@@ -1,0 +1,18 @@
+#+title: bb-godot
+
+Utilities for managing Godot Projects using Babashka (Clojure).
+
+Status: Just getting started!
+
+See todo.org.
+
+* Features
+** Aseprite watch + export
+A task that watches and exports *.aesprite files as pngs, using the aseprite
+binary.
+** [ ] Package install
+A very-wip task for cloning and symlinking godot add-on packages.
+** [ ] Build project
+Build your project, for web or wherever.
+** [ ] Deploy project
+Deploy a project to an s3 bucket.

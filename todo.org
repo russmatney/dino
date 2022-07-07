@@ -1,0 +1,14 @@
+#+title: Todo
+
+
+* [ ] unit test framework
+* [ ] tests for aseprite watch command
+* [ ] read aseprite command from ENV var
+* [ ] package install
+** [ ] read packages local repo
+** [ ] clone from github/gitlab/etc
+** [ ] ensure symlinks
+** [ ] update godot project settings file
+* [ ] build for web
+* [ ] deploy to s3
+* [ ] document example bb.edn consumer
