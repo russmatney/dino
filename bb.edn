@@ -1,20 +1,6 @@
 {:paths ["src"]
  :tasks
- {:requires ([babashka.fs :as fs]
-             [bb-godot.tasks :as tasks])
-  :enter    (println "Entering:" (:name (current-task)))
-  :init
-  (do
-    (defn home-dir []
-      (-> (shell {:out :string}
-                 "zsh -c 'echo -n ~'")
-          :out))
-
-    (defn shell-and-log
-      ([x] (shell-and-log {} x))
-      ([opts x]
-       (println x)
-       (shell opts x))))
+ {:requires ([bb-godot.tasks :as tasks])
 
   watch  tasks/watch
   pixels tasks/pixels
@@ -31,23 +17,5 @@
   ;; deploy-web      (shell-and-log "aws s3 sync build/ s3://protomoon.russmatney.com")
 
   install-addons
-  (do
-    (shell-and-log "mkdir -p addons")
-    (let [addons
-          ;; TODO read from some local bb.edn file?
-          {"btree" "fian46/addons-btree/addons/btree"}]
-      ;; TODO clone locally (or at least log if missing)
-      (doall
-        (->>
-          addons
-          (map
-            (fn [[name path]]
-              (let [project-addon-path (str "./addons/" name)
-                    symlink-target     (str (home-dir) "/" path)]
-                (println "creating symlink from"
-                         project-addon-path "to" symlink-target)
-                (fs/delete-if-exists project-addon-path)
-                (fs/create-sym-link project-addon-path symlink-target))))))
-      ;; TODO auto-health check/doctor
-      ;; i.e. make sure these symlinks exist
-      ))}}
+  (tasks/install-addons
+    {"behavior_tree" "kagenash1/godot-behavior-tree/addons/behavior_tree"})

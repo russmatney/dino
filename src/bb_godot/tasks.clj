@@ -2,6 +2,7 @@
   (:require
    [babashka.process :as p]
    [babashka.fs :as fs]
+   [babashka.tasks :as bb.tasks]
    [clojure.java.io :as io]
    [clojure.string :as string]))
 
@@ -176,3 +177,34 @@
 
         @(promise))
       (println (str "dir: " dir "  does not exist.")))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Deps
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn home-dir []
+  (-> (bb.tasks/shell {:out :string}
+                      "zsh -c 'echo -n ~'")
+      :out))
+
+(defn shell-and-log
+  ([x] (shell-and-log {} x))
+  ([opts x]
+   (println x)
+   (bb.tasks/shell opts x)))
+
+(defn install-addons [addons]
+  (shell-and-log "mkdir -p addons")
+  (println addons)
+  (doall
+    (->>
+      addons
+      (map
+        (fn [[name path]]
+          (let [project-addon-path (str "./addons/" name)
+                symlink-target     (str (home-dir) "/" path)]
+            (println "creating symlink from"
+                     project-addon-path "to" symlink-target)
+            (fs/delete-if-exists project-addon-path)
+            (fs/create-sym-link project-addon-path symlink-target)))))))
