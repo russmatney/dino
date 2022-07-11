@@ -208,3 +208,21 @@
                      project-addon-path "to" symlink-target)
             (fs/delete-if-exists project-addon-path)
             (fs/create-sym-link project-addon-path symlink-target)))))))
+
+(defn install-script-templates [paths]
+  (shell-and-log "mkdir -p script_templates")
+  (doall
+    (->>
+      paths
+      (map
+        (fn [path]
+          (let [local-templates-dir "./script_templates"
+                path                (str (home-dir) "/" path)]
+            (println "copying templates from" path)
+            (if (not (fs/directory? path))
+              (println "path is not a directory", path)
+              (doall
+                (->> (fs/list-dir path)
+                     (map (fn [f]
+                            (println "copying template" f)
+                            (fs/copy f (str local-templates-dir "/.") {:replace-existing true}))))))))))))

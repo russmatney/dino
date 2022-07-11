@@ -16,6 +16,10 @@
   ;; build-and-serve {:depends [build-web serve-web]}
   ;; deploy-web      (shell-and-log "aws s3 sync build/ s3://protomoon.russmatney.com")
 
+  install-script-templates
+  (tasks/install-script-templates
+    #{"kagenash1/godot-behavior-tree/script_templates"})
+
   install-addons
   (tasks/install-addons
-    {"behavior_tree" "kagenash1/godot-behavior-tree/addons/behavior_tree"})
+    {"behavior_tree" "kagenash1/godot-behavior-tree/addons/behavior_tree"})}}

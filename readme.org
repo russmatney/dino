@@ -10,8 +10,10 @@ See todo.org.
 ** Aseprite watch + export
 A task that watches and exports *.aesprite files as pngs, using the aseprite
 binary.
-** [ ] Package install
+** install addons
 A very-wip task for cloning and symlinking godot add-on packages.
+** install script_templates
+Copy templates from external paths into your project
 ** [ ] Build project
 Build your project, for web or wherever.
 ** [ ] Deploy project
