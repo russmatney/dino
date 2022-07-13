@@ -130,11 +130,15 @@
 
 (defn pixels-dir [dir]
   (println "Checking pixels-dir" (str dir))
-  (let [files (->> dir .list vec (map #(io/file dir %))
-                   (filter #(ext-match? % "aseprite")))]
-    (doall (map pixels-file files))))
+  (let [files          (->> dir .list vec (map #(io/file dir %)))
+        aseprite-files (->> files (filter #(ext-match? % "aseprite")))
+        dirs           (->> files (filter fs/directory?))]
+    (doall (map pixels-file aseprite-files))
+    (doall (map pixels-dir dirs))))
 
 (defn pixels
+  "Attempts to find `*.aseprite` files to process with `pixels-file`.
+  Defaults to looking in an `assets/` dir."
   ([] (pixels nil))
   ([& args]
    (let [dir (or (some-> args first) "assets")]
