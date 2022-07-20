@@ -24,7 +24,7 @@ CLOSED: [2022-07-20 Wed 15:14]
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:16]
 ** [ ] add tileSetTools script
-* credot
+* thanks
 ** [ ] init plugin
 ** [ ] add basic credits node type
 * [ ] add GUT and basic testing flow

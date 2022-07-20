@@ -24,5 +24,5 @@ across scene transitions.
 ** tyle
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
-** credot
-A simple Credits abstraction.
+** thanks
+A simple Credits scene that reads from a .txt file

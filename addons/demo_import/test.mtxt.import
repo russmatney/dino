@@ -1,0 +1,14 @@
+[remap]
+
+importer="demo.sillymaterial"
+type="SpatialMaterial"
+path="res://.import/test.mtxt-af103721c01917bdc5d40e740256543d.material"
+
+[deps]
+
+source_file="res://addons/demo_import/test.mtxt"
+dest_files=[ "res://.import/test.mtxt-af103721c01917bdc5d40e740256543d.material" ]
+
+[params]
+
+use_red=false
