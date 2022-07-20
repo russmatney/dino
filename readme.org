@@ -1,0 +1,28 @@
+#+title: Godot Extras
+
+Godot addons that haven't earned their wings just yet.
+
+These are intended to speed up prototyping and game-jam workflows, but should
+also be useful in longer-running projects.
+
+For godot command-line helpers, see also [[github:russmatney/bb-godot][~russmatney/bb-godot~]], which provides
+helpers for things like auto-exporting from aseprite, building and deploying to
+s3, and installing addons from github. Maybe some of those will be absorbed into
+here at some point?
+
+* ideas/works-in-progress
+** Beehive
+For working with state machines, behavior trees, maybe GOAP
+** Troll
+For handling controls inputs and remapping.
+** Navi
+Basic menus, pausing, and credits, plus a scene loader for navigating between
+them all.
+** Credot
+A simple Credits abstraction.
+** DJ
+For sounds and music management, such as background music that is maintained
+across scene transitions.
+** Tyle
+Tools scripts and ui to improve on Godot's TileSet UI gap.
+Includes some basic auto-tiles to speed up prototyping.

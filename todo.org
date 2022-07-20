@@ -1,0 +1,23 @@
+#+title: Todo
+
+* Beehive
+** [ ] init plugin
+** [ ] write state machine abstraction
+** [ ] write behavior tree abstraction
+** [ ] write goap abstraction
+* Troll
+** [ ] init plugin
+** [ ] look into input mapping/remapping flows
+* Navi
+** [ ] init plugin
+** [ ] add basic Navi autoload for loading scenes
+** [ ] add menu support for opt-in scenes
+* DJ
+** [ ] init plugin
+** [ ] add basic sounds/music autoload
+** [ ] include helpers for resuming songs across scene nav
+* Tyle
+** [ ] init plugin
+** [ ] add tileSetTools script
+* [ ] add GUT and basic testing flow
+* [ ] consider CI for testing
