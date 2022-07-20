@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="My Dock" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Button" type="Button" parent="."]
+margin_right = 246.0
+margin_bottom = 194.0
+text = "Hey there brother bear"
