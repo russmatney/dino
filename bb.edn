@@ -2,19 +2,11 @@
  :tasks
  {:requires ([bb-godot.tasks :as tasks])
 
-  watch  tasks/watch
-  pixels tasks/pixels
-  is-mac (do (println "eh?" (tasks/is-mac?)))
-  ;; serve  tasks/serve
-
-  ;; build-web
-  ;; (shell-and-log
-  ;;   {:dir "./Game"}
-  ;;   "godot --export HTML5 ../build/index.html")
-  ;; serve-web (shell-and-log "bb serve -d ./build")
-
-  ;; build-and-serve {:depends [build-web serve-web]}
-  ;; deploy-web      (shell-and-log "aws s3 sync build/ s3://protomoon.russmatney.com")
+  watch      tasks/watch
+  pixels     tasks/pixels
+  build-web  tasks/build-web
+  deploy-web (tasks/deploy-web "s3://<some-bucket-name>")
+  zip        tasks/zip
 
   install-script-templates
   (tasks/install-script-templates

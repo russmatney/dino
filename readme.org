@@ -14,7 +14,11 @@ binary.
 A very-wip task for cloning and symlinking godot add-on packages.
 ** install script_templates
 Copy templates from external paths into your project
-** [ ] Build project
-Build your project, for web or wherever.
-** [ ] Deploy project
+** Build project for web
+Build your project, for web.
+
+Builds using godot's HTML5 template, in the ~./dist~ directory.
+** Deploy project to s3
 Deploy a project to an s3 bucket.
+** Zip project
+zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io

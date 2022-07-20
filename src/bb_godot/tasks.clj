@@ -230,3 +230,23 @@
                      (map (fn [f]
                             (println "copying template" f)
                             (fs/copy f (str local-templates-dir "/.") {:replace-existing true}))))))))))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Build
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def build-dir "dist")
+
+(defn build-web []
+  (shell-and-log (str "godot --export HTML5 " build-dir "/index.html")))
+
+(defn zip []
+  (shell-and-log (str "zip " build-dir  ".zip " build-dir "/*")))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Deploy
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn deploy-web [s3-bucket]
+  (shell-and-log (str "aws s3 sync " build-dir "/ " s3-bucket)))
