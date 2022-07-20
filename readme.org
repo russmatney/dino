@@ -11,18 +11,18 @@ s3, and installing addons from github. Maybe some of those will be absorbed into
 here at some point?
 
 * ideas/works-in-progress
-** Beehive
+** beehive
 For working with state machines, behavior trees, maybe GOAP
-** Troll
+** troll
 For handling controls inputs and remapping.
-** Navi
+** navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
-** Credot
-A simple Credits abstraction.
-** DJ
+** dj
 For sounds and music management, such as background music that is maintained
 across scene transitions.
-** Tyle
+** tyle
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
+** credot
+A simple Credits abstraction.

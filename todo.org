@@ -1,23 +1,31 @@
 #+title: Todo
 
-* Beehive
-** [ ] init plugin
+* beehive
+** [X] init plugin
+CLOSED: [2022-07-20 Wed 15:17]
 ** [ ] write state machine abstraction
 ** [ ] write behavior tree abstraction
 ** [ ] write goap abstraction
-* Troll
-** [ ] init plugin
+* troll
+** [X] init plugin
+CLOSED: [2022-07-20 Wed 15:13]
 ** [ ] look into input mapping/remapping flows
-* Navi
-** [ ] init plugin
+* navi
+** [X] init plugin
+CLOSED: [2022-07-20 Wed 15:12]
 ** [ ] add basic Navi autoload for loading scenes
 ** [ ] add menu support for opt-in scenes
-* DJ
-** [ ] init plugin
+* dj
+** [X] init plugin
+CLOSED: [2022-07-20 Wed 15:14]
 ** [ ] add basic sounds/music autoload
 ** [ ] include helpers for resuming songs across scene nav
-* Tyle
-** [ ] init plugin
+* tyle
+** [X] init plugin
+CLOSED: [2022-07-20 Wed 15:16]
 ** [ ] add tileSetTools script
+* credot
+** [ ] init plugin
+** [ ] add basic credits node type
 * [ ] add GUT and basic testing flow
 * [ ] consider CI for testing
