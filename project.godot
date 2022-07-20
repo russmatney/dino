@@ -15,7 +15,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/beehive/plugin.cfg", "res://addons/demo_button/plugin.cfg", "res://addons/demo_dock/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/troll/plugin.cfg", "res://addons/tyle/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/beehive/plugin.cfg", "res://addons/demo_button/plugin.cfg", "res://addons/demo_dock/plugin.cfg", "res://addons/demo_main_screen/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/troll/plugin.cfg", "res://addons/tyle/plugin.cfg" )
 
 [physics]
 
