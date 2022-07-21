@@ -2,6 +2,12 @@
  :tasks
  {:requires ([bb-godot.tasks :as tasks])
 
+  :init
+  (do
+    (def gut "godot --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd "))
+
+  test (tasks/shell-and-log (str gut "-gexit"))
+
   watch      tasks/watch
   pixels     tasks/pixels
   build-web  tasks/build-web

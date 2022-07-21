@@ -8,15 +8,139 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "BTDecorator",
+"class": "BTAlways",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_always.gd"
+}, {
+"base": "BTNode",
+"class": "BTComposite",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/bt_composite.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTConditional",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_conditional.gd"
+}, {
+"base": "BTNode",
+"class": "BTDecorator",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/bt_decorator.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTGuard",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_guard.gd"
+}, {
+"base": "BTNode",
+"class": "BTLeaf",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/bt_leaf.gd"
+}, {
+"base": "Node",
+"class": "BTNode",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/bt_node.gd"
+}, {
+"base": "BTComposite",
+"class": "BTParallel",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_parallel.gd"
+}, {
+"base": "BTSelector",
+"class": "BTRandomSelector",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_random_selector.gd"
+}, {
+"base": "BTSequence",
+"class": "BTRandomSequence",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_random_sequence.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTRepeat",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_repeat.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTRepeatUntil",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_repeat_until.gd"
+}, {
+"base": "BTDecorator",
+"class": "BTRevert",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/decorators/bt_revert.gd"
+}, {
+"base": "BTComposite",
+"class": "BTSelector",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_selector.gd"
+}, {
+"base": "BTComposite",
+"class": "BTSequence",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/composites/bt_sequence.gd"
+}, {
+"base": "BTLeaf",
+"class": "BTWait",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/btnodes/leaves/bt_wait.gd"
+}, {
+"base": "Node",
+"class": "BehaviorTree",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/behavior_tree.gd"
+}, {
+"base": "Node",
+"class": "Blackboard",
+"language": "GDScript",
+"path": "res://addons/behavior_tree/src/blackboard.gd"
+}, {
+"base": "Reference",
+"class": "GutHookScript",
+"language": "GDScript",
+"path": "res://addons/gut/hook_script.gd"
+}, {
+"base": "Node",
+"class": "GutTest",
+"language": "GDScript",
+"path": "res://addons/gut/test.gd"
+} ]
+_global_script_class_icons={
+"BTAlways": "res://addons/behavior_tree/icons/btalways.svg",
+"BTComposite": "res://addons/behavior_tree/icons/btcomposite.svg",
+"BTConditional": "res://addons/behavior_tree/icons/btconditional.png",
+"BTDecorator": "res://addons/behavior_tree/icons/btdecorator.svg",
+"BTGuard": "res://addons/behavior_tree/icons/btguard.svg",
+"BTLeaf": "res://addons/behavior_tree/icons/btleaf.svg",
+"BTNode": "res://addons/behavior_tree/icons/btnode.svg",
+"BTParallel": "res://addons/behavior_tree/icons/btparallel.svg",
+"BTRandomSelector": "res://addons/behavior_tree/icons/btrndselector.svg",
+"BTRandomSequence": "res://addons/behavior_tree/icons/btrndsequence.svg",
+"BTRepeat": "res://addons/behavior_tree/icons/btrepeat.svg",
+"BTRepeatUntil": "res://addons/behavior_tree/icons/btrepeatuntil.svg",
+"BTRevert": "res://addons/behavior_tree/icons/btrevert.svg",
+"BTSelector": "res://addons/behavior_tree/icons/btselector.svg",
+"BTSequence": "res://addons/behavior_tree/icons/btsequence.svg",
+"BTWait": "res://addons/behavior_tree/icons/btwait.svg",
+"BehaviorTree": "res://addons/behavior_tree/icons/bt.svg",
+"Blackboard": "res://addons/behavior_tree/icons/blackboard.svg",
+"GutHookScript": "",
+"GutTest": ""
+}
+
 [application]
 
 config/name="Dino"
 run/main_scene="res://src/demos/MenuDemo.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/tyle/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/tyle/plugin.cfg" )
 
 [physics]
 
