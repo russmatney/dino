@@ -9,9 +9,9 @@ func after_each():
 	gut.file_delete("user://some_test_file")
 
 
-func test_pending():
-	pending("This test is not implemented yet")
-	pending()
+# func test_pending():
+# 	pending("This test is not implemented yet")
+# 	pending()
 
 
 func test_equals():
@@ -27,12 +27,12 @@ func test_equals():
 	var d2_pass = d1_pass
 	assert_eq(d1_pass, d2_pass)  # PASS
 
-	gut.p("-- failing --")
-	assert_eq(1, 2)  # FAIL
-	assert_eq("hello", "world")  # FAIL
-	assert_eq(self, node1)  # FAIL
-	assert_eq([1, "two", 3], [1, 2, 3, 4])  # FAIL
-	assert_eq({"a": 1}, {"a": 1})  # FAIL
+	# gut.p("-- failing --")
+	# assert_eq(1, 2)  # FAIL
+	# assert_eq("hello", "world")  # FAIL
+	# assert_eq(self, node1)  # FAIL
+	# assert_eq([1, "two", 3], [1, 2, 3, 4])  # FAIL
+	# assert_eq({"a": 1}, {"a": 1})  # FAIL
 
 
 func test_not_equal():
@@ -44,10 +44,10 @@ func test_not_equal():
 	assert_ne("hello", "world")  # PASS
 	assert_ne(self, node1)  # PASS
 
-	gut.p("-- failing --")
-	assert_ne(two, 2)  # FAIL
-	assert_ne("one", "one")  # FAIL
-	assert_ne("2", 2)  # FAIL
+	# gut.p("-- failing --")
+	# assert_ne(two, 2)  # FAIL
+	# assert_ne("one", "one")  # FAIL
+	# assert_ne("2", 2)  # FAIL
 
 # func test_almost_equals():
 
