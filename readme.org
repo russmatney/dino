@@ -44,19 +44,15 @@ Clones and symlinks godot addons,
 using a clojure map as the manifest
 
 Here's a bit of the current bb.edn for this project
+
 #+begin_src clojure
 {:tasks
  {:requires ([bb-godot.tasks :as tasks])
 
   install-addons
   (tasks/install-addons
-    {"behavior_tree" "kagenash1/godot-behavior-tree/addons/behavior_tree"
-     "gut"           "bitwes/Gut/addons/gut"}
-
-    ;; ideally we'd support this syntax, but rn that's a TODO
-    {:behavior_tree "kagenash1/godot-behavior-tree"
-     :gut           "bitwes/Gut"}
-    )}}
+    {:behavior_tree :kagenash1/godot-behavior-tree
+     :gut           :bitwes/Gut})}}
 #+end_src
 
 A project consuming dino's addons might look like:
@@ -67,15 +63,11 @@ A project consuming dino's addons might look like:
 
   install-addons
   (tasks/install-addons
-    {"behavior_tree" "kagenash1/godot-behavior-tree/addons/behavior_tree"
-     "gut"           "bitwes/Gut/addons/gut"}
-
-    ;; ideally we'd support this syntax, but rn that's a TODO
-    {:behavior_tree "kagenash1/godot-behavior-tree"
-     :gut           "bitwes/Gut"
-     :navi "russmatney/dino"
-     :tyle "russmatney/dino"
-     :beehive "russmatney/dino"})}}
+    {:behavior_tree :kagenash1/godot-behavior-tree
+     :gut           :bitwes/Gut
+     :navi          :russmatney/dino
+     :tyle          :russmatney/dino
+     :beehive       :russmatney/dino})}}
 #+end_src
 ** `bb install-script-templates`
 Copy templates from external paths into your project
