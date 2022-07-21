@@ -1,8 +1,7 @@
 tool
 extends Control
 
-# TODO this button scene should itself by configurable
-var button_scene = preload("res://src/ui/MenuButton.tscn")
+export(PackedScene) var button_scene = preload("res://src/ui/MenuButton.tscn")
 
 var menu_list = null
 var expected_nodes = {"MenuList": "menu_list"}
@@ -43,8 +42,6 @@ func _ready():
 
 	if Engine.editor_hint:
 		request_ready()
-	else:
-		add_menu_item({"label": "dis a button", "method": "print_button_things", "obj": self})
 
 
 func print_button_things():
@@ -54,9 +51,15 @@ func print_button_things():
 ## add_menu_item #####################################################################
 
 
+func no_op():
+	print("button created with no method")
+
 func add_menu_item(item):
-	var label = item["label"]
 	var button = button_scene.instance()
+	var label = item.get("label", "Fallback Label")
 	button.text = label
-	button.connect("pressed", item["obj"], item["method"])
+  # TODO consider using a funcref
+	var obj = item.get("obj", self)
+	var method = item.get("method", "no_op")
+	button.connect("pressed", obj, method)
 	menu_list.add_child(button)
