@@ -249,9 +249,9 @@
       addons
       (map input->godot-dep)
       (map
-        (fn [[name path]]
-          (let [project-addon-path (str "./addons/" name)
-                symlink-target     (str (home-dir) "/" path)]
+        (fn [{:keys [addon-name addon-path]}]
+          (let [project-addon-path (str "./addons/" addon-name)
+                symlink-target     (str (home-dir) "/" addon-path)]
             (println "creating symlink from"
                      project-addon-path "to" symlink-target)
             (fs/delete-if-exists project-addon-path)
