@@ -12,6 +12,21 @@
 (require '[pod.babashka.filewatcher :as fw])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; helpers
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn home-dir []
+  (-> (bb.tasks/shell {:out :string}
+                      "zsh -c 'echo -n ~'")
+      :out))
+
+(defn shell-and-log
+  ([x] (shell-and-log {} x))
+  ([opts x]
+   (println x)
+   (bb.tasks/shell opts x)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fs extensions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -187,16 +202,27 @@
 ;; Deps
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn home-dir []
-  (-> (bb.tasks/shell {:out :string}
-                      "zsh -c 'echo -n ~'")
-      :out))
+(defn input->godot-dep [input]
+  (let [[addon-name repo-id] input
+        addon-name           (if (keyword? addon-name)
+                               (name addon-name)
+                               addon-name)]
+    {:addon-name addon-name
+     :addon-path
+     (cond
+       (re-seq #"/addons/" repo-id)
+       repo-id
 
-(defn shell-and-log
-  ([x] (shell-and-log {} x))
-  ([opts x]
-   (println x)
-   (bb.tasks/shell opts x)))
+       :else
+       (str repo-id "/addons/" addon-name))}))
+
+(comment
+  (name :gut)
+  (->>
+    {:gut  "bitwes/Gut"
+     "gut" "bitwes/Gut/addons/gut"}
+    (map input->godot-dep))
+  )
 
 (defn install-addons [addons]
   (shell-and-log "mkdir -p addons")
@@ -204,6 +230,7 @@
   (doall
     (->>
       addons
+      (map input->godot-dep)
       (map
         (fn [[name path]]
           (let [project-addon-path (str "./addons/" name)
@@ -212,6 +239,7 @@
                      project-addon-path "to" symlink-target)
             (fs/delete-if-exists project-addon-path)
             (fs/create-sym-link project-addon-path symlink-target)))))))
+
 
 (defn install-script-templates [paths]
   (shell-and-log "mkdir -p script_templates")
