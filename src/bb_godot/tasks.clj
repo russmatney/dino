@@ -206,7 +206,12 @@
   (let [[addon-name repo-id] input
         addon-name           (if (keyword? addon-name)
                                (name addon-name)
-                               addon-name)]
+                               addon-name)
+        repo-id              (if (keyword? repo-id)
+                               (if (namespace repo-id)
+                                 (str (namespace repo-id) "/" (name repo-id))
+                                 (name repo-id))
+                               repo-id)]
     {:addon-name addon-name
      :addon-path
      (cond
@@ -218,11 +223,23 @@
 
 (comment
   (name :gut)
-  (->>
-    {:gut  "bitwes/Gut"
-     "gut" "bitwes/Gut/addons/gut"}
-    (map input->godot-dep))
-  )
+  (name :bitwes/Gut)
+  (name "gut")
+  (namespace "gut")
+  (str :bitwes/Gut)
+  (namespace :bitwes/Gut)
+  (namespace :gut)
+  (str (ns :bitwes/Gut) (name :bitwes/Gut))
+  (=
+    (->>
+      {:gut   "bitwes/Gut"
+       "gut"  "bitwes/Gut/addons/gut"
+       :gut-2 :bitwes/Gut}
+      (map input->godot-dep)
+      (into []))
+    [{:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
+     {:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
+     {:addon-name "gut-2", :addon-path "bitwes/Gut/addons/gut-2"}]))
 
 (defn install-addons [addons]
   (shell-and-log "mkdir -p addons")
