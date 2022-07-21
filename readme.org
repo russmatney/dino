@@ -13,7 +13,7 @@ here at some point?
 * ideas/works-in-progress
 ** beehive
 For working with state machines, behavior trees, maybe GOAP
-** troll
+** trolley
 For handling controls inputs and remapping.
 ** navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between

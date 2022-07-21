@@ -6,7 +6,7 @@ CLOSED: [2022-07-20 Wed 15:17]
 ** [ ] write state machine abstraction
 ** [ ] write behavior tree abstraction
 ** [ ] write goap abstraction
-* troll
+* trolley
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:13]
 ** [ ] look into input mapping/remapping flows
