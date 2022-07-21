@@ -16,8 +16,9 @@ pom.xml.asc
 /.prepl-port
 /.cpcache
 
-.clj-kondo/
 .lsp/
 .import/
 
 dist/
+/.clj-kondo/.cache
+/.lsp

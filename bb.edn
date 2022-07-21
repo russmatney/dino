@@ -1,0 +1,24 @@
+{:paths ["src"]
+ :tasks
+ {:requires ([bb-godot.tasks :as tasks])
+
+  watch      tasks/watch
+  pixels     tasks/pixels
+  build-web  tasks/build-web
+  deploy-web (tasks/deploy-web "s3://<some-bucket-name>")
+  zip        tasks/zip
+
+  install-script-templates
+  (tasks/install-script-templates
+    #{"kagenash1/godot-behavior-tree/script_templates"
+      })
+
+  install-addons
+  (tasks/install-addons
+    {"behavior_tree" "kagenash1/godot-behavior-tree/addons/behavior_tree"
+     "gut"           "bitwes/Gut/addons/gut"}
+
+    ;; ideally we'd support this as well
+    ;; {:behavior_tree "kagenash1/godot-behavior-tree"
+    ;;  :gut           "bitwes/Gut"}
+    )}}

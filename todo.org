@@ -29,3 +29,17 @@ CLOSED: [2022-07-20 Wed 15:16]
 ** [ ] add basic credits node type
 * [ ] add GUT and basic testing flow
 * [ ] consider CI for testing
+* bb-godot
+** [ ] unit test framework
+** [ ] tests for aseprite watch command
+** [ ] read aseprite command from ENV var
+** [ ] package install
+*** [ ] read packages local repo
+*** [ ] clone from github/gitlab/etc
+*** [ ] ensure symlinks
+*** [ ] update godot project settings file
+** [X] build for web
+CLOSED: [2022-07-20 Wed 23:49]
+** [X] deploy to s3
+CLOSED: [2022-07-20 Wed 23:49]
+** [ ] document example bb.edn consumer
