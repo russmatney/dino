@@ -4,9 +4,15 @@
 
   :init
   (do
-    (def gut "godot --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd "))
+    (def gut "godot --no-window --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd ")
+    (def gut-with-window "godot --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd "))
 
-  test (tasks/shell-and-log (str gut "-gexit"))
+  test-with-window  (tasks/shell-and-log (str gut-with-window " -gexit"))
+  test              (tasks/shell-and-log (str gut " -gexit"))
+  test-match        (let [arg (some-> *command-line-args* first)]
+                      (tasks/shell-and-log (str gut " -gexit -gunit_test_name=" arg)))
+  test-match-script (let [arg (some-> *command-line-args* first)]
+                      (tasks/shell-and-log (str gut " -gexit -gselect=" arg)))
 
   watch      tasks/watch
   pixels     tasks/pixels
