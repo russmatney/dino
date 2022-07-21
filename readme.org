@@ -1,14 +1,14 @@
-#+title: Godot Extras
+#+title: dino
 
-Godot addons that haven't earned their wings just yet.
+My library for Godot addons that haven't earned their wings just yet,
+and a godot game that tries to use them all.
+
+'Dino' sort of comes from 'demo', but it provides a punch of personality.
+
+Also it gives us a cast of characters to pull from.
 
 These are intended to speed up prototyping and game-jam workflows, but should
 also be useful in longer-running projects.
-
-For godot command-line helpers, see also [[github:russmatney/bb-godot][~russmatney/bb-godot~]], which provides
-helpers for things like auto-exporting from aseprite, building and deploying to
-s3, and installing addons from github. Maybe some of those will be absorbed into
-here at some point?
 
 * ideas/works-in-progress
 ** beehive
@@ -26,3 +26,12 @@ Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 ** thanks
 A simple Credits scene that reads from a .txt file
+* this project is also a consumer of [[github:russmatney/bb-godot]]
+bb-godot provides command-line helpers:
+
+- auto-exporting from aseprite
+- building a local web build
+- deploying to s3
+- installing addons from github
+
+Maybe that tool should be absorbed into here?
