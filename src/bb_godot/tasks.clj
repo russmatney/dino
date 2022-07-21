@@ -283,7 +283,7 @@
 (def build-dir "dist")
 
 (defn build-web []
-  (shell-and-log (str "godot --export HTML5 " build-dir "/index.html")))
+  (shell-and-log (str "godot --no-window --export HTML5 " build-dir "/index.html")))
 
 (defn zip []
   (shell-and-log (str "zip " build-dir  ".zip " build-dir "/*")))
