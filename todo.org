@@ -3,23 +3,45 @@
 * beehive
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:17]
-** [ ] write state machine abstraction
-** [ ] write behavior tree abstraction
-** [ ] write goap abstraction
+** machine
+*** [ ] write state machine abstraction
+*** [ ] documentation/visualization for state machine flow
+how do we really see what the behaviors are like
+could we show them all at once, and see when one starts to deviate?
+i see a scene for each scene transition, showing them all at once, or sequentially
+*** [ ] tests for state machine guarantees
+** tree
+*** [ ] write behavior tree abstraction
+** goat
+*** [ ] write goap abstraction
 * trolley
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:13]
-** [ ] look into input mapping/remapping flows
+** [ ] unit tests for Trolley.gd
+** [ ] writing out an input mapping
+should be able to just click yes to get WASD and HJKL for movement
+or just make it better - show a keyboard when asking for input?
+
+is there a big keyboard visualization for showing keys we can re-use?
+maybe ergodox?
+** [ ] remapping flows
 * navi
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:12]
+** [ ] basic menu support
+** [ ] menu keyboard focus with trolley inputs
 ** [ ] add basic Navi autoload for loading scenes
-** [ ] add menu support for opt-in scenes
+** [ ] scanning for opt-in scenes?
+or a menu with checkboxes
 * dj
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:14]
 ** [ ] add basic sounds/music autoload
 ** [ ] include helpers for resuming songs across scene nav
+** [ ] ui showing what sounds/songs are used in the game
+** [ ] should be able to play/listen to a song, then drag it as a resource
+so i'm not reading bs sound file names when trying to assign to an audio stream
+maybe i'm doing this wrong?
 * tyle
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:16]
@@ -27,19 +49,28 @@ CLOSED: [2022-07-20 Wed 15:16]
 * thanks
 ** [ ] init plugin
 ** [ ] add basic credits node type
-* [ ] add GUT and basic testing flow
-* [ ] consider CI for testing
+* [X] add GUT and basic testing flow
+CLOSED: [2022-07-21 Thu 22:25]
 * bb-godot
 ** [ ] unit test framework
-** [ ] tests for aseprite watch command
-** [ ] read aseprite command from ENV var
-** [ ] package install
+** watch
+*** worth adding GUT unit test re-running on save?
+maybe opt-in?
+** pixels
+*** [ ] tests for aseprite command
+*** [ ] read aseprite command from ENV var
+** addons
+*** [ ] UI confirming symlinks exist
+*** [ ] UI showing git-status of all symlinked addons
 *** [ ] read packages local repo
-*** [ ] clone from github/gitlab/etc
-*** [ ] ensure symlinks
+*** [ ] fully clone from github/gitlab/etc
+*** [ ] support cloning a local version with a git-hash
 *** [ ] update godot project settings file
+(auto-enable the plugin)
+might need to reload godot, but i usually have to do that anyway
 ** [X] build for web
 CLOSED: [2022-07-20 Wed 23:49]
 ** [X] deploy to s3
 CLOSED: [2022-07-20 Wed 23:49]
 ** [ ] document example bb.edn consumer
+* [ ] consider CI for testing
