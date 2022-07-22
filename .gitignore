@@ -22,3 +22,5 @@ pom.xml.asc
 dist/
 /.clj-kondo/.cache
 /.lsp
+
+.gut_editor_config.json
