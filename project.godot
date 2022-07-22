@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/beehive/machine.gd"
 }, {
+"base": "Control",
+"class": "NaviMenu",
+"language": "GDScript",
+"path": "res://addons/navi/NaviMenu.gd"
+}, {
 "base": "Node",
 "class": "Sort",
 "language": "GDScript",
@@ -50,6 +55,7 @@ _global_script_class_icons={
 "GutTest": "",
 "HFlowContainer": "",
 "Machine": "",
+"NaviMenu": "",
 "Sort": "",
 "State": ""
 }
@@ -63,10 +69,11 @@ config/icon="res://assets/icon.png"
 [autoload]
 
 Trolley="*res://addons/trolley/Trolley.gd"
+Navi="*res://addons/navi/Navi.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/tyle/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/tyle/plugin.cfg" )
 
 [input]
 

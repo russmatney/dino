@@ -1,7 +1,12 @@
 tool
 extends Control
+class_name NaviMenu
 
 export(PackedScene) var button_scene = preload("res://src/ui/MenuButton.tscn")
+
+# set a local member for the Navi autoload, to ease testing
+# TODO consider loading/falling back on a load instead?
+var _navi = Navi
 
 var menu_list = null
 var expected_nodes = {"MenuList": "menu_list"}
@@ -54,12 +59,28 @@ func print_button_things():
 func no_op():
 	print("button created with no method")
 
+func connect_pressed_to_action(button, item):
+	var nav_to = item.get("nav_to", false)
+
+	var obj
+	var method
+	var arg
+	if nav_to:
+		obj = _navi
+		method = "nav_to"
+		arg = nav_to
+	else:
+		obj = item.get("obj", self)
+		method = item.get("method", "no_op")
+
+	if arg:
+		button.connect("pressed", obj, method, [arg])
+	else:
+		button.connect("pressed", obj, method)
+
 func add_menu_item(item):
 	var button = button_scene.instance()
 	var label = item.get("label", "Fallback Label")
 	button.text = label
-  # TODO consider using a funcref
-	var obj = item.get("obj", self)
-	var method = item.get("method", "no_op")
-	button.connect("pressed", obj, method)
+	connect_pressed_to_action(button, item)
 	menu_list.add_child(button)
