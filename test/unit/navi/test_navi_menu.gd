@@ -56,6 +56,7 @@ func test_does_not_add_duplicates():
 	var buttons = m.get_buttons()
 	assert_eq(buttons.size(), 2, "Added only 2 buttons")
 
+
 var inc = 0
 
 
@@ -64,11 +65,13 @@ func some_button_incrementer():
 
 
 func test_pressed_buttons_call_functions():
-	m.add_menu_item({
-		"label": "My button",
-		"obj": self,
-		"method": "some_button_incrementer",
-	})
+	m.add_menu_item(
+		{
+			"label": "My button",
+			"obj": self,
+			"method": "some_button_incrementer",
+		}
+	)
 
 	var button = get_button()
 	assert_eq(inc, 0, "inc is initially 0")
