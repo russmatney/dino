@@ -1,13 +1,14 @@
 extends GutTest
 
-
 var menu_scene = load("res://test/unit/navi/NaviMenuTest.tscn")
 
 var m
 
+
 func before_each():
 	m = autofree(menu_scene.instance())
 	add_child(m)
+
 
 func test_add_one_menu_item():
 	var label = "My button label"
@@ -24,6 +25,7 @@ func test_add_one_menu_item():
 	# not method assigned, emitting this does not crash
 	but.emit_signal("pressed")
 
+
 func test_add_multiple_menu_items():
 	var labels = ["fred", "wilma", "barney", "betty"]
 	for label in labels:
@@ -39,9 +41,13 @@ func test_add_multiple_menu_items():
 	for l in labels:
 		assert_true(l in button_texts, "Every label should be found")
 
+
 var inc = 0
+
+
 func some_button_incrementer():
 	inc += 1
+
 
 func test_pressed_buttons_call_functions():
 	var button_desc = {
