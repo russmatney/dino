@@ -40,7 +40,7 @@ func _physics_process(delta):
 signal transitioned(state_name)
 
 
-func transition_to(target_state_name: String, ctx: Dictionary = {}):
+func transit(target_state_name: String, ctx: Dictionary = {}):
 	var next_state
 	for child in get_children():
 		if child.name == target_state_name:

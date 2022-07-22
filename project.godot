@@ -42,6 +42,10 @@ config/name="Dino"
 run/main_scene="res://test/unit/navi/NaviMenuTest.tscn"
 config/icon="res://assets/icon.png"
 
+[autoload]
+
+Trolley="*res://addons/trolley/Trolley.gd"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/tyle/plugin.cfg" )

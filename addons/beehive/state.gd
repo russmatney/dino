@@ -1,4 +1,3 @@
-# https://www.gdquest.com/tutorial/godot/design-patterns/finite-state-machine/
 class_name State
 extends Node
 
@@ -12,6 +11,9 @@ func handle_input(event: InputEvent):
 ## process ################################################################
 
 
+# if these names matched the usual _process,
+# they'd actually be called by the engine,
+# not our state machine
 func process(_delta: float):
 	pass
 
