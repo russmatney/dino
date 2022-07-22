@@ -16,7 +16,7 @@ func after_each():
 
 func test_equals():
 	var one = 1
-	var node1 = Node.new()
+	var node1 = autofree(Node.new())
 	var node2 = node1
 
 	assert_eq(one, 1, "one should equal one")  # PASS
@@ -37,7 +37,7 @@ func test_equals():
 
 func test_not_equal():
 	var two = 2
-	var node1 = Node.new()
+	var node1 = autofree(Node.new())
 
 	gut.p("-- passing --")
 	assert_ne(two, 1, "Two should not equal one.")  # PASS
