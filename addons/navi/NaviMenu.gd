@@ -11,6 +11,14 @@ var _navi = Navi
 var menu_list = null
 var expected_nodes = {"MenuList": "menu_list"}
 
+
+func pw(msg: String, item = {}):
+	if item:
+		print("[NaviMenu] Warning: ", msg, " item: ", item)
+	else:
+		print("[NaviMenu] Warning: ", msg)
+
+
 ## config warnings #####################################################################
 
 
@@ -56,6 +64,10 @@ func print_button_things():
 ## add_menu_item #####################################################################
 
 
+func get_buttons():
+	return menu_list.get_children()
+
+
 func no_op():
 	print("button created with no method")
 
@@ -71,8 +83,23 @@ func connect_pressed_to_action(button, item):
 		method = "nav_to"
 		arg = nav_to
 	else:
-		obj = item.get("obj", self)
-		method = item.get("method", "no_op")
+		obj = item.get("obj")
+		method = item.get("method")
+
+	if (not (obj and method)) and (not nav_to):
+		button.set_disabled(true)
+		pw("Menu item missing handler", item)
+		return
+	elif nav_to:
+		if not File.new().file_exists(nav_to):  # TODO does resource exist?
+			button.set_disabled(true)
+			pw("Menu item with non-existent nav-to", item)
+			return
+	elif obj and method:
+		if not obj.has_method(method):
+			button.set_disabled(true)
+			pw("Menu item handler invalid", item)
+			return
 
 	if arg:
 		button.connect("pressed", obj, method, [arg])
@@ -81,8 +108,18 @@ func connect_pressed_to_action(button, item):
 
 
 func add_menu_item(item):
+	var texts = []
+	for but in get_buttons():
+		texts.append(but.text)
+
 	var button = button_scene.instance()
 	var label = item.get("label", "Fallback Label")
+	if label in texts:
+		# TODO some better logging lib
+		pw("Refusing to add button with existing label.", item)
+		button.free()
+		return
+
 	button.text = label
 	connect_pressed_to_action(button, item)
 	menu_list.add_child(button)
