@@ -59,6 +59,7 @@ func print_button_things():
 func no_op():
 	print("button created with no method")
 
+
 func connect_pressed_to_action(button, item):
 	var nav_to = item.get("nav_to", false)
 
@@ -77,6 +78,7 @@ func connect_pressed_to_action(button, item):
 		button.connect("pressed", obj, method, [arg])
 	else:
 		button.connect("pressed", obj, method)
+
 
 func add_menu_item(item):
 	var button = button_scene.instance()

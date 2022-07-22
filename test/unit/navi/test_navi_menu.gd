@@ -9,7 +9,8 @@ func before_each():
 	m = autofree(menu_scene.instance())
 	add_child(m)
 
-func get_button(idx=0):
+
+func get_button(idx = 0):
 	var buttons = m.menu_list.get_children()
 	if buttons.size() > 0:
 		return buttons[idx]

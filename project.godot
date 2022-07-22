@@ -63,7 +63,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dino"
-run/main_scene="res://test/unit/beehive/machine/MovementDemo.tscn"
+run/main_scene="res://src/menus/MainMenu.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]
