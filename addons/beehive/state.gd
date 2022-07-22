@@ -5,7 +5,7 @@ extends Node
 
 
 func handle_input(event: InputEvent):
-	print("Unhandled input received: ", event)
+	pass
 
 
 ## process ################################################################

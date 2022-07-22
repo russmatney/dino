@@ -4,7 +4,8 @@
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:17]
 ** machine
-*** [ ] write state machine abstraction
+*** [X] write state machine abstraction
+CLOSED: [2022-07-22 Fri 00:38]
 *** [ ] documentation/visualization for state machine flow
 how do we really see what the behaviors are like
 could we show them all at once, and see when one starts to deviate?

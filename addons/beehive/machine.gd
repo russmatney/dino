@@ -47,6 +47,10 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 			next_state = child
 
 	if next_state:
+		print("Transit from :", state.name, " to: ", next_state.name)
 		state.exit()
-		state.enter(ctx)
-		emit_signal("transitioned", state.name)
+		state = next_state
+		next_state.enter(ctx)
+		emit_signal("transitioned", next_state.name)
+	else:
+		print("Error! no next state! derp!", target_state_name, ctx)
