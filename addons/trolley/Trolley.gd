@@ -19,3 +19,7 @@ func move_dir():
 
 func is_attack(event):
 	return event.is_action_pressed("attack")
+
+
+func is_pause(event):
+	return event.is_action_pressed("pause")

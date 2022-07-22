@@ -11,6 +11,8 @@ var last_scene_stack = []
 
 
 func _ready():
+	pause_mode = PAUSE_MODE_PROCESS
+
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
@@ -46,3 +48,35 @@ func _deferred_goto_scene(path):
 
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
+
+
+## pause ###################################################################
+
+
+func _unhandled_input(event):
+	# Call me crazy! Navi implies Trolly dep?
+	if Trolley.is_pause(event):
+		Navi.toggle_pause()
+
+
+func toggle_pause():
+	print("toggling pause")
+	var t = get_tree()
+	if t.paused:
+		resume()
+	else:
+		pause()
+
+
+func pause():
+	var t = get_tree()
+	t.paused = true
+	if pause_menu:
+		pause_menu.show()
+
+
+func resume():
+	var t = get_tree()
+	t.paused = false
+	if pause_menu:
+		pause_menu.hide()
