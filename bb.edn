@@ -27,4 +27,5 @@
 
   install-addons
   (tasks/install-addons
-    {:gut           :bitwes/Gut})}}
+    {:gut                 :bitwes/Gut
+     :lospec_palette_list :hiulit/Lospec-Palette-List})}}
