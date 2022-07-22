@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "GutTest",
 "language": "GDScript",
 "path": "res://addons/gut/test.gd"
+}, {
+"base": "Node",
+"class": "Machine",
+"language": "GDScript",
+"path": "res://addons/beehive/machine.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://addons/beehive/state.gd"
 } ]
 _global_script_class_icons={
 "GutHookScript": "",
-"GutTest": ""
+"GutTest": "",
+"Machine": "",
+"State": ""
 }
 
 [application]
