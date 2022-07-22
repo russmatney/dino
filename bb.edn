@@ -9,7 +9,8 @@
 
     (def addons-map
       {:gut                 :bitwes/Gut
-       :lospec_palette_list :hiulit/Lospec-Palette-List}))
+       :lospec_palette_list :hiulit/Lospec-Palette-List
+       :MaxSizeContainer    :MattUV/godot-MaxSizeContainer}))
 
   test-with-window  (tasks/shell-and-log (str gut-with-window " -gexit"))
   test              (tasks/shell-and-log (str gut " -gexit"))
