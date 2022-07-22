@@ -10,14 +10,19 @@ Also it gives us a cast of characters to pull from.
 These are intended to speed up prototyping and game-jam workflows, but should
 also be useful in longer-running projects.
 
-* ideas/works-in-progress
+* addons
 ** beehive
 For working with state machines, behavior trees, maybe GOAP
+*** basic state machine abstraction
 ** trolley
 For handling controls inputs and remapping.
+*** Trolley autoload with `move_dir()` helpers
+returns a normalized vector according to `move_{left,up,right,down}` input actions
 ** navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
+*** NaviMenu
+supporting ~add_menu_item({label: "Blah", obj: self, method: "some_func"})~
 ** dj
 For sounds and music management, such as background music that is maintained
 across scene transitions.
@@ -26,7 +31,8 @@ Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 ** thanks
 A simple Credits scene that reads from a .txt file
-* bb-godot: Utilities for managing Godot Projects using Babashka (Clojure)
+* bb-godot
+Utilities for managing Godot Projects using Babashka (Clojure)
 
 - auto-exporting from aseprite
 - building a local web build
@@ -38,6 +44,8 @@ A file watcher that runs other commands, which for now is just `bb pixels`.
 ** `bb pixels`: Aseprite export
 and exports *.aesprite files as pngs, using the aseprite
 binary.
+** `bb addons`
+An quick status check for your addons-map
 ** `bb install-addons`
 An approximation of a dependency manager
 Clones and symlinks godot addons,

@@ -61,8 +61,10 @@ maybe opt-in?
 *** [ ] tests for aseprite command
 *** [ ] read aseprite command from ENV var
 ** addons
-*** [ ] UI confirming symlinks exist
-*** [ ] UI showing git-status of all symlinked addons
+*** [X] UI confirming addon dirs exist
+CLOSED: [2022-07-22 Fri 14:27]
+*** [X] UI showing git-status of all addons
+CLOSED: [2022-07-22 Fri 14:27]
 *** [ ] read packages local repo
 *** [ ] fully clone from github/gitlab/etc
 *** [ ] support cloning a local version with a git-hash

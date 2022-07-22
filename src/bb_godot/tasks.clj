@@ -24,6 +24,7 @@
   ([x] (shell-and-log {} x))
   ([opts x]
    (println x)
+   (when (seq opts) (println opts))
    (bb.tasks/shell opts x)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -211,15 +212,19 @@
                                (if (namespace repo-id)
                                  (str (namespace repo-id) "/" (name repo-id))
                                  (name repo-id))
-                               repo-id)]
-    {:addon-name addon-name
-     :addon-path
-     (cond
-       (re-seq #"/addons/" repo-id)
-       repo-id
+                               repo-id)
+        addon-path           (cond
+                               (re-seq #"/addons/" repo-id)
+                               repo-id
 
-       :else
-       (str repo-id "/addons/" addon-name))}))
+                               :else
+                               (str repo-id "/addons/" addon-name))]
+    {:addon-name         addon-name
+     :addon-path         addon-path
+     :project-addon-path (str "./addons/" addon-name)
+     :symlink-target     (str (home-dir) "/" addon-path)
+     :repo-id            repo-id
+     :repo-path          (str (home-dir) "/" repo-id)}))
 
 (comment
   (name :gut)
@@ -241,6 +246,34 @@
      {:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
      {:addon-name "gut-2", :addon-path "bitwes/Gut/addons/gut-2"}]))
 
+(defn git-status-addons [addons]
+  (doall
+    (->>
+      addons
+      (map input->godot-dep)
+      (map :repo-path)
+      (into #{})
+      (filter fs/directory?)
+      (map (fn [repo-path]
+             (shell-and-log {:dir repo-path} "git status"))))))
+
+(defn dir-exists-addons [addons]
+  (doall
+    (->>
+      addons
+      (map input->godot-dep)
+      (map :repo-path)
+      (into #{})
+      (remove fs/directory?)
+      (map (fn [repo-path]
+             (println "repo-path does not exist:" repo-path))))))
+
+(defn addons [addons]
+  (println "status checking addons: " addons)
+
+  (dir-exists-addons addons)
+  (git-status-addons addons))
+
 (defn install-addons [addons]
   (shell-and-log "mkdir -p addons")
   (println addons)
@@ -249,13 +282,10 @@
       addons
       (map input->godot-dep)
       (map
-        (fn [{:keys [addon-name addon-path]}]
-          (let [project-addon-path (str "./addons/" addon-name)
-                symlink-target     (str (home-dir) "/" addon-path)]
-            (println "creating symlink from"
-                     project-addon-path "to" symlink-target)
-            (fs/delete-if-exists project-addon-path)
-            (fs/create-sym-link project-addon-path symlink-target)))))))
+        (fn [{:keys [project-addon-path symlink-target]}]
+          (println "creating symlink from" project-addon-path "to" symlink-target)
+          (fs/delete-if-exists project-addon-path)
+          (fs/create-sym-link project-addon-path symlink-target))))))
 
 
 (defn install-script-templates [paths]
