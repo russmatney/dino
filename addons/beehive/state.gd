@@ -33,3 +33,7 @@ func enter(_ctx := {}):
 
 func exit():
 	pass
+
+
+func transit(next_state, arg = {}):
+	machine.transit(next_state, arg)

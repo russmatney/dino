@@ -24,6 +24,7 @@ func _ready():
 
 	if state:
 		state.enter()
+		emit_signal("transitioned", state.name)
 
 
 ### input #####################################################################
@@ -59,7 +60,7 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 			next_state = child
 
 	if next_state:
-		print("Transit from :", state.name, " to: ", next_state.name)
+		print(owner, "Transit from :", state.name, " to: ", next_state.name)
 		state.exit()
 		state = next_state
 		next_state.enter(ctx)
