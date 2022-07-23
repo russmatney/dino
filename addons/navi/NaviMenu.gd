@@ -2,7 +2,7 @@ tool
 extends Control
 class_name NaviMenu
 
-export(PackedScene) var button_scene = preload("res://src/ui/MenuButton.tscn")
+export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
 
 # set a local member for the Navi autoload, to ease testing
 # TODO consider loading/falling back on a load instead?

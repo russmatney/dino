@@ -4,11 +4,14 @@ extends PopupPanel
 
 ### ready ##################################################################
 
+
 func _ready():
 	# TODO validate connections
 	pass
 
+
 ### handlers ##################################################################
+
 
 func _on_ReturnToMain_pressed():
 	# TODO is there some way to auto-assert if this is missing?
