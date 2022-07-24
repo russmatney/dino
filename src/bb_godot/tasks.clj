@@ -274,6 +274,19 @@
   (dir-exists-addons addons)
   (git-status-addons addons))
 
+(defn clone-addons [addons]
+  (doall
+    (->>
+      addons
+      (map input->godot-dep)
+      (group-by (fn [x] (:repo-path x)))
+      (map (fn [[path xs]]
+             [path (first xs)]))
+      (map second)
+      (remove (comp fs/directory? :repo-path))
+      (map (fn [{:keys [repo-path repo-id]}]
+             (shell-and-log (str "gh repo clone " repo-id " " repo-path)))))))
+
 (defn install-addons [addons]
   (shell-and-log "mkdir -p addons")
   (println addons)
