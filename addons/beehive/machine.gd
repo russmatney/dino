@@ -4,6 +4,8 @@ extends Node
 export var initial_state := NodePath()
 var state: State
 
+var should_log = false
+
 ### ready #####################################################################
 
 
@@ -60,7 +62,17 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 			next_state = child
 
 	if next_state:
-		print(owner, "Transit from :", state.name, " to: ", next_state.name)
+		if should_log:
+			print(
+				owner,
+				(
+					"[Machine] Transit. Exiting '"
+					+ state.name
+					+ "', Entering '"
+					+ next_state.name
+					+ "'"
+				)
+			)
 		state.exit()
 		state = next_state
 		next_state.enter(ctx)
