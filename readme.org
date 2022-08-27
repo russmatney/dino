@@ -26,7 +26,7 @@ supporting ~add_menu_item({label: "Blah", obj: self, method: "some_func"})~
 ** dj
 For sounds and music management, such as background music that is maintained
 across scene transitions.
-** tyle
+** reptile
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 ** thanks
@@ -74,7 +74,7 @@ A project consuming dino's addons might look like:
     {:behavior_tree :kagenash1/godot-behavior-tree
      :gut           :bitwes/Gut
      :navi          :russmatney/dino
-     :tyle          :russmatney/dino
+     :reptile       :russmatney/dino
      :beehive       :russmatney/dino})}}
 #+end_src
 ** `bb install-script-templates`

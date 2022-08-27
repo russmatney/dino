@@ -98,10 +98,13 @@ CLOSED: [2022-07-20 Wed 15:14]
 ** [ ] should be able to play/listen to a song, then drag it as a resource
 so i'm not reading bs sound file names when trying to assign to an audio stream
 maybe i'm doing this wrong?
-* tyle
+* reptile
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:16]
-** [ ] add tileSetTools script
+** [X] add tileSetTools script
+CLOSED: [2022-08-27 Sat 18:25]
+** [ ] add example 2x2 and 3x3 min tilesets with bitmasks
+** [ ] TileSetTools script unit tests
 * thanks
 ** [ ] init plugin
 ** [ ] add basic credits node type

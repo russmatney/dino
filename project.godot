@@ -73,7 +73,7 @@ Navi="*res://addons/navi/Navi.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/tyle/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg" )
 
 [input]
 
