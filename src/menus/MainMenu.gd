@@ -10,6 +10,10 @@ var menu_scenes = [
 		"label": "Navi Menu Test",
 		"nav_to": "res://test/unit/navi/NaviMenuTest.tscn",
 	},
+	{
+		"label": "Maze Game",
+		"nav_to": "res://src/demos/Maze.tscn",
+	},
 ]
 
 

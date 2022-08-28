@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/2x2_autotiles_sheet.png-4657da1e46f104e19da5c4fa989b82a6.stex"
+path="res://.import/3x3_minimal_autotiles_sheet.png-00650d9c111b003b7e33ab541fc20f67.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/2x2_autotiles_sheet.png"
-dest_files=[ "res://.import/2x2_autotiles_sheet.png-4657da1e46f104e19da5c4fa989b82a6.stex" ]
+source_file="res://addons/reptile/assets/3x3_minimal_autotiles_sheet.png"
+dest_files=[ "res://.import/3x3_minimal_autotiles_sheet.png-00650d9c111b003b7e33ab541fc20f67.stex" ]
 
 [params]
 

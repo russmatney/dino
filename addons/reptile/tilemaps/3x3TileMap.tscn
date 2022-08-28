@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://resources/tiles/3x3-autotiles.tres" type="TileSet" id=1]
+[ext_resource path="res://addons/reptile/tilesets/3x3-autotiles.tres" type="TileSet" id=1]
 
 [node name="3x3TileMap" type="TileMap"]
 tile_set = ExtResource( 1 )
