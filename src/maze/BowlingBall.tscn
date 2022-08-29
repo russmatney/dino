@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/sprites/bowlingball.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://src/maze/BowlingBall.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 12.0416
 
-[node name="BowlingBall" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="BowlingBall" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )

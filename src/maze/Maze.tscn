@@ -33,6 +33,24 @@ position = Vector2( 52, -27 )
 [node name="BowlingBall4" parent="." instance=ExtResource( 1 )]
 position = Vector2( 121, -50 )
 
+[node name="BowlingBall5" parent="." instance=ExtResource( 1 )]
+position = Vector2( 248, -56 )
+
+[node name="BowlingBall6" parent="." instance=ExtResource( 1 )]
+position = Vector2( 320, -27 )
+
+[node name="BowlingBall7" parent="." instance=ExtResource( 1 )]
+position = Vector2( 416, 48 )
+
+[node name="BowlingBall8" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 128 )
+
+[node name="BowlingBall9" parent="." instance=ExtResource( 1 )]
+position = Vector2( 56, 136 )
+
+[node name="BowlingBall10" parent="." instance=ExtResource( 1 )]
+position = Vector2( -104, 56 )
+
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
 current = true
 smoothing_enabled = true
