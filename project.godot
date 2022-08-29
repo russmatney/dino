@@ -72,6 +72,7 @@ Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
 Util="*res://src/autoloads/Util.gd"
 Clawe="*res://src/Clawe.gd"
+DJ="*res://addons/dj/DJ.gd"
 
 [display]
 

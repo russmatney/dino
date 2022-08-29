@@ -56,6 +56,10 @@ func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
+	# TODO opt-out if desired
+	# TODO support passing a custom song
+	DJ.resume_menu_song()
+
 
 func print_button_things():
 	print("button button things things")
@@ -82,6 +86,7 @@ func connect_pressed_to_action(button, item):
 		obj = _navi
 		method = "nav_to"
 		arg = nav_to
+		# TODO  could pass more args to nav_to here, like skip_pause_music
 	else:
 		obj = item.get("obj")
 		method = item.get("method")

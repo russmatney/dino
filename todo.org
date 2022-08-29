@@ -92,6 +92,8 @@ needs helpers like get-nodes, defaults for params, tab-completion, etc
 * dj
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:14]
+** [X] basic menu/pause music
+CLOSED: [2022-08-29 Mon 10:40]
 ** [ ] add basic sounds/music autoload
 ** [ ] include helpers for resuming songs across scene nav
 ** [ ] ui showing what sounds/songs are used in the game

@@ -35,8 +35,12 @@ func _ready():
 
 func nav_to(path):
 	print("[Navi] nav_to: ", path)
+	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(path)
 	call_deferred("_deferred_goto_scene", path)
+	# Navi implying DJ dep
+	# TODO opt-in/out of pausing the music
+	DJ.pause_menu_song()
 
 
 func _deferred_goto_scene(path):
@@ -62,7 +66,7 @@ func _deferred_goto_scene(path):
 
 
 func _unhandled_input(event):
-	# Call me crazy! Navi implies Trolly dep?
+	# Navi implying Trolly dep
 	if Trolley.is_pause(event):
 		Navi.toggle_pause()
 
@@ -81,6 +85,9 @@ func pause():
 	t.paused = true
 	if pause_menu:
 		pause_menu.show()
+	# Navi implying DJ dep
+	print("dj.resume")
+	DJ.resume_menu_song()
 
 
 func resume():
@@ -88,3 +95,6 @@ func resume():
 	t.paused = false
 	if pause_menu:
 		pause_menu.hide()
+	# Navi implying DJ dep
+	print("dj.pause")
+	DJ.pause_menu_song()
