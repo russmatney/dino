@@ -69,16 +69,16 @@ _global_script_class_icons={
 [application]
 
 config/name="Dino"
-run/main_scene="res://src/demos/Maze.tscn"
+run/main_scene="res://src/maze/Maze.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]
 
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
-Util="*res://src/autoloads/Util.gd"
+Util="*res://addons/core/Util.gd"
 DJ="*res://addons/dj/DJ.gd"
-Clawe="*res://src/autoloads/Clawe.gd"
+Clawe="*res://src/clawe/Clawe.gd"
 
 [display]
 
@@ -87,7 +87,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
 
 [input]
 

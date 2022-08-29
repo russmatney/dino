@@ -1,17 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=1]
-
-[sub_resource type="DynamicFont" id=1]
-size = 128
-outline_size = 4
-outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
-font_data = ExtResource( 1 )
+[ext_resource path="res://addons/core/resources/fonts/hero-label.tres" type="DynamicFont" id=1]
 
 [node name="HeroLabel" type="RichTextLabel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Hero Label[/center]"
 text = "Hero Label"
