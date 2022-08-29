@@ -14,6 +14,10 @@ var menu_scenes = [
 		"label": "Maze Game",
 		"nav_to": "res://src/demos/Maze.tscn",
 	},
+	{
+		"label": "Clawe Dashboard",
+		"nav_to": "res://src/clawe/ClaweDashboard.tscn",
+	},
 ]
 
 

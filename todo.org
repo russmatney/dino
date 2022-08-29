@@ -137,4 +137,10 @@ CLOSED: [2022-07-20 Wed 23:49]
 ** [X] deploy to s3
 CLOSED: [2022-07-20 Wed 23:49]
 ** [ ] document example bb.edn consumer
+* clawe dashboard
+visualization of config-defs, workspace-defs
+basically just reading the config.edn
+** [ ] tool script that parses the config-defs every time
+** [ ] step 1: print the edn in the game
+** [ ] step 2: unit test that reads and prints it
 * [ ] consider CI for testing

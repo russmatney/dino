@@ -71,6 +71,7 @@ config/icon="res://assets/icon.png"
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
 Util="*res://src/autoloads/Util.gd"
+Clawe="*res://src/Clawe.gd"
 
 [display]
 
