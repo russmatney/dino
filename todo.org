@@ -111,8 +111,16 @@ CLOSED: [2022-08-27 Sat 18:41]
 CLOSED: [2022-08-28 Sun 10:58]
 ** [ ] TileSetTools script unit tests
 * thanks
-** [ ] init plugin
-** [ ] add basic credits node type
+** [X] init plugin
+CLOSED: [2022-08-29 Mon 12:22]
+** [X] basic credits scene and support scripts
+CLOSED: [2022-08-29 Mon 12:22]
+** [ ] tom hanks pixel art logo
+** [ ] read credits from a txt file
+rather than in-lining a list of strings
+** [ ] generate credits based on assets in the project resources
+could be a ui that asks about every asset
+a checkbox and license + source-url drop-down manager of sorts
 * [X] add GUT and basic testing flow
 CLOSED: [2022-07-21 Thu 22:25]
 * bb-godot

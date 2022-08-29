@@ -18,6 +18,10 @@ var menu_scenes = [
 		"label": "Clawe Dashboard",
 		"nav_to": "res://src/clawe/ClaweDashboard.tscn",
 	},
+	{
+		"label": "Credits",
+		"nav_to": "res://src/demos/DinoCredits.tscn",
+	},
 ]
 
 

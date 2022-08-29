@@ -24,7 +24,7 @@ func pw(msg: String, item = {}):
 
 func _get_configuration_warning():
 	for node_name in expected_nodes:
-		var node = find_node("MenuList")
+		var node = find_node(node_name)
 		if not node:
 			return (
 				"'NaviMenu' expected child node named '"

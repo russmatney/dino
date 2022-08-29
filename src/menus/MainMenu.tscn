@@ -31,6 +31,5 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
 [node name="MenuList" type="VBoxContainer" parent="VBoxContainer/MaxSizeContainer"]
-margin_left = 362.0
-margin_right = 662.0
+margin_right = 1024.0
 margin_bottom = 467.0
