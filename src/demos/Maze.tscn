@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/reptile/tilemaps/3x3TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/players/TopDownPlayer.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/players/PlayerSpawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/cameras/Camera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://resources/tilesets/maze-3x3.tres" type="TileSet" id=6]
+[ext_resource path="res://src/items/BowlingBall.tscn" type="PackedScene" id=7]
 
 [node name="Maze" type="Node2D"]
 script = ExtResource( 3 )
@@ -19,6 +20,18 @@ tile_data = PoolIntArray( -458744, 0, 8, -458743, 0, 10, -458742, 0, 10, -458741
 unique_name_in_owner = true
 position = Vector2( -192, -144 )
 player_to_spawn = ExtResource( 2 )
+
+[node name="BowlingBall" parent="." instance=ExtResource( 7 )]
+position = Vector2( 90, -46 )
+
+[node name="BowlingBall2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 57, -74 )
+
+[node name="BowlingBall3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 52, -27 )
+
+[node name="BowlingBall4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 121, -50 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 5 )]
 current = true
