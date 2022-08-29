@@ -30,4 +30,5 @@
     #{"kagenash1/godot-behavior-tree/script_templates"})
 
   addons         (tasks/addons addons-map)
-  install-addons (tasks/install-addons addons-map)}}
+  install-addons (tasks/install-addons addons-map)
+  clone-addons   (tasks/clone-addons addons-map)}}
