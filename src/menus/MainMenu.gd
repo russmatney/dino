@@ -12,7 +12,7 @@ var menu_scenes = [
 	},
 	{
 		"label": "Maze Game",
-		"nav_to": "res://src/demos/Maze.tscn",
+		"nav_to": "res://src/maze/Maze.tscn",
 	},
 	{
 		"label": "Clawe Dashboard",
@@ -20,7 +20,7 @@ var menu_scenes = [
 	},
 	{
 		"label": "Credits",
-		"nav_to": "res://src/demos/DinoCredits.tscn",
+		"nav_to": "res://src/credits/DinoCredits.tscn",
 	},
 ]
 

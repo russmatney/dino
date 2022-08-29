@@ -2,7 +2,7 @@ extends Position2D
 
 
 export(PackedScene) var player_to_spawn
-var fallback_player_scene = preload("res://src/players/TopDownPlayer.tscn")
+var fallback_player_scene = preload("res://src/maze/Player.tscn")
 
 func spawn_player(parent = null) -> KinematicBody2D:
 	print("doing some spawning action")
