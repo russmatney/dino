@@ -11,6 +11,13 @@ These are intended to speed up prototyping and game-jam workflows, but should
 also be useful in longer-running projects.
 
 * addons
+Note that cross-dependencies between these addons is not yet solved - i.e. if
+you add 'navi', you will have trouble unless you also add 'core', 'trolley', and
+'dj', b/c the 'navi' code expects to use fonts/autoloads from those addons. I
+hope to resolve this dependency issue in `bb-godot`'s install-addons flow.
+
+** core
+A Util autoload and a slew of fonts.
 ** beehive
 For working with state machines, behavior trees, maybe GOAP
 *** basic state machine abstraction
@@ -30,7 +37,7 @@ across scene transitions.
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 ** thanks
-A simple Credits scene that reads from a .txt file
+A simple Credits scene and/or script that scrolls credits from a .txt file
 * bb-godot
 Utilities for managing Godot Projects using Babashka (Clojure)
 
@@ -63,7 +70,7 @@ Here's a bit of the current bb.edn for this project
      :gut           :bitwes/Gut})}}
 #+end_src
 
-A project consuming dino's addons might look like:
+A project consuming some of dino's addons (plus GUT) might look like:
 
 #+begin_src clojure
 {:tasks
@@ -71,9 +78,11 @@ A project consuming dino's addons might look like:
 
   install-addons
   (tasks/install-addons
-    {:behavior_tree :kagenash1/godot-behavior-tree
-     :gut           :bitwes/Gut
+    {:gut           :bitwes/Gut
      :navi          :russmatney/dino
+     :dj            :russmatney/dino
+     :trolley       :russmatney/dino
+     :core          :russmatney/dino
      :reptile       :russmatney/dino
      :beehive       :russmatney/dino})}}
 #+end_src
