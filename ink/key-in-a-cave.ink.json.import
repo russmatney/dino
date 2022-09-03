@@ -1,0 +1,14 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+path="res://.import/key-in-a-cave.ink.json-3c32d9d04f9dc7c2c9199d0341fed8d5.res"
+
+[deps]
+
+source_file="res://ink/key-in-a-cave.ink.json"
+dest_files=[ "res://.import/key-in-a-cave.ink.json-3c32d9d04f9dc7c2c9199d0341fed8d5.res" ]
+
+[params]
+
+compress=true
