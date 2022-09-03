@@ -24,7 +24,7 @@ func physics_process(_delta: float):
 
 ## transitions ###################################################################
 
-var machine = null
+var machine: Machine = null
 
 
 func enter(_ctx := {}):
