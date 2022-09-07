@@ -20,11 +20,13 @@
   test-match-script (let [arg (some-> *command-line-args* first)]
                       (tasks/shell-and-log (str gut " -gexit -gselect=" arg)))
 
-  watch      tasks/watch
-  pixels     tasks/pixels
-  build-web  tasks/build-web
-  deploy-web (tasks/deploy-web "s3://<some-bucket-name>")
-  zip        tasks/zip
+  watch          tasks/watch
+  watch-reptile  (tasks/watch "addons/reptile/assets")
+  pixels         tasks/pixels
+  pixels-reptile (tasks/pixels "addons/reptile/assets")
+  build-web      tasks/build-web
+  deploy-web     (tasks/deploy-web "s3://<some-bucket-name>")
+  zip            tasks/zip
 
   install-script-templates
   (tasks/install-script-templates

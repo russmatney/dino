@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=98 format=2]
 
 [ext_resource path="res://addons/reptile/TileSetTools.gd" type="Script" id=1]
-[ext_resource path="res://addons/reptile/assets/ship_auto_tiles_sheet_3.png" type="Texture" id=2]
+[ext_resource path="res://addons/reptile/assets/pirate_ship_auto_tiles_sheet.png" type="Texture" id=2]
 
 [sub_resource type="OccluderPolygon2D" id=61]
 polygon = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )

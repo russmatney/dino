@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ship_auto_tiles_sheet_2.png-7e1aff3babc82a3f7a123e15efc10f32.stex"
+path="res://.import/3x3_minimal_autotiles_sheet.png-3d32eff22e049a77630bf44cf1824545.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/reptile/assets/ship_auto_tiles_sheet_2.png"
-dest_files=[ "res://.import/ship_auto_tiles_sheet_2.png-7e1aff3babc82a3f7a123e15efc10f32.stex" ]
+source_file="res://assets/tiles/3x3_minimal_autotiles_sheet.png"
+dest_files=[ "res://.import/3x3_minimal_autotiles_sheet.png-3d32eff22e049a77630bf44cf1824545.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

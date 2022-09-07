@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ship_auto_tiles_sheet_2.png-7e1aff3babc82a3f7a123e15efc10f32.stex"
+path="res://.import/16x16-tilemap-template_sheet.png-f82094ec5d030d6cbbe5134fd48e554d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/reptile/assets/ship_auto_tiles_sheet_2.png"
-dest_files=[ "res://.import/ship_auto_tiles_sheet_2.png-7e1aff3babc82a3f7a123e15efc10f32.stex" ]
+source_file="res://addons/reptile/assets/16x16-tilemap-template_sheet.png"
+dest_files=[ "res://.import/16x16-tilemap-template_sheet.png-f82094ec5d030d6cbbe5134fd48e554d.stex" ]
 
 [params]
 

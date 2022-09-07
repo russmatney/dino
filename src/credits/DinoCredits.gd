@@ -13,6 +13,15 @@ var dino_credits = [
     "http://creativecommons.org/licenses/by/4.0",
   ],
   [
+    "Art",
+    "",
+    "Pirate Bomb",
+    "Pixel Frog",
+      # TODO get proper attribution in here
+    "CC-0",
+    "",
+  ],
+  [
     "Fonts",
     "",
     "born2bsportyv2",
