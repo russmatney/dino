@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/reptile/tilemaps/DungeonWalls.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/reptile/tilemaps/ShipInteriorTiles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/dungeonCrawler/PlayerSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/dungeonCrawler/BowlingBall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/dungeonCrawler/rooms/Room.gd" type="Script" id=5]
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="ShipInteriorTiles" parent="." instance=ExtResource( 2 )]
+
+[node name="DungeonWalls" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 6, 0, 1, 7, 0, 196610, 8, 0, 196610, 9, 0, 3, 11, 0, 1, 12, 0, 196610, 13, 0, 196610, 14, 0, 196610, 15, 0, 196610, 16, 0, 3, 65538, 0, 1, 65539, 0, 196610, 65540, 0, 196610, 65541, 0, 196610, 65542, 0, 131075, 65545, 0, 131073, 65546, 0, 196610, 65547, 0, 131075, 65552, 0, 131073, 65553, 0, 196610, 65554, 0, 196610, 65555, 0, 196610, 65556, 0, 196610, 65557, 0, 196610, 65558, 0, 196610, 65559, 0, 3, 131074, 0, 65536, 131095, 0, 131073, 131096, 0, 196610, 131097, 0, 3, 196610, 0, 65536, 196633, 0, 131073, 196634, 0, 196610, 196635, 0, 3, 262146, 0, 65536, 262171, 0, 65536, 327681, 0, 1, 327682, 0, 131075, 327707, 0, 131073, 327708, 0, 3, 393217, 0, 65536, 393244, 0, 65536, 458753, 0, 65536, 458780, 0, 65536, 524289, 0, 65536, 524316, 0, 65536, 589825, 0, 65536, 589852, 0, 65536, 655361, 0, 65536, 655388, 0, 65536, 720897, 0, 65536, 720923, 0, 1, 720924, 0, 131075, 786433, 0, 65536, 786459, 0, 65536, 851969, 0, 65536, 851995, 0, 65536, 917505, 0, 65536, 917531, 0, 65536, 983041, 0, 65536, 983066, 0, 1, 983067, 0, 131075, 1048577, 0, 131073, 1048578, 0, 3, 1048601, 0, 1, 1048602, 0, 131075, 1114114, 0, 65536, 1114136, 0, 1, 1114137, 0, 131075, 1179650, 0, 131073, 1179651, 0, 196610, 1179652, 0, 196610, 1179653, 0, 196610, 1179654, 0, 196610, 1179655, 0, 196610, 1179656, 0, 196610, 1179657, 0, 196610, 1179658, 0, 196610, 1179659, 0, 196610, 1179660, 0, 196610, 1179661, 0, 196610, 1179662, 0, 3, 1179670, 0, 1, 1179671, 0, 196610, 1179672, 0, 131075, 1245198, 0, 131073, 1245199, 0, 196610, 1245200, 0, 196610, 1245201, 0, 196610, 1245202, 0, 196610, 1245203, 0, 196610, 1245204, 0, 196610, 1245205, 0, 196610, 1245206, 0, 131075 )
+
+[node name="PlayerStart" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
+position = Vector2( 208, 144 )
+
+[node name="BowlingBall" parent="." instance=ExtResource( 4 )]
+position = Vector2( 600, 216 )
+
+[node name="BowlingBall2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 320, 352 )
+
+[node name="BowlingBall3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 512, 368 )

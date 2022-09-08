@@ -447,7 +447,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dino"
-run/main_scene="res://src/maze/Maze.tscn"
+run/main_scene="res://src/dungeonCrawler/rooms/Maze.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]

@@ -11,8 +11,12 @@ var menu_scenes = [
 		"nav_to": "res://test/unit/navi/NaviMenuTest.tscn",
 	},
 	{
-		"label": "Maze Game",
-		"nav_to": "res://src/maze/Maze.tscn",
+		"label": "Maze",
+		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
+	},
+	{
+		"label": "Room",
+		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
 	},
 	{
 		"label": "Clawe Dashboard",

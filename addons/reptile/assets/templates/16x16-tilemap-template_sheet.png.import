@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/16x16-tilemap-template_sheet.png-6653027508cc73ca91ca5ab6d0b37fed.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://addons/reptile/assets/templates/16x16-tilemap-template_sheet.png"
+dest_files=[ "res://.import/16x16-tilemap-template_sheet.png-6653027508cc73ca91ca5ab6d0b37fed.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
