@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/sprites/DungeonDoor.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://src/dungeonCrawler/Door.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 24 )
+
+[node name="Door" type="Area2D" groups=["door"]]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="ActionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="ActionArea" to="." method="_on_ActionArea_body_entered"]
+[connection signal="body_exited" from="ActionArea" to="." method="_on_ActionArea_body_exited"]
