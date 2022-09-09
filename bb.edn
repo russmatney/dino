@@ -22,8 +22,10 @@
 
   watch          tasks/watch
   watch-reptile  (tasks/watch "addons/reptile/assets")
+  watch-core     (tasks/watch "addons/core/assets")
   pixels         tasks/pixels
   pixels-reptile (tasks/pixels "addons/reptile/assets")
+  pixels-core (tasks/pixels "addons/core/assets")
   build-web      tasks/build-web
   deploy-web     (tasks/deploy-web "s3://<some-bucket-name>")
   zip            tasks/zip
