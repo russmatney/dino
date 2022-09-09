@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/dungeonCrawler/BowlingBall.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/dungeonCrawler/Barney.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/dungeonCrawler/player/Barney.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/dungeonCrawler/rooms/Dungeon.gd" type="Script" id=3]
 [ext_resource path="res://addons/reptile/tilesets/ShipAutotiles.tres" type="TileSet" id=4]
-[ext_resource path="res://src/dungeonCrawler/PlayerSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/reptile/tilemaps/3x3TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/reptile/tilemaps/ShipInteriorTiles.tscn" type="PackedScene" id=8]

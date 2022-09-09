@@ -23,19 +23,61 @@ func set_door_state(val):
 			if coll_shape:
 				coll_shape.disabled = false
 
+func open_door():
+	set_door_state(door_state.OPEN)
+
+func close_door():
+	set_door_state(door_state.CLOSED)
+
+#######################################################################33
+# ready
+
 func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
 	set_door_state(state)
 
+#######################################################################33
+# actions
+
 var bodies = []
+
+var open_door_action = {
+	"func": funcref(self, "open_door"),
+	"label": "Open"
+	}
+
+var close_door_action = {
+	"func": funcref(self, "close_door"),
+	"label": "Close"
+	}
 
 func _on_ActionArea_body_entered(body:Node):
 	bodies.append(body)
+
+	print(body)
+
+	if body.has_method("add_action"):
+		print("body has add_action")
+		match state:
+			door_state.OPEN:
+				body.add_action(close_door_action)
+			door_state.CLOSED:
+				body.add_action(open_door_action)
+	else:
+		print("body has no add_action")
+		if body.name == "Player":
+			body.add_action(open_door_action)
+
 	print("[enter] action area bodies", bodies)
 
 
 func _on_ActionArea_body_exited(body:Node):
 	bodies.erase(body)
 	print("[exit] action area bodies", bodies)
+
+	if body.has_method("remove_action"):
+		# should no-op ok?
+		body.remove_action(close_door_action)
+		body.remove_action(open_door_action)

@@ -2,10 +2,10 @@
 
 [ext_resource path="res://addons/reptile/tilemaps/DungeonWalls.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/reptile/tilemaps/ShipInteriorTiles.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/dungeonCrawler/PlayerSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/dungeonCrawler/BowlingBall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/dungeonCrawler/rooms/Dungeon.gd" type="Script" id=5]
-[ext_resource path="res://src/dungeonCrawler/Barney.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/dungeonCrawler/player/Barney.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/core/assets/lights/light4_sheet.png" type="Texture" id=7]
 
 [node name="Room" type="Node2D"]
