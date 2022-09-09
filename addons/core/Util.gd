@@ -18,3 +18,15 @@ func reparent(child: Node, new_parent: Node):
     var old_parent = child.get_parent()
     old_parent.remove_child(child)
     new_parent.add_child(child)
+
+# https://godotengine.org/qa/27869/how-to-get-the-nearest-object-in-a-group
+func nearest_node(source: Node, targets) -> Node:
+    # assume the first is closest
+    var nearest_target = targets[0]
+
+    # look through spawn nodes to see if any are closer
+    for target in targets:
+         if target.global_position.distance_to(source.global_position) < nearest_target.global_position.distance_to(source.global_position):
+            nearest_target = target
+
+    return nearest_target
