@@ -4,9 +4,8 @@ extends EditorPlugin
 
 func _enter_tree():
 	print("navi entering tree")
-	pass
-
+	add_autoload_singleton("Navi", "res://addons/navi/Navi.gd")
 
 func _exit_tree():
 	print("navi leaving tree")
-	pass
+	remove_autoload_singleton("Navi")

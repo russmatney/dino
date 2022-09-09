@@ -4,9 +4,9 @@ extends EditorPlugin
 
 func _enter_tree():
 	print("trolley entering tree")
-	pass
+	add_autoload_singleton("Trolley", "res://addons/trolley/Trolley.gd")
 
 
 func _exit_tree():
 	print("trolley exiting tree")
-	pass
+	remove_autoload_singleton("Trolley")

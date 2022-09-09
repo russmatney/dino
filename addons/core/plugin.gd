@@ -3,8 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	pass
+	add_autoload_singleton("Util", "res://addons/core/Util.gd")
 
 
 func _exit_tree():
-	pass
+	remove_autoload_singleton("Util")
