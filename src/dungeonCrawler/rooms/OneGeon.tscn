@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/dungeonCrawler/rooms/Dungeon.gd" type="Script" id=1]
 [ext_resource path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/dungeonCrawler/Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/dungeonCrawler/items/Key.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/dungeonCrawler/items/BowItem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/dungeonCrawler/enemies/Goomba.tscn" type="PackedScene" id=9]
 
 [node name="OneGeon" type="Node2D"]
 script = ExtResource( 1 )
@@ -47,3 +48,9 @@ position = Vector2( -640, -64 )
 
 [node name="BowItem" parent="." instance=ExtResource( 8 )]
 position = Vector2( 24, 0 )
+
+[node name="Goomba" parent="." instance=ExtResource( 9 )]
+position = Vector2( -96, -64 )
+
+[node name="Goomba2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 152, 64 )

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/sprites/goomba.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://src/dungeonCrawler/enemies/Goomba.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14, 10 )
+
+[node name="Goomba" type="KinematicBody2D" groups=["enemies"]]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = ExtResource( 1 )
+animation = "walk"
+frame = 3
+playing = true

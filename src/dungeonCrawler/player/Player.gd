@@ -28,11 +28,9 @@ func update_facing(move_dir):
 		new_facing = facing_dir.DOWN if move_dir.y > 0 else facing_dir.UP
 
 	if new_facing != null and new_facing != facing:
-		print("new facing", new_facing)
 		facing = new_facing
 		anim.flip_h = facing == facing_dir.RIGHT
 		point_weapon(facing)
-		print("pointed weapon w/ facing", facing)
 
 #######################################################################33
 # process
@@ -127,7 +125,6 @@ func fire_bow():
 	# prefer to add bullets to the current scene, so they get cleaned up
 	Navi.current_scene.call_deferred("add_child", arrow)
 	var impulse_dir = Vector2(1, 0)
-	print("facing", facing)
 	match facing:
 		facing_dir.RIGHT:
 			arrow.rotation_degrees = 90

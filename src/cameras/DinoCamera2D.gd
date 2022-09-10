@@ -16,7 +16,6 @@ func find_node_to_follow():
 
 	if nodes.size() > 0:
 		following = nodes[0]
-		print("camera found player!", following)
 		match mode:
 			cam_mode.FOLLOW:
 				Util.reparent(self, following)

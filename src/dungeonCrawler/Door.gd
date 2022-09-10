@@ -40,8 +40,6 @@ func _ready():
 
 	set_door_state(state)
 
-	print("coll shape disabled", coll_shape.disabled)
-
 #######################################################################33
 # actions
 
