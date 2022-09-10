@@ -46,4 +46,4 @@ unique_name_in_owner = true
 position = Vector2( -640, -64 )
 
 [node name="BowItem" parent="." instance=ExtResource( 8 )]
-position = Vector2( -1152, 0 )
+position = Vector2( 24, 0 )

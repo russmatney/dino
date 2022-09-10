@@ -30,3 +30,10 @@ func nearest_node(source: Node, targets) -> Node:
             nearest_target = target
 
     return nearest_target
+
+func get_first_child_in_group(node: Node, group_name: String) -> Node:
+	# only checks first children
+	for c in node.get_children():
+		if c.is_in_group(group_name):
+			return c
+	return null

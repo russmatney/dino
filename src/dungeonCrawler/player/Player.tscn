@@ -28,3 +28,9 @@ margin_bottom = -8.0
 
 [node name="WeaponPosition" type="Position2D" parent="."]
 position = Vector2( 8, 2 )
+
+[node name="DebugList" type="VBoxContainer" parent="."]
+margin_left = -24.0
+margin_top = -56.0
+margin_right = 24.0
+margin_bottom = -16.0

@@ -11,12 +11,36 @@ var velocity := Vector2.ZERO
 var initial_pos
 func _ready():
 	initial_pos = get_global_position()
+	anim.flip_h = facing == facing_dir.RIGHT
+
+#######################################################################33
+# facing
+
+onready var anim = $AnimatedSprite
+enum facing_dir {RIGHT, DOWN, LEFT, UP}
+var facing = facing_dir.RIGHT
+
+func update_facing(move_dir):
+	var new_facing
+	if abs(move_dir.x) > 0:
+		new_facing = facing_dir.RIGHT if move_dir.x > 0 else facing_dir.LEFT
+	elif abs(move_dir.y) > 0:
+		new_facing = facing_dir.DOWN if move_dir.y > 0 else facing_dir.UP
+
+	if new_facing != null and new_facing != facing:
+		print("new facing", new_facing)
+		facing = new_facing
+		anim.flip_h = facing == facing_dir.RIGHT
+		point_weapon(facing)
+		print("pointed weapon w/ facing", facing)
 
 #######################################################################33
 # process
 
+
 func _process(delta):
 	var move_dir = Trolley.move_dir()
+	update_facing(move_dir)
 	if move_dir.length() == 0:
 		velocity = lerp(velocity, Vector2.ZERO, 0.5)
 	else:
@@ -63,6 +87,13 @@ func use_weapon(wp=null):
 		"bow":
 			fire_bow()
 
+func point_weapon(dir):
+	if weapon:
+		match weapon["type"]:
+			"bow":
+				point_bow(dir)
+
+
 const weapons = []
 
 func add_weapon(wp):
@@ -83,8 +114,52 @@ func attach_bow():
 	call_deferred("add_child", bow)
 	bow.transform.origin = weapon_pos.position
 
+var arrow_scene = preload("res://src/dungeonCrawler/weapons/ArrowProjectile.tscn")
+var arrow_impulse = 400
 func fire_bow():
-	print("fire bow")
+	var bow = Util.get_first_child_in_group(self, "bow")
+	if not bow:
+		print("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
+		return
+
+	var arrow = arrow_scene.instance()
+	arrow.position = bow.get_global_position() # maybe use weapon position?
+	# prefer to add bullets to the current scene, so they get cleaned up
+	Navi.current_scene.call_deferred("add_child", arrow)
+	var impulse_dir = Vector2(1, 0)
+	print("facing", facing)
+	match facing:
+		facing_dir.RIGHT:
+			arrow.rotation_degrees = 90
+			impulse_dir = Vector2(1, 0)
+		facing_dir.LEFT:
+			arrow.rotation_degrees = -90
+			impulse_dir = Vector2(-1, 0)
+		facing_dir.UP:
+			arrow.rotation_degrees = 0
+			impulse_dir = Vector2(0, -1)
+		facing_dir.DOWN:
+			arrow.rotation_degrees = 180
+			impulse_dir = Vector2(0, 1)
+	arrow.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
+
+func point_bow(dir):
+	var bow = Util.get_first_child_in_group(self, "bow")
+	if bow:
+		match dir:
+			facing_dir.RIGHT:
+				bow.transform.origin = weapon_pos.position
+				bow.rotation_degrees = 0
+			facing_dir.LEFT:
+				bow.transform.origin = Vector2(-weapon_pos.position.x, weapon_pos.position.y)
+				bow.rotation_degrees = 180
+			facing_dir.UP:
+				bow.transform.origin = Vector2(0, -weapon_pos.position.x + weapon_pos.position.y)
+				bow.rotation_degrees = -90
+			facing_dir.DOWN:
+				bow.transform.origin = Vector2(0, weapon_pos.position.x + weapon_pos.position.y)
+				bow.rotation_degrees = 90
+
 
 #######################################################################33
 # items

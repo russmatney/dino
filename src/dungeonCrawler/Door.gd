@@ -21,10 +21,9 @@ func set_door_state(val):
 			if anim:
 				anim.animation = "closed"
 			if coll_shape:
-				print("found coll shape, setting disabled")
 				coll_shape.set_disabled(false)
 			else:
-				print("no coll shape")
+				print("[WARN] no door collision shape")
 
 func open_door():
 	set_door_state(door_state.OPEN)
