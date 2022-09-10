@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 enum door_state {OPEN, CLOSED}
 
@@ -16,12 +16,15 @@ func set_door_state(val):
 			if anim:
 				anim.animation = "open"
 			if coll_shape:
-				coll_shape.disabled = true
+				coll_shape.set_disabled(true)
 		door_state.CLOSED:
 			if anim:
 				anim.animation = "closed"
 			if coll_shape:
-				coll_shape.disabled = false
+				print("found coll shape, setting disabled")
+				coll_shape.set_disabled(false)
+			else:
+				print("no coll shape")
 
 func open_door():
 	set_door_state(door_state.OPEN)
@@ -37,6 +40,8 @@ func _ready():
 		request_ready()
 
 	set_door_state(state)
+
+	print("coll shape disabled", coll_shape.disabled)
 
 #######################################################################33
 # actions
@@ -56,26 +61,16 @@ var close_door_action = {
 func _on_ActionArea_body_entered(body:Node):
 	bodies.append(body)
 
-	print(body)
-
 	if body.has_method("add_action"):
-		print("body has add_action")
 		match state:
 			door_state.OPEN:
 				body.add_action(close_door_action)
 			door_state.CLOSED:
 				body.add_action(open_door_action)
-	else:
-		print("body has no add_action")
-		if body.name == "Player":
-			body.add_action(open_door_action)
-
-	print("[enter] action area bodies", bodies)
 
 
 func _on_ActionArea_body_exited(body:Node):
 	bodies.erase(body)
-	print("[exit] action area bodies", bodies)
 
 	if body.has_method("remove_action"):
 		# should no-op ok?

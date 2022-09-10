@@ -16,7 +16,11 @@ var menu_scenes = [
 	},
 	{
 		"label": "Room",
-		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
+		"nav_to": "res://src/dungeonCrawler/rooms/Room.tscn",
+	},
+	{
+		"label": "OneGeon",
+		"nav_to": "res://src/dungeonCrawler/rooms/OneGeon.tscn",
 	},
 	{
 		"label": "Clawe Dashboard",

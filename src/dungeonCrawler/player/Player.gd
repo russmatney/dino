@@ -25,6 +25,16 @@ func _process(delta):
 	velocity = move_and_slide(velocity)
 
 #######################################################################33
+# _input
+
+func _unhandled_input(event):
+	if Trolley.is_action(event):
+		if actions:
+			# TODO select an action
+			var ax = actions[0]
+			execute_action(ax)
+
+#######################################################################33
 # actions
 
 const actions = []
@@ -33,13 +43,11 @@ var action_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.ts
 onready var actions_list = $ActionsList
 
 func add_action(ax):
-	print("adding player action", ax)
 	var label_text = ax.get("label", "fallback label")
 	var new_label = action_label_scene.instance()
 	new_label.bbcode_text = "[center]" + label_text
 	actions_list.add_child(new_label)
 	actions.append(ax)
-	print("added player action")
 
 func remove_action(ax):
 	var to_remove

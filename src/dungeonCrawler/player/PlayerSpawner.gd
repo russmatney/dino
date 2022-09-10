@@ -5,20 +5,15 @@ export(PackedScene) var player_to_spawn
 var fallback_player_scene = preload("res://src/dungeonCrawler/player/Player.tscn")
 
 func spawn_player(parent = null):
-	print("doing some spawning action")
-
 	var player
 	if player_to_spawn:
 		player = player_to_spawn.instance()
 	else:
-		print("spawning fallback player")
 		player = fallback_player_scene.instance()
 
 	if not player:
 		print("could not create player instance")
 		return null
-
-	print("p has method?", player.has_method("add_action"))
 
 	player.transform.origin = position
 

@@ -9,7 +9,7 @@ extents = Vector2( 16, 16 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24, 24 )
 
-[node name="Door" type="Area2D" groups=["door"]]
+[node name="Door" type="StaticBody2D" groups=["door"]]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

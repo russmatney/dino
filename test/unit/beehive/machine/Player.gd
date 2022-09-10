@@ -13,6 +13,7 @@ onready var machine = $Machine
 
 
 func _ready():
+	print("machine player ready")
 	initial_pos = get_global_position()
 	machine.connect("transitioned", self, "on_transit")
 
