@@ -34,6 +34,71 @@ func _unhandled_input(event):
 			var ax = actions[0]
 			execute_action(ax)
 
+	if Trolley.is_attack(event):
+		if weapon:
+			use_weapon(weapon)
+
+#######################################################################33
+# weapons
+
+onready var weapon_pos = $WeaponPosition
+var weapon
+func update_weapon():
+	if weapons.size():
+		# TODO select new weapon? keep current?
+		weapon = weapons[0]
+	else:
+		weapon = null
+
+	if weapon:
+		match weapon["type"]:
+			"bow":
+				attach_bow()
+
+func use_weapon(wp=null):
+	if not wp:
+		wp = weapon
+
+	match wp["type"]:
+		"bow":
+			fire_bow()
+
+const weapons = []
+
+func add_weapon(wp):
+	weapons.append(wp)
+	print("[player weapons]: ", weapons)
+
+	update_weapon()
+
+func remove_weapon(wp):
+	weapons.erase(wp)
+	print("[player weapons]: ", weapons)
+
+# bow
+
+var player_bow_scene = preload("res://src/dungeonCrawler/weapons/BowWeapon.tscn")
+func attach_bow():
+	var bow = player_bow_scene.instance()
+	call_deferred("add_child", bow)
+	bow.transform.origin = weapon_pos.position
+
+func fire_bow():
+	print("fire bow")
+
+#######################################################################33
+# items
+
+const items = []
+
+func add_item(it):
+	items.append(it)
+	print("[player items]: ", items)
+
+func remove_item(it):
+	items.erase(it)
+	print("[player items]: ", items)
+
 #######################################################################33
 # actions
 

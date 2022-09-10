@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/dungeonCrawler/rooms/Dungeon.gd" type="Script" id=1]
 [ext_resource path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://addons/reptile/tilemaps/DungeonWalls.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/cameras/CamAnchor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/dungeonCrawler/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/dungeonCrawler/items/Key.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/dungeonCrawler/items/BowItem.tscn" type="PackedScene" id=8]
 
 [node name="OneGeon" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,3 +41,9 @@ position = Vector2( 496, -112 )
 
 [node name="PlayerStart" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true
+
+[node name="Key" parent="." instance=ExtResource( 7 )]
+position = Vector2( -640, -64 )
+
+[node name="BowItem" parent="." instance=ExtResource( 8 )]
+position = Vector2( -1152, 0 )
