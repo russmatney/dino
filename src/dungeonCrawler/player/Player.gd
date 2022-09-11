@@ -172,6 +172,28 @@ func remove_item(it):
 	print("[player items]: ", items)
 
 #######################################################################33
+# doors/keys
+
+func can_lock_door():
+	return false
+
+func can_unlock_door():
+	for it in items:
+		if it["type"] == "key":
+			return true
+	return false
+
+func use_key():
+	# TODO how to determine/sort small vs boss key?
+	var key_item
+	for it in items:
+		if it["type"] == "key":
+			key_item = it
+
+	if key_item:
+		items.erase(key_item)
+
+#######################################################################33
 # actions
 
 const actions = []
@@ -200,6 +222,8 @@ func remove_action(ax):
 
 func execute_action(ax):
 	var fn = ax["func"]
-	fn.call_func()
+	# TODO big assumption here, passing self as first arg
+	# really not sure about this pattern vs pubsub
+	fn.call_func(self)
 
 	remove_action(ax)

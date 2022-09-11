@@ -13,31 +13,42 @@ func set_door_state(val):
 
 	match state:
 		door_state.OPEN:
-			anim.animation = "open"
-			coll_shape.set_disabled(true)
+			if anim:
+				anim.animation = "open"
+			if coll_shape:
+				coll_shape.set_disabled(true)
 		door_state.CLOSED:
-			anim.animation = "closed"
-			coll_shape.set_disabled(false)
+			if anim:
+				anim.animation = "closed"
+			if coll_shape:
+				coll_shape.set_disabled(false)
 		door_state.LOCKED:
-			anim.animation = "closed" # TODO support "locked"
-			coll_shape.set_disabled(false)
+			if anim:
+				anim.animation = "closed" # TODO support "locked"
+			if coll_shape:
+				coll_shape.set_disabled(false)
 
-func open_door():
+func open_door(_body=null):
 	set_door_state(door_state.OPEN)
 	# it'd be better to attach this to the actions magically
 	# maybe actions should get pre/post hooks
 	# starting to feel state machiney
 	update_bodies()
 
-func close_door():
+func close_door(_body=null):
 	set_door_state(door_state.CLOSED)
 	update_bodies()
 
-func unlock_door():
+func unlock_door(body=null):
 	set_door_state(door_state.CLOSED)
+
+	# this.... this is crazy, right?
+	if body and body.has_method("use_key"):
+		body.use_key()
+
 	update_bodies()
 
-func lock_door():
+func lock_door(_body=null):
 	set_door_state(door_state.LOCKED)
 	update_bodies()
 
@@ -49,6 +60,7 @@ func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
+	# make sure any setup code is called so we're in the expected state
 	set_door_state(state)
 
 #######################################################################33
@@ -76,19 +88,6 @@ var close_door_action = {
 	"label": "Close"
 	}
 
-func update_body(body):
-	remove_actions(body)
-	if body.has_method("add_action"):
-		match state:
-			door_state.OPEN:
-				body.add_action(close_door_action)
-				body.add_action(lock_door_action)
-			door_state.CLOSED:
-				body.add_action(open_door_action)
-				body.add_action(lock_door_action)
-			door_state.LOCKED:
-				body.add_action(unlock_door_action)
-
 func remove_actions(body):
 	if body.has_method("remove_action"):
 		# should no-op ok?
@@ -97,9 +96,37 @@ func remove_actions(body):
 		body.remove_action(lock_door_action)
 		body.remove_action(unlock_door_action)
 
+func update_body(body):
+	remove_actions(body)
+	if body.has_method("add_action"):
+		match state:
+			door_state.OPEN:
+				body.add_action(close_door_action)
+				if body.has_method("can_lock_door"):
+					if body.can_lock_door():
+						body.add_action(lock_door_action)
+			door_state.CLOSED:
+				body.add_action(open_door_action)
+				if body.has_method("can_lock_door"):
+					if body.can_lock_door():
+						body.add_action(lock_door_action)
+			door_state.LOCKED:
+				if body.has_method("can_unlock_door"):
+					# TODO pass params to support key vs boss key
+					# or do that logic here
+					if body.can_unlock_door():
+						body.add_action(unlock_door_action)
+					else:
+						print("player cannot unlock door!")
+						# todo should this all be via emit/sub??
+						# it seems like it'd be nicer, but we'd
+						# have to manage the connections
+						# perhaps an event and routing system could reduce that
+
 # update actions on all bodies we're currently aware of
 # TODO move into `AXE` helper namespace/dino lib
 func update_bodies():
+	print("[Door ", self.name, " bodies]: ", bodies)
 	for body in bodies:
 		update_body(body)
 
