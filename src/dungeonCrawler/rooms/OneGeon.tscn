@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/dungeonCrawler/rooms/Dungeon.gd" type="Script" id=1]
 [ext_resource path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/dungeonCrawler/items/Key.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/dungeonCrawler/items/BowItem.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/dungeonCrawler/enemies/Goomba.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/dungeonCrawler/items/Coin.tscn" type="PackedScene" id=10]
 
 [node name="OneGeon" type="Node2D"]
 script = ExtResource( 1 )
@@ -54,3 +55,51 @@ position = Vector2( -96, -64 )
 
 [node name="Goomba2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 152, 64 )
+
+[node name="Coin" parent="." instance=ExtResource( 10 )]
+position = Vector2( -509, -54 )
+
+[node name="Coin2" parent="." instance=ExtResource( 10 )]
+position = Vector2( -575, 17 )
+
+[node name="Coin3" parent="." instance=ExtResource( 10 )]
+position = Vector2( -945, -31 )
+
+[node name="Coin4" parent="." instance=ExtResource( 10 )]
+position = Vector2( -917, 52 )
+
+[node name="Coin5" parent="." instance=ExtResource( 10 )]
+position = Vector2( -43, 42 )
+
+[node name="Coin6" parent="." instance=ExtResource( 10 )]
+position = Vector2( 22, 56 )
+
+[node name="Coin7" parent="." instance=ExtResource( 10 )]
+position = Vector2( 396, -1 )
+
+[node name="Coin8" parent="." instance=ExtResource( 10 )]
+position = Vector2( 393, -345 )
+
+[node name="Goomba3" parent="." instance=ExtResource( 9 )]
+position = Vector2( -589, -65 )
+
+[node name="Goomba4" parent="." instance=ExtResource( 9 )]
+position = Vector2( -400, 41 )
+
+[node name="Goomba5" parent="." instance=ExtResource( 9 )]
+position = Vector2( -414, -42 )
+
+[node name="Goomba6" parent="." instance=ExtResource( 9 )]
+position = Vector2( -1152, -42 )
+
+[node name="Goomba7" parent="." instance=ExtResource( 9 )]
+position = Vector2( -1076, 48 )
+
+[node name="Goomba8" parent="." instance=ExtResource( 9 )]
+position = Vector2( -986, -57 )
+
+[node name="Goomba9" parent="." instance=ExtResource( 9 )]
+position = Vector2( 406, 41 )
+
+[node name="Goomba10" parent="." instance=ExtResource( 9 )]
+position = Vector2( 385, -63 )

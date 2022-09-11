@@ -157,6 +157,13 @@ func point_bow(dir):
 				bow.transform.origin = Vector2(0, weapon_pos.position.x + weapon_pos.position.y)
 				bow.rotation_degrees = 90
 
+#######################################################################33
+# coins
+
+var coins = 0
+
+func add_coin():
+	coins += 1
 
 #######################################################################33
 # items
