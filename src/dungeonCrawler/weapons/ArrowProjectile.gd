@@ -30,8 +30,9 @@ func _on_RemoveTimer_timeout():
 
 ### collisions #####################################################################
 
-func _on_ArrowProjectile_body_entered(body:Node):
-	print("arrow projectile body entered")
+func _on_Area2D_body_entered(body:Node):
+	print("area2d body entered")
+
 	if body != self:
 		print(body)
 		if body.is_in_group("enemies"):
