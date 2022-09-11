@@ -37,9 +37,11 @@ position = Vector2( 512, -320 )
 [node name="Door" parent="." instance=ExtResource( 6 )]
 position = Vector2( 208, -16 )
 rotation = 1.57079
+state = 0
 
 [node name="BossDoor" parent="." instance=ExtResource( 6 )]
 position = Vector2( 496, -112 )
+state = 0
 
 [node name="PlayerStart" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true
