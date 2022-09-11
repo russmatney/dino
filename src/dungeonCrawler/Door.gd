@@ -24,15 +24,22 @@ func set_door_state(val):
 
 func open_door():
 	set_door_state(door_state.OPEN)
+	# it'd be better to attach this to the actions magically
+	# maybe actions should get pre/post hooks
+	# starting to feel state machiney
+	update_bodies()
 
 func close_door():
 	set_door_state(door_state.CLOSED)
+	update_bodies()
 
 func unlock_door():
 	set_door_state(door_state.CLOSED)
+	update_bodies()
 
 func lock_door():
 	set_door_state(door_state.LOCKED)
+	update_bodies()
 
 
 #######################################################################33
@@ -69,9 +76,8 @@ var close_door_action = {
 	"label": "Close"
 	}
 
-func _on_ActionArea_body_entered(body:Node):
-	bodies.append(body)
-
+func update_body(body):
+	remove_actions(body)
 	if body.has_method("add_action"):
 		match state:
 			door_state.OPEN:
@@ -83,13 +89,24 @@ func _on_ActionArea_body_entered(body:Node):
 			door_state.LOCKED:
 				body.add_action(unlock_door_action)
 
-
-func _on_ActionArea_body_exited(body:Node):
-	bodies.erase(body)
-
+func remove_actions(body):
 	if body.has_method("remove_action"):
 		# should no-op ok?
 		body.remove_action(close_door_action)
 		body.remove_action(open_door_action)
 		body.remove_action(lock_door_action)
 		body.remove_action(unlock_door_action)
+
+# update actions on all bodies we're currently aware of
+# TODO move into `AXE` helper namespace/dino lib
+func update_bodies():
+	for body in bodies:
+		update_body(body)
+
+func _on_ActionArea_body_entered(body:Node):
+	bodies.append(body)
+	update_bodies()
+
+func _on_ActionArea_body_exited(body:Node):
+	bodies.erase(body)
+	remove_actions(body)
