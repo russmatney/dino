@@ -1,6 +1,9 @@
 class_name State
 extends Node
 
+# set in machine._ready()
+var actor = null
+
 ## input #####################################################################
 
 

@@ -19,6 +19,9 @@ func _ready():
 		# assign machine to states
 		child.machine = self
 
+		# assign machine's owner as 'actor' in state fns
+		child.actor = owner
+
 		# initial state defaults to first child
 		# (unless set via the inspector)
 		if not state:
