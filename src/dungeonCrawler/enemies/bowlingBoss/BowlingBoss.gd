@@ -39,3 +39,17 @@ func set_state_label(label: String):
 
 #func _process(delta):
 #	pass
+
+
+#######################################################################33
+# signals
+
+var bodies = []
+var detects_group = "player"
+
+func _on_DetectBox_body_entered(body:Node):
+	if body.is_in_group(detects_group):
+		bodies.append(body)
+
+func _on_DetectBox_body_exited(body:Node):
+	bodies.erase(body)

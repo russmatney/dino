@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" type="Script" id=2]
@@ -14,6 +14,9 @@ extents = Vector2( 9, 13 )
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 128, 104 )
 
 [node name="Barney" type="Node2D"]
 script = ExtResource( 2 )
@@ -55,3 +58,11 @@ text = "state"
 fit_content_height = true
 
 [node name="Machine" parent="." instance=ExtResource( 5 )]
+
+[node name="DetectBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox"]
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="DetectBox" to="." method="_on_DetectBox_body_entered"]
+[connection signal="body_exited" from="DetectBox" to="." method="_on_DetectBox_body_exited"]

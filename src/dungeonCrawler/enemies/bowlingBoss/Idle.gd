@@ -9,5 +9,5 @@ func enter(_msg = {}):
 
 
 func process(_delta: float):
-	# check for nearby player
-	pass
+	if actor.bodies.size() > 0:
+		machine.transit("Attack", {"body": actor.bodies[0]})
