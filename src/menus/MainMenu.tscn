@@ -15,15 +15,15 @@ anchor_bottom = 1.0
 [node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1024.0
+margin_right = 512.0
 margin_bottom = 129.0
 bbcode_text = "[center]Main Menu[/center]"
 text = "Main Menu"
 
 [node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 133.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 512.0
+margin_bottom = 305.0
 size_flags_vertical = 3
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
@@ -31,5 +31,5 @@ custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 
 [node name="MenuList" type="VBoxContainer" parent="VBoxContainer/MaxSizeContainer"]
-margin_right = 1024.0
-margin_bottom = 467.0
+margin_right = 512.0
+margin_bottom = 172.0
