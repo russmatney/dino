@@ -47,6 +47,7 @@ state = 1
 
 [node name="PlayerStart" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true
+position = Vector2( 496, -206 )
 
 [node name="Key" parent="." instance=ExtResource( 7 )]
 position = Vector2( -640, -64 )
