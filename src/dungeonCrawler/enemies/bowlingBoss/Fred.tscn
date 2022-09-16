@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://resources/sprites/fred64.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/dungeonCrawler/enemies/BowlingBoss.gd" type="Script" id=2]
+[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" type="Script" id=2]
 [ext_resource path="res://resources/sprites/fred32.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/sprites/fred64.tres" type="SpriteFrames" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.5, 27.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 16 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
 
 [node name="Fred" type="Node2D"]
 script = ExtResource( 2 )
@@ -20,7 +25,7 @@ position = Vector2( -0.5, 3.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Body"]
-frames = ExtResource( 1 )
+frames = ExtResource( 6 )
 
 [node name="ActionsList" type="VBoxContainer" parent="."]
 margin_left = -32.0
@@ -36,3 +41,16 @@ shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SmallBody"]
 frames = ExtResource( 3 )
+
+[node name="StateLabel" type="RichTextLabel" parent="."]
+margin_left = -32.0
+margin_top = -48.0
+margin_right = 32.0
+margin_bottom = -24.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]state[/center]"
+text = "state"
+fit_content_height = true
+
+[node name="Machine" parent="." instance=ExtResource( 4 )]
