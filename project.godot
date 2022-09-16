@@ -476,6 +476,10 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
 
+[global]
+
+layer=false
+
 [input]
 
 move_up={
@@ -514,6 +518,15 @@ action={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="walls, doors, env"
+2d_physics/layer_2="player"
+2d_physics/layer_3="player projectiles"
+2d_physics/layer_4="enemies"
+2d_physics/layer_5="enemy projectiles"
+2d_physics/layer_6="items"
 
 [physics]
 

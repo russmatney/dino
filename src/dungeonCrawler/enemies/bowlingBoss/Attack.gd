@@ -19,13 +19,12 @@ func process(_delta: float):
 		once = false
 
 onready var ball_scene = preload("res://src/dungeonCrawler/weapons/BowlingBall.tscn")
-var bowl_speed = 5
+var bowl_speed = 200
 
-func bowl_attack(_target):
+func bowl_attack(target):
 	var ball = ball_scene.instance()
 	ball.position = actor.get_global_position()
 	Navi.current_scene.call_deferred("add_child", ball)
 
-	# TODO angle toward target
-	var impulse_dir = Vector2(-200, 0)
-	ball.velocity = impulse_dir * bowl_speed
+	var bowl_dir = target.get_global_position() - ball.position
+	ball.velocity = bowl_dir.normalized() * bowl_speed

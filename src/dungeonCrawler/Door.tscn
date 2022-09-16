@@ -10,6 +10,7 @@ extents = Vector2( 16, 16 )
 extents = Vector2( 24, 24 )
 
 [node name="Door" type="StaticBody2D" groups=["door"]]
+collision_mask = 30
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

@@ -8,6 +8,8 @@
 radius = 12.0416
 
 [node name="BowlingBall" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 23
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
