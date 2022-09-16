@@ -53,3 +53,18 @@ func _on_DetectBox_body_entered(body:Node):
 
 func _on_DetectBox_body_exited(body:Node):
 	bodies.erase(body)
+
+#######################################################################33
+# funcs
+
+onready var ball_scene = preload("res://src/dungeonCrawler/weapons/BowlingBall.tscn")
+var bowl_speed = 200
+
+func bowl_attack(target):
+	var ball = ball_scene.instance()
+	ball.position = get_global_position()
+	Navi.current_scene.call_deferred("add_child", ball)
+
+	var bowl_dir = target.get_global_position() - ball.position
+	print("bowl_dir", bowl_dir)
+	ball.velocity = bowl_dir.normalized() * bowl_speed

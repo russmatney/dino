@@ -31,15 +31,10 @@ func _on_RemoveTimer_timeout():
 ### collisions #####################################################################
 
 func _on_Area2D_body_entered(body:Node):
-	print("area2d body entered")
-
 	if body != self:
-		print(body)
 		if body.is_in_group("enemies"):
 			if body.has_method("hit"):
 				body.hit()
 			kill()
 		elif body is TileMap:
-			# TODO this is never fired - tilemap doesn't get detected in this method at all
-			print("arrow hit tilemap")
 			kill()

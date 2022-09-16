@@ -10,6 +10,22 @@ func _ready():
 	light.enabled = light_enabled
 
 func _physics_process(delta):
-	var collision_info = move_and_collide(velocity * delta)
-	if collision_info:
-		velocity = velocity.bounce(collision_info.normal)
+	var _collision_info = move_and_collide(velocity * delta)
+	# if collision_info:
+	# 	# bounce logic
+	# 	velocity = velocity.bounce(collision_info.normal)
+
+func kill():
+	queue_free()
+
+### collisions #####################################################################
+
+func _on_Area2D_body_entered(body:Node):
+	if body != self:
+		print("bowling ball hit: ", body, body.name)
+		if body.is_in_group("player"):
+			if body.has_method("hit"):
+				body.hit()
+
+		# dies on any hit for now
+		kill()
