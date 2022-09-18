@@ -34,10 +34,15 @@ func attach_to_nearest_anchor():
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...
 		# maybe only run this when the player moves some distance?
 		# or make it disable-able/only called from an autoload/at specific times
-		var nearest_anchor = Util.nearest_node(following, anchors)
-		if nearest_anchor != current_anchor:
-			current_anchor = nearest_anchor
-			Util.reparent(self, current_anchor)
+
+		# handling in case the player dies before here
+		if is_instance_valid(following):
+			var nearest_anchor = Util.nearest_node(following, anchors)
+			if nearest_anchor != current_anchor:
+				current_anchor = nearest_anchor
+				Util.reparent(self, current_anchor)
+		else:
+			following = null
 
 ###########################################################################
 
@@ -56,4 +61,7 @@ func _process(_delta):
 			if not following:
 				find_node_to_follow()
 			else:
-				attach_to_nearest_anchor()
+				if is_instance_valid(following):
+					attach_to_nearest_anchor()
+				else:
+					following = null
