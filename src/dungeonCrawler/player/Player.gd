@@ -259,12 +259,10 @@ onready var line_of_sight = $LineOfSightRayCast2D
 
 func in_line_of_sight(body):
 	var cast_to = to_local(body.global_position)
-	print("checking if body is in line of sight", body)
 	line_of_sight.cast_to = cast_to
 	line_of_sight.force_raycast_update()
 	if line_of_sight.is_colliding():
 		var collider = line_of_sight.get_collider()
-		print("collider hit!", collider)
 		if collider == body:
 			return true
 	return false
@@ -275,7 +273,7 @@ func current_target():
 	# TODO sort by 'closest'
 	if bodies.size():
 		for body in bodies:
-			if in_line_of_sight(body):
+			if in_line_of_sight(body) and not body.get("dead"):
 				return body
 	if areas.size():
 		return areas[0]
