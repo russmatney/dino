@@ -20,6 +20,7 @@ pom.xml.asc
 .import/
 
 dist/
+dist.zip
 /.clj-kondo/.cache
 /.lsp
 
