@@ -57,6 +57,10 @@ collision_mask = 32
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPullArea2D"]
 shape = SubResource( 3 )
 
+[node name="LineOfSightRayCast2D" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, 130 )
+collision_mask = 57
+
 [connection signal="area_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_entered"]
 [connection signal="area_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_exited"]
 [connection signal="body_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_body_entered"]

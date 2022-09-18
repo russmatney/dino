@@ -138,36 +138,17 @@ func point_bow(dir):
 	if bow:
 		match dir:
 			facing_dir.RIGHT:
-				bow.transform.origin = weapon_pos.position
+				bow.transform.origin = weapon_pos.position / 2
 				bow.rotation_degrees = 0
 			facing_dir.LEFT:
-				bow.transform.origin = Vector2(-weapon_pos.position.x, weapon_pos.position.y)
+				bow.transform.origin = Vector2(-weapon_pos.position.x, weapon_pos.position.y) / 2
 				bow.rotation_degrees = 180
 			facing_dir.UP:
-				bow.transform.origin = Vector2(0, -weapon_pos.position.x + weapon_pos.position.y)
+				bow.transform.origin = Vector2(0, -weapon_pos.position.x + weapon_pos.position.y) / 2
 				bow.rotation_degrees = -90
 			facing_dir.DOWN:
-				bow.transform.origin = Vector2(0, weapon_pos.position.x + weapon_pos.position.y)
+				bow.transform.origin = Vector2(0, weapon_pos.position.x + weapon_pos.position.y) / 2
 				bow.rotation_degrees = 90
-
-var targets = []
-
-func current_target():
-	# TODO grab a 'closest'
-	# TODO filter by line of sight
-	if bodies.size():
-		return bodies[0]
-	if areas.size():
-		return areas[0]
-
-func point_at_target():
-	var target = current_target()
-	if target:
-		# TODO should probably be generic
-		var bow = Util.get_first_child_in_group(self, "bow")
-		if bow:
-			bow.look_at(target.global_position)
-
 
 #######################################################################33
 # coins
@@ -248,7 +229,7 @@ func execute_action(ax):
 	remove_action(ax)
 
 #######################################################################33
-# lock-ons
+# targets
 # can pretty much lock-on to everything
 
 var bodies = []
@@ -272,6 +253,41 @@ func _on_LockOnDetectArea2D_area_entered(area:Area2D):
 func _on_LockOnDetectArea2D_area_exited(area:Area2D):
 	areas.erase(area)
 	print("[player-lockon-areas]:", areas)
+
+
+onready var line_of_sight = $LineOfSightRayCast2D
+
+func in_line_of_sight(body):
+	var cast_to = to_local(body.global_position)
+	print("checking if body is in line of sight", body)
+	line_of_sight.cast_to = cast_to
+	line_of_sight.force_raycast_update()
+	if line_of_sight.is_colliding():
+		var collider = line_of_sight.get_collider()
+		print("collider hit!", collider)
+		if collider == body:
+			return true
+	return false
+
+var targets = []
+
+func current_target():
+	# TODO sort by 'closest'
+	if bodies.size():
+		for body in bodies:
+			if in_line_of_sight(body):
+				return body
+	if areas.size():
+		return areas[0]
+
+func point_at_target():
+	var target = current_target()
+	if target:
+		# TODO should probably be generic (vs bow specific)
+		var bow = Util.get_first_child_in_group(self, "bow")
+		if bow:
+			bow.look_at(target.global_position)
+
 
 
 #######################################################################33

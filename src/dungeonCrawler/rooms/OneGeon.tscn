@@ -99,7 +99,7 @@ position = Vector2( -872, 17 )
 position = Vector2( -986, -57 )
 
 [node name="GoombaWithKey2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 584, 72 )
+position = Vector2( 584, 64 )
 drop_scene = ExtResource( 7 )
 
 [node name="Goomba10" parent="." instance=ExtResource( 9 )]
@@ -109,19 +109,19 @@ position = Vector2( 385, -63 )
 position = Vector2( 626, -61 )
 
 [node name="Goomba12" parent="." instance=ExtResource( 9 )]
-position = Vector2( 626, 38 )
+position = Vector2( 610, 19 )
 
 [node name="Goomba13" parent="." instance=ExtResource( 9 )]
-position = Vector2( 496, 66 )
+position = Vector2( 496, 64 )
 
 [node name="Goomba14" parent="." instance=ExtResource( 9 )]
-position = Vector2( 530, 22 )
+position = Vector2( 530, 21 )
 
 [node name="Goomba15" parent="." instance=ExtResource( 9 )]
-position = Vector2( 392, 60 )
+position = Vector2( 397, 48 )
 
 [node name="Goomba16" parent="." instance=ExtResource( 9 )]
-position = Vector2( 451, 18 )
+position = Vector2( 461, 23 )
 
 [node name="Fred" parent="." instance=ExtResource( 11 )]
 position = Vector2( 637, -360 )
