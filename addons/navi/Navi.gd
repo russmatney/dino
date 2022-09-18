@@ -10,6 +10,11 @@ export(PackedScene) var pause_menu_scene = preload("res://addons/navi/NaviPauseM
 var pause_container
 var pause_menu
 
+# overwritable, but defaults to a reasonable death screen
+export(PackedScene) var death_menu_scene = preload("res://addons/navi/NaviDeathMenu.tscn")
+var death_container
+var death_menu
+
 ## ready ###################################################################
 
 
@@ -19,11 +24,17 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
-	# will one day be conditional/opt-out
+	# should one day be conditional/opt-out
 	pause_container = CanvasLayer.new()
 	pause_menu = pause_menu_scene.instance()
 	pause_container.add_child(pause_menu)
 	call_deferred("add_child", pause_container)
+
+	# should one day be conditional/opt-out
+	death_container = CanvasLayer.new()
+	death_menu = death_menu_scene.instance()
+	death_container.add_child(death_menu)
+	call_deferred("add_child", death_container)
 
 	if "node_path" in current_scene:
 		last_scene_stack.push_back(current_scene.node_path)
@@ -41,6 +52,9 @@ func nav_to(path):
 	# Navi implying DJ dep
 	# TODO opt-in/out of pausing the music
 	DJ.pause_menu_song()
+
+	# b/c you can pause the game and go to main instead of clicking go to main
+	death_menu.hide()
 
 
 func _deferred_goto_scene(path):
@@ -98,3 +112,12 @@ func resume():
 	# Navi implying DJ dep
 	print("dj.pause")
 	DJ.pause_menu_song()
+
+
+## death ###########################################333
+
+func show_death_menu():
+	death_menu.show()
+
+func hide_death_menu():
+	death_menu.hide()
