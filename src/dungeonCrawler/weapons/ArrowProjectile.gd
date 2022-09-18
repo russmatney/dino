@@ -32,8 +32,10 @@ func _on_RemoveTimer_timeout():
 
 func _on_Area2D_body_entered(body:Node):
 	if body != self:
-		if body.owner.is_in_group("enemies"):
-			if body.owner.has_method("hit"):
+		if body.is_in_group("enemies") or body.get("owner") and body.owner.is_in_group("enemies"):
+			if body.has_method("hit"):
+				body.hit()
+			elif body.get("owner") and body.owner.has_method("hit"):
 				body.owner.hit()
 			kill()
 		elif body is TileMap:
