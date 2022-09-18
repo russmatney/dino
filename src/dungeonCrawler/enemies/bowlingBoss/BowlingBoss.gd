@@ -34,18 +34,6 @@ func on_transit(new_state):
 func set_state_label(label: String):
 	state_label.bbcode_text = "[center]" + label + "[/center]"
 
-
-# Bowling Boss States
-# Idle - until player detected
-# Engaged - player detected
-# Bowling - launching a bowling ball
-	# WindUp - preparing to fire
-	# Fire
-	# CoolDown - just fired, following through
-# Next-Position - moving to another point
-# Engaged/Idle
-
-
 #######################################################################33
 # process
 
@@ -81,3 +69,25 @@ func bowl_attack(target):
 	ball.velocity = bowl_dir.normalized() * bowl_speed
 
 	yield(get_tree().create_timer(1.0), "timeout")
+
+
+var health = 3
+
+onready var normal_body = $Body
+onready var small_body = $SmallBody
+
+func hit():
+	health -= 1
+	print(name, " health: ", health)
+	# TODO flash sprite white - via shader
+
+	if health == 1:
+		# switch to small body
+		small_body.visible = true
+		normal_body.visible = false
+	elif health <= 0:
+		kill()
+
+func kill():
+	# TODO death anim
+	queue_free()

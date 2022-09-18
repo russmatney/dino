@@ -18,7 +18,7 @@ font_data = ExtResource( 1 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 128, 104 )
 
-[node name="Barney" type="Node2D"]
+[node name="Barney" type="Node2D" groups=["enemies"]]
 script = ExtResource( 2 )
 
 [node name="Body" type="KinematicBody2D" parent="."]
