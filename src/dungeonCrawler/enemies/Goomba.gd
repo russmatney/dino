@@ -33,3 +33,12 @@ func emit_drops():
 		if fallback_drop_scenes.size():
 			var drop = fallback_drop_scenes[0]
 			emit_drop(drop)
+
+
+var dir = Vector2.LEFT
+var speed = 50
+var velocity = dir * speed
+func _physics_process(delta):
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		velocity = velocity.bounce(collision_info.normal)
