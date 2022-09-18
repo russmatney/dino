@@ -52,6 +52,10 @@ func lock_door(_body=null):
 	set_door_state(door_state.LOCKED)
 	update_bodies()
 
+func jostle_door(_body=null):
+	# TODO some animation/something
+	print("jostling the door!")
+	update_bodies()
 
 #######################################################################33
 # ready
@@ -88,6 +92,11 @@ var close_door_action = {
 	"label": "Close"
 	}
 
+var door_locked_message = {
+	"func": funcref(self, "jostle_door"),
+	"label": "(locked)"
+	}
+
 func remove_actions(body):
 	if body.has_method("remove_action"):
 		# should no-op ok?
@@ -95,6 +104,7 @@ func remove_actions(body):
 		body.remove_action(open_door_action)
 		body.remove_action(lock_door_action)
 		body.remove_action(unlock_door_action)
+		body.remove_action(door_locked_message)
 
 func update_body(body):
 	remove_actions(body)
@@ -118,10 +128,11 @@ func update_body(body):
 						body.add_action(unlock_door_action)
 					else:
 						print("player cannot unlock door!")
+						body.add_action(door_locked_message)
 						# todo should this all be via emit/sub??
 						# it seems like it'd be nicer, but we'd
 						# have to manage the connections
-						# perhaps an event and routing system could reduce that
+						# perhaps an event/routing system could reduce that?
 
 # update actions on all bodies we're currently aware of
 # TODO move into `AXE` helper namespace/dino lib
