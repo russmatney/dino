@@ -13,6 +13,11 @@ func _ready():
 	initial_pos = get_global_position()
 	anim.flip_h = facing == facing_dir.RIGHT
 
+	call_deferred("setup")
+
+func setup():
+	add_info_message(health_info_dict(health))
+
 #######################################################################33
 # facing
 
@@ -165,6 +170,15 @@ var coins = 0
 func add_coin():
 	coins += 1
 
+	remove_info_message(coin_info_dict(coins - 1))
+	add_info_message(coin_info_dict(coins))
+
+func coin_info_dict(c):
+	return {
+		"label": str("Coins: ", c)
+	}
+
+
 #######################################################################33
 # items
 
@@ -173,10 +187,23 @@ const items = []
 func add_item(it):
 	items.append(it)
 	print("[player items]: ", items)
+	update_item_info()
 
 func remove_item(it):
 	items.erase(it)
 	print("[player items]: ", items)
+	update_item_info()
+
+func update_item_info():
+	var key_ct = 0
+	for it in items:
+		if it.get("type") == "key":
+			key_ct += 1
+
+	remove_info_message({"label": str("Keys: ", 1)})
+	remove_info_message({"label": str("Keys: ", 2)})
+	if key_ct > 0:
+		add_info_message({"label": str("Keys: ", key_ct)})
 
 #######################################################################33
 # doors/keys
@@ -198,7 +225,7 @@ func use_key():
 			key_item = it
 
 	if key_item:
-		items.erase(key_item)
+		remove_item(key_item)
 
 #######################################################################33
 # actions
@@ -335,6 +362,9 @@ func hit():
 	health -= 1
 	print("[PLAYER HIT]: remaining health = ", health)
 
+	remove_info_message(health_info_dict(health + 1))
+	add_info_message(health_info_dict(health))
+
 	if health <= 0:
 		die()
 	else:
@@ -358,6 +388,11 @@ func _on_Hurtbox_body_entered(body:Node):
 		or body.is_in_group("enemy_projectile"):
 		print("player hit enemy", body.name)
 		hit()
+
+func health_info_dict(health):
+	return {
+		"label": str("Health: ", health)
+	}
 
 #######################################################################33
 # debug list
@@ -386,3 +421,32 @@ func remove_debug_message(msg):
 		debug_list.remove_child(to_remove)
 
 	debug_messages.erase(msg)
+
+
+#######################################################################33
+# info panel
+
+const info_messages = []
+
+var info_message_scene = preload("res://src/dungeonCrawler/player/InfoMessage.tscn")
+onready var info_list = get_node("%InfoList")
+
+func add_info_message(msg):
+	var label_text = msg.get("label")
+	if label_text:
+		var new_label = info_message_scene.instance()
+		new_label.bbcode_text = "[center]" + label_text
+		info_list.add_child(new_label)
+		info_messages.append(msg)
+
+func remove_info_message(msg):
+	var to_remove
+	for info_label in info_list.get_children():
+		if info_label.text == msg.get("label"):
+			to_remove = info_label
+			break
+
+	if to_remove:
+		info_list.remove_child(to_remove)
+
+	info_messages.erase(msg)

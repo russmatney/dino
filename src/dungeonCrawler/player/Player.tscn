@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://resources/sprites/redhat.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/dungeonCrawler/player/Player.gd" type="Script" id=3]
@@ -15,6 +15,9 @@ extents = Vector2( 128, 128 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 9, 13.5 )
 
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.372549, 0.352941, 0.352941, 0.133333 )
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 57
@@ -24,6 +27,7 @@ script = ExtResource( 3 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "run"
+frame = 1
 playing = true
 flip_h = true
 
@@ -72,6 +76,19 @@ collision_mask = 24
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, 1.5 )
 shape = SubResource( 4 )
+
+[node name="InfoPanel" type="Panel" parent="."]
+margin_left = -22.0
+margin_top = 16.0
+margin_right = 18.0
+margin_bottom = 56.0
+rect_scale = Vector2( 1.10075, 0.399394 )
+custom_styles/panel = SubResource( 5 )
+
+[node name="InfoList" type="VBoxContainer" parent="InfoPanel"]
+unique_name_in_owner = true
+margin_right = 40.0
+margin_bottom = 40.0
 
 [connection signal="area_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_entered"]
 [connection signal="area_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_exited"]
