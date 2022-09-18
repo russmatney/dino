@@ -7,16 +7,12 @@ var fallback_drop_scenes = [
 
 onready var anim = $AnimatedSprite
 
-
 func hit():
-	print("hit!!!")
-
 	kill()
-
 
 func kill():
 	anim.animation = "death"
-	yield(get_tree().create_timer(1.0), "timeout")
+	yield(get_tree().create_timer(0.4), "timeout")
 	emit_drops()
 	queue_free()
 
