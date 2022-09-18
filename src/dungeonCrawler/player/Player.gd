@@ -61,9 +61,12 @@ func _process(delta):
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		if actions:
-			# TODO select an action
+			# TODO selecting when there are multiple actions
 			var ax = actions[0]
 			execute_action(ax)
+		else:
+			# one button for everything?
+			use_weapon(weapon)
 
 	if Trolley.is_attack(event):
 		if weapon:
