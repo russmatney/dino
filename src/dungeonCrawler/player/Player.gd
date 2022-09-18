@@ -46,6 +46,9 @@ func _process(delta):
 		velocity = velocity.limit_length(max_speed)
 	velocity = move_and_slide(velocity)
 
+	# TODO cache or otherwise store current_target
+	point_at_target()
+
 #######################################################################33
 # _input
 
@@ -124,20 +127,8 @@ func fire_bow():
 	arrow.position = bow.get_global_position() # maybe use weapon position?
 	# prefer to add bullets to the current scene, so they get cleaned up
 	Navi.current_scene.call_deferred("add_child", arrow)
-	var impulse_dir = Vector2(1, 0)
-	match facing:
-		facing_dir.RIGHT:
-			arrow.rotation_degrees = 90
-			impulse_dir = Vector2(1, 0)
-		facing_dir.LEFT:
-			arrow.rotation_degrees = -90
-			impulse_dir = Vector2(-1, 0)
-		facing_dir.UP:
-			arrow.rotation_degrees = 0
-			impulse_dir = Vector2(0, -1)
-		facing_dir.DOWN:
-			arrow.rotation_degrees = 180
-			impulse_dir = Vector2(0, 1)
+	arrow.rotation_degrees = bow.rotation_degrees + 90
+	var impulse_dir = Vector2(1, 0).rotated(deg2rad(bow.rotation_degrees))
 	arrow.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
 
 func point_bow(dir):
@@ -156,6 +147,25 @@ func point_bow(dir):
 			facing_dir.DOWN:
 				bow.transform.origin = Vector2(0, weapon_pos.position.x + weapon_pos.position.y)
 				bow.rotation_degrees = 90
+
+var targets = []
+
+func current_target():
+	# TODO grab a 'closest'
+	# TODO filter by line of sight
+	if bodies.size():
+		return bodies[0]
+	if areas.size():
+		return areas[0]
+
+func point_at_target():
+	var target = current_target()
+	if target:
+		# TODO should probably be generic
+		var bow = Util.get_first_child_in_group(self, "bow")
+		if bow:
+			bow.look_at(target.global_position)
+
 
 #######################################################################33
 # coins
@@ -234,3 +244,29 @@ func execute_action(ax):
 	fn.call_func(self)
 
 	remove_action(ax)
+
+#######################################################################33
+# lock-ons
+# can pretty much lock-on to everything
+
+var bodies = []
+
+func _on_LockOnDetectArea2D_body_entered(body:Node):
+	# TODO ignore tilemaps properly, maybe via collision layers
+	if body != self and body.name != "DungeonWalls":
+		bodies.append(body)
+		print("[player-lockon-bodies]:", bodies)
+
+func _on_LockOnDetectArea2D_body_exited(body:Node):
+	bodies.erase(body)
+	print("[player-lockon-bodies]:", bodies)
+
+var areas = []
+
+func _on_LockOnDetectArea2D_area_entered(area:Area2D):
+	areas.append(area)
+	print("[player-lockon-areas]:", areas)
+
+func _on_LockOnDetectArea2D_area_exited(area:Area2D):
+	areas.erase(area)
+	print("[player-lockon-areas]:", areas)
