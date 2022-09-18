@@ -324,3 +324,65 @@ func pull_items(delta):
 				n.owner.position -= diff * delta * move_speed
 		else:
 			nearby_items.erase(n)
+
+#######################################################################33
+# health/death
+
+var health = 3
+var dead = false
+
+func hit():
+	health -= 1
+	print("[PLAYER HIT]: remaining health = ", health)
+
+	if health <= 0:
+		die()
+	else:
+		# TODO API helper for this whole debug msg thing?
+		var msg = {"label": "health -= 1"}
+		add_debug_message(msg)
+		yield(get_tree().create_timer(2.0), "timeout")
+		remove_debug_message(msg)
+
+func die():
+	print("[PLAYER DEATH]")
+	dead = true
+	queue_free()
+	# death menu
+	Navi.show_death_menu()
+	# TODO restart behavior - just this dungeon? load last checkpoint?
+
+func _on_Hurtbox_body_entered(body:Node):
+	if body.is_in_group("enemies") \
+		or (body.get("owner") and body.owner.is_in_group("enemies")) \
+		or body.is_in_group("enemy_projectile"):
+		print("player hit enemy", body.name)
+		hit()
+
+#######################################################################33
+# debug list
+
+const debug_messages = []
+
+var debug_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
+onready var debug_list = $DebugList
+
+func add_debug_message(msg):
+	var label_text = msg.get("label")
+	if label_text:
+		var new_label = debug_label_scene.instance()
+		new_label.bbcode_text = "[center]" + label_text
+		debug_list.add_child(new_label)
+		debug_messages.append(msg)
+
+func remove_debug_message(msg):
+	var to_remove
+	for debug_label in debug_list.get_children():
+		if debug_label.text == msg.get("label"):
+			to_remove = debug_label
+			break
+
+	if to_remove:
+		debug_list.remove_child(to_remove)
+
+	debug_messages.erase(msg)
