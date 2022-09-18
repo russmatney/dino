@@ -1,11 +1,9 @@
 extends KinematicBody2D
 
-export(PackedScene) var drop_scene
-var fallback_drop_scenes = [
-	preload("res://src/dungeonCrawler/items/Coin.tscn")
-	]
-
 onready var anim = $AnimatedSprite
+
+#######################################################################33
+# hit, kill
 
 var dead = false
 
@@ -19,13 +17,20 @@ func kill():
 	emit_drops()
 	queue_free()
 
+#######################################################################33
+# drops
+
+export(PackedScene) var drop_scene
+var fallback_drop_scenes = [
+	preload("res://src/dungeonCrawler/items/Coin.tscn")
+	]
 
 func emit_drop(scene):
 	var drop = scene.instance()
 	drop.position = transform.origin
 	Navi.current_scene.call_deferred("add_child", drop)
 
-	# eh? particles?
+	# eh? particle physics?
 	# drop.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
 
 func emit_drops():
@@ -37,6 +42,8 @@ func emit_drops():
 			var drop = fallback_drop_scenes[0]
 			emit_drop(drop)
 
+#######################################################################33
+# physics process
 
 var dir = Vector2.LEFT
 var speed = 50
