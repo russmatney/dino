@@ -15,6 +15,11 @@ export(PackedScene) var death_menu_scene = preload("res://addons/navi/NaviDeathM
 var death_container
 var death_menu
 
+# overwritable, but defaults to a reasonable win screen
+export(PackedScene) var win_menu_scene = preload("res://addons/navi/NaviWinMenu.tscn")
+var win_container
+var win_menu
+
 ## ready ###################################################################
 
 
@@ -35,6 +40,12 @@ func _ready():
 	death_menu = death_menu_scene.instance()
 	death_container.add_child(death_menu)
 	call_deferred("add_child", death_container)
+
+	# should one day be conditional/opt-out
+	win_container = CanvasLayer.new()
+	win_menu = win_menu_scene.instance()
+	win_container.add_child(win_menu)
+	call_deferred("add_child", win_container)
 
 	if "node_path" in current_scene:
 		last_scene_stack.push_back(current_scene.node_path)
@@ -121,3 +132,12 @@ func show_death_menu():
 
 func hide_death_menu():
 	death_menu.hide()
+
+
+## win ###########################################333
+
+func show_win_menu():
+	win_menu.show()
+
+func hide_win_menu():
+	win_menu.hide()

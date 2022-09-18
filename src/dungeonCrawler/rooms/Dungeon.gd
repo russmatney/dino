@@ -34,11 +34,12 @@ var once = true
 #######################################################################33
 # process
 
-func _process(delta):
+func _process(_delta):
 	if once and is_win():
 		if once:
 			once = false
 		print("win!")
+		Navi.show_win_menu()
 
 #######################################################################33
 # win
