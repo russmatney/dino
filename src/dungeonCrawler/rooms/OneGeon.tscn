@@ -39,24 +39,18 @@ position = Vector2( 512, -320 )
 [node name="Door" parent="." instance=ExtResource( 6 )]
 position = Vector2( 208, -16 )
 rotation = 1.57079
-state = 1
+state = 0
 
 [node name="BossDoor" parent="." instance=ExtResource( 6 )]
 position = Vector2( 496, -112 )
-state = 1
+state = 0
 
 [node name="PlayerStart" parent="." instance=ExtResource( 2 )]
 unique_name_in_owner = true
-position = Vector2( 136, -16 )
-
-[node name="Key" parent="." instance=ExtResource( 7 )]
-position = Vector2( -640, -64 )
-
-[node name="Key2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 649, 60 )
+position = Vector2( 136, -64 )
 
 [node name="BowItem" parent="." instance=ExtResource( 8 )]
-position = Vector2( 24, 0 )
+position = Vector2( -1168, 48 )
 
 [node name="Goomba" parent="." instance=ExtResource( 9 )]
 position = Vector2( -96, -64 )
@@ -65,49 +59,69 @@ position = Vector2( -96, -64 )
 position = Vector2( 152, 64 )
 
 [node name="Coin" parent="." instance=ExtResource( 10 )]
-position = Vector2( -509, -54 )
+position = Vector2( -225, 17 )
 
 [node name="Coin2" parent="." instance=ExtResource( 10 )]
-position = Vector2( -575, 17 )
+position = Vector2( -293, 17 )
 
 [node name="Coin3" parent="." instance=ExtResource( 10 )]
-position = Vector2( -945, -31 )
+position = Vector2( -746, 46 )
 
 [node name="Coin4" parent="." instance=ExtResource( 10 )]
-position = Vector2( -917, 52 )
+position = Vector2( -792, 48 )
 
 [node name="Coin5" parent="." instance=ExtResource( 10 )]
-position = Vector2( -43, 42 )
+position = Vector2( -195, 17 )
 
 [node name="Coin6" parent="." instance=ExtResource( 10 )]
-position = Vector2( 22, 56 )
+position = Vector2( -260, 18 )
 
 [node name="Coin7" parent="." instance=ExtResource( 10 )]
-position = Vector2( 396, -1 )
+position = Vector2( 496, -150 )
 
-[node name="Goomba3" parent="." instance=ExtResource( 9 )]
-position = Vector2( -589, -65 )
+[node name="GoombaWithKey" parent="." instance=ExtResource( 9 )]
+position = Vector2( -623, -77 )
+drop_scene = ExtResource( 7 )
 
 [node name="Goomba4" parent="." instance=ExtResource( 9 )]
-position = Vector2( -400, 41 )
+position = Vector2( -556, 80 )
 
 [node name="Goomba5" parent="." instance=ExtResource( 9 )]
 position = Vector2( -414, -42 )
 
 [node name="Goomba6" parent="." instance=ExtResource( 9 )]
-position = Vector2( -1152, -42 )
+position = Vector2( -1058, -23 )
 
 [node name="Goomba7" parent="." instance=ExtResource( 9 )]
-position = Vector2( -1076, 48 )
+position = Vector2( -872, 17 )
 
 [node name="Goomba8" parent="." instance=ExtResource( 9 )]
 position = Vector2( -986, -57 )
 
-[node name="Goomba9" parent="." instance=ExtResource( 9 )]
-position = Vector2( 406, 41 )
+[node name="GoombaWithKey2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 584, 72 )
+drop_scene = ExtResource( 7 )
 
 [node name="Goomba10" parent="." instance=ExtResource( 9 )]
 position = Vector2( 385, -63 )
+
+[node name="Goomba11" parent="." instance=ExtResource( 9 )]
+position = Vector2( 626, -61 )
+
+[node name="Goomba12" parent="." instance=ExtResource( 9 )]
+position = Vector2( 626, 38 )
+
+[node name="Goomba13" parent="." instance=ExtResource( 9 )]
+position = Vector2( 496, 66 )
+
+[node name="Goomba14" parent="." instance=ExtResource( 9 )]
+position = Vector2( 530, 22 )
+
+[node name="Goomba15" parent="." instance=ExtResource( 9 )]
+position = Vector2( 392, 60 )
+
+[node name="Goomba16" parent="." instance=ExtResource( 9 )]
+position = Vector2( 451, 18 )
 
 [node name="Fred" parent="." instance=ExtResource( 11 )]
 position = Vector2( 637, -360 )
