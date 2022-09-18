@@ -16,7 +16,7 @@ extents = Vector2( 10, 16 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 192, 128 )
+extents = Vector2( 448, 128 )
 
 [node name="Fred" type="Node2D" groups=["enemies"]]
 script = ExtResource( 2 )
