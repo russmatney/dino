@@ -34,6 +34,18 @@ func on_transit(new_state):
 func set_state_label(label: String):
 	state_label.bbcode_text = "[center]" + label + "[/center]"
 
+
+# Bowling Boss States
+# Idle - until player detected
+# Engaged - player detected
+# Bowling - launching a bowling ball
+	# WindUp - preparing to fire
+	# Fire
+	# CoolDown - just fired, following through
+# Next-Position - moving to another point
+# Engaged/Idle
+
+
 #######################################################################33
 # process
 
@@ -66,5 +78,6 @@ func bowl_attack(target):
 	Navi.current_scene.call_deferred("add_child", ball)
 
 	var bowl_dir = target.get_global_position() - ball.position
-	print("bowl_dir", bowl_dir)
 	ball.velocity = bowl_dir.normalized() * bowl_speed
+
+	yield(get_tree().create_timer(1.0), "timeout")
