@@ -40,3 +40,16 @@ func get_first_child_in_group(node: Node, group_name: String) -> Node:
 		if c.is_in_group(group_name):
 			return c
 	return null
+
+# https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
+# unconfirmed
+func set_collisions_enabled(node, enabled):
+    if enabled:
+        if node.has_meta("col_mask"):
+            node.collision_mask = node.get_meta("col_mask")
+            node.collision_layer = node.get_meta("col_layer")
+    else:
+            node.set_meta("col_mask", node.collision_mask)
+            node.set_meta("col_layer", node.collision_layer)
+            node.collision_mask = 0
+            node.collision_layer = 0

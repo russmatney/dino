@@ -22,7 +22,6 @@ func kill():
 
 func _on_Area2D_body_entered(body:Node):
 	if body != self:
-		print("bowling ball hit: ", body, body.name)
 		if body.is_in_group("player"):
 			if body.has_method("hit"):
 				body.hit()

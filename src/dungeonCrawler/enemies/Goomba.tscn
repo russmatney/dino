@@ -19,5 +19,5 @@ shape = SubResource( 1 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "walk"
-frame = 3
+frame = 1
 playing = true

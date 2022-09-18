@@ -19,6 +19,9 @@ func enter(_msg = {}):
 	move_dir = next_direction()
 
 func process(delta):
+	if actor.dead:
+		machine.transit("Dead")
+
 	if move_time > 0:
 		move_time -= delta
 		actor.position -= move_dir.normalized() * move_speed * delta

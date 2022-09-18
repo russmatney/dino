@@ -8,5 +8,7 @@ func enter(_msg = {}):
 
 
 func process(_delta: float):
+	if actor.dead:
+		machine.transit("Dead")
 	if actor.bodies.size() > 0:
 		machine.transit("Engaged", {"body": actor.bodies[0]})

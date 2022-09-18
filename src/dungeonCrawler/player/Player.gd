@@ -69,7 +69,7 @@ func _unhandled_input(event):
 			# TODO selecting when there are multiple actions
 			var ax = actions[0]
 			execute_action(ax)
-		else:
+		elif weapon:
 			# one button for everything?
 			use_weapon(weapon)
 
@@ -272,21 +272,21 @@ func _on_LockOnDetectArea2D_body_entered(body:Node):
 	# TODO ignore tilemaps properly, maybe via collision layers
 	if body != self and body.name != "DungeonWalls":
 		bodies.append(body)
-		print("[player-lockon-bodies]:", bodies)
+		# print("[player-lockon-bodies]:", bodies)
 
 func _on_LockOnDetectArea2D_body_exited(body:Node):
 	bodies.erase(body)
-	print("[player-lockon-bodies]:", bodies)
+	# print("[player-lockon-bodies]:", bodies)
 
 var areas = []
 
 func _on_LockOnDetectArea2D_area_entered(area:Area2D):
 	areas.append(area)
-	print("[player-lockon-areas]:", areas)
+	# print("[player-lockon-areas]:", areas)
 
 func _on_LockOnDetectArea2D_area_exited(area:Area2D):
 	areas.erase(area)
-	print("[player-lockon-areas]:", areas)
+	# print("[player-lockon-areas]:", areas)
 
 
 onready var line_of_sight = $LineOfSightRayCast2D
@@ -386,12 +386,11 @@ func _on_Hurtbox_body_entered(body:Node):
 	if body.is_in_group("enemies") \
 		or (body.get("owner") and body.owner.is_in_group("enemies")) \
 		or body.is_in_group("enemy_projectile"):
-		print("player hit enemy", body.name)
 		hit()
 
-func health_info_dict(health):
+func health_info_dict(h):
 	return {
-		"label": str("Health: ", health)
+		"label": str("Health: ", h)
 	}
 
 #######################################################################33

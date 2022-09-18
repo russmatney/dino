@@ -7,6 +7,9 @@ func enter(_msg = {}):
 	wait_time = 100
 
 func process(delta):
+	if actor.dead:
+		machine.transit("Dead")
+
 	wait_time -= delta
 
 	if wait_time <= 0:

@@ -35,13 +35,6 @@ func set_state_label(label: String):
 	state_label.bbcode_text = "[center]" + label + "[/center]"
 
 #######################################################################33
-# process
-
-#func _process(delta):
-#	pass
-
-
-#######################################################################33
 # signals
 
 var bodies = []
@@ -55,7 +48,7 @@ func _on_DetectBox_body_exited(body:Node):
 	bodies.erase(body)
 
 #######################################################################33
-# funcs
+# bowl attack
 
 onready var ball_scene = preload("res://src/dungeonCrawler/weapons/BowlingBall.tscn")
 var bowl_speed = 200
@@ -71,7 +64,11 @@ func bowl_attack(target):
 	yield(get_tree().create_timer(1.0), "timeout")
 
 
+#######################################################################33
+# health, death
+
 var health = 3
+var dead = false
 
 onready var normal_body = $Body
 onready var small_body = $SmallBody
@@ -85,9 +82,14 @@ func hit():
 		# switch to small body
 		small_body.visible = true
 		normal_body.visible = false
+		Util.set_collisions_enabled(normal_body, false)
 	elif health <= 0:
 		kill()
 
 func kill():
+	Util.set_collisions_enabled(small_body, false)
+	small_body.visible = false
+	dead = true
+	machine.transit("Dead")
 	# TODO death anim
-	queue_free()
+	# queue_free()

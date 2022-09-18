@@ -12,6 +12,8 @@ func enter(_msg = {}):
 	bowled = false
 
 func process(delta):
+	if actor.dead:
+		machine.transit("Dead")
 	if windup_time > 0:
 		windup_time -= delta
 	else:
