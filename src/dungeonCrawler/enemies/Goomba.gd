@@ -40,8 +40,12 @@ func emit_drops():
 
 var dir = Vector2.LEFT
 var speed = 50
+var dead_spin_speed = 800
 var velocity = dir * speed
 func _physics_process(delta):
-	var collision_info = move_and_collide(velocity * delta)
-	if collision_info:
-		velocity = velocity.bounce(collision_info.normal)
+	if not dead:
+		var collision_info = move_and_collide(velocity * delta)
+		if collision_info:
+			velocity = velocity.bounce(collision_info.normal)
+	else:
+		rotation_degrees += dead_spin_speed * delta

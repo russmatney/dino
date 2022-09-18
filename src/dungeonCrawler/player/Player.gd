@@ -43,6 +43,10 @@ func _process(delta):
 	else:
 		velocity += move_accel * move_dir * delta
 		velocity = velocity.limit_length(max_speed)
+	if velocity.x > 0.1 or velocity.y > 0.1:
+		anim.animation = "run"
+	else:
+		anim.animation = "idle"
 	velocity = move_and_slide(velocity)
 
 	# TODO cache or otherwise store current_target
