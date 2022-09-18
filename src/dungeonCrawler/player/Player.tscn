@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://resources/sprites/redhat.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/dungeonCrawler/player/Player.gd" type="Script" id=3]
@@ -8,6 +8,9 @@ extents = Vector2( 4, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 128, 128 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 64 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -41,11 +44,22 @@ margin_right = 24.0
 margin_bottom = -16.0
 
 [node name="LockOnDetectArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LockOnDetectArea2D"]
 shape = SubResource( 2 )
+
+[node name="ItemPullArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPullArea2D"]
+shape = SubResource( 3 )
 
 [connection signal="area_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_entered"]
 [connection signal="area_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_exited"]
 [connection signal="body_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_body_entered"]
 [connection signal="body_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_body_exited"]
+[connection signal="area_entered" from="ItemPullArea2D" to="." method="_on_ItemPullArea2D_area_entered"]
+[connection signal="area_exited" from="ItemPullArea2D" to="." method="_on_ItemPullArea2D_area_exited"]

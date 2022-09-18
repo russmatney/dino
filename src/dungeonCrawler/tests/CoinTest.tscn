@@ -14,4 +14,10 @@ position = Vector2( 40, 17 )
 [node name="Coin2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 38, -19 )
 
+[node name="Coin3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 104, 0 )
+
+[node name="Coin4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 152, -40 )
+
 [node name="DinoCamera2D" parent="." instance=ExtResource( 3 )]

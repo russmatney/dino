@@ -35,7 +35,6 @@ func update_facing(move_dir):
 #######################################################################33
 # process
 
-
 func _process(delta):
 	var move_dir = Trolley.move_dir()
 	update_facing(move_dir)
@@ -47,7 +46,10 @@ func _process(delta):
 	velocity = move_and_slide(velocity)
 
 	# TODO cache or otherwise store current_target
+	# TODO animate rotation, pass delta in
 	point_at_target()
+
+	pull_items(delta)
 
 #######################################################################33
 # _input
@@ -270,3 +272,25 @@ func _on_LockOnDetectArea2D_area_entered(area:Area2D):
 func _on_LockOnDetectArea2D_area_exited(area:Area2D):
 	areas.erase(area)
 	print("[player-lockon-areas]:", areas)
+
+
+#######################################################################33
+# nearby items
+
+var nearby_items = []
+
+func _on_ItemPullArea2D_area_entered(area:Area2D):
+	nearby_items.append(area.owner)
+	print("[player-nearby-items]: ", nearby_items)
+
+func _on_ItemPullArea2D_area_exited(area:Area2D):
+	nearby_items.erase(area.owner)
+	print("[player-nearby-items]: ", nearby_items)
+
+var move_speed = 400
+func pull_items(delta):
+	for n in nearby_items:
+		if n.is_in_group("magnetic"):
+			var diff = (n.global_position - global_position).normalized()
+			# += here pushes things away
+			n.position -= diff * delta * move_speed
