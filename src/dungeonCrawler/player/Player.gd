@@ -280,17 +280,26 @@ func _on_LockOnDetectArea2D_area_exited(area:Area2D):
 var nearby_items = []
 
 func _on_ItemPullArea2D_area_entered(area:Area2D):
-	nearby_items.append(area.owner)
+	nearby_items.append(area)
 	print("[player-nearby-items]: ", nearby_items)
 
 func _on_ItemPullArea2D_area_exited(area:Area2D):
-	nearby_items.erase(area.owner)
+	nearby_items.erase(area)
 	print("[player-nearby-items]: ", nearby_items)
 
 var move_speed = 400
 func pull_items(delta):
 	for n in nearby_items:
-		if n.is_in_group("magnetic"):
-			var diff = (n.global_position - global_position).normalized()
-			# += here pushes things away
-			n.position -= diff * delta * move_speed
+		if is_instance_valid(n):
+			# do i have the thing itself, or a sub-component?
+			if n.is_in_group("magnetic"):
+				var diff = (n.global_position - global_position).normalized()
+				# += here pushes things away
+				n.position -= diff * delta * move_speed
+
+			if n.get("owner") and n.owner.is_in_group("magnetic"):
+				var diff = (n.owner.global_position - global_position).normalized()
+				# += here pushes things away
+				n.owner.position -= diff * delta * move_speed
+		else:
+			nearby_items.erase(n)

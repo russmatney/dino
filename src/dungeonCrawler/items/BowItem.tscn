@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="Bow" type="Area2D"]
+[node name="Bow" type="Area2D" groups=["magnetic"]]
 collision_layer = 32
 collision_mask = 2
 script = ExtResource( 2 )
