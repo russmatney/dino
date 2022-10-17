@@ -453,7 +453,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dino"
-run/main_scene="res://src/dungeonCrawler/rooms/OneGeon.tscn"
+run/main_scene="res://src/runner/Runner.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]
