@@ -4,34 +4,63 @@ extends Node2D
 export(Array, PackedScene) var room_options = []
 
 var current_rooms = []
-var current_width = 0
+var total_room_width = 0
+var active_room_count = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not room_options:
 		print("[WARN]: no room options!")
-	current_rooms = []
+	current_rooms.clear()
 
 	# should we wait to add the player after the rooms are ready?
-	create_rooms()
+	create_rooms(active_room_count)
 
 	if Engine.editor_hint:
 		request_ready()
 
-func create_rooms():
-	if current_rooms.size() == 3:
-		return
-
+func make_room():
 	var room_i = randi() % room_options.size()
 
-	var next_room = room_options[room_i].instance()
-	var next_w = next_room.room_width()
-	var offset_x = current_width + next_w / 2
+	var new_room = room_options[room_i].instance()
+	var next_w = new_room.room_width()
+	var offset_x = total_room_width + next_w / 2
+	new_room.position.x = offset_x
 
-	next_room.position.x = offset_x
+	# update width so we can keep appending rooms
+	total_room_width += next_w
 
-	call_deferred("add_child", next_room)
-	current_rooms.append(next_room)
-	current_width += next_w
+	new_room.connect("player_entered", self, "room_entered", [new_room])
+	new_room.connect("player_exited", self, "room_exited", [new_room])
 
-	create_rooms()
+	# update rooms array
+	current_rooms.append(new_room)
+
+	return new_room
+
+func create_rooms(count: int):
+	for i in count:
+		var new_room = make_room()
+		call_deferred("add_child", new_room)
+
+func room_entered(_player, room):
+	var current_room_index = current_rooms.find(room)
+	var current_room_count = current_rooms.size()
+	var remaining_rooms = current_room_count - 1 - current_room_index
+	var rooms_to_make = active_room_count - remaining_rooms
+
+	if rooms_to_make:
+		create_rooms(rooms_to_make)
+
+func room_exited(_player, room):
+	var exited_room_index = current_rooms.find(room)
+
+	var to_delete = []
+	# remove rooms before the just-exited one
+	for idx in exited_room_index - 2: # subtract 2 for some buffer
+		to_delete.append(current_rooms[idx])
+
+	# delete in separate loop b/c array indexes shift in place
+	for r in to_delete:
+		current_rooms.erase(r)
+		call_deferred("remove_child", r)
