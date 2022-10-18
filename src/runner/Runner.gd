@@ -34,5 +34,4 @@ func create_rooms():
 	current_rooms.append(next_room)
 	current_width += next_w
 
-
 	create_rooms()
