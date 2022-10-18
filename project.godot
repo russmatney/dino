@@ -354,6 +354,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/dungeonCrawler/player/Player.gd"
 }, {
+"base": "Node2D",
+"class": "RunnerRoom",
+"language": "GDScript",
+"path": "res://src/runner/RunnerRoom.gd"
+}, {
 "base": "Node",
 "class": "Sort",
 "language": "GDScript",
@@ -444,6 +449,7 @@ _global_script_class_icons={
 "Machine": "",
 "NaviMenu": "",
 "Player": "",
+"RunnerRoom": "",
 "Sort": "",
 "State": "",
 "StoryError": "",

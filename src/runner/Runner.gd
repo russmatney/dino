@@ -19,7 +19,7 @@ func _ready():
 		request_ready()
 
 func create_rooms():
-	if current_rooms.size() == 30:
+	if current_rooms.size() == 3:
 		return
 
 	var room_i = randi() % room_options.size()
