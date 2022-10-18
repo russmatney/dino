@@ -2,6 +2,7 @@ tool
 extends Node2D
 
 export(Array, PackedScene) var room_options = []
+export(PackedScene) var final_room
 
 var current_rooms = []
 var total_room_width = 0
@@ -11,13 +12,26 @@ var active_room_count = 3
 func _ready():
 	if not room_options:
 		print("[WARN]: no room options!")
-	current_rooms.clear()
+
+	clear_current_rooms()
 
 	# should we wait to add the player after the rooms are ready?
 	create_rooms(active_room_count)
 
 	if Engine.editor_hint:
 		request_ready()
+
+func clear_current_rooms():
+	for r in current_rooms:
+		r.queue_free()
+
+	var to_del = []
+	for r in current_rooms:
+		to_del.append(r)
+	for r in to_del:
+		current_rooms.erase(r)
+	total_room_width = 0
+	print("Emptied current rooms: ", current_rooms)
 
 func make_room():
 	var room_i = randi() % room_options.size()
@@ -30,8 +44,7 @@ func make_room():
 	# update width so we can keep appending rooms
 	total_room_width += next_w
 
-	new_room.connect("player_entered", self, "room_entered", [new_room])
-	new_room.connect("player_exited", self, "room_exited", [new_room])
+	Util.ensure_connection(new_room, "player_exited", self, "room_exited", [new_room])
 
 	# update rooms array
 	current_rooms.append(new_room)
@@ -63,4 +76,5 @@ func room_exited(_player, room):
 	# delete in separate loop b/c array indexes shift in place
 	for r in to_delete:
 		current_rooms.erase(r)
-		call_deferred("remove_child", r)
+		r.queue_free()
+		# call_deferred("remove_child", r)

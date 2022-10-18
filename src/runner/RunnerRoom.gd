@@ -18,14 +18,11 @@ func room_width():
 onready var roombox = $RoomBox
 
 func _ready():
+	Util.ensure_connection(roombox, "body_entered", self, "_on_body_entered")
+	Util.ensure_connection(roombox, "body_exited", self, "_on_body_eexited")
+
 	if Engine.editor_hint:
 		request_ready()
-
-	var err
-	err = roombox.connect("body_entered", self, "_on_body_entered")
-	if err: print("[Error]: ", err)
-	err = roombox.connect("body_exited", self, "_on_body_exited")
-	if err: print("[Error]: ", err)
 
 var bodies = []
 

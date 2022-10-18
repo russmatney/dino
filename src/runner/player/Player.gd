@@ -3,6 +3,7 @@ extends KinematicBody2D
 export(int) var max_speed = 400
 export(int) var min_speed = 20
 export(int) var x_accel = 400
+export(int) var x_decel = 400
 export(int) var max_air_speed = 300
 export(int) var min_air_speed = 100
 export(int) var air_resistance = 5
@@ -30,29 +31,42 @@ func _unhandled_input(event):
 
 func jump():
 	if is_on_floor():
-		print("player jumping!")
 		# we may need a delta-based jump
 		velocity += jump_velocity
+
+var stopping = false
+func stop_running():
+	stopping = true
+
+func start_running():
+	stopping = false
 
 #######################################
 # process
 
+signal player_resetting
+
 func _process(_delta):
-	if is_on_floor():
+	if is_on_floor() and abs(velocity.x) > 2:
 		anim.set_animation("run")
 	else:
 		anim.set_animation("idle") # TODO jumping
 
-	# quick retry
+	# quick restart
 	if global_position.y > 2000:
 		position = initial_pos
 		velocity = Vector2.ZERO
+		emit_signal("player_resetting")
 
 #######################################
 # physics_process
 
 func _physics_process(_delta):
-	if is_on_floor():
+	if stopping:
+		velocity.x -= x_decel
+		if velocity.x < min_speed:
+			velocity.x = 0
+	elif is_on_floor():
 		# run right
 		velocity.x += x_accel
 		velocity.x = clamp(velocity.x, min_speed, max_speed)
@@ -66,7 +80,6 @@ func _physics_process(_delta):
 
 	# move_and_slide factors in delta for us
 	velocity = move_and_slide(velocity, Vector2.UP)
-
 
 #######################################
 # pickups

@@ -1,3 +1,4 @@
+tool
 extends Node
 
 
@@ -53,3 +54,9 @@ func set_collisions_enabled(node, enabled):
             node.set_meta("col_layer", node.collision_layer)
             node.collision_mask = 0
             node.collision_layer = 0
+
+func ensure_connection(obj, sig, target, method, args=[]):
+	var err
+	if not obj.is_connected(sig, target, method):
+		err = obj.connect(sig, target, method, args)
+	if err: print("[Error]: ", err) # useless enum digit
