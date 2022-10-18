@@ -19,7 +19,7 @@ onready var roombox = $RoomBox
 
 func _ready():
 	Util.ensure_connection(roombox, "body_entered", self, "_on_body_entered")
-	Util.ensure_connection(roombox, "body_exited", self, "_on_body_eexited")
+	Util.ensure_connection(roombox, "body_exited", self, "_on_body_exited")
 
 	if Engine.editor_hint:
 		request_ready()

@@ -8,6 +8,9 @@ var current_rooms = []
 var total_room_width = 0
 var active_room_count = 3
 
+var final_room_idx = 8
+var rooms_created = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not room_options:
@@ -31,12 +34,20 @@ func clear_current_rooms():
 	for r in to_del:
 		current_rooms.erase(r)
 	total_room_width = 0
+	rooms_created = 0
 	print("Emptied current rooms: ", current_rooms)
 
 func make_room():
-	var room_i = randi() % room_options.size()
+	if rooms_created > final_room_idx:
+		return
 
-	var new_room = room_options[room_i].instance()
+	var room_i = randi() % room_options.size()
+	var room_opt = room_options[room_i]
+
+	if rooms_created == final_room_idx && final_room:
+		room_opt = final_room
+
+	var new_room = room_opt.instance()
 	var next_w = new_room.room_width()
 	var offset_x = total_room_width + next_w / 2
 	new_room.position.x = offset_x
@@ -44,17 +55,23 @@ func make_room():
 	# update width so we can keep appending rooms
 	total_room_width += next_w
 
+	Util.ensure_connection(new_room, "player_entered", self, "room_entered", [new_room])
 	Util.ensure_connection(new_room, "player_exited", self, "room_exited", [new_room])
 
 	# update rooms array
 	current_rooms.append(new_room)
+
+	rooms_created += 1
 
 	return new_room
 
 func create_rooms(count: int):
 	for i in count:
 		var new_room = make_room()
-		call_deferred("add_child", new_room)
+		if new_room:
+			call_deferred("add_child", new_room)
+		else:
+			print("No more rooms, says code")
 
 func room_entered(_player, room):
 	var current_room_index = current_rooms.find(room)

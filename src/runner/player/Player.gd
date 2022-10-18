@@ -3,7 +3,7 @@ extends KinematicBody2D
 export(int) var max_speed = 400
 export(int) var min_speed = 20
 export(int) var x_accel = 400
-export(int) var x_decel = 400
+export(int) var stopping_decel = 5
 export(int) var max_air_speed = 300
 export(int) var min_air_speed = 100
 export(int) var air_resistance = 5
@@ -63,7 +63,7 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	if stopping:
-		velocity.x -= x_decel
+		velocity.x -= stopping_decel
 		if velocity.x < min_speed:
 			velocity.x = 0
 	elif is_on_floor():
