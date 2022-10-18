@@ -66,3 +66,10 @@ func _physics_process(_delta):
 
 	# move_and_slide factors in delta for us
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+#######################################
+# pickups
+
+func add_coin():
+	print("player picked up coin")

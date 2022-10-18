@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/runner/park/Ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/runner/RunnerRoom.gd" type="Script" id=2]
+[ext_resource path="res://src/runner/pickups/Coin.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 211, 59 )
@@ -18,3 +19,15 @@ scale = Vector2( 6.6, 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
 position = Vector2( 0, -37 )
 shape = SubResource( 1 )
+
+[node name="Coin" parent="." instance=ExtResource( 3 )]
+position = Vector2( 143, -79 )
+
+[node name="Coin2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 56, -32 )
+
+[node name="Coin3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -48, -75 )
+
+[node name="Coin4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -147, -30 )
