@@ -1,7 +1,8 @@
 tool
 extends Node2D
 
-export(Array, PackedScene) var room_options = []
+export(Array, PackedScene) var initial_room_options = []
+var room_options = []
 export(PackedScene) var final_room
 export(Array, PackedScene) var gap_room_options
 
@@ -10,15 +11,12 @@ var current_rooms = []
 var total_room_width = 0
 var active_room_count = 3
 
-export(int) var finishable_room_count = 5
-var finishable_rooms_to_add = 5
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if not room_options:
+	if not initial_room_options:
 		print("[WARN]: no room options!")
 
-	finishable_rooms_to_add = finishable_room_count
+	room_options = initial_room_options.duplicate()
 	clear_current_rooms()
 
 	# should we wait to add the player after the rooms are ready?
@@ -41,53 +39,38 @@ func clear_current_rooms():
 var no_more_rooms = false
 
 func get_next_room_instance():
+	# no rooms yet? start in a gap room
+	if not current_rooms:
+		var room_i = randi() % gap_room_options.size()
+		return gap_room_options[room_i].instance()
+
 	# return unfinished room first
 	# TODO may want to mix this back into the randoms
 	if room_queue:
 		var room_i = randi() % room_queue.size()
 		return room_queue.pop_at(room_i)
 
-	var current_unfinished
-	for r in current_rooms:
-		if not r.is_finished():
-			current_unfinished = r
-			break
+	if room_options:
+		# none queued, pulling new random room
+		var room_i = randi() % room_options.size()
+		# pop from opts - we won't see it anymore
+		return room_options.pop_at(room_i).instance()
+	else:
+		# no queue or options, but we might need a gap room
+		# i.e. we might be in/near an unfinished room right now
+		var current_unfinished
+		for r in current_rooms:
+			if not r.is_finished():
+				current_unfinished = r
+				break
 
-	# no more randoms? lets add gaps/unfinished rooms until they're all done
-	if finishable_rooms_to_add <= 0:
-		if room_queue or current_unfinished:
-			var opts = gap_room_options
-
-			# TODO assigned rooms could opt-in here
-			# but i don't want to instance every room just to check it
-			# could also find and re-use an existing instance...?
-			# but then we'd want to create a new one, right?
-			# for r in room_options:
-			# 	if not r in opts && r.is_gap(): # can't call is_gap on instance
-			# 		opts.append(r)
-
-			var room_i = randi() % opts.size()
-			var room_opt = opts[room_i]
-			return room_opt.instance()
+		if current_unfinished:
+			var room_i = randi() % gap_room_options.size()
+			return gap_room_options[room_i].instance()
 		else:
 			# use final room when unfinished and random queue are empty
 			no_more_rooms = true
 			return final_room.instance()
-
-	# none queued, pulling new random room
-	var room_i = randi() % room_options.size()
-	var room_opt = room_options[room_i]
-
-	var inst = room_opt.instance()
-
-	# already finished rooms do not count towards this
-	# this lets us decide how many rooms a user has to 'finish'
-	# might look into favoring finishable rooms more in this randomness
-	# might not!
-	if inst.is_finished():
-		finishable_rooms_to_add -= 1
-
-	return inst
 
 func prep_room():
 	if no_more_rooms:
