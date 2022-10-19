@@ -44,33 +44,34 @@ func get_next_room_instance():
 		var room_i = randi() % gap_room_options.size()
 		return gap_room_options[room_i].instance()
 
-	# return unfinished room first
-	# TODO may want to mix this back into the randoms
-	if room_queue:
-		var room_i = randi() % room_queue.size()
-		return room_queue.pop_at(room_i)
-
+	# some rooms we haven't seen yet? let's see them!
 	if room_options:
 		# none queued, pulling new random room
 		var room_i = randi() % room_options.size()
 		# pop from opts - we won't see it anymore
 		return room_options.pop_at(room_i).instance()
-	else:
-		# no queue or options, but we might need a gap room
-		# i.e. we might be in/near an unfinished room right now
-		var current_unfinished
-		for r in current_rooms:
-			if not r.is_finished():
-				current_unfinished = r
-				break
 
-		if current_unfinished:
-			var room_i = randi() % gap_room_options.size()
-			return gap_room_options[room_i].instance()
-		else:
-			# use final room when unfinished and random queue are empty
-			no_more_rooms = true
-			return final_room.instance()
+	# some unfinished rooms? gimme one
+	if room_queue:
+		var room_i = randi() % room_queue.size()
+		return room_queue.pop_at(room_i)
+
+	# we might need a gap room if a current room is not finished
+	# i.e. we might be in/near an unfinished room right now
+	var current_unfinished
+	for r in current_rooms:
+		if not r.is_finished():
+			current_unfinished = r
+			break
+
+	# add a gap room until the current is requeued
+	if current_unfinished:
+		var room_i = randi() % gap_room_options.size()
+		return gap_room_options[room_i].instance()
+
+	# nothing left to finish, mark done and return the final
+	no_more_rooms = true
+	return final_room.instance()
 
 func prep_room():
 	if no_more_rooms:
@@ -106,8 +107,6 @@ func add_rooms_to_scene(count: int):
 func room_entered(_player, room):
 	print("\n\n--------------------------------------------------------------------")
 	print("entered: ", room)
-	print(current_rooms.size(), " current rooms: ", current_rooms)
-	print(room_queue.size(), " in room queue:", room_queue)
 	var current_room_index = current_rooms.find(room)
 	var current_room_count = current_rooms.size()
 	var remaining_rooms = current_room_count - 1 - current_room_index
@@ -130,7 +129,7 @@ func room_exited(_player, room):
 
 	for idx in exited_room_index - 2: # subtract 2 for some buffer
 		var r = current_rooms[idx]
-		# TODO remove these extra is_finished calls... :/
+		# TODO this feels like an extra is_finished call... :/
 		if r.is_finished():
 			to_delete.append(r)
 		else:
@@ -142,10 +141,5 @@ func room_exited(_player, room):
 		r.queue_free()
 
 	for r in to_remove:
-		# if we use current to add gaps when something is incomplete, we can't really erase here
+		# this room should have been queued by now
 		current_rooms.erase(r)
-		# remove from current_rooms and scene, but don't queue_free
-		# TODO this may not be in the scene/a child anymore
-		# not sure if we want to remove this or not
-		# r.get_parent().remove_child(r)
-		# call_deferred("remove_child", r)
