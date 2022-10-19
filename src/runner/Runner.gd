@@ -3,22 +3,22 @@ extends Node2D
 
 export(Array, PackedScene) var room_options = []
 export(PackedScene) var final_room
-export(PackedScene) var gap_room
+export(Array, PackedScene) var gap_room_options
 
 var room_queue = []
 var current_rooms = []
 var total_room_width = 0
 var active_room_count = 3
 
-export(int) var override_random_rooms_to_add = 5
-var random_rooms_to_add = 5
+export(int) var finishable_room_count = 5
+var finishable_rooms_to_add = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not room_options:
 		print("[WARN]: no room options!")
 
-	random_rooms_to_add = override_random_rooms_to_add
+	finishable_rooms_to_add = finishable_room_count
 	clear_current_rooms()
 
 	# should we wait to add the player after the rooms are ready?
@@ -54,9 +54,21 @@ func get_next_room_instance():
 			break
 
 	# no more randoms? lets add gaps/unfinished rooms until they're all done
-	if random_rooms_to_add <= 0:
+	if finishable_rooms_to_add <= 0:
 		if room_queue or current_unfinished:
-			return gap_room.instance()
+			var opts = gap_room_options
+
+			# TODO assigned rooms could opt-in here
+			# but i don't want to instance every room just to check it
+			# could also find and re-use an existing instance...?
+			# but then we'd want to create a new one, right?
+			# for r in room_options:
+			# 	if not r in opts && r.is_gap(): # can't call is_gap on instance
+			# 		opts.append(r)
+
+			var room_i = randi() % opts.size()
+			var room_opt = opts[room_i]
+			return room_opt.instance()
 		else:
 			# use final room when unfinished and random queue are empty
 			no_more_rooms = true
@@ -66,10 +78,16 @@ func get_next_room_instance():
 	var room_i = randi() % room_options.size()
 	var room_opt = room_options[room_i]
 
-	# here, does not count re-played rooms
-	random_rooms_to_add -= 1
+	var inst = room_opt.instance()
 
-	return room_opt.instance()
+	# already finished rooms do not count towards this
+	# this lets us decide how many rooms a user has to 'finish'
+	# might look into favoring finishable rooms more in this randomness
+	# might not!
+	if inst.is_finished():
+		finishable_rooms_to_add -= 1
+
+	return inst
 
 func prep_room():
 	if no_more_rooms:
