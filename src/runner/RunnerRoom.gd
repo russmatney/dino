@@ -11,9 +11,19 @@ func _get_configuration_warning():
 			return "Missing expected child named '" + n + "'"
 	return ""
 
+###########################################################
+## Runner Room API
+
 func room_width():
 	# we have use get_node directly here b/c this also runs at editor-time
 	return get_node("RoomBox/CollisionShape2D").shape.extents.x * 2
+
+func is_finished():
+	# default to always true
+	return true
+
+###########################################################
+## impl
 
 onready var roombox = $RoomBox
 

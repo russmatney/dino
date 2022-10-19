@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export(int) var max_speed = 400
+export(int) var max_speed = 200
 export(int) var min_speed = 20
 export(int) var x_accel = 400
 export(int) var stopping_decel = 5

@@ -42,6 +42,14 @@ func get_first_child_in_group(node: Node, group_name: String) -> Node:
 			return c
 	return null
 
+func get_child_in_group(node: Node, group_name: String) -> Array:
+	# only checks first children
+	var in_group = []
+	for c in node.get_children():
+		if c.is_in_group(group_name):
+			in_group.append(c)
+	return in_group
+
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
 func set_collisions_enabled(node, enabled):

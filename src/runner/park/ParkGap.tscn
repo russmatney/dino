@@ -4,7 +4,7 @@
 [ext_resource path="res://src/runner/RunnerRoom.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 43.5 )
+extents = Vector2( 32, 79.5 )
 
 [node name="ParkGap" type="Node2D"]
 script = ExtResource( 2 )
@@ -15,5 +15,5 @@ position = Vector2( 0, 32 )
 [node name="RoomBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
-position = Vector2( 0, -19.5 )
+position = Vector2( 0, -55.5 )
 shape = SubResource( 1 )
