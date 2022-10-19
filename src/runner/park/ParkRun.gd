@@ -7,5 +7,4 @@ func is_finished():
 	if coins:
 		return false
 	else:
-		print(coins.size(), " park run finished!")
 		return true

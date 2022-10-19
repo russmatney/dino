@@ -84,5 +84,12 @@ func _physics_process(_delta):
 #######################################
 # pickups
 
+func update_hud():
+	print("------------")
+	print("player stats: coins: ", coins)
+
+var coins = 0
+
 func add_coin():
-	print("player picked up coin")
+	coins += 1
+	update_hud()
