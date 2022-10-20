@@ -11,6 +11,8 @@ var current_rooms = []
 var total_room_width = 0
 var active_room_count = 3
 
+onready var rooms_node = $Rooms
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not initial_room_options:
@@ -102,7 +104,7 @@ func add_rooms_to_scene(count: int):
 			# only need to add newly instanced rooms
 			# the others get moved when .position.x is set
 			if not room.get_parent():
-				call_deferred("add_child", room, true)
+				rooms_node.call_deferred("add_child", room, true)
 
 func room_entered(_player, room):
 	print("\n\n--------------------------------------------------------------------")

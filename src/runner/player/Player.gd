@@ -9,7 +9,7 @@ export(int) var min_air_speed = 100
 export(int) var air_resistance = 5
 export(int) var gravity = 80
 
-var jump_velocity = Vector2(100, -1000)
+var jump_velocity = Vector2(0, -1000)
 
 var velocity = Vector2.ZERO
 
@@ -23,7 +23,7 @@ func _ready():
 	initial_pos = global_position
 
 #######################################################################33
-# _input
+# input
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
@@ -50,10 +50,10 @@ func _process(_delta):
 	if is_on_floor() and abs(velocity.x) > 2:
 		anim.set_animation("run")
 	else:
-		anim.set_animation("idle") # TODO jumping
+		anim.set_animation("idle") # TODO jump anim
 
 	# quick restart
-	if global_position.y > 2000:
+	if global_position.y > 1000:
 		position = initial_pos
 		velocity = Vector2.ZERO
 		emit_signal("player_resetting")
@@ -97,6 +97,6 @@ func add_coin():
 
 var leaves = []
 
-func caught_leaf(leaf):
-	leaves.append(leaf)
+func caught_leaf(leaf_data):
+	leaves.append(leaf_data)
 	update_hud()

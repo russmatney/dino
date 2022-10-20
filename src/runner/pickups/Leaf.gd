@@ -15,7 +15,7 @@ export(leaf_colors) var color = leaf_colors.redorange
 onready var anim = $AnimatedSprite
 
 ###################################################
-# _ready
+# ready
 
 func _ready():
 	anim.animation = to_anim(color)
@@ -28,5 +28,5 @@ func _ready():
 
 func _on_Area2D_body_entered(body: Node):
 	if body.has_method("caught_leaf"):
-		body.caught_leaf(body)
+		body.caught_leaf({"color": color})
 		queue_free()

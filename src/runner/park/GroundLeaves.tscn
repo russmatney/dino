@@ -16,6 +16,7 @@ extents = Vector2( 64, 32 )
 [node name="GroundLeaves" type="StaticBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -5 )
 frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

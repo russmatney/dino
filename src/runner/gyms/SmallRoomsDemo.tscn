@@ -3,7 +3,7 @@
 [ext_resource path="res://src/runner/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/runner/Runner.gd" type="Script" id=5]
-[ext_resource path="res://src/runner/park/ParkGap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/runner/park/rooms/ParkGap.tscn" type="PackedScene" id=6]
 
 [node name="SmallRooms" type="Node2D"]
 script = ExtResource( 5 )

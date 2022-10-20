@@ -16,7 +16,9 @@ func _get_configuration_warning():
 
 func room_width():
 	# we have use get_node directly here b/c this also runs at editor-time
-	return get_node("RoomBox/CollisionShape2D").shape.extents.x * 2
+	var coll_shape = get_node("RoomBox/CollisionShape2D")
+	var shape = get_node("RoomBox/CollisionShape2D").shape
+	return shape.extents.x * 2 * coll_shape.scale.x
 
 # if false, the room will be requeued until this returns true
 func is_finished():

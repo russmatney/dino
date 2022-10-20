@@ -20,7 +20,7 @@ animations = [ {
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
-position = Vector2( 9.53674e-07, 0 )
+position = Vector2( 9.53674e-07, -5 )
 scale = Vector2( 0.5, 1 )
 frames = SubResource( 2 )
 

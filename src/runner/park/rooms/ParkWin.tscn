@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/runner/park/ParkWin.gd" type="Script" id=1]
-[ext_resource path="res://src/runner/park/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/runner/park/Ground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/runner/park/rooms/ParkWin.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/runner_leaf_friend_sheet.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 256, 86 )
 
 [node name="ParkWin" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
-[node name="Ground" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 3.2 )
-scale = Vector2( 8, 0.1 )
+[node name="Ground" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 29.2 )
+scale = Vector2( 8, 0.899999 )
 
 [node name="RoomBox" type="Area2D" parent="."]
 
