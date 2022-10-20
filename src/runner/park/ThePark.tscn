@@ -13,7 +13,6 @@ script = ExtResource( 5 )
 initial_room_options = [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ) ]
 final_room = ExtResource( 7 )
 gap_room_options = [ ExtResource( 6 ) ]
-finishable_room_count = 1
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 39, -24 )

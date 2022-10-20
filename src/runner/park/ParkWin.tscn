@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/runner/park/ParkWin.gd" type="Script" id=1]
 [ext_resource path="res://src/runner/park/Ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/runner_leaf_friend_sheet.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 256, 86 )
@@ -18,3 +19,10 @@ scale = Vector2( 8, 0.1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
 position = Vector2( 0, -78 )
 shape = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 29.0
+margin_top = -152.0
+margin_right = 157.0
+margin_bottom = -24.0
+texture = ExtResource( 3 )
