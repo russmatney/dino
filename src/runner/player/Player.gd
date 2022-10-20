@@ -87,9 +87,16 @@ func _physics_process(_delta):
 func update_hud():
 	print("------------")
 	print("player stats: coins: ", coins)
+	print("leaves: ", leaves)
 
 var coins = 0
 
 func add_coin():
 	coins += 1
+	update_hud()
+
+var leaves = []
+
+func caught_leaf(leaf):
+	leaves.append(leaf)
 	update_hud()

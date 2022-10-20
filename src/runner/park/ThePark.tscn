@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/runner/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/runner/park/ParkRun.tscn" type="PackedScene" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://src/runner/Runner.gd" type="Script" id=5]
 [ext_resource path="res://src/runner/park/ParkGap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/runner/park/ParkWin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/runner/park/ParkLeaf.tscn" type="PackedScene" id=8]
 
 [node name="ThePark" type="Node2D"]
 script = ExtResource( 5 )
-initial_room_options = [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ) ]
+initial_room_options = [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 8 ) ]
 final_room = ExtResource( 7 )
 gap_room_options = [ ExtResource( 6 ) ]
 

@@ -15,7 +15,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-frame = 4
+frame = 1
 playing = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
