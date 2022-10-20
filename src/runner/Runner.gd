@@ -9,7 +9,7 @@ export(Array, PackedScene) var gap_room_options
 var room_queue = []
 var current_rooms = []
 var total_room_width = 0
-var active_room_count = 3
+var active_room_count = 5
 
 onready var rooms_node = $Rooms
 
@@ -82,11 +82,11 @@ func prep_room():
 	var next_room = get_next_room_instance()
 
 	# could abstract this prep out, it's runner specific
-	var next_w = next_room.room_width()
-	var offset_x = total_room_width + next_w / 2
+	var offset_x = total_room_width + next_room.x_offset()
 	next_room.position.x = offset_x
 
 	# update width so we can keep appending rooms
+	var next_w = next_room.room_width()
 	total_room_width += next_w
 
 	Util.ensure_connection(next_room, "player_entered", self, "room_entered", [next_room])

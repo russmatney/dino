@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 211, 134 )
 
-[node name="ParkRun" type="Node2D"]
+[node name="ParkCoin" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Ground" parent="." instance=ExtResource( 1 )]
