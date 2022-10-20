@@ -1,15 +1,15 @@
 extends KinematicBody2D
 
-export(int) var max_speed = 200
+export(int) var max_speed = 300
 export(int) var min_speed = 20
-export(int) var x_accel = 400
+export(int) var x_accel = 50
 export(int) var stopping_decel = 5
-export(int) var max_air_speed = 300
-export(int) var min_air_speed = 100
+export(int) var max_air_speed = 200
+export(int) var min_air_speed = 50
 export(int) var air_resistance = 5
-export(int) var gravity = 80
+export(int) var gravity = 50
 
-var jump_velocity = Vector2(0, -1000)
+var jump_velocity = Vector2(0, -700)
 
 var velocity = Vector2.ZERO
 
