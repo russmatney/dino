@@ -10,6 +10,11 @@ Also it gives us a cast of characters to pull from.
 These are intended to speed up prototyping and game-jam workflows, but should
 also be useful in longer-running projects.
 
+* rooms runner
+In Godot, open the ~ThePark~ scene: ~res://src/runner/park/ThePark.tscn~
+
+Then Play Scene should run the latest version of the leaf catching runner game.
+
 * addons
 Note that cross-dependencies between these addons is not yet solved - i.e. if
 you add 'navi', you will have trouble unless you also add 'core', 'trolley', and
