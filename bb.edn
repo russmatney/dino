@@ -20,15 +20,30 @@
   test-match-script (let [arg (some-> *command-line-args* first)]
                       (tasks/shell-and-log (str gut " -gexit -gselect=" arg)))
 
+  ;; TODO create a watch-all (take a list of dirs)
   watch          tasks/watch
   watch-reptile  (tasks/watch "addons/reptile/assets")
   watch-core     (tasks/watch "addons/core/assets")
+  ;; TODO create a pixels-all (take a list of dirs)
   pixels         tasks/pixels
   pixels-reptile (tasks/pixels "addons/reptile/assets")
   pixels-core    (tasks/pixels "addons/core/assets")
-  build-web      tasks/build-web
-  deploy-web     (tasks/deploy-web "s3://danger.russmatney.com")
-  zip            tasks/zip
+
+  build-web  tasks/build-web
+  deploy-web (tasks/deploy-web "s3://danger.russmatney.com")
+  zip        tasks/zip
+
+  serve-built (let [arg (some-> *command-line-args* first)
+                    arg (or arg "dino")]
+                ;; http-server installable via bbin
+                (tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))
+
+  butler-push (let [arg          (some-> *command-line-args* first)
+                    arg          (or arg "dino")
+                    dir          (str "dist/" arg)
+                    itch-project (str "russmatney/" arg ":html5")]
+                ;; http-server installable via bbin
+                (tasks/shell-and-log (str "butler push --if-changed " dir " " itch-project)))
 
   install-script-templates
   (tasks/install-script-templates

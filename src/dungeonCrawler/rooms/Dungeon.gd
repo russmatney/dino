@@ -8,7 +8,7 @@ var player
 # warnings
 
 func _get_configuration_warning():
-	for n in ["%PlayerStart"]:
+	for n in ["PlayerStart"]:
 		var node = find_node(n)
 		if not node:
 			return "Missing expected child named '" + n + "'"

@@ -459,8 +459,10 @@ _global_script_class_icons={
 [application]
 
 config/name="Dino"
-run/main_scene="res://src/runner/Runner.tscn"
+run/main_scene="res://src/menus/MainMenu.tscn"
 config/icon="res://assets/icon.png"
+run/main_scene.runner="res://src/runner/park/ThePark.tscn"
+run/main_scene.dungeon-crawler="res://src/dungeonCrawler/rooms/OneGeon.tscn"
 
 [autoload]
 
@@ -540,5 +542,6 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 environment/default_clear_color=Color( 0.76, 0.582667, 0.228, 1 )
 environment/default_environment="res://default_env.tres"
