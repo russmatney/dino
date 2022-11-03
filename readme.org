@@ -1,21 +1,40 @@
 #+title: dino
 
-My library for Godot addons that haven't earned their wings just yet,
-and a godot game that tries to use them all.
+A monorepo with Godot games and addons.
+Play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
 
-'Dino' sort of comes from 'demo', but it provides a punch of personality.
+'Dino' sort of comes from 'demo', but with some personality and a cast of characters to pull from.
 
-Also it gives us a cast of characters to pull from.
+Working in a monorepo decreases overhead for creating and sharing new ideas and
+tools across games. This repo is a sandbox for experimenting with new game and
+addon ideas.
 
-These are intended to speed up prototyping and game-jam workflows, but should
-also be useful in longer-running projects.
+* Games
+** Runner
+Play the latest version here: [[https://russmatney.itch.io/runner][russmatney.itch.io/runner]]
 
-* rooms runner
-In Godot, open the ~ThePark~ scene: ~res://src/runner/park/ThePark.tscn~
+A catch-the-leaf inspired running game.
 
-Then Play Scene should run the latest version of the leaf catching runner game.
+The code is all in ~src/runner/*~ - the ~ThePark~ scene is the original, but
+you should be able to toy with individual rooms in the ~src/runner/gyms~ as well.
 
-* addons
+The core of the logic is the Runner.gd script, which handles adding and removing
+rooms while the player moves across them until they are all complete.
+** Dungeon Crawler
+Play the latest version here: [[https://russmatney.itch.io/dungeon-crawler][russmatney.itch.io/dungeon-crawler]]
+
+Part of my classic-game-clones adventure, in which I'm creating basic prototypes
+modeled after classic genres and games.
+
+See ~src/dungeonCrawler/*~ for the code.
+
+This was a chance to implement keys and door logic, and a basic boss state
+machine. The map is one giant scene, and the tiles use auto-tiling, which should
+make it simple to doodle a few more levels.
+* Addons
+These addons are intended to speed up prototyping and game-jam workflows, but should
+also be useful in larger, long-running projects.
+
 Note that cross-dependencies between these addons is not yet solved - i.e. if
 you add 'navi', you will have trouble unless you also add 'core', 'trolley', and
 'dj', b/c the 'navi' code expects to use fonts/autoloads from those addons. I
