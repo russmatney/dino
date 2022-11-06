@@ -86,8 +86,8 @@ custom_styles/panel = SubResource( 5 )
 
 [node name="InfoList" type="VBoxContainer" parent="InfoPanel"]
 unique_name_in_owner = true
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [connection signal="area_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_entered"]
 [connection signal="area_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_exited"]
