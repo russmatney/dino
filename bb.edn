@@ -29,8 +29,8 @@
   pixels-reptile (tasks/pixels "addons/reptile/assets")
   pixels-core    (tasks/pixels "addons/core/assets")
 
-  ;; TODO support building new web exports
-  build-web  tasks/build-web
+  build-web  (tasks/build-web (some-> *command-line-args* first))
+  ;; TODO rename/rework in the context of butler
   deploy-web (tasks/deploy-web "s3://danger.russmatney.com")
   zip        tasks/zip
 

@@ -325,8 +325,13 @@
 
 (def build-dir "dist")
 
-(defn build-web []
-  (shell-and-log (str "godot --no-window --export HTML5 " build-dir "/index.html")))
+(defn build-web
+  ([] (build-web nil))
+  ([export-name]
+   (let [export-name (or export-name "dino")
+         build-dir   (str "dist/" export-name)]
+     (println "build-web" export-name build-dir)
+     (shell-and-log (str "godot --no-window --export " export-name "-web " build-dir "/index.html")))))
 
 (defn zip []
   (shell-and-log (str "zip " build-dir  ".zip " build-dir "/*")))
