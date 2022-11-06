@@ -80,6 +80,8 @@ func prep_room():
 		return
 
 	var next_room = get_next_room_instance()
+	if not next_room:
+		print("[WARN] no next_room!")
 
 	# could abstract this prep out, it's runner specific
 	var offset_x = total_room_width + next_room.x_offset()
