@@ -477,8 +477,10 @@ __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 
 window/size/width=512
 window/size/height=300
-window/stretch/mode="2d"
-window/stretch/aspect="keep"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+window/size/height.dino=600
+window/size/width.dino=1024
 
 [editor_plugins]
 
