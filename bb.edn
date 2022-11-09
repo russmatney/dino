@@ -25,7 +25,10 @@
   watch-reptile  (tasks/watch "addons/reptile/assets")
   watch-core     (tasks/watch "addons/core/assets")
   ;; TODO create a pixels-all (take a list of dirs)
-  pixels         tasks/pixels
+  pixels         (let [dir (some-> *command-line-args* first)]
+                   (if dir
+                     (tasks/pixels dir)
+                     (tasks/pixels)))
   pixels-reptile (tasks/pixels "addons/reptile/assets")
   pixels-core    (tasks/pixels "addons/core/assets")
 
