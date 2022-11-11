@@ -2,6 +2,6 @@
 
 [ext_resource path="res://src/cameras/DinoCamera2D.gd" type="Script" id=1]
 
-[node name="DinoCamera2D" type="Camera2D"]
+[node name="DinoCamera2D" type="Camera2D" groups=["camera"]]
 current = true
 script = ExtResource( 1 )

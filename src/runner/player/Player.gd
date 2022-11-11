@@ -15,12 +15,27 @@ var velocity = Vector2.ZERO
 
 onready var anim = $AnimatedSprite
 
+export(PackedScene) var fallback_camera = preload("res://src/cameras/DinoCamera2D.tscn")
+
 #######################################
 # ready
 
 var initial_pos: Vector2
 func _ready():
 	initial_pos = global_position
+
+	call_deferred("ensure_camera")
+
+func ensure_camera():
+	# this might need to be deferred until the player and its children
+	# (and siblings?) have been created
+	var cam = get_tree().get_nodes_in_group("camera")
+	if not cam:
+		print("[CAMERA] cam not found, adding one to player")
+		# if no camera, add one
+		cam = fallback_camera.instance()
+		cam.current = true
+		call_deferred("add_child", cam)
 
 #######################################################################33
 # input
