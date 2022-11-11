@@ -65,6 +65,7 @@ scale = Vector2( 0.4, 0.4 )
 color = 0
 
 [node name="RoomBox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
 position = Vector2( 0, -80 )

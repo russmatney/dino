@@ -11,6 +11,12 @@ extents = Vector2( 384, 124.5 )
 position = Vector2( 0, -2 )
 script = ExtResource( 3 )
 
+[node name="RoomBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
+position = Vector2( -248, -6 )
+shape = SubResource( 1 )
+
 [node name="GroundLeaves" parent="." instance=ExtResource( 1 )]
 position = Vector2( -440, 91 )
 
@@ -82,9 +88,3 @@ color = 4
 position = Vector2( -159, 17 )
 scale = Vector2( 0.4, 0.4 )
 color = 4
-
-[node name="RoomBox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
-position = Vector2( -248, -6 )
-shape = SubResource( 1 )

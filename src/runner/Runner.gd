@@ -8,7 +8,7 @@ export(Array, PackedScene) var gap_room_options
 
 var room_queue = []
 var current_rooms = []
-var total_room_width = 0
+var accumulated_room_width = 0
 var active_room_count = 5
 
 onready var rooms_node = $Rooms
@@ -36,11 +36,12 @@ func clear_current_rooms():
 		to_del.append(r)
 	for r in to_del:
 		current_rooms.erase(r) # is this even necssary after they are queue_freed? probably?
-	total_room_width = 0
+	accumulated_room_width = 0
 
 var no_more_rooms = false
 
-func get_next_room_instance():
+# TODO unit test for this function
+func choose_next_room_instance():
 	# no rooms yet? start in a gap room
 	if not current_rooms:
 		var room_i = randi() % gap_room_options.size()
@@ -75,21 +76,23 @@ func get_next_room_instance():
 	no_more_rooms = true
 	return final_room.instance()
 
+# prepare room to be added to the scene
 func prep_room():
 	if no_more_rooms:
 		return
 
-	var next_room = get_next_room_instance()
+	var next_room = choose_next_room_instance()
 	if not next_room:
 		print("[WARN] no next_room!")
 
 	# could abstract this prep out, it's runner specific
-	var offset_x = total_room_width + next_room.x_offset()
-	next_room.position.x = offset_x
+	var offset_x = accumulated_room_width + next_room.x_offset()
+	# TODO maybe we don't always want this??
+	next_room.position.x = abs(offset_x)
 
 	# update width so we can keep appending rooms
 	var next_w = next_room.room_width()
-	total_room_width += next_w
+	accumulated_room_width += next_w
 
 	Util.ensure_connection(next_room, "player_entered", self, "room_entered", [next_room])
 	Util.ensure_connection(next_room, "player_exited", self, "room_exited", [next_room])
@@ -108,6 +111,7 @@ func add_rooms_to_scene(count: int):
 			if not room.get_parent():
 				rooms_node.call_deferred("add_child", room, true)
 
+# TODO add unit tests
 func room_entered(_player, room):
 	print("\n\n--------------------------------------------------------------------")
 	print("entered: ", room)
@@ -119,6 +123,7 @@ func room_entered(_player, room):
 	if rooms_to_make:
 		add_rooms_to_scene(rooms_to_make)
 
+# TODO add unit tests
 func room_exited(_player, room):
 	var exited_room_index = current_rooms.find(room)
 

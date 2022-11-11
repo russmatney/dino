@@ -17,8 +17,8 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "run"
-frame = 3
 playing = true
 flip_h = true
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 3 )]
+visible = false

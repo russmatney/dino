@@ -53,15 +53,15 @@ func get_child_in_group(node: Node, group_name: String) -> Array:
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
 func set_collisions_enabled(node, enabled):
-    if enabled:
-        if node.has_meta("col_mask"):
-            node.collision_mask = node.get_meta("col_mask")
-            node.collision_layer = node.get_meta("col_layer")
-    else:
-            node.set_meta("col_mask", node.collision_mask)
-            node.set_meta("col_layer", node.collision_layer)
-            node.collision_mask = 0
-            node.collision_layer = 0
+	if enabled:
+		if node.has_meta("col_mask"):
+			node.collision_mask = node.get_meta("col_mask")
+			node.collision_layer = node.get_meta("col_layer")
+	else:
+			node.set_meta("col_mask", node.collision_mask)
+			node.set_meta("col_layer", node.collision_layer)
+			node.collision_mask = 0
+			node.collision_layer = 0
 
 func ensure_connection(obj, sig, target, method, args=[]):
 	var err
