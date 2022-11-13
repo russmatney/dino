@@ -22,7 +22,6 @@ onready var block_scene = preload("res://src/runner/gravity/Block.tscn")
 
 func spawn_blocks():
 	var xs = Util.get_children_in_group(self, "block_spawn")
-	print("found block spawns", xs)
 
 	if not block_scene:
 		return

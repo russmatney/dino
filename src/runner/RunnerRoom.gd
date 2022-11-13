@@ -5,13 +5,24 @@ class_name RunnerRoom
 var expected_child_nodes = ["RoomBox"]
 
 func _get_configuration_warning():
+	var has_roombox = false
 	for n in ["RoomBox"]:
 		var node = find_node(n)
-		if not node:
-			return "Missing expected child named '" + n + "'"
-		if node.name == "RoomBox":
-			if node.position.x != 0:
-				return "RoomBox Area2d should be at position 0,0"
+		# if not node:
+		# 	return "Missing expected child named '" + n + "'"
+		if node:
+			has_roombox = true
+		# if node.name == "RoomBox":
+		# 	if node.position.x != 0:
+		# 		return "RoomBox Area2d should be at position 0,0"
+
+	if not has_roombox:
+		var enter = find_node("EnterBox")
+		var exit = find_node("ExitBox")
+		if not enter:
+			return "Expected RoomBox or EnterBox"
+		if not exit:
+			return "Found EnterBox, expected ExitBox"
 	return ""
 
 ###########################################################
@@ -63,6 +74,7 @@ func x_offset():
 	print("[WARN] x_offset not supported for room!", self)
 
 func x_offset_roombox(coll_shape):
+	# note requires roombox area2d to have 0, 0 position :/
 	if coll_shape.position.x > 0:
 		return abs((room_width() / 2) - coll_shape.position.x * coll_shape.scale.x)
 	elif coll_shape.position.x < 0:
@@ -71,8 +83,10 @@ func x_offset_roombox(coll_shape):
 		return room_width() / 2
 
 func x_offset_enterbox(coll_shape):
-	# TODO maybe need to incorporate parent (area2d) position + scale as well
-	return (coll_shape.position.x + coll_shape.shape.extents.x) * coll_shape.scale.x
+	var coll_x_offset = (coll_shape.position.x - coll_shape.shape.extents.x) * coll_shape.scale.x
+	var p = coll_shape.get_parent()
+	var parent_x_offset = p.position.x * p.scale.x
+	return coll_x_offset + parent_x_offset
 
 ###########################################################
 ## Runner Room is_finished()
@@ -93,6 +107,15 @@ func _ready():
 
 	if Engine.editor_hint:
 		request_ready()
+
+	call_deferred("print_debug")
+
+func print_debug():
+	print("---------------------------------------------")
+	print(self.name, " debug report")
+	print("room_width(): ", room_width())
+	print("x_offset(): ", x_offset())
+	print("---------------------------------------------")
 
 func setup():
 	roombox = get_node_or_null("RoomBox")

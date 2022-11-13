@@ -16,9 +16,12 @@ script = ExtResource( 1 )
 tile_data = PoolIntArray( 0, 0, 196609, 1, 0, 196610, 2, 0, 2, 3, 0, 196610, 4, 0, 196610, 5, 0, 196610, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 196610, 10, 0, 196610, 11, 0, 196610, 12, 0, 196610, 13, 0, 2, 14, 0, 196610, 15, 0, 196610, 16, 0, 196610, 17, 0, 196610, 18, 0, 196610, 19, 0, 196610, 20, 0, 196610, 21, 0, 196610, 22, 0, 196611, 65538, 0, 131072, 65549, 0, 131072 )
 
 [node name="RoomBox" type="Area2D" parent="."]
+position = Vector2( 92, -65 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
-position = Vector2( 92.5, -63.5 )
 shape = SubResource( 1 )
 
 [node name="ChangedGravity" type="Area2D" parent="."]
