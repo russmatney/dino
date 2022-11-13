@@ -1,7 +1,7 @@
 tool
 extends RunnerRoom
 
-var max_runs = 3
+var max_runs = 6
 var runs = 0
 
 func _ready():
@@ -15,12 +15,19 @@ func _ready():
 
 func setup():
 	.setup()
+	ensure_blocks()
 
-	spawn_blocks()
+func cleanup():
+	.cleanup()
+
+	# pause, then remove blocks
+	yield(get_tree().create_timer(0.4), "timeout")
+	for block in Util.get_children_in_group(self, "block"):
+		block.queue_free()
 
 onready var block_scene = preload("res://src/runner/gravity/Block.tscn")
 
-func spawn_blocks():
+func ensure_blocks():
 	var existing_blocks = Util.get_children_in_group(self, "block")
 	if existing_blocks:
 		return
@@ -36,7 +43,7 @@ func spawn_blocks():
 		call_deferred("add_child", new_block)
 
 func _on_player_entered(_player):
-	spawn_blocks()
+	ensure_blocks()
 
 	runs = runs + 1
 
@@ -45,5 +52,4 @@ func is_finished():
 
 
 func _on_player_exited(_player):
-	for block in Util.get_children_in_group(self, "block"):
-		block.queue_free()
+	pass

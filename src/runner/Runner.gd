@@ -88,7 +88,10 @@ func prep_room():
 	if not next_room.has_method("x_offset"):
 		print("[WARN] next_room has no x_offset?: ", next_room)
 
+	##############################
+	# invoke RunnerRoom.x_offset()
 	var next_offset = next_room.x_offset()
+
 	# don't try `.is_null()` here! floats can't handle it
 	if next_offset == null:
 		print("[WARN] nil next_offset calculated for room: ", next_room)
@@ -96,15 +99,19 @@ func prep_room():
 
 	# could abstract this prep out, it's runner specific
 	# offset is the distance from the room's origin to the left side of the enterBox/roomBox
-	var offset_x = accumulated_room_width - next_room.x_offset()
+	var offset_x = accumulated_room_width - next_offset
 	next_room.position.x = offset_x
 
-	# update width so we can keep appending rooms
-	var next_w = next_room.room_width()
-	accumulated_room_width += next_w
+	##############################
+	# invoke RunnerRoom.room_width()
+	accumulated_room_width += next_room.room_width()
 
 	Util.ensure_connection(next_room, "player_entered", self, "room_entered", [next_room])
 	Util.ensure_connection(next_room, "player_exited", self, "room_exited", [next_room])
+
+	##############################
+	# invoke RunnerRoom.setup()
+	next_room.setup()
 
 	# update rooms array
 	current_rooms.append(next_room)
@@ -134,6 +141,12 @@ func room_entered(_player, room):
 
 # TODO add unit tests
 func room_exited(_player, room):
+
+	# TODO maybe there's a later place to fire this?
+	# it happens too quickly this way, the blocks
+	# disappear on-screen.
+	room.cleanup()
+
 	var exited_room_index = current_rooms.find(room)
 
 	# check just-exited room for completion

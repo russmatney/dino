@@ -90,6 +90,7 @@ func calc_shape_offset(coll_shape, left_side = true):
 func is_finished():
 	return true
 
+
 ###########################################################
 ## impl
 
@@ -112,6 +113,7 @@ func print_debug():
 	print("x_offset(): ", x_offset())
 	print("---------------------------------------------")
 
+# called in _ready() AND when unfinished rooms are re-added to the view
 func setup():
 	roombox = get_node_or_null("RoomBox")
 	enterbox = get_node_or_null("EnterBox")
@@ -125,6 +127,9 @@ func setup():
 		Util.ensure_connection(enterbox, "body_entered", self, "_on_body_entered")
 	if exitbox:
 		Util.ensure_connection(exitbox, "body_exited", self, "_on_body_exited")
+
+func cleanup():
+	pass
 
 var player
 
