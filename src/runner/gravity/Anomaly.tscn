@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/runner/gravity/Anomaly.gd" type="Script" id=1]
 [ext_resource path="res://src/runner/gravity/GravityTiles.tscn" type="PackedScene" id=2]
@@ -7,7 +7,9 @@
 extents = Vector2( 91.5, 64.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 33, 16 )
+extents = Vector2( 49, 48 )
+
+[sub_resource type="RectangleShape2D" id=3]
 
 [node name="Anomaly" type="Node2D"]
 script = ExtResource( 1 )
@@ -23,10 +25,51 @@ shape = SubResource( 1 )
 
 [node name="ChangedGravity" type="Area2D" parent="."]
 modulate = Color( 0.956863, 0.172549, 0.172549, 1 )
-space_override = 3
-gravity_point = true
-gravity_vec = Vector2( -0.5, -10 )
+space_override = 1
+gravity_vec = Vector2( 0, -1.1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChangedGravity"]
-position = Vector2( 79, -16 )
+position = Vector2( 95, -48 )
 shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="ChangedGravity"]
+margin_left = 48.0
+margin_top = -96.0
+margin_right = 144.0
+color = Color( 1, 1, 1, 0.247059 )
+
+[node name="Block" type="RigidBody2D" parent="."]
+position = Vector2( 0, 16 )
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Block"]
+margin_left = 64.0
+margin_top = -56.0
+margin_right = 80.0
+margin_bottom = -40.0
+color = Color( 0.839216, 0.737255, 0.258824, 0.788235 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block"]
+position = Vector2( 72, -48 )
+shape = SubResource( 3 )
+
+[node name="Block2" type="RigidBody2D" parent="."]
+position = Vector2( 40, 24 )
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Block2"]
+margin_left = 64.0
+margin_top = -56.0
+margin_right = 80.0
+margin_bottom = -40.0
+color = Color( 0.839216, 0.737255, 0.258824, 0.788235 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
+position = Vector2( 72, -48 )
+shape = SubResource( 3 )
