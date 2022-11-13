@@ -20,11 +20,11 @@ func _get_configuration_warning():
 # returns the width of the room. uses the RoomBox's collision shape
 func room_width():
 	# we have use get_node directly here b/c this also runs at editor-time
-	var roombox_coll_shape = get_node("RoomBox/CollisionShape2D")
+	var roombox_coll_shape = get_node_or_null("RoomBox/CollisionShape2D")
 	if roombox_coll_shape:
 		return room_width_roombox(roombox_coll_shape)
 
-	var enterbox_shape = get_node("EnterBox/CollisionShape2D")
+	var enterbox_shape = get_node_or_null("EnterBox/CollisionShape2D")
 	if enterbox_shape:
 		return room_width_enterbox()
 
@@ -51,12 +51,12 @@ func room_width_enterbox():
 # calculated using the width and the roombox's position
 func x_offset():
 	# may also want to account for position/scale in the roombox area2d
-	var roombox_coll_shape = get_node("RoomBox/CollisionShape2D")
+	var roombox_coll_shape = get_node_or_null("RoomBox/CollisionShape2D")
 
 	if roombox_coll_shape:
 		return x_offset_roombox(roombox_coll_shape)
 
-	var enterbox_shape = get_node("EnterBox/CollisionShape2D")
+	var enterbox_shape = get_node_or_null("EnterBox/CollisionShape2D")
 	if enterbox_shape:
 		return x_offset_enterbox(enterbox_shape)
 
