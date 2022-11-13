@@ -42,7 +42,7 @@ func get_first_child_in_group(node: Node, group_name: String) -> Node:
 			return c
 	return null
 
-func get_child_in_group(node: Node, group_name: String) -> Array:
+func get_children_in_group(node: Node, group_name: String) -> Array:
 	# only checks first children
 	var in_group = []
 	for c in node.get_children():
