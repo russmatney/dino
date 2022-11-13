@@ -24,8 +24,8 @@ func room_width():
 	if roombox_coll_shape:
 		return room_width_roombox(roombox_coll_shape)
 
-	var enterbox = get_node("EnterBox/CollisionShape2D")
-	if enterbox:
+	var enterbox_shape = get_node("EnterBox/CollisionShape2D")
+	if enterbox_shape:
 		return room_width_enterbox()
 
 	print("[WARN] room_width not supported for room!", self)
@@ -56,9 +56,9 @@ func x_offset():
 	if roombox_coll_shape:
 		return x_offset_roombox(roombox_coll_shape)
 
-	var enterbox = get_node("EnterBox/CollisionShape2D")
-	if enterbox:
-		return x_offset_enterbox(enterbox)
+	var enterbox_shape = get_node("EnterBox/CollisionShape2D")
+	if enterbox_shape:
+		return x_offset_enterbox(enterbox_shape)
 
 	print("[WARN] x_offset not supported for room!", self)
 

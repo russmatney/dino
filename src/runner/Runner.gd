@@ -85,6 +85,12 @@ func prep_room():
 	if not next_room:
 		print("[WARN] no next_room!")
 
+	var next_offset = next_room.x_offset()
+	# don't try `.is_null()` here! floats can't handle it
+	if next_offset == null:
+		print("[WARN] nil next_offset calculated for room: ", next_room)
+		next_offset = 0
+
 	# could abstract this prep out, it's runner specific
 	var offset_x = accumulated_room_width + next_room.x_offset()
 	# TODO maybe we don't always want this??
