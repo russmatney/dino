@@ -3,7 +3,7 @@ extends RunnerRoom
 
 
 func is_finished():
-	var coins = Util.get_child_in_group(self, "coin")
+	var coins = Util.get_children_in_group(self, "coin")
 	if coins:
 		return false
 	else:

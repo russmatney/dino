@@ -89,9 +89,15 @@ var enterbox
 var exitbox
 
 func _ready():
-	roombox = get_node("RoomBox")
-	enterbox = get_node("EnterBox")
-	exitbox = get_node("ExitBox")
+	setup()
+
+	if Engine.editor_hint:
+		request_ready()
+
+func setup():
+	roombox = get_node_or_null("RoomBox")
+	enterbox = get_node_or_null("EnterBox")
+	exitbox = get_node_or_null("ExitBox")
 
 	if roombox:
 		Util.ensure_connection(roombox, "body_entered", self, "_on_body_entered")
@@ -101,9 +107,6 @@ func _ready():
 		Util.ensure_connection(enterbox, "body_entered", self, "_on_body_entered")
 	if exitbox:
 		Util.ensure_connection(exitbox, "body_exited", self, "_on_body_exited")
-
-	if Engine.editor_hint:
-		request_ready()
 
 var player
 

@@ -85,6 +85,9 @@ func prep_room():
 	if not next_room:
 		print("[WARN] no next_room!")
 
+	if not next_room.has_method("x_offset"):
+		print("[WARN] next_room has no x_offset?: ", next_room)
+
 	var next_offset = next_room.x_offset()
 	# don't try `.is_null()` here! floats can't handle it
 	if next_offset == null:

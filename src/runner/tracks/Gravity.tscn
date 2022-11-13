@@ -8,7 +8,7 @@
 
 [node name="Gravity" type="Node2D"]
 script = ExtResource( 1 )
-initial_room_options = [ ExtResource( 2 ) ]
+initial_room_options = [ ExtResource( 2 ), ExtResource( 3 ) ]
 final_room = ExtResource( 5 )
 gap_room_options = [ ExtResource( 3 ) ]
 
