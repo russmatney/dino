@@ -4,7 +4,7 @@
 [ext_resource path="res://src/runner/gravity/GravityTiles.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 91.5, 64.5 )
+extents = Vector2( 91.75, 63.75 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 49, 48 )
@@ -22,6 +22,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
+position = Vector2( -0.25, 0.75 )
 shape = SubResource( 1 )
 
 [node name="ChangedGravity" type="Area2D" parent="."]

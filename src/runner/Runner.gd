@@ -95,9 +95,9 @@ func prep_room():
 		next_offset = 0
 
 	# could abstract this prep out, it's runner specific
-	var offset_x = accumulated_room_width + next_room.x_offset()
-	# TODO maybe we don't always want this??
-	next_room.position.x = abs(offset_x)
+	# offset is the distance from the room's origin to the left side of the enterBox/roomBox
+	var offset_x = accumulated_room_width - next_room.x_offset()
+	next_room.position.x = offset_x
 
 	# update width so we can keep appending rooms
 	var next_w = next_room.room_width()

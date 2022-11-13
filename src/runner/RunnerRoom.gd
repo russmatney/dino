@@ -8,13 +8,8 @@ func _get_configuration_warning():
 	var has_roombox = false
 	for n in ["RoomBox"]:
 		var node = find_node(n)
-		# if not node:
-		# 	return "Missing expected child named '" + n + "'"
 		if node:
 			has_roombox = true
-		# if node.name == "RoomBox":
-		# 	if node.position.x != 0:
-		# 		return "RoomBox Area2d should be at position 0,0"
 
 	if not has_roombox:
 		var enter = find_node("EnterBox")
@@ -46,14 +41,13 @@ func room_width_roombox(coll_shape):
 	return shape.extents.x * 2 * coll_shape.scale.x
 
 func room_width_enterbox():
-	# TODO maybe need to incorporate parent (area2d) position + scale as well
 	var enter_coll_shape = get_node("EnterBox/CollisionShape2D")
-	var left_x_offset = abs((enter_coll_shape.position.x + enter_coll_shape.shape.extents.x) * enter_coll_shape.scale.x)
+	var left_x_offset = calc_shape_offset(enter_coll_shape)
 
 	var exit_coll_shape = get_node("ExitBox/CollisionShape2D")
-	var right_x_offset = abs((exit_coll_shape.position.x + exit_coll_shape.shape.extents.x) * enter_coll_shape.scale.x)
+	var right_x_offset = calc_shape_offset(exit_coll_shape, false)
 
-	return left_x_offset + right_x_offset
+	return right_x_offset - left_x_offset
 
 ###########################################################
 ## Runner Room x_offset
@@ -74,16 +68,17 @@ func x_offset():
 	print("[WARN] x_offset not supported for room!", self)
 
 func x_offset_roombox(coll_shape):
-	# note requires roombox area2d to have 0, 0 position :/
-	if coll_shape.position.x > 0:
-		return abs((room_width() / 2) - coll_shape.position.x * coll_shape.scale.x)
-	elif coll_shape.position.x < 0:
-		return (room_width() / 2) + abs(coll_shape.position.x * coll_shape.scale.x)
-	else:
-		return room_width() / 2
+	return calc_shape_offset(coll_shape)
 
 func x_offset_enterbox(coll_shape):
-	var coll_x_offset = (coll_shape.position.x - coll_shape.shape.extents.x) * coll_shape.scale.x
+	return calc_shape_offset(coll_shape)
+
+func calc_shape_offset(coll_shape, left_side = true):
+	var coll_x_offset
+	if left_side:
+		coll_x_offset = (coll_shape.position.x - coll_shape.shape.extents.x) * coll_shape.scale.x
+	else:
+		coll_x_offset = (coll_shape.position.x + coll_shape.shape.extents.x) * coll_shape.scale.x
 	var p = coll_shape.get_parent()
 	var parent_x_offset = p.position.x * p.scale.x
 	return coll_x_offset + parent_x_offset

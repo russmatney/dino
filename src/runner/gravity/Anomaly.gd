@@ -21,6 +21,10 @@ func setup():
 onready var block_scene = preload("res://src/runner/gravity/Block.tscn")
 
 func spawn_blocks():
+	var existing_blocks = Util.get_children_in_group(self, "block")
+	if existing_blocks:
+		return
+
 	var xs = Util.get_children_in_group(self, "block_spawn")
 
 	if not block_scene:

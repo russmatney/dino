@@ -26,6 +26,9 @@ shape = SubResource( 1 )
 
 [node name="ExitBox" type="Area2D" parent="."]
 position = Vector2( 248, -32 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitBox"]
 shape = SubResource( 2 )
