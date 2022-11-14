@@ -15,41 +15,23 @@ func _ready():
 
 func setup():
 	.setup()
-	ensure_blocks()
+	Blocks.ensure_blocks(self)
 
 func cleanup():
 	.cleanup()
 
 	# pause, then remove blocks
 	yield(get_tree().create_timer(0.4), "timeout")
-	for block in Util.get_children_in_group(self, "block"):
-		block.queue_free()
 
-onready var block_scene = preload("res://src/runner/gravity/Block.tscn")
-
-func ensure_blocks():
-	var existing_blocks = Util.get_children_in_group(self, "block")
-	if existing_blocks:
-		return
-
-	var xs = Util.get_children_in_group(self, "block_spawn")
-
-	if not block_scene:
-		return
-
-	for x in xs:
-		var new_block = block_scene.instance()
-		new_block.position = x.position
-		call_deferred("add_child", new_block)
+	Blocks.cleanup_blocks(self)
 
 func _on_player_entered(_player):
-	ensure_blocks()
+	Blocks.ensure_blocks(self)
 
 	runs = runs + 1
 
 func is_finished():
 	return runs >= max_runs
-
 
 func _on_player_exited(_player):
 	pass

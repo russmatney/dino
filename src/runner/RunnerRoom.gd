@@ -104,7 +104,8 @@ func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
-	call_deferred("print_debug")
+	# useful when debugging room calcs
+	# call_deferred("print_debug")
 
 func print_debug():
 	print("---------------------------------------------")
@@ -131,6 +132,12 @@ func setup():
 func cleanup():
 	pass
 
+func restart_position():
+	if enterbox:
+		return enterbox.global_position
+	if roombox:
+		return roombox.global_position
+
 var player
 
 signal player_entered
@@ -139,9 +146,11 @@ signal player_exited
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
+		player.entered_room(self)
 		emit_signal("player_entered", player)
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
-		player = null
 		emit_signal("player_exited", player)
+		player.exited_room(self)
+		player = null

@@ -472,6 +472,7 @@ Util="*res://addons/core/Util.gd"
 DJ="*res://addons/dj/DJ.gd"
 Clawe="*res://src/clawe/Clawe.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
+Blocks="*res://src/runner/gravity/Blocks.gd"
 
 [display]
 

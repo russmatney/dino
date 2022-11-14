@@ -20,9 +20,9 @@ export(PackedScene) var fallback_camera = preload("res://src/cameras/DinoCamera2
 #######################################
 # ready
 
-var initial_pos: Vector2
+var restart_pos: Vector2
 func _ready():
-	initial_pos = global_position
+	restart_pos = global_position
 
 	call_deferred("ensure_camera")
 
@@ -59,8 +59,6 @@ func start_running():
 #######################################
 # process
 
-signal player_resetting
-
 func _process(_delta):
 	if is_on_floor() and abs(velocity.x) > 2:
 		anim.set_animation("run")
@@ -68,10 +66,15 @@ func _process(_delta):
 		anim.set_animation("idle") # TODO jump anim
 
 	# quick restart
-	if global_position.y > 1000:
-		position = initial_pos
-		velocity = Vector2.ZERO
-		emit_signal("player_resetting")
+	if global_position.y > 700:
+		restart()
+
+signal player_resetting
+
+func restart():
+	position = restart_pos
+	velocity = Vector2.ZERO
+	emit_signal("player_resetting")
 
 #######################################
 # physics_process
@@ -115,3 +118,20 @@ var leaves = []
 func caught_leaf(leaf_data):
 	leaves.append(leaf_data)
 	update_hud()
+
+###########################################
+# room api
+
+var current_rooms = []
+
+func entered_room(room):
+	current_rooms.append(room)
+	var pos = room.restart_position()
+	if pos:
+		restart_pos = pos
+
+func exited_room(room):
+	current_rooms.erase(room)
+	if not current_rooms:
+		# if we aren't in a room, restart me
+		restart()

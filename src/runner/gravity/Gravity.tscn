@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/runner/Runner.gd" type="Script" id=1]
+[ext_resource path="res://src/runner/gravity/rooms/KnockEm.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/runner/gravity/rooms/GravityGap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/runner/player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/runner/gravity/rooms/GravityWin.tscn" type="PackedScene" id=5]
+
+[node name="Gravity" type="Node2D"]
+script = ExtResource( 1 )
+initial_room_options = [ ExtResource( 2 ) ]
+final_room = ExtResource( 5 )
+gap_room_options = [ ExtResource( 3 ) ]
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 10, -19 )

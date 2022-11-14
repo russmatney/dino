@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 49, 48 )
+
+[node name="ChangedGravity" type="Area2D"]
+modulate = Color( 0.956863, 0.172549, 0.172549, 1 )
+space_override = 3
+gravity_point = true
+gravity = 1257.48
+linear_damp = 3.485
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -49.0
+margin_top = -48.0
+margin_right = 47.0
+margin_bottom = 48.0
+color = Color( 1, 1, 1, 0.247059 )

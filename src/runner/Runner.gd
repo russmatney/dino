@@ -129,8 +129,10 @@ func add_rooms_to_scene(count: int):
 
 # TODO add unit tests
 func room_entered(_player, room):
-	print("\n\n--------------------------------------------------------------------")
-	print("entered: ", room)
+	if not "Gap" in room.name:
+		print("\n\n--------------------------------------------------------------------")
+		print("entered: ", room)
+
 	var current_room_index = current_rooms.find(room)
 	var current_room_count = current_rooms.size()
 	var remaining_rooms = current_room_count - 1 - current_room_index
