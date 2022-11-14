@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+
+var destroy_blocks = false
+
+
 export(int) var max_speed = 300
 export(int) var min_speed = 20
 export(int) var x_accel = 50
