@@ -1,7 +1,7 @@
 tool
 extends RunnerRoom
 
-var max_runs = 1
+var max_runs = 3
 var runs = 0
 
 func _ready():
@@ -31,7 +31,14 @@ func _on_player_entered(_player):
 	print("[NOTIF] player entered KnockEm")
 
 func is_finished():
+	var blocks_remaining = Blocks.get_blocks(self)
+
+	if not blocks_remaining:
+		print("no more blocks? finished?")
+		# return true
+
 	return runs >= max_runs
 
 func _on_player_exited(_player):
+	print(max_runs - runs, " attempts remain")
 	pass
