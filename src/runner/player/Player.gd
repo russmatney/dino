@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 var destroy_blocks = false
+var won = false
 
 
 export(int) var max_speed = 300
@@ -136,6 +137,6 @@ func entered_room(room):
 
 func exited_room(room):
 	current_rooms.erase(room)
-	if not current_rooms:
+	if not current_rooms and not won:
 		# if we aren't in a room, restart me
 		restart()

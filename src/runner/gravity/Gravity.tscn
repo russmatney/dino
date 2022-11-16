@@ -14,7 +14,5 @@ initial_room_options = [ ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ) ]
 final_room = ExtResource( 5 )
 gap_room_options = [ ExtResource( 3 ) ]
 
-[node name="Rooms" type="Node" parent="."]
-
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 10, -19 )

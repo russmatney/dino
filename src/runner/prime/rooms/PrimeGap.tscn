@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/runner/prime/PrimeTileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/runner/EnterBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/runner/ExitBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/runner/RunnerRoom.gd" type="Script" id=4]
+
+[node name="PrimeGap" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="PrimeTileMap" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 0, 0, 8, 1, 0, 10, 2, 0, 10, 3, 0, 11, 65536, 0, 65544, 65537, 0, 131081, 65538, 0, 131081, 65539, 0, 131083, 131072, 0, 131076, 131073, 0, 196617, 131074, 0, 196617, 131075, 0, 131079, 196608, 0, 131072, 196611, 0, 131072 )
+
+[node name="EnterBox" parent="." instance=ExtResource( 2 )]
+position = Vector2( 8, -64 )
+
+[node name="ExitBox" parent="." instance=ExtResource( 3 )]
+position = Vector2( 24, -64 )
