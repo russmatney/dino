@@ -7,6 +7,7 @@
 [node name="Block" type="RigidBody2D" groups=["block"]]
 position = Vector2( 72, -64 )
 mass = 3.57
+contacts_reported = 8
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
@@ -19,7 +20,7 @@ margin_left = -8.0
 margin_top = -8.0
 margin_right = 8.0
 margin_bottom = 8.0
-color = Color( 0.839216, 0.737255, 0.258824, 0.788235 )
+color = Color( 0.2, 0.227451, 0.309804, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )

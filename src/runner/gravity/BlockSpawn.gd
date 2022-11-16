@@ -5,6 +5,8 @@ extends Position2D
 var expected_group_name = "block_spawners"
 # var expected_group_name = Blocks.block_spawners_group_name
 
+var color
+
 # TODO create WARREN autoload for config warning helpers
 # (and debug logging in general)
 # could support a global config warning/debug reading UI

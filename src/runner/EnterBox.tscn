@@ -4,6 +4,7 @@
 extents = Vector2( 8, 63.75 )
 
 [node name="EnterBox" type="Area2D"]
+modulate = Color( 0.6, 0.933333, 0.572549, 1 )
 __meta__ = {
 "_edit_group_": true
 }

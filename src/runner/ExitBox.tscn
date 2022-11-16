@@ -4,6 +4,7 @@
 extents = Vector2( 8, 63.75 )
 
 [node name="ExitBox" type="Area2D"]
+modulate = Color( 0.968627, 0.435294, 0.309804, 1 )
 __meta__ = {
 "_edit_group_": true
 }
