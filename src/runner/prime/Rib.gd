@@ -7,7 +7,7 @@ func _ready():
 	if players:
 		player = players[0]
 		print("rib found player ", player)
-		# Util.ensure_connection("")
 
-# func _physics_process(delta):
-# 	pass
+func _on_Rib_body_entered(body: Node):
+	if body.is_in_group("player") and body.has_method("hit"):
+		body.hit(self)

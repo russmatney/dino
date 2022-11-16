@@ -8,7 +8,9 @@ extents = Vector2( 5, 4 )
 
 [node name="Rib" type="RigidBody2D" groups=["ribs"]]
 gravity_scale = 0.0
-applied_force = Vector2( -1, 0 )
+contacts_reported = 8
+contact_monitor = true
+can_sleep = false
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,3 +20,5 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "walk"
+
+[connection signal="body_entered" from="." to="." method="_on_Rib_body_entered"]

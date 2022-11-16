@@ -8,7 +8,7 @@ var won = false
 export(int) var max_speed = 300
 export(int) var min_speed = 20
 export(int) var x_accel = 50
-export(int) var stopping_decel = 5
+export(int) var slowing_decel = 5
 export(int) var max_air_speed = 200
 export(int) var min_air_speed = 50
 export(int) var air_resistance = 5
@@ -54,12 +54,12 @@ func jump():
 		# we may need a delta-based jump
 		velocity += jump_velocity
 
-var stopping = false
+var slowing = false
 func stop_running():
-	stopping = true
+	slowing = true
 
 func start_running():
-	stopping = false
+	slowing = false
 
 #######################################
 # process
@@ -77,16 +77,21 @@ func _process(_delta):
 signal player_resetting
 
 func restart():
+	# TODO disable/reenable collision detection?
+	# or, work on a timer - first remove, then wait a bit, then restart
 	position = restart_pos
 	velocity = Vector2.ZERO
+	stop = false
 	emit_signal("player_resetting")
 
 #######################################
 # physics_process
 
 func _physics_process(_delta):
-	if stopping:
-		velocity.x -= stopping_decel
+	if stop:
+		velocity = Vector2.ZERO
+	elif slowing:
+		velocity.x -= slowing_decel
 		if velocity.x < min_speed:
 			velocity.x = 0
 	elif is_on_floor():
@@ -104,17 +109,25 @@ func _physics_process(_delta):
 	# move_and_slide factors in delta for us
 	velocity = move_and_slide(velocity, Vector2.UP)
 
-	for i in get_slide_count():
-		var coll = get_slide_collision(i)
-		if coll and coll.collider:
-			handle_collision(coll)
+	# for i in get_slide_count():
+	# 	var coll = get_slide_collision(i)
+	# 	if coll and coll.collider:
+	# 		var body = coll.collider
+	# 		if not body.name == "PrimeTileMap":
+	# 			print("body ", body)
+	# 			if body.is_in_group("ribs"):
+	# 				print("player hit ribs")
 
-func handle_collision(coll):
-	var body = coll.collider
-	if not body.name == "PrimeTileMap":
-		print("body ", body)
-		if body.is_in_group("ribs"):
-			print("player hit ribs")
+	# var collision = move_and_collide(velocity * delta)
+	# if collision:
+	# 	print(collision.collider)
+	# 	print(collision.normal)
+	# 	velocity = velocity.slide(collision.normal)
+	# 	var body = collision.collider
+	# 	if not body.name == "PrimeTileMap":
+	# 		print("body ", body)
+	# 		if body.is_in_group("ribs"):
+	# 			print("player hit ribs")
 
 #######################################
 # pickups
@@ -152,3 +165,14 @@ func exited_room(room):
 	if not current_rooms and not won:
 		# if we aren't in a room, restart me
 		restart()
+
+###########################################
+# enemy interactions
+
+var stop = false
+func hit(body):
+	print("player hit by: ", body)
+	velocity = Vector2.ZERO
+	stop = true
+	yield(get_tree().create_timer(1.0), "timeout")
+	restart()
