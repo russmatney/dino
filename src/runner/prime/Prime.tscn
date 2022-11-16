@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/runner/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/runner/prime/PrimeTileMap.tscn" type="PackedScene" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://src/runner/prime/rooms/PrimeWin.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/runner/prime/rooms/Fall.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/runner/prime/rooms/Climb.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/runner/prime/rooms/Dodge.tscn" type="PackedScene" id=8]
 
 [node name="Prime" type="Node2D"]
 script = ExtResource( 3 )
-initial_room_options = [ ExtResource( 6 ), ExtResource( 7 ) ]
+initial_room_options = [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
 final_room = ExtResource( 5 )
 gap_room_options = [ ExtResource( 4 ) ]
 

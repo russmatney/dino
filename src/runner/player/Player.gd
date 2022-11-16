@@ -104,6 +104,18 @@ func _physics_process(_delta):
 	# move_and_slide factors in delta for us
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+	for i in get_slide_count():
+		var coll = get_slide_collision(i)
+		if coll and coll.collider:
+			handle_collision(coll)
+
+func handle_collision(coll):
+	var body = coll.collider
+	if not body.name == "PrimeTileMap":
+		print("body ", body)
+		if body.is_in_group("ribs"):
+			print("player hit ribs")
+
 #######################################
 # pickups
 

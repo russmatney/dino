@@ -17,6 +17,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "run"
+frame = 2
 playing = true
 flip_h = true
 
