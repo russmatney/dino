@@ -4,17 +4,16 @@ extends Node2D
 export(Array, PackedScene) var initial_room_options = []
 var room_options = []
 export(PackedScene) var final_room
-export(Array, PackedScene) var gap_room_options
+export(Array, PackedScene) var gap_room_options = []
 
 var room_queue = []
 var current_rooms = []
 var accumulated_room_width = 0
 var active_room_count = 5
 
-onready var rooms_node = $Rooms
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
 	if not initial_room_options:
 		print("[WARN]: no room options!")
 
@@ -44,8 +43,9 @@ var no_more_rooms = false
 func choose_next_room_instance():
 	# no rooms yet? start in a gap room
 	if not current_rooms:
-		var room_i = randi() % gap_room_options.size()
-		return gap_room_options[room_i].instance()
+		if gap_room_options:
+			var room_i = randi() % gap_room_options.size()
+			return gap_room_options[room_i].instance()
 
 	# some rooms we haven't seen yet? let's see them!
 	if room_options:
@@ -74,7 +74,8 @@ func choose_next_room_instance():
 
 	# nothing left to finish, mark done and return the final
 	no_more_rooms = true
-	return final_room.instance()
+	if final_room:
+		return final_room.instance()
 
 # prepare room to be added to the scene
 func prep_room():
@@ -84,6 +85,7 @@ func prep_room():
 	var next_room = choose_next_room_instance()
 	if not next_room:
 		print("[WARN] no next_room!")
+		return
 
 	if not next_room.has_method("x_offset"):
 		print("[WARN] next_room has no x_offset?: ", next_room)
@@ -125,7 +127,7 @@ func add_rooms_to_scene(count: int):
 			# only need to add newly instanced rooms
 			# the others get moved when .position.x is set
 			if not room.get_parent():
-				rooms_node.call_deferred("add_child", room, true)
+				call_deferred("add_child", room, true)
 
 # TODO add unit tests
 func room_entered(_player, room):
