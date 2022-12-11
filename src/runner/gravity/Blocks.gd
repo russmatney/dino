@@ -40,4 +40,4 @@ func get_blocks(room):
 	return Util.get_children_in_group(room, "block")
 
 func _ready():
-	print("runner/Blocks ready()")
+	pass

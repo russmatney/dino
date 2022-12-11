@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/thanks/Credits.gd"
 }, {
-"base": "Node",
-"class": "Filter",
-"language": "GDScript",
-"path": "res://addons/lospec_palette_list/classes/filter.gd"
-}, {
 "base": "Reference",
 "class": "GutHookScript",
 "language": "GDScript",
@@ -28,11 +23,6 @@ _global_script_classes=[ {
 "class": "GutTest",
 "language": "GDScript",
 "path": "res://addons/gut/test.gd"
-}, {
-"base": "Container",
-"class": "HFlowContainer",
-"language": "GDScript",
-"path": "res://addons/lospec_palette_list/h_flow_container/h_flow_container.gd"
 }, {
 "base": "Reference",
 "class": "InkBase",
@@ -360,11 +350,6 @@ _global_script_classes=[ {
 "path": "res://src/runner/RunnerRoom.gd"
 }, {
 "base": "Node",
-"class": "Sort",
-"language": "GDScript",
-"path": "res://addons/lospec_palette_list/classes/sort.gd"
-}, {
-"base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://addons/beehive/state.gd"
@@ -381,10 +366,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Credits": "",
-"Filter": "",
 "GutHookScript": "",
 "GutTest": "",
-"HFlowContainer": "",
 "InkBase": "",
 "InkBoolValue": "",
 "InkCSharpValidator": "",
@@ -450,7 +433,6 @@ _global_script_class_icons={
 "NaviMenu": "",
 "Player": "",
 "RunnerRoom": "",
-"Sort": "",
 "State": "",
 "StoryError": "",
 "StoryErrorMetadata": ""
@@ -485,7 +467,7 @@ window/stretch/aspect.runner="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/lospec_palette_list/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
 
 [global]
 

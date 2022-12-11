@@ -1,3 +1,4 @@
+tool
 extends Node
 
 onready var menu_song = preload("res://addons/dj/assets/songs/Late Night Radio.mp3")
@@ -20,13 +21,10 @@ func _ready():
 # TODO support a passed song as well
 # TODO may need to handle pausing the current song before overwriting here
 func resume_menu_song(song = null):
-	print("resuming menu song", song)
 	if song and menu_song != song:
-		print("using new passed song")
 		menu_song = song
 		audio_stream_player.set_stream(menu_song)
 
-	print("playback_pos", playback_pos)
 	if playback_pos:
 		audio_stream_player.play(playback_pos)
 	else:
@@ -34,6 +32,5 @@ func resume_menu_song(song = null):
 
 
 func pause_menu_song():
-	print("pausing menu song", audio_stream_player)
 	audio_stream_player.stop()
 	playback_pos = audio_stream_player.get_playback_position()
