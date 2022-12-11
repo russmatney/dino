@@ -23,4 +23,3 @@ margin_right = 223.0
 margin_bottom = 114.0
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
-zoom = Vector2( 2, 2 )
