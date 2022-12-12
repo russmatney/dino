@@ -445,6 +445,7 @@ run/main_scene="res://src/menus/MainMenu.tscn"
 config/icon="res://assets/icon.png"
 run/main_scene.runner="res://src/runner/park/ThePark.tscn"
 run/main_scene.dungeon-crawler="res://src/dungeonCrawler/rooms/OneGeon.tscn"
+run/main_scene.ghosts="res://src/ghosts/world/World.tscn"
 
 [autoload]
 
