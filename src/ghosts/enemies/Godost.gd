@@ -15,11 +15,5 @@ func shader_loop():
 	tween = get_tree().create_tween()
 	tween.set_loops(0)
 
-	tween.tween_property(anim.get_material(), "shader_param/ghost", 1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/red_displacement", 1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/blue_displacement", 1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/green_displacement", 1.0, 1)
-	tween.tween_property(anim.get_material(), "shader_param/ghost", 0.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/red_displacement", -1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/blue_displacement", -1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/green_displacement", -1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.9, 2)
+	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.0, 1)
