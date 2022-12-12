@@ -1,0 +1,161 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/ghosts/world/SmallLight.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+height = 4.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 1.0
+height = 16.0
+
+[node name="ChainContainer" type="Node2D"]
+
+[node name="ChainBase" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="ChainBase"]
+margin_left = -7.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChainBase"]
+shape = SubResource( 1 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2( 0, 8 )
+node_a = NodePath("../ChainBase")
+node_b = NodePath("../Chain")
+
+[node name="Chain" type="RigidBody2D" parent="."]
+position = Vector2( 0, 18 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chain"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2( 0, 26 )
+node_a = NodePath("../Chain")
+node_b = NodePath("../Chain2")
+
+[node name="Chain2" type="RigidBody2D" parent="."]
+position = Vector2( 0, 36 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chain2"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain2"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+position = Vector2( 0, 44 )
+node_a = NodePath("../Chain2")
+node_b = NodePath("../Chain3")
+
+[node name="Chain3" type="RigidBody2D" parent="."]
+position = Vector2( 0, 54 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chain3"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain3"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2( 0, 62 )
+node_a = NodePath("../Chain3")
+node_b = NodePath("../Chain4")
+
+[node name="Chain4" type="RigidBody2D" parent="."]
+position = Vector2( 0, 72 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chain4"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain4"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="."]
+position = Vector2( 0, 80 )
+node_a = NodePath("../Chain4")
+node_b = NodePath("../Chain5")
+
+[node name="Chain5" type="RigidBody2D" parent="."]
+position = Vector2( 0, 90 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chain5"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain5"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="."]
+position = Vector2( 0, 98 )
+node_a = NodePath("../Chain5")
+node_b = NodePath("../Chain6")
+
+[node name="Chain6" type="RigidBody2D" parent="."]
+position = Vector2( 0, 108 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Chain6"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain6"]
+position = Vector2( 0, -1 )
+shape = SubResource( 2 )
+
+[node name="PinJoint2D7" type="PinJoint2D" parent="."]
+position = Vector2( 0, 116 )
+node_a = NodePath("../Chain6")
+node_b = NodePath("../SmallLight")
+
+[node name="SmallLight" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 127 )
