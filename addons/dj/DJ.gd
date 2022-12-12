@@ -25,10 +25,11 @@ func resume_menu_song(song = null):
 		menu_song = song
 		audio_stream_player.set_stream(menu_song)
 
-	if playback_pos:
-		audio_stream_player.play(playback_pos)
-	else:
-		audio_stream_player.play()
+	if not Engine.editor_hint:
+		if playback_pos:
+			audio_stream_player.play(playback_pos)
+		else:
+			audio_stream_player.play()
 
 
 func pause_menu_song():
