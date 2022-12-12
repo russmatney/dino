@@ -10,5 +10,9 @@
 position = Vector2( -159, -174 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 123, 100 )
+jump_impulse = 1500
+speed = 300
+gravity = 4000
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]

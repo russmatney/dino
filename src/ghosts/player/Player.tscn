@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
@@ -7,9 +7,21 @@
 [ext_resource path="res://src/ghosts/player/Run.gd" type="Script" id=5]
 [ext_resource path="res://src/ghosts/player/PlayerMachine.gd" type="Script" id=6]
 [ext_resource path="res://src/ghosts/player/Idle.gd" type="Script" id=7]
+[ext_resource path="res://src/ghosts/enemies/CartridgeTiltingGlitch.gdshader" type="Shader" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 26 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 8 )
+shader_param/red_displacement = 0.0
+shader_param/green_displacement = 0.0
+shader_param/blue_displacement = 0.0
+shader_param/ghost = 0.0
+shader_param/intensity = 0.0
+shader_param/scan_effect = 0.0
+shader_param/distortion_effect = 0.0
+shader_param/negative_effect = 0.0
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
@@ -22,6 +34,7 @@ position = Vector2( 1.5, 6 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
