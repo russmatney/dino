@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/ghosts/shaders/InvisibleSprite.gdshader" type="Shader" id=1]
+[ext_resource path="res://resources/sprites/godot-logo.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/ghosts/world/platforms/GhostBlock.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/dist = 16.0
+shader_param/alpha = 0.744167
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[node name="GhostBlock" type="KinematicBody2D"]
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 2 )
+frames = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
