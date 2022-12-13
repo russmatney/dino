@@ -15,11 +15,6 @@
 ;; helpers
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn home-dir []
-  (-> (bb.tasks/shell {:out :string}
-                      "zsh -c 'echo -n ~'")
-      :out))
-
 (defn shell-and-log
   ([x] (shell-and-log {} x))
   ([opts x]
@@ -221,7 +216,7 @@
                                (str repo-id "/addons/" addon-name))
         dir-prefix           (string/join
                               "/"
-                              (conj dir-prefix (home-dir)))]
+                              (conj dir-prefix (fs/home)))]
     {:addon-name         addon-name
      :addon-path         addon-path
      :project-addon-path (str "./addons/" addon-name)
@@ -317,7 +312,7 @@
       (map
         (fn [path]
           (let [local-templates-dir "./script_templates"
-                path                (->> (home-dir)
+                path                (->> (fs/home)
                                          (conj dir-prefix)
                                          reverse
                                          (cons path)
