@@ -49,9 +49,10 @@
                 (tasks/shell-and-log (str "butler push --if-changed " dir " " itch-project)))
 
   install-script-templates
-  (tasks/install-script-templates
-    #{"kagenash1/godot-behavior-tree/script_templates"})
+  (apply tasks/install-script-templates
+   #{"kagenash1/godot-behavior-tree/script_templates"}
+   *command-line-args*)
 
-  addons         (tasks/addons addons-map)
-  addons-install (tasks/install-addons addons-map)
-  addons-clone   (tasks/clone-addons addons-map)}}
+  addons         (apply tasks/addons addons-map *command-line-args*)
+  addons-install (apply tasks/install-addons addons-map *command-line-args*)
+  addons-clone   (apply tasks/clone-addons addons-map *command-line-args*)}}
