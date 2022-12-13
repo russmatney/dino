@@ -456,6 +456,7 @@ DJ="*res://addons/dj/DJ.gd"
 Clawe="*res://src/clawe/Clawe.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 Blocks="*res://src/runner/gravity/Blocks.gd"
+Kink="*res://addons/kink/Kink.gd"
 
 [display]
 
@@ -468,7 +469,7 @@ window/stretch/aspect.runner="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/kink/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
 
 [global]
 
