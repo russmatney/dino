@@ -253,7 +253,8 @@
       (into #{})
       (filter fs/directory?)
       (map (fn [repo-path]
-             (shell-and-log {:dir repo-path} "git status"))))))
+             (bb.tasks/shell {:dir repo-path} "git fetch origin")
+             (shell-and-log {:dir repo-path} "git status -sb"))))))
 
 (defn dir-exists-addons [addons & dir-prefix]
   (doall
