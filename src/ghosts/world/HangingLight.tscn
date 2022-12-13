@@ -13,6 +13,8 @@ height = 16.0
 [node name="ChainContainer" type="Node2D"]
 
 [node name="ChainBase" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -30,9 +32,12 @@ shape = SubResource( 1 )
 position = Vector2( 0, 8 )
 node_a = NodePath("../ChainBase")
 node_b = NodePath("../Chain")
+softness = 2.0
 
 [node name="Chain" type="RigidBody2D" parent="."]
 position = Vector2( 0, 18 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -54,6 +59,8 @@ node_b = NodePath("../Chain2")
 
 [node name="Chain2" type="RigidBody2D" parent="."]
 position = Vector2( 0, 36 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -75,6 +82,8 @@ node_b = NodePath("../Chain3")
 
 [node name="Chain3" type="RigidBody2D" parent="."]
 position = Vector2( 0, 54 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -96,6 +105,8 @@ node_b = NodePath("../Chain4")
 
 [node name="Chain4" type="RigidBody2D" parent="."]
 position = Vector2( 0, 72 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -117,6 +128,8 @@ node_b = NodePath("../Chain5")
 
 [node name="Chain5" type="RigidBody2D" parent="."]
 position = Vector2( 0, 90 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -138,6 +151,8 @@ node_b = NodePath("../Chain6")
 
 [node name="Chain6" type="RigidBody2D" parent="."]
 position = Vector2( 0, 108 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -156,6 +171,8 @@ shape = SubResource( 2 )
 position = Vector2( 0, 116 )
 node_a = NodePath("../Chain6")
 node_b = NodePath("../SmallLight")
+softness = 2.0
 
 [node name="SmallLight" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 127 )
+gravity_scale = 50.0

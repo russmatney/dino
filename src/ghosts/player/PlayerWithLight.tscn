@@ -36,7 +36,6 @@ gravity_scale = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2( -15.2682, -34.0367 )
 rotation = 0.81951
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
@@ -46,6 +45,8 @@ node_b = NodePath("../ChainBase2")
 
 [node name="ChainBase2" type="RigidBody2D" parent="."]
 position = Vector2( -41, -58 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -66,6 +67,8 @@ node_b = NodePath("../Chain7")
 
 [node name="Chain7" type="RigidBody2D" parent="."]
 position = Vector2( -41, -40 )
+collision_layer = 0
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -80,52 +83,12 @@ margin_bottom = 8.0
 position = Vector2( 0, -1 )
 shape = SubResource( 3 )
 
-[node name="PinJoint2D9" type="PinJoint2D" parent="."]
-position = Vector2( -41, -32 )
-node_a = NodePath("../Chain7")
-node_b = NodePath("../Chain8")
-
-[node name="Chain8" type="RigidBody2D" parent="."]
-position = Vector2( -41, -22 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain8"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain8"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
-[node name="PinJoint2D10" type="PinJoint2D" parent="."]
-position = Vector2( -41, -14 )
-node_a = NodePath("../Chain8")
-node_b = NodePath("../Chain9")
-
-[node name="Chain9" type="RigidBody2D" parent="."]
-position = Vector2( -41, -4 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain9"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain9"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
 [node name="PinJoint2D14" type="PinJoint2D" parent="."]
-position = Vector2( -41, 4 )
-node_a = NodePath("../Chain9")
+position = Vector2( -41, -31 )
+node_a = NodePath("../Chain7")
 node_b = NodePath("../SmallLight2")
 
 [node name="SmallLight2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -41, 15 )
+position = Vector2( -41, -20 )
+collision_layer = 0
+collision_mask = 0
