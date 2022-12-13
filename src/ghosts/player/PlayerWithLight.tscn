@@ -4,7 +4,7 @@
 [ext_resource path="res://src/ghosts/player/Player.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 105.978, 10 )
+extents = Vector2( 38.9792, 10 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 5.0
@@ -29,21 +29,23 @@ node_a = NodePath("../Player")
 node_b = NodePath("../RigidBody2D")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( -61, -83 )
+position = Vector2( -15.2682, -34.0367 )
 rotation = 0.81951
 scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
-position = Vector2( -132, -151 )
+position = Vector2( -41, -63 )
 node_a = NodePath("../RigidBody2D")
 node_b = NodePath("../ChainBase2")
 
 [node name="ChainBase2" type="RigidBody2D" parent="."]
-position = Vector2( -132, -146 )
+position = Vector2( -41, -58 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -58,12 +60,12 @@ margin_bottom = 6.0
 shape = SubResource( 2 )
 
 [node name="PinJoint2D8" type="PinJoint2D" parent="."]
-position = Vector2( -132, -138 )
+position = Vector2( -41, -50 )
 node_a = NodePath("../ChainBase2")
 node_b = NodePath("../Chain7")
 
 [node name="Chain7" type="RigidBody2D" parent="."]
-position = Vector2( -132, -128 )
+position = Vector2( -41, -40 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -79,12 +81,12 @@ position = Vector2( 0, -1 )
 shape = SubResource( 3 )
 
 [node name="PinJoint2D9" type="PinJoint2D" parent="."]
-position = Vector2( -132, -120 )
+position = Vector2( -41, -32 )
 node_a = NodePath("../Chain7")
 node_b = NodePath("../Chain8")
 
 [node name="Chain8" type="RigidBody2D" parent="."]
-position = Vector2( -132, -110 )
+position = Vector2( -41, -22 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -100,12 +102,12 @@ position = Vector2( 0, -1 )
 shape = SubResource( 3 )
 
 [node name="PinJoint2D10" type="PinJoint2D" parent="."]
-position = Vector2( -132, -102 )
+position = Vector2( -41, -14 )
 node_a = NodePath("../Chain8")
 node_b = NodePath("../Chain9")
 
 [node name="Chain9" type="RigidBody2D" parent="."]
-position = Vector2( -132, -92 )
+position = Vector2( -41, -4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -120,73 +122,10 @@ margin_bottom = 8.0
 position = Vector2( 0, -1 )
 shape = SubResource( 3 )
 
-[node name="PinJoint2D11" type="PinJoint2D" parent="."]
-position = Vector2( -132, -84 )
-node_a = NodePath("../Chain9")
-node_b = NodePath("../Chain10")
-
-[node name="Chain10" type="RigidBody2D" parent="."]
-position = Vector2( -132, -74 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain10"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain10"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
-[node name="PinJoint2D12" type="PinJoint2D" parent="."]
-position = Vector2( -132, -66 )
-node_a = NodePath("../Chain10")
-node_b = NodePath("../Chain11")
-
-[node name="Chain11" type="RigidBody2D" parent="."]
-position = Vector2( -132, -56 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain11"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain11"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
-[node name="PinJoint2D13" type="PinJoint2D" parent="."]
-position = Vector2( -132, -48 )
-node_a = NodePath("../Chain11")
-node_b = NodePath("../Chain12")
-
-[node name="Chain12" type="RigidBody2D" parent="."]
-position = Vector2( -132, -38 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain12"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain12"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
 [node name="PinJoint2D14" type="PinJoint2D" parent="."]
-position = Vector2( -132, -30 )
-node_a = NodePath("../Chain12")
+position = Vector2( -41, 4 )
+node_a = NodePath("../Chain9")
 node_b = NodePath("../SmallLight2")
 
 [node name="SmallLight2" parent="." instance=ExtResource( 1 )]
-position = Vector2( -132, -19 )
+position = Vector2( -41, 15 )
