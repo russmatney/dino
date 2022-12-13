@@ -17,7 +17,7 @@
 
 (defn home-dir []
   (-> (bb.tasks/shell {:out :string}
-                      "zsh -c 'echo -n ~'")
+                      "sh -c 'printf %s $HOME'")
       :out))
 
 (defn shell-and-log
