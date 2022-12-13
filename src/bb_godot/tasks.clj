@@ -203,7 +203,7 @@
 ;; Deps
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn input->godot-dep [input]
+(defn input->godot-dep [input & dir-prefix]
   (let [[addon-name repo-id] input
         addon-name           (if (keyword? addon-name)
                                (name addon-name)
@@ -218,13 +218,16 @@
                                repo-id
 
                                :else
-                               (str repo-id "/addons/" addon-name))]
+                               (str repo-id "/addons/" addon-name))
+        dir-prefix           (string/join
+                              "/"
+                              (conj dir-prefix (home-dir)))]
     {:addon-name         addon-name
      :addon-path         addon-path
      :project-addon-path (str "./addons/" addon-name)
-     :symlink-target     (str (home-dir) "/" addon-path)
+     :symlink-target     (str dir-prefix "/" addon-path)
      :repo-id            repo-id
-     :repo-path          (str (home-dir) "/" repo-id)}))
+     :repo-path          (str dir-prefix "/" repo-id)}))
 
 (comment
   (name :gut)
@@ -246,39 +249,39 @@
      {:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
      {:addon-name "gut-2", :addon-path "bitwes/Gut/addons/gut-2"}]))
 
-(defn git-status-addons [addons]
+(defn git-status-addons [addons & dir-prefix]
   (doall
     (->>
       addons
-      (map input->godot-dep)
+      (map #(apply input->godot-dep % dir-prefix))
       (map :repo-path)
       (into #{})
       (filter fs/directory?)
       (map (fn [repo-path]
              (shell-and-log {:dir repo-path} "git status"))))))
 
-(defn dir-exists-addons [addons]
+(defn dir-exists-addons [addons & dir-prefix]
   (doall
-    (->>
-      addons
-      (map input->godot-dep)
-      (map :repo-path)
-      (into #{})
-      (remove fs/directory?)
-      (map (fn [repo-path]
-             (println "repo-path does not exist:" repo-path))))))
+   (->>
+    addons
+    (map #(apply input->godot-dep % dir-prefix))
+    (map :repo-path)
+    (into #{})
+    (remove fs/directory?)
+    (map (fn [repo-path]
+           (println "repo-path does not exist:" repo-path))))))
 
-(defn addons [addons]
+(defn addons [addons & dir-prefix]
   (println "status checking addons: " addons)
 
-  (dir-exists-addons addons)
-  (git-status-addons addons))
+  (apply dir-exists-addons addons dir-prefix)
+  (apply git-status-addons addons dir-prefix))
 
-(defn clone-addons [addons]
+(defn clone-addons [addons & dir-prefix]
   (doall
     (->>
       addons
-      (map input->godot-dep)
+      (map #(apply input->godot-dep % dir-prefix))
       (group-by (fn [x] (:repo-path x)))
       (map (fn [[path xs]]
              [path (first xs)]))
@@ -287,21 +290,26 @@
       (map (fn [{:keys [repo-path repo-id]}]
              (shell-and-log (str "gh repo clone " repo-id " " repo-path)))))))
 
-(defn install-addons [addons]
+(defn install-addons [addons & dir-prefix]
   (shell-and-log "mkdir -p addons")
   (println addons)
   (doall
     (->>
-      addons
-      (map input->godot-dep)
-      (map
-        (fn [{:keys [project-addon-path symlink-target]}]
-          (println "creating symlink from" project-addon-path "to" symlink-target)
+     addons
+     (map #(apply input->godot-dep % dir-prefix))
+     (map
+      (fn [{:keys [project-addon-path symlink-target]}]
+        (when
+         (fs/exists? project-addon-path)
+          (println "deleting existing folder at target" project-addon-path)          
+          (fs/delete-tree project-addon-path)
           (fs/delete-if-exists project-addon-path)
-          (fs/create-sym-link project-addon-path symlink-target))))))
+          (println "Success!"))
+        (println "creating symlink from" project-addon-path "to" symlink-target)
+        (fs/create-sym-link project-addon-path symlink-target))))))
 
 
-(defn install-script-templates [paths]
+(defn install-script-templates [paths & dir-prefix]
   (shell-and-log "mkdir -p script_templates")
   (doall
     (->>
@@ -309,7 +317,12 @@
       (map
         (fn [path]
           (let [local-templates-dir "./script_templates"
-                path                (str (home-dir) "/" path)]
+                path                (->> (home-dir)
+                                         (conj dir-prefix)
+                                         reverse
+                                         (cons path)
+                                         reverse
+                                         (string/join "/"))]
             (println "copying templates from" path)
             (if (not (fs/directory? path))
               (println "path is not a directory", path)
