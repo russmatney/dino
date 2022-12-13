@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/ghosts/enemies/glowmba_animated_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/enemies/Glowmba.gd" type="Script" id=2]
+[ext_resource path="res://addons/core/assets/lights/downward_light_sheet.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 29, 29 )
 
 [node name="Glowmba" type="KinematicBody2D"]
 script = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, 31 )
+rotation = -3.14159
+texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )

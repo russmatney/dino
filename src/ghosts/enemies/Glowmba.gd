@@ -5,8 +5,8 @@ var dead = false
 #######################################################################33
 # physics process
 
-var dir = Vector2.LEFT
-export(int) var speed = 200
+var dir = Vector2.RIGHT
+export(int) var speed = 100
 export(int) var gravity := 4000
 var velocity = dir * speed
 
