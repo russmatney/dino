@@ -8,10 +8,9 @@
     (def gut-with-window "godot --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd ")
 
     (def addons-map
-      {:gut                 :bitwes/Gut
-       :lospec_palette_list :hiulit/Lospec-Palette-List
-       :MaxSizeContainer    :MattUV/godot-MaxSizeContainer
-       :inkgd               :ephread/inkgd}))
+      {:gut              :bitwes/Gut
+       :MaxSizeContainer :MattUV/godot-MaxSizeContainer
+       :inkgd            :ephread/inkgd}))
 
   test-with-window  (tasks/shell-and-log (str gut-with-window " -gexit"))
   test              (tasks/shell-and-log (str gut " -gexit"))

@@ -78,9 +78,14 @@ binary.
 ** `bb addons`
 An quick status check for your addons-map
 ** `bb install-addons`
-An approximation of a dependency manager
-Clones and symlinks godot addons,
-using a clojure map as the manifest
+> NOTE: at this point I've moved to vendorizing the deps completely within the
+project, to avoid burdening other folks with cloning/installing these deps to
+get Dino to run. These commands might still be useful in some cases, but are not
+required to run the project.
+
+An approximation of a dependency manager.
+
+Clones and symlinks godot addons, using a clojure map as the manifest
 
 Here's a bit of the current bb.edn for this project
 
@@ -110,6 +115,7 @@ A project consuming some of dino's addons (plus GUT) might look like:
      :reptile       :russmatney/dino
      :beehive       :russmatney/dino})}}
 #+end_src
+
 ** `bb install-script-templates`
 Copy templates from external paths into your project
 
