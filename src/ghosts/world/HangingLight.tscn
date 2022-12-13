@@ -174,5 +174,5 @@ node_b = NodePath("../SmallLight")
 softness = 2.0
 
 [node name="SmallLight" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 127 )
+position = Vector2( 0, 118 )
 gravity_scale = 50.0

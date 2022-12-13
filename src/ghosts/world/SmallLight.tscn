@@ -4,7 +4,7 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="SmallLight" type="RigidBody2D"]
 gravity_scale = 118.84
 
 [node name="ColorRect" type="ColorRect" parent="."]
