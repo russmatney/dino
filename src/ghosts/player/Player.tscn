@@ -38,6 +38,8 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 3
+playing = true
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource( 6 )
