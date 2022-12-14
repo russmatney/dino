@@ -2,6 +2,8 @@ extends State
 
 
 func enter(ctx = {}):
+	owner.anim.animation = "air"
+
 	if ctx.get("do_jump", false):
 		owner.velocity.y -= owner.jump_impulse
 

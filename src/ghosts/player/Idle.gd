@@ -5,6 +5,8 @@ func enter(_msg = {}):
 	# owner points to the root node of a packed scene
 	owner.velocity = Vector2.ZERO
 
+	owner.anim.animation = "idle"
+
 
 func process(_delta: float):
 	if not owner.is_on_floor():

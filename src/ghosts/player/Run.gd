@@ -2,7 +2,7 @@ extends State
 
 
 func enter(_ctx = {}):
-	pass
+	owner.anim.animation = "run"
 
 
 func physics_process(delta):
