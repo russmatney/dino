@@ -15,6 +15,11 @@ func physics_process(delta):
 	owner.velocity.y += owner.gravity * delta
 	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
 
+	if move_dir.x > 0:
+		owner.face_right()
+	elif move_dir.x < 0:
+		owner.face_left()
+
 	if Input.is_action_just_pressed("move_up"):
 		machine.transit("Air", {do_jump = true})
 	elif is_equal_approx(move_dir.x, 0.0):

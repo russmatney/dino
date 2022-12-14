@@ -43,3 +43,17 @@ func _process(_delta):
 
 func set_state_label(label: String):
 	state_label.bbcode_text = "[center]" + label + "[/center]"
+
+
+############################################################
+
+enum DIR {left, right}
+var facing_direction = DIR.left
+
+func face_right():
+	facing_direction = DIR.right
+	anim.flip_h = true
+
+func face_left():
+	facing_direction = DIR.left
+	anim.flip_h = false
