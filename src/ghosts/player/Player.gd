@@ -24,12 +24,12 @@ func shader_loop():
 	tween = get_tree().create_tween()
 	tween.set_loops(0)
 
-	tween.parallel().tween_property(anim.get_material(), "shader_param/red_displacement", 1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/blue_displacement", 1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/green_displacement", 1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/red_displacement", -1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/blue_displacement", -1.0, 1)
-	tween.parallel().tween_property(anim.get_material(), "shader_param/green_displacement", -1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/red_displacement", 1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/blue_displacement", 1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/green_displacement", 1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/red_displacement", -1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/blue_displacement", -1.0, 1)
+	tween.tween_property(anim.get_material(), "shader_param/green_displacement", -1.0, 1)
 
 func on_transit(new_state):
 	set_state_label(new_state)
