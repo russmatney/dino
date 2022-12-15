@@ -7,6 +7,10 @@ export(int) var jump_impulse := 1500
 export(int) var speed := 300
 export(int) var gravity := 4000
 
+export(int) var max_health := 4
+var health = max_health
+signal health_change
+
 var initial_pos
 
 onready var state_label = $StateLabel
@@ -18,7 +22,12 @@ func _ready():
 	initial_pos = get_global_position()
 	machine.connect("transitioned", self, "on_transit")
 
+	call_deferred("finish_setup")
+
 	shader_loop()
+
+func finish_setup():
+	emit_signal("health_change", health)
 
 func shader_loop():
 	tween = get_tree().create_tween()

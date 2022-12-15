@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[resource]
+Label/colors/font_color = Color( 0.858824, 0.815686, 0.74902, 1 )
+Label/fonts/font = SubResource( 1 )

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/ghosts/hud/HudLabelTheme.tres" type="Theme" id=1]
+
+[node name="HudLabel" type="Label"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+text = "Health"
+valign = 1
+autowrap = true

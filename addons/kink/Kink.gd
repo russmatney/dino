@@ -50,5 +50,3 @@ func register(node):
 func _ready():
 	if Engine.editor_hint:
 		request_ready()
-
-	print("Kink autoload ready")
