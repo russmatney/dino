@@ -8,6 +8,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 42 )
 
+[sub_resource type="CapsuleShape2D" id=4]
+
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 1.0
 height = 16.0
@@ -15,8 +17,6 @@ height = 16.0
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 5.0
 height = 4.0
-
-[sub_resource type="CapsuleShape2D" id=4]
 
 [node name="PlayerWithLight" type="Node2D"]
 
@@ -55,111 +55,6 @@ margin_top = -84.0
 margin_right = 1.0
 color = Color( 1, 0.298039, 0.278431, 1 )
 
-[node name="PinJoint2D2" type="PinJoint2D" parent="."]
-position = Vector2( -15, -75 )
-node_a = NodePath("../AnglerLightRod")
-node_b = NodePath("../Chain9")
-
-[node name="PinJoint2D4" type="PinJoint2D" parent="."]
-position = Vector2( -4, -62 )
-node_a = NodePath("../Chain9")
-node_b = NodePath("../Chain8")
-
-[node name="PinJoint2D3" type="PinJoint2D" parent="."]
-position = Vector2( 7, -74 )
-node_a = NodePath("../Chain8")
-node_b = NodePath("../ChainBase2")
-
-[node name="Chain9" type="RigidBody2D" parent="."]
-position = Vector2( -10, -69 )
-rotation = 2.4762
-collision_layer = 0
-collision_mask = 0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain9"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain9"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
-[node name="Chain8" type="RigidBody2D" parent="."]
-position = Vector2( 1, -67 )
-rotation = 0.670127
-collision_layer = 0
-collision_mask = 0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain8"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain8"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
-[node name="ChainBase2" type="RigidBody2D" parent="."]
-position = Vector2( 8, -74 )
-collision_layer = 0
-collision_mask = 0
-gravity_scale = -15.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="ChainBase2"]
-margin_left = -7.0
-margin_top = -6.0
-margin_right = 6.0
-margin_bottom = 6.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChainBase2"]
-shape = SubResource( 2 )
-
-[node name="PinJoint2D8" type="PinJoint2D" parent="."]
-position = Vector2( 8, -74 )
-node_a = NodePath("../ChainBase2")
-node_b = NodePath("../Chain7")
-
-[node name="Chain7" type="RigidBody2D" parent="."]
-position = Vector2( 8, -64 )
-collision_layer = 0
-collision_mask = 0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="Chain7"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain7"]
-position = Vector2( 0, -1 )
-shape = SubResource( 3 )
-
-[node name="PinJoint2D14" type="PinJoint2D" parent="."]
-position = Vector2( 8, -55 )
-node_a = NodePath("../Chain7")
-node_b = NodePath("../SmallLight2")
-
-[node name="SmallLight2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 8, -44 )
-collision_layer = 0
-collision_mask = 0
-gravity_scale = 10.0
-
 [node name="MouseTracker" type="RigidBody2D" parent="."]
 collision_layer = 0
 collision_mask = 0
@@ -175,9 +70,116 @@ margin_right = 5.0
 margin_bottom = 5.0
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
-node_a = NodePath("../ChainBase2")
+node_a = NodePath("../AnglerChainAndLight/ChainBase2")
 node_b = NodePath("../MouseTracker")
 bias = 0.9
 length = 1000.0
 stiffness = 1.0
 damping = 0.1
+
+[node name="AnglerChainAndLight" type="Node2D" parent="."]
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="AnglerChainAndLight"]
+position = Vector2( -15, -75 )
+node_a = NodePath("../../AnglerLightRod")
+node_b = NodePath("../Chain9")
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="AnglerChainAndLight"]
+position = Vector2( -4, -62 )
+node_a = NodePath("../Chain9")
+node_b = NodePath("../Chain8")
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="AnglerChainAndLight"]
+position = Vector2( 7, -74 )
+node_a = NodePath("../Chain8")
+node_b = NodePath("../ChainBase2")
+
+[node name="Chain9" type="RigidBody2D" parent="AnglerChainAndLight"]
+position = Vector2( -10, -69 )
+rotation = 2.4762
+collision_layer = 0
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/Chain9"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/Chain9"]
+position = Vector2( 0, -1 )
+shape = SubResource( 3 )
+
+[node name="Chain8" type="RigidBody2D" parent="AnglerChainAndLight"]
+position = Vector2( 1, -67 )
+rotation = 0.670127
+collision_layer = 0
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/Chain8"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/Chain8"]
+position = Vector2( 0, -1 )
+shape = SubResource( 3 )
+
+[node name="ChainBase2" type="RigidBody2D" parent="AnglerChainAndLight"]
+position = Vector2( 8, -74 )
+collision_layer = 0
+collision_mask = 0
+gravity_scale = -15.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/ChainBase2"]
+margin_left = -7.0
+margin_top = -6.0
+margin_right = 6.0
+margin_bottom = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/ChainBase2"]
+shape = SubResource( 2 )
+
+[node name="PinJoint2D8" type="PinJoint2D" parent="AnglerChainAndLight"]
+position = Vector2( 8, -74 )
+node_a = NodePath("../ChainBase2")
+node_b = NodePath("../Chain7")
+
+[node name="Chain7" type="RigidBody2D" parent="AnglerChainAndLight"]
+position = Vector2( 8, -64 )
+collision_layer = 0
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/Chain7"]
+margin_left = -1.0
+margin_top = -10.0
+margin_right = 1.0
+margin_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/Chain7"]
+position = Vector2( 0, -1 )
+shape = SubResource( 3 )
+
+[node name="PinJoint2D14" type="PinJoint2D" parent="AnglerChainAndLight"]
+position = Vector2( 8, -55 )
+node_a = NodePath("../Chain7")
+node_b = NodePath("../SmallLight2")
+
+[node name="SmallLight2" parent="AnglerChainAndLight" instance=ExtResource( 1 )]
+position = Vector2( 8, -44 )
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 10.0

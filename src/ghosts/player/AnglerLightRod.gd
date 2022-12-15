@@ -5,6 +5,7 @@ extends RigidBody2D
 onready var player = .get_node("../Player")
 onready var handle_pinjoint = .get_node("../RodHandlePin")
 onready var player_machine = .get_node("../Player/Machine")
+onready var angler_chain = get_node("../AnglerChainAndLight")
 
 onready var initial_pos = position
 onready var initial_x_rel = abs(player.position.x - position.x)
@@ -27,11 +28,17 @@ func _process(_delta):
 	if player.velocity.y != 0:
 		position.y = player.position.y + initial_y_rel
 
+
+	# TODO move to reaction to player signal to get out of process loop
 	match player.facing_direction:
 		player.DIR.right:
 			position.x = player.position.x + initial_x_rel
+			# for ch in angler_chain.get_children():
+			# 	ch.position.x *= -1
 		player.DIR.left:
 			position.x = player.position.x - initial_x_rel
+			# for ch in angler_chain.get_children():
+			# 	ch.position.x *= -1
 
 	handle_pinjoint.position = position
 
