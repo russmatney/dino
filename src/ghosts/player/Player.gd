@@ -18,6 +18,7 @@ onready var machine = $Machine
 onready var anim = $AnimatedSprite
 var tween
 
+
 func _ready():
 	initial_pos = get_global_position()
 	machine.connect("transitioned", self, "on_transit")
@@ -26,8 +27,10 @@ func _ready():
 
 	shader_loop()
 
+
 func finish_setup():
 	emit_signal("health_change", health)
+
 
 func shader_loop():
 	tween = get_tree().create_tween()
@@ -39,6 +42,7 @@ func shader_loop():
 	tween.tween_property(anim.get_material(), "shader_param/red_displacement", -1.0, 1)
 	tween.tween_property(anim.get_material(), "shader_param/blue_displacement", -1.0, 1)
 	tween.tween_property(anim.get_material(), "shader_param/green_displacement", -1.0, 1)
+
 
 func on_transit(new_state):
 	set_state_label(new_state)
@@ -56,12 +60,14 @@ func set_state_label(label: String):
 
 ############################################################
 
-enum DIR {left, right}
+enum DIR { left, right }
 var facing_direction = DIR.left
+
 
 func face_right():
 	facing_direction = DIR.right
 	anim.flip_h = true
+
 
 func face_left():
 	facing_direction = DIR.left

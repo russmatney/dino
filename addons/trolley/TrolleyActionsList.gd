@@ -1,8 +1,9 @@
 tool
 extends VBoxContainer
 
-export (String) var ignore_prefix = "ui_"
-export (String) var only_prefix
+export(String) var ignore_prefix = "ui_"
+export(String) var only_prefix
+
 
 func _ready():
 	if Engine.editor_hint:
@@ -10,7 +11,9 @@ func _ready():
 
 	build_actions_list()
 
+
 var ActionLabel = preload("res://addons/trolley/TrolleyActionLabel.tscn")
+
 
 func build_actions_list():
 	for ch in get_children():

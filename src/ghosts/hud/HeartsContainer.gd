@@ -2,7 +2,8 @@ tool
 extends HBoxContainer
 
 var heart_icons
-export (int) var h setget set_health
+export(int) var h setget set_health
+
 
 func _ready():
 	if Engine.editor_hint:
@@ -10,8 +11,10 @@ func _ready():
 
 	call_deferred("find_heart_icons")
 
+
 func find_heart_icons():
 	heart_icons = get_children()
+
 
 ## Converts a passed int into a number of hearts to display.
 func set_health(health):

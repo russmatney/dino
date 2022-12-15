@@ -3,11 +3,13 @@ extends Node
 
 var actions
 
+
 func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
 	build_actions_dict()
+
 
 # TODO unit tests
 func build_actions_dict():
@@ -25,12 +27,8 @@ func build_actions_dict():
 			if evt is InputEventKey:
 				keys.append(OS.get_scancode_string(evt.scancode))
 
-		actions[ac] = {
-			"events": evts,
-			"setting": setting,
-			"keys": keys,
-			"action": ac
-			}
+		actions[ac] = {"events": evts, "setting": setting, "keys": keys, "action": ac}
+
 
 class ActionsSorter:
 	static func sort_alphabetical(a, b):
@@ -38,9 +36,10 @@ class ActionsSorter:
 			return true
 		return false
 
+
 # TODO write unit tests, use parse_input_event to test controls
 # TODO maybe support filtering out actions by prefix
-func actions_list(ignore_prefix="", only_prefix=""):
+func actions_list(ignore_prefix = "", only_prefix = ""):
 	if not actions:
 		build_actions_dict()
 
@@ -61,9 +60,11 @@ func actions_list(ignore_prefix="", only_prefix=""):
 
 	return axs
 
+
 ##################################################################
 # public
 ##################################################################
+
 
 # returns a normalized Vector2 based on the controller's movement
 func move_dir():
@@ -84,8 +85,10 @@ func move_dir():
 func is_attack(event):
 	return event.is_action_pressed("attack")
 
+
 func is_action(event):
 	return event.is_action_pressed("action")
+
 
 func is_pause(event):
 	return event.is_action_pressed("pause")

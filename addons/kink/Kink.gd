@@ -6,6 +6,7 @@ var ink_states = {}
 ############################################################
 # current_message
 
+
 func current_message(node):
 	if node.name in ink_states:
 		var state = ink_states[node.name]
@@ -14,8 +15,10 @@ func current_message(node):
 		return str("No current_message for ", node.name)
 	return str("No ink_state found for ", node.name)
 
+
 ############################################################
 # register
+
 
 func register(node):
 	# TODO unit tests:
@@ -28,7 +31,7 @@ func register(node):
 	ink_states[node.name] = {
 		"msg": "debug first msg",
 		"node_name": node.name,
-		}
+	}
 
 	if node.kink_file:
 		var ink_player = InkPlayer.new()
@@ -44,8 +47,10 @@ func register(node):
 
 	return ink_states[node.name]
 
+
 ############################################################
 # ready
+
 
 func _ready():
 	if Engine.editor_hint:

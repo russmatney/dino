@@ -14,9 +14,10 @@ onready var initial_y_rel = abs(player.position.y - position.y)
 #		  Color(0.0, 1.0, 0.0, 1.0),
 #		  Color(0.0, 0.0, 1.0, 0.0)]
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass  # Replace with function body.
 
 
 #func _input(event):
@@ -27,7 +28,6 @@ func _ready():
 func _process(_delta):
 	if player.velocity.y != 0:
 		position.y = player.position.y + initial_y_rel
-
 
 	# TODO move to reaction to player signal to get out of process loop
 	match player.facing_direction:
@@ -44,4 +44,4 @@ func _process(_delta):
 
 #func _integrate_forces(state):
 #	state.add_torque(global_position.angle_to_point(get_global_mouse_position()))
-	# state.add_torque(angular_damp)
+# state.add_torque(angular_damp)
