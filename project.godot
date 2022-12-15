@@ -449,7 +449,6 @@ run/main_scene.ghosts="res://src/ghosts/world/World.tscn"
 
 [autoload]
 
-Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
 Util="*res://addons/core/Util.gd"
 DJ="*res://addons/dj/DJ.gd"
@@ -457,6 +456,7 @@ Clawe="*res://src/clawe/Clawe.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 Blocks="*res://src/runner/gravity/Blocks.gd"
 Kink="*res://addons/kink/Kink.gd"
+Trolley="*res://addons/trolley/Trolley.gd"
 
 [display]
 

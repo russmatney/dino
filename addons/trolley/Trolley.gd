@@ -1,5 +1,19 @@
+tool
 extends Node
 
+var actions
+
+func _ready():
+	if Engine.editor_hint:
+		request_ready()
+
+	actions = InputMap.get_actions()
+
+	print("Trolley autoload ready")
+
+##################################################################
+# public
+##################################################################
 
 # returns a normalized Vector2 based on the controller's movement
 func move_dir():
