@@ -15,7 +15,6 @@ func add_key(k):
 	key_list.add_child(icon)
 
 
-
 func _ready():
 	if Engine.editor_hint:
 		request_ready()
