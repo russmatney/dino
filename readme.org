@@ -84,10 +84,12 @@ binary.
 ** ~bb addons~
 An quick status check for your addons-map
 ** ~bb install-addons~
-> NOTE: at this point I've moved to vendorizing the deps completely within the
+#+begin_quote
+NOTE: at this point I've moved to vendorizing the deps completely within the
 project, to avoid burdening other folks with cloning/installing these deps to
 get Dino to run. These commands might still be useful in some cases, but are not
 required to run the project.
+#+end_quote
 
 An approximation of a dependency manager.
 
