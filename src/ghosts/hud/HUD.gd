@@ -33,5 +33,5 @@ func find_player():
 # update health
 
 func update_player_health(health):
-	var health_label = get_node("%Health")
-	health_label.text = str("Health: ", health, "/", player.max_health)
+	var hearts = get_node("%HeartsContainer")
+	hearts.set_health(health)

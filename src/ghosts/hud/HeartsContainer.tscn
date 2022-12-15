@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/ghosts/hud/HeartIcon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/ghosts/hud/HeartsContainer.gd" type="Script" id=3]
+
+[node name="HeartsContainer" type="HBoxContainer"]
+margin_right = 98.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 98, 30 )
+alignment = 2
+script = ExtResource( 3 )
+h = 3
+
+[node name="HeartIcon" parent="." instance=ExtResource( 1 )]
+position = Vector2( 82, 16 )
+animation = "full"
+flip_h = true
+
+[node name="HeartIcon2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 49, 16 )
+flip_h = true
+
+[node name="HeartIcon3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 16, 16 )
+animation = "empty"
+flip_h = true
