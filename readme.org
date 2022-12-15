@@ -44,7 +44,7 @@ also be useful in larger, long-running projects.
 Note that cross-dependencies between these addons is not yet solved - i.e. if
 you add 'navi', you will have trouble unless you also add 'core', 'trolley', and
 'dj', b/c the 'navi' code expects to use fonts/autoloads from those addons. I
-hope to resolve this dependency issue in `bb-godot`'s install-addons flow.
+hope to resolve this dependency issue in ~bb-godot~'s install-addons flow.
 
 ** core
 A Util autoload and a slew of fonts.
@@ -53,8 +53,8 @@ For working with state machines, behavior trees, maybe GOAP
 *** basic state machine abstraction
 ** trolley
 For handling controls inputs and remapping.
-*** Trolley autoload with `move_dir()` helpers
-returns a normalized vector according to `move_{left,up,right,down}` input actions
+*** Trolley autoload with ~move_dir()~ helpers
+returns a normalized vector according to ~move_{left,up,right,down}~ input actions
 ** navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
@@ -76,14 +76,14 @@ Utilities for managing Godot Projects using Babashka (Clojure)
 - deploying to s3
 - installing addons from github
 
-** `bb watch`
-A file watcher that runs other commands, which for now is just `bb pixels`.
-** `bb pixels`: Aseprite export
+** ~bb watch~
+A file watcher that runs other commands, which for now is just ~bb pixels~.
+** ~bb pixels~: Aseprite export
 and exports *.aesprite files as pngs, using the aseprite
 binary.
-** `bb addons`
+** ~bb addons~
 An quick status check for your addons-map
-** `bb install-addons`
+** ~bb install-addons~
 > NOTE: at this point I've moved to vendorizing the deps completely within the
 project, to avoid burdening other folks with cloning/installing these deps to
 get Dino to run. These commands might still be useful in some cases, but are not
@@ -122,21 +122,18 @@ A project consuming some of dino's addons (plus GUT) might look like:
      :beehive       :russmatney/dino})}}
 #+end_src
 
-** `bb install-script-templates`
+** ~bb install-script-templates~
 Copy templates from external paths into your project
 
 I needed this one time, tho it seems like addons should do this themselves?
 Maybe going through the asset library works that way?
-** `bb build-web`: Build project for web
+** ~bb build-web~: Build project for web
 Build your project, for web.
 
 Builds using godot's HTML5 template, in the ~./dist~ directory.
-** `bb deploy-web <s3-bucket>`: Deploy project to s3
+** ~bb deploy-web <s3-bucket>~: Deploy project to s3
 Deploy a project to an s3 bucket.
 
 Depends on a working and logged-in ~aws~ cli tool.
-** `bb zip`: Zip project
+** ~bb zip~: Zip project
 zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
-
-*** [ ] look into whatever `butler` is
-maybe could use a clojure wrapper
