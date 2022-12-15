@@ -22,5 +22,11 @@ frames = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="KinkLabel" type="Label" parent="."]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_left = -95.0
+margin_top = -88.0
+margin_right = 94.0
+margin_bottom = -23.0
+text = "If you're here, you're about to learn, Glowmba are very shy.
+"
+align = 1
+autowrap = true

@@ -457,6 +457,7 @@ __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
 Blocks="*res://src/runner/gravity/Blocks.gd"
 Kink="*res://addons/kink/Kink.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
+Ghosts="*res://src/ghosts/Ghosts.gd"
 
 [display]
 
