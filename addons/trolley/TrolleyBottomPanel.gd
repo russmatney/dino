@@ -17,6 +17,8 @@ class ActionsSorter:
 			return true
 		return false
 
+var ActionLabel = preload("res://addons/trolley/TrolleyActionLabel.tscn")
+
 # TODO build and fetch from Trolley autoload
 # TODO write unit tests, use parse_input_event to test updated controls
 func build_actions_list():
@@ -48,14 +50,11 @@ func build_actions_list():
 		$ActionsList.remove_child(ch)
 
 	for ac in actions_list:
-		var label = Label.new()
-
+		var action_label = ActionLabel.instance()
 		var action_name = ac["action"]
-		var key_text = ",".join(ac["keys"])
+		action_label.set_label(action_name)
 
-		if key_text:
-			label.text = str(action_name, " : ", key_text)
-		else:
-			label.text = action_name
+		for k in ac["keys"]:
+			action_label.add_key(k)
 
-		$ActionsList.add_child(label)
+		$ActionsList.add_child(action_label)
