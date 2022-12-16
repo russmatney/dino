@@ -103,13 +103,17 @@ position = Vector2( 1206, -438 )
 initial_dir = 1
 
 [node name="Camera2D" parent="." instance=ExtResource( 7 )]
-current = false
 
 [node name="PlayerWithLight" parent="." instance=ExtResource( 6 )]
 position = Vector2( 312, 312 )
 
 [node name="Door" parent="." instance=ExtResource( 9 )]
 position = Vector2( 416, 352 )
+label = "House"
+destination = "res://src/ghosts/world/House.tscn"
+
+[node name="Door2" parent="." instance=ExtResource( 9 )]
+position = Vector2( -576, -672 )
 label = "House"
 destination = "res://src/ghosts/world/House.tscn"
 
