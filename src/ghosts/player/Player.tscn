@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
@@ -9,15 +9,16 @@
 [ext_resource path="res://src/ghosts/player/Idle.gd" type="Script" id=7]
 [ext_resource path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/ghosts/player/Knockback.gd" type="Script" id=9]
+[ext_resource path="res://src/ghosts/player/Dead.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 26 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
-shader_param/red_displacement = -1.0
-shader_param/green_displacement = 0.0544557
-shader_param/blue_displacement = 0.479422
+shader_param/red_displacement = -0.544781
+shader_param/green_displacement = -0.208337
+shader_param/blue_displacement = 0.138063
 shader_param/ghost = 0.0
 shader_param/intensity = 0.0
 shader_param/scan_effect = 0.0
@@ -44,7 +45,6 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -61,6 +61,9 @@ script = ExtResource( 4 )
 
 [node name="Knockback" type="Node" parent="Machine"]
 script = ExtResource( 9 )
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource( 10 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 margin_left = -32.0

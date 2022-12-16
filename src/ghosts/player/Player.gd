@@ -13,6 +13,7 @@ signal health_change
 
 var initial_pos
 var knocked_back = false
+var dead = false
 
 onready var state_label = $StateLabel
 onready var machine = $Machine
@@ -76,24 +77,22 @@ func face_left():
 
 ############################################################
 
-func hit():
+func hit(body):
 	health -= 1
 	emit_signal("health_change", health)
 
-func knockback(dir):
-	machine.transit("Knockback", {"dir": dir})
+	var dir
+	if body.global_position.x > global_position.x:
+		dir = Vector2.LEFT
+	else:
+		dir = Vector2.RIGHT
+
+	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
 func _on_Hurtbox_body_entered(body:Node):
+	# ignore if we're still recovering or dead
+	if knocked_back or dead:
+		return
 	if body.is_in_group("enemies"):
-		# ignore if we're still recovering
-		if not knocked_back:
-			Ghosts.create_notification(str("Player hurt by ", body.name))
-			hit()
-
-			var dir
-			if body.global_position.x > global_position.x:
-				dir = Vector2.LEFT
-			else:
-				dir = Vector2.RIGHT
-
-			knockback(dir)
+		Ghosts.create_notification(str("Player hurt by ", body.name))
+		hit(body)
