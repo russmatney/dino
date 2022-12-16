@@ -16,9 +16,9 @@ extents = Vector2( 13.5, 26 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
-shader_param/red_displacement = -0.544781
-shader_param/green_displacement = -0.208337
-shader_param/blue_displacement = 0.138063
+shader_param/red_displacement = -0.990108
+shader_param/green_displacement = 0.0974427
+shader_param/blue_displacement = -0.755282
 shader_param/ghost = 0.0
 shader_param/intensity = 0.0
 shader_param/scan_effect = 0.0
@@ -45,6 +45,7 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -74,6 +75,15 @@ custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center]state[/center]"
 text = "state"
+fit_content_height = true
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+margin_left = -32.0
+margin_top = -64.0
+margin_right = 32.0
+margin_bottom = -40.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
 fit_content_height = true
 
 [node name="Hurtbox" type="Area2D" parent="."]

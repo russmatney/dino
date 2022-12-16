@@ -60,6 +60,11 @@ func _process(_delta):
 		position = initial_pos
 		velocity = Vector2.ZERO
 
+	if Input.is_action_just_pressed("action"):
+		if current_action:
+			call_action(current_action)
+
+
 ############################################################
 
 enum DIR { left, right }
@@ -96,3 +101,33 @@ func _on_Hurtbox_body_entered(body:Node):
 	if body.is_in_group("enemies"):
 		Ghosts.create_notification(str("Player hurt by ", body.name))
 		hit(body)
+
+############################################################
+
+var actions = {}
+var current_action
+
+func update_actions_ui():
+	if actions:
+		current_action = actions.values()[0]
+		$ActionLabel.bbcode_text = str("[center]", current_action["fname"].capitalize(), "[/center]")
+	else:
+		$ActionLabel.bbcode_text = ""
+
+func call_action(action):
+	action["obj"].call_deferred(action["fname"])
+
+func add_action(obj, fname):
+	actions[fname] = {
+		"obj": obj,
+		"fname": fname,
+		}
+	print("added action?", actions)
+
+	update_actions_ui()
+
+func remove_action(obj, fname):
+	actions.erase(fname)
+	print("earsed action?", actions)
+
+	update_actions_ui()
