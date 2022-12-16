@@ -109,6 +109,7 @@ var current_action
 
 func update_actions_ui():
 	if actions:
+		# TODO support multiple actions?
 		current_action = actions.values()[0]
 		$ActionLabel.bbcode_text = str("[center]", current_action["fname"].capitalize(), "[/center]")
 	else:
@@ -118,16 +119,9 @@ func call_action(action):
 	action["obj"].call_deferred(action["fname"])
 
 func add_action(obj, fname):
-	actions[fname] = {
-		"obj": obj,
-		"fname": fname,
-		}
-	print("added action?", actions)
-
+	actions[fname] = {"obj": obj, "fname": fname}
 	update_actions_ui()
 
 func remove_action(_obj, fname):
 	actions.erase(fname)
-	print("earsed action?", actions)
-
 	update_actions_ui()
