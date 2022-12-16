@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/ghosts/enemies/glowmba_animated_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/enemies/Glowmba.gd" type="Script" id=2]
@@ -7,7 +7,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
 
-[node name="Glowmba" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 119.821
+
+[node name="Glowmba" type="KinematicBody2D" groups=["enemies", "gloomba"]]
 script = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
@@ -18,7 +21,7 @@ texture = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 1
 speed_scale = 2.0
 playing = true
 
@@ -30,6 +33,14 @@ margin_left = -95.0
 margin_top = -88.0
 margin_right = 94.0
 margin_bottom = -23.0
-text = "Glowmba are shy."
+text = "\"Hello there! I'm your local 'Glowmba'.\""
 align = 1
 autowrap = true
+
+[node name="Detectbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
+[connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]

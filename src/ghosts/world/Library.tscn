@@ -61,3 +61,39 @@ position = Vector2( -69, 275 )
 [node name="Glowmba" parent="." instance=ExtResource( 5 )]
 position = Vector2( -331, 33 )
 initial_dir = 1
+
+[node name="Glowmba2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -160, 39 )
+initial_dir = 1
+
+[node name="Glowmba3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -637, 290 )
+initial_dir = 1
+
+[node name="Glowmba4" parent="." instance=ExtResource( 5 )]
+position = Vector2( -390, 977 )
+initial_dir = 1
+
+[node name="Glowmba5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 420, 891 )
+initial_dir = 1
+
+[node name="Glowmba6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1122, 780 )
+initial_dir = 1
+
+[node name="Glowmba7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 631, -370 )
+initial_dir = 1
+
+[node name="Glowmba8" parent="." instance=ExtResource( 5 )]
+position = Vector2( -799, -657 )
+initial_dir = 1
+
+[node name="Glowmba9" parent="." instance=ExtResource( 5 )]
+position = Vector2( -384, -637 )
+initial_dir = 1
+
+[node name="Glowmba10" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1206, -438 )
+initial_dir = 1
