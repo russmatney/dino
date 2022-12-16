@@ -7,12 +7,13 @@
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
 shader_param/dist = 16.0
-shader_param/alpha = 0.744167
+shader_param/alpha = 0.577177
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [node name="GhostBlock" type="KinematicBody2D"]
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -21,3 +22,14 @@ frames = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+one_way_collision = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -24.0
+margin_top = -56.0
+margin_right = 24.0
+margin_bottom = -40.0
+text = "enabled"
+align = 1
+uppercase = true

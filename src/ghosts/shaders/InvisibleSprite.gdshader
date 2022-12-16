@@ -18,5 +18,5 @@ void fragment() {
 	
 	vec4 texCol = texture(TEXTURE, UV);
 	
-	COLOR = mix(texCol, texCol.a * vec4(backColR.r, backColG.g, backColB.b, 1.0), alpha);
+	COLOR = mix(texCol, texCol.a * vec4(backColR.r, backColG.g, backColB.b, 1.0), 1.0 - alpha);
 }

@@ -7,5 +7,6 @@ func enter(_msg = {}):
 	owner.dead = true
 
 
-func process(_delta: float):
-	pass
+func physics_process(delta):
+	owner.velocity.y += owner.gravity * delta
+	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
