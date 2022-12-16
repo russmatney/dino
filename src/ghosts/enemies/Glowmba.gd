@@ -45,7 +45,16 @@ func _physics_process(delta):
 		if not stunned:
 			velocity.y += gravity * delta
 
-		if not dead or stunned:
+		if stunned:
+			velocity.x = lerp(velocity.x, 0, 0.1)
+			velocity = move_and_slide(velocity, Vector2.UP)
+
+		elif knocked_back or dead:
+			velocity.x = lerp(velocity.x, 0, 0.9)
+			velocity = move_and_slide(velocity, Vector2.UP)
+			$AnimatedSprite.animation = "fly"
+
+		else:
 			velocity.x = move_dir.x * max(speed + speed_factor, velocity.x)
 			velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -66,29 +75,61 @@ func _physics_process(delta):
 						$AnimatedSprite.flip_h = false
 
 func fly():
-	if not flying:
+	if not flying and can_hit_player():
 		flying = true
 		velocity.y = -1 * (fly_speed + (randi() % fly_range) - (fly_range/3.0))
 		yield(get_tree().create_timer(1), "timeout")
 		flying = false
 
+var knockback_impulse = 200
+var knockback_y = 700
+var knockback_time = 2
+var knocked_back = false
+
+func hit(dir):
+	$DeadLight.enabled = true
+	$StunnedLight.enabled = false
+	stunned = false
+	knocked_back = true
+	velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
+	yield(get_tree().create_timer(knockback_time), "timeout")
+	knocked_back = false
+	velocity = Vector2.ZERO
+	die()
+
 func die():
+	stunned = false
 	dead = true
 	$AnimatedSprite.animation = "idle"
 	$AnimatedSprite.playing = false
 	$Light2D.enabled = false
+	$StunnedLight.enabled = false
+	$DeadLight.enabled = true
 
 func stun():
 	stunned = true
 	$AnimatedSprite.animation = "idle"
 	$AnimatedSprite.playing = false
 	$Light2D.enabled = false
+	$StunnedLight.enabled = true
 
 	yield(get_tree().create_timer(4), "timeout")
 
-	$Light2D.enabled = true
-	$AnimatedSprite.playing = true
 	stunned = false
+
+	if not dead and not knocked_back:
+		$Light2D.enabled = true
+		$AnimatedSprite.playing = true
+		$StunnedLight.enabled = false
+
+func player_can_stun():
+	return not stunned and not dead and not knocked_back
+
+func player_can_hit():
+	return stunned
+
+func can_hit_player():
+	return not stunned and not dead and not knocked_back
 
 #############################################################
 

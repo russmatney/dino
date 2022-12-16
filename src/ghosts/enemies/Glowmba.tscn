@@ -1,13 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/ghosts/enemies/glowmba_animated_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/enemies/Glowmba.gd" type="Script" id=2]
 [ext_resource path="res://addons/core/assets/lights/light1_nobg_sheet.png" type="Texture" id=3]
-[ext_resource path="res://addons/inkgd/editor/import_plugins/ink_resource.gd" type="Script" id=4]
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 4 )
-json = "{\"inkVersion\":19,\"root\":[[\"^\\\"Hello there! I'm your local 'Glowmba'.\\\"\",\"\\n\",\"^Glowmba are shy.\",\"\\n\",[\"done\",{\"#n\":\"g-0\"}],null],\"done\",null],\"listDefs\":{}}"
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0
@@ -18,17 +13,29 @@ radius = 154.081
 [node name="Glowmba" type="KinematicBody2D" groups=["enemies", "gloomba"]]
 collision_layer = 8
 script = ExtResource( 2 )
-kink_file = SubResource( 3 )
 gravity = 4000
-
-[node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 2
 speed_scale = 2.0
 playing = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+
+[node name="StunnedLight" type="Light2D" parent="."]
+position = Vector2( 6.67572e-06, 0 )
+scale = Vector2( 0.148438, 0.136719 )
+enabled = false
+texture = ExtResource( 3 )
+
+[node name="DeadLight" type="Light2D" parent="."]
+position = Vector2( -9.53674e-07, -4.76837e-07 )
+scale = Vector2( 0.0898438, 0.0859375 )
+enabled = false
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

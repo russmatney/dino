@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
@@ -17,9 +17,9 @@ extents = Vector2( 13.5, 26 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
-shader_param/red_displacement = 1.0
-shader_param/green_displacement = -1.0
-shader_param/blue_displacement = 1.0
+shader_param/red_displacement = -1.0
+shader_param/green_displacement = -0.775356
+shader_param/blue_displacement = -1.0
 shader_param/ghost = 0.0
 shader_param/intensity = 0.0
 shader_param/scan_effect = 0.0
@@ -31,6 +31,9 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 14.5, 24 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 125.004
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -54,7 +57,6 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 4
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -107,4 +109,14 @@ shape = SubResource( 4 )
 position = Vector2( -12, 13 )
 rotation = -3.13314
 
+[node name="Burstbox" type="Area2D" parent="."]
+position = Vector2( -142, 8 )
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Burstbox"]
+shape = SubResource( 5 )
+
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
+[connection signal="body_entered" from="Burstbox" to="." method="_on_Burstbox_body_entered"]
+[connection signal="body_exited" from="Burstbox" to="." method="_on_Burstbox_body_exited"]

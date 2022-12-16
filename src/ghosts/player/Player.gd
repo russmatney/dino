@@ -63,6 +63,8 @@ func _process(_delta):
 	if Input.is_action_just_pressed("action"):
 		if current_action:
 			call_action(current_action)
+		# TODO update when gloombas become unstunned, maybe via signals
+		update_burst_action()
 
 
 ############################################################
@@ -77,6 +79,7 @@ func face_right():
 	if $Flashlight.position.x < 0:
 		$Flashlight.position.x = -$Flashlight.position.x
 		$Flashlight.scale.x = -$Flashlight.scale.x
+		$Burstbox.position.x = -$Burstbox.position.x
 
 func face_left():
 	facing_direction = DIR.left
@@ -85,6 +88,7 @@ func face_left():
 	if $Flashlight.position.x > 0:
 		$Flashlight.position.x = -$Flashlight.position.x
 		$Flashlight.scale.x = -$Flashlight.scale.x
+		$Burstbox.position.x = -$Burstbox.position.x
 
 ############################################################
 
@@ -105,8 +109,50 @@ func _on_Hurtbox_body_entered(body:Node):
 	if knocked_back or dead:
 		return
 	if body.is_in_group("enemies"):
-		Ghosts.create_notification(str("Player hurt by ", body.name))
-		hit(body)
+		if body.can_hit_player():
+			Ghosts.create_notification(str("Player hurt by ", body.name))
+			hit(body)
+		elif body.player_can_hit():
+			if body.has_method("hit"):
+				var dir
+				if body.global_position.x > global_position.x:
+					dir = Vector2.RIGHT
+				else:
+					dir = Vector2.LEFT
+
+				body.hit(dir)
+
+############################################################
+
+var burstables = []
+
+func burst_gloomba():
+	for b in burstables:
+		if b.player_can_stun():
+			b.stun()
+
+	update_burst_action()
+
+func update_burst_action():
+	if burstables:
+		# add if one can be burst
+		for b in burstables:
+			if b.player_can_stun():
+				add_action(self, "burst_gloomba")
+				return
+
+	remove_action(self, "burst_gloomba")
+
+func _on_Burstbox_body_entered(body:Node):
+	if body.is_in_group("enemies"):
+		burstables.append(body)
+	update_burst_action()
+
+func _on_Burstbox_body_exited(body:Node):
+	if body.is_in_group("enemies"):
+		burstables.erase(body)
+	update_burst_action()
+
 
 ############################################################
 
@@ -115,10 +161,12 @@ var current_action
 
 func update_actions_ui():
 	if actions:
-		# TODO support multiple actions?
+		# TODO support multiple actions, or preferred action?
+		# maybe actions can pass a priority
 		current_action = actions.values()[0]
 		$ActionLabel.bbcode_text = str("[center]", current_action["fname"].capitalize(), "[/center]")
 	else:
+		current_action = null
 		$ActionLabel.bbcode_text = ""
 
 func call_action(action):

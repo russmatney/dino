@@ -120,4 +120,4 @@ destination = "res://src/ghosts/world/House.tscn"
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( 272, 152 )
+position = Vector2( 144, 871 )
