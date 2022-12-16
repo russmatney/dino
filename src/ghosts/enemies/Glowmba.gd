@@ -1,13 +1,6 @@
 tool
 extends KinematicBody2D
 
-onready var kink_label = $KinkLabel
-
-export(Resource) var kink_file = preload("res://src/ghosts/enemies/glowmba.ink.json")
-
-var ink_player
-
-
 func _ready():
 	match initial_dir:
 		DIR.left:
