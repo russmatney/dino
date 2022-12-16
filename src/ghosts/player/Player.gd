@@ -70,15 +70,21 @@ func _process(_delta):
 enum DIR { left, right }
 var facing_direction = DIR.left
 
-
 func face_right():
 	facing_direction = DIR.right
 	anim.flip_h = true
 
+	if $Flashlight.position.x < 0:
+		$Flashlight.position.x = -$Flashlight.position.x
+		$Flashlight.scale.x = -$Flashlight.scale.x
 
 func face_left():
 	facing_direction = DIR.left
 	anim.flip_h = false
+
+	if $Flashlight.position.x > 0:
+		$Flashlight.position.x = -$Flashlight.position.x
+		$Flashlight.scale.x = -$Flashlight.scale.x
 
 ############################################################
 

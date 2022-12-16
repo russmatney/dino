@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
@@ -10,15 +10,16 @@
 [ext_resource path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" type="Shader" id=8]
 [ext_resource path="res://src/ghosts/player/Knockback.gd" type="Script" id=9]
 [ext_resource path="res://src/ghosts/player/Dead.gd" type="Script" id=10]
+[ext_resource path="res://src/ghosts/player/Flashlight.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 26 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
-shader_param/red_displacement = -0.990108
-shader_param/green_displacement = 0.0974427
-shader_param/blue_displacement = -0.755282
+shader_param/red_displacement = 1.0
+shader_param/green_displacement = -1.0
+shader_param/blue_displacement = 1.0
 shader_param/ghost = 0.0
 shader_param/intensity = 0.0
 shader_param/scan_effect = 0.0
@@ -36,6 +37,14 @@ collision_layer = 2
 script = ExtResource( 2 )
 max_health = 4
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_left = -250.0
+margin_top = -181.0
+margin_right = 235.0
+margin_bottom = 175.0
+color = Color( 0.298039, 0.215686, 0.215686, 1 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5, 6 )
 shape = SubResource( 1 )
@@ -45,7 +54,7 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
+frame = 4
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -93,5 +102,9 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 2.5, 4 )
 shape = SubResource( 4 )
+
+[node name="Flashlight" parent="." instance=ExtResource( 11 )]
+position = Vector2( -12, 13 )
+rotation = -3.13314
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
