@@ -4,8 +4,6 @@ var player
 
 
 func _ready():
-	print("ghosts player hud ready")
-
 	# TODO connect to player spawn signals instead
 	call_deferred("find_player")
 

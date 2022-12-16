@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
@@ -8,15 +8,16 @@
 [ext_resource path="res://src/ghosts/player/PlayerMachine.gd" type="Script" id=6]
 [ext_resource path="res://src/ghosts/player/Idle.gd" type="Script" id=7]
 [ext_resource path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" type="Shader" id=8]
+[ext_resource path="res://src/ghosts/player/Knockback.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 26 )
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
-shader_param/red_displacement = 0.369342
-shader_param/green_displacement = -0.901205
-shader_param/blue_displacement = -0.938867
+shader_param/red_displacement = -1.0
+shader_param/green_displacement = 0.0544557
+shader_param/blue_displacement = 0.479422
 shader_param/ghost = 0.0
 shader_param/intensity = 0.0
 shader_param/scan_effect = 0.0
@@ -26,8 +27,13 @@ shader_param/negative_effect = 0.0
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 14.5, 24 )
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource( 2 )
+max_health = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5, 6 )
@@ -38,7 +44,7 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -53,6 +59,9 @@ script = ExtResource( 5 )
 [node name="Air" type="Node" parent="Machine"]
 script = ExtResource( 4 )
 
+[node name="Knockback" type="Node" parent="Machine"]
+script = ExtResource( 9 )
+
 [node name="StateLabel" type="RichTextLabel" parent="."]
 margin_left = -32.0
 margin_top = -49.0
@@ -63,3 +72,13 @@ bbcode_enabled = true
 bbcode_text = "[center]state[/center]"
 text = "state"
 fit_content_height = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 2.5, 4 )
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
