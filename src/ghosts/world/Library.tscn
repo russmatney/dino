@@ -60,3 +60,4 @@ position = Vector2( -69, 275 )
 
 [node name="Glowmba" parent="." instance=ExtResource( 5 )]
 position = Vector2( -331, 33 )
+initial_dir = 1

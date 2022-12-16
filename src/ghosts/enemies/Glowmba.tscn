@@ -4,8 +4,8 @@
 [ext_resource path="res://src/ghosts/enemies/Glowmba.gd" type="Script" id=2]
 [ext_resource path="res://addons/core/assets/lights/downward_light_sheet.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 29, 29 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 15.0
 
 [node name="Glowmba" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -17,6 +17,10 @@ texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
+animation = "idle"
+frame = 3
+speed_scale = 2.0
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -26,7 +30,6 @@ margin_left = -95.0
 margin_top = -88.0
 margin_right = 94.0
 margin_bottom = -23.0
-text = "If you're here, you're about to learn, Glowmba are very shy.
-"
+text = "Glowmba are shy."
 align = 1
 autowrap = true

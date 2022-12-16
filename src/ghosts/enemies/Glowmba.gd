@@ -24,6 +24,18 @@ func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
+	match initial_dir:
+		DIR.left:
+			move_dir = Vector2.LEFT
+		DIR.right:
+			move_dir = Vector2.RIGHT
+
+	match move_dir:
+		Vector2.RIGHT:
+			$AnimatedSprite.flip_h = true
+		Vector2.LEFT:
+			$AnimatedSprite.flip_h = false
+
 
 func kink_player_ready():
 	ink_player.create_story()
@@ -72,22 +84,31 @@ func kink_ended():
 # physics process
 
 var dead = false
-var dir = Vector2.RIGHT
+enum DIR { left, right }
+export(DIR) var initial_dir = DIR.left
+var move_dir = Vector2.RIGHT
 export(int) var speed = 100
 export(int) var gravity := 4000
-var velocity = dir * speed
-
+var velocity = move_dir * speed
 
 func _physics_process(delta):
 	if not Engine.editor_hint:
 		velocity.y += gravity * delta
 
 		if not dead:
-			velocity.x = dir.x * max(speed, velocity.x)
+			velocity.x = move_dir.x * max(speed, velocity.x)
 			velocity = move_and_slide(velocity, Vector2.UP)
+
+			if abs(velocity.x) > 0.1:
+				$AnimatedSprite.animation = "walk"
+			else:
+				$AnimatedSprite.animation = "idle"
+
 			if is_on_wall():
-				match dir:
+				match move_dir:
 					Vector2.LEFT:
-						dir = Vector2.RIGHT
+						move_dir = Vector2.RIGHT
+						$AnimatedSprite.flip_h = true
 					Vector2.RIGHT:
-						dir = Vector2.LEFT
+						move_dir = Vector2.LEFT
+						$AnimatedSprite.flip_h = false
