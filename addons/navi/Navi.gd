@@ -55,11 +55,11 @@ func _ready():
 ## nav_to ###################################################################
 
 
-func nav_to(path):
-	print("[Navi] nav_to: ", path)
+func nav_to(path_or_packed_scene):
+	print("[Navi] nav_to: ", path_or_packed_scene)
 	# NOTE this scene stack grows forever!
-	last_scene_stack.push_back(path)
-	call_deferred("_deferred_goto_scene", path)
+	last_scene_stack.push_back(path_or_packed_scene)
+	call_deferred("_deferred_goto_scene", path_or_packed_scene)
 	# Navi implying DJ dep
 	# TODO opt-in/out of pausing the music
 	DJ.pause_menu_song()
@@ -68,12 +68,16 @@ func nav_to(path):
 	death_menu.hide()
 
 
-func _deferred_goto_scene(path):
+func _deferred_goto_scene(path_or_packed_scene):
 	# It is now safe to remove the current scene
 	current_scene.free()
 
 	# Load the new scene.
-	var s = ResourceLoader.load(path)
+	var s
+	if path_or_packed_scene is String:
+		s = ResourceLoader.load(path_or_packed_scene)
+	else:
+		s = path_or_packed_scene
 
 	# Instance the new scene.
 	current_scene = s.instance()
