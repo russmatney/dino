@@ -12,7 +12,7 @@ func _ready():
 	shader_loop()
 
 func shader_loop():
-	tween = get_tree().create_tween()
+	tween = create_tween()
 	tween.set_loops(0)
 
 	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.9, 2)

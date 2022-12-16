@@ -42,7 +42,7 @@ func set_state_label(label: String):
 ############################################################
 
 func shader_loop():
-	tween = get_tree().create_tween()
+	tween = create_tween()
 	tween.set_loops(0)
 
 	tween.tween_property(anim.get_material(), "shader_param/red_displacement", 1.0, 1)
