@@ -24,26 +24,28 @@ func _ready():
 #######################################################################33
 # physics process
 
+var stunned = false
 var dead = false
 enum DIR { left, right }
 export(DIR) var initial_dir = DIR.left
 var move_dir = Vector2.RIGHT
 export(int) var speed = 100
 export(int) var speed_range = 90
-export(int) var gravity := 4000
+export(int) var gravity := 2000
 var speed_factor = 0
 
 var velocity = move_dir * speed
 
-export(int) var fly_speed := 1500
+export(int) var fly_speed := 900
 export(int) var fly_range := 400
 var flying = false
 
 func _physics_process(delta):
 	if not Engine.editor_hint:
-		velocity.y += gravity * delta
+		if not stunned:
+			velocity.y += gravity * delta
 
-		if not dead:
+		if not dead or stunned:
 			velocity.x = move_dir.x * max(speed + speed_factor, velocity.x)
 			velocity = move_and_slide(velocity, Vector2.UP)
 
@@ -70,6 +72,23 @@ func fly():
 		yield(get_tree().create_timer(1), "timeout")
 		flying = false
 
+func die():
+	dead = true
+	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.playing = false
+	$Light2D.enabled = false
+
+func stun():
+	stunned = true
+	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.playing = false
+	$Light2D.enabled = false
+
+	yield(get_tree().create_timer(4), "timeout")
+
+	$Light2D.enabled = true
+	$AnimatedSprite.playing = true
+	stunned = false
 
 #############################################################
 
