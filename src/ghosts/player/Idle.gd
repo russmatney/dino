@@ -16,3 +16,7 @@ func process(_delta: float):
 		machine.transit("Air", {do_jump = true})
 	elif Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		machine.transit("Run")
+
+func physics_process(delta):
+	owner.velocity.y += owner.gravity * delta
+	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)

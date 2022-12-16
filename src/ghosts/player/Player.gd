@@ -56,10 +56,6 @@ func shader_loop():
 ############################################################
 
 func _process(_delta):
-	if get_global_position().y > 3000:
-		position = initial_pos
-		velocity = Vector2.ZERO
-
 	if Input.is_action_just_pressed("action"):
 		if current_action:
 			call_action(current_action)
