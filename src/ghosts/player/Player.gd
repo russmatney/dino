@@ -126,7 +126,7 @@ func add_action(obj, fname):
 
 	update_actions_ui()
 
-func remove_action(obj, fname):
+func remove_action(_obj, fname):
 	actions.erase(fname)
 	print("earsed action?", actions)
 
