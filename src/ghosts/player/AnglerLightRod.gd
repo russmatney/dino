@@ -26,21 +26,23 @@ func _ready():
 
 
 func _process(_delta):
-	if player.velocity.y != 0:
-		position.y = player.position.y + initial_y_rel
+	# if this pinjoint as been freed, we don't manually position the rod anymore
+	if handle_pinjoint and is_instance_valid(handle_pinjoint):
+		if player.velocity.y != 0:
+			position.y = player.position.y + initial_y_rel
 
-	# TODO move to reaction to player signal to get out of process loop
-	match player.facing_direction:
-		player.DIR.right:
-			position.x = player.position.x + initial_x_rel
-			# for ch in angler_chain.get_children():
-			# 	ch.position.x *= -1
-		player.DIR.left:
-			position.x = player.position.x - initial_x_rel
-			# for ch in angler_chain.get_children():
-			# 	ch.position.x *= -1
+		# TODO move to reaction to player signal to get out of process loop
+		match player.facing_direction:
+			player.DIR.right:
+				position.x = player.position.x + initial_x_rel
+				# for ch in angler_chain.get_children():
+				# 	ch.position.x *= -1
+			player.DIR.left:
+				position.x = player.position.x - initial_x_rel
+				# for ch in angler_chain.get_children():
+				# 	ch.position.x *= -1
 
-	handle_pinjoint.position = position
+		handle_pinjoint.position = position
 
 #func _integrate_forces(state):
 #	state.add_torque(global_position.angle_to_point(get_global_mouse_position()))
