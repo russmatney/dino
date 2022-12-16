@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/ghosts/world/platforms/IndoorTiles.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/ghosts/player/Camera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/ghosts/enemies/Glowmba.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/ghosts/world/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/ghosts/world/lights/HangingLight.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ghosts/hud/HUD.tscn" type="PackedScene" id=8]
 
 [node name="House" type="Node2D"]
@@ -42,9 +43,6 @@ position = Vector2( 262, 225 )
 [node name="Glowmba4" parent="." instance=ExtResource( 5 )]
 position = Vector2( -286, -158 )
 
-[node name="Glowmba5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 158, 217 )
-
 [node name="Door2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 256, 608 )
 label = "Library"
@@ -52,12 +50,30 @@ destination = "res://src/ghosts/world/Library.tscn"
 
 [node name="Door3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 192, 32 )
+label = "Cells"
+destination = "res://src/ghosts/world/Cells.tscn"
 
 [node name="Door4" parent="." instance=ExtResource( 6 )]
 position = Vector2( -512, 608 )
+label = "Office"
+destination = "res://src/ghosts/world/Office.tscn"
 
 [node name="Door" parent="." instance=ExtResource( 6 )]
 position = Vector2( -512, 96 )
+label = "Pit"
+destination = "res://src/ghosts/world/Pit.tscn"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( -170, 150 )
+
+[node name="HangingLight" parent="." instance=ExtResource( 7 )]
+position = Vector2( -460, -63 )
+
+[node name="HangingLight2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 138, -126 )
+
+[node name="HangingLight3" parent="." instance=ExtResource( 7 )]
+position = Vector2( -485, 446 )
+
+[node name="HangingLight4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 157, 388 )
