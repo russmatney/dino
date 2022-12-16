@@ -45,9 +45,6 @@ position = Vector2( -286, -158 )
 [node name="Glowmba5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 158, 217 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( -170, 150 )
-
 [node name="Door2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 256, 608 )
 label = "Library"
@@ -61,3 +58,6 @@ position = Vector2( -512, 608 )
 
 [node name="Door" parent="." instance=ExtResource( 6 )]
 position = Vector2( -512, 96 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( -170, 150 )

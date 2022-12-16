@@ -127,11 +127,20 @@ func _on_Hurtbox_body_entered(body:Node):
 var burstables = []
 
 func burst_gloomba():
+	var did_burst = false
 	for b in burstables:
 		if b.player_can_stun():
 			b.stun()
+			did_burst = true
 
 	update_burst_action()
+
+	if did_burst:
+		$Flashlight/AnimatedSprite.visible = true
+		$Flashlight/AnimatedSprite.frame = 0
+		# $Flashlight/AnimatedSprite.play("burst")
+		yield(get_tree().create_timer(0.4), "timeout")
+		$Flashlight/AnimatedSprite.visible = false
 
 func update_burst_action():
 	if burstables:

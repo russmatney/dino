@@ -42,12 +42,12 @@ var flying = false
 
 func _physics_process(delta):
 	if not Engine.editor_hint:
-		if not stunned:
-			velocity.y += gravity * delta
+		velocity.y += gravity * delta
 
 		if stunned:
 			velocity.x = lerp(velocity.x, 0, 0.1)
 			velocity = move_and_slide(velocity, Vector2.UP)
+			$AnimatedSprite.animation = "fly"
 
 		elif knocked_back or dead:
 			velocity.x = lerp(velocity.x, 0, 0.9)
@@ -100,7 +100,7 @@ func hit(dir):
 func die():
 	stunned = false
 	dead = true
-	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.animation = "fly"
 	$AnimatedSprite.playing = false
 	$Light2D.enabled = false
 	$StunnedLight.enabled = false
@@ -108,10 +108,12 @@ func die():
 
 func stun():
 	stunned = true
-	$AnimatedSprite.animation = "idle"
+	$AnimatedSprite.animation = "fly"
 	$AnimatedSprite.playing = false
 	$Light2D.enabled = false
 	$StunnedLight.enabled = true
+
+	velocity = Vector2(0, -1 * knockback_y / 2.0)
 
 	yield(get_tree().create_timer(4), "timeout")
 

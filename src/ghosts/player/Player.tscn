@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/ghosts/player/Knockback.gd" type="Script" id=9]
 [ext_resource path="res://src/ghosts/player/Dead.gd" type="Script" id=10]
 [ext_resource path="res://src/ghosts/player/Flashlight.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/core/assets/lights/light_smooth_sheet.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 26 )
@@ -18,10 +19,10 @@ extents = Vector2( 13.5, 26 )
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 8 )
 shader_param/red_displacement = -1.0
-shader_param/green_displacement = -0.775356
-shader_param/blue_displacement = -1.0
+shader_param/green_displacement = 1.0
+shader_param/blue_displacement = 1.0
 shader_param/ghost = 0.0
-shader_param/intensity = 0.0
+shader_param/intensity = 1.0
 shader_param/scan_effect = 0.0
 shader_param/distortion_effect = 0.0
 shader_param/negative_effect = 0.0
@@ -57,6 +58,7 @@ material = SubResource( 3 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -116,6 +118,10 @@ collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Burstbox"]
 shape = SubResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 2, 5 )
+texture = ExtResource( 12 )
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="body_entered" from="Burstbox" to="." method="_on_Burstbox_body_entered"]
