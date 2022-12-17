@@ -1,6 +1,6 @@
 tool
-extends Control
-class_name NaviMenu
+extends VBoxContainer
+class_name NaviButtonList
 
 export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
 
@@ -8,9 +8,7 @@ export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.
 # TODO consider loading/falling back on a load instead?
 var _navi = Navi
 
-var menu_list = null
-var expected_nodes = {"MenuList": "menu_list"}
-
+var menu_list = self
 
 func pw(msg: String, item = {}):
 	if item:
@@ -21,44 +19,18 @@ func pw(msg: String, item = {}):
 
 ## config warnings #####################################################################
 
-
 func _get_configuration_warning():
-	for node_name in expected_nodes:
-		var node = find_node(node_name)
-		if not node:
-			return (
-				"'NaviMenu' expected child node named '"
-				+ node_name
-				+ "' somewhere in its children."
-			)
+	if not button_scene:
+		return "No button_scene set"
 	return ""
-
 
 ## ready #####################################################################
 
 
 func _ready():
-	for node_name in expected_nodes:
-		var local_var_name = expected_nodes[node_name]
-		self[local_var_name] = find_node("MenuList")
-		assert(
-			self[local_var_name],
-			(
-				"'NaviMenu' expected "
-				+ node_name
-				+ " to be set as "
-				+ local_var_name
-				+ ", but found: "
-				+ str(self[local_var_name])
-			)
-		)
-
+	# TODO assert on nav paths?
 	if Engine.editor_hint:
 		request_ready()
-
-	# TODO opt-out if desired
-	# TODO support passing a custom song
-	DJ.resume_menu_song()
 
 
 func print_button_things():
@@ -116,6 +88,10 @@ func add_menu_item(item):
 	var texts = []
 	for but in get_buttons():
 		texts.append(but.text)
+
+	if not button_scene:
+		pw("No button_scene: ", button_scene)
+		return
 
 	var button = button_scene.instance()
 	var label = item.get("label", "Fallback Label")

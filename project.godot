@@ -334,10 +334,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/beehive/machine.gd"
 }, {
-"base": "Control",
-"class": "NaviMenu",
+"base": "VBoxContainer",
+"class": "NaviButtonList",
 "language": "GDScript",
-"path": "res://addons/navi/NaviMenu.gd"
+"path": "res://addons/navi/NaviButtonList.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -430,7 +430,7 @@ _global_script_class_icons={
 "InkVariablesState": "",
 "InkVoid": "",
 "Machine": "",
-"NaviMenu": "",
+"NaviButtonList": "",
 "Player": "",
 "RunnerRoom": "",
 "State": "",

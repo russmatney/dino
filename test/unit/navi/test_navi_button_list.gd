@@ -1,12 +1,13 @@
 extends GutTest
 
-var menu_scene = load("res://test/unit/navi/NaviMenuTest.tscn")
+var scene_path = "res://test/unit/navi/NaviButtonListTest.tscn"
+var scene = load(scene_path)
 
 var m
 
 
 func before_each():
-	m = autofree(menu_scene.instance())
+	m = autofree(scene.instance())
 	add_child(m)
 
 
@@ -83,7 +84,7 @@ func test_menu_items_with_nav_to():
 	# autoloads are not easily doubled
 	m._navi = double("res://addons/navi/Navi.gd").new()
 
-	var some_path = "res://test/unit/navi/NaviMenuTest.tscn"
+	var some_path = scene_path
 	var button_desc = {
 		"label": "My button",
 		"nav_to": some_path,
