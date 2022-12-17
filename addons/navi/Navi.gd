@@ -20,10 +20,17 @@ export(PackedScene) var win_menu_scene = preload("res://addons/navi/NaviWinMenu.
 var win_container
 var win_menu
 
+func pp(msg):
+	print("[Navi] ", msg)
+
 ## ready ###################################################################
 
 
 func _ready():
+	var f = File.new()
+	if not f.file_exists(main_menu_path):
+		pp(str("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op."))
+
 	pause_mode = PAUSE_MODE_PROCESS
 
 	var root = get_tree().get_root()
@@ -91,6 +98,25 @@ func _deferred_goto_scene(path_or_packed_scene):
 	get_tree().set_current_scene(current_scene)
 
 
+## main ###################################################################
+
+var main_menu_path = "res://src/menus/DinoMenu.tscn"
+
+func set_main_menu(path):
+	var f = File.new()
+	if f.file_exists(path):
+		pp(str("Updating main_menu_path: ", path))
+		main_menu_path = path
+	else:
+		pp(str("No scene at path: ", main_menu_path, ", can't set main menu."))
+
+func nav_to_main_menu():
+	var f = File.new()
+	if f.file_exists(main_menu_path):
+		nav_to(main_menu_path)
+	else:
+		pp(str("No scene at path: ", main_menu_path, ", can't navigate."))
+
 ## pause ###################################################################
 
 
@@ -129,7 +155,7 @@ func resume():
 	DJ.pause_menu_song()
 
 
-## death ###########################################333
+## death ###########################################
 
 func show_death_menu():
 	death_menu.show()
@@ -138,7 +164,7 @@ func hide_death_menu():
 	death_menu.hide()
 
 
-## win ###########################################333
+## win ###########################################
 
 func show_win_menu():
 	win_menu.show()

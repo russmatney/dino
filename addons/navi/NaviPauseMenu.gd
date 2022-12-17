@@ -14,12 +14,7 @@ func _ready():
 
 
 func _on_ReturnToMain_pressed():
-	# TODO is there some way to auto-assert if this is missing?
-	# could give a helper func here if we had some main-menu-opt-in ui
-	# feels like we need a configuration UI...
-	# TODO nav_to should automatically resume
-	# TODO Navi.goto_main_menu() ?
-	Navi.nav_to("res://src/menus/DinoMenu.tscn")
+	Navi.nav_to_main_menu()
 	Navi.resume()
 
 
