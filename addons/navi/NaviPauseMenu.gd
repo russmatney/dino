@@ -18,7 +18,8 @@ func _on_ReturnToMain_pressed():
 	# could give a helper func here if we had some main-menu-opt-in ui
 	# feels like we need a configuration UI...
 	# TODO nav_to should automatically resume
-	Navi.nav_to("res://src/menus/MainMenu.tscn")
+	# TODO Navi.goto_main_menu() ?
+	Navi.nav_to("res://src/menus/DinoMenu.tscn")
 	Navi.resume()
 
 

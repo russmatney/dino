@@ -441,7 +441,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dino"
-run/main_scene="res://src/menus/MainMenu.tscn"
+run/main_scene="res://src/menus/DinoMenu.tscn"
 config/icon="res://assets/icon.png"
 run/main_scene.runner="res://src/runner/park/ThePark.tscn"
 run/main_scene.dungeon-crawler="res://src/dungeonCrawler/rooms/OneGeon.tscn"
