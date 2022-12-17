@@ -8,8 +8,6 @@ export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.
 # TODO consider loading/falling back on a load instead?
 var _navi = Navi
 
-var menu_list = self
-
 func pw(msg: String, item = {}):
 	if item:
 		print("[NaviMenu] Warning: ", msg, " item: ", item)
@@ -41,7 +39,7 @@ func print_button_things():
 
 
 func get_buttons():
-	return menu_list.get_children()
+	return get_children()
 
 
 func no_op():
@@ -103,4 +101,4 @@ func add_menu_item(item):
 
 	button.text = label
 	connect_pressed_to_action(button, item)
-	menu_list.add_child(button)
+	add_child(button)

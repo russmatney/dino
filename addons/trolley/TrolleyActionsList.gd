@@ -1,5 +1,6 @@
 tool
 extends VBoxContainer
+class_name TrolleyActionsList
 
 export(String) var ignore_prefix = "ui_"
 export(String) var only_prefix

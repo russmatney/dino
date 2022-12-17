@@ -12,7 +12,7 @@ var menu_scenes = [
 	},
 	{
 		"label": "Ghosts",
-		"nav_to": "res://src/ghosts/world/World.tscn",
+		"nav_to": "res://src/ghosts/GhostsMenu.tscn",
 	},
 ]
 

@@ -363,6 +363,11 @@ _global_script_classes=[ {
 "class": "StoryErrorMetadata",
 "language": "GDScript",
 "path": "res://addons/inkgd/runtime/extra/story_error_metadata.gd"
+}, {
+"base": "VBoxContainer",
+"class": "TrolleyActionsList",
+"language": "GDScript",
+"path": "res://addons/trolley/TrolleyActionsList.gd"
 } ]
 _global_script_class_icons={
 "Credits": "",
@@ -435,7 +440,8 @@ _global_script_class_icons={
 "RunnerRoom": "",
 "State": "",
 "StoryError": "",
-"StoryErrorMetadata": ""
+"StoryErrorMetadata": "",
+"TrolleyActionsList": ""
 }
 
 [application]
@@ -445,7 +451,7 @@ run/main_scene="res://src/menus/DinoMenu.tscn"
 config/icon="res://assets/icon.png"
 run/main_scene.runner="res://src/runner/park/ThePark.tscn"
 run/main_scene.dungeon-crawler="res://src/dungeonCrawler/rooms/OneGeon.tscn"
-run/main_scene.ghosts="res://src/ghosts/world/World.tscn"
+run/main_scene.ghosts="res://src/ghosts/GhostsMenu.tscn"
 
 [autoload]
 

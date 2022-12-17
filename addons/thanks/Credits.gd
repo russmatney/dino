@@ -2,8 +2,7 @@ tool
 extends Control
 class_name Credits
 
-# TODO support swappable to allow different fonts
-var credit_line_scene = preload("res://addons/thanks/CreditLine.tscn")
+export(PackedScene) var credit_line_scene = preload("res://addons/thanks/CreditLine.tscn")
 var credits_lines_container: VBoxContainer
 
 var credits_scroll_container: ScrollContainer

@@ -26,23 +26,23 @@ text = "Dino"
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 133.0
 margin_right = 512.0
-margin_bottom = 283.0
+margin_bottom = 195.0
 alignment = 1
 
 [node name="GamesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 31.0
+margin_left = 75.0
 margin_right = 178.0
-margin_bottom = 150.0
+margin_bottom = 62.0
 script = ExtResource( 3 )
 
 [node name="GymsList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 182.0
 margin_right = 329.0
-margin_bottom = 150.0
+margin_bottom = 62.0
 script = ExtResource( 4 )
 
 [node name="OtherList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 333.0
-margin_right = 480.0
-margin_bottom = 150.0
+margin_right = 436.0
+margin_bottom = 62.0
 script = ExtResource( 5 )

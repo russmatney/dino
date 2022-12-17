@@ -1,3 +1,4 @@
+tool
 extends Credits
 
 var dino_credits = [
@@ -8,26 +9,37 @@ var dino_credits = [
     "Songs",
     "",
     "Late Night Radio",
-    "Kevin MacLeod (incompetech.com)",
+    "by Kevin MacLeod (incompetech.com)",
     "Licensed under Creative Commons: By Attribution 4.0 License",
     "http://creativecommons.org/licenses/by/4.0",
-  ],
-  [
-    "Art",
-    "",
-    "Pirate Bomb",
-    "Pixel Frog",
-      # TODO get proper attribution in here
-    "CC-0",
-    "",
   ],
   [
     "Fonts",
     "",
     "born2bsportyv2",
-    "japanyoshi",
+    "by japanyoshi",
     "http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=383",
     "Public Domain",
+    "https://creativecommons.org/publicdomain/zero/1.0/",
+    "",
+    "at10",
+    "by grafxkid",
+    "https://grafxkid.itch.io/at01",
+    "Public Domain",
+    "https://creativecommons.org/publicdomain/zero/1.0/",
+  ],
+  [
+    "Art",
+    "",
+    "Pirate Bomb Tile Set",
+    "By Pixel Frog",
+    "https://pixelfrog-assets.itch.io/pirate-bomb",
+    "Public Domain",
+    "https://creativecommons.org/publicdomain/zero/1.0/",
+  ],
+  ["Contributors",
+    "",
+    "Joshua Skrzypek",
   ],
   ["Patrons",
     "",

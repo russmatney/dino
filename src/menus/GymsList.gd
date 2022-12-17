@@ -1,7 +1,7 @@
 tool
 extends NaviButtonList
 
-# TODO parse scenes with 'Gym' or 'Demo' into a menu_scenes list
+# TODO parse paths to scenes with 'Gym' or 'Demo' into a menu_scenes list
 
 var menu_scenes = [
 	{
