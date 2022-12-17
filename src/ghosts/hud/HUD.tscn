@@ -1,14 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/ghosts/hud/HUD.gd" type="Script" id=1]
-[ext_resource path="res://addons/MaxSizeContainer/max_size_container.gd" type="Script" id=2]
-[ext_resource path="res://addons/trolley/TrolleyActionLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/ghosts/hud/GhostsControls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/ghosts/hud/HeartsContainer.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -16,78 +15,30 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 496.0
-margin_bottom = 140.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 392.0
+margin_bottom = 284.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 496.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-script = ExtResource( 2 )
-max_size = Vector2( 200, -1 )
-valign = 0
-halign = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MaxSizeContainer"]
-margin_left = 296.0
-margin_right = 496.0
-margin_bottom = 140.0
-size_flags_horizontal = 11
-
-[node name="TrolleyActionLabel" parent="VBoxContainer/HBoxContainer/MaxSizeContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_bottom = 23.0
-action = "Pause (controls)"
-key = "Escape"
-
-[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/MaxSizeContainer/VBoxContainer"]
-margin_top = 27.0
-margin_right = 200.0
-margin_bottom = 57.0
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-script = ExtResource( 2 )
-max_size = Vector2( 98, -1 )
-halign = 2
-
-[node name="HeartsContainer" parent="VBoxContainer/HBoxContainer/MaxSizeContainer/VBoxContainer/MaxSizeContainer" instance=ExtResource( 5 )]
+[node name="HeartsContainer" parent="HBoxContainer/VBoxContainer2" instance=ExtResource( 5 )]
 unique_name_in_owner = true
-margin_left = 102.0
-margin_right = 200.0
+margin_right = 392.0
 margin_bottom = 30.0
-size_flags_horizontal = 3
 h = 0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 144.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 396.0
 margin_right = 496.0
 margin_bottom = 284.0
-size_flags_vertical = 3
 
-[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
-margin_right = 496.0
-margin_bottom = 140.0
-size_flags_horizontal = 3
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-script = ExtResource( 2 )
-max_size = Vector2( 200, -1 )
-valign = 2
-halign = 2
+[node name="GhostsControls" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
 
-[node name="Notifications" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/MaxSizeContainer"]
+[node name="Notifications" type="VBoxContainer" parent="HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_left = 296.0
-margin_right = 496.0
-margin_bottom = 140.0
+margin_top = 81.0
+margin_right = 100.0
+margin_bottom = 284.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 2
