@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/ghosts/hud/HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/ghosts/enemies/Glowmba.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/ghosts/player/PlayerSpawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/ghosts/world/GhostsRoom.gd" type="Script" id=9]
+[ext_resource path="res://src/ghosts/world/platforms/GhostBlock.tscn" type="PackedScene" id=10]
 
 [node name="Cells" type="Node2D"]
 script = ExtResource( 9 )
@@ -80,3 +81,27 @@ position = Vector2( 1439, 1823 )
 
 [node name="PlayerSpawner" parent="." instance=ExtResource( 8 )]
 position = Vector2( 87, 50 )
+
+[node name="GhostBlock" parent="." instance=ExtResource( 10 )]
+position = Vector2( 493, 323 )
+
+[node name="GhostBlock2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 608, 926 )
+
+[node name="GhostBlock3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 2149, 613 )
+
+[node name="GhostBlock4" parent="." instance=ExtResource( 10 )]
+position = Vector2( 2683, 1320 )
+
+[node name="GhostBlock5" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1718, 1333 )
+
+[node name="GhostBlock6" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1231, 1888 )
+
+[node name="GhostBlock7" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1632, 1885 )
+
+[node name="GhostBlock8" parent="." instance=ExtResource( 10 )]
+position = Vector2( 604, 1465 )

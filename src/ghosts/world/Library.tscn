@@ -119,3 +119,18 @@ destination = "res://src/ghosts/world/Cells.tscn"
 
 [node name="PlayerSpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 304, 209 )
+
+[node name="GhostBlock" parent="." instance=ExtResource( 3 )]
+position = Vector2( -40, 889 )
+
+[node name="GhostBlock2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 685, 858 )
+
+[node name="GhostBlock3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 907, -530 )
+
+[node name="GhostBlock4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1488, -542 )
+
+[node name="GhostBlock5" parent="." instance=ExtResource( 3 )]
+position = Vector2( -666, -781 )
