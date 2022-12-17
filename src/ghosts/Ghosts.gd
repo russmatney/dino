@@ -19,8 +19,9 @@ func _ready():
 var player
 var player_data = {}
 
-func room_ready(level):
-	level.connect("spawning_player", self, "spawning_player")
+func room_ready(room):
+	room.connect("spawning_player", self, "spawning_player")
+	create_notification(str("Entered: ", room.name))
 
 func spawning_player(p):
 	player = p

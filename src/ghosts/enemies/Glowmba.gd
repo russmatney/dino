@@ -16,8 +16,6 @@ func _ready():
 
 	speed_factor = (randi() % speed_range) - speed_range
 
-	Ghosts.create_notification("Gloomba alive!")
-
 	if Engine.editor_hint:
 		request_ready()
 

@@ -130,9 +130,9 @@ func _on_Hurtbox_body_entered(body:Node):
 signal gloomba_koed
 var gloomba_kos = 0
 func gloomba_ko():
+	Ghosts.create_notification("Gloomba K.O.!")
 	gloomba_kos += 1
 	emit_signal("gloomba_koed", gloomba_kos)
-
 
 var burstables = []
 
@@ -146,6 +146,7 @@ func burst_gloomba():
 	update_burst_action()
 
 	if did_burst:
+		Ghosts.create_notification("Gloomba stunned!")
 		$Flashlight/AnimatedSprite.visible = true
 		$Flashlight/AnimatedSprite.frame = 0
 		# $Flashlight/AnimatedSprite.play("burst")

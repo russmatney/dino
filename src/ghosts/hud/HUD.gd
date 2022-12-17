@@ -62,7 +62,7 @@ func update_gloomba_kos(gloomba_kos):
 	var label = get_node("%GloombaKOs")
 	if not label:
 		print("no GloombaKOs label found")
-	label.set_text(str("Gloomba KOs: ", gloomba_kos))
+	label.set_text(str("Gloomba K.O.s: ", gloomba_kos))
 
 
 ###################################################################
