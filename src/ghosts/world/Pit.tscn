@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/ghosts/world/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/ghosts/enemies/Glowmba.tscn" type="PackedScene" id=2]
@@ -7,10 +7,12 @@
 [ext_resource path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/ghosts/player/Camera.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/ghosts/world/platforms/IndoorTiles.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/ghosts/player/Player.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/ghosts/player/PlayerSpawner.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/ghosts/world/platforms/GhostBlock.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/ghosts/world/GhostsRoom.gd" type="Script" id=10]
 
 [node name="Pit" type="Node2D"]
+script = ExtResource( 10 )
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 
@@ -116,5 +118,5 @@ position = Vector2( -288, 160 )
 alpha_threshold = 0.3
 offset = 1.0
 
-[node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( -576, 896 )
+[node name="PlayerSpawner" parent="." instance=ExtResource( 8 )]
+position = Vector2( 440, 488 )

@@ -35,6 +35,14 @@ func find_player():
 	if player:
 		player.connect("health_change", self, "update_player_health")
 
+		update_player_health(player.health)
+
+###################################################################
+# process
+
+func _process(_delta):
+	if not player:
+		find_player()
 
 ###################################################################
 # update health

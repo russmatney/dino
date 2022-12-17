@@ -2,8 +2,6 @@ tool
 extends Node2D
 
 export(String) var label
-
-# TODO warning testing this
 export(String) var destination
 
 #############################################################
@@ -12,6 +10,9 @@ func _ready():
 	if label:
 		set_label(label)
 
+	if destination and not File.new().file_exists(destination):
+		print("[WARN] Ghosts door destination does not exist! ", destination)
+
 func set_label(text):
 	$Label.text = text
 
@@ -19,13 +20,10 @@ func set_label(text):
 
 ## Not stateless! depends on _this_ door's destination
 func open_door():
+	print("open_door called, with dest: ", destination)
 	# TODO pause tree?
 	# TODO animate door
-	# TODO load destination scene
-	print("open_door called, with dest: ", destination)
-
-	# TODO i think this needs to be a path, maybe write a packed scene version?
-	Navi.nav_to(destination)
+	Ghosts.load_next_room(destination)
 
 func _on_Detectbox_body_entered(body:Node):
 	if body.is_in_group("player") and body.has_method("add_action"):
