@@ -22,6 +22,12 @@ var tween
 
 ############################################################
 
+signal player_died
+func die():
+	emit_signal("player_died")
+
+############################################################
+
 func _ready():
 	initial_pos = get_global_position()
 	machine.connect("transitioned", self, "on_transit")

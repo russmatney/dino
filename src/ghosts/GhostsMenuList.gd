@@ -4,14 +4,14 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		"label": "Play",
-		"nav_to": "res://src/ghosts/world/House.tscn",
+		"obj": Ghosts,
+		"method": "restart_game"
 	},
 	{
 		"label": "Credits",
 		"nav_to": "res://src/credits/DinoCredits.tscn",
 	},
 ]
-
 
 func _ready():
 	for ms in menu_scenes:

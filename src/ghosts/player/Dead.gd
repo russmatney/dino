@@ -5,6 +5,7 @@ func enter(_msg = {}):
 	owner.velocity = Vector2.ZERO
 	owner.anim.animation = "dead"
 	owner.dead = true
+	owner.die()
 
 
 func physics_process(delta):

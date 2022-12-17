@@ -6,6 +6,8 @@ var player_scene = preload("res://src/ghosts/player/Player.tscn")
 
 var player
 
+#############################################################
+
 func _ready():
 	# register connections
 	Ghosts.room_ready(self)
@@ -22,4 +24,16 @@ func spawn_player():
 	player.position = pos
 
 	emit_signal("spawning_player", player)
+
+	player.connect("player_died", self, "player_died")
+
 	call_deferred("add_child", player)
+
+#############################################################
+
+func player_died():
+	Navi.show_death_menu()
+	DJ.resume_menu_song()
+
+func player_won():
+	print("player won")

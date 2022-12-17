@@ -40,6 +40,12 @@ func save_player_data():
 
 #############################################################
 
+func restart_game():
+	player_data = {}
+	Navi.nav_to("res://src/ghosts/world/House.tscn")
+
+#############################################################
+
 func load_next_room(room_path):
 	if room_path and not File.new().file_exists(room_path):
 		print("[WARN] Ghosts next room does not exist! ", room_path)
