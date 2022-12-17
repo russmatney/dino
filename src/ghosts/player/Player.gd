@@ -123,8 +123,16 @@ func _on_Hurtbox_body_entered(body:Node):
 					dir = Vector2.LEFT
 
 				body.hit(dir)
+				gloomba_ko()
 
 ############################################################
+
+signal gloomba_koed
+var gloomba_kos = 0
+func gloomba_ko():
+	gloomba_kos += 1
+	emit_signal("gloomba_koed", gloomba_kos)
+
 
 var burstables = []
 

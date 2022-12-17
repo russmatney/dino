@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/ghosts/hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://src/ghosts/hud/GhostsControls.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/ghosts/hud/NotificationLabelTheme.tres" type="Theme" id=3]
 [ext_resource path="res://src/ghosts/hud/HeartsContainer.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="CanvasLayer"]
@@ -26,6 +27,13 @@ unique_name_in_owner = true
 margin_right = 392.0
 margin_bottom = 30.0
 h = 0
+
+[node name="GloombaKOs" type="Label" parent="HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 34.0
+margin_right = 392.0
+margin_bottom = 47.0
+theme = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 396.0

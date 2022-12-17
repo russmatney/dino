@@ -34,8 +34,10 @@ func find_player():
 
 	if player:
 		player.connect("health_change", self, "update_player_health")
+		player.connect("gloomba_koed", self, "update_gloomba_kos")
 
 		update_player_health(player.health)
+		update_gloomba_kos(player.gloomba_kos)
 
 ###################################################################
 # process
@@ -51,6 +53,16 @@ func _process(_delta):
 func update_player_health(health):
 	var hearts = get_node("%HeartsContainer")
 	hearts.set_health(health)
+
+
+###################################################################
+# gloomba count
+
+func update_gloomba_kos(gloomba_kos):
+	var label = get_node("%GloombaKOs")
+	if not label:
+		print("no GloombaKOs label found")
+	label.set_text(str("Gloomba KOs: ", gloomba_kos))
 
 
 ###################################################################

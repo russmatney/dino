@@ -33,7 +33,8 @@ func restore_saved_player_data():
 func save_player_data():
 	if player:
 		player_data = {
-			"health": player.health
+			"health": player.health,
+			"gloomba_kos": player.gloomba_kos,
 			}
 	else:
 		print("[WARN] Ghosts save_player_data called with no player")
