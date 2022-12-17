@@ -11,57 +11,57 @@ bg_color = Color( 0.180392, 0.027451, 0.113725, 0.713726 )
 
 [node name="PauseMenu" type="PopupPanel"]
 pause_mode = 2
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 512.0
-margin_bottom = 300.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 512.0
-margin_bottom = 129.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
 bbcode_text = "[center]Pause[/center]"
 text = "Pause"
+fit_content_height = false
 
-[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 133.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 104.0
 margin_right = 512.0
-margin_bottom = 173.0
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-script = ExtResource( 1 )
-max_size = Vector2( 200, -1 )
+margin_bottom = 300.0
+size_flags_vertical = 3
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MaxSizeContainer"]
-margin_left = 156.0
-margin_right = 356.0
-margin_bottom = 40.0
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 91.0
+margin_right = 216.0
+margin_bottom = 196.0
 
-[node name="ReturnToMain" parent="VBoxContainer/MaxSizeContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_right = 200.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/CenterContainer"]
+margin_top = 78.0
+margin_right = 125.0
+margin_bottom = 118.0
+
+[node name="ReturnToMain" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_right = 125.0
 margin_bottom = 18.0
 text = "Return to Main Menu"
 
-[node name="Resume" parent="VBoxContainer/MaxSizeContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Resume" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 22.0
-margin_right = 200.0
+margin_right = 125.0
 margin_bottom = 40.0
 text = "Resume"
 
-[node name="MaxSizeContainer2" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 177.0
-margin_right = 512.0
-margin_bottom = 300.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="MaxSizeContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 220.0
+margin_right = 420.0
+margin_bottom = 196.0
 custom_constants/margin_right = 0
 custom_constants/margin_top = 0
 custom_constants/margin_left = 0
@@ -69,18 +69,18 @@ custom_constants/margin_bottom = 0
 script = ExtResource( 1 )
 max_size = Vector2( 250, -1 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MaxSizeContainer2"]
-margin_left = 131.0
-margin_right = 381.0
-margin_bottom = 123.0
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/MaxSizeContainer2"]
+margin_right = 200.0
+margin_bottom = 196.0
 size_flags_horizontal = 7
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="ActionsList" parent="VBoxContainer/MaxSizeContainer2/ScrollContainer" instance=ExtResource( 5 )]
+[node name="ActionsList" parent="VBoxContainer/HBoxContainer/MaxSizeContainer2/ScrollContainer" instance=ExtResource( 5 )]
+margin_right = 200.0
 margin_bottom = 185.0
 size_flags_horizontal = 3
 
-[connection signal="pressed" from="VBoxContainer/MaxSizeContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]
-[connection signal="pressed" from="VBoxContainer/MaxSizeContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
