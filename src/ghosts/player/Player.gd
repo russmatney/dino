@@ -112,8 +112,8 @@ func _on_Hurtbox_body_entered(body:Node):
 		return
 	if body.is_in_group("enemies"):
 		if body.can_hit_player():
-			Ghosts.create_notification(str("Player hurt by ", body.name))
 			hit(body)
+			Ghosts.create_notification("Youch!")
 		elif body.player_can_hit():
 			if body.has_method("hit"):
 				var dir

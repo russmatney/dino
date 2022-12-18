@@ -40,20 +40,26 @@ position = Vector2( -92, -184 )
 [node name="Glowmba" parent="." instance=ExtResource( 2 )]
 position = Vector2( -420, 160 )
 
+[node name="Glowmba2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -528, 24 )
+
+[node name="Glowmba3" parent="." instance=ExtResource( 2 )]
+position = Vector2( -264, 120 )
+
 [node name="PlayerSpawner" parent="." instance=ExtResource( 8 )]
 position = Vector2( 200, 24 )
 
 [node name="GhostBlock" parent="." instance=ExtResource( 10 )]
 position = Vector2( -96, 96 )
 
+[node name="GhostBlock3" parent="." instance=ExtResource( 10 )]
+position = Vector2( -96, -32 )
+
+[node name="GhostBlock4" parent="." instance=ExtResource( 10 )]
+position = Vector2( -96, -96 )
+
+[node name="GhostBlock5" parent="." instance=ExtResource( 10 )]
+position = Vector2( -96, -160 )
+
 [node name="GhostBlock2" parent="." instance=ExtResource( 10 )]
 position = Vector2( -96, 32 )
-
-[node name="GhostBlock" parent="GhostBlock2" instance=ExtResource( 10 )]
-position = Vector2( 0, -64 )
-
-[node name="GhostBlock2" parent="GhostBlock2" instance=ExtResource( 10 )]
-position = Vector2( 0, -128 )
-
-[node name="GhostBlock3" parent="GhostBlock2" instance=ExtResource( 10 )]
-position = Vector2( 0, -192 )

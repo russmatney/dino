@@ -46,6 +46,18 @@ position = Vector2( 262, 225 )
 [node name="Glowmba4" parent="." instance=ExtResource( 5 )]
 position = Vector2( -286, -158 )
 
+[node name="HangingLight" parent="." instance=ExtResource( 7 )]
+position = Vector2( -460, -63 )
+
+[node name="HangingLight2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 138, -126 )
+
+[node name="HangingLight3" parent="." instance=ExtResource( 7 )]
+position = Vector2( -485, 446 )
+
+[node name="HangingLight4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 157, 388 )
+
 [node name="Door2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 256, 608 )
 label = "Library"
@@ -65,18 +77,6 @@ destination = "res://src/ghosts/world/Office.tscn"
 position = Vector2( -512, 96 )
 label = "Pit"
 destination = "res://src/ghosts/world/Pit.tscn"
-
-[node name="HangingLight" parent="." instance=ExtResource( 7 )]
-position = Vector2( -460, -63 )
-
-[node name="HangingLight2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 138, -126 )
-
-[node name="HangingLight3" parent="." instance=ExtResource( 7 )]
-position = Vector2( -485, 446 )
-
-[node name="HangingLight4" parent="." instance=ExtResource( 7 )]
-position = Vector2( 157, 388 )
 
 [node name="PlayerSpawner" parent="." instance=ExtResource( 3 )]
 position = Vector2( -163, 120 )

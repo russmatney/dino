@@ -29,6 +29,7 @@ animations = [ {
 extents = Vector2( 32, 28 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="Theme" id=6]
@@ -51,10 +52,10 @@ position = Vector2( 0, 4 )
 shape = SubResource( 4 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -32.0
-margin_top = -48.0
-margin_right = 32.0
-margin_bottom = -26.0
+margin_left = -48.0
+margin_top = -56.0
+margin_right = 48.0
+margin_bottom = -30.0
 theme = SubResource( 6 )
 align = 1
 autowrap = true
