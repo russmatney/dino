@@ -62,6 +62,21 @@ position = Vector2( 522, 640 )
 [node name="HangingLight7" parent="." instance=ExtResource( 4 )]
 position = Vector2( 943, 646 )
 
+[node name="Door" parent="." instance=ExtResource( 9 )]
+position = Vector2( 416, 352 )
+label = "House"
+destination = "res://src/ghosts/world/House.tscn"
+
+[node name="Door2" parent="." instance=ExtResource( 9 )]
+position = Vector2( -576, -672 )
+label = "Cells"
+destination = "res://src/ghosts/world/Cells.tscn"
+
+[node name="Door3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1099, 802 )
+label = "Pit"
+destination = "res://src/ghosts/world/Pit.tscn"
+
 [node name="Godost" parent="." instance=ExtResource( 3 )]
 position = Vector2( 508, 232 )
 
@@ -106,16 +121,6 @@ initial_dir = 1
 [node name="Glowmba10" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1206, -438 )
 initial_dir = 1
-
-[node name="Door" parent="." instance=ExtResource( 9 )]
-position = Vector2( 416, 352 )
-label = "House"
-destination = "res://src/ghosts/world/House.tscn"
-
-[node name="Door2" parent="." instance=ExtResource( 9 )]
-position = Vector2( -576, -672 )
-label = "Cells"
-destination = "res://src/ghosts/world/Cells.tscn"
 
 [node name="PlayerSpawner" parent="." instance=ExtResource( 6 )]
 position = Vector2( 304, 209 )
