@@ -20,8 +20,8 @@ margin_right = 308.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
-bbcode_text = "[center]GhostHouse[/center]"
-text = "GhostHouse"
+bbcode_text = "[center]Ghost House[/center]"
+text = "Ghost House"
 scroll_active = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
