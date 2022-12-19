@@ -297,7 +297,7 @@
       (fn [{:keys [project-addon-path symlink-target]}]
         (when
          (fs/exists? project-addon-path)
-          (println "deleting existing folder at target" project-addon-path)          
+          (println "deleting existing folder at target" project-addon-path)
           (fs/delete-tree project-addon-path)
           (fs/delete-if-exists project-addon-path)
           (println "Success!"))
@@ -340,6 +340,7 @@
    (let [export-name (or export-name "dino")
          build-dir   (str "dist/" export-name)]
      (println "build-web" export-name build-dir)
+     (-> (p/$ mkdir -p ~build-dir) p/check)
      (shell-and-log (str "godot --no-window --export " export-name "-web " build-dir "/index.html")))))
 
 (defn zip []
