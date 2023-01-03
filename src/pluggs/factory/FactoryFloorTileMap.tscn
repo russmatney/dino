@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/pluggs/factory/FactoryFloorTiles.tres" type="TileSet" id=1]
+[ext_resource path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/red_displacement = 0.717
+shader_param/green_displacement = -0.845
+shader_param/blue_displacement = 0.773
+shader_param/ghost = 0.0
+shader_param/intensity = 0.0
+shader_param/scan_effect = 0.0
+shader_param/distortion_effect = 0.0
+shader_param/negative_effect = 0.0
+
+[node name="FactoryFloorTileMap" type="TileMap"]
+material = SubResource( 1 )
+tile_set = ExtResource( 1 )
+format = 1

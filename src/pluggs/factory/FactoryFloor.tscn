@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/pluggs/factory/FactoryFloorTileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/pluggs/player/Pluggs.tscn" type="PackedScene" id=3]
+
+[node name="FactoryFloor" type="Node2D"]
+
+[node name="FactoryFloorTileMap" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -131076, 0, 0, -196604, 0, 0, -65540, 0, 65536, -131068, 0, 65536, -4, 0, 65536, -65532, 0, 65536, 65532, 0, 131073, 65533, 0, 196610, 65534, 0, 196610, 65535, 0, 196610, 0, 0, 196610, 1, 0, 196610, 2, 0, 196610, 3, 0, 196610, 4, 0, 131075 )
+
+[node name="Pluggs" parent="." instance=ExtResource( 3 )]
+position = Vector2( -26, -27 )
+
+[node name="DinoCamera2D" parent="." instance=ExtResource( 1 )]
+zoom = Vector2( 1.5, 1.5 )
