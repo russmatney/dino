@@ -8,6 +8,8 @@ func enter(_msg = {}):
 func process(_delta: float):
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		machine.transit("Run")
+	elif Input.is_action_pressed("move_down"):
+		machine.transit("Bucket")
 
 func physics_process(delta):
 	owner.velocity.y += owner.gravity * delta

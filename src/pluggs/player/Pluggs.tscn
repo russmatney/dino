@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/pluggs/player/PluggsSpriteFrames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/pluggs/player/Pluggs.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://addons/beehive/machine.gd" type="Script" id=4]
 [ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://src/pluggs/player/Run.gd" type="Script" id=6]
+[ext_resource path="res://src/pluggs/player/Bucket.gd" type="Script" id=7]
+[ext_resource path="res://src/pluggs/player/DragReach.gd" type="Script" id=8]
+[ext_resource path="res://src/pluggs/player/DragPull.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25.5, 21.5 )
@@ -20,8 +23,8 @@ script = ExtResource( 2 )
 position = Vector2( 0, -32 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
-animation = "running"
-frame = 3
+animation = "idle-standing"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -38,6 +41,15 @@ script = ExtResource( 3 )
 [node name="Run" type="Node" parent="Machine"]
 script = ExtResource( 6 )
 
+[node name="Bucket" type="Node" parent="Machine"]
+script = ExtResource( 7 )
+
+[node name="DragReach" type="Node" parent="Machine"]
+script = ExtResource( 8 )
+
+[node name="DragPull" type="Node" parent="Machine"]
+script = ExtResource( 9 )
+
 [node name="StateLabel" type="RichTextLabel" parent="."]
 margin_left = -64.0
 margin_top = -63.0
@@ -45,6 +57,6 @@ margin_right = 64.0
 margin_bottom = -45.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "[center]Stand[/center]"
-text = "Stand"
+bbcode_text = "[center]State[/center]"
+text = "State"
 scroll_active = false

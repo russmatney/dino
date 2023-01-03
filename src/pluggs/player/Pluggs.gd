@@ -15,4 +15,5 @@ func set_state_label(label: String):
 
 var velocity = Vector2.ZERO
 var speed := 300
+var drag_speed := 50
 var gravity := 4000

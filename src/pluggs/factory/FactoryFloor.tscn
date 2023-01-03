@@ -13,4 +13,3 @@ tile_data = PoolIntArray( -131076, 0, 0, -196604, 0, 0, -65540, 0, 65536, -13106
 position = Vector2( -26, -27 )
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 1 )]
-zoom = Vector2( 1.5, 1.5 )
