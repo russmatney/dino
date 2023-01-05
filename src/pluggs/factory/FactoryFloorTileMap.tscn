@@ -5,9 +5,9 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/red_displacement = 0.717
-shader_param/green_displacement = -0.845
-shader_param/blue_displacement = 0.773
+shader_param/red_displacement = 0.0
+shader_param/green_displacement = 0.0
+shader_param/blue_displacement = 0.0
 shader_param/ghost = 0.0
 shader_param/intensity = 0.0
 shader_param/scan_effect = 0.0
