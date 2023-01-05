@@ -24,7 +24,7 @@ position = Vector2( 0, -32 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle-standing"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -60,3 +60,5 @@ bbcode_enabled = true
 bbcode_text = "[center]State[/center]"
 text = "State"
 scroll_active = false
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animation_finished"]

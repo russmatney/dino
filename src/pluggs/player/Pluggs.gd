@@ -17,3 +17,22 @@ var velocity = Vector2.ZERO
 var speed := 300
 var drag_speed := 50
 var gravity := 4000
+
+############################################################
+
+enum DIR { left, right }
+var facing_direction = DIR.left
+
+func face_right():
+	facing_direction = DIR.right
+	anim.flip_h = true
+
+func face_left():
+	facing_direction = DIR.left
+	anim.flip_h = false
+
+############################################################
+
+func _on_animation_finished():
+	if anim.animation == "from-bucket":
+		anim.animation = "idle-standing"

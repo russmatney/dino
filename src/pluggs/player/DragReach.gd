@@ -11,11 +11,17 @@ func enter(_msg = {}):
 
 func process(delta: float):
 	if not Input.is_action_pressed("move_down"):
-		machine.transit("Stand")
+		machine.transit("Stand", {"animate": true})
 
 	if not Input.is_action_pressed("move_left") \
 		and not Input.is_action_pressed("move_right"):
-		machine.transit("Bucket", {"skip_anim": true})
+		machine.transit("Bucket", {"animate": false})
+
+	var move_dir = Trolley.move_dir()
+	if move_dir.x > 0:
+		owner.face_right()
+	elif move_dir.x < 0:
+		owner.face_left()
 
 	tt_drag = tt_drag - delta
 	if tt_drag <= 0:

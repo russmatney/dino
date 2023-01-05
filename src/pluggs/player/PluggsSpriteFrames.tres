@@ -120,9 +120,9 @@ animations = [ {
 "speed": 15.0
 }, {
 "frames": [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
-"loop": true,
+"loop": false,
 "name": "from-bucket",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
