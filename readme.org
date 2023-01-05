@@ -31,12 +31,16 @@ See ~src/dungeonCrawler/*~ for the code.
 This was a chance to implement keys and door logic, and a basic boss state
 machine. The map is one giant scene, and the tiles use auto-tiling, which should
 make it simple to doodle a few more levels.
-** Ghosts
+** Ghost House
 Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
 
 A small something created for the [[https://itch.io/jam/godot-wild-jam-52][Godot Wild Jam #52]].
 
 See ~src/ghosts/*~ for the code.
+** Pluggs
+A fun character - just a bucket of plugs.
+
+See ~src/pluggs/*~ for the code.
 * Addons
 These addons are intended to speed up prototyping and game-jam workflows, but should
 also be useful in larger, long-running projects.

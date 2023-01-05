@@ -11,8 +11,12 @@ var menu_scenes = [
 		"nav_to": "res://src/runner/park/ThePark.tscn",
 	},
 	{
-		"label": "Ghosts",
+		"label": "Ghost House",
 		"nav_to": "res://src/ghosts/GhostsMenu.tscn",
+	},
+	{
+		"label": "Pluggs",
+		"nav_to": "res://src/pluggs/factory/FactoryFloor.tscn",
 	},
 ]
 
