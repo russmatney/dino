@@ -82,7 +82,14 @@ func perform_action():
 		ax["obj"].call(ax["method"])
 
 ############################################################
-# pickup seed
+# items
+
+onready var item = $Item
+onready var item_produce_icon = $Item/ProduceIcon
+onready var item_icon = $Item/ItemIcon
 
 func pickup_seed(produce_type):
 	print("player picking up seed type: ", produce_type)
+	item.set_visible(true)
+	item_icon.animation = "seed"
+	item_produce_icon.animation = produce_type

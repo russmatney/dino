@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/harvey/player/harvey_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/beehive/machine.gd" type="Script" id=2]
@@ -6,9 +6,19 @@
 [ext_resource path="res://src/harvey/player/Idle.gd" type="Script" id=4]
 [ext_resource path="res://src/harvey/player/Player.gd" type="Script" id=5]
 [ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=6]
+[ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/harvey/seed-icon_sheet.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 13 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "seed",
+"speed": 5.0
+} ]
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 script = ExtResource( 5 )
@@ -22,6 +32,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -60,7 +71,18 @@ margin_right = 20.0
 margin_bottom = -26.0
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
-bbcode_text = "action"
-text = "action"
 fit_content_height = true
 scroll_active = false
+
+[node name="Item" type="Node2D" parent="."]
+visible = false
+position = Vector2( -13, -29 )
+
+[node name="ProduceIcon" parent="Item" instance=ExtResource( 7 )]
+scale = Vector2( 1, 1 )
+
+[node name="ItemIcon" type="AnimatedSprite" parent="Item"]
+position = Vector2( 4, 4 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+animation = "seed"

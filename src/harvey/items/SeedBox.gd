@@ -1,6 +1,7 @@
+tool
 extends StaticBody2D
 
-export (String) var produce_type = "carrot"
+export (String, "carrot", "tomato", "onion") var produce_type = "carrot"
 
 onready var produce_icon = $ProduceIcon
 

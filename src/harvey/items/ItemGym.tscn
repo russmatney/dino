@@ -13,8 +13,6 @@ margin_right = 195.0
 margin_bottom = 101.0
 color = Color( 0.360784, 0.337255, 0.333333, 1 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-
 [node name="DinoCamera2D" parent="." instance=ExtResource( 2 )]
 
 [node name="SeedBox" parent="." instance=ExtResource( 1 )]
@@ -27,3 +25,5 @@ produce_type = "tomato"
 [node name="SeedBox3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 122, -102 )
 produce_type = "onion"
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
