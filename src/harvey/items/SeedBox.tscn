@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/harvey/seed-box_sheet.png" type="Texture" id=1]
+[ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/harvey/items/SeedBox.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 30, 54 )
+
+[node name="SeedBox" type="StaticBody2D"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 2, 2 )
+frames = SubResource( 3 )
+
+[node name="ProduceIcon" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -9 )
+
+[node name="Detectbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
+position = Vector2( 0, 24 )
+shape = SubResource( 4 )
+
+[connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
+[connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]
