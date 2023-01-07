@@ -18,16 +18,16 @@ size_flags_horizontal = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 512.0
-margin_bottom = 107.0
+margin_bottom = 139.0
 size_flags_horizontal = 3
 bbcode_text = "[center]Harvey[/center]"
 text = "Harvey"
 scroll_active = false
 
 [node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 111.0
+margin_top = 143.0
 margin_right = 512.0
-margin_bottom = 215.0
+margin_bottom = 247.0
 size_flags_vertical = 3
 custom_constants/margin_right = 191
 custom_constants/margin_top = 0
@@ -44,7 +44,7 @@ margin_right = 321.0
 margin_bottom = 104.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 219.0
+margin_top = 251.0
 margin_right = 512.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 200, 0 )
@@ -52,7 +52,7 @@ size_flags_vertical = 3
 
 [node name="HarveyButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
 margin_left = 226.0
-margin_top = 20.0
+margin_top = 4.0
 margin_right = 286.0
-margin_bottom = 60.0
+margin_bottom = 44.0
 script = ExtResource( 5 )
