@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/MaxSizeContainer/max_size_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/harvey/HarveyControls.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/harvey/HarveyMenuButtonList.gd" type="Script" id=5]
+
+[node name="HarveyMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+
+[node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 512.0
+margin_bottom = 107.0
+size_flags_horizontal = 3
+bbcode_text = "[center]Harvey[/center]"
+text = "Harvey"
+scroll_active = false
+
+[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 111.0
+margin_right = 512.0
+margin_bottom = 215.0
+size_flags_vertical = 3
+custom_constants/margin_right = 191
+custom_constants/margin_top = 0
+custom_constants/margin_left = 191
+custom_constants/margin_bottom = 0
+script = ExtResource( 1 )
+max_size = Vector2( 130, -1 )
+
+[node name="HarveyControls" parent="VBoxContainer/MaxSizeContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 191.0
+margin_right = 321.0
+margin_bottom = 104.0
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 219.0
+margin_right = 512.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_vertical = 3
+
+[node name="HarveyButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+margin_left = 226.0
+margin_top = 20.0
+margin_right = 286.0
+margin_bottom = 60.0
+script = ExtResource( 5 )

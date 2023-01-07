@@ -19,30 +19,30 @@ anchor_bottom = 1.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 512.0
-margin_bottom = 139.0
+margin_bottom = 107.0
 bbcode_text = "[center]Dino[/center]"
 text = "Dino"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 143.0
+margin_top = 111.0
 margin_right = 512.0
-margin_bottom = 205.0
+margin_bottom = 195.0
 alignment = 1
 
 [node name="GamesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 75.0
 margin_right = 178.0
-margin_bottom = 62.0
+margin_bottom = 84.0
 script = ExtResource( 3 )
 
 [node name="GymsList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 182.0
 margin_right = 329.0
-margin_bottom = 62.0
+margin_bottom = 84.0
 script = ExtResource( 4 )
 
 [node name="OtherList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 333.0
 margin_right = 436.0
-margin_bottom = 62.0
+margin_bottom = 84.0
 script = ExtResource( 5 )

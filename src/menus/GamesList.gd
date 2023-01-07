@@ -18,6 +18,10 @@ var menu_scenes = [
 		"label": "Pluggs",
 		"nav_to": "res://src/pluggs/factory/FactoryFloor.tscn",
 	},
+	{
+		"label": "Harvey",
+		"nav_to": "res://src/harvey/HarveyMenu.tscn",
+	},
 ]
 
 
