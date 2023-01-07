@@ -15,5 +15,4 @@ func _on_Detectbox_body_entered(body:Node):
 
 func _on_Detectbox_body_exited(body:Node):
 	if body.has_method("remove_action"):
-		# TODO maybe remove by method
 		body.remove_action({"obj": body, "method": "pickup_seed", "arg": produce_type})

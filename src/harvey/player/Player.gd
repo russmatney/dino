@@ -85,11 +85,28 @@ func perform_action():
 # items
 
 onready var item = $Item
-onready var item_produce_icon = $Item/ProduceIcon
-onready var item_icon = $Item/ItemIcon
+onready var produce_icon = $Item/ProduceIcon
+onready var seed_icon = $Item/SeedIcon
+onready var tool_icon = $Item/ToolIcon
+
+func hide_item_icons():
+	seed_icon.set_visible(false)
+	tool_icon.set_visible(false)
+	produce_icon.set_visible(false)
 
 func pickup_seed(produce_type):
 	print("player picking up seed type: ", produce_type)
-	item.set_visible(true)
-	item_icon.animation = "seed"
-	item_produce_icon.animation = produce_type
+	hide_item_icons()
+	seed_icon.set_visible(true)
+	produce_icon.set_visible(true)
+	produce_icon.animation = produce_type
+
+	# TODO drop held tool
+
+func pickup_tool(tool_type):
+	print("player picking up tool type: ", tool_type)
+	hide_item_icons()
+	tool_icon.set_visible(true)
+	tool_icon.animation = tool_type
+
+	# TODO drop held tool

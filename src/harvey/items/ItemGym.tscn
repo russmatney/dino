@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/harvey/items/SeedBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/harvey/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/harvey/items/Tool.tscn" type="PackedScene" id=4]
 
 [node name="ItemGym" type="Node2D"]
 
@@ -25,5 +26,12 @@ produce_type = "tomato"
 [node name="SeedBox3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 122, -102 )
 produce_type = "onion"
+
+[node name="Tool" parent="." instance=ExtResource( 4 )]
+position = Vector2( 41, -120 )
+
+[node name="Tool2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 66, -83 )
+tool_type = "shovel"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]

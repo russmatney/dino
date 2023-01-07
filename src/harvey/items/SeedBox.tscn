@@ -5,6 +5,7 @@
 [ext_resource path="res://src/harvey/items/SeedBox.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 23.5 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -25,6 +26,7 @@ extents = Vector2( 30, 54 )
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -6.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
