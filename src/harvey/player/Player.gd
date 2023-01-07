@@ -62,6 +62,8 @@ func update_action_label():
 		var ax = actions.values()[0]
 		action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
 
+# TODO refactor towards player registering with current ActionBoxes
+# better than requiring movement to add/remove actions
 func add_action(ax):
 	actions[ax["method"]] = ax
 	update_action_label()
@@ -76,10 +78,13 @@ func perform_action():
 
 	var ax = actions.values()[0]
 	print("performing action: ", ax)
-	if ax["arg"]:
+	if "arg" in ax and ax["arg"]:
 		ax["obj"].call(ax["method"], ax["arg"])
 	else:
 		ax["obj"].call(ax["method"])
+
+	# clean up this action after calling
+	remove_action(ax)
 
 ############################################################
 # items
@@ -122,6 +127,9 @@ func pickup_tool(tool_type):
 	tool_icon.animation = tool_type
 	item_tool = tool_type
 
+############################################################
+# seeds
+
 func has_seed():
 	if item_seed:
 		return true
@@ -134,6 +142,9 @@ func plant_seed(plot_inst):
 		item_seed = null
 		drop_held_item()
 
+############################################################
+# water
+
 func has_water():
 	if item_tool == "watering-pail":
 		return true
@@ -144,6 +155,22 @@ func water_plant(plot_inst):
 	if has_water():
 		plot_inst.water_plant()
 
-func harvest_plant(plot_inst):
+############################################################
+# produce
+
+func harvest_produce(plot_inst):
 	pickup_produce(plot_inst.produce_type)
-	plot_inst.harvest_plant()
+	plot_inst.harvest_produce()
+
+func has_produce():
+	if item_produce:
+		return true
+	else:
+		return false
+
+var produce_delivered = 0
+
+func deliver_produce():
+	produce_delivered = produce_delivered + 1
+	print("player delivering produce: ", item_produce, " total: ", produce_delivered)
+	drop_held_item()

@@ -35,8 +35,8 @@ func _on_Detectbox_body_entered(body:Node):
 			"NeedsWater": if body.has_method("water_plant") and body.has_method("has_water") and body.has_water():
 				body.add_action({"obj": body, "method": "water_plant", "arg": self})
 			"Watered": return
-			"ReadyForHarvest": if body.has_method("harvest_plant"):
-				body.add_action({"obj": body, "method": "harvest_plant", "arg": self})
+			"ReadyForHarvest": if body.has_method("harvest_produce"):
+				body.add_action({"obj": body, "method": "harvest_produce", "arg": self})
 			_: print("unexpected plot state: ", state)
 
 
@@ -47,7 +47,7 @@ func _on_Detectbox_body_exited(body:Node):
 		# dictionary might not work afterall
 		body.remove_action({"method": "plant_seed"})
 		body.remove_action({"method": "water_plant"})
-		body.remove_action({"method": "harvest_plant"})
+		body.remove_action({"method": "harvest_produce"})
 
 ############################################################
 # interactions
@@ -59,6 +59,6 @@ func plant_seed(p_type):
 func water_plant():
 	machine.transit("Watered")
 
-func harvest_plant():
+func harvest_produce():
 	produce_type = null
 	machine.transit("ReadyForSeed")
