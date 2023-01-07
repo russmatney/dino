@@ -1,7 +1,6 @@
 tool
 extends KinematicBody2D
 
-
 export (String, "watering-pail", "shovel") var tool_type = "watering-pail"
 
 onready var tool_icon = $ToolIcon

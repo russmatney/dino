@@ -84,29 +84,66 @@ func perform_action():
 ############################################################
 # items
 
-onready var item = $Item
+var item_seed
+var item_tool
+var item_produce
+
 onready var produce_icon = $Item/ProduceIcon
 onready var seed_icon = $Item/SeedIcon
 onready var tool_icon = $Item/ToolIcon
 
-func hide_item_icons():
+func drop_held_item():
+	# TODO animate, sounds drop held tool/seed
+
 	seed_icon.set_visible(false)
 	tool_icon.set_visible(false)
 	produce_icon.set_visible(false)
 
+	item_seed = null
+	item_tool = null
+	item_produce = null
+
 func pickup_seed(produce_type):
-	print("player picking up seed type: ", produce_type)
-	hide_item_icons()
+	drop_held_item()
 	seed_icon.set_visible(true)
 	produce_icon.set_visible(true)
 	produce_icon.animation = produce_type
+	item_seed = produce_type
 
-	# TODO drop held tool
+func pickup_produce(produce_type):
+	drop_held_item()
+	produce_icon.set_visible(true)
+	produce_icon.animation = produce_type
+	item_produce = produce_type
 
 func pickup_tool(tool_type):
-	print("player picking up tool type: ", tool_type)
-	hide_item_icons()
+	drop_held_item()
 	tool_icon.set_visible(true)
 	tool_icon.animation = tool_type
+	item_tool = tool_type
 
-	# TODO drop held tool
+func has_seed():
+	if item_seed:
+		return true
+	else:
+		return false
+
+func plant_seed(plot_inst):
+	if has_seed():
+		plot_inst.plant_seed(item_seed)
+		item_seed = null
+		drop_held_item()
+
+func has_water():
+	if item_tool == "watering-pail":
+		return true
+	else:
+		return false
+
+func water_plant(plot_inst):
+	if has_water():
+		plot_inst.water_plant()
+
+func harvest_plant(plot_inst):
+	pickup_produce(plot_inst.produce_type)
+	plot_inst.harvest_plant()
