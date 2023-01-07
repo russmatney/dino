@@ -7,4 +7,4 @@ func _ready():
 
 
 func restart_game():
-	print("Harvey.restart_game()")
+	Navi.nav_to("res://src/harvey/plots/PlotGym.tscn")

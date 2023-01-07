@@ -24,9 +24,3 @@ margin_top = 54.0
 margin_bottom = 77.0
 action = "Action"
 key = "E"
-
-[node name="TrolleyActionLabel11" parent="." instance=ExtResource( 1 )]
-margin_top = 81.0
-margin_bottom = 104.0
-action = "Action"
-key = "Click"
