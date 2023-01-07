@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/knifeSlice.ogg-173bf4c6df62ff6ed2349418457f74ae.oggstr"
+
+[deps]
+
+source_file="res://assets/harvey/sounds/knifeSlice.ogg"
+dest_files=[ "res://.import/knifeSlice.ogg-173bf4c6df62ff6ed2349418457f74ae.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

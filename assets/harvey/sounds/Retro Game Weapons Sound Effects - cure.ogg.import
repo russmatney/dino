@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Retro Game Weapons Sound Effects - cure.ogg-9ab30af69fd9d30822d092a33573644e.oggstr"
+
+[deps]
+
+source_file="res://assets/harvey/sounds/Retro Game Weapons Sound Effects - cure.ogg"
+dest_files=[ "res://.import/Retro Game Weapons Sound Effects - cure.ogg-9ab30af69fd9d30822d092a33573644e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

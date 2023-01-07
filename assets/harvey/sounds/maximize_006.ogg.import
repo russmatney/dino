@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/maximize_006.ogg-eee3c6362e18a947ad38f2439b3f53e2.oggstr"
+
+[deps]
+
+source_file="res://assets/harvey/sounds/maximize_006.ogg"
+dest_files=[ "res://.import/maximize_006.ogg-eee3c6362e18a947ad38f2439b3f53e2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

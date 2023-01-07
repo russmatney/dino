@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/slime_001.ogg-571c6e78374babf38d802f937efca1e0.oggstr"
+
+[deps]
+
+source_file="res://assets/harvey/sounds/slime_001.ogg"
+dest_files=[ "res://.import/slime_001.ogg-571c6e78374babf38d802f937efca1e0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
