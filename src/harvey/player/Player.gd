@@ -9,10 +9,22 @@ func _ready():
 	machine.connect("transitioned", self, "on_transit")
 
 ############################################################
+# process
+
+func _process(_delta):
+	# TODO probably don't want to call this every frame....
+	eval_current_action()
+
+	if c_ax and "source" in c_ax:
+		# TODO point action_arrow at c_ax["source"]
+		var rot = get_angle_to(c_ax["source"].get_global_position()) + (PI/2)
+		action_arrow.set_rotation(rot)
+
+############################################################
 # _input
 
 func _unhandled_input(event):
-	if actions and Trolley.is_action(event):
+	if c_ax and Trolley.is_action(event):
 		perform_action()
 
 ############################################################
@@ -50,29 +62,54 @@ func face_left():
 ############################################################
 # action detection
 
-static func map(function: FuncRef, i_array: Array)->Array:
-	var o_array := []
-	for value in i_array:
-		o_array.append(function.call_func(value))
-	return o_array
-
 onready var action_label = $ActionLabel
+onready var action_arrow = $ActionArrow
 var actions = []
+var c_ax # current action
+
+func action_sources():
+	var srcs = {}
+	for ax in actions:
+		if "source_name" in ax:
+			srcs[ax["source_name"]] = ax["source"]
+	return srcs.values()
 
 func update_action_label():
-	if not actions:
+	if not c_ax:
 		action_label.bbcode_text = ""
 		return
 
-	if actions and actions[0]:
-		var ax = actions[0]
-		action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+	action_label.bbcode_text = "[center]" + c_ax["method"].capitalize() + "[/center]"
+
+func update_action_arrow():
+	if not c_ax:
+		action_arrow.set_visible(false)
+		return
+
+	action_arrow.set_visible(true)
+
+func eval_current_action():
+	if actions:
+		# TODO filter out impossible actions
+		var src = Util.nearest_node(self, action_sources())
+		for ax in actions:
+			if "source" in ax and ax["source"] == src:
+				c_ax = ax
+				break
+	else:
+		c_ax = null
+
+	update_action_label()
+	update_action_arrow()
 
 func _on_ActionDetector_area_entered(area:Area2D):
 	if area.name == "Detectbox":
 		if area.get_parent().has_method("build_actions"):
 			for ax in area.get_parent().build_actions(self):
-				ax.merge({"source": area.get_parent().name})
+				ax.merge({
+					"source_name": area.get_parent().name,
+					"source": area.get_parent(),
+					})
 				add_action(ax)
 
 func _on_ActionDetector_area_exited(area:Area2D):
@@ -81,39 +118,37 @@ func _on_ActionDetector_area_exited(area:Area2D):
 
 func add_action(ax):
 	actions.append(ax)
-	update_action_label()
+	eval_current_action()
 
 func remove_action(ax):
 	actions.erase(ax)
-	update_action_label()
+	eval_current_action()
 
 func remove_actions_with_source(name):
 	# this should be simpler - if not, create a util/extension for Array.filter()
 	var to_remove = []
 	for ax in actions:
-		if ax["source"] == name:
+		if "source_name" in ax and ax["source_name"] == name:
 			to_remove.append(ax)
 	for ax in to_remove:
 		actions.erase(ax)
-	update_action_label()
+	eval_current_action()
 
 ############################################################
 # performing actions
 
 func perform_action():
-	if not actions:
+	if not c_ax:
 		return
 
-	var ax = actions[0]
+	var ax = c_ax
 	print("performing action: ", ax)
 	if "arg" in ax and ax["arg"]:
 		ax["obj"].call(ax["method"], ax["arg"])
 	else:
 		ax["obj"].call(ax["method"])
 
-	# clean up this action after calling
-	# TODO probably want an actions re-eval here
-	remove_action(ax)
+	eval_current_action()
 
 ############################################################
 # items

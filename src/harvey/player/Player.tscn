@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/harvey/player/harvey_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/beehive/machine.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/harvey/seed-icon_sheet.png" type="Texture" id=8]
 [ext_resource path="res://src/harvey/ToolIcon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resources/sprites/arrow.tres" type="SpriteFrames" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 13 )
@@ -36,6 +37,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "run"
+frame = 1
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -100,7 +102,12 @@ visible = false
 [node name="ActionDetector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+visible = false
 shape = SubResource( 3 )
+
+[node name="ActionArrow" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = ExtResource( 10 )
 
 [connection signal="area_entered" from="ActionDetector" to="." method="_on_ActionDetector_area_entered"]
 [connection signal="area_exited" from="ActionDetector" to="." method="_on_ActionDetector_area_exited"]

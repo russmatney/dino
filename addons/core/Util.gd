@@ -25,6 +25,9 @@ func do_reparent(child, new_parent):
 
 # https://godotengine.org/qa/27869/how-to-get-the-nearest-object-in-a-group
 func nearest_node(source: Node, targets) -> Node:
+	if not targets:
+		return null
+
 	# assume the first is closest
 	var nearest_target = targets[0]
 

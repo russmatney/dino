@@ -5,6 +5,7 @@ export (String, "carrot", "tomato", "onion") var produce_type = "carrot"
 
 onready var produce_icon = $ProduceIcon
 onready var anim = $AnimatedSprite
+onready var action_label = $ActionLabel
 
 ##########################################################
 # ready
@@ -23,17 +24,33 @@ func _unhandled_input(event):
 ##########################################################
 # detectbox
 
+var actions
+
 func build_actions(player):
-	return [{"obj": self, "method": "pickup_seed", "arg": player}]
+	actions = [{"obj": self, "method": "pickup_seed", "arg": player}]
+	set_action_label()
+	return actions
+
+func set_action_label():
+	action_label.set_visible(true)
+
+	# TODO only when an action can be performed
+	var ax = actions[0]
+	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+
 
 func _on_Detectbox_body_entered(body:Node):
-	if body.has_method("add_action") and body.has_method("pickup_seed"):
-		body.add_action({"obj": self, "method": "pickup_seed", "arg": body})
+	pass
+	# TODO rewrite/update
+	# if body.has_method("add_action") and body.has_method("pickup_seed"):
+	# 	body.add_action({"obj": self, "method": "pickup_seed", "arg": body})
 
 
 func _on_Detectbox_body_exited(body:Node):
-	if body.has_method("remove_action"):
-		body.remove_action({"obj": self, "method": "pickup_seed", "arg": body})
+	pass
+	# TODO rewrite/update
+	# if body.has_method("remove_action"):
+	# 	body.remove_action({"obj": self, "method": "pickup_seed", "arg": body})
 
 ##########################################################
 # animate
