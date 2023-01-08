@@ -48,35 +48,63 @@ func face_left():
 	anim.flip_h = false
 
 ############################################################
-# actions
+# action detection
+
+static func map(function: FuncRef, i_array: Array)->Array:
+	var o_array := []
+	for value in i_array:
+		o_array.append(function.call_func(value))
+	return o_array
 
 onready var action_label = $ActionLabel
-var actions = {}
+var actions = []
 
 func update_action_label():
 	if not actions:
 		action_label.bbcode_text = ""
 		return
 
-	if actions:
-		var ax = actions.values()[0]
+	if actions and actions[0]:
+		var ax = actions[0]
 		action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
 
-# TODO refactor towards player registering with current ActionBoxes
-# better than requiring movement to add/remove actions
+func _on_ActionDetector_area_entered(area:Area2D):
+	if area.name == "Detectbox":
+		if area.get_parent().has_method("build_actions"):
+			for ax in area.get_parent().build_actions(self):
+				ax.merge({"source": area.get_parent().name})
+				add_action(ax)
+
+func _on_ActionDetector_area_exited(area:Area2D):
+	if area.name == "Detectbox":
+		remove_actions_with_source(area.get_parent().name)
+
 func add_action(ax):
-	actions[ax["method"]] = ax
+	actions.append(ax)
 	update_action_label()
 
 func remove_action(ax):
-	actions.erase(ax["method"])
+	actions.erase(ax)
 	update_action_label()
+
+func remove_actions_with_source(name):
+	# this should be simpler - if not, create a util/extension for Array.filter()
+	var to_remove = []
+	for ax in actions:
+		if ax["source"] == name:
+			to_remove.append(ax)
+	for ax in to_remove:
+		actions.erase(ax)
+	update_action_label()
+
+############################################################
+# performing actions
 
 func perform_action():
 	if not actions:
 		return
 
-	var ax = actions.values()[0]
+	var ax = actions[0]
 	print("performing action: ", ax)
 	if "arg" in ax and ax["arg"]:
 		ax["obj"].call(ax["method"], ax["arg"])
@@ -84,6 +112,7 @@ func perform_action():
 		ax["obj"].call(ax["method"])
 
 	# clean up this action after calling
+	# TODO probably want an actions re-eval here
 	remove_action(ax)
 
 ############################################################

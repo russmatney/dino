@@ -23,6 +23,9 @@ func _unhandled_input(event):
 ##########################################################
 # detectbox
 
+func build_actions(player):
+	return [{"obj": self, "method": "pickup_seed", "arg": player}]
+
 func _on_Detectbox_body_entered(body:Node):
 	if body.has_method("add_action") and body.has_method("pickup_seed"):
 		body.add_action({"obj": self, "method": "pickup_seed", "arg": body})

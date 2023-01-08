@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/harvey/player/harvey_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://addons/beehive/machine.gd" type="Script" id=2]
@@ -21,6 +21,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 192, 128 )
+
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 script = ExtResource( 5 )
 
@@ -33,7 +36,6 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "run"
-frame = 2
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -94,3 +96,11 @@ animation = "onion"
 
 [node name="ToolIcon" parent="Item" instance=ExtResource( 9 )]
 visible = false
+
+[node name="ActionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="ActionDetector" to="." method="_on_ActionDetector_area_entered"]
+[connection signal="area_exited" from="ActionDetector" to="." method="_on_ActionDetector_area_exited"]
