@@ -25,32 +25,38 @@ func _unhandled_input(event):
 # detectbox
 
 var actions
+var bodies = []
 
 func build_actions(player):
 	actions = [{"obj": self, "method": "pickup_seed", "arg": player}]
-	set_action_label()
+	set_action_label(player)
 	return actions
 
-func set_action_label():
+func can_perform_action(player, action):
+	match (action["method"]):
+		"pickup_seed": return bodies.has(player)
+
+func set_action_label(player):
 	action_label.set_visible(true)
 
-	# TODO only when an action can be performed
+	# TODO select action better?
 	var ax = actions[0]
 	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
 
+	if not can_perform_action(player, ax):
+		action_label.modulate.a = 0.5
+	else:
+		action_label.modulate.a = 1
 
 func _on_Detectbox_body_entered(body:Node):
-	pass
-	# TODO rewrite/update
-	# if body.has_method("add_action") and body.has_method("pickup_seed"):
-	# 	body.add_action({"obj": self, "method": "pickup_seed", "arg": body})
-
+	if body.is_in_group("player"):
+		bodies.append(body)
+		set_action_label(body)
 
 func _on_Detectbox_body_exited(body:Node):
-	pass
-	# TODO rewrite/update
-	# if body.has_method("remove_action"):
-	# 	body.remove_action({"obj": self, "method": "pickup_seed", "arg": body})
+	if body.is_in_group("player"):
+		bodies.erase(body)
+		set_action_label(body)
 
 ##########################################################
 # animate

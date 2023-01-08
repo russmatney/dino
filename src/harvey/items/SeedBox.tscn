@@ -62,7 +62,6 @@ position = Vector2( 0, 24 )
 shape = SubResource( 4 )
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
-visible = false
 margin_left = -30.0
 margin_top = -48.0
 margin_right = 30.0

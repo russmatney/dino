@@ -12,11 +12,10 @@ func _ready():
 # process
 
 func _process(_delta):
-	# TODO probably don't want to call this every frame....
+	# probably don't want to call this every frame....
 	eval_current_action()
 
 	if c_ax and "source" in c_ax:
-		# TODO point action_arrow at c_ax["source"]
 		var rot = get_angle_to(c_ax["source"].get_global_position()) + (PI/2)
 		action_arrow.set_rotation(rot)
 
@@ -67,9 +66,9 @@ onready var action_arrow = $ActionArrow
 var actions = []
 var c_ax # current action
 
-func action_sources():
+func action_sources(axs = actions):
 	var srcs = {}
-	for ax in actions:
+	for ax in axs:
 		if "source_name" in ax:
 			srcs[ax["source_name"]] = ax["source"]
 	return srcs.values()
@@ -81,21 +80,35 @@ func update_action_label():
 
 	action_label.bbcode_text = "[center]" + c_ax["method"].capitalize() + "[/center]"
 
+# TODO differentiate nearby vs can-perform-now actions
 func update_action_arrow():
+	# TODO refactor to point to nearby action, not just current
 	if not c_ax:
 		action_arrow.set_visible(false)
 		return
 
 	action_arrow.set_visible(true)
 
+func find_nearest_action(axs):
+	var srcs = action_sources(axs)
+	var nearest_src = Util.nearest_node(self, srcs)
+	var nearest_action
+	for ax in actions:
+		if "source" in ax and ax["source"] == nearest_src:
+			nearest_action = ax
+			break
+	return nearest_action
+
 func eval_current_action():
 	if actions:
-		# TODO filter out impossible actions
-		var src = Util.nearest_node(self, action_sources())
+		var possible_actions = []
 		for ax in actions:
-			if "source" in ax and ax["source"] == src:
-				c_ax = ax
-				break
+			if "source" in ax and ax["source"].has_method("can_perform_action"):
+				if ax["source"].can_perform_action(self, ax):
+					possible_actions.append(ax)
+
+		var nearest_action = find_nearest_action(possible_actions)
+		c_ax = nearest_action
 	else:
 		c_ax = null
 

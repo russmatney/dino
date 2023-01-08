@@ -37,7 +37,6 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "run"
-frame = 1
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -70,9 +69,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
+margin_left = -32.0
 margin_top = -42.0
-margin_right = 20.0
+margin_right = 32.0
 margin_bottom = -26.0
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
