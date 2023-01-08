@@ -1,11 +1,19 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/harvey/seed-box_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/harvey/items/SeedBox.gd" type="Script" id=3]
+[ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 23.5 )
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/deformation = Vector2( 0, 0 )
+shader_param/sideWaysDeformationFactor = 5.0
+shader_param/knockbackFactor = 0.4
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -19,6 +27,13 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="ShaderMaterial" id=7]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/deformation = Vector2( 0, 0 )
+shader_param/sideWaysDeformationFactor = 5.0
+shader_param/knockbackFactor = 0.4
+
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 30, 54 )
 
@@ -30,10 +45,12 @@ position = Vector2( 0, -6.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 6 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
 
 [node name="ProduceIcon" parent="." instance=ExtResource( 2 )]
+material = SubResource( 7 )
 position = Vector2( 0, -9 )
 animation = "carrot"
 

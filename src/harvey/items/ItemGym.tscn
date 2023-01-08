@@ -12,6 +12,7 @@ margin_left = -149.0
 margin_top = -189.0
 margin_right = 195.0
 margin_bottom = 101.0
+mouse_filter = 2
 color = Color( 0.360784, 0.337255, 0.333333, 1 )
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 2 )]
