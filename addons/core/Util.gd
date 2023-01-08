@@ -68,3 +68,13 @@ func ensure_connection(obj, sig, target, method, args=[]):
 	if not obj.is_connected(sig, target, method):
 		err = obj.connect(sig, target, method, args)
 	if err: print("[Error]: ", err) # useless enum digit
+
+
+############################################################
+# Functional
+
+static func map(function: FuncRef, i_array: Array)->Array:
+	var o_array := []
+	for value in i_array:
+		o_array.append(function.call_func(value))
+	return o_array
