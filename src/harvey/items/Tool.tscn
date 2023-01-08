@@ -1,10 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/harvey/items/Tool.gd" type="Script" id=1]
 [ext_resource path="res://src/harvey/ToolIcon.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/harvey/ActionLabelTheme.tres" type="Theme" id=3]
+[ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/deformation = Vector2( 0, 0 )
+shader_param/sideWaysDeformationFactor = 5.0
+shader_param/knockbackFactor = 0.4
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 22.0227
@@ -16,12 +25,24 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="ToolIcon" parent="." instance=ExtResource( 2 )]
+material = SubResource( 3 )
 animation = "watering-pail"
 
 [node name="Detectbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
 shape = SubResource( 2 )
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+margin_left = -32.0
+margin_top = -24.0
+margin_right = 32.0
+theme = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center]action"
+text = "action"
+fit_content_height = true
+scroll_active = false
 
 [connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
 [connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]

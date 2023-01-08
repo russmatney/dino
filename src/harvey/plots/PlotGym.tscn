@@ -21,16 +21,13 @@ color = Color( 0.298039, 0.270588, 0.270588, 1 )
 position = Vector2( -106, 58 )
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 4 )]
+mode = 2
 
 [node name="Tool" parent="." instance=ExtResource( 5 )]
 position = Vector2( -76, -77 )
 
 [node name="SeedBox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 94, -60 )
-
-[node name="SeedBox2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 160, -69 )
-produce_type = "tomato"
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 

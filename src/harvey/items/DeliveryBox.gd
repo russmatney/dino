@@ -5,6 +5,7 @@ extends StaticBody2D
 # ready
 
 onready var anim = $AnimatedSprite
+onready var action_label = $ActionLabel
 
 func _ready():
 	pass
@@ -12,14 +13,39 @@ func _ready():
 ##########################################################
 # actions
 
+var actions
+var bodies = []
+
+func build_actions(player):
+	actions = [{"obj": self, "method": "deliver_produce", "arg": player}]
+	set_action_label(player)
+	return actions
+
+func can_perform_action(player, action):
+	match (action["method"]):
+		"deliver_produce": return bodies.has(player) and player.has_produce()
+
+func set_action_label(player):
+	action_label.set_visible(true)
+
+	# TODO select action better?
+	var ax = actions[0]
+	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+
+	if not can_perform_action(player, ax):
+		action_label.modulate.a = 0.5
+	else:
+		action_label.modulate.a = 1
+
 func _on_Detectbox_body_entered(body:Node):
-	if body.has_method("add_action"):
-		if body.has_method("has_produce") and body.has_produce() and body.has_method("deliver_produce"):
-			body.add_action({"obj": self, "method": "deliver_produce", "arg": body})
+	if body.is_in_group("player"):
+		bodies.append(body)
+		set_action_label(body)
 
 func _on_Detectbox_body_exited(body:Node):
-	if body.has_method("remove_action"):
-		body.remove_action({"obj": self, "method": "deliver_produce", "arg": body})
+	if body.is_in_group("player"):
+		bodies.erase(body)
+		set_action_label(body)
 
 ##########################################################
 # animate

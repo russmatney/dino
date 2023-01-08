@@ -15,8 +15,9 @@ func _process(_delta):
 	# probably don't want to call this every frame....
 	eval_current_action()
 
-	if c_ax and "source" in c_ax:
-		var rot = get_angle_to(c_ax["source"].get_global_position()) + (PI/2)
+	var ax = Util._or(c_ax, nearest_ax)
+	if ax and "source" in ax:
+		var rot = get_angle_to(ax["source"].get_global_position()) + (PI/2)
 		action_arrow.set_rotation(rot)
 
 ############################################################
@@ -65,6 +66,7 @@ onready var action_label = $ActionLabel
 onready var action_arrow = $ActionArrow
 var actions = []
 var c_ax # current action
+var nearest_ax # current action
 
 func action_sources(axs = actions):
 	var srcs = {}
@@ -80,16 +82,18 @@ func update_action_label():
 
 	action_label.bbcode_text = "[center]" + c_ax["method"].capitalize() + "[/center]"
 
-# TODO differentiate nearby vs can-perform-now actions
 func update_action_arrow():
-	# TODO refactor to point to nearby action, not just current
-	if not c_ax:
+	if not actions:
 		action_arrow.set_visible(false)
 		return
 
+	# note, not always a possible action
+	nearest_ax = find_nearest_action()
 	action_arrow.set_visible(true)
 
-func find_nearest_action(axs):
+func find_nearest_action(axs = actions):
+	if axs.size() == 1:
+		return axs[0]
 	var srcs = action_sources(axs)
 	var nearest_src = Util.nearest_node(self, srcs)
 	var nearest_action
@@ -155,7 +159,7 @@ func perform_action():
 		return
 
 	var ax = c_ax
-	print("performing action: ", ax)
+	print("performing action: ", ax["method"])
 	if "arg" in ax and ax["arg"]:
 		ax["obj"].call(ax["method"], ax["arg"])
 	else:
@@ -176,7 +180,7 @@ onready var seed_type_icon = $Item/SeedIcon/SeedTypeIcon
 onready var tool_icon = $Item/ToolIcon
 
 func drop_held_item():
-	# TODO animate, sounds drop held tool/seed
+	# TODO animation, sounds
 
 	produce_icon.set_visible(false)
 	seed_icon.set_visible(false)
@@ -213,11 +217,13 @@ func has_seed():
 	else:
 		return false
 
-func plant_seed(plot_inst):
-	if has_seed():
-		plot_inst.plant_seed(item_seed)
-		item_seed = null
-		drop_held_item()
+func plant_seed():
+	var type = item_seed
+
+	item_seed = null
+	drop_held_item()
+
+	return type
 
 ############################################################
 # water
@@ -228,16 +234,14 @@ func has_water():
 	else:
 		return false
 
-func water_plant(plot_inst):
-	if has_water():
-		plot_inst.water_plant()
+func water_plant():
+	pass
 
 ############################################################
 # produce
 
-func harvest_produce(plot_inst):
-	pickup_produce(plot_inst.produce_type)
-	plot_inst.harvest_produce()
+func harvest_produce(produce_type):
+	pickup_produce(produce_type)
 
 func has_produce():
 	if item_produce:

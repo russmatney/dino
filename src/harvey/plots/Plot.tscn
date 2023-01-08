@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/harvey/plot_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/harvey/plots/Plot.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/harvey/plots/NeedsWater.gd" type="Script" id=8]
 [ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=9]
 [ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=10]
+[ext_resource path="res://src/harvey/ActionLabelTheme.tres" type="Theme" id=11]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 16, 16 )
@@ -107,14 +108,26 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
+margin_left = -32.0
 margin_top = -31.0
-margin_right = 20.0
+margin_right = 32.0
 margin_bottom = -16.0
 custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "state"
 text = "state"
+fit_content_height = true
+scroll_active = false
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+margin_left = -32.0
+margin_top = -56.0
+margin_right = 32.0
+margin_bottom = -31.0
+theme = ExtResource( 11 )
+bbcode_enabled = true
+bbcode_text = "[center]action[/center]"
+text = "action"
 fit_content_height = true
 scroll_active = false
 
