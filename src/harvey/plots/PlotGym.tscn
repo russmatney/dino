@@ -28,6 +28,10 @@ position = Vector2( -76, -77 )
 [node name="SeedBox" parent="." instance=ExtResource( 2 )]
 position = Vector2( 94, -60 )
 
+[node name="SeedBox2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160, -69 )
+produce_type = "tomato"
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 
 [node name="DeliveryBox" parent="." instance=ExtResource( 6 )]

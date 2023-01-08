@@ -95,14 +95,15 @@ var item_produce
 
 onready var produce_icon = $Item/ProduceIcon
 onready var seed_icon = $Item/SeedIcon
+onready var seed_type_icon = $Item/SeedIcon/SeedTypeIcon
 onready var tool_icon = $Item/ToolIcon
 
 func drop_held_item():
 	# TODO animate, sounds drop held tool/seed
 
+	produce_icon.set_visible(false)
 	seed_icon.set_visible(false)
 	tool_icon.set_visible(false)
-	produce_icon.set_visible(false)
 
 	item_seed = null
 	item_tool = null
@@ -111,8 +112,7 @@ func drop_held_item():
 func pickup_seed(produce_type):
 	drop_held_item()
 	seed_icon.set_visible(true)
-	produce_icon.set_visible(true)
-	produce_icon.animation = produce_type
+	seed_type_icon.animation = produce_type
 	item_seed = produce_type
 
 func pickup_produce(produce_type):

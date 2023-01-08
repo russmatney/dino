@@ -32,8 +32,8 @@ shape = SubResource( 1 )
 position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
-animation = "idle"
-frame = 3
+animation = "run"
+frame = 2
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -84,10 +84,13 @@ scale = Vector2( 1, 1 )
 
 [node name="SeedIcon" type="AnimatedSprite" parent="Item"]
 visible = false
-position = Vector2( 4, 4 )
-scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 2 )
 animation = "seed"
+
+[node name="SeedTypeIcon" parent="Item/SeedIcon" instance=ExtResource( 7 )]
+position = Vector2( -4, 4 )
+scale = Vector2( 0.5, 0.5 )
+animation = "onion"
 
 [node name="ToolIcon" parent="Item" instance=ExtResource( 9 )]
 visible = false
