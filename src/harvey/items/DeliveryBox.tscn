@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/harvey/seed-box_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/harvey/items/DeliveryBox.gd" type="Script" id=2]
+[ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 23.5 )
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/deformation = Vector2( 0, 0 )
+shader_param/sideWaysDeformationFactor = 5.0
+shader_param/knockbackFactor = 0.4
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -29,6 +37,7 @@ position = Vector2( 0, -6.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
 

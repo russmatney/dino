@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/harvey/plot_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/harvey/plots/Plot.gd" type="Script" id=2]
@@ -9,9 +9,17 @@
 [ext_resource path="res://src/harvey/plots/ReadyForSeed.gd" type="Script" id=7]
 [ext_resource path="res://src/harvey/plots/NeedsWater.gd" type="Script" id=8]
 [ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=9]
+[ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=10]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 16, 16 )
+
+[sub_resource type="ShaderMaterial" id=8]
+resource_local_to_scene = true
+shader = ExtResource( 10 )
+shader_param/deformation = Vector2( 0, 0 )
+shader_param/sideWaysDeformationFactor = 5.0
+shader_param/knockbackFactor = 0.4
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -70,6 +78,7 @@ script = ExtResource( 2 )
 shape = SubResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 8 )
 frames = SubResource( 6 )
 animation = "ready-for-seed"
 playing = true
