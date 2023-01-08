@@ -9,7 +9,7 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 22.0227
 
-[node name="Tool" type="KinematicBody2D"]
+[node name="Tool" type="KinematicBody2D" groups=["poi"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

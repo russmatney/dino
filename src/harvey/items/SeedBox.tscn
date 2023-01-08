@@ -37,7 +37,7 @@ shader_param/knockbackFactor = 0.4
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 30, 54 )
 
-[node name="SeedBox" type="StaticBody2D"]
+[node name="SeedBox" type="StaticBody2D" groups=["poi"]]
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

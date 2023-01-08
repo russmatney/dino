@@ -16,6 +16,7 @@ color = Color( 0.435294, 0.32549, 0.32549, 1 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 1 )]
+mode = 2
 
 [node name="SeedBox" parent="." instance=ExtResource( 3 )]
 position = Vector2( 143, -92 )

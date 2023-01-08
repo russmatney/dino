@@ -16,6 +16,7 @@ mouse_filter = 2
 color = Color( 0.360784, 0.337255, 0.333333, 1 )
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 2 )]
+mode = 2
 
 [node name="SeedBox" parent="." instance=ExtResource( 1 )]
 position = Vector2( -95, -92 )

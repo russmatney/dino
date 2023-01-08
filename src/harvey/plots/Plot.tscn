@@ -69,7 +69,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Plot" type="Node2D"]
+[node name="Plot" type="Node2D" groups=["poi"]]
 script = ExtResource( 2 )
 
 [node name="Detectbox" type="Area2D" parent="."]

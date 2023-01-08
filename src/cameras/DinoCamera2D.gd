@@ -1,12 +1,64 @@
 extends Camera2D
 
-enum cam_mode {FOLLOW, ANCHOR}
+enum cam_mode {FOLLOW, ANCHOR, FOLLOW_AND_POIS}
 export(cam_mode) var mode = cam_mode.FOLLOW
 
-var following
 export(String) var follow_group = "player"
-var current_anchor # only set in ANCHOR mode
 export(String) var anchor_group = "camera_anchor"
+export (String) var poi_group = "poi"
+
+var following
+var current_anchor
+
+var poi_follows = []
+var zoom_offset = Vector2(1000, 1000)
+var window_size = OS.window_size
+var min_zoom_factor = 1
+var poi_following_distance = 200
+
+###########################################################################
+# ready
+
+func _ready():
+	if mode == cam_mode.FOLLOW_AND_POIS:
+		if poi_group:
+			update_pois()
+		else:
+			print("[WARN][CAMERA]: no poi_group indicated")
+		update_window_size()
+
+		var _x = get_tree().connect("screen_resized", self, "update_window_size")
+
+	if not following:
+		find_node_to_follow()
+
+###########################################################################
+# process
+
+func _process(_delta):
+	match mode:
+		cam_mode.FOLLOW:
+			if not following:
+				find_node_to_follow()
+		cam_mode.ANCHOR:
+			if not following:
+				find_node_to_follow()
+			else:
+				if is_instance_valid(following):
+					attach_to_nearest_anchor()
+				else:
+					following = null
+		cam_mode.FOLLOW_AND_POIS:
+			if not following:
+				find_node_to_follow()
+
+			# TODO how often do we update this?
+			update_pois()
+
+			center_pois()
+
+###########################################################################
+# follow mode
 
 func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
@@ -19,8 +71,13 @@ func find_node_to_follow():
 		match mode:
 			cam_mode.FOLLOW:
 				Util.reparent(self, following)
+			cam_mode.FOLLOW_AND_POIS:
+				Util.reparent(self, following)
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
+
+###########################################################################
+# anchor mode
 
 func attach_to_nearest_anchor():
 	# assumes `following` is set as desired
@@ -45,23 +102,67 @@ func attach_to_nearest_anchor():
 			following = null
 
 ###########################################################################
+# poi mode
 
-func _ready():
-	if not following:
-		find_node_to_follow()
+func update_window_size():
+	window_size = OS.window_size
 
-###########################################################################
+# TODO how often should we check for more follows?
+# maybe trigger via signal/singleton when adding new nodes
+func update_pois():
+	if poi_group:
+		var all_pois = get_tree().get_nodes_in_group(poi_group)
+		var nearby_pois = []
 
-func _process(_delta):
-	match mode:
-		cam_mode.FOLLOW:
-			if not following:
-				find_node_to_follow()
-		cam_mode.ANCHOR:
-			if not following:
-				find_node_to_follow()
-			else:
-				if is_instance_valid(following):
-					attach_to_nearest_anchor()
-				else:
-					following = null
+		if following:
+			for poi in all_pois:
+				var dist_vec = following.global_position - poi.global_position
+				var dist_len = dist_vec.length()
+				if dist_len <= poi_following_distance:
+					nearby_pois.append(poi)
+
+		if nearby_pois:
+			poi_follows = nearby_pois
+
+func center_pois():
+	if poi_follows and following:
+
+		# TODO favor the following (player) position more
+		poi_follows.append(following)
+
+		var center = Vector2.ZERO
+
+		var max_left
+		var max_right
+		var max_top
+		var max_bottom
+
+		for obj in poi_follows:
+			center += obj.global_position
+
+			if not max_left:
+				max_left = obj.global_position.x
+			if not max_right:
+				max_right = obj.global_position.x
+			if not max_top:
+				max_top = obj.global_position.y
+			if not max_bottom:
+				max_bottom = obj.global_position.y
+
+			if obj.global_position.x < max_left:
+				max_left = obj.global_position.x
+			if obj.global_position.x > max_right:
+				max_right = obj.global_position.x
+			if obj.global_position.y < max_top:
+				max_top = obj.global_position.y
+			if obj.global_position.y > max_bottom:
+				max_bottom = obj.global_position.y
+
+		center = center / poi_follows.size()
+		self.global_position = center
+
+		var zoom_factor1 = abs(max_right - max_left) / (window_size.x - zoom_offset.x)
+		var zoom_factor2 = abs(max_bottom - max_top) / (window_size.y - zoom_offset.y)
+		var zoom_factor = max(max(zoom_factor1, zoom_factor2), min_zoom_factor)
+
+		self.zoom = Vector2(zoom_factor, zoom_factor)
