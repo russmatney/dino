@@ -10,7 +10,7 @@ func _ready():
 
 onready var time = get_node("%Time")
 # TODO variable time?
-var time_remaining = 15
+var time_remaining = 90
 
 func tick_timer():
 	time.bbcode_text = "[right]Time: " + str(time_remaining)

@@ -121,9 +121,9 @@ fit_content_height = true
 scroll_active = false
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
-margin_left = -32.0
+margin_left = -40.0
 margin_top = -32.0
-margin_right = 32.0
+margin_right = 40.0
 margin_bottom = -7.0
 theme = ExtResource( 11 )
 bbcode_enabled = true

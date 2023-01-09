@@ -71,9 +71,3 @@ position = Vector2( 128, -37 )
 
 [node name="HarveyBot4" parent="." instance=ExtResource( 1 )]
 position = Vector2( 155, -8 )
-
-[node name="HarveyBot5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 112, -21 )
-
-[node name="HarveyBot6" parent="." instance=ExtResource( 1 )]
-position = Vector2( 120, 0 )

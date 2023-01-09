@@ -2,7 +2,7 @@ extends State
 
 ## enter ###########################################################
 
-var transit_in = 1
+var transit_in = 2
 var tt_transit
 
 func enter(_arg = {}):
