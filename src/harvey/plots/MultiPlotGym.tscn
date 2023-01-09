@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/harvey/items/SeedBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/harvey/player/Player.tscn" type="PackedScene" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://src/harvey/plots/Plot.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/harvey/items/Tool.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/harvey/items/DeliveryBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/harvey/HUD/HUD.tscn" type="PackedScene" id=7]
 
 [node name="MultiPlotGym" type="Node2D"]
+
+[node name="HUD" parent="." instance=ExtResource( 7 )]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -144.0
@@ -33,22 +36,22 @@ produce_type = "onion"
 position = Vector2( -40, -80 )
 
 [node name="Plot" parent="." instance=ExtResource( 4 )]
-position = Vector2( -20, 48 )
+position = Vector2( -48, 48 )
 
 [node name="Plot2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20, 48 )
+position = Vector2( 16, 48 )
 
 [node name="Plot3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 60, 48 )
+position = Vector2( 80, 48 )
 
 [node name="Plot4" parent="." instance=ExtResource( 4 )]
-position = Vector2( -20, 88 )
+position = Vector2( -48, 112 )
 
 [node name="Plot5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 20, 88 )
+position = Vector2( 16, 112 )
 
 [node name="Plot6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 60, 88 )
+position = Vector2( 80, 112 )
 
 [node name="DeliveryBox" parent="." instance=ExtResource( 6 )]
 position = Vector2( 216, 48 )

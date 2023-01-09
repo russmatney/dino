@@ -37,6 +37,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "run"
+frame = 3
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -49,6 +50,7 @@ script = ExtResource( 4 )
 script = ExtResource( 3 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

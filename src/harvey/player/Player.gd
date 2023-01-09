@@ -34,9 +34,11 @@ onready var machine = $Machine
 onready var state_label = $StateLabel
 
 func on_transit(new_state):
-	set_state_label(new_state)
+	if Harvey.debug_mode():
+		set_state_label(new_state)
 
 func set_state_label(label: String):
+	state_label.set_visible(true)
 	state_label.bbcode_text = "[center]" + label + "[/center]"
 
 ############################################################
@@ -249,9 +251,6 @@ func has_produce():
 	else:
 		return false
 
-var produce_delivered = 0
-
 func deliver_produce():
-	produce_delivered = produce_delivered + 1
-	print("player delivering produce: ", item_produce, " total: ", produce_delivered)
+	Harvey.new_produce_delivered(item_produce)
 	drop_held_item()

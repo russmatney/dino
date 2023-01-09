@@ -25,9 +25,12 @@ var state
 
 func on_transit(new_state):
 	state = new_state
-	set_state_label(new_state)
+
+	if Harvey.debug_mode():
+		set_state_label(new_state)
 
 func set_state_label(label: String):
+	state_label.set_visible(true)
 	state_label.bbcode_text = "[center]" + label + "[/center]"
 
 ############################################################
