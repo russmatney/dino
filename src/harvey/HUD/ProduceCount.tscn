@@ -21,10 +21,9 @@ scale = Vector2( 1, 1 )
 
 [node name="Count" type="RichTextLabel" parent="."]
 margin_left = 28.0
-margin_right = 58.0
+margin_right = 92.0
 margin_bottom = 18.0
-rect_min_size = Vector2( 30, 0 )
+rect_min_size = Vector2( 64, 0 )
 theme = ExtResource( 3 )
-text = "x 2
-"
+text = "x 22"
 scroll_active = false
