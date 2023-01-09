@@ -7,7 +7,7 @@ func _ready():
 
 
 func restart_game():
-	Navi.nav_to("res://src/harvey/plots/PlotGym.tscn")
+	Navi.nav_to("res://src/harvey/maps/KitchenSink.tscn")
 
 
 func debug_mode():
