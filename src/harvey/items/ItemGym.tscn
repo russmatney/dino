@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/harvey/items/SeedBox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/harvey/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/harvey/player/HarveyPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/harvey/items/Tool.tscn" type="PackedScene" id=4]
 
 [node name="ItemGym" type="Node2D"]

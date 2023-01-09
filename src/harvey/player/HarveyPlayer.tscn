@@ -1,31 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/harvey/player/harvey_spriteframes.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://addons/beehive/machine.gd" type="Script" id=2]
-[ext_resource path="res://src/harvey/player/Run.gd" type="Script" id=3]
-[ext_resource path="res://src/harvey/player/Idle.gd" type="Script" id=4]
-[ext_resource path="res://src/harvey/player/Player.gd" type="Script" id=5]
+[ext_resource path="res://src/harvey/player/PlayerItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/harvey/player/Machine.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/harvey/player/HarveyPlayer.gd" type="Script" id=5]
 [ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=6]
-[ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/harvey/seed-icon_sheet.png" type="Texture" id=8]
-[ext_resource path="res://src/harvey/ToolIcon.tscn" type="PackedScene" id=9]
 [ext_resource path="res://resources/sprites/arrow.tres" type="SpriteFrames" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 13 )
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "seed",
-"speed": 5.0
-} ]
-
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 192, 128 )
 
-[node name="Player" type="KinematicBody2D" groups=["player"]]
+[node name="HarveyPlayer" type="KinematicBody2D" groups=["action_detector", "player"]]
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -40,14 +28,7 @@ animation = "run"
 frame = 3
 playing = true
 
-[node name="Machine" type="Node" parent="."]
-script = ExtResource( 2 )
-
-[node name="Idle" type="Node" parent="Machine"]
-script = ExtResource( 4 )
-
-[node name="Run" type="Node" parent="Machine"]
-script = ExtResource( 3 )
+[node name="Machine" parent="." instance=ExtResource( 3 )]
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -80,25 +61,7 @@ bbcode_enabled = true
 fit_content_height = true
 scroll_active = false
 
-[node name="Item" type="Node2D" parent="."]
-position = Vector2( -13, -29 )
-
-[node name="ProduceIcon" parent="Item" instance=ExtResource( 7 )]
-visible = false
-scale = Vector2( 1, 1 )
-
-[node name="SeedIcon" type="AnimatedSprite" parent="Item"]
-visible = false
-frames = SubResource( 2 )
-animation = "seed"
-
-[node name="SeedTypeIcon" parent="Item/SeedIcon" instance=ExtResource( 7 )]
-position = Vector2( -4, 4 )
-scale = Vector2( 0.5, 0.5 )
-animation = "onion"
-
-[node name="ToolIcon" parent="Item" instance=ExtResource( 9 )]
-visible = false
+[node name="Item" parent="." instance=ExtResource( 2 )]
 
 [node name="ActionDetector" type="Area2D" parent="."]
 

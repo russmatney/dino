@@ -36,36 +36,38 @@ shader_param/sideWaysDeformationFactor = 5.0
 shader_param/knockbackFactor = 0.4
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30, 54 )
+extents = Vector2( 64, 28 )
 
 [node name="SeedBox" type="StaticBody2D" groups=["poi"]]
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -6.5 )
+position = Vector2( 0, -46.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 6 )
+position = Vector2( 0, -40 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
 
 [node name="ProduceIcon" parent="." instance=ExtResource( 2 )]
 material = SubResource( 7 )
-position = Vector2( 0, -9 )
+position = Vector2( 0, -49 )
 animation = "carrot"
 
 [node name="Detectbox" type="Area2D" parent="."]
+position = Vector2( 0, -40 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-position = Vector2( 0, 24 )
+position = Vector2( 0, 36 )
 shape = SubResource( 4 )
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
 margin_left = -30.0
-margin_top = -48.0
+margin_top = -88.0
 margin_right = 30.0
-margin_bottom = -30.0
+margin_bottom = -70.0
 theme = ExtResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[center]action[/center]"

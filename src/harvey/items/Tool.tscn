@@ -16,7 +16,7 @@ shader_param/sideWaysDeformationFactor = 5.0
 shader_param/knockbackFactor = 0.4
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 22.0227
+radius = 32.0
 
 [node name="Tool" type="KinematicBody2D" groups=["poi"]]
 script = ExtResource( 1 )

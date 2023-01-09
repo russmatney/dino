@@ -25,7 +25,27 @@ func build_actions(player):
 
 func can_perform_action(player, action):
 	match (action["method"]):
-		"pickup_tool": return bodies.has(player)
+		"pickup_tool": return bodies.has(player) and could_perform_action(player, action)
+
+func could_perform_action(player, _action):
+	# players can always grab tools
+	if player.is_in_group("player"):
+		return true
+
+	# prevent bots from repeatedly picking up tools
+	if player.has_tool():
+		return false
+
+	# never stop with produce?
+	if player.has_produce():
+		return false
+
+	# TODO has the bot seen a NeedsWater?
+	# connected actions?
+	# some spaghetti pattern starting?
+	match (tool_type):
+		"watering-pail":
+			return player.action_source_needs_water()
 
 func set_action_label(player):
 	action_label.set_visible(true)
@@ -40,12 +60,12 @@ func set_action_label(player):
 		action_label.modulate.a = 1
 
 func _on_Detectbox_body_entered(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.append(body)
 		set_action_label(body)
 
 func _on_Detectbox_body_exited(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.erase(body)
 		set_action_label(body)
 

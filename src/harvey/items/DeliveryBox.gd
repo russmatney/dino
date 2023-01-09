@@ -23,10 +23,14 @@ func build_actions(player):
 
 func can_perform_action(player, action):
 	match (action["method"]):
-		"deliver_produce": return bodies.has(player) and player.has_produce()
+		"deliver_produce": return bodies.has(player) and could_perform_action(player, action)
+
+func could_perform_action(player, _action):
+	return player.has_produce()
 
 func set_action_label(player):
-	action_label.set_visible(true)
+	if not actions:
+		return
 
 	# TODO select action better?
 	var ax = actions[0]
@@ -37,13 +41,15 @@ func set_action_label(player):
 	else:
 		action_label.modulate.a = 1
 
+	action_label.set_visible(true)
+
 func _on_Detectbox_body_entered(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.append(body)
 		set_action_label(body)
 
 func _on_Detectbox_body_exited(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.erase(body)
 		set_action_label(body)
 

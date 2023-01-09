@@ -28,31 +28,33 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 30, 54 )
+extents = Vector2( 64, 28 )
 
 [node name="DeliveryBox" type="StaticBody2D" groups=["poi"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -6.5 )
+position = Vector2( 0, -46.5 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 5 )
+position = Vector2( 0, -40 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
 
 [node name="Detectbox" type="Area2D" parent="."]
+position = Vector2( 0, -40 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-position = Vector2( 0, 24 )
+position = Vector2( 0, 36 )
 shape = SubResource( 4 )
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
 margin_left = -32.0
-margin_top = -56.0
+margin_top = -96.0
 margin_right = 32.0
-margin_bottom = -32.0
+margin_bottom = -72.0
 theme = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center]action[/center]"

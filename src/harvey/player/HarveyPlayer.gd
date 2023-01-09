@@ -1,3 +1,4 @@
+class_name HarveyPlayer
 extends KinematicBody2D
 
 onready var anim = $AnimatedSprite
@@ -15,7 +16,10 @@ func _process(_delta):
 	# probably don't want to call this every frame....
 	eval_current_action()
 
-	var ax = Util._or(c_ax, nearest_ax)
+	point_arrow()
+
+func point_arrow():
+	var ax = Util._or(c_ax, p_ax, nearest_ax)
 	if ax and "source" in ax:
 		var rot = get_angle_to(ax["source"].get_global_position()) + (PI/2)
 		action_arrow.set_rotation(rot)
@@ -23,6 +27,7 @@ func _process(_delta):
 ############################################################
 # _input
 
+# overwritten in subclass
 func _unhandled_input(event):
 	if c_ax and Trolley.is_action(event):
 		perform_action()
@@ -45,7 +50,12 @@ func set_state_label(label: String):
 # movement
 
 var velocity = Vector2.ZERO
+# overwritten in subclass
 var speed := 100
+
+# overwritten in subclass
+func get_move_dir():
+	return Trolley.move_dir()
 
 ############################################################
 # facing
@@ -63,11 +73,13 @@ func face_left():
 
 ############################################################
 # action detection
+# TODO move to ActionDetector script
 
 onready var action_label = $ActionLabel
 onready var action_arrow = $ActionArrow
 var actions = []
 var c_ax # current action
+var p_ax # nearest potential action
 var nearest_ax # current action
 
 func action_sources(axs = actions):
@@ -78,19 +90,26 @@ func action_sources(axs = actions):
 	return srcs.values()
 
 func update_action_label():
-	if not c_ax:
+	var ax = Util._or(c_ax, p_ax, nearest_ax)
+
+	if not ax:
 		action_label.bbcode_text = ""
 		return
 
-	action_label.bbcode_text = "[center]" + c_ax["method"].capitalize() + "[/center]"
+	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+
+	# fade label if action is not current (i.e. not possible?) bit of naming could help here
+	if c_ax:
+		action_label.modulate.a = 1
+	elif p_ax:
+		action_label.modulate.a = 0.7
+	else:
+		action_label.modulate.a = 0.4
 
 func update_action_arrow():
 	if not actions:
 		action_arrow.set_visible(false)
 		return
-
-	# note, not always a possible action
-	nearest_ax = find_nearest_action()
 	action_arrow.set_visible(true)
 
 func find_nearest_action(axs = actions):
@@ -105,19 +124,47 @@ func find_nearest_action(axs = actions):
 			break
 	return nearest_action
 
-func eval_current_action():
-	if actions:
-		var possible_actions = []
-		for ax in actions:
-			if "source" in ax and ax["source"].has_method("can_perform_action"):
-				if ax["source"].can_perform_action(self, ax):
-					possible_actions.append(ax)
+func immediate_actions():
+	# TODO refactor into a filter predicate style
+	var axs = []
+	for ax in actions:
+		if "source" in ax and ax["source"].has_method("can_perform_action"):
+			if ax["source"].can_perform_action(self, ax):
+				axs.append(ax)
+	return axs
 
-		var nearest_action = find_nearest_action(possible_actions)
-		c_ax = nearest_action
+# TODO refactor to call can/could separately (and find better naming)
+func potential_actions():
+	# TODO refactor into a filter predicate style
+	var axs = []
+	for ax in actions:
+		if "source" in ax and ax["source"].has_method("could_perform_action"):
+			if ax["source"].could_perform_action(self, ax):
+				axs.append(ax)
+	return axs
+
+func eval_current_action():
+	c_ax = null
+	p_ax = null
+	nearest_ax = null
+
+	if actions:
+		var im_axs = immediate_actions()
+		var pot_axs
+		if not im_axs:
+			pot_axs = potential_actions()
+
+		if im_axs:
+			var nearest_action = find_nearest_action(im_axs)
+			c_ax = nearest_action
+		if pot_axs:
+			p_ax = find_nearest_action(pot_axs)
 	else:
 		c_ax = null
+		p_ax = null
+		nearest_ax = null
 
+	nearest_ax = find_nearest_action()
 	update_action_label()
 	update_action_arrow()
 
@@ -153,6 +200,12 @@ func remove_actions_with_source(name):
 		actions.erase(ax)
 	eval_current_action()
 
+func has_action(method):
+	for ax in actions:
+		if ax["method"] == method:
+			return true
+	return false
+
 ############################################################
 # performing actions
 
@@ -161,13 +214,25 @@ func perform_action():
 		return
 
 	var ax = c_ax
-	print("performing action: ", ax["method"])
+	print("\n\nperforming action: ", ax["method"])
 	if "arg" in ax and ax["arg"]:
 		ax["obj"].call(ax["method"], ax["arg"])
 	else:
 		ax["obj"].call(ax["method"])
 
 	eval_current_action()
+
+	print("next action:")
+
+	print("has_seed: ", has_seed())
+	print("has_tool: ", has_water())
+	print("has_produce: ", has_produce())
+	if c_ax:
+		print("c_ax: ", c_ax["method"])
+	if p_ax:
+		print("p_ax: ", p_ax["method"])
+	if nearest_ax:
+		print("nearest_ax: ", nearest_ax["method"])
 
 ############################################################
 # items
@@ -228,7 +293,13 @@ func plant_seed():
 	return type
 
 ############################################################
-# water
+# tools, water
+
+func has_tool():
+	if item_tool:
+		return true
+	else:
+		return false
 
 func has_water():
 	if item_tool == "watering-pail":
@@ -238,6 +309,12 @@ func has_water():
 
 func water_plant():
 	pass
+
+func action_source_needs_water():
+	for src in action_sources():
+		if src.has_method("needs_water"):
+			if src.needs_water():
+				return true
 
 ############################################################
 # produce
@@ -252,5 +329,6 @@ func has_produce():
 		return false
 
 func deliver_produce():
+	# TODO only for player, not for bots
 	Harvey.new_produce_delivered(item_produce)
 	drop_held_item()

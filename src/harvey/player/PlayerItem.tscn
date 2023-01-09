@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/harvey/ToolIcon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/harvey/ToolIcon.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/harvey/seed-icon_sheet.png" type="Texture" id=4]
+[ext_resource path="res://src/harvey/ProduceIcon.tres" type="SpriteFrames" id=5]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "seed",
+"speed": 5.0
+} ]
+
+[node name="Item" type="Node2D"]
+position = Vector2( -13, -29 )
+
+[node name="ProduceIcon" type="AnimatedSprite" parent="." instance=ExtResource( 3 )]
+visible = false
+frames = ExtResource( 5 )
+animation = "tomato"
+
+[node name="SeedIcon" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 2 )
+animation = "seed"
+
+[node name="SeedTypeIcon" type="AnimatedSprite" parent="SeedIcon" instance=ExtResource( 3 )]
+position = Vector2( -4, 4 )
+scale = Vector2( 0.5, 0.5 )
+frames = ExtResource( 5 )
+animation = "onion"
+
+[node name="ToolIcon" type="AnimatedSprite" parent="." instance=ExtResource( 1 )]
+visible = false
+frames = ExtResource( 2 )
+animation = "shovel"

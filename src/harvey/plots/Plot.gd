@@ -52,10 +52,20 @@ func can_perform_action(player, action):
 	if not bodies.has(player):
 		return false
 
+	return could_perform_action(player, action)
+
+func could_perform_action(player, action):
+	# never stop with produce?
+	if player.has_produce():
+		return false
+
 	match (action["method"]):
 		"plant_seed": return state == "ReadyForSeed" and player.has_seed()
 		"water_plant": return state == "NeedsWater" and player.has_water()
-		"harvest_produce": return state == "ReadyForHarvest"
+		"harvest_produce":
+			# maybe questionable - really it's just a priority thing?
+			# could also change with inventory size
+			return state == "ReadyForHarvest"
 
 func set_action_label(player):
 	if not actions:
@@ -86,12 +96,12 @@ func set_action_label(player):
 	action_label.set_visible(true)
 
 func _on_Detectbox_body_entered(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.append(body)
 		set_action_label(body)
 
 func _on_Detectbox_body_exited(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.erase(body)
 		set_action_label(body)
 
@@ -124,6 +134,9 @@ func plant_seed(player):
 	if player:
 		var dir = anim.global_position - player.get_global_position()
 		deform(dir)
+
+func needs_water():
+	return state == "NeedsWater"
 
 func water_plant(player):
 	player.water_plant()

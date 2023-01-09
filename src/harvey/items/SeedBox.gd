@@ -34,7 +34,19 @@ func build_actions(player):
 
 func can_perform_action(player, action):
 	match (action["method"]):
-		"pickup_seed": return bodies.has(player)
+		"pickup_seed": return bodies.has(player) and could_perform_action(player, action)
+
+func could_perform_action(player, _action):
+	# players can always grab seeds
+	if player.is_in_group("player"):
+		return true
+
+	# never stop with produce?
+	if player.has_produce():
+		return false
+
+	# bot can't pick up another seed
+	return not player.has_seed()
 
 func set_action_label(player):
 	action_label.set_visible(true)
@@ -48,13 +60,15 @@ func set_action_label(player):
 	else:
 		action_label.modulate.a = 1
 
+# TODO detecting bodies instead of areas, should probably switch to actual ActionDetectors areas
+# otherwise it gets conflated with the node supporting it (the body)
 func _on_Detectbox_body_entered(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.append(body)
 		set_action_label(body)
 
 func _on_Detectbox_body_exited(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("action_detector"):
 		bodies.erase(body)
 		set_action_label(body)
 

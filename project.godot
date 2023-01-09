@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/gut/test.gd"
 }, {
+"base": "HarveyPlayer",
+"class": "HarveyBot",
+"language": "GDScript",
+"path": "res://src/harvey/bots/HarveyBot.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "HarveyPlayer",
+"language": "GDScript",
+"path": "res://src/harvey/player/HarveyPlayer.gd"
+}, {
 "base": "Reference",
 "class": "InkBase",
 "language": "GDScript",
@@ -373,6 +383,8 @@ _global_script_class_icons={
 "Credits": "",
 "GutHookScript": "",
 "GutTest": "",
+"HarveyBot": "",
+"HarveyPlayer": "",
 "InkBase": "",
 "InkBoolValue": "",
 "InkCSharpValidator": "",

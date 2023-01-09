@@ -12,7 +12,7 @@ func restart_game():
 
 func debug_mode():
 	# OS.is_debug_build()
-	return false
+	return true
 
 signal new_produce_delivered(type)
 
