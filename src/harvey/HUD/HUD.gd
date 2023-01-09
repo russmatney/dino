@@ -10,13 +10,13 @@ func _ready():
 
 onready var time = get_node("%Time")
 # TODO variable time?
-var time_remaining = 90
+var time_remaining = 15
 
 func tick_timer():
 	time.bbcode_text = "[right]Time: " + str(time_remaining)
 
 	if time_remaining <= 0:
-		Harvey.time_up()
+		Harvey.time_up(produce_counts)
 	else:
 		var tween = create_tween()
 		tween.tween_callback(self, "tick_timer").set_delay(1.0)

@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/MaxSizeContainer/max_size_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/navi/ui/MenuButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/harvey/menus/TimeUpMenu.gd" type="Script" id=5]
+[ext_resource path="res://src/harvey/HUDTheme.tres" type="Theme" id=6]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.180392, 0.027451, 0.113725, 0.501961 )
+
+[sub_resource type="DynamicFont" id=2]
+resource_local_to_scene = true
+size = 96
+outline_size = 4
+outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
+extra_spacing_top = 10
+font_data = ExtResource( 2 )
+
+[node name="TimeUpMenu" type="PopupPanel"]
+pause_mode = 2
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 512.0
+margin_bottom = 300.0
+
+[node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 512.0
+margin_bottom = 107.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_text = "[center]Time Up![/center]"
+text = "Time Up!"
+
+[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 111.0
+margin_right = 512.0
+margin_bottom = 151.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+script = ExtResource( 1 )
+max_size = Vector2( 200, -1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MaxSizeContainer"]
+margin_left = 156.0
+margin_right = 356.0
+margin_bottom = 40.0
+
+[node name="ReturnToMain" parent="VBoxContainer/MaxSizeContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_right = 200.0
+margin_bottom = 18.0
+text = "Return to Main Menu"
+
+[node name="Restart" parent="VBoxContainer/MaxSizeContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 22.0
+margin_right = 200.0
+margin_bottom = 40.0
+text = "Restart"
+
+[node name="MaxSizeContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 155.0
+margin_right = 512.0
+margin_bottom = 300.0
+size_flags_vertical = 3
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+script = ExtResource( 1 )
+max_size = Vector2( 300, -1 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MaxSizeContainer2"]
+margin_left = 106.0
+margin_right = 406.0
+margin_bottom = 145.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="ScoreLabel" type="RichTextLabel" parent="VBoxContainer/MaxSizeContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 62.0
+margin_right = 300.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 100, 0 )
+theme = ExtResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Score"
+text = "Score"
+fit_content_height = true
+scroll_active = false
+
+[node name="ProduceList" type="VBoxContainer" parent="VBoxContainer/MaxSizeContainer2/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 83.0
+margin_right = 300.0
+margin_bottom = 83.0
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="VBoxContainer/MaxSizeContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]
+[connection signal="pressed" from="VBoxContainer/MaxSizeContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
