@@ -25,9 +25,17 @@ var state
 
 func on_transit(new_state):
 	state = new_state
-
 	if Harvey.debug_mode():
 		set_state_label(new_state)
+
+	match (state):
+		"SeedPlanted": Harvey.sound_seed_planted()
+		"NeedsWater": Harvey.sound_plant_needs_water()
+		"Watered": Harvey.sound_watering()
+		"ReadyForHarvest": Harvey.sound_ready_for_harvest()
+		_: print("no sound")
+
+
 
 func set_state_label(label: String):
 	state_label.set_visible(true)

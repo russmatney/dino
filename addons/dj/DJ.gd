@@ -35,3 +35,10 @@ func resume_menu_song(song = null):
 func pause_menu_song():
 	audio_stream_player.stop()
 	playback_pos = audio_stream_player.get_playback_position()
+
+func setup_sound(sound):
+	# TODO force no loop
+	var asp = AudioStreamPlayer.new()
+	asp.set_stream(sound)
+	add_child(asp)
+	return asp

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Retro Game Weapons Sound Effects - complete.ogg-b9c7
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

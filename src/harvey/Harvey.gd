@@ -11,6 +11,8 @@ func _ready():
 	time_up_container.add_child(time_up_menu)
 	call_deferred("add_child", time_up_container)
 
+	setup_sounds()
+
 #########################################################################
 # restart
 
@@ -42,4 +44,41 @@ func debug_mode():
 signal new_produce_delivered(type)
 
 func new_produce_delivered(type):
+	sound_produce_delivered()
 	emit_signal("new_produce_delivered", type)
+
+#########################################################################
+# sounds
+
+onready var slime_stream = preload("res://assets/harvey/sounds/slime_001.ogg")
+var slime_sound
+onready var maximize_stream = preload("res://assets/harvey/sounds/maximize_006.ogg")
+var maximize_sound
+onready var minimize_stream = preload("res://assets/harvey/sounds/minimize_006.ogg")
+var minimize_sound
+onready var cure_stream = preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - cure.ogg")
+var cure_sound
+onready var complete_stream = preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - complete.ogg")
+var complete_sound
+
+func setup_sounds():
+	slime_sound = DJ.setup_sound(slime_stream)
+	minimize_sound = DJ.setup_sound(minimize_stream)
+	maximize_sound = DJ.setup_sound(maximize_stream)
+	cure_sound = DJ.setup_sound(cure_stream)
+	complete_sound = DJ.setup_sound(complete_stream)
+
+func sound_ready_for_harvest():
+	cure_sound.play()
+
+func sound_produce_delivered():
+	complete_sound.play()
+
+func sound_watering():
+	slime_sound.play()
+
+func sound_plant_needs_water():
+	minimize_sound.play()
+
+func sound_seed_planted():
+	maximize_sound.play()

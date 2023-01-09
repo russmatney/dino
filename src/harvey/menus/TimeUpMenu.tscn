@@ -20,7 +20,6 @@ font_data = ExtResource( 2 )
 
 [node name="TimeUpMenu" type="PopupPanel"]
 pause_mode = 2
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
