@@ -20,7 +20,7 @@ var menu_scenes = [
 	},
 	{
 		"label": "Harvey",
-		"nav_to": "res://src/harvey/HarveyMenu.tscn",
+		"nav_to": "res://src/harvey/menus/HarveyMenu.tscn",
 	},
 ]
 

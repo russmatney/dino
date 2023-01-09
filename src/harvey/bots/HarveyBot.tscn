@@ -27,7 +27,7 @@ modulate = Color( 0.388235, 0.698039, 0.4, 1 )
 position = Vector2( 0, -8 )
 frames = ExtResource( 6 )
 animation = "run"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Machine" parent="." instance=ExtResource( 5 )]

@@ -1,3 +1,4 @@
+class_name NaviPauseMenu
 extends PopupPanel
 
 # TODO tests for this scene

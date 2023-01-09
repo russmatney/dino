@@ -119,6 +119,19 @@ func nav_to_main_menu():
 
 ## pause ###################################################################
 
+var pause_menu_path = "res://addons/navi/NaviPauseMenu.tscn"
+
+func set_pause_menu(path):
+	var f = File.new()
+	if f.file_exists(path):
+		pp(str("Updating pause_menu_path: ", path))
+		pause_menu_path = path
+
+		pause_menu.queue_free()
+		pause_menu = load(pause_menu_path).instance()
+		pause_container.add_child(pause_menu)
+	else:
+		pp(str("No scene at path: ", path, ", can't set pause menu."))
 
 func _unhandled_input(event):
 	# Navi implying Trolly dep
@@ -127,7 +140,6 @@ func _unhandled_input(event):
 
 
 func toggle_pause():
-	print("toggling pause")
 	var t = get_tree()
 	if t.paused:
 		resume()
