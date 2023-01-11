@@ -42,7 +42,7 @@ func _process(delta):
 
 func _unhandled_key_input(event):
 	if Trolley.is_jump(event):
-		if can_wall_jump:
+		if can_wall_jump and is_on_wall():
 			machine.transit("Jump")
 		if state in ["Idle", "Run", "Fall"]:
 			machine.transit("Jump")
