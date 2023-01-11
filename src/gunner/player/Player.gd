@@ -40,14 +40,16 @@ func _process(delta):
 ############################################################
 # _unhandled_input
 
-func _unhandled_input(event):
+func _unhandled_key_input(event):
 	if Trolley.is_jump(event):
 		if can_wall_jump:
-			machine.transit("WallJump")
+			machine.transit("Jump")
 		if state in ["Idle", "Run", "Fall"]:
 			machine.transit("Jump")
 	elif Trolley.is_event(event, "fire"):
 		fire()
+	elif Trolley.is_event_released(event, "fire"):
+		stop_firing()
 
 ############################################################
 # machine
@@ -61,7 +63,10 @@ func on_transit(new_state):
 	set_state_label(new_state)
 
 func set_state_label(label: String):
-	state_label.bbcode_text = "[center]" + label + "[/center]"
+	var lbl = label
+	if machine.state.has_method("label"):
+		lbl = machine.state.label()
+	state_label.bbcode_text = "[center]" + lbl + "[/center]"
 
 ############################################################
 # movement
@@ -106,11 +111,29 @@ func face_left():
 onready var bullet_position = $BulletPosition
 onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
 var bullet_impulse = 800
+var firing = false
+var fire_rate = 0.4
 
 func fire():
-	var bullet = bullet_scene.instance()
-	bullet.position = bullet_position.get_global_position()
-	Navi.current_scene.call_deferred("add_child", bullet)
-	var impulse_dir = facing_dir
-	bullet.rotation = impulse_dir.angle()
-	bullet.apply_impulse(Vector2.ZERO, impulse_dir * bullet_impulse)
+	firing = true
+	fire_bullet()
+
+var tween
+func fire_bullet():
+	if firing:
+		tween = create_tween()
+
+		var bullet = bullet_scene.instance()
+		bullet.position = bullet_position.get_global_position()
+		Navi.current_scene.call_deferred("add_child", bullet)
+		bullet.rotation = facing_dir.angle()
+		bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
+
+		tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
+	else:
+		if tween:
+			tween.stop()
+
+func stop_firing():
+	firing = false
+	pass

@@ -60,7 +60,6 @@ func actions_list(ignore_prefix = "", only_prefix = ""):
 
 	return axs
 
-
 ##################################################################
 # public
 ##################################################################
@@ -83,6 +82,9 @@ func move_dir():
 
 func is_event(event, event_name):
 	return event.is_action_pressed(event_name)
+
+func is_event_released(event, event_name):
+	return event.is_action_released(event_name)
 
 func is_jump(event):
 	return event.is_action_pressed("jump")
