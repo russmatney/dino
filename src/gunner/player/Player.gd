@@ -109,10 +109,14 @@ func face_left():
 # fire
 
 onready var bullet_position = $BulletPosition
+var firing = false
+
+# per-bullet (gun) numbers
+
 onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
 var bullet_impulse = 800
-var firing = false
 var fire_rate = 0.2
+var bullet_knockback = 2
 
 var tween
 func fire():
@@ -139,3 +143,8 @@ func fire_bullet():
 	Navi.current_scene.call_deferred("add_child", bullet)
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
+
+	# push player back when firing
+	var pos = get_global_position()
+	pos += -1 * facing_dir * bullet_knockback
+	set_global_position(pos)
