@@ -112,28 +112,30 @@ onready var bullet_position = $BulletPosition
 onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var firing = false
-var fire_rate = 0.4
-
-func fire():
-	firing = true
-	fire_bullet()
+var fire_rate = 0.2
 
 var tween
-func fire_bullet():
-	if firing:
-		tween = create_tween()
+func fire():
+	firing = true
 
-		var bullet = bullet_scene.instance()
-		bullet.position = bullet_position.get_global_position()
-		Navi.current_scene.call_deferred("add_child", bullet)
-		bullet.rotation = facing_dir.angle()
-		bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
+	if tween and tween.is_running():
+		return
 
-		tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
-	else:
-		if tween:
-			tween.stop()
+	tween = create_tween()
+	fire_bullet()
+	tween.set_loops(0)
+	tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
 
 func stop_firing():
 	firing = false
-	pass
+
+	# kill tween after last bullet
+	if tween and tween.is_running():
+		tween.kill()
+
+func fire_bullet():
+	var bullet = bullet_scene.instance()
+	bullet.position = bullet_position.get_global_position()
+	Navi.current_scene.call_deferred("add_child", bullet)
+	bullet.rotation = facing_dir.angle()
+	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
