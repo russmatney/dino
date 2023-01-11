@@ -10,20 +10,20 @@ var dead
 var time_left = 0
 
 func enter(msg = {}):
-	owner.knocked_back = true
+	actor.knocked_back = true
 
 	dir = msg["dir"]
 	dead = msg["dead"]
 
-	owner.velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
+	actor.velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
 
 	if dead:
-		owner.velocity *= 3
+		actor.velocity *= 3
 
 	if dead:
-		owner.anim.animation = "dying"
+		actor.anim.animation = "dying"
 	else:
-		owner.anim.animation = "knockback"
+		actor.anim.animation = "knockback"
 
 	time_left = knockback_time
 
@@ -34,8 +34,8 @@ func process(delta: float):
 	# if we've flown a bit
 	if knockback_time - time_left > 0.5:
 		# and we're back on the floor
-		if owner.is_on_floor():
-			owner.knocked_back = false
+		if actor.is_on_floor():
+			actor.knocked_back = false
 			if dead:
 				transit("Dead")
 			else:
@@ -43,11 +43,11 @@ func process(delta: float):
 
 	# fallback, in case we fly for a long while
 	if time_left < 0:
-		owner.knocked_back = false
+		actor.knocked_back = false
 		if dead:
 			transit("Dead")
 		else:
 			transit("Idle")
 
-	owner.velocity.y += owner.gravity * delta
-	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
+	actor.velocity.y += actor.gravity * delta
+	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)

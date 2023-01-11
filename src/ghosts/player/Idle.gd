@@ -1,15 +1,11 @@
 extends State
 
-
 func enter(_msg = {}):
-	# owner points to the root node of a packed scene
-	owner.velocity = Vector2.ZERO
-
-	owner.anim.animation = "idle"
-
+	actor.velocity = Vector2.ZERO
+	actor.anim.animation = "idle"
 
 func process(_delta: float):
-	if not owner.is_on_floor():
+	if not actor.is_on_floor():
 		machine.transit("Air")
 
 	if Input.is_action_just_pressed("move_up"):
@@ -18,5 +14,5 @@ func process(_delta: float):
 		machine.transit("Run")
 
 func physics_process(delta):
-	owner.velocity.y += owner.gravity * delta
-	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
+	actor.velocity.y += actor.gravity * delta
+	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
