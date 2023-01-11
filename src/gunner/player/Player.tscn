@@ -48,8 +48,8 @@ script = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
-margin_left = -20.0
-margin_right = 20.0
+margin_left = -45.0
+margin_right = 45.0
 margin_bottom = 40.0
 theme = ExtResource( 6 )
 bbcode_enabled = true

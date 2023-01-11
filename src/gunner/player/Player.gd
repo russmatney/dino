@@ -11,8 +11,26 @@ func _ready():
 ############################################################
 # _process
 
-func _process(_delta):
-    move_dir = Trolley.move_dir()
+var positions = []
+var rec_pos_n = 10
+var rec_pos_every = 0.0005
+var rec_pos_in = 0
+
+func _process(delta):
+	move_dir = Trolley.move_dir()
+
+	if rec_pos_in > 0:
+		rec_pos_in = rec_pos_in - delta
+	else:
+		rec_pos_in = rec_pos_every
+
+		positions.push_front(get_global_position())
+		if positions.size() > rec_pos_n:
+			positions.pop_back()
+
+	var back = positions.back()
+	if back:
+		state_label.set_global_position(back + Vector2(-45, 0))
 
 ############################################################
 # _unhandled_input
