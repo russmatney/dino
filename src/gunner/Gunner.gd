@@ -29,6 +29,9 @@ onready var sounds = {
 		preload("res://assets/sounds/step2.sfxr"),
 		preload("res://assets/sounds/step3.sfxr"),
 		],
+	"bullet_pop": [
+		preload("res://assets/sounds/small_explosion.sfxr"),
+		]
 	}
 var sound_map
 onready var laser_stream = preload("res://assets/harvey/sounds/slime_001.ogg")
