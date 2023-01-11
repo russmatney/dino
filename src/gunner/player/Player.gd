@@ -30,7 +30,11 @@ func _process(delta):
 
 	var back = positions.back()
 	if back:
-		state_label.set_global_position(back + Vector2(-45, 0))
+		var target = back + Vector2(-45, 0)
+		var current = state_label.get_global_position()
+		var pos = target - (current - target) * 0.1
+		# pos += (1 - delta) * pos
+		state_label.set_global_position(pos)
 
 ############################################################
 # _unhandled_input
