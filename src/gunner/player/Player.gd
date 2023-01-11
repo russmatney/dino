@@ -8,6 +8,8 @@ onready var anim = $AnimatedSprite
 func _ready():
 	machine.connect("transitioned", self, "on_transit")
 
+	face_left()
+
 ############################################################
 # _process
 
@@ -33,7 +35,6 @@ func _process(delta):
 		var target = back + Vector2(-45, 0)
 		var current = state_label.get_global_position()
 		var pos = target - (current - target) * 0.1
-		# pos += (1 - delta) * pos
 		state_label.set_global_position(pos)
 
 ############################################################
@@ -45,6 +46,8 @@ func _unhandled_input(event):
 			machine.transit("WallJump")
 		if state in ["Idle", "Run", "Fall"]:
 			machine.transit("Jump")
+	elif Trolley.is_event(event, "fire"):
+		fire()
 
 ############################################################
 # machine
@@ -73,9 +76,9 @@ export(int) var gravity := 900
 var can_wall_jump
 
 ############################################################
+# facing
 
-enum DIR { left, right }
-var facing_direction = DIR.left
+var facing_dir = Vector2.ZERO
 
 func update_facing():
 	if move_dir.x > 0:
@@ -84,9 +87,30 @@ func update_facing():
 		face_left()
 
 func face_right():
-	facing_direction = DIR.right
+	facing_dir = Vector2(1, 0)
 	anim.flip_h = true
 
+	if bullet_position.position.x < 0:
+		bullet_position.position.x *= -1
+
 func face_left():
-	facing_direction = DIR.left
+	facing_dir = Vector2(-1, 0)
 	anim.flip_h = false
+
+	if bullet_position.position.x > 0:
+		bullet_position.position.x *= -1
+
+############################################################
+# fire
+
+onready var bullet_position = $BulletPosition
+onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+var bullet_impulse = 800
+
+func fire():
+	var bullet = bullet_scene.instance()
+	bullet.position = bullet_position.get_global_position()
+	Navi.current_scene.call_deferred("add_child", bullet)
+	var impulse_dir = facing_dir
+	bullet.rotation = impulse_dir.angle()
+	bullet.apply_impulse(Vector2.ZERO, impulse_dir * bullet_impulse)

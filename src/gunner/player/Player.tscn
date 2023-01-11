@@ -25,7 +25,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -57,3 +57,6 @@ bbcode_text = "[center]state"
 text = "state"
 fit_content_height = true
 scroll_active = false
+
+[node name="BulletPosition" type="Position2D" parent="."]
+position = Vector2( -12, -14 )

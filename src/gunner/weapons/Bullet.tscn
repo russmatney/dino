@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/sprites/arrow.tres" type="SpriteFrames" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[node name="Bullet" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 10, 2 )
+rotation = 1.57079
+scale = Vector2( 4, 2 )
+frames = ExtResource( 1 )

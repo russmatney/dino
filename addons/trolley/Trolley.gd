@@ -81,6 +81,9 @@ func move_dir():
 
 	return v_diff.normalized()
 
+func is_event(event, event_name):
+	return event.is_action_pressed(event_name)
+
 func is_jump(event):
 	return event.is_action_pressed("jump")
 
