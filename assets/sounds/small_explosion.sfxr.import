@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/small_explosion.sfxr-80960683ceb170c8a5997e7731c9b03d.sample"
+
+[deps]
+
+source_file="res://assets/sounds/small_explosion.sfxr"
+dest_files=[ "res://.import/small_explosion.sfxr-80960683ceb170c8a5997e7731c9b03d.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

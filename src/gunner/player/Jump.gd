@@ -9,6 +9,7 @@ func label():
 func enter(_ctx = {}):
 	actor.anim.animation = "jump"
 	actor.velocity.y -= actor.jump_impulse
+	Gunner.play_sound("jump")
 	actor.can_wall_jump = false
 
 	jump_count += 1

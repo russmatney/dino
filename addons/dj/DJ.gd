@@ -37,8 +37,24 @@ func pause_menu_song():
 	playback_pos = audio_stream_player.get_playback_position()
 
 func setup_sound(sound):
-	# TODO force no loop
+	# TODO force no looping? it's determined by the input rn
 	var asp = AudioStreamPlayer.new()
 	asp.set_stream(sound)
 	add_child(asp)
 	return asp
+
+func setup_sound_map(sound_map):
+	var playables = {}
+	for k in sound_map.keys():
+		playables[k] = []
+		for s in sound_map[k]:
+			var playable = setup_sound(s)
+			playable.set_volume_db(-12)
+			playables[k].append(playable)
+	return playables
+
+func play_sound_rand(sounds):
+	if sounds:
+		var i = randi() % sounds.size()
+		var s = sounds[i]
+		s.play()

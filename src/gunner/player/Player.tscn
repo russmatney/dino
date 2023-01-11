@@ -24,7 +24,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 
 [node name="Machine" type="Node" parent="."]

@@ -143,6 +143,7 @@ func fire_bullet():
 	Navi.current_scene.call_deferred("add_child", bullet)
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
+	Gunner.play_sound("fire")
 
 	# push player back when firing
 	var pos = get_global_position()
