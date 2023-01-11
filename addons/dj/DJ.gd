@@ -49,12 +49,14 @@ func setup_sound_map(sound_map):
 		playables[k] = []
 		for s in sound_map[k]:
 			var playable = setup_sound(s)
-			playable.set_volume_db(-12)
+			playable.set_volume_db(-14)
 			playables[k].append(playable)
 	return playables
 
-func play_sound_rand(sounds):
+func play_sound_rand(sounds, vary = 0.0):
 	if sounds:
 		var i = randi() % sounds.size()
 		var s = sounds[i]
+		if vary > 0:
+			s.pitch_scale = 1 - (randf() * vary)
 		s.play()

@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/step1.sfxr-f67c72ad8923f6b00bf7a33c14ed2253.sample"
+
+[deps]
+
+source_file="res://assets/sounds/step1.sfxr"
+dest_files=[ "res://.import/step1.sfxr-f67c72ad8923f6b00bf7a33c14ed2253.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

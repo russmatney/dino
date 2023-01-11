@@ -34,4 +34,6 @@ func physics_process(delta):
 		machine.transit("Idle")
 
 	if actor.is_on_wall():
-		actor.can_wall_jump = true
+		if not actor.can_wall_jump:
+			Gunner.play_sound("step")
+			actor.can_wall_jump = true
