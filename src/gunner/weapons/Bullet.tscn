@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/sprites/arrow.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://src/gunner/weapons/Bullet.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.00001
 height = 12.0
 
 [node name="Bullet" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 9
+contacts_reported = 4
+contact_monitor = true
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
@@ -17,3 +23,5 @@ position = Vector2( 4, 1 )
 rotation = 1.57079
 scale = Vector2( 2, 1 )
 frames = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

@@ -13,6 +13,8 @@
 extents = Vector2( 7, 12 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 57
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -24,7 +26,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 
 [node name="Machine" type="Node" parent="."]
