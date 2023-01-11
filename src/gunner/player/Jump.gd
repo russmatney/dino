@@ -5,8 +5,10 @@ var jump_count = 0
 
 onready var jump_ring_scene = preload("res://src/gunner/player/JumpRing.tscn")
 
+
 func label():
 	return "Jump: " + str(jump_count)
+
 
 func enter(_ctx = {}):
 	actor.anim.animation = "jump"
@@ -19,11 +21,13 @@ func enter(_ctx = {}):
 
 	jump_count += 1
 
+
 func create_jump_ring():
 	var jr = jump_ring_scene.instance()
 	jr.position = actor.get_global_position()
 	Navi.current_scene.call_deferred("add_child", jr)
 	# we might care about z-index
+
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta

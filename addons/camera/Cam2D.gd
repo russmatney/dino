@@ -1,11 +1,11 @@
 extends Camera2D
 
-enum cam_mode {FOLLOW, ANCHOR, FOLLOW_AND_POIS}
+enum cam_mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
 export(cam_mode) var mode = cam_mode.FOLLOW
 
 export(String) var follow_group = "player"
 export(String) var anchor_group = "camera_anchor"
-export (String) var poi_group = "poi"
+export(String) var poi_group = "poi"
 
 var following
 var current_anchor
@@ -19,7 +19,10 @@ var poi_following_distance = 400
 ###########################################################################
 # ready
 
+
 func _ready():
+	original_offset = offset
+
 	if mode == cam_mode.FOLLOW_AND_POIS:
 		if poi_group:
 			update_pois()
@@ -32,8 +35,10 @@ func _ready():
 	if not following:
 		find_node_to_follow()
 
+
 ###########################################################################
 # process
+
 
 func _process(_delta):
 	match mode:
@@ -57,8 +62,34 @@ func _process(_delta):
 
 			center_pois()
 
+
+###########################################################################
+# screenshake
+
+var amplitude = 10
+var shake_duration = 0.2
+var original_offset
+
+
+func screenshake(opts = {}):
+	var tween = create_tween()
+	var amp = Util._or(opts.get("amplitude"), amplitude)
+	var duration = Util._or(opts.get("duration"))
+
+	var rand = Vector2(rand_range(-amp, amp), rand_range(-amp, amp))
+	var diff = Vector2(rand.x, rand.y)
+
+	tween.tween_property(self, "offset", offset + diff, duration).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_IN_OUT
+	)
+	tween.tween_property(self, "offset", original_offset, duration).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_IN_OUT
+	)
+
+
 ###########################################################################
 # follow mode
+
 
 func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
@@ -76,8 +107,10 @@ func find_node_to_follow():
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
 
+
 ###########################################################################
 # anchor mode
+
 
 func attach_to_nearest_anchor():
 	# assumes `following` is set as desired
@@ -101,11 +134,14 @@ func attach_to_nearest_anchor():
 		else:
 			following = null
 
+
 ###########################################################################
 # poi mode
 
+
 func update_window_size():
 	window_size = OS.window_size
+
 
 # TODO how often should we check for more follows?
 # maybe trigger via signal/singleton when adding new nodes
@@ -124,15 +160,16 @@ func update_pois():
 		if nearby_pois:
 			poi_follows = nearby_pois
 
+
 func zoom_for_bounds(pt_a, pt_b):
 	var zoom_factor1 = abs(pt_a.x - pt_b.x) / (window_size.x - zoom_offset.x)
 	var zoom_factor2 = abs(pt_a.y - pt_b.x) / (window_size.y - zoom_offset.y)
 	var zoom_factor = max(max(zoom_factor1, zoom_factor2), min_zoom_factor)
 	return Vector2(zoom_factor, zoom_factor)
 
+
 func center_pois():
 	if poi_follows and following:
-
 		# TODO favor the following (player) position more
 		poi_follows.append(following)
 
@@ -167,5 +204,4 @@ func center_pois():
 		center = center / poi_follows.size()
 		self.global_position = center
 
-		self.zoom = zoom_for_bounds(Vector2(max_right, max_bottom),
-			Vector2(max_left, max_top))
+		self.zoom = zoom_for_bounds(Vector2(max_right, max_bottom), Vector2(max_left, max_top))

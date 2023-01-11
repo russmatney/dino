@@ -5,12 +5,15 @@ onready var anim = $AnimatedSprite
 
 var ttl = 5
 
+
 func _process(delta):
 	ttl -= delta
 	if ttl <= 0:
 		queue_free()
 
+
 func kill():
+	Cam.screenshake({"amplitude": 5, "duration": 0.2})
 	Gunner.play_sound("bullet_pop")
 	anim.set_visible(false)
 	pop.set_visible(true)
@@ -19,5 +22,6 @@ func kill():
 	if is_instance_valid(self):
 		queue_free()
 
-func _on_Bullet_body_entered(_body:Node):
+
+func _on_Bullet_body_entered(_body: Node):
 	kill()

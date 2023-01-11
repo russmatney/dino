@@ -11,7 +11,7 @@ func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
 
 	if menu_song:
-		print(menu_song, " configured in DJ")
+		print("[DJ]: Menu song configured")
 
 	audio_stream_player = AudioStreamPlayer.new()
 	audio_stream_player.set_stream(menu_song)
@@ -36,12 +36,14 @@ func pause_menu_song():
 	audio_stream_player.stop()
 	playback_pos = audio_stream_player.get_playback_position()
 
+
 func setup_sound(sound):
 	# TODO force no looping? it's determined by the input rn
 	var asp = AudioStreamPlayer.new()
 	asp.set_stream(sound)
 	add_child(asp)
 	return asp
+
 
 func setup_sound_map(sound_map):
 	var playables = {}
@@ -52,6 +54,7 @@ func setup_sound_map(sound_map):
 			playable.set_volume_db(-14)
 			playables[k].append(playable)
 	return playables
+
 
 func play_sound_rand(sounds, vary = 0.0):
 	if sounds:

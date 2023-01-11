@@ -5,11 +5,13 @@ onready var anim = $AnimatedSprite
 ############################################################
 # _ready
 
+
 func _ready():
 	machine.connect("transitioned", self, "on_transit")
 	face_left()
 
 	Cam.call_deferred("ensure_camera", 2)
+
 
 ############################################################
 # _process
@@ -18,6 +20,7 @@ var positions = []
 var rec_pos_n = 10
 var rec_pos_every = 0.0005
 var rec_pos_in = 0
+
 
 func _process(delta):
 	move_dir = Trolley.move_dir()
@@ -38,8 +41,10 @@ func _process(delta):
 		var pos = target - (current - target) * 0.1
 		state_label.set_global_position(pos)
 
+
 ############################################################
 # _unhandled_input
+
 
 func _unhandled_key_input(event):
 	if Trolley.is_jump(event):
@@ -52,6 +57,7 @@ func _unhandled_key_input(event):
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
 
+
 ############################################################
 # machine
 
@@ -59,9 +65,11 @@ onready var machine = $Machine
 onready var state_label = $StateLabel
 var state
 
+
 func on_transit(new_state):
 	state = new_state
 	set_state_label(new_state)
+
 
 func set_state_label(label: String):
 	var lbl = label
@@ -69,10 +77,11 @@ func set_state_label(label: String):
 		lbl = machine.state.label()
 	state_label.bbcode_text = "[center]" + lbl + "[/center]"
 
+
 ############################################################
 # movement
 
-var move_dir = Vector2.ZERO # controller input
+var move_dir = Vector2.ZERO  # controller input
 var velocity = Vector2.ZERO
 export(int) var speed := 120
 export(int) var air_speed := 120
@@ -87,11 +96,13 @@ var can_wall_jump
 var facing_dir = Vector2.ZERO
 onready var lookahead_poi = $LookaheadPOI
 
+
 func update_facing():
 	if move_dir.x > 0:
 		face_right()
 	elif move_dir.x < 0:
 		face_left()
+
 
 func face_right():
 	facing_dir = Vector2(1, 0)
@@ -103,6 +114,7 @@ func face_right():
 	if lookahead_poi.position.x < 0:
 		lookahead_poi.position.x *= -1
 
+
 func face_left():
 	facing_dir = Vector2(-1, 0)
 	anim.flip_h = false
@@ -112,6 +124,7 @@ func face_left():
 
 	if lookahead_poi.position.x > 0:
 		lookahead_poi.position.x *= -1
+
 
 ############################################################
 # fire
@@ -127,6 +140,8 @@ var fire_rate = 0.2
 var bullet_knockback = 2
 
 var tween
+
+
 func fire():
 	firing = true
 
@@ -138,12 +153,14 @@ func fire():
 	tween.set_loops(0)
 	tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
 
+
 func stop_firing():
 	firing = false
 
 	# kill tween after last bullet
 	if tween and tween.is_running():
 		tween.kill()
+
 
 func fire_bullet():
 	var bullet = bullet_scene.instance()

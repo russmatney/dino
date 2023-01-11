@@ -1,8 +1,10 @@
 # Fall
 extends State
 
+
 func enter(_ctx = {}):
 	actor.anim.animation = "fall"
+
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta

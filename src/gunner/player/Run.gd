@@ -1,8 +1,10 @@
 # Run
 extends State
 
+
 func enter(_ctx = {}):
 	actor.anim.animation = "run"
+
 
 func physics_process(delta):
 	if actor.move_dir:
@@ -11,8 +13,7 @@ func physics_process(delta):
 
 		# TODO clamp run speed
 
-		actor.velocity = actor.move_and_slide(actor.velocity,
-			Vector2.UP)
+		actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
 
 		if not actor.firing:
 			actor.update_facing()

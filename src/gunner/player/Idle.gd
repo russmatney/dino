@@ -1,10 +1,12 @@
 # Idle
 extends State
 
+
 func enter(_ctx = {}):
 	actor.anim.animation = "idle"
 
 	Gunner.play_sound("step")
+
 
 func physics_process(delta):
 	if actor.move_dir:

@@ -4,6 +4,7 @@ extends Node
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
+
 func ensure_camera(cam_mode = null):
 	if cam:
 		return
@@ -21,3 +22,10 @@ func ensure_camera(cam_mode = null):
 		cam.mode = cam_mode
 
 	Navi.current_scene.call_deferred("add_child", cam)
+
+
+func screenshake(opts = {}):
+	if cam:
+		cam.screenshake(opts)
+	else:
+		print("[WARN]: screenshake called, but no 'cam' set.")
