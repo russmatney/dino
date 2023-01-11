@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/camera/Cam2D.gd" type="Script" id=1]
+
+[node name="Cam2D" type="Camera2D" groups=["camera"]]
+current = true
+smoothing_enabled = true
+smoothing_speed = 3.0
+script = ExtResource( 1 )

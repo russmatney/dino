@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/gunner/player/redhat_sprites.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/Player.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/gunner/StateLabelTheme.tres" type="Theme" id=6]
 [ext_resource path="res://src/gunner/player/Jump.gd" type="Script" id=7]
 [ext_resource path="res://src/gunner/player/Fall.gd" type="Script" id=8]
+[ext_resource path="res://addons/camera/CamPOI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 12 )
@@ -26,6 +27,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -57,3 +59,6 @@ scroll_active = false
 
 [node name="BulletPosition" type="Position2D" parent="."]
 position = Vector2( -12, -14 )
+
+[node name="LookaheadPOI" parent="." instance=ExtResource( 9 )]
+position = Vector2( -140, -9 )

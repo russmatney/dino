@@ -11,10 +11,10 @@ var following
 var current_anchor
 
 var poi_follows = []
-var zoom_offset = Vector2(1000, 1000)
+var zoom_offset = Vector2(100, 100)
 var window_size = OS.window_size
 var min_zoom_factor = 1
-var poi_following_distance = 200
+var poi_following_distance = 400
 
 ###########################################################################
 # ready
@@ -25,9 +25,9 @@ func _ready():
 			update_pois()
 		else:
 			print("[WARN][CAMERA]: no poi_group indicated")
-		update_window_size()
 
-		var _x = get_tree().connect("screen_resized", self, "update_window_size")
+	update_window_size()
+	var _x = get_tree().connect("screen_resized", self, "update_window_size")
 
 	if not following:
 		find_node_to_follow()
@@ -124,6 +124,12 @@ func update_pois():
 		if nearby_pois:
 			poi_follows = nearby_pois
 
+func zoom_for_bounds(pt_a, pt_b):
+	var zoom_factor1 = abs(pt_a.x - pt_b.x) / (window_size.x - zoom_offset.x)
+	var zoom_factor2 = abs(pt_a.y - pt_b.x) / (window_size.y - zoom_offset.y)
+	var zoom_factor = max(max(zoom_factor1, zoom_factor2), min_zoom_factor)
+	return Vector2(zoom_factor, zoom_factor)
+
 func center_pois():
 	if poi_follows and following:
 
@@ -161,8 +167,5 @@ func center_pois():
 		center = center / poi_follows.size()
 		self.global_position = center
 
-		var zoom_factor1 = abs(max_right - max_left) / (window_size.x - zoom_offset.x)
-		var zoom_factor2 = abs(max_bottom - max_top) / (window_size.y - zoom_offset.y)
-		var zoom_factor = max(max(zoom_factor1, zoom_factor2), min_zoom_factor)
-
-		self.zoom = Vector2(zoom_factor, zoom_factor)
+		self.zoom = zoom_for_bounds(Vector2(max_right, max_bottom),
+			Vector2(max_left, max_top))

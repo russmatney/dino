@@ -7,8 +7,9 @@ onready var anim = $AnimatedSprite
 
 func _ready():
 	machine.connect("transitioned", self, "on_transit")
-
 	face_left()
+
+	Cam.call_deferred("ensure_camera", 2)
 
 ############################################################
 # _process
@@ -84,6 +85,7 @@ var can_wall_jump
 # facing
 
 var facing_dir = Vector2.ZERO
+onready var lookahead_poi = $LookaheadPOI
 
 func update_facing():
 	if move_dir.x > 0:
@@ -98,12 +100,18 @@ func face_right():
 	if bullet_position.position.x < 0:
 		bullet_position.position.x *= -1
 
+	if lookahead_poi.position.x < 0:
+		lookahead_poi.position.x *= -1
+
 func face_left():
 	facing_dir = Vector2(-1, 0)
 	anim.flip_h = false
 
 	if bullet_position.position.x > 0:
 		bullet_position.position.x *= -1
+
+	if lookahead_poi.position.x > 0:
+		lookahead_poi.position.x *= -1
 
 ############################################################
 # fire

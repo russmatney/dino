@@ -19,7 +19,7 @@ var velocity = Vector2.ZERO
 
 onready var anim = $AnimatedSprite
 
-export(PackedScene) var fallback_camera = preload("res://src/cameras/DinoCamera2D.tscn")
+export(PackedScene) var fallback_camera = preload("res://addons/camera/Cam2D.tscn")
 
 #######################################
 # ready

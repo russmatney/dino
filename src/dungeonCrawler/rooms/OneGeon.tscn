@@ -2,9 +2,9 @@
 
 [ext_resource path="res://src/dungeonCrawler/rooms/Dungeon.gd" type="Script" id=1]
 [ext_resource path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/camera/Cam2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/reptile/tilemaps/DungeonWalls.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/cameras/CamAnchor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/camera/CamAnchor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/dungeonCrawler/Door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/dungeonCrawler/items/Key.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/dungeonCrawler/items/BowItem.tscn" type="PackedScene" id=8]

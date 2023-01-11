@@ -7,7 +7,7 @@
 [ext_resource path="res://src/harvey/items/Tool.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/harvey/items/DeliveryBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/harvey/plots/Plot.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/camera/Cam2D.tscn" type="PackedScene" id=8]
 
 [node name="KitchenSink" type="Node2D"]
 
