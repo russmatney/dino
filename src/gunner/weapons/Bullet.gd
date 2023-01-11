@@ -13,7 +13,7 @@ func _process(delta):
 
 
 func kill():
-	Cam.screenshake({"amplitude": 5, "duration": 0.2})
+	Cam.screenshake({"amplitude": 1, "variance": 1, "duration": 0.05, "loops": 3})
 	Gunner.play_sound("bullet_pop")
 	anim.set_visible(false)
 	pop.set_visible(true)

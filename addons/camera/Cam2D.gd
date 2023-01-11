@@ -66,23 +66,29 @@ func _process(_delta):
 ###########################################################################
 # screenshake
 
-var amplitude = 10
+var shake_amplitude = 10
+var shake_variance = 10
 var shake_duration = 0.2
+var shake_loops = 1
 var original_offset
 
 
 func screenshake(opts = {}):
+	var lps = opts.get("loops", shake_loops)
+	var vary = opts.get("variance", shake_variance)
+	var amp = opts.get("amplitude", shake_amplitude)
+	var dur = opts.get("duration", shake_duration)
+
 	var tween = create_tween()
-	var amp = Util._or(opts.get("amplitude"), amplitude)
-	var duration = Util._or(opts.get("duration"))
+	tween.set_loops(lps)
 
-	var rand = Vector2(rand_range(-amp, amp), rand_range(-amp, amp))
-	var diff = Vector2(rand.x, rand.y)
+	var rand = Vector2(rand_range(-vary, vary), rand_range(-vary, vary))
+	var diff = Vector2(sign(rand.x) * amp + rand.x, sign(rand.y) * amp + rand.y)
 
-	tween.tween_property(self, "offset", offset + diff, duration).set_trans(Tween.TRANS_SINE).set_ease(
+	tween.tween_property(self, "offset", offset + diff, dur).set_trans(Tween.TRANS_SINE).set_ease(
 		Tween.EASE_IN_OUT
 	)
-	tween.tween_property(self, "offset", original_offset, duration).set_trans(Tween.TRANS_SINE).set_ease(
+	tween.tween_property(self, "offset", original_offset, dur).set_trans(Tween.TRANS_SINE).set_ease(
 		Tween.EASE_IN_OUT
 	)
 
