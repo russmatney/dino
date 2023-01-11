@@ -50,6 +50,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	if state:
+		# TODO warn a mofo that this isn't on _physics_process
 		state.physics_process(delta)
 
 

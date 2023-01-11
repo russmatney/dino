@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/gunner/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/gunner/maps/BasicTile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/cameras/DinoCamera2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gunner/maps/OneDirectionalTile.tscn" type="PackedScene" id=4]
+
+[node name="PlayerGym" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -165.0
+margin_top = -159.0
+margin_right = 318.0
+margin_bottom = 162.0
+color = Color( 0.435294, 0.462745, 0.415686, 1 )
+
+[node name="BasicTile" parent="." instance=ExtResource( 2 )]
+tile_data = PoolIntArray( -196599, 0, 0, -131063, 0, 65536, -9, 0, 0, -65527, 0, 65536, 65527, 0, 65536, 4, 0, 1, 5, 0, 196610, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 131075, 131063, 0, 65536, 131068, 0, 1, 131069, 0, 196610, 131070, 0, 196610, 131071, 0, 196610, 65536, 0, 196610, 65537, 0, 196610, 65538, 0, 196610, 65539, 0, 196610, 65540, 0, 131075, 196599, 0, 65536, 196604, 0, 65536, 262135, 0, 131073, 262136, 0, 196610, 262137, 0, 196610, 262138, 0, 196610, 262139, 0, 196610, 262140, 0, 131075 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -42, -27 )
+
+[node name="DinoCamera2D" parent="." instance=ExtResource( 3 )]
+
+[node name="OneDirectionalTile" parent="." instance=ExtResource( 4 )]
+tile_data = PoolIntArray( -786414, 0, 65539, -786413, 0, 131074, -655366, 0, 65539, -655365, 0, 131074, -720878, 0, 2, -720877, 0, 65537, -589830, 0, 2, -589829, 0, 65537, -524289, 0, 65539, -589824, 0, 131073, -589823, 0, 131074, -589810, 0, 65539, -589809, 0, 131074, -458753, 0, 2, -524288, 0, 3, -524287, 0, 65537, -524279, 0, 65539, -524278, 0, 131074, -524274, 0, 2, -524273, 0, 65537, -458743, 0, 2, -458742, 0, 65537, -327692, 0, 65539, -327691, 0, 131073, -327690, 0, 131074, -327685, 0, 65539, -327684, 0, 131073, -327683, 0, 131074, -393212, 0, 65539, -393211, 0, 131073, -393210, 0, 131074, -262156, 0, 2, -262155, 0, 3, -262154, 0, 65537, -262149, 0, 2, -262148, 0, 3, -262147, 0, 65537, -327676, 0, 2, -327675, 0, 3, -327674, 0, 65537, -131074, 0, 65539, -131073, 0, 131073, -196608, 0, 131073, -196607, 0, 131073, -196606, 0, 131074, -65538, 0, 2, -65537, 0, 3, -131072, 0, 3, -131071, 0, 3, -131070, 0, 65537 )

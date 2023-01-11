@@ -503,6 +503,7 @@ Kink="*res://addons/kink/Kink.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
 Ghosts="*res://src/ghosts/Ghosts.gd"
 Harvey="*res://src/harvey/Harvey.gd"
+Gunner="*res://src/gunner/Gunner.gd"
 
 [display]
 
@@ -557,6 +558,12 @@ attack={
 action={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

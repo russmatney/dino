@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/gunner/maps/BasicTileSet.tres" type="TileSet" id=1]
+
+[node name="BasicTile" type="TileMap"]
+scale = Vector2( 4, 4 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1

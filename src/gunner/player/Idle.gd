@@ -1,0 +1,20 @@
+# Idle
+extends State
+
+func enter(_ctx = {}):
+	actor.anim.animation = "idle"
+
+func physics_process(delta):
+	if actor.move_dir:
+		if actor.is_on_floor() and abs(actor.move_dir.x) > 0:
+			machine.transit("Run")
+	else:
+		# slow down
+		actor.velocity.x = actor.velocity.x * 0.9 * delta
+
+	actor.velocity.y += actor.gravity * delta
+	# TODO clamp fall speed?
+	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+
+	# if not actor.is_on_floor() and actor.velocity.y > 0:
+	# 	machine.transit("Fall")

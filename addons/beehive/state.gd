@@ -31,6 +31,7 @@ var machine = null
 
 
 func enter(_ctx := {}):
+	print("WARN: enter func expected to be overwritten")
 	pass
 
 
