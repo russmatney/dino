@@ -34,6 +34,7 @@ func restart_game():
 # respawns
 
 var respawns = []
+signal respawn(node)
 
 func register_respawn(node):
 	if node.filename:
@@ -62,6 +63,7 @@ func respawn_missing():
 			var ins = load(r["filename"]).instance()
 			ins.position = r["position"]
 			Navi.current_scene.call_deferred("add_child", ins)
+			emit_signal("respawn", ins)
 
 	respawns = Util.remove_matching(respawns, to_remove)
 

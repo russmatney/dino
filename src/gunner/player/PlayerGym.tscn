@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/gunner/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/gunner/tiles/BasicTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/camera/CamPOI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gunner/tiles/OneDirectionalTile.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/gunner/targets/Target.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/gunner/targets/BreakTheTargets.tscn" type="PackedScene" id=6]
 
 [node name="PlayerGym" type="Node2D"]
 
@@ -26,9 +27,6 @@ position = Vector2( -281, -125 )
 
 [node name="Target2" parent="." instance=ExtResource( 5 )]
 position = Vector2( -114, 10 )
-
-[node name="Target3" parent="." instance=ExtResource( 5 )]
-position = Vector2( -149, 67 )
 
 [node name="Target4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 226, -25 )
@@ -59,3 +57,5 @@ position = Vector2( -272, -45 )
 
 [node name="CamPOI2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 305, -178 )
+
+[node name="BreakTheTargets" parent="." instance=ExtResource( 6 )]
