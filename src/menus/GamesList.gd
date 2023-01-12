@@ -22,6 +22,10 @@ var menu_scenes = [
 		"label": "Harvey",
 		"nav_to": "res://src/harvey/menus/HarveyMenu.tscn",
 	},
+	{
+		"label": "Gunner",
+		"nav_to": "res://src/gunner/player/PlayerGym.tscn",
+	},
 ]
 
 

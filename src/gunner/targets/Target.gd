@@ -6,6 +6,8 @@ onready var anim = $AnimatedSprite
 func _ready():
 	anim.connect("animation_finished", self, "_animation_finished")
 
+	Gunner.register_respawn(self)
+
 func _animation_finished():
 	if anim.animation == "pop":
 		queue_free()

@@ -6,7 +6,10 @@ var cam
 
 
 func ensure_camera(cam_mode = null):
-	if cam:
+	print("ensuring camera")
+
+	if cam and is_instance_valid(cam):
+		print("found cam: ", cam)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")

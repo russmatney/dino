@@ -81,3 +81,13 @@ static func map(function: FuncRef, i_array: Array)->Array:
 	for value in i_array:
 		o_array.append(function.call_func(value))
 	return o_array
+
+static func filter(function: FuncRef, i_array: Array):
+	pass
+
+# could be more efficient
+# https://github.com/godotengine/godot-proposals/issues/3116#issuecomment-1363222780
+func remove_matching(arr, to_remove):
+	for rem in to_remove:
+		arr.erase(rem)
+	return arr

@@ -1,10 +1,69 @@
 extends Node
 
+var deving_gunner = true
 
 func _ready():
-	print("gunner")
+	if OS.has_feature("gunner") or deving_gunner:
+		Navi.set_pause_menu("res://src/gunner/menus/GunnerPauseMenu.tscn")
 
 	setup_sounds()
+
+func _unhandled_input(event):
+	# consider making this a hold-for-two-seconds
+	if deving_gunner:
+		if Trolley.is_event(event, "respawns"):
+			respawn_missing()
+		elif Trolley.is_event(event, "restart"):
+			restart_game()
+
+###########################################################################
+# (re)start game
+
+var default_game_path = "res://src/gunner/player/PlayerGym.tscn"
+
+func restart_game():
+	Navi.resume() # ensure unpaused
+	reset_respawns()
+
+	if Navi.current_scene.filename.match("gunner"):
+		Navi.nav_to(Navi.current_scene.filename)
+	else:
+		Navi.nav_to(default_game_path)
+
+###########################################################################
+# respawns
+
+var respawns = []
+
+func register_respawn(node):
+	if node.filename:
+		respawns.append({
+			"filename": node.filename,
+			"position": node.get_global_position(),
+			"node": node
+			})
+
+	print("[Gunner] Respawn Registered. Total: ", respawns.size())
+
+func reset_respawns():
+	respawns = []
+
+func respawn_all():
+	for r in respawns:
+		var ins = load(r["filename"]).instance()
+		# ins.position = r["position"]
+		Navi.current_scene.call_deferred("add_child", ins)
+
+func respawn_missing():
+	var to_remove = []
+	for r in respawns:
+		if not is_instance_valid(r["node"]):
+			to_remove.append(r)
+			var ins = load(r["filename"]).instance()
+			ins.position = r["position"]
+			Navi.current_scene.call_deferred("add_child", ins)
+
+	respawns = Util.remove_matching(respawns, to_remove)
 
 
 ###########################################################################
