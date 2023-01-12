@@ -225,7 +225,6 @@ func level_up():
 # shine
 
 func shine(time=1.0):
-	notif("shine", {"dupe": true})
 	var tween = create_tween()
 	anim.material.set("shader_param/speed", 1.0)
 	tween.tween_callback(anim.material, "set", ["shader_param/speed", 0.0]).set_delay(time)
