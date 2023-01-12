@@ -29,3 +29,9 @@ func screenshake(opts = {}):
 		cam.screenshake(opts)
 	else:
 		print("[WARN]: screenshake called, but no 'cam' set.")
+
+
+func freezeframe(time_scale, duration):
+	Engine.time_scale = time_scale
+	yield(get_tree().create_timer(duration * time_scale), "timeout")
+	Engine.time_scale = 1.0

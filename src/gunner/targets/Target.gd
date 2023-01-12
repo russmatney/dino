@@ -8,13 +8,13 @@ func _ready():
 
 func _animation_finished():
 	if anim.animation == "pop":
-		Engine.set_time_scale(1)
 		queue_free()
 
 func kill():
 	Gunner.play_sound("target_kill")
 	anim.animation = "pop"
-	Engine.set_time_scale(0.5)
+	# freeze frame
+	Cam.freezeframe(0.05, 0.4)
 
 
 func _on_Target_body_entered(body:Node):
