@@ -7,7 +7,6 @@
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
-player_group = null
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0

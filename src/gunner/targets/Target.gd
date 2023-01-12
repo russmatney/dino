@@ -16,6 +16,7 @@ func _animation_finished():
 		queue_free()
 
 func kill():
+	Gunner.notif("Target Destroyed")
 	Gunner.play_sound("target_kill")
 	anim.animation = "pop"
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)

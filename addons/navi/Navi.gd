@@ -97,8 +97,15 @@ func _deferred_goto_scene(path_or_packed_scene):
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
 
+#####################################################################
+# add child
 
-## main ###################################################################
+# helper for adding a child to the current scene
+func add_child(child, legible_unique_name = false):
+	current_scene.call_deferred("add_child", child, legible_unique_name)
+
+#####################################################################
+# main menu
 
 var main_menu_path = "res://src/menus/DinoMenu.tscn"
 

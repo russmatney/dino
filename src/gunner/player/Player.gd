@@ -12,6 +12,7 @@ func _ready():
 	face_left()
 
 	Cam.call_deferred("ensure_camera", 2)
+	Gunner.ensure_hud()
 
 
 ############################################################
@@ -60,6 +61,17 @@ func _unhandled_key_input(event):
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
 
+############################################################
+# health
+
+var initial_health = 6
+onready var health = initial_health
+
+signal health_change(health)
+
+func take_damage(d = 1):
+	health -= d
+	emit_signal("health_change", health)
 
 ############################################################
 # machine
@@ -181,24 +193,39 @@ func fire_bullet():
 ######################################################################
 # notif
 
-func notif(text, ttl=1.5):
-	notif_label.bbcode_text = "[center][jump][sparkle freq=10.0 c1=#4466cc c2=#aabbdd]" + text
-	notif_label.set_visible(true)
+func notif(text, opts={}):
+	var ttl = opts.get("ttl", 1.5)
+	var dupe = opts.get("dupe", false)
+	var label
+	if dupe:
+		label = notif_label.duplicate()
+	else:
+		label = notif_label
 
+	label.bbcode_text = "[center][jump][sparkle freq=10.0 c1=#4466cc c2=#aabbdd]" + text
+	label.set_visible(true)
 	var tween = create_tween()
-	tween.tween_callback(notif_label, "set_visible", [false]).set_delay(ttl)
+
+	if dupe:
+		label.set_global_position(notif_label.get_global_position())
+		Navi.add_child(label)
+		tween.tween_callback(label, "queue_free").set_delay(ttl)
+	else:
+		tween.tween_callback(label, "set_visible", [false]).set_delay(ttl)
 
 ######################################################################
 # level up
 
 func level_up():
 	shine(2.0)
-	notif("LEVEL UP")
+	notif("LEVEL UP", {"dupe": true})
+	Gunner.notif("Level Up")
 
 ######################################################################
 # shine
 
 func shine(time=1.0):
+	notif("shine", {"dupe": true})
 	var tween = create_tween()
 	anim.material.set("shader_param/speed", 1.0)
 	tween.tween_callback(anim.material, "set", ["shader_param/speed", 0.0]).set_delay(time)

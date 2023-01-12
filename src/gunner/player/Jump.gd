@@ -25,7 +25,9 @@ func enter(_ctx = {}):
 func create_jump_ring():
 	var jr = jump_ring_scene.instance()
 	jr.position = actor.get_global_position()
-	Navi.current_scene.call_deferred("add_child", jr)
+	Navi.add_child(jr)
+	if jump_count > 0:
+		actor.notif("Wall Jump!", {"dupe": true})
 	# we might care about z-index
 
 

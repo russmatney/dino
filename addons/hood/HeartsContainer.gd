@@ -18,6 +18,10 @@ func find_heart_icons():
 
 ## Converts a passed int into a number of hearts to display.
 func set_health(health):
+	if not health:
+		print("[HOOD] WARN: set_health with nil!")
+		return
+
 	# TODO extend to add and place more hearts, or layer a new color on top
 
 	if not heart_icons:

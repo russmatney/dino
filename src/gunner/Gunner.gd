@@ -11,10 +11,12 @@ func _ready():
 func _unhandled_input(event):
 	# consider making this a hold-for-two-seconds
 	if deving_gunner:
-		if Trolley.is_event(event, "respawns"):
-			respawn_missing()
-		elif Trolley.is_event(event, "restart"):
+		if Trolley.is_event(event, "restart"):
+			notif("Restarting Game")
 			restart_game()
+		elif Trolley.is_event(event, "respawns"):
+			notif("Respawning Targets")
+			respawn_missing()
 
 ###########################################################################
 # (re)start game
@@ -29,6 +31,29 @@ func restart_game():
 		Navi.nav_to(Navi.current_scene.filename)
 	else:
 		Navi.nav_to(default_game_path)
+
+###########################################################################
+# hud
+
+onready var hud_scene = preload("res://src/gunner/hud/HUD.tscn")
+var hud
+
+func ensure_hud():
+	if hud and is_instance_valid(hud):
+		print("[Gunner] HUD exists, nothing doing.")
+		return
+
+	hud = hud_scene.instance()
+	call_deferred("add_child", hud)
+
+###########################################################################
+# notifs
+
+signal notification(text)
+
+func notif(text, ttl=5):
+	print("[Gunner] notif: ", text)
+	emit_signal("notification", {"msg": text, "ttl": ttl})
 
 ###########################################################################
 # respawns
