@@ -208,7 +208,7 @@ func notif(text, opts={}):
 
 	if dupe:
 		label.set_global_position(notif_label.get_global_position())
-		Navi.add_child(label)
+		Navi.add_child_to_current(label)
 		tween.tween_callback(label, "queue_free").set_delay(ttl)
 	else:
 		tween.tween_callback(label, "set_visible", [false]).set_delay(ttl)

@@ -71,8 +71,9 @@ func nav_to(path_or_packed_scene):
 	# TODO opt-in/out of pausing the music
 	DJ.pause_menu_song()
 
-	# b/c you can pause the game and go to main instead of clicking go to main
-	death_menu.hide()
+	if death_menu and is_instance_valid(death_menu):
+		# b/c you can pause the game and go to main instead of clicking go to main
+		death_menu.hide()
 
 
 func _deferred_goto_scene(path_or_packed_scene):
@@ -101,8 +102,8 @@ func _deferred_goto_scene(path_or_packed_scene):
 # add child
 
 # helper for adding a child to the current scene
-func add_child(child, legible_unique_name = false):
-	current_scene.call_deferred("add_child", child, legible_unique_name)
+func add_child_to_current(child):
+	current_scene.call_deferred("add_child", child)
 
 #####################################################################
 # main menu
@@ -157,7 +158,7 @@ func toggle_pause():
 func pause():
 	var t = get_tree()
 	t.paused = true
-	if pause_menu:
+	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
 	# Navi implying DJ dep
 	print("dj.resume")
@@ -167,7 +168,7 @@ func pause():
 func resume():
 	var t = get_tree()
 	t.paused = false
-	if pause_menu:
+	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.hide()
 	# Navi implying DJ dep
 	print("dj.pause")
