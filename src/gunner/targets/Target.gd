@@ -8,14 +8,16 @@ func _ready():
 
 func _animation_finished():
 	if anim.animation == "pop":
+		Engine.set_time_scale(1)
 		queue_free()
 
 func kill():
 	Gunner.play_sound("target_kill")
 	anim.animation = "pop"
+	Engine.set_time_scale(0.5)
+
 
 func _on_Target_body_entered(body:Node):
-	print("body entered: ", body)
 	if body.is_in_group("bullet"):
 		if body.has_method("kill"):
 			body.kill()
