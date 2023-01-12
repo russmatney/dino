@@ -40,7 +40,22 @@ See ~src/ghosts/*~ for the code.
 ** Pluggs
 A fun character - just a bucket of plugs.
 
+Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
+
 See ~src/pluggs/*~ for the code.
+** Harvey
+An overlooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
+
+Play the latest version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
+
+See ~src/harvey/*~ for the code.
+** Cozy Gunner
+A juicy gunner.
+
+Play the latest version on dino's main game (click the "Gunner" button on the
+main menu): [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
+
+See ~src/gunner/*~ for the code.
 * Addons
 These addons are intended to speed up prototyping and game-jam workflows, but should
 also be useful in larger, long-running projects.
@@ -72,6 +87,13 @@ Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 ** thanks
 A simple Credits scene and/or script that scrolls credits from a .txt file
+** camera
+2D Camera with modes for following the player, anchors, or centering based on
+points of focus/interest.
+
+Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
+** hood
+HUD UI components.
 * bb-godot
 Utilities for managing Godot Projects using Babashka (Clojure)
 
