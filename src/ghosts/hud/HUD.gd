@@ -74,7 +74,7 @@ func update_room_name(room):
 ###################################################################
 # Notifications
 
-var notif_label = preload("res://src/ghosts/hud/NotifLabel.tscn")
+var notif_label = preload("res://addons/hood/NotifLabel.tscn")
 
 func new_notification(notif):
 	var lbl = notif_label.instance()
