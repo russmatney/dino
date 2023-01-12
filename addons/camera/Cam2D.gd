@@ -22,6 +22,7 @@ var poi_following_distance = 400
 
 func _ready():
 	original_offset = offset
+	original_rotation = rotation
 
 	if mode == cam_mode.FOLLOW_AND_POIS:
 		if poi_group:
@@ -71,6 +72,7 @@ var shake_variance = 10
 var shake_duration = 0.2
 var shake_loops = 1
 var original_offset
+var original_rotation
 
 
 func screenshake(opts = {}):
@@ -82,15 +84,28 @@ func screenshake(opts = {}):
 	var tween = create_tween()
 	tween.set_loops(lps)
 
+	# TODO finish wip rotational shake feat
+	# rotational
+	# var rot_diff = PI + (PI * 0.10 * rand_range(-vary, vary))
+
+	# translational
 	var rand = Vector2(rand_range(-vary, vary), rand_range(-vary, vary))
 	var diff = Vector2(sign(rand.x) * amp + rand.x, sign(rand.y) * amp + rand.y)
 
 	tween.tween_property(self, "offset", offset + diff, dur).set_trans(Tween.TRANS_SINE).set_ease(
 		Tween.EASE_IN_OUT
 	)
+	# tween.parallel().tween_property(self, "rotation", rotation + rot_diff, dur).set_trans(Tween.TRANS_SINE).set_ease(
+	# 	Tween.EASE_IN_OUT
+	# )
+
+	# reset
 	tween.tween_property(self, "offset", original_offset, dur).set_trans(Tween.TRANS_SINE).set_ease(
 		Tween.EASE_IN_OUT
 	)
+	# tween.parallel().tween_property(self, "rotation", original_rotation, dur).set_trans(Tween.TRANS_SINE).set_ease(
+	# 	Tween.EASE_IN_OUT
+	# )
 
 
 ###########################################################################

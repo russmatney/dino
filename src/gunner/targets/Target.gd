@@ -13,9 +13,7 @@ func _animation_finished():
 func kill():
 	Gunner.play_sound("target_kill")
 	anim.animation = "pop"
-	# freeze frame
 	Cam.freezeframe(0.05, 0.4)
-
 
 func _on_Target_body_entered(body:Node):
 	if body.is_in_group("bullet"):
