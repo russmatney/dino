@@ -42,6 +42,15 @@ position = Vector2( 104, 8 )
 [node name="Target7" parent="." instance=ExtResource( 5 )]
 position = Vector2( 157, -25 )
 
+[node name="Target8" parent="." instance=ExtResource( 5 )]
+position = Vector2( 66, 8 )
+
+[node name="Target9" parent="." instance=ExtResource( 5 )]
+position = Vector2( 192, -25 )
+
+[node name="Target10" parent="." instance=ExtResource( 5 )]
+position = Vector2( 268, -25 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -42, -27 )
 

@@ -5,7 +5,7 @@ extends State
 func enter(_ctx = {}):
 	actor.anim.animation = "idle"
 
-	Gunner.play_sound("step")
+	# Gunner.play_sound("step")
 
 
 func physics_process(delta):
