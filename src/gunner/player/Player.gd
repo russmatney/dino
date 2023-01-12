@@ -38,7 +38,7 @@ func _process(delta):
 	if back:
 		var target = back + Vector2(-45, 0)
 		var current = state_label.get_global_position()
-		var pos = target - (current - target) * 0.1
+		var pos = target * 0.1 + current * 0.9
 		state_label.set_global_position(pos)
 
 
@@ -94,7 +94,7 @@ var can_wall_jump
 # facing
 
 var facing_dir = Vector2.ZERO
-onready var lookahead_poi = $LookaheadPOI
+onready var look_pof = $LookPOF
 
 
 func update_facing():
@@ -111,8 +111,8 @@ func face_right():
 	if bullet_position.position.x < 0:
 		bullet_position.position.x *= -1
 
-	if lookahead_poi.position.x < 0:
-		lookahead_poi.position.x *= -1
+	if look_pof.position.x < 0:
+		look_pof.position.x *= -1
 
 
 func face_left():
@@ -122,8 +122,8 @@ func face_left():
 	if bullet_position.position.x > 0:
 		bullet_position.position.x *= -1
 
-	if lookahead_poi.position.x > 0:
-		lookahead_poi.position.x *= -1
+	if look_pof.position.x > 0:
+		look_pof.position.x *= -1
 
 
 ############################################################

@@ -6,15 +6,18 @@ export(cam_mode) var mode = cam_mode.FOLLOW
 export(String) var follow_group = "player"
 export(String) var anchor_group = "camera_anchor"
 export(String) var poi_group = "poi"
+export(String) var pof_group = "pof"
 
 var following
 var current_anchor
 
 var poi_follows = []
+var pof_follows = []
 var zoom_offset = Vector2(100, 100)
 var window_size = OS.window_size
 var min_zoom_factor = 1
 var poi_following_distance = 400
+var pof_following_distance = 400
 
 ###########################################################################
 # ready
@@ -27,8 +30,8 @@ func _ready():
 	if mode == cam_mode.FOLLOW_AND_POIS:
 		if poi_group:
 			update_pois()
-		else:
-			print("[WARN][CAMERA]: no poi_group indicated")
+		elif pof_group:
+			update_pofs()
 
 	update_window_size()
 	var _x = get_tree().connect("screen_resized", self, "update_window_size")
@@ -60,6 +63,7 @@ func _process(_delta):
 
 			# TODO how often do we update this?
 			update_pois()
+			update_pofs()
 
 			center_pois()
 
@@ -181,6 +185,9 @@ func update_pois():
 		if nearby_pois:
 			poi_follows = nearby_pois
 
+func update_pofs():
+	if pof_group:
+		pof_follows = get_tree().get_nodes_in_group(pof_group)
 
 func zoom_for_bounds(pt_a, pt_b):
 	var zoom_factor1 = abs(pt_a.x - pt_b.x) / (window_size.x - zoom_offset.x)
@@ -192,7 +199,12 @@ func zoom_for_bounds(pt_a, pt_b):
 func center_pois():
 	if poi_follows and following:
 		# TODO favor the following (player) position more
-		poi_follows.append(following)
+		var focuses = pof_follows.append(following)
+
+		poi_follows
+
+		# TODO pois have importance and proximity
+		# that should feed into the weighting
 
 		var center = Vector2.ZERO
 
@@ -201,7 +213,7 @@ func center_pois():
 		var max_top
 		var max_bottom
 
-		for obj in poi_follows:
+		for obj in pof_follows:
 			center += obj.global_position
 
 			if not max_left:
@@ -222,7 +234,7 @@ func center_pois():
 			if obj.global_position.y > max_bottom:
 				max_bottom = obj.global_position.y
 
-		center = center / poi_follows.size()
+		center = center / pof_follows.size()
 		self.global_position = center
 
 		self.zoom = zoom_for_bounds(Vector2(max_right, max_bottom), Vector2(max_left, max_top))
