@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/coin3.sfxr-a142eb7724ffc776f8d813c56ea5ecf6.sample"
+
+[deps]
+
+source_file="res://assets/sounds/coin3.sfxr"
+dest_files=[ "res://.import/coin3.sfxr-a142eb7724ffc776f8d813c56ea5ecf6.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

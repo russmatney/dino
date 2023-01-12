@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/gunner/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/gunner/maps/BasicTile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/camera/CamPOI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gunner/maps/OneDirectionalTile.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gunner/targets/Target.tscn" type="PackedScene" id=5]
 
 [node name="PlayerGym" type="Node2D"]
 
@@ -19,6 +20,27 @@ tile_data = PoolIntArray( -786414, 0, 65539, -786413, 0, 131074, -655366, 0, 655
 
 [node name="BasicTile" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray( -196599, 0, 0, -131063, 0, 65536, -9, 0, 0, -65527, 0, 65536, 65527, 0, 65536, 4, 0, 1, 5, 0, 196610, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 131075, 131063, 0, 65536, 131068, 0, 1, 131069, 0, 196610, 131070, 0, 196610, 131071, 0, 196610, 65536, 0, 196610, 65537, 0, 196610, 65538, 0, 196610, 65539, 0, 196610, 65540, 0, 131075, 196599, 0, 65536, 196604, 0, 65536, 262135, 0, 131073, 262136, 0, 196610, 262137, 0, 196610, 262138, 0, 196610, 262139, 0, 196610, 262140, 0, 131075 )
+
+[node name="Target" parent="." instance=ExtResource( 5 )]
+position = Vector2( -281, -125 )
+
+[node name="Target2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -114, 10 )
+
+[node name="Target3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -149, 67 )
+
+[node name="Target4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 226, -25 )
+
+[node name="Target5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 135, -225 )
+
+[node name="Target6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 104, 8 )
+
+[node name="Target7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 157, -25 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -42, -27 )

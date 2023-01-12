@@ -37,6 +37,12 @@ onready var sounds = {
 	"bullet_pop":
 	[
 		preload("res://assets/sounds/small_explosion.sfxr"),
+	],
+	"target_kill":
+	[
+		preload("res://assets/sounds/coin1.sfxr"),
+		preload("res://assets/sounds/coin2.sfxr"),
+		preload("res://assets/sounds/coin3.sfxr"),
 	]
 }
 var sound_map
@@ -50,6 +56,6 @@ func setup_sounds():
 func play_sound(name):
 	if name in sound_map:
 		var s = sound_map[name]
-		DJ.play_sound_rand(s, 0.3)
+		DJ.play_sound_rand(s, {"vary": 0.3})
 	else:
 		print("[WARN]: no sound for name", name)

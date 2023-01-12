@@ -56,10 +56,12 @@ func setup_sound_map(sound_map):
 	return playables
 
 
-func play_sound_rand(sounds, vary = 0.0):
+func play_sound_rand(sounds, opts = {}):
+	var vary = opts.get("vary", 0.0)
+
 	if sounds:
 		var i = randi() % sounds.size()
 		var s = sounds[i]
-		if vary > 0:
+		if vary > 0.0:
 			s.pitch_scale = 1 - (randf() * vary)
 		s.play()
