@@ -49,8 +49,11 @@ func update_player_health(health):
 ###################################################################
 # update targets
 
-func update_targets_destroyed(targets):
-	pass
+onready var destroyed_label = get_node("%TargetsDestroyed")
+onready var remaining_label = get_node("%TargetsRemaining")
 
-func update_targets_remaining(targets):
-	pass
+func update_targets_destroyed(count):
+	destroyed_label.text = "Targets Destroyed: " + str(count)
+
+func update_targets_remaining(count):
+	remaining_label.text = "Targets Remaining: " + str(count)
