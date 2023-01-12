@@ -5,6 +5,8 @@ var player
 var hud
 var destroyed_count = 0
 
+# onready var shockwave = $ShockwaveShaderLayer
+
 ###############################################################################
 # ready
 
@@ -23,6 +25,9 @@ func setup():
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
 		Util.ensure_connection(t, "destroyed", self, "_on_target_destroyed")
+
+	# if targets:
+	# 	shockwave.set_node(targets[0])
 
 	var huds = get_tree().get_nodes_in_group("hud")
 	if huds:

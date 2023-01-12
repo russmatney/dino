@@ -10,52 +10,64 @@
 [node name="PlayerGym" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -334.0
-margin_top = -255.0
-margin_right = 318.0
-margin_bottom = 162.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 962.0
+margin_bottom = 648.0
 color = Color( 0.435294, 0.462745, 0.415686, 1 )
 
 [node name="OneDirectionalTile" parent="." instance=ExtResource( 4 )]
+position = Vector2( 482, 366 )
 tile_data = PoolIntArray( -786414, 0, 65539, -786413, 0, 131074, -655366, 0, 65539, -655365, 0, 131074, -720878, 0, 2, -720877, 0, 65537, -589830, 0, 2, -589829, 0, 65537, -524289, 0, 65539, -589824, 0, 131073, -589823, 0, 131074, -589810, 0, 65539, -589809, 0, 131074, -458753, 0, 2, -524288, 0, 3, -524287, 0, 65537, -524279, 0, 65539, -524278, 0, 131074, -524274, 0, 2, -524273, 0, 65537, -458743, 0, 2, -458742, 0, 65537, -327692, 0, 65539, -327691, 0, 131073, -327690, 0, 131074, -327685, 0, 65539, -327684, 0, 131073, -327683, 0, 131074, -393212, 0, 65539, -393211, 0, 131073, -393210, 0, 131074, -262156, 0, 2, -262155, 0, 3, -262154, 0, 65537, -262149, 0, 2, -262148, 0, 3, -262147, 0, 65537, -327676, 0, 2, -327675, 0, 3, -327674, 0, 65537, -131074, 0, 65539, -131073, 0, 131073, -196608, 0, 131073, -196607, 0, 131073, -196606, 0, 131074, -65538, 0, 2, -65537, 0, 3, -131072, 0, 3, -131071, 0, 3, -131070, 0, 65537 )
 
 [node name="BasicTile" parent="." instance=ExtResource( 2 )]
+position = Vector2( 482, 366 )
 tile_data = PoolIntArray( -196599, 0, 0, -131063, 0, 65536, -9, 0, 0, -65527, 0, 65536, 65527, 0, 65536, 4, 0, 1, 5, 0, 196610, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 131075, 131063, 0, 65536, 131068, 0, 1, 131069, 0, 196610, 131070, 0, 196610, 131071, 0, 196610, 65536, 0, 196610, 65537, 0, 196610, 65538, 0, 196610, 65539, 0, 196610, 65540, 0, 131075, 196599, 0, 65536, 196604, 0, 65536, 262135, 0, 131073, 262136, 0, 196610, 262137, 0, 196610, 262138, 0, 196610, 262139, 0, 196610, 262140, 0, 131075 )
 
 [node name="Target" parent="." instance=ExtResource( 5 )]
-position = Vector2( -281, -125 )
+position = Vector2( 201, 241 )
 
 [node name="Target2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -114, 10 )
+position = Vector2( 368, 376 )
 
 [node name="Target4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 226, -25 )
+position = Vector2( 708, 341 )
 
 [node name="Target5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 135, -225 )
+position = Vector2( 617, 141 )
 
 [node name="Target6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 104, 8 )
+position = Vector2( 586, 374 )
 
 [node name="Target7" parent="." instance=ExtResource( 5 )]
-position = Vector2( 157, -25 )
+position = Vector2( 639, 341 )
 
 [node name="Target8" parent="." instance=ExtResource( 5 )]
-position = Vector2( 66, 8 )
+position = Vector2( 548, 374 )
 
 [node name="Target9" parent="." instance=ExtResource( 5 )]
-position = Vector2( 192, -25 )
+position = Vector2( 674, 341 )
 
 [node name="Target10" parent="." instance=ExtResource( 5 )]
-position = Vector2( 268, -25 )
+position = Vector2( 750, 341 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -42, -27 )
+position = Vector2( 440, 339 )
 
 [node name="CamPOI" parent="." instance=ExtResource( 3 )]
-position = Vector2( -272, -45 )
+position = Vector2( 210, 321 )
 
 [node name="CamPOI2" parent="." instance=ExtResource( 3 )]
-position = Vector2( 305, -178 )
+position = Vector2( 787, 188 )
 
 [node name="BreakTheTargets" parent="." instance=ExtResource( 6 )]
+position = Vector2( -24, 42 )
+
+[node name="Rect" parent="BreakTheTargets/ShockwaveShaderLayer" index="0"]
+margin_left = 6.0
+margin_top = -2.0
+margin_right = 469.0
+margin_bottom = 363.0
+
+[editable path="BreakTheTargets"]
+[editable path="BreakTheTargets/ShockwaveShaderLayer"]
