@@ -7,13 +7,13 @@
 [ext_resource path="res://src/gunner/targets/DestroyedLabel.gd" type="Script" id=5]
 
 [node name="DestroyedLabel" type="RichTextLabel"]
-margin_left = -28.0
-margin_top = -20.0
-margin_right = 28.0
-margin_bottom = 20.0
+margin_left = -34.0
+margin_top = -19.0
+margin_right = 34.0
+margin_bottom = 21.0
 theme = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center][jump][sparkle freq=5.0 c1=#cc2244 c2=#dd4455]TARGET DESTROYED"
+bbcode_text = "[center][jump][sparkle freq=10.0 c1=#cc6688 c2=#bb4433]TARGET DESTROYED"
 text = "TARGET DESTROYED"
 fit_content_height = true
 scroll_active = false

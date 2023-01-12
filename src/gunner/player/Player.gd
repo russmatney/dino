@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var anim = $AnimatedSprite
+onready var notif_label = $NotifLabel
 
 ############################################################
 # _ready
@@ -52,6 +53,8 @@ func _unhandled_key_input(event):
 			machine.transit("Jump")
 		if state in ["Idle", "Run", "Fall"]:
 			machine.transit("Jump")
+	elif Trolley.is_event(event, "action"):
+		shine()
 	elif Trolley.is_event(event, "fire"):
 		fire()
 	elif Trolley.is_event_released(event, "fire"):
@@ -139,27 +142,27 @@ var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 2
 
-var tween
+var fire_tween
 
 
 func fire():
 	firing = true
 
-	if tween and tween.is_running():
+	if fire_tween and fire_tween.is_running():
 		return
 
-	tween = create_tween()
+	fire_tween = create_tween()
 	fire_bullet()
-	tween.set_loops(0)
-	tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
+	fire_tween.set_loops(0)
+	fire_tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
 
 
 func stop_firing():
 	firing = false
 
 	# kill tween after last bullet
-	if tween and tween.is_running():
-		tween.kill()
+	if fire_tween and fire_tween.is_running():
+		fire_tween.kill()
 
 
 func fire_bullet():
@@ -174,3 +177,28 @@ func fire_bullet():
 	var pos = get_global_position()
 	pos += -1 * facing_dir * bullet_knockback
 	set_global_position(pos)
+
+######################################################################
+# notif
+
+func notif(text, ttl=1.5):
+	notif_label.bbcode_text = "[center][jump][sparkle freq=10.0 c1=#4466cc c2=#aabbdd]" + text
+	notif_label.set_visible(true)
+
+	var tween = create_tween()
+	tween.tween_callback(notif_label, "set_visible", [false]).set_delay(ttl)
+
+######################################################################
+# level up
+
+func level_up():
+	shine(2.0)
+	notif("LEVEL UP")
+
+######################################################################
+# shine
+
+func shine(time=1.0):
+	var tween = create_tween()
+	anim.material.set("shader_param/speed", 1.0)
+	tween.tween_callback(anim.material, "set", ["shader_param/speed", 0.0]).set_delay(time)

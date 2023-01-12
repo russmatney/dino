@@ -1,16 +1,20 @@
 extends Node2D
 
 var targets = []
+var player
 
 ###############################################################################
 # ready
 
 func _ready():
-	print("[Gunner] BREAK THE TARGETS")
+	print("[Gunner] BREAK THE TARGETS!")
 
 	targets = get_tree().get_nodes_in_group("target")
 
-	print("found targets: ", targets.size())
+	var players = get_tree().get_nodes_in_group("player")
+	if players:
+		player = players[0]
+		player.call_deferred("notif", "BREAK THE TARGETS")
 
 	for t in targets:
 		Util.ensure_connection(t, "destroyed", self, "_on_target_destroyed")
@@ -37,20 +41,20 @@ func _on_target_destroyed(t):
 # update
 
 func target_change(opts = {}):
-	print("targets remaining: ", targets.size())
-
 	if targets.size() == 1 and opts.get("was_destroy"):
-		# TODO notify
-		print("ONE REMAINING")
+		if player:
+			player.notif("ONE REMAINING")
 		Cam.start_slowmo("one-target-left", 0.3)
 	elif targets.empty() and opts.get("was_destroy"):
 		Cam.stop_slowmo("one-target-left")
-		# TODO notify
-		print("COMPLETE")
+		if player:
+			player.notif("TARGETS CLEARED")
 		Cam.freezeframe("targets-cleared", 0.01, 3)
 	else:
 		Cam.stop_slowmo("one-target-left")
 
 func _on_slowmo_stopped(label):
 	if label == "targets-cleared":
+		if player:
+			player.level_up()
 		Gunner.respawn_missing()

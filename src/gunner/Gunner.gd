@@ -44,8 +44,6 @@ func register_respawn(node):
 			"node": node
 			})
 
-	print("[Gunner] Respawn Registered. Total: ", respawns.size())
-
 func reset_respawns():
 	respawns = []
 
