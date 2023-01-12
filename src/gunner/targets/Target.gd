@@ -2,6 +2,7 @@ extends Area2D
 
 
 onready var anim = $AnimatedSprite
+onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
 
 signal destroyed(target)
 
@@ -19,6 +20,10 @@ func kill():
 	anim.animation = "pop"
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
 	emit_signal("destroyed", self)
+
+	var lbl = destroyed_label_scene.instance()
+	lbl.set_position(get_global_position())
+	Navi.current_scene.call_deferred("add_child", lbl)
 
 func _on_Target_body_entered(body:Node):
 	if body.is_in_group("bullet"):

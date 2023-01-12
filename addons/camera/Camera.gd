@@ -45,7 +45,6 @@ func screenshake(opts = {}):
 func freezeframe(name, time_scale, duration):
 	start_slowmo(name, time_scale)
 	yield(get_tree().create_timer(duration * time_scale), "timeout")
-	print("freeze frame done, resuming")
 	stop_slowmo(name)
 
 ##############################################################
@@ -58,13 +57,13 @@ var slowmos = []
 var slowmo_scales = {}
 
 func start_slowmo(label, scale):
-	print("[CAM] start slowmo: ", label, " scale: ", scale)
+	# print("[CAM] start slowmo: ", label, " scale: ", scale)
 	slowmos.append(label)
 	slowmo_scales[label] = scale
 	Engine.time_scale = scale
 
 func stop_slowmo(label):
-	print("[CAM] stop slowmo: ", label)
+	# print("[CAM] stop slowmo: ", label)
 	slowmos.erase(label)
 	slowmo_scales.erase(label)
 	emit_signal("slowmo_stopped", label)
@@ -78,11 +77,11 @@ func clear_all_slowmos():
 # resumes normal time if no slowmos remain
 func resume_slowmo():
 	if slowmos.empty() or slowmo_scales.empty():
-		print("[Cam] resuming normal speed")
 		Engine.time_scale = 1.0
 		return
 
 	var l = slowmos[0]
+	# maybe a bug here if two targets are destroyed at the same time
 	if l in slowmo_scales:
 		var scale = slowmo_scales[l]
 		Engine.time_scale = scale

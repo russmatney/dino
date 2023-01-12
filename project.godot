@@ -505,6 +505,7 @@ Ghosts="*res://src/ghosts/Ghosts.gd"
 Harvey="*res://src/harvey/Harvey.gd"
 Gunner="*res://src/gunner/Gunner.gd"
 Cam="*res://addons/camera/Camera.gd"
+TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 
 [display]
 

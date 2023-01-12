@@ -40,11 +40,12 @@ func target_change(opts = {}):
 	print("targets remaining: ", targets.size())
 
 	if targets.size() == 1 and opts.get("was_destroy"):
+		# TODO notify
 		print("ONE REMAINING")
 		Cam.start_slowmo("one-target-left", 0.3)
 	elif targets.empty() and opts.get("was_destroy"):
 		Cam.stop_slowmo("one-target-left")
-
+		# TODO notify
 		print("COMPLETE")
 		Cam.freezeframe("targets-cleared", 0.01, 3)
 	else:
