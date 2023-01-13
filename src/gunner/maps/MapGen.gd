@@ -12,7 +12,7 @@ func _ready():
 ######################################################################
 # triggers and inputs
 
-export(bool) var trigger_image_regen setget do_image_regen
+export(bool) var regenerate_image setget do_image_regen
 func do_image_regen(_val = null):
 	print("doing regeneration: ", Time.get_unix_time_from_system())
 	image_regen()
@@ -23,6 +23,12 @@ func do_persist_latest(_val = null):
 	print("inputs: ", inputs())
 	persisted_imgs.push_front(temp_imgs[0])
 	colorize_image()
+
+export(bool) var generate_tilemap setget do_gen_tilemap
+func do_gen_tilemap(_val = null):
+	print("generating tilemap: ", Time.get_unix_time_from_system())
+	print("bounds: ", bounds())
+	gen_tilemap()
 
 ######################################################################
 # image gen setters
@@ -76,6 +82,8 @@ var temp_imgs = []
 var persisted_imgs = []
 
 func image_regen():
+	if not Engine.editor_hint:
+		return
 	if not octaves:
 		print("[WARN] nil octaves...")
 		return
@@ -115,18 +123,21 @@ export(float) var lower_bound = 0.3 setget set_lower_bound
 func set_lower_bound(v):
 	lower_bound = v
 	colorize_image()
-	# gen_tile_map()
 
 export(float) var upper_bound = 0.8 setget set_upper_bound
 func set_upper_bound(v):
 	upper_bound = v
 	colorize_image()
-	# gen_tile_map()
+
+func bounds():
+	return {"upper": upper_bound, "lower": lower_bound}
 
 ######################################################################
 # colorize_image
 
 func colorize_image():
+	if not Engine.editor_hint:
+		return
 	var img = persisted_imgs[0].duplicate()
 	img.convert(Image.FORMAT_RGBA8)
 	img.lock()
@@ -149,8 +160,39 @@ func colorize_image():
 
 	$ColorizedImage.texture = img_to_texture(img)
 
-func gen_tile_map():
-	pass
+######################################################################
+# tile map
+
+func gen_tilemap():
+	if not Engine.editor_hint:
+		return
+	var img = persisted_imgs[0].duplicate()
+	img.convert(Image.FORMAT_RGBA8)
+	img.lock()
+
+	var stats = img_stats(img)
+	print(stats)
+
+	# TODO separate function/flag?
+	$BasicTile.clear()
+	$ShipTiles.clear()
+
+	for x in img.get_width():
+		for y in img.get_height():
+			var pix = img.get_pixel(x, y)
+			var normed = normalized_val(stats, pix.r)
+			# var col
+			if normed < lower_bound:
+				pass
+				# col = Color.aquamarine
+			elif normed > upper_bound:
+				# col = Color.crimson
+				$BasicTile.set_cell(x, y, 0)
+			else:
+				# col = Color.darkseagreen
+				$ShipTiles.set_cell(x, y, 0)
+	$BasicTile.update_bitmask_region()
+	$ShipTiles.update_bitmask_region()
 
 ######################################################################
 # helpers
