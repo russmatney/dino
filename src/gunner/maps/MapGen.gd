@@ -2,8 +2,6 @@
 tool
 extends Node2D
 
-onready var TextureRect = $TextureRect
-
 ######################################################################
 # ready
 
@@ -22,13 +20,12 @@ func do_image_regen(_val = null):
 export(bool) var persist_latest setget do_persist_latest
 func do_persist_latest(_val = null):
 	print("persisting latest: ", Time.get_unix_time_from_system())
-	# TODO impl
-	# list files
-	# filter by tmp_img_path prefix
-	# write out persisted images (img and data?)
+	print("inputs: ", inputs())
+	persisted_imgs.push_front(temp_imgs[0])
+	colorize_image()
 
 ######################################################################
-# setters
+# image gen setters
 
 export(int) var n_seed = 1 setget set_seed
 func set_seed(v):
@@ -60,40 +57,125 @@ func set_img_size(v):
 	img_size = v
 	do_image_regen()
 
+func inputs():
+	return {
+		"seed": n_seed,
+		"ocatves": octaves,
+		"period": period,
+		"persistence": persistence,
+		"lacunarity": lacunarity,
+		"img_size": img_size,
+		}
 
 ######################################################################
 # regen
 
 var temp_img_path = "res://src/gunner/maps/temp_"
 
+var temp_imgs = []
+var persisted_imgs = []
+
 func image_regen():
 	if not octaves:
-		print("[WARN] nil octaves.")
+		print("[WARN] nil octaves...")
 		return
 
 	var noise = OpenSimplexNoise.new()
-
 	noise.seed = n_seed
 	noise.octaves = octaves
 	noise.period = period
 	noise.persistence = persistence
 	noise.lacunarity = lacunarity
 
-	var sample = noise.get_noise_2d(1.0, 1.0)
-	print("sample: ", sample)
-
 	var img = noise.get_seamless_image(img_size)
-	var imgTexture = ImageTexture.new()
-	imgTexture.create_from_image(img, 1)
+	$RawImage.texture = img_to_texture(img)
 
-	var p = temp_img_path + str(Time.get_unix_time_from_system()) + ".png"
-	var res = img.save_png(p)
-	if res == 0:
-		TextureRect.texture = imgTexture
+	temp_imgs.push_front(img)
+	if temp_imgs.size() > 10:
+		print("10 recents, popping back")
+		temp_imgs.pop_back()
 
-	img.lock()
-	print("save res error: ", res)
-	print("img: ", img)
+	print(str(temp_imgs.size()) + " temp_images")
+
+	# var sample = noise.get_noise_2d(1.0, 1.0)
+	# print("sample: ", sample)
+
+	# img.lock()
 	# print("img.data: ", img.data)
 	# print("img.get_size: ", img.get_size())
-	print("img.get_pixel: ", img.get_pixel(0, 0))
+	# print("img.get_pixel: ", img.get_pixel(0, 0))
+
+	# var p = temp_img_path + str(Time.get_unix_time_from_system()) + ".png"
+	# var res = img.save_png(p)
+
+######################################################################
+# bound inputs/triggers
+
+export(float) var lower_bound = 0.3 setget set_lower_bound
+func set_lower_bound(v):
+	lower_bound = v
+	colorize_image()
+	# gen_tile_map()
+
+export(float) var upper_bound = 0.8 setget set_upper_bound
+func set_upper_bound(v):
+	upper_bound = v
+	colorize_image()
+	# gen_tile_map()
+
+######################################################################
+# colorize_image
+
+func colorize_image():
+	var img = persisted_imgs[0].duplicate()
+	img.convert(Image.FORMAT_RGBA8)
+	img.lock()
+
+	var stats = img_stats(img)
+	print(stats)
+
+	for x in img.get_width():
+		for y in img.get_height():
+			var pix = img.get_pixel(x, y)
+			var normed = normalized_val(stats, pix.r)
+			var col
+			if normed < lower_bound:
+				col = Color.aquamarine
+			elif normed > upper_bound:
+				col = Color.crimson
+			else:
+				col = Color.darkseagreen
+			img.set_pixel(x, y, col)
+
+	$ColorizedImage.texture = img_to_texture(img)
+
+func gen_tile_map():
+	pass
+
+######################################################################
+# helpers
+
+func img_to_texture(img):
+	var imgTexture = ImageTexture.new()
+	imgTexture.create_from_image(img, 1)
+	return imgTexture
+
+func img_stats(img):
+	var vals = []
+	var stats = {"min": 1, "max": 0}
+	for x in img.get_width():
+		for y in img.get_height():
+			var pix = img.get_pixel(x, y)
+			var val = pix.r
+			if val < stats["min"]:
+				stats["min"] = val
+			if val > stats["max"]:
+				stats["max"] = val
+			vals.append(pix.r)
+	stats["variance"] = stats["max"] - stats["min"]
+	# stats["vals"] = vals
+	return stats
+
+func normalized_val(stats, val):
+	val = val - stats["min"]
+	return val / stats["variance"]
