@@ -124,13 +124,20 @@ func set_lower_bound(v):
 	lower_bound = v
 	colorize_image()
 
+export(float) var middle_bound = 0.3 setget set_middle_bound
+func set_middle_bound(v):
+	middle_bound = v
+	colorize_image()
+
 export(float) var upper_bound = 0.8 setget set_upper_bound
 func set_upper_bound(v):
 	upper_bound = v
 	colorize_image()
 
 func bounds():
-	return {"upper": upper_bound, "lower": lower_bound}
+	return {"upper": upper_bound,
+		"middle": middle_bound,
+		"lower": lower_bound}
 
 ######################################################################
 # colorize_image
@@ -151,11 +158,15 @@ func colorize_image():
 			var normed = normalized_val(stats, pix.r)
 			var col
 			if normed < lower_bound:
-				col = Color.aquamarine
-			elif normed > upper_bound:
-				col = Color.crimson
-			else:
 				col = Color.darkseagreen
+			elif normed >= lower_bound and normed < middle_bound:
+				col = Color.aquamarine
+			elif normed >= middle_bound and normed < upper_bound:
+				col = Color.crimson
+			elif normed >= upper_bound:
+				col = Color.brown
+			else:
+				print("wut.")
 			img.set_pixel(x, y, col)
 
 	$ColorizedImage.texture = img_to_texture(img)
@@ -176,21 +187,24 @@ func gen_tilemap():
 	# TODO separate function/flag?
 	$BasicTile.clear()
 	$ShipTiles.clear()
+	$IndoorBackgroundTiles.clear()
 
 	for x in img.get_width():
 		for y in img.get_height():
 			var pix = img.get_pixel(x, y)
 			var normed = normalized_val(stats, pix.r)
-			# var col
+
 			if normed < lower_bound:
-				pass
-				# col = Color.aquamarine
-			elif normed > upper_bound:
-				# col = Color.crimson
-				$BasicTile.set_cell(x, y, 0)
-			else:
-				# col = Color.darkseagreen
+				$IndoorBackgroundTiles.set_cell(x, y, 0)
+			elif normed >= lower_bound and normed < middle_bound:
 				$ShipTiles.set_cell(x, y, 0)
+			elif normed >= middle_bound and normed < upper_bound:
+				$BasicTile.set_cell(x, y, 0)
+			elif normed >= upper_bound:
+				pass
+			else:
+				print("wut.")
+	$IndoorBackgroundTiles.update_bitmask_region()
 	$BasicTile.update_bitmask_region()
 	$ShipTiles.update_bitmask_region()
 
