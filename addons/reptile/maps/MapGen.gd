@@ -5,17 +5,22 @@ extends Node2D
 ######################################################################
 # ready
 
+var ready = false
+
 func _ready():
 	if Engine.editor_hint:
 		print("in editor, _ready(): ", Time.get_unix_time_from_system())
+		ready = true
+
 
 ######################################################################
 # triggers and inputs
 
 export(bool) var regenerate_image setget do_image_regen
 func do_image_regen(_val = null):
-	print("doing regeneration: ", Time.get_unix_time_from_system())
-	image_regen()
+	if ready:
+		print("doing regeneration: ", Time.get_unix_time_from_system())
+		image_regen()
 
 export(bool) var persist_latest setget do_persist_latest
 func do_persist_latest(_val = null):
@@ -96,7 +101,9 @@ func image_regen():
 	noise.lacunarity = lacunarity
 
 	var img = noise.get_seamless_image(img_size)
-	$RawImage.texture = img_to_texture(img)
+	var raw_image = get_node_or_null("RawImage")
+	if raw_image:
+		raw_image.texture = img_to_texture(img)
 
 	temp_imgs.push_front(img)
 	if temp_imgs.size() > 10:
@@ -122,17 +129,23 @@ func image_regen():
 export(float) var lower_bound = 0.3 setget set_lower_bound
 func set_lower_bound(v):
 	lower_bound = v
-	colorize_image()
+	if ready:
+		colorize_image()
+		gen_tilemap()
 
 export(float) var middle_bound = 0.3 setget set_middle_bound
 func set_middle_bound(v):
 	middle_bound = v
-	colorize_image()
+	if ready:
+		colorize_image()
+		gen_tilemap()
 
 export(float) var upper_bound = 0.8 setget set_upper_bound
 func set_upper_bound(v):
 	upper_bound = v
-	colorize_image()
+	if ready:
+		colorize_image()
+		gen_tilemap()
 
 func bounds():
 	return {"upper": upper_bound,
@@ -142,9 +155,19 @@ func bounds():
 ######################################################################
 # colorize_image
 
+export(Color) var color1 = Color.darkseagreen
+export(Color) var color2 = Color.aquamarine
+export(Color) var color3 = Color.crimson
+export(Color) var color4 = Color.brown
+
 func colorize_image():
 	if not Engine.editor_hint:
 		return
+
+	if not persisted_imgs:
+		print("No persisted_imgs, skipping colorize")
+		return
+
 	var img = persisted_imgs[0].duplicate()
 	img.convert(Image.FORMAT_RGBA8)
 	img.lock()
@@ -158,13 +181,13 @@ func colorize_image():
 			var normed = normalized_val(stats, pix.r)
 			var col
 			if normed < lower_bound:
-				col = Color.darkseagreen
+				col = color1
 			elif normed >= lower_bound and normed < middle_bound:
-				col = Color.aquamarine
+				col = color2
 			elif normed >= middle_bound and normed < upper_bound:
-				col = Color.crimson
+				col = color3
 			elif normed >= upper_bound:
-				col = Color.brown
+				col = color4
 			else:
 				print("wut.")
 			img.set_pixel(x, y, col)
@@ -174,9 +197,61 @@ func colorize_image():
 ######################################################################
 # tile map
 
+export(PackedScene) var tilemap1_scene
+var tilemap1
+export(PackedScene) var tilemap2_scene
+var tilemap2
+export(PackedScene) var tilemap3_scene
+var tilemap3
+export(PackedScene) var tilemap4_scene
+var tilemap4
+
+export(int) var target_cell_size = 64
+
+func invalid_config():
+	if not (tilemap1_scene or tilemap2_scene or tilemap3_scene or tilemap4_scene):
+		print("No tilemap_scenes set, no tiles to add.")
+		return true
+
+func init_tile(tilemap, tilemap_scene):
+	if tilemap_scene:
+		var t = tilemap_scene.instance()
+		var scale_by = target_cell_size / t.cell_size.x
+		t.scale = Vector2(scale_by, scale_by)
+		t.connect("tree_entered", t, "set_owner", [self])
+		$Map.add_child(t)
+		return t
+
+func update_autotile(tilemap):
+	if tilemap:
+		tilemap.update_bitmask_region()
+
+func init_tiles():
+	for c in $Map.get_children():
+		c.queue_free()
+
+	tilemap1 = init_tile(tilemap1, tilemap1_scene)
+	tilemap2 = init_tile(tilemap2, tilemap2_scene)
+	tilemap3 = init_tile(tilemap3, tilemap3_scene)
+	tilemap4 = init_tile(tilemap4, tilemap4_scene)
+
+func update_autotiles():
+	update_autotile(tilemap1)
+	update_autotile(tilemap2)
+	update_autotile(tilemap3)
+	update_autotile(tilemap4)
+
 func gen_tilemap():
 	if not Engine.editor_hint:
 		return
+
+	if invalid_config():
+		print("Invalid config")
+
+	if not persisted_imgs:
+		print("No persisted_imgs, skipping gen_tilemap")
+		return
+
 	var img = persisted_imgs[0].duplicate()
 	img.convert(Image.FORMAT_RGBA8)
 	img.lock()
@@ -184,10 +259,9 @@ func gen_tilemap():
 	var stats = img_stats(img)
 	print(stats)
 
-	# TODO separate function/flag?
-	$BasicTile.clear()
-	$ShipTiles.clear()
-	$IndoorBackgroundTiles.clear()
+	init_tiles()
+
+	print("tilemap 2: ", tilemap2)
 
 	for x in img.get_width():
 		for y in img.get_height():
@@ -195,18 +269,26 @@ func gen_tilemap():
 			var normed = normalized_val(stats, pix.r)
 
 			if normed < lower_bound:
-				$IndoorBackgroundTiles.set_cell(x, y, 0)
+				if tilemap1 and is_instance_valid(tilemap1):
+					tilemap1.set_cell(x, y, 0)
 			elif normed >= lower_bound and normed < middle_bound:
-				$ShipTiles.set_cell(x, y, 0)
+				# print("should set on tilemap 2", tilemap2)
+				if tilemap2 and is_instance_valid(tilemap2):
+					# print("setting on tilemap 2")
+					tilemap2.set_cell(x, y, 0)
+				else:
+					pass
+					# print("nope!")
 			elif normed >= middle_bound and normed < upper_bound:
-				$BasicTile.set_cell(x, y, 0)
+				if tilemap3 and is_instance_valid(tilemap3):
+					tilemap3.set_cell(x, y, 0)
 			elif normed >= upper_bound:
-				pass
+				if tilemap4 and is_instance_valid(tilemap4):
+					tilemap4.set_cell(x, y, 0)
 			else:
 				print("wut.")
-	$IndoorBackgroundTiles.update_bitmask_region()
-	$BasicTile.update_bitmask_region()
-	$ShipTiles.update_bitmask_region()
+
+	update_autotiles()
 
 ######################################################################
 # helpers

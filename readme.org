@@ -52,8 +52,7 @@ See ~src/harvey/*~ for the code.
 ** Cozy Gunner
 A juicy gunner.
 
-Play the latest version on dino's main game (click the "Gunner" button on the
-main menu): [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
+Play the latest version here: [[https://russmatney.itch.io/gunner][russmatney.itch.io/gunner]]
 
 See ~src/gunner/*~ for the code.
 * Addons
