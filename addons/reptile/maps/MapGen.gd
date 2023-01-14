@@ -20,20 +20,18 @@ export(bool) var regenerate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready:
 		print("doing regeneration: ", Time.get_unix_time_from_system())
+		print("inputs: ", inputs())
 		image_regen()
+		persisted_imgs.push_front(temp_imgs[0])
+		colorize_image()
+		gen_tilemap()
 
-export(bool) var persist_latest setget do_persist_latest
-func do_persist_latest(_val = null):
-	print("persisting latest: ", Time.get_unix_time_from_system())
-	print("inputs: ", inputs())
-	persisted_imgs.push_front(temp_imgs[0])
-	colorize_image()
-
-export(bool) var generate_tilemap setget do_gen_tilemap
-func do_gen_tilemap(_val = null):
-	print("generating tilemap: ", Time.get_unix_time_from_system())
+export(bool) var persist_tilemap setget do_persist_tilemap
+func do_persist_tilemap(_val = null):
+	print("persisting tilemap: ", Time.get_unix_time_from_system())
 	print("bounds: ", bounds())
-	gen_tilemap()
+	print("inputs: ", inputs())
+	persist_tilemap_to_disk()
 
 ######################################################################
 # image gen setters
@@ -218,7 +216,6 @@ func init_tile(tilemap, tilemap_scene):
 		var t = tilemap_scene.instance()
 		var scale_by = target_cell_size / t.cell_size.x
 		t.scale = Vector2(scale_by, scale_by)
-		t.connect("tree_entered", t, "set_owner", [self])
 		$Map.add_child(t)
 		return t
 
@@ -289,6 +286,44 @@ func gen_tilemap():
 				print("wut.")
 
 	update_autotiles()
+
+######################################################################
+# persist map as resource
+
+export(String) var persist_dir = "res://addons/reptile/maps/"
+export(String) var persist_name = "Map"
+export(bool) var name_with_time = true
+
+func persist_tilemap_to_disk():
+	if not Engine.editor_hint:
+		return
+
+	if not persisted_imgs:
+		print("No persisted_imgs, skipping persist")
+		return
+
+	if not $Map.get_children():
+		print("$Map has no children, skipping persist")
+
+	print("map: ", $Map)
+	for c in $Map.get_children():
+		c.set_owner($Map)
+		print("c owner: ", c.owner)
+
+	var scene = PackedScene.new()
+	var result = scene.pack($Map)
+	if result == OK:
+		var path = str(persist_dir, persist_name)
+		if name_with_time:
+			path = path + str(Time.get_unix_time_from_system())
+		path = path + ".tscn"
+		var error = ResourceSaver.save(path, scene)
+		if error != OK:
+			push_error("Error while saving Map")
+			print("E: ", error)
+		else:
+			print("Successfully saved new map: ", path)
+
 
 ######################################################################
 # helpers
