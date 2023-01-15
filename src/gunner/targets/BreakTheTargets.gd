@@ -5,8 +5,6 @@ var player
 var hud
 var destroyed_count = 0
 
-# onready var shockwave = $ShockwaveShaderLayer
-
 ###############################################################################
 # ready
 
@@ -45,14 +43,20 @@ func find_hud():
 		print("no hud found :(")
 
 var wait_for = 5
+var has_warned = false
 
 func _process(delta):
-	# TODO hmmm shouldn't wait forever...
-	# refactor to some sensible pattern
+	# TODO refactor to some sensible pattern
 	if wait_for > 0:
 		wait_for -= delta
 		if not hud:
 			find_hud()
+	else:
+		if not hud and not has_warned:
+			has_warned = true
+			print("[WARN]: BreakTheTargets could not find HUD, giving up.")
+
+
 
 ###############################################################################
 # signals
