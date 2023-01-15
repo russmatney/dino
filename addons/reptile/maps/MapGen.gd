@@ -36,6 +36,7 @@ func do_image_reprocess():
 			print("Invalid groups config")
 			return
 
+		groups = build_groups()
 		print("new tilemap: ", Time.get_unix_time_from_system())
 		print("bounds: ", bounds())
 		print("inputs: ", inputs())
@@ -111,6 +112,11 @@ func set_boundC(v):
 	boundC = v
 	do_image_reprocess()
 
+export(float) var boundD = 1.0 setget set_boundD
+func set_boundD(v):
+	boundD = v
+	do_image_reprocess()
+
 # colors
 
 export(Color) var colorA = Color.darkseagreen
@@ -149,7 +155,8 @@ func build_groups():
 	{
 		"tilemap": null,
 		"tilemap_scene": tilemapD_scene,
-		"color": colorD
+		"color": colorD,
+		"bound": boundD,
 		},
 	]
 
