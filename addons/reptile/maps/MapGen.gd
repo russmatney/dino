@@ -90,6 +90,10 @@ func inputs():
 ######################################################################
 # groups
 
+# TODO move Group to a type and support defining it via the UI
+# consider whether it's easier to create in-editor ui components to do this instead
+export(Array) var group_list = []
+
 # bound inputs/triggers
 
 export(float) var boundA = 0.3 setget set_boundA
