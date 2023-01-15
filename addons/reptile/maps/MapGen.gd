@@ -12,26 +12,37 @@ func _ready():
 		print("in editor, _ready(): ", Time.get_unix_time_from_system())
 		ready = true
 
-
 ######################################################################
 # triggers and inputs
 
-export(bool) var regenerate_image setget do_image_regen
+var the_img
+
+export(bool) var generate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready:
-		print("doing regeneration: ", Time.get_unix_time_from_system())
-		print("inputs: ", inputs())
-		image_regen()
-		persisted_imgs.push_front(temp_imgs[0])
-		colorize_image()
-		gen_tilemap()
+		print("generating new image: ", Time.get_unix_time_from_system())
 
-export(bool) var persist_tilemap setget do_persist_tilemap
-func do_persist_tilemap(_val = null):
-	print("persisting tilemap: ", Time.get_unix_time_from_system())
-	print("bounds: ", bounds())
-	print("inputs: ", inputs())
-	persist_tilemap_to_disk()
+		groups = build_groups()
+		the_img = ReptileMap.generate_image(inputs())
+		var raw_image = get_node_or_null("RawImage")
+		if raw_image:
+			raw_image.texture = ReptileMap.img_to_texture(the_img)
+
+		do_image_reprocess()
+
+func do_image_reprocess():
+	if ready and the_img:
+		if not groups_valid():
+			print("Invalid groups config")
+			return
+
+		print("new tilemap: ", Time.get_unix_time_from_system())
+		print("bounds: ", bounds())
+		print("inputs: ", inputs())
+		print("groups: ", groups)
+
+		colorize_image(the_img)
+		gen_tilemaps(the_img)
 
 ######################################################################
 # image gen setters
@@ -69,7 +80,7 @@ func set_img_size(v):
 func inputs():
 	return {
 		"seed": n_seed,
-		"ocatves": octaves,
+		"octaves": octaves,
 		"period": period,
 		"persistence": persistence,
 		"lacunarity": lacunarity,
@@ -77,244 +88,240 @@ func inputs():
 		}
 
 ######################################################################
-# regen
+# groups
 
-var temp_img_path = "res://src/gunner/maps/temp_"
-
-var temp_imgs = []
-var persisted_imgs = []
-
-func image_regen():
-	if not Engine.editor_hint:
-		return
-	if not octaves:
-		print("[WARN] nil octaves...")
-		return
-
-	var noise = OpenSimplexNoise.new()
-	noise.seed = n_seed
-	noise.octaves = octaves
-	noise.period = period
-	noise.persistence = persistence
-	noise.lacunarity = lacunarity
-
-	var img = noise.get_seamless_image(img_size)
-	var raw_image = get_node_or_null("RawImage")
-	if raw_image:
-		raw_image.texture = img_to_texture(img)
-
-	temp_imgs.push_front(img)
-	if temp_imgs.size() > 10:
-		print("10 recents, popping back")
-		temp_imgs.pop_back()
-
-	print(str(temp_imgs.size()) + " temp_images")
-
-	# var sample = noise.get_noise_2d(1.0, 1.0)
-	# print("sample: ", sample)
-
-	# img.lock()
-	# print("img.data: ", img.data)
-	# print("img.get_size: ", img.get_size())
-	# print("img.get_pixel: ", img.get_pixel(0, 0))
-
-	# var p = temp_img_path + str(Time.get_unix_time_from_system()) + ".png"
-	# var res = img.save_png(p)
-
-######################################################################
 # bound inputs/triggers
 
-export(float) var lower_bound = 0.3 setget set_lower_bound
-func set_lower_bound(v):
-	lower_bound = v
-	if ready:
-		colorize_image()
-		gen_tilemap()
+export(float) var boundA = 0.3 setget set_boundA
+func set_boundA(v):
+	boundA = v
+	do_image_reprocess()
 
-export(float) var middle_bound = 0.3 setget set_middle_bound
-func set_middle_bound(v):
-	middle_bound = v
-	if ready:
-		colorize_image()
-		gen_tilemap()
+export(float) var boundB = 0.55 setget set_boundB
+func set_boundB(v):
+	boundB = v
+	do_image_reprocess()
 
-export(float) var upper_bound = 0.8 setget set_upper_bound
-func set_upper_bound(v):
-	upper_bound = v
-	if ready:
-		colorize_image()
-		gen_tilemap()
+export(float) var boundC = 0.8 setget set_boundC
+func set_boundC(v):
+	boundC = v
+	do_image_reprocess()
+
+# colors
+
+export(Color) var colorA = Color.darkseagreen
+export(Color) var colorB = Color.aquamarine
+export(Color) var colorC = Color.crimson
+export(Color) var colorD = Color.brown
+
+# tilemap scene
+
+export(PackedScene) var tilemapA_scene
+export(PackedScene) var tilemapB_scene
+export(PackedScene) var tilemapC_scene
+export(PackedScene) var tilemapD_scene
+
+# TODO refactor into an arbitrary number of groups
+var groups
+func build_groups():
+	return [{
+	"tilemap": null,
+	"tilemap_scene": tilemapA_scene,
+	"color": colorA,
+	"bound": boundA,
+	},
+	{
+		"tilemap": null,
+		"tilemap_scene": tilemapB_scene,
+		"color": colorB,
+		"bound": boundB,
+		},
+	{
+		"tilemap": null,
+		"tilemap_scene": tilemapC_scene,
+		"color": colorC,
+		"bound": boundC,
+		},
+	{
+		"tilemap": null,
+		"tilemap_scene": tilemapD_scene,
+		"color": colorD
+		},
+	]
+
+class GroupsSort:
+	static func sort_by_key(a, b):
+		if not "bound" in a:
+			return false
+		if a["bound"] <= b.get("bound", 1.1):
+			return true
+		return false
+
+	func sort(xs):
+		xs.sort_custom(self, "sort_by_key")
+		return xs
 
 func bounds():
-	return {"upper": upper_bound,
-		"middle": middle_bound,
-		"lower": lower_bound}
+	var bds = []
+	groups.sort_custom(GroupsSort, "sort_by_key")
+	for gp in groups:
+		bds.append(gp.get("bound"))
+	return bds
+
+func group_for_normed_val(normed):
+	var group_name
+
+	groups.sort_custom(GroupsSort, "sort_by_key")
+	for g in groups:
+		if not "bound" in g:
+			# no bound? we must be past the bounds, let's return
+			return g
+
+		if normed < g["bound"]:
+			# we fit here
+			return g
+	# this should be comprehensive ^
+	print("[WARN] No group found for normed val: ", normed, " ", groups)
+
+func groups_valid():
+	# TODO add validation for bounds
+
+	for gp in groups:
+		if "tilemap_scene" in gp and gp["tilemap_scene"]:
+			return true
+
+	print("No tilemap_scenes set, no tiles to add.")
+	return false
+
+func to_ctx(coord, img, stats):
+	# this is called per coordinate
+	# avoid expensive ops in here, things should be passed in
+	var normed = ReptileMap.normalized_val(stats, img.get_pixel(coord.x, coord.y).r)
+	var group = group_for_normed_val(normed)
+	var dupe = group.duplicate()
+	dupe.merge({
+		"x": coord.x,
+		"y": coord.y,
+		"normed": normed,
+		"img": img,
+		})
+	return dupe
+
+#####################################################################
+# coords
+
+func call_with_group_context(img, obj, fname):
+	var stats = ReptileMap.img_stats(img)
+
+	for coord in ReptileMap.all_coords(img):
+		var ctx = to_ctx(coord, img, stats)
+		obj.call(fname, coord, ctx)
 
 ######################################################################
 # colorize_image
 
-export(Color) var color1 = Color.darkseagreen
-export(Color) var color2 = Color.aquamarine
-export(Color) var color3 = Color.crimson
-export(Color) var color4 = Color.brown
-
-func colorize_image():
-	if not Engine.editor_hint:
+func colorize_coord(coord, ctx):
+	if not "img" in ctx:
+		print("[WARN] colorize_coord ctx without img")
 		return
+	ctx["img"].set_pixel(coord.x, coord.y, ctx["color"])
 
-	if not persisted_imgs:
-		print("No persisted_imgs, skipping colorize")
-		return
-
-	var img = persisted_imgs[0].duplicate()
-	img.convert(Image.FORMAT_RGBA8)
-	img.lock()
-
-	var stats = img_stats(img)
-	print(stats)
-
-	for x in img.get_width():
-		for y in img.get_height():
-			var pix = img.get_pixel(x, y)
-			var normed = normalized_val(stats, pix.r)
-			var col
-			if normed < lower_bound:
-				col = color1
-			elif normed >= lower_bound and normed < middle_bound:
-				col = color2
-			elif normed >= middle_bound and normed < upper_bound:
-				col = color3
-			elif normed >= upper_bound:
-				col = color4
-			else:
-				print("wut.")
-			img.set_pixel(x, y, col)
-
-	$ColorizedImage.texture = img_to_texture(img)
+func colorize_image(img):
+	# copy this image b/c we're about to mutate it
+	var n = Image.new()
+	n.copy_from(img)
+	n.convert(Image.FORMAT_RGBA8)
+	n.lock()
+	call_with_group_context(n, self, "colorize_coord")
+	$ColorizedImage.texture = ReptileMap.img_to_texture(n)
 
 ######################################################################
-# tile map
-
-export(PackedScene) var tilemap1_scene
-var tilemap1
-export(PackedScene) var tilemap2_scene
-var tilemap2
-export(PackedScene) var tilemap3_scene
-var tilemap3
-export(PackedScene) var tilemap4_scene
-var tilemap4
+# generate tilemap
 
 export(int) var target_cell_size = 64
+export(String) var gen_node_path = "Map"
 
-func invalid_config():
-	if not (tilemap1_scene or tilemap2_scene or tilemap3_scene or tilemap4_scene):
-		print("No tilemap_scenes set, no tiles to add.")
-		return true
-
-func init_tile(tilemap, tilemap_scene):
-	if tilemap_scene:
-		var t = tilemap_scene.instance()
-		var scale_by = target_cell_size / t.cell_size.x
-		t.scale = Vector2(scale_by, scale_by)
-		$Map.add_child(t)
-		return t
-
-func update_autotile(tilemap):
-	if tilemap:
-		tilemap.update_bitmask_region()
-
-func init_tiles():
-	for c in $Map.get_children():
+func init_tilemaps(parent_node):
+	print("initing tilemaps at parent_node: ", parent_node)
+	# do we need to return the updated tilemap anywhere?
+	for c in parent_node.get_children():
 		c.queue_free()
 
-	tilemap1 = init_tile(tilemap1, tilemap1_scene)
-	tilemap2 = init_tile(tilemap2, tilemap2_scene)
-	tilemap3 = init_tile(tilemap3, tilemap3_scene)
-	tilemap4 = init_tile(tilemap4, tilemap4_scene)
+	for group in groups:
+		if group["tilemap_scene"]:
+			var t = group["tilemap_scene"].instance()
+			var scale_by = target_cell_size / t.cell_size.x
+			t.scale = Vector2(scale_by, scale_by)
+			t.connect("tree_entered", t, "set_owner", [self])
+			parent_node.add_child(t)
+			group["tilemap"] = t
 
-func update_autotiles():
-	update_autotile(tilemap1)
-	update_autotile(tilemap2)
-	update_autotile(tilemap3)
-	update_autotile(tilemap4)
+func add_tile_at_coord(coord, ctx):
+	var t
+	if "tilemap" in ctx and ctx["tilemap"]:
+		t = ctx["tilemap"]
+	if t and is_instance_valid(t):
+		t.set_cell(coord.x, coord.y, 0)
 
-func gen_tilemap():
-	if not Engine.editor_hint:
+func update_tilemaps():
+	for val in groups:
+		if val["tilemap"]:
+			val["tilemap"].update_bitmask_region()
+
+
+# maybe we want this per-group instead of that being baked in?
+# as impled it runs once for every x/y
+func gen_tilemaps(img):
+	if not get_node(gen_node_path) and get_node(gen_node_path):
+		print("No node at " + gen_node_path)
 		return
 
-	if invalid_config():
-		print("Invalid config")
-
-	if not persisted_imgs:
-		print("No persisted_imgs, skipping gen_tilemap")
-		return
-
-	var img = persisted_imgs[0].duplicate()
-	img.convert(Image.FORMAT_RGBA8)
+	# feeling like i should pass groups into these rather than rely on this node's state
+	# but maybe that's long dead
+	init_tilemaps(get_node(gen_node_path))
 	img.lock()
-
-	var stats = img_stats(img)
-	print(stats)
-
-	init_tiles()
-
-	print("tilemap 2: ", tilemap2)
-
-	for x in img.get_width():
-		for y in img.get_height():
-			var pix = img.get_pixel(x, y)
-			var normed = normalized_val(stats, pix.r)
-
-			if normed < lower_bound:
-				if tilemap1 and is_instance_valid(tilemap1):
-					tilemap1.set_cell(x, y, 0)
-			elif normed >= lower_bound and normed < middle_bound:
-				# print("should set on tilemap 2", tilemap2)
-				if tilemap2 and is_instance_valid(tilemap2):
-					# print("setting on tilemap 2")
-					tilemap2.set_cell(x, y, 0)
-				else:
-					pass
-					# print("nope!")
-			elif normed >= middle_bound and normed < upper_bound:
-				if tilemap3 and is_instance_valid(tilemap3):
-					tilemap3.set_cell(x, y, 0)
-			elif normed >= upper_bound:
-				if tilemap4 and is_instance_valid(tilemap4):
-					tilemap4.set_cell(x, y, 0)
-			else:
-				print("wut.")
-
-	update_autotiles()
+	call_with_group_context(img, self, "add_tile_at_coord")
+	update_tilemaps()
 
 ######################################################################
 # persist map as resource
 
+export(bool) var persist_tilemap setget do_persist_tilemap
+func do_persist_tilemap(_val = null):
+	print("persisting tilemap: ", Time.get_unix_time_from_system())
+	print("bounds: ", bounds())
+	print("inputs: ", inputs())
+	print("groups: ", groups)
+	persist_tilemap_to_disk()
+
+export(String) var persist_node_path = "Map"
+export(String) var persist_name = persist_node_path
 export(String) var persist_dir = "res://addons/reptile/maps/"
-export(String) var persist_name = "Map"
-export(bool) var name_with_time = true
+export(bool) var version_number = true
+export(String) var hardcoded_version_number
 
 func persist_tilemap_to_disk():
 	if not Engine.editor_hint:
 		return
 
-	if not persisted_imgs:
-		print("No persisted_imgs, skipping persist")
+	var node = get_node(persist_node_path)
+	if not node:
+		push_error(str("No node found for node_path: ", persist_node_path))
+
+	if not node.get_children():
+		print(persist_node_path + " has no children, skipping persist")
 		return
 
-	if not $Map.get_children():
-		print("$Map has no children, skipping persist")
-
-	print("map: ", $Map)
-	for c in $Map.get_children():
-		c.set_owner($Map)
-		print("c owner: ", c.owner)
+	for c in node.get_children():
+		c.set_owner(node)
 
 	var scene = PackedScene.new()
-	var result = scene.pack($Map)
+	var result = scene.pack(node)
 	if result == OK:
 		var path = str(persist_dir, persist_name)
-		if name_with_time:
+		if hardcoded_version_number:
+			path = path + hardcoded_version_number
+		elif version_number:
 			path = path + str(Time.get_unix_time_from_system())
 		path = path + ".tscn"
 		var error = ResourceSaver.save(path, scene)
@@ -324,31 +331,3 @@ func persist_tilemap_to_disk():
 		else:
 			print("Successfully saved new map: ", path)
 
-
-######################################################################
-# helpers
-
-func img_to_texture(img):
-	var imgTexture = ImageTexture.new()
-	imgTexture.create_from_image(img, 1)
-	return imgTexture
-
-func img_stats(img):
-	var vals = []
-	var stats = {"min": 1, "max": 0}
-	for x in img.get_width():
-		for y in img.get_height():
-			var pix = img.get_pixel(x, y)
-			var val = pix.r
-			if val < stats["min"]:
-				stats["min"] = val
-			if val > stats["max"]:
-				stats["max"] = val
-			vals.append(pix.r)
-	stats["variance"] = stats["max"] - stats["min"]
-	# stats["vals"] = vals
-	return stats
-
-func normalized_val(stats, val):
-	val = val - stats["min"]
-	return val / stats["variance"]
