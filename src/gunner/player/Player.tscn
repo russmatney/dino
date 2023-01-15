@@ -75,7 +75,7 @@ scroll_active = false
 position = Vector2( -12, -14 )
 
 [node name="LookPOF" parent="." instance=ExtResource( 9 )]
-position = Vector2( -122, -15 )
+position = Vector2( -182, -14 )
 
 [node name="NotifLabel" type="RichTextLabel" parent="."]
 visible = false

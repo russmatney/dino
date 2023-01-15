@@ -26,18 +26,33 @@ func setup():
 	for t in targets:
 		Util.ensure_connection(t, "destroyed", self, "_on_target_destroyed")
 
-	# if targets:
-	# 	shockwave.set_node(targets[0])
+	print("targets? :(", targets.size())
 
+	find_hud()
+
+	Util.ensure_connection(Gunner, "respawn", self, "_on_respawn")
+	Util.ensure_connection(Cam, "slowmo_stopped", self, "_on_slowmo_stopped")
+
+func find_hud():
 	var huds = get_tree().get_nodes_in_group("hud")
 	if huds:
 		hud = huds[0]
 
 	if hud:
+		print("found hud and targets: ", targets.size())
 		hud.update_targets_remaining(targets.size())
+	else:
+		print("no hud found :(")
 
-	Util.ensure_connection(Gunner, "respawn", self, "_on_respawn")
-	Util.ensure_connection(Cam, "slowmo_stopped", self, "_on_slowmo_stopped")
+var wait_for = 5
+
+func _process(delta):
+	# TODO hmmm shouldn't wait forever...
+	# refactor to some sensible pattern
+	if wait_for > 0:
+		wait_for -= delta
+		if not hud:
+			find_hud()
 
 ###############################################################################
 # signals

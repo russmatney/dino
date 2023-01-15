@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/gunner/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/runner/gueststar/Room1673763260.970021.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/runner/gueststar/Room1673763207.827701.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/runner/gueststar/Room1673763320.57725.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gunner/targets/BreakTheTargets.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/gunner/targets/Target.tscn" type="PackedScene" id=6]
+
+[node name="GuestStar" type="Node2D"]
+
+[node name="BreakTheTargets" parent="." instance=ExtResource( 5 )]
+
+[node name="Room" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 0.5, 0.5 )
+
+[node name="DungeonWalls2" parent="Room" index="3"]
+visible = false
+
+[node name="Room2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 3200, 0 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+
+[node name="DungeonWalls2" parent="Room2" index="3"]
+visible = false
+
+[node name="Room3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 3200, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 144, 184 )
+
+[node name="Target" parent="." instance=ExtResource( 6 )]
+position = Vector2( 360, 496 )
+
+[node name="Target2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 736, 624 )
+
+[node name="Target3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1688, 752 )
+
+[node name="Target4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2192, 752 )
+
+[node name="Target5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1264, 624 )
+
+[node name="Target6" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2624, 928 )
+
+[node name="Target7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3664, 480 )
+
+[node name="Target8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4680, 624 )
+
+[node name="Target9" parent="." instance=ExtResource( 6 )]
+position = Vector2( 2384, 856 )
+
+[node name="Target10" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3520, 744 )
+
+[node name="Target11" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3624, 816 )
+
+[node name="Target12" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3112, 664 )
+
+[node name="Target13" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3544, 384 )
+
+[editable path="Room"]
+[editable path="Room2"]

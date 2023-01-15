@@ -13,15 +13,14 @@ var current_anchor
 
 var poi_follows = []
 var pof_follows = []
-var zoom_offset = Vector2(100, 100)
+var zoom_offset = Vector2(5000, 5000)
 var window_size = OS.window_size
-var min_zoom_factor = 1
+var min_zoom_factor = 2
 var poi_following_distance = 400
 var pof_following_distance = 400
 
 ###########################################################################
 # ready
-
 
 func _ready():
 	original_offset = offset
@@ -197,7 +196,7 @@ func zoom_for_bounds(pt_a, pt_b):
 
 
 func center_pois():
-	if poi_follows and following:
+	if pof_follows and following:
 		# TODO favor the following (player) position more
 		var focuses = pof_follows.append(following)
 

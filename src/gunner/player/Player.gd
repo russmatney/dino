@@ -7,7 +7,10 @@ onready var notif_label = $NotifLabel
 # _ready
 
 
+var reset_position
+
 func _ready():
+	reset_position = get_global_position()
 	machine.connect("transitioned", self, "on_transit")
 	face_left()
 
@@ -19,21 +22,22 @@ func _ready():
 # _process
 
 var positions = []
-var rec_pos_n = 10
-var rec_pos_every = 0.0005
-var rec_pos_in = 0
+var record_pos_n = 10
+var record_pos_every = 0.0005
+var record_pos_in = 0
 
+export(float) var max_y = 50000.0
 
 func _process(delta):
 	move_dir = Trolley.move_dir()
 
-	if rec_pos_in > 0:
-		rec_pos_in = rec_pos_in - delta
+	if record_pos_in > 0:
+		record_pos_in = record_pos_in - delta
 	else:
-		rec_pos_in = rec_pos_every
+		record_pos_in = record_pos_every
 
 		positions.push_front(get_global_position())
-		if positions.size() > rec_pos_n:
+		if positions.size() > record_pos_n:
 			positions.pop_back()
 
 	var back = positions.back()
@@ -43,6 +47,11 @@ func _process(delta):
 		var pos = target * 0.1 + current * 0.9
 		state_label.set_global_position(pos)
 
+	# TODO remove/replace with some other thing?
+	if get_global_position().y >= max_y:
+		take_damage(1)
+		position = reset_position
+		velocity = Vector2.ZERO
 
 ############################################################
 # _unhandled_input
@@ -72,6 +81,12 @@ signal health_change(health)
 func take_damage(d = 1):
 	health -= d
 	emit_signal("health_change", health)
+
+	if health <= 0:
+		die()
+
+func die():
+	print("TODO impl death")
 
 ############################################################
 # machine
