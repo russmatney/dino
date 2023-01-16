@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/gunner/hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://addons/hood/HeartsContainer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gunner/menus/GunnerControls.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/hood/HudLabel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gunner/hud/Pickups.tscn" type="PackedScene" id=5]
 
 [node name="HUD" type="CanvasLayer" groups=["hud"]]
 script = ExtResource( 1 )
@@ -26,13 +27,21 @@ unique_name_in_owner = true
 margin_right = 388.0
 margin_bottom = 30.0
 
-[node name="TargetsDestroyed" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+[node name="PickupsContainer" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 34.0
 margin_right = 388.0
-margin_bottom = 47.0
+margin_bottom = 64.0
+
+[node name="TargetsDestroyed" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 388.0
+margin_bottom = 81.0
 text = "Targets Destroyed: 0"
 align = 0
 
@@ -40,9 +49,9 @@ align = 0
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 51.0
+margin_top = 85.0
 margin_right = 388.0
-margin_bottom = 64.0
+margin_bottom = 98.0
 text = "Targets Remaining: 0"
 align = 0
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://src/gunner/player/redhat_sprites.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://assets/sprites/greyhat_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://src/gunner/player/Run.gd" type="Script" id=3]
 [ext_resource path="res://src/gunner/player/Idle.gd" type="Script" id=4]
@@ -13,7 +13,7 @@
 [ext_resource path="res://addons/teeb.text_effects/resources/Cuss.tres" type="RichTextEffect" id=11]
 [ext_resource path="res://addons/teeb.text_effects/resources/Sparkle.tres" type="RichTextEffect" id=12]
 [ext_resource path="res://addons/teeb.text_effects/resources/Jump.tres" type="RichTextEffect" id=13]
-[ext_resource path="res://src/gunner/SpriteShineShader.gdshader" type="Shader" id=14]
+[ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 12 )
@@ -21,9 +21,8 @@ extents = Vector2( 7, 12 )
 [sub_resource type="ShaderMaterial" id=3]
 resource_local_to_scene = true
 shader = ExtResource( 14 )
-shader_param/speed = 0.0
-shader_param/tint = Color( 1, 1, 0, 1 )
-shader_param/span = 0.5
+shader_param/outline = Color( 0.356863, 0.462745, 0.552941, 1 )
+shader_param/accent = Color( 0.964706, 0.776471, 0.658824, 1 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -60,6 +59,7 @@ script = ExtResource( 7 )
 script = ExtResource( 8 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 margin_left = -45.0
 margin_right = 45.0
 margin_bottom = 40.0

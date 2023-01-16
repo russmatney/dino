@@ -244,3 +244,14 @@ func shine(time=1.0):
 	var tween = create_tween()
 	anim.material.set("shader_param/speed", 1.0)
 	tween.tween_callback(anim.material, "set", ["shader_param/speed", 0.0]).set_delay(time)
+
+######################################################################
+# pickups
+
+var pickups = []
+
+signal pickups_change(pickups)
+
+func collect_pickup(pickup_type):
+	pickups.append(pickup_type)
+	emit_signal("pickups_change", pickups)

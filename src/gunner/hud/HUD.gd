@@ -27,6 +27,8 @@ func find_player():
 	if player:
 		player.connect("health_change", self, "update_player_health")
 		update_player_health(player.health)
+		player.connect("pickups_change", self, "update_player_pickups")
+		update_player_pickups(player.pickups)
 
 ###################################################################
 # Notifications
@@ -45,6 +47,13 @@ func new_notification(notif):
 func update_player_health(health):
 	var hearts = get_node("%HeartsContainer")
 	hearts.set_health(health)
+
+###################################################################
+# update pickups
+
+func update_player_pickups(pickups):
+	var p = get_node("%PickupsContainer")
+	p.update_pickups(pickups)
 
 ###################################################################
 # update targets

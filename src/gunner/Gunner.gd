@@ -118,9 +118,17 @@ onready var sounds = {
 		preload("res://assets/sounds/step2.sfxr"),
 		preload("res://assets/sounds/step3.sfxr"),
 	],
+	"heavy_land":
+	[
+		preload("res://assets/sounds/small_explosion.sfxr"),
+	],
 	"bullet_pop":
 	[
 		preload("res://assets/sounds/small_explosion.sfxr"),
+	],
+	"pickup":
+	[
+		preload("res://assets/sounds/pickup1.sfxr"),
 	],
 	"target_kill":
 	[
@@ -140,6 +148,6 @@ func setup_sounds():
 func play_sound(name):
 	if name in sound_map:
 		var s = sound_map[name]
-		DJ.play_sound_rand(s, {"vary": 0.3})
+		DJ.play_sound_rand(s, {"vary": 0.4})
 	else:
 		print("[WARN]: no sound for name", name)
