@@ -34,7 +34,7 @@ position = Vector2( 368, 376 )
 [node name="Target4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 708, 341 )
 
-[node name="Target5" parent="." groups=["pof"] instance=ExtResource( 5 )]
+[node name="Target5" parent="." instance=ExtResource( 5 )]
 position = Vector2( 617, 141 )
 
 [node name="Target6" parent="." instance=ExtResource( 5 )]

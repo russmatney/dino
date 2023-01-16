@@ -21,10 +21,10 @@ var zoom_level = 1.0
 var zoom_increment = 0.1
 var zoom_offset = 500
 var zoom_offset_previous = 500
-var zoom_offset_increment = 50
+var zoom_offset_increment = 150
 var zoom_duration = 0.2
 var min_zoom = 0.5
-var max_zoom = 5.0
+var max_zoom = 4.0
 
 
 ###########################################################################
@@ -79,7 +79,6 @@ func _process(_delta):
 
 func _input(event):
 	if Trolley.is_event(event, "zoom_in"):
-		print("zoom in!")
 		zoom_level -= zoom_increment
 		zoom_offset_previous = zoom_offset
 		zoom_offset -= zoom_offset_increment
@@ -91,7 +90,6 @@ func _input(event):
 			cam_mode.FOLLOW_AND_POIS:
 				pass
 	elif Trolley.is_event(event, "zoom_out"):
-		print("zoom out!")
 		zoom_level += zoom_increment
 		zoom_offset_previous = zoom_offset
 		zoom_offset += zoom_offset_increment
@@ -106,11 +104,14 @@ func _input(event):
 ###########################################################################
 # zoom
 
+var zoom_tween
+
 func update_zoom():
-	print("updating zoom: ", zoom_level)
 	zoom_level = clamp(zoom_level, min_zoom, max_zoom)
-	print("setting zoom: ", zoom_level)
-	self.zoom = Vector2(zoom_level, zoom_level)
+	zoom_tween = create_tween()
+	var new_zoom = Vector2(zoom_level, zoom_level)
+	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 ###########################################################################
 # screenshake
