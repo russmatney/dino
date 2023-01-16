@@ -155,5 +155,5 @@ position = Vector2( 0, 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "all"
-frame = 1
+frame = 2
 playing = true

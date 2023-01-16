@@ -118,9 +118,23 @@ onready var sounds = {
 		preload("res://assets/sounds/step2.sfxr"),
 		preload("res://assets/sounds/step3.sfxr"),
 	],
-	"heavy_land":
+	"jet_init":
+	[
+		preload("res://assets/sounds/jet1.sfxr"),
+	],
+	"jet_boost":
+	[
+		preload("res://assets/sounds/jet2.sfxr"),
+		preload("res://assets/sounds/jet3.sfxr"),
+	],
+	"jet_echo":
+	[
+		preload("res://assets/sounds/jet_echo1.sfxr"),
+	],
+	"heavy_landing":
 	[
 		preload("res://assets/sounds/small_explosion.sfxr"),
+		preload("res://assets/sounds/heavy_landing1.sfxr"),
 	],
 	"bullet_pop":
 	[
@@ -151,3 +165,9 @@ func play_sound(name):
 		DJ.play_sound_rand(s, {"vary": 0.4})
 	else:
 		print("[WARN]: no sound for name", name)
+
+func interrupt_sound(name):
+	if name in sound_map:
+		for s in sound_map[name]:
+			if s.is_playing():
+				s.stop()

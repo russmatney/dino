@@ -1,32 +1,53 @@
 extends State
 
 var is_jetting
-var jet_boost_ramp
 
+var jet_boost_ramp
 var jet_boost_levels = [
 	[1, 1.0],
 	[0.5, 0.6],
 	[0.2, 0.3],
-	[null, 4.0],
+	# initial speed from ground and in air
+	[null, 4.0, 2.5],
 	]
 
 func jet_boost_factor(delta):
 	jet_boost_ramp += delta
 	for jbl in jet_boost_levels:
 		if jbl[0] == null or jet_boost_ramp > jbl[0]:
+			if jbl.size() == 3:
+				if not actor.is_on_floor():
+					return jbl[2]
 			return jbl[1]
+
+var jet_sound_every = 1.1
+var jet_sound_in
 
 func enter(_ctx={}):
 	actor.anim.animation = "jetpack"
 	is_jetting = true
 	jet_boost_ramp = 0
+	Gunner.play_sound("jet_boost")
+
+	jet_sound_in = jet_sound_every
 
 
 func physics_process(delta):
+	jet_sound_in -= delta
+	if jet_sound_in <= 0:
+		print("playing jet_boost sound")
+		Gunner.play_sound("jet_boost")
+		jet_sound_in = jet_sound_every
+
 	# TODO get_action_strength for shoulder buttons
 	if Input.is_action_pressed("jetpack"):
-		is_jetting = true
+		if not is_jetting:
+			Gunner.play_sound("jet_boost")
+			is_jetting = true
+			jet_sound_in = jet_sound_every
 	else:
+		Gunner.interrupt_sound("jet_boost")
+		# Gunner.play_sound("jet_echo")
 		jet_boost_ramp = 0
 		is_jetting = false
 

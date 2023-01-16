@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/jet_echo1.sfxr-91b98198ece42541284312b0bdcad743.sample"
+
+[deps]
+
+source_file="res://assets/sounds/jet_echo1.sfxr"
+dest_files=[ "res://.import/jet_echo1.sfxr-91b98198ece42541284312b0bdcad743.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
