@@ -130,6 +130,7 @@ onready var sounds = {
 	"jet_echo":
 	[
 		preload("res://assets/sounds/jet_echo1.sfxr"),
+		preload("res://assets/sounds/jet_echo2.sfxr"),
 	],
 	"heavy_landing":
 	[

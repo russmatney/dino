@@ -28,6 +28,7 @@ func enter(_ctx={}):
 	is_jetting = true
 	jet_boost_ramp = 0
 	Gunner.play_sound("jet_boost")
+	Cam.screenshake(0.2)
 
 	jet_sound_in = jet_sound_every
 
@@ -37,16 +38,19 @@ func physics_process(delta):
 	if jet_sound_in <= 0:
 		Gunner.play_sound("jet_boost")
 		jet_sound_in = jet_sound_every
+		Cam.screenshake(0.2)
 
 	# TODO get_action_strength for shoulder buttons
 	if Input.is_action_pressed("jetpack"):
 		if not is_jetting:
+			Gunner.interrupt_sound("jet_echo")
 			Gunner.play_sound("jet_boost")
 			is_jetting = true
 			jet_sound_in = jet_sound_every
 	else:
 		Gunner.interrupt_sound("jet_boost")
-		Gunner.play_sound("jet_echo")
+		if is_jetting:
+			Gunner.play_sound("jet_echo")
 		jet_boost_ramp = 0
 		is_jetting = false
 
