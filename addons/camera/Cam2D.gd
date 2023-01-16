@@ -79,30 +79,42 @@ func _process(_delta):
 
 func _input(event):
 	if Trolley.is_event(event, "zoom_in"):
-		zoom_level -= zoom_increment
-		zoom_offset_previous = zoom_offset
-		zoom_offset -= zoom_offset_increment
-		match mode:
-			cam_mode.FOLLOW:
-				update_zoom()
-			cam_mode.ANCHOR:
-				pass
-			cam_mode.FOLLOW_AND_POIS:
-				pass
+		zoom_dir("in")
 	elif Trolley.is_event(event, "zoom_out"):
-		zoom_level += zoom_increment
-		zoom_offset_previous = zoom_offset
-		zoom_offset += zoom_offset_increment
-		match mode:
-			cam_mode.FOLLOW:
-				update_zoom()
-			cam_mode.ANCHOR:
-				pass
-			cam_mode.FOLLOW_AND_POIS:
-				pass
+		zoom_dir("out")
 
 ###########################################################################
 # zoom
+
+func zoom_dir(dir):
+	zoom_offset_previous = zoom_offset
+	var inc
+	var offset_inc
+	if zoom_level > 2:
+		inc = zoom_increment * 2
+		offset_inc = zoom_offset_increment * 2
+	else:
+		inc = zoom_increment
+		offset_inc = zoom_offset_increment
+
+	match (dir):
+		"out":
+			zoom_level += inc
+			zoom_offset += offset_inc
+		"in":
+			zoom_level -= inc
+			zoom_offset -= offset_inc
+
+	match mode:
+		cam_mode.FOLLOW:
+			# untested
+			update_zoom()
+		cam_mode.ANCHOR:
+			# untested
+			update_zoom()
+		cam_mode.FOLLOW_AND_POIS:
+			# updated via _process
+			pass
 
 var zoom_tween
 
