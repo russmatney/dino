@@ -13,11 +13,19 @@ var current_anchor
 
 var poi_follows = []
 var pof_follows = []
-var zoom_offset = Vector2(5000, 5000)
 var window_size = OS.window_size
-var min_zoom_factor = 2
 var poi_following_distance = 400
 var pof_following_distance = 400
+
+var zoom_level = 1.0
+var zoom_increment = 0.1
+var zoom_offset = 500
+var zoom_offset_previous = 500
+var zoom_offset_increment = 50
+var zoom_duration = 0.2
+var min_zoom = 0.5
+var max_zoom = 5.0
+
 
 ###########################################################################
 # ready
@@ -66,6 +74,43 @@ func _process(_delta):
 
 			center_pois()
 
+###########################################################################
+# input
+
+func _input(event):
+	if Trolley.is_event(event, "zoom_in"):
+		print("zoom in!")
+		zoom_level -= zoom_increment
+		zoom_offset_previous = zoom_offset
+		zoom_offset -= zoom_offset_increment
+		match mode:
+			cam_mode.FOLLOW:
+				update_zoom()
+			cam_mode.ANCHOR:
+				pass
+			cam_mode.FOLLOW_AND_POIS:
+				pass
+	elif Trolley.is_event(event, "zoom_out"):
+		print("zoom out!")
+		zoom_level += zoom_increment
+		zoom_offset_previous = zoom_offset
+		zoom_offset += zoom_offset_increment
+		match mode:
+			cam_mode.FOLLOW:
+				update_zoom()
+			cam_mode.ANCHOR:
+				pass
+			cam_mode.FOLLOW_AND_POIS:
+				pass
+
+###########################################################################
+# zoom
+
+func update_zoom():
+	print("updating zoom: ", zoom_level)
+	zoom_level = clamp(zoom_level, min_zoom, max_zoom)
+	print("setting zoom: ", zoom_level)
+	self.zoom = Vector2(zoom_level, zoom_level)
 
 ###########################################################################
 # screenshake
@@ -160,7 +205,7 @@ func attach_to_nearest_anchor():
 
 
 ###########################################################################
-# poi mode
+# pof/poi mode
 
 
 func update_window_size():
@@ -188,11 +233,20 @@ func update_pofs():
 	if pof_group:
 		pof_follows = get_tree().get_nodes_in_group(pof_group)
 
-func zoom_for_bounds(pt_a, pt_b):
-	var zoom_factor1 = abs(pt_a.x - pt_b.x) / (window_size.x - zoom_offset.x)
-	var zoom_factor2 = abs(pt_a.y - pt_b.x) / (window_size.y - zoom_offset.y)
-	var zoom_factor = max(max(zoom_factor1, zoom_factor2), min_zoom_factor)
-	return Vector2(zoom_factor, zoom_factor)
+func zoom_factor_for_bounds(pt_a, pt_b):
+	var x = abs(pt_a.x - pt_b.x)
+	var y = abs(pt_a.y - pt_b.y)
+	var zoom_factor1 = (x + zoom_offset) / window_size.x
+	var zoom_factor2 = (y + zoom_offset) / window_size.y
+	var zoom_factor = clamp(max(zoom_factor1, zoom_factor2), min_zoom, max_zoom)
+
+	# prevent zooming beyond clamp
+	if zoom_factor == min_zoom and zoom_offset < zoom_offset_previous:
+		# TODO a bit bouncy, but maybe that's fine
+		zoom_offset = zoom_offset_previous
+	elif zoom_factor == max_zoom and zoom_offset > zoom_offset_previous:
+		zoom_offset = zoom_offset_previous
+	return zoom_factor
 
 
 func center_pois():
@@ -236,4 +290,5 @@ func center_pois():
 		center = center / pof_follows.size()
 		self.global_position = center
 
-		self.zoom = zoom_for_bounds(Vector2(max_right, max_bottom), Vector2(max_left, max_top))
+		zoom_level = zoom_factor_for_bounds(Vector2(max_right, max_bottom), Vector2(max_left, max_top))
+		update_zoom()

@@ -14,6 +14,7 @@ margin_left = 15.0
 margin_top = 15.0
 margin_right = 962.0
 margin_bottom = 648.0
+mouse_filter = 2
 color = Color( 0.435294, 0.462745, 0.415686, 1 )
 
 [node name="OneDirectionalTile" parent="." instance=ExtResource( 4 )]
@@ -33,7 +34,7 @@ position = Vector2( 368, 376 )
 [node name="Target4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 708, 341 )
 
-[node name="Target5" parent="." instance=ExtResource( 5 )]
+[node name="Target5" parent="." groups=["pof"] instance=ExtResource( 5 )]
 position = Vector2( 617, 141 )
 
 [node name="Target6" parent="." instance=ExtResource( 5 )]
@@ -63,11 +64,4 @@ position = Vector2( 787, 188 )
 [node name="BreakTheTargets" parent="." instance=ExtResource( 6 )]
 position = Vector2( -24, 42 )
 
-[node name="Rect" parent="BreakTheTargets/ShockwaveShaderLayer" index="0"]
-margin_left = 6.0
-margin_top = -2.0
-margin_right = 469.0
-margin_bottom = 363.0
-
 [editable path="BreakTheTargets"]
-[editable path="BreakTheTargets/ShockwaveShaderLayer"]
