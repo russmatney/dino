@@ -9,7 +9,9 @@ func enter(_ctx = {}):
 
 
 func physics_process(delta):
-	if actor.move_dir:
+	if actor.velocity.y > 0:
+		machine.transit("Fall")
+	elif actor.move_dir:
 		actor.velocity.x = actor.speed * actor.move_dir.x
 		actor.velocity.y += actor.gravity * delta
 
@@ -19,7 +21,5 @@ func physics_process(delta):
 
 		if not actor.firing:
 			actor.update_facing()
-	elif abs(actor.velocity.y) > 0:
-		machine.transit("Fall")
 	else:
 		machine.transit("Idle")
