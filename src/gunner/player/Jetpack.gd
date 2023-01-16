@@ -35,7 +35,6 @@ func enter(_ctx={}):
 func physics_process(delta):
 	jet_sound_in -= delta
 	if jet_sound_in <= 0:
-		print("playing jet_boost sound")
 		Gunner.play_sound("jet_boost")
 		jet_sound_in = jet_sound_every
 
@@ -47,7 +46,7 @@ func physics_process(delta):
 			jet_sound_in = jet_sound_every
 	else:
 		Gunner.interrupt_sound("jet_boost")
-		# Gunner.play_sound("jet_echo")
+		Gunner.play_sound("jet_echo")
 		jet_boost_ramp = 0
 		is_jetting = false
 
@@ -80,3 +79,7 @@ func physics_process(delta):
 
 	if not is_jetting and actor.is_on_floor():
 		machine.transit("Idle")
+
+	if not is_jetting and actor.velocity.y > 0:
+		# TODO fall some distance first?
+		machine.transit("Fall")
