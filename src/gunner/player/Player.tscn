@@ -40,7 +40,7 @@ position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -60,7 +60,6 @@ script = ExtResource( 7 )
 script = ExtResource( 8 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
-visible = false
 margin_left = -45.0
 margin_right = 45.0
 margin_bottom = 40.0

@@ -56,12 +56,13 @@ func _process(delta):
 ############################################################
 # _unhandled_input
 
+var jump_count = 0
 
 func _unhandled_key_input(event):
 	if Trolley.is_jump(event):
 		if can_wall_jump and is_on_wall():
 			machine.transit("Jump")
-		if state in ["Idle", "Run", "Fall"]:
+		if state in ["Idle", "Run", "Fall"] and jump_count == 0:
 			machine.transit("Jump")
 	elif Trolley.is_event(event, "action"):
 		shine()

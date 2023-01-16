@@ -1,16 +1,14 @@
 # Jump
 extends State
 
-var jump_count = 0
-
 onready var jump_ring_scene = preload("res://src/gunner/player/JumpRing.tscn")
 
 
 func label():
-	return "Jump: " + str(jump_count)
+	return "Jump: " + str(actor.jump_count)
 
 
-func enter(_ctx = {}):
+func enter(ctx = {}):
 	actor.anim.animation = "jump"
 	actor.velocity.y -= actor.jump_impulse
 	actor.velocity.y = max(-actor.jump_impulse, actor.velocity.y)
@@ -19,14 +17,14 @@ func enter(_ctx = {}):
 
 	create_jump_ring()
 
-	jump_count += 1
+	actor.jump_count += 1
 
 
 func create_jump_ring():
 	var jr = jump_ring_scene.instance()
 	jr.position = actor.get_global_position()
 	Navi.add_child_to_current(jr)
-	if jump_count > 0:
+	if actor.jump_count > 0:
 		actor.notif("Wall Jump!", {"dupe": true})
 	# we might care about z-index
 
@@ -47,10 +45,12 @@ func physics_process(delta):
 		actor.update_facing()
 
 	if actor.is_on_floor():
-		jump_count = 0
 		machine.transit("Idle")
 
 	if actor.is_on_wall():
 		if not actor.can_wall_jump:
 			Gunner.play_sound("step")
 			actor.can_wall_jump = true
+
+	if actor.velocity.y > 0:
+		machine.transit("Fall")

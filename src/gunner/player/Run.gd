@@ -4,6 +4,8 @@ extends State
 
 func enter(_ctx = {}):
 	actor.anim.animation = "run"
+	# perhaps unnecessary jump reset
+	actor.jump_count = 0
 
 
 func physics_process(delta):

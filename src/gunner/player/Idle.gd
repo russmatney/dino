@@ -2,8 +2,15 @@
 extends State
 
 
-func enter(_ctx = {}):
+func enter(ctx = {}):
 	actor.anim.animation = "idle"
+	actor.jump_count = 0
+
+	if "shake" in ctx and ctx["shake"]:
+		if typeof(ctx["shake"]) == TYPE_REAL:
+			Cam.screenshake(ctx["shake"])
+		else:
+			Cam.screenshake(0.25)
 
 	# Gunner.play_sound("step")
 
