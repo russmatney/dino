@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/sprites/greyhat_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/Player.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://addons/teeb.text_effects/resources/Jump.tres" type="RichTextEffect" id=13]
 [ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=14]
 [ext_resource path="res://src/gunner/player/Jetpack.gd" type="Script" id=15]
+[ext_resource path="res://assets/sprites/greyhat_jetflame_sheet.png" type="Texture" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 12 )
@@ -24,6 +25,61 @@ resource_local_to_scene = true
 shader = ExtResource( 14 )
 shader_param/outline = Color( 0.356863, 0.462745, 0.552941, 1 )
 shader_param/accent = Color( 0.964706, 0.776471, 0.658824, 1 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 14 )
+shader_param/outline = Color( 0.819608, 0.486275, 0.486275, 1 )
+shader_param/accent = Color( 0.964706, 0.776471, 0.658824, 1 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 16 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 16 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 16 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 16 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 16 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 16 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "all",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "full",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "init",
+"speed": 5.0
+} ]
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_layer = 2
@@ -39,8 +95,7 @@ material = SubResource( 3 )
 position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
-animation = "idle"
-frame = 1
+animation = "jetpack"
 playing = true
 
 [node name="Machine" type="Node" parent="."]
@@ -92,3 +147,13 @@ text = "BREAK THE TARGETS"
 fit_content_height = true
 scroll_active = false
 custom_effects = [ ExtResource( 11 ), ExtResource( 13 ), ExtResource( 12 ) ]
+
+[node name="Jet" type="AnimatedSprite" parent="."]
+visible = false
+material = SubResource( 9 )
+position = Vector2( 0, 5 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 6 )
+animation = "all"
+frame = 1
+playing = true

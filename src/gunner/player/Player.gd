@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var anim = $AnimatedSprite
+onready var jet_anim = $Jet
 onready var notif_label = $NotifLabel
 
 ############################################################
