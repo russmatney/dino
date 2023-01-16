@@ -26,13 +26,19 @@ var zoom_duration = 0.2
 var min_zoom = 0.5
 var max_zoom = 4.0
 
-
 ###########################################################################
 # ready
+
+var original_offset
+var original_rotation
 
 func _ready():
 	original_offset = offset
 	original_rotation = rotation
+
+	# otherwise we can't do a rotational screenshake
+	# let's hope the camera parent doesn't need to rotate...
+	set_rotating(true)
 
 	if mode == cam_mode.FOLLOW_AND_POIS:
 		if poi_group:
@@ -51,7 +57,7 @@ func _ready():
 # process
 
 
-func _process(_delta):
+func _process(delta):
 	match mode:
 		cam_mode.FOLLOW:
 			if not following:
@@ -75,6 +81,13 @@ func _process(_delta):
 			center_pois()
 
 ###########################################################################
+# physics_process
+
+
+func _physics_process(delta):
+	process_shake(delta)
+
+###########################################################################
 # input
 
 func _input(event):
@@ -83,27 +96,33 @@ func _input(event):
 	elif Trolley.is_event(event, "zoom_out"):
 		zoom_dir("out")
 
+	if Trolley.is_action(event):
+		# Cam.freezeframe("shake-watch", 0.2, 1.5)
+		# inc_trauma(1.0)
+		# inc_trauma(0.3)
+		inc_trauma(0.5)
+		# inc_trauma(1.0)
+
 ###########################################################################
 # zoom
 
-func zoom_dir(dir):
+func zoom_dir(dir, n=null):
 	zoom_offset_previous = zoom_offset
 	var inc
 	var offset_inc
-	if zoom_level > 2:
-		inc = zoom_increment * 2
-		offset_inc = zoom_offset_increment * 2
-	else:
-		inc = zoom_increment
-		offset_inc = zoom_offset_increment
+
+	if not n and zoom_level > 2:
+		n = 2
+	elif not n:
+		n = 1
 
 	match (dir):
 		"out":
-			zoom_level += inc
-			zoom_offset += offset_inc
+			zoom_level += zoom_increment * n
+			zoom_offset += zoom_offset_increment * n
 		"in":
-			zoom_level -= inc
-			zoom_offset -= offset_inc
+			zoom_level -= zoom_increment * n
+			zoom_offset -= zoom_offset_increment * n
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -126,48 +145,92 @@ func update_zoom():
 
 
 ###########################################################################
-# screenshake
+# fractal screenshake
 
-var shake_amplitude = 10
-var shake_variance = 10
-var shake_duration = 0.2
-var shake_loops = 1
-var original_offset
-var original_rotation
+# https://youtu.be/tu-Qe66AvtY?t=260
+var trauma = 0.0
+var trauma_decrement_factor = 0.7
 
+func inc_trauma(inc):
+	trauma += inc
+	trauma = clamp(trauma, 0.0, 1.0)
+	print("[CAM] Trauma: ", trauma)
 
-func screenshake(opts = {}):
-	var lps = opts.get("loops", shake_loops)
-	var vary = opts.get("variance", shake_variance)
-	var amp = opts.get("amplitude", shake_amplitude)
-	var dur = opts.get("duration", shake_duration)
+var shake_offset
+var shake_rotation
+var trans_noise_ctx
+var rot_noise_ctx
 
-	var tween = create_tween()
-	tween.set_loops(lps)
+func screenshake_reset():
+	shake_offset = null
+	shake_rotation = null
+	trans_noise_ctx = null
+	rot_noise_ctx = null
+	# These 'originals' could use a better name
+	# and may need to be updated by hand if an external something or other wants camera control
+	self.offset = original_offset
+	self.rotation = original_rotation
 
-	# TODO finish wip rotational shake feat
-	# rotational
-	# var rot_diff = PI + (PI * 0.10 * rand_range(-vary, vary))
+func process_shake(delta):
+	if trauma > 0:
+		trauma -= trauma_decrement_factor * delta
+		trauma = clamp(trauma, 0.0, 1.0)
+		if trauma == 0.0:
+			print("[CAM] Trauma resetting: ", trauma)
+			screenshake_reset()
+		else:
+			if not trans_noise_ctx:
+				trans_noise_ctx = {
+					"noise": new_noise(noise_inputs),
+					"acc": 0
+					}
+			if not rot_noise_ctx:
+				noise_inputs["seed"] += randi()
+				rot_noise_ctx = {
+					"noise": new_noise(noise_inputs),
+					"acc": 0
+					}
+			screenshake_translational(trans_noise_ctx, delta)
+			screenshake_rotational(rot_noise_ctx, delta)
+	if shake_offset:
+		self.offset = original_offset + shake_offset
+	if shake_rotation:
+		self.rotation = original_rotation + shake_rotation
 
-	# translational
-	var rand = Vector2(rand_range(-vary, vary), rand_range(-vary, vary))
-	var diff = Vector2(sign(rand.x) * amp + rand.x, sign(rand.y) * amp + rand.y)
+var noise_inputs = {
+	"seed": 4,
+	"octaves": 5,
+	"period": 5,
+	"persistence": 0.8,
+	"lacunarity": 4.0,
+	}
 
-	tween.tween_property(self, "offset", offset + diff, dur).set_trans(Tween.TRANS_SINE).set_ease(
-		Tween.EASE_IN_OUT
-	)
-	# tween.parallel().tween_property(self, "rotation", rotation + rot_diff, dur).set_trans(Tween.TRANS_SINE).set_ease(
-	# 	Tween.EASE_IN_OUT
-	# )
+func new_noise(inputs):
+	var noise = OpenSimplexNoise.new()
+	noise.seed = inputs["seed"]
+	noise.octaves = inputs["octaves"]
+	noise.period = inputs["period"]
+	noise.persistence = inputs["persistence"]
+	noise.lacunarity = inputs["lacunarity"]
+	return noise
 
-	# reset
-	tween.tween_property(self, "offset", original_offset, dur).set_trans(Tween.TRANS_SINE).set_ease(
-		Tween.EASE_IN_OUT
-	)
-	# tween.parallel().tween_property(self, "rotation", original_rotation, dur).set_trans(Tween.TRANS_SINE).set_ease(
-	# 	Tween.EASE_IN_OUT
-	# )
+func next_noise_factor(noise_ctx, delta):
+	noise_ctx["acc"] = delta + noise_ctx["acc"]
+	noise_ctx["factor"] = noise_ctx["noise"].get_noise_1d(noise_ctx["acc"])
 
+var max_shake_offset = 100
+var max_shake_rotation = PI / 8
+
+func screenshake_translational(noise_ctx, delta):
+	var max_offset = Vector2(max_shake_offset, max_shake_offset)
+	var shake = trauma * trauma
+	next_noise_factor(noise_ctx, delta)
+	shake_offset = max_offset * shake * noise_ctx["factor"]
+
+func screenshake_rotational(noise_ctx, delta):
+	var shake = trauma * trauma
+	next_noise_factor(noise_ctx, delta)
+	shake_rotation = max_shake_rotation * shake * noise_ctx["factor"]
 
 ###########################################################################
 # follow mode

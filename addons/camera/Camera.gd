@@ -54,11 +54,14 @@ func ensure_camera(cam_mode = null):
 ##############################################################
 # screenshake
 
-func screenshake(opts = {}):
+func inc_trauma(inc = 0.1):
 	if cam:
-		cam.screenshake(opts)
+		cam.inc_trauma(inc)
 	else:
-		print("[WARN]: screenshake called, but no 'cam' set.")
+		print("[WARN]: inc_trauma called, but no 'cam' set.")
+
+func screenshake(trauma = 0.3):
+	inc_trauma(trauma)
 
 ##############################################################
 # freezeframe
