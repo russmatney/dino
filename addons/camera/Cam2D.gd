@@ -20,7 +20,7 @@ var pof_following_distance = 400
 var zoom_level = 1.0
 var zoom_increment = 0.1
 var zoom_offset = 500
-var zoom_offset_previous = 500
+var zoom_offset_previous
 var zoom_offset_increment = 150
 var zoom_duration = 0.2
 var min_zoom = 0.5
@@ -35,6 +35,7 @@ var original_rotation
 func _ready():
 	original_offset = offset
 	original_rotation = rotation
+	zoom_offset_previous = zoom_offset
 
 	# otherwise we can't do a rotational screenshake
 	# let's hope the camera parent doesn't need to rotate...

@@ -30,7 +30,7 @@ func cam_window_rect():
 ##############################################################
 # ensure camera
 
-func ensure_camera(cam_mode = null):
+func ensure_camera(cam_mode = null, zoom_offset=3000):
 	print("ensuring camera")
 
 	if cam and is_instance_valid(cam):
@@ -45,6 +45,7 @@ func ensure_camera(cam_mode = null):
 
 	cam = cam_scene.instance()
 	cam.current = true
+	cam.zoom_offset = zoom_offset
 
 	if cam_mode:
 		cam.mode = cam_mode

@@ -17,7 +17,7 @@ func kill():
 	# no need to run more than once (if we contact multiple objs)
 	if not dying:
 		dying = true
-		Cam.screenshake(0.3)
+		Cam.screenshake(0.1)
 		Gunner.play_sound("bullet_pop")
 		anim.set_visible(false)
 		pop.set_visible(true)
