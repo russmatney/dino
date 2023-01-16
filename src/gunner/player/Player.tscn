@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprites/greyhat_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/Player.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://addons/teeb.text_effects/resources/Sparkle.tres" type="RichTextEffect" id=12]
 [ext_resource path="res://addons/teeb.text_effects/resources/Jump.tres" type="RichTextEffect" id=13]
 [ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=14]
+[ext_resource path="res://src/gunner/player/Jetpack.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 12 )
@@ -58,8 +59,10 @@ script = ExtResource( 7 )
 [node name="Fall" type="Node" parent="Machine"]
 script = ExtResource( 8 )
 
+[node name="Jetpack" type="Node" parent="Machine"]
+script = ExtResource( 15 )
+
 [node name="StateLabel" type="RichTextLabel" parent="."]
-visible = false
 margin_left = -45.0
 margin_right = 45.0
 margin_bottom = 40.0

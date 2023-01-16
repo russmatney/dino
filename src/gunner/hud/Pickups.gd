@@ -28,6 +28,10 @@ func update_pickups(ps=pickups):
 				"body":
 					inst = body_scene.instance()
 					inst.position.y = -2
+				_:
+					print("unknown pickup, falling back on hat scene")
+					inst = hat_scene.instance()
+					inst.position.y = 19
 			inst.position.x = x_pos(i)
 
 			add_child(inst)

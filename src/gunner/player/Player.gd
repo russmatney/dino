@@ -17,6 +17,8 @@ func _ready():
 	Cam.call_deferred("ensure_camera", 2)
 	Gunner.ensure_hud()
 
+	has_jetpack = true
+
 
 ############################################################
 # _process
@@ -59,7 +61,9 @@ func _process(delta):
 var jump_count = 0
 
 func _unhandled_key_input(event):
-	if Trolley.is_jump(event):
+	if has_jetpack and Trolley.is_event(event, "jetpack"):
+		machine.transit("Jetpack")
+	elif Trolley.is_jump(event):
 		if can_wall_jump and is_on_wall():
 			machine.transit("Jump")
 		if state in ["Idle", "Run", "Fall"] and jump_count == 0:
@@ -118,8 +122,10 @@ export(int) var speed := 120
 export(int) var air_speed := 120
 export(int) var jump_impulse := 400
 export(int) var gravity := 900
+export(int) var jetpack_boost := 1300
 
 var can_wall_jump
+var has_jetpack
 
 ############################################################
 # facing
@@ -253,5 +259,8 @@ var pickups = []
 signal pickups_change(pickups)
 
 func collect_pickup(pickup_type):
-	pickups.append(pickup_type)
-	emit_signal("pickups_change", pickups)
+	if pickup_type == "jetpack":
+		has_jetpack = true
+	else:
+		pickups.append(pickup_type)
+		emit_signal("pickups_change", pickups)

@@ -83,6 +83,12 @@ func move_dir():
 func is_event(event, event_name):
 	return event.is_action_pressed(event_name)
 
+func is_pressed(event, event_name):
+	return event.is_action_pressed(event_name)
+
+func is_held(event, event_name):
+	return event.is_action_pressed(event_name)
+
 func is_event_released(event, event_name):
 	return event.is_action_released(event_name)
 
