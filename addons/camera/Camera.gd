@@ -4,6 +4,40 @@ extends Node
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
+func cam_viewport():
+	if cam:
+		return cam.get_viewport()
+
+func cam_visible_rect():
+	if cam:
+		# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
+		# var ci: CanvasItem = ... # any CanvasItem in the viewport you're interested in
+		# var visibleRectGlobal: Rect2 = ci.get_viewport_transform().affine_inverse().xform(ci.get_viewport_rect())
+		# var visibleRectGlobal: Rect2 = cam.get_viewport_transform().affine_inverse().xform(cam.get_viewport_rect())
+		# print("vp size: ", cam.get_viewport().size)
+		# return visibleRectGlobal
+		# return cam.get_viewport().get_visible_rect()
+		#
+
+		# again verbose version
+		pass
+
+func cam_window_rect():
+	# TODO how to support this for all stretch modes?
+
+	var v: Viewport = cam.get_viewport()
+	var viewportRect: Rect2 = v.get_visible_rect()
+	var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
+	var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
+	var viewportRectGlobal: Rect2 = viewportToGlobalTransform.xform(viewportRect)
+
+	var rect = Rect2()
+	rect.position = viewportRectGlobal.position
+	rect.size = cam.window_size / 2
+	# print("rect: ", rect)
+
+	return rect
+
 ##############################################################
 # ensure camera
 

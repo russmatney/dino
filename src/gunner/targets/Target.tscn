@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/target_sprite_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/targets/Target.gd" type="Script" id=2]
+[ext_resource path="res://src/gunner/OffscreenIndicator.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.1245
@@ -19,4 +20,12 @@ frames = ExtResource( 1 )
 animation = "target"
 playing = true
 
+[node name="OffscreenIndicator" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( -87, -41 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_Target_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -26,7 +26,7 @@ var record_pos_n = 10
 var record_pos_every = 0.0005
 var record_pos_in = 0
 
-export(float) var max_y = 50000.0
+export(float) var max_y = 10000.0
 
 func _process(delta):
 	move_dir = Trolley.move_dir()

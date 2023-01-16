@@ -4,12 +4,21 @@ extends Area2D
 onready var anim = $AnimatedSprite
 onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
 
+onready var offscreen_indicator = $OffscreenIndicator
+
 signal destroyed(target)
 
 func _ready():
 	anim.connect("animation_finished", self, "_animation_finished")
 
 	Gunner.register_respawn(self)
+
+func _process(_delta):
+	# if target offscreen and player close enough/line-of-sight
+	if not on_screen:
+		offscreen_indicator.activate(self)
+	else:
+		offscreen_indicator.deactivate()
 
 func _animation_finished():
 	if anim.animation == "pop":
@@ -32,3 +41,11 @@ func _on_Target_body_entered(body:Node):
 			body.kill()
 
 		kill()
+
+
+var on_screen = false
+func _on_VisibilityNotifier2D_screen_entered():
+	on_screen = true
+
+func _on_VisibilityNotifier2D_screen_exited():
+	on_screen = false

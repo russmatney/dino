@@ -22,7 +22,7 @@ tile_data = PoolIntArray( -458748, 0, 196609, -458747, 0, 196610, -458746, 0, 19
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Target" parent="." instance=ExtResource( 3 )]
-position = Vector2( -334, -57 )
+position = Vector2( -79, -94 )
 
 [node name="Target2" parent="." instance=ExtResource( 3 )]
 position = Vector2( -290, -26 )
@@ -31,13 +31,13 @@ position = Vector2( -290, -26 )
 position = Vector2( -268, -70 )
 
 [node name="Target4" parent="." instance=ExtResource( 3 )]
-position = Vector2( -221, -31 )
+position = Vector2( 91, -85 )
 
 [node name="Target5" parent="." instance=ExtResource( 3 )]
 position = Vector2( -370, -24 )
 
 [node name="Target6" parent="." instance=ExtResource( 3 )]
-position = Vector2( -395, -73 )
+position = Vector2( 23, -78 )
 
 [node name="Target7" parent="." instance=ExtResource( 3 )]
 position = Vector2( 290, -26 )

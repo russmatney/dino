@@ -38,6 +38,12 @@ func nearest_node(source: Node, targets) -> Node:
 
 	return nearest_target
 
+func first_node_in_group(group_name: String) -> Node:
+	# TODO questionable navi dependency!
+	for c in Navi.current_scene.get_tree().get_nodes_in_group(group_name):
+		return c
+	return null
+
 func get_first_child_in_group(node: Node, group_name: String) -> Node:
 	# only checks first children
 	for c in node.get_children():
