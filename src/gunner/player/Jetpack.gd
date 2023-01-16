@@ -3,20 +3,22 @@ extends State
 var is_jetting
 var jet_boost_ramp
 
-var jet_level_one = 0.3
+var jet_level_one = 0.2
 var jet_level_two = 1
 var jet_level_three = 2
 
+var jet_boost_levels = [
+	[1, 1.0],
+	[0.5, 0.6],
+	[0.2, 0.3],
+	[null, 4.0],
+	]
+
 func jet_boost_factor(delta):
 	jet_boost_ramp += delta
-	if jet_boost_ramp > jet_level_three:
-		return 1
-	elif jet_boost_ramp > jet_level_two:
-		return 0.6
-	elif jet_boost_ramp > jet_level_one:
-		return 0.3
-	else:
-		return 0.1
+	for jbl in jet_boost_levels:
+		if jbl[0] == null or jet_boost_ramp > jbl[0]:
+			return jbl[1]
 
 func enter(_ctx={}):
 	print("enter jetpack")

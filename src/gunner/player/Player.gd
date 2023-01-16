@@ -122,7 +122,7 @@ export(int) var speed := 120
 export(int) var air_speed := 120
 export(int) var jump_impulse := 400
 export(int) var gravity := 900
-export(int) var jetpack_boost := 1300
+export(int) var jetpack_boost := 800
 
 var can_wall_jump
 var has_jetpack
