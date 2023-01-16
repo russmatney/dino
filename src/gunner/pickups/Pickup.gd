@@ -4,6 +4,7 @@ extends Node2D
 export(String, "jetpack", "hat", "body") var type = "jetpack"
 
 func _ready():
+	$AnimatedSprite.animation = type
 	Gunner.register_respawn(self)
 
 func kill():

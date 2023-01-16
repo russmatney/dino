@@ -18,7 +18,7 @@ func _ready():
 	Cam.call_deferred("ensure_camera", 2)
 	Gunner.ensure_hud()
 
-	has_jetpack = true
+	# has_jetpack = true
 
 
 ############################################################
@@ -260,6 +260,7 @@ var pickups = []
 signal pickups_change(pickups)
 
 func collect_pickup(pickup_type):
+	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
 	if pickup_type == "jetpack":
 		has_jetpack = true
 	else:
