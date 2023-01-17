@@ -106,9 +106,36 @@ func inputs():
 ######################################################################
 # groups
 
-# TODO move Group to a type and support defining it via the UI
-# consider whether it's easier to create in-editor ui components to do this instead
+class MapGroup:
+	extends Object
+
+	export(int) var bound
+	export(Color) var color
+	export(PackedScene) var tilemap_scene
+	var tilemap
+
+	func _init(b, c, ts):
+		._init()
+		bound = b
+		color = c
+		tilemap_scene = ts
+		return self
+
+	func _to_string():
+		return "\n[tiles: " + str(tilemap_scene) + "]\t[bound: " + str(bound) + "]\t[color: " + str(color) + "]"
+
+	static func sort_by_key(a, b):
+		if not a.bound:
+			return false
+		if a.bound <= Util._or(b.bound, 1.1):
+			return true
+		return false
+
+
+# TODO type hint for editor arbitrary groups in the editor in 4.0 (or if it gets backported)
+# https://github.com/godotengine/godot-proposals/issues/18
 export(Array) var group_list = []
+
 
 # bound inputs/triggers
 
@@ -149,114 +176,86 @@ export(PackedScene) var tilemapD_scene
 # TODO refactor into an arbitrary number of groups
 var groups
 func build_groups():
-	return [{
-	"tilemap": null,
-	"tilemap_scene": tilemapA_scene,
-	"color": colorA,
-	"bound": boundA,
-	},
-	{
-		"tilemap": null,
-		"tilemap_scene": tilemapB_scene,
-		"color": colorB,
-		"bound": boundB,
-		},
-	{
-		"tilemap": null,
-		"tilemap_scene": tilemapC_scene,
-		"color": colorC,
-		"bound": boundC,
-		},
-	{
-		"tilemap": null,
-		"tilemap_scene": tilemapD_scene,
-		"color": colorD,
-		"bound": boundD,
-		},
+	if group_list:
+		return group_list
+
+	return [
+		MapGroup.new(boundA, colorA, tilemapA_scene),
+		MapGroup.new(boundB, colorB, tilemapB_scene),
+		MapGroup.new(boundC, colorC, tilemapC_scene),
+		MapGroup.new(boundD, colorD, tilemapD_scene),
 	]
-
-class GroupsSort:
-	static func sort_by_key(a, b):
-		if not "bound" in a:
-			return false
-		if a["bound"] <= b.get("bound", 1.1):
-			return true
-		return false
-
-	func sort(xs):
-		xs.sort_custom(self, "sort_by_key")
-		return xs
-
-func bounds():
-	var bds = []
-	groups.sort_custom(GroupsSort, "sort_by_key")
-	for gp in groups:
-		bds.append(gp.get("bound"))
-	return bds
-
-# return a group for the normed value, if one can be found.
-# this may not be comprehensive, if we want to leave some empty tiles
-func group_for_normed_val(normed):
-	groups.sort_custom(GroupsSort, "sort_by_key")
-	for g in groups:
-		if not "bound" in g:
-			# no bound? we must be past the bounds, let's return
-			return g
-
-		if normed < g["bound"]:
-			# we fit here
-			return g
 
 func groups_valid():
 	# TODO add validation for bounds
-
-	for gp in groups:
-		if "tilemap_scene" in gp and gp["tilemap_scene"]:
+	for mg in groups:
+		if mg.tilemap_scene:
 			return true
 
 	print("No tilemap_scenes set, no tiles to add.")
 	return false
 
-func to_ctx(coord, img, stats):
+
+func bounds():
+	var bds = []
+	groups.sort_custom(MapGroup, "sort_by_key")
+	for mg in groups:
+		bds.append(mg.bound)
+	return bds
+
+# return a group for the normed value, if one can be found.
+# this may not be comprehensive, if we want to leave some empty tiles
+func group_for_normed_val(normed):
+	groups.sort_custom(MapGroup, "sort_by_key")
+	for g in groups:
+		if not g.bound:
+			# no bound? we must be past the bounds, let's return
+			return g
+
+		if normed < g.bound:
+			# we fit here
+			return g
+
+class CoordCtx:
+	var group: MapGroup
+	var coord: Vector2
+	var normed: float
+	var img: Image
+
+	func _init(g, c, n, i):
+		._init()
+		group = g
+		coord = c
+		normed = n
+		img = i
+		return self
+
+func to_coord_ctx(coord, img, stats):
 	# this is called per coordinate
 	# avoid expensive ops in here, things should be passed in
 	var normed = ReptileMap.normalized_val(stats, img.get_pixel(coord.x, coord.y).r)
 	var group = group_for_normed_val(normed)
-	if not group:
-		return
-	var dupe = group.duplicate()
-	dupe.merge({
-		"x": coord.x,
-		"y": coord.y,
-		"normed": normed,
-		"img": img,
-		})
-	return dupe
+	return CoordCtx.new(group, coord, normed, img)
 
 #####################################################################
 # coords
 
-func call_with_group_context(img, obj, fname):
+func call_with_coord_context(img, obj, fname):
 	var stats = ReptileMap.img_stats(img)
 
 	for coord in ReptileMap.all_coords(img):
-		var ctx = to_ctx(coord, img, stats)
-		if not ctx:
-			ctx = {"found_group": false}
-		else:
-			ctx["found_group"] = true
-
-		obj.call(fname, coord, ctx)
+		var ctx = to_coord_ctx(coord, img, stats)
+		obj.call(fname, ctx)
 
 ######################################################################
 # colorize_image
 
-func colorize_coord(coord, ctx):
-	if ctx["found_group"] == true:
-		if not "img" in ctx:
+func colorize_coord(ctx):
+	if ctx.group:
+		if not ctx.img:
 			print("[WARN] colorize_coord ctx without img")
 			return
-		ctx["img"].set_pixel(coord.x, coord.y, ctx["color"])
+		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
 func colorize_image(img):
 	# copy this image b/c we're about to mutate it
@@ -264,7 +263,7 @@ func colorize_image(img):
 	n.copy_from(img)
 	n.convert(Image.FORMAT_RGBA8)
 	n.lock()
-	call_with_group_context(n, self, "colorize_coord")
+	call_with_coord_context(n, self, "colorize_coord")
 	$ColorizedImage.texture = ReptileMap.img_to_texture(n)
 
 ######################################################################
@@ -286,26 +285,24 @@ func init_tilemaps(parent_node):
 		c.queue_free()
 
 	for group in groups:
-		if group["tilemap_scene"]:
-			var t = group["tilemap_scene"].instance()
+		if group.tilemap_scene:
+			var t = group.tilemap_scene.instance()
 			var scale_by = target_cell_size / t.cell_size.x
 			t.scale = Vector2(scale_by, scale_by)
 			t.connect("tree_entered", t, "set_owner", [owner_or_self()])
 			parent_node.add_child(t)
-			group["tilemap"] = t
+			group.tilemap = t
 
-func add_tile_at_coord(coord, ctx):
-	if ctx["found_group"] == true:
-		var t
-		if "tilemap" in ctx and ctx["tilemap"]:
-			t = ctx["tilemap"]
+func add_tile_at_coord(ctx):
+	if ctx.group:
+		var t = ctx.group.tilemap
 		if t and is_instance_valid(t):
-			t.set_cell(coord.x, coord.y, 0)
+			t.set_cell(ctx.coord.x, ctx.coord.y, 0)
 
 func update_tilemaps():
-	for val in groups:
-		if val["tilemap"]:
-			val["tilemap"].update_bitmask_region()
+	for gp in groups:
+		if gp.tilemap:
+			gp.tilemap.update_bitmask_region()
 
 
 func node_name_from_path(path):
@@ -330,7 +327,7 @@ func gen_tilemaps(img):
 	# but maybe that's long dead
 	init_tilemaps(parent_node)
 	img.lock()
-	call_with_group_context(img, self, "add_tile_at_coord")
+	call_with_coord_context(img, self, "add_tile_at_coord")
 	update_tilemaps()
 
 ######################################################################
@@ -338,11 +335,12 @@ func gen_tilemaps(img):
 
 export(bool) var persist_tilemap setget do_persist_tilemap
 func do_persist_tilemap(_val = null):
-	print("persisting tilemap: ", Time.get_unix_time_from_system())
-	print("bounds: ", bounds())
-	print("inputs: ", inputs())
-	print("groups: ", groups)
-	persist_tilemap_to_disk()
+	if ready:
+		print("persisting tilemap: ", Time.get_unix_time_from_system())
+		print("bounds: ", bounds())
+		print("inputs: ", inputs())
+		print("groups: ", groups)
+		persist_tilemap_to_disk()
 
 export(String) var persist_node_path = "Map"
 export(String) var persist_name = persist_node_path
