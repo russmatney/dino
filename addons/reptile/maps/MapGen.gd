@@ -6,12 +6,27 @@ class_name MapGen
 ######################################################################
 # ready
 
+export(bool) var force_reload
 var ready = false
+
+
+func _init():
+	print("MapGen._init: ", Time.get_time_string_from_system())
 
 func _ready():
 	if Engine.editor_hint:
-		print("in editor, _ready(): ", Time.get_unix_time_from_system())
+		print("in editor, _ready(): ", Time.get_time_string_from_system())
 		ready = true
+		request_ready()
+
+	Util.ensure_connection(self, "script_changed", self, "_on_script_changed")
+
+
+func _on_script_changed():
+	print("--------------------------")
+	print("script changed: ", filename, " at: ", Time.get_time_string_from_system())
+	print("--------------------------")
+
 
 func p_script_vars():
 	for prop in get_property_list():
@@ -25,13 +40,12 @@ func p_script_vars():
 export(bool) var generate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready:
-		print("generating new image: ", Time.get_unix_time_from_system())
+		print("\n[Map--Gen] Image Regen: ", Time.get_time_string_from_system())
 		image_regen()
 
 func do_image_reprocess():
 	if ready:
 		image_reprocess()
-
 
 var the_img
 func image_regen():
@@ -43,7 +57,6 @@ func image_regen():
 
 	do_image_reprocess()
 
-
 func image_reprocess():
 	if the_img:
 		groups = build_groups()
@@ -52,7 +65,7 @@ func image_reprocess():
 			print("Invalid groups config")
 			return
 
-		print("new tilemap: ", Time.get_unix_time_from_system())
+		print("new tilemap: ", Time.get_time_string_from_system())
 		print("bounds: ", bounds())
 		print("inputs: ", inputs())
 		print("groups: ", groups)
@@ -114,12 +127,10 @@ class MapGroup:
 	export(PackedScene) var tilemap_scene
 	var tilemap
 
-	func _init(b, c, ts):
-		._init()
+	func _init(b=null, c=null, ts=null):
 		bound = b
 		color = c
 		tilemap_scene = ts
-		return self
 
 	func _to_string():
 		return "\n[tiles: " + str(tilemap_scene) + "]\t[bound: " + str(bound) + "]\t[color: " + str(color) + "]"
@@ -222,13 +233,11 @@ class CoordCtx:
 	var normed: float
 	var img: Image
 
-	func _init(g, c, n, i):
-		._init()
+	func _init(g=null, c=null, n=null, i=null):
 		group = g
 		coord = c
 		normed = n
 		img = i
-		return self
 
 func to_coord_ctx(coord, img, stats):
 	# this is called per coordinate
@@ -293,6 +302,10 @@ func init_tilemaps(parent_node):
 			parent_node.add_child(t)
 			group.tilemap = t
 
+	print("Tile maps initialized")
+	parent_node.print_tree_pretty()
+
+
 func add_tile_at_coord(ctx):
 	if ctx.group:
 		var t = ctx.group.tilemap
@@ -336,7 +349,7 @@ func gen_tilemaps(img):
 export(bool) var persist_tilemap setget do_persist_tilemap
 func do_persist_tilemap(_val = null):
 	if ready:
-		print("persisting tilemap: ", Time.get_unix_time_from_system())
+		print("persisting tilemap: ", Time.get_time_string_from_system())
 		print("bounds: ", bounds())
 		print("inputs: ", inputs())
 		print("groups: ", groups)
