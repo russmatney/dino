@@ -6,27 +6,12 @@ class_name MapGen
 ######################################################################
 # ready
 
-export(bool) var force_reload
 var ready = false
-
-
-func _init():
-	print("MapGen._init: ", Time.get_time_string_from_system())
 
 func _ready():
 	if Engine.editor_hint:
 		print("in editor, _ready(): ", Time.get_time_string_from_system())
 		ready = true
-		request_ready()
-
-	Util.ensure_connection(self, "script_changed", self, "_on_script_changed")
-
-
-func _on_script_changed():
-	print("--------------------------")
-	print("script changed: ", filename, " at: ", Time.get_time_string_from_system())
-	print("--------------------------")
-
 
 func p_script_vars():
 	for prop in get_property_list():
@@ -40,7 +25,7 @@ func p_script_vars():
 export(bool) var generate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready:
-		print("\n[Map--Gen] Image Regen: ", Time.get_time_string_from_system())
+		print("\n[MapGen] Image Regen: ", Time.get_time_string_from_system())
 		image_regen()
 
 func do_image_reprocess():
@@ -57,6 +42,12 @@ func image_regen():
 
 	do_image_reprocess()
 
+
+func print_data():
+	print("[MapGen] bounds: ", bounds())
+	print("[MapGen] inputs: ", inputs())
+	print("[MapGen] groups: ", groups)
+
 func image_reprocess():
 	if the_img:
 		groups = build_groups()
@@ -66,9 +57,7 @@ func image_reprocess():
 			return
 
 		print("new tilemap: ", Time.get_time_string_from_system())
-		print("bounds: ", bounds())
-		print("inputs: ", inputs())
-		print("groups: ", groups)
+		print_data()
 
 		colorize_image(the_img)
 		gen_tilemaps(the_img)
@@ -203,7 +192,7 @@ func groups_valid():
 		if mg.tilemap_scene:
 			return true
 
-	print("No tilemap_scenes set, no tiles to add.")
+	print("[MapGen] No tilemap_scenes set, no tiles to add.")
 	return false
 
 
@@ -262,7 +251,7 @@ func call_with_coord_context(img, obj, fname):
 func colorize_coord(ctx):
 	if ctx.group:
 		if not ctx.img:
-			print("[WARN] colorize_coord ctx without img")
+			print("[MapGen] [WARN] colorize_coord ctx without img")
 			return
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
@@ -288,7 +277,7 @@ func owner_or_self():
 		return self
 
 func init_tilemaps(parent_node):
-	print("initing tilemaps at parent_node: ", parent_node)
+	print("[MapGen] initing tilemaps at parent_node: ", parent_node)
 	# do we need to return the updated tilemap anywhere?
 	for c in parent_node.get_children():
 		c.queue_free()
@@ -302,7 +291,7 @@ func init_tilemaps(parent_node):
 			parent_node.add_child(t)
 			group.tilemap = t
 
-	print("Tile maps initialized")
+	print("[MapGen] Tile maps initialized")
 	parent_node.print_tree_pretty()
 
 
@@ -349,10 +338,8 @@ func gen_tilemaps(img):
 export(bool) var persist_tilemap setget do_persist_tilemap
 func do_persist_tilemap(_val = null):
 	if ready:
-		print("persisting tilemap: ", Time.get_time_string_from_system())
-		print("bounds: ", bounds())
-		print("inputs: ", inputs())
-		print("groups: ", groups)
+		print("[MapGen] persisting tilemap: ", Time.get_time_string_from_system())
+		print_data()
 		persist_tilemap_to_disk()
 
 export(String) var persist_node_path = "Map"
@@ -370,7 +357,7 @@ func persist_tilemap_to_disk():
 		push_error(str("No node found for node_path: ", persist_node_path))
 
 	if not node.get_children():
-		print(persist_node_path + " has no children, skipping persist")
+		print("[MapGen] " + persist_node_path + " has no children, skipping persist")
 		return
 
 	for c in node.get_children():
@@ -390,5 +377,4 @@ func persist_tilemap_to_disk():
 			push_error("Error while saving Map")
 			print("E: ", error)
 		else:
-			print("Successfully saved new map: ", path)
-
+			print("[MapGen] Successfully saved new map: ", path)
