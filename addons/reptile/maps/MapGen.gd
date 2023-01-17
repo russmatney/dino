@@ -1,6 +1,7 @@
 # MapGen
 tool
 extends Node2D
+class_name MapGen
 
 ######################################################################
 # ready
@@ -12,31 +13,45 @@ func _ready():
 		print("in editor, _ready(): ", Time.get_unix_time_from_system())
 		ready = true
 
+func p_script_vars():
+	for prop in get_property_list():
+		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
+			print("\t", prop["name"], ": ", self.get(prop["name"]))
+
 ######################################################################
 # triggers and inputs
 
-var the_img
-
+# these behind 'ready' guards to avoid errors in the editor (upon opening)
 export(bool) var generate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready:
 		print("generating new image: ", Time.get_unix_time_from_system())
-
-		groups = build_groups()
-		the_img = ReptileMap.generate_image(inputs())
-		var raw_image = get_node_or_null("RawImage")
-		if raw_image:
-			raw_image.texture = ReptileMap.img_to_texture(the_img)
-
-		do_image_reprocess()
+		image_regen()
 
 func do_image_reprocess():
-	if ready and the_img:
+	if ready:
+		image_reprocess()
+
+
+var the_img
+func image_regen():
+	groups = build_groups()
+	the_img = ReptileMap.generate_image(inputs())
+	var raw_image = get_node_or_null("RawImage")
+	if raw_image:
+		raw_image.texture = ReptileMap.img_to_texture(the_img)
+
+	do_image_reprocess()
+
+
+func image_reprocess():
+	if the_img:
+		groups = build_groups()
+
 		if not groups_valid():
 			print("Invalid groups config")
 			return
 
-		groups = build_groups()
 		print("new tilemap: ", Time.get_unix_time_from_system())
 		print("bounds: ", bounds())
 		print("inputs: ", inputs())
