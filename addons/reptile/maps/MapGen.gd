@@ -179,9 +179,9 @@ func bounds():
 		bds.append(gp.get("bound"))
 	return bds
 
+# return a group for the normed value, if one can be found.
+# this may not be comprehensive, if we want to leave some empty tiles
 func group_for_normed_val(normed):
-	var group_name
-
 	groups.sort_custom(GroupsSort, "sort_by_key")
 	for g in groups:
 		if not "bound" in g:
@@ -191,8 +191,6 @@ func group_for_normed_val(normed):
 		if normed < g["bound"]:
 			# we fit here
 			return g
-	# this should be comprehensive ^
-	print("[WARN] No group found for normed val: ", normed, " ", groups)
 
 func groups_valid():
 	# TODO add validation for bounds
@@ -209,6 +207,8 @@ func to_ctx(coord, img, stats):
 	# avoid expensive ops in here, things should be passed in
 	var normed = ReptileMap.normalized_val(stats, img.get_pixel(coord.x, coord.y).r)
 	var group = group_for_normed_val(normed)
+	if not group:
+		return
 	var dupe = group.duplicate()
 	dupe.merge({
 		"x": coord.x,
@@ -226,16 +226,22 @@ func call_with_group_context(img, obj, fname):
 
 	for coord in ReptileMap.all_coords(img):
 		var ctx = to_ctx(coord, img, stats)
+		if not ctx:
+			ctx = {"found_group": false}
+		else:
+			ctx["found_group"] = true
+
 		obj.call(fname, coord, ctx)
 
 ######################################################################
 # colorize_image
 
 func colorize_coord(coord, ctx):
-	if not "img" in ctx:
-		print("[WARN] colorize_coord ctx without img")
-		return
-	ctx["img"].set_pixel(coord.x, coord.y, ctx["color"])
+	if ctx["found_group"] == true:
+		if not "img" in ctx:
+			print("[WARN] colorize_coord ctx without img")
+			return
+		ctx["img"].set_pixel(coord.x, coord.y, ctx["color"])
 
 func colorize_image(img):
 	# copy this image b/c we're about to mutate it
@@ -250,7 +256,13 @@ func colorize_image(img):
 # generate tilemap
 
 export(int) var target_cell_size = 64
-export(String) var gen_node_path = "Map"
+export(NodePath) var gen_node_path = "Map"
+
+func owner_or_self():
+	if owner:
+		return owner
+	else:
+		return self
 
 func init_tilemaps(parent_node):
 	print("initing tilemaps at parent_node: ", parent_node)
@@ -263,16 +275,17 @@ func init_tilemaps(parent_node):
 			var t = group["tilemap_scene"].instance()
 			var scale_by = target_cell_size / t.cell_size.x
 			t.scale = Vector2(scale_by, scale_by)
-			t.connect("tree_entered", t, "set_owner", [self])
+			t.connect("tree_entered", t, "set_owner", [owner_or_self()])
 			parent_node.add_child(t)
 			group["tilemap"] = t
 
 func add_tile_at_coord(coord, ctx):
-	var t
-	if "tilemap" in ctx and ctx["tilemap"]:
-		t = ctx["tilemap"]
-	if t and is_instance_valid(t):
-		t.set_cell(coord.x, coord.y, 0)
+	if ctx["found_group"] == true:
+		var t
+		if "tilemap" in ctx and ctx["tilemap"]:
+			t = ctx["tilemap"]
+		if t and is_instance_valid(t):
+			t.set_cell(coord.x, coord.y, 0)
 
 func update_tilemaps():
 	for val in groups:
@@ -280,16 +293,27 @@ func update_tilemaps():
 			val["tilemap"].update_bitmask_region()
 
 
+func node_name_from_path(path):
+	var parts = path.split("/")
+	return parts[-1]
+
 # maybe we want this per-group instead of that being baked in?
 # as impled it runs once for every x/y
 func gen_tilemaps(img):
-	if not get_node(gen_node_path) and get_node(gen_node_path):
-		print("No node at " + gen_node_path)
-		return
+	var parent_node = get_node_or_null(gen_node_path)
+	if not parent_node:
+		parent_node = Node2D.new()
+		parent_node.name = node_name_from_path(gen_node_path)
+
+		# support adding to this node or a parent if one exists
+		# TODO support following the gen_node_path "../SomeOtherNode/MyNode"?
+		var o = owner_or_self()
+		o.add_child(parent_node)
+		parent_node.set_owner(o)
 
 	# feeling like i should pass groups into these rather than rely on this node's state
 	# but maybe that's long dead
-	init_tilemaps(get_node(gen_node_path))
+	init_tilemaps(parent_node)
 	img.lock()
 	call_with_group_context(img, self, "add_tile_at_coord")
 	update_tilemaps()
