@@ -3,8 +3,25 @@ tool
 extends Node2D
 class_name MapGen
 
-func prn(msg):
-	print(str("[MapGen] ", msg))
+func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
+	var s = "[MapGen] "
+	if msg5:
+		print(str(s, msg, msg2, msg3, msg4, msg5))
+	elif msg4:
+		print(str(s, msg, msg2, msg3, msg4))
+	elif msg3:
+		print(str(s, msg, msg2, msg3))
+	elif msg2:
+		print(str(s, msg, msg2))
+	elif msg:
+		print(str(s, msg))
+
+func print_data():
+	prn(str("Inputs: ", inputs()))
+	prn(str("Groups: ", groups))
+	prn(str("Bounds: ", bounds()))
+	prn(str("Image size: ", img_size))
+	prn(str("Gen Node: ", gen_node_path, " ", gen_node_position))
 
 ######################################################################
 # ready
@@ -13,13 +30,28 @@ var ready = false
 
 func _ready():
 	if Engine.editor_hint:
-		prn(str("in editor, _ready(): ", Time.get_time_string_from_system()))
+		prn(str("ready: ", Time.get_time_string_from_system()))
 		ready = true
 
 func p_script_vars():
 	for prop in get_property_list():
 		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
 			print("\t", prop["name"], ": ", self.get(prop["name"]))
+
+func _init(inputs={}, groups=[]):
+	prn("init map gen")
+	for k in inputs.keys():
+		prn("setting k ", k, " and v ", inputs[k])
+		match(k):
+			"seed": self["n_seed"] = inputs[k]
+			_: self[k] = inputs[k]
+
+	if groups:
+		group_list = groups
+
+	if inputs:
+		prn("inputs: ", inputs)
+		prn("group_list: ", group_list)
 
 ######################################################################
 # triggers and inputs
@@ -30,41 +62,30 @@ func do_image_regen(_val = null):
 	if ready:
 		print("-------------------")
 		prn(str("Image Regen: ", Time.get_time_string_from_system()))
-		image_regen()
+		regenerate_image()
 
-func do_image_reprocess():
-	if ready:
-		image_reprocess()
-
-var the_img
-func image_regen():
+func regenerate_image(img=null):
 	groups = build_groups()
-	the_img = ReptileMap.generate_image(inputs())
+	if not img:
+		img = ReptileMap.generate_image(inputs())
 	var raw_image = get_node_or_null("RawImage")
 	if raw_image:
-		raw_image.texture = ReptileMap.img_to_texture(the_img)
+		raw_image.texture = ReptileMap.img_to_texture(img)
 
-	do_image_reprocess()
+	image_reprocess(img)
 
+func image_reprocess(img):
+	groups = build_groups()
 
-func print_data():
-	prn(str("Inputs: ", inputs()))
-	prn(str("Groups: ", groups))
-	prn(str("Bounds: ", bounds()))
+	if not groups_valid():
+		prn("Invalid groups config")
+		return
 
-func image_reprocess():
-	if the_img:
-		groups = build_groups()
+	prn(str("New Tilemap: ", Time.get_time_string_from_system()))
+	print_data()
 
-		if not groups_valid():
-			prn("Invalid groups config")
-			return
-
-		prn(str("New Tilemap: ", Time.get_time_string_from_system()))
-		print_data()
-
-		colorize_image(the_img)
-		gen_tilemaps(the_img)
+	colorize_image(img)
+	gen_tilemaps(img)
 
 
 export(NodePath) var gen_node_path = "Map"
@@ -159,22 +180,22 @@ export(Array) var group_list = []
 export(float) var boundA = 0.3 setget set_boundA
 func set_boundA(v):
 	boundA = v
-	do_image_reprocess()
+	do_image_regen()
 
 export(float) var boundB = 0.55 setget set_boundB
 func set_boundB(v):
 	boundB = v
-	do_image_reprocess()
+	do_image_regen()
 
 export(float) var boundC = 0.8 setget set_boundC
 func set_boundC(v):
 	boundC = v
-	do_image_reprocess()
+	do_image_regen()
 
 export(float) var boundD = 1.0 setget set_boundD
 func set_boundD(v):
 	boundD = v
-	do_image_reprocess()
+	do_image_regen()
 
 # colors
 
@@ -272,18 +293,19 @@ func colorize_coord(ctx):
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
 func colorize_image(img):
-	# copy this image b/c we're about to mutate it
-	var n = Image.new()
-	n.copy_from(img)
-	n.convert(Image.FORMAT_RGBA8)
-	n.lock()
-	call_with_coord_context(n, self, "colorize_coord")
-	$ColorizedImage.texture = ReptileMap.img_to_texture(n)
+	if get_node_or_null("ColorizedImage"):
+		# copy this image b/c we're about to mutate it
+		var n = Image.new()
+		n.copy_from(img)
+		n.convert(Image.FORMAT_RGBA8)
+		n.lock()
+		call_with_coord_context(n, self, "colorize_coord")
+		$ColorizedImage.texture = ReptileMap.img_to_texture(n)
 
 ######################################################################
 # generate tilemap
 
-export(int) var target_cell_size = 64
+export(int) var cell_size = 64
 
 func owner_or_self():
 	if owner:
@@ -300,7 +322,7 @@ func init_tilemaps(parent_node):
 	for group in groups:
 		if group.tilemap_scene:
 			var t = group.tilemap_scene.instance()
-			var scale_by = target_cell_size / t.cell_size.x
+			var scale_by = cell_size / t.cell_size.x
 			t.scale = Vector2(scale_by, scale_by)
 			t.connect("tree_entered", t, "set_owner", [owner_or_self()])
 			parent_node.add_child(t)
@@ -326,6 +348,8 @@ func node_name_from_path(path):
 	var parts = path.split("/")
 	return parts[-1]
 
+var gen_node_position = Vector2.ZERO
+
 # maybe we want this per-group instead of that being baked in?
 # as impled it runs once for every x/y
 func gen_tilemaps(img):
@@ -339,6 +363,9 @@ func gen_tilemaps(img):
 		var o = owner_or_self()
 		o.add_child(parent_node)
 		parent_node.set_owner(o)
+
+	prn(str("setting parent global position: ", gen_node_position))
+	parent_node.global_position = gen_node_position
 
 	# feeling like i should pass groups into these rather than rely on this node's state
 	# but maybe that's long dead
