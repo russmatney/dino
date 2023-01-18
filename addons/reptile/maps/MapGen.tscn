@@ -11,8 +11,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
-gen_node_path = "Map"
-n_seed = 3
+room_node_path = "Map"
+n_seed = 2
 octaves = 6
 period = 30.0
 persistence = 0.4

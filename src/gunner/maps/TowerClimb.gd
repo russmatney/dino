@@ -12,10 +12,7 @@ var coldfire_red = Color8(209, 124, 124)
 var coldfire_yellow = Color8(246, 198, 168)
 
 var offset_x = 0
-var ready = false
-
-func _ready():
-	ready = true
+var offset_y = 0
 
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	var s = "[TowerClimb] "
@@ -31,40 +28,19 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 		print(str(s, msg))
 
 ######################################################################
-# room data
+# ready
 
-func default_inputs():
-	# ensures some defaults
-	return {
-		"seed": 1001,
-		"octaves": 4,
-		"period": 20,
-		"persistence": 0.6,
-		"lacunarity": 3.0,
-		"img_size": 20,
-		}
+var ready = false
 
-func build_room_data():
-	var img_size = 50
-	var cell_size = 64
+func _ready():
+	ready = true
 
-	var room_data = {}
+######################################################################
+# inputs
 
-	# merge does not overwrite values for existing keys
-	room_data.merge({
-		"img_size": img_size,
-		"cell_size": cell_size,
-		})
-	room_data.merge(default_inputs())
-
-	var groups = [
-		MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
-		MapGroup.new(coldfire_blue, blue_tile_scene, 0.4, 0.7),
-		]
-
-	room_data.merge({"groups": groups})
-	return room_data
-
+export(String) var room_name = "Room"
+export(int) var img_size = 30
+export(int) var seed_override
 
 ######################################################################
 # triggers
@@ -77,37 +53,41 @@ func do_clear(_v):
 
 		offset_x = 0
 
-export(bool) var add_map setget do_add_map
-func do_add_map(_v):
+export(bool) var add_room setget do_add_room
+func do_add_room(_v):
 	if ready:
-		gen_new_map()
-
+		gen_new_room()
 
 ######################################################################
 # gen new map
 
-export(String) var room_name = "Room"
-
-# var map_gen_scene = preload("res://addons/reptile/maps/MapGen.tscn")
-
-func gen_new_map():
+func gen_new_room():
 	print("-----------------------")
-	prn(str("Adding map ", Time.get_unix_time_from_system()))
 
 	var next_position = Vector2(offset_x, 0)
-	prn(str("next position: ", next_position))
+	prn("Creating room ", room_name, " ", next_position)
 
-	var room_data = build_room_data()
-	room_data["gen_node_position"] = next_position
-	# var mg = map_gen_scene.instance()
-	var mg = MapGen.new()
-	mg.init_room_data(room_data)
+	var room = MapRoom.new()
+	room.set_room_name(room_name)
+	room.set_data({
+		"seed": Util._or(seed_override, 1001),
+		"octaves": 4,
+		"period": 30,
+		"persistence": 0.4,
+		"lacunarity": 2.0,
+		"img_size": img_size,
+		"position_offset": next_position,
+		})
 
-	mg.name = "MapGen" + room_name
-	mg.gen_node_path = room_name
-	add_child(mg)
-	mg.set_owner(self)
+	room.groups = [
+		MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
+		MapGroup.new(coldfire_blue, blue_tile_scene, 0.4, 0.7),
+		]
 
-	mg.regenerate_image()
+	add_child(room)
+	room.set_owner(self)
 
-	offset_x += mg.cell_size * mg.img_size
+	room.regen_tilemaps()
+
+	offset_x += room.cell_size * room.img_size
+	offset_y += room.cell_size * room.img_size
