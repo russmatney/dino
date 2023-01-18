@@ -38,20 +38,20 @@ func p_script_vars():
 		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
 			print("\t", prop["name"], ": ", self.get(prop["name"]))
 
-func _init(inputs={}, groups=[]):
-	prn("init map gen")
-	for k in inputs.keys():
-		prn("setting k ", k, " and v ", inputs[k])
+var room_data
+func init_room_data(room_data={}):
+	# Not great, but avoids regen-ing the image whenever this runs
+	var old_ready = ready
+	ready = false
+	call_deferred("set", "ready", old_ready)
+
+	room_data = room_data
+	prn("setting room data: ", room_data)
+	for k in room_data.keys():
 		match(k):
-			"seed": self["n_seed"] = inputs[k]
-			_: self[k] = inputs[k]
-
-	if groups:
-		group_list = groups
-
-	if inputs:
-		prn("inputs: ", inputs)
-		prn("group_list: ", group_list)
+			"seed": self["n_seed"] = room_data[k]
+			"groups": self["group_list"] = room_data[k]
+			_: self[k] = room_data[k]
 
 ######################################################################
 # triggers and inputs
@@ -64,15 +64,39 @@ func do_image_regen(_val = null):
 		prn(str("Image Regen: ", Time.get_time_string_from_system()))
 		regenerate_image()
 
+func width():
+	return cell_size * img_size
+
+func height():
+	return cell_size * img_size
+
+func ensure_image_node(name, i=0, img=null):
+	var texture_rect = get_node_or_null(name)
+	if not texture_rect:
+
+		texture_rect = TextureRect.new()
+		add_child(texture_rect)
+		texture_rect.set_owner(owner_or_self())
+		texture_rect.name = name
+
+	texture_rect.rect_size = Vector2(width()/2, height()/2)
+	texture_rect.rect_position = Vector2(-width()/2, height()*i/2)
+	texture_rect.expand = true
+
+	if img:
+		texture_rect.texture = ReptileMap.img_to_texture(img)
+
 func regenerate_image(img=null):
 	groups = build_groups()
 	if not img:
 		img = ReptileMap.generate_image(inputs())
-	var raw_image = get_node_or_null("RawImage")
-	if raw_image:
-		raw_image.texture = ReptileMap.img_to_texture(img)
+
+	if include_images:
+		ensure_image_node("RawImage", 0, img)
 
 	image_reprocess(img)
+
+export(bool) var include_images = true
 
 func image_reprocess(img):
 	groups = build_groups()
@@ -84,7 +108,8 @@ func image_reprocess(img):
 	prn(str("New Tilemap: ", Time.get_time_string_from_system()))
 	print_data()
 
-	colorize_image(img)
+	if include_images:
+		colorize_image(img)
 	gen_tilemaps(img)
 
 
@@ -97,6 +122,11 @@ func do_clear_node(_v):
 		var node = get_node_or_null(gen_node_path)
 		if node:
 			node.queue_free()
+
+		prn(str("Clearing all children: ", gen_node_path))
+		for c in get_children():
+			c.queue_free()
+
 
 ######################################################################
 # image gen setters
@@ -143,35 +173,6 @@ func inputs():
 
 ######################################################################
 # groups
-
-class MapGroup:
-	extends Object
-
-	export(int) var upper_bound
-	export(int) var lower_bound
-	export(Color) var color
-	export(PackedScene) var tilemap_scene
-	var tilemap
-
-	func _init(c=null, ts=null, lb=null, ub=null):
-		upper_bound = ub
-		lower_bound = lb
-		color = c
-		tilemap_scene = ts
-
-	func _to_string():
-		return "\n[tiles: " + str(tilemap_scene) + "]\t[bounds: " + str(upper_bound) + ", " + str(lower_bound) + "]\t[color: " + str(color) + "]"
-
-	# TODO consider selecting a group based on all group bounds per coord instead
-	# TODO unit tests
-	static func sort_by_key(a, b):
-		if not a.upper_bound or a.lower_bound:
-			return false
-		if a.upper_bound <= Util._or(b.upper_bound, 1.1):
-			return true
-		if a.lower_bound >= Util._or(b.lower_bound, -0.1):
-			return true
-		return false
 
 export(Array) var group_list = []
 
@@ -253,18 +254,6 @@ func group_for_normed_val(normed):
 		if normed <= g.upper_bound and normed >= g.lower_bound:
 			return g
 
-class CoordCtx:
-	var group: MapGroup
-	var coord: Vector2
-	var normed: float
-	var img: Image
-
-	func _init(g=null, c=null, n=null, i=null):
-		group = g
-		coord = c
-		normed = n
-		img = i
-
 func to_coord_ctx(coord, img, stats):
 	# this is called per coordinate
 	# avoid expensive ops in here, things should be passed in
@@ -293,14 +282,13 @@ func colorize_coord(ctx):
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
 func colorize_image(img):
-	if get_node_or_null("ColorizedImage"):
-		# copy this image b/c we're about to mutate it
-		var n = Image.new()
-		n.copy_from(img)
-		n.convert(Image.FORMAT_RGBA8)
-		n.lock()
-		call_with_coord_context(n, self, "colorize_coord")
-		$ColorizedImage.texture = ReptileMap.img_to_texture(n)
+	# copy this image b/c we're about to mutate it
+	var n = Image.new()
+	n.copy_from(img)
+	n.convert(Image.FORMAT_RGBA8)
+	n.lock()
+	call_with_coord_context(n, self, "colorize_coord")
+	ensure_image_node("ColorizedImage", 1, n)
 
 ######################################################################
 # generate tilemap

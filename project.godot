@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Object",
+"class": "CoordCtx",
+"language": "GDScript",
+"path": "res://addons/reptile/maps/CoordCtx.gd"
+}, {
 "base": "Control",
 "class": "Credits",
 "language": "GDScript",
@@ -349,6 +354,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/reptile/maps/MapGen.gd"
 }, {
+"base": "Object",
+"class": "MapGroup",
+"language": "GDScript",
+"path": "res://addons/reptile/maps/MapGroup.gd"
+}, {
 "base": "VBoxContainer",
 "class": "NaviButtonList",
 "language": "GDScript",
@@ -405,6 +415,7 @@ _global_script_classes=[ {
 "path": "res://addons/trolley/TrolleyActionsList.gd"
 } ]
 _global_script_class_icons={
+"CoordCtx": "",
 "Credits": "",
 "GutHookScript": "",
 "GutTest": "",
@@ -473,6 +484,7 @@ _global_script_class_icons={
 "InkVoid": "",
 "Machine": "",
 "MapGen": "",
+"MapGroup": "",
 "NaviButtonList": "",
 "NaviPauseMenu": "",
 "Player": "",
