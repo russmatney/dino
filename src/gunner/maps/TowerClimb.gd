@@ -31,20 +31,40 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 		print(str(s, msg))
 
 ######################################################################
-# inputs
+# room data
 
-func inputs(opts={}):
+func default_inputs():
 	# ensures some defaults
-	# merge does not overwrite values for existing keys
-	opts.merge({
+	return {
 		"seed": 1001,
 		"octaves": 4,
 		"period": 20,
 		"persistence": 0.6,
 		"lacunarity": 3.0,
 		"img_size": 20,
+		}
+
+func build_room_data():
+	var img_size = 50
+	var cell_size = 64
+
+	var room_data = {}
+
+	# merge does not overwrite values for existing keys
+	room_data.merge({
+		"img_size": img_size,
+		"cell_size": cell_size,
 		})
-	return opts
+	room_data.merge(default_inputs())
+
+	var groups = [
+		MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
+		MapGroup.new(coldfire_blue, blue_tile_scene, 0.4, 0.7),
+		]
+
+	room_data.merge({"groups": groups})
+	return room_data
+
 
 ######################################################################
 # triggers
@@ -63,33 +83,24 @@ func do_add_map(_v):
 ######################################################################
 # gen new map
 
+var map_gen_scene = preload("res://addons/reptile/maps/MapGen.tscn")
 func gen_new_map():
 	print("-----------------------")
-	prn(str("Adding map", Time.get_unix_time_from_system()))
+	prn(str("Adding map ", Time.get_unix_time_from_system()))
 
 	var next_position = Vector2(offset_x, 0)
 	prn(str("next position: ", next_position))
 
-	var img_size = 50
-	var cell_size = 64
+	var room_data = build_room_data()
+	room_data["gen_node_position"] = next_position
+	var mg = map_gen_scene.instance()
+	mg.init_room_data(room_data)
 
-	var inps = inputs({
-		"img_size": img_size,
-		"cell_size": cell_size,
-		"gen_node_position": next_position,
-		})
-	var groups = [
-		MapGen.MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
-		MapGen.MapGroup.new(coldfire_blue, blue_tile_scene, 0.4, 0.7),
-		]
-
-	var mg = MapGen.new(inps, groups)
-
-	# Add to scene
+	# TODO get name from ui
 	mg.name = "MapGenTowerStart"
 	add_child(mg)
 	mg.set_owner(self)
 
 	mg.regenerate_image()
 
-	offset_x += cell_size * img_size
+	offset_x += mg.cell_size * mg.img_size
