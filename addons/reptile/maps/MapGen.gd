@@ -54,26 +54,11 @@ func init_room_data(room_data={}):
 			_: self[k] = room_data[k]
 
 ######################################################################
-# triggers and inputs
-
-# these behind 'ready' guards to avoid errors in the editor (upon opening)
-export(bool) var generate_image setget do_image_regen
-func do_image_regen(_val = null):
-	if ready:
-		print("-------------------")
-		prn(str("Image Regen: ", Time.get_time_string_from_system()))
-		regenerate_image()
-
-func width():
-	return cell_size * img_size
-
-func height():
-	return cell_size * img_size
+# helpers
 
 func ensure_image_node(name, i=0, img=null):
 	var texture_rect = get_node_or_null(name)
 	if not texture_rect:
-
 		texture_rect = TextureRect.new()
 		add_child(texture_rect)
 		texture_rect.set_owner(owner_or_self())
@@ -86,44 +71,54 @@ func ensure_image_node(name, i=0, img=null):
 	if img:
 		texture_rect.texture = ReptileMap.img_to_texture(img)
 
-func regenerate_image(img=null):
-	groups = build_groups()
-	if not img:
-		img = ReptileMap.generate_image(inputs())
+func width():
+	return cell_size * img_size
 
-	if include_images:
-		ensure_image_node("RawImage", 0, img)
+func height():
+	return cell_size * img_size
 
-	image_reprocess(img)
+######################################################################
+# triggers
+
+export(bool) var ready_override = false
+
+# these behind 'ready' guards to avoid errors in the editor (upon opening)
+export(bool) var generate_image setget do_image_regen
+func do_image_regen(_val = null):
+	if ready or ready_override:
+		print("-------------------")
+		prn(str("New Tilemap: ", Time.get_time_string_from_system()))
+		print_data()
+		regenerate_image()
 
 export(bool) var include_images = true
 
-func image_reprocess(img):
+func regenerate_image(img=null):
 	groups = build_groups()
 
 	if not groups_valid():
 		prn("Invalid groups config")
 		return
 
-	prn(str("New Tilemap: ", Time.get_time_string_from_system()))
-	print_data()
+	if not img:
+		img = ReptileMap.generate_image(inputs())
 
 	if include_images:
+		ensure_image_node("RawImage", 0, img)
 		colorize_image(img)
-	gen_tilemaps(img)
 
+	gen_tilemaps(img)
 
 export(NodePath) var gen_node_path = "Map"
 
-export(bool) var clear_node setget do_clear_node
-func do_clear_node(_v):
+export(bool) var clear setget do_clear
+func do_clear(_v):
 	if ready:
-		prn(str("Clearing node: ", gen_node_path))
+		prn("Clear")
 		var node = get_node_or_null(gen_node_path)
 		if node:
 			node.queue_free()
 
-		prn(str("Clearing all children: ", gen_node_path))
 		for c in get_children():
 			c.queue_free()
 
@@ -341,8 +336,10 @@ var gen_node_position = Vector2.ZERO
 # maybe we want this per-group instead of that being baked in?
 # as impled it runs once for every x/y
 func gen_tilemaps(img):
-	var parent_node = get_node_or_null(gen_node_path)
+	var parent_node = owner_or_self().get_node_or_null(gen_node_path)
 	if not parent_node:
+		prn("still No parent_node: ", gen_node_path)
+
 		parent_node = Node2D.new()
 		parent_node.name = node_name_from_path(gen_node_path)
 

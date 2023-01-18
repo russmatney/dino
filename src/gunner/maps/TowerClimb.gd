@@ -6,10 +6,10 @@ var blue_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireBl
 var red_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireRed.tscn")
 var yellow_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireYellow.tscn")
 
-var coldfire_dark = Color(70, 66, 94)
-var coldfire_blue = Color(91, 118, 141)
-var coldfire_red = Color(209, 124, 124)
-var coldfire_yellow = Color(246, 198, 168)
+var coldfire_dark = Color8(70, 66, 94)
+var coldfire_blue = Color8(91, 118, 141)
+var coldfire_red = Color8(209, 124, 124)
+var coldfire_yellow = Color8(246, 198, 168)
 
 var offset_x = 0
 var ready = false
@@ -75,15 +75,21 @@ func do_clear(_v):
 		for c in get_children():
 			c.queue_free()
 
+		offset_x = 0
+
 export(bool) var add_map setget do_add_map
 func do_add_map(_v):
 	if ready:
 		gen_new_map()
 
+
 ######################################################################
 # gen new map
 
-var map_gen_scene = preload("res://addons/reptile/maps/MapGen.tscn")
+export(String) var room_name = "Room"
+
+# var map_gen_scene = preload("res://addons/reptile/maps/MapGen.tscn")
+
 func gen_new_map():
 	print("-----------------------")
 	prn(str("Adding map ", Time.get_unix_time_from_system()))
@@ -93,11 +99,12 @@ func gen_new_map():
 
 	var room_data = build_room_data()
 	room_data["gen_node_position"] = next_position
-	var mg = map_gen_scene.instance()
+	# var mg = map_gen_scene.instance()
+	var mg = MapGen.new()
 	mg.init_room_data(room_data)
 
-	# TODO get name from ui
-	mg.name = "MapGenTowerStart"
+	mg.name = "MapGen" + room_name
+	mg.gen_node_path = room_name
 	add_child(mg)
 	mg.set_owner(self)
 
