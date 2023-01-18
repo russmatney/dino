@@ -13,6 +13,9 @@ func _ready():
 		print("in editor, _ready(): ", Time.get_time_string_from_system())
 		ready = true
 
+func prn(msg):
+	print(str("[MapGen] ", msg))
+
 func p_script_vars():
 	for prop in get_property_list():
 		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
@@ -25,7 +28,8 @@ func p_script_vars():
 export(bool) var generate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready:
-		print("\n[MapGen] Image Regen: ", Time.get_time_string_from_system())
+		print("-------------------")
+		prn(str("Image Regen: ", Time.get_time_string_from_system()))
 		image_regen()
 
 func do_image_reprocess():
@@ -44,9 +48,9 @@ func image_regen():
 
 
 func print_data():
-	print("[MapGen] bounds: ", bounds())
-	print("[MapGen] inputs: ", inputs())
-	print("[MapGen] groups: ", groups)
+	prn(str("bounds: ", bounds()))
+	prn(str("inputs: ", inputs()))
+	prn(str("groups: ", groups))
 
 func image_reprocess():
 	if the_img:
@@ -56,11 +60,22 @@ func image_reprocess():
 			print("Invalid groups config")
 			return
 
-		print("new tilemap: ", Time.get_time_string_from_system())
+		prn(str("new tilemap: ", Time.get_time_string_from_system()))
 		print_data()
 
 		colorize_image(the_img)
 		gen_tilemaps(the_img)
+
+
+export(NodePath) var gen_node_path = "Map"
+
+export(bool) var clear_node setget do_clear_node
+func do_clear_node(_v):
+	if ready:
+		prn(str("Clearing node: ", gen_node_path))
+		var node = get_node_or_null(gen_node_path)
+		if node:
+			node.queue_free()
 
 ######################################################################
 # image gen setters
@@ -268,7 +283,6 @@ func colorize_image(img):
 # generate tilemap
 
 export(int) var target_cell_size = 64
-export(NodePath) var gen_node_path = "Map"
 
 func owner_or_self():
 	if owner:
