@@ -3,6 +3,9 @@ tool
 extends Node2D
 class_name MapGen
 
+func prn(msg):
+	print(str("[MapGen] ", msg))
+
 ######################################################################
 # ready
 
@@ -10,11 +13,8 @@ var ready = false
 
 func _ready():
 	if Engine.editor_hint:
-		print("in editor, _ready(): ", Time.get_time_string_from_system())
+		prn(str("in editor, _ready(): ", Time.get_time_string_from_system()))
 		ready = true
-
-func prn(msg):
-	print(str("[MapGen] ", msg))
 
 func p_script_vars():
 	for prop in get_property_list():
@@ -48,19 +48,19 @@ func image_regen():
 
 
 func print_data():
-	prn(str("bounds: ", bounds()))
-	prn(str("inputs: ", inputs()))
-	prn(str("groups: ", groups))
+	prn(str("Inputs: ", inputs()))
+	prn(str("Groups: ", groups))
+	prn(str("Bounds: ", bounds()))
 
 func image_reprocess():
 	if the_img:
 		groups = build_groups()
 
 		if not groups_valid():
-			print("Invalid groups config")
+			prn("Invalid groups config")
 			return
 
-		prn(str("new tilemap: ", Time.get_time_string_from_system()))
+		prn(str("New Tilemap: ", Time.get_time_string_from_system()))
 		print_data()
 
 		colorize_image(the_img)
@@ -126,31 +126,33 @@ func inputs():
 class MapGroup:
 	extends Object
 
-	export(int) var bound
+	export(int) var upper_bound
+	export(int) var lower_bound
 	export(Color) var color
 	export(PackedScene) var tilemap_scene
 	var tilemap
 
-	func _init(b=null, c=null, ts=null):
-		bound = b
+	func _init(c=null, ts=null, lb=null, ub=null):
+		upper_bound = ub
+		lower_bound = lb
 		color = c
 		tilemap_scene = ts
 
 	func _to_string():
-		return "\n[tiles: " + str(tilemap_scene) + "]\t[bound: " + str(bound) + "]\t[color: " + str(color) + "]"
+		return "\n[tiles: " + str(tilemap_scene) + "]\t[bounds: " + str(upper_bound) + ", " + str(lower_bound) + "]\t[color: " + str(color) + "]"
 
+	# TODO consider selecting a group based on all group bounds per coord instead
+	# TODO unit tests
 	static func sort_by_key(a, b):
-		if not a.bound:
+		if not a.upper_bound or a.lower_bound:
 			return false
-		if a.bound <= Util._or(b.bound, 1.1):
+		if a.upper_bound <= Util._or(b.upper_bound, 1.1):
+			return true
+		if a.lower_bound >= Util._or(b.lower_bound, -0.1):
 			return true
 		return false
 
-
-# TODO type hint for editor arbitrary groups in the editor in 4.0 (or if it gets backported)
-# https://github.com/godotengine/godot-proposals/issues/18
 export(Array) var group_list = []
-
 
 # bound inputs/triggers
 
@@ -195,10 +197,10 @@ func build_groups():
 		return group_list
 
 	return [
-		MapGroup.new(boundA, colorA, tilemapA_scene),
-		MapGroup.new(boundB, colorB, tilemapB_scene),
-		MapGroup.new(boundC, colorC, tilemapC_scene),
-		MapGroup.new(boundD, colorD, tilemapD_scene),
+		MapGroup.new(colorA, tilemapA_scene, 0.0, boundA),
+		MapGroup.new(colorB, tilemapB_scene, boundA, boundB),
+		MapGroup.new(colorC, tilemapC_scene, boundB, boundC),
+		MapGroup.new(colorD, tilemapD_scene, boundC, boundD),
 	]
 
 func groups_valid():
@@ -207,15 +209,15 @@ func groups_valid():
 		if mg.tilemap_scene:
 			return true
 
-	print("[MapGen] No tilemap_scenes set, no tiles to add.")
+	prn("No tilemap_scenes set, no tiles to add.")
 	return false
 
-
+# only used to print the bounds
 func bounds():
 	var bds = []
 	groups.sort_custom(MapGroup, "sort_by_key")
 	for mg in groups:
-		bds.append(mg.bound)
+		bds.append([mg.lower_bound, mg.upper_bound])
 	return bds
 
 # return a group for the normed value, if one can be found.
@@ -223,12 +225,11 @@ func bounds():
 func group_for_normed_val(normed):
 	groups.sort_custom(MapGroup, "sort_by_key")
 	for g in groups:
-		if not g.bound:
-			# no bound? we must be past the bounds, let's return
+		if not g.upper_bound and not g.lower_bound:
+			# no bounds? we assume it's this group then
 			return g
 
-		if normed < g.bound:
-			# we fit here
+		if normed <= g.upper_bound and normed >= g.lower_bound:
 			return g
 
 class CoordCtx:
@@ -266,7 +267,7 @@ func call_with_coord_context(img, obj, fname):
 func colorize_coord(ctx):
 	if ctx.group:
 		if not ctx.img:
-			print("[MapGen] [WARN] colorize_coord ctx without img")
+			prn("[WARN] colorize_coord ctx without img")
 			return
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
@@ -291,10 +292,10 @@ func owner_or_self():
 		return self
 
 func init_tilemaps(parent_node):
-	print("[MapGen] initing tilemaps at parent_node: ", parent_node)
-	# do we need to return the updated tilemap anywhere?
+	prn(str("Initializing tilemaps at parent_node: ", parent_node))
+
 	for c in parent_node.get_children():
-		c.queue_free()
+		c.free()
 
 	for group in groups:
 		if group.tilemap_scene:
@@ -305,7 +306,7 @@ func init_tilemaps(parent_node):
 			parent_node.add_child(t)
 			group.tilemap = t
 
-	print("[MapGen] Tile maps initialized")
+	prn("Tile maps initialized")
 	parent_node.print_tree_pretty()
 
 
@@ -352,7 +353,7 @@ func gen_tilemaps(img):
 export(bool) var persist_tilemap setget do_persist_tilemap
 func do_persist_tilemap(_val = null):
 	if ready:
-		print("[MapGen] persisting tilemap: ", Time.get_time_string_from_system())
+		prn(str("persisting tilemap: ", Time.get_time_string_from_system()))
 		print_data()
 		persist_tilemap_to_disk()
 
@@ -371,7 +372,7 @@ func persist_tilemap_to_disk():
 		push_error(str("No node found for node_path: ", persist_node_path))
 
 	if not node.get_children():
-		print("[MapGen] " + persist_node_path + " has no children, skipping persist")
+		prn(str(persist_node_path + " has no children, skipping persist"))
 		return
 
 	for c in node.get_children():
@@ -389,6 +390,6 @@ func persist_tilemap_to_disk():
 		var error = ResourceSaver.save(path, scene)
 		if error != OK:
 			push_error("Error while saving Map")
-			print("E: ", error)
+			prn(str("E: ", error))
 		else:
-			print("[MapGen] Successfully saved new map: ", path)
+			prn(str("Successfully saved new map: ", path))
