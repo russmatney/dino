@@ -354,7 +354,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/reptile/maps/MapGen.gd"
 }, {
-"base": "Object",
+"base": "Node",
 "class": "MapGroup",
 "language": "GDScript",
 "path": "res://addons/reptile/maps/MapGroup.gd"

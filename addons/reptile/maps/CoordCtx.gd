@@ -1,7 +1,8 @@
+tool
 class_name CoordCtx
 extends Object
 
-var group: MapGroup
+var group
 var coord: Vector2
 var normed: float
 var img: Image

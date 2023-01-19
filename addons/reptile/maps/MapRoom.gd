@@ -1,3 +1,4 @@
+tool
 class_name MapRoom
 extends Node2D
 
@@ -37,11 +38,38 @@ func set_data(opts):
 ######################################################################
 # ready
 
+var groups
+
+func _enter_tree():
+	self.add_to_group("map_room")
+
 var ready = false
 func _ready():
 	ready = true
 	if position_offset:
 		global_position += position_offset
+
+	if not groups:
+		find_groups()
+
+
+func find_groups():
+	groups = []
+	for c in get_children():
+		if c.is_in_group("map_group"):
+			groups.append(c)
+
+func set_groups(new_groups):
+	for c in get_children():
+		if c.is_in_group("map_group"):
+			c.free()
+
+	for g in new_groups:
+		g.connect("tree_entered", g, "set_owner", [Util._or(owner, self)])
+		g.name = "Group"
+		add_child(g)
+	groups = new_groups
+
 
 ######################################################################
 # room geo
@@ -110,19 +138,8 @@ func noise_inputs():
 
 export(int) var cell_size = 64
 
-######################################################################
-# groups
-
-var groups
-
-func groups_valid():
-	# TODO add validation for bounds
-	for mg in groups:
-		if mg.tilemap_scene:
-			return true
-
-	prn("No tilemap_scenes set, no tiles to add.")
-	return false
+#####################################################################
+# coords
 
 # return a group for the normed value, if one can be found.
 # this may not be comprehensive, if we want to leave some empty tiles
@@ -132,12 +149,8 @@ func group_for_normed_val(normed):
 		if not g.upper_bound and not g.lower_bound:
 			# no bounds? we assume it's this group then
 			return g
-
-		if normed <= g.upper_bound and normed >= g.lower_bound:
+		if g.contains_val(normed):
 			return g
-
-#####################################################################
-# coords
 
 func to_coord_ctx(coord, img, stats):
 	# this is called per coordinate
@@ -159,7 +172,8 @@ func call_for_each_coord(img, obj, fname):
 
 func init_tilemaps():
 	for c in get_children():
-		c.free()
+		if c is TileMap:
+			c.free()
 
 	for group in groups:
 		if group.tilemap_scene:
@@ -181,11 +195,22 @@ func update_tilemaps():
 		if gp.tilemap:
 			gp.tilemap.update_bitmask_region()
 
+func groups_valid():
+	for g in groups:
+		if g.valid():
+			return true
+	prn("No valid group found")
+	return false
+
 func regen_tilemaps(image=null):
 	if image:
 		img = image
 	if not img:
 		img = ReptileMap.generate_image(noise_inputs())
+
+	if not groups:
+		prn("No groups, re-finding")
+		find_groups()
 
 	if not groups_valid():
 		prn("Invalid groups config")

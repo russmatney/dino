@@ -27,41 +27,50 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 ######################################################################
 # room data
 
-func get_groups():
+func get_group_opt():
 	var options = [
 		[
-			MapGroup.new(coldfire_blue, blue_tile_scene, 0.0, 0.4),
-			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.4, 0.7),
-			MapGroup.new(coldfire_dark, dark_tile_scene, 0.7, 1.0),
+			[coldfire_blue, blue_tile_scene, 0.0, 0.4],
+			[coldfire_yellow, yellow_tile_scene, 0.4, 0.7],
+			[coldfire_dark, dark_tile_scene, 0.7, 1.0],
 			],
 		[
-			MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.3),
-			MapGroup.new(coldfire_blue, blue_tile_scene, 0.3, 0.7),
-			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.7, 1.0),
+			[coldfire_dark, dark_tile_scene, 0.0, 0.3],
+			[coldfire_blue, blue_tile_scene, 0.3, 0.7],
+			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
 			],
 		[
-			MapGroup.new(coldfire_red, red_tile_scene, 0.0, 0.4),
-			MapGroup.new(coldfire_dark, dark_tile_scene, 0.4, 0.7),
-			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.7, 1.0),
+			[coldfire_red, red_tile_scene, 0.0, 0.4],
+			[coldfire_dark, dark_tile_scene, 0.4, 0.7],
+			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
 			],
 		[
-			MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.3),
-			MapGroup.new(coldfire_red, red_tile_scene, 0.3, 0.7),
-			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.7, 1.0),
+			[coldfire_dark, dark_tile_scene, 0.0, 0.3],
+			[coldfire_red, red_tile_scene, 0.3, 0.7],
+			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
 			],
 		[
-			MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
-			MapGroup.new(coldfire_red, red_tile_scene, 0.4, 0.7),
-			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.7, 1.0),
+			[coldfire_dark, dark_tile_scene, 0.0, 0.4],
+			[coldfire_red, red_tile_scene, 0.4, 0.7],
+			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
 			],
 		[
-			MapGroup.new(coldfire_blue, dark_tile_scene, 0.0, 0.4),
-			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.4, 0.7),
-			MapGroup.new(coldfire_red, yellow_tile_scene, 0.7, 1.0),
+			[coldfire_blue, dark_tile_scene, 0.0, 0.4],
+			[coldfire_yellow, yellow_tile_scene, 0.4, 0.7],
+			[coldfire_red, yellow_tile_scene, 0.7, 1.0],
 		]
 		]
-	options.shuffle()
-	return options[0]
+
+	var opts = []
+	for group_opt in options:
+		var grp_opt = []
+		for data in group_opt:
+			var grp = MapGroup.new()
+			grp.setup(data[0], data[1], data[2], data[3])
+			grp_opt.append(grp)
+		opts.append(grp_opt)
+	opts.shuffle()
+	return opts[0]
 
 func get_noise_input():
 	var options = [{
@@ -170,12 +179,11 @@ func gen_new_room():
 	var room_opts = {}
 	room_opts.merge(get_noise_input())
 	room.set_data(room_opts)
-	room.groups = get_groups()
 	room.position_offset = get_next_room_position(room)
 
 	add_child(room)
 	room.set_owner(self)
+	room.set_groups(get_group_opt())
 
 	room.regen_tilemaps()
-
 	rooms.append(room)

@@ -45,7 +45,7 @@ func do_image_regen(_val = null):
 
 export(bool) var include_images = true
 
-func regenerate_image(img=null):
+func regenerate_image():
 	var room = Util._or(owner, self).get_node_or_null(room_node_path)
 	if not room:
 		room = MapRoom.new()
@@ -55,9 +55,9 @@ func regenerate_image(img=null):
 		o.add_child(room)
 		room.set_owner(o)
 
-	room.set_room_data(noise_inputs())
-	room.groups = default_groups()
-	room.regen_tilemaps(img)
+	room.set_data(noise_inputs())
+	room.set_groups(default_groups())
+	room.regen_tilemaps()
 
 export(NodePath) var room_node_path = "Map"
 
@@ -155,12 +155,18 @@ export(PackedScene) var tilemapC_scene
 export(PackedScene) var tilemapD_scene
 
 func default_groups():
-	return [
-		MapGroup.new(colorA, tilemapA_scene, 0.0, boundA),
-		MapGroup.new(colorB, tilemapB_scene, boundA, boundB),
-		MapGroup.new(colorC, tilemapC_scene, boundB, boundC),
-		MapGroup.new(colorD, tilemapD_scene, boundC, boundD),
+	var group_data = [
+		[colorA, tilemapA_scene, 0.0, boundA],
+		[colorB, tilemapB_scene, boundA, boundB],
+		[colorC, tilemapC_scene, boundB, boundC],
+		[colorD, tilemapD_scene, boundC, boundD],
 	]
+	var gps = []
+	for data in group_data:
+		var g = MapGroup.new()
+		g.setup(data[0], data[1], data[2], data[3])
+		gps.append(g)
+	return gps
 
 ######################################################################
 # colorize_image
