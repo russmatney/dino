@@ -6,7 +6,6 @@ extends Node
 func _ready():
 	print("<ReptileMap> ready")
 
-
 ######################################################################
 # generate random image
 
@@ -66,3 +65,27 @@ func img_stats(img):
 func normalized_val(stats, val):
 	val = val - stats["min"]
 	return val / stats["variance"]
+
+######################################################################
+# tilemap/cell helpers
+
+func all_neighbors(cell):
+	return [
+		Vector2(cell.x, cell.y),
+		Vector2(cell.x + 1, cell.y),
+		Vector2(cell.x - 1, cell.y),
+		Vector2(cell.x, cell.y - 1),
+		Vector2(cell.x + 1, cell.y - 1),
+		Vector2(cell.x - 1, cell.y - 1),
+		Vector2(cell.x, cell.y + 1),
+		Vector2(cell.x + 1, cell.y + 1),
+		Vector2(cell.x - 1, cell.y + 1),
+		]
+
+func valid_neighbors(tilemap, cell):
+	var nbrs = all_neighbors(cell)
+	var valid = []
+	for n in nbrs:
+		if tilemap.get_cellv(n) != TileMap.INVALID_CELL:
+			valid.append(n)
+	return valid

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/gunner/player/PlayerStart.gd" type="Script" id=1]
+
+[node name="PlayerStart" type="Position2D" groups=["player_start"]]
+script = ExtResource( 1 )

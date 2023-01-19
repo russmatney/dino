@@ -17,6 +17,40 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 
 var img
 
+
+######################################################################
+# ready
+
+func _enter_tree():
+	self.add_to_group("reptile_room")
+
+var ready = false
+func _ready():
+	ready = true
+	if position_offset:
+		global_position += position_offset
+
+	if not groups:
+		find_groups()
+
+	connect("regenerated_tilemaps", self, "_on_regen")
+
+func _on_regen():
+	pass
+
+func tilemaps():
+	var ts = []
+	for c in get_children():
+		if c is TileMap:
+			ts.append(c)
+	return ts
+
+func setup():
+	set_noise_input()
+	if not groups_valid():
+		recreate_groups()
+
+
 ######################################################################
 # name
 
@@ -35,34 +69,70 @@ func set_data(opts):
 			"seed": self["n_seed"] = opts[k]
 			_: self[k] = opts[k]
 
+#####################################################################
+## fallback group data
+
+var cf_dark_tile = preload("res://addons/reptile/tilemaps/coldfire/ColdFireDark.tscn")
+var cf_blue_tile = preload("res://addons/reptile/tilemaps/coldfire/ColdFireBlue.tscn")
+
+var cf_dark = Color8(91, 118, 141)
+var cf_blue = Color8(70, 66, 94)
+
+func get_group_def():
+	var options = [
+		[
+			[cf_blue, cf_blue_tile, 0.0, 0.4],
+			[cf_dark, cf_dark_tile, 0.7, 1.0],
+			],
+		]
+
+	var opts = []
+	for group_opt in options:
+		var grp_opt = []
+		for data in group_opt:
+			var grp = ReptileGroup.new()
+			grp.setup(data[0], data[1], data[2], data[3])
+			grp_opt.append(grp)
+		opts.append(grp_opt)
+	opts.shuffle()
+	return opts[0]
+
+func get_noise_input():
+	var options = [{
+		"seed": rand_range(0, 50000),
+		"octaves": Util.rand_of([2, 3, 4]),
+		"period": rand_range(5, 30),
+		"persistence": rand_range(0.3, 0.7),
+		"lacunarity": rand_range(2.0, 4.0),
+		"img_size": rand_range(40, 60)
+	}]
+	options.shuffle()
+	return options[0]
+
+func set_noise_input():
+	# overwrites default noise inputs with vals specified in get_noise_inputs
+	var inp = get_noise_input()
+	set_data(inp)
+
 ######################################################################
-# ready
+# groups
 
 var groups
-
-func _enter_tree():
-	self.add_to_group("map_room")
-
-var ready = false
-func _ready():
-	ready = true
-	if position_offset:
-		global_position += position_offset
-
-	if not groups:
-		find_groups()
-
 
 func find_groups():
 	groups = []
 	for c in get_children():
-		if c.is_in_group("map_group"):
+		if c.is_in_group("reptile_group"):
 			groups.append(c)
+	return groups
+
+func clear_groups():
+	for c in get_children():
+		if c.is_in_group("reptile_group"):
+			c.free()
 
 func set_groups(new_groups):
-	for c in get_children():
-		if c.is_in_group("map_group"):
-			c.free()
+	clear_groups()
 
 	for g in new_groups:
 		g.connect("tree_entered", g, "set_owner", [Util._or(owner, self)])
@@ -70,6 +140,13 @@ func set_groups(new_groups):
 		add_child(g)
 	groups = new_groups
 
+func recreate_groups():
+	clear_groups()
+
+	var groups = get_group_def()
+	for g in groups:
+		add_child(g)
+		g.set_owner(get_tree().edited_scene_root())
 
 ######################################################################
 # room geo
@@ -88,7 +165,7 @@ func height():
 export(bool) var regenerate_tilemaps setget do_tile_regen
 func do_tile_regen(_v=null):
 	if ready:
-		# regen image with latest noise_inputs()
+		# regen image with latest noise_inputs
 		img = Reptile.generate_image(noise_inputs())
 		regen_tilemaps()
 
@@ -171,9 +248,8 @@ func call_for_each_coord(img, obj, fname):
 # generate tilemaps
 
 func init_tilemaps():
-	for c in get_children():
-		if c is TileMap:
-			c.free()
+	for t in tilemaps():
+		t.free()
 
 	for group in groups:
 		if group.tilemap_scene:
@@ -199,8 +275,9 @@ func groups_valid():
 	for g in groups:
 		if g.valid():
 			return true
-	prn("No valid group found")
 	return false
+
+signal regenerated_tilemaps
 
 func regen_tilemaps(image=null):
 	if image:
@@ -219,3 +296,6 @@ func regen_tilemaps(image=null):
 	init_tilemaps()
 	call_for_each_coord(img, self, "add_tile_at_coord")
 	update_tilemaps()
+
+	# call_deferred("emit_signal", "regenerated_tilemaps")
+	emit_signal("regenerated_tilemaps")

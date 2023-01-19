@@ -7,7 +7,7 @@ extends Node
 
 func tile_regen():
 	var p = get_parent()
-	if p and is_instance_valid(p) and p.is_in_group("map_room"):
+	if p and is_instance_valid(p) and p.is_in_group("reptile_room"):
 		p.regen_tilemaps()
 
 #####################################################################
@@ -40,7 +40,7 @@ var tilemap
 # init
 
 func _ready():
-	self.add_to_group("map_group")
+	self.add_to_group("reptile_group")
 
 func setup(c, ts, lb, ub):
 	color = c
@@ -60,7 +60,7 @@ func valid():
 		return true
 
 func contains_val(normed):
-	return normed < upper_bound and normed >= lower_bound
+	return normed <= upper_bound and normed >= lower_bound
 
 #####################################################################
 # sort

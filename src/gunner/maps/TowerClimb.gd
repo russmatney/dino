@@ -1,16 +1,6 @@
 tool
 extends Node2D
 
-var dark_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireDark.tscn")
-var blue_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireBlue.tscn")
-var red_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireRed.tscn")
-var yellow_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireYellow.tscn")
-
-var coldfire_dark = Color8(70, 66, 94)
-var coldfire_blue = Color8(91, 118, 141)
-var coldfire_red = Color8(209, 124, 124)
-var coldfire_yellow = Color8(246, 198, 168)
-
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	var s = "[TowerClimb] "
 	if msg5:
@@ -24,81 +14,6 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	elif msg:
 		print(str(s, msg))
 
-######################################################################
-# room data
-
-func get_group_opt():
-	var options = [
-		[
-			[coldfire_blue, blue_tile_scene, 0.0, 0.4],
-			[coldfire_yellow, yellow_tile_scene, 0.4, 0.7],
-			[coldfire_dark, dark_tile_scene, 0.7, 1.0],
-			],
-		[
-			[coldfire_dark, dark_tile_scene, 0.0, 0.3],
-			[coldfire_blue, blue_tile_scene, 0.3, 0.7],
-			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
-			],
-		[
-			[coldfire_red, red_tile_scene, 0.0, 0.4],
-			[coldfire_dark, dark_tile_scene, 0.4, 0.7],
-			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
-			],
-		[
-			[coldfire_dark, dark_tile_scene, 0.0, 0.3],
-			[coldfire_red, red_tile_scene, 0.3, 0.7],
-			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
-			],
-		[
-			[coldfire_dark, dark_tile_scene, 0.0, 0.4],
-			[coldfire_red, red_tile_scene, 0.4, 0.7],
-			[coldfire_yellow, yellow_tile_scene, 0.7, 1.0],
-			],
-		[
-			[coldfire_blue, dark_tile_scene, 0.0, 0.4],
-			[coldfire_yellow, yellow_tile_scene, 0.4, 0.7],
-			[coldfire_red, yellow_tile_scene, 0.7, 1.0],
-		]
-		]
-
-	var opts = []
-	for group_opt in options:
-		var grp_opt = []
-		for data in group_opt:
-			var grp = ReptileGroup.new()
-			grp.setup(data[0], data[1], data[2], data[3])
-			grp_opt.append(grp)
-		opts.append(grp_opt)
-	opts.shuffle()
-	return opts[0]
-
-func get_noise_input():
-	var options = [{
-		"seed": Util._or(seed_override, rand_range(0, 50000)),
-		"octaves": Util.rand_of([2, 3, 4]),
-		"period": rand_range(5, 30),
-		"persistence": rand_range(0.3, 0.7),
-		"lacunarity": rand_range(2.0, 4.0),
-		"img_size": img_size
-	}, {
-		"seed": Util._or(seed_override, rand_range(0, 50000)),
-		"octaves": Util.rand_of([3, 4]),
-		"period": rand_range(5, 10),
-		"persistence": rand_range(0.3, 0.4),
-		"lacunarity": rand_range(2.0, 3.0),
-		"img_size": img_size
-	}, {
-		"seed": Util._or(seed_override, rand_range(0, 50000)),
-		"octaves": Util.rand_of([2, 3]),
-		"period": rand_range(30, 60),
-		"persistence": rand_range(0.4, 0.7),
-		"lacunarity": rand_range(2.0, 4.0),
-		"img_size": img_size
-	}]
-	options.shuffle()
-	return options[0]
-
-
 func collect_tiles():
 	var ts = []
 	ts.append_array(get_tree().get_nodes_in_group("coldfire_bluetile"))
@@ -110,29 +25,23 @@ func collect_tiles():
 ######################################################################
 # ready
 
-var rooms = []
 var tiles
 
 var ready = false
 func _ready():
 	ready = true
 	randomize()
+	disable_collisions()
 
+func disable_collisions(_opts={}):
+	# disable all collisions except darktile
 	tiles = collect_tiles()
-
 	for t in tiles:
 		if not t.is_in_group("coldfire_darktile"):
 			# disable collisions with player
 			t.set_collision_layer_bit(0, 0)
 			t.set_collision_mask_bit(1, 0)
 			t.set_collision_mask_bit(2, 0)
-
-######################################################################
-# inputs
-
-export(String) var room_name = "Room"
-export(int) var img_size = 30
-export(int) var seed_override
 
 ######################################################################
 # triggers
@@ -142,48 +51,56 @@ func do_clear(_v):
 	if ready:
 		for c in get_children():
 			c.queue_free()
-		rooms = []
 
-export(String, "above", "below", "left", "right") var next_room_dir = "right" setget set_next_room_dir
-func set_next_room_dir(val):
-	next_room_dir = val
+export(String, "middle", "end") var next_room_type = "middle" setget set_next_room_type
+func set_next_room_type(val):
+	next_room_type = val
 
-# TODO refactor into a gen-neighbor with passed opts
-func get_next_room_position(next_room):
-	var next_position = Vector2.ZERO
-	var last_room = rooms.pop_back()
-	if last_room:
-		next_position = last_room.global_position
-		match(next_room_dir):
-			"above": next_position.y -= next_room.height()
-			"below": next_position.y += next_room.height()
-			"left": next_position.x -= next_room.width()
-			"right": next_position.x += next_room.width()
-	return next_position
+######################################################################
+# build tower
+
+func rooms():
+	var rs = []
+	for c in get_children():
+		if c is TowerRoom:
+			print("found tower room!")
+			rs.append(c)
+	return rs
+
+func get_start_room():
+	for r in rooms():
+		if r.is_in_group("tower_start_room"):
+			return r
+
+func get_previous_room():
+	var rs = rooms()
+	print("previous rooms: ", rs)
+	return rs.back()
+
+######################################################################
+# add neighboring room
+
+var start_room_scene = preload("res://src/gunner/maps/TowerStartRoom.tscn")
+var middle_room_scene = preload("res://src/gunner/maps/TowerMiddleRoom.tscn")
+var end_room_scene = preload("res://src/gunner/maps/TowerEndRoom.tscn")
+
+func add_room_inst(room_scene):
+	var room = room_scene.instance()
+	add_child(room)
+	room.set_owner(self)
+	room.setup()
+	return room
 
 export(bool) var add_room setget do_add_room
 func do_add_room(_v):
 	if ready:
-		gen_new_room()
-
-######################################################################
-# gen new map
-
-func gen_new_room():
-	print("-----------------------")
-	prn("Creating room ", room_name)
-
-	var room = ReptileRoom.new()
-	room.set_room_name(room_name)
-
-	var room_opts = {}
-	room_opts.merge(get_noise_input())
-	room.set_data(room_opts)
-	room.position_offset = get_next_room_position(room)
-
-	add_child(room)
-	room.set_owner(self)
-	room.set_groups(get_group_opt())
-
-	room.regen_tilemaps()
-	rooms.append(room)
+		var start_room = get_start_room()
+		if not start_room:
+			var room = add_room_inst(start_room_scene)
+			room.regen_tilemaps()
+		elif next_room_type == "middle":
+			var room = add_room_inst(middle_room_scene)
+			room.regen_tilemaps()
+		elif next_room_type == "end":
+			var room = add_room_inst(end_room_scene)
+			room.regen_tilemaps()
