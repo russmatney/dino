@@ -118,37 +118,6 @@ func noise_inputs():
 ######################################################################
 # groups
 
-# bound inputs/triggers
-
-export(float) var boundA = 0.3 setget set_boundA
-func set_boundA(v):
-	boundA = v
-	do_image_regen()
-
-export(float) var boundB = 0.55 setget set_boundB
-func set_boundB(v):
-	boundB = v
-	do_image_regen()
-
-export(float) var boundC = 0.8 setget set_boundC
-func set_boundC(v):
-	boundC = v
-	do_image_regen()
-
-export(float) var boundD = 1.0 setget set_boundD
-func set_boundD(v):
-	boundD = v
-	do_image_regen()
-
-# colors
-
-export(Color) var colorA = Color.darkseagreen
-export(Color) var colorB = Color.aquamarine
-export(Color) var colorC = Color.crimson
-export(Color) var colorD = Color.brown
-
-# tilemap scene
-
 export(PackedScene) var tilemapA_scene
 export(PackedScene) var tilemapB_scene
 export(PackedScene) var tilemapC_scene
@@ -156,10 +125,10 @@ export(PackedScene) var tilemapD_scene
 
 func default_groups():
 	var group_data = [
-		[colorA, tilemapA_scene, 0.0, boundA],
-		[colorB, tilemapB_scene, boundA, boundB],
-		[colorC, tilemapC_scene, boundB, boundC],
-		[colorD, tilemapD_scene, boundC, boundD],
+		[Color.darkseagreen, tilemapA_scene, 0.0, 0.3],
+		[Color.aquamarine, tilemapB_scene, 0.3, 0.55],
+		[Color.crimson, tilemapC_scene, 0.55, 0.8],
+		[Color.brown, tilemapD_scene, 0.8, 1.0],
 	]
 	var gps = []
 	for data in group_data:
