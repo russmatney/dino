@@ -1,5 +1,5 @@
 tool
-class_name MapRoom
+class_name ReptileRoom
 extends Node2D
 
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
@@ -89,7 +89,7 @@ export(bool) var regenerate_tilemaps setget do_tile_regen
 func do_tile_regen(_v=null):
 	if ready:
 		# regen image with latest noise_inputs()
-		img = ReptileMap.generate_image(noise_inputs())
+		img = Reptile.generate_image(noise_inputs())
 		regen_tilemaps()
 
 ######################################################################
@@ -144,7 +144,7 @@ export(int) var cell_size = 64
 # return a group for the normed value, if one can be found.
 # this may not be comprehensive, if we want to leave some empty tiles
 func group_for_normed_val(normed):
-	groups.sort_custom(MapGroup, "sort_by_key")
+	groups.sort_custom(ReptileGroup, "sort_by_key")
 	for g in groups:
 		if not g.upper_bound and not g.lower_bound:
 			# no bounds? we assume it's this group then
@@ -155,15 +155,15 @@ func group_for_normed_val(normed):
 func to_coord_ctx(coord, img, stats):
 	# this is called per coordinate
 	# avoid expensive ops in here, things should be passed in
-	var normed = ReptileMap.normalized_val(stats, img.get_pixel(coord.x, coord.y).r)
+	var normed = Reptile.normalized_val(stats, img.get_pixel(coord.x, coord.y).r)
 	var group = group_for_normed_val(normed)
 	return CoordCtx.new(group, coord, normed, img)
 
 func call_for_each_coord(img, obj, fname):
 	img.lock()
-	var stats = ReptileMap.img_stats(img)
+	var stats = Reptile.img_stats(img)
 
-	for coord in ReptileMap.all_coords(img):
+	for coord in Reptile.all_coords(img):
 		var ctx = to_coord_ctx(coord, img, stats)
 		obj.call(fname, ctx)
 
@@ -206,7 +206,7 @@ func regen_tilemaps(image=null):
 	if image:
 		img = image
 	if not img:
-		img = ReptileMap.generate_image(noise_inputs())
+		img = Reptile.generate_image(noise_inputs())
 
 	if not groups:
 		prn("No groups, re-finding")

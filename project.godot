@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Object",
+"base": "Reference",
 "class": "CoordCtx",
 "language": "GDScript",
-"path": "res://addons/reptile/maps/CoordCtx.gd"
+"path": "res://addons/reptile/CoordCtx.gd"
 }, {
 "base": "Control",
 "class": "Credits",
@@ -352,17 +352,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "MapGen",
 "language": "GDScript",
-"path": "res://addons/reptile/maps/MapGen.gd"
-}, {
-"base": "Node",
-"class": "MapGroup",
-"language": "GDScript",
-"path": "res://addons/reptile/maps/MapGroup.gd"
-}, {
-"base": "Node2D",
-"class": "MapRoom",
-"language": "GDScript",
-"path": "res://addons/reptile/maps/MapRoom.gd"
+"path": "res://addons/reptile/mapgen/MapGen.gd"
 }, {
 "base": "VBoxContainer",
 "class": "NaviButtonList",
@@ -378,6 +368,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/dungeonCrawler/player/Player.gd"
+}, {
+"base": "Reference",
+"class": "ReptileGroup",
+"language": "GDScript",
+"path": "res://addons/reptile/ReptileGroup.gd"
+}, {
+"base": "Reference",
+"class": "ReptileRoom",
+"language": "GDScript",
+"path": "res://addons/reptile/ReptileRoom.gd"
 }, {
 "base": "Node2D",
 "class": "RunnerRoom",
@@ -489,11 +489,11 @@ _global_script_class_icons={
 "InkVoid": "",
 "Machine": "",
 "MapGen": "",
-"MapGroup": "",
-"MapRoom": "",
 "NaviButtonList": "",
 "NaviPauseMenu": "",
 "Player": "",
+"ReptileGroup": "",
+"ReptileRoom": "",
 "RunnerRoom": "",
 "SfxrGenerator": "",
 "SfxrGlobals": "",
@@ -529,7 +529,7 @@ Harvey="*res://src/harvey/Harvey.gd"
 Gunner="*res://src/gunner/Gunner.gd"
 Cam="*res://addons/camera/Camera.gd"
 TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
-ReptileMap="*res://addons/reptile/ReptileMap.gd"
+Reptile="*res://addons/reptile/Reptile.gd"
 Util="*res://addons/core/Util.gd"
 
 [display]

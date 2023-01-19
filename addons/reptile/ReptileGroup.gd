@@ -1,5 +1,5 @@
 tool
-class_name MapGroup
+class_name ReptileGroup
 extends Node
 
 #####################################################################

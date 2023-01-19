@@ -16,11 +16,6 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	elif msg:
 		print(str(s, msg))
 
-func print_data():
-	prn("Inputs: ", noise_inputs())
-	prn("Image size: ", img_size)
-	prn("Room Node: ", room_node_path)
-
 ######################################################################
 # ready
 
@@ -40,26 +35,21 @@ export(bool) var generate_image setget do_image_regen
 func do_image_regen(_val = null):
 	if ready or ready_override:
 		print("-------------------")
-		print_data()
 		regenerate_image()
-
-export(bool) var include_images = true
 
 func regenerate_image():
 	var room = Util._or(owner, self).get_node_or_null(room_node_path)
 	if not room:
-		room = MapRoom.new()
-		room.room_name = Util.node_name_from_path(room_node_path)
-
+		room = ReptileRoom.new()
 		var o = Util._or(owner, self)
 		o.add_child(room)
 		room.set_owner(o)
 
-	room.set_data(noise_inputs())
+	room.set_room_name(Util.node_name_from_path(room_node_path))
 	room.set_groups(default_groups())
 	room.regen_tilemaps()
 
-export(NodePath) var room_node_path = "Map"
+export(String) var room_node_path = "Map"
 
 export(bool) var clear setget do_clear
 func do_clear(_v):
@@ -71,49 +61,6 @@ func do_clear(_v):
 
 		for c in self.get_children():
 			c.queue_free()
-
-######################################################################
-# image gen setters
-
-export(int) var n_seed = 1 setget set_seed
-func set_seed(v):
-	n_seed = v
-	do_image_regen()
-
-export(int) var octaves = 3 setget set_octaves
-func set_octaves(v):
-	octaves = v
-	do_image_regen()
-
-export(float) var period = 60.0 setget set_period
-func set_period(v):
-	period = v
-	do_image_regen()
-
-export(float) var persistence = 0.5 setget set_persistence
-func set_persistence(v):
-	persistence = v
-	do_image_regen()
-
-export(float) var lacunarity = 2.0 setget set_lacunarity
-func set_lacunarity(v):
-	lacunarity = v
-	do_image_regen()
-
-export(int) var img_size = 20 setget set_img_size
-func set_img_size(v):
-	img_size = v
-	do_image_regen()
-
-func noise_inputs():
-	return {
-		"seed": n_seed,
-		"octaves": octaves,
-		"period": period,
-		"persistence": persistence,
-		"lacunarity": lacunarity,
-		"img_size": img_size,
-		}
 
 ######################################################################
 # groups
@@ -132,7 +79,7 @@ func default_groups():
 	]
 	var gps = []
 	for data in group_data:
-		var g = MapGroup.new()
+		var g = ReptileGroup.new()
 		g.setup(data[0], data[1], data[2], data[3])
 		gps.append(g)
 	return gps
@@ -155,7 +102,7 @@ func default_groups():
 # 	texture_rect.expand = true
 
 # 	if img:
-# 		texture_rect.texture = ReptileMap.img_to_texture(img)
+# 		texture_rect.texture = Reptile.img_to_texture(img)
 
 
 # func colorize_coord(ctx):
@@ -181,11 +128,10 @@ export(bool) var persist_tilemap setget do_persist_tilemap
 func do_persist_tilemap(_val = null):
 	if ready:
 		prn(str("persisting tilemap: ", Time.get_time_string_from_system()))
-		print_data()
 		persist_tilemap_to_disk()
 
-export(String) var persist_node_path = "Map"
-export(String) var persist_name = persist_node_path
+export(NodePath) var persist_node_path = "Map"
+export(String) var persist_name = str(persist_node_path)
 export(String) var persist_dir = "res://addons/reptile/maps/"
 export(bool) var version_number = true
 export(String) var hardcoded_version_number
