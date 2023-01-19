@@ -8,7 +8,7 @@ func label():
 	return "Jump: " + str(actor.jump_count)
 
 
-func enter(ctx = {}):
+func enter(_ctx = {}):
 	actor.anim.animation = "jump"
 	actor.velocity.y -= actor.jump_impulse
 	actor.velocity.y = max(-actor.jump_impulse, actor.velocity.y)
