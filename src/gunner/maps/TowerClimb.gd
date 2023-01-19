@@ -11,9 +11,6 @@ var coldfire_blue = Color8(91, 118, 141)
 var coldfire_red = Color8(209, 124, 124)
 var coldfire_yellow = Color8(246, 198, 168)
 
-var offset_x = 0
-var offset_y = 0
-
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	var s = "[TowerClimb] "
 	if msg5:
@@ -28,12 +25,53 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 		print(str(s, msg))
 
 ######################################################################
+# room data
+
+func get_groups():
+	var groups = [
+		[
+			MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
+			MapGroup.new(coldfire_blue, blue_tile_scene, 0.4, 0.7),
+			],
+		[
+			MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
+			MapGroup.new(coldfire_red, red_tile_scene, 0.4, 0.7),
+			],
+		[
+			MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
+			MapGroup.new(coldfire_yellow, yellow_tile_scene, 0.4, 0.7),
+		]
+		]
+	return groups[randi() % groups.size()]
+
+func get_noise_input():
+	var options = [{
+		"seed": Util._or(seed_override, 1001),
+		"octaves": 4,
+		"period": 30,
+		"persistence": 0.4,
+		"lacunarity": 2.0,
+		"img_size": img_size
+	}, {
+		"seed": Util._or(seed_override, 1002),
+		"octaves": 3,
+		"period": 10,
+		"persistence": 0.3,
+		"lacunarity": 2.0,
+		"img_size": img_size
+	}]
+
+	return options[randi() % options.size()]
+
+
+######################################################################
 # ready
 
 var ready = false
-
 func _ready():
 	ready = true
+
+var rooms = []
 
 ######################################################################
 # inputs
@@ -50,8 +88,24 @@ func do_clear(_v):
 	if ready:
 		for c in get_children():
 			c.queue_free()
+		rooms = []
 
-		offset_x = 0
+export(String, "above", "below", "left", "right") var next_room_dir = "right" setget set_next_room_dir
+func set_next_room_dir(val):
+	next_room_dir = val
+
+func get_next_room_position(next_room):
+	# TODO alert when pointing at an existing room?
+	var next_position = Vector2.ZERO
+	var last_room = rooms.pop_back()
+	if last_room:
+		next_position = last_room.global_position
+		match(next_room_dir):
+			"above": next_position.y -= next_room.height()
+			"below": next_position.y += next_room.height()
+			"left": next_position.x -= next_room.width()
+			"right": next_position.x += next_room.width()
+	return next_position
 
 export(bool) var add_room setget do_add_room
 func do_add_room(_v):
@@ -63,31 +117,20 @@ func do_add_room(_v):
 
 func gen_new_room():
 	print("-----------------------")
-
-	var next_position = Vector2(offset_x, 0)
-	prn("Creating room ", room_name, " ", next_position)
+	prn("Creating room ", room_name)
 
 	var room = MapRoom.new()
 	room.set_room_name(room_name)
-	room.set_data({
-		"seed": Util._or(seed_override, 1001),
-		"octaves": 4,
-		"period": 30,
-		"persistence": 0.4,
-		"lacunarity": 2.0,
-		"img_size": img_size,
-		"position_offset": next_position,
-		})
 
-	room.groups = [
-		MapGroup.new(coldfire_dark, dark_tile_scene, 0.0, 0.4),
-		MapGroup.new(coldfire_blue, blue_tile_scene, 0.4, 0.7),
-		]
+	var room_opts = {}
+	room_opts.merge(get_noise_input())
+	room.set_data(room_opts)
+	room.groups = get_groups()
+	room.position_offset = get_next_room_position(room)
 
 	add_child(room)
 	room.set_owner(self)
 
 	room.regen_tilemaps()
 
-	offset_x += room.cell_size * room.img_size
-	offset_y += room.cell_size * room.img_size
+	rooms.append(room)
