@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/reptile/tilesets/coldfire/ColdFireBlue.tres" type="TileSet" id=1]
 
-[node name="ColdFireBlueTile" type="TileMap"]
+[node name="ColdFireBlueTile" type="TileMap" groups=["coldfire_bluetile"]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
 format = 1

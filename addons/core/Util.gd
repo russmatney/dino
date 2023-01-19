@@ -78,7 +78,6 @@ func ensure_connection(obj, sig, target, method, args=[]):
 		err = obj.connect(sig, target, method, args)
 	if err: print("[Error]: ", err) # useless enum digit
 
-
 func node_name_from_path(path):
 	var parts = path.split("/")
 	return parts[-1]
@@ -87,6 +86,10 @@ func p_script_vars(node):
 	for prop in node.get_property_list():
 		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
 			print("\t", prop["name"], ": ", self.get(prop["name"]))
+
+func rand_of(arr):
+	arr.shuffle()
+	return arr[0]
 
 ############################################################
 # Functional

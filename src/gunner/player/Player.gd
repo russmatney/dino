@@ -10,6 +10,8 @@ onready var notif_label = $NotifLabel
 
 var reset_position
 
+export(bool) var has_jetpack = false
+
 func _ready():
 	reset_position = get_global_position()
 	machine.connect("transitioned", self, "on_transit")
@@ -17,9 +19,6 @@ func _ready():
 
 	Cam.call_deferred("ensure_camera", 2)
 	Gunner.ensure_hud()
-
-	# has_jetpack = true
-
 
 ############################################################
 # _process
@@ -126,7 +125,6 @@ export(int) var gravity := 900
 export(int) var jetpack_boost := 800
 
 var can_wall_jump
-var has_jetpack
 
 ############################################################
 # facing

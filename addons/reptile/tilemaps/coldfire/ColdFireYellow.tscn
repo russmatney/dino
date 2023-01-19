@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/reptile/tilesets/coldfire/ColdFireYellow.tres" type="TileSet" id=1]
 
-[node name="ColdFireYellow" type="TileMap"]
+[node name="ColdFireYellow" type="TileMap" groups=["coldfire_yellowtile"]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
 collision_mask = 62
