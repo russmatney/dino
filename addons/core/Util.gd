@@ -39,8 +39,7 @@ func nearest_node(source: Node, targets) -> Node:
 	return nearest_target
 
 func first_node_in_group(group_name: String) -> Node:
-	# TODO questionable navi dependency! this lets us avoid passing in a node
-	for c in Navi.current_scene.get_tree().get_nodes_in_group(group_name):
+	for c in get_tree().get_nodes_in_group(group_name):
 		return c
 	return null
 

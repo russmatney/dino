@@ -47,3 +47,49 @@ func get_noise_input():
 	}]
 	options.shuffle()
 	return options[0]
+
+########################################################################
+# spawn targets
+
+var target_scene = preload("res://src/gunner/targets/Target.tscn")
+
+func spawn_targets():
+	for c in get_children():
+		if c.is_in_group("target"):
+			c.free()
+
+	var locs = []
+
+	# var dark_tilemaps = tilemaps({"group": "coldfire_darktile"})
+	# var red_tilemaps = tilemaps({"group": "coldfire_redtile"})
+	# var blue_tilemaps = tilemaps({"group": "coldfire_bluetile"})
+
+	for t_cell in tilemap_cells({"group": "coldfire_yellowtile"}):
+		var t = t_cell[0]
+		var cell = t_cell[1]
+		var valid_nbrs = Reptile.valid_neighbors(t, cell)
+		prn("found ", valid_nbrs.size(), " valid_nbrs for cell ", cell)
+
+		if valid_nbrs.size() == 9:
+			var pos = t.map_to_world(cell) * t.scale.x
+			locs.append({
+				"position": pos,
+				"cell": cell,
+				})
+
+	var target_locs = []
+	if locs:
+		locs.shuffle()
+		for loc in locs:
+			target_locs.append(loc)
+			if target_locs.size() == 3:
+				break
+
+	for loc in target_locs:
+		print(loc["position"])
+		print(loc["cell"])
+		var target = target_scene.instance()
+		# set relative to parent position
+		target.position = loc["position"]
+		add_child(target)
+		target.set_owner(get_tree().edited_scene_root)

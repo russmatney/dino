@@ -38,17 +38,32 @@ func _ready():
 func _on_regen():
 	pass
 
-func tilemaps():
-	var ts = []
-	for c in get_children():
-		if c is TileMap:
-			ts.append(c)
-	return ts
-
 func setup():
 	set_noise_input()
 	if not groups_valid():
 		recreate_groups()
+
+######################################################################
+# tilemaps, cells helpers
+
+func tilemaps(opts={}):
+	var tile_group_name = opts.get("group")
+	var ts = []
+	for c in get_children():
+		if c is TileMap:
+			if tile_group_name:
+				if c.is_in_group(tile_group_name):
+					ts.append(c)
+			else:
+				ts.append(c)
+	return ts
+
+func tilemap_cells(opts={}):
+	var cells = []
+	for t in tilemaps(opts):
+		for cell in t.get_used_cells():
+			cells.append([t, cell])
+	return cells
 
 
 ######################################################################
