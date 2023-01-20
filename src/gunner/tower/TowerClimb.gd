@@ -84,14 +84,16 @@ var start_room_scene = preload("res://src/gunner/tower/TowerStartRoom.tscn")
 var middle_room_scene = preload("res://src/gunner/tower/TowerMiddleRoom.tscn")
 var end_room_scene = preload("res://src/gunner/tower/TowerEndRoom.tscn")
 
-export(int) var cell_size = 32
+export(int) var cell_size = 16
+export(int) var img_size = 50
 
 func add_room_inst(room_scene):
 	var room = room_scene.instance()
 	add_child(room)
 	room.set_owner(self)
+	room.cell_size = cell_size
+	room.img_size = img_size
 	room.setup()
-	room.cell_size = 32
 	room.regen_tilemaps()
 	return room
 

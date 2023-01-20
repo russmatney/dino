@@ -39,12 +39,11 @@ func get_group_def():
 
 func get_noise_input():
 	var options = [{
-		"seed": rand_range(0, 50000),
+		"seed": rand_range(0, 100000),
 		"octaves": Util.rand_of([2, 3, 4]),
 		"period": rand_range(5, 30),
-		"persistence": rand_range(0.3, 0.7),
-		"lacunarity": rand_range(2.0, 4.0),
-		"img_size": rand_range(40, 60)
+		"persistence": rand_range(0.3, 0.5),
+		"lacunarity": rand_range(2.5, 4.0),
 	}]
 	options.shuffle()
 	return options[0]

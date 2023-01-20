@@ -38,6 +38,15 @@ func all_coords(img):
 			coords.append(Vector2(x, y))
 	return coords
 
+func rotate(img):
+	img.lock()
+	var new_img = Image.new()
+	new_img.copy_from(img)
+	new_img.lock()
+	for coord in all_coords(img):
+		new_img.set_pixel(coord.y, coord.x, img.get_pixelv(coord))
+	return new_img
+
 func img_to_texture(img):
 	var imgTexture = ImageTexture.new()
 	imgTexture.create_from_image(img, 1)

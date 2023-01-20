@@ -212,6 +212,11 @@ func set_img_flip_y(v):
 	img_flip_y = v
 	do_tile_regen()
 
+export(bool) var img_rotate setget set_img_rotate
+func set_img_rotate(v):
+	img_rotate = v
+	do_tile_regen()
+
 func noise_inputs():
 	return {
 		"seed": n_seed,
@@ -298,6 +303,8 @@ func regen_tilemaps(image=null):
 		img.flip_x()
 	if img_flip_y:
 		img.flip_y()
+	if img_rotate:
+		img = Reptile.rotate(img)
 
 	if not groups:
 		prn("No groups, re-finding")
