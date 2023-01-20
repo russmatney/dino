@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://src/gunner/maps/TowerStartRoom.gd" type="Script" id=1]
-[ext_resource path="res://src/gunner/player/PlayerStart.tscn" type="PackedScene" id=2]
-
-[node name="TowerStartRoom" type="Node2D" groups=["tower_start_room"]]
-script = ExtResource( 1 )
-
-[node name="PlayerStart" parent="." instance=ExtResource( 2 )]

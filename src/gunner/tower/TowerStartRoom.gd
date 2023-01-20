@@ -1,8 +1,6 @@
 tool
 extends TowerRoom
 
-onready var player_start = $PlayerStart
-
 func _ready():
 	print("tower start room ready")
 
@@ -22,6 +20,6 @@ func _on_regen():
 
 	if start_locs:
 		start_locs.shuffle()
-		player_start.global_position = start_locs[0]
+		# player_start.global_position = start_locs[0]
 	else:
 		print("no viable player positions")

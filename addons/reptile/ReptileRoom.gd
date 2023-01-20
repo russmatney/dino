@@ -146,7 +146,7 @@ func recreate_groups():
 	var groups = get_group_def()
 	for g in groups:
 		add_child(g)
-		g.set_owner(get_tree().edited_scene_root())
+		g.set_owner(get_tree().edited_scene_root)
 
 ######################################################################
 # room geo

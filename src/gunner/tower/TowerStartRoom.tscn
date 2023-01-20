@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/gunner/tower/TowerStartRoom.gd" type="Script" id=1]
+
+[node name="TowerStartRoom" type="Node2D" groups=["tower_start_room"]]
+script = ExtResource( 1 )

@@ -1,10 +1,10 @@
-# ReptileMap
+# Reptile
 tool
 extends Node
 
 
 func _ready():
-	print("<ReptileMap> ready")
+	print("<Reptile> ready")
 
 ######################################################################
 # generate random image

@@ -15,4 +15,5 @@ tilemapA_scene = ExtResource( 1 )
 tilemapB_scene = ExtResource( 2 )
 tilemapC_scene = ExtResource( 4 )
 tilemapD_scene = ExtResource( 3 )
+persist_node_path = "Map"
 persist_name = "Map"

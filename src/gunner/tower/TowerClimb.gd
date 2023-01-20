@@ -80,15 +80,19 @@ func get_previous_room():
 ######################################################################
 # add neighboring room
 
-var start_room_scene = preload("res://src/gunner/maps/TowerStartRoom.tscn")
-var middle_room_scene = preload("res://src/gunner/maps/TowerMiddleRoom.tscn")
-var end_room_scene = preload("res://src/gunner/maps/TowerEndRoom.tscn")
+var start_room_scene = preload("res://src/gunner/tower/TowerStartRoom.tscn")
+var middle_room_scene = preload("res://src/gunner/tower/TowerMiddleRoom.tscn")
+var end_room_scene = preload("res://src/gunner/tower/TowerEndRoom.tscn")
+
+export(int) var cell_size = 32
 
 func add_room_inst(room_scene):
 	var room = room_scene.instance()
 	add_child(room)
 	room.set_owner(self)
 	room.setup()
+	room.cell_size = 32
+	room.regen_tilemaps()
 	return room
 
 export(bool) var add_room setget do_add_room
@@ -96,11 +100,8 @@ func do_add_room(_v):
 	if ready:
 		var start_room = get_start_room()
 		if not start_room:
-			var room = add_room_inst(start_room_scene)
-			room.regen_tilemaps()
+			add_room_inst(start_room_scene)
 		elif next_room_type == "middle":
-			var room = add_room_inst(middle_room_scene)
-			room.regen_tilemaps()
+			add_room_inst(middle_room_scene)
 		elif next_room_type == "end":
-			var room = add_room_inst(end_room_scene)
-			room.regen_tilemaps()
+			add_room_inst(end_room_scene)
