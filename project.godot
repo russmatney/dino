@@ -524,7 +524,6 @@ run/main_scene.harvey="res://src/harvey/menus/HarveyMenu.tscn"
 [autoload]
 
 Navi="*res://addons/navi/Navi.gd"
-Util="*res://addons/core/Util.gd"
 DJ="*res://addons/dj/DJ.gd"
 Clawe="*res://src/clawe/Clawe.gd"
 __InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
@@ -537,6 +536,7 @@ Gunner="*res://src/gunner/Gunner.gd"
 Cam="*res://addons/camera/Camera.gd"
 TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 Reptile="*res://addons/reptile/Reptile.gd"
+Util="*res://addons/core/Util.gd"
 
 [display]
 

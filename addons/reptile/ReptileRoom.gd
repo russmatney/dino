@@ -202,6 +202,15 @@ func set_img_size(v):
 	img_size = v
 	do_tile_regen()
 
+export(bool) var img_flip_x setget set_img_flip_x
+func set_img_flip_x(v):
+	img_flip_x = v
+	do_tile_regen()
+
+export(bool) var img_flip_y setget set_img_flip_y
+func set_img_flip_y(v):
+	img_flip_y = v
+	do_tile_regen()
 
 func noise_inputs():
 	return {
@@ -284,6 +293,11 @@ func regen_tilemaps(image=null):
 		img = image
 	if not img:
 		img = Reptile.generate_image(noise_inputs())
+
+	if img_flip_x:
+		img.flip_x()
+	if img_flip_y:
+		img.flip_y()
 
 	if not groups:
 		prn("No groups, re-finding")
