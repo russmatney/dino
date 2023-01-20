@@ -80,9 +80,9 @@ func get_previous_room():
 ######################################################################
 # add neighboring room
 
-var start_room_scene = preload("res://src/gunner/tower/TowerStartRoom.tscn")
-var middle_room_scene = preload("res://src/gunner/tower/TowerMiddleRoom.tscn")
-var end_room_scene = preload("res://src/gunner/tower/TowerEndRoom.tscn")
+var start_room_scene = preload("res://src/tower/rooms/TowerStartRoom.tscn")
+var middle_room_scene = preload("res://src/tower/rooms/TowerMiddleRoom.tscn")
+var end_room_scene = preload("res://src/tower/rooms/TowerEndRoom.tscn")
 
 export(int) var cell_size = 16
 export(int) var img_size = 50

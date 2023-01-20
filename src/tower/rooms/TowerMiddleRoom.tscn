@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/tower/rooms/TowerMiddleRoom.gd" type="Script" id=1]
+
+[node name="TowerMiddleRoom" type="Node2D" groups=["tower_middle_room"]]
+script = ExtResource( 1 )
+room_name = "Room"
+regenerate_tilemaps = false
+n_seed = 1001
+octaves = 4
+period = 60.0
+persistence = 0.5
+lacunarity = 2.0
+img_size = 50
+img_flip_x = false
+img_flip_y = false
+img_rotate = false
+cell_size = 64

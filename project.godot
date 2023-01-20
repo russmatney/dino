@@ -417,7 +417,7 @@ _global_script_classes=[ {
 "base": "ReptileRoom",
 "class": "TowerRoom",
 "language": "GDScript",
-"path": "res://src/gunner/tower/TowerRoom.gd"
+"path": "res://src/tower/rooms/TowerRoom.gd"
 }, {
 "base": "VBoxContainer",
 "class": "TrolleyActionsList",
