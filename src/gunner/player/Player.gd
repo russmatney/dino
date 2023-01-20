@@ -18,7 +18,7 @@ func _ready():
 	face_left()
 
 	Cam.call_deferred("ensure_camera", 2)
-	Gunner.ensure_hud()
+	Hood.ensure_hud()
 
 ############################################################
 # _process
@@ -204,7 +204,7 @@ func fire_bullet():
 	Navi.current_scene.call_deferred("add_child", bullet)
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
-	Gunner.play_sound("fire")
+	GunnerSounds.play_sound("fire")
 
 	# push player back when firing
 	var pos = get_global_position()
@@ -240,7 +240,7 @@ func notif(text, opts={}):
 func level_up():
 	shine(2.0)
 	notif("LEVEL UP", {"dupe": true})
-	Gunner.notif("Level Up")
+	Hood.notif("Level Up")
 
 ######################################################################
 # shine

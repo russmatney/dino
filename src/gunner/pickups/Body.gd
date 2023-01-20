@@ -3,10 +3,10 @@ extends Node2D
 var type = "body"
 
 func _ready():
-	Gunner.register_respawn(self)
+	Respawner.register_respawn(self)
 
 func kill():
-	Gunner.play_sound("pickup")
+	GunnerSounds.play_sound("pickup")
 	# TODO collect anim
 	queue_free()
 

@@ -26,6 +26,10 @@ var menu_scenes = [
 		"label": "Gunner",
 		"nav_to": "res://src/gunner/player/PlayerGym.tscn",
 	},
+	{
+		"label": "Tower",
+		"nav_to": "res://src/tower/menus/TowerMainMenu.tscn",
+	},
 ]
 
 

@@ -7,13 +7,13 @@ func enter(ctx = {}):
 	actor.jump_count = 0
 
 	if "shake" in ctx and ctx["shake"]:
-		Gunner.play_sound("heavy_landing")
+		GunnerSounds.play_sound("heavy_landing")
 		if typeof(ctx["shake"]) == TYPE_REAL:
 			Cam.screenshake(ctx["shake"])
 		else:
 			Cam.screenshake(0.25)
 
-	# Gunner.play_sound("step")
+	# GunnerSounds.play_sound("step")
 
 
 func physics_process(delta):

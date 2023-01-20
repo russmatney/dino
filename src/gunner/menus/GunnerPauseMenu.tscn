@@ -43,52 +43,52 @@ scroll_active = false
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
 margin_top = 104.0
 margin_right = 504.0
-margin_bottom = 297.0
+margin_bottom = 293.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
 margin_left = 125.0
 margin_right = 275.0
-margin_bottom = 193.0
+margin_bottom = 189.0
 rect_min_size = Vector2( 150, 0 )
 alignment = 1
 
 [node name="ReturnToMain" parent="VBoxContainer2/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 65.0
+margin_top = 63.0
 margin_right = 150.0
-margin_bottom = 83.0
+margin_bottom = 81.0
 text = "Return to Main Menu"
 
 [node name="Resume" parent="VBoxContainer2/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 87.0
+margin_top = 85.0
 margin_right = 150.0
-margin_bottom = 105.0
+margin_bottom = 103.0
 text = "Resume"
 
 [node name="Restart" parent="VBoxContainer2/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 109.0
+margin_top = 107.0
 margin_right = 150.0
-margin_bottom = 127.0
+margin_bottom = 125.0
 text = "Restart"
 
 [node name="MaxSizeContainer2" type="MarginContainer" parent="VBoxContainer2/HBoxContainer"]
 margin_left = 279.0
 margin_right = 379.0
-margin_bottom = 193.0
+margin_bottom = 189.0
 custom_constants/margin_right = 0
-custom_constants/margin_top = 0
+custom_constants/margin_top = 54
 custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
+custom_constants/margin_bottom = 54
 script = ExtResource( 1 )
 max_size = Vector2( 250, 80 )
 
 [node name="GunnerControls" parent="VBoxContainer2/HBoxContainer/MaxSizeContainer2" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 56.0
+margin_top = 54.0
 margin_right = 100.0
-margin_bottom = 137.0
+margin_bottom = 135.0
 
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]

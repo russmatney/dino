@@ -5,10 +5,10 @@ export(String, "jetpack", "hat", "body") var type = "jetpack"
 
 func _ready():
 	$AnimatedSprite.animation = type
-	Gunner.register_respawn(self)
+	Respawner.register_respawn(self)
 
 func kill():
-	Gunner.play_sound("pickup")
+	GunnerSounds.play_sound("pickup")
 	# TODO animate
 	queue_free()
 

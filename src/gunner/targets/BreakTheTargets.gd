@@ -18,7 +18,7 @@ func setup():
 	if players:
 		player = players[0]
 		player.call_deferred("notif", "BREAK THE TARGETS")
-		Gunner.notif("Break The Targets!")
+		Hood.notif("Break The Targets!")
 
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
@@ -28,7 +28,7 @@ func setup():
 
 	find_hud()
 
-	Util.ensure_connection(Gunner, "respawn", self, "_on_respawn")
+	Util.ensure_connection(Respawner, "respawn", self, "_on_respawn")
 	Util.ensure_connection(Cam, "slowmo_stopped", self, "_on_slowmo_stopped")
 
 func find_hud():
@@ -56,8 +56,6 @@ func _process(delta):
 			has_warned = true
 			print("[WARN]: BreakTheTargets could not find HUD, giving up.")
 
-
-
 ###############################################################################
 # signals
 
@@ -81,7 +79,6 @@ func _on_target_destroyed(t):
 		hud.update_targets_destroyed(destroyed_count)
 		hud.update_targets_remaining(targets.size())
 
-
 ###############################################################################
 # update
 
@@ -99,4 +96,7 @@ func _on_slowmo_stopped(label):
 	if label == "targets-cleared":
 		if player:
 			player.level_up()
-		Gunner.respawn_missing()
+
+		yield(get_tree().create_timer(2.0), "timeout")
+		# TODO handle break the targets complete
+		Respawner.respawn_missing()

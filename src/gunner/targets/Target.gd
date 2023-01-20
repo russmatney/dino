@@ -11,7 +11,7 @@ signal destroyed(target)
 func _ready():
 	anim.connect("animation_finished", self, "_animation_finished")
 
-	Gunner.register_respawn(self)
+	Respawner.register_respawn(self)
 
 func _process(_delta):
 	# if target offscreen and player close enough/line-of-sight
@@ -25,8 +25,8 @@ func _animation_finished():
 		queue_free()
 
 func kill():
-	Gunner.notif("Target Destroyed")
-	Gunner.play_sound("target_kill")
+	Hood.notif("Target Destroyed")
+	GunnerSounds.play_sound("target_kill")
 	anim.animation = "pop"
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
 	emit_signal("destroyed", self)
