@@ -89,14 +89,11 @@ func target_change(opts = {}):
 	if targets.size() == 1 and opts.get("was_destroy"):
 		if player:
 			player.notif("ONE REMAINING")
-		Cam.start_slowmo("one-target-left", 0.3)
+		Cam.freezeframe("one-target-left", 0.3, 2)
 	elif targets.empty() and opts.get("was_destroy"):
-		Cam.stop_slowmo("one-target-left")
 		if player:
 			player.notif("TARGETS CLEARED")
 		Cam.freezeframe("targets-cleared", 0.01, 3)
-	else:
-		Cam.stop_slowmo("one-target-left")
 
 func _on_slowmo_stopped(label):
 	if label == "targets-cleared":
