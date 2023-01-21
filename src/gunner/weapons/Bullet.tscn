@@ -37,7 +37,7 @@ shader_param/replace_4 = null
 
 [node name="Bullet" type="RigidBody2D" groups=["bullet"]]
 collision_layer = 4
-collision_mask = 9
+collision_mask = 11
 contacts_reported = 4
 contact_monitor = true
 script = ExtResource( 2 )
@@ -59,7 +59,7 @@ modulate = Color( 1, 1, 1, 0.886275 )
 material = SubResource( 3 )
 frames = ExtResource( 3 )
 animation = "pop"
-frame = 1
+frame = 3
 playing = true
 
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

@@ -109,7 +109,7 @@ func take_damage(body=null, d = 1):
 	var dir = Vector2.DOWN
 	if body and body.global_position.x > global_position.x:
 		dir = Vector2.LEFT
-	else:
+	elif body:
 		dir = Vector2.RIGHT
 
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
@@ -138,11 +138,11 @@ func _on_VisibilityNotifier2D_screen_exited():
 var player
 
 func _on_VisionBox_body_entered(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not body.dead:
 		player = body
 
 func _on_VisionBox_body_exited(body:Node):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and not body.dead:
 		player = null
 
 ########################################################
@@ -156,7 +156,7 @@ var bullet_knockback = 2
 signal fired_bullet(bullet)
 
 func fire_at_player():
-	if player and is_instance_valid(player):
+	if player and not player.dead and is_instance_valid(player):
 		var bullet = bullet_scene.instance()
 		bullet.position = bullet_position.get_global_position()
 		bullet.add_collision_exception_with(self)

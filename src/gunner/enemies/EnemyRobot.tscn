@@ -34,6 +34,7 @@ material = SubResource( 2 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
+frame = 4
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

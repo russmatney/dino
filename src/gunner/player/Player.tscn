@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/sprites/greyhat_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/Player.gd" type="Script" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=14]
 [ext_resource path="res://src/gunner/player/Jetpack.gd" type="Script" id=15]
 [ext_resource path="res://assets/sprites/greyhat_jetflame_sheet.png" type="Texture" id=16]
+[ext_resource path="res://src/gunner/player/Knockback.gd" type="Script" id=17]
+[ext_resource path="res://src/gunner/player/Dead.gd" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 12 )
@@ -119,6 +121,12 @@ script = ExtResource( 8 )
 
 [node name="Jetpack" type="Node" parent="Machine"]
 script = ExtResource( 15 )
+
+[node name="Knockback" type="Node" parent="Machine"]
+script = ExtResource( 17 )
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource( 18 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 visible = false

@@ -4,6 +4,8 @@ onready var anim = $AnimatedSprite
 onready var jet_anim = $Jet
 onready var notif_label = $NotifLabel
 
+var dead = false
+
 ############################################################
 # _ready
 
@@ -51,7 +53,7 @@ func _process(delta):
 
 	# TODO remove/replace with some other thing?
 	if get_global_position().y >= max_y:
-		take_damage(1)
+		take_damage(null, 1)
 		position = reset_position
 		velocity = Vector2.ZERO
 
@@ -61,16 +63,16 @@ func _process(delta):
 var jump_count = 0
 
 func _unhandled_key_input(event):
-	if has_jetpack and Trolley.is_event(event, "jetpack"):
+	if not dead and has_jetpack and Trolley.is_event(event, "jetpack"):
 		machine.transit("Jetpack")
-	elif Trolley.is_jump(event):
+	elif not dead and Trolley.is_jump(event):
 		if can_wall_jump and is_on_wall():
 			machine.transit("Jump")
 		if state in ["Idle", "Run", "Fall"] and jump_count == 0:
 			machine.transit("Jump")
-	elif Trolley.is_event(event, "action"):
+	elif not dead and Trolley.is_event(event, "action"):
 		shine()
-	elif Trolley.is_event(event, "fire"):
+	elif not dead and Trolley.is_event(event, "fire"):
 		fire()
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
@@ -78,20 +80,29 @@ func _unhandled_key_input(event):
 ############################################################
 # health
 
-var initial_health = 6
+var initial_health = 2
 onready var health = initial_health
 
 signal health_change(health)
+signal dead
 
-func take_damage(d = 1):
+func take_damage(body=null, d = 1):
 	health -= d
 	emit_signal("health_change", health)
 
-	if health <= 0:
-		die()
+	var dir = Vector2.DOWN
+	if body and body.global_position.x > global_position.x:
+		dir = Vector2.LEFT
+	elif body:
+		dir = Vector2.RIGHT
 
-func die():
-	print("TODO impl death")
+	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
+
+func die(remove=false):
+	dead = true
+	emit_signal("dead")
+	if remove:
+		queue_free()
 
 ############################################################
 # machine

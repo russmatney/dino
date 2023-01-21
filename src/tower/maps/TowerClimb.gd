@@ -36,13 +36,17 @@ func _ready():
 	randomize()
 	calc_rect()
 
-	player.connect("fired_bullet", self, "add_bullet")
+	player.connect("fired_bullet", self, "track_bullet")
+	player.connect("dead", self, "_on_player_dead")
 
 	break_the_targets.connect("targets_cleared", self, "_on_targets_cleared")
 
 func _on_targets_cleared():
 	# TODO ensure pickups collected
 	Hood.notif("Level Complete")
+
+func _on_player_dead():
+	Hood.notif("Death comes to us all")
 
 func _physics_process(_delta):
 	# TODO disable camera smoothing if we're going to jump across?
@@ -54,7 +58,7 @@ func _physics_process(_delta):
 
 
 var bullets = []
-func add_bullet(b):
+func track_bullet(b):
 	bullets.append(b)
 	b.connect("bullet_dying", self, "remove_bullet")
 
