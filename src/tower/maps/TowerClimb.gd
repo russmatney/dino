@@ -23,6 +23,16 @@ func collect_tiles():
 	return ts
 
 ######################################################################
+# win
+
+var targets_destroyed
+var robots_destroyed
+
+func check_win():
+	if targets_destroyed and robots_destroyed:
+		Tower.level_complete()
+
+######################################################################
 # ready
 
 var tiles
@@ -46,11 +56,11 @@ func _ready():
 func _on_player_spawned(p):
 	p.connect("fired_bullet", self, "track_bullet")
 	p.connect("dead", self, "_on_player_dead")
-	p.connect("pickups_change", self, "_on_player_pickups_change")
+	p.connect("pickups_changed", self, "_on_player_pickups_changed")
 
 var enemies = []
 
-func _on_player_pickups_change(pickups):
+func _on_player_pickups_changed(pickups):
 	if "hat" in pickups and "body" in pickups:
 		# TODO animate assembly/enemy spawning
 		# anim the items flying to the spot?
@@ -60,14 +70,26 @@ func _on_player_pickups_change(pickups):
 		enemy_spawners.shuffle()
 		if enemy_spawners:
 			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
+			en.connect("dead", self, "_on_robot_destroyed")
 			enemies.append(en)
 
 		# clear player items
 		player.pickups = []
+		player.emit_signal("pickups_changed", player.pickups)
 
 func _on_targets_cleared():
-	# TODO ensure pickups collected
-	Hood.notif("Level Complete")
+	Hood.notif("Targets Destroyed!")
+	targets_destroyed = true
+	check_win()
+
+func _on_robot_destroyed():
+	Hood.notif("Robot Destroyed!")
+	for e in enemies:
+		if not e.dead:
+			robots_destroyed = false
+			return
+	robots_destroyed = true
+	check_win()
 
 func _physics_process(_delta):
 	# TODO disable camera smoothing if we're wrapping across

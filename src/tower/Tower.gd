@@ -6,8 +6,6 @@ var deving_tower = true
 onready var tower_hud = preload("res://src/tower/hud/HUD.tscn")
 
 func _ready():
-	print("Tower autoload ready")
-
 	if OS.has_feature("tower") or deving_tower:
 		Navi.set_pause_menu("res://src/tower/menus/TowerPauseMenu.tscn")
 		Navi.set_main_menu("res://src/tower/menus/TowerMainMenu.tscn")
@@ -37,6 +35,12 @@ func restart_game():
 
 	DJ.pause_menu_song() # ensure menu music not playing
 
+func level_complete():
+	print("[TOWER] level complete")
+	Navi.show_win_menu()
+	# TODO generate new level in restart?
+	# TODO preserve level number
+
 ###########################################################################
 # player
 
@@ -53,9 +57,14 @@ func spawn_player(pos):
 	for k in player_default_opts.keys():
 		player[k] = player_default_opts[k]
 	player.position = pos
+	player.connect("dead", self, "show_dead")
 	Navi.add_child_to_current(player)
 	emit_signal("player_spawned", player)
 	return player
+
+func show_dead():
+	print("[Tower] player dead")
+	Navi.show_death_menu()
 
 ###########################################################################
 # enemy

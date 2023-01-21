@@ -41,9 +41,9 @@ text = "WIN!"
 margin_top = 111.0
 margin_right = 512.0
 margin_bottom = 129.0
-custom_constants/margin_right = 0
+custom_constants/margin_right = 156
 custom_constants/margin_top = 0
-custom_constants/margin_left = 0
+custom_constants/margin_left = 156
 custom_constants/margin_bottom = 0
 script = ExtResource( 1 )
 max_size = Vector2( 200, -1 )
@@ -57,3 +57,5 @@ margin_bottom = 18.0
 margin_right = 200.0
 margin_bottom = 18.0
 text = "Return to Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/MaxSizeContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]

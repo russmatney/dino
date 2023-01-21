@@ -27,7 +27,7 @@ func find_player():
 	if player:
 		player.connect("health_change", self, "update_player_health")
 		update_player_health(player.health)
-		player.connect("pickups_change", self, "update_player_pickups")
+		player.connect("pickups_changed", self, "update_player_pickups")
 		update_player_pickups(player.pickups)
 
 ###################################################################

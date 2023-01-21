@@ -11,7 +11,6 @@ signal targets_cleared
 # ready
 
 func _ready():
-	print("[Gunner] BREAK THE TARGETS!")
 	# defer until everything has hit the scene tree
 	call_deferred("setup")
 
@@ -37,10 +36,10 @@ func find_hud():
 		hud = huds[0]
 
 	if hud:
-		print("found hud and targets: ", targets.size())
+		print("[BREAK THE TARGETS] found hud and targets: ", targets.size())
 		hud.update_targets_remaining(targets.size())
 	else:
-		print("no hud found :(")
+		print("[BREAK THE TARGETS] no hud found")
 
 var wait_for = 5
 var has_warned = false

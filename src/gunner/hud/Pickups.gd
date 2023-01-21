@@ -14,7 +14,7 @@ func x_pos(i):
 
 func update_pickups(ps=pickups):
 	pickups = ps
-	if ps:
+	if not ps == null:
 		for c in get_children():
 			c.queue_free()
 

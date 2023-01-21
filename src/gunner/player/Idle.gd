@@ -13,8 +13,6 @@ func enter(ctx = {}):
 		else:
 			Cam.screenshake(0.25)
 
-	# GunnerSounds.play_sound("step")
-
 
 func physics_process(delta):
 	if actor.move_dir:

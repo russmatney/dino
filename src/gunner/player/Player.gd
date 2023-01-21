@@ -96,8 +96,9 @@ func take_damage(body=null, d = 1):
 			dir = Vector2.LEFT
 		else:
 			dir = Vector2.RIGHT
-
-	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
+		machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
+	else:
+		machine.transit("Dead", {"shake": 1.0})
 
 func die(remove=false):
 	dead = true
@@ -276,7 +277,7 @@ func shine(time=1.0):
 
 var pickups = []
 
-signal pickups_change(pickups)
+signal pickups_changed(pickups)
 
 func collect_pickup(pickup_type):
 	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
@@ -284,7 +285,7 @@ func collect_pickup(pickup_type):
 		has_jetpack = true
 	else:
 		pickups.append(pickup_type)
-		emit_signal("pickups_change", pickups)
+		emit_signal("pickups_changed", pickups)
 
 ######################################################################
 # tile color detection

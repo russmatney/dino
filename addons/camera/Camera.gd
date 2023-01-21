@@ -31,10 +31,8 @@ func cam_window_rect():
 # ensure camera
 
 func ensure_camera(cam_mode = null, zoom_offset=3000):
-	print("ensuring camera")
-
 	if cam and is_instance_valid(cam):
-		print("found cam: ", cam)
+		print("[CAM] found existing cam: ", cam)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")

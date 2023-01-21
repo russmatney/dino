@@ -1,9 +1,16 @@
 extends State
 
-func enter(_msg = {}):
+func enter(ctx = {}):
 	actor.velocity = Vector2.ZERO
 	actor.anim.animation = "dead"
 	actor.die()
+
+	if "shake" in ctx and ctx["shake"]:
+		GunnerSounds.play_sound("heavy_landing")
+		if typeof(ctx["shake"]) == TYPE_REAL:
+			Cam.screenshake(ctx["shake"])
+		else:
+			Cam.screenshake(0.5)
 
 
 func physics_process(delta):

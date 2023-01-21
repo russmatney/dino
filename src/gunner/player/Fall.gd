@@ -40,7 +40,9 @@ func physics_process(delta):
 			shake = 0.6
 		elif fall_distance >= fall_distance_shake_threshold:
 			shake = 0.3
-		machine.transit("Idle", {"shake": shake})
+
+		if not actor.dead:
+			machine.transit("Idle", {"shake": shake})
 
 	if actor.is_on_wall():
 		if not actor.can_wall_jump:
