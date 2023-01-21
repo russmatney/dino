@@ -32,8 +32,15 @@ func _ready():
 	ready = true
 	randomize()
 
+	calc_rect()
+
 ######################################################################
 # triggers
+
+export(bool) var recalc_rect setget do_calc_rect
+func do_calc_rect(_v):
+	if ready:
+		calc_rect()
 
 export(bool) var clear setget do_clear
 func do_clear(_v):
@@ -96,3 +103,18 @@ func do_add_room(_v):
 			add_room_inst(middle_room_scene)
 		elif next_room_type == "end":
 			add_room_inst(end_room_scene)
+
+		rect = calc_rect()
+
+######################################################################
+# calc rect
+
+var rect
+func calc_rect():
+	var new_rect = Rect2()
+	for r in rooms():
+		var rr = r.calc_rect_global()
+		new_rect = new_rect.merge(rr)
+
+	rect = new_rect
+	return rect

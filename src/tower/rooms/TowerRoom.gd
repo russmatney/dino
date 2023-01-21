@@ -70,7 +70,7 @@ func spawn_targets():
 		var valid_nbrs = Reptile.valid_neighbors(t, cell)
 
 		if valid_nbrs.size() == 9:
-			var pos = t.map_to_world(cell) * t.scale.x
+			var pos = cell_to_local_pos(t, cell)
 			# center on tile (rn it's top-left)
 			locs.append({
 				"position": pos,

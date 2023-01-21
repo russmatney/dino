@@ -65,6 +65,23 @@ func tilemap_cells(opts={}):
 			cells.append([t, cell])
 	return cells
 
+func cell_to_local_pos(t, cell):
+	# assumes scaled in same x/y directions
+	return t.map_to_world(cell) * t.scale.x
+
+func calc_rect():
+	var rect = Rect2()
+	for t in tilemaps():
+		var rr = t.get_used_rect()
+		var pos = t.map_to_world(rr.position) * t.scale.x
+		var size = t.map_to_world(rr.size) * t.scale.x
+		rect = rect.merge(Rect2(pos, size))
+	return rect
+
+func calc_rect_global():
+	var r = calc_rect()
+	r.position = to_global(r.position)
+	return r
 
 ######################################################################
 # name
