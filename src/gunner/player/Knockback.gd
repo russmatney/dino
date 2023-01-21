@@ -16,7 +16,8 @@ func enter(msg = {}):
 	dir = msg["dir"]
 	dead = msg["dead"]
 
-	actor.velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
+	if dir:
+		actor.velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
 
 	if dead:
 		actor.velocity *= 2

@@ -11,8 +11,9 @@
 [ext_resource path="res://src/gunner/enemies/Knockback.gd" type="Script" id=9]
 [ext_resource path="res://src/gunner/enemies/Attack.gd" type="Script" id=10]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 17.5, 26.5 )
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 15.5
+height = 31.0
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 2 )
@@ -27,14 +28,14 @@ script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5, 5.5 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 4
+frame = 2
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

@@ -16,10 +16,11 @@ func physics_process(delta):
 
 	if actor.move_dir:
 		actor.velocity.x = actor.air_speed * actor.move_dir.x
-		# TODO clamp fall speed
 	else:
 		# slow down
 		actor.velocity.x = actor.velocity.x * 0.9 * delta
+
+	actor.velocity.y = clamp(actor.velocity.y, actor.velocity.y, actor.max_fall_speed)
 
 	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
 
@@ -31,7 +32,9 @@ func physics_process(delta):
 		var fall_distance = actor.global_position.y - initial_y
 		if fall_distance >= huge_fall_distance_shake_threshold:
 			# TODO player flash color and drop health
+			# TODO player hurt sound
 			shake = 1.0
+			actor.take_damage(null, 1)
 		elif fall_distance >= heavy_fall_distance_shake_threshold:
 			# TODO player flash color
 			shake = 0.6

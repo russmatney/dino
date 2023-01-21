@@ -4,21 +4,38 @@ var is_jetting
 
 var jet_boost_ramp
 var jet_boost_levels = [
-	[1, 1.0],
-	[0.5, 0.6],
-	[0.2, 0.3],
-	# initial speed from ground and in air
-	[null, 4.0, 2.5],
+	# depends on order, should be sorted by descending "time"
+	{
+		"time": 1.0,
+		"boost": 1.0,
+		},
+	{
+		"time": 0.5,
+		"boost": 0.7,
+		},
+	{
+		"time": 0.25,
+		"boost": 0.4,
+		},
+	{
+		"time": 0.0,
+		"boost": 4.0,
+		"boost_from_air": 3.3,
+		}
 	]
+
+var jet_boost_level
 
 func jet_boost_factor(delta):
 	jet_boost_ramp += delta
 	for jbl in jet_boost_levels:
-		if jbl[0] == null or jet_boost_ramp > jbl[0]:
-			if jbl.size() == 3:
+		if jet_boost_ramp > jbl["time"]:
+			if "boost_from_air" in jbl:
 				if not actor.is_on_floor():
-					return jbl[2]
-			return jbl[1]
+					jet_boost_level = jbl
+					return jbl["boost_from_air"]
+			jet_boost_level = jbl
+			return jbl["boost"]
 
 var jet_sound_every = 1.1
 var jet_sound_in
@@ -44,9 +61,10 @@ func physics_process(delta):
 	if Input.is_action_pressed("jetpack"):
 		if not is_jetting:
 			GunnerSounds.interrupt_sound("jet_echo")
-			GunnerSounds.play_sound("jet_boost")
+			if not actor.in_blue:
+				GunnerSounds.play_sound("jet_boost")
+				jet_sound_in = jet_sound_every
 			is_jetting = true
-			jet_sound_in = jet_sound_every
 	else:
 		GunnerSounds.interrupt_sound("jet_boost")
 		if is_jetting:
@@ -54,25 +72,31 @@ func physics_process(delta):
 		jet_boost_ramp = 0
 		is_jetting = false
 
-	if is_jetting:
+ # and not actor.in_blue
+	if is_jetting and not actor.dead:
+		actor.jet_anim.set_visible(true)
+
 		var boost_factor = jet_boost_factor(delta)
 
-		actor.jet_anim.set_visible(true)
+		if actor.in_red:
+			boost_factor *= 2
+		if actor.in_blue:
+			boost_factor /= 8
+
 		if boost_factor > 0.5:
 			actor.jet_anim.animation = "all"
 		else:
 			actor.jet_anim.animation = "init"
-		# print("boost factor: ", boost_factor)
-		# print("jet boost ramp: ", jet_boost_ramp)
+
 		actor.velocity.y -= actor.jetpack_boost * boost_factor * delta
 		actor.velocity.y += actor.gravity * delta / 4
+		actor.velocity.y = clamp(actor.velocity.y, actor.max_jet_speed, actor.velocity.y)
 	else:
 		actor.jet_anim.set_visible(false)
 		actor.velocity.y += actor.gravity * delta
 
 	if actor.move_dir:
 		actor.velocity.x = actor.air_speed * actor.move_dir.x
-		# TODO clamp fall speed
 	else:
 		actor.velocity.x = actor.velocity.x * 0.9 * delta
 
@@ -85,5 +109,4 @@ func physics_process(delta):
 		machine.transit("Idle")
 
 	if not is_jetting and actor.velocity.y > 0:
-		# TODO fall some distance first?
 		machine.transit("Fall")

@@ -129,7 +129,6 @@ script = ExtResource( 17 )
 script = ExtResource( 18 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
-visible = false
 margin_left = -45.0
 margin_right = 45.0
 margin_bottom = 40.0

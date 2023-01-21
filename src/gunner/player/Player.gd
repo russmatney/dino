@@ -72,7 +72,7 @@ func _unhandled_key_input(event):
 			machine.transit("Jump")
 	elif not dead and Trolley.is_event(event, "action"):
 		shine()
-	elif not dead and Trolley.is_event(event, "fire"):
+	elif not dead and Trolley.is_event(event, "fire") and not state in ["Knockback"]:
 		fire()
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
@@ -80,7 +80,7 @@ func _unhandled_key_input(event):
 ############################################################
 # health
 
-var initial_health = 2
+var initial_health = 6
 onready var health = initial_health
 
 signal health_change(health)
@@ -90,11 +90,12 @@ func take_damage(body=null, d = 1):
 	health -= d
 	emit_signal("health_change", health)
 
-	var dir = Vector2.DOWN
-	if body and body.global_position.x > global_position.x:
-		dir = Vector2.LEFT
-	elif body:
-		dir = Vector2.RIGHT
+	var dir
+	if body:
+		if body.global_position.x > global_position.x:
+			dir = Vector2.LEFT
+		else:
+			dir = Vector2.RIGHT
 
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
@@ -121,6 +122,10 @@ func set_state_label(label: String):
 	var lbl = label
 	if machine.state.has_method("label"):
 		lbl = machine.state.label()
+	if in_blue:
+		lbl += " COLD"
+	if in_red:
+		lbl += " HOT"
 	state_label.bbcode_text = "[center]" + lbl + "[/center]"
 
 
@@ -129,11 +134,13 @@ func set_state_label(label: String):
 
 var move_dir = Vector2.ZERO  # controller input
 var velocity = Vector2.ZERO
-export(int) var speed := 120
-export(int) var air_speed := 120
+export(int) var speed := 220
+export(int) var air_speed := 200
+export(int) var max_fall_speed := 1500
 export(int) var jump_impulse := 400
 export(int) var gravity := 900
 export(int) var jetpack_boost := 800
+export(int) var max_jet_speed := -1200
 
 var can_wall_jump
 
@@ -292,6 +299,7 @@ func _on_TileAOEDetector_body_entered(body:Node):
 	elif body.is_in_group("redtile"):
 		current_tile_colors.append("red")
 	update_colors()
+	update_aoe_state()
 
 func _on_TileAOEDetector_body_exited(body:Node):
 	if body.is_in_group("yellowtile"):
@@ -301,6 +309,7 @@ func _on_TileAOEDetector_body_exited(body:Node):
 	elif body.is_in_group("redtile"):
 		current_tile_colors.erase("red")
 	update_colors()
+	update_aoe_state()
 
 var coldfire_dark = Color8(70, 66, 94)
 var coldfire_blue = Color8(91, 118, 141)
@@ -325,3 +334,17 @@ func update_colors():
 	else:
 		tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
 		tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_yellow, 0.4)
+
+var in_blue = false
+var in_red = false
+func update_aoe_state():
+	if "blue" in current_tile_colors:
+		in_blue = true
+	else:
+		print("no longer BLUE")
+		in_blue = false
+
+	if "red" in current_tile_colors:
+		in_red = true
+	else:
+		in_red = false
