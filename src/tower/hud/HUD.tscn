@@ -23,6 +23,13 @@ margin_right = 506.0
 margin_bottom = 118.0
 color = Color( 0.27451, 0.258824, 0.368627, 0.486275 )
 
+[node name="ColorRect3" type="ColorRect" parent="."]
+margin_left = 408.0
+margin_top = 119.0
+margin_right = 506.0
+margin_bottom = 295.0
+color = Color( 0.27451, 0.258824, 0.368627, 0.486275 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0

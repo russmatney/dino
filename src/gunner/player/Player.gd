@@ -223,7 +223,7 @@ func notif(text, opts={}):
 	else:
 		label = notif_label
 
-	label.bbcode_text = "[center][jump][sparkle freq=10.0 c1=#4466cc c2=#aabbdd]" + text
+	label.bbcode_text = "[center][jump][sparkle freq=10.0 c1=#5b768d c2=#f6c6a8]" + text
 	label.set_visible(true)
 	var tween = create_tween()
 
