@@ -5,6 +5,8 @@ var player
 var hud
 var destroyed_count = 0
 
+signal targets_cleared
+
 ###############################################################################
 # ready
 
@@ -23,8 +25,6 @@ func setup():
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
 		Util.ensure_connection(t, "destroyed", self, "_on_target_destroyed")
-
-	print("targets? :(", targets.size())
 
 	find_hud()
 
@@ -85,8 +85,8 @@ func _on_target_destroyed(t):
 func target_change(opts = {}):
 	if targets.size() == 1 and opts.get("was_destroy"):
 		if player:
-			player.notif("ONE REMAINING")
-		Cam.freezeframe("one-target-left", 0.3, 2)
+			player.notif("ONE TARGET REMAINING")
+		Cam.freezeframe("one-target-left", 0.3, 0.5)
 	elif targets.empty() and opts.get("was_destroy"):
 		if player:
 			player.notif("TARGETS CLEARED")
@@ -98,5 +98,4 @@ func _on_slowmo_stopped(label):
 			player.level_up()
 
 		yield(get_tree().create_timer(2.0), "timeout")
-		# TODO handle break the targets complete
-		Respawner.respawn_missing()
+		emit_signal("targets_cleared")

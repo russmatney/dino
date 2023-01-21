@@ -28,6 +28,7 @@ func collect_tiles():
 var tiles
 
 onready var player = $Player
+onready var break_the_targets = $BreakTheTargets
 
 var ready = false
 func _ready():
@@ -36,6 +37,12 @@ func _ready():
 	calc_rect()
 
 	player.connect("fired_bullet", self, "add_bullet")
+
+	break_the_targets.connect("targets_cleared", self, "_on_targets_cleared")
+
+func _on_targets_cleared():
+	# TODO ensure pickups collected
+	Hood.notif("Level Complete")
 
 func _physics_process(_delta):
 	# TODO disable camera smoothing if we're going to jump across?
