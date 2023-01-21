@@ -27,12 +27,21 @@ func collect_tiles():
 
 var tiles
 
+onready var player = $Player
+
 var ready = false
 func _ready():
 	ready = true
 	randomize()
 
 	calc_rect()
+
+func wrap_player():
+	player.position.x = wrapf(player.position.x, rect.position.x, rect.end.x)
+	player.position.y = wrapf(player.position.y, rect.position.y, rect.end.y)
+
+func _physics_process(_delta):
+	wrap_player()
 
 ######################################################################
 # triggers
