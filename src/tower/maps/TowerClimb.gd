@@ -37,10 +37,9 @@ func _ready():
 
 	player.connect("fired_bullet", self, "add_bullet")
 
-# TODO don't wrap into walls
-# func _physics_process(_delta):
-# 	# TODO disable camera smoothing if we're going to jump across?
-# 	wrap_thing(player)
+func _physics_process(_delta):
+	# TODO disable camera smoothing if we're going to jump across?
+	wrap_thing(player)
 
 #   # TODO fix wrap disabling bullet collisions
 # 	for ar in bullets:
