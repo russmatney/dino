@@ -12,12 +12,17 @@ func _ready():
 ########################################################
 # process
 
+export(float) var max_y = 5000.0
+
 func _process(_delta):
 	# if target offscreen and player close enough/line-of-sight
 	if not on_screen:
 		offscreen_indicator.activate(self)
 	else:
 		offscreen_indicator.deactivate()
+
+	if get_global_position().y >= max_y:
+		die()
 
 ########################################################
 # movement
@@ -87,8 +92,8 @@ func take_damage(body=null, d = 1):
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
 func die():
-	print("enemy dead")
 	emit_signal("dead")
+	queue_free()
 
 ########################################################
 # offscreen indicator

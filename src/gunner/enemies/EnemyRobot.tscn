@@ -18,7 +18,7 @@ shader = ExtResource( 2 )
 shader_param/outline = Color( 0.819608, 0.486275, 0.486275, 1 )
 shader_param/accent = Color( 0.27451, 0.258824, 0.368627, 1 )
 
-[node name="EnemyRobot" type="KinematicBody2D"]
+[node name="EnemyRobot" type="KinematicBody2D" groups=["enemy_robots"]]
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,7 +30,7 @@ material = SubResource( 2 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

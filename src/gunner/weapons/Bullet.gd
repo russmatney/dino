@@ -33,3 +33,5 @@ func _on_Bullet_body_entered(body: Node):
 
 	if body.is_in_group("darktile"):
 		body.hit(global_position)
+	if body.is_in_group("enemy_robots"):
+		body.take_damage(self, 1)
