@@ -68,10 +68,10 @@ func spawn_targets():
 		var t = t_cell[0]
 		var cell = t_cell[1]
 		var valid_nbrs = Reptile.valid_neighbors(t, cell)
-		prn("found ", valid_nbrs.size(), " valid_nbrs for cell ", cell)
 
 		if valid_nbrs.size() == 9:
 			var pos = t.map_to_world(cell) * t.scale.x
+			# center on tile (rn it's top-left)
 			locs.append({
 				"position": pos,
 				"cell": cell,
@@ -86,8 +86,6 @@ func spawn_targets():
 				break
 
 	for loc in target_locs:
-		print(loc["position"])
-		print(loc["cell"])
 		var target = target_scene.instance()
 		# set relative to parent position
 		target.position = loc["position"]

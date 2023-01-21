@@ -293,7 +293,9 @@ func add_tile_at_coord(ctx):
 	if ctx.group:
 		var t = ctx.group.tilemap
 		if t and is_instance_valid(t):
-			t.set_cell(ctx.coord.x, ctx.coord.y, 0)
+			var t_ids = t.tile_set.get_tiles_ids()
+			t_ids.shuffle()
+			t.set_cell(ctx.coord.x, ctx.coord.y, t_ids[0])
 
 func update_tilemaps():
 	for gp in groups:
