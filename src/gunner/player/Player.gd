@@ -197,6 +197,7 @@ func stop_firing():
 	if fire_tween and fire_tween.is_running():
 		fire_tween.kill()
 
+signal fired_bullet(bullet)
 
 func fire_bullet():
 	var bullet = bullet_scene.instance()
@@ -205,6 +206,7 @@ func fire_bullet():
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
 	GunnerSounds.play_sound("fire")
+	emit_signal("fired_bullet", bullet)
 
 	# push player back when firing
 	var pos = get_global_position()

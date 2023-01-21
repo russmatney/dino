@@ -33,15 +33,32 @@ var ready = false
 func _ready():
 	ready = true
 	randomize()
-
 	calc_rect()
 
-func wrap_player():
-	player.position.x = wrapf(player.position.x, rect.position.x, rect.end.x)
-	player.position.y = wrapf(player.position.y, rect.position.y, rect.end.y)
+	player.connect("fired_bullet", self, "add_bullet")
 
-func _physics_process(_delta):
-	wrap_player()
+# TODO don't wrap into walls
+# func _physics_process(_delta):
+# 	# TODO disable camera smoothing if we're going to jump across?
+# 	wrap_thing(player)
+
+#   # TODO fix wrap disabling bullet collisions
+# 	for ar in bullets:
+# 		wrap_thing(ar)
+
+
+var bullets = []
+func add_bullet(b):
+	bullets.append(b)
+	b.connect("bullet_dying", self, "remove_bullet")
+
+func remove_bullet(b):
+	bullets.erase(b)
+
+func wrap_thing(thing):
+	if thing and is_instance_valid(thing):
+		thing.position.x = wrapf(thing.position.x, rect.position.x, rect.end.x)
+		thing.position.y = wrapf(thing.position.y, rect.position.y, rect.end.y)
 
 ######################################################################
 # triggers

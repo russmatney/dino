@@ -3,17 +3,19 @@ extends RigidBody2D
 onready var pop = $Pop
 onready var anim = $AnimatedSprite
 
-var ttl = 5
+var ttl = 3
 var dying = false
 
 
 func _process(delta):
 	ttl -= delta
 	if ttl <= 0:
-		queue_free()
+		kill()
 
+signal bullet_dying(bullet)
 
 func kill():
+	emit_signal("bullet_dying", self)
 	# no need to run more than once (if we contact multiple objs)
 	if not dying:
 		dying = true
@@ -26,6 +28,8 @@ func kill():
 		if is_instance_valid(self):
 			queue_free()
 
-
-func _on_Bullet_body_entered(_body: Node):
+func _on_Bullet_body_entered(body: Node):
 	kill()
+
+	if body.is_in_group("darktile"):
+		body.hit(global_position)
