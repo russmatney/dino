@@ -4,14 +4,12 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
-outline_size = 1
-outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
 extra_spacing_bottom = 4
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 8.0
-bg_color = Color( 0.2, 0.227451, 0.309804, 1 )
+bg_color = Color( 0.27451, 0.258824, 0.368627, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -19,6 +17,6 @@ corner_radius_bottom_left = 4
 corner_detail = 4
 
 [resource]
-Label/colors/font_color = Color( 0.701961, 0.560784, 0.52549, 1 )
+Label/colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 Label/fonts/font = SubResource( 1 )
 Label/styles/normal = SubResource( 2 )

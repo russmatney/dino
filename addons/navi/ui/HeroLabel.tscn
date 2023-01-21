@@ -5,6 +5,7 @@
 [node name="HeroLabel" type="RichTextLabel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_colors/default_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Hero Label[/center]"

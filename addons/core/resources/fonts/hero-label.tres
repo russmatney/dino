@@ -6,6 +6,6 @@
 resource_local_to_scene = true
 size = 96
 outline_size = 4
-outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
+outline_color = Color( 0.356863, 0.462745, 0.552941, 1 )
 extra_spacing_top = 10
 font_data = ExtResource( 1 )

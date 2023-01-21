@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/sprites/HeartAnimations.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://src/ColorSwapShader.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/original_0 = Color( 0.85098, 0.341176, 0.388235, 1 )
+shader_param/original_1 = Color( 0.34902, 0.337255, 0.321569, 1 )
+shader_param/original_2 = null
+shader_param/original_3 = null
+shader_param/original_4 = null
+shader_param/replace_0 = Color( 0.819608, 0.486275, 0.486275, 1 )
+shader_param/replace_1 = Color( 0.27451, 0.258824, 0.368627, 1 )
+shader_param/replace_2 = null
+shader_param/replace_3 = null
+shader_param/replace_4 = null
 
 [node name="HeartIcon" type="AnimatedSprite"]
+material = SubResource( 1 )
 frames = ExtResource( 1 )
 animation = "half"

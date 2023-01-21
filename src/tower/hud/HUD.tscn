@@ -9,6 +9,20 @@
 [node name="HUD" type="CanvasLayer" groups=["hud"]]
 script = ExtResource( 4 )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 111.0
+margin_bottom = 111.0
+color = Color( 0.27451, 0.258824, 0.368627, 0.486275 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 397.0
+margin_top = 7.0
+margin_right = 506.0
+margin_bottom = 118.0
+color = Color( 0.27451, 0.258824, 0.368627, 0.486275 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -42,6 +56,7 @@ anchor_bottom = 0.0
 margin_top = 68.0
 margin_right = 388.0
 margin_bottom = 81.0
+custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Targets Destroyed: 0"
 align = 0
 
@@ -52,6 +67,7 @@ anchor_bottom = 0.0
 margin_top = 85.0
 margin_right = 388.0
 margin_bottom = 98.0
+custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Targets Remaining: 0"
 align = 0
 

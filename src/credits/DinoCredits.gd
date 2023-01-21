@@ -29,6 +29,13 @@ var dino_credits = [
     "https://creativecommons.org/publicdomain/zero/1.0/",
   ],
   [
+    "Color Palettes",
+    "",
+    "COLDFIRE GB",
+    "By Kerrielake",
+    "https://lospec.com/palette-list/coldfire-gb",
+  ],
+  [
     "Art",
     "",
     "Pirate Bomb Tile Set",

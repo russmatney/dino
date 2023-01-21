@@ -11,7 +11,7 @@
 resource_local_to_scene = true
 size = 96
 outline_size = 4
-outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
+outline_color = Color( 0.356863, 0.462745, 0.552941, 1 )
 extra_spacing_top = 10
 font_data = ExtResource( 2 )
 
@@ -19,6 +19,11 @@ font_data = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.27451, 0.258824, 0.368627, 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0

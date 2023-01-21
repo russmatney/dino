@@ -8,6 +8,7 @@ extra_spacing_bottom = 4
 font_data = ExtResource( 3 )
 
 [sub_resource type="Theme" id=2]
+Label/colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 Label/fonts/font = SubResource( 1 )
 
 [node name="TrolleyActionLabel" type="HBoxContainer"]
@@ -22,7 +23,7 @@ key = null
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
 margin_top = 11.0
-margin_right = 48.0
+margin_right = 96.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 theme = SubResource( 2 )
