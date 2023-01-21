@@ -2,10 +2,10 @@ tool
 extends ReptileRoom
 class_name TowerRoom
 
-var dark_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireDark.tscn")
-var blue_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireBlue.tscn")
-var red_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireRed.tscn")
-var yellow_tile_scene = preload("res://addons/reptile/tilemaps/coldfire/ColdFireYellow.tscn")
+var dark_tile_scene = preload("res://src/tower/tiles/DarkTile.tscn")
+var blue_tile_scene = preload("res://src/tower/tiles/BlueTile.tscn")
+var red_tile_scene = preload("res://src/tower/tiles/RedTile.tscn")
+var yellow_tile_scene = preload("res://src/tower/tiles/YellowTile.tscn")
 
 var coldfire_dark = Color8(91, 118, 141)
 var coldfire_blue = Color8(70, 66, 94)
@@ -41,7 +41,7 @@ func get_noise_input():
 	var options = [{
 		"seed": rand_range(0, 100000),
 		"octaves": Util.rand_of([2, 3, 4]),
-		"period": rand_range(5, 30),
+		"period": rand_range(15, 30),
 		"persistence": rand_range(0.3, 0.5),
 		"lacunarity": rand_range(2.5, 4.0),
 	}]
@@ -60,11 +60,11 @@ func spawn_targets():
 
 	var locs = []
 
-	# var dark_tilemaps = tilemaps({"group": "coldfire_darktile"})
-	# var red_tilemaps = tilemaps({"group": "coldfire_redtile"})
-	# var blue_tilemaps = tilemaps({"group": "coldfire_bluetile"})
+	# var dark_tilemaps = tilemaps({"group": "darktile"})
+	# var red_tilemaps = tilemaps({"group": "redtile"})
+	# var blue_tilemaps = tilemaps({"group": "bluetile"})
 
-	for t_cell in tilemap_cells({"group": "coldfire_yellowtile"}):
+	for t_cell in tilemap_cells({"group": "yellowtile"}):
 		var t = t_cell[0]
 		var cell = t_cell[1]
 		var valid_nbrs = Reptile.valid_neighbors(t, cell)

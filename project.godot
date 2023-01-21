@@ -645,6 +645,7 @@ jetpack={
 2d_physics/layer_4="enemies"
 2d_physics/layer_5="enemy projectiles"
 2d_physics/layer_6="items"
+2d_physics/layer_7="aoe tiles"
 
 [physics]
 

@@ -155,7 +155,7 @@ var trauma_decrement_factor = 0.7
 func inc_trauma(inc):
 	trauma += inc
 	trauma = clamp(trauma, 0.0, 1.0)
-	print("[CAM] Trauma: ", trauma)
+	# print("[CAM] Trauma: ", trauma)
 
 var shake_offset
 var shake_rotation
@@ -177,7 +177,7 @@ func process_shake(delta):
 		trauma -= trauma_decrement_factor * delta
 		trauma = clamp(trauma, 0.0, 1.0)
 		if trauma == 0.0:
-			print("[CAM] Trauma resetting: ", trauma)
+			# print("[CAM] Trauma resetting: ", trauma)
 			screenshake_reset()
 		else:
 			if not trans_noise_ctx:

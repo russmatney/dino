@@ -264,3 +264,50 @@ func collect_pickup(pickup_type):
 	else:
 		pickups.append(pickup_type)
 		emit_signal("pickups_change", pickups)
+
+######################################################################
+# tile color detection
+
+var current_tile_colors = []
+
+func _on_TileAOEDetector_body_entered(body:Node):
+	if body.is_in_group("yellowtile"):
+		current_tile_colors.append("yellow")
+	elif body.is_in_group("bluetile"):
+		current_tile_colors.append("blue")
+	elif body.is_in_group("redtile"):
+		current_tile_colors.append("red")
+	update_colors()
+
+func _on_TileAOEDetector_body_exited(body:Node):
+	if body.is_in_group("yellowtile"):
+		current_tile_colors.erase("yellow")
+	elif body.is_in_group("bluetile"):
+		current_tile_colors.erase("blue")
+	elif body.is_in_group("redtile"):
+		current_tile_colors.erase("red")
+	update_colors()
+
+var coldfire_dark = Color8(70, 66, 94)
+var coldfire_blue = Color8(91, 118, 141)
+var coldfire_red = Color8(209, 124, 124)
+var coldfire_yellow = Color8(246, 198, 168)
+
+func update_colors():
+	var tween = create_tween()
+	if current_tile_colors:
+		var color = current_tile_colors[0]
+
+		match(color):
+			"red":
+				tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
+				tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_yellow, 0.4)
+			"yellow":
+				tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
+				tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_red, 0.4)
+			"blue":
+				tween.tween_property(anim.material, "shader_param/outline", coldfire_yellow, 0.4)
+				tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_dark, 0.4)
+	else:
+		tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
+		tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_yellow, 0.4)

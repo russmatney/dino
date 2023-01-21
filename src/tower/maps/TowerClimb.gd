@@ -16,10 +16,10 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 
 func collect_tiles():
 	var ts = []
-	ts.append_array(get_tree().get_nodes_in_group("coldfire_bluetile"))
-	ts.append_array(get_tree().get_nodes_in_group("coldfire_redtile"))
-	ts.append_array(get_tree().get_nodes_in_group("coldfire_darktile"))
-	ts.append_array(get_tree().get_nodes_in_group("coldfire_yellowtile"))
+	ts.append_array(get_tree().get_nodes_in_group("bluetile"))
+	ts.append_array(get_tree().get_nodes_in_group("redtile"))
+	ts.append_array(get_tree().get_nodes_in_group("darktile"))
+	ts.append_array(get_tree().get_nodes_in_group("yellowtile"))
 	return ts
 
 ######################################################################
@@ -31,17 +31,6 @@ var ready = false
 func _ready():
 	ready = true
 	randomize()
-	disable_collisions()
-
-func disable_collisions(_opts={}):
-	# disable all collisions except darktile
-	tiles = collect_tiles()
-	for t in tiles:
-		if not t.is_in_group("coldfire_darktile"):
-			# disable collisions with player
-			t.set_collision_layer_bit(0, 0)
-			t.set_collision_mask_bit(1, 0)
-			t.set_collision_mask_bit(2, 0)
 
 ######################################################################
 # triggers
