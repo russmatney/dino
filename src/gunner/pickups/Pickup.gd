@@ -6,6 +6,24 @@ func _ready():
 	$AnimatedSprite.animation = type
 	Respawner.register_respawn(self)
 
+	animate()
+	animate_rotate()
+
+func animate_rotate():
+	var tween = create_tween()
+	tween.set_loops(0)
+	tween.tween_property($AnimatedSprite, "rotation", rotation + PI/8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property($AnimatedSprite, "rotation", rotation - PI/8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+
+func animate():
+	var n = 10
+	var og_pos = position
+	var rand_offset = Vector2(randi() % n - n/2, randi() % n - n/2)
+	var tween = create_tween()
+	tween.tween_property(self, "position", position + rand_offset, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "position", og_pos, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback(self, "animate").set_delay(rand_range(0.3, 2.0))
+
 func kill():
 	GunnerSounds.play_sound("pickup")
 	# TODO animate
