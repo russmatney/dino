@@ -2,12 +2,15 @@ extends KinematicBody2D
 
 onready var anim = $AnimatedSprite
 onready var machine = $Machine
+onready var collision_shape = $CollisionShape2D
+
+var dead = false
 
 ########################################################
 # ready
 
 func _ready():
-	pass # Replace with function body.
+	Respawner.register_respawn(self)
 
 ########################################################
 # process
@@ -16,13 +19,20 @@ export(float) var max_y = 5000.0
 
 func _process(_delta):
 	# if target offscreen and player close enough/line-of-sight
-	if not on_screen:
+	if not on_screen and not machine.state.name == "Dead":
 		offscreen_indicator.activate(self)
 	else:
 		offscreen_indicator.deactivate()
 
-	if get_global_position().y >= max_y:
-		die()
+	if get_global_position().y >= max_y and not machine.state.name == "Dead":
+		die(true)
+
+	if player and machine.state.name in ["Idle", "Walk"]:
+		vision_ray.set_cast_to(to_local(player.get_global_position()))
+		if vision_ray.is_colliding():
+			var coll = vision_ray.get_collider()
+			if coll.is_in_group("player"):
+				machine.transit("Attack")
 
 ########################################################
 # movement
@@ -31,11 +41,13 @@ var velocity = Vector2.ZERO
 var speed = 50
 var gravity = 900
 
-var facing = Vector2.LEFT
+var facing_dir = Vector2.LEFT
 var move_dir
 
 onready var bullet_position = $BulletPosition
 onready var front_ray = $FrontRay
+onready var vision_box = $VisionBox
+onready var vision_ray = $VisionRay
 
 func face_dir(dir):
 	if dir == Vector2.RIGHT:
@@ -44,14 +56,13 @@ func face_dir(dir):
 		face_right()
 
 func turn():
-	if facing == Vector2.RIGHT:
+	if facing_dir == Vector2.RIGHT:
 		face_left()
-	elif facing == Vector2.LEFT:
+	elif facing_dir == Vector2.LEFT:
 		face_right()
 
-
 func face_right():
-	facing = Vector2.RIGHT
+	facing_dir = Vector2.RIGHT
 	anim.flip_h = true
 
 	if bullet_position.position.x < 0:
@@ -60,8 +71,14 @@ func face_right():
 	if front_ray.position.x < 0:
 		front_ray.position.x *= -1
 
+	if vision_ray.position.x < 0:
+		vision_ray.position.x *= -1
+
+	if vision_box.position.x < 0:
+		vision_box.position.x *= -1
+
 func face_left():
-	facing = Vector2.LEFT
+	facing_dir = Vector2.LEFT
 	anim.flip_h = false
 
 	if bullet_position.position.x > 0:
@@ -69,6 +86,12 @@ func face_left():
 
 	if front_ray.position.x > 0:
 		front_ray.position.x *= -1
+
+	if vision_ray.position.x > 0:
+		vision_ray.position.x *= -1
+
+	if vision_box.position.x > 0:
+		vision_box.position.x *= -1
 
 ############################################################
 # health
@@ -91,9 +114,11 @@ func take_damage(body=null, d = 1):
 
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
-func die():
+func die(remove=false):
+	dead = true
 	emit_signal("dead")
-	queue_free()
+	if remove:
+		queue_free()
 
 ########################################################
 # offscreen indicator
@@ -105,3 +130,42 @@ func _on_VisibilityNotifier2D_screen_entered():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	on_screen = false
+
+
+########################################################
+# vision box
+
+var player
+
+func _on_VisionBox_body_entered(body:Node):
+	if body.is_in_group("player"):
+		player = body
+
+func _on_VisionBox_body_exited(body:Node):
+	if body.is_in_group("player"):
+		player = null
+
+########################################################
+# fire
+
+onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+var bullet_impulse = 800
+var fire_rate = 0.2
+var bullet_knockback = 2
+
+signal fired_bullet(bullet)
+
+func fire_at_player():
+	if player and is_instance_valid(player):
+		var bullet = bullet_scene.instance()
+		bullet.position = bullet_position.get_global_position()
+		bullet.add_collision_exception_with(self)
+		Navi.current_scene.call_deferred("add_child", bullet)
+
+		var angle_to_player = bullet.position.direction_to(player.global_position)
+
+		bullet.rotation = angle_to_player.angle()
+		bullet.apply_impulse(Vector2.ZERO, angle_to_player * bullet_impulse)
+
+		GunnerSounds.play_sound("fire")
+		emit_signal("fired_bullet", bullet)

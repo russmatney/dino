@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/sprites/greyhat_frames.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/gunner/enemies/Dead.gd" type="Script" id=7]
 [ext_resource path="res://src/gunner/enemies/Walk.gd" type="Script" id=8]
 [ext_resource path="res://src/gunner/enemies/Knockback.gd" type="Script" id=9]
+[ext_resource path="res://src/gunner/enemies/Attack.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 17.5, 26.5 )
@@ -17,6 +18,9 @@ extents = Vector2( 17.5, 26.5 )
 shader = ExtResource( 2 )
 shader_param/outline = Color( 0.819608, 0.486275, 0.486275, 1 )
 shader_param/accent = Color( 0.27451, 0.258824, 0.368627, 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 216.75, 239 )
 
 [node name="EnemyRobot" type="KinematicBody2D" groups=["enemy_robots"]]
 script = ExtResource( 4 )
@@ -30,7 +34,6 @@ material = SubResource( 2 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -56,6 +59,9 @@ script = ExtResource( 7 )
 [node name="Knockback" type="Node" parent="Machine"]
 script = ExtResource( 9 )
 
+[node name="Attack" type="Node" parent="Machine"]
+script = ExtResource( 10 )
+
 [node name="BulletPosition" type="Position2D" parent="."]
 position = Vector2( -21, 0 )
 
@@ -63,5 +69,19 @@ position = Vector2( -21, 0 )
 position = Vector2( -16, 0 )
 enabled = true
 
+[node name="VisionBox" type="Area2D" parent="."]
+position = Vector2( -221, -69 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionBox"]
+shape = SubResource( 3 )
+
+[node name="VisionRay" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 3
+
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="body_entered" from="VisionBox" to="." method="_on_VisionBox_body_entered"]
+[connection signal="body_exited" from="VisionBox" to="." method="_on_VisionBox_body_exited"]

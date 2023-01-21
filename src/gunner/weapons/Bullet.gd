@@ -33,5 +33,6 @@ func _on_Bullet_body_entered(body: Node):
 
 	if body.is_in_group("darktile"):
 		body.hit(global_position)
-	if body.is_in_group("enemy_robots"):
+	elif body.is_in_group("enemy_robots") and not body.dead:
+		print("collided with enemy! ", body)
 		body.take_damage(self, 1)

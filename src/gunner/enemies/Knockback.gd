@@ -1,7 +1,7 @@
 extends State
 
 var knockback_impulse = 70
-var knockback_y = 700
+var knockback_y = 300
 var knockback_time = 2
 var knocked_back
 
@@ -19,7 +19,7 @@ func enter(msg = {}):
 	actor.velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
 
 	if dead:
-		actor.velocity *= 3
+		actor.velocity *= 2
 
 	if dead:
 		actor.anim.animation = "dying"

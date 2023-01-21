@@ -202,6 +202,7 @@ signal fired_bullet(bullet)
 func fire_bullet():
 	var bullet = bullet_scene.instance()
 	bullet.position = bullet_position.get_global_position()
+	bullet.add_collision_exception_with(self)
 	Navi.current_scene.call_deferred("add_child", bullet)
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)

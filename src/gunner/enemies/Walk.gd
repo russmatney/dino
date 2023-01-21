@@ -29,8 +29,8 @@ func physics_process(delta):
 
 	if not actor.front_ray.is_colliding():
 		actor.turn()
-		actor.move_dir = actor.facing
+		actor.move_dir = actor.facing_dir
 
 	if actor.is_on_wall():
 		actor.turn()
-		actor.move_dir = actor.facing
+		actor.move_dir = actor.facing_dir
