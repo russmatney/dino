@@ -41,7 +41,7 @@ func get_noise_input():
 	var options = [{
 		"seed": rand_range(0, 100000),
 		"octaves": Util.rand_of([2, 3, 4]),
-		"period": rand_range(15, 30),
+		"period": rand_range(15, 40),
 		"persistence": rand_range(0.3, 0.5),
 		"lacunarity": rand_range(2.5, 4.0),
 	}]
@@ -59,11 +59,6 @@ func spawn_targets():
 			c.free()
 
 	var locs = []
-
-	# var dark_tilemaps = tilemaps({"group": "darktile"})
-	# var red_tilemaps = tilemaps({"group": "redtile"})
-	# var blue_tilemaps = tilemaps({"group": "bluetile"})
-
 	for t_cell in tilemap_cells({"group": "yellowtile"}):
 		var t = t_cell[0]
 		var cell = t_cell[1]
@@ -78,12 +73,12 @@ func spawn_targets():
 				})
 
 	var target_locs = []
-	if locs:
+	if locs.size() > 3:
+		# TODO should be a minimum distance apart
 		locs.shuffle()
-		for loc in locs:
-			target_locs.append(loc)
-			if target_locs.size() == 3:
-				break
+		target_locs = locs.slice(0, 2)
+	else:
+		target_locs = locs
 
 	for loc in target_locs:
 		var target = target_scene.instance()
@@ -91,3 +86,76 @@ func spawn_targets():
 		target.position = loc["position"]
 		add_child(target)
 		target.set_owner(get_tree().edited_scene_root)
+
+########################################################################
+# player spawn point
+
+var player_spawner_scene = preload("res://src/tower/PlayerSpawner.tscn")
+
+func add_player_spawner():
+	for c in get_children():
+		if c.is_in_group("player_spawner"):
+			c.free()
+
+	var locs = []
+	for t_cell in tilemap_cells({"group": "yellowtile"}):
+		var t = t_cell[0]
+		var cell = t_cell[1]
+		var valid_nbrs = Reptile.valid_neighbors(t, cell)
+
+		# TODO make sure this square is above darktiles
+		# so robot doesn't just fall to death
+
+		if valid_nbrs.size() == 9:
+			var pos = cell_to_local_pos(t, cell)
+			# center on tile (rn it's top-left)
+			locs.append({
+				"position": pos,
+				"cell": cell,
+				})
+
+	if locs:
+		locs.shuffle()
+		var loc = locs[0]
+		var inst = player_spawner_scene.instance()
+		# set relative to parent position
+		inst.position = loc["position"]
+		add_child(inst)
+		inst.unique_name_in_owner = true
+		inst.set_owner(get_tree().edited_scene_root)
+
+########################################################################
+# enemy spawn point
+
+var enemy_spawner_scene = preload("res://src/tower/EnemySpawner.tscn")
+
+func add_enemy_spawner():
+	for c in get_children():
+		if c.is_in_group("enemy_spawner"):
+			c.free()
+
+	var locs = []
+	for t_cell in tilemap_cells({"group": "yellowtile"}):
+		var t = t_cell[0]
+		var cell = t_cell[1]
+		var valid_nbrs = Reptile.valid_neighbors(t, cell)
+
+		# TODO make sure this square is above darktiles
+		# so robot doesn't just fall to death
+
+		if valid_nbrs.size() == 9:
+			var pos = cell_to_local_pos(t, cell)
+			# center on tile (rn it's top-left)
+			locs.append({
+				"position": pos,
+				"cell": cell,
+				})
+
+	if locs:
+		locs.shuffle()
+		var loc = locs[0]
+		var inst = enemy_spawner_scene.instance()
+		# set relative to parent position
+		inst.position = loc["position"]
+		add_child(inst)
+		inst.set_owner(get_tree().edited_scene_root)

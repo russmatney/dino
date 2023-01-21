@@ -36,3 +36,34 @@ func restart_game():
 		Navi.nav_to(default_game_path)
 
 	DJ.pause_menu_song() # ensure menu music not playing
+
+###########################################################################
+# player
+
+var player_scene = preload("res://src/gunner/player/Player.tscn")
+var player
+signal player_spawned(player)
+
+var player_default_opts = {
+	"has_jetpack": true
+	}
+
+func spawn_player(pos):
+	player = player_scene.instance()
+	for k in player_default_opts.keys():
+		player[k] = player_default_opts[k]
+	player.position = pos
+	Navi.add_child_to_current(player)
+	emit_signal("player_spawned", player)
+	return player
+
+###########################################################################
+# enemy
+
+var enemy_robot_scene = preload("res://src/gunner/enemies/EnemyRobot.tscn")
+
+func spawn_enemy(pos):
+	var enemy = enemy_robot_scene.instance()
+	enemy.position = pos
+	Navi.add_child_to_current(enemy)
+	return enemy

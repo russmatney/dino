@@ -27,7 +27,8 @@ func collect_tiles():
 
 var tiles
 
-onready var player = $Player
+var player
+onready var player_spawner = get_node("%PlayerSpawner")
 onready var break_the_targets = $BreakTheTargets
 
 var ready = false
@@ -36,20 +37,40 @@ func _ready():
 	randomize()
 	calc_rect()
 
-	player.connect("fired_bullet", self, "track_bullet")
-	player.connect("dead", self, "_on_player_dead")
-
 	break_the_targets.connect("targets_cleared", self, "_on_targets_cleared")
+	var _x = Tower.connect("player_spawned", self, "_on_player_spawned")
+
+	if not player:
+		player = Tower.spawn_player(player_spawner.global_position)
+
+func _on_player_spawned(p):
+	p.connect("fired_bullet", self, "track_bullet")
+	p.connect("dead", self, "_on_player_dead")
+	p.connect("pickups_change", self, "_on_player_pickups_change")
+
+var enemies = []
+
+func _on_player_pickups_change(pickups):
+	if "hat" in pickups and "body" in pickups:
+		# TODO animate assembly/enemy spawning
+		# anim the items flying to the spot?
+		Hood.notif("Robot Assembled")
+
+		var enemy_spawners = get_tree().get_nodes_in_group("enemy_spawner")
+		enemy_spawners.shuffle()
+		if enemy_spawners:
+			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
+			enemies.append(en)
+
+		# clear player items
+		player.pickups = []
 
 func _on_targets_cleared():
 	# TODO ensure pickups collected
 	Hood.notif("Level Complete")
 
-func _on_player_dead():
-	Hood.notif("Death comes to us all")
-
 func _physics_process(_delta):
-	# TODO disable camera smoothing if we're going to jump across?
+	# TODO disable camera smoothing if we're wrapping across
 	wrap_thing(player)
 
 #   # TODO fix wrap disabling bullet collisions
@@ -95,7 +116,6 @@ func rooms():
 	var rs = []
 	for c in get_children():
 		if c is TowerRoom:
-			print("found tower room!")
 			rs.append(c)
 	return rs
 
@@ -106,7 +126,6 @@ func get_start_room():
 
 func get_previous_room():
 	var rs = rooms()
-	print("previous rooms: ", rs)
 	return rs.back()
 
 ######################################################################

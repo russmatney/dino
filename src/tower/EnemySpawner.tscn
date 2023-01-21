@@ -1,0 +1,3 @@
+[gd_scene format=2]
+
+[node name="EnemySpawner" type="Position2D" groups=["enemy_spawner"]]

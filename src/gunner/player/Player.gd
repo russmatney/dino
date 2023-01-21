@@ -341,7 +341,6 @@ func update_aoe_state():
 	if "blue" in current_tile_colors:
 		in_blue = true
 	else:
-		print("no longer BLUE")
 		in_blue = false
 
 	if "red" in current_tile_colors:

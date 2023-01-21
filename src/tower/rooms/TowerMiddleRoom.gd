@@ -6,3 +6,4 @@ func _ready():
 
 func _on_regen():
 	spawn_targets()
+	add_enemy_spawner()
