@@ -1,21 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/gunner/pickups/Pickup.gd" type="Script" id=1]
 [ext_resource path="res://src/gunner/pickups/pickup_spriteframes.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/ColorSwapShader.gdshader" type="Shader" id=3]
+[ext_resource path="res://src/gunner/OffscreenIndicator.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/original_0 = Color( 0.666667, 0.666667, 0.666667, 1 )
+shader_param/original_1 = Color( 0, 0, 0, 1 )
+shader_param/original_2 = null
+shader_param/original_3 = null
+shader_param/original_4 = null
+shader_param/replace_0 = Color( 0.819608, 0.486275, 0.486275, 1 )
+shader_param/replace_1 = Color( 0.356863, 0.462745, 0.552941, 1 )
+shader_param/replace_2 = null
+shader_param/replace_3 = null
+shader_param/replace_4 = null
 
 [sub_resource type="RectangleShape2D" id=1]
 
 [node name="Pickup" type="Node2D"]
 script = ExtResource( 1 )
+type = "hat"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 2 )
 scale = Vector2( 2, 2 )
 frames = ExtResource( 2 )
-animation = "jetpack"
+animation = "hat"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
+[node name="OffscreenIndicator" parent="." instance=ExtResource( 4 )]
+visible = false
+position = Vector2( -42, -28 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

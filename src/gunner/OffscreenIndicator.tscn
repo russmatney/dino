@@ -1,7 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/offscreen-indicator_sheet.png" type="Texture" id=1]
 [ext_resource path="res://src/gunner/OffscreenIndicator.gd" type="Script" id=2]
+[ext_resource path="res://src/gunner/SpriteShineShader.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/speed = 0.5
+shader_param/tint = Color( 0.819608, 0.486275, 0.486275, 1 )
+shader_param/span = 0.3
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -12,6 +19,8 @@ animations = [ {
 } ]
 
 [node name="OffscreenIndicator" type="AnimatedSprite"]
+material = SubResource( 2 )
 rotation = 0.785397
+scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 script = ExtResource( 2 )

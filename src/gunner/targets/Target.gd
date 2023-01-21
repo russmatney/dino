@@ -14,7 +14,6 @@ func _ready():
 	Respawner.register_respawn(self)
 
 func _process(_delta):
-	# if target offscreen and player close enough/line-of-sight
 	if not on_screen:
 		offscreen_indicator.activate(self)
 	else:
