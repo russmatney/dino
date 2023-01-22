@@ -34,11 +34,12 @@ custom_styles/panel = ExtResource( 6 )
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/Panel"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 102.0
-margin_bottom = 132.0
+margin_right = 104.0
+margin_bottom = 152.0
 
 [node name="HeartsContainer" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource( 2 )]
 unique_name_in_owner = true
+margin_right = 100.0
 margin_bottom = 30.0
 
 [node name="PickupsContainer" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource( 3 )]
@@ -46,7 +47,7 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 34.0
-margin_right = 98.0
+margin_right = 100.0
 margin_bottom = 64.0
 
 [node name="TargetsDestroyed" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource( 1 )]
@@ -54,7 +55,7 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 68.0
-margin_right = 98.0
+margin_right = 100.0
 margin_bottom = 81.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Targets Destroyed: 0"
@@ -65,7 +66,7 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 85.0
-margin_right = 98.0
+margin_right = 100.0
 margin_bottom = 98.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Targets Remaining: 0"
@@ -76,7 +77,7 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 102.0
-margin_right = 98.0
+margin_right = 100.0
 margin_bottom = 115.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Enemies Destroyed: 0"
@@ -87,7 +88,7 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 119.0
-margin_right = 98.0
+margin_right = 100.0
 margin_bottom = 132.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Enemies Remaining: 0"
