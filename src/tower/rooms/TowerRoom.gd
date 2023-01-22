@@ -63,6 +63,26 @@ func n_random(locs, n):
 		return locs.slice(0, n - 1)
 	return locs
 
+var dark_max_y
+func dark_tile_max_y():
+	if dark_max_y:
+		return dark_max_y
+
+	var dark_tile_map = tilemaps({"group": "darktile"})[0]
+	dark_max_y = 0
+	for c in dark_tile_map.get_used_cells():
+		if c.y > dark_max_y:
+			dark_max_y = c.y
+	return dark_max_y
+
+func floor_tile_below(cell):
+	var dark_tile_map = tilemaps({"group": "darktile"})[0]
+	var max_y = dark_tile_max_y()
+	for y in range(cell.y, max_y):
+		var c = dark_tile_map.get_cell(cell.x, y)
+		if c != TileMap.INVALID_CELL:
+			return true
+
 ########################################################################
 # spawn targets
 
@@ -78,10 +98,8 @@ func spawn_targets():
 		var valid_nbrs = Reptile.valid_neighbors(t, cell)
 
 		if valid_nbrs.size() == 9:
-			var pos = cell_to_local_pos(t, cell)
-			# center on tile (rn it's top-left)
 			locs.append({
-				"position": pos,
+				"position": cell_to_local_pos(t, cell),
 				"cell": cell,
 				})
 
@@ -97,6 +115,36 @@ func spawn_targets():
 ########################################################################
 # player spawn point
 
+var pickup_scene = preload("res://src/gunner/pickups/Pickup.tscn")
+var pickup_types = ["hat", "body"]
+
+func add_pickups():
+	free_children_in_group("pickup")
+
+	var locs = []
+	for t_cell in tilemap_cells({"group": "yellowtile"}):
+		var t = t_cell[0]
+		var cell = t_cell[1]
+		var valid_nbrs = Reptile.valid_neighbors(t, cell)
+
+		if valid_nbrs.size() == 9:
+			locs.append({
+				"position": cell_to_local_pos(t, cell),
+				"cell": cell,
+				})
+
+	var p_locs = n_random(locs, 2)
+	for i in range(2):
+		var loc = p_locs[i]
+		var p = pickup_scene.instance()
+		p.position = loc["position"]
+		p.type = pickup_types[i]
+		add_child(p)
+		p.set_owner(get_tree().edited_scene_root)
+
+########################################################################
+# player spawn point
+
 var player_spawner_scene = preload("res://src/tower/PlayerSpawner.tscn")
 
 func add_player_spawner():
@@ -107,15 +155,14 @@ func add_player_spawner():
 		var t = t_cell[0]
 		var cell = t_cell[1]
 		var valid_nbrs = Reptile.valid_neighbors(t, cell)
+		var enough_valid_nbrs = valid_nbrs.size() == 9
+		var floor_below = floor_tile_below(cell) \
+			and floor_tile_below(Vector2(cell.x + 1, cell.y)) \
+			and floor_tile_below(Vector2(cell.x - 1, cell.y))
 
-		# TODO make sure this square is above darktiles
-		# so robot doesn't just fall to death
-
-		if valid_nbrs.size() == 9:
-			var pos = cell_to_local_pos(t, cell)
-			# center on tile (rn it's top-left)
+		if enough_valid_nbrs and floor_below:
 			locs.append({
-				"position": pos,
+				"position": cell_to_local_pos(t, cell),
 				"cell": cell,
 				})
 
@@ -123,7 +170,6 @@ func add_player_spawner():
 		locs.shuffle()
 		var loc = locs[0]
 		var inst = player_spawner_scene.instance()
-		# set relative to parent position
 		inst.position = loc["position"]
 		add_child(inst)
 		inst.unique_name_in_owner = true
@@ -142,15 +188,14 @@ func add_enemy_spawner():
 		var t = t_cell[0]
 		var cell = t_cell[1]
 		var valid_nbrs = Reptile.valid_neighbors(t, cell)
+		var enough_valid_nbrs = valid_nbrs.size() == 9
+		var floor_below = floor_tile_below(cell) \
+			and floor_tile_below(Vector2(cell.x + 1, cell.y)) \
+			and floor_tile_below(Vector2(cell.x - 1, cell.y))
 
-		# TODO make sure this square is above darktiles
-		# so robot doesn't just fall to death
-
-		if valid_nbrs.size() == 9:
-			var pos = cell_to_local_pos(t, cell)
-			# center on tile (rn it's top-left)
+		if enough_valid_nbrs and floor_below:
 			locs.append({
-				"position": pos,
+				"position": cell_to_local_pos(t, cell),
 				"cell": cell,
 				})
 
@@ -158,7 +203,6 @@ func add_enemy_spawner():
 		locs.shuffle()
 		var loc = locs[0]
 		var inst = enemy_spawner_scene.instance()
-		# set relative to parent position
 		inst.position = loc["position"]
 		add_child(inst)
 		inst.set_owner(get_tree().edited_scene_root)

@@ -21,7 +21,7 @@ shader_param/replace_4 = null
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.5, 20.5 )
 
-[node name="Pickup" type="Node2D"]
+[node name="Pickup" type="Node2D" groups=["pickup"]]
 script = ExtResource( 1 )
 type = "hat"
 
