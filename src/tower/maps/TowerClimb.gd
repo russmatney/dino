@@ -30,6 +30,7 @@ var robots_destroyed
 
 func check_win():
 	if targets_destroyed and robots_destroyed:
+		Hood.notif(str("Level ", level_num, " Complete!"))
 		Tower.level_complete()
 
 ######################################################################
@@ -41,12 +42,15 @@ var player
 var player_spawner
 onready var break_the_targets = $BreakTheTargets
 
+export(String) var level_num
+
 var ready = false
 func _ready():
 	ready = true
 	randomize()
 	calc_rect()
 
+	var _y = Hood.connect("hud_ready", self, "_on_hud_ready")
 	break_the_targets.connect("targets_cleared", self, "_on_targets_cleared")
 	var _x = Tower.connect("player_spawned", self, "_on_player_spawned")
 
@@ -54,6 +58,9 @@ func _ready():
 
 	if not player and player_spawner and not Engine.editor_hint:
 		player = Tower.spawn_player(player_spawner.global_position)
+
+func _on_hud_ready():
+	Hood.notif(str("Begin Level ", level_num))
 
 func _on_player_spawned(p):
 	p.connect("pickups_changed", self, "_on_player_pickups_changed")

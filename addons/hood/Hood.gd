@@ -20,8 +20,13 @@ func ensure_hud():
 		return
 
 	hud = hud_scene.instance()
+	hud.connect("ready", self, "_on_hud_ready")
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
+
+signal hud_ready
+func _on_hud_ready():
+	emit_signal("hud_ready")
 
 ###########################################################################
 # notifs
@@ -30,4 +35,7 @@ signal notification(text)
 
 func notif(text, ttl=5):
 	print("[HOOD] notif: ", text)
+	if not hud:
+		# TODO queue and fire after hud is ready
+		print("no hud yet")
 	emit_signal("notification", {"msg": text, "ttl": ttl})

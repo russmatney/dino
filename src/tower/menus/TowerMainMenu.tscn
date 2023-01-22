@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/MaxSizeContainer/max_size_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/tower/menus/TowerMainMenuButtonList.gd" type="Script" id=5]
 [ext_resource path="res://src/tower/menus/TowerMainMenu.gd" type="Script" id=6]
+[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 resource_local_to_scene = true
@@ -14,6 +15,9 @@ outline_size = 4
 outline_color = Color( 0.356863, 0.462745, 0.552941, 1 )
 extra_spacing_top = 10
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.356863, 0.462745, 0.552941, 1 )
 
 [node name="TowerMainMenu" type="Control"]
 anchor_right = 1.0
@@ -37,35 +41,15 @@ margin_right = 512.0
 margin_bottom = 107.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
-bbcode_text = "[center]Tower Climb[/center]"
-text = "Tower Climb"
+bbcode_text = "[center]Tower Jet[/center]"
+text = "Tower Jet"
 scroll_active = false
 
-[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 111.0
 margin_right = 512.0
-margin_bottom = 215.0
-size_flags_vertical = 3
-custom_constants/margin_right = 191
-custom_constants/margin_top = 0
-custom_constants/margin_left = 191
-custom_constants/margin_bottom = 0
-script = ExtResource( 1 )
-max_size = Vector2( 130, -1 )
-
-[node name="TowerControls" parent="VBoxContainer/MaxSizeContainer" instance=ExtResource( 3 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 191.0
-margin_right = 321.0
-margin_bottom = 104.0
-
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 219.0
-margin_right = 512.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 200, 0 )
-size_flags_vertical = 3
+margin_bottom = 191.0
+rect_min_size = Vector2( 200, 80 )
 
 [node name="TowerMainMenuButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
 margin_left = 226.0
@@ -73,3 +57,49 @@ margin_top = 20.0
 margin_right = 286.0
 margin_bottom = 60.0
 script = ExtResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 195.0
+margin_right = 512.0
+margin_bottom = 299.0
+size_flags_vertical = 0
+alignment = 1
+
+[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 144.0
+margin_right = 244.0
+margin_bottom = 104.0
+size_flags_vertical = 3
+custom_constants/margin_right = 0
+custom_constants/margin_top = 0
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 0
+script = ExtResource( 1 )
+max_size = Vector2( 200, -1 )
+
+[node name="TowerControls" parent="VBoxContainer/HBoxContainer/MaxSizeContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 100.0
+margin_bottom = 104.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 248.0
+margin_right = 368.0
+margin_bottom = 50.0
+size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+margin_right = 120.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 120, 50 )
+custom_styles/panel = SubResource( 2 )
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/MarginContainer/Panel"]
+margin_right = 120.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "Destroy all Targets and Collect Robot Parts to Assemble a \"friend\""
+align = 1
+autowrap = true

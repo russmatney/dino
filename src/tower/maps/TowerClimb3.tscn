@@ -17,6 +17,7 @@
 
 [node name="TowerClimb" type="Node2D"]
 script = ExtResource( 8 )
+level_num = "3"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1600.0

@@ -39,7 +39,6 @@ func restart_game(opts={}):
 	Respawner.reset_respawns()
 
 	var level_path = opts.get("level", levels[0])
-	Hood.notif(str("Begin level ", levels.find(level_path)))
 	Navi.nav_to(level_path)
 
 	DJ.pause_menu_song() # ensure menu music not playing
