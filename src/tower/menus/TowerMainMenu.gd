@@ -1,4 +1,5 @@
 extends Control
 
 func _ready():
-	DJ.resume_menu_song()
+	pass
+	# DJ.resume_menu_song()
