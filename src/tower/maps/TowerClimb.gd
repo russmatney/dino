@@ -31,6 +31,7 @@ var robots_destroyed
 func check_win():
 	if targets_destroyed and robots_destroyed:
 		Hood.notif(str("Level ", level_num, " Complete!"))
+		player.notif("Level Clear!")
 		Tower.level_complete()
 
 ######################################################################
@@ -70,7 +71,7 @@ var enemies = []
 func enemies_alive():
 	var es = []
 	for e in enemies:
-		if not e.dead:
+		if e and is_instance_valid(e) and not e.dead:
 			es.append(e)
 	return es
 
@@ -94,6 +95,7 @@ func _on_player_pickups_changed(pickups):
 
 func _on_targets_cleared():
 	Hood.notif("Targets Destroyed!")
+	player.notif("All targets destroyed!")
 	targets_destroyed = true
 	check_win()
 
@@ -105,6 +107,7 @@ func _on_robot_destroyed():
 			robots_destroyed = false
 			return
 	robots_destroyed = true
+	player.notif("All robots destroyed!")
 	check_win()
 
 func _physics_process(_delta):

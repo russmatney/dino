@@ -67,7 +67,8 @@ func screenshake(trauma = 0.3):
 
 # freezeframes called in parallel may compete/reset eachother
 # maybe register_slowmo is a viable workaround?
-func freezeframe(name, time_scale, duration):
+func freezeframe(name, time_scale, duration, trauma=0.1):
+	inc_trauma(trauma)
 	start_slowmo(name, time_scale)
 	yield(get_tree().create_timer(duration * time_scale), "timeout")
 	stop_slowmo(name)

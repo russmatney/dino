@@ -31,6 +31,7 @@ var levels = [
 	"res://src/tower/maps/TowerClimb2.tscn",
 	"res://src/tower/maps/TowerClimb3.tscn",
 	"res://src/tower/maps/TowerClimb4.tscn",
+	"res://src/tower/maps/TowerClimb5.tscn",
 	]
 
 func restart_game(opts={}):

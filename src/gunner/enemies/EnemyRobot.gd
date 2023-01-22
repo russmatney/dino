@@ -103,6 +103,7 @@ signal health_change(health)
 signal dead
 
 func take_damage(body=null, d = 1):
+	Cam.freezeframe("enemy_damage_hitstop", 0.2, 0.3, 0.3)
 	health -= d
 	emit_signal("health_change", health)
 
