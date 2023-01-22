@@ -26,7 +26,14 @@ func _physics_process(_delta):
 		point_at(target.get_global_position())
 		position_onscreen()
 
+func find_player():
+	if not Engine.editor_hint:
+		player = Util.first_node_in_group("player")
+
 func position_onscreen():
+	if not player:
+		find_player()
+
 	if player:
 		var player_pos = player.get_global_position() + Vector2(0, -16)
 		var target_pos = target.get_global_position()
