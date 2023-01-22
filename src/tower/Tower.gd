@@ -25,26 +25,36 @@ func _unhandled_input(event):
 
 var default_game = preload("res://src/tower/maps/TowerClimb.tscn")
 
+var levels = [
+	"res://src/tower/maps/TowerClimb0.tscn",
+	"res://src/tower/maps/TowerClimb1.tscn",
+	"res://src/tower/maps/TowerClimb2.tscn",
+	"res://src/tower/maps/TowerClimb3.tscn",
+	"res://src/tower/maps/TowerClimb4.tscn",
+	]
+
 func restart_game(opts={}):
 	print("[TOWER] restarting game: ", opts)
 	Navi.resume() # ensure unpaused
 	Respawner.reset_respawns()
 
-	if Navi.current_scene.filename.match("*tower/maps*"):
-		Navi.nav_to(Navi.current_scene.filename)
-	else:
-		Navi.nav_to(default_game)
+	var level_path = opts.get("level", levels[0])
+	Hood.notif(str("Begin level ", levels.find(level_path)))
+	Navi.nav_to(level_path)
 
 	DJ.pause_menu_song() # ensure menu music not playing
+
 
 func level_complete():
 	print("[TOWER] level complete")
 
-	restart_game({"regen": true})
+	var curr = Navi.current_scene
+	var idx = levels.find(curr.filename)
 
-	# TODO preserve level number
-
-	Navi.show_win_menu()
+	if idx + 1 >= levels.size():
+		Navi.show_win_menu()
+	else:
+		restart_game({"level": levels[idx+1]})
 
 ###########################################################################
 # player
