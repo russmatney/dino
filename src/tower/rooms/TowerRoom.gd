@@ -49,14 +49,27 @@ func get_noise_input():
 	return options[0]
 
 ########################################################################
+# helpers
+
+func free_children_in_group(group_name):
+	for c in get_children():
+		if c.is_in_group(group_name):
+			c.free()
+
+func n_random(locs, n):
+	if locs.size() > n:
+		# TODO should be a minimum distance apart
+		locs.shuffle()
+		return locs.slice(0, n - 1)
+	return locs
+
+########################################################################
 # spawn targets
 
 var target_scene = preload("res://src/gunner/targets/Target.tscn")
 
 func spawn_targets():
-	for c in get_children():
-		if c.is_in_group("target"):
-			c.free()
+	free_children_in_group("target")
 
 	var locs = []
 	for t_cell in tilemap_cells({"group": "yellowtile"}):
@@ -72,13 +85,7 @@ func spawn_targets():
 				"cell": cell,
 				})
 
-	var target_locs = []
-	if locs.size() > 3:
-		# TODO should be a minimum distance apart
-		locs.shuffle()
-		target_locs = locs.slice(0, 2)
-	else:
-		target_locs = locs
+	var target_locs = n_random(locs, 3)
 
 	for loc in target_locs:
 		var target = target_scene.instance()
@@ -93,9 +100,7 @@ func spawn_targets():
 var player_spawner_scene = preload("res://src/tower/PlayerSpawner.tscn")
 
 func add_player_spawner():
-	for c in get_children():
-		if c.is_in_group("player_spawner"):
-			c.free()
+	free_children_in_group("player_spawner")
 
 	var locs = []
 	for t_cell in tilemap_cells({"group": "yellowtile"}):
@@ -130,9 +135,7 @@ func add_player_spawner():
 var enemy_spawner_scene = preload("res://src/tower/EnemySpawner.tscn")
 
 func add_enemy_spawner():
-	for c in get_children():
-		if c.is_in_group("enemy_spawner"):
-			c.free()
+	free_children_in_group("enemy_spawner")
 
 	var locs = []
 	for t_cell in tilemap_cells({"group": "yellowtile"}):

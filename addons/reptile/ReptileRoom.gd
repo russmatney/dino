@@ -68,7 +68,7 @@ func tilemap_cells(opts={}):
 
 func cell_to_local_pos(t, cell):
 	# assumes scaled in same x/y directions
-	return t.map_to_world(cell) * t.scale.x
+	return t.map_to_world(cell) * t.scale.x + t.cell_size * t.scale.x / 2.0
 
 func calc_rect():
 	var rect = Rect2()

@@ -11,8 +11,6 @@ func _ready():
 		Navi.set_main_menu("res://src/tower/menus/TowerMainMenu.tscn")
 		Hood.set_hud_scene(tower_hud)
 
-	var _x = Navi.connect("new_scene_instanced", self, "_on_new_scene_instanced")
-
 func _unhandled_input(event):
 	# consider making this a hold-for-two-seconds
 	if deving_tower:
@@ -27,15 +25,10 @@ func _unhandled_input(event):
 
 var default_game = preload("res://src/tower/maps/TowerClimb.tscn")
 
-var tower_climb_inst
-
 func restart_game(opts={}):
 	print("[TOWER] restarting game: ", opts)
 	Navi.resume() # ensure unpaused
 	Respawner.reset_respawns()
-
-	# woof
-	# regen_rooms = opts.get("regen", false)
 
 	if Navi.current_scene.filename.match("*tower/maps*"):
 		Navi.nav_to(Navi.current_scene.filename)
@@ -43,15 +36,6 @@ func restart_game(opts={}):
 		Navi.nav_to(default_game)
 
 	DJ.pause_menu_song() # ensure menu music not playing
-
-# var regen_rooms
-
-func _on_new_scene_instanced(_scene):
-	print("new scene instanced")
-	# # double woof
-	# if regen_rooms and scene.has_method("regen_all_rooms"):
-	# 	print("regening rooms")
-	# 	scene.regen_all_rooms()
 
 func level_complete():
 	print("[TOWER] level complete")

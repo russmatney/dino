@@ -23,6 +23,7 @@ shader_param/replace_4 = null
 
 [node name="Target" type="Area2D" groups=["target"]]
 scale = Vector2( 2, 2 )
+z_index = 10
 collision_layer = 0
 collision_mask = 6
 script = ExtResource( 2 )
