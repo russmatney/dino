@@ -130,6 +130,7 @@ script = ExtResource( 17 )
 script = ExtResource( 18 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 margin_left = -45.0
 margin_right = 45.0
 margin_bottom = 40.0
@@ -168,7 +169,6 @@ position = Vector2( 0, 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "all"
-frame = 2
 playing = true
 
 [node name="TileAOEDetector" type="Area2D" parent="."]

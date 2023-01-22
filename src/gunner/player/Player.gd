@@ -339,12 +339,24 @@ func update_colors():
 var in_blue = false
 var in_red = false
 func update_aoe_state():
+	var was_blue = in_blue
 	if "blue" in current_tile_colors:
 		in_blue = true
+		if not was_blue:
+			notif("BRRRRRRRRRR")
+			Hood.notif("Jetpack power reduced")
 	else:
 		in_blue = false
+		if was_blue:
+			Hood.notif("Jetpack power restored")
 
+	var was_red = in_red
 	if "red" in current_tile_colors:
 		in_red = true
+		if not was_red:
+			notif("HOT HOT HOT")
+			Hood.notif("Jetpack supercharged")
 	else:
 		in_red = false
+		if was_red:
+			Hood.notif("Jetpack power restored")
