@@ -162,7 +162,7 @@ func fire_at_player():
 		bullet.add_collision_exception_with(self)
 		Navi.current_scene.call_deferred("add_child", bullet)
 
-		var angle_to_player = bullet.position.direction_to(player.global_position)
+		var angle_to_player = bullet.position.direction_to(player.global_position + Vector2(0, -15))
 
 		bullet.rotation = angle_to_player.angle()
 		bullet.apply_impulse(Vector2.ZERO, angle_to_player * bullet_impulse)
