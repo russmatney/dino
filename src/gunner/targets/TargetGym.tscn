@@ -20,27 +20,16 @@ color = Color( 1, 1, 1, 0.301961 )
 tile_data = PoolIntArray( -458748, 0, 196609, -458747, 0, 196610, -458746, 0, 196611, -327681, 0, 8, -393216, 0, 10, -393215, 0, 11, -262159, 0, 0, -262150, 0, 8, -262149, 0, 11, -262145, 0, 196616, -327680, 0, 196617, -327679, 0, 196619, -196623, 0, 65536, -196614, 0, 196616, -196613, 0, 196619, -131087, 0, 65536, -65552, 0, 1, -65551, 0, 131075, -16, 0, 65536, 65520, 0, 131073, 65521, 0, 196610, 65522, 0, 196610, 65523, 0, 196610, 65524, 0, 196610, 65525, 0, 196610, 65526, 0, 196610, 65527, 0, 196610, 65528, 0, 196610, 65529, 0, 196610, 65530, 0, 196610, 65531, 0, 196610, 65532, 0, 196610, 65533, 0, 196610, 65534, 0, 196610, 65535, 0, 196610, 0, 0, 196610, 1, 0, 3, 5, 0, 1, 6, 0, 196610, 7, 0, 196610, 8, 0, 196610, 9, 0, 196611, 65537, 0, 131073, 65538, 0, 196610, 65539, 0, 196610, 65540, 0, 196610, 65541, 0, 131075 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+has_jetpack = true
 
-[node name="Target" parent="." instance=ExtResource( 3 )]
-position = Vector2( -79, -94 )
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 385, -245 )
 
-[node name="Target2" parent="." instance=ExtResource( 3 )]
-position = Vector2( -290, -26 )
+[node name="Target7" parent="Node2D" instance=ExtResource( 3 )]
+position = Vector2( 196, -276 )
 
-[node name="Target3" parent="." instance=ExtResource( 3 )]
-position = Vector2( -268, -70 )
-
-[node name="Target4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 91, -85 )
-
-[node name="Target5" parent="." instance=ExtResource( 3 )]
-position = Vector2( -370, -24 )
-
-[node name="Target6" parent="." instance=ExtResource( 3 )]
-position = Vector2( 23, -78 )
-
-[node name="Target7" parent="." instance=ExtResource( 3 )]
-position = Vector2( 290, -26 )
-
-[node name="Target8" parent="." instance=ExtResource( 3 )]
+[node name="Target8" parent="Node2D" instance=ExtResource( 3 )]
 position = Vector2( 232, -72 )
+
+[node name="Target9" parent="Node2D" instance=ExtResource( 3 )]
+position = Vector2( -401, -57 )

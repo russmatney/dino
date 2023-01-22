@@ -60,6 +60,13 @@ func _on_player_spawned(p):
 
 var enemies = []
 
+func enemies_alive():
+	var es = []
+	for e in enemies:
+		if not e.dead:
+			es.append(e)
+	return es
+
 func _on_player_pickups_changed(pickups):
 	if "hat" in pickups and "body" in pickups:
 		# TODO animate assembly/enemy spawning
@@ -72,6 +79,7 @@ func _on_player_pickups_changed(pickups):
 			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
 			en.connect("dead", self, "_on_robot_destroyed")
 			enemies.append(en)
+			Hood.hud.update_enemies_remaining(enemies_alive().size())
 
 		# clear player items
 		player.pickups = []
@@ -84,6 +92,7 @@ func _on_targets_cleared():
 
 func _on_robot_destroyed():
 	Hood.notif("Robot Destroyed!")
+	Hood.hud.update_enemies_remaining(enemies_alive().size())
 	for e in enemies:
 		if not e.dead:
 			robots_destroyed = false

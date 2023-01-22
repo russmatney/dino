@@ -66,3 +66,15 @@ func update_targets_destroyed(count):
 
 func update_targets_remaining(count):
 	remaining_label.text = "Targets Remaining: " + str(count)
+
+###################################################################
+# update enemies
+
+onready var e_destroyed_label = get_node("%EnemiesDestroyed")
+onready var e_remaining_label = get_node("%EnemiesRemaining")
+
+func update_enemies_destroyed(count):
+	e_destroyed_label.text = "Enemies Destroyed: " + str(count)
+
+func update_enemies_remaining(count):
+	e_remaining_label.text = "Enemies Remaining: " + str(count)
