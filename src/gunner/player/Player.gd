@@ -97,7 +97,7 @@ func take_damage(body=null, d = 1):
 		else:
 			dir = Vector2.RIGHT
 		machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
-	else:
+	elif health <= 0:
 		machine.transit("Dead", {"shake": 1.0})
 
 func die(remove=false):

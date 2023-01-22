@@ -56,7 +56,6 @@ func _ready():
 		player = Tower.spawn_player(player_spawner.global_position)
 
 func _on_player_spawned(p):
-	p.connect("dead", self, "_on_player_dead")
 	p.connect("pickups_changed", self, "_on_player_pickups_changed")
 
 var enemies = []
@@ -121,10 +120,15 @@ func do_regen_all_rooms(_v):
 		regen_all_rooms()
 
 func regen_all_rooms():
-	print("generating new rooms")
+	Hood.notif("generating new rooms")
+	for t in get_tree().get_nodes_in_group("targets"):
+		t.queue_free()
+
 	for r in rooms():
 		# only works if rooms are 'ready'
-		r.n_seed += 1
+		r.n_seed += randi() % 5
+
+	break_the_targets.setup()
 
 export(String, "middle", "end") var next_room_type = "middle" setget set_next_room_type
 func set_next_room_type(val):

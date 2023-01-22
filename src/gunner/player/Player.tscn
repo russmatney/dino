@@ -87,6 +87,7 @@ animations = [ {
 extents = Vector2( 10, 14.5 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
+z_index = 10
 collision_layer = 2
 collision_mask = 57
 script = ExtResource( 2 )
@@ -167,6 +168,7 @@ position = Vector2( 0, 5 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 6 )
 animation = "all"
+frame = 2
 playing = true
 
 [node name="TileAOEDetector" type="Area2D" parent="."]

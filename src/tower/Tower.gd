@@ -17,8 +17,10 @@ func _unhandled_input(event):
 	# consider making this a hold-for-two-seconds
 	if deving_tower:
 		if Trolley.is_event(event, "restart"):
-			Hood.notif("Restarting Game")
-			restart_game()
+			Hood.notif("Regenerating rooms")
+			Navi.current_scene.regen_all_rooms()
+			# Hood.notif("Restarting Game")
+			# restart_game()
 
 ###########################################################################
 # (re)start game

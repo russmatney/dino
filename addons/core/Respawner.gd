@@ -2,11 +2,11 @@ tool
 extends Node
 
 
-func _unhandled_input(event):
-	# TODO probably don't want this on _all_ the time
-	if Trolley.is_event(event, "respawns"):
-		Hood.notif("Respawning Targets")
-		respawn_missing()
+# func _unhandled_input(event):
+# 	# TODO probably don't want this on _all_ the time
+# 	if Trolley.is_event(event, "respawns"):
+# 		Hood.notif("Respawning Targets")
+# 		respawn_missing()
 
 ###########################################################################
 # respawns

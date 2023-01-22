@@ -8,11 +8,11 @@ var menu_scenes = [
 		"method": "restart_game",
 		"arg": {"regen": true},
 	},
-	{
-		"label": "Play (fixed world)",
-		"obj": Tower,
-		"method": "restart_game"
-	},
+	# {
+	# 	"label": "Play (fixed world)",
+	# 	"obj": Tower,
+	# 	"method": "restart_game"
+	# },
 	{
 		"label": "Credits",
 		"nav_to": "res://src/credits/DinoCredits.tscn",
