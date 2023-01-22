@@ -62,11 +62,30 @@ onready var sounds = {
 		preload("res://assets/sounds/coin1.sfxr"),
 		preload("res://assets/sounds/coin2.sfxr"),
 		preload("res://assets/sounds/coin3.sfxr"),
-	]
+		],
+	"player_hit": [
+		preload("res://assets/sounds/player_hurt1.sfxr"),
+		],
+	"player_dead": [
+		preload("res://assets/sounds/player_dead1.sfxr"),
+		],
+	"player_spawn": [
+		preload("res://assets/sounds/player_spawn1.sfxr"),
+		],
+	"enemy_spawn": [
+		preload("res://assets/sounds/enemy_spawn2.sfxr"),
+		],
+	"enemy_sees_you": [
+		preload("res://assets/sounds/enemy_sees_you1.sfxr"),
+		],
+	"enemy_hit": [
+		preload("res://assets/sounds/enemy_hurt1.sfxr"),
+		],
+	"enemy_dead": [
+		preload("res://assets/sounds/enemy_dead1.sfxr"),
+		],
 }
 var sound_map
-onready var laser_stream = preload("res://assets/harvey/sounds/slime_001.ogg")
-
 
 func setup_sounds():
 	sound_map = DJ.setup_sound_map(sounds)

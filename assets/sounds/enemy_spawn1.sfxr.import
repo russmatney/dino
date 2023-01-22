@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/enemy_spawn1.sfxr-50922a226fca3699860348657bab9711.sample"
+
+[deps]
+
+source_file="res://assets/sounds/enemy_spawn1.sfxr"
+dest_files=[ "res://.import/enemy_spawn1.sfxr-50922a226fca3699860348657bab9711.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

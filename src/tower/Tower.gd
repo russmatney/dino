@@ -74,6 +74,7 @@ func spawn_player(pos):
 	player.connect("dead", self, "show_dead")
 	Navi.add_child_to_current(player)
 	emit_signal("player_spawned", player)
+	GunnerSounds.play_sound("player_spawn")
 	return player
 
 func show_dead():
@@ -89,4 +90,5 @@ func spawn_enemy(pos):
 	var enemy = enemy_robot_scene.instance()
 	enemy.position = pos
 	Navi.add_child_to_current(enemy)
+	GunnerSounds.play_sound("enemy_spawn")
 	return enemy

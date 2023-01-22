@@ -106,6 +106,8 @@ func take_damage(body=null, d = 1):
 	health -= d
 	emit_signal("health_change", health)
 
+	GunnerSounds.play_sound("enemy_hit")
+
 	var dir = Vector2.DOWN
 	if body and body.global_position.x > global_position.x:
 		dir = Vector2.LEFT
@@ -117,6 +119,8 @@ func take_damage(body=null, d = 1):
 func die(remove=false):
 	dead = true
 	emit_signal("dead")
+
+	GunnerSounds.play_sound("enemy_dead")
 	if remove:
 		queue_free()
 
@@ -139,6 +143,7 @@ var player
 
 func _on_VisionBox_body_entered(body:Node):
 	if body.is_in_group("player") and not body.dead:
+		GunnerSounds.play_sound("enemy_sees_you")
 		player = body
 
 func _on_VisionBox_body_exited(body:Node):

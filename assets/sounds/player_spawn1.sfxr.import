@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/player_spawn1.sfxr-96ab47c4658e39d32c47c2a228883c30.sample"
+
+[deps]
+
+source_file="res://assets/sounds/player_spawn1.sfxr"
+dest_files=[ "res://.import/player_spawn1.sfxr-96ab47c4658e39d32c47c2a228883c30.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

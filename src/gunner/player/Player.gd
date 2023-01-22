@@ -89,6 +89,7 @@ signal dead
 func take_damage(body=null, d = 1):
 	health -= d
 	emit_signal("health_change", health)
+	GunnerSounds.play_sound("player_hit")
 
 	var dir
 	if body:
@@ -102,6 +103,7 @@ func take_damage(body=null, d = 1):
 
 func die(remove=false):
 	dead = true
+	GunnerSounds.play_sound("player_dead")
 	emit_signal("dead")
 	if remove:
 		queue_free()
