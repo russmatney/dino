@@ -54,7 +54,6 @@ func _ready():
 		player = Tower.spawn_player(player_spawner.global_position)
 
 func _on_player_spawned(p):
-	p.connect("fired_bullet", self, "track_bullet")
 	p.connect("dead", self, "_on_player_dead")
 	p.connect("pickups_changed", self, "_on_player_pickups_changed")
 
@@ -92,23 +91,10 @@ func _on_robot_destroyed():
 	check_win()
 
 func _physics_process(_delta):
-	# TODO disable camera smoothing if we're wrapping across
 	wrap_thing(player)
 
-#   # TODO fix wrap disabling bullet collisions
-# 	for ar in bullets:
-# 		wrap_thing(ar)
-
-
-var bullets = []
-func track_bullet(b):
-	bullets.append(b)
-	b.connect("bullet_dying", self, "remove_bullet")
-
-func remove_bullet(b):
-	bullets.erase(b)
-
 func wrap_thing(thing):
+	# TODO disable camera smoothing if we're wrapping across
 	if thing and is_instance_valid(thing):
 		thing.position.x = wrapf(thing.position.x, rect.position.x, rect.end.x)
 		thing.position.y = wrapf(thing.position.y, rect.position.y, rect.end.y)
@@ -126,6 +112,12 @@ func do_clear(_v):
 	if ready:
 		for c in get_children():
 			c.queue_free()
+
+export(bool) var regen_all setget regen_all_rooms
+func regen_all_rooms(_v):
+	if ready:
+		for r in rooms():
+			r.n_seed += 1
 
 export(String, "middle", "end") var next_room_type = "middle" setget set_next_room_type
 func set_next_room_type(val):

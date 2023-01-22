@@ -23,7 +23,9 @@ func _unhandled_input(event):
 
 var default_game_path = "res://src/tower/maps/TowerClimb.tscn"
 
-func restart_game():
+var tower_climb_inst
+
+func restart_game(opts={}):
 	print("[TOWER] restarting game")
 	Navi.resume() # ensure unpaused
 	Respawner.reset_respawns()
@@ -33,13 +35,23 @@ func restart_game():
 	else:
 		Navi.nav_to(default_game_path)
 
+	# if opts.get("regen", false):
+	if opts.get("regen", true):
+		print("regening rooms")
+		# TODO regenerate/randomize world
+		tower_climb_inst = Navi.current_scene
+		tower_climb_inst.regen_all_rooms()
+
 	DJ.pause_menu_song() # ensure menu music not playing
 
 func level_complete():
 	print("[TOWER] level complete")
-	Navi.show_win_menu()
-	# TODO generate new level in restart?
+
+	restart_game({"regen": true})
+
 	# TODO preserve level number
+
+	Navi.show_win_menu()
 
 ###########################################################################
 # player
@@ -63,7 +75,7 @@ func spawn_player(pos):
 	return player
 
 func show_dead():
-	print("[Tower] player dead")
+	print("[TOWER] player dead")
 	Navi.show_death_menu()
 
 ###########################################################################
