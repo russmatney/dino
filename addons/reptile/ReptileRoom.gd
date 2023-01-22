@@ -24,7 +24,8 @@ var img
 func _enter_tree():
 	self.add_to_group("reptile_room")
 
-var ready = false
+var ready
+
 func _ready():
 	ready = true
 	if position_offset:

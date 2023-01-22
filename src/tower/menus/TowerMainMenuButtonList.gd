@@ -6,8 +6,7 @@ var menu_scenes = [
 		"label": "Play",
 		"obj": Tower,
 		"method": "restart_game",
-		# TODO pass args
-		# "args": {"regen": true},
+		"arg": {"regen": true},
 	},
 	{
 		"label": "Play (fixed world)",

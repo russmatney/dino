@@ -75,6 +75,7 @@ func nav_to(path_or_packed_scene):
 		# b/c you can pause the game and go to main instead of clicking go to main
 		death_menu.hide()
 
+signal new_scene_instanced(inst)
 
 func _deferred_goto_scene(path_or_packed_scene):
 	# It is now safe to remove the current scene
@@ -90,7 +91,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 	# Instance the new scene.
 	current_scene = s.instance()
 	print("[Navi] Current scene: ", current_scene)
-	print("[Navi] last scene stack: ", last_scene_stack)
+	emit_signal("new_scene_instanced", current_scene)
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)

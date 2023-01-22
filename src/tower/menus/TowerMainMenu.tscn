@@ -46,9 +46,9 @@ margin_top = 111.0
 margin_right = 512.0
 margin_bottom = 215.0
 size_flags_vertical = 3
-custom_constants/margin_right = 191
+custom_constants/margin_right = 0
 custom_constants/margin_top = 0
-custom_constants/margin_left = 191
+custom_constants/margin_left = 0
 custom_constants/margin_bottom = 0
 script = ExtResource( 1 )
 max_size = Vector2( 130, -1 )
@@ -68,8 +68,8 @@ rect_min_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 
 [node name="TowerMainMenuButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
-margin_left = 226.0
-margin_top = 20.0
-margin_right = 286.0
-margin_bottom = 60.0
+margin_left = 203.0
+margin_top = 9.0
+margin_right = 309.0
+margin_bottom = 71.0
 script = ExtResource( 5 )

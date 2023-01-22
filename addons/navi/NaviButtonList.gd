@@ -55,11 +55,13 @@ func connect_pressed_to_action(button, item):
 	if nav_to:
 		obj = _navi
 		method = "nav_to"
+		# wtf is this?
 		arg = nav_to
 		# TODO  could pass more args to nav_to here, like skip_pause_music
 	else:
 		obj = item.get("obj")
 		method = item.get("method")
+		arg = item.get("arg")
 
 	if (not (obj and method)) and (not nav_to):
 		button.set_disabled(true)

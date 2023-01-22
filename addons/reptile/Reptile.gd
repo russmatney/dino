@@ -2,10 +2,6 @@
 tool
 extends Node
 
-
-func _ready():
-	print("<Reptile> ready")
-
 ######################################################################
 # generate random image
 

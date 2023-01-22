@@ -38,7 +38,7 @@ func check_win():
 var tiles
 
 var player
-onready var player_spawner = get_node("%PlayerSpawner")
+var player_spawner
 onready var break_the_targets = $BreakTheTargets
 
 var ready = false
@@ -50,7 +50,9 @@ func _ready():
 	break_the_targets.connect("targets_cleared", self, "_on_targets_cleared")
 	var _x = Tower.connect("player_spawned", self, "_on_player_spawned")
 
-	if not player:
+	player_spawner = get_node_or_null("%PlayerSpawner")
+
+	if not player and player_spawner:
 		player = Tower.spawn_player(player_spawner.global_position)
 
 func _on_player_spawned(p):
@@ -113,11 +115,16 @@ func do_clear(_v):
 		for c in get_children():
 			c.queue_free()
 
-export(bool) var regen_all setget regen_all_rooms
-func regen_all_rooms(_v):
+export(bool) var regen_all setget do_regen_all_rooms
+func do_regen_all_rooms(_v):
 	if ready:
-		for r in rooms():
-			r.n_seed += 1
+		regen_all_rooms()
+
+func regen_all_rooms():
+	print("generating new rooms")
+	for r in rooms():
+		# only works if rooms are 'ready'
+		r.n_seed += 1
 
 export(String, "middle", "end") var next_room_type = "middle" setget set_next_room_type
 func set_next_room_type(val):
