@@ -10,6 +10,38 @@ tools across games. This repo is a sandbox for experimenting with new game and
 addon ideas.
 
 * Games
+** Tower
+A Jetpack-fueled mess of propulsion in some generated tilemaps.
+
+I built much of Reptile (a dino addon) while working on this game.
+
+Play the latest version here: [[https://russmatney.itch.io/tower][russmatney.itch.io/tower]]
+
+See ~src/{gunner,tower}/*~ for the code.
+** Cozy Gunner
+A juicy gunner.
+
+Play the latest version here: [[https://russmatney.itch.io/gunner][russmatney.itch.io/gunner]]
+
+See ~src/gunner/*~ for the code.
+** Harvey
+An overlooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
+
+Play the latest version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
+
+See ~src/harvey/*~ for the code.
+** Pluggs
+A fun character - just a bucket of plugs.
+
+Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
+
+See ~src/pluggs/*~ for the code.
+** Ghost House
+Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
+
+A small something created for the [[https://itch.io/jam/godot-wild-jam-52][Godot Wild Jam #52]].
+
+See ~src/ghosts/*~ for the code.
 ** Runner
 Play the latest version here: [[https://russmatney.itch.io/runner][russmatney.itch.io/runner]]
 
@@ -31,30 +63,6 @@ See ~src/dungeonCrawler/*~ for the code.
 This was a chance to implement keys and door logic, and a basic boss state
 machine. The map is one giant scene, and the tiles use auto-tiling, which should
 make it simple to doodle a few more levels.
-** Ghost House
-Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
-
-A small something created for the [[https://itch.io/jam/godot-wild-jam-52][Godot Wild Jam #52]].
-
-See ~src/ghosts/*~ for the code.
-** Pluggs
-A fun character - just a bucket of plugs.
-
-Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
-
-See ~src/pluggs/*~ for the code.
-** Harvey
-An overlooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
-
-Play the latest version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
-
-See ~src/harvey/*~ for the code.
-** Cozy Gunner
-A juicy gunner.
-
-Play the latest version here: [[https://russmatney.itch.io/gunner][russmatney.itch.io/gunner]]
-
-See ~src/gunner/*~ for the code.
 * Addons
 These addons are intended to speed up prototyping and game-jam workflows, but should
 also be useful in larger, long-running projects.
@@ -66,33 +74,107 @@ hope to resolve this dependency issue in ~bb-godot~'s install-addons flow.
 
 ** core
 A Util autoload and a slew of fonts.
+
+Generally, anything too small to go in an existing addon.
 ** beehive
 For working with state machines, behavior trees, maybe GOAP
-*** basic state machine abstraction
-** trolley
-For handling controls inputs and remapping.
-*** Trolley autoload with ~move_dir()~ helpers
-returns a normalized vector according to ~move_{left,up,right,down}~ input actions
-** navi
-Basic menus, pausing, and credits, plus a scene loader for navigating between
-them all.
-*** NaviMenu
-supporting ~add_menu_item({label: "Blah", obj: self, method: "some_func"})~
-** dj
-For sounds and music management, such as background music that is maintained
-across scene transitions.
-** reptile
-Tools scripts and ui to improve on Godot's TileSet UI gap.
-Includes some basic auto-tiles to speed up prototyping.
-** thanks
-A simple Credits scene and/or script that scrolls credits from a .txt file
+*** state machine
+Namespaces/keywords: 'machine', 'state', 'actor'
 ** camera
 2D Camera with modes for following the player, anchors, or centering based on
 points of focus/interest.
 
 Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
+*** slow-mo
+*** hit-stop
+*** screenshake
+** trolley
+For handling controls inputs and remapping.
+*** Trolley autoload with ~move_dir()~ helpers
+returns a normalized vector according to ~move_{left,up,right,down}~ input actions
+*** basic (not passable) UI components derived from input map
+*** ControlsList helper
 ** hood
 HUD UI components.
+
+Maybe camera goes in here?
+GUI and HUD should be camera-zoom-level related anyway.
+
+*** Health Container
+*** Notifications
+*** Offscreen Indicator
+** navi
+Basic menus, pausing, and credits, plus a scene loader for navigating between
+them all.
+*** NaviMenu
+supporting ~add_menu_item({label: "Blah", obj: self, method: "some_func"})~
+*** Basic popovers
+**** Pause Screen
+**** Win Screen
+**** Death Screen
+** dj
+For sounds and music management, such as background music that is maintained
+across scene transitions.
+
+Whatever it takes to make playing sounds in Godot better.
+*** GunnerSounds usage
+When implementing Gunner and Tower, I used a large map like:
+
+(note the .sfxr usage i got via gdfxr (or was it godot-sfxr ?))
+both were fine! just need a wrapper!
+
+#+begin_src gdscript
+extends Node
+
+func _ready():
+	setup_sounds()
+
+###########################################################################
+# sounds
+
+onready var sounds = {
+	"fire":
+	[
+		preload("res://assets/sounds/laser1.sfxr"),
+		preload("res://assets/sounds/laser2.sfxr"),
+	],
+	"jump":
+	[
+		preload("res://assets/sounds/jump1.sfxr"),
+		preload("res://assets/sounds/jump2.sfxr"),
+		preload("res://assets/sounds/jump3.sfxr"),
+	],
+	"pickup":
+	[
+		preload("res://assets/sounds/pickup1.sfxr"),
+	],
+}
+var sound_map
+
+func setup_sounds():
+	sound_map = DJ.setup_sound_map(sounds)
+
+func play_sound(name):
+	if name in sound_map:
+		var s = sound_map[name]
+		DJ.play_sound_rand(s, {"vary": 0.4})
+	else:
+		print("[WARN]: no sound for name", name)
+
+func interrupt_sound(name):
+	if name in sound_map:
+		for s in sound_map[name]:
+			if s.is_playing():
+				s.stop()
+#+end_src
+** reptile
+Tools scripts and ui to improve on Godot's TileSet UI gap.
+Includes some basic auto-tiles to speed up prototyping.
+
+Includes Reptile autoload and ReptileRoom, which are a base for some proc gen with tilemaps.
+
+** thanks
+A simple Credits scene and/or script that scrolls credits from a .txt file
 * bb-godot
 Utilities for managing Godot Projects using Babashka (Clojure)
 

@@ -1,4 +1,5 @@
 # Reptile
+#
 tool
 extends Node
 
@@ -9,6 +10,7 @@ extends Node
 # var p = temp_img_path + str(Time.get_unix_time_from_system()) + ".png"
 # var res = img.save_png(p)
 
+# REPTILE.generate_image({:seed 1337})
 func generate_image(inputs):
 	# validating inputs
 	if not "octaves" in inputs:
