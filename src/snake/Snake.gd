@@ -1,16 +1,17 @@
+tool
 extends Node2D
 
+export(int) var initial_size = 3
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
+var cell_coords = []
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func init(cell: Vector2, dir: Vector2, size := initial_size):
+	cell_coords.append(cell)
+	var next_cell = cell
+	for _i in range(size - 1):
+		next_cell -= dir
+		cell_coords.append(next_cell)
+

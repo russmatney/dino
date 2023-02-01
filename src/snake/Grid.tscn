@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/snake/Grid.gd" type="Script" id=1]
 [ext_resource path="res://src/snake/Cell.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/coldfire_squares.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://src/snake/Cell.gd" type="Script" id=4]
+[ext_resource path="res://src/snake/Snake.gd" type="Script" id=5]
+[ext_resource path="res://src/snake/Snake.tscn" type="PackedScene" id=6]
 
 [node name="Grid" type="Node2D"]
 script = ExtResource( 1 )
@@ -20,7 +22,7 @@ script = ExtResource( 4 )
 position = Vector2( 0, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell3" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -34,7 +36,6 @@ script = ExtResource( 4 )
 position = Vector2( 0, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell5" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -55,66 +56,67 @@ script = ExtResource( 4 )
 position = Vector2( 0, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell8" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell9" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell10" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell11" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell12" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell13" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell14" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell15" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell16" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 0, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell17" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -128,14 +130,13 @@ script = ExtResource( 4 )
 position = Vector2( 8, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell19" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell20" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -149,7 +150,7 @@ script = ExtResource( 4 )
 position = Vector2( 8, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell22" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -162,14 +163,14 @@ script = ExtResource( 4 )
 position = Vector2( 8, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell24" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell25" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -190,85 +191,89 @@ script = ExtResource( 4 )
 position = Vector2( 8, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell28" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell29" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell30" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell31" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell32" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 8, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell33" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell34" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell35" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell36" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell37" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell38" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell39" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell40" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -282,14 +287,13 @@ script = ExtResource( 4 )
 position = Vector2( 16, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell42" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell43" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -303,82 +307,80 @@ script = ExtResource( 4 )
 position = Vector2( 16, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell45" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell46" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell47" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell48" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 16, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell49" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell50" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell51" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell52" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell53" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell54" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell55" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell56" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -392,14 +394,13 @@ script = ExtResource( 4 )
 position = Vector2( 24, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell58" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell59" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -413,27 +414,28 @@ script = ExtResource( 4 )
 position = Vector2( 24, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell61" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell62" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell63" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 24, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell64" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -447,7 +449,6 @@ script = ExtResource( 4 )
 position = Vector2( 32, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell66" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -461,40 +462,42 @@ script = ExtResource( 4 )
 position = Vector2( 32, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell68" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell69" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell70" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell71" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell72" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell73" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -508,14 +511,12 @@ script = ExtResource( 4 )
 position = Vector2( 32, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell75" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell76" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -535,13 +536,13 @@ script = ExtResource( 4 )
 position = Vector2( 32, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell79" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 32, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell80" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -555,27 +556,28 @@ script = ExtResource( 4 )
 position = Vector2( 40, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell82" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell83" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell84" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell85" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -589,7 +591,7 @@ script = ExtResource( 4 )
 position = Vector2( 40, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell87" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -602,13 +604,14 @@ script = ExtResource( 4 )
 position = Vector2( 40, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell89" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell90" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -629,56 +632,54 @@ script = ExtResource( 4 )
 position = Vector2( 40, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell93" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell94" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell95" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell96" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 40, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell97" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell98" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell99" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell100" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -691,46 +692,47 @@ script = ExtResource( 4 )
 position = Vector2( 48, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell102" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell103" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell104" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell105" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell106" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell107" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 48, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell108" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -743,7 +745,7 @@ script = ExtResource( 4 )
 position = Vector2( 48, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell110" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -763,74 +765,75 @@ script = ExtResource( 4 )
 position = Vector2( 48, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell113" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell114" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell115" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell116" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell117" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell118" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell119" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell120" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell121" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell122" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell123" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -844,26 +847,27 @@ script = ExtResource( 4 )
 position = Vector2( 56, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell125" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell126" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell127" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 56, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell128" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -877,7 +881,6 @@ script = ExtResource( 4 )
 position = Vector2( 64, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell130" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -890,14 +893,14 @@ script = ExtResource( 4 )
 position = Vector2( 64, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell132" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell133" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -911,76 +914,72 @@ script = ExtResource( 4 )
 position = Vector2( 64, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell135" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell136" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell137" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell138" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell139" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell140" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell141" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell142" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell143" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell144" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 64, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell145" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1007,69 +1006,68 @@ script = ExtResource( 4 )
 position = Vector2( 72, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell149" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell150" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell151" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell152" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell153" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell154" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell155" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell156" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell157" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 72, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell158" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1089,41 +1087,40 @@ script = ExtResource( 4 )
 position = Vector2( 72, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell161" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell162" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell163" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell164" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell165" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell166" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1143,6 +1140,7 @@ script = ExtResource( 4 )
 position = Vector2( 80, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell169" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1156,34 +1154,34 @@ script = ExtResource( 4 )
 position = Vector2( 80, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell171" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell172" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell173" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell174" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 80, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell175" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1197,21 +1195,20 @@ script = ExtResource( 4 )
 position = Vector2( 80, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell177" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell178" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell179" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1225,20 +1222,20 @@ script = ExtResource( 4 )
 position = Vector2( 88, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell181" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell182" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell183" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1251,20 +1248,21 @@ script = ExtResource( 4 )
 position = Vector2( 88, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell185" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell186" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell187" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1278,34 +1276,34 @@ script = ExtResource( 4 )
 position = Vector2( 88, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell189" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell190" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell191" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell192" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 88, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell193" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1318,14 +1316,14 @@ script = ExtResource( 4 )
 position = Vector2( 96, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell195" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell196" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1339,28 +1337,28 @@ script = ExtResource( 4 )
 position = Vector2( 96, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell198" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell199" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell200" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell201" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1381,27 +1379,27 @@ script = ExtResource( 4 )
 position = Vector2( 96, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell204" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell205" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell206" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 96, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell207" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1421,6 +1419,7 @@ script = ExtResource( 4 )
 position = Vector2( 104, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell210" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1434,21 +1433,20 @@ script = ExtResource( 4 )
 position = Vector2( 104, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell212" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell213" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell214" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1468,75 +1466,73 @@ script = ExtResource( 4 )
 position = Vector2( 104, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell217" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell218" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell219" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell220" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell221" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell222" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell223" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell224" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 104, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell225" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 0 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell226" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell227" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1550,13 +1546,14 @@ script = ExtResource( 4 )
 position = Vector2( 112, 24 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell229" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 32 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell230" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1591,14 +1588,14 @@ script = ExtResource( 4 )
 position = Vector2( 112, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell235" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 80 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell236" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1612,28 +1609,27 @@ script = ExtResource( 4 )
 position = Vector2( 112, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell238" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell239" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 112 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell240" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 112, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell241" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1647,14 +1643,14 @@ script = ExtResource( 4 )
 position = Vector2( 120, 8 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell243" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 16 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell244" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1674,34 +1670,32 @@ script = ExtResource( 4 )
 position = Vector2( 120, 40 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell247" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 48 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell248" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 56 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell249" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 64 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 1
+frame = 3
 script = ExtResource( 4 )
 
 [node name="Cell250" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 72 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 2
 script = ExtResource( 4 )
 
 [node name="Cell251" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1715,20 +1709,21 @@ script = ExtResource( 4 )
 position = Vector2( 120, 88 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 3
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell253" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 96 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell254" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
 position = Vector2( 120, 104 )
 frames = ExtResource( 3 )
 animation = "yellow"
-frame = 2
+frame = 1
 script = ExtResource( 4 )
 
 [node name="Cell255" type="AnimatedSprite" parent="Cells" groups=["cells"] instance=ExtResource( 2 )]
@@ -1742,5 +1737,36 @@ script = ExtResource( 4 )
 position = Vector2( 120, 120 )
 frames = ExtResource( 3 )
 animation = "yellow"
+frame = 3
+script = ExtResource( 4 )
+
+[node name="Snake" type="Node2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 88, 72 )
+script = ExtResource( 5 )
+
+[node name="Cell" type="AnimatedSprite" parent="Snake" groups=["cells"] instance=ExtResource( 2 )]
+frames = ExtResource( 3 )
+animation = "dark"
 frame = 2
+script = ExtResource( 4 )
+
+[node name="Cell2" type="AnimatedSprite" parent="Snake" groups=["cells"] instance=ExtResource( 2 )]
+position = Vector2( -8, 0 )
+frames = ExtResource( 3 )
+animation = "dark"
+frame = 2
+script = ExtResource( 4 )
+
+[node name="Cell3" type="AnimatedSprite" parent="Snake" groups=["cells"] instance=ExtResource( 2 )]
+position = Vector2( -16, 0 )
+frames = ExtResource( 3 )
+animation = "dark"
+frame = 2
+script = ExtResource( 4 )
+
+[node name="Cell4" type="AnimatedSprite" parent="Snake" groups=["cells"] instance=ExtResource( 2 )]
+position = Vector2( -24, 0 )
+frames = ExtResource( 3 )
+animation = "dark"
+frame = 1
 script = ExtResource( 4 )
