@@ -6,6 +6,7 @@ export(int) var initial_size = 3
 ###########################################################################
 # input
 
+
 func _unhandled_input(event):
 	if Trolley.is_event(event, "move_right"):
 		move(Vector2.RIGHT)
@@ -16,17 +17,22 @@ func _unhandled_input(event):
 	elif Trolley.is_event(event, "move_down"):
 		move(Vector2.DOWN)
 
+
 var move_dir_queue = []
+
 
 func move(dir):
 	# TODO expose juicy direction queue append
 	move_dir_queue.append(dir)
 
+
 ###########################################################################
 # ready
 
+
 func _ready():
 	pass
+
 
 ###########################################################################
 # init
@@ -35,6 +41,7 @@ var cell_coords = []
 var segments = {}
 var direction
 var grid
+
 
 func init(g, cell: Vector2, dir: Vector2, size := initial_size):
 	grid = g
@@ -45,7 +52,9 @@ func init(g, cell: Vector2, dir: Vector2, size := initial_size):
 		next_cell -= direction
 		cell_coords.append(next_cell)
 
+
 onready var cell_scene = preload("res://src/snake/Cell.tscn")
+
 
 func draw_segments():
 	for c in get_children():
@@ -54,6 +63,7 @@ func draw_segments():
 
 	for coord in cell_coords:
 		draw_segment(coord)
+
 
 func draw_segment(coord):
 	var c = cell_scene.instance()
@@ -64,16 +74,20 @@ func draw_segment(coord):
 	c.set_owner(self)
 	segments[coord] = c
 
+
 ###########################################################################
 # start/walk
 
 export(float) var walk_every = 0.15
 
 var walk_tween
+
+
 func restart():
 	walk_tween = create_tween()
 	walk_tween.set_loops()
 	walk_tween.tween_callback(self, "walk_in_dir").set_delay(walk_every)
+
 
 func walk_in_dir():
 	if move_dir_queue.size():
@@ -89,7 +103,9 @@ func walk_in_dir():
 
 	handle_next_walk(next)
 
+
 var food = 0
+
 
 func handle_next_walk(next):
 	var info = grid.cell_info_at(next)
@@ -104,10 +120,13 @@ func handle_next_walk(next):
 				walk_every -= walk_every * 0.05
 				restart()
 			walk_towards(next, false)
-		"snake": print("TODO game over")
-		_: walk_towards(next)
+		"snake":
+			print("TODO game over")
+		_:
+			walk_towards(next)
 
-func walk_towards(next, drop_tail=true):
+
+func walk_towards(next, drop_tail = true):
 	if drop_tail:
 		var tail = cell_coords.pop_back()
 		var c = segments[tail]

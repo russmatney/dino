@@ -23,6 +23,7 @@ func set_cell_size(v):
 	cell_size = v
 	init_grid()
 
+
 ###########################################################################
 # ready
 
@@ -35,6 +36,7 @@ func _ready():
 	if snake:
 		snake.restart()
 
+
 ###########################################################################
 # grid
 
@@ -43,13 +45,14 @@ func all_cell_coords():
 	var cs := []
 	for x in range(width):
 		for y in range(height):
-			 cs.append(Vector2(x, y))
+			cs.append(Vector2(x, y))
 	return cs
 
 
 func random_coord():
 	var all = all_cell_coords()
 	return all[randi() % all.size()]
+
 
 func random_empty_coord():
 	var coords = all_cell_coords()
@@ -59,6 +62,7 @@ func random_empty_coord():
 		coords.erase(f.coord)
 	if coords:
 		return coords[randi() % coords.size()]
+
 
 # dicts for cells might be better here
 func cell_info_at(coord):
@@ -73,6 +77,7 @@ func cell_info_at(coord):
 	for c in all_cell_coords():
 		if coord == c:
 			return "empty"
+
 
 ###########################################################################
 # init grid
@@ -94,6 +99,7 @@ func init_grid(anim = "yellow"):
 		c.position = coord * cell_size
 		cells.add_child(c)
 		c.set_owner(self)
+
 
 ###########################################################################
 # init snake
@@ -123,11 +129,13 @@ func init_snake():
 
 var food = []
 
+
 func init_food():
 	for f in food:
 		f.free()
 
 	add_food()
+
 
 func add_food():
 	var empty_cell = random_empty_coord()
@@ -143,6 +151,7 @@ func add_food():
 	add_child(f)
 	f.set_owner(self)
 	food.append(f)
+
 
 func remove_food(f):
 	food.erase(f)
