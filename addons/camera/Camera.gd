@@ -1,4 +1,5 @@
 # Cam
+tool
 extends Node
 
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
@@ -35,7 +36,7 @@ func cam_window_rect():
 # ensure camera
 
 
-func ensure_camera(cam_mode = null, zoom_offset = 3000):
+func ensure_camera(cam_mode = null, zoom_offset = 3000.0):
 	if cam and is_instance_valid(cam):
 		print("[CAM] found existing cam: ", cam)
 		return
@@ -83,6 +84,8 @@ func freezeframe(name, time_scale, duration, trauma = 0.1):
 	yield(get_tree().create_timer(duration * time_scale), "timeout")
 	stop_slowmo(name)
 
+func hitstop(name, time_scale, duration, trauma=0.1):
+	freezeframe(name, time_scale, duration, trauma)
 
 ##############################################################
 # slowmo

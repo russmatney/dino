@@ -11,24 +11,32 @@ export(int) var cell_size = 8 setget set_cell_size
 
 func set_width(v):
 	width = v
-	init_grid()
+	if Engine.editor_hint and ready:
+		init_grid()
 
 
 func set_height(v):
 	height = v
-	init_grid()
+	if Engine.editor_hint and ready:
+		init_grid()
 
 
 func set_cell_size(v):
 	cell_size = v
-	init_grid()
+	if Engine.editor_hint and ready:
+		init_grid()
 
 
 ###########################################################################
 # ready
 
 
+var ready
 func _ready():
+	call_deferred("setup")
+	ready = true
+
+func setup():
 	init_grid()
 	init_snake()
 	init_food()
@@ -54,14 +62,16 @@ func random_coord():
 	return all[randi() % all.size()]
 
 
-func random_empty_coord():
+func random_empty_coord(exclude=null):
 	var coords = all_cell_coords()
 	for c in snake.cell_coords:
 		coords.erase(c)
 	for f in food:
 		coords.erase(f.coord)
+	if exclude:
+		coords.erase(exclude)
 	if coords:
-		return coords[randi() % coords.size()]
+		return Util.rand_of(coords)
 
 
 # dicts for cells might be better here
@@ -87,6 +97,8 @@ onready var cell_scene = preload("res://src/snake/Cell.tscn")
 
 
 func init_grid(anim = "yellow"):
+	if not cells:
+		cells = $Cells
 	for c in cells.get_children():
 		if c.is_in_group("cells"):
 			c.free()
@@ -98,7 +110,6 @@ func init_grid(anim = "yellow"):
 		c.frame = randi() % 4
 		c.position = coord * cell_size
 		cells.add_child(c)
-		c.set_owner(self)
 
 
 ###########################################################################
@@ -120,7 +131,6 @@ func init_snake():
 	snake.init(self, initial_cell, initial_direction)
 	snake.position = initial_cell * cell_size
 	add_child(snake)
-	snake.set_owner(self)
 	snake.draw_segments()
 
 
@@ -133,23 +143,26 @@ var food = []
 func init_food():
 	for f in food:
 		f.free()
+	for f in get_children():
+		if f.is_in_group("food"):
+			f.free()
 
 	add_food()
 
 
-func add_food():
-	var empty_cell = random_empty_coord()
-	if not empty_cell:
+func add_food(exclude=null):
+	var empty_cell = random_empty_coord(exclude)
+	if empty_cell == null:
 		print("[SNAKE] No empty cells! Cannot place food.")
 		return
 
 	var f = cell_scene.instance()
+	f.add_to_group("food")
 	f.coord = empty_cell
 	f.animation = Util.rand_of(["red", "blue"])
 	f.frame = randi() % 4
 	f.position = empty_cell * cell_size
 	add_child(f)
-	f.set_owner(self)
 	food.append(f)
 
 

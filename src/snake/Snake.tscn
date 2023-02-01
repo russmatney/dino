@@ -6,7 +6,7 @@
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
 
-[node name="Snake" type="Node2D"]
+[node name="Snake" type="Node2D" groups=["player"]]
 script = ExtResource( 1 )
 walk_every = 0.3
 

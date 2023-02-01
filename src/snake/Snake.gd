@@ -31,7 +31,7 @@ func move(dir):
 
 
 func _ready():
-	pass
+	Cam.ensure_camera(2)
 
 
 ###########################################################################
@@ -113,12 +113,18 @@ func handle_next_walk(next):
 	match info:
 		["food", _]:
 			food += 1
-			grid.add_food()
-			# remove after adding to avoid adding to the same coord
 			grid.remove_food(info[1])
+
+			# hitstop here needs alot more juice
+			# Cam.hitstop("snake_collecting_food", 0.01, 0.3, 0.2)
+			Cam.screenshake(0.3)
+
+			# pass next to exclude it from new food places
+			grid.add_food(next)
 			if food % 3 == 0:
 				walk_every -= walk_every * 0.05
 				restart()
+				Cam.screenshake(0.5)
 			walk_towards(next, false)
 		"snake":
 			print("TODO game over")
