@@ -8,6 +8,7 @@ font_data = ExtResource( 2 )
 
 [node name="Snake" type="Node2D"]
 script = ExtResource( 1 )
+walk_every = 0.3
 
 [node name="LabelWrapper" type="Node2D" parent="."]
 scale = Vector2( 0.5, 0.5 )

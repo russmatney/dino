@@ -1735,3 +1735,4 @@ script = ExtResource( 4 )
 [node name="Snake" type="Node2D" parent="." instance=ExtResource( 6 )]
 position = Vector2( 72, 80 )
 script = ExtResource( 5 )
+walk_every = 0.3

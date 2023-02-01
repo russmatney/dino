@@ -67,14 +67,14 @@ func draw_segment(coord):
 ###########################################################################
 # start/walk
 
-export(float) var walk_every = 0.3
+export(float) var walk_every = 0.2
 
 func start():
 	var tween = create_tween()
 	tween.set_loops()
-	tween.tween_callback(self, "walk").set_delay(walk_every)
+	tween.tween_callback(self, "walk_in_dir").set_delay(walk_every)
 
-func walk():
+func walk_in_dir():
 	if move_dir_queue.size():
 		# update direction
 		var next_dir = move_dir_queue.pop_front()
@@ -86,10 +86,32 @@ func walk():
 	next.x = wrapi(next.x, 0, grid.width)
 	next.y = wrapi(next.y, 0, grid.height)
 
-	var tail = cell_coords.pop_back()
-	var c = segments[tail]
-	segments.erase(tail)
-	c.queue_free()
+	handle_next_walk(next)
+
+var food = 0
+
+func handle_next_walk(next):
+	var info = grid.cell_info_at(next)
+
+	match info:
+		["food", _]:
+			food += 1
+			grid.remove_food(info[1])
+			grid.add_food()
+			grid.add_food()
+			grid.add_food()
+			if food % 3 == 0:
+				walk_every -= walk_every * 0.1
+			walk_towards(next, false)
+		"snake": print("TODO game over")
+		_: walk_towards(next)
+
+func walk_towards(next, drop_tail=true):
+	if drop_tail:
+		var tail = cell_coords.pop_back()
+		var c = segments[tail]
+		segments.erase(tail)
+		c.queue_free()
 
 	cell_coords.push_front(next)
 	draw_segment(next)
