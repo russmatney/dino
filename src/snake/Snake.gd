@@ -3,8 +3,33 @@ extends Node2D
 
 export(int) var initial_size = 3
 
+###########################################################################
+# input
+
+func _unhandled_input(event):
+	if Trolley.is_event(event, "move_right"):
+		move(Vector2.RIGHT)
+	elif Trolley.is_event(event, "move_left"):
+		move(Vector2.LEFT)
+	elif Trolley.is_event(event, "move_up"):
+		move(Vector2.UP)
+	elif Trolley.is_event(event, "move_down"):
+		move(Vector2.DOWN)
+
+var move_dir_queue = []
+
+func move(dir):
+	# TODO expose juicy direction queue append
+	move_dir_queue.append(dir)
+
+###########################################################################
+# ready
+
 func _ready():
 	pass
+
+###########################################################################
+# init
 
 var cell_coords = []
 var segments = {}
@@ -39,7 +64,10 @@ func draw_segment(coord):
 	c.set_owner(self)
 	segments[coord] = c
 
-export(float) var walk_every = 0.5
+###########################################################################
+# start/walk
+
+export(float) var walk_every = 0.3
 
 func start():
 	var tween = create_tween()
@@ -47,6 +75,13 @@ func start():
 	tween.tween_callback(self, "walk").set_delay(walk_every)
 
 func walk():
+	if move_dir_queue.size():
+		# update direction
+		var next_dir = move_dir_queue.pop_front()
+		if next_dir + direction != Vector2.ZERO:
+			# ignore moving against current direction
+			direction = next_dir
+
 	var next = cell_coords[0] + direction
 	next.x = wrapi(next.x, 0, grid.width)
 	next.y = wrapi(next.y, 0, grid.height)
