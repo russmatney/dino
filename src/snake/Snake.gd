@@ -31,7 +31,7 @@ func move(dir):
 
 
 func _ready():
-	Cam.ensure_camera(2)
+	Cam.ensure_camera(2, 10.0)
 
 
 ###########################################################################
@@ -122,7 +122,7 @@ func handle_next_walk(next):
 			# pass next to exclude it from new food places
 			grid.add_food(next)
 			if food % 3 == 0:
-				walk_every -= walk_every * 0.05
+				walk_every -= walk_every * 0.02
 				restart()
 				Cam.screenshake(0.5)
 			walk_towards(next, false)
