@@ -24,6 +24,9 @@ func _ready():
 	init_grid()
 	init_snake()
 
+	if snake:
+		snake.start()
+
 func all_cell_coords():
 	var cs := []
 	for x in range(width):
@@ -61,16 +64,8 @@ func init_snake():
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
 	snake = snake_scene.instance()
-	snake.init(initial_cell, initial_direction)
+	snake.init(self, initial_cell, initial_direction)
 	snake.position = initial_cell * cell_size
 	add_child(snake)
 	snake.set_owner(self)
-	print(snake.cell_coords)
-
-	for coord in snake.cell_coords:
-		var c = cell_scene.instance()
-		c.animation = "dark"
-		c.frame = randi() % 4
-		c.position = coord * cell_size - snake.position
-		snake.add_child(c)
-		c.set_owner(self)
+	snake.draw_segments()
