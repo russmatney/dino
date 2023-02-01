@@ -1,9 +1,11 @@
 extends CanvasLayer
 
+
 func _ready():
 	var _x = Harvey.connect("new_produce_delivered", self, "inc_produce_count")
 
 	tick_timer()
+
 
 ###################################################################
 # timer
@@ -11,6 +13,7 @@ func _ready():
 onready var time = get_node("%Time")
 # TODO variable time?
 var time_remaining = 90
+
 
 func tick_timer():
 	time.bbcode_text = "[right]Time: " + str(time_remaining)
@@ -22,12 +25,14 @@ func tick_timer():
 		tween.tween_callback(self, "tick_timer").set_delay(1.0)
 		time_remaining = time_remaining - 1
 
+
 ###################################################################
 # produce counts
 
 onready var produce_list = get_node("%ProduceList")
 var produce_count_scene = preload("res://src/harvey/HUD/ProduceCount.tscn")
 var produce_counts = {}
+
 
 func inc_produce_count(type):
 	if type in produce_counts:

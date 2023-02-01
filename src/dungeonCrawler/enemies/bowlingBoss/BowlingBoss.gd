@@ -13,6 +13,7 @@ onready var machine = $Machine
 #######################################################################33
 # config warning
 
+
 func _get_configuration_warning():
 	for n in ["StateLabel", "Machine"]:
 		var node = find_node(n)
@@ -20,19 +21,24 @@ func _get_configuration_warning():
 			return "Missing expected child named '" + n + "'"
 	return ""
 
+
 #######################################################################33
 # ready
+
 
 func _ready():
 	print("bowling boss ready")
 	initial_pos = get_global_position()
 	machine.connect("transitioned", self, "on_transit")
 
+
 func on_transit(new_state):
 	set_state_label(new_state)
 
+
 func set_state_label(label: String):
 	state_label.bbcode_text = "[center]" + label + "[/center]"
+
 
 #######################################################################33
 # signals
@@ -40,18 +46,22 @@ func set_state_label(label: String):
 var bodies = []
 var detects_group = "player"
 
-func _on_DetectBox_body_entered(body:Node):
+
+func _on_DetectBox_body_entered(body: Node):
 	if body.is_in_group(detects_group):
 		bodies.append(body)
 
-func _on_DetectBox_body_exited(body:Node):
+
+func _on_DetectBox_body_exited(body: Node):
 	bodies.erase(body)
+
 
 #######################################################################33
 # bowl attack
 
 onready var ball_scene = preload("res://src/dungeonCrawler/weapons/BowlingBall.tscn")
 var bowl_speed = 200
+
 
 func bowl_attack(target):
 	var ball = ball_scene.instance()
@@ -73,6 +83,7 @@ var dead = false
 onready var normal_body = $Body
 onready var small_body = $SmallBody
 
+
 func hit():
 	health -= 1
 	print(name, " health: ", health)
@@ -85,6 +96,7 @@ func hit():
 		Util.set_collisions_enabled(normal_body, false)
 	elif health <= 0:
 		kill()
+
 
 func kill():
 	Util.set_collisions_enabled(small_body, false)

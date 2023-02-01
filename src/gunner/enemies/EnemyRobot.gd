@@ -9,13 +9,16 @@ var dead = false
 ########################################################
 # ready
 
+
 func _ready():
 	Respawner.register_respawn(self)
+
 
 ########################################################
 # process
 
 export(float) var max_y = 5000.0
+
 
 func _process(_delta):
 	# if target offscreen and player close enough/line-of-sight
@@ -34,6 +37,7 @@ func _process(_delta):
 			if coll.is_in_group("player"):
 				machine.transit("Attack")
 
+
 ########################################################
 # movement
 
@@ -49,17 +53,20 @@ onready var front_ray = $FrontRay
 onready var vision_box = $VisionBox
 onready var vision_ray = $VisionRay
 
+
 func face_dir(dir):
 	if dir == Vector2.RIGHT:
 		face_left()
 	elif dir == Vector2.LEFT:
 		face_right()
 
+
 func turn():
 	if facing_dir == Vector2.RIGHT:
 		face_left()
 	elif facing_dir == Vector2.LEFT:
 		face_right()
+
 
 func face_right():
 	facing_dir = Vector2.RIGHT
@@ -77,6 +84,7 @@ func face_right():
 	if vision_box.position.x < 0:
 		vision_box.position.x *= -1
 
+
 func face_left():
 	facing_dir = Vector2.LEFT
 	anim.flip_h = false
@@ -93,6 +101,7 @@ func face_left():
 	if vision_box.position.x > 0:
 		vision_box.position.x *= -1
 
+
 ############################################################
 # health
 
@@ -102,7 +111,8 @@ onready var health = initial_health
 signal health_change(health)
 signal dead
 
-func take_damage(body=null, d = 1):
+
+func take_damage(body = null, d = 1):
 	Cam.freezeframe("enemy_damage_hitstop", 0.2, 0.3, 0.3)
 	health -= d
 	emit_signal("health_change", health)
@@ -117,7 +127,8 @@ func take_damage(body=null, d = 1):
 
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
-func die(remove=false):
+
+func die(remove = false):
 	dead = true
 	emit_signal("dead")
 
@@ -125,13 +136,17 @@ func die(remove=false):
 	if remove:
 		queue_free()
 
+
 ########################################################
 # offscreen indicator
 
 onready var offscreen_indicator = $OffscreenIndicator
 var on_screen = false
+
+
 func _on_VisibilityNotifier2D_screen_entered():
 	on_screen = true
+
 
 func _on_VisibilityNotifier2D_screen_exited():
 	on_screen = false
@@ -142,14 +157,17 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 var player
 
-func _on_VisionBox_body_entered(body:Node):
+
+func _on_VisionBox_body_entered(body: Node):
 	if body.is_in_group("player") and not body.dead:
 		GunnerSounds.play_sound("enemy_sees_you")
 		player = body
 
-func _on_VisionBox_body_exited(body:Node):
+
+func _on_VisionBox_body_exited(body: Node):
 	if body.is_in_group("player") and not body.dead:
 		player = null
+
 
 ########################################################
 # fire
@@ -160,6 +178,7 @@ var fire_rate = 0.2
 var bullet_knockback = 2
 
 signal fired_bullet(bullet)
+
 
 func fire_at_player():
 	if player and not player.dead and is_instance_valid(player):

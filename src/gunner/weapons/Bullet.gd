@@ -12,7 +12,9 @@ func _process(delta):
 	if ttl <= 0:
 		kill()
 
+
 signal bullet_dying(bullet)
+
 
 func kill():
 	emit_signal("bullet_dying", self)
@@ -27,6 +29,7 @@ func kill():
 		yield(get_tree().create_timer(0.1), "timeout")
 		if is_instance_valid(self):
 			queue_free()
+
 
 func _on_Bullet_body_entered(body: Node):
 	kill()

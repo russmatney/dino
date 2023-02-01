@@ -9,6 +9,7 @@ var dead
 
 var time_left = 0
 
+
 func enter(msg = {}):
 	actor.knocked_back = true
 

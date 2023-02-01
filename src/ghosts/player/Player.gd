@@ -23,10 +23,14 @@ var tween
 ############################################################
 
 signal player_died
+
+
 func die():
 	emit_signal("player_died")
 
+
 ############################################################
+
 
 func _ready():
 	initial_pos = get_global_position()
@@ -36,16 +40,21 @@ func _ready():
 
 	shader_loop()
 
+
 func finish_setup():
 	emit_signal("health_change", health)
+
 
 func on_transit(new_state):
 	set_state_label(new_state)
 
+
 func set_state_label(label: String):
 	state_label.bbcode_text = "[center]" + label + "[/center]"
 
+
 ############################################################
+
 
 func shader_loop():
 	tween = create_tween()
@@ -61,6 +70,7 @@ func shader_loop():
 
 ############################################################
 
+
 func _process(_delta):
 	if Input.is_action_just_pressed("action"):
 		if current_action:
@@ -74,6 +84,7 @@ func _process(_delta):
 enum DIR { left, right }
 var facing_direction = DIR.left
 
+
 func face_right():
 	facing_direction = DIR.right
 	anim.flip_h = true
@@ -82,6 +93,7 @@ func face_right():
 		$Flashlight.position.x = -$Flashlight.position.x
 		$Flashlight.scale.x = -$Flashlight.scale.x
 		$Burstbox.position.x = -$Burstbox.position.x
+
 
 func face_left():
 	facing_direction = DIR.left
@@ -92,7 +104,9 @@ func face_left():
 		$Flashlight.scale.x = -$Flashlight.scale.x
 		$Burstbox.position.x = -$Burstbox.position.x
 
+
 ############################################################
+
 
 func hit(body):
 	health -= 1
@@ -106,7 +120,8 @@ func hit(body):
 
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
-func _on_Hurtbox_body_entered(body:Node):
+
+func _on_Hurtbox_body_entered(body: Node):
 	# ignore if we're still recovering or dead
 	if knocked_back or dead:
 		return
@@ -125,16 +140,21 @@ func _on_Hurtbox_body_entered(body:Node):
 				body.hit(dir)
 				gloomba_ko()
 
+
 ############################################################
 
 signal gloomba_koed
 var gloomba_kos = 0
+
+
 func gloomba_ko():
 	Ghosts.create_notification("Gloomba K.O.!")
 	gloomba_kos += 1
 	emit_signal("gloomba_koed", gloomba_kos)
 
+
 var burstables = []
+
 
 func burst_gloomba():
 	var did_burst = false
@@ -153,6 +173,7 @@ func burst_gloomba():
 		yield(get_tree().create_timer(0.4), "timeout")
 		$Flashlight/AnimatedSprite.visible = false
 
+
 func update_burst_action():
 	if burstables:
 		# add if one can be burst
@@ -163,12 +184,14 @@ func update_burst_action():
 
 	remove_action(self, "burst_gloomba")
 
-func _on_Burstbox_body_entered(body:Node):
+
+func _on_Burstbox_body_entered(body: Node):
 	if body.is_in_group("enemies"):
 		burstables.append(body)
 	update_burst_action()
 
-func _on_Burstbox_body_exited(body:Node):
+
+func _on_Burstbox_body_exited(body: Node):
 	if body.is_in_group("enemies"):
 		burstables.erase(body)
 	update_burst_action()
@@ -179,22 +202,28 @@ func _on_Burstbox_body_exited(body:Node):
 var actions = {}
 var current_action
 
+
 func update_actions_ui():
 	if actions:
 		# TODO support multiple actions, or preferred action?
 		# maybe actions can pass a priority
 		current_action = actions.values()[0]
-		$ActionLabel.bbcode_text = str("[center]", current_action["fname"].capitalize(), "[/center]")
+		$ActionLabel.bbcode_text = str(
+			"[center]", current_action["fname"].capitalize(), "[/center]"
+		)
 	else:
 		current_action = null
 		$ActionLabel.bbcode_text = ""
 
+
 func call_action(action):
 	action["obj"].call_deferred(action["fname"])
+
 
 func add_action(obj, fname):
 	actions[fname] = {"obj": obj, "fname": fname}
 	update_actions_ui()
+
 
 func remove_action(_obj, fname):
 	actions.erase(fname)

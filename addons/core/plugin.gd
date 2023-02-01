@@ -1,7 +1,6 @@
 tool
 extends EditorPlugin
 
-
 var reload_scene_btn = Button.new()
 var container = 0
 var editor_interface

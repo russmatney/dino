@@ -33,7 +33,7 @@ See ~src/harvey/*~ for the code.
 ** Pluggs
 A fun character - just a bucket of plugs.
 
-Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
+Play the latest version here: [[https://russmatney.itch.io/pluggs][russmatney.itch.io/pluggs]]
 
 See ~src/pluggs/*~ for the code.
 ** Ghost House

@@ -8,6 +8,7 @@ export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.
 # TODO consider loading/falling back on a load instead?
 var _navi = Navi
 
+
 func pw(msg: String, item = {}):
 	if item:
 		print("[NaviMenu] Warning: ", msg, " item: ", item)
@@ -17,10 +18,12 @@ func pw(msg: String, item = {}):
 
 ## config warnings #####################################################################
 
+
 func _get_configuration_warning():
 	if not button_scene:
 		return "No button_scene set"
 	return ""
+
 
 ## ready #####################################################################
 

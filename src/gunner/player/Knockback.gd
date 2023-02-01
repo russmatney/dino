@@ -10,6 +10,7 @@ var dead
 
 var time_left = 0
 
+
 func enter(msg = {}):
 	knocked_back = true
 

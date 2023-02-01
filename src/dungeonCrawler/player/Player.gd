@@ -9,21 +9,26 @@ var velocity := Vector2.ZERO
 # ready
 
 var initial_pos
+
+
 func _ready():
 	initial_pos = get_global_position()
 	anim.flip_h = facing == facing_dir.RIGHT
 
 	call_deferred("setup")
 
+
 func setup():
 	add_info_message(health_info_dict(health))
+
 
 #######################################################################33
 # facing
 
 onready var anim = $AnimatedSprite
-enum facing_dir {RIGHT, DOWN, LEFT, UP}
+enum facing_dir { RIGHT, DOWN, LEFT, UP }
 var facing = facing_dir.RIGHT
+
 
 func update_facing(move_dir):
 	var new_facing
@@ -37,8 +42,10 @@ func update_facing(move_dir):
 		anim.flip_h = facing == facing_dir.RIGHT
 		point_weapon(facing)
 
+
 #######################################################################33
 # process
+
 
 func _process(delta):
 	var move_dir = Trolley.move_dir()
@@ -60,8 +67,10 @@ func _process(delta):
 
 	pull_items(delta)
 
+
 #######################################################################33
 # _input
+
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
@@ -77,11 +86,14 @@ func _unhandled_input(event):
 		if weapon:
 			use_weapon(weapon)
 
+
 #######################################################################33
 # weapons
 
 onready var weapon_pos = $WeaponPosition
 var weapon
+
+
 func update_weapon():
 	if weapons.size():
 		# TODO select new weapon? keep current?
@@ -94,13 +106,15 @@ func update_weapon():
 			"bow":
 				attach_bow()
 
-func use_weapon(wp=null):
+
+func use_weapon(wp = null):
 	if not wp:
 		wp = weapon
 
 	match wp["type"]:
 		"bow":
 			fire_bow()
+
 
 func point_weapon(dir):
 	if weapon:
@@ -111,26 +125,34 @@ func point_weapon(dir):
 
 const weapons = []
 
+
 func add_weapon(wp):
 	weapons.append(wp)
 	print("[player weapons]: ", weapons)
 
 	update_weapon()
 
+
 func remove_weapon(wp):
 	weapons.erase(wp)
 	print("[player weapons]: ", weapons)
 
+
 # bow
 
 var player_bow_scene = preload("res://src/dungeonCrawler/weapons/BowWeapon.tscn")
+
+
 func attach_bow():
 	var bow = player_bow_scene.instance()
 	call_deferred("add_child", bow)
 	bow.transform.origin = weapon_pos.position
 
+
 var arrow_scene = preload("res://src/dungeonCrawler/weapons/ArrowProjectile.tscn")
 var arrow_impulse = 400
+
+
 func fire_bow():
 	var bow = Util.get_first_child_in_group(self, "bow")
 	if not bow:
@@ -138,12 +160,13 @@ func fire_bow():
 		return
 
 	var arrow = arrow_scene.instance()
-	arrow.position = bow.get_global_position() # maybe use weapon position?
+	arrow.position = bow.get_global_position()  # maybe use weapon position?
 	# prefer to add bullets to the current scene, so they get cleaned up
 	Navi.current_scene.call_deferred("add_child", arrow)
 	arrow.rotation_degrees = bow.rotation_degrees + 90
 	var impulse_dir = Vector2(1, 0).rotated(deg2rad(bow.rotation_degrees))
 	arrow.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
+
 
 func point_bow(dir):
 	var bow = Util.get_first_child_in_group(self, "bow")
@@ -156,16 +179,21 @@ func point_bow(dir):
 				bow.transform.origin = Vector2(-weapon_pos.position.x, weapon_pos.position.y) / 2
 				bow.rotation_degrees = 180
 			facing_dir.UP:
-				bow.transform.origin = Vector2(0, -weapon_pos.position.x + weapon_pos.position.y) / 2
+				bow.transform.origin = (
+					Vector2(0, -weapon_pos.position.x + weapon_pos.position.y)
+					/ 2
+				)
 				bow.rotation_degrees = -90
 			facing_dir.DOWN:
 				bow.transform.origin = Vector2(0, weapon_pos.position.x + weapon_pos.position.y) / 2
 				bow.rotation_degrees = 90
 
+
 #######################################################################33
 # coins
 
 var coins = 0
+
 
 func add_coin():
 	coins += 1
@@ -173,10 +201,9 @@ func add_coin():
 	remove_info_message(coin_info_dict(coins - 1))
 	add_info_message(coin_info_dict(coins))
 
+
 func coin_info_dict(c):
-	return {
-		"label": str("Coins: ", c)
-	}
+	return {"label": str("Coins: ", c)}
 
 
 #######################################################################33
@@ -184,15 +211,18 @@ func coin_info_dict(c):
 
 const items = []
 
+
 func add_item(it):
 	items.append(it)
 	print("[player items]: ", items)
 	update_item_info()
 
+
 func remove_item(it):
 	items.erase(it)
 	print("[player items]: ", items)
 	update_item_info()
+
 
 func update_item_info():
 	var key_ct = 0
@@ -205,17 +235,21 @@ func update_item_info():
 	if key_ct > 0:
 		add_info_message({"label": str("Keys: ", key_ct)})
 
+
 #######################################################################33
 # doors/keys
 
+
 func can_lock_door():
 	return false
+
 
 func can_unlock_door():
 	for it in items:
 		if it["type"] == "key":
 			return true
 	return false
+
 
 func use_key():
 	# TODO how to determine/sort small vs boss key?
@@ -227,6 +261,7 @@ func use_key():
 	if key_item:
 		remove_item(key_item)
 
+
 #######################################################################33
 # actions
 
@@ -235,12 +270,14 @@ const actions = []
 var action_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
 onready var actions_list = $ActionsList
 
+
 func add_action(ax):
 	var label_text = ax.get("label", "fallback label")
 	var new_label = action_label_scene.instance()
 	new_label.bbcode_text = "[center]" + label_text
 	actions_list.add_child(new_label)
 	actions.append(ax)
+
 
 func remove_action(ax):
 	var to_remove
@@ -254,6 +291,7 @@ func remove_action(ax):
 
 	actions.erase(ax)
 
+
 func execute_action(ax):
 	var fn = ax["func"]
 	# TODO big assumption here, passing self as first arg
@@ -262,34 +300,41 @@ func execute_action(ax):
 
 	remove_action(ax)
 
+
 #######################################################################33
 # targets
 # can pretty much lock-on to everything
 
 var bodies = []
 
-func _on_LockOnDetectArea2D_body_entered(body:Node):
+
+func _on_LockOnDetectArea2D_body_entered(body: Node):
 	# TODO ignore tilemaps properly, maybe via collision layers
 	if body != self and body.name != "DungeonWalls":
 		bodies.append(body)
 		# print("[player-lockon-bodies]:", bodies)
 
-func _on_LockOnDetectArea2D_body_exited(body:Node):
+
+func _on_LockOnDetectArea2D_body_exited(body: Node):
 	bodies.erase(body)
 	# print("[player-lockon-bodies]:", bodies)
 
+
 var areas = []
 
-func _on_LockOnDetectArea2D_area_entered(area:Area2D):
+
+func _on_LockOnDetectArea2D_area_entered(area: Area2D):
 	areas.append(area)
 	# print("[player-lockon-areas]:", areas)
 
-func _on_LockOnDetectArea2D_area_exited(area:Area2D):
+
+func _on_LockOnDetectArea2D_area_exited(area: Area2D):
 	areas.erase(area)
 	# print("[player-lockon-areas]:", areas)
 
 
 onready var line_of_sight = $LineOfSightRayCast2D
+
 
 func in_line_of_sight(body):
 	var cast_to = to_local(body.global_position)
@@ -301,7 +346,9 @@ func in_line_of_sight(body):
 			return true
 	return false
 
+
 var targets = []
+
 
 func current_target():
 	# TODO sort by 'closest'
@@ -312,6 +359,7 @@ func current_target():
 	if areas.size():
 		return areas[0]
 
+
 func point_at_target():
 	var target = current_target()
 	if target:
@@ -321,21 +369,25 @@ func point_at_target():
 			bow.look_at(target.global_position)
 
 
-
 #######################################################################33
 # nearby items
 
 var nearby_items = []
 
-func _on_ItemPullArea2D_area_entered(area:Area2D):
+
+func _on_ItemPullArea2D_area_entered(area: Area2D):
 	nearby_items.append(area)
 	print("[player-nearby-items]: ", nearby_items)
 
-func _on_ItemPullArea2D_area_exited(area:Area2D):
+
+func _on_ItemPullArea2D_area_exited(area: Area2D):
 	nearby_items.erase(area)
 	print("[player-nearby-items]: ", nearby_items)
 
+
 var move_speed = 400
+
+
 func pull_items(delta):
 	for n in nearby_items:
 		if is_instance_valid(n):
@@ -352,11 +404,13 @@ func pull_items(delta):
 		else:
 			nearby_items.erase(n)
 
+
 #######################################################################33
 # health/death
 
 var health = 3
 var dead = false
+
 
 func hit():
 	health -= 1
@@ -374,6 +428,7 @@ func hit():
 		yield(get_tree().create_timer(2.0), "timeout")
 		remove_debug_message(msg)
 
+
 func die():
 	print("[PLAYER DEATH]")
 	dead = true
@@ -382,16 +437,19 @@ func die():
 	Navi.show_death_menu()
 	# TODO restart behavior - just this dungeon? load last checkpoint?
 
-func _on_Hurtbox_body_entered(body:Node):
-	if body.is_in_group("enemies") \
-		or (body.get("owner") and body.owner.is_in_group("enemies")) \
-		or body.is_in_group("enemy_projectile"):
+
+func _on_Hurtbox_body_entered(body: Node):
+	if (
+		body.is_in_group("enemies")
+		or (body.get("owner") and body.owner.is_in_group("enemies"))
+		or body.is_in_group("enemy_projectile")
+	):
 		hit()
 
+
 func health_info_dict(h):
-	return {
-		"label": str("Health: ", h)
-	}
+	return {"label": str("Health: ", h)}
+
 
 #######################################################################33
 # debug list
@@ -401,6 +459,7 @@ const debug_messages = []
 var debug_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
 onready var debug_list = $DebugList
 
+
 func add_debug_message(msg):
 	var label_text = msg.get("label")
 	if label_text:
@@ -408,6 +467,7 @@ func add_debug_message(msg):
 		new_label.bbcode_text = "[center]" + label_text
 		debug_list.add_child(new_label)
 		debug_messages.append(msg)
+
 
 func remove_debug_message(msg):
 	var to_remove
@@ -430,6 +490,7 @@ const info_messages = []
 var info_message_scene = preload("res://src/dungeonCrawler/player/InfoMessage.tscn")
 onready var info_list = get_node("%InfoList")
 
+
 func add_info_message(msg):
 	var label_text = msg.get("label")
 	if label_text:
@@ -437,6 +498,7 @@ func add_info_message(msg):
 		new_label.bbcode_text = "[center]" + label_text
 		info_list.add_child(new_label)
 		info_messages.append(msg)
+
 
 func remove_info_message(msg):
 	var to_remove

@@ -19,6 +19,7 @@ var menu_scenes = [
 	},
 ]
 
+
 func _ready():
 	for ms in menu_scenes:
 		add_menu_item(ms)

@@ -1,6 +1,7 @@
 tool
 extends KinematicBody2D
 
+
 func _ready():
 	match initial_dir:
 		DIR.left:
@@ -18,6 +19,7 @@ func _ready():
 
 	if Engine.editor_hint:
 		request_ready()
+
 
 #######################################################################33
 # physics process
@@ -37,6 +39,7 @@ var velocity = move_dir * speed
 export(int) var fly_speed := 900
 export(int) var fly_range := 400
 var flying = false
+
 
 func _physics_process(delta):
 	if not Engine.editor_hint:
@@ -72,17 +75,20 @@ func _physics_process(delta):
 						move_dir = Vector2.LEFT
 						$AnimatedSprite.flip_h = false
 
+
 func fly():
 	if not flying and can_hit_player():
 		flying = true
-		velocity.y = -1 * (fly_speed + (randi() % fly_range) - (fly_range/3.0))
+		velocity.y = -1 * (fly_speed + (randi() % fly_range) - (fly_range / 3.0))
 		yield(get_tree().create_timer(1), "timeout")
 		flying = false
+
 
 var knockback_impulse = 200
 var knockback_y = 700
 var knockback_time = 2
 var knocked_back = false
+
 
 func hit(dir):
 	$DeadLight.enabled = true
@@ -95,6 +101,7 @@ func hit(dir):
 	velocity = Vector2.ZERO
 	die()
 
+
 func die():
 	stunned = false
 	dead = true
@@ -103,6 +110,7 @@ func die():
 	$Light2D.enabled = false
 	$StunnedLight.enabled = false
 	$DeadLight.enabled = true
+
 
 func stun():
 	stunned = true
@@ -122,21 +130,26 @@ func stun():
 		$AnimatedSprite.playing = true
 		$StunnedLight.enabled = false
 
+
 func player_can_stun():
 	return not stunned and not dead and not knocked_back
+
 
 func player_can_hit():
 	return stunned
 
+
 func can_hit_player():
 	return not stunned and not dead and not knocked_back
+
 
 #############################################################
 
 var enemies = []
 var player
 
-func _on_Detectbox_body_entered(body:Node):
+
+func _on_Detectbox_body_entered(body: Node):
 	if body.is_in_group("enemies"):
 		enemies.append(body)
 		fly()
@@ -145,7 +158,8 @@ func _on_Detectbox_body_entered(body:Node):
 		player = body
 		fly()
 
-func _on_Detectbox_body_exited(body:Node):
+
+func _on_Detectbox_body_exited(body: Node):
 	if body.is_in_group("enemies"):
 		enemies.erase(body)
 	if body.is_in_group("player"):

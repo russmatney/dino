@@ -1,5 +1,6 @@
 extends State
 
+
 func enter(_msg = {}):
 	actor.velocity = Vector2.ZERO
 	actor.anim.animation = "dead"

@@ -60,6 +60,7 @@ func actions_list(ignore_prefix = "", only_prefix = ""):
 
 	return axs
 
+
 ##################################################################
 # public
 ##################################################################
@@ -80,26 +81,34 @@ func move_dir():
 
 	return v_diff.normalized()
 
+
 func is_event(event, event_name):
 	return event.is_action_pressed(event_name)
+
 
 func is_pressed(event, event_name):
 	return event.is_action_pressed(event_name)
 
+
 func is_held(event, event_name):
 	return event.is_action_pressed(event_name)
+
 
 func is_event_released(event, event_name):
 	return event.is_action_released(event_name)
 
+
 func is_jump(event):
 	return event.is_action_pressed("jump")
+
 
 func is_attack(event):
 	return event.is_action_pressed("attack")
 
+
 func is_action(event):
 	return event.is_action_pressed("action")
+
 
 func is_pause(event):
 	return event.is_action_pressed("pause")

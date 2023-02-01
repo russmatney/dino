@@ -1,9 +1,9 @@
 class_name HarveyBot
 extends HarveyPlayer
 
-
 #########################################################
 # ready
+
 
 func _ready():
 	# TODO persistent notification/HUD api
@@ -12,8 +12,10 @@ func _ready():
 	# overwrite parent speed
 	speed = 70
 
+
 #########################################################
 # process
+
 
 func _process(_delta):
 	eval_current_action()
@@ -22,14 +24,18 @@ func _process(_delta):
 	if c_ax:
 		perform_action()
 
+
 #########################################################
 # move_dir
+
 
 func _unhandled_input(_event):
 	pass
 
+
 #########################################################
 # move_dir
+
 
 func get_move_dir():
 	var ax = Util._or(p_ax, nearest_ax)

@@ -2,9 +2,11 @@ extends State
 
 var wait_time: int = 0
 
+
 func enter(_msg = {}):
 	print("[ENGAGED]", actor)
 	wait_time = 100
+
 
 func process(delta):
 	if actor.dead:

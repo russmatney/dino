@@ -1,12 +1,13 @@
 extends Camera2D
 
-enum cam_mode {FOLLOW, ANCHOR}
+enum cam_mode { FOLLOW, ANCHOR }
 export(cam_mode) var mode = cam_mode.FOLLOW
 
 var following
 export(String) var follow_group = "player"
-var current_anchor # only set in ANCHOR mode
+var current_anchor  # only set in ANCHOR mode
 export(String) var anchor_group = "camera_anchor"
+
 
 func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
@@ -21,6 +22,7 @@ func find_node_to_follow():
 				Util.reparent(self, following)
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
+
 
 func attach_to_nearest_anchor():
 	# assumes `following` is set as desired
@@ -44,13 +46,17 @@ func attach_to_nearest_anchor():
 		else:
 			following = null
 
+
 ###########################################################################
+
 
 func _ready():
 	if not following:
 		find_node_to_follow()
 
+
 ###########################################################################
+
 
 func _process(_delta):
 	match mode:

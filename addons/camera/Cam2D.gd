@@ -32,6 +32,7 @@ var max_zoom = 4.0
 var original_offset
 var original_rotation
 
+
 func _ready():
 	original_offset = offset
 	original_rotation = rotation
@@ -81,6 +82,7 @@ func _process(delta):
 
 			center_pois()
 
+
 ###########################################################################
 # physics_process
 
@@ -88,8 +90,10 @@ func _process(delta):
 func _physics_process(delta):
 	process_shake(delta)
 
+
 ###########################################################################
 # input
+
 
 func _input(event):
 	if Trolley.is_event(event, "zoom_in"):
@@ -104,10 +108,12 @@ func _input(event):
 		inc_trauma(0.5)
 		# inc_trauma(1.0)
 
+
 ###########################################################################
 # zoom
 
-func zoom_dir(dir, n=null):
+
+func zoom_dir(dir, n = null):
 	zoom_offset_previous = zoom_offset
 	var inc
 	var offset_inc
@@ -117,7 +123,7 @@ func zoom_dir(dir, n=null):
 	elif not n:
 		n = 1
 
-	match (dir):
+	match dir:
 		"out":
 			zoom_level += zoom_increment * n
 			zoom_offset += zoom_offset_increment * n
@@ -136,13 +142,17 @@ func zoom_dir(dir, n=null):
 			# updated via _process
 			pass
 
+
 var zoom_tween
+
 
 func update_zoom():
 	zoom_level = clamp(zoom_level, min_zoom, max_zoom)
 	zoom_tween = create_tween()
 	var new_zoom = Vector2(zoom_level, zoom_level)
-	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_duration).set_trans(Tween.TRANS_SINE).set_ease(
+		Tween.EASE_OUT
+	)
 
 
 ###########################################################################
@@ -152,15 +162,18 @@ func update_zoom():
 var trauma = 0.0
 var trauma_decrement_factor = 0.7
 
+
 func inc_trauma(inc):
 	trauma += inc
 	trauma = clamp(trauma, 0.0, 1.0)
 	# print("[CAM] Trauma: ", trauma)
 
+
 var shake_offset
 var shake_rotation
 var trans_noise_ctx
 var rot_noise_ctx
+
 
 func screenshake_reset():
 	shake_offset = null
@@ -172,6 +185,7 @@ func screenshake_reset():
 	self.offset = original_offset
 	self.rotation = original_rotation
 
+
 func process_shake(delta):
 	if trauma > 0:
 		trauma -= trauma_decrement_factor * delta
@@ -181,16 +195,10 @@ func process_shake(delta):
 			screenshake_reset()
 		else:
 			if not trans_noise_ctx:
-				trans_noise_ctx = {
-					"noise": new_noise(noise_inputs),
-					"acc": 0
-					}
+				trans_noise_ctx = {"noise": new_noise(noise_inputs), "acc": 0}
 			if not rot_noise_ctx:
 				noise_inputs["seed"] += randi()
-				rot_noise_ctx = {
-					"noise": new_noise(noise_inputs),
-					"acc": 0
-					}
+				rot_noise_ctx = {"noise": new_noise(noise_inputs), "acc": 0}
 			screenshake_translational(trans_noise_ctx, delta)
 			screenshake_rotational(rot_noise_ctx, delta)
 	if shake_offset:
@@ -198,13 +206,15 @@ func process_shake(delta):
 	if shake_rotation:
 		self.rotation = original_rotation + shake_rotation
 
+
 var noise_inputs = {
 	"seed": 4,
 	"octaves": 5,
 	"period": 5,
 	"persistence": 0.8,
 	"lacunarity": 4.0,
-	}
+}
+
 
 func new_noise(inputs):
 	var noise = OpenSimplexNoise.new()
@@ -215,12 +225,15 @@ func new_noise(inputs):
 	noise.lacunarity = inputs["lacunarity"]
 	return noise
 
+
 func next_noise_factor(noise_ctx, delta):
 	noise_ctx["acc"] = delta + noise_ctx["acc"]
 	noise_ctx["factor"] = noise_ctx["noise"].get_noise_1d(noise_ctx["acc"])
 
+
 var max_shake_offset = 100
 var max_shake_rotation = PI / 8
+
 
 func screenshake_translational(noise_ctx, delta):
 	var max_offset = Vector2(max_shake_offset, max_shake_offset)
@@ -228,10 +241,12 @@ func screenshake_translational(noise_ctx, delta):
 	next_noise_factor(noise_ctx, delta)
 	shake_offset = max_offset * shake * noise_ctx["factor"]
 
+
 func screenshake_rotational(noise_ctx, delta):
 	var shake = trauma * trauma
 	next_noise_factor(noise_ctx, delta)
 	shake_rotation = max_shake_rotation * shake * noise_ctx["factor"]
+
 
 ###########################################################################
 # follow mode
@@ -306,9 +321,11 @@ func update_pois():
 		if nearby_pois:
 			poi_follows = nearby_pois
 
+
 func update_pofs():
 	if pof_group:
 		pof_follows = get_tree().get_nodes_in_group(pof_group)
+
 
 func zoom_factor_for_bounds(pt_a, pt_b):
 	var x = abs(pt_a.x - pt_b.x)
@@ -367,5 +384,7 @@ func center_pois():
 		center = center / pof_follows.size()
 		self.global_position = center
 
-		zoom_level = zoom_factor_for_bounds(Vector2(max_right, max_bottom), Vector2(max_left, max_top))
+		zoom_level = zoom_factor_for_bounds(
+			Vector2(max_right, max_bottom), Vector2(max_left, max_top)
+		)
 		update_zoom()

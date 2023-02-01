@@ -15,6 +15,7 @@ func process(_delta: float):
 	elif Input.is_action_pressed("move_down"):
 		machine.transit("Bucket", {"animate": true})
 
+
 func physics_process(delta):
 	owner.velocity.y += owner.gravity * delta
 	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)

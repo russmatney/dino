@@ -1,12 +1,13 @@
 extends StaticBody2D
 
-enum door_state {LOCKED, OPEN, CLOSED}
+enum door_state { LOCKED, OPEN, CLOSED }
 
 export(door_state) var state = door_state.CLOSED setget set_door_state
 
 onready var anim: AnimatedSprite = $AnimatedSprite
 onready var coll_shape: CollisionShape2D = $CollisionShape2D
 onready var action_area: Area2D = $ActionArea
+
 
 func set_door_state(val):
 	state = val
@@ -24,22 +25,25 @@ func set_door_state(val):
 				coll_shape.set_disabled(false)
 		door_state.LOCKED:
 			if anim:
-				anim.animation = "closed" # TODO support "locked"
+				anim.animation = "closed"  # TODO support "locked"
 			if coll_shape:
 				coll_shape.set_disabled(false)
 
-func open_door(_body=null):
+
+func open_door(_body = null):
 	set_door_state(door_state.OPEN)
 	# it'd be better to attach this to the actions magically
 	# maybe actions should get pre/post hooks
 	# starting to feel state machiney
 	update_bodies()
 
-func close_door(_body=null):
+
+func close_door(_body = null):
 	set_door_state(door_state.CLOSED)
 	update_bodies()
 
-func unlock_door(body=null):
+
+func unlock_door(body = null):
 	set_door_state(door_state.CLOSED)
 
 	# this.... this is crazy, right?
@@ -48,17 +52,21 @@ func unlock_door(body=null):
 
 	update_bodies()
 
-func lock_door(_body=null):
+
+func lock_door(_body = null):
 	set_door_state(door_state.LOCKED)
 	update_bodies()
 
-func jostle_door(_body=null):
+
+func jostle_door(_body = null):
 	# TODO some animation/something
 	print("jostling the door!")
 	update_bodies()
 
+
 #######################################################################33
 # ready
+
 
 func _ready():
 	if Engine.editor_hint:
@@ -67,35 +75,22 @@ func _ready():
 	# make sure any setup code is called so we're in the expected state
 	set_door_state(state)
 
+
 #######################################################################33
 # actions
 
 var bodies = []
 
-var unlock_door_action = {
-	"func": funcref(self, "unlock_door"),
-	"label": "Unlock"
-	}
+var unlock_door_action = {"func": funcref(self, "unlock_door"), "label": "Unlock"}
 
-var lock_door_action = {
-	"func": funcref(self, "lock_door"),
-	"label": "lock"
-	}
+var lock_door_action = {"func": funcref(self, "lock_door"), "label": "lock"}
 
-var open_door_action = {
-	"func": funcref(self, "open_door"),
-	"label": "Open"
-	}
+var open_door_action = {"func": funcref(self, "open_door"), "label": "Open"}
 
-var close_door_action = {
-	"func": funcref(self, "close_door"),
-	"label": "Close"
-	}
+var close_door_action = {"func": funcref(self, "close_door"), "label": "Close"}
 
-var door_locked_message = {
-	"func": funcref(self, "jostle_door"),
-	"label": "(locked)"
-	}
+var door_locked_message = {"func": funcref(self, "jostle_door"), "label": "(locked)"}
+
 
 func remove_actions(body):
 	if body.has_method("remove_action"):
@@ -105,6 +100,7 @@ func remove_actions(body):
 		body.remove_action(lock_door_action)
 		body.remove_action(unlock_door_action)
 		body.remove_action(door_locked_message)
+
 
 func update_body(body):
 	remove_actions(body)
@@ -134,6 +130,7 @@ func update_body(body):
 						# have to manage the connections
 						# perhaps an event/routing system could reduce that?
 
+
 # update actions on all bodies we're currently aware of
 # TODO move into `AXE` helper namespace/dino lib
 func update_bodies():
@@ -141,10 +138,12 @@ func update_bodies():
 	for body in bodies:
 		update_body(body)
 
-func _on_ActionArea_body_entered(body:Node):
+
+func _on_ActionArea_body_entered(body: Node):
 	bodies.append(body)
 	update_bodies()
 
-func _on_ActionArea_body_exited(body:Node):
+
+func _on_ActionArea_body_exited(body: Node):
 	bodies.erase(body)
 	remove_actions(body)

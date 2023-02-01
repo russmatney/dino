@@ -3,14 +3,16 @@ extends State
 var walk_for = 3
 var tt_idle
 
-func enter(ctx={}):
+
+func enter(ctx = {}):
 	actor.anim.animation = "run"
 	actor.move_dir = ctx.get("dir")
 	if not actor.move_dir:
-		actor.move_dir = [Vector2.RIGHT, Vector2.LEFT][randi()%2]
+		actor.move_dir = [Vector2.RIGHT, Vector2.LEFT][randi() % 2]
 	actor.face_dir(actor.move_dir)
 
 	tt_idle = walk_for
+
 
 func physics_process(delta):
 	tt_idle -= delta

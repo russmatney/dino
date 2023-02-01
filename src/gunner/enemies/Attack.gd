@@ -3,10 +3,12 @@ extends State
 var shoot_every = 1
 var tt_shoot
 
-func enter(_ctx={}):
+
+func enter(_ctx = {}):
 	print("entering attack")
 	actor.velocity = Vector2.ZERO
 	tt_shoot = shoot_every
+
 
 func process(delta):
 	if actor.player:
@@ -16,6 +18,7 @@ func process(delta):
 			tt_shoot = shoot_every
 	else:
 		machine.transit("Idle")
+
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta

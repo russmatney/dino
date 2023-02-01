@@ -1,7 +1,6 @@
 tool
 extends Node
 
-
 # func _unhandled_input(event):
 # 	# TODO probably don't want this on _all_ the time
 # 	if Trolley.is_event(event, "respawns"):
@@ -14,22 +13,24 @@ extends Node
 var respawns = []
 signal respawn(node)
 
+
 func register_respawn(node):
 	if node.filename:
-		respawns.append({
-			"filename": node.filename,
-			"position": node.get_global_position(),
-			"node": node
-			})
+		respawns.append(
+			{"filename": node.filename, "position": node.get_global_position(), "node": node}
+		)
+
 
 func reset_respawns():
 	respawns = []
+
 
 func respawn_all():
 	for r in respawns:
 		var ins = load(r["filename"]).instance()
 		# ins.position = r["position"]
 		Navi.current_scene.call_deferred("add_child", ins)
+
 
 func respawn_missing():
 	var to_remove = []

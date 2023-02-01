@@ -4,6 +4,7 @@ class_name RunnerRoom
 
 var expected_child_nodes = ["RoomBox"]
 
+
 func _get_configuration_warning():
 	var has_roombox = false
 	for n in ["RoomBox"]:
@@ -20,8 +21,10 @@ func _get_configuration_warning():
 			return "Found EnterBox, expected ExitBox"
 	return ""
 
+
 ###########################################################
 ## Runner Room room_width
+
 
 # returns the width of the room. uses the RoomBox's collision shape
 func room_width():
@@ -36,9 +39,11 @@ func room_width():
 
 	print("[WARN] room_width not supported for room!", self)
 
+
 func room_width_roombox(coll_shape):
 	var shape = get_node("RoomBox/CollisionShape2D").shape
 	return shape.extents.x * 2 * coll_shape.scale.x
+
 
 func room_width_enterbox():
 	var enter_coll_shape = get_node("EnterBox/CollisionShape2D")
@@ -49,8 +54,10 @@ func room_width_enterbox():
 
 	return right_x_offset - left_x_offset
 
+
 ###########################################################
 ## Runner Room x_offset
+
 
 # returns the distance from the furthest left to the origin.
 # calculated using the width and the roombox's position
@@ -67,11 +74,14 @@ func x_offset():
 
 	print("[WARN] x_offset not supported for room!", self)
 
+
 func x_offset_roombox(coll_shape):
 	return calc_shape_offset(coll_shape)
 
+
 func x_offset_enterbox(coll_shape):
 	return calc_shape_offset(coll_shape)
+
 
 func calc_shape_offset(coll_shape, left_side = true):
 	var coll_x_offset
@@ -83,8 +93,10 @@ func calc_shape_offset(coll_shape, left_side = true):
 	var parent_x_offset = p.position.x * p.scale.x
 	return coll_x_offset + parent_x_offset
 
+
 ###########################################################
 ## Runner Room is_finished()
+
 
 # if false, the room will be requeued until this returns true
 func is_finished():
@@ -98,6 +110,7 @@ var roombox
 var enterbox
 var exitbox
 
+
 func _ready():
 	setup()
 
@@ -107,12 +120,14 @@ func _ready():
 	# useful when debugging room calcs
 	# call_deferred("print_debug")
 
+
 func print_debug():
 	print("---------------------------------------------")
 	print(self.name, " debug report")
 	print("room_width(): ", room_width())
 	print("x_offset(): ", x_offset())
 	print("---------------------------------------------")
+
 
 # called in _ready() AND when unfinished rooms are re-added to the view
 func setup():
@@ -129,8 +144,10 @@ func setup():
 	if exitbox:
 		Util.ensure_connection(exitbox, "body_exited", self, "_on_body_exited")
 
+
 func cleanup():
 	pass
+
 
 func restart_position():
 	if enterbox:
@@ -138,16 +155,19 @@ func restart_position():
 	if roombox:
 		return roombox.global_position
 
+
 var player
 
 signal player_entered
 signal player_exited
+
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		player.entered_room(self)
 		emit_signal("player_entered", player)
+
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):

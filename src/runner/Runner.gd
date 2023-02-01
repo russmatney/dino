@@ -11,9 +11,9 @@ var current_rooms = []
 var accumulated_room_width = 0
 var active_room_count = 5
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
 	if not initial_room_options:
 		print("[WARN]: no room options!")
 
@@ -26,6 +26,7 @@ func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
+
 func clear_current_rooms():
 	for r in current_rooms:
 		r.queue_free()
@@ -34,10 +35,12 @@ func clear_current_rooms():
 	for r in current_rooms:
 		to_del.append(r)
 	for r in to_del:
-		current_rooms.erase(r) # is this even necssary after they are queue_freed? probably?
+		current_rooms.erase(r)  # is this even necssary after they are queue_freed? probably?
 	accumulated_room_width = 0
 
+
 var no_more_rooms = false
+
 
 # TODO unit test for this function
 func choose_next_room_instance():
@@ -76,6 +79,7 @@ func choose_next_room_instance():
 	no_more_rooms = true
 	if final_room:
 		return final_room.instance()
+
 
 # prepare room to be added to the scene
 func prep_room():
@@ -120,6 +124,7 @@ func prep_room():
 
 	return next_room
 
+
 func add_rooms_to_scene(count: int):
 	for i in count:
 		var room = prep_room()
@@ -128,6 +133,7 @@ func add_rooms_to_scene(count: int):
 			# the others get moved when .position.x is set
 			if not room.get_parent():
 				call_deferred("add_child", room, true)
+
 
 # TODO add unit tests
 func room_entered(_player, room):
@@ -143,9 +149,9 @@ func room_entered(_player, room):
 	if rooms_to_make:
 		add_rooms_to_scene(rooms_to_make)
 
+
 # TODO add unit tests
 func room_exited(_player, room):
-
 	# TODO maybe there's a later place to fire this?
 	# it happens too quickly this way, the blocks
 	# disappear on-screen.
@@ -162,7 +168,7 @@ func room_exited(_player, room):
 	var to_delete = []
 	var to_remove = []
 
-	for idx in exited_room_index - 2: # subtract 2 for some buffer
+	for idx in exited_room_index - 2:  # subtract 2 for some buffer
 		var r = current_rooms[idx]
 		# TODO this feels like an extra is_finished call... :/
 		if r.is_finished():

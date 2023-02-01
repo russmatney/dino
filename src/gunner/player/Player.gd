@@ -9,10 +9,10 @@ var dead = false
 ############################################################
 # _ready
 
-
 var reset_position
 
 export(bool) var has_jetpack = false
+
 
 func _ready():
 	reset_position = get_global_position()
@@ -21,6 +21,7 @@ func _ready():
 
 	Cam.call_deferred("ensure_camera", 2)
 	Hood.ensure_hud()
+
 
 ############################################################
 # _process
@@ -31,6 +32,7 @@ var record_pos_every = 0.0005
 var record_pos_in = 0
 
 export(float) var max_y = 10000.0
+
 
 func _process(delta):
 	move_dir = Trolley.move_dir()
@@ -57,10 +59,12 @@ func _process(delta):
 		position = reset_position
 		velocity = Vector2.ZERO
 
+
 ############################################################
 # _unhandled_input
 
 var jump_count = 0
+
 
 func _unhandled_key_input(event):
 	if not dead and has_jetpack and Trolley.is_event(event, "jetpack"):
@@ -77,6 +81,7 @@ func _unhandled_key_input(event):
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
 
+
 ############################################################
 # health
 
@@ -86,7 +91,8 @@ onready var health = initial_health
 signal health_change(health)
 signal dead
 
-func take_damage(body=null, d = 1):
+
+func take_damage(body = null, d = 1):
 	health -= d
 	emit_signal("health_change", health)
 	GunnerSounds.play_sound("player_hit")
@@ -101,12 +107,14 @@ func take_damage(body=null, d = 1):
 	elif health <= 0:
 		machine.transit("Dead", {"shake": 1.0})
 
-func die(remove=false):
+
+func die(remove = false):
 	dead = true
 	GunnerSounds.play_sound("player_dead")
 	emit_signal("dead")
 	if remove:
 		queue_free()
+
 
 ############################################################
 # machine
@@ -218,7 +226,9 @@ func stop_firing():
 	if fire_tween and fire_tween.is_running():
 		fire_tween.kill()
 
+
 signal fired_bullet(bullet)
+
 
 func fire_bullet():
 	var bullet = bullet_scene.instance()
@@ -235,10 +245,12 @@ func fire_bullet():
 	pos += -1 * facing_dir * bullet_knockback
 	set_global_position(pos)
 
+
 ######################################################################
 # notif
 
-func notif(text, opts={}):
+
+func notif(text, opts = {}):
 	var ttl = opts.get("ttl", 1.5)
 	var dupe = opts.get("dupe", false)
 	var label
@@ -258,21 +270,26 @@ func notif(text, opts={}):
 	else:
 		tween.tween_callback(label, "set_visible", [false]).set_delay(ttl)
 
+
 ######################################################################
 # level up
+
 
 func level_up():
 	shine(2.0)
 	notif("LEVEL UP", {"dupe": true})
 	Hood.notif("Level Up")
 
+
 ######################################################################
 # shine
 
-func shine(time=1.0):
+
+func shine(time = 1.0):
 	var tween = create_tween()
 	anim.material.set("shader_param/speed", 1.0)
 	tween.tween_callback(anim.material, "set", ["shader_param/speed", 0.0]).set_delay(time)
+
 
 ######################################################################
 # pickups
@@ -280,6 +297,7 @@ func shine(time=1.0):
 var pickups = []
 
 signal pickups_changed(pickups)
+
 
 func collect_pickup(pickup_type):
 	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
@@ -289,12 +307,14 @@ func collect_pickup(pickup_type):
 		pickups.append(pickup_type)
 		emit_signal("pickups_changed", pickups)
 
+
 ######################################################################
 # tile color detection
 
 var current_tile_colors = []
 
-func _on_TileAOEDetector_body_entered(body:Node):
+
+func _on_TileAOEDetector_body_entered(body: Node):
 	if body.is_in_group("yellowtile"):
 		current_tile_colors.append("yellow")
 	elif body.is_in_group("bluetile"):
@@ -304,7 +324,8 @@ func _on_TileAOEDetector_body_entered(body:Node):
 	update_colors()
 	update_aoe_state()
 
-func _on_TileAOEDetector_body_exited(body:Node):
+
+func _on_TileAOEDetector_body_exited(body: Node):
 	if body.is_in_group("yellowtile"):
 		current_tile_colors.erase("yellow")
 	elif body.is_in_group("bluetile"):
@@ -314,32 +335,43 @@ func _on_TileAOEDetector_body_exited(body:Node):
 	update_colors()
 	update_aoe_state()
 
+
 var coldfire_dark = Color8(70, 66, 94)
 var coldfire_blue = Color8(91, 118, 141)
 var coldfire_red = Color8(209, 124, 124)
 var coldfire_yellow = Color8(246, 198, 168)
+
 
 func update_colors():
 	var tween = create_tween()
 	if current_tile_colors:
 		var color = current_tile_colors[0]
 
-		match(color):
+		match color:
 			"red":
 				tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
-				tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_yellow, 0.4)
+				tween.parallel().tween_property(
+					anim.material, "shader_param/accent", coldfire_yellow, 0.4
+				)
 			"yellow":
 				tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
-				tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_red, 0.4)
+				tween.parallel().tween_property(
+					anim.material, "shader_param/accent", coldfire_red, 0.4
+				)
 			"blue":
 				tween.tween_property(anim.material, "shader_param/outline", coldfire_yellow, 0.4)
-				tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_dark, 0.4)
+				tween.parallel().tween_property(
+					anim.material, "shader_param/accent", coldfire_dark, 0.4
+				)
 	else:
 		tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
 		tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_yellow, 0.4)
 
+
 var in_blue = false
 var in_red = false
+
+
 func update_aoe_state():
 	var was_blue = in_blue
 	if "blue" in current_tile_colors:

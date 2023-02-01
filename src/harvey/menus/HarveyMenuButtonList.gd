@@ -2,16 +2,13 @@ tool
 extends NaviButtonList
 
 var menu_scenes = [
-	{
-		"label": "Play",
-		"obj": Harvey,
-		"method": "restart_game"
-	},
+	{"label": "Play", "obj": Harvey, "method": "restart_game"},
 	{
 		"label": "Credits",
 		"nav_to": "res://src/credits/DinoCredits.tscn",
 	},
 ]
+
 
 func _ready():
 	for ms in menu_scenes:

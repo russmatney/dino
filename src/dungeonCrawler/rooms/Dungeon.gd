@@ -7,6 +7,7 @@ var player
 #######################################################################33
 # warnings
 
+
 func _get_configuration_warning():
 	for n in ["PlayerStart"]:
 		var node = find_node(n)
@@ -15,11 +16,12 @@ func _get_configuration_warning():
 	return ""
 
 
-enum w_type {DEFEAT_BOSS, GET_TREASURE}
+enum w_type { DEFEAT_BOSS, GET_TREASURE }
 export(w_type) var win_type = w_type.DEFEAT_BOSS
 
 #######################################################################33
 # ready
+
 
 func _ready():
 	player = player_start.spawn_player(self)
@@ -29,10 +31,12 @@ func _ready():
 	else:
 		print("failed to spawn player?")
 
+
 var once = true
 
 #######################################################################33
 # process
+
 
 func _process(_delta):
 	if once and is_win():
@@ -41,8 +45,10 @@ func _process(_delta):
 		print("win!")
 		Navi.show_win_menu()
 
+
 #######################################################################33
 # win
+
 
 func is_win():
 	match win_type:

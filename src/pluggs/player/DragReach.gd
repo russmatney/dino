@@ -1,8 +1,8 @@
 extends State
 
-
 var drag_in_t = 0.3
 var tt_drag
+
 
 func enter(_msg = {}):
 	owner.anim.animation = "drag-reach"
@@ -13,8 +13,7 @@ func process(delta: float):
 	if not Input.is_action_pressed("move_down"):
 		machine.transit("Stand", {"animate": true})
 
-	if not Input.is_action_pressed("move_left") \
-		and not Input.is_action_pressed("move_right"):
+	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		machine.transit("Bucket", {"animate": false})
 
 	var move_dir = Trolley.move_dir()

@@ -26,10 +26,12 @@ export(PackedScene) var fallback_camera = preload("res://addons/camera/Cam2D.tsc
 
 var restart_pos: Vector2
 
+
 func _ready():
 	restart_pos = global_position
 
 	call_deferred("ensure_camera")
+
 
 func ensure_camera():
 	# this might need to be deferred until the player and its children
@@ -42,28 +44,36 @@ func ensure_camera():
 		cam.current = true
 		call_deferred("add_child", cam)
 
+
 #######################################################################33
 # input
+
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		jump()
+
 
 func jump():
 	if is_on_floor():
 		# we may need a delta-based jump
 		velocity += jump_velocity
 
+
 var slowing = false
+
 
 func stop_running():
 	slowing = true
 
+
 func start_running():
 	slowing = false
 
+
 #######################################
 # process
+
 
 func _process(_delta):
 	if is_on_floor() and abs(velocity.x) > 2:
@@ -75,7 +85,9 @@ func _process(_delta):
 	if global_position.y > 700:
 		restart()
 
+
 signal player_resetting
+
 
 func restart():
 	# TODO disable/reenable collision detection?
@@ -85,8 +97,10 @@ func restart():
 	stop = false
 	emit_signal("player_resetting")
 
+
 #######################################
 # physics_process
+
 
 func _physics_process(_delta):
 	if stop:
@@ -110,30 +124,38 @@ func _physics_process(_delta):
 	# move_and_slide factors in delta for us
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+
 #######################################
 # pickups
+
 
 func update_hud():
 	print("------------")
 	print("player stats: coins: ", coins)
 	print("leaves: ", leaves)
 
+
 var coins = 0
+
 
 func add_coin():
 	coins += 1
 	update_hud()
 
+
 var leaves = []
+
 
 func caught_leaf(leaf_data):
 	leaves.append(leaf_data)
 	update_hud()
 
+
 ###########################################
 # room api
 
 var current_rooms = []
+
 
 func entered_room(room):
 	current_rooms.append(room)
@@ -141,16 +163,19 @@ func entered_room(room):
 	if pos:
 		restart_pos = pos
 
+
 func exited_room(room):
 	current_rooms.erase(room)
 	if not current_rooms and not won:
 		# if we aren't in a room, restart me
 		restart()
 
+
 ###########################################
 # enemy interactions
 
 var stop = false
+
 
 func hit(body):
 	print("player hit by: ", body)

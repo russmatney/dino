@@ -10,9 +10,11 @@ signal targets_cleared
 ###############################################################################
 # ready
 
+
 func _ready():
 	# defer until everything has hit the scene tree
 	call_deferred("setup")
+
 
 func setup():
 	var players = get_tree().get_nodes_in_group("player")
@@ -30,6 +32,7 @@ func setup():
 	Util.ensure_connection(Respawner, "respawn", self, "_on_respawn")
 	Util.ensure_connection(Cam, "slowmo_stopped", self, "_on_slowmo_stopped")
 
+
 func find_hud():
 	var huds = get_tree().get_nodes_in_group("hud")
 	if huds:
@@ -41,8 +44,10 @@ func find_hud():
 	else:
 		print("[BREAK THE TARGETS] no hud found")
 
+
 var wait_for = 5
 var has_warned = false
+
 
 func _process(delta):
 	# TODO refactor to some sensible pattern
@@ -55,8 +60,10 @@ func _process(delta):
 			has_warned = true
 			print("[WARN]: BreakTheTargets could not find HUD, giving up.")
 
+
 ###############################################################################
 # signals
+
 
 func _on_respawn(node):
 	if node.is_in_group("target"):
@@ -78,8 +85,10 @@ func _on_target_destroyed(t):
 		hud.update_targets_destroyed(destroyed_count)
 		hud.update_targets_remaining(targets.size())
 
+
 ###############################################################################
 # update
+
 
 func target_change(opts = {}):
 	if targets.size() == 1 and opts.get("was_destroy"):
@@ -90,6 +99,7 @@ func target_change(opts = {}):
 		if player:
 			player.notif("TARGETS CLEARED")
 		Cam.freezeframe("targets-cleared", 0.01, 3)
+
 
 func _on_slowmo_stopped(label):
 	if label == "targets-cleared":

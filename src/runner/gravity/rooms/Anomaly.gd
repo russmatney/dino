@@ -4,6 +4,7 @@ extends RunnerRoom
 var max_runs = 3
 var runs = 0
 
+
 func _ready():
 	Util.ensure_connection(self, "player_entered", self, "_on_player_entered")
 	Util.ensure_connection(self, "player_exited", self, "_on_player_exited")
@@ -13,9 +14,11 @@ func _ready():
 	if Engine.editor_hint:
 		request_ready()
 
+
 func setup():
 	.setup()
 	Blocks.ensure_blocks(self)
+
 
 func cleanup():
 	.cleanup()
@@ -25,13 +28,16 @@ func cleanup():
 
 	Blocks.cleanup_blocks(self)
 
+
 func _on_player_entered(_player):
 	Blocks.ensure_blocks(self)
 
 	runs = runs + 1
 
+
 func is_finished():
 	return runs >= max_runs
+
 
 func _on_player_exited(_player):
 	print(max_runs - runs, " attempts remain")

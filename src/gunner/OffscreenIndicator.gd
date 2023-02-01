@@ -1,34 +1,39 @@
 tool
 extends AnimatedSprite
 
-
 var offset_rads = PI / 4
 
 var target
 var showing = false
 var player
 
+
 func _ready():
 	player = Util.first_node_in_group("player")
+
 
 func point_at(pos):
 	look_at(pos)
 	rotate(offset_rads)
 
+
 # func _input(event):
 # 	if event is InputEventMouseButton:
 # 		point_at(get_global_mouse_position())
-	# if event is InputEventMouseMotion:
-	# 	print("mouse: ", get_global_mouse_position())
+# if event is InputEventMouseMotion:
+# 	print("mouse: ", get_global_mouse_position())
+
 
 func _physics_process(_delta):
 	if target and is_instance_valid(target) and showing:
 		point_at(target.get_global_position())
 		position_onscreen()
 
+
 func find_player():
 	if not Engine.editor_hint:
 		player = Util.first_node_in_group("player")
+
 
 func position_onscreen():
 	if not player:
@@ -71,12 +76,14 @@ func position_onscreen():
 
 		global_position = new_pos
 
+
 func activate(node):
 	target = node
 	if not showing:
 		showing = true
 		set_visible(true)
 	point_at(node.get_global_position())
+
 
 func deactivate():
 	if showing:

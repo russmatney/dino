@@ -5,9 +5,11 @@ var fall_speed_shake_threshold = 700
 var heavy_fall_speed_shake_threshold = 900
 var very_heavy_fall_speed_shake_threshold = 1300
 
+
 func enter(_ctx = {}):
 	actor.anim.animation = "fall"
 	actor.can_wall_jump = false
+
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta
@@ -48,6 +50,7 @@ func physics_process(delta):
 		if not actor.can_wall_jump:
 			GunnerSounds.play_sound("step")
 			actor.can_wall_jump = true
+
 
 func exit():
 	pass

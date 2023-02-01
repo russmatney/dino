@@ -8,23 +8,24 @@ var jet_boost_levels = [
 	{
 		"time": 1.0,
 		"boost": 1.0,
-		},
+	},
 	{
 		"time": 0.5,
 		"boost": 0.7,
-		},
+	},
 	{
 		"time": 0.25,
 		"boost": 0.4,
-		},
+	},
 	{
 		"time": 0.0,
 		"boost": 4.0,
 		"boost_from_air": 3.3,
-		}
-	]
+	}
+]
 
 var jet_boost_level
+
 
 func jet_boost_factor(delta):
 	jet_boost_ramp += delta
@@ -37,10 +38,12 @@ func jet_boost_factor(delta):
 			jet_boost_level = jbl
 			return jbl["boost"]
 
+
 var jet_sound_every = 1.1
 var jet_sound_in
 
-func enter(_ctx={}):
+
+func enter(_ctx = {}):
 	actor.anim.animation = "jetpack"
 	is_jetting = true
 	jet_boost_ramp = 0
@@ -72,7 +75,7 @@ func physics_process(delta):
 		jet_boost_ramp = 0
 		is_jetting = false
 
- # and not actor.in_blue
+	# and not actor.in_blue
 	if is_jetting and not actor.dead:
 		actor.jet_anim.set_visible(true)
 

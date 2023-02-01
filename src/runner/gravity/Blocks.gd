@@ -10,6 +10,7 @@ var block_script = "res://src/runner/gravity/Block.gd"
 # TODO consider validation/configuration warning here
 # e.g. ensure the groups being used are used in the scene
 
+
 func create_new_block(room, spawner):
 	if not block_scene:
 		return
@@ -23,6 +24,7 @@ func create_new_block(room, spawner):
 
 	room.call_deferred("add_child", new_block)
 
+
 func ensure_blocks(room):
 	var existing_blocks = get_blocks(room)
 	if existing_blocks:
@@ -32,12 +34,15 @@ func ensure_blocks(room):
 	for spawner in xs:
 		create_new_block(room, spawner)
 
+
 func cleanup_blocks(room):
 	for block in get_blocks(room):
 		block.queue_free()
 
+
 func get_blocks(room):
 	return Util.get_children_in_group(room, "block")
+
 
 func _ready():
 	pass

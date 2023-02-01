@@ -8,10 +8,12 @@ var coll_enabled = true
 export(float) var alpha_threshold = 0.2
 export(float) var offset = 0.5
 
+
 func enable_collision():
 	coll_enabled = true
 	$CollisionShape2D.set_deferred("disabled", false)
 	$Label.text = "enabled"
+
 
 func disable_collision():
 	coll_enabled = false
@@ -25,11 +27,13 @@ func _ready():
 
 	shader_loop()
 
+
 func shader_loop():
 	tween = create_tween()
 	tween.set_loops(0)
 	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.95, 3 + offset)
 	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.0, 1 + offset)
+
 
 func _process(_delta):
 	var alpha = anim.get_material().get("shader_param/alpha")

@@ -11,12 +11,14 @@ onready var remove_timer = $RemoveTimer
 func _ready():
 	remove_timer.start(ttl)
 
+
 ### physics_process #####################################################################
 
 # func _physics_process(_delta):
 #   pass
 
 ### kill #####################################################################
+
 
 func kill():
 	# TODO body destroyed animation/shrink/something?
@@ -30,7 +32,8 @@ func _on_RemoveTimer_timeout():
 
 ### collisions #####################################################################
 
-func _on_Area2D_body_entered(body:Node):
+
+func _on_Area2D_body_entered(body: Node):
 	if body != self:
 		if body.is_in_group("enemies") or body.get("owner") and body.owner.is_in_group("enemies"):
 			if body.has_method("hit"):

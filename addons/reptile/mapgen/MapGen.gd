@@ -3,7 +3,8 @@ tool
 extends Node2D
 class_name MapGen
 
-func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
+
+func prn(msg, msg2 = null, msg3 = null, msg4 = null, msg5 = null):
 	var s = "[MapGen] "
 	if msg5:
 		print(str(s, msg, msg2, msg3, msg4, msg5))
@@ -16,14 +17,17 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	elif msg:
 		print(str(s, msg))
 
+
 ######################################################################
 # ready
 
 var ready = false
 
+
 func _ready():
 	if Engine.editor_hint:
 		ready = true
+
 
 ######################################################################
 # triggers
@@ -32,10 +36,13 @@ export(bool) var ready_override = false
 
 # these behind 'ready' guards to avoid errors in the editor (upon opening)
 export(bool) var generate_image setget do_image_regen
+
+
 func do_image_regen(_val = null):
 	if ready or ready_override:
 		print("-------------------")
 		regenerate_image()
+
 
 func regenerate_image():
 	var room = Util._or(owner, self).get_node_or_null(room_node_path)
@@ -49,9 +56,12 @@ func regenerate_image():
 	room.set_groups(default_groups())
 	room.regen_tilemaps()
 
+
 export(String) var room_node_path = "Map"
 
 export(bool) var clear setget do_clear
+
+
 func do_clear(_v):
 	if ready:
 		prn("Clear")
@@ -62,6 +72,7 @@ func do_clear(_v):
 		for c in self.get_children():
 			c.queue_free()
 
+
 ######################################################################
 # groups
 
@@ -69,6 +80,7 @@ export(PackedScene) var tilemapA_scene
 export(PackedScene) var tilemapB_scene
 export(PackedScene) var tilemapC_scene
 export(PackedScene) var tilemapD_scene
+
 
 func default_groups():
 	var group_data = [
@@ -83,6 +95,7 @@ func default_groups():
 		g.setup(data[0], data[1], data[2], data[3])
 		gps.append(g)
 	return gps
+
 
 ######################################################################
 # colorize_image
@@ -104,7 +117,6 @@ func default_groups():
 # 	if img:
 # 		texture_rect.texture = Reptile.img_to_texture(img)
 
-
 # func colorize_coord(ctx):
 # 	if ctx.group:
 # 		if not ctx.img:
@@ -125,16 +137,20 @@ func default_groups():
 # persist map as resource
 
 export(bool) var persist_tilemap setget do_persist_tilemap
+
+
 func do_persist_tilemap(_val = null):
 	if ready:
 		prn(str("persisting tilemap: ", Time.get_time_string_from_system()))
 		persist_tilemap_to_disk()
+
 
 export(NodePath) var persist_node_path = "Map"
 export(String) var persist_name = str(persist_node_path)
 export(String) var persist_dir = "res://addons/reptile/maps/"
 export(bool) var version_number = true
 export(String) var hardcoded_version_number
+
 
 func persist_tilemap_to_disk():
 	if not Engine.editor_hint:

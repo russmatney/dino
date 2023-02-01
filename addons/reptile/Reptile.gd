@@ -26,8 +26,10 @@ func generate_image(inputs):
 
 	return noise.get_seamless_image(inputs["img_size"])
 
+
 ######################################################################
 # img helpers
+
 
 func all_coords(img):
 	var coords = []
@@ -35,6 +37,7 @@ func all_coords(img):
 		for y in img.get_height():
 			coords.append(Vector2(x, y))
 	return coords
+
 
 func rotate(img):
 	img.lock()
@@ -45,13 +48,16 @@ func rotate(img):
 		new_img.set_pixel(coord.y, coord.x, img.get_pixelv(coord))
 	return new_img
 
+
 func img_to_texture(img):
 	var imgTexture = ImageTexture.new()
 	imgTexture.create_from_image(img, 1)
 	return imgTexture
 
+
 ######################################################################
 # img stats
+
 
 func img_stats(img):
 	var vals = []
@@ -69,12 +75,15 @@ func img_stats(img):
 	# stats["vals"] = vals
 	return stats
 
+
 func normalized_val(stats, val):
 	val = val - stats["min"]
 	return val / stats["variance"]
 
+
 ######################################################################
 # tilemap/cell helpers
+
 
 func all_neighbors(cell):
 	return [
@@ -87,7 +96,8 @@ func all_neighbors(cell):
 		Vector2(cell.x, cell.y + 1),
 		Vector2(cell.x + 1, cell.y + 1),
 		Vector2(cell.x - 1, cell.y + 1),
-		]
+	]
+
 
 func valid_neighbors(tilemap, cell):
 	var nbrs = all_neighbors(cell)

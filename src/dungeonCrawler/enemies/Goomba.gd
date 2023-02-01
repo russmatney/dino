@@ -7,8 +7,10 @@ onready var anim = $AnimatedSprite
 
 var dead = false
 
+
 func hit():
 	kill()
+
 
 func kill():
 	dead = true
@@ -17,13 +19,13 @@ func kill():
 	emit_drops()
 	queue_free()
 
+
 #######################################################################33
 # drops
 
 export(PackedScene) var drop_scene
-var fallback_drop_scenes = [
-	preload("res://src/dungeonCrawler/items/Coin.tscn")
-	]
+var fallback_drop_scenes = [preload("res://src/dungeonCrawler/items/Coin.tscn")]
+
 
 func emit_drop(scene):
 	var drop = scene.instance()
@@ -32,6 +34,7 @@ func emit_drop(scene):
 
 	# eh? particle physics?
 	# drop.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
+
 
 func emit_drops():
 	if drop_scene:
@@ -42,6 +45,7 @@ func emit_drops():
 			var drop = fallback_drop_scenes[0]
 			emit_drop(drop)
 
+
 #######################################################################33
 # physics process
 
@@ -49,6 +53,8 @@ var dir = Vector2.LEFT
 var speed = 50
 var dead_spin_speed = 800
 var velocity = dir * speed
+
+
 func _physics_process(delta):
 	if not dead:
 		var collision_info = move_and_collide(velocity * delta)

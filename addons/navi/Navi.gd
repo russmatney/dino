@@ -20,8 +20,10 @@ export(PackedScene) var win_menu_scene = preload("res://addons/navi/NaviWinMenu.
 var win_container
 var win_menu
 
+
 func pp(msg):
 	print("[Navi] ", msg)
+
 
 ## ready ###################################################################
 
@@ -75,7 +77,9 @@ func nav_to(path_or_packed_scene):
 		# b/c you can pause the game and go to main instead of clicking go to main
 		death_menu.hide()
 
+
 signal new_scene_instanced(inst)
+
 
 func _deferred_goto_scene(path_or_packed_scene):
 	# It is now safe to remove the current scene
@@ -99,17 +103,21 @@ func _deferred_goto_scene(path_or_packed_scene):
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
 
+
 #####################################################################
 # add child
+
 
 # helper for adding a child to the current scene
 func add_child_to_current(child):
 	current_scene.call_deferred("add_child", child)
 
+
 #####################################################################
 # main menu
 
 var main_menu_path = "res://src/menus/DinoMenu.tscn"
+
 
 func set_main_menu(path):
 	var f = File.new()
@@ -119,6 +127,7 @@ func set_main_menu(path):
 	else:
 		pp(str("No scene at path: ", main_menu_path, ", can't set main menu."))
 
+
 func nav_to_main_menu():
 	var f = File.new()
 	if f.file_exists(main_menu_path):
@@ -126,9 +135,11 @@ func nav_to_main_menu():
 	else:
 		pp(str("No scene at path: ", main_menu_path, ", can't navigate."))
 
+
 ## pause ###################################################################
 
 var pause_menu_path = "res://addons/navi/NaviPauseMenu.tscn"
+
 
 func set_pause_menu(path):
 	var f = File.new()
@@ -141,6 +152,7 @@ func set_pause_menu(path):
 		pause_container.add_child(pause_menu)
 	else:
 		pp(str("No scene at path: ", path, ", can't set pause menu."))
+
 
 func _unhandled_input(event):
 	# Navi implying Trolly dep
@@ -178,8 +190,10 @@ func resume():
 
 ## death ###########################################
 
+
 func show_death_menu():
 	death_menu.show()
+
 
 func hide_death_menu():
 	death_menu.hide()
@@ -187,8 +201,10 @@ func hide_death_menu():
 
 ## win ###########################################
 
+
 func show_win_menu():
 	win_menu.show()
+
 
 func hide_win_menu():
 	win_menu.hide()

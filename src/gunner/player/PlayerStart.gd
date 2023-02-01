@@ -1,6 +1,5 @@
 extends Position2D
 
-
 export(bool) var spawn_on_ready = false
 
 signal spawning_player
@@ -11,10 +10,12 @@ var player
 
 #############################################################
 
+
 func _ready():
 	# TODO probably never want to do this in more than one place
 	if spawn_on_ready:
 		call_deferred("spawn_player")
+
 
 func spawn_player():
 	# TODO probably better to create and spawn from our autoload/gamestate

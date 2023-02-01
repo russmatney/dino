@@ -1,8 +1,8 @@
 extends Position2D
 
-
 export(PackedScene) var player_to_spawn
 var fallback_player_scene = preload("res://src/dungeonCrawler/player/Player.tscn")
+
 
 func spawn_player(parent = null):
 	var player

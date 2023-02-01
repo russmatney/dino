@@ -40,12 +40,15 @@ func find_player():
 		update_player_health(player.health)
 		update_gloomba_kos(player.gloomba_kos)
 
+
 ###################################################################
 # process
+
 
 func _process(_delta):
 	if not player:
 		find_player()
+
 
 ###################################################################
 # update health
@@ -59,6 +62,7 @@ func update_player_health(health):
 ###################################################################
 # gloomba count
 
+
 func update_gloomba_kos(gloomba_kos):
 	var label = get_node("%GloombaKOs")
 	label.set_text(str("Gloomba K.O.s: ", gloomba_kos))
@@ -67,14 +71,17 @@ func update_gloomba_kos(gloomba_kos):
 ###################################################################
 # gloomba count
 
+
 func update_room_name(room):
 	var label = get_node("%Room")
 	label.set_text(str("Room: ", room.name))
+
 
 ###################################################################
 # Notifications
 
 var notif_label = preload("res://addons/hood/NotifLabel.tscn")
+
 
 func new_notification(notif):
 	var lbl = notif_label.instance()

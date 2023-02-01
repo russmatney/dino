@@ -6,6 +6,7 @@ onready var pos = $Position2D
 var node
 var screen_size
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not node:
@@ -14,11 +15,13 @@ func _ready():
 	update_screen_size()
 	var _x = get_tree().connect("screen_resized", self, "update_screen_size")
 
+
 func update_screen_size():
 	screen_size = get_viewport().get_visible_rect().size
 
 	if node:
 		set_node(node)
+
 
 func set_node(n):
 	print("setting node for shockwave shader: ", n)
@@ -29,7 +32,7 @@ func set_node(n):
 
 	var center = node.get_global_position()
 	if node == rect:
-		print("half rect size", (node.rect_size / 2))
+		print("half rect size", node.rect_size / 2)
 		print("global pos", node.get_global_position())
 		center = node.get_global_position() + (node.rect_size / 2)
 		pos.set_global_position(center)
@@ -39,6 +42,7 @@ func set_node(n):
 	center.x = (center.x - 0.5) / ratio + 0.5
 	center.y = (screen_size.y - center.y) / screen_size.y
 	print("center", center)
+
 
 func _process(_delta):
 	if node and is_instance_valid(node):
