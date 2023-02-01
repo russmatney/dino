@@ -67,12 +67,13 @@ func draw_segment(coord):
 ###########################################################################
 # start/walk
 
-export(float) var walk_every = 0.2
+export(float) var walk_every = 0.15
 
-func start():
-	var tween = create_tween()
-	tween.set_loops()
-	tween.tween_callback(self, "walk_in_dir").set_delay(walk_every)
+var walk_tween
+func restart():
+	walk_tween = create_tween()
+	walk_tween.set_loops()
+	walk_tween.tween_callback(self, "walk_in_dir").set_delay(walk_every)
 
 func walk_in_dir():
 	if move_dir_queue.size():
@@ -96,12 +97,12 @@ func handle_next_walk(next):
 	match info:
 		["food", _]:
 			food += 1
+			grid.add_food()
+			# remove after adding to avoid adding to the same coord
 			grid.remove_food(info[1])
-			grid.add_food()
-			grid.add_food()
-			grid.add_food()
 			if food % 3 == 0:
-				walk_every -= walk_every * 0.1
+				walk_every -= walk_every * 0.05
+				restart()
 			walk_towards(next, false)
 		"snake": print("TODO game over")
 		_: walk_towards(next)

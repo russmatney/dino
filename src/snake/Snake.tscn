@@ -11,6 +11,7 @@ script = ExtResource( 1 )
 walk_every = 0.3
 
 [node name="LabelWrapper" type="Node2D" parent="."]
+visible = false
 scale = Vector2( 0.5, 0.5 )
 z_index = 10
 

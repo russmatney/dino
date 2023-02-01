@@ -33,7 +33,7 @@ func _ready():
 	init_food()
 
 	if snake:
-		snake.start()
+		snake.restart()
 
 ###########################################################################
 # grid
