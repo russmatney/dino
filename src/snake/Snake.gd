@@ -99,6 +99,8 @@ func walk_in_dir():
 		if next_dir + direction != Vector2.ZERO:
 			# ignore moving against current direction
 			direction = next_dir
+		else:
+			Cam.screenshake(0.5)
 
 	var next = cell_coords[0] + direction
 	next.x = wrapi(next.x, 0, grid.width)
@@ -109,23 +111,28 @@ func walk_in_dir():
 
 var food = 0
 
+func handle_pickup_food(next, f):
+	food += 1
+	grid.remove_food(f)
+
+	# TODO flash some text, hitstop lines
+	Cam.freezeframe("snake_collecting_food", 0.01, 1.4, 0.5)
+
+	# pass next to exclude it from new food places
+	grid.add_food(next)
+
+	if food % 3 == 0:
+		walk_every -= walk_every * 0.02
+		Cam.screenshake(0.5)
+
+	walk_towards(next, false)
 
 func handle_next_walk(next):
 	var info = grid.cell_info_at(next)
 
 	match info:
 		["food", _]:
-			food += 1
-			grid.remove_food(info[1])
-
-			Cam.freezeframe("snake_collecting_food", 0.01, 1.4, 0.5)
-
-			# pass next to exclude it from new food places
-			grid.add_food(next)
-			if food % 3 == 0:
-				walk_every -= walk_every * 0.02
-				Cam.screenshake(0.5)
-			walk_towards(next, false)
+			handle_pickup_food(next, info[1])
 		"snake":
 			print("TODO game over")
 		_:
@@ -147,11 +154,13 @@ func walk_towards(next, drop_tail = true):
 	# var c = segments[next]
 	# c.bounce(direction.rotated(PI/2), 0.95)
 
-	for cell in segments.values():
-		cell.bounce(direction.rotated(PI/2), 0.99)
+	var def = 0.9
 
-	for cell in grid.all_cells():
-		cell.bounce(direction, 0.99)
+	for cell in segments.values():
+		cell.bounce(direction.rotated(PI/2), def)
+
+	# for cell in grid.all_cells():
+	# 	cell.bounce(direction, def)
 
 	for cell in grid.food_cells():
-		cell.bounce(direction.rotated(PI/2), 0.99)
+		cell.bounce(direction.rotated(PI/2), def)

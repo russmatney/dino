@@ -8,8 +8,8 @@
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/deformation = Vector2( 0, 0 )
-shader_param/sideWaysDeformationFactor = 5.0
-shader_param/knockbackFactor = 0.2
+shader_param/sideWaysDeformationFactor = 0.0
+shader_param/knockbackFactor = 0.4
 
 [node name="Cell" type="AnimatedSprite" groups=["cells"]]
 material = SubResource( 1 )

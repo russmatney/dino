@@ -15,19 +15,16 @@ func bounce(dir, def = 0.9):
 var max_dir_distance = 5
 var duration = 0.2
 var reset_duration = 0.2
+var def_scale_factor = 0.4
 
 func deform(direction):
-	var deformationStrength = (
-		clamp(max_dir_distance - direction.length(), 0, max_dir_distance)
-		/ max_dir_distance
-	)
-	var deformationDirection = direction.normalized()
-	var deformationScale = 0.5 * deformationDirection * deformationStrength
+	var og_def = material.get("shader_param/deformation")
+	var def_scale = direction * def_scale_factor
 
 	var tween = create_tween()
-	tween.tween_property(material, "shader_param/deformation", deformationScale, duration).set_trans(
+	tween.tween_property(material, "shader_param/deformation", def_scale, duration).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_property(material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+	tween.tween_property(material, "shader_param/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
 		Tween.EASE_IN_OUT
 	)
