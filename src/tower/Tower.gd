@@ -1,7 +1,7 @@
 tool
 extends Node
 
-var deving_tower = true
+var deving_tower = false
 
 onready var tower_hud = preload("res://src/tower/hud/HUD.tscn")
 

@@ -17,12 +17,15 @@ func set_hud_scene(preloaded_scene):
 var hud
 
 
-func ensure_hud():
+func ensure_hud(hud_preload=null):
 	if hud and is_instance_valid(hud):
 		print("[HOOD] HUD exists, nothing doing.")
 		return
 
-	hud = hud_scene.instance()
+	if not hud_preload:
+		hud_preload = hud_scene
+
+	hud = hud_preload.instance()
 	hud.connect("ready", self, "_on_hud_ready")
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)

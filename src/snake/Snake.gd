@@ -19,8 +19,10 @@ func _unhandled_input(event):
 
 	elif Trolley.is_event(event, "slowmo"):
 		Cam.start_slowmo("snake_slowmo", 0.5)
+		Hood.notif("Slooooooow mooooootion")
 	elif Trolley.is_event_released(event, "slowmo"):
 		Cam.stop_slowmo("snake_slowmo")
+		Hood.notif("Back to full speed")
 
 
 var move_dir_queue = []
@@ -34,9 +36,11 @@ func move(dir):
 ###########################################################################
 # ready
 
+var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
 	Cam.ensure_camera(2, 10.0)
+	Hood.ensure_hud(hud_scene)
 
 
 ###########################################################################
@@ -117,13 +121,14 @@ func walk_in_dir():
 var food = 0
 
 func handle_pickup_food(next, f):
+	Hood.notif(Util.rand_of(["Food collected", "Am nam nam", "Yummy!"]))
 	SnakeSounds.play_sound("pickup")
 	bounce_floor()
 	food += 1
 	grid.remove_food(f)
 
 	# TODO flash some text, hitstop lines
-	Cam.freezeframe("snake_collecting_food", 0.01, 1.4, 0.5)
+	Cam.freezeframe("snake_collecting_food", 0.01, 1.6, 0.5)
 
 	# pass next to exclude it from new food places
 	grid.add_food(next)
