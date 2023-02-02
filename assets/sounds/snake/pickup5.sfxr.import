@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/pickup5.sfxr-95f6110b3e74a539985e6daa8c948853.sample"
+
+[deps]
+
+source_file="res://assets/sounds/snake/pickup5.sfxr"
+dest_files=[ "res://.import/pickup5.sfxr-95f6110b3e74a539985e6daa8c948853.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
