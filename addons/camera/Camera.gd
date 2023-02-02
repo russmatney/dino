@@ -97,7 +97,7 @@ var slowmos = []
 var slowmo_scales = {}
 
 
-func start_slowmo(label, scale):
+func start_slowmo(label, scale = 0.5):
 	# print("[CAM] start slowmo: ", label, " scale: ", scale)
 	slowmos.append(label)
 	slowmo_scales[label] = scale
