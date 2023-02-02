@@ -17,6 +17,11 @@ func _unhandled_input(event):
 	elif Trolley.is_event(event, "move_down"):
 		move(Vector2.DOWN)
 
+	elif Trolley.is_event(event, "slowmo"):
+		Cam.start_slowmo("snake_slowmo", 0.5)
+	elif Trolley.is_event_released(event, "slowmo"):
+		Cam.stop_slowmo("snake_slowmo")
+
 
 var move_dir_queue = []
 
