@@ -5,6 +5,7 @@
 [ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=3]
 
 [sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/deformation = Vector2( 0, 0 )
 shader_param/sideWaysDeformationFactor = 5.0

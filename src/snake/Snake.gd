@@ -74,9 +74,6 @@ func draw_segment(coord):
 	c.set_owner(self)
 	segments[coord] = c
 
-	# `direction` perhaps too loose to use here
-	c.bounce(direction)
-
 
 ###########################################################################
 # process
@@ -121,9 +118,7 @@ func handle_next_walk(next):
 			food += 1
 			grid.remove_food(info[1])
 
-			# hitstop here needs alot more juice
-			# Cam.freezeframe("snake_collecting_food", 0.01, 2.0, 0.2)
-			Cam.screenshake(0.3)
+			Cam.freezeframe("snake_collecting_food", 0.01, 1.4, 0.5)
 
 			# pass next to exclude it from new food places
 			grid.add_food(next)
@@ -148,3 +143,15 @@ func walk_towards(next, drop_tail = true):
 
 	cell_coords.push_front(next)
 	draw_segment(next)
+
+	# var c = segments[next]
+	# c.bounce(direction.rotated(PI/2), 0.95)
+
+	for cell in segments.values():
+		cell.bounce(direction.rotated(PI/2), 0.99)
+
+	for cell in grid.all_cells():
+		cell.bounce(direction, 0.99)
+
+	for cell in grid.food_cells():
+		cell.bounce(direction.rotated(PI/2), 0.99)

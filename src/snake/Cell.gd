@@ -8,11 +8,11 @@ func _ready():
 	pass
 
 
-func bounce(dir):
-	material.set("shader_param/deformation", Vector2(0.9, 0.9))
+func bounce(dir, def = 0.9):
+	material.set("shader_param/deformation", Vector2(def, def))
 	deform(dir)
 
-var max_dir_distance = 50
+var max_dir_distance = 5
 var duration = 0.2
 var reset_duration = 0.2
 

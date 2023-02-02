@@ -75,6 +75,11 @@ func random_empty_coord(exclude=null):
 ###########################################################################
 # cells
 
+func all_cells():
+	return cells.values()
+
+func food_cells():
+	return food
 
 # dicts for cells might be better here
 func cell_info_at(coord):
