@@ -44,12 +44,14 @@ func _on_hud_ready():
 signal notification(text)
 
 
-func notif(text, ttl = 5):
+func notif(text, opts = {}):
 	print("[HOOD] notif: ", text)
 	if not hud:
-		# TODO queue and fire after hud is ready
-		print("no hud yet")
-	emit_signal("notification", {"msg": text, "ttl": ttl})
+		print("[WARN] no hud yet, can't send notification")
+	opts["msg"] = text
+	if not "ttl" in opts:
+		opts["ttl"] = 3.0
+	emit_signal("notification", opts)
 
 
 ###########################################################################

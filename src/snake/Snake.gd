@@ -125,8 +125,10 @@ var food_count = 0
 var speed_level = 1
 
 func handle_pickup_food(next, f):
-
-	Hood.notif(Util.rand_of(["Food collected", "Am nam nam", "Yummy!"]))
+	Hood.notif(
+		Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"]),
+		{"rich": true}
+		)
 	SnakeSounds.play_sound("pickup")
 	bounce_floor()
 	food_count += 1

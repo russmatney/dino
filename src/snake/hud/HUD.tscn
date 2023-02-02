@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/snake/hud/HUD.gd" type="Script" id=1]
 [ext_resource path="res://addons/hood/Notifications.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/hood/NotifLabel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/hood/HudLabel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/snake/hud/HUDPanelStyle.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/hood/NotifRichLabel.tscn" type="PackedScene" id=6]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -24,7 +25,7 @@ margin_bottom = 280.0
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 margin_right = 51.0
-margin_bottom = 47.0
+margin_bottom = 51.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
@@ -63,19 +64,19 @@ autowrap = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 margin_left = 55.0
-margin_right = 436.0
+margin_right = 384.0
 margin_bottom = 280.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 440.0
+margin_left = 388.0
 margin_right = 492.0
 margin_bottom = 280.0
 alignment = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
-margin_top = 267.0
-margin_right = 52.0
+margin_top = 262.0
+margin_right = 104.0
 margin_bottom = 280.0
 custom_styles/panel = ExtResource( 5 )
 
@@ -83,15 +84,24 @@ custom_styles/panel = ExtResource( 5 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 2.0
-margin_right = 50.0
-margin_bottom = 13.0
+margin_right = 102.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
 [node name="NotifLabel" parent="HBoxContainer/VBoxContainer2/PanelContainer/Notifications" instance=ExtResource( 3 )]
+visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 48.0
 margin_bottom = 13.0
 text = "Notification"
+
+[node name="NotifRichLabel" parent="HBoxContainer/VBoxContainer2/PanelContainer/Notifications" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 100.0
+margin_bottom = 14.0
+bbcode_text = "[jump]Happy Notif[/jump]"
+text = "Happy Notif"

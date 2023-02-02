@@ -1,4 +1,4 @@
-extends Label
+extends RichTextLabel
 
 var default_ttl = 3
 var ttl
