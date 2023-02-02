@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/snake/Cell.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/coldfire_squares.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 3 )
+shader_param/deformation = Vector2( 0, 0 )
+shader_param/sideWaysDeformationFactor = 5.0
+shader_param/knockbackFactor = 0.2
 
 [node name="Cell" type="AnimatedSprite" groups=["cells"]]
+material = SubResource( 1 )
 frames = ExtResource( 2 )
 animation = "dark"
 script = ExtResource( 1 )

@@ -74,6 +74,9 @@ func draw_segment(coord):
 	c.set_owner(self)
 	segments[coord] = c
 
+	# `direction` perhaps too loose to use here
+	c.bounce(direction)
+
 
 ###########################################################################
 # process
