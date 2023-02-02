@@ -1,7 +1,7 @@
 tool
 extends Container
 
-enum ExtraOption { SAVE_AS, COPY, PASTE, PASTE_JSFXR, RECENT }
+enum ExtraOption { SAVE_AS, DUPLICATE, COPY, PASTE, PASTE_JSFXR, RECENT }
 
 const SFXRConfig := preload("../SFXRConfig.gd")
 const SFXRGenerator := preload("../SFXRGenerator.gd")
@@ -44,6 +44,7 @@ func _ready():
 	
 	var popup := extra_button.get_popup()
 	popup.add_item(translator.tr("Save As..."), ExtraOption.SAVE_AS)
+	popup.add_item(translator.tr("Duplicate..."), ExtraOption.DUPLICATE)
 	popup.add_separator()
 	popup.add_item(translator.tr("Copy"), ExtraOption.COPY)
 	popup.add_item(translator.tr("Paste"), ExtraOption.PASTE)
@@ -135,7 +136,7 @@ func _popup_message(content: String) -> void:
 	dialog.popup_centered()
 
 
-func _popup_file_dialog(mode: int, callback: String) -> void:
+func _popup_file_dialog(mode: int, callback: String, current_file="") -> void:
 	var dialog := EditorFileDialog.new()
 	add_child(dialog)
 	dialog.access = EditorFileDialog.ACCESS_RESOURCES
@@ -143,6 +144,12 @@ func _popup_file_dialog(mode: int, callback: String) -> void:
 	dialog.add_filter("*.sfxr; %s" % translator.tr("SFXR Audio"))
 	dialog.connect("popup_hide", dialog, "queue_free")
 	dialog.connect("file_selected", self, callback)
+
+	if current_file:
+		dialog.current_dir = current_file.get_base_dir()
+		dialog.current_path = current_file
+		dialog.current_file = current_file.get_file()
+
 	dialog.popup_centered_ratio()
 
 
@@ -318,8 +325,23 @@ func _on_Extra_about_to_show():
 func _on_Extra_id_pressed(id: int) -> void:
 	match id:
 		ExtraOption.SAVE_AS:
-			_popup_file_dialog(EditorFileDialog.MODE_SAVE_FILE, "_on_SaveAsDialog_confirmed")
-		
+			_popup_file_dialog(EditorFileDialog.MODE_SAVE_FILE, "_on_SaveAsDialog_confirmed", _path)
+
+		ExtraOption.DUPLICATE:
+			var dupe_path = _path
+			var ext = _path.get_extension()
+			var ext_idx = dupe_path.find_last(ext)
+			# drop extension plus `.`
+			dupe_path.erase(ext_idx - 1, ext.length() + 1)
+			# cut last digit and increment it
+			# TODO support more than single digit ints (properly)
+			var num = int(dupe_path[-1]) + 1
+			# drop last char (num)
+			dupe_path.erase(dupe_path.length()-1, 1)
+			# add new num and ext back
+			dupe_path = str(dupe_path, num, ".", ext)
+			_popup_file_dialog(EditorFileDialog.MODE_SAVE_FILE, "_on_SaveAsDialog_confirmed", dupe_path)
+
 		ExtraOption.COPY:
 			if not _config_clipboard:
 				_config_clipboard = SFXRConfig.new()
