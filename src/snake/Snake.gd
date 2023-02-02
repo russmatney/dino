@@ -157,6 +157,7 @@ func attempt_walk(next):
 		["food", _]:
 			handle_pickup_food(next, info[1])
 		"snake":
+			SnakeSounds.play_sound("bump")
 			print("TODO game over")
 		_:
 			walk_towards(next)

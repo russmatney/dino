@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/bump2.sfxr-93cdd0f0d91d432e2691967eed8b1967.sample"
+
+[deps]
+
+source_file="res://assets/sounds/snake/bump2.sfxr"
+dest_files=[ "res://.import/bump2.sfxr-93cdd0f0d91d432e2691967eed8b1967.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
