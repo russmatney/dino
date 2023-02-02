@@ -28,6 +28,12 @@ onready var sounds = {
 		preload("res://assets/sounds/snake/bump2.sfxr"),
 		preload("res://assets/sounds/snake/bump3.sfxr"),
 	],
+	"speedup":
+	[
+		preload("res://assets/sounds/snake/speedup1.sfxr"),
+		preload("res://assets/sounds/snake/speedup2.sfxr"),
+		preload("res://assets/sounds/snake/speedup3.sfxr"),
+	],
 }
 var sound_map
 

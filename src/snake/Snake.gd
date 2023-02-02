@@ -143,10 +143,11 @@ func handle_pickup_food(next, f):
 	grid.add_food(next)
 
 	if food_count % 3 == 0:
-		walk_every -= walk_every * 0.02
+		walk_every -= walk_every * 0.1
 		Cam.screenshake(0.5)
 		speed_level += 1
 		emit_signal("speed_increased")
+		SnakeSounds.play_sound("speedup")
 
 	walk_towards(next, false)
 

@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/speedup3.sfxr-75d77d2a9fe6536229f00e58601da05a.sample"
+
+[deps]
+
+source_file="res://assets/sounds/snake/speedup3.sfxr"
+dest_files=[ "res://.import/speedup3.sfxr-75d77d2a9fe6536229f00e58601da05a.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
