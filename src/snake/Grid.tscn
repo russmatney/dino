@@ -5,7 +5,5 @@
 [node name="Grid" type="Node2D"]
 position = Vector2( 1, 0 )
 script = ExtResource( 1 )
-width = 10
-height = 10
 
 [node name="Cells" type="Node2D" parent="."]

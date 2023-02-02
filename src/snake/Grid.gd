@@ -36,13 +36,11 @@ func _ready():
 	call_deferred("setup")
 	ready = true
 
+
 func setup():
 	init_grid()
 	init_snake()
 	init_food()
-
-	if snake:
-		snake.restart()
 
 
 ###########################################################################
@@ -74,6 +72,10 @@ func random_empty_coord(exclude=null):
 		return Util.rand_of(coords)
 
 
+###########################################################################
+# cells
+
+
 # dicts for cells might be better here
 func cell_info_at(coord):
 	for c in snake.cell_coords:
@@ -89,17 +91,22 @@ func cell_info_at(coord):
 			return "empty"
 
 
+func mark_touched(coord):
+	var cell = cells[coord]
+	if cell:
+		cell.animation = "blue"
+		# TODO dry up 'random frame' on animations with a util
+		cell.frame = randi() % 4
+
 ###########################################################################
 # init grid
 
-onready var cells = $Cells
 onready var cell_scene = preload("res://src/snake/Cell.tscn")
+var cells = {}
 
 
 func init_grid(anim = "yellow"):
-	if not cells:
-		cells = $Cells
-	for c in cells.get_children():
+	for c in $Cells.get_children():
 		if c.is_in_group("cells"):
 			c.free()
 
@@ -109,7 +116,9 @@ func init_grid(anim = "yellow"):
 		c.animation = anim
 		c.frame = randi() % 4
 		c.position = coord * cell_size
-		cells.add_child(c)
+		$Cells.add_child(c)
+
+		cells[coord] = c
 
 
 ###########################################################################
@@ -159,7 +168,7 @@ func add_food(exclude=null):
 	var f = cell_scene.instance()
 	f.add_to_group("food")
 	f.coord = empty_cell
-	f.animation = Util.rand_of(["red", "blue"])
+	f.animation = "red"
 	f.frame = randi() % 4
 	f.position = empty_cell * cell_size
 	add_child(f)

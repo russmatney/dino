@@ -76,17 +76,20 @@ func draw_segment(coord):
 
 
 ###########################################################################
-# start/walk
+# process
 
 export(float) var walk_every = 0.15
+var next_walk_in = 0
 
-var walk_tween
 
+func _process(delta):
+	next_walk_in -= delta
+	if next_walk_in <= 0:
+		next_walk_in = walk_every
+		walk_in_dir()
 
-func restart():
-	walk_tween = create_tween()
-	walk_tween.set_loops()
-	walk_tween.tween_callback(self, "walk_in_dir").set_delay(walk_every)
+###########################################################################
+# walk
 
 
 func walk_in_dir():
@@ -116,14 +119,13 @@ func handle_next_walk(next):
 			grid.remove_food(info[1])
 
 			# hitstop here needs alot more juice
-			# Cam.hitstop("snake_collecting_food", 0.01, 0.3, 0.2)
+			# Cam.freezeframe("snake_collecting_food", 0.01, 2.0, 0.2)
 			Cam.screenshake(0.3)
 
 			# pass next to exclude it from new food places
 			grid.add_food(next)
 			if food % 3 == 0:
 				walk_every -= walk_every * 0.02
-				restart()
 				Cam.screenshake(0.5)
 			walk_towards(next, false)
 		"snake":
@@ -138,6 +140,8 @@ func walk_towards(next, drop_tail = true):
 		var c = segments[tail]
 		segments.erase(tail)
 		c.queue_free()
+
+		grid.mark_touched(tail)
 
 	cell_coords.push_front(next)
 	draw_segment(next)
