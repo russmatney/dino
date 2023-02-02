@@ -100,6 +100,7 @@ func _process(delta):
 ###########################################################################
 # walk
 
+var step_count = 0
 
 func walk_in_dir():
 	if move_dir_queue.size():
@@ -154,8 +155,11 @@ func attempt_walk(next):
 		_:
 			walk_towards(next)
 
+signal step
 
 func walk_towards(next, drop_tail = true):
+	step_count += 1
+	emit_signal("step")
 	if drop_tail:
 		var tail = cell_coords.pop_back()
 		var c = segments[tail]
