@@ -118,7 +118,7 @@ var food = 0
 
 func handle_pickup_food(next, f):
 	SnakeSounds.play_sound("pickup")
-
+	bounce_floor()
 	food += 1
 	grid.remove_food(f)
 
@@ -163,13 +163,18 @@ func walk_towards(next, drop_tail = true):
 	# var c = segments[next]
 	# c.bounce(direction.rotated(PI/2), 0.95)
 
-	var def = 0.9
+	bounce_segments()
+	# bounce_floor()
+	bounce_food()
 
+func bounce_segments():
 	for cell in segments.values():
-		cell.bounce(direction.rotated(PI/2), def)
+		cell.bounce(direction.rotated(PI/2))
 
-	# for cell in grid.all_cells():
-	# 	cell.bounce(direction, def)
+func bounce_floor():
+	for cell in grid.all_cells():
+		cell.bounce(direction)
 
+func bounce_food():
 	for cell in grid.food_cells():
-		cell.bounce(direction.rotated(PI/2), def)
+		cell.bounce(direction.rotated(PI/2))
