@@ -15,4 +15,5 @@ shader_param/knockbackFactor = 0.4
 material = SubResource( 1 )
 frames = ExtResource( 2 )
 animation = "dark"
+playing = true
 script = ExtResource( 1 )

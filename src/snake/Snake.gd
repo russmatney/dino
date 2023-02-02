@@ -111,12 +111,14 @@ func walk_in_dir():
 	next.x = wrapi(next.x, 0, grid.width)
 	next.y = wrapi(next.y, 0, grid.height)
 
-	handle_next_walk(next)
+	attempt_walk(next)
 
 
 var food = 0
 
 func handle_pickup_food(next, f):
+	SnakeSounds.play_sound("pickup")
+
 	food += 1
 	grid.remove_food(f)
 
@@ -132,7 +134,7 @@ func handle_pickup_food(next, f):
 
 	walk_towards(next, false)
 
-func handle_next_walk(next):
+func attempt_walk(next):
 	var info = grid.cell_info_at(next)
 
 	match info:
@@ -152,6 +154,8 @@ func walk_towards(next, drop_tail = true):
 		c.queue_free()
 
 		grid.mark_touched(tail)
+
+	SnakeSounds.play_sound("walk")
 
 	cell_coords.push_front(next)
 	draw_segment(next)

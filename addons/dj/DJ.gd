@@ -37,13 +37,25 @@ func pause_menu_song():
 	playback_pos = audio_stream_player.get_playback_position()
 
 
+func play_sound_rand(sounds, opts = {}):
+	var vary = opts.get("vary", 0.0)
+
+	if sounds:
+		var i = randi() % sounds.size()
+		var s = sounds[i]
+		if vary > 0.0:
+			s.pitch_scale = 1 - (randf() * vary)
+		s.play()
+
+##########################################################
+# sound map api
+
 func setup_sound(sound):
 	# TODO force no looping? it's determined by the input rn
 	var asp = AudioStreamPlayer.new()
 	asp.set_stream(sound)
 	add_child(asp)
 	return asp
-
 
 func setup_sound_map(sound_map):
 	var playables = {}
@@ -55,13 +67,17 @@ func setup_sound_map(sound_map):
 			playables[k].append(playable)
 	return playables
 
+func play_sound(sound_map, name):
+	if name in sound_map:
+		var s = sound_map[name]
+		play_sound_rand(s, {"vary": 0.4})
+	else:
+		print("<DJ> [WARN] no sound for name", name)
 
-func play_sound_rand(sounds, opts = {}):
-	var vary = opts.get("vary", 0.0)
-
-	if sounds:
-		var i = randi() % sounds.size()
-		var s = sounds[i]
-		if vary > 0.0:
-			s.pitch_scale = 1 - (randf() * vary)
-		s.play()
+func interrupt_sound(sound_map, name):
+	if name in sound_map:
+		for s in sound_map[name]:
+			if s.is_playing():
+				s.stop()
+	else:
+		print("<DJ> [WARN] no sound for name", name)
