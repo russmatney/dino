@@ -24,13 +24,13 @@ margin_bottom = 280.0
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 margin_right = 51.0
-margin_bottom = 30.0
+margin_bottom = 47.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
 margin_left = 2.0
 margin_right = 49.0
-margin_bottom = 30.0
+margin_bottom = 47.0
 
 [node name="StepCount" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
 unique_name_in_owner = true
@@ -49,6 +49,16 @@ margin_top = 17.0
 margin_right = 47.0
 margin_bottom = 30.0
 text = "Food: 7"
+autowrap = false
+
+[node name="Speed" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 34.0
+margin_right = 47.0
+margin_bottom = 47.0
+text = "Speed: 1"
 autowrap = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]

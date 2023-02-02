@@ -119,8 +119,10 @@ func walk_in_dir():
 	attempt_walk(next)
 
 signal food_picked_up
+signal speed_increased
 
 var food_count = 0
+var speed_level = 1
 
 func handle_pickup_food(next, f):
 
@@ -141,6 +143,8 @@ func handle_pickup_food(next, f):
 	if food_count % 3 == 0:
 		walk_every -= walk_every * 0.02
 		Cam.screenshake(0.5)
+		speed_level += 1
+		emit_signal("speed_increased")
 
 	walk_towards(next, false)
 
