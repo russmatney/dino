@@ -50,3 +50,27 @@ func notif(text, ttl = 5):
 		# TODO queue and fire after hud is ready
 		print("no hud yet")
 	emit_signal("notification", {"msg": text, "ttl": ttl})
+
+
+###########################################################################
+# find_player
+
+signal found_player(player)
+
+var player
+var player_group = "player"
+
+
+func find_player():
+	var ps = get_tree().get_nodes_in_group(player_group)
+
+	if ps.size() > 1:
+		print("<HOOD> [WARN] found multiple in player_group: ", player_group)
+	if ps:
+		player = ps[0]
+		print("<HOOD> found player: ", player)
+	else:
+		print("<HOOD> [WARN] could not find player, zero in player_group: ", player_group)
+		return
+
+	emit_signal("found_player", player)

@@ -3,34 +3,22 @@ extends CanvasLayer
 
 func _ready():
 	var _x = Hood.connect("notification", self, "new_notification")
-
-	call_deferred("find_player")
+	var _y = Hood.connect("found_player", self, "setup_player")
+	Hood.call_deferred("find_player")
 
 
 ###################################################################
 # player setup
 
 var player
-var player_group = "player"
 
+func setup_player(p):
+	player = p
 
-func find_player():
-	var ps = get_tree().get_nodes_in_group(player_group)
-
-	if ps.size() > 1:
-		print("[WARN] HUD found multiple in player_group: ", player_group)
-	if ps:
-		player = ps[0]
-		print("[HUD] found player: ", player)
-	else:
-		print("[WARN] HUD found zero in player_group: ", player_group)
-		return
-
-	if player:
-		player.connect("health_change", self, "update_player_health")
-		update_player_health(player.health)
-		player.connect("pickups_changed", self, "update_player_pickups")
-		update_player_pickups(player.pickups)
+	player.connect("health_change", self, "update_player_health")
+	update_player_health(player.health)
+	player.connect("pickups_changed", self, "update_player_pickups")
+	update_player_pickups(player.pickups)
 
 
 ###################################################################

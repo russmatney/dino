@@ -117,14 +117,18 @@ func walk_in_dir():
 
 	attempt_walk(next)
 
+signal food_picked_up
 
-var food = 0
+var food_count = 0
 
 func handle_pickup_food(next, f):
+
 	Hood.notif(Util.rand_of(["Food collected", "Am nam nam", "Yummy!"]))
 	SnakeSounds.play_sound("pickup")
 	bounce_floor()
-	food += 1
+	food_count += 1
+	# must be after inc food_count
+	emit_signal("food_picked_up")
 	grid.remove_food(f)
 
 	# TODO flash some text, hitstop lines
@@ -133,7 +137,7 @@ func handle_pickup_food(next, f):
 	# pass next to exclude it from new food places
 	grid.add_food(next)
 
-	if food % 3 == 0:
+	if food_count % 3 == 0:
 		walk_every -= walk_every * 0.02
 		Cam.screenshake(0.5)
 
