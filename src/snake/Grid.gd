@@ -92,7 +92,7 @@ func food_cells():
 	return food
 
 # dicts for cells might be better here
-func cell_info_at(coord):
+func cell_info_at(coord, from=null):
 	for c in snake.segment_coords:
 		if coord == c:
 			return "snake"
@@ -100,6 +100,11 @@ func cell_info_at(coord):
 	for f in food:
 		if coord == f.coord:
 			return ["food", f]
+
+		if not from == null:
+			# next is same x/y as food AND same x/y as from
+			if (coord.x == f.coord.x and from.x == coord.x) or (coord.y == f.coord.y and from.y == coord.y):
+				return ["facing_food", f]
 
 	for c in all_cell_coords():
 		if coord == c:
@@ -155,7 +160,7 @@ func init_grid(anim = "yellow"):
 
 		cells[coord] = c
 
-	deform_all_cells()
+	# deform_all_cells()
 
 ###########################################################################
 # init snake

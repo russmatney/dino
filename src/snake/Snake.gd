@@ -102,6 +102,26 @@ func draw_segment(coord):
 	grid.add_child(c)
 	segments[coord] = c
 
+###########################################################################
+# snake segment helpers
+
+func head_cell():
+	return segments[segment_coords[0]]
+
+func tail_cells():
+	var ts = []
+	for coord in segment_coords.slice(1, -1):
+		ts.append(segments[coord])
+	return ts
+
+func print_snake_positions():
+	print("food: ", food_count)
+	print("speed level: ", speed_level)
+	var hc = head_cell()
+	print("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
+	for t in tail_cells():
+		print("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
+
 
 ###########################################################################
 # process
@@ -143,14 +163,14 @@ signal food_picked_up
 signal step
 
 func attempt_walk(next):
-	# TODO if this direction heads toward food, we should SNAP to it
-
-	var info = grid.cell_info_at(next)
+	var info = grid.cell_info_at(next, head_cell().coord)
 
 	match info:
+		["facing_food", _]:
+			# TODO move behind combo/level/unlock wall?
+			leap_towards_food(next, info[1])
 		["food", _]:
-			food_count += 1
-			emit_signal("food_picked_up", info[1])
+			pickup_food(info[1])
 			walk_towards(next, false)
 		"snake":
 			SnakeSounds.play_sound("bump")
@@ -159,6 +179,9 @@ func attempt_walk(next):
 			walk_towards(next)
 
 func walk_towards(next, should_drop_tail = true):
+	# print("walking towards: ", next)
+	# print_snake_positions()
+
 	step_count += 1
 	emit_signal("step")
 
@@ -180,51 +203,44 @@ func move_head(coord):
 	draw_segment(coord)
 	bounce_head()
 
-	# print_snake_positions()
 	global_position = head_cell().global_position
 	grid.mark_touched(coord)
 
-func head_cell():
-	return segments[segment_coords[0]]
-
-func tail_cells():
-	var ts = []
-	for coord in segment_coords.slice(1, -1):
-		ts.append(segments[coord])
-	return ts
-
-func print_snake_positions():
-	var hc = head_cell()
-	print("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
-	for t in tail_cells():
-		print("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
-
-
-
 ##################################################################
-# tile bounce helpers
+# leap
 
-func bounce_head():
-	head_cell().bounce_in()
+func leap_towards_food(next, f):
+	# first, take the step onto the food's row/col
+	walk_towards(next)
 
-func bounce_tail():
-	for t in tail_cells():
-		t.bounce(direction.rotated(PI/2))
+	var target_cell = grid.wrap_edges(f.coord - direction)
+	var next_cell = head_cell().coord
+	if target_cell != next_cell:
+		# walk to target cell
+		for _i in range(100):
+			next_cell += direction
+			next_cell = grid.wrap_edges(next_cell)
+			var info = grid.cell_info_at(next_cell)
 
-func bounce_segments():
-	for cell in segments.values():
-		cell.bounce(direction.rotated(PI/2))
+			match info:
+				"snake":
+					SnakeSounds.play_sound("bump")
+					print("TODO game over")
+					return
+				_:
+					walk_towards(next_cell)
+					if next_cell == target_cell:
+						break
 
-func bounce_floor():
-	for cell in grid.all_cells():
-		cell.bounce(direction)
-
-func bounce_food():
-	for cell in grid.food_cells():
-		cell.deform_scale()
+	pickup_food(f)
+	walk_towards(f.coord, false)
 
 ##################################################################
 # food picked up
+
+func pickup_food(f):
+	food_count += 1
+	emit_signal("food_picked_up", f)
 
 signal speed_increased
 
@@ -257,3 +273,26 @@ func _on_food_picked_up(f):
 		grid.mark_cells_playing()
 		yield(get_tree().create_timer(3.0), "timeout")
 		grid.mark_cells_not_playing()
+
+
+##################################################################
+# tile bounce helpers
+
+func bounce_head():
+	head_cell().bounce_in()
+
+func bounce_tail():
+	for t in tail_cells():
+		t.bounce(direction.rotated(PI/2))
+
+func bounce_segments():
+	for cell in segments.values():
+		cell.bounce(direction.rotated(PI/2))
+
+func bounce_floor():
+	for cell in grid.all_cells():
+		cell.bounce(direction)
+
+func bounce_food():
+	for cell in grid.food_cells():
+		cell.deform_scale()

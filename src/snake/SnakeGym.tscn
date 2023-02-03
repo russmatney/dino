@@ -6,7 +6,10 @@
 [node name="SnakeGym" type="Node2D"]
 
 [node name="Grid" parent="." instance=ExtResource( 1 )]
-position = Vector2( -36, -36 )
+position = Vector2( -20, -20 )
+width = 9
+height = 9
 
 [node name="Dust" parent="." instance=ExtResource( 2 )]
+visible = false
 scale = Vector2( 0.5, 0.5 )
