@@ -3,9 +3,10 @@ extends AnimatedSprite
 
 var coord: Vector2
 
-
 func _ready():
-	pass
+	$Coord.text = str(coord)
+	$Position.text = str(position)
+	$GlobalPosition.text = str(global_position)
 
 
 func bounce(dir, def = 0.9):

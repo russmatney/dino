@@ -43,17 +43,18 @@ func move(dir):
 var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
-	# SnakeSounds.play_song("cool-kids")
-	# SnakeSounds.play_song("chill-electric")
-	# SnakeSounds.play_song("evening-dogs")
-	# SnakeSounds.play_song("funk-till-five")
-	# SnakeSounds.play_song("funkmachine")
-	SnakeSounds.play_song("field-stars")
+	if not Engine.editor_hint:
+		# SnakeSounds.play_song("cool-kids")
+		# SnakeSounds.play_song("chill-electric")
+		# SnakeSounds.play_song("evening-dogs")
+		# SnakeSounds.play_song("funk-till-five")
+		# SnakeSounds.play_song("funkmachine")
+		SnakeSounds.play_song("field-stars")
 
-	Cam.ensure_camera(2, 1000.0, 1)
-	Hood.ensure_hud(hud_scene)
+		Cam.ensure_camera(2, 1000.0, 1)
+		Hood.ensure_hud(hud_scene)
 
-	connect("food_picked_up", self, "_on_food_picked_up")
+	var _x = connect("food_picked_up", self, "_on_food_picked_up")
 
 
 ###########################################################################
@@ -70,11 +71,12 @@ var grid
 func init(g, cell: Vector2, dir: Vector2, size := initial_size):
 	grid = g
 	direction = dir
-	segment_coords.append(cell)
+
+	move_head(cell)
 	var next_cell = cell
 	for _i in range(size - 1):
-		next_cell -= direction
-		segment_coords.append(next_cell)
+		next_cell += direction
+		move_head(next_cell)
 
 
 func clear_cells():
@@ -95,9 +97,9 @@ func draw_segment(coord):
 	var c = cell_scene.instance()
 	c.animation = "dark"
 	c.frame = randi() % 4
-	c.position = coord * grid.cell_size - position
-	add_child(c)
-	c.set_owner(self)
+	c.global_position = grid.coord_to_position(coord)
+	c.coord = coord
+	grid.add_child(c)
 	segments[coord] = c
 
 
@@ -109,10 +111,11 @@ var next_walk_in = 0
 
 
 func _process(delta):
-	next_walk_in -= delta
-	if next_walk_in <= 0:
-		next_walk_in = walk_every
-		walk_in_dir()
+	if not Engine.editor_hint:
+		next_walk_in -= delta
+		if next_walk_in <= 0:
+			next_walk_in = walk_every
+			walk_in_dir()
 
 ###########################################################################
 # walk
@@ -128,14 +131,11 @@ func walk_in_dir():
 			# ignore moving against current direction
 			Cam.screenshake(0.3)
 
-	# calc next coord with direction and current head
-	var next = segment_coords[0] + direction
-
-	# wrap next coord against the grid's edges
-	next.x = wrapi(next.x, 0, grid.width)
-	next.y = wrapi(next.y, 0, grid.height)
-
-	attempt_walk(next)
+	if segment_coords:
+		# calc next coord with direction and current head
+		var next = segment_coords[0] + direction
+		next = grid.wrap_edges(next)
+		attempt_walk(next)
 
 var food_count = 0
 var step_count = 0
@@ -159,30 +159,58 @@ func attempt_walk(next):
 		_:
 			walk_towards(next)
 
-func walk_towards(next, drop_tail = true):
+func walk_towards(next, should_drop_tail = true):
 	step_count += 1
 	emit_signal("step")
-	if drop_tail:
-		var tail = segment_coords.pop_back()
-		var c = segments[tail]
-		segments.erase(tail)
-		c.queue_free()
 
-		grid.mark_touched(tail)
+	if should_drop_tail:
+		drop_tail()
+	move_head(next)
 
 	SnakeSounds.play_sound("walk")
-
-	segment_coords.push_front(next)
-	draw_segment(next)
-
-	# var c = segments[next]
-	# c.bounce(direction.rotated(PI/2), 0.95)
-
-	bounce_segments()
+	bounce_head()
 	bounce_food()
+
+func drop_tail():
+	var tail = segment_coords.pop_back()
+	var c = segments[tail]
+	segments.erase(tail)
+	c.queue_free()
+	grid.mark_touched(tail)
+
+func move_head(coord):
+	segment_coords.push_front(coord)
+	draw_segment(coord)
+
+	# print_snake_positions()
+	global_position = head_cell().global_position
+
+func head_cell():
+	return segments[segment_coords[0]]
+
+func tail_cells():
+	var ts = []
+	for coord in segment_coords.slice(1, -1):
+		ts.append(segments[coord])
+	return ts
+
+func print_snake_positions():
+	var hc = head_cell()
+	print("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
+	for t in tail_cells():
+		print("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
+
+
 
 ##################################################################
 # tile bounce helpers
+
+func bounce_head():
+	head_cell().bounce(direction.rotated(PI/2), 0.999)
+
+func bounce_tail():
+	for t in tail_cells():
+		t.bounce(direction.rotated(PI/2))
 
 func bounce_segments():
 	for cell in segments.values():
@@ -208,6 +236,7 @@ func _on_food_picked_up(f):
 		Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"]),
 		{"rich": true})
 	SnakeSounds.play_sound("pickup")
+	bounce_tail()
 	bounce_floor()
 	grid.remove_food(f)
 

@@ -72,6 +72,16 @@ func random_empty_coord(exclude=null):
 		return Util.rand_of(coords)
 
 
+func wrap_edges(next):
+	# wrap next coord against the grid's edges
+	next.x = wrapi(next.x, 0, width)
+	next.y = wrapi(next.y, 0, height)
+	return next
+
+func coord_to_position(coord):
+	return coord * cell_size
+
+
 ###########################################################################
 # cells
 
@@ -120,7 +130,7 @@ func init_grid(anim = "yellow"):
 		c.coord = coord
 		c.animation = anim
 		c.frame = randi() % 4
-		c.position = coord * cell_size
+		c.position = coord_to_position(coord)
 		$Cells.add_child(c)
 
 		cells[coord] = c
@@ -142,10 +152,9 @@ func init_snake():
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
 	snake = snake_scene.instance()
-	snake.init(self, initial_cell, initial_direction)
-	snake.position = initial_cell * cell_size
+	# snake.position = coord_to_position(initial_cell)
 	add_child(snake)
-	snake.draw_segments()
+	snake.init(self, initial_cell, initial_direction)
 
 
 ###########################################################################
@@ -175,7 +184,7 @@ func add_food(exclude=null):
 	f.coord = empty_cell
 	f.animation = "red"
 	f.frame = randi() % 4
-	f.position = empty_cell * cell_size
+	f.position = coord_to_position(empty_cell)
 	add_child(f)
 	food.append(f)
 
