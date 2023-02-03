@@ -174,7 +174,8 @@ func attempt_walk(next):
 			pickup_food(info[1])
 		"snake":
 			SnakeSounds.play_sound("bump")
-			print("TODO game over")
+			# TODO debounce this notif
+			highlight("[jump]ow!")
 		_:
 			walk_towards(next)
 
@@ -225,7 +226,7 @@ func leap_towards_food(next, f):
 			match info:
 				"snake":
 					SnakeSounds.play_sound("bump")
-					print("TODO game over")
+					highlight("[jump]derp.")
 					return
 				_:
 					walk_towards(next_cell)
@@ -249,9 +250,7 @@ func highlight(text):
 	var tween = create_tween()
 	th.set_scale(Vector2.ZERO)
 	tween.tween_property(th, "rect_scale", 0.5*Vector2.ONE, 0.5).set_trans(Tween.TRANS_CUBIC)
-	# .set_ease(Tween.EASE_OUT_IN)
 	tween.tween_property(th, "rect_scale", Vector2.ZERO, 0.2).set_ease(Tween.EASE_IN_OUT)
-# .set_trans(Tween.TRANS_CUBIC)
 
 ##################################################################
 # food picked up
