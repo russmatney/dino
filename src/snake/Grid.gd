@@ -105,6 +105,8 @@ func cell_info_at(coord):
 		if coord == c:
 			return "empty"
 
+###########################################################################
+# cell anims
 
 func mark_touched(coord):
 	var cell = cells[coord]
@@ -124,6 +126,12 @@ func mark_cells_not_playing():
 func deform_all_cells():
 	for c in all_cells():
 		c.deform(Vector2.ONE * 0.9)
+
+# func animate_cell_size():
+# 	var t = create_tween()
+# 	var og_cell_size = cell_size
+# 	t.tween_property(self, "cell_size", cell_size * 2, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
+# 	t.tween_property(self, "cell_size", og_cell_size, 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 ###########################################################################
 # init grid
@@ -186,19 +194,18 @@ func init_food():
 	add_food()
 
 
+onready var food_scene = preload("res://src/snake/Food.tscn")
+
 func add_food(exclude=null):
 	var empty_cell = random_empty_coord(exclude)
 	if empty_cell == null:
 		print("[SNAKE] No empty cells! Cannot place food.")
 		return
 
-	var f = cell_scene.instance()
-	f.add_to_group("food")
+	var f = food_scene.instance()
 	f.coord = empty_cell
-	f.animation = "red"
 	f.frame = randi() % 4
 	f.position = coord_to_position(empty_cell)
-	f.playing = true
 	add_child(f)
 	food.append(f)
 

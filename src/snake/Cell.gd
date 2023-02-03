@@ -1,4 +1,5 @@
 tool
+class_name SnakeCell
 extends AnimatedSprite
 
 var coord: Vector2
@@ -26,8 +27,6 @@ func bounce_in():
 	tween.tween_property(material, "shader_param/deformation", def_scale, duration).set_trans(
 		Tween.TRANS_CUBIC
 	)
-
-	print("between tweens: ", material.get("shader_param/deformation"))
 	tween.tween_property(material, "shader_param/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
 		Tween.EASE_IN_OUT
 	)
@@ -53,3 +52,11 @@ func animate_deformation(direction):
 	tween.tween_property(material, "shader_param/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
 		Tween.EASE_IN_OUT
 	)
+
+func deform_scale(s=Vector2(0.5, 0.5)):
+	var duration = 0.1
+	var reset_duration = 0.3
+
+	var tween = create_tween()
+	tween.tween_property(self, "scale", s, duration).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self, "scale", Vector2.ONE, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

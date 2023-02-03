@@ -221,7 +221,7 @@ func bounce_floor():
 
 func bounce_food():
 	for cell in grid.food_cells():
-		cell.bounce(direction.rotated(PI/2))
+		cell.deform_scale()
 
 ##################################################################
 # food picked up
@@ -237,6 +237,7 @@ func _on_food_picked_up(f):
 	SnakeSounds.play_sound("pickup")
 	bounce_tail()
 	bounce_floor()
+
 	grid.remove_food(f)
 
 	# TODO flash some text, hitstop lines
