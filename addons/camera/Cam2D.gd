@@ -349,9 +349,13 @@ func center_pois():
 	if not pof_follows and not following:
 		return
 
+	var focuses = []
+
 	# TODO favor the `following` (player) position more
+	focuses.append(following)
+	focuses.append_array(pof_follows)
 	# TODO favor pois based on importance * proximity
-	var focuses = pof_follows.append(following).append(poi_follows)
+	focuses.append_array(poi_follows)
 
 	var center = Vector2.ZERO
 
@@ -360,7 +364,7 @@ func center_pois():
 	var max_top
 	var max_bottom
 
-	for obj in pof_follows:
+	for obj in focuses:
 		center += obj.global_position
 
 		if not max_left:
@@ -381,7 +385,7 @@ func center_pois():
 		if obj.global_position.y > max_bottom:
 			max_bottom = obj.global_position.y
 
-	center = center / pof_follows.size()
+	center = center / focuses.size()
 	self.global_position = center
 
 	zoom_level = zoom_factor_for_bounds(

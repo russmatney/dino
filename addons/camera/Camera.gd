@@ -36,7 +36,7 @@ func cam_window_rect():
 # ensure camera
 
 
-func ensure_camera(cam_mode = null, zoom_offset = 3000.0):
+func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
 	if cam and is_instance_valid(cam):
 		print("[CAM] found existing cam: ", cam)
 		return
@@ -50,6 +50,7 @@ func ensure_camera(cam_mode = null, zoom_offset = 3000.0):
 	cam = cam_scene.instance()
 	cam.current = true
 	cam.zoom_offset = zoom_offset
+	cam.zoom_level = zoom_level
 
 	if cam_mode:
 		cam.mode = cam_mode
@@ -134,8 +135,9 @@ func resume_slowmo():
 ####################################################################
 # zoom
 
-func zoom_in():
-	cam.zoom_dir("in")
+# TODO get these behaving properly - what is this `n`?
+func zoom_in(n=null):
+	cam.zoom_dir("in", n)
 
-func zoom_out():
-	cam.zoom_dir("out")
+func zoom_out(n=null):
+	cam.zoom_dir("out", n)
