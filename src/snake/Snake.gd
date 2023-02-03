@@ -190,7 +190,7 @@ func bounce_segments():
 
 func bounce_floor():
 	for cell in grid.all_cells():
-		cell.bounce(direction)
+		cell.bounce(direction, 0.99)
 
 func bounce_food():
 	for cell in grid.food_cells():
@@ -212,14 +212,14 @@ func _on_food_picked_up(f):
 	grid.remove_food(f)
 
 	# TODO flash some text, hitstop lines
-	Cam.freezeframe("snake_collecting_food", 0.01, 1.6, 0.5)
+	Cam.freezeframe("snake_collecting_food", 0.01, 1.6, 0.2)
 
 	# pass next to exclude it from new food places
 	grid.add_food(f.coord)
 
 	if food_count % 3 == 0:
 		walk_every -= walk_every * 0.1
-		Cam.screenshake(0.5)
+		Cam.screenshake(0.3)
 		speed_level += 1
 		emit_signal("speed_increased")
 		SnakeSounds.play_sound("speedup")
