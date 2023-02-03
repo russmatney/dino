@@ -170,8 +170,8 @@ func attempt_walk(next):
 			# TODO move behind combo/level/unlock wall?
 			leap_towards_food(next, info[1])
 		["food", _]:
-			pickup_food(info[1])
 			walk_towards(next, false)
+			pickup_food(info[1])
 		"snake":
 			SnakeSounds.play_sound("bump")
 			print("TODO game over")
@@ -236,6 +236,24 @@ func leap_towards_food(next, f):
 	walk_towards(f.coord, false)
 
 ##################################################################
+# highlight
+
+var text_highlight_scene = preload("res://src/snake/TextHighlight.tscn")
+
+func highlight(text):
+	var th = text_highlight_scene.instance()
+	th.bbcode_text = text
+	th.set_global_position(global_position)
+	Navi.add_child_to_current(th)
+
+	var tween = create_tween()
+	th.set_scale(Vector2.ZERO)
+	tween.tween_property(th, "rect_scale", 0.5*Vector2.ONE, 0.5).set_trans(Tween.TRANS_CUBIC)
+	# .set_ease(Tween.EASE_OUT_IN)
+	tween.tween_property(th, "rect_scale", Vector2.ZERO, 0.2).set_ease(Tween.EASE_IN_OUT)
+# .set_trans(Tween.TRANS_CUBIC)
+
+##################################################################
 # food picked up
 
 func pickup_food(f):
@@ -247,12 +265,13 @@ signal speed_increased
 var speed_level = 1
 
 func _on_food_picked_up(f):
-	Hood.notif(
-		Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"]),
-		{"rich": true})
+	var txt = Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"])
+	Hood.notif(txt, {"rich": true})
 	SnakeSounds.play_sound("pickup")
 	bounce_tail()
 	bounce_floor()
+
+	highlight(txt)
 
 	grid.remove_food(f)
 

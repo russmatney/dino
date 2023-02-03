@@ -7,7 +7,6 @@
 [node name="FoodCell" type="AnimatedSprite" groups=["cells", "food"]]
 frames = ExtResource( 2 )
 animation = "red"
-frame = 2
 playing = true
 script = ExtResource( 1 )
 
