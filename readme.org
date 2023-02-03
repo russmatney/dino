@@ -246,3 +246,9 @@ Deploy a project to an s3 bucket.
 Depends on a working and logged-in ~aws~ cli tool.
 ** ~bb zip~: Zip project
 zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
+
+* Credits
+** SuloSounds 100
+https://sulosounds.itch.io/100-songs
+
+Songs in ~assets/music/sulosounds/*~

@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/funk-till-five-loop.wav-476712df0514b5ac955f172da9ac7422.sample"
+
+[deps]
+
+source_file="res://assets/music/sulosounds/funk-till-five-loop.wav"
+dest_files=[ "res://.import/funk-till-five-loop.wav-476712df0514b5ac955f172da9ac7422.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
