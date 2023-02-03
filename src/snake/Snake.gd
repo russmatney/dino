@@ -123,12 +123,11 @@ func _process(delta):
 func walk_in_dir():
 	if move_dir_queue.size():
 		var next_dir = move_dir_queue.pop_front()
-		# TODO switch head to tail? stop in place?
 		if next_dir + direction != Vector2.ZERO:
-			# update direction with direction from move_queue
 			direction = next_dir
 		else:
-			# ignore moving against current direction
+			# moving against current direction
+			# TODO switch head to tail? stop in place?
 			Cam.screenshake(0.3)
 
 	if segment_coords:
@@ -168,7 +167,6 @@ func walk_towards(next, should_drop_tail = true):
 	move_head(next)
 
 	SnakeSounds.play_sound("walk")
-	bounce_head()
 	bounce_food()
 
 func drop_tail():
@@ -176,14 +174,15 @@ func drop_tail():
 	var c = segments[tail]
 	segments.erase(tail)
 	c.queue_free()
-	grid.mark_touched(tail)
 
 func move_head(coord):
 	segment_coords.push_front(coord)
 	draw_segment(coord)
+	bounce_head()
 
 	# print_snake_positions()
 	global_position = head_cell().global_position
+	grid.mark_touched(coord)
 
 func head_cell():
 	return segments[segment_coords[0]]
@@ -206,7 +205,7 @@ func print_snake_positions():
 # tile bounce helpers
 
 func bounce_head():
-	head_cell().bounce(direction.rotated(PI/2), 0.999)
+	head_cell().bounce_in()
 
 func bounce_tail():
 	for t in tail_cells():
@@ -218,7 +217,7 @@ func bounce_segments():
 
 func bounce_floor():
 	for cell in grid.all_cells():
-		cell.bounce(direction, 0.99)
+		cell.bounce(direction)
 
 func bounce_food():
 	for cell in grid.food_cells():
@@ -252,3 +251,8 @@ func _on_food_picked_up(f):
 		speed_level += 1
 		emit_signal("speed_increased")
 		SnakeSounds.play_sound("speedup")
+
+		# TODO move to combo levels
+		grid.mark_cells_playing()
+		yield(get_tree().create_timer(3.0), "timeout")
+		grid.mark_cells_not_playing()

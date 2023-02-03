@@ -1,0 +1,19 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform vec2 deformation = vec2(0, 0);
+
+void vertex() {
+	vec2 deformationStrength = abs(deformation);
+	float spriteWidth = abs(VERTEX.x);
+	if (sign(VERTEX.y) != sign(deformation.y)) {
+		VERTEX.x += spriteWidth * sign(deformation.x);
+	}
+	vec2 scale = 1.0 - deformationStrength;
+	
+	VERTEX.x *= scale.x / scale.y;
+	VERTEX.y *= scale.y / scale.x;
+//	VERTEX.xy += deformation;
+}"

@@ -113,6 +113,18 @@ func mark_touched(coord):
 		# TODO dry up 'random frame' on animations with a util
 		cell.frame = randi() % 4
 
+func mark_cells_playing():
+	for c in all_cells():
+		c.playing = true
+
+func mark_cells_not_playing():
+	for c in all_cells():
+		c.playing = false
+
+func deform_all_cells():
+	for c in all_cells():
+		c.deform(Vector2.ONE * 0.9)
+
 ###########################################################################
 # init grid
 
@@ -135,6 +147,7 @@ func init_grid(anim = "yellow"):
 
 		cells[coord] = c
 
+	deform_all_cells()
 
 ###########################################################################
 # init snake
@@ -185,6 +198,7 @@ func add_food(exclude=null):
 	f.animation = "red"
 	f.frame = randi() % 4
 	f.position = coord_to_position(empty_cell)
+	f.playing = true
 	add_child(f)
 	food.append(f)
 
