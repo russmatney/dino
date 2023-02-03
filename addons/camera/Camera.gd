@@ -129,3 +129,13 @@ func resume_slowmo():
 	if l in slowmo_scales:
 		var scale = slowmo_scales[l]
 		Engine.time_scale = scale
+
+
+####################################################################
+# zoom
+
+func zoom_in():
+	cam.zoom_dir("in")
+
+func zoom_out():
+	cam.zoom_dir("out")

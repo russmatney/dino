@@ -18,10 +18,14 @@ func _unhandled_input(event):
 		move(Vector2.DOWN)
 
 	elif Trolley.is_event(event, "slowmo"):
-		Cam.start_slowmo("snake_slowmo", 0.5)
+		Cam.start_slowmo("snake_slowmo", 0.3)
+		# TODO special rules zoom for slowmo, allow us to go below minimum zoom
+		Cam.zoom_in()
+		# TODO slow mo sound effect mods
 		Hood.notif("Slooooooow mooooootion")
 	elif Trolley.is_event_released(event, "slowmo"):
 		Cam.stop_slowmo("snake_slowmo")
+		Cam.zoom_out()
 		Hood.notif("Back to full speed")
 
 
@@ -49,7 +53,6 @@ func _ready():
 
 	Cam.ensure_camera(2, 10.0)
 	Hood.ensure_hud(hud_scene)
-
 
 
 ###########################################################################

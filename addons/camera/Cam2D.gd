@@ -23,7 +23,7 @@ var zoom_offset = 500
 var zoom_offset_previous
 var zoom_offset_increment = 150
 var zoom_duration = 0.2
-var min_zoom = 0.5
+var min_zoom = 0.2
 var max_zoom = 4.0
 
 ###########################################################################
@@ -130,6 +130,8 @@ func zoom_dir(dir, n = null):
 		"in":
 			zoom_level -= zoom_increment * n
 			zoom_offset -= zoom_offset_increment * n
+
+	print("<Cam> Zoom update. level: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -344,47 +346,45 @@ func zoom_factor_for_bounds(pt_a, pt_b):
 
 
 func center_pois():
-	if pof_follows and following:
-		# TODO favor the following (player) position more
-		var focuses = pof_follows.append(following)
+	if not pof_follows and not following:
+		return
 
-		poi_follows
+	# TODO favor the `following` (player) position more
+	# TODO favor pois based on importance * proximity
+	var focuses = pof_follows.append(following).append(poi_follows)
 
-		# TODO pois have importance and proximity
-		# that should feed into the weighting
+	var center = Vector2.ZERO
 
-		var center = Vector2.ZERO
+	var max_left
+	var max_right
+	var max_top
+	var max_bottom
 
-		var max_left
-		var max_right
-		var max_top
-		var max_bottom
+	for obj in pof_follows:
+		center += obj.global_position
 
-		for obj in pof_follows:
-			center += obj.global_position
+		if not max_left:
+			max_left = obj.global_position.x
+		if not max_right:
+			max_right = obj.global_position.x
+		if not max_top:
+			max_top = obj.global_position.y
+		if not max_bottom:
+			max_bottom = obj.global_position.y
 
-			if not max_left:
-				max_left = obj.global_position.x
-			if not max_right:
-				max_right = obj.global_position.x
-			if not max_top:
-				max_top = obj.global_position.y
-			if not max_bottom:
-				max_bottom = obj.global_position.y
+		if obj.global_position.x < max_left:
+			max_left = obj.global_position.x
+		if obj.global_position.x > max_right:
+			max_right = obj.global_position.x
+		if obj.global_position.y < max_top:
+			max_top = obj.global_position.y
+		if obj.global_position.y > max_bottom:
+			max_bottom = obj.global_position.y
 
-			if obj.global_position.x < max_left:
-				max_left = obj.global_position.x
-			if obj.global_position.x > max_right:
-				max_right = obj.global_position.x
-			if obj.global_position.y < max_top:
-				max_top = obj.global_position.y
-			if obj.global_position.y > max_bottom:
-				max_bottom = obj.global_position.y
+	center = center / pof_follows.size()
+	self.global_position = center
 
-		center = center / pof_follows.size()
-		self.global_position = center
-
-		zoom_level = zoom_factor_for_bounds(
-			Vector2(max_right, max_bottom), Vector2(max_left, max_top)
-		)
-		update_zoom()
+	zoom_level = zoom_factor_for_bounds(
+		Vector2(max_right, max_bottom), Vector2(max_left, max_top)
+	)
+	update_zoom()
