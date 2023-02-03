@@ -1,8 +1,6 @@
 tool
 extends Node2D
 
-export(int) var initial_size = 3
-
 ###########################################################################
 # input
 
@@ -44,7 +42,6 @@ func move(dir):
 
 var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
-
 func _ready():
 	# SnakeSounds.play_song("cool-kids")
 	# SnakeSounds.play_song("chill-electric")
@@ -56,11 +53,15 @@ func _ready():
 	Cam.ensure_camera(2, 1000.0, 1)
 	Hood.ensure_hud(hud_scene)
 
+	connect("food_picked_up", self, "_on_food_picked_up")
+
 
 ###########################################################################
 # init
 
-var cell_coords = []
+export(int) var initial_size = 3
+
+var segment_coords = []
 var segments = {}
 var direction
 var grid
@@ -69,24 +70,26 @@ var grid
 func init(g, cell: Vector2, dir: Vector2, size := initial_size):
 	grid = g
 	direction = dir
-	cell_coords.append(cell)
+	segment_coords.append(cell)
 	var next_cell = cell
 	for _i in range(size - 1):
 		next_cell -= direction
-		cell_coords.append(next_cell)
+		segment_coords.append(next_cell)
 
 
-onready var cell_scene = preload("res://src/snake/Cell.tscn")
-
-
-func draw_segments():
+func clear_cells():
 	for c in get_children():
 		if c.is_in_group("cells"):
 			c.free()
 
-	for coord in cell_coords:
+func draw_segments():
+	clear_cells()
+
+	for coord in segment_coords:
 		draw_segment(coord)
 
+
+onready var cell_scene = preload("res://src/snake/Cell.tscn")
 
 func draw_segment(coord):
 	var c = cell_scene.instance()
@@ -101,7 +104,7 @@ func draw_segment(coord):
 ###########################################################################
 # process
 
-export(float) var walk_every = 0.15
+export(float) var walk_every = 0.12
 var next_walk_in = 0
 
 
@@ -114,76 +117,53 @@ func _process(delta):
 ###########################################################################
 # walk
 
-var step_count = 0
-
 func walk_in_dir():
 	if move_dir_queue.size():
-		# update direction
 		var next_dir = move_dir_queue.pop_front()
+		# TODO switch head to tail? stop in place?
 		if next_dir + direction != Vector2.ZERO:
-			# ignore moving against current direction
+			# update direction with direction from move_queue
 			direction = next_dir
 		else:
-			Cam.screenshake(0.5)
+			# ignore moving against current direction
+			Cam.screenshake(0.3)
 
-	var next = cell_coords[0] + direction
+	# calc next coord with direction and current head
+	var next = segment_coords[0] + direction
+
+	# wrap next coord against the grid's edges
 	next.x = wrapi(next.x, 0, grid.width)
 	next.y = wrapi(next.y, 0, grid.height)
 
 	attempt_walk(next)
 
-signal food_picked_up
-signal speed_increased
-
 var food_count = 0
-var speed_level = 1
+var step_count = 0
 
-func handle_pickup_food(next, f):
-	Hood.notif(
-		Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"]),
-		{"rich": true}
-		)
-	SnakeSounds.play_sound("pickup")
-	bounce_floor()
-	food_count += 1
-	# must be after inc food_count
-	emit_signal("food_picked_up")
-	grid.remove_food(f)
-
-	# TODO flash some text, hitstop lines
-	Cam.freezeframe("snake_collecting_food", 0.01, 1.6, 0.5)
-
-	# pass next to exclude it from new food places
-	grid.add_food(next)
-
-	if food_count % 3 == 0:
-		walk_every -= walk_every * 0.1
-		Cam.screenshake(0.5)
-		speed_level += 1
-		emit_signal("speed_increased")
-		SnakeSounds.play_sound("speedup")
-
-	walk_towards(next, false)
+signal food_picked_up
+signal step
 
 func attempt_walk(next):
+	# TODO if this direction heads toward food, we should SNAP to it
+
 	var info = grid.cell_info_at(next)
 
 	match info:
 		["food", _]:
-			handle_pickup_food(next, info[1])
+			food_count += 1
+			emit_signal("food_picked_up", info[1])
+			walk_towards(next, false)
 		"snake":
 			SnakeSounds.play_sound("bump")
 			print("TODO game over")
 		_:
 			walk_towards(next)
 
-signal step
-
 func walk_towards(next, drop_tail = true):
 	step_count += 1
 	emit_signal("step")
 	if drop_tail:
-		var tail = cell_coords.pop_back()
+		var tail = segment_coords.pop_back()
 		var c = segments[tail]
 		segments.erase(tail)
 		c.queue_free()
@@ -192,15 +172,17 @@ func walk_towards(next, drop_tail = true):
 
 	SnakeSounds.play_sound("walk")
 
-	cell_coords.push_front(next)
+	segment_coords.push_front(next)
 	draw_segment(next)
 
 	# var c = segments[next]
 	# c.bounce(direction.rotated(PI/2), 0.95)
 
 	bounce_segments()
-	# bounce_floor()
 	bounce_food()
+
+##################################################################
+# tile bounce helpers
 
 func bounce_segments():
 	for cell in segments.values():
@@ -213,3 +195,31 @@ func bounce_floor():
 func bounce_food():
 	for cell in grid.food_cells():
 		cell.bounce(direction.rotated(PI/2))
+
+##################################################################
+# food picked up
+
+signal speed_increased
+
+var speed_level = 1
+
+func _on_food_picked_up(f):
+	Hood.notif(
+		Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"]),
+		{"rich": true})
+	SnakeSounds.play_sound("pickup")
+	bounce_floor()
+	grid.remove_food(f)
+
+	# TODO flash some text, hitstop lines
+	Cam.freezeframe("snake_collecting_food", 0.01, 1.6, 0.5)
+
+	# pass next to exclude it from new food places
+	grid.add_food(f.coord)
+
+	if food_count % 3 == 0:
+		walk_every -= walk_every * 0.1
+		Cam.screenshake(0.5)
+		speed_level += 1
+		emit_signal("speed_increased")
+		SnakeSounds.play_sound("speedup")

@@ -62,7 +62,7 @@ func random_coord():
 
 func random_empty_coord(exclude=null):
 	var coords = all_cell_coords()
-	for c in snake.cell_coords:
+	for c in snake.segment_coords:
 		coords.erase(c)
 	for f in food:
 		coords.erase(f.coord)
@@ -83,7 +83,7 @@ func food_cells():
 
 # dicts for cells might be better here
 func cell_info_at(coord):
-	for c in snake.cell_coords:
+	for c in snake.segment_coords:
 		if coord == c:
 			return "snake"
 

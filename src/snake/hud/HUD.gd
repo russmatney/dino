@@ -28,5 +28,5 @@ func update_speed():
 func update_steps():
 	get_node("%StepCount").text = str("Steps: ", player.step_count)
 
-func update_food_score():
+func update_food_score(_food=null):
 	get_node("%FoodCount").text = str("Food: ", player.food_count)
