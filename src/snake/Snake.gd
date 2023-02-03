@@ -38,9 +38,18 @@ func move(dir):
 
 var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
+
 func _ready():
+	# SnakeSounds.play_song("cool-kids")
+	# SnakeSounds.play_song("chill-electric")
+	# SnakeSounds.play_song("evening-dogs")
+	# SnakeSounds.play_song("funk-till-five")
+	# SnakeSounds.play_song("funkmachine")
+	SnakeSounds.play_song("field-stars")
+
 	Cam.ensure_camera(2, 10.0)
 	Hood.ensure_hud(hud_scene)
+
 
 
 ###########################################################################

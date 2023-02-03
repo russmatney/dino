@@ -2,7 +2,7 @@ tool
 extends Node
 
 onready var menu_song = preload("res://addons/dj/assets/songs/Late Night Radio.mp3")
-var audio_stream_player
+var menu_song_player
 var playback_pos
 
 
@@ -13,9 +13,7 @@ func _ready():
 	if menu_song:
 		print("[DJ]: Menu song configured")
 
-	audio_stream_player = AudioStreamPlayer.new()
-	audio_stream_player.set_stream(menu_song)
-	add_child(audio_stream_player)
+	menu_song_player = setup_sound(menu_song, {"is_sound": false})
 
 
 # TODO support a passed song as well
@@ -23,18 +21,18 @@ func _ready():
 func resume_menu_song(song = null):
 	if song and menu_song != song:
 		menu_song = song
-		audio_stream_player.set_stream(menu_song)
+		menu_song_player.set_stream(menu_song)
 
 	if not Engine.editor_hint:
 		if playback_pos:
-			audio_stream_player.play(playback_pos)
+			menu_song_player.play(playback_pos)
 		else:
-			audio_stream_player.play()
+			menu_song_player.play()
 
 
 func pause_menu_song():
-	audio_stream_player.stop()
-	playback_pos = audio_stream_player.get_playback_position()
+	menu_song_player.stop()
+	playback_pos = menu_song_player.get_playback_position()
 
 
 func play_sound_rand(sounds, opts = {}):
@@ -50,34 +48,67 @@ func play_sound_rand(sounds, opts = {}):
 ##########################################################
 # sound map api
 
-func setup_sound(sound):
-	# TODO force no looping? it's determined by the input rn
+func setup_sound(sound, opts = {}):
 	var asp = AudioStreamPlayer.new()
 	asp.set_stream(sound)
-	add_child(asp)
+	asp.name = sound.resource_path.get_file()
+	add_child(asp, true)
+	if "is_sound" in opts and opts["is_sound"]:
+		# TODO also force no looping for sounds? it's determined by the input rn
+		asp.set_volume_db(default_sound_vol_db)
+
+	if "vol_db" in opts:
+		asp.set_volume_db(opts["vol_db"])
+
 	return asp
 
-func setup_sound_map(sound_map):
+var default_sound_vol_db = -12
+var defaults = {
+	"is_sound": true
+	}
+
+func setup_sound_map(sound_map, default_opts=defaults):
 	var playables = {}
 	for k in sound_map.keys():
 		playables[k] = []
 		for s in sound_map[k]:
-			var playable = setup_sound(s)
-			playable.set_volume_db(-14)
+			var sound = s
+			var opts = {}
+			if typeof(s) == TYPE_ARRAY:
+				sound = s[0]
+				opts = s[1]
+			opts.merge(default_opts)
+			var playable = setup_sound(sound, opts)
 			playables[k].append(playable)
 	return playables
 
 func play_sound(sound_map, name):
 	if name in sound_map:
-		var s = sound_map[name]
-		play_sound_rand(s, {"vary": 0.4})
+		var sounds = sound_map[name]
+		play_sound_rand(sounds, {"vary": 0.4})
 	else:
 		print("<DJ> [WARN] no sound for name", name)
 
 func interrupt_sound(sound_map, name):
 	if name in sound_map:
 		for s in sound_map[name]:
+			# stop any of these that are playing
 			if s.is_playing():
 				s.stop()
 	else:
 		print("<DJ> [WARN] no sound for name", name)
+
+#################################################
+# music map api
+
+func play_song(sound_map, name):
+	if name in sound_map:
+		var songs = sound_map[name]
+		var i = randi() % songs.size()
+		var s = songs[i]
+		s.play()
+	else:
+		print("<DJ> [WARN] no song for name", name)
+
+func interrupt_song(sound_map, name):
+	interrupt_sound(sound_map, name)
