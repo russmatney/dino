@@ -17,9 +17,11 @@ func setup_player(p):
 	player.connect("step", self, "update_steps")
 	player.connect("speed_increased", self, "update_speed")
 	player.connect("food_picked_up", self, "update_food_score")
+	player.connect("inc_combo_juice", self, "update_combo_juice")
 	update_speed()
 	update_steps()
 	update_food_score()
+	update_combo_juice()
 
 
 func update_speed():
@@ -30,3 +32,6 @@ func update_steps():
 
 func update_food_score(_food=null):
 	get_node("%FoodCount").text = str("Food: ", player.food_count)
+
+func update_combo_juice(juice=null):
+	get_node("%ComboJuice").text = str("Combo: ", juice)

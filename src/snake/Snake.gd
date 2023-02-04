@@ -45,11 +45,6 @@ var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
 	if not Engine.editor_hint:
-		# SnakeSounds.play_song("cool-kids")
-		# SnakeSounds.play_song("chill-electric")
-		# SnakeSounds.play_song("evening-dogs")
-		# SnakeSounds.play_song("funk-till-five")
-		# SnakeSounds.play_song("funkmachine")
 		SnakeSounds.play_song("field-stars")
 
 		Cam.ensure_camera(2, 1000.0, 1)
@@ -206,7 +201,25 @@ func move_head(coord):
 	bounce_head()
 
 	global_position = head_cell().global_position
+
+	attempt_collect(coord)
+
 	grid.mark_touched(coord)
+
+##################################################################
+# combo
+
+var combo_juice = 0
+signal inc_combo_juice(combo_juice)
+
+func attempt_collect(coord):
+	var c = grid.get_cell(coord)
+
+	if c.has_method("should_inc_juice") and c.should_inc_juice():
+		highlight("[jump]juice++")
+		combo_juice += 1
+		emit_signal("inc_combo_juice", combo_juice)
+		Hood.notif(str("[jump]Combo Juice ++: ", combo_juice))
 
 ##################################################################
 # leap

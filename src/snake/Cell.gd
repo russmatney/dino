@@ -16,6 +16,13 @@ func _ready():
 		$Position.set_visible(false)
 		$GlobalPosition.set_visible(false)
 
+
+func should_inc_juice():
+	# loosey, goosey, eh?
+	if animation == "yellow":
+		return true
+
+
 func bounce_in():
 	var og_def = material.get("shader_param/deformation")
 	var def_scale = Vector2.ONE * 2.0

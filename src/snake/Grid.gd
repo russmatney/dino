@@ -85,6 +85,10 @@ func coord_to_position(coord):
 ###########################################################################
 # cells
 
+func get_cell(coord):
+	# TODO consider returning food or snake segment (or enemy?)
+	return cells[coord]
+
 func all_cells():
 	return cells.values()
 
