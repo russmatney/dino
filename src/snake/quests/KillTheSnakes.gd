@@ -6,6 +6,10 @@ func _ready():
 	if Hood.player:
 		setup(Hood.player)
 
+	Quest.register_quest(self)
+
+signal quest_complete
+
 var enemy_snakes
 var player
 var remaining_enemies_count
@@ -38,5 +42,6 @@ func _on_destroyed(snake):
 
 	if not enemy_snakes:
 		Hood.notif("Enemies Cleared!")
+		emit_signal("quest_complete")
 	else:
 		Hood.notif(str(enemy_snakes.size(), " Enemies remaining!"))

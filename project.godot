@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "ActiveQuest",
+"language": "GDScript",
+"path": "res://addons/hood/ActiveQuest.gd"
+}, {
 "base": "Object",
 "class": "CoordCtx",
 "language": "GDScript",
@@ -435,6 +440,7 @@ _global_script_classes=[ {
 "path": "res://addons/trolley/TrolleyActionsList.gd"
 } ]
 _global_script_class_icons={
+"ActiveQuest": "",
 "CoordCtx": "",
 "Credits": "",
 "GutHookScript": "",
@@ -556,6 +562,7 @@ Respawner="*res://addons/core/Respawner.gd"
 GunnerSounds="*res://src/gunner/GunnerSounds.gd"
 Hood="*res://addons/hood/Hood.gd"
 SnakeSounds="*res://src/snake/SnakeSounds.gd"
+Quest="*res://addons/hood/Quest.gd"
 
 [display]
 

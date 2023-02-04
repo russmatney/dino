@@ -6,6 +6,10 @@ func _ready():
 	if Hood.player:
 		setup(Hood.player)
 
+	Quest.register_quest(self)
+
+signal quest_complete
+
 var player
 var remaining_cell_count
 
@@ -25,6 +29,7 @@ func _on_cell_touched(_coord):
 
 	if remaining_cell_count <= 0:
 		Hood.notif("Grid Cleared!")
+		emit_signal("quest_complete")
 	else:
 		pass
 	# TODO this highlight via Hood
