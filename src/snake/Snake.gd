@@ -14,11 +14,8 @@ func _ready():
 		Cam.ensure_camera(2, 1000.0, 1)
 		Hood.ensure_hud(hud_scene)
 
-	var _x = connect("food_picked_up", self, "_on_food_picked_up")
-	var _y = connect("slowmo_start", self, "_on_slowmo_start")
-	var _z = connect("slowmo_stop", self, "_on_slowmo_stop")
-	var _a = connect("step", self, "_on_step")
-	var _b = connect("move_head", self, "_on_move_head")
+	var _x = connect("step", self, "_on_step")
+	var _y = connect("move_head", self, "_on_move_head")
 
 ##########################################################################
 # move

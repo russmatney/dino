@@ -6,7 +6,9 @@ extends Snake
 # ready
 
 func _ready():
-	pass
+	var _x = connect("food_picked_up", self, "_on_food_picked_up")
+	var _y = connect("slowmo_start", self, "_on_slowmo_start")
+	var _z = connect("slowmo_stop", self, "_on_slowmo_stop")
 
 func print_snake_meta():
 	.print_snake_meta()
