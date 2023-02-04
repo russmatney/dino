@@ -99,10 +99,13 @@ func restore_tail_segment(cell):
 	cell.playing = false
 
 func restore_segments():
-	animate_head(head_cell())
+	var hd = head_cell()
+	if is_instance_valid(hd):
+		animate_head(hd)
 
 	for cell in tail_cells():
-		restore_tail_segment(cell)
+		if is_instance_valid(cell):
+			restore_tail_segment(cell)
 
 ##################################################################
 # flashing colors
@@ -114,7 +117,8 @@ func cell_flash(cell):
 
 func segments_flash_white():
 	for cell in segments.values():
-		cell_flash(cell)
+		if is_instance_valid(cell):
+			cell_flash(cell)
 
 ###########################################################################
 # snake segment helpers
@@ -255,13 +259,15 @@ signal destroyed(snake)
 var dead
 
 func destroy():
+	if dead:
+		return
 	highlight("DEATH")
 	dead = true
 	segments_flash_white()
 
 	for cell in segments.values():
-		print("destroying cell: ", cell.coord)
-		cell.kill()
+		if is_instance_valid(cell):
+			cell.kill()
 
 	emit_signal("destroyed", self)
 

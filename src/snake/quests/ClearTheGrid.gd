@@ -9,9 +9,12 @@ func _ready():
 	Quest.register_quest(self)
 
 signal quest_complete
+# signal quest_failed
+signal count_remaining_update
+signal count_total_update
 
 var player
-var remaining_cell_count
+var count_remaining
 
 func setup(p):
 	player = p
@@ -19,19 +22,24 @@ func setup(p):
 	Hood.notif("Clear the Grid!")
 
 	if player.grid:
-		remaining_cell_count = player.grid.untouched_cells().size()
+		find_remaining_cells()
+		emit_signal("count_total_update", count_remaining)
 
 
 	Util.ensure_connection(player.grid, "cell_touched", self, "_on_cell_touched")
 
-func _on_cell_touched(_coord):
-	remaining_cell_count = player.grid.untouched_cells().size()
+func find_remaining_cells():
+	count_remaining = player.grid.untouched_cells().size()
+	emit_signal("count_remaining_update", count_remaining)
 
-	if remaining_cell_count <= 0:
+func _on_cell_touched(_coord):
+	find_remaining_cells()
+
+	if count_remaining <= 0:
 		Hood.notif("Grid Cleared!")
 		emit_signal("quest_complete")
 	else:
 		pass
-	# TODO this highlight via Hood
+	# TODO highlight this via Hood
 		# player.highlight("--cells remaining")
-		# Hood.notif(str("remaining cells: ", remaining_cell_count))
+		# Hood.notif(str("remaining cells: ", count_remaining))

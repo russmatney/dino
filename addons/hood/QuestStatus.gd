@@ -12,6 +12,7 @@ func render():
 	for q in quests:
 		var ch = checkbox_scene.instance()
 		get_node("%QuestList").add_child(ch)
+		# set after add_child, let the setter update children
 		ch.quest = q
 
 

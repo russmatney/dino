@@ -83,6 +83,8 @@ func set_collisions_enabled(node, enabled):
 
 
 func ensure_connection(obj, sig, target, method, args = []):
+	if not obj.has_signal(sig):
+		print("[Warn] obj has no signal for connection: ", obj, " :", sig)
 	var err
 	if not obj.is_connected(sig, target, method):
 		err = obj.connect(sig, target, method, args)
