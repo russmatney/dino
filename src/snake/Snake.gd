@@ -2,6 +2,36 @@ tool
 extends Node2D
 class_name Snake
 
+## slowmo
+
+signal slowmo_start
+signal slowmo_stop
+
+var slowing_down
+var walk_manually
+
+func _on_slowmo_start():
+	slowing_down = true
+	walk_manually = false
+	steps_til_stop = slow_steps_before_pause
+
+	Hood.notif("Slooooooow mooooootion")
+
+	Cam.start_slowmo("snake_slowmo", 0.3)
+
+	# TODO need special rules zoom for slowmo, allow us to go below minimum zoom
+	old_zoom_level = Cam.cam.zoom_level
+	Cam.zoom_in(2)
+	# TODO sound
+
+func _on_slowmo_stop():
+	slowing_down = false
+	walk_manually = false
+	Hood.notif("Back to full speed")
+	Cam.stop_slowmo("snake_slowmo")
+	Cam.zoom_out(old_zoom_level)
+	# TODO sound
+
 ###########################################################################
 # input
 
@@ -18,24 +48,19 @@ func _unhandled_input(event):
 		move(Vector2.DOWN)
 
 	elif Trolley.is_event(event, "slowmo"):
-		Cam.start_slowmo("snake_slowmo", 0.3)
-		# TODO need special rules zoom for slowmo, allow us to go below minimum zoom
-		old_zoom_level = Cam.cam.zoom_level
-		Cam.zoom_in(2)
-		# TODO slow mo sound effect mods
-		Hood.notif("Slooooooow mooooootion")
+		emit_signal("slowmo_start")
 	elif Trolley.is_event_released(event, "slowmo"):
-		Cam.stop_slowmo("snake_slowmo")
-		Cam.zoom_out(old_zoom_level)
-		Hood.notif("Back to full speed")
+		emit_signal("slowmo_stop")
 
 
 var move_dir_queue = []
 
 
 func move(dir):
-	# TODO expose juicy direction queue append
-	move_dir_queue.append(dir)
+	if walk_manually:
+		walk_in_dir(dir)
+	else:
+		move_dir_queue.append(dir)
 
 
 ###########################################################################
@@ -51,6 +76,8 @@ func _ready():
 		Hood.ensure_hud(hud_scene)
 
 	var _x = connect("food_picked_up", self, "_on_food_picked_up")
+	var _y = connect("slowmo_start", self, "_on_slowmo_start")
+	var _z = connect("slowmo_stop", self, "_on_slowmo_stop")
 
 
 ###########################################################################
@@ -123,21 +150,36 @@ func print_snake_positions():
 # process
 
 export(float) var walk_every = 0.12
-var next_walk_in = 0
+var secs_til_walk = 0.12
 
+func walk_in_t(delta):
+	secs_til_walk -= delta
+	if secs_til_walk <= 0:
+		secs_til_walk = walk_every
+		walk_in_dir()
+		return true
+
+var slow_steps_before_pause = 2
+var steps_til_stop
 
 func _process(delta):
-	if not Engine.editor_hint:
-		next_walk_in -= delta
-		if next_walk_in <= 0:
-			next_walk_in = walk_every
-			walk_in_dir()
+	if slowing_down:
+		if steps_til_stop == null:
+			steps_til_stop = slow_steps_before_pause
+		elif steps_til_stop > 0:
+			var stepped = walk_in_t(delta)
+			if stepped:
+				steps_til_stop -= 1
+		else:
+			walk_manually = true
+	elif not Engine.editor_hint:
+		walk_in_t(delta)
 
 ###########################################################################
 # walk
 
-func walk_in_dir():
-	if move_dir_queue.size():
+func walk_in_dir(dir=null):
+	if not dir and move_dir_queue.size():
 		var next_dir = move_dir_queue.pop_front()
 		if next_dir + direction != Vector2.ZERO:
 			direction = next_dir
@@ -145,6 +187,9 @@ func walk_in_dir():
 			# moving against current direction
 			# TODO switch head to tail? stop in place?
 			Cam.screenshake(0.3)
+
+	if dir:
+		direction = dir
 
 	if segment_coords:
 		# calc next coord with direction and current head
