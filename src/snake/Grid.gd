@@ -142,8 +142,7 @@ func mark_touched(coord):
 	var cell = cells[coord]
 	if cell:
 		cell.animation = "blue"
-		# TODO dry up 'random frame' on animations with a util
-		cell.frame = randi() % 4
+		Util.set_random_frame(cell)
 
 	emit_signal("cell_touched", coord)
 
@@ -181,7 +180,7 @@ func init_grid(anim = "yellow"):
 		var c = cell_scene.instance()
 		c.coord = coord
 		c.animation = anim
-		c.frame = randi() % 4
+		Util.set_random_frame(c)
 		c.position = coord_to_position(coord)
 		$Cells.add_child(c)
 
@@ -252,7 +251,7 @@ func add_food(exclude=null):
 
 	var f = food_scene.instance()
 	f.coord = empty_cell
-	f.frame = randi() % 4
+	Util.set_random_frame(f)
 	f.position = coord_to_position(empty_cell)
 	add_child(f)
 	food.append(f)

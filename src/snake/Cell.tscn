@@ -13,7 +13,7 @@ shader_param/deformation = Vector2( 0, 0 )
 [node name="Cell" type="AnimatedSprite" groups=["cells"]]
 material = SubResource( 1 )
 frames = ExtResource( 2 )
-animation = "dark"
+animation = "player"
 script = ExtResource( 1 )
 
 [node name="Coord" type="Label" parent="."]

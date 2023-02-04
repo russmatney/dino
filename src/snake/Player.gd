@@ -10,6 +10,8 @@ func _ready():
 	var _y = connect("slowmo_start", self, "_on_slowmo_start")
 	var _z = connect("slowmo_stop", self, "_on_slowmo_stop")
 
+	cell_anim = "player"
+
 func print_snake_meta():
 	.print_snake_meta()
 	print("food: ", food_count)
@@ -144,12 +146,12 @@ func attempt_collect(coord):
 
 func cell_flash(cell):
 	cell.set_animation("flash")
-	cell.frame = randi() % 4
+	Util.set_random_frame(cell)
 	cell.playing = true
 
 func cell_restore(cell):
-	cell.set_animation("dark")
-	cell.frame = randi() % 4
+	cell.set_animation("player")
+	Util.set_random_frame(cell)
 	cell.playing = false
 
 func segments_flash_white():

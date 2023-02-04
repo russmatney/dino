@@ -106,6 +106,10 @@ func rand_of(arr):
 	return arr[0]
 
 
+func set_random_frame(anim):
+	anim.frame = randi() % anim.frames.get_frame_count(anim.animation)
+
+
 ############################################################
 # Functional
 

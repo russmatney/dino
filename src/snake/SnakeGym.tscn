@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/snake/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/snake/Dust.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/snake/ClearTheGrid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/snake/quests/ClearTheGrid.tscn" type="PackedScene" id=3]
 
 [node name="SnakeGym" type="Node2D"]
 

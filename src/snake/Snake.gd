@@ -63,6 +63,7 @@ func draw_segments():
 onready var cell_scene = preload("res://src/snake/Cell.tscn")
 
 var should_flash
+var cell_anim = "dark"
 
 func draw_segment(coord):
 	var c = cell_scene.instance()
@@ -70,8 +71,8 @@ func draw_segment(coord):
 		c.set_animation("flash")
 		c.playing = true
 	else:
-		c.set_animation("dark")
-	c.frame = randi() % 4
+		c.set_animation(cell_anim)
+	Util.set_random_frame(c)
 	c.global_position = grid.coord_to_position(coord)
 	c.coord = coord
 	grid.add_child(c)
