@@ -16,9 +16,9 @@ func _ready():
 	menu_song_player = setup_sound(menu_song, {"is_sound": false})
 
 
-# TODO support a passed song as well
-# TODO may need to handle pausing the current song before overwriting here
 func resume_menu_song(song = null):
+	# TODO pause any playing sound_map songs
+
 	if song and menu_song != song:
 		menu_song = song
 		menu_song_player.set_stream(menu_song)
@@ -34,6 +34,7 @@ func pause_menu_song():
 	menu_song_player.stop()
 	playback_pos = menu_song_player.get_playback_position()
 
+	# TODO resume any playing sound_map songs
 
 func play_sound_rand(sounds, opts = {}):
 	var vary = opts.get("vary", 0.0)
@@ -106,7 +107,9 @@ func play_song(sound_map, name):
 		var songs = sound_map[name]
 		var i = randi() % songs.size()
 		var s = songs[i]
-		s.play()
+		# if already playing, do nothing
+		if not s.playing:
+			s.play()
 	else:
 		print("<DJ> [WARN] no song for name", name)
 

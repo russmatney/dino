@@ -8,12 +8,6 @@ class_name Snake
 var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
-	if not Engine.editor_hint:
-		SnakeSounds.play_song("field-stars")
-
-		Cam.ensure_camera(2, 1000.0, 1)
-		Hood.ensure_hud(hud_scene)
-
 	var _x = connect("step", self, "_on_step")
 	var _y = connect("move_head", self, "_on_move_head")
 
