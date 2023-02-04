@@ -11,6 +11,7 @@ func _ready():
 	var _z = connect("slowmo_stop", self, "_on_slowmo_stop")
 
 	cell_anim = "player"
+	cell_head_anim = "playerhead"
 
 func print_snake_meta():
 	.print_snake_meta()
@@ -108,12 +109,15 @@ func attempt_walk(next):
 		["food", _]:
 			walk_towards(next, false)
 			pickup_food(info[1])
+			restore_segments()
 		"snake":
 			SnakeSounds.play_sound("bump")
 			# TODO debounce this notif
 			highlight("[jump]ow!")
+			restore_segments()
 		_:
 			walk_towards(next)
+			restore_segments()
 
 func _on_step():
 	if not leaping:
@@ -149,20 +153,9 @@ func cell_flash(cell):
 	Util.set_random_frame(cell)
 	cell.playing = true
 
-func cell_restore(cell):
-	cell.set_animation("player")
-	Util.set_random_frame(cell)
-	cell.playing = false
-
 func segments_flash_white():
-	print("flashing white?")
 	for cell in segments.values():
 		cell_flash(cell)
-
-func segments_restore_color():
-	print("restoring color")
-	for cell in segments.values():
-		cell_restore(cell)
 
 ##################################################################
 # leap
@@ -194,7 +187,7 @@ func leap_towards_food(next, f):
 					SnakeSounds.play_sound("bump")
 					highlight("[jump]derp.")
 					should_flash = false
-					segments_restore_color()
+					restore_segments()
 					return
 				_:
 					# TODO skip steps in this walk (b/c we leap)
@@ -210,7 +203,7 @@ func leap_towards_food(next, f):
 	leaping = false
 
 	yield(get_tree().create_timer(0.4), "timeout")
-	segments_restore_color()
+	restore_segments()
 
 ##################################################################
 # food picked up

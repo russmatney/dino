@@ -59,11 +59,14 @@ func draw_segments():
 	for coord in segment_coords:
 		draw_segment(coord)
 
+###########################################################################
+# draw/animate segments
 
 onready var cell_scene = preload("res://src/snake/Cell.tscn")
 
 var should_flash
 var cell_anim = "dark"
+var cell_head_anim = "enemyhead"
 
 func draw_segment(coord):
 	var c = cell_scene.instance()
@@ -77,6 +80,36 @@ func draw_segment(coord):
 	c.coord = coord
 	grid.add_child(c)
 	segments[coord] = c
+
+func animate_head(cell):
+	cell.set_animation(cell_head_anim)
+	cell.playing = true
+	# TODO grow/lunge per step
+	match direction:
+		Vector2.LEFT:
+			cell.flip_h = true
+		Vector2.RIGHT:
+			cell.flip_h = false
+		Vector2.UP:
+			cell.flip_h = false
+			cell.rotation = -PI/2
+		Vector2.DOWN:
+			cell.flip_h = false
+			cell.rotation = PI/2
+		_:
+			pass
+
+func restore_tail_segment(cell):
+	cell.set_animation(cell_anim)
+	Util.set_random_frame(cell)
+	cell.playing = false
+
+func restore_segments():
+	animate_head(head_cell())
+
+	for cell in tail_cells():
+		restore_tail_segment(cell)
+
 
 ###########################################################################
 # snake segment helpers
@@ -152,6 +185,7 @@ func attempt_walk(next):
 			highlight("[jump]ow!")
 		_:
 			walk_towards(next)
+	restore_segments()
 
 func _on_step():
 	step_count +=1
