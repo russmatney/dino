@@ -1,20 +1,20 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://src/snake/Cell.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/coldfire_squares.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://src/snake/SquashStetchShader.tres" type="Shader" id=3]
-[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=4]
+[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/snake/SquashStetchShader.tres" type="Shader" id=2]
+[ext_resource path="res://assets/sprites/coldfire_squares.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://src/snake/snakes/Cell.gd" type="Script" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
+shader = ExtResource( 2 )
 shader_param/deformation = Vector2( 0, 0 )
 
 [node name="Cell" type="AnimatedSprite" groups=["cells"]]
 material = SubResource( 1 )
-frames = ExtResource( 2 )
+frames = ExtResource( 3 )
 animation = "enemyhead"
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Coord" type="Label" parent="."]
 visible = false
@@ -23,7 +23,7 @@ margin_top = -4.0
 margin_right = 21.0
 margin_bottom = 9.0
 rect_scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
 text = "(0, 0)"
 
 [node name="Position" type="Label" parent="."]
@@ -33,7 +33,7 @@ margin_top = -1.0
 margin_right = 21.0
 margin_bottom = 12.0
 rect_scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
 text = "(0, 0)"
 
 [node name="GlobalPosition" type="Label" parent="."]
@@ -43,5 +43,5 @@ margin_top = 1.0
 margin_right = 21.0
 margin_bottom = 14.0
 rect_scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
 text = "(0, 0)"

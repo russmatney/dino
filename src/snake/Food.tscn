@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/snake/Cell.gd" type="Script" id=1]
+[ext_resource path="res://src/snake/snakes/Cell.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/coldfire_squares.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=3]
 

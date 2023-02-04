@@ -158,18 +158,6 @@ func attempt_collect(coord):
 		# Hood.notif(str("[jump]Combo Juice ++: ", combo_juice))
 
 ##################################################################
-# flashing colors
-
-func cell_flash(cell):
-	cell.set_animation("flash")
-	Util.set_random_frame(cell)
-	cell.playing = true
-
-func segments_flash_white():
-	for cell in segments.values():
-		cell_flash(cell)
-
-##################################################################
 # leap
 
 var leaping

@@ -56,7 +56,7 @@ func draw_segments():
 ###########################################################################
 # draw/animate segments
 
-onready var cell_scene = preload("res://src/snake/Cell.tscn")
+onready var cell_scene = preload("res://src/snake/snakes/Cell.tscn")
 
 var should_flash
 var cell_anim = "dark"

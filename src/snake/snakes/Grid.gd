@@ -167,7 +167,7 @@ func deform_all_cells():
 ###########################################################################
 # init grid
 
-onready var cell_scene = preload("res://src/snake/Cell.tscn")
+onready var cell_scene = preload("res://src/snake/snakes/Cell.tscn")
 var cells = {}
 
 
@@ -192,7 +192,7 @@ func init_grid(anim = "yellow"):
 # init snake
 
 var snakes = []
-onready var player_scene = preload("res://src/snake/Player.tscn")
+onready var player_scene = preload("res://src/snake/snakes/Player.tscn")
 
 func init_snake():
 	if snakes:
@@ -215,7 +215,7 @@ func add_snake():
 ###########################################################################
 # init enemy
 
-onready var enemy_scene = preload("res://src/snake/Enemy.tscn")
+onready var enemy_scene = preload("res://src/snake/snakes/Enemy.tscn")
 
 func add_enemy():
 	var initial_cell = random_coord()

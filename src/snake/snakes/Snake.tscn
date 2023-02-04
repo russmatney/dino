@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/snake/Snake.gd" type="Script" id=1]
+[ext_resource path="res://src/snake/snakes/Snake.gd" type="Script" id=1]
 [ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]

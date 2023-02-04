@@ -402,12 +402,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Snake",
 "language": "GDScript",
-"path": "res://src/snake/Snake.gd"
+"path": "res://src/snake/snakes/Snake.gd"
 }, {
 "base": "AnimatedSprite",
 "class": "SnakeCell",
 "language": "GDScript",
-"path": "res://src/snake/Cell.gd"
+"path": "res://src/snake/snakes/Cell.gd"
 }, {
 "base": "Node",
 "class": "State",
