@@ -27,10 +27,8 @@ func setup(p):
 func find_snakes():
 	var ss = []
 	var enemies = get_tree().get_nodes_in_group("enemy")
-	print("enemies: ", enemies)
 	for e in enemies:
 		if e.is_in_group("snakes"):
-			print("found snake")
 			Util.ensure_connection(e, "destroyed", self, "_on_destroyed")
 			ss.append(e)
 
