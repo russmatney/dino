@@ -16,7 +16,7 @@ func print_snake_meta():
 	print("speed level: ", speed_level)
 
 ###########################################################################
-# process
+# physics_process
 
 var slow_steps_before_pause = 2
 var steps_til_stop
@@ -135,12 +135,41 @@ func attempt_collect(coord):
 		highlight("[jump]juice++")
 		combo_juice += 1
 		emit_signal("inc_combo_juice", combo_juice)
-		Hood.notif(str("[jump]Combo Juice ++: ", combo_juice))
+		# Hood.notif(str("[jump]Combo Juice ++: ", combo_juice))
+
+##################################################################
+# flashing colors
+
+func cell_flash(cell):
+	cell.set_animation("flash")
+	cell.frame = randi() % 4
+	cell.playing = true
+
+func cell_restore(cell):
+	cell.set_animation("dark")
+	cell.frame = randi() % 4
+	cell.playing = false
+
+func segments_flash_white():
+	print("flashing white?")
+	for cell in segments.values():
+		cell_flash(cell)
+
+func segments_restore_color():
+	print("restoring color")
+	for cell in segments.values():
+		cell_restore(cell)
 
 ##################################################################
 # leap
 
+var leaping
+
 func leap_towards_food(next, f):
+	highlight("LEAP")
+	should_flash = true
+	segments_flash_white()
+
 	# first, take the step onto the food's row/col
 	walk_towards(next)
 
@@ -157,14 +186,22 @@ func leap_towards_food(next, f):
 				"snake":
 					SnakeSounds.play_sound("bump")
 					highlight("[jump]derp.")
+					should_flash = false
+					segments_restore_color()
 					return
 				_:
 					walk_towards(next_cell)
 					if next_cell == target_cell:
 						break
 
+
 	pickup_food(f)
 	walk_towards(f.coord, false)
+
+	should_flash = false
+
+	yield(get_tree().create_timer(0.4), "timeout")
+	segments_restore_color()
 
 ##################################################################
 # food picked up
