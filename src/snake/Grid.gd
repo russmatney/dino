@@ -7,6 +7,7 @@ extends Node2D
 export(int, 2, 24) var width = 16 setget set_width
 export(int, 2, 24) var height = 16 setget set_height
 export(int) var cell_size = 8 setget set_cell_size
+export(int) var enemy_count = 1
 
 
 func set_width(v):
@@ -36,11 +37,12 @@ func _ready():
 	call_deferred("setup")
 	ready = true
 
-
 func setup():
 	init_grid()
 	init_snake()
 	init_food()
+	for _i in range(enemy_count):
+		add_enemy()
 
 
 ###########################################################################
@@ -194,6 +196,18 @@ func add_snake():
 	add_child(p)
 	p.init(self, initial_cell, initial_direction)
 
+###########################################################################
+# init enemy
+
+onready var enemy_scene = preload("res://src/snake/Enemy.tscn")
+
+func add_enemy():
+	var initial_cell = random_coord()
+	var initial_direction = Vector2.RIGHT
+	var e = enemy_scene.instance()
+	snakes.append(e)
+	add_child(e)
+	e.init(self, initial_cell, initial_direction)
 
 ###########################################################################
 # init food
