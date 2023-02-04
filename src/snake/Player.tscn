@@ -2,5 +2,5 @@
 
 [ext_resource path="res://src/snake/Player.gd" type="Script" id=1]
 
-[node name="Player" type="Node2D" groups=["player", "pof"]]
+[node name="PlayerSnake" type="Node2D" groups=["player", "pof"]]
 script = ExtResource( 1 )

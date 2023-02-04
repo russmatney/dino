@@ -62,8 +62,10 @@ func random_coord():
 
 func random_empty_coord(exclude=null):
 	var coords = all_cell_coords()
-	for c in snake.segment_coords:
-		coords.erase(c)
+	for s in snakes:
+		if is_instance_valid(s):
+			for c in s.segment_coords:
+				coords.erase(c)
 	for f in food:
 		coords.erase(f.coord)
 	if exclude:
@@ -97,9 +99,11 @@ func food_cells():
 
 # dicts for cells might be better here
 func cell_info_at(coord, from=null):
-	for c in snake.segment_coords:
-		if coord == c:
-			return "snake"
+	for s in snakes:
+		if is_instance_valid(s):
+			for c in s.segment_coords:
+				if coord == c:
+					return "snake"
 
 	for f in food:
 		if coord == f.coord:
@@ -169,22 +173,26 @@ func init_grid(anim = "yellow"):
 ###########################################################################
 # init snake
 
-var snake
-onready var snake_scene = preload("res://src/snake/Snake.tscn")
-
+var snakes = []
+onready var player_scene = preload("res://src/snake/Player.tscn")
 
 func init_snake():
-	if snake:
-		snake.free()
+	if snakes:
+		for s in snakes:
+			if is_instance_valid(s):
+				s.free()
 	if get_node_or_null("Snake"):
 		$Snake.free()
 
+	add_snake()
+
+func add_snake():
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
-	snake = snake_scene.instance()
-	# snake.position = coord_to_position(initial_cell)
-	add_child(snake)
-	snake.init(self, initial_cell, initial_direction)
+	var p = player_scene.instance()
+	snakes.append(p)
+	add_child(p)
+	p.init(self, initial_cell, initial_direction)
 
 
 ###########################################################################
