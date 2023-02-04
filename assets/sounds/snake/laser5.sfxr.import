@@ -1,0 +1,16 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamSample"
+path="res://.import/laser5.sfxr-71a7a7d5512fb633ec3ebb1a5bc17ce4.sample"
+
+[deps]
+
+source_file="res://assets/sounds/snake/laser5.sfxr"
+dest_files=[ "res://.import/laser5.sfxr-71a7a7d5512fb633ec3ebb1a5bc17ce4.sample" ]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

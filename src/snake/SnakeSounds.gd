@@ -15,6 +15,14 @@ onready var sounds = {
 			preload("res://assets/sounds/snake/walk1.sfxr"),
 			preload("res://assets/sounds/snake/walk2.sfxr"),
 		],
+	"laser":
+	[
+		preload("res://assets/sounds/snake/laser1.sfxr"),
+		preload("res://assets/sounds/snake/laser2.sfxr"),
+		preload("res://assets/sounds/snake/laser3.sfxr"),
+		preload("res://assets/sounds/snake/laser4.sfxr"),
+		preload("res://assets/sounds/snake/laser5.sfxr"),
+	],
 	"pickup":
 	[
 		preload("res://assets/sounds/snake/pickup1.sfxr"),

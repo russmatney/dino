@@ -114,7 +114,9 @@ func attempt_walk(next):
 			walk_towards(next)
 
 func _on_step():
-	._on_step()
+	if not leaping:
+		# TODO skipping step counter here
+		._on_step()
 	bounce_food()
 	SnakeSounds.play_sound("walk")
 
@@ -168,7 +170,10 @@ var leaping
 func leap_towards_food(next, f):
 	highlight("LEAP")
 	should_flash = true
+	leaping = true
 	segments_flash_white()
+	Cam.screenshake(0.1)
+	SnakeSounds.play_sound("laser")
 
 	# first, take the step onto the food's row/col
 	walk_towards(next)
@@ -190,6 +195,7 @@ func leap_towards_food(next, f):
 					segments_restore_color()
 					return
 				_:
+					# TODO skip steps in this walk (b/c we leap)
 					walk_towards(next_cell)
 					if next_cell == target_cell:
 						break
@@ -199,6 +205,7 @@ func leap_towards_food(next, f):
 	walk_towards(f.coord, false)
 
 	should_flash = false
+	leaping = false
 
 	yield(get_tree().create_timer(0.4), "timeout")
 	segments_restore_color()
