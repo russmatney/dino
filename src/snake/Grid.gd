@@ -118,7 +118,7 @@ func cell_info_at(coord, from=null):
 		if is_instance_valid(s):
 			for c in s.segment_coords:
 				if coord == c:
-					return "snake"
+					return ["snake", s]
 
 	for f in food:
 		if coord == f.coord:

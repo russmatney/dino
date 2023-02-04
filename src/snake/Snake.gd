@@ -179,16 +179,19 @@ func attempt_walk(next):
 	var info = grid.cell_info_at(next, head_cell().coord)
 
 	match info:
-		"snake":
-			SnakeSounds.play_sound("bump")
-			# TODO debounce this notif
-			highlight("[jump]ow!")
+		["snake", _]:
+			var s = info[1]
+			if s == self:
+				SnakeSounds.play_sound("bump")
+				highlight("[jump]ow!")
+			else:
+				highlight("[jump]chomp!")
 		_:
 			walk_towards(next)
 	restore_segments()
 
 func _on_step():
-	step_count +=1
+	step_count += 1
 
 func walk_towards(next, should_drop_tail = true):
 	emit_signal("step")

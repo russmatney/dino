@@ -110,10 +110,13 @@ func attempt_walk(next):
 			walk_towards(next, false)
 			pickup_food(info[1])
 			restore_segments()
-		"snake":
-			SnakeSounds.play_sound("bump")
-			# TODO debounce this notif
-			highlight("[jump]ow!")
+		["snake", _]:
+			var s = info[1]
+			if s == self:
+				SnakeSounds.play_sound("bump")
+				highlight("[jump]ow!")
+			else:
+				highlight("[jump]chomp!")
 			restore_segments()
 		_:
 			walk_towards(next)
@@ -183,9 +186,14 @@ func leap_towards_food(next, f):
 			var info = grid.cell_info_at(next_cell)
 
 			match info:
-				"snake":
-					SnakeSounds.play_sound("bump")
-					highlight("[jump]derp.")
+				["snake", _]:
+					var s = info[1]
+					if s == self:
+						SnakeSounds.play_sound("bump")
+						highlight("[jump]ow!")
+						highlight("[jump]derp.")
+					else:
+						highlight("[jump]chomp!")
 					should_flash = false
 					restore_segments()
 					return
