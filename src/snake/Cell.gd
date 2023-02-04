@@ -67,3 +67,14 @@ func deform_scale(s=Vector2(0.5, 0.5)):
 	var tween = create_tween()
 	tween.tween_property(self, "scale", s, duration).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "scale", Vector2.ONE, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+
+func shrink(s=Vector2(0.1, 0.1)):
+	var duration = 0.3
+	var tween = create_tween()
+	tween.tween_property(self, "scale", s, duration).set_trans(Tween.TRANS_CUBIC)
+
+func kill():
+	var duration = 0.4
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ZERO, duration).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback(self, "queue_free")

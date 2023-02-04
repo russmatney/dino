@@ -104,24 +104,57 @@ func restore_segments():
 	for cell in tail_cells():
 		restore_tail_segment(cell)
 
+##################################################################
+# flashing colors
+
+func cell_flash(cell):
+	cell.set_animation("flash")
+	Util.set_random_frame(cell)
+	cell.playing = true
+
+func segments_flash_white():
+	for cell in segments.values():
+		cell_flash(cell)
 
 ###########################################################################
 # snake segment helpers
 
 func head_cell():
-	return segments[segment_coords[0]]
+	if not segment_coords:
+		print("no segment coords, can't get head")
+		return
+	elif not segment_coords[0] in segments:
+		print("first segment coord not in segments")
+		return
+
+	var hd = segments[segment_coords[0]]
+	if is_instance_valid(hd):
+		return hd
+	else:
+		print("head cell invalid")
 
 func tail_cells():
+	if segment_coords.size() <= 1:
+		return []
 	var ts = []
 	for coord in segment_coords.slice(1, -1):
-		ts.append(segments[coord])
+		if coord in segments:
+			var t = segments[coord]
+			if is_instance_valid(t):
+				ts.append(t)
+			else:
+				print("tail cell invalid")
+		else:
+			print("[WARN] tail coord not in segments")
 	return ts
 
 func print_snake_meta():
 	var hc = head_cell()
-	print("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
+	if hc:
+		print("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
 	for t in tail_cells():
-		print("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
+		if t:
+			print("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
 
 
 ###########################################################################
@@ -137,12 +170,11 @@ func walk_in_t(delta):
 		walk_in_dir()
 
 func process(delta):
-	if not Engine.editor_hint:
-		walk_in_t(delta)
+	walk_in_t(delta)
 
 func _process(delta):
-	# avoid calling parent process AND child process
-	process(delta)
+	if not Engine.editor_hint and not dead:
+		process(delta)
 
 ###########################################################################
 # walk
@@ -170,6 +202,8 @@ var step_count = 0
 signal step
 
 func attempt_walk(next):
+	print("snake attempting walk")
+	print_snake_meta()
 	var info = grid.cell_info_at(next, head_cell().coord)
 
 	match info:
@@ -179,7 +213,10 @@ func attempt_walk(next):
 				SnakeSounds.play_sound("bump")
 				highlight("[jump]ow!")
 			else:
+				# TODO enemies only chomp player
+				# reverse direction when two enemies interact?
 				highlight("[jump]chomp!")
+				chomp_snake(s, next)
 		_:
 			walk_towards(next)
 	restore_segments()
@@ -195,9 +232,13 @@ func walk_towards(next, should_drop_tail = true):
 
 func drop_tail():
 	var tail = segment_coords.pop_back()
-	var c = segments[tail]
-	segments.erase(tail)
-	c.queue_free()
+	if tail in segments:
+		var c = segments[tail]
+		segments.erase(tail)
+		if is_instance_valid(c):
+			c.queue_free()
+	else:
+		print("[WARN] tail expected but not found in `segments`")
 
 func _on_move_head(_coord):
 	bounce_head()
@@ -208,6 +249,65 @@ func move_head(coord):
 	draw_segment(coord)
 	global_position = head_cell().global_position
 	emit_signal("move_head", coord)
+
+##################################################################
+# chomp
+
+func duplicate_snake(snake, coord):
+
+	# split passed snake in two
+	var dupe = snake.duplicate()
+
+	var coord_idx = snake.segment_coords.find(coord)
+	var snake_coords = snake.segment_coords.slice(0, coord_idx)
+	var dupe_coords = snake.segment_coords.slice(coord_idx, -1)
+
+	# remove chomped square
+	snake.segment_coords.erase(coord)
+	snake.segments.erase(coord)
+	dupe_coords.erase(coord)
+	dupe.segments = snake.segments.duplicate()
+	dupe.segments.erase(coord)
+
+	# remove dead cells from snake
+	for d_coord in dupe_coords:
+		snake.segment_coords.erase(d_coord)
+		snake.segments.erase(d_coord)
+
+	# remove 'living' cells from dupe snake
+	for s_coord in snake_coords:
+		dupe.segments.erase(s_coord)
+
+	dupe_coords.invert()
+	dupe.segment_coords = dupe_coords
+	dupe.direction = -1 * snake.direction
+	dupe.grid = snake.grid
+	grid.add_child(dupe)
+
+var dead
+
+func destroy():
+	highlight("DEATH")
+	dead = true
+	segments_flash_white()
+
+	for cell in segments.values():
+		print("destroying cell: ", cell.coord)
+		cell.kill()
+
+	yield(get_tree().create_timer(2.0), "timeout")
+	# after cells animate away
+	queue_free()
+
+func chomp_snake(snake, coord):
+	snake.destroy()
+
+	# if snake.head_cell().coord == coord:
+	# 	snake.destroy()
+	# else:
+	# 	duplicate_snake(snake, coord)
+
+	walk_towards(coord)
 
 ##################################################################
 # highlight

@@ -40,7 +40,7 @@ func process(delta):
 				steps_til_stop -= 1
 		else:
 			walk_manually = true
-	elif not Engine.editor_hint:
+	else:
 		walk_in_t(delta)
 
 ## slowmo
@@ -106,6 +106,8 @@ var food_count = 0
 signal food_picked_up
 
 func attempt_walk(next):
+	print("player attempting walk")
+	print_snake_meta()
 	var info = grid.cell_info_at(next, head_cell().coord)
 
 	match info:
@@ -123,6 +125,7 @@ func attempt_walk(next):
 				highlight("[jump]ow!")
 			else:
 				highlight("[jump]chomp!")
+				chomp_snake(s, next)
 			restore_segments()
 		_:
 			walk_towards(next)
@@ -200,6 +203,7 @@ func leap_towards_food(next, f):
 						highlight("[jump]derp.")
 					else:
 						highlight("[jump]chomp!")
+						chomp_snake(s, next)
 					should_flash = false
 					restore_segments()
 					return
