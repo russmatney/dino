@@ -202,8 +202,6 @@ var step_count = 0
 signal step
 
 func attempt_walk(next):
-	print("snake attempting walk")
-	print_snake_meta()
 	var info = grid.cell_info_at(next, head_cell().coord)
 
 	match info:
@@ -251,6 +249,27 @@ func move_head(coord):
 	emit_signal("move_head", coord)
 
 ##################################################################
+# death
+
+signal destroyed(snake)
+var dead
+
+func destroy():
+	highlight("DEATH")
+	dead = true
+	segments_flash_white()
+
+	for cell in segments.values():
+		print("destroying cell: ", cell.coord)
+		cell.kill()
+
+	emit_signal("destroyed", self)
+
+	yield(get_tree().create_timer(2.0), "timeout")
+	# after cells animate away
+	queue_free()
+
+##################################################################
 # chomp
 
 func duplicate_snake(snake, coord):
@@ -283,21 +302,6 @@ func duplicate_snake(snake, coord):
 	dupe.direction = -1 * snake.direction
 	dupe.grid = snake.grid
 	grid.add_child(dupe)
-
-var dead
-
-func destroy():
-	highlight("DEATH")
-	dead = true
-	segments_flash_white()
-
-	for cell in segments.values():
-		print("destroying cell: ", cell.coord)
-		cell.kill()
-
-	yield(get_tree().create_timer(2.0), "timeout")
-	# after cells animate away
-	queue_free()
 
 func chomp_snake(snake, coord):
 	snake.destroy()

@@ -106,8 +106,6 @@ var food_count = 0
 signal food_picked_up
 
 func attempt_walk(next):
-	print("player attempting walk")
-	print_snake_meta()
 	var info = grid.cell_info_at(next, head_cell().coord)
 
 	match info:
