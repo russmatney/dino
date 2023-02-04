@@ -62,7 +62,7 @@ func random_coord():
 	return all[randi() % all.size()]
 
 
-func random_empty_coord(exclude=null):
+func all_empty_coords():
 	var coords = all_cell_coords()
 	for s in snakes:
 		if is_instance_valid(s):
@@ -70,6 +70,11 @@ func random_empty_coord(exclude=null):
 				coords.erase(c)
 	for f in food:
 		coords.erase(f.coord)
+
+	return coords
+
+func random_empty_coord(exclude=null):
+	var coords = all_empty_coords()
 	if exclude:
 		coords.erase(exclude)
 	if coords:
@@ -99,6 +104,14 @@ func all_cells():
 func food_cells():
 	return food
 
+func untouched_cells():
+	var untouched = []
+	for c in all_cells():
+		if c.animation == "yellow":
+			untouched.append(c)
+	return untouched
+
+
 # dicts for cells might be better here
 func cell_info_at(coord, from=null):
 	for s in snakes:
@@ -123,12 +136,16 @@ func cell_info_at(coord, from=null):
 ###########################################################################
 # cell anims
 
+signal cell_touched(coord)
+
 func mark_touched(coord):
 	var cell = cells[coord]
 	if cell:
 		cell.animation = "blue"
 		# TODO dry up 'random frame' on animations with a util
 		cell.frame = randi() % 4
+
+	emit_signal("cell_touched", coord)
 
 func mark_cells_playing():
 	for c in all_cells():
