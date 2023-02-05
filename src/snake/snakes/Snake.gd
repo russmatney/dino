@@ -82,8 +82,10 @@ func animate_head(cell):
 	match direction:
 		Vector2.LEFT:
 			cell.flip_h = true
+			cell.rotation = 0
 		Vector2.RIGHT:
 			cell.flip_h = false
+			cell.rotation = 0
 		Vector2.UP:
 			cell.flip_h = false
 			cell.rotation = -PI/2
@@ -196,6 +198,7 @@ func walk_in_dir(dir=null):
 	if dir:
 		direction = dir
 
+	animate_head(head_cell())
 	if segment_coords:
 		# calc next coord with direction and current head
 		var next = segment_coords[0] + direction
