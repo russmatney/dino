@@ -94,8 +94,11 @@ func coord_to_position(coord):
 # cells
 
 func get_cell(coord):
-	# TODO consider returning food or snake segment (or enemy?)
-	return cells[coord]
+	if coord in cells:
+		# TODO consider returning food or snake segment (or enemy?)
+		return cells[coord]
+	else:
+		print("[WARN] no coord in grid!")
 
 func all_cells():
 	return cells.values()
@@ -138,12 +141,11 @@ func cell_info_at(coord, from=null):
 signal cell_touched(coord)
 
 func mark_touched(coord):
-	var cell = cells[coord]
+	var cell = get_cell(coord)
 	if cell:
 		cell.animation = "blue"
 		Util.set_random_frame(cell)
-
-	emit_signal("cell_touched", coord)
+		emit_signal("cell_touched", coord)
 
 func mark_cells_playing():
 	for c in all_cells():

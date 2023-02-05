@@ -1,0 +1,12 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 96
+outline_size = 4
+outline_color = Color( 0.356863, 0.462745, 0.552941, 1 )
+font_data = ExtResource( 1 )
+
+[resource]
+RichTextLabel/fonts/normal_font = SubResource( 1 )

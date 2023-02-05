@@ -175,6 +175,7 @@ func pause():
 		pause_menu.show()
 	# Navi implying DJ dep
 	print("dj.resume")
+	DJ.pause_game_song()
 	DJ.resume_menu_song()
 
 
@@ -186,12 +187,14 @@ func resume():
 	# Navi implying DJ dep
 	print("dj.pause")
 	DJ.pause_menu_song()
+	DJ.resume_game_song()
 
 
 ## death ###########################################
 
 
 func show_death_menu():
+	DJ.pause_game_song()
 	death_menu.show()
 
 
@@ -203,6 +206,7 @@ func hide_death_menu():
 
 
 func show_win_menu():
+	DJ.pause_game_song()
 	win_menu.show()
 
 

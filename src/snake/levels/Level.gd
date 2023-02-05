@@ -41,7 +41,10 @@ func _on_quest_failed(q):
 	Hood.notif(str("Quest failed: ", q.label))
 	SnakeGame.reload_current_level()
 
+var fired_once
 func _on_all_quests_complete():
-	Hood.notif("All Quests complete")
 	# TODO animation/scene transition/delay
-	SnakeGame.load_next_level()
+
+	if not fired_once:
+		fired_once = true
+		SnakeGame.load_next_level()

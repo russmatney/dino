@@ -7,8 +7,6 @@ extends Snake
 
 func _ready():
 	if not Engine.editor_hint:
-		SnakeSounds.play_song("field-stars")
-
 		Cam.ensure_camera(2, 1000.0, 1)
 		Hood.ensure_hud(hud_scene)
 
@@ -137,9 +135,12 @@ func _on_step():
 	SnakeSounds.play_sound("walk")
 
 func _on_move_head(coord):
-	._on_move_head(coord)
-	attempt_collect(coord)
-	grid.mark_touched(coord)
+	if not dead:
+		._on_move_head(coord)
+		# ... in case we lost in the middle of this?
+		if is_instance_valid(grid):
+			attempt_collect(coord)
+			grid.mark_touched(coord)
 
 ##################################################################
 # combo
@@ -149,7 +150,7 @@ signal inc_combo_juice(combo_juice)
 
 func attempt_collect(coord):
 	var c = grid.get_cell(coord)
-	if c.has_method("should_inc_juice") and c.should_inc_juice():
+	if c and c.has_method("should_inc_juice") and c.should_inc_juice():
 		highlight("[jump]juice++")
 		combo_juice += 1
 		emit_signal("inc_combo_juice", combo_juice)

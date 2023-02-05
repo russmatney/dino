@@ -96,11 +96,15 @@ func interrupt_sound(sound_map, name):
 			# stop any of these that are playing
 			if s.is_playing():
 				s.stop()
+				return s
 	else:
 		print("<DJ> [WARN] no sound for name", name)
 
 #################################################
 # music map api
+
+var playing_game_songs = []
+var paused_game_songs = []
 
 func play_song(sound_map, name):
 	if name in sound_map:
@@ -110,8 +114,25 @@ func play_song(sound_map, name):
 		# if already playing, do nothing
 		if not s.playing:
 			s.play()
+			playing_game_songs.append(s)
 	else:
 		print("<DJ> [WARN] no song for name", name)
 
 func interrupt_song(sound_map, name):
-	interrupt_sound(sound_map, name)
+	var song = interrupt_sound(sound_map, name)
+	if song:
+		playing_game_songs.erase(song)
+
+func pause_game_song():
+	paused_game_songs = []
+	for song in playing_game_songs:
+		if song.playing:
+			song.stop()
+			paused_game_songs.append([song, song.get_playback_position()])
+
+func resume_game_song():
+	# TODO store and resume at same playback_position?
+	for song_and_pos in paused_game_songs:
+		var song = song_and_pos[0]
+		var pos = song_and_pos[1]
+		song.play(pos)

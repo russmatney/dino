@@ -1,16 +1,21 @@
 tool
 extends Node
 
+var song_name = "field-stars"
+
 func _ready():
 	print("SnakeGame ready")
-	load_next_level()
+	if not Engine.editor_hint:
+		SnakeSounds.play_song(song_name)
 
 func start_game():
+	current_level_idx = -1
 	load_next_level()
 
 func all_levels_complete():
 	Hood.notif("Game complete!")
-	print("TODO Load credits?")
+	SnakeSounds.interrupt_song(song_name)
+	Navi.show_win_menu()
 
 var levels = [{
 		"label": "Level One",
@@ -37,7 +42,6 @@ func load_next_level():
 		Navi.nav_to(lvl["scene"])
 	else:
 		all_levels_complete()
-		Navi.show_win_menu()
 
 
 func reload_current_level():

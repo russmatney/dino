@@ -90,7 +90,7 @@ scroll_horizontal_enabled = false
 
 [node name="ActionsList" parent="VBoxContainer/HBoxContainer/MaxSizeContainer2/ActionsListContainer" instance=ExtResource( 5 )]
 margin_right = 134.0
-margin_bottom = 185.0
+margin_bottom = 401.0
 size_flags_horizontal = 3
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]
