@@ -539,7 +539,7 @@ run/main_scene.ghosts="res://src/ghosts/GhostsMenu.tscn"
 run/main_scene.pluggs="res://src/pluggs/factory/FactoryFloor.tscn"
 run/main_scene.harvey="res://src/harvey/menus/HarveyMenu.tscn"
 run/main_scene.tower="res://src/tower/menus/TowerMainMenu.tscn"
-run/main_scene.snake="res://src/snake/SnakeGym.tscn"
+run/main_scene.snake="res://src/snake/levels/SnakeGym.tscn"
 
 [autoload]
 
