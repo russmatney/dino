@@ -3,10 +3,13 @@ extends Node2D
 
 func _ready():
 	var _x = Hood.connect("found_player", self, "setup")
-	if Hood.player:
+	if Hood.player and is_instance_valid(Hood.player):
 		setup(Hood.player)
 
 	Quest.register_quest(self)
+
+func _exit_tree():
+	Quest.unregister(self)
 
 signal quest_complete
 # signal quest_failed

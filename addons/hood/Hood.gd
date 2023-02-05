@@ -48,6 +48,9 @@ func notif(text, opts = {}):
 	print("[HOOD] notif: ", text)
 	if not hud:
 		print("[WARN] no hud yet, can't send notification")
+	if typeof(opts) == TYPE_STRING:
+		text += opts
+		opts = {}
 	opts["msg"] = text
 	if not "ttl" in opts:
 		opts["ttl"] = 3.0

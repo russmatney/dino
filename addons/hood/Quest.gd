@@ -12,6 +12,8 @@ var active_quests = {}
 func q_label(node, opts):
 	return opts.get("label", node.name)
 
+var current_level_label = "Quest Status"
+
 ######################################################
 # register quest and updates
 
@@ -39,6 +41,12 @@ func register_quest(node, opts={}):
 
 	Hood.notif(str("Registered Quest: ", label))
 	emit_signal("quest_update")
+
+func unregister(node, opts={}):
+	var label = q_label(node, opts)
+	active_quests.erase(label)
+	emit_signal("quest_update")
+
 
 ######################################################
 # public helper

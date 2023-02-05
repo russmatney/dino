@@ -14,6 +14,8 @@ func render():
 		# set after add_child, let the setter update children
 		ch.quest = q
 
+	get_node("%Header").bbcode_text = "[center]" + Quest.current_level_label
+
 
 func _ready():
 	Quest.connect("quest_update", self, "_on_quest_update")

@@ -563,6 +563,7 @@ GunnerSounds="*res://src/gunner/GunnerSounds.gd"
 Hood="*res://addons/hood/Hood.gd"
 SnakeSounds="*res://src/snake/SnakeSounds.gd"
 Quest="*res://addons/hood/Quest.gd"
+SnakeGame="*res://src/snake/SnakeGame.gd"
 
 [display]
 
