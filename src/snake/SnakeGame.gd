@@ -8,6 +8,9 @@ func _ready():
 	if not Engine.editor_hint:
 		SnakeSounds.play_song(song_name)
 
+	if OS.has_feature("snake"):
+		Navi.set_main_menu("res://src/snake/menus/SnakeMainMenu.tscn")
+
 func start_game():
 	current_level_idx = -1
 	load_next_level()
@@ -23,6 +26,9 @@ var levels = [{
 	}, {
 		"label": "Level Two",
 		"scene": preload("res://src/snake/levels/Two.tscn"),
+	}, {
+		"label": "Level Three",
+		"scene": preload("res://src/snake/levels/Three.tscn"),
 	}]
 
 var current_level_idx

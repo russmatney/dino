@@ -200,7 +200,6 @@ func leap_towards_food(next, f):
 					if next_cell == target_cell:
 						break
 
-
 	pickup_food(f)
 	walk_towards(f.coord, false)
 

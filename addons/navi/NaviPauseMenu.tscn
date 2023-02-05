@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://addons/MaxSizeContainer/max_size_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/navi/NaviPauseMenu.gd" type="Script" id=2]
 [ext_resource path="res://addons/navi/ui/MenuButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/trolley/TrolleyActionsList.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -20,6 +18,7 @@ font_data = ExtResource( 6 )
 
 [node name="PauseMenu" type="PopupPanel"]
 pause_mode = 2
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
@@ -48,8 +47,8 @@ size_flags_vertical = 3
 alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 124.0
-margin_right = 249.0
+margin_left = 193.0
+margin_right = 318.0
 margin_bottom = 196.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/CenterContainer"]
@@ -67,31 +66,6 @@ margin_top = 22.0
 margin_right = 125.0
 margin_bottom = 40.0
 text = "Resume"
-
-[node name="MaxSizeContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 253.0
-margin_right = 387.0
-margin_bottom = 196.0
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
-script = ExtResource( 1 )
-max_size = Vector2( 250, -1 )
-
-[node name="ActionsListContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/MaxSizeContainer2"]
-unique_name_in_owner = true
-margin_right = 134.0
-margin_bottom = 196.0
-size_flags_horizontal = 7
-size_flags_vertical = 3
-follow_focus = true
-scroll_horizontal_enabled = false
-
-[node name="ActionsList" parent="VBoxContainer/HBoxContainer/MaxSizeContainer2/ActionsListContainer" instance=ExtResource( 5 )]
-margin_right = 134.0
-margin_bottom = 401.0
-size_flags_horizontal = 3
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/ReturnToMain" to="." method="_on_ReturnToMain_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
