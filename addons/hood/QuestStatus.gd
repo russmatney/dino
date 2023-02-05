@@ -8,7 +8,6 @@ func render():
 	for c in get_node("%QuestList").get_children():
 		c.free()
 
-	print("rendering quests: ", quests)
 	for q in quests:
 		var ch = checkbox_scene.instance()
 		get_node("%QuestList").add_child(ch)

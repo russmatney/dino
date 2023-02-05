@@ -39,7 +39,6 @@ func _ready():
 
 func setup():
 	init_grid()
-	init_snake()
 	init_food()
 	for _i in range(enemy_count):
 		add_enemy()
@@ -189,20 +188,10 @@ func init_grid(anim = "yellow"):
 	# deform_all_cells()
 
 ###########################################################################
-# init snake
+# init player
 
 var snakes = []
 onready var player_scene = preload("res://src/snake/snakes/Player.tscn")
-
-func init_snake():
-	if snakes:
-		for s in snakes:
-			if is_instance_valid(s):
-				s.free()
-	if get_node_or_null("Snake"):
-		$Snake.free()
-
-	add_snake()
 
 func add_snake():
 	var initial_cell = random_coord()
@@ -218,6 +207,7 @@ func add_snake():
 onready var enemy_scene = preload("res://src/snake/snakes/Enemy.tscn")
 
 func add_enemy():
+	print("adding enemy to grid")
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
 	var e = enemy_scene.instance()
