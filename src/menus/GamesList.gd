@@ -32,9 +32,11 @@ var menu_scenes = [
 	},
 ]
 
+export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
 
 func _ready():
 	for ms in menu_scenes:
+		ms.merge({"button_scene": button_scene})
 		add_menu_item(ms)
 
 	if Engine.editor_hint:

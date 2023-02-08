@@ -2,7 +2,7 @@ tool
 extends VBoxContainer
 class_name NaviButtonList
 
-export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
+export(PackedScene) var default_button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
 
 # set a local member for the Navi autoload, to ease testing
 # TODO consider loading/falling back on a load instead?
@@ -20,8 +20,8 @@ func pw(msg: String, item = {}):
 
 
 func _get_configuration_warning():
-	if not button_scene:
-		return "No button_scene set"
+	if not default_button_scene:
+		return "No default_button_scene set"
 	return ""
 
 
@@ -88,9 +88,14 @@ func connect_pressed_to_action(button, item):
 
 
 func add_menu_item(item):
+	# read texts from buttons in scene
 	var texts = []
 	for but in get_buttons():
 		texts.append(but.text)
+
+	var button_scene = default_button_scene
+	if "button_scene" in item:
+		button_scene = item["button_scene"]
 
 	if not button_scene:
 		pw("No button_scene: ", button_scene)
@@ -99,7 +104,6 @@ func add_menu_item(item):
 	var button = button_scene.instance()
 	var label = item.get("label", "Fallback Label")
 	if label in texts:
-		# TODO some better logging lib
 		pw("Refusing to add button with existing label.", item)
 		button.free()
 		return
