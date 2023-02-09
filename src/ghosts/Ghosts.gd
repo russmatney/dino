@@ -64,7 +64,7 @@ func restart_game():
 
 
 func load_next_room(room_path):
-	if room_path and not File.new().file_exists(room_path):
+	if room_path and not FileAccess.file_exists(room_path):
 		print("[WARN] Ghosts next room does not exist! ", room_path)
 		return
 

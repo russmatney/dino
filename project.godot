@@ -26,8 +26,8 @@ run/main_scene.snake="res://src/snake/menus/SnakeMainMenu.tscn"
 
 Navi="*res://addons/navi/Navi.gd"
 DJ="*res://addons/dj/DJ.gd"
-Clawe="*res://src/clawe/Clawe.gd"
-__InkRuntime="*res://addons/inkgd/runtime/static/ink_runtime.gd"
+Clawe="res://src/clawe/Clawe.gd"
+__InkRuntime="res://addons/inkgd/runtime/static/ink_runtime.gd"
 Blocks="*res://src/runner/gravity/Blocks.gd"
 Kink="*res://addons/kink/Kink.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
@@ -57,7 +57,7 @@ window/stretch/aspect.runner="keep"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/kink/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
+enabled=PackedStringArray("res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/kink/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
 
 [global]
 

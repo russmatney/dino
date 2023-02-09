@@ -11,7 +11,7 @@ func _ready():
 	if label:
 		set_label(label)
 
-	if destination and not File.new().file_exists(destination):
+	if not destination == null and not FileAccess.file_exists(destination):
 		print("[WARN] Ghosts door destination does not exist! ", destination)
 
 

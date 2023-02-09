@@ -25,7 +25,7 @@ func build_actions_dict():
 		var keys = []
 		for evt in evts:
 			if evt is InputEventKey:
-				keys.append(OS.get_keycode_string(evt.scancode))
+				keys.append(OS.get_keycode_string(evt.keycode))
 
 		actions[ac] = {"events": evts, "setting": setting, "keys": keys, "action": ac}
 

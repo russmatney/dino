@@ -21,12 +21,12 @@ func prn(msg, msg2 = null, msg3 = null, msg4 = null, msg5 = null):
 ######################################################################
 # ready
 
-var ready = false
+var scene_ready = false
 
 
 func _ready():
 	if Engine.is_editor_hint():
-		ready = true
+		scene_ready = true
 
 
 ######################################################################
@@ -39,7 +39,7 @@ func _ready():
 
 
 func do_image_regen(_val = null):
-	if ready or ready_override:
+	if scene_ready or ready_override:
 		print("-------------------")
 		regenerate_image()
 
@@ -63,7 +63,7 @@ func regenerate_image():
 
 
 func do_clear(_v):
-	if ready:
+	if scene_ready:
 		prn("Clear")
 		var node = get_node_or_null(room_node_path)
 		if node:
@@ -140,7 +140,7 @@ func default_groups():
 
 
 func do_persist_tilemap(_val = null):
-	if ready:
+	if scene_ready:
 		prn(str("persisting tilemap: ", Time.get_time_string_from_system()))
 		persist_tilemap_to_disk()
 
@@ -160,8 +160,8 @@ func persist_tilemap_to_disk():
 	if not node:
 		push_error(str("No node found for node_path: ", persist_node_path))
 
-	if not node.get_children():
-		prn(str(persist_node_path + " has no children, skipping persist"))
+	if not node.get_children().size():
+		prn(str(persist_node_path, " has no children, skipping persist"))
 		return
 
 	for c in node.get_children():
@@ -176,7 +176,7 @@ func persist_tilemap_to_disk():
 		elif version_number:
 			path = path + str(Time.get_unix_time_from_system())
 		path = path + ".tscn"
-		var error = ResourceSaver.save(path, scene)
+		var error = ResourceSaver.save(scene, path)
 		if error != OK:
 			push_error("Error while saving Map")
 			prn(str("E: ", error))

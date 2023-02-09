@@ -29,8 +29,7 @@ func pp(msg):
 
 
 func _ready():
-	var f = File.new()
-	if not f.file_exists(main_menu_path):
+	if not FileAccessd.file_exists(main_menu_path):
 		pp(str("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op."))
 
 	process_mode = PROCESS_MODE_ALWAYS
@@ -120,8 +119,7 @@ var main_menu_path = "res://src/menus/DinoMenu.tscn"
 
 
 func set_main_menu(path):
-	var f = File.new()
-	if f.file_exists(path):
+	if FileAccess.file_exists(path):
 		pp(str("Updating main_menu_path: ", path))
 		main_menu_path = path
 	else:
@@ -129,8 +127,7 @@ func set_main_menu(path):
 
 
 func nav_to_main_menu():
-	var f = File.new()
-	if f.file_exists(main_menu_path):
+	if FileAccess.file_exists(main_menu_path):
 		nav_to(main_menu_path)
 	else:
 		pp(str("No scene at path: ", main_menu_path, ", can't navigate."))
@@ -142,8 +139,7 @@ var pause_menu_path = "res://addons/navi/NaviPauseMenu.tscn"
 
 
 func set_pause_menu(path):
-	var f = File.new()
-	if f.file_exists(path):
+	if FileAccess.file_exists(path):
 		pp(str("Updating pause_menu_path: ", path))
 		pause_menu_path = path
 

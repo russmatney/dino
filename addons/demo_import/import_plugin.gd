@@ -37,7 +37,7 @@ func _get_preset_name(preset):
 			return "Unknown"
 
 
-func _get_import_options(preset):
+func _get_import_options(preset, idx):
 	match preset:
 		Presets.DEFAULT:
 			return [
@@ -53,7 +53,7 @@ func _get_import_options(preset):
 			return []
 
 
-func _get_option_visibility(option, options):
+func _get_option_visibility(path, option_name, options):
 	return true
 
 
@@ -61,14 +61,9 @@ func _get_option_visibility(option, options):
 
 
 func import(source_file, save_path, options, r_platform_variants, r_gen_files):
-	var file = File.new()
-	var err = file.open(source_file, File.READ)
-	if err != OK:
-		return err
-
+	var file = FileAccess.open(source_file, FileAccess.READ)
 	var line = file.get_line()
-
-	file.close()
+	file = null
 
 	var channels = line.split(",")
 	if channels.size() != 3:
@@ -83,4 +78,4 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color
 
-	return ResourceSaver.save("%s.%s" % [save_path, _get_save_extension()], material)
+	return ResourceSaver.save(material, "%s.%s" % [save_path, _get_save_extension()])

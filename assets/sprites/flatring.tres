@@ -1,27 +1,39 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=2]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b5p6xby5wjoir"]
 
-[ext_resource path="res://assets/sprites/flatring_sheet.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://du30s73ubsqo" path="res://assets/sprites/flatring_sheet.png" id="1"]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="2"]
+atlas = ExtResource("1")
+region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("1")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("1")
+region = Rect2(64, 0, 32, 32)
 
 [resource]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("1")
+}, {
+"duration": 1.0,
+"texture": SubResource("2")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}],
 "loop": false,
-"name": "ripple",
+"name": &"ripple",
 "speed": 15.0
-} ]
+}]

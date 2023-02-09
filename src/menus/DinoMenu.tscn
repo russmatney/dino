@@ -1,58 +1,39 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://c1oqegnheeg6c"]
 
-[ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/menus/DinoMenu.gd" type="Script" id=2]
-[ext_resource path="res://src/menus/GamesList.gd" type="Script" id=3]
-[ext_resource path="res://src/menus/GymsList.gd" type="Script" id=4]
-[ext_resource path="res://src/menus/OtherList.gd" type="Script" id=5]
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=6]
-
-[sub_resource type="FontFile" id=1]
-resource_local_to_scene = true
-size = 96
-outline_size = 4
-outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
-spacing_top = 10
-font_data = ExtResource( 6 )
+[ext_resource type="PackedScene" path="res://addons/navi/ui/HeroLabel.tscn" id="1"]
+[ext_resource type="Script" path="res://src/menus/DinoMenu.gd" id="2"]
+[ext_resource type="Script" path="res://src/menus/GamesList.gd" id="3"]
+[ext_resource type="Script" path="res://src/menus/GymsList.gd" id="4"]
+[ext_resource type="Script" path="res://src/menus/OtherList.gd" id="5"]
 
 [node name="DinoMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 512.0
-offset_bottom = 107.0
-custom_fonts/normal_font = SubResource( 1 )
-text = "[center]Dino[/center]"
+[node name="HeroLabel" parent="VBoxContainer" instance=ExtResource("1")]
+layout_mode = 2
 text = "Dino"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-offset_top = 111.0
-offset_right = 512.0
-offset_bottom = 261.0
+layout_mode = 2
 alignment = 1
 
 [node name="GamesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-offset_left = 75.0
-offset_right = 178.0
-offset_bottom = 150.0
-script = ExtResource( 3 )
+layout_mode = 2
+script = ExtResource("3")
 
 [node name="GymsList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-offset_left = 182.0
-offset_right = 329.0
-offset_bottom = 150.0
-script = ExtResource( 4 )
+layout_mode = 2
+script = ExtResource("4")
 
 [node name="OtherList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-offset_left = 333.0
-offset_right = 436.0
-offset_bottom = 150.0
-script = ExtResource( 5 )
+layout_mode = 2
+script = ExtResource("5")
