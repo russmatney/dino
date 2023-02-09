@@ -99,7 +99,7 @@ func contains_val(normed):
 # TODO consider selecting a group based checked all group bounds per coord instead
 # TODO unit tests
 static func sort_by_key(a, b):
-	if not a.upper_bound or a.lower_bound:
+	if a.upper_bound == null or not a.lower_bound == null:
 		return false
 	if a.upper_bound <= Util._or(b.upper_bound, 1.1):
 		return true

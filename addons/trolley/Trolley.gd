@@ -32,7 +32,10 @@ func build_actions_dict():
 
 class ActionsSorter:
 	static func sort_alphabetical(a, b):
-		if a["action"] <= b["action"]:
+		if "action" in a and "action" in b:
+			if a["action"] <= b["action"]:
+				return true
+		elif "action" in b:
 			return true
 		return false
 
@@ -44,7 +47,8 @@ func actions_list(ignore_prefix = "", only_prefix = ""):
 		build_actions_dict()
 
 	var actions_list = actions.values()
-	actions_list.sort_custom(Callable(ActionsSorter,"sort_alphabetical"))
+	# TODO this prints bad-comparision function error?
+	# actions_list.sort_custom(Callable(ActionsSorter, "sort_alphabetical"))
 
 	var axs = []
 	for ax in actions_list:

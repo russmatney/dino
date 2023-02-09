@@ -20,7 +20,7 @@ func pw(msg: String, item = {}):
 
 
 func _get_configuration_warnings():
-	if default_button_scene is null:
+	if default_button_scene == null:
 		return ["No default_button_scene set"]
 	return []
 
