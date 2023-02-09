@@ -29,7 +29,7 @@ func to_anim(c):
 func _ready():
 	anim.animation = to_anim(color)
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 

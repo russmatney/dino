@@ -179,7 +179,7 @@ func process(delta):
 	walk_in_t(delta)
 
 func _process(delta):
-	if not Engine.editor_hint and not dead:
+	if not Engine.is_editor_hint() and not dead:
 		process(delta)
 
 ###########################################################################

@@ -17,7 +17,7 @@ func _ready():
 
 	speed_factor = (randi() % speed_range) - speed_range
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 
@@ -42,7 +42,7 @@ var flying = false
 
 
 func _physics_process(delta):
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		velocity.y += gravity * delta
 
 		if stunned:

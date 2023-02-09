@@ -6,7 +6,7 @@ extends Snake
 # ready
 
 func _ready():
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		Cam.ensure_camera(2, 1000.0, 1)
 		Hood.ensure_hud(hud_scene)
 

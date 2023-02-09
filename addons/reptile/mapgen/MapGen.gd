@@ -25,7 +25,7 @@ var ready = false
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		ready = true
 
 
@@ -153,7 +153,7 @@ func do_persist_tilemap(_val = null):
 
 
 func persist_tilemap_to_disk():
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		return
 
 	var node = get_node(persist_node_path)

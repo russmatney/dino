@@ -22,7 +22,7 @@ func disable_collision():
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 	shader_loop()

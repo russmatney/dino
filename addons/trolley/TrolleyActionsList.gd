@@ -7,7 +7,7 @@ class_name TrolleyActionsList
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 	build_actions_list()

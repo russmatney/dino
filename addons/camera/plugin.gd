@@ -3,8 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	print("<Camera3D>")
+	print("<Cam>")
 
 
 func _exit_tree():
-	print("</Camera3D>")
+	print("</Cam>")

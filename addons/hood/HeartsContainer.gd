@@ -6,7 +6,7 @@ var heart_icons
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 	call_deferred("find_heart_icons")

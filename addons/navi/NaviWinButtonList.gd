@@ -35,5 +35,5 @@ func _ready():
 	for def in button_defs:
 		add_menu_item(def)
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()

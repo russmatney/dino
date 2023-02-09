@@ -7,7 +7,7 @@ var body_scene = preload("res://src/gunner/hud/PickupBody.tscn")
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		update_pickups(["hat", "body", "hat"])
 
 

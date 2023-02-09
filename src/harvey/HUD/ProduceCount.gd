@@ -14,6 +14,6 @@ func set_produce(type):
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		set_count(5)
 		set_produce("carrot")

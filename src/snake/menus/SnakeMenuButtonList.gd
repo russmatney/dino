@@ -18,5 +18,5 @@ func _ready():
 	for ms in menu_scenes:
 		add_menu_item(ms)
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()

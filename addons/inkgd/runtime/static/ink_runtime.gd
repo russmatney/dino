@@ -155,7 +155,7 @@ func _handle_generic_exception(
 	if OS.is_debug_build():
 		if should_pause_execution:
 			assert(false) #,message)
-		elif Engine.editor_hint:
+		elif Engine.is_editor_hint():
 			printerr(message)
 			if stack_trace.size() > 0:
 				printerr("Stack trace:")

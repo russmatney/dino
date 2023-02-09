@@ -64,7 +64,7 @@ func _ready():
 
 	player_spawner = get_node_or_null("%PlayerSpawner")
 
-	if not player and player_spawner and not Engine.editor_hint:
+	if not player and player_spawner and not Engine.is_editor_hint():
 		player = Tower.spawn_player(player_spawner.global_position)
 
 
@@ -165,7 +165,7 @@ func do_regen_all_rooms(_v):
 
 
 func regen_all_rooms():
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		Hood.notif("generating new rooms")
 	for t in get_tree().get_nodes_in_group("targets"):
 		t.queue_free()

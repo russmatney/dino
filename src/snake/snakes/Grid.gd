@@ -12,19 +12,19 @@ extends Node2D
 
 func set_width(v):
 	width = v
-	if Engine.editor_hint and ready:
+	if Engine.is_editor_hint() and ready:
 		init_grid()
 
 
 func set_height(v):
 	height = v
-	if Engine.editor_hint and ready:
+	if Engine.is_editor_hint() and ready:
 		init_grid()
 
 
 func set_cell_size(v):
 	cell_size = v
-	if Engine.editor_hint and ready:
+	if Engine.is_editor_hint() and ready:
 		init_grid()
 
 

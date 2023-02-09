@@ -843,7 +843,7 @@ func _push_null_story_error() -> void:
 
 
 func _push_story_error(message: String, type: int) -> void:
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		match type:
 			ErrorType.ERROR:
 				printerr(message)
@@ -857,7 +857,7 @@ func _push_story_error(message: String, type: int) -> void:
 				push_warning(message)
 
 func _push_error(message: String):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		printerr(message)
 
 		var i = 1

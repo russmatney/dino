@@ -39,5 +39,5 @@ func _ready():
 		ms.merge({"button_scene": button_scene})
 		add_menu_item(ms)
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()

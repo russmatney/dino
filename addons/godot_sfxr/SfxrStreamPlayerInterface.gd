@@ -91,7 +91,7 @@ static func object_get(object: Node, property: String):
 
 
 static func object_set(object: Node, property: String, value) -> bool:
-    var auto_build = Engine.editor_hint and object.is_inside_tree()
+    var auto_build = Engine.is_editor_hint() and object.is_inside_tree()
     if property in PROPERTY_MAP:
         object[PROPERTY_MAP[property]["name"]] = value
         if auto_build:

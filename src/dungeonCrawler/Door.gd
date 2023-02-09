@@ -69,7 +69,7 @@ func jostle_door(_body = null):
 
 
 func _ready():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 	# make sure any setup code is called so we're in the expected state

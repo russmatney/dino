@@ -30,7 +30,7 @@ func _get_configuration_warnings():
 
 func _ready():
 	# TODO assert checked nav paths?
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 

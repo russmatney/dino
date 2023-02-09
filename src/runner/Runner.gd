@@ -23,7 +23,7 @@ func _ready():
 	# should we wait to add the player after the rooms are ready?
 	add_rooms_to_scene(active_room_count)
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 

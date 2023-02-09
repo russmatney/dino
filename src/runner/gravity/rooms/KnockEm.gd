@@ -11,7 +11,7 @@ func _ready():
 
 	setup()
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 

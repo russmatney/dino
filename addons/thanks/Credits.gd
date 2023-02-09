@@ -48,7 +48,7 @@ func _ready():
 		added_lines.append(new_line)
 		credits_lines_container.add_child(new_line)
 
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		request_ready()
 
 	# TODO opt-out if desired

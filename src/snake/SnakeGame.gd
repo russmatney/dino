@@ -5,7 +5,7 @@ var song_name = "field-stars"
 
 func _ready():
 	print("SnakeGame ready")
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		SnakeSounds.play_song(song_name)
 
 	if OS.has_feature("snake"):
