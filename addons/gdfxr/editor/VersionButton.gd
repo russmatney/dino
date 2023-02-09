@@ -1,9 +1,9 @@
-tool
+@tool
 extends LinkButton
 
-export var website: String
+@export var website: String
 
-var plugin: EditorPlugin setget set_plugin
+var plugin: EditorPlugin : set = set_plugin
 
 
 func set_plugin(v: EditorPlugin) -> void:

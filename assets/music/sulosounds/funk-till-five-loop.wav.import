@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/funk-till-five-loop.wav-476712df0514b5ac955f172da9ac7422.sample"
+type="AudioStreamWAV"
+uid="uid://cedlxfl2peg2l"
+path="res://.godot/imported/funk-till-five-loop.wav-476712df0514b5ac955f172da9ac7422.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/funk-till-five-loop.wav"
-dest_files=[ "res://.import/funk-till-five-loop.wav-476712df0514b5ac955f172da9ac7422.sample" ]
+dest_files=["res://.godot/imported/funk-till-five-loop.wav-476712df0514b5ac955f172da9ac7422.sample"]
 
 [params]
 

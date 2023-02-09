@@ -13,7 +13,7 @@ using System.Diagnostics;
 
 [Tool]
 
-public class InkPlayer : Node
+public partial class InkPlayer : Node
 {
 	#region Signals
 	[Signal] public delegate void exception_raised(string message, Godot.Collections.Array<string> stack_trace);
@@ -672,7 +672,7 @@ public class InkPlayer : Node
 		}
 
 		file.Seek(0);
-		if (file.GetLen() > 0) {
+		if (file.GetLength() > 0) {
 			story.state.LoadJson(file.GetAsText());
 		}
 	}
@@ -696,7 +696,7 @@ public class InkPlayer : Node
 				return inkBridger.MakeGDInkList(inkList);
 			}
 
-			if (variable is Ink.Runtime.Path path)
+			if (variable is Ink.Runtime.Path3D path)
 			{
 				return inkBridger.MakeGDInkPath(path);
 			}
@@ -776,7 +776,7 @@ public class InkPlayer : Node
 		try
 		{
 			var instanceId = (int)gd_object.Call("get_instance_id");
-			var funcRef = GD.FuncRef(gd_object, method_name);
+			var funcRef = GD.Callable(gd_object, method_name);
 
 			var functionReference = new FunctionReference(
 				variable_name,
@@ -821,7 +821,7 @@ public class InkPlayer : Node
 
 				foreach(FunctionReference reference in validReferences) {
 					story.RemoveVariableObserver(reference.observer, specific_variable_name);
-					references.Remove(reference);
+					references.RemoveAt(reference);
 				}
 			}
 		}
@@ -850,7 +850,7 @@ public class InkPlayer : Node
 
 				foreach(FunctionReference reference in validReferences) {
 					story.RemoveVariableObserver(reference.observer);
-					kv.Value.Remove(reference);
+					kv.Value.RemoveAt(reference);
 				}
 			}
 		}
@@ -871,7 +871,7 @@ public class InkPlayer : Node
 		try
 		{
 			story.RemoveVariableObserver(null, specific_variable_name);
-			observers.Remove(specific_variable_name);
+			observers.RemoveAt(specific_variable_name);
 		}
 		catch (Exception e)
 		{

@@ -6,532 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Node",
-"class": "ActiveQuest",
-"language": "GDScript",
-"path": "res://addons/hood/ActiveQuest.gd"
-}, {
-"base": "Object",
-"class": "CoordCtx",
-"language": "GDScript",
-"path": "res://addons/reptile/CoordCtx.gd"
-}, {
-"base": "Control",
-"class": "Credits",
-"language": "GDScript",
-"path": "res://addons/thanks/Credits.gd"
-}, {
-"base": "Reference",
-"class": "GutHookScript",
-"language": "GDScript",
-"path": "res://addons/gut/hook_script.gd"
-}, {
-"base": "Node",
-"class": "GutTest",
-"language": "GDScript",
-"path": "res://addons/gut/test.gd"
-}, {
-"base": "HarveyPlayer",
-"class": "HarveyBot",
-"language": "GDScript",
-"path": "res://src/harvey/bots/HarveyBot.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "HarveyPlayer",
-"language": "GDScript",
-"path": "res://src/harvey/player/HarveyPlayer.gd"
-}, {
-"base": "Reference",
-"class": "InkBase",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/common/ink_base.gd"
-}, {
-"base": "InkValue",
-"class": "InkBoolValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/bool_value.gd"
-}, {
-"base": "Reference",
-"class": "InkCSharpValidator",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/ink_csharp_validator.gd"
-}, {
-"base": "InkBase",
-"class": "InkCallStack",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/callstack.gd"
-}, {
-"base": "InkObject",
-"class": "InkChoice",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/choices/choice.gd"
-}, {
-"base": "InkObject",
-"class": "InkChoicePoint",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/choices/choice_point.gd"
-}, {
-"base": "InkExecutionConfiguration",
-"class": "InkCompilationConfiguration",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/executors/structures/ink_compilation_configuration.gd"
-}, {
-"base": "InkExternalCommandExecutor",
-"class": "InkCompiler",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/executors/ink_compiler.gd"
-}, {
-"base": "Reference",
-"class": "InkConfiguration",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/ink_configuration.gd"
-}, {
-"base": "InkExternalCommandExecutor",
-"class": "InkConfigurationTester",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/executors/ink_configuration_tester.gd"
-}, {
-"base": "InkObject",
-"class": "InkContainer",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/container.gd"
-}, {
-"base": "InkObject",
-"class": "InkControlCommand",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/control_command.gd"
-}, {
-"base": "InkBase",
-"class": "InkDebugMetadata",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/debug_metadata.gd"
-}, {
-"base": "InkObject",
-"class": "InkDivert",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/divert.gd"
-}, {
-"base": "InkValue",
-"class": "InkDivertTargetValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/divert_target_value.gd"
-}, {
-"base": "Reference",
-"class": "InkEditorInterface",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/ink_editor_interface.gd"
-}, {
-"base": "Reference",
-"class": "InkExecutionConfiguration",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/executors/structures/ink_execution_configuration.gd"
-}, {
-"base": "Reference",
-"class": "InkExecutionResult",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/executors/structures/ink_execution_result.gd"
-}, {
-"base": "Reference",
-"class": "InkExternalCommandExecutor",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/common/executors/ink_external_command_executor.gd"
-}, {
-"base": "InkValue",
-"class": "InkFloatValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/float_value.gd"
-}, {
-"base": "InkBase",
-"class": "InkFlow",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/flow.gd"
-}, {
-"base": "Reference",
-"class": "InkFunctionResult",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/function_result.gd"
-}, {
-"base": "InkObject",
-"class": "InkGlue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/glue.gd"
-}, {
-"base": "InkValue",
-"class": "InkIntValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/int_value.gd"
-}, {
-"base": "EditorImportPlugin",
-"class": "InkJsonImportPlugin",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/import_plugins/ink_json_import_plugin.gd"
-}, {
-"base": "Reference",
-"class": "InkKeyValuePair",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/key_value_pair.gd"
-}, {
-"base": "InkObject",
-"class": "InkList",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/lists/ink_list.gd"
-}, {
-"base": "InkObject",
-"class": "InkListDefinition",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/lists/list_definition.gd"
-}, {
-"base": "InkObject",
-"class": "InkListDefinitionsOrigin",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/lists/list_definitions_origin.gd"
-}, {
-"base": "InkObject",
-"class": "InkListItem",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/lists/structs/ink_list_item.gd"
-}, {
-"base": "InkValue",
-"class": "InkListValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/list_value.gd"
-}, {
-"base": "InkObject",
-"class": "InkNativeFunctionCall",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/native_function_call.gd"
-}, {
-"base": "InkBase",
-"class": "InkObject",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/common/ink_object.gd"
-}, {
-"base": "InkBase",
-"class": "InkPath",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/ink_path.gd"
-}, {
-"base": "Node",
-"class": "InkPlayer",
-"language": "GDScript",
-"path": "res://addons/inkgd/ink_player.gd"
-}, {
-"base": "Reference",
-"class": "InkPlayerFactory",
-"language": "GDScript",
-"path": "res://addons/inkgd/ink_player_factory.gd"
-}, {
-"base": "InkBase",
-"class": "InkPointer",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/structs/pointer.gd"
-}, {
-"base": "InkBase",
-"class": "InkProfiler",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/profiler.gd"
-}, {
-"base": "Resource",
-"class": "InkResource",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/import_plugins/ink_resource.gd"
-}, {
-"base": "InkBase",
-"class": "InkSearchResult",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/search_result.gd"
-}, {
-"base": "InkBase",
-"class": "InkSimpleJSON",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/simple_json.gd"
-}, {
-"base": "EditorImportPlugin",
-"class": "InkSourceImportPlugin",
-"language": "GDScript",
-"path": "res://addons/inkgd/editor/import_plugins/ink_source_import_plugin.gd"
-}, {
-"base": "Reference",
-"class": "InkStateElement",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/state_element.gd"
-}, {
-"base": "InkBase",
-"class": "InkStatePatch",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/state_patch.gd"
-}, {
-"base": "InkBase",
-"class": "InkStaticJSON",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/static/json.gd"
-}, {
-"base": "Reference",
-"class": "InkStaticNativeFunctionCall",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/static/native_function_call.gd"
-}, {
-"base": "Reference",
-"class": "InkStopWatch",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/stopwatch.gd"
-}, {
-"base": "InkObject",
-"class": "InkStory",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/story.gd"
-}, {
-"base": "InkBase",
-"class": "InkStoryState",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/story_state.gd"
-}, {
-"base": "Reference",
-"class": "InkStringSet",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/string_set.gd"
-}, {
-"base": "InkValue",
-"class": "InkStringValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/string_value.gd"
-}, {
-"base": "Reference",
-"class": "InkStringWriter",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/string_writer.gd"
-}, {
-"base": "InkObject",
-"class": "InkTag",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/tag.gd"
-}, {
-"base": "Reference",
-"class": "InkTryGetResult",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/try_get_result.gd"
-}, {
-"base": "Reference",
-"class": "InkUtils",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/utils.gd"
-}, {
-"base": "InkObject",
-"class": "InkValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/value.gd"
-}, {
-"base": "InkObject",
-"class": "InkVariableAssignment",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/variable_assignment.gd"
-}, {
-"base": "InkValue",
-"class": "InkVariablePointerValue",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/values/variable_pointer_value.gd"
-}, {
-"base": "InkObject",
-"class": "InkVariableReference",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/variable_reference.gd"
-}, {
-"base": "InkBase",
-"class": "InkVariablesState",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/variables_state.gd"
-}, {
-"base": "InkObject",
-"class": "InkVoid",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/content/void.gd"
-}, {
-"base": "Node",
-"class": "Machine",
-"language": "GDScript",
-"path": "res://addons/beehive/machine.gd"
-}, {
-"base": "Node2D",
-"class": "MapGen",
-"language": "GDScript",
-"path": "res://addons/reptile/mapgen/MapGen.gd"
-}, {
-"base": "VBoxContainer",
-"class": "NaviButtonList",
-"language": "GDScript",
-"path": "res://addons/navi/NaviButtonList.gd"
-}, {
-"base": "PopupPanel",
-"class": "NaviPauseMenu",
-"language": "GDScript",
-"path": "res://addons/navi/NaviPauseMenu.gd"
-}, {
-"base": "KinematicBody2D",
-"class": "Player",
-"language": "GDScript",
-"path": "res://src/dungeonCrawler/player/Player.gd"
-}, {
-"base": "Node",
-"class": "ReptileGroup",
-"language": "GDScript",
-"path": "res://addons/reptile/ReptileGroup.gd"
-}, {
-"base": "Node2D",
-"class": "ReptileRoom",
-"language": "GDScript",
-"path": "res://addons/reptile/ReptileRoom.gd"
-}, {
-"base": "Node2D",
-"class": "RunnerRoom",
-"language": "GDScript",
-"path": "res://src/runner/RunnerRoom.gd"
-}, {
-"base": "Reference",
-"class": "SfxrGenerator",
-"language": "GDScript",
-"path": "res://addons/godot_sfxr/SfxrGenerator.gd"
-}, {
-"base": "Object",
-"class": "SfxrGlobals",
-"language": "GDScript",
-"path": "res://addons/godot_sfxr/SfxrGlobals.gd"
-}, {
-"base": "Object",
-"class": "SfxrStreamPlayerInterface",
-"language": "GDScript",
-"path": "res://addons/godot_sfxr/SfxrStreamPlayerInterface.gd"
-}, {
-"base": "Node2D",
-"class": "Snake",
-"language": "GDScript",
-"path": "res://src/snake/snakes/Snake.gd"
-}, {
-"base": "AnimatedSprite",
-"class": "SnakeCell",
-"language": "GDScript",
-"path": "res://src/snake/snakes/Cell.gd"
-}, {
-"base": "Node",
-"class": "State",
-"language": "GDScript",
-"path": "res://addons/beehive/state.gd"
-}, {
-"base": "Reference",
-"class": "StoryError",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/story_error.gd"
-}, {
-"base": "Reference",
-"class": "StoryErrorMetadata",
-"language": "GDScript",
-"path": "res://addons/inkgd/runtime/extra/story_error_metadata.gd"
-}, {
-"base": "ReptileRoom",
-"class": "TowerRoom",
-"language": "GDScript",
-"path": "res://src/tower/rooms/TowerRoom.gd"
-}, {
-"base": "VBoxContainer",
-"class": "TrolleyActionsList",
-"language": "GDScript",
-"path": "res://addons/trolley/TrolleyActionsList.gd"
-} ]
-_global_script_class_icons={
-"ActiveQuest": "",
-"CoordCtx": "",
-"Credits": "",
-"GutHookScript": "",
-"GutTest": "",
-"HarveyBot": "",
-"HarveyPlayer": "",
-"InkBase": "",
-"InkBoolValue": "",
-"InkCSharpValidator": "",
-"InkCallStack": "",
-"InkChoice": "",
-"InkChoicePoint": "",
-"InkCompilationConfiguration": "",
-"InkCompiler": "",
-"InkConfiguration": "",
-"InkConfigurationTester": "",
-"InkContainer": "",
-"InkControlCommand": "",
-"InkDebugMetadata": "",
-"InkDivert": "",
-"InkDivertTargetValue": "",
-"InkEditorInterface": "",
-"InkExecutionConfiguration": "",
-"InkExecutionResult": "",
-"InkExternalCommandExecutor": "",
-"InkFloatValue": "",
-"InkFlow": "",
-"InkFunctionResult": "",
-"InkGlue": "",
-"InkIntValue": "",
-"InkJsonImportPlugin": "",
-"InkKeyValuePair": "",
-"InkList": "",
-"InkListDefinition": "",
-"InkListDefinitionsOrigin": "",
-"InkListItem": "",
-"InkListValue": "",
-"InkNativeFunctionCall": "",
-"InkObject": "",
-"InkPath": "",
-"InkPlayer": "",
-"InkPlayerFactory": "",
-"InkPointer": "",
-"InkProfiler": "",
-"InkResource": "",
-"InkSearchResult": "",
-"InkSimpleJSON": "",
-"InkSourceImportPlugin": "",
-"InkStateElement": "",
-"InkStatePatch": "",
-"InkStaticJSON": "",
-"InkStaticNativeFunctionCall": "",
-"InkStopWatch": "",
-"InkStory": "",
-"InkStoryState": "",
-"InkStringSet": "",
-"InkStringValue": "",
-"InkStringWriter": "",
-"InkTag": "",
-"InkTryGetResult": "",
-"InkUtils": "",
-"InkValue": "",
-"InkVariableAssignment": "",
-"InkVariablePointerValue": "",
-"InkVariableReference": "",
-"InkVariablesState": "",
-"InkVoid": "",
-"Machine": "",
-"MapGen": "",
-"NaviButtonList": "",
-"NaviPauseMenu": "",
-"Player": "",
-"ReptileGroup": "",
-"ReptileRoom": "",
-"RunnerRoom": "",
-"SfxrGenerator": "",
-"SfxrGlobals": "",
-"SfxrStreamPlayerInterface": "",
-"Snake": "",
-"SnakeCell": "",
-"State": "",
-"StoryError": "",
-"StoryErrorMetadata": "",
-"TowerRoom": "",
-"TrolleyActionsList": ""
-}
+config_version=5
 
 [application]
 
 config/name="Dino"
 run/main_scene="res://src/menus/DinoMenu.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://assets/icons/dino_sheet.png"
 run/main_scene.runner="res://src/runner/park/ThePark.tscn"
 run/main_scene.dungeon-crawler="res://src/dungeonCrawler/rooms/OneGeon.tscn"
@@ -567,8 +48,8 @@ SnakeGame="*res://src/snake/SnakeGame.gd"
 
 [display]
 
-window/size/width=512
-window/size/height=300
+window/size/viewport_width=512
+window/size/viewport_height=300
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 window/stretch/mode.runner="viewport"
@@ -576,7 +57,7 @@ window/stretch/aspect.runner="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/kink/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg" )
+enabled=PackedStringArray("res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/inkgd/plugin.cfg", "res://addons/kink/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
 
 [global]
 
@@ -586,82 +67,82 @@ layer=false
 
 move_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 move_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 pause={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777217,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 attack={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 action={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 jump={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":77,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 fire={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":78,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 restart={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":true,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 respawns={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 zoom_in={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"pressed":false,"double_click":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 zoom_out={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"pressed":false,"double_click":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 jetpack={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 slowmo={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
 }
 
 [layer_names]
@@ -681,5 +162,5 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 2d/snapping/use_gpu_pixel_snap=true
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color(0, 0, 0, 1)
 environment/default_environment="res://default_env.tres"

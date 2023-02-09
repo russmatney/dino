@@ -4,7 +4,7 @@
 [ext_resource path="res://src/pluggs/player/Pluggs.gd" type="Script" id=2]
 [ext_resource path="res://src/pluggs/player/Stand.gd" type="Script" id=3]
 [ext_resource path="res://addons/beehive/machine.gd" type="Script" id=4]
-[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="FontFile" id=5]
 [ext_resource path="res://src/pluggs/player/Run.gd" type="Script" id=6]
 [ext_resource path="res://src/pluggs/player/Bucket.gd" type="Script" id=7]
 [ext_resource path="res://src/pluggs/player/DragReach.gd" type="Script" id=8]
@@ -13,16 +13,16 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25.5, 21.5 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="FontFile" id=2]
 font_data = ExtResource( 5 )
 
-[node name="Pluggs" type="KinematicBody2D" groups=["player"]]
+[node name="Pluggs" type="CharacterBody2D" groups=["player"]]
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2( 0, -32 )
 scale = Vector2( 2, 2 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "idle-standing"
 frame = 2
 playing = true
@@ -51,14 +51,14 @@ script = ExtResource( 8 )
 script = ExtResource( 9 )
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
-margin_left = -64.0
-margin_top = -63.0
-margin_right = 64.0
-margin_bottom = -45.0
+offset_left = -64.0
+offset_top = -63.0
+offset_right = 64.0
+offset_bottom = -45.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "[center]State[/center]"
+text = "[center]State[/center]"
 text = "State"
 scroll_active = false
 
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

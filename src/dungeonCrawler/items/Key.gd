@@ -2,7 +2,7 @@ extends Area2D
 
 enum key_type { SMALL, BOSS }
 
-export(key_type) var type = key_type.SMALL
+@export var type: key_type = key_type.SMALL
 
 
 func item_def():

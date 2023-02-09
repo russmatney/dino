@@ -29,4 +29,7 @@ func process(delta: float):
 
 func physics_process(delta):
 	owner.velocity.y += owner.gravity * delta
-	owner.velocity = owner.move_and_slide(owner.velocity, Vector2.UP)
+	owner.set_velocity(owner.velocity)
+	owner.set_up_direction(Vector2.UP)
+	owner.move_and_slide()
+	owner.velocity = owner.velocity

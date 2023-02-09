@@ -2,7 +2,7 @@ extends Node
 
 var deving_gunner = false
 
-onready var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
+@onready var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
 
 
 func _ready():

@@ -4,9 +4,9 @@
 [ext_resource path="res://addons/hood/HeartsContainer.gd" type="Script" id=3]
 
 [node name="HeartsContainer" type="HBoxContainer"]
-margin_right = 98.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 98, 30 )
+offset_right = 98.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 98, 30 )
 alignment = 2
 script = ExtResource( 3 )
 

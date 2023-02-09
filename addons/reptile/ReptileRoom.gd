@@ -1,10 +1,10 @@
-tool
+@tool
 class_name ReptileRoom
 extends Node2D
 
 
 func prn(msg, msg2 = null, msg3 = null, msg4 = null, msg5 = null):
-	var s = "[Room" + name + "] "
+	var s = "[Node3D" + name + "] "
 	if msg5:
 		print(str(s, msg, msg2, msg3, msg4, msg5))
 	elif msg4:
@@ -38,7 +38,7 @@ func _ready():
 	if not groups:
 		find_groups()
 
-	connect("regenerated_tilemaps", self, "_on_regen")
+	connect("regenerated_tilemaps",Callable(self,"_on_regen"))
 
 
 func _on_regen():
@@ -78,15 +78,15 @@ func tilemap_cells(opts = {}):
 
 func cell_to_local_pos(t, cell):
 	# assumes scaled in same x/y directions
-	return t.map_to_world(cell) * t.scale.x + t.cell_size * t.scale.x / 2.0
+	return t.map_to_local(cell) * t.scale.x + t.cell_size * t.scale.x / 2.0
 
 
 func calc_rect():
 	var rect = Rect2()
 	for t in tilemaps():
 		var rr = t.get_used_rect()
-		var pos = t.map_to_world(rr.position) * t.scale.x
-		var size = t.map_to_world(rr.size) * t.scale.x
+		var pos = t.map_to_local(rr.position) * t.scale.x
+		var size = t.map_to_local(rr.size) * t.scale.x
 		rect = rect.merge(Rect2(pos, size))
 	return rect
 
@@ -100,7 +100,7 @@ func calc_rect_global():
 ######################################################################
 # name
 
-export(String) var room_name = "Room" setget set_room_name
+@export var room_name: String = "Node3D" : set = set_room_name
 
 
 func set_room_name(n):
@@ -154,12 +154,12 @@ func get_group_def():
 func get_noise_input():
 	var options = [
 		{
-			"seed": rand_range(0, 50000),
+			"seed": randf_range(0, 50000),
 			"octaves": Util.rand_of([2, 3, 4]),
-			"period": rand_range(5, 30),
-			"persistence": rand_range(0.3, 0.7),
-			"lacunarity": rand_range(2.0, 4.0),
-			"img_size": rand_range(40, 60)
+			"period": randf_range(5, 30),
+			"persistence": randf_range(0.3, 0.7),
+			"lacunarity": randf_range(2.0, 4.0),
+			"img_size": randf_range(40, 60)
 		}
 	]
 	options.shuffle()
@@ -196,7 +196,7 @@ func set_groups(new_groups):
 	clear_groups()
 
 	for g in new_groups:
-		g.connect("tree_entered", g, "set_owner", [Util._or(owner, self)])
+		g.connect("tree_entered",Callable(g,"set_owner").bind(Util._or(owner, self)))
 		g.name = "Group"
 		add_child(g)
 	groups = new_groups
@@ -228,7 +228,7 @@ func height():
 ######################################################################
 # noise and tile regen
 
-export(bool) var regenerate_tilemaps setget do_tile_regen
+@export var regenerate_tilemaps: bool : set = do_tile_regen
 
 
 func do_tile_regen(_v = null):
@@ -241,7 +241,7 @@ func do_tile_regen(_v = null):
 ######################################################################
 # noise inputs
 
-export(int) var n_seed = 1001 setget set_seed
+@export var n_seed: int = 1001 : set = set_seed
 
 
 func set_seed(v):
@@ -249,7 +249,7 @@ func set_seed(v):
 	do_tile_regen()
 
 
-export(int) var octaves = 4 setget set_octaves
+@export var octaves: int = 4 : set = set_octaves
 
 
 func set_octaves(v):
@@ -257,7 +257,7 @@ func set_octaves(v):
 	do_tile_regen()
 
 
-export(float) var period = 60.0 setget set_period
+@export var period: float = 60.0 : set = set_period
 
 
 func set_period(v):
@@ -265,7 +265,7 @@ func set_period(v):
 	do_tile_regen()
 
 
-export(float) var persistence = 0.5 setget set_persistence
+@export var persistence: float = 0.5 : set = set_persistence
 
 
 func set_persistence(v):
@@ -273,7 +273,7 @@ func set_persistence(v):
 	do_tile_regen()
 
 
-export(float) var lacunarity = 2.0 setget set_lacunarity
+@export var lacunarity: float = 2.0 : set = set_lacunarity
 
 
 func set_lacunarity(v):
@@ -281,7 +281,7 @@ func set_lacunarity(v):
 	do_tile_regen()
 
 
-export(int) var img_size = 50 setget set_img_size
+@export var img_size: int = 50 : set = set_img_size
 
 
 func set_img_size(v):
@@ -289,7 +289,7 @@ func set_img_size(v):
 	do_tile_regen()
 
 
-export(bool) var img_flip_x setget set_img_flip_x
+@export var img_flip_x: bool : set = set_img_flip_x
 
 
 func set_img_flip_x(v):
@@ -297,7 +297,7 @@ func set_img_flip_x(v):
 	do_tile_regen()
 
 
-export(bool) var img_flip_y setget set_img_flip_y
+@export var img_flip_y: bool : set = set_img_flip_y
 
 
 func set_img_flip_y(v):
@@ -305,7 +305,7 @@ func set_img_flip_y(v):
 	do_tile_regen()
 
 
-export(bool) var img_rotate setget set_img_rotate
+@export var img_rotate: bool : set = set_img_rotate
 
 
 func set_img_rotate(v):
@@ -324,7 +324,7 @@ func noise_inputs():
 	}
 
 
-export(int) var cell_size = 64
+@export var cell_size: int = 64
 
 #####################################################################
 # coords
@@ -333,7 +333,7 @@ export(int) var cell_size = 64
 # return a group for the normed value, if one can be found.
 # this may not be comprehensive, if we want to leave some empty tiles
 func group_for_normed_val(normed):
-	groups.sort_custom(ReptileGroup, "sort_by_key")
+	groups.sort_custom(Callable(ReptileGroup,"sort_by_key"))
 	for g in groups:
 		if not g.upper_bound and not g.lower_bound:
 			# no bounds? we assume it's this group then
@@ -351,7 +351,7 @@ func to_coord_ctx(coord, img, stats):
 
 
 func call_for_each_coord(img, obj, fname):
-	img.lock()
+	false # img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var stats = Reptile.img_stats(img)
 
 	for coord in Reptile.all_coords(img):
@@ -369,10 +369,10 @@ func init_tilemaps():
 
 	for group in groups:
 		if group.tilemap_scene:
-			var t = group.tilemap_scene.instance()
+			var t = group.tilemap_scene.instantiate()
 			var scale_by = cell_size / t.cell_size.x
 			t.scale = Vector2(scale_by, scale_by)
-			t.connect("tree_entered", t, "set_owner", [Util._or(owner, self)])
+			t.connect("tree_entered",Callable(t,"set_owner").bind(Util._or(owner, self)))
 			add_child(t)
 			group.tilemap = t
 

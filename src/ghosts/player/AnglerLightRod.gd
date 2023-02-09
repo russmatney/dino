@@ -2,14 +2,14 @@ extends RigidBody2D
 
 #var mouse_pos
 #var ang_to_mouse
-onready var player = .get_node("../Player")
-onready var handle_pinjoint = .get_node("../RodHandlePin")
-onready var player_machine = .get_node("../Player/Machine")
-onready var angler_chain = get_node("../AnglerChainAndLight")
+@onready var player = super.get_node("../Player")
+@onready var handle_pinjoint = super.get_node("../RodHandlePin")
+@onready var player_machine = super.get_node("../Player/Machine")
+@onready var angler_chain = get_node("../AnglerChainAndLight")
 
-onready var initial_pos = position
-onready var initial_x_rel = abs(player.position.x - position.x)
-onready var initial_y_rel = abs(player.position.y - position.y)
+@onready var initial_pos = position
+@onready var initial_x_rel = abs(player.position.x - position.x)
+@onready var initial_y_rel = abs(player.position.y - position.y)
 #var colors = [Color(1.0, 0.0, 0.0, 1.0),
 #		  Color(0.0, 1.0, 0.0, 1.0),
 #		  Color(0.0, 0.0, 1.0, 0.0)]
@@ -45,5 +45,5 @@ func _process(_delta):
 		handle_pinjoint.position = position
 
 #func _integrate_forces(state):
-#	state.add_torque(global_position.angle_to_point(get_global_mouse_position()))
-# state.add_torque(angular_damp)
+#	state.apply_torque(global_position.angle_to_point(get_global_mouse_position()))
+# state.apply_torque(angular_damp)

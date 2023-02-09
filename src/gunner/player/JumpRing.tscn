@@ -3,9 +3,9 @@
 [ext_resource path="res://assets/sprites/flatring.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://src/gunner/player/JumpRing.gd" type="Script" id=2]
 
-[node name="JumpRing" type="AnimatedSprite"]
+[node name="JumpRing" type="AnimatedSprite2D"]
 modulate = Color( 1, 1, 1, 0.470588 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "ripple"
 frame = 3
 playing = true

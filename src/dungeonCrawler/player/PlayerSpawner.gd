@@ -1,15 +1,15 @@
-extends Position2D
+extends Marker2D
 
-export(PackedScene) var player_to_spawn
+@export var player_to_spawn: PackedScene
 var fallback_player_scene = preload("res://src/dungeonCrawler/player/Player.tscn")
 
 
 func spawn_player(parent = null):
 	var player
 	if player_to_spawn:
-		player = player_to_spawn.instance()
+		player = player_to_spawn.instantiate()
 	else:
-		player = fallback_player_scene.instance()
+		player = fallback_player_scene.instantiate()
 
 	if not player:
 		print("could not create player instance")

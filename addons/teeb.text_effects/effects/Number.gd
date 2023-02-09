@@ -1,4 +1,4 @@
-tool
+@tool
 extends RichTextEffect
 
 
@@ -21,9 +21,9 @@ func get_color(s) -> Color:
 
 
 func _process_custom_fx(char_fx):
-	var number_color:Color = get_color(char_fx.env.get("color", Color.yellow))
+	var number_color:Color = get_color(char_fx.env.get("color", Color.YELLOW))
 	
-	# Reset on first character.
+	# Reset checked first character.
 	if char_fx.relative_index == 0:
 		_last_char_was_number = false
 		_last_word_was_number = false

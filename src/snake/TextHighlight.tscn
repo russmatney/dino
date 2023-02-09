@@ -15,14 +15,14 @@
 [ext_resource path="res://src/snake/TextHighlight.gd" type="Script" id=13]
 
 [node name="TextHighlight" type="RichTextLabel"]
-margin_left = -16.0
-margin_top = -8.0
-margin_right = 48.0
-margin_bottom = 16.0
-rect_scale = Vector2( 0.5, 0.5 )
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 48.0
+offset_bottom = 16.0
+scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 12 )
 bbcode_enabled = true
-bbcode_text = "[center][jump]nam nam"
+text = "[center][jump]nam nam"
 text = "nam nam"
 fit_content_height = true
 scroll_active = false

@@ -1,35 +1,35 @@
-tool
+@tool
 extends EditorImportPlugin
 
 enum Presets { DEFAULT }
 
 
-func get_importer_name():
+func _get_importer_name():
 	return "demo.sillymaterial"
 
 
-func get_visible_name():
+func _get_visible_name():
 	# "Import as Silly Material"
 	return "Silly Material"
 
 
-func get_recognized_extensions():
+func _get_recognized_extensions():
 	return ["mtxt"]
 
 
-func get_save_extension():
+func _get_save_extension():
 	return "material"
 
 
-func get_resource_type():
-	return "SpatialMaterial"
+func _get_resource_type():
+	return "StandardMaterial3D"
 
 
-func get_preset_count():
+func _get_preset_count():
 	return Presets.size()
 
 
-func get_preset_name(preset):
+func _get_preset_name(preset):
 	match preset:
 		Presets.DEFAULT:
 			return "Default"
@@ -37,7 +37,7 @@ func get_preset_name(preset):
 			return "Unknown"
 
 
-func get_import_options(preset):
+func _get_import_options(preset):
 	match preset:
 		Presets.DEFAULT:
 			return [
@@ -53,7 +53,7 @@ func get_import_options(preset):
 			return []
 
 
-func get_option_visibility(option, options):
+func _get_option_visibility(option, options):
 	return true
 
 
@@ -80,7 +80,7 @@ func import(source_file, save_path, options, r_platform_variants, r_gen_files):
 	else:
 		color = Color8(int(channels[0]), int(channels[1]), int(channels[2]))
 
-	var material = SpatialMaterial.new()
+	var material = StandardMaterial3D.new()
 	material.albedo_color = color
 
-	return ResourceSaver.save("%s.%s" % [save_path, get_save_extension()], material)
+	return ResourceSaver.save("%s.%s" % [save_path, _get_save_extension()], material)

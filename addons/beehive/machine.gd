@@ -1,7 +1,7 @@
 class_name Machine
 extends Node
 
-export var initial_state := NodePath()
+@export var initial_state := NodePath()
 var state: State
 
 var should_log = false
@@ -10,7 +10,7 @@ var should_log = false
 
 
 func _ready():
-	yield(owner, "ready")
+	await owner.ready
 
 	if initial_state:
 		state = get_node(initial_state)
@@ -50,7 +50,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	if state:
-		# TODO warn a mofo that this isn't on _physics_process
+		# TODO warn a mofo that this isn't checked _physics_process
 		state.physics_process(delta)
 
 

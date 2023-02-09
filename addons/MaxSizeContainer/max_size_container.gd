@@ -1,4 +1,4 @@
-tool
+@tool
 extends MarginContainer
 
 # Enums
@@ -7,9 +7,9 @@ enum VERTICAL_ALIGN {TOP, CENTER, BOTTOM}
 enum HORIZONTAL_ALIGN {LEFT, CENTER, RIGHT}
 
 # Parameters
-export var max_size := Vector2(-1, -1) setget set_max_size
-export(VERTICAL_ALIGN) var valign = VERTICAL_ALIGN.CENTER setget set_valign
-export(HORIZONTAL_ALIGN) var halign = HORIZONTAL_ALIGN.CENTER setget set_halign
+@export var max_size := Vector2(-1, -1) : set = set_max_size
+@export var valign: VERTICAL_ALIGN = VERTICAL_ALIGN.CENTER : set = set_vertical_alignment
+@export var halign: HORIZONTAL_ALIGN = HORIZONTAL_ALIGN.CENTER : set = set_halign
 
 # child node of the container
 var child : Node
@@ -29,7 +29,7 @@ func _ready() -> void:
 
 	# print("reaaaaady")
 	# Sets up the Container
-	connect("resized", self, "_on_self_resized")
+	connect("resized",Callable(self,"_on_self_resized"))
 
 	if get_child_count() > 0:
 		_initialize(get_child(0))
@@ -39,10 +39,10 @@ func _initialize(p_child: Node) -> void:
 	# Sets the child node
 	child = p_child
 	minimum_child_size = child.get_combined_minimum_size()
-	child.connect("tree_exiting", self, "_on_child_tree_exiting")
-	child.connect("minimum_size_changed", self, "_on_child_minimum_size_changed")
-	if not child.is_connected("tree_entered", self, "_on_child_tree_entered"):
-		child.connect("tree_entered", self, "_on_child_tree_entered")
+	child.connect("tree_exiting",Callable(self,"_on_child_tree_exiting"))
+	child.connect("minimum_size_changed",Callable(self,"_on_child_minimum_size_changed"))
+	if not child.is_connected("tree_entered",Callable(self,"_on_child_tree_entered")):
+		child.connect("tree_entered",Callable(self,"_on_child_tree_entered"))
 
 	_check_if_valid()
 	_adapt_margins()
@@ -54,7 +54,7 @@ func _initialize(p_child: Node) -> void:
 
 func add_child(node : Node, legible_unique_name := false) -> void:
 	# Overloading add_child() to detect when a child node comes
-	.add_child(node, legible_unique_name)
+	super.add_child(node, legible_unique_name)
 
 	if get_child_count() == 1:
 		_initialize(node)
@@ -77,7 +77,7 @@ func set_max_size(value : Vector2) -> void:
 		_adapt_margins()
 
 
-func set_valign(value : int) -> void:
+func set_vertical_alignment(value : int) -> void:
 	valign = value
 
 	if is_initialized:
@@ -101,7 +101,7 @@ func _check_if_valid() -> void:
 		is_size_valid.x = false
 	elif minimum_child_size.x > max_size.x:
 		is_size_valid.x = false
-		push_warning(str("max_size ( ", max_size, " ) ignored on x axis: too small.",
+		push_warning(str("max_size ( ", max_size, " ) ignored checked x axis: too small.",
 				"The minimum possible size is: ", minimum_child_size))
 	else:
 		is_size_valid.x = true
@@ -110,7 +110,7 @@ func _check_if_valid() -> void:
 		is_size_valid.y = false
 	elif minimum_child_size.y > max_size.y:
 		is_size_valid.y = false
-		push_warning(str("max_size ( ", max_size, " ) ignored on y axis: too small.",
+		push_warning(str("max_size ( ", max_size, " ) ignored checked y axis: too small.",
 				"The minimum possible size is: ", minimum_child_size))
 	else:
 		is_size_valid.y = true
@@ -120,10 +120,10 @@ func _adapt_margins() -> void:
 	# Adapats the margin to keep the child size below max_size
 
 	# If the container size is smaller than the max size, no margins are necessary
-	if rect_size.x < max_size.x:
+	if size.x < max_size.x:
 		_set_custom_margins(LEFT, 0)
 		_set_custom_margins(RIGHT, 0)
-	if rect_size.y < max_size.y:
+	if size.y < max_size.y:
 		_set_custom_margins(TOP, 0)
 		_set_custom_margins(BOTTOM, 0)
 
@@ -133,20 +133,20 @@ func _adapt_margins() -> void:
 		_set_custom_margins(LEFT, 0)
 		_set_custom_margins(RIGHT, 0)
 
-	# Else, adds margins to keep the child's rect_size below the max_size
-	elif rect_size.x >= max_size.x:
+	# Else, adds margins to keep the child's size below the max_size
+	elif size.x >= max_size.x:
 		var new_margin_left : int
 		var new_margin_right : int
 
 		match halign:
 			HORIZONTAL_ALIGN.LEFT:
 				new_margin_left = 0
-				new_margin_right = rect_size.x - max_size.x
+				new_margin_right = size.x - max_size.x
 			HORIZONTAL_ALIGN.CENTER:
-				new_margin_left = (rect_size.x - max_size.x) / 2
-				new_margin_right = (rect_size.x - max_size.x) / 2
+				new_margin_left = (size.x - max_size.x) / 2
+				new_margin_right = (size.x - max_size.x) / 2
 			HORIZONTAL_ALIGN.RIGHT:
-				new_margin_left = rect_size.x - max_size.x
+				new_margin_left = size.x - max_size.x
 				new_margin_right = 0
 
 		_set_custom_margins(LEFT, new_margin_left)
@@ -158,20 +158,20 @@ func _adapt_margins() -> void:
 		_set_custom_margins(TOP, 0)
 		_set_custom_margins(BOTTOM, 0)
 
-	# Else, adds margins to keep the child's rect_size below the max_size
-	elif rect_size.y >= max_size.y:
+	# Else, adds margins to keep the child's size below the max_size
+	elif size.y >= max_size.y:
 		var new_margin_top : int
 		var new_margin_bottom : int
 
 		match valign:
 			VERTICAL_ALIGN.TOP:
 				new_margin_top = 0
-				new_margin_bottom = rect_size.y - max_size.y
+				new_margin_bottom = size.y - max_size.y
 			VERTICAL_ALIGN.CENTER:
-				new_margin_top = (rect_size.y - max_size.y) / 2
-				new_margin_bottom = (rect_size.y - max_size.y) / 2
+				new_margin_top = (size.y - max_size.y) / 2
+				new_margin_bottom = (size.y - max_size.y) / 2
 			VERTICAL_ALIGN.BOTTOM:
-				new_margin_top = rect_size.y - max_size.y
+				new_margin_top = size.y - max_size.y
 				new_margin_bottom = 0
 
 		_set_custom_margins(TOP, new_margin_top)
@@ -182,16 +182,16 @@ func _set_custom_margins(side : int, value : int) -> void:
 # This function makes custom constants modifications easier
 	match side:
 		LEFT:
-			set("custom_constants/margin_left", value)
+			set("custom_constants/offset_left", value)
 		RIGHT:
-			set("custom_constants/margin_right", value)
+			set("custom_constants/offset_right", value)
 		TOP:
-			set("custom_constants/margin_top", value)
+			set("custom_constants/offset_top", value)
 		BOTTOM:
-			set("custom_constants/margin_bottom", value)
+			set("custom_constants/offset_bottom", value)
 
 
-func _get_configuration_warning() -> String:
+func _get_configuration_warnings() -> String:
 	# Warns the user that only 1 child node is possible
 	var warning := ""
 
@@ -216,8 +216,8 @@ func _on_child_tree_exiting() -> void:
 	is_initialized = false
 
 	# Disconnect signals
-	child.disconnect("tree_exiting", self, "_on_child_tree_exiting")
-	child.disconnect("minimum_size_changed", self, "_on_child_minimum_size_changed")
+	child.disconnect("tree_exiting",Callable(self,"_on_child_tree_exiting"))
+	child.disconnect("minimum_size_changed",Callable(self,"_on_child_minimum_size_changed"))
 
 	# Reset custom margins
 	_set_custom_margins(LEFT, 0)

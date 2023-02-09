@@ -1,11 +1,11 @@
-tool
+@tool
 extends Control
 
 signal value_changed(value)
 
-export var value: float = 0.0 setget set_value
-export var min_value: float = 0.0
-export var max_value: float = 1.0
+@export var value: float = 0.0 : set = set_value
+@export var min_value: float = 0.0
+@export var max_value: float = 1.0
 
 var _line_edit: LineEdit
 
@@ -24,9 +24,9 @@ var _drag_dist := 0.0
 var _drag_start_factor: float
 
 
-func _init() -> void:
+func _init():
 	mouse_default_cursor_shape = Control.CURSOR_HSIZE
-	rect_clip_content = true
+	clip_contents = true
 	focus_mode = Control.FOCUS_ALL
 	
 	var style := StyleBoxEmpty.new()
@@ -34,15 +34,15 @@ func _init() -> void:
 	style.content_margin_right = 8
 	
 	_line_edit = LineEdit.new()
-	_line_edit.set_as_toplevel(true)
+	_line_edit.set_as_top_level(true)
 	_line_edit.visible = false
-	_line_edit.add_stylebox_override("normal", style)
-	_line_edit.add_stylebox_override("focus", StyleBoxEmpty.new())
+	_line_edit.add_theme_stylebox_override("normal", style)
+	_line_edit.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	
 	var _ret: int
-	_ret = _line_edit.connect("focus_exited", self, "_on_line_edit_focus_exited")
-	_ret = _line_edit.connect("text_entered", self, "_on_line_edit_text_entered")
-	_ret = _line_edit.connect("visibility_changed", self, "_on_line_edit_visibility_changed")
+	_ret = _line_edit.connect("focus_exited",Callable(self,"_on_line_edit_focus_exited"))
+	_ret = _line_edit.connect("text_submitted",Callable(self,"_on_line_edit_text_entered"))
+	_ret = _line_edit.connect("visibility_changed",Callable(self,"_on_line_edit_visibility_changed"))
 	
 	add_child(_line_edit)
 
@@ -53,18 +53,18 @@ func _draw() -> void:
 	var number_string := "%.3f" % value
 	var number_size := font.get_string_size(number_string)
 	var pos := Vector2(
-		(rect_size.x - number_size.x) / 2,
-		(rect_size.y - number_size.y) / 2 + font.get_ascent()
+		(size.x - number_size.x) / 2,
+		(size.y - number_size.y) / 2 + font.get_ascent()
 	)
 	
 	var stylebox := _stylebox_editing if _is_editing else _stylebox_hover if _mouse_hovering else _stylebox_normal
 	
 	if _line_edit.visible:
-		draw_style_box(stylebox, Rect2(Vector2.ZERO, rect_size))
+		draw_style_box(stylebox, Rect2(Vector2.ZERO, size))
 	else:
-		var value_width := rect_size.x * ((value - min_value) / (max_value - min_value))
-		draw_style_box(stylebox, Rect2(value_width, 0, rect_size.x - value_width, rect_size.y))
-		draw_style_box(_stylebox_value, Rect2(0, 0, value_width, rect_size.y))
+		var value_width := size.x * ((value - min_value) / (max_value - min_value))
+		draw_style_box(stylebox, Rect2(value_width, 0, size.x - value_width, size.y))
+		draw_style_box(_stylebox_value, Rect2(0, 0, value_width, size.y))
 		draw_string(font, pos, number_string, color)
 
 
@@ -76,7 +76,7 @@ func _get_minimum_size() -> Vector2:
 
 func _gui_input(event: InputEvent) -> void:
 	var mb := event as InputEventMouseButton
-	if mb and mb.button_index == BUTTON_LEFT:
+	if mb and mb.button_index == MOUSE_BUTTON_LEFT:
 		if mb.pressed:
 			_drag_prepare(mb)
 		else:
@@ -88,7 +88,7 @@ func _gui_input(event: InputEvent) -> void:
 		update()
 	
 	var mm := event as InputEventMouseMotion
-	if mm and mm.button_mask & BUTTON_MASK_LEFT:
+	if mm and mm.button_mask & MOUSE_BUTTON_MASK_LEFT:
 		_drag_motion(mm)
 		_drag_cancelled = false
 
@@ -141,9 +141,9 @@ func _drag_done() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if _drag_cancelled:
-		Input.warp_mouse_position(_drag_start_position)
+		Input.warp_mouse(_drag_start_position)
 	else:
-		Input.warp_mouse_position(rect_global_position + rect_size * Vector2(
+		Input.warp_mouse(global_position + size * Vector2(
 			(value - min_value) / (max_value - min_value),
 			0.5
 		))
@@ -152,10 +152,10 @@ func _drag_done() -> void:
 func _drag_motion(motion: InputEventMouseMotion) -> void:
 	_drag_dist += motion.relative.x
 	
-	var factor := _drag_start_factor + _drag_dist / rect_size.x
+	var factor := _drag_start_factor + _drag_dist / size.x
 	if factor < 0 or 1 < factor:
 		factor = clamp(factor, 0, 1)
-		_drag_dist = (factor - _drag_start_factor) * rect_size.x
+		_drag_dist = (factor - _drag_start_factor) * size.x
 	
 	var v := factor * (max_value - min_value) + min_value
 	var snap := motion.command or motion.shift

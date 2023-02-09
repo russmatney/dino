@@ -1,4 +1,4 @@
-tool
+@tool
 extends ReptileRoom
 class_name TowerRoom
 
@@ -42,11 +42,11 @@ func get_group_def():
 func get_noise_input():
 	var options = [
 		{
-			"seed": rand_range(0, 100000),
+			"seed": randf_range(0, 100000),
 			"octaves": Util.rand_of([2, 3, 4]),
-			"period": rand_range(15, 40),
-			"persistence": rand_range(0.3, 0.5),
-			"lacunarity": rand_range(2.5, 4.0),
+			"period": randf_range(15, 40),
+			"persistence": randf_range(0.3, 0.5),
+			"lacunarity": randf_range(2.5, 4.0),
 		}
 	]
 	options.shuffle()
@@ -121,7 +121,7 @@ func spawn_targets():
 	var target_locs = n_random(locs, 3)
 
 	for loc in target_locs:
-		var target = target_scene.instance()
+		var target = target_scene.instantiate()
 		# set relative to parent position
 		target.position = loc["position"]
 		add_child(target)
@@ -155,7 +155,7 @@ func add_pickups():
 	var p_locs = n_random(locs, 2)
 	for i in range(2):
 		var loc = p_locs[i]
-		var p = pickup_scene.instance()
+		var p = pickup_scene.instantiate()
 		p.position = loc["position"]
 		p.type = pickup_types[i]
 		add_child(p)
@@ -194,7 +194,7 @@ func add_player_spawner():
 	if locs:
 		locs.shuffle()
 		var loc = locs[0]
-		var inst = player_spawner_scene.instance()
+		var inst = player_spawner_scene.instantiate()
 		inst.position = loc["position"]
 		add_child(inst)
 		inst.unique_name_in_owner = true
@@ -233,7 +233,7 @@ func add_enemy_spawner():
 	if locs:
 		locs.shuffle()
 		var loc = locs[0]
-		var inst = enemy_spawner_scene.instance()
+		var inst = enemy_spawner_scene.instantiate()
 		inst.position = loc["position"]
 		add_child(inst)
 		inst.set_owner(get_tree().edited_scene_root)

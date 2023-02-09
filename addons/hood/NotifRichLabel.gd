@@ -18,4 +18,4 @@ func kill_in_ttl():
 
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 2).set_delay(time_to_kill)
-	tween.tween_callback(self, "queue_free")
+	tween.tween_callback(Callable(self,"queue_free"))

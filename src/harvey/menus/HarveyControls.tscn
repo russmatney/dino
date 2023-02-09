@@ -5,22 +5,22 @@
 [node name="HarveyControls" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -412.0
-margin_bottom = -223.0
+offset_right = -412.0
+offset_bottom = -223.0
 
 [node name="TrolleyActionLabel8" parent="." instance=ExtResource( 1 )]
-margin_bottom = 23.0
+offset_bottom = 23.0
 action = "Pause"
 key = "Escape"
 
 [node name="TrolleyActionLabel9" parent="." instance=ExtResource( 1 )]
-margin_top = 27.0
-margin_bottom = 50.0
+offset_top = 27.0
+offset_bottom = 50.0
 action = "Move"
 key = "WASD"
 
 [node name="TrolleyActionLabel10" parent="." instance=ExtResource( 1 )]
-margin_top = 54.0
-margin_bottom = 77.0
+offset_top = 54.0
+offset_bottom = 77.0
 action = "Action"
 key = "E"

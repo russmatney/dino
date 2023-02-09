@@ -7,7 +7,7 @@ var m
 
 
 func before_each():
-	m = autofree(scene.instance())
+	m = autofree(scene.instantiate())
 	add_child(m)
 
 

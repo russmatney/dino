@@ -10,8 +10,8 @@
 [ext_resource path="res://src/runner/park/rooms/ParkLeaf.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/runner/park/rooms/LeafSteps.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/runner/park/rooms/LeafDrop.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/concept-art/runner/leaf-backgrounds-middle_sheet.png" type="Texture" id=11]
-[ext_resource path="res://assets/concept-art/runner/leaf-backgrounds-far_sheet.png" type="Texture" id=12]
+[ext_resource path="res://assets/concept-art/runner/leaf-backgrounds-middle_sheet.png" type="Texture2D" id=11]
+[ext_resource path="res://assets/concept-art/runner/leaf-backgrounds-far_sheet.png" type="Texture2D" id=12]
 
 [node name="ThePark" type="Node2D"]
 script = ExtResource( 5 )
@@ -27,14 +27,14 @@ transform = Transform2D( 1, 0, 0, 1, 0, -73 )
 motion_scale = Vector2( 0.04, 1 )
 motion_mirroring = Vector2( 1024, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture = ExtResource( 12 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.1, 1 )
 motion_mirroring = Vector2( 1024, 0 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 texture = ExtResource( 11 )
 
 [node name="Rooms" type="Node2D" parent="."]
@@ -45,7 +45,7 @@ scale = Vector2( 1.5, 1.5 )
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 3 )]
 offset = Vector2( 200, -50 )
-drag_margin_v_enabled = true
-drag_margin_top = 0.8
-drag_margin_bottom = 0.6
+drag_vertical_enabled = true
+drag_top_margin = 0.8
+drag_bottom_margin = 0.6
 editor_draw_drag_margin = true

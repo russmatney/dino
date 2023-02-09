@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/trolley/TrolleyActionLabel.gd" type="Script" id=1]
-[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="FontFile" id=3]
 
-[sub_resource type="DynamicFont" id=1]
-extra_spacing_bottom = 4
+[sub_resource type="FontFile" id=1]
+spacing_bottom = 4
 font_data = ExtResource( 3 )
 
 [sub_resource type="Theme" id=2]
@@ -12,9 +12,9 @@ Label/colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 Label/fonts/font = SubResource( 1 )
 
 [node name="TrolleyActionLabel" type="HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 100, 0 )
+offset_right = 100.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 100, 0 )
 size_flags_horizontal = 3
 script = ExtResource( 1 )
 action = null
@@ -22,16 +22,16 @@ key = null
 
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
-margin_top = 11.0
-margin_right = 96.0
-margin_bottom = 28.0
+offset_top = 11.0
+offset_right = 96.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 theme = SubResource( 2 )
 text = "action"
 
 [node name="KeyList" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
-margin_left = 100.0
-margin_right = 100.0
-margin_bottom = 40.0
+offset_left = 100.0
+offset_right = 100.0
+offset_bottom = 40.0
 alignment = 2

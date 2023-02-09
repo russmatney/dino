@@ -1,4 +1,4 @@
-tool
+@tool
 extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 
 # Should have GlobalCharEffectSettings.fade_distance = 1
@@ -8,7 +8,7 @@ var bbcode = "console"
 
 
 const CURSOR = ord("█")
-const CURSOR_COLOR = Color.greenyellow
+const CURSOR_COLOR = Color.GREEN_YELLOW
 
 var last_char = -1
 

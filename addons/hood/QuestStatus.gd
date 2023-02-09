@@ -9,16 +9,16 @@ func render():
 		c.free()
 
 	for q in quests:
-		var ch = checkbox_scene.instance()
+		var ch = checkbox_scene.instantiate()
 		get_node("%QuestList").add_child(ch)
 		# set after add_child, let the setter update children
 		ch.quest = q
 
-	get_node("%Header").bbcode_text = "[center]" + Quest.current_level_label
+	get_node("%Header").text = "[center]" + Quest.current_level_label
 
 
 func _ready():
-	Quest.connect("quest_update", self, "_on_quest_update")
+	Quest.connect("quest_update",Callable(self,"_on_quest_update"))
 	_on_quest_update()
 
 func _on_quest_update():

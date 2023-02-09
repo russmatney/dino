@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 
@@ -86,8 +86,8 @@ func ensure_connection(obj, sig, target, method, args = []):
 	if not obj.has_signal(sig):
 		print("[Warn] obj has no signal for connection: ", obj, " :", sig)
 	var err
-	if not obj.is_connected(sig, target, method):
-		err = obj.connect(sig, target, method, args)
+	if not obj.is_connected(sig,Callable(target,method)):
+		err = obj.connect(sig,Callable(target,method).bind(args))
 	if err:
 		print("[Error]: ", err)  # useless enum digit
 
@@ -109,21 +109,21 @@ func rand_of(arr):
 
 
 func set_random_frame(anim):
-	anim.frame = randi() % anim.frames.get_frame_count(anim.animation)
+	anim.frame = randi() % anim.sprite_frames.get_frame_count(anim.animation)
 
 
 ############################################################
 # Functional
 
 
-static func map(function: FuncRef, i_array: Array) -> Array:
+static func map(function: Callable, i_array: Array) -> Array:
 	var o_array := []
 	for value in i_array:
 		o_array.append(function.call_func(value))
 	return o_array
 
 
-static func filter(function: FuncRef, i_array: Array):
+static func filter(function: Callable, i_array: Array):
 	pass
 
 

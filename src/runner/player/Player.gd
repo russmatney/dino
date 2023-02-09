@@ -1,25 +1,25 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var destroy_blocks = false
 var activate_blocks = false
 var won = false
 
-export(int) var max_speed = 300
-export(int) var min_speed = 20
-export(int) var x_accel = 50
-export(int) var slowing_decel = 5
-export(int) var max_air_speed = 200
-export(int) var min_air_speed = 50
-export(int) var air_resistance = 5
-export(int) var gravity = 50
+@export var max_speed: int = 300
+@export var min_speed: int = 20
+@export var x_accel: int = 50
+@export var slowing_decel: int = 5
+@export var max_air_speed: int = 200
+@export var min_air_speed: int = 50
+@export var air_resistance: int = 5
+@export var gravity: int = 50
 
 var jump_velocity = Vector2(0, -700)
 
 var velocity = Vector2.ZERO
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 
-export(PackedScene) var fallback_camera = preload("res://addons/camera/Cam2D.tscn")
+@export var fallback_camera: PackedScene = preload("res://addons/camera/Cam2D.tscn")
 
 #######################################
 # ready
@@ -40,7 +40,7 @@ func ensure_camera():
 	if not cam:
 		print("[CAMERA] cam not found, adding one to player")
 		# if no camera, add one
-		cam = fallback_camera.instance()
+		cam = fallback_camera.instantiate()
 		cam.current = true
 		call_deferred("add_child", cam)
 
@@ -91,7 +91,7 @@ signal player_resetting
 
 func restart():
 	# TODO disable/reenable collision detection?
-	# or, work on a timer - first remove, then wait a bit, then restart
+	# or, work checked a timer - first remove_at, then wait a bit, then restart
 	position = restart_pos
 	velocity = Vector2.ZERO
 	stop = false
@@ -122,7 +122,10 @@ func _physics_process(_delta):
 	velocity.y += gravity
 
 	# move_and_slide factors in delta for us
-	velocity = move_and_slide(velocity, Vector2.UP)
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
 
 
 #######################################
@@ -181,5 +184,5 @@ func hit(body):
 	print("player hit by: ", body)
 	velocity = Vector2.ZERO
 	stop = true
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	restart()

@@ -7,14 +7,14 @@
 [node name="FactoryFloor" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -314.0
-margin_top = -276.0
-margin_right = 385.0
-margin_bottom = 162.0
+offset_left = -314.0
+offset_top = -276.0
+offset_right = 385.0
+offset_bottom = 162.0
 color = Color( 0.129412, 0.219608, 0.278431, 1 )
 
 [node name="FactoryFloorTileMap" parent="." instance=ExtResource( 2 )]
-tile_data = PoolIntArray( -131076, 0, 0, -196604, 0, 0, -65540, 0, 65536, -131068, 0, 65536, -4, 0, 65536, -65532, 0, 65536, 65532, 0, 131073, 65533, 0, 196610, 65534, 0, 196610, 65535, 0, 196610, 0, 0, 196610, 1, 0, 196610, 2, 0, 196610, 3, 0, 196610, 4, 0, 131075 )
+tile_data = PackedInt32Array( -131076, 0, 0, -196604, 0, 0, -65540, 0, 65536, -131068, 0, 65536, -4, 0, 65536, -65532, 0, 65536, 65532, 0, 131073, 65533, 0, 196610, 65534, 0, 196610, 65535, 0, 196610, 0, 0, 196610, 1, 0, 196610, 2, 0, 196610, 3, 0, 196610, 4, 0, 131075 )
 
 [node name="Pluggs" parent="." instance=ExtResource( 3 )]
 position = Vector2( -26, -27 )

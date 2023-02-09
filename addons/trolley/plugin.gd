@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var TrolleyBottomPanel
@@ -8,7 +8,7 @@ func _enter_tree():
 	print("<TROLLEY>")
 	add_autoload_singleton("Trolley", "res://addons/trolley/Trolley.gd")
 
-	TrolleyBottomPanel = preload("res://addons/trolley/TrolleyBottomPanel.tscn").instance()
+	TrolleyBottomPanel = preload("res://addons/trolley/TrolleyBottomPanel.tscn").instantiate()
 	add_control_to_bottom_panel(TrolleyBottomPanel, "Trolley")
 
 

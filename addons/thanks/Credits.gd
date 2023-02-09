@@ -1,8 +1,8 @@
-tool
+@tool
 extends Control
 class_name Credits
 
-export(PackedScene) var credit_line_scene = preload("res://addons/thanks/CreditLine.tscn")
+@export var credit_line_scene: PackedScene = preload("res://addons/thanks/CreditLine.tscn")
 var credits_lines_container: VBoxContainer
 
 var credits_scroll_container: ScrollContainer
@@ -15,9 +15,9 @@ var since_last_scroll = 0
 var expected_nodes = ["CreditsScrollContainer", "CreditsLinesContainer"]
 
 
-func _get_configuration_warning():
+func _get_configuration_warnings():
 	for n in expected_nodes:
-		var node = find_node(n)
+		var node = find_child(n)
 		if not node:
 			return "'Credits' node expects a child named '" + n + "'"
 	return ""
@@ -27,10 +27,10 @@ var added_lines = []
 
 
 func _ready():
-	credits_scroll_container = find_node("CreditsScrollContainer")
-	assert(credits_scroll_container, "Expected ScrollContainer node")
-	credits_lines_container = find_node("CreditsLinesContainer")
-	assert(credits_lines_container, "Expected VBoxContainer node")
+	credits_scroll_container = find_child("CreditsScrollContainer")
+	assert(credits_scroll_container) #,"Expected ScrollContainer node")
+	credits_lines_container = find_child("CreditsLinesContainer")
+	assert(credits_lines_container) #,"Expected VBoxContainer node")
 
 	# support ready creating a clean credits view
 	for l in added_lines:
@@ -40,11 +40,11 @@ func _ready():
 
 	# TODO render at tool-time
 	for lines in get_credit_lines():
-		var new_line = credit_line_scene.instance()
-		new_line.bbcode_text = "[center]\n"
+		var new_line = credit_line_scene.instantiate()
+		new_line.text = "[center]\n"
 		for line in lines:
-			new_line.bbcode_text += line + "\n"
-		new_line.bbcode_text += "[/center]"
+			new_line.text += line + "\n"
+		new_line.text += "[/center]"
 		added_lines.append(new_line)
 		credits_lines_container.add_child(new_line)
 

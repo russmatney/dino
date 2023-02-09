@@ -1,13 +1,13 @@
-tool
-extends KinematicBody2D
+@tool
+extends CharacterBody2D
 
 var velocity := Vector2.ZERO
 
-export(int) var jump_impulse := 1500
-export(int) var speed := 300
-export(int) var gravity := 4000
+@export var jump_impulse: int := 1500
+@export var speed: int := 300
+@export var gravity: int := 4000
 
-export(int) var max_health := 6
+@export var max_health: int := 6
 var health = max_health
 signal health_change
 
@@ -15,9 +15,9 @@ var initial_pos
 var knocked_back = false
 var dead = false
 
-onready var state_label = $StateLabel
-onready var machine = $Machine
-onready var anim = $AnimatedSprite
+@onready var state_label = $StateLabel
+@onready var machine = $Machine
+@onready var anim = $AnimatedSprite2D
 var tween
 
 ############################################################
@@ -34,7 +34,7 @@ func die():
 
 func _ready():
 	initial_pos = get_global_position()
-	machine.connect("transitioned", self, "on_transit")
+	machine.connect("transitioned",Callable(self,"on_transit"))
 
 	call_deferred("finish_setup")
 
@@ -50,7 +50,7 @@ func on_transit(new_state):
 
 
 func set_state_label(label: String):
-	state_label.bbcode_text = "[center]" + label + "[/center]"
+	state_label.text = "[center]" + label + "[/center]"
 
 
 ############################################################
@@ -167,11 +167,11 @@ func burst_gloomba():
 
 	if did_burst:
 		Ghosts.create_notification("Gloomba stunned!")
-		$Flashlight/AnimatedSprite.visible = true
-		$Flashlight/AnimatedSprite.frame = 0
-		# $Flashlight/AnimatedSprite.play("burst")
-		yield(get_tree().create_timer(0.4), "timeout")
-		$Flashlight/AnimatedSprite.visible = false
+		$Flashlight/AnimatedSprite2D.visible = true
+		$Flashlight/AnimatedSprite2D.frame = 0
+		# $Flashlight/AnimatedSprite2D.play("burst")
+		await get_tree().create_timer(0.4).timeout
+		$Flashlight/AnimatedSprite2D.visible = false
 
 
 func update_burst_action():
@@ -208,12 +208,12 @@ func update_actions_ui():
 		# TODO support multiple actions, or preferred action?
 		# maybe actions can pass a priority
 		current_action = actions.values()[0]
-		$ActionLabel.bbcode_text = str(
+		$ActionLabel.text = str(
 			"[center]", current_action["fname"].capitalize(), "[/center]"
 		)
 	else:
 		current_action = null
-		$ActionLabel.bbcode_text = ""
+		$ActionLabel.text = ""
 
 
 func call_action(action):

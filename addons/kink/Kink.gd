@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 var ink_states = {}
@@ -23,7 +23,7 @@ func current_message(node):
 func register(node):
 	# TODO unit tests:
 	#   - assert node passed in has usabel ink_player set afterwards
-	#   - assert warnings on missing or mis-typed kink_file (or w/e property)
+	#   - assert warnings checked missing or mis-typed kink_file (or w/e property)
 	#   - assert ink_states can be accessed as expected (msg, node_name)
 
 	print("[KINK]: initing new ink node")

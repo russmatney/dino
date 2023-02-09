@@ -14,32 +14,32 @@ script = ExtResource( 1 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 alignment = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 51.0
-margin_bottom = 280.0
+offset_right = 51.0
+offset_bottom = 280.0
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
-margin_right = 51.0
-margin_bottom = 68.0
+offset_right = 51.0
+offset_bottom = 68.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
-margin_left = 2.0
-margin_right = 49.0
-margin_bottom = 64.0
+offset_left = 2.0
+offset_right = 49.0
+offset_bottom = 64.0
 
 [node name="StepCount" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 47.0
-margin_bottom = 13.0
+offset_right = 47.0
+offset_bottom = 13.0
 text = "Steps: 700"
 autowrap = false
 
@@ -47,9 +47,9 @@ autowrap = false
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 17.0
-margin_right = 47.0
-margin_bottom = 30.0
+offset_top = 17.0
+offset_right = 47.0
+offset_bottom = 30.0
 text = "Food: 7"
 autowrap = false
 
@@ -57,9 +57,9 @@ autowrap = false
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 34.0
-margin_right = 47.0
-margin_bottom = 47.0
+offset_top = 34.0
+offset_right = 47.0
+offset_bottom = 47.0
 text = "Speed: 1"
 autowrap = false
 
@@ -67,60 +67,60 @@ autowrap = false
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 51.0
-margin_right = 47.0
-margin_bottom = 64.0
+offset_top = 51.0
+offset_right = 47.0
+offset_bottom = 64.0
 text = "Combo: 1"
 autowrap = false
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
-margin_left = 55.0
-margin_right = 384.0
-margin_bottom = 280.0
+offset_left = 55.0
+offset_right = 384.0
+offset_bottom = 280.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MarginContainer"]
-margin_right = 329.0
-margin_bottom = 280.0
+offset_right = 329.0
+offset_bottom = 280.0
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 64.0
-margin_right = 264.0
-margin_bottom = 280.0
+offset_left = 64.0
+offset_right = 264.0
+offset_bottom = 280.0
 
 [node name="QuestStatus" parent="HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 200.0
-margin_bottom = 53.0
-rect_min_size = Vector2( 200, 0 )
+offset_right = 200.0
+offset_bottom = 53.0
+custom_minimum_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-margin_top = 57.0
-margin_right = 200.0
-margin_bottom = 280.0
+offset_top = 57.0
+offset_right = 200.0
+offset_bottom = 280.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 388.0
-margin_right = 492.0
-margin_bottom = 280.0
+offset_left = 388.0
+offset_right = 492.0
+offset_bottom = 280.0
 alignment = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2"]
-margin_top = 262.0
-margin_right = 104.0
-margin_bottom = 280.0
+offset_top = 262.0
+offset_right = 104.0
+offset_bottom = 280.0
 custom_styles/panel = ExtResource( 5 )
 
 [node name="Notifications" parent="HBoxContainer/VBoxContainer2/PanelContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 2.0
-margin_right = 102.0
-margin_bottom = 14.0
+offset_left = 2.0
+offset_right = 102.0
+offset_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
@@ -129,14 +129,14 @@ alignment = 2
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 48.0
-margin_bottom = 13.0
+offset_right = 48.0
+offset_bottom = 13.0
 text = "Notification"
 
 [node name="NotifRichLabel" parent="HBoxContainer/VBoxContainer2/PanelContainer/Notifications" instance=ExtResource( 6 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 100.0
-margin_bottom = 14.0
-bbcode_text = "[jump]Happy Notif[/jump]"
+offset_right = 100.0
+offset_bottom = 14.0
+text = "[jump]Happy Notif[/jump]"
 text = "Happy Notif"

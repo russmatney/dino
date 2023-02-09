@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/jungle-groove.wav-072ccf2df785c3bc4e650e7438bfacdd.sample"
+type="AudioStreamWAV"
+uid="uid://c61mgxxjhgi1r"
+path="res://.godot/imported/jungle-groove.wav-072ccf2df785c3bc4e650e7438bfacdd.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/jungle-groove.wav"
-dest_files=[ "res://.import/jungle-groove.wav-072ccf2df785c3bc4e650e7438bfacdd.sample" ]
+dest_files=["res://.godot/imported/jungle-groove.wav-072ccf2df785c3bc4e650e7438bfacdd.sample"]
 
 [params]
 

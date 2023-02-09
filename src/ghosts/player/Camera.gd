@@ -1,19 +1,19 @@
 extends Camera2D
 
 enum cam_mode { FOLLOW, ANCHOR }
-export(cam_mode) var mode = cam_mode.FOLLOW
+@export var mode: cam_mode = cam_mode.FOLLOW
 
 var following
-export(String) var follow_group = "player"
+@export var follow_group: String = "player"
 var current_anchor  # only set in ANCHOR mode
-export(String) var anchor_group = "camera_anchor"
+@export var anchor_group: String = "camera_anchor"
 
 
 func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
 
 	if nodes.size() > 1:
-		print("[WARN] Camera found multiple nodes to follow", nodes)
+		print("[WARN] Camera3D found multiple nodes to follow", nodes)
 
 	if nodes.size() > 0:
 		following = nodes[0]
@@ -30,7 +30,7 @@ func attach_to_nearest_anchor():
 	# find nearest anchor node, reparent to that
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
-		print("[WARN] Camera found no anchor nodes, attaching to player")
+		print("[WARN] Camera3D found no anchor nodes, attaching to player")
 		Util.reparent(self, following)
 	else:
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...

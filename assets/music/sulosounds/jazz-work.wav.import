@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/jazz-work.wav-94b7da63b3c76da1a7a6cb8eb8c47b02.sample"
+type="AudioStreamWAV"
+uid="uid://rkqljane1lqu"
+path="res://.godot/imported/jazz-work.wav-94b7da63b3c76da1a7a6cb8eb8c47b02.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/jazz-work.wav"
-dest_files=[ "res://.import/jazz-work.wav-94b7da63b3c76da1a7a6cb8eb8c47b02.sample" ]
+dest_files=["res://.godot/imported/jazz-work.wav-94b7da63b3c76da1a7a6cb8eb8c47b02.sample"]
 
 [params]
 

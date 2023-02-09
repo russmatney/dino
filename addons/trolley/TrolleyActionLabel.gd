@@ -1,10 +1,10 @@
-tool
+@tool
 extends Control
 
 # TODO handle hard-coding/mis-coding of keys for actions?
 # we should pass an action and lookup the key via Trolley instead of setting it raw here
-export(String) var action = ""
-export(String) var key = ""
+@export var action: String = ""
+@export var key: String = ""
 
 
 func set_label(action):
@@ -15,7 +15,7 @@ var key_icon = preload("res://addons/trolley/TrolleyKeyIcon.tscn")
 
 
 func add_key(k):
-	var icon = key_icon.instance()
+	var icon = key_icon.instantiate()
 	icon.text = k
 
 	var key_list = get_node("%KeyList")

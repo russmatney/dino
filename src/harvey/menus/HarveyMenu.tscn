@@ -4,14 +4,14 @@
 [ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/harvey/menus/HarveyControls.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/harvey/menus/HarveyMenuButtonList.gd" type="Script" id=4]
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=5]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 resource_local_to_scene = true
 size = 96
 outline_size = 4
 outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
-extra_spacing_top = 10
+spacing_top = 10
 font_data = ExtResource( 5 )
 
 [node name="HarveyMenu" type="Control"]
@@ -26,43 +26,43 @@ size_flags_horizontal = 3
 [node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 512.0
-margin_bottom = 107.0
+offset_right = 512.0
+offset_bottom = 107.0
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
-bbcode_text = "[center]Harvey[/center]"
+text = "[center]Harvey[/center]"
 text = "Harvey"
 scroll_active = false
 
 [node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 111.0
-margin_right = 512.0
-margin_bottom = 203.0
+offset_top = 111.0
+offset_right = 512.0
+offset_bottom = 203.0
 size_flags_vertical = 3
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
+custom_constants/offset_right = 0
+custom_constants/offset_top = 0
+custom_constants/offset_left = 0
+custom_constants/offset_bottom = 0
 script = ExtResource( 1 )
 max_size = Vector2( 130, -1 )
 
 [node name="HarveyControls" parent="VBoxContainer/MaxSizeContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 191.0
-margin_right = 321.0
-margin_bottom = 92.0
+offset_left = 191.0
+offset_right = 321.0
+offset_bottom = 92.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 207.0
-margin_right = 512.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 200, 0 )
+offset_top = 207.0
+offset_right = 512.0
+offset_bottom = 300.0
+custom_minimum_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 
 [node name="HarveyButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
-margin_left = 226.0
-margin_top = 26.0
-margin_right = 286.0
-margin_bottom = 66.0
+offset_left = 226.0
+offset_top = 26.0
+offset_right = 286.0
+offset_bottom = 66.0
 script = ExtResource( 4 )

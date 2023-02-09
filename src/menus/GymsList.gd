@@ -1,4 +1,4 @@
-tool
+@tool
 extends NaviButtonList
 
 # TODO parse paths to scenes with 'Gym' or 'Demo' into a menu_scenes list
@@ -13,7 +13,7 @@ var menu_scenes = [
 		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
 	},
 	{
-		"label": "Room",
+		"label": "Node3D",
 		"nav_to": "res://src/dungeonCrawler/rooms/Room.tscn",
 	},
 ]

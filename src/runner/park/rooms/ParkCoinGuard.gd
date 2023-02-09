@@ -1,4 +1,4 @@
-tool
+@tool
 # ParkCoinGuard
 extends RunnerRoom
 

@@ -1,19 +1,19 @@
 extends Camera2D
 
 enum cam_mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
-export(cam_mode) var mode = cam_mode.FOLLOW
+@export var mode: cam_mode = cam_mode.FOLLOW
 
-export(String) var follow_group = "player"
-export(String) var anchor_group = "camera_anchor"
-export(String) var poi_group = "poi"
-export(String) var pof_group = "pof"
+@export var follow_group: String = "player"
+@export var anchor_group: String = "camera_anchor"
+@export var poi_group: String = "poi"
+@export var pof_group: String = "pof"
 
 var following
 var current_anchor
 
 var poi_follows = []
 var pof_follows = []
-var window_size = OS.window_size
+
 var poi_following_distance = 400
 var pof_following_distance = 400
 
@@ -40,7 +40,7 @@ func _ready():
 
 	# otherwise we can't do a rotational screenshake
 	# let's hope the camera parent doesn't need to rotate...
-	set_rotating(true)
+	set_ignore_rotation(false)
 
 	if mode == cam_mode.FOLLOW_AND_POIS:
 		if poi_group:
@@ -49,7 +49,7 @@ func _ready():
 			update_pofs()
 
 	update_window_size()
-	var _x = get_tree().connect("screen_resized", self, "update_window_size")
+	var _x = get_tree().connect("screen_resized",Callable(self,"update_window_size"))
 
 	if not following:
 		find_node_to_follow()
@@ -258,7 +258,7 @@ func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
 
 	if nodes.size() > 1:
-		print("[WARN] Camera found multiple nodes to follow", nodes)
+		print("[WARN] Camera3D found multiple nodes to follow", nodes)
 
 	if nodes.size() > 0:
 		following = nodes[0]
@@ -281,7 +281,7 @@ func attach_to_nearest_anchor():
 	# find nearest anchor node, reparent to that
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
-		print("[WARN] Camera found no anchor nodes, attaching to player")
+		print("[WARN] Camera3D found no anchor nodes, attaching to player")
 		Util.reparent(self, following)
 	else:
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...
@@ -303,7 +303,7 @@ func attach_to_nearest_anchor():
 
 
 func update_window_size():
-	window_size = OS.window_size
+
 
 
 # TODO how often should we check for more follows?
@@ -354,7 +354,7 @@ func center_pois():
 	# TODO favor the `following` (player) position more
 	focuses.append(following)
 	focuses.append_array(pof_follows)
-	# TODO favor pois based on importance * proximity
+	# TODO favor pois based checked importance * proximity
 	focuses.append_array(poi_follows)
 
 	var center = Vector2.ZERO

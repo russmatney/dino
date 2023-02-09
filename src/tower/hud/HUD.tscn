@@ -13,50 +13,50 @@ script = ExtResource( 4 )
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 10.0
-margin_top = 10.0
-margin_right = -10.0
-margin_bottom = -10.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
-margin_right = 383.0
-margin_bottom = 280.0
+offset_right = 383.0
+offset_bottom = 280.0
 size_flags_horizontal = 3
 
 [node name="Panel" type="Panel" parent="HBoxContainer/MarginContainer"]
-margin_right = 106.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 106, 140 )
+offset_right = 106.0
+offset_bottom = 140.0
+custom_minimum_size = Vector2( 106, 140 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_styles/panel = ExtResource( 6 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MarginContainer/Panel"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 104.0
-margin_bottom = 152.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 104.0
+offset_bottom = 152.0
 
 [node name="HeartsContainer" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource( 2 )]
 unique_name_in_owner = true
-margin_right = 100.0
-margin_bottom = 30.0
+offset_right = 100.0
+offset_bottom = 30.0
 
 [node name="PickupsContainer" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 34.0
-margin_right = 100.0
-margin_bottom = 64.0
+offset_top = 34.0
+offset_right = 100.0
+offset_bottom = 64.0
 
 [node name="TargetsDestroyed" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource( 1 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 68.0
-margin_right = 100.0
-margin_bottom = 81.0
+offset_top = 68.0
+offset_right = 100.0
+offset_bottom = 81.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Targets Destroyed: 0"
 align = 0
@@ -65,9 +65,9 @@ align = 0
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 85.0
-margin_right = 100.0
-margin_bottom = 98.0
+offset_top = 85.0
+offset_right = 100.0
+offset_bottom = 98.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Targets Remaining: 0"
 align = 0
@@ -76,9 +76,9 @@ align = 0
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 102.0
-margin_right = 100.0
-margin_bottom = 115.0
+offset_top = 102.0
+offset_right = 100.0
+offset_bottom = 115.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Enemies Destroyed: 0"
 align = 0
@@ -87,40 +87,40 @@ align = 0
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 119.0
-margin_right = 100.0
-margin_bottom = 132.0
+offset_top = 119.0
+offset_right = 100.0
+offset_bottom = 132.0
 custom_colors/font_color = Color( 0.964706, 0.776471, 0.658824, 1 )
 text = "Enemies Remaining: 0"
 align = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 387.0
-margin_right = 492.0
-margin_bottom = 280.0
+offset_left = 387.0
+offset_right = 492.0
+offset_bottom = 280.0
 
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer2"]
-margin_right = 105.0
-margin_bottom = 110.0
-rect_min_size = Vector2( 105, 110 )
+offset_right = 105.0
+offset_bottom = 110.0
+custom_minimum_size = Vector2( 105, 110 )
 custom_styles/panel = ExtResource( 6 )
 
 [node name="TowerControls" parent="HBoxContainer/VBoxContainer2/Panel" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 100.0
-margin_bottom = 108.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 100.0
+offset_bottom = 108.0
 
 [node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer2"]
-margin_top = 114.0
-margin_right = 105.0
-margin_bottom = 280.0
+offset_top = 114.0
+offset_right = 105.0
+offset_bottom = 280.0
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 6 )
 
 [node name="Notifications" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/Panel2"]
 unique_name_in_owner = true
-margin_top = 3.0
-rect_min_size = Vector2( 100, 160 )
+offset_top = 3.0
+custom_minimum_size = Vector2( 100, 160 )

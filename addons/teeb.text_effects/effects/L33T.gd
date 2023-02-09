@@ -1,4 +1,4 @@
-tool
+@tool
 extends RichTextEffect
 
 # Syntax: [l33t][/l33t]

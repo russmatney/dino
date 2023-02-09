@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="FontFile" id=1]
 
 [node name="InfoMessage" type="RichTextLabel"]
 anchor_right = 0.078
 anchor_bottom = 0.047
-margin_right = 0.0639992
-margin_bottom = -0.1
+offset_right = 0.0639992
+offset_bottom = -0.1
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "Health: 3"
+text = "Health: 3"
 text = "Health: 3"
 fit_content_height = true

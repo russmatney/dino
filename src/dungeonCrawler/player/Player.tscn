@@ -18,14 +18,14 @@ extents = Vector2( 9, 13.5 )
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.372549, 0.352941, 0.352941, 0.133333 )
 
-[node name="Player" type="KinematicBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 57
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2( 2, 2 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "run"
 playing = true
 flip_h = true
@@ -36,19 +36,19 @@ scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
 
 [node name="ActionsList" type="VBoxContainer" parent="."]
-margin_left = -24.0
-margin_top = -32.0
-margin_right = 24.0
-margin_bottom = -8.0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = -8.0
 
-[node name="WeaponPosition" type="Position2D" parent="."]
+[node name="WeaponPosition" type="Marker2D" parent="."]
 position = Vector2( 8, 2 )
 
 [node name="DebugList" type="VBoxContainer" parent="."]
-margin_left = -24.0
-margin_top = -56.0
-margin_right = 24.0
-margin_bottom = -16.0
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -16.0
 
 [node name="LockOnDetectArea2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -77,11 +77,11 @@ position = Vector2( 0, 1.5 )
 shape = SubResource( 4 )
 
 [node name="InfoPanel" type="Panel" parent="."]
-margin_left = -22.0
-margin_top = 16.0
-margin_right = 18.0
-margin_bottom = 56.0
-rect_scale = Vector2( 1.10075, 0.399394 )
+offset_left = -22.0
+offset_top = 16.0
+offset_right = 18.0
+offset_bottom = 56.0
+scale = Vector2( 1.10075, 0.399394 )
 custom_styles/panel = SubResource( 5 )
 
 [node name="InfoList" type="VBoxContainer" parent="InfoPanel"]

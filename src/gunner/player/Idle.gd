@@ -8,7 +8,7 @@ func enter(ctx = {}):
 
 	if "shake" in ctx and ctx["shake"]:
 		GunnerSounds.play_sound("heavy_landing")
-		if typeof(ctx["shake"]) == TYPE_REAL:
+		if typeof(ctx["shake"]) == TYPE_FLOAT:
 			Cam.screenshake(ctx["shake"])
 		else:
 			Cam.screenshake(0.25)
@@ -24,7 +24,10 @@ func physics_process(delta):
 
 	actor.velocity.y += actor.gravity * delta
 	# TODO clamp fall speed?
-	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+	actor.set_velocity(actor.velocity)
+	actor.set_up_direction(Vector2.UP)
+	actor.move_and_slide()
+	actor.velocity = actor.velocity
 
 	# if not actor.is_on_floor() and actor.velocity.y > 0:
 	# 	machine.transit("Fall")

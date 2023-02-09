@@ -25,10 +25,10 @@ extents = Vector2( 11.5, 20.5 )
 script = ExtResource( 1 )
 type = "hat"
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource( 2 )
 scale = Vector2( 3, 3 )
-frames = ExtResource( 2 )
+sprite_frames = ExtResource( 2 )
 animation = "body"
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -41,8 +41,8 @@ shape = SubResource( 1 )
 visible = false
 position = Vector2( -42, -28 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

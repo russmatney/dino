@@ -4,8 +4,8 @@
 
 [sub_resource type="SphereMesh" id=1]
 
-[node name="ImportTest" type="Spatial"]
+[node name="ImportTest" type="Node3D"]
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )

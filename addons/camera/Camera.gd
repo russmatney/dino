@@ -1,5 +1,5 @@
 # Cam
-tool
+@tool
 extends Node
 
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
@@ -12,22 +12,22 @@ func cam_viewport():
 
 
 func cam_window_rect():
-	var v: Viewport = cam.get_viewport()
+	var v: SubViewport = cam.get_viewport()
 	var viewportRect: Rect2 = v.get_visible_rect()
 
 	# https://github.com/godotengine/godot/issues/34805
 	var viewport_base_size = (
-		v.get_size_override()
-		if v.get_size_override() > Vector2(0, 0)
+		v.get_size_2d_override()
+		if v.get_size_2d_override() > Vector2(0, 0)
 		else v.size
 	)
-	var scale_factor = OS.window_size / viewport_base_size
+
 	viewportRect.size = viewport_base_size * scale_factor
 
 	# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
 	var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
 	var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
-	var viewportRectGlobal: Rect2 = viewportToGlobalTransform.xform(viewportRect)
+	var viewportRectGlobal: Rect2 = viewportToGlobalTransform * viewportRect
 
 	return viewportRectGlobal
 
@@ -47,7 +47,7 @@ func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
 
 	print("[CAM]: No node found with 'camera' group, adding one.")
 
-	cam = cam_scene.instance()
+	cam = cam_scene.instantiate()
 	cam.current = true
 	cam.zoom_offset = zoom_offset
 	cam.zoom_level = zoom_level
@@ -82,7 +82,7 @@ func screenshake(trauma = 0.3):
 func freezeframe(name, time_scale, duration, trauma = 0.1):
 	inc_trauma(trauma)
 	start_slowmo(name, time_scale)
-	yield(get_tree().create_timer(duration * time_scale), "timeout")
+	await get_tree().create_timer(duration * time_scale).timeout
 	stop_slowmo(name)
 
 func hitstop(name, time_scale, duration, trauma=0.1):
@@ -121,7 +121,7 @@ func clear_all_slowmos():
 
 # resumes normal time if no slowmos remain
 func resume_slowmo():
-	if slowmos.empty() or slowmo_scales.empty():
+	if slowmos.is_empty() or slowmo_scales.is_empty():
 		Engine.time_scale = 1.0
 		return
 

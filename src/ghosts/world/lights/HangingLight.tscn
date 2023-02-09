@@ -20,10 +20,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="ChainBase"]
-margin_left = -7.0
-margin_top = -6.0
-margin_right = 6.0
-margin_bottom = 6.0
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChainBase"]
 shape = SubResource( 1 )
@@ -43,10 +43,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Chain"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chain"]
 position = Vector2( 0, -1 )
@@ -66,10 +66,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Chain2"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chain2"]
 position = Vector2( 0, -1 )
@@ -89,10 +89,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Chain3"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chain3"]
 position = Vector2( 0, -1 )
@@ -112,10 +112,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Chain4"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chain4"]
 position = Vector2( 0, -1 )
@@ -135,10 +135,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Chain5"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chain5"]
 position = Vector2( 0, -1 )
@@ -158,10 +158,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="Chain6"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chain6"]
 position = Vector2( 0, -1 )

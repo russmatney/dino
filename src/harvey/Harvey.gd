@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 
@@ -8,7 +8,7 @@ func _ready():
 		Navi.set_pause_menu("res://src/harvey/menus/HarveyPauseMenu.tscn")
 
 	time_up_container = CanvasLayer.new()
-	time_up_menu = time_up_menu_scene.instance()
+	time_up_menu = time_up_menu_scene.instantiate()
 	time_up_container.add_child(time_up_menu)
 	call_deferred("add_child", time_up_container)
 
@@ -60,15 +60,15 @@ func new_produce_delivered(type):
 #########################################################################
 # sounds
 
-onready var slime_stream = preload("res://assets/harvey/sounds/slime_001.ogg")
+@onready var slime_stream = preload("res://assets/harvey/sounds/slime_001.ogg")
 var slime_sound
-onready var maximize_stream = preload("res://assets/harvey/sounds/maximize_006.ogg")
+@onready var maximize_stream = preload("res://assets/harvey/sounds/maximize_006.ogg")
 var maximize_sound
-onready var minimize_stream = preload("res://assets/harvey/sounds/minimize_006.ogg")
+@onready var minimize_stream = preload("res://assets/harvey/sounds/minimize_006.ogg")
 var minimize_sound
-onready var cure_stream = preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - cure.ogg")
+@onready var cure_stream = preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - cure.ogg")
 var cure_sound
-onready var complete_stream = preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - complete.ogg")
+@onready var complete_stream = preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - complete.ogg")
 var complete_sound
 
 

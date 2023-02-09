@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node2D
 
 enum leaf_colors { green, greenred, redorange, yellow, purple }
@@ -18,9 +18,9 @@ func to_anim(c):
 			return "purple"
 
 
-export(leaf_colors) var color = leaf_colors.redorange
+@export var color: leaf_colors = leaf_colors.redorange
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 
 ###################################################
 # ready

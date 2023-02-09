@@ -1,23 +1,23 @@
-tool
+@tool
 extends Node2D
 
-onready var player_start = get_node("%PlayerStart")
+@onready var player_start = get_node("%PlayerStart")
 var player
 
 #######################################################################33
 # warnings
 
 
-func _get_configuration_warning():
+func _get_configuration_warnings():
 	for n in ["PlayerStart"]:
-		var node = find_node(n)
+		var node = find_child(n)
 		if not node:
 			return "Missing expected child named '" + n + "'"
 	return ""
 
 
 enum w_type { DEFEAT_BOSS, GET_TREASURE }
-export(w_type) var win_type = w_type.DEFEAT_BOSS
+@export var win_type: w_type = w_type.DEFEAT_BOSS
 
 #######################################################################33
 # ready

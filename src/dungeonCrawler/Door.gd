@@ -2,11 +2,11 @@ extends StaticBody2D
 
 enum door_state { LOCKED, OPEN, CLOSED }
 
-export(door_state) var state = door_state.CLOSED setget set_door_state
+@export var state: door_state = door_state.CLOSED : set = set_door_state
 
-onready var anim: AnimatedSprite = $AnimatedSprite
-onready var coll_shape: CollisionShape2D = $CollisionShape2D
-onready var action_area: Area2D = $ActionArea
+@onready var anim: AnimatedSprite2D = $AnimatedSprite2D
+@onready var coll_shape: CollisionShape2D = $CollisionShape2D
+@onready var action_area: Area2D = $ActionArea
 
 
 func set_door_state(val):
@@ -131,7 +131,7 @@ func update_body(body):
 						# perhaps an event/routing system could reduce that?
 
 
-# update actions on all bodies we're currently aware of
+# update actions checked all bodies we're currently aware of
 # TODO move into `AXE` helper namespace/dino lib
 func update_bodies():
 	print("[Door ", self.name, " bodies]: ", bodies)

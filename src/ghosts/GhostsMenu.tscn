@@ -4,14 +4,14 @@
 [ext_resource path="res://src/ghosts/GhostsMenuList.gd" type="Script" id=2]
 [ext_resource path="res://src/ghosts/hud/GhostsControls.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/MaxSizeContainer/max_size_container.gd" type="Script" id=4]
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=5]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 resource_local_to_scene = true
 size = 96
 outline_size = 4
 outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
-extra_spacing_top = 10
+spacing_top = 10
 font_data = ExtResource( 5 )
 
 [node name="Control" type="Control"]
@@ -25,48 +25,48 @@ anchor_bottom = 1.0
 [node name="HeroLabel" parent="HBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 308.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 0, 100 )
+offset_right = 308.0
+offset_bottom = 300.0
+custom_minimum_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 custom_fonts/normal_font = SubResource( 1 )
-bbcode_text = "[center]Ghost House[/center]"
+text = "[center]Ghost House[/center]"
 text = "Ghost House"
 scroll_active = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 312.0
-margin_right = 512.0
-margin_bottom = 300.0
+offset_left = 312.0
+offset_right = 512.0
+offset_bottom = 300.0
 
 [node name="MaxSizeContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-margin_right = 200.0
-margin_bottom = 148.0
+offset_right = 200.0
+offset_bottom = 148.0
 size_flags_vertical = 3
-custom_constants/margin_right = 0
-custom_constants/margin_top = 0
-custom_constants/margin_left = 0
-custom_constants/margin_bottom = 0
+custom_constants/offset_right = 0
+custom_constants/offset_top = 0
+custom_constants/offset_left = 0
+custom_constants/offset_bottom = 0
 script = ExtResource( 4 )
 max_size = Vector2( 130, -1 )
 
 [node name="GhostsControls" parent="HBoxContainer/VBoxContainer/MaxSizeContainer" instance=ExtResource( 3 )]
-margin_left = 35.0
-margin_right = 165.0
-margin_bottom = 148.0
+offset_left = 35.0
+offset_right = 165.0
+offset_bottom = 148.0
 size_flags_vertical = 3
 alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 152.0
-margin_right = 200.0
-margin_bottom = 300.0
-rect_min_size = Vector2( 200, 0 )
+offset_top = 152.0
+offset_right = 200.0
+offset_bottom = 300.0
+custom_minimum_size = Vector2( 200, 0 )
 size_flags_vertical = 3
 
 [node name="NaviButtonList" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/CenterContainer"]
-margin_left = 70.0
-margin_top = 54.0
-margin_right = 130.0
-margin_bottom = 94.0
+offset_left = 70.0
+offset_top = 54.0
+offset_right = 130.0
+offset_bottom = 94.0
 script = ExtResource( 2 )

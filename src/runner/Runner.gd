@@ -1,10 +1,10 @@
-tool
+@tool
 extends Node2D
 
-export(Array, PackedScene) var initial_room_options = []
+@export var initial_room_options = [] # (Array, PackedScene)
 var room_options = []
-export(PackedScene) var final_room
-export(Array, PackedScene) var gap_room_options = []
+@export var final_room: PackedScene
+@export var gap_room_options = [] # (Array, PackedScene)
 
 var room_queue = []
 var current_rooms = []
@@ -48,14 +48,14 @@ func choose_next_room_instance():
 	if not current_rooms:
 		if gap_room_options:
 			var room_i = randi() % gap_room_options.size()
-			return gap_room_options[room_i].instance()
+			return gap_room_options[room_i].instantiate()
 
 	# some rooms we haven't seen yet? let's see them!
 	if room_options:
 		# none queued, pulling new random room
 		var room_i = randi() % room_options.size()
 		# pop from opts - we won't see it anymore
-		return room_options.pop_at(room_i).instance()
+		return room_options.pop_at(room_i).instantiate()
 
 	# some unfinished rooms? gimme one
 	if room_queue:
@@ -73,12 +73,12 @@ func choose_next_room_instance():
 	# add a gap room until the current is requeued
 	if current_unfinished:
 		var room_i = randi() % gap_room_options.size()
-		return gap_room_options[room_i].instance()
+		return gap_room_options[room_i].instantiate()
 
 	# nothing left to finish, mark done and return the final
 	no_more_rooms = true
 	if final_room:
-		return final_room.instance()
+		return final_room.instantiate()
 
 
 # prepare room to be added to the scene
@@ -154,7 +154,7 @@ func room_entered(_player, room):
 func room_exited(_player, room):
 	# TODO maybe there's a later place to fire this?
 	# it happens too quickly this way, the blocks
-	# disappear on-screen.
+	# disappear checked-screen.
 	room.cleanup()
 
 	var exited_room_index = current_rooms.find(room)
@@ -164,7 +164,7 @@ func room_exited(_player, room):
 		if not room_queue.has(room):
 			room_queue.append(room)
 
-	# remove rooms before the just-exited one
+	# remove_at rooms before the just-exited one
 	var to_delete = []
 	var to_remove = []
 

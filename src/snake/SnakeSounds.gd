@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 
@@ -9,7 +9,7 @@ func _ready():
 ###########################################################################
 # sounds
 
-onready var sounds = {
+@onready var sounds = {
 	"walk":
 	[
 			preload("res://assets/sounds/snake/walk1.sfxr"),

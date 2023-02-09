@@ -8,13 +8,13 @@
 
 [node name="DestroyedLabel" type="RichTextLabel"]
 modulate = Color( 0.819608, 0.486275, 0.486275, 1 )
-margin_left = -34.0
-margin_top = -19.0
-margin_right = 34.0
-margin_bottom = 21.0
+offset_left = -34.0
+offset_top = -19.0
+offset_right = 34.0
+offset_bottom = 21.0
 theme = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center][jump][sparkle freq=10.0 c1=#f6c6a8 c2=#d17c7c]TARGET DESTROYED"
+text = "[center][jump][sparkle freq=10.0 c1=#f6c6a8 c2=#d17c7c]TARGET DESTROYED"
 text = "TARGET DESTROYED"
 fit_content_height = true
 scroll_active = false

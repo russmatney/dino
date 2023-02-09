@@ -1,4 +1,4 @@
-tool
+@tool
 extends RichTextEffect
 
 
@@ -17,7 +17,7 @@ func _process_custom_fx(char_fx):
 	
 	_last = char_fx.absolute_index
 	var t = abs(sin(char_fx.elapsed_time * 8.0 + _w_char * PI * .025)) * 4.0
-	var angle = deg2rad(char_fx.env.get("angle", 0))
+	var angle = deg_to_rad(char_fx.env.get("angle", 0))
 	char_fx.offset.x += sin(angle) * t
 	char_fx.offset.y += cos(angle) * t
 	return true

@@ -4,7 +4,7 @@
 # See LICENSE in the project root for license information.
 # ############################################################################ #
 
-extends Reference
+extends RefCounted
 
 class_name InkEditorInterface
 
@@ -27,8 +27,8 @@ var editor_interface: EditorInterface
 var editor_settings: EditorSettings
 var editor_filesystem: EditorFileSystem
 
-## `true` if the editor is running on Windows, `false` otherwise.
-var is_running_on_windows: bool setget , get_is_running_on_windows
+## `true` if the editor is running checked Windows, `false` otherwise.
+var is_running_on_windows: bool : get = get_is_running_on_windows
 func get_is_running_on_windows() -> bool:
 	var os_name = OS.get_name()
 	return (os_name == "Windows" || os_name == "UWP")
@@ -45,7 +45,7 @@ func _init(editor_interface: EditorInterface):
 
 	scale = editor_interface.get_editor_scale()
 
-	self.editor_filesystem.connect("resources_reimported", self, "_resources_reimported")
+	self.editor_filesystem.connect("resources_reimported",Callable(self,"_resources_reimported"))
 
 # ############################################################################ #
 # Methods
@@ -59,22 +59,22 @@ func scan_file_system():
 func update_file(path: String):
 	self.editor_filesystem.update_file(path)
 
-## Returns a custom header color based on the editor's base color.
+## Returns a custom header color based checked the editor's base color.
 ##
-## If the base color is not found, return 'Color.transparent'.
+## If the base color is not found, return 'Color.TRANSPARENT'.
 func get_custom_header_color() -> Color:
 	var color = self.editor_settings.get_setting("interface/theme/base_color")
 	if color != null:
 		return Color.from_hsv(color.h * 0.99, color.s * 0.6, color.v * 1.1)
 	else:
-		return Color.transparent
+		return Color.TRANSPARENT
 
 # ############################################################################ #
 # Signal Receivers
 # ############################################################################ #
 
 func _resources_reimported(resources):
-	var ink_resources := PoolStringArray()
+	var ink_resources := PackedStringArray()
 
 	for resource in resources:
 		if resource.get_extension() == "ink":

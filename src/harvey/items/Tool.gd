@@ -1,10 +1,10 @@
-tool
-extends KinematicBody2D
+@tool
+extends CharacterBody2D
 
-export(String, "watering-pail", "shovel") var tool_type = "watering-pail"
+@export var tool_type = "watering-pail" # (String, "watering-pail", "shovel")
 
-onready var tool_icon = $ToolIcon
-onready var action_label = $ActionLabel
+@onready var tool_icon = $ToolIcon
+@onready var action_label = $ActionLabel
 
 ##########################################################
 # ready
@@ -59,7 +59,7 @@ func set_action_label(player):
 
 	# TODO select action better?
 	var ax = actions[0]
-	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
 
 	if not can_perform_action(player, ax):
 		action_label.modulate.a = 0.5

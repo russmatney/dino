@@ -1,11 +1,11 @@
-tool
+@tool
 extends VBoxContainer
 class_name NaviButtonList
 
-export(PackedScene) var default_button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
+@export var default_button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")
 
 # set a local member for the Navi autoload, to ease testing
-# TODO consider loading/falling back on a load instead?
+# TODO consider loading/falling back checked a load instead?
 var _navi = Navi
 
 
@@ -19,7 +19,7 @@ func pw(msg: String, item = {}):
 ## config warnings #####################################################################
 
 
-func _get_configuration_warning():
+func _get_configuration_warnings():
 	if not default_button_scene:
 		return "No default_button_scene set"
 	return ""
@@ -29,7 +29,7 @@ func _get_configuration_warning():
 
 
 func _ready():
-	# TODO assert on nav paths?
+	# TODO assert checked nav paths?
 	if Engine.editor_hint:
 		request_ready()
 
@@ -82,9 +82,9 @@ func connect_pressed_to_action(button, item):
 			return
 
 	if arg:
-		button.connect("pressed", obj, method, [arg])
+		button.connect("pressed",Callable(obj,method).bind(arg))
 	else:
-		button.connect("pressed", obj, method)
+		button.connect("pressed",Callable(obj,method))
 
 
 func add_menu_item(item):
@@ -101,7 +101,7 @@ func add_menu_item(item):
 		pw("No button_scene: ", button_scene)
 		return
 
-	var button = button_scene.instance()
+	var button = button_scene.instantiate()
 	var label = item.get("label", "Fallback Label")
 	if label in texts:
 		pw("Refusing to add button with existing label.", item)

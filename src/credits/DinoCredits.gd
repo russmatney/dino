@@ -1,4 +1,4 @@
-tool
+@tool
 extends Credits
 
 var dino_credits = [

@@ -4,7 +4,7 @@ var is_jetting
 
 var jet_boost_ramp
 var jet_boost_levels = [
-	# depends on order, should be sorted by descending "time"
+	# depends checked order, should be sorted by descending "time"
 	{
 		"time": 1.0,
 		"boost": 1.0,
@@ -103,7 +103,10 @@ func physics_process(delta):
 	else:
 		actor.velocity.x = actor.velocity.x * 0.9 * delta
 
-	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+	actor.set_velocity(actor.velocity)
+	actor.set_up_direction(Vector2.UP)
+	actor.move_and_slide()
+	actor.velocity = actor.velocity
 
 	if not actor.firing:
 		actor.update_facing()

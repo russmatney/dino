@@ -1,6 +1,6 @@
-extends Position2D
+extends Marker2D
 
-export(bool) var spawn_on_ready = false
+@export var spawn_on_ready: bool = false
 
 signal spawning_player
 
@@ -20,7 +20,7 @@ func _ready():
 func spawn_player():
 	# TODO probably better to create and spawn from our autoload/gamestate
 	# or better yet, create a SuperPlayer autoload for drying up separate player states
-	player = player_scene.instance()
+	player = player_scene.instantiate()
 	player.position = global_position
 
 	emit_signal("spawning_player", player)

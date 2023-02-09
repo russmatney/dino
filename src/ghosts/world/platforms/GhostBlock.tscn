@@ -12,13 +12,13 @@ shader_param/alpha = 0.577177
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="GhostBlock" type="KinematicBody2D"]
+[node name="GhostBlock" type="CharacterBody2D"]
 collision_mask = 0
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource( 2 )
-frames = ExtResource( 2 )
+sprite_frames = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -26,10 +26,10 @@ one_way_collision = true
 
 [node name="Label" type="Label" parent="."]
 visible = false
-margin_left = -24.0
-margin_top = -56.0
-margin_right = 24.0
-margin_bottom = -40.0
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -40.0
 text = "enabled"
 align = 1
 uppercase = true

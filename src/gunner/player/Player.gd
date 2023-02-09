@@ -1,8 +1,8 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var anim = $AnimatedSprite
-onready var jet_anim = $Jet
-onready var notif_label = $NotifLabel
+@onready var anim = $AnimatedSprite2D
+@onready var jet_anim = $Jet
+@onready var notif_label = $NotifLabel
 
 var dead = false
 
@@ -11,12 +11,12 @@ var dead = false
 
 var reset_position
 
-export(bool) var has_jetpack = false
+@export var has_jetpack: bool = false
 
 
 func _ready():
 	reset_position = get_global_position()
-	machine.connect("transitioned", self, "on_transit")
+	machine.connect("transitioned",Callable(self,"on_transit"))
 	face_left()
 
 	Cam.call_deferred("ensure_camera", 2)
@@ -31,7 +31,7 @@ var record_pos_n = 10
 var record_pos_every = 0.0005
 var record_pos_in = 0
 
-export(float) var max_y = 10000.0
+@export var max_y: float = 10000.0
 
 
 func _process(delta):
@@ -53,7 +53,7 @@ func _process(delta):
 		var pos = target * 0.1 + current * 0.9
 		state_label.set_global_position(pos)
 
-	# TODO remove/replace with some other thing?
+	# TODO remove_at/replace with some other thing?
 	if get_global_position().y >= max_y:
 		take_damage(null, 1)
 		position = reset_position
@@ -86,7 +86,7 @@ func _unhandled_key_input(event):
 # health
 
 var initial_health = 6
-onready var health = initial_health
+@onready var health = initial_health
 
 signal health_change(health)
 signal dead
@@ -108,19 +108,19 @@ func take_damage(body = null, d = 1):
 		machine.transit("Dead", {"shake": 1.0})
 
 
-func die(remove = false):
+func die(remove_at = false):
 	dead = true
 	GunnerSounds.play_sound("player_dead")
 	emit_signal("dead")
-	if remove:
+	if remove_at:
 		queue_free()
 
 
 ############################################################
 # machine
 
-onready var machine = $Machine
-onready var state_label = $StateLabel
+@onready var machine = $Machine
+@onready var state_label = $StateLabel
 var state
 
 
@@ -137,7 +137,7 @@ func set_state_label(label: String):
 		lbl += " COLD"
 	if in_red:
 		lbl += " HOT"
-	state_label.bbcode_text = "[center]" + lbl + "[/center]"
+	state_label.text = "[center]" + lbl + "[/center]"
 
 
 ############################################################
@@ -145,13 +145,13 @@ func set_state_label(label: String):
 
 var move_dir = Vector2.ZERO  # controller input
 var velocity = Vector2.ZERO
-export(int) var speed := 220
-export(int) var air_speed := 200
-export(int) var max_fall_speed := 1500
-export(int) var jump_impulse := 400
-export(int) var gravity := 900
-export(int) var jetpack_boost := 800
-export(int) var max_jet_speed := -1200
+@export var speed: int := 220
+@export var air_speed: int := 200
+@export var max_fall_speed: int := 1500
+@export var jump_impulse: int := 400
+@export var gravity: int := 900
+@export var jetpack_boost: int := 800
+@export var max_jet_speed: int := -1200
 
 var can_wall_jump
 
@@ -159,7 +159,7 @@ var can_wall_jump
 # facing
 
 var facing_dir = Vector2.ZERO
-onready var look_pof = $LookPOF
+@onready var look_pof = $LookPOF
 
 
 func update_facing():
@@ -194,12 +194,12 @@ func face_left():
 ############################################################
 # fire
 
-onready var bullet_position = $BulletPosition
+@onready var bullet_position = $BulletPosition
 var firing = false
 
 # per-bullet (gun) numbers
 
-onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+@onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 2
@@ -216,7 +216,7 @@ func fire():
 	fire_tween = create_tween()
 	fire_bullet()
 	fire_tween.set_loops(0)
-	fire_tween.tween_callback(self, "fire_bullet").set_delay(fire_rate)
+	fire_tween.tween_callback(Callable(self,"fire_bullet")).set_delay(fire_rate)
 
 
 func stop_firing():
@@ -231,12 +231,12 @@ signal fired_bullet(bullet)
 
 
 func fire_bullet():
-	var bullet = bullet_scene.instance()
+	var bullet = bullet_scene.instantiate()
 	bullet.position = bullet_position.get_global_position()
 	bullet.add_collision_exception_with(self)
 	Navi.current_scene.call_deferred("add_child", bullet)
 	bullet.rotation = facing_dir.angle()
-	bullet.apply_impulse(Vector2.ZERO, facing_dir * bullet_impulse)
+	bullet.apply_impulse(facing_dir * bullet_impulse, Vector2.ZERO)
 	GunnerSounds.play_sound("fire")
 	emit_signal("fired_bullet", bullet)
 
@@ -259,16 +259,16 @@ func notif(text, opts = {}):
 	else:
 		label = notif_label
 
-	label.bbcode_text = "[center][jump][sparkle freq=10.0 c1=#5b768d c2=#f6c6a8]" + text
+	label.text = "[center][jump][sparkle freq=10.0 c1=#5b768d c2=#f6c6a8]" + text
 	label.set_visible(true)
 	var tween = create_tween()
 
 	if dupe:
 		label.set_global_position(notif_label.get_global_position())
 		Navi.add_child_to_current(label)
-		tween.tween_callback(label, "queue_free").set_delay(ttl)
+		tween.tween_callback(Callable(label,"queue_free")).set_delay(ttl)
 	else:
-		tween.tween_callback(label, "set_visible", [false]).set_delay(ttl)
+		tween.tween_callback(Callable(label,"set_visible").bind(false)).set_delay(ttl)
 
 
 ######################################################################
@@ -288,7 +288,7 @@ func level_up():
 func shine(time = 1.0):
 	var tween = create_tween()
 	anim.material.set("shader_param/speed", 1.0)
-	tween.tween_callback(anim.material, "set", ["shader_param/speed", 0.0]).set_delay(time)
+	tween.tween_callback(Callable(anim.material,"set").bind("shader_param/speed", 0.0)).set_delay(time)
 
 
 ######################################################################

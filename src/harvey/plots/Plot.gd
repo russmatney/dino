@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var anim = $AnimatedSprite
-onready var action_label = $ActionLabel
+@onready var anim = $AnimatedSprite2D
+@onready var action_label = $ActionLabel
 var produce_type
 
 ############################################################
@@ -9,7 +9,7 @@ var produce_type
 
 
 func _ready():
-	machine.connect("transitioned", self, "on_transit")
+	machine.connect("transitioned",Callable(self,"on_transit"))
 
 
 func _process(_delta):
@@ -22,8 +22,8 @@ func _process(_delta):
 ############################################################
 # machine
 
-onready var machine = $Machine
-onready var state_label = $StateLabel
+@onready var machine = $Machine
+@onready var state_label = $StateLabel
 var state
 
 
@@ -47,7 +47,7 @@ func on_transit(new_state):
 
 func set_state_label(label: String):
 	state_label.set_visible(true)
-	state_label.bbcode_text = "[center]" + label + "[/center]"
+	state_label.text = "[center]" + label + "[/center]"
 
 
 ############################################################
@@ -110,9 +110,9 @@ func set_action_label(player):
 		return
 
 	if ax_label:
-		action_label.bbcode_text = "[center]" + ax_label.capitalize() + "[/center]"
+		action_label.text = "[center]" + ax_label.capitalize() + "[/center]"
 	else:
-		action_label.bbcode_text = ""
+		action_label.text = ""
 
 	if not player or not can_perform_action(player, ax):
 		action_label.modulate.a = 0.5

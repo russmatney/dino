@@ -1,10 +1,10 @@
-tool
+@tool
 extends EditorPlugin
 
 
 func _enter_tree():
-	print("<Camera>")
+	print("<Camera3D>")
 
 
 func _exit_tree():
-	print("</Camera>")
+	print("</Camera3D>")

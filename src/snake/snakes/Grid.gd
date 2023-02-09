@@ -1,13 +1,13 @@
-tool
+@tool
 extends Node2D
 
 ###########################################################################
 # exports/vars
 
-export(int, 2, 24) var width = 16 setget set_width
-export(int, 2, 24) var height = 16 setget set_height
-export(int) var cell_size = 8 setget set_cell_size
-export(int) var enemy_count = 1
+@export var width = 16 setget set_width # (int, 2, 24)
+@export var height = 16 setget set_height # (int, 2, 24)
+@export var cell_size: int = 8 : set = set_cell_size
+@export var enemy_count: int = 1
 
 
 func set_width(v):
@@ -168,7 +168,7 @@ func deform_all_cells():
 ###########################################################################
 # init grid
 
-onready var cell_scene = preload("res://src/snake/snakes/Cell.tscn")
+@onready var cell_scene = preload("res://src/snake/snakes/Cell.tscn")
 var cells = {}
 
 
@@ -178,7 +178,7 @@ func init_grid(anim = "yellow"):
 			c.free()
 
 	for coord in all_cell_coords():
-		var c = cell_scene.instance()
+		var c = cell_scene.instantiate()
 		c.coord = coord
 		c.animation = anim
 		Util.set_random_frame(c)
@@ -193,12 +193,12 @@ func init_grid(anim = "yellow"):
 # init player
 
 var snakes = []
-onready var player_scene = preload("res://src/snake/snakes/Player.tscn")
+@onready var player_scene = preload("res://src/snake/snakes/Player.tscn")
 
 func add_snake():
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
-	var p = player_scene.instance()
+	var p = player_scene.instantiate()
 	snakes.append(p)
 	add_child(p)
 	p.init(self, initial_cell, initial_direction)
@@ -206,13 +206,13 @@ func add_snake():
 ###########################################################################
 # init enemy
 
-onready var enemy_scene = preload("res://src/snake/snakes/Enemy.tscn")
+@onready var enemy_scene = preload("res://src/snake/snakes/Enemy.tscn")
 
 func add_enemy():
 	print("adding enemy to grid")
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
-	var e = enemy_scene.instance()
+	var e = enemy_scene.instantiate()
 	snakes.append(e)
 	add_child(e)
 	e.init(self, initial_cell, initial_direction)
@@ -233,7 +233,7 @@ func init_food():
 	add_food()
 
 
-onready var food_scene = preload("res://src/snake/Food.tscn")
+@onready var food_scene = preload("res://src/snake/Food.tscn")
 
 func add_food(exclude=null):
 	var empty_cell = random_empty_coord(exclude)
@@ -241,7 +241,7 @@ func add_food(exclude=null):
 		print("[SNAKE] No empty cells! Cannot place food.")
 		return
 
-	var f = food_scene.instance()
+	var f = food_scene.instantiate()
 	f.coord = empty_cell
 	Util.set_random_frame(f)
 	f.position = coord_to_position(empty_cell)

@@ -5,14 +5,14 @@
 [ext_resource path="res://src/menus/GamesList.gd" type="Script" id=3]
 [ext_resource path="res://src/menus/GymsList.gd" type="Script" id=4]
 [ext_resource path="res://src/menus/OtherList.gd" type="Script" id=5]
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=6]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="FontFile" id=1]
 resource_local_to_scene = true
 size = 96
 outline_size = 4
 outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
-extra_spacing_top = 10
+spacing_top = 10
 font_data = ExtResource( 6 )
 
 [node name="DinoMenu" type="Control"]
@@ -27,32 +27,32 @@ anchor_bottom = 1.0
 [node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 512.0
-margin_bottom = 107.0
+offset_right = 512.0
+offset_bottom = 107.0
 custom_fonts/normal_font = SubResource( 1 )
-bbcode_text = "[center]Dino[/center]"
+text = "[center]Dino[/center]"
 text = "Dino"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 111.0
-margin_right = 512.0
-margin_bottom = 261.0
+offset_top = 111.0
+offset_right = 512.0
+offset_bottom = 261.0
 alignment = 1
 
 [node name="GamesList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 75.0
-margin_right = 178.0
-margin_bottom = 150.0
+offset_left = 75.0
+offset_right = 178.0
+offset_bottom = 150.0
 script = ExtResource( 3 )
 
 [node name="GymsList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 182.0
-margin_right = 329.0
-margin_bottom = 150.0
+offset_left = 182.0
+offset_right = 329.0
+offset_bottom = 150.0
 script = ExtResource( 4 )
 
 [node name="OtherList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 333.0
-margin_right = 436.0
-margin_bottom = 150.0
+offset_left = 333.0
+offset_right = 436.0
+offset_bottom = 150.0
 script = ExtResource( 5 )

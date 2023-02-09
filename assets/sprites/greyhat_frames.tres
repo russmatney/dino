@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=21 format=2]
 
-[ext_resource path="res://assets/sprites/greyhat_sheet.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/greyhat_sheet.png" type="Texture2D" id=1]
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )

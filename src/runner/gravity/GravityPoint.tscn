@@ -14,8 +14,8 @@ linear_damp = 3.485
 shape = SubResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -49.0
-margin_top = -48.0
-margin_right = 47.0
-margin_bottom = 48.0
+offset_left = -49.0
+offset_top = -48.0
+offset_right = 47.0
+offset_bottom = 48.0
 color = Color( 1, 1, 1, 0.247059 )

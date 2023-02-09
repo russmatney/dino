@@ -7,15 +7,15 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.5, 6 )
 
-[node name="Player" type="KinematicBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 1 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource( 1 )
 animation = "run"
 frame = 2
 playing = true

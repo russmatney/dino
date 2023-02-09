@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/evening-dogs.wav-5eb4cefe8663c91b60084a90edf0c526.sample"
+type="AudioStreamWAV"
+uid="uid://pe86ov000emh"
+path="res://.godot/imported/evening-dogs.wav-5eb4cefe8663c91b60084a90edf0c526.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/evening-dogs.wav"
-dest_files=[ "res://.import/evening-dogs.wav-5eb4cefe8663c91b60084a90edf0c526.sample" ]
+dest_files=["res://.godot/imported/evening-dogs.wav-5eb4cefe8663c91b60084a90edf0c526.sample"]
 
 [params]
 

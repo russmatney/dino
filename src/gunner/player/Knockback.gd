@@ -36,7 +36,7 @@ func process(delta: float):
 
 	# if we've flown a bit
 	if knockback_time - time_left > 0.5:
-		# and we're back on the floor
+		# and we're back checked the floor
 		if actor.is_on_floor():
 			knocked_back = false
 			if dead:
@@ -53,4 +53,7 @@ func process(delta: float):
 			transit("Idle")
 
 	actor.velocity.y += actor.gravity * delta
-	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+	actor.set_velocity(actor.velocity)
+	actor.set_up_direction(Vector2.UP)
+	actor.move_and_slide()
+	actor.velocity = actor.velocity

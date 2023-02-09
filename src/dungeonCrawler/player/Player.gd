@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Player
 
 var move_accel := 800
@@ -25,7 +25,7 @@ func setup():
 #######################################################################33
 # facing
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 enum facing_dir { RIGHT, DOWN, LEFT, UP }
 var facing = facing_dir.RIGHT
 
@@ -59,7 +59,9 @@ func _process(delta):
 		anim.animation = "run"
 	else:
 		anim.animation = "idle"
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity
 
 	# TODO cache or otherwise store current_target
 	# TODO animate rotation, pass delta in
@@ -90,7 +92,7 @@ func _unhandled_input(event):
 #######################################################################33
 # weapons
 
-onready var weapon_pos = $WeaponPosition
+@onready var weapon_pos = $WeaponPosition
 var weapon
 
 
@@ -144,7 +146,7 @@ var player_bow_scene = preload("res://src/dungeonCrawler/weapons/BowWeapon.tscn"
 
 
 func attach_bow():
-	var bow = player_bow_scene.instance()
+	var bow = player_bow_scene.instantiate()
 	call_deferred("add_child", bow)
 	bow.transform.origin = weapon_pos.position
 
@@ -159,13 +161,13 @@ func fire_bow():
 		print("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
 		return
 
-	var arrow = arrow_scene.instance()
+	var arrow = arrow_scene.instantiate()
 	arrow.position = bow.get_global_position()  # maybe use weapon position?
 	# prefer to add bullets to the current scene, so they get cleaned up
 	Navi.current_scene.call_deferred("add_child", arrow)
 	arrow.rotation_degrees = bow.rotation_degrees + 90
-	var impulse_dir = Vector2(1, 0).rotated(deg2rad(bow.rotation_degrees))
-	arrow.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
+	var impulse_dir = Vector2(1, 0).rotated(deg_to_rad(bow.rotation_degrees))
+	arrow.apply_impulse(impulse_dir * arrow_impulse, Vector2.ZERO)
 
 
 func point_bow(dir):
@@ -268,13 +270,13 @@ func use_key():
 const actions = []
 
 var action_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
-onready var actions_list = $ActionsList
+@onready var actions_list = $ActionsList
 
 
 func add_action(ax):
 	var label_text = ax.get("label", "fallback label")
-	var new_label = action_label_scene.instance()
-	new_label.bbcode_text = "[center]" + label_text
+	var new_label = action_label_scene.instantiate()
+	new_label.text = "[center]" + label_text
 	actions_list.add_child(new_label)
 	actions.append(ax)
 
@@ -303,7 +305,7 @@ func execute_action(ax):
 
 #######################################################################33
 # targets
-# can pretty much lock-on to everything
+# can pretty much lock-checked to everything
 
 var bodies = []
 
@@ -333,7 +335,7 @@ func _on_LockOnDetectArea2D_area_exited(area: Area2D):
 	# print("[player-lockon-areas]:", areas)
 
 
-onready var line_of_sight = $LineOfSightRayCast2D
+@onready var line_of_sight = $LineOfSightRayCast2D
 
 
 func in_line_of_sight(body):
@@ -425,7 +427,7 @@ func hit():
 		# TODO API helper for this whole debug msg thing?
 		var msg = {"label": "health -= 1"}
 		add_debug_message(msg)
-		yield(get_tree().create_timer(2.0), "timeout")
+		await get_tree().create_timer(2.0).timeout
 		remove_debug_message(msg)
 
 
@@ -457,14 +459,14 @@ func health_info_dict(h):
 const debug_messages = []
 
 var debug_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
-onready var debug_list = $DebugList
+@onready var debug_list = $DebugList
 
 
 func add_debug_message(msg):
 	var label_text = msg.get("label")
 	if label_text:
-		var new_label = debug_label_scene.instance()
-		new_label.bbcode_text = "[center]" + label_text
+		var new_label = debug_label_scene.instantiate()
+		new_label.text = "[center]" + label_text
 		debug_list.add_child(new_label)
 		debug_messages.append(msg)
 
@@ -488,14 +490,14 @@ func remove_debug_message(msg):
 const info_messages = []
 
 var info_message_scene = preload("res://src/dungeonCrawler/player/InfoMessage.tscn")
-onready var info_list = get_node("%InfoList")
+@onready var info_list = get_node("%InfoList")
 
 
 func add_info_message(msg):
 	var label_text = msg.get("label")
 	if label_text:
-		var new_label = info_message_scene.instance()
-		new_label.bbcode_text = "[center]" + label_text
+		var new_label = info_message_scene.instantiate()
+		new_label.text = "[center]" + label_text
 		info_list.add_child(new_label)
 		info_messages.append(msg)
 

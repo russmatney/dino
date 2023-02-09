@@ -33,7 +33,7 @@ static func InkNativeFunctionCall() -> GDScript:
 static func call_with_name(function_name) -> InkNativeFunctionCall:
 	return InkNativeFunctionCall().new_with_name(function_name)
 
-var name: String setget set_name, get_name
+var name: String : get = get_name, set = set_name
 func get_name() -> String:
 	return _name
 
@@ -43,7 +43,7 @@ func set_name(value: String):
 		_prototype = self._static_native_function_call.native_functions[_name]
 var _name
 
-var number_of_parameters: int setget set_number_of_parameters, get_number_of_parameters
+var number_of_parameters: int : get = get_number_of_parameters, set = set_number_of_parameters
 func get_number_of_parameters() -> int:
 	if _prototype:
 		return _prototype.number_of_parameters
@@ -74,7 +74,7 @@ func call_with_parameters(parameters: Array, metadata: StoryErrorMetadata) -> In
 	for p in parameters:
 		if Utils.is_ink_class(p, "Void"):
 			Utils.throw_story_exception(
-					"Attempting to perform operation on a void value. Did you forget to " +
+					"Attempting to perform operation checked a void value. Did you forget to " +
 					"'return' a value from a function you called here?",
 					false,
 					metadata
@@ -120,7 +120,7 @@ func call_coerced(parameters_of_single_type: Array, metadata: StoryErrorMetadata
 		else:
 			var type_name = Utils.value_type_name(val_type)
 			Utils.throw_story_exception(
-					"Cannot perform operation '%s' on value of type (%d)" \
+					"Cannot perform operation '%s' checked value of type (%d)" \
 					% [self.name, type_name],
 					false,
 					metadata
@@ -177,7 +177,7 @@ func call_binary_list_operation(parameters: Array, metadata) -> InkValue:
 	var v1_type_name = Utils.value_type_name(v1.value_type)
 	var v2_type_name = Utils.value_type_name(v2.value_type)
 	Utils.throw_story_exception(
-			"Can not call use '%s' operation on %s and %s" % \
+			"Can not call use '%s' operation checked %s and %s" % \
 			[self.name, v1_type_name, v2_type_name],
 			false,
 			metadata
@@ -315,7 +315,7 @@ var _operation_funcs: Dictionary = {}
 # ############################################################################ #
 
 func is_class(type):
-	return type == "NativeFunctionCall" || .is_class(type)
+	return type == "NativeFunctionCall" || super.is_class(type)
 
 func get_class():
 	return "NativeFunctionCall"

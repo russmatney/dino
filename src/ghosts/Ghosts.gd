@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 signal room_entered
@@ -27,7 +27,7 @@ var player_data = {}
 
 
 func room_ready(room):
-	room.connect("spawning_player", self, "spawning_player")
+	room.connect("spawning_player",Callable(self,"spawning_player"))
 	create_notification(str("Entered: ", room.name))
 	emit_signal("room_entered", room)
 

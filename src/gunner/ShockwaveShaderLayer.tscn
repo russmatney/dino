@@ -19,7 +19,7 @@ material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Position2D" type="Position2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2( 256, 150 )
 __meta__ = {
 "_gizmo_extents_": 312.3

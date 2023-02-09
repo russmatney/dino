@@ -1,14 +1,14 @@
-tool
+@tool
 extends Node
 
-onready var menu_song = preload("res://addons/dj/assets/songs/Late Night Radio.mp3")
+@onready var menu_song = preload("res://addons/dj/assets/songs/Late Night Radio.mp3")
 var menu_song_player
 var playback_pos
 
 
 func _ready():
 	# so we can play music while paused
-	pause_mode = PAUSE_MODE_PROCESS
+	process_mode = PROCESS_MODE_ALWAYS
 
 	if menu_song:
 		print("[DJ]: Menu song configured")

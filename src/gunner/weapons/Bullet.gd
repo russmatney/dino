@@ -1,7 +1,7 @@
 extends RigidBody2D
 
-onready var pop = $Pop
-onready var anim = $AnimatedSprite
+@onready var pop = $Pop
+@onready var anim = $AnimatedSprite2D
 
 var ttl = 3
 var dying = false
@@ -26,7 +26,7 @@ func kill():
 		anim.set_visible(false)
 		pop.set_visible(true)
 
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 		if is_instance_valid(self):
 			queue_free()
 

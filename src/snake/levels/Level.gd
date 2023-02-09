@@ -6,9 +6,9 @@ extends Node2D
 var player
 
 func _ready():
-	var _x = Quest.connect("quest_failed", self, "_on_quest_failed")
-	var _y = Quest.connect("all_quests_complete", self, "_on_all_quests_complete")
-	var _z = Hood.connect("found_player", self, "_on_found_player")
+	var _x = Quest.connect("quest_failed",Callable(self,"_on_quest_failed"))
+	var _y = Quest.connect("all_quests_complete",Callable(self,"_on_all_quests_complete"))
+	var _z = Hood.connect("found_player",Callable(self,"_on_found_player"))
 	if Hood.player:
 		_on_found_player(Hood.player)
 

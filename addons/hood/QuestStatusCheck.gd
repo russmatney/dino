@@ -1,13 +1,13 @@
 extends HBoxContainer
 
-var quest: ActiveQuest setget set_quest
+var quest: ActiveQuest : set = set_quest
 
 func set_quest(q):
 	quest = q
 
 	if quest:
 		$CheckBox.text = status_label()
-		$CheckBox.pressed = quest.complete
+		$CheckBox.button_pressed = quest.complete
 
 func status_label():
 	var label

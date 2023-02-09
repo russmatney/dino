@@ -12,10 +12,10 @@
 [node name="BotGym" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -248.0
-margin_top = -144.0
-margin_right = 248.0
-margin_bottom = 144.0
+offset_left = -248.0
+offset_top = -144.0
+offset_right = 248.0
+offset_bottom = 144.0
 color = Color( 0.321569, 0.52549, 0.380392, 1 )
 
 [node name="SeedBox" parent="." instance=ExtResource( 4 )]

@@ -1,4 +1,4 @@
-tool
+@tool
 extends NaviButtonList
 
 var menu_scenes = [

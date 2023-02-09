@@ -8,7 +8,7 @@ func _ready():
 ###########################################################################
 # sounds
 
-onready var sounds = {
+@onready var sounds = {
 	"fire":
 	[
 		preload("res://assets/sounds/laser1.sfxr"),

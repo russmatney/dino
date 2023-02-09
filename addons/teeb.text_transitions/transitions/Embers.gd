@@ -1,4 +1,4 @@
-tool
+@tool
 extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 
 
@@ -17,7 +17,7 @@ func _process_custom_fx(char_fx):
 	var scale = char_fx.env.get("scale", 16.0)
 	var clr1 = char_fx.env.get("color")
 	if clr1 == null:
-		clr1 = Color.red
+		clr1 = Color.RED
 	else:
 		clr1 = tween_data.get_color(clr1)
 	var clr2 = clr1

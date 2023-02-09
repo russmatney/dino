@@ -1,9 +1,9 @@
-tool
+@tool
 extends Node
 
 var deving_tower = false
 
-onready var tower_hud = preload("res://src/tower/hud/HUD.tscn")
+@onready var tower_hud = preload("res://src/tower/hud/HUD.tscn")
 
 
 func _ready():
@@ -72,11 +72,11 @@ var player_default_opts = {"has_jetpack": true}
 
 
 func spawn_player(pos):
-	player = player_scene.instance()
+	player = player_scene.instantiate()
 	for k in player_default_opts.keys():
 		player[k] = player_default_opts[k]
 	player.position = pos
-	player.connect("dead", self, "show_dead")
+	player.connect("dead",Callable(self,"show_dead"))
 	Navi.add_child_to_current(player)
 	emit_signal("player_spawned", player)
 	GunnerSounds.play_sound("player_spawn")
@@ -95,7 +95,7 @@ var enemy_robot_scene = preload("res://src/gunner/enemies/EnemyRobot.tscn")
 
 
 func spawn_enemy(pos):
-	var enemy = enemy_robot_scene.instance()
+	var enemy = enemy_robot_scene.instantiate()
 	enemy.position = pos
 	Navi.add_child_to_current(enemy)
 	GunnerSounds.play_sound("enemy_spawn")

@@ -1,10 +1,10 @@
-tool
+@tool
 extends Node
 
 # TODO dry up
 var block_spawners_group_name = "block_spawners"
 
-onready var block_scene = preload("res://src/runner/gravity/Block.tscn")
+@onready var block_scene = preload("res://src/runner/gravity/Block.tscn")
 var block_script = "res://src/runner/gravity/Block.gd"
 
 # TODO consider validation/configuration warning here
@@ -15,7 +15,7 @@ func create_new_block(room, spawner):
 	if not block_scene:
 		return
 
-	var new_block = block_scene.instance()
+	var new_block = block_scene.instantiate()
 	# new_block.script = block_script
 	new_block.position = spawner.position
 

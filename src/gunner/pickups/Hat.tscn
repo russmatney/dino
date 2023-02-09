@@ -15,10 +15,10 @@ extents = Vector2( 8, 7 )
 [node name="Hat" type="Node2D" groups=["poi"]]
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource( 4 )
 scale = Vector2( 2, 2 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 

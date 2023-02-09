@@ -1,5 +1,5 @@
-tool
-extends AnimatedSprite
+@tool
+extends AnimatedSprite2D
 
 var offset_rads = PI / 4
 

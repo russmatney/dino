@@ -1,7 +1,7 @@
-[gd_resource type="DynamicFont" load_steps=3 format=2]
+[gd_resource type="FontFile" load_steps=3 format=2]
 
-[ext_resource path="res://addons/teeb.text_transitions/demo/unifont-13.0.01.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://addons/teeb.text_transitions/demo/unifont_upper-13.0.01.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://addons/teeb.text_transitions/demo/unifont-13.0.01.ttf" type="FontFile" id=1]
+[ext_resource path="res://addons/teeb.text_transitions/demo/unifont_upper-13.0.01.ttf" type="FontFile" id=2]
 
 [resource]
 size = 32

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 var song_name = "field-stars"

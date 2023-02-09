@@ -1,11 +1,11 @@
-tool
+@tool
 extends StaticBody2D
 
-export(String, "carrot", "tomato", "onion") var produce_type = "carrot"
+@export var produce_type = "carrot" # (String, "carrot", "tomato", "onion")
 
-onready var produce_icon = $ProduceIcon
-onready var anim = $AnimatedSprite
-onready var action_label = $ActionLabel
+@onready var produce_icon = $ProduceIcon
+@onready var anim = $AnimatedSprite2D
+@onready var action_label = $ActionLabel
 
 ##########################################################
 # ready
@@ -62,7 +62,7 @@ func set_action_label(player):
 
 	# TODO select action better?
 	var ax = actions[0]
-	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
 
 	if not can_perform_action(player, ax):
 		action_label.modulate.a = 0.5

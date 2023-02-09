@@ -1,5 +1,5 @@
-tool
-extends KinematicBody2D
+@tool
+extends CharacterBody2D
 
 
 func _ready():
@@ -11,9 +11,9 @@ func _ready():
 
 	match move_dir:
 		Vector2.RIGHT:
-			$AnimatedSprite.flip_h = true
+			$AnimatedSprite2D.flip_h = true
 		Vector2.LEFT:
-			$AnimatedSprite.flip_h = false
+			$AnimatedSprite2D.flip_h = false
 
 	speed_factor = (randi() % speed_range) - speed_range
 
@@ -27,17 +27,17 @@ func _ready():
 var stunned = false
 var dead = false
 enum DIR { left, right }
-export(DIR) var initial_dir = DIR.left
+@export var initial_dir: DIR = DIR.left
 var move_dir = Vector2.RIGHT
-export(int) var speed = 100
-export(int) var speed_range = 90
-export(int) var gravity := 2000
+@export var speed: int = 100
+@export var speed_range: int = 90
+@export var gravity: int := 2000
 var speed_factor = 0
 
 var velocity = move_dir * speed
 
-export(int) var fly_speed := 900
-export(int) var fly_range := 400
+@export var fly_speed: int := 900
+@export var fly_range: int := 400
 var flying = false
 
 
@@ -47,40 +47,49 @@ func _physics_process(delta):
 
 		if stunned:
 			velocity.x = lerp(velocity.x, 0, 0.1)
-			velocity = move_and_slide(velocity, Vector2.UP)
-			$AnimatedSprite.animation = "fly"
+			set_velocity(velocity)
+			set_up_direction(Vector2.UP)
+			move_and_slide()
+			velocity = velocity
+			$AnimatedSprite2D.animation = "fly"
 
 		elif knocked_back or dead:
 			velocity.x = lerp(velocity.x, 0, 0.9)
-			velocity = move_and_slide(velocity, Vector2.UP)
-			$AnimatedSprite.animation = "fly"
+			set_velocity(velocity)
+			set_up_direction(Vector2.UP)
+			move_and_slide()
+			velocity = velocity
+			$AnimatedSprite2D.animation = "fly"
 
 		else:
 			velocity.x = move_dir.x * max(speed + speed_factor, velocity.x)
-			velocity = move_and_slide(velocity, Vector2.UP)
+			set_velocity(velocity)
+			set_up_direction(Vector2.UP)
+			move_and_slide()
+			velocity = velocity
 
 			if abs(velocity.x) > 0.1:
-				$AnimatedSprite.animation = "walk"
+				$AnimatedSprite2D.animation = "walk"
 			elif velocity.y < -0.1:
-				$AnimatedSprite.animation = "fly"
+				$AnimatedSprite2D.animation = "fly"
 			else:
-				$AnimatedSprite.animation = "idle"
+				$AnimatedSprite2D.animation = "idle"
 
 			if is_on_wall():
 				match move_dir:
 					Vector2.LEFT:
 						move_dir = Vector2.RIGHT
-						$AnimatedSprite.flip_h = true
+						$AnimatedSprite2D.flip_h = true
 					Vector2.RIGHT:
 						move_dir = Vector2.LEFT
-						$AnimatedSprite.flip_h = false
+						$AnimatedSprite2D.flip_h = false
 
 
 func fly():
 	if not flying and can_hit_player():
 		flying = true
 		velocity.y = -1 * (fly_speed + (randi() % fly_range) - (fly_range / 3.0))
-		yield(get_tree().create_timer(1), "timeout")
+		await get_tree().create_timer(1).timeout
 		flying = false
 
 
@@ -96,7 +105,7 @@ func hit(dir):
 	stunned = false
 	knocked_back = true
 	velocity = Vector2(dir.x * knockback_impulse, -1 * knockback_y)
-	yield(get_tree().create_timer(knockback_time), "timeout")
+	await get_tree().create_timer(knockback_time).timeout
 	knocked_back = false
 	velocity = Vector2.ZERO
 	die()
@@ -105,29 +114,29 @@ func hit(dir):
 func die():
 	stunned = false
 	dead = true
-	$AnimatedSprite.animation = "fly"
-	$AnimatedSprite.playing = false
-	$Light2D.enabled = false
+	$AnimatedSprite2D.animation = "fly"
+	$AnimatedSprite2D.playing = false
+	$PointLight2D.enabled = false
 	$StunnedLight.enabled = false
 	$DeadLight.enabled = true
 
 
 func stun():
 	stunned = true
-	$AnimatedSprite.animation = "fly"
-	$AnimatedSprite.playing = false
-	$Light2D.enabled = false
+	$AnimatedSprite2D.animation = "fly"
+	$AnimatedSprite2D.playing = false
+	$PointLight2D.enabled = false
 	$StunnedLight.enabled = true
 
 	velocity = Vector2(0, -1 * knockback_y / 2.0)
 
-	yield(get_tree().create_timer(4), "timeout")
+	await get_tree().create_timer(4).timeout
 
 	stunned = false
 
 	if not dead and not knocked_back:
-		$Light2D.enabled = true
-		$AnimatedSprite.playing = true
+		$PointLight2D.enabled = true
+		$AnimatedSprite2D.playing = true
 		$StunnedLight.enabled = false
 
 

@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node2D
 class_name Snake
 
@@ -8,8 +8,8 @@ class_name Snake
 var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
-	var _x = connect("step", self, "_on_step")
-	var _y = connect("move_head", self, "_on_move_head")
+	var _x = connect("step",Callable(self,"_on_step"))
+	var _y = connect("move_head",Callable(self,"_on_move_head"))
 
 ##########################################################################
 # move
@@ -23,7 +23,7 @@ func move(dir):
 ###########################################################################
 # init
 
-export(int) var initial_size = 3
+@export var initial_size: int = 3
 
 var segment_coords = []
 var segments = {}
@@ -56,14 +56,14 @@ func draw_segments():
 ###########################################################################
 # draw/animate segments
 
-onready var cell_scene = preload("res://src/snake/snakes/Cell.tscn")
+@onready var cell_scene = preload("res://src/snake/snakes/Cell.tscn")
 
 var should_flash
 var cell_anim = "dark"
 var cell_head_anim = "enemyhead"
 
 func draw_segment(coord):
-	var c = cell_scene.instance()
+	var c = cell_scene.instantiate()
 	if should_flash:
 		c.set_animation("flash")
 		c.playing = true
@@ -166,7 +166,7 @@ func print_snake_meta():
 ###########################################################################
 # process
 
-export(float) var walk_every = 0.3
+@export var walk_every: float = 0.3
 var secs_til_walk = 0.3
 
 func walk_in_t(delta):
@@ -274,7 +274,7 @@ func destroy():
 
 	emit_signal("destroyed", self)
 
-	yield(get_tree().create_timer(2.0), "timeout")
+	await get_tree().create_timer(2.0).timeout
 	# after cells animate away
 	queue_free()
 
@@ -290,23 +290,23 @@ func duplicate_snake(snake, coord):
 	var snake_coords = snake.segment_coords.slice(0, coord_idx)
 	var dupe_coords = snake.segment_coords.slice(coord_idx, -1)
 
-	# remove chomped square
+	# remove_at chomped square
 	snake.segment_coords.erase(coord)
 	snake.segments.erase(coord)
 	dupe_coords.erase(coord)
 	dupe.segments = snake.segments.duplicate()
 	dupe.segments.erase(coord)
 
-	# remove dead cells from snake
+	# remove_at dead cells from snake
 	for d_coord in dupe_coords:
 		snake.segment_coords.erase(d_coord)
 		snake.segments.erase(d_coord)
 
-	# remove 'living' cells from dupe snake
+	# remove_at 'living' cells from dupe snake
 	for s_coord in snake_coords:
 		dupe.segments.erase(s_coord)
 
-	dupe_coords.invert()
+	dupe_coords.reverse()
 	dupe.segment_coords = dupe_coords
 	dupe.direction = -1 * snake.direction
 	dupe.grid = snake.grid
@@ -328,15 +328,15 @@ func chomp_snake(snake, coord):
 var text_highlight_scene = preload("res://src/snake/TextHighlight.tscn")
 
 func highlight(text):
-	var th = text_highlight_scene.instance()
-	th.bbcode_text = text
+	var th = text_highlight_scene.instantiate()
+	th.text = text
 	th.set_global_position(global_position)
 	Navi.add_child_to_current(th)
 
 	var tween = create_tween()
 	th.set_scale(Vector2.ZERO)
-	tween.tween_property(th, "rect_scale", 0.5*Vector2.ONE, 0.5).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(th, "rect_scale", Vector2.ZERO, 0.2).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(th, "scale", 0.5*Vector2.ONE, 0.5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(th, "scale", Vector2.ZERO, 0.2).set_ease(Tween.EASE_IN_OUT)
 
 ##################################################################
 # tile bounce helpers

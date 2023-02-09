@@ -1,10 +1,10 @@
 extends Node2D
 
-export(String, "jetpack", "hat", "body") var type = "jetpack"
+@export var type = "jetpack" # (String, "jetpack", "hat", "body")
 
 
 func _ready():
-	$AnimatedSprite.animation = type
+	$AnimatedSprite2D.animation = type
 	Respawner.register_respawn(self)
 
 	animate()
@@ -14,10 +14,10 @@ func _ready():
 func animate_rotate():
 	var tween = create_tween()
 	tween.set_loops(0)
-	tween.tween_property($AnimatedSprite, "rotation", rotation + PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
+	tween.tween_property($AnimatedSprite2D, "rotation", rotation + PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_property($AnimatedSprite, "rotation", rotation - PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
+	tween.tween_property($AnimatedSprite2D, "rotation", rotation - PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC
 	)
 
@@ -33,7 +33,7 @@ func animate():
 	tween.tween_property(self, "position", og_pos, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_callback(self, "animate").set_delay(rand_range(0.3, 2.0))
+	tween.tween_callback(Callable(self,"animate")).set_delay(randf_range(0.3, 2.0))
 
 
 func kill():
@@ -50,7 +50,7 @@ func _on_Area2D_body_entered(body: Node):
 			kill()
 
 
-onready var offscreen_indicator = $OffscreenIndicator
+@onready var offscreen_indicator = $OffscreenIndicator
 
 
 func _process(_delta):

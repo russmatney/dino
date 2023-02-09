@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/cool-kids-electronic-bass-groo.wav-b06d7b925556cbbc5ef09cba5263244f.sample"
+type="AudioStreamWAV"
+uid="uid://kyhdi7q3wa6v"
+path="res://.godot/imported/cool-kids-electronic-bass-groo.wav-b06d7b925556cbbc5ef09cba5263244f.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/cool-kids-electronic-bass-groo.wav"
-dest_files=[ "res://.import/cool-kids-electronic-bass-groo.wav-b06d7b925556cbbc5ef09cba5263244f.sample" ]
+dest_files=["res://.godot/imported/cool-kids-electronic-bass-groo.wav-b06d7b925556cbbc5ef09cba5263244f.sample"]
 
 [params]
 

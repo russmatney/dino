@@ -1,4 +1,4 @@
-tool
+@tool
 # ParkWin
 extends RunnerRoom
 

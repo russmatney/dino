@@ -1,9 +1,9 @@
-tool
+@tool
 extends VBoxContainer
 class_name TrolleyActionsList
 
-export(String) var ignore_prefix = "ui_"
-export(String) var only_prefix
+@export var ignore_prefix: String = "ui_"
+@export var only_prefix: String
 
 
 func _ready():
@@ -21,7 +21,7 @@ func build_actions_list():
 		remove_child(ch)
 
 	for ac in Trolley.actions_list(ignore_prefix, only_prefix):
-		var action_label = ActionLabel.instance()
+		var action_label = ActionLabel.instantiate()
 		var action_name = ac["action"].capitalize()
 		action_label.set_label(action_name)
 

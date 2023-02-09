@@ -1,6 +1,6 @@
 # Reptile
 #
-tool
+@tool
 extends Node
 
 ######################################################################
@@ -40,10 +40,10 @@ func all_coords(img):
 
 
 func rotate(img):
-	img.lock()
+	false # img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var new_img = Image.new()
 	new_img.copy_from(img)
-	new_img.lock()
+	false # new_img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for coord in all_coords(img):
 		new_img.set_pixel(coord.y, coord.x, img.get_pixelv(coord))
 	return new_img
@@ -51,7 +51,7 @@ func rotate(img):
 
 func img_to_texture(img):
 	var imgTexture = ImageTexture.new()
-	imgTexture.create_from_image(img, 1)
+	imgTexture.create_from_image(img) #,1
 	return imgTexture
 
 

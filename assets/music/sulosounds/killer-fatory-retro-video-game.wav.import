@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/killer-fatory-retro-video-game.wav-ba4901f011cff68b5a8b4afb5188dfd5.sample"
+type="AudioStreamWAV"
+uid="uid://pkqlegwgbdhy"
+path="res://.godot/imported/killer-fatory-retro-video-game.wav-ba4901f011cff68b5a8b4afb5188dfd5.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/killer-fatory-retro-video-game.wav"
-dest_files=[ "res://.import/killer-fatory-retro-video-game.wav-ba4901f011cff68b5a8b4afb5188dfd5.sample" ]
+dest_files=["res://.godot/imported/killer-fatory-retro-video-game.wav-ba4901f011cff68b5a8b4afb5188dfd5.sample"]
 
 [params]
 

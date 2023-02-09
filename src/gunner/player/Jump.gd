@@ -1,7 +1,7 @@
 # Jump
 extends State
 
-onready var jump_ring_scene = preload("res://src/gunner/player/JumpRing.tscn")
+@onready var jump_ring_scene = preload("res://src/gunner/player/JumpRing.tscn")
 
 
 func label():
@@ -21,7 +21,7 @@ func enter(_ctx = {}):
 
 
 func create_jump_ring():
-	var jr = jump_ring_scene.instance()
+	var jr = jump_ring_scene.instantiate()
 	jr.position = actor.get_global_position()
 	Navi.add_child_to_current(jr)
 	if actor.jump_count > 0:
@@ -39,7 +39,10 @@ func physics_process(delta):
 		# slow down
 		actor.velocity.x = actor.velocity.x * 0.99 * delta
 
-	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+	actor.set_velocity(actor.velocity)
+	actor.set_up_direction(Vector2.UP)
+	actor.move_and_slide()
+	actor.velocity = actor.velocity
 
 	if not actor.firing:
 		actor.update_facing()

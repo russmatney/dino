@@ -1,4 +1,4 @@
-tool
+@tool
 extends RichTextEffect
 
 
@@ -19,5 +19,5 @@ func _process_custom_fx(char_fx):
 	var r = get_rand(char_fx)
 	var t = fmod(r + time * .5, 1.0)
 	char_fx.offset.y += t * 8.0
-	char_fx.color = lerp(char_fx.color, Color.transparent, t)
+	char_fx.color = lerp(char_fx.color, Color.TRANSPARENT, t)
 	return true

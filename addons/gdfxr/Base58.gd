@@ -11,7 +11,7 @@ static func b58decode(v: String) -> StreamPeerBuffer:
 	v = v.lstrip(BASE_58_ALPHABET[0])
 	var zeros := original_length - v.length()
 	
-	var buffer := PoolByteArray()
+	var buffer := PackedByteArray()
 	buffer.resize(v.length())  # Won't be as long as base 58 string since the buffer is 256-based.
 	buffer.fill(0)
 	

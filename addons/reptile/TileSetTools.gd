@@ -1,8 +1,8 @@
-tool
+@tool
 extends TileSet
 
-export(bool) var dryrun = true
-export(String) var tile_name = "somedefault"
+@export var dryrun: bool = true
+@export var tile_name: String = "somedefault"
 
 ### ready #####################################################################
 
@@ -33,7 +33,7 @@ func tiles_with_name(name):
 
 ### generate_collisions #######################################################
 
-export(bool) var run_gen_collisions = false setget run_gen_colls
+@export var run_gen_collisions: bool = false : set = run_gen_colls
 
 
 func run_gen_colls(val):
@@ -91,7 +91,7 @@ func create_collision_shape(tile_id):
 
 ### clean_collisions #######################################################
 
-export(bool) var run_clean_collisions = false setget run_clean_colls
+@export var run_clean_collisions: bool = false : set = run_clean_colls
 
 
 func run_clean_colls(val):
@@ -130,7 +130,7 @@ func clean_collisions_for_auto_tiles(tile_id):
 
 ### copy_collisions_to_occluders #######################################################
 
-export(bool) var run_copy_colls_to_occs = false setget run_copy_colls_occs
+@export var run_copy_colls_to_occs: bool = false : set = run_copy_colls_occs
 
 
 func run_copy_colls_occs(val):

@@ -17,9 +17,9 @@ position = Vector2( 10.5, 104 )
 shape = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
-margin_left = -202.0
-margin_top = 92.0
-margin_right = 223.0
-margin_bottom = 114.0
+offset_left = -202.0
+offset_top = 92.0
+offset_right = 223.0
+offset_bottom = 114.0
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]

@@ -1,4 +1,4 @@
-tool
+@tool
 extends RunnerRoom
 
 var max_runs = 3
@@ -16,15 +16,15 @@ func _ready():
 
 
 func setup():
-	.setup()
+	super.setup()
 	Blocks.ensure_blocks(self)
 
 
 func cleanup():
-	.cleanup()
+	super.cleanup()
 
-	# pause, then remove blocks
-	yield(get_tree().create_timer(0.4), "timeout")
+	# pause, then remove_at blocks
+	await get_tree().create_timer(0.4).timeout
 	Blocks.cleanup_blocks(self)
 
 

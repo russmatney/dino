@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var state_label = $StateLabel
-onready var machine = $Machine
-onready var anim = $AnimatedSprite
+@onready var state_label = $StateLabel
+@onready var machine = $Machine
+@onready var anim = $AnimatedSprite2D
 
 
 func _ready():
-	machine.connect("transitioned", self, "on_transit")
+	machine.connect("transitioned",Callable(self,"on_transit"))
 
 
 func on_transit(new_state):
@@ -14,7 +14,7 @@ func on_transit(new_state):
 
 
 func set_state_label(label: String):
-	state_label.bbcode_text = "[center]" + label + "[/center]"
+	state_label.text = "[center]" + label + "[/center]"
 
 
 var velocity = Vector2.ZERO

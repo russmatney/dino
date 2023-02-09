@@ -9,7 +9,7 @@
 # ############################################################################ #
 
 
-extends Reference
+extends RefCounted
 
 class_name InkTryGetResult
 
@@ -20,6 +20,6 @@ var result = null # Variant
 
 # ############################################################################ #
 
-func _init(exists: bool, result):
+func _init(exists: bool,result):
 	self.exists = exists
 	self.result = result

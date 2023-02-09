@@ -7,10 +7,10 @@
 [node name="PlayerGym" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -103.0
-margin_top = -133.0
-margin_right = 122.0
-margin_bottom = 80.0
+offset_left = -103.0
+offset_top = -133.0
+offset_right = 122.0
+offset_bottom = 80.0
 color = Color( 0.435294, 0.32549, 0.32549, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]

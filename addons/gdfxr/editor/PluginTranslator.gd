@@ -1,7 +1,7 @@
-tool
+@tool
 extends Node
 
-var plugin: EditorPlugin setget set_plugin
+var plugin: EditorPlugin : set = set_plugin
 
 var _translation: Translation
 
@@ -28,14 +28,14 @@ func set_plugin(v: EditorPlugin) -> void:
 func tr(message: String) -> String:
 	if _translation:
 		var translated := _translation.get_message(message)
-		if not translated.empty():
+		if not translated.is_empty():
 			return translated
 	return message
 
 
 func _translate_node(node: Node):
 	if node is Control:
-		node.hint_tooltip = tr(node.hint_tooltip)
+		node.tooltip_text = tr(node.tooltip_text)
 		
 		if node is HBoxContainer and node.has_method("set_options"):
 			var options = []
@@ -50,7 +50,7 @@ func _translate_node(node: Node):
 			node.text = tr(node.text)
 		
 		if node is Slider:
-			node.hint_tooltip = tr(node.hint_tooltip)
+			node.tooltip_text = tr(node.tooltip_text)
 	
 	for child in node.get_children():
 		_translate_node(child)

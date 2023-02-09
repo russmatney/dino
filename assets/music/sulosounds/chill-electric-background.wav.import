@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/chill-electric-background.wav-c646545a34590fb7c97ea407e02801f7.sample"
+type="AudioStreamWAV"
+uid="uid://cjrf00o774aw8"
+path="res://.godot/imported/chill-electric-background.wav-c646545a34590fb7c97ea407e02801f7.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/chill-electric-background.wav"
-dest_files=[ "res://.import/chill-electric-background.wav-c646545a34590fb7c97ea407e02801f7.sample" ]
+dest_files=["res://.godot/imported/chill-electric-background.wav-c646545a34590fb7c97ea407e02801f7.sample"]
 
 [params]
 

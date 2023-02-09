@@ -4,8 +4,8 @@
 # See LICENSE in the project root for license information.
 # ############################################################################ #
 
-tool
-extends Reference
+@tool
+extends RefCounted
 
 ## Contains all the configuration settings necessary to perform an execution.
 class_name InkExecutionConfiguration

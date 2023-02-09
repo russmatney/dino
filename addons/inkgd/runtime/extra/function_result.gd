@@ -8,7 +8,7 @@
 # inkgd is licensed under the terms of the MIT license.
 # ############################################################################ #
 
-extends Reference
+extends RefCounted
 
 class_name InkFunctionResult
 
@@ -19,6 +19,6 @@ var return_value = null
 
 # ############################################################################ #
 
-func _init(text_output: String, return_value):
+func _init(text_output: String,return_value):
 	self.text_output = text_output
 	self.return_value = return_value

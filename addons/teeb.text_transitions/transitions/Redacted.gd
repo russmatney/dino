@@ -1,4 +1,4 @@
-tool
+@tool
 extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 
 
@@ -24,6 +24,6 @@ func _process_custom_fx(char_fx):
 			var freq:float = char_fx.env.get("freq", 1.0)
 			var scale:float = char_fx.env.get("scale", 1.0)
 			char_fx.character = MID_BLOCK if t1 != t2 else BLOCK
-			char_fx.color = Color.black
+			char_fx.color = Color.BLACK
 			char_fx.offset.y -= sin(char_fx.absolute_index * freq) * scale
 	return true

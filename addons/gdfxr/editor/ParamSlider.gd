@@ -1,12 +1,12 @@
-tool
+@tool
 extends HBoxContainer
 
 signal param_changed(name, value)
 signal param_reset(name)
 
-export var label: String setget set_label
-export var parameter: String
-export var bipolar := false setget set_bipolar
+@export var label: String : set = set_label
+@export var parameter: String
+@export var bipolar := false : set = set_bipolar
 
 
 func set_label(v: String) -> void:

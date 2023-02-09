@@ -1,4 +1,4 @@
-tool
+@tool
 class_name ReptileGroup
 extends Node
 
@@ -15,7 +15,7 @@ func tile_regen():
 #####################################################################
 # fields
 
-export(float) var lower_bound = 0.0 setget set_lower_bound
+@export var lower_bound: float = 0.0 : set = set_lower_bound
 
 
 func set_lower_bound(v):
@@ -23,7 +23,7 @@ func set_lower_bound(v):
 	tile_regen()
 
 
-export(float) var upper_bound = 1.0 setget set_upper_bound
+@export var upper_bound: float = 1.0 : set = set_upper_bound
 
 
 func set_upper_bound(v):
@@ -31,7 +31,7 @@ func set_upper_bound(v):
 	tile_regen()
 
 
-export(Color) var color = Color.crimson setget set_color
+@export var color: Color = Color.CRIMSON : set = set_color
 
 
 func set_color(c):
@@ -39,7 +39,7 @@ func set_color(c):
 	tile_regen()
 
 
-export(PackedScene) var tilemap_scene setget set_tilemap_scene
+@export var tilemap_scene: PackedScene : set = set_tilemap_scene
 
 
 func set_tilemap_scene(ts):
@@ -96,7 +96,7 @@ func contains_val(normed):
 # sort
 
 
-# TODO consider selecting a group based on all group bounds per coord instead
+# TODO consider selecting a group based checked all group bounds per coord instead
 # TODO unit tests
 static func sort_by_key(a, b):
 	if not a.upper_bound or a.lower_bound:

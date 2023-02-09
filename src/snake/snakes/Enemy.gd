@@ -1,4 +1,4 @@
-tool
+@tool
 extends Snake
 
 func _ready():

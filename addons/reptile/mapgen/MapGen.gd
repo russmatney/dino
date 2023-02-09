@@ -1,5 +1,5 @@
 # MapGen
-tool
+@tool
 extends Node2D
 class_name MapGen
 
@@ -32,10 +32,10 @@ func _ready():
 ######################################################################
 # triggers
 
-export(bool) var ready_override = false
+@export var ready_override: bool = false
 
 # these behind 'ready' guards to avoid errors in the editor (upon opening)
-export(bool) var generate_image setget do_image_regen
+@export var generate_image: bool : set = do_image_regen
 
 
 func do_image_regen(_val = null):
@@ -57,9 +57,9 @@ func regenerate_image():
 	room.regen_tilemaps()
 
 
-export(String) var room_node_path = "Map"
+@export var room_node_path: String = "Map"
 
-export(bool) var clear setget do_clear
+@export var clear: bool : set = do_clear
 
 
 func do_clear(_v):
@@ -76,18 +76,18 @@ func do_clear(_v):
 ######################################################################
 # groups
 
-export(PackedScene) var tilemapA_scene
-export(PackedScene) var tilemapB_scene
-export(PackedScene) var tilemapC_scene
-export(PackedScene) var tilemapD_scene
+@export var tilemapA_scene: PackedScene
+@export var tilemapB_scene: PackedScene
+@export var tilemapC_scene: PackedScene
+@export var tilemapD_scene: PackedScene
 
 
 func default_groups():
 	var group_data = [
-		[Color.darkseagreen, tilemapA_scene, 0.0, 0.3],
-		[Color.aquamarine, tilemapB_scene, 0.3, 0.55],
-		[Color.crimson, tilemapC_scene, 0.55, 0.8],
-		[Color.brown, tilemapD_scene, 0.8, 1.0],
+		[Color.DARK_SEA_GREEN, tilemapA_scene, 0.0, 0.3],
+		[Color.AQUAMARINE, tilemapB_scene, 0.3, 0.55],
+		[Color.CRIMSON, tilemapC_scene, 0.55, 0.8],
+		[Color.BROWN, tilemapD_scene, 0.8, 1.0],
 	]
 	var gps = []
 	for data in group_data:
@@ -110,8 +110,8 @@ func default_groups():
 
 # 	var w = 3200
 # 	var h = 3200
-# 	texture_rect.rect_size = Vector2(w/2, h/2)
-# 	texture_rect.rect_position = Vector2(-w/2, h*i/2)
+# 	texture_rect.size = Vector2(w/2, h/2)
+# 	texture_rect.position = Vector2(-w/2, h*i/2)
 # 	texture_rect.expand = true
 
 # 	if img:
@@ -129,14 +129,14 @@ func default_groups():
 # 	var n = Image.new()
 # 	n.copy_from(img)
 # 	n.convert(Image.FORMAT_RGBA8)
-# 	n.lock()
+# 	false # n.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 # 	call_with_coord_context(n, self, "colorize_coord")
 # 	ensure_image_node("ColorizedImage", 1, n)
 
 ######################################################################
 # persist map as resource
 
-export(bool) var persist_tilemap setget do_persist_tilemap
+@export var persist_tilemap: bool : set = do_persist_tilemap
 
 
 func do_persist_tilemap(_val = null):
@@ -145,11 +145,11 @@ func do_persist_tilemap(_val = null):
 		persist_tilemap_to_disk()
 
 
-export(NodePath) var persist_node_path = "Map"
-export(String) var persist_name = str(persist_node_path)
-export(String) var persist_dir = "res://addons/reptile/maps/"
-export(bool) var version_number = true
-export(String) var hardcoded_version_number
+@export var persist_node_path: NodePath = "Map"
+@export var persist_name: String = str(persist_node_path)
+@export var persist_dir: String = "res://addons/reptile/maps/"
+@export var version_number: bool = true
+@export var hardcoded_version_number: String
 
 
 func persist_tilemap_to_disk():

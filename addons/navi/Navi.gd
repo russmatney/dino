@@ -6,17 +6,17 @@ var current_scene = null
 var last_scene_stack = []
 
 # overwritable, but defaults to a reasonable pause screen
-export(PackedScene) var pause_menu_scene = preload("res://addons/navi/NaviPauseMenu.tscn")
+@export var pause_menu_scene: PackedScene = preload("res://addons/navi/NaviPauseMenu.tscn")
 var pause_container
 var pause_menu
 
 # overwritable, but defaults to a reasonable death screen
-export(PackedScene) var death_menu_scene = preload("res://addons/navi/NaviDeathMenu.tscn")
+@export var death_menu_scene: PackedScene = preload("res://addons/navi/NaviDeathMenu.tscn")
 var death_container
 var death_menu
 
 # overwritable, but defaults to a reasonable win screen
-export(PackedScene) var win_menu_scene = preload("res://addons/navi/NaviWinMenu.tscn")
+@export var win_menu_scene: PackedScene = preload("res://addons/navi/NaviWinMenu.tscn")
 var win_container
 var win_menu
 
@@ -33,26 +33,26 @@ func _ready():
 	if not f.file_exists(main_menu_path):
 		pp(str("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op."))
 
-	pause_mode = PAUSE_MODE_PROCESS
+	process_mode = PROCESS_MODE_ALWAYS
 
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
 	# should one day be conditional/opt-out
 	pause_container = CanvasLayer.new()
-	pause_menu = pause_menu_scene.instance()
+	pause_menu = pause_menu_scene.instantiate()
 	pause_container.add_child(pause_menu)
 	call_deferred("add_child", pause_container)
 
 	# should one day be conditional/opt-out
 	death_container = CanvasLayer.new()
-	death_menu = death_menu_scene.instance()
+	death_menu = death_menu_scene.instantiate()
 	death_container.add_child(death_menu)
 	call_deferred("add_child", death_container)
 
 	# should one day be conditional/opt-out
 	win_container = CanvasLayer.new()
-	win_menu = win_menu_scene.instance()
+	win_menu = win_menu_scene.instantiate()
 	win_container.add_child(win_menu)
 	call_deferred("add_child", win_container)
 
@@ -82,7 +82,7 @@ signal new_scene_instanced(inst)
 
 
 func _deferred_goto_scene(path_or_packed_scene):
-	# It is now safe to remove the current scene
+	# It is now safe to remove_at the current scene
 	current_scene.free()
 
 	# Load the new scene.
@@ -93,14 +93,14 @@ func _deferred_goto_scene(path_or_packed_scene):
 		s = path_or_packed_scene
 
 	# Instance the new scene.
-	current_scene = s.instance()
+	current_scene = s.instantiate()
 	print("[Navi] Current scene: ", current_scene)
 	emit_signal("new_scene_instanced", current_scene)
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
 
-	# Optionally, to make it compatible with the SceneTree.change_scene() API.
+	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().set_current_scene(current_scene)
 
 
@@ -148,7 +148,7 @@ func set_pause_menu(path):
 		pause_menu_path = path
 
 		pause_menu.queue_free()
-		pause_menu = load(pause_menu_path).instance()
+		pause_menu = load(pause_menu_path).instantiate()
 		pause_container.add_child(pause_menu)
 	else:
 		pp(str("No scene at path: ", path, ", can't set pause menu."))

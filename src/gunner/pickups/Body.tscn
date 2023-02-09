@@ -15,11 +15,11 @@ extents = Vector2( 8, 7 )
 [node name="Body" type="Node2D" groups=["poi"]]
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource( 2 )
 position = Vector2( 0, -8 )
 scale = Vector2( 2, 2 )
-frames = ExtResource( 2 )
+sprite_frames = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -10,28 +10,28 @@ script = ExtResource( 3 )
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = 8.0
-margin_right = -8.0
-margin_bottom = -8.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 496.0
-margin_bottom = 284.0
+offset_right = 496.0
+offset_bottom = 284.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 496.0
-margin_bottom = 98.0
+offset_right = 496.0
+offset_bottom = 98.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_right = 392.0
-margin_bottom = 98.0
+offset_right = 392.0
+offset_bottom = 98.0
 size_flags_horizontal = 3
 
 [node name="Produce" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 392.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 100, 0 )
+offset_right = 392.0
+offset_bottom = 17.0
+custom_minimum_size = Vector2( 100, 0 )
 theme = ExtResource( 2 )
 text = "Delivered"
 fit_content_height = true
@@ -39,24 +39,24 @@ scroll_active = false
 
 [node name="ProduceList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
-margin_top = 21.0
-margin_right = 392.0
-margin_bottom = 21.0
+offset_top = 21.0
+offset_right = 392.0
+offset_bottom = 21.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 396.0
-margin_right = 496.0
-margin_bottom = 98.0
+offset_left = 396.0
+offset_right = 496.0
+offset_bottom = 98.0
 alignment = 2
 
 [node name="Time" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_right = 100.0
-margin_bottom = 17.0
+offset_right = 100.0
+offset_bottom = 17.0
 theme = ExtResource( 2 )
 bbcode_enabled = true
-bbcode_text = "[right]Time: 999[/right]"
+text = "[right]Time: 999[/right]"
 text = "Time: 999"
 fit_content_height = true
 scroll_active = false
@@ -64,6 +64,6 @@ scroll_active = false
 [node name="HarveyControls" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 21.0
-margin_right = 100.0
-margin_bottom = 98.0
+offset_top = 21.0
+offset_right = 100.0
+offset_bottom = 98.0

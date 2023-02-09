@@ -16,7 +16,7 @@ shader_param/replace_2 = null
 shader_param/replace_3 = null
 shader_param/replace_4 = null
 
-[node name="HeartIcon" type="AnimatedSprite"]
+[node name="HeartIcon" type="AnimatedSprite2D"]
 material = SubResource( 1 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "half"

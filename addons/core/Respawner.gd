@@ -1,8 +1,8 @@
-tool
+@tool
 extends Node
 
 # func _unhandled_input(event):
-# 	# TODO probably don't want this on _all_ the time
+# 	# TODO probably don't want this checked _all_ the time
 # 	if Trolley.is_event(event, "respawns"):
 # 		Hood.notif("Respawning Targets")
 # 		respawn_missing()
@@ -27,7 +27,7 @@ func reset_respawns():
 
 func respawn_all():
 	for r in respawns:
-		var ins = load(r["filename"]).instance()
+		var ins = load(r["filename"]).instantiate()
 		# ins.position = r["position"]
 		Navi.current_scene.call_deferred("add_child", ins)
 
@@ -37,7 +37,7 @@ func respawn_missing():
 	for r in respawns:
 		if not is_instance_valid(r["node"]):
 			to_remove.append(r)
-			var ins = load(r["filename"]).instance()
+			var ins = load(r["filename"]).instantiate()
 			ins.position = r["position"]
 			Navi.current_scene.call_deferred("add_child", ins)
 			emit_signal("respawn", ins)

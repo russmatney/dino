@@ -1,16 +1,16 @@
 shader_type canvas_item;
 
 
-uniform vec4 original_0: hint_color;
-uniform vec4 original_1: hint_color;
-uniform vec4 original_2: hint_color;
-uniform vec4 original_3: hint_color;
-uniform vec4 original_4: hint_color;
-uniform vec4 replace_0: hint_color;
-uniform vec4 replace_1: hint_color;
-uniform vec4 replace_2: hint_color;
-uniform vec4 replace_3: hint_color;
-uniform vec4 replace_4: hint_color;
+uniform vec4 original_0: source_color;
+uniform vec4 original_1: source_color;
+uniform vec4 original_2: source_color;
+uniform vec4 original_3: source_color;
+uniform vec4 original_4: source_color;
+uniform vec4 replace_0: source_color;
+uniform vec4 replace_1: source_color;
+uniform vec4 replace_2: source_color;
+uniform vec4 replace_3: source_color;
+uniform vec4 replace_4: source_color;
 
 const float precision = 0.1;
 

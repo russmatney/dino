@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-onready var rect = $Rect
-onready var pos = $Position2D
+@onready var rect = $Rect
+@onready var pos = $Marker2D
 
 var node
 var screen_size
@@ -13,7 +13,7 @@ func _ready():
 		node = rect
 
 	update_screen_size()
-	var _x = get_tree().connect("screen_resized", self, "update_screen_size")
+	var _x = get_tree().connect("screen_resized",Callable(self,"update_screen_size"))
 
 
 func update_screen_size():
@@ -32,9 +32,9 @@ func set_node(n):
 
 	var center = node.get_global_position()
 	if node == rect:
-		print("half rect size", node.rect_size / 2)
+		print("half rect size", node.size / 2)
 		print("global pos", node.get_global_position())
-		center = node.get_global_position() + (node.rect_size / 2)
+		center = node.get_global_position() + (node.size / 2)
 		pos.set_global_position(center)
 
 	print("center", center)
@@ -51,9 +51,9 @@ func _process(_delta):
 
 		var center = node.get_global_position()
 		if node == rect:
-			# print("half rect size", (node.rect_size / 2))
+			# print("half rect size", (node.size / 2))
 			# print("global pos", node.get_global_position())
-			center = node.get_global_position() + (node.rect_size / 2)
+			center = node.get_global_position() + (node.size / 2)
 			pos.set_global_position(center)
 
 		# print("center", center)
@@ -62,6 +62,6 @@ func _process(_delta):
 		center.y = (screen_size.y - center.y) / screen_size.y
 		# print("center", center)
 
-		rect.material.set_shader_param("center", center)
-		# rect.material.set_shader_param("center", Vector2(0.5, 0.5))
-		# rect.material.set_shader_param("global_position", node.get_global_position())
+		rect.material.set_shader_parameter("center", center)
+		# rect.material.set_shader_parameter("center", Vector2(0.5, 0.5))
+		# rect.material.set_shader_parameter("global_position", node.get_global_position())

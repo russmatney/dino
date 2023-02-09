@@ -4,7 +4,7 @@ const float PI = 3.141516;
 
 uniform float speed = 1.;
 
-uniform vec4 tint : hint_color = vec4(1., 1., 0., 1.);
+uniform vec4 tint : source_color = vec4(1., 1., 0., 1.);
 
 uniform float span : hint_range(0.1, 1.) = .3;
 

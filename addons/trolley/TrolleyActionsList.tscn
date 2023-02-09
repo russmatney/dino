@@ -3,6 +3,6 @@
 [ext_resource path="res://addons/trolley/TrolleyActionsList.gd" type="Script" id=1]
 
 [node name="ActionsList" type="VBoxContainer"]
-margin_right = 238.0
-margin_bottom = 318.0
+offset_right = 238.0
+offset_bottom = 318.0
 script = ExtResource( 1 )

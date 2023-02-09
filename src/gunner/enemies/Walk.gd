@@ -22,7 +22,10 @@ func physics_process(delta):
 
 	actor.velocity.x = actor.speed * actor.move_dir.x
 	actor.velocity.y += actor.gravity * delta
-	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+	actor.set_velocity(actor.velocity)
+	actor.set_up_direction(Vector2.UP)
+	actor.move_and_slide()
+	actor.velocity = actor.velocity
 
 	if actor.move_dir.x > 0:
 		actor.face_right()

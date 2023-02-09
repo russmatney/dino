@@ -7,14 +7,14 @@ func _ready():
 	# TODO connect to player spawn signals instead
 	call_deferred("find_player")
 
-	var _x = Ghosts.connect("notification", self, "new_notification")
-	var _y = Ghosts.connect("room_entered", self, "update_room_name")
+	var _x = Ghosts.connect("notification",Callable(self,"new_notification"))
+	var _y = Ghosts.connect("room_entered",Callable(self,"update_room_name"))
 
 
 ###################################################################
 # find player
 
-export(String) var player_group = "player"
+@export var player_group: String = "player"
 
 
 func find_player():
@@ -34,8 +34,8 @@ func find_player():
 		return
 
 	if player:
-		player.connect("health_change", self, "update_player_health")
-		player.connect("gloomba_koed", self, "update_gloomba_kos")
+		player.connect("health_change",Callable(self,"update_player_health"))
+		player.connect("gloomba_koed",Callable(self,"update_gloomba_kos"))
 
 		update_player_health(player.health)
 		update_gloomba_kos(player.gloomba_kos)
@@ -73,8 +73,8 @@ func update_gloomba_kos(gloomba_kos):
 
 
 func update_room_name(room):
-	var label = get_node("%Room")
-	label.set_text(str("Room: ", room.name))
+	var label = get_node("%Node3D")
+	label.set_text(str("Node3D: ", room.name))
 
 
 ###################################################################
@@ -84,7 +84,7 @@ var notif_label = preload("res://addons/hood/NotifLabel.tscn")
 
 
 func new_notification(notif):
-	var lbl = notif_label.instance()
+	var lbl = notif_label.instantiate()
 	lbl.text = notif["msg"]
 	lbl.ttl = notif["ttl"]
 	get_node("%Notifications").add_child(lbl)

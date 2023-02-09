@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/harvey/seed-box_sheet.png" type="Texture" id=1]
+[ext_resource path="res://assets/harvey/seed-box_sheet.png" type="Texture2D" id=1]
 [ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/harvey/items/SeedBox.gd" type="Script" id=3]
 [ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=4]
@@ -22,7 +22,7 @@ region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 2 ) ],
+"sprite_frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -45,11 +45,11 @@ script = ExtResource( 3 )
 position = Vector2( 0, -46.5 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource( 6 )
 position = Vector2( 0, -40 )
 scale = Vector2( 2, 2 )
-frames = SubResource( 3 )
+sprite_frames = SubResource( 3 )
 
 [node name="ProduceIcon" parent="." instance=ExtResource( 2 )]
 material = SubResource( 7 )
@@ -64,13 +64,13 @@ position = Vector2( 0, 36 )
 shape = SubResource( 4 )
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
-margin_left = -30.0
-margin_top = -88.0
-margin_right = 30.0
-margin_bottom = -70.0
+offset_left = -30.0
+offset_top = -88.0
+offset_right = 30.0
+offset_bottom = -70.0
 theme = ExtResource( 5 )
 bbcode_enabled = true
-bbcode_text = "[center]action[/center]"
+text = "[center]action[/center]"
 text = "action"
 fit_content_height = true
 scroll_active = false

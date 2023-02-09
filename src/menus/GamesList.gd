@@ -1,4 +1,4 @@
-tool
+@tool
 extends NaviButtonList
 
 var menu_scenes = [
@@ -32,7 +32,7 @@ var menu_scenes = [
 	},
 ]
 
-export(PackedScene) var button_scene = preload("res://addons/navi/ui/MenuButton.tscn")
+@export var button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")
 
 func _ready():
 	for ms in menu_scenes:

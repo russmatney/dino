@@ -1,12 +1,12 @@
-tool
-extends KinematicBody2D
+@tool
+extends CharacterBody2D
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 
 var tween
 var coll_enabled = true
-export(float) var alpha_threshold = 0.2
-export(float) var offset = 0.5
+@export var alpha_threshold: float = 0.2
+@export var offset: float = 0.5
 
 
 func enable_collision():

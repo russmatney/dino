@@ -66,12 +66,12 @@ __meta__ = {
 time = 1.0
 
 [node name="bounce" parent="." instance=ExtResource( 1 )]
-margin_left = 36.5651
-margin_top = 2.21606
-margin_right = 1045.57
-margin_bottom = 129.216
+offset_left = 36.5651
+offset_top = 2.21606
+offset_right = 1045.57
+offset_bottom = 129.216
 bbcode_enabled = true
-bbcode_text = "[color=gray]bounce:[/color] [bounce]A long time ago, in a far away place...[/bounce]"
+text = "[color=gray]bounce:[/color] [bounce]A long time ago, in a far away place...[/bounce]"
 text = "bounce: A long time ago, in a far away place..."
 custom_effects = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), SubResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), null, null ]
 length = 16.0
@@ -79,12 +79,12 @@ reverse = false
 animation_time = 0.5
 
 [node name="console" parent="." instance=ExtResource( 1 )]
-margin_left = 22.345
-margin_top = 36.1859
-margin_right = 1031.34
-margin_bottom = 163.186
+offset_left = 22.345
+offset_top = 36.1859
+offset_right = 1031.34
+offset_bottom = 163.186
 bbcode_enabled = true
-bbcode_text = "[color=gray]console:[/color] [console id=console]A long time ago, in a far away place...[/console]"
+text = "[color=gray]console:[/color] [console id=console]A long time ago, in a far away place...[/console]"
 text = "console: A long time ago, in a far away place..."
 custom_effects = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), SubResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), null, null ]
 id = "console"
@@ -93,12 +93,12 @@ reverse = false
 animation_time = 0.5
 
 [node name="embers" parent="." instance=ExtResource( 1 )]
-margin_left = 39.4702
-margin_top = 71.3033
-margin_right = 1048.47
-margin_bottom = 198.303
+offset_left = 39.4702
+offset_top = 71.3033
+offset_right = 1048.47
+offset_bottom = 198.303
 bbcode_enabled = true
-bbcode_text = "[color=gray]embers:[/color] [embers id=embers]A long time ago, in a far away place...[/embers]"
+text = "[color=gray]embers:[/color] [embers id=embers]A long time ago, in a far away place...[/embers]"
 text = "embers: A long time ago, in a far away place..."
 custom_effects = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), SubResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), null, null ]
 id = "embers"
@@ -106,12 +106,12 @@ reverse = false
 animation_time = 0.5
 
 [node name="prickle" parent="." instance=ExtResource( 1 )]
-margin_left = 25.5704
-margin_top = 111.007
-margin_right = 1034.57
-margin_bottom = 238.007
+offset_left = 25.5704
+offset_top = 111.007
+offset_right = 1034.57
+offset_bottom = 238.007
 bbcode_enabled = true
-bbcode_text = "[color=gray]prickle:[/color] [prickle id=prickle]A long time ago, in a far away place...[/prickle]"
+text = "[color=gray]prickle:[/color] [prickle id=prickle]A long time ago, in a far away place...[/prickle]"
 text = "prickle: A long time ago, in a far away place..."
 custom_effects = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 9 ), SubResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 7 ), null, null ]
 id = "prickle"
@@ -120,24 +120,24 @@ reverse = false
 animation_time = 0.5
 
 [node name="redacted" parent="." instance=ExtResource( 1 )]
-margin_left = 10.1619
-margin_top = 148.323
-margin_right = 1019.16
-margin_bottom = 275.323
+offset_left = 10.1619
+offset_top = 148.323
+offset_right = 1019.16
+offset_bottom = 275.323
 bbcode_enabled = true
-bbcode_text = "[color=gray]redacted:[/color] [redacted id=redacted]A long time ago, in a far away place...[/redacted]"
+text = "[color=gray]redacted:[/color] [redacted id=redacted]A long time ago, in a far away place...[/redacted]"
 text = "redacted: A long time ago, in a far away place..."
 id = "redacted"
 reverse = false
 animation_time = 0.5
 
 [node name="wfc" parent="." instance=ExtResource( 1 )]
-margin_left = 91.1592
-margin_top = 187.824
-margin_right = 1100.15
-margin_bottom = 314.824
+offset_left = 91.1592
+offset_top = 187.824
+offset_right = 1100.15
+offset_bottom = 314.824
 bbcode_enabled = true
-bbcode_text = "[color=gray]wfc:[/color] [wfc id=wfc]A long time ago, in a far away place...[/wfc]"
+text = "[color=gray]wfc:[/color] [wfc id=wfc]A long time ago, in a far away place...[/wfc]"
 text = "wfc: A long time ago, in a far away place..."
 id = "wfc"
 length = 32.0
@@ -145,12 +145,12 @@ reverse = false
 animation_time = 0.5
 
 [node name="word" parent="." instance=ExtResource( 1 )]
-margin_left = 74.5387
-margin_top = 227.713
-margin_right = 1083.53
-margin_bottom = 354.713
+offset_left = 74.5387
+offset_top = 227.713
+offset_right = 1083.53
+offset_bottom = 354.713
 bbcode_enabled = true
-bbcode_text = "[color=gray]word:[/color] [word id=word]A long time ago, in a far away place...[/word]"
+text = "[color=gray]word:[/color] [word id=word]A long time ago, in a far away place...[/word]"
 text = "word: A long time ago, in a far away place..."
 id = "word"
 length = 4.0

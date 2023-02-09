@@ -95,7 +95,7 @@ func target_change(opts = {}):
 		if player:
 			player.notif("ONE TARGET REMAINING")
 		Cam.freezeframe("one-target-left", 0.3, 0.5)
-	elif targets.empty() and opts.get("was_destroy"):
+	elif targets.is_empty() and opts.get("was_destroy"):
 		if player:
 			player.notif("TARGETS CLEARED")
 		Cam.freezeframe("targets-cleared", 0.01, 3)
@@ -106,5 +106,5 @@ func _on_slowmo_stopped(label):
 		if player:
 			player.level_up()
 
-		yield(get_tree().create_timer(2.0), "timeout")
+		await get_tree().create_timer(2.0).timeout
 		emit_signal("targets_cleared")

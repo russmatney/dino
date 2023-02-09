@@ -24,7 +24,7 @@ func process(delta):
 			if target and not bowling:
 				bowling = true
 				actor.bowl_attack(target)  # yields until finished
-				yield(get_tree().create_timer(1.0), "timeout")
+				await get_tree().create_timer(1.0).timeout
 				bowled = true
 
 			if bowled:

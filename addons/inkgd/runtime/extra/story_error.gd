@@ -24,7 +24,7 @@ var metadata # StoryErrorMetadata | null
 # Initialization
 # ############################################################################ #
 
-func _init(message: String, use_end_line_number: bool, metadata):
+func _init(message: String,use_end_line_number: bool,metadata):
 	self.message = message
 	self.use_end_line_number = use_end_line_number
 	self.metadata = metadata

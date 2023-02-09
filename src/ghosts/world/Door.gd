@@ -1,8 +1,8 @@
-tool
+@tool
 extends Node2D
 
-export(String) var label
-export(String) var destination
+@export var label: String
+@export var destination: String
 
 #############################################################
 
@@ -22,7 +22,7 @@ func set_label(text):
 #############################################################
 
 
-## Not stateless! depends on _this_ door's destination
+## Not stateless! depends checked _this_ door's destination
 func open_door():
 	print("open_door called, with dest: ", destination)
 	# TODO pause tree?

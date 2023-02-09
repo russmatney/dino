@@ -1,15 +1,15 @@
 extends Area2D
 
-onready var anim = $AnimatedSprite
-onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
+@onready var anim = $AnimatedSprite2D
+@onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
 
-onready var offscreen_indicator = $OffscreenIndicator
+@onready var offscreen_indicator = $OffscreenIndicator
 
 signal destroyed(target)
 
 
 func _ready():
-	anim.connect("animation_finished", self, "_animation_finished")
+	anim.connect("animation_finished",Callable(self,"_animation_finished"))
 	Respawner.register_respawn(self)
 
 	animate()
@@ -38,7 +38,7 @@ func animate():
 	tween.tween_property(self, "position", og_pos, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_callback(self, "animate").set_delay(rand_range(0.3, 2.0))
+	tween.tween_callback(Callable(self,"animate")).set_delay(randf_range(0.3, 2.0))
 
 
 func _process(_delta):
@@ -60,7 +60,7 @@ func kill():
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
 	emit_signal("destroyed", self)
 
-	var lbl = destroyed_label_scene.instance()
+	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())
 	Navi.current_scene.call_deferred("add_child", lbl)
 

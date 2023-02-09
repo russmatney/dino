@@ -8,8 +8,8 @@ shader = ExtResource( 1 )
 shader_param/outline = Color( 0.356863, 0.462745, 0.552941, 1 )
 shader_param/accent = Color( 0.964706, 0.776471, 0.658824, 1 )
 
-[node name="Body" type="AnimatedSprite"]
+[node name="Body" type="AnimatedSprite2D"]
 material = SubResource( 2 )
 position = Vector2( 36, -2 )
 scale = Vector2( 3, 3 )
-frames = ExtResource( 2 )
+sprite_frames = ExtResource( 2 )

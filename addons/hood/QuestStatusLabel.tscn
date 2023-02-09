@@ -3,13 +3,13 @@
 [ext_resource path="res://addons/hood/QuestStatusLabelTheme.tres" type="Theme" id=1]
 
 [node name="QuestStatusLabel" type="RichTextLabel"]
-margin_left = 28.0
-margin_right = 180.0
-margin_bottom = 24.0
+offset_left = 28.0
+offset_right = 180.0
+offset_bottom = 24.0
 size_flags_horizontal = 3
 theme = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center]Some quest"
+text = "[center]Some quest"
 text = "Some quest"
 fit_content_height = true
 scroll_active = false

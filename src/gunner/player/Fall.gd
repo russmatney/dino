@@ -23,7 +23,10 @@ func physics_process(delta):
 	actor.velocity.y = clamp(actor.velocity.y, actor.velocity.y, actor.max_fall_speed)
 
 	var vel_before_coll = actor.velocity
-	actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+	actor.set_velocity(actor.velocity)
+	actor.set_up_direction(Vector2.UP)
+	actor.move_and_slide()
+	actor.velocity = actor.velocity
 
 	if not actor.firing:
 		actor.update_facing()

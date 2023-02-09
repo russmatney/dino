@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://resources/sprites/godot-logo.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://assets/sprites/runner_ground_1_sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/runner_ground_1_sheet.png" type="Texture2D" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"sprite_frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -19,11 +19,11 @@ animations = [ {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2" type="AnimatedSprite2D" parent="."]
 position = Vector2( 9.53674e-07, -5 )
 scale = Vector2( 0.5, 1 )
-frames = SubResource( 2 )
+sprite_frames = SubResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )

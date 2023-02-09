@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node2D
 
 
@@ -46,9 +46,9 @@ var tiles
 
 var player
 var player_spawner
-onready var break_the_targets = $BreakTheTargets
+@onready var break_the_targets = $BreakTheTargets
 
-export(String) var level_num
+@export var level_num: String
 
 var ready = false
 
@@ -58,9 +58,9 @@ func _ready():
 	randomize()
 	calc_rect()
 
-	var _y = Hood.connect("hud_ready", self, "_on_hud_ready")
-	break_the_targets.connect("targets_cleared", self, "_on_targets_cleared")
-	var _x = Tower.connect("player_spawned", self, "_on_player_spawned")
+	var _y = Hood.connect("hud_ready",Callable(self,"_on_hud_ready"))
+	break_the_targets.connect("targets_cleared",Callable(self,"_on_targets_cleared"))
+	var _x = Tower.connect("player_spawned",Callable(self,"_on_player_spawned"))
 
 	player_spawner = get_node_or_null("%PlayerSpawner")
 
@@ -73,7 +73,7 @@ func _on_hud_ready():
 
 
 func _on_player_spawned(p):
-	p.connect("pickups_changed", self, "_on_player_pickups_changed")
+	p.connect("pickups_changed",Callable(self,"_on_player_pickups_changed"))
 
 
 var enemies = []
@@ -97,7 +97,7 @@ func _on_player_pickups_changed(pickups):
 		enemy_spawners.shuffle()
 		if enemy_spawners:
 			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
-			en.connect("dead", self, "_on_robot_destroyed")
+			en.connect("dead",Callable(self,"_on_robot_destroyed"))
 			enemies.append(en)
 			Hood.hud.update_enemies_remaining(enemies_alive().size())
 
@@ -139,7 +139,7 @@ func wrap_thing(thing):
 ######################################################################
 # triggers
 
-export(bool) var recalc_rect setget do_calc_rect
+@export var recalc_rect: bool : set = do_calc_rect
 
 
 func do_calc_rect(_v):
@@ -147,7 +147,7 @@ func do_calc_rect(_v):
 		calc_rect()
 
 
-export(bool) var clear setget do_clear
+@export var clear: bool : set = do_clear
 
 
 func do_clear(_v):
@@ -156,7 +156,7 @@ func do_clear(_v):
 			c.queue_free()
 
 
-export(bool) var regen_all setget do_regen_all_rooms
+@export var regen_all: bool : set = do_regen_all_rooms
 
 
 func do_regen_all_rooms(_v):
@@ -177,7 +177,7 @@ func regen_all_rooms():
 	break_the_targets.setup()
 
 
-export(String, "middle", "end") var next_room_type = "middle" setget set_next_room_type
+@export var next_room_type = "middle" setget set_next_room_type # (String, "middle", "end")
 
 
 func set_next_room_type(val):
@@ -214,12 +214,12 @@ var start_room_scene = preload("res://src/tower/rooms/TowerStartRoom.tscn")
 var middle_room_scene = preload("res://src/tower/rooms/TowerMiddleRoom.tscn")
 var end_room_scene = preload("res://src/tower/rooms/TowerEndRoom.tscn")
 
-export(int) var cell_size = 16
-export(int) var img_size = 50
+@export var cell_size: int = 16
+@export var img_size: int = 50
 
 
 func add_room_inst(room_scene):
-	var room = room_scene.instance()
+	var room = room_scene.instantiate()
 	add_child(room)
 	room.set_owner(self)
 	room.cell_size = cell_size
@@ -229,7 +229,7 @@ func add_room_inst(room_scene):
 	return room
 
 
-export(bool) var add_room setget do_add_room
+@export var add_room: bool : set = do_add_room
 
 
 func do_add_room(_v):

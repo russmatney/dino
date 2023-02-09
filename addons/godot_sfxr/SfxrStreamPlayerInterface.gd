@@ -64,12 +64,12 @@ static func object_get_property_list() -> Array:
         "name": "wave/type",
         "type": TYPE_INT,
         "hint": PROPERTY_HINT_ENUM,
-        "hint_string": PoolStringArray(SfxrGlobals.WAVE_SHAPES.keys()).join(",").capitalize(),
+        "hint_string": PackedStringArray(SfxrGlobals.WAVE_SHAPES.",".join(keys())).capitalize(),
     })
     for property in PROPERTY_MAP:
         props.append({
             "name": property,
-            "type": TYPE_REAL,
+            "type": TYPE_FLOAT,
             "hint": PROPERTY_HINT_RANGE,
             "hint_string": PROPERTY_MAP[property]["hint_string"],
         })
@@ -460,7 +460,7 @@ static func preset_values(object: Node, preset_key: int) -> bool:
 
 static func _schedule_build_sfx(object: Node, play_after_build: bool):
     object.sfx_timer = object.get_tree().create_timer(.5)
-    object.sfx_timer.connect("timeout", object, "_on_sfx_timer_timeout", [object.sfx_timer, play_after_build])
+    object.sfx_timer.connect("timeout",Callable(object,"_on_sfx_timer_timeout").bind(object.sfx_timer, play_after_build))
 
 
 static func _on_sfx_timer_timeout(object: Node, timer: SceneTreeTimer, play_after_build: bool):
@@ -473,4 +473,4 @@ static func build_sfx(object: Node, play_after_build: bool = false):
     sfxg.build_sample(object)
     if play_after_build:
         object.play()
-    object.property_list_changed_notify()
+    object.notify_property_list_changed()

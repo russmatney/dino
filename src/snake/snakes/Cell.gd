@@ -1,6 +1,6 @@
-tool
+@tool
 class_name SnakeCell
-extends AnimatedSprite
+extends AnimatedSprite2D
 
 var coord: Vector2
 
@@ -77,4 +77,4 @@ func kill():
 	var duration = 0.4
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, duration).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(self, "queue_free")
+	tween.tween_callback(Callable(self,"queue_free"))

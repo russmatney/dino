@@ -13,10 +13,10 @@
 [node name="HUD" parent="." instance=ExtResource( 7 )]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -144.0
-margin_top = -168.0
-margin_right = 280.0
-margin_bottom = 160.0
+offset_left = -144.0
+offset_top = -168.0
+offset_right = 280.0
+offset_bottom = 160.0
 color = Color( 0.321569, 0.309804, 0.309804, 1 )
 
 [node name="DinoCamera2D" parent="." instance=ExtResource( 3 )]

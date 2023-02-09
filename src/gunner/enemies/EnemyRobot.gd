@@ -1,8 +1,8 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var anim = $AnimatedSprite
-onready var machine = $Machine
-onready var collision_shape = $CollisionShape2D
+@onready var anim = $AnimatedSprite2D
+@onready var machine = $Machine
+@onready var collision_shape = $CollisionShape2D
 
 var dead = false
 
@@ -17,7 +17,7 @@ func _ready():
 ########################################################
 # process
 
-export(float) var max_y = 5000.0
+@export var max_y: float = 5000.0
 
 
 func _process(_delta):
@@ -31,7 +31,7 @@ func _process(_delta):
 		die(true)
 
 	if player and machine.state.name in ["Idle", "Walk"]:
-		vision_ray.set_cast_to(to_local(player.get_global_position()))
+		vision_ray.set_target_position(to_local(player.get_global_position()))
 		if vision_ray.is_colliding():
 			var coll = vision_ray.get_collider()
 			if coll.is_in_group("player"):
@@ -48,10 +48,10 @@ var gravity = 900
 var facing_dir = Vector2.LEFT
 var move_dir
 
-onready var bullet_position = $BulletPosition
-onready var front_ray = $FrontRay
-onready var vision_box = $VisionBox
-onready var vision_ray = $VisionRay
+@onready var bullet_position = $BulletPosition
+@onready var front_ray = $FrontRay
+@onready var vision_box = $VisionBox
+@onready var vision_ray = $VisionRay
 
 
 func face_dir(dir):
@@ -106,7 +106,7 @@ func face_left():
 # health
 
 var initial_health = 2
-onready var health = initial_health
+@onready var health = initial_health
 
 signal health_change(health)
 signal dead
@@ -128,19 +128,19 @@ func take_damage(body = null, d = 1):
 	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
 
 
-func die(remove = false):
+func die(remove_at = false):
 	dead = true
 	emit_signal("dead")
 
 	GunnerSounds.play_sound("enemy_dead")
-	if remove:
+	if remove_at:
 		queue_free()
 
 
 ########################################################
 # offscreen indicator
 
-onready var offscreen_indicator = $OffscreenIndicator
+@onready var offscreen_indicator = $OffscreenIndicator
 var on_screen = false
 
 
@@ -172,7 +172,7 @@ func _on_VisionBox_body_exited(body: Node):
 ########################################################
 # fire
 
-onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+@onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 2
@@ -182,7 +182,7 @@ signal fired_bullet(bullet)
 
 func fire_at_player():
 	if player and not player.dead and is_instance_valid(player):
-		var bullet = bullet_scene.instance()
+		var bullet = bullet_scene.instantiate()
 		bullet.position = bullet_position.get_global_position()
 		bullet.add_collision_exception_with(self)
 		Navi.current_scene.call_deferred("add_child", bullet)
@@ -190,7 +190,7 @@ func fire_at_player():
 		var angle_to_player = bullet.position.direction_to(player.global_position + Vector2(0, -15))
 
 		bullet.rotation = angle_to_player.angle()
-		bullet.apply_impulse(Vector2.ZERO, angle_to_player * bullet_impulse)
+		bullet.apply_impulse(angle_to_player * bullet_impulse, Vector2.ZERO)
 
 		GunnerSounds.play_sound("fire")
 		emit_signal("fired_bullet", bullet)

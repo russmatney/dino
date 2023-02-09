@@ -2,5 +2,5 @@
 
 [ext_resource path="res://src/runner/gravity/BlockSpawn.gd" type="Script" id=1]
 
-[node name="BlockSpawn" type="Position2D" groups=["block_spawners"]]
+[node name="BlockSpawn" type="Marker2D" groups=["block_spawners"]]
 script = ExtResource( 1 )

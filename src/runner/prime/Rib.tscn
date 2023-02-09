@@ -8,7 +8,7 @@ extents = Vector2( 5, 4 )
 
 [node name="Rib" type="RigidBody2D" groups=["ribs"]]
 gravity_scale = 0.0
-contacts_reported = 8
+max_contacts_reported = 8
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 2 )
@@ -17,8 +17,8 @@ script = ExtResource( 2 )
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = ExtResource( 1 )
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource( 1 )
 animation = "walk"
 
 [connection signal="body_entered" from="." to="." method="_on_Rib_body_entered"]

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/field-stars-ambient-loop.wav-f54f4365a5f6bf72232051f881cae280.sample"
+type="AudioStreamWAV"
+uid="uid://futvtpxaxmsh"
+path="res://.godot/imported/field-stars-ambient-loop.wav-f54f4365a5f6bf72232051f881cae280.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/field-stars-ambient-loop.wav"
-dest_files=[ "res://.import/field-stars-ambient-loop.wav-f54f4365a5f6bf72232051f881cae280.sample" ]
+dest_files=["res://.godot/imported/field-stars-ambient-loop.wav-f54f4365a5f6bf72232051f881cae280.sample"]
 
 [params]
 

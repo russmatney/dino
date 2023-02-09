@@ -9,7 +9,10 @@ func physics_process(_delta):
 	var move_dir = actor.get_move_dir()
 	if move_dir:
 		actor.velocity = actor.speed * move_dir
-		actor.velocity = actor.move_and_slide(actor.velocity, Vector2.UP)
+		actor.set_velocity(actor.velocity)
+		actor.set_up_direction(Vector2.UP)
+		actor.move_and_slide()
+		actor.velocity = actor.velocity
 
 		if move_dir.x > 0:
 			actor.face_right()

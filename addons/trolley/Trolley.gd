@@ -1,4 +1,4 @@
-tool
+@tool
 extends Node
 
 var actions
@@ -14,18 +14,18 @@ func _ready():
 # TODO unit tests
 func build_actions_dict():
 	# apparently we need to reload this
-	InputMap.load_from_globals()
+	InputMap.load_from_project_settings()
 
 	actions = {}
 	for ac in InputMap.get_actions():
-		var evts = InputMap.get_action_list(ac)
+		var evts = InputMap.action_get_events(ac)
 
 		var setting = ProjectSettings.get_setting(str("input/", ac))
 
 		var keys = []
 		for evt in evts:
 			if evt is InputEventKey:
-				keys.append(OS.get_scancode_string(evt.scancode))
+				keys.append(OS.get_keycode_string(evt.scancode))
 
 		actions[ac] = {"events": evts, "setting": setting, "keys": keys, "action": ac}
 
@@ -44,7 +44,7 @@ func actions_list(ignore_prefix = "", only_prefix = ""):
 		build_actions_dict()
 
 	var actions_list = actions.values()
-	actions_list.sort_custom(ActionsSorter, "sort_alphabetical")
+	actions_list.sort_custom(Callable(ActionsSorter,"sort_alphabetical"))
 
 	var axs = []
 	for ax in actions_list:
@@ -66,7 +66,7 @@ func actions_list(ignore_prefix = "", only_prefix = ""):
 ##################################################################
 
 
-# returns a normalized Vector2 based on the controller's movement
+# returns a normalized Vector2 based checked the controller's movement
 func move_dir():
 	var v_diff = Vector2()
 

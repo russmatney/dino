@@ -3,7 +3,7 @@ extends Node
 ###########################################################################
 # config
 
-onready var hud_scene = preload("res://src/tower/hud/HUD.tscn")
+@onready var hud_scene = preload("res://src/tower/hud/HUD.tscn")
 
 
 func set_hud_scene(preloaded_scene):
@@ -25,8 +25,8 @@ func ensure_hud(hud_preload=null):
 	if not hud_preload:
 		hud_preload = hud_scene
 
-	hud = hud_preload.instance()
-	hud.connect("ready", self, "_on_hud_ready")
+	hud = hud_preload.instantiate()
+	hud.connect("ready",Callable(self,"_on_hud_ready"))
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
 

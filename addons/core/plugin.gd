@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 var reload_scene_btn = Button.new()
@@ -11,7 +11,7 @@ func _enter_tree():
 	add_autoload_singleton("Util", "res://addons/core/Util.gd")
 
 	editor_interface = get_editor_interface()
-	reload_scene_btn.connect("pressed", self, "reload_scene")
+	reload_scene_btn.connect("pressed",Callable(self,"reload_scene"))
 	reload_scene_btn.text = "Reload Scene"
 	add_control_to_container(container, reload_scene_btn)
 

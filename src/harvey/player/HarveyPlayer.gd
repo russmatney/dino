@@ -1,14 +1,14 @@
 class_name HarveyPlayer
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 
 ############################################################
 # ready
 
 
 func _ready():
-	machine.connect("transitioned", self, "on_transit")
+	machine.connect("transitioned",Callable(self,"on_transit"))
 
 
 ############################################################
@@ -42,8 +42,8 @@ func _unhandled_input(event):
 ############################################################
 # machine
 
-onready var machine = $Machine
-onready var state_label = $StateLabel
+@onready var machine = $Machine
+@onready var state_label = $StateLabel
 
 
 func on_transit(new_state):
@@ -53,7 +53,7 @@ func on_transit(new_state):
 
 func set_state_label(label: String):
 	state_label.set_visible(true)
-	state_label.bbcode_text = "[center]" + label + "[/center]"
+	state_label.text = "[center]" + label + "[/center]"
 
 
 ############################################################
@@ -90,8 +90,8 @@ func face_left():
 # action detection
 # TODO move to ActionDetector script
 
-onready var action_label = $ActionLabel
-onready var action_arrow = $ActionArrow
+@onready var action_label = $ActionLabel
+@onready var action_arrow = $ActionArrow
 var actions = []
 var c_ax  # current action
 var p_ax  # nearest potential action
@@ -110,10 +110,10 @@ func update_action_label():
 	var ax = Util._or(c_ax, p_ax, nearest_ax)
 
 	if not ax:
-		action_label.bbcode_text = ""
+		action_label.text = ""
 		return
 
-	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
 
 	# fade label if action is not current (i.e. not possible?) bit of naming could help here
 	if c_ax:
@@ -274,10 +274,10 @@ var item_seed
 var item_tool
 var item_produce
 
-onready var produce_icon = $Item/ProduceIcon
-onready var seed_icon = $Item/SeedIcon
-onready var seed_type_icon = $Item/SeedIcon/SeedTypeIcon
-onready var tool_icon = $Item/ToolIcon
+@onready var produce_icon = $Item/ProduceIcon
+@onready var seed_icon = $Item/SeedIcon
+@onready var seed_type_icon = $Item/SeedIcon/SeedTypeIcon
+@onready var tool_icon = $Item/ToolIcon
 
 
 func drop_held_item():

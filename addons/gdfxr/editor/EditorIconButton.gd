@@ -1,7 +1,7 @@
-tool
+@tool
 extends Button
 
-export var icon_name: String
+@export var icon_name: String
 
 var plugin: EditorPlugin # a hack to know if this is executing as plugin
 

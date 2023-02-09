@@ -8,10 +8,10 @@ anchor_bottom = 1.0
 size_flags_vertical = 3
 
 [node name="HowdyButton" type="Button" parent="."]
-margin_left = 424.0
-margin_top = 290.0
-margin_right = 599.0
-margin_bottom = 310.0
+offset_left = 424.0
+offset_top = 290.0
+offset_right = 599.0
+offset_bottom = 310.0
 text = "howdy there country bear"
 script = ExtResource( 1 )
 

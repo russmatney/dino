@@ -4,7 +4,7 @@
 
 [node name="TowerMiddleRoom" type="Node2D" groups=["tower_middle_room"]]
 script = ExtResource( 1 )
-room_name = "Room"
+room_name = "Node3D"
 regenerate_tilemaps = false
 n_seed = 1001
 octaves = 4

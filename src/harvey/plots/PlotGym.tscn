@@ -10,10 +10,10 @@
 [node name="PlotGym" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -162.0
-margin_top = -159.0
-margin_right = 234.0
-margin_bottom = 160.0
+offset_left = -162.0
+offset_top = -159.0
+offset_right = 234.0
+offset_bottom = 160.0
 mouse_filter = 2
 color = Color( 0.298039, 0.270588, 0.270588, 1 )
 

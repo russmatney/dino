@@ -20,9 +20,9 @@ script = ExtResource( 2 )
 position = Vector2( -0.5, -9 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2( 0, -13 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 
 [node name="RemoveTimer" type="Timer" parent="."]
 one_shot = true

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/snake/SnakeMenuTheme.tres" type="Theme" id=1]
 [ext_resource path="res://src/snake/menus/SnakeMenuButtonList.gd" type="Script" id=2]
-[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="DynamicFont" id=3]
+[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="FontFile" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -25,114 +25,114 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Header" type="RichTextLabel" parent="VBoxContainer"]
-margin_right = 512.0
-margin_bottom = 97.0
-rect_clip_content = false
+offset_right = 512.0
+offset_bottom = 97.0
+clip_contents = false
 theme = ExtResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[center]Juicy Snake"
+text = "[center]Juicy Snake"
 text = "Juicy Snake"
 fit_content_height = true
 scroll_active = false
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 101.0
-margin_right = 512.0
-margin_bottom = 198.0
+offset_top = 101.0
+offset_right = 512.0
+offset_bottom = 198.0
 size_flags_vertical = 3
 
 [node name="SnakeMenuButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
-margin_left = 226.0
-margin_top = 28.0
-margin_right = 286.0
-margin_bottom = 68.0
+offset_left = 226.0
+offset_top = 28.0
+offset_right = 286.0
+offset_bottom = 68.0
 script = ExtResource( 2 )
 
 [node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
-margin_top = 202.0
-margin_right = 512.0
-margin_bottom = 300.0
+offset_top = 202.0
+offset_right = 512.0
+offset_bottom = 300.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer2"]
-margin_left = 110.0
-margin_top = 12.0
-margin_right = 401.0
-margin_bottom = 86.0
+offset_left = 110.0
+offset_top = 12.0
+offset_right = 401.0
+offset_bottom = 86.0
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_right = 85.0
-margin_bottom = 74.0
+offset_right = 85.0
+offset_bottom = 74.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer2"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 80.0
-margin_bottom = 69.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 80.0
+offset_bottom = 69.0
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer2/VBoxContainer"]
-margin_right = 75.0
-margin_bottom = 13.0
+offset_right = 75.0
+offset_bottom = 13.0
 custom_fonts/font = ExtResource( 3 )
 text = "Clear the Cells"
 align = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer2/VBoxContainer"]
-margin_top = 17.0
-margin_right = 75.0
-margin_bottom = 30.0
+offset_top = 17.0
+offset_right = 75.0
+offset_bottom = 30.0
 custom_fonts/font = ExtResource( 3 )
 text = "Eat the Enemies"
 align = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer2/VBoxContainer"]
-margin_top = 34.0
-margin_right = 75.0
-margin_bottom = 47.0
+offset_top = 34.0
+offset_right = 75.0
+offset_bottom = 47.0
 custom_fonts/font = ExtResource( 3 )
 text = "Stay Alive!"
 align = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/CenterContainer2/HBoxContainer"]
-margin_left = 89.0
-margin_right = 291.0
-margin_bottom = 74.0
+offset_left = 89.0
+offset_right = 291.0
+offset_bottom = 74.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 197.0
-margin_bottom = 69.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 197.0
+offset_bottom = 69.0
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_right = 192.0
-margin_bottom = 13.0
+offset_right = 192.0
+offset_bottom = 13.0
 custom_fonts/font = ExtResource( 3 )
 text = "WASD: queue a move"
 align = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 17.0
-margin_right = 192.0
-margin_bottom = 30.0
+offset_top = 17.0
+offset_right = 192.0
+offset_bottom = 30.0
 custom_fonts/font = ExtResource( 3 )
 text = "Hold Shift: slow-motion, manual movement"
 align = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 34.0
-margin_right = 192.0
-margin_bottom = 47.0
+offset_top = 34.0
+offset_right = 192.0
+offset_bottom = 47.0
 custom_fonts/font = ExtResource( 3 )
 text = "Escape: Pause"
 align = 1
 
 [node name="Label4" type="Label" parent="VBoxContainer/CenterContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 51.0
-margin_right = 192.0
-margin_bottom = 64.0
+offset_top = 51.0
+offset_right = 192.0
+offset_bottom = 64.0
 custom_fonts/font = ExtResource( 3 )
 text = "Scroll/Up-Down: Zoom camera in/out"
 align = 1

@@ -1,8 +1,8 @@
-tool
+@tool
 extends HBoxContainer
 
-onready var count_label = $Count
-onready var produce_icon = $MarginContainer/ProduceIcon
+@onready var count_label = $Count
+@onready var produce_icon = $MarginContainer/ProduceIcon
 
 
 func set_count(n):

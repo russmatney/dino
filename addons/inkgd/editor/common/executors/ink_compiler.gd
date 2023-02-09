@@ -44,14 +44,14 @@ func _init(configuration: InkCompilationConfiguration):
 # Methods
 # ############################################################################ #
 
-## Compile the story, based on the compilation configuration provided
+## Compile the story, based checked the compilation configuration provided
 ## by this object. If `configuration.use_thread` is set to `false`,
 ## this method will return `true` if the compilation succeeded and `false`
 ## otherwise. If `configuration.use_thread` is set to `true`, this method
 ## always returns `true`.
 func compile_story() -> bool:
 	if _configuration.use_threads:
-		var error = _thread.start(self, "_compile_story", _configuration, Thread.PRIORITY_HIGH)
+		var error = _thread.start(Callable(self,"_compile_story").bind(_configuration),Thread.PRIORITY_HIGH)
 
 		if error != OK:
 			var result = InkExecutionResult.new(
@@ -72,7 +72,7 @@ func compile_story() -> bool:
 # Private Helpers
 # ############################################################################ #
 
-## Compile the story, based on the given compilation configuration
+## Compile the story, based checked the given compilation configuration
 ## If `configuration.use_thread` is set to `false`, this method will
 ## return `true` if the compilation succeeded and `false` otherwise.
 ## If `configuration.use_thread` is set to `false`, this method always
@@ -82,7 +82,7 @@ func _compile_story(config: InkCompilationConfiguration) -> bool:
 	var return_code = 0
 	var output = []
 
-	var start_time = OS.get_ticks_msec()
+	var start_time = Time.get_ticks_msec()
 
 	if config.use_mono:
 		var args = [config.inklecate_path, '-o', config.target_file_path, config.source_file_path]
@@ -91,11 +91,11 @@ func _compile_story(config: InkCompilationConfiguration) -> bool:
 		var args = ['-o', config.target_file_path, config.source_file_path]
 		return_code = OS.execute(config.inklecate_path, args, true, output, true)
 
-	var end_time = OS.get_ticks_msec()
+	var end_time = Time.get_ticks_msec()
 
 	print("[inkgd] [INFO] Command executed in %dms." % (end_time - start_time))
 
-	var string_output = PoolStringArray(output)
+	var string_output = PackedStringArray(output)
 	if _configuration.use_threads:
 		call_deferred("_handle_compilation_result", config, return_code, string_output)
 		return true
@@ -106,7 +106,7 @@ func _compile_story(config: InkCompilationConfiguration) -> bool:
 
 ## Handles the compilation results when exectuted in a different thread.
 ##
-## This method should always be executed on the main thread.
+## This method should always be executed checked the main thread.
 func _handle_compilation_result(
 	config: InkCompilationConfiguration,
 	return_code: int,
@@ -124,10 +124,10 @@ func _handle_compilation_result(
 func _process_compilation_result(
 	config: InkCompilationConfiguration,
 	return_code: int,
-	output: PoolStringArray
+	output: PackedStringArray
 ) -> InkExecutionResult:
 	var success: bool = (return_code == 0)
-	var output_text: String = output.join("\n").replace(BOM, "").strip_edges()
+	var output_text: String = "\n".join(output).replace(BOM, "").strip_edges()
 
 	if success:
 		print("[inkgd] [INFO] %s was successfully compiled." % config.source_file_path)

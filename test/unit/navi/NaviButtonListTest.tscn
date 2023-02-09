@@ -3,6 +3,6 @@
 [ext_resource path="res://addons/navi/NaviButtonList.gd" type="Script" id=1]
 
 [node name="NaviButtonListTest" type="VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 1 )

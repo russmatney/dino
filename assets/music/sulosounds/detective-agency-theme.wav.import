@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/detective-agency-theme.wav-234cf3179e8b83ff3261750def939d3d.sample"
+type="AudioStreamWAV"
+uid="uid://d1uuhj2ni6781"
+path="res://.godot/imported/detective-agency-theme.wav-234cf3179e8b83ff3261750def939d3d.sample"
 
 [deps]
 
 source_file="res://assets/music/sulosounds/detective-agency-theme.wav"
-dest_files=[ "res://.import/detective-agency-theme.wav-234cf3179e8b83ff3261750def939d3d.sample" ]
+dest_files=["res://.godot/imported/detective-agency-theme.wav-234cf3179e8b83ff3261750def939d3d.sample"]
 
 [params]
 

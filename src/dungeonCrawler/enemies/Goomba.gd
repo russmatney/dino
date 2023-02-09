@@ -1,6 +1,6 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var anim = $AnimatedSprite
+@onready var anim = $AnimatedSprite2D
 
 #######################################################################33
 # hit, kill
@@ -15,7 +15,7 @@ func hit():
 func kill():
 	dead = true
 	anim.animation = "death"
-	yield(get_tree().create_timer(0.4), "timeout")
+	await get_tree().create_timer(0.4).timeout
 	emit_drops()
 	queue_free()
 
@@ -23,17 +23,17 @@ func kill():
 #######################################################################33
 # drops
 
-export(PackedScene) var drop_scene
+@export var drop_scene: PackedScene
 var fallback_drop_scenes = [preload("res://src/dungeonCrawler/items/Coin.tscn")]
 
 
 func emit_drop(scene):
-	var drop = scene.instance()
+	var drop = scene.instantiate()
 	drop.position = transform.origin
 	Navi.current_scene.call_deferred("add_child", drop)
 
 	# eh? particle physics?
-	# drop.apply_impulse(Vector2.ZERO, impulse_dir * arrow_impulse)
+	# drop.apply_impulse(impulse_dir * arrow_impulse, Vector2.ZERO)
 
 
 func emit_drops():

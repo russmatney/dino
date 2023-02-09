@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	var _x = Hood.connect("found_player", self, "setup")
+	var _x = Hood.connect("found_player",Callable(self,"setup"))
 	if Hood.player and is_instance_valid(Hood.player):
 		setup(Hood.player)
 
@@ -22,7 +22,7 @@ var player
 
 func setup(p):
 	player = p
-	p.connect("destroyed", self, "_on_player_destroyed")
+	p.connect("destroyed",Callable(self,"_on_player_destroyed"))
 
 func _on_player_destroyed(_snake):
 	emit_signal("quest_failed")

@@ -1,20 +1,20 @@
-tool
+@tool
 extends Node2D
 class_name RunnerRoom
 
 var expected_child_nodes = ["RoomBox"]
 
 
-func _get_configuration_warning():
+func _get_configuration_warnings():
 	var has_roombox = false
 	for n in ["RoomBox"]:
-		var node = find_node(n)
+		var node = find_child(n)
 		if node:
 			has_roombox = true
 
 	if not has_roombox:
-		var enter = find_node("EnterBox")
-		var exit = find_node("ExitBox")
+		var enter = find_child("EnterBox")
+		var exit = find_child("ExitBox")
 		if not enter:
 			return "Expected RoomBox or EnterBox"
 		if not exit:
@@ -23,7 +23,7 @@ func _get_configuration_warning():
 
 
 ###########################################################
-## Runner Room room_width
+## Runner Node3D room_width
 
 
 # returns the width of the room. uses the RoomBox's collision shape
@@ -56,7 +56,7 @@ func room_width_enterbox():
 
 
 ###########################################################
-## Runner Room x_offset
+## Runner Node3D x_offset
 
 
 # returns the distance from the furthest left to the origin.
@@ -95,7 +95,7 @@ func calc_shape_offset(coll_shape, left_side = true):
 
 
 ###########################################################
-## Runner Room is_finished()
+## Runner Node3D is_finished()
 
 
 # if false, the room will be requeued until this returns true

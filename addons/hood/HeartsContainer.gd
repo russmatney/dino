@@ -1,8 +1,8 @@
-tool
+@tool
 extends HBoxContainer
 
 var heart_icons
-export(int) var h setget set_health
+@export var h: int : set = set_health
 
 
 func _ready():
@@ -22,7 +22,7 @@ func set_health(health):
 		print("[HOOD] WARN: set_health with null!")
 		return
 
-	# TODO extend to add and place more hearts, or layer a new color on top
+	# TODO extend to add and place more hearts, or layer a new color checked top
 
 	if not heart_icons:
 		find_heart_icons()

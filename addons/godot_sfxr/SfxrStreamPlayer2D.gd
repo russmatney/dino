@@ -1,8 +1,8 @@
-tool
+@tool
 extends AudioStreamPlayer2D
 
 
-# Wave Shape
+# Wave Shape3D
 var wave_type: int
 
 # Envelope
@@ -75,7 +75,7 @@ func _set(property: String, value) -> bool:
 ##################################
 
 
-func _init() -> void:
+func _init():
     SfxrStreamPlayerInterface.object_set_defaults(self)
 
 
@@ -116,4 +116,4 @@ func build_sfx(play_after_build: bool = false):
 func play(from_position: float = 0.0):
     if playing:
         stop()
-    .play(from_position)
+    super.play(from_position)

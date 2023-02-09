@@ -4,7 +4,7 @@
 # See LICENSE in the project root for license information.
 # ############################################################################ #
 
-tool
+@tool
 extends EditorPlugin
 
 # Hiding this type to prevent registration of "private" nodes.
@@ -46,7 +46,7 @@ var _panel = null
 var _ink_source_import_plugin: InkSourceImportPlugin = null
 var _ink_json_import_plugin: InkJsonImportPlugin = null
 
-var _tool_button: ToolButton = null
+var _tool_button: Button = null
 
 
 # ############################################################################ #
@@ -160,7 +160,7 @@ func _remove_import_plugin():
 
 
 func _add_bottom_panel():
-	_panel = InkBottomPanel.instance()
+	_panel = InkBottomPanel.instantiate()
 	_panel.editor_interface = _editor_interface
 	_panel.configuration = _configuration
 
@@ -206,7 +206,7 @@ func _remove_templates():
 	for name in names:
 		var template_file_path = template_dir_path + "/" + name
 		if dir.file_exists(template_file_path):
-			dir.remove(template_file_path)
+			dir.remove_at(template_file_path)
 
 
 ## Get all the script templates provided by the plugin.
@@ -215,7 +215,7 @@ func _get_plugin_templates_names() -> Array:
 	var plugin_template_names = []
 
 	dir.change_dir("res://addons/inkgd/editor/templates/")
-	dir.list_dir_begin(true)
+	dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	var temp = dir.get_next()
 	while temp != "":
@@ -241,7 +241,7 @@ func _register_custom_settings():
 
 func _validate_csproj() -> bool:
 	var project_name = ProjectSettings.get_setting("application/config/name")
-	if project_name.empty():
+	if project_name.is_empty():
 		printerr("[inkgd] [ERROR] The project is missing a name.")
 		return false
 

@@ -1,4 +1,4 @@
-tool
+@tool
 extends HBoxContainer
 
 var pickups
@@ -26,14 +26,14 @@ func update_pickups(ps = pickups):
 			var inst
 			match p:
 				"hat":
-					inst = hat_scene.instance()
+					inst = hat_scene.instantiate()
 					inst.position.y = 19
 				"body":
-					inst = body_scene.instance()
+					inst = body_scene.instantiate()
 					inst.position.y = -2
 				_:
-					print("unknown pickup, falling back on hat scene")
-					inst = hat_scene.instance()
+					print("unknown pickup, falling back checked hat scene")
+					inst = hat_scene.instantiate()
 					inst.position.y = 19
 			inst.position.x = x_pos(i)
 

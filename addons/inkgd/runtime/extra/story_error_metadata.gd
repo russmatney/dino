@@ -25,6 +25,6 @@ var pointer: InkPointer
 # Initialization
 # ############################################################################ #
 
-func _init(debug_metadata: InkDebugMetadata, pointer: InkPointer):
+func _init(debug_metadata: InkDebugMetadata,pointer: InkPointer):
 	self.debug_metadata = debug_metadata
 	self.pointer = pointer

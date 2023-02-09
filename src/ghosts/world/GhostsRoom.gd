@@ -22,12 +22,12 @@ func spawn_player():
 		return
 
 	var pos = $PlayerSpawner.global_position
-	player = player_scene.instance()
+	player = player_scene.instantiate()
 	player.position = pos
 
 	emit_signal("spawning_player", player)
 
-	player.connect("player_died", self, "player_died")
+	player.connect("player_died",Callable(self,"player_died"))
 
 	call_deferred("add_child", player)
 

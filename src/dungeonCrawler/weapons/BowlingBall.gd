@@ -1,7 +1,7 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var light = $Light2D
-export(bool) var light_enabled = false
+@onready var light = $PointLight2D
+@export var light_enabled: bool = false
 
 var velocity = Vector2.ZERO
 
@@ -31,5 +31,5 @@ func _on_Area2D_body_entered(body: Node):
 			if body.has_method("hit"):
 				body.hit()
 
-		# dies on any hit for now
+		# dies checked any hit for now
 		kill()

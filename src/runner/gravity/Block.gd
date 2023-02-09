@@ -2,7 +2,7 @@ extends RigidBody2D
 
 var spawner
 
-onready var color_rect = $ColorRect
+@onready var color_rect = $ColorRect
 
 
 func _ready():

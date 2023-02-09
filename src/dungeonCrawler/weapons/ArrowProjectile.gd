@@ -1,9 +1,9 @@
 extends RigidBody2D
 
-export(float) var ttl = 3.0
+@export var ttl: float = 3.0
 
-onready var anim = $AnimatedSprite
-onready var remove_timer = $RemoveTimer
+@onready var anim = $AnimatedSprite2D
+@onready var remove_timer = $RemoveTimer
 
 ### ready #####################################################################
 

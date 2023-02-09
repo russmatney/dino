@@ -1,11 +1,11 @@
-tool
+@tool
 extends StaticBody2D
 
 ##########################################################
 # ready
 
-onready var anim = $AnimatedSprite
-onready var action_label = $ActionLabel
+@onready var anim = $AnimatedSprite2D
+@onready var action_label = $ActionLabel
 
 
 func _ready():
@@ -41,7 +41,7 @@ func set_action_label(player):
 
 	# TODO select action better?
 	var ax = actions[0]
-	action_label.bbcode_text = "[center]" + ax["method"].capitalize() + "[/center]"
+	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
 
 	if not can_perform_action(player, ax):
 		action_label.modulate.a = 0.5

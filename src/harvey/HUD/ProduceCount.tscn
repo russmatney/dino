@@ -5,25 +5,25 @@
 [ext_resource path="res://src/harvey/HUDTheme.tres" type="Theme" id=3]
 
 [node name="ProduceCount" type="HBoxContainer"]
-margin_right = 512.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 0, 18 )
+offset_right = 512.0
+offset_bottom = 18.0
+custom_minimum_size = Vector2( 0, 18 )
 script = ExtResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 24.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 24, 0 )
+offset_right = 24.0
+offset_bottom = 18.0
+custom_minimum_size = Vector2( 24, 0 )
 
 [node name="ProduceIcon" parent="MarginContainer" instance=ExtResource( 1 )]
 position = Vector2( 16, 6 )
 scale = Vector2( 1, 1 )
 
 [node name="Count" type="RichTextLabel" parent="."]
-margin_left = 28.0
-margin_right = 92.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 64, 0 )
+offset_left = 28.0
+offset_right = 92.0
+offset_bottom = 18.0
+custom_minimum_size = Vector2( 64, 0 )
 theme = ExtResource( 3 )
 text = "x 22"
 scroll_active = false

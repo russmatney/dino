@@ -1,6 +1,6 @@
 extends Area2D
 
-export(String) var label
+@export var label: String
 
 
 func weapon_def():

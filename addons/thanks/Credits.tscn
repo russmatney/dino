@@ -9,20 +9,20 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="CreditsScrollContainer" type="ScrollContainer" parent="."]
-margin_right = 512.0
-margin_bottom = 300.0
+offset_right = 512.0
+offset_bottom = 300.0
 scroll_vertical = 104
 
 [node name="CreditsLinesContainer" type="VBoxContainer" parent="CreditsScrollContainer"]
-margin_top = -104.0
-margin_right = 500.0
-margin_bottom = 684.0
+offset_top = -104.0
+offset_right = 500.0
+offset_bottom = 684.0
 size_flags_horizontal = 3
 
 [node name="CreditLine" parent="CreditsScrollContainer/CreditsLinesContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 500.0
-margin_bottom = 14.0
-bbcode_text = "[center]Credits[/center]"
+offset_right = 500.0
+offset_bottom = 14.0
+text = "[center]Credits[/center]"
 text = "Credits"

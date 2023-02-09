@@ -1,5 +1,5 @@
 # Player.gd
-tool
+@tool
 extends Snake
 
 ###########################################################################
@@ -10,15 +10,15 @@ func _ready():
 		Cam.ensure_camera(2, 1000.0, 1)
 		Hood.ensure_hud(hud_scene)
 
-	var _x = connect("food_picked_up", self, "_on_food_picked_up")
-	var _y = connect("slowmo_start", self, "_on_slowmo_start")
-	var _z = connect("slowmo_stop", self, "_on_slowmo_stop")
+	var _x = connect("food_picked_up",Callable(self,"_on_food_picked_up"))
+	var _y = connect("slowmo_start",Callable(self,"_on_slowmo_start"))
+	var _z = connect("slowmo_stop",Callable(self,"_on_slowmo_stop"))
 
 	cell_anim = "player"
 	cell_head_anim = "playerhead"
 
 func print_snake_meta():
-	.print_snake_meta()
+	super.print_snake_meta()
 	print("food: ", food_count)
 	print("speed level: ", speed_level)
 
@@ -130,13 +130,13 @@ func attempt_walk(next):
 func _on_step():
 	if not leaping:
 		# TODO skipping step counter here
-		._on_step()
+		super._on_step()
 	bounce_food()
 	SnakeSounds.play_sound("walk")
 
 func _on_move_head(coord):
 	if not dead:
-		._on_move_head(coord)
+		super._on_move_head(coord)
 		# ... in case we lost in the middle of this?
 		if is_instance_valid(grid):
 			attempt_collect(coord)
@@ -206,7 +206,7 @@ func leap_towards_food(next, f):
 	should_flash = false
 	leaping = false
 
-	yield(get_tree().create_timer(0.4), "timeout")
+	await get_tree().create_timer(0.4).timeout
 	restore_segments()
 
 ##################################################################
@@ -246,5 +246,5 @@ func _on_food_picked_up(f):
 
 		# TODO move to combo levels
 		grid.mark_cells_playing()
-		yield(get_tree().create_timer(3.0), "timeout")
+		await get_tree().create_timer(3.0).timeout
 		grid.mark_cells_not_playing()

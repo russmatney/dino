@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 
@@ -10,7 +10,7 @@ func _enter_tree():
 	import_plugin = preload("import_plugin.gd").new()
 	add_import_plugin(import_plugin)
 	
-	sfxr_editor = preload("editor/Editor.tscn").instance()
+	sfxr_editor = preload("editor/Editor.tscn").instantiate()
 	sfxr_editor.plugin = self
 	add_control_to_bottom_panel(sfxr_editor, "gdfxr")
 
@@ -25,14 +25,14 @@ func _exit_tree():
 
 
 func handles(object: Object) -> bool:
-	return object is AudioStreamSample and object.resource_path.ends_with(".sfxr")
+	return object is AudioStreamWAV and object.resource_path.ends_with(".sfxr")
 
 
 func edit(object: Object):
 	sfxr_editor.edit(object.resource_path) # Should already passed `handles()` checks
 
 
-func make_visible(visible: bool):
+func _make_visible(visible: bool):
 	if visible:
 		make_bottom_panel_item_visible(sfxr_editor)
 	elif sfxr_editor.is_visible_in_tree():

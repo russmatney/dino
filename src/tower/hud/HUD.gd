@@ -2,8 +2,8 @@ extends CanvasLayer
 
 
 func _ready():
-	var _x = Hood.connect("notification", self, "new_notification")
-	var _y = Hood.connect("found_player", self, "setup_player")
+	var _x = Hood.connect("notification",Callable(self,"new_notification"))
+	var _y = Hood.connect("found_player",Callable(self,"setup_player"))
 	Hood.call_deferred("find_player")
 
 
@@ -15,9 +15,9 @@ var player
 func setup_player(p):
 	player = p
 
-	player.connect("health_change", self, "update_player_health")
+	player.connect("health_change",Callable(self,"update_player_health"))
 	update_player_health(player.health)
-	player.connect("pickups_changed", self, "update_player_pickups")
+	player.connect("pickups_changed",Callable(self,"update_player_pickups"))
 	update_player_pickups(player.pickups)
 
 
@@ -28,7 +28,7 @@ var notif_label = preload("res://addons/hood/NotifLabel.tscn")
 
 
 func new_notification(notif):
-	var lbl = notif_label.instance()
+	var lbl = notif_label.instantiate()
 	lbl.text = notif["msg"]
 	lbl.ttl = notif["ttl"]
 	get_node("%Notifications").add_child(lbl)
@@ -55,8 +55,8 @@ func update_player_pickups(pickups):
 ###################################################################
 # update targets
 
-onready var destroyed_label = get_node("%TargetsDestroyed")
-onready var remaining_label = get_node("%TargetsRemaining")
+@onready var destroyed_label = get_node("%TargetsDestroyed")
+@onready var remaining_label = get_node("%TargetsRemaining")
 
 
 func update_targets_destroyed(count):
@@ -70,8 +70,8 @@ func update_targets_remaining(count):
 ###################################################################
 # update enemies
 
-onready var e_destroyed_label = get_node("%EnemiesDestroyed")
-onready var e_remaining_label = get_node("%EnemiesRemaining")
+@onready var e_destroyed_label = get_node("%EnemiesDestroyed")
+@onready var e_remaining_label = get_node("%EnemiesRemaining")
 
 
 func update_enemies_destroyed(count):

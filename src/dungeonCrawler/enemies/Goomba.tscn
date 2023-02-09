@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14, 10 )
 
-[node name="Goomba" type="KinematicBody2D" groups=["enemies"]]
+[node name="Goomba" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource( 2 )
@@ -15,9 +15,9 @@ script = ExtResource( 2 )
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2( 2, 2 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "walk"
 frame = 1
 playing = true

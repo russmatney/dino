@@ -52,9 +52,9 @@ position = Vector2( 0, -44 )
 shape = SubResource( 1 )
 
 [node name="AnglerLightRod" type="ColorRect" parent="AnglerLightRod"]
-margin_left = -1.0
-margin_top = -84.0
-margin_right = 1.0
+offset_left = -1.0
+offset_top = -84.0
+offset_right = 1.0
 color = Color( 1, 0.298039, 0.278431, 1 )
 
 [node name="MouseTracker" type="RigidBody2D" parent="."]
@@ -69,8 +69,8 @@ disabled = true
 
 [node name="ColorRect" type="ColorRect" parent="MouseTracker"]
 visible = false
-margin_right = 5.0
-margin_bottom = 5.0
+offset_right = 5.0
+offset_bottom = 5.0
 
 [node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="." groups=["pins"]]
 node_a = NodePath("../AnglerChainAndLight/ChainBase2")
@@ -107,10 +107,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/Chain9"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/Chain9"]
 position = Vector2( 0, -1 )
@@ -126,10 +126,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/Chain8"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/Chain8"]
 position = Vector2( 0, -1 )
@@ -145,10 +145,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/ChainBase2"]
-margin_left = -7.0
-margin_top = -6.0
-margin_right = 6.0
-margin_bottom = 6.0
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/ChainBase2"]
 shape = SubResource( 2 )
@@ -167,10 +167,10 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="AnglerChainAndLight/Chain7"]
-margin_left = -1.0
-margin_top = -10.0
-margin_right = 1.0
-margin_bottom = 8.0
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnglerChainAndLight/Chain7"]
 position = Vector2( 0, -1 )
