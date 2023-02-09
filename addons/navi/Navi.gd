@@ -29,7 +29,7 @@ func pp(msg):
 
 
 func _ready():
-	if not FileAccessd.file_exists(main_menu_path):
+	if not FileAccess.file_exists(main_menu_path):
 		pp(str("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op."))
 
 	process_mode = PROCESS_MODE_ALWAYS

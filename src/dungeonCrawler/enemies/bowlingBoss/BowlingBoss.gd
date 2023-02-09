@@ -15,11 +15,12 @@ var initial_pos
 
 
 func _get_configuration_warnings():
+	var warnings = []
 	for n in ["StateLabel", "Machine"]:
 		var node = find_child(n)
 		if not node:
-			return "Missing expected child named '" + n + "'"
-	return ""
+			warnings.append("Missing expected child named '" + n + "'")
+	return warnings
 
 
 #######################################################################33

@@ -16,11 +16,12 @@ var expected_nodes = ["CreditsScrollContainer", "CreditsLinesContainer"]
 
 
 func _get_configuration_warnings():
+	var warnings = []
 	for n in expected_nodes:
 		var node = find_child(n)
 		if not node:
-			return "'Credits' node expects a child named '" + n + "'"
-	return ""
+			warnings.append("'Credits' node expects a child named '" + n + "'")
+	return warnings
 
 
 var added_lines = []

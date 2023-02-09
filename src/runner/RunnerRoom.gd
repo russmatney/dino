@@ -16,10 +16,10 @@ func _get_configuration_warnings():
 		var enter = find_child("EnterBox")
 		var exit = find_child("ExitBox")
 		if not enter:
-			return "Expected RoomBox or EnterBox"
+			return ["Expected RoomBox or EnterBox"]
 		if not exit:
-			return "Found EnterBox, expected ExitBox"
-	return ""
+			return ["Found EnterBox, expected ExitBox"]
+	return []
 
 
 ###########################################################

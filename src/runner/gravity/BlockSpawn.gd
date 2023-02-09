@@ -15,5 +15,5 @@ func _get_configuration_warnings():
 	var groups = get_groups()
 
 	if not expected_group_name in groups:
-		return str("Group Name expected: ", expected_group_name)
-	return ""
+		return [str("Group Name expected: ", expected_group_name)]
+	return []

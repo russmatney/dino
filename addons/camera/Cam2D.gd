@@ -264,9 +264,9 @@ func find_node_to_follow():
 		following = nodes[0]
 		match mode:
 			cam_mode.FOLLOW:
-				Util.reparent(self, following)
+				Util.change_parent(self, following)
 			cam_mode.FOLLOW_AND_POIS:
-				Util.reparent(self, following)
+				Util.change_parent(self, following)
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
 
@@ -282,7 +282,7 @@ func attach_to_nearest_anchor():
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
 		print("[WARN] Camera found no anchor nodes, attaching to player")
-		Util.reparent(self, following)
+		Util.change_parent(self, following)
 	else:
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...
 		# maybe only run this when the player moves some distance?
@@ -293,7 +293,7 @@ func attach_to_nearest_anchor():
 			var nearest_anchor = Util.nearest_node(following, anchors)
 			if nearest_anchor != current_anchor:
 				current_anchor = nearest_anchor
-				Util.reparent(self, current_anchor)
+				Util.change_parent(self, current_anchor)
 		else:
 			following = null
 

@@ -1,4 +1,3 @@
-@tool
 extends Node
 
 
@@ -15,11 +14,11 @@ func _or(a, b = null, c = null, d = null, e = null):
 		return e
 
 
-func reparent(child: Node, new_parent: Node):
-	call_deferred("do_reparent", child, new_parent)
+func change_parent(child: Node, new_parent: Node):
+	call_deferred("do_change_parent", child, new_parent)
 
 
-func do_reparent(child, new_parent):
+func do_change_parent(child, new_parent):
 	# TODO need to set owner as well to support creating PackedScenes
 	var old_parent = child.get_parent()
 	old_parent.remove_child(child)
@@ -119,7 +118,7 @@ func set_random_frame(anim):
 static func map(function: Callable, i_array: Array) -> Array:
 	var o_array := []
 	for value in i_array:
-		o_array.append(function.call_func(value))
+		o_array.append(function.call(value))
 	return o_array
 
 

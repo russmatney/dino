@@ -1,5 +1,4 @@
 # Cam
-@tool
 extends Node
 
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")

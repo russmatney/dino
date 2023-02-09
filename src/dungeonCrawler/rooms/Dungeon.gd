@@ -12,8 +12,8 @@ func _get_configuration_warnings():
 	for n in ["PlayerStart"]:
 		var node = find_child(n)
 		if not node:
-			return "Missing expected child named '" + n + "'"
-	return ""
+			return ["Missing expected child named '" + n + "'"]
+	return []
 
 
 enum w_type { DEFEAT_BOSS, GET_TREASURE }

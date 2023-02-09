@@ -52,9 +52,9 @@ func _initialize(p_child: Node) -> void:
 	is_initialized = true
 
 
-func add_child(node : Node, legible_unique_name := false) -> void:
+func add_child(node : Node, legible_unique_name := false, internal := Node.InternalMode) -> void:
 	# Overloading add_child() to detect when a child node comes
-	super.add_child(node, legible_unique_name)
+	super.add_child(node, legible_unique_name, internal)
 
 	if get_child_count() == 1:
 		_initialize(node)
@@ -191,14 +191,14 @@ func _set_custom_margins(side : int, value : int) -> void:
 			set("custom_constants/offset_bottom", value)
 
 
-func _get_configuration_warnings() -> String:
+func _get_configuration_warnings() -> PackedStringArray:
 	# Warns the user that only 1 child node is possible
-	var warning := ""
+	var warnings := []
 
 	if get_child_count() > 1:
-		warning = "This Container can handle only one (1) child"
+		warnings.append("This Container can handle only one (1) child")
 
-	return warning
+	return warnings
 
 
 func _on_self_resized() -> void:
