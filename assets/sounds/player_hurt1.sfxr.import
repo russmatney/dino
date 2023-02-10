@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/player_hurt1.sfxr-c12ca50d2452f5e8289d03c0c90734ad.sample"
+type="AudioStreamWAV"
+uid="uid://brcdhh7llxo0l"
+path="res://.godot/imported/player_hurt1.sfxr-c12ca50d2452f5e8289d03c0c90734ad.sample"
 
 [deps]
 
 source_file="res://assets/sounds/player_hurt1.sfxr"
-dest_files=[ "res://.import/player_hurt1.sfxr-c12ca50d2452f5e8289d03c0c90734ad.sample" ]
+dest_files=["res://.godot/imported/player_hurt1.sfxr-c12ca50d2452f5e8289d03c0c90734ad.sample"]
 
 [params]
 

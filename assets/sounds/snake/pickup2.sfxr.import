@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/pickup2.sfxr-23acd8e9f2c3ece89554b8ef17364a59.sample"
+type="AudioStreamWAV"
+uid="uid://bb1jqftlg6obo"
+path="res://.godot/imported/pickup2.sfxr-23acd8e9f2c3ece89554b8ef17364a59.sample"
 
 [deps]
 
 source_file="res://assets/sounds/snake/pickup2.sfxr"
-dest_files=[ "res://.import/pickup2.sfxr-23acd8e9f2c3ece89554b8ef17364a59.sample" ]
+dest_files=["res://.godot/imported/pickup2.sfxr-23acd8e9f2c3ece89554b8ef17364a59.sample"]
 
 [params]
 

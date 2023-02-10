@@ -3,7 +3,8 @@ extends Control
 
 signal value_changed(value)
 
-@export var value: float = 0.0 : set = set_value
+@export var value: float = 0.0 :
+	set = set_value
 @export var min_value: float = 0.0
 @export var max_value: float = 1.0
 
@@ -48,8 +49,9 @@ func _init():
 
 
 func _draw() -> void:
-	var font := get_font("font", "LineEdit")
-	var color := get_color("highlighted_font_color" if _mouse_hovering else "font_color", "Editor")
+	var font := get_theme_font("font", "LineEdit")
+	var font_size := get_theme_font_size("font_size", "LineEdit")
+	var color := get_theme_color("highlighted_font_color" if _mouse_hovering else "font_color", "Editor")
 	var number_string := "%.3f" % value
 	var number_size := font.get_string_size(number_string)
 	var pos := Vector2(
@@ -65,12 +67,12 @@ func _draw() -> void:
 		var value_width := size.x * ((value - min_value) / (max_value - min_value))
 		draw_style_box(stylebox, Rect2(value_width, 0, size.x - value_width, size.y))
 		draw_style_box(_stylebox_value, Rect2(0, 0, value_width, size.y))
-		draw_string(font, pos, number_string, color)
+		draw_string(font, pos, number_string, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, color)
 
 
 func _get_minimum_size() -> Vector2:
-	var ms := _stylebox_normal.get_minimum_size()
-	ms.y += get_font("font", "LineEdit").get_height()
+	var ms := _stylebox_normal.get_minimum_size() if _stylebox_normal else Vector2.ZERO
+	ms.y += get_theme_font("font", "LineEdit").get_height()
 	return ms
 
 
@@ -85,7 +87,7 @@ func _gui_input(event: InputEvent) -> void:
 				_show_text_edit()
 			_drag_cancelled = true
 		_is_editing = mb.pressed
-		update()
+		queue_redraw()
 	
 	var mm := event as InputEventMouseMotion
 	if mm and mm.button_mask & MOUSE_BUTTON_MASK_LEFT:
@@ -100,11 +102,11 @@ func _notification(what: int) -> void:
 		
 		NOTIFICATION_MOUSE_ENTER:
 			_mouse_hovering = true
-			update()
+			queue_redraw()
 		
 		NOTIFICATION_MOUSE_EXIT:
 			_mouse_hovering = false
-			update()
+			queue_redraw()
 		
 		NOTIFICATION_FOCUS_ENTER:
 			if (Input.is_action_pressed("ui_focus_next") or Input.is_action_pressed("ui_focus_prev")) and not _line_edit_just_closed:
@@ -117,17 +119,17 @@ func set_value(v: float) -> void:
 		return
 	value = v
 	emit_signal("value_changed", value)
-	update()
+	queue_redraw()
 
 
 func _update_stylebox() -> void:
-	_stylebox_normal = get_stylebox("normal", "LineEdit")
+	_stylebox_normal = get_theme_stylebox("normal", "LineEdit")
 	_stylebox_hover = StyleBoxFlat.new()
-	_stylebox_hover.bg_color = get_color("highlight_color", "Editor")
+	_stylebox_hover.bg_color = get_theme_color("highlight_color", "Editor")
 	_stylebox_editing = StyleBoxFlat.new()
-	_stylebox_editing.bg_color = get_color("dark_color_2", "Editor")
+	_stylebox_editing.bg_color = get_theme_color("dark_color_2", "Editor")
 	_stylebox_value = StyleBoxFlat.new()
-	_stylebox_value.bg_color = get_color("accent_color", "Editor") * Color(1, 1, 1, 0.4)
+	_stylebox_value.bg_color = get_theme_color("accent_color", "Editor") * Color(1, 1, 1, 0.4)
 
 
 func _drag_prepare(mouse: InputEventMouse) -> void:
@@ -158,18 +160,18 @@ func _drag_motion(motion: InputEventMouseMotion) -> void:
 		_drag_dist = (factor - _drag_start_factor) * size.x
 	
 	var v := factor * (max_value - min_value) + min_value
-	var snap := motion.command or motion.shift
+	var snap := motion.is_command_or_control_pressed() or motion.shift_pressed
 	if snap and not (is_equal_approx(v, min_value) or is_equal_approx(v, max_value)):
-		if motion.shift and motion.command:
+		if motion.shift_pressed and motion.is_command_or_control_pressed():
 			v = round(v * 1000.0) * 0.001
-		elif motion.shift:
+		elif motion.shift_pressed:
 			v = round(v * 100.0) * 0.01
 		else:
 			v = round(v * 10.0) * 0.1
 	
 	set_value(clamp(v, min_value, max_value))
 	
-	update()
+	queue_redraw()
 
 
 func _show_text_edit() -> void:
@@ -177,7 +179,7 @@ func _show_text_edit() -> void:
 	_line_edit.text = str(value)
 	_line_edit.set_position(gr.position)
 	_line_edit.set_size(gr.size)
-	_line_edit.show_modal()
+	_line_edit.show()  # FIXME: no suitable solution for `show_modal` yet
 	_line_edit.select_all()
 	_line_edit.grab_focus()
 	_line_edit.focus_next = find_next_valid_focus().get_path()
@@ -191,7 +193,7 @@ func _on_line_edit_focus_exited():
 		set_value(clamp(_line_edit.text.to_float(), min_value, max_value))
 	if not _line_edit_just_closed:
 		_line_edit.hide()
-	update()
+	queue_redraw()
 
 
 func _on_line_edit_text_entered(_text: String):

@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/heavy_landing1.sfxr-64de92c5273588d13e497fa6d2a07d57.sample"
+type="AudioStreamWAV"
+uid="uid://cgd1aesee3s8v"
+path="res://.godot/imported/heavy_landing1.sfxr-64de92c5273588d13e497fa6d2a07d57.sample"
 
 [deps]
 
 source_file="res://assets/sounds/heavy_landing1.sfxr"
-dest_files=[ "res://.import/heavy_landing1.sfxr-64de92c5273588d13e497fa6d2a07d57.sample" ]
+dest_files=["res://.godot/imported/heavy_landing1.sfxr-64de92c5273588d13e497fa6d2a07d57.sample"]
 
 [params]
 

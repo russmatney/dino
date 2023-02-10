@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/coin1.sfxr-8227b0b46430a950fdc6fc8eb396bbaa.sample"
+type="AudioStreamWAV"
+uid="uid://cldjo6aedydib"
+path="res://.godot/imported/coin1.sfxr-8227b0b46430a950fdc6fc8eb396bbaa.sample"
 
 [deps]
 
 source_file="res://assets/sounds/coin1.sfxr"
-dest_files=[ "res://.import/coin1.sfxr-8227b0b46430a950fdc6fc8eb396bbaa.sample" ]
+dest_files=["res://.godot/imported/coin1.sfxr-8227b0b46430a950fdc6fc8eb396bbaa.sample"]
 
 [params]
 

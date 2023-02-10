@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/speedup1.sfxr-09aeda4cd85110703d3f63b9bcfb0d4c.sample"
+type="AudioStreamWAV"
+uid="uid://b0uselajk2y3d"
+path="res://.godot/imported/speedup1.sfxr-09aeda4cd85110703d3f63b9bcfb0d4c.sample"
 
 [deps]
 
 source_file="res://assets/sounds/snake/speedup1.sfxr"
-dest_files=[ "res://.import/speedup1.sfxr-09aeda4cd85110703d3f63b9bcfb0d4c.sample" ]
+dest_files=["res://.godot/imported/speedup1.sfxr-09aeda4cd85110703d3f63b9bcfb0d4c.sample"]
 
 [params]
 

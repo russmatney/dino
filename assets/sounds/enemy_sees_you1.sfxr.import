@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/enemy_sees_you1.sfxr-6f56dc0d408f167d7b2b1a10ec68f9a5.sample"
+type="AudioStreamWAV"
+uid="uid://cp1ic8ny05bwi"
+path="res://.godot/imported/enemy_sees_you1.sfxr-6f56dc0d408f167d7b2b1a10ec68f9a5.sample"
 
 [deps]
 
 source_file="res://assets/sounds/enemy_sees_you1.sfxr"
-dest_files=[ "res://.import/enemy_sees_you1.sfxr-6f56dc0d408f167d7b2b1a10ec68f9a5.sample" ]
+dest_files=["res://.godot/imported/enemy_sees_you1.sfxr-6f56dc0d408f167d7b2b1a10ec68f9a5.sample"]
 
 [params]
 

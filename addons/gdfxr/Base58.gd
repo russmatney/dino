@@ -32,7 +32,7 @@ static func b58decode(v: String) -> StreamPeerBuffer:
 	var result := StreamPeerBuffer.new()
 	for _i in zeros:
 		result.put_8(0)
-	result.put_data(buffer.subarray(buffer.size() - length, -1))
+	result.put_data(buffer.slice(buffer.size() - length))
 	result.seek(0)
 	
 	return result

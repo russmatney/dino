@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/walk1.sfxr-1f8d2271f2b6560f5875310eb9fc7622.sample"
+type="AudioStreamWAV"
+uid="uid://cjvqxfbnr5x0f"
+path="res://.godot/imported/walk1.sfxr-1f8d2271f2b6560f5875310eb9fc7622.sample"
 
 [deps]
 
 source_file="res://assets/sounds/snake/walk1.sfxr"
-dest_files=[ "res://.import/walk1.sfxr-1f8d2271f2b6560f5875310eb9fc7622.sample" ]
+dest_files=["res://.godot/imported/walk1.sfxr-1f8d2271f2b6560f5875310eb9fc7622.sample"]
 
 [params]
 

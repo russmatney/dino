@@ -4,7 +4,8 @@ extends HBoxContainer
 signal param_changed(name, value)
 signal param_reset(name)
 
-@export var options: Array : set = set_options
+@export var options: Array :
+	set = set_options
 @export var parameter: String # Could be PackedStringArray, but pybabel won't catch that
 
 @onready var option_button := $OptionButton as OptionButton

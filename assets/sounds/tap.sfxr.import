@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/tap.sfxr-77eaa568c333574a3e205b83e31c683f.sample"
+type="AudioStreamWAV"
+uid="uid://cuosc6qt6su4j"
+path="res://.godot/imported/tap.sfxr-77eaa568c333574a3e205b83e31c683f.sample"
 
 [deps]
 
 source_file="res://assets/sounds/tap.sfxr"
-dest_files=[ "res://.import/tap.sfxr-77eaa568c333574a3e205b83e31c683f.sample" ]
+dest_files=["res://.godot/imported/tap.sfxr-77eaa568c333574a3e205b83e31c683f.sample"]
 
 [params]
 

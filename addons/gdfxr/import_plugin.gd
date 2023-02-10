@@ -9,6 +9,14 @@ func _get_importer_name():
 	return "com.timothyqiu.gdfxr.importer"
 
 
+func _get_import_order():
+	return ResourceImporter.IMPORT_ORDER_DEFAULT
+
+
+func _get_priority():
+	return 1.0
+
+
 func _get_visible_name():
 	return "SFXR Audio"
 
@@ -33,7 +41,7 @@ func _get_preset_name(preset):
 	return "Default"
 
 
-func _get_import_options(preset):
+func _get_import_options(path, preset):
 	return [
 		{
 			name="loop",
@@ -54,11 +62,11 @@ func _get_import_options(preset):
 	]
 
 
-func _get_option_visibility(option, options):
+func _get_option_visibility(path, option, options):
 	return true
 
 
-func import(source_file, save_path, options, platform_variants, gen_files):
+func _import(source_file, save_path, options, platform_variants, gen_files):
 	var config := SFXRConfig.new()
 	var err := config.load(source_file)
 	if err != OK:
@@ -73,4 +81,4 @@ func import(source_file, save_path, options, platform_variants, gen_files):
 		stream.loop_end = stream.data.size()
 	
 	var filename = save_path + "." + _get_save_extension()
-	return ResourceSaver.save(filename, stream)
+	return ResourceSaver.save(stream, filename)

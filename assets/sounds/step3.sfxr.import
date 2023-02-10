@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/step3.sfxr-bb281af015cb0f5223bd065980b43d93.sample"
+type="AudioStreamWAV"
+uid="uid://cvqpuyhuvy88s"
+path="res://.godot/imported/step3.sfxr-bb281af015cb0f5223bd065980b43d93.sample"
 
 [deps]
 
 source_file="res://assets/sounds/step3.sfxr"
-dest_files=[ "res://.import/step3.sfxr-bb281af015cb0f5223bd065980b43d93.sample" ]
+dest_files=["res://.godot/imported/step3.sfxr-bb281af015cb0f5223bd065980b43d93.sample"]
 
 [params]
 

@@ -24,12 +24,12 @@ func _exit_tree():
 	import_plugin = null
 
 
-func handles(object: Object) -> bool:
+func _handles(object: Variant) -> bool:
 	return object is AudioStreamWAV and object.resource_path.ends_with(".sfxr")
 
 
-func edit(object: Object):
-	sfxr_editor.edit(object.resource_path) # Should already passed `handles()` checks
+func _edit(object: Variant):
+	sfxr_editor.edit(object)
 
 
 func _make_visible(visible: bool):

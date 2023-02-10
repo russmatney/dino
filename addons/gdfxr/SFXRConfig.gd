@@ -55,10 +55,9 @@ var sound_vol := 0.5
 
 
 func load(path: String) -> int: # Error
-	var f := File.new()
-	var err := f.open(path, File.READ)
-	if err != OK:
-		return err
+	var f := FileAccess.open(path, FileAccess.READ)
+	if not f:
+		return FileAccess.get_open_error()
 	
 	var version := f.get_32()
 	if not [100, 101, 102].has(version):
@@ -106,10 +105,9 @@ func load(path: String) -> int: # Error
 
 
 func save(path: String) -> int: # Error
-	var f := File.new()
-	var err := f.open(path, File.WRITE)
-	if err != OK:
-		return err
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if not f:
+		return FileAccess.get_open_error()
 	
 	f.store_32(102)
 	f.store_32(wave_type)

@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/laser1.sfxr-b2a66650dbc27e1de667badbe5fdab66.sample"
+type="AudioStreamWAV"
+uid="uid://wtybftojogol"
+path="res://.godot/imported/laser1.sfxr-b2a66650dbc27e1de667badbe5fdab66.sample"
 
 [deps]
 
 source_file="res://assets/sounds/laser1.sfxr"
-dest_files=[ "res://.import/laser1.sfxr-b2a66650dbc27e1de667badbe5fdab66.sample" ]
+dest_files=["res://.godot/imported/laser1.sfxr-b2a66650dbc27e1de667badbe5fdab66.sample"]
 
 [params]
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="com.timothyqiu.gdfxr.importer"
-type="AudioStreamSample"
-path="res://.import/jump1.sfxr-447493074ece442349b28d015fcb9707.sample"
+type="AudioStreamWAV"
+uid="uid://c371rsc8x6hw6"
+path="res://.godot/imported/jump1.sfxr-447493074ece442349b28d015fcb9707.sample"
 
 [deps]
 
 source_file="res://assets/sounds/jump1.sfxr"
-dest_files=[ "res://.import/jump1.sfxr-447493074ece442349b28d015fcb9707.sample" ]
+dest_files=["res://.godot/imported/jump1.sfxr-447493074ece442349b28d015fcb9707.sample"]
 
 [params]
 
