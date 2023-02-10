@@ -1,13 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://fsmrend5ith2"]
 
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="1_giuuf"]
 [ext_resource type="Script" path="res://src/gunner/OffscreenIndicator.gd" id="2"]
 
-[sub_resource type="SpriteFrames" id="1"]
-animations = []
-
 [node name="OffscreenIndicator" type="AnimatedSprite2D"]
-rotation = 0.785397
+rotation = 1.57079
 scale = Vector2(2, 2)
-sprite_frames = SubResource("1")
-animation = &""
+sprite_frames = ExtResource("1_giuuf")
 script = ExtResource("2")

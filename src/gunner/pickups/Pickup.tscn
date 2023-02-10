@@ -25,7 +25,6 @@ shape = SubResource("1")
 [node name="OffscreenIndicator" parent="." instance=ExtResource("4")]
 visible = false
 position = Vector2(-42, -28)
-animation = &""
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

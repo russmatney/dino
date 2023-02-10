@@ -7,23 +7,27 @@ var cam
 
 func cam_viewport():
 	if cam:
-		return cam.get_viewport()
+		# TODO maybe we should create a subviewport here?
+		var vp = cam.get_viewport()
+		return vp
 
 
 func cam_window_rect():
 	if cam:
-		var v: SubViewport = cam_viewport()
+		var v = cam_viewport()
 		var viewportRect: Rect2 = v.get_visible_rect()
 
 		# https://github.com/godotengine/godot/issues/34805
-		var viewport_base_size = (
-			v.get_size_2d_override()
-			if v.get_size_2d_override()
-			else v.size
-		)
+		# TODO restore this size correction
+		# var viewport_base_size = (
+		# 	v.get_size_2d_override()
+		# 	if v.get_size_2d_override()
+		# 	else v.size
+		# )
+		var viewport_base_size = v.size
 
 		var scale_factor = DisplayServer.window_get_size() / viewport_base_size
-		viewportRect.size = viewport_base_size * scale_factor
+		viewportRect.size = (viewport_base_size * scale_factor) as Vector2
 
 		# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
 		var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
@@ -50,7 +54,7 @@ func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
 	print("[CAM]: No node found with 'camera' group, adding one.")
 
 	cam = cam_scene.instantiate()
-	cam.make_current()
+	cam.enabled = true
 	cam.zoom_offset = zoom_offset
 	cam.zoom_level = zoom_level
 

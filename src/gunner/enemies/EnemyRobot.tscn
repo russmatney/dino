@@ -37,7 +37,6 @@ scale = Vector2(1.4, 2.4)
 [node name="OffscreenIndicator" parent="." instance=ExtResource("3")]
 position = Vector2(-64, -48)
 scale = Vector2(3, 3)
-animation = &""
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("6")
