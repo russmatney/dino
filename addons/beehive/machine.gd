@@ -9,8 +9,9 @@ var should_log = false
 ### ready #####################################################################
 
 
-func _ready():
-	await owner.ready
+# should only be called when the owner is ready
+func start():
+	print("machine start")
 
 	if initial_state:
 		state = get_node(initial_state)

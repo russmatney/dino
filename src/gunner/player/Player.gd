@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var jet_anim = $Jet
 @onready var notif_label = $NotifLabel
+@onready var machine = $Machine
 
 var is_dead = false
 
@@ -15,12 +16,16 @@ var reset_position
 
 
 func _ready():
+	print("gunner player getting ready: ", anim)
 	reset_position = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
 	face_left()
 
 	Cam.call_deferred("ensure_camera", 2)
 	Hood.ensure_hud()
+
+	print("gunner player ready: ", anim)
+	machine.call_deferred("start")
 
 
 ############################################################
@@ -119,7 +124,6 @@ func die(remove_at = false):
 ############################################################
 # machine
 
-@onready var machine = $Machine
 @onready var state_label = $StateLabel
 var state
 
