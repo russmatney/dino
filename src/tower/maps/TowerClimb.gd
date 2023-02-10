@@ -50,12 +50,11 @@ var player_spawner
 
 @export var level_num: String
 
-var ready = false
+var scene_ready = false
 
 
 func _ready():
-	ready = true
-	randomize()
+	scene_ready = true
 	calc_rect()
 
 	var _y = Hood.connect("hud_ready",Callable(self,"_on_hud_ready"))
@@ -143,7 +142,7 @@ func wrap_thing(thing):
 
 
 func do_calc_rect(_v):
-	if ready:
+	if scene_ready:
 		calc_rect()
 
 
@@ -151,7 +150,7 @@ func do_calc_rect(_v):
 
 
 func do_clear(_v):
-	if ready:
+	if scene_ready:
 		for c in get_children():
 			c.queue_free()
 
@@ -160,7 +159,7 @@ func do_clear(_v):
 
 
 func do_regen_all_rooms(_v):
-	if ready:
+	if scene_ready:
 		regen_all_rooms()
 
 
@@ -171,7 +170,7 @@ func regen_all_rooms():
 		t.queue_free()
 
 	for r in rooms():
-		# only works if rooms are 'ready'
+		# only works if rooms are 'scene_ready'
 		r.n_seed += randi() % 5
 
 	break_the_targets.setup()
@@ -233,7 +232,7 @@ func add_room_inst(room_scene):
 
 
 func do_add_room(_v):
-	if ready:
+	if scene_ready:
 		var start_room = get_start_room()
 		if not start_room:
 			add_room_inst(start_room_scene)

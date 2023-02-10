@@ -1,44 +1,40 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://c6crwj175n8r"]
 
-[ext_resource path="res://src/ghosts/player/player_sprites.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/ghosts/player/Player.gd" type="Script" id=2]
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=3]
-[ext_resource path="res://src/ghosts/player/Air.gd" type="Script" id=4]
-[ext_resource path="res://src/ghosts/player/Run.gd" type="Script" id=5]
-[ext_resource path="res://src/ghosts/player/PlayerMachine.gd" type="Script" id=6]
-[ext_resource path="res://src/ghosts/player/Idle.gd" type="Script" id=7]
-[ext_resource path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" type="Shader" id=8]
-[ext_resource path="res://src/ghosts/player/Knockback.gd" type="Script" id=9]
-[ext_resource path="res://src/ghosts/player/Dead.gd" type="Script" id=10]
-[ext_resource path="res://src/ghosts/player/Flashlight.tscn" type="PackedScene" id=11]
-[ext_resource path="res://addons/core/assets/lights/light_smooth_sheet.png" type="Texture2D" id=12]
+[ext_resource type="SpriteFrames" uid="uid://dya6hn1wti0o0" path="res://src/ghosts/player/player_sprites.tres" id="1"]
+[ext_resource type="Script" path="res://src/ghosts/player/Player.gd" id="2"]
+[ext_resource type="Script" path="res://src/ghosts/player/Air.gd" id="4"]
+[ext_resource type="Script" path="res://src/ghosts/player/Run.gd" id="5"]
+[ext_resource type="Script" path="res://src/ghosts/player/PlayerMachine.gd" id="6"]
+[ext_resource type="Script" path="res://src/ghosts/player/Idle.gd" id="7"]
+[ext_resource type="Shader" path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" id="8"]
+[ext_resource type="Script" path="res://src/ghosts/player/Knockback.gd" id="9"]
+[ext_resource type="Script" path="res://src/ghosts/player/Dead.gd" id="10"]
+[ext_resource type="PackedScene" path="res://src/ghosts/player/Flashlight.tscn" id="11"]
+[ext_resource type="Texture2D" uid="uid://d2txqhto2oicp" path="res://addons/core/assets/lights/light_smooth_sheet.png" id="12"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.5, 26 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(27, 52)
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 8 )
-shader_param/red_displacement = -1.0
-shader_param/green_displacement = 1.0
-shader_param/blue_displacement = 1.0
-shader_param/ghost = 0.0
-shader_param/intensity = 1.0
-shader_param/scan_effect = 0.0
-shader_param/distortion_effect = 0.0
-shader_param/negative_effect = 0.0
+[sub_resource type="ShaderMaterial" id="3"]
+shader = ExtResource("8")
+shader_parameter/red_displacement = -1.0
+shader_parameter/green_displacement = 1.0
+shader_parameter/blue_displacement = 1.0
+shader_parameter/ghost = 0.0
+shader_parameter/intensity = 1.0
+shader_parameter/scan_effect = 0.0
+shader_parameter/distortion_effect = 0.0
+shader_parameter/negative_effect = 0.0
 
-[sub_resource type="FontFile" id=2]
-font_data = ExtResource( 3 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(29, 48)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 14.5, 24 )
-
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id="5"]
 radius = 125.004
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-script = ExtResource( 2 )
+script = ExtResource("2")
 max_health = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -47,37 +43,36 @@ offset_left = -250.0
 offset_top = -181.0
 offset_right = 235.0
 offset_bottom = 175.0
-color = Color( 0.298039, 0.215686, 0.215686, 1 )
+color = Color(0.298039, 0.215686, 0.215686, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1.5, 6 )
-shape = SubResource( 1 )
+position = Vector2(1.5, 6)
+shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource( 3 )
-scale = Vector2( 4, 4 )
-sprite_frames = ExtResource( 1 )
-animation = "idle"
+material = SubResource("3")
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("1")
+animation = &"idle"
 frame = 2
-playing = true
 
 [node name="Machine" type="Node" parent="."]
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="Idle" type="Node" parent="Machine"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="Run" type="Node" parent="Machine"]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="Air" type="Node" parent="Machine"]
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="Knockback" type="Node" parent="Machine"]
-script = ExtResource( 9 )
+script = ExtResource("9")
 
 [node name="Dead" type="Node" parent="Machine"]
-script = ExtResource( 10 )
+script = ExtResource("10")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -85,44 +80,39 @@ offset_left = -32.0
 offset_top = -49.0
 offset_right = 32.0
 offset_bottom = -25.0
-custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-text = "[center]state[/center]"
 text = "state"
-fit_content_height = true
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
 offset_left = -32.0
 offset_top = -64.0
 offset_right = 32.0
 offset_bottom = -40.0
-custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-fit_content_height = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( 2.5, 4 )
-shape = SubResource( 4 )
+position = Vector2(2.5, 4)
+shape = SubResource("4")
 
-[node name="Flashlight" parent="." instance=ExtResource( 11 )]
-position = Vector2( -12, 13 )
+[node name="Flashlight" parent="." instance=ExtResource("11")]
+position = Vector2(-12, 13)
 rotation = -3.13314
 
 [node name="Burstbox" type="Area2D" parent="."]
-position = Vector2( -142, 8 )
+position = Vector2(-142, 8)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Burstbox"]
-shape = SubResource( 5 )
+shape = SubResource("5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2( 2, 5 )
-texture = ExtResource( 12 )
+position = Vector2(2, 5)
+texture = ExtResource("12")
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="body_entered" from="Burstbox" to="." method="_on_Burstbox_body_entered"]

@@ -27,11 +27,11 @@ func _enter_tree():
 	self.add_to_group("reptile_room")
 
 
-var ready
+var scene_ready
 
 
 func _ready():
-	ready = true
+	scene_ready = true
 	if position_offset:
 		global_position += position_offset
 
@@ -232,7 +232,7 @@ func height():
 
 
 func do_tile_regen(_v = null):
-	if ready:
+	if scene_ready:
 		# regen image with latest noise_inputs
 		img = Reptile.generate_image(noise_inputs())
 		regen_tilemaps()

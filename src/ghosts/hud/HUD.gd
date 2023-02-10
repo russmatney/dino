@@ -18,7 +18,7 @@ func _ready():
 
 
 func find_player():
-	if not player_group:
+	if player_group == null:
 		print("[WARN] HUD has not player_group set")
 		return
 
@@ -26,7 +26,7 @@ func find_player():
 	if ps.size() > 1:
 		print("[WARN] HUD found multiple in player_group: ", player_group)
 
-	if ps:
+	if ps.size() > 0:
 		player = ps[0]
 		print("[HUD] found player: ", player)
 	else:

@@ -1,15 +1,18 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=2]
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://d0wao72qmyyp8"]
 
-[ext_resource path="res://assets/sprites/bow_sheet.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://b1aeavnwt8rpf" path="res://assets/sprites/bow_sheet.png" id="1"]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 32 )
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 16, 32)
 
 [resource]
-animations = [ {
-"frames": [ SubResource( 1 ) ],
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("1")
+}],
 "loop": true,
-"name": "default",
+"name": &"default",
 "speed": 5.0
-} ]
+}]

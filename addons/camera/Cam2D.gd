@@ -212,19 +212,20 @@ func process_shake(delta):
 var noise_inputs = {
 	"seed": 4,
 	"octaves": 5,
-	"period": 5,
-	"persistence": 0.8,
+	"frequency": 1/5,
+	"gain": 0.8,
 	"lacunarity": 4.0,
 }
 
 
 func new_noise(inputs):
-	var noise = OpenSimplexNoise.new()
+	var noise = FastNoiseLite.new()
 	noise.seed = inputs["seed"]
-	noise.octaves = inputs["octaves"]
-	noise.period = inputs["period"]
-	noise.persistence = inputs["persistence"]
-	noise.lacunarity = inputs["lacunarity"]
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	noise.fractal_ocatves = inputs["octaves"]
+	noise.fractal_gain = inputs["gain"]
+	noise.fractal_lacunarity = inputs["lacunarity"]
+	noise.frequency = inputs["frequency"]
 	return noise
 
 
@@ -302,8 +303,9 @@ func attach_to_nearest_anchor():
 # pof/poi mode
 
 
+var window_size
 func update_window_size():
-
+	window_size = DisplayServer.window_get_size()
 
 
 # TODO how often should we check for more follows?
