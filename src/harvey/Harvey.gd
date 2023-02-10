@@ -51,7 +51,7 @@ func debug_mode():
 signal new_produce_delivered(type)
 
 
-func new_produce_delivered(type):
+func produce_delivered(type):
 	sound_produce_delivered()
 	emit_signal("new_produce_delivered", type)
 

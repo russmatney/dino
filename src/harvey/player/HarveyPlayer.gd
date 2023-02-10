@@ -59,7 +59,7 @@ func set_state_label(label: String):
 ############################################################
 # movement
 
-var velocity = Vector2.ZERO
+# var velocity = Vector2.ZERO
 # overwritten in subclass
 var speed := 100
 
@@ -109,7 +109,7 @@ func action_sources(axs = actions):
 func update_action_label():
 	var ax = Util._or(c_ax, p_ax, nearest_ax)
 
-	if not ax:
+	if ax == null:
 		action_label.text = ""
 		return
 
@@ -125,7 +125,7 @@ func update_action_label():
 
 
 func update_action_arrow():
-	if not actions:
+	if actions.size() == 0:
 		action_arrow.set_visible(false)
 		return
 	action_arrow.set_visible(true)
@@ -172,14 +172,14 @@ func eval_current_action():
 
 	if actions:
 		var im_axs = immediate_actions()
-		var pot_axs
-		if not im_axs:
+		var pot_axs = []
+		if im_axs.size() == 0:
 			pot_axs = potential_actions()
 
-		if im_axs:
+		if im_axs.size() > 0:
 			var nearest_action = find_nearest_action(im_axs)
 			c_ax = nearest_action
-		if pot_axs:
+		if pot_axs.size() > 0:
 			p_ax = find_nearest_action(pot_axs)
 	else:
 		c_ax = null
@@ -242,7 +242,7 @@ func has_action(method):
 
 
 func perform_action():
-	if not c_ax:
+	if c_ax == null:
 		return
 
 	var ax = c_ax
@@ -379,5 +379,5 @@ func has_produce():
 
 func deliver_produce():
 	# TODO only for player, not for bots
-	Harvey.new_produce_delivered(item_produce)
+	Harvey.produce_delivered(item_produce)
 	drop_held_item()

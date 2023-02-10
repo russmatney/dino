@@ -28,7 +28,7 @@ func do_change_parent(child, new_parent):
 
 # https://godotengine.org/qa/27869/how-to-get-the-nearest-object-in-a-group
 func nearest_node(source: Node, targets) -> Node:
-	if not targets:
+	if targets == null or targets.size() == 0:
 		return null
 
 	# assume the first is closest

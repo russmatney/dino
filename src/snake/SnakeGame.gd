@@ -5,8 +5,9 @@ var song_name = "field-stars"
 
 func _ready():
 	print("SnakeGame ready")
-	if not Engine.is_editor_hint():
-		SnakeSounds.play_song(song_name)
+	# TODO restore music
+	# if not Engine.is_editor_hint():
+	# 	SnakeSounds.play_song(song_name)
 
 	if OS.has_feature("snake"):
 		Navi.set_main_menu("res://src/snake/menus/SnakeMainMenu.tscn")

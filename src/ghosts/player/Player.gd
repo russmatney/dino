@@ -1,7 +1,7 @@
 @tool
 extends CharacterBody2D
 
-var velocity := Vector2.ZERO
+# var velocity := Vector2.ZERO
 
 @export var jump_impulse: int := 1500
 @export var speed: int := 300
@@ -33,6 +33,9 @@ func die():
 
 
 func _ready():
+	print("ghost player ready")
+	print(anim)
+
 	initial_pos = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
 

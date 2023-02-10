@@ -19,6 +19,7 @@ func _ready():
 		# assign machine to states
 		child.machine = self
 
+		print("assigning owner: ", owner)
 		# assign machine's owner as 'actor' in state fns
 		child.actor = owner
 

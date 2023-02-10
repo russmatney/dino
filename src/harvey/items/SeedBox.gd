@@ -100,19 +100,20 @@ func deform(direction):
 	var deformationDirection = direction.normalized()
 	var deformationScale = 0.5 * deformationDirection * deformationStrength
 
-	var tween = create_tween()
-	tween.tween_property(anim.material, "shader_param/deformation", deformationScale, duration).set_trans(
-		Tween.TRANS_CUBIC
-	)
-	tween.parallel().tween_property(produce_icon.material, "shader_param/deformation", deformationScale, duration).set_trans(
-		Tween.TRANS_CUBIC
-	)
-	tween.tween_property(anim.material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
-		Tween.EASE_IN_OUT
-	)
-	tween.parallel().tween_property(produce_icon.material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
-		Tween.EASE_IN_OUT
-	)
+	print("TODO restore animation")
+	# var tween = create_tween()
+	# tween.tween_property(anim.material, "shader_param/deformation", deformationScale, duration).set_trans(
+	# 	Tween.TRANS_CUBIC
+	# )
+	# tween.parallel().tween_property(produce_icon.material, "shader_param/deformation", deformationScale, duration).set_trans(
+	# 	Tween.TRANS_CUBIC
+	# )
+	# tween.tween_property(anim.material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+	# 	Tween.EASE_IN_OUT
+	# )
+	# tween.parallel().tween_property(produce_icon.material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+	# 	Tween.EASE_IN_OUT
+	# )
 
 
 ##########################################################

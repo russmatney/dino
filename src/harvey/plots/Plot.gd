@@ -91,7 +91,7 @@ func could_perform_action(player, action):
 
 
 func set_action_label(player):
-	if not actions:
+	if actions == null or actions.size() == 0:
 		return
 	var ax_label
 	match state:
@@ -106,7 +106,7 @@ func set_action_label(player):
 		if a["method"] == ax_label:
 			ax = a
 			break
-	if not ax:
+	if ax == null or ax.size() == 0:
 		return
 
 	if ax_label:
@@ -150,13 +150,14 @@ func deform(direction):
 	var deformationDirection = direction.normalized()
 	var deformationScale = 0.5 * deformationDirection * deformationStrength
 
-	var tween = create_tween()
-	tween.tween_property(anim.material, "shader_param/deformation", deformationScale, duration).set_trans(
-		Tween.TRANS_CUBIC
-	)
-	tween.tween_property(anim.material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
-		Tween.EASE_IN_OUT
-	)
+	print("TODO restore animation")
+	# var tween = create_tween()
+	# tween.tween_property(anim.material, "shader_param/deformation", deformationScale, duration).set_trans(
+	# 	Tween.TRANS_CUBIC
+	# )
+	# tween.tween_property(anim.material, "shader_param/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+	# 	Tween.EASE_IN_OUT
+	# )
 
 
 ############################################################
