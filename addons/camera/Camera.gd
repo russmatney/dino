@@ -1,3 +1,4 @@
+@tool
 # Cam
 extends Node
 

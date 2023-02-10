@@ -31,7 +31,6 @@ clip_contents = false
 theme = ExtResource( 1 )
 bbcode_enabled = true
 text = "[center]Juicy Snake"
-text = "Juicy Snake"
 fit_content_height = true
 scroll_active = false
 
