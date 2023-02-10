@@ -87,7 +87,10 @@ func ensure_connection(obj, sig, target, method, args = []):
 		print("[Warn] obj has no signal for connection: ", obj, " :", sig)
 	var err
 	if not obj.is_connected(sig,Callable(target,method)):
-		err = obj.connect(sig,Callable(target,method).bind(args))
+		if args.size() > 0:
+			err = obj.connect(sig,Callable(target,method).bind(args))
+		else:
+			err = obj.connect(sig,Callable(target,method))
 	if err:
 		print("[Error]: ", err)  # useless enum digit
 
