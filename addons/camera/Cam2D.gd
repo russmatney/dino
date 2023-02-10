@@ -349,7 +349,7 @@ func zoom_factor_for_bounds(pt_a, pt_b):
 
 
 func center_pois():
-	if not pof_follows and not following:
+	if pof_follows == null and following == null:
 		return
 
 	var focuses = []

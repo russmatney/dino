@@ -50,7 +50,7 @@ func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
 	print("[CAM]: No node found with 'camera' group, adding one.")
 
 	cam = cam_scene.instantiate()
-	cam.current = true
+	cam.make_current()
 	cam.zoom_offset = zoom_offset
 	cam.zoom_level = zoom_level
 

@@ -24,10 +24,10 @@ func set_health(health):
 
 	# TODO extend to add and place more hearts, or layer a new color checked top
 
-	if not heart_icons:
+	if heart_icons == null:
 		find_heart_icons()
 
-	if not heart_icons:
+	if heart_icons.size() == 0:
 		return
 
 	h = health
