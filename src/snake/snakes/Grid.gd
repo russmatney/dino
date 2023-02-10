@@ -4,27 +4,27 @@ extends Node2D
 ###########################################################################
 # exports/vars
 
-@export var width = 16 setget set_width # (int, 2, 24)
-@export var height = 16 setget set_height # (int, 2, 24)
+@export var width = 16 : set = set_width # (int, 2, 24)
+@export var height = 16 : set = set_height # (int, 2, 24)
 @export var cell_size: int = 8 : set = set_cell_size
 @export var enemy_count: int = 1
 
 
 func set_width(v):
 	width = v
-	if Engine.is_editor_hint() and ready:
+	if Engine.is_editor_hint() and scene_ready:
 		init_grid()
 
 
 func set_height(v):
 	height = v
-	if Engine.is_editor_hint() and ready:
+	if Engine.is_editor_hint() and scene_ready:
 		init_grid()
 
 
 func set_cell_size(v):
 	cell_size = v
-	if Engine.is_editor_hint() and ready:
+	if Engine.is_editor_hint() and scene_ready:
 		init_grid()
 
 
@@ -32,10 +32,10 @@ func set_cell_size(v):
 # ready
 
 
-var ready
+var scene_ready
 func _ready():
 	call_deferred("setup")
-	ready = true
+	scene_ready = true
 
 func setup():
 	init_grid()

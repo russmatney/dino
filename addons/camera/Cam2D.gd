@@ -223,7 +223,7 @@ func new_noise(inputs):
 	var noise = FastNoiseLite.new()
 	noise.seed = inputs["seed"]
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
-	noise.fractal_ocatves = inputs["octaves"]
+	noise.fractal_octaves = inputs["octaves"]
 	noise.fractal_gain = inputs["gain"]
 	noise.fractal_lacunarity = inputs["lacunarity"]
 	noise.frequency = inputs["frequency"]

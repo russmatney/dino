@@ -3,8 +3,6 @@ extends CharacterBody2D
 @onready var light = $PointLight2D
 @export var light_enabled: bool = false
 
-var velocity = Vector2.ZERO
-
 
 func _ready():
 	#velocity = Vector2(-250, 0)

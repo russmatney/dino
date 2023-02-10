@@ -8,8 +8,8 @@ class_name Snake
 var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
-	var _x = connect("step",Callable(self,"_on_step"))
-	var _y = connect("move_head",Callable(self,"_on_move_head"))
+	step.connect(_on_step)
+	move_head.connect(_on_move_head)
 
 ##########################################################################
 # move
