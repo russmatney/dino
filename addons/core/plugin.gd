@@ -26,7 +26,7 @@ func reload_scene():
 	print("[ReloadScene] ", Time.get_time_string_from_system())
 
 	var edited_scene = editor_interface.get_edited_scene_root()
-	print("edited scene: ", edited_scene, " filename: ", edited_scene.scene_file_path)
+	print("edited scene: ", edited_scene, " .scene_file_path: ", edited_scene.scene_file_path)
 
 	editor_interface.reload_scene_from_path(edited_scene.scene_file_path)
 

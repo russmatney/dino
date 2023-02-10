@@ -92,6 +92,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 		s = path_or_packed_scene
 
 	# Instance the new scene.
+	print("[Navi] instancing new scene: ", s)
 	current_scene = s.instantiate()
 	print("[Navi] Current scene: ", current_scene)
 	emit_signal("new_scene_instanced", current_scene)

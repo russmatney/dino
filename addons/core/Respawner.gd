@@ -14,9 +14,9 @@ signal respawn(node)
 
 
 func register_respawn(node):
-	if node.filename:
+	if node.scene_file_path:
 		respawns.append(
-			{"filename": node.filename, "position": node.get_global_position(), "node": node}
+			{"scene_file_path": node.scene_file_path, "position": node.get_global_position(), "node": node}
 		)
 
 
@@ -26,7 +26,7 @@ func reset_respawns():
 
 func respawn_all():
 	for r in respawns:
-		var ins = load(r["filename"]).instantiate()
+		var ins = load(r["scene_file_path"]).instantiate()
 		# ins.position = r["position"]
 		Navi.current_scene.call_deferred("add_child", ins)
 
@@ -36,7 +36,7 @@ func respawn_missing():
 	for r in respawns:
 		if not is_instance_valid(r["node"]):
 			to_remove.append(r)
-			var ins = load(r["filename"]).instantiate()
+			var ins = load(r["scene_file_path"]).instantiate()
 			ins.position = r["position"]
 			Navi.current_scene.call_deferred("add_child", ins)
 			emit_signal("respawn", ins)

@@ -29,7 +29,7 @@ func restart_game():
 	Navi.resume()  # ensure unpaused
 	Respawner.reset_respawns()
 
-	if Navi.current_scene.filename.match("*gunner*"):
-		Navi.nav_to(Navi.current_scene.filename)
+	if Navi.current_scene.scene_file_path.match("*gunner*"):
+		Navi.nav_to(Navi.current_scene.scene_file_path)
 	else:
 		Navi.nav_to(default_game_path)

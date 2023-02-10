@@ -51,7 +51,7 @@ func level_complete():
 	print("[TOWER] level complete")
 
 	var curr = Navi.current_scene
-	var idx = levels.find(curr.filename)
+	var idx = levels.find(curr.scene_file_path)
 
 	if idx + 1 >= levels.size():
 		Navi.show_win_menu()
