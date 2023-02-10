@@ -39,7 +39,10 @@ func position_onscreen():
 	if not player:
 		find_player()
 
-	if player:
+	if not Cam.cam:
+		return
+
+	if player and Cam.cam:
 		var player_pos = player.get_global_position() + Vector2(0, -16)
 		var target_pos = target.get_global_position()
 		var direction = (target_pos - player_pos).normalized()

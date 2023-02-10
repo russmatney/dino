@@ -12,16 +12,19 @@ signal targets_cleared
 
 
 func _ready():
+	print("BTT: _ready")
 	# defer until everything has hit the scene tree
 	call_deferred("setup")
 
 
 func setup():
+	print("BTT: setup")
 	var players = get_tree().get_nodes_in_group("player")
 	if players:
 		player = players[0]
 		player.call_deferred("notif", "BREAK THE TARGETS")
 		Hood.notif("Break The Targets!")
+		print("btt found player: ", player)
 
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
@@ -91,6 +94,7 @@ func _on_target_destroyed(t):
 
 
 func target_change(opts = {}):
+	print("BTT: target_change")
 	if targets.size() == 1 and opts.get("was_destroy"):
 		if player:
 			player.notif("ONE TARGET REMAINING")

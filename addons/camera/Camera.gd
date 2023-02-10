@@ -11,25 +11,26 @@ func cam_viewport():
 
 
 func cam_window_rect():
-	var v: SubViewport = cam.get_viewport()
-	var viewportRect: Rect2 = v.get_visible_rect()
+	if cam:
+		var v: SubViewport = cam_viewport()
+		var viewportRect: Rect2 = v.get_visible_rect()
 
-	# https://github.com/godotengine/godot/issues/34805
-	var viewport_base_size = (
-		v.get_size_2d_override()
-		if v.get_size_2d_override()
-		else v.size
-	)
+		# https://github.com/godotengine/godot/issues/34805
+		var viewport_base_size = (
+			v.get_size_2d_override()
+			if v.get_size_2d_override()
+			else v.size
+		)
 
-	var scale_factor = DisplayServer.window_get_size() / viewport_base_size
-	viewportRect.size = viewport_base_size * scale_factor
+		var scale_factor = DisplayServer.window_get_size() / viewport_base_size
+		viewportRect.size = viewport_base_size * scale_factor
 
-	# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
-	var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
-	var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
-	var viewportRectGlobal: Rect2 = viewportToGlobalTransform * viewportRect
+		# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
+		var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
+		var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
+		var viewportRectGlobal: Rect2 = viewportToGlobalTransform * viewportRect
 
-	return viewportRectGlobal
+		return viewportRectGlobal
 
 
 ##############################################################
@@ -37,6 +38,7 @@ func cam_window_rect():
 
 
 func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
+	print("[CAM] ensuring camera")
 	if cam and is_instance_valid(cam):
 		print("[CAM] found existing cam: ", cam)
 		return

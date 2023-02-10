@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://def3o3xnbpwg4"]
+[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://def3o3xnbpwg4"]
 
 [ext_resource type="Texture2D" uid="uid://botmd0creyshp" path="res://assets/sprites/greyhat_sheet.png" id="1"]
 
@@ -77,6 +77,10 @@ region = Rect2(112, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="9"]
 atlas = ExtResource("1")
 region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kksmo"]
+atlas = ExtResource("1")
+region = Rect2(160, 0, 16, 16)
 
 [resource]
 animations = [{
@@ -175,5 +179,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kksmo")
+}],
+"loop": true,
+"name": &"seated",
 "speed": 5.0
 }]

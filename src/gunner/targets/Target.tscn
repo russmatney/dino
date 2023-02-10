@@ -2,7 +2,7 @@
 
 [ext_resource type="SpriteFrames" uid="uid://d1uqrh57tjmm6" path="res://assets/sprites/target_sprite_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/targets/Target.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/gunner/OffscreenIndicator.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://fsmrend5ith2" path="res://src/gunner/OffscreenIndicator.tscn" id="3"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.1245
@@ -24,7 +24,6 @@ animation = &"target"
 [node name="OffscreenIndicator" parent="." instance=ExtResource("3")]
 visible = false
 position = Vector2(-87, -41)
-animation = &""
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

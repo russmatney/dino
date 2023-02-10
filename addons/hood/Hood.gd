@@ -18,6 +18,7 @@ var hud
 
 
 func ensure_hud(hud_preload=null):
+	print("[HOOD] ensuring hud")
 	if hud and is_instance_valid(hud):
 		print("[HOOD] HUD exists, nothing doing.")
 		return
@@ -26,9 +27,10 @@ func ensure_hud(hud_preload=null):
 		hud_preload = hud_scene
 
 	hud = hud_preload.instantiate()
-	hud.connect("ready",Callable(self,"_on_hud_ready"))
+	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
+	print("hud ensured?")
 
 
 signal hud_ready
