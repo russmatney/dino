@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://coo2aee7h0hok"]
+[gd_scene load_steps=6 format=3 uid="uid://coo2aee7h0hok"]
 
 [ext_resource type="PackedScene" uid="uid://kaba3l5rrf7x" path="res://src/gunner/player/Player.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/gunner/tiles/BasicTile.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://brcv2nlohhn4h" path="res://src/gunner/tiles/BasicTile.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://addons/camera/CamPOI.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/gunner/tiles/OneDirectionalTile.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://ckoswhkpkg1f8" path="res://src/gunner/targets/Target.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/gunner/targets/BreakTheTargets.tscn" id="6"]
 
@@ -17,13 +16,9 @@ offset_bottom = 648.0
 mouse_filter = 2
 color = Color(0.435294, 0.462745, 0.415686, 1)
 
-[node name="OneDirectionalTile" parent="." instance=ExtResource("4")]
-position = Vector2(482, 366)
-format = 2
-
 [node name="BasicTile" parent="." instance=ExtResource("2")]
 position = Vector2(482, 366)
-format = 2
+layer_0/tile_data = PackedInt32Array(327669, 131072, 3, 327670, 131072, 3, 327671, 131072, 3, 327672, 131072, 3, 327673, 131072, 3, 327674, 131072, 3, 327675, 131072, 3, 327676, 131072, 3, 327677, 131072, 3, 327678, 131072, 3, 327679, 131072, 3, 262144, 131072, 3, 262145, 131072, 3, 262146, 131072, 3, 262147, 131072, 3, 262148, 131072, 3, 262149, 131072, 3, 262150, 131072, 3, 262151, 131072, 3, 262152, 131072, 3, 262153, 131072, 3, 262154, 131072, 3, 262155, 131072, 3)
 
 [node name="Target" parent="." instance=ExtResource("5")]
 position = Vector2(201, 241)
