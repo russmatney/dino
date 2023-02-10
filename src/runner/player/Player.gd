@@ -15,8 +15,6 @@ var won = false
 
 var jump_velocity = Vector2(0, -700)
 
-var velocity = Vector2.ZERO
-
 @onready var anim = $AnimatedSprite2D
 
 @export var fallback_camera: PackedScene = preload("res://addons/camera/Cam2D.tscn")
@@ -37,7 +35,7 @@ func ensure_camera():
 	# this might need to be deferred until the player and its children
 	# (and siblings?) have been created
 	var cam = get_tree().get_nodes_in_group("camera")
-	if not cam:
+	if cam.size() == 0:
 		print("[CAMERA] cam not found, adding one to player")
 		# if no camera, add one
 		cam = fallback_camera.instantiate()

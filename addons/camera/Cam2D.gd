@@ -49,7 +49,8 @@ func _ready():
 			update_pofs()
 
 	update_window_size()
-	var _x = get_tree().connect("screen_resized",Callable(self,"update_window_size"))
+	# TODO recreate this? what to subscribe too?
+	# var _x = get_tree().connect("screen_resized",Callable(self,"update_window_size"))
 
 	if not following:
 		find_node_to_follow()

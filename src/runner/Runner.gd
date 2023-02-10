@@ -14,7 +14,7 @@ var active_room_count = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if not initial_room_options:
+	if initial_room_options == null or initial_room_options.size() > 0:
 		print("[WARN]: no room options!")
 
 	room_options = initial_room_options.duplicate()
@@ -45,20 +45,20 @@ var no_more_rooms = false
 # TODO unit test for this function
 func choose_next_room_instance():
 	# no rooms yet? start in a gap room
-	if not current_rooms:
+	if current_rooms == null or current_rooms.size() == 0:
 		if gap_room_options:
 			var room_i = randi() % gap_room_options.size()
 			return gap_room_options[room_i].instantiate()
 
 	# some rooms we haven't seen yet? let's see them!
-	if room_options:
+	if not room_options == null and room_options.size() > 0:
 		# none queued, pulling new random room
 		var room_i = randi() % room_options.size()
 		# pop from opts - we won't see it anymore
 		return room_options.pop_at(room_i).instantiate()
 
 	# some unfinished rooms? gimme one
-	if room_queue:
+	if not room_queue == null and room_queue.size() > 0:
 		var room_i = randi() % room_queue.size()
 		return room_queue.pop_at(room_i)
 

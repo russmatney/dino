@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var jet_anim = $Jet
 @onready var notif_label = $NotifLabel
 
-var dead = false
+var is_dead = false
 
 ############################################################
 # _ready
@@ -67,16 +67,16 @@ var jump_count = 0
 
 
 func _unhandled_key_input(event):
-	if not dead and has_jetpack and Trolley.is_event(event, "jetpack"):
+	if not is_dead and has_jetpack and Trolley.is_event(event, "jetpack"):
 		machine.transit("Jetpack")
-	elif not dead and Trolley.is_jump(event):
+	elif not is_dead and Trolley.is_jump(event):
 		if can_wall_jump and is_on_wall():
 			machine.transit("Jump")
 		if state in ["Idle", "Run", "Fall"] and jump_count == 0:
 			machine.transit("Jump")
-	elif not dead and Trolley.is_event(event, "action"):
+	elif not is_dead and Trolley.is_event(event, "action"):
 		shine()
-	elif not dead and Trolley.is_event(event, "fire") and not state in ["Knockback"]:
+	elif not is_dead and Trolley.is_event(event, "fire") and not state in ["Knockback"]:
 		fire()
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
@@ -109,7 +109,7 @@ func take_damage(body = null, d = 1):
 
 
 func die(remove_at = false):
-	dead = true
+	is_dead = true
 	GunnerSounds.play_sound("player_dead")
 	emit_signal("dead")
 	if remove_at:
@@ -144,7 +144,7 @@ func set_state_label(label: String):
 # movement
 
 var move_dir = Vector2.ZERO  # controller input
-var velocity = Vector2.ZERO
+# var velocity = Vector2.ZERO
 @export var speed: int := 220
 @export var air_speed: int := 200
 @export var max_fall_speed: int := 1500
