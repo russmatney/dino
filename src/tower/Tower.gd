@@ -26,8 +26,6 @@ func _unhandled_input(event):
 ###########################################################################
 # (re)start game
 
-var default_game = preload("res://src/tower/maps/TowerClimb.tscn")
-
 var levels = [
 	"res://src/tower/maps/TowerClimb0.tscn",
 	"res://src/tower/maps/TowerClimb1.tscn",
