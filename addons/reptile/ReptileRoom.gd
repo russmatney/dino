@@ -4,7 +4,7 @@ extends Node2D
 
 
 func prn(msg, msg2 = null, msg3 = null, msg4 = null, msg5 = null):
-	var s = "[Node3D" + name + "] "
+	var s = "[Room" + name + "] "
 	if msg5:
 		print(str(s, msg, msg2, msg3, msg4, msg5))
 	elif msg4:
@@ -100,7 +100,7 @@ func calc_rect_global():
 ######################################################################
 # name
 
-@export var room_name: String = "Node3D" : set = set_room_name
+@export var room_name: String = "Room" : set = set_room_name
 
 
 func set_room_name(n):
@@ -381,9 +381,12 @@ func add_tile_at_coord(ctx):
 	if ctx.group:
 		var t = ctx.group.tilemap
 		if t and is_instance_valid(t):
-			var t_ids = t.tile_set.get_tiles_ids()
-			t_ids.shuffle()
-			t.set_cell(ctx.coord.x, ctx.coord.y, t_ids[0])
+			# TODO restore random tile selector for godot 4 api
+			# may want to support source_id/atlas_coords/alternative_tile
+			# var t_ids = t.tile_set.get_tiles_ids()
+			# t_ids.shuffle()
+			# t.set_cell(0, Vector2(ctx.coord.x, ctx.coord.y), t_ids[0])
+			t.set_cell(0, Vector2(ctx.coord.x, ctx.coord.y), 0)
 
 
 func update_tilemaps():

@@ -73,8 +73,8 @@ func update_gloomba_kos(gloomba_kos):
 
 
 func update_room_name(room):
-	var label = get_node("%Node3D")
-	label.set_text(str("Node3D: ", room.name))
+	var label = get_node("%Room")
+	label.set_text(str("Room: ", room.name))
 
 
 ###################################################################

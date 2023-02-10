@@ -15,14 +15,16 @@ func generate_image(inputs):
 		print("[WARN] nil octaves...")
 		return
 
-	var noise = OpenSimplexNoise.new()
+	var noise = FastNoiseLite.new()
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.seed = inputs["seed"]
-	noise.octaves = inputs["octaves"]
-	noise.period = inputs["period"]
-	noise.persistence = inputs["persistence"]
-	noise.lacunarity = inputs["lacunarity"]
+	noise.fractal_octaves = inputs["octaves"]
+	noise.fractal_lacunarity = inputs["lacunarity"]
+	noise.fractal_gain = inputs.get("gain", inputs.get("persistence"))
+	noise.frequency = inputs.get("frequency", 1.0 / inputs.get("period", 20.0))
 
-	return noise.get_seamless_image(inputs["img_size"])
+	# TODO may want to use normalize here to simplify the stats bit?
+	return noise.get_seamless_image(inputs["img_size"], inputs["img_size"])
 
 
 ######################################################################
@@ -101,6 +103,6 @@ func valid_neighbors(tilemap, cell):
 	var nbrs = all_neighbors(cell)
 	var valid = []
 	for n in nbrs:
-		if tilemap.get_cellv(n) != TileMap.INVALID_CELL:
+		if tilemap.get_cell_tile_data(0, n):
 			valid.append(n)
 	return valid

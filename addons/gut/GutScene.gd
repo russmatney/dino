@@ -1,7 +1,7 @@
 extends Panel
 
 @onready var _script_list = $ScriptsList
-@onready var _nav_container = $VBox/BottomPanel/VBox/HBox/Node3D
+@onready var _nav_container = $VBox/BottomPanel/VBox/HBox/Room
 @onready var _nav = {
 	container = _nav_container,
 	prev = _nav_container.get_node('VBox/HBox/Previous'),

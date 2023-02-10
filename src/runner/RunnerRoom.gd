@@ -23,7 +23,7 @@ func _get_configuration_warnings():
 
 
 ###########################################################
-## Runner Node3D room_width
+## Runner Room room_width
 
 
 # returns the width of the room. uses the RoomBox's collision shape
@@ -56,7 +56,7 @@ func room_width_enterbox():
 
 
 ###########################################################
-## Runner Node3D x_offset
+## Runner Room x_offset
 
 
 # returns the distance from the furthest left to the origin.
@@ -95,7 +95,7 @@ func calc_shape_offset(coll_shape, left_side = true):
 
 
 ###########################################################
-## Runner Node3D is_finished()
+## Runner Room is_finished()
 
 
 # if false, the room will be requeued until this returns true

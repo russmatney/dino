@@ -13,7 +13,7 @@ var menu_scenes = [
 		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
 	},
 	{
-		"label": "Node3D",
+		"label": "Room",
 		"nav_to": "res://src/dungeonCrawler/rooms/Room.tscn",
 	},
 ]

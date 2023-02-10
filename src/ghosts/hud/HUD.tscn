@@ -27,13 +27,13 @@ unique_name_in_owner = true
 offset_right = 392.0
 offset_bottom = 30.0
 
-[node name="Node3D" type="Label" parent="HBoxContainer/VBoxContainer2"]
+[node name="Room" type="Label" parent="HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 offset_top = 34.0
 offset_right = 392.0
 offset_bottom = 47.0
 theme = ExtResource( 3 )
-text = "Node3D: "
+text = "Room: "
 
 [node name="GloombaKOs" type="Label" parent="HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true

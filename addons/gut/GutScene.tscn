@@ -350,7 +350,7 @@ offset_bottom = 80.0
 custom_minimum_size = Vector2( 5, 0 )
 size_flags_horizontal = 3
 
-[node name="Node3D" type="Panel" parent="VBox/BottomPanel/VBox/HBox"]
+[node name="Room" type="Panel" parent="VBox/BottomPanel/VBox/HBox"]
 self_modulate = Color( 1, 1, 1, 0 )
 offset_left = 230.0
 offset_right = 580.0
@@ -361,14 +361,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="VBox/BottomPanel/VBox/HBox/Node3D"]
+[node name="VBox" type="VBoxContainer" parent="VBox/BottomPanel/VBox/HBox/Room"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentScript" type="Button" parent="VBox/BottomPanel/VBox/HBox/Node3D/VBox"]
+[node name="CurrentScript" type="Button" parent="VBox/BottomPanel/VBox/HBox/Room/VBox"]
 offset_right = 350.0
 offset_bottom = 38.0
 tooltip_text = "Select a script to run.  You can run just this script, or this script and all scripts after using the run buttons."
@@ -380,14 +380,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBox" type="HBoxContainer" parent="VBox/BottomPanel/VBox/HBox/Node3D/VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox/BottomPanel/VBox/HBox/Room/VBox"]
 offset_top = 42.0
 offset_right = 350.0
 offset_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Previous" type="Button" parent="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox"]
+[node name="Previous" type="Button" parent="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox"]
 offset_right = 84.0
 offset_bottom = 38.0
 tooltip_text = "Previous script in the list."
@@ -398,7 +398,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Next" type="Button" parent="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox"]
+[node name="Next" type="Button" parent="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox"]
 offset_left = 88.0
 offset_right = 173.0
 offset_bottom = 38.0
@@ -411,7 +411,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Run" type="Button" parent="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox"]
+[node name="Run" type="Button" parent="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox"]
 offset_left = 177.0
 offset_right = 261.0
 offset_bottom = 38.0
@@ -423,7 +423,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RunSingleScript" type="Button" parent="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox"]
+[node name="RunSingleScript" type="Button" parent="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox"]
 offset_left = 265.0
 offset_right = 350.0
 offset_bottom = 38.0
@@ -619,11 +619,11 @@ __meta__ = {
 [connection signal="draw" from="VBox/TitleBar/HBox/Maximize" to="." method="_on_Maximize_draw"]
 [connection signal="pressed" from="VBox/TitleBar/HBox/Maximize" to="." method="_on_Maximize_pressed"]
 [connection signal="gui_input" from="VBox/TextDisplay/RichTextLabel" to="." method="_on_RichTextLabel_gui_input"]
-[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Node3D/VBox/CurrentScript" to="." method="_on_CurrentScript_pressed"]
-[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox/Previous" to="." method="_on_Previous_pressed"]
-[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox/Next" to="." method="_on_Next_pressed"]
-[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox/Run" to="." method="_on_Run_pressed"]
-[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Node3D/VBox/HBox/RunSingleScript" to="." method="_on_RunSingleScript_pressed"]
+[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Room/VBox/CurrentScript" to="." method="_on_CurrentScript_pressed"]
+[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox/Previous" to="." method="_on_Previous_pressed"]
+[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox/Next" to="." method="_on_Next_pressed"]
+[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox/Run" to="." method="_on_Run_pressed"]
+[connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Room/VBox/HBox/RunSingleScript" to="." method="_on_RunSingleScript_pressed"]
 [connection signal="draw" from="VBox/BottomPanel/VBox/HBox/Continue/ShowExtras" to="." method="_on_ShowExtras_draw"]
 [connection signal="toggled" from="VBox/BottomPanel/VBox/HBox/Continue/ShowExtras" to="." method="_on_ShowExtras_toggled"]
 [connection signal="pressed" from="VBox/BottomPanel/VBox/HBox/Continue/Continue" to="." method="_on_Continue_pressed"]

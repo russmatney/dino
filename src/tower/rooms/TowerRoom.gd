@@ -90,8 +90,8 @@ func floor_tile_below(cell):
 	var dark_tile_map = tilemaps({"group": "darktile"})[0]
 	var max_y = dark_tile_max_y()
 	for y in range(cell.y, max_y):
-		var c = dark_tile_map.get_cell(cell.x, y)
-		if c != TileMap.INVALID_CELL:
+		var c = dark_tile_map.get_cell_tile_data(0, Vector2(cell.x, y))
+		if c:
 			return true
 
 

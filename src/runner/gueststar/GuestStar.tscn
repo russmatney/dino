@@ -11,10 +11,10 @@
 
 [node name="BreakTheTargets" parent="." instance=ExtResource( 5 )]
 
-[node name="Node3D" parent="." instance=ExtResource( 3 )]
+[node name="Room" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 0.5, 0.5 )
 
-[node name="DungeonWalls2" parent="Node3D" index="3"]
+[node name="DungeonWalls2" parent="Room" index="3"]
 visible = false
 
 [node name="Room2" parent="." instance=ExtResource( 2 )]
@@ -77,5 +77,5 @@ position = Vector2( 3112, 664 )
 [node name="Target13" parent="." instance=ExtResource( 6 )]
 position = Vector2( 3544, 384 )
 
-[editable path="Node3D"]
+[editable path="Room"]
 [editable path="Room2"]

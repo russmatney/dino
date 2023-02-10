@@ -1,8 +1,8 @@
 extends TileMap
 
 
-func hit(position):
-	var cell = local_to_map(to_local(position))
+func hit(pos):
+	var cell = local_to_map(to_local(pos))
 	var nbrs = Reptile.valid_neighbors(self, cell)
 	for c in nbrs:
-		set_cellv(c, -1)
+		set_cell(0, c, -1)

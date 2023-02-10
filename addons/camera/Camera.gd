@@ -17,10 +17,11 @@ func cam_window_rect():
 	# https://github.com/godotengine/godot/issues/34805
 	var viewport_base_size = (
 		v.get_size_2d_override()
-		if v.get_size_2d_override() > Vector2(0, 0)
+		if v.get_size_2d_override()
 		else v.size
 	)
 
+	var scale_factor = DisplayServer.window_get_size() / viewport_base_size
 	viewportRect.size = viewport_base_size * scale_factor
 
 	# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/

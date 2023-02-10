@@ -8,7 +8,7 @@
 [ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Barney.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/core/assets/lights/light4_sheet.png" type="Texture2D" id=7]
 
-[node name="Node3D" type="Node2D"]
+[node name="Room" type="Node2D"]
 script = ExtResource( 5 )
 
 [node name="TextureRect" type="TextureRect" parent="."]

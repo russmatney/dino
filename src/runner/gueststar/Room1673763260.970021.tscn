@@ -9,7 +9,7 @@
 [ext_resource path="res://addons/reptile/tilesets/ShipAutotiles.tres" type="TileSet" id=7]
 [ext_resource path="res://addons/reptile/tilesets/3x3-autotiles.tres" type="TileSet" id=8]
 
-[node name="Node3D" type="Node2D"]
+[node name="Room" type="Node2D"]
 
 [node name="ShipInteriorTiles2" type="TileMap" parent="." instance=ExtResource( 3 )]
 modulate = Color( 0.282353, 0.431373, 0.419608, 0.690196 )
