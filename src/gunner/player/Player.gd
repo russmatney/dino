@@ -7,13 +7,15 @@ extends CharacterBody2D
 
 var is_dead = false
 
+var has_jetpack: bool = false
+
 ############################################################
 # _ready
 
 var reset_position
 
-@export var has_jetpack: bool = false
-
+func _enter_tree():
+	print("enter tree")
 
 func _ready():
 	print("gunner player getting ready: ", anim)
@@ -149,13 +151,13 @@ func set_state_label(label: String):
 
 var move_dir = Vector2.ZERO  # controller input
 # var velocity = Vector2.ZERO
-@export var speed: int := 220
-@export var air_speed: int := 200
-@export var max_fall_speed: int := 1500
-@export var jump_impulse: int := 400
-@export var gravity: int := 900
-@export var jetpack_boost: int := 800
-@export var max_jet_speed: int := -1200
+@export var speed: int = 220
+@export var air_speed: int = 200
+@export var max_fall_speed: int = 1500
+@export var jump_impulse: int = 400
+@export var gravity: int = 900
+@export var jetpack_boost: int = 800
+@export var max_jet_speed: int = -1200
 
 var can_wall_jump
 
@@ -203,7 +205,7 @@ var firing = false
 
 # per-bullet (gun) numbers
 
-@onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 2

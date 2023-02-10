@@ -3,7 +3,7 @@ extends Node2D
 
 var velocity := Vector2.ZERO
 
-@export var speed: int := 500
+@export var speed: int = 500
 
 var initial_pos
 
