@@ -291,10 +291,11 @@ func level_up():
 # shine
 
 
-func shine(time = 1.0):
-	var tween = create_tween()
-	anim.material.set("shader_param/speed", 1.0)
-	tween.tween_callback(Callable(anim.material,"set").bind("shader_param/speed", 0.0)).set_delay(time)
+func shine(_time = 1.0):
+	pass
+	# var tween = create_tween()
+	# anim.material.set("shader_param/speed", 1.0)
+	# tween.tween_callback(Callable(anim.material,"set").bind("shader_param/speed", 0.0)).set_delay(time)
 
 
 ######################################################################

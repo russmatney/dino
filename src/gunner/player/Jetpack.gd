@@ -76,7 +76,7 @@ func physics_process(delta):
 		is_jetting = false
 
 	# and not actor.in_blue
-	if is_jetting and not actor.dead:
+	if is_jetting and not actor.is_dead:
 		actor.jet_anim.set_visible(true)
 
 		var boost_factor = jet_boost_factor(delta)

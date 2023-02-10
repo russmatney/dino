@@ -9,7 +9,7 @@ var hud_scene = preload("res://src/snake/hud/HUD.tscn")
 
 func _ready():
 	step.connect(_on_step)
-	move_head.connect(_on_move_head)
+	did_move_head.connect(_on_move_head)
 
 ##########################################################################
 # move
@@ -248,12 +248,12 @@ func drop_tail():
 func _on_move_head(_coord):
 	bounce_head()
 
-signal move_head(coord)
+signal did_move_head(coord)
 func move_head(coord):
 	segment_coords.push_front(coord)
 	draw_segment(coord)
 	global_position = head_cell().global_position
-	emit_signal("move_head", coord)
+	emit_signal("did_move_head", coord)
 
 ##################################################################
 # death

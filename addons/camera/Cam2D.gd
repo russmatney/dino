@@ -197,9 +197,9 @@ func process_shake(delta):
 			# print("[CAM] Trauma resetting: ", trauma)
 			screenshake_reset()
 		else:
-			if not trans_noise_ctx:
+			if trans_noise_ctx == null:
 				trans_noise_ctx = {"noise": new_noise(noise_inputs), "acc": 0}
-			if not rot_noise_ctx:
+			if rot_noise_ctx == null:
 				noise_inputs["seed"] += randi()
 				rot_noise_ctx = {"noise": new_noise(noise_inputs), "acc": 0}
 			screenshake_translational(trans_noise_ctx, delta)
