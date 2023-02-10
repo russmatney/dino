@@ -16,7 +16,7 @@ var W = "W".unicode_at(0)
 
 
 func _process_custom_fx(char_fx):
-	match char_fx.character:
-		r, l: char_fx.character = w
-		R, L: char_fx.character = W
+	match char_fx.glyph_index:
+		r, l: char_fx.glyph_index = w
+		R, L: char_fx.glyph_index = W
 	return true

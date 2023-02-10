@@ -17,7 +17,7 @@ func _process_custom_fx(char_fx):
 	var scale:float = char_fx.env.get("scale", 1.0)
 	var freq:float = char_fx.env.get("freq", 8.0)
 
-	if char_fx.character in SPLITTERS:
+	if char_fx.glyph_index in SPLITTERS:
 		_word += 1
 
 	var s = fmod((_word + char_fx.elapsed_time) * PI * 1.25, PI * 2.0)

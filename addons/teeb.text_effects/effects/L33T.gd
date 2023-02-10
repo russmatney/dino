@@ -24,6 +24,6 @@ var leet = {
 
 
 func _process_custom_fx(char_fx):
-	if char_fx.character in leet:
-		char_fx.character = leet[char_fx.character]
+	if char_fx.glyph_index in leet:
+		char_fx.glyph_index = leet[char_fx.glyph_index]
 	return true
