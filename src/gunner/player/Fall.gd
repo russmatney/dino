@@ -34,7 +34,6 @@ func physics_process(delta):
 	if actor.is_on_floor():
 		var shake = false
 		var fall_speed = vel_before_coll.y
-		print("fall_speed: ", fall_speed)
 		if fall_speed >= very_heavy_fall_speed_shake_threshold:
 			# TODO player flash color and drop health
 			# TODO player hurt sound
