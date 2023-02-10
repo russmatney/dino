@@ -21,6 +21,7 @@ run/main_scene.pluggs="res://src/pluggs/factory/FactoryFloor.tscn"
 run/main_scene.harvey="res://src/harvey/menus/HarveyMenu.tscn"
 run/main_scene.tower="res://src/tower/menus/TowerMainMenu.tscn"
 run/main_scene.snake="res://src/snake/menus/SnakeMainMenu.tscn"
+run/main_scene.gunner="res://src/gunner/player/PlayerGym.tscn"
 
 [autoload]
 

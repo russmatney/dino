@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://du3kijww5llmg"]
+[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://dssioecwcl0c5"]
 
 [ext_resource type="Texture2D" uid="uid://bn21mhqpf8pu4" path="res://assets/icon.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcb8ffwd15pgn" path="res://assets/sprites/gloomba_sheet.png" id="2"]
