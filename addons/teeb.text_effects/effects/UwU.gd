@@ -6,13 +6,13 @@ extends RichTextEffect
 var bbcode = "uwu"
 
 
-const r = ord("r")
-const R = ord("R")
-const l = ord("l")
-const L = ord("L")
+var r = "r".unicode_at(0)
+var R = "R".unicode_at(0)
+var l = "l".unicode_at(0)
+var L = "L".unicode_at(0)
 
-const w = ord("w")
-const W = ord("W")
+var w = "w".unicode_at(0)
+var W = "W".unicode_at(0)
 
 
 func _process_custom_fx(char_fx):

@@ -7,14 +7,14 @@ extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 var bbcode = "console"
 
 
-const CURSOR = ord("█")
+const CURSOR = int("█")
 const CURSOR_COLOR = Color.GREEN_YELLOW
 
 var last_char = -1
 
 func _process_custom_fx(char_fx):
 	var tween_data = get_tween_data(char_fx)
-	
+
 	if tween_data.reverse:
 		# When fading out, just scroll all text up and fade.
 		char_fx.offset.y -= 32 * (1.0 - tween_data.time)
@@ -38,7 +38,7 @@ func _process_custom_fx(char_fx):
 					char_fx.color = CURSOR_COLOR
 				else:
 					char_fx.character = SPACE
-			
+
 			if char_fx.absolute_index > last_char:
 				last_char = char_fx.absolute_index
 	return true

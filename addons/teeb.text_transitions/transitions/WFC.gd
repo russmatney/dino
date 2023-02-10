@@ -6,8 +6,8 @@ extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 var bbcode = "wfc"
 
 
-const ONE = ord("1")
-const ZERO = ord("0")
+const ONE = int("1")
+const ZERO = int("0")
 
 
 func _process_custom_fx(char_fx):

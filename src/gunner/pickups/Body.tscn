@@ -1,30 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://b0tvu2n4gaf67"]
 
-[ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=1]
-[ext_resource path="res://src/gunner/pickups/body_spriteframes.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://src/gunner/pickups/Body.gd" type="Script" id=3]
+[ext_resource type="SpriteFrames" uid="uid://b8rermnydtd16" path="res://src/gunner/pickups/body_spriteframes.tres" id="2"]
+[ext_resource type="Script" path="res://src/gunner/pickups/Body.gd" id="3"]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 1 )
-shader_param/outline = Color( 0.819608, 0.486275, 0.486275, 1 )
-shader_param/accent = Color( 0.964706, 0.776471, 0.658824, 1 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 7 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 14)
 
 [node name="Body" type="Node2D" groups=["poi"]]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource( 2 )
-position = Vector2( 0, -8 )
-scale = Vector2( 2, 2 )
-sprite_frames = ExtResource( 2 )
+position = Vector2(0, -8)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("2")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 1, 2 )
-shape = SubResource( 1 )
+position = Vector2(1, 2)
+shape = SubResource("1")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

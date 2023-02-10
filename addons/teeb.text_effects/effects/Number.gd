@@ -6,9 +6,9 @@ extends RichTextEffect
 var bbcode = "number"
 
 
-const COMMA = ord(",")
-const SPACE = ord(" ")
-const PERIOD = ord(".")
+var COMMA = ",".unicode_at(0)
+var SPACE = " ".unicode_at(0)
+var PERIOD = ".".unicode_at(0)
 
 var _last_char_was_number:bool = false
 var _last_word_was_number:bool = false
@@ -17,28 +17,28 @@ var _last_word_was_number:bool = false
 func get_color(s) -> Color:
 	if s is Color: return s
 	elif s[0] == '#': return Color(s)
-	else: return ColorN(s)
+	else: return Color(s)
 
 
 func _process_custom_fx(char_fx):
 	var number_color:Color = get_color(char_fx.env.get("color", Color.YELLOW))
-	
+
 	# Reset checked first character.
 	if char_fx.relative_index == 0:
 		_last_char_was_number = false
 		_last_word_was_number = false
-	
+
 	# If the following is a word, and it came after a number, we'll colorize it.
 	if char_fx.character == SPACE:
 		if _last_char_was_number:
 			_last_word_was_number = true
 		else:
 			_last_word_was_number = false
-	
+
 	# Colorize characters after a number, except for the period.
 	if _last_word_was_number and char_fx.character != PERIOD:
 		char_fx.color = number_color
-	
+
 	# If character is a number, color it.
 	if char_fx.character >= 48 and char_fx.character <= 57:
 		char_fx.color = number_color

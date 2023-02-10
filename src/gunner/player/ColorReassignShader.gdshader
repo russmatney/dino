@@ -17,6 +17,6 @@ void fragment() {
 			color = accent;
 		}
 	}
-	
+
 	COLOR = color;
 }

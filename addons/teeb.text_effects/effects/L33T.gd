@@ -6,20 +6,20 @@ var bbcode = "l33t"
 
 
 var leet = {
-	ord("L"): ord("1"),
-	ord("l"): ord("1"),
-	ord("I"): ord("1"),
-	ord("i"): ord("1"),
-	ord("E"): ord("3"),
-	ord("e"): ord("3"),
-	ord("T"): ord("7"),
-	ord("t"): ord("7"),
-	ord("S"): ord("5"),
-	ord("s"): ord("5"),
-	ord("A"): ord("4"),
-	ord("a"): ord("4"),
-	ord("O"): ord("0"),
-	ord("o"): ord("0"),
+	"L".unicode_at(0): "1".unicode_at(0),
+	"l".unicode_at(0): "1".unicode_at(0),
+	"I".unicode_at(0): "1".unicode_at(0),
+	"i".unicode_at(0): "1".unicode_at(0),
+	"E".unicode_at(0): "3".unicode_at(0),
+	"e".unicode_at(0): "3".unicode_at(0),
+	"T".unicode_at(0): "7".unicode_at(0),
+	"t".unicode_at(0): "7".unicode_at(0),
+	"S".unicode_at(0): "5".unicode_at(0),
+	"s".unicode_at(0): "5".unicode_at(0),
+	"A".unicode_at(0): "4".unicode_at(0),
+	"a".unicode_at(0): "4".unicode_at(0),
+	"O".unicode_at(0): "0".unicode_at(0),
+	"o".unicode_at(0): "0".unicode_at(0),
 }
 
 

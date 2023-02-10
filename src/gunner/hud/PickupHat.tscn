@@ -1,15 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://d0sjxyrv8b68"]
 
-[ext_resource path="res://src/gunner/player/ColorReassignShader.gdshader" type="Shader" id=1]
-[ext_resource path="res://src/gunner/pickups/hat_spriteframes.tres" type="SpriteFrames" id=2]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 1 )
-shader_param/outline = Color( 0.819608, 0.486275, 0.486275, 1 )
-shader_param/accent = Color( 0.27451, 0.258824, 0.368627, 1 )
+[ext_resource type="SpriteFrames" uid="uid://c8h6jkmy43gsi" path="res://src/gunner/pickups/hat_spriteframes.tres" id="2"]
 
 [node name="Hat" type="AnimatedSprite2D"]
-material = SubResource( 1 )
-position = Vector2( 11, 19 )
-scale = Vector2( 3, 3 )
-sprite_frames = ExtResource( 2 )
+position = Vector2(11, 19)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("2")

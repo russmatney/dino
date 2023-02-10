@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-const float PI = 3.141516;
+const float _PI = 3.141516;
 
 uniform float speed = 1.;
 
@@ -14,13 +14,13 @@ float luminance(vec4 colour) {
 
 void fragment() {
 	vec4 colour = texture(TEXTURE, UV);
-	float target = abs(sin(TIME * PI * speed) * (1. + span));
+	float target = abs(sin(TIME * _PI * speed) * (1. + span));
 	if(colour.a > 0.) {
 		float lum = luminance(colour);
 		float diff = abs(lum - target);
 		float mx = clamp(1. - diff / span, 0., 1.);
 		colour = mix(colour, tint, mx);
 	}
-	
+
 	COLOR = colour;
 }

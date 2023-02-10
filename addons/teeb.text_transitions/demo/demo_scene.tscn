@@ -19,8 +19,8 @@ extends \"res://addons/teeb.text_transitions/transitions/TransitionBase.gd\"
 var bbcode = \"glide\"
 
 
-const A1 = ord(\"<\")
-const A2 = ord(\">\")
+const A1 = int(\"<\")
+const A2 = int(\">\")
 
 
 var _move_left = false
@@ -28,7 +28,7 @@ var _move_left = false
 
 func _process_custom_fx(char_fx):
 	var t = get_t(char_fx)
-	
+
 	if char_fx.character == A1:
 		_move_left = true
 		char_fx.color.a = 0.0
@@ -39,14 +39,14 @@ func _process_custom_fx(char_fx):
 		return true
 	else:
 		char_fx.color.a = t
-	
+
 	var s = sin(char_fx.elapsed_time) * .5 + .5
 	if _move_left:
 		char_fx.offset.y -= 33
 		char_fx.color.a = s
 	else:
 		char_fx.color.a = 1.0 - s
-		
+
 #	if _move_left:
 #		char_fx.offset.y = 16.0 - t * 16.0
 #	else:

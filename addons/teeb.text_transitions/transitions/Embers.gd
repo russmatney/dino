@@ -6,12 +6,12 @@ extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 var bbcode = "embers"
 
 
-const EMBER = ord(".")
+const EMBER = int(".")
 
 
 func _process_custom_fx(char_fx):
 	var tween_data = get_tween_data(char_fx)
-	
+
 	if tween_data.time == 1.0:
 		return true
 	var scale = char_fx.env.get("scale", 16.0)
@@ -22,7 +22,7 @@ func _process_custom_fx(char_fx):
 		clr1 = tween_data.get_color(clr1)
 	var clr2 = clr1
 	clr2.a = 0.0
-	
+
 	var t = tween_data.get_t(char_fx.absolute_index)
 	var t2 = tween_data.get_t(char_fx.absolute_index+1)
 	var r = get_rand(char_fx) * PI * 2.0

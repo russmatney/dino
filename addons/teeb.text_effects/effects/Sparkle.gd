@@ -20,7 +20,7 @@ static func lerp_list(a:Array, t:float):
 func get_color(s) -> Color:
 	if s is Color: return s
 	elif s[0] == '#': return Color(s)
-	else: return ColorN(s)
+	else: return Color(s)
 
 
 func get_rand_unclamped(char_fx):

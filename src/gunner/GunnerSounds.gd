@@ -101,9 +101,9 @@ func setup_sounds():
 	sound_map = DJ.setup_sound_map(sounds)
 
 
-func play_sound(name):
-	DJ.play_sound(sound_map, name)
+func play_sound(nm):
+	DJ.play_sound(sound_map, nm)
 
 
-func interrupt_sound(name):
-	DJ.interrupt_sound(sound_map, name)
+func interrupt_sound(nm):
+	DJ.interrupt_sound(sound_map, nm)

@@ -2,13 +2,13 @@ extends RichTextEffect
 
 
 const HALFPI = PI / 2.0
-const SPACE = ord(" ")
+const SPACE = int(" ")
 
 
 func get_color(s) -> Color:
 	if s is Color: return s
 	elif s[0] == '#': return Color(s)
-	else: return ColorN(s)
+	else: return Color(s)
 
 
 # Just a way to get a consistent seed value for randomized animations.

@@ -6,15 +6,15 @@ extends "res://addons/teeb.text_transitions/transitions/TransitionBase.gd"
 var bbcode = "redacted"
 
 
-const BLOCK = ord("█")
-const MID_BLOCK = ord("▓")
+const BLOCK = int("█")
+const MID_BLOCK = int("▓")
 
 
 func _process_custom_fx(char_fx):
 	var tween_data = get_tween_data(char_fx)
 	var t1 = tween_data.get_t(char_fx.absolute_index, false)
 	var t2 = tween_data.get_t(char_fx.absolute_index+1, false)
-	
+
 	if tween_data.reverse:
 		char_fx.color.a = 1.0 - t1
 		if t1 != t2:

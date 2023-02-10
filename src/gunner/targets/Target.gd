@@ -30,7 +30,7 @@ func animate_rotate():
 func animate():
 	var n = 10
 	var og_pos = position
-	var rand_offset = Vector2(randi() % n - n / 2, randi() % n - n / 2)
+	var rand_offset = Vector2(randi() % n - n / 2.0, randi() % n - n / 2.0)
 	var tween = create_tween()
 	tween.tween_property(self, "position", position + rand_offset, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC

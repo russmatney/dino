@@ -12,14 +12,14 @@ uniform vec4 replace_2: source_color;
 uniform vec4 replace_3: source_color;
 uniform vec4 replace_4: source_color;
 
-const float precision = 0.1;
+const float prec = 0.1;
 
 
 vec4 swap_color(vec4 color){
 	vec4 original_colors[5] = vec4[] (original_0, original_1, original_2, original_3, original_4);
 	vec4 replace_colors[5] = vec4[] (replace_0, replace_1, replace_2, replace_3, replace_4);
 	for (int i = 0; i < 5; i ++) {
-		if (distance(color, original_colors[i]) <= precision){
+		if (distance(color, original_colors[i]) <= prec){
 			return replace_colors[i];
 		}
 	}

@@ -1,26 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://fsmrend5ith2"]
 
-[ext_resource path="res://assets/sprites/offscreen-indicator_sheet.png" type="Texture2D" id=1]
-[ext_resource path="res://src/gunner/OffscreenIndicator.gd" type="Script" id=2]
-[ext_resource path="res://src/gunner/SpriteShineShader.gdshader" type="Shader" id=3]
+[ext_resource type="Script" path="res://src/gunner/OffscreenIndicator.gd" id="2"]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/speed = 0.5
-shader_param/tint = Color( 0.819608, 0.486275, 0.486275, 1 )
-shader_param/span = 0.3
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"sprite_frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="SpriteFrames" id="1"]
+animations = []
 
 [node name="OffscreenIndicator" type="AnimatedSprite2D"]
-material = SubResource( 2 )
 rotation = 0.785397
-scale = Vector2( 2, 2 )
-sprite_frames = SubResource( 1 )
-script = ExtResource( 2 )
+scale = Vector2(2, 2)
+sprite_frames = SubResource("1")
+animation = &""
+script = ExtResource("2")
