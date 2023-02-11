@@ -176,7 +176,8 @@ func regen_all_rooms():
 	break_the_targets.setup()
 
 
-@export var next_room_type = "middle" setget set_next_room_type # (String, "middle", "end")
+# TODO restore export (String, "middle", "end")
+@export var next_room_type = "middle" : set = set_next_room_type
 
 
 func set_next_room_type(val):

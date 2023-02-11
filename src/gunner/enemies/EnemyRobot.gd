@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var collision_shape = $CollisionShape2D
 
-var dead = false
+var is_dead = false
 
 ########################################################
 # ready
@@ -128,7 +128,7 @@ func take_damage(body = null, d = 1):
 
 
 func die(remove_at = false):
-	dead = true
+	is_dead = true
 	emit_signal("dead")
 
 	GunnerSounds.play_sound("enemy_dead")
@@ -158,13 +158,13 @@ var player
 
 
 func _on_VisionBox_body_entered(body: Node):
-	if body.is_in_group("player") and not body.dead:
+	if body.is_in_group("player") and not body.is_dead:
 		GunnerSounds.play_sound("enemy_sees_you")
 		player = body
 
 
 func _on_VisionBox_body_exited(body: Node):
-	if body.is_in_group("player") and not body.dead:
+	if body.is_in_group("player") and not body.is_dead:
 		player = null
 
 
@@ -180,7 +180,7 @@ signal fired_bullet(bullet)
 
 
 func fire_at_player():
-	if player and not player.dead and is_instance_valid(player):
+	if player and not player.is_dead and is_instance_valid(player):
 		var bullet = bullet_scene.instantiate()
 		bullet.position = bullet_position.get_global_position()
 		bullet.add_collision_exception_with(self)
