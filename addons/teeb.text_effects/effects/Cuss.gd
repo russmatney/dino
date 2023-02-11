@@ -6,7 +6,7 @@ extends RichTextEffect
 var bbcode = "cuss"
 
 var VOWELS = ["a".unicode_at(0), "e".unicode_at(0), "i".unicode_at(0), "o".unicode_at(0), "u".unicode_at(0),
-			  "A".unicode_at(0), "E".unicode_at(0), "I".unicode_at(0), "O".unicode_at(0), "U".unicode_at(0)]
+	"A".unicode_at(0), "E".unicode_at(0), "I".unicode_at(0), "O".unicode_at(0), "U".unicode_at(0)]
 var CHARS = ["&".unicode_at(0), "$".unicode_at(0), "!".unicode_at(0), "@".unicode_at(0), "*".unicode_at(0), "#".unicode_at(0), "%".unicode_at(0)]
 var SPACE = " ".unicode_at(0)
 

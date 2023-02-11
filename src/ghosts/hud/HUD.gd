@@ -37,8 +37,9 @@ func find_player():
 		player.connect("health_change",Callable(self,"update_player_health"))
 		player.connect("gloomba_koed",Callable(self,"update_gloomba_kos"))
 
-		update_player_health(player.health)
-		update_gloomba_kos(player.gloomba_kos)
+		# TODO restore zero state
+		# update_player_health(player.health)
+		# update_gloomba_kos(player.gloomba_kos)
 
 
 ###################################################################

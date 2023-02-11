@@ -25,7 +25,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	shader_loop()
+	# shader_loop()
 
 
 func shader_loop():
@@ -37,7 +37,8 @@ func shader_loop():
 
 func _process(_delta):
 	var alpha = anim.get_material().get("shader_param/alpha")
-	if coll_enabled and alpha < alpha_threshold:
-		disable_collision()
-	elif not coll_enabled and alpha > alpha_threshold:
-		enable_collision()
+	if alpha:
+		if coll_enabled and alpha < alpha_threshold:
+			disable_collision()
+		elif not coll_enabled and alpha > alpha_threshold:
+			enable_collision()

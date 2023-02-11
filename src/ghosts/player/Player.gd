@@ -1,11 +1,11 @@
 @tool
 extends CharacterBody2D
 
-@export var jump_impulse: int := 1500
-@export var speed: int := 300
-@export var gravity: int := 4000
+@export var jump_impulse: int = 1500
+@export var speed: int = 300
+@export var gravity: int = 4000
 
-@export var max_health: int := 6
+@export var max_health: int = 6
 var health = max_health
 signal health_change
 
@@ -31,15 +31,12 @@ func die():
 
 
 func _ready():
-	print("ghost player ready")
-	print(anim)
-
 	initial_pos = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.call_deferred("start")
 
 	call_deferred("finish_setup")
-
-	shader_loop()
+	# shader_loop()
 
 
 func finish_setup():

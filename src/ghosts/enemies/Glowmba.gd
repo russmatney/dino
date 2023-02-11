@@ -33,11 +33,11 @@ enum DIR { left, right }
 var move_dir = Vector2.RIGHT
 @export var speed: int = 100
 @export var speed_range: int = 90
-@export var gravity: int := 2000
+@export var gravity: int = 2000
 var speed_factor = 0
 
-@export var fly_speed: int := 900
-@export var fly_range: int := 400
+@export var fly_speed: int = 900
+@export var fly_range: int = 400
 var flying = false
 
 
