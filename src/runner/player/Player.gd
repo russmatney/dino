@@ -167,7 +167,7 @@ func entered_room(room):
 
 func exited_room(room):
 	current_rooms.erase(room)
-	if not current_rooms and not won:
+	if current_rooms.size() == 0 and not won:
 		# if we aren't in a room, restart me
 		restart()
 

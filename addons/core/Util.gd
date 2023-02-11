@@ -88,7 +88,7 @@ func ensure_connection(obj, sig, target, method, args = []):
 	var err
 	if not obj.is_connected(sig,Callable(target,method)):
 		if args.size() > 0:
-			err = obj.connect(sig,Callable(target,method).bind(args))
+			err = obj.connect(sig,Callable(target,method).bindv(args))
 		else:
 			err = obj.connect(sig,Callable(target,method))
 	if err:

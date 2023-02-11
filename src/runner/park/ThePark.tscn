@@ -1,50 +1,50 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=13 format=3 uid="uid://nl5hwgob1x7g"]
 
-[ext_resource path="res://src/runner/player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/runner/park/rooms/ParkCoin.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/camera/Cam2D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/runner/park/rooms/ParkCoinGuard.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/runner/Runner.gd" type="Script" id=5]
-[ext_resource path="res://src/runner/park/rooms/ParkGap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/runner/park/rooms/ParkWin.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/runner/park/rooms/ParkLeaf.tscn" type="PackedScene" id=8]
-[ext_resource path="res://src/runner/park/rooms/LeafSteps.tscn" type="PackedScene" id=9]
-[ext_resource path="res://src/runner/park/rooms/LeafDrop.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/concept-art/runner/leaf-backgrounds-middle_sheet.png" type="Texture2D" id=11]
-[ext_resource path="res://assets/concept-art/runner/leaf-backgrounds-far_sheet.png" type="Texture2D" id=12]
+[ext_resource type="PackedScene" path="res://src/runner/player/Player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkCoin.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://addons/camera/Cam2D.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkCoinGuard.tscn" id="4"]
+[ext_resource type="Script" path="res://src/runner/Runner.gd" id="5"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkGap.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkWin.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkLeaf.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/LeafSteps.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://src/runner/park/rooms/LeafDrop.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://d72nndjciiah" path="res://assets/concept-art/runner/leaf-backgrounds-middle_sheet.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://lgggv5iku27u" path="res://assets/concept-art/runner/leaf-backgrounds-far_sheet.png" id="12"]
 
 [node name="ThePark" type="Node2D"]
-script = ExtResource( 5 )
-initial_room_options = [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ]
-final_room = ExtResource( 7 )
-gap_room_options = [ ExtResource( 6 ) ]
+script = ExtResource("5")
+initial_room_options = [ExtResource("6"), ExtResource("2"), ExtResource("4"), ExtResource("8"), ExtResource("9"), ExtResource("10")]
+final_room = ExtResource("7")
+gap_room_options = [ExtResource("6")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-offset = Vector2( 0, -73 )
-transform = Transform2D( 1, 0, 0, 1, 0, -73 )
+offset = Vector2(0, -73)
+transform = Transform2D(1, 0, 0, 1, 0, -73)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.04, 1 )
-motion_mirroring = Vector2( 1024, 0 )
+motion_scale = Vector2(0.04, 1)
+motion_mirroring = Vector2(1024, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture = ExtResource( 12 )
+texture = ExtResource("12")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.1, 1 )
-motion_mirroring = Vector2( 1024, 0 )
+motion_scale = Vector2(0.1, 1)
+motion_mirroring = Vector2(1024, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource( 11 )
+texture = ExtResource("11")
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 39, -24 )
-scale = Vector2( 1.5, 1.5 )
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(39, -24)
+scale = Vector2(1.5, 1.5)
 
-[node name="DinoCamera2D" parent="." instance=ExtResource( 3 )]
-offset = Vector2( 200, -50 )
+[node name="DinoCamera2D" parent="." instance=ExtResource("3")]
+offset = Vector2(200, -50)
 drag_vertical_enabled = true
 drag_top_margin = 0.8
 drag_bottom_margin = 0.6
