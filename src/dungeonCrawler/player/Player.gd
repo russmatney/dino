@@ -3,7 +3,6 @@ class_name Player
 
 var move_accel := 800
 var max_speed := 300
-var velocity := Vector2.ZERO
 
 #######################################################################33
 # ready
@@ -76,7 +75,7 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
-		if actions:
+		if actions.size() > 0:
 			# TODO selecting when there are multiple actions
 			var ax = actions[0]
 			execute_action(ax)
@@ -97,20 +96,20 @@ var weapon
 
 
 func update_weapon():
-	if weapons.size():
+	if weapons.size() > 0:
 		# TODO select new weapon? keep current?
 		weapon = weapons[0]
 	else:
 		weapon = null
 
-	if weapon:
+	if not weapon == null:
 		match weapon["type"]:
 			"bow":
 				attach_bow()
 
 
 func use_weapon(wp = null):
-	if not wp:
+	if wp == null:
 		wp = weapon
 
 	match wp["type"]:
@@ -119,13 +118,13 @@ func use_weapon(wp = null):
 
 
 func point_weapon(dir):
-	if weapon:
+	if not weapon == null:
 		match weapon["type"]:
 			"bow":
 				point_bow(dir)
 
 
-const weapons = []
+var weapons = []
 
 
 func add_weapon(wp):
@@ -157,7 +156,7 @@ var arrow_impulse = 400
 
 func fire_bow():
 	var bow = Util.get_first_child_in_group(self, "bow")
-	if not bow:
+	if bow == null:
 		print("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
 		return
 
@@ -211,7 +210,7 @@ func coin_info_dict(c):
 #######################################################################33
 # items
 
-const items = []
+var items = []
 
 
 func add_item(it):
@@ -267,7 +266,7 @@ func use_key():
 #######################################################################33
 # actions
 
-const actions = []
+var actions = []
 
 var action_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
 @onready var actions_list = $ActionsList
@@ -340,7 +339,7 @@ func _on_LockOnDetectArea2D_area_exited(area: Area2D):
 
 func in_line_of_sight(body):
 	var cast_to = to_local(body.global_position)
-	line_of_sight.cast_to = cast_to
+	line_of_sight.target_position = cast_to
 	line_of_sight.force_raycast_update()
 	if line_of_sight.is_colliding():
 		var collider = line_of_sight.get_collider()
@@ -456,7 +455,7 @@ func health_info_dict(h):
 #######################################################################33
 # debug list
 
-const debug_messages = []
+var debug_messages = []
 
 var debug_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
 @onready var debug_list = $DebugList
@@ -487,7 +486,7 @@ func remove_debug_message(msg):
 #######################################################################33
 # info panel
 
-const info_messages = []
+var info_messages = []
 
 var info_message_scene = preload("res://src/dungeonCrawler/player/InfoMessage.tscn")
 @onready var info_list = get_node("%InfoList")

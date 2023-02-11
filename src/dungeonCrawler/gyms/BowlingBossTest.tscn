@@ -1,22 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dcoqw86db0ekq"]
 
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Fred.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/camera/Cam2D.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/dungeonCrawler/player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/reptile/tilemaps/DungeonWalls.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/dungeonCrawler/items/BowItem.tscn" type="PackedScene" id=5]
+[ext_resource type="PackedScene" uid="uid://bluovkoat1mev" path="res://src/dungeonCrawler/enemies/bowlingBoss/Fred.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://addons/camera/Cam2D.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bov8lal5vy6yc" path="res://src/dungeonCrawler/player/Player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/DungeonWalls.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/BowItem.tscn" id="5"]
 
 [node name="BowlingBossTest" type="Node2D"]
 
-[node name="DungeonWalls" parent="." instance=ExtResource( 4 )]
-tile_data = PackedInt32Array( -655362, 0, 1, -655361, 0, 196610, -720896, 0, 196610, -720895, 0, 196610, -720894, 0, 196610, -720893, 0, 196610, -720892, 0, 196610, -720891, 0, 196610, -720890, 0, 196610, -720889, 0, 196610, -720888, 0, 196610, -720887, 0, 196610, -720886, 0, 196610, -720885, 0, 3, -720883, 0, 0, -589827, 0, 1, -589826, 0, 131075, -655349, 0, 131073, -655348, 0, 196610, -655347, 0, 131074, -655346, 0, 3, -524292, 0, 1, -524291, 0, 131075, -589810, 0, 131073, -589809, 0, 3, -458757, 0, 1, -458756, 0, 131075, -524273, 0, 65536, -393221, 0, 65536, -458737, 0, 65536, -327686, 0, 1, -327685, 0, 131075, -393202, 0, 196609, -393201, 0, 65539, -262150, 0, 65536, -327665, 0, 65536, -196614, 0, 65536, -262129, 0, 65536, -131078, 0, 65536, -196593, 0, 65536, -65542, 0, 65536, -131057, 0, 65536, -6, 0, 65536, -65521, 0, 65536, 65530, 0, 131072, 15, 0, 65536, 131067, 0, 0, 65551, 0, 65536, 196603, 0, 65536, 131087, 0, 65536, 262139, 0, 131073, 262140, 0, 3, 196622, 0, 1, 196623, 0, 131075, 327676, 0, 131073, 327677, 0, 3, 262156, 0, 1, 262157, 0, 196610, 262158, 0, 131075, 393213, 0, 131073, 393214, 0, 196611, 327690, 0, 196609, 327691, 0, 196610, 327692, 0, 131075, 458751, 0, 196609, 393216, 0, 196610, 393217, 0, 196610, 393218, 0, 196610, 393219, 0, 196610, 393220, 0, 196610, 393221, 0, 196610, 393222, 0, 196610, 393223, 0, 196610, 393224, 0, 196610, 393225, 0, 196611 )
+[node name="DungeonWalls" parent="." instance=ExtResource("4")]
+format = 2
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
+[node name="Player" parent="." instance=ExtResource("3")]
 
-[node name="Fred" parent="." instance=ExtResource( 1 )]
-position = Vector2( 243, -108 )
+[node name="Fred" parent="." instance=ExtResource("1")]
+position = Vector2(243, -108)
 
-[node name="DinoCamera2D" parent="." instance=ExtResource( 2 )]
+[node name="DinoCamera2D" parent="." instance=ExtResource("2")]
 
-[node name="Bow" parent="." instance=ExtResource( 5 )]
-position = Vector2( 73, -213 )
+[node name="Bow" parent="." instance=ExtResource("5")]
+position = Vector2(73, -213)

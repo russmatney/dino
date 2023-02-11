@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-var velocity := Vector2.ZERO
-
 @export var jump_impulse: int := 1000
 @export var speed: int := 500
 @export var gravity: int := 2000

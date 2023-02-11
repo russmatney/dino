@@ -1,8 +1,6 @@
 @tool
 extends Node2D
 
-var velocity := Vector2.ZERO
-
 @export var speed: int = 500
 
 var initial_pos
@@ -31,6 +29,7 @@ func _ready():
 	print("bowling boss ready")
 	initial_pos = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.call_deferred("start")
 
 
 func on_transit(new_state):

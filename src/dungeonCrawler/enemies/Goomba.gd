@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 
+func _ready():
+	velocity = dir * speed
+
 #######################################################################33
 # hit, kill
 
@@ -52,7 +55,6 @@ func emit_drops():
 var dir = Vector2.LEFT
 var speed = 50
 var dead_spin_speed = 800
-var velocity = dir * speed
 
 
 func _physics_process(delta):

@@ -150,7 +150,6 @@ func set_state_label(label: String):
 # movement
 
 var move_dir = Vector2.ZERO  # controller input
-# var velocity = Vector2.ZERO
 @export var speed: int = 220
 @export var air_speed: int = 200
 @export var max_fall_speed: int = 1500

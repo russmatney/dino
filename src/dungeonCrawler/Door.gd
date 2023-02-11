@@ -81,15 +81,11 @@ func _ready():
 
 var bodies = []
 
-var unlock_door_action = {"func": funcref(self, "unlock_door"), "label": "Unlock"}
-
-var lock_door_action = {"func": funcref(self, "lock_door"), "label": "lock"}
-
-var open_door_action = {"func": funcref(self, "open_door"), "label": "Open"}
-
-var close_door_action = {"func": funcref(self, "close_door"), "label": "Close"}
-
-var door_locked_message = {"func": funcref(self, "jostle_door"), "label": "(locked)"}
+var unlock_door_action = {"func": unlock_door, "label": "Unlock"}
+var lock_door_action = {"func": lock_door, "label": "lock"}
+var open_door_action = {"func": open_door, "label": "Open"}
+var close_door_action = {"func": close_door, "label": "Close"}
+var door_locked_message = {"func": jostle_door, "label": "(locked)"}
 
 
 func remove_actions(body):

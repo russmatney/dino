@@ -1,4 +1,3 @@
-@tool
 extends Node
 # expects to be autoloaded
 

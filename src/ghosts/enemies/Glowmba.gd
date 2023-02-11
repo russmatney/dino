@@ -17,6 +17,8 @@ func _ready():
 
 	speed_factor = (randi() % speed_range) - speed_range
 
+	velocity = move_dir * speed
+
 	if Engine.is_editor_hint():
 		request_ready()
 
@@ -33,8 +35,6 @@ var move_dir = Vector2.RIGHT
 @export var speed_range: int = 90
 @export var gravity: int := 2000
 var speed_factor = 0
-
-var velocity = move_dir * speed
 
 @export var fly_speed: int := 900
 @export var fly_range: int := 400

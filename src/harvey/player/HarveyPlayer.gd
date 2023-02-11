@@ -59,7 +59,6 @@ func set_state_label(label: String):
 ############################################################
 # movement
 
-# var velocity = Vector2.ZERO
 # overwritten in subclass
 var speed := 100
 

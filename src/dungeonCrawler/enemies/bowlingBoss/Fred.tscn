@@ -1,36 +1,32 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://bluovkoat1mev"]
 
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=1]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" type="Script" id=2]
-[ext_resource path="res://resources/sprites/fred32.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" type="PackedScene" id=4]
-[ext_resource path="res://resources/sprites/fred64.tres" type="SpriteFrames" id=6]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" id="2"]
+[ext_resource type="SpriteFrames" uid="uid://b4xahws88l4mj" path="res://resources/sprites/fred32.tres" id="3"]
+[ext_resource type="PackedScene" path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" id="4"]
+[ext_resource type="SpriteFrames" uid="uid://bsumj7qtcqoqg" path="res://resources/sprites/fred64.tres" id="6"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12.5, 27.5 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(25, 55)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 16 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(20, 32)
 
-[sub_resource type="FontFile" id=3]
-font_data = ExtResource( 1 )
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 448, 128 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(896, 256)
 
 [node name="Fred" type="Node2D" groups=["bosses", "enemies"]]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 8
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-position = Vector2( -0.5, 3.5 )
-shape = SubResource( 1 )
+position = Vector2(-0.5, 3.5)
+shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Body"]
-sprite_frames = ExtResource( 6 )
+sprite_frames = ExtResource("6")
 
 [node name="ActionsList" type="VBoxContainer" parent="."]
 offset_left = -32.0
@@ -44,28 +40,25 @@ collision_layer = 8
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallBody"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SmallBody"]
-sprite_frames = ExtResource( 3 )
+sprite_frames = ExtResource("3")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 offset_left = -32.0
 offset_top = -48.0
 offset_right = 32.0
 offset_bottom = -24.0
-custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
-text = "[center]state[/center]"
 text = "state"
-fit_content_height = true
 
-[node name="Machine" parent="." instance=ExtResource( 4 )]
+[node name="Machine" parent="." instance=ExtResource("4")]
 
 [node name="DetectBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox"]
-shape = SubResource( 4 )
+shape = SubResource("4")
 
 [connection signal="body_entered" from="DetectBox" to="." method="_on_DetectBox_body_entered"]
 [connection signal="body_exited" from="DetectBox" to="." method="_on_DetectBox_body_exited"]

@@ -41,7 +41,6 @@ func _process(_delta):
 ########################################################
 # movement
 
-var velocity = Vector2.ZERO
 var speed = 50
 var gravity = 900
 

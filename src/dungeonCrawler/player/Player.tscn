@@ -1,39 +1,35 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://bov8lal5vy6yc"]
 
-[ext_resource path="res://resources/sprites/redhat.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/dungeonCrawler/player/Player.gd" type="Script" id=3]
+[ext_resource type="SpriteFrames" uid="uid://kpo3jkaqrj7k" path="res://resources/sprites/redhat.tres" id="1"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/player/Player.gd" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 6 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 12)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 192, 128 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(384, 256)
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 128, 128 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(256, 256)
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 9, 13.5 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.372549, 0.352941, 0.352941, 0.133333 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(18, 27)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 57
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2( 2, 2 )
-sprite_frames = ExtResource( 1 )
-animation = "run"
-playing = true
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("1")
+animation = &"run"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-scale = Vector2( 2, 2 )
-shape = SubResource( 1 )
+position = Vector2(0, 2)
+scale = Vector2(2, 2)
+shape = SubResource("1")
 
 [node name="ActionsList" type="VBoxContainer" parent="."]
 offset_left = -24.0
@@ -42,7 +38,7 @@ offset_right = 24.0
 offset_bottom = -8.0
 
 [node name="WeaponPosition" type="Marker2D" parent="."]
-position = Vector2( 8, 2 )
+position = Vector2(8, 2)
 
 [node name="DebugList" type="VBoxContainer" parent="."]
 offset_left = -24.0
@@ -55,17 +51,16 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LockOnDetectArea2D"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="ItemPullArea2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemPullArea2D"]
-shape = SubResource( 3 )
+shape = SubResource("3")
 
 [node name="LineOfSightRayCast2D" type="RayCast2D" parent="."]
-cast_to = Vector2( 0, 130 )
 collision_mask = 57
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -73,19 +68,19 @@ collision_layer = 2
 collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( 0, 1.5 )
-shape = SubResource( 4 )
+position = Vector2(0, 1.5)
+shape = SubResource("4")
 
 [node name="InfoPanel" type="Panel" parent="."]
 offset_left = -22.0
 offset_top = 16.0
 offset_right = 18.0
 offset_bottom = 56.0
-scale = Vector2( 1.10075, 0.399394 )
-custom_styles/panel = SubResource( 5 )
+scale = Vector2(1.10075, 0.399394)
 
 [node name="InfoList" type="VBoxContainer" parent="InfoPanel"]
 unique_name_in_owner = true
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
