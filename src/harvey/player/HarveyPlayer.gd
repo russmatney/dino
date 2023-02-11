@@ -218,11 +218,11 @@ func remove_action(ax):
 	eval_current_action()
 
 
-func remove_actions_with_source(name):
+func remove_actions_with_source(nm):
 	# this should be simpler - if not, create a util/extension for Array.filter()
 	var to_remove = []
 	for ax in actions:
-		if "source_name" in ax and ax["source_name"] == name:
+		if "source_name" in ax and ax["source_name"] == nm:
 			to_remove.append(ax)
 	for ax in to_remove:
 		actions.erase(ax)

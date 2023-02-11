@@ -2,12 +2,12 @@
 extends RichTextLabel
 
 
-@export var id: String:String = "main"
+@export var id: String = "main"
 @export var time:float = 0.0 # (float, 0.0, 1.0)
 @export var length:float = 8.0 # (float, 1.0, 32.0)
-@export var reverse: bool:bool = false
-@export var all_at_once: bool:bool = false
-@export var animation_time:float = 1.0  # (float, 0.1, 2.0)
+@export var reverse: bool = false
+@export var all_at_once: bool = false
+@export var animation_time: float = 1.0  # (float, 0.1, 2.0)
 
 
 func _enter_tree():

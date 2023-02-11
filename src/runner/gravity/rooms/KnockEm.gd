@@ -28,14 +28,14 @@ func cleanup():
 	Blocks.cleanup_blocks(self)
 
 
-func _on_player_entered(player):
+func _on_player_entered(p):
 	Blocks.ensure_blocks(self)
 	runs = runs + 1
 
 	print("[NOTIF] player entered KnockEm")
 
-	if player:
-		player.destroy_blocks = true
+	if p:
+		p.destroy_blocks = true
 
 	# TODO player touches block to enable it
 	# TODO once touched, blocks outside of some square are 'complete'
@@ -50,7 +50,7 @@ func is_finished():
 	return not blocks_remaining or runs >= max_runs
 
 
-func _on_player_exited(player):
+func _on_player_exited(p):
 	print(max_runs - runs, " attempts remain")
 
-	player.destroy_blocks = false
+	p.destroy_blocks = false

@@ -142,13 +142,13 @@ var duration = 0.2
 var reset_duration = 0.2
 
 
-func deform(direction):
-	var deformationStrength = (
-		clamp(max_dir_distance - direction.length(), 0, max_dir_distance)
-		/ max_dir_distance
-	)
-	var deformationDirection = direction.normalized()
-	var deformationScale = 0.5 * deformationDirection * deformationStrength
+func deform(_direction):
+	# var deformationStrength = (
+	# 	clamp(max_dir_distance - direction.length(), 0, max_dir_distance)
+	# 	/ max_dir_distance
+	# )
+	# var deformationDirection = direction.normalized()
+	# var deformationScale = 0.5 * deformationDirection * deformationStrength
 
 	print("TODO restore animation")
 	# var tween = create_tween()

@@ -118,10 +118,10 @@ func _ready():
 		request_ready()
 
 	# useful when debugging room calcs
-	# call_deferred("print_debug")
+	# call_deferred("my_print_debug")
 
 
-func print_debug():
+func my_print_debug():
 	print("---------------------------------------------")
 	print(self.name, " debug report")
 	print("room_width(): ", room_width())

@@ -28,14 +28,14 @@ func cleanup():
 	Blocks.cleanup_blocks(self)
 
 
-func _on_player_entered(player):
+func _on_player_entered(p):
 	Blocks.ensure_blocks(self)
 	runs = runs + 1
 
 	print("[NOTIF] player entered ", self.name)
 
-	if player:
-		player.activate_blocks = true
+	if p:
+		p.activate_blocks = true
 
 	# TODO player touches block to enable it
 	# TODO once touched, blocks outside of some square are 'complete'
@@ -50,6 +50,6 @@ func is_finished():
 	return not blocks_remaining
 
 
-func _on_player_exited(player):
-	if player:
-		player.activate_blocks = false
+func _on_player_exited(p):
+	if p:
+		p.activate_blocks = false

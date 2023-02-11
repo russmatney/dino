@@ -11,8 +11,8 @@ var _all_at_once:bool = false
 Press 2 to 'fade out' all effects.
 Or, simply mess with the following slider and toggles."""
 @export var time:float = 0.0 : get = _get_time, set = _set_time # (float, 0.0, 1.0)
-@export var reverse: bool:bool = false : get = _get_reverse, set = _set_reverse
-@export var all_at_once: bool:bool = false : get = _get_all_at_once, set = _set_all_at_once
+@export var reverse: bool = false : get = _get_reverse, set = _set_reverse
+@export var all_at_once: bool = false : get = _get_all_at_once, set = _set_all_at_once
 
 
 func _process(delta):
