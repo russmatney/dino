@@ -1,5 +1,20 @@
 #+title: dino
 
+Godot 4 port in progress!
+
+I spent the last few days porting everything from Godot 3.5 to Godot 4.0 (rc1).
+I've gotten through most of the crashes and script errors, but many things are
+still broken, and now need to be recreated, such as sprite frames (animations)
+and tilemaps.
+
+Be warned if trying to work with this repo! There is a 3.5 branch at the
+'working' state before diving into this port + refactor + cleanup.
+
+I hope to come out of the port with improved versions of all the games and
+addons :D
+
+--
+
 A monorepo with Godot games and addons.
 Play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
 
