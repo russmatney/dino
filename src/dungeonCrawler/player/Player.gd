@@ -297,7 +297,7 @@ func execute_action(ax):
 	var fn = ax["func"]
 	# TODO big assumption here, passing self as first arg
 	# really not sure about this pattern vs pubsub
-	fn.call_func(self)
+	fn.call(self)
 
 	remove_action(ax)
 
@@ -378,12 +378,12 @@ var nearby_items = []
 
 func _on_ItemPullArea2D_area_entered(area: Area2D):
 	nearby_items.append(area)
-	print("[player-nearby-items]: ", nearby_items)
+	# print("[player-nearby-items]: ", nearby_items)
 
 
 func _on_ItemPullArea2D_area_exited(area: Area2D):
 	nearby_items.erase(area)
-	print("[player-nearby-items]: ", nearby_items)
+	# print("[player-nearby-items]: ", nearby_items)
 
 
 var move_speed = 400

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cmaxg11lghsbw" path="res://addons/reptile/tilemaps/3x3TileMap.tscn" id="2_l0tv8"]
 [ext_resource type="PackedScene" path="res://addons/camera/Cam2D.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://addons/camera/CamAnchor.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/dungeonCrawler/Door.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://gosjcf3y2i74" path="res://src/dungeonCrawler/Door.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Key.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/BowItem.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://bqnlkmtoprs0x" path="res://src/dungeonCrawler/enemies/Goomba.tscn" id="9"]
