@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1oqegnheeg6c"]
 
-[ext_resource type="PackedScene" path="res://addons/navi/ui/HeroLabel.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/menus/DinoMenu.gd" id="2"]
 [ext_resource type="Script" path="res://src/menus/GamesList.gd" id="3"]
 [ext_resource type="Script" path="res://src/menus/GymsList.gd" id="4"]
@@ -16,13 +16,17 @@ grow_vertical = 2
 script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HeroLabel" parent="VBoxContainer" instance=ExtResource("1")]
 layout_mode = 2
-text = "Dino"
+text = "[center]Dino"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

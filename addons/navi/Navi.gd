@@ -1,7 +1,11 @@
 extends Node
 # expects to be autoloaded
 
-var current_scene = null
+# https://docs.godotengine.org/en/latest/tutorials/io/background_loading.html#doc-background-loading
+var wait_frames
+var time_max = 100
+var loader
+var current_scene
 
 var last_scene_stack = []
 
@@ -33,6 +37,7 @@ func _ready():
 		pp(str("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op."))
 
 	process_mode = PROCESS_MODE_ALWAYS
+	print("proc mode: ", process_mode)
 
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -40,18 +45,24 @@ func _ready():
 	# should one day be conditional/opt-out
 	pause_container = CanvasLayer.new()
 	pause_menu = pause_menu_scene.instantiate()
+	pause_menu.hide()
+	pause_menu.transient = true
 	pause_container.add_child(pause_menu)
 	call_deferred("add_child", pause_container)
 
 	# should one day be conditional/opt-out
 	death_container = CanvasLayer.new()
 	death_menu = death_menu_scene.instantiate()
+	death_menu.hide()
+	death_menu.transient = true
 	death_container.add_child(death_menu)
 	call_deferred("add_child", death_container)
 
 	# should one day be conditional/opt-out
 	win_container = CanvasLayer.new()
 	win_menu = win_menu_scene.instantiate()
+	win_menu.hide()
+	win_menu.transient = true
 	win_container.add_child(win_menu)
 	call_deferred("add_child", win_container)
 
@@ -152,6 +163,7 @@ func set_pause_menu(path):
 
 
 func _unhandled_input(event):
+	print("unhandled_input ? ", event)
 	# Navi implying Trolly dep
 	if Trolley.is_pause(event):
 		Navi.toggle_pause()
@@ -159,6 +171,8 @@ func _unhandled_input(event):
 
 func toggle_pause():
 	var t = get_tree()
+	print("toggle pause invoked. paused?: ", t.paused)
+	print("proc mode: ", process_mode)
 	if t.paused:
 		resume()
 	else:
@@ -166,6 +180,7 @@ func toggle_pause():
 
 
 func pause():
+	pp("pausing")
 	var t = get_tree()
 	t.paused = true
 	if pause_menu and is_instance_valid(pause_menu):
@@ -177,6 +192,7 @@ func pause():
 
 
 func resume():
+	pp("unpausing")
 	var t = get_tree()
 	t.paused = false
 	if pause_menu and is_instance_valid(pause_menu):
@@ -191,11 +207,13 @@ func resume():
 
 
 func show_death_menu():
+	pp("Show death screen")
 	DJ.pause_game_song()
 	death_menu.show()
 
 
 func hide_death_menu():
+	pp("Hide death screen")
 	death_menu.hide()
 
 
@@ -203,9 +221,11 @@ func hide_death_menu():
 
 
 func show_win_menu():
+	pp("Show win screen")
 	DJ.pause_game_song()
 	win_menu.show()
 
 
 func hide_win_menu():
+	pp("Hide win screen")
 	win_menu.hide()

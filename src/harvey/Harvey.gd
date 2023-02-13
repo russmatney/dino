@@ -8,6 +8,7 @@ func _ready():
 
 	time_up_container = CanvasLayer.new()
 	time_up_menu = time_up_menu_scene.instantiate()
+	time_up_menu.hide()
 	time_up_container.add_child(time_up_menu)
 	call_deferred("add_child", time_up_container)
 

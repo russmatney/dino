@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://addons/MaxSizeContainer/max_size_container.gd" id="1"]
 [ext_resource type="PackedScene" path="res://addons/navi/ui/MenuButton.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://addons/navi/ui/HeroLabel.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="4"]
 [ext_resource type="Script" path="res://src/harvey/menus/TimeUpMenu.gd" id="5"]
 [ext_resource type="Theme" uid="uid://bmvv7vyaun6y8" path="res://src/harvey/HUDTheme.tres" id="6"]
 
 [node name="TimeUpMenu" type="PopupPanel"]
 process_mode = 2
-size = Vector2i(181, 100)
+size = Vector2i(181, 214)
 visible = true
 script = ExtResource("5")
 
@@ -16,7 +16,7 @@ script = ExtResource("5")
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 177.0
-offset_bottom = 96.0
+offset_bottom = 210.0
 
 [node name="HeroLabel" parent="VBoxContainer" instance=ExtResource("4")]
 layout_mode = 2

@@ -72,23 +72,25 @@ CLOSED: [2022-07-20 Wed 15:12]
 CLOSED: [2022-07-22 Fri 18:41]
 ** [X] basic pause menu
 CLOSED: [2022-07-22 Fri 18:41]
-** [ ] add tests for pause menu
-** [ ] some high-level integration tests for dino itself
-load main-menu/load-level/pause-and-return-to-main/loop-three more times
-
-maybe learn/set an example for the tests we can write in godot games
+** [X] add basic Navi autoload for loading scenes
+CLOSED: [2023-02-13 Mon 15:33]
 ** [ ] menu keyboard navigation
 with trolley inputs
 ui_up/ui_down/ui_left/ui_right?
 
-** [ ] add basic Navi autoload for loading scenes
-** [ ] scanning for opt-in scenes?
-or a menu with checkboxes
-** [ ] consider a menu-y rofi filter ui
+** [ ] scanning for opt-in scenes (like *Gyms)?
+or a menu with checkboxes - so scenes can opt-in to an all-scenes nav list
+** [ ] consider a menu-y rofi filter ui for naving/loading scenes
 maybe there are built-ins for this
+** [ ] use the change_scene api
+** [ ] add to a base viewport
 * console
 ** [ ] in-game console for running available funcs
 needs helpers like get-nodes, defaults for params, tab-completion, etc
+* camera
+** [ ] add to base viewport
+** [ ] invert zoom directions
+** [ ] impl better default zoom handling
 * dj
 ** [X] init plugin
 CLOSED: [2022-07-20 Wed 15:14]
@@ -109,7 +111,11 @@ CLOSED: [2022-08-27 Sat 18:25]
 CLOSED: [2022-08-27 Sat 18:41]
 ** [X] starter png, tileset resource, tilemap scene for 2x2 and 3x3
 CLOSED: [2022-08-28 Sun 10:58]
-** [ ] TileSetTools script unit tests
+** [ ] basic tilemaps recreated
+** proc gen
+*** [ ] ReptileRoom api restored
+*** [ ] ReptileRoom api tested
+*** [ ] wave form collapse impl
 * thanks
 ** [X] init plugin
 CLOSED: [2022-08-29 Mon 12:22]
@@ -121,6 +127,10 @@ rather than in-lining a list of strings
 ** [ ] generate credits based on assets in the project resources
 could be a ui that asks about every asset
 a checkbox and license + source-url drop-down manager of sorts
+* dino
+** [ ] main menu with better game presentation
+** [ ] asset viewer/tester
+all songs, sounds, animations
 * [X] add GUT and basic testing flow
 CLOSED: [2022-07-21 Thu 22:25]
 * bb-godot
@@ -154,3 +164,12 @@ basically just reading the config.edn
 ** [ ] step 1: print the edn in the game
 ** [ ] step 2: unit test that reads and prints it
 * [ ] consider CI for testing
+* dungeon crawler
+** [ ] restore boss interactions
+* runner
+* ghosts
+* harvey
+* gunner
+* tower
+* snake
+** [ ] better default zoom

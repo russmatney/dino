@@ -1,47 +1,32 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://j0sk3m2xccgv"]
 
-[ext_resource path="res://addons/navi/ui/HeroLabel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/navi/NaviWinButtonList.gd" type="Script" id=3]
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=5]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.403922, 0.788235, 0.427451, 0.470588 )
-
-[sub_resource type="FontFile" id=2]
-resource_local_to_scene = true
-size = 96
-outline_size = 4
-outline_color = Color( 0.180392, 0.027451, 0.113725, 1 )
-spacing_top = 10
-font_data = ExtResource( 5 )
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2"]
+[ext_resource type="Script" path="res://addons/navi/NaviWinButtonList.gd" id="3"]
 
 [node name="NaviWinMenu" type="PopupPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 1 )
+transparent_bg = true
+size = Vector2i(512, 300)
+visible = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 512.0
-offset_bottom = 300.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 508.0
+offset_bottom = 296.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HeroLabel" parent="VBoxContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 512.0
-offset_bottom = 107.0
-custom_fonts/normal_font = SubResource( 2 )
-text = "[center]WIN![/center]"
-text = "WIN!"
+[node name="HeroLabel" parent="VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
+text = "[center]WIN!"
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-offset_top = 111.0
-offset_right = 512.0
-offset_bottom = 300.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="WinButtonList" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
-offset_left = 193.0
-offset_top = 63.0
-offset_right = 318.0
-offset_bottom = 125.0
-script = ExtResource( 3 )
+layout_mode = 2
+script = ExtResource("3")
