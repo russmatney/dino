@@ -5,6 +5,12 @@ extends CharacterBody2D
 func _ready():
 	velocity = dir * speed
 
+func update_facing():
+	if velocity.x >= 0:
+		anim.flip_h = true
+	else:
+		anim.flip_h = false
+
 #######################################################################33
 # hit, kill
 
@@ -59,8 +65,10 @@ var dead_spin_speed = 800
 
 func _physics_process(delta):
 	if not dead:
-		var collision_info = move_and_collide(velocity * delta)
-		if collision_info:
-			velocity = velocity.bounce(collision_info.normal)
+		move_and_slide()
+		var coll = get_last_slide_collision()
+		if coll:
+			velocity = velocity.bounce(coll.get_normal())
+			update_facing()
 	else:
 		rotation_degrees += dead_spin_speed * delta

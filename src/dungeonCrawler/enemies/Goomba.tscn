@@ -1,23 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bqnlkmtoprs0x"]
 
-[ext_resource path="res://resources/sprites/goomba.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/dungeonCrawler/enemies/Goomba.gd" type="Script" id=2]
+[ext_resource type="SpriteFrames" uid="uid://dts6qhnvp1o0h" path="res://resources/sprites/goomba.tres" id="1"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/Goomba.gd" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14, 10 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(28, 20)
 
 [node name="Goomba" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 7
-script = ExtResource( 2 )
+motion_mode = 1
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 1 )
+position = Vector2(0, 2)
+shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2( 2, 2 )
-sprite_frames = ExtResource( 1 )
-animation = "walk"
-frame = 1
-playing = true
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("1")
+animation = &"walk"
+autoplay = "walk"
