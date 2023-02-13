@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bd7yifa3f7rjf"]
 
-[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="FontFile" id=1]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_8p236"]
 
 [node name="InfoMessage" type="RichTextLabel"]
-anchor_right = 0.078
-anchor_bottom = 0.047
-offset_right = 0.0639992
-offset_bottom = -0.1
-custom_fonts/normal_font = ExtResource( 1 )
+anchors_preset = -1
+anchor_right = 0.084
+anchor_bottom = 0.05
+offset_right = -0.00800323
+theme_override_fonts/normal_font = ExtResource("1_8p236")
 bbcode_enabled = true
-text = "Health: 3"
-text = "Health: 3"
-fit_content_height = true
+text = "[center]Health: 3"
+fit_content = true
+scroll_active = false

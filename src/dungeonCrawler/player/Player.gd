@@ -283,7 +283,7 @@ func add_action(ax):
 func remove_action(ax):
 	var to_remove
 	for action_label in actions_list.get_children():
-		if action_label.text == ax.get("label", "fallback label"):
+		if action_label.get_parsed_text() == ax.get("label", "fallback label"):
 			to_remove = action_label
 			break
 
@@ -473,7 +473,7 @@ func add_debug_message(msg):
 func remove_debug_message(msg):
 	var to_remove
 	for debug_label in debug_list.get_children():
-		if debug_label.text == msg.get("label"):
+		if debug_label.get_parsed_text() == msg.get("label"):
 			to_remove = debug_label
 			break
 
@@ -504,7 +504,7 @@ func add_info_message(msg):
 func remove_info_message(msg):
 	var to_remove
 	for info_label in info_list.get_children():
-		if info_label.text == msg.get("label"):
+		if info_label.get_parsed_text() == msg.get("label"):
 			to_remove = info_label
 			break
 
