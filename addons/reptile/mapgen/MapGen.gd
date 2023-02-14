@@ -54,7 +54,17 @@ func regenerate_image():
 
 	room.set_room_name(Util.node_name_from_path(room_node_path))
 	room.set_groups(default_groups())
-	room.regen_tilemaps()
+	randomize()
+	room.regen_tilemaps(null, {
+			"seed": randf_range(0, 500000),
+			"octaves": Util.rand_of([2, 3, 4]),
+			"frequency": 1/randf_range(5, 30),
+			"persistence": randf_range(0.3, 0.7),
+			"lacunarity": randf_range(2.0, 4.0),
+			"img_size": randf_range(40, 60)
+		})
+
+	colorize_image(room.img)
 
 
 @export var room_node_path: String = "Map"
@@ -71,7 +81,6 @@ func do_clear(_v):
 
 		for c in self.get_children():
 			c.queue_free()
-
 
 ######################################################################
 # groups
@@ -100,38 +109,70 @@ func default_groups():
 ######################################################################
 # colorize_image
 
-# func ensure_image_node(name, i=0, img=null):
-# 	var texture_rect = get_node_or_null(name)
-# 	if not texture_rect:
-# 		texture_rect = TextureRect.new()
-# 		add_child(texture_rect)
-# 		texture_rect.set_owner(Util._or(owner, self))
-# 		texture_rect.name = name
+# return a group for the normed value, if one can be found.
+# this may not be comprehensive, if we want to leave some empty tiles
+func group_for_normed_val(normed):
+	var groups = default_groups()
+	groups.sort_custom(Callable(ReptileGroup,"sort_by_key"))
+	for g in groups:
+		if not g.upper_bound and not g.lower_bound:
+			# no bounds? we assume it's this group then
+			return g
+		if g.contains_val(normed):
+			return g
 
-# 	var w = 3200
-# 	var h = 3200
-# 	texture_rect.size = Vector2(w/2, h/2)
-# 	texture_rect.position = Vector2(-w/2, h*i/2)
-# 	texture_rect.expand = true
 
-# 	if img:
-# 		texture_rect.texture = Reptile.img_to_texture(img)
+func to_coord_ctx(coord, img, stats):
+	# this is called per coordinate
+	# avoid expensive ops in here, things should be passed in
+	var normed = Reptile.normalized_val(stats, img.get_pixel(coord.x, coord.y).r)
+	var group = group_for_normed_val(normed)
+	return CoordCtx.new(group, coord, normed, img)
 
-# func colorize_coord(ctx):
-# 	if ctx.group:
-# 		if not ctx.img:
-# 			prn("[WARN] colorize_coord ctx without img")
-# 			return
-# 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
-# func colorize_image(img):
-# 	# copy this image b/c we're about to mutate it
-# 	var n = Image.new()
-# 	n.copy_from(img)
-# 	n.convert(Image.FORMAT_RGBA8)
-# 	false # n.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
-# 	call_with_coord_context(n, self, "colorize_coord")
-# 	ensure_image_node("ColorizedImage", 1, n)
+func call_for_each_coord(img, obj, fname):
+	var stats = Reptile.img_stats(img)
+
+	for coord in Reptile.all_coords(img):
+		var ctx = to_coord_ctx(coord, img, stats)
+		obj.call(fname, ctx)
+
+func ensure_image_node(name, i=0, img=null):
+	var texture_rect = get_node_or_null(name)
+	if not texture_rect:
+		texture_rect = TextureRect.new()
+		add_child(texture_rect)
+		texture_rect.set_owner(Util._or(owner, self))
+		texture_rect.name = name
+
+	var w = 3200
+	var h = 3200
+	texture_rect.size = Vector2(w/2, h/2)
+	texture_rect.position = Vector2(-w/2, h*i/2)
+	texture_rect.expand = true
+
+	if img:
+		print("setting texture with img: ", img)
+		var img_texture = ImageTexture.create_from_image(img)
+		# img_texture.set_size_override(Vector2(w/2, h/2))
+		texture_rect.texture = img_texture
+
+func colorize_coord(ctx):
+	if ctx.group:
+		if not ctx.img:
+			prn("[WARN] colorize_coord ctx without img")
+			return
+		# print("setting coord to color: ", ctx.coord, " ", ctx.group.color)
+		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
+
+func colorize_image(img):
+	print("colorizing img: ", img)
+	# copy this image b/c we're about to mutate it
+	var n = Image.new()
+	n.copy_from(img)
+	n.convert(Image.FORMAT_RGBA8)
+	call_for_each_coord(n, self, "colorize_coord")
+	ensure_image_node("ColorizedImage", 1, n)
 
 ######################################################################
 # persist map as resource

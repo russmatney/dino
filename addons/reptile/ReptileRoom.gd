@@ -417,11 +417,14 @@ func groups_valid():
 signal regenerated_tilemaps
 
 
-func regen_tilemaps(image = null):
+func regen_tilemaps(image = null, inputs=null):
+	if inputs == null:
+		inputs = noise_inputs()
+
 	if image:
 		img = image
 	if not img:
-		img = Reptile.generate_image(noise_inputs())
+		img = Reptile.generate_image(inputs)
 
 	if img_flip_x:
 		img.flip_x()

@@ -54,9 +54,7 @@ func rotate(img):
 
 
 func img_to_texture(img):
-	var imgTexture = ImageTexture.new()
-	imgTexture.create_from_image(img) #,1
-	return imgTexture
+	return ImageTexture.create_from_image(img)
 
 
 ######################################################################
