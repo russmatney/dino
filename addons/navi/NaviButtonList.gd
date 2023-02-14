@@ -29,7 +29,6 @@ func _get_configuration_warnings():
 
 
 func _ready():
-	# TODO assert checked nav paths?
 	if Engine.is_editor_hint():
 		request_ready()
 
@@ -52,21 +51,18 @@ func no_op():
 func connect_pressed_to_action(button, item):
 	var nav_to = item.get("nav_to", false)
 
-	var obj
-	var method
+	var fn
 	var arg
+	var argv
 	if nav_to:
-		obj = _navi
-		method = "nav_to"
-		# wtf is this?
+		fn = Callable(_navi, "nav_to")
 		arg = nav_to
-		# TODO  could pass more args to nav_to here, like skip_pause_music
 	else:
-		obj = item.get("obj")
-		method = item.get("method")
 		arg = item.get("arg")
+		argv = item.get("argv")
+		fn = item.get("fn")
 
-	if obj == null and method == null and nav_to == null:
+	if nav_to == null and fn == null:
 		button.set_disabled(true)
 		pw("Menu item missing handler", item)
 		return
@@ -75,16 +71,18 @@ func connect_pressed_to_action(button, item):
 			button.set_disabled(true)
 			pw("Menu item with non-existent nav-to", item)
 			return
-	elif obj and method:
-		if not obj.has_method(method):
-			button.set_disabled(true)
-			pw("Menu item handler invalid", item)
-			return
+
+	if fn == null:
+		button.set_disabled(true)
+		pw("Menu item handler invalid", item)
+		return
 
 	if arg:
-		button.connect("pressed",Callable(obj,method).bind(arg))
+		button.connect("pressed", fn.bind(arg))
+	elif argv:
+		button.connect("pressed", fn.bindv(argv))
 	else:
-		button.connect("pressed",Callable(obj,method))
+		button.connect("pressed", fn)
 
 
 func add_menu_item(item):

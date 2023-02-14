@@ -14,6 +14,18 @@ var menu_scenes = [
 		"label": "Credits",
 		"nav_to": "res://src/credits/DinoCredits.tscn",
 	},
+	{
+		"label": "Toggle Pause",
+		"fn": Navi.toggle_pause,
+	},
+	{
+		"label": "Show Win Menu",
+		"fn": Navi.show_win_menu,
+	},
+	{
+		"label": "Show Death Menu",
+		"fn": Navi.show_death_menu,
+	}
 ]
 
 

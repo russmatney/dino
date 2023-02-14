@@ -4,14 +4,11 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		"label": "Play",
-		"obj": Tower,
-		"method": "restart_game",
-		"arg": {"regen": true},
+		"fn": Tower.restart_game.bind({"regen": true}),
 	},
 	# {
 	# 	"label": "Play (fixed world)",
-	# 	"obj": Tower,
-	# 	"method": "restart_game"
+	# 	"fn": Tower.restart_game,
 	# },
 	{
 		"label": "Credits",

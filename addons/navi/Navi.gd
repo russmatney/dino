@@ -25,8 +25,17 @@ var win_container
 var win_menu
 
 
-func pp(msg):
-	print("[Navi] ", msg)
+func pp(msg, msg2=null, msg3=null, msg4=null, msg5=null):
+	if msg5:
+		print("[Navi] ", msg, msg2, msg3, msg4, msg5)
+	if msg4:
+		print("[Navi] ", msg, msg2, msg3, msg4)
+	if msg3:
+		print("[Navi] ", msg, msg2, msg3)
+	if msg2:
+		print("[Navi] ", msg, msg2)
+	else:
+		print("[Navi] ", msg)
 
 
 ## ready ###################################################################
@@ -34,7 +43,7 @@ func pp(msg):
 
 func _ready():
 	if not FileAccess.file_exists(main_menu_path):
-		pp(str("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op."))
+		pp("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
 
 	process_mode = PROCESS_MODE_ALWAYS
 	print("proc mode: ", process_mode)
@@ -42,29 +51,17 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
-	# should one day be conditional/opt-out
-	pause_container = CanvasLayer.new()
 	pause_menu = pause_menu_scene.instantiate()
 	pause_menu.hide()
-	pause_menu.transient = true
-	pause_container.add_child(pause_menu)
-	call_deferred("add_child", pause_container)
+	call_deferred("add_child", pause_menu)
 
-	# should one day be conditional/opt-out
-	death_container = CanvasLayer.new()
 	death_menu = death_menu_scene.instantiate()
 	death_menu.hide()
-	death_menu.transient = true
-	death_container.add_child(death_menu)
-	call_deferred("add_child", death_container)
+	call_deferred("add_child", death_menu)
 
-	# should one day be conditional/opt-out
-	win_container = CanvasLayer.new()
 	win_menu = win_menu_scene.instantiate()
 	win_menu.hide()
-	win_menu.transient = true
-	win_container.add_child(win_menu)
-	call_deferred("add_child", win_container)
+	call_deferred("add_child", win_menu)
 
 	if "node_path" in current_scene:
 		last_scene_stack.push_back(current_scene.node_path)
@@ -132,17 +129,17 @@ var main_menu_path = "res://src/menus/DinoMenu.tscn"
 
 func set_main_menu(path):
 	if FileAccess.file_exists(path):
-		pp(str("Updating main_menu_path: ", path))
+		pp("Updating main_menu_path: ", path)
 		main_menu_path = path
 	else:
-		pp(str("No scene at path: ", main_menu_path, ", can't set main menu."))
+		pp("No scene at path: ", main_menu_path, ", can't set main menu.")
 
 
 func nav_to_main_menu():
 	if FileAccess.file_exists(main_menu_path):
 		nav_to(main_menu_path)
 	else:
-		pp(str("No scene at path: ", main_menu_path, ", can't navigate."))
+		pp("No scene at path: ", main_menu_path, ", can't navigate.")
 
 
 ## pause ###################################################################
@@ -152,18 +149,17 @@ var pause_menu_path = "res://addons/navi/NaviPauseMenu.tscn"
 
 func set_pause_menu(path):
 	if FileAccess.file_exists(path):
-		pp(str("Updating pause_menu_path: ", path))
+		pp("Updating pause_menu_path: ", path)
 		pause_menu_path = path
 
 		pause_menu.queue_free()
 		pause_menu = load(pause_menu_path).instantiate()
 		pause_container.add_child(pause_menu)
 	else:
-		pp(str("No scene at path: ", path, ", can't set pause menu."))
+		pp("No scene at path: ", path, ", can't set pause menu.")
 
 
 func _unhandled_input(event):
-	print("unhandled_input ? ", event)
 	# Navi implying Trolly dep
 	if Trolley.is_pause(event):
 		Navi.toggle_pause()

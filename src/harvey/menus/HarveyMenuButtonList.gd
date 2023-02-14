@@ -2,7 +2,7 @@
 extends NaviButtonList
 
 var menu_scenes = [
-	{"label": "Play", "obj": Harvey, "method": "restart_game"},
+	{"label": "Play", "fn": Harvey.restart_game},
 	{
 		"label": "Credits",
 		"nav_to": "res://src/credits/DinoCredits.tscn",

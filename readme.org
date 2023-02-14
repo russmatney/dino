@@ -122,7 +122,7 @@ GUI and HUD should be camera-zoom-level related anyway.
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
 *** NaviMenu
-supporting ~add_menu_item({label: "Blah", obj: self, method: "some_func"})~
+supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
 *** Basic popovers
 **** Pause Screen
 **** Win Screen

@@ -4,8 +4,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		"label": "Play",
-		"obj": SnakeGame,
-		"method": "start_game",
+		"fn": SnakeGame.start_game,
 	},
 	{
 		"label": "Credits",

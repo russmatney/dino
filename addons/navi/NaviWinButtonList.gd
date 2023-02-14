@@ -14,15 +14,13 @@ func restart_game():
 var button_defs = [
 	{
 		"label": "Return to Main Menu",
-		"obj": self,
-		"method": "return_to_main",
+		"fn": self.return_to_main,
 	},
 	# TODO general 'restart game' and menu-action registry
 	# this should be overwritable, not snake specific within Navi
 	{
 		"label": "Restart Snake Game",
-		"obj": self,
-		"method": "restart_game",
+		"fn": self.restart_game,
 	},
 	{
 		"label": "Credits",
