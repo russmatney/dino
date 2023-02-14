@@ -57,9 +57,9 @@ func _ready():
 	scene_ready = true
 	calc_rect()
 
-	var _y = Hood.connect("hud_ready",Callable(self,"_on_hud_ready"))
-	break_the_targets.connect("targets_cleared",Callable(self,"_on_targets_cleared"))
-	var _x = Tower.connect("player_spawned",Callable(self,"_on_player_spawned"))
+	var _y = Hood.hud_ready.connect(_on_hud_ready)
+	break_the_targets.targets_cleared.connect(_on_targets_cleared)
+	var _x = Tower.player_spawned.connect(_on_player_spawned)
 
 	player_spawner = get_node_or_null("%PlayerSpawner")
 
@@ -72,7 +72,7 @@ func _on_hud_ready():
 
 
 func _on_player_spawned(p):
-	p.connect("pickups_changed",Callable(self,"_on_player_pickups_changed"))
+	p.pickups_changed.connect(_on_player_pickups_changed)
 
 
 var enemies = []
@@ -96,13 +96,13 @@ func _on_player_pickups_changed(pickups):
 		enemy_spawners.shuffle()
 		if enemy_spawners:
 			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
-			en.connect("dead",Callable(self,"_on_robot_destroyed"))
+			en.dead.connect(_on_robot_destroyed)
 			enemies.append(en)
 			Hood.hud.update_enemies_remaining(enemies_alive().size())
 
 		# clear player items
 		player.pickups = []
-		player.emit_signal("pickups_changed", player.pickups)
+		player.pickups_changed.emit(player.pickups)
 
 
 func _on_targets_cleared():

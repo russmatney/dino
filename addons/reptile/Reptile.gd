@@ -1,5 +1,9 @@
+@tool
 # Reptile
 extends Node
+
+func _ready():
+	print("<Reptile> autoload ready")
 
 ######################################################################
 # generate random image
@@ -85,24 +89,5 @@ func normalized_val(stats, val):
 # tilemap/cell helpers
 
 
-func all_neighbors(cell):
-	return [
-		Vector2(cell.x, cell.y),
-		Vector2(cell.x + 1, cell.y),
-		Vector2(cell.x - 1, cell.y),
-		Vector2(cell.x, cell.y - 1),
-		Vector2(cell.x + 1, cell.y - 1),
-		Vector2(cell.x - 1, cell.y - 1),
-		Vector2(cell.x, cell.y + 1),
-		Vector2(cell.x + 1, cell.y + 1),
-		Vector2(cell.x - 1, cell.y + 1),
-	]
-
-
 func valid_neighbors(tilemap, cell):
-	var nbrs = all_neighbors(cell)
-	var valid = []
-	for n in nbrs:
-		if tilemap.get_cell_tile_data(0, n):
-			valid.append(n)
-	return valid
+	return tilemap.get_surrounding_cells(cell)

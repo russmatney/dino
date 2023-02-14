@@ -38,7 +38,7 @@ func _ready():
 	if not groups:
 		find_groups()
 
-	connect("regenerated_tilemaps",Callable(self,"_on_regen"))
+	regenerated_tilemaps.connect(_on_regen)
 
 
 func _on_regen():
@@ -71,7 +71,7 @@ func tilemaps(opts = {}):
 func tilemap_cells(opts = {}):
 	var cells = []
 	for t in tilemaps(opts):
-		for cell in t.get_used_cells():
+		for cell in t.get_used_cells(0):
 			cells.append([t, cell])
 	return cells
 
@@ -156,7 +156,7 @@ func get_noise_input():
 		{
 			"seed": randf_range(0, 50000),
 			"octaves": Util.rand_of([2, 3, 4]),
-			"period": randf_range(5, 30),
+			"frequency": 1/randf_range(5, 30),
 			"persistence": randf_range(0.3, 0.7),
 			"lacunarity": randf_range(2.0, 4.0),
 			"img_size": randf_range(40, 60)
@@ -196,7 +196,7 @@ func set_groups(new_groups):
 	clear_groups()
 
 	for g in new_groups:
-		g.connect("tree_entered",Callable(g,"set_owner").bind(Util._or(owner, self)))
+		g.tree_entered.connect(g.set_owner.bind(Util._or(owner, self)))
 		g.name = "Group"
 		add_child(g)
 	groups = new_groups
@@ -264,6 +264,12 @@ func set_period(v):
 	period = v
 	do_tile_regen()
 
+@export var frequency: float = 1.0/60.0 : set = set_frequency
+
+
+func set_frequency(v):
+	frequency = v
+	do_tile_regen()
 
 @export var persistence: float = 0.5 : set = set_persistence
 
@@ -318,6 +324,7 @@ func noise_inputs():
 		"seed": n_seed,
 		"octaves": octaves,
 		"period": period,
+		"frequency": frequency,
 		"persistence": persistence,
 		"lacunarity": lacunarity,
 		"img_size": img_size,
@@ -351,7 +358,6 @@ func to_coord_ctx(coord, img, stats):
 
 
 func call_for_each_coord(img, obj, fname):
-	false # img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var stats = Reptile.img_stats(img)
 
 	for coord in Reptile.all_coords(img):
@@ -370,7 +376,11 @@ func init_tilemaps():
 	for group in groups:
 		if group.tilemap_scene:
 			var t = group.tilemap_scene.instantiate()
-			var scale_by = cell_size / t.cell_size.x
+			var scale_by
+			if t.tile_set:
+				scale_by = cell_size / t.tile_set.tile_size.x
+			else:
+				scale_by = 1
 			t.scale = Vector2(scale_by, scale_by)
 			t.connect("tree_entered",Callable(t,"set_owner").bind(Util._or(owner, self)))
 			add_child(t)
@@ -381,18 +391,20 @@ func add_tile_at_coord(ctx):
 	if ctx.group:
 		var t = ctx.group.tilemap
 		if t and is_instance_valid(t):
+			# print("adding tile at coord: ", t.name, " ", ctx.coord)
 			# TODO restore random tile selector for godot 4 api
 			# may want to support source_id/atlas_coords/alternative_tile
 			# var t_ids = t.tile_set.get_tiles_ids()
 			# t_ids.shuffle()
 			# t.set_cell(0, Vector2(ctx.coord.x, ctx.coord.y), t_ids[0])
-			t.set_cell(0, Vector2(ctx.coord.x, ctx.coord.y), 0)
+			t.set_cell(0, ctx.coord, 1)
 
 
 func update_tilemaps():
 	for gp in groups:
 		if gp.tilemap:
-			gp.tilemap.update_bitmask_region()
+			# gp.tilemap.update_bitmask_region()
+			gp.tilemap.force_update()
 
 
 func groups_valid():
@@ -418,7 +430,7 @@ func regen_tilemaps(image = null):
 	if img_rotate:
 		img = Reptile.rotate(img)
 
-	if not groups:
+	if groups == null or groups.size() == 0:
 		prn("No groups, re-finding")
 		find_groups()
 

@@ -44,7 +44,7 @@ func get_noise_input():
 		{
 			"seed": randf_range(0, 100000),
 			"octaves": Util.rand_of([2, 3, 4]),
-			"period": randf_range(15, 40),
+			"frequency": 1/randf_range(15, 40),
 			"persistence": randf_range(0.3, 0.5),
 			"lacunarity": randf_range(2.5, 4.0),
 		}
@@ -80,7 +80,7 @@ func dark_tile_max_y():
 
 	var dark_tile_map = tilemaps({"group": "darktile"})[0]
 	dark_max_y = 0
-	for c in dark_tile_map.get_used_cells():
+	for c in dark_tile_map.get_used_cells(0):
 		if c.y > dark_max_y:
 			dark_max_y = c.y
 	return dark_max_y
@@ -154,12 +154,13 @@ func add_pickups():
 
 	var p_locs = n_random(locs, 2)
 	for i in range(2):
-		var loc = p_locs[i]
-		var p = pickup_scene.instantiate()
-		p.position = loc["position"]
-		p.type = pickup_types[i]
-		add_child(p)
-		p.set_owner(get_tree().edited_scene_root)
+		if p_locs.size() > i:
+			var loc = p_locs[i]
+			var p = pickup_scene.instantiate()
+			p.position = loc["position"]
+			p.type = pickup_types[i]
+			add_child(p)
+			p.set_owner(get_tree().edited_scene_root)
 
 
 ########################################################################
@@ -191,7 +192,7 @@ func add_player_spawner():
 				}
 			)
 
-	if locs:
+	if locs.size() > 0:
 		locs.shuffle()
 		var loc = locs[0]
 		var inst = player_spawner_scene.instantiate()
@@ -230,7 +231,7 @@ func add_enemy_spawner():
 				}
 			)
 
-	if locs:
+	if locs.size() > 0:
 		locs.shuffle()
 		var loc = locs[0]
 		var inst = enemy_spawner_scene.instantiate()

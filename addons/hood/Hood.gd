@@ -1,4 +1,8 @@
+@tool
 extends Node
+
+func _ready():
+	print("<Hood> autoload ready")
 
 ###########################################################################
 # config
