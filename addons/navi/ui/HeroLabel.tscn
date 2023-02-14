@@ -12,3 +12,4 @@ bbcode_enabled = true
 text = "[center]Hero Label"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0

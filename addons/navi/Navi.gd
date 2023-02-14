@@ -1,30 +1,9 @@
+@tool
 extends Node
-# expects to be autoloaded
 
 # https://docs.godotengine.org/en/latest/tutorials/io/background_loading.html#doc-background-loading
-var wait_frames
-var time_max = 100
-var loader
-var current_scene
 
-var last_scene_stack = []
-
-# overwritable, but defaults to a reasonable pause screen
-@export var pause_menu_scene: PackedScene = preload("res://addons/navi/NaviPauseMenu.tscn")
-var pause_container
-var pause_menu
-
-# overwritable, but defaults to a reasonable death screen
-@export var death_menu_scene: PackedScene = preload("res://addons/navi/NaviDeathMenu.tscn")
-var death_container
-var death_menu
-
-# overwritable, but defaults to a reasonable win screen
-@export var win_menu_scene: PackedScene = preload("res://addons/navi/NaviWinMenu.tscn")
-var win_container
-var win_menu
-
-
+# TODO logger abstraction
 func pp(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	if msg5:
 		print("[Navi] ", msg, msg2, msg3, msg4, msg5)
@@ -37,9 +16,16 @@ func pp(msg, msg2=null, msg3=null, msg4=null, msg5=null):
 	else:
 		print("[Navi] ", msg)
 
+func add_menu(scene):
+	var menu = scene.instantiate()
+	menu.hide()
+	call_deferred("add_child", menu)
+	return menu
 
 ## ready ###################################################################
 
+var current_scene
+var last_scene_stack = []
 
 func _ready():
 	if not FileAccess.file_exists(main_menu_path):
@@ -51,17 +37,9 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 
-	pause_menu = pause_menu_scene.instantiate()
-	pause_menu.hide()
-	call_deferred("add_child", pause_menu)
-
-	death_menu = death_menu_scene.instantiate()
-	death_menu.hide()
-	call_deferred("add_child", death_menu)
-
-	win_menu = win_menu_scene.instantiate()
-	win_menu.hide()
-	call_deferred("add_child", win_menu)
+	pause_menu = add_menu(pause_menu_scene)
+	death_menu = add_menu(death_menu_scene)
+	win_menu = add_menu(win_menu_scene)
 
 	if "node_path" in current_scene:
 		last_scene_stack.push_back(current_scene.node_path)
@@ -100,9 +78,9 @@ func _deferred_goto_scene(path_or_packed_scene):
 		s = path_or_packed_scene
 
 	# Instance the new scene.
-	print("[Navi] instancing new scene: ", s)
+	pp("Instancing new scene: ", s)
 	current_scene = s.instantiate()
-	print("[Navi] Current scene: ", current_scene)
+	pp("Current scene: ", current_scene)
 	emit_signal("new_scene_instanced", current_scene)
 
 	# Add it to the active scene, as child of root.
@@ -118,6 +96,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 
 # helper for adding a child to the current scene
 func add_child_to_current(child):
+	# could use the scene_tree's current_scene directly
 	current_scene.call_deferred("add_child", child)
 
 
@@ -144,17 +123,15 @@ func nav_to_main_menu():
 
 ## pause ###################################################################
 
-var pause_menu_path = "res://addons/navi/NaviPauseMenu.tscn"
-
+@export var pause_menu_scene: PackedScene = preload("res://addons/navi/NaviPauseMenu.tscn")
+var pause_menu
 
 func set_pause_menu(path):
 	if FileAccess.file_exists(path):
-		pp("Updating pause_menu_path: ", path)
-		pause_menu_path = path
-
-		pause_menu.queue_free()
-		pause_menu = load(pause_menu_path).instantiate()
-		pause_container.add_child(pause_menu)
+		pp("Updating pause_menu: ", path)
+		if pause_menu:
+			pause_menu.queue_free()
+		pause_menu = add_menu(load(path))
 	else:
 		pp("No scene at path: ", path, ", can't set pause menu.")
 
@@ -201,6 +178,18 @@ func resume():
 
 ## death ###########################################
 
+@export var death_menu_scene: PackedScene = preload("res://addons/navi/NaviDeathMenu.tscn")
+var death_menu
+
+func set_death_menu(path):
+	if FileAccess.file_exists(path):
+		pp("Updating death_menu: ", path)
+		if death_menu:
+			death_menu.queue_free()
+		death_menu = add_menu(load(path))
+	else:
+		pp("No scene at path: ", path, ", can't set death menu.")
+
 
 func show_death_menu():
 	pp("Show death screen")
@@ -215,6 +204,17 @@ func hide_death_menu():
 
 ## win ###########################################
 
+@export var win_menu_scene: PackedScene = preload("res://addons/navi/NaviWinMenu.tscn")
+var win_menu
+
+func set_win_menu(path):
+	if FileAccess.file_exists(path):
+		pp("Updating win_menu: ", path)
+		if win_menu:
+			win_menu.queue_free()
+		win_menu = add_menu(load(path))
+	else:
+		pp("No scene at path: ", path, ", can't set win menu.")
 
 func show_win_menu():
 	pp("Show win screen")
