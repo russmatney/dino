@@ -25,3 +25,4 @@ dist.zip
 /.lsp
 
 .gut_editor_config.json
+/.godot/

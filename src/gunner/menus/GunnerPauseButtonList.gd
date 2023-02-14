@@ -1,14 +1,21 @@
-@tool
 extends NaviButtonList
+
+func restart():
+	owner.hide()
+	Gunner.restart_game()
 
 var button_defs = [
 	{
-		"label": "Return to Main Menu",
-		"fn": Navi.nav_to_main_menu,
-	},
-	{
 		"label": "Resume",
 		"fn": Navi.resume,
+	},
+	{
+		"label": "Restart",
+		"fn": self.restart,
+	},
+	{
+		"label": "Return to Main Menu",
+		"fn": Navi.nav_to_main_menu,
 	},
 ]
 

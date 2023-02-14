@@ -116,7 +116,10 @@ func set_main_menu(path):
 
 func nav_to_main_menu():
 	if FileAccess.file_exists(main_menu_path):
+		death_menu.hide()
+		win_menu.hide()
 		nav_to(main_menu_path)
+		resume()
 	else:
 		pp("No scene at path: ", main_menu_path, ", can't navigate.")
 

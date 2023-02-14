@@ -1,16 +1,4 @@
-extends PopupPanel
-
-
-func _on_ReturnToMain_pressed():
-	Navi.nav_to_main_menu()
-	Navi.resume()
-	hide()
-
-
-func _on_Restart_pressed():
-	Harvey.restart_game()
-	hide()
-
+extends CanvasLayer
 
 ###################################################################
 # produce counts
