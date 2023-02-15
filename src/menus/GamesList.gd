@@ -36,7 +36,7 @@ var menu_scenes = [
 	},
 	{
 		"label": "Mvania",
-		"nav_to": "res://src/mvania/maps/DemoMap.tscn",
+		"nav_to": "res://src/mvania19/maps/DemoMap.tscn",
 	},
 ]
 

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://d4m2tn1shyqcs"
+path="res://.godot/imported/fall.sfxr-2a2492a29a755e3f5a845ce4dccb070c.sample"
+
+[deps]
+
+source_file="res://src/mvania19/sounds/fall.sfxr"
+dest_files=["res://.godot/imported/fall.sfxr-2a2492a29a755e3f5a845ce4dccb070c.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

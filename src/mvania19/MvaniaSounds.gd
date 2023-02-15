@@ -9,6 +9,17 @@ var sounds = {
 	[
 			preload("res://src/mvania19/sounds/jump1.sfxr"),
 		],
+	"fall":
+	[
+			preload("res://src/mvania19/sounds/fall1.sfxr"),
+			preload("res://src/mvania19/sounds/fall2.sfxr"),
+			preload("res://src/mvania19/sounds/fall3.sfxr"),
+		],
+	"heavy_fall":
+	[
+			preload("res://src/mvania19/sounds/heavyfall1.sfxr"),
+			preload("res://src/mvania19/sounds/heavyfall2.sfxr"),
+		],
 	"cool-kids":
 	[
 		[
