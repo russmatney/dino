@@ -34,8 +34,7 @@ func physics_process(delta):
 	if not actor.is_on_floor():
 		actor.velocity.y += actor.GRAVITY * delta
 
-	# apply move dir
-	# TODO consider different air horizontal speed
+	# horizontal speed up or slowdown
 	if actor.move_dir:
 		actor.velocity.x = actor.move_dir.x * actor.SPEED
 	else:
@@ -44,6 +43,7 @@ func physics_process(delta):
 	var vel_before_coll = actor.velocity
 	actor.move_and_slide()
 
+	# move back to idle
 	if actor.is_on_floor():
 		var fall_speed = vel_before_coll.y
 		print("fall_speed was: ", fall_speed)
