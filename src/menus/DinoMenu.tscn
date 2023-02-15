@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://src/menus/OtherList.gd" id="5"]
 
 [node name="DinoMenu" type="CanvasLayer"]
-follow_viewport_enabled = true
 script = ExtResource("2")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

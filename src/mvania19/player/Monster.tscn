@@ -16,4 +16,4 @@ shape = SubResource("CapsuleShape2D_fy5s5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_w3vs6")
 animation = &"idle"
-frame_progress = 0.26102
+frame_progress = 0.210228

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="2_kwgin"]
 
 [node name="HUD" type="CanvasLayer"]
-follow_viewport_enabled = true
 script = ExtResource("1_ubn4a")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

@@ -4,7 +4,6 @@ extends Node
 var song_name = "field-stars"
 
 func _ready():
-	print("SnakeGame ready")
 	# TODO restore music
 	# if not Engine.is_editor_hint():
 	# 	SnakeSounds.play_song(song_name)

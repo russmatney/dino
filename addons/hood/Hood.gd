@@ -1,6 +1,15 @@
 @tool
 extends Node
 
+# TODO logger
+func prn(msg, msg2=null, msg3=null):
+	if msg3:
+		print("[HOOD]: ", msg, msg2, msg3)
+	elif msg2:
+		print("[HOOD]: ", msg, msg2)
+	elif msg:
+		print("[HOOD]: ", msg)
+
 func _ready():
 	print("<Hood> autoload ready")
 
@@ -10,7 +19,7 @@ func _ready():
 @onready var fallback_hud_scene = preload("res://addons/hood/HUD.tscn")
 
 func set_hud_scene(preloaded_scene):
-	print("[HOOD] Overriding fallback HUD scene: ", preloaded_scene)
+	prn("Overriding fallback HUD scene: ", preloaded_scene)
 	fallback_hud_scene = preloaded_scene
 
 
@@ -19,11 +28,10 @@ func set_hud_scene(preloaded_scene):
 
 var hud
 
-
 func ensure_hud(hud_preload=null):
-	print("[HOOD] ensuring hud")
+	prn("ensuring hud")
 	if hud and is_instance_valid(hud):
-		print("[HOOD] HUD exists, nothing doing.")
+		prn("HUD exists, nothing doing.")
 		return
 
 	if not hud_preload:
@@ -33,14 +41,15 @@ func ensure_hud(hud_preload=null):
 	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
-	print("hud ensured?")
-
 
 signal hud_ready
 
-
 func _on_hud_ready():
 	emit_signal("hud_ready")
+
+	# notify with any queued notifs
+	for qn in queued_notifs:
+		notif(qn[0], qn[1])
 
 
 ###########################################################################
@@ -48,11 +57,13 @@ func _on_hud_ready():
 
 signal notification(text)
 
+var queued_notifs = []
 
 func notif(text, opts = {}):
-	print("[HOOD] notif: ", text)
+	prn("notif: ", text)
 	if not hud:
-		print("[WARN] no hud yet, can't send notification")
+		queued_notifs.append([text, opts])
+		prn("[INFO] no hud yet, queuing notification")
 	if typeof(opts) == TYPE_STRING:
 		text += opts
 		opts = {}
@@ -75,12 +86,12 @@ func find_player():
 	var ps = get_tree().get_nodes_in_group(player_group)
 
 	if ps.size() > 1:
-		print("<HOOD> [WARN] found multiple in player_group: ", player_group)
+		prn("[WARN] found multiple in player_group: ", player_group)
 	if ps:
 		player = ps[0]
-		print("<HOOD> found player: ", player)
+		prn("found player: ", player)
 	else:
-		print("<HOOD> [WARN] could not find player, zero in player_group: ", player_group)
+		prn("[WARN] could not find player, zero in player_group: ", player_group)
 		return
 
 	emit_signal("found_player", player)

@@ -5,7 +5,6 @@
 
 [node name="DeathMenu" type="CanvasLayer"]
 layer = 2
-follow_viewport_enabled = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15

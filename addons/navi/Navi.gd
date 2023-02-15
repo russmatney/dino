@@ -32,7 +32,6 @@ func _ready():
 		pp("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
 
 	process_mode = PROCESS_MODE_ALWAYS
-	print("proc mode: ", process_mode)
 
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -147,8 +146,6 @@ func _unhandled_input(event):
 
 func toggle_pause():
 	var t = get_tree()
-	print("toggle pause invoked. paused?: ", t.paused)
-	print("proc mode: ", process_mode)
 	if t.paused:
 		resume()
 	else:
@@ -162,7 +159,6 @@ func pause():
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
 	# Navi implying DJ dep
-	print("dj.resume")
 	DJ.pause_game_song()
 	DJ.resume_menu_song()
 
@@ -174,7 +170,6 @@ func resume():
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.hide()
 	# Navi implying DJ dep
-	print("dj.pause")
 	DJ.pause_menu_song()
 	DJ.resume_game_song()
 

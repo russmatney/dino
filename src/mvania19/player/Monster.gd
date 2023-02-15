@@ -4,6 +4,7 @@ extends CharacterBody2D
 # ready
 
 func _ready():
+	Hood.notif("early notif")
 	Cam.ensure_camera(2)
 	Hood.ensure_hud()
 

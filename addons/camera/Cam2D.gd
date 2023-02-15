@@ -125,10 +125,10 @@ func zoom_dir(dir, n = null):
 		n = 1
 
 	match dir:
-		"out":
+		"in":
 			zoom_level += zoom_increment * n
 			zoom_offset += zoom_offset_increment * n
-		"in":
+		"out":
 			zoom_level -= zoom_increment * n
 			zoom_offset -= zoom_offset_increment * n
 
