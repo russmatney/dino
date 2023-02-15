@@ -3,9 +3,6 @@ extends State
 func enter(_ctx={}):
 	actor.anim.play("run")
 
-func process(_delta):
-	pass
-
 func physics_process(delta):
 	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
 		machine.transit("Jump")
@@ -21,6 +18,9 @@ func physics_process(delta):
 		actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)
 
 	actor.move_and_slide()
+
+	if actor.velocity.y > 0:
+		machine.transit("Fall")
 
 	if abs(actor.velocity.x) < 1:
 		machine.transit("Idle")

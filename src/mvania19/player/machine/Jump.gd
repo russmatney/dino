@@ -15,9 +15,6 @@ func _on_anim_finished():
 func exit():
 	actor.anim.animation_finished.disconnect(_on_anim_finished)
 
-func process(_delta):
-	pass
-
 func physics_process(delta):
 	# gravity
 	if not actor.is_on_floor():

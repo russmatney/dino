@@ -4,9 +4,6 @@ extends State
 func enter(_ctx={}):
 	actor.anim.play("air")
 
-func process(_delta):
-	pass
-
 func physics_process(delta):
 	# gravity
 	if not actor.is_on_floor():
