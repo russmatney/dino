@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnosf7eta2ht5"]
+
+[ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
+[ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
+radius = 4.0
+height = 16.0
+
+[node name="Monster" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_wj1cn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_fy5s5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_w3vs6")
+animation = &"idle"
+frame_progress = 0.26102

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgkiy2tme7sae"]
+
+[ext_resource type="TileSet" uid="uid://db48qit5jufd1" path="res://src/mvania19/tiles/DemoTiles.tres" id="1_n8ltn"]
+
+[node name="DemoTiles" type="TileMap"]
+tile_set = ExtResource("1_n8ltn")
+format = 2
+layer_0/name = "dark"
