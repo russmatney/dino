@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Fall.gd" id="7_ovoef"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
-radius = 4.0
+radius = 3.8
 height = 12.0
 
 [node name="Monster" type="CharacterBody2D" groups=["player"]]
