@@ -7,12 +7,11 @@ func _ready():
 ###########################################################################
 # config
 
-@onready var hud_scene = preload("res://src/tower/hud/HUD.tscn")
-
+@onready var fallback_hud_scene = preload("res://addons/hood/HUD.tscn")
 
 func set_hud_scene(preloaded_scene):
 	print("[HOOD] Overriding fallback HUD scene: ", preloaded_scene)
-	hud_scene = preloaded_scene
+	fallback_hud_scene = preloaded_scene
 
 
 ###########################################################################
@@ -28,7 +27,7 @@ func ensure_hud(hud_preload=null):
 		return
 
 	if not hud_preload:
-		hud_preload = hud_scene
+		hud_preload = fallback_hud_scene
 
 	hud = hud_preload.instantiate()
 	hud.ready.connect(_on_hud_ready)

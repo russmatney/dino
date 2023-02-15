@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://1qfoheo0oh3m"]
+
+[ext_resource type="Script" path="res://addons/hood/HUD.gd" id="1_ubn4a"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="2_kwgin"]
+
+[node name="HUD" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_ubn4a")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Notifications" parent="HBoxContainer/PanelContainer" instance=ExtResource("2_kwgin")]
+layout_mode = 2
