@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://csxn7trh6hvk1"
+path="res://.godot/imported/jump4.sfxr-889fe858176ba3d8ac761caf9ac38939.sample"
+
+[deps]
+
+source_file="res://src/mvania19/sounds/jump4.sfxr"
+dest_files=["res://.godot/imported/jump4.sfxr-889fe858176ba3d8ac761caf9ac38939.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
