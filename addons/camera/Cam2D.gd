@@ -132,7 +132,7 @@ func zoom_dir(dir, n = null):
 			zoom_level -= zoom_increment * n
 			zoom_offset -= zoom_offset_increment * n
 
-	print("<Cam> Zoom update. level: ", zoom_level, " offset: ", zoom_offset)
+	Cam.prn("Zoom update. level: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -169,7 +169,6 @@ var trauma_decrement_factor = 0.7
 func inc_trauma(inc):
 	trauma += inc
 	trauma = clamp(trauma, 0.0, 1.0)
-	# print("[CAM] Trauma: ", trauma)
 
 
 var shake_offset
@@ -191,17 +190,17 @@ func screenshake_reset():
 
 func process_shake(delta):
 	if trauma > 0:
+		# Cam.prn("[CAM] Trauma: ", trauma)
 		trauma -= trauma_decrement_factor * delta
 		trauma = clamp(trauma, 0.0, 1.0)
 		if trauma == 0.0:
-			# print("[CAM] Trauma resetting: ", trauma)
 			screenshake_reset()
 		else:
 			if trans_noise_ctx == null:
-				trans_noise_ctx = {"noise": new_noise(noise_inputs), "acc": 0}
+				trans_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
 			if rot_noise_ctx == null:
 				noise_inputs["seed"] += randi()
-				rot_noise_ctx = {"noise": new_noise(noise_inputs), "acc": 0}
+				rot_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
 			screenshake_translational(trans_noise_ctx, delta)
 			screenshake_rotational(rot_noise_ctx, delta)
 	if shake_offset:
@@ -212,8 +211,8 @@ func process_shake(delta):
 
 var noise_inputs = {
 	"seed": 4,
-	"octaves": 5,
-	"frequency": 1/5,
+	"octaves": 5.0,
+	"frequency": 1.0/5.0,
 	"gain": 0.8,
 	"lacunarity": 4.0,
 }
@@ -231,8 +230,8 @@ func new_noise(inputs):
 
 
 func next_noise_factor(noise_ctx, delta):
-	noise_ctx["acc"] = delta + noise_ctx["acc"]
-	noise_ctx["factor"] = noise_ctx["noise"].get_noise_1d(noise_ctx["acc"])
+	noise_ctx["t"] = delta + noise_ctx["t"]
+	noise_ctx["factor"] = noise_ctx["noise"].get_noise_1d(noise_ctx["t"])
 
 
 var max_shake_offset = 100
@@ -260,7 +259,7 @@ func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
 
 	if nodes.size() > 1:
-		print("[WARN] Camera found multiple nodes to follow", nodes)
+		Cam.prn("[WARN] Camera found multiple nodes to follow", nodes)
 
 	if nodes.size() > 0:
 		following = nodes[0]
@@ -283,7 +282,7 @@ func attach_to_nearest_anchor():
 	# find nearest anchor node, reparent to that
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
-		print("[WARN] Camera found no anchor nodes, attaching to player")
+		Cam.prn("[WARN] Camera found no anchor nodes, attaching to player")
 		Util.change_parent(self, following)
 	else:
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...

@@ -5,6 +5,15 @@ extends Node
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
+func prn(msg, msg2=null, msg3=null, msg4=null):
+	if not msg4 == null:
+		print("[CAM] ", msg, msg2, msg3, msg4)
+	elif not msg3 == null:
+		print("[CAM] ", msg, msg2, msg3)
+	elif not msg2 == null:
+		print("[CAM] ", msg, msg2)
+	else:
+		print("[CAM] ", msg)
 
 func cam_viewport():
 	if cam:
@@ -43,16 +52,16 @@ func cam_window_rect():
 
 
 func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
-	print("[CAM] ensuring camera")
+	prn("ensuring camera")
 	if cam and is_instance_valid(cam):
-		print("[CAM] found existing cam: ", cam)
+		prn("found existing cam: ", cam)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")
 	if cams:
 		return
 
-	print("[CAM]: No node found with 'camera' group, adding one.")
+	prn("No node found with 'camera' group, adding one.")
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true
@@ -73,7 +82,7 @@ func inc_trauma(inc = 0.1):
 	if cam:
 		cam.inc_trauma(inc)
 	else:
-		print("[WARN]: inc_trauma called, but no 'cam' set.")
+		prn("[WARN]: inc_trauma called, but no 'cam' set.")
 
 
 func screenshake(trauma = 0.3):

@@ -30,6 +30,14 @@ var menu_scenes = [
 		"label": "Tower",
 		"nav_to": "res://src/tower/menus/TowerMainMenu.tscn",
 	},
+	{
+		"label": "Snake",
+		"nav_to": "res://src/snake/menus/SnakeMainMenu.tscn",
+	},
+	{
+		"label": "Mvania",
+		"nav_to": "res://src/mvania/maps/DemoMap.tscn",
+	},
 ]
 
 @export var button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")

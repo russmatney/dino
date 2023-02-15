@@ -55,7 +55,6 @@ func physics_process(delta):
 			var thresh = filtered[0]
 			var shake = thresh["shake"]
 			# var damage = thresh["damage"]
-			print("thresh: ", thresh)
 			Cam.screenshake(shake)
 
 		# apply damage
