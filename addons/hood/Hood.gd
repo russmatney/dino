@@ -64,6 +64,7 @@ func notif(text, opts = {}):
 	if not hud:
 		queued_notifs.append([text, opts])
 		prn("[INFO] no hud yet, queuing notification")
+		return
 	if typeof(opts) == TYPE_STRING:
 		text += opts
 		opts = {}

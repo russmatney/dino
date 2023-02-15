@@ -19,3 +19,5 @@ layout_mode = 2
 
 [node name="Notifications" parent="HBoxContainer/PanelContainer" instance=ExtResource("2_kwgin")]
 layout_mode = 2
+add_notif = "Some other notification"
+add_rich_notif = "[jump]Some rich notification"

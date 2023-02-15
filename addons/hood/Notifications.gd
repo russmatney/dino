@@ -10,6 +10,13 @@ var scene_ready
 		if scene_ready:
 			new_notification({"msg": txt})
 
+@export var add_rich_notif = "Some rich notification" :
+	set(txt):
+		add_rich_notif = txt
+		print("setting notif: ", txt)
+		if scene_ready:
+			new_notification({"msg": txt, "rich": true})
+
 func _ready():
 	var _x = Hood.connect("notification",Callable(self,"new_notification"))
 	Hood.notif("[HOOD] Notifications online.")
@@ -28,3 +35,5 @@ func new_notification(notif: Dictionary):
 		lbl.text = notif["msg"]
 	lbl.ttl = notif.get("ttl", 3.0)
 	add_child(lbl)
+	if Engine.is_editor_hint():
+		lbl.set_owner(owner)

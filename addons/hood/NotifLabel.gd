@@ -9,7 +9,8 @@ func _ready():
 	if not ttl:
 		ttl = default_ttl
 
-	call_deferred("kill_in_ttl")
+	if not Engine.is_editor_hint():
+		call_deferred("kill_in_ttl")
 
 
 func kill_in_ttl():
