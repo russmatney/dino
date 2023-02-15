@@ -1,10 +1,15 @@
 extends Node
 
-# func _unhandled_input(event):
-# 	# TODO probably don't want this checked _all_ the time
-# 	if Trolley.is_event(event, "respawns"):
-# 		Hood.notif("Respawning Targets")
-# 		respawn_missing()
+var deving = false
+
+func _unhandled_input(event):
+	if not deving:
+		return
+
+	# TODO probably don't want this checked _all_ the time
+	if Trolley.is_event(event, "respawns"):
+		Hood.notif("Respawning Targets")
+		respawn_missing()
 
 ###########################################################################
 # respawns
