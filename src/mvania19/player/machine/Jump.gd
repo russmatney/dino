@@ -1,6 +1,7 @@
 extends State
 
 func enter(_ctx={}):
+	MvaniaSounds.play_sound("jump")
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
 

@@ -44,6 +44,7 @@ SnakeSounds="*res://src/snake/SnakeSounds.gd"
 Quest="*res://addons/hood/Quest.gd"
 SnakeGame="*res://src/snake/SnakeGame.gd"
 Util="*res://addons/core/Util.gd"
+MvaniaSounds="*res://src/mvania19/MvaniaSounds.gd"
 
 [display]
 
