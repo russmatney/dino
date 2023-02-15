@@ -1,15 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://tatmpjsqo4pm"]
+[gd_scene load_steps=8 format=3 uid="uid://tatmpjsqo4pm"]
 
 [ext_resource type="PackedScene" path="res://src/tower/tiles/YellowTile.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://doufo75jmm0ga" path="res://src/tower/tiles/DarkTile.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://src/tower/tiles/BlueTile.tscn" id="6_mbcbv"]
 [ext_resource type="PackedScene" path="res://src/tower/rooms/TowerStartRoom.tscn" id="7"]
 [ext_resource type="Script" path="res://src/tower/maps/TowerClimb.gd" id="8"]
-[ext_resource type="TileSet" uid="uid://5avd3m2aroxa" path="res://addons/reptile/tilesets/coldfire/ColdFireYellow.tres" id="8_f0yt2"]
 [ext_resource type="Script" path="res://addons/reptile/ReptileGroup.gd" id="9"]
-[ext_resource type="TileSet" uid="uid://bat0oor02xfha" path="res://addons/reptile/tilesets/coldfire/ColdFireDark.tres" id="9_6dh30"]
-[ext_resource type="TileSet" uid="uid://dljr6o7d1o1oi" path="res://addons/reptile/tilesets/coldfire/ColdFireBlue.tres" id="9_oay3l"]
-[ext_resource type="Script" path="res://src/tower/tiles/DarkTile.gd" id="10_sf85l"]
 [ext_resource type="PackedScene" path="res://src/gunner/targets/BreakTheTargets.tscn" id="11"]
 
 [node name="TowerClimb" type="Node2D"]
@@ -42,18 +38,13 @@ lower_bound = 0.7
 color = Color(0.356863, 0.462745, 0.552941, 1)
 tilemap_scene = ExtResource("6")
 
-[node name="BlueTile" type="TileMap" parent="TowerStartRoom" groups=["bluetile"] instance=ExtResource("6_mbcbv")]
+[node name="BlueTile" parent="TowerStartRoom" instance=ExtResource("6_mbcbv")]
 scale = Vector2(2, 2)
-tile_set = ExtResource("9_oay3l")
 format = 2
 
-[node name="YellowTile" type="TileMap" parent="TowerStartRoom" groups=["yellowtile"] instance=ExtResource("4")]
+[node name="YellowTile" parent="TowerStartRoom" instance=ExtResource("4")]
 scale = Vector2(2, 2)
-tile_set = ExtResource("8_f0yt2")
 format = 2
 
-[node name="DarkTile" type="TileMap" parent="TowerStartRoom" groups=["darktile"] instance=ExtResource("6")]
+[node name="DarkTile" parent="TowerStartRoom" instance=ExtResource("6")]
 scale = Vector2(2, 2)
-tile_set = ExtResource("9_6dh30")
-format = 2
-script = ExtResource("10_sf85l")

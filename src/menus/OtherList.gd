@@ -3,10 +3,6 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		"label": "Navi Menu Test",
-		"nav_to": "res://test/unit/navi/NaviButtonListTest.tscn",
-	},
-	{
 		"label": "Clawe Dashboard",
 		"nav_to": "res://src/clawe/ClaweDashboard.tscn",
 	},

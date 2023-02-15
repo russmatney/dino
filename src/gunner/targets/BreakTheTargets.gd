@@ -13,13 +13,11 @@ signal targets_cleared
 
 
 func _ready():
-	print("BTT: _ready")
 	# defer until everything has hit the scene tree
 	call_deferred("setup")
 
 
 func setup():
-	print("BTT: setup")
 	var players = get_tree().get_nodes_in_group("player")
 	if players:
 		player = players[0]
@@ -43,10 +41,11 @@ func find_hud():
 		hud = huds[0]
 
 	if hud:
-		print("[BREAK THE TARGETS] found hud and targets: ", targets.size())
+		# print("[BREAK THE TARGETS] found hud and targets: ", targets.size())
 		hud.update_targets_remaining(targets.size())
 	else:
-		print("[BREAK THE TARGETS] no hud found")
+		pass
+		# print("[BREAK THE TARGETS] no hud found")
 
 
 var wait_for = 5
