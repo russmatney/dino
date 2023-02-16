@@ -7,7 +7,8 @@ extends AnimatableBody2D
 @export var initial_state = "closed" :
 	set(new_state):
 		initial_state = new_state
-		set_new_state(new_state)
+		if scene_ready:
+			set_new_state(new_state)
 
 func set_new_state(new_state):
 	if new_state == "open":
@@ -15,8 +16,11 @@ func set_new_state(new_state):
 	elif new_state == "closed":
 		set_closed()
 
+var scene_ready
+
 func _ready():
 	call_deferred("setup")
+	scene_ready = true
 
 func setup():
 	set_new_state(initial_state)

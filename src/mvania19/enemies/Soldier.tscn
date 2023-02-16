@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dycyi1m0w17sl"]
+
+[ext_resource type="Script" path="res://src/mvania19/enemies/Soldier.gd" id="1_ca64f"]
+[ext_resource type="SpriteFrames" uid="uid://bk18wq80s2nw6" path="res://src/mvania19/enemies/SoldierSpriteFrames.tres" id="1_cvejl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37lm3"]
+radius = 6.0
+height = 18.0
+
+[node name="Soldier" type="CharacterBody2D"]
+script = ExtResource("1_ca64f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_37lm3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = ExtResource("1_cvejl")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.258015
