@@ -1,0 +1,44 @@
+[gd_scene load_steps=11 format=3 uid="uid://clbavwp8d3bv5"]
+
+[ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/01Entrance.tscn" id="1_vpwkf"]
+[ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/02MainTower.tscn" id="2_kip2h"]
+[ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/03FirstSnowMan.tscn" id="3_lq2ff"]
+[ext_resource type="PackedScene" uid="uid://be6mwtbfu4hyi" path="res://src/mvania19/maps/04SecondSnowman.tscn" id="4_kj05g"]
+[ext_resource type="PackedScene" uid="uid://d3s1p28e36maj" path="res://src/mvania19/maps/05Crossroads.tscn" id="5_qqhvm"]
+[ext_resource type="PackedScene" uid="uid://cluqdo14cnme5" path="res://src/mvania19/maps/06BossChamber.tscn" id="6_xa5kp"]
+[ext_resource type="PackedScene" uid="uid://b8w55flpfieoq" path="res://src/mvania19/maps/07ThirdSnowman.tscn" id="7_fl3ue"]
+[ext_resource type="PackedScene" uid="uid://d2lmsou7x7sgy" path="res://src/mvania19/maps/08DownTower.tscn" id="8_umldl"]
+[ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/09Elevator.tscn" id="9_pjsu1"]
+[ext_resource type="PackedScene" uid="uid://bnosf7eta2ht5" path="res://src/mvania19/player/Monster.tscn" id="10_tjgng"]
+
+[node name="Area01MapEditor" type="Node2D"]
+
+[node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
+position = Vector2(136, -16)
+
+[node name="02MainTower" parent="." instance=ExtResource("2_kip2h")]
+position = Vector2(-40, -40)
+
+[node name="03FirstSnowMan" parent="." instance=ExtResource("3_lq2ff")]
+position = Vector2(-152, 0)
+
+[node name="04SecondSnowman" parent="." instance=ExtResource("4_kj05g")]
+position = Vector2(72, -176)
+
+[node name="05Crossroads" parent="." instance=ExtResource("5_qqhvm")]
+position = Vector2(-152, -128)
+
+[node name="06BossChamber" parent="." instance=ExtResource("6_xa5kp")]
+position = Vector2(-200, -232)
+
+[node name="07ThirdSnowman" parent="." instance=ExtResource("7_fl3ue")]
+position = Vector2(-400, -224)
+
+[node name="08DownTower" parent="." instance=ExtResource("8_umldl")]
+position = Vector2(-240, -40)
+
+[node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
+position = Vector2(-168, 104)
+
+[node name="Monster" parent="." instance=ExtResource("10_tjgng")]
+position = Vector2(200, -32)
