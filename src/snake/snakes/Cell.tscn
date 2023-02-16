@@ -1,20 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://bs1xc80vqjc7p"]
 
-[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="FontFile" id=1]
-[ext_resource path="res://src/snake/SquashStetchShader.tres" type="Shader" id=2]
-[ext_resource path="res://assets/sprites/coldfire_squares.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://src/snake/snakes/Cell.gd" type="Script" id=4]
+[ext_resource type="Shader" uid="uid://b2njpwm1kqmiu" path="res://src/snake/SquashStetchShader.tres" id="2"]
+[ext_resource type="SpriteFrames" uid="uid://xpnnqhjngtr" path="res://assets/sprites/coldfire_squares.tres" id="3"]
+[ext_resource type="Script" path="res://src/snake/snakes/Cell.gd" id="4"]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/deformation = Vector2( 0, 0 )
+shader = ExtResource("2")
+shader_parameter/deformation = Vector2(0, 0)
 
 [node name="Cell" type="AnimatedSprite2D" groups=["cells"]]
-material = SubResource( 1 )
-sprite_frames = ExtResource( 3 )
-animation = "enemyhead"
-script = ExtResource( 4 )
+material = SubResource("1")
+sprite_frames = ExtResource("3")
+animation = &"enemyhead"
+script = ExtResource("4")
 
 [node name="Coord" type="Label" parent="."]
 visible = false
@@ -22,8 +21,7 @@ offset_left = -3.0
 offset_top = -4.0
 offset_right = 21.0
 offset_bottom = 9.0
-scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 1 )
+scale = Vector2(0.2, 0.2)
 text = "(0, 0)"
 
 [node name="Position" type="Label" parent="."]
@@ -32,8 +30,7 @@ offset_left = -3.0
 offset_top = -1.0
 offset_right = 21.0
 offset_bottom = 12.0
-scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 1 )
+scale = Vector2(0.2, 0.2)
 text = "(0, 0)"
 
 [node name="GlobalPosition" type="Label" parent="."]
@@ -42,6 +39,5 @@ offset_left = -3.0
 offset_top = 1.0
 offset_right = 21.0
 offset_bottom = 14.0
-scale = Vector2( 0.2, 0.2 )
-custom_fonts/font = ExtResource( 1 )
+scale = Vector2(0.2, 0.2)
 text = "(0, 0)"

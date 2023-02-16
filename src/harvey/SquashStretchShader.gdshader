@@ -8,7 +8,7 @@ void vertex() {
 	vec2 deformationStrength = abs(deformation);
 	float sideWaysDeformation = min(deformationStrength.x, deformationStrength.y);
 	float spriteWidth = abs(VERTEX.x);
-	if (sign(VERTEX.y) != sign(deformation.y)) {
+	if (abs(sign(VERTEX.y) - sign(deformation.y)) < 0.0001) {
 		VERTEX.x += sideWaysDeformation * sideWaysDeformationFactor * spriteWidth * sign(deformation.x);
 	}
 	vec2 scale = 1.0 - deformationStrength;

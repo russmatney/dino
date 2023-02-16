@@ -24,9 +24,9 @@ func should_inc_juice():
 
 
 func bounce_in():
-	var og_def = material.get("shader_param/deformation")
+	var og_def = material.get_shader_parameter("deformation")
 	var def_scale = Vector2.ONE * 2.0
-	material.set("shader_param/deformation", def_scale)
+	material.set_shader_param("deformation", def_scale)
 	var duration = 0.5
 	var reset_duration = 1.0
 
@@ -39,7 +39,7 @@ func bounce_in():
 	)
 
 func deform(def=Vector2(0.9, 0.9)):
-	material.set("shader_param/deformation", def)
+	material.set_shader_param("deformation", def)
 
 func bounce(dir):
 	animate_deformation(dir)
@@ -49,7 +49,7 @@ func animate_deformation(direction):
 	var reset_duration = 0.2
 	var def_scale_factor = 0.4
 
-	var og_def = material.get("shader_param/deformation")
+	var og_def = material.get_shader_param("deformation")
 	var def_scale = direction * def_scale_factor
 
 	var tween = create_tween()

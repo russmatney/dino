@@ -12,6 +12,7 @@ func _ready():
 	# overwrite parent speed
 	speed = 70
 
+	super._ready()
 
 #########################################################
 # process

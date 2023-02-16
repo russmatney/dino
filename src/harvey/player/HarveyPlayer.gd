@@ -9,6 +9,7 @@ extends CharacterBody2D
 
 func _ready():
 	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.start()
 
 
 ############################################################

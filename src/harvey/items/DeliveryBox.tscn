@@ -1,65 +1,54 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://dr8e3mcxgjxah"]
 
-[ext_resource path="res://assets/harvey/seed-box_sheet.png" type="Texture2D" id=1]
-[ext_resource path="res://src/harvey/items/DeliveryBox.gd" type="Script" id=2]
-[ext_resource path="res://src/harvey/SquashStretchShader.gdshader" type="Shader" id=3]
-[ext_resource path="res://src/harvey/ActionLabelTheme.tres" type="Theme" id=4]
+[ext_resource type="Script" path="res://src/harvey/items/DeliveryBox.gd" id="2"]
+[ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="3"]
+[ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="4"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 30, 23.5 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(60, 47)
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id="5"]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
-shader_param/deformation = Vector2( 0, 0 )
-shader_param/sideWaysDeformationFactor = 5.0
-shader_param/knockbackFactor = 0.4
+shader = ExtResource("3")
+shader_parameter/deformation = Vector2(0, 0)
+shader_parameter/sideWaysDeformationFactor = 5.0
+shader_parameter/knockbackFactor = 0.4
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 32 )
+[sub_resource type="SpriteFrames" id="3"]
+animations = []
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"sprite_frames": [ SubResource( 2 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 64, 28 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(128, 56)
 
 [node name="DeliveryBox" type="StaticBody2D" groups=["poi"]]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -46.5 )
-shape = SubResource( 1 )
+position = Vector2(0, -46.5)
+shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource( 5 )
-position = Vector2( 0, -40 )
-scale = Vector2( 2, 2 )
-sprite_frames = SubResource( 3 )
+material = SubResource("5")
+position = Vector2(0, -40)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("3")
+animation = &""
 
 [node name="Detectbox" type="Area2D" parent="."]
-position = Vector2( 0, -40 )
+position = Vector2(0, -40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-position = Vector2( 0, 36 )
-shape = SubResource( 4 )
+position = Vector2(0, 36)
+shape = SubResource("4")
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
 offset_left = -32.0
 offset_top = -96.0
 offset_right = 32.0
 offset_bottom = -72.0
-theme = ExtResource( 4 )
+theme = ExtResource("4")
 bbcode_enabled = true
-text = "[center]action[/center]"
 text = "action"
-fit_content_height = true
 scroll_active = false
 
 [connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]

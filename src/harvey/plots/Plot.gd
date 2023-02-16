@@ -10,6 +10,7 @@ var produce_type
 
 func _ready():
 	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.start()
 
 
 func _process(_delta):

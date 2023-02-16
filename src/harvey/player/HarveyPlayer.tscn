@@ -1,37 +1,36 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://c4wk4oavufugc"]
 
-[ext_resource path="res://src/harvey/player/harvey_spriteframes.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/harvey/player/PlayerItem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/harvey/player/Machine.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/harvey/player/HarveyPlayer.gd" type="Script" id=5]
-[ext_resource path="res://addons/core/resources/fonts/debug-info-text.tres" type="FontFile" id=6]
-[ext_resource path="res://resources/sprites/arrow.tres" type="SpriteFrames" id=10]
+[ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/harvey/player/harvey_spriteframes.tres" id="1"]
+[ext_resource type="PackedScene" path="res://src/harvey/player/PlayerItem.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://src/harvey/player/Machine.tscn" id="3"]
+[ext_resource type="Script" path="res://src/harvey/player/HarveyPlayer.gd" id="5"]
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="10"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.5, 13 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(15, 26)
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 192, 128 )
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(384, 256)
 
 [node name="HarveyPlayer" type="CharacterBody2D" groups=["action_detector", "player"]]
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -13 )
-shape = SubResource( 1 )
+position = Vector2(0.5, -13)
+shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2( 0, -16 )
-scale = Vector2( 2, 2 )
-sprite_frames = ExtResource( 1 )
-animation = "run"
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("1")
+animation = &"run"
 frame = 3
-playing = true
 
-[node name="Machine" parent="." instance=ExtResource( 3 )]
+[node name="Machine" parent="." instance=ExtResource("3")]
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 visible = false
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -40,14 +39,12 @@ offset_left = -20.0
 offset_top = -57.0
 offset_right = 20.0
 offset_bottom = -41.0
-custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
 text = "state"
-text = "state"
-fit_content_height = true
 scroll_active = false
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -56,22 +53,20 @@ offset_left = -32.0
 offset_top = -42.0
 offset_right = 32.0
 offset_bottom = -26.0
-custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
-fit_content_height = true
 scroll_active = false
 
-[node name="Item" parent="." instance=ExtResource( 2 )]
+[node name="Item" parent="." instance=ExtResource("2")]
 
 [node name="ActionDetector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 visible = false
-shape = SubResource( 3 )
+shape = SubResource("3")
 
 [node name="ActionArrow" type="AnimatedSprite2D" parent="."]
-position = Vector2( 0, -16 )
-sprite_frames = ExtResource( 10 )
+position = Vector2(0, -16)
+sprite_frames = ExtResource("10")
 
 [connection signal="area_entered" from="ActionDetector" to="." method="_on_ActionDetector_area_entered"]
 [connection signal="area_exited" from="ActionDetector" to="." method="_on_ActionDetector_area_exited"]

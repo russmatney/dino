@@ -7,6 +7,8 @@ uniform float size = 0.3;
 uniform float thickness = 0.1;
 uniform float color_offset = 0.01;
 
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
 void fragment() {
 	float ratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
 

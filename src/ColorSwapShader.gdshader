@@ -1,7 +1,5 @@
 shader_type canvas_item;
 
-// uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-
 uniform vec4 original_0: source_color;
 uniform vec4 original_1: source_color;
 uniform vec4 original_2: source_color;
