@@ -24,7 +24,7 @@ var zoom_offset_previous
 var zoom_offset_increment = 150
 var zoom_duration = 0.2
 var min_zoom = 0.2
-var max_zoom = 4.0
+var max_zoom = 9.0
 
 ###########################################################################
 # ready
@@ -132,7 +132,8 @@ func zoom_dir(dir, n = null):
 			zoom_level -= zoom_increment * n
 			zoom_offset -= zoom_offset_increment * n
 
-	Cam.prn("Zoom update. level: ", zoom_level, " offset: ", zoom_offset)
+	if zoom_level >= max_zoom or zoom_level <= min_zoom:
+		Cam.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
