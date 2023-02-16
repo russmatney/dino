@@ -139,8 +139,7 @@ func set_pause_menu(path):
 
 
 func _unhandled_input(event):
-	# Navi implying Trolly dep
-	if Trolley.is_pause(event):
+	if not Engine.is_editor_hint() and Trolley.is_pause(event):
 		Navi.toggle_pause()
 
 

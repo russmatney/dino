@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://btgfyldjmtu8t"]
+
+[ext_resource type="SpriteFrames" uid="uid://dfrbf5ohm2fct" path="res://src/mvania19/entities/DoorSpriteFrames.tres" id="1_5m0uh"]
+[ext_resource type="Script" path="res://src/mvania19/entities/Door.gd" id="1_arj2e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1rxf"]
+size = Vector2(30, 31)
+
+[node name="Door" type="AnimatableBody2D"]
+script = ExtResource("1_arj2e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_y1rxf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_5m0uh")
+animation = &"closed"

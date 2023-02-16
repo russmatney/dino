@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c30amgff0b623"]
+[gd_scene load_steps=6 format=3 uid="uid://c30amgff0b623"]
 
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_8u5qq"]
 [ext_resource type="PackedScene" uid="uid://bnosf7eta2ht5" path="res://src/mvania19/player/Monster.tscn" id="2_8pwd8"]
+[ext_resource type="PackedScene" uid="uid://ir4k1eniloe7" path="res://src/mvania19/entities/Box.tscn" id="3_s7p3q"]
+[ext_resource type="PackedScene" uid="uid://d2stcxgxdvkkw" path="res://src/mvania19/entities/TreasureBox.tscn" id="4_vlxbf"]
+[ext_resource type="PackedScene" uid="uid://btgfyldjmtu8t" path="res://src/mvania19/entities/Door.tscn" id="5_apdpi"]
 
 [node name="DemoMap" type="Node2D"]
 
@@ -11,3 +14,23 @@ layer_0/tile_data = PackedInt32Array(-655374, 65537, 3, -589838, 131073, 2, -524
 
 [node name="Monster" parent="." instance=ExtResource("2_8pwd8")]
 position = Vector2(-4, -2)
+
+[node name="Box" parent="." instance=ExtResource("3_s7p3q")]
+position = Vector2(-410, 24)
+
+[node name="Box2" parent="." instance=ExtResource("3_s7p3q")]
+position = Vector2(-374, 24)
+initial_anim = "idlealt"
+
+[node name="Box3" parent="." instance=ExtResource("3_s7p3q")]
+position = Vector2(-301, 0)
+
+[node name="Box4" parent="." instance=ExtResource("3_s7p3q")]
+position = Vector2(-395, -40)
+initial_anim = "idlealt"
+
+[node name="TreasureBox" parent="." instance=ExtResource("4_vlxbf")]
+position = Vector2(-409, -160)
+
+[node name="Door" parent="." instance=ExtResource("5_apdpi")]
+position = Vector2(0, -96)
