@@ -14,7 +14,6 @@ func enter(ctx={}):
 
 	if "coyote_time" in ctx:
 		coyote_ttj = coyote_time_t
-		print("coyote time begins")
 	else:
 		coyote_ttj = null
 
@@ -27,7 +26,6 @@ func physics_process(delta):
 			if Input.is_action_just_pressed("jump"):
 				machine.transit("Jump")
 		else:
-			print("coyote time over")
 			coyote_ttj = null
 
 	# gravity
@@ -46,7 +44,6 @@ func physics_process(delta):
 	# move back to idle
 	if actor.is_on_floor():
 		var fall_speed = vel_before_coll.y
-		print("fall_speed was: ", fall_speed)
 
 		var filtered = fall_shake_thresholds.filter(func(thresh): return fall_speed >= thresh["threshold"])
 		filtered.sort_custom(func(a, b): return a["threshold"] >= b["threshold"])

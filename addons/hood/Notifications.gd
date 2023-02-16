@@ -3,18 +3,16 @@ extends VBoxContainer
 
 var scene_ready
 
-@export var add_notif = "Some new notification" :
+@export var add_notif = "" :
 	set(txt):
 		add_notif = txt
-		print("setting notif: ", txt)
-		if scene_ready:
+		if txt and scene_ready:
 			new_notification({"msg": txt})
 
-@export var add_rich_notif = "Some rich notification" :
+@export var add_rich_notif = "" :
 	set(txt):
 		add_rich_notif = txt
-		print("setting notif: ", txt)
-		if scene_ready:
+		if txt and scene_ready:
 			new_notification({"msg": txt, "rich": true})
 
 func _ready():
