@@ -35,20 +35,13 @@ func _physics_process(_delta):
 ###########################################################################
 # facing
 
-var facing
-
-func update_h_flip(node):
-	if facing == "right" and look_point.position.x < 0:
-		look_point.position.x = -look_point.position.x
-	elif facing == "left" and look_point.position.x > 0:
-		look_point.position.x = -look_point.position.x
-
 func face_right():
-	facing = "right"
-	anim.flip_h = false
-	update_h_flip(look_point)
+	anim.flip_h = true
+	if look_point.position.x < 0:
+		look_point.position.x = -look_point.position.x
 
 func face_left():
-	facing = "left"
-	anim.flip_h = true
-	update_h_flip(look_point)
+	anim.flip_h = false
+
+	if look_point.position.x > 0:
+		look_point.position.x = -look_point.position.x

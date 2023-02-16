@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://5gqanim0mpxo"]
+
+[ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_4gwu2"]
+[ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="2_xytd2"]
+[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_gkuma"]
+[ext_resource type="Script" path="res://src/mvania19/player/machine/Idle.gd" id="4_orod7"]
+[ext_resource type="Script" path="res://src/mvania19/player/machine/Run.gd" id="5_x7a41"]
+[ext_resource type="Script" path="res://src/mvania19/player/machine/Jump.gd" id="6_bmft5"]
+[ext_resource type="Script" path="res://src/mvania19/player/machine/Fall.gd" id="7_kiwfr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
+radius = 3.8
+height = 12.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_4gwu2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_fy5s5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_xytd2")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="LookPoint" type="Marker2D" parent="." groups=["pof"]]
+position = Vector2(-48, 0)
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("3_gkuma")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("4_orod7")
+
+[node name="Run" type="Node" parent="Machine"]
+script = ExtResource("5_x7a41")
+
+[node name="Jump" type="Node" parent="Machine"]
+script = ExtResource("6_bmft5")
+
+[node name="Fall" type="Node" parent="Machine"]
+script = ExtResource("7_kiwfr")
