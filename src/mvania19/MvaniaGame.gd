@@ -142,6 +142,8 @@ func update_current_rooms():
 			current_room = room
 		else:
 			room.set_visible(false)
+			# maybe want a cleanup here to clear bullets and things
+			room.pause()
 
 	if current_room:
 		current_room.set_visible(true)
