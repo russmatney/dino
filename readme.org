@@ -25,6 +25,18 @@ tools across games. This repo is a sandbox for experimenting with new game and
 addon ideas.
 
 * Games
+** Mvania 19
+A work-in-progress for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
+
+Play the latest version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
+
+See ~src/mvania19/*~ for the code.
+** Snake
+A rough prototype for [[https://itch.io/jam/gdb-juice-jam-ii][Juice Jam 2]].
+
+Play the latest version here: [[https://russmatney.itch.io/snake][russmatney.itch.io/snake]]
+
+See ~src/snake/*~ for the code.
 ** Tower
 A Jetpack-fueled mess of propulsion in some generated tilemaps.
 
