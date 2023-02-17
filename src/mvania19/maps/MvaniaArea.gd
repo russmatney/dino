@@ -34,7 +34,7 @@ func draw_room_outline(room: MvaniaRoom):
 
 
 ###########################################################
-# ready
+# persist
 
 func persist_area():
 	MvaniaGame.persist_area(self)
@@ -44,14 +44,38 @@ func persist_area():
 		prn(MvaniaGame.get_area_data(self))
 
 ###########################################################
+# set room data
+
+func set_room_data():
+	ensure_rooms()
+	for room in rooms:
+		room.room_data = MvaniaGame.get_room_data(self, room)
+
+###########################################################
+# spawn coords
+
+func player_spawn_coords() -> Vector2:
+	ensure_rooms()
+
+	var markers = get_tree().get_nodes_in_group("player_spawn_points")
+
+	for mark in markers:
+		# if mark something or other, use last checkpoint
+		return mark.global_position
+
+	prn("[WARN] no parent_spawn_points found, returning (0, 0)")
+	return Vector2.ZERO
+
+###########################################################
 # ready
 
 func _ready():
 	pause_rooms()
 
-	if Engine.is_editor_hint():
+	if MvaniaGame.get_area_data(self) == null:
 		persist_area()
 
+	set_room_data()
 
 ###########################################################
 # draw

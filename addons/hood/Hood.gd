@@ -12,6 +12,7 @@ func prn(msg, msg2=null, msg3=null):
 
 func _ready():
 	print("<Hood> autoload ready")
+	Hood.call_deferred("find_player")
 
 ###########################################################################
 # config
@@ -84,6 +85,10 @@ var player_group = "player"
 
 
 func find_player():
+	if player:
+		emit_signal("found_player", player)
+		return
+
 	var ps = get_tree().get_nodes_in_group(player_group)
 
 	if ps.size() > 1:

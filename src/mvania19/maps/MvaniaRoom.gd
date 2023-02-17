@@ -2,8 +2,10 @@
 class_name MvaniaRoom
 extends Node2D
 
-func prn(msg, msg2=null, msg3=null):
-	if msg3:
+func prn(msg, msg2=null, msg3=null, msg4=null):
+	if msg4:
+		print("[MvaniaRoom ", name, "]: ", msg, msg2, msg3, msg4)
+	elif msg3:
 		print("[MvaniaRoom ", name, "]: ", msg, msg2, msg3)
 	elif msg2:
 		print("[MvaniaRoom ", name, "]: ", msg, msg2)
@@ -73,10 +75,14 @@ func to_room_data(room=self):
 ###########################################
 # ready
 
-var room_data
+var room_data : Dictionary :
+	set(data):
+		room_data = data
 
 func _ready():
-	print("Room ready: ", name, " ", tilemap_rect(), " ", used_rect(), " ", used_rect().end)
+	prn("Room ready: ", used_rect(), " ", used_rect().end)
+	if len(room_data):
+		prn("room data: ", room_data)
 
 ###########################################
 # pause
