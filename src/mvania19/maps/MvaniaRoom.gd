@@ -137,7 +137,7 @@ func _ready():
 # pause
 
 func pause():
-	set_process(false)
+	process_mode = PROCESS_MODE_DISABLED
 
 func unpause():
-	set_process(true)
+	process_mode = PROCESS_MODE_INHERIT
