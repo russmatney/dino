@@ -113,9 +113,11 @@ func add_room_box():
 
 func _on_room_entered(body: Node2D):
 	prn("body entered", body)
+	MvaniaGame.update_current_rooms()
 
 func _on_room_exited(body: Node2D):
 	prn("body exited", body)
+	MvaniaGame.update_current_rooms()
 
 ###########################################
 # ready

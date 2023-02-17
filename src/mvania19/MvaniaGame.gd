@@ -110,21 +110,28 @@ func spawn_player():
 	player.player_data = player_data
 	Navi.add_child_to_current(player)
 
+func find_current_area():
+	# this should only happen in dev-mode, when running an area in isolation
+	for c in get_tree().get_root().get_children():
+		if c is MvaniaArea:
+			current_area = c
+			prn("[WARN] manually setting current_area")
+
 func _on_player_found(p):
 	if not player:
 		player = p
 
-	prn("player found, hiding other rooms")
+	update_current_rooms()
 
+
+func update_current_rooms():
+	# we could pass the 'entered' room in here, may be faster
 	if not current_area:
-		for c in get_tree().get_root().get_children():
-			if c is MvaniaArea:
-				current_area = c
-				# this should only happen in dev-mode
-				prn("[WARN] manually setting current_area")
+		find_current_area()
 
 	if len(current_area.rooms) == 0:
 		prn("[WARN] Zero current area rooms.")
+		return
 
 	for room in current_area.rooms:
 		var rect = room.used_rect()
