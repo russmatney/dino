@@ -73,6 +73,48 @@ func to_room_data(room=self):
 		}
 
 ###########################################
+# room_box
+
+var room_box
+
+func add_room_box():
+	# room rect
+	var rect = used_rect()
+
+	# shape
+	var shape = RectangleShape2D.new()
+	shape.size = rect.size
+
+	# collision shape
+	var coll = CollisionShape2D.new()
+	coll.set_shape(shape)
+	coll.position = rect.position + (rect.size / 2.0)
+
+	# area2D
+	room_box = Area2D.new()
+	room_box.add_child(coll)
+	room_box.name = "RoomBox"
+	room_box.set_collision_layer_value(1, false)
+	room_box.set_collision_mask_value(1, false)
+	room_box.set_collision_mask_value(2, true) # 2 for player
+
+	# room_box.set_visible(false)
+
+	# signals
+	room_box.body_entered.connect(_on_room_entered)
+	room_box.body_exited.connect(_on_room_exited)
+
+	# add child, set owner
+	add_child(room_box)
+	room_box.set_owner(self)
+
+func _on_room_entered(body: Node2D):
+	prn("body entered", body)
+
+func _on_room_exited(body: Node2D):
+	prn("body exited", body)
+
+###########################################
 # ready
 
 var room_data : Dictionary :
@@ -83,6 +125,8 @@ func _ready():
 	prn("Room ready: ", used_rect(), " ", used_rect().end)
 	if len(room_data):
 		prn("room data: ", room_data)
+
+	add_room_box()
 
 ###########################################
 # pause
