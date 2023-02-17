@@ -8,6 +8,8 @@ radius = 6.0
 height = 18.0
 
 [node name="Soldier" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 5
 script = ExtResource("1_ca64f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

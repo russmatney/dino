@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var look_point = $LookPoint
 @onready var machine = $Machine
 
+var player_data
+
 ###########################################################################
 # ready
 
@@ -11,6 +13,10 @@ func _ready():
 	Cam.ensure_camera(2)
 	Hood.ensure_hud()
 	machine.start()
+
+	if player_data and len(player_data):
+		print("player_data: ", player_data)
+		# TODO merge
 
 ###########################################################################
 # movement

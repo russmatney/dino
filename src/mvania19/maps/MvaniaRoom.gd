@@ -78,6 +78,7 @@ func to_room_data(room=self):
 var room_box
 
 func add_room_box():
+	# TODO maybe clear any existing room_box
 	# room rect
 	var rect = used_rect()
 
