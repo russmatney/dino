@@ -57,7 +57,23 @@ func used_rect() -> Rect2:
 	return r
 
 ###########################################
+# persisted
+
+func to_room_data(room=self):
+	return {
+		"name": room.name,
+		"scene_file_path": room.scene_file_path,
+		"position": room.position,
+		"rect": room.used_rect(),
+		# TODO player spawn points
+		# TODO enemies spawns/data
+		# TODO pickup spawns/data
+		}
+
+###########################################
 # ready
+
+var room_data
 
 func _ready():
 	print("Room ready: ", name, " ", tilemap_rect(), " ", used_rect(), " ", used_rect().end)

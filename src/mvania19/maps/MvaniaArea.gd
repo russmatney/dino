@@ -37,32 +37,17 @@ func draw_room_outline(room: MvaniaRoom):
 # ready
 
 func persist_area():
-	ensure_rooms()
-	if len(rooms) == 0:
-		prn("[ERR] No rooms!")
-		return
-
 	MvaniaGame.persist_area(self)
 
-	for r in rooms:
-		var room_data = {
-			"name": r.name,
-			"scene_file_path": r.scene_file_path,
-			"position": r.position,
-			"rect": r.used_rect(),
-			}
-
-		MvaniaGame.persist_room_data(self, room_data)
-
-	prn("Persisted rooms data: \n")
-	prn(MvaniaGame.get_rooms_data(self))
+	if Engine.is_editor_hint():
+		prn("Persisted area data: \n")
+		prn(MvaniaGame.get_area_data(self))
 
 ###########################################################
 # ready
 
 func _ready():
-	if not Engine.is_editor_hint():
-		pause_rooms()
+	pause_rooms()
 
 	if Engine.is_editor_hint():
 		persist_area()
