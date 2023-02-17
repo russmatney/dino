@@ -69,22 +69,24 @@ func _deferred_goto_scene(path_or_packed_scene):
 	# It is now safe to remove_at the current scene
 	current_scene.free()
 
-	# Load the new scene.
-	var s
-	if path_or_packed_scene is String:
-		s = ResourceLoader.load(path_or_packed_scene)
-	else:
-		s = path_or_packed_scene
+	pp("Instancing new scene: ", path_or_packed_scene)
 
-	# Instance the new scene.
-	pp("Instancing new scene: ", s)
-	current_scene = s.instantiate()
-	pp("Current scene: ", current_scene)
+	var next_scene
+	if path_or_packed_scene is String:
+		var s = ResourceLoader.load(path_or_packed_scene)
+		next_scene = s.instantiate()
+	elif path_or_packed_scene is PackedScene:
+		next_scene = path_or_packed_scene.instantiate()
+	else:
+		# assuming it is already instantiated
+		next_scene = path_or_packed_scene
+
+	current_scene = next_scene
+	pp("New current_scene: ", current_scene)
 	emit_signal("new_scene_instanced", current_scene)
 
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().set_current_scene(current_scene)
 

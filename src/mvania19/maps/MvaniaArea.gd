@@ -57,7 +57,7 @@ func set_room_data():
 func player_spawn_coords() -> Vector2:
 	ensure_rooms()
 
-	var markers = get_tree().get_nodes_in_group("player_spawn_points")
+	var markers = Util.get_children_in_group(self, "player_spawn_points")
 
 	for mark in markers:
 		# if mark something or other, use last checkpoint
@@ -65,6 +65,20 @@ func player_spawn_coords() -> Vector2:
 
 	prn("[WARN] no parent_spawn_points found, returning (0, 0)")
 	return Vector2.ZERO
+
+## removes any player nodes attached to areas and rooms
+## these are added during development and _should_ be cleaned up
+## but here's a just-in-case fix
+func drop_player():
+	for c in get_children():
+		if c is MvaniaRoom:
+			for d in c.get_children():
+				if d.is_in_group("player"):
+					d.free()
+
+		if c.is_in_group("player"):
+			c.free()
+
 
 ###########################################################
 # ready

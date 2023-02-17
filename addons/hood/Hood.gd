@@ -12,7 +12,6 @@ func prn(msg, msg2=null, msg3=null):
 
 func _ready():
 	print("<Hood> autoload ready")
-	Hood.call_deferred("find_player")
 
 ###########################################################################
 # config
@@ -42,6 +41,7 @@ func ensure_hud(hud_preload=null):
 	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
+	Hood.call_deferred("find_player")
 
 signal hud_ready
 

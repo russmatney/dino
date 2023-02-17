@@ -137,7 +137,9 @@ func _ready():
 # pause
 
 func pause():
-	process_mode = PROCESS_MODE_DISABLED
+	if not Engine.is_editor_hint():
+		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
 func unpause():
-	process_mode = PROCESS_MODE_INHERIT
+	if not Engine.is_editor_hint():
+		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)

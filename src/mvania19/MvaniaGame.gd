@@ -78,17 +78,25 @@ var current_room: MvaniaRoom
 
 func restart_game():
 	recreate_db()
+
+	# consider better logic here
 	current_area_name = area_db.keys()[0]
 
-	load_area()
-	spawn_player()
-
-	Navi.nav_to(current_area)
-
-func load_area():
-	# unload current area?
+	# unload current area? Navi takes care of it?
 	var area_data = area_db[current_area_name]
 	current_area = load(area_data["scene_file_path"]).instantiate()
+
+	# bandaid to remove players from areas/rooms
+	current_area.drop_player()
+
+	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
+	Navi.nav_to(current_area)
+
+func _on_new_scene_instanced(s):
+	if s == current_area:
+		# deferring to run after the new scene is set (which is also deferred)
+		create_new_player()
+		Navi.add_child_to_current(player)
 
 
 ###########################################################
@@ -103,12 +111,11 @@ const default_player_data = {
 	}
 var player_data = default_player_data
 
-func spawn_player():
-	var spawn_coords = current_area.player_spawn_point()
+func create_new_player():
+	var spawn_coords = current_area.player_spawn_coords()
 	player = player_scene.instantiate()
 	player.position = spawn_coords
 	player.player_data = player_data
-	Navi.add_child_to_current(player)
 
 func find_current_area():
 	# this should only happen in dev-mode, when running an area in isolation
@@ -118,6 +125,7 @@ func find_current_area():
 			prn("[WARN] manually setting current_area")
 
 func _on_player_found(p):
+	prn("player found")
 	if not player:
 		player = p
 
