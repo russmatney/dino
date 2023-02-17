@@ -2,12 +2,26 @@
 class_name MvaniaRoom
 extends Node2D
 
+func prn(msg, msg2=null, msg3=null):
+	if msg3:
+		print("[MvaniaRoom ", name, "]: ", msg, msg2, msg3)
+	elif msg2:
+		print("[MvaniaRoom ", name, "]: ", msg, msg2)
+	else:
+		print("[MvaniaRoom ", name, "]: ", msg)
+
+###########################################
+# tilemaps
+
 func tilemaps() -> Array[TileMap]:
 	var tmaps: Array[TileMap] = []
 	for c in get_children():
 		if c is TileMap:
 			tmaps.append(c)
 	return tmaps
+
+###########################################
+# rects
 
 func tilemap_rect() -> Rect2i:
 	var tm: TileMap
@@ -42,6 +56,8 @@ func used_rect() -> Rect2:
 
 	return r
 
+###########################################
+# ready
 
 func _ready():
 	print("Room ready: ", name, " ", tilemap_rect(), " ", used_rect(), " ", used_rect().end)

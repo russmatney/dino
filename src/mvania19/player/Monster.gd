@@ -38,10 +38,10 @@ func _physics_process(_delta):
 var facing
 
 func update_h_flip(node):
-	if facing == "right" and look_point.position.x < 0:
-		look_point.position.x = -look_point.position.x
-	elif facing == "left" and look_point.position.x > 0:
-		look_point.position.x = -look_point.position.x
+	if facing == "right" and node.position.x < 0:
+		node.position.x = -node.position.x
+	elif facing == "left" and node.position.x > 0:
+		node.position.x = -node.position.x
 
 func face_right():
 	facing = "right"

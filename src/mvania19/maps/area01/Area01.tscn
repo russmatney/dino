@@ -1,19 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://clbavwp8d3bv5"]
+[gd_scene load_steps=12 format=3 uid="uid://dap3qhxnk5asm"]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MapEditor.gd" id="1_uq5ho"]
-[ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/01Entrance.tscn" id="1_vpwkf"]
-[ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/02MainTower.tscn" id="2_kip2h"]
-[ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/03FirstSnowMan.tscn" id="3_lq2ff"]
-[ext_resource type="PackedScene" uid="uid://be6mwtbfu4hyi" path="res://src/mvania19/maps/04SecondSnowman.tscn" id="4_kj05g"]
-[ext_resource type="PackedScene" uid="uid://d3s1p28e36maj" path="res://src/mvania19/maps/05Crossroads.tscn" id="5_qqhvm"]
-[ext_resource type="PackedScene" uid="uid://cluqdo14cnme5" path="res://src/mvania19/maps/06BossChamber.tscn" id="6_xa5kp"]
-[ext_resource type="PackedScene" uid="uid://b8w55flpfieoq" path="res://src/mvania19/maps/07ThirdSnowman.tscn" id="7_fl3ue"]
-[ext_resource type="PackedScene" uid="uid://d2lmsou7x7sgy" path="res://src/mvania19/maps/08DownTower.tscn" id="8_umldl"]
-[ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/09Elevator.tscn" id="9_pjsu1"]
+[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_j5wm8"]
+[ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
+[ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/area01/02MainTower.tscn" id="2_kip2h"]
+[ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
+[ext_resource type="PackedScene" uid="uid://be6mwtbfu4hyi" path="res://src/mvania19/maps/area01/04SecondSnowman.tscn" id="4_kj05g"]
+[ext_resource type="PackedScene" uid="uid://d3s1p28e36maj" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
+[ext_resource type="PackedScene" uid="uid://cluqdo14cnme5" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
+[ext_resource type="PackedScene" uid="uid://b8w55flpfieoq" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
+[ext_resource type="PackedScene" uid="uid://d2lmsou7x7sgy" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
+[ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
 [ext_resource type="PackedScene" uid="uid://bnosf7eta2ht5" path="res://src/mvania19/player/Monster.tscn" id="10_tjgng"]
 
-[node name="Area01MapEditor" type="Node2D"]
-script = ExtResource("1_uq5ho")
+[node name="Area01" type="Node2D"]
+script = ExtResource("1_j5wm8")
 metadata/_edit_vertical_guides_ = [-152.0, -264.0]
 metadata/_edit_horizontal_guides_ = [-216.0, -128.0]
 
