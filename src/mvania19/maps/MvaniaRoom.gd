@@ -78,7 +78,10 @@ func to_room_data(room=self):
 var room_box
 
 func add_room_box():
-	# TODO maybe clear any existing room_box
+	for c in get_children():
+		if c.name == "RoomBox":
+			c.free()
+
 	# room rect
 	var rect = used_rect()
 
@@ -98,8 +101,7 @@ func add_room_box():
 	room_box.set_collision_layer_value(1, false)
 	room_box.set_collision_mask_value(1, false)
 	room_box.set_collision_mask_value(2, true) # 2 for player
-
-	# room_box.set_visible(false)
+	room_box.set_visible(false)
 
 	# signals
 	room_box.body_entered.connect(_on_room_entered)
