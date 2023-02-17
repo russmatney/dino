@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://clbavwp8d3bv5"]
+[gd_scene load_steps=12 format=3 uid="uid://clbavwp8d3bv5"]
 
+[ext_resource type="Script" path="res://src/mvania19/maps/MapEditor.gd" id="1_uq5ho"]
 [ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/01Entrance.tscn" id="1_vpwkf"]
 [ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/02MainTower.tscn" id="2_kip2h"]
 [ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/03FirstSnowMan.tscn" id="3_lq2ff"]
@@ -12,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bnosf7eta2ht5" path="res://src/mvania19/player/Monster.tscn" id="10_tjgng"]
 
 [node name="Area01MapEditor" type="Node2D"]
+script = ExtResource("1_uq5ho")
+metadata/_edit_vertical_guides_ = [-152.0, -264.0]
+metadata/_edit_horizontal_guides_ = [-216.0, -128.0]
 
 [node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
 position = Vector2(136, -16)
