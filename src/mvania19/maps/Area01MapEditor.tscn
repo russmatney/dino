@@ -18,30 +18,39 @@ metadata/_edit_vertical_guides_ = [-152.0, -264.0]
 metadata/_edit_horizontal_guides_ = [-216.0, -128.0]
 
 [node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
+show_behind_parent = true
 position = Vector2(136, -16)
 
 [node name="02MainTower" parent="." instance=ExtResource("2_kip2h")]
+show_behind_parent = true
 position = Vector2(-40, -40)
 
 [node name="03FirstSnowMan" parent="." instance=ExtResource("3_lq2ff")]
+show_behind_parent = true
 position = Vector2(-152, 0)
 
 [node name="04SecondSnowman" parent="." instance=ExtResource("4_kj05g")]
+show_behind_parent = true
 position = Vector2(72, -176)
 
 [node name="05Crossroads" parent="." instance=ExtResource("5_qqhvm")]
+show_behind_parent = true
 position = Vector2(-152, -128)
 
 [node name="06BossChamber" parent="." instance=ExtResource("6_xa5kp")]
+show_behind_parent = true
 position = Vector2(-200, -232)
 
 [node name="07ThirdSnowman" parent="." instance=ExtResource("7_fl3ue")]
+show_behind_parent = true
 position = Vector2(-400, -224)
 
 [node name="08DownTower" parent="." instance=ExtResource("8_umldl")]
+show_behind_parent = true
 position = Vector2(-240, -40)
 
 [node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
+show_behind_parent = true
 position = Vector2(-168, 104)
 
 [node name="Monster" parent="." instance=ExtResource("10_tjgng")]

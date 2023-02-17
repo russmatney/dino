@@ -34,3 +34,11 @@ func _ready():
 		var used_rect = r.used_rect()
 		prn("used rect: ", used_rect)
 		prn("used rect end: ", used_rect.end)
+
+
+func _draw():
+	for room in rooms:
+		var rect = room.used_rect()
+		rect.position += room.position
+
+		draw_rect(rect, Color.MAGENTA, false, 2.0)
