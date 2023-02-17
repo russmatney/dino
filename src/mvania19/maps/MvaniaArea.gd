@@ -15,24 +15,32 @@ func prn(msg, msg2=null, msg3=null):
 
 var rooms: Array[MvaniaRoom] = []
 
-func collect_rooms():
-	rooms = []
-	for c in get_children():
-		if c is MvaniaRoom:
-			rooms.append(c)
-	prn("found rooms: ", len(rooms))
+func ensure_rooms():
+	if len(rooms) == 0:
+		for c in get_children():
+			if c is MvaniaRoom:
+				rooms.append(c)
+
+func pause_rooms():
+	ensure_rooms()
+	for r in rooms:
+		r.pause()
+	print("paused ", len(rooms), " rooms.")
 
 func draw_room_outline(room: MvaniaRoom):
 	var rect = room.used_rect()
 	rect.position += room.position
 	draw_rect(rect, Color.MAGENTA, false, 2.0)
 
+
 ###########################################################
 # ready
 
-func _ready():
-	prn("ready")
-	collect_rooms()
+func persist_area():
+	ensure_rooms()
+	if len(rooms) == 0:
+		prn("[ERR] No rooms!")
+		return
 
 	MvaniaGame.persist_area(self)
 
@@ -46,12 +54,24 @@ func _ready():
 
 		MvaniaGame.persist_room_data(self, room_data)
 
-	print(MvaniaGame.get_rooms_data(self))
+	prn("Persisted rooms data: \n")
+	prn(MvaniaGame.get_rooms_data(self))
+
+###########################################################
+# ready
+
+func _ready():
+	if not Engine.is_editor_hint():
+		pause_rooms()
+
+	if Engine.is_editor_hint():
+		persist_area()
 
 
 ###########################################################
 # draw
 
 func _draw():
-	for room in rooms:
-		draw_room_outline(room)
+	if Engine.is_editor_hint():
+		for room in rooms:
+			draw_room_outline(room)

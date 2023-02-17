@@ -61,3 +61,12 @@ func used_rect() -> Rect2:
 
 func _ready():
 	print("Room ready: ", name, " ", tilemap_rect(), " ", used_rect(), " ", used_rect().end)
+
+###########################################
+# pause
+
+func pause():
+	set_process(false)
+
+func unpause():
+	set_process(true)
