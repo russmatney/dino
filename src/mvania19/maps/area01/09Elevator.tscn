@@ -12,6 +12,8 @@ layer_0/tile_data = PackedInt32Array(-327687, 1, 0, -262151, 131073, 2, -196615,
 
 [node name="Elevator" parent="." instance=ExtResource("3_0xsm0")]
 position = Vector2(0, 24)
+destination_area_str = "area02/Area02.tscn"
+destination_elevator_path = "Area02/Elevator"
 
 [node name="RoomBox" type="Area2D" parent="."]
 visible = false

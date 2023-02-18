@@ -79,3 +79,6 @@ position = Vector2(24, -8)
 
 [node name="Elevator" parent="." instance=ExtResource("6_2leqq")]
 position = Vector2(0, 16)
+clear = false
+destination_area_str = "area01/Area01.tscn"
+destination_elevator_path = "09Elevator/Elevator"

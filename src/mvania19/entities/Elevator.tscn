@@ -113,10 +113,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Elevator" type="Area2D"]
+[node name="Elevator" type="Area2D" groups=["elevators"]]
 script = ExtResource("1_87cqc")
+destination_area_str = ""
+destination_elevator_path = ""
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["elevators"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2nrn8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
