@@ -77,8 +77,7 @@ func list_areas():
 						if fname.match("*Area0*"):
 							area_paths += file_name.path_join(fname)
 						fname = area_dir.get_next()
-						if fname:
-							area_paths += ","
+						area_paths += ","
 			file_name = maps_dir.get_next()
 	return area_paths
 

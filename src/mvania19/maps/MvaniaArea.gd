@@ -25,7 +25,6 @@ func pause_rooms():
 	ensure_rooms()
 	for r in rooms:
 		r.pause()
-	print("paused ", len(rooms), " rooms.")
 
 func draw_room_outline(room: MvaniaRoom):
 	var rect = room.used_rect()

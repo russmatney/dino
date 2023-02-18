@@ -106,17 +106,13 @@ func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		MvaniaGame.update_current_rooms()
 		visited = true
-
 		MvaniaGame.update_room_data(self)
-		print("updated room data: ", MvaniaGame.get_room_data(self))
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
 		MvaniaGame.update_current_rooms()
 		visited = true
-
 		MvaniaGame.update_room_data(self)
-		print("updated room data: ", MvaniaGame.get_room_data(self))
 
 ###########################################
 # persisted

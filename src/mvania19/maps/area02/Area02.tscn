@@ -77,7 +77,17 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 [node name="Monster" parent="." instance=ExtResource("6_qs8x8")]
 position = Vector2(24, -8)
 
-[node name="Elevator" parent="." instance=ExtResource("6_2leqq")]
+[node name="ToArea01" parent="." instance=ExtResource("6_2leqq")]
 position = Vector2(0, 16)
 destination_area_str = "area01/Area01.tscn"
-destination_elevator_path = "09Elevator/Elevator"
+destination_elevator_path = "09Elevator/ToArea02"
+
+[node name="ToArea04" parent="." instance=ExtResource("6_2leqq")]
+position = Vector2(136, 136)
+destination_area_str = "area04/Area04.tscn"
+destination_elevator_path = "ToArea02"
+
+[node name="ToArea03" parent="." instance=ExtResource("6_2leqq")]
+position = Vector2(492, 152)
+destination_area_str = "area03/Area03.tscn"
+destination_elevator_path = "ToArea02"
