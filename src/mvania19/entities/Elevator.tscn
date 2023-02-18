@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://b18v8a4sg3rak"]
+[gd_scene load_steps=17 format=3 uid="uid://b18v8a4sg3rak"]
 
 [ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://assets/mvania19/door_sheet.png" id="1_6v2w8"]
+[ext_resource type="Script" path="res://src/mvania19/entities/Elevator.gd" id="1_87cqc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2nrn8"]
 size = Vector2(32, 32)
@@ -113,6 +114,7 @@ animations = [{
 }]
 
 [node name="Elevator" type="Area2D"]
+script = ExtResource("1_87cqc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["elevators"]]
 shape = SubResource("RectangleShape2D_2nrn8")
