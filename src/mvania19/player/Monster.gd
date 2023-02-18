@@ -9,9 +9,11 @@ var player_data
 ###########################################################################
 # ready
 
+var hud = preload("res://src/mvania19/hud/HUD.tscn")
+
 func _ready():
 	Cam.ensure_camera(2)
-	Hood.ensure_hud()
+	Hood.call_deferred("ensure_hud", hud)
 	machine.start()
 
 	if player_data and len(player_data):

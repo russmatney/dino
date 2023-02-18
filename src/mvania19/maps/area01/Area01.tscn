@@ -13,8 +13,6 @@
 
 [node name="Area01" type="Node2D"]
 script = ExtResource("1_j5wm8")
-metadata/_edit_vertical_guides_ = [-152.0, -264.0]
-metadata/_edit_horizontal_guides_ = [-216.0, -128.0]
 
 [node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
 show_behind_parent = true
