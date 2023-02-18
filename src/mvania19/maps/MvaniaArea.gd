@@ -46,7 +46,7 @@ func persist_area():
 ###########################################################
 # set room data
 
-func set_room_data():
+func init_room_data():
 	ensure_rooms()
 	for room in rooms:
 		room.room_data = MvaniaGame.get_room_data(self, room)
@@ -57,14 +57,23 @@ func set_room_data():
 func player_spawn_coords() -> Vector2:
 	ensure_rooms()
 
+	if spawn_node_path:
+		var spawn_node = self.get_node(spawn_node_path)
+		print("found spawn node: ", spawn_node)
+		return spawn_node.global_position
+
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
 
 	for mark in markers:
 		# if mark something or other, use last checkpoint
 		return mark.global_position
 
-	prn("[WARN] no parent_spawn_points found, returning (0, 0)")
+	prn("[WARN] no parent_spawn_points or spawn_node found, returning (0, 0)")
 	return Vector2.ZERO
+
+var spawn_node_path
+func set_spawn_node(node_path: NodePath):
+	spawn_node_path = node_path
 
 ## removes any player nodes attached to areas and rooms
 ## these are added during development and _should_ be cleaned up
@@ -89,7 +98,7 @@ func _ready():
 	if MvaniaGame.get_area_data(self) == null:
 		persist_area()
 
-	set_room_data()
+	init_room_data()
 
 ###########################################################
 # draw

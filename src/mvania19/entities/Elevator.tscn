@@ -114,6 +114,8 @@ animations = [{
 }]
 
 [node name="Elevator" type="Area2D" groups=["elevators"]]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_87cqc")
 destination_area_str = ""
 destination_elevator_path = ""

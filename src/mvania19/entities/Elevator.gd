@@ -1,12 +1,31 @@
 @tool
 extends Area2D
 
+###################################################################
+# ready
+
+func _ready():
+	# TODO validate elevator destinations via MvaniaGame startup
+	# there we can load all the areas and make sure elevator destinations can be loaded
+
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
+
+
+###################################################################
+# clear
+
+## Helper to clear the destination area/elevator path
 @export var clear: bool :
 	set(v):
 		clear = v
 		destination_area_str = ""
 		destination_elevator_path = ""
 		notify_property_list_changed()
+
+###################################################################
+# destination vars
+
 var destination_area_str: String :
 	set(v):
 		destination_area_str = v
@@ -21,7 +40,10 @@ var maps_dir_path := "res://src/mvania19/maps"
 func destination_area_full_path():
 	return maps_dir_path.path_join(destination_area_str)
 
-func _get_property_list() -> Array: # Allows to make custom exports
+###################################################################
+# get property list
+
+func _get_property_list() -> Array:
 	var dest_elevator_usage = PROPERTY_USAGE_NO_EDITOR
 	if not destination_area_str == null and len(destination_area_str) > 0:
 		dest_elevator_usage = PROPERTY_USAGE_DEFAULT
@@ -39,7 +61,7 @@ func _get_property_list() -> Array: # Allows to make custom exports
 			hint_string = list_elevator_paths()
 		}]
 
-func list_areas(): # Simply lists the filenames in a folder
+func list_areas():
 	var area_paths = ""
 	var maps_dir := DirAccess.open(maps_dir_path)
 	if maps_dir:
@@ -55,9 +77,8 @@ func list_areas(): # Simply lists the filenames in a folder
 						if fname.match("*Area0*"):
 							area_paths += file_name.path_join(fname)
 						fname = area_dir.get_next()
-						area_paths += ","
-						# if fname:
-						# 	area_paths += ","
+						if fname:
+							area_paths += ","
 			file_name = maps_dir.get_next()
 	return area_paths
 
@@ -76,11 +97,28 @@ func list_elevator_paths():
 
 	var e_paths = ""
 	for e in elevators:
-		e_paths += e.owner.name + "/" + e.name + ","
+		if e.owner.name.match("*Area*"):
+			e_paths += e.name + ","
+		else:
+			e_paths += e.owner.name + "/" + e.name + ","
 
 	return e_paths
 
-func _ready():
-	# TODO validate elevator destinations via MvaniaGame startup
-	# there we can load all the areas and make sure elevator destinations can be loaded
-	pass
+###################################################################
+# travel to destination
+
+func travel():
+	# TODO exit transition
+	print(name, ".travel(): ", destination_area_str, " ", destination_elevator_path)
+	var area_path = destination_area_full_path()
+	MvaniaGame.travel_to_area(area_path, destination_elevator_path)
+
+var travel_action = {label="Travel", fn=travel}
+
+func _on_body_entered(body):
+	if body.is_in_group("player"):
+		body.add_action(travel_action)
+
+func _on_body_exited(body):
+	if body.is_in_group("player"):
+		body.remove_action(travel_action)

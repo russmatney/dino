@@ -63,4 +63,4 @@ show_behind_parent = true
 position = Vector2(-168, 104)
 
 [node name="Monster" parent="." instance=ExtResource("10_tjgng")]
-position = Vector2(200, -32)
+position = Vector2(-208, 96)

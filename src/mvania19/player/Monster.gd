@@ -19,6 +19,24 @@ func _ready():
 		# TODO merge
 
 ###########################################################################
+# _input
+
+func _unhandled_input(event):
+	if Trolley.is_action(event):
+		if len(actions) > 0:
+			var ax = actions[0]
+			ax["fn"].call()
+
+###########################################################################
+# actions
+
+var actions = []
+func add_action(ax):
+	actions.append(ax)
+func remove_action(ax):
+	actions.erase(ax)
+
+###########################################################################
 # movement
 
 const SPEED = 150.0

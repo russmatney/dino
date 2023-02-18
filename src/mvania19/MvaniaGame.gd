@@ -1,8 +1,10 @@
 @tool
 extends Node
 
-func prn(msg, msg2=null, msg3=null):
-	if msg3:
+func prn(msg, msg2=null, msg3=null, msg4=null):
+	if msg4:
+		print("[MvaniaGame]: ", msg, msg2, msg3, msg4)
+	elif msg3:
 		print("[MvaniaGame]: ", msg, msg2, msg3)
 	elif msg2:
 		print("[MvaniaGame]: ", msg, msg2)
@@ -65,6 +67,8 @@ func get_room_data(area, room):
 # ready
 
 func _ready():
+	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
+
 	Hood.hud_ready.connect(_on_hud_ready)
 	Hood.found_player.connect(_on_player_found)
 	if Hood.player:
@@ -80,17 +84,22 @@ var current_room: MvaniaRoom
 func restart_game():
 	recreate_db()
 
-	# consider better logic here
-	current_area_name = area_db.keys()[0]
+	# consider first area selection logic
+	load_area(area_scenes[0])
 
-	# unload current area? Navi takes care of it?
-	var area_data = area_db[current_area_name]
-	current_area = load(area_data["scene_file_path"]).instantiate()
+func load_area(area_scene, spawn_node_path=null):
+	current_area = area_scene.instantiate()
+	current_area_name = current_area.name
+
+	# var area_data = area_db[current_area_name]
+	# current_area.set_area_data(area_data)
+
+	if spawn_node_path:
+		current_area.set_spawn_node(spawn_node_path)
 
 	# bandaid to remove players from areas/rooms
 	current_area.drop_player()
 
-	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 	Navi.nav_to(current_area)
 
 func _on_new_scene_instanced(s):
@@ -168,4 +177,17 @@ func update_current_rooms():
 
 func _on_hud_ready():
 	prn("hud ready")
-	# TODO set current room, area data?
+	# TODO show current room, area data?
+
+###########################################################
+# Area travel
+
+func travel_to_area(dest_area, elevator_path):
+	prn("traveling to area: ", dest_area, " ", elevator_path)
+
+	if current_area.scene_file_path == dest_area:
+		# we're already in the right area
+		print("already in same area?")
+
+	var area = load(dest_area)
+	load_area(area, elevator_path)
