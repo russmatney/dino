@@ -49,7 +49,9 @@ func persist_area():
 func init_room_data():
 	ensure_rooms()
 	for room in rooms:
-		room.room_data = MvaniaGame.get_room_data(self, room)
+		# must be set before fetching room data
+		room.area = self
+		room.room_data = MvaniaGame.get_room_data(room)
 
 ###########################################################
 # spawn coords
@@ -59,7 +61,6 @@ func player_spawn_coords() -> Vector2:
 
 	if spawn_node_path:
 		var spawn_node = self.get_node(spawn_node_path)
-		print("found spawn node: ", spawn_node)
 		return spawn_node.global_position
 
 	var markers = Util.get_children_in_group(self, "player_spawn_points")

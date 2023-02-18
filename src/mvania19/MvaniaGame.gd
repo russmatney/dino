@@ -50,6 +50,9 @@ func persist_area(area):
 	for r in area.rooms:
 		persist_room_data(area, r.to_room_data())
 
+func update_room_data(room):
+	persist_room_data(room.area, room.to_room_data())
+
 func persist_room_data(area, room_data):
 	area_db[area.name]["rooms"][room_data["name"]] = room_data
 
@@ -60,13 +63,16 @@ func get_area_data(area):
 func get_rooms_data(area):
 	return area_db[area.name]["rooms"]
 
-func get_room_data(area, room):
-	return area_db[area.name]["rooms"][room.name]
+func get_room_data(room):
+	return area_db[room.area.name]["rooms"][room.name]
 
 ###########################################################
 # ready
 
 func _ready():
+	if len(area_db) == 0:
+		recreate_db()
+
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
 	Hood.hud_ready.connect(_on_hud_ready)

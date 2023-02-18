@@ -59,26 +59,11 @@ func used_rect() -> Rect2:
 	return r
 
 ###########################################
-# persisted
-
-func to_room_data(room=self):
-	return {
-		"name": room.name,
-		"scene_file_path": room.scene_file_path,
-		"position": room.position,
-		"rect": room.used_rect(),
-		"visited": room.visited,
-		# TODO player spawn points
-		# TODO enemies spawns/data
-		# TODO pickup spawns/data
-		}
-
-###########################################
 # room_box
 
 var room_box
 
-func add_room_box():
+func ensure_room_box():
 	for c in get_children():
 		if c.name == "RoomBox":
 			c.free()
@@ -112,53 +97,88 @@ func add_room_box():
 	add_child(room_box)
 	room_box.set_owner(self)
 
+###########################################
+# roombox signals
+
 var visited = false
 
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		MvaniaGame.update_current_rooms()
 		visited = true
-		# TODO mark this room 'visited' in the area db
+
+		MvaniaGame.update_room_data(self)
+		print("updated room data: ", MvaniaGame.get_room_data(self))
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
 		MvaniaGame.update_current_rooms()
+		visited = true
+
+		MvaniaGame.update_room_data(self)
+		print("updated room data: ", MvaniaGame.get_room_data(self))
+
+###########################################
+# persisted
+
+func to_room_data(room=self):
+	var data = {
+		"name": room.name,
+		"scene_file_path": room.scene_file_path,
+		"position": room.position,
+		"rect": room.used_rect(),
+		"visited": room.visited,
+		# TODO player spawn points
+		# TODO enemies spawns/data
+		# TODO pickup spawns/data
+		}
+	if room.area:
+		data["area_name"] = room.area.name
+	return data
 
 ###########################################
 # ready
 
+var area
+
 var room_data : Dictionary :
 	set(data):
 		room_data = data
+		if "visited" in room_data:
+			if room_data["visited"]:
+				visited = room_data["visited"]
+				_on_paused() if paused else _on_unpaused()
 
 func _ready():
-	prn("Room ready: ", used_rect(), " ", used_rect().end)
-	if len(room_data):
-		prn("setting room data: ", room_data)
-		if "visited" in room_data:
-			visited = room_data["visited"]
-
-	add_room_box()
+	ensure_room_box()
 
 ###########################################
 # pause
 
+var paused
+
 func pause():
+	paused = true
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
-		# TODO if we've haven't visited this, hide it
-		# if we've visited this, fade it
-		if visited:
-			to_faded()
-		else:
-			set_visible(false)
+		_on_paused()
 
 func unpause():
+	paused = false
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
-		set_visible(true)
-		to_normal()
+		_on_unpaused()
 
+func _on_paused():
+	if visited:
+		set_visible(true)
+		to_faded()
+	else:
+		set_visible(false)
+
+func _on_unpaused():
+	set_visible(true)
+	to_normal()
 
 func reset_tweens():
 	if fade_tween and fade_tween.is_valid():
