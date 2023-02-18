@@ -25,9 +25,8 @@ shape = SubResource("CapsuleShape2D_fy5s5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("1_w3vs6")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
-frame_progress = 0.640753
 
 [node name="LookPoint" type="Marker2D" parent="." groups=["pof"]]
 position = Vector2(48, 0)
