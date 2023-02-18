@@ -13,7 +13,8 @@ func prn(msg, msg2=null, msg3=null):
 # area DB
 
 var area_scenes = [
-	preload("res://src/mvania19/maps/area01/Area01.tscn")
+	preload("res://src/mvania19/maps/area01/Area01.tscn"),
+	preload("res://src/mvania19/maps/area02/Area02.tscn")
 	]
 
 var area_db = {}
@@ -153,12 +154,12 @@ func update_current_rooms():
 		if rect.has_point(player.global_position):
 			current_room = room
 		else:
-			room.set_visible(false)
+			# room.set_visible(false)
 			# maybe want a cleanup here to clear bullets and things
 			room.pause()
 
 	if current_room:
-		current_room.set_visible(true)
+		# current_room.set_visible(true)
 		current_room.unpause()
 
 

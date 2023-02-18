@@ -140,6 +140,33 @@ func pause():
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
+	to_faded()
+
+
 func unpause():
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
+
+	to_normal()
+
+func reset_tweens():
+	if fade_tween and fade_tween.is_valid():
+		fade_tween.kill()
+	if normal_tween and normal_tween.is_valid():
+		normal_tween.kill()
+
+var fade_tween
+func to_faded():
+	if normal_tween and normal_tween.is_valid():
+		normal_tween.kill()
+	fade_tween = create_tween()
+	fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	fade_tween.tween_property(self, "modulate:a", 0.2, 0.3)
+
+var normal_tween
+func to_normal():
+	if fade_tween and fade_tween.is_valid():
+		fade_tween.kill()
+	normal_tween = create_tween()
+	normal_tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+	normal_tween.tween_property(self, "modulate:a", 1, 0.2)
