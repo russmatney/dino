@@ -18,6 +18,6 @@ shape = SubResource("CapsuleShape2D_37lm3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = ExtResource("1_cvejl")
-animation = &"knockback"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.828224
+frame_progress = 0.610081

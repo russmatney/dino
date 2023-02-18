@@ -18,38 +18,47 @@ metadata/_edit_vertical_guides_ = [-152.0, -264.0]
 metadata/_edit_horizontal_guides_ = [-216.0, -128.0]
 
 [node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(136, -16)
 
 [node name="02MainTower" parent="." instance=ExtResource("2_kip2h")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-40, -40)
 
 [node name="03FirstSnowMan" parent="." instance=ExtResource("3_lq2ff")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-152, 0)
 
 [node name="04SecondSnowman" parent="." instance=ExtResource("4_kj05g")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(72, -176)
 
 [node name="05Crossroads" parent="." instance=ExtResource("5_qqhvm")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-152, -128)
 
 [node name="06BossChamber" parent="." instance=ExtResource("6_xa5kp")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-200, -232)
 
 [node name="07ThirdSnowman" parent="." instance=ExtResource("7_fl3ue")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-400, -224)
 
 [node name="08DownTower" parent="." instance=ExtResource("8_umldl")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-240, -40)
 
 [node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
+modulate = Color(1, 1, 1, 0.2)
 show_behind_parent = true
 position = Vector2(-168, 104)
 

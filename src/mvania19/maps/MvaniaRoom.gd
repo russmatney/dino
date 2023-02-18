@@ -67,6 +67,7 @@ func to_room_data(room=self):
 		"scene_file_path": room.scene_file_path,
 		"position": room.position,
 		"rect": room.used_rect(),
+		"visited": room.visited,
 		# TODO player spawn points
 		# TODO enemies spawns/data
 		# TODO pickup spawns/data
@@ -111,9 +112,13 @@ func add_room_box():
 	add_child(room_box)
 	room_box.set_owner(self)
 
+var visited = false
+
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		MvaniaGame.update_current_rooms()
+		visited = true
+		# TODO mark this room 'visited' in the area db
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
@@ -129,7 +134,9 @@ var room_data : Dictionary :
 func _ready():
 	prn("Room ready: ", used_rect(), " ", used_rect().end)
 	if len(room_data):
-		prn("room data: ", room_data)
+		prn("setting room data: ", room_data)
+		if "visited" in room_data:
+			visited = room_data["visited"]
 
 	add_room_box()
 
@@ -139,15 +146,19 @@ func _ready():
 func pause():
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
-
-	to_faded()
-
+		# TODO if we've haven't visited this, hide it
+		# if we've visited this, fade it
+		if visited:
+			to_faded()
+		else:
+			set_visible(false)
 
 func unpause():
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
+		set_visible(true)
+		to_normal()
 
-	to_normal()
 
 func reset_tweens():
 	if fade_tween and fade_tween.is_valid():
