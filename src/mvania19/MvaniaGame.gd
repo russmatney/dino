@@ -137,6 +137,10 @@ func update_current_rooms():
 	if not current_area:
 		find_current_area()
 
+	if not current_area:
+		prn("[WARN] No current area.")
+		return
+
 	if len(current_area.rooms) == 0:
 		prn("[WARN] Zero current area rooms.")
 		return
