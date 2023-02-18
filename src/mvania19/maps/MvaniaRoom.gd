@@ -56,6 +56,8 @@ func used_rect() -> Rect2:
 	r.position = tm.map_to_local(tm_rect.position) - v_half_tile_size
 	r.end = tm.map_to_local(tm_rect.end) - v_half_tile_size
 
+	r.position += tm.position
+
 	return r
 
 ###########################################
