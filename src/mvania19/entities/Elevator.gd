@@ -96,10 +96,11 @@ func list_elevator_paths():
 
 	var e_paths = ""
 	for e in elevators:
-		if e.owner.name.match("*Area*"):
+		var parent_name = e.get_parent().name
+		if parent_name.match("*Area*"):
 			e_paths += e.name + ","
 		else:
-			e_paths += e.owner.name + "/" + e.name + ","
+			e_paths += parent_name + "/" + e.name + ","
 
 	return e_paths
 
