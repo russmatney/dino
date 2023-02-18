@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi0rp7otd60dr"]
+[gd_scene load_steps=6 format=3 uid="uid://bi0rp7otd60dr"]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_knuf7"]
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_s40vt"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="3_clql2"]
 [ext_resource type="PackedScene" uid="uid://cjjt4cr36npwa" path="res://src/mvania19/maps/area02/04BossTime.tscn" id="5_wq514"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="6_2leqq"]
-[ext_resource type="PackedScene" uid="uid://bnosf7eta2ht5" path="res://src/mvania19/player/Monster.tscn" id="6_qs8x8"]
 
 [node name="Area02" type="Node2D"]
 script = ExtResource("1_knuf7")
@@ -88,6 +87,3 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 position = Vector2(464, 152)
 destination_area_str = "area04/Area04.tscn"
 destination_elevator_path = "01Elevator/ToArea02"
-
-[node name="Monster" parent="." instance=ExtResource("6_qs8x8")]
-position = Vector2(24, -8)

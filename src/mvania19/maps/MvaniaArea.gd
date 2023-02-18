@@ -33,16 +33,6 @@ func draw_room_outline(room: MvaniaRoom):
 
 
 ###########################################################
-# persist
-
-func persist_area():
-	MvaniaGame.persist_area(self)
-
-	if Engine.is_editor_hint():
-		prn("Persisted area data: \n")
-		prn(MvaniaGame.get_area_data(self))
-
-###########################################################
 # set room data
 
 func init_room_data():
@@ -63,31 +53,20 @@ func player_spawn_coords() -> Vector2:
 		return spawn_node.global_position
 
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
-
 	for mark in markers:
 		# if mark something or other, use last checkpoint
 		return mark.global_position
 
-	prn("[WARN] no parent_spawn_points or spawn_node found, returning (0, 0)")
+	var eles = Util.get_children_in_group(self, "elevators")
+	for e in eles:
+		return e.global_position
+
+	prn("[WARN] no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
 	return Vector2.ZERO
 
 var spawn_node_path
 func set_spawn_node(node_path: NodePath):
 	spawn_node_path = node_path
-
-## removes any player nodes attached to areas and rooms
-## these are added during development and _should_ be cleaned up
-## but here's a just-in-case fix
-func drop_player():
-	for c in get_children():
-		if c is MvaniaRoom:
-			for d in c.get_children():
-				if d.is_in_group("player"):
-					d.free()
-
-		if c.is_in_group("player"):
-			c.free()
-
 
 ###########################################################
 # ready
@@ -96,9 +75,21 @@ func _ready():
 	pause_rooms()
 
 	if MvaniaGame.get_area_data(self) == null:
-		persist_area()
+		# assuming we're not in a 'proper' MvaniaGame state
+		MvaniaGame.persist_area(self)
+		if Engine.is_editor_hint():
+			prn("Persisted area data: \n")
+			prn(MvaniaGame.get_area_data(self))
 
 	init_room_data()
+
+	call_deferred("maybe_spawn_player")
+
+func maybe_spawn_player():
+	await get_tree().create_timer(2.0).timeout
+	if MvaniaGame.player == null:
+		MvaniaGame.current_area = self
+		MvaniaGame.spawn_player()
 
 ###########################################################
 # draw

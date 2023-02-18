@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dap3qhxnk5asm"]
+[gd_scene load_steps=11 format=3 uid="uid://dap3qhxnk5asm"]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_j5wm8"]
 [ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://b8w55flpfieoq" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
 [ext_resource type="PackedScene" uid="uid://d2lmsou7x7sgy" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
 [ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
-[ext_resource type="PackedScene" uid="uid://bnosf7eta2ht5" path="res://src/mvania19/player/Monster.tscn" id="10_tjgng"]
 
 [node name="Area01" type="Node2D"]
 script = ExtResource("1_j5wm8")
@@ -52,6 +51,3 @@ position = Vector2(-240, -40)
 [node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
 show_behind_parent = true
 position = Vector2(-168, 104)
-
-[node name="Monster" parent="." instance=ExtResource("10_tjgng")]
-position = Vector2(-208, 96)

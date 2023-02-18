@@ -16,7 +16,9 @@ func prn(msg, msg2=null, msg3=null, msg4=null):
 
 var area_scenes = [
 	preload("res://src/mvania19/maps/area01/Area01.tscn"),
-	preload("res://src/mvania19/maps/area02/Area02.tscn")
+	preload("res://src/mvania19/maps/area02/Area02.tscn"),
+	preload("res://src/mvania19/maps/area03/Area03.tscn"),
+	preload("res://src/mvania19/maps/area04/Area04.tscn"),
 	]
 
 var area_db = {}
@@ -26,29 +28,40 @@ func recreate_db():
 	area_db = {}
 	for area in area_scenes:
 		var area_inst = area.instantiate()
-		area_inst.persist_area()
-		area_inst.queue_free()
+		if area_inst:
+			persist_area(area_inst)
+			area_inst.queue_free()
+		else:
+			print("area failed to instantiate: ", area)
 	prn("recreated area_db: ", len(area_db))
 
 func print_area_db():
 	# TODO pretty print
 	prn(area_db)
 
-func persist_area(area):
+func to_area_data(area):
 	area.ensure_rooms()
 	if len(area.rooms) == 0:
 		push_error(area.name, " [ERR] No rooms!")
 		return
 
-	# don't overwrite if exists?
-	area_db[area.name] = {
+	var room_data = {}
+	for r in area.rooms:
+		var r_data = r.to_room_data()
+		room_data[r.name] = r_data
+
+	return {
 		"name": area.name,
 		"scene_file_path": area.scene_file_path,
-		"rooms": {},
+		"rooms": room_data,
 		}
 
-	for r in area.rooms:
-		persist_room_data(area, r.to_room_data())
+func persist_area(area):
+	var area_data = to_area_data(area)
+
+	if area_data:
+		# don't overwrite if exists?
+		area_db[area.name] = area_data
 
 func update_room_data(room):
 	persist_room_data(room.area, room.to_room_data())
@@ -59,6 +72,10 @@ func persist_room_data(area, room_data):
 func get_area_data(area):
 	if area.name in area_db:
 		return area_db[area.name]
+
+func get_current_area_data():
+	if current_area:
+		return area_db[current_area.name]
 
 func get_rooms_data(area):
 	return area_db[area.name]["rooms"]
@@ -103,17 +120,16 @@ func load_area(area_scene, spawn_node_path=null):
 	if spawn_node_path:
 		current_area.set_spawn_node(spawn_node_path)
 
-	# bandaid to remove players from areas/rooms
-	current_area.drop_player()
-
 	Navi.nav_to(current_area)
 
 func _on_new_scene_instanced(s):
 	if s == current_area:
 		# deferring to run after the new scene is set (which is also deferred)
-		create_new_player()
-		Navi.add_child_to_current(player)
+		spawn_player()
 
+func spawn_player():
+	create_new_player()
+	Navi.add_child_to_current(player)
 
 ###########################################################
 # Player
