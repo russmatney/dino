@@ -7,8 +7,8 @@ extends PanelContainer
 @export var create_new_label: bool :
 	set(v):
 		create_new_label = v
-		if Engine.is_editor_hint():
-			Hood.debug_label("Width", str("width: ", 360))
+		# if Engine.is_editor_hint():
+		# 	Hood.debug_label("Width", str("width: ", 360))
 
 ###########################################################################
 # ready
