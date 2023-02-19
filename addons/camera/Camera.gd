@@ -15,6 +15,9 @@ func prn(msg, msg2=null, msg3=null, msg4=null):
 	else:
 		print("[CAM] ", msg)
 
+##############################################################
+# cam_window_rect
+
 func cam_viewport():
 	if cam:
 		# TODO maybe we should create a subviewport here?
@@ -22,6 +25,8 @@ func cam_viewport():
 		return vp
 
 
+## helpful for placing 'offscreen' indicators at the edges
+# tho perhaps that's easier with just a canvas layer
 func cam_window_rect():
 	if cam:
 		var v = cam_viewport()
@@ -151,9 +156,11 @@ func resume_slowmo():
 ####################################################################
 # zoom
 
-# TODO get these behaving properly - what is this `n`?
-func zoom_in(n=null):
-	cam.zoom_dir("in", n)
+func zoom_to(level=null):
+	cam.zoom_dir("to", level)
 
-func zoom_out(n=null):
-	cam.zoom_dir("out", n)
+func zoom_in(n_levels=null):
+	cam.zoom_dir("in", n_levels)
+
+func zoom_out(n_levels=null):
+	cam.zoom_dir("out", n_levels)

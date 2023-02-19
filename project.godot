@@ -52,7 +52,6 @@ MvaniaGame="*res://src/mvania19/MvaniaGame.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/window_width_override=1024
 window/stretch/mode.runner="viewport"
 window/stretch/aspect.runner="keep"
 

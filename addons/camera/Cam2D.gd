@@ -113,27 +113,34 @@ func _input(event):
 ###########################################################################
 # zoom
 
+func calc_zoom_offset_increment():
+	return zoom_offset_increment + zoom_offset * 0.1
 
-func zoom_dir(dir, n = null):
+func zoom_dir(dir, n_levels = null):
 	zoom_offset_previous = zoom_offset
 	var inc
 	var offset_inc
 
-	if not n and zoom_level > 2:
-		n = 2
-	elif not n:
-		n = 1
+	if not n_levels and zoom_level > 2:
+		n_levels = 2
+	elif not n_levels:
+		n_levels = 1
 
 	match dir:
 		"in":
-			zoom_level += zoom_increment * n
-			zoom_offset += zoom_offset_increment * n
+			zoom_level += zoom_increment * n_levels
+			zoom_offset += calc_zoom_offset_increment() * n_levels
 		"out":
-			zoom_level -= zoom_increment * n
-			zoom_offset -= zoom_offset_increment * n
+			zoom_level -= zoom_increment * n_levels
+			zoom_offset -= calc_zoom_offset_increment() * n_levels
+		"to":
+			zoom_level = n_levels
+			zoom_offset = calc_zoom_offset_increment() * n_levels
 
 	if zoom_level >= max_zoom or zoom_level <= min_zoom:
 		Cam.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
+
+	Cam.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
