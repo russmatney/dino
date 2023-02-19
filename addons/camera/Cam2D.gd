@@ -55,6 +55,12 @@ func _ready():
 	if not following:
 		find_node_to_follow()
 
+###########################################################################
+# window size updates
+
+var window_size
+func update_window_size():
+	window_size = DisplayServer.window_get_size()
 
 ###########################################################################
 # process
@@ -149,9 +155,10 @@ func zoom_dir(dir, n_levels = null):
 			# updated via _process
 			pass
 
+###########################################################################
+# update zoom
 
 var zoom_tween
-
 
 func update_zoom():
 	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
@@ -160,100 +167,6 @@ func update_zoom():
 	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_duration).set_trans(Tween.TRANS_SINE).set_ease(
 		Tween.EASE_OUT
 	)
-
-
-###########################################################################
-# fractal screenshake
-
-# https://youtu.be/tu-Qe66AvtY?t=260
-var trauma = 0.0
-var trauma_decrement_factor = 0.7
-
-
-func inc_trauma(inc):
-	trauma += inc
-	trauma = clamp(trauma, 0.0, 1.0)
-
-
-var shake_offset
-var shake_rotation
-var trans_noise_ctx
-var rot_noise_ctx
-
-
-func screenshake_reset():
-	shake_offset = null
-	shake_rotation = null
-	trans_noise_ctx = null
-	rot_noise_ctx = null
-	# These 'originals' could use a better name
-	# and may need to be updated by hand if an external something or other wants camera control
-	self.offset = original_offset
-	self.rotation = original_rotation
-
-
-func process_shake(delta):
-	if trauma > 0:
-		# Cam.prn("[CAM] Trauma: ", trauma)
-		trauma -= trauma_decrement_factor * delta
-		trauma = clamp(trauma, 0.0, 1.0)
-		if trauma == 0.0:
-			screenshake_reset()
-		else:
-			if trans_noise_ctx == null:
-				trans_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
-			if rot_noise_ctx == null:
-				noise_inputs["seed"] += randi()
-				rot_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
-			screenshake_translational(trans_noise_ctx, delta)
-			screenshake_rotational(rot_noise_ctx, delta)
-	if shake_offset:
-		self.offset = original_offset + shake_offset
-	if shake_rotation:
-		self.rotation = original_rotation + shake_rotation
-
-
-var noise_inputs = {
-	"seed": 4,
-	"octaves": 5.0,
-	"frequency": 1.0/5.0,
-	"gain": 0.8,
-	"lacunarity": 4.0,
-}
-
-
-func new_noise(inputs):
-	var noise = FastNoiseLite.new()
-	noise.seed = inputs["seed"]
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
-	noise.fractal_octaves = inputs["octaves"]
-	noise.fractal_gain = inputs["gain"]
-	noise.fractal_lacunarity = inputs["lacunarity"]
-	noise.frequency = inputs["frequency"]
-	return noise
-
-
-func next_noise_factor(noise_ctx, delta):
-	noise_ctx["t"] = delta + noise_ctx["t"]
-	noise_ctx["factor"] = noise_ctx["noise"].get_noise_1d(noise_ctx["t"])
-
-
-var max_shake_offset = 100
-var max_shake_rotation = PI / 8
-
-
-func screenshake_translational(noise_ctx, delta):
-	var max_offset = Vector2(max_shake_offset, max_shake_offset)
-	var shake = trauma * trauma
-	next_noise_factor(noise_ctx, delta)
-	shake_offset = max_offset * shake * noise_ctx["factor"]
-
-
-func screenshake_rotational(noise_ctx, delta):
-	var shake = trauma * trauma
-	next_noise_factor(noise_ctx, delta)
-	shake_rotation = max_shake_rotation * shake * noise_ctx["factor"]
-
 
 ###########################################################################
 # follow mode
@@ -304,13 +217,7 @@ func attach_to_nearest_anchor():
 
 
 ###########################################################################
-# pof/poi mode
-
-
-var window_size
-func update_window_size():
-	window_size = DisplayServer.window_get_size()
-
+# update pofs/pois
 
 # TODO how often should we check for more follows?
 # maybe trigger via signal/singleton when adding new nodes
@@ -346,24 +253,8 @@ func update_pofs():
 
 			pof_follows = to_focus
 
-func clamp_zoom_offset(zoom_factor):
-	# prevent zoom offset moving beyond clamp
-	if zoom_factor == min_zoom_level and zoom_offset < zoom_offset_previous:
-		zoom_offset = zoom_offset_previous
-	elif zoom_factor == max_zoom_level and zoom_offset > zoom_offset_previous:
-		zoom_offset = zoom_offset_previous
-
-func zoom_factor_for_bounds(pt_a, pt_b):
-	# print("pt_a: ", pt_a)
-	# print("pt_b: ", pt_b)
-	var x = abs(pt_a.x - pt_b.x)
-	var y = abs(pt_a.y - pt_b.y)
-	var zoom_factor1 = (x + zoom_offset) / window_size.x
-	var zoom_factor2 = (y + zoom_offset) / window_size.y
-	var zoom_factor = clamp(max(zoom_factor1, zoom_factor2), min_zoom_level, max_zoom_level)
-
-	clamp_zoom_offset(zoom_factor)
-	return zoom_factor
+###########################################################################
+# zoom in pof/poi mode
 
 func build_focuses():
 	if len(pof_follows) == 0 and not following:
@@ -395,6 +286,8 @@ func update_focus():
 	for obj in focuses:
 		center += obj.global_position
 
+		Hood.debug_label(str("focus global_pos", obj.name), str(obj.name, " center: ", obj.global_position))
+
 		if not max_left:
 			max_left = obj.global_position.x
 		if not max_right:
@@ -413,18 +306,135 @@ func update_focus():
 		if obj.global_position.y > max_bottom:
 			max_bottom = obj.global_position.y
 
-	Hood.debug_label("max left", str("max left: ", max_left))
-	Hood.debug_label("max right", str("max_right: ", max_right))
-	Hood.debug_label("max top", str("max_top: ", max_top))
-	Hood.debug_label("max bottom", str("max_bottom: ", max_bottom))
+	Hood.debug_label("max left", str("max left: ", int(max_left)))
+	Hood.debug_label("max right", str("max_right: ", int(max_right)))
+	Hood.debug_label("max top", str("max_top: ", int(max_top)))
+	Hood.debug_label("max bottom", str("max_bottom: ", int(max_bottom)))
 
+	Hood.debug_label("combined center", str("combined center: ", center))
 	center = center / focuses.size()
-	Hood.debug_label("center", str("center: ", center))
+	Hood.debug_label("averaged center", str("avg center: ", center))
 	self.global_position = center
 
-	zoom_level = zoom_factor_for_bounds(
-		Vector2(max_right, max_bottom), Vector2(max_left, max_top)
-	)
+	var focuses_rect = Rect2()
+	focuses_rect.position = Vector2(max_left, max_top)
+	focuses_rect.end = Vector2(max_right, max_bottom)
+
+	update_zoom_level_for_bounds(focuses_rect)
+	Hood.debug_label("calced zoom level", str("calced zoom level: ", zoom_level))
+	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
+	Hood.debug_label("clamped zoom level", str("clamped zoom level: ", zoom_level))
+	clamp_zoom_offset()
+	Hood.debug_label("zoom offset", str("zoom offset: ", zoom_offset))
 
 	# print("zoom_level: ", zoom_level)
 	update_zoom()
+
+	Hood.debug_label("final zoom level", str("final zoom level: ", zoom_level))
+
+func clamp_zoom_offset():
+	# prevent zoom offset moving beyond clamp
+	if zoom_level == min_zoom_level and zoom_offset < zoom_offset_previous:
+		zoom_offset = zoom_offset_previous
+	elif zoom_level == max_zoom_level and zoom_offset > zoom_offset_previous:
+		zoom_offset = zoom_offset_previous
+
+func update_zoom_level_for_bounds(focuses_rect):
+	Hood.debug_label("focuses rect", str("focuses rect: ", focuses_rect))
+	# print("pt_a: ", pt_a)
+	# print("pt_b: ", pt_b)
+	var x = focuses_rect.size.x
+	var y = focuses_rect.size.y
+	Hood.debug_label("window size", str("window size: ", window_size))
+	# var zoom_factor1 = x / (window_size.x - zoom_offset)
+	# var zoom_factor2 = y / (window_size.y - zoom_offset)
+	var zoom_factor1 = (x + zoom_offset) / window_size.x
+	var zoom_factor2 = (y + zoom_offset) / window_size.y
+	# var zoom_factor1 = x / window_size.x
+	# var zoom_factor2 = y / window_size.y
+	Hood.debug_label("zoom factor1", str("zoom factor1: ", zoom_factor1))
+	Hood.debug_label("zoom factor2", str("zoom factor2: ", zoom_factor2))
+	zoom_level = max(zoom_factor1, zoom_factor2)
+
+
+###########################################################################
+# screenshake
+
+# https://youtu.be/tu-Qe66AvtY?t=260
+var trauma = 0.0
+var trauma_decrement_factor = 0.7
+
+func inc_trauma(inc):
+	trauma += inc
+	trauma = clamp(trauma, 0.0, 1.0)
+
+var shake_offset
+var shake_rotation
+var trans_noise_ctx
+var rot_noise_ctx
+
+func screenshake_reset():
+	shake_offset = null
+	shake_rotation = null
+	trans_noise_ctx = null
+	rot_noise_ctx = null
+	# These 'originals' could use a better name
+	# and may need to be updated by hand if an external something or other wants camera control
+	self.offset = original_offset
+	self.rotation = original_rotation
+
+func process_shake(delta):
+	if trauma > 0:
+		# Cam.prn("[CAM] Trauma: ", trauma)
+		trauma -= trauma_decrement_factor * delta
+		trauma = clamp(trauma, 0.0, 1.0)
+		if trauma == 0.0:
+			screenshake_reset()
+		else:
+			if trans_noise_ctx == null:
+				trans_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
+			if rot_noise_ctx == null:
+				noise_inputs["seed"] += randi()
+				rot_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
+			screenshake_translational(trans_noise_ctx, delta)
+			screenshake_rotational(rot_noise_ctx, delta)
+	if shake_offset:
+		self.offset = original_offset + shake_offset
+	if shake_rotation:
+		self.rotation = original_rotation + shake_rotation
+
+var noise_inputs = {
+	"seed": 4,
+	"octaves": 5.0,
+	"frequency": 1.0/5.0,
+	"gain": 0.8,
+	"lacunarity": 4.0,
+}
+
+func new_noise(inputs):
+	var noise = FastNoiseLite.new()
+	noise.seed = inputs["seed"]
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+	noise.fractal_octaves = inputs["octaves"]
+	noise.fractal_gain = inputs["gain"]
+	noise.fractal_lacunarity = inputs["lacunarity"]
+	noise.frequency = inputs["frequency"]
+	return noise
+
+func next_noise_factor(noise_ctx, delta):
+	noise_ctx["t"] = delta + noise_ctx["t"]
+	noise_ctx["factor"] = noise_ctx["noise"].get_noise_1d(noise_ctx["t"])
+
+var max_shake_offset = 100
+var max_shake_rotation = PI / 8
+
+func screenshake_translational(noise_ctx, delta):
+	var max_offset = Vector2(max_shake_offset, max_shake_offset)
+	var shake = trauma * trauma
+	next_noise_factor(noise_ctx, delta)
+	shake_offset = max_offset * shake * noise_ctx["factor"]
+
+func screenshake_rotational(noise_ctx, delta):
+	var shake = trauma * trauma
+	next_noise_factor(noise_ctx, delta)
+	shake_rotation = max_shake_rotation * shake * noise_ctx["factor"]

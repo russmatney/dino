@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-var initial_vis = false
+# var initial_vis = false
+var initial_vis = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

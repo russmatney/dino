@@ -56,7 +56,7 @@ func cam_window_rect():
 # ensure camera
 
 
-func ensure_camera(cam_mode = null, zoom_offset = 3000.0, zoom_level = 1):
+func ensure_camera(cam_mode = null, zoom_offset = 500.0, zoom_level = 1):
 	prn("ensuring camera")
 	if cam and is_instance_valid(cam):
 		prn("found existing cam: ", cam)
