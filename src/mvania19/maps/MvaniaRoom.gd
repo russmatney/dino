@@ -155,6 +155,7 @@ var room_data : Dictionary :
 
 func _ready():
 	ensure_room_box()
+	ensure_pofs()
 
 ###########################################
 # pause
@@ -211,15 +212,33 @@ func to_normal():
 ###########################################
 # pofs
 
+var pof_scene = preload("res://addons/camera/CamPOF.tscn")
+var auto_pof_group = "auto_pofs"
+
+func ensure_pofs():
+	for c in get_children():
+		if c.is_in_group(auto_pof_group):
+			c.free()
+
+	var rect = used_rect()
+	var points = [rect.position, rect.end]
+
+	for p in points:
+		var auto_pof = pof_scene.instantiate()
+		auto_pof.add_to_group(auto_pof_group)
+		auto_pof.position = p
+		add_child(auto_pof)
+		auto_pof.set_owner(self)
+
 func deactivate_pofs():
-	var pofs = Util.get_children_in_group(self, "pof")
+	var pofs = Util.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("deactivate"):
 			p.deactivate()
 	# Cam.update_pofs()
 
 func activate_pofs():
-	var pofs = Util.get_children_in_group(self, "pof")
+	var pofs = Util.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("activate"):
 			p.activate()

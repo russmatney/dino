@@ -12,7 +12,7 @@ var player_data
 var hud = preload("res://src/mvania19/hud/HUD.tscn")
 
 func _ready():
-	Cam.ensure_camera(2, 500.0, 5)
+	Cam.ensure_camera(2, {"zoom_level": 5.0})
 	Hood.call_deferred("ensure_hud", hud)
 	machine.start()
 

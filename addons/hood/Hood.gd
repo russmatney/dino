@@ -90,6 +90,7 @@ func ensure_debug_overlay():
 signal debug_label_update(node_name, text)
 
 func debug_label(node_name, text):
+	# TODO make this node_name safe (remove weird chars)
 	ensure_debug_overlay()
 	emit_signal("debug_label_update", node_name, text)
 

@@ -5,8 +5,8 @@ enum cam_mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
 
 @export var follow_group: String = "player"
 @export var anchor_group: String = "camera_anchor"
-@export var poi_group: String = "poi"
-@export var pof_group: String = "pof"
+@export var poi_group: String = Cam.poi_group
+@export var pof_group: String = Cam.pof_group
 
 var following
 var current_anchor
@@ -18,13 +18,13 @@ var poi_following_distance = 400
 var pof_following_distance = 400
 
 var zoom_level = 1.0
-var min_zoom_level = 0.2
-var max_zoom_level = 9.0
+var min_zoom_level = 1.0
+var max_zoom_level = 10.0
 var zoom_increment = 0.1
-var zoom_offset = 500
-var zoom_offset_previous
-var zoom_offset_increment = 150
-var zoom_duration = 0.2
+var zoom_offset: float = 500.0
+var zoom_offset_previous : float
+var zoom_offset_increment = 150.0
+var zoom_tween_duration = 0.1
 
 ###########################################################################
 # ready
@@ -164,7 +164,7 @@ func update_zoom():
 	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
 	zoom_tween = create_tween()
 	var new_zoom = Vector2(zoom_level, zoom_level)
-	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_duration).set_trans(Tween.TRANS_SINE).set_ease(
+	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_tween_duration).set_trans(Tween.TRANS_SINE).set_ease(
 		Tween.EASE_OUT
 	)
 
@@ -284,15 +284,13 @@ func update_focus():
 	for obj in focuses:
 		center += obj.global_position
 
-		Hood.debug_label(str("focus global_pos", obj.name), str(obj.name, " center: ", obj.global_position))
-
-		if not max_left:
+		if max_left == null:
 			max_left = obj.global_position.x
-		if not max_right:
+		if max_right == null:
 			max_right = obj.global_position.x
-		if not max_top:
+		if max_top == null:
 			max_top = obj.global_position.y
-		if not max_bottom:
+		if max_bottom == null:
 			max_bottom = obj.global_position.y
 
 		if obj.global_position.x < max_left:
@@ -311,25 +309,17 @@ func update_focus():
 	# center camera on merged rect
 	self.global_position = merged_rect.get_center()
 
-	# alternative centering impl
-	# Hood.debug_label("combined center", str("combined center: ", center))
-	# Hood.debug_label("averaged center", str("avg center: ", center))
-	# center = center / focuses.size()
-	# self.global_position = merged_rect.get_center()
-
 	update_zoom_level_for_bounds(merged_rect)
-	Hood.debug_label("calced zoom level", str("calced zoom level: ", zoom_level))
 
-	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
+	zoom_level = int(clamp(zoom_level, min_zoom_level, max_zoom_level))
+	Hood.debug_label("calced+clamped zoom level", str("calced zoom level: ", zoom_level))
 	clamp_zoom_offset()
 
 	Hood.debug_label("zoom offset", str("zoom offset: ", zoom_offset))
 
-	# print("zoom_level: ", zoom_level)
 	update_zoom()
 
 	Hood.debug_label("final zoom level", str("final zoom level: ", zoom_level))
-	Hood.debug_label("cam screen center", str("cam screen center: ", get_screen_center_position()))
 	Hood.debug_label("cam target pos", str("cam target pos: ", get_target_position()))
 
 func clamp_zoom_offset():
@@ -339,23 +329,38 @@ func clamp_zoom_offset():
 	elif zoom_level == max_zoom_level and zoom_offset > zoom_offset_previous:
 		zoom_offset = zoom_offset_previous
 
+# TODO per zoom level margins?
+var zoom_rect_min_margin = 50
+
 func update_zoom_level_for_bounds(focuses_rect):
 	Hood.debug_label("focuses rect", str("focuses rect: ", focuses_rect, " end: ", focuses_rect.end))
 	# print("pt_a: ", pt_a)
 	# print("pt_b: ", pt_b)
 	var x = focuses_rect.size.x
 	var y = focuses_rect.size.y
+	Hood.debug_label("frect size", str("frect size: ", focuses_rect.size))
 	Hood.debug_label("window size", str("window size: ", window_size))
-	Hood.debug_label("viewport size", str("viewport size: ", get_viewport().size))
-	# var zoom_factor1 = x / (window_size.x - zoom_offset)
-	# var zoom_factor2 = y / (window_size.y - zoom_offset)
-	var zoom_factor1 = (x + zoom_offset) / window_size.x
-	var zoom_factor2 = (y + zoom_offset) / window_size.y
-	# var zoom_factor1 = x / window_size.x
-	# var zoom_factor2 = y / window_size.y
-	Hood.debug_label("zoom factor1", str("zoom factor1: ", zoom_factor1))
-	Hood.debug_label("zoom factor2", str("zoom factor2: ", zoom_factor2))
-	zoom_level = min(zoom_factor1, zoom_factor2)
+	var vp_size = get_viewport().size
+	Hood.debug_label("viewport size", str("viewport size: ", vp_size))
+
+	var frect_over_viewport_x = vp_size.x / focuses_rect.size.x
+	var frect_over_viewport_y = vp_size.y / focuses_rect.size.y
+	Hood.debug_label("viewport frect x ratio", str("frect/viewport x: ", frect_over_viewport_x))
+	Hood.debug_label("viewport frect y ratio", str("frect/viewport y: ", frect_over_viewport_y))
+
+	# zoom = viewport / desired_rect
+
+	var x_factor = focuses_rect.size.x + zoom_rect_min_margin
+	var y_factor = focuses_rect.size.y + zoom_rect_min_margin
+	var x_ratio = vp_size.x / x_factor
+	var y_ratio = vp_size.y / y_factor
+	zoom_level = min(x_ratio, y_ratio)
+
+	Hood.debug_label("frect x min margin", str("x factor: ", x_factor))
+	Hood.debug_label("frect y min margin", str("y factor: ", y_factor))
+	Hood.debug_label("final x ratio", str("x ratio: ", x_ratio))
+	Hood.debug_label("final y ratio", str("y ratio: ", y_ratio))
+
 
 
 ###########################################################################

@@ -56,7 +56,11 @@ func cam_window_rect():
 # ensure camera
 
 
-func ensure_camera(cam_mode = null, zoom_offset = 500.0, zoom_level = 1):
+func ensure_camera(cam_mode = null, opts={}):
+	if not opts is Dictionary:
+		opts = {}
+		prn("[WARN] overwriting/ignoring camera opts")
+
 	prn("ensuring camera")
 	if cam and is_instance_valid(cam):
 		prn("found existing cam: ", cam)
@@ -70,8 +74,8 @@ func ensure_camera(cam_mode = null, zoom_offset = 500.0, zoom_level = 1):
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true
-	cam.zoom_offset = zoom_offset
-	cam.zoom_level = zoom_level
+	cam.zoom_offset = opts.get("zoom_offset", 500.0)
+	cam.zoom_level = opts.get("zoom_level", 1.0)
 
 	if cam_mode:
 		cam.mode = cam_mode
@@ -168,6 +172,9 @@ func zoom_out(n_levels=null):
 
 ####################################################################
 # focus
+
+var pof_group = "pof"
+var poi_group = "poi"
 
 func update_pofs():
 	if cam:

@@ -7,7 +7,7 @@ extends Snake
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera(2, 1000.0, 1)
+		Cam.ensure_camera(2)
 		Hood.ensure_hud(hud_scene)
 
 	var _x = connect("food_picked_up",Callable(self,"_on_food_picked_up"))
