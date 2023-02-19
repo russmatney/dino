@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
-@onready var look_point = $LookPoint
 @onready var machine = $Machine
 
 var player_data
@@ -69,12 +68,14 @@ func update_h_flip(node):
 	elif facing == "left" and node.position.x > 0:
 		node.position.x = -node.position.x
 
+
+# @onready var look_point = $LookPoint
 func face_right():
 	facing = "right"
 	anim.flip_h = false
-	update_h_flip(look_point)
+	# update_h_flip(look_point)
 
 func face_left():
 	facing = "left"
 	anim.flip_h = true
-	update_h_flip(look_point)
+	# update_h_flip(look_point)

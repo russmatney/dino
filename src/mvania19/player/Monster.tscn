@@ -28,9 +28,6 @@ sprite_frames = ExtResource("1_w3vs6")
 animation = &"run"
 autoplay = "idle"
 
-[node name="LookPoint" type="Marker2D" parent="." groups=["pof"]]
-position = Vector2(48, 0)
-
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_hxyr2")
 
