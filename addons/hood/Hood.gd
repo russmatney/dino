@@ -74,6 +74,24 @@ func notif(text, opts = {}):
 		opts["ttl"] = 3.0
 	emit_signal("notification", opts)
 
+###########################################################################
+# debug overlay
+
+var debug_overlay_scene = preload("res://addons/hood/DebugOverlay.tscn")
+var debug_overlay
+
+func ensure_debug_overlay():
+	if debug_overlay and is_instance_valid(debug_overlay):
+		return
+
+	debug_overlay = debug_overlay_scene.instantiate()
+	add_child(debug_overlay)
+
+signal debug_label_update(node_name, text)
+
+func debug_label(node_name, text):
+	ensure_debug_overlay()
+	emit_signal("debug_label_update", node_name, text)
 
 ###########################################################################
 # find_player

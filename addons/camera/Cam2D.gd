@@ -413,13 +413,13 @@ func update_focus():
 		if obj.global_position.y > max_bottom:
 			max_bottom = obj.global_position.y
 
-	# print("max left: ", max_left)
-	# print("max right: ", max_right)
-	# print("max top: ", max_top)
-	# print("max bottom: ", max_bottom)
+	Hood.debug_label("max left", str("max left: ", max_left))
+	Hood.debug_label("max right", str("max_right: ", max_right))
+	Hood.debug_label("max top", str("max_top: ", max_top))
+	Hood.debug_label("max bottom", str("max_bottom: ", max_bottom))
 
 	center = center / focuses.size()
-	# print("center: ", center)
+	Hood.debug_label("center", str("center: ", center))
 	self.global_position = center
 
 	zoom_level = zoom_factor_for_bounds(

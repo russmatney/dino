@@ -16,7 +16,7 @@ var scene_ready
 			new_notification({"msg": txt, "rich": true})
 
 func _ready():
-	var _x = Hood.connect("notification",Callable(self,"new_notification"))
+	Hood.notification.connect(new_notification)
 	Hood.notif("[HOOD] Notifications online.")
 	scene_ready = true
 

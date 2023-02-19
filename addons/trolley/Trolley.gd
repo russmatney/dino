@@ -116,3 +116,7 @@ func is_action(event):
 
 func is_pause(event):
 	return event.is_action_pressed("pause")
+
+
+func is_debug_toggle(event):
+	return event.is_action_pressed("debug_toggle")
