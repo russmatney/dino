@@ -188,10 +188,8 @@ func find_node_to_follow():
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
 
-
 ###########################################################################
 # anchor mode
-
 
 func attach_to_nearest_anchor():
 	# assumes `following` is set as desired
@@ -306,31 +304,33 @@ func update_focus():
 		if obj.global_position.y > max_bottom:
 			max_bottom = obj.global_position.y
 
-	Hood.debug_label("max left", str("max left: ", int(max_left)))
-	Hood.debug_label("max right", str("max_right: ", int(max_right)))
-	Hood.debug_label("max top", str("max_top: ", int(max_top)))
-	Hood.debug_label("max bottom", str("max_bottom: ", int(max_bottom)))
+	var merged_rect = Rect2()
+	merged_rect.position = Vector2(max_left, max_top)
+	merged_rect.end = Vector2(max_right, max_bottom)
 
-	Hood.debug_label("combined center", str("combined center: ", center))
-	center = center / focuses.size()
-	Hood.debug_label("averaged center", str("avg center: ", center))
-	self.global_position = center
+	# center camera on merged rect
+	self.global_position = merged_rect.get_center()
 
-	var focuses_rect = Rect2()
-	focuses_rect.position = Vector2(max_left, max_top)
-	focuses_rect.end = Vector2(max_right, max_bottom)
+	# alternative centering impl
+	# Hood.debug_label("combined center", str("combined center: ", center))
+	# Hood.debug_label("averaged center", str("avg center: ", center))
+	# center = center / focuses.size()
+	# self.global_position = merged_rect.get_center()
 
-	update_zoom_level_for_bounds(focuses_rect)
+	update_zoom_level_for_bounds(merged_rect)
 	Hood.debug_label("calced zoom level", str("calced zoom level: ", zoom_level))
+
 	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
-	Hood.debug_label("clamped zoom level", str("clamped zoom level: ", zoom_level))
 	clamp_zoom_offset()
+
 	Hood.debug_label("zoom offset", str("zoom offset: ", zoom_offset))
 
 	# print("zoom_level: ", zoom_level)
 	update_zoom()
 
 	Hood.debug_label("final zoom level", str("final zoom level: ", zoom_level))
+	Hood.debug_label("cam screen center", str("cam screen center: ", get_screen_center_position()))
+	Hood.debug_label("cam target pos", str("cam target pos: ", get_target_position()))
 
 func clamp_zoom_offset():
 	# prevent zoom offset moving beyond clamp
@@ -340,12 +340,13 @@ func clamp_zoom_offset():
 		zoom_offset = zoom_offset_previous
 
 func update_zoom_level_for_bounds(focuses_rect):
-	Hood.debug_label("focuses rect", str("focuses rect: ", focuses_rect))
+	Hood.debug_label("focuses rect", str("focuses rect: ", focuses_rect, " end: ", focuses_rect.end))
 	# print("pt_a: ", pt_a)
 	# print("pt_b: ", pt_b)
 	var x = focuses_rect.size.x
 	var y = focuses_rect.size.y
 	Hood.debug_label("window size", str("window size: ", window_size))
+	Hood.debug_label("viewport size", str("viewport size: ", get_viewport().size))
 	# var zoom_factor1 = x / (window_size.x - zoom_offset)
 	# var zoom_factor2 = y / (window_size.y - zoom_offset)
 	var zoom_factor1 = (x + zoom_offset) / window_size.x
@@ -354,7 +355,7 @@ func update_zoom_level_for_bounds(focuses_rect):
 	# var zoom_factor2 = y / window_size.y
 	Hood.debug_label("zoom factor1", str("zoom factor1: ", zoom_factor1))
 	Hood.debug_label("zoom factor2", str("zoom factor2: ", zoom_factor2))
-	zoom_level = max(zoom_factor1, zoom_factor2)
+	zoom_level = min(zoom_factor1, zoom_factor2)
 
 
 ###########################################################################
