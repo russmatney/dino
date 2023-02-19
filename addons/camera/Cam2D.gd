@@ -311,7 +311,7 @@ func update_focus():
 
 	update_zoom_level_for_bounds(merged_rect)
 
-	zoom_level = int(clamp(zoom_level, min_zoom_level, max_zoom_level))
+	zoom_level = round(clamp(zoom_level, min_zoom_level, max_zoom_level))
 	Hood.debug_label("calced+clamped zoom level", str("calced zoom level: ", zoom_level))
 	clamp_zoom_offset()
 
@@ -330,7 +330,8 @@ func clamp_zoom_offset():
 		zoom_offset = zoom_offset_previous
 
 # TODO per zoom level margins?
-var zoom_rect_min_margin = 50
+var zoom_rect_min = 50
+var zoom_min_margin = 50
 
 func update_zoom_level_for_bounds(focuses_rect):
 	Hood.debug_label("focuses rect", str("focuses rect: ", focuses_rect, " end: ", focuses_rect.end))
@@ -350,8 +351,8 @@ func update_zoom_level_for_bounds(focuses_rect):
 
 	# zoom = viewport / desired_rect
 
-	var x_factor = focuses_rect.size.x + zoom_rect_min_margin
-	var y_factor = focuses_rect.size.y + zoom_rect_min_margin
+	var x_factor = max(focuses_rect.size.x, zoom_rect_min) + zoom_min_margin
+	var y_factor = max(focuses_rect.size.y, zoom_rect_min) + zoom_min_margin
 	var x_ratio = vp_size.x / x_factor
 	var y_ratio = vp_size.y / y_factor
 	zoom_level = min(x_ratio, y_ratio)
@@ -360,7 +361,6 @@ func update_zoom_level_for_bounds(focuses_rect):
 	Hood.debug_label("frect y min margin", str("y factor: ", y_factor))
 	Hood.debug_label("final x ratio", str("x ratio: ", x_ratio))
 	Hood.debug_label("final y ratio", str("y ratio: ", y_ratio))
-
 
 
 ###########################################################################
