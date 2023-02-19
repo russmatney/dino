@@ -7,65 +7,78 @@ scale = Vector2(0.4, 0.4)
 script = ExtResource("1_dgo60")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(2.5, 2.5)
+limit_left = -15
+limit_top = -15
+limit_right = 735
+limit_bottom = 487
 position_smoothing_enabled = true
 
 [node name="01Entrance" type="ColorRect" parent="."]
-offset_top = -72.0
-offset_right = 256.0
-offset_bottom = 32.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 464.0
+offset_top = 240.0
+offset_right = 720.0
+offset_bottom = 344.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="02MainTower" type="ColorRect" parent="."]
-offset_left = -80.0
-offset_top = -232.0
-offset_bottom = 32.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 384.0
+offset_top = 80.0
+offset_right = 464.0
+offset_bottom = 344.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="03FirstSnowMan" type="ColorRect" parent="."]
-offset_left = -224.0
-offset_top = -72.0
-offset_right = -80.0
-offset_bottom = 56.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 240.0
+offset_top = 240.0
+offset_right = 384.0
+offset_bottom = 368.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="04SecondSnowman" type="ColorRect" parent="."]
-offset_top = -248.0
-offset_right = 144.0
-offset_bottom = -104.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 464.0
+offset_top = 64.0
+offset_right = 608.0
+offset_bottom = 208.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="05Crossroads" type="ColorRect" parent="."]
-offset_left = -224.0
-offset_top = -184.0
-offset_right = -80.0
-offset_bottom = -72.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 240.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 240.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="06BossChamber" type="ColorRect" parent="."]
-offset_left = -336.0
-offset_top = -312.0
-offset_right = -88.0
-offset_bottom = -184.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 128.0
+offset_right = 376.0
+offset_bottom = 128.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="07ThirdSnowman" type="ColorRect" parent="."]
-offset_left = -464.0
-offset_top = -280.0
-offset_right = -336.0
-offset_bottom = -168.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 144.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="08DownTower" type="ColorRect" parent="."]
-offset_left = -344.0
-offset_top = -176.0
-offset_right = -224.0
-offset_bottom = 136.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 120.0
+offset_top = 136.0
+offset_right = 240.0
+offset_bottom = 448.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)
 
 [node name="09Elevator" type="ColorRect" parent="."]
-offset_left = -224.0
-offset_top = 56.0
-offset_right = -112.0
-offset_bottom = 160.0
-color = Color(0.498039, 1, 0.831373, 1)
+offset_left = 240.0
+offset_top = 368.0
+offset_right = 352.0
+offset_bottom = 472.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.4)

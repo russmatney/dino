@@ -87,7 +87,7 @@ func _ready():
 
 func maybe_spawn_player():
 	if not Engine.is_editor_hint():
-		await get_tree().create_timer(2.0).timeout
+		await get_tree().create_timer(0.5).timeout
 		if MvaniaGame.player == null:
 			MvaniaGame.current_area = self
 			MvaniaGame.spawn_player()

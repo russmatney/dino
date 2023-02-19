@@ -36,7 +36,7 @@ func recreate_db():
 			area_inst.queue_free()
 		else:
 			print("area failed to instantiate: ", area)
-	prn("recreated area_db: ", len(area_db))
+	prn("recreated area_db: ", len(area_db), " areas.")
 
 	area_db_recreated.emit(area_db)
 

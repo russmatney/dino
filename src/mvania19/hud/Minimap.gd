@@ -12,8 +12,7 @@ func _ready():
 	if len(MvaniaGame.area_db) > 0:
 		update(MvaniaGame.area_db)
 
-func update(area_db):
-	print("minimap update!", area_db)
+func update(_area_db):
 	update_minimap_data()
 	update_map()
 
@@ -42,7 +41,6 @@ var area_data = {}
 func update_minimap_data():
 	# TODO proper minimap lifecycle
 	area_data = Util._or(MvaniaGame.get_current_area_data(), MvaniaGame.area_db.values()[0])
-	print("updated data? ", area_data)
 	if area_data == null:
 		area_data = {}
 
@@ -70,14 +68,7 @@ func update_map():
 	if last_area_name == null or last_area_name != area_data["name"]:
 		clear_map()
 		last_area_name = area_data["name"]
-	update_rooms()
 
-func clear_map():
-	for c in get_children():
-		if c is ColorRect:
-			c.free()
-
-func update_rooms():
 	var merged = merged_rect(area_data["rooms"].values())
 	var offset = Vector2.ZERO
 	if merged.position.x < 0:
@@ -85,9 +76,20 @@ func update_rooms():
 	if merged.position.y < 0:
 		offset.y = -merged.position.y
 
+	merged.position += offset
+
+	update_rooms(offset)
+	update_camera_limits(merged)
+
+func clear_map():
+	for c in get_children():
+		if c is ColorRect:
+			c.free()
+
+func update_rooms(offset: Vector2):
 	for room_data in area_data["rooms"].values():
 		var rect = room_data["rect"]
-		rect.position += room_data["position"] - offset
+		rect.position += room_data["position"] + offset
 		var visited = room_data["visited"]
 		var has_player = "has_player" in room_data and room_data["has_player"]
 
@@ -103,12 +105,20 @@ func update_rooms():
 		rooms.append(c_rect)
 
 		if has_player:
-			c_rect.set_color(Color.CRIMSON)
-			cam.set_offset(to_global(rect.get_center()))
+			c_rect.set_color(Color(Color.CRIMSON,0.8))
+			cam.set_position(rect.get_center())
 		elif visited:
-			c_rect.set_color(Color.PERU)
+			c_rect.set_color(Color(Color.PERU, 0.7))
 		else:
-			c_rect.set_color(Color.AQUAMARINE)
+			c_rect.set_color(Color(Color.AQUAMARINE, 0.4))
+
+var limit_offset = 15
+var viewport_dim = 256
+func update_camera_limits(merged: Rect2):
+	cam.set_limit(SIDE_LEFT, merged.position.x - limit_offset)
+	cam.set_limit(SIDE_RIGHT, max(viewport_dim, merged.size.x / 2.0 + merged.position.x - limit_offset * 2))
+	cam.set_limit(SIDE_TOP, merged.position.y - limit_offset)
+	cam.set_limit(SIDE_BOTTOM, max(viewport_dim, merged.size.y / 2.0 + merged.position.y - limit_offset * 2))
 
 ################################################################
 # input
@@ -123,8 +133,6 @@ func update_rooms():
 # draw
 
 # func _draw():
-# 	draw_rect(Rect2(Vector2(32, 32), Vector2(32, 32)), Color.MAGENTA, true)
-
 # 	if not area_data == null and len(area_data) > 0:
 # 		var merged = merged_rect(area_data["rooms"].values())
 # 		var offset = Vector2.ZERO
@@ -133,15 +141,9 @@ func update_rooms():
 # 		if merged.position.y < 0:
 # 			offset.y = -merged.position.y
 
+# 		print("(draw)merged rect (pre-offset): ", merged)
+# 		merged.position += offset
+
+# 		print("(draw)merged rect: ", merged)
+
 # 		draw_rect(merged, Color.MAGENTA, false)
-
-# 		print("merged: ", merged)
-# 		print("offset: ", offset)
-# 		for room_data in area_data["rooms"].values():
-# 			var rect = room_data["rect"]
-# 			rect.position += room_data["position"] + offset
-# 			var visited = room_data["visited"]
-
-# 			print("room rect: ", room_data["name"], " ", rect)
-
-# 			draw_rect(rect, Color.MAGENTA, visited, 2.0)
