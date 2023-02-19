@@ -106,32 +106,38 @@ var visited = false
 
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
-		MvaniaGame.update_current_rooms()
 		visited = true
+		MvaniaGame.update_rooms()
 		MvaniaGame.update_room_data(self)
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
-		MvaniaGame.update_current_rooms()
 		visited = true
+		MvaniaGame.update_rooms()
 		MvaniaGame.update_room_data(self)
 
 ###########################################
 # persisted
 
-func to_room_data(room=self):
+func to_room_data(player=null):
+	var rect = used_rect()
 	var data = {
-		"name": room.name,
-		"scene_file_path": room.scene_file_path,
-		"position": room.position,
-		"rect": room.used_rect(),
-		"visited": room.visited,
+		"name": name,
+		"scene_file_path": scene_file_path,
+		"position": position,
+		"rect": rect,
+		"visited": visited,
 		# TODO player spawn points
 		# TODO enemies spawns/data
 		# TODO pickup spawns/data
 		}
-	if room.area:
-		data["area_name"] = room.area.name
+	if area:
+		data["area_name"] = area.name
+	if player:
+		var r = Rect2()
+		r.position = rect.position + position
+		r.size = rect.size
+		data["contains_player"] = r.has_point(player.global_position)
 	return data
 
 ###########################################

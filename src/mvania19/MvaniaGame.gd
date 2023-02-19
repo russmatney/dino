@@ -23,6 +23,9 @@ var area_scenes = [
 
 var area_db = {}
 
+signal area_db_recreated(area_db)
+signal area_db_updated(area_db)
+
 func recreate_db():
 	prn("recreating area_db")
 	area_db = {}
@@ -34,6 +37,8 @@ func recreate_db():
 		else:
 			print("area failed to instantiate: ", area)
 	prn("recreated area_db: ", len(area_db))
+
+	area_db_recreated.emit(area_db)
 
 func print_area_db():
 	# TODO pretty print
@@ -47,7 +52,7 @@ func to_area_data(area):
 
 	var room_data = {}
 	for r in area.rooms:
-		var r_data = r.to_room_data()
+		var r_data = r.to_room_data(player)
 		room_data[r.name] = r_data
 
 	return {
@@ -62,12 +67,14 @@ func persist_area(area):
 	if area_data:
 		# don't overwrite if exists?
 		area_db[area.name] = area_data
+		area_db_updated.emit(area_db)
 
 func update_room_data(room):
-	persist_room_data(room.area, room.to_room_data())
+	persist_room_data(room.area, room.to_room_data(player))
 
 func persist_room_data(area, room_data):
 	area_db[area.name]["rooms"][room_data["name"]] = room_data
+	area_db_updated.emit(area_db)
 
 func get_area_data(area):
 	if area.name in area_db:
@@ -161,10 +168,10 @@ func _on_player_found(p):
 	if not player:
 		player = p
 
-	update_current_rooms()
+	update_rooms()
 
 
-func update_current_rooms():
+func update_rooms():
 	# we could pass the 'entered' room in here, may be faster
 	if not current_area:
 		find_current_area()
