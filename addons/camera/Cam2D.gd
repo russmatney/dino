@@ -18,13 +18,13 @@ var poi_following_distance = 400
 var pof_following_distance = 400
 
 var zoom_level = 1.0
+var min_zoom_level = 0.2
+var max_zoom_level = 9.0
 var zoom_increment = 0.1
 var zoom_offset = 500
 var zoom_offset_previous
 var zoom_offset_increment = 150
 var zoom_duration = 0.2
-var min_zoom = 0.2
-var max_zoom = 9.0
 
 ###########################################################################
 # ready
@@ -77,11 +77,9 @@ func _process(delta):
 			if not following:
 				find_node_to_follow()
 
-			# TODO how often do we update this?
 			update_pois()
 			update_pofs()
-
-			center_pois()
+			update_focus()
 
 
 ###########################################################################
@@ -137,17 +135,15 @@ func zoom_dir(dir, n_levels = null):
 			zoom_level = n_levels
 			zoom_offset = calc_zoom_offset_increment() * n_levels
 
-	if zoom_level >= max_zoom or zoom_level <= min_zoom:
+	if zoom_level >= max_zoom_level or zoom_level <= min_zoom_level:
 		Cam.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
 	Cam.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
-			# untested
 			update_zoom()
 		cam_mode.ANCHOR:
-			# untested
 			update_zoom()
 		cam_mode.FOLLOW_AND_POIS:
 			# updated via _process
@@ -158,7 +154,7 @@ var zoom_tween
 
 
 func update_zoom():
-	zoom_level = clamp(zoom_level, min_zoom, max_zoom)
+	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
 	zoom_tween = create_tween()
 	var new_zoom = Vector2(zoom_level, zoom_level)
 	zoom_tween.tween_property(self, "zoom", new_zoom, zoom_duration).set_trans(Tween.TRANS_SINE).set_ease(
@@ -350,26 +346,28 @@ func update_pofs():
 
 			pof_follows = to_focus
 
+func clamp_zoom_offset(zoom_factor):
+	# prevent zoom offset moving beyond clamp
+	if zoom_factor == min_zoom_level and zoom_offset < zoom_offset_previous:
+		zoom_offset = zoom_offset_previous
+	elif zoom_factor == max_zoom_level and zoom_offset > zoom_offset_previous:
+		zoom_offset = zoom_offset_previous
 
 func zoom_factor_for_bounds(pt_a, pt_b):
+	# print("pt_a: ", pt_a)
+	# print("pt_b: ", pt_b)
 	var x = abs(pt_a.x - pt_b.x)
 	var y = abs(pt_a.y - pt_b.y)
 	var zoom_factor1 = (x + zoom_offset) / window_size.x
 	var zoom_factor2 = (y + zoom_offset) / window_size.y
-	var zoom_factor = clamp(max(zoom_factor1, zoom_factor2), min_zoom, max_zoom)
+	var zoom_factor = clamp(max(zoom_factor1, zoom_factor2), min_zoom_level, max_zoom_level)
 
-	# prevent zooming beyond clamp
-	if zoom_factor == min_zoom and zoom_offset < zoom_offset_previous:
-		# TODO a bit bouncy, but maybe that's fine
-		zoom_offset = zoom_offset_previous
-	elif zoom_factor == max_zoom and zoom_offset > zoom_offset_previous:
-		zoom_offset = zoom_offset_previous
+	clamp_zoom_offset(zoom_factor)
 	return zoom_factor
 
-
-func center_pois():
-	if pof_follows == null and following == null:
-		return
+func build_focuses():
+	if len(pof_follows) == 0 and not following:
+		return []
 
 	var focuses = []
 
@@ -378,6 +376,14 @@ func center_pois():
 	focuses.append_array(pof_follows)
 	# TODO favor pois based checked importance * proximity
 	focuses.append_array(poi_follows)
+
+	return focuses
+
+func update_focus():
+	# adjusts the offset and zoom based on following, pofs, and pois
+	var focuses = build_focuses()
+	if len(focuses) == 0:
+		return
 
 	var center = Vector2.ZERO
 
@@ -407,10 +413,18 @@ func center_pois():
 		if obj.global_position.y > max_bottom:
 			max_bottom = obj.global_position.y
 
+	# print("max left: ", max_left)
+	# print("max right: ", max_right)
+	# print("max top: ", max_top)
+	# print("max bottom: ", max_bottom)
+
 	center = center / focuses.size()
+	# print("center: ", center)
 	self.global_position = center
 
 	zoom_level = zoom_factor_for_bounds(
 		Vector2(max_right, max_bottom), Vector2(max_left, max_top)
 	)
+
+	# print("zoom_level: ", zoom_level)
 	update_zoom()
