@@ -47,56 +47,49 @@ func update_minimap_data():
 		area_data = {}
 
 	if len(area_data) == 0:
-		# dev only helper!
 		if Engine.is_editor_hint():
+			# draw a map to be sure things work
 			var area = MvaniaGame.area_scenes[0].instantiate()
 			area_data = MvaniaGame.to_area_data(area)
 			if area_data == null:
 				area_data = {}
-			print("created area_data: ", area_data)
-			print("room data: ", area_data["rooms"])
 		else:
 			return
-	else:
-		print("existing area data")
-		print("room data: ", area_data["rooms"])
 
 ################################################################
 # update_map
 
 var rooms = []
 @onready var cam = $Camera2D
-var player_current_room
 
+var last_area_name
 func update_map():
 	if len(area_data) == 0:
 		return
 
-	clear_map()
-	ensure_rooms()
-
-	# if len(rooms) > 0:
-	# 	if player_current_room and is_instance_valid(player_current_room):
-	# 		var r = player_current_room
-	# 		print("setting cam offset: ", r.position)
-	# 		cam.set_offset(r.position)
-	# else:
-	# 	print("no rooms, can't update cam")
-
+	if last_area_name == null or last_area_name != area_data["name"]:
+		clear_map()
+		last_area_name = area_data["name"]
+	update_rooms()
 
 func clear_map():
 	for c in get_children():
 		if c is ColorRect:
 			c.free()
 
-func ensure_rooms():
+func update_rooms():
+	var merged = merged_rect(area_data["rooms"].values())
+	var offset = Vector2.ZERO
+	if merged.position.x < 0:
+		offset.x = -merged.position.x
+	if merged.position.y < 0:
+		offset.y = -merged.position.y
+
 	for room_data in area_data["rooms"].values():
 		var rect = room_data["rect"]
-		rect.position += room_data["position"]
+		rect.position += room_data["position"] - offset
 		var visited = room_data["visited"]
 		var has_player = "has_player" in room_data and room_data["has_player"]
-
-		print("room rect: ", room_data["name"], " ", rect)
 
 		var c_rect = get_node_or_null(str(room_data["name"]))
 		if not c_rect:
@@ -104,22 +97,30 @@ func ensure_rooms():
 			c_rect.name = room_data["name"]
 			add_child(c_rect)
 			c_rect.set_owner(self)
+		c_rect.size = rect.size
+		c_rect.position = rect.position
+		c_rect.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 		rooms.append(c_rect)
 
 		if has_player:
 			c_rect.set_color(Color.CRIMSON)
-			player_current_room = c_rect
-			cam.set_offset(rect.get_center())
+			cam.set_offset(to_global(rect.get_center()))
 		elif visited:
 			c_rect.set_color(Color.PERU)
 		else:
 			c_rect.set_color(Color.AQUAMARINE)
-		c_rect.size = rect.size
-		c_rect.position = rect.position
 
+################################################################
+# input
 
-# ################################################################
-# # draw
+# func _unhandled_input(event):
+# 	if event is InputEventMouseButton:
+# 		print("pos clicked: ", event.global_position)
+# 		print("pos clicked: ", event.position)
+# 		cam.set_offset(event.position)
+
+################################################################
+# draw
 
 # func _draw():
 # 	draw_rect(Rect2(Vector2(32, 32), Vector2(32, 32)), Color.MAGENTA, true)
@@ -131,6 +132,8 @@ func ensure_rooms():
 # 			offset.x = -merged.position.x
 # 		if merged.position.y < 0:
 # 			offset.y = -merged.position.y
+
+# 		draw_rect(merged, Color.MAGENTA, false)
 
 # 		print("merged: ", merged)
 # 		print("offset: ", offset)
