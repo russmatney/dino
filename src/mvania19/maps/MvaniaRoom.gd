@@ -137,7 +137,7 @@ func to_room_data(player=null):
 		var r = Rect2()
 		r.position = rect.position + position
 		r.size = rect.size
-		data["contains_player"] = r.has_point(player.global_position)
+		data["has_player"] = r.has_point(player.global_position)
 	return data
 
 ###########################################

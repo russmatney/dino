@@ -66,6 +66,7 @@ func update_minimap_data():
 
 var rooms = []
 @onready var cam = $Camera2D
+var player_current_room
 
 func update_map():
 	if len(area_data) == 0:
@@ -74,12 +75,13 @@ func update_map():
 	clear_map()
 	ensure_rooms()
 
-	if len(rooms) > 0:
-		var r = rooms[-1]
-		print("setting cam offset: ", r.position)
-		cam.set_offset(r.position)
-	else:
-		print("no rooms, can't update cam")
+	# if len(rooms) > 0:
+	# 	if player_current_room and is_instance_valid(player_current_room):
+	# 		var r = player_current_room
+	# 		print("setting cam offset: ", r.position)
+	# 		cam.set_offset(r.position)
+	# else:
+	# 	print("no rooms, can't update cam")
 
 
 func clear_map():
@@ -92,6 +94,7 @@ func ensure_rooms():
 		var rect = room_data["rect"]
 		rect.position += room_data["position"]
 		var visited = room_data["visited"]
+		var has_player = "has_player" in room_data and room_data["has_player"]
 
 		print("room rect: ", room_data["name"], " ", rect)
 
@@ -103,7 +106,11 @@ func ensure_rooms():
 			c_rect.set_owner(self)
 		rooms.append(c_rect)
 
-		if visited:
+		if has_player:
+			c_rect.set_color(Color.CRIMSON)
+			player_current_room = c_rect
+			cam.set_offset(rect.get_center())
+		elif visited:
 			c_rect.set_color(Color.PERU)
 		else:
 			c_rect.set_color(Color.AQUAMARINE)
