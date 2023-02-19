@@ -12,13 +12,13 @@ var player_data
 var hud = preload("res://src/mvania19/hud/HUD.tscn")
 
 func _ready():
-	Cam.ensure_camera(2, 30000, 7)
+	Cam.ensure_camera(2, 30000, 5)
 	Hood.call_deferred("ensure_hud", hud)
 	machine.start()
 
 	if player_data and len(player_data):
 		print("player_data: ", player_data)
-		# TODO merge
+		# TODO merge persisted data
 
 ###########################################################################
 # _input

@@ -164,3 +164,16 @@ func zoom_in(n_levels=null):
 
 func zoom_out(n_levels=null):
 	cam.zoom_dir("out", n_levels)
+
+
+####################################################################
+# focus
+
+func update_pofs():
+	if cam:
+		# currently also called in cam._process() ...?
+		cam.update_pofs()
+
+func update_pois():
+	if cam:
+		cam.update_pois()

@@ -164,6 +164,7 @@ var paused
 func pause():
 	paused = true
 	if not Engine.is_editor_hint():
+		deactivate_pofs()
 		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 		_on_paused()
 
@@ -172,6 +173,7 @@ func unpause():
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 		_on_unpaused()
+		call_deferred("activate_pofs")
 
 func _on_paused():
 	if visited:
@@ -205,3 +207,20 @@ func to_normal():
 	normal_tween = create_tween()
 	normal_tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
 	normal_tween.tween_property(self, "modulate:a", 1, 0.2)
+
+###########################################
+# pofs
+
+func deactivate_pofs():
+	var pofs = Util.get_children_in_group(self, "pof")
+	for p in pofs:
+		if p.has_method("deactivate"):
+			p.deactivate()
+	# Cam.update_pofs()
+
+func activate_pofs():
+	var pofs = Util.get_children_in_group(self, "pof")
+	for p in pofs:
+		if p.has_method("activate"):
+			p.activate()
+	# Cam.update_pofs()

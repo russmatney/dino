@@ -336,7 +336,19 @@ func update_pois():
 
 func update_pofs():
 	if pof_group:
-		pof_follows = get_tree().get_nodes_in_group(pof_group)
+		var t = get_tree()
+		if t:
+			var pofs = t.get_nodes_in_group(pof_group)
+
+			var to_focus = []
+			for p in pofs:
+				if p.has_method("pof_active"):
+					if p.pof_active():
+						to_focus.append(p)
+				else:
+					to_focus.append(p)
+
+			pof_follows = to_focus
 
 
 func zoom_factor_for_bounds(pt_a, pt_b):
