@@ -53,10 +53,6 @@ func rotate(img):
 	return new_img
 
 
-func img_to_texture(img):
-	return ImageTexture.create_from_image(img)
-
-
 ######################################################################
 # img stats
 

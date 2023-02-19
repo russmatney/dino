@@ -13,4 +13,4 @@ func _ready():
 ##########################################
 # minimap
 
-@onready var minimap = $%Minimap
+# @onready var minimap = $%Minimap

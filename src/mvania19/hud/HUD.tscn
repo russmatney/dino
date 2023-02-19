@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0px3m4jnsq1j"]
+[gd_scene load_steps=6 format=3 uid="uid://csrh7werb01q3"]
 
 [ext_resource type="Script" path="res://src/mvania19/hud/HUD.gd" id="1_d2rgr"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_gncwx"]
-[ext_resource type="Script" path="res://src/mvania19/hud/Minimap.gd" id="2_r01mc"]
+[ext_resource type="PackedScene" uid="uid://b7b7ck0q42nl5" path="res://src/mvania19/hud/Minimap.tscn" id="2_5w0jp"]
 [ext_resource type="PackedScene" uid="uid://dd1matykobs6c" path="res://addons/hood/NotifLabel.tscn" id="4_d4hyq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]
@@ -36,15 +36,7 @@ handle_input_locally = false
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport"]
-color = Color(0, 0.439216, 0, 1)
-
-[node name="Camera2D" type="Camera2D" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport"]
-
-[node name="Minimap" type="Node2D" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport"]
-unique_name_in_owner = true
-scale = Vector2(0.4, 0.4)
-script = ExtResource("2_r01mc")
+[node name="Minimap" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_5w0jp")]
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2

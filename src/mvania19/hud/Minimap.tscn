@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7b7ck0q42nl5"]
+
+[ext_resource type="Script" path="res://src/mvania19/hud/Minimap.gd" id="1_dgo60"]
+
+[node name="Minimap" type="Node2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_dgo60")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2.5, 2.5)
+offset = Vector2(-224, 56)
+position_smoothing_enabled = true
+
+[node name="01Entrance" type="ColorRect" parent="."]
+offset_top = -72.0
+offset_right = 256.0
+offset_bottom = 32.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="02MainTower" type="ColorRect" parent="."]
+offset_left = -80.0
+offset_top = -232.0
+offset_bottom = 32.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="03FirstSnowMan" type="ColorRect" parent="."]
+offset_left = -224.0
+offset_top = -72.0
+offset_right = -80.0
+offset_bottom = 56.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="04SecondSnowman" type="ColorRect" parent="."]
+offset_top = -248.0
+offset_right = 144.0
+offset_bottom = -104.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="05Crossroads" type="ColorRect" parent="."]
+offset_left = -224.0
+offset_top = -184.0
+offset_right = -80.0
+offset_bottom = -72.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="06BossChamber" type="ColorRect" parent="."]
+offset_left = -336.0
+offset_top = -312.0
+offset_right = -88.0
+offset_bottom = -184.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="07ThirdSnowman" type="ColorRect" parent="."]
+offset_left = -464.0
+offset_top = -280.0
+offset_right = -336.0
+offset_bottom = -168.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="08DownTower" type="ColorRect" parent="."]
+offset_left = -344.0
+offset_top = -176.0
+offset_right = -224.0
+offset_bottom = 136.0
+color = Color(0.498039, 1, 0.831373, 1)
+
+[node name="09Elevator" type="ColorRect" parent="."]
+offset_left = -224.0
+offset_top = 56.0
+offset_right = -112.0
+offset_bottom = 160.0
+color = Color(0.498039, 1, 0.831373, 1)
