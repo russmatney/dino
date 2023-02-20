@@ -73,6 +73,10 @@ func update_room_data(room):
 	persist_room_data(room.area, room.to_room_data(player))
 
 func persist_room_data(area, room_data):
+	var old_room_data = area_db[area.name]["rooms"][room_data["name"]]
+	if "visited" in room_data and room_data["visited"]:
+		if not "visited" in old_room_data or not old_room_data["visited"]:
+			MvaniaSounds.play_sound("new_room_blip")
 	area_db[area.name]["rooms"][room_data["name"]] = room_data
 	area_db_updated.emit(area_db)
 

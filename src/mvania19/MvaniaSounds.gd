@@ -20,6 +20,18 @@ var sounds = {
 			preload("res://src/mvania19/sounds/heavyfall1.sfxr"),
 			preload("res://src/mvania19/sounds/heavyfall2.sfxr"),
 		],
+	"new_room_blip":
+	[
+			preload("res://src/mvania19/sounds/new_room_blip1.sfxr"),
+			preload("res://src/mvania19/sounds/new_room_blip2.sfxr"),
+			preload("res://src/mvania19/sounds/new_room_blip3.sfxr"),
+		],
+	"coin":
+	[
+			preload("res://src/mvania19/sounds/coin1.sfxr"),
+			preload("res://src/mvania19/sounds/coin2.sfxr"),
+			preload("res://src/mvania19/sounds/coin3.sfxr"),
+		],
 	"cool-kids":
 	[
 		[

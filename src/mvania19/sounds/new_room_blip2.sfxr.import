@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://vi4ygv34kuhh"
+path="res://.godot/imported/new_room_blip2.sfxr-63e46a51ddae07c1e0861278a7ec1d26.sample"
+
+[deps]
+
+source_file="res://src/mvania19/sounds/new_room_blip2.sfxr"
+dest_files=["res://.godot/imported/new_room_blip2.sfxr-63e46a51ddae07c1e0861278a7ec1d26.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
