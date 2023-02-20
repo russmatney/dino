@@ -44,7 +44,6 @@ func debug_label_update(label_id, data_arr, call_site={}):
 		text += str(t, " ")
 	label.text = text
 	label.set_scale(Vector2i(16, 16))
-
 	rearrange_labels()
 
 ###########################################################################
@@ -56,7 +55,7 @@ func rearrange_labels():
 	var by_source = {}
 	for label in debug_label_db.values():
 		var source = "None"
-		if "call_site" in label and "source" in label["call_site"]:
+		if "call_site" in label and label["call_site"] != null and "source" in label["call_site"]:
 			source = label["call_site"]["source"].get_file().get_basename()
 
 		if source in by_source:

@@ -100,8 +100,14 @@ func debug_label(text_arr):
 	ensure_debug_overlay()
 	if text_arr is String:
 		text_arr = [text_arr]
-	var call_site = get_stack()[1]
-	var label_id = callsite_to_label_id(call_site)
+	var s = get_stack()
+	var call_site
+	var label_id
+	if len(s) > 1:
+		call_site = s[1]
+		label_id = callsite_to_label_id(call_site)
+	else:
+		label_id = "NONE"
 	debug_label_update.emit(label_id, text_arr, call_site)
 
 ###########################################################################
@@ -135,11 +141,12 @@ func find_player():
 # logger
 
 func log_prefix(stack):
-	var call_site = stack[1]
-	if call_site["source"].match("*/addons/*"):
-		return "<" + call_site["source"].get_file().get_basename() + ">: "
-	else:
-		return "[" + call_site["source"].get_file().get_basename() + "]: "
+	if len(stack) > 0:
+		var call_site = stack[1]
+		if call_site["source"].match("*/addons/*"):
+			return "<" + call_site["source"].get_file().get_basename() + ">: "
+		else:
+			return "[" + call_site["source"].get_file().get_basename() + "]: "
 
 func to_printable(msgs, stack):
 	var m = ""
