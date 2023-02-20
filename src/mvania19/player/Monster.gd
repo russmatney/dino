@@ -67,7 +67,9 @@ func _physics_process(_delta):
 ###########################################################################
 # stamp frame
 
-func stamp_frame():
+func stamp_frame(opts={}):
+	var scale = opts.get("scale", 0.3)
+	var ttl = opts.get("ttl", 0.5)
 	var new_anim = AnimatedSprite2D.new()
 	new_anim.sprite_frames = anim.sprite_frames
 	new_anim.animation = anim.animation
@@ -78,8 +80,8 @@ func stamp_frame():
 	Navi.add_child_to_current(new_anim)
 
 	var t = create_tween()
-	t.tween_property(new_anim, "scale", Vector2(0.3, 0.3), 0.5)
-	t.parallel().tween_property(new_anim, "modulate:a", 0.3, 0.5)
+	t.tween_property(new_anim, "scale", Vector2(scale, scale), ttl)
+	t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
 	t.tween_callback(new_anim.queue_free)
 
 
