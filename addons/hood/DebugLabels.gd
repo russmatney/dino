@@ -7,8 +7,8 @@ extends PanelContainer
 @export var create_new_label: bool :
 	set(v):
 		create_new_label = v
-		# if Engine.is_editor_hint():
-		# 	Hood.debug_label("Width", str("width: ", 360))
+		if Engine.is_editor_hint():
+			debug_label_update("DEBUG", ["width", 360])
 
 ###########################################################################
 # ready
@@ -32,5 +32,5 @@ func debug_label_update(label_id, text_arr):
 
 	var text = "[right]"
 	for t in text_arr:
-		text += str(t)
+		text += str(t, " ")
 	lbl.text = text
