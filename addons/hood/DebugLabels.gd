@@ -23,11 +23,14 @@ func _ready():
 
 var label_scene = preload("res://addons/hood/DebugLabel.tscn")
 
-func debug_label_update(node_name, text):
-	var lbl = container.get_node_or_null(node_name)
+func debug_label_update(label_id, text_arr):
+	var lbl = container.get_node_or_null(label_id)
 	if not lbl:
 		lbl = label_scene.instantiate()
-		lbl.name = node_name
+		lbl.name = label_id
 		container.add_child(lbl)
 
-	lbl.text = "[right]" + text
+	var text = "[right]"
+	for t in text_arr:
+		text += str(t)
+	lbl.text = text

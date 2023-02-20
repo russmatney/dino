@@ -13,6 +13,8 @@ func prn(msg, msg2=null, msg3=null):
 func _ready():
 	print("<Hood> autoload ready")
 
+	debug_label("Hood: loaded")
+
 ###########################################################################
 # config
 
@@ -87,12 +89,18 @@ func ensure_debug_overlay():
 	debug_overlay = debug_overlay_scene.instantiate()
 	add_child(debug_overlay)
 
-signal debug_label_update(node_name, text)
+signal debug_label_update(label_id, text)
 
-func debug_label(node_name, text):
-	# TODO make this node_name safe (remove weird chars)
+func debug_label(text_arr):
+	if text_arr is String:
+		text_arr = [text_arr]
+	var call_site = get_stack()[1]
+	var label_id = ""
+	label_id += call_site["source"]
+	label_id += str(call_site["line"])
+	label_id = label_id.replace("/", "").replace(":", "").replace(".", "")
 	ensure_debug_overlay()
-	emit_signal("debug_label_update", node_name, text)
+	emit_signal("debug_label_update", label_id, text_arr)
 
 ###########################################################################
 # find_player

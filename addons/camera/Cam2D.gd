@@ -67,6 +67,13 @@ func update_window_size():
 
 
 func _process(delta):
+	Hood.debug_label(["Window Size", window_size])
+	var vp_size = get_viewport().size
+	Hood.debug_label(["Viewport Size", vp_size])
+	Hood.debug_label(["Zoom Level", "[jump]", zoom_level, "[/jump]"])
+	Hood.debug_label(["Zoom Offset", zoom_offset])
+	Hood.debug_label(["Cam Center", get_target_position()])
+
 	match mode:
 		cam_mode.FOLLOW:
 			if not following:
@@ -312,15 +319,10 @@ func update_focus():
 	update_zoom_level_for_bounds(merged_rect)
 
 	zoom_level = round(clamp(zoom_level, min_zoom_level, max_zoom_level))
-	Hood.debug_label("calced+clamped zoom level", str("calced zoom level: ", zoom_level))
 	clamp_zoom_offset()
 
-	Hood.debug_label("zoom offset", str("zoom offset: ", zoom_offset))
 
 	update_zoom()
-
-	Hood.debug_label("final zoom level", str("final zoom level: ", zoom_level))
-	Hood.debug_label("cam target pos", str("cam target pos: ", get_target_position()))
 
 func clamp_zoom_offset():
 	# prevent zoom offset moving beyond clamp
@@ -333,34 +335,20 @@ func clamp_zoom_offset():
 var zoom_rect_min = 50
 var zoom_min_margin = 50
 
+## Attempts to determine a new zoom based on the passed rectangle of pofs
+## camera2d zoom ~= viewport.size / desired_rect.size
 func update_zoom_level_for_bounds(focuses_rect):
-	Hood.debug_label("focuses rect", str("focuses rect: ", focuses_rect, " end: ", focuses_rect.end))
-	# print("pt_a: ", pt_a)
-	# print("pt_b: ", pt_b)
+	var vp_size = get_viewport().size
+
+	Hood.debug_label(["POF Rect", focuses_rect])
+
 	var x = focuses_rect.size.x
 	var y = focuses_rect.size.y
-	Hood.debug_label("frect size", str("frect size: ", focuses_rect.size))
-	Hood.debug_label("window size", str("window size: ", window_size))
-	var vp_size = get_viewport().size
-	Hood.debug_label("viewport size", str("viewport size: ", vp_size))
-
-	var frect_over_viewport_x = vp_size.x / focuses_rect.size.x
-	var frect_over_viewport_y = vp_size.y / focuses_rect.size.y
-	Hood.debug_label("viewport frect x ratio", str("frect/viewport x: ", frect_over_viewport_x))
-	Hood.debug_label("viewport frect y ratio", str("frect/viewport y: ", frect_over_viewport_y))
-
-	# zoom = viewport / desired_rect
-
 	var x_factor = max(focuses_rect.size.x, zoom_rect_min) + zoom_min_margin
 	var y_factor = max(focuses_rect.size.y, zoom_rect_min) + zoom_min_margin
 	var x_ratio = vp_size.x / x_factor
 	var y_ratio = vp_size.y / y_factor
 	zoom_level = min(x_ratio, y_ratio)
-
-	Hood.debug_label("frect x min margin", str("x factor: ", x_factor))
-	Hood.debug_label("frect y min margin", str("y factor: ", y_factor))
-	Hood.debug_label("final x ratio", str("x ratio: ", x_ratio))
-	Hood.debug_label("final y ratio", str("y ratio: ", y_ratio))
 
 
 ###########################################################################
