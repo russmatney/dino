@@ -25,7 +25,7 @@ func recreate_db():
 			persist_area(area_inst)
 			area_inst.queue_free()
 		else:
-			print("area failed to instantiate: ", area)
+			Hood.prn("area failed to instantiate: ", area)
 	Hood.prn("recreated area_db: ", len(area_db), " areas.")
 
 	area_db_recreated.emit(area_db)
@@ -210,7 +210,7 @@ func travel_to_area(dest_area, elevator_path):
 
 	if current_area.scene_file_path == dest_area:
 		# we're already in the right area
-		print("already in same area?")
+		Hood.prn("already in same area?")
 
 	var area = load(dest_area)
 	load_area(area, elevator_path)

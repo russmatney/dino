@@ -11,7 +11,7 @@ func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 
 	if menu_song:
-		print("[DJ]: Menu song configured")
+		Hood.prn("Menu song configured")
 
 	menu_song_player = setup_sound(menu_song, {"is_sound": false})
 

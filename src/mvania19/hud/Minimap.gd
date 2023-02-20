@@ -121,15 +121,6 @@ func update_camera_limits(merged: Rect2):
 	cam.set_limit(SIDE_BOTTOM, max(viewport_dim, merged.size.y / 2.0 + merged.position.y - limit_offset * 2))
 
 ################################################################
-# input
-
-# func _unhandled_input(event):
-# 	if event is InputEventMouseButton:
-# 		print("pos clicked: ", event.global_position)
-# 		print("pos clicked: ", event.position)
-# 		cam.set_offset(event.position)
-
-################################################################
 # draw
 
 # func _draw():
@@ -141,9 +132,7 @@ func update_camera_limits(merged: Rect2):
 # 		if merged.position.y < 0:
 # 			offset.y = -merged.position.y
 
-# 		print("(draw)merged rect (pre-offset): ", merged)
+# 		Hood.prn("(draw)merged rect (pre-offset): ", merged)
 # 		merged.position += offset
-
-# 		print("(draw)merged rect: ", merged)
-
+# 		Hood.prn("(draw)merged rect: ", merged)
 # 		draw_rect(merged, Color.MAGENTA, false)

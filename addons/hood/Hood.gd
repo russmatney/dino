@@ -3,8 +3,6 @@ extends Node
 
 func _ready():
 	prn("autoload ready")
-	print("<Hood> autoload ready")
-
 	debug_label("Hood: loaded")
 
 ###########################################################################
@@ -152,8 +150,9 @@ func log_prefix(stack):
 func to_printable(msgs, stack):
 	var m = ""
 	if len(stack) > 0:
-		var color = "aquamarine"
-		m += "[color=%s]%s[/color]" % [color, log_prefix(get_stack())]
+		var prefix = log_prefix(stack)
+		var color = "aquamarine" if prefix[0] == "[" else "peru"
+		m += "[color=%s]%s[/color]" % [color, prefix]
 	for ms in msgs:
 		m += str(ms)
 	return m

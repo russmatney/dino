@@ -3,8 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	print("<Cam>")
+	Hood.prn("<Cam>")
 
 
 func _exit_tree():
-	print("</Cam>")
+	Hood.prn("</Cam>")

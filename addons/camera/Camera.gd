@@ -114,14 +114,14 @@ var slowmo_scales = {}
 
 
 func start_slowmo(label, scale = 0.5):
-	# print("[CAM] start slowmo: ", label, " scale: ", scale)
+	Hood.debug_label("[CAM] start slowmo: ", label, " scale: ", scale)
 	slowmos.append(label)
 	slowmo_scales[label] = scale
 	Engine.time_scale = scale
 
 
 func stop_slowmo(label):
-	# print("[CAM] stop slowmo: ", label)
+	Hood.debug_label("[CAM] stop slowmo: ", label)
 	slowmos.erase(label)
 	slowmo_scales.erase(label)
 	emit_signal("slowmo_stopped", label)

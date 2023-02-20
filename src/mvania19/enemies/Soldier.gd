@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 func _ready():
-	print("soldier ready")
+	Hood.prn("ready")
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0

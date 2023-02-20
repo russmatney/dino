@@ -3,10 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	print("[BEEHIVE] entering tree")
-	pass
+	Hood.prn("entering tree")
 
 
 func _exit_tree():
-	print("[BEEHIVE] exiting tree")
-	pass
+	Hood.prn("exiting tree")

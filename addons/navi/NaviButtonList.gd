@@ -33,10 +33,6 @@ func _ready():
 		request_ready()
 
 
-func print_button_things():
-	print("button button things things")
-
-
 ## add_menu_item #####################################################################
 
 

@@ -82,4 +82,4 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 		next_state.enter(ctx)
 		transitioned.emit(next_state.name)
 	else:
-		print("Error! no next state! derp!", target_state_name, ctx)
+		Hood.err("Error! no next state! derp!", target_state_name, ctx)

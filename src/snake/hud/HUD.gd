@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
-	print("[snake] HUD ready")
+	Hood.prn("ready")
 	var _x = Hood.connect("found_player",Callable(self,"setup_player"))
 	Hood.call_deferred("find_player")
 

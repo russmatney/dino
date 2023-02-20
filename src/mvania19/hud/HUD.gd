@@ -6,7 +6,7 @@ extends CanvasLayer
 # ready
 
 func _ready():
-	print("\n\nmvania hud ready")
+	Hood.prn("ready")
 
 
 

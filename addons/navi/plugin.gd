@@ -3,10 +3,10 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	print("[NAVI] entering tree")
+	Hood.prn("enter")
 	add_autoload_singleton("Navi", "res://addons/navi/Navi.gd")
 
 
 func _exit_tree():
-	print("[NAVI] leaving tree")
+	Hood.prn("exit")
 	remove_autoload_singleton("Navi")
