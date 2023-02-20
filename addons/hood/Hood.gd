@@ -81,18 +81,28 @@ func ensure_debug_overlay():
 	debug_overlay = debug_overlay_scene.instantiate()
 	add_child(debug_overlay)
 
-signal debug_label_update(label_id, text)
+signal debug_label_update(label_id, text, call_site)
+
+func callsite_to_label_id(call_site):
+	var lbl = ""
+	lbl += call_site["source"].get_file().get_basename()
+	lbl += " "
+	lbl += call_site["function"]
+	# lbl += str(call_site["line"])
+	# lbl = lbl.replace("/", "").replace(":", "").replace(".", "")
+	return lbl
 
 func debug_label(text_arr):
+	if Engine.is_editor_hint():
+		prn("DEBUG_LABEL: ", text_arr)
+		return
+
+	ensure_debug_overlay()
 	if text_arr is String:
 		text_arr = [text_arr]
 	var call_site = get_stack()[1]
-	var label_id = ""
-	label_id += call_site["source"]
-	label_id += str(call_site["line"])
-	label_id = label_id.replace("/", "").replace(":", "").replace(".", "")
-	ensure_debug_overlay()
-	emit_signal("debug_label_update", label_id, text_arr)
+	var label_id = callsite_to_label_id(call_site)
+	debug_label_update.emit(label_id, text_arr, call_site)
 
 ###########################################################################
 # find_player
@@ -131,32 +141,29 @@ func log_prefix(stack):
 	else:
 		return "[" + call_site["source"].get_file().get_basename() + "]: "
 
+func to_printable(msgs, stack):
+	var m = ""
+	if len(stack) > 0:
+		var color = "aquamarine"
+		m += "[color=%s]%s[/color]" % [color, log_prefix(get_stack())]
+	for ms in msgs:
+		m += str(ms)
+	return m
+
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-
-	var m = log_prefix(get_stack())
-	for ms in msgs:
-		m += str(ms)
-
-	print(m)
+	var m = to_printable(msgs, get_stack())
+	print_rich(m)
 
 func warn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-
-	var m = log_prefix(get_stack())
-	for ms in msgs:
-		m += str(ms)
-
+	var m = to_printable(msgs, get_stack())
 	push_warning(m)
 
 func err(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-
-	var m = log_prefix(get_stack())
-	for ms in msgs:
-		m += str(ms)
-
+	var m = to_printable(msgs, get_stack())
 	push_error(m)
