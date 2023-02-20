@@ -43,41 +43,6 @@ func _ready():
 		preload("res://assets/sounds/snake/speedup2.sfxr"),
 		preload("res://assets/sounds/snake/speedup3.sfxr"),
 	],
-	"cool-kids":
-	[
-		[
-			preload("res://assets/music/sulosounds/cool-kids-electronic-bass-groo.wav"),
-			{"is_sound": false}
-		],
-	],
-	"chill-electric":
-	[
-		[
-			preload("res://assets/music/sulosounds/chill-electric-background.wav"),
-			{"is_sound": false}
-		],
-	],
-	"evening-dogs":
-	[
-		[
-			preload("res://assets/music/sulosounds/evening-dogs.wav"),
-			{"is_sound": false}
-		],
-	],
-	"funk-till-five":
-	[
-		[
-			preload("res://assets/music/sulosounds/funk-till-five-loop.wav"),
-			{"is_sound": false}
-		],
-	],
-	"funkmachine":
-	[
-		[
-			preload("res://assets/music/sulosounds/funkmachine-master-loop.wav"),
-			{"is_sound": false}
-		],
-	],
 	"field-stars":
 	[
 		[
