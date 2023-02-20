@@ -75,11 +75,12 @@ func stamp_frame():
 
 	# definitely more position work to do
 	new_anim.global_position = global_position + anim.position
-
 	Navi.add_child_to_current(new_anim)
 
-	await get_tree().create_timer(1.0).timeout
-	new_anim.queue_free()
+	var t = create_tween()
+	t.tween_property(new_anim, "scale", Vector2(0.3, 0.3), 0.5)
+	t.parallel().tween_property(new_anim, "modulate:a", 0.3, 0.5)
+	t.tween_callback(new_anim.queue_free)
 
 
 ###########################################################################
