@@ -149,9 +149,10 @@ func zoom_dir(dir, n_levels = null):
 			zoom_offset = calc_zoom_offset_increment() * n_levels
 
 	if zoom_level >= max_zoom_level or zoom_level <= min_zoom_level:
-		Cam.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
+		Hood.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
-	Cam.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
+	# TODO print helper with throttle/debounce
+	Hood.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -183,7 +184,7 @@ func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
 
 	if nodes.size() > 1:
-		Cam.prn("[WARN] Camera found multiple nodes to follow", nodes)
+		Hood.prn("[WARN] Camera found multiple nodes to follow", nodes)
 
 	if nodes.size() > 0:
 		following = nodes[0]
@@ -204,7 +205,7 @@ func attach_to_nearest_anchor():
 	# find nearest anchor node, reparent to that
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
-		Cam.prn("[WARN] Camera found no anchor nodes, attaching to player")
+		Hood.warn("[WARN] Camera found no anchor nodes, attaching to player")
 		Util.change_parent(self, following)
 	else:
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...
@@ -379,7 +380,7 @@ func screenshake_reset():
 
 func process_shake(delta):
 	if trauma > 0:
-		# Cam.prn("[CAM] Trauma: ", trauma)
+		Hood.debug_label(["[CAM] Trauma: ", trauma])
 		trauma -= trauma_decrement_factor * delta
 		trauma = clamp(trauma, 0.0, 1.0)
 		if trauma == 0.0:

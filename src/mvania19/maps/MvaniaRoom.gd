@@ -2,16 +2,6 @@
 class_name MvaniaRoom
 extends Node2D
 
-func prn(msg, msg2=null, msg3=null, msg4=null):
-	if msg4:
-		print("[MvaniaRoom ", name, "]: ", msg, msg2, msg3, msg4)
-	elif msg3:
-		print("[MvaniaRoom ", name, "]: ", msg, msg2, msg3)
-	elif msg2:
-		print("[MvaniaRoom ", name, "]: ", msg, msg2)
-	else:
-		print("[MvaniaRoom ", name, "]: ", msg)
-
 ###########################################
 # tilemaps
 

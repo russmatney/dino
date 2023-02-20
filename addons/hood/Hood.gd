@@ -1,16 +1,8 @@
 @tool
 extends Node
 
-# TODO logger
-func prn(msg, msg2=null, msg3=null):
-	if msg3:
-		print("[HOOD]: ", msg, msg2, msg3)
-	elif msg2:
-		print("[HOOD]: ", msg, msg2)
-	elif msg:
-		print("[HOOD]: ", msg)
-
 func _ready():
+	prn("autoload ready")
 	print("<Hood> autoload ready")
 
 	debug_label("Hood: loaded")
@@ -128,3 +120,43 @@ func find_player():
 		return
 
 	emit_signal("found_player", player)
+
+############################################################################
+# logger
+
+func log_prefix(stack):
+	var call_site = stack[1]
+	if call_site["source"].match("*/addons/*"):
+		return "<" + call_site["source"].get_file().get_basename() + ">: "
+	else:
+		return "[" + call_site["source"].get_file().get_basename() + "]: "
+
+func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+
+	var m = log_prefix(get_stack())
+	for ms in msgs:
+		m += str(ms)
+
+	print(m)
+
+func warn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+
+	var m = log_prefix(get_stack())
+	for ms in msgs:
+		m += str(ms)
+
+	push_warning(m)
+
+func err(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+
+	var m = log_prefix(get_stack())
+	for ms in msgs:
+		m += str(ms)
+
+	push_error(m)

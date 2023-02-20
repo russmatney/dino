@@ -2,14 +2,6 @@
 class_name MvaniaArea
 extends Node2D
 
-func prn(msg, msg2=null, msg3=null):
-	if msg3:
-		print("[MvaniaArea ", name, "]: ", msg, msg2, msg3)
-	elif msg2:
-		print("[MvaniaArea ", name, "]: ", msg, msg2)
-	else:
-		print("[MvaniaArea ", name, "]: ", msg)
-
 ###########################################################
 # rooms
 
@@ -61,7 +53,7 @@ func player_spawn_coords() -> Vector2:
 	for e in eles:
 		return e.global_position
 
-	prn("[WARN] no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
+	Hood.warn("no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
 	return Vector2.ZERO
 
 var spawn_node_path
@@ -78,8 +70,8 @@ func _ready():
 		# assuming we're not in a 'proper' MvaniaGame state
 		MvaniaGame.persist_area(self)
 		if Engine.is_editor_hint():
-			prn("Persisted area data: \n")
-			prn(MvaniaGame.get_area_data(self))
+			Hood.prn("Persisted area data: \n")
+			Hood.prn(MvaniaGame.get_area_data(self))
 
 	init_room_data()
 

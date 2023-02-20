@@ -4,20 +4,6 @@ extends Node2D
 class_name MapGen
 
 
-func prn(msg, msg2 = null, msg3 = null, msg4 = null, msg5 = null):
-	var s = "[MapGen] "
-	if msg5:
-		print(str(s, msg, msg2, msg3, msg4, msg5))
-	elif msg4:
-		print(str(s, msg, msg2, msg3, msg4))
-	elif msg3:
-		print(str(s, msg, msg2, msg3))
-	elif msg2:
-		print(str(s, msg, msg2))
-	elif msg:
-		print(str(s, msg))
-
-
 ######################################################################
 # ready
 
@@ -74,7 +60,7 @@ func regenerate_image():
 
 func do_clear(_v):
 	if scene_ready:
-		prn("Clear")
+		Hood.prn("Clear")
 		var node = get_node_or_null(room_node_path)
 		if node:
 			node.queue_free()
@@ -160,7 +146,7 @@ func ensure_image_node(name, i=0, img=null):
 func colorize_coord(ctx):
 	if ctx.group:
 		if not ctx.img:
-			prn("[WARN] colorize_coord ctx without img")
+			Hood.warn("[WARN] colorize_coord ctx without img")
 			return
 		# print("setting coord to color: ", ctx.coord, " ", ctx.group.color)
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
@@ -182,7 +168,7 @@ func colorize_image(img):
 
 func do_persist_tilemap(_val = null):
 	if scene_ready:
-		prn(str("persisting tilemap: ", Time.get_time_string_from_system()))
+		Hood.prn("persisting tilemap: ", Time.get_time_string_from_system())
 		persist_tilemap_to_disk()
 
 
@@ -202,7 +188,7 @@ func persist_tilemap_to_disk():
 		push_error(str("No node found for node_path: ", persist_node_path))
 
 	if not node.get_children().size():
-		prn(str(persist_node_path, " has no children, skipping persist"))
+		Hood.prn(persist_node_path, " has no children, skipping persist")
 		return
 
 	for c in node.get_children():
@@ -220,6 +206,6 @@ func persist_tilemap_to_disk():
 		var error = ResourceSaver.save(scene, path)
 		if error != OK:
 			push_error("Error while saving Map")
-			prn(str("E: ", error))
+			Hood.prn("E: ", error)
 		else:
-			prn(str("Successfully saved new map: ", path))
+			Hood.prn("Successfully saved new map: ", path)

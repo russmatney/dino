@@ -2,20 +2,6 @@
 extends Node2D
 
 
-func prn(msg, msg2 = null, msg3 = null, msg4 = null, msg5 = null):
-	var s = "[TowerClimb] "
-	if msg5:
-		print(str(s, msg, msg2, msg3, msg4, msg5))
-	elif msg4:
-		print(str(s, msg, msg2, msg3, msg4))
-	elif msg3:
-		print(str(s, msg, msg2, msg3))
-	elif msg2:
-		print(str(s, msg, msg2))
-	elif msg:
-		print(str(s, msg))
-
-
 func collect_tiles():
 	var ts = []
 	ts.append_array(get_tree().get_nodes_in_group("bluetile"))

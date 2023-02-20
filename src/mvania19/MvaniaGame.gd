@@ -1,16 +1,6 @@
 @tool
 extends Node
 
-func prn(msg, msg2=null, msg3=null, msg4=null):
-	if msg4:
-		print("[MvaniaGame]: ", msg, msg2, msg3, msg4)
-	elif msg3:
-		print("[MvaniaGame]: ", msg, msg2, msg3)
-	elif msg2:
-		print("[MvaniaGame]: ", msg, msg2)
-	else:
-		print("[MvaniaGame]: ", msg)
-
 ###########################################################
 # area DB
 
@@ -27,7 +17,7 @@ signal area_db_recreated(area_db)
 signal area_db_updated(area_db)
 
 func recreate_db():
-	prn("recreating area_db")
+	Hood.prn("recreating area_db")
 	area_db = {}
 	for area in area_scenes:
 		var area_inst = area.instantiate()
@@ -36,13 +26,13 @@ func recreate_db():
 			area_inst.queue_free()
 		else:
 			print("area failed to instantiate: ", area)
-	prn("recreated area_db: ", len(area_db), " areas.")
+	Hood.prn("recreated area_db: ", len(area_db), " areas.")
 
 	area_db_recreated.emit(area_db)
 
 func print_area_db():
 	# TODO pretty print
-	prn(area_db)
+	Hood.prn(area_db)
 
 func to_area_data(area):
 	area.ensure_rooms()
@@ -165,10 +155,10 @@ func find_current_area():
 	for c in get_tree().get_root().get_children():
 		if c is MvaniaArea:
 			current_area = c
-			prn("[WARN] manually setting current_area")
+			Hood.prn("[WARN] manually setting current_area")
 
 func _on_player_found(p):
-	prn("player found")
+	Hood.prn("player found")
 	if not player:
 		player = p
 
@@ -181,11 +171,11 @@ func update_rooms():
 		find_current_area()
 
 	if not current_area:
-		prn("[WARN] No current area.")
+		Hood.prn("[WARN] No current area.")
 		return
 
 	if len(current_area.rooms) == 0:
-		prn("[WARN] Zero current area rooms.")
+		Hood.prn("[WARN] Zero current area rooms.")
 		return
 
 	for room in current_area.rooms:
@@ -209,14 +199,14 @@ func update_rooms():
 # HUD
 
 func _on_hud_ready():
-	prn("hud ready")
+	Hood.prn("hud ready")
 	# TODO show current room, area data?
 
 ###########################################################
 # Area travel
 
 func travel_to_area(dest_area, elevator_path):
-	prn("traveling to area: ", dest_area, " ", elevator_path)
+	Hood.prn("traveling to area: ", dest_area, " ", elevator_path)
 
 	if current_area.scene_file_path == dest_area:
 		# we're already in the right area
