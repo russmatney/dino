@@ -21,6 +21,7 @@ func _ready():
 		Hood.prn("player_data: ", player_data)
 		# TODO merge persisted data
 
+	sword.bodies_updated.connect(_on_sword_bodies_updated)
 	update_actions()
 
 func _on_transit(state):
@@ -28,6 +29,15 @@ func _on_transit(state):
 
 	if state in ["Fall", "Run"]:
 		stamp_frame()
+
+func _on_sword_bodies_updated(bodies):
+	if len(bodies) > 0:
+		# TODO hide when we've seen some amount of sword action
+		# i.e. the player has learned it
+		# TODO combine with 'forget learned actions' pause button
+		update_action_hint("m", "Sword")
+	else:
+		hide_action_hint()
 
 ###########################################################################
 # _input
@@ -41,10 +51,22 @@ func _unhandled_input(event):
 		sword.swing()
 
 ###########################################################################
-# actions
+# action hint
 
 @onready var action_hint = $ActionHint
 @onready var action_hint_label = $ActionHint/Label
+@onready var action_hint_key = $ActionHint/Key
+
+func update_action_hint(key, label):
+	action_hint.set_visible(true)
+	action_hint_key.text = "[center][jump]" + key
+	action_hint_label.text = "[center][jump]" + label
+
+func hide_action_hint():
+	action_hint.set_visible(false)
+
+###########################################################################
+# actions
 
 var actions = []
 func add_action(ax):
@@ -56,12 +78,11 @@ func remove_action(ax):
 
 func update_actions():
 	if len(actions) > 0:
-		action_hint.set_visible(true)
 		var ax = actions[0]
 		var action_label = ax["label"] if "label" in ax else "Action"
-		action_hint_label.text = "[center][jump]" + action_label
+		update_action_hint("e", action_label)
 	else:
-		action_hint.set_visible(false)
+		hide_action_hint()
 
 ###########################################################################
 # movement
