@@ -38,4 +38,16 @@ var sounds = {
 			preload("res://src/mvania19/sounds/swordswing2.sfxr"),
 			preload("res://src/mvania19/sounds/swordswing3.sfxr"),
 		],
+	"soldierhit":
+	[
+			preload("res://src/mvania19/sounds/soldierhit.sfxr"),
+			preload("res://src/mvania19/sounds/soldierhit1.sfxr"),
+			preload("res://src/mvania19/sounds/soldierhit2.sfxr"),
+		],
+	"soldierdead":
+	[
+			preload("res://src/mvania19/sounds/soldierdead1.sfxr"),
+			preload("res://src/mvania19/sounds/soldierdead2.sfxr"),
+			preload("res://src/mvania19/sounds/soldierdead3.sfxr"),
+		],
 }

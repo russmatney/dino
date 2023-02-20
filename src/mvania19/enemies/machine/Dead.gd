@@ -3,6 +3,8 @@ extends State
 
 func enter(_ctx={}):
 	actor.anim.play("dead")
+	Cam.screenshake(0.3)
+	MvaniaSounds.play_sound("soldierdead")
 
 
 func physics_process(delta):

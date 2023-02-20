@@ -21,15 +21,21 @@ position = Vector2(-72, -72)
 [node name="@CamPOF@31466" parent="." instance=ExtResource("4_lrt4a")]
 position = Vector2(72, 56)
 
+[node name="@CamPOF@48953" parent="." instance=ExtResource("4_lrt4a")]
+position = Vector2(-72, -72)
+
+[node name="@CamPOF@48954" parent="." instance=ExtResource("4_lrt4a")]
+position = Vector2(72, 56)
+
 [node name="RoomBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="@CamPOF@48953" type="Marker2D" parent="." groups=["pof"] instance=ExtResource("4_lrt4a")]
+[node name="@CamPOF@17815" type="Marker2D" parent="." groups=["pof"] instance=ExtResource("4_lrt4a")]
 position = Vector2(-72, -72)
 script = ExtResource("5_2323c")
 
-[node name="@CamPOF@48954" type="Marker2D" parent="." groups=["pof"] instance=ExtResource("4_lrt4a")]
+[node name="@CamPOF@17816" type="Marker2D" parent="." groups=["pof"] instance=ExtResource("4_lrt4a")]
 position = Vector2(72, 56)
 script = ExtResource("5_2323c")

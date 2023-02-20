@@ -53,7 +53,7 @@ func swing():
 	swinging = true
 	play("swing")
 	MvaniaSounds.play_sound("swordswing")
-	Cam.inc_trauma(0.18)
+	Cam.screenshake(0.18)
 
 	for b in bodies:
 		Hood.prn("Hit body: ", b)

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://c1v40m3c0mpy2"
+path="res://.godot/imported/soldierdead2.sfxr-b5d2d799a6ac49bca5b0d5630abb3a76.sample"
+
+[deps]
+
+source_file="res://src/mvania19/sounds/soldierdead2.sfxr"
+dest_files=["res://.godot/imported/soldierdead2.sfxr-b5d2d799a6ac49bca5b0d5630abb3a76.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

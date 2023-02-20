@@ -7,9 +7,11 @@ func enter(ctx={}):
 	if actor.health <= 0:
 		actor.anim.play("dying")
 		kb_vel = actor.DYING_VELOCITY
+		MvaniaSounds.play_sound("soldierdead")
 	else:
 		actor.anim.play("knockback")
 		kb_vel = actor.KNOCKBACK_VELOCITY
+		MvaniaSounds.play_sound("soldierhit")
 
 	# look into the punch
 	if dir == Vector2.LEFT:
