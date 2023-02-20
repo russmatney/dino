@@ -43,7 +43,8 @@ func debug_label_update(label_id, data_arr, call_site={}):
 	for t in data_arr:
 		text += str(t, " ")
 	label.text = text
-	label.set_scale(Vector2i(16, 16))
+	# label.set_scale(Vector2i(16, 16))
+
 	rearrange_labels()
 
 ###########################################################################
@@ -65,7 +66,7 @@ func rearrange_labels():
 
 	var children_by_source = []
 	for source in by_source.keys():
-		var source_label_id = str("Group label: ", source)
+		var source_label_id = str("Group label ", source)
 		var source_label = container.get_node_or_null(source_label_id)
 		if not source_label:
 			source_label = label_scene.instantiate()
@@ -73,10 +74,14 @@ func rearrange_labels():
 			source_label.name = source_label_id
 			container.add_child(source_label)
 
+		source_label.text = "[right]Source: [color=crimson]" + source + "[/color]"
+
 		children_by_source.append(source_label)
 
 		for label in by_source[source]:
 			children_by_source.append(label["label"])
 
-	for c in children_by_source:
-		container.move_child(c, -1)
+	# print("here, i'd put the children in this order")
+	# for c in children_by_source:
+	# 	Hood.prn("name: ", c.name, " text: ", c.text)
+		# container.move_child(c, -1)

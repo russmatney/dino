@@ -88,18 +88,19 @@ func callsite_to_label_id(call_site):
 	lbl += call_site["source"].get_file().get_basename()
 	lbl += " "
 	lbl += call_site["function"]
-	# lbl += str(call_site["line"])
+	lbl += str(call_site["line"])
 	# lbl = lbl.replace("/", "").replace(":", "").replace(".", "")
 	return lbl
 
-func debug_label(text_arr):
+func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msg_array = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msg_array = msg_array.filter(func(m): return m)
+
 	if Engine.is_editor_hint():
-		prn("DEBUG_LABEL: ", text_arr)
+		prn("DEBUG_LABEL: ", msg_array)
 		return
 
 	ensure_debug_overlay()
-	if text_arr is String:
-		text_arr = [text_arr]
 	var s = get_stack()
 	var call_site
 	var label_id
@@ -108,7 +109,7 @@ func debug_label(text_arr):
 		label_id = callsite_to_label_id(call_site)
 	else:
 		label_id = "NONE"
-	debug_label_update.emit(label_id, text_arr, call_site)
+	debug_label_update.emit(label_id, msg_array, call_site)
 
 ###########################################################################
 # find_player

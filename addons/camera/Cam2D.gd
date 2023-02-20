@@ -67,12 +67,12 @@ func update_window_size():
 
 
 func _process(delta):
-	Hood.debug_label(["Window Size", window_size])
+	Hood.debug_label("Window Size", window_size)
 	var vp_size = get_viewport().size
-	Hood.debug_label(["Viewport Size", vp_size])
-	Hood.debug_label(["Zoom Level", "[jump]", zoom_level, "[/jump]"])
-	Hood.debug_label(["Zoom Offset", zoom_offset])
-	Hood.debug_label(["Cam Center", get_target_position()])
+	Hood.debug_label("Viewport Size", vp_size)
+	Hood.debug_label("Zoom Level", "[jump]", zoom_level, "[/jump]")
+	Hood.debug_label("Zoom Offset", zoom_offset)
+	Hood.debug_label("Cam Center", get_target_position())
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -341,7 +341,7 @@ var zoom_min_margin = 50
 func update_zoom_level_for_bounds(focuses_rect):
 	var vp_size = get_viewport().size
 
-	Hood.debug_label(["POF Rect", focuses_rect])
+	Hood.debug_label("POF Rect", focuses_rect)
 
 	var x = focuses_rect.size.x
 	var y = focuses_rect.size.y
@@ -380,7 +380,7 @@ func screenshake_reset():
 
 func process_shake(delta):
 	if trauma > 0:
-		Hood.debug_label(["[CAM] Trauma: ", trauma])
+		Hood.debug_label("[CAM] Trauma: ", trauma)
 		trauma -= trauma_decrement_factor * delta
 		trauma = clamp(trauma, 0.0, 1.0)
 		if trauma == 0.0:
