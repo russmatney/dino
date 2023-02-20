@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dycyi1m0w17sl"]
+[gd_scene load_steps=12 format=3 uid="uid://dycyi1m0w17sl"]
 
 [ext_resource type="Script" path="res://src/mvania19/enemies/Soldier.gd" id="1_ca64f"]
 [ext_resource type="SpriteFrames" uid="uid://bk18wq80s2nw6" path="res://src/mvania19/enemies/SoldierSpriteFrames.tres" id="1_cvejl"]
+[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_ttylb"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Idle.gd" id="4_t7r86"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Dead.gd" id="5_878v8"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/KnockedBack.gd" id="6_kaq1k"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Run.gd" id="7_dlk46"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Kick.gd" id="8_tx5rp"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Fall.gd" id="9_k88d1"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Jump.gd" id="10_8ukws"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37lm3"]
 radius = 6.0
@@ -18,6 +26,29 @@ shape = SubResource("CapsuleShape2D_37lm3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = ExtResource("1_cvejl")
-animation = &"idle"
+animation = &"kick"
 autoplay = "idle"
-frame_progress = 0.610081
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("3_ttylb")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("4_t7r86")
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource("5_878v8")
+
+[node name="KnockedBack" type="Node" parent="Machine"]
+script = ExtResource("6_kaq1k")
+
+[node name="Run" type="Node" parent="Machine"]
+script = ExtResource("7_dlk46")
+
+[node name="Kick" type="Node" parent="Machine"]
+script = ExtResource("8_tx5rp")
+
+[node name="Fall" type="Node" parent="Machine"]
+script = ExtResource("9_k88d1")
+
+[node name="Jump" type="Node" parent="Machine"]
+script = ExtResource("10_8ukws")

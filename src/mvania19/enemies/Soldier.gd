@@ -1,14 +1,56 @@
 extends CharacterBody2D
 
+@onready var anim = $AnimatedSprite2D
+@onready var machine = $Machine
+
+########################################################
+# ready
+
 func _ready():
 	Hood.prn("ready")
+	machine.start()
+	anim.animation_finished.connect(_on_animation_finished)
+
+	# TODO pull/set data from db when area loads?
+	health = initial_health
+
+func _on_animation_finished():
+	pass
+
+########################################################
+# facing
+
+var facing
+func face_right():
+	facing = Vector2.RIGHT
+	anim.flip_h = true
+
+func face_left():
+	facing = Vector2.LEFT
+	anim.flip_h = false
+
+########################################################
+# _physics_process
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
+const KNOCKBACK_VELOCITY = -300.0
+const KNOCKBACK_VELOCITY_HORIZONTAL = 30.0
+const DYING_VELOCITY = -400.0
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _physics_process(delta):
-	if not is_on_floor():
-		velocity.y += GRAVITY * delta
+func _physics_process(_delta):
+	pass
 
-	move_and_slide()
+########################################################
+# health
+
+var initial_health = 3
+var health
+
+func take_hit(opts={}):
+	var damage = opts.get("damage", 1)
+	var direction = opts.get("direction", Vector2.RIGHT)
+
+	health -= damage
+	machine.transit("KnockedBack", {"direction": direction})

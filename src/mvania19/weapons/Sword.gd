@@ -31,12 +31,18 @@ func _on_body_exited(body: Node2D):
 	bodies.erase(body)
 	bodies_updated.emit(bodies)
 
-func _on_bodies_updated(bodies):
-	Hood.debug_label("Sword bodies: ", bodies)
+func _on_bodies_updated(bds):
+	Hood.debug_label("Sword bodies: ", bds)
 
 
 ######################################################
 # swing
+
+func facing_dir():
+	if scale.x > 0:
+		return Vector2.RIGHT
+	elif scale.x < 0:
+		return Vector2.LEFT
 
 var swinging
 func swing():
@@ -51,3 +57,6 @@ func swing():
 
 	for b in bodies:
 		Hood.prn("Hit body: ", b)
+		if b.has_method("take_hit"):
+			var dir = facing_dir()
+			b.take_hit({"damage": 1, "direction": dir})
