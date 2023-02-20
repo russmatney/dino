@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnosf7eta2ht5"]
+[gd_scene load_steps=12 format=3 uid="uid://bnosf7eta2ht5"]
 
 [ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
@@ -7,6 +7,9 @@
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Run.gd" id="5_x1nnv"]
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Jump.gd" id="6_e7xnp"]
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Fall.gd" id="7_ovoef"]
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="8_fa4a4"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="9_lsphn"]
+[ext_resource type="FontFile" uid="uid://mxcssnh2gipt" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="10_6ebua"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
 radius = 3.8
@@ -42,3 +45,30 @@ script = ExtResource("6_e7xnp")
 
 [node name="Fall" type="Node" parent="Machine"]
 script = ExtResource("7_ovoef")
+
+[node name="ActionHint" type="Node2D" parent="."]
+position = Vector2(-3, -3)
+scale = Vector2(0.4, 0.4)
+
+[node name="Label" type="RichTextLabel" parent="ActionHint"]
+clip_contents = false
+offset_left = -52.0
+offset_top = -40.0
+offset_right = 69.0
+theme_override_fonts/normal_font = ExtResource("8_fa4a4")
+bbcode_enabled = true
+text = "[center][jump]Travel"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("9_lsphn")]
+
+[node name="Key" type="RichTextLabel" parent="ActionHint"]
+offset_top = -52.5
+offset_right = 16.0
+offset_bottom = -28.5
+theme_override_fonts/normal_font = ExtResource("10_6ebua")
+bbcode_enabled = true
+text = "[jump]e"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("9_lsphn")]

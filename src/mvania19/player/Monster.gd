@@ -20,6 +20,8 @@ func _ready():
 		Hood.prn("player_data: ", player_data)
 		# TODO merge persisted data
 
+	update_actions()
+
 func _on_transit(state):
 	Hood.debug_label("Player State: ", state)
 
@@ -38,11 +40,25 @@ func _unhandled_input(event):
 ###########################################################################
 # actions
 
+@onready var action_hint = $ActionHint
+@onready var action_hint_label = $ActionHint/Label
+
 var actions = []
 func add_action(ax):
 	actions.append(ax)
+	update_actions()
 func remove_action(ax):
 	actions.erase(ax)
+	update_actions()
+
+func update_actions():
+	if len(actions) > 0:
+		action_hint.set_visible(true)
+		var ax = actions[0]
+		var action_label = ax["label"] if "label" in ax else "Action"
+		action_hint_label.text = "[center][jump]" + action_label
+	else:
+		action_hint.set_visible(false)
 
 ###########################################################################
 # movement
@@ -68,7 +84,7 @@ func _physics_process(_delta):
 # stamp frame
 
 func stamp_frame(opts={}):
-	var scale = opts.get("scale", 0.3)
+	var new_scale = opts.get("scale", 0.3)
 	var ttl = opts.get("ttl", 0.5)
 	var new_anim = AnimatedSprite2D.new()
 	new_anim.sprite_frames = anim.sprite_frames
@@ -80,7 +96,7 @@ func stamp_frame(opts={}):
 	Navi.add_child_to_current(new_anim)
 
 	var t = create_tween()
-	t.tween_property(new_anim, "scale", Vector2(scale, scale), ttl)
+	t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
 	t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
 	t.tween_callback(new_anim.queue_free)
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://38kn6ld7am23"]
+[gd_scene load_steps=5 format=3 uid="uid://38kn6ld7am23"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_b8vev"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="2_h0g0m"]
 [ext_resource type="Script" path="res://src/mvania19/menus/MvaniaMenuButtonList.gd" id="2_y1gxv"]
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_t4d3r"]
 
 [node name="MainMenu" type="CanvasLayer"]
 
@@ -22,15 +23,22 @@ size_flags_vertical = 3
 text = "[center][jump]Mvania19[/jump][/center]"
 custom_effects = [ExtResource("2_h0g0m")]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_t4d3r")
+bbcode_enabled = true
+text = "[center]Movement: WASD
+Jump: N
+Actions: E[/center]"
+fit_content = true
+scroll_active = false
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="MvaniaMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+[node name="MvaniaMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 alignment = 1
 script = ExtResource("2_y1gxv")
