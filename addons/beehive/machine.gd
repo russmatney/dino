@@ -11,7 +11,7 @@ var should_log = false
 
 # should only be called when the owner is ready
 func start():
-	print("machine start")
+	Hood.prn("[Start] actor: ", owner)
 
 	if initial_state:
 		state = get_node(initial_state)
@@ -19,8 +19,6 @@ func start():
 	for child in get_children():
 		# assign machine to states
 		child.machine = self
-
-		print("assigning owner: ", owner)
 		# assign machine's owner as 'actor' in state fns
 		child.actor = owner
 
@@ -31,7 +29,7 @@ func start():
 
 	if state:
 		state.enter()
-		emit_signal("transitioned", state.name)
+		transitioned.emit(state.name)
 
 
 ### input #####################################################################
@@ -69,10 +67,10 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 
 	if next_state:
 		if should_log:
-			print(
+			Hood.prn(
 				owner,
 				(
-					"[Machine] Transit. Exiting '"
+					"Transition. Exiting '"
 					+ state.name
 					+ "', Entering '"
 					+ next_state.name
@@ -82,6 +80,6 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 		state.exit()
 		state = next_state
 		next_state.enter(ctx)
-		emit_signal("transitioned", next_state.name)
+		transitioned.emit(next_state.name)
 	else:
 		print("Error! no next state! derp!", target_state_name, ctx)

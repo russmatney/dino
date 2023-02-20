@@ -14,10 +14,17 @@ func _ready():
 	Cam.ensure_camera(2, {"zoom_level": 5.0})
 	Hood.call_deferred("ensure_hud", hud)
 	machine.start()
+	machine.transitioned.connect(_on_transit)
 
 	if player_data and len(player_data):
-		print("player_data: ", player_data)
+		Hood.prn("player_data: ", player_data)
 		# TODO merge persisted data
+
+func _on_transit(state):
+	Hood.debug_label("Player State: ", state)
+
+	if state in ["Fall", "Run"]:
+		stamp_frame()
 
 ###########################################################################
 # _input
@@ -58,6 +65,24 @@ func _physics_process(_delta):
 
 
 ###########################################################################
+# stamp frame
+
+func stamp_frame():
+	var new_anim = AnimatedSprite2D.new()
+	new_anim.sprite_frames = anim.sprite_frames
+	new_anim.animation = anim.animation
+	new_anim.frame = anim.frame
+
+	# definitely more position work to do
+	new_anim.global_position = global_position + anim.position
+
+	Navi.add_child_to_current(new_anim)
+
+	await get_tree().create_timer(1.0).timeout
+	new_anim.queue_free()
+
+
+###########################################################################
 # facing
 
 var facing
@@ -71,11 +96,15 @@ func update_h_flip(node):
 
 # @onready var look_point = $LookPoint
 func face_right():
+	if facing == "left":
+		stamp_frame()
 	facing = "right"
 	anim.flip_h = false
 	# update_h_flip(look_point)
 
 func face_left():
+	if facing == "right":
+		stamp_frame()
 	facing = "left"
 	anim.flip_h = true
 	# update_h_flip(look_point)

@@ -57,6 +57,8 @@ func rearrange_labels():
 	for label in debug_label_db.values():
 		var source = "None"
 		if "call_site" in label and label["call_site"] != null and "source" in label["call_site"]:
+			# TODO reuse some of the callsite_to_label_id
+			# maybe in Util or some other meta namespace
 			source = label["call_site"]["source"].get_file().get_basename()
 
 		if source in by_source:
@@ -83,5 +85,5 @@ func rearrange_labels():
 
 	# print("here, i'd put the children in this order")
 	# for c in children_by_source:
-	# 	Hood.prn("name: ", c.name, " text: ", c.text)
-		# container.move_child(c, -1)
+	# 	# Hood.prn("name: ", c.name, " text: ", c.text)
+	# 	container.move_child(c, -1)
