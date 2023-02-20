@@ -32,4 +32,10 @@ var sounds = {
 			preload("res://src/mvania19/sounds/coin2.sfxr"),
 			preload("res://src/mvania19/sounds/coin3.sfxr"),
 		],
+	"swordswing":
+	[
+			preload("res://src/mvania19/sounds/swordswing1.sfxr"),
+			preload("res://src/mvania19/sounds/swordswing2.sfxr"),
+			preload("res://src/mvania19/sounds/swordswing3.sfxr"),
+		],
 }

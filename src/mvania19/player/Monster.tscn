@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnosf7eta2ht5"]
+[gd_scene load_steps=13 format=3 uid="uid://bnosf7eta2ht5"]
 
 [ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="8_fa4a4"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="9_lsphn"]
 [ext_resource type="FontFile" uid="uid://mxcssnh2gipt" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="10_6ebua"]
+[ext_resource type="PackedScene" uid="uid://d1ppixlu80mlb" path="res://src/mvania19/weapons/Sword.tscn" id="11_847ey"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
 radius = 3.8
@@ -72,3 +73,8 @@ text = "[jump]e"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("9_lsphn")]
+
+[node name="Sword" parent="." instance=ExtResource("11_847ey")]
+position = Vector2(9, -10)
+animation = &"idle"
+frame_progress = 0.142502

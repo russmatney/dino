@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
+@onready var sword = $Sword
 
 var player_data
 
@@ -36,6 +37,8 @@ func _unhandled_input(event):
 		if len(actions) > 0:
 			var ax = actions[0]
 			ax["fn"].call()
+	elif Trolley.is_attack(event):
+		sword.swing()
 
 ###########################################################################
 # actions
@@ -84,21 +87,22 @@ func _physics_process(_delta):
 # stamp frame
 
 func stamp_frame(opts={}):
-	var new_scale = opts.get("scale", 0.3)
-	var ttl = opts.get("ttl", 0.5)
-	var new_anim = AnimatedSprite2D.new()
-	new_anim.sprite_frames = anim.sprite_frames
-	new_anim.animation = anim.animation
-	new_anim.frame = anim.frame
+	if not Engine.is_editor_hint():
+		var new_scale = opts.get("scale", 0.3)
+		var ttl = opts.get("ttl", 0.5)
+		var new_anim = AnimatedSprite2D.new()
+		new_anim.sprite_frames = anim.sprite_frames
+		new_anim.animation = anim.animation
+		new_anim.frame = anim.frame
 
-	# definitely more position work to do
-	new_anim.global_position = global_position + anim.position
-	Navi.add_child_to_current(new_anim)
+		# definitely more position work to do
+		new_anim.global_position = global_position + anim.position
+		Navi.add_child_to_current(new_anim)
 
-	var t = create_tween()
-	t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
-	t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
-	t.tween_callback(new_anim.queue_free)
+		var t = create_tween()
+		t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
+		t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
+		t.tween_callback(new_anim.queue_free)
 
 
 ###########################################################################
@@ -109,8 +113,10 @@ var facing
 func update_h_flip(node):
 	if facing == "right" and node.position.x < 0:
 		node.position.x = -node.position.x
+		node.scale.x = -node.scale.x
 	elif facing == "left" and node.position.x > 0:
 		node.position.x = -node.position.x
+		node.scale.x = -node.scale.x
 
 
 # @onready var look_point = $LookPoint
@@ -119,11 +125,11 @@ func face_right():
 		stamp_frame()
 	facing = "right"
 	anim.flip_h = false
-	# update_h_flip(look_point)
+	update_h_flip(sword)
 
 func face_left():
 	if facing == "right":
 		stamp_frame()
 	facing = "left"
 	anim.flip_h = true
-	# update_h_flip(look_point)
+	update_h_flip(sword)

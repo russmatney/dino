@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1ppixlu80mlb"]
+
+[ext_resource type="SpriteFrames" uid="uid://cbqqesb6w446l" path="res://src/mvania19/weapons/SwordSpriteFrames.tres" id="1_awr05"]
+[ext_resource type="Script" path="res://src/mvania19/weapons/Sword.gd" id="2_7ibua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvao8"]
+size = Vector2(23, 11)
+
+[node name="Sword" type="AnimatedSprite2D"]
+position = Vector2(8, -16)
+sprite_frames = ExtResource("1_awr05")
+animation = &"swing"
+autoplay = "idle"
+script = ExtResource("2_7ibua")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 152
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(-1, 9)
+shape = SubResource("RectangleShape2D_nvao8")

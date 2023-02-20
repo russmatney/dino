@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bmkitliv0j1v4"
+path="res://.godot/imported/swordswing1.sfxr-98f7fec6a4d8adb3410d90cfe4eed937.sample"
+
+[deps]
+
+source_file="res://src/mvania19/sounds/swordswing1.sfxr"
+dest_files=["res://.godot/imported/swordswing1.sfxr-98f7fec6a4d8adb3410d90cfe4eed937.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

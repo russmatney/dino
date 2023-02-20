@@ -52,4 +52,4 @@ show_behind_parent = true
 position = Vector2(-168, 104)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("11_oke76")]
-position = Vector2(-32, -144)
+position = Vector2(-138, -18)
