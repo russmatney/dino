@@ -32,6 +32,9 @@ scale = Vector2(0.5, 0.5)
 label_text = "move"
 key_text = "wasd"
 
+[node name="Candle8" parent="01Entrance" instance=ExtResource("15_r03j1")]
+position = Vector2(47, 24)
+
 [node name="02MainTower" parent="." instance=ExtResource("2_kip2h")]
 show_behind_parent = true
 position = Vector2(-40, -40)
