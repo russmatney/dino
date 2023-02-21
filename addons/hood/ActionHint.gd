@@ -6,15 +6,13 @@ extends Node2D
 
 @export var label_text: String = "" :
 	set(t):
-		if t:
-			label_text = t
-			update_text()
+		label_text = t
+		update_text()
 
 @export var key_text: String = "" :
 	set(t):
-		if t:
-			key_text = t
-			update_text()
+		key_text = t
+		update_text()
 
 func update_text():
 	if label:
@@ -32,5 +30,4 @@ func hide():
 	set_visible(false)
 
 func _ready():
-	Hood.prn("action hint ready", inst_to_dict(self))
 	update_text()
