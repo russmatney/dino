@@ -2,6 +2,13 @@
 class_name MvaniaArea
 extends Node2D
 
+@export var persist_area_data: bool :
+	set(v):
+		persist_area_data = v
+		if v:
+			if Engine.is_editor_hint():
+				MvaniaGame.persist_area(self)
+
 ###########################################################
 # rooms
 
@@ -32,7 +39,7 @@ func init_room_data():
 	for room in rooms:
 		# must be set before fetching room data
 		room.area = self
-		room.room_data = MvaniaGame.get_room_data(room)
+		room.room_data = Util._or(MvaniaGame.get_room_data(room), {})
 
 ###########################################################
 # spawn coords

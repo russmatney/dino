@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cluqdo14cnme5"]
+[gd_scene load_steps=3 format=3 uid="uid://cluqdo14cnme5"]
 
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_33sd2"]
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_l0aqx"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="3_oue6l"]
-[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="4_7goka"]
 
 [node name="06BossChamber" type="Node2D"]
 script = ExtResource("1_l0aqx")
@@ -15,11 +13,3 @@ layer_0/tile_data = PackedInt32Array(-589834, 131073, 2, -524298, 131073, 0, -45
 visible = false
 collision_layer = 0
 collision_mask = 2
-
-[node name="@CamPOF@43462" type="Marker2D" parent="." groups=["pof"] instance=ExtResource("3_oue6l")]
-position = Vector2(-136, -80)
-script = ExtResource("4_7goka")
-
-[node name="@CamPOF@43463" type="Marker2D" parent="." groups=["pof"] instance=ExtResource("3_oue6l")]
-position = Vector2(112, 48)
-script = ExtResource("4_7goka")

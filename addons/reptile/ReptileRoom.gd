@@ -9,7 +9,7 @@ var img
 
 
 func _enter_tree():
-	self.add_to_group("reptile_room")
+	self.add_to_group("reptile_room", true)
 
 
 var scene_ready

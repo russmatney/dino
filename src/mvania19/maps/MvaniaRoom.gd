@@ -214,7 +214,7 @@ func ensure_pofs():
 
 	for p in points:
 		var auto_pof = pof_scene.instantiate()
-		auto_pof.add_to_group(auto_pof_group)
+		auto_pof.add_to_group(auto_pof_group, true)
 		auto_pof.position = p
 		add_child(auto_pof)
 		auto_pof.set_owner(self)

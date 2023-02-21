@@ -32,7 +32,7 @@ func debug_label_update(label_id, data_arr, call_site={}):
 	var label = container.get_node_or_null(label_id)
 	if not label:
 		label = label_scene.instantiate()
-		label.add_to_group(debug_label_group)
+		label.add_to_group(debug_label_group, true)
 		label.name = label_id
 		container.add_child(label)
 
@@ -72,7 +72,7 @@ func rearrange_labels():
 		var source_label = container.get_node_or_null(source_label_id)
 		if not source_label:
 			source_label = label_scene.instantiate()
-			source_label.add_to_group(debug_label_group)
+			source_label.add_to_group(debug_label_group, true)
 			source_label.name = source_label_id
 			container.add_child(source_label)
 

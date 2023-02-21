@@ -82,7 +82,10 @@ func get_rooms_data(area):
 	return area_db[area.name]["rooms"]
 
 func get_room_data(room):
-	return area_db[room.area.name]["rooms"][room.name]
+	if room.name in area_db[room.area.name]["rooms"]:
+		return area_db[room.area.name]["rooms"][room.name]
+	else:
+		Hood.warn("Room data not in area_db: ", room.name)
 
 ###########################################################
 # ready

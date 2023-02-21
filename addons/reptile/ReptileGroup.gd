@@ -54,7 +54,7 @@ var tilemap
 
 
 func _ready():
-	self.add_to_group("reptile_group")
+	self.add_to_group("reptile_group", true)
 
 
 func setup(c, ts, lb, ub):
