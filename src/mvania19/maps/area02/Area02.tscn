@@ -1,14 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi0rp7otd60dr"]
+[gd_scene load_steps=8 format=3 uid="uid://bi0rp7otd60dr"]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_knuf7"]
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_s40vt"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="3_clql2"]
+[ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_iiw26"]
 [ext_resource type="PackedScene" uid="uid://cjjt4cr36npwa" path="res://src/mvania19/maps/area02/04BossTime.tscn" id="5_wq514"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="6_2leqq"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="6_obold"]
 
 [node name="Area02" type="Node2D"]
 script = ExtResource("1_knuf7")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.454902, 0.423529, 0.486275, 1)
 
 [node name="01Elevator" type="Node2D" parent="."]
 show_behind_parent = true
@@ -44,6 +48,12 @@ rotation = 2.55691
 color = Color(0.160784, 0.482353, 0.568627, 1)
 shadow_enabled = true
 
+[node name="Candle" parent="02Hallway" instance=ExtResource("5_iiw26")]
+position = Vector2(-4, -8)
+
+[node name="Candle2" parent="02Hallway" instance=ExtResource("5_iiw26")]
+position = Vector2(84, -8)
+
 [node name="03Crossroads" type="Node2D" parent="."]
 show_behind_parent = true
 position = Vector2(312, 120)
@@ -59,9 +69,21 @@ rotation = 2.55691
 color = Color(0.160784, 0.482353, 0.568627, 1)
 shadow_enabled = true
 
+[node name="Candle3" parent="03Crossroads" instance=ExtResource("5_iiw26")]
+position = Vector2(64, -24)
+
+[node name="Candle4" parent="03Crossroads" instance=ExtResource("5_iiw26")]
+position = Vector2(53, 40)
+
 [node name="04BossTime" parent="." instance=ExtResource("5_wq514")]
 show_behind_parent = true
 position = Vector2(64, 160)
+
+[node name="Candle5" parent="04BossTime" instance=ExtResource("5_iiw26")]
+position = Vector2(132, 136)
+
+[node name="Candle6" parent="04BossTime" instance=ExtResource("5_iiw26")]
+position = Vector2(237, 176)
 
 [node name="05SomeRoom" type="Node2D" parent="."]
 show_behind_parent = true
@@ -97,3 +119,6 @@ layer_0/tile_data = PackedInt32Array(1966092, 131073, 0, 1966091, 1, 2, 2031627,
 
 [node name="Soldier" parent="07HiddenRoom" instance=ExtResource("6_obold")]
 position = Vector2(-16, 432)
+
+[node name="Candle7" parent="07HiddenRoom" instance=ExtResource("5_iiw26")]
+position = Vector2(20, 440)

@@ -16,4 +16,4 @@ shape = SubResource("RectangleShape2D_vs53a")
 sprite_frames = ExtResource("1_bh73g")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.0792483
+frame_progress = 0.728982
