@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
 @onready var sword = $Sword
+@onready var action_hint = $ActionHint
 
 var player_data
 
@@ -35,9 +36,9 @@ func _on_sword_bodies_updated(bodies):
 		# TODO hide when we've seen some amount of sword action
 		# i.e. the player has learned it
 		# TODO combine with 'forget learned actions' pause button
-		update_action_hint("m", "Sword")
+		action_hint.display("m", "Sword")
 	else:
-		hide_action_hint()
+		action_hint.hide()
 
 ###########################################################################
 # _input
@@ -49,21 +50,6 @@ func _unhandled_input(event):
 			ax["fn"].call()
 	elif Trolley.is_attack(event):
 		sword.swing()
-
-###########################################################################
-# action hint
-
-@onready var action_hint = $ActionHint
-@onready var action_hint_label = $ActionHint/Label
-@onready var action_hint_key = $ActionHint/Key
-
-func update_action_hint(key, label):
-	action_hint.set_visible(true)
-	action_hint_key.text = "[center][jump]" + key
-	action_hint_label.text = "[center][jump]" + label
-
-func hide_action_hint():
-	action_hint.set_visible(false)
 
 ###########################################################################
 # actions
@@ -80,9 +66,9 @@ func update_actions():
 	if len(actions) > 0:
 		var ax = actions[0]
 		var action_label = ax["label"] if "label" in ax else "Action"
-		update_action_hint("e", action_label)
+		action_hint.display("e", action_label)
 	else:
-		hide_action_hint()
+		action_hint.hide()
 
 ###########################################################################
 # movement

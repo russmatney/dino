@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://sw03ot27btw2"]
+
+[ext_resource type="Script" path="res://addons/hood/ActionHint.gd" id="1_k2w1x"]
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_dkr3d"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="3_q3lvy"]
+[ext_resource type="FontFile" uid="uid://mxcssnh2gipt" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="4_wg2uw"]
+
+[node name="ActionHint" type="Node2D"]
+script = ExtResource("1_k2w1x")
+
+[node name="Key" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = -64.0
+offset_top = -24.0
+offset_right = 64.0
+offset_bottom = -8.0
+theme_override_fonts/normal_font = ExtResource("4_wg2uw")
+bbcode_enabled = true
+text = "[center][jump]e"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("3_q3lvy")]
+
+[node name="Label" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = -64.0
+offset_top = -16.0
+offset_right = 64.0
+offset_bottom = 12.0
+theme_override_fonts/normal_font = ExtResource("2_dkr3d")
+bbcode_enabled = true
+text = "[center][jump]Travel"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("3_q3lvy")]
