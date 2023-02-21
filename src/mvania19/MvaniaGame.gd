@@ -37,7 +37,7 @@ func print_area_db():
 func to_area_data(area):
 	area.ensure_rooms()
 	if len(area.rooms) == 0:
-		push_error(area.name, " [ERR] No rooms!")
+		Hood.err(area.name, " [ERR] No rooms!")
 		return
 
 	var room_data = {}
