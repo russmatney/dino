@@ -11,20 +11,46 @@ func _ready():
 	og_scale = light.texture_scale
 	og_energy = light.energy
 
-	light_up()
+	if lit:
+		light_up()
+	else:
+		put_out()
 	$ColorRect.set_visible(false)
+
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
+
 
 #################################################################
 # actions
 
+var lit = true
+
 func light_up():
+	lit = true
 	anim.play("flicker")
 	light.set_enabled(true)
 	light_tween()
 
 func put_out():
+	lit = false
 	anim.play("off")
 	light.set_enabled(false)
+
+var light_action = {label="Light", fn=light_up}
+var put_out_action = {label="Put Out", fn=put_out}
+
+func _on_body_entered(body):
+	if body.is_in_group("player"):
+		if lit:
+			body.add_action(put_out_action)
+		else:
+			body.add_action(light_action)
+
+func _on_body_exited(body):
+	if body.is_in_group("player"):
+		body.remove_action(light_action)
+		body.remove_action(put_out_action)
 
 #################################################################
 # light tween

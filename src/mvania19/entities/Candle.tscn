@@ -8,6 +8,8 @@
 size = Vector2(32, 24)
 
 [node name="Candle" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_7eirx")
 metadata/_edit_lock_ = true
 
@@ -26,13 +28,13 @@ shape = SubResource("RectangleShape2D_nv5xr")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
-energy = 1.09421
+energy = 1.38724
 shadow_enabled = true
 texture = ExtResource("6_nahms")
-texture_scale = 1.00517
+texture_scale = 1.26061
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ywigl")
 animation = &"flicker"
 autoplay = "flicker"
-frame_progress = 0.715967
+frame_progress = 0.0605162
