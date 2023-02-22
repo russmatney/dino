@@ -1,6 +1,8 @@
-{:paths ["src"]
+{:deps  {org.babashka/http-server {:local/root "../../babashka/http-server"}}
+ :paths ["src"]
  :tasks
- {:requires ([bb-godot.tasks :as tasks])
+ {:requires ([bb-godot.tasks :as tasks]
+             [babashka.http-server :as http-server])
 
   :init
   (do
@@ -31,15 +33,18 @@
   pixels-reptile (tasks/pixels "addons/reptile/assets")
   pixels-core    (tasks/pixels "addons/core/assets")
 
-  build-web  (tasks/build-web (some-> *command-line-args* first))
+  build-web (tasks/build-web (some-> *command-line-args* first))
   ;; TODO rename/rework in the context of butler
-  deploy-web (tasks/deploy-web "s3://danger.russmatney.com")
-  zip        tasks/zip
+  ;; deploy-web (tasks/deploy-web "s3://danger.russmatney.com")
+  ;; zip       tasks/zip
 
-  serve-built (let [arg (some-> *command-line-args* first)
-                    arg (or arg "dino")]
-                ;; http-server installable via bbin
-                (tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))
+  serve-built
+  {:task (let [arg (some-> *command-line-args* first)
+               arg (or arg "dino")]
+           ;; TODO add :header support to bb/http-server inputs
+           (http-server/exec {:port 3010 :dir (str  "dist/" arg)})
+           ;; http-server installable via bbin
+           #_(tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))}
 
   butler-push (let [arg          (some-> *command-line-args* first)
                     arg          (or arg "dino")
@@ -50,8 +55,8 @@
 
   install-script-templates
   (apply tasks/install-script-templates
-   #{"kagenash1/godot-behavior-tree/script_templates"}
-   *command-line-args*)
+         #{"kagenash1/godot-behavior-tree/script_templates"}
+         *command-line-args*)
 
   addons         (apply tasks/addons addons-map *command-line-args*)
   addons-install (apply tasks/install-addons addons-map *command-line-args*)
