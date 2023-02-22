@@ -1,5 +1,5 @@
 @tool
-extends Area2D
+extends Node2D
 
 @onready var light = $PointLight2D
 @onready var anim = $AnimatedSprite2D
