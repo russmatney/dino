@@ -53,16 +53,16 @@ shape = SubResource("RectangleShape2D_nv5xr")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
-energy = 0.87376
+energy = 0.840915
 shadow_enabled = true
 texture = ExtResource("6_nahms")
-texture_scale = 0.858956
+texture_scale = 0.832703
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ywigl")
 animation = &"flicker"
 autoplay = "flicker"
-frame_progress = 0.607784
+frame_progress = 0.287155
 
 [node name="FlameParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, -5)

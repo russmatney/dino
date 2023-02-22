@@ -8,6 +8,7 @@ var key: String
 var source: Node
 var source_can_execute: Callable = func(): return true
 var actor_could_execute: Callable = func(_a): return true
+var area
 
 func _to_string():
 	if source:
@@ -29,9 +30,8 @@ func can_execute_now(actor) -> bool:
 func could_execute(actor) -> bool:
 	return source_can_execute.call() and actor_could_execute.call(actor)
 
-func close_enough_to_execute(_actor) -> bool:
-	# TODO is actor body in action_area bodies?
-	return true
+func close_enough_to_execute(actor) -> bool:
+	return actor in area.actors
 
 # TODO args
 func execute():

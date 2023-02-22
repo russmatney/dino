@@ -1,3 +1,5 @@
+@tool
+class_name ActionDetector
 extends Area2D
 
 ####################################################################
@@ -10,14 +12,18 @@ func _ready():
 var actor:
 	set(a):
 		actor = a
+		# detectable by ActionAreas
+		actor.add_to_group("actors", true)
 		Hood.prn("actor configured: ", a)
 
 ####################################################################
 # process
 
 func _process(_delta):
-	Hood.debug_label("immediate_actions: ", immediate_actions())
-	Hood.debug_label("potential_actions: ", potential_actions())
+	if not Engine.is_editor_hint():
+		Hood.debug_label("immediate_actions: ", immediate_actions())
+		Hood.debug_label("potential_actions: ", potential_actions())
+
 
 ####################################################################
 # action area add/remove

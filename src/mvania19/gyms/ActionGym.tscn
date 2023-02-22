@@ -24,6 +24,12 @@ position = Vector2(83, 0)
 [node name="Candle4" parent="." instance=ExtResource("3_epy4s")]
 position = Vector2(-173, 0)
 
+[node name="Candle6" parent="." instance=ExtResource("3_epy4s")]
+position = Vector2(-189, 0)
+
+[node name="Candle7" parent="." instance=ExtResource("3_epy4s")]
+position = Vector2(-199, 0)
+
 [node name="Candle5" parent="." instance=ExtResource("3_epy4s")]
 position = Vector2(192, 0)
 
