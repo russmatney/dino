@@ -1,5 +1,7 @@
 @tool
-extends Area2D
+extends Node2D
+
+@onready var action_area = $ActionArea
 
 ###################################################################
 # ready
@@ -8,8 +10,18 @@ func _ready():
 	# TODO validate elevator destinations via MvaniaGame startup
 	# there we can load all the areas and make sure elevator destinations can be loaded
 
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+	action_area.register_actions([
+		Action.mk({label="Travel", fn=travel})
+	], self)
+
+###################################################################
+# travel to destination
+
+func travel():
+	# TODO exit transition
+	print(name, ".travel(): ", destination_area_str, " ", destination_elevator_path)
+	var area_path = destination_area_full_path()
+	MvaniaGame.travel_to_area(area_path, destination_elevator_path)
 
 
 ###################################################################
@@ -103,22 +115,3 @@ func list_elevator_paths():
 			e_paths += parent_name + "/" + e.name + ","
 
 	return e_paths
-
-###################################################################
-# travel to destination
-
-func travel():
-	# TODO exit transition
-	print(name, ".travel(): ", destination_area_str, " ", destination_elevator_path)
-	var area_path = destination_area_full_path()
-	MvaniaGame.travel_to_area(area_path, destination_elevator_path)
-
-var travel_action = {label="Travel", fn=travel}
-
-func _on_body_entered(body):
-	if body.is_in_group("player"):
-		body.add_action(travel_action)
-
-func _on_body_exited(body):
-	if body.is_in_group("player"):
-		body.remove_action(travel_action)

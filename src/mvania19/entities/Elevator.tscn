@@ -1,10 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://b18v8a4sg3rak"]
+[gd_scene load_steps=18 format=3 uid="uid://b18v8a4sg3rak"]
 
 [ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://assets/mvania19/door_sheet.png" id="1_6v2w8"]
 [ext_resource type="Script" path="res://src/mvania19/entities/Elevator.gd" id="1_87cqc"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2nrn8"]
-size = Vector2(32, 32)
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_nrb31"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtm3d"]
 atlas = ExtResource("1_6v2w8")
@@ -113,16 +111,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Elevator" type="Area2D" groups=["elevators"]]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("1_87cqc")
-destination_area_str = ""
-destination_elevator_path = ""
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuhdv"]
+size = Vector2(32, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_2nrn8")
+[node name="Elevator" type="Node2D" groups=["elevators"]]
+script = ExtResource("1_87cqc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wbl66")
 animation = &"closed"
+
+[node name="ActionArea" parent="." instance=ExtResource("3_nrb31")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_xuhdv")
