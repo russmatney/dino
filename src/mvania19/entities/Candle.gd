@@ -3,6 +3,7 @@ extends Area2D
 
 @onready var light = $PointLight2D
 @onready var anim = $AnimatedSprite2D
+@onready var particles = $FlameParticles
 
 #################################################################
 # ready
@@ -30,12 +31,14 @@ func light_up():
 	lit = true
 	anim.play("flicker")
 	light.set_enabled(true)
+	particles.set_emitting(true)
 	light_tween()
 
 func put_out():
 	lit = false
 	anim.play("off")
 	light.set_enabled(false)
+	particles.set_emitting(false)
 
 var light_action = {label="Light", fn=light_up}
 var put_out_action = {label="Put Out", fn=put_out}
