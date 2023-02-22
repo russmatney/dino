@@ -4,6 +4,7 @@ extends Area2D
 @onready var light = $PointLight2D
 @onready var anim = $AnimatedSprite2D
 @onready var particles = $FlameParticles
+@onready var action_area = $ActionArea
 
 #################################################################
 # ready
@@ -18,14 +19,25 @@ func _ready():
 		put_out()
 	$ColorRect.set_visible(false)
 
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
+	action_area.register_actions([
+		Action.mk({
+			label="Light", fn=light_up,
+			source_can_execute=func(): return not is_lit()}),
+		Action.mk({
+			label="Put Out", fn=put_out,
+			source_can_execute=is_lit}),
+		])
 
 
 #################################################################
 # actions
 
-var lit = true
+@export var lit: bool = true :
+	set(l):
+		lit = l
+
+func is_lit():
+	return lit
 
 func light_up():
 	lit = true
@@ -39,21 +51,6 @@ func put_out():
 	anim.play("off")
 	light.set_enabled(false)
 	particles.set_emitting(false)
-
-var light_action = {label="Light", fn=light_up}
-var put_out_action = {label="Put Out", fn=put_out}
-
-func _on_body_entered(body):
-	if body.is_in_group("player"):
-		if lit:
-			body.add_action(put_out_action)
-		else:
-			body.add_action(light_action)
-
-func _on_body_exited(body):
-	if body.is_in_group("player"):
-		body.remove_action(light_action)
-		body.remove_action(put_out_action)
 
 #################################################################
 # light tween

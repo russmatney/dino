@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://yt5kb6c86xpu"]
+
+[ext_resource type="Script" path="res://addons/hood/actions/ActionArea.gd" id="1_jtcdv"]
+
+[node name="ActionArea" type="Area2D" groups=["action_areas"]]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_jtcdv")

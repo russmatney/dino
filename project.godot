@@ -158,6 +158,7 @@ debug_toggle={
 2d_physics/layer_6="items"
 2d_physics/layer_7="aoe tiles"
 2d_physics/layer_8="destructibles"
+2d_physics/layer_9="actionAreas"
 
 [physics]
 

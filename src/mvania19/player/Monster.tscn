@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bnosf7eta2ht5"]
+[gd_scene load_steps=14 format=3 uid="uid://bnosf7eta2ht5"]
 
 [ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Jump.gd" id="6_e7xnp"]
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Fall.gd" id="7_ovoef"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="9_ocb0p"]
+[ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="10_68kyd"]
 [ext_resource type="PackedScene" uid="uid://d1ppixlu80mlb" path="res://src/mvania19/weapons/Sword.tscn" id="11_847ey"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_67gj4"]
@@ -17,6 +18,9 @@ polygon = PackedVector2Array(-3, -4, 3, -4, 3, 1, 2, 5, -2, 5, -3, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
 radius = 3.8
 height = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_56h2g"]
+size = Vector2(96, 96)
 
 [node name="Monster" type="CharacterBody2D" groups=["player"]]
 z_index = 1
@@ -60,3 +64,8 @@ frame_progress = 0.142502
 [node name="ActionHint" parent="." instance=ExtResource("9_ocb0p")]
 position = Vector2(0, -15)
 scale = Vector2(0.4, 0.4)
+
+[node name="ActionDetector" parent="." instance=ExtResource("10_68kyd")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource("RectangleShape2D_56h2g")

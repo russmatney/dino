@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8uyfy5lmgykl"]
+[gd_scene load_steps=10 format=3 uid="uid://b8uyfy5lmgykl"]
 
 [ext_resource type="Script" path="res://src/mvania19/entities/Candle.gd" id="1_7eirx"]
 [ext_resource type="SpriteFrames" uid="uid://fl4kmbxvhiyo" path="res://src/mvania19/entities/CandleSpriteFrames.tres" id="1_ywigl"]
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="4_asdr1"]
 [ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://assets/mvania19/light64px4.png" id="6_nahms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nv5xr"]
@@ -29,6 +30,9 @@ scale_curve = SubResource("CurveTexture_hai1r")
 color = Color(0.819608, 0.486275, 0.486275, 1)
 turbulence_enabled = true
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1lts"]
+size = Vector2(32, 26)
+
 [node name="Candle" type="Area2D"]
 collision_layer = 0
 collision_mask = 2
@@ -49,17 +53,23 @@ shape = SubResource("RectangleShape2D_nv5xr")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
-energy = 1.39817
+energy = 0.87376
 shadow_enabled = true
 texture = ExtResource("6_nahms")
-texture_scale = 1.27811
+texture_scale = 0.858956
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ywigl")
 animation = &"flicker"
 autoplay = "flicker"
-frame_progress = 0.286615
+frame_progress = 0.607784
 
 [node name="FlameParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, -5)
 process_material = SubResource("ParticleProcessMaterial_lgdnq")
+
+[node name="ActionArea" parent="." instance=ExtResource("4_asdr1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_a1lts")

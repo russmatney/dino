@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var sword = $Sword
 @onready var action_hint = $ActionHint
+@onready var action_detector = $ActionDetector
 
 var player_data
 
@@ -22,8 +23,10 @@ func _ready():
 		Hood.prn("player_data: ", player_data)
 		# TODO merge persisted data
 
+	action_detector.actor = self
+	action_detector.update_hint()
+
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
-	update_actions()
 
 func _on_transit(state):
 	Hood.debug_label("Player State: ", state)
@@ -45,27 +48,16 @@ func _on_sword_bodies_updated(bodies):
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
-		if len(actions) > 0:
-			var ax = actions[0]
-			ax["fn"].call()
+		var _executed = action_detector.execute_current_action()
 	elif Trolley.is_attack(event):
 		sword.swing()
 
 ###########################################################################
 # actions
 
-var actions = []
-func add_action(ax):
-	actions.append(ax)
-	update_actions()
-func remove_action(ax):
-	actions.erase(ax)
-	update_actions()
-
-func update_actions():
-	if len(actions) > 0:
-		var ax = actions[0]
-		var action_label = ax["label"] if "label" in ax else "Action"
+func update_action_hint(ax):
+	if ax:
+		var action_label = ax.label if ax.label else "Action"
 		action_hint.display("e", action_label)
 	else:
 		action_hint.hide()
