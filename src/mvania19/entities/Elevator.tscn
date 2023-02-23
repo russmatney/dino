@@ -80,7 +80,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"closing",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -108,7 +108,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"opening",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xuhdv"]
@@ -122,7 +122,7 @@ destination_elevator_path = ""
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wbl66")
-animation = &"closed"
+animation = &"opening"
 
 [node name="ActionArea" parent="." instance=ExtResource("3_nrb31")]
 

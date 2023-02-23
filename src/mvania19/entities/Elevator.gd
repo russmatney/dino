@@ -24,22 +24,26 @@ func _ready():
 var travel_to_area
 
 func _on_anim_finished():
-	# TODO switch player/elevator z-index
 	if anim.animation == "opening":
 		z_index = 0
 	if anim.animation == "closing":
 		if travel_to_area:
 			MvaniaGame.travel_to_area(travel_to_area, destination_elevator_path)
+		else:
+			z_index = 0
 
 ###################################################################
 # travel to destination
+
+# TODO move player to center of elevator
+# TODO hide action label while waiting
+# TODO open door, then travel
+# TODO close door when player walks away
 
 func travel():
 	z_index = 10
 	travel_to_area = destination_area_full_path()
 	anim.play("closing")
-	# play closed animation
-	# do travel
 
 ###################################################################
 # fancy exported destination vars
