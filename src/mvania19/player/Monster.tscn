@@ -64,7 +64,7 @@ frame_progress = 0.142502
 [node name="ActionHint" parent="." instance=ExtResource("9_ocb0p")]
 position = Vector2(0, -15)
 scale = Vector2(0.4, 0.4)
-key_or_action = null
+key_or_action = ""
 
 [node name="ActionDetector" parent="." instance=ExtResource("10_68kyd")]
 

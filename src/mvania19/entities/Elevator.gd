@@ -2,30 +2,47 @@
 extends Node2D
 
 @onready var action_area = $ActionArea
+@onready var anim = $AnimatedSprite2D
 
 ###################################################################
 # ready
+
+var actions = [
+	Action.mk({label="Travel", fn=travel})
+	]
 
 func _ready():
 	# TODO validate elevator destinations via MvaniaGame startup
 	# there we can load all the areas and make sure elevator destinations can be loaded
 
-	action_area.register_actions([
-		Action.mk({label="Travel", fn=travel})
-	], self)
+	action_area.register_actions(actions, self)
+	anim.animation_finished.connect(_on_anim_finished)
+
+	z_index = 10
+	anim.play("opening")
+
+var travel_to_area
+
+func _on_anim_finished():
+	# TODO switch player/elevator z-index
+	if anim.animation == "opening":
+		z_index = 0
+	if anim.animation == "closing":
+		if travel_to_area:
+			MvaniaGame.travel_to_area(travel_to_area, destination_elevator_path)
 
 ###################################################################
 # travel to destination
 
 func travel():
-	# TODO exit transition
-	print(name, ".travel(): ", destination_area_str, " ", destination_elevator_path)
-	var area_path = destination_area_full_path()
-	MvaniaGame.travel_to_area(area_path, destination_elevator_path)
-
+	z_index = 10
+	travel_to_area = destination_area_full_path()
+	anim.play("closing")
+	# play closed animation
+	# do travel
 
 ###################################################################
-# clear
+# fancy exported destination vars
 
 ## Helper to clear the destination area/elevator path
 @export var clear: bool :
@@ -34,9 +51,6 @@ func travel():
 		destination_area_str = ""
 		destination_elevator_path = ""
 		notify_property_list_changed()
-
-###################################################################
-# destination vars
 
 var destination_area_str: String :
 	set(v):
@@ -51,9 +65,6 @@ var maps_dir_path := "res://src/mvania19/maps"
 
 func destination_area_full_path():
 	return maps_dir_path.path_join(destination_area_str)
-
-###################################################################
-# get property list
 
 func _get_property_list() -> Array:
 	var dest_elevator_usage = PROPERTY_USAGE_NO_EDITOR

@@ -28,7 +28,7 @@ func _ready():
 		put_out()
 	$ColorRect.set_visible(false)
 
-	action_area.register_actions(actions)
+	action_area.register_actions(actions, self)
 
 
 #################################################################

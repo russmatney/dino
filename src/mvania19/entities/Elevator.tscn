@@ -115,6 +115,7 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="Elevator" type="Node2D" groups=["elevators"]]
+z_index = 10
 script = ExtResource("1_87cqc")
 destination_area_str = ""
 destination_elevator_path = ""
