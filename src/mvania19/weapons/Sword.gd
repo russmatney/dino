@@ -10,6 +10,7 @@ func _ready():
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
 	bodies_updated.connect(_on_bodies_updated)
+	frame_changed.connect(_on_frame_changed)
 
 func _on_animation_finished():
 	if animation == "swing":
@@ -45,18 +46,23 @@ func facing_dir():
 		return Vector2.LEFT
 
 var swinging
+var bodies_this_swing = []
 func swing():
 	if swinging:
 		# consider combos
 		return
 
 	swinging = true
+	bodies_this_swing = []
 	play("swing")
 	MvaniaSounds.play_sound("swordswing")
 	Cam.screenshake(0.18)
 
-	for b in bodies:
-		Hood.prn("Hit body: ", b)
-		if b.has_method("take_hit"):
-			var dir = facing_dir()
-			b.take_hit({"damage": 1, "direction": dir})
+func _on_frame_changed():
+	if animation == "swing" and frame in [1, 2, 3]:
+		for b in bodies:
+			if b.has_method("take_hit"):
+				if not b in bodies_this_swing:
+					bodies_this_swing.append(b)
+					var dir = facing_dir()
+					b.take_hit({"damage": 1, "direction": dir})
