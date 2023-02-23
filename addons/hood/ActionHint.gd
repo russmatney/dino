@@ -10,23 +10,32 @@ extends Node2D
 		label_text = t
 		update_text()
 
-@export var key_text: String = "" :
+@export var key_or_action: String = "" :
 	set(t):
-		key_text = t
+		key_or_action = t
 		update_text()
 
 func update_text():
 	if label:
 		label.text = "[center][jump]" + label_text
 	if key:
-		var k_text = key_text.to_lower()
-		if key_text in key_map:
-			k_text = key_map[key_text]
+		# attempts to find a matching input action with keys for the passed "input_action"
+		# otherwise, the "keys" are used as the key_or_action directly
+		var keys = Trolley.keys_for_input_action(key_or_action)
+		var k_text
+		if keys != null and len(keys) > 0:
+			k_text = "".join(keys)
+		else:
+			k_text = key_or_action
+
+		k_text = k_text.to_lower()
+		if k_text in key_map:
+			k_text = key_map[k_text]
 
 		key.text = "[center][jump]" + k_text
 
-func display(key_t, label_t):
-	key_text = key_t
+func display(k_or_a, label_t):
+	key_or_action = k_or_a
 	label_text = label_t
 	update_text()
 	set_visible(true)
@@ -35,7 +44,6 @@ func hide():
 	set_visible(false)
 
 func _ready():
-	Hood.prn("action hint ready")
 	update_text()
 
 

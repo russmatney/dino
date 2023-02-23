@@ -115,9 +115,6 @@ func update_displayed_action():
 	elif action_hint:
 		var c_ax = current_action()
 		if c_ax:
-			var action_label = c_ax.label if c_ax.label else "Action"
-			var keys = Trolley.keys_for_input_action(c_ax.input_action)
-			var key_text = "".join(keys)
-			action_hint.display(key_text, action_label)
+			action_hint.display(c_ax.input_action, c_ax.label)
 		else:
 			action_hint.hide()

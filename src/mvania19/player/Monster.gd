@@ -38,7 +38,7 @@ func _on_sword_bodies_updated(bodies):
 		# TODO hide when we've seen some amount of sword action
 		# i.e. the player has learned it
 		# TODO combine with 'forget learned actions' pause button
-		action_hint.display("m", "Sword")
+		action_hint.display("attack", "Sword")
 	else:
 		action_hint.hide()
 

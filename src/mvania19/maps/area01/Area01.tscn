@@ -30,7 +30,7 @@ position = Vector2(264, -24)
 position = Vector2(92, -16)
 scale = Vector2(0.5, 0.5)
 label_text = "move"
-key_text = "wasd"
+key_or_action = "wasd"
 
 [node name="Candle8" parent="01Entrance" instance=ExtResource("15_r03j1")]
 position = Vector2(47, 24)
@@ -49,7 +49,7 @@ layer_0/tile_data = PackedInt32Array(-589824, 131073, 0, -524288, 131073, 0, -45
 position = Vector2(80, 0)
 scale = Vector2(0.5, 0.5)
 label_text = "jump"
-key_text = "n"
+key_or_action = "jump"
 
 [node name="Candle7" parent="10JumpRoom" instance=ExtResource("15_r03j1")]
 position = Vector2(80, -40)
