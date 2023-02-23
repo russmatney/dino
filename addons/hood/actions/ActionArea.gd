@@ -39,4 +39,4 @@ func _on_body_exited(body):
 
 func update_actor_actions(actor):
 	if actor.action_detector:
-		actor.action_detector.update_hint()
+		actor.action_detector.update_displayed_action()

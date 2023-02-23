@@ -1,22 +1,22 @@
 @tool
 extends Node
 
-var actions
+var inputs
 
 
 func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	build_actions_dict()
+	build_inputs_dict()
 
 
 # TODO unit tests
-func build_actions_dict():
+func build_inputs_dict():
 	# apparently we need to reload this
 	InputMap.load_from_project_settings()
 
-	actions = {}
+	inputs = {}
 	for ac in InputMap.get_actions():
 		var evts = InputMap.action_get_events(ac)
 
@@ -25,12 +25,13 @@ func build_actions_dict():
 		var keys = []
 		for evt in evts:
 			if evt is InputEventKey:
+				# TODO support 'Enter, Shift, etc'
 				keys.append(OS.get_keycode_string(evt.keycode))
 
-		actions[ac] = {"events": evts, "setting": setting, "keys": keys, "action": ac}
+		inputs[ac] = {"events": evts, "setting": setting, "keys": keys, "action": ac}
 
 
-class ActionsSorter:
+class InputsSorter:
 	static func sort_alphabetical(a, b):
 		if "action" in a and "action" in b:
 			if a["action"] <= b["action"]:
@@ -41,29 +42,35 @@ class ActionsSorter:
 
 
 # TODO write unit tests, use parse_input_event to test controls
-# TODO maybe support filtering out actions by prefix
-func actions_list(ignore_prefix = "", only_prefix = ""):
-	if not actions:
-		build_actions_dict()
+# TODO maybe support filtering out inputs by prefix
+func inputs_list(ignore_prefix = "", only_prefix = ""):
+	if inputs == null or len(inputs) == 0:
+		build_inputs_dict()
 
-	var actions_list = actions.values()
+	var inputs_list = inputs.values()
 	# TODO this prints bad-comparision function error?
-	# actions_list.sort_custom(Callable(ActionsSorter, "sort_alphabetical"))
+	# inputs_list.sort_custom(Callable(InputsSorter, "sort_alphabetical"))
 
-	var axs = []
-	for ax in actions_list:
+	var inps = []
+	for inp in inputs_list:
 		if ignore_prefix:
-			if ax["action"].begins_with(ignore_prefix):
+			if inp["action"].begins_with(ignore_prefix):
 				continue
 
 		if only_prefix:
-			if not ax["action"].begins_with(only_prefix):
+			if not inp["action"].begins_with(only_prefix):
 				continue
 
-		axs.append(ax)
+		inps.append(inp)
 
-	return axs
+	return inps
 
+
+func keys_for_input_action(action):
+	# TODO no need to rebuild in prod... or at all?
+	build_inputs_dict()
+	if action in inputs:
+		return inputs[action]["keys"]
 
 ##################################################################
 # public

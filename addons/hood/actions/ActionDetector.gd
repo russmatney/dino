@@ -78,7 +78,7 @@ func immediate_actions():
 ## The actor has no other hang ups (missing dependent items/whatever).
 func potential_actions():
 	if actor:
-		return actions.filter(func(ax): return ax.could_execute(actor))
+		return actions.filter(func(ax): return ax.can_execute(actor))
 
 ####################################################################
 # current, selecting an action
@@ -116,8 +116,8 @@ func update_displayed_action():
 		var c_ax = current_action()
 		if c_ax:
 			var action_label = c_ax.label if c_ax.label else "Action"
-			# TODO get action key from Trolley/input map?
-			var action_key = Util._or(c_ax.key, "e")
-			action_hint.display(action_key, action_label)
+			var keys = Trolley.keys_for_input_action(c_ax.input_action)
+			var key_text = "".join(keys)
+			action_hint.display(key_text, action_label)
 		else:
 			action_hint.hide()

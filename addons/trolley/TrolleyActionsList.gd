@@ -20,7 +20,7 @@ func build_actions_list():
 	for ch in get_children():
 		remove_child(ch)
 
-	for ac in Trolley.actions_list(ignore_prefix, only_prefix):
+	for ac in Trolley.inputs_list(ignore_prefix, only_prefix):
 		var action_label = ActionLabel.instantiate()
 		var action_name = ac["action"].capitalize()
 		action_label.set_label(action_name)

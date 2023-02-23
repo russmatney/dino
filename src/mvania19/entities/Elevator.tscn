@@ -116,6 +116,8 @@ size = Vector2(32, 32)
 
 [node name="Elevator" type="Node2D" groups=["elevators"]]
 script = ExtResource("1_87cqc")
+destination_area_str = ""
+destination_elevator_path = ""
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wbl66")

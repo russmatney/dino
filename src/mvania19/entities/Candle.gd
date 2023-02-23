@@ -6,6 +6,15 @@ extends Node2D
 @onready var particles = $FlameParticles
 @onready var action_area = $ActionArea
 
+var actions = [
+	Action.mk({
+		label="Light", fn=light_up,
+		source_can_execute=func(): return not is_lit()}),
+	Action.mk({
+		label="Put Out", fn=put_out,
+		source_can_execute=is_lit}),
+	]
+
 #################################################################
 # ready
 
@@ -19,14 +28,7 @@ func _ready():
 		put_out()
 	$ColorRect.set_visible(false)
 
-	action_area.register_actions([
-		Action.mk({
-			label="Light", fn=light_up,
-			source_can_execute=func(): return not is_lit()}),
-		Action.mk({
-			label="Put Out", fn=put_out,
-			source_can_execute=is_lit}),
-		])
+	action_area.register_actions(actions)
 
 
 #################################################################
