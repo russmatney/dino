@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dap3qhxnk5asm"]
+[gd_scene load_steps=17 format=3 uid="uid://dap3qhxnk5asm"]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_j5wm8"]
 [ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_oke76"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="12_7ylae"]
+[ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="14_l82es"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="15_r03j1"]
 
 [node name="Area01" type="Node2D"]
@@ -92,6 +93,9 @@ position = Vector2(-36, 8)
 
 [node name="Candle6" parent="08DownTower" instance=ExtResource("15_r03j1")]
 position = Vector2(-60, 80)
+
+[node name="Soldier" parent="08DownTower" instance=ExtResource("14_l82es")]
+position = Vector2(-60, 144)
 
 [node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
 show_behind_parent = true

@@ -18,6 +18,29 @@ func _on_animation_finished():
 	pass
 
 ########################################################
+# to_data, restore
+
+func to_data():
+	var d = {
+		"name": name,
+		"position": position,
+		}
+	if health != null:
+		d["health"] = health
+	if machine and machine.state and machine.state.name:
+		d["state"] = machine.state.name
+	return d
+
+func restore(data):
+	if "position" in data:
+		position = data["position"]
+	if "health" in data:
+		health = data["health"]
+	if "state" in data:
+		machine.transit(data["state"], {ignore_side_effects=true})
+
+
+########################################################
 # facing
 
 var facing

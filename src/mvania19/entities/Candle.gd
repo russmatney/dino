@@ -22,14 +22,23 @@ func _ready():
 	og_scale = light.texture_scale
 	og_energy = light.energy
 
-	if lit:
-		light_up()
-	else:
-		put_out()
+	update_light()
 	$ColorRect.set_visible(false)
 
 	action_area.register_actions(actions, self)
 
+#################################################################
+# persist/restore
+
+func to_data():
+	return {
+		"name": name,
+		"lit": lit,
+		}
+
+func restore(data):
+	lit = data["lit"]
+	update_light()
 
 #################################################################
 # actions
@@ -37,6 +46,12 @@ func _ready():
 @export var lit: bool = true :
 	set(l):
 		lit = l
+
+func update_light():
+	if lit:
+		light_up()
+	else:
+		put_out()
 
 func is_lit():
 	return lit

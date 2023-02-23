@@ -54,6 +54,9 @@ position = Vector2(-4, -8)
 [node name="Candle2" parent="02Hallway" instance=ExtResource("5_iiw26")]
 position = Vector2(84, -8)
 
+[node name="Soldier" parent="02Hallway" instance=ExtResource("6_obold")]
+position = Vector2(-32, 0)
+
 [node name="03Crossroads" type="Node2D" parent="."]
 show_behind_parent = true
 position = Vector2(312, 120)
