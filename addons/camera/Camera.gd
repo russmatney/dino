@@ -97,7 +97,7 @@ func screenshake(trauma = 0.3):
 func freezeframe(name, time_scale, duration, trauma = 0.1):
 	inc_trauma(trauma)
 	start_slowmo(name, time_scale)
-	await get_tree().create_timer(duration * time_scale).timeout
+	await get_tree().create_timer(duration, true, false, true).timeout
 	stop_slowmo(name)
 
 func hitstop(name, time_scale, duration, trauma=0.1):

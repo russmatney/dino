@@ -63,6 +63,7 @@ func _on_frame_changed():
 		for b in bodies:
 			if b.has_method("take_hit"):
 				if not b in bodies_this_swing:
+					Cam.hitstop("swordhit", 0.3, 0.1)
 					bodies_this_swing.append(b)
 					var dir = facing_dir()
 					b.take_hit({"damage": 1, "direction": dir})
