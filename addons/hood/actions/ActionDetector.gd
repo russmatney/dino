@@ -9,12 +9,17 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
 
-var actor:
-	set(a):
-		actor = a
-		# detectable by ActionAreas
-		actor.add_to_group("actors", true)
-		Hood.prn("actor configured: ", a)
+var actor
+var action_hint
+
+func setup(a, ac_hint=null):
+	actor = a
+	# required to be added to ActionAreas
+	actor.add_to_group("actors", true)
+	Hood.prn("actor configured: ", a)
+
+	if ac_hint:
+		action_hint = ac_hint
 
 ####################################################################
 # process
@@ -58,7 +63,7 @@ func update_actions():
 
 	Hood.debug_label("actions: ", actions)
 
-	update_hint()
+	update_displayed_action()
 
 	# maybe reset here
 	# selected_ax_idx = 0
@@ -90,20 +95,29 @@ func inc_selected_ax_idx():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		selected_ax_idx += 1 % len(im_axs)
-	update_hint()
+	update_displayed_action()
 
 func dec_selected_ax_idx():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		selected_ax_idx -= 1 % len(im_axs)
-	update_hint()
+	update_displayed_action()
 
 func execute_current_action():
 	var c_ax = current_action()
 	if c_ax:
 		c_ax.execute()
-	update_hint()
+	update_displayed_action()
 
-func update_hint():
-	if actor:
-		actor.update_action_hint(current_action())
+func update_displayed_action():
+	if actor and actor.has_method("update_displayed_action"):
+		actor.update_displayed_action(current_action())
+	elif action_hint:
+		var c_ax = current_action()
+		if c_ax:
+			var action_label = c_ax.label if c_ax.label else "Action"
+			# TODO get action key from Trolley/input map?
+			var action_key = Util._or(c_ax.key, "e")
+			action_hint.display(action_key, action_label)
+		else:
+			action_hint.hide()

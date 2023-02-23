@@ -23,8 +23,7 @@ func _ready():
 		Hood.prn("player_data: ", player_data)
 		# TODO merge persisted data
 
-	action_detector.actor = self
-	action_detector.update_hint()
+	action_detector.setup(self, action_hint)
 
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
 
@@ -51,16 +50,6 @@ func _unhandled_input(event):
 		var _executed = action_detector.execute_current_action()
 	elif Trolley.is_attack(event):
 		sword.swing()
-
-###########################################################################
-# actions
-
-func update_action_hint(ax):
-	if ax:
-		var action_label = ax.label if ax.label else "Action"
-		action_hint.display("e", action_label)
-	else:
-		action_hint.hide()
 
 ###########################################################################
 # movement
