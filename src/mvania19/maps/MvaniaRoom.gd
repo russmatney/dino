@@ -97,16 +97,17 @@ var visited = false
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		visited = true
-		MvaniaGame.update_rooms()
 		MvaniaGame.update_room_data(self)
+		MvaniaGame.update_rooms()
 		body.stamp_frame({"scale": 2.0, "ttl": 1.0})
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
+		MvaniaGame.update_room_data(self)
 		MvaniaGame.update_rooms()
 
 ###########################################
-# persisted
+# store/retrieve data from store
 
 func to_room_data(player=null):
 	var rect = used_rect()
@@ -116,10 +117,16 @@ func to_room_data(player=null):
 		"position": position,
 		"rect": rect,
 		"visited": visited,
-		# TODO player spawn points
-		# TODO enemies spawns/data
-		# TODO pickup spawns/data
 		}
+
+	var ents = get_children()\
+		.filter(func(c): return c.has_method("to_data") and c.has_method("restore"))\
+		.map(func(c): return [c.name, c.to_data()])
+	var ent_map = {}
+	for e in ents:
+		ent_map[e[0]] = e[1]
+	if len(ents) > 0:
+		data["entities"] = ent_map
 	if area:
 		data["area_name"] = area.name
 	if player:
@@ -128,9 +135,6 @@ func to_room_data(player=null):
 		r.size = rect.size
 		data["has_player"] = r.has_point(player.global_position)
 	return data
-
-###########################################
-# ready
 
 var area
 
@@ -141,6 +145,17 @@ var room_data : Dictionary :
 			if room_data["visited"]:
 				visited = room_data["visited"]
 				_on_paused() if paused else _on_unpaused()
+
+		if "entities" in room_data:
+			var ch_by_name = Util.get_children_by_name(self)
+			for ent_key in room_data["entities"].keys():
+				var ent_data = room_data["entities"][ent_key]
+				var ent = ch_by_name[ent_key]
+				if ent.has_method("restore"):
+					ent.restore(ent_data)
+
+###########################################
+# ready
 
 func _ready():
 	ensure_room_box()
