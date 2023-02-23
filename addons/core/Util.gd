@@ -72,6 +72,11 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 					in_group.append(d)
 	return in_group
 
+func get_children_by_name(node: Node):
+	var by_name = {}
+	for ch in node.get_children():
+		by_name[ch.name] = ch
+	return by_name
 
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
