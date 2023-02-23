@@ -1,0 +1,22 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://ditwsfgayekkb"]
+
+[sub_resource type="Curve" id="Curve_ytr46"]
+_data = [Vector2(0, 0.472393), 0.0, 0.0, 0, 0, Vector2(0.654267, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.717791), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rckle"]
+curve = SubResource("Curve_ytr46")
+
+[resource]
+emission_shape = 1
+emission_sphere_radius = 4.33
+gravity = Vector3(0, -25, 0)
+radial_accel_min = 2.08
+radial_accel_max = 8.33
+damping_min = 4.17
+damping_max = 13.02
+scale_curve = SubResource("CurveTexture_rckle")
+color = Color(0.819608, 0.486275, 0.486275, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+turbulence_enabled = true
