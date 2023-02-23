@@ -167,7 +167,6 @@ func _on_player_found(p):
 
 	update_rooms()
 
-
 func update_rooms():
 	# we could pass the 'entered' room in here, may be faster
 	if not current_area:
@@ -196,6 +195,9 @@ func update_rooms():
 	if current_room:
 		# current_room.set_visible(true)
 		current_room.unpause()
+
+func set_forced_movement_target(target_position):
+	player.move_to_target(target_position)
 
 
 ###########################################################

@@ -23,9 +23,12 @@ func _ready():
 		Hood.prn("player_data: ", player_data)
 		# TODO merge persisted data
 
-	action_detector.setup(self, action_hint)
+	action_detector.setup(self, can_execute_any_actions, action_hint)
 
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
+
+func can_execute_any_actions():
+	return move_target == null
 
 func _on_transit(state):
 	Hood.debug_label("Player State: ", state)
@@ -59,23 +62,44 @@ const JUMP_VELOCITY = -300.0
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var move_dir = Vector2.ZERO
+var move_target
+
+func get_move_dir():
+	if move_target != null:
+		var towards_target = move_target - position
+		var dist = towards_target.length()
+		if dist >= 5:
+			return towards_target.normalized()
+		else:
+			return Vector2.ZERO
+		# note, no movement can occur until move_target is unset
+	else:
+		return Trolley.move_dir()
 
 func _physics_process(_delta):
 	# assign move_dir
-	move_dir = Trolley.move_dir()
+	move_dir = get_move_dir()
+	Hood.debug_label("move_dir: ", move_dir)
 
-	# update facing
-	if move_dir.x > 0:
-		face_right()
-	if move_dir.x < 0:
-		face_left()
+	if move_dir:
+		# update facing
+		if move_dir.x > 0:
+			face_right()
+		if move_dir.x < 0:
+			face_left()
+
+func move_to_target(target_position):
+	move_target = target_position
+
+func clear_move_target():
+	move_target = null
 
 
 ###########################################################################
 # stamp frame
 
 func stamp_frame(opts={}):
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and move_target == null:
 		var new_scale = opts.get("scale", 0.3)
 		var ttl = opts.get("ttl", 0.5)
 		var new_anim = AnimatedSprite2D.new()

@@ -115,7 +115,6 @@ animations = [{
 size = Vector2(32, 32)
 
 [node name="Elevator" type="Node2D" groups=["elevators"]]
-z_index = 10
 script = ExtResource("1_87cqc")
 destination_area_str = ""
 destination_elevator_path = ""
@@ -123,6 +122,8 @@ destination_elevator_path = ""
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wbl66")
 animation = &"opening"
+frame = 4
+frame_progress = 1.0
 
 [node name="ActionArea" parent="." instance=ExtResource("3_nrb31")]
 

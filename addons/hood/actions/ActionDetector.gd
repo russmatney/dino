@@ -12,11 +12,16 @@ func _ready():
 var actor
 var action_hint
 
-func setup(a, ac_hint=null):
+var can_execute_any_actions = func(): return true
+
+func setup(a, can_execute_any=null, ac_hint=null):
 	actor = a
 	# required to be added to ActionAreas
 	actor.add_to_group("actors", true)
 	Hood.prn("actor configured: ", a)
+
+	if can_execute_any:
+		can_execute_any_actions = can_execute_any
 
 	if ac_hint:
 		action_hint = ac_hint
@@ -71,13 +76,13 @@ func update_actions():
 
 ## Returns actions that can be immediately executed
 func immediate_actions():
-	if actor:
+	if actor and can_execute_any_actions.call():
 		return actions.filter(func(ax): return ax.can_execute_now(actor))
 
 ## Returns actions that could be performed if we were close enough to the source.
 ## The actor has no other hang ups (missing dependent items/whatever).
 func potential_actions():
-	if actor:
+	if actor and can_execute_any_actions.call():
 		return actions.filter(func(ax): return ax.can_execute(actor))
 
 ####################################################################
