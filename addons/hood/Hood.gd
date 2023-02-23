@@ -90,6 +90,8 @@ func callsite_to_label_id(call_site):
 	# lbl = lbl.replace("/", "").replace(":", "").replace(".", "")
 	return lbl
 
+func debug_log(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	debug_label(msg, msg2, msg3, msg4, msg5, msg6, msg7)
 func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msg_array = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msg_array = msg_array.filter(func(m): return m)
