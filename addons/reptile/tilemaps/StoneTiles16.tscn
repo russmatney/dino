@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="TileSet" uid="uid://uuhwfbymqdt8" path="res://addons/reptile/tilesets/PurpleStoneTiles16.tres" id="1_h7klg"]
+
+[node name="PurpleStoneTiles" type="TileMap"]
+tile_set = ExtResource("1_h7klg")
+format = 2

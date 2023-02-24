@@ -9,7 +9,8 @@ extends CharacterBody2D
 
 func _ready():
 	Hood.prn("ready")
-	machine.start()
+	if not Engine.is_editor_hint():
+		machine.start()
 	anim.animation_finished.connect(_on_animation_finished)
 
 	# TODO pull/set data from db when area loads?
