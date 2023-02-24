@@ -29,7 +29,7 @@ color = Color(0.160784, 0.482353, 0.568627, 1)
 shadow_enabled = true
 
 [node name="ToArea01" parent="01Elevator" instance=ExtResource("6_2leqq")]
-position = Vector2(0, 16)
+position = Vector2(0, 8)
 destination_area_str = "area01/Area01.tscn"
 destination_elevator_path = "09Elevator/ToArea02"
 
