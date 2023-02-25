@@ -100,7 +100,7 @@ func freezeframe(name, time_scale, duration, trauma = 0.1):
 	await get_tree().create_timer(duration, true, false, true).timeout
 	stop_slowmo(name)
 
-func hitstop(name, time_scale, duration, trauma=0.1):
+func hitstop(name="hitstop", time_scale=0.1, duration=0.3, trauma=0.1):
 	freezeframe(name, time_scale, duration, trauma)
 
 ##############################################################
@@ -174,3 +174,21 @@ func update_pofs():
 func update_pois():
 	if cam:
 		cam.update_pois()
+
+###########################################################################
+# input
+
+
+func _input(event):
+	if Trolley.is_event(event, "zoom_in"):
+		if cam:
+			cam.zoom_dir("in")
+	elif Trolley.is_event(event, "zoom_out"):
+		if cam:
+			cam.zoom_dir("out")
+	if Trolley.is_action(event):
+		if cam:
+			# freezeframe("shake-watch", 0.2, 1.5)
+			cam.inc_trauma(0.1)
+	if Trolley.is_debug_toggle(event):
+		Hood.prn("TODO IMPL camera debug UI!!")

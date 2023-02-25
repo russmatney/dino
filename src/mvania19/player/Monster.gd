@@ -34,7 +34,7 @@ func _on_transit(state):
 	Hood.debug_label("Player State: ", state)
 
 	if state in ["Fall", "Run"]:
-		stamp_frame()
+		stamp()
 
 func _on_sword_bodies_updated(bodies):
 	if len(bodies) > 0:
@@ -51,8 +51,12 @@ func _on_sword_bodies_updated(bodies):
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		var _executed = action_detector.execute_current_action()
+		# TODO fire stamp via actions api? use whatever the current action_hint is?
+		stamp({"scale": 2.0, "ttl": 1.0})
+		Cam.hitstop("player_hitstop")
 	elif Trolley.is_attack(event):
 		sword.swing()
+		stamp({"scale": 2.0, "ttl": 1.0})
 
 ###########################################################################
 # movement
@@ -98,7 +102,7 @@ func clear_move_target():
 ###########################################################################
 # stamp frame
 
-func stamp_frame(opts={}):
+func stamp(opts={}):
 	if not Engine.is_editor_hint() and move_target == null:
 		var new_scale = opts.get("scale", 0.3)
 		var ttl = opts.get("ttl", 0.5)
@@ -138,7 +142,7 @@ func update_h_flip(node):
 
 func face_right():
 	if facing == "left":
-		stamp_frame()
+		stamp()
 	facing = "right"
 	anim.flip_h = false
 	update_h_flip(sword)
@@ -146,7 +150,7 @@ func face_right():
 
 func face_left():
 	if facing == "right":
-		stamp_frame()
+		stamp()
 	facing = "left"
 	anim.flip_h = true
 	update_h_flip(sword)

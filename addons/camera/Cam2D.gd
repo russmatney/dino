@@ -103,23 +103,6 @@ func _physics_process(delta):
 	process_shake(delta)
 
 
-###########################################################################
-# input
-
-
-func _input(event):
-	if Trolley.is_event(event, "zoom_in"):
-		zoom_dir("in")
-	elif Trolley.is_event(event, "zoom_out"):
-		zoom_dir("out")
-
-	if Trolley.is_action(event):
-		# Cam.freezeframe("shake-watch", 0.2, 1.5)
-		# inc_trauma(1.0)
-		# inc_trauma(0.3)
-		inc_trauma(0.5)
-		# inc_trauma(1.0)
-
 
 ###########################################################################
 # zoom

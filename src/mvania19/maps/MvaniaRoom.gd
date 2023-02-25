@@ -99,7 +99,7 @@ func _on_room_entered(body: Node2D):
 		visited = true
 		MvaniaGame.update_room_data(self)
 		MvaniaGame.update_rooms()
-		body.stamp_frame({"scale": 2.0, "ttl": 1.0})
+		body.stamp({"scale": 2.0, "ttl": 1.0})
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
