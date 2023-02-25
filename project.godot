@@ -28,6 +28,7 @@ run/main_scene.mvania19="res://src/mvania19/menus/MainMenu.tscn"
 
 Util="*res://addons/core/Util.gd"
 Hood="*res://addons/hood/Hood.gd"
+Debug="*res://addons/core/Debug.gd"
 Quest="*res://addons/hood/Quest.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
