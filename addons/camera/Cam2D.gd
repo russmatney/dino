@@ -54,6 +54,13 @@ func _ready():
 	if not following:
 		find_node_to_follow()
 
+	Debug.debug_toggled.connect(_on_debug_toggled)
+
+func _on_debug_toggled(debugging):
+	if debugging:
+		print("debugging cam2d!")
+	queue_redraw()
+
 ###########################################################################
 # window size updates
 
@@ -72,6 +79,9 @@ func _process(delta):
 	Hood.debug_label("Zoom Level", "[jump]", zoom_level, "[/jump]")
 	Hood.debug_label("Zoom Offset", zoom_offset)
 	Hood.debug_label("Cam Center", get_target_position())
+
+	if Debug.debugging:
+		queue_redraw()
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -207,8 +217,8 @@ func attach_to_nearest_anchor():
 ###########################################################################
 # update pofs/pois
 
-# TODO how often should we check for more follows?
-# maybe trigger via signal/singleton when adding new nodes
+# how often should we check for more follows?
+# maybe trigger via signal/singleton when adding new nodes?
 func update_pois():
 	if poi_group:
 		var all_pois = get_tree().get_nodes_in_group(poi_group)
@@ -253,23 +263,27 @@ func update_pofs():
 ###########################################################################
 # zoom in pof/poi mode
 
+
 func build_focuses():
 	if len(pof_follows) == 0 and not following:
 		return []
 
-	var focuses = []
+	var fcses = []
 
 	# TODO favor the `following` (player) position more
-	focuses.append(following)
-	focuses.append_array(pof_follows)
+	fcses.append(following)
+	fcses.append_array(pof_follows)
 	# TODO favor pois based checked importance * proximity
-	focuses.append_array(poi_follows)
+	fcses.append_array(poi_follows)
 
-	return focuses
+	return fcses
+
+var focuses = []
+var focuses_rect = Rect2()
 
 func update_focus():
 	# adjusts the offset and zoom based on following, pofs, and pois
-	var focuses = build_focuses()
+	focuses = build_focuses()
 	if len(focuses) == 0:
 		return
 
@@ -301,14 +315,14 @@ func update_focus():
 		if obj.global_position.y > max_bottom:
 			max_bottom = obj.global_position.y
 
-	var merged_rect = Rect2()
-	merged_rect.position = Vector2(max_left, max_top)
-	merged_rect.end = Vector2(max_right, max_bottom)
+	focuses_rect = Rect2()
+	focuses_rect.position = Vector2(max_left, max_top)
+	focuses_rect.end = Vector2(max_right, max_bottom)
 
 	# center camera on merged rect
-	self.global_position = merged_rect.get_center()
+	self.global_position = focuses_rect.get_center()
 
-	update_zoom_level_for_bounds(merged_rect)
+	update_zoom_level_for_bounds()
 
 	zoom_level = round(clamp(zoom_level, min_zoom_level, max_zoom_level))
 	clamp_zoom_offset()
@@ -329,7 +343,7 @@ var zoom_min_margin = 50
 
 ## Attempts to determine a new zoom based on the passed rectangle of pofs
 ## camera2d zoom ~= viewport.size / desired_rect.size
-func update_zoom_level_for_bounds(focuses_rect):
+func update_zoom_level_for_bounds():
 	var vp_size = get_viewport().size
 
 	Hood.debug_label("POF Rect", focuses_rect)
@@ -424,3 +438,32 @@ func screenshake_rotational(noise_ctx, delta):
 	var shake = trauma * trauma
 	next_noise_factor(noise_ctx, delta)
 	shake_rotation = max_shake_rotation * shake * noise_ctx["factor"]
+
+################################################################
+# debug
+
+var debug_font = preload("res://addons/core/assets/fonts/at01.ttf")
+func _draw():
+	if Debug.debugging:
+		var focus_points: PackedVector2Array = focuses.map(func(x): return x.global_position - get_target_position())
+		if len(focus_points) > 0:
+			focus_points.append(focus_points[0])
+
+		var player_pos = following.global_position - get_target_position()
+		Hood.debug_label("points", focus_points)
+		for p in focus_points:
+			draw_circle(p, 5.0, Color.MAGENTA)
+
+			var diff = p - player_pos
+			var s = str("(", round(p.x), ", ", round(p.y), ")",
+				"\n", round(diff.length()), " (", round(diff.x), ", ", round(diff.y), ")"
+				)
+			draw_multiline_string(debug_font, p, s)
+
+		# draw_multiline(focus_points, Color.MAGENTA, 1.0)
+		draw_polyline(focus_points, Color.MAGENTA, 1.0)
+
+		var f_rect = focuses_rect
+		f_rect.position - get_target_position()
+
+		draw_rect(focuses_rect, Color.CRIMSON, false, 2.0)

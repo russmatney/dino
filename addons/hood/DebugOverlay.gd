@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready():
-	Debug.debug_toggle.connect(_on_debug_toggle)
+	Debug.debug_toggled.connect(_on_debug_toggled)
 
-func _on_debug_toggle(debugging):
+func _on_debug_toggled(debugging):
 	set_visible(debugging)

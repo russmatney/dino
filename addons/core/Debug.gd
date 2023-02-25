@@ -3,7 +3,7 @@ extends Node
 
 var debugging = false
 
-signal debug_toggle(debugging)
+signal debug_toggled(debugging)
 
 ################################################
 # ready
@@ -30,7 +30,7 @@ func toggle_debug(d=null):
 		debugging = d
 	else:
 		debugging = !debugging
-	debug_toggle.emit(debugging)
+	debug_toggled.emit(debugging)
 
 ################################################
 # slowmo toggle

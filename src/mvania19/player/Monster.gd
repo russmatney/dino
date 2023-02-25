@@ -32,6 +32,7 @@ func can_execute_any_actions():
 
 func _on_transit(state):
 	Hood.debug_label("Player State: ", state)
+	Hood.debug_label("Player pos: ", global_position)
 
 	if state in ["Fall", "Run"]:
 		stamp()

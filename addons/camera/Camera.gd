@@ -6,6 +6,16 @@ var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
 ##############################################################
+# ready
+
+func _ready():
+	Debug.debug_toggled.connect(_on_debug_toggled)
+
+func _on_debug_toggled(debugging):
+	if debugging:
+		print("debugging camera!")
+
+##############################################################
 # cam_window_rect
 
 func cam_viewport():
@@ -190,5 +200,3 @@ func _input(event):
 		if cam:
 			# freezeframe("shake-watch", 0.2, 1.5)
 			cam.inc_trauma(0.1)
-	if Trolley.is_debug_toggle(event):
-		Hood.prn("TODO IMPL camera debug UI!!")
