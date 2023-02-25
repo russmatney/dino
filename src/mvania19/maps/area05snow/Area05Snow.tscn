@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://cqhsmlv6spf55"]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_hhqw3"]
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_qeyop"]
-[ext_resource type="PackedScene" uid="uid://e2jqikhe4ma3" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="3_bpkdb"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="3_bpkdb"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_fp2ej"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_xkjtp"]
 

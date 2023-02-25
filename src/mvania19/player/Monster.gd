@@ -139,6 +139,7 @@ func update_h_flip(node):
 
 
 @onready var light_occluder = $LightOccluder2D
+@onready var look_point = $LookPoint
 
 func face_right():
 	if facing == "left":
@@ -147,6 +148,7 @@ func face_right():
 	anim.flip_h = false
 	update_h_flip(sword)
 	update_h_flip(light_occluder)
+	update_h_flip(look_point)
 
 func face_left():
 	if facing == "right":
@@ -155,3 +157,4 @@ func face_left():
 	anim.flip_h = true
 	update_h_flip(sword)
 	update_h_flip(light_occluder)
+	update_h_flip(look_point)

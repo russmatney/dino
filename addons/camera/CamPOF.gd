@@ -3,7 +3,7 @@ extends Marker2D
 
 var active = true
 
-func pof_active():
+func is_active():
 	return active
 
 func activate():

@@ -1,3 +1,6 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c3xlrhgvm4nmf"]
 
-[node name="CamPOI" type="Marker2D" groups=["poi"]]
+[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="1_un53m"]
+
+[node name="CamPOI" type="Marker2D" groups=["poi", "pois"]]
+script = ExtResource("1_un53m")

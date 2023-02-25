@@ -159,7 +159,7 @@ var room_data : Dictionary :
 
 func _ready():
 	ensure_room_box()
-	ensure_pofs()
+	ensure_cam_points()
 
 ###########################################
 # pause
@@ -169,7 +169,7 @@ var paused
 func pause():
 	paused = true
 	if not Engine.is_editor_hint():
-		deactivate_pofs()
+		deactivate_cam_points()
 		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 		_on_paused()
 
@@ -178,7 +178,7 @@ func unpause():
 	if not Engine.is_editor_hint():
 		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 		_on_unpaused()
-		call_deferred("activate_pofs")
+		call_deferred("activate_cam_points")
 
 func _on_paused():
 	if visited:
@@ -214,36 +214,52 @@ func to_normal():
 	normal_tween.tween_property(self, "modulate:a", 1, 0.2)
 
 ###########################################
-# pofs
+# cam points
 
 var pof_scene = preload("res://addons/camera/CamPOF.tscn")
 var auto_pof_group = "auto_pofs"
+var poi_scene = preload("res://addons/camera/CamPOI.tscn")
+var auto_poi_group = "auto_pois"
 
-func ensure_pofs():
+func create_point(scene, auto_group, pos):
+	var auto_point = scene.instantiate()
+	auto_point.add_to_group(auto_group, true)
+	auto_point.position = pos
+	add_child(auto_point)
+	auto_point.set_owner(self)
+
+func ensure_cam_points():
 	for c in get_children():
-		if c.is_in_group(auto_pof_group):
+		if c.is_in_group(auto_poi_group):
 			c.free()
 
 	var rect = used_rect()
-	var points = [rect.position, rect.end]
+	var points = [rect.position, rect.end,
+		rect.position + Vector2(rect.size.x, 0),
+		rect.position + Vector2(0, rect.size.y)]
 
 	for p in points:
-		var auto_pof = pof_scene.instantiate()
-		auto_pof.add_to_group(auto_pof_group, true)
-		auto_pof.position = p
-		add_child(auto_pof)
-		auto_pof.set_owner(self)
+		# create_point(poi_scene, auto_poi_group, p)
+		create_point(pof_scene, auto_pof_group, p)
 
-func deactivate_pofs():
+func deactivate_cam_points():
 	var pofs = Util.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("deactivate"):
 			p.deactivate()
-	# Cam.update_pofs()
 
-func activate_pofs():
+	var pois = Util.get_children_in_group(self, Cam.poi_group)
+	for p in pois:
+		if p.has_method("deactivate"):
+			p.deactivate()
+
+func activate_cam_points():
 	var pofs = Util.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("activate"):
 			p.activate()
-	# Cam.update_pofs()
+
+	var pois = Util.get_children_in_group(self, Cam.poi_group)
+	for p in pois:
+		if p.has_method("activate"):
+			p.activate()

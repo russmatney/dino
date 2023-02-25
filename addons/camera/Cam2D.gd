@@ -14,8 +14,7 @@ var current_anchor
 var poi_follows = []
 var pof_follows = []
 
-var poi_following_distance = 400
-var pof_following_distance = 400
+var poi_following_distance = 150
 
 var zoom_level = 1.0
 var min_zoom_level = 1.0
@@ -213,10 +212,19 @@ func attach_to_nearest_anchor():
 func update_pois():
 	if poi_group:
 		var all_pois = get_tree().get_nodes_in_group(poi_group)
+
+		var active_pois = []
+		for p in all_pois:
+			if p.has_method("is_active"):
+				if p.is_active():
+					active_pois.append(p)
+			else:
+				active_pois.append(p)
+
 		var nearby_pois = []
 
 		if following:
-			for poi in all_pois:
+			for poi in active_pois:
 				var dist_vec = following.global_position - poi.global_position
 				var dist_len = dist_vec.length()
 				if dist_len <= poi_following_distance:
@@ -234,8 +242,8 @@ func update_pofs():
 
 			var to_focus = []
 			for p in pofs:
-				if p.has_method("pof_active"):
-					if p.pof_active():
+				if p.has_method("is_active"):
+					if p.is_active():
 						to_focus.append(p)
 				else:
 					to_focus.append(p)
