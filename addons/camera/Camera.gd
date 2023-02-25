@@ -100,7 +100,7 @@ func freezeframe(name, time_scale, duration, trauma = 0.1):
 	await get_tree().create_timer(duration, true, false, true).timeout
 	stop_slowmo(name)
 
-func hitstop(name="hitstop", time_scale=0.1, duration=0.3, trauma=0.1):
+func hitstop(name="hitstop", time_scale=0.5, duration=0.2, trauma=0.1):
 	freezeframe(name, time_scale, duration, trauma)
 
 ##############################################################

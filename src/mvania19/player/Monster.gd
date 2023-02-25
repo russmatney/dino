@@ -50,10 +50,10 @@ func _on_sword_bodies_updated(bodies):
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
+		stamp({"scale": 2.0, "ttl": 1.0})
 		var _executed = action_detector.execute_current_action()
 		# TODO fire stamp via actions api? use whatever the current action_hint is?
-		stamp({"scale": 2.0, "ttl": 1.0})
-		Cam.hitstop("player_hitstop")
+		Cam.hitstop("player_hitstop", 0.5, 0.2)
 	elif Trolley.is_attack(event):
 		sword.swing()
 		stamp({"scale": 2.0, "ttl": 1.0})
