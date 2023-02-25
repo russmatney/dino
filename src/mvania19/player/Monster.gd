@@ -107,7 +107,10 @@ func stamp_frame(opts={}):
 		new_anim.animation = anim.animation
 		new_anim.frame = anim.frame
 
-		# definitely more position work to do
+		var ax_hint = action_hint.duplicate()
+		new_anim.add_child(ax_hint)
+
+		# definitely more position work to do...?
 		new_anim.global_position = global_position + anim.position
 		Navi.add_child_to_current(new_anim)
 
