@@ -225,8 +225,10 @@ func create_point(scene, auto_group, pos):
 	var auto_point = scene.instantiate()
 	auto_point.add_to_group(auto_group, true)
 	auto_point.position = pos
-	# note, only relevant for POIs, not POFs
-	auto_point.importance = 0.4
+
+	# only relevant for POIs, not POFs
+	# auto_point.importance = 0.4
+
 	add_child(auto_point)
 	auto_point.set_owner(self)
 
@@ -241,8 +243,8 @@ func ensure_cam_points():
 		rect.position + Vector2(0, rect.size.y)]
 
 	for p in points:
-		create_point(poi_scene, auto_poi_group, p)
-		# create_point(pof_scene, auto_pof_group, p)
+		# create_point(poi_scene, auto_poi_group, p)
+		create_point(pof_scene, auto_pof_group, p)
 
 func deactivate_cam_points():
 	var pofs = Util.get_children_in_group(self, Cam.pof_group)

@@ -74,9 +74,12 @@ shape = SubResource("RectangleShape2D_56h2g")
 
 [node name="CamPOF" parent="." instance=ExtResource("11_8r4cy")]
 position = Vector2(2.08165e-12, -60)
+active = false
 
 [node name="CamPOF2" parent="." instance=ExtResource("11_8r4cy")]
 position = Vector2(2.08165e-12, 60)
+active = false
 
 [node name="LookPoint" parent="." instance=ExtResource("11_8r4cy")]
 position = Vector2(50, 2.08165e-12)
+active = false

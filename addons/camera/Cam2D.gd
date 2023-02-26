@@ -308,8 +308,8 @@ func update_focus():
 			if weighted_dist.length() > 0:
 				var poi_weighted_pos = obj.global_position - weighted_dist
 				obj_pos = poi_weighted_pos
-		elif obj.is_in_group(pof_group):
-			obj_pos = obj.global_position
+		elif obj.is_in_group(pof_group) and obj != following:
+			obj_pos = obj.global_position - pof_offset(obj)
 		else:
 			obj_pos = obj.global_position
 
@@ -334,7 +334,7 @@ func update_focus():
 
 	update_zoom_level_for_bounds()
 
-	zoom_level = round(clamp(zoom_level, min_zoom_level, max_zoom_level))
+	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
 	clamp_zoom_offset()
 
 	update_zoom()
@@ -451,11 +451,35 @@ func screenshake_rotational(noise_ctx, delta):
 ################################################################
 # debug
 
-# TODO scrolling might move this min/max window
+# TODO scrolling could move this min/max window
+
+var pof_max = Vector2(100.0, 80.0)
+
+## How much should we move the pof towards the player?
+func pof_offset(pof) -> Vector2:
+	var v_diff = pof.global_position - following.global_position
+	var offset = Vector2()
+
+	if abs(v_diff.x) < pof_max.x:
+		offset.x = 0
+	elif v_diff.x < 0:
+		offset.x = v_diff.x + pof_max.x
+	elif v_diff.x > 0:
+		offset.x = v_diff.x - pof_max.x
+
+	if abs(v_diff.y) < pof_max.y:
+		offset.y = 0
+	elif v_diff.y < 0:
+		offset.y = v_diff.y + pof_max.y
+	elif v_diff.y > 0:
+		offset.y = v_diff.y - pof_max.y
+
+	return offset
+
 var proximity_max = 200.0
 var proximity_min = 100.0
 
-func weighted_poi_offset(poi):
+func weighted_poi_offset(poi) -> Vector2:
 	var poi_diff = poi.global_position - following.global_position
 	var poi_dist = poi_diff.length()
 
@@ -491,7 +515,6 @@ func _draw():
 			if p.is_in_group(poi_group):
 				var weighted_dist = weighted_poi_offset(p)
 				var poi_weighted_pos = p.global_position - weighted_dist - get_target_position()
-
 				var dist_from_player = poi_weighted_pos - player_pos
 
 				var s = str(round(dist_from_player.length()), "\n")
@@ -499,6 +522,17 @@ func _draw():
 
 				draw_multiline_string(debug_font, poi_weighted_pos, s)
 				draw_circle(poi_weighted_pos, 3.0, Color.AQUAMARINE)
+
+			if p.is_in_group(pof_group) and p != following:
+				var dist = pof_offset(p)
+				var pof_pos = p.global_position - dist - get_target_position()
+				var dist_from_player = pof_pos - player_pos
+
+				var s = str(round(dist_from_player.length()), "\n")
+				s += str(round(pof_pos.x), ",", round(pof_pos.y), "\n")
+
+				draw_multiline_string(debug_font, pof_pos, s)
+				draw_circle(pof_pos, 3.0, Color.AQUAMARINE)
 
 			var diff = pos - player_pos
 			if diff.length() != 0:
