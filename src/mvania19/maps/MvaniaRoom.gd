@@ -225,6 +225,8 @@ func create_point(scene, auto_group, pos):
 	var auto_point = scene.instantiate()
 	auto_point.add_to_group(auto_group, true)
 	auto_point.position = pos
+	# note, only relevant for POIs, not POFs
+	auto_point.importance = 0.4
 	add_child(auto_point)
 	auto_point.set_owner(self)
 

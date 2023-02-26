@@ -304,6 +304,7 @@ func update_focus():
 		var obj_pos
 		if obj.is_in_group(poi_group):
 			var weighted_dist = weighted_poi_offset(obj)
+			# ignore poi if it's so far that our proximity is zero
 			if weighted_dist.length() > 0:
 				var poi_weighted_pos = obj.global_position - weighted_dist
 				obj_pos = poi_weighted_pos
@@ -450,21 +451,34 @@ func screenshake_rotational(noise_ctx, delta):
 ################################################################
 # debug
 
-var proximity_max = 300.0
-var proximity_min = 30.0
+# TODO scrolling might move this min/max window
+var proximity_max = 200.0
+var proximity_min = 100.0
 
 func weighted_poi_offset(poi):
 	var poi_diff = poi.global_position - following.global_position
 	var poi_dist = poi_diff.length()
-	var proximity
+
+	var proximity # [0,1]
 	if poi_dist > proximity_max:
 		proximity = 0.0
 	elif poi_dist < proximity_min:
 		proximity = 1.0
 	else:
 		proximity = (poi_dist - proximity_min) / (proximity_max-proximity_min)
-	var importance = 0.7
-	return poi_diff * (importance * proximity)
+		Hood.prn(proximity)
+
+	var importance # [0,1]
+	if poi.has_method("get_importance"):
+		importance = poi.get_importance()
+	else:
+		importance = 0.5
+
+	# invert vals: more important/proximal means smaller poi_contib
+	# we want to focus MORE on the important thing, and this value pushes
+	# the focused point away from the poi's position
+	# (and less on the player)
+	return poi_diff * (1 - importance) * proximity
 
 var debug_font = preload("res://addons/core/assets/fonts/at01.ttf")
 func _draw():
@@ -478,7 +492,10 @@ func _draw():
 			if p.is_in_group(poi_group):
 				var weighted_dist = weighted_poi_offset(p)
 				var poi_weighted_pos = p.global_position - weighted_dist - get_target_position()
-				var s = str(round(weighted_dist.length()), "\n")
+
+				var dist_from_player = poi_weighted_pos - player_pos
+
+				var s = str(round(dist_from_player.length()), "\n")
 				s += str(round(poi_weighted_pos.x), ",", round(poi_weighted_pos.y), "\n")
 
 				draw_multiline_string(debug_font, poi_weighted_pos, s)
