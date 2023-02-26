@@ -301,7 +301,6 @@ func update_focus():
 
 	# TODO refactor into reduce
 	for obj in focuses:
-
 		var obj_pos
 		if obj.is_in_group(poi_group):
 			var weighted_dist = weighted_poi_offset(obj)
@@ -311,24 +310,16 @@ func update_focus():
 			obj_pos = obj.global_position
 		else:
 			obj_pos = obj.global_position
+
 		center += obj_pos
 
-		if max_left == null:
+		if max_left == null or obj_pos.x < max_left:
 			max_left = obj_pos.x
-		if max_right == null:
+		if max_right == null or obj_pos.x > max_right:
 			max_right = obj_pos.x
-		if max_top == null:
+		if max_top == null or obj_pos.y < max_top:
 			max_top = obj_pos.y
-		if max_bottom == null:
-			max_bottom = obj_pos.y
-
-		if obj_pos.x < max_left:
-			max_left = obj_pos.x
-		if obj_pos.x > max_right:
-			max_right = obj_pos.x
-		if obj_pos.y < max_top:
-			max_top = obj_pos.y
-		if obj_pos.y > max_bottom:
+		if max_bottom == null or obj_pos.y > max_bottom:
 			max_bottom = obj_pos.y
 
 	focuses_rect = Rect2()
@@ -342,7 +333,6 @@ func update_focus():
 
 	zoom_level = round(clamp(zoom_level, min_zoom_level, max_zoom_level))
 	clamp_zoom_offset()
-
 
 	update_zoom()
 
@@ -497,6 +487,5 @@ func _draw():
 		draw_polyline(focus_points, Color.MAGENTA, 1.0)
 
 		var f_rect = focuses_rect
-		f_rect.position - get_target_position()
-
-		draw_rect(focuses_rect, Color.CRIMSON, false, 2.0)
+		f_rect.position -= get_target_position()
+		draw_rect(f_rect, Color.CRIMSON, false, 2.0)
