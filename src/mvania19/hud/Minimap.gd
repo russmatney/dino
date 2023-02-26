@@ -44,15 +44,15 @@ func update_minimap_data():
 	if area_data == null:
 		area_data = {}
 
-	if len(area_data) == 0:
-		if Engine.is_editor_hint():
-			# draw a map to be sure things work
-			var area = MvaniaGame.area_scenes[0].instantiate()
-			area_data = MvaniaGame.to_area_data(area)
-			if area_data == null:
-				area_data = {}
-		else:
-			return
+	# if len(area_data) == 0:
+	# 	if Engine.is_editor_hint():
+	# 		# draw a map to be sure things work
+	# 		var area = MvaniaGame.area_scenes[0].instantiate()
+	# 		area_data = MvaniaGame.to_area_data(area)
+	# 		if area_data == null:
+	# 			area_data = {}
+	# 	else:
+	# 		return
 
 ################################################################
 # update_map

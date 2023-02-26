@@ -4,9 +4,9 @@ extends Node2D
 
 @export var persist_area_data: bool :
 	set(v):
-		persist_area_data = v
+		persist_area_data = false
 		if v:
-			if Engine.is_editor_hint():
+			if Engine.is_editor_hint() and self.name != &"":
 				MvaniaGame.persist_area(self)
 
 ###########################################################

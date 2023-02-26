@@ -120,7 +120,11 @@ func list_elevator_paths():
 	# _bundle is close but does not go across packed scenes (i.e. packed rooms in packed areas)
 	# maybe could still traverse into those...
 	var area_scene = load(area_file_path)
+	if area_scene == null:
+		return []
 	var area_inst = area_scene.instantiate()
+	if area_inst == null:
+		return []
 	var elevators = []
 	if area_inst:
 		elevators = Util.get_children_in_group(area_inst, "elevators")

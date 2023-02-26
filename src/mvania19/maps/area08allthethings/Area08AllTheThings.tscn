@@ -28,8 +28,8 @@ script = ExtResource("2_jvikm")
 
 [node name="Elevator" parent="01Entrance" instance=ExtResource("3_745pf")]
 position = Vector2(-24, 32)
-destination_area_str = "area08allthethings/Area08AllTheThings.tscn"
-destination_elevator_path = "04MetalElevator/Elevator"
+destination_area_str = "area01/Area01.tscn"
+destination_elevator_path = "12WorldHub/ToAllTheThings"
 
 [node name="Candle" parent="01Entrance" instance=ExtResource("4_pu2un")]
 position = Vector2(40, 24)

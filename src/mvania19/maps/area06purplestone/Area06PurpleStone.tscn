@@ -28,8 +28,8 @@ script = ExtResource("2_xk25d")
 [node name="Elevator" parent="01StoneEntrance" instance=ExtResource("3_wwjab")]
 position = Vector2(136, -96)
 clear = true
-destination_area_str = "area06purplestone/Area06PurpleStone.tscn"
-destination_elevator_path = "04Boss/Elevator2"
+destination_area_str = "area01/Area01.tscn"
+destination_elevator_path = "12WorldHub/ToPurpleStone"
 
 [node name="Candle3" parent="01StoneEntrance" instance=ExtResource("4_6jxld")]
 position = Vector2(192, -96)

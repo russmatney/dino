@@ -9,6 +9,10 @@ var area_scenes = [
 	preload("res://src/mvania19/maps/area02/Area02.tscn"),
 	preload("res://src/mvania19/maps/area03/Area03.tscn"),
 	preload("res://src/mvania19/maps/area04/Area04.tscn"),
+	preload("res://src/mvania19/maps/area05snow/Area05.tscn"),
+	preload("res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn"),
+	preload("res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn"),
+	preload("res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn"),
 	]
 
 var area_db = {}
@@ -36,11 +40,11 @@ func print_area_db():
 
 func to_area_data(area):
 	area.ensure_rooms()
-	if len(area.rooms) == 0:
-		Hood.err(area.name, " [ERR] No rooms!")
-		return
 
 	var room_data = {}
+	if len(area.rooms) == 0:
+		Hood.warn(area.name, " No rooms in to_area_data! ", area)
+
 	for r in area.rooms:
 		var r_data = r.to_room_data(player)
 		room_data[r.name] = r_data
@@ -53,7 +57,6 @@ func to_area_data(area):
 
 func persist_area(area):
 	var area_data = to_area_data(area)
-
 	if area_data:
 		# don't overwrite if exists?
 		area_db[area.name] = area_data

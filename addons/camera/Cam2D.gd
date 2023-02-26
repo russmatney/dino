@@ -466,7 +466,6 @@ func weighted_poi_offset(poi):
 		proximity = 1.0
 	else:
 		proximity = (poi_dist - proximity_min) / (proximity_max-proximity_min)
-		Hood.prn(proximity)
 
 	var importance # [0,1]
 	if poi.has_method("get_importance"):
