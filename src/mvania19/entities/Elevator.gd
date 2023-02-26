@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+# class_name MvaniaElevator
 
 @onready var action_area = $ActionArea
 @onready var anim = $AnimatedSprite2D
@@ -56,9 +57,9 @@ func travel():
 @export var clear: bool :
 	set(v):
 		clear = v
-		destination_area_str = ""
-		destination_elevator_path = ""
-		notify_property_list_changed()
+		if v:
+			destination_area_str = ""
+			destination_elevator_path = ""
 
 var destination_area_str: String :
 	set(v):
@@ -116,25 +117,34 @@ func list_elevator_paths():
 	if destination_area_str == null or len(destination_area_str) == 0:
 		return ""
 	var area_file_path = destination_area_full_path()
-	# TODO is there a way to see a scene's children/grandchildren without loading and instantiating?
-	# _bundle is close but does not go across packed scenes (i.e. packed rooms in packed areas)
-	# maybe could still traverse into those...
+
+	# DANGER do not try to 'load' the current owner!
+	# if you do, the editor crashes while trying to save the scene
+	var e_paths = ""
+	if owner.scene_file_path == area_file_path:
+		for c in Util.get_children_in_group(owner, "elevators"):
+			e_paths += str(owner.get_path_to(c)) + ","
+
+		return e_paths
+
 	var area_scene = load(area_file_path)
 	if area_scene == null:
-		return []
-	var area_inst = area_scene.instantiate()
-	if area_inst == null:
-		return []
-	var elevators = []
-	if area_inst:
-		elevators = Util.get_children_in_group(area_inst, "elevators")
+		Hood.warn("Failed to load area scene: ", area_file_path)
+		return ""
 
-	var e_paths = ""
-	for e in elevators:
-		var parent_name = e.get_parent().name
-		if parent_name.match("*Area*"):
-			e_paths += e.name + ","
-		else:
-			e_paths += parent_name + "/" + e.name + ","
+	var state = area_scene.get_state()
+
+	e_paths = ""
+	for node_idx in state.get_node_count():
+		var node_packed_scene = state.get_node_instance(node_idx)
+		if node_packed_scene != null:
+			var node_packed_scene_name = node_packed_scene.get_state().get_node_name(0)
+
+			# weakly relying on this packed scene name
+			# it'd be nice if the scene type was Elevator instead of Node2D
+			# TODO make elevators a custom type! not sure if custom types get pulled here
+			if node_packed_scene_name == "Elevator":
+				var path = state.get_node_path(node_idx)
+				e_paths += str(path).substr(2, -1) + ","
 
 	return e_paths

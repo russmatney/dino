@@ -78,6 +78,24 @@ func get_children_by_name(node: Node):
 		by_name[ch.name] = ch
 	return by_name
 
+
+# TODO convert this goofy idx api into traversable dicts
+func packed_scene_info(scene):
+	var state = scene.get_state()
+	for node_idx in state.get_node_count():
+		var node_packed_scene = state.get_node_instance(node_idx)
+		print("node type", state.get_node_type(node_idx))
+		print("node name", state.get_node_name(node_idx))
+		print("node owner path", state.get_node_owner_path(node_idx))
+		print("node path", state.get_node_path(node_idx))
+		if node_packed_scene:
+			print("node packed scene ", node_packed_scene)
+
+		for prop_idx in state.get_node_property_count(node_idx):
+			var prop_name = state.get_node_property_name(node_idx, prop_idx)
+			var prop_val = state.get_node_property_value(node_idx, prop_idx)
+			print("node prop: ", prop_name, " : ", prop_val)
+
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
 func set_collisions_enabled(node, enabled):
