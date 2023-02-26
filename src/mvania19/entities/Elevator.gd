@@ -139,7 +139,6 @@ func list_elevator_paths():
 			# depends on the Elevator instance name itself
 			# maybe could check the instance properties for a group?
 			if "Elevator" == node_state.get("instance_name"):
-				print("elevator props: ", node_state["instance"]["Elevator"]["properties"])
 				var path = node_state["path"]
 				elevator_paths += str(path).substr(2, -1) + ","
 
