@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_olwdl"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="3_fx5qs"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_fmddr"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="5_do5d3"]
+[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="5_do5d3"]
 
 [node name="Area05Snow" type="Node2D"]
 script = ExtResource("1_ekxi3")

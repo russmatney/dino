@@ -27,7 +27,6 @@ script = ExtResource("2_xk25d")
 
 [node name="Elevator" parent="01StoneEntrance" instance=ExtResource("3_wwjab")]
 position = Vector2(136, -96)
-clear = true
 destination_area_str = "area01/Area01.tscn"
 destination_elevator_path = "12WorldHub/ToPurpleStone"
 

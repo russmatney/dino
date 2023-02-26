@@ -15,12 +15,13 @@ func _ready():
 # input
 
 func _unhandled_input(event):
-	if Trolley.is_debug_toggle(event):
-		toggle_debug()
-	elif Trolley.is_event(event, "slowmo"):
-		slowmo_start()
-	elif Trolley.is_event_released(event, "slowmo"):
-		slowmo_stop()
+	if not Engine.is_editor_hint():
+		if Trolley.is_debug_toggle(event):
+			toggle_debug()
+		elif Trolley.is_event(event, "slowmo"):
+			slowmo_start()
+		elif Trolley.is_event_released(event, "slowmo"):
+			slowmo_stop()
 
 ################################################
 # input
