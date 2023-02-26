@@ -56,7 +56,7 @@ layer_0/tile_data = PackedInt32Array(720950, 196609, 4, 655414, 196609, 3, 58987
 script = ExtResource("2_jvikm")
 
 [node name="Candle" parent="03SpaceshipTower" instance=ExtResource("4_pu2un")]
-position = Vector2(504, -24)
+position = Vector2(504, -32)
 
 [node name="Candle2" parent="03SpaceshipTower" instance=ExtResource("4_pu2un")]
 position = Vector2(536, 144)

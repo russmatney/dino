@@ -450,8 +450,8 @@ func screenshake_rotational(noise_ctx, delta):
 ################################################################
 # debug
 
-var proximity_max = 200.0
-var proximity_min = 50.0
+var proximity_max = 300.0
+var proximity_min = 30.0
 
 func weighted_poi_offset(poi):
 	var poi_diff = poi.global_position - following.global_position
@@ -473,34 +473,24 @@ func _draw():
 
 		for p in focuses:
 			var pos = p.global_position - get_target_position()
-			draw_circle(pos, 5.0, Color.MAGENTA)
+			draw_circle(pos, 2.0, Color.AQUAMARINE)
 
-			var s = ""
 			if p.is_in_group(poi_group):
 				var weighted_dist = weighted_poi_offset(p)
 				var poi_weighted_pos = p.global_position - weighted_dist - get_target_position()
-				s += str("poi dist: ", round(weighted_dist.length()), "\n")
-				s += str("poi weighted: ", round(poi_weighted_pos.x), ", ", round(poi_weighted_pos.y), "\n")
+				var s = str(round(weighted_dist.length()), "\n")
+				s += str(round(poi_weighted_pos.x), ",", round(poi_weighted_pos.y), "\n")
 
-				draw_multiline_string(debug_font, pos, s)
+				draw_multiline_string(debug_font, poi_weighted_pos, s)
 				draw_circle(poi_weighted_pos, 3.0, Color.AQUAMARINE)
 
 			var diff = pos - player_pos
-			s += str("(", round(pos.x), ", ", round(pos.y), ")",
-				"\n", round(diff.length()), " (", round(diff.x), ", ", round(diff.y), ")"
-				)
-			draw_multiline_string(debug_font, pos, s)
-
-			draw_line(player_pos, pos, Color.MAGENTA, 1.0)
-
-		# var focus_points: PackedVector2Array = focuses.map(
-		# 	func(x): return x.global_position - get_target_position()
-		# 	)
-		# if len(focus_points) > 0:
-		# 	focus_points.append(focus_points[0])
-		# # TODO draw lines between points and player
-		# # draw_multiline(focus_points, Color.MAGENTA, 1.0)
-		# draw_polyline(focus_points, Color.MAGENTA, 1.0)
+			if diff.length() != 0:
+				var s = str("(", round(pos.x), ", ", round(pos.y), ")",
+					"\n", round(diff.length()), " (", round(diff.x), ", ", round(diff.y), ")"
+					)
+				draw_multiline_string(debug_font, pos, s)
+				draw_line(player_pos, pos, Color.MAGENTA, 1.0)
 
 		var f_rect = focuses_rect
 		f_rect.position -= get_target_position()
