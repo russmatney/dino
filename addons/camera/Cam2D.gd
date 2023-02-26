@@ -304,23 +304,25 @@ func update_focus():
 		var obj_pos
 		if obj.is_in_group(poi_group):
 			var weighted_dist = weighted_poi_offset(obj)
-			var poi_weighted_pos = obj.global_position - weighted_dist
-			obj_pos = poi_weighted_pos
+			if weighted_dist.length() > 0:
+				var poi_weighted_pos = obj.global_position - weighted_dist
+				obj_pos = poi_weighted_pos
 		elif obj.is_in_group(pof_group):
 			obj_pos = obj.global_position
 		else:
 			obj_pos = obj.global_position
 
-		center += obj_pos
+		if obj_pos != null:
+			center += obj_pos
 
-		if max_left == null or obj_pos.x < max_left:
-			max_left = obj_pos.x
-		if max_right == null or obj_pos.x > max_right:
-			max_right = obj_pos.x
-		if max_top == null or obj_pos.y < max_top:
-			max_top = obj_pos.y
-		if max_bottom == null or obj_pos.y > max_bottom:
-			max_bottom = obj_pos.y
+			if max_left == null or obj_pos.x < max_left:
+				max_left = obj_pos.x
+			if max_right == null or obj_pos.x > max_right:
+				max_right = obj_pos.x
+			if max_top == null or obj_pos.y < max_top:
+				max_top = obj_pos.y
+			if max_bottom == null or obj_pos.y > max_bottom:
+				max_bottom = obj_pos.y
 
 	focuses_rect = Rect2()
 	focuses_rect.position = Vector2(max_left, max_top)
@@ -448,10 +450,21 @@ func screenshake_rotational(noise_ctx, delta):
 ################################################################
 # debug
 
+var proximity_max = 200.0
+var proximity_min = 50.0
+
 func weighted_poi_offset(poi):
 	var poi_diff = poi.global_position - following.global_position
+	var poi_dist = poi_diff.length()
+	var proximity
+	if poi_dist > proximity_max:
+		proximity = 0.0
+	elif poi_dist < proximity_min:
+		proximity = 1.0
+	else:
+		proximity = (poi_dist - proximity_min) / (proximity_max-proximity_min)
 	var importance = 0.7
-	return poi_diff * (1 - importance)
+	return poi_diff * (importance * proximity)
 
 var debug_font = preload("res://addons/core/assets/fonts/at01.ttf")
 func _draw():
@@ -478,13 +491,16 @@ func _draw():
 				)
 			draw_multiline_string(debug_font, pos, s)
 
-		var focus_points: PackedVector2Array = focuses.map(
-			func(x): return x.global_position - get_target_position()
-			)
-		if len(focus_points) > 0:
-			focus_points.append(focus_points[0])
-		# draw_multiline(focus_points, Color.MAGENTA, 1.0)
-		draw_polyline(focus_points, Color.MAGENTA, 1.0)
+			draw_line(player_pos, pos, Color.MAGENTA, 1.0)
+
+		# var focus_points: PackedVector2Array = focuses.map(
+		# 	func(x): return x.global_position - get_target_position()
+		# 	)
+		# if len(focus_points) > 0:
+		# 	focus_points.append(focus_points[0])
+		# # TODO draw lines between points and player
+		# # draw_multiline(focus_points, Color.MAGENTA, 1.0)
+		# draw_polyline(focus_points, Color.MAGENTA, 1.0)
 
 		var f_rect = focuses_rect
 		f_rect.position -= get_target_position()

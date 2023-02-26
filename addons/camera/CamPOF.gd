@@ -1,7 +1,7 @@
 extends Marker2D
 
 
-var active = true
+@export var active = true
 
 func is_active():
 	return active

@@ -73,10 +73,10 @@ key_or_action = ""
 shape = SubResource("RectangleShape2D_56h2g")
 
 [node name="CamPOF" parent="." instance=ExtResource("11_8r4cy")]
-position = Vector2(0, -48)
+position = Vector2(2.08165e-12, -60)
 
 [node name="CamPOF2" parent="." instance=ExtResource("11_8r4cy")]
-position = Vector2(0, 48)
+position = Vector2(2.08165e-12, 60)
 
 [node name="LookPoint" parent="." instance=ExtResource("11_8r4cy")]
-position = Vector2(48, 0)
+position = Vector2(50, 2.08165e-12)
