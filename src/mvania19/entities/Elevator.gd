@@ -117,34 +117,30 @@ func list_elevator_paths():
 	if destination_area_str == null or len(destination_area_str) == 0:
 		return ""
 	var area_file_path = destination_area_full_path()
+	var elevator_paths = ""
 
-	# DANGER do not try to 'load' the current owner!
-	# if you do, the editor crashes while trying to save the scene
-	var e_paths = ""
 	if owner.scene_file_path == area_file_path:
+		# depends on elevators having an 'elevators' group
 		for c in Util.get_children_in_group(owner, "elevators"):
-			e_paths += str(owner.get_path_to(c)) + ","
+			elevator_paths += str(owner.get_path_to(c)) + ","
+		return elevator_paths
 
-		return e_paths
-
+	# DANGER do not try to 'load' the current owner! (should return above)
+	# if you do, the editor can crash while trying to save the scene.
+	# technically a load is fine, but using get_state or instantiating can be problemmatic anyway
 	var area_scene = load(area_file_path)
 	if area_scene == null:
 		Hood.warn("Failed to load area scene: ", area_file_path)
 		return ""
 
-	var state = area_scene.get_state()
+	var scene_data = Util.packed_scene_data(area_scene, true)
+	if scene_data:
+		for node_state in scene_data.values():
+			# depends on the Elevator instance name itself
+			# maybe could check the instance properties for a group?
+			if "Elevator" == node_state.get("instance_name"):
+				print("elevator props: ", node_state["instance"]["Elevator"]["properties"])
+				var path = node_state["path"]
+				elevator_paths += str(path).substr(2, -1) + ","
 
-	e_paths = ""
-	for node_idx in state.get_node_count():
-		var node_packed_scene = state.get_node_instance(node_idx)
-		if node_packed_scene != null:
-			var node_packed_scene_name = node_packed_scene.get_state().get_node_name(0)
-
-			# weakly relying on this packed scene name
-			# it'd be nice if the scene type was Elevator instead of Node2D
-			# TODO make elevators a custom type! not sure if custom types get pulled here
-			if node_packed_scene_name == "Elevator":
-				var path = state.get_node_path(node_idx)
-				e_paths += str(path).substr(2, -1) + ","
-
-	return e_paths
+	return elevator_paths

@@ -79,22 +79,37 @@ func get_children_by_name(node: Node):
 	return by_name
 
 
-# TODO convert this goofy idx api into traversable dicts
-func packed_scene_info(scene):
+func packed_scene_data(scene, include_properties=false):
 	var state = scene.get_state()
+	var by_name = {}
 	for node_idx in state.get_node_count():
-		var node_packed_scene = state.get_node_instance(node_idx)
-		print("node type", state.get_node_type(node_idx))
-		print("node name", state.get_node_name(node_idx))
-		print("node owner path", state.get_node_owner_path(node_idx))
-		print("node path", state.get_node_path(node_idx))
-		if node_packed_scene:
-			print("node packed scene ", node_packed_scene)
+		var node_name = state.get_node_name(node_idx)
+		var node_data = {
+			"name": node_name,
+			"type": state.get_node_type(node_idx),
+			"owner_path": state.get_node_owner_path(node_idx),
+			"path": state.get_node_path(node_idx),
+			}
 
-		for prop_idx in state.get_node_property_count(node_idx):
+		var node_instance = state.get_node_instance(node_idx)
+		if node_instance:
+			node_data["instance"] = packed_scene_data(node_instance, include_properties)
+			node_data["instance_name"] = node_instance.get_state().get_node_name(0)
+
+		var prop_count = 0
+		if include_properties:
+			prop_count = state.get_node_property_count(node_idx)
+		var properties = {}
+		for prop_idx in prop_count:
 			var prop_name = state.get_node_property_name(node_idx, prop_idx)
 			var prop_val = state.get_node_property_value(node_idx, prop_idx)
-			print("node prop: ", prop_name, " : ", prop_val)
+			properties[prop_name] = prop_val
+		if len(properties) > 0:
+			node_data["properties"] = properties
+
+		by_name[node_name] = node_data
+	return by_name
+
 
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
