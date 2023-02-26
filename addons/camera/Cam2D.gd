@@ -83,6 +83,7 @@ func _process(delta):
 	if Debug.debugging:
 		queue_redraw()
 
+
 	match mode:
 		cam_mode.FOLLOW:
 			if not following:
@@ -102,6 +103,10 @@ func _process(delta):
 			update_pois()
 			update_pofs()
 			update_focus()
+
+			Hood.debug_label("pofs: ", pof_follows)
+			Hood.debug_label("pois: ", poi_follows)
+
 
 
 ###########################################################################
@@ -231,14 +236,15 @@ func update_pois():
 			else:
 				active_pois.append(p)
 
-		var nearby_pois = []
+		var nearby_pois = active_pois
+		# var nearby_pois = []
 
-		if following:
-			for poi in active_pois:
-				var dist_vec = following.global_position - poi.global_position
-				var dist_len = dist_vec.length()
-				if dist_len <= poi_following_distance:
-					nearby_pois.append(poi)
+		# if following:
+		# 	for poi in active_pois:
+		# 		var dist_vec = following.global_position - poi.global_position
+		# 		var dist_len = dist_vec.length()
+		# 		if dist_len <= poi_following_distance:
+		# 			nearby_pois.append(poi)
 
 		if nearby_pois:
 			poi_follows = nearby_pois
@@ -257,7 +263,6 @@ func update_pofs():
 						to_focus.append(p)
 				else:
 					to_focus.append(p)
-
 			pof_follows = to_focus
 
 ###########################################################################
@@ -294,26 +299,37 @@ func update_focus():
 	var max_top
 	var max_bottom
 
+	# TODO refactor into reduce
 	for obj in focuses:
-		center += obj.global_position
+
+		var obj_pos
+		if obj.is_in_group(poi_group):
+			var weighted_dist = weighted_poi_offset(obj)
+			var poi_weighted_pos = obj.global_position - weighted_dist
+			obj_pos = poi_weighted_pos
+		elif obj.is_in_group(pof_group):
+			obj_pos = obj.global_position
+		else:
+			obj_pos = obj.global_position
+		center += obj_pos
 
 		if max_left == null:
-			max_left = obj.global_position.x
+			max_left = obj_pos.x
 		if max_right == null:
-			max_right = obj.global_position.x
+			max_right = obj_pos.x
 		if max_top == null:
-			max_top = obj.global_position.y
+			max_top = obj_pos.y
 		if max_bottom == null:
-			max_bottom = obj.global_position.y
+			max_bottom = obj_pos.y
 
-		if obj.global_position.x < max_left:
-			max_left = obj.global_position.x
-		if obj.global_position.x > max_right:
-			max_right = obj.global_position.x
-		if obj.global_position.y < max_top:
-			max_top = obj.global_position.y
-		if obj.global_position.y > max_bottom:
-			max_bottom = obj.global_position.y
+		if obj_pos.x < max_left:
+			max_left = obj_pos.x
+		if obj_pos.x > max_right:
+			max_right = obj_pos.x
+		if obj_pos.y < max_top:
+			max_top = obj_pos.y
+		if obj_pos.y > max_bottom:
+			max_bottom = obj_pos.y
 
 	focuses_rect = Rect2()
 	focuses_rect.position = Vector2(max_left, max_top)
@@ -442,24 +458,41 @@ func screenshake_rotational(noise_ctx, delta):
 ################################################################
 # debug
 
+func weighted_poi_offset(poi):
+	var poi_diff = poi.global_position - following.global_position
+	var importance = 0.7
+	return poi_diff * (1 - importance)
+
 var debug_font = preload("res://addons/core/assets/fonts/at01.ttf")
 func _draw():
 	if Debug.debugging:
-		var focus_points: PackedVector2Array = focuses.map(func(x): return x.global_position - get_target_position())
-		if len(focus_points) > 0:
-			focus_points.append(focus_points[0])
-
 		var player_pos = following.global_position - get_target_position()
-		Hood.debug_label("points", focus_points)
-		for p in focus_points:
-			draw_circle(p, 5.0, Color.MAGENTA)
 
-			var diff = p - player_pos
-			var s = str("(", round(p.x), ", ", round(p.y), ")",
+		for p in focuses:
+			var pos = p.global_position - get_target_position()
+			draw_circle(pos, 5.0, Color.MAGENTA)
+
+			var s = ""
+			if p.is_in_group(poi_group):
+				var weighted_dist = weighted_poi_offset(p)
+				var poi_weighted_pos = p.global_position - weighted_dist - get_target_position()
+				s += str("poi dist: ", round(weighted_dist.length()), "\n")
+				s += str("poi weighted: ", round(poi_weighted_pos.x), ", ", round(poi_weighted_pos.y), "\n")
+
+				draw_multiline_string(debug_font, pos, s)
+				draw_circle(poi_weighted_pos, 3.0, Color.AQUAMARINE)
+
+			var diff = pos - player_pos
+			s += str("(", round(pos.x), ", ", round(pos.y), ")",
 				"\n", round(diff.length()), " (", round(diff.x), ", ", round(diff.y), ")"
 				)
-			draw_multiline_string(debug_font, p, s)
+			draw_multiline_string(debug_font, pos, s)
 
+		var focus_points: PackedVector2Array = focuses.map(
+			func(x): return x.global_position - get_target_position()
+			)
+		if len(focus_points) > 0:
+			focus_points.append(focus_points[0])
 		# draw_multiline(focus_points, Color.MAGENTA, 1.0)
 		draw_polyline(focus_points, Color.MAGENTA, 1.0)
 
