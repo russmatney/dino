@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://6eiyt343ioij"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_5xi4f"]
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_xk25d"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="3_wwjab"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="4_6jxld"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/StoneTiles16.tscn" id="5_q8ouj"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
 
 [node name="Area06PurpleStone" type="Node2D"]
 position = Vector2(1, 0)

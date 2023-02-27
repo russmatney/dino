@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dap3qhxnk5asm"]
+[gd_scene load_steps=22 format=3 uid="uid://dap3qhxnk5asm"]
 
 [ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_j5wm8"]
 [ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
@@ -17,6 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="14_l82es"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="15_r03j1"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="17_aao4x"]
+[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
 [node name="Area01" type="Node2D"]
 script = ExtResource("1_j5wm8")
@@ -149,3 +153,17 @@ position = Vector2(-24, 72)
 
 [node name="Candle5" parent="12WorldHub" instance=ExtResource("15_r03j1")]
 position = Vector2(184, 161)
+
+[node name="SnowTiles" parent="12WorldHub" instance=ExtResource("18_34m1s")]
+scale = Vector2(0.5, 0.5)
+layer_0/tile_data = PackedInt32Array(1114149, 524288, 5, 1114148, 131072, 12, 1114147, 131072, 5, 1114146, 131072, 12, 1114145, 131072, 5, 1114144, 65536, 12, 1048613, 262144, 3, 983077, 262144, 3, 917541, 262144, 3, 852005, 262144, 3, 786469, 524288, 2, 786468, 131072, 12, 786467, 131072, 5, 786466, 131072, 12, 786465, 131072, 12, 786464, 131072, 12, 786463, 131072, 5, 786462, 131072, 5, 786461, 65536, 5)
+
+[node name="GrassyCaveTileMap" parent="12WorldHub" instance=ExtResource("19_na50t")]
+layer_0/tile_data = PackedInt32Array(1769486, 327681, 5, 1703950, 262145, 3, 1638414, 262145, 3, 1572878, 262145, 3, 1507342, 262145, 3, 1441806, 262145, 2, 1769502, 524289, 5, 1769501, 131073, 5, 1769500, 131073, 5, 1769499, 131073, 5, 1769498, 131073, 5, 1769497, 131073, 5, 1769496, 131073, 5, 1769495, 131073, 5, 1769494, 131073, 5, 1769493, 131073, 5, 1769492, 131073, 5, 1769491, 131073, 5, 1769490, 131073, 5, 1769489, 131073, 5, 1769488, 131073, 5, 1769487, 131073, 5, 1703966, 262145, 3, 1638430, 262145, 3, 1572894, 262145, 3, 1507358, 262145, 3, 1441822, 262145, 2)
+
+[node name="GildedKingdomTiles8" parent="12WorldHub" instance=ExtResource("20_1t25n")]
+layer_0/tile_data = PackedInt32Array(1441801, 196609, 5, 1441800, 131073, 5, 1441799, 131073, 5, 1441798, 131073, 5, 1441797, 131073, 5, 1441796, 131073, 5, 1441795, 327681, 2, 1769475, 327681, 5, 1703939, 262145, 3, 1638403, 262145, 3, 1572867, 262145, 3, 1507331, 262145, 3, 1769485, 196609, 5, 1769484, 131073, 5, 1769483, 131073, 5, 1769482, 131073, 5, 1769481, 131073, 5, 1769480, 131073, 5, 1769479, 131073, 5, 1769478, 131073, 5, 1769477, 131073, 5, 1769476, 131073, 5)
+
+[node name="PurpleStoneTiles" parent="12WorldHub" instance=ExtResource("21_xbmuk")]
+scale = Vector2(0.5, 0.5)
+layer_0/tile_data = PackedInt32Array(1114118, 196608, 5, 1114117, 131072, 5, 1114116, 131072, 5, 1114115, 131072, 5, 1114114, 131072, 5, 1114113, 131072, 5, 1114112, 327680, 5, 1048576, 262144, 3, 983040, 262144, 3, 917504, 262144, 3, 851968, 262144, 3, 786432, 327680, 2, 786442, 524288, 2, 786441, 131072, 5, 786440, 131072, 5, 786439, 131072, 5, 786438, 131072, 5, 786437, 131072, 5, 786436, 131072, 5, 786435, 131072, 5, 786434, 131072, 5, 786433, 131072, 5, 1114122, 262144, 4, 1048586, 262144, 3, 983050, 262144, 3, 917514, 262144, 3, 851978, 262144, 3)
