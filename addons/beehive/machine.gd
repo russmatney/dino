@@ -11,7 +11,7 @@ var should_log = false
 
 # should only be called when the owner is ready
 func start():
-	Hood.prn("[Start] actor: ", owner)
+	Debug.prn("[Start] actor: ", owner)
 
 	if initial_state:
 		state = get_node(initial_state)
@@ -67,7 +67,7 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 
 	if next_state:
 		if should_log:
-			Hood.prn(
+			Debug.prn(
 				owner,
 				(
 					"Transition. Exiting '"

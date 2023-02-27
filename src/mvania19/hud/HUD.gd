@@ -6,7 +6,7 @@ extends CanvasLayer
 # ready
 
 func _ready():
-	Hood.prn("ready")
+	Debug.prn("ready")
 
 
 

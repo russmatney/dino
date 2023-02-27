@@ -7,7 +7,7 @@ var editor_interface
 
 
 func _enter_tree():
-	Hood.prn("enter")
+	Debug.prn("enter")
 	add_autoload_singleton("Util", "res://addons/core/Util.gd")
 
 	editor_interface = get_editor_interface()
@@ -18,7 +18,7 @@ func _enter_tree():
 
 func _exit_tree():
 	remove_autoload_singleton("Util")
-	Hood.prn("exit")
+	Debug.prn("exit")
 
 
 func reload_scene():

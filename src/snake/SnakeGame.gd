@@ -34,8 +34,8 @@ var levels = [{
 var current_level_idx
 
 func load_next_level():
-	Hood.prn("snake game loading next level")
-	Hood.prn("current_level_idx: ", current_level_idx)
+	Debug.prn("snake game loading next level")
+	Debug.prn("current_level_idx: ", current_level_idx)
 	if current_level_idx == null:
 		current_level_idx = 0
 	else:
@@ -44,7 +44,7 @@ func load_next_level():
 	if current_level_idx < levels.size():
 		var lvl = levels[current_level_idx]
 		Quest.current_level_label = lvl["label"]
-		Hood.prn("Navi.nav_to: ", lvl["label"])
+		Debug.prn("Navi.nav_to: ", lvl["label"])
 		Navi.nav_to(lvl["scene"])
 	else:
 		all_levels_complete()

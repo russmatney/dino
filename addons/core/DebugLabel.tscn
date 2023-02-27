@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmcv52djgijio"]
+[gd_scene load_steps=12 format=3]
 
-[ext_resource type="Theme" uid="uid://dp5lmxj28h382" path="res://addons/hood/DebugLabelTheme.tres" id="1_l1u50"]
+[ext_resource type="Theme" uid="uid://dp5lmxj28h382" path="res://addons/core/DebugLabelTheme.tres" id="1_l1u50"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="2_7ic56"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="3_cnlh2"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="4_ekc5j"]

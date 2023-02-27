@@ -73,12 +73,12 @@ func update_window_size():
 
 
 func _process(delta):
-	Hood.debug_label("Window Size", window_size)
+	Debug.debug_label("Window Size", window_size)
 	var vp_size = get_viewport().size
-	Hood.debug_label("Viewport Size", vp_size)
-	Hood.debug_label("Zoom Level", "[jump]", zoom_level, "[/jump]")
-	Hood.debug_label("Zoom Offset", zoom_offset)
-	Hood.debug_label("Cam Center", get_target_position())
+	Debug.debug_label("Viewport Size", vp_size)
+	Debug.debug_label("Zoom Level", "[jump]", zoom_level, "[/jump]")
+	Debug.debug_label("Zoom Offset", zoom_offset)
+	Debug.debug_label("Cam Center", get_target_position())
 
 	if Debug.debugging:
 		queue_redraw()
@@ -104,8 +104,8 @@ func _process(delta):
 			update_pofs()
 			update_focus()
 
-			Hood.debug_label("pofs: ", pof_follows)
-			Hood.debug_label("pois: ", poi_follows)
+			Debug.debug_label("pofs: ", pof_follows)
+			Debug.debug_label("pois: ", poi_follows)
 
 
 
@@ -146,10 +146,10 @@ func zoom_dir(dir, n_levels = null):
 			zoom_offset = calc_zoom_offset_increment() * n_levels
 
 	if zoom_level >= max_zoom_level or zoom_level <= min_zoom_level:
-		Hood.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
+		Debug.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
 	# TODO print helper with throttle/debounce
-	Hood.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
+	Debug.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:
@@ -181,7 +181,7 @@ func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
 
 	if nodes.size() > 1:
-		Hood.prn("[WARN] Camera found multiple nodes to follow", nodes)
+		Debug.prn("[WARN] Camera found multiple nodes to follow", nodes)
 
 	if nodes.size() > 0:
 		following = nodes[0]
@@ -355,7 +355,7 @@ var zoom_min_margin = 50
 func update_zoom_level_for_bounds():
 	var vp_size = get_viewport().size
 
-	Hood.debug_label("POF Rect", focuses_rect)
+	Debug.debug_label("POF Rect", focuses_rect)
 
 	var x = focuses_rect.size.x
 	var y = focuses_rect.size.y
@@ -394,7 +394,7 @@ func screenshake_reset():
 
 func process_shake(delta):
 	if trauma > 0:
-		Hood.debug_label("[CAM] Trauma: ", trauma)
+		Debug.debug_label("[CAM] Trauma: ", trauma)
 		trauma -= trauma_decrement_factor * delta
 		trauma = clamp(trauma, 0.0, 1.0)
 		if trauma == 0.0:

@@ -8,7 +8,7 @@ extends CharacterBody2D
 # ready
 
 func _ready():
-	Hood.prn("ready")
+	Debug.prn("ready")
 	if not Engine.is_editor_hint():
 		machine.start()
 	anim.animation_finished.connect(_on_animation_finished)

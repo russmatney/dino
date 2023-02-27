@@ -33,7 +33,7 @@ func _on_body_exited(body: Node2D):
 	bodies_updated.emit(bodies)
 
 func _on_bodies_updated(bds):
-	Hood.debug_label("Sword bodies: ", bds)
+	Debug.debug_label("Sword bodies: ", bds)
 
 
 ######################################################

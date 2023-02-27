@@ -77,8 +77,8 @@ func _ready():
 		# assuming we're not in a 'proper' MvaniaGame state
 		MvaniaGame.persist_area(self)
 		if Engine.is_editor_hint():
-			Hood.prn("Persisted area data: \n")
-			Hood.prn(MvaniaGame.get_area_data(self))
+			Debug.prn("Persisted area data: \n")
+			Debug.prn(MvaniaGame.get_area_data(self))
 
 	init_room_data()
 

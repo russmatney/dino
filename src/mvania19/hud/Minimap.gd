@@ -132,7 +132,7 @@ func update_camera_limits(merged: Rect2):
 # 		if merged.position.y < 0:
 # 			offset.y = -merged.position.y
 
-# 		Hood.prn("(draw)merged rect (pre-offset): ", merged)
+# 		Debug.prn("(draw)merged rect (pre-offset): ", merged)
 # 		merged.position += offset
-# 		Hood.prn("(draw)merged rect: ", merged)
+# 		Debug.prn("(draw)merged rect: ", merged)
 # 		draw_rect(merged, Color.MAGENTA, false)

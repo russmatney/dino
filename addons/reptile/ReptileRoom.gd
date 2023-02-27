@@ -419,11 +419,11 @@ func regen_tilemaps(image = null, inputs=null):
 		img = Reptile.rotate(img)
 
 	if groups == null or groups.size() == 0:
-		Hood.prn("No groups, re-finding")
+		Debug.prn("No groups, re-finding")
 		find_groups()
 
 	if not groups_valid():
-		Hood.prn("Invalid groups config")
+		Debug.prn("Invalid groups config")
 		return
 
 	init_tilemaps()

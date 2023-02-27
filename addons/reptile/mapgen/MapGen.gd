@@ -60,7 +60,7 @@ func regenerate_image():
 
 func do_clear(_v):
 	if scene_ready:
-		Hood.prn("Clear")
+		Debug.prn("Clear")
 		var node = get_node_or_null(room_node_path)
 		if node:
 			node.queue_free()
@@ -168,7 +168,7 @@ func colorize_image(img):
 
 func do_persist_tilemap(_val = null):
 	if scene_ready:
-		Hood.prn("persisting tilemap: ", Time.get_time_string_from_system())
+		Debug.prn("persisting tilemap: ", Time.get_time_string_from_system())
 		persist_tilemap_to_disk()
 
 
@@ -188,7 +188,7 @@ func persist_tilemap_to_disk():
 		push_error(str("No node found for node_path: ", persist_node_path))
 
 	if not node.get_children().size():
-		Hood.prn(persist_node_path, " has no children, skipping persist")
+		Debug.prn(persist_node_path, " has no children, skipping persist")
 		return
 
 	for c in node.get_children():
@@ -206,6 +206,6 @@ func persist_tilemap_to_disk():
 		var error = ResourceSaver.save(scene, path)
 		if error != OK:
 			push_error("Error while saving Map")
-			Hood.prn("E: ", error)
+			Debug.prn("E: ", error)
 		else:
-			Hood.prn("Successfully saved new map: ", path)
+			Debug.prn("Successfully saved new map: ", path)

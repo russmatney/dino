@@ -3,7 +3,7 @@
 extends Node
 
 func _ready():
-	Hood.prn("autoload ready")
+	Debug.prn("autoload ready")
 
 ######################################################################
 # generate random image

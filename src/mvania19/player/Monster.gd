@@ -20,7 +20,7 @@ func _ready():
 	machine.transitioned.connect(_on_transit)
 
 	if player_data and len(player_data):
-		Hood.prn("player_data: ", player_data)
+		Debug.prn("player_data: ", player_data)
 		# TODO merge persisted data
 
 	action_detector.setup(self, can_execute_any_actions, action_hint)
@@ -31,8 +31,8 @@ func can_execute_any_actions():
 	return move_target == null
 
 func _on_transit(state):
-	Hood.debug_label("Player State: ", state)
-	Hood.debug_label("Player pos: ", global_position)
+	Debug.debug_label("Player State: ", state)
+	Debug.debug_label("Player pos: ", global_position)
 
 	if state in ["Fall", "Run"]:
 		stamp()
@@ -84,7 +84,7 @@ func get_move_dir():
 func _physics_process(_delta):
 	# assign move_dir
 	move_dir = get_move_dir()
-	Hood.debug_label("move_dir: ", move_dir)
+	Debug.debug_label("move_dir: ", move_dir)
 
 	if move_dir:
 		# update facing

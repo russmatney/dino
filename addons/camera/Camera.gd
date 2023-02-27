@@ -59,18 +59,18 @@ func cam_window_rect():
 func ensure_camera(cam_mode = null, opts={}):
 	if not opts is Dictionary:
 		opts = {}
-		Hood.prn("[WARN] overwriting/ignoring camera opts")
+		Debug.prn("[WARN] overwriting/ignoring camera opts")
 
-	Hood.prn("ensuring camera")
+	Debug.prn("ensuring camera")
 	if cam and is_instance_valid(cam):
-		Hood.prn("found existing cam: ", cam)
+		Debug.prn("found existing cam: ", cam)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")
 	if cams:
 		return
 
-	Hood.prn("No node found with 'camera' group, adding one.")
+	Debug.prn("No node found with 'camera' group, adding one.")
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true
@@ -91,7 +91,7 @@ func inc_trauma(inc = 0.1):
 	if cam:
 		cam.inc_trauma(inc)
 	else:
-		Hood.prn("[WARN]: inc_trauma called, but no 'cam' set.")
+		Debug.prn("[WARN]: inc_trauma called, but no 'cam' set.")
 
 
 func screenshake(trauma = 0.3):
@@ -124,14 +124,14 @@ var slowmo_scales = {}
 
 
 func start_slowmo(label, scale = 0.5):
-	Hood.debug_label("[CAM] start slowmo: ", label, " scale: ", scale)
+	Debug.debug_label("[CAM] start slowmo: ", label, " scale: ", scale)
 	slowmos.append(label)
 	slowmo_scales[label] = scale
 	Engine.time_scale = scale
 
 
 func stop_slowmo(label):
-	Hood.debug_label("[CAM] stop slowmo: ", label)
+	Debug.debug_label("[CAM] stop slowmo: ", label)
 	slowmos.erase(label)
 	slowmo_scales.erase(label)
 	emit_signal("slowmo_stopped", label)

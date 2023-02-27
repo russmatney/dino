@@ -8,51 +8,64 @@ extends PanelContainer
 	set(v):
 		create_new_label = v
 		if Engine.is_editor_hint():
-			debug_label_update("DEBUG", ["width", 360])
+			_on_debug_label_update("DEBUG", ["width", 360])
 
 ###########################################################################
 # ready
 
-@onready var container = $VBoxContainer
+var container
 
 func _ready():
-	Hood.debug_label_update.connect(debug_label_update)
+	Debug.debug_label_update.connect(_on_debug_label_update)
+	container = get_node("%LabelsContainer")
+
+	Debug.debug_toggled.connect(_on_debug_toggled)
+
+func _on_debug_toggled(debugging):
+	if debugging:
+		rearrange_labels()
 
 ###########################################################################
 # label update
 
-var label_scene = preload("res://addons/hood/DebugLabel.tscn")
+var label_scene = preload("res://addons/core/DebugLabel.tscn")
 var debug_label_group = "debug_labels"
 var debug_label_db = {}
 
-func debug_label_update(label_id, data_arr, call_site={}):
+func _on_debug_label_update(label_id, data_arr, call_site={}):
 	if not container:
 		return
 
-	var label = container.get_node_or_null(label_id)
-	if not label:
-		label = label_scene.instantiate()
+	var db_label
+	if label_id in debug_label_db:
+		db_label = debug_label_db[label_id]
+	else:
+		var label = label_scene.instantiate()
 		label.add_to_group(debug_label_group, true)
 		label.name = label_id
-		container.add_child(label)
-
-	# update local data-dict
-	debug_label_db[label_id] = {"call_site": call_site, "data_arr": data_arr, "label": label}
+		db_label = {"call_site": call_site, "data_arr": data_arr, "label": label}
 
 	var text = "[right]"
 	for t in data_arr:
 		text += str(t, " ")
-	label.text = text
-	# label.set_scale(Vector2i(16, 16))
+	db_label["label"].text = text
 
-	rearrange_labels()
+	debug_label_db[label_id] = db_label
 
 ###########################################################################
 # rearrange labels
 
-func rearrange_labels():
-	# Hood.prn("data: ", debug_label_db.values())
+var ignored_sources = []
 
+func _toggle_source(src):
+	if src in ignored_sources:
+		ignored_sources.erase(src)
+	else:
+		ignored_sources.append(src)
+
+	rearrange_labels()
+
+func rearrange_labels():
 	var by_source = {}
 	for label in debug_label_db.values():
 		var source = "None"
@@ -66,7 +79,7 @@ func rearrange_labels():
 		else:
 			by_source[source] = []
 
-	var children_by_source = []
+	var children_sorted_by_source = []
 	for source in by_source.keys():
 		var source_label_id = str("Group label ", source)
 		var source_label = container.get_node_or_null(source_label_id)
@@ -78,12 +91,26 @@ func rearrange_labels():
 
 		source_label.text = "[right]Source: [color=crimson]" + source + "[/color]"
 
-		children_by_source.append(source_label)
+		var toggle_source_btn = Button.new()
+		if source in ignored_sources:
+			toggle_source_btn.text = str("Show ", source, " labels")
+		else:
+			toggle_source_btn.text = str("Hide ", source, " labels")
+		toggle_source_btn.pressed.connect(_toggle_source.bind(source))
 
-		for label in by_source[source]:
-			children_by_source.append(label["label"])
+		children_sorted_by_source.append(toggle_source_btn)
+		# children_sorted_by_source.append(source_label)
 
-	# print("here, i'd put the children in this order")
-	# for c in children_by_source:
-	# 	# Hood.prn("name: ", c.name, " text: ", c.text)
-	# 	container.move_child(c, -1)
+		if not source in ignored_sources:
+			for label in by_source[source]:
+				children_sorted_by_source.append(label["label"])
+
+	for c in container.get_children():
+		container.remove_child(c)
+
+	for c in children_sorted_by_source:
+		container.add_child(c)
+
+
+func _on_rearrange_labels_pressed():
+	rearrange_labels()

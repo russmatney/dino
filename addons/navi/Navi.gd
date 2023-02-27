@@ -16,7 +16,7 @@ var last_scene_stack = []
 
 func _ready():
 	if not FileAccess.file_exists(main_menu_path):
-		Hood.prn("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
+		Debug.prn("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
 
 	process_mode = PROCESS_MODE_ALWAYS
 
@@ -29,14 +29,14 @@ func _ready():
 
 	if "node_path" in current_scene:
 		last_scene_stack.push_back(current_scene.node_path)
-	Hood.prn("[Navi] Current scene: ", current_scene)
+	Debug.prn("[Navi] Current scene: ", current_scene)
 
 
 ## nav_to ###################################################################
 
 
 func nav_to(path_or_packed_scene):
-	Hood.prn("nav_to: ", path_or_packed_scene)
+	Debug.prn("nav_to: ", path_or_packed_scene)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(path_or_packed_scene)
 	call_deferred("_deferred_goto_scene", path_or_packed_scene)
@@ -56,7 +56,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 	# It is now safe to remove_at the current scene
 	current_scene.free()
 
-	Hood.prn("Instancing new scene: ", path_or_packed_scene)
+	Debug.prn("Instancing new scene: ", path_or_packed_scene)
 
 	var next_scene
 	if path_or_packed_scene is String:
@@ -69,7 +69,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 		next_scene = path_or_packed_scene
 
 	current_scene = next_scene
-	Hood.prn("New current_scene: ", current_scene)
+	Debug.prn("New current_scene: ", current_scene)
 	new_scene_instanced.emit(current_scene)
 
 	# Add it to the active scene, as child of root.
@@ -96,10 +96,10 @@ var main_menu_path = "res://src/menus/DinoMenu.tscn"
 
 func set_main_menu(path):
 	if FileAccess.file_exists(path):
-		Hood.prn("Updating main_menu_path: ", path)
+		Debug.prn("Updating main_menu_path: ", path)
 		main_menu_path = path
 	else:
-		Hood.prn("No scene at path: ", main_menu_path, ", can't set main menu.")
+		Debug.prn("No scene at path: ", main_menu_path, ", can't set main menu.")
 
 
 func nav_to_main_menu():
@@ -109,7 +109,7 @@ func nav_to_main_menu():
 		nav_to(main_menu_path)
 		resume()
 	else:
-		Hood.prn("No scene at path: ", main_menu_path, ", can't navigate.")
+		Debug.prn("No scene at path: ", main_menu_path, ", can't navigate.")
 
 
 ## pause ###################################################################
@@ -119,12 +119,12 @@ var pause_menu
 
 func set_pause_menu(path):
 	if FileAccess.file_exists(path):
-		Hood.prn("Updating pause_menu: ", path)
+		Debug.prn("Updating pause_menu: ", path)
 		if pause_menu:
 			pause_menu.queue_free()
 		pause_menu = add_menu(load(path))
 	else:
-		Hood.prn("No scene at path: ", path, ", can't set pause menu.")
+		Debug.prn("No scene at path: ", path, ", can't set pause menu.")
 
 
 func _unhandled_input(event):
@@ -141,7 +141,7 @@ func toggle_pause():
 
 
 func pause():
-	Hood.prn("pausing")
+	Debug.prn("pausing")
 	var t = get_tree()
 	t.paused = true
 	if pause_menu and is_instance_valid(pause_menu):
@@ -152,7 +152,7 @@ func pause():
 
 
 func resume():
-	Hood.prn("unpausing")
+	Debug.prn("unpausing")
 	var t = get_tree()
 	t.paused = false
 	if pause_menu and is_instance_valid(pause_menu):
@@ -169,22 +169,22 @@ var death_menu
 
 func set_death_menu(path):
 	if FileAccess.file_exists(path):
-		Hood.prn("Updating death_menu: ", path)
+		Debug.prn("Updating death_menu: ", path)
 		if death_menu:
 			death_menu.queue_free()
 		death_menu = add_menu(load(path))
 	else:
-		Hood.prn("No scene at path: ", path, ", can't set death menu.")
+		Debug.prn("No scene at path: ", path, ", can't set death menu.")
 
 
 func show_death_menu():
-	Hood.prn("Show death screen")
+	Debug.prn("Show death screen")
 	DJ.pause_game_song()
 	death_menu.show()
 
 
 func hide_death_menu():
-	Hood.prn("Hide death screen")
+	Debug.prn("Hide death screen")
 	death_menu.hide()
 
 
@@ -195,19 +195,19 @@ var win_menu
 
 func set_win_menu(path):
 	if FileAccess.file_exists(path):
-		Hood.prn("Updating win_menu: ", path)
+		Debug.prn("Updating win_menu: ", path)
 		if win_menu:
 			win_menu.queue_free()
 		win_menu = add_menu(load(path))
 	else:
-		Hood.prn("No scene at path: ", path, ", can't set win menu.")
+		Debug.prn("No scene at path: ", path, ", can't set win menu.")
 
 func show_win_menu():
-	Hood.prn("Show win screen")
+	Debug.prn("Show win screen")
 	DJ.pause_game_song()
 	win_menu.show()
 
 
 func hide_win_menu():
-	Hood.prn("Hide win screen")
+	Debug.prn("Hide win screen")
 	win_menu.hide()

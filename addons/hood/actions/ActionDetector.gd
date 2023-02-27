@@ -18,7 +18,7 @@ func setup(a, can_execute_any=null, ac_hint=null):
 	actor = a
 	# required to be added to ActionAreas
 	actor.add_to_group("actors", true)
-	Hood.prn("actor configured: ", a)
+	Debug.prn("actor configured: ", a)
 
 	if can_execute_any:
 		can_execute_any_actions = can_execute_any
@@ -31,8 +31,8 @@ func setup(a, can_execute_any=null, ac_hint=null):
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
-		Hood.debug_label("immediate_actions: ", immediate_actions())
-		Hood.debug_label("potential_actions: ", potential_actions())
+		Debug.debug_label("immediate_actions: ", immediate_actions())
+		Debug.debug_label("potential_actions: ", potential_actions())
 
 
 ####################################################################
@@ -52,7 +52,7 @@ func _on_area_exited(area):
 		update_action_areas()
 
 func update_action_areas():
-	Hood.debug_label("action areas: ", action_areas)
+	Debug.debug_label("action areas: ", action_areas)
 
 	update_actions()
 
@@ -66,7 +66,7 @@ func update_actions():
 	for area in action_areas:
 		actions.append_array(area.actions)
 
-	Hood.debug_label("actions: ", actions)
+	Debug.debug_label("actions: ", actions)
 
 	update_displayed_action()
 
