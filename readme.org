@@ -279,3 +279,13 @@ zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
 https://sulosounds.itch.io/100-songs
 
 Songs in ~assets/music/sulosounds/*~
+* Assets
+Currently, a few assets are symlinked from my game-assets collection:
+
+#+begin_src sh
+ln -s ~/game-assets/fonts/vexed addons/core/assets/fonts/vexed
+#+end_src
+
+Unfortunately, this breaks some of the games. I'll look into safer handling for
+missing assets and brainstorm ways to include assets that artists prefer to keep
+out of open-source projects.
