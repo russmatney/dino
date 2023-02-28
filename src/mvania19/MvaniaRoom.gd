@@ -109,6 +109,7 @@ func _on_room_exited(body: Node2D):
 ###########################################
 # store/retrieve data from store
 
+# TODO write a static/packed scene version
 func to_room_data(player=null):
 	var rect = used_rect()
 	var data = {

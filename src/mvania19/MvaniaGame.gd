@@ -24,6 +24,22 @@ signal area_db_updated(area_db)
 func recreate_db():
 	Debug.prn("recreating area_db")
 	area_db = {}
+
+	var a = area_scenes[4]
+	var d = Util.packed_scene_data(a, true)
+
+	# print(d)
+	print("\n\n")
+	print("keys:", d.keys())
+	print("candle: ", d[^"./01Entrance/Candle"])
+	print("\n\n")
+	print("candle keys: ", d[^"./01Entrance/Candle"].keys())
+	print("\n\n")
+	print("candle props: ", d[^"./01Entrance/Candle"]["properties"])
+	print("candle pos: ", d[^"./01Entrance/Candle"]["properties"]["position"])
+	print("\n\n")
+	print("inst:", d[^"./01Entrance/Candle"]["instance"])
+	print("\n\n")
 	for area in area_scenes:
 		var area_inst = area.instantiate()
 		if area_inst:
@@ -39,6 +55,7 @@ func print_area_db():
 	# TODO pretty print
 	Debug.prn(area_db)
 
+# TODO refactor to alternatively work on a packed_scene
 func to_area_data(area):
 	area.ensure_rooms()
 

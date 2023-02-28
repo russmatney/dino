@@ -79,13 +79,14 @@ func get_children_by_name(node: Node):
 	return by_name
 
 
+# TODO update to use path as key
 func packed_scene_data(scene, include_properties=false):
 	var state = scene.get_state()
-	var by_name = {}
+	var by_path = {}
 	for node_idx in state.get_node_count():
-		var node_name = state.get_node_name(node_idx)
+		var path = state.get_node_path(node_idx)
 		var node_data = {
-			"name": node_name,
+			"name": state.get_node_name(node_idx),
 			"type": state.get_node_type(node_idx),
 			"owner_path": state.get_node_owner_path(node_idx),
 			"path": state.get_node_path(node_idx),
@@ -107,8 +108,8 @@ func packed_scene_data(scene, include_properties=false):
 		if len(properties) > 0:
 			node_data["properties"] = properties
 
-		by_name[node_name] = node_data
-	return by_name
+		by_path[path] = node_data
+	return by_path
 
 
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
