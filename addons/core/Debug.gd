@@ -102,11 +102,11 @@ func log_prefix(stack):
 			return "[" + call_site["source"].get_file().get_basename() + "]: "
 
 func to_pretty(msg, newlines=false):
-	if msg is Array:
+	if msg is Array or msg is PackedStringArray:
 		var tmp = "[ "
 		var last = len(msg) - 1
 		for i in range(len(msg)):
-			if newlines:
+			if newlines and last > 1:
 				tmp += "\n\t"
 			tmp += to_pretty(msg[i], newlines)
 			if i != last:
@@ -115,13 +115,13 @@ func to_pretty(msg, newlines=false):
 		return tmp
 	elif msg is Dictionary:
 		var tmp = "{ "
-		var ks = len(msg)
+		var ct = len(msg)
 		var last
 		if len(msg) > 0:
 			last = msg.keys()[-1]
 		for k in msg.keys():
 			var val = to_pretty(msg[k], newlines)
-			if newlines:
+			if newlines and ct > 1:
 				tmp += "\n\t"
 			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
 			if last and k != last:
@@ -131,9 +131,11 @@ func to_pretty(msg, newlines=false):
 	elif msg is String:
 		return '[color=%s]%s[/color]' % ["dark_gray", msg]
 	elif msg is StringName:
-		return '[color=%s]&"%s"[/color]' % ["", msg]
+		return '[color=%s]&[/color]"%s"' % ["coral", msg]
 	elif msg is NodePath:
-		return '[color=%s]^"%s"[/color]' % ["", msg]
+		return '[color=%s]^[/color]"%s"' % ["coral", msg]
+	elif msg is Vector2:
+		return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["cornflower_blue", msg.x, "cornflower_blue", msg.y]
 	else:
 		return str(msg)
 
