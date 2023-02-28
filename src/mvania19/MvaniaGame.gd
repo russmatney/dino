@@ -39,7 +39,7 @@ func recreate_db():
 
 	Debug.prn("hotel scene_db keys", Hotel.scene_db.keys())
 
-	Debug.prn("hotel elevators", Hotel.check_out(a_name, "01Entrance/Elevator"))
+	Debug.pr("hotel elevators", Hotel.check_out(a_name, "01Entrance/Elevator"))
 	Debug.prn("hotel elevators", Hotel.check_out_for_group("elevators"))
 
 	# print("area: ", d[^"."])

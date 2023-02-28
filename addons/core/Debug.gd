@@ -101,32 +101,73 @@ func log_prefix(stack):
 		else:
 			return "[" + call_site["source"].get_file().get_basename() + "]: "
 
-func to_printable(msgs, stack):
+func to_pretty(msg, newlines=false):
+	if msg is Array:
+		var tmp = "[ "
+		var last = len(msg) - 1
+		for i in range(len(msg)):
+			if newlines:
+				tmp += "\n\t"
+			tmp += to_pretty(msg[i], newlines)
+			if i != last:
+				tmp += ", "
+		tmp += " ]"
+		return tmp
+	elif msg is Dictionary:
+		var tmp = "{ "
+		var ks = len(msg)
+		var last
+		if len(msg) > 0:
+			last = msg.keys()[-1]
+		for k in msg.keys():
+			var val = to_pretty(msg[k], newlines)
+			if newlines:
+				tmp += "\n\t"
+			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
+			if last and k != last:
+				tmp += ", "
+		tmp += " }"
+		return tmp
+	elif msg is String:
+		return '[color=%s]%s[/color]' % ["dark_gray", msg]
+	elif msg is StringName:
+		return '[color=%s]&"%s"[/color]' % ["", msg]
+	elif msg is NodePath:
+		return '[color=%s]^"%s"[/color]' % ["", msg]
+	else:
+		return str(msg)
+
+func to_printable(msgs, stack, newlines=false):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
 		var color = "aquamarine" if prefix[0] == "[" else "peru"
 		m += "[color=%s]%s[/color]" % [color, prefix]
-	for ms in msgs:
-		# add a space between all chars
-		# TODO pretty print/colorize dicts/arrays
-		m += str(ms, " ")
+	for msg in msgs:
+		# add a space between msgs
+		m += to_pretty(msg, newlines) + " "
 	return m
 
-func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+func pr(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
 	var m = to_printable(msgs, get_stack())
 	print_rich(m)
 
+func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+	var m = to_printable(msgs, get_stack(), true)
+	print_rich(m)
+
 func warn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-	var m = to_printable(msgs, get_stack())
+	var m = to_printable(msgs, get_stack(), true)
 	push_warning(m)
 
 func err(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-	var m = to_printable(msgs, get_stack())
+	var m = to_printable(msgs, get_stack(), true)
 	push_error(m)
