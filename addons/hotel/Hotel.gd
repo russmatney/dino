@@ -32,7 +32,6 @@ func check_in_area(scene: PackedScene):
 	var area_name = scene_data[^"."]["name"]
 	Debug.prn("checking in area", area_name)
 	for path in scene_data.keys():
-		Debug.prn("checking in path", path)
 		var d = scene_data[path]
 		var key = db_key(area_name, path)
 		var db_data = d["properties"]
@@ -60,8 +59,8 @@ func check_in_area(scene: PackedScene):
 			for k in inst.get("properties", {}).keys():
 				if not k in db_data:
 					db_data[k] = inst["properties"][k]
-			# don't overwrite
-			if "script" in inst["properties"] and not "script_path" in db_data:
+
+			if "properties" in inst and "script" in inst["properties"] and not "script_path" in db_data:
 				db_data["script_path"] = inst["properties"]["script"].resource_path
 
 		if "instance_name" in d:
@@ -69,9 +68,16 @@ func check_in_area(scene: PackedScene):
 
 		scene_db[key] = db_data
 
-## update any properties stored in the scene_db
-func update(node: Node):
-	pass
+## update relevant properties stored in the scene_db
+func update(area_name: String, path: String = "", update: Dictionary = {}):
+	var key = db_key(area_name, path)
+	if key in scene_db:
+		scene_db[key].merge(update)
+	else:
+		if path:
+			Debug.warn("No area_name + path in scene_db: ", area_name, " ", path)
+		else:
+			Debug.warn("No area_name in scene_db: ", area_name)
 
 ######################################################################
 # read

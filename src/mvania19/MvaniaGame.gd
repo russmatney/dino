@@ -22,53 +22,21 @@ signal area_db_recreated(area_db)
 signal area_db_updated(area_db)
 
 func recreate_db():
-	Debug.prn("recreating area_db")
+	Debug.pr("recreating area_db")
 	area_db = {}
 
+	for a in area_scenes:
+		Hotel.check_in_area(a)
 
-	var a = area_scenes[4]
-	var d = Util.packed_scene_data(a)
+	var a_name = "Area05Snow"
 
-	Hotel.check_in_area(a)
-
-	var a_name = d[^"."]["name"]
-
-	Debug.prn("hotel checkout", "a_name", a_name, Hotel.check_out(a_name))
-	Debug.prn("hotel checkout", "room", Hotel.check_out(a_name, "01Entrance"))
-	Debug.prn("hotel checkout", "candle", Hotel.check_out(a_name, "01Entrance/Candle"))
-
+	Debug.pr("hotel checkout", "a_name", a_name, Hotel.check_out(a_name))
+	Debug.pr("hotel checkout", "room", Hotel.check_out(a_name, "01Entrance"))
+	Debug.pr("hotel checkout", "candle", Hotel.check_out(a_name, "01Entrance/Candle"))
 	Debug.prn("hotel scene_db keys", Hotel.scene_db.keys())
-
-	Debug.pr("hotel elevators", Hotel.check_out(a_name, "01Entrance/Elevator"))
 	Debug.prn("hotel elevators", Hotel.check_out_for_group("elevators"))
+	Debug.prn("hotel elevators", len(Hotel.check_out_for_group("elevators")))
 
-	# print("area: ", d[^"."])
-	# print("area keys: ", d[^"."].keys())
-	# print("area groups: ", d[^"."]["groups"])
-	# print("area props: ", d[^"."]["properties"])
-	# print("area script: ", d[^"."]["properties"]["script"])
-	# print("area script: ", d[^"."]["properties"]["script"].resource_path)
-	# print("area script: ", d[^"."]["properties"]["script"].resource_name)
-
-	# print("room: ", d[^"./01Entrance"])
-	# print("room keys: ", d[^"./01Entrance"].keys())
-	# print("room props: ", d[^"./01Entrance"]["properties"])
-	# print("room script: ", d[^"./01Entrance"]["properties"]["script"])
-	# print("room script: ", d[^"./01Entrance"]["properties"]["script"].resource_name)
-	# print("room script: ", d[^"./01Entrance"]["properties"]["script"].resource_path)
-
-	# # print(d)
-	# print("\n\n")
-	# print("keys:", d.keys())
-	# print("candle: ", d[^"./01Entrance/Candle"])
-	# print("\n\n")
-	# print("candle keys: ", d[^"./01Entrance/Candle"].keys())
-	# print("\n\n")
-	# print("candle props: ", d[^"./01Entrance/Candle"]["properties"])
-	# print("candle pos: ", d[^"./01Entrance/Candle"]["properties"]["position"])
-	# print("\n\n")
-	# print("inst:", d[^"./01Entrance/Candle"]["instance"])
-	# print("\n\n")
 	for area in area_scenes:
 		var area_inst = area.instantiate()
 		if area_inst:
@@ -76,13 +44,12 @@ func recreate_db():
 			area_inst.queue_free()
 		else:
 			Debug.prn("area failed to instantiate: ", area)
-	Debug.prn("recreated area_db: ", len(area_db), " areas.")
+	Debug.pr("recreated area_db: ", len(area_db), " areas.")
 
 	area_db_recreated.emit(area_db)
 
 func print_area_db():
-	# TODO pretty print
-	Debug.prn(area_db)
+	Debug.pr(area_db)
 
 # TODO refactor to alternatively work on a packed_scene
 func to_area_data(area):
