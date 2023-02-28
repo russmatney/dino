@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtji35uje4oqs"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_78oqi"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_qg6sh"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_qg6sh"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="3_0xsm0"]
 
 [node name="09Elevator" type="Node2D"]

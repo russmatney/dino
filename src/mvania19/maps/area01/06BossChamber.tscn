@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cluqdo14cnme5"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_33sd2"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_l0aqx"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_l0aqx"]
 
 [node name="06BossChamber" type="Node2D"]
 script = ExtResource("1_l0aqx")

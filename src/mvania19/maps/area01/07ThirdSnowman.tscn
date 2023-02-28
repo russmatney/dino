@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8w55flpfieoq"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_6rlks"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_6rlks"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_qj746"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="2_auvbu"]
 

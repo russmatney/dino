@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6y1gghtowcm3"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_khcx4"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_qxn7y"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_khcx4"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_qxn7y"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="3_ija0w"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_7oqef"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_vnpuv"]

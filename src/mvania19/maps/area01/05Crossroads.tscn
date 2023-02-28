@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3s1p28e36maj"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_6mbfn"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_6mbfn"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_moefn"]
 
 [node name="05Crossroads" type="Node2D"]

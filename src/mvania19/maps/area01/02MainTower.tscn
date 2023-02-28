@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbjgf4a4ixvm1"]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_o2vbl"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_o2vbl"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_x4gas"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="3_t13mq"]
 [ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="4_pg681"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://6ruvsd7ukq27"]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_7f7ro"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_tix0m"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_7f7ro"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_tix0m"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_8ionw"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_qcjf2"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_7ifjf"]

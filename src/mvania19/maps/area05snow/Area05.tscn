@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfo6ar58tsl7j"]
+[gd_scene load_steps=6 format=3 uid="uid://c18xiyi1tqga1"]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_ekxi3"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_olwdl"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_8spil"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_jpp5s"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="3_fx5qs"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_fmddr"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="5_do5d3"]
 
 [node name="Area05Snow" type="Node2D"]
-script = ExtResource("1_ekxi3")
+script = ExtResource("1_8spil")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -376.0
@@ -20,7 +20,7 @@ color = Color(0.384314, 0.509804, 0.65098, 1)
 color = Color(0.384314, 0.509804, 0.65098, 1)
 
 [node name="01Entrance" type="Node2D" parent="."]
-script = ExtResource("2_olwdl")
+script = ExtResource("2_jpp5s")
 
 [node name="Candle" parent="01Entrance" instance=ExtResource("3_fx5qs")]
 position = Vector2(40, 0)
@@ -35,7 +35,7 @@ recalc_autotiles = false
 
 [node name="02SnowFall" type="Node2D" parent="."]
 position = Vector2(160, 0)
-script = ExtResource("2_olwdl")
+script = ExtResource("2_jpp5s")
 
 [node name="SnowTiles" parent="02SnowFall" instance=ExtResource("5_do5d3")]
 layer_0/tile_data = PackedInt32Array(1114115, 262144, 14, 1048579, 262144, 14, 983043, 262144, 2, 917507, 524288, 2, 851971, 196608, 14, 786435, 196608, 14, 720899, 196608, 14, 655363, 196608, 8, 589827, 196608, 8, 524291, 196608, 1, 327683, 196608, 3, 262147, 196608, 14, 196611, 196608, 2, 131075, 196608, 14, 65539, 524288, 3, 3, 262144, 8, -65533, 262144, 14, -131069, 524288, 2, -196605, 196608, 2, -262141, 196608, 1, 917506, 65536, 15, 851970, 458752, 2, 786434, 458752, 3, 720898, 65536, 2, 655362, 65536, 8, 589826, 65536, 2, 524290, 65536, 7, 327682, 131072, 9, 262146, 458752, 3, 196610, 65536, 2, 131074, 458752, 2, 65538, 131072, 1, -131070, 131072, 9, -196606, 131072, 14, -262142, 131072, 13, 851969, 131072, 15, 786433, 131072, 7, 327681, 131072, 15, 262145, 131072, 13, 131073, 65536, 9, -131071, 131072, 15, -196607, 131072, 8, -262143, 131072, 7, 1114112, 196608, 15, 1048576, 196608, 1, 851968, 65536, 9, 786432, 65536, 13, 327680, 131072, 9, 262144, 131072, 1, -131072, 131072, 15, -196608, 131072, 14, -262144, 131072, 1, 1179647, 131072, 15, 1114111, 131072, 7, 655359, 196608, 3, 589823, 196608, 1, 393215, 65536, 15, 327679, 65536, 7, -65537, 131072, 15, -131073, 131072, 14, -196609, 131072, 7, 1179646, 393216, 2, 1114110, 393216, 3, 1048574, 196608, 14, 983038, 196608, 13, 655358, 131072, 9, 589822, 131072, 1, 196606, 196608, 9, 131070, 196608, 7, -65538, 131072, 3, -131074, 131072, 14, -196610, 131072, 1, 1179645, 131072, 8, 1114109, 131072, 8, 1048573, 131072, 8, 983037, 131072, 7, 655357, 393216, 2, 589821, 393216, 3, 196605, 131072, 9, 131069, 131072, 13, -65539, 131072, 9, -131075, 131072, 8, -196611, 131072, 13, 1179644, 65536, 8, 1114108, 65536, 2, 1048572, 65536, 2, 983036, 327680, 3, 917500, 262144, 8, 851964, 262144, 8, 786428, 262144, 2, 720892, 327680, 2, 655356, 65536, 8, 589820, 65536, 2, 524284, 327680, 3, 458748, 262144, 2, 393212, 262144, 8, 327676, 262144, 8, 262140, 262144, 2, 196604, 327680, 2, 131068, 65536, 7, -65540, 65536, 15, -131076, 65536, 8, -196612, 65536, 1, 1572867, 196608, 3, 1507331, 196608, 8, 1441795, 196608, 8, 1376259, 196608, 14, 1310723, 196608, 8, 1245187, 524288, 3, 1179651, 262144, 14, 1572866, 131072, 9, 1507330, 131072, 2, 1441794, 458752, 3, 1376258, 65536, 2, 1310722, 65536, 2, 1245186, 65536, 7, 1572865, 131072, 3, 1507329, 131072, 14, 1441793, 131072, 1, 1572864, 131072, 15, 1507328, 131072, 2, 1441792, 131072, 7, 1638399, 131072, 15, 1572863, 131072, 2, 1507327, 131072, 13, 1638398, 131072, 9, 1572862, 131072, 14, 1507326, 131072, 7, 1310718, 196608, 15, 1245182, 196608, 2, 1638397, 131072, 9, 1572861, 131072, 2, 1507325, 131072, 7, 1310717, 131072, 3, 1245181, 131072, 2, 1638396, 65536, 3, 1572860, 65536, 8, 1507324, 65536, 1, 1310716, 65536, 3, 1245180, 65536, 8, 65537, 65536, 13, 524285, 196608, 7, 720893, 196608, 9)
@@ -55,7 +55,7 @@ position = Vector2(-32, 208)
 
 [node name="03SnowHall" type="Node2D" parent="."]
 position = Vector2(360, 104)
-script = ExtResource("2_olwdl")
+script = ExtResource("2_jpp5s")
 
 [node name="SnowTiles2" parent="03SnowHall" instance=ExtResource("5_do5d3")]
 position = Vector2(-40, -8)
@@ -76,7 +76,7 @@ position = Vector2(136, -23)
 
 [node name="04SmallRoom" type="Node2D" parent="."]
 position = Vector2(640, 112)
-script = ExtResource("2_olwdl")
+script = ExtResource("2_jpp5s")
 
 [node name="SnowTiles3" parent="04SmallRoom" instance=ExtResource("5_do5d3")]
 position = Vector2(16, -16)
@@ -93,7 +93,7 @@ destination_elevator_path = "01Entrance/Elevator"
 
 [node name="05LargeRoom" type="Node2D" parent="."]
 position = Vector2(-8, 328)
-script = ExtResource("2_olwdl")
+script = ExtResource("2_jpp5s")
 
 [node name="SnowTiles4" parent="05LargeRoom" instance=ExtResource("5_do5d3")]
 position = Vector2(-8, -8)

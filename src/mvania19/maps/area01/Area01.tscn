@@ -1,11 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://dap3qhxnk5asm"]
+[gd_scene load_steps=22 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_j5wm8"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_j5wm8"]
 [ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
 [ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/area01/02MainTower.tscn" id="2_kip2h"]
 [ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
 [ext_resource type="PackedScene" uid="uid://be6mwtbfu4hyi" path="res://src/mvania19/maps/area01/04SecondSnowman.tscn" id="4_kj05g"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="4_wy6o1"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="4_wy6o1"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="5_q3c5s"]
 [ext_resource type="PackedScene" uid="uid://d3s1p28e36maj" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
 [ext_resource type="PackedScene" uid="uid://cluqdo14cnme5" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
 [node name="Area01" type="Node2D"]
 script = ExtResource("1_j5wm8")

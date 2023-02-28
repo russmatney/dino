@@ -4,6 +4,7 @@ extends Node
 ###########################################################
 # area DB
 
+# TODO can we gather all nodes of a type more generally?
 var area_scenes = [
 	preload("res://src/mvania19/maps/area01/Area01.tscn"),
 	preload("res://src/mvania19/maps/area02/Area02.tscn"),

@@ -70,6 +70,7 @@ var destination_elevator_path: String :
 		destination_elevator_path = v
 		notify_property_list_changed()
 
+# TODO refactor towards selecting an elevator from the game_db (MvaniaGame)
 var maps_dir_path := "res://src/mvania19/maps"
 
 func destination_area_full_path():

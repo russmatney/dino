@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi0rp7otd60dr"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaArea.gd" id="1_knuf7"]
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="2_s40vt"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_knuf7"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_s40vt"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="3_clql2"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_iiw26"]
 [ext_resource type="PackedScene" uid="uid://cjjt4cr36npwa" path="res://src/mvania19/maps/area02/04BossTime.tscn" id="5_wq514"]

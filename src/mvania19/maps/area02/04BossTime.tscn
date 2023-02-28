@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjjt4cr36npwa"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/maps/MvaniaRoom.gd" id="1_ebr4f"]
+[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_ebr4f"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="2_ob33d"]
 
 [node name="04BossTime" type="Node2D"]
