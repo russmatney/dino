@@ -34,6 +34,9 @@ func check_in_area(scene: PackedScene):
 	for path in scene_data.keys():
 		var d = scene_data[path]
 		var key = db_key(area_name, path)
+
+		# we may not want to overwrite properties
+		# q, how to mix with 'saved' data states
 		var db_data = d["properties"]
 
 		db_data["area_name"] = area_name
@@ -96,3 +99,9 @@ func check_out(area_name: String, path: String = ""):
 ## grab a list of scene data dicts that belong to the passed group
 func check_out_for_group(group: String):
 	return scene_db.values().filter(func (s_dict): return group in s_dict["groups"])
+
+## grab a list of scene data dicts that belong to the passed group
+func check_out_for_area_and_group(area_name: String, group: String):
+	return scene_db.values()\
+		.filter(func (s_dict): return area_name == s_dict["area_name"])\
+		.filter(func (s_dict): return group in s_dict["groups"])

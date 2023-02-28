@@ -15,7 +15,7 @@
 radius = 6.0
 height = 18.0
 
-[node name="Soldier" type="CharacterBody2D" groups=["pois"]]
+[node name="Soldier" type="CharacterBody2D" groups=["enemies", "pois"]]
 collision_layer = 8
 collision_mask = 5
 script = ExtResource("1_ca64f")

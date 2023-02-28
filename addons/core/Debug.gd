@@ -129,6 +129,8 @@ func to_pretty(msg, newlines=false):
 		tmp += " }"
 		return tmp
 	elif msg is String:
+		if msg == "":
+			return '""'
 		return '[color=%s]%s[/color]' % ["dark_gray", msg]
 	elif msg is StringName:
 		return '[color=%s]&[/color]"%s"' % ["coral", msg]

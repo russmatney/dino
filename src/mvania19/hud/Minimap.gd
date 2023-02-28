@@ -8,12 +8,15 @@ extends Node2D
 # ready
 
 func _ready():
-	MvaniaGame.area_db_updated.connect(update)
-	if len(MvaniaGame.area_db) > 0:
-		update(MvaniaGame.area_db)
+	# TODO restore after area_db/hotel refactor
+	# MvaniaGame.area_db_updated.connect(update)
+	# if len(MvaniaGame.area_db) > 0:
+	# 	update(MvaniaGame.area_db)
+	pass
 
 func update(_area_db):
-	update_minimap_data()
+	# TODO restore after area_db/hotel refactor
+	# update_minimap_data()
 	update_map()
 
 ################################################################
@@ -40,7 +43,7 @@ var area_data = {}
 
 func update_minimap_data():
 	# TODO proper minimap lifecycle
-	area_data = Util._or(MvaniaGame.get_current_area_data(), MvaniaGame.area_db.values()[0])
+	area_data = MvaniaGame.get_current_area_data()
 	if area_data == null:
 		area_data = {}
 

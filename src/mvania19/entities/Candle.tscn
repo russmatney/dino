@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1lts"]
 size = Vector2(32, 26)
 
-[node name="Candle" type="Node2D"]
+[node name="Candle" type="Node2D" groups=["candles"]]
 script = ExtResource("1_7eirx")
 
 [node name="ActionArea" parent="." instance=ExtResource("4_asdr1")]
@@ -34,12 +34,12 @@ process_material = ExtResource("3_7okj4")
 sprite_frames = ExtResource("1_ywigl")
 animation = &"flicker"
 autoplay = "flicker"
-frame_progress = 0.728174
+frame_progress = 0.506748
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
-energy = 0.800836
+energy = 0.800347
 shadow_enabled = true
 texture = ExtResource("6_nahms")
-texture_scale = 0.800668
+texture_scale = 0.800277

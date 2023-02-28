@@ -169,6 +169,14 @@ func _ready():
 	ensure_room_box()
 	ensure_cam_points()
 
+	var p = get_parent()
+	if p.is_in_group("mvania_areas"):
+		area = p
+
+	if area:
+		Hotel.update(area.name, name, to_room_data())
+		Debug.pr(area.name, name, Hotel.check_out(area.name, name))
+
 ###########################################
 # pause
 

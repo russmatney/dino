@@ -18,24 +18,15 @@ var area_scenes = [
 
 var area_db = {}
 
-signal area_db_recreated(area_db)
-signal area_db_updated(area_db)
-
 func recreate_db():
 	Debug.pr("recreating area_db")
 	area_db = {}
 
+	# TODO maybe remove completely...tho, how to reference elevators...?
 	for a in area_scenes:
 		Hotel.check_in_area(a)
 
-	var a_name = "Area05Snow"
-
-	Debug.pr("hotel checkout", "a_name", a_name, Hotel.check_out(a_name))
-	Debug.pr("hotel checkout", "room", Hotel.check_out(a_name, "01Entrance"))
-	Debug.pr("hotel checkout", "candle", Hotel.check_out(a_name, "01Entrance/Candle"))
-	Debug.prn("hotel scene_db keys", Hotel.scene_db.keys())
-	Debug.prn("hotel elevators", Hotel.check_out_for_group("elevators"))
-	Debug.prn("hotel elevators", len(Hotel.check_out_for_group("elevators")))
+	# Debug.prn(Hotel.check_out_for_area_and_group("Area05Snow", "mvania_rooms"))
 
 	for area in area_scenes:
 		var area_inst = area.instantiate()
@@ -45,8 +36,6 @@ func recreate_db():
 		else:
 			Debug.prn("area failed to instantiate: ", area)
 	Debug.pr("recreated area_db: ", len(area_db), " areas.")
-
-	area_db_recreated.emit(area_db)
 
 func print_area_db():
 	Debug.pr(area_db)
@@ -74,7 +63,6 @@ func persist_area(area):
 	if area_data:
 		# don't overwrite if exists?
 		area_db[area.name] = area_data
-		area_db_updated.emit(area_db)
 
 func update_room_data(room):
 	persist_room_data(room.area, room.to_room_data(player))
@@ -85,7 +73,6 @@ func persist_room_data(area, room_data):
 		if not "visited" in old_room_data or not old_room_data["visited"]:
 			MvaniaSounds.play_sound("new_room_blip")
 	area_db[area.name]["rooms"][room_data["name"]] = room_data
-	area_db_updated.emit(area_db)
 
 func get_area_data(area):
 	if area.name in area_db:
