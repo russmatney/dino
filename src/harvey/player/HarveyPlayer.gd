@@ -199,7 +199,7 @@ func _on_ActionDetector_area_entered(area: Area2D):
 					{
 						"source_name": area.get_parent().name,
 						"source": area.get_parent(),
-					}
+						}, true
 				)
 				add_action(ax)
 

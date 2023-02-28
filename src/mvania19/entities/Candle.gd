@@ -19,6 +19,9 @@ var actions = [
 # ready
 
 func _ready():
+
+	# TODO hotel register
+
 	og_scale = light.texture_scale
 	og_energy = light.energy
 

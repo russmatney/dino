@@ -44,7 +44,7 @@ var menu_scenes = [
 
 func _ready():
 	for ms in menu_scenes:
-		ms.merge({"button_scene": button_scene})
+		ms.merge({"button_scene": button_scene}, true)
 		add_menu_item(ms)
 
 	if Engine.is_editor_hint():

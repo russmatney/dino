@@ -19,6 +19,8 @@ func _ready():
 	action_area.register_actions(actions, self)
 	anim.animation_finished.connect(_on_anim_finished)
 
+	# TODO hotel register
+
 	z_index = 10
 	anim.play("opening")
 

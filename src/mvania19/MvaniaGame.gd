@@ -16,87 +16,23 @@ var area_scenes = [
 	preload("res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn"),
 	]
 
-var area_db = {}
-
 func recreate_db():
-	Debug.pr("recreating area_db")
-	area_db = {}
+	Debug.pr("Checking area data into Hotel")
 
 	# TODO maybe remove completely...tho, how to reference elevators...?
 	for a in area_scenes:
 		Hotel.check_in_area(a)
 
-	# Debug.prn(Hotel.check_out_for_area_and_group("Area05Snow", "mvania_rooms"))
+	var areas = Hotel.check_out_for_group("mvania_areas")
 
-	for area in area_scenes:
-		var area_inst = area.instantiate()
-		if area_inst:
-			persist_area(area_inst)
-			area_inst.queue_free()
-		else:
-			Debug.prn("area failed to instantiate: ", area)
-	Debug.pr("recreated area_db: ", len(area_db), " areas.")
-
-func print_area_db():
-	Debug.pr(area_db)
-
-# TODO refactor to alternatively work on a packed_scene
-func to_area_data(area):
-	area.ensure_rooms()
-
-	var room_data = {}
-	if len(area.rooms) == 0:
-		Hood.warn(area.name, " No rooms in to_area_data! ", area)
-
-	for r in area.rooms:
-		var r_data = r.to_room_data(player)
-		room_data[r.name] = r_data
-
-	return {
-		"name": area.name,
-		"scene_file_path": area.scene_file_path,
-		"rooms": room_data,
-		}
-
-func persist_area(area):
-	var area_data = to_area_data(area)
-	if area_data:
-		# don't overwrite if exists?
-		area_db[area.name] = area_data
-
-func update_room_data(room):
-	persist_room_data(room.area, room.to_room_data(player))
-
-func persist_room_data(area, room_data):
-	var old_room_data = area_db[area.name]["rooms"][room_data["name"]]
-	if "visited" in room_data and room_data["visited"]:
-		if not "visited" in old_room_data or not old_room_data["visited"]:
-			MvaniaSounds.play_sound("new_room_blip")
-	area_db[area.name]["rooms"][room_data["name"]] = room_data
-
-func get_area_data(area):
-	if area.name in area_db:
-		return area_db[area.name]
-
-func get_current_area_data():
-	if current_area:
-		return area_db[current_area.name]
-
-func get_rooms_data(area):
-	return area_db[area.name]["rooms"]
-
-func get_room_data(room):
-	if room.name in area_db[room.area.name]["rooms"]:
-		return area_db[room.area.name]["rooms"][room.name]
-	else:
-		Hood.warn("Room data not in area_db: ", room.name)
+	Debug.pr("recreated Hotel.scene_db with", len(areas), "areas.")
 
 ###########################################################
 # ready
 
 func _ready():
-	if len(area_db) == 0:
-		recreate_db()
+	# TODO maybe every time? was formely only when no areas
+	recreate_db()
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
@@ -163,6 +99,7 @@ func find_current_area():
 		if c is MvaniaArea:
 			current_area = c
 			Debug.prn("[WARN] manually setting current_area")
+			Debug.warn("manually setting current_area")
 
 func _on_player_found(p):
 	Debug.prn("player found")

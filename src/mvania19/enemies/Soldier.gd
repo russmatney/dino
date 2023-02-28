@@ -16,6 +16,9 @@ func _ready():
 	# TODO pull/set data from db when area loads?
 	health = initial_health
 
+	# TODO hotel register
+
+
 func _on_animation_finished():
 	pass
 

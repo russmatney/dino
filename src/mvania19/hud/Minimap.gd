@@ -42,10 +42,12 @@ func merged_rect(rms):
 var area_data = {}
 
 func update_minimap_data():
+	pass
 	# TODO proper minimap lifecycle
-	area_data = MvaniaGame.get_current_area_data()
-	if area_data == null:
-		area_data = {}
+	# TODO restore after area_db/hotel refactor
+	# area_data = MvaniaGame.get_current_area_data()
+	# if area_data == null:
+	# 	area_data = {}
 
 	# if len(area_data) == 0:
 	# 	if Engine.is_editor_hint():

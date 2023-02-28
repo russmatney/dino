@@ -72,10 +72,14 @@ func check_in_area(scene: PackedScene):
 		scene_db[key] = db_data
 
 ## update relevant properties stored in the scene_db
+## TODO help nodes register so they can update without area/path_name
 func update(area_name: String, path: String = "", update: Dictionary = {}):
+	Debug.pr("updating", area_name, path)
+	# TODO minimize updates?
+	# Debug.pr("updating", area_name, path, update)
 	var key = db_key(area_name, path)
 	if key in scene_db:
-		scene_db[key].merge(update)
+		scene_db[key].merge(update, true)
 	else:
 		if path:
 			Debug.warn("No area_name + path in scene_db: ", area_name, " ", path)
@@ -84,6 +88,9 @@ func update(area_name: String, path: String = "", update: Dictionary = {}):
 
 ######################################################################
 # read
+
+func has(area_name: String, path: String = ""):
+	return db_key(area_name, path) in scene_db
 
 ## grab any stored properties from the scene_db
 func check_out(area_name: String, path: String = ""):

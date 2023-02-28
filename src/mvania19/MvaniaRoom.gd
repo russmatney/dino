@@ -97,13 +97,14 @@ var visited = false
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		visited = true
-		MvaniaGame.update_room_data(self)
+		# TODO restore sound on room visit
+		Hotel.update(area.name, name, to_room_data(MvaniaGame.player))
 		MvaniaGame.update_rooms()
 		body.stamp({"scale": 2.0, "ttl": 1.0})
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
-		MvaniaGame.update_room_data(self)
+		Hotel.update(area.name, name, to_room_data(MvaniaGame.player))
 		MvaniaGame.update_rooms()
 
 ###########################################
@@ -120,6 +121,7 @@ func to_room_data(player=null):
 		"visited": visited,
 		}
 
+	# TODO unnest this data, update in hotel w/ flattened keys
 	var ents = get_children()\
 		.filter(func(c): return c.has_method("to_data") and c.has_method("restore"))\
 		.map(func(c): return [c.name, c.to_data()])
@@ -128,8 +130,6 @@ func to_room_data(player=null):
 		ent_map[e[0]] = e[1]
 	if len(ents) > 0:
 		data["entities"] = ent_map
-	if area:
-		data["area_name"] = area.name
 	if player:
 		var r = Rect2()
 		r.position = rect.position + position
@@ -173,9 +173,12 @@ func _ready():
 	if p.is_in_group("mvania_areas"):
 		area = p
 
-	if area:
-		Hotel.update(area.name, name, to_room_data())
-		Debug.pr(area.name, name, Hotel.check_out(area.name, name))
+	# TODO hotel register
+
+	# if area:
+	# 	# TODO may need to check in first? if the area hasn't?
+	# 	Hotel.update(area.name, name, to_room_data())
+		# Debug.pr(area.name, name, Hotel.check_out(area.name, name))
 
 ###########################################
 # pause

@@ -2,13 +2,6 @@
 class_name MvaniaArea
 extends Node2D
 
-@export var persist_area_data: bool :
-	set(v):
-		persist_area_data = false
-		if v:
-			if Engine.is_editor_hint() and self.name != &"":
-				MvaniaGame.persist_area(self)
-
 ###########################################################
 # rooms
 
@@ -36,10 +29,12 @@ func draw_room_outline(room: MvaniaRoom):
 
 func init_room_data():
 	ensure_rooms()
+	Debug.pr("initing room data", rooms)
 	for room in rooms:
-		# must be set before fetching room data
-		room.area = self
-		room.room_data = Util._or(MvaniaGame.get_room_data(room), {})
+		if room.area:
+			room.room_data = Hotel.check_out(room.area.name, room.name)
+		else:
+			Debug.err("room without area should never happen")
 
 ###########################################################
 # spawn coords
@@ -80,12 +75,13 @@ func _enter_tree():
 func _ready():
 	pause_rooms()
 
-	if MvaniaGame.get_area_data(self) == null:
-		# assuming we're not in a 'proper' MvaniaGame state
-		MvaniaGame.persist_area(self)
-		if Engine.is_editor_hint():
-			Debug.prn("Persisted area data: \n")
-			Debug.prn(MvaniaGame.get_area_data(self))
+	# TODO hotel register
+
+	# checkin and update area data
+	# TODO consider existing/saved data
+	if not Hotel.has(name):
+		Hotel.check_in_area(load(scene_file_path))
+	Hotel.update(name, "", {"scene_file_path": scene_file_path})
 
 	init_room_data()
 
