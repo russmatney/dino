@@ -108,7 +108,9 @@ func to_printable(msgs, stack):
 		var color = "aquamarine" if prefix[0] == "[" else "peru"
 		m += "[color=%s]%s[/color]" % [color, prefix]
 	for ms in msgs:
-		m += str(ms)
+		# add a space between all chars
+		# TODO pretty print/colorize dicts/arrays
+		m += str(ms, " ")
 	return m
 
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
