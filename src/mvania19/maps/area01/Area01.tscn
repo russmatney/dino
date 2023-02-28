@@ -1,17 +1,17 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=22 format=3 uid="uid://04rrrqm4424o"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_j5wm8"]
-[ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
-[ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/area01/02MainTower.tscn" id="2_kip2h"]
-[ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
-[ext_resource type="PackedScene" uid="uid://be6mwtbfu4hyi" path="res://src/mvania19/maps/area01/04SecondSnowman.tscn" id="4_kj05g"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/02MainTower.tscn" id="2_kip2h"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/04SecondSnowman.tscn" id="4_kj05g"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="4_wy6o1"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="5_q3c5s"]
-[ext_resource type="PackedScene" uid="uid://d3s1p28e36maj" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
-[ext_resource type="PackedScene" uid="uid://cluqdo14cnme5" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
-[ext_resource type="PackedScene" uid="uid://b8w55flpfieoq" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
-[ext_resource type="PackedScene" uid="uid://d2lmsou7x7sgy" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
-[ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
+[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_oke76"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="12_7ylae"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="14_l82es"]
@@ -22,13 +22,13 @@
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
-[node name="Area01" type="Node2D"]
+[node name="Area01" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_j5wm8")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.454902, 0.423529, 0.486275, 1)
 
-[node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
+[node name="01Entrance" parent="." groups=["mvania_rooms"] instance=ExtResource("1_vpwkf")]
 show_behind_parent = true
 position = Vector2(264, -24)
 
@@ -41,11 +41,11 @@ key_or_action = "wasd"
 [node name="Candle8" parent="01Entrance" instance=ExtResource("15_r03j1")]
 position = Vector2(47, 24)
 
-[node name="02MainTower" parent="." instance=ExtResource("2_kip2h")]
+[node name="02MainTower" parent="." groups=["mvania_rooms"] instance=ExtResource("2_kip2h")]
 show_behind_parent = true
 position = Vector2(-40, -40)
 
-[node name="10JumpRoom" type="Node2D" parent="."]
+[node name="10JumpRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("4_wy6o1")
 
 [node name="DemoTiles" parent="10JumpRoom" instance=ExtResource("5_q3c5s")]
@@ -60,36 +60,36 @@ key_or_action = "jump"
 [node name="Candle7" parent="10JumpRoom" instance=ExtResource("15_r03j1")]
 position = Vector2(80, -40)
 
-[node name="03FirstSnowMan" parent="." instance=ExtResource("3_lq2ff")]
+[node name="03FirstSnowMan" parent="." groups=["mvania_rooms"] instance=ExtResource("3_lq2ff")]
 show_behind_parent = true
 position = Vector2(-152, 0)
 
 [node name="Candle3" parent="03FirstSnowMan" instance=ExtResource("15_r03j1")]
 position = Vector2(12, -24)
 
-[node name="04SecondSnowman" parent="." instance=ExtResource("4_kj05g")]
+[node name="04SecondSnowman" parent="." groups=["mvania_rooms"] instance=ExtResource("4_kj05g")]
 show_behind_parent = true
 position = Vector2(72, -176)
 
 [node name="Candle2" parent="04SecondSnowman" instance=ExtResource("15_r03j1")]
 position = Vector2(-17, -15)
 
-[node name="05Crossroads" parent="." instance=ExtResource("5_qqhvm")]
+[node name="05Crossroads" parent="." groups=["mvania_rooms"] instance=ExtResource("5_qqhvm")]
 show_behind_parent = true
 position = Vector2(-152, -128)
 
-[node name="06BossChamber" parent="." instance=ExtResource("6_xa5kp")]
+[node name="06BossChamber" parent="." groups=["mvania_rooms"] instance=ExtResource("6_xa5kp")]
 show_behind_parent = true
 position = Vector2(-200, -232)
 
-[node name="07ThirdSnowman" parent="." instance=ExtResource("7_fl3ue")]
+[node name="07ThirdSnowman" parent="." groups=["mvania_rooms"] instance=ExtResource("7_fl3ue")]
 show_behind_parent = true
 position = Vector2(-400, -224)
 
 [node name="Candle4" parent="07ThirdSnowman" instance=ExtResource("15_r03j1")]
 position = Vector2(16, -8)
 
-[node name="08DownTower" parent="." instance=ExtResource("8_umldl")]
+[node name="08DownTower" parent="." groups=["mvania_rooms"] instance=ExtResource("8_umldl")]
 show_behind_parent = true
 position = Vector2(-240, -40)
 
@@ -102,14 +102,14 @@ position = Vector2(-60, 80)
 [node name="Soldier" parent="08DownTower" instance=ExtResource("14_l82es")]
 position = Vector2(-60, 144)
 
-[node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
+[node name="09Elevator" parent="." groups=["mvania_rooms"] instance=ExtResource("9_pjsu1")]
 show_behind_parent = true
 position = Vector2(-168, 104)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("11_oke76")]
 position = Vector2(356, -24)
 
-[node name="11CandleRoom" type="Node2D" parent="."]
+[node name="11CandleRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
 script = ExtResource("4_wy6o1")
 
@@ -119,7 +119,7 @@ layer_0/tile_data = PackedInt32Array(-327748, 131073, 0, -262212, 131073, 0, -19
 [node name="Candle" parent="11CandleRoom" instance=ExtResource("15_r03j1")]
 position = Vector2(-388, 48)
 
-[node name="12WorldHub" type="Node2D" parent="."]
+[node name="12WorldHub" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("4_wy6o1")
 
 [node name="DemoTiles2" parent="12WorldHub" instance=ExtResource("5_q3c5s")]
@@ -157,6 +157,7 @@ position = Vector2(184, 161)
 [node name="SnowTiles" parent="12WorldHub" instance=ExtResource("18_34m1s")]
 scale = Vector2(0.5, 0.5)
 layer_0/tile_data = PackedInt32Array(1114149, 524288, 5, 1114148, 131072, 10, 1114147, 131072, 16, 1114146, 131072, 10, 1114145, 131072, 4, 1114144, 65536, 16, 1048613, 262144, 14, 983077, 262144, 8, 917541, 262144, 8, 852005, 262144, 2, 786469, 524288, 1, 786468, 131072, 10, 786467, 131072, 4, 786466, 131072, 16, 786465, 131072, 16, 786464, 131072, 10, 786463, 131072, 4, 786462, 131072, 10, 786461, 65536, 10)
+recalc_autotiles = false
 
 [node name="GrassyCaveTileMap" parent="12WorldHub" instance=ExtResource("19_na50t")]
 layer_0/tile_data = PackedInt32Array(1769486, 327681, 5, 1703950, 262145, 3, 1638414, 262145, 3, 1572878, 262145, 3, 1507342, 262145, 3, 1441806, 262145, 2, 1769502, 524289, 5, 1769501, 131073, 5, 1769500, 131073, 5, 1769499, 131073, 5, 1769498, 131073, 5, 1769497, 131073, 5, 1769496, 131073, 5, 1769495, 131073, 5, 1769494, 131073, 5, 1769493, 131073, 5, 1769492, 131073, 5, 1769491, 131073, 5, 1769490, 131073, 5, 1769489, 131073, 5, 1769488, 131073, 5, 1769487, 131073, 5, 1703966, 262145, 3, 1638430, 262145, 3, 1572894, 262145, 3, 1507358, 262145, 3, 1441822, 262145, 2)

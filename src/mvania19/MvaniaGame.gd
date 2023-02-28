@@ -28,6 +28,20 @@ func recreate_db():
 	var a = area_scenes[4]
 	var d = Util.packed_scene_data(a, true)
 
+	print("area: ", d[^"."])
+	print("area keys: ", d[^"."].keys())
+	print("area props: ", d[^"."]["properties"])
+	print("area script: ", d[^"."]["properties"]["script"])
+	print("area script: ", d[^"."]["properties"]["script"].resource_path)
+	print("area script: ", d[^"."]["properties"]["script"].resource_name)
+
+	print("room: ", d[^"./01Entrance"])
+	print("room keys: ", d[^"./01Entrance"].keys())
+	print("room props: ", d[^"./01Entrance"]["properties"])
+	print("room script: ", d[^"./01Entrance"]["properties"]["script"])
+	print("room script: ", d[^"./01Entrance"]["properties"]["script"].resource_name)
+	print("room script: ", d[^"./01Entrance"]["properties"]["script"].resource_path)
+
 	# print(d)
 	print("\n\n")
 	print("keys:", d.keys())

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dispdrgh53rhu"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_7f7ro"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_tix0m"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_qcjf2"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_7ifjf"]
 
-[node name="Area07GrassyCave" type="Node2D"]
+[node name="Area07GrassyCave" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_7f7ro")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -19,7 +19,7 @@ color = Color(0.0928734, 0.179759, 0.0287756, 1)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.107274, 0.449081, 0.339994, 1)
 
-[node name="01GrassyCaveEntrance" type="Node2D" parent="."]
+[node name="01GrassyCaveEntrance" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_tix0m")
 
 [node name="GrassyCaveTileMap" parent="01GrassyCaveEntrance" instance=ExtResource("3_8ionw")]
@@ -32,7 +32,7 @@ destination_elevator_path = "12WorldHub/ToGrassyCaves"
 [node name="Candle" parent="01GrassyCaveEntrance" instance=ExtResource("5_7ifjf")]
 position = Vector2(58, 0)
 
-[node name="02GrassyFall" type="Node2D" parent="."]
+[node name="02GrassyFall" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_tix0m")
 
 [node name="GrassyCaveTileMap" parent="02GrassyFall" instance=ExtResource("3_8ionw")]
@@ -44,7 +44,7 @@ position = Vector2(176, 0)
 [node name="Candle2" parent="02GrassyFall" instance=ExtResource("5_7ifjf")]
 position = Vector2(173, 128)
 
-[node name="03GrassyChamber" type="Node2D" parent="."]
+[node name="03GrassyChamber" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_tix0m")
 
 [node name="GrassyCaveTileMap" parent="03GrassyChamber" instance=ExtResource("3_8ionw")]
@@ -61,7 +61,7 @@ position = Vector2(-34, 264)
 [node name="Candle2" parent="03GrassyChamber" instance=ExtResource("5_7ifjf")]
 position = Vector2(4, 264)
 
-[node name="04GrassyHallway" type="Node2D" parent="."]
+[node name="04GrassyHallway" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(8, 8)
 script = ExtResource("2_tix0m")
 
@@ -77,7 +77,7 @@ position = Vector2(432, 192)
 [node name="Candle3" parent="04GrassyHallway" instance=ExtResource("5_7ifjf")]
 position = Vector2(392, 136)
 
-[node name="05GrassyExit" type="Node2D" parent="."]
+[node name="05GrassyExit" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(8, 0)
 script = ExtResource("2_tix0m")
 

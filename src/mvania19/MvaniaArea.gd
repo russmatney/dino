@@ -68,6 +68,13 @@ func set_spawn_node(node_path: NodePath):
 	spawn_node_path = node_path
 
 ###########################################################
+# enter tree
+
+func _enter_tree():
+	# required for area db to pick this up
+	add_to_group("mvania_areas", true)
+
+###########################################################
 # ready
 
 func _ready():

@@ -90,6 +90,7 @@ func packed_scene_data(scene, include_properties=false):
 			"type": state.get_node_type(node_idx),
 			"owner_path": state.get_node_owner_path(node_idx),
 			"path": state.get_node_path(node_idx),
+			"groups": state.get_node_groups(node_idx),
 			}
 
 		var node_instance = state.get_node_instance(node_idx)

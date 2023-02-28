@@ -155,6 +155,13 @@ var room_data : Dictionary :
 				if ent.has_method("restore"):
 					ent.restore(ent_data)
 
+###########################################################
+# enter tree
+
+func _enter_tree():
+	# required for area db to pick this up
+	add_to_group("mvania_rooms", true)
+
 ###########################################
 # ready
 

@@ -1,20 +1,20 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://bmm7bhhb47s1a"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_knuf7"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_s40vt"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="3_clql2"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_iiw26"]
-[ext_resource type="PackedScene" uid="uid://cjjt4cr36npwa" path="res://src/mvania19/maps/area02/04BossTime.tscn" id="5_wq514"]
+[ext_resource type="PackedScene" uid="uid://crgc3ivdvcrqm" path="res://src/mvania19/maps/area02/04BossTime.tscn" id="5_wq514"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="6_2leqq"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="6_obold"]
 
-[node name="Area02" type="Node2D"]
+[node name="Area02" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_knuf7")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.454902, 0.423529, 0.486275, 1)
 
-[node name="01Elevator" type="Node2D" parent="."]
+[node name="01Elevator" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
 script = ExtResource("2_s40vt")
 
@@ -33,7 +33,7 @@ position = Vector2(0, 8)
 destination_area_str = "area01/Area01.tscn"
 destination_elevator_path = "09Elevator/ToArea02"
 
-[node name="02Hallway" type="Node2D" parent="."]
+[node name="02Hallway" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
 position = Vector2(144, 0)
 script = ExtResource("2_s40vt")
@@ -57,7 +57,7 @@ position = Vector2(84, -8)
 [node name="Soldier" parent="02Hallway" instance=ExtResource("6_obold")]
 position = Vector2(-32, 0)
 
-[node name="03Crossroads" type="Node2D" parent="."]
+[node name="03Crossroads" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
 position = Vector2(312, 120)
 script = ExtResource("2_s40vt")
@@ -88,7 +88,7 @@ position = Vector2(132, 136)
 [node name="Candle6" parent="04BossTime" instance=ExtResource("5_iiw26")]
 position = Vector2(237, 176)
 
-[node name="05SomeRoom" type="Node2D" parent="."]
+[node name="05SomeRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
 script = ExtResource("2_s40vt")
 
@@ -101,7 +101,7 @@ position = Vector2(492, 152)
 destination_area_str = "area03/Area03.tscn"
 destination_elevator_path = "01Elevator/ToArea02"
 
-[node name="06SomeOtherRoom" type="Node2D" parent="."]
+[node name="06SomeOtherRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
 position = Vector2(-328, -16)
 script = ExtResource("2_s40vt")
@@ -114,7 +114,7 @@ position = Vector2(464, 152)
 destination_area_str = "area04/Area04.tscn"
 destination_elevator_path = "01Elevator/ToArea02"
 
-[node name="07HiddenRoom" type="Node2D" parent="."]
+[node name="07HiddenRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_s40vt")
 
 [node name="DemoTiles" parent="07HiddenRoom" instance=ExtResource("3_clql2")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://b8p6ke7ukoe27"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_khcx4"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_qxn7y"]
@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_7oqef"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="5_vnpuv"]
 
-[node name="Area04" type="Node2D"]
+[node name="Area04" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_khcx4")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.454902, 0.423529, 0.486275, 1)
 
-[node name="01Elevator" type="Node2D" parent="."]
+[node name="01Elevator" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_qxn7y")
 
 [node name="DemoTiles" parent="01Elevator" instance=ExtResource("3_ija0w")]
@@ -26,7 +26,7 @@ destination_elevator_path = "06SomeOtherRoom/ToArea04"
 [node name="Candle2" parent="01Elevator" instance=ExtResource("5_vnpuv")]
 position = Vector2(32, 32)
 
-[node name="02Something" type="Node2D" parent="."]
+[node name="02Something" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(168, 0)
 script = ExtResource("2_qxn7y")
 
