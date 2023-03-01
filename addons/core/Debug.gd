@@ -101,20 +101,23 @@ func log_prefix(stack):
 		else:
 			return "[" + call_site["source"].get_file().get_basename() + "]: "
 
+func color_wrap(s, color):
+	return "[color=%s]%s[/color]" % [color, s]
+
 func to_pretty(msg, newlines=false):
 	if msg is Array or msg is PackedStringArray:
-		var tmp = "[ "
+		var tmp = color_wrap("[ ", "crimson")
 		var last = len(msg) - 1
 		for i in range(len(msg)):
 			if newlines and last > 1:
 				tmp += "\n\t"
 			tmp += to_pretty(msg[i], newlines)
 			if i != last:
-				tmp += ", "
-		tmp += " ]"
+				tmp += color_wrap(", ", "crimson")
+		tmp += color_wrap(" ]", "crimson")
 		return tmp
 	elif msg is Dictionary:
-		var tmp = "{ "
+		var tmp = color_wrap("{ ", "crimson")
 		var ct = len(msg)
 		var last
 		if len(msg) > 0:
@@ -125,13 +128,13 @@ func to_pretty(msg, newlines=false):
 				tmp += "\n\t"
 			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
 			if last and k != last:
-				tmp += ", "
-		tmp += " }"
+				tmp += color_wrap(", ", "crimson")
+		tmp += color_wrap(" }", "crimson")
 		return tmp
 	elif msg is String:
 		if msg == "":
 			return '""'
-		return '[color=%s]%s[/color]' % ["dark_gray", msg]
+		return color_wrap(msg, "dark_gray")
 	elif msg is StringName:
 		return '[color=%s]&[/color]"%s"' % ["coral", msg]
 	elif msg is NodePath:

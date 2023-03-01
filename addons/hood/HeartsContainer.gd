@@ -19,7 +19,7 @@ func find_heart_icons():
 ## Converts a passed int into a number of hearts to display.
 func set_health(health):
 	if health == null:
-		print("[HOOD] WARN: set_health with null!")
+		Debug.warn("[HOOD] WARN: set_health with null!")
 		return
 
 	# TODO extend to add and place more hearts, or layer a new color checked top
