@@ -166,5 +166,4 @@ func travel_to_area(dest_area, elevator_path):
 		# (smooth camera movement)
 		Debug.pr("already in same area?")
 
-	var area = load(dest_area)
-	load_area(area, elevator_path)
+	load_area(dest_area, elevator_path)

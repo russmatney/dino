@@ -68,6 +68,11 @@ func book_area(scene: PackedScene):
 			# TODO lift and store nested instance data too?
 			# maybe opt-in with groups? will need to traverse to check them...
 			# probably need to do this if we have room instances...
+			# indeed - this misses elevators in instanced-rooms
+			# should we dig for it here, or should we register/book elevators/entities independently?
+			# It might be better to give entities (enemies, action-detectors) their own
+			# registration/data life-cycle handling
+
 			var inst = d["instance"][^"."]
 			db_data["groups"].append_array(inst["groups"])
 

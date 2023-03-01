@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://dtji35uje4oqs"]
 
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_78oqi"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_qg6sh"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="3_0xsm0"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_0mkwh"]
+[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="5_0dxrk"]
 
-[node name="09Elevator" type="Node2D"]
+[node name="09Elevator" type="Node2D" groups=["mvania_rooms"]]
 script = ExtResource("1_qg6sh")
 
 [node name="DemoTiles" parent="." instance=ExtResource("1_78oqi")]
@@ -12,10 +14,27 @@ layer_0/tile_data = PackedInt32Array(-327687, 1, 0, -262151, 131073, 2, -196615,
 
 [node name="ToArea02" parent="." instance=ExtResource("3_0xsm0")]
 position = Vector2(0, 24)
-destination_area_str = "area02/Area02.tscn"
-destination_elevator_path = "01Elevator/ToArea01"
+destination_area_str = "res://src/mvania19/maps/area02/Area02.tscn"
+destination_elevator_path = "./01Elevator/ToArea01"
+dest_elevators = null
 
 [node name="RoomBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
 collision_mask = 2
+
+[node name="CamPOF" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(-56, -48)
+script = ExtResource("5_0dxrk")
+
+[node name="@CamPOF@56467" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(56, 56)
+script = ExtResource("5_0dxrk")
+
+[node name="@CamPOF@56468" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(56, -48)
+script = ExtResource("5_0dxrk")
+
+[node name="@CamPOF@56469" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(-56, 56)
+script = ExtResource("5_0dxrk")

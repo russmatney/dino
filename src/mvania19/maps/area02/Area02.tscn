@@ -30,8 +30,8 @@ shadow_enabled = true
 
 [node name="ToArea01" parent="01Elevator" instance=ExtResource("6_2leqq")]
 position = Vector2(0, 8)
-destination_area_str = "res://src/mvania19/maps/area04/Area04.tscn"
-destination_elevator_path = "./01Elevator/ToArea02"
+destination_area_str = "res://src/mvania19/maps/area01/Area01.tscn"
+destination_elevator_path = "./12WorldHub/ToSnow"
 dest_elevators = null
 
 [node name="02Hallway" type="Node2D" parent="." groups=["mvania_rooms"]]

@@ -132,8 +132,19 @@ func list_elevator_paths():
 		return ""
 
 	var area_name = area["name"]
+
+	# TODO this misses elevators in instanced-rooms - Hotel needs to gather room-instance elevators
+	# OR we need a different/better elevator/hotel registry
 	var elevators = Hotel.query({
 		"group": "elevators",
 		"filter": func(elevator): return elevator["area_name"] == area_name,
 		})
+
+	# TODO exclude THIS elevator?
+	# or maybe make that the default?
+
+	if len(elevators) == 1:
+		destination_elevator_path = elevators[0]["path"]
+		return
+
 	return ",".join(elevators.map(func(ele): return ele["path"]))

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_xk25d"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="3_wwjab"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="4_6jxld"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
 
 [node name="Area06PurpleStone" type="Node2D" groups=["mvania_areas"]]
 position = Vector2(1, 0)
@@ -27,8 +27,9 @@ script = ExtResource("2_xk25d")
 
 [node name="Elevator" parent="01StoneEntrance" instance=ExtResource("3_wwjab")]
 position = Vector2(136, -96)
-destination_area_str = "area01/Area01.tscn"
-destination_elevator_path = "12WorldHub/ToPurpleStone"
+destination_area_str = "res://src/mvania19/maps/area01/Area01.tscn"
+destination_elevator_path = "./12WorldHub/ToPurpleStone"
+dest_elevators = null
 
 [node name="Candle3" parent="01StoneEntrance" instance=ExtResource("4_6jxld")]
 position = Vector2(192, -96)
@@ -77,5 +78,6 @@ position = Vector2(24, 32)
 
 [node name="Elevator2" parent="04Boss" instance=ExtResource("3_wwjab")]
 position = Vector2(-40, 32)
-destination_area_str = "area06purplestone/Area06PurpleStone.tscn"
-destination_elevator_path = "01StoneEntrance/Elevator"
+destination_area_str = "res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn"
+destination_elevator_path = "./01StoneEntrance/Elevator"
+dest_elevators = null

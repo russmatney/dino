@@ -1,26 +1,26 @@
-[gd_scene load_steps=22 format=3 uid="uid://04rrrqm4424o"]
+[gd_scene load_steps=22 format=3 uid="uid://dap3qhxnk5asm"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_j5wm8"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/02MainTower.tscn" id="2_kip2h"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/04SecondSnowman.tscn" id="4_kj05g"]
+[ext_resource type="PackedScene" uid="uid://cy80y255vvnqw" path="res://src/mvania19/maps/area01/01Entrance.tscn" id="1_vpwkf"]
+[ext_resource type="PackedScene" uid="uid://bbjgf4a4ixvm1" path="res://src/mvania19/maps/area01/02MainTower.tscn" id="2_kip2h"]
+[ext_resource type="PackedScene" uid="uid://dcjjyp1eimyng" path="res://src/mvania19/maps/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
+[ext_resource type="PackedScene" uid="uid://be6mwtbfu4hyi" path="res://src/mvania19/maps/area01/04SecondSnowman.tscn" id="4_kj05g"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="4_wy6o1"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="5_q3c5s"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
+[ext_resource type="PackedScene" uid="uid://d3s1p28e36maj" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
+[ext_resource type="PackedScene" uid="uid://cluqdo14cnme5" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
+[ext_resource type="PackedScene" uid="uid://b8w55flpfieoq" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
+[ext_resource type="PackedScene" uid="uid://d2lmsou7x7sgy" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
+[ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_oke76"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="12_7ylae"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="14_l82es"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="15_r03j1"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="17_aao4x"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
-[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
-[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
 [node name="Area01" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_j5wm8")
@@ -44,6 +44,9 @@ position = Vector2(47, 24)
 [node name="02MainTower" parent="." groups=["mvania_rooms"] instance=ExtResource("2_kip2h")]
 show_behind_parent = true
 position = Vector2(-40, -40)
+
+[node name="Candle6" parent="02MainTower" instance=ExtResource("15_r03j1")]
+position = Vector2(16, 112)
 
 [node name="10JumpRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("4_wy6o1")
@@ -127,29 +130,30 @@ layer_0/tile_data = PackedInt32Array(786432, 131073, 2, 851968, 1, 2, 917504, 1,
 
 [node name="ToPurpleStone" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(24, 120)
-destination_area_str = "area06purplestone/Area06PurpleStone.tscn"
-destination_elevator_path = "01StoneEntrance/Elevator"
+destination_area_str = "res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn"
+destination_elevator_path = "./01StoneEntrance/Elevator"
+dest_elevators = null
 
 [node name="ToAllTheThings" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(48, 200)
-destination_area_str = "area08allthethings/Area08AllTheThings.tscn"
-destination_elevator_path = "01Entrance/Elevator"
+destination_area_str = "res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn"
+destination_elevator_path = "./01Entrance/Elevator"
+dest_elevators = null
 
 [node name="ToGrassyCaves" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(184, 200)
-destination_area_str = "area07grassycave/Area07GrassyCave.tscn"
-destination_elevator_path = "01GrassyCaveEntrance/Elevator"
+destination_area_str = "res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn"
+destination_elevator_path = "./01GrassyCaveEntrance/Elevator"
+dest_elevators = null
 
 [node name="ToSnow" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(280, 120)
-destination_area_str = "area05snow/Area05.tscn"
-destination_elevator_path = "01Entrance/Elevator"
+destination_area_str = "res://src/mvania19/maps/area05snow/Area05.tscn"
+destination_elevator_path = "./01Entrance/Elevator"
+dest_elevators = null
 
 [node name="Candle4" parent="12WorldHub" instance=ExtResource("15_r03j1")]
 position = Vector2(64, 160)
-
-[node name="Candle6" parent="12WorldHub" instance=ExtResource("15_r03j1")]
-position = Vector2(-24, 72)
 
 [node name="Candle5" parent="12WorldHub" instance=ExtResource("15_r03j1")]
 position = Vector2(184, 161)
