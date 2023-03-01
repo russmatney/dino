@@ -1,3 +1,10 @@
+# Hotel is so-named because it is intended as a Room manager
+# 'Room' being a game unit, specifically the level I want to design at
+# A group of rooms is gathered into an 'Area'
+#
+# Hotel is primarily a database.
+# It wants to be a light-weight manager for game state.
+#
 @tool
 extends Node
 
@@ -21,16 +28,21 @@ func db_key(area_name, path):
 ######################################################################
 # write
 
+# TODO use 'register' or 'book' for static, packedScene data, 'check-in' from _ready for instances
+# register/book should _never_ overwrite values (unless explicitly told to do so)
+# check-in adds an object_id and makes it simple to pull from and write to the db later
+# maybe consider an frp/eventy/reframey framework
+
 ## add a packed scene (and children) to the scene_db
-func check_in(scene: PackedScene):
+func book(scene: PackedScene):
 	# TODO impl
 	pass
 
 ## add a packed scene (and children) to the scene_db
-func check_in_area(scene: PackedScene):
+func book_area(scene: PackedScene):
 	var scene_data = Util.packed_scene_data(scene, true)
 	var area_name = scene_data[^"."]["name"]
-	Debug.prn("checking in area", area_name)
+	Debug.prn("Booking area", area_name)
 	for path in scene_data.keys():
 		var d = scene_data[path]
 		var key = db_key(area_name, path)
@@ -92,6 +104,7 @@ func update(area_name: String, path: String = "", update: Dictionary = {}):
 func has(area_name: String, path: String = ""):
 	return db_key(area_name, path) in scene_db
 
+
 ## grab any stored properties from the scene_db
 func check_out(area_name: String, path: String = ""):
 	var key = db_key(area_name, path)
@@ -102,6 +115,17 @@ func check_out(area_name: String, path: String = ""):
 			Debug.warn("No area_name + path in scene_db: ", area_name, " ", path)
 		else:
 			Debug.warn("No area_name in scene_db: ", area_name)
+
+# query
+func query(opts):
+	var vals = scene_db.values()
+	if "group" in opts:
+		vals = vals.filter(func (s_dict): return opts["group"] in s_dict["groups"])
+	if "area_name" in opts:
+		vals = vals.filter(func (s_dict): return opts["area_name"] == s_dict["area_name"])
+	if "filter" in opts:
+		vals = vals.filter(opts["filter"])
+	return vals
 
 ## grab a list of scene data dicts that belong to the passed group
 func check_out_for_group(group: String):

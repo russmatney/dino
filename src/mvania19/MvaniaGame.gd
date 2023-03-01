@@ -6,33 +6,40 @@ extends Node
 
 # TODO can we gather all nodes of a type more generally?
 var area_scenes = [
-	preload("res://src/mvania19/maps/area01/Area01.tscn"),
-	preload("res://src/mvania19/maps/area02/Area02.tscn"),
-	preload("res://src/mvania19/maps/area03/Area03.tscn"),
-	preload("res://src/mvania19/maps/area04/Area04.tscn"),
-	preload("res://src/mvania19/maps/area05snow/Area05.tscn"),
-	preload("res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn"),
-	preload("res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn"),
-	preload("res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn"),
+	"res://src/mvania19/maps/area01/Area01.tscn",
+	"res://src/mvania19/maps/area02/Area02.tscn",
+	"res://src/mvania19/maps/area03/Area03.tscn",
+	"res://src/mvania19/maps/area04/Area04.tscn",
+	"res://src/mvania19/maps/area05snow/Area05.tscn",
+	"res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn",
+	"res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn",
+	"res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn",
 	]
 
-func recreate_db():
+func register_areas():
 	Debug.pr("Checking area data into Hotel")
 
-	# TODO maybe remove completely...tho, how to reference elevators...?
-	for a in area_scenes:
-		Hotel.check_in_area(a)
+	for sfp in area_scenes:
+		# TODO this seems gross! how else can i get the name and sfp?
+		var area = load(sfp)
+		var area_data = Util.packed_scene_data(area)
+		var area_name = area_data[^"."]["name"]
+		Hotel.book_area(area)
+		Hotel.update(area_name, "", {"scene_file_path": sfp})
 
-	var areas = Hotel.check_out_for_group("mvania_areas")
+	var areas = Hotel.query({"group": "mvania_areas"})
 
 	Debug.pr("recreated Hotel.scene_db with", len(areas), "areas.")
+
+# TODO validation apis
+# e.g. are all the elevator connections valid?
 
 ###########################################################
 # ready
 
 func _ready():
 	# TODO maybe every time? was formely only when no areas
-	recreate_db()
+	register_areas()
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
@@ -49,13 +56,13 @@ var current_area: MvaniaArea
 var current_room: MvaniaRoom
 
 func restart_game():
-	recreate_db()
+	register_areas()
 
 	# consider first area selection logic
 	load_area(area_scenes[0])
 
 func load_area(area_scene, spawn_node_path=null):
-	current_area = area_scene.instantiate()
+	current_area = load(area_scene).instantiate()
 	current_area_name = current_area.name
 
 	# var area_data = area_db[current_area_name]
@@ -152,11 +159,12 @@ func _on_hud_ready():
 # Area travel
 
 func travel_to_area(dest_area, elevator_path):
-	Debug.prn("traveling to area: ", dest_area, " ", elevator_path)
+	Debug.pr("traveling to area", dest_area, elevator_path)
 
 	if current_area.scene_file_path == dest_area:
-		# we're already in the right area
-		Debug.prn("already in same area?")
+		# TODO handle if we're already in the right area
+		# (smooth camera movement)
+		Debug.pr("already in same area?")
 
 	var area = load(dest_area)
 	load_area(area, elevator_path)

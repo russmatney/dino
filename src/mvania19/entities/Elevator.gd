@@ -63,6 +63,7 @@ func travel():
 			destination_area_str = ""
 			destination_elevator_path = ""
 
+# TODO rename, this is now the full-path
 var destination_area_str: String :
 	set(v):
 		destination_area_str = v
@@ -76,7 +77,7 @@ var destination_elevator_path: String :
 var maps_dir_path := "res://src/mvania19/maps"
 
 func destination_area_full_path():
-	return maps_dir_path.path_join(destination_area_str)
+	return destination_area_str
 
 func _get_property_list() -> Array:
 	var dest_elevator_usage = PROPERTY_USAGE_NO_EDITOR
@@ -94,55 +95,45 @@ func _get_property_list() -> Array:
 			usage = dest_elevator_usage,
 			hint = PROPERTY_HINT_ENUM,
 			hint_string = list_elevator_paths()
-		}]
+			}, {
+			name = "dest_elevators",
+			type = TYPE_ARRAY,
+			usage = dest_elevator_usage,
+			hint = PROPERTY_HINT_ENUM,
+			hint_string = list_elevators()
+				}]
+
+func list_elevators():
+	# var elevators = Hotel.query({"group": "elevators"})
+	# Debug.pr(elevators)
+	return []
 
 func list_areas():
-	var area_paths = ""
-	var maps_dir := DirAccess.open(maps_dir_path)
-	if maps_dir:
-		maps_dir.list_dir_begin()
-		var file_name = maps_dir.get_next()
-		while file_name != "":
-			if maps_dir.current_is_dir():
-				var area_dir = DirAccess.open(maps_dir_path.path_join(file_name))
-				if area_dir:
-					area_dir.list_dir_begin()
-					var fname = area_dir.get_next()
-					while fname != "":
-						if fname.match("*Area0*"):
-							area_paths += file_name.path_join(fname)
-						fname = area_dir.get_next()
-						area_paths += ","
-			file_name = maps_dir.get_next()
-	return area_paths
+	var areas = Hotel.query({"group": "mvania_areas",
+		"filter": func(area): return area.get("scene_file_path"),
+		})
+	var area_file_paths = areas.map(func(area): return area.get("scene_file_path"))
+	return ",".join(area_file_paths)
 
 func list_elevator_paths():
+
 	if destination_area_str == null or len(destination_area_str) == 0:
 		return ""
 	var area_file_path = destination_area_full_path()
-	var elevator_paths = ""
 
-	if owner.scene_file_path == area_file_path:
-		# depends on elevators having an 'elevators' group
-		for c in Util.get_children_in_group(owner, "elevators"):
-			elevator_paths += str(owner.get_path_to(c)) + ","
-		return elevator_paths
-
-	# DANGER do not try to 'load' the current owner! (should return above)
-	# if you do, the editor can crash while trying to save the scene.
-	# technically a load is fine, but using get_state or instantiating can be problemmatic anyway
-	var area_scene = load(area_file_path)
-	if area_scene == null:
-		Hood.warn("Failed to load area scene: ", area_file_path)
+	var areas = Hotel.query({
+		"group": "mvania_areas",
+		"filter": func(area): return area.get("scene_file_path") == area_file_path})
+	var area
+	if len(areas) > 0:
+		area = areas[0]
+	else:
+		Debug.warn("No areas found with destination_area_full_path()", area_file_path)
 		return ""
 
-	var scene_data = Util.packed_scene_data(area_scene, true)
-	if scene_data:
-		for node_state in scene_data.values():
-			# depends on the Elevator instance name itself
-			# maybe could check the instance properties for a group?
-			if "Elevator" == node_state.get("instance_name"):
-				var path = node_state["path"]
-				elevator_paths += str(path).substr(2, -1) + ","
-
-	return elevator_paths
+	var area_name = area["name"]
+	var elevators = Hotel.query({
+		"group": "elevators",
+		"filter": func(elevator): return elevator["area_name"] == area_name,
+		})
+	return ",".join(elevators.map(func(ele): return ele["path"]))

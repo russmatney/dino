@@ -79,9 +79,8 @@ func _ready():
 
 	# checkin and update area data
 	# TODO consider existing/saved data
-	if not Hotel.has(name):
-		Hotel.check_in_area(load(scene_file_path))
-	Hotel.update(name, "", {"scene_file_path": scene_file_path})
+	if Engine.is_editor_hint():
+		MvaniaGame.register_areas()
 
 	init_room_data()
 

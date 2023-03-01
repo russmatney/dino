@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8p6ke7ukoe27"]
+[gd_scene load_steps=6 format=3 uid="uid://b6y1gghtowcm3"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_khcx4"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_qxn7y"]
@@ -20,8 +20,9 @@ layer_0/tile_data = PackedInt32Array(-458760, 1, 0, -393224, 1, 2, -327688, 1310
 
 [node name="ToArea02" parent="01Elevator" instance=ExtResource("4_7oqef")]
 position = Vector2(-24, 32)
-destination_area_str = "area02/Area02.tscn"
-destination_elevator_path = "06SomeOtherRoom/ToArea04"
+destination_area_str = "res://src/mvania19/maps/area02/Area02.tscn"
+destination_elevator_path = "./06SomeOtherRoom/ToArea04"
+dest_elevators = null
 
 [node name="Candle2" parent="01Elevator" instance=ExtResource("5_vnpuv")]
 position = Vector2(32, 32)
