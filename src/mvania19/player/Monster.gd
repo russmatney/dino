@@ -8,12 +8,16 @@ extends CharacterBody2D
 
 var player_data
 
+var og_position
+var MAX_Y = 5000
+
 ###########################################################################
 # ready
 
 var hud = preload("res://src/mvania19/hud/HUD.tscn")
 
 func _ready():
+	og_position = position
 	Cam.ensure_camera(2, {"zoom_level": 5.0})
 	Hood.call_deferred("ensure_hud", hud)
 	machine.start()
@@ -92,6 +96,11 @@ func _physics_process(_delta):
 			face_right()
 		if move_dir.x < 0:
 			face_left()
+
+	if position.y > MAX_Y:
+		Debug.warn("MAX Y HIT - RESETTING PLAYER")
+		velocity = Vector2.ZERO
+		position = og_position
 
 func move_to_target(target_position):
 	move_target = target_position

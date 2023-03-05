@@ -95,7 +95,11 @@ const default_player_data = {
 var player_data = default_player_data
 
 func create_new_player():
-	var spawn_coords = current_area.player_spawn_coords()
+	var spawn_coords
+	if current_area:
+		spawn_coords = current_area.player_spawn_coords()
+	else:
+		spawn_coords = Vector2.ZERO
 	player = player_scene.instantiate()
 	player.position = spawn_coords
 	player.player_data = player_data
@@ -167,3 +171,14 @@ func travel_to_area(dest_area, elevator_path):
 		Debug.pr("already in same area?")
 
 	load_area(dest_area, elevator_path)
+
+###########################################################
+# dev helper functions
+
+func maybe_spawn_player():
+	if not Engine.is_editor_hint():
+		await get_tree().create_timer(0.5).timeout
+		if player == null:
+			# if not current_area:
+			# 	current_area = self
+			spawn_player()
