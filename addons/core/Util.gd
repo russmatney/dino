@@ -181,3 +181,15 @@ func remove_matching(arr, to_remove):
 	for rem in to_remove:
 		arr.erase(rem)
 	return arr
+
+
+############################################################
+# Flip
+
+func update_h_flip(facing, node):
+	if facing == Vector2.RIGHT and node.position.x < 0:
+		node.position.x = -node.position.x
+		node.scale.x = -node.scale.x
+	elif facing == Vector2.LEFT and node.position.x > 0:
+		node.position.x = -node.position.x
+		node.scale.x = -node.scale.x

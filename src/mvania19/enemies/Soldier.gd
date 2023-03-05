@@ -3,24 +3,63 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
+@onready var hitbox = $Hitbox
 
 ########################################################
 # ready
 
 func _ready():
-	Debug.prn("ready")
-	if not Engine.is_editor_hint():
-		machine.start()
-	anim.animation_finished.connect(_on_animation_finished)
-
-	# TODO pull/set data from db when area loads?
+	# TODO hotel register
+	# TODO pull/set data from hotel db
 	health = initial_health
 
-	# TODO hotel register
+	if not Engine.is_editor_hint():
+		machine.start()
+		machine.transitioned.connect(_on_transitioned)
+		machine.transit("Run", {dir=Vector2.LEFT})
 
+	anim.animation_finished.connect(_on_animation_finished)
+
+	hitbox.body_entered.connect(_on_body_entered)
+	hitbox.body_exited.connect(_on_body_exited)
+
+	anim.frame_changed.connect(_on_frame_changed)
+
+func _on_frame_changed():
+	if anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
+		for b in bodies:
+			if b.has_method("take_hit"):
+				if not b in bodies_this_kick:
+					Cam.hitstop("kickhit", 0.3, 0.1)
+					bodies_this_kick.append(b)
+					b.take_hit({damage=1, direction=facing})
+
+var bodies_this_kick = []
+
+func kick(body):
+	bodies_this_kick = []
+	machine.transit("Kick", {body=body})
+
+var bodies = []
+
+func _on_body_entered(body):
+	Debug.prn("body entered", body)
+
+	if body.is_in_group("player"):
+		bodies.append(body)
+
+		if machine.state.name != "Kick":
+			kick(body)
+
+func _on_body_exited(body):
+	bodies.erase(body)
+
+func _on_transitioned(state_label):
+	Debug.prn(state_label)
 
 func _on_animation_finished():
-	pass
+	if anim.animation == "kick":
+		machine.transit("Idle")
 
 ########################################################
 # to_data, restore
@@ -52,20 +91,24 @@ var facing
 func face_right():
 	facing = Vector2.RIGHT
 	anim.flip_h = true
+	Util.update_h_flip(facing, hitbox)
 
 func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
+	Util.update_h_flip(facing, hitbox)
 
 ########################################################
 # _physics_process
 
-const SPEED = 150.0
+const SPEED = 50.0
 const JUMP_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY_HORIZONTAL = 30.0
 const DYING_VELOCITY = -400.0
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+var move_dir = Vector2.ZERO
 
 func _physics_process(_delta):
 	pass

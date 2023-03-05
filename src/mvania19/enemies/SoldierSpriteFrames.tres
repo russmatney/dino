@@ -221,9 +221,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ucdid")
 }],
-"loop": true,
+"loop": false,
 "name": &"kick",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -263,5 +263,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 10.0
+"speed": 13.0
 }]

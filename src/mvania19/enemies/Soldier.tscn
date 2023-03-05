@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dycyi1m0w17sl"]
+[gd_scene load_steps=13 format=3 uid="uid://dycyi1m0w17sl"]
 
 [ext_resource type="Script" path="res://src/mvania19/enemies/Soldier.gd" id="1_ca64f"]
 [ext_resource type="SpriteFrames" uid="uid://bk18wq80s2nw6" path="res://src/mvania19/enemies/SoldierSpriteFrames.tres" id="1_cvejl"]
@@ -15,6 +15,9 @@
 radius = 6.0
 height = 18.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2i04"]
+size = Vector2(18, 16)
+
 [node name="Soldier" type="CharacterBody2D" groups=["enemies", "pois"]]
 collision_layer = 8
 collision_mask = 5
@@ -28,6 +31,8 @@ position = Vector2(0, -7)
 sprite_frames = ExtResource("1_cvejl")
 animation = &"kick"
 autoplay = "idle"
+frame = 8
+frame_progress = 1.0
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_ttylb")
@@ -52,3 +57,12 @@ script = ExtResource("9_k88d1")
 
 [node name="Jump" type="Node" parent="Machine"]
 script = ExtResource("10_8ukws")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(-7, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_h2i04")
+metadata/_edit_lock_ = true

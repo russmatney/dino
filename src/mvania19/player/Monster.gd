@@ -31,6 +31,9 @@ func _ready():
 
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
 
+	health = initial_health
+
+
 func can_execute_any_actions():
 	return move_target == null
 
@@ -68,6 +71,9 @@ func _unhandled_input(event):
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
+const KNOCKBACK_VELOCITY = -300.0
+const KNOCKBACK_VELOCITY_HORIZONTAL = 30.0
+const DYING_VELOCITY = -400.0
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var move_dir = Vector2.ZERO
@@ -139,32 +145,36 @@ func stamp(opts={}):
 
 var facing
 
-func update_h_flip(node):
-	if facing == "right" and node.position.x < 0:
-		node.position.x = -node.position.x
-		node.scale.x = -node.scale.x
-	elif facing == "left" and node.position.x > 0:
-		node.position.x = -node.position.x
-		node.scale.x = -node.scale.x
-
-
 @onready var light_occluder = $LightOccluder2D
 @onready var look_point = $LookPoint
 
 func face_right():
-	if facing == "left":
+	if facing == Vector2.LEFT:
 		stamp()
-	facing = "right"
+	facing = Vector2.RIGHT
 	anim.flip_h = false
-	update_h_flip(sword)
-	update_h_flip(light_occluder)
-	update_h_flip(look_point)
+	Util.update_h_flip(facing, sword)
+	Util.update_h_flip(facing, light_occluder)
+	Util.update_h_flip(facing, look_point)
 
 func face_left():
-	if facing == "right":
+	if facing == Vector2.RIGHT:
 		stamp()
-	facing = "left"
+	facing = Vector2.LEFT
 	anim.flip_h = true
-	update_h_flip(sword)
-	update_h_flip(light_occluder)
-	update_h_flip(look_point)
+	Util.update_h_flip(facing, sword)
+	Util.update_h_flip(facing, light_occluder)
+	Util.update_h_flip(facing, look_point)
+
+########################################################
+# health
+
+var initial_health = 3
+var health
+
+func take_hit(opts={}):
+	var damage = opts.get("damage", 1)
+	var direction = opts.get("direction", Vector2.RIGHT)
+
+	health -= damage
+	machine.transit("KnockedBack", {"direction": direction})
