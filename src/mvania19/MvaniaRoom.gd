@@ -186,6 +186,29 @@ func _ready():
 
 	MvaniaGame.call_deferred("maybe_spawn_player")
 
+	Hood.found_player.connect(_on_found_player)
+
+	lights = Util.get_children_in_group(self, "lights")
+
+var lights
+var player
+
+func _on_found_player(p):
+	Debug.prn("found player in mvania room")
+	player = p
+
+###########################################
+# _process
+
+func _process(delta):
+	if player:
+		for l in lights:
+			var ang = Vector2(0, 0).angle_to_point(player.global_position)
+			Debug.debug_label("ANGLE", ang)
+			Debug.prn("ANGLE", ang)
+			l.rotation = ang - PI
+
+
 ###########################################
 # pause
 

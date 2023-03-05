@@ -41,7 +41,7 @@ key_or_action = "wasd"
 [node name="Candle8" parent="01Entrance" instance=ExtResource("15_r03j1")]
 position = Vector2(47, 24)
 
-[node name="02MainTower" parent="." groups=["mvania_rooms"] instance=ExtResource("2_kip2h")]
+[node name="02MainTower" parent="." instance=ExtResource("2_kip2h")]
 show_behind_parent = true
 position = Vector2(-40, -40)
 
@@ -63,7 +63,7 @@ key_or_action = "jump"
 [node name="Candle7" parent="10JumpRoom" instance=ExtResource("15_r03j1")]
 position = Vector2(80, -40)
 
-[node name="03FirstSnowMan" parent="." groups=["mvania_rooms"] instance=ExtResource("3_lq2ff")]
+[node name="03FirstSnowMan" parent="." instance=ExtResource("3_lq2ff")]
 show_behind_parent = true
 position = Vector2(-152, 0)
 
@@ -105,7 +105,7 @@ position = Vector2(-60, 80)
 [node name="Soldier" parent="08DownTower" instance=ExtResource("14_l82es")]
 position = Vector2(-60, 144)
 
-[node name="09Elevator" parent="." groups=["mvania_rooms"] instance=ExtResource("9_pjsu1")]
+[node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
 show_behind_parent = true
 position = Vector2(-168, 104)
 

@@ -179,6 +179,4 @@ func maybe_spawn_player():
 	if not Engine.is_editor_hint():
 		await get_tree().create_timer(0.5).timeout
 		if player == null:
-			# if not current_area:
-			# 	current_area = self
 			spawn_player()

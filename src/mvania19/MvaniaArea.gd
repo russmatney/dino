@@ -84,7 +84,15 @@ func _ready():
 
 	init_room_data()
 
-	MvaniaGame.call_deferred("maybe_spawn_player")
+	call_deferred("maybe_spawn_player")
+
+# TODO fix in Mvania game and remove here
+func maybe_spawn_player():
+	if not Engine.is_editor_hint():
+		await get_tree().create_timer(0.5).timeout
+		if MvaniaGame.player == null:
+			MvaniaGame.current_area = self
+			MvaniaGame.spawn_player()
 
 ###########################################################
 # draw
