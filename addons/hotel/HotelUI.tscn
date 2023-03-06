@@ -23,11 +23,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -37,10 +40,25 @@ text = "[center]Hotel DB[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="ReloadPluginButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ReloadPluginButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_kmkd5")
 text = "Reload"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AreaOptionButton" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+alignment = 2
+
+[node name="GroupOptionButton" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+alignment = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -73,4 +91,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ReloadPluginButton" to="." method="_on_reload_plugin_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/ReloadPluginButton" to="." method="_on_reload_plugin_button_pressed"]
