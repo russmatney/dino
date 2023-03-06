@@ -201,9 +201,13 @@ func _on_found_player(p):
 # _process
 
 func _process(delta):
+	var rect = used_rect()
+	var top_center = rect.position
+	top_center.x = top_center.x + (rect.size.x/2)
+	Debug.prn("top_center", top_center)
 	if player:
 		for l in lights:
-			var ang = Vector2(0, 0).angle_to_point(player.global_position)
+			var ang = top_center.angle_to_point(player.global_position)
 			Debug.debug_label("ANGLE", ang)
 			Debug.prn("ANGLE", ang)
 			l.rotation = ang - PI
