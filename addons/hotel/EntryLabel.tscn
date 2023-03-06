@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvbpa2a36e5vn"]
 
 [ext_resource type="Script" path="res://addons/hotel/EntryLabel.gd" id="1_cj45d"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_7xxwy"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="2_fp36n"]
 
 [node name="EntryLabel" type="HBoxContainer"]
 anchors_preset = 15
@@ -16,7 +16,7 @@ script = ExtResource("1_cj45d")
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/normal_font = ExtResource("2_7xxwy")
+theme_override_fonts/normal_font = ExtResource("2_fp36n")
 bbcode_enabled = true
 fit_content = true
 scroll_active = false

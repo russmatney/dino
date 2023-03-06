@@ -17,4 +17,4 @@ func _ready():
 func setup():
 	if entry and entry_name and data:
 		entry_name.text = "[center]%s[/center]" % [entry["key"]]
-		data.text = Debug.to_pretty(entry)
+		data.text = Debug.to_pretty(entry, true)
