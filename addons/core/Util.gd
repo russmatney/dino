@@ -78,6 +78,17 @@ func get_children_by_name(node: Node):
 		by_name[ch.name] = ch
 	return by_name
 
+## Returns all of a node's parents EXCEPT the root.
+func get_all_parents(node: Node, parents=[]):
+	var p = node.get_parent()
+	if p == node.get_tree().get_root():
+		return parents
+	if p:
+		parents.append(p)
+		return get_all_parents(p, parents)
+	else:
+		return parents
+
 
 # TODO update to use path as key
 func packed_scene_data(scene, include_properties=false):

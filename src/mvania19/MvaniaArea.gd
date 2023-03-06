@@ -30,11 +30,8 @@ func draw_room_outline(room: MvaniaRoom):
 func init_room_data():
 	ensure_rooms()
 	Debug.pr("initing room data (NOT)", rooms)
-	# for room in rooms:
-	# 	if room.area:
-	# 		room.room_data = Hotel.check_out(room.area.name, room.name)
-	# 	else:
-	# 		Debug.err("room without area should never happen")
+	for room in rooms:
+		room.room_data = Hotel.check_out(room)
 
 ###########################################################
 # spawn coords

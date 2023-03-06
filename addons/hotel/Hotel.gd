@@ -17,19 +17,33 @@ func _ready():
 ######################################################################
 # scene_db
 
-## a dict of arbitrary scene properties with a composite area + node_path key
-##
-## scenes are any properties
+## a dict of arbitrary scene properties. Built from static packed_scenes,
+## updated using passed nodes and dicts.
 var scene_db = {}
+
+func drop_db():
+	Debug.warn("Dropping scene_db")
+	scene_db = {}
+
+######################################################################
+# key
 
 func db_key(area_name, path):
 	return str(area_name).path_join(str(path).replace(".", ""))
 
+func node_to_entry_key(node):
+	var parents = Util.get_all_parents(node)
+	Debug.pr("to entry key", node.name, parents)
+	var key = to_entry_key({path=node.name}, parents)
+	Debug.pr("node to entry key", node, key)
+	return key
+
+## converts the passed data dict and parents list into a path from area to the current scene
 func to_entry_key(data, parents=[]):
 	var prefix = ""
 	for p in parents:
 		var parent_path = p.get("path")
-		if parent_path == ^".":
+		if parent_path == null or parent_path == ^".":
 			parent_path = p.get("name")
 		prefix = prefix.path_join(parent_path).replace(".", "").replace("//", "/")
 		prefix = prefix.trim_prefix("/").trim_suffix("/")
@@ -38,11 +52,6 @@ func to_entry_key(data, parents=[]):
 
 ######################################################################
 # write
-
-# TODO use 'register' or 'book' for static, packedScene data, 'check-in' from _ready for instances
-# register/book should _never_ overwrite values (unless explicitly told to do so)
-# check-in adds an object_id and makes it simple to pull from and write to the db later
-# maybe consider an frp/eventy/reframey framework
 
 ## add a packed scene (and children) to the scene_db. Accepts PackedScene or a path to one (sfp).
 func book(scene: Variant):
@@ -67,8 +76,6 @@ func book_data(data: Dictionary, parents = null):
 
 	if parents == null:
 		parents = [data.values()[0]]
-
-	# TODO get/pass parents to root (not possible without instance?)
 
 	for path in data.keys():
 		var ps = parents.duplicate()
@@ -115,107 +122,45 @@ func book_data(data: Dictionary, parents = null):
 		else:
 			scene_db[key] = entry
 
-
-## add a packed scene (and children) to the scene_db
-func book_area(scene: PackedScene):
-	var scene_data = Util.packed_scene_data(scene, true)
-	var area_name = scene_data[^"."]["name"]
-	Debug.prn("Booking area", area_name)
-	for path in scene_data.keys():
-		var d = scene_data[path]
-		var key = db_key(area_name, path)
-
-		# we may not want to overwrite properties
-		# q, how to mix with 'saved' data states
-		var db_data = d["properties"]
-
-		db_data["area_name"] = area_name
-		db_data["path"] = path
-		db_data["key"] = key
-
-		db_data["groups"] = d.get("groups", [])
-		db_data["name"] = d["name"]
-
-		if d["type"]:
-			db_data["type"] = d["type"]
-
-		if "script" in d["properties"]:
-			db_data["script_path"] = d["properties"]["script"].resource_path
-
-		if "instance" in d:
-			# TODO lift and store nested instance data too?
-			# maybe opt-in with groups? will need to traverse to check them...
-			# probably need to do this if we have room instances...
-			# indeed - this misses elevators in instanced-rooms
-			# should we dig for it here, or should we register/book elevators/entities independently?
-			# It might be better to give entities (enemies, action-detectors) their own
-			# registration/data life-cycle handling
-
-			var inst = d["instance"][^"."]
-			db_data["groups"].append_array(inst["groups"])
-
-			for k in inst.get("properties", {}).keys():
-				if not k in db_data:
-					db_data[k] = inst["properties"][k]
-
-			if "properties" in inst and "script" in inst["properties"] and not "script_path" in db_data:
-				db_data["script_path"] = inst["properties"]["script"].resource_path
-
-		if "instance_name" in d:
-			db_data["instance_name"] = d["instance_name"]
-
-		scene_db[key] = db_data
-
-######################################################################
-# drop
-
-func drop_db():
-	Debug.warn("Dropping scene_db")
-	scene_db = {}
-
 ######################################################################
 # update
 
 ## update relevant properties stored in the scene_db
-## TODO help nodes register so they can update without area/path_name
-func update(area_name: String, path: String = "", update: Dictionary = {}):
-	Debug.pr("Update:", area_name, path)
-	# TODO minimize updates?
-	# Debug.pr("updating", area_name, path, update)
-	var key = db_key(area_name, path)
+func update(node: Node, update: Dictionary = {}):
+	Debug.pr("Updating node:", node)
+	# TODO minimize updates by comparing key/vals?
+
+	var key = node_to_entry_key(node)
 	if key in scene_db:
 		scene_db[key].merge(update, true)
 	else:
-		if path:
-			Debug.warn("No area_name + path in scene_db: ", area_name, " ", path)
-		else:
-			Debug.warn("No area_name in scene_db: ", area_name)
+		Debug.warn("No entry in scene_db for node: ", node)
 
 ######################################################################
 # read
 
-func has(area_name: String, path: String = ""):
-	return db_key(area_name, path) in scene_db
-
+## Returns true if an entry for this node was found in the db
+func has(node: Node):
+	return node_to_entry_key(node) in scene_db
 
 ## grab any stored properties from the scene_db
-func check_out(area_name: String, path: String = ""):
-	var key = db_key(area_name, path)
+func check_out(node: Node):
+	var key = node_to_entry_key(node)
 	if key in scene_db:
 		return scene_db[key]
 	else:
-		if path:
-			Debug.warn("No area_name + path in scene_db: ", area_name, " ", path)
-		else:
-			Debug.warn("No area_name in scene_db: ", area_name)
+		Debug.warn("No entry in scene_db for node: ", node)
 
-# query
+## General access to the scene_db
 func query(opts={}):
 	var vals = scene_db.values()
 	if "group" in opts:
 		vals = vals.filter(func (s_dict): return opts["group"] in s_dict["groups"])
+
+	# TODO make this work
 	if "area_name" in opts:
 		vals = vals.filter(func (s_dict): return opts["area_name"] == s_dict["area_name"])
+
 	if "filter" in opts:
 		vals = vals.filter(opts["filter"])
 	return vals

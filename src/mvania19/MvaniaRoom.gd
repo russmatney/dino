@@ -99,16 +99,14 @@ func _on_room_entered(body: Node2D):
 		visited = true
 		# TODO restore sound on room visit
 		if area:
-			# TODO this is bad - should instead make it simple to Hotel.update(self)
-			Hotel.update(area.name, name, to_room_data(MvaniaGame.player))
+			Hotel.update(self, to_room_data(MvaniaGame.player))
 		MvaniaGame.update_rooms()
 		body.stamp({"scale": 2.0, "ttl": 1.0})
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
-		# TODO this is bad - should instead make it simple to Hotel.update(self)
 		if area:
-			Hotel.update(area.name, name, to_room_data(MvaniaGame.player))
+			Hotel.update(self, to_room_data(MvaniaGame.player))
 		MvaniaGame.update_rooms()
 
 ###########################################

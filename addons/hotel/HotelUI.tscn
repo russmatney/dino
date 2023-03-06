@@ -70,7 +70,7 @@ unique_name_in_owner = true
 layout_mode = 2
 flat = true
 alignment = 2
-item_count = 5
+item_count = 6
 selected = 0
 popup/item_0/text = "mvania_areas"
 popup/item_0/id = 0
@@ -78,10 +78,12 @@ popup/item_1/text = "mvania_rooms"
 popup/item_1/id = 1
 popup/item_2/text = "elevators"
 popup/item_2/id = 2
-popup/item_3/text = "candles"
+popup/item_3/text = "action_areas"
 popup/item_3/id = 3
-popup/item_4/text = "Clear"
+popup/item_4/text = "candles"
 popup/item_4/id = 4
+popup/item_5/text = "Clear"
+popup/item_5/id = 5
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
