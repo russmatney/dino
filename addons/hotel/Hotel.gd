@@ -88,9 +88,6 @@ func book_area(scene: PackedScene):
 
 		scene_db[key] = db_data
 
-		Debug.prn(key, db_data)
-		Debug.debug_label(key, db_data)
-
 ## update relevant properties stored in the scene_db
 ## TODO help nodes register so they can update without area/path_name
 func update(area_name: String, path: String = "", update: Dictionary = {}):
@@ -125,7 +122,7 @@ func check_out(area_name: String, path: String = ""):
 			Debug.warn("No area_name in scene_db: ", area_name)
 
 # query
-func query(opts):
+func query(opts={}):
 	var vals = scene_db.values()
 	if "group" in opts:
 		vals = vals.filter(func (s_dict): return opts["group"] in s_dict["groups"])
@@ -134,6 +131,12 @@ func query(opts):
 	if "filter" in opts:
 		vals = vals.filter(opts["filter"])
 	return vals
+
+## mostly a debug helper, returns the first db entry
+func first():
+	var entries = query()
+	if len(entries) > 0:
+		return entries[0]
 
 ## grab a list of scene data dicts that belong to the passed group
 func check_out_for_group(group: String):

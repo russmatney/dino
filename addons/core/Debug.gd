@@ -105,8 +105,15 @@ func log_prefix(stack):
 func color_wrap(s, color):
 	return "[color=%s]%s[/color]" % [color, s]
 
+var omit_vals_for_keys = ["layer_0/tile_data"]
+
 func to_pretty(msg, newlines=false):
 	if msg is Array or msg is PackedStringArray:
+		if len(msg) > 10:
+			msg = msg.slice(0, 9)
+			msg.append("...")
+			prn("cutting down large array")
+
 		var tmp = color_wrap("[ ", "crimson")
 		var last = len(msg) - 1
 		for i in range(len(msg)):
@@ -124,7 +131,11 @@ func to_pretty(msg, newlines=false):
 		if len(msg) > 0:
 			last = msg.keys()[-1]
 		for k in msg.keys():
-			var val = to_pretty(msg[k], newlines)
+			var val
+			if k in omit_vals_for_keys:
+				val = "..."
+			else:
+				val = to_pretty(msg[k], newlines)
 			if newlines and ct > 1:
 				tmp += "\n\t"
 			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
@@ -145,7 +156,7 @@ func to_pretty(msg, newlines=false):
 	else:
 		return str(msg)
 
-func to_printable(msgs, stack, newlines=false, pretty=true):
+func to_printable(msgs, stack=[], newlines=false, pretty=true):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)

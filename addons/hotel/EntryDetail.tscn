@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbyoe1xrjh0pf"]
+
+[ext_resource type="Script" path="res://addons/hotel/EntryDetail.gd" id="1_debfm"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ajb63"]
+
+[node name="EntryDetail" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_debfm")
+
+[node name="EntryName" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_ajb63")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="EntryData" type="RichTextLabel" parent="."]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_ajb63")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
