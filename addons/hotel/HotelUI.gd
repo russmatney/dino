@@ -16,11 +16,14 @@ func _ready():
 
 var editor_interface
 func _on_reload_plugin_button_pressed():
-	Debug.prn(&"Reloading hotel plugin ----------------------------------")
-	editor_interface.set_plugin_enabled("hotel", false)
-	editor_interface.set_plugin_enabled("hotel", true)
-	editor_interface.set_main_screen_editor("HotelDB")
-	Debug.prn(&"Reloaded hotel plugin -----------------------------------")
+	if Engine.is_editor_hint():
+		Debug.prn(&"Reloading hotel plugin ----------------------------------")
+		editor_interface.set_plugin_enabled("hotel", false)
+		editor_interface.set_plugin_enabled("hotel", true)
+		editor_interface.set_main_screen_editor("HotelDB")
+		Debug.prn(&"Reloaded hotel plugin -----------------------------------")
+	else:
+		list_entries()
 
 #######################################################################
 # option buttons
@@ -69,7 +72,6 @@ func reset_option_buttons():
 const entry_label_scene = preload("res://addons/hotel/EntryLabel.tscn")
 
 func list_entries():
-	Debug.prn("query", query)
 	var entries = Hotel.query(query)
 
 	for ch in db_entries.get_children():

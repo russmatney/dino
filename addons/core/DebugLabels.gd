@@ -114,3 +114,14 @@ func rearrange_labels():
 
 func _on_rearrange_labels_pressed():
 	rearrange_labels()
+
+
+const hotel_ui_scene = preload("res://addons/hotel/HotelUI.tscn")
+var hotel_ui
+
+func _on_toggle_hotel_db_pressed():
+	if hotel_ui:
+		hotel_ui.queue_free()
+	else:
+		hotel_ui = hotel_ui_scene.instantiate()
+		$%ToggleHotelDB.add_sibling(hotel_ui)

@@ -7,7 +7,6 @@ extends VBoxContainer
 var entry :
 	set(val):
 		entry = val
-		Debug.prn("Entry Detail set", val)
 		setup()
 
 func _ready():
