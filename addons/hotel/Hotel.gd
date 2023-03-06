@@ -25,6 +25,17 @@ var scene_db = {}
 func db_key(area_name, path):
 	return str(area_name).path_join(str(path).replace(".", ""))
 
+func to_entry_key(data, parents=[]):
+	var prefix = ""
+	for p in parents:
+		var parent_path = p.get("path")
+		if parent_path == ^".":
+			parent_path = p.get("name")
+		prefix = prefix.path_join(parent_path).replace(".", "").replace("//", "/")
+		prefix = prefix.trim_prefix("/").trim_suffix("/")
+	var key = prefix.path_join(str(data.get("path")).replace(".", ""))
+	return key.trim_prefix("/").trim_suffix("/")
+
 ######################################################################
 # write
 
@@ -33,10 +44,77 @@ func db_key(area_name, path):
 # check-in adds an object_id and makes it simple to pull from and write to the db later
 # maybe consider an frp/eventy/reframey framework
 
-## add a packed scene (and children) to the scene_db
-func book(scene: PackedScene):
-	# TODO impl
-	pass
+## add a packed scene (and children) to the scene_db. Accepts PackedScene or a path to one (sfp).
+func book(scene: Variant):
+	var sfp
+	if scene is String:
+		sfp = scene
+		scene = load(sfp)
+	elif scene is PackedScene:
+		# TODO can we get scene_file_path from an already loaded packed scene?
+		sfp = null
+
+	var data = Util.packed_scene_data(scene)
+
+	if sfp:
+		# ugh!
+		data[^"."]["scene_file_path"] = sfp
+
+	book_data(data)
+
+func book_data(data: Dictionary, parents = null):
+	var scene_name = data[^"."]["name"]
+
+	if parents == null:
+		parents = [data.values()[0]]
+
+	# TODO get/pass parents to root (not possible without instance?)
+
+	for path in data.keys():
+		var ps = parents.duplicate()
+		var d = data.get(path)
+		var key = to_entry_key(d, ps)
+		var entry = d.get("properties", {})
+
+		entry.merge({
+			path=path,
+			key=key,
+			groups=d.get("groups", []),
+			name=d.get("name"),
+			type=d.get("type"),
+			})
+
+		if d.get("scene_file_path"):
+			entry["scene_file_path"] = scene_file_path
+
+		if "script" in entry:
+			entry["script_path"] = entry["script"].resource_path
+
+		if "instance_name" in d:
+			entry["instance_name"] = d["instance_name"]
+
+		if "instance" in d:
+			var inst = d["instance"][^"."]
+			entry["groups"].append_array(inst["groups"])
+
+			for k in inst.get("properties", {}).keys():
+				if not k in entry:
+					entry[k] = inst["properties"][k]
+
+			if "properties" in inst and "script" in inst["properties"] and not "script_path" in entry:
+				entry["script_path"] = inst["properties"]["script"].resource_path
+
+			# TODO update/add to this dict before recursing?
+			# is it ok for this to book first?
+			ps.append(entry)
+			book_data(d["instance"], ps)
+
+		if key in scene_db:
+			# TODO expose flag to support overwriting
+			scene_db[key].merge(entry)
+		else:
+			scene_db[key] = entry
+
 
 ## add a packed scene (and children) to the scene_db
 func book_area(scene: PackedScene):
@@ -87,6 +165,16 @@ func book_area(scene: PackedScene):
 			db_data["instance_name"] = d["instance_name"]
 
 		scene_db[key] = db_data
+
+######################################################################
+# drop
+
+func drop_db():
+	Debug.warn("Dropping scene_db")
+	scene_db = {}
+
+######################################################################
+# update
 
 ## update relevant properties stored in the scene_db
 ## TODO help nodes register so they can update without area/path_name

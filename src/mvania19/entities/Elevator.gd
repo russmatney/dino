@@ -109,6 +109,7 @@ func list_elevators():
 	return []
 
 func list_areas():
+	# only returns areas with scene_file_path set
 	var areas = Hotel.query({"group": "mvania_areas",
 		"filter": func(area): return area.get("scene_file_path"),
 		})

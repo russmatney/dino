@@ -17,7 +17,7 @@ var entry :
 
 func entry_to_label(e):
 	var key = e["key"]
-	key = key.replace("/", " [color=crimson]/[/color] ")
+	key = key.replace("/", "\t[color=crimson]/[/color]\t")
 	return "[center]%s[/center]" % [key]
 
 func set_label():

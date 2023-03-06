@@ -6,26 +6,27 @@ extends Node
 
 # TODO can we gather all nodes of a type more generally?
 var area_scenes = [
-	"res://src/mvania19/maps/area01/Area01.tscn",
-	"res://src/mvania19/maps/area02/Area02.tscn",
-	"res://src/mvania19/maps/area03/Area03.tscn",
+	# "res://src/mvania19/maps/area01/Area01.tscn",
+	# "res://src/mvania19/maps/area02/Area02.tscn",
+	# "res://src/mvania19/maps/area03/Area03.tscn",
 	"res://src/mvania19/maps/area04/Area04.tscn",
-	"res://src/mvania19/maps/area05snow/Area05.tscn",
-	"res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn",
-	"res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn",
-	"res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn",
+	# "res://src/mvania19/maps/area05snow/Area05.tscn",
+	# "res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn",
+	# "res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn",
+	# "res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn",
 	]
 
 func register_areas():
 	Debug.pr("Checking area data into Hotel")
 
 	for sfp in area_scenes:
+		Hotel.book(sfp)
 		# TODO this seems gross! how else can i get the name and sfp?
-		var area = load(sfp)
-		var area_data = Util.packed_scene_data(area)
-		var area_name = area_data[^"."]["name"]
-		Hotel.book_area(area)
-		Hotel.update(area_name, "", {"scene_file_path": sfp})
+		# var area = load(sfp)
+		# var area_data = Util.packed_scene_data(area)
+		# var area_name = area_data[^"."]["name"]
+		# Hotel.book_area(area)
+		# Hotel.update(area_name, "", {"scene_file_path": sfp})
 
 	var areas = Hotel.query({"group": "mvania_areas"})
 

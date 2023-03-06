@@ -25,6 +25,11 @@ func _on_reload_plugin_button_pressed():
 	else:
 		list_entries()
 
+func _on_rebuild_db_button_pressed():
+	Hotel.drop_db()
+	MvaniaGame.register_areas()
+	list_entries()
+
 #######################################################################
 # option buttons
 
@@ -78,8 +83,8 @@ func list_entries():
 		ch.queue_free()
 
 	for e in entries:
-		if not e["area_name"] in area_names:
-			area_names.append(e["area_name"])
+		if "mvania_areas" in e.get("groups", []) and "name" in e:
+			area_names.append(e["name"])
 		if "groups" in e:
 			for g in e["groups"]:
 				if not g in groups:

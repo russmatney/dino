@@ -139,7 +139,7 @@ func to_pretty(msg, newlines=false):
 			if newlines and ct > 1:
 				tmp += "\n\t"
 			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
-			if last and k != last:
+			if last and str(k) != str(last):
 				tmp += color_wrap(", ", "crimson")
 		tmp += color_wrap(" }", "crimson")
 		return tmp

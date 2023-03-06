@@ -15,6 +15,7 @@ script = ExtResource("1_debfm")
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_fomfn")
 bbcode_enabled = true
+text = "[center]Area04	[color=crimson]/[/color]	01Elevator	[color=crimson]/[/color]	DemoTiles[/center]"
 fit_content = true
 scroll_active = false
 
@@ -22,5 +23,12 @@ scroll_active = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_fomfn")
 bbcode_enabled = true
+text = "[color=crimson]{ [/color]
+	[color=cadet_blue]\"path\"[/color]: [color=coral]^[/color]\".\"[color=crimson], [/color]
+	[color=cadet_blue]\"key\"[/color]: [color=dark_gray]Area04/01Elevator/DemoTiles[/color][color=crimson], [/color]
+	[color=cadet_blue]\"groups\"[/color]: [color=crimson][ [/color][color=crimson] ][/color][color=crimson], [/color]
+	[color=cadet_blue]\"name\"[/color]: [color=coral]&[/color]\"DemoTiles\"[color=crimson], [/color]
+	[color=cadet_blue]\"type\"[/color]: [color=coral]&[/color]\"TileMap\"[color=crimson], [/color]
+	[color=cadet_blue]\"instance_name\"[/color]: [color=coral]&[/color]\"DemoTiles\"[color=crimson] }[/color]"
 fit_content = true
 scroll_active = false

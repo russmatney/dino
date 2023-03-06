@@ -26,8 +26,6 @@ script = ExtResource("2_jpp5s")
 position = Vector2(40, 0)
 
 [node name="Elevator" parent="01Entrance" instance=ExtResource("4_fmddr")]
-destination_area_str = "res://src/mvania19/maps/area01/Area01.tscn"
-destination_elevator_path = "./12WorldHub/ToSnow"
 dest_elevators = null
 
 [node name="SnowTiles" parent="01Entrance" instance=ExtResource("5_do5d3")]
@@ -89,8 +87,6 @@ position = Vector2(8, 0)
 
 [node name="Elevator4" parent="04SmallRoom" instance=ExtResource("4_fmddr")]
 position = Vector2(48, 16)
-destination_area_str = "res://src/mvania19/maps/area05snow/Area05.tscn"
-destination_elevator_path = "./05LargeRoom/Elevator5"
 dest_elevators = null
 
 [node name="05LargeRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
@@ -107,6 +103,4 @@ position = Vector2(-32, 24)
 
 [node name="Elevator5" parent="05LargeRoom" instance=ExtResource("4_fmddr")]
 position = Vector2(-104, 24)
-destination_area_str = "res://src/mvania19/maps/area05snow/Area05.tscn"
-destination_elevator_path = "./04SmallRoom/Elevator4"
 dest_elevators = null
