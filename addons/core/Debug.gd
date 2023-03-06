@@ -87,6 +87,7 @@ func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg
 		label_id = callsite_to_label_id(call_site)
 	else:
 		label_id = "NONE"
+
 	debug_label_update.emit(label_id, msg_array, call_site)
 
 

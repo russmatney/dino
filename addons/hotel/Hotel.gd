@@ -88,10 +88,13 @@ func book_area(scene: PackedScene):
 
 		scene_db[key] = db_data
 
+		Debug.prn(key, db_data)
+		Debug.debug_label(key, db_data)
+
 ## update relevant properties stored in the scene_db
 ## TODO help nodes register so they can update without area/path_name
 func update(area_name: String, path: String = "", update: Dictionary = {}):
-	Debug.pr("updating", area_name, path)
+	Debug.pr("Update:", area_name, path)
 	# TODO minimize updates?
 	# Debug.pr("updating", area_name, path, update)
 	var key = db_key(area_name, path)
