@@ -144,15 +144,21 @@ func to_pretty(msg, newlines=false):
 	else:
 		return str(msg)
 
-func to_printable(msgs, stack, newlines=false):
+func to_printable(msgs, stack, newlines=false, pretty=true):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
 		var color = "aquamarine" if prefix[0] == "[" else "peru"
-		m += "[color=%s]%s[/color]" % [color, prefix]
+		if pretty:
+			m += "[color=%s]%s[/color]" % [color, prefix]
+		else:
+			m += prefix
 	for msg in msgs:
 		# add a space between msgs
-		m += to_pretty(msg, newlines) + " "
+		if pretty:
+			m += to_pretty(msg, newlines) + " "
+		else:
+			m += msg + " "
 	return m
 
 func pr(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
@@ -170,11 +176,11 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 func warn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-	var m = to_printable(msgs, get_stack(), true)
+	var m = to_printable(msgs, get_stack(), true, false)
 	push_warning(m)
 
 func err(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-	var m = to_printable(msgs, get_stack(), true)
+	var m = to_printable(msgs, get_stack(), true, false)
 	push_error(m)
