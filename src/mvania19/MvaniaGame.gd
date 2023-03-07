@@ -3,16 +3,23 @@ extends Node
 
 ###########################################################
 
-const area_scenes = [
-	"res://src/mvania19/maps/area01/Area01.tscn",
-	"res://src/mvania19/maps/area02/Area02.tscn",
-	"res://src/mvania19/maps/area03/Area03.tscn",
-	"res://src/mvania19/maps/area04/Area04.tscn",
-	"res://src/mvania19/maps/area05snow/Area05.tscn",
-	"res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn",
-	"res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn",
-	"res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn",
+const demoland_area_scenes = [
+	"res://src/mvania19/maps/demoland/area01/Area01.tscn",
+	"res://src/mvania19/maps/demoland/area02/Area02.tscn",
+	"res://src/mvania19/maps/demoland/area03/Area03.tscn",
+	"res://src/mvania19/maps/demoland/area04/Area04.tscn",
+	"res://src/mvania19/maps/demoland/area05snow/Area05.tscn",
+	"res://src/mvania19/maps/demoland/area06purplestone/Area06PurpleStone.tscn",
+	"res://src/mvania19/maps/demoland/area07grassycave/Area07GrassyCave.tscn",
+	"res://src/mvania19/maps/demoland/area08allthethings/Area08AllTheThings.tscn",
 	]
+
+const hatbot_area_scenes = [
+	"res://src/mvania19/maps/hatbot/GrassyCaves.tscn",
+	]
+
+var area_scenes = demoland_area_scenes
+# var area_scenes = hatbot_area_scenes
 
 func register_areas():
 	Debug.pr("Checking area data into Hotel")

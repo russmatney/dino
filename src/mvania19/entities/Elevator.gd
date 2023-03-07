@@ -28,7 +28,10 @@ func restore():
 		pass
 
 func hotel_data():
-	return {}
+	return {
+		destination_area_name=destination_area_name,
+		destination_elevator_path=destination_elevator_path,
+		}
 
 var travel_dest
 

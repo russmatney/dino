@@ -78,8 +78,8 @@ func restore():
 		global_position = data.get("position", global_position)
 		health = data.get("health", initial_health)
 
-	if health <= 0:
-		machine.transit("Dead", {ignore_side_effects=true})
+		if health <= 0:
+			machine.transit("Dead", {ignore_side_effects=true})
 
 
 ########################################################
