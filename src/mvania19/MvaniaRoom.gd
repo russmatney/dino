@@ -156,10 +156,6 @@ func _ready():
 	ensure_room_box()
 	ensure_cam_points()
 
-	# var p = get_parent()
-	# if p.is_in_group("mvania_areas"):
-	# 	area = p
-
 	MvaniaGame.call_deferred("maybe_spawn_player")
 
 	lights = Util.get_children_in_group(self, "lights")

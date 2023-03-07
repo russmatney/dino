@@ -60,7 +60,6 @@ func book(packed_scene_or_path: Variant):
 	book_data(data)
 
 func book_data(data: Dictionary, parents = null):
-	# TODO opt-in with group or duck-typing?
 	var scene_name = data[^"."]["name"]
 
 	if parents == null:
@@ -97,13 +96,25 @@ func book_data(data: Dictionary, parents = null):
 			if "properties" in inst and "script" in inst["properties"] and not "script_path" in entry:
 				entry["script_path"] = inst["properties"]["script"].resource_path
 
-			# TODO update/add to this dict before recursing?
-			# is it ok for this to book first?
+			# recursively book child instances
+			# consider opt-in for recursing via groups
 			ps.append(entry)
 			book_data(d["instance"], ps)
 
+		# set area and room names on children
+		for p in ps:
+			if "mvania_areas" in p["groups"]:
+				entry["area_name"] = p["name"]
+
+		for p in ps:
+			if "mvania_rooms" in p["groups"]:
+				if entry["area_name"]:
+					entry["room_name"] = str(entry["area_name"], "/", p["name"])
+				else:
+					# probably not a real case, but might help testing rooms stay consistent?
+					entry["room_name"] = p["name"]
+
 		if key in scene_db:
-			# TODO expose flag to support overwriting
 			scene_db[key].merge(entry)
 		else:
 			scene_db[key] = entry
@@ -111,10 +122,8 @@ func book_data(data: Dictionary, parents = null):
 ######################################################################
 # checkin
 
-## check-in some data that wasn't in the packed_scene
+## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
-	# TODO minimize updates by comparing key/vals?
-
 	if data == null:
 		if node.has_method("hotel_data"):
 			data = node.hotel_data()
@@ -123,7 +132,6 @@ func check_in(node: Node, data=null):
 
 	var key = node_to_entry_key(node)
 	if key in scene_db:
-		Debug.pr("Checking in data", node, data)
 		scene_db[key].merge(data, true)
 	else:
 		Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
@@ -143,15 +151,17 @@ func check_out(node: Node):
 	else:
 		Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
-## General access to the scene_db
+## Flexible access to the scene_db vals
 func query(opts={}):
 	var vals = scene_db.values()
 	if "group" in opts:
 		vals = vals.filter(func (s_dict): return opts["group"] in s_dict["groups"])
 
-	# TODO make this work
 	if "area_name" in opts:
 		vals = vals.filter(func (s_dict): return opts["area_name"] == s_dict["area_name"])
+
+	if "room_name" in opts:
+		vals = vals.filter(func (s_dict): return opts["room_name"] == s_dict["room_name"])
 
 	if "filter" in opts:
 		vals = vals.filter(opts["filter"])
@@ -162,13 +172,3 @@ func first():
 	var entries = query()
 	if len(entries) > 0:
 		return entries[0]
-
-## grab a list of scene data dicts that belong to the passed group
-func check_out_for_group(group: String):
-	return scene_db.values().filter(func (s_dict): return group in s_dict["groups"])
-
-## grab a list of scene data dicts that belong to the passed group
-func check_out_for_area_and_group(area_name: String, group: String):
-	return scene_db.values()\
-		.filter(func (s_dict): return area_name == s_dict["area_name"])\
-		.filter(func (s_dict): return group in s_dict["groups"])
