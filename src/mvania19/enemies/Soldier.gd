@@ -9,13 +9,13 @@ extends CharacterBody2D
 # ready
 
 func _ready():
-	restore()
-	Hotel.check_in(self)
-
 	if not Engine.is_editor_hint():
 		machine.start()
 		machine.transitioned.connect(_on_transitioned)
 		machine.transit("Run", {dir=Vector2.LEFT})
+
+	restore()
+	Hotel.check_in(self)
 
 	anim.animation_finished.connect(_on_animation_finished)
 
@@ -66,7 +66,7 @@ func _on_animation_finished():
 func hotel_data():
 	var d = {
 		"name": name,
-		"position": position,
+		"position": global_position,
 		}
 	if health != null:
 		d["health"] = health
@@ -75,7 +75,7 @@ func hotel_data():
 func restore():
 	var data = Hotel.check_out(self)
 	if not data == null:
-		position = data.get("position", global_position)
+		global_position = data.get("position", global_position)
 		health = data.get("health", initial_health)
 
 	if health <= 0:
