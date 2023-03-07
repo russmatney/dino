@@ -55,24 +55,12 @@ func to_entry_key(data, parents=[]):
 # write
 
 ## add a packed scene (and children) to the scene_db. Accepts PackedScene or a path to one (sfp).
-func book(scene: Variant):
-	var sfp
-	if scene is String:
-		sfp = scene
-		scene = load(sfp)
-	elif scene is PackedScene:
-		# TODO can we get scene_file_path from an already loaded packed scene?
-		sfp = null
-
-	var data = Util.packed_scene_data(scene)
-
-	# TODO ugh!
-	if sfp:
-		data[^"."]["scene_file_path"] = sfp
-
+func book(packed_scene_or_path: Variant):
+	var data = Util.packed_scene_data(packed_scene_or_path)
 	book_data(data)
 
 func book_data(data: Dictionary, parents = null):
+	# TODO opt-in with group or duck-typing?
 	var scene_name = data[^"."]["name"]
 
 	if parents == null:
@@ -91,10 +79,6 @@ func book_data(data: Dictionary, parents = null):
 			name=d.get("name"),
 			type=d.get("type"),
 			})
-
-		# TODO ugh!
-		if d.get("scene_file_path"):
-			entry["scene_file_path"] = scene_file_path
 
 		if "script" in entry:
 			entry["script_path"] = entry["script"].resource_path

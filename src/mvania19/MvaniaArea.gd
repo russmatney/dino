@@ -28,7 +28,7 @@ func draw_room_outline(room: MvaniaRoom):
 # Hotel data
 
 func hotel_data():
-	return {}
+	return {scene_file_path=scene_file_path}
 
 func restore():
 	var _data = Hotel.check_out(self)
@@ -77,20 +77,13 @@ func _ready():
 		MvaniaGame.register_areas()
 
 	Hotel.book(self.scene_file_path)
-
-	# TODO consider existing/saved data
 	restore()
 	Hotel.check_in(self)
-
-	call_deferred("maybe_spawn_player")
-
-# TODO fix in Mvania game and remove here
-func maybe_spawn_player():
 	if not Engine.is_editor_hint():
-		await get_tree().create_timer(0.5).timeout
-		if MvaniaGame.player == null:
-			MvaniaGame.current_area = self
-			MvaniaGame.spawn_player()
+		if MvaniaGame.current_area != self:
+			MvaniaGame.set_current_area(self)
+
+	MvaniaGame.call_deferred("maybe_spawn_player")
 
 ###########################################################
 # draw

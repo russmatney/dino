@@ -13,8 +13,8 @@ var actions = [
 	]
 
 func _ready():
-	# TODO validate elevator destinations via MvaniaGame startup
-	# there we can load all the areas and make sure elevator destinations can be loaded
+	restore()
+	Hotel.check_in(self)
 
 	action_area.register_actions(actions, self)
 	anim.animation_finished.connect(_on_anim_finished)
@@ -23,6 +23,14 @@ func _ready():
 
 	z_index = 10
 	anim.play("opening")
+
+func restore():
+	var data = Hotel.check_out(self)
+	if not data == null:
+		pass
+
+func hotel_data():
+	return {}
 
 var travel_to_area
 
@@ -63,6 +71,7 @@ func travel():
 			destination_area_str = ""
 			destination_elevator_path = ""
 
+# TODO move to just an area name, not a path
 # TODO rename, this is now the full-path
 var destination_area_str: String :
 	set(v):

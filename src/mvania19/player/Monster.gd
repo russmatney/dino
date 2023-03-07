@@ -6,8 +6,6 @@ extends CharacterBody2D
 @onready var action_hint = $ActionHint
 @onready var action_detector = $ActionDetector
 
-var player_data
-
 var og_position
 var MAX_Y = 5000
 
@@ -23,15 +21,19 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
-	if player_data and len(player_data):
-		Debug.prn("player_data: ", player_data)
-		# TODO merge persisted data
+	restore()
+	Hotel.check_in(self)
 
 	action_detector.setup(self, can_execute_any_actions, action_hint)
-
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
 
-	health = initial_health
+func restore():
+	var data = Hotel.check_out(self)
+	if not data == null:
+		health = data.get("health", initial_health)
+
+func hotel_data():
+	return {health=health}
 
 
 func can_execute_any_actions():
@@ -169,7 +171,7 @@ func face_left():
 ########################################################
 # health
 
-var initial_health = 3
+var initial_health = 6
 var health
 
 func take_hit(opts={}):

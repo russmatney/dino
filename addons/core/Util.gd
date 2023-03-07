@@ -90,8 +90,12 @@ func get_all_parents(node: Node, parents=[]):
 		return parents
 
 
-# TODO update to use path as key
-func packed_scene_data(scene, include_properties=false):
+func packed_scene_data(packed_scene_or_path, include_properties=false):
+	var scene
+	if packed_scene_or_path is String:
+		scene = load(packed_scene_or_path)
+	elif packed_scene_or_path is PackedScene:
+		scene = packed_scene_or_path
 	var state = scene.get_state()
 	var by_path = {}
 	for node_idx in state.get_node_count():
