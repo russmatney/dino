@@ -35,7 +35,6 @@ func restore():
 func hotel_data():
 	return {health=health}
 
-
 func can_execute_any_actions():
 	return move_target == null
 
@@ -179,4 +178,5 @@ func take_hit(opts={}):
 	var direction = opts.get("direction", Vector2.RIGHT)
 
 	health -= damage
+	Hotel.check_in(self)
 	machine.transit("KnockedBack", {"direction": direction})
