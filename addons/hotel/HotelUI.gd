@@ -9,6 +9,7 @@ func _ready():
 	reset_option_buttons()
 
 	area_option_button.item_selected.connect(_on_area_selected)
+	room_option_button.item_selected.connect(_on_room_selected)
 	group_option_button.item_selected.connect(_on_group_selected)
 
 #######################################################################
@@ -101,9 +102,6 @@ const entry_label_scene = preload("res://addons/hotel/EntryLabel.tscn")
 func list_entries():
 	var entries = Hotel.query(query)
 
-	# reset room names so they are filtered by selected area or group
-	room_names = []
-
 	for ch in db_entries.get_children():
 		ch.queue_free()
 
@@ -125,6 +123,10 @@ func list_entries():
 			lbl.initial_selected = true
 
 		db_entries.call_deferred("add_child", lbl)
+
+	area_names.sort()
+	room_names.sort()
+	groups.sort()
 
 
 #######################################################################

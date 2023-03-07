@@ -59,7 +59,7 @@ func book(packed_scene_or_path: Variant):
 	var data = Util.packed_scene_data(packed_scene_or_path)
 	book_data(data)
 
-func book_data(data: Dictionary, parents = null):
+func book_data(data: Dictionary, parents = null, last_room = null):
 	var scene_name = data[^"."]["name"]
 
 	if parents == null:
@@ -69,50 +69,66 @@ func book_data(data: Dictionary, parents = null):
 		var ps = parents.duplicate()
 		var d = data.get(path)
 		var key = to_entry_key(d, ps)
+
+		# basic properties
 		var entry = d.get("properties", {})
 
+		# basic metadata
 		entry.merge({
 			path=path,
 			key=key,
-			groups=d.get("groups", []),
 			name=d.get("name"),
 			type=d.get("type"),
 			})
 
+		# instance properties
+		if "instance" in d:
+			var inst = d["instance"][^"."]
+
+			for k in inst.get("properties", {}).keys():
+				if not k in entry:
+					entry[k] = inst["properties"][k]
+
+		# groups
+		entry["groups"] = d.get("groups", [])
+		if "instance" in d:
+			var inst = d["instance"][^"."]
+			entry["groups"].append_array(inst["groups"])
+
+		# update last_room based on groups
+		if "mvania_rooms" in entry["groups"]:
+			last_room = entry
+
+		# set script data
 		if "script" in entry:
 			entry["script_path"] = entry["script"].resource_path
+		if "instance" in d:
+			var inst = d["instance"][^"."]
+			if "properties" in inst and "script" in inst["properties"] and not "script_path" in entry:
+				entry["script_path"] = inst["properties"]["script"].resource_path
 
+		# instance name
 		if "instance_name" in d:
 			entry["instance_name"] = d["instance_name"]
 
-		# set area and room names before passing children
+		# set area and room names via parents
 		for p in ps:
 			if "mvania_areas" in p["groups"]:
 				entry["area_name"] = p["name"]
 
 		for p in ps:
 			if "mvania_rooms" in p["groups"]:
-				if entry["area_name"]:
-					entry["room_name"] = str(entry["area_name"], "/", p["name"])
-				else:
-					# probably not a real case, but might help testing rooms stay consistent?
-					entry["room_name"] = p["name"]
+				entry["room_name"] = str(p["area_name"], "/", p["name"])
 
+		# set room name for non-room-instance children (which are flattened here)
+		if not "room_name" in entry and last_room != null:
+			if key.contains(last_room["key"]):
+				entry["room_name"] = last_room["key"]
+
+		# recurse into instances
 		if "instance" in d:
-			var inst = d["instance"][^"."]
-			entry["groups"].append_array(inst["groups"])
-
-			for k in inst.get("properties", {}).keys():
-				if not k in entry:
-					entry[k] = inst["properties"][k]
-
-			if "properties" in inst and "script" in inst["properties"] and not "script_path" in entry:
-				entry["script_path"] = inst["properties"]["script"].resource_path
-
-			# recursively book child instances
-			# consider opt-in for recursing via groups
 			ps.append(entry)
-			book_data(d["instance"], ps)
+			book_data(d["instance"], ps, last_room)
 
 		if key in scene_db:
 			scene_db[key].merge(entry)
@@ -152,19 +168,20 @@ func check_out(node: Node):
 		Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
 ## Flexible access to the scene_db vals
-func query(opts={}):
+func query(q={}):
 	var vals = scene_db.values()
-	if "group" in opts:
-		vals = vals.filter(func (s_dict): return opts["group"] in s_dict["groups"])
+	if "group" in q:
+		vals = vals.filter(func (s_dict): return q["group"] in s_dict.get("groups", []))
 
-	if "area_name" in opts:
-		vals = vals.filter(func (s_dict): return opts["area_name"] == s_dict["area_name"])
+	if "area_name" in q:
+		vals = vals.filter(func (s_dict): return q["area_name"] == s_dict.get("area_name"))
 
-	if "room_name" in opts:
-		vals = vals.filter(func (s_dict): return opts["room_name"] == s_dict["room_name"])
+	if "room_name" in q:
+		Debug.prn("filtering entries by room name: ", q)
+		vals = vals.filter(func (s_dict): return q["room_name"] == s_dict.get("room_name"))
 
-	if "filter" in opts:
-		vals = vals.filter(opts["filter"])
+	if "filter" in q:
+		vals = vals.filter(q["filter"])
 	return vals
 
 ## mostly a debug helper, returns the first db entry
