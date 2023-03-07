@@ -98,22 +98,19 @@ func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		visited = true
 		# TODO restore sound on room visit
-		if area:
-			Hotel.update(self, to_room_data(MvaniaGame.player))
+		Hotel.check_in(self, hotel_data(MvaniaGame.player))
 		MvaniaGame.update_rooms()
 		body.stamp({"scale": 2.0, "ttl": 1.0})
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
-		if area:
-			Hotel.update(self, to_room_data(MvaniaGame.player))
+		Hotel.check_in(self, hotel_data(MvaniaGame.player))
 		MvaniaGame.update_rooms()
 
 ###########################################
-# store/retrieve data from store
+# Hotel store/retrieve data
 
-# TODO write a static/packed scene version
-func to_room_data(player=null):
+func hotel_data(player=null):
 	var rect = used_rect()
 	var data = {
 		"name": name,
@@ -123,15 +120,6 @@ func to_room_data(player=null):
 		"visited": visited,
 		}
 
-	# TODO unnest this data, update in hotel w/ flattened keys
-	var ents = get_children()\
-		.filter(func(c): return c.has_method("to_data") and c.has_method("restore"))\
-		.map(func(c): return [c.name, c.to_data()])
-	var ent_map = {}
-	for e in ents:
-		ent_map[e[0]] = e[1]
-	if len(ents) > 0:
-		data["entities"] = ent_map
 	if player:
 		var r = Rect2()
 		r.position = rect.position + position
@@ -139,7 +127,10 @@ func to_room_data(player=null):
 		data["has_player"] = r.has_point(player.global_position)
 	return data
 
-var area
+func restore():
+	var data = Hotel.check_out(self)
+	if data != null:
+		room_data = data
 
 var room_data : Dictionary :
 	set(data):
@@ -149,38 +140,25 @@ var room_data : Dictionary :
 				visited = room_data["visited"]
 				_on_paused() if paused else _on_unpaused()
 
-		if "entities" in room_data:
-			var ch_by_name = Util.get_children_by_name(self)
-			for ent_key in room_data["entities"].keys():
-				var ent_data = room_data["entities"][ent_key]
-				var ent = ch_by_name[ent_key]
-				if ent.has_method("restore"):
-					ent.restore(ent_data)
-
 ###########################################################
 # enter tree
 
 func _enter_tree():
-	# required for area db to pick this up
 	add_to_group("mvania_rooms", true)
 
 ###########################################
 # ready
 
 func _ready():
+	restore()
+	Hotel.check_in(self)
+
 	ensure_room_box()
 	ensure_cam_points()
 
-	var p = get_parent()
-	if p.is_in_group("mvania_areas"):
-		area = p
-
-	# TODO hotel register
-
-	# if area:
-	# 	# TODO may need to check in first? if the area hasn't?
-	# 	Hotel.update(area.name, name, to_room_data())
-		# Debug.pr(area.name, name, Hotel.check_out(area.name, name))
+	# var p = get_parent()
+	# if p.is_in_group("mvania_areas"):
+	# 	area = p
 
 	MvaniaGame.call_deferred("maybe_spawn_player")
 

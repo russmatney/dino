@@ -9,8 +9,8 @@ extends CharacterBody2D
 # ready
 
 func _ready():
-	# TODO hotel register
-	# TODO pull/set data from hotel db
+	restore()
+
 	health = initial_health
 
 	if not Engine.is_editor_hint():
@@ -62,26 +62,28 @@ func _on_animation_finished():
 		machine.transit("Idle")
 
 ########################################################
-# to_data, restore
+# hotel data
 
-func to_data():
+func hotel_data():
 	var d = {
 		"name": name,
 		"position": position,
 		}
 	if health != null:
 		d["health"] = health
-	if machine and machine.state and machine.state.name:
-		d["state"] = machine.state.name
+	# if machine and machine.state and machine.state.name:
+	# 	d["state"] = machine.state.name
 	return d
 
-func restore(data):
-	if "position" in data:
-		position = data["position"]
-	if "health" in data:
-		health = data["health"]
-	if "state" in data:
-		machine.transit(data["state"], {ignore_side_effects=true})
+func restore():
+	var data = Hotel.check_out(self)
+	if not data == null:
+		if "position" in data:
+			position = data["position"]
+		if "health" in data:
+			health = data["health"]
+	# if "state" in data:
+	# 	machine.transit(data["state"], {ignore_side_effects=true})
 
 
 ########################################################
@@ -124,4 +126,5 @@ func take_hit(opts={}):
 	var direction = opts.get("direction", Vector2.RIGHT)
 
 	health -= damage
+	Hotel.check_in(self)
 	machine.transit("KnockedBack", {"direction": direction})

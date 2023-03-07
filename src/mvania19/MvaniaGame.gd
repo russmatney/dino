@@ -6,14 +6,14 @@ extends Node
 
 # TODO can we gather all nodes of a type more generally?
 var area_scenes = [
-	# "res://src/mvania19/maps/area01/Area01.tscn",
-	# "res://src/mvania19/maps/area02/Area02.tscn",
-	# "res://src/mvania19/maps/area03/Area03.tscn",
+	"res://src/mvania19/maps/area01/Area01.tscn",
+	"res://src/mvania19/maps/area02/Area02.tscn",
+	"res://src/mvania19/maps/area03/Area03.tscn",
 	"res://src/mvania19/maps/area04/Area04.tscn",
-	# "res://src/mvania19/maps/area05snow/Area05.tscn",
-	# "res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn",
-	# "res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn",
-	# "res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn",
+	"res://src/mvania19/maps/area05snow/Area05.tscn",
+	"res://src/mvania19/maps/area06purplestone/Area06PurpleStone.tscn",
+	"res://src/mvania19/maps/area07grassycave/Area07GrassyCave.tscn",
+	"res://src/mvania19/maps/area08allthethings/Area08AllTheThings.tscn",
 	]
 
 func register_areas():
@@ -26,8 +26,10 @@ func register_areas():
 
 	Debug.pr("recreated Hotel.scene_db with", len(areas), "areas.")
 
-# TODO validation apis
-# e.g. are all the elevator connections valid?
+func validate():
+	# TODO validation apis
+	# e.g. are all the elevator connections valid?
+	pass
 
 ###########################################################
 # ready
@@ -35,6 +37,7 @@ func register_areas():
 func _ready():
 	# TODO maybe every time? was formely only when no areas
 	register_areas()
+	validate()
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
@@ -59,9 +62,6 @@ func restart_game():
 func load_area(area_scene, spawn_node_path=null):
 	current_area = load(area_scene).instantiate()
 	current_area_name = current_area.name
-
-	# var area_data = area_db[current_area_name]
-	# current_area.set_area_data(area_data)
 
 	if spawn_node_path:
 		current_area.set_spawn_node(spawn_node_path)
@@ -104,7 +104,6 @@ func find_current_area():
 	for c in get_tree().get_root().get_children():
 		if c is MvaniaArea:
 			current_area = c
-			Debug.prn("[WARN] manually setting current_area")
 			Debug.warn("manually setting current_area")
 
 func _on_player_found(p):

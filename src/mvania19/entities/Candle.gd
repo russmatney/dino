@@ -19,13 +19,11 @@ var actions = [
 # ready
 
 func _ready():
-
-	# TODO hotel register
-
 	og_scale = light.texture_scale
 	og_energy = light.energy
 
-	update_light()
+	restore()
+
 	$ColorRect.set_visible(false)
 
 	action_area.register_actions(actions, self)
@@ -33,14 +31,13 @@ func _ready():
 #################################################################
 # persist/restore
 
-func to_data():
-	return {
-		"name": name,
-		"lit": lit,
-		}
+func hotel_data():
+	return {lit=lit}
 
-func restore(data):
-	lit = data["lit"]
+func restore():
+	var data = Hotel.check_out(self)
+	if not data == null and "lit" in data:
+		lit = data["lit"]
 	update_light()
 
 #################################################################
@@ -65,12 +62,14 @@ func light_up():
 	light.set_enabled(true)
 	particles.set_emitting(true)
 	light_tween()
+	Hotel.check_in(self)
 
 func put_out():
 	lit = false
 	anim.play("off")
 	light.set_enabled(false)
 	particles.set_emitting(false)
+	Hotel.check_in(self)
 
 #################################################################
 # light tween

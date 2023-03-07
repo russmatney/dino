@@ -25,13 +25,14 @@ func draw_room_outline(room: MvaniaRoom):
 
 
 ###########################################################
-# set room data
+# Hotel data
 
-func init_room_data():
-	ensure_rooms()
-	Debug.pr("initing room data (NOT)", rooms)
-	for room in rooms:
-		room.room_data = Hotel.check_out(room)
+func hotel_data():
+	return {}
+
+func restore():
+	var _data = Hotel.check_out(self)
+
 
 ###########################################################
 # spawn coords
@@ -72,14 +73,14 @@ func _enter_tree():
 func _ready():
 	pause_rooms()
 
-	# TODO hotel register
-
-	# checkin and update area data
-	# TODO consider existing/saved data
 	if Engine.is_editor_hint():
 		MvaniaGame.register_areas()
 
-	init_room_data()
+	Hotel.book(self.scene_file_path)
+
+	# TODO consider existing/saved data
+	restore()
+	Hotel.check_in(self)
 
 	call_deferred("maybe_spawn_player")
 

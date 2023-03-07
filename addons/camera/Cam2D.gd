@@ -148,8 +148,8 @@ func zoom_dir(dir, n_levels = null):
 	if zoom_level >= max_zoom_level or zoom_level <= min_zoom_level:
 		Debug.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
-	# TODO print helper with throttle/debounce
-	Debug.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
+	# TODO Debug throttle/debounce log option
+	# Debug.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		cam_mode.FOLLOW:

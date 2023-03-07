@@ -28,14 +28,11 @@ func drop_db():
 ######################################################################
 # key
 
-func db_key(area_name, path):
-	return str(area_name).path_join(str(path).replace(".", ""))
-
 func node_to_entry_key(node):
 	var parents = Util.get_all_parents(node)
-	Debug.pr("to entry key", node.name, parents)
+	# reverse so our join puts the furthest ancestor first
+	parents.reverse()
 	var key = to_entry_key({path=node.name}, parents)
-	Debug.pr("node to entry key", node, key)
 	return key
 
 ## converts the passed data dict and parents list into a path from area to the current scene
@@ -123,16 +120,22 @@ func book_data(data: Dictionary, parents = null):
 			scene_db[key] = entry
 
 ######################################################################
-# update
+# checkin
 
-## update relevant properties stored in the scene_db
-func update(node: Node, update: Dictionary = {}):
-	Debug.pr("Updating node:", node)
+## check-in some data that wasn't in the packed_scene
+func check_in(node: Node, data=null):
 	# TODO minimize updates by comparing key/vals?
+
+	if data == null:
+		if node.has_method("hotel_data"):
+			data = node.hotel_data()
+		else:
+			Debug.warn(node, "does not implement hotel_data()")
 
 	var key = node_to_entry_key(node)
 	if key in scene_db:
-		scene_db[key].merge(update, true)
+		Debug.pr("Checking in data", node, data)
+		scene_db[key].merge(data, true)
 	else:
 		Debug.warn("No entry in scene_db for node: ", node)
 

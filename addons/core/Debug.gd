@@ -170,7 +170,7 @@ func to_printable(msgs, stack=[], newlines=false, pretty=true):
 		if pretty:
 			m += to_pretty(msg, newlines) + " "
 		else:
-			m += msg + " "
+			m += str(msg) + " "
 	return m
 
 func pr(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
