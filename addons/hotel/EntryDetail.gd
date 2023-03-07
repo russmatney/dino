@@ -16,12 +16,16 @@ func entry_to_label(e):
 #######################################################################
 # ready
 
+signal deselected
+
 func _ready():
 	setup()
+	deselect.pressed.connect(func(): deselected.emit())
 
 
-@onready var entry_name = $EntryName
-@onready var data = $EntryData
+@onready var entry_name = $%EntryName
+@onready var deselect = $%Deselect
+@onready var data = $%EntryData
 
 func setup():
 	if entry and entry_name and data:

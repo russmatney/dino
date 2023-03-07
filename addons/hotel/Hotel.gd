@@ -85,6 +85,19 @@ func book_data(data: Dictionary, parents = null):
 		if "instance_name" in d:
 			entry["instance_name"] = d["instance_name"]
 
+		# set area and room names before passing children
+		for p in ps:
+			if "mvania_areas" in p["groups"]:
+				entry["area_name"] = p["name"]
+
+		for p in ps:
+			if "mvania_rooms" in p["groups"]:
+				if entry["area_name"]:
+					entry["room_name"] = str(entry["area_name"], "/", p["name"])
+				else:
+					# probably not a real case, but might help testing rooms stay consistent?
+					entry["room_name"] = p["name"]
+
 		if "instance" in d:
 			var inst = d["instance"][^"."]
 			entry["groups"].append_array(inst["groups"])
@@ -100,19 +113,6 @@ func book_data(data: Dictionary, parents = null):
 			# consider opt-in for recursing via groups
 			ps.append(entry)
 			book_data(d["instance"], ps)
-
-		# set area and room names on children
-		for p in ps:
-			if "mvania_areas" in p["groups"]:
-				entry["area_name"] = p["name"]
-
-		for p in ps:
-			if "mvania_rooms" in p["groups"]:
-				if entry["area_name"]:
-					entry["room_name"] = str(entry["area_name"], "/", p["name"])
-				else:
-					# probably not a real case, but might help testing rooms stay consistent?
-					entry["room_name"] = p["name"]
 
 		if key in scene_db:
 			scene_db[key].merge(entry)

@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+var initial_selected = false
+
 @onready var entry_name = $EntryName
 @onready var select_button = $SelectButton
 
@@ -36,6 +38,9 @@ signal select_toggled(selected: bool)
 func _on_select_button_pressed():
 	select_toggled.emit(select_button.button_pressed)
 
+func set_selected(selected):
+	select_button.set_pressed_no_signal(selected)
+
 #######################################################################
 # testing ui
 
@@ -55,4 +60,6 @@ func _on_select_button_pressed():
 # ready
 
 func _ready():
+	set_selected(initial_selected)
+
 	set_label()

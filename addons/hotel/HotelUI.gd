@@ -26,16 +26,22 @@ func _on_reload_plugin_button_pressed():
 		list_entries()
 
 func _on_rebuild_db_button_pressed():
+	Debug.prn(&"Rebuilding hotel db -----------------------------------")
 	Hotel.drop_db()
 	MvaniaGame.register_areas()
 	list_entries()
+	Debug.prn(&"Rebuilt hotel db --------------------------------------")
 
 #######################################################################
 # option buttons
 
+# consider drying up this pattern
+
 @onready var area_option_button = $%AreaOptionButton
+@onready var room_option_button = $%RoomOptionButton
 @onready var group_option_button = $%GroupOptionButton
 var area_names = []
+var room_names = []
 var groups = []
 
 var query = {}
@@ -47,6 +53,16 @@ func _on_area_selected(idx):
 		var area_name = area_names[idx]
 		if area_name:
 			query["area_name"] = area_name
+
+	list_entries()
+
+func _on_room_selected(idx):
+	if idx > len(room_names) - 1:
+		query.erase("room_name")
+	else:
+		var room_name = room_names[idx]
+		if room_name:
+			query["room_name"] = room_name
 
 	list_entries()
 
@@ -62,10 +78,16 @@ func _on_group_selected(idx):
 
 func reset_option_buttons():
 	area_option_button.clear()
-	group_option_button.clear()
 	for an in area_names:
 		area_option_button.add_item(an)
 	area_option_button.add_item("Clear")
+
+	room_option_button.clear()
+	for rn in room_names:
+		room_option_button.add_item(rn)
+	room_option_button.add_item("Clear")
+
+	group_option_button.clear()
 	for g in groups:
 		group_option_button.add_item(g)
 	group_option_button.add_item("Clear")
@@ -79,12 +101,17 @@ const entry_label_scene = preload("res://addons/hotel/EntryLabel.tscn")
 func list_entries():
 	var entries = Hotel.query(query)
 
+	# reset room names so they are filtered by selected area or group
+	room_names = []
+
 	for ch in db_entries.get_children():
 		ch.queue_free()
 
 	for e in entries:
-		if "mvania_areas" in e.get("groups", []) and "name" in e:
-			area_names.append(e["name"])
+		if "area_name" in e and e["area_name"] not in area_names:
+			area_names.append(e["area_name"])
+		if "room_name" in e and e["room_name"] not in room_names:
+			room_names.append(e["room_name"])
 		if "groups" in e:
 			for g in e["groups"]:
 				if not g in groups:
@@ -93,6 +120,10 @@ func list_entries():
 		var lbl = entry_label_scene.instantiate()
 		lbl.entry = e
 		lbl.select_toggled.connect(toggle_entry_details.bind(e))
+
+		if lbl.entry in selected_entries:
+			lbl.initial_selected = true
+
 		db_entries.call_deferred("add_child", lbl)
 
 
@@ -104,14 +135,21 @@ const entry_detail_scene = preload("res://addons/hotel/EntryDetail.tscn")
 
 var selected_entries = []
 
-func toggle_entry_details(_selected, entry):
-	if entry in selected_entries:
+func toggle_entry_details(selected, entry):
+	if not selected and entry in selected_entries:
 		selected_entries.erase(entry)
 		for ch in db_entry_details.get_children():
 			if ch.entry == entry:
 				ch.queue_free()
-	else:
+	elif selected:
 		selected_entries.append(entry)
 		var detail = entry_detail_scene.instantiate()
 		detail.entry = entry
+		detail.deselected.connect(deselect_entry.bind(entry))
 		db_entry_details.call_deferred("add_child", detail)
+
+func deselect_entry(entry):
+	toggle_entry_details(false, entry)
+	for lbl in db_entries.get_children():
+		if lbl.entry == entry:
+			lbl.set_selected(false)
