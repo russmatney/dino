@@ -15,11 +15,12 @@ const demoland_area_scenes = [
 	]
 
 const hatbot_area_scenes = [
-	"res://src/mvania19/maps/hatbot/GrassyCaves.tscn",
+	"res://src/mvania19/maps/hatbot/TheLandingSite.tscn",
+	"res://src/mvania19/maps/hatbot/Simulation.tscn",
 	]
 
-var area_scenes = demoland_area_scenes
-# var area_scenes = hatbot_area_scenes
+# var area_scenes = demoland_area_scenes
+var area_scenes = hatbot_area_scenes
 
 func register_areas():
 	Debug.pr("Checking area data into Hotel")
