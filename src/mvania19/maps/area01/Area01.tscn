@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="5_q3c5s"]
 [ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/05Crossroads.tscn" id="5_qqhvm"]
 [ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/06BossChamber.tscn" id="6_xa5kp"]
-[ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
+[ext_resource type="PackedScene" uid="uid://cyf2uh65lt0a4" path="res://src/mvania19/maps/area01/07ThirdSnowman.tscn" id="7_fl3ue"]
 [ext_resource type="PackedScene" path="res://src/mvania19/maps/area01/08DownTower.tscn" id="8_umldl"]
 [ext_resource type="PackedScene" uid="uid://dtji35uje4oqs" path="res://src/mvania19/maps/area01/09Elevator.tscn" id="9_pjsu1"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_oke76"]
@@ -85,7 +85,7 @@ position = Vector2(-152, -128)
 show_behind_parent = true
 position = Vector2(-200, -232)
 
-[node name="07ThirdSnowman" parent="." groups=["mvania_rooms"] instance=ExtResource("7_fl3ue")]
+[node name="07ThirdSnowman" parent="." instance=ExtResource("7_fl3ue")]
 show_behind_parent = true
 position = Vector2(-400, -224)
 
@@ -103,7 +103,7 @@ position = Vector2(-36, 8)
 position = Vector2(-60, 80)
 
 [node name="Soldier" parent="08DownTower" instance=ExtResource("14_l82es")]
-position = Vector2(-300, 104)
+position = Vector2(-64, 131)
 
 [node name="09Elevator" parent="." instance=ExtResource("9_pjsu1")]
 show_behind_parent = true

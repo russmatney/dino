@@ -55,7 +55,7 @@ position = Vector2(-4, -8)
 position = Vector2(84, -8)
 
 [node name="Soldier" parent="02Hallway" instance=ExtResource("6_obold")]
-position = Vector2(256, 0)
+position = Vector2(-40, 0)
 
 [node name="03Crossroads" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true

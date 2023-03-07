@@ -26,6 +26,7 @@ script = ExtResource("2_jpp5s")
 position = Vector2(40, 0)
 
 [node name="Elevator" parent="01Entrance" instance=ExtResource("4_fmddr")]
+position = Vector2(-8, 0)
 destination_area_name = "Area01"
 destination_elevator_path = "./12WorldHub/ToSnow"
 

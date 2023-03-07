@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://cyf2uh65lt0a4"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_6rlks"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_qj746"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="2_auvbu"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_6a8et"]
+[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="5_p1d73"]
 
-[node name="07ThirdSnowman" type="Node2D"]
+[node name="07ThirdSnowman" type="Node2D" groups=["mvania_rooms"]]
 script = ExtResource("1_6rlks")
 
 [node name="DemoTiles" parent="." instance=ExtResource("1_qj746")]
@@ -12,3 +14,24 @@ layer_0/tile_data = PackedInt32Array(-393224, 131073, 2, -327688, 1, 0, -262152,
 
 [node name="Soldier" parent="." instance=ExtResource("2_auvbu")]
 position = Vector2(-25, -9)
+
+[node name="RoomBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CamPOF" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_6a8et")]
+position = Vector2(-64, -56)
+script = ExtResource("5_p1d73")
+
+[node name="@CamPOF@304872" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_6a8et")]
+position = Vector2(64, 56)
+script = ExtResource("5_p1d73")
+
+[node name="@CamPOF@304873" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_6a8et")]
+position = Vector2(64, -56)
+script = ExtResource("5_p1d73")
+
+[node name="@CamPOF@304874" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_6a8et")]
+position = Vector2(-64, 56)
+script = ExtResource("5_p1d73")
