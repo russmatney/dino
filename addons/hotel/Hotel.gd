@@ -32,6 +32,10 @@ func node_to_entry_key(node):
 	var parents = Util.get_all_parents(node)
 	# reverse so our join puts the furthest ancestor first
 	parents.reverse()
+	if Engine.is_editor_hint():
+		# remove nonsensy intermediary parents in editor
+		parents = parents.filter(func(node):
+			return not node.name.begins_with("@@") and not node.name == "MainScreen")
 	var key = to_entry_key({path=node.name}, parents)
 	return key
 
@@ -62,8 +66,8 @@ func book(scene: Variant):
 
 	var data = Util.packed_scene_data(scene)
 
+	# TODO ugh!
 	if sfp:
-		# ugh!
 		data[^"."]["scene_file_path"] = sfp
 
 	book_data(data)
@@ -88,6 +92,7 @@ func book_data(data: Dictionary, parents = null):
 			type=d.get("type"),
 			})
 
+		# TODO ugh!
 		if d.get("scene_file_path"):
 			entry["scene_file_path"] = scene_file_path
 
@@ -137,7 +142,7 @@ func check_in(node: Node, data=null):
 		Debug.pr("Checking in data", node, data)
 		scene_db[key].merge(data, true)
 	else:
-		Debug.warn("No entry in scene_db for node: ", node)
+		Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 
 ######################################################################
 # read
@@ -152,7 +157,7 @@ func check_out(node: Node):
 	if key in scene_db:
 		return scene_db[key]
 	else:
-		Debug.warn("No entry in scene_db for node: ", node)
+		Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
 ## General access to the scene_db
 func query(opts={}):

@@ -10,8 +10,7 @@ extends CharacterBody2D
 
 func _ready():
 	restore()
-
-	health = initial_health
+	Hotel.check_in(self)
 
 	if not Engine.is_editor_hint():
 		machine.start()
@@ -71,19 +70,16 @@ func hotel_data():
 		}
 	if health != null:
 		d["health"] = health
-	# if machine and machine.state and machine.state.name:
-	# 	d["state"] = machine.state.name
 	return d
 
 func restore():
 	var data = Hotel.check_out(self)
 	if not data == null:
-		if "position" in data:
-			position = data["position"]
-		if "health" in data:
-			health = data["health"]
-	# if "state" in data:
-	# 	machine.transit(data["state"], {ignore_side_effects=true})
+		position = data.get("position", global_position)
+		health = data.get("health", initial_health)
+
+	if health <= 0:
+		machine.transit("Dead", {ignore_side_effects=true})
 
 
 ########################################################
