@@ -129,7 +129,7 @@ func update_rooms():
 	if not current_area:
 		find_current_area()
 
-	if not current_area:
+	if not current_area or not is_instance_valid(current_area):
 		Debug.warn("No current area, cannot update rooms")
 		return
 

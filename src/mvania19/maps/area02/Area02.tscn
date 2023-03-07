@@ -31,7 +31,7 @@ shadow_enabled = true
 [node name="ToArea01" parent="01Elevator" instance=ExtResource("6_2leqq")]
 position = Vector2(0, 8)
 destination_area_name = "Area01"
-destination_elevator_path = "./ToArea02"
+destination_elevator_path = "./09Elevator/ToArea02"
 
 [node name="02Hallway" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true

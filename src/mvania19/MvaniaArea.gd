@@ -41,8 +41,11 @@ func player_spawn_coords() -> Vector2:
 	ensure_rooms()
 
 	if spawn_node_path:
-		var spawn_node = self.get_node(spawn_node_path)
-		return spawn_node.global_position
+		var spawn_node = get_node(spawn_node_path)
+		if spawn_node:
+			return spawn_node.global_position
+		else:
+			Debug.warn("Invalid spawn_node_path", self, spawn_node_path)
 
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
 	for mark in markers:

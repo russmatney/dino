@@ -102,6 +102,14 @@ func list_area_names():
 	var areas = Hotel.query({"group": "mvania_areas"})
 	return ",".join(areas.map(func(area): return area.get("name")))
 
+func ele_path(entry):
+	var room = str(entry.get("room_name")).replace(destination_area_name, ".")
+	var path = str(entry.get("path"))
+	if path.contains(room):
+		return str(path)
+	else:
+		return str(room.path_join(path)).replace("/./", "/")
+
 func list_elevator_paths():
 	if destination_area_name == null or len(destination_area_name) == 0:
 		return ""
@@ -116,8 +124,7 @@ func list_elevator_paths():
 		})
 
 	if len(elevators) == 1:
-		Debug.pr("Area has only one elevator, setting it.", destination_area_name, str(elevators[0]["path"]))
-		destination_elevator_path = str(elevators[0]["path"])
+		destination_elevator_path = ele_path(elevators[0])
 		return destination_elevator_path
 
-	return ",".join(elevators.map(func(ele): return str(ele["path"])))
+	return ",".join(elevators.map(ele_path))
