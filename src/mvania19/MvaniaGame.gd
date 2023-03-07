@@ -2,7 +2,6 @@
 extends Node
 
 ###########################################################
-# area DB
 
 const area_scenes = [
 	"res://src/mvania19/maps/area01/Area01.tscn",
@@ -157,6 +156,9 @@ func update_rooms():
 func set_forced_movement_target(target_position):
 	player.move_to_target(target_position)
 
+func clear_forced_movement_target():
+	player.clear_move_target()
+
 
 ###########################################################
 # HUD
@@ -171,19 +173,19 @@ func _on_hud_ready():
 # Area travel
 
 func travel_to(dest_area_name, elevator_path):
-	Debug.pr("traveling to area", dest_area_name, elevator_path)
-
 	if current_area.name == dest_area_name:
-		# TODO handle if we're already in the right area
-		# (smooth camera movement)
-		Debug.pr("already in same area")
+		Debug.pr("Traveling in same area", dest_area_name, elevator_path)
+		current_area.set_spawn_node(elevator_path)
+		clear_forced_movement_target()
+		player.position = current_area.player_spawn_coords()
+		return
+
+	Debug.pr("Traveling to area", dest_area_name, elevator_path)
 
 	var dest_area = Hotel.first({group="mvania_areas", area_name=dest_area_name})
 	if dest_area == null:
 		Debug.warn("Can't travel_to(), no area found", dest_area_name, elevator_path)
 		return
-	else:
-		Debug.pr("traveling to", dest_area)
 
 	if not "scene_file_path" in dest_area:
 		Debug.warn("Can't travel_to(), no scene_file_path in area", dest_area)
