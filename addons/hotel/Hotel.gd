@@ -28,19 +28,37 @@ func drop_db():
 ######################################################################
 # key
 
+var root_groups = ["mvania_areas", "player"]
+
+func is_in_root_group(x):
+	if x is Dictionary:
+		if "groups" in x:
+			return root_groups.any(func(g): return g in x["groups"])
+	elif x.has_method("is_in_group"):
+		return root_groups.any(func(g): return x.is_in_group(g))
+
 func node_to_entry_key(node):
-	var parents = Util.get_all_parents(node)
-	# reverse so our join puts the furthest ancestor first
-	parents.reverse()
-	if Engine.is_editor_hint():
-		# remove nonsensy intermediary parents in editor
-		parents = parents.filter(func(node):
-			return not node.name.begins_with("@@") and not node.name == "MainScreen")
+	var parents
+	if is_in_root_group(node):
+		parents = []
+	else:
+		parents = Util.get_all_parents(node)
+		# reverse so our join puts the furthest ancestor first
+		parents.reverse()
+		if Engine.is_editor_hint():
+			# remove nonsensy intermediary parents in editor
+			parents = parents.filter(func(node):
+				return not node.name.begins_with("@@") and not node.name == "MainScreen")
 	var key = to_entry_key({path=node.name}, parents)
 	return key
 
 ## converts the passed data dict and parents list into a path from area to the current scene
 func to_entry_key(data, parents=[]):
+	var key = data.get("path")
+	if is_in_root_group(data):
+		parents = []
+		key = data.get("name")
+
 	var prefix = ""
 	for p in parents:
 		var parent_path = p.get("path")
@@ -48,7 +66,8 @@ func to_entry_key(data, parents=[]):
 			parent_path = p.get("name")
 		prefix = prefix.path_join(parent_path).replace(".", "").replace("//", "/")
 		prefix = prefix.trim_prefix("/").trim_suffix("/")
-	var key = prefix.path_join(str(data.get("path")).replace(".", ""))
+
+	key = prefix.path_join(str(key).replace(".", ""))
 	return key.trim_prefix("/").trim_suffix("/")
 
 ######################################################################
