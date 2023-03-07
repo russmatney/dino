@@ -138,6 +138,8 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 ######################################################################
 # checkin
 
+signal entry_updated(entry)
+
 ## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
 	if data == null:
@@ -149,6 +151,7 @@ func check_in(node: Node, data=null):
 	var key = node_to_entry_key(node)
 	if key in scene_db:
 		scene_db[key].merge(data, true)
+		entry_updated.emit(scene_db[key])
 	else:
 		Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 
@@ -177,7 +180,6 @@ func query(q={}):
 		vals = vals.filter(func (s_dict): return q["area_name"] == s_dict.get("area_name"))
 
 	if "room_name" in q:
-		Debug.prn("filtering entries by room name: ", q)
 		vals = vals.filter(func (s_dict): return q["room_name"] == s_dict.get("room_name"))
 
 	if "filter" in q:

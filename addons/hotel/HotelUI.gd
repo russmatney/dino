@@ -12,6 +12,9 @@ func _ready():
 	room_option_button.item_selected.connect(_on_room_selected)
 	group_option_button.item_selected.connect(_on_group_selected)
 
+	Hotel.entry_updated.connect(_on_entry_update)
+
+
 #######################################################################
 # reload button
 
@@ -155,3 +158,11 @@ func deselect_entry(entry):
 	for lbl in db_entries.get_children():
 		if lbl.entry == entry:
 			lbl.set_selected(false)
+
+#######################################################################
+# updates
+
+func _on_entry_update(entry):
+	for ed in db_entry_details.get_children():
+		if ed.entry["key"] == entry["key"]:
+			ed.entry = entry
