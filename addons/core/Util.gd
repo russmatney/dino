@@ -90,10 +90,15 @@ func get_all_parents(node: Node, parents=[]):
 		return parents
 
 
+# Returns a dict full of data for the passed packed_scene or path to one.
+# If a path is passed, the scene_file_path will be included as a property
+# on the first dictionary (the root of the packed scene).
 func packed_scene_data(packed_scene_or_path, include_properties=false):
 	var scene
+	var sfp
 	if packed_scene_or_path is String:
 		scene = load(packed_scene_or_path)
+		sfp = packed_scene_or_path
 	elif packed_scene_or_path is PackedScene:
 		scene = packed_scene_or_path
 	var state = scene.get_state()
@@ -121,8 +126,11 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 			var prop_name = state.get_node_property_name(node_idx, prop_idx)
 			var prop_val = state.get_node_property_value(node_idx, prop_idx)
 			properties[prop_name] = prop_val
-		if len(properties) > 0:
-			node_data["properties"] = properties
+		node_data["properties"] = properties
+
+		# hack to get scene_file_path on packed scene data
+		if sfp and node_data["path"] == ^".":
+			node_data["properties"]["scene_file_path"] = sfp
 
 		by_path[path] = node_data
 	return by_path

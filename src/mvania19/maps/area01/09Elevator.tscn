@@ -14,27 +14,38 @@ layer_0/tile_data = PackedInt32Array(-327687, 1, 0, -262151, 131073, 2, -196615,
 
 [node name="ToArea02" parent="." instance=ExtResource("3_0xsm0")]
 position = Vector2(0, 24)
-destination_area_str = "res://src/mvania19/maps/area02/Area02.tscn"
+destination_area_name = "Area02"
 destination_elevator_path = "./01Elevator/ToArea01"
-dest_elevators = null
+
+[node name="CamPOF" parent="." groups=["auto_pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(-56, -48)
+
+[node name="@CamPOF@56467" parent="." groups=["auto_pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(56, 56)
+
+[node name="@CamPOF@56468" parent="." groups=["auto_pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(56, -48)
+
+[node name="@CamPOF@56469" parent="." groups=["auto_pofs"] instance=ExtResource("4_0mkwh")]
+position = Vector2(-56, 56)
 
 [node name="RoomBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CamPOF" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+[node name="@CamPOF@240938" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
 position = Vector2(-56, -48)
 script = ExtResource("5_0dxrk")
 
-[node name="@CamPOF@56467" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+[node name="@CamPOF@240939" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
 position = Vector2(56, 56)
 script = ExtResource("5_0dxrk")
 
-[node name="@CamPOF@56468" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+[node name="@CamPOF@240940" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
 position = Vector2(56, -48)
 script = ExtResource("5_0dxrk")
 
-[node name="@CamPOF@56469" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
+[node name="@CamPOF@240941" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("4_0mkwh")]
 position = Vector2(-56, 56)
 script = ExtResource("5_0dxrk")

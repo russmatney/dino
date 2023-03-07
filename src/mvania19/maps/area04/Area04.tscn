@@ -20,9 +20,8 @@ layer_0/tile_data = PackedInt32Array(-458760, 1, 0, -393224, 1, 2, -327688, 1310
 
 [node name="ToArea02" parent="01Elevator" instance=ExtResource("4_7oqef")]
 position = Vector2(-24, 32)
-destination_area_str = "res://src/mvania19/maps/area02/Area02.tscn"
+destination_area_name = "Area02"
 destination_elevator_path = "./06SomeOtherRoom/ToArea04"
-dest_elevators = null
 
 [node name="Candle2" parent="01Elevator" instance=ExtResource("5_vnpuv")]
 position = Vector2(32, 32)

@@ -121,7 +121,7 @@ polygon = PackedVector2Array(-13, 15, -13, 3, -12, -1, -11, -4, -10, -6, -9, -8,
 
 [node name="Elevator" type="Node2D" groups=["elevators"]]
 script = ExtResource("1_87cqc")
-destination_area_str = ""
+destination_area_name = ""
 destination_elevator_path = ""
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -135,6 +135,8 @@ color = Color(0.243137, 0.458824, 0.752941, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_wbl66")
 animation = &"opening"
+frame = 4
+frame_progress = 1.0
 
 [node name="ActionArea" parent="." instance=ExtResource("3_nrb31")]
 

@@ -26,7 +26,8 @@ script = ExtResource("2_jpp5s")
 position = Vector2(40, 0)
 
 [node name="Elevator" parent="01Entrance" instance=ExtResource("4_fmddr")]
-dest_elevators = null
+destination_area_name = "Area01"
+destination_elevator_path = "./12WorldHub/ToSnow"
 
 [node name="SnowTiles" parent="01Entrance" instance=ExtResource("5_do5d3")]
 layer_0/tile_data = PackedInt32Array(131077, 196608, 9, 65541, 196608, 7, -131067, 196608, 9, -196603, 196608, 14, -262139, 196608, 1, 131076, 131072, 15, 65540, 131072, 7, -131068, 65536, 3, -196604, 458752, 2, -262140, 131072, 1, 131075, 131072, 3, 65539, 131072, 1, -196605, 131072, 9, -262141, 131072, 1, 131074, 131072, 15, 65538, 131072, 7, -196606, 131072, 15, -262142, 131072, 1, 131073, 131072, 15, 65537, 131072, 7, -196607, 131072, 9, -262143, 131072, 13, 131072, 131072, 3, 65536, 131072, 1, -196608, 131072, 9, -262144, 131072, 1, 196607, 131072, 15, 131071, 131072, 1, -131073, 131072, 15, -196609, 131072, 1, 196606, 131072, 9, 131070, 131072, 13, -131074, 131072, 9, -196610, 131072, 1, 196605, 131072, 9, 131069, 393216, 3, 65533, 196608, 14, -3, 196608, 8, -65539, 196608, 2, -131075, 393216, 2, -196611, 131072, 7, 196604, 65536, 15, 131068, 65536, 14, 65532, 65536, 14, -4, 65536, 14, -65540, 65536, 14, -131076, 65536, 2, -196612, 65536, 7)
@@ -87,7 +88,8 @@ position = Vector2(8, 0)
 
 [node name="Elevator4" parent="04SmallRoom" instance=ExtResource("4_fmddr")]
 position = Vector2(48, 16)
-dest_elevators = null
+destination_area_name = "Area05Snow"
+destination_elevator_path = "./05LargeRoom/Elevator5"
 
 [node name="05LargeRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(-8, 328)
@@ -103,4 +105,5 @@ position = Vector2(-32, 24)
 
 [node name="Elevator5" parent="05LargeRoom" instance=ExtResource("4_fmddr")]
 position = Vector2(-104, 24)
-dest_elevators = null
+destination_area_name = "Area05Snow"
+destination_elevator_path = "./04SmallRoom/Elevator4"

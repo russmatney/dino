@@ -19,8 +19,6 @@ func _ready():
 	action_area.register_actions(actions, self)
 	anim.animation_finished.connect(_on_anim_finished)
 
-	# TODO hotel register
-
 	z_index = 10
 	anim.play("opening")
 
@@ -32,15 +30,16 @@ func restore():
 func hotel_data():
 	return {}
 
-var travel_to_area
+var travel_dest
 
 func _on_anim_finished():
 	if anim.animation == "opening":
 		z_index = 0
 	if anim.animation == "closing":
-		if travel_to_area:
-			MvaniaGame.travel_to_area(travel_to_area, destination_elevator_path)
+		if travel_dest != null:
+			MvaniaGame.travel_to(travel_dest[0], travel_dest[1])
 			traveling = false
+			travel_dest = null
 		else:
 			z_index = 0
 
@@ -57,7 +56,7 @@ func travel():
 	MvaniaGame.set_forced_movement_target(global_position)
 	traveling = true
 	z_index = 10
-	travel_to_area = destination_area_full_path()
+	travel_dest = [destination_area_name, destination_elevator_path]
 	anim.play("closing")
 
 ###################################################################
@@ -68,93 +67,57 @@ func travel():
 	set(v):
 		clear = v
 		if v:
-			destination_area_str = ""
+			destination_area_name = ""
 			destination_elevator_path = ""
 
-# TODO move to just an area name, not a path
-# TODO rename, this is now the full-path
-var destination_area_str: String :
+var destination_area_name: String :
 	set(v):
-		destination_area_str = v
+		destination_area_name = v
 		notify_property_list_changed()
+
 var destination_elevator_path: String :
 	set(v):
 		destination_elevator_path = v
 		notify_property_list_changed()
 
-# TODO refactor towards selecting an elevator from the game_db (MvaniaGame)
-var maps_dir_path := "res://src/mvania19/maps"
-
-func destination_area_full_path():
-	return destination_area_str
-
 func _get_property_list() -> Array:
 	var dest_elevator_usage = PROPERTY_USAGE_NO_EDITOR
-	if not destination_area_str == null and len(destination_area_str) > 0:
+	if not destination_area_name == null and len(destination_area_name) > 0:
 		dest_elevator_usage = PROPERTY_USAGE_DEFAULT
 
 	return [{
-			name = "destination_area_str",
+			name = "destination_area_name",
 			type = TYPE_STRING,
 			hint = PROPERTY_HINT_ENUM,
-			hint_string = list_areas()
+			hint_string = list_area_names()
 		}, {
 			name = "destination_elevator_path",
 			type = TYPE_STRING,
 			usage = dest_elevator_usage,
 			hint = PROPERTY_HINT_ENUM,
 			hint_string = list_elevator_paths()
-			}, {
-			name = "dest_elevators",
-			type = TYPE_ARRAY,
-			usage = dest_elevator_usage,
-			hint = PROPERTY_HINT_ENUM,
-			hint_string = list_elevators()
-				}]
+		}]
 
-func list_elevators():
-	# var elevators = Hotel.query({"group": "elevators"})
-	# Debug.pr(elevators)
-	return []
-
-func list_areas():
-	# only returns areas with scene_file_path set
-	var areas = Hotel.query({"group": "mvania_areas",
-		"filter": func(area): return area.get("scene_file_path"),
-		})
-	var area_file_paths = areas.map(func(area): return area.get("scene_file_path"))
-	return ",".join(area_file_paths)
+func list_area_names():
+	var areas = Hotel.query({"group": "mvania_areas"})
+	return ",".join(areas.map(func(area): return area.get("name")))
 
 func list_elevator_paths():
-
-	if destination_area_str == null or len(destination_area_str) == 0:
-		return ""
-	var area_file_path = destination_area_full_path()
-
-	var areas = Hotel.query({
-		"group": "mvania_areas",
-		"filter": func(area): return area.get("scene_file_path") == area_file_path})
-	var area
-	if len(areas) > 0:
-		area = areas[0]
-	else:
-		Debug.warn("No areas found with destination_area_full_path()", area_file_path)
+	if destination_area_name == null or len(destination_area_name) == 0:
 		return ""
 
-	var area_name = area["name"]
-
-	# TODO this misses elevators in instanced-rooms - Hotel needs to gather room-instance elevators
-	# OR we need a different/better elevator/hotel registry
 	var elevators = Hotel.query({
 		"group": "elevators",
-		"filter": func(elevator): return elevator["area_name"] == area_name,
+		"area_name": destination_area_name,
+		# exclude THIS elevator
+		"filter": func(ele): return ele["name"] != name \
+		# include this to avoid excluding elevator nodes that aren't renamed
+		or name == "Elevator",
 		})
 
-	# TODO exclude THIS elevator?
-	# or maybe make that the default?
-
 	if len(elevators) == 1:
-		destination_elevator_path = elevators[0]["path"]
-		return
+		Debug.pr("Area has only one elevator, setting it.", destination_area_name, str(elevators[0]["path"]))
+		destination_elevator_path = str(elevators[0]["path"])
+		return destination_elevator_path
 
-	return ",".join(elevators.map(func(ele): return ele["path"]))
+	return ",".join(elevators.map(func(ele): return str(ele["path"])))

@@ -30,9 +30,8 @@ shadow_enabled = true
 
 [node name="ToArea01" parent="01Elevator" instance=ExtResource("6_2leqq")]
 position = Vector2(0, 8)
-destination_area_str = "res://src/mvania19/maps/area01/Area01.tscn"
-destination_elevator_path = "./12WorldHub/ToSnow"
-dest_elevators = null
+destination_area_name = "Area01"
+destination_elevator_path = "./ToArea02"
 
 [node name="02Hallway" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
@@ -56,7 +55,7 @@ position = Vector2(-4, -8)
 position = Vector2(84, -8)
 
 [node name="Soldier" parent="02Hallway" instance=ExtResource("6_obold")]
-position = Vector2(-32, 0)
+position = Vector2(256, 0)
 
 [node name="03Crossroads" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
@@ -99,9 +98,8 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 
 [node name="ToArea03" parent="05SomeRoom" instance=ExtResource("6_2leqq")]
 position = Vector2(492, 152)
-destination_area_str = "res://src/mvania19/maps/area03/Area03.tscn"
+destination_area_name = "Area03"
 destination_elevator_path = "./01Elevator/ToArea02"
-dest_elevators = null
 
 [node name="06SomeOtherRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 show_behind_parent = true
@@ -113,9 +111,8 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 
 [node name="ToArea04" parent="06SomeOtherRoom" instance=ExtResource("6_2leqq")]
 position = Vector2(464, 152)
-destination_area_str = "res://src/mvania19/maps/area04/Area04.tscn"
+destination_area_name = "Area04"
 destination_elevator_path = "./01Elevator/ToArea02"
-dest_elevators = null
 
 [node name="07HiddenRoom" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_s40vt")

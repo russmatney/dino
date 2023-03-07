@@ -30,24 +30,6 @@ func validate():
 	for e in elevators:
 		pass
 
-		# TODO reconsider in elevator multi-select context
-
-		# var dest_area = e.destination_area_full_path()
-		# if dest_area not in area_scenes:
-		# 	Debug.warn("Elevator with unknown destination", e, dest_area)
-
-		# # TODO move elevators to selecting areas by name
-		# var dest_area_name = ""
-		# var dest_elevator_path = e.destination_elevator_path
-		# var area_data = Hotel.query({group="mvania_areas",
-		# 	filter=func(area): return area["name"] == dest_area_name})
-		# var elevator_key = dest_area_name.path_join(dest_elevator_path)
-
-		# var matches =
-
-	# TODO validation apis
-	# e.g. are all the elevator connections valid?
-
 ###########################################################
 # ready
 
@@ -188,18 +170,26 @@ func _on_hud_ready():
 ###########################################################
 # Area travel
 
-func travel_to_area(dest_area, elevator_path):
-	Debug.pr("traveling to area", dest_area, elevator_path)
+func travel_to(dest_area_name, elevator_path):
+	Debug.pr("traveling to area", dest_area_name, elevator_path)
 
-	# TODO move to selecting area by name
-	if current_area.scene_file_path == dest_area:
+	if current_area.name == dest_area_name:
 		# TODO handle if we're already in the right area
 		# (smooth camera movement)
 		Debug.pr("already in same area")
-	else:
-		Debug.pr("traveling to a new area")
 
-	load_area(dest_area, elevator_path)
+	var dest_area = Hotel.first({group="mvania_areas", area_name=dest_area_name})
+	if dest_area == null:
+		Debug.warn("Can't travel_to(), no area found", dest_area_name, elevator_path)
+		return
+	else:
+		Debug.pr("traveling to", dest_area)
+
+	if not "scene_file_path" in dest_area:
+		Debug.warn("Can't travel_to(), no scene_file_path in area", dest_area)
+		return
+
+	load_area(dest_area["scene_file_path"], elevator_path)
 
 ###########################################################
 # dev helper functions

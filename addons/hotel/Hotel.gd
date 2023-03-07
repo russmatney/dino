@@ -74,12 +74,10 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 		var entry = d.get("properties", {})
 
 		# basic metadata
-		entry.merge({
-			path=path,
-			key=key,
-			name=d.get("name"),
-			type=d.get("type"),
-			})
+		entry.merge({path=path, key=key, name=d.get("name")})
+
+		if d.get("type"):
+			entry["type"] = d.get("type")
 
 		# instance properties
 		if "instance" in d:
@@ -125,15 +123,16 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 			if key.contains(last_room["key"]):
 				entry["room_name"] = last_room["key"]
 
-		# recurse into instances
-		if "instance" in d:
-			ps.append(entry)
-			book_data(d["instance"], ps, last_room)
-
 		if key in scene_db:
 			scene_db[key].merge(entry)
 		else:
 			scene_db[key] = entry
+
+		# recurse into instances
+		# we do this AFTER updating scene_db to prevent instance overwriting
+		if "instance" in d:
+			ps.append(entry)
+			book_data(d["instance"], ps, last_room)
 
 ######################################################################
 # checkin
@@ -187,7 +186,7 @@ func query(q={}):
 	return vals
 
 ## mostly a debug helper, returns the first db entry
-func first():
-	var entries = query()
+func first(q={}):
+	var entries = query(q)
 	if len(entries) > 0:
 		return entries[0]
