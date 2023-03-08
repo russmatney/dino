@@ -5,10 +5,13 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var hitbox = $Hitbox
 @onready var front_ray = $FrontRay
-@onready var los = $LineOfSight
+@onready var low_los = $LowLineOfSight
+@onready var high_los = $HighLineOfSight
 
 ########################################################
 # ready
+
+var line_of_sights = []
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -19,12 +22,13 @@ func _ready():
 	restore()
 	Hotel.check_in(self)
 
+	line_of_sights = [low_los, high_los]
+
 	anim.animation_finished.connect(_on_animation_finished)
+	anim.frame_changed.connect(_on_frame_changed)
 
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
-
-	anim.frame_changed.connect(_on_frame_changed)
 
 func _on_transitioned(state_label):
 	Debug.prn(state_label)
@@ -41,9 +45,11 @@ func _on_animation_finished():
 func _on_frame_changed():
 	if anim.animation == "idle":
 		if anim.frame in [3, 4, 5, 6]:
-			Util.update_los_facing(-1*facing, los)
+			for los in line_of_sights:
+				Util.update_los_facing(-1*facing, los)
 		else:
-			Util.update_los_facing(facing, los)
+			for los in line_of_sights:
+				Util.update_los_facing(facing, los)
 
 	elif anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
 		for b in bodies:
@@ -116,14 +122,16 @@ func face_right():
 	anim.flip_h = true
 	Util.update_h_flip(facing, hitbox)
 	Util.update_h_flip(facing, front_ray)
-	Util.update_los_facing(facing, los)
+	for los in line_of_sights:
+		Util.update_los_facing(facing, los)
 
 func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
 	Util.update_h_flip(facing, hitbox)
 	Util.update_h_flip(facing, front_ray)
-	Util.update_los_facing(facing, los)
+	for los in line_of_sights:
+		Util.update_los_facing(facing, los)
 
 ########################################################
 # _physics_process

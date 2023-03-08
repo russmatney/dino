@@ -69,8 +69,14 @@ metadata/_edit_lock_ = true
 position = Vector2(-5, 0)
 target_position = Vector2(0, 12)
 
-[node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(0, 4)
+[node name="LowLineOfSight" type="RayCast2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.57079
+target_position = Vector2(0, 40)
+collision_mask = 2
+
+[node name="HighLineOfSight" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
 rotation = 1.57079
 target_position = Vector2(0, 40)
 collision_mask = 2
