@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_78edy"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_b2dn2"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_60ffy"]
-[ext_resource type="PackedScene" uid="uid://dq5gh8hmxsj01" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="4_bw1oa"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="4_bw1oa"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="5_cfyjd"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ubggt"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="7_e7wku"]

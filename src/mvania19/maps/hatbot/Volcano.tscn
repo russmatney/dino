@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="3_4wvhc"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="4_m2scx"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ruuw7"]
-[ext_resource type="PackedScene" uid="uid://dq5gh8hmxsj01" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
 
 [node name="Volcano" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_2s6nm")
