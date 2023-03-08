@@ -43,7 +43,8 @@ func restore():
 	if not data == null:
 		health = data.get("health", initial_health)
 
-		for p in data.get("powerups", []):
+		powerups = data.get("powerups", [])
+		for p in powerups:
 			update_with_powerup(p)
 
 func hotel_data():
