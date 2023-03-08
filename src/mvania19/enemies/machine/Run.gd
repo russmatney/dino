@@ -2,7 +2,7 @@ extends State
 
 
 func enter(ctx={}):
-	var dir = ctx.get("dir", Vector2.LEFT)
+	var dir = ctx.get("dir", actor.facing)
 	actor.move_dir = dir
 	actor.anim.play("run")
 

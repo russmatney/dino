@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var hitbox = $Hitbox
 @onready var front_ray = $FrontRay
+@onready var los = $LineOfSight
 
 ########################################################
 # ready
@@ -13,7 +14,7 @@ func _ready():
 	if not Engine.is_editor_hint():
 		machine.start()
 		machine.transitioned.connect(_on_transitioned)
-		machine.transit("Run", {dir=Vector2.LEFT})
+		machine.transit("Run")
 
 	restore()
 	Hotel.check_in(self)
@@ -25,8 +26,26 @@ func _ready():
 
 	anim.frame_changed.connect(_on_frame_changed)
 
+func _on_transitioned(state_label):
+	Debug.prn(state_label)
+
+########################################################
+# kick
+
+# should move this to the machine's kick state
+
+func _on_animation_finished():
+	if anim.animation == "kick":
+		machine.transit("Idle")
+
 func _on_frame_changed():
-	if anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
+	if anim.animation == "idle":
+		if anim.frame in [3, 4, 5, 6]:
+			Util.update_los_facing(-1*facing, los)
+		else:
+			Util.update_los_facing(facing, los)
+
+	elif anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
 		for b in bodies:
 			if b.has_method("take_hit"):
 				if not b in bodies_this_kick:
@@ -40,6 +59,9 @@ func kick(body):
 	bodies_this_kick = []
 	machine.transit("Kick", {body=body})
 
+########################################################
+# kick collisions
+
 var bodies = []
 
 func _on_body_entered(body):
@@ -48,18 +70,13 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		bodies.append(body)
 
-		if machine.state.name != "Kick":
+		# should probably do this from the state's physics_process()
+		if machine.state.name in ["Idle", "Run"]:
 			kick(body)
 
 func _on_body_exited(body):
 	bodies.erase(body)
 
-func _on_transitioned(state_label):
-	Debug.prn(state_label)
-
-func _on_animation_finished():
-	if anim.animation == "kick":
-		machine.transit("Idle")
 
 ########################################################
 # hotel data
@@ -93,18 +110,20 @@ func turn():
 		face_right()
 	move_dir.x = -1 * move_dir.x
 
-var facing
+var facing = Vector2.LEFT
 func face_right():
 	facing = Vector2.RIGHT
 	anim.flip_h = true
 	Util.update_h_flip(facing, hitbox)
 	Util.update_h_flip(facing, front_ray)
+	Util.update_los_facing(facing, los)
 
 func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
 	Util.update_h_flip(facing, hitbox)
 	Util.update_h_flip(facing, front_ray)
+	Util.update_los_facing(facing, los)
 
 ########################################################
 # _physics_process
