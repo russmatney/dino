@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
 @onready var hitbox = $Hitbox
+@onready var front_ray = $FrontRay
 
 ########################################################
 # ready
@@ -85,16 +86,25 @@ func restore():
 ########################################################
 # facing
 
+func turn():
+	if facing == Vector2.RIGHT:
+		face_left()
+	elif facing == Vector2.LEFT:
+		face_right()
+	move_dir.x = -1 * move_dir.x
+
 var facing
 func face_right():
 	facing = Vector2.RIGHT
 	anim.flip_h = true
 	Util.update_h_flip(facing, hitbox)
+	Util.update_h_flip(facing, front_ray)
 
 func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
 	Util.update_h_flip(facing, hitbox)
+	Util.update_h_flip(facing, front_ray)
 
 ########################################################
 # _physics_process

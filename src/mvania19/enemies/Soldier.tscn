@@ -29,10 +29,8 @@ shape = SubResource("CapsuleShape2D_37lm3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
 sprite_frames = ExtResource("1_cvejl")
-animation = &"kick"
+animation = &"run"
 autoplay = "idle"
-frame = 8
-frame_progress = 1.0
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_ttylb")
@@ -66,3 +64,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_h2i04")
 metadata/_edit_lock_ = true
+
+[node name="FrontRay" type="RayCast2D" parent="."]
+position = Vector2(-5, 0)
+target_position = Vector2(0, 12)
