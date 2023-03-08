@@ -65,17 +65,17 @@ func show_jumbotron():
 	var label
 	match (powerup):
 		MvaniaGame.Powerup.Sword:
-			header = "[jump]Sword[/jump] Discovered!"
+			header = "[jump]Sword[/jump]\nDiscovered!"
 			body = "Try it on wooden blocks!"
 			action = "attack"
 			label = "Swing"
 		MvaniaGame.Powerup.DoubleJump:
-			header = "[jump]Double Jump[/jump] Discovered!"
+			header = "[jump]Double Jump[/jump]\nDiscovered!"
 			body = "....but how?"
 			action = "jump"
 			label = "Jump"
 		MvaniaGame.Powerup.Climb:
-			header = "[jump]Climbing Gloves[/jump] Discovered!"
+			header = "[jump]Climbing Gloves[/jump]\nDiscovered!"
 			body = "Hold towards a wall to grab it."
 			action = "ad"
 			label = "Toward wall"
