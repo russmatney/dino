@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
-@onready var sword = $Sword
 @onready var action_hint = $ActionHint
 @onready var action_detector = $ActionDetector
 
@@ -25,18 +24,9 @@ func _ready():
 	Hotel.check_in(self)
 
 	action_detector.setup(self, can_execute_any_actions, action_hint)
-	sword.bodies_updated.connect(_on_sword_bodies_updated)
 
-func restore():
-	var data = Hotel.check_out(self)
-	if not data == null:
-		health = data.get("health", initial_health)
-
-func hotel_data():
-	return {health=health}
-
-func can_execute_any_actions():
-	return move_target == null
+	if not has_sword:
+		sword.set_visible(false)
 
 func _on_transit(state):
 	Debug.debug_label("Player State: ", state)
@@ -45,14 +35,25 @@ func _on_transit(state):
 	if state in ["Fall", "Run"]:
 		stamp()
 
-func _on_sword_bodies_updated(bodies):
-	if len(bodies) > 0:
-		# TODO hide when we've seen some amount of sword action
-		# i.e. the player has learned it
-		# TODO combine with 'forget learned actions' pause button
-		action_hint.display("attack", "Sword")
-	else:
-		action_hint.hide()
+###########################################################################
+# hotel data
+
+func restore():
+	var data = Hotel.check_out(self)
+	if not data == null:
+		health = data.get("health", initial_health)
+
+		for p in data.get("powerups", []):
+			update_with_powerup(p)
+
+func hotel_data():
+	return {health=health, powerups=powerups}
+
+###########################################################################
+# actions
+
+func can_execute_any_actions():
+	return move_target == null
 
 ###########################################################################
 # _input
@@ -64,8 +65,9 @@ func _unhandled_input(event):
 		# TODO fire stamp via actions api? use whatever the current action_hint is?
 		Cam.hitstop("player_hitstop", 0.5, 0.2)
 	elif Trolley.is_attack(event):
-		sword.swing()
-		stamp({"scale": 2.0, "ttl": 1.0})
+		if has_sword:
+			sword.swing()
+			stamp({"scale": 2.0, "ttl": 1.0})
 
 ###########################################################################
 # movement
@@ -180,3 +182,41 @@ func take_hit(opts={}):
 	health -= damage
 	Hotel.check_in(self)
 	machine.transit("KnockedBack", {"direction": direction})
+
+########################################################
+# powerups
+
+var powerups = []
+var has_sword = false
+var has_double_jump = false
+var has_climb = false
+
+func update_with_powerup(powerup: MvaniaGame.Powerup):
+	match (powerup):
+		MvaniaGame.Powerup.Sword: add_sword()
+		MvaniaGame.Powerup.DoubleJump: has_double_jump = true
+		MvaniaGame.Powerup.Climb: has_climb = true
+
+func add_powerup(powerup: MvaniaGame.Powerup):
+	powerups.append(powerup)
+	update_with_powerup(powerup)
+	Hotel.check_in(self)
+
+########################################################
+# sword
+
+@onready var sword = $Sword
+
+func add_sword():
+	sword.set_visible(true)
+	sword.bodies_updated.connect(_on_sword_bodies_updated)
+	has_sword = true
+
+func _on_sword_bodies_updated(bodies):
+	if len(bodies) > 0:
+		# TODO hide when we've seen some amount of sword action
+		# i.e. the player has learned it
+		# TODO combine with 'forget learned actions' pause button
+		action_hint.display("attack", "Sword")
+	else:
+		action_hint.hide()

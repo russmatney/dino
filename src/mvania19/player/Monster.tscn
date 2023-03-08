@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnosf7eta2ht5"]
+[gd_scene load_steps=17 format=3 uid="uid://b6jbqq1rhdrkm"]
 
 [ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
@@ -11,8 +11,8 @@
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Dead.gd" id="9_betuw"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="9_ocb0p"]
 [ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="10_68kyd"]
+[ext_resource type="PackedScene" uid="uid://dr2pm86smthb3" path="res://src/mvania19/powerups/Sword.tscn" id="10_a54r4"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_8r4cy"]
-[ext_resource type="PackedScene" uid="uid://d1ppixlu80mlb" path="res://src/mvania19/weapons/Sword.tscn" id="11_847ey"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_67gj4"]
 cull_mode = 2
@@ -65,7 +65,7 @@ script = ExtResource("8_rpcmv")
 [node name="Dead" type="Node" parent="Machine"]
 script = ExtResource("9_betuw")
 
-[node name="Sword" parent="." instance=ExtResource("11_847ey")]
+[node name="Sword" parent="." instance=ExtResource("10_a54r4")]
 position = Vector2(9, -10)
 animation = &"idle"
 frame_progress = 0.142502

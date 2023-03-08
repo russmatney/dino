@@ -1,6 +1,8 @@
 @tool
 extends Node
 
+enum Powerup { Sword, DoubleJump, Climb }
+
 ###########################################################
 
 const demoland_area_scenes = [

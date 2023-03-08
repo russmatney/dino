@@ -23,6 +23,7 @@ func _ready():
 	og_energy = light.energy
 
 	restore()
+	Hotel.check_in(self)
 
 	$ColorRect.set_visible(false)
 

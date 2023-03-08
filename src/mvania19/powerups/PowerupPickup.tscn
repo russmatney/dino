@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dei87fp4qan6e"]
+
+[ext_resource type="Script" path="res://src/mvania19/powerups/PowerupPickup.gd" id="1_o8nae"]
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="2_bgc07"]
+[ext_resource type="SpriteFrames" uid="uid://c2lpaekpy8an8" path="res://src/mvania19/powerups/PowerupPickupSpriteFrames.tres" id="3_vjx0t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlg50"]
+size = Vector2(16, 16)
+
+[node name="PowerupPickup" type="Node2D"]
+script = ExtResource("1_o8nae")
+
+[node name="ActionArea" parent="." instance=ExtResource("2_bgc07")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_rlg50")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, -16)
+sprite_frames = ExtResource("3_vjx0t")
+animation = &"sword"

@@ -1,17 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1ppixlu80mlb"]
+[gd_scene load_steps=4 format=3 uid="uid://dr2pm86smthb3"]
 
-[ext_resource type="SpriteFrames" uid="uid://cbqqesb6w446l" path="res://src/mvania19/weapons/SwordSpriteFrames.tres" id="1_awr05"]
-[ext_resource type="Script" path="res://src/mvania19/weapons/Sword.gd" id="2_7ibua"]
+[ext_resource type="SpriteFrames" uid="uid://cbqqesb6w446l" path="res://src/mvania19/powerups/SwordSpriteFrames.tres" id="1_pttpo"]
+[ext_resource type="Script" path="res://src/mvania19/powerups/Sword.gd" id="2_220bt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvao8"]
 size = Vector2(23, 11)
 
 [node name="Sword" type="AnimatedSprite2D"]
 position = Vector2(8, -16)
-sprite_frames = ExtResource("1_awr05")
+sprite_frames = ExtResource("1_pttpo")
 animation = &"swing"
 autoplay = "idle"
-script = ExtResource("2_7ibua")
+script = ExtResource("2_220bt")
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 0
