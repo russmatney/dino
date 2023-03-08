@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://cije58jjaeikn"]
+
+[ext_resource type="Texture2D" uid="uid://botmd0creyshp" path="res://assets/sprites/greyhat_sheet.png" id="1_jb2vt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32fae"]
+atlas = ExtResource("1_jb2vt")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufgb7"]
+atlas = ExtResource("1_jb2vt")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27f7d"]
+atlas = ExtResource("1_jb2vt")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay6iw"]
+atlas = ExtResource("1_jb2vt")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phr3x"]
+atlas = ExtResource("1_jb2vt")
+region = Rect2(64, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32fae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufgb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27f7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay6iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phr3x")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

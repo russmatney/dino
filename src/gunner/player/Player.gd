@@ -221,7 +221,7 @@ func fire():
 	fire_tween = create_tween()
 	fire_bullet()
 	fire_tween.set_loops(0)
-	fire_tween.tween_callback(Callable(self,"fire_bullet")).set_delay(fire_rate)
+	fire_tween.tween_callback(fire_bullet).set_delay(fire_rate)
 
 
 func stop_firing():
