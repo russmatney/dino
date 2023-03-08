@@ -6,7 +6,7 @@ func snds():
 	if "sounds" in self:
 		return self["sounds"]
 	else:
-		print("[DJ] [WARN] no sounds configured in sound map: ", name)
+		Debug.warn("no sounds configured in sound map:", name)
 		return {}
 var _sound_map
 

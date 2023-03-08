@@ -181,7 +181,7 @@ func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
 
 	if nodes.size() > 1:
-		Debug.prn("[WARN] Camera found multiple nodes to follow", nodes)
+		Debug.warn("Camera found multiple nodes to follow", nodes)
 
 	if nodes.size() > 0:
 		following = nodes[0]
@@ -202,7 +202,7 @@ func attach_to_nearest_anchor():
 	# find nearest anchor node, reparent to that
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
-		Hood.warn("[WARN] Camera found no anchor nodes, attaching to player")
+		Debug.warn("Camera found no anchor nodes, attaching to player")
 		Util.change_parent(self, following)
 	else:
 		# TODO this may be too expensive to run per process-loop, there's likely an optimization...

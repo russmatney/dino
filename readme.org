@@ -186,7 +186,7 @@ func play_sound(name):
 		var s = sound_map[name]
 		DJ.play_sound_rand(s, {"vary": 0.4})
 	else:
-		print("[WARN]: no sound for name", name)
+		Debug.warn("no sound for name", name)
 
 func interrupt_sound(name):
 	if name in sound_map:

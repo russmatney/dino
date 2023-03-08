@@ -146,7 +146,7 @@ func ensure_image_node(name, i=0, img=null):
 func colorize_coord(ctx):
 	if ctx.group:
 		if not ctx.img:
-			Hood.warn("[WARN] colorize_coord ctx without img")
+			Debug.warn("colorize_coord ctx without img")
 			return
 		# print("setting coord to color: ", ctx.coord, " ", ctx.group.color)
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)

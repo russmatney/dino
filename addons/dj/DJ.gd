@@ -88,7 +88,7 @@ func play_sound(sound_map, name):
 		var sounds = sound_map[name]
 		play_sound_rand(sounds, {"vary": 0.4})
 	else:
-		print("<DJ> [WARN] no sound for name", name)
+		Debug.warn("no sound for name", name)
 
 func interrupt_sound(sound_map, name):
 	if name in sound_map:
@@ -98,7 +98,7 @@ func interrupt_sound(sound_map, name):
 				s.stop()
 				return s
 	else:
-		print("<DJ> [WARN] no sound for name", name)
+		Debug.warn("no sound for name", name)
 
 #################################################
 # music map api
@@ -116,7 +116,7 @@ func play_song(sound_map, name):
 			s.play()
 			playing_game_songs.append(s)
 	else:
-		print("<DJ> [WARN] no song for name", name)
+		Debug.warn("no song for name", name)
 
 func interrupt_song(sound_map, name):
 	var song = interrupt_sound(sound_map, name)

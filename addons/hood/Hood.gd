@@ -82,12 +82,12 @@ func find_player():
 	var ps = get_tree().get_nodes_in_group(player_group)
 
 	if ps.size() > 1:
-		Debug.prn("[WARN] found multiple in player_group: ", player_group)
+		Debug.warn("found multiple in player_group: ", player_group)
 	if ps:
 		player = ps[0]
-		Debug.prn("found player: ", player)
+		Debug.pr("found player: ", player)
 	else:
-		Debug.prn("[WARN] could not find player, zero in player_group: ", player_group)
+		Debug.warn("could not find player, zero in player_group: ", player_group)
 		return
 
 	emit_signal("found_player", player)

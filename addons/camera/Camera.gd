@@ -59,7 +59,7 @@ func cam_window_rect():
 func ensure_camera(cam_mode = null, opts={}):
 	if not opts is Dictionary:
 		opts = {}
-		Debug.prn("[WARN] overwriting/ignoring camera opts")
+		Debug.warn("overwriting/ignoring camera opts")
 
 	Debug.prn("ensuring camera")
 	if cam and is_instance_valid(cam):
@@ -91,7 +91,7 @@ func inc_trauma(inc = 0.1):
 	if cam:
 		cam.inc_trauma(inc)
 	else:
-		Debug.prn("[WARN]: inc_trauma called, but no 'cam' set.")
+		Debug.warn("inc_trauma called, but no 'cam' set.")
 
 
 func screenshake(trauma = 0.3):

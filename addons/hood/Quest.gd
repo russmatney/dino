@@ -20,7 +20,7 @@ var current_level_label = "Quest Status"
 func register_quest(node, opts={}):
 	var label = q_label(node, opts)
 	if label in active_quests:
-		print("[WARN]: skipping register of existing quest with node.label: ", label)
+		Debug.warn("skipping register of existing quest with node.label:", label)
 		return
 
 	if node.has_signal("quest_complete"):

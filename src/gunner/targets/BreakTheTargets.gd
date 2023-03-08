@@ -23,7 +23,7 @@ func setup():
 		player = players[0]
 		player.call_deferred("notif", "BREAK THE TARGETS")
 		Hood.notif("Break The Targets!")
-		print("btt found player: ", player)
+		Debug.pr("btt found player: ", player)
 
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
@@ -41,11 +41,7 @@ func find_hud():
 		hud = huds[0]
 
 	if hud:
-		# print("[BREAK THE TARGETS] found hud and targets: ", targets.size())
 		hud.update_targets_remaining(targets.size())
-	else:
-		pass
-		# print("[BREAK THE TARGETS] no hud found")
 
 
 var wait_for = 5
@@ -61,7 +57,7 @@ func _process(delta):
 	else:
 		if not hud and not has_warned:
 			has_warned = true
-			print("[WARN]: BreakTheTargets could not find HUD, giving up.")
+			Debug.warn("BreakTheTargets could not find HUD, giving up.")
 
 
 ###############################################################################
@@ -94,7 +90,6 @@ func _on_target_destroyed(t):
 
 
 func target_change(opts = {}):
-	print("BTT: target_change")
 	if targets.size() == 1 and opts.get("was_destroy"):
 		if player:
 			player.notif("ONE TARGET REMAINING")
