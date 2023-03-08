@@ -1,25 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cfjqjsw0ekld7"]
 
-[ext_resource path="res://addons/hood/HeartIcon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/hood/HeartsContainer.gd" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://c0ih7p2jp44x2" path="res://addons/hood/HeartIcon.tscn" id="1"]
+[ext_resource type="Script" path="res://addons/hood/HeartsContainer.gd" id="3"]
 
 [node name="HeartsContainer" type="HBoxContainer"]
-offset_right = 98.0
-offset_bottom = 32.0
-custom_minimum_size = Vector2( 98, 30 )
-alignment = 2
-script = ExtResource( 3 )
+custom_minimum_size = Vector2(98, 32)
+anchors_preset = -1
+anchor_right = 0.153
+anchor_bottom = 0.089
+offset_right = 0.0799942
+offset_bottom = -0.0400009
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
 
-[node name="HeartIcon" parent="." instance=ExtResource( 1 )]
-position = Vector2( 82, 16 )
-animation = "full"
+[node name="HeartIcon" parent="." instance=ExtResource("1")]
+position = Vector2(82, 16)
+animation = &"full"
 flip_h = true
 
-[node name="HeartIcon2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 49, 16 )
+[node name="HeartIcon2" parent="." instance=ExtResource("1")]
+position = Vector2(49, 16)
 flip_h = true
 
-[node name="HeartIcon3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 16, 16 )
-animation = "empty"
+[node name="HeartIcon3" parent="." instance=ExtResource("1")]
+position = Vector2(16, 16)
+animation = &"empty"
 flip_h = true

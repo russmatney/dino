@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://csrh7werb01q3"]
+[gd_scene load_steps=6 format=3 uid="uid://csrh7werb01q3"]
 
 [ext_resource type="Script" path="res://src/mvania19/hud/HUD.gd" id="1_d2rgr"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_gncwx"]
 [ext_resource type="PackedScene" uid="uid://b7b7ck0q42nl5" path="res://src/mvania19/hud/Minimap.tscn" id="2_5w0jp"]
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="3_3f8qd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]
 bg_color = Color(1, 0.356863, 1, 0.435294)
@@ -41,5 +42,21 @@ render_target_update_mode = 4
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Notifications" parent="HBoxContainer" instance=ExtResource("1_gncwx")]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeartsContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("3_3f8qd")]
+unique_name_in_owner = true
+layout_mode = 2
+h = 5
+
+[node name="Notifications" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("1_gncwx")]
 layout_mode = 2
