@@ -1,6 +1,13 @@
 extends State
 
-func enter(_ctx={}):
+var double_jumping
+var double_jump_wait = 0.1
+var double_jump_ttl
+
+func enter(ctx={}):
+	double_jumping = ctx.get("double_jumping", false)
+	Debug.pr("entering jump with double jump:", double_jumping)
+
 	MvaniaSounds.play_sound("jump")
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
@@ -12,6 +19,9 @@ func enter(_ctx={}):
 	# apply jump velocity
 	actor.velocity.y = actor.JUMP_VELOCITY
 
+	if actor.has_double_jump:
+		double_jump_ttl = double_jump_wait
+
 func _on_anim_finished():
 	if actor.anim.animation == "jump":
 		actor.anim.play("air")
@@ -20,6 +30,19 @@ func exit():
 	actor.anim.animation_finished.disconnect(_on_anim_finished)
 
 func physics_process(delta):
+	if actor.has_double_jump:
+		if double_jump_ttl == null:
+			double_jump_ttl = double_jump_wait
+		double_jump_ttl -= delta
+
+	# double jump
+	if not double_jumping and actor.has_double_jump \
+		and double_jump_ttl <= 0 \
+		and Input.is_action_just_pressed("jump"):
+		Debug.prn("firing double jump!")
+		machine.transit("Jump", {"double_jumping": true})
+		return
+
 	# gravity
 	if not actor.is_on_floor():
 		actor.velocity.y += actor.GRAVITY * delta
@@ -34,4 +57,4 @@ func physics_process(delta):
 	actor.move_and_slide()
 
 	if actor.velocity.y > 0:
-		machine.transit("Fall")
+		machine.transit("Fall", {"double_jumping": double_jumping})

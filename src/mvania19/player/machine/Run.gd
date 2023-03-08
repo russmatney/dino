@@ -4,7 +4,7 @@ func enter(_ctx={}):
 	actor.anim.play("run")
 
 func physics_process(delta):
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
 		machine.transit("Jump")
 
 	# gravity

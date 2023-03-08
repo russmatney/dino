@@ -6,14 +6,21 @@ var fall_shake_thresholds = [
 	{"threshold": 1000, "shake": 1.0, "damage": 2, "sound": "heavy_fall"},
 	]
 
-var coyote_time_t = 0.18
+var coyote_time_t = 0.2
+var double_jump_coyote_time_t = 0.4
 var coyote_ttj
 
+var double_jumping
+
 func enter(ctx={}):
+	double_jumping = ctx.get("double_jumping")
 	actor.anim.play("air")
 
 	if "coyote_time" in ctx:
-		coyote_ttj = coyote_time_t
+		if actor.has_double_jump:
+			coyote_ttj = double_jump_coyote_time_t
+		else:
+			coyote_ttj = coyote_time_t
 	else:
 		coyote_ttj = null
 
@@ -24,9 +31,17 @@ func physics_process(delta):
 
 		if coyote_ttj > 0:
 			if Input.is_action_just_pressed("jump"):
+				Debug.prn("Coyote time jump!")
 				machine.transit("Jump")
+				return
 		else:
 			coyote_ttj = null
+
+	# double jump
+	if not double_jumping and actor.has_double_jump \
+		and Input.is_action_just_pressed("jump"):
+		machine.transit("Jump", {"double_jumping": true})
+		return
 
 	# gravity
 	if not actor.is_on_floor():

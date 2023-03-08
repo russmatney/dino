@@ -194,7 +194,7 @@ var has_climb = false
 func update_with_powerup(powerup: MvaniaGame.Powerup):
 	match (powerup):
 		MvaniaGame.Powerup.Sword: add_sword()
-		MvaniaGame.Powerup.DoubleJump: has_double_jump = true
+		MvaniaGame.Powerup.DoubleJump: add_double_jump()
 		MvaniaGame.Powerup.Climb: has_climb = true
 
 func add_powerup(powerup: MvaniaGame.Powerup):
@@ -220,3 +220,9 @@ func _on_sword_bodies_updated(bodies):
 		action_hint.display("attack", "Sword")
 	else:
 		action_hint.hide()
+
+########################################################
+# double jump
+
+func add_double_jump():
+	has_double_jump = true
