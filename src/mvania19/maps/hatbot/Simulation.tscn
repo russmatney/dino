@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_4fgnt"]
 [ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="3_3kbfw"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_0thwe"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_tky8d"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_tky8d"]
 [ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="6_1c5dl"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="7_fdlq5"]
 [ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_u6t8r"]
@@ -105,7 +105,7 @@ layer_0/tile_data = PackedInt32Array(786451, 131073, 2, -589805, 131073, 4, -655
 layer_0/tile_data = PackedInt32Array(655347, 196609, 4, 589811, 196609, 3, 524275, 196609, 2, 655346, 131073, 4, 589810, 131073, 3, 524274, 131073, 2, 655345, 65537, 4, 589809, 65537, 3, 524273, 65537, 2, 720897, 196609, 4, 655361, 196609, 3, 589825, 196609, 3, 524289, 196609, 2, 720896, 131073, 4, 655360, 131073, 3, 589824, 131073, 3, 524288, 131073, 2, 786431, 131073, 4, 720895, 131073, 3, 655359, 131073, 3, 589823, 131073, 2, 786430, 65537, 4, 720894, 65537, 3, 655358, 65537, 3, 589822, 65537, 2, 786424, 196609, 4, 720888, 196609, 2, 786423, 65537, 4, 720887, 65537, 2, 196629, 196609, 4, 131093, 196609, 2, 196628, 65537, 4, 131092, 65537, 2, 786439, 196609, 4, 720903, 196609, 3, 655367, 196609, 2, 786438, 131073, 4, 720902, 131073, 3, 655366, 131073, 2, 786437, 65537, 4, 720901, 65537, 3, 655365, 65537, 2)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("10_jfj05")]
-position = Vector2(959.04, 106.403)
+position = Vector2(1016, 96)
 
 [node name="PowerupPickup" parent="." instance=ExtResource("11_4s4lm")]
 position = Vector2(1048, 216)

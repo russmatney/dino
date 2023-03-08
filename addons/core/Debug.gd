@@ -107,12 +107,14 @@ func color_wrap(s, color):
 
 var omit_vals_for_keys = ["layer_0/tile_data"]
 
+var max_array_size = 20
+
 func to_pretty(msg, newlines=false):
 	if msg is Array or msg is PackedStringArray:
-		if len(msg) > 10:
-			msg = msg.slice(0, 9)
-			msg.append("...")
-			prn("cutting down large array")
+		if len(msg) > max_array_size:
+			prn("cutting down large array. size:", len(msg))
+			msg = msg.slice(0, max_array_size - 1)
+			# msg.append("...")
 
 		var tmp = color_wrap("[ ", "crimson")
 		var last = len(msg) - 1
