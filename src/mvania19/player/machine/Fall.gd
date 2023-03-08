@@ -10,13 +10,18 @@ var coyote_time_t = 0.2
 var double_jump_coyote_time_t = 0.4
 var coyote_ttj
 
+var can_jump
+
 var double_jumping
 
 func enter(ctx={}):
 	double_jumping = ctx.get("double_jumping")
 	actor.anim.play("air")
 
-	if "coyote_time" in ctx:
+	can_jump = ctx.get("can_jump", false)
+
+	# TODO just let 'em jump?
+	if ctx.get("coyote_time", false):
 		if actor.has_double_jump:
 			coyote_ttj = double_jump_coyote_time_t
 		else:
@@ -43,8 +48,13 @@ func physics_process(delta):
 		machine.transit("Jump", {"double_jumping": true})
 		return
 
+	# jump after climb
+	if can_jump and Input.is_action_just_pressed("jump"):
+		machine.transit("Jump")
+		return
+
 	# gravity
-	if not actor.is_on_floor():
+	if not actor.is_on_floor_only():
 		actor.velocity.y += actor.GRAVITY * delta
 
 	# horizontal speed up or slowdown
@@ -55,6 +65,18 @@ func physics_process(delta):
 
 	var vel_before_coll = actor.velocity
 	actor.move_and_slide()
+
+	if actor.has_climb and actor.is_on_wall_only() \
+		and not actor.near_ground_check.is_colliding():
+		var coll = actor.get_slide_collision(0)
+		var x_diff = coll.get_position().x - actor.global_position.x
+
+		if actor.move_dir.x > 0 and x_diff > 0:
+			machine.transit("Climb")
+			return
+		if actor.move_dir.x < 0 and x_diff < 0:
+			machine.transit("Climb")
+			return
 
 	# move back to idle
 	if actor.is_on_floor():
@@ -70,8 +92,7 @@ func physics_process(delta):
 			Cam.screenshake(shake)
 			MvaniaSounds.play_sound(thresh["sound"])
 
-		# apply damage
-		# apply shake
+		# TODO apply damage
 		# if not actor.is_dead:
 		# 	machine.transit("Idle", {"shake": shake})
 		machine.transit("Idle")

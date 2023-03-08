@@ -16,6 +16,11 @@ func enter(ctx={}):
 	actor.action_hint.display("jump", "Jump")
 	actor.stamp({"scale": 0.1, "ttl": 0.4})
 
+	# apply horizontal push
+	var dir = ctx.get("dir", Vector2.ZERO)
+	if dir:
+		actor.velocity.x = actor.move_dir.x * actor.SPEED
+
 	# apply jump velocity
 	actor.velocity.y = actor.JUMP_VELOCITY
 
@@ -53,6 +58,19 @@ func physics_process(delta):
 		actor.velocity.x = actor.move_dir.x * actor.SPEED
 	else:
 		actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)
+
+	if actor.has_climb and actor.is_on_wall_only()\
+		and not actor.near_ground_check.is_colliding():
+		var coll = actor.get_slide_collision(0)
+		var x_diff = coll.get_position().x - actor.global_position.x
+
+		if actor.move_dir.x > 0 and x_diff > 0:
+			machine.transit("Climb")
+			return
+		if actor.move_dir.x < 0 and x_diff < 0:
+			machine.transit("Climb")
+			return
+
 
 	actor.move_and_slide()
 

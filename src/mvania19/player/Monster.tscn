@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6jbqq1rhdrkm"]
+[gd_scene load_steps=18 format=3 uid="uid://b6jbqq1rhdrkm"]
 
 [ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="9_ocb0p"]
 [ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="10_68kyd"]
 [ext_resource type="PackedScene" uid="uid://dr2pm86smthb3" path="res://src/mvania19/powerups/Sword.tscn" id="10_a54r4"]
+[ext_resource type="Script" path="res://src/mvania19/player/machine/Climb.gd" id="10_vycc5"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_8r4cy"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_67gj4"]
@@ -65,6 +66,9 @@ script = ExtResource("8_rpcmv")
 [node name="Dead" type="Node" parent="Machine"]
 script = ExtResource("9_betuw")
 
+[node name="Climb" type="Node" parent="Machine"]
+script = ExtResource("10_vycc5")
+
 [node name="Sword" parent="." instance=ExtResource("10_a54r4")]
 position = Vector2(9, -10)
 animation = &"idle"
@@ -72,7 +76,6 @@ animation = &"idle"
 [node name="ActionHint" parent="." instance=ExtResource("9_ocb0p")]
 position = Vector2(0, -15)
 scale = Vector2(0.4, 0.4)
-key_or_action = ""
 
 [node name="ActionDetector" parent="." instance=ExtResource("10_68kyd")]
 
@@ -90,3 +93,16 @@ active = false
 [node name="LookPoint" parent="." instance=ExtResource("11_8r4cy")]
 position = Vector2(50, 2.08165e-12)
 active = false
+
+[node name="HighWallCheck" type="RayCast2D" parent="."]
+position = Vector2(-2, -3)
+rotation = -1.57079
+target_position = Vector2(0, 10)
+
+[node name="LowWallCheck" type="RayCast2D" parent="."]
+position = Vector2(-2, 6)
+rotation = -1.57079
+target_position = Vector2(0, 10)
+
+[node name="NearGroundCheck" type="RayCast2D" parent="."]
+target_position = Vector2(0, 40)

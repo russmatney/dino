@@ -6,9 +6,11 @@ func enter(_ctx={}):
 func physics_process(delta):
 	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
 		machine.transit("Jump")
+		return
 
 	if actor.move_dir.x != 0:
 		machine.transit("Run")
+		return
 
 	# slow down
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)

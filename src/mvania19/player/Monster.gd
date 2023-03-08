@@ -5,6 +5,11 @@ extends CharacterBody2D
 @onready var action_hint = $ActionHint
 @onready var action_detector = $ActionDetector
 
+@onready var high_wall_check = $HighWallCheck
+@onready var low_wall_check = $LowWallCheck
+var wall_checks = []
+@onready var near_ground_check = $NearGroundCheck
+
 var og_position
 var MAX_Y = 5000
 
@@ -27,6 +32,8 @@ func _ready():
 
 	if not has_sword:
 		sword.set_visible(false)
+
+	wall_checks = [high_wall_check, low_wall_check]
 
 func _on_transit(state):
 	Debug.debug_label("Player State: ", state)
@@ -74,6 +81,7 @@ func _unhandled_input(event):
 # movement
 
 const SPEED = 150.0
+const CLIMB_SPEED = -100.0
 const JUMP_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY_HORIZONTAL = 30.0
@@ -154,6 +162,15 @@ func stamp(opts={}):
 ###########################################################################
 # facing
 
+# TODO dry up against Util version
+func update_los_facing(p_facing, node):
+	if p_facing == Vector2.RIGHT and node.scale.y < 0:
+		node.scale.y = 1
+		node.position.x = -node.position.x
+	elif p_facing == Vector2.LEFT and node.scale.y > 0:
+		node.scale.y = -1
+		node.position.x = -node.position.x
+
 var facing
 
 @onready var light_occluder = $LightOccluder2D
@@ -167,6 +184,8 @@ func face_right():
 	Util.update_h_flip(facing, sword)
 	Util.update_h_flip(facing, light_occluder)
 	Util.update_h_flip(facing, look_point)
+	update_los_facing(facing, high_wall_check)
+	update_los_facing(facing, low_wall_check)
 
 func face_left():
 	if facing == Vector2.RIGHT:
@@ -176,6 +195,8 @@ func face_left():
 	Util.update_h_flip(facing, sword)
 	Util.update_h_flip(facing, light_occluder)
 	Util.update_h_flip(facing, look_point)
+	update_los_facing(facing, high_wall_check)
+	update_los_facing(facing, low_wall_check)
 
 ########################################################
 # health
