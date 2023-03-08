@@ -17,6 +17,8 @@ const demoland_area_scenes = [
 const hatbot_area_scenes = [
 	"res://src/mvania19/maps/hatbot/TheLandingSite.tscn",
 	"res://src/mvania19/maps/hatbot/Simulation.tscn",
+	"res://src/mvania19/maps/hatbot/TheKingdom.tscn",
+	"res://src/mvania19/maps/hatbot/Volcano.tscn",
 	]
 
 # var area_scenes = demoland_area_scenes

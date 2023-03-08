@@ -43,8 +43,10 @@ layer_0/tile_data = PackedInt32Array(262142, 327680, 5, 196609, 524288, 5, 19660
 [node name="GildedKingdomTiles8" parent="ToKingdom" instance=ExtResource("9_wn65p")]
 layer_0/tile_data = PackedInt32Array(262146, 196609, 5, 262145, 393217, 2, 262144, 131073, 2, 327679, 131073, 2, 327678, 458753, 2, 327677, 65537, 5, 327681, 196609, 4, 327680, 131073, 4, 393215, 131073, 4, 393214, 65537, 4, -131072, 131073, 5, -65537, 131073, 5, -131070, 196609, 5, -131071, 131073, 5, -65538, 131073, 5, -65539, 65537, 5)
 
-[node name="Elevator" parent="ToKingdom" instance=ExtResource("4_0thwe")]
+[node name="ToKingdom" parent="ToKingdom" instance=ExtResource("4_0thwe")]
 position = Vector2(0, 16)
+destination_area_name = "TheKingdom"
+destination_elevator_path = "./ToSimulation/ToSimulation"
 
 [node name="SplitStairs" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(128, 0)
