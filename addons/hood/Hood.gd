@@ -21,6 +21,8 @@ func set_hud_scene(preloaded_scene):
 var hud
 
 func ensure_hud(hud_preload=null):
+	call_deferred("ensure_jumbotron")
+
 	Debug.prn("ensuring hud")
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
@@ -33,7 +35,7 @@ func ensure_hud(hud_preload=null):
 	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
-	Hood.call_deferred("find_player")
+	call_deferred("find_player")
 
 signal hud_ready
 
@@ -64,6 +66,31 @@ func notif(text, opts = {}):
 	if not "ttl" in opts:
 		opts["ttl"] = 3.0
 	notification.emit(opts)
+
+###########################################################################
+# jumbotron
+
+var jumbotron_scene = preload("res://addons/hood/Jumbotron.tscn")
+var jumbotron
+
+func ensure_jumbotron():
+	if jumbotron and is_instance_valid(jumbotron):
+		return
+
+	jumbotron = jumbotron_scene.instantiate()
+	jumbotron.set_visible(false)
+	Navi.add_child_to_current(jumbotron)
+
+func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
+	if jumbotron:
+		jumbotron.header_text = header
+		if body:
+			jumbotron.body_text = body
+		if key_or_action or action_label_text:
+			jumbotron.action_hint.display(key_or_action, action_label_text)
+
+		# pause game?
+		jumbotron.fade_in()
 
 ###########################################################################
 # find_player
