@@ -107,6 +107,13 @@ func _physics_process(_delta):
 		if move_dir.x < 0:
 			face_left()
 
+		if move_dir.y > 0:
+			aim_sword(Vector2.DOWN)
+		elif move_dir.y < 0:
+			aim_sword(Vector2.UP)
+		else:
+			aim_sword(facing)
+
 	if position.y > MAX_Y:
 		Debug.warn("MAX Y HIT - RESETTING PLAYER")
 		velocity = Vector2.ZERO
@@ -196,7 +203,7 @@ func update_with_powerup(powerup: MvaniaGame.Powerup):
 	match (powerup):
 		MvaniaGame.Powerup.Sword: add_sword()
 		MvaniaGame.Powerup.DoubleJump: add_double_jump()
-		MvaniaGame.Powerup.Climb: has_climb = true
+		MvaniaGame.Powerup.Climb: add_climb()
 
 func add_powerup(powerup: MvaniaGame.Powerup):
 	powerups.append(powerup)
@@ -222,8 +229,38 @@ func _on_sword_bodies_updated(bodies):
 	else:
 		action_hint.hide()
 
+func aim_sword(dir):
+	if has_sword:
+		match (dir):
+			Vector2.UP:
+				sword.rotation_degrees = -90.0
+				sword.position.x = -8
+				sword.position.y = -10
+				sword.scale.x = 1
+			Vector2.DOWN:
+				sword.rotation_degrees = 90.0
+				sword.position.x = 9
+				sword.position.y = 12
+				sword.scale.x = 1
+			Vector2.LEFT:
+				sword.rotation_degrees = 0.0
+				sword.position.x = -9
+				sword.position.y = -10
+				sword.scale.x = -1
+			Vector2.RIGHT:
+				sword.rotation_degrees = 0.0
+				sword.position.x = 9
+				sword.position.y = -10
+				sword.scale.x = 1
+
 ########################################################
 # double jump
 
 func add_double_jump():
 	has_double_jump = true
+
+########################################################
+# climb
+
+func add_climb():
+	has_climb = true

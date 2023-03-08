@@ -68,7 +68,6 @@ script = ExtResource("9_betuw")
 [node name="Sword" parent="." instance=ExtResource("10_a54r4")]
 position = Vector2(9, -10)
 animation = &"idle"
-frame_progress = 0.142502
 
 [node name="ActionHint" parent="." instance=ExtResource("9_ocb0p")]
 position = Vector2(0, -15)
