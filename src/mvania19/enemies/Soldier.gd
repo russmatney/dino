@@ -30,8 +30,9 @@ func _ready():
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
 
-func _on_transitioned(state_label):
-	Debug.prn(state_label)
+func _on_transitioned(_state_label):
+	pass
+	# Debug.prn(state_label)
 
 ########################################################
 # kick

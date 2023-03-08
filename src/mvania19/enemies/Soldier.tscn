@@ -11,9 +11,8 @@
 [ext_resource type="Script" path="res://src/mvania19/enemies/machine/Fall.gd" id="9_k88d1"]
 [ext_resource type="Script" path="res://src/mvania19/enemies/machine/Jump.gd" id="10_8ukws"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_37lm3"]
-radius = 6.0
-height = 18.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5cd88"]
+size = Vector2(12, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2i04"]
 size = Vector2(18, 16)
@@ -24,7 +23,7 @@ collision_mask = 5
 script = ExtResource("1_ca64f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_37lm3")
+shape = SubResource("RectangleShape2D_5cd88")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -7)
