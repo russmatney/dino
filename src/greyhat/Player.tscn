@@ -24,7 +24,7 @@ sprite_frames = ExtResource("2_xytd2")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="LookPoint" type="Marker2D" parent="." groups=["pof"]]
+[node name="LookPoint" type="Marker2D" parent="." groups=["pofs"]]
 position = Vector2(-48, 0)
 
 [node name="Machine" type="Node" parent="."]

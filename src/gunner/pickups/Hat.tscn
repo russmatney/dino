@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(16, 14)
 
-[node name="Hat" type="Node2D" groups=["poi"]]
+[node name="Hat" type="Node2D" groups=["pois"]]
 script = ExtResource("3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

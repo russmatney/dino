@@ -23,7 +23,7 @@ shader_parameter/knockbackFactor = 0.4
 [sub_resource type="SpriteFrames" id="6"]
 animations = []
 
-[node name="Plot" type="Node2D" groups=["poi"]]
+[node name="Plot" type="Node2D" groups=["pois"]]
 script = ExtResource("2")
 
 [node name="Detectbox" type="Area2D" parent="."]

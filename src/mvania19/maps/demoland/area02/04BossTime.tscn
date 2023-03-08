@@ -20,18 +20,18 @@ visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CamPOF" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("3_1bnkq")]
+[node name="CamPOF" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_1bnkq")]
 position = Vector2(40, 40)
 script = ExtResource("4_qvoxb")
 
-[node name="@CamPOF@40005" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("3_1bnkq")]
+[node name="@CamPOF@40005" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_1bnkq")]
 position = Vector2(336, 208)
 script = ExtResource("4_qvoxb")
 
-[node name="@CamPOF@40006" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("3_1bnkq")]
+[node name="@CamPOF@40006" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_1bnkq")]
 position = Vector2(336, 40)
 script = ExtResource("4_qvoxb")
 
-[node name="@CamPOF@40007" type="Marker2D" parent="." groups=["auto_pofs", "pof", "pofs"] instance=ExtResource("3_1bnkq")]
+[node name="@CamPOF@40007" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_1bnkq")]
 position = Vector2(40, 208)
 script = ExtResource("4_qvoxb")

@@ -173,8 +173,8 @@ func zoom_out(n_levels=null):
 ####################################################################
 # focus
 
-var pof_group = "pof"
-var poi_group = "poi"
+var pof_group = "pofs"
+var poi_group = "pois"
 
 func update_pofs():
 	if cam:

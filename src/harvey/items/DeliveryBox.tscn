@@ -20,7 +20,7 @@ animations = []
 [sub_resource type="RectangleShape2D" id="4"]
 size = Vector2(128, 56)
 
-[node name="DeliveryBox" type="StaticBody2D" groups=["poi"]]
+[node name="DeliveryBox" type="StaticBody2D" groups=["pois"]]
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

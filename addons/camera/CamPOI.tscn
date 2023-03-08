@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="1_un53m"]
 
-[node name="CamPOI" type="Marker2D" groups=["poi", "pois"]]
+[node name="CamPOI" type="Marker2D" groups=["pois"]]
 script = ExtResource("1_un53m")
