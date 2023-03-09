@@ -31,9 +31,23 @@ func hotel_data():
 	return {health=health}
 
 #####################################################
+# facing
+
+var facing
+
+func face_right():
+	facing = Vector2.RIGHT
+	anim.flip_h = true
+
+func face_left():
+	facing = Vector2.LEFT
+	anim.flip_h = false
+
+#####################################################
 # movement
 
 const SPEED = 200
+var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 #####################################################
 # shared process
@@ -48,6 +62,11 @@ func _physics_process(_delta):
 		if los.is_colliding():
 			can_see_player = true
 
+			if los.target_position.x > 0:
+				face_right()
+			else:
+				face_left()
+
 #####################################################
 # attack
 
@@ -59,14 +78,17 @@ signal fired_bullet(bullet)
 var initial_health = 5
 var health
 
+signal died(beefstronaut)
+signal stunned(beefstronaut)
+
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
-	var _dir = opts.get("direction", Vector2.UP)
+	var direction = opts.get("direction", Vector2.UP)
 
 	health -= damage
 	Debug.pr("took hit! health", health)
-
-	# TODO knockback state, animations, handle death there
-	if health <= 0:
-		queue_free()
-
+	machine.transit("KnockedBack", {
+		dying=health <= 0,
+		damage=damage,
+		direction=direction,
+		})

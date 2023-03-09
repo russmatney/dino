@@ -7,31 +7,29 @@ func enter(_ctx={}):
 	# TODO firing animation
 	actor.anim.play("jump")
 
+	bullets_til_break = break_every
+
 #####################################################
 # physics
 
 var break_every = 3
 var bullets_til_break
+var last_bullet
 
 func physics_process(delta):
 	if actor.can_see_player and can_fire():
-		fire()
+		last_bullet = fire()
+
 		if bullets_til_break:
 			bullets_til_break -= 1
-			if bullets_til_break <= 0:
-				machine.transit("Idle", {"wait_for": fire_cooldown})
-				return
-		else:
-			bullets_til_break = break_every
 
 	if fire_burst_ttl:
 		fire_burst_ttl -= delta
 		if fire_burst_ttl <= 0:
 			fire_burst_ttl = null
 
-	if len(bullets) >= max_bullets:
-		machine.transit("Idle", {"wait_for": fire_cooldown})
-		return
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
+	actor.move_and_slide()
 
 #####################################################
 # fire control
@@ -42,8 +40,7 @@ var fire_burst_ttl
 var fire_cooldown = 3
 
 func can_fire():
-	return len(bullets) < max_bullets \
-		and fire_burst_ttl == null
+	return fire_burst_ttl == null and bullets_til_break and bullets_til_break > 0
 
 func _on_hit(bullet):
 	# if bullet back_fired, we handle state change from actor.take_hit()
@@ -54,15 +51,17 @@ func _on_hit(bullet):
 func _on_bullet_dying(bullet):
 	bullets.erase(bullet)
 
+	if bullets_til_break <= 0 and bullet == last_bullet:
+		machine.transit("Idle", {"wait_for": fire_cooldown})
+
 #####################################################
 # fire logic
 
-var max_bullets = 3
 var bullets = []
 
 var bullet_scene = preload("res://src/mvania19/bosses/beefstronaut/Bullet.tscn")
 var bullet_impulse = 100
-var bullet_knockback = 0.2
+var bullet_knockback = 1
 
 func fire():
 	fire_burst_ttl = fire_burst_rate()
@@ -95,3 +94,5 @@ func fire():
 	var pos = actor.get_global_position()
 	pos += -1 * to_player * bullet_knockback
 	actor.set_global_position(pos)
+
+	return bullet
