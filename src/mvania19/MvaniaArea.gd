@@ -56,7 +56,7 @@ func player_spawn_coords() -> Vector2:
 	for e in eles:
 		return e.global_position
 
-	Hood.warn("no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
+	Debug.warn("no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
 	return Vector2.ZERO
 
 var spawn_node_path
