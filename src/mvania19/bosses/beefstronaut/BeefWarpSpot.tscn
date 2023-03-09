@@ -1,3 +1,0 @@
-[gd_scene format=3 uid="uid://dba5urikk70ib"]
-
-[node name="BeefWarpSpot" type="Marker2D" groups=["beef_warp_spots"]]

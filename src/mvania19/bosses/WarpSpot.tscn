@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dba5urikk70ib"]
+
+[node name="WarpSpot" type="Marker2D" groups=["warp_spots"]]
