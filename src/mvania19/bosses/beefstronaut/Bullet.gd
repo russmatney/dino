@@ -4,12 +4,16 @@ extends RigidBody2D
 var dying = false
 
 @onready var anim = $AnimatedSprite2D
+@onready var fb_hit_box = $FireBackHitBox
 
 #####################################################
 # ready
 
 func _ready():
 	body_entered.connect(_on_body_entered)
+	fb_hit_box.body_entered.connect(_on_fb_hitbox_body_entered)
+
+	fb_hit_box.monitoring = false
 
 #####################################################
 # process
@@ -35,17 +39,19 @@ func fire(impulse, rot):
 #####################################################
 # fire_back
 
+var firing_back
+
 func fire_back():
+	firing_back = true
+
 	anim.flip_v = true
-	apply_central_impulse(-2*og_impulse)
-	# TODO flip collision layers/masks
+	apply_central_impulse(-3*og_impulse)
 
-	# set player projectile layer
-	set_collision_layer(3)
+	fb_hit_box.monitoring = true
 
-	# set enemy mask
-	set_collision_mask(4)
-
+	# move to layer 3 (player projectiles) so we destroy enemy projectiles
+	set_collision_layer_value(3, true)
+	set_collision_layer_value(5, false)
 
 #####################################################
 # kill
@@ -67,21 +73,28 @@ func kill():
 #####################################################
 # collision
 
-signal hit_player()
+signal hit()
 
 func _on_body_entered(body: Node):
-	kill()
-
-	if dying:
+	if dying or firing_back:
 		return
 
-	Debug.pr("hit body", body)
+	_on_hit(body)
 
-	if body.is_in_group("player"):
+func _on_fb_hitbox_body_entered(body: Node):
+	if dying or not firing_back:
+		return
+
+	_on_hit(body)
+
+func _on_hit(body):
+	kill()
+
+	if body.has_method("take_hit"):
 		var dir
 		if global_position.x > body.global_position.x:
 			dir = Vector2.RIGHT
 		else:
 			dir = Vector2.LEFT
 		body.take_hit({"damage": 1, "direction": dir})
-		hit_player.emit()
+		hit.emit(self)

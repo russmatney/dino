@@ -12,8 +12,22 @@ func _ready():
 		machine.start()
 		machine.transitioned.connect(_on_transit)
 
+	restore()
+	Hotel.check_in(self)
+
 func _on_transit(state_label):
 	Debug.pr(state_label)
+
+#####################################################
+# hotel
+
+func restore():
+	var data = Hotel.check_out(self)
+	if data:
+		health = data.get("health", initial_health)
+
+func hotel_data():
+	return {health=health}
 
 #####################################################
 # movement
@@ -51,12 +65,10 @@ var max_bullets = 3
 
 func can_fire():
 	return len(bullets) < max_bullets and fire_cooldown_ttl == null and fire_burst_ttl == null
-	# on cool down?
-	# too many bullets in the room?
 
 var bullet_scene = preload("res://src/mvania19/bosses/beefstronaut/Bullet.tscn")
-var bullet_impulse = 200
-var bullet_knockback = 0.1
+var bullet_impulse = 100
+var bullet_knockback = 0.2
 
 signal fired_bullet(bullet)
 
@@ -68,9 +80,10 @@ var fire_burst_ttl
 var fire_cooldown = 5
 var fire_cooldown_ttl
 
-func _on_hit_player():
-	# take a break
-	fire_cooldown_ttl = fire_cooldown
+func _on_hit(bullet):
+	if not bullet.firing_back:
+		# take a break
+		fire_cooldown_ttl = fire_cooldown
 
 func _on_bullet_dying(bullet):
 	bullets.erase(bullet)
@@ -85,7 +98,7 @@ func fire():
 			fire_cooldown_ttl = fire_cooldown
 
 		bullet.bullet_dying.connect(_on_bullet_dying)
-		bullet.hit_player.connect(_on_hit_player)
+		bullet.hit.connect(_on_hit)
 
 		bullet.position = get_global_position()
 		bullet.add_collision_exception_with(self)
@@ -105,3 +118,21 @@ func fire():
 		var pos = get_global_position()
 		pos += -1 * to_player * bullet_knockback
 		set_global_position(pos)
+
+#####################################################
+# take_hit
+
+var initial_health = 5
+var health
+
+func take_hit(opts={}):
+	var damage = opts.get("damage", 1)
+	var _dir = opts.get("direction", Vector2.UP)
+
+	health -= damage
+	Debug.pr("took hit! health", health)
+
+	# TODO knockback state, animations, handle death there
+	if health <= 0:
+		queue_free()
+
