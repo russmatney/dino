@@ -11,7 +11,7 @@ size = Vector2(24, 36)
 
 [node name="Beefstronaut" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 3
+collision_mask = 7
 script = ExtResource("1_at5n1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

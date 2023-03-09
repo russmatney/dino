@@ -38,6 +38,14 @@ func fire(impulse, rot):
 func fire_back():
 	anim.flip_v = true
 	apply_central_impulse(-2*og_impulse)
+	# TODO flip collision layers/masks
+
+	# set player projectile layer
+	set_collision_layer(3)
+
+	# set enemy mask
+	set_collision_mask(4)
+
 
 #####################################################
 # kill
@@ -66,6 +74,8 @@ func _on_body_entered(body: Node):
 
 	if dying:
 		return
+
+	Debug.pr("hit body", body)
 
 	if body.is_in_group("player"):
 		var dir
