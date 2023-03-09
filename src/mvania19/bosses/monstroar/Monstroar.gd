@@ -3,6 +3,11 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var anim = $AnimatedSprite2D
 @onready var los = $LineOfSight
+@onready var attack_box = $AttackBox
+@onready var swoop_hint1 = $SwoopHint1
+@onready var swoop_hint2 = $SwoopHint2
+@onready var swoop_hint_player = $SwoopHintPlayer
+var swoop_hints = []
 
 const warp_group = "warp_spots"
 var warp_spots = []
@@ -21,6 +26,13 @@ func _ready():
 	warp_spots = Util.get_children_in_group(get_parent(), warp_group, false)
 
 	died.connect(_on_death)
+
+	attack_box.body_entered.connect(_on_attack_box_entered)
+
+	swoop_hints = [swoop_hint1, swoop_hint2, swoop_hint_player]
+	for sh in swoop_hints:
+		sh.call_deferred("reparent", get_parent())
+
 
 func _on_death(_boss):
 	Hotel.check_in(self)
@@ -110,3 +122,16 @@ func take_hit(opts={}):
 		damage=damage,
 		direction=direction,
 		})
+
+#####################################################
+# touch damage
+
+func _on_attack_box_entered(body: Node):
+	if machine.state.name in ["Swoop", "Idle"]:
+		if body.is_in_group("player") and body.has_method("take_hit"):
+			var dir
+			if global_position.x > body.global_position.x:
+				dir = Vector2.LEFT
+			else:
+				dir = Vector2.RIGHT
+			body.take_hit({"direction": dir})

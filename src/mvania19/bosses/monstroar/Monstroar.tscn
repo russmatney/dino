@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://uphnlcgjpnxu"]
+[gd_scene load_steps=16 format=3 uid="uid://uphnlcgjpnxu"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/Monstroar.gd" id="1_jqu05"]
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="2_afph5"]
@@ -12,9 +12,14 @@
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/machine/Laughing.gd" id="10_cameb"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_d6bbg"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/machine/Swoop.gd" id="11_w0qlm"]
+[ext_resource type="PackedScene" uid="uid://7mew15q00kg3" path="res://src/mvania19/bosses/PositionHint.tscn" id="13_qubff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tidp"]
-size = Vector2(24, 31)
+size = Vector2(16, 28)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_judcs"]
+radius = 16.0
+height = 32.0
 
 [node name="Monstroar" type="CharacterBody2D" groups=["bosses", "enemies"]]
 collision_layer = 8
@@ -22,13 +27,13 @@ collision_mask = 7
 script = ExtResource("1_jqu05")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.5)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_6tidp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
 sprite_frames = ExtResource("2_afph5")
-animation = &"dead"
+animation = &"fall"
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_85gcx")
@@ -62,3 +67,20 @@ target_position = Vector2(0, 150)
 collision_mask = 2
 
 [node name="CamPOF" parent="." instance=ExtResource("11_d6bbg")]
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+shape = SubResource("CapsuleShape2D_judcs")
+
+[node name="SwoopHint1" parent="." instance=ExtResource("13_qubff")]
+visible = false
+
+[node name="SwoopHint2" parent="." instance=ExtResource("13_qubff")]
+visible = false
+
+[node name="SwoopHintPlayer" parent="." instance=ExtResource("13_qubff")]
+visible = false

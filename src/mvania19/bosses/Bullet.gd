@@ -93,8 +93,8 @@ func _on_hit(body):
 	if body.has_method("take_hit"):
 		var dir
 		if global_position.x > body.global_position.x:
-			dir = Vector2.RIGHT
-		else:
 			dir = Vector2.LEFT
+		else:
+			dir = Vector2.RIGHT
 		body.take_hit({"damage": 1, "direction": dir})
 		hit.emit(self)

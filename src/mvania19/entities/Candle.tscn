@@ -34,12 +34,12 @@ process_material = ExtResource("3_7okj4")
 sprite_frames = ExtResource("1_ywigl")
 animation = &"flicker"
 autoplay = "flicker"
-frame_progress = 0.506748
+frame_progress = 0.840953
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(2, 2)
-energy = 0.800347
+energy = 0.800046
 shadow_enabled = true
 texture = ExtResource("6_nahms")
-texture_scale = 0.800277
+texture_scale = 0.800037
