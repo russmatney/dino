@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://uphnlcgjpnxu"]
+[gd_scene load_steps=14 format=3 uid="uid://uphnlcgjpnxu"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/Monstroar.gd" id="1_jqu05"]
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="2_afph5"]
@@ -11,11 +11,12 @@
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/machine/Warping.gd" id="9_07fic"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/machine/Laughing.gd" id="10_cameb"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_d6bbg"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/machine/Swoop.gd" id="11_w0qlm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tidp"]
 size = Vector2(24, 31)
 
-[node name="Monstroar" type="CharacterBody2D"]
+[node name="Monstroar" type="CharacterBody2D" groups=["bosses", "enemies"]]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_jqu05")
@@ -52,6 +53,9 @@ script = ExtResource("9_07fic")
 
 [node name="Laughing" type="Node" parent="Machine"]
 script = ExtResource("10_cameb")
+
+[node name="Swoop" type="Node" parent="Machine"]
+script = ExtResource("11_w0qlm")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)

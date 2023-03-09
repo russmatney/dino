@@ -15,12 +15,12 @@ func enter(opts={}):
 	if actor.dead:
 		kb_y = KNOCKBACK_DYING_Y
 		actor.anim.play("dying")
-		# TODO beefy sounds
+		# TODO monstroar sounds
 		MvaniaSounds.play_sound("soldierdead")
 	else:
 		kb_y = KNOCKBACK_Y
 		actor.anim.play("knockback")
-		# TODO beefy sounds
+		# TODO monstroar sounds
 		MvaniaSounds.play_sound("soldierhit")
 
 	if dir == Vector2.LEFT:
