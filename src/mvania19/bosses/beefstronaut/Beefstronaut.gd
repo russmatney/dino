@@ -20,6 +20,10 @@ func _ready():
 
 	warp_spots = Util.get_children_in_group(get_parent(), warp_group, false)
 
+	died.connect(_on_beef_death)
+
+func _on_beef_death(_beefstronaut):
+	Hotel.check_in(self)
 
 func _on_transit(state_label):
 	Debug.pr(state_label)
@@ -31,10 +35,15 @@ func _on_transit(state_label):
 func restore():
 	var data = Hotel.check_out(self)
 	if data:
+		global_position = data.get("position", global_position)
 		health = data.get("health", initial_health)
 
+		if health <= 0:
+			if machine:
+				machine.transit("Dead", {ignore_side_effects=true})
+
 func hotel_data():
-	return {health=health}
+	return {health=health, position=global_position}
 
 #####################################################
 # facing
@@ -83,6 +92,7 @@ signal fired_bullet(bullet)
 
 var initial_health = 5
 var health
+var dead
 
 signal died(beefstronaut)
 signal stunned(beefstronaut)
@@ -92,9 +102,11 @@ func take_hit(opts={}):
 	var direction = opts.get("direction", Vector2.UP)
 
 	health -= damage
+
+	if health <= 0:
+		dead = true
 	Debug.pr("took hit! health", health)
 	machine.transit("KnockedBack", {
-		dying=health <= 0,
 		damage=damage,
 		direction=direction,
 		})

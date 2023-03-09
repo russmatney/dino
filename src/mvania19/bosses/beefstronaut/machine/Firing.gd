@@ -46,7 +46,7 @@ func _on_hit(bullet):
 	# if bullet back_fired, we handle state change from actor.take_hit()
 	if not bullet.firing_back:
 		# hit player, take a break
-		machine.transit("Idle", {wait_for=fire_cooldown})
+		machine.transit("Laughing", {laugh_for=fire_cooldown, next_state="Firing"})
 
 func _on_bullet_dying(bullet):
 	bullets.erase(bullet)

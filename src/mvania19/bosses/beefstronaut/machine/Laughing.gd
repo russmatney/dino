@@ -1,18 +1,18 @@
 extends State
 
-var wait_at_least = 1
-var wait_ttl
+var laugh_at_least = 1
+var laugh_ttl
 var next_state
 
 func enter(ctx={}):
-	actor.anim.play("idle")
+	actor.anim.play("laughing")
 
-	wait_ttl = ctx.get("wait_for", wait_at_least)
+	laugh_ttl = ctx.get("wait_for", laugh_at_least)
 
 	next_state = ctx.get("next_state")
 
 func exit():
-	wait_ttl = wait_at_least
+	laugh_ttl = laugh_at_least
 
 func physics_process(delta):
 	actor.velocity.y += actor.GRAVITY * delta
@@ -23,9 +23,6 @@ func physics_process(delta):
 		machine.transit("Dead", {ignore_side_effects=true})
 		return
 
-	wait_ttl -= delta
-	if wait_ttl <= 0:
-		if next_state:
-			machine.transit(next_state)
-		else:
-			machine.transit("Firing")
+	laugh_ttl -= delta
+	if laugh_ttl <= 0:
+		machine.transit("Idle")

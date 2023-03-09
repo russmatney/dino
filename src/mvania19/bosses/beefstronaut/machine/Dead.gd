@@ -2,12 +2,13 @@ extends State
 
 func enter(ctx={}):
 	actor.anim.play("dead")
+	actor.dead = true
 	if not ctx.get("ignore_side_effects", false):
 		Cam.hitstop("beefstronaut_dead", 0.2, 1.0, 0.8)
 		# TODO beefy sound
 		MvaniaSounds.play_sound("soldierdead")
 
-	actor.died.emit(actor)
+		actor.died.emit(actor)
 
 
 func physics_process(delta):

@@ -1,10 +1,8 @@
 extends State
 
-var dying
-
 var KNOCKBACK_X = 20
-var KNOCKBACK_Y = 200
-var KNOCKBACK_DYING_Y = 300
+var KNOCKBACK_Y = 500
+var KNOCKBACK_DYING_Y = 700
 var min_kb_time = 2
 var kb_ttl = 2
 
@@ -12,10 +10,9 @@ var kb_ttl = 2
 func enter(opts={}):
 	kb_ttl = min_kb_time
 	var dir = opts.get("direction", Vector2.RIGHT)
-	dying = opts.get("dying", false)
 
 	var kb_y
-	if dying:
+	if actor.dead:
 		kb_y = KNOCKBACK_DYING_Y
 		actor.anim.play("dying")
 		# TODO beefy sounds
@@ -41,7 +38,7 @@ func physics_process(delta):
 
 	kb_ttl -= delta
 	if actor.is_on_floor() and kb_ttl <= 0:
-		if dying:
+		if actor.dead:
 			transit("Dead")
-		elif not dying:
+		else:
 			transit("Stunned")
