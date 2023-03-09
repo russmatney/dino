@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c06w4e4gdpkgf"]
+[gd_scene load_steps=12 format=3 uid="uid://c06w4e4gdpkgf"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1_k537y"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Idle.gd" id="4_safym"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Firing.gd" id="5_3polh"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/KnockedBack.gd" id="6_cfr1c"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Dead.gd" id="7_0fkpb"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Stunned.gd" id="8_s4710"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Warping.gd" id="9_7xr87"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 36)
@@ -28,6 +33,21 @@ script = ExtResource("2_jbhjj")
 
 [node name="Idle" type="Node" parent="Machine"]
 script = ExtResource("4_safym")
+
+[node name="Firing" type="Node" parent="Machine"]
+script = ExtResource("5_3polh")
+
+[node name="KnockedBack" type="Node" parent="Machine"]
+script = ExtResource("6_cfr1c")
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource("7_0fkpb")
+
+[node name="Stunned" type="Node" parent="Machine"]
+script = ExtResource("8_s4710")
+
+[node name="Warping" type="Node" parent="Machine"]
+script = ExtResource("9_7xr87")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)

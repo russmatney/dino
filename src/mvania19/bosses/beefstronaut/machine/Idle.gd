@@ -1,8 +1,15 @@
 extends State
 
+var wait_ttl
 
-func enter(_ctx={}):
+func enter(ctx={}):
 	actor.anim.play("idle")
 
-func physics_process(_delta):
-	pass
+	wait_ttl = ctx.get("wait_for", 0)
+
+func physics_process(delta):
+	wait_ttl -= delta
+
+	if wait_ttl <= 0:
+		# TODO warp after firing
+		machine.transit("Firing")
