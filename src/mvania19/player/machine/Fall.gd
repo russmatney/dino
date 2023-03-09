@@ -36,7 +36,6 @@ func physics_process(delta):
 
 		if coyote_ttj > 0:
 			if Input.is_action_just_pressed("jump"):
-				Debug.prn("Coyote time jump!")
 				machine.transit("Jump")
 				return
 		else:

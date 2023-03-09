@@ -26,7 +26,7 @@ func _on_death(_boss):
 	Hotel.check_in(self)
 
 func _on_transit(state_label):
-	Debug.pr(state_label)
+	# Debug.pr(state_label)
 	Debug.debug_label(name, "state", state_label)
 
 #####################################################
@@ -105,7 +105,7 @@ func take_hit(opts={}):
 
 	if health <= 0:
 		dead = true
-	Debug.pr("took hit! health", health)
+
 	machine.transit("KnockedBack", {
 		damage=damage,
 		direction=direction,

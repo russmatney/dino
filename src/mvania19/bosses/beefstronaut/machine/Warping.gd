@@ -13,9 +13,7 @@ func enter(_ctx={}):
 	# TODO warping animation
 	actor.anim.play("jump")
 
-	Debug.pr("warp spots", actor.warp_spots)
 	var warp_options = actor.warp_spots.filter(func(ws): return ws != last_ws)
-	Debug.pr("warp options", warp_options)
 	next_warp_spot = Util.rand_of(warp_options)
 
 	warp_ttl = warp_in

@@ -6,7 +6,6 @@ var double_jump_ttl
 
 func enter(ctx={}):
 	double_jumping = ctx.get("double_jumping", false)
-	Debug.pr("entering jump with double jump:", double_jumping)
 
 	MvaniaSounds.play_sound("jump")
 	actor.anim.play("jump")
@@ -44,7 +43,6 @@ func physics_process(delta):
 	if not double_jumping and actor.has_double_jump \
 		and double_jump_ttl <= 0 \
 		and Input.is_action_just_pressed("jump"):
-		Debug.prn("firing double jump!")
 		machine.transit("Jump", {"double_jumping": true})
 		return
 
