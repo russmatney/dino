@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var ttl = 3
+# var ttl = 3
 var dying = false
 
 @onready var anim = $AnimatedSprite2D
@@ -14,10 +14,30 @@ func _ready():
 #####################################################
 # process
 
-func _process(delta):
-	ttl -= delta
-	if ttl <= 0:
-		kill()
+# func _process(delta):
+# 	ttl -= delta
+# 	if ttl <= 0:
+# 		kill()
+
+#####################################################
+# fire
+
+var og_impulse
+var og_rotation
+
+func fire(impulse, rot):
+	og_impulse = impulse
+	og_rotation = rot
+
+	rotation = rot
+	apply_central_impulse(impulse)
+
+#####################################################
+# fire_back
+
+func fire_back():
+	anim.flip_v = true
+	apply_central_impulse(-2*og_impulse)
 
 #####################################################
 # kill
@@ -28,7 +48,7 @@ func kill():
 	if not dying:
 		dying = true
 		Cam.screenshake(0.1)
-		MvaniaSounds.play_sound("bullet_hit")
+		# MvaniaSounds.play_sound("bullet_hit")
 		anim.set_visible(false)
 		bullet_dying.emit(self)
 
@@ -43,6 +63,9 @@ signal hit_player()
 
 func _on_body_entered(body: Node):
 	kill()
+
+	if dying:
+		return
 
 	if body.is_in_group("player"):
 		var dir

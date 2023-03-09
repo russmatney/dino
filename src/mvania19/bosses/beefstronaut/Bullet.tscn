@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iexjs"]
 radius = 3.0
-height = 16.0
+height = 10.0
 
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 16
@@ -16,13 +16,11 @@ contact_monitor = true
 script = ExtResource("1_s23kw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, 1)
 rotation = 1.57079
 scale = Vector2(2, 1)
 sprite_frames = ExtResource("1_fvfvs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
 rotation = -1.57079
 scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_iexjs")

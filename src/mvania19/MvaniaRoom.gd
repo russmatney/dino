@@ -235,6 +235,8 @@ func to_normal():
 
 var pof_scene = preload("res://addons/camera/CamPOF.tscn")
 var auto_pof_group = "auto_pofs"
+var poa_scene = preload("res://addons/camera/CamPOA.tscn")
+var auto_poa_group = "auto_poas"
 var poi_scene = preload("res://addons/camera/CamPOI.tscn")
 var auto_poi_group = "auto_pois"
 
@@ -243,7 +245,7 @@ func create_point(scene, auto_group, pos):
 	auto_point.add_to_group(auto_group, true)
 	auto_point.position = pos
 
-	# only relevant for POIs, not POFs
+	# only relevant for POIs
 	# auto_point.importance = 0.4
 
 	add_child(auto_point)
@@ -260,10 +262,14 @@ func ensure_cam_points():
 		rect.position + Vector2(0, rect.size.y)]
 
 	for p in points:
-		# create_point(poi_scene, auto_poi_group, p)
-		create_point(pof_scene, auto_pof_group, p)
+		create_point(poa_scene, auto_poa_group, p)
 
 func deactivate_cam_points():
+	var poas = Util.get_children_in_group(self, Cam.poa_group)
+	for p in poas:
+		if p.has_method("deactivate"):
+			p.deactivate()
+
 	var pofs = Util.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("deactivate"):
@@ -275,6 +281,11 @@ func deactivate_cam_points():
 			p.deactivate()
 
 func activate_cam_points():
+	var poas = Util.get_children_in_group(self, Cam.poa_group)
+	for p in poas:
+		if p.has_method("activate"):
+			p.activate()
+
 	var pofs = Util.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("activate"):

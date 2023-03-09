@@ -95,9 +95,10 @@ func fire():
 		var to_player = to_global(los.target_position) - global_position
 		to_player = to_player.normalized()
 
-		bullet.rotation = to_player.angle()
-		bullet.apply_impulse(to_player * bullet_impulse, Vector2.ZERO)
-		# MvaniaSounds.play_sound("fire")
+		var impulse = to_player * bullet_impulse
+		var rot = to_player.angle()
+		bullet.fire(impulse, rot)
+
 		emit_signal("fired_bullet", bullet)
 
 		# push back when firing

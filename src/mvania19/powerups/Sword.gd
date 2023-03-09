@@ -86,6 +86,11 @@ func _on_frame_changed():
 					bodies_this_swing.append(b)
 					var dir = facing_dir()
 					b.take_hit({"damage": 1, "direction": dir})
+			if b.has_method("fire_back"):
+				if not b in bodies_this_swing:
+					Cam.hitstop("swordhit", 0.3, 0.2)
+					bodies_this_swing.append(b)
+					b.fire_back()
 		for bs in body_shapes:
 			var b = bs[1]
 			if b.has_method("destroy_tile_with_rid"):

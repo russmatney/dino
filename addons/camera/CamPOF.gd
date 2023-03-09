@@ -1,10 +1,10 @@
-# NOTE for POIs and POFs
+# NOTE for POIs, POAs, and POFs
 extends Marker2D
 
 
 @export var active = true
 
-# only relevant for POIs, not POFs
+# only relevant for POIs
 @export_range(0.0, 1.0) var importance
 
 func get_importance():

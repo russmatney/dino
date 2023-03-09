@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c06w4e4gdpkgf"]
+[gd_scene load_steps=7 format=3 uid="uid://c06w4e4gdpkgf"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1_k537y"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Idle.gd" id="4_safym"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 36)
@@ -31,3 +32,5 @@ script = ExtResource("4_safym")
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)
 collision_mask = 2
+
+[node name="CamPOF" parent="." instance=ExtResource("5_15lvx")]

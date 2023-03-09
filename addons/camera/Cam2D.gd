@@ -6,6 +6,7 @@ enum cam_mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
 @export var follow_group: String = "player"
 @export var anchor_group: String = "camera_anchor"
 @export var poi_group: String = Cam.poi_group
+@export var poa_group: String = Cam.poa_group
 @export var pof_group: String = Cam.pof_group
 
 var following
@@ -13,6 +14,7 @@ var current_anchor
 
 var poi_follows = []
 var pof_follows = []
+var poa_follows = []
 
 var poi_following_distance = 150
 
@@ -44,6 +46,8 @@ func _ready():
 	if mode == cam_mode.FOLLOW_AND_POIS:
 		if poi_group:
 			update_pois()
+		elif poa_group:
+			update_poas()
 		elif pof_group:
 			update_pofs()
 
@@ -102,8 +106,10 @@ func _process(delta):
 
 			update_pois()
 			update_pofs()
+			update_poas()
 			update_focus()
 
+			Debug.debug_label("poas: ", poa_follows)
 			Debug.debug_label("pofs: ", pof_follows)
 			Debug.debug_label("pois: ", poi_follows)
 
@@ -250,6 +256,21 @@ func update_pois():
 			poi_follows = nearby_pois
 
 
+func update_poas():
+	if poa_group:
+		var t = get_tree()
+		if t:
+			var poas = t.get_nodes_in_group(poa_group)
+
+			var to_focus = []
+			for p in poas:
+				if p.has_method("is_active"):
+					if p.is_active():
+						to_focus.append(p)
+				else:
+					to_focus.append(p)
+			poa_follows = to_focus
+
 func update_pofs():
 	if pof_group:
 		var t = get_tree()
@@ -275,10 +296,9 @@ func build_focuses():
 
 	var fcses = []
 
-	# TODO favor the `following` (player) position more
 	fcses.append(following)
 	fcses.append_array(pof_follows)
-	# TODO favor pois based checked importance * proximity
+	fcses.append_array(poa_follows)
 	fcses.append_array(poi_follows)
 
 	return fcses
@@ -308,9 +328,12 @@ func update_focus():
 			if weighted_dist.length() > 0:
 				var poi_weighted_pos = obj.global_position - weighted_dist
 				obj_pos = poi_weighted_pos
-		elif obj.is_in_group(pof_group) and obj != following:
-			obj_pos = obj.global_position - pof_offset(obj)
+		# elif obj.is_in_group(pof_group) and obj != following:
+		# 	obj_pos = obj.global_position
+		elif obj.is_in_group(poa_group):
+			obj_pos = obj.global_position - poa_offset(obj)
 		else:
+			# pofs always in focus
 			obj_pos = obj.global_position
 
 		if obj_pos != null:
@@ -355,7 +378,7 @@ var zoom_min_margin = 50
 func update_zoom_level_for_bounds():
 	var vp_size = get_viewport().size
 
-	Debug.debug_label("POF Rect", focuses_rect)
+	Debug.debug_label("Focus Rect", focuses_rect)
 
 	var x = focuses_rect.size.x
 	var y = focuses_rect.size.y
@@ -455,9 +478,9 @@ func screenshake_rotational(noise_ctx, delta):
 
 var pof_max = Vector2(100.0, 80.0)
 
-## How much should we move the pof towards the player?
-func pof_offset(pof) -> Vector2:
-	var v_diff = pof.global_position - following.global_position
+## How much should we move the poa towards the player?
+func poa_offset(poa) -> Vector2:
+	var v_diff = poa.global_position - following.global_position
 	var offset = Vector2()
 
 	if abs(v_diff.x) < pof_max.x:
@@ -523,9 +546,19 @@ func _draw():
 				draw_multiline_string(debug_font, poi_weighted_pos, s)
 				draw_circle(poi_weighted_pos, 3.0, Color.AQUAMARINE)
 
+			if p.is_in_group(poa_group) and p != following:
+				var dist = poa_offset(p)
+				var poa_pos = p.global_position - dist - get_target_position()
+				var dist_from_player = poa_pos - player_pos
+
+				var s = str(round(dist_from_player.length()), "\n")
+				s += str(round(poa_pos.x), ",", round(poa_pos.y), "\n")
+
+				draw_multiline_string(debug_font, poa_pos, s)
+				draw_circle(poa_pos, 3.0, Color.AQUAMARINE)
+
 			if p.is_in_group(pof_group) and p != following:
-				var dist = pof_offset(p)
-				var pof_pos = p.global_position - dist - get_target_position()
+				var pof_pos = p.global_position - get_target_position()
 				var dist_from_player = pof_pos - player_pos
 
 				var s = str(round(dist_from_player.length()), "\n")
