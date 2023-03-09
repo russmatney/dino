@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var los = $LineOfSight
 
+const warp_group = "beef_warp_spots"
+var warp_spots = []
+
 #####################################################
 # ready
 
@@ -14,6 +17,9 @@ func _ready():
 
 	restore()
 	Hotel.check_in(self)
+
+	warp_spots = Util.get_children_in_group(get_parent(), warp_group, false)
+
 
 func _on_transit(state_label):
 	Debug.pr(state_label)

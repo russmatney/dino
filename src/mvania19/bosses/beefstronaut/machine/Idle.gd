@@ -1,20 +1,27 @@
 extends State
 
+var wait_at_least = 1
 var wait_ttl
+var next_state
 
 func enter(ctx={}):
 	actor.anim.play("idle")
 
-	wait_ttl = ctx.get("wait_for", 0)
+	wait_ttl = ctx.get("wait_for", wait_at_least)
+
+	next_state = ctx.get("next_state")
+
+func exit():
+	wait_ttl = wait_at_least
 
 func physics_process(delta):
-	wait_ttl -= delta
-
-	if wait_ttl <= 0:
-		# TODO warp after firing
-		machine.transit("Firing")
-		return
-
 	actor.velocity.y += actor.GRAVITY * delta
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
 	actor.move_and_slide()
+
+	wait_ttl -= delta
+	if wait_ttl <= 0:
+		if next_state:
+			machine.transit(next_state)
+		else:
+			machine.transit("Firing")

@@ -46,13 +46,13 @@ func _on_hit(bullet):
 	# if bullet back_fired, we handle state change from actor.take_hit()
 	if not bullet.firing_back:
 		# hit player, take a break
-		machine.transit("Idle", {"wait_for": fire_cooldown})
+		machine.transit("Idle", {wait_for=fire_cooldown})
 
 func _on_bullet_dying(bullet):
 	bullets.erase(bullet)
 
 	if bullets_til_break <= 0 and bullet == last_bullet:
-		machine.transit("Idle", {"wait_for": fire_cooldown})
+		machine.transit("Idle", {wait_for=fire_cooldown, next_state="Warping"})
 
 #####################################################
 # fire logic

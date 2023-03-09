@@ -23,4 +23,4 @@ func physics_process(delta):
 
 	stunned_ttl -= delta
 	if stunned_ttl <= 0:
-		machine.transit("Idle", {wait_for=2})
+		machine.transit("Idle", {wait_for=2, next_state="Warping"})

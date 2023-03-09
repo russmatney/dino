@@ -175,6 +175,9 @@ func p_script_vars(node):
 
 
 func rand_of(arr):
+	if len(arr) == 0:
+		push_warning("Util.rand_of passed empty array")
+		return
 	arr.shuffle()
 	return arr[0]
 

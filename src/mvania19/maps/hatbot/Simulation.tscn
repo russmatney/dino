@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://csusojqfjxde1"]
+[gd_scene load_steps=14 format=3 uid="uid://csusojqfjxde1"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_eirev"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_4fgnt"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="10_jfj05"]
 [ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="11_4s4lm"]
 [ext_resource type="PackedScene" uid="uid://c06w4e4gdpkgf" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="11_v6sjm"]
+[ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/beefstronaut/BeefWarpSpot.tscn" id="12_m4nn0"]
 
 [node name="Simulation" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_eirev")
@@ -113,6 +114,18 @@ position = Vector2(8, 40)
 
 [node name="PowerupPickup2" parent="SpaceshipBoss" instance=ExtResource("11_4s4lm")]
 position = Vector2(104, 96)
+
+[node name="BeefWarpSpot" parent="SpaceshipBoss" instance=ExtResource("12_m4nn0")]
+position = Vector2(-88, 8)
+
+[node name="BeefWarpSpot2" parent="SpaceshipBoss" instance=ExtResource("12_m4nn0")]
+position = Vector2(32, -64)
+
+[node name="BeefWarpSpot3" parent="SpaceshipBoss" instance=ExtResource("12_m4nn0")]
+position = Vector2(120, -16)
+
+[node name="BeefWarpSpot4" parent="SpaceshipBoss" instance=ExtResource("12_m4nn0")]
+position = Vector2(40, 32)
 
 [node name="DevSpawnPoint" parent="." groups=["dev_spawn_points"] instance=ExtResource("10_jfj05")]
 position = Vector2(584, -23)
