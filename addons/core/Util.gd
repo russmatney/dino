@@ -1,30 +1,20 @@
 @tool
 extends Node
 
+############################################################
+# misc
 
-func _or(a, b = null, c = null, d = null, e = null):
-	if a:
-		return a
-	if b:
-		return b
-	if c:
-		return c
-	if d:
-		return d
-	if e:
-		return e
+func node_name_from_path(path):
+	var parts = path.split("/")
+	return parts[-1]
 
+func p_script_vars(node):
+	for prop in node.get_property_list():
+		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
+			print("\t", prop["name"], ": ", self.get(prop["name"]))
 
-func change_parent(child: Node, new_parent: Node):
-	call_deferred("do_change_parent", child, new_parent)
-
-
-func do_change_parent(child, new_parent):
-	# TODO need to set owner as well to support creating PackedScenes
-	var old_parent = child.get_parent()
-	old_parent.remove_child(child)
-	new_parent.add_child(child)
-
+############################################################
+# nearby
 
 # https://godotengine.org/qa/27869/how-to-get-the-nearest-object-in-a-group
 func nearest_node(source: Node, targets) -> Node:
@@ -44,6 +34,14 @@ func nearest_node(source: Node, targets) -> Node:
 
 	return nearest_target
 
+func are_points_close(a, b, diff=5):
+	return abs(a.x - b.x) < diff and abs(a.y - b.y) < diff
+
+func are_nodes_close(a, b, diff=5):
+	return are_points_close(a.global_position, b.global_position, diff)
+
+############################################################
+# groups
 
 func first_node_in_group(group_name: String) -> Node:
 	for c in get_tree().get_nodes_in_group(group_name):
@@ -72,6 +70,19 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 					in_group.append(d)
 	return in_group
 
+############################################################
+# children/parents
+
+func change_parent(child: Node, new_parent: Node):
+	call_deferred("do_change_parent", child, new_parent)
+
+
+func do_change_parent(child, new_parent):
+	# TODO need to set owner as well to support creating PackedScenes
+	var old_parent = child.get_parent()
+	old_parent.remove_child(child)
+	new_parent.add_child(child)
+
 func get_children_by_name(node: Node):
 	var by_name = {}
 	for ch in node.get_children():
@@ -89,6 +100,8 @@ func get_all_parents(node: Node, parents=[]):
 	else:
 		return parents
 
+############################################################
+# packed_scene reading
 
 # Returns a dict full of data for the passed packed_scene or path to one.
 # If a path is passed, the scene_file_path will be included as a property
@@ -135,6 +148,8 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 		by_path[path] = node_data
 	return by_path
 
+############################################################
+# collisions
 
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
@@ -149,6 +164,8 @@ func set_collisions_enabled(node, enabled):
 		node.collision_mask = 0
 		node.collision_layer = 0
 
+############################################################
+# connections
 
 func ensure_connection(obj, sig, target, method, args = []):
 	if not obj.has_signal(sig):
@@ -163,23 +180,19 @@ func ensure_connection(obj, sig, target, method, args = []):
 		print("[Error]: ", err)  # useless enum digit
 
 
-func node_name_from_path(path):
-	var parts = path.split("/")
-	return parts[-1]
 
+############################################################
+# random
 
-func p_script_vars(node):
-	for prop in node.get_property_list():
-		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
-			print("\t", prop["name"], ": ", self.get(prop["name"]))
-
-
-func rand_of(arr):
+func rand_of(arr, n=1):
 	if len(arr) == 0:
 		push_warning("Util.rand_of passed empty array")
 		return
 	arr.shuffle()
-	return arr[0]
+	if n == 1:
+		return arr[0]
+	else:
+		return arr.slice(0, n)
 
 
 func set_random_frame(anim):
@@ -187,30 +200,28 @@ func set_random_frame(anim):
 
 
 ############################################################
-# Functional
+# misc functional
 
-
-static func map(function: Callable, i_array: Array) -> Array:
-	var o_array := []
-	for value in i_array:
-		o_array.append(function.call(value))
-	return o_array
-
-
-static func filter(function: Callable, i_array: Array):
-	pass
-
+func _or(a, b = null, c = null, d = null, e = null):
+	if a:
+		return a
+	if b:
+		return b
+	if c:
+		return c
+	if d:
+		return d
+	if e:
+		return e
 
 # could be more efficient
 # https://github.com/godotengine/godot-proposals/issues/3116#issuecomment-1363222780
 func remove_matching(arr, to_remove):
-	for rem in to_remove:
-		arr.erase(rem)
-	return arr
+	return arr.filter(func(a): return a in to_remove)
 
 
 ############################################################
-# Flip
+# Facing
 
 func update_h_flip(facing, node):
 	if facing == Vector2.RIGHT and node.position.x < 0:
@@ -225,3 +236,4 @@ func update_los_facing(facing, node):
 		node.target_position.y = -node.target_position.y
 	elif facing == Vector2.LEFT and node.target_position.y < 0:
 		node.target_position.y = -node.target_position.y
+
