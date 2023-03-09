@@ -10,9 +10,19 @@ func enter(_ctx={}):
 #####################################################
 # physics
 
+var break_every = 3
+var bullets_til_break
+
 func physics_process(delta):
 	if actor.can_see_player and can_fire():
 		fire()
+		if bullets_til_break:
+			bullets_til_break -= 1
+			if bullets_til_break <= 0:
+				machine.transit("Idle", {"wait_for": fire_cooldown})
+				return
+		else:
+			bullets_til_break = break_every
 
 	if fire_burst_ttl:
 		fire_burst_ttl -= delta
@@ -58,24 +68,27 @@ func fire():
 	fire_burst_ttl = fire_burst_rate()
 
 	var bullet = bullet_scene.instantiate()
-	bullets.append(bullet)
 
+	# meta
+	bullets.append(bullet)
 	bullet.bullet_dying.connect(_on_bullet_dying)
 	bullet.hit.connect(_on_hit)
 
+	# position
 	bullet.position = actor.get_global_position()
-	bullet.add_collision_exception_with(self)
 
+	# add child
 	Navi.current_scene.call_deferred("add_child", bullet)
 
+	# rotate and impulse
 	# using los.target_position for player position
 	var to_player = actor.to_global(actor.los.target_position) - actor.global_position
 	to_player = to_player.normalized()
-
 	var impulse = to_player * bullet_impulse
 	var rot = to_player.angle()
 	bullet.fire(impulse, rot)
 
+	# signal
 	actor.fired_bullet.emit(bullet)
 
 	# push back when firing
