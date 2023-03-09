@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dggsvp0ettrqd"]
+[gd_scene load_steps=12 format=3 uid="uid://dggsvp0ettrqd"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_2s6nm"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_0ral6"]
@@ -7,7 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ruuw7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
 [ext_resource type="PackedScene" uid="uid://uphnlcgjpnxu" path="res://src/mvania19/bosses/monstroar/Monstroar.tscn" id="7_h4avw"]
+[ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="7_l0y7r"]
 [ext_resource type="PackedScene" uid="uid://c06w4e4gdpkgf" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="8_jvvmr"]
+[ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="9_yyqc6"]
+[ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_rawej"]
 
 [node name="Volcano" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_2s6nm")
@@ -59,3 +62,35 @@ position = Vector2(104, 12)
 
 [node name="Beefstronaut" parent="VolcanoBoss" instance=ExtResource("8_jvvmr")]
 position = Vector2(-112, 8)
+
+[node name="WarpSpot" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
+position = Vector2(-112, 8)
+
+[node name="WarpSpot4" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
+position = Vector2(112, 8)
+
+[node name="WarpSpot5" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
+position = Vector2(32, 48)
+
+[node name="WarpSpot6" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
+position = Vector2(-24, 48)
+
+[node name="WarpSpot2" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
+position = Vector2(-144, -24)
+
+[node name="WarpSpot3" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
+position = Vector2(144, -32)
+
+[node name="PowerupPickup" parent="VolcanoBoss" instance=ExtResource("7_l0y7r")]
+position = Vector2(-112, 64)
+
+[node name="PowerupPickup2" parent="VolcanoBoss" instance=ExtResource("7_l0y7r")]
+position = Vector2(-128, 64)
+powerup = 1
+
+[node name="PowerupPickup3" parent="VolcanoBoss" instance=ExtResource("7_l0y7r")]
+position = Vector2(-144, 64)
+powerup = 2
+
+[node name="PlayerSpawnPoint" parent="VolcanoBoss" instance=ExtResource("11_rawej")]
+position = Vector2(-144, 40)

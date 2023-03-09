@@ -38,7 +38,7 @@ func _on_death(_boss):
 	Hotel.check_in(self)
 
 func _on_transit(state_label):
-	# Debug.pr(state_label)
+	Debug.pr(state_label)
 	Debug.debug_label(name, "state", state_label)
 
 #####################################################

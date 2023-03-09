@@ -71,7 +71,7 @@ func swoop(spot):
 	swooping = true
 
 	var tween = create_tween()
-	tween.tween_property(actor, "position", pos, 0.4)\
+	tween.tween_property(actor, "global_position", pos, 0.4)\
 		.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_callback(finished_swoop.bind(spot[1]))
 

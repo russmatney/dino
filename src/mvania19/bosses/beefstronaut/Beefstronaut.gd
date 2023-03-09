@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var los = $LineOfSight
 
-const warp_group = "beef_warp_spots"
+const warp_group = "warp_spots"
 var warp_spots = []
 
 #####################################################
@@ -26,7 +26,7 @@ func _on_beef_death(_beefstronaut):
 	Hotel.check_in(self)
 
 func _on_transit(state_label):
-	# Debug.pr(state_label)
+	Debug.pr(state_label)
 	Debug.debug_label(name, "state", state_label)
 
 #####################################################

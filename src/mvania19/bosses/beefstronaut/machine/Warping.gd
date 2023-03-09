@@ -28,5 +28,6 @@ func physics_process(delta):
 	warp_ttl -= delta
 	if warp_ttl <= 0:
 		# animate
-		actor.global_position = next_warp_spot.global_position
+		if next_warp_spot != null:
+			actor.global_position = next_warp_spot.global_position
 		machine.transit("Idle")
