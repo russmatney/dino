@@ -1,34 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://duohpnsdc120b"]
 
-[ext_resource path="res://resources/sprites/coin.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/dungeonCrawler/items/Coin.gd" type="Script" id=2]
+[ext_resource type="SpriteFrames" uid="uid://c1f3hoppwx7cw" path="res://resources/sprites/coin.tres" id="1"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/items/Coin.gd" id="2"]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 9.0
-
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id="1"]
 
 [node name="Coin" type="Node2D" groups=["magnetic"]]
-script = ExtResource( 2 )
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-collision_layer = 32
-collision_mask = 2
-gravity_scale = 0.0
-applied_torque = 20.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource( 2 )
+script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource( 1 )
-playing = true
+sprite_frames = ExtResource("1")
+autoplay = "default"
+frame_progress = 0.0797929
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["coin"]]
 collision_layer = 32
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

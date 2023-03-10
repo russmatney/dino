@@ -1,18 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://btgfyldjmtu8t"]
+[gd_scene load_steps=7 format=3 uid="uid://btgfyldjmtu8t"]
 
 [ext_resource type="SpriteFrames" uid="uid://dfrbf5ohm2fct" path="res://src/mvania19/entities/DoorSpriteFrames.tres" id="1_5m0uh"]
 [ext_resource type="Script" path="res://src/mvania19/entities/Door.gd" id="1_arj2e"]
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_ox5jh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1rxf"]
-size = Vector2(30, 31)
+size = Vector2(30, 64)
 
-[node name="Door" type="AnimatableBody2D"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s844d"]
+polygon = PackedVector2Array(16, -28, 0, -16, -16, -28, -16, -32, 16, -32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5q0k"]
+size = Vector2(128, 64)
+
+[node name="Door" type="Node2D" groups=["doors"]]
 script = ExtResource("1_arj2e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 shape = SubResource("RectangleShape2D_y1rxf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_5m0uh")
-animation = &"closed"
+animation = &"opening"
+autoplay = "closed"
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = 1.5708
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_s844d")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+rotation = 3.14159
+occluder = SubResource("OccluderPolygon2D_s844d")
+
+[node name="ActionArea" parent="." instance=ExtResource("3_ox5jh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_o5q0k")

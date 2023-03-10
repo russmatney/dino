@@ -217,6 +217,14 @@ func heal(opts={}):
 	Hotel.check_in(self)
 
 ########################################################
+# coins
+
+var coins = 0
+
+func add_coin():
+	coins += 1
+
+########################################################
 # powerups
 
 var powerups = []

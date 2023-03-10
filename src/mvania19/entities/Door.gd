@@ -1,41 +1,83 @@
 @tool
-extends AnimatableBody2D
+extends Node2D
 
-@onready var collision_shape = $CollisionShape2D
+@onready var collision_shape = $AnimatableBody2D/CollisionShape2D
 @onready var anim = $AnimatedSprite2D
+@onready var action_area = $ActionArea
 
-@export var initial_state = "closed" :
+##################################################################
+# actions
+
+var actions = [
+	Action.mk({
+		label="Open", fn=open, source_can_execute=func():
+		Debug.prn("src can exec")
+		return can_open(),
+		}),
+	Action.mk({
+		label="Close", fn=close, source_can_execute=can_close,
+		})
+	]
+
+##################################################################
+# exports
+
+@export var state = "closed" :
 	set(new_state):
-		initial_state = new_state
-		if scene_ready:
-			set_new_state(new_state)
+		if state != new_state:
+			state = new_state
+			update_state()
 
-func set_new_state(new_state):
-	if new_state == "open":
-		set_open()
-	elif new_state == "closed":
-		set_closed()
+func update_state():
+	if state == "open":
+		open()
+	elif state == "closed":
+		close()
 
-var scene_ready
+##################################################################
+# ready
 
 func _ready():
-	call_deferred("setup")
-	scene_ready = true
+	Hotel.register(self)
 
-func setup():
-	set_new_state(initial_state)
+	action_area.register_actions(actions, self)
+
+	update_state()
 	anim.animation_finished.connect(_on_animation_finished)
+
+func hotel_data():
+	return {state=state}
+func check_out(data):
+	state = data.get("state", state)
 
 func _on_animation_finished():
 	if anim.animation == "opening":
 		anim.play("open")
+		if collision_shape:
+			collision_shape.call_deferred("set_disabled", true)
 	elif anim.animation == "closing":
 		anim.play("closed")
+		collision_shape.call_deferred("set_disabled", false)
 
-func set_open():
-	anim.play("opening")
-	collision_shape.call_deferred("set_disabled", true)
+##################################################################
+# open/close
 
-func set_closed():
-	anim.play("closing")
-	collision_shape.call_deferred("set_disabled", false)
+func open():
+	state = "open"
+	if anim:
+		anim.play("opening")
+
+
+func close():
+	state = "closed"
+	if anim:
+		anim.play("closing")
+
+##################################################################
+# can
+
+func can_open():
+	return state == "closed"
+
+func can_close():
+	return state == "open"
