@@ -17,7 +17,8 @@ func exit():
 func physics_process(delta):
 
 	# TODO floaty wiggle
-	# actor.velocity.y += actor.GRAVITY * delta
+	if not actor.can_float:
+		actor.velocity.y += actor.GRAVITY * delta
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
 	actor.move_and_slide()
 
@@ -29,6 +30,7 @@ func physics_process(delta):
 	if wait_ttl <= 0:
 		if next_state:
 			machine.transit(next_state)
-		else:
-			# consider still supporting fire
+		elif actor.can_swoop:
 			machine.transit("Swoop")
+		else:
+			machine.transit("Firing")

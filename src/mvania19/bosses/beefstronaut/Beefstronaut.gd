@@ -7,6 +7,9 @@ extends CharacterBody2D
 const warp_group = "warp_spots"
 var warp_spots = []
 
+const can_float = false
+const can_swoop = false
+
 #####################################################
 # ready
 
@@ -19,9 +22,9 @@ func _ready():
 
 	warp_spots = Util.get_children_in_group(get_parent(), warp_group, false)
 
-	died.connect(_on_beef_death)
+	died.connect(_on_death)
 
-func _on_beef_death(_beefstronaut):
+func _on_death(_boss):
 	Hotel.check_in(self)
 
 func _on_transit(state_label):
@@ -91,8 +94,8 @@ var initial_health = 5
 var health
 var dead
 
-signal died(beefstronaut)
-signal stunned(beefstronaut)
+signal died(boss)
+signal stunned(boss)
 
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)

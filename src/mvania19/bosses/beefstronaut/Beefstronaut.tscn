@@ -1,16 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://c06w4e4gdpkgf"]
+[gd_scene load_steps=13 format=3 uid="uid://coxhcbeogq8y3"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1_k537y"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Idle.gd" id="4_safym"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Firing.gd" id="5_3polh"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/Idle.gd" id="4_rwt87"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/Firing.gd" id="5_5chnv"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/KnockedBack.gd" id="6_cfr1c"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Dead.gd" id="7_0fkpb"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Stunned.gd" id="8_s4710"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Warping.gd" id="9_7xr87"]
-[ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/machine/Laughing.gd" id="10_oqpxc"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/KnockedBack.gd" id="6_fqcf7"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/Dead.gd" id="7_oy4g0"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/Stunned.gd" id="8_fhgq5"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/Warping.gd" id="9_3hlyf"]
+[ext_resource type="Script" path="res://src/mvania19/bosses/machine/Laughing.gd" id="10_dgtvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 31)
@@ -33,25 +33,25 @@ animation = &"dead"
 script = ExtResource("2_jbhjj")
 
 [node name="Idle" type="Node" parent="Machine"]
-script = ExtResource("4_safym")
+script = ExtResource("4_rwt87")
 
 [node name="Firing" type="Node" parent="Machine"]
-script = ExtResource("5_3polh")
+script = ExtResource("5_5chnv")
 
 [node name="KnockedBack" type="Node" parent="Machine"]
-script = ExtResource("6_cfr1c")
+script = ExtResource("6_fqcf7")
 
 [node name="Dead" type="Node" parent="Machine"]
-script = ExtResource("7_0fkpb")
+script = ExtResource("7_oy4g0")
 
 [node name="Stunned" type="Node" parent="Machine"]
-script = ExtResource("8_s4710")
+script = ExtResource("8_fhgq5")
 
 [node name="Warping" type="Node" parent="Machine"]
-script = ExtResource("9_7xr87")
+script = ExtResource("9_3hlyf")
 
 [node name="Laughing" type="Node" parent="Machine"]
-script = ExtResource("10_oqpxc")
+script = ExtResource("10_dgtvf")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)

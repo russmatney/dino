@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="4_m2scx"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ruuw7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
-[ext_resource type="PackedScene" uid="uid://uphnlcgjpnxu" path="res://src/mvania19/bosses/monstroar/Monstroar.tscn" id="7_h4avw"]
+[ext_resource type="PackedScene" uid="uid://cukeivdgc4n4c" path="res://src/mvania19/bosses/monstroar/Monstroar.tscn" id="7_h4avw"]
 [ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="7_l0y7r"]
-[ext_resource type="PackedScene" uid="uid://c06w4e4gdpkgf" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="8_jvvmr"]
+[ext_resource type="PackedScene" uid="uid://coxhcbeogq8y3" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="8_jvvmr"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="9_yyqc6"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_rawej"]
 

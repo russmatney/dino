@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var los = $LineOfSight
 @onready var attack_box = $AttackBox
+
 @onready var swoop_hint1 = $SwoopHint1
 @onready var swoop_hint2 = $SwoopHint2
 @onready var swoop_hint_player = $SwoopHintPlayer
@@ -11,6 +12,9 @@ var swoop_hints = []
 
 const warp_group = "warp_spots"
 var warp_spots = []
+
+const can_float = true
+const can_swoop = true
 
 #####################################################
 # ready
