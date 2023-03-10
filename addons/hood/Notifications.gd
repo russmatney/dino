@@ -7,23 +7,23 @@ var scene_ready
 	set(txt):
 		add_notif = txt
 		if txt and scene_ready:
-			new_notification({"msg": txt})
+			_on_notification({"msg": txt})
 
 @export var add_rich_notif = "" :
 	set(txt):
 		add_rich_notif = txt
 		if txt and scene_ready:
-			new_notification({"msg": txt, "rich": true})
+			_on_notification({"msg": txt, "rich": true})
 
 func _ready():
-	Hood.notification.connect(new_notification)
+	Hood.notification.connect(_on_notification)
 	Hood.notif("[HOOD] Notifications online.")
 	scene_ready = true
 
 var notif_label = preload("res://addons/hood/NotifLabel.tscn")
 var notif_rich_label = preload("res://addons/hood/NotifRichLabel.tscn")
 
-func new_notification(notif: Dictionary):
+func _on_notification(notif: Dictionary):
 	var lbl
 	if "rich" in notif and notif["rich"]:
 		lbl = notif_rich_label.instantiate()
