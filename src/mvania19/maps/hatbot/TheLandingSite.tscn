@@ -17,7 +17,7 @@
 script = ExtResource("1_78edy")
 
 [node name="PlayerSpawnPoint2" parent="." instance=ExtResource("5_cfyjd")]
-position = Vector2(592, 168)
+position = Vector2(275, 128)
 
 [node name="TheLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_b2dn2")
@@ -40,6 +40,18 @@ layer_0/tile_data = PackedInt32Array(-327673, 196609, 3, -393209, 196609, 3, -45
 
 [node name="WoodenBoxesTiles8" parent="FirstDrop" instance=ExtResource("4_bw1oa")]
 layer_0/tile_data = PackedInt32Array(917507, 196609, 3, 851971, 196609, 3, 786435, 196609, 3, 983042, 65537, 4, 917506, 65537, 3, 851970, 65537, 3, 786434, 65537, 3, 983043, 196609, 4, 720899, 196609, 2, 720898, 65537, 2, 1114101, 196609, 4, 1048565, 196609, 3, 983029, 196609, 3, 1114100, 65537, 4, 1048564, 65537, 3, 983028, 65537, 3, 1638406, 196609, 2, 1638405, 131073, 2, 1638404, 131073, 2, 1638403, 65537, 2, 1703942, 196609, 4, 1703941, 131073, 4, 1703940, 131073, 4, 1703939, 65537, 4, 1900532, 196609, 4, 1834996, 393217, 3, 1769460, 131073, 2, 1900531, 131073, 4, 1834995, 458753, 4, 1769459, 65537, 2, 1900530, 65537, 4, 1834994, 65537, 2, 2424828, 196609, 3, 2359292, 196609, 2, 2424827, 131073, 3, 2359291, 131073, 2, 2424826, 131073, 3, 2359290, 131073, 2, 2424825, 65537, 3, 2359289, 65537, 2, 917493, 196609, 2, 917492, 65537, 2, 1310721, 196609, 3, 1245185, 196609, 3, 1310720, 131073, 3, 1245184, 458753, 4, 1376255, 458753, 3, 1310719, 131073, 2, 1376254, 131073, 4, 1310718, 131073, 2, 1376253, 131073, 4, 1310717, 131073, 2, 1376252, 65537, 4, 1310716, 65537, 2, 1376257, 196609, 4, 1376256, 131073, 4, 1441791, 65537, 4, 1179649, 196609, 3, 1114113, 196609, 3, 1048577, 196609, 3, 983041, 393217, 2, 1179648, 65537, 3, 1114112, 65537, 3, 1048576, 65537, 3, 983040, 65537, 2, 786425, 196609, 4, 720889, 196609, 3, 655353, 196609, 3, 589817, 196609, 2, 786424, 131073, 4, 720888, 131073, 3, 655352, 131073, 3, 589816, 131073, 2, 786423, 131073, 4, 720887, 131073, 3, 655351, 131073, 3, 589815, 131073, 2, 1834999, 196609, 4, 1769463, 196609, 3, 1703927, 196609, 3, 1638391, 196609, 3, 1572855, 196609, 2, 1834998, 131073, 4, 1769462, 131073, 3, 1703926, 131073, 3, 1638390, 131073, 3, 1572854, 131073, 2, 1834997, 131073, 4, 1769461, 458753, 4, 1703925, 65537, 3, 1638389, 65537, 3, 1572853, 65537, 2, 786422, 65537, 4, 720886, 65537, 3, 655350, 65537, 3, 589814, 65537, 2, 2555900, 196609, 4, 2490364, 196609, 3, 2555899, 131073, 4, 2490363, 131073, 3, 2555898, 131073, 4, 2490362, 131073, 3, 2555897, 65537, 4, 2490361, 65537, 3)
+
+[node name="ShootyCrawly4" parent="FirstDrop" instance=ExtResource("10_33lpn")]
+position = Vector2(-72, 112)
+
+[node name="ShootyCrawly7" parent="FirstDrop" instance=ExtResource("10_33lpn")]
+position = Vector2(9, 215)
+
+[node name="ShootyCrawly5" parent="FirstDrop" instance=ExtResource("10_33lpn")]
+position = Vector2(-8, -2)
+
+[node name="ShootyCrawly6" parent="FirstDrop" instance=ExtResource("10_33lpn")]
+position = Vector2(-72, 272)
 
 [node name="BlockedByWood" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(-320, 0)
@@ -90,14 +102,17 @@ position = Vector2(8, 32)
 [node name="Goomba2" parent="FirstHallway" instance=ExtResource("9_2vvn3")]
 position = Vector2(32, -16)
 
-[node name="PowerupPickup" parent="FirstHallway" instance=ExtResource("6_q71ss")]
-position = Vector2(104, -8)
-
 [node name="ShootyCrawly" parent="FirstHallway" instance=ExtResource("10_33lpn")]
-position = Vector2(152, 32)
+position = Vector2(144, 24)
+
+[node name="ShootyCrawly4" parent="FirstHallway" instance=ExtResource("10_33lpn")]
+position = Vector2(144, 24)
 
 [node name="ShootyCrawly2" parent="FirstHallway" instance=ExtResource("10_33lpn")]
-position = Vector2(120, 40)
+position = Vector2(136, -25)
+
+[node name="ShootyCrawly3" parent="FirstHallway" instance=ExtResource("10_33lpn")]
+position = Vector2(128, 0)
 
 [node name="ToSimulation" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(768, 192)

@@ -124,9 +124,32 @@ var GRAVITY = 0
 
 var move_dir = Vector2.ZERO
 
+var crawl_on_side
 func _physics_process(_delta):
-	pass
+	if crawl_on_side == null:
+		if is_on_wall_only():
+			Debug.prn(self, "on wall only!")
+			crawl_on_side = get_wall_normal()
+		elif is_on_floor_only():
+			Debug.prn(self, "on floor only!")
+			crawl_on_side = Vector2.DOWN
+		elif is_on_ceiling_only():
+			Debug.prn(self, "on ceiling only!")
+			crawl_on_side = Vector2.UP
+		if crawl_on_side != null:
+			orient(crawl_on_side)
+		Debug.prn(self, "stuck to", crawl_on_side)
 
+func orient(side):
+	match(side):
+		Vector2.UP:
+			rotation_degrees = 180.0
+		Vector2.DOWN:
+			rotation_degrees = 0.0
+		Vector2.LEFT:
+			rotation_degrees = 270.0
+		Vector2.RIGHT:
+			rotation_degrees = 90.0
 
 ########################################################
 # hitbox entered
