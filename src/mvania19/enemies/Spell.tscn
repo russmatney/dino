@@ -1,17 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://c32oxlpyjoaw"]
+[gd_scene load_steps=5 format=3 uid="uid://c32oxlpyjoaw"]
 
+[ext_resource type="Script" path="res://src/mvania19/bosses/Bullet.gd" id="1_ek0md"]
 [ext_resource type="SpriteFrames" uid="uid://dgx2li3f0py1c" path="res://src/mvania19/enemies/spell_sprite_frames.tres" id="1_ntbuo"]
-[ext_resource type="Script" path="res://src/mvania19/enemies/Spell.gd" id="1_v3iny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w1ggg"]
+radius = 4.0
 
-[node name="Spell" type="RigidBody2D"]
-script = ExtResource("1_v3iny")
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvjwp"]
+radius = 4.12311
+
+[node name="Spell" type="RigidBody2D" groups=["bullets"]]
+collision_layer = 16
+collision_mask = 7
+gravity_scale = 0.0
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("1_ek0md")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("1_ntbuo")
+animation = &"spin"
+frame_progress = 0.790722
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_w1ggg")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("1_ntbuo")
-animation = &"launch"
-frame_progress = 0.430734
+[node name="FireBackHitBox" type="Area2D" parent="."]
+collision_layer = 20
+collision_mask = 9
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FireBackHitBox"]
+rotation = -1.57079
+shape = SubResource("CircleShape2D_wvjwp")

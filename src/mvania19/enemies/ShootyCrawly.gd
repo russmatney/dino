@@ -5,13 +5,17 @@ extends CharacterBody2D
 @onready var hitbox = $Hitbox
 # @onready var spell = $Spell
 @onready var front_ray = $FrontRay
+@onready var los = $LineOfSight
 
 signal died(me)
 signal knocked_back(me)
+signal fired_bullet(spell)
 
 var death_animation = "dead"
 var dying_animation = "hit"
 var run_animation = "crawl"
+
+var can_see_player
 
 ########################################################
 # ready
@@ -115,7 +119,7 @@ func face_left():
 ########################################################
 # _physics_process
 
-const SPEED = 5.0
+const SPEED = 15.0
 const JUMP_VELOCITY = 0.0
 const KNOCKBACK_VELOCITY = 0.0
 const KNOCKBACK_VELOCITY_HORIZONTAL = 0.0
@@ -128,17 +132,24 @@ var crawl_on_side
 func _physics_process(_delta):
 	if crawl_on_side == null:
 		if is_on_wall_only():
-			Debug.prn(self, "on wall only!")
 			crawl_on_side = get_wall_normal()
 		elif is_on_floor_only():
-			Debug.prn(self, "on floor only!")
 			crawl_on_side = Vector2.DOWN
 		elif is_on_ceiling_only():
-			Debug.prn(self, "on ceiling only!")
 			crawl_on_side = Vector2.UP
 		if crawl_on_side != null:
 			orient(crawl_on_side)
-		Debug.prn(self, "stuck to", crawl_on_side)
+
+	if MvaniaGame.player:
+		# var player_pos = MvaniaGame.player.global_position
+		# los.target_position = to_local(player_pos)
+
+		if los.is_colliding():
+			var body = los.get_collider()
+			if body.is_in_group("player"):
+				can_see_player = true
+			else:
+				can_see_player = false
 
 func orient(side):
 	match(side):

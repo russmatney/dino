@@ -15,8 +15,7 @@ func exit():
 	laugh_ttl = laugh_at_least
 
 func physics_process(delta):
-	if not actor.can_float:
-		actor.velocity.y += actor.GRAVITY * delta
+	actor.velocity.y += actor.GRAVITY * delta
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
 	actor.move_and_slide()
 

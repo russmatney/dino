@@ -12,7 +12,7 @@ size = Vector2(16, 15)
 
 [node name="ShootyCrawly" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 29
+collision_mask = 13
 script = ExtResource("1_4m7qg")
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -37,3 +37,7 @@ position = Vector2(-5, 2)
 target_position = Vector2(0, 12)
 
 [node name="Machine" parent="." instance=ExtResource("4_ft7tc")]
+
+[node name="LineOfSight" type="RayCast2D" parent="." groups=["enemies"]]
+target_position = Vector2(0, -100)
+collision_mask = 3

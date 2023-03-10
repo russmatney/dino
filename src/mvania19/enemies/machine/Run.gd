@@ -8,6 +8,10 @@ func enter(ctx={}):
 
 
 func physics_process(delta):
+	if "can_see_player" in actor and actor.can_see_player:
+		machine.transit("Fire")
+		return
+
 	if not actor.is_on_floor():
 		actor.velocity.y += actor.GRAVITY * delta
 

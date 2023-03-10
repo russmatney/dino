@@ -17,7 +17,7 @@
 script = ExtResource("1_78edy")
 
 [node name="PlayerSpawnPoint2" parent="." instance=ExtResource("5_cfyjd")]
-position = Vector2(480, 175)
+position = Vector2(337, 40)
 
 [node name="TheLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_b2dn2")
@@ -52,6 +52,9 @@ position = Vector2(-8, -2)
 
 [node name="ShootyCrawly6" parent="FirstDrop" instance=ExtResource("10_33lpn")]
 position = Vector2(-72, 272)
+
+[node name="PowerupPickup" parent="FirstDrop" instance=ExtResource("6_q71ss")]
+position = Vector2(17, 48)
 
 [node name="BlockedByWood" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(-320, 0)

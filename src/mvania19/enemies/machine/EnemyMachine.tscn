@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://8dv1jhx154rq"]
+[gd_scene load_steps=11 format=3 uid="uid://8dv1jhx154rq"]
 
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="1_avc5j"]
 [ext_resource type="Script" path="res://src/mvania19/enemies/machine/Idle.gd" id="2_08acf"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://src/mvania19/enemies/machine/Kick.gd" id="6_7xk8n"]
 [ext_resource type="Script" path="res://src/mvania19/enemies/machine/Fall.gd" id="7_cdopo"]
 [ext_resource type="Script" path="res://src/mvania19/enemies/machine/Jump.gd" id="8_vriro"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Fire.gd" id="9_hgagb"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Laugh.gd" id="10_gqe3v"]
 
 [node name="Machine" type="Node"]
 script = ExtResource("1_avc5j")
@@ -32,3 +34,9 @@ script = ExtResource("7_cdopo")
 
 [node name="Jump" type="Node" parent="."]
 script = ExtResource("8_vriro")
+
+[node name="Fire" type="Node" parent="."]
+script = ExtResource("9_hgagb")
+
+[node name="Laugh" type="Node" parent="."]
+script = ExtResource("10_gqe3v")
