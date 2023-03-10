@@ -17,15 +17,16 @@ func physics_process(delta):
 		actor.face_left()
 
 	# TODO consider a new state for when we can see the player
-	if not actor.front_ray.is_colliding():
-		for lo in actor.line_of_sights:
-			if lo.is_colliding():
-				machine.transit("Idle", {stop=true})
-				return
-		actor.turn()
+	if "front_ray" in actor:
+		if not actor.front_ray.is_colliding():
+			for lo in actor.line_of_sights:
+				if lo.is_colliding():
+					machine.transit("Idle", {stop=true})
+					return
+			actor.turn()
 
 	if actor.is_on_wall():
-		for lo in actor.line_of_sights:
+		for lo in actor.line_of_sights if "line_of_sights" in actor else []:
 			if lo.is_colliding():
 				machine.transit("Idle", {stop=true})
 				return

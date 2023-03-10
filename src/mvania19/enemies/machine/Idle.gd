@@ -24,7 +24,8 @@ func physics_process(delta):
 	actor.move_and_slide()
 
 	# TODO consider a new state for when we can see the player
-	for lo in actor.line_of_sights:
+	var los = actor.line_of_sights if "line_of_sights" in actor else []
+	for lo in los:
 		if lo.is_colliding():
 			# run towards collision
 			if lo.target_position.y > 0:

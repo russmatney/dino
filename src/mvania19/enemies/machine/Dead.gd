@@ -2,10 +2,10 @@ extends State
 
 
 func enter(ctx={}):
-	actor.anim.play("dead")
+	actor.anim.play(actor.death_animation)
+	# maybe 'no_emit' is a better flag
 	if not ctx.get("ignore_side_effects", false):
-		Cam.screenshake(0.3)
-		MvaniaSounds.play_sound("soldierdead")
+		actor.died.emit(actor)
 
 
 func physics_process(delta):

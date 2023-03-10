@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqnu6gnhs5sim"]
+
+[ext_resource type="SpriteFrames" uid="uid://dluh18k2o67ff" path="res://src/mvania19/enemies/goomba_sprite_frames.tres" id="1_s7guy"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/Goomba.gd" id="1_vdsqm"]
+[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_uipsb"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Idle.gd" id="4_hetij"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Run.gd" id="5_xo0nm"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/KnockedBack.gd" id="6_kb0h2"]
+[ext_resource type="Script" path="res://src/mvania19/enemies/machine/Dead.gd" id="7_5f3x5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qexhu"]
+size = Vector2(24, 26)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lrapw"]
+radius = 14.0
+
+[node name="Goomba" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_vdsqm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_qexhu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_s7guy")
+animation = &"fly"
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("3_uipsb")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("4_hetij")
+
+[node name="Run" type="Node" parent="Machine"]
+script = ExtResource("5_xo0nm")
+
+[node name="KnockedBack" type="Node" parent="Machine"]
+script = ExtResource("6_kb0h2")
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource("7_5f3x5")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_lrapw")

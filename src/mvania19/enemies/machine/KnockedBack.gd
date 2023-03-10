@@ -2,16 +2,11 @@ extends State
 
 
 func enter(ctx={}):
+	actor.knocked_back.emit(actor)
+
 	var dir = ctx.get("direction", Vector2.LEFT)
-	var kb_vel
-	if actor.health <= 0:
-		actor.anim.play("dying")
-		kb_vel = actor.DYING_VELOCITY
-		MvaniaSounds.play_sound("soldierdead")
-	else:
-		actor.anim.play("knockback")
-		kb_vel = actor.KNOCKBACK_VELOCITY
-		MvaniaSounds.play_sound("soldierhit")
+	var dying = ctx.get("dying", false)
+	var kb_vel = actor.DYING_VELOCITY if dying else actor.KNOCKBACK_VELOCITY
 
 	# look into the punch
 	if dir == Vector2.LEFT:

@@ -8,6 +8,9 @@ extends CharacterBody2D
 @onready var low_los = $LowLineOfSight
 @onready var high_los = $HighLineOfSight
 
+signal died(soldier)
+signal knocked_back(soldier)
+
 ########################################################
 # ready
 
@@ -29,9 +32,27 @@ func _ready():
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
 
+	died.connect(_on_death)
+	knocked_back.connect(_on_knocked_back)
+
 func _on_transitioned(_state_label):
 	pass
 	# Debug.prn(state_label)
+
+var death_animation = "dead"
+
+func _on_death(_soldier):
+	Cam.screenshake(0.3)
+	MvaniaSounds.play_sound("soldierdead")
+	Hotel.check_in(self)
+
+func _on_knocked_back(_soldier):
+	if health <= 0:
+		anim.play("dying")
+		MvaniaSounds.play_sound("soldierdead")
+	else:
+		anim.play("knockback")
+		MvaniaSounds.play_sound("soldierhit")
 
 ########################################################
 # kick
@@ -89,8 +110,9 @@ func _on_body_exited(body):
 
 func hotel_data():
 	var d = {
-		"name": name,
-		"position": global_position,
+		name=name,
+		position=global_position,
+		facing=facing,
 		}
 	if health != null:
 		d["health"] = health
@@ -99,6 +121,7 @@ func hotel_data():
 func check_out(data):
 	global_position = data.get("position", global_position)
 	health = data.get("health", initial_health)
+	facing = data.get("facing", facing)
 
 	if health <= 0:
 		machine.transit("Dead", {ignore_side_effects=true})
@@ -137,7 +160,7 @@ func face_left():
 const SPEED = 50.0
 const JUMP_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY = -300.0
-const KNOCKBACK_VELOCITY_HORIZONTAL = 30.0
+const KNOCKBACK_VELOCITY_HORIZONTAL = 20.0
 const DYING_VELOCITY = -400.0
 var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -158,4 +181,4 @@ func take_hit(opts={}):
 
 	health -= damage
 	Hotel.check_in(self)
-	machine.transit("KnockedBack", {"direction": direction})
+	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
