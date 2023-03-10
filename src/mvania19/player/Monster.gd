@@ -64,14 +64,14 @@ func can_execute_any_actions():
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
-		stamp({"scale": 2.0, "ttl": 1.0})
+		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		var _executed = action_detector.execute_current_action()
 		# TODO fire stamp via actions api? use whatever the current action_hint is?
 		Cam.hitstop("player_hitstop", 0.5, 0.2)
 	elif Trolley.is_attack(event):
 		if has_sword:
 			sword.swing()
-			stamp({"scale": 2.0, "ttl": 1.0})
+			stamp({scale=2.0, ttl=1.0})
 
 ###########################################################################
 # movement
@@ -142,8 +142,9 @@ func stamp(opts={}):
 		new_anim.animation = anim.animation
 		new_anim.frame = anim.frame
 
-		var ax_hint = action_hint.duplicate()
-		new_anim.add_child(ax_hint)
+		if opts.get("include_action_hint", false):
+			var ax_hint = action_hint.duplicate()
+			new_anim.add_child(ax_hint)
 
 		# definitely more position work to do...?
 		new_anim.global_position = global_position + anim.position

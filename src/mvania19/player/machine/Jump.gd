@@ -11,9 +11,10 @@ func enter(ctx={}):
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
 
+	# TODO remove?
 	Cam.hitstop("lmao_jump_hitstop", 0.5, 0.3)
-	actor.action_hint.display("jump", "Jump")
-	actor.stamp({"scale": 0.1, "ttl": 0.4})
+	# actor.action_hint.display("jump", "Jump")
+	# actor.stamp({"scale": 0.1, "ttl": 0.4})
 
 	# apply horizontal push
 	var dir = ctx.get("dir", Vector2.ZERO)
