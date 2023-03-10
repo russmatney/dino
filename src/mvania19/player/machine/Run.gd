@@ -6,6 +6,7 @@ func enter(_ctx={}):
 func physics_process(delta):
 	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
 		machine.transit("Jump")
+		return
 
 	# gravity
 	if not actor.is_on_floor():
@@ -21,6 +22,7 @@ func physics_process(delta):
 
 	if actor.velocity.y > 0:
 		machine.transit("Fall", {"coyote_time": true})
+		return
 
 	if abs(actor.velocity.x) < 1:
 		machine.transit("Idle")
