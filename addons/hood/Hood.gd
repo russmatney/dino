@@ -46,6 +46,9 @@ func _on_hud_ready():
 	for qn in queued_notifs:
 		notif(qn[0], qn[1])
 
+	for msgs in queued_notifs_dev:
+		dev_notif.callv(msgs)
+
 ###########################################################################
 # notifs
 
@@ -67,12 +70,17 @@ func notif(text, opts = {}):
 		opts["ttl"] = 3.0
 	notification.emit(opts)
 
+var queued_notifs_dev = []
+
 # TODO only fire in dev mode?
 func dev_notif(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
-	msg = Debug.to_printable(msgs)
-	notification.emit({msg=msg, rich=true})
+	if not hud:
+		queued_notifs_dev.append(msgs)
+	else:
+		msg = Debug.to_printable(msgs)
+		notification.emit({msg=msg, rich=true, ttl=10.0})
 
 ###########################################################################
 # jumbotron

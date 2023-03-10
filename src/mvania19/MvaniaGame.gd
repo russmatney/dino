@@ -146,7 +146,9 @@ func update_rooms():
 		return
 
 	if len(current_area.rooms) == 0:
-		Debug.warn("Cannot update zero rooms.")
+		# this _should_ only happen when the room is being unloaded
+		# commenting out the spammy warning for now
+		# Debug.warn("Cannot update zero rooms.")
 		return
 
 	for room in current_area.rooms:
