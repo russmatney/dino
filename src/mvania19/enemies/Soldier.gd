@@ -11,6 +11,10 @@ extends CharacterBody2D
 signal died(soldier)
 signal knocked_back(soldier)
 
+var death_animation = "dead"
+var dying_animation = "dying"
+var run_animation = "run"
+
 ########################################################
 # ready
 
@@ -38,8 +42,6 @@ func _ready():
 func _on_transitioned(_state_label):
 	pass
 	# Debug.prn(state_label)
-
-var death_animation = "dead"
 
 func _on_death(_soldier):
 	Cam.screenshake(0.3)

@@ -25,6 +25,7 @@ func physics_process(delta):
 
 	actor.move_and_slide()
 
+	# TODO wait for dying animation to end
 	if actor.is_on_floor():
 		if actor.health <= 0:
 			transit("Dead")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0b1p7leftjw0"]
+[gd_scene load_steps=13 format=3 uid="uid://c0b1p7leftjw0"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_78edy"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_b2dn2"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="7_gln6l"]
 [ext_resource type="PackedScene" uid="uid://cqnu6gnhs5sim" path="res://src/mvania19/enemies/Goomba.tscn" id="9_2vvn3"]
 [ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="9_85myu"]
+[ext_resource type="PackedScene" uid="uid://7fa0vymgrsig" path="res://src/mvania19/enemies/ShootyCrawly.tscn" id="10_33lpn"]
 
 [node name="TheLandingSite" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_78edy")
@@ -91,6 +92,12 @@ position = Vector2(32, -16)
 
 [node name="PowerupPickup" parent="FirstHallway" instance=ExtResource("6_q71ss")]
 position = Vector2(104, -8)
+
+[node name="ShootyCrawly" parent="FirstHallway" instance=ExtResource("10_33lpn")]
+position = Vector2(152, 32)
+
+[node name="ShootyCrawly2" parent="FirstHallway" instance=ExtResource("10_33lpn")]
+position = Vector2(120, 40)
 
 [node name="ToSimulation" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(768, 192)

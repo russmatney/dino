@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://7fa0vymgrsig"]
+
+[ext_resource type="Script" path="res://src/mvania19/enemies/ShootyCrawly.gd" id="1_4m7qg"]
+[ext_resource type="SpriteFrames" uid="uid://bau1snjyg45pw" path="res://src/mvania19/enemies/shootycrawly_sprite_frames.tres" id="1_vkef8"]
+[ext_resource type="PackedScene" uid="uid://8dv1jhx154rq" path="res://src/mvania19/enemies/machine/EnemyMachine.tscn" id="4_ft7tc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njcjt"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t12w0"]
+size = Vector2(16, 16)
+
+[node name="ShootyCrawly" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 29
+script = ExtResource("1_4m7qg")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_njcjt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_t12w0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("1_vkef8")
+animation = &"hit"
+frame_progress = 0.136404
+
+[node name="Machine" parent="." instance=ExtResource("4_ft7tc")]
+
+[node name="FrontRay" type="RayCast2D" parent="."]
+position = Vector2(-6, -6)
+target_position = Vector2(0, 12)

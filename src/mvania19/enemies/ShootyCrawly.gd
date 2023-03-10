@@ -3,14 +3,15 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
 @onready var hitbox = $Hitbox
+# @onready var spell = $Spell
+@onready var front_ray = $FrontRay
 
-signal died(goomba)
-signal knocked_back(goomba)
+signal died(me)
+signal knocked_back(me)
 
-
-var death_animation = "fly"
-var dying_animation = "dying"
-var run_animation = "run"
+var death_animation = "dead"
+var dying_animation = "hit"
+var run_animation = "crawl"
 
 ########################################################
 # ready
@@ -26,41 +27,26 @@ func _ready():
 	hitbox.body_exited.connect(_on_body_exited)
 
 	died.connect(_on_death)
-	knocked_back.connect(_on_knocked_back)
 
 func _on_transitioned(state_label):
 	Debug.prn(state_label)
 	pass
 
-func _on_death(_goomba):
+func _on_death(_me):
 	Cam.screenshake(0.1)
 	# TODO goomba sounds
 	MvaniaSounds.play_sound("soldierdead")
 	Hotel.check_in(self)
 
-func _on_knocked_back(_goomba):
+func _on_knocked_back(_me):
+	anim.play(dying_animation)
 	if health <= 0:
-		anim.play(death_animation)
 		# TODO goomba sounds
 		MvaniaSounds.play_sound("soldierdead")
 	else:
-		anim.play(death_animation)
 		# TODO goomba sounds
 		MvaniaSounds.play_sound("soldierhit")
 
-########################################################
-# health/hit
-
-var initial_health = 1
-var health
-
-func take_hit(opts={}):
-	var damage = opts.get("damage", 1)
-	var direction = opts.get("direction", Vector2.RIGHT)
-
-	health -= damage
-	Hotel.check_in(self)
-	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
 
 ########################################################
 # hotel data
@@ -85,6 +71,20 @@ func check_out(data):
 		machine.transit("Dead", {ignore_side_effects=true})
 
 ########################################################
+# health/hit
+
+var initial_health = 1
+var health
+
+func take_hit(opts={}):
+	var damage = opts.get("damage", 1)
+	var direction = opts.get("direction", Vector2.RIGHT)
+
+	health -= damage
+	Hotel.check_in(self)
+	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
+
+########################################################
 # facing
 
 func face(face_dir):
@@ -105,21 +105,22 @@ var facing = Vector2.LEFT
 func face_right():
 	facing = Vector2.RIGHT
 	anim.flip_h = true
+	Util.update_h_flip(facing, front_ray)
 
 func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
-
+	Util.update_h_flip(facing, front_ray)
 
 ########################################################
 # _physics_process
 
-const SPEED = 20.0
-const JUMP_VELOCITY = -100.0
-const KNOCKBACK_VELOCITY = -100.0
-const KNOCKBACK_VELOCITY_HORIZONTAL = 10.0
-const DYING_VELOCITY = -200.0
-var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
+const SPEED = 5.0
+const JUMP_VELOCITY = 0.0
+const KNOCKBACK_VELOCITY = 0.0
+const KNOCKBACK_VELOCITY_HORIZONTAL = 0.0
+const DYING_VELOCITY = 0.0
+var GRAVITY = 0
 
 var move_dir = Vector2.ZERO
 

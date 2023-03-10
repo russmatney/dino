@@ -4,7 +4,7 @@ extends State
 func enter(ctx={}):
 	var dir = ctx.get("dir", actor.facing)
 	actor.move_dir = dir
-	actor.anim.play("run")
+	actor.anim.play(actor.run_animation)
 
 
 func physics_process(delta):
@@ -19,7 +19,7 @@ func physics_process(delta):
 	# TODO consider a new state for when we can see the player
 	if "front_ray" in actor:
 		if not actor.front_ray.is_colliding():
-			for lo in actor.line_of_sights:
+			for lo in actor.line_of_sights if "line_of_sights" in actor else []:
 				if lo.is_colliding():
 					machine.transit("Idle", {stop=true})
 					return
