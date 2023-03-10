@@ -108,9 +108,6 @@ position = Vector2(32, -16)
 [node name="ShootyCrawly" parent="FirstHallway" instance=ExtResource("10_33lpn")]
 position = Vector2(144, 24)
 
-[node name="ShootyCrawly4" parent="FirstHallway" instance=ExtResource("10_33lpn")]
-position = Vector2(144, 24)
-
 [node name="ShootyCrawly2" parent="FirstHallway" instance=ExtResource("10_33lpn")]
 position = Vector2(-45, -25)
 

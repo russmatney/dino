@@ -2,7 +2,7 @@ extends State
 
 
 var ttr
-var wait_to_run = 3
+var wait_to_run = 2
 var stop
 
 func enter(ctx={}):

@@ -60,6 +60,7 @@ func hotel_data():
 		name=name,
 		position=global_position,
 		facing=facing,
+		crawl_on_side=crawl_on_side,
 		}
 	if health != null:
 		d["health"] = health
@@ -70,6 +71,10 @@ func check_out(data):
 	health = data.get("health", initial_health)
 	facing = data.get("facing", facing)
 	face(facing)
+
+	crawl_on_side = data.get("crawl_on_side", crawl_on_side)
+	if crawl_on_side:
+		orient(crawl_on_side)
 
 	if health <= 0:
 		machine.transit("Dead", {ignore_side_effects=true})
