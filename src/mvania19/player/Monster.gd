@@ -206,8 +206,15 @@ func take_hit(opts={}):
 	var direction = opts.get("direction", Vector2.RIGHT)
 
 	health -= damage
+	health = clamp(health, 0, initial_health)
 	Hotel.check_in(self)
 	machine.transit("KnockedBack", {"direction": direction})
+
+func heal(opts={}):
+	var h = opts.get("health", 1)
+	health += h
+	health = clamp(health, 0, initial_health)
+	Hotel.check_in(self)
 
 ########################################################
 # powerups
