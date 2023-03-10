@@ -127,10 +127,8 @@ func hotel_data(player=null):
 		data["has_player"] = r.has_point(player.global_position)
 	return data
 
-func restore():
-	var data = Hotel.check_out(self)
-	if data != null:
-		room_data = data
+func check_out(data):
+	room_data = data
 
 var room_data : Dictionary :
 	set(data):
@@ -150,8 +148,7 @@ func _enter_tree():
 # ready
 
 func _ready():
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 
 	ensure_room_box()
 	ensure_cam_points()

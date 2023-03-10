@@ -30,8 +30,8 @@ func draw_room_outline(room: MvaniaRoom):
 func hotel_data():
 	return {scene_file_path=scene_file_path}
 
-func restore():
-	var _data = Hotel.check_out(self)
+func check_out(_data):
+	pass
 
 
 ###########################################################
@@ -80,8 +80,7 @@ func _ready():
 		MvaniaGame.register_areas()
 
 	Hotel.book(self.scene_file_path)
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 	if not Engine.is_editor_hint():
 		if MvaniaGame.current_area != self:
 			MvaniaGame.set_current_area(self)

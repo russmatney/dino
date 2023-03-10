@@ -20,8 +20,7 @@ func _ready():
 		machine.start()
 		machine.transitioned.connect(_on_transit)
 
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 
 	warp_spots = Util.get_children_in_group(get_parent(), warp_group, false)
 
@@ -44,15 +43,13 @@ func _on_transit(state_label):
 #####################################################
 # hotel
 
-func restore():
-	var data = Hotel.check_out(self)
-	if data:
-		global_position = data.get("position", global_position)
-		health = data.get("health", initial_health)
+func check_out(data):
+	global_position = data.get("position", global_position)
+	health = data.get("health", initial_health)
 
-		if health <= 0:
-			if machine:
-				machine.transit("Dead", {ignore_side_effects=true})
+	if health <= 0:
+		if machine:
+			machine.transit("Dead", {ignore_side_effects=true})
 
 func hotel_data():
 	return {health=health, position=global_position}

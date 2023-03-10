@@ -24,15 +24,15 @@ extends Node2D
 var picked_up = false
 
 func _ready():
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 	action_area.register_actions(actions, self)
 
 ##############################################################
 # hotel
 
-func restore():
-	var _data = Hotel.check_out(self)
+func check_out(data):
+	picked_up = data.get("picked_up", picked_up)
+	powerup = data.get("powerup", powerup)
 
 func hotel_data():
 	return {powerup=powerup, picked_up=picked_up}

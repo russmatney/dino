@@ -154,6 +154,25 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 			book_data(d["instance"], ps, last_room)
 
 ######################################################################
+# register
+
+func register(node, opts={}):
+	if not node.has_method("hotel_data"):
+		Debug.warn("skipping hotel register.", node, "missing expected hotel_data() method")
+		return
+	if not node.has_method("check_out"):
+		Debug.warn("skipping hotel register.", node, "missing expected check_out() method")
+		return
+
+	# restore node state with data from hotel
+	node.check_out(Util._or(check_out(node), {}))
+
+	# calls node.hotel_data(), stores the data in the db
+	check_in(node)
+
+	Hood.dev_notif(node, "Registered")
+
+######################################################################
 # checkin
 
 signal entry_updated(entry)

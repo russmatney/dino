@@ -13,8 +13,8 @@ var actions = [
 	]
 
 func _ready():
-	restore()
-	Hotel.check_in(self)
+	# TODO pass in validation function
+	Hotel.register(self)
 
 	action_area.register_actions(actions, self)
 	anim.animation_finished.connect(_on_anim_finished)
@@ -22,10 +22,8 @@ func _ready():
 	z_index = 10
 	anim.play("opening")
 
-func restore():
-	var data = Hotel.check_out(self)
-	if not data == null:
-		pass
+func check_out(_data):
+	pass
 
 func hotel_data():
 	return {

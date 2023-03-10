@@ -19,8 +19,7 @@ func _ready():
 		machine.transitioned.connect(_on_transitioned)
 		machine.transit("Run")
 
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 
 	line_of_sights = [low_los, high_los]
 
@@ -97,14 +96,12 @@ func hotel_data():
 		d["health"] = health
 	return d
 
-func restore():
-	var data = Hotel.check_out(self)
-	if not data == null:
-		global_position = data.get("position", global_position)
-		health = data.get("health", initial_health)
+func check_out(data):
+	global_position = data.get("position", global_position)
+	health = data.get("health", initial_health)
 
-		if health <= 0:
-			machine.transit("Dead", {ignore_side_effects=true})
+	if health <= 0:
+		machine.transit("Dead", {ignore_side_effects=true})
 
 
 ########################################################

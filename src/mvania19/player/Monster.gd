@@ -25,8 +25,7 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 
 	action_detector.setup(self, can_execute_any_actions, action_hint)
 
@@ -45,14 +44,11 @@ func _on_transit(state):
 ###########################################################################
 # hotel data
 
-func restore():
-	var data = Hotel.check_out(self)
-	if not data == null:
-		health = data.get("health", initial_health)
-
-		powerups = data.get("powerups", [])
-		for p in powerups:
-			update_with_powerup(p)
+func check_out(data):
+	health = data.get("health", initial_health)
+	powerups = data.get("powerups", [])
+	for p in powerups:
+		update_with_powerup(p)
 
 func hotel_data():
 	return {health=health, powerups=powerups}

@@ -22,8 +22,7 @@ func _ready():
 	og_scale = light.texture_scale
 	og_energy = light.energy
 
-	restore()
-	Hotel.check_in(self)
+	Hotel.register(self)
 
 	$ColorRect.set_visible(false)
 
@@ -35,10 +34,8 @@ func _ready():
 func hotel_data():
 	return {lit=lit}
 
-func restore():
-	var data = Hotel.check_out(self)
-	if not data == null and "lit" in data:
-		lit = data["lit"]
+func check_out(data):
+	lit = data.get("lit", false)
 	update_light()
 
 #################################################################
