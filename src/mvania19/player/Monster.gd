@@ -25,6 +25,9 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
+	if not MvaniaGame.managed_game:
+		powerups = MvaniaGame.all_powerups
+
 	Hotel.register(self)
 
 	action_detector.setup(self, can_execute_any_actions, action_hint)
@@ -46,7 +49,7 @@ func _on_transit(state):
 
 func check_out(data):
 	health = data.get("health", initial_health)
-	powerups = data.get("powerups", [])
+	powerups = data.get("powerups", powerups)
 	for p in powerups:
 		update_with_powerup(p)
 

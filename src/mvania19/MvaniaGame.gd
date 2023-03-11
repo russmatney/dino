@@ -2,6 +2,7 @@
 extends Node
 
 enum Powerup { Sword, DoubleJump, Climb }
+var all_powerups = [Powerup.Sword, Powerup.DoubleJump, Powerup.Climb]
 
 ###########################################################
 
@@ -65,19 +66,19 @@ var current_area: MvaniaArea
 var current_room: MvaniaRoom
 var managed_game: bool = false
 
+# public start/restart game function (from title screen)
 func restart_game():
 	register_areas()
+
+	# this script manages the player
+	# so remove/don't add debugging tools, powerup helpers, dev_notify logs, etc
+	managed_game = true
 
 	# consider area selection logic
 	# TODO pull from saved game?
 	load_area(area_scenes[0])
 
 func load_area(area_scene_path, spawn_node_path=null):
-	# if we're starting the game via `load_area`,
-	# this script manages the player (and game in general)
-	# (vs. deving in a room or area)
-	managed_game = true
-
 	var area_scene_inst = load(area_scene_path).instantiate()
 	set_current_area(area_scene_inst)
 
