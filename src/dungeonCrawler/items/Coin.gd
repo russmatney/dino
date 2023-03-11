@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var anim = $AnimatedSprite2D
+@onready var light = $PointLight2D
 
 func _ready():
 	Hotel.register(self)
@@ -20,10 +21,9 @@ func _on_Area2D_body_entered(body: Node):
 	if collected:
 		return
 
-	Debug.prn("coin body entered", body)
 	if body.has_method("add_coin"):
 		body.add_coin()
-		# TODO coin noise
+		DJSounds.play_sound(DJSounds.coin)
 		collected = true
 		on_collected.emit(self)
 		disable()
@@ -31,3 +31,4 @@ func _on_Area2D_body_entered(body: Node):
 
 func disable():
 	anim.set_visible(false)
+	light.set_visible(false)

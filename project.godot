@@ -49,6 +49,7 @@ SnakeSounds="*res://src/snake/SnakeSounds.gd"
 SnakeGame="*res://src/snake/SnakeGame.gd"
 MvaniaSounds="*res://src/mvania19/MvaniaSounds.gd"
 MvaniaGame="*res://src/mvania19/MvaniaGame.gd"
+DJSounds="*res://addons/dj/DJSounds.gd"
 
 [display]
 
