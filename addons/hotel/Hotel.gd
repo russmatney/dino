@@ -171,7 +171,6 @@ func register(node, opts={}):
 	# at _ready time without issue
 
 	if opts.get("root", false):
-		Debug.pr(hotel_root_group_name)
 		node.add_to_group(hotel_root_group_name, true)
 
 	# restore node state with data from hotel

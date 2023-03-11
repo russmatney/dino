@@ -21,7 +21,6 @@ func _ready():
 
 
 func check_out(data):
-	Debug.prn("Hotel UI check out:", data)
 	query = data.get("query", query)
 
 func hotel_data():

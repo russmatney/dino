@@ -4,7 +4,7 @@ func enter(ctx={}):
 	actor.anim.play("dead")
 	if not ctx.get("ignore_side_effects", false):
 		Cam.screenshake(0.3)
-		MvaniaSounds.play_sound("playerdead")
+		# MvaniaSounds.play_sound("playerdead")
 		actor.player_death.emit()
 
 

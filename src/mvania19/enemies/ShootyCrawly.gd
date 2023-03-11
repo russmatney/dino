@@ -32,8 +32,8 @@ func _ready():
 
 	died.connect(_on_death)
 
-func _on_transitioned(state_label):
-	Debug.prn(state_label)
+func _on_transitioned(_state_label):
+	# Debug.prn(state_label)
 	pass
 
 func _on_death(_me):
