@@ -22,7 +22,7 @@ var hud = preload("res://src/mvania19/hud/HUD.tscn")
 func _ready():
 	og_position = position
 	Cam.ensure_camera(2, {"zoom_level": 5.0})
-	Hood.call_deferred("ensure_hud", hud)
+	Hood.call_deferred("ensure_hud", hud, self)
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
@@ -51,8 +51,11 @@ func _on_transit(state):
 # hotel data
 
 func check_out(data):
-	health = data.get("health", initial_health)
-	powerups = data.get("powerups", powerups)
+	health = data.get("health", health)
+	var stored_powerups = data.get("powerups", powerups)
+	if len(stored_powerups) > 0:
+		powerups = stored_powerups
+
 	for p in powerups:
 		update_with_powerup(p)
 
@@ -207,22 +210,22 @@ func face_left():
 
 signal player_death
 
-var initial_health = 2
-var health
+var max_health = 6
+var health = max_health
 
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.RIGHT)
 
 	health -= damage
-	health = clamp(health, 0, initial_health)
+	health = clamp(health, 0, max_health)
 	Hotel.check_in(self)
 	machine.transit("KnockedBack", {"direction": direction})
 
 func heal(opts={}):
 	var h = opts.get("health", 1)
 	health += h
-	health = clamp(health, 0, initial_health)
+	health = clamp(health, 0, max_health)
 	Hotel.check_in(self)
 
 func _on_player_death():
@@ -232,7 +235,7 @@ func _on_player_death():
 	var t = create_tween()
 	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
 	t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
-	t.tween_callback(MvaniaGame.respawn_player)
+	t.tween_callback(MvaniaGame.respawn_player.bind(true)).set_delay(1)
 
 ########################################################
 # coins
