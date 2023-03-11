@@ -5,6 +5,7 @@ extends Node2D
 @onready var anim = $AnimatedSprite2D
 @onready var particles = $FlameParticles
 @onready var action_area = $ActionArea
+@onready var spawn_point = $PlayerSpawnPoint
 
 var actions = [
 	Action.mk({
@@ -67,6 +68,9 @@ func light_up():
 	particles.set_emitting(true)
 	light_tween()
 	Hotel.check_in(self)
+
+	# marks spawn point active
+	spawn_point.sat_at()
 
 func put_out():
 	lit = false
