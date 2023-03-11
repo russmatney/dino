@@ -95,7 +95,7 @@ func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg
 # logger
 
 func log_prefix(stack):
-	if len(stack) > 0:
+	if len(stack) > 1:
 		var call_site = stack[1]
 		if call_site["source"].match("*/addons/*"):
 			return "<" + call_site["source"].get_file().get_basename() + ">: "
@@ -162,7 +162,7 @@ func to_printable(msgs, stack=[], newlines=false, pretty=true):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
-		var color = "aquamarine" if prefix[0] == "[" else "peru"
+		var color = "aquamarine" if prefix != null and prefix[0] == "[" else "peru"
 		if pretty:
 			m += "[color=%s]%s[/color]" % [color, prefix]
 		else:
