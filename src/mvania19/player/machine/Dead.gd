@@ -5,6 +5,7 @@ func enter(ctx={}):
 	if not ctx.get("ignore_side_effects", false):
 		Cam.screenshake(0.3)
 		MvaniaSounds.play_sound("playerdead")
+		actor.player_death.emit()
 
 
 func physics_process(delta):

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var action_hint = $ActionHint
 @onready var action_detector = $ActionDetector
+@onready var light = $PointLight2D
 
 @onready var high_wall_check = $HighWallCheck
 @onready var low_wall_check = $LowWallCheck
@@ -36,6 +37,8 @@ func _ready():
 		sword.set_visible(false)
 
 	wall_checks = [high_wall_check, low_wall_check]
+
+	player_death.connect(_on_player_death)
 
 func _on_transit(state):
 	Debug.debug_label("Player State: ", state)
@@ -153,10 +156,11 @@ func stamp(opts={}):
 		new_anim.global_position = global_position + anim.position
 		Navi.add_child_to_current(new_anim)
 
-		var t = create_tween()
-		t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
-		t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
-		t.tween_callback(new_anim.queue_free)
+		if ttl > 0:
+			var t = create_tween()
+			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
+			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
+			t.tween_callback(new_anim.queue_free)
 
 
 ###########################################################################
@@ -201,7 +205,9 @@ func face_left():
 ########################################################
 # health
 
-var initial_health = 6
+signal player_death
+
+var initial_health = 2
 var health
 
 func take_hit(opts={}):
@@ -218,6 +224,15 @@ func heal(opts={}):
 	health += h
 	health = clamp(health, 0, initial_health)
 	Hotel.check_in(self)
+
+func _on_player_death():
+	stamp({ttl=0}) # perma stamp
+
+	Hotel.check_in(self)
+	var t = create_tween()
+	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
+	t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
+	t.tween_callback(MvaniaGame.respawn_player)
 
 ########################################################
 # coins

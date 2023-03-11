@@ -80,7 +80,7 @@ func dev_notif(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=
 		queued_notifs_dev.append(msgs)
 	else:
 		msg = Debug.to_printable(msgs)
-		notification.emit({msg=msg, rich=true, ttl=10.0})
+		notification.emit({msg=msg, rich=true, ttl=5.0})
 
 ###########################################################################
 # jumbotron

@@ -94,11 +94,12 @@ func set_current_area(area_scene_inst):
 func _on_new_scene_instanced(s):
 	if s == current_area:
 		# deferring to run after the new scene is set (which is also deferred)
-		spawn_player()
+		respawn_player()
 
-func spawn_player():
-	create_new_player()
-	Navi.add_child_to_current(player)
+func respawn_player():
+	var p = create_new_player()
+	Navi.add_child_to_current(p)
+	update_rooms()
 
 ###########################################################
 # Player
@@ -107,11 +108,17 @@ const player_scene = preload("res://src/mvania19/player/Monster.tscn")
 var player
 
 func create_new_player():
+	if player:
+		var p = player
+		player = null
+		Navi.current_scene.remove_child(p)
+		update_rooms()
+		p.free()
+
 	var spawn_coords
 
 	# may need to check if this instance is valid, etc
-	if not current_area:
-		find_current_area()
+	ensure_current_area()
 
 	spawn_coords = current_area.player_spawn_coords()
 
@@ -120,14 +127,16 @@ func create_new_player():
 
 	player = player_scene.instantiate()
 	player.position = spawn_coords
+	return player
 
-func find_current_area():
+func ensure_current_area():
 	if not current_area:
 		for c in get_tree().get_root().get_children():
 			# could use groups instead
 			if c is MvaniaArea:
 				current_area = c
 				if player:
+					# really shouldn't have a player without a current area
 					Debug.warn("found current_area in MvaniaGame after player found")
 
 func _on_player_found(p):
@@ -139,8 +148,7 @@ func _on_player_found(p):
 
 func update_rooms():
 	# we could pass the 'entered' room in here, may be faster
-	if not current_area:
-		find_current_area()
+	ensure_current_area()
 
 	if not current_area or not is_instance_valid(current_area):
 		Debug.warn("No current area, cannot update rooms")
@@ -152,17 +160,23 @@ func update_rooms():
 		# Debug.warn("Cannot update zero rooms.")
 		return
 
+	var new_current
 	for room in current_area.rooms:
 		var rect = room.used_rect()
 		rect.position += room.position
 
 		# NOTE overlapping rooms may break this
-		if rect.has_point(player.global_position):
-			current_room = room
+		if player and is_instance_valid(player) and rect.has_point(player.global_position):
+			new_current = room
 		else:
 			# room.set_visible(false)
 			# maybe want a cleanup here to clear bullets and things
 			room.pause()
+
+	if new_current:
+		current_room = new_current
+	else:
+		current_room = null
 
 	if current_room:
 		# current_room.set_visible(true)
@@ -215,4 +229,4 @@ func maybe_spawn_player():
 	if not managed_game and not Engine.is_editor_hint():
 		Debug.pr("Unmanaged game, spawning player")
 		if player == null:
-			spawn_player()
+			respawn_player()

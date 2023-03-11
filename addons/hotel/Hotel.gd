@@ -175,7 +175,11 @@ func register(node, opts={}):
 		node.add_to_group(hotel_root_group_name, true)
 
 	# restore node state with data from hotel
-	node.check_out(Util._or(check_out(node), {}))
+	var data = check_out(node)
+	if data == null:
+		Debug.warn("No data found for node: ", node, "passing empty dict.")
+		data = {}
+	node.check_out(data)
 
 	# calls node.hotel_data(), stores the data in the db
 	check_in(node)
