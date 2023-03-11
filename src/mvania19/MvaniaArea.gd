@@ -43,14 +43,18 @@ func player_spawn_coords() -> Vector2:
 	if spawn_node_path:
 		var spawn_node = get_node(spawn_node_path)
 		if spawn_node:
+			# clear this override once it is used
+			spawn_node_path = null
 			return spawn_node.global_position
 		else:
 			Debug.warn("Invalid spawn_node_path", self, spawn_node_path)
 
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
-	for mark in markers:
-		# if mark something or other, use last checkpoint
-		return mark.global_position
+	markers = markers.filter(func(ma): return ma.active)
+	markers.sort_custom(func(ma, mb): return ma.last_sat_at > mb.last_sat_at)
+
+	if len(markers) > 0:
+		return markers[0].global_position
 
 	var eles = Util.get_children_in_group(self, "elevators")
 	for e in eles:
