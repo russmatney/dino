@@ -58,16 +58,13 @@ func get_first_child_in_group(node: Node, group_name: String) -> Node:
 
 
 func get_children_in_group(node: Node, group_name: String, include_nested=true) -> Array:
-	# only checks first children
 	var in_group = []
 	for c in node.get_children():
 		if c.is_in_group(group_name):
 			in_group.append(c)
 
 		if include_nested:
-			for d in c.get_children():
-				if d.is_in_group(group_name):
-					in_group.append(d)
+			in_group.append_array(get_children_in_group(c, group_name, include_nested))
 	return in_group
 
 ############################################################
