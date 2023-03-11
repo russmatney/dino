@@ -8,16 +8,19 @@ extends Node2D
 # ready
 
 func _ready():
-	# TODO restore after area_db/hotel refactor
-	# MvaniaGame.area_db_updated.connect(update)
-	# if len(MvaniaGame.area_db) > 0:
-	# 	update(MvaniaGame.area_db)
-	pass
+	Hotel.entry_updated.connect(update)
 
-func update(_area_db):
-	# TODO restore after area_db/hotel refactor
-	# update_minimap_data()
+	update_minimap_data()
 	update_map()
+
+
+func update(entry):
+	if "mvania_areas" in entry.get("groups", []):
+		update_minimap_data()
+		update_map()
+	if "mvania_rooms" in entry.get("groups", []):
+		update_minimap_data()
+		update_map()
 
 ################################################################
 # process
@@ -31,9 +34,10 @@ func _process(_delta):
 func merged_rect(rms):
 	var r = Rect2()
 	for room_data in rms:
-		var rect = room_data["rect"]
-		rect.position += room_data["position"]
-		r = r.merge(rect)
+		var rect = room_data.get("rect")
+		if rect:
+			rect.position += room_data.get("position")
+			r = r.merge(rect)
 	return r
 
 ################################################################
@@ -42,22 +46,17 @@ func merged_rect(rms):
 var area_data = {}
 
 func update_minimap_data():
-	pass
-	# TODO proper minimap lifecycle
-	# TODO restore after area_db/hotel refactor
-	# area_data = MvaniaGame.get_current_area_data()
-	# if area_data == null:
-	# 	area_data = {}
+	var current_area = MvaniaGame.current_area
+	if not current_area:
+		if Engine.is_editor_hint():
+			current_area = Hotel.first({group="mvania_areas"})
+		else:
+			Debug.pr("No current area")
+			return
 
-	# if len(area_data) == 0:
-	# 	if Engine.is_editor_hint():
-	# 		# draw a map to be sure things work
-	# 		var area = MvaniaGame.area_scenes[0].instantiate()
-	# 		area_data = MvaniaGame.to_area_data(area)
-	# 		if area_data == null:
-	# 			area_data = {}
-	# 	else:
-	# 		return
+	var areas = Hotel.query({area_name=current_area.name, group="mvania_areas"})
+	if len(areas) > 0:
+		area_data = areas[0]
 
 ################################################################
 # update_map
@@ -74,7 +73,8 @@ func update_map():
 		clear_map()
 		last_area_name = area_data["name"]
 
-	var merged = merged_rect(area_data["rooms"].values())
+	rooms = Hotel.query({area_name=area_data["name"], group="mvania_rooms"})
+	var merged = merged_rect(rooms)
 	var offset = Vector2.ZERO
 	if merged.position.x < 0:
 		offset.x = -merged.position.x
@@ -92,30 +92,31 @@ func clear_map():
 			c.free()
 
 func update_rooms(offset: Vector2):
-	for room_data in area_data["rooms"].values():
-		var rect = room_data["rect"]
-		rect.position += room_data["position"] + offset
-		var visited = room_data["visited"]
-		var has_player = "has_player" in room_data and room_data["has_player"]
+	for room_data in rooms:
+		var rect = room_data.get("rect")
+		if rect:
+			rect.position += room_data["position"] + offset
+			var visited = room_data["visited"]
+			var has_player = "has_player" in room_data and room_data["has_player"]
 
-		var c_rect = get_node_or_null(str(room_data["name"]))
-		if not c_rect:
-			c_rect = ColorRect.new()
-			c_rect.name = room_data["name"]
-			add_child(c_rect)
-			c_rect.set_owner(self)
-		c_rect.size = rect.size
-		c_rect.position = rect.position
-		c_rect.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
-		rooms.append(c_rect)
+			var c_rect = get_node_or_null(str(room_data["name"]))
+			if not c_rect:
+				c_rect = ColorRect.new()
+				c_rect.name = room_data["name"]
+				add_child(c_rect)
+				c_rect.set_owner(self)
+			c_rect.size = rect.size
+			c_rect.position = rect.position
+			c_rect.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+			rooms.append(c_rect)
 
-		if has_player:
-			c_rect.set_color(Color(Color.CRIMSON,0.8))
-			cam.set_position(rect.get_center())
-		elif visited:
-			c_rect.set_color(Color(Color.PERU, 0.7))
-		else:
-			c_rect.set_color(Color(Color.AQUAMARINE, 0.4))
+			if has_player:
+				c_rect.set_color(Color(Color.PERU,0.8))
+				cam.set_position(rect.get_center())
+			elif visited:
+				c_rect.set_color(Color(Color.GRAY, 0.7))
+			else:
+				c_rect.set_color(Color(Color.AQUAMARINE, 0.2))
 
 var limit_offset = 15
 var viewport_dim = 256
