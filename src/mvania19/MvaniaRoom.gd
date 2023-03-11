@@ -120,7 +120,7 @@ func hotel_data(player=null):
 		"visited": visited,
 		}
 
-	if player:
+	if player and is_instance_valid(player):
 		var r = Rect2()
 		r.position = rect.position + position
 		r.size = rect.size
@@ -184,8 +184,8 @@ func pause():
 	paused = true
 	if not Engine.is_editor_hint():
 		deactivate_cam_points()
-		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 		_on_paused()
+		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
 func unpause():
 	paused = false
@@ -213,19 +213,19 @@ func reset_tweens():
 
 var fade_tween
 func to_faded():
-	if normal_tween and normal_tween.is_valid():
-		normal_tween.kill()
+	reset_tweens()
 	fade_tween = create_tween()
-	fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-	fade_tween.tween_property(self, "modulate:a", 0.2, 0.3)
+	if fade_tween and fade_tween.is_valid():
+		fade_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		fade_tween.tween_property(self, "modulate:a", 0.2, 0.3)
 
 var normal_tween
 func to_normal():
-	if fade_tween and fade_tween.is_valid():
-		fade_tween.kill()
+	reset_tweens()
 	normal_tween = create_tween()
-	normal_tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
-	normal_tween.tween_property(self, "modulate:a", 1, 0.2)
+	if normal_tween and normal_tween.is_valid():
+		normal_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+		normal_tween.tween_property(self, "modulate:a", 1, 0.2)
 
 ###########################################
 # cam points
