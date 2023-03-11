@@ -5,15 +5,27 @@ extends Control
 # ready
 
 func _ready():
+	Hotel.book(self.scene_file_path)
+	Hotel.register(self, {"root": true})
+
 	list_entries()
 	reset_option_buttons()
 
 	area_option_button.item_selected.connect(_on_area_selected)
 	room_option_button.item_selected.connect(_on_room_selected)
 	group_option_button.item_selected.connect(_on_group_selected)
+	has_group_toggle.pressed.connect(_on_has_group_toggle)
+	is_root_toggle.pressed.connect(_on_is_root_toggle)
 
 	Hotel.entry_updated.connect(_on_entry_update)
 
+
+func check_out(data):
+	Debug.prn("Hotel UI check out:", data)
+	query = data.get("query", query)
+
+func hotel_data():
+	return {query=query}
 
 #######################################################################
 # reload button
@@ -44,11 +56,13 @@ func _on_rebuild_db_button_pressed():
 @onready var area_option_button = $%AreaOptionButton
 @onready var room_option_button = $%RoomOptionButton
 @onready var group_option_button = $%GroupOptionButton
+@onready var has_group_toggle = $%HasGroupToggle
+@onready var is_root_toggle = $%IsRootToggle
 var area_names = []
 var room_names = []
 var groups = []
 
-var query = {}
+var query = {has_group=true,}
 
 func _on_area_selected(idx):
 	if idx > len(area_names) - 1:
@@ -77,6 +91,22 @@ func _on_group_selected(idx):
 		var group = groups[idx]
 		if group:
 			query["group"] = group
+
+	list_entries()
+
+func _on_has_group_toggle():
+	if has_group_toggle.button_pressed:
+		query["has_group"] = true
+	else:
+		query.erase("has_group")
+
+	list_entries()
+
+func _on_is_root_toggle():
+	if is_root_toggle.button_pressed:
+		query["is_root"] = true
+	else:
+		query.erase("is_root")
 
 	list_entries()
 

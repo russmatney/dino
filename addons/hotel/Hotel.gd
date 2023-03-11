@@ -28,7 +28,8 @@ func drop_db():
 ######################################################################
 # key
 
-var root_groups = ["mvania_areas", "player"]
+var hotel_root_group_name = "hotel_singletons"
+var root_groups = ["mvania_areas", "player", hotel_root_group_name]
 
 func is_in_root_group(x):
 	if x is Dictionary:
@@ -164,6 +165,15 @@ func register(node, opts={}):
 		Debug.warn("skipping hotel register.", node, "missing expected check_out() method")
 		return
 
+	# TODO consider booking if this node hasn't been found in the db?
+	# maybe only for "root" elems that can store themselves?
+	# OR, maybe any node should be able to book itself, b/c we can pull in parent detail/path
+	# at _ready time without issue
+
+	if opts.get("root", false):
+		Debug.pr(hotel_root_group_name)
+		node.add_to_group(hotel_root_group_name, true)
+
 	# restore node state with data from hotel
 	node.check_out(Util._or(check_out(node), {}))
 
@@ -220,6 +230,21 @@ func query(q={}):
 
 	if "room_name" in q:
 		vals = vals.filter(func (s_dict): return q["room_name"] == s_dict.get("room_name"))
+
+	if "has_group" in q:
+		vals = vals.filter(func (s_dict): return len(s_dict.get("groups", [])) > 0)
+
+	if "is_player" in q:
+		vals = vals.filter(func (s_dict): return "player" in s_dict.get("groups", []))
+
+	if "is_enemy" in q:
+		vals = vals.filter(func (s_dict): return "enemies" in s_dict.get("groups", []))
+
+	if "is_boss" in q:
+		vals = vals.filter(func (s_dict): return "bosses" in s_dict.get("groups", []))
+
+	if "is_root" in q:
+		vals = vals.filter(func (s_dict): return is_in_root_group(s_dict))
 
 	if "filter" in q:
 		vals = vals.filter(q["filter"])
