@@ -10,13 +10,19 @@ extends CanvasLayer
 	set(v):
 		header_text = v
 		if header:
-			header.text = "[center]%s[/center]" % v
+			if len(v) == 0:
+				header.text = ""
+			else:
+				header.text = "[center]%s[/center]" % v
 
 @export var body_text: String :
 	set(v):
 		body_text = v
 		if body:
-			body.text = "[center]%s[/center]" % v
+			if len(v) == 0:
+				body.text = ""
+			else:
+				body.text = "[center]%s[/center]" % v
 
 func _unhandled_input(event):
 	if Trolley.is_close(event):

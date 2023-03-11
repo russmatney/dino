@@ -108,8 +108,12 @@ func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
 		jumbotron.header_text = header
 		if body:
 			jumbotron.body_text = body
+		else:
+			jumbotron.body_text = ""
 		if key_or_action or action_label_text:
 			jumbotron.action_hint.display(key_or_action, action_label_text)
+		else:
+			jumbotron.action_hint.hide()
 
 		# pause game?
 		jumbotron.fade_in()

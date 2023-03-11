@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6h3mksaa507i"]
+[gd_scene load_steps=8 format=3 uid="uid://b6h3mksaa507i"]
 
 [ext_resource type="Script" path="res://addons/hood/Jumbotron.gd" id="1_dv3ck"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="1_lmvlg"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vafy"]
 bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.470588)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rp857"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrs0h"]
 
 [node name="Jumbotron" type="CanvasLayer"]
 layer = 4
@@ -42,6 +46,7 @@ custom_effects = [ExtResource("2_apr2o")]
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_rp857")
 
 [node name="ActionHint" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("3_r7u42")]
 unique_name_in_owner = true
@@ -72,3 +77,4 @@ key_or_action = "close"
 [node name="VSeparator2" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxFlat_yrs0h")
