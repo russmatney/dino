@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dggsvp0ettrqd"]
+[gd_scene load_steps=17 format=3 uid="uid://dggsvp0ettrqd"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_2s6nm"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_0ral6"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ruuw7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
 [ext_resource type="PackedScene" uid="uid://cukeivdgc4n4c" path="res://src/mvania19/bosses/monstroar/Monstroar.tscn" id="7_h4avw"]
-[ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="7_l0y7r"]
 [ext_resource type="PackedScene" uid="uid://7fa0vymgrsig" path="res://src/mvania19/enemies/ShootyCrawly.tscn" id="7_qtkyx"]
 [ext_resource type="PackedScene" uid="uid://cqnu6gnhs5sim" path="res://src/mvania19/enemies/Goomba.tscn" id="8_ajlub"]
 [ext_resource type="PackedScene" uid="uid://coxhcbeogq8y3" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="8_jvvmr"]
@@ -22,7 +21,7 @@
 script = ExtResource("1_2s6nm")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.701961, 0.619608, 0.0431373, 1)
+color = Color(0.513726, 0.454902, 0.027451, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -866.0
@@ -186,17 +185,6 @@ position = Vector2(-144, -24)
 
 [node name="WarpSpot3" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
 position = Vector2(144, -32)
-
-[node name="PowerupPickup" parent="VolcanoBoss" instance=ExtResource("7_l0y7r")]
-position = Vector2(-112, 64)
-
-[node name="PowerupPickup2" parent="VolcanoBoss" instance=ExtResource("7_l0y7r")]
-position = Vector2(-128, 64)
-powerup = 1
-
-[node name="PowerupPickup3" parent="VolcanoBoss" instance=ExtResource("7_l0y7r")]
-position = Vector2(-144, 64)
-powerup = 2
 
 [node name="PlayerSpawnPoint" parent="VolcanoBoss" instance=ExtResource("11_rawej")]
 position = Vector2(-144, 40)

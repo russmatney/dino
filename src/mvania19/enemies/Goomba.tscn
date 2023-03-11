@@ -34,5 +34,4 @@ shape = SubResource("CircleShape2D_lrapw")
 [node name="Machine" parent="." instance=ExtResource("3_chfoy")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 texture = ExtResource("4_507b1")
