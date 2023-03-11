@@ -190,6 +190,28 @@ func update_pois():
 	if cam:
 		cam.update_pois()
 
+
+func add_to_pofs(node):
+	node.add_to_group(pof_group)
+	update_pofs()
+func remove_from_pofs(node):
+	node.remove_from_group(pof_group)
+	update_pofs()
+
+func add_to_pois(node):
+	node.add_to_group(poi_group)
+	update_pois()
+func remove_from_pois(node):
+	node.remove_from_group(poi_group)
+	update_pois()
+
+func add_to_poas(node):
+	node.add_to_group(poa_group)
+	update_poas()
+func remove_from_poas(node):
+	node.remove_from_group(poa_group)
+	update_poas()
+
 ###########################################################################
 # input
 
