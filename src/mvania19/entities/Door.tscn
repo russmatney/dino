@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://btgfyldjmtu8t"]
+[gd_scene load_steps=8 format=3 uid="uid://btgfyldjmtu8t"]
 
 [ext_resource type="SpriteFrames" uid="uid://dfrbf5ohm2fct" path="res://src/mvania19/entities/DoorSpriteFrames.tres" id="1_5m0uh"]
 [ext_resource type="Script" path="res://src/mvania19/entities/Door.gd" id="1_arj2e"]
 [ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_ox5jh"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_oifqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1rxf"]
 size = Vector2(30, 64)
@@ -23,8 +24,9 @@ shape = SubResource("RectangleShape2D_y1rxf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_5m0uh")
-animation = &"opening"
+animation = &"closed"
 autoplay = "closed"
+frame_progress = 0.71834
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
@@ -43,3 +45,5 @@ occluder = SubResource("OccluderPolygon2D_s844d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 shape = SubResource("RectangleShape2D_o5q0k")
+
+[node name="CamPOF" parent="." instance=ExtResource("4_oifqr")]

@@ -4,6 +4,7 @@ extends Node2D
 @onready var collision_shape = $AnimatableBody2D/CollisionShape2D
 @onready var anim = $AnimatedSprite2D
 @onready var action_area = $ActionArea
+@onready var cam_pof = $CamPOF
 
 ##################################################################
 # actions
@@ -53,9 +54,12 @@ func _on_animation_finished():
 		anim.play("open")
 		if collision_shape:
 			collision_shape.call_deferred("set_disabled", true)
+		cam_pof.deactivate()
+
 	elif anim.animation == "closing":
 		anim.play("closed")
 		collision_shape.call_deferred("set_disabled", false)
+		cam_pof.deactivate()
 
 ##################################################################
 # open/close
@@ -64,12 +68,14 @@ func open():
 	state = "open"
 	if anim:
 		anim.play("opening")
+		cam_pof.activate()
 
 
 func close():
 	state = "closed"
 	if anim:
 		anim.play("closing")
+		cam_pof.activate()
 
 ##################################################################
 # can
