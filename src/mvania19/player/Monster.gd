@@ -52,6 +52,7 @@ func _on_transit(state):
 
 func check_out(data):
 	health = data.get("health", health)
+	death_count = data.get("death_count", death_count)
 	var stored_powerups = data.get("powerups", powerups)
 	if len(stored_powerups) > 0:
 		powerups = stored_powerups
@@ -60,7 +61,7 @@ func check_out(data):
 		update_with_powerup(p)
 
 func hotel_data():
-	return {health=health, powerups=powerups}
+	return {health=health, powerups=powerups, death_count=death_count}
 
 ###########################################################################
 # actions
@@ -228,9 +229,12 @@ func heal(opts={}):
 	health = clamp(health, 0, max_health)
 	Hotel.check_in(self)
 
+var death_count = 0
+
 func _on_player_death():
 	stamp({ttl=0}) # perma stamp
 
+	death_count += 1
 	Hotel.check_in(self)
 	var t = create_tween()
 	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
