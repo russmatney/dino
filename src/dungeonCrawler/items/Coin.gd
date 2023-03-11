@@ -5,6 +5,7 @@ extends Node2D
 func _ready():
 	Hotel.register(self)
 
+signal on_collected(coin)
 var collected = false
 
 func hotel_data():
@@ -24,7 +25,9 @@ func _on_Area2D_body_entered(body: Node):
 		body.add_coin()
 		# TODO coin noise
 		collected = true
+		on_collected.emit(self)
 		disable()
+		Hotel.check_in(self)
 
 func disable():
 	anim.set_visible(false)

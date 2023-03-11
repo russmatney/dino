@@ -5,13 +5,13 @@
 
 [sub_resource type="RectangleShape2D" id="1"]
 
-[node name="Coin" type="Node2D" groups=["magnetic"]]
+[node name="Coin" type="Node2D" groups=["coins", "magnetic"]]
 script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1")
 autoplay = "default"
-frame_progress = 0.0797929
+frame_progress = 0.24671
 
 [node name="Area2D" type="Area2D" parent="." groups=["coin"]]
 collision_layer = 32

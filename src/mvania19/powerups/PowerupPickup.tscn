@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlg50"]
 size = Vector2(16, 16)
 
-[node name="PowerupPickup" type="Node2D"]
+[node name="PowerupPickup" type="Node2D" groups=["pickups", "powerups"]]
 script = ExtResource("1_o8nae")
 
 [node name="ActionArea" parent="." instance=ExtResource("2_bgc07")]

@@ -98,6 +98,13 @@ func ensure_jumbotron():
 
 func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
 	if jumbotron:
+		if header and header is Dictionary:
+			body = header.get("body")
+			key_or_action = header.get("key")
+			key_or_action = header.get("action", key_or_action)
+			action_label_text = header.get("action_label_text")
+			header = header.get("header")
+
 		jumbotron.header_text = header
 		if body:
 			jumbotron.body_text = body

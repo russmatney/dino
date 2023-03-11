@@ -10,9 +10,7 @@ extends Node2D
 
 var actions = [
 	Action.mk({
-		label="Open", fn=open, source_can_execute=func():
-		Debug.prn("src can exec")
-		return can_open(),
+		label="Open", fn=open, source_can_execute=can_open,
 		}),
 	Action.mk({
 		label="Close", fn=close, source_can_execute=can_close,
