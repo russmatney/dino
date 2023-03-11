@@ -18,6 +18,16 @@
 [node name="Simulation" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_eirev")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1248.0
+offset_top = -1000.0
+offset_right = 1136.0
+offset_bottom = 904.0
+color = Color(0.12549, 0.156863, 0.239216, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.964706, 0.776471, 0.658824, 1)
+
 [node name="ToLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_4fgnt")
 
@@ -136,6 +146,7 @@ layer_0/tile_data = PackedInt32Array(-65473, 196609, 4, -131009, 196609, 3, -196
 
 [node name="Candle" parent="BossHallway" instance=ExtResource("14_8cf58")]
 position = Vector2(408, -112)
+lit = false
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("10_jfj05")]
 position = Vector2(408, -144)

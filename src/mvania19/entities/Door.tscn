@@ -27,6 +27,7 @@ animation = &"opening"
 autoplay = "closed"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
 rotation = 1.5708
 color = Color(1, 1, 1, 0.117647)
 shadow_enabled = true
