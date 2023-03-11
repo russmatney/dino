@@ -27,9 +27,6 @@ color = Color(0.27451, 0.258824, 0.368627, 1)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.266667, 0.662745, 0.337255, 1)
 
-[node name="PlayerSpawnPoint2" parent="." instance=ExtResource("5_cfyjd")]
-position = Vector2(337, 40)
-
 [node name="TheLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_b2dn2")
 
@@ -160,4 +157,3 @@ layer_0/tile_data = PackedInt32Array(2031687, 196609, 4, 1966151, 196609, 3, 190
 
 [node name="Candle" parent="FirstCandle" instance=ExtResource("13_3q15i")]
 position = Vector2(480, 216)
-lit = false

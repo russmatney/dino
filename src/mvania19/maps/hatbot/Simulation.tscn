@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://g38soh27mea6"]
+[gd_scene load_steps=14 format=3 uid="uid://g38soh27mea6"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_eirev"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_4fgnt"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="7_fdlq5"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_u6t8r"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="9_wn65p"]
-[ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="10_jfj05"]
 [ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="11_4s4lm"]
 [ext_resource type="PackedScene" uid="uid://coxhcbeogq8y3" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="11_v6sjm"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="12_m4nn0"]
@@ -135,9 +134,6 @@ position = Vector2(120, -16)
 [node name="WarpSpot4" parent="SpaceshipBoss" instance=ExtResource("12_m4nn0")]
 position = Vector2(40, 32)
 
-[node name="PowerupPickup2" parent="SpaceshipBoss" instance=ExtResource("11_4s4lm")]
-position = Vector2(-24, 48)
-
 [node name="BossHallway" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_4fgnt")
 
@@ -146,7 +142,3 @@ layer_0/tile_data = PackedInt32Array(-65473, 196609, 4, -131009, 196609, 3, -196
 
 [node name="Candle" parent="BossHallway" instance=ExtResource("14_8cf58")]
 position = Vector2(408, -112)
-lit = false
-
-[node name="PlayerSpawnPoint" parent="." instance=ExtResource("10_jfj05")]
-position = Vector2(408, -144)
