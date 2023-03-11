@@ -100,6 +100,8 @@ func ensure_jumbotron():
 	jumbotron.set_visible(false)
 	Navi.add_child_to_current(jumbotron)
 
+signal jumbo_closed
+
 func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
 	if jumbotron:
 		if header and header is Dictionary:
@@ -121,6 +123,8 @@ func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
 
 		# pause game?
 		jumbotron.fade_in()
+
+		return jumbo_closed
 
 ###########################################################################
 # find_player

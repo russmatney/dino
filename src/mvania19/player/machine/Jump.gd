@@ -43,7 +43,8 @@ func physics_process(delta):
 	# double jump
 	if not double_jumping and actor.has_double_jump \
 		and double_jump_ttl <= 0 \
-		and Input.is_action_just_pressed("jump"):
+		and Input.is_action_just_pressed("jump") \
+		and actor.can_execute_any_actions():
 		machine.transit("Jump", {"double_jumping": true})
 		return
 

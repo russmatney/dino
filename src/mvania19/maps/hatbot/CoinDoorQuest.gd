@@ -41,10 +41,11 @@ func _process(_delta):
 	if not complete:
 		if len(remaining_coins()) <= 0 and seen_coins:
 			complete = true
-			door.open()
 			Hood.notif("All coins found!")
 			Debug.pr("All coins found!")
-			Hood.jumbo_notif({header="All coins found!"})
+			var on_close = Hood.jumbo_notif({header="All coins found!"})
+			if on_close:
+				on_close.connect(door.open)
 
 
 #########################################################

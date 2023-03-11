@@ -235,7 +235,10 @@ func _on_player_death():
 	var t = create_tween()
 	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
 	t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
-	t.tween_callback(MvaniaGame.respawn_player.bind(true)).set_delay(1)
+
+	var on_close = Hood.jumbo_notif({header="You died", body="Close (Q) to respawn."})
+	if on_close:
+		on_close.connect(MvaniaGame.respawn_player.bind(true))
 
 ########################################################
 # coins

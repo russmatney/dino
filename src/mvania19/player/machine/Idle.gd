@@ -4,7 +4,8 @@ func enter(_ctx={}):
 	actor.anim.play("idle")
 
 func physics_process(delta):
-	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor() \
+		and actor.can_execute_any_actions():
 		machine.transit("Jump")
 		return
 

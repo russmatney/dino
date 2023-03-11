@@ -35,7 +35,7 @@ func physics_process(delta):
 		coyote_ttj -= delta
 
 		if coyote_ttj > 0:
-			if Input.is_action_just_pressed("jump"):
+			if Input.is_action_just_pressed("jump") and actor.can_execute_any_actions():
 				machine.transit("Jump")
 				return
 		else:
@@ -43,12 +43,14 @@ func physics_process(delta):
 
 	# double jump
 	if not double_jumping and actor.has_double_jump \
-		and Input.is_action_just_pressed("jump"):
+		and Input.is_action_just_pressed("jump") \
+		and actor.can_execute_any_actions():
 		machine.transit("Jump", {"double_jumping": true})
 		return
 
 	# jump after climb
-	if can_jump and Input.is_action_just_pressed("jump"):
+	if can_jump and Input.is_action_just_pressed("jump") \
+		and actor.can_execute_any_actions():
 		machine.transit("Jump")
 		return
 

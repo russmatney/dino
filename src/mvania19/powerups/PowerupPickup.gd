@@ -81,4 +81,7 @@ func show_jumbotron():
 			label = "Toward wall"
 
 	if header:
-		Hood.jumbo_notif(header, body, action, label)
+		MvaniaGame.set_forced_movement_target(global_position)
+		var on_close = Hood.jumbo_notif(header, body, action, label)
+		if on_close:
+			on_close.connect(MvaniaGame.clear_forced_movement_target)
