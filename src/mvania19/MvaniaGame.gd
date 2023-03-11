@@ -96,10 +96,6 @@ func _on_new_scene_instanced(s):
 		# deferring to run after the new scene is set (which is also deferred)
 		respawn_player()
 
-func respawn_player():
-	var p = create_new_player()
-	Navi.add_child_to_current(p)
-	update_rooms()
 
 ###########################################################
 # Player
@@ -107,13 +103,15 @@ func respawn_player():
 const player_scene = preload("res://src/mvania19/player/Monster.tscn")
 var player
 
-func create_new_player():
+func respawn_player(player_died=false):
 	if player:
 		var p = player
 		player = null
-		Navi.current_scene.remove_child(p)
+		if p and is_instance_valid(p):
+			Navi.current_scene.remove_child(p)
 		update_rooms()
-		p.free()
+		if p and is_instance_valid(p):
+			p.free()
 
 	var spawn_coords
 
@@ -127,7 +125,14 @@ func create_new_player():
 
 	player = player_scene.instantiate()
 	player.position = spawn_coords
-	return player
+
+	# check in new player health
+	# here we pass the data ourselves to not overwrite other fields (powerups)
+	if player_died:
+		Hotel.check_in(player, {health=player.max_health})
+
+	Navi.add_child_to_current(player)
+	update_rooms()
 
 func ensure_current_area():
 	if not current_area:
@@ -193,7 +198,7 @@ func clear_forced_movement_target():
 # HUD
 
 func _on_hud_ready():
-	Debug.prn("hud ready")
+	pass
 	# TODO show current room, area data
 	# TODO show player data
 	# TODO show quest progress
@@ -226,7 +231,6 @@ func travel_to(dest_area_name, elevator_path):
 # dev helper functions
 
 func maybe_spawn_player():
-	if not managed_game and not Engine.is_editor_hint():
-		Debug.pr("Unmanaged game, spawning player")
-		if player == null:
-			respawn_player()
+	if not managed_game and not Engine.is_editor_hint() and player == null:
+		Debug.pr("Unmanaged game, player is null, spawning")
+		respawn_player()
