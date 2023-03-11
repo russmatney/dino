@@ -20,12 +20,16 @@ func set_hud_scene(preloaded_scene):
 
 var hud
 
-func ensure_hud(hud_preload=null):
+func ensure_hud(hud_preload=null, p=null):
 	call_deferred("ensure_jumbotron")
 
 	Debug.prn("ensuring hud")
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
+
+		# support passing the player back into Hood
+		if p:
+			find_player(p)
 		return
 
 	if not hud_preload:
@@ -127,7 +131,10 @@ var player
 var player_group = "player"
 
 
-func find_player():
+func find_player(p=null):
+	if p:
+		player = p
+
 	if player:
 		emit_signal("found_player", player)
 		return
