@@ -26,7 +26,7 @@ offset_bottom = 904.0
 color = Color(0.12549, 0.156863, 0.239216, 1)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.964706, 0.776471, 0.658824, 1)
+color = Color(0.417489, 0.231056, 0.0929001, 1)
 
 [node name="ToLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_4fgnt")
