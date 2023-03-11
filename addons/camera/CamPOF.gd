@@ -1,4 +1,5 @@
-# NOTE for POIs, POAs, and POFs
+# for POIs, POAs, and POFs
+@tool
 extends Marker2D
 
 
