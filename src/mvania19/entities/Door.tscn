@@ -28,6 +28,8 @@ autoplay = "closed"
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 rotation = 1.5708
+color = Color(1, 1, 1, 0.117647)
+shadow_enabled = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_s844d")
