@@ -20,7 +20,7 @@ layout_mode = 2
 [node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_b8vev")]
 layout_mode = 2
 size_flags_vertical = 3
-text = "[center][jump]Mvania19[/jump][/center]"
+text = "[center][jump]HatBot[/jump][/center]"
 custom_effects = [ExtResource("2_h0g0m")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
