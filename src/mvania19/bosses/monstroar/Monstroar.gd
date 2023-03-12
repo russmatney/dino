@@ -115,6 +115,7 @@ func take_hit(opts={}):
 	var direction = opts.get("direction", Vector2.UP)
 
 	health -= damage
+	Hotel.check_in(self)
 
 	if health <= 0:
 		dead = true
