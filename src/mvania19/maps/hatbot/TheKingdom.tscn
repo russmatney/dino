@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bj6s1mankwubh"]
+[gd_scene load_steps=19 format=3 uid="uid://bj6s1mankwubh"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_nsqxk"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_xs8vo"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="10_8esf0"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="11_cnih1"]
 [ext_resource type="PackedScene" uid="uid://7fa0vymgrsig" path="res://src/mvania19/enemies/ShootyCrawly.tscn" id="12_p6uor"]
+[ext_resource type="PackedScene" uid="uid://c5w5v3oyfkg8v" path="res://src/mvania19/maps/hatbot/BossDefeatQuest.tscn" id="16_4r28o"]
 
 [node name="TheKingdom" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_nsqxk")
@@ -334,6 +335,8 @@ position = Vector2(-152, -160)
 
 [node name="WarpSpot7" parent="ThroneRoom" instance=ExtResource("10_8esf0")]
 position = Vector2(-184, -344)
+
+[node name="BossDefeatQuest" parent="ThroneRoom" instance=ExtResource("16_4r28o")]
 
 [node name="ToLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(-640, -152)

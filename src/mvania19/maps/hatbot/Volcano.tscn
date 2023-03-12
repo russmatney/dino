@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dggsvp0ettrqd"]
+[gd_scene load_steps=18 format=3 uid="uid://dggsvp0ettrqd"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_2s6nm"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_0ral6"]
-[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="3_4wvhc"]
-[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="4_m2scx"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="3_4wvhc"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="4_m2scx"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ruuw7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
 [ext_resource type="PackedScene" uid="uid://cukeivdgc4n4c" path="res://src/mvania19/bosses/monstroar/Monstroar.tscn" id="7_h4avw"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_rawej"]
 [ext_resource type="Script" path="res://src/mvania19/maps/hatbot/CoinDoorQuest.gd" id="11_x2s08"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="12_kdhm3"]
+[ext_resource type="PackedScene" uid="uid://c5w5v3oyfkg8v" path="res://src/mvania19/maps/hatbot/BossDefeatQuest.tscn" id="16_ypdi0"]
 
 [node name="Volcano" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_2s6nm")
@@ -189,6 +190,8 @@ position = Vector2(144, -32)
 [node name="PlayerSpawnPoint" parent="VolcanoBoss" instance=ExtResource("11_rawej")]
 position = Vector2(-144, 40)
 
+[node name="BossDefeatQuest" parent="VolcanoBoss" instance=ExtResource("16_ypdi0")]
+
 [node name="PreBossCandle" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_0ral6")
 
@@ -197,4 +200,3 @@ layer_0/tile_data = PackedInt32Array(-6815649, 131073, 2, -6750114, 131073, 3, -
 
 [node name="Candle" parent="PreBossCandle" instance=ExtResource("12_kdhm3")]
 position = Vector2(704, -712)
-lit = false
