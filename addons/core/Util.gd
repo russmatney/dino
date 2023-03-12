@@ -68,7 +68,7 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 	return in_group
 
 ############################################################
-# children/parents
+# children/parents/...siblings?
 
 func change_parent(child: Node, new_parent: Node):
 	call_deferred("do_change_parent", child, new_parent)
@@ -96,6 +96,10 @@ func get_all_parents(node: Node, parents=[]):
 		return get_all_parents(p, parents)
 	else:
 		return parents
+
+func each_sibling(node: Node):
+	var p = node.get_parent()
+	return p.get_children().filter(func(ch): return ch != node)
 
 ############################################################
 # packed_scene reading
