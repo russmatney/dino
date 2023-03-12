@@ -29,10 +29,10 @@ func setup(a, can_execute_any=null, ac_hint=null):
 ####################################################################
 # process
 
-func _process(_delta):
-	if not Engine.is_editor_hint():
-		Debug.debug_label("immediate_actions: ", immediate_actions())
-		Debug.debug_label("potential_actions: ", potential_actions())
+# func _process(_delta):
+# 	if not Engine.is_editor_hint():
+# 		Debug.debug_label("immediate_actions: ", immediate_actions())
+# 		Debug.debug_label("potential_actions: ", potential_actions())
 
 
 ####################################################################
@@ -52,7 +52,7 @@ func _on_area_exited(area):
 		update_action_areas()
 
 func update_action_areas():
-	Debug.debug_label("action areas: ", action_areas)
+	# Debug.debug_label("action areas: ", action_areas)
 
 	update_actions()
 
@@ -66,7 +66,7 @@ func update_actions():
 	for area in action_areas:
 		actions.append_array(area.actions)
 
-	Debug.debug_label("actions: ", actions)
+	# Debug.debug_label("actions: ", actions)
 
 	update_displayed_action()
 

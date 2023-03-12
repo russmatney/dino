@@ -36,8 +36,6 @@ func set_health(health):
 		for icon in heart_icons:
 			icon.flip_h = not flip_h
 
-	Debug.pr("setting health", heart_icons, heart_icons.map(func(h): return {flip_h=h.flip_h}))
-
 	if heart_icons.size() == 0:
 		return
 

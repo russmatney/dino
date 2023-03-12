@@ -8,10 +8,6 @@ extends PanelContainer
 var delete_in
 
 func set_status(opts):
-	Debug.prn(opts)
-	Debug.prn(portrait)
-	Debug.prn(enemy_name)
-	Debug.prn(hearts_container)
 	if opts.get("texture"):
 		portrait.set_texture(opts.get("texture"))
 

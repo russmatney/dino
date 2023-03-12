@@ -29,7 +29,7 @@ func _on_death(_boss):
 
 func _on_transit(state_label):
 	Debug.pr(state_label)
-	Debug.debug_label(name, "state", state_label)
+	# Debug.debug_label(name, "state", state_label)
 
 #####################################################
 # hotel

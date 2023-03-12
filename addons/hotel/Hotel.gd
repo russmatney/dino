@@ -202,8 +202,8 @@ func check_in(node: Node, data=null):
 	if key in scene_db:
 		scene_db[key].merge(data, true)
 		entry_updated.emit(scene_db[key])
-		if len(data):
-			Hood.dev_notif(node, "check_in", data)
+		# if len(data):
+		# 	Hood.dev_notif(node, "check_in", data)
 	else:
 		Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 

@@ -140,7 +140,7 @@ position = Vector2(40, 32)
 process_mode = 3
 
 [node name="PlayerSpawnPoint" parent="SpaceshipBoss" instance=ExtResource("14_srb17")]
-position = Vector2(-64, 24)
+position = Vector2(-304, 27)
 
 [node name="BossHallway" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_4fgnt")
