@@ -188,7 +188,7 @@ position = Vector2(-144, -24)
 position = Vector2(144, -32)
 
 [node name="PlayerSpawnPoint" parent="VolcanoBoss" instance=ExtResource("11_rawej")]
-position = Vector2(-144, 40)
+position = Vector2(8, 216)
 
 [node name="BossDefeatQuest" parent="VolcanoBoss" instance=ExtResource("16_ypdi0")]
 

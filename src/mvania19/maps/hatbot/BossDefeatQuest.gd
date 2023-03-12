@@ -59,11 +59,35 @@ func quest_complete():
 	Debug.pr("Boss quest complete!")
 	complete = true
 
+	var header = "Boss Defeated"
+	var body = "You defeated [jump]%s[/jump]" % " and ".join(defeated_bosses.map(func(b): return b.name.capitalize()))
+	var action
+	var action_label_text
+
+	match(bosses.map(func(b): return b.name)):
+		["Beefstronaut"]:
+			header = "It was never a fair fight"
+			body = "Maybe this will make things more interesting?"
+			action = "slowmo"
+			action_label_text = "Slow down Time"
+
+		["Monstroar"]:
+			header = "Two down! One boss battle left."
+			body = "Spice up your game, spam 'e' for more noise!"
+			action = "action"
+			action_label_text = "Add Screen Shake"
+
+		["Beefstronaut", "Monstroar"], ["Beefstronaut", "Monstroar"]:
+			header = "YOU DID IT! CONGRATS!"
+			body = "Featuring: Camera debugging and HotelDB."
+			action = "debug_toggle"
+			action_label_text = "Show the debug menu"
+
 	if room:
 		room.pause()
 	var on_close = Hood.jumbo_notif({
-		header="Boss Defeated",
-		body="You defeated [jump]%s[/jump]" % " and ".join(defeated_bosses.map(func(b): return b.name.capitalize()))
+		header=header, body=body, action=action,
+		action_label_text=action_label_text,
 		})
 	on_close.connect(func(): if room:
 		room.unpause())

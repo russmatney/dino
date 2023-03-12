@@ -3,8 +3,9 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1"]
 
 [resource]
+default_font_size = 48
 Label/colors/font_color = Color(0.858824, 0.815686, 0.74902, 1)
-Label/font_sizes/font_size = 16
+Label/font_sizes/font_size = 64
 Label/fonts/font = ExtResource("1")
 RichTextLabel/colors/default_color = Color(0.964706, 0.776471, 0.658824, 1)
 RichTextLabel/fonts/normal_font = ExtResource("1")
