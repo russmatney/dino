@@ -56,7 +56,7 @@ func cam_window_rect():
 # ensure camera
 
 
-func ensure_camera(cam_mode = null, opts={}):
+func ensure_camera(cam_mode = null, opts={}, player=null):
 	if not opts is Dictionary:
 		opts = {}
 		Debug.warn("overwriting/ignoring camera opts")
@@ -64,6 +64,10 @@ func ensure_camera(cam_mode = null, opts={}):
 	Debug.prn("ensuring camera")
 	if cam and is_instance_valid(cam):
 		Debug.prn("found existing cam: ", cam)
+
+		if player:
+			Debug.prn("reparenting cam to player: ", cam)
+			cam.reparent(player)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")
