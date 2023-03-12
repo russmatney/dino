@@ -1,9 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://b6h3mksaa507i"]
+[gd_scene load_steps=18 format=3 uid="uid://b6h3mksaa507i"]
 
 [ext_resource type="Script" path="res://addons/hood/Jumbotron.gd" id="1_dv3ck"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="1_lmvlg"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="2_apr2o"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="3_r7u42"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="3_w30p6"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="4_e6ymp"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Heart.tres" id="5_s33mu"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="7_5tarr"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="8_pc3ok"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Number.tres" id="9_p7o8v"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="10_26f40"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="11_ptnju"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="12_hagoo"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_l8py3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vafy"]
 bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.470588)
@@ -43,7 +53,7 @@ bbcode_enabled = true
 text = "[center][jump]Double Jump[/jump] Discovered[/center]"
 fit_content = true
 scroll_active = false
-custom_effects = [ExtResource("2_apr2o")]
+custom_effects = [ExtResource("3_w30p6"), ExtResource("4_e6ymp"), ExtResource("5_s33mu"), ExtResource("2_apr2o"), ExtResource("7_5tarr"), ExtResource("8_pc3ok"), ExtResource("9_p7o8v"), ExtResource("10_26f40"), ExtResource("11_ptnju"), ExtResource("12_hagoo"), ExtResource("13_l8py3")]
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
@@ -69,7 +79,7 @@ bbcode_enabled = true
 text = "[center]Try it on wooden blocks![/center]"
 fit_content = true
 scroll_active = false
-custom_effects = [ExtResource("2_apr2o")]
+custom_effects = [ExtResource("3_w30p6"), ExtResource("4_e6ymp"), ExtResource("5_s33mu"), ExtResource("2_apr2o"), ExtResource("7_5tarr"), ExtResource("8_pc3ok"), ExtResource("9_p7o8v"), ExtResource("10_26f40"), ExtResource("11_ptnju"), ExtResource("12_hagoo"), ExtResource("13_l8py3")]
 
 [node name="VSeparator2" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
