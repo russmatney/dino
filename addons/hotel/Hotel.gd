@@ -183,7 +183,7 @@ func register(node, opts={}):
 	# calls node.hotel_data(), stores the data in the db
 	check_in(node)
 
-	Hood.dev_notif(node, "Registered")
+	# Hood.dev_notif(node, "Registered")
 
 ######################################################################
 # checkin

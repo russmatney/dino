@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_78edy"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_b2dn2"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_60ffy"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_60ffy"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="4_bw1oa"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="5_cfyjd"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ubggt"]
 [ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="6_q71ss"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="7_e7wku"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="7_gln6l"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="7_e7wku"]
+[ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="7_gln6l"]
 [ext_resource type="PackedScene" uid="uid://cqnu6gnhs5sim" path="res://src/mvania19/enemies/Goomba.tscn" id="9_2vvn3"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="9_85myu"]
+[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="9_85myu"]
 [ext_resource type="PackedScene" uid="uid://7fa0vymgrsig" path="res://src/mvania19/enemies/ShootyCrawly.tscn" id="10_33lpn"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="13_3q15i"]
 
@@ -37,7 +37,7 @@ layer_0/tile_data = PackedInt32Array(524271, 131073, 4, 458735, 131073, 3, 39319
 layer_0/tile_data = PackedInt32Array(-131083, 393217, 5, -196619, 196609, 3, -262155, 196609, 2, -131084, 131073, 4, -196620, 131073, 3, -262156, 131073, 2, -131085, 65537, 4, -196621, 65537, 3, -262157, 65537, 2, -14, 196609, 4, -65550, 196609, 2, -15, 65537, 4, -65551, 65537, 2, -8, 196609, 4, -65544, 196609, 3, -131080, 196609, 2, -9, 131073, 4, -65545, 131073, 3, -131081, 131073, 2, -10, 65537, 4, -65546, 65537, 3, -131082, 458753, 2, 327691, 131073, 4, 262155, 131073, 3, 196619, 393217, 4, 131083, 196609, 3, 65547, 196609, 3, 11, 196609, 2, 327690, 131073, 4, 262154, 131073, 3, 196618, 131073, 3, 131082, 131073, 3, 65546, 131073, 3, 10, 131073, 2, 327689, 131073, 4, 262153, 131073, 3, 196617, 131073, 3, 131081, 131073, 3, 65545, 131073, 3, 9, 131073, 2, 327688, 131073, 4, 262152, 131073, 3, 196616, 131073, 3, 131080, 131073, 3, 65544, 131073, 3, 8, 131073, 2, 327687, 131073, 4, 262151, 131073, 3, 196615, 131073, 3, 131079, 131073, 3, 65543, 131073, 3, 7, 131073, 2, 327686, 131073, 4, 262150, 131073, 3, 196614, 131073, 3, 131078, 131073, 3, 65542, 131073, 3, 6, 131073, 2, 327685, 65537, 4, 262149, 65537, 3, 196613, 65537, 3, 131077, 65537, 3, 65541, 65537, 3, 5, 65537, 2, 327699, 196609, 4, 262163, 196609, 3, 196627, 196609, 2, 327698, 131073, 4, 262162, 131073, 3, 196626, 131073, 2, 327697, 131073, 4, 262161, 131073, 3, 196625, 131073, 2, 327696, 131073, 4, 262160, 131073, 3, 196624, 131073, 2, 327695, 131073, 4, 262159, 131073, 3, 196623, 131073, 2, 327694, 131073, 4, 262158, 131073, 3, 196622, 131073, 2, 327693, 131073, 4, 262157, 131073, 3, 196621, 131073, 2, 327692, 131073, 4, 262156, 131073, 3, 196620, 131073, 2)
 
 [node name="PlayerSpawnPoint" parent="TheLandingSite" instance=ExtResource("5_cfyjd")]
-position = Vector2(0, -176)
+position = Vector2(248, -8)
 
 [node name="FirstDrop" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(320, 0)
