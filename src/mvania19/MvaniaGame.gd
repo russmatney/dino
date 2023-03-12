@@ -103,7 +103,9 @@ func _on_new_scene_instanced(s):
 const player_scene = preload("res://src/mvania19/player/Monster.tscn")
 var player
 
+var spawning = false
 func respawn_player(player_died=false):
+	spawning = true
 	if player:
 		var p = player
 		player = null
@@ -111,8 +113,13 @@ func respawn_player(player_died=false):
 			Navi.current_scene.remove_child(p)
 		update_rooms()
 		if p and is_instance_valid(p):
-			p.free()
+			p.name = "DeadPlayer"
+			p.queue_free()
 
+	# defer to let player free safely?
+	call_deferred("_respawn_player", player_died)
+
+func _respawn_player(player_died=false):
 	var spawn_coords
 
 	# may need to check if this instance is valid, etc
@@ -133,6 +140,7 @@ func respawn_player(player_died=false):
 
 	Navi.add_child_to_current(player)
 	update_rooms()
+	spawning = false
 
 func ensure_current_area():
 	if not current_area:
@@ -231,6 +239,6 @@ func travel_to(dest_area_name, elevator_path):
 # dev helper functions
 
 func maybe_spawn_player():
-	if not managed_game and not Engine.is_editor_hint() and player == null:
+	if not managed_game and not Engine.is_editor_hint() and player == null and not spawning:
 		Debug.pr("Unmanaged game, player is null, spawning")
 		respawn_player()
