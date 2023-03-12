@@ -28,6 +28,7 @@ func _unhandled_input(event):
 	if Trolley.is_close(event):
 		fade_out()
 		Hood.jumbo_closed.emit()
+		DJSounds.play_sound(DJSounds.showjumbotron)
 
 func fade_in():
 	$PanelContainer.modulate.a = 0

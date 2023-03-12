@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://d0oci5f2uwxn4"
+path="res://.godot/imported/collectpowerup1.sfxr-589ff8847a099edec5ca38778887d30d.sample"
+
+[deps]
+
+source_file="res://assets/sounds/collectpowerup1.sfxr"
+dest_files=["res://.godot/imported/collectpowerup1.sfxr-589ff8847a099edec5ca38778887d30d.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

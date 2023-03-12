@@ -51,12 +51,14 @@ var actions = [
 	]
 
 func pickup():
+	DJSounds.play_sound(DJSounds.collectpowerup)
 	MvaniaGame.player.add_powerup(powerup)
 	picked_up = true
 	Hotel.check_in(self)
 	show_jumbotron()
 
 func read_note():
+	DJSounds.play_sound(DJSounds.showjumbotron)
 	show_jumbotron()
 
 func show_jumbotron():

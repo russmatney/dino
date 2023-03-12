@@ -9,6 +9,9 @@ enum {
 	swordswing,
 	soldierhit,
 	soldierdead,
+	collectpowerup,
+	showjumbotron,
+	climbstart,
 	}
 
 ###########################################################################
@@ -53,5 +56,21 @@ var sounds = {
 			preload("res://src/mvania19/sounds/soldierdead1.sfxr"),
 			preload("res://src/mvania19/sounds/soldierdead2.sfxr"),
 			preload("res://src/mvania19/sounds/soldierdead3.sfxr"),
+		],
+	collectpowerup:
+	[
+			preload("res://assets/sounds/collectpowerup1.sfxr"),
+			preload("res://assets/sounds/collectpowerup2.sfxr"),
+		],
+	showjumbotron:
+	[
+			preload("res://assets/sounds/showjumbotron1.sfxr"),
+			preload("res://assets/sounds/showjumbotron2.sfxr"),
+			preload("res://assets/sounds/showjumbotron3.sfxr"),
+		],
+	climbstart:
+	[
+			preload("res://assets/sounds/climbstart1.sfxr"),
+			preload("res://assets/sounds/climbstart2.sfxr"),
 		],
 }

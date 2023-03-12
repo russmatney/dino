@@ -60,7 +60,7 @@ window/stretch/aspect.runner="keep"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/hotel/plugin.cfg")
+enabled=PackedStringArray("res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/gdfxr/plugin.cfg")
 
 [global]
 
