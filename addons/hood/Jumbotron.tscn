@@ -22,6 +22,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_7vafy")
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
@@ -33,10 +35,10 @@ layout_mode = 2
 [node name="Header" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(720, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_lmvlg")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center][jump]Double Jump[/jump] Discovered[/center]"
 fit_content = true
@@ -46,11 +48,12 @@ custom_effects = [ExtResource("2_apr2o")]
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxFlat_rp857")
 
-[node name="ActionHint" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("3_r7u42")]
+[node name="ActionHint" parent="PanelContainer/CenterContainer/VBoxContainer/VSeparator" instance=ExtResource("3_r7u42")]
 unique_name_in_owner = true
-position = Vector2(250, 192)
+position = Vector2(640, 76)
 scale = Vector2(2, 2)
 label_text = "Swing"
 key_or_action = "attack"
@@ -58,23 +61,24 @@ key_or_action = "attack"
 [node name="Body" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(1280, 2.08165e-12)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_lmvlg")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "[center]Try it on wooden blocks![/center]"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("2_apr2o")]
 
-[node name="CloseActionHint" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("3_r7u42")]
-position = Vector2(250, 328)
-scale = Vector2(1.5, 1.5)
-label_text = "Close"
-key_or_action = "close"
-
 [node name="VSeparator2" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxFlat_yrs0h")
+
+[node name="CloseActionHint" parent="PanelContainer/CenterContainer/VBoxContainer/VSeparator2" instance=ExtResource("3_r7u42")]
+position = Vector2(640, 144)
+scale = Vector2(1.5, 1.5)
+label_text = "Close"
+key_or_action = "close"
