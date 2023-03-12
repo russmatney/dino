@@ -1,31 +1,42 @@
 @tool
 extends HBoxContainer
 
-var heart_icons
 @export var h: int : set = set_health
+
+@export var flip_h = false :
+	set = set_flip_h
+
+func set_flip_h(v):
+	if v != flip_h:
+		flip_h = v
+		set_health(h)
+
 
 
 func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	call_deferred("find_heart_icons")
 
-
-func find_heart_icons():
-	heart_icons = get_children()
-
-
+# TODO extend to add and place more hearts, or layer a new color checked top
 ## Converts a passed int into a number of hearts to display.
 func set_health(health):
 	if health == null:
 		Debug.warn("[HOOD] WARN: set_health with null!")
 		return
 
-	# TODO extend to add and place more hearts, or layer a new color checked top
+	var heart_icons = []
 
-	if heart_icons == null:
-		find_heart_icons()
+	if len(heart_icons) == 0:
+		heart_icons = get_children()
+
+		if flip_h:
+			heart_icons.reverse()
+
+		for icon in heart_icons:
+			icon.flip_h = not flip_h
+
+	Debug.pr("setting health", heart_icons, heart_icons.map(func(h): return {flip_h=h.flip_h}))
 
 	if heart_icons.size() == 0:
 		return

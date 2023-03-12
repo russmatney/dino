@@ -16,11 +16,12 @@ script = ExtResource("3")
 
 [node name="HeartIcon" parent="." instance=ExtResource("1")]
 position = Vector2(82, 16)
-animation = &"full"
+animation = &"empty"
 flip_h = true
 
 [node name="HeartIcon2" parent="." instance=ExtResource("1")]
 position = Vector2(49, 16)
+animation = &"empty"
 flip_h = true
 
 [node name="HeartIcon3" parent="." instance=ExtResource("1")]

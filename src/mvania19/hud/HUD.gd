@@ -21,7 +21,14 @@ func update_player_data():
 func _on_entry_updated(entry):
 	# maybe strange to do this way... or maybe it's nice and decoupled?
 	if "player" in entry["groups"]:
-		set_health(entry["health"])
+		if entry.get("health") != null:
+			set_health(entry["health"])
+		if entry.get("death_count") != null:
+			set_deaths(entry["death_count"])
+		if entry.get("coins") != null:
+			set_coins(entry["coins"])
+	if "enemies" in entry["groups"]:
+		update_enemy_status(entry)
 
 ##########################################
 # health
@@ -29,7 +36,59 @@ func _on_entry_updated(entry):
 @onready var hearts = $%HeartsContainer
 
 func set_health(health):
+	# TODO tween/jiggle hearts on change!
 	hearts.h = health
+
+##########################################
+# labels
+
+@onready var deaths_label = $%DeathsLabel
+@onready var coins_label = $%CoinsLabel
+
+func set_deaths(count):
+	# TODO tween/jiggle on change!
+	if count > 0:
+		deaths_label.text = "[right]Deaths [jump]%s[/jump][/right]" % count
+	else:
+		deaths_label.text = ""
+
+func set_coins(count):
+	# TODO tween/jiggle on change!
+	if count > 0:
+		coins_label.text = "[right]Coins [jump]%s[/jump][/right]" % count
+	else:
+		coins_label.text = ""
+
+##########################################
+# enemy status list
+
+@onready var enemy_status_list = $%EnemyStatusList
+var status_scene = preload("res://src/mvania19/hud/EnemyStatus.tscn")
+var statuses = {}
+
+func update_enemy_status(enemy):
+	var nm = enemy.get("name")
+
+	var existing = statuses.get(nm)
+	if existing:
+		# assume it's just a health update
+		existing.set_status({health=enemy.get("health")})
+	else:
+		var status = status_scene.instantiate()
+		status.removed.connect(_on_remove.bind(nm))
+		enemy_status_list.add_child(status)
+		# TODO set portraits
+		# call after adding so _ready has added elems
+		status.set_status({
+			name=nm,
+			health=enemy.get("health"),
+			ttl=0 if "bosses" in enemy.get("groups", []) else 5,
+			})
+		statuses[nm] = status
+
+func _on_remove(nm, _status):
+	statuses.erase(nm)
+
 
 ##########################################
 # minimap

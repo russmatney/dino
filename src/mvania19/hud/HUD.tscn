@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://csrh7werb01q3"]
+[gd_scene load_steps=7 format=3 uid="uid://67cetdmlytic"]
 
 [ext_resource type="Script" path="res://src/mvania19/hud/HUD.gd" id="1_d2rgr"]
-[ext_resource type="PackedScene" path="res://addons/hood/Notifications.tscn" id="1_gncwx"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_gncwx"]
 [ext_resource type="PackedScene" uid="uid://b7b7ck0q42nl5" path="res://src/mvania19/hud/Minimap.tscn" id="2_5w0jp"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="3_3f8qd"]
+[ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="4_bi0yc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]
 bg_color = Color(0.603922, 0.603922, 0.603922, 0.117647)
@@ -39,7 +40,8 @@ render_target_update_mode = 4
 
 [node name="Minimap" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_5w0jp")]
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="EnemyStatusList" type="VBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -58,6 +60,25 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 h = 5
+flip_h = null
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="DeathsLabel" parent="HBoxContainer/VBoxContainer2/HBoxContainer2" instance=ExtResource("4_bi0yc")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[right]Deaths: 10[/right]"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="CoinsLabel" parent="HBoxContainer/VBoxContainer2/HBoxContainer3" instance=ExtResource("4_bi0yc")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[right]Coins 10[/right]"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
