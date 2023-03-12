@@ -5,7 +5,8 @@ var laugh_ttl
 var next_state
 
 func enter(ctx={}):
-	actor.anim.play("laughing")
+	# actor.anim.play("laughing")
+	# TODO enemy laugh noise
 
 	laugh_ttl = ctx.get("wait_for", laugh_at_least)
 
