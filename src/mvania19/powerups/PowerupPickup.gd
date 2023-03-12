@@ -82,6 +82,13 @@ func show_jumbotron():
 
 	if header:
 		MvaniaGame.set_forced_movement_target(global_position)
-		var on_close = Hood.jumbo_notif(header, body, action, label)
+		var on_close = Hood.jumbo_notif({
+			header=header, body=body, action=action, action_label_text=label,
+			})
 		if on_close:
-			on_close.connect(MvaniaGame.clear_forced_movement_target)
+			if not Hood.is_connected("jumbo_closed", _on_close_respawn):
+				on_close.connect(_on_close_respawn.bind(on_close))
+
+func _on_close_respawn(on_close):
+	on_close.disconnect(_on_close_respawn)
+	MvaniaGame.clear_forced_movement_target()

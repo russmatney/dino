@@ -21,7 +21,7 @@ var hud = preload("res://src/mvania19/hud/HUD.tscn")
 
 func _ready():
 	og_position = position
-	Cam.ensure_camera(2, {"zoom_level": 5.0})
+	Cam.ensure_camera(2, {"zoom_level": 5.0}, self)
 	Hood.call_deferred("ensure_hud", hud, self)
 	machine.start()
 	machine.transitioned.connect(_on_transit)
@@ -53,6 +53,7 @@ func _on_transit(state):
 func check_out(data):
 	health = data.get("health", health)
 	death_count = data.get("death_count", death_count)
+	coins = data.get("coins", coins)
 	var stored_powerups = data.get("powerups", powerups)
 	if len(stored_powerups) > 0:
 		powerups = stored_powerups
@@ -61,7 +62,7 @@ func check_out(data):
 		update_with_powerup(p)
 
 func hotel_data():
-	return {health=health, powerups=powerups, death_count=death_count}
+	return {health=health, powerups=powerups, death_count=death_count, coins=coins}
 
 ###########################################################################
 # actions
@@ -231,9 +232,14 @@ func heal(opts={}):
 
 var death_count = 0
 
-func _on_player_death():
-	stamp({ttl=0}) # perma stamp
+var death_jumbo_open = false
 
+func _on_player_death():
+	if death_jumbo_open:
+		return
+	death_jumbo_open = true
+
+	stamp({ttl=0}) # perma stamp
 	death_count += 1
 	Hotel.check_in(self)
 	var t = create_tween()
@@ -242,7 +248,12 @@ func _on_player_death():
 
 	var on_close = Hood.jumbo_notif({header="You died", body="Close (Q) to respawn."})
 	if on_close:
-		on_close.connect(MvaniaGame.respawn_player.bind(true))
+		if not Hood.is_connected("jumbo_closed", _on_close_respawn):
+			on_close.connect(_on_close_respawn.bind(on_close))
+
+func _on_close_respawn(on_close):
+	on_close.disconnect(_on_close_respawn)
+	MvaniaGame.respawn_player(true)
 
 ########################################################
 # coins
@@ -251,6 +262,7 @@ var coins = 0
 
 func add_coin():
 	coins += 1
+	Hotel.check_in(self)
 
 ########################################################
 # powerups
