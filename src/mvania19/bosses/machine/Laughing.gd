@@ -6,6 +6,7 @@ var next_state
 
 func enter(ctx={}):
 	actor.anim.play("laughing")
+	# TODO laughing noise
 
 	laugh_ttl = ctx.get("wait_for", laugh_at_least)
 

@@ -10,8 +10,7 @@ var warp_ttl = 1
 # enter
 
 func enter(_ctx={}):
-	# TODO warping animation
-	actor.anim.play("jump")
+	actor.anim.play("warp-leave")
 
 	var warp_options = actor.warp_spots.filter(func(ws): return ws != last_ws)
 	next_warp_spot = Util.rand_of(warp_options)
@@ -29,4 +28,7 @@ func physics_process(delta):
 	if warp_ttl <= 0:
 		# animate
 		actor.global_position = next_warp_spot.global_position
+		actor.anim.play("warp-arrive")
+
+		# TODO wait until current animation ends
 		machine.transit("Idle")

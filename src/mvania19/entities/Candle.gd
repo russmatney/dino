@@ -94,6 +94,7 @@ func sit():
 	await get_tree().create_timer(3.4).timeout
 	put_out()
 	MvaniaGame.clear_forced_movement_target()
+	MvaniaGame.player.machine.transit("Idle")
 	sitting = false
 
 #################################################################

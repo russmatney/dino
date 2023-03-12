@@ -9,8 +9,9 @@ extends Node2D
 		if anim:
 			match (powerup):
 				MvaniaGame.Powerup.Sword: anim.play("sword")
-				MvaniaGame.Powerup.DoubleJump: anim.play("double_jump")
-				MvaniaGame.Powerup.Climb: anim.play("climb")
+				MvaniaGame.Powerup.DoubleJump: anim.play("doublejump")
+				MvaniaGame.Powerup.Climb: anim.play("climbinggloves")
+				_: anim.play("read")
 
 ##############################################################
 # nodes

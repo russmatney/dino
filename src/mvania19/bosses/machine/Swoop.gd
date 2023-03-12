@@ -12,7 +12,7 @@ var finished_chasing_player
 # enter
 
 func enter(_ctx={}):
-	actor.anim.play("jump")
+	actor.anim.play("preswoop")
 
 	player_pos_set = false
 	finished_chasing_player = false
@@ -69,6 +69,7 @@ func swoop(spot):
 		pos = spot[0]
 
 	swooping = true
+	actor.anim.play("swooping")
 
 	var tween = create_tween()
 	tween.tween_property(actor, "global_position", pos, 0.4)\

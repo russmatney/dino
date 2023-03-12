@@ -41,8 +41,8 @@ func _ready():
 	player_death.connect(_on_player_death)
 
 func _on_transit(state):
-	Debug.debug_label("Player State: ", state)
-	Debug.debug_label("Player pos: ", global_position)
+	# Debug.debug_label("Player State: ", state)
+	# Debug.debug_label("Player pos: ", global_position)
 
 	if state in ["Fall", "Run"]:
 		stamp()
@@ -102,7 +102,7 @@ func get_move_dir():
 	if move_target != null:
 		var towards_target = move_target - position
 		var dist = towards_target.length()
-		if dist >= 5:
+		if dist >= 10:
 			return towards_target.normalized()
 		else:
 			return Vector2.ZERO
@@ -113,7 +113,6 @@ func get_move_dir():
 func _physics_process(_delta):
 	# assign move_dir
 	move_dir = get_move_dir()
-	Debug.debug_label("move_dir: ", move_dir)
 
 	if move_dir:
 		# update facing
@@ -225,6 +224,7 @@ func take_hit(opts={}):
 	machine.transit("KnockedBack", {"direction": direction})
 
 func heal(opts={}):
+	anim.play("sit")
 	var h = opts.get("health", 1)
 	health += h
 	health = clamp(health, 0, max_health)

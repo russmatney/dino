@@ -43,8 +43,9 @@ func _on_body_exited(body: Node2D):
 	bodies_updated.emit(bodies)
 
 func _on_bodies_updated(_bds):
-	Debug.debug_label("Sword bodies: ", bodies)
-	Debug.debug_label("Sword body shapes: ", body_shapes)
+	pass
+	# Debug.debug_label("Sword bodies: ", bodies)
+	# Debug.debug_label("Sword body shapes: ", body_shapes)
 
 func _on_body_shape_entered(rid, body: Node2D, _bs_idx, _local_idx):
 	body_shapes.append([rid, body])

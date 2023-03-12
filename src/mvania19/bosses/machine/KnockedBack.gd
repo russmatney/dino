@@ -19,7 +19,7 @@ func enter(opts={}):
 		MvaniaSounds.play_sound("soldierdead")
 	else:
 		kb_y = KNOCKBACK_Y
-		actor.anim.play("knockback")
+		actor.anim.play("knocked-back")
 		# TODO monstroar sounds
 		MvaniaSounds.play_sound("soldierhit")
 

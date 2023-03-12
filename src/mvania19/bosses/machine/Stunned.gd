@@ -6,7 +6,7 @@ var stunned_ttl
 func enter(ctx={}):
 	stunned_ttl = ctx.get("stunned_for", stunned_for)
 
-	actor.anim.play("seated")
+	actor.anim.play("stunned")
 	Cam.hitstop("monstroar_stunned", 0.5, 0.3, 0.3)
 	# TODO monstroar sound
 	MvaniaSounds.play_sound("soldierdead")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://cukeivdgc4n4c"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/Monstroar.gd" id="1_jqu05"]
-[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="2_afph5"]
+[ext_resource type="SpriteFrames" uid="uid://c2utbyiiwsrqd" path="res://src/mvania19/bosses/monstroar/monstroar_sprite_frames.tres" id="2_55uo8"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_85gcx"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Idle.gd" id="4_sls1w"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Firing.gd" id="5_tbca7"]
@@ -15,11 +15,11 @@
 [ext_resource type="PackedScene" uid="uid://7mew15q00kg3" path="res://src/mvania19/bosses/PositionHint.tscn" id="13_qubff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tidp"]
-size = Vector2(16, 28)
+size = Vector2(16, 24)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_judcs"]
-radius = 16.0
-height = 32.0
+radius = 8.0
+height = 20.0
 
 [node name="Monstroar" type="CharacterBody2D" groups=["bosses", "enemies"]]
 collision_layer = 8
@@ -27,13 +27,12 @@ collision_mask = 7
 script = ExtResource("1_jqu05")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_6tidp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3, 3)
-sprite_frames = ExtResource("2_afph5")
-animation = &"fall"
+position = Vector2(0, -16)
+sprite_frames = ExtResource("2_55uo8")
+animation = &"warp-arrive"
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_85gcx")

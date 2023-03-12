@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6jbqq1rhdrkm"]
+[gd_scene load_steps=20 format=3 uid="uid://b6jbqq1rhdrkm"]
 
 [ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_wj1cn"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dr2pm86smthb3" path="res://src/mvania19/powerups/Sword.tscn" id="10_a54r4"]
 [ext_resource type="Script" path="res://src/mvania19/player/machine/Climb.gd" id="10_vycc5"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_8r4cy"]
+[ext_resource type="Script" path="res://src/mvania19/player/machine/Sit.gd" id="12_7npxa"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_67gj4"]
 cull_mode = 2
@@ -47,8 +48,9 @@ shape = SubResource("CapsuleShape2D_fy5s5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = ExtResource("1_w3vs6")
-animation = &"idle"
+animation = &"climb"
 autoplay = "idle"
+frame_progress = 0.639512
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_hxyr2")
@@ -74,9 +76,11 @@ script = ExtResource("9_betuw")
 [node name="Climb" type="Node" parent="Machine"]
 script = ExtResource("10_vycc5")
 
+[node name="Sit" type="Node" parent="Machine"]
+script = ExtResource("12_7npxa")
+
 [node name="Sword" parent="." instance=ExtResource("10_a54r4")]
 position = Vector2(9, -10)
-animation = &"idle"
 
 [node name="ActionHint" parent="." instance=ExtResource("9_ocb0p")]
 position = Vector2(0, -15)

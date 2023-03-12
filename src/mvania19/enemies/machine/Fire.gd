@@ -4,8 +4,7 @@ extends State
 # enter
 
 func enter(_ctx={}):
-	# TODO firing animation
-	actor.anim.play("jump")
+	actor.anim.play("shoot")
 
 	bullets_til_break = break_every
 	cool_down = 0

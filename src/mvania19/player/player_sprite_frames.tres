@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=25 format=3 uid="uid://dsrjmvmjj7n26"]
+[gd_resource type="SpriteFrames" load_steps=33 format=3 uid="uid://dsrjmvmjj7n26"]
 
 [ext_resource type="Texture2D" uid="uid://bluw785nqbvw4" path="res://assets/mvania19/lilbighat_sheet.png" id="1_monur"]
 
@@ -17,6 +17,22 @@ region = Rect2(416, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lkn12"]
 atlas = ExtResource("1_monur")
 region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4n8g4"]
+atlas = ExtResource("1_monur")
+region = Rect2(640, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b7tc"]
+atlas = ExtResource("1_monur")
+region = Rect2(672, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ogy8"]
+atlas = ExtResource("1_monur")
+region = Rect2(704, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5od3e"]
+atlas = ExtResource("1_monur")
+region = Rect2(736, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ls0q2"]
 atlas = ExtResource("1_monur")
@@ -94,6 +110,22 @@ region = Rect2(160, 0, 32, 32)
 atlas = ExtResource("1_monur")
 region = Rect2(192, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee2fh"]
+atlas = ExtResource("1_monur")
+region = Rect2(768, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf02t"]
+atlas = ExtResource("1_monur")
+region = Rect2(800, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trerb"]
+atlas = ExtResource("1_monur")
+region = Rect2(832, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walos"]
+atlas = ExtResource("1_monur")
+region = Rect2(864, 0, 32, 32)
+
 [resource]
 animations = [{
 "frames": [{
@@ -112,6 +144,23 @@ animations = [{
 "loop": true,
 "name": &"air",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4n8g4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1b7tc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ogy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5od3e")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -199,4 +248,21 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee2fh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf02t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trerb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walos")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
 }]

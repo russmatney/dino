@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://coxhcbeogq8y3"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
-[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1_k537y"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
+[ext_resource type="SpriteFrames" uid="uid://cije58jjaeikn" path="res://src/mvania19/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Idle.gd" id="4_rwt87"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Firing.gd" id="5_5chnv"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
@@ -21,13 +21,13 @@ collision_mask = 7
 script = ExtResource("1_at5n1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.5)
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_wvons")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3, 3)
-sprite_frames = ExtResource("1_k537y")
-animation = &"dead"
+position = Vector2(0, -10)
+sprite_frames = ExtResource("2_o0rv1")
+animation = &"warp-leave"
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("2_jbhjj")

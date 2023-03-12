@@ -30,8 +30,7 @@ shape = SubResource("RectangleShape2D_t12w0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_vkef8")
-animation = &"hit"
-frame_progress = 0.136404
+animation = &"shoot"
 
 [node name="FrontRay" type="RayCast2D" parent="."]
 position = Vector2(-5, 2)

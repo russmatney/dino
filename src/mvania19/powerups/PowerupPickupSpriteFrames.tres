@@ -1,28 +1,52 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://c2lpaekpy8an8"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c2lpaekpy8an8"]
 
-[ext_resource type="Texture2D" uid="uid://darqwt7dia6n1" path="res://assets/mvania19/sword_sheet.png" id="1_w073a"]
+[ext_resource type="Texture2D" uid="uid://dohv3iwpfsnbx" path="res://assets/mvania19/powerupicons_sheet.png" id="1_1064x"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fifxe"]
-atlas = ExtResource("1_w073a")
-region = Rect2(96, 0, 48, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7l30"]
+atlas = ExtResource("1_1064x")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5wen1"]
-atlas = ExtResource("1_w073a")
-region = Rect2(144, 0, 48, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol2ne"]
+atlas = ExtResource("1_1064x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sup2b"]
+atlas = ExtResource("1_1064x")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wrr6"]
+atlas = ExtResource("1_1064x")
+region = Rect2(0, 0, 16, 16)
 
 [resource]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7l30")
+}],
 "loop": true,
-"name": &"default",
+"name": &"climbinggloves",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fifxe")
+"texture": SubResource("AtlasTexture_ol2ne")
+}],
+"loop": true,
+"name": &"doublejump",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5wen1")
+"texture": SubResource("AtlasTexture_sup2b")
+}],
+"loop": true,
+"name": &"read",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wrr6")
 }],
 "loop": true,
 "name": &"sword",

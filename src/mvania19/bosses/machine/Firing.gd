@@ -4,8 +4,7 @@ extends State
 # enter
 
 func enter(_ctx={}):
-	# TODO firing animation
-	actor.anim.play("jump")
+	actor.anim.play("idle")
 
 	bullets_til_break = break_every
 
@@ -64,6 +63,8 @@ var bullet_impulse = 100
 var bullet_knockback = 1
 
 func fire():
+	actor.anim.play("firing")
+
 	fire_burst_ttl = fire_burst_rate()
 
 	var bullet = bullet_scene.instantiate()
