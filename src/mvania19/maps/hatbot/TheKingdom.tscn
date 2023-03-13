@@ -385,5 +385,5 @@ layer_0/tile_data = PackedInt32Array(-4784017, 196609, 4, -4849553, 196609, 3, -
 
 [node name="ToLevelZero" parent="SecretEndgameRoomToLevelZero" instance=ExtResource("3_laypo")]
 position = Vector2(704, -656)
-destination_area_name = "Volcano"
-destination_elevator_path = "./ToLandingSite/ToLandingSite"
+destination_area_name = "LevelZero"
+destination_elevator_path = "./SecretEntrance/ToTheKingdom"
