@@ -240,8 +240,9 @@ func heal(opts={}):
 	anim.play("sit")
 
 	# force one-shot emission
-	heart_particles.restart()
+	Debug.pr(heart_particles)
 	heart_particles.set_emitting(true)
+	heart_particles.restart()
 
 	var h = opts.get("health", 1)
 	health += h

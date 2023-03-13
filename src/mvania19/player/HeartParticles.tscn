@@ -12,7 +12,7 @@ point_count = 4
 
 [node name="HeartParticles" type="CPUParticles2D"]
 emitting = false
-amount = 1
+amount = 2
 one_shot = true
 texture = SubResource("AtlasTexture_njuh8")
 gravity = Vector2(0, -150)
