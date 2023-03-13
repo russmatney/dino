@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dggsvp0ettrqd"]
+[gd_scene load_steps=20 format=3 uid="uid://dggsvp0ettrqd"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_2s6nm"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_0ral6"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="3_4wvhc"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="4_m2scx"]
+[ext_resource type="Shader" path="res://src/mvania19/maps/hatbot/BgBlur.gdshader" id="2_u1qrf"]
+[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/reptile/tilemaps/VolcanoTiles8.tscn" id="3_4wvhc"]
+[ext_resource type="Texture2D" uid="uid://ca1qei0yboss5" path="res://assets/mvania19/background_mountains_sheet.png" id="3_kmfun"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="4_m2scx"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="5_ruuw7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_42yyj"]
 [ext_resource type="PackedScene" uid="uid://cukeivdgc4n4c" path="res://src/mvania19/bosses/monstroar/Monstroar.tscn" id="7_h4avw"]
@@ -13,23 +15,40 @@
 [ext_resource type="PackedScene" uid="uid://btgfyldjmtu8t" path="res://src/mvania19/entities/Door.tscn" id="9_vx5rn"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="9_yyqc6"]
 [ext_resource type="PackedScene" uid="uid://duohpnsdc120b" path="res://src/dungeonCrawler/items/Coin.tscn" id="10_x76oo"]
-[ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="11_rawej"]
 [ext_resource type="Script" path="res://src/mvania19/maps/hatbot/CoinDoorQuest.gd" id="11_x2s08"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="12_kdhm3"]
 [ext_resource type="PackedScene" uid="uid://c5w5v3oyfkg8v" path="res://src/mvania19/maps/hatbot/BossDefeatQuest.tscn" id="16_ypdi0"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_scfj8"]
+shader = ExtResource("2_u1qrf")
+shader_parameter/radius = 64.0
+
 [node name="Volcano" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_2s6nm")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2(-200, -1280)
+scroll_limit_end = Vector2(100, 100)
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_scfj8")
+position = Vector2(460, -328)
+scale = Vector2(3.55, 5.22222)
+texture = ExtResource("3_kmfun")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.513726, 0.454902, 0.027451, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -866.0
-offset_top = -1466.0
-offset_right = 1518.0
-offset_bottom = 438.0
-color = Color(0.819608, 0.486275, 0.486275, 1)
+modulate = Color(1, 1, 1, 0.427451)
+offset_left = -752.0
+offset_top = -1496.0
+offset_right = 1632.0
+offset_bottom = 656.0
+color = Color(0.12549, 0.156863, 0.239216, 1)
 
 [node name="ToLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_0ral6")
@@ -186,9 +205,6 @@ position = Vector2(-144, -24)
 
 [node name="WarpSpot3" parent="VolcanoBoss" instance=ExtResource("9_yyqc6")]
 position = Vector2(144, -32)
-
-[node name="PlayerSpawnPoint" parent="VolcanoBoss" instance=ExtResource("11_rawej")]
-position = Vector2(8, 216)
 
 [node name="BossDefeatQuest" parent="VolcanoBoss" instance=ExtResource("16_ypdi0")]
 

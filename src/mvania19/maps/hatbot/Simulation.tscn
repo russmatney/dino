@@ -1,14 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://g38soh27mea6"]
+[gd_scene load_steps=19 format=3 uid="uid://g38soh27mea6"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_eirev"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_4fgnt"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="3_3kbfw"]
+[ext_resource type="Shader" path="res://src/mvania19/maps/hatbot/BgBlur.gdshader" id="2_48np1"]
+[ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="3_3kbfw"]
+[ext_resource type="Texture2D" uid="uid://q2pnjmesx2xc" path="res://assets/mvania19/background_city_sheet.png" id="3_3rpyx"]
 [ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/mvania19/entities/Elevator.tscn" id="4_0thwe"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_tky8d"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="6_1c5dl"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="6_1c5dl"]
 [ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/mvania19/enemies/Soldier.tscn" id="7_fdlq5"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_u6t8r"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="9_wn65p"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_u6t8r"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="9_wn65p"]
 [ext_resource type="PackedScene" uid="uid://dei87fp4qan6e" path="res://src/mvania19/powerups/PowerupPickup.tscn" id="11_4s4lm"]
 [ext_resource type="PackedScene" uid="uid://coxhcbeogq8y3" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.tscn" id="11_v6sjm"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="12_m4nn0"]
@@ -16,15 +18,34 @@
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="14_8cf58"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="14_srb17"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_il8gr"]
+shader = ExtResource("2_48np1")
+shader_parameter/radius = 64.0
+
 [node name="Simulation" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_eirev")
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2(-384, -384)
+scroll_limit_end = Vector2(1280, 384)
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_il8gr")
+position = Vector2(464, 3.99995)
+scale = Vector2(2.85, 3.04444)
+texture = ExtResource("3_3rpyx")
+
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -1248.0
-offset_top = -1000.0
-offset_right = 1136.0
-offset_bottom = 904.0
+modulate = Color(1, 1, 1, 0.627451)
+offset_left = -728.0
+offset_top = -944.0
+offset_right = 1656.0
+offset_bottom = 960.0
 color = Color(0.12549, 0.156863, 0.239216, 1)
+metadata/_edit_lock_ = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.417489, 0.231056, 0.0929001, 1)
@@ -112,7 +133,7 @@ layer_0/tile_data = PackedInt32Array(1310833, 196609, 4, 1245297, 196609, 3, 117
 position = Vector2(1048, 216)
 
 [node name="PlayerSpawnPoint" parent="BatMechanicRoom" instance=ExtResource("14_srb17")]
-position = Vector2(616, -128)
+position = Vector2(600, -168)
 
 [node name="SpaceshipBoss" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(672, -144)

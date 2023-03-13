@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://src/runner/player/Player.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkCoin.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://addons/camera/Cam2D.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bflpu7dhqovtc" path="res://addons/camera/Cam2D.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkCoinGuard.tscn" id="4"]
 [ext_resource type="Script" path="res://src/runner/Runner.gd" id="5"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkGap.tscn" id="6"]
