@@ -104,6 +104,8 @@ func take_hit(opts={}):
 	health -= damage
 	Hotel.check_in(self)
 
+	DJSounds.play_sound(DJSounds.playerhurt)
+
 	if health <= 0:
 		dead = true
 	machine.transit("KnockedBack", {

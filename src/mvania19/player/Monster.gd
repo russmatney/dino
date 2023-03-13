@@ -217,6 +217,7 @@ var health = max_health
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.RIGHT)
+	DJSounds.play_sound(DJSounds.playerhurt)
 
 	health -= damage
 	health = clamp(health, 0, max_health)
@@ -224,6 +225,7 @@ func take_hit(opts={}):
 	machine.transit("KnockedBack", {"direction": direction})
 
 func heal(opts={}):
+	DJSounds.play_sound(DJSounds.playerheal)
 	anim.play("sit")
 	var h = opts.get("health", 1)
 	health += h

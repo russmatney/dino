@@ -13,3 +13,5 @@ func destroy_tile_with_rid(rid):
 	var coords = get_coords_for_body_rid(rid)
 	if coords:
 		erase_cell(0, coords)
+		return true
+	return false

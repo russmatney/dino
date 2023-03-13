@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://g38soh27mea6"]
+[gd_scene load_steps=16 format=3 uid="uid://g38soh27mea6"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_eirev"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_4fgnt"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="12_m4nn0"]
 [ext_resource type="PackedScene" uid="uid://c5w5v3oyfkg8v" path="res://src/mvania19/maps/hatbot/BossDefeatQuest.tscn" id="13_gqy3q"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="14_8cf58"]
+[ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="14_srb17"]
 
 [node name="Simulation" type="Node2D" groups=["mvania_areas"]]
 script = ExtResource("1_eirev")
@@ -109,6 +110,9 @@ layer_0/tile_data = PackedInt32Array(1310833, 196609, 4, 1245297, 196609, 3, 117
 
 [node name="PowerupPickup" parent="BatMechanicRoom" instance=ExtResource("11_4s4lm")]
 position = Vector2(1048, 216)
+
+[node name="PlayerSpawnPoint" parent="BatMechanicRoom" instance=ExtResource("14_srb17")]
+position = Vector2(616, -128)
 
 [node name="SpaceshipBoss" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(672, -144)

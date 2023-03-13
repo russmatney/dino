@@ -95,4 +95,6 @@ func _on_frame_changed():
 		for bs in body_shapes:
 			var b = bs[1]
 			if b.has_method("destroy_tile_with_rid"):
-				b.destroy_tile_with_rid(bs[0])
+				var destroyed = b.destroy_tile_with_rid(bs[0])
+				if destroyed:
+					DJSounds.play_sound(DJSounds.destroyed_block)

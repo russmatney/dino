@@ -12,6 +12,12 @@ enum {
 	collectpowerup,
 	showjumbotron,
 	climbstart,
+	playerheal,
+	playerhurt,
+	bosswarp,
+	boss_shoot,
+	boss_swoop,
+	destroyed_block,
 	}
 
 ###########################################################################
@@ -72,5 +78,39 @@ var sounds = {
 	[
 			preload("res://assets/sounds/climbstart1.sfxr"),
 			preload("res://assets/sounds/climbstart2.sfxr"),
+		],
+	playerheal:
+	[
+			preload("res://assets/sounds/playerheal1.sfxr"),
+			preload("res://assets/sounds/playerheal2.sfxr"),
+		],
+	playerhurt:
+	[
+			preload("res://assets/sounds/player_hurt1.sfxr"),
+			preload("res://assets/sounds/player_hurt2.sfxr"),
+			preload("res://assets/sounds/player_hurt3.sfxr"),
+		],
+	bosswarp:
+	[
+			preload("res://assets/sounds/bosswarp1.sfxr"),
+			preload("res://assets/sounds/bosswarp2.sfxr"),
+		],
+	boss_shoot:
+	[
+			preload("res://assets/sounds/boss_shoot1.sfxr"),
+			preload("res://assets/sounds/boss_shoot2.sfxr"),
+			preload("res://assets/sounds/boss_shoot3.sfxr"),
+		],
+	boss_swoop:
+	[
+			preload("res://assets/sounds/boss_swoop1.sfxr"),
+			preload("res://assets/sounds/boss_swoop2.sfxr"),
+			preload("res://assets/sounds/boss_swoop3.sfxr"),
+		],
+	destroyed_block:
+	[
+			preload("res://assets/sounds/destroyedblock1.sfxr"),
+			preload("res://assets/sounds/destroyedblock2.sfxr"),
+			preload("res://assets/sounds/destroyedblock3.sfxr"),
 		],
 }

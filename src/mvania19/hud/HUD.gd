@@ -70,7 +70,7 @@ func update_enemy_status(enemy):
 	var nm = enemy.get("name")
 
 	var existing = statuses.get(nm)
-	if existing:
+	if existing and is_instance_valid(existing):
 		# assume it's just a health update
 		existing.set_status({health=enemy.get("health")})
 	else:
