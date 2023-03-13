@@ -62,6 +62,15 @@ func set_coins(count):
 ##########################################
 # enemy status list
 
+var to_portrait_texture = {
+	"Beefstronaut": preload("res://assets/mvania19/portraits1.png"),
+	"Monstroar": preload("res://assets/mvania19/portraits2.png"),
+	"Goomba": preload("res://assets/mvania19/portraits3.png"),
+	"Soldier": preload("res://assets/mvania19/portraits4.png"),
+	"ShootyCrawly": preload("res://assets/mvania19/portraits5.png"),
+	}
+
+
 @onready var enemy_status_list = $%EnemyStatusList
 var status_scene = preload("res://src/mvania19/hud/EnemyStatus.tscn")
 
@@ -80,13 +89,22 @@ func update_enemy_status(enemy):
 	else:
 		var status = status_scene.instantiate()
 		enemy_status_list.add_child(status)
-		# TODO set portraits
-		# call after adding so _ready has added elems
-		status.set_status({
+
+		var opts = {
 			name=nm,
 			health=enemy.get("health"),
 			ttl=0 if "bosses" in enemy.get("groups", []) else 5,
-			})
+			}
+
+		var inst = enemy.get("instance_name")
+		var texture
+		if inst and inst in to_portrait_texture:
+			texture = to_portrait_texture[inst]
+		if texture:
+			opts["texture"] = texture
+
+		# call after adding so _ready has added elems
+		status.set_status(opts)
 
 
 ##########################################
