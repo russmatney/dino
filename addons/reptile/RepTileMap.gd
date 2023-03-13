@@ -12,6 +12,19 @@ extends TileMap
 func destroy_tile_with_rid(rid):
 	var coords = get_coords_for_body_rid(rid)
 	if coords:
-		erase_cell(0, coords)
+
+		# TODO animate tile destruction
+		var tile_data = get_cell_tile_data(0, coords)
+		if tile_data:
+			var mat = tile_data.material
+			if mat is ShaderMaterial:
+				mat.set_shader_parameter("offset", mat.get_shader_parameter("fade"))
+
+				Debug.pr("mat", mat)
+				Debug.pr("tiledata", tile_data)
+			else:
+				erase_cell(0, coords)
+		else:
+			erase_cell(0, coords)
 		return true
 	return false

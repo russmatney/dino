@@ -92,9 +92,18 @@ func _on_frame_changed():
 					Cam.hitstop("swordhit", 0.3, 0.2)
 					bodies_this_swing.append(b)
 					b.fire_back()
+
+		var needs_redraw = []
 		for bs in body_shapes:
 			var b = bs[1]
 			if b.has_method("destroy_tile_with_rid"):
+				# TODO prevent extra calls on each hit-frame if already hit
 				var destroyed = b.destroy_tile_with_rid(bs[0])
 				if destroyed:
 					DJSounds.play_sound(DJSounds.destroyed_block)
+					if not b in needs_redraw:
+						needs_redraw.append(b)
+
+		for b in needs_redraw:
+			var cells = b.get_used_cells(0)
+			b.set_cells_terrain_connect(0, cells, 0, 0, false)
