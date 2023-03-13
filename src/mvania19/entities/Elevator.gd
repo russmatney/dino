@@ -18,6 +18,8 @@ func get_dest_label():
 	else:
 		return "Travel"
 
+var room
+
 func _ready():
 	# TODO pass in validation function
 	Hotel.register(self)
@@ -27,6 +29,10 @@ func _ready():
 
 	z_index = 10
 	anim.play("opening")
+
+	var p = get_parent()
+	if p is MvaniaRoom:
+		room = p
 
 func check_out(_data):
 	pass
@@ -60,6 +66,10 @@ var traveling
 func travel():
 	if traveling:
 		return
+
+	if room:
+		room.deactivate_cam_points()
+
 	MvaniaGame.set_forced_movement_target(global_position)
 	traveling = true
 	z_index = 10

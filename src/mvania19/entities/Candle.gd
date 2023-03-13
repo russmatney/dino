@@ -22,6 +22,8 @@ var actions = [
 #################################################################
 # ready
 
+var room
+
 func _ready():
 	og_scale = light.texture_scale
 	og_energy = light.energy
@@ -31,6 +33,10 @@ func _ready():
 	$ColorRect.set_visible(false)
 
 	action_area.register_actions(actions, self)
+
+	var p = get_parent()
+	if p is MvaniaRoom:
+		room = p
 
 #################################################################
 # persist/restore
@@ -87,6 +93,9 @@ func sit():
 	sat_count += 1
 	Hotel.check_in(self)
 
+	if room:
+		room.deactivate_cam_points()
+
 	# TODO some _sit_ animation + glow when healing
 	# using this to lock player controls for a bit
 	MvaniaGame.set_forced_movement_target(global_position)
@@ -97,7 +106,11 @@ func sit():
 	put_out()
 	MvaniaGame.clear_forced_movement_target()
 	MvaniaGame.player.machine.transit("Idle")
+
 	sitting = false
+
+	if room:
+		room.activate_cam_points()
 
 #################################################################
 # light tween
