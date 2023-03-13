@@ -1,32 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bo0cjl0owk0me"]
+[gd_scene load_steps=4 format=3 uid="uid://bo0cjl0owk0me"]
 
 [ext_resource type="Texture2D" uid="uid://cwmlq0qc307ej" path="res://assets/mvania19/particles_sheet.png" id="1_6i7hr"]
-
-[sub_resource type="Curve" id="Curve_0aiu4"]
-_data = [Vector2(0, 0.196319), 0.0, 0.0, 0, 0, Vector2(0.660194, 0.779141), 0.0, 0.0, 0, 0, Vector2(1, 0.128834), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_oib1l"]
-curve = SubResource("Curve_0aiu4")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3awgw"]
-particle_flag_disable_z = true
-gravity = Vector3(0, -98, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-linear_accel_min = 9.25
-linear_accel_max = 36.99
-scale_curve = SubResource("CurveTexture_oib1l")
-turbulence_enabled = true
-turbulence_noise_scale = 5.88
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_njuh8"]
 atlas = ExtResource("1_6i7hr")
 region = Rect2(0, 0, 16, 16)
 
-[node name="HeartParticles" type="GPUParticles2D"]
+[sub_resource type="Curve" id="Curve_i4b1e"]
+_data = [Vector2(0, 0.0122699), 0.0, 0.0, 0, 0, Vector2(0.522523, 1), 0.0, 0.0, 0, 0, Vector2(0.642643, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.177914), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="HeartParticles" type="CPUParticles2D"]
 emitting = false
 amount = 1
-process_material = SubResource("ParticleProcessMaterial_3awgw")
-texture = SubResource("AtlasTexture_njuh8")
 one_shot = true
+texture = SubResource("AtlasTexture_njuh8")
+gravity = Vector2(0, -150)
+scale_amount_curve = SubResource("Curve_i4b1e")
