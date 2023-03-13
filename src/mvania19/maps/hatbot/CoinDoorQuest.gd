@@ -30,8 +30,9 @@ func _ready():
 # signal reactions
 
 func _on_collected(coin):
+	# TODO ascending sound here
 	Debug.pr("coin collected", coin.hotel_data())
-	Hood.dev_notif("coin collected", coin.hotel_data())
+	# Hood.dev_notif("coin collected", coin.hotel_data())
 
 
 #########################################################

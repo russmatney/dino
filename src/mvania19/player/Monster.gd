@@ -29,8 +29,8 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
-	# if not MvaniaGame.managed_game:
-	# 	powerups = MvaniaGame.all_powerups
+	if not MvaniaGame.managed_game:
+		powerups = MvaniaGame.all_powerups
 
 	Hotel.register(self)
 
