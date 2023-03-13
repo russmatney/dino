@@ -10,6 +10,8 @@ extends CharacterBody2D
 @onready var swoop_hint_player = $SwoopHintPlayer
 var swoop_hints = []
 
+@onready var skull_particles = $SkullParticles
+
 const warp_group = "warp_spots"
 var warp_spots = []
 
@@ -39,6 +41,7 @@ func _ready():
 
 func _on_death(_boss):
 	Hotel.check_in(self)
+	skull_particles.set_emitting(true)
 
 func _on_transit(state_label):
 	Debug.pr(state_label)

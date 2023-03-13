@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://psr6qa0jnbc5"]
+
+[ext_resource type="Texture2D" uid="uid://cwmlq0qc307ej" path="res://assets/mvania19/particles_sheet.png" id="1_5hl8o"]
+
+[sub_resource type="Curve" id="Curve_1ek38"]
+_data = [Vector2(0, 0.00613499), 0.0, 0.0, 0, 0, Vector2(0.631068, 1), 0.0, 0.0, 0, 0, Vector2(0.841424, 0.98773), 0.0, 0.0, 0, 0, Vector2(1, 0.355828), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_8djs5"]
+curve = SubResource("Curve_1ek38")
+
+[sub_resource type="Curve" id="Curve_s0iuu"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.226537, 0.993865), 0.0, 0.0, 0, 0, Vector2(0.501618, 0.220859), 0.0, 0.0, 0, 0, Vector2(0.812298, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.288344), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_dh4kf"]
+curve = SubResource("Curve_s0iuu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k5iqp"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 5.78
+damping_max = 36.99
+scale_curve = SubResource("CurveTexture_8djs5")
+turbulence_enabled = true
+turbulence_noise_strength = 10.59
+turbulence_influence_max = 0.26
+turbulence_influence_over_life = SubResource("CurveTexture_dh4kf")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae7vx"]
+atlas = ExtResource("1_5hl8o")
+region = Rect2(16, 0, 16, 16)
+
+[node name="SkullParticles" type="GPUParticles2D"]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_k5iqp")
+texture = SubResource("AtlasTexture_ae7vx")
+one_shot = true

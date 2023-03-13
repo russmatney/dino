@@ -2,6 +2,7 @@ extends State
 
 func enter(ctx={}):
 	actor.anim.play("dead")
+	actor.skull_particles.set_emitting(true)
 	if not ctx.get("ignore_side_effects", false):
 		Cam.screenshake(0.3)
 		# MvaniaSounds.play_sound("playerdead")

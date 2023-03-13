@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var los = $LineOfSight
 
+@onready var skull_particles = $SkullParticles
+
 const warp_group = "warp_spots"
 var warp_spots = []
 
@@ -26,6 +28,7 @@ func _ready():
 
 func _on_death(_boss):
 	Hotel.check_in(self)
+	skull_particles.set_emitting(true)
 
 func _on_transit(state_label):
 	Debug.pr(state_label)

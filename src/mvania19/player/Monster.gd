@@ -11,6 +11,9 @@ extends CharacterBody2D
 var wall_checks = []
 @onready var near_ground_check = $NearGroundCheck
 
+@onready var heart_particles = $HeartParticles
+@onready var skull_particles = $SkullParticles
+
 var og_position
 var MAX_Y = 5000
 
@@ -39,6 +42,9 @@ func _ready():
 	wall_checks = [high_wall_check, low_wall_check]
 
 	player_death.connect(_on_player_death)
+
+	heart_particles.set_emitting(false)
+	skull_particles.set_emitting(false)
 
 func _on_transit(state):
 	# Debug.debug_label("Player State: ", state)
@@ -227,6 +233,11 @@ func take_hit(opts={}):
 func heal(opts={}):
 	DJSounds.play_sound(DJSounds.playerheal)
 	anim.play("sit")
+
+	# force one-shot emission
+	heart_particles.restart()
+	heart_particles.set_emitting(true)
+
 	var h = opts.get("health", 1)
 	health += h
 	health = clamp(health, 0, max_health)

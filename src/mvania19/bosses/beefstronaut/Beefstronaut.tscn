@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://coxhcbeogq8y3"]
+[gd_scene load_steps=15 format=3 uid="uid://coxhcbeogq8y3"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Warping.gd" id="9_3hlyf"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Laughing.gd" id="10_dgtvf"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/mvania19/light64px1.png" id="12_7xc6l"]
+[ext_resource type="PackedScene" uid="uid://psr6qa0jnbc5" path="res://src/mvania19/player/SkullParticles.tscn" id="13_qnfjf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 31)
@@ -62,3 +63,5 @@ collision_mask = 2
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("12_7xc6l")
+
+[node name="SkullParticles" parent="." instance=ExtResource("13_qnfjf")]

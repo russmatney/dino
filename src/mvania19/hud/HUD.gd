@@ -130,7 +130,7 @@ func update_enemy_status(enemy):
 ##########################################
 # minimap
 
-@onready var minimap = $%Minimap
+# @onready var minimap = $%Minimap
 
 @onready var area_name = $%AreaName
 @onready var room_name = $%RoomName
