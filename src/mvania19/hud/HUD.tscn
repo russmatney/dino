@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://67cetdmlytic"]
+[gd_scene load_steps=13 format=3 uid="uid://67cetdmlytic"]
 
 [ext_resource type="Script" path="res://src/mvania19/hud/HUD.gd" id="1_d2rgr"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_gncwx"]
 [ext_resource type="PackedScene" uid="uid://b7b7ck0q42nl5" path="res://src/mvania19/hud/Minimap.tscn" id="2_5w0jp"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="3_3f8qd"]
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_pdtjy"]
 [ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="4_bi0yc"]
 [ext_resource type="Texture2D" uid="uid://cgwl5x7a5ydx2" path="res://src/mvania19/hud/SwordAtlasTexture.tres" id="5_os1hs"]
 [ext_resource type="Texture2D" uid="uid://cbjjdocowrh4w" path="res://src/mvania19/hud/DoubleJumpAtlasTexture.tres" id="6_jdb6x"]
@@ -56,6 +57,31 @@ size = Vector2i(256, 256)
 render_target_update_mode = 4
 
 [node name="Minimap" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_5w0jp")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="AreaName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_pdtjy")
+bbcode_enabled = true
+text = "Area Name"
+fit_content = true
+scroll_active = false
+
+[node name="RoomName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_pdtjy")
+bbcode_enabled = true
+text = "Room Name"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="EnemyStatusList" type="VBoxContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
