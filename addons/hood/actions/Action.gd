@@ -6,7 +6,8 @@ extends Object
 # fields
 
 var fn: Callable
-var label: String
+var label: String = "Action"
+var label_fn: Callable
 var input_action: String = "action"
 var source: Node
 var source_can_execute: Callable = func(): return true
@@ -16,21 +17,33 @@ var requires_proximity: bool = true
 var requires_line_of_sight: bool = true
 
 #################################################################
+# get_label
+
+func get_label():
+	if label_fn:
+		return label_fn.call()
+	return label
+
+#################################################################
 # to string
 
 func _to_string():
 	if source:
-		return "Action: %s on source: %s" % [label, source]
+		return "Action: %s on source: %s" % [get_label(), source]
 	else:
-		return "Action: %s" % label
+		return "Action: %s" % get_label()
 
 #################################################################
 # constructor
 
 static func mk(opts) -> Action:
 	var ax = Action.new()
-	ax.label = opts.get("label", "Action")
 	ax.fn = opts.get("fn", func(): print("No-op action"))
+
+	ax.label = opts.get("label", "Action")
+	var label_fn = opts.get("label_fn")
+	if label_fn != null:
+		ax.label_fn = label_fn
 
 	var input_action = opts.get("input_action")
 	if input_action != null:

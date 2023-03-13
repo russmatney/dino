@@ -120,6 +120,6 @@ func update_displayed_action():
 	elif action_hint:
 		var c_ax = current_action()
 		if c_ax:
-			action_hint.display(c_ax.input_action, c_ax.label)
+			action_hint.display(c_ax.input_action, c_ax.get_label())
 		else:
 			action_hint.hide()
