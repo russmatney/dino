@@ -29,8 +29,8 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
-	if not MvaniaGame.managed_game:
-		powerups = MvaniaGame.all_powerups
+	# if not MvaniaGame.managed_game:
+	# 	powerups = MvaniaGame.all_powerups
 
 	Hotel.register(self)
 
@@ -95,6 +95,11 @@ func _unhandled_input(event):
 
 const SPEED = 150.0
 const CLIMB_SPEED = -100.0
+
+# const JUMP_ACCEL = -50.0
+# const JUMP_VELOCITY_INITIAL = -100.0
+# const JUMP_VELOCITY_MAX = -300.0
+
 const JUMP_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY = -300.0
 const KNOCKBACK_VELOCITY_HORIZONTAL = 30.0

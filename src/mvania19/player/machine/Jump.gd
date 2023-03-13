@@ -23,6 +23,7 @@ func enter(ctx={}):
 
 	# apply jump velocity
 	actor.velocity.y = actor.JUMP_VELOCITY
+	# actor.velocity.y = actor.JUMP_VELOCITY_INITIAL
 
 	if actor.has_double_jump:
 		double_jump_ttl = double_jump_wait
@@ -49,6 +50,10 @@ func physics_process(delta):
 		return
 
 	# gravity
+	# if Input.is_action_pressed("jump"):
+	# 	var new_y = actor.velocity.y + actor.JUMP_ACCEL * delta
+	# 	new_y = clamp(new_y, actor.JUMP_VELOCITY_INITIAL, actor.JUMP_VELOCITY_MAX)
+	# 	actor.velocity.y = new_y
 	if not actor.is_on_floor():
 		actor.velocity.y += actor.GRAVITY * delta
 
