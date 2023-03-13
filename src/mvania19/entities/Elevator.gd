@@ -9,8 +9,14 @@ extends Node2D
 # ready
 
 var actions = [
-	Action.mk({label="Travel", fn=travel})
+	Action.mk({label_fn=get_dest_label, fn=travel})
 	]
+
+func get_dest_label():
+	if destination_area_name:
+		return "To %s" % destination_area_name.capitalize()
+	else:
+		return "Travel"
 
 func _ready():
 	# TODO pass in validation function
