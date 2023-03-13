@@ -6,12 +6,14 @@ extends PanelContainer
 @onready var enemy_name = $%EnemyName
 
 var delete_in
+var key
 
 func set_status(opts):
 	if opts.get("texture"):
 		portrait.set_texture(opts.get("texture"))
 
 	if opts.get("name"):
+		key = opts.get("name")
 		enemy_name.text = "%s" % opts.get("name")
 
 	var h = opts.get("health")
@@ -25,11 +27,8 @@ func set_status(opts):
 	if ttl > 0:
 		delete_in = ttl
 
-signal removed(me)
-
 func _process(delta):
 	if delete_in != null:
 		delete_in -= delta
 		if delete_in <= 0:
-			removed.emit(self)
 			queue_free()

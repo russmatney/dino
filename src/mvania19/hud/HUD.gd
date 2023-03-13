@@ -64,18 +64,21 @@ func set_coins(count):
 
 @onready var enemy_status_list = $%EnemyStatusList
 var status_scene = preload("res://src/mvania19/hud/EnemyStatus.tscn")
-var statuses = {}
+
+func find_existing_status(enemy):
+	for ch in enemy_status_list.get_children():
+		if ch.key == enemy.get("name"):
+			return ch
 
 func update_enemy_status(enemy):
 	var nm = enemy.get("name")
 
-	var existing = statuses.get(nm)
+	var existing = find_existing_status(enemy)
 	if existing and is_instance_valid(existing):
 		# assume it's just a health update
 		existing.set_status({health=enemy.get("health")})
 	else:
 		var status = status_scene.instantiate()
-		status.removed.connect(_on_remove.bind(nm))
 		enemy_status_list.add_child(status)
 		# TODO set portraits
 		# call after adding so _ready has added elems
@@ -84,10 +87,6 @@ func update_enemy_status(enemy):
 			health=enemy.get("health"),
 			ttl=0 if "bosses" in enemy.get("groups", []) else 5,
 			})
-		statuses[nm] = status
-
-func _on_remove(nm, _status):
-	statuses.erase(nm)
 
 
 ##########################################
