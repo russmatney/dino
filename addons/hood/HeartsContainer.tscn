@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/hood/HeartsContainer.gd" id="3"]
 
 [node name="HeartsContainer" type="HBoxContainer"]
-custom_minimum_size = Vector2(98, 32)
+custom_minimum_size = Vector2(192, 64)
 anchors_preset = -1
 anchor_right = 0.153
 anchor_bottom = 0.089
@@ -15,16 +15,19 @@ grow_vertical = 2
 script = ExtResource("3")
 
 [node name="HeartIcon" parent="." instance=ExtResource("1")]
-position = Vector2(82, 16)
+position = Vector2(160, 32)
+scale = Vector2(2, 2)
 animation = &"empty"
 flip_h = true
 
 [node name="HeartIcon2" parent="." instance=ExtResource("1")]
-position = Vector2(49, 16)
+position = Vector2(96, 32)
+scale = Vector2(2, 2)
 animation = &"empty"
 flip_h = true
 
 [node name="HeartIcon3" parent="." instance=ExtResource("1")]
-position = Vector2(16, 16)
+position = Vector2(32, 32)
+scale = Vector2(2, 2)
 animation = &"empty"
 flip_h = true
