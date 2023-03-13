@@ -60,6 +60,8 @@ var bullet_impulse = 100
 var bullet_knockback = 0
 
 func fire():
+	DJSounds.play_sound(DJSounds.boss_shoot)
+
 	var bullet = bullet_scene.instantiate()
 
 	# meta

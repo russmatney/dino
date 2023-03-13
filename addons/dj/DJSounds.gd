@@ -18,6 +18,8 @@ enum {
 	boss_shoot,
 	boss_swoop,
 	destroyed_block,
+	candleout,
+	candlelit,
 	}
 
 ###########################################################################
@@ -112,5 +114,15 @@ var sounds = {
 			preload("res://assets/sounds/destroyedblock1.sfxr"),
 			preload("res://assets/sounds/destroyedblock2.sfxr"),
 			preload("res://assets/sounds/destroyedblock3.sfxr"),
+		],
+	candleout:
+	[
+			preload("res://assets/sounds/candleout1.sfxr"),
+			preload("res://assets/sounds/candleout2.sfxr"),
+		],
+	candlelit:
+	[
+			preload("res://assets/sounds/candlelit1.sfxr"),
+			preload("res://assets/sounds/candlelit2.sfxr"),
 		],
 }

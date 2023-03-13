@@ -21,8 +21,9 @@ script = ExtResource("1_s23kw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.57079
-scale = Vector2(2, 1)
 sprite_frames = ExtResource("1_fvfvs")
+animation = &"pop"
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.57079

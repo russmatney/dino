@@ -62,9 +62,9 @@ func kill():
 	if not dying:
 		dying = true
 		Cam.screenshake(0.1)
-		# MvaniaSounds.play_sound("bullet_hit")
-		anim.set_visible(false)
+		MvaniaSounds.play_sound("fall")
 		bullet_dying.emit(self)
+		anim.play("pop")
 
 		await get_tree().create_timer(0.2).timeout
 		if is_instance_valid(self):
