@@ -22,7 +22,6 @@ script = ExtResource("1_ek0md")
 scale = Vector2(0.5, 0.5)
 sprite_frames = ExtResource("1_ntbuo")
 animation = &"spin"
-frame_progress = 0.790722
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_w1ggg")

@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://dgx2li3f0py1c"]
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://dgx2li3f0py1c"]
 
 [ext_resource type="Texture2D" uid="uid://ba1tyxqdklvys" path="res://assets/mvania19/shootycrawlybullet_sheet.png" id="1_2e8a6"]
+[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://assets/sprites/pop_sheet.png" id="2_v0xjh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fyt1v"]
 atlas = ExtResource("1_2e8a6")
@@ -13,6 +14,26 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7cxa"]
 atlas = ExtResource("1_2e8a6")
 region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1scmo"]
+atlas = ExtResource("2_v0xjh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qc1ef"]
+atlas = ExtResource("2_v0xjh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo3bp"]
+atlas = ExtResource("2_v0xjh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3sqi"]
+atlas = ExtResource("2_v0xjh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71ull"]
+atlas = ExtResource("2_v0xjh")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66mb7"]
 atlas = ExtResource("1_2e8a6")
@@ -42,9 +63,29 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t7cxa")
 }],
-"loop": true,
+"loop": false,
 "name": &"launch",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1scmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qc1ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jo3bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3sqi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71ull")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
