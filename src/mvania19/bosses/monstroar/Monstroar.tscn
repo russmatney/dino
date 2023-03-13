@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cukeivdgc4n4c"]
+[gd_scene load_steps=17 format=3 uid="uid://cukeivdgc4n4c"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/Monstroar.gd" id="1_jqu05"]
 [ext_resource type="SpriteFrames" uid="uid://c2utbyiiwsrqd" path="res://src/mvania19/bosses/monstroar/monstroar_sprite_frames.tres" id="2_55uo8"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_d6bbg"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Swoop.gd" id="11_exkrm"]
 [ext_resource type="PackedScene" uid="uid://7mew15q00kg3" path="res://src/mvania19/bosses/PositionHint.tscn" id="13_qubff"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/mvania19/light64px1.png" id="14_y6g7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tidp"]
 size = Vector2(16, 24)
@@ -32,7 +33,7 @@ shape = SubResource("RectangleShape2D_6tidp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = ExtResource("2_55uo8")
-animation = &"warp-arrive"
+animation = &"idle"
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_85gcx")
@@ -83,3 +84,6 @@ visible = false
 
 [node name="SwoopHintPlayer" parent="." instance=ExtResource("13_qubff")]
 visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("14_y6g7e")

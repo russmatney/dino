@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://coxhcbeogq8y3"]
+[gd_scene load_steps=14 format=3 uid="uid://coxhcbeogq8y3"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Stunned.gd" id="8_fhgq5"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Warping.gd" id="9_3hlyf"]
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Laughing.gd" id="10_dgtvf"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/mvania19/light64px1.png" id="12_7xc6l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 31)
@@ -58,3 +59,6 @@ target_position = Vector2(0, 150)
 collision_mask = 2
 
 [node name="CamPOF" parent="." instance=ExtResource("5_15lvx")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("12_7xc6l")
