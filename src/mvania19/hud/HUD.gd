@@ -23,6 +23,8 @@ func _on_entry_updated(entry):
 	if "player" in entry["groups"]:
 		if entry.get("health") != null:
 			set_health(entry["health"])
+		if entry.get("powerups") != null:
+			set_powerups(entry["powerups"])
 		if entry.get("death_count") != null:
 			set_deaths(entry["death_count"])
 		if entry.get("coins") != null:
@@ -38,6 +40,22 @@ func _on_entry_updated(entry):
 func set_health(health):
 	# TODO tween/jiggle hearts on change!
 	hearts.h = health
+
+##########################################
+# powerups
+
+@onready var sword = $%SwordPowerup
+@onready var double_jump = $%DoubleJumpPowerup
+@onready var climbing_gloves = $%ClimbingGlovesPowerup
+
+func set_powerups(powerups):
+	for p in MvaniaGame.all_powerups:
+		var vis = p in powerups
+		match(p):
+			MvaniaGame.Powerup.Sword: sword.set_visible(vis)
+			MvaniaGame.Powerup.DoubleJump: double_jump.set_visible(vis)
+			MvaniaGame.Powerup.Climb: climbing_gloves.set_visible(vis)
+			_: pass
 
 ##########################################
 # labels

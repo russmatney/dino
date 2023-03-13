@@ -120,12 +120,12 @@ func list_area_names():
 	return ",".join(areas.map(func(area): return area.get("name")))
 
 func ele_path(entry):
-	var room = str(entry.get("room_name")).replace(destination_area_name, ".")
+	var rm = str(entry.get("room_name")).replace(destination_area_name, ".")
 	var path = str(entry.get("path"))
-	if path.contains(room):
+	if path.contains(rm):
 		return str(path)
 	else:
-		return str(room.path_join(path)).replace("/./", "/")
+		return str(rm.path_join(path)).replace("/./", "/")
 
 func list_elevator_paths():
 	if destination_area_name == null or len(destination_area_name) == 0:
