@@ -354,18 +354,6 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("9_uk0fg")
 metadata/_edit_lock_ = true
 
-[node name="patron-thanks-you" parent="PatronCredits" instance=ExtResource("13_q2rk4")]
-visible = false
-position = Vector2(-173, -89)
-scale = Vector2(0.5, 0.5)
-text = "YOU?!?"
-font = ExtResource("12_cjkwf")
-
-[node name="PointLight2D2" type="PointLight2D" parent="PatronCredits/patron-thanks-you"]
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("9_uk0fg")
-metadata/_edit_lock_ = true
-
 [node name="CamPOF" parent="PatronCredits" instance=ExtResource("15_fr2us")]
 position = Vector2(-232, -15)
 
@@ -399,14 +387,6 @@ node_paths = Array[NodePath]([NodePath("../patron-thanks-ac")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PatronCredits/RevealOnContact4"]
 position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_yl45m")
-
-[node name="RevealOnContact5" parent="PatronCredits" instance=ExtResource("16_41guf")]
-position = Vector2(-107, -80)
-node_paths = Array[NodePath]([NodePath("../patron-thanks-you")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PatronCredits/RevealOnContact5"]
-position = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_yl45m")
 
 [node name="SecretEntrance" type="Node2D" parent="." groups=["mvania_rooms"]]
