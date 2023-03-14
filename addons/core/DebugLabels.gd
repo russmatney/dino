@@ -120,7 +120,7 @@ const hotel_ui_scene = preload("res://addons/hotel/HotelUI.tscn")
 var hotel_ui
 
 func _on_toggle_hotel_db_pressed():
-	if hotel_ui:
+	if hotel_ui and is_instance_valid(hotel_ui):
 		hotel_ui.queue_free()
 	else:
 		hotel_ui = hotel_ui_scene.instantiate()

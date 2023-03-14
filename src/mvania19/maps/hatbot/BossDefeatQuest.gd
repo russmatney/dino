@@ -13,16 +13,13 @@ func reset_bosses():
 		if sib.is_in_group("bosses"):
 			bosses.append(sib)
 
-	for boss in bosses:
-		boss.died.connect(_on_boss_death)
-
 	if len(bosses) > 0:
 		Debug.pr("found bosses!", bosses)
 
 func remaining_bosses():
 	if len(bosses) == 0:
 		return null
-	return bosses.filter(func(b): return not b in defeated_bosses)
+	return bosses.filter(func(b): return not b.dead)
 
 #####################################################
 # ready
@@ -34,13 +31,6 @@ func _ready():
 	var r = get_parent()
 	if r is MvaniaRoom:
 		room = r
-
-var defeated_bosses = []
-
-func _on_boss_death(boss):
-	Debug.pr("Boss defeated", boss)
-	Hood.dev_notif("Boss defeated", boss)
-	defeated_bosses.append(boss)
 
 #####################################################
 # process
@@ -60,7 +50,7 @@ func quest_complete():
 	complete = true
 
 	var header = "Boss Defeated"
-	var body = "You defeated [jump]%s[/jump]" % " and ".join(defeated_bosses.map(func(b): return b.name.capitalize()))
+	var body = "You defeated [jump]%s[/jump]" % " and ".join(bosses.map(func(b): return b.name.capitalize()))
 	var action
 	var action_label_text
 

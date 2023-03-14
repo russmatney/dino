@@ -3,7 +3,7 @@ extends State
 var KNOCKBACK_X = 20
 var KNOCKBACK_Y = 500
 var KNOCKBACK_DYING_Y = 700
-var min_kb_time = 2
+var min_kb_time = 0.3
 var kb_ttl = 2
 
 
@@ -15,12 +15,10 @@ func enter(opts={}):
 	if actor.dead:
 		kb_y = KNOCKBACK_DYING_Y
 		actor.anim.play("dying")
-		# TODO monstroar sounds
 		MvaniaSounds.play_sound("soldierdead")
 	else:
 		kb_y = KNOCKBACK_Y
 		actor.anim.play("knocked-back")
-		# TODO monstroar sounds
 		MvaniaSounds.play_sound("soldierhit")
 
 	if dir == Vector2.LEFT:

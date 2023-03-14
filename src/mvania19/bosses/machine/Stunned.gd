@@ -7,8 +7,7 @@ func enter(ctx={}):
 	stunned_ttl = ctx.get("stunned_for", stunned_for)
 
 	actor.anim.play("stunned")
-	Cam.hitstop("monstroar_stunned", 0.5, 0.3, 0.3)
-	# TODO monstroar sound
+	Cam.hitstop("boss_stunned", 0.5, 0.3, 0.3)
 	MvaniaSounds.play_sound("soldierdead")
 	actor.stunned.emit(actor)
 
@@ -23,4 +22,4 @@ func physics_process(delta):
 
 	stunned_ttl -= delta
 	if stunned_ttl <= 0:
-		machine.transit("Idle", {wait_for=2, next_state="Warping"})
+		machine.transit("Idle", {wait_for=0.5, next_state="Warping"})

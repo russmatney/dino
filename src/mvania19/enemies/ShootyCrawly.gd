@@ -145,7 +145,7 @@ func _physics_process(_delta):
 		if crawl_on_side != null:
 			orient(crawl_on_side)
 
-	if MvaniaGame.player:
+	if MvaniaGame.player and is_instance_valid(MvaniaGame.player):
 		# var player_pos = MvaniaGame.player.global_position
 		# los.target_position = to_local(player_pos)
 

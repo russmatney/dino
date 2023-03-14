@@ -23,6 +23,7 @@ enum {
 	candlelit,
 	enemylaugh,
 	bosslaugh,
+	nodamageclang,
 	}
 
 ###########################################################################
@@ -145,5 +146,11 @@ var sounds = {
 			preload("res://assets/sounds/bosslaugh1.sfxr"),
 			preload("res://assets/sounds/bosslaugh2.sfxr"),
 			preload("res://assets/sounds/bosslaugh3.sfxr"),
+		],
+	nodamageclang:
+	[
+			preload("res://assets/sounds/nodamageclang.sfxr"),
+			preload("res://assets/sounds/nodamageclang2.sfxr"),
+			preload("res://assets/sounds/nodamageclang3.sfxr"),
 		],
 }

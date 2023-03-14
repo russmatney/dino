@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://coxhcbeogq8y3"]
+[gd_scene load_steps=17 format=3 uid="uid://coxhcbeogq8y3"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
@@ -13,9 +13,14 @@
 [ext_resource type="Script" path="res://src/mvania19/bosses/machine/Laughing.gd" id="10_dgtvf"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/mvania19/light64px1.png" id="12_7xc6l"]
 [ext_resource type="PackedScene" uid="uid://psr6qa0jnbc5" path="res://src/mvania19/player/SkullParticles.tscn" id="13_qnfjf"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="14_s0hdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 31)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onh6t"]
+radius = 8.0
+height = 20.0
 
 [node name="Beefstronaut" type="CharacterBody2D" groups=["bosses", "enemies"]]
 collision_layer = 8
@@ -65,3 +70,21 @@ collision_mask = 2
 texture = ExtResource("12_7xc6l")
 
 [node name="SkullParticles" parent="." instance=ExtResource("13_qnfjf")]
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("14_s0hdd")
+text = "state"
+horizontal_alignment = 1
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_onh6t")

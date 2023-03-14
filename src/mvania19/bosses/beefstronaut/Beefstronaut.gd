@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var anim = $AnimatedSprite2D
 @onready var los = $LineOfSight
+@onready var attack_box = $AttackBox
+@onready var state_label = $StateLabel
 
 @onready var skull_particles = $SkullParticles
 
@@ -26,13 +28,18 @@ func _ready():
 
 	died.connect(_on_death)
 
+	attack_box.body_entered.connect(_on_attack_box_entered)
+
+	if MvaniaGame.managed_game:
+		state_label.set_visible(false)
+
 func _on_death(_boss):
 	Hotel.check_in(self)
 	skull_particles.set_emitting(true)
 
-func _on_transit(state_label):
-	Debug.pr(state_label)
-	# Debug.debug_label(name, "state", state_label)
+func _on_transit(label):
+	if state_label.visible:
+		state_label.text = label
 
 #####################################################
 # hotel
@@ -73,7 +80,7 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_see_player
 
 func _physics_process(_delta):
-	if MvaniaGame.player:
+	if MvaniaGame.player and is_instance_valid(MvaniaGame.player):
 		var player_pos = MvaniaGame.player.global_position
 		los.target_position = to_local(player_pos)
 
@@ -101,18 +108,39 @@ signal died(boss)
 signal stunned(boss)
 
 func take_hit(opts={}):
+	if not machine.state.name in ["Stunned", "Swoop", "Firing", "Idle", "Laughing"]:
+		DJSounds.play_sound(DJSounds.nodamageclang)
+		return
+
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.UP)
+
+	DJSounds.play_sound(DJSounds.playerhurt)
 
 	health -= damage
 	health = clamp(health, 0, initial_health)
 	Hotel.check_in(self)
 
-	DJSounds.play_sound(DJSounds.playerhurt)
-
 	if health <= 0:
 		dead = true
-	machine.transit("KnockedBack", {
-		damage=damage,
-		direction=direction,
-		})
+
+	if machine.state.name in ["Stunned"]:
+		machine.transit("Warping")
+	else:
+		machine.transit("KnockedBack", {
+			damage=damage,
+			direction=direction,
+			})
+
+#####################################################
+# touch damage
+
+func _on_attack_box_entered(body: Node):
+	if machine.state.name in ["Swoop", "Idle"]:
+		if body.is_in_group("player") and body.has_method("take_hit"):
+			var dir
+			if global_position.x > body.global_position.x:
+				dir = Vector2.LEFT
+			else:
+				dir = Vector2.RIGHT
+			body.take_hit({"direction": dir})

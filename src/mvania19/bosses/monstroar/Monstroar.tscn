@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cukeivdgc4n4c"]
+[gd_scene load_steps=19 format=3 uid="uid://cukeivdgc4n4c"]
 
 [ext_resource type="Script" path="res://src/mvania19/bosses/monstroar/Monstroar.gd" id="1_jqu05"]
 [ext_resource type="SpriteFrames" uid="uid://c2utbyiiwsrqd" path="res://src/mvania19/bosses/monstroar/monstroar_sprite_frames.tres" id="2_55uo8"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://7mew15q00kg3" path="res://src/mvania19/bosses/PositionHint.tscn" id="13_qubff"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/mvania19/light64px1.png" id="14_y6g7e"]
 [ext_resource type="PackedScene" uid="uid://psr6qa0jnbc5" path="res://src/mvania19/player/SkullParticles.tscn" id="15_w3c60"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="16_k3jf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tidp"]
 size = Vector2(16, 24)
@@ -90,3 +91,12 @@ visible = false
 texture = ExtResource("14_y6g7e")
 
 [node name="SkullParticles" parent="." instance=ExtResource("15_w3c60")]
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("16_k3jf2")
+text = "state"
+horizontal_alignment = 1
