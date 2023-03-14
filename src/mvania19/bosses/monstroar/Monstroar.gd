@@ -98,10 +98,11 @@ func _physics_process(_delta):
 		if los.is_colliding():
 			can_see_player = true
 
-			if los.target_position.x > 0:
-				face_right()
-			else:
-				face_left()
+			if not dead:
+				if los.target_position.x > 0:
+					face_right()
+				else:
+					face_left()
 
 #####################################################
 # attack

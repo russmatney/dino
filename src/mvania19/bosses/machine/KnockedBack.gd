@@ -1,8 +1,8 @@
 extends State
 
 var KNOCKBACK_X = 20
-var KNOCKBACK_Y = 500
-var KNOCKBACK_DYING_Y = 700
+var KNOCKBACK_Y = -300
+var KNOCKBACK_DYING_Y = -700
 var min_kb_time = 0.3
 var kb_ttl = 2
 
