@@ -3,19 +3,21 @@ extends Node2D
 
 @onready var collision_shape = $AnimatableBody2D/CollisionShape2D
 @onready var anim = $AnimatedSprite2D
-@onready var action_area = $ActionArea
+@onready var front_action_area = $FrontActionArea
+@onready var back_action_area = $BackActionArea
 @onready var cam_pof = $CamPOF
 
 ##################################################################
 # actions
 
-var actions = [
+var front_actions = []
+var back_actions = [
 	Action.mk({
 		label="Open", fn=open, source_can_execute=can_open,
 		}),
-	Action.mk({
-		label="Close", fn=close, source_can_execute=can_close,
-		})
+	# Action.mk({
+	# 	label="Close", fn=close, source_can_execute=can_close,
+	# 	})
 	]
 
 ##################################################################
@@ -39,7 +41,8 @@ func update_state():
 func _ready():
 	Hotel.register(self)
 
-	action_area.register_actions(actions, self)
+	front_action_area.register_actions(front_actions, self)
+	back_action_area.register_actions(back_actions, self)
 
 	update_state()
 	anim.animation_finished.connect(_on_animation_finished)
