@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8uyfy5lmgykl"]
+[gd_scene load_steps=7 format=3 uid="uid://b8uyfy5lmgykl"]
 
 [ext_resource type="Script" path="res://src/mvania19/entities/Candle.gd" id="1_7eirx"]
 [ext_resource type="SpriteFrames" uid="uid://fl4kmbxvhiyo" path="res://src/mvania19/entities/CandleSpriteFrames.tres" id="1_ywigl"]
-[ext_resource type="Material" uid="uid://ditwsfgayekkb" path="res://src/mvania19/entities/CandleFlickerParticleMaterial.tres" id="3_7okj4"]
 [ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="4_asdr1"]
 [ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://assets/mvania19/light64px4.png" id="6_nahms"]
 [ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="6_ttkix"]
@@ -28,17 +27,11 @@ offset_right = 64.0
 offset_bottom = 64.0
 color = Color(0.11248, 0.245715, 0.115688, 1)
 
-[node name="FlameParticles" type="GPUParticles2D" parent="."]
-visible = false
-position = Vector2(0, -5)
-emitting = false
-process_material = ExtResource("3_7okj4")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ywigl")
 animation = &"off"
 autoplay = "flicker"
-frame_progress = 0.386128
+frame_progress = 0.146211
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)

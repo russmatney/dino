@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var light = $PointLight2D
 @onready var anim = $AnimatedSprite2D
-@onready var particles = $FlameParticles
+# @onready var particles = $FlameParticles
 @onready var action_area = $ActionArea
 @onready var spawn_point = $PlayerSpawnPoint
 
@@ -72,19 +72,20 @@ func light_up():
 	anim.play("flicker")
 	DJSounds.play_sound(DJSounds.candlelit)
 	light.set_enabled(true)
-	particles.set_emitting(true)
+	# particles.set_emitting(true)
 	light_tween()
 	Hotel.check_in(self)
 
 	# marks spawn point active
 	spawn_point.sat_at()
+	Debug.pr("light up finished")
 
 func put_out():
 	lit = false
 	anim.play("off")
 	DJSounds.play_sound(DJSounds.candleout)
 	light.set_enabled(false)
-	particles.set_emitting(false)
+	# particles.set_emitting(false)
 	Hotel.check_in(self)
 
 var sitting

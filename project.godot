@@ -58,6 +58,10 @@ window/size/viewport_height=720
 window/stretch/mode.runner="viewport"
 window/stretch/aspect.runner="keep"
 
+[editor]
+
+naming/scene_name_casing=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/MaxSizeContainer/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/hotel/plugin.cfg")
@@ -176,6 +180,7 @@ common/enable_pause_aware_picking=true
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
+textures/vram_compression/import_s3tc_bptc=true
 textures/canvas_textures/default_texture_filter=0
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_clear_color=Color(0, 0, 0, 1)
