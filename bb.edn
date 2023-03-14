@@ -1,8 +1,6 @@
-{:deps  {org.babashka/http-server {:local/root "../../babashka/http-server"}}
- :paths ["src"]
+{:paths ["src"]
  :tasks
  {:requires ([bb-godot.tasks :as tasks]
-             [babashka.http-server :as http-server]
              [clojure.string :as string])
 
   :init
@@ -40,12 +38,14 @@
   ;; zip       tasks/zip
 
   serve-built
-  {:task (let [arg (some-> *command-line-args* first)
-               arg (or arg "dino")]
-           ;; TODO add :header support to bb/http-server inputs
-           (http-server/exec {:port 3010 :dir (str  "dist/" arg)})
-           ;; http-server installable via bbin
-           #_(tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))}
+  {:deps     {org.babashka/http-server {:local/root "../../babashka/http-server"}}
+   :requires ([babashka.http-server :as http-server])
+   :task     (let [arg (some-> *command-line-args* first)
+                   arg (or arg "dino")]
+               ;; TODO add :header support to bb/http-server inputs
+               (http-server/exec {:port 3010 :dir (str  "dist/" arg)})
+               ;; http-server installable via bbin
+               #_(tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))}
 
   butler-push (let [arg          (some-> *command-line-args* first)
                     arg          (or arg "dino")
@@ -54,7 +54,9 @@
                                    (re-seq (re-pattern "-linux") arg)
                                    [(-> arg (string/replace "-linux" "")) "linux-universal"]
                                    (re-seq (re-pattern "-macos") arg)
-                                   [(-> arg (string/replace "-macos" "")) "osx-universal"]
+                                   (do
+                                     (println "DID YOU REMEMBER TO STAPLE IIIT???????")
+                                     [(-> arg (string/replace "-macos" "")) "osx-universal"])
                                    (re-seq (re-pattern "-windows") arg)
                                    [(-> arg (string/replace "-windows" "")) "windows"]
                                    :else [(cond
