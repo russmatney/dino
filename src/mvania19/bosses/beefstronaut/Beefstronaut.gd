@@ -124,7 +124,7 @@ func take_hit(opts={}):
 	if health <= 0:
 		dead = true
 
-	if machine.state.name in ["Stunned"]:
+	if not dead and machine.state.name in ["Stunned"]:
 		machine.transit("Warping")
 	else:
 		machine.transit("KnockedBack", {
