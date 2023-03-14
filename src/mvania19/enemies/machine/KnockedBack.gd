@@ -4,6 +4,8 @@ extends State
 func enter(ctx={}):
 	actor.knocked_back.emit(actor)
 
+	DJSounds.play_sound(DJSounds.enemyhurt)
+
 	var dir = ctx.get("direction", Vector2.LEFT)
 	var dying = ctx.get("dying", false)
 	var kb_vel = actor.DYING_VELOCITY if dying else actor.KNOCKBACK_VELOCITY

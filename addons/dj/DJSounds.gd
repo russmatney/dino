@@ -14,6 +14,7 @@ enum {
 	climbstart,
 	playerheal,
 	playerhurt,
+	enemyhurt,
 	bosswarp,
 	boss_shoot,
 	boss_swoop,
@@ -93,6 +94,12 @@ var sounds = {
 			preload("res://assets/sounds/player_hurt1.sfxr"),
 			preload("res://assets/sounds/player_hurt2.sfxr"),
 			preload("res://assets/sounds/player_hurt3.sfxr"),
+		],
+	enemyhurt:
+	[
+			preload("res://assets/sounds/enemy_hurt1.sfxr"),
+			preload("res://assets/sounds/enemy_hurt2.sfxr"),
+			preload("res://assets/sounds/enemy_hurt3.sfxr"),
 		],
 	bosswarp:
 	[
