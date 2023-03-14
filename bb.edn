@@ -2,7 +2,8 @@
  :paths ["src"]
  :tasks
  {:requires ([bb-godot.tasks :as tasks]
-             [babashka.http-server :as http-server])
+             [babashka.http-server :as http-server]
+             [clojure.string :as string])
 
   :init
   (do
@@ -49,9 +50,23 @@
   butler-push (let [arg          (some-> *command-line-args* first)
                     arg          (or arg "dino")
                     dir          (str "dist/" arg)
-                    itch-project (str "russmatney/" arg ":html5")]
+                    [arg type]   (cond
+                                   (re-seq (re-pattern "-linux") arg)
+                                   [(-> arg (string/replace "-linux" "")) "linux-universal"]
+                                   (re-seq (re-pattern "-macos") arg)
+                                   [(-> arg (string/replace "-macos" "")) "osx-universal"]
+                                   (re-seq (re-pattern "-windows") arg)
+                                   [(-> arg (string/replace "-windows" "")) "windows"]
+                                   :else [(cond
+                                            (= arg "mvania19") "mvania19-web"
+                                            :else              arg)
+                                          "html5"])
+                    itch-project (str "russmatney/" arg ":" type)
+                    command      (str "butler push --if-changed " dir " " itch-project)]
+
+                ;; (println command)
                 ;; http-server installable via bbin
-                (tasks/shell-and-log (str "butler push --if-changed " dir " " itch-project)))
+                (tasks/shell-and-log command))
 
   install-script-templates
   (apply tasks/install-script-templates
