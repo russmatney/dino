@@ -107,6 +107,10 @@ func update_enemy_status(enemy):
 		# assume it's just a health update
 		existing.set_status({health=enemy.get("health")})
 	else:
+		if len(enemy_status_list.get_children()) >= 3:
+			Debug.pr("Too many enemy_statuses, not adding one", enemy)
+			# TODO evict least-relevant status
+			return
 		var status = status_scene.instantiate()
 		enemy_status_list.add_child(status)
 

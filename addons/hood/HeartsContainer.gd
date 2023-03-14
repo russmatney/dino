@@ -11,6 +11,10 @@ func set_flip_h(v):
 		flip_h = v
 		set_health(h)
 
+		if flip_h:
+			alignment = ALIGNMENT_END
+		else:
+			alignment = ALIGNMENT_BEGIN
 
 
 func _ready():
@@ -35,7 +39,7 @@ func set_health(health):
 			heart_icons.reverse()
 
 		for icon in heart_icons:
-			icon.flip_h = not flip_h
+			icon.flip_h = flip_h
 
 	if heart_icons.size() == 0:
 		return
@@ -48,14 +52,14 @@ func set_health(health):
 	# full hearts indexed below health / 2
 	for x in range(hearts_floor):
 		if heart_icons.size() > x:
-			heart_icons[x].animation = "full"
+			heart_icons[x].set_full()
 
 	# empty hearts indexed above health / 2
 	for x in range(hearts_floor, 1 + heart_icons.size()):
 		if heart_icons.size() > x:
-			heart_icons[x].animation = "empty"
+			heart_icons[x].set_empty()
 
 	# half heart should overwrite an empty heart
 	if hearts > hearts_floor:
 		if heart_icons.size() > hearts_floor:
-			heart_icons[hearts_floor].animation = "half"
+			heart_icons[hearts_floor].set_half()
