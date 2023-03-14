@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://0od740hm7lbl"]
+[gd_scene load_steps=25 format=3 uid="uid://0od740hm7lbl"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_uu6kd"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_e7xxp"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_ml4hm"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="6_xoy8t"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/mvania19/light64px1.png" id="9_uk0fg"]
+[ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="10_urcpa"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="11_arac5"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="12_cjkwf"]
 [ext_resource type="PackedScene" uid="uid://duohpnsdc120b" path="res://src/dungeonCrawler/items/Coin.tscn" id="12_ma4mf"]
@@ -81,14 +82,16 @@ layer_0/tile_data = PackedInt32Array(524280, 131073, 0, 524282, 1, 2, 524283, 1,
 
 [node name="PlayerSpawnPoint" parent="FirstRoom" instance=ExtResource("5_f2j1h")]
 position = Vector2(128, -231)
+dev_only = false
 
 [node name="MoveActionHint" parent="FirstRoom" instance=ExtResource("6_xoy8t")]
-position = Vector2(128, -24)
+position = Vector2(128, 40)
 scale = Vector2(0.5, 0.5)
 label_text = "move"
 key_or_action = "wasd"
 
 [node name="PointLight2D2" type="PointLight2D" parent="FirstRoom/MoveActionHint"]
+position = Vector2(0, 2)
 scale = Vector2(3, 3)
 texture = ExtResource("9_uk0fg")
 
@@ -101,6 +104,9 @@ key_or_action = "jump"
 [node name="PointLight2D" type="PointLight2D" parent="FirstRoom/JumpActionHint"]
 scale = Vector2(3, 3)
 texture = ExtResource("9_uk0fg")
+
+[node name="Candle" parent="FirstRoom" instance=ExtResource("10_urcpa")]
+position = Vector2(128, -64)
 
 [node name="Title" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(192, -40)

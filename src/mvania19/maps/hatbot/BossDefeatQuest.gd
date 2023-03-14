@@ -64,24 +64,21 @@ func quest_complete():
 	var action
 	var action_label_text
 
-	match(bosses.map(func(b): return b.name)):
-		["Beefstronaut"]:
-			header = "It was never a fair fight"
-			body = "Maybe this will make things more interesting?"
-			action = "slowmo"
-			action_label_text = "Slow down Time"
-
-		["Monstroar"]:
-			header = "Two down! One boss battle left."
-			body = "Spice up your game, spam 'e' for more noise!"
-			action = "action"
-			action_label_text = "Add Screen Shake"
-
-		["Beefstronaut", "Monstroar"], ["Beefstronaut", "Monstroar"]:
-			header = "YOU DID IT! CONGRATS!"
-			body = "Featuring: Camera debugging and HotelDB."
-			action = "debug_toggle"
-			action_label_text = "Show the debug menu"
+	if len(bosses) == 1 and bosses[0].name == "Beefstronaut":
+		header = "That was a beefy one."
+		body = "Maybe this will make things more interesting?"
+		action = "slowmo"
+		action_label_text = "Slow-down Time"
+	elif len(bosses) == 1 and bosses[0].name == "Monstroar":
+		header = "Monstroar has been silenced!"
+		body = "More crunch? Spam 'e' for shake!"
+		action = "action"
+		action_label_text = "Add Screen Shake"
+	elif len(bosses) == 2:
+		header = "YOU DID IT! CONGRATS!"
+		body = "Debug tool secret unlocked!"
+		action = "debug_toggle"
+		action_label_text = "Show the debug menu"
 
 	if room:
 		room.pause()

@@ -51,6 +51,8 @@ func player_spawn_coords() -> Vector2:
 
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
 	markers = markers.filter(func(ma): return ma.active)
+	if MvaniaGame.managed_game:
+		markers = markers.filter(func(ma): return not ma.dev_only)
 	markers.sort_custom(func(ma, mb): return ma.last_sat_at > mb.last_sat_at)
 
 	if len(markers) > 0:

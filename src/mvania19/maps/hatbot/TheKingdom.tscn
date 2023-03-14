@@ -372,6 +372,9 @@ position = Vector2(-184, -344)
 
 [node name="BossDefeatQuest" parent="ThroneRoom" instance=ExtResource("16_4r28o")]
 
+[node name="PlayerSpawnPoint" parent="ThroneRoom" instance=ExtResource("8_typcp")]
+position = Vector2(-288, -216)
+
 [node name="ToLandingSite" type="Node2D" parent="." groups=["mvania_rooms"]]
 position = Vector2(-640, -152)
 script = ExtResource("2_xs8vo")

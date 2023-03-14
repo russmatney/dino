@@ -128,7 +128,7 @@ func _respawn_player(player_died=false):
 
 	spawn_coords = current_area.player_spawn_coords()
 
-	if spawn_coords == Vector2.ZERO:
+	if spawn_coords == null:
 		Debug.warn("No spawn coords found for area", current_area)
 
 	player = player_scene.instantiate()

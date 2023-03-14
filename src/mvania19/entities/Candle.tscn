@@ -31,7 +31,7 @@ color = Color(0.11248, 0.245715, 0.115688, 1)
 sprite_frames = ExtResource("1_ywigl")
 animation = &"off"
 autoplay = "flicker"
-frame_progress = 0.146211
+frame_progress = 0.202153
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
@@ -44,3 +44,4 @@ texture_scale = 0.800037
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("6_ttkix")]
 active = false
+dev_only = false

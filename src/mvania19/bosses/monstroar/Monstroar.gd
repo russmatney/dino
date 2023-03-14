@@ -120,6 +120,7 @@ func take_hit(opts={}):
 	DJSounds.play_sound(DJSounds.playerhurt)
 
 	health -= damage
+	health = clamp(health, 0, initial_health)
 	Hotel.check_in(self)
 
 	if health <= 0:

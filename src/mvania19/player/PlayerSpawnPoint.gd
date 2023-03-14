@@ -1,6 +1,7 @@
 extends Marker2D
 
 @export var active = true
+@export var dev_only = true
 
 var last_sat_at = 0
 

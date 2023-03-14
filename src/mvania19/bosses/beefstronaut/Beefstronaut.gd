@@ -105,6 +105,7 @@ func take_hit(opts={}):
 	var direction = opts.get("direction", Vector2.UP)
 
 	health -= damage
+	health = clamp(health, 0, initial_health)
 	Hotel.check_in(self)
 
 	DJSounds.play_sound(DJSounds.playerhurt)

@@ -21,6 +21,7 @@ func _ready():
 # TODO extend to add and place more hearts, or layer a new color checked top
 ## Converts a passed int into a number of hearts to display.
 func set_health(health):
+	health = clamp(health, 0, health)
 	if health == null:
 		Debug.warn("[HOOD] WARN: set_health with null!")
 		return

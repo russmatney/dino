@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dggsvp0ettrqd"]
+[gd_scene load_steps=21 format=3 uid="uid://dggsvp0ettrqd"]
 
 [ext_resource type="Script" path="res://src/mvania19/MvaniaArea.gd" id="1_2s6nm"]
 [ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="2_0ral6"]
@@ -15,9 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://btgfyldjmtu8t" path="res://src/mvania19/entities/Door.tscn" id="9_vx5rn"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/mvania19/bosses/WarpSpot.tscn" id="9_yyqc6"]
 [ext_resource type="PackedScene" uid="uid://duohpnsdc120b" path="res://src/dungeonCrawler/items/Coin.tscn" id="10_x76oo"]
-[ext_resource type="Script" path="res://src/mvania19/maps/hatbot/CoinDoorQuest.gd" id="11_x2s08"]
 [ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/mvania19/entities/Candle.tscn" id="12_kdhm3"]
+[ext_resource type="PackedScene" uid="uid://w183wigcxpuj" path="res://src/mvania19/maps/hatbot/CoinDoorQuest.tscn" id="13_tlgb8"]
 [ext_resource type="PackedScene" uid="uid://c5w5v3oyfkg8v" path="res://src/mvania19/maps/hatbot/BossDefeatQuest.tscn" id="16_ypdi0"]
+[ext_resource type="PackedScene" uid="uid://da47d3vds1gk5" path="res://src/mvania19/player/PlayerSpawnPoint.tscn" id="18_tov06"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scfj8"]
 shader = ExtResource("2_u1qrf")
@@ -139,8 +140,7 @@ position = Vector2(107, 12)
 [node name="Coin5" parent="DoubleJumpCoinRoom" instance=ExtResource("10_x76oo")]
 position = Vector2(84, 12)
 
-[node name="CoinDoorQuest" type="Node" parent="DoubleJumpCoinRoom"]
-script = ExtResource("11_x2s08")
+[node name="CoinDoorQuest" parent="DoubleJumpCoinRoom" instance=ExtResource("13_tlgb8")]
 
 [node name="VolcanoClimb" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_0ral6")
@@ -207,6 +207,8 @@ position = Vector2(-144, -24)
 position = Vector2(144, -32)
 
 [node name="BossDefeatQuest" parent="VolcanoBoss" instance=ExtResource("16_ypdi0")]
+
+[node name="PlayerSpawnPoint" parent="VolcanoBoss" instance=ExtResource("18_tov06")]
 
 [node name="PreBossCandle" type="Node2D" parent="." groups=["mvania_rooms"]]
 script = ExtResource("2_0ral6")
