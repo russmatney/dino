@@ -29,6 +29,7 @@ offset_bottom = 64.0
 color = Color(0.11248, 0.245715, 0.115688, 1)
 
 [node name="FlameParticles" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(0, -5)
 emitting = false
 process_material = ExtResource("3_7okj4")
@@ -37,7 +38,7 @@ process_material = ExtResource("3_7okj4")
 sprite_frames = ExtResource("1_ywigl")
 animation = &"off"
 autoplay = "flicker"
-frame_progress = 0.619818
+frame_progress = 0.386128
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
