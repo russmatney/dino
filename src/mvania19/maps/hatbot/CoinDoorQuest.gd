@@ -39,11 +39,20 @@ func _on_collected(coin):
 # _process
 
 func _process(_delta):
+	# open if there are no coins
+	if door.is_closed() and len(remaining_coins()) <= 0:
+		door.open()
+
+	# open if complete
+	if complete and door.is_closed():
+		door.open()
+
 	if not complete:
 		if len(remaining_coins()) <= 0 and seen_coins:
 			complete = true
 			Hood.notif("All coins found!")
 			Debug.pr("All coins found!")
+			door.open()
 			var on_close = Hood.jumbo_notif({header="Door opening!", body="All coins found."})
 			if on_close:
 				if not Hood.is_connected("jumbo_closed", _on_close_respawn):
@@ -51,7 +60,6 @@ func _process(_delta):
 
 func _on_close_respawn(on_close):
 	on_close.disconnect(_on_close_respawn)
-	door.open()
 
 
 #########################################################

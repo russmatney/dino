@@ -102,6 +102,12 @@ func _on_room_entered(body: Node2D):
 		MvaniaGame.update_rooms()
 		body.stamp({"scale": 2.0, "ttl": 1.0})
 
+		for ch in get_children():
+			if ch.has_method("on_room_entered"):
+				# doors toggling focus properly
+				ch.on_room_entered()
+
+
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
 		Hotel.check_in(self, hotel_data(MvaniaGame.player))

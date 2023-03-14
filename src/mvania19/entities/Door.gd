@@ -30,9 +30,9 @@ var back_actions = [
 			update_state()
 
 func update_state():
-	if state == "open":
+	if is_open():
 		open()
-	elif state == "closed":
+	elif is_closed():
 		close()
 
 ##################################################################
@@ -65,6 +65,13 @@ func _on_animation_finished():
 		cam_pof.deactivate()
 
 ##################################################################
+# on_room_entered
+
+func on_room_entered():
+	# replay anims to get anim-finished side effects (cam-pof deactivate)
+	update_state()
+
+##################################################################
 # open/close
 
 func open():
@@ -81,10 +88,19 @@ func close():
 		cam_pof.activate()
 
 ##################################################################
+# is
+
+func is_open():
+	return state == "open"
+
+func is_closed():
+	return state == "closed"
+
+##################################################################
 # can
 
 func can_open():
-	return state == "closed"
+	return is_closed()
 
 func can_close():
-	return state == "open"
+	return is_open()

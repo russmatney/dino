@@ -30,7 +30,7 @@ shape = SubResource("RectangleShape2D_y1rxf")
 sprite_frames = ExtResource("1_5m0uh")
 animation = &"closed"
 autoplay = "closed"
-frame_progress = 0.778657
+frame_progress = 0.153251
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
