@@ -58,6 +58,7 @@ var key_map = {
 	"Backspace": "B",
 	"Enter": "E",
 	"Shift": "S",
+	"shift": "S",
 	"Print Screen": "P",
 	"End": "N",
 	"Delete": "D",
