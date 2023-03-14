@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://djy4vlxa557nt"
+path="res://.godot/imported/bosslaugh2.sfxr-f6f55a19f2446eb115032f20160d9f83.sample"
+
+[deps]
+
+source_file="res://assets/sounds/bosslaugh2.sfxr"
+dest_files=["res://.godot/imported/bosslaugh2.sfxr-f6f55a19f2446eb115032f20160d9f83.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
