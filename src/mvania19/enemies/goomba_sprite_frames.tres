@@ -1,7 +1,11 @@
-[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://dluh18k2o67ff"]
+[gd_resource type="SpriteFrames" load_steps=18 format=3 uid="uid://dluh18k2o67ff"]
 
 [ext_resource type="Texture2D" uid="uid://bn21mhqpf8pu4" path="res://assets/icon.png" id="1_mxh14"]
 [ext_resource type="Texture2D" uid="uid://dcb8ffwd15pgn" path="res://assets/sprites/gloomba_sheet.png" id="2_aq6ju"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8o18"]
+atlas = ExtResource("2_aq6ju")
+region = Rect2(448, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("2_aq6ju")
@@ -61,6 +65,14 @@ region = Rect2(320, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8o18")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_mxh14")

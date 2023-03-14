@@ -22,7 +22,7 @@ shape = SubResource("RectangleShape2D_qexhu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_s7guy")
-animation = &"fly"
+animation = &"dead"
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0

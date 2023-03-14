@@ -8,7 +8,7 @@ signal died(goomba)
 signal knocked_back(goomba)
 
 
-var death_animation = "fly"
+var death_animation = "dead"
 var dying_animation = "dying"
 var run_animation = "run"
 
