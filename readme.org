@@ -279,6 +279,8 @@ zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
 https://sulosounds.itch.io/100-songs
 
 Songs in ~assets/music/sulosounds/*~
+** Excellent fonts from VEXED
+https://v3x3d.itch.io/
 * Assets
 Currently, a few assets are symlinked from my game-assets collection:
 
