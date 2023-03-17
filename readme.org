@@ -271,6 +271,7 @@ Builds using godot's HTML5 template, in the ~./dist~ directory.
 Deploy a project to an s3 bucket.
 
 Depends on a working and logged-in ~aws~ cli tool.
+** ~bb butler-push <game-name>~: Push project to matching itch.io game
 ** ~bb zip~: Zip project
 zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
 
