@@ -1,17 +1,12 @@
 #+title: dino
 
-Godot 4 port in progress!
+Godot 4 port mostly complete! Not all games working again yet, but the latest
+ones are fine.
 
-I spent the last few days porting everything from Godot 3.5 to Godot 4.0 (rc1).
-I've gotten through most of the crashes and script errors, but many things are
-still broken, and now need to be recreated, such as sprite frames (animations)
-and tilemaps.
+--
 
-Be warned if trying to work with this repo! There is a 3.5 branch at the
-'working' state before diving into this port + refactor + cleanup.
-
-I hope to come out of the port with improved versions of all the games and
-addons :D
+NOTE: the recent hatbot/mvania game will not work out of the box b/c I'm not yet including
+some game assets (fonts) in the repo.
 
 --
 
@@ -25,10 +20,12 @@ tools across games. This repo is a sandbox for experimenting with new game and
 addon ideas.
 
 * Games
-** Mvania 19
+** Mvania 19: HatBot
 A work-in-progress for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
 
 Play the latest version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
+
+Or the webversion: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19-web]]
 
 See ~src/mvania19/*~ for the code.
 ** Snake
