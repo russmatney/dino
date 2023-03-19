@@ -1,10 +1,12 @@
 {:paths ["src"]
  :tasks
  {:requires ([bb-godot.tasks :as tasks]
+             [bb-godot.logger :refer [log]]
              [clojure.string :as string])
 
   :init
   (do
+    (log "bb.edn running task")
     (def gut "godot --no-window --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd ")
     (def gut-with-window "godot --debug-collisions --path $PWD -d -s addons/gut/gut_cmdln.gd ")
 
@@ -65,6 +67,8 @@
                                           "html5"])
                     itch-project (str "russmatney/" arg ":" type)
                     command      (str "butler push --if-changed " dir " " itch-project)]
+
+                (log command)
 
                 ;; (println command)
                 ;; http-server installable via bbin
