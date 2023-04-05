@@ -52,8 +52,6 @@ func _on_area_exited(area):
 		update_action_areas()
 
 func update_action_areas():
-	# Debug.debug_label("action areas: ", action_areas)
-
 	update_actions()
 
 ####################################################################
@@ -65,8 +63,6 @@ func update_actions():
 	actions = []
 	for area in action_areas:
 		actions.append_array(area.actions)
-
-	# Debug.debug_label("actions: ", actions)
 
 	update_displayed_action()
 
@@ -110,16 +106,19 @@ func dec_selected_ax_idx():
 
 func execute_current_action():
 	var c_ax = current_action()
+	var executed = false
 	if c_ax:
-		c_ax.execute()
+		c_ax.execute(actor)
+		executed = true
 	update_displayed_action()
+	return executed
 
 func update_displayed_action():
-	if actor and actor.has_method("update_displayed_action"):
-		actor.update_displayed_action(current_action())
-	elif action_hint:
+	if action_hint:
 		var c_ax = current_action()
 		if c_ax:
 			action_hint.display(c_ax.input_action, c_ax.get_label())
 		else:
 			action_hint.hide()
+	else:
+		Debug.warn("Cannot display available action, no action_hint")

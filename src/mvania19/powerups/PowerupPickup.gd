@@ -50,14 +50,14 @@ var actions = [
 		source_can_execute=func(): return picked_up}),
 	]
 
-func pickup():
+func pickup(_actor):
 	DJSounds.play_sound(DJSounds.collectpowerup)
 	MvaniaGame.player.add_powerup(powerup)
 	picked_up = true
 	Hotel.check_in(self)
 	show_jumbotron()
 
-func read_note():
+func read_note(_actor):
 	DJSounds.play_sound(DJSounds.showjumbotron)
 	show_jumbotron()
 

@@ -74,14 +74,14 @@ func on_room_entered():
 ##################################################################
 # open/close
 
-func open():
+func open(_actor=null):
 	state = "open"
 	if anim:
 		anim.play("opening")
 		cam_pof.activate()
 
 
-func close():
+func close(_actor=null):
 	state = "closed"
 	if anim:
 		anim.play("closing")

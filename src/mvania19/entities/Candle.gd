@@ -67,7 +67,7 @@ func update_light():
 func is_lit():
 	return lit
 
-func light_up():
+func light_up(_actor=null):
 	lit = true
 	anim.play("flicker")
 	DJSounds.play_sound(DJSounds.candlelit)
@@ -80,7 +80,7 @@ func light_up():
 	spawn_point.sat_at()
 	Debug.pr("light up finished")
 
-func put_out():
+func put_out(_actor=null):
 	lit = false
 	anim.play("off")
 	DJSounds.play_sound(DJSounds.candleout)
@@ -89,7 +89,7 @@ func put_out():
 	Hotel.check_in(self)
 
 var sitting
-func sit():
+func sit(_actor=null):
 	sitting = true
 	sat_count += 1
 	Hotel.check_in(self)

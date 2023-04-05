@@ -63,7 +63,7 @@ func _on_anim_finished():
 # TODO close door when player walks away
 
 var traveling
-func travel():
+func travel(_actor):
 	if traveling:
 		return
 
