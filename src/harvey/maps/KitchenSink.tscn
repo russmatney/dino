@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch6jdbh2vfwon"]
 
-[ext_resource type="PackedScene" path="res://src/harvey/bots/HarveyBot.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/SeedBox.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cmw7jmnok8682" path="res://src/harvey/bots/HarveyBot.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ct71m7st0mcr4" path="res://src/harvey/items/SeedBox.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/harvey/HUD/HUD.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/harvey/player/HarveyPlayer.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/Tool.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/DeliveryBox.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://src/harvey/plots/Plot.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://addons/camera/Cam2D.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://c4wk4oavufugc" path="res://src/harvey/player/HarveyPlayer.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://wq32yioprbpx" path="res://src/harvey/items/Tool.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dr8e3mcxgjxah" path="res://src/harvey/items/DeliveryBox.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://fo52ujd4jco3" path="res://src/harvey/plots/Plot.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://bflpu7dhqovtc" path="res://addons/camera/Cam2D.tscn" id="8"]
 
 [node name="KitchenSink" type="Node2D"]
 

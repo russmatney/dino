@@ -9,7 +9,7 @@ var produce_type
 
 
 func _ready():
-	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.transitioned.connect(on_transit)
 	machine.start()
 
 

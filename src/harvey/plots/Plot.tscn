@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://fo52ujd4jco3"]
+[gd_scene load_steps=19 format=3 uid="uid://fo52ujd4jco3"]
 
 [ext_resource type="Script" path="res://src/harvey/plots/Plot.gd" id="2"]
 [ext_resource type="Script" path="res://src/harvey/plots/SeedPlanted.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://dmgywspm7rtsd" path="res://assets/harvey/plot_sheet.png" id="3_rrxc6"]
 [ext_resource type="Script" path="res://src/harvey/plots/Watered.gd" id="4"]
 [ext_resource type="Script" path="res://src/harvey/plots/ReadyForHarvest.gd" id="5"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="6"]
@@ -20,8 +21,88 @@ shader_parameter/deformation = Vector2(0, 0)
 shader_parameter/sideWaysDeformationFactor = 5.0
 shader_parameter/knockbackFactor = 0.4
 
-[sub_resource type="SpriteFrames" id="6"]
-animations = []
+[sub_resource type="AtlasTexture" id="AtlasTexture_eefsy"]
+atlas = ExtResource("3_rrxc6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clcwm"]
+atlas = ExtResource("3_rrxc6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loxd1"]
+atlas = ExtResource("3_rrxc6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltnei"]
+atlas = ExtResource("3_rrxc6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reanu"]
+atlas = ExtResource("3_rrxc6")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0sd6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eefsy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clcwm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loxd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltnei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reanu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loxd1")
+}],
+"loop": false,
+"name": &"needs-water",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reanu")
+}],
+"loop": false,
+"name": &"ready-for-harvest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eefsy")
+}],
+"loop": false,
+"name": &"ready-for-seed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clcwm")
+}],
+"loop": false,
+"name": &"seed-planted",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltnei")
+}],
+"loop": false,
+"name": &"watered",
+"speed": 5.0
+}]
 
 [node name="Plot" type="Node2D" groups=["pois"]]
 script = ExtResource("2")
@@ -33,8 +114,8 @@ shape = SubResource("7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("8")
-sprite_frames = SubResource("6")
-animation = &"ready-for-seed"
+sprite_frames = SubResource("SpriteFrames_0sd6n")
+animation = &"watered"
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("6")

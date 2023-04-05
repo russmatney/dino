@@ -6,8 +6,8 @@ extends HarveyPlayer
 
 
 func _ready():
-	# TODO persistent notification/HUD api
-	print("HarveyBot online: ", self.name)
+	# TODO should be a Hood.notify
+	Debug.prn("HarveyBot online: ", self.name)
 
 	# overwrite parent speed
 	speed = 70

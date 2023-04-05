@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ct71m7st0mcr4"]
+[gd_scene load_steps=12 format=3 uid="uid://ct71m7st0mcr4"]
 
 [ext_resource type="PackedScene" path="res://src/harvey/ProduceIcon.tscn" id="2"]
 [ext_resource type="Script" path="res://src/harvey/items/SeedBox.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://dxy65wjusiq7j" path="res://assets/harvey/seed-box_sheet.png" id="3_ce6ye"]
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="5"]
 
@@ -15,8 +16,20 @@ shader_parameter/deformation = Vector2(0, 0)
 shader_parameter/sideWaysDeformationFactor = 5.0
 shader_parameter/knockbackFactor = 0.4
 
-[sub_resource type="SpriteFrames" id="3"]
-animations = []
+[sub_resource type="AtlasTexture" id="AtlasTexture_gosxv"]
+atlas = ExtResource("3_ce6ye")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_udds0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gosxv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="ShaderMaterial" id="7"]
 resource_local_to_scene = true
@@ -39,8 +52,7 @@ shape = SubResource("1")
 material = SubResource("6")
 position = Vector2(0, -40)
 scale = Vector2(2, 2)
-sprite_frames = SubResource("3")
-animation = &""
+sprite_frames = SubResource("SpriteFrames_udds0")
 
 [node name="ProduceIcon" parent="." instance=ExtResource("2")]
 material = SubResource("7")
