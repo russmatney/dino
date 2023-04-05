@@ -10,6 +10,7 @@ class_name Player
 var initial_pos
 
 func _ready():
+	Cam.ensure_camera(2, {}, self)
 	action_detector.setup(self, null, action_hint)
 
 	initial_pos = get_global_position()

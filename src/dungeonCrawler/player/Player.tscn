@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bov8lal5vy6yc"]
+[gd_scene load_steps=12 format=3 uid="uid://bov8lal5vy6yc"]
 
 [ext_resource type="SpriteFrames" uid="uid://cftno75kwes1u" path="res://resources/sprites/redhat.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/player/Player.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="4_6y2b6"]
 [ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="4_yxejb"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_cntjv"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 12)
@@ -103,6 +104,12 @@ scale = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 shape = SubResource("RectangleShape2D_mx3k7")
+
+[node name="CamPOF" parent="." instance=ExtResource("5_cntjv")]
+position = Vector2(128, -128)
+
+[node name="CamPOF2" parent="." instance=ExtResource("5_cntjv")]
+position = Vector2(-128, 128)
 
 [connection signal="area_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_entered"]
 [connection signal="area_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_exited"]
