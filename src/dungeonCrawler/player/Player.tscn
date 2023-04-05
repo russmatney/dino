@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bov8lal5vy6yc"]
+[gd_scene load_steps=11 format=3 uid="uid://bov8lal5vy6yc"]
 
 [ext_resource type="SpriteFrames" uid="uid://cftno75kwes1u" path="res://resources/sprites/redhat.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/player/Player.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="4_6y2b6"]
+[ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="4_yxejb"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(8, 12)
@@ -19,6 +21,9 @@ size = Vector2(18, 27)
 content_margin_left = 4.0
 content_margin_right = 4.0
 bg_color = Color(0.894118, 0.427451, 0.54902, 0.219608)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mx3k7"]
+size = Vector2(100, 100)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -89,6 +94,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ux155")
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
+
+[node name="ActionHint" parent="." instance=ExtResource("4_6y2b6")]
+position = Vector2(0, -31)
+scale = Vector2(0.8, 0.8)
+
+[node name="ActionDetector" parent="." instance=ExtResource("4_yxejb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource("RectangleShape2D_mx3k7")
 
 [connection signal="area_entered" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_entered"]
 [connection signal="area_exited" from="LockOnDetectArea2D" to="." method="_on_LockOnDetectArea2D_area_exited"]

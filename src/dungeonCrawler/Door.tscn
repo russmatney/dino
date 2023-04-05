@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://gosjcf3y2i74"]
+[gd_scene load_steps=6 format=3 uid="uid://gosjcf3y2i74"]
 
 [ext_resource type="SpriteFrames" uid="uid://dtrjbne1a0g58" path="res://resources/sprites/DungeonDoor.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/Door.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_wk04p"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)
 
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(48, 48)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h76d7"]
+size = Vector2(52, 52)
 
 [node name="Door" type="StaticBody2D" groups=["door"]]
 collision_mask = 30
@@ -20,12 +21,7 @@ animation = &"closed"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
 
-[node name="ActionArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="ActionArea" parent="." instance=ExtResource("3_wk04p")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
-shape = SubResource("2")
-
-[connection signal="body_entered" from="ActionArea" to="." method="_on_ActionArea_body_entered"]
-[connection signal="body_exited" from="ActionArea" to="." method="_on_ActionArea_body_exited"]
+shape = SubResource("RectangleShape2D_h76d7")

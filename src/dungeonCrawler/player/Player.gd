@@ -1,16 +1,17 @@
 extends CharacterBody2D
 class_name Player
 
-var move_accel := 800
-var max_speed := 300
+@onready var action_hint = $ActionHint
+@onready var action_detector = $ActionDetector
 
 #######################################################################
 # ready
 
 var initial_pos
 
-
 func _ready():
+	action_detector.setup(self, null, action_hint)
+
 	initial_pos = get_global_position()
 	anim.flip_h = facing == facing_dir.RIGHT
 
@@ -45,6 +46,8 @@ func update_facing(move_dir):
 #######################################################################
 # process
 
+var move_accel := 800
+var max_speed := 300
 
 func _process(delta):
 	var move_dir = Trolley.move_dir()
@@ -75,11 +78,9 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
-		if actions.size() > 0:
-			# TODO selecting when there are multiple actions
-			var ax = actions[0]
-			execute_action(ax)
-		elif weapon:
+		var executed = action_detector.execute_current_action()
+
+		if not executed and weapon:
 			# one button for everything?
 			use_weapon(weapon)
 
@@ -261,45 +262,6 @@ func use_key():
 
 	if key_item:
 		remove_item(key_item)
-
-
-#######################################################################
-# actions
-
-var actions = []
-
-var action_label_scene = preload("res://src/dungeonCrawler/player/ActionLabel.tscn")
-@onready var actions_list = $ActionsList
-
-
-func add_action(ax):
-	var label_text = ax.get("label", "fallback label")
-	var new_label = action_label_scene.instantiate()
-	new_label.text = "[center]" + label_text
-	actions_list.add_child(new_label)
-	actions.append(ax)
-
-
-func remove_action(ax):
-	var to_remove
-	for action_label in actions_list.get_children():
-		if action_label.get_parsed_text() == ax.get("label", "fallback label"):
-			to_remove = action_label
-			break
-
-	if to_remove:
-		actions_list.remove_child(to_remove)
-
-	actions.erase(ax)
-
-
-func execute_action(ax):
-	var fn = ax["func"]
-	# TODO big assumption here, passing self as first arg
-	# really not sure about this pattern vs pubsub
-	fn.call(self)
-
-	remove_action(ax)
 
 
 #######################################################################
