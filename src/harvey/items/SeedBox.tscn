@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct71m7st0mcr4"]
+[gd_scene load_steps=14 format=3 uid="uid://ct71m7st0mcr4"]
 
 [ext_resource type="PackedScene" path="res://src/harvey/ProduceIcon.tscn" id="2"]
 [ext_resource type="Script" path="res://src/harvey/items/SeedBox.gd" id="3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="6_2okg2"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="7_fnnbu"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(60, 47)
@@ -76,3 +77,6 @@ scroll_active = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 position = Vector2(0, -4)
 shape = SubResource("4")
+
+[node name="CamPOI" parent="." instance=ExtResource("7_fnnbu")]
+position = Vector2(0, -70)

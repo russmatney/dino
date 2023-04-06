@@ -14,6 +14,8 @@ func _ready():
 
 	action_detector.setup(self)
 
+	Cam.ensure_camera(2, {}, self)
+
 
 ############################################################
 # process

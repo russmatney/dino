@@ -1,60 +1,57 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://c882tim62062c"]
 
-[ext_resource path="res://src/harvey/items/SeedBox.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/harvey/player/HarveyPlayer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/camera/Cam2D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/harvey/plots/Plot.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/harvey/items/Tool.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/harvey/items/DeliveryBox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/harvey/HUD/HUD.tscn" type="PackedScene" id=7]
+[ext_resource type="PackedScene" uid="uid://ct71m7st0mcr4" path="res://src/harvey/items/SeedBox.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://c4wk4oavufugc" path="res://src/harvey/player/HarveyPlayer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://fo52ujd4jco3" path="res://src/harvey/plots/Plot.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://wq32yioprbpx" path="res://src/harvey/items/Tool.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dr8e3mcxgjxah" path="res://src/harvey/items/DeliveryBox.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://src/harvey/HUD/HUD.tscn" id="7"]
 
 [node name="MultiPlotGym" type="Node2D"]
 
-[node name="HUD" parent="." instance=ExtResource( 7 )]
+[node name="HUD" parent="." instance=ExtResource("7")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -144.0
 offset_top = -168.0
 offset_right = 280.0
 offset_bottom = 160.0
-color = Color( 0.321569, 0.309804, 0.309804, 1 )
+color = Color(0.321569, 0.309804, 0.309804, 1)
 
-[node name="DinoCamera2D" parent="." instance=ExtResource( 3 )]
+[node name="SeedBox" parent="." instance=ExtResource("1")]
+position = Vector2(160, -104)
 
-[node name="SeedBox" parent="." instance=ExtResource( 1 )]
-position = Vector2( 160, -104 )
-
-[node name="SeedBox2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 240, -96 )
+[node name="SeedBox2" parent="." instance=ExtResource("1")]
+position = Vector2(240, -96)
 produce_type = "tomato"
 
-[node name="SeedBox3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 88, -120 )
+[node name="SeedBox3" parent="." instance=ExtResource("1")]
+position = Vector2(88, -120)
 produce_type = "onion"
 
-[node name="Tool" parent="." instance=ExtResource( 5 )]
-position = Vector2( -40, -80 )
+[node name="Tool" parent="." instance=ExtResource("5")]
+position = Vector2(-40, -80)
 
-[node name="Plot" parent="." instance=ExtResource( 4 )]
-position = Vector2( -48, 48 )
+[node name="Plot" parent="." instance=ExtResource("4")]
+position = Vector2(-48, 48)
 
-[node name="Plot2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 16, 48 )
+[node name="Plot2" parent="." instance=ExtResource("4")]
+position = Vector2(16, 48)
 
-[node name="Plot3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 80, 48 )
+[node name="Plot3" parent="." instance=ExtResource("4")]
+position = Vector2(80, 48)
 
-[node name="Plot4" parent="." instance=ExtResource( 4 )]
-position = Vector2( -48, 112 )
+[node name="Plot4" parent="." instance=ExtResource("4")]
+position = Vector2(-48, 112)
 
-[node name="Plot5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 16, 112 )
+[node name="Plot5" parent="." instance=ExtResource("4")]
+position = Vector2(16, 112)
 
-[node name="Plot6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 80, 112 )
+[node name="Plot6" parent="." instance=ExtResource("4")]
+position = Vector2(80, 112)
 
-[node name="DeliveryBox" parent="." instance=ExtResource( 6 )]
-position = Vector2( 216, 48 )
+[node name="DeliveryBox" parent="." instance=ExtResource("6")]
+position = Vector2(216, 48)
 rotation = 1.57079
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource("2")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://fo52ujd4jco3"]
+[gd_scene load_steps=21 format=3 uid="uid://fo52ujd4jco3"]
 
 [ext_resource type="Script" path="res://src/harvey/plots/Plot.gd" id="2"]
 [ext_resource type="Script" path="res://src/harvey/plots/SeedPlanted.gd" id="3"]
@@ -11,6 +11,7 @@
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="10"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="11"]
 [ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="11_5d4ib"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="12_bvg40"]
 
 [sub_resource type="ShaderMaterial" id="8"]
 resource_local_to_scene = true
@@ -162,3 +163,5 @@ scroll_active = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 visible = false
 shape = SubResource("7")
+
+[node name="CamPOI" parent="." instance=ExtResource("12_bvg40")]
