@@ -97,10 +97,8 @@ var visited = false
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		visited = true
-		# TODO restore sound on room visit
 		Hotel.check_in(self, hotel_data(body))
 		MvaniaGame.update_rooms()
-		body.stamp({"scale": 2.0, "ttl": 1.0})
 
 		for ch in get_children():
 			if ch.has_method("on_room_entered"):
@@ -159,7 +157,7 @@ func _ready():
 	ensure_room_box()
 	ensure_cam_points()
 
-	Game.call_deferred("maybe_spawn_player")
+	Game.maybe_spawn_player.call_deferred()
 
 
 ###########################################
@@ -172,14 +170,14 @@ func pause():
 	if not Engine.is_editor_hint():
 		deactivate_cam_points()
 		_on_paused()
-		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+		set_process_mode.call_deferred(PROCESS_MODE_DISABLED)
 
 func unpause():
 	paused = false
 	if not Engine.is_editor_hint():
-		call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
+		set_process_mode.call_deferred(PROCESS_MODE_INHERIT)
 		_on_unpaused()
-		call_deferred("activate_cam_points")
+		activate_cam_points.call_deferred()
 
 func _on_paused():
 	if visited:

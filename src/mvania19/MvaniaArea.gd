@@ -37,6 +37,10 @@ func check_out(_data):
 ###########################################################
 # spawn coords
 
+var spawn_node_path
+func set_spawn_node(node_path: NodePath):
+	spawn_node_path = node_path
+
 func player_spawn_coords() -> Vector2:
 	ensure_rooms()
 
@@ -67,10 +71,6 @@ func player_spawn_coords() -> Vector2:
 	Debug.warn("no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
 	return Vector2.ZERO
 
-var spawn_node_path
-func set_spawn_node(node_path: NodePath):
-	spawn_node_path = node_path
-
 ###########################################################
 # enter tree
 
@@ -86,12 +86,13 @@ func _ready():
 
 	Hotel.book(self.scene_file_path)
 	Hotel.register(self)
+
 	if not Engine.is_editor_hint():
 		if MvaniaGame.current_area != self:
 			Debug.warn("mvania area had to self-set current area")
 			MvaniaGame.current_area = self
 
-	Game.call_deferred("maybe_spawn_player")
+	Game.maybe_spawn_player.call_deferred()
 
 ###########################################################
 # draw

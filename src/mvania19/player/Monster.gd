@@ -25,7 +25,7 @@ var hud = preload("res://src/mvania19/hud/HUD.tscn")
 func _ready():
 	og_position = position
 	Cam.ensure_camera(2, {"zoom_level": 5.0}, self)
-	Hood.call_deferred("ensure_hud", hud, self)
+	Hood.ensure_hud.call_deferred(hud, self)
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
