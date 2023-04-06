@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends DinoGame
 
 ###########################################################
 # hatbot data
@@ -61,7 +61,10 @@ func register():
 ###########################################################
 # player
 
-const player_scene = preload("res://src/mvania19/player/Monster.tscn")
+var player_scene = preload("res://src/mvania19/player/Monster.tscn")
+
+func get_player_scene():
+	return player_scene
 
 func get_spawn_coords():
 	return MvaniaGame.get_spawn_coords()

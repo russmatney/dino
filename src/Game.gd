@@ -96,7 +96,7 @@ var managed_game: bool = false
 
 func register(game):
 	# make sure we get a player scene
-	register_player_scene(game.player_scene)
+	register_player_scene(game.get_player_scene())
 	game.register()
 
 func set_current_game(game):
@@ -104,7 +104,7 @@ func set_current_game(game):
 
 func restart_game(game=null):
 	if game:
-		current_game = game
+		set_current_game(game)
 
 	if not current_game:
 		Debug.err("No current_game set")
