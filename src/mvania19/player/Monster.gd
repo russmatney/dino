@@ -291,13 +291,13 @@ var has_sword = false
 var has_double_jump = false
 var has_climb = false
 
-func update_with_powerup(powerup: MvaniaGame.Powerup):
+func update_with_powerup(powerup: HatBot.Powerup):
 	match (powerup):
-		MvaniaGame.Powerup.Sword: add_sword()
-		MvaniaGame.Powerup.DoubleJump: add_double_jump()
-		MvaniaGame.Powerup.Climb: add_climb()
+		HatBot.Powerup.Sword: add_sword()
+		HatBot.Powerup.DoubleJump: add_double_jump()
+		HatBot.Powerup.Climb: add_climb()
 
-func add_powerup(powerup: MvaniaGame.Powerup):
+func add_powerup(powerup: HatBot.Powerup):
 	powerups.append(powerup)
 	update_with_powerup(powerup)
 	Hotel.check_in(self)

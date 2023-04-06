@@ -89,7 +89,7 @@ func put_out(_actor=null):
 	Hotel.check_in(self)
 
 var sitting
-func sit(_actor=null):
+func sit(player=null):
 	sitting = true
 	sat_count += 1
 	Hotel.check_in(self)
@@ -97,16 +97,15 @@ func sit(_actor=null):
 	if room:
 		room.deactivate_cam_points()
 
-	# TODO some _sit_ animation + glow when healing
 	# using this to lock player controls for a bit
-	MvaniaGame.set_forced_movement_target(global_position)
+	player.move_to_target(global_position)
 	var heal_t = create_tween()
 	heal_t.set_loops(3)
-	heal_t.tween_callback(MvaniaGame.player.heal.bind({health=1})).set_delay(1)
+	heal_t.tween_callback(player.heal.bind({health=1})).set_delay(1)
 	await get_tree().create_timer(3.4).timeout
 	put_out()
-	MvaniaGame.clear_forced_movement_target()
-	MvaniaGame.player.machine.transit("Idle")
+	player.clear_move_target()
+	player.machine.transit("Idle")
 
 	sitting = false
 

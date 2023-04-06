@@ -51,12 +51,12 @@ func set_health(health):
 @onready var climbing_gloves = $%ClimbingGlovesPowerup
 
 func set_powerups(powerups):
-	for p in MvaniaGame.all_powerups:
+	for p in HatBot.all_powerups:
 		var vis = p in powerups
 		match(p):
-			MvaniaGame.Powerup.Sword: sword.set_visible(vis)
-			MvaniaGame.Powerup.DoubleJump: double_jump.set_visible(vis)
-			MvaniaGame.Powerup.Climb: climbing_gloves.set_visible(vis)
+			HatBot.Powerup.Sword: sword.set_visible(vis)
+			HatBot.Powerup.DoubleJump: double_jump.set_visible(vis)
+			HatBot.Powerup.Climb: climbing_gloves.set_visible(vis)
 			_: pass
 
 ##########################################

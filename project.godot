@@ -50,6 +50,7 @@ SnakeSounds="*res://src/snake/SnakeSounds.gd"
 SnakeGame="*res://src/snake/SnakeGame.gd"
 MvaniaSounds="*res://src/mvania19/MvaniaSounds.gd"
 MvaniaGame="*res://src/mvania19/MvaniaGame.gd"
+HatBot="*res://src/mvania19/HatBot.gd"
 
 [display]
 

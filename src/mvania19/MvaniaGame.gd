@@ -1,9 +1,6 @@
 @tool
 extends Node
 
-enum Powerup { Sword, DoubleJump, Climb, Read }
-var all_powerups = [Powerup.Sword, Powerup.DoubleJump, Powerup.Climb]
-
 ###########################################################
 
 const demoland_area_scenes = [
@@ -54,7 +51,6 @@ func _ready():
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
-	Hood.hud_ready.connect(_on_hud_ready)
 	Hood.found_player.connect(_on_player_found)
 	if Hood.player:
 		_on_player_found(Hood.player)
@@ -62,7 +58,6 @@ func _ready():
 ###########################################################
 # start game
 
-var current_area_name
 var current_area: MvaniaArea
 var current_room: MvaniaRoom
 var managed_game: bool = false
@@ -81,16 +76,12 @@ func restart_game():
 
 func load_area(area_scene_path, spawn_node_path=null):
 	var area_scene_inst = load(area_scene_path).instantiate()
-	set_current_area(area_scene_inst)
+	current_area = area_scene_inst
 
 	if spawn_node_path:
 		current_area.set_spawn_node(spawn_node_path)
 
 	Navi.nav_to(current_area)
-
-func set_current_area(area_scene_inst):
-	current_area = area_scene_inst
-	current_area_name = current_area.name
 
 func _on_new_scene_instanced(s):
 	if s == current_area:
@@ -149,9 +140,6 @@ func ensure_current_area():
 			# could use groups instead
 			if c is MvaniaArea:
 				current_area = c
-				if player:
-					# really shouldn't have a player without a current area
-					Debug.warn("found current_area in MvaniaGame after player found")
 
 func _on_player_found(p):
 	Debug.prn("MvaniaGame.player found")
@@ -196,22 +184,6 @@ func update_rooms():
 		# current_room.set_visible(true)
 		current_room.unpause()
 
-func set_forced_movement_target(target_position):
-	player.move_to_target(target_position)
-
-func clear_forced_movement_target():
-	player.clear_move_target()
-
-
-###########################################################
-# HUD
-
-func _on_hud_ready():
-	pass
-	# TODO show current room, area data
-	# TODO show player data
-	# TODO show quest progress
-
 ###########################################################
 # Area travel
 
@@ -219,7 +191,7 @@ func travel_to(dest_area_name, elevator_path):
 	if current_area.name == dest_area_name:
 		Debug.pr("Traveling in same area", dest_area_name, elevator_path)
 		current_area.set_spawn_node(elevator_path)
-		clear_forced_movement_target()
+		player.clear_move_target()
 		player.position = current_area.player_spawn_coords()
 		return
 

@@ -63,14 +63,14 @@ func _on_anim_finished():
 # TODO close door when player walks away
 
 var traveling
-func travel(_actor):
+func travel(player):
 	if traveling:
 		return
 
 	if room:
 		room.deactivate_cam_points()
 
-	MvaniaGame.set_forced_movement_target(global_position)
+	player.move_to_target(global_position)
 	traveling = true
 	z_index = 10
 	travel_dest = [destination_area_name, destination_elevator_path]
