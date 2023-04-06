@@ -15,6 +15,7 @@ height = 4.0
 size = Vector2(640, 512)
 
 [node name="HarveyBot" type="CharacterBody2D" groups=["action_detector", "bot"]]
+collision_layer = 512
 collision_mask = 0
 script = ExtResource("1")
 
