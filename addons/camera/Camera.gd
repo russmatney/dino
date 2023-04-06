@@ -61,17 +61,22 @@ func ensure_camera(cam_mode = null, opts={}, player=null):
 		opts = {}
 		Debug.warn("overwriting/ignoring camera opts")
 
-	Debug.prn("ensuring camera")
+	Debug.prn("ensuring camera for player", player)
 	if cam and is_instance_valid(cam):
-		Debug.prn("found existing cam: ", cam)
+		Debug.prn("found existing cam:", cam)
 
-		if player:
-			Debug.prn("reparenting cam to player: ", cam)
-			cam.reparent(player)
+		# require player group to avoid reparenting cameras on bots
+		if player and player.is_in_group("player"):
+			if not cam.get_parent():
+				Debug.prn("Setting cam parent to player:", cam)
+				cam.set_parent(player)
+			if cam.get_parent() != player:
+				Debug.prn("reparenting cam to player:", cam)
+				cam.reparent(player)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")
-	if cams:
+	if cams and cams.size() > 0:
 		return
 
 	Debug.prn("No node found with 'camera' group, adding one.")
