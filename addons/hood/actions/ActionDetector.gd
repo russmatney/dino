@@ -67,7 +67,7 @@ func update_actions():
 
 	update_displayed_action()
 
-	# maybe reset here
+	# maybe reset selection here? probably should maintain the current if it still exists
 	# selected_ax_idx = 0
 
 
@@ -116,26 +116,36 @@ func nearest_action():
 ####################################################################
 # current, selecting an action
 
-var selected_ax_idx = 0
+var selected_ax_idx
 
+## Returns the current action. Defaults to the nearest 'immediate' action,
+## but if selected_ax_idx is set, it will return the 'immediate' action at that index.
 func current_action():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		if selected_ax_idx != null and selected_ax_idx < len(im_axs):
 			return im_axs[selected_ax_idx]
+		else:
+			return find_nearest(im_axs)
 
+## Supports cycling forward through available actions.
+## TODO cycle according to distance
 func inc_selected_ax_idx():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		selected_ax_idx += 1 % len(im_axs)
 	update_displayed_action()
 
+## Supports cycling backwards through available actions.
+## TODO cycle according to distance
 func dec_selected_ax_idx():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		selected_ax_idx -= 1 % len(im_axs)
 	update_displayed_action()
 
+## Executes the result of `current_action()`.
+## Does nothing if there is no 'immediate' action available.
 func execute_current_action():
 	var c_ax = current_action()
 	if c_ax:
@@ -143,6 +153,9 @@ func execute_current_action():
 		update_displayed_action()
 		return true
 	return false
+
+####################################################################
+# action display
 
 var warned_no_action_hint
 func update_displayed_action():

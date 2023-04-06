@@ -54,3 +54,14 @@ func is_current_for_any_actor(action):
 			if action == actor.action_detector.current_action():
 				return true
 	return false
+
+## Returns any actions in this area's actions list that an actor
+## has as a 'current' (immediate and nearest) action.
+func current_actions():
+	var current_axs = {}
+	for actor in actors:
+		if actor.action_detector:
+			var c_ax = actor.action_detector.current_action()
+			if c_ax in actions:
+				current_axs[c_ax.label] = c_ax
+	return current_axs.values()
