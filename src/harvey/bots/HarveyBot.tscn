@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmw7jmnok8682"]
+[gd_scene load_steps=9 format=3 uid="uid://cmw7jmnok8682"]
 
 [ext_resource type="Script" path="res://src/harvey/bots/HarveyBot.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/harvey/player/PlayerItem.tscn" id="3"]
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="4"]
 [ext_resource type="PackedScene" path="res://src/harvey/player/Machine.tscn" id="5"]
 [ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/harvey/player/harvey_spriteframes.tres" id="6"]
+[ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="6_havi5"]
 
 [sub_resource type="CapsuleShape2D" id="3"]
 radius = 2.0
@@ -60,16 +61,13 @@ scroll_active = false
 
 [node name="Item" parent="." instance=ExtResource("3")]
 
-[node name="ActionDetector" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
-visible = false
-shape = SubResource("2")
-
 [node name="ActionArrow" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(0, -16)
 sprite_frames = ExtResource("4")
 
-[connection signal="area_entered" from="ActionDetector" to="." method="_on_ActionDetector_area_entered"]
-[connection signal="area_exited" from="ActionDetector" to="." method="_on_ActionDetector_area_exited"]
+[node name="ActionDetector" parent="." instance=ExtResource("6_havi5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+visible = false
+shape = SubResource("2")

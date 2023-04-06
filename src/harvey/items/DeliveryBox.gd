@@ -6,61 +6,33 @@ extends StaticBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var action_label = $ActionLabel
+@onready var action_area = $ActionArea
 
+var actions = [
+	Action.mk({label="Deliver", fn=deliver_produce,
+		actor_can_execute=func(player): return player.has_produce(),
+		}),
+	]
 
 func _ready():
-	pass
-
+	action_area.register_actions(actions, self)
+	action_area.action_display_updated.connect(set_action_label)
 
 ##########################################################
 # actions
 
-var actions
-var bodies = []
-
-
-func build_actions(player):
-	actions = [{"obj": self, "method": "deliver_produce", "arg": player}]
-	set_action_label(player)
-	return actions
-
-
-func can_perform_action(player, action):
-	match action["method"]:
-		"deliver_produce":
-			return bodies.has(player) and could_perform_action(player, action)
-
-
-func could_perform_action(player, _action):
-	return player.has_produce()
-
-
-func set_action_label(player):
-	if actions == null or actions.size() == 0:
-		return
-
-	# TODO select action better?
+func set_action_label():
 	var ax = actions[0]
-	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
+	var is_current = action_area.is_current_for_any_actor(ax)
 
-	if not can_perform_action(player, ax):
-		action_label.modulate.a = 0.5
-	else:
+	action_label.text = "[center]" + ax.label.capitalize() + "[/center]"
+
+	if is_current:
 		action_label.modulate.a = 1
+	else:
+		action_label.modulate.a = 0.5
 
 	action_label.set_visible(true)
-
-
-func _on_Detectbox_body_entered(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.append(body)
-		set_action_label(body)
-
-
-func _on_Detectbox_body_exited(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.erase(body)
-		set_action_label(body)
 
 
 ##########################################################

@@ -19,19 +19,12 @@ func _ready():
 
 
 func _process(_delta):
-	eval_current_action()
+	update_action_label()
+	point_arrow()
 
 	# if we can, go ahead and perform an action
-	if c_ax:
-		perform_action()
+	action_detector.execute_current_action()
 
-
-#########################################################
-# move_dir
-
-
-func _unhandled_input(_event):
-	pass
 
 
 #########################################################
@@ -39,10 +32,10 @@ func _unhandled_input(_event):
 
 
 func get_move_dir():
-	var ax = Util._or(p_ax, nearest_ax)
+	var ax = action_detector.nearest_action()
 
-	if ax and "source" in ax:
-		var dir = ax["source"].global_position - self.global_position
+	if ax and ax.source:
+		var dir = ax.source.global_position - self.global_position
 
 		# if we're close, stop moving
 		if dir.length() <= 1:

@@ -5,6 +5,13 @@ extends CharacterBody2D
 
 @onready var tool_icon = $ToolIcon
 @onready var action_label = $ActionLabel
+@onready var action_area = $ActionArea
+
+var actions = [
+	Action.mk({label="Grab Tool", fn=pickup_tool,
+		actor_can_execute=could_perform_action,
+		})
+	]
 
 ##########################################################
 # ready
@@ -13,27 +20,14 @@ extends CharacterBody2D
 func _ready():
 	tool_icon.animation = tool_type
 
+	action_area.register_actions(actions, self)
+	action_area.action_display_updated.connect(set_action_label)
+
 
 ##########################################################
-# detectbox
+# actions
 
-var actions
-var bodies = []
-
-
-func build_actions(player):
-	actions = [{"obj": self, "method": "pickup_tool", "arg": player}]
-	set_action_label(player)
-	return actions
-
-
-func can_perform_action(player, action):
-	match action["method"]:
-		"pickup_tool":
-			return bodies.has(player) and could_perform_action(player, action)
-
-
-func could_perform_action(player, _action):
+func could_perform_action(player):
 	# players can always grab tools
 	if player.is_in_group("player"):
 		return true
@@ -47,37 +41,24 @@ func could_perform_action(player, _action):
 		return false
 
 	# TODO has the bot seen a NeedsWater?
-	# connected actions?
-	# some spaghetti pattern starting?
+	# hmmmmm this is a bit odd... action cross-deps
+	# maybe need action-planning
 	match tool_type:
 		"watering-pail":
 			return player.action_source_needs_water()
 
 
-func set_action_label(player):
+func set_action_label():
 	action_label.set_visible(true)
-
-	# TODO select action better?
 	var ax = actions[0]
-	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
+	var is_current = action_area.is_current_for_any_actor(ax)
 
-	if not can_perform_action(player, ax):
-		action_label.modulate.a = 0.5
-	else:
+	action_label.text = "[center]" + ax.label.capitalize() + "[/center]"
+
+	if is_current:
 		action_label.modulate.a = 1
-
-
-func _on_Detectbox_body_entered(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.append(body)
-		set_action_label(body)
-
-
-func _on_Detectbox_body_exited(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.erase(body)
-		set_action_label(body)
-
+	else:
+		action_label.modulate.a = 0.5
 
 ##########################################################
 # animate

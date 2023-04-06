@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr8e3mcxgjxah"]
+[gd_scene load_steps=11 format=3 uid="uid://dr8e3mcxgjxah"]
 
 [ext_resource type="Script" path="res://src/harvey/items/DeliveryBox.gd" id="2"]
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxy65wjusiq7j" path="res://assets/harvey/seed-box_sheet.png" id="3_loqwr"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="4"]
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="5_2gqyg"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(60, 47)
@@ -34,6 +35,7 @@ animations = [{
 size = Vector2(128, 56)
 
 [node name="DeliveryBox" type="StaticBody2D" groups=["pois"]]
+collision_mask = 2
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -46,13 +48,6 @@ position = Vector2(0, -40)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_7ojcq")
 
-[node name="Detectbox" type="Area2D" parent="."]
-position = Vector2(0, -40)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-position = Vector2(0, 36)
-shape = SubResource("4")
-
 [node name="ActionLabel" type="RichTextLabel" parent="."]
 offset_left = -32.0
 offset_top = -96.0
@@ -63,5 +58,8 @@ bbcode_enabled = true
 text = "action"
 scroll_active = false
 
-[connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
-[connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]
+[node name="ActionArea" parent="." instance=ExtResource("5_2gqyg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+position = Vector2(0, -4)
+shape = SubResource("4")

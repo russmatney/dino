@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ylhatm4wr6lg"]
 
-[ext_resource type="PackedScene" path="res://src/harvey/items/SeedBox.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://cgyquenf13rgw" path="res://addons/camera/Cam2D.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/harvey/player/HarveyPlayer.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/Tool.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://ct71m7st0mcr4" path="res://src/harvey/items/SeedBox.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bflpu7dhqovtc" path="res://addons/camera/Cam2D.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c4wk4oavufugc" path="res://src/harvey/player/HarveyPlayer.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://wq32yioprbpx" path="res://src/harvey/items/Tool.tscn" id="4"]
 
 [node name="ItemGym" type="Node2D"]
 

@@ -6,13 +6,21 @@ extends StaticBody2D
 @onready var produce_icon = $ProduceIcon
 @onready var anim = $AnimatedSprite2D
 @onready var action_label = $ActionLabel
+@onready var action_area = $ActionArea
 
 ##########################################################
 # ready
 
+var actions = [
+	Action.mk({label="Get Seed", fn=pickup_seed,
+		actor_can_execute=could_perform_action}),
+	]
 
 func _ready():
 	produce_icon.animation = produce_type
+
+	action_area.register_actions(actions, self)
+	action_area.action_display_updated.connect(set_action_label)
 
 
 ##########################################################
@@ -28,23 +36,7 @@ func _unhandled_input(event):
 ##########################################################
 # detectbox
 
-var actions
-var bodies = []
-
-
-func build_actions(player):
-	actions = [{"obj": self, "method": "pickup_seed", "arg": player}]
-	set_action_label(player)
-	return actions
-
-
-func can_perform_action(player, action):
-	match action["method"]:
-		"pickup_seed":
-			return bodies.has(player) and could_perform_action(player, action)
-
-
-func could_perform_action(player, _action):
+func could_perform_action(player):
 	# players can always grab seeds
 	if player.is_in_group("player"):
 		return true
@@ -57,32 +49,17 @@ func could_perform_action(player, _action):
 	return not player.has_seed()
 
 
-func set_action_label(player):
+func set_action_label():
 	action_label.set_visible(true)
-
-	# TODO select action better?
 	var ax = actions[0]
-	action_label.text = "[center]" + ax["method"].capitalize() + "[/center]"
+	var is_current = action_area.is_current_for_any_actor(ax)
 
-	if not can_perform_action(player, ax):
-		action_label.modulate.a = 0.5
-	else:
+	action_label.text = "[center]" + ax.label.capitalize() + "[/center]"
+
+	if is_current:
 		action_label.modulate.a = 1
-
-
-# TODO detecting bodies instead of areas, should probably switch to actual ActionDetectors areas
-# otherwise it gets conflated with the node supporting it (the body)
-func _on_Detectbox_body_entered(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.append(body)
-		set_action_label(body)
-
-
-func _on_Detectbox_body_exited(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.erase(body)
-		set_action_label(body)
-
+	else:
+		action_label.modulate.a = 0.5
 
 ##########################################################
 # animate
