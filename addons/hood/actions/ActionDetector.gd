@@ -12,6 +12,7 @@ func _ready():
 var actor
 var action_hint
 
+# used to prevent player actions, e.g. while sitting
 var can_execute_any_actions = func(): return true
 
 func setup(a, can_execute_any=null, ac_hint=null):
@@ -81,6 +82,37 @@ func potential_actions():
 	if actor and can_execute_any_actions.call():
 		return actions.filter(func(ax): return ax.can_execute(actor))
 
+## Returns the nearest of all the actions, regardless of executability.
+func find_nearest(axs=actions):
+	# TODO filter/sort by line-of-sight
+	var srcs = axs.map(func(ax): return ax.source)
+	var nearest_src = Util.nearest_node(self, srcs)
+	if not nearest_src:
+		return
+	# TODO sources with multiple actions - which action to return?
+	var nearest = axs.filter(func(ax): return ax.source == nearest_src)
+	# this just returns a matching action for the nearest source
+	if nearest.size() > 0:
+		return nearest[0]
+
+## Return the nearest immediate action. If none, return the nearest potential action.
+## Proximity is calced using the actor and the action's source node.
+## Line Of Sight is opt-in per action, and should be sorted last. (should be, pending implementation).
+func nearest_action():
+	var im_axs = immediate_actions()
+	if im_axs.size() > 0:
+		var nearest_ax = find_nearest(im_axs)
+		if nearest_ax:
+			return nearest_ax
+
+	var pot_axs = potential_actions()
+	if pot_axs.size() > 0:
+		var nearest_ax = find_nearest(pot_axs)
+		if nearest_ax:
+			return nearest_ax
+
+	return find_nearest()
+
 ####################################################################
 # current, selecting an action
 
@@ -106,13 +138,13 @@ func dec_selected_ax_idx():
 
 func execute_current_action():
 	var c_ax = current_action()
-	var executed = false
 	if c_ax:
 		c_ax.execute(actor)
-		executed = true
-	update_displayed_action()
-	return executed
+		update_displayed_action()
+		return true
+	return false
 
+var warned_no_action_hint
 func update_displayed_action():
 	if action_hint:
 		var c_ax = current_action()
@@ -121,4 +153,6 @@ func update_displayed_action():
 		else:
 			action_hint.hide()
 	else:
-		Debug.warn("Cannot display available action, no action_hint")
+		if not warned_no_action_hint:
+			Debug.warn("Cannot display available action, no action_hint")
+			warned_no_action_hint = true
