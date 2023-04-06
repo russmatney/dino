@@ -29,8 +29,8 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
-	if not MvaniaGame.managed_game:
-		powerups = MvaniaGame.all_powerups
+	if not Game.managed_game:
+		powerups = HatBot.all_powerups
 
 	Hotel.register(self)
 
@@ -272,7 +272,7 @@ func _on_player_death():
 
 func _on_close_respawn(on_close):
 	on_close.disconnect(_on_close_respawn)
-	MvaniaGame.respawn_player(true)
+	Game.respawn_player(true)
 
 ########################################################
 # coins

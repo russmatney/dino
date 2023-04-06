@@ -25,8 +25,8 @@ func enter(_ctx={}):
 	swoop_spots = [
 		[rand_positions[0], actor.swoop_hint1],
 		[func():
-			if MvaniaGame.player and is_instance_valid(MvaniaGame.player):
-				return MvaniaGame.player.global_position, actor.swoop_hint_player],
+			if Game.player and is_instance_valid(Game.player):
+				return Game.player.global_position, actor.swoop_hint_player],
 		[rand_positions[1], actor.swoop_hint2],
 		]
 
@@ -93,8 +93,8 @@ func update_player_swoop_hint():
 	if player_pos_set or finished_chasing_player:
 		return
 
-	if MvaniaGame.player and is_instance_valid(MvaniaGame.player):
-		var pos = MvaniaGame.player.global_position
+	if Game.player and is_instance_valid(Game.player):
+		var pos = Game.player.global_position
 		actor.swoop_hint_player.global_position = pos
 
 func set_player_swoop_hint(pos):

@@ -30,7 +30,7 @@ func _ready():
 
 	attack_box.body_entered.connect(_on_attack_box_entered)
 
-	if MvaniaGame.managed_game:
+	if Game.managed_game:
 		state_label.set_visible(false)
 
 func _on_death(_boss):
@@ -80,8 +80,8 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_see_player
 
 func _physics_process(_delta):
-	if MvaniaGame.player and is_instance_valid(MvaniaGame.player):
-		var player_pos = MvaniaGame.player.global_position
+	if Game.player and is_instance_valid(Game.player):
+		var player_pos = Game.player.global_position
 		los.target_position = to_local(player_pos)
 
 		if los.is_colliding():

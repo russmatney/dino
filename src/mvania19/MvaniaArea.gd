@@ -52,7 +52,7 @@ func player_spawn_coords() -> Vector2:
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
 	markers = markers.filter(func(ma): return ma.active)
 
-	if MvaniaGame.managed_game:
+	if Game.managed_game:
 		markers = markers.filter(func(ma): return not ma.dev_only)
 
 	markers.sort_custom(func(ma, mb): return ma.last_sat_at > mb.last_sat_at)
@@ -84,16 +84,14 @@ func _enter_tree():
 func _ready():
 	pause_rooms()
 
-	if Engine.is_editor_hint():
-		MvaniaGame.register_areas()
-
 	Hotel.book(self.scene_file_path)
 	Hotel.register(self)
 	if not Engine.is_editor_hint():
 		if MvaniaGame.current_area != self:
+			Debug.warn("mvania area had to self-set current area")
 			MvaniaGame.current_area = self
 
-	MvaniaGame.call_deferred("maybe_spawn_player")
+	Game.call_deferred("maybe_spawn_player")
 
 ###########################################################
 # draw

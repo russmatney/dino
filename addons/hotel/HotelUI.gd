@@ -43,7 +43,7 @@ func _on_reload_plugin_button_pressed():
 func _on_rebuild_db_button_pressed():
 	Debug.prn(&"Rebuilding hotel db -----------------------------------")
 	Hotel.drop_db()
-	MvaniaGame.register_areas()
+	# TODO collect scene_file_paths and re-register with those instead
 	list_entries()
 	Debug.prn(&"Rebuilt hotel db --------------------------------------")
 

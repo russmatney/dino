@@ -159,7 +159,7 @@ func _ready():
 	ensure_room_box()
 	ensure_cam_points()
 
-	MvaniaGame.call_deferred("maybe_spawn_player")
+	Game.call_deferred("maybe_spawn_player")
 
 
 ###########################################

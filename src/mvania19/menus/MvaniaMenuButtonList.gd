@@ -5,7 +5,7 @@ extends NaviButtonList
 var button_defs = [
 	{
 		"label": "Start Game",
-		"fn": MvaniaGame.restart_game,
+		"fn": Game.restart_game.bind(HatBot),
 	},
 ]
 
