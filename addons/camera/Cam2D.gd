@@ -193,9 +193,9 @@ func find_node_to_follow():
 		following = nodes[0]
 		match mode:
 			cam_mode.FOLLOW:
-				reparent(following)
+				call_deferred("reparent", following)
 			cam_mode.FOLLOW_AND_POIS:
-				reparent(following)
+				call_deferred("reparent", following)
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
 
