@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="5"]
 [ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="6_2okg2"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="7_fnnbu"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="7_oli3n"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(60, 47)
@@ -78,5 +78,5 @@ scroll_active = false
 position = Vector2(0, -4)
 shape = SubResource("4")
 
-[node name="CamPOI" parent="." instance=ExtResource("7_fnnbu")]
+[node name="CamPOA" parent="." instance=ExtResource("7_oli3n")]
 position = Vector2(0, -70)

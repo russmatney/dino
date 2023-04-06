@@ -75,3 +75,4 @@ visible = false
 shape = SubResource("2")
 
 [node name="CamPOI" parent="." instance=ExtResource("7_pr8qp")]
+importance = 1.0

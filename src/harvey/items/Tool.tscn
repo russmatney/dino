@@ -5,7 +5,7 @@
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="3"]
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="5_grsnf"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="6_h6dh4"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="6_8thnk"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 7.0
@@ -46,4 +46,4 @@ scroll_active = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 shape = SubResource("2")
 
-[node name="CamPOI" parent="." instance=ExtResource("6_h6dh4")]
+[node name="CamPOA" parent="." instance=ExtResource("6_8thnk")]
