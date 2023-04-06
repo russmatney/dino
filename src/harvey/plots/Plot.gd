@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var action_label = $ActionLabel
+@onready var action_area = $ActionArea
 var produce_type
 
 ############################################################
@@ -12,13 +13,8 @@ func _ready():
 	machine.transitioned.connect(on_transit)
 	machine.start()
 
-
-func _process(_delta):
-	if bodies:
-		set_action_label(bodies[0])
-	else:
-		set_action_label(null)
-
+	action_area.register_actions(actions, self)
+	action_area.action_display_updated.connect(set_action_label)
 
 ############################################################
 # machine
@@ -43,7 +39,7 @@ func on_transit(new_state):
 		"ReadyForHarvest":
 			Harvey.sound_ready_for_harvest()
 		_:
-			print("no sound")
+			Debug.prn("no sound")
 
 
 func set_state_label(label: String):
@@ -54,85 +50,33 @@ func set_state_label(label: String):
 ############################################################
 # actions
 
-var actions
-var bodies = []
-
-
-func build_actions(player):
-	actions = [
-		{"obj": self, "method": "plant_seed", "arg": player},
-		{"obj": self, "method": "water_plant", "arg": player},
-		{"obj": self, "method": "harvest_produce", "arg": player},
+var actions = [
+	Action.mk({label="Plant Seed", fn=plant_seed,
+		source_can_execute=func(): return state == "ReadyForSeed",
+		actor_can_execute=func(player): return not player.has_produce() and player.has_seed(),
+		}),
+	Action.mk({label="Water Plant", fn=water_plant,
+		source_can_execute=func(): return state == "NeedsWater",
+		actor_can_execute=func(player): return not player.has_produce() and player.has_water(),
+		}),
+	Action.mk({label="Harvest", fn=harvest_produce,
+		source_can_execute=func(): return state == "ReadyForHarvest",
+		actor_can_execute=func(player): return not player.has_produce(),
+		}),
 	]
-	set_action_label(player)
-	return actions
 
-
-func can_perform_action(player, action):
-	if not bodies.has(player):
-		return false
-
-	return could_perform_action(player, action)
-
-
-func could_perform_action(player, action):
-	# never stop with produce?
-	if player.has_produce():
-		return false
-
-	match action["method"]:
-		"plant_seed":
-			return state == "ReadyForSeed" and player.has_seed()
-		"water_plant":
-			return state == "NeedsWater" and player.has_water()
-		"harvest_produce":
-			# maybe questionable - really it's just a priority thing?
-			# could also change with inventory size
-			return state == "ReadyForHarvest"
-
-
-func set_action_label(player):
-	if actions == null or actions.size() == 0:
-		return
-	var ax_label
-	match state:
-		"ReadyForSeed":
-			ax_label = "plant_seed"
-		"NeedsWater":
-			ax_label = "water_plant"
-		"ReadyForHarvest":
-			ax_label = "harvest_produce"
-	var ax
-	for a in actions:
-		if a["method"] == ax_label:
-			ax = a
-			break
-	if ax == null or ax.size() == 0:
+func set_action_label():
+	var axs = action_area.current_actions()
+	if axs.size() == 0:
+		action_label.set_visible(false)
 		return
 
-	if ax_label:
-		action_label.text = "[center]" + ax_label.capitalize() + "[/center]"
-	else:
-		action_label.text = ""
+	# TODO what to do when two different actions are current (for two actors)
+	var ax = axs[0]
 
-	if not player or not can_perform_action(player, ax):
-		action_label.modulate.a = 0.5
-	else:
-		action_label.modulate.a = 1
-
+	action_label.text = "[center]" + ax.label.capitalize() + "[/center]"
+	action_label.modulate.a = 1
 	action_label.set_visible(true)
-
-
-func _on_Detectbox_body_entered(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.append(body)
-		set_action_label(body)
-
-
-func _on_Detectbox_body_exited(body: Node):
-	if body.is_in_group("action_detector"):
-		bodies.erase(body)
-		set_action_label(body)
 
 
 ##########################################################

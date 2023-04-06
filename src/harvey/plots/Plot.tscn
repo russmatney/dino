@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://fo52ujd4jco3"]
+[gd_scene load_steps=20 format=3 uid="uid://fo52ujd4jco3"]
 
 [ext_resource type="Script" path="res://src/harvey/plots/Plot.gd" id="2"]
 [ext_resource type="Script" path="res://src/harvey/plots/SeedPlanted.gd" id="3"]
@@ -10,9 +10,7 @@
 [ext_resource type="Script" path="res://src/harvey/plots/NeedsWater.gd" id="8"]
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="10"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="11"]
-
-[sub_resource type="RectangleShape2D" id="7"]
-size = Vector2(32, 32)
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="11_5d4ib"]
 
 [sub_resource type="ShaderMaterial" id="8"]
 resource_local_to_scene = true
@@ -104,13 +102,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="7"]
+size = Vector2(32, 32)
+
 [node name="Plot" type="Node2D" groups=["pois"]]
 script = ExtResource("2")
-
-[node name="Detectbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-shape = SubResource("7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("8")
@@ -161,5 +157,8 @@ bbcode_enabled = true
 text = "action"
 scroll_active = false
 
-[connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
-[connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]
+[node name="ActionArea" parent="." instance=ExtResource("11_5d4ib")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+visible = false
+shape = SubResource("7")
