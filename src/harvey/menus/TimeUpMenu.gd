@@ -9,7 +9,7 @@ var produce_count_scene = preload("res://src/harvey/HUD/ProduceCount.tscn")
 
 
 func set_score(produce_counts):
-	if not produce_counts:
+	if len(produce_counts) == 0:
 		score_label.text = "[center]" + "No Veggies Delivered!"
 		return
 
