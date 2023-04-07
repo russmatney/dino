@@ -22,7 +22,7 @@ run/main_scene.harvey="res://src/harvey/menus/HarveyMenu.tscn"
 run/main_scene.tower="res://src/tower/menus/TowerMainMenu.tscn"
 run/main_scene.snake="res://src/snake/menus/SnakeMainMenu.tscn"
 run/main_scene.gunner="res://src/gunner/player/PlayerGym.tscn"
-run/main_scene.mvania19="res://src/mvania19/menus/MainMenu.tscn"
+run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
 
 [autoload]
 
@@ -48,10 +48,10 @@ Tower="*res://src/tower/Tower.gd"
 GunnerSounds="*res://src/gunner/GunnerSounds.gd"
 SnakeSounds="*res://src/snake/SnakeSounds.gd"
 SnakeGame="*res://src/snake/SnakeGame.gd"
-MvaniaSounds="*res://src/mvania19/MvaniaSounds.gd"
-HatBot="*res://src/mvania19/HatBot.gd"
+HatBot="*res://src/hatbot/HatBot.gd"
 Game="*res://src/Game.gd"
 Metro="*res://addons/metro/Metro.gd"
+DemoLand="*res://src/demoland/DemoLand.gd"
 
 [display]
 

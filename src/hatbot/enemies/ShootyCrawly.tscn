@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://src/hatbot/enemies/ShootyCrawly.gd" id="1_4m7qg"]
+[ext_resource type="SpriteFrames" uid="uid://bau1snjyg45pw" path="res://src/hatbot/enemies/shootycrawly_sprite_frames.tres" id="1_vkef8"]
+[ext_resource type="PackedScene" path="res://src/hatbot/enemies/machine/EnemyMachine.tscn" id="4_ft7tc"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="4_lfa7i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njcjt"]
+size = Vector2(10, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t12w0"]
+size = Vector2(16, 15)
+
+[node name="ShootyCrawly" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_4m7qg")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_njcjt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_t12w0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_vkef8")
+animation = &"shoot"
+
+[node name="FrontRay" type="RayCast2D" parent="."]
+position = Vector2(-5, 2)
+target_position = Vector2(0, 12)
+
+[node name="Machine" parent="." instance=ExtResource("4_ft7tc")]
+
+[node name="LineOfSight" type="RayCast2D" parent="." groups=["enemies"]]
+target_position = Vector2(0, -100)
+collision_mask = 3
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lfa7i")

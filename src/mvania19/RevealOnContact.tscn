@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1ejaa6iyyqtr"]
-
-[ext_resource type="Script" path="res://src/mvania19/maps/hatbot/RevealOnContact.gd" id="1_klrru"]
-
-[node name="RevealOnContact" type="Area2D"]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("1_klrru")

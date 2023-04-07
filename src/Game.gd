@@ -17,7 +17,7 @@ func _ready():
 ###########################################################
 # handling current_game (for dev-mode), could live elsewhere
 
-var games = [HatBot]
+var games = [HatBot, DemoLand]
 
 func game_for_scene(sfp):
 	var gs = games.filter(func(g): return g.manages_scene(sfp))

@@ -1,0 +1,90 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://src/hatbot/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
+[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
+[ext_resource type="SpriteFrames" uid="uid://cije58jjaeikn" path="res://src/hatbot/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Idle.gd" id="4_rwt87"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Firing.gd" id="5_5chnv"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/KnockedBack.gd" id="6_fqcf7"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Dead.gd" id="7_oy4g0"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Stunned.gd" id="8_fhgq5"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Warping.gd" id="9_3hlyf"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Laughing.gd" id="10_dgtvf"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="12_7xc6l"]
+[ext_resource type="PackedScene" uid="uid://psr6qa0jnbc5" path="res://src/hatbot/player/SkullParticles.tscn" id="13_qnfjf"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="14_s0hdd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
+size = Vector2(24, 31)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onh6t"]
+radius = 8.0
+height = 20.0
+
+[node name="Beefstronaut" type="CharacterBody2D" groups=["bosses", "enemies"]]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_at5n1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_wvons")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = ExtResource("2_o0rv1")
+animation = &"warp-leave"
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("2_jbhjj")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("4_rwt87")
+
+[node name="Firing" type="Node" parent="Machine"]
+script = ExtResource("5_5chnv")
+
+[node name="KnockedBack" type="Node" parent="Machine"]
+script = ExtResource("6_fqcf7")
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource("7_oy4g0")
+
+[node name="Stunned" type="Node" parent="Machine"]
+script = ExtResource("8_fhgq5")
+
+[node name="Warping" type="Node" parent="Machine"]
+script = ExtResource("9_3hlyf")
+
+[node name="Laughing" type="Node" parent="Machine"]
+script = ExtResource("10_dgtvf")
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+target_position = Vector2(0, 150)
+collision_mask = 2
+
+[node name="CamPOF" parent="." instance=ExtResource("5_15lvx")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("12_7xc6l")
+
+[node name="SkullParticles" parent="." instance=ExtResource("13_qnfjf")]
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("14_s0hdd")
+text = "state"
+horizontal_alignment = 1
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_onh6t")

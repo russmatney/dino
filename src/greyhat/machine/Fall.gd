@@ -53,7 +53,7 @@ func physics_process(delta):
 			var shake = thresh["shake"]
 			# var damage = thresh["damage"]
 			Cam.screenshake(shake)
-			MvaniaSounds.play_sound(thresh["sound"])
+			DJSounds.play_sound(thresh["sound"])
 
 		# apply damage
 		# apply shake

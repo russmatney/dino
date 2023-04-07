@@ -1,12 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://5gqanim0mpxo"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://src/mvania19/player/Monster.gd" id="1_4gwu2"]
-[ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/mvania19/player/player_sprite_frames.tres" id="2_xytd2"]
+[ext_resource type="Script" path="res://src/hatbot/player/Monster.gd" id="1_4gwu2"]
+[ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/hatbot/player/player_sprite_frames.tres" id="2_xytd2"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_gkuma"]
-[ext_resource type="Script" path="res://src/mvania19/player/machine/Idle.gd" id="4_orod7"]
-[ext_resource type="Script" path="res://src/mvania19/player/machine/Run.gd" id="5_x7a41"]
-[ext_resource type="Script" path="res://src/mvania19/player/machine/Jump.gd" id="6_bmft5"]
-[ext_resource type="Script" path="res://src/mvania19/player/machine/Fall.gd" id="7_kiwfr"]
+[ext_resource type="Script" path="res://src/hatbot/player/machine/Idle.gd" id="4_orod7"]
+[ext_resource type="Script" path="res://src/hatbot/player/machine/Run.gd" id="5_x7a41"]
+[ext_resource type="Script" path="res://src/hatbot/player/machine/Jump.gd" id="6_bmft5"]
+[ext_resource type="Script" path="res://src/hatbot/player/machine/Fall.gd" id="7_kiwfr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fy5s5"]
 radius = 3.8

@@ -35,8 +35,8 @@ var menu_scenes = [
 		"nav_to": "res://src/snake/menus/SnakeMainMenu.tscn",
 	},
 	{
-		"label": "Mvania",
-		"nav_to": "res://src/mvania19/maps/DemoMap.tscn",
+		"label": "Hatbot",
+		"nav_to": "res://src/hatbot/menus/MainMenu.tscn",
 	},
 ]
 

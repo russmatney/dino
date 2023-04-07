@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_ktq0m"]
+[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_yptok"]
+[ext_resource type="PackedScene" uid="uid://dycyi1m0w17sl" path="res://src/hatbot/enemies/Soldier.tscn" id="2_orywx"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_0y4vr"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="5_r30nw"]
+[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="5_u4k1p"]
+
+[node name="03FirstSnowMan" type="Node2D" groups=["metro_rooms"]]
+script = ExtResource("1_ktq0m")
+
+[node name="DemoTiles" parent="." instance=ExtResource("1_yptok")]
+layer_0/tile_data = PackedInt32Array(-327686, 1, 3, -262150, 131073, 1, -196614, 1, 3, -131078, 131073, 1, -65542, 1, 3, -6, 1, 1, 65530, 131073, 1, 131066, 1, 3, 196602, 1, 1, 262138, 131073, 3, 327674, 131073, 1, 393210, 131073, 2, -327685, 131073, 1, -262149, 131073, 1, -196613, 1, 3, -131077, 131073, 3, -65541, 131073, 1, -5, 1, 3, 65531, 131073, 1, 131067, 1, 3, 196603, 131073, 3, 262139, 1, 3, 327675, 131073, 3, 393211, 131073, 2, -327684, 1, 1, -262148, 1, 3, -196612, 131073, 1, -131076, 131073, 1, -65540, 131073, 3, -4, 1, 3, 65532, 1, 3, 131068, 131073, 3, 196604, 1, 1, 262140, 1, 1, 327676, 131073, 1, 393212, 1, 0, -327683, 131073, 0, -262147, 1, 3, -196611, 1, 3, -131075, 131073, 3, -65539, 1, 1, -3, 131073, 3, 65533, 1, 3, 131069, 1, 1, 196605, 131073, 1, 262141, 1, 3, 327677, 131073, 1, 393213, 1, 0, -327682, 1, 2, -262146, 1, 3, -196610, 131073, 3, -131074, 131073, 3, -65538, 131073, 3, -2, 1, 3, 65534, 1, 3, 131070, 1, 1, 196606, 131073, 3, 262142, 1, 3, 327678, 1, 3, 393214, 1, 2, -327681, 131073, 0, -262145, 1, 1, -196609, 1, 3, -131073, 1, 3, -65537, 1, 3, -1, 1, 3, 65535, 131073, 3, 131071, 1, 3, 196607, 131073, 1, 262143, 1, 1, 327679, 1, 3, 393215, 131073, 2, -393216, 131073, 1, -327680, 1, 3, -262144, 131073, 3, -196608, 1, 3, -131072, 131073, 3, -65536, 1, 2, 0, 1, 1, 65536, 1, 3, 131072, 1, 3, 196608, 1, 1, 262144, 131073, 1, 327680, 131073, 2, -393215, 131073, 3, -327679, 1, 1, -262143, 1, 3, -196607, 131073, 3, -131071, 1, 1, -65535, 1, 2, 1, 131073, 1, 65537, 131073, 3, 131073, 131073, 1, 196609, 1, 1, 262145, 131073, 3, 327681, 131073, 0, -393214, 131073, 1, -327678, 1, 1, -262142, 1, 1, -196606, 1, 1, -131070, 1, 1, -65534, 131073, 2, 2, 1, 3, 65538, 1, 1, 131074, 131073, 1, 196610, 131073, 3, 262146, 131073, 3, 327682, 1, 2, -393213, 1, 3, -327677, 131073, 3, -262141, 131073, 3, -196605, 131073, 3, -131069, 131073, 1, -65533, 1, 1, 3, 131073, 1, 65539, 1, 3, 131075, 1, 1, 196611, 131073, 1, 262147, 1, 3, 327683, 131073, 2, -393212, 131073, 1, -327676, 131073, 1, -262140, 131073, 3, -196604, 131073, 1, -131068, 1, 1, -65532, 131073, 1, 4, 131073, 3, 65540, 131073, 1, 131076, 131073, 3, 196612, 131073, 1, 262148, 1, 1, 327684, 1, 2, -393211, 131073, 1, -327675, 131073, 1, -262139, 1, 1, -196603, 1, 1, -131067, 131073, 1, -65531, 131073, 1, 5, 1, 3, 65541, 1, 1, 131077, 131073, 1, 196613, 1, 1, 262149, 131073, 3, 327685, 131073, 0, -393210, 1, 1, -327674, 131073, 3, -262138, 131073, 3, -196602, 1, 1, -131066, 131073, 3, -65530, 131073, 3, 6, 131073, 1, 65542, 1, 1, 131078, 131073, 3, 196614, 1, 3, 262150, 131073, 3, 327686, 1, 0, -524297, 1, 0, -458761, 131073, 2, -393225, 131073, 0, -327689, 131073, 2, -262153, 1, 2, -196617, 131073, 0, -131081, 131073, 0, -65545, 131073, 0, -9, 131073, 0, 65527, 1, 0, 131063, 1, 2, 196599, 1, 0, 262135, 131073, 0, 327671, 131073, 2, 393207, 1, 2, 458743, 1, 0, -524296, 131073, 0, -458760, 131073, 2, -393224, 1, 0, -327688, 131073, 0, -262152, 1, 0, -196616, 1, 2, -131080, 131073, 0, -65544, 131073, 0, -8, 1, 0, 65528, 131073, 2, 131064, 131073, 0, 196600, 131073, 0, 262136, 131073, 0, 327672, 131073, 0, 393208, 131073, 2, 458744, 1, 0, -524295, 1, 0, -458759, 131073, 2, -393223, 1, 1, -327687, 131073, 1, -262151, 1, 1, -196615, 1, 3, -131079, 1, 3, -65543, 131073, 1, -7, 1, 1, 65529, 131073, 3, 131065, 1, 3, 196601, 131073, 3, 262137, 1, 3, 327673, 1, 1, 393209, 1, 0, 458745, 1, 0, -524294, 1, 2, -458758, 1, 0, -393222, 1, 1, 458746, 1, 0, -524293, 131073, 0, -458757, 1, 0, -393221, 1, 3, 458747, 1, 2, -524292, 1, 3, -458756, 1, 1, -393220, 131073, 1, 458748, 1, 0, -524291, 131073, 1, -458755, 1, 1, -393219, 131073, 1, 458749, 131073, 2, -524290, 1, 1, -458754, 131073, 3, -393218, 1, 1, 458750, 1, 2, -524289, 1, 1, -458753, 1, 1, -393217, 131073, 3, 458751, 131073, 0, -589824, 131073, 3, -524288, 1, 3, -458752, 131073, 3, 393216, 1, 2, -589823, 1, 2, -524287, 1, 1, -458751, 1, 3, 393217, 1, 0, -589822, 131073, 0, -524286, 131073, 0, -458750, 1, 1, 393218, 131073, 2, -589821, 1, 0, -524285, 131073, 0, -458749, 1, 3, 393219, 131073, 2, -589820, 1, 2, -524284, 131073, 0, -458748, 131073, 3, 393220, 1, 2, -589819, 1, 0, -524283, 131073, 0, -458747, 131073, 3, 393221, 1, 2, -589818, 131073, 2, -524282, 131073, 0, -458746, 131073, 1, 393222, 131073, 0, -589817, 1, 2, -524281, 131073, 2, -458745, 1, 0, -393209, 131073, 0, -327673, 1, 2, -262137, 1, 2, -196601, 1, 2, -131065, 131073, 3, -65529, 131073, 3, 7, 131073, 3, 65543, 1, 1, 131079, 1, 0, 196615, 131073, 2, 262151, 1, 0, 327687, 131073, 2, 393223, 1, 0, -589816, 131073, 2, -524280, 1, 2, -458744, 131073, 2, -393208, 1, 2, -327672, 1, 2, -262136, 131073, 2, -196600, 1, 2, -131064, 1, 3, -65528, 131073, 1, 8, 1, 1, 65544, 131073, 1, 131080, 131073, 2, 196616, 1, 0, 262152, 1, 0, 327688, 1, 0, 393224, 1, 0)
+
+[node name="Soldier" parent="." instance=ExtResource("2_orywx")]
+position = Vector2(-40, -32)
+
+[node name="CamPOF" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, -72)
+
+[node name="@CamPOF@34403" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, 56)
+
+[node name="@CamPOF@34404" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, -72)
+
+[node name="@CamPOF@34405" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, 56)
+
+[node name="@CamPOF@35838" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, -72)
+
+[node name="@CamPOF@35839" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, 56)
+
+[node name="@CamPOF@35840" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, -72)
+
+[node name="@CamPOF@35841" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, 56)
+
+[node name="@CamPOF@17001" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, -72)
+
+[node name="@CamPOF@17002" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, 56)
+
+[node name="@CamPOF@17003" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, -72)
+
+[node name="@CamPOF@17004" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, 56)
+
+[node name="@CamPOF@24756" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, -72)
+
+[node name="@CamPOF@24757" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, 56)
+
+[node name="@CamPOF@24758" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(72, -72)
+
+[node name="@CamPOF@24759" parent="." groups=["auto_pofs"] instance=ExtResource("4_0y4vr")]
+position = Vector2(-72, 56)
+
+[node name="RoomBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CamPOA" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_r30nw")]
+position = Vector2(-72, -72)
+script = ExtResource("5_u4k1p")
+
+[node name="@CamPOA@49704" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_r30nw")]
+position = Vector2(72, 56)
+script = ExtResource("5_u4k1p")
+
+[node name="@CamPOA@49705" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_r30nw")]
+position = Vector2(72, -72)
+script = ExtResource("5_u4k1p")
+
+[node name="@CamPOA@49706" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_r30nw")]
+position = Vector2(-72, 56)
+script = ExtResource("5_u4k1p")

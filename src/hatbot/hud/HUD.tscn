@@ -1,0 +1,173 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://src/hatbot/hud/HUD.gd" id="1_swmch"]
+[ext_resource type="PackedScene" uid="uid://b7b7ck0q42nl5" path="res://src/hatbot/hud/Minimap.tscn" id="2_hm6ex"]
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_eq15p"]
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="4_0rxhj"]
+[ext_resource type="Texture2D" uid="uid://cprq2nft4pj6a" path="res://src/hatbot/hud/ClimbingGlovesAtlasTexture.tres" id="5_lrx0n"]
+[ext_resource type="Texture2D" uid="uid://cbjjdocowrh4w" path="res://src/hatbot/hud/DoubleJumpAtlasTexture.tres" id="6_hd868"]
+[ext_resource type="Texture2D" uid="uid://cgwl5x7a5ydx2" path="res://src/hatbot/hud/SwordAtlasTexture.tres" id="7_u2dyi"]
+[ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="8_fge0x"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="9_sdjxj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]
+bg_color = Color(0.603922, 0.603922, 0.603922, 0.117647)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_culps"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.301961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oiduu"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.239216, 0.239216, 0.239216, 0.301961)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_swmch")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iv61c")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Minimap" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_hm6ex")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="ZoneName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_eq15p")
+bbcode_enabled = true
+text = "Zone Name"
+fit_content = true
+scroll_active = false
+
+[node name="RoomName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_eq15p")
+bbcode_enabled = true
+text = "Room Name"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyStatusList" type="VBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_culps")
+
+[node name="HeartsContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer" instance=ExtResource("4_0rxhj")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+h = 4
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oiduu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer4/PanelContainer"]
+layout_mode = 2
+
+[node name="ClimbingGlovesPowerup" type="TextureRect" parent="HBoxContainer/VBoxContainer2/HBoxContainer4/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("5_lrx0n")
+stretch_mode = 4
+
+[node name="DoubleJumpPowerup" type="TextureRect" parent="HBoxContainer/VBoxContainer2/HBoxContainer4/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("6_hd868")
+stretch_mode = 4
+
+[node name="SwordPowerup" type="TextureRect" parent="HBoxContainer/VBoxContainer2/HBoxContainer4/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("7_u2dyi")
+stretch_mode = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="DeathsLabel" parent="HBoxContainer/VBoxContainer2/HBoxContainer2" instance=ExtResource("8_fge0x")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[right]Deaths: 10[/right]"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 2
+
+[node name="CoinsLabel" parent="HBoxContainer/VBoxContainer2/HBoxContainer3" instance=ExtResource("8_fge0x")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[right]Coins 10[/right]"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Notifications" parent="HBoxContainer/VBoxContainer2/ScrollContainer" instance=ExtResource("9_sdjxj")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cxdueedu3l74"
+path="res://.godot/imported/jump3.sfxr-f635ec7c734373c3ddf4575f76301ea5.sample"
+
+[deps]
+
+source_file="res://src/hatbot/sounds/jump3.sfxr"
+dest_files=["res://.godot/imported/jump3.sfxr-f635ec7c734373c3ddf4575f76301ea5.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

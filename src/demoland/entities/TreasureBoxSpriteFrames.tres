@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" uid="uid://dtedwnudfu376" path="res://assets/hatbot/treasurebox_sheet.png" id="1_q3irs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gnlob"]
+atlas = ExtResource("1_q3irs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yo1p"]
+atlas = ExtResource("1_q3irs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03nii"]
+atlas = ExtResource("1_q3irs")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxi7j"]
+atlas = ExtResource("1_q3irs")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gnlob")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yo1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_03nii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxi7j")
+}],
+"loop": true,
+"name": &"opening",
+"speed": 5.0
+}]

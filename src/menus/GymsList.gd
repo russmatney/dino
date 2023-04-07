@@ -8,6 +8,14 @@ var menu_scenes = [
 		"label": "Maze",
 		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
 	},
+	{
+		"label": "Mvania Demo Map",
+		"nav_to": "res://src/demoland/DemoMap.tscn",
+	},
+	{
+		"label": "Mvania DemoLand",
+		"nav_to": "res://src/demoland/zones/area01/Area01.tscn",
+	},
 ]
 
 

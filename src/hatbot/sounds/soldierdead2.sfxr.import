@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://c1v40m3c0mpy2"
+path="res://.godot/imported/soldierdead2.sfxr-e11b22b964b7e8ae435aeb36b37d7394.sample"
+
+[deps]
+
+source_file="res://src/hatbot/sounds/soldierdead2.sfxr"
+dest_files=["res://.godot/imported/soldierdead2.sfxr-e11b22b964b7e8ae435aeb36b37d7394.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

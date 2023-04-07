@@ -27,7 +27,7 @@ Play the latest version here: [[https://russmatney.itch.io/mvania19][russmatney.
 
 Or the webversion: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19-web]]
 
-See ~src/mvania19/*~ for the code.
+See ~src/hatbot/*~ for the code.
 ** Snake
 A rough prototype for [[https://itch.io/jam/gdb-juice-jam-ii][Juice Jam 2]].
 

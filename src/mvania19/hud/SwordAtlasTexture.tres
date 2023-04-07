@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cgwl5x7a5ydx2"]
-
-[ext_resource type="Texture2D" uid="uid://dohv3iwpfsnbx" path="res://assets/mvania19/powerupicons_sheet.png" id="1_lufsn"]
-
-[resource]
-atlas = ExtResource("1_lufsn")
-region = Rect2(0, 0, 16, 16)

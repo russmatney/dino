@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://uag7cnuntgs8"
+path="res://.godot/imported/new_room_blip4.sfxr-813a42aff496e029bce6bb82f5cf17c2.sample"
+
+[deps]
+
+source_file="res://src/hatbot/sounds/new_room_blip4.sfxr"
+dest_files=["res://.godot/imported/new_room_blip4.sfxr-813a42aff496e029bce6bb82f5cf17c2.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

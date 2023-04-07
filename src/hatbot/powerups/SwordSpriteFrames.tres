@@ -1,0 +1,79 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://d16nn6a1ni5p2"]
+
+[ext_resource type="Texture2D" uid="uid://darqwt7dia6n1" path="res://assets/hatbot/sword_sheet.png" id="1_qb0ms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sglv7"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7ieo"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i0du"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqur8"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxrvt"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fltv"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(288, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1gfy"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(336, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27x1k"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(384, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bwsh"]
+atlas = ExtResource("1_qb0ms")
+region = Rect2(432, 0, 48, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sglv7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7ieo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6i0du")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqur8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxrvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fltv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1gfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27x1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bwsh")
+}],
+"loop": false,
+"name": &"swing",
+"speed": 25.0
+}]

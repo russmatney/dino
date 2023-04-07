@@ -1,0 +1,74 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://src/hatbot/hud/EnemyStatus.gd" id="1_gnikg"]
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="1_p6q6e"]
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_1ldpa"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="2_rs2om"]
+[ext_resource type="Texture2D" uid="uid://cansttxpsx8ys" path="res://assets/hatbot/portraits1.png" id="2_sifeq"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="3_sps3d"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Heart.tres" id="4_ck77m"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="5_iaws7"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="6_svsmf"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="7_jlrjb"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Number.tres" id="8_72nhi"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="9_a3t3o"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="10_2j8qv"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="11_xq8dn"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="12_onis2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njl06"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.301961)
+
+[node name="EnemyStatus" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -960.0
+offset_bottom = -656.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_njl06")
+script = ExtResource("1_gnikg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_sifeq")
+stretch_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeartsContainer" parent="HBoxContainer/VBoxContainer" instance=ExtResource("1_p6q6e")]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 0
+h = 4
+flip_h = false
+
+[node name="EnemyName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_1ldpa")
+bbcode_enabled = true
+text = "ShootyCrawly5"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("2_rs2om"), ExtResource("3_sps3d"), ExtResource("4_ck77m"), ExtResource("5_iaws7"), ExtResource("6_svsmf"), ExtResource("7_jlrjb"), ExtResource("8_72nhi"), ExtResource("9_a3t3o"), ExtResource("10_2j8qv"), ExtResource("11_xq8dn"), ExtResource("12_onis2")]

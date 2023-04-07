@@ -1,0 +1,54 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" uid="uid://dohv3iwpfsnbx" path="res://assets/hatbot/powerupicons_sheet.png" id="1_1064x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7l30"]
+atlas = ExtResource("1_1064x")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ol2ne"]
+atlas = ExtResource("1_1064x")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sup2b"]
+atlas = ExtResource("1_1064x")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wrr6"]
+atlas = ExtResource("1_1064x")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7l30")
+}],
+"loop": true,
+"name": &"climbinggloves",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ol2ne")
+}],
+"loop": true,
+"name": &"doublejump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sup2b")
+}],
+"loop": true,
+"name": &"read",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wrr6")
+}],
+"loop": true,
+"name": &"sword",
+"speed": 5.0
+}]
