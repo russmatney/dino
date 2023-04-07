@@ -6,24 +6,30 @@ extends Node2D
 # enter tree
 
 func _enter_tree():
-	# required for hotel to pick this up
 	add_to_group("metro_zones", true)
+
+	# book this zone and children with the hotel
+	# TODO maybe we don't want to rebook every enter tree?
+	# or only do this when managing?
+	Hotel.book(self.scene_file_path)
+
 
 ###########################################################
 # ready
 
 func _ready():
 	pause_rooms()
-
-	Hotel.book(self.scene_file_path)
 	Hotel.register(self)
 
-	if not Engine.is_editor_hint():
-		if Metro.current_zone != self:
-			Debug.warn("metro zone had to self-set current zone")
-			Metro.current_zone = self
-
-	Game.maybe_spawn_player.call_deferred()
+	# unmanaged game (dev mode) helpers
+	if not Engine.is_editor_hint() and not Game.is_managed:
+		Metro.ensure_current_zone(self)
+		Game.ensure_current_game(self)
+		Game.maybe_spawn_player.call_deferred({
+			# passing a fn b/c we don't want side-effects,
+			# and this avoids calling it when already respawning
+			spawn_coords_fn=player_spawn_coords,
+			})
 
 ###########################################################
 # Hotel data
@@ -73,6 +79,9 @@ var spawn_node_path
 func set_spawn_node(node_path: NodePath):
 	spawn_node_path = node_path
 
+## NOTE this function has side-effects!
+## It clears the spawn_node_path when used!
+## TODO redesign
 func player_spawn_coords() -> Vector2:
 	ensure_rooms()
 
@@ -88,7 +97,7 @@ func player_spawn_coords() -> Vector2:
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
 	markers = markers.filter(func(ma): return ma.active)
 
-	if Game.managed_game:
+	if Game.is_managed:
 		markers = markers.filter(func(ma): return not ma.dev_only)
 
 	markers.sort_custom(func(ma, mb): return ma.last_sat_at > mb.last_sat_at)

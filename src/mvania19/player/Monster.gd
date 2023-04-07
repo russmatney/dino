@@ -22,6 +22,9 @@ var MAX_Y = 5000
 
 var hud = preload("res://src/mvania19/hud/HUD.tscn")
 
+func _enter_tree():
+	Hotel.book(self.scene_file_path)
+
 func _ready():
 	og_position = position
 	Cam.ensure_camera(2, {"zoom_level": 5.0}, self)
@@ -29,7 +32,7 @@ func _ready():
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
-	if not Game.managed_game:
+	if not Game.is_managed:
 		powerups = HatBot.all_powerups
 
 	Hotel.register(self)
@@ -272,7 +275,7 @@ func _on_player_death():
 
 func _on_close_respawn(on_close):
 	on_close.disconnect(_on_close_respawn)
-	Game.respawn_player(true)
+	Game.respawn_player({player_died=true})
 
 ########################################################
 # coins

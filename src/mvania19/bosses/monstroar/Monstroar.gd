@@ -40,7 +40,7 @@ func _ready():
 	for sh in swoop_hints:
 		sh.call_deferred("reparent", get_parent())
 
-	if Game.managed_game:
+	if Game.is_managed:
 		state_label.set_visible(false)
 
 

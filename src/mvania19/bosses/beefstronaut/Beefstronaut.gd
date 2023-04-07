@@ -30,7 +30,7 @@ func _ready():
 
 	attack_box.body_entered.connect(_on_attack_box_entered)
 
-	if Game.managed_game:
+	if Game.is_managed:
 		state_label.set_visible(false)
 
 func _on_death(_boss):

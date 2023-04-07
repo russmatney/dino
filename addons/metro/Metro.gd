@@ -42,10 +42,13 @@ func travel_to(dest_zone_name, elevator_path):
 ###########################################################
 # world update
 
-func ensure_current_zone():
+func ensure_current_zone(zone=null):
+	if zone:
+		current_zone = zone
+		return
 	# what situation does get used in?
 	if not current_zone:
-		Debug.warn("METRO had to seek out a current_zone")
+		Debug.warn("Metro had to seek out a current_zone")
 		for c in get_tree().get_root().get_children():
 			# could use groups instead
 			if c is MetroZone:

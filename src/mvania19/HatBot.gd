@@ -32,14 +32,18 @@ const hatbot_zone_scenes = [
 ###########################################################
 # register
 
-func manages_scene(scene):
-	return scene.scene_file_path in hatbot_zone_scenes
+func manages_scene(scene_or_path):
+	if scene_or_path is String:
+		return scene_or_path in hatbot_zone_scenes
+	return scene_or_path.scene_file_path in hatbot_zone_scenes
 
 var first_zone
 
 func register():
 	Debug.pr("Registering HatBot Zones")
 
+	# TODO include game ('hatbot') on hatbot zones, rooms, entities
+	# TODO filter by game in hotel queries
 	for sfp in hatbot_zone_scenes:
 		Hotel.book(sfp)
 

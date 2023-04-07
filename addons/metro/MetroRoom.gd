@@ -159,8 +159,6 @@ func _ready():
 	ensure_room_box()
 	ensure_cam_points()
 
-	Game.maybe_spawn_player.call_deferred()
-
 	var p = get_parent()
 	if p is MetroZone:
 		zone = p

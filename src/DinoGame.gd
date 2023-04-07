@@ -18,8 +18,8 @@ func start():
 func update_world():
 	Debug.warn("update_world not implemented")
 
-func get_spawn_coords():
-	Debug.warn("get_spawn_coords not implemented")
+# func get_spawn_coords():
+# 	Debug.warn("get_spawn_coords not implemented")
 
 func manages_scene(_scene):
 	Debug.warn("manages_scene not implemented")

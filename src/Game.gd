@@ -14,37 +14,80 @@ func _ready():
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
-func _on_new_scene_instanced(scene):
-	if current_game and current_game.manages_scene(scene):
-		if not player and not spawning:
-			respawn_player()
+###########################################################
+# handling current_game (for dev-mode), could live elsewhere
+
+var games = [HatBot]
+
+func game_for_scene(sfp):
+	var gs = games.filter(func(g): return g.manages_scene(sfp))
+	if gs.size() == 1:
+		return gs[0]
+	elif gs.size() == 0:
+		Debug.warn("No game found to manage scene", sfp)
+	else:
+		Debug.warn("Multiple games manage scene", sfp, gs)
+
+func set_current_game_for_scene(sfp):
+	var g = game_for_scene(sfp)
+	if g:
+		register_current_game(g)
+
+func ensure_current_game(sfp=null):
+	if not current_game:
+		Debug.prn("No current_game, setting with passed sfp", sfp)
+		set_current_game_for_scene(sfp)
+	if not current_game:
+		Debug.warn("No current_game!")
+		# TODO get cute about looking one up based on the scene tree?
+
+###########################################################
+# game lifecycle
+
+var current_game: DinoGame
+
+var is_managed: bool = false
+
+func register_current_game(game):
+	current_game = game
+	game.register()
+
+func restart_game(game=null):
+	# indicate that we are not in dev-mode
+	is_managed = true
+
+	if game:
+		register_current_game(game)
+
+	if not current_game:
+		Debug.err("No current_game set")
+		return
+	current_game.start()
 
 ###########################################################
 # player
 
+# TODO maybe better to let the zones respawn the player?
+func _on_new_scene_instanced(scene):
+	if current_game and current_game.manages_scene(scene):
+		if not player and not spawning:
+			Debug.prn("respawning player after new scene instanced")
+			respawn_player()
+
 var player
-var player_scene
 
 signal player_found(player)
 
 func _on_player_found(p):
-	Debug.prn("Game.player found", p)
+	Debug.prn("Game.player found:", p)
 	if not player:
 		player = p
 
 	player_found.emit(player)
 	current_game.update_world()
 
-## Register the player scene, so Game can spawn/respawn the player
-func register_player_scene(p_scene):
-	if not p_scene:
-		Debug.err("Game found no player scene")
-		return
-	player_scene = p_scene
-	Hotel.book(player_scene)
-
 var spawning = false
-func respawn_player(player_died=false):
+func respawn_player(opts={}):
 	spawning = true
 	if player:
 		var p = player
@@ -56,14 +99,18 @@ func respawn_player(player_died=false):
 			p.name = "DeadPlayer"
 			p.queue_free()
 
-	# defer to let player free safely?
-	call_deferred("_respawn_player", player_died)
+	# defer to let player free safely
+	_respawn_player.call_deferred(opts)
 
-func _respawn_player(player_died=false):
-	var spawn_coords = current_game.get_spawn_coords()
+func _respawn_player(opts={}):
+	var player_died = opts.get("player_died", false)
+	var spawn_coords = opts.get("spawn_coords")
+	if not spawn_coords:
+		var coords_fn = opts.get("spawn_coords_fn", respawn_coords)
+		spawn_coords = coords_fn.call()
 
-	player = player_scene.instantiate()
-	if spawn_coords:
+	player = current_game.get_player_scene().instantiate()
+	if not spawn_coords == null:
 		player.position = spawn_coords
 	else:
 		Debug.err("No spawn coords found when respawning player")
@@ -77,39 +124,29 @@ func _respawn_player(player_died=false):
 	current_game.update_world()
 	spawning = false
 
+func respawn_coords():
+	if current_game.has_method("get_spawn_coords"):
+		return current_game.get_spawn_coords()
+
+	# TODO better game-independent respawn logic
+	# probably via player_spawn_points group
+	# collect nodes in groups
+	# apply some kind of sort
+	# return first preferred global position
+
+	var psp = Util.first_node_in_group("player_spawn_points")
+	if psp:
+		return psp.global_position
+	var elevator = Util.first_node_in_group("elevator")
+	if elevator:
+		return elevator.global_position
+
+
 
 ###########################################################
 # dev helper functions
 
-func maybe_spawn_player():
-	if not managed_game and not Engine.is_editor_hint() and player == null and not spawning:
-		Debug.pr("Unmanaged game, player is null, spawning")
-		respawn_player()
-
-###########################################################
-# game lifecycle
-
-# probably a DinoGame type
-var current_game = HatBot
-
-var managed_game: bool = false
-
-func register(game):
-	# make sure we get a player scene
-	register_player_scene(game.get_player_scene())
-	game.register()
-
-func set_current_game(game):
-	current_game = game
-
-func restart_game(game=null):
-	if game:
-		set_current_game(game)
-
-	if not current_game:
-		Debug.err("No current_game set")
-		return
-
-	managed_game = true
-	register(current_game)
-	current_game.start()
+func maybe_spawn_player(opts={}):
+	if not is_managed and not Engine.is_editor_hint() and player == null and not spawning:
+		Debug.pr("Unmanaged game, player is null, spawning a new one", opts)
+		respawn_player(opts)
