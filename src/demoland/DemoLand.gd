@@ -36,7 +36,7 @@ func register():
 
 	var zones = Hotel.query({"group": "metro_zones"})
 
-	Debug.pr("HatBot registered", len(zones), "zones and first zone ", first_zone)
+	Debug.pr("DemoLand registered", len(zones), "zones and first zone ", first_zone)
 
 ###########################################################
 # player

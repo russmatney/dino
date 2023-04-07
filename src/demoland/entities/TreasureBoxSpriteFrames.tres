@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://vfgj4qh623p0"]
 
 [ext_resource type="Texture2D" uid="uid://dtedwnudfu376" path="res://assets/hatbot/treasurebox_sheet.png" id="1_q3irs"]
 

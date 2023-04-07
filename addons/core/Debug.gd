@@ -181,6 +181,18 @@ func pr(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var m = to_printable(msgs, get_stack())
 	print_rich(m)
 
+func info(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+	var m = to_printable(msgs, get_stack())
+	print_rich(m)
+
+func log(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+	var m = to_printable(msgs, get_stack())
+	print_rich(m)
+
 func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
@@ -190,11 +202,17 @@ func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 func warn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
+	var rich_msgs = msgs.duplicate()
+	rich_msgs.push_front("[color=yellow][WARN][/color]")
+	print_rich(to_printable(rich_msgs, get_stack(), true))
 	var m = to_printable(msgs, get_stack(), true, false)
 	push_warning(m)
 
 func err(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)
+	var rich_msgs = msgs.duplicate()
+	rich_msgs.push_front("[color=red][ERR][/color]")
+	print_rich(to_printable(rich_msgs, get_stack(), true))
 	var m = to_printable(msgs, get_stack(), true, false)
 	push_error(m)

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=29 format=3]
+[gd_resource type="SpriteFrames" load_steps=29 format=3 uid="uid://buwix7wp71vf1"]
 
 [ext_resource type="Texture2D" uid="uid://c6oecyd264fgd" path="res://assets/hatbot/coindoor_sheet.png" id="1_psynu"]
 

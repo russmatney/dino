@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3]
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://r3lxa4h7qi4n"]
 
 [ext_resource type="Texture2D" uid="uid://dipp5jx781kiv" path="res://assets/hatbot/box_sheet.png" id="1_yrhqc"]
 

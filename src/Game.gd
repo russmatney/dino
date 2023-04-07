@@ -17,10 +17,12 @@ func _ready():
 ###########################################################
 # handling current_game (for dev-mode), could live elsewhere
 
+# NOTE these need to auto-load BEFORE Game.gd
 var games = [HatBot, DemoLand]
 
 func game_for_scene(sfp):
-	var gs = games.filter(func(g): return g.manages_scene(sfp))
+	Debug.log("games", games)
+	var gs = games.filter(func(g): return g and g.manages_scene(sfp))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
@@ -35,11 +37,11 @@ func set_current_game_for_scene(sfp):
 
 func ensure_current_game(sfp=null):
 	if not current_game:
-		Debug.prn("No current_game, setting with passed sfp", sfp)
+		Debug.pr("No current_game, setting with passed sfp", sfp)
 		set_current_game_for_scene(sfp)
 	if not current_game:
 		Debug.warn("No current_game!")
-		# TODO get cute about looking one up based on the scene tree?
+		# TODO get cute about looking one up based on the scene tree or autoloads?
 
 ###########################################################
 # game lifecycle
@@ -49,6 +51,7 @@ var current_game: DinoGame
 var is_managed: bool = false
 
 func register_current_game(game):
+	Debug.pr("Registering current game", game)
 	current_game = game
 	game.register()
 
@@ -84,10 +87,18 @@ func _on_player_found(p):
 		player = p
 
 	player_found.emit(player)
-	current_game.update_world()
+	if current_game:
+		current_game.update_world()
 
 var spawning = false
 func respawn_player(opts={}):
+	if not current_game:
+		Debug.warn("No current_game, can't respawn player")
+		return
+	if not current_game.get_player_scene():
+		Debug.warn("current_game has not player_scene, can't respawn player", current_game)
+		return
+
 	spawning = true
 	if player:
 		var p = player

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=22 format=3 uid="uid://db4aadcckt033"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_71epl"]
 [ext_resource type="PackedScene" path="res://src/demoland/zones/area01/01Entrance.tscn" id="1_vpwkf"]
@@ -28,7 +28,7 @@ script = ExtResource("1_71epl")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.454902, 0.423529, 0.486275, 1)
 
-[node name="01Entrance" parent="." groups=["metro_rooms"] instance=ExtResource("1_vpwkf")]
+[node name="01Entrance" parent="." instance=ExtResource("1_vpwkf")]
 show_behind_parent = true
 position = Vector2(264, -24)
 
@@ -70,18 +70,18 @@ position = Vector2(-152, 0)
 [node name="Candle3" parent="03FirstSnowMan" instance=ExtResource("15_r03j1")]
 position = Vector2(12, -24)
 
-[node name="04SecondSnowman" parent="." groups=["metro_rooms"] instance=ExtResource("4_kj05g")]
+[node name="04SecondSnowman" parent="." instance=ExtResource("4_kj05g")]
 show_behind_parent = true
 position = Vector2(72, -176)
 
 [node name="Candle2" parent="04SecondSnowman" instance=ExtResource("15_r03j1")]
 position = Vector2(-17, -15)
 
-[node name="05Crossroads" parent="." groups=["metro_rooms"] instance=ExtResource("5_qqhvm")]
+[node name="05Crossroads" parent="." instance=ExtResource("5_qqhvm")]
 show_behind_parent = true
 position = Vector2(-152, -128)
 
-[node name="06BossChamber" parent="." groups=["metro_rooms"] instance=ExtResource("6_xa5kp")]
+[node name="06BossChamber" parent="." instance=ExtResource("6_xa5kp")]
 show_behind_parent = true
 position = Vector2(-200, -232)
 
@@ -92,7 +92,7 @@ position = Vector2(-400, -224)
 [node name="Candle4" parent="07ThirdSnowman" instance=ExtResource("15_r03j1")]
 position = Vector2(16, -8)
 
-[node name="08DownTower" parent="." groups=["metro_rooms"] instance=ExtResource("8_umldl")]
+[node name="08DownTower" parent="." instance=ExtResource("8_umldl")]
 show_behind_parent = true
 position = Vector2(-240, -40)
 
