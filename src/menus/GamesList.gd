@@ -4,7 +4,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		"label": "Dungeon Crawler",
-		"nav_to": "res://src/dungeonCrawler/rooms/OneGeon.tscn",
+		"nav_to": "res://src/dungeonCrawler/zones/OneGeon.tscn",
 	},
 	{
 		"label": "Runner",

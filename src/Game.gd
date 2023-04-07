@@ -18,7 +18,7 @@ func _ready():
 # handling current_game (for dev-mode), could live elsewhere
 
 # NOTE these need to auto-load BEFORE Game.gd
-var games = [HatBot, DemoLand]
+var games = [HatBot, DemoLand, DungeonCrawler]
 
 func game_for_scene(sfp):
 	Debug.log("games", games)

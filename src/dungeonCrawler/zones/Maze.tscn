@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtfsrffjj83sd"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/weapons/BowlingBall.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/enemies/bowlingBoss/Barney.tscn" id="2"]
-[ext_resource type="Script" path="res://src/dungeonCrawler/rooms/Dungeon.gd" id="3"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/zones/Dungeon.gd" id="3"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://cmaxg11lghsbw" path="res://addons/reptile/tilemaps/3x3TileMap.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://addons/camera/Cam2D.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://bflpu7dhqovtc" path="res://addons/camera/Cam2D.tscn" id="7"]
 
 [node name="Maze" type="Node2D"]
 script = ExtResource("3")

@@ -38,7 +38,7 @@ var fallback_drop_scenes = [preload("res://src/dungeonCrawler/items/Coin.tscn")]
 
 func emit_drop(scene):
 	var drop = scene.instantiate()
-	drop.position = transform.origin
+	drop.global_position = get_global_position()
 	Navi.current_scene.call_deferred("add_child", drop)
 
 	# eh? particle physics?
