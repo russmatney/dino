@@ -1,6 +1,7 @@
 # Hotel is so-named because it is intended as a Room manager
 # 'Room' being a game unit, specifically the level I want to design at
-# A group of rooms is gathered into an 'Area'
+# A group of rooms is gathered into an 'Zone'. (These are MetroRoom
+# and MetroZones for now)
 #
 # Hotel is primarily a database.
 # It wants to be a light-weight manager for game state.
@@ -29,7 +30,7 @@ func drop_db():
 # key
 
 var hotel_root_group_name = "hotel_singletons"
-var root_groups = ["mvania_areas", "player", hotel_root_group_name]
+var root_groups = ["metro_zones", "player", hotel_root_group_name]
 
 func is_in_root_group(x):
 	if x is Dictionary:
@@ -53,7 +54,7 @@ func node_to_entry_key(node):
 	var key = to_entry_key({path=node.name}, parents)
 	return key
 
-## converts the passed data dict and parents list into a path from area to the current scene
+## converts the passed data dict and parents list into a path from zone to the current scene
 func to_entry_key(data, parents=[]):
 	var key = data.get("path")
 	if is_in_root_group(data):
@@ -114,7 +115,7 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 			entry["groups"].append_array(inst["groups"])
 
 		# update last_room based on groups
-		if "mvania_rooms" in entry["groups"]:
+		if "metro_rooms" in entry["groups"]:
 			last_room = entry
 
 		# set script data
@@ -129,14 +130,14 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 		if "instance_name" in d:
 			entry["instance_name"] = d["instance_name"]
 
-		# set area and room names via parents
+		# set zone and room names via parents
 		for p in ps:
-			if "mvania_areas" in p["groups"]:
-				entry["area_name"] = p["name"]
+			if "metro_zones" in p["groups"]:
+				entry["zone_name"] = p["name"]
 
 		for p in ps:
-			if "mvania_rooms" in p["groups"]:
-				entry["room_name"] = str(p["area_name"], "/", p["name"])
+			if "metro_rooms" in p["groups"]:
+				entry["room_name"] = str(p["zone_name"], "/", p["name"])
 
 		# set room name for non-room-instance children (which are flattened here)
 		if not "room_name" in entry and last_room != null:
@@ -228,8 +229,8 @@ func query(q={}):
 	if "group" in q:
 		vals = vals.filter(func (s_dict): return q["group"] in s_dict.get("groups", []))
 
-	if "area_name" in q:
-		vals = vals.filter(func (s_dict): return q["area_name"] == s_dict.get("area_name"))
+	if "zone_name" in q:
+		vals = vals.filter(func (s_dict): return q["zone_name"] == s_dict.get("zone_name"))
 
 	if "room_name" in q:
 		vals = vals.filter(func (s_dict): return q["room_name"] == s_dict.get("room_name"))

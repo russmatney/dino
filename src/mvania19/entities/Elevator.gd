@@ -13,8 +13,8 @@ var actions = [
 	]
 
 func get_dest_label():
-	if destination_area_name:
-		return "To %s" % destination_area_name.capitalize()
+	if destination_zone_name:
+		return "To %s" % destination_zone_name.capitalize()
 	else:
 		return "Travel"
 
@@ -31,7 +31,7 @@ func _ready():
 	anim.play("opening")
 
 	var p = get_parent()
-	if p is MvaniaRoom:
+	if p is MetroRoom:
 		room = p
 
 func check_out(_data):
@@ -39,7 +39,7 @@ func check_out(_data):
 
 func hotel_data():
 	return {
-		destination_area_name=destination_area_name,
+		destination_zone_name=destination_zone_name,
 		destination_elevator_path=destination_elevator_path,
 		}
 
@@ -50,7 +50,7 @@ func _on_anim_finished():
 		z_index = 0
 	if anim.animation == "closing":
 		if travel_dest != null:
-			MvaniaGame.travel_to(travel_dest[0], travel_dest[1])
+			Metro.travel_to(travel_dest[0], travel_dest[1])
 			traveling = false
 			travel_dest = null
 		else:
@@ -73,7 +73,7 @@ func travel(player):
 	player.move_to_target(global_position)
 	traveling = true
 	z_index = 10
-	travel_dest = [destination_area_name, destination_elevator_path]
+	travel_dest = [destination_zone_name, destination_elevator_path]
 	anim.play("closing")
 
 ###################################################################
@@ -84,12 +84,12 @@ func travel(player):
 	set(v):
 		clear = v
 		if v:
-			destination_area_name = ""
+			destination_zone_name = ""
 			destination_elevator_path = ""
 
-var destination_area_name: String :
+var destination_zone_name: String :
 	set(v):
-		destination_area_name = v
+		destination_zone_name = v
 		notify_property_list_changed()
 
 var destination_elevator_path: String :
@@ -99,14 +99,14 @@ var destination_elevator_path: String :
 
 func _get_property_list() -> Array:
 	var dest_elevator_usage = PROPERTY_USAGE_NO_EDITOR
-	if not destination_area_name == null and len(destination_area_name) > 0:
+	if not destination_zone_name == null and len(destination_zone_name) > 0:
 		dest_elevator_usage = PROPERTY_USAGE_DEFAULT
 
 	return [{
-			name = "destination_area_name",
+			name = "destination_zone_name",
 			type = TYPE_STRING,
 			hint = PROPERTY_HINT_ENUM,
-			hint_string = list_area_names()
+			hint_string = list_zone_names()
 		}, {
 			name = "destination_elevator_path",
 			type = TYPE_STRING,
@@ -115,12 +115,12 @@ func _get_property_list() -> Array:
 			hint_string = list_elevator_paths()
 		}]
 
-func list_area_names():
-	var areas = Hotel.query({"group": "mvania_areas"})
+func list_zone_names():
+	var areas = Hotel.query({"group": "metro_zones"})
 	return ",".join(areas.map(func(area): return area.get("name")))
 
 func ele_path(entry):
-	var rm = str(entry.get("room_name")).replace(destination_area_name, ".")
+	var rm = str(entry.get("room_name")).replace(destination_zone_name, ".")
 	var path = str(entry.get("path"))
 	if path.contains(rm):
 		return str(path)
@@ -128,12 +128,12 @@ func ele_path(entry):
 		return str(rm.path_join(path)).replace("/./", "/")
 
 func list_elevator_paths():
-	if destination_area_name == null or len(destination_area_name) == 0:
+	if destination_zone_name == null or len(destination_zone_name) == 0:
 		return ""
 
 	var elevators = Hotel.query({
 		"group": "elevators",
-		"area_name": destination_area_name,
+		"zone_name": destination_zone_name,
 		# exclude THIS elevator
 		"filter": func(ele): return ele["name"] != name \
 		# include this to avoid excluding elevator nodes that aren't renamed

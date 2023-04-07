@@ -31,7 +31,7 @@ func _on_entry_updated(entry):
 			set_coins(entry["coins"])
 	if "enemies" in entry["groups"]:
 		update_enemy_status(entry)
-	if "mvania_rooms" in entry["groups"]:
+	if "metro_rooms" in entry["groups"]:
 		update_minimap(entry)
 
 ##########################################
@@ -136,10 +136,10 @@ func update_enemy_status(enemy):
 
 # @onready var minimap = $%Minimap
 
-@onready var area_name = $%AreaName
+@onready var zone_name = $%ZoneName
 @onready var room_name = $%RoomName
 
 func update_minimap(room):
 	if room.get("has_player"):
-		area_name.text = room.get("area_name").capitalize()
+		zone_name.text = room.get("zone_name").capitalize()
 		room_name.text = room.get("name").capitalize()

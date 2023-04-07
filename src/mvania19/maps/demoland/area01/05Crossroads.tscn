@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://bmh26bnfo67vi"]
 
-[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_6mbfn"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_moefn"]
+[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_ypp1l"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="3_26a7u"]
+[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="4_5glld"]
 
-[node name="05Crossroads" type="Node2D"]
-script = ExtResource("1_6mbfn")
+[node name="05Crossroads" type="Node2D" groups=["metro_rooms"]]
+script = ExtResource("1_ypp1l")
 metadata/_edit_vertical_guides_ = [-72.0, 76.0]
 metadata/_edit_horizontal_guides_ = [-56.0, 60.0]
 
@@ -15,3 +17,19 @@ layer_0/tile_data = PackedInt32Array(-393224, 1, 0, -327688, 131073, 0, -262152,
 visible = false
 collision_layer = 0
 collision_mask = 2
+
+[node name="CamPOA" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
+position = Vector2(-72, -56)
+script = ExtResource("4_5glld")
+
+[node name="@CamPOA@53719" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
+position = Vector2(72, 56)
+script = ExtResource("4_5glld")
+
+[node name="@CamPOA@53720" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
+position = Vector2(72, -56)
+script = ExtResource("4_5glld")
+
+[node name="@CamPOA@53721" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
+position = Vector2(-72, 56)
+script = ExtResource("4_5glld")

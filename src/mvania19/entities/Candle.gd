@@ -35,7 +35,7 @@ func _ready():
 	action_area.register_actions(actions, self)
 
 	var p = get_parent()
-	if p is MvaniaRoom:
+	if p is MetroRoom:
 		room = p
 
 #################################################################

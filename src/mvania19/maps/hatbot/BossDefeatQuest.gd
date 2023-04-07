@@ -29,7 +29,7 @@ func _ready():
 	reset_bosses()
 
 	var r = get_parent()
-	if r is MvaniaRoom:
+	if r is MetroRoom:
 		room = r
 
 #####################################################

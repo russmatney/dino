@@ -15,10 +15,10 @@ func _ready():
 
 
 func update(entry):
-	if "mvania_areas" in entry.get("groups", []):
+	if "metro_zones" in entry.get("groups", []):
 		update_minimap_data()
 		update_map()
-	if "mvania_rooms" in entry.get("groups", []):
+	if "metro_rooms" in entry.get("groups", []):
 		update_minimap_data()
 		update_map()
 
@@ -43,20 +43,20 @@ func merged_rect(rms):
 ################################################################
 # update data
 
-var area_data = {}
+var zone_data = {}
 
 func update_minimap_data():
-	var current_area = MvaniaGame.current_area
-	if not current_area:
+	var current_zone = Metro.current_zone
+	if not current_zone:
 		if Engine.is_editor_hint():
-			current_area = Hotel.first({group="mvania_areas"})
+			current_zone = Hotel.first({group="metro_zones"})
 		else:
-			Debug.pr("No current area")
+			Debug.pr("No current zone")
 			return
 
-	var areas = Hotel.query({area_name=current_area.name, group="mvania_areas"})
-	if len(areas) > 0:
-		area_data = areas[0]
+	var zones = Hotel.query({zone_name=current_zone.name, group="metro_zones"})
+	if len(zones) > 0:
+		zone_data = zones[0]
 
 ################################################################
 # update_map
@@ -64,16 +64,16 @@ func update_minimap_data():
 var rooms = []
 @onready var cam = $Camera2D
 
-var last_area_name
+var last_zone_name
 func update_map():
-	if len(area_data) == 0:
+	if len(zone_data) == 0:
 		return
 
-	if last_area_name == null or last_area_name != area_data["name"]:
+	if last_zone_name == null or last_zone_name != zone_data["name"]:
 		clear_map()
-		last_area_name = area_data["name"]
+		last_zone_name = zone_data["name"]
 
-	rooms = Hotel.query({area_name=area_data["name"], group="mvania_rooms"})
+	rooms = Hotel.query({zone_name=zone_data["name"], group="metro_rooms"})
 	var merged = merged_rect(rooms)
 	var offset = Vector2.ZERO
 	if merged.position.x < 0:
@@ -130,8 +130,8 @@ func update_camera_limits(merged: Rect2):
 # draw
 
 # func _draw():
-# 	if not area_data == null and len(area_data) > 0:
-# 		var merged = merged_rect(area_data["rooms"].values())
+# 	if not zone_data == null and len(zone_data) > 0:
+# 		var merged = merged_rect(zone_data["rooms"].values())
 # 		var offset = Vector2.ZERO
 # 		if merged.position.x < 0:
 # 			offset.x = -merged.position.x

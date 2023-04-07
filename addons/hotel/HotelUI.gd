@@ -11,7 +11,7 @@ func _ready():
 	list_entries()
 	reset_option_buttons()
 
-	area_option_button.item_selected.connect(_on_area_selected)
+	zone_option_button.item_selected.connect(_on_zone_selected)
 	room_option_button.item_selected.connect(_on_room_selected)
 	group_option_button.item_selected.connect(_on_group_selected)
 	has_group_toggle.pressed.connect(_on_has_group_toggle)
@@ -52,24 +52,24 @@ func _on_rebuild_db_button_pressed():
 
 # consider drying up this pattern
 
-@onready var area_option_button = $%AreaOptionButton
+@onready var zone_option_button = $%ZoneOptionButton
 @onready var room_option_button = $%RoomOptionButton
 @onready var group_option_button = $%GroupOptionButton
 @onready var has_group_toggle = $%HasGroupToggle
 @onready var is_root_toggle = $%IsRootToggle
-var area_names = []
+var zone_names = []
 var room_names = []
 var groups = []
 
 var query = {has_group=true,}
 
-func _on_area_selected(idx):
-	if idx > len(area_names) - 1:
-		query.erase("area_name")
+func _on_zone_selected(idx):
+	if idx > len(zone_names) - 1:
+		query.erase("zone_name")
 	else:
-		var area_name = area_names[idx]
-		if area_name:
-			query["area_name"] = area_name
+		var zone_name = zone_names[idx]
+		if zone_name:
+			query["zone_name"] = zone_name
 
 	list_entries()
 
@@ -110,10 +110,10 @@ func _on_is_root_toggle():
 	list_entries()
 
 func reset_option_buttons():
-	area_option_button.clear()
-	for an in area_names:
-		area_option_button.add_item(an)
-	area_option_button.add_item("Clear")
+	zone_option_button.clear()
+	for an in zone_names:
+		zone_option_button.add_item(an)
+	zone_option_button.add_item("Clear")
 
 	room_option_button.clear()
 	for rn in room_names:
@@ -138,8 +138,8 @@ func list_entries():
 		ch.queue_free()
 
 	for e in entries:
-		if "area_name" in e and e["area_name"] not in area_names:
-			area_names.append(e["area_name"])
+		if "zone_name" in e and e["zone_name"] not in zone_names:
+			zone_names.append(e["zone_name"])
 		if "room_name" in e and e["room_name"] not in room_names:
 			room_names.append(e["room_name"])
 		if "groups" in e:
@@ -156,7 +156,7 @@ func list_entries():
 
 		db_entries.call_deferred("add_child", lbl)
 
-	area_names.sort()
+	zone_names.sort()
 	room_names.sort()
 	groups.sort()
 

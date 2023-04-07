@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbjgf4a4ixvm1"]
+[gd_scene load_steps=6 format=3 uid="uid://bbjgf4a4ixvm1"]
 
-[ext_resource type="Script" path="res://src/mvania19/MvaniaRoom.gd" id="1_o2vbl"]
+[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_oehus"]
 [ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://src/mvania19/tiles/DemoTiles.tscn" id="1_x4gas"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="3_85f6w"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="4_hnj0w"]
 [ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="4_pg681"]
 
-[node name="02MainTower" type="Node2D" groups=["mvania_rooms"]]
-script = ExtResource("1_o2vbl")
+[node name="02MainTower" type="Node2D" groups=["metro_rooms"]]
+script = ExtResource("1_oehus")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -30,23 +31,35 @@ rotation = 0.949459
 color = Color(0.819608, 0.854902, 0.219608, 1)
 shadow_enabled = true
 
+[node name="CamPOF" parent="." groups=["auto_pofs"] instance=ExtResource("3_85f6w")]
+position = Vector2(-40, -192)
+
+[node name="@CamPOF@25078" parent="." groups=["auto_pofs"] instance=ExtResource("3_85f6w")]
+position = Vector2(40, 296)
+
+[node name="@CamPOF@25079" parent="." groups=["auto_pofs"] instance=ExtResource("3_85f6w")]
+position = Vector2(40, -192)
+
+[node name="@CamPOF@25080" parent="." groups=["auto_pofs"] instance=ExtResource("3_85f6w")]
+position = Vector2(-40, 296)
+
 [node name="RoomBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CamPOF" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_85f6w")]
+[node name="CamPOA" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("4_hnj0w")]
 position = Vector2(-40, -192)
 script = ExtResource("4_pg681")
 
-[node name="@CamPOF@25078" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_85f6w")]
+[node name="@CamPOA@45837" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("4_hnj0w")]
 position = Vector2(40, 296)
 script = ExtResource("4_pg681")
 
-[node name="@CamPOF@25079" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_85f6w")]
+[node name="@CamPOA@45838" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("4_hnj0w")]
 position = Vector2(40, -192)
 script = ExtResource("4_pg681")
 
-[node name="@CamPOF@25080" type="Marker2D" parent="." groups=["auto_pofs", "pofs", "pofs"] instance=ExtResource("3_85f6w")]
+[node name="@CamPOA@45839" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("4_hnj0w")]
 position = Vector2(-40, 296)
 script = ExtResource("4_pg681")

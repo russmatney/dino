@@ -8,9 +8,9 @@ enum Powerup { Sword, DoubleJump, Climb, Read }
 var all_powerups = [Powerup.Sword, Powerup.DoubleJump, Powerup.Climb]
 
 ###########################################################
-# hatbot areas
+# hatbot zones
 
-const demoland_area_scenes = [
+const demoland_zone_scenes = [
 	"res://src/mvania19/maps/demoland/area01/Area01.tscn",
 	"res://src/mvania19/maps/demoland/area02/Area02.tscn",
 	"res://src/mvania19/maps/demoland/area03/Area03.tscn",
@@ -21,7 +21,7 @@ const demoland_area_scenes = [
 	"res://src/mvania19/maps/demoland/area08allthethings/Area08AllTheThings.tscn",
 	]
 
-const hatbot_area_scenes = [
+const hatbot_zone_scenes = [
 	"res://src/mvania19/maps/hatbot/LevelZero.tscn",
 	"res://src/mvania19/maps/hatbot/TheLandingSite.tscn",
 	"res://src/mvania19/maps/hatbot/Simulation.tscn",
@@ -29,34 +29,26 @@ const hatbot_area_scenes = [
 	"res://src/mvania19/maps/hatbot/Volcano.tscn",
 	]
 
-## Returns true if the passed scene is managed by HatBot
-func manages_scene(scene):
-	return scene.scene_file_path in area_scenes
-
-# var area_scenes = demoland_area_scenes
-var area_scenes = hatbot_area_scenes
-var first_area
-
-# probably actually an areas/zones helper func
-func register_areas():
-	Debug.pr("Checking in HatBot Areas")
-
-	if not first_area:
-		first_area = area_scenes[0]
-
-	for sfp in area_scenes:
-		Hotel.book(sfp)
-
-	var areas = Hotel.query({"group": "mvania_areas"})
-
-	Debug.pr("HatBot registered", len(areas), "areas.")
-
 ###########################################################
 # register
 
-## Registers hatbot areas
+func manages_scene(scene):
+	return scene.scene_file_path in hatbot_zone_scenes
+
+var first_zone
+
 func register():
-	register_areas()
+	Debug.pr("Registering HatBot Zones")
+
+	for sfp in hatbot_zone_scenes:
+		Hotel.book(sfp)
+
+	if not first_zone:
+		first_zone = hatbot_zone_scenes[0]
+
+	var zones = Hotel.query({"group": "metro_zones"})
+
+	Debug.pr("HatBot registered", len(zones), "zones and first zone ", first_zone)
 
 ###########################################################
 # player
@@ -67,7 +59,8 @@ func get_player_scene():
 	return player_scene
 
 func get_spawn_coords():
-	return MvaniaGame.get_spawn_coords()
+	# TODO consider non-global usage of Metro here
+	return Metro.get_spawn_coords()
 
 ###########################################################
 # start
@@ -75,10 +68,10 @@ func get_spawn_coords():
 func start():
 	Debug.prn("Starting HatBot!")
 
-	# consider area selection logic
 	# TODO pull from saved game?
-	MvaniaGame.load_area(first_area)
+	Metro.load_zone(first_zone)
 
 ## Called to trigger a world update after the player is loaded or removed
 func update_world():
-	MvaniaGame.update_rooms()
+	# TODO consider non-global usage of Metro here
+	Metro.update_zone()

@@ -11,9 +11,9 @@ var _navi = Navi
 
 func pw(msg: String, item = {}):
 	if item:
-		print("[NaviMenu] Warning: ", msg, " item: ", item)
+		Debug.warn(msg, "item:", item)
 	else:
-		print("[NaviMenu] Warning: ", msg)
+		Debug.warn(msg)
 
 
 ## config warnings #####################################################################
