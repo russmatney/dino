@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://ddlibeeuuh12v"]
 
 [ext_resource type="SpriteFrames" uid="uid://dluh18k2o67ff" path="res://src/hatbot/enemies/goomba_sprite_frames.tres" id="1_s7guy"]
 [ext_resource type="Script" path="res://src/hatbot/enemies/Goomba.gd" id="1_vdsqm"]

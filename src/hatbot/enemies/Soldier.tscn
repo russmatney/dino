@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://d2b2tuk47rndw"]
 
 [ext_resource type="Script" path="res://src/hatbot/enemies/Soldier.gd" id="1_ca64f"]
-[ext_resource type="SpriteFrames" uid="uid://bk18wq80s2nw6" path="res://src/hatbot/enemies/SoldierSpriteFrames.tres" id="1_cvejl"]
+[ext_resource type="SpriteFrames" uid="uid://tehrf3qb1t4c" path="res://src/hatbot/enemies/SoldierSpriteFrames.tres" id="1_cvejl"]
 [ext_resource type="PackedScene" path="res://src/hatbot/enemies/machine/EnemyMachine.tscn" id="3_22wf2"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="4_f6c4x"]
 

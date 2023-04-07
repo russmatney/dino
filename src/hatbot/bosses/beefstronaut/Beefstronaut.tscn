@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=17 format=3 uid="uid://bsc7ya3jv8mlf"]
 
 [ext_resource type="Script" path="res://src/hatbot/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="2_jbhjj"]
-[ext_resource type="SpriteFrames" uid="uid://cije58jjaeikn" path="res://src/hatbot/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
+[ext_resource type="SpriteFrames" path="res://src/hatbot/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Idle.gd" id="4_rwt87"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Firing.gd" id="5_5chnv"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Warping.gd" id="9_3hlyf"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Laughing.gd" id="10_dgtvf"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="12_7xc6l"]
-[ext_resource type="PackedScene" uid="uid://psr6qa0jnbc5" path="res://src/hatbot/player/SkullParticles.tscn" id="13_qnfjf"]
+[ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="13_qnfjf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="14_s0hdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dur6t7wxntgbj"]
 
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_8u5qq"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/Monster.tscn" id="2_8pwd8"]
-[ext_resource type="PackedScene" path="res://src/demoland/entities/Box.tscn" id="3_s7p3q"]
-[ext_resource type="PackedScene" path="res://src/demoland/entities/TreasureBox.tscn" id="4_vlxbf"]
-[ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="5_apdpi"]
-[ext_resource type="PackedScene" path="res://src/hatbot/enemies/Soldier.tscn" id="6_3txdl"]
-[ext_resource type="PackedScene" path="res://src/hatbot/entities/Candle.tscn" id="7_cksc3"]
+[ext_resource type="PackedScene" uid="uid://ds7uyvpupe34x" path="res://src/hatbot/player/Monster.tscn" id="2_8pwd8"]
+[ext_resource type="PackedScene" uid="uid://da2wa1ua1rdwh" path="res://src/demoland/entities/Box.tscn" id="3_s7p3q"]
+[ext_resource type="PackedScene" uid="uid://ddjj5kujrnpg5" path="res://src/demoland/entities/TreasureBox.tscn" id="4_vlxbf"]
+[ext_resource type="PackedScene" uid="uid://blsiw37dhgfg4" path="res://src/hatbot/entities/Door.tscn" id="5_apdpi"]
+[ext_resource type="PackedScene" uid="uid://d2b2tuk47rndw" path="res://src/hatbot/enemies/Soldier.tscn" id="6_3txdl"]
+[ext_resource type="PackedScene" uid="uid://j0nvr2rd56ca" path="res://src/hatbot/entities/Candle.tscn" id="7_cksc3"]
 
 [node name="DemoMap" type="Node2D"]
 

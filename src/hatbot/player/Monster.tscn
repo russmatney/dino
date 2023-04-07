@@ -1,6 +1,6 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=22 format=3 uid="uid://ds7uyvpupe34x"]
 
-[ext_resource type="SpriteFrames" uid="uid://dsrjmvmjj7n26" path="res://src/hatbot/player/player_sprite_frames.tres" id="1_w3vs6"]
+[ext_resource type="SpriteFrames" uid="uid://b7n3u8ytapvb4" path="res://src/hatbot/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/hatbot/player/Monster.gd" id="1_wj1cn"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="2_go366"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_hxyr2"]
@@ -16,8 +16,8 @@
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Climb.gd" id="10_vycc5"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_8r4cy"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Sit.gd" id="12_7npxa"]
-[ext_resource type="PackedScene" uid="uid://bo0cjl0owk0me" path="res://src/hatbot/player/HeartParticles.tscn" id="17_g1yjn"]
-[ext_resource type="PackedScene" uid="uid://psr6qa0jnbc5" path="res://src/hatbot/player/SkullParticles.tscn" id="18_6urtn"]
+[ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="17_g1yjn"]
+[ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="18_6urtn"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_67gj4"]
 cull_mode = 2

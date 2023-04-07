@@ -1,12 +1,12 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://67cetdmlytic"]
 
 [ext_resource type="Script" path="res://src/hatbot/hud/HUD.gd" id="1_swmch"]
-[ext_resource type="PackedScene" uid="uid://b7b7ck0q42nl5" path="res://src/hatbot/hud/Minimap.tscn" id="2_hm6ex"]
+[ext_resource type="PackedScene" path="res://src/hatbot/hud/Minimap.tscn" id="2_hm6ex"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_eq15p"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="4_0rxhj"]
-[ext_resource type="Texture2D" uid="uid://cprq2nft4pj6a" path="res://src/hatbot/hud/ClimbingGlovesAtlasTexture.tres" id="5_lrx0n"]
-[ext_resource type="Texture2D" uid="uid://cbjjdocowrh4w" path="res://src/hatbot/hud/DoubleJumpAtlasTexture.tres" id="6_hd868"]
-[ext_resource type="Texture2D" uid="uid://cgwl5x7a5ydx2" path="res://src/hatbot/hud/SwordAtlasTexture.tres" id="7_u2dyi"]
+[ext_resource type="Texture2D" path="res://src/hatbot/hud/ClimbingGlovesAtlasTexture.tres" id="5_lrx0n"]
+[ext_resource type="Texture2D" path="res://src/hatbot/hud/DoubleJumpAtlasTexture.tres" id="6_hd868"]
+[ext_resource type="Texture2D" path="res://src/hatbot/hud/SwordAtlasTexture.tres" id="7_u2dyi"]
 [ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="8_fge0x"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="9_sdjxj"]
 
