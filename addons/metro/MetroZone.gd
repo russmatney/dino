@@ -3,6 +3,47 @@ class_name MetroZone
 extends Node2D
 
 ###########################################################
+# enter tree
+
+func _enter_tree():
+	# required for hotel to pick this up
+	add_to_group("metro_zones", true)
+
+###########################################################
+# ready
+
+func _ready():
+	pause_rooms()
+
+	Hotel.book(self.scene_file_path)
+	Hotel.register(self)
+
+	if not Engine.is_editor_hint():
+		if Metro.current_zone != self:
+			Debug.warn("metro zone had to self-set current zone")
+			Metro.current_zone = self
+
+	Game.maybe_spawn_player.call_deferred()
+
+###########################################################
+# Hotel data
+
+func hotel_data():
+	return {scene_file_path=scene_file_path}
+
+func check_out(_data):
+	pass
+
+
+###########################################################
+# draw
+
+func _draw():
+	if Engine.is_editor_hint():
+		for room in rooms:
+			draw_room_outline(room)
+
+###########################################################
 # rooms
 
 var rooms: Array[MetroRoom] = []
@@ -23,15 +64,6 @@ func draw_room_outline(room: MetroRoom):
 	rect.position += room.position
 	draw_rect(rect, Color.MAGENTA, false, 2.0)
 
-
-###########################################################
-# Hotel data
-
-func hotel_data():
-	return {scene_file_path=scene_file_path}
-
-func check_out(_data):
-	pass
 
 
 ###########################################################
@@ -71,33 +103,3 @@ func player_spawn_coords() -> Vector2:
 	Debug.warn("no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
 	return Vector2.ZERO
 
-###########################################################
-# enter tree
-
-func _enter_tree():
-	# required for hotel to pick this up
-	add_to_group("metro_zones", true)
-
-###########################################################
-# ready
-
-func _ready():
-	pause_rooms()
-
-	Hotel.book(self.scene_file_path)
-	Hotel.register(self)
-
-	if not Engine.is_editor_hint():
-		if Metro.current_zone != self:
-			Debug.warn("metro zone had to self-set current zone")
-			Metro.current_zone = self
-
-	Game.maybe_spawn_player.call_deferred()
-
-###########################################################
-# draw
-
-func _draw():
-	if Engine.is_editor_hint():
-		for room in rooms:
-			draw_room_outline(room)

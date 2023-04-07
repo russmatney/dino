@@ -43,7 +43,7 @@ func register():
 	for sfp in hatbot_zone_scenes:
 		Hotel.book(sfp)
 
-	if not first_zone:
+	if first_zone == null:
 		first_zone = hatbot_zone_scenes[0]
 
 	var zones = Hotel.query({"group": "metro_zones"})

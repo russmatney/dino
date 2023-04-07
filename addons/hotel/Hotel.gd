@@ -177,7 +177,8 @@ func register(node, opts={}):
 	# restore node state with data from hotel
 	var data = check_out(node)
 	if data == null:
-		Debug.warn("No data found for node: ", node, "passing empty dict.")
+		if not Engine.is_editor_hint():
+			Debug.warn("No data found for node: ", node, "passing empty dict.")
 		data = {}
 	node.check_out(data)
 
@@ -206,7 +207,8 @@ func check_in(node: Node, data=null):
 		# if len(data):
 		# 	Hood.dev_notif(node, "check_in", data)
 	else:
-		Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
+		if not Engine.is_editor_hint():
+			Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 
 ######################################################################
 # read
@@ -221,7 +223,8 @@ func check_out(node: Node):
 	if key in scene_db:
 		return scene_db[key]
 	else:
-		Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
+		if not Engine.is_editor_hint():
+			Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
 ## Flexible access to the scene_db vals
 func query(q={}):
