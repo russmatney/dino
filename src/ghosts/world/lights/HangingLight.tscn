@@ -35,6 +35,7 @@ softness = 2.0
 position = Vector2(0, 18)
 collision_layer = 0
 collision_mask = 0
+mass = 0.01
 
 [node name="ColorRect" type="ColorRect" parent="Chain"]
 offset_left = -1.0
@@ -50,11 +51,13 @@ shape = SubResource("2")
 position = Vector2(0, 26)
 node_a = NodePath("../Chain")
 node_b = NodePath("../Chain2")
+softness = 10.0
 
 [node name="Chain2" type="RigidBody2D" parent="."]
 position = Vector2(0, 36)
 collision_layer = 0
 collision_mask = 0
+mass = 0.01
 
 [node name="ColorRect" type="ColorRect" parent="Chain2"]
 offset_left = -1.0
@@ -70,11 +73,13 @@ shape = SubResource("2")
 position = Vector2(0, 44)
 node_a = NodePath("../Chain2")
 node_b = NodePath("../Chain3")
+softness = 10.0
 
 [node name="Chain3" type="RigidBody2D" parent="."]
 position = Vector2(0, 54)
 collision_layer = 0
 collision_mask = 0
+mass = 0.01
 
 [node name="ColorRect" type="ColorRect" parent="Chain3"]
 offset_left = -1.0
@@ -90,11 +95,13 @@ shape = SubResource("2")
 position = Vector2(0, 62)
 node_a = NodePath("../Chain3")
 node_b = NodePath("../Chain4")
+softness = 10.0
 
 [node name="Chain4" type="RigidBody2D" parent="."]
 position = Vector2(0, 72)
 collision_layer = 0
 collision_mask = 0
+mass = 0.01
 
 [node name="ColorRect" type="ColorRect" parent="Chain4"]
 offset_left = -1.0
@@ -110,11 +117,13 @@ shape = SubResource("2")
 position = Vector2(0, 80)
 node_a = NodePath("../Chain4")
 node_b = NodePath("../Chain5")
+softness = 10.0
 
 [node name="Chain5" type="RigidBody2D" parent="."]
 position = Vector2(0, 90)
 collision_layer = 0
 collision_mask = 0
+mass = 0.01
 
 [node name="ColorRect" type="ColorRect" parent="Chain5"]
 offset_left = -1.0
@@ -130,11 +139,13 @@ shape = SubResource("2")
 position = Vector2(0, 98)
 node_a = NodePath("../Chain5")
 node_b = NodePath("../Chain6")
+softness = 10.0
 
 [node name="Chain6" type="RigidBody2D" parent="."]
 position = Vector2(0, 108)
 collision_layer = 0
 collision_mask = 0
+mass = 0.01
 
 [node name="ColorRect" type="ColorRect" parent="Chain6"]
 offset_left = -1.0
@@ -150,8 +161,10 @@ shape = SubResource("2")
 position = Vector2(0, 116)
 node_a = NodePath("../Chain6")
 node_b = NodePath("../SmallLight")
-softness = 2.0
+softness = 10.0
 
 [node name="SmallLight" parent="." instance=ExtResource("1")]
 position = Vector2(0, 118)
-gravity_scale = 50.0
+mass = 0.01
+gravity_scale = 1.0
+freeze_mode = 1

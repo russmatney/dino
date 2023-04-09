@@ -1,21 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://ddklv6bc7o134"]
 
-[ext_resource path="res://addons/core/assets/lights/light1_nobg_sheet.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="1"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id="1"]
 
 [node name="SmallLight" type="RigidBody2D"]
-gravity_scale = 118.84
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -10.0
 offset_top = -11.0
 offset_right = 9.0
 offset_bottom = 10.0
-color = Color( 0.839216, 0.737255, 0.258824, 0.788235 )
+color = Color(0.839216, 0.737255, 0.258824, 0.788235)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource("1")
