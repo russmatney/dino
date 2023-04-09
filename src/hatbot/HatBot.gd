@@ -50,7 +50,7 @@ func register():
 	if first_zone == null:
 		first_zone = hatbot_zone_scenes[0]
 
-	var zones = Hotel.query({"group": "metro_zones"})
+	var zones = Hotel.query({"group": Metro.zones_group})
 
 	Debug.pr("HatBot registered", len(zones), "zones and first zone ", first_zone)
 

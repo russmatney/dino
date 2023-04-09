@@ -27,7 +27,7 @@ func register():
 	if first_zone == null:
 		first_zone = zones[0]
 
-	var zs = Hotel.query({"group": "metro_zones"})
+	var zs = Hotel.query({"group": Metro.zones_group})
 
 	Debug.pr("DungeonCrawler registered", len(zs), "zones and first zone ", first_zone)
 

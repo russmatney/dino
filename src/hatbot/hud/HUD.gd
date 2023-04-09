@@ -31,7 +31,7 @@ func _on_entry_updated(entry):
 			set_coins(entry["coins"])
 	if "enemies" in entry["groups"]:
 		update_enemy_status(entry)
-	if "metro_rooms" in entry["groups"]:
+	if Metro.rooms_group in entry["groups"]:
 		update_minimap(entry)
 
 ##########################################

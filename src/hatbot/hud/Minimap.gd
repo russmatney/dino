@@ -15,10 +15,10 @@ func _ready():
 
 
 func update(entry):
-	if "metro_zones" in entry.get("groups", []):
+	if Metro.zones_group in entry.get("groups", []):
 		update_minimap_data()
 		update_map()
-	if "metro_rooms" in entry.get("groups", []):
+	if Metro.rooms_group in entry.get("groups", []):
 		update_minimap_data()
 		update_map()
 
@@ -49,12 +49,12 @@ func update_minimap_data():
 	var current_zone = Metro.current_zone
 	if not current_zone:
 		if Engine.is_editor_hint():
-			current_zone = Hotel.first({group="metro_zones"})
+			current_zone = Hotel.first({group=Metro.zones_group})
 		else:
 			Debug.pr("No current zone")
 			return
 
-	var zones = Hotel.query({zone_name=current_zone.name, group="metro_zones"})
+	var zones = Hotel.query({zone_name=current_zone.name, group=Metro.zones_group})
 	if len(zones) > 0:
 		zone_data = zones[0]
 
@@ -73,7 +73,7 @@ func update_map():
 		clear_map()
 		last_zone_name = zone_data["name"]
 
-	rooms = Hotel.query({zone_name=zone_data["name"], group="metro_rooms"})
+	rooms = Hotel.query({zone_name=zone_data["name"], group=Metro.rooms_group})
 	var merged = merged_rect(rooms)
 	var offset = Vector2.ZERO
 	if merged.position.x < 0:

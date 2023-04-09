@@ -146,7 +146,7 @@ var room_data : Dictionary :
 # enter tree
 
 func _enter_tree():
-	add_to_group("metro_rooms", true)
+	add_to_group(Metro.rooms_group, true)
 
 ###########################################
 # ready

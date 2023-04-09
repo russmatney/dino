@@ -6,7 +6,7 @@ extends Node2D
 # enter tree
 
 func _enter_tree():
-	add_to_group("metro_zones", true)
+	add_to_group(Metro.zones_group, true)
 
 	# book this zone and children with the hotel
 	# TODO maybe we don't want to rebook every enter tree?

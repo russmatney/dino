@@ -1,6 +1,9 @@
 @tool
 extends Node
 
+const zones_group = "metro_zones"
+const rooms_group = "metro_rooms"
+
 ###########################################################
 # start game
 
@@ -28,7 +31,7 @@ func travel_to(dest_zone_name, elevator_path):
 
 	Debug.pr("Traveling to zone", dest_zone_name, elevator_path)
 
-	var dest_zone = Hotel.first({group="metro_zones", zone_name=dest_zone_name})
+	var dest_zone = Hotel.first({group=Metro.zones_group, zone_name=dest_zone_name})
 	if dest_zone == null:
 		Debug.warn("Can't travel_to(), no zone found", dest_zone_name, elevator_path)
 		return

@@ -30,7 +30,7 @@ func drop_db():
 # key
 
 var hotel_root_group_name = "hotel_singletons"
-var root_groups = ["metro_zones", "player", hotel_root_group_name]
+var root_groups = [Metro.zones_group, "player", hotel_root_group_name]
 
 func is_in_root_group(x):
 	if x is Dictionary:
@@ -115,7 +115,7 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 			entry["groups"].append_array(inst["groups"])
 
 		# update last_room based on groups
-		if "metro_rooms" in entry["groups"]:
+		if Metro.rooms_group in entry["groups"]:
 			last_room = entry
 
 		# set script data
@@ -132,11 +132,11 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 
 		# set zone and room names via parents
 		for p in ps:
-			if "metro_zones" in p["groups"]:
+			if Metro.zones_group in p["groups"]:
 				entry["zone_name"] = p["name"]
 
 		for p in ps:
-			if "metro_rooms" in p["groups"]:
+			if Metro.rooms_group in p["groups"]:
 				entry["room_name"] = str(p["zone_name"], "/", p["name"])
 
 		# set room name for non-room-instance children (which are flattened here)

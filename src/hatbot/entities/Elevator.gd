@@ -115,7 +115,7 @@ func _get_property_list() -> Array:
 		}]
 
 func list_zone_names():
-	var areas = Hotel.query({"group": "metro_zones"})
+	var areas = Hotel.query({"group": Metro.zones_group})
 	return ",".join(areas.map(func(area): return area.get("name")))
 
 func ele_path(entry):
