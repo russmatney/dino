@@ -5,7 +5,7 @@ var tt_shoot
 
 
 func enter(_ctx = {}):
-	print("entering attack")
+	Debug.pr("entering attack")
 	actor.velocity = Vector2.ZERO
 	tt_shoot = shoot_every
 

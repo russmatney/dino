@@ -12,7 +12,7 @@ func spawn_player(parent = null):
 		player = fallback_player_scene.instantiate()
 
 	if not player:
-		print("could not create player instance")
+		Debug.pr("could not create player instance")
 		return null
 
 	player.transform.origin = position

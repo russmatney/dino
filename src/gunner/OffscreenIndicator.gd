@@ -21,7 +21,7 @@ func point_at(pos):
 # 	if event is InputEventMouseButton:
 # 		point_at(get_global_mouse_position())
 # if event is InputEventMouseMotion:
-# 	print("mouse: ", get_global_mouse_position())
+# 	Debug.pr("mouse: ", get_global_mouse_position())
 
 
 func _physics_process(_delta):

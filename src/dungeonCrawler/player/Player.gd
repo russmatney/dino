@@ -131,14 +131,14 @@ var weapons = []
 
 func add_weapon(wp):
 	weapons.append(wp)
-	print("[player weapons]: ", weapons)
+	Debug.pr("[player weapons]: ", weapons)
 
 	update_weapon()
 
 
 func remove_weapon(wp):
 	weapons.erase(wp)
-	print("[player weapons]: ", weapons)
+	Debug.pr("[player weapons]: ", weapons)
 
 
 # bow
@@ -159,7 +159,7 @@ var arrow_impulse = 400
 func fire_bow():
 	var bow = Util.get_first_child_in_group(self, "bow")
 	if bow == null:
-		print("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
+		Debug.pr("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
 		return
 
 	var arrow = arrow_scene.instantiate()
@@ -217,13 +217,13 @@ var items = []
 
 func add_item(it):
 	items.append(it)
-	print("[player items]: ", items)
+	Debug.pr("[player items]: ", items)
 	update_item_info()
 
 
 func remove_item(it):
 	items.erase(it)
-	print("[player items]: ", items)
+	Debug.pr("[player items]: ", items)
 	update_item_info()
 
 
@@ -276,12 +276,12 @@ func _on_LockOnDetectArea2D_body_entered(body: Node):
 	# TODO ignore tilemaps properly, maybe via collision layers
 	if body != self and body.name != "DungeonWalls":
 		bodies.append(body)
-		# print("[player-lockon-bodies]:", bodies)
+		# Debug.pr("[player-lockon-bodies]:", bodies)
 
 
 func _on_LockOnDetectArea2D_body_exited(body: Node):
 	bodies.erase(body)
-	# print("[player-lockon-bodies]:", bodies)
+	# Debug.pr("[player-lockon-bodies]:", bodies)
 
 
 var areas = []
@@ -289,12 +289,12 @@ var areas = []
 
 func _on_LockOnDetectArea2D_area_entered(area: Area2D):
 	areas.append(area)
-	# print("[player-lockon-areas]:", areas)
+	# Debug.pr("[player-lockon-areas]:", areas)
 
 
 func _on_LockOnDetectArea2D_area_exited(area: Area2D):
 	areas.erase(area)
-	# print("[player-lockon-areas]:", areas)
+	# Debug.pr("[player-lockon-areas]:", areas)
 
 
 @onready var line_of_sight = $LineOfSightRayCast2D
@@ -341,12 +341,12 @@ var nearby_items = []
 
 func _on_ItemPullArea2D_area_entered(area: Area2D):
 	nearby_items.append(area)
-	# print("[player-nearby-items]: ", nearby_items)
+	# Debug.pr("[player-nearby-items]: ", nearby_items)
 
 
 func _on_ItemPullArea2D_area_exited(area: Area2D):
 	nearby_items.erase(area)
-	# print("[player-nearby-items]: ", nearby_items)
+	# Debug.pr("[player-nearby-items]: ", nearby_items)
 
 
 var move_speed = 400
@@ -378,7 +378,7 @@ var dead = false
 
 func hit():
 	health -= 1
-	print("[PLAYER HIT]: remaining health = ", health)
+	Debug.pr("[PLAYER HIT]: remaining health = ", health)
 
 	remove_info_message(health_info_dict(health + 1))
 	add_info_message(health_info_dict(health))
@@ -394,7 +394,7 @@ func hit():
 
 
 func die():
-	print("[PLAYER DEATH]")
+	Debug.pr("[PLAYER DEATH]")
 	dead = true
 	queue_free()
 	# death menu

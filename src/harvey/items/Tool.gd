@@ -76,7 +76,7 @@ func deform(_direction):
 	# var deformationDirection = direction.normalized()
 	# var deformationScale = 0.5 * deformationDirection * deformationStrength
 
-	print("TODO restore animation")
+	Debug.pr("TODO restore animation")
 	# var tween = create_tween()
 	# var anim = tool_icon
 

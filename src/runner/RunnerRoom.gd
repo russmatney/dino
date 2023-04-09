@@ -37,7 +37,7 @@ func room_width():
 	if enterbox_shape:
 		return room_width_enterbox()
 
-	print("[WARN] room_width not supported for room!", self)
+	Debug.pr("[WARN] room_width not supported for room!", self)
 
 
 func room_width_roombox(coll_shape):
@@ -72,7 +72,7 @@ func x_offset():
 	if enterbox_shape:
 		return x_offset_enterbox(enterbox_shape)
 
-	print("[WARN] x_offset not supported for room!", self)
+	Debug.pr("[WARN] x_offset not supported for room!", self)
 
 
 func x_offset_roombox(coll_shape):
@@ -122,11 +122,11 @@ func _ready():
 
 
 func my_print_debug():
-	print("---------------------------------------------")
-	print(self.name, " debug report")
-	print("room_width(): ", room_width())
-	print("x_offset(): ", x_offset())
-	print("---------------------------------------------")
+	Debug.pr("---------------------------------------------")
+	Debug.pr(name, " debug report")
+	Debug.pr("room_width(): ", room_width())
+	Debug.pr("x_offset(): ", x_offset())
+	Debug.pr("---------------------------------------------")
 
 
 # called in _ready() AND when unfinished rooms are re-added to the view

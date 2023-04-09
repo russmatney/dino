@@ -16,7 +16,7 @@ func _ready():
 func generate_image(inputs):
 	# validating inputs
 	if not "octaves" in inputs:
-		print("[WARN] nil octaves...")
+		Debug.pr("[WARN] nil octaves...")
 		return
 
 	var noise = FastNoiseLite.new()

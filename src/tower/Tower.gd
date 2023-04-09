@@ -37,7 +37,7 @@ var levels = [
 
 
 func restart_game(opts = {}):
-	print("[TOWER] restarting game: ", opts)
+	Debug.pr("[TOWER] restarting game: ", opts)
 	Navi.resume()  # ensure unpaused
 	Respawner.reset_respawns()
 
@@ -48,7 +48,7 @@ func restart_game(opts = {}):
 
 
 func level_complete():
-	print("[TOWER] level complete")
+	Debug.pr("[TOWER] level complete")
 
 	var curr = Navi.current_scene
 	var idx = levels.find(curr.scene_file_path)
@@ -82,7 +82,7 @@ func spawn_player(pos):
 
 
 func show_dead():
-	print("[TOWER] player dead")
+	Debug.pr("[TOWER] player dead")
 	Navi.show_death_menu()
 
 

@@ -26,7 +26,7 @@ func _get_configuration_warnings():
 
 
 func _ready():
-	print("bowling boss ready")
+	Debug.pr("bowling boss ready")
 	initial_pos = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
 	machine.call_deferred("start")
@@ -86,7 +86,7 @@ var dead = false
 
 func hit():
 	health -= 1
-	print(name, " health: ", health)
+	Debug.pr(name, " health: ", health)
 	# TODO flash sprite white - via shader
 
 	if health == 1:

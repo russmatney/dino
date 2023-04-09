@@ -2,9 +2,9 @@ extends CanvasLayer
 
 
 func _ready():
-	Debug.prn("ready")
-	var _x = Hood.connect("found_player",Callable(self,"setup_player"))
-	Hood.call_deferred("find_player")
+	Debug.pr("ready")
+	var _x = Hood.found_player.connect(setup_player)
+	Hood.find_player.call_deferred()
 
 
 ###################################################################
@@ -14,10 +14,10 @@ var player
 
 func setup_player(p):
 	player = p
-	player.connect("step",Callable(self,"update_steps"))
-	player.connect("speed_increased",Callable(self,"update_speed"))
-	player.connect("food_picked_up",Callable(self,"update_food_score"))
-	player.connect("inc_combo_juice",Callable(self,"update_combo_juice"))
+	player.step.connect(update_steps)
+	player.speed_increased.connect(update_speed)
+	player.food_picked_up.connect(update_food_score)
+	player.inc_combo_juice.connect(update_combo_juice)
 	update_speed()
 	update_steps()
 	update_food_score()

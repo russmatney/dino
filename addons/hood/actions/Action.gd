@@ -38,7 +38,7 @@ func _to_string():
 
 static func mk(opts) -> Action:
 	var ax = Action.new()
-	ax.fn = opts.get("fn", func(): print("No-op action"))
+	ax.fn = opts.get("fn", func(): Debug.pr("No-op action"))
 
 	ax.label = opts.get("label", "Action")
 	var label_fn = opts.get("label_fn")

@@ -32,7 +32,7 @@ func _on_player_entered(p):
 	Blocks.ensure_blocks(self)
 	runs = runs + 1
 
-	print("[NOTIF] player entered ", self.name)
+	Debug.pr("[NOTIF] player entered ", self.name)
 
 	if p:
 		p.activate_blocks = true

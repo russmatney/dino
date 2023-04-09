@@ -7,7 +7,7 @@ func _ready():
 	var players = get_tree().get_nodes_in_group("player")
 	if players:
 		player = players[0]
-		print("rib found player ", player)
+		Debug.pr("rib found player ", player)
 
 
 func _on_Rib_body_entered(body: Node):

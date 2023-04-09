@@ -32,7 +32,7 @@ func _on_player_entered(p):
 	Blocks.ensure_blocks(self)
 	runs = runs + 1
 
-	print("[NOTIF] player entered KnockEm")
+	Debug.pr("[NOTIF] player entered KnockEm")
 
 	if p:
 		p.destroy_blocks = true
@@ -51,6 +51,6 @@ func is_finished():
 
 
 func _on_player_exited(p):
-	print(max_runs - runs, " attempts remain")
+	Debug.pr(max_runs - runs, " attempts remain")
 
 	p.destroy_blocks = false

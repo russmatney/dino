@@ -29,7 +29,7 @@ func _ready():
 	if player:
 		player.add_to_group("player")
 	else:
-		print("failed to spawn player?")
+		Debug.pr("failed to spawn player?")
 
 
 var once = true
@@ -42,7 +42,7 @@ func _process(_delta):
 	if once and is_win():
 		if once:
 			once = false
-		print("win!")
+		Debug.pr("win!")
 		Navi.show_win_menu()
 
 

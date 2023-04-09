@@ -12,7 +12,7 @@ func _ready():
 		set_label(label)
 
 	if not destination == null and not FileAccess.file_exists(destination):
-		print("[WARN] Ghosts door destination does not exist! ", destination)
+		Debug.pr("[WARN] Ghosts door destination does not exist! ", destination)
 
 
 func set_label(text):
@@ -24,7 +24,7 @@ func set_label(text):
 
 ## Not stateless! depends checked _this_ door's destination
 func open_door():
-	print("open_door called, with dest: ", destination)
+	Debug.pr("open_door called, with dest: ", destination)
 	# TODO pause tree?
 	# TODO animate door
 	Ghosts.load_next_room(destination)

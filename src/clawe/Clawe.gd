@@ -2,4 +2,4 @@ extends Node
 
 
 func hello():
-	print("Hey there")
+	Debug.pr("Hey there")

@@ -26,7 +26,7 @@ func _ready():
 
 func do_image_regen(_val = null):
 	if scene_ready or ready_override:
-		print("-------------------")
+		Debug.pr("-------------------")
 		regenerate_image()
 
 
@@ -138,7 +138,7 @@ func ensure_image_node(name, i=0, img=null):
 	texture_rect.expand = true
 
 	if img:
-		print("setting texture with img: ", img)
+		Debug.pr("setting texture with img: ", img)
 		var img_texture = ImageTexture.create_from_image(img)
 		# img_texture.set_size_override(Vector2(w/2, h/2))
 		texture_rect.texture = img_texture
@@ -148,11 +148,11 @@ func colorize_coord(ctx):
 		if not ctx.img:
 			Debug.warn("colorize_coord ctx without img")
 			return
-		# print("setting coord to color: ", ctx.coord, " ", ctx.group.color)
+		# Debug.pr("setting coord to color: ", ctx.coord, " ", ctx.group.color)
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
 func colorize_image(img):
-	print("colorizing img: ", img)
+	Debug.pr("colorizing img: ", img)
 	# copy this image b/c we're about to mutate it
 	var n = Image.new()
 	n.copy_from(img)

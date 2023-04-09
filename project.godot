@@ -26,9 +26,9 @@ run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
 
 [autoload]
 
+Debug="*res://addons/core/Debug.gd"
 Util="*res://addons/core/Util.gd"
 Hood="*res://addons/hood/Hood.gd"
-Debug="*res://addons/core/Debug.gd"
 Quest="*res://addons/hood/Quest.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"

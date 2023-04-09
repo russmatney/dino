@@ -49,7 +49,7 @@ func save_player_data():
 			"gloomba_kos": player.gloomba_kos,
 		}
 	else:
-		print("[WARN] Ghosts save_player_data called with no player")
+		Debug.pr("[WARN] Ghosts save_player_data called with no player")
 
 
 #############################################################
@@ -65,7 +65,7 @@ func restart_game():
 
 func load_next_room(room_path):
 	if room_path and not FileAccess.file_exists(room_path):
-		print("[WARN] Ghosts next room does not exist! ", room_path)
+		Debug.pr("[WARN] Ghosts next room does not exist! ", room_path)
 		return
 
 	# save player data to restore upon next spawn

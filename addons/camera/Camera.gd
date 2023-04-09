@@ -13,7 +13,7 @@ func _ready():
 
 func _on_debug_toggled(debugging):
 	if debugging:
-		print("debugging camera!")
+		Debug.pr("debugging camera!")
 
 ##############################################################
 # cam_window_rect

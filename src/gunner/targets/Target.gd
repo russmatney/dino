@@ -9,7 +9,7 @@ signal destroyed(target)
 
 
 func _ready():
-	print("target ready")
+	Debug.pr("target ready")
 	anim.connect("animation_finished",Callable(self,"_animation_finished"))
 	Respawner.register_respawn(self)
 

@@ -127,17 +127,17 @@ func segments_flash_white():
 
 func head_cell():
 	if not segment_coords:
-		print("no segment coords, can't get head")
+		Debug.pr("no segment coords, can't get head")
 		return
 	elif not segment_coords[0] in segments:
-		print("first segment coord not in segments")
+		Debug.pr("first segment coord not in segments")
 		return
 
 	var hd = segments[segment_coords[0]]
 	if is_instance_valid(hd):
 		return hd
 	else:
-		print("head cell invalid")
+		Debug.pr("head cell invalid")
 
 func tail_cells():
 	if segment_coords.size() <= 1:
@@ -149,19 +149,18 @@ func tail_cells():
 			if is_instance_valid(t):
 				ts.append(t)
 			else:
-				print("tail cell invalid")
+				Debug.pr("tail cell invalid")
 		else:
-			print("[WARN] tail coord not in segments")
+			Debug.pr("[WARN] tail coord not in segments")
 	return ts
 
 func print_snake_meta():
 	var hc = head_cell()
 	if hc:
-		print("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
+		Debug.pr("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
 	for t in tail_cells():
 		if t:
-			print("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
-
+			Debug.pr("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
 
 ###########################################################################
 # process
@@ -243,7 +242,7 @@ func drop_tail():
 		if is_instance_valid(c):
 			c.queue_free()
 	else:
-		print("[WARN] tail expected but not found in `segments`")
+		Debug.pr("[WARN] tail expected but not found in `segments`")
 
 func _on_move_head(_coord):
 	bounce_head()

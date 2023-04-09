@@ -24,43 +24,43 @@ func update_screen_size():
 
 
 func set_node(n):
-	print("setting node for shockwave shader: ", n)
+	Debug.pr("setting node for shockwave shader: ", n)
 	node = n
 
-	print("\nscreensize: ", screen_size)
+	Debug.pr("\nscreensize: ", screen_size)
 	var ratio = screen_size.x / screen_size.y
 
 	var center = node.get_global_position()
 	if node == rect:
-		print("half rect size", node.size / 2)
-		print("global pos", node.get_global_position())
+		Debug.pr("half rect size", node.size / 2)
+		Debug.pr("global pos", node.get_global_position())
 		center = node.get_global_position() + (node.size / 2)
 		pos.set_global_position(center)
 
-	print("center", center)
+	Debug.pr("center", center)
 	center.x = center.x / screen_size.x
 	center.x = (center.x - 0.5) / ratio + 0.5
 	center.y = (screen_size.y - center.y) / screen_size.y
-	print("center", center)
+	Debug.pr("center", center)
 
 
 func _process(_delta):
 	if node and is_instance_valid(node):
-		# print("\nscreensize: ", screen_size)
+		# Debug.pr("\nscreensize: ", screen_size)
 		var ratio = screen_size.x / screen_size.y
 
 		var center = node.get_global_position()
 		if node == rect:
-			# print("half rect size", (node.size / 2))
-			# print("global pos", node.get_global_position())
+			# Debug.pr("half rect size", (node.size / 2))
+			# Debug.pr("global pos", node.get_global_position())
 			center = node.get_global_position() + (node.size / 2)
 			pos.set_global_position(center)
 
-		# print("center", center)
+		# Debug.pr("center", center)
 		center.x = center.x / screen_size.x
 		center.x = (center.x - 0.5) / ratio + 0.5
 		center.y = (screen_size.y - center.y) / screen_size.y
-		# print("center", center)
+		# Debug.pr("center", center)
 
 		rect.material.set_shader_parameter("center", center)
 		# rect.material.set_shader_parameter("center", Vector2(0.5, 0.5))

@@ -15,10 +15,10 @@ var has_jetpack: bool = false
 var reset_position
 
 func _enter_tree():
-	print("enter tree")
+	Debug.pr("enter tree")
 
 func _ready():
-	print("gunner player getting ready: ", anim)
+	Debug.pr("gunner player getting ready: ", anim)
 	reset_position = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
 	face_left()
@@ -26,7 +26,7 @@ func _ready():
 	Cam.call_deferred("ensure_camera", 2)
 	Hood.ensure_hud()
 
-	print("gunner player ready: ", anim)
+	Debug.pr("gunner player ready: ", anim)
 	machine.call_deferred("start")
 
 

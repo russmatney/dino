@@ -6,7 +6,7 @@ var spawner
 
 
 func _ready():
-	print("block ready")
+	Debug.pr("block ready")
 
 	if spawner.color:
 		color_rect.color = spawner.color
@@ -28,7 +28,7 @@ var active_color = Color(0, 1, 0, 0.5)
 func activate():
 	# TODO color change
 	# TODO apply to spawner
-	print("block activated")
+	Debug.pr("block activated")
 	set_color(active_color)
 
 

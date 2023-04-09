@@ -2,5 +2,5 @@ extends State
 
 
 func enter(_msg = {}):
-	print("[DEAD]", actor)
+	Debug.pr("[DEAD]", actor)
 	# TODO animation

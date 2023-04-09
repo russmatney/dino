@@ -6,7 +6,7 @@ var bowled = false
 
 
 func enter(_msg = {}):
-	print("[BOWLING]", actor)
+	Debug.pr("[BOWLING]", actor)
 
 	windup_time = 80
 	bowling = false

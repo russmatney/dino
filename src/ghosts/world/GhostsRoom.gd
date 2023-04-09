@@ -18,7 +18,7 @@ func _ready():
 
 func spawn_player():
 	if not $PlayerSpawner:
-		print("[WARN] no PlayerSpawner found")
+		Debug.pr("[WARN] no PlayerSpawner found")
 		return
 
 	var pos = $PlayerSpawner.global_position
@@ -41,4 +41,4 @@ func player_died():
 
 
 func player_won():
-	print("player won")
+	Debug.pr("player won")

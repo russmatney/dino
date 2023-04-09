@@ -98,7 +98,7 @@ func get_cell(coord):
 		# TODO consider returning food or snake segment (or enemy?)
 		return cells[coord]
 	else:
-		print("[WARN] no coord in grid!")
+		Debug.pr("[WARN] no coord in grid!")
 
 func all_cells():
 	return cells.values()
@@ -209,7 +209,7 @@ func add_snake():
 @onready var enemy_scene = preload("res://src/snake/snakes/Enemy.tscn")
 
 func add_enemy():
-	print("adding enemy to grid")
+	Debug.pr("adding enemy to grid")
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
 	var e = enemy_scene.instantiate()
@@ -238,7 +238,7 @@ func init_food():
 func add_food(exclude=null):
 	var empty_cell = random_empty_coord(exclude)
 	if empty_cell == null:
-		print("[SNAKE] No empty cells! Cannot place food.")
+		Debug.pr("[SNAKE] No empty cells! Cannot place food.")
 		return
 
 	var f = food_scene.instantiate()

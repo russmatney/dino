@@ -36,7 +36,7 @@ func ensure_camera():
 	# (and siblings?) have been created
 	var cam = get_tree().get_nodes_in_group("camera")
 	if cam.size() == 0:
-		print("[CAMERA] cam not found, adding one to player")
+		Debug.pr("[CAMERA] cam not found, adding one to player")
 		# if no camera, add one
 		cam = fallback_camera.instantiate()
 		cam.current = true
@@ -131,9 +131,9 @@ func _physics_process(_delta):
 
 
 func update_hud():
-	print("------------")
-	print("player stats: coins: ", coins)
-	print("leaves: ", leaves)
+	Debug.pr("------------")
+	Debug.pr("player stats: coins: ", coins)
+	Debug.pr("leaves: ", leaves)
 
 
 var coins = 0
@@ -179,7 +179,7 @@ var stop = false
 
 
 func hit(body):
-	print("player hit by: ", body)
+	Debug.pr("player hit by: ", body)
 	velocity = Vector2.ZERO
 	stop = true
 	await get_tree().create_timer(1.0).timeout

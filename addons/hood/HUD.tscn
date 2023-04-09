@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://1qfoheo0oh3m"]
+[gd_scene load_steps=2 format=3 uid="uid://jxsq8yyoh7jt"]
 
 [ext_resource type="Script" path="res://addons/hood/HUD.gd" id="1_ubn4a"]
-[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="2_kwgin"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ubn4a")
@@ -16,8 +15,3 @@ alignment = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
-
-[node name="Notifications" parent="HBoxContainer/PanelContainer" instance=ExtResource("2_kwgin")]
-layout_mode = 2
-add_notif = "Some other notification"
-add_rich_notif = "[jump]Some rich notification"

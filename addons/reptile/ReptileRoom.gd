@@ -376,7 +376,7 @@ func add_tile_at_coord(ctx):
 	if ctx.group:
 		var t = ctx.group.tilemap
 		if t and is_instance_valid(t):
-			# print("adding tile at coord: ", t.name, " ", ctx.coord)
+			# Debug.pr("adding tile at coord: ", t.name, " ", ctx.coord)
 			# TODO restore random tile selector for godot 4 api
 			# may want to support source_id/atlas_coords/alternative_tile
 			# var t_ids = t.tile_set.get_tiles_ids()

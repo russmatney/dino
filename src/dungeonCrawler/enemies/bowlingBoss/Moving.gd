@@ -21,7 +21,7 @@ func next_direction():
 
 
 func enter(_msg = {}):
-	print("[MOVING]", actor)
+	Debug.pr("[MOVING]", actor)
 	move_time = 100
 	move_dir = next_direction()
 

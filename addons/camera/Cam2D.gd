@@ -62,7 +62,7 @@ func _ready():
 
 func _on_debug_toggled(debugging):
 	if debugging:
-		print("debugging cam2d!")
+		Debug.pr("debugging cam2d!")
 	queue_redraw()
 
 ###########################################################################

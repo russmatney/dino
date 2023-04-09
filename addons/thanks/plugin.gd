@@ -3,10 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	print("[THANKS] entering tree")
-	pass
+	Debug.pr("<THANKS>")
 
 
 func _exit_tree():
-	print("[THANKS] exiting tree")
-	pass
+	Debug.pr("</Thanks>")

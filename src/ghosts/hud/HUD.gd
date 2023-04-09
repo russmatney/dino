@@ -19,18 +19,18 @@ func _ready():
 
 func find_player():
 	if player_group == null:
-		print("[WARN] HUD has not player_group set")
+		Debug.pr("[WARN] HUD has not player_group set")
 		return
 
 	var ps = get_tree().get_nodes_in_group(player_group)
 	if ps.size() > 1:
-		print("[WARN] HUD found multiple in player_group: ", player_group)
+		Debug.pr("[WARN] HUD found multiple in player_group: ", player_group)
 
 	if ps.size() > 0:
 		player = ps[0]
-		print("[HUD] found player: ", player)
+		Debug.pr("[HUD] found player: ", player)
 	else:
-		print("[WARN] HUD found zero in player_group: ", player_group)
+		Debug.pr("[WARN] HUD found zero in player_group: ", player_group)
 		return
 
 	if player:

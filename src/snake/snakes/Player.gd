@@ -19,8 +19,8 @@ func _ready():
 
 func print_snake_meta():
 	super.print_snake_meta()
-	print("food: ", food_count)
-	print("speed level: ", speed_level)
+	Debug.pr("food: ", food_count)
+	Debug.pr("speed level: ", speed_level)
 
 ###########################################################################
 # physics_process

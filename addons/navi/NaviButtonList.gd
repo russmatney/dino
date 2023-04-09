@@ -41,7 +41,7 @@ func get_buttons():
 
 
 func no_op():
-	print("button created with no method")
+	Debug.pr("button created with no method")
 
 
 func connect_pressed_to_action(button, item):

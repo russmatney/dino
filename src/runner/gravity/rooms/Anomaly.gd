@@ -40,5 +40,5 @@ func is_finished():
 
 
 func _on_player_exited(_player):
-	print(max_runs - runs, " attempts remain")
+	Debug.pr(max_runs - runs, " attempts remain")
 	pass

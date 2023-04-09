@@ -11,7 +11,7 @@ func node_name_from_path(path):
 func p_script_vars(node):
 	for prop in node.get_property_list():
 		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
-			print("\t", prop["name"], ": ", self.get(prop["name"]))
+			Debug.pr("\t", prop["name"], ": ", self.get(prop["name"]))
 
 ############################################################
 # nearby
@@ -170,7 +170,7 @@ func set_collisions_enabled(node, enabled):
 
 func ensure_connection(obj, sig, target, method, args = []):
 	if not obj.has_signal(sig):
-		print("[Warn] obj has no signal for connection: ", obj, " :", sig)
+		Debug.pr("[Warn] obj has no signal for connection: ", obj, " :", sig)
 	var err
 	if not obj.is_connected(sig,Callable(target,method)):
 		if args.size() > 0:
@@ -178,7 +178,7 @@ func ensure_connection(obj, sig, target, method, args = []):
 		else:
 			err = obj.connect(sig,Callable(target,method))
 	if err:
-		print("[Error]: ", err)  # useless enum digit
+		Debug.pr("[Error]: ", err)  # useless enum digit
 
 
 

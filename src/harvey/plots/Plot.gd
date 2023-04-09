@@ -95,7 +95,7 @@ func deform(_direction):
 	# var deformationDirection = direction.normalized()
 	# var deformationScale = 0.5 * deformationDirection * deformationStrength
 
-	print("TODO restore animation")
+	Debug.pr("TODO restore animation")
 	# var tween = create_tween()
 	# tween.tween_property(anim.material, "shader_parameter/deformation", deformationScale, duration).set_trans(
 	# 	Tween.TRANS_CUBIC
