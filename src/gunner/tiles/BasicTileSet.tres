@@ -1,6 +1,5 @@
 [gd_resource type="TileSet" load_steps=4 format=3 uid="uid://c5snf3hggm181"]
 
-[ext_resource type="Script" path="res://addons/reptile/TileSetTools.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhje4gp8yfvgf" path="res://addons/reptile/assets/templates/3x3_minimal_autotiles_sheet.png" id="2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uf4n0"]
@@ -13,7 +12,6 @@ terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 0.25098, 1)
 terrain_set_0/terrain_1/name = "Terrain 1"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_uf4n0")
-script = ExtResource("1")
 dryrun = false
 tile_name = "3x3"
 run_gen_collisions = false

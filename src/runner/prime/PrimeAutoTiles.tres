@@ -1,6 +1,5 @@
 [gd_resource type="TileSet" load_steps=97 format=2]
 
-[ext_resource path="res://addons/reptile/TileSetTools.gd" type="Script" id=1]
 [ext_resource path="res://addons/reptile/assets/templates/3x3_minimal_autotiles_sheet.png" type="Texture2D" id=2]
 
 [sub_resource type="OccluderPolygon2D" id=61]
@@ -592,7 +591,6 @@ points = PackedVector2Array( 0, 0, 8, 0, 8, 5, 0, 5 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
-script = ExtResource( 1 )
 dryrun = false
 tile_name = "3x3"
 run_gen_collisions = false

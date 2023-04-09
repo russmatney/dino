@@ -1,10 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://diyagfcf418hq"]
 
-[ext_resource path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tres" type="TileSet" id=1]
+[ext_resource type="TileSet" uid="uid://blvew4kmdi1j" path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tres" id="1"]
 
 [node name="IndoorBackgroundTiles" type="TileMap"]
-modulate = Color( 0.443137, 0.435294, 0.678431, 0.505882 )
-tile_set = ExtResource( 1 )
-collision_layer = 0
-collision_mask = 0
-format = 1
+modulate = Color(0.443137, 0.435294, 0.678431, 0.505882)
+tile_set = ExtResource("1")
+format = 2
