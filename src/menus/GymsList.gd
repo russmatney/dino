@@ -6,7 +6,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		"label": "Maze",
-		"nav_to": "res://src/dungeonCrawler/rooms/Maze.tscn",
+		"nav_to": "res://src/dungeonCrawler/zones/Maze.tscn",
 	},
 	{
 		"label": "Mvania Demo Map",
