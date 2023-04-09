@@ -1,14 +1,14 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c4weyxx3tm1pp"]
 
-[ext_resource path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" id="1"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/red_displacement = 0.0
-shader_param/green_displacement = 0.0
-shader_param/blue_displacement = 0.0
-shader_param/ghost = 0.0
-shader_param/intensity = 0.0
-shader_param/scan_effect = 0.0
-shader_param/distortion_effect = 0.0
-shader_param/negative_effect = 0.0
+shader = ExtResource("1")
+shader_parameter/red_displacement = 0.0
+shader_parameter/green_displacement = 0.0
+shader_parameter/blue_displacement = 0.0
+shader_parameter/ghost = 0.0
+shader_parameter/intensity = 0.0
+shader_parameter/scan_effect = 0.0
+shader_parameter/distortion_effect = 0.0
+shader_parameter/negative_effect = 0.0

@@ -1,27 +1,27 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://b0lbt0omub0br"]
 
-[ext_resource path="res://src/ghosts/shaders/InvisibleSprite.gdshader" type="Shader" id=1]
-[ext_resource path="res://resources/sprites/godot-logo.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://src/ghosts/world/platforms/GhostBlock.gd" type="Script" id=3]
+[ext_resource type="Shader" path="res://src/ghosts/shaders/InvisibleSprite.gdshader" id="1"]
+[ext_resource type="SpriteFrames" path="res://resources/sprites/godot-logo.tres" id="2"]
+[ext_resource type="Script" path="res://src/ghosts/world/platforms/GhostBlock.gd" id="3"]
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 1 )
-shader_param/dist = 16.0
-shader_param/alpha = 0.577177
+[sub_resource type="ShaderMaterial" id="2"]
+shader = ExtResource("1")
+shader_parameter/dist = 16.0
+shader_parameter/alpha = 0.577177
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(64, 64)
 
 [node name="GhostBlock" type="CharacterBody2D"]
 collision_mask = 0
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource( 2 )
-sprite_frames = ExtResource( 2 )
+material = SubResource("2")
+sprite_frames = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 one_way_collision = true
 
 [node name="Label" type="Label" parent="."]
@@ -31,5 +31,4 @@ offset_top = -56.0
 offset_right = 24.0
 offset_bottom = -40.0
 text = "enabled"
-align = 1
 uppercase = true

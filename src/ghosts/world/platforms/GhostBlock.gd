@@ -25,18 +25,18 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	# shader_loop()
+	shader_loop()
 
 
 func shader_loop():
 	tween = create_tween()
 	tween.set_loops(0)
-	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.95, 3 + offset)
-	tween.tween_property(anim.get_material(), "shader_param/alpha", 0.0, 1 + offset)
+	tween.tween_property(anim.get_material(), "shader_parameter/alpha", 0.95, 3 + offset)
+	tween.tween_property(anim.get_material(), "shader_parameter/alpha", 0.0, 1 + offset)
 
 
 func _process(_delta):
-	var alpha = anim.get_material().get("shader_param/alpha")
+	var alpha = anim.get_material().get_shader_parameter("alpha")
 	if alpha:
 		if coll_enabled and alpha < alpha_threshold:
 			disable_collision()

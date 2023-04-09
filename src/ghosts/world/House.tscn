@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://src/ghosts/world/lights/HangingLight.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://src/ghosts/hud/HUD.tscn" id="8"]
 [ext_resource type="Script" path="res://src/ghosts/world/GhostsRoom.gd" id="9"]
-[ext_resource type="PackedScene" path="res://src/ghosts/world/platforms/GhostBlock.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/ghosts/world/platforms/GhostBlock.tscn" id="10"]
 
 [node name="House" type="Node2D"]
 script = ExtResource("9")

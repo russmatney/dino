@@ -293,8 +293,8 @@ func level_up():
 func shine(_time = 1.0):
 	pass
 	# var tween = create_tween()
-	# anim.material.set("shader_param/speed", 1.0)
-	# tween.tween_callback(Callable(anim.material,"set").bind("shader_param/speed", 0.0)).set_delay(time)
+	# anim.material.set("shader_parameter/speed", 1.0)
+	# tween.tween_callback(Callable(anim.material,"set").bind("shader_parameter/speed", 0.0)).set_delay(time)
 
 
 ######################################################################
@@ -355,23 +355,23 @@ func update_colors():
 
 		match color:
 			"red":
-				tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
+				tween.tween_property(anim.material, "shader_parameter/outline", coldfire_dark, 0.4)
 				tween.parallel().tween_property(
-					anim.material, "shader_param/accent", coldfire_yellow, 0.4
+					anim.material, "shader_parameter/accent", coldfire_yellow, 0.4
 				)
 			"yellow":
-				tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
+				tween.tween_property(anim.material, "shader_parameter/outline", coldfire_dark, 0.4)
 				tween.parallel().tween_property(
-					anim.material, "shader_param/accent", coldfire_red, 0.4
+					anim.material, "shader_parameter/accent", coldfire_red, 0.4
 				)
 			"blue":
-				tween.tween_property(anim.material, "shader_param/outline", coldfire_yellow, 0.4)
+				tween.tween_property(anim.material, "shader_parameter/outline", coldfire_yellow, 0.4)
 				tween.parallel().tween_property(
-					anim.material, "shader_param/accent", coldfire_dark, 0.4
+					anim.material, "shader_parameter/accent", coldfire_dark, 0.4
 				)
 	else:
-		tween.tween_property(anim.material, "shader_param/outline", coldfire_dark, 0.4)
-		tween.parallel().tween_property(anim.material, "shader_param/accent", coldfire_yellow, 0.4)
+		tween.tween_property(anim.material, "shader_parameter/outline", coldfire_dark, 0.4)
+		tween.parallel().tween_property(anim.material, "shader_parameter/accent", coldfire_yellow, 0.4)
 
 
 var in_blue = false

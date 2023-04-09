@@ -31,15 +31,15 @@ func bounce_in():
 	var reset_duration = 1.0
 
 	var tween = create_tween()
-	tween.tween_property(material, "shader_param/deformation", def_scale, duration).set_trans(
+	tween.tween_property(material, "shader_parameter/deformation", def_scale, duration).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_property(material, "shader_param/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+	tween.tween_property(material, "shader_parameter/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
 		Tween.EASE_IN_OUT
 	)
 
 func deform(def=Vector2(0.9, 0.9)):
-	material.set_shader_param("deformation", def)
+	material.set_shader_parameter("deformation", def)
 
 func bounce(dir):
 	animate_deformation(dir)
@@ -49,14 +49,14 @@ func animate_deformation(direction):
 	var reset_duration = 0.2
 	var def_scale_factor = 0.4
 
-	var og_def = material.get_shader_param("deformation")
+	var og_def = material.get_shader_parameter("deformation")
 	var def_scale = direction * def_scale_factor
 
 	var tween = create_tween()
-	tween.tween_property(material, "shader_param/deformation", def_scale, duration).set_trans(
+	tween.tween_property(material, "shader_parameter/deformation", def_scale, duration).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_property(material, "shader_param/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+	tween.tween_property(material, "shader_parameter/deformation", og_def, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
 		Tween.EASE_IN_OUT
 	)
 
