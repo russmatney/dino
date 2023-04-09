@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://i8hqcggguxgj" path="res://src/ghosts/world/House.tscn" id="1"]
 
-[node name="World3D" type="Node2D"]
+[node name="World" type="Node2D"]
 
 [node name="House" parent="." instance=ExtResource("1")]
