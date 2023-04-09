@@ -19,6 +19,7 @@ gravity = 4000
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1")
 animation = &"walk"
+autoplay = "idle"
 speed_scale = 2.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]

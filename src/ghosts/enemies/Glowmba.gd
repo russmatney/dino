@@ -46,20 +46,20 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 		if stunned:
-			velocity.x = lerp(velocity.x, 0, 0.1)
+			velocity.x = lerp(velocity.x, 0.0, 0.1)
 			set_velocity(velocity)
 			set_up_direction(Vector2.UP)
 			move_and_slide()
 			velocity = velocity
-			$AnimatedSprite2D.animation = "fly"
+			$AnimatedSprite2D.play("fly")
 
 		elif knocked_back or dead:
-			velocity.x = lerp(velocity.x, 0, 0.9)
+			velocity.x = lerp(velocity.x, 0.0, 0.9)
 			set_velocity(velocity)
 			set_up_direction(Vector2.UP)
 			move_and_slide()
 			velocity = velocity
-			$AnimatedSprite2D.animation = "fly"
+			$AnimatedSprite2D.play("fly")
 
 		else:
 			velocity.x = move_dir.x * max(speed + speed_factor, velocity.x)
@@ -69,11 +69,11 @@ func _physics_process(delta):
 			velocity = velocity
 
 			if abs(velocity.x) > 0.1:
-				$AnimatedSprite2D.animation = "walk"
+				$AnimatedSprite2D.play("walk")
 			elif velocity.y < -0.1:
-				$AnimatedSprite2D.animation = "fly"
+				$AnimatedSprite2D.play("fly")
 			else:
-				$AnimatedSprite2D.animation = "idle"
+				$AnimatedSprite2D.play("idle")
 
 			if is_on_wall():
 				match move_dir:
@@ -114,8 +114,8 @@ func hit(dir):
 func die():
 	stunned = false
 	dead = true
-	$AnimatedSprite2D.animation = "fly"
-	$AnimatedSprite2D.playing = false
+	$AnimatedSprite2D.play("fly")
+	$AnimatedSprite2D.stop.call_deferred()
 	$PointLight2D.enabled = false
 	$StunnedLight.enabled = false
 	$DeadLight.enabled = true
@@ -123,8 +123,8 @@ func die():
 
 func stun():
 	stunned = true
-	$AnimatedSprite2D.animation = "fly"
-	$AnimatedSprite2D.playing = false
+	$AnimatedSprite2D.play("fly")
+	$AnimatedSprite2D.stop.call_deferred()
 	$PointLight2D.enabled = false
 	$StunnedLight.enabled = true
 
@@ -136,7 +136,7 @@ func stun():
 
 	if not dead and not knocked_back:
 		$PointLight2D.enabled = true
-		$AnimatedSprite2D.playing = true
+		$AnimatedSprite2D.play()
 		$StunnedLight.enabled = false
 
 

@@ -9,7 +9,7 @@
 [ext_resource type="Shader" path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" id="8"]
 [ext_resource type="Script" path="res://src/ghosts/player/Knockback.gd" id="9"]
 [ext_resource type="Script" path="res://src/ghosts/player/Dead.gd" id="10"]
-[ext_resource type="PackedScene" path="res://src/ghosts/player/Flashlight.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://bwaumvx2geh3k" path="res://src/ghosts/player/Flashlight.tscn" id="11"]
 [ext_resource type="Texture2D" uid="uid://d2txqhto2oicp" path="res://addons/core/assets/lights/light_smooth_sheet.png" id="12"]
 
 [sub_resource type="RectangleShape2D" id="1"]

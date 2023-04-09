@@ -2,9 +2,6 @@ extends State
 
 
 func enter(_msg = {}):
-	print("actor in Idle")
-	print("actor: ", actor)
-	print("actor.anim: ", actor.anim)
 	actor.velocity = Vector2.ZERO
 	actor.anim.animation = "idle"
 

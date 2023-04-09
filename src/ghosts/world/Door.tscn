@@ -1,64 +1,76 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://dy621hqwy41r4"]
 
-[ext_resource path="res://assets/sprites/dungeon_door_sheet.png" type="Texture2D" id=1]
-[ext_resource path="res://src/ghosts/world/Door.gd" type="Script" id=2]
-[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="FontFile" id=3]
+[ext_resource type="Texture2D" uid="uid://ba1yri2mynwtc" path="res://assets/sprites/dungeon_door_sheet.png" id="1"]
+[ext_resource type="Script" path="res://src/ghosts/world/Door.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3"]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ywj5"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg7p3"]
+atlas = ExtResource("1")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"sprite_frames": [ SubResource( 1 ) ],
+[sub_resource type="SpriteFrames" id="SpriteFrames_bggw3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ywj5")
+}],
 "loop": true,
-"name": "closed",
+"name": &"closed",
 "speed": 5.0
 }, {
-"sprite_frames": [ SubResource( 2 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gg7p3")
+}],
 "loop": true,
-"name": "open",
+"name": &"open",
 "speed": 5.0
-} ]
+}]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 32, 28 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(64, 56)
 
-[sub_resource type="FontFile" id=5]
-size = 32
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="5"]
+fallbacks = Array[Font]([ExtResource("3")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="Theme" id=6]
-Label/fonts/font = SubResource( 5 )
+[sub_resource type="Theme" id="6"]
+Label/fonts/font = SubResource("5")
 
 [node name="Door" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2( 2, 2 )
-sprite_frames = SubResource( 3 )
-animation = "closed"
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_bggw3")
+animation = &"closed"
 
 [node name="Detectbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-position = Vector2( 0, 4 )
-shape = SubResource( 4 )
+position = Vector2(0, 4)
+shape = SubResource("4")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -48.0
 offset_top = -56.0
 offset_right = 48.0
 offset_bottom = -30.0
-theme = SubResource( 6 )
-align = 1
-autowrap = true
+theme = SubResource("6")
 uppercase = true
 
 [connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]

@@ -166,10 +166,10 @@ func burst_gloomba():
 	if did_burst:
 		Ghosts.create_notification("Gloomba stunned!")
 		$Flashlight/AnimatedSprite2D.visible = true
-		$Flashlight/AnimatedSprite2D.frame = 0
-		# $Flashlight/AnimatedSprite2D.play("burst")
+		$Flashlight/AnimatedSprite2D.play("burst")
 		await get_tree().create_timer(0.4).timeout
 		$Flashlight/AnimatedSprite2D.visible = false
+		$Flashlight/AnimatedSprite2D.stop()
 
 
 func update_burst_action():
