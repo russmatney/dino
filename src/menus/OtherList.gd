@@ -3,24 +3,24 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		"label": "Clawe Dashboard",
-		"nav_to": "res://src/clawe/ClaweDashboard.tscn",
+		label="Clawe Dashboard",
+		nav_to="res://src/clawe/ClaweDashboard.tscn",
 	},
 	{
-		"label": "Credits",
-		"nav_to": "res://src/credits/DinoCredits.tscn",
+		label="Credits",
+		nav_to="res://src/credits/DinoCredits.tscn",
 	},
 	{
-		"label": "Toggle Pause",
-		"fn": Navi.toggle_pause,
+		label="Toggle Pause",
+		fn=Navi.toggle_pause,
 	},
 	{
-		"label": "Show Win Menu",
-		"fn": Navi.show_win_menu,
+		label="Show Win Menu",
+		fn=Navi.show_win_menu,
 	},
 	{
-		"label": "Show Death Menu",
-		"fn": Navi.show_death_menu,
+		label="Show Death Menu",
+		fn=Navi.show_death_menu,
 	}
 ]
 

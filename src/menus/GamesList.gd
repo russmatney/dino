@@ -1,42 +1,43 @@
 @tool
 extends NaviButtonList
 
+# TODO map Games.games with something like menu_link
 var menu_scenes = [
 	{
-		"label": "Dungeon Crawler",
-		"nav_to": "res://src/dungeonCrawler/zones/OneGeon.tscn",
+		label="Dungeon Crawler",
+		nav_to="res://src/dungeonCrawler/zones/OneGeon.tscn",
 	},
 	{
-		"label": "Runner",
-		"nav_to": "res://src/runner/park/ThePark.tscn",
+		label="Runner",
+		nav_to="res://src/runner/park/ThePark.tscn",
 	},
 	{
-		"label": "Ghost House",
-		"nav_to": "res://src/ghosts/GhostsMenu.tscn",
+		label="Ghost House",
+		nav_to="res://src/ghosts/GhostsMenu.tscn",
 	},
 	{
-		"label": "Pluggs",
-		"nav_to": "res://src/pluggs/factory/FactoryFloor.tscn",
+		label="Pluggs",
+		nav_to="res://src/pluggs/factory/FactoryFloor.tscn",
 	},
 	{
-		"label": "Harvey",
-		"nav_to": "res://src/harvey/menus/HarveyMenu.tscn",
+		label="Harvey",
+		nav_to="res://src/harvey/menus/HarveyMenu.tscn",
 	},
 	{
-		"label": "Gunner",
-		"nav_to": "res://src/gunner/player/PlayerGym.tscn",
+		label="Gunner",
+		nav_to="res://src/gunner/player/PlayerGym.tscn",
 	},
 	{
-		"label": "Tower",
-		"nav_to": "res://src/tower/menus/TowerMainMenu.tscn",
+		label="Tower",
+		nav_to="res://src/tower/menus/TowerMainMenu.tscn",
 	},
 	{
-		"label": "Snake",
-		"nav_to": "res://src/snake/menus/SnakeMainMenu.tscn",
+		label="Snake",
+		nav_to="res://src/snake/menus/SnakeMainMenu.tscn",
 	},
 	{
-		"label": "Hatbot",
-		"nav_to": "res://src/hatbot/menus/MainMenu.tscn",
+		label="Hatbot",
+		nav_to="res://src/hatbot/menus/MainMenu.tscn",
 	},
 ]
 
@@ -44,7 +45,7 @@ var menu_scenes = [
 
 func _ready():
 	for ms in menu_scenes:
-		ms.merge({"button_scene": button_scene}, true)
+		ms.merge({button_scene=button_scene}, true)
 		add_menu_item(ms)
 
 	if Engine.is_editor_hint():

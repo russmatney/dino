@@ -5,16 +5,16 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		"label": "Maze",
-		"nav_to": "res://src/dungeonCrawler/zones/Maze.tscn",
+		label="Maze",
+		nav_to="res://src/dungeonCrawler/zones/Maze.tscn",
 	},
 	{
-		"label": "Mvania Demo Map",
-		"nav_to": "res://src/demoland/DemoMap.tscn",
+		label="Mvania Demo Map",
+		nav_to="res://src/demoland/DemoMap.tscn",
 	},
 	{
-		"label": "Mvania DemoLand",
-		"nav_to": "res://src/demoland/zones/area01/Area01.tscn",
+		label="Mvania DemoLand",
+		nav_to="res://src/demoland/zones/area01/Area01.tscn",
 	},
 ]
 
