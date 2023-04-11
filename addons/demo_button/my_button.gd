@@ -3,7 +3,7 @@ extends Button
 
 
 func _enter_tree():
-	connect("pressed",Callable(self,"clicked"))
+	pressed.connect(clicked)
 
 
 func clicked():

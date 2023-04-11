@@ -154,7 +154,7 @@ func list_entries():
 		if lbl.entry in selected_entries:
 			lbl.initial_selected = true
 
-		db_entries.call_deferred("add_child", lbl)
+		db_entries.add_child.call_deferred(lbl)
 
 	zone_names.sort()
 	room_names.sort()
@@ -180,7 +180,7 @@ func toggle_entry_details(selected, entry):
 		var detail = entry_detail_scene.instantiate()
 		detail.entry = entry
 		detail.deselected.connect(deselect_entry.bind(entry))
-		db_entry_details.call_deferred("add_child", detail)
+		db_entry_details.add_child.call_deferred(detail)
 
 func deselect_entry(entry):
 	toggle_entry_details(false, entry)

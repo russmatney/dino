@@ -367,7 +367,7 @@ func init_tilemaps():
 			else:
 				scale_by = 1
 			t.scale = Vector2(scale_by, scale_by)
-			t.connect("tree_entered",Callable(t,"set_owner").bind(Util._or(owner, self)))
+			t.tree_entered.connect(t.set_owner.bind(Util._or(owner, self)))
 			add_child(t)
 			group.tilemap = t
 
@@ -430,5 +430,5 @@ func regen_tilemaps(image = null, inputs=null):
 	call_for_each_coord(img, self, "add_tile_at_coord")
 	update_tilemaps()
 
-	# call_deferred("emit_signal", "regenerated_tilemaps")
-	emit_signal("regenerated_tilemaps")
+	# regenerated_tilemaps.emit.call_deferred()
+	regenerated_tilemaps.emit()

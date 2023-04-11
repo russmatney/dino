@@ -40,12 +40,12 @@ func register_quest(node, opts={}):
 	active_quests[label] = quest
 
 	Hood.notif(str("Registered Quest: ", label))
-	emit_signal("quest_update")
+	quest_update.emit()
 
 func unregister(node, opts={}):
 	var label = q_label(node, opts)
 	active_quests.erase(label)
-	emit_signal("quest_update")
+	quest_update.emit()
 
 
 ######################################################
@@ -78,7 +78,7 @@ func check_all_complete():
 
 	# all complete or not failed!
 	Hood.notif("All quests complete!")
-	emit_signal("all_quests_complete")
+	all_quests_complete.emit()
 
 ######################################################
 # signal updates
@@ -88,21 +88,21 @@ func _on_complete(node, opts):
 	var label = q_label(node, opts)
 	active_quests[label].complete = true
 
-	emit_signal("quest_update")
+	quest_update.emit()
 	check_all_complete()
 
 func _on_fail(node, opts):
 	var label = q_label(node, opts)
 	active_quests[label].failed = true
-	emit_signal("quest_update")
-	emit_signal("quest_failed", active_quests[label])
+	quest_update.emit()
+	quest_failed.emit(active_quests[label])
 
 func _on_count_total_update(total, node, opts):
 	var label = q_label(node, opts)
 	active_quests[label].total = total
-	emit_signal("quest_update")
+	quest_update.emit()
 
 func _on_count_remaining_update(remaining, node, opts):
 	var label = q_label(node, opts)
 	active_quests[label].remaining = remaining
-	emit_signal("quest_update")
+	quest_update.emit()

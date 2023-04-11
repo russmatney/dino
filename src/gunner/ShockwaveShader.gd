@@ -13,7 +13,7 @@ func _ready():
 		node = rect
 
 	update_screen_size()
-	var _x = get_tree().connect("screen_resized",Callable(self,"update_screen_size"))
+	var _x = get_tree().screen_resized.connect(update_screen_size)
 
 
 func update_screen_size():

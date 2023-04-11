@@ -71,7 +71,7 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 # children/parents/...siblings?
 
 func change_parent(child: Node, new_parent: Node):
-	call_deferred("do_change_parent", child, new_parent)
+	do_change_parent.call_deferred(child, new_parent)
 
 
 func do_change_parent(child, new_parent):
@@ -172,11 +172,11 @@ func ensure_connection(obj, sig, target, method, args = []):
 	if not obj.has_signal(sig):
 		Debug.pr("[Warn] obj has no signal for connection: ", obj, " :", sig)
 	var err
-	if not obj.is_connected(sig,Callable(target,method)):
+	if not obj.is_connected(sig, target.method):
 		if args.size() > 0:
-			err = obj.connect(sig,Callable(target,method).bindv(args))
+			err = obj.connect(sig, target.method.bindv(args))
 		else:
-			err = obj.connect(sig,Callable(target,method))
+			err = obj.connect(sig, target.method)
 	if err:
 		Debug.pr("[Error]: ", err)  # useless enum digit
 

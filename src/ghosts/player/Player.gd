@@ -27,7 +27,7 @@ signal player_died
 
 
 func die():
-	emit_signal("player_died")
+	player_died.emit()
 
 
 ############################################################
@@ -37,15 +37,15 @@ func _ready():
 	action_detector.setup(self, null, action_hint)
 
 	initial_pos = get_global_position()
-	machine.connect("transitioned",Callable(self,"on_transit"))
-	machine.call_deferred("start")
+	machine.transitioned.connect(on_transit)
+	machine.start.call_deferred()
 
-	call_deferred("finish_setup")
+	finish_setup.call_deferred()
 	shader_loop()
 
 
 func finish_setup():
-	emit_signal("health_change", health)
+	health_change.emit(health)
 
 
 func on_transit(new_state):
@@ -115,7 +115,7 @@ func face_left():
 
 func hit(body):
 	health -= 1
-	emit_signal("health_change", health)
+	health_change.emit(health)
 
 	var dir
 	if body.global_position.x > global_position.x:
@@ -155,7 +155,7 @@ var gloomba_kos = 0
 func gloomba_ko():
 	Ghosts.create_notification("Gloomba K.O.!")
 	gloomba_kos += 1
-	emit_signal("gloomba_koed", gloomba_kos)
+	gloomba_koed.emit(gloomba_kos)
 
 
 var burstables = []
@@ -222,7 +222,7 @@ func update_actions_ui():
 
 
 func call_action(action):
-	action["obj"].call_deferred(action["fname"])
+	action["obj"].action["fname"].call_deferred()
 
 
 func add_action(obj, fname):

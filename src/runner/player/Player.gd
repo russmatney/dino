@@ -28,7 +28,7 @@ var restart_pos: Vector2
 func _ready():
 	restart_pos = global_position
 
-	call_deferred("ensure_camera")
+	ensure_camera.call_deferred()
 
 
 func ensure_camera():
@@ -40,7 +40,7 @@ func ensure_camera():
 		# if no camera, add one
 		cam = fallback_camera.instantiate()
 		cam.current = true
-		call_deferred("add_child", cam)
+		add_child.call_deferred(cam)
 
 
 #######################################################################33
@@ -93,7 +93,7 @@ func restart():
 	position = restart_pos
 	velocity = Vector2.ZERO
 	stop = false
-	emit_signal("player_resetting")
+	player_resetting.emit()
 
 
 #######################################

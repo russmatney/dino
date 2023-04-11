@@ -10,7 +10,7 @@ signal destroyed(target)
 
 func _ready():
 	Debug.pr("target ready")
-	anim.connect("animation_finished",Callable(self,"_animation_finished"))
+	anim.animation_finished.connect(_animation_finished)
 	Respawner.register_respawn(self)
 
 	animate()
@@ -39,7 +39,7 @@ func animate():
 	tween.tween_property(self, "position", og_pos, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_callback(Callable(self,"animate")).set_delay(randf_range(0.3, 2.0))
+	tween.tween_callback(animate).set_delay(randf_range(0.3, 2.0))
 
 
 func _process(_delta):
@@ -59,11 +59,11 @@ func kill():
 	GunnerSounds.play_sound("target_kill")
 	anim.animation = "pop"
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
-	emit_signal("destroyed", self)
+	destroyed.emit(self)
 
 	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())
-	Navi.current_scene.call_deferred("add_child", lbl)
+	Navi.current_scene.add_child.call_deferred(lbl)
 
 
 func _on_Target_body_entered(body: Node):

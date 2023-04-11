@@ -34,7 +34,7 @@ func set_cell_size(v):
 
 var scene_ready
 func _ready():
-	call_deferred("setup")
+	setup.call_deferred()
 	scene_ready = true
 
 func setup():
@@ -145,7 +145,7 @@ func mark_touched(coord):
 	if cell:
 		cell.animation = "blue"
 		Util.set_random_frame(cell)
-		emit_signal("cell_touched", coord)
+		cell_touched.emit(coord)
 
 func mark_cells_playing():
 	for c in all_cells():

@@ -132,7 +132,7 @@ func add_rooms_to_scene(count: int):
 			# only need to add newly instanced rooms
 			# the others get moved when .position.x is set
 			if not room.get_parent():
-				call_deferred("add_child", room, true)
+				add_child.call_deferred(room, true)
 
 
 # TODO add unit tests

@@ -6,7 +6,7 @@ extends Node
 func add_menu(scene):
 	var menu = scene.instantiate()
 	menu.hide()
-	call_deferred("add_child", menu)
+	add_child.call_deferred(menu)
 	return menu
 
 ## ready ###################################################################
@@ -39,7 +39,7 @@ func nav_to(path_or_packed_scene):
 	Debug.prn("nav_to: ", path_or_packed_scene)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(path_or_packed_scene)
-	call_deferred("_deferred_goto_scene", path_or_packed_scene)
+	_deferred_goto_scene.call_deferred(path_or_packed_scene)
 	# Navi implying DJ dep
 	# TODO opt-in/out of pausing the music
 	DJ.pause_menu_song()
@@ -85,7 +85,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 # helper for adding a child to the current scene
 func add_child_to_current(child):
 	# could use the scene_tree's current_scene directly
-	current_scene.call_deferred("add_child", child)
+	current_scene.add_child.call_deferred(child)
 
 
 #####################################################################

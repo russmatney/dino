@@ -9,7 +9,7 @@ signal notification
 
 
 func create_notification(message, ttl = 5):
-	emit_signal("notification", {"msg": message, "ttl": ttl})
+	notification.emit({"msg": message, "ttl": ttl})
 
 
 #############################################################
@@ -27,9 +27,9 @@ var player_data = {}
 
 
 func room_ready(room):
-	room.connect("spawning_player",Callable(self,"spawning_player"))
+	room.spawning_player.connect(spawning_player)
 	create_notification(str("Entered: ", room.name))
-	emit_signal("room_entered", room)
+	room_entered.emit(room)
 
 
 func spawning_player(p):

@@ -10,7 +10,7 @@ func _ready():
 		ttl = default_ttl
 
 	if not Engine.is_editor_hint():
-		call_deferred("kill_in_ttl")
+		kill_in_ttl.call_deferred()
 
 
 func kill_in_ttl():
@@ -20,4 +20,4 @@ func kill_in_ttl():
 
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 2.0).set_delay(time_to_kill)
-	tween.tween_callback(Callable(self,"queue_free"))
+	tween.tween_callback(queue_free)

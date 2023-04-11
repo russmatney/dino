@@ -53,7 +53,7 @@ func _ready():
 
 	update_window_size()
 	# TODO recreate this? what to subscribe too?
-	# var _x = get_tree().connect("screen_resized",Callable(self,"update_window_size"))
+	# var _x = get_tree().screen_resized.connect(update_window_size)
 
 	if not following:
 		find_node_to_follow()
@@ -193,9 +193,9 @@ func find_node_to_follow():
 		following = nodes[0]
 		match mode:
 			cam_mode.FOLLOW:
-				call_deferred("reparent", following)
+				reparent.call_deferred(following)
 			cam_mode.FOLLOW_AND_POIS:
-				call_deferred("reparent", following)
+				reparent.call_deferred(following)
 			cam_mode.ANCHOR:
 				attach_to_nearest_anchor()
 

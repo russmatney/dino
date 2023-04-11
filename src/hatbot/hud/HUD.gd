@@ -8,7 +8,7 @@ extends CanvasLayer
 func _ready():
 	Hotel.entry_updated.connect(_on_entry_updated)
 
-	call_deferred("update_player_data")
+	update_player_data.call_deferred()
 
 func update_player_data():
 	var player_data = Hotel.query({is_player=true})

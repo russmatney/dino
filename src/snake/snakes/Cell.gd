@@ -77,4 +77,4 @@ func kill():
 	var duration = 0.4
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, duration).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(Callable(self,"queue_free"))
+	tween.tween_callback(queue_free)

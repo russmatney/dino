@@ -21,7 +21,7 @@ func set_hud_scene(preloaded_scene):
 var hud
 
 func ensure_hud(hud_preload=null, p=null):
-	call_deferred("ensure_jumbotron")
+	ensure_jumbotron.call_deferred()
 
 	Debug.prn("ensuring hud")
 	if hud and is_instance_valid(hud):
@@ -40,7 +40,7 @@ func ensure_hud(hud_preload=null, p=null):
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
 	if not player:
-		call_deferred("find_player")
+		find_player.call_deferred()
 
 signal hud_ready
 
@@ -141,7 +141,7 @@ func find_player(p=null):
 		player = p
 
 	if player:
-		emit_signal("found_player", player)
+		found_player.emit(player)
 		return
 
 	var ps = get_tree().get_nodes_in_group(player_group)
@@ -155,4 +155,4 @@ func find_player(p=null):
 		Debug.warn("could not find player, zero in player_group: ", player_group)
 		return
 
-	emit_signal("found_player", player)
+	found_player.emit(player)

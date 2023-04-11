@@ -12,12 +12,12 @@ extends RichTextLabel
 
 func _enter_tree():
 	TextTransitionSettings.register(self)
-	$AnimationPlayer.connect("animation_finished",Callable(self,"on_animation_finish"))
+	$AnimationPlayer.animation_finished.connect(on_animation_finish)
 
 
 func _exit_tree():
 	TextTransitionSettings.unregister(self)
-	$AnimationPlayer.disconnect("animation_finished",Callable(self,"on_animation_finish"))
+	$AnimationPlayer.animation_finished.disconnect(on_animation_finish)
 
 
 # Mostly needed for editor testing.

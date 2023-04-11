@@ -14,14 +14,14 @@ signal targets_cleared
 
 func _ready():
 	# defer until everything has hit the scene tree
-	call_deferred("setup")
+	setup.call_deferred()
 
 
 func setup():
 	var players = get_tree().get_nodes_in_group("player")
 	if players:
 		player = players[0]
-		player.call_deferred("notif", "BREAK THE TARGETS")
+		player.notif.call_deferred("BREAK THE TARGETS")
 		Hood.notif("Break The Targets!")
 		Debug.pr("btt found player: ", player)
 
@@ -106,4 +106,4 @@ func _on_slowmo_stopped(label):
 			player.level_up()
 
 		await get_tree().create_timer(2.0).timeout
-		emit_signal("targets_cleared")
+		targets_cleared.emit()

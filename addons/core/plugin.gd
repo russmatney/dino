@@ -12,7 +12,7 @@ func _enter_tree():
 	add_autoload_singleton("Debug", "res://addons/core/Debug.gd")
 
 	editor_interface = get_editor_interface()
-	reload_scene_btn.connect("pressed",Callable(self,"reload_scene"))
+	reload_scene_btn.pressed.connect(reload_scene)
 	reload_scene_btn.text = "Reload Scene"
 	add_control_to_container(container, reload_scene_btn)
 

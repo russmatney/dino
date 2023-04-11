@@ -14,7 +14,7 @@ var player
 func _ready():
 	# TODO probably never want to do this in more than one place
 	if spawn_on_ready:
-		call_deferred("spawn_player")
+		spawn_player.call_deferred()
 
 
 func spawn_player():
@@ -23,5 +23,5 @@ func spawn_player():
 	player = player_scene.instantiate()
 	player.position = global_position
 
-	emit_signal("spawning_player", player)
-	call_deferred("add_child", player)
+	spawning_player.emit(player)
+	add_child.call_deferred(player)

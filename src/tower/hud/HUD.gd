@@ -2,9 +2,9 @@ extends CanvasLayer
 
 
 func _ready():
-	var _x = Hood.connect("notification",Callable(self,"new_notification"))
-	var _y = Hood.connect("found_player",Callable(self,"setup_player"))
-	Hood.call_deferred("find_player")
+	var _x = Hood.notification.connect(new_notification)
+	var _y = Hood.found_player.connect(setup_player)
+	Hood.find_player.call_deferred()
 
 
 ###################################################################
@@ -15,9 +15,9 @@ var player
 func setup_player(p):
 	player = p
 
-	player.connect("health_change",Callable(self,"update_player_health"))
+	player.health_change.connect(update_player_health)
 	update_player_health(player.health)
-	player.connect("pickups_changed",Callable(self,"update_player_pickups"))
+	player.pickups_changed.connect(update_player_pickups)
 	update_player_pickups(player.pickups)
 
 

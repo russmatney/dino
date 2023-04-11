@@ -118,7 +118,7 @@ func _ready():
 		request_ready()
 
 	# useful when debugging room calcs
-	# call_deferred("my_print_debug")
+	# my_print_debug.call_deferred()
 
 
 func my_print_debug():
@@ -166,11 +166,11 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
 		player.entered_room(self)
-		emit_signal("player_entered", player)
+		player_entered.emit(player)
 
 
 func _on_body_exited(body):
 	if body.is_in_group("player"):
-		emit_signal("player_exited", player)
+		player_exited.emit(player)
 		player.exited_room(self)
 		player = null

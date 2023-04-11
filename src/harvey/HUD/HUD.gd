@@ -2,7 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
-	var _x = Harvey.connect("new_produce_delivered",Callable(self,"inc_produce_count"))
+	var _x = Harvey.new_produce_delivered.connect(inc_produce_count)
 
 	tick_timer()
 
@@ -22,7 +22,7 @@ func tick_timer():
 		Harvey.time_up(produce_counts)
 	else:
 		var tween = create_tween()
-		tween.tween_callback(Callable(self,"tick_timer")).set_delay(1.0)
+		tween.tween_callback(tick_timer).set_delay(1.0)
 		time_remaining = time_remaining - 1
 
 

@@ -51,7 +51,7 @@ func connect_pressed_to_action(button, item):
 	var arg
 	var argv
 	if nav_to:
-		fn = Callable(_navi, "nav_to")
+		fn = _navi.nav_to
 		arg = nav_to
 	else:
 		arg = item.get("arg")
@@ -74,11 +74,11 @@ func connect_pressed_to_action(button, item):
 		return
 
 	if arg:
-		button.connect("pressed", fn.bind(arg))
+		button.pressed.connect(fn.bind(arg))
 	elif argv:
-		button.connect("pressed", fn.bindv(argv))
+		button.pressed.connect(fn.bindv(argv))
 	else:
-		button.connect("pressed", fn)
+		button.pressed.connect(fn)
 
 
 func add_menu_item(item):

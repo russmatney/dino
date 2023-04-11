@@ -5,10 +5,10 @@ var player
 
 func _ready():
 	# TODO connect to player spawn signals instead
-	call_deferred("find_player")
+	find_player.call_deferred()
 
-	var _x = Ghosts.connect("notification",Callable(self,"new_notification"))
-	var _y = Ghosts.connect("room_entered",Callable(self,"update_room_name"))
+	var _x = Ghosts.notification.connect(new_notification)
+	var _y = Ghosts.room_entered.connect(update_room_name)
 
 
 ###################################################################
@@ -34,8 +34,8 @@ func find_player():
 		return
 
 	if player:
-		player.connect("health_change",Callable(self,"update_player_health"))
-		player.connect("gloomba_koed",Callable(self,"update_gloomba_kos"))
+		player.health_change.connect(update_player_health)
+		player.gloomba_koed.connect(update_gloomba_kos)
 
 		# TODO restore zero state
 		# update_player_health(player.health)

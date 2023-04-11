@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	var _x = Hood.connect("found_player",Callable(self,"setup"))
+	var _x = Hood.found_player.connect(setup)
 	if Hood.player and is_instance_valid(Hood.player):
 		setup(Hood.player)
 
@@ -21,26 +21,26 @@ var count_remaining
 
 func setup(p):
 	player = p
-	player.call_deferred("highlight", "Clear The Grid!")
+	player.highlight.call_deferred("Clear The Grid!")
 	Hood.notif("Clear the Grid!")
 
 	if player.grid:
 		find_remaining_cells()
-		emit_signal("count_total_update", count_remaining)
+		count_total_update.emit(count_remaining)
 
 
 	Util.ensure_connection(player.grid, "cell_touched", self, "_on_cell_touched")
 
 func find_remaining_cells():
 	count_remaining = player.grid.untouched_cells().size()
-	emit_signal("count_remaining_update", count_remaining)
+	count_remaining_update.emit(count_remaining)
 
 func _on_cell_touched(_coord):
 	find_remaining_cells()
 
 	if count_remaining <= 0:
 		Hood.notif("Grid Cleared!")
-		emit_signal("quest_complete")
+		quest_complete.emit()
 	else:
 		pass
 	# TODO highlight this via Hood

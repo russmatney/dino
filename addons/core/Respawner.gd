@@ -33,7 +33,7 @@ func respawn_all():
 	for r in respawns:
 		var ins = load(r["scene_file_path"]).instantiate()
 		# ins.position = r["position"]
-		Navi.current_scene.call_deferred("add_child", ins)
+		Navi.current_scene.add_child.call_deferred(ins)
 
 
 func respawn_missing():
@@ -43,7 +43,7 @@ func respawn_missing():
 			to_remove.append(r)
 			var ins = load(r["scene_file_path"]).instantiate()
 			ins.position = r["position"]
-			Navi.current_scene.call_deferred("add_child", ins)
-			emit_signal("respawn", ins)
+			Navi.current_scene.add_child.call_deferred(ins)
+			respawn.emit(ins)
 
 	respawns = Util.remove_matching(respawns, to_remove)

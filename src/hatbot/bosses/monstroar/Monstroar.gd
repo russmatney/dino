@@ -38,7 +38,7 @@ func _ready():
 
 	swoop_hints = [swoop_hint1, swoop_hint2, swoop_hint_player]
 	for sh in swoop_hints:
-		sh.call_deferred("reparent", get_parent())
+		sh.reparent.call_deferred(get_parent())
 
 	if Game.is_managed:
 		state_label.set_visible(false)

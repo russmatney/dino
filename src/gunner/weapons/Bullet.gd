@@ -17,7 +17,7 @@ signal bullet_dying(bullet)
 
 
 func kill():
-	emit_signal("bullet_dying", self)
+	bullet_dying.emit(self)
 	# no need to run more than once (if we contact multiple objs)
 	if not dying:
 		dying = true

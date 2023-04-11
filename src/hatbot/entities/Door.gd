@@ -56,12 +56,12 @@ func _on_animation_finished():
 	if anim.animation == "opening":
 		anim.play("open")
 		if collision_shape:
-			collision_shape.call_deferred("set_disabled", true)
+			collision_shape.set_disabled.call_deferred(true)
 		cam_pof.deactivate()
 
 	elif anim.animation == "closing":
 		anim.play("closed")
-		collision_shape.call_deferred("set_disabled", false)
+		collision_shape.set_disabled.call_deferred(false)
 		cam_pof.deactivate()
 
 ##################################################################

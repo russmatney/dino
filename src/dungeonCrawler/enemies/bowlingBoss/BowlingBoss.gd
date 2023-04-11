@@ -28,8 +28,8 @@ func _get_configuration_warnings():
 func _ready():
 	Debug.pr("bowling boss ready")
 	initial_pos = get_global_position()
-	machine.connect("transitioned",Callable(self,"on_transit"))
-	machine.call_deferred("start")
+	machine.transitioned.connect(on_transit)
+	machine.start.call_deferred()
 
 
 func on_transit(new_state):
@@ -66,7 +66,7 @@ var bowl_speed = 200
 func bowl_attack(target):
 	var ball = ball_scene.instantiate()
 	ball.position = get_global_position()
-	Navi.current_scene.call_deferred("add_child", ball)
+	Navi.current_scene.add_child.call_deferred(ball)
 
 	var bowl_dir = target.get_global_position() - ball.position
 	ball.velocity = bowl_dir.normalized() * bowl_speed

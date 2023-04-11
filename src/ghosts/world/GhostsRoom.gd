@@ -3,7 +3,6 @@ extends Node
 signal spawning_player
 
 var player_scene = preload("res://src/ghosts/player/Player.tscn")
-
 var player
 
 #############################################################
@@ -12,8 +11,7 @@ var player
 func _ready():
 	# register connections
 	Ghosts.room_ready(self)
-
-	call_deferred("spawn_player")
+	spawn_player.call_deferred()
 
 
 func spawn_player():
@@ -25,11 +23,9 @@ func spawn_player():
 	player = player_scene.instantiate()
 	player.position = pos
 
-	emit_signal("spawning_player", player)
-
-	player.connect("player_died",Callable(self,"player_died"))
-
-	call_deferred("add_child", player)
+	spawning_player.emit(player)
+	player.player_died.connect(player_died)
+	add_child.call_deferred(player)
 
 
 #############################################################

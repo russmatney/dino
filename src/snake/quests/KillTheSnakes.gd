@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	var _x = Hood.connect("found_player",Callable(self,"setup"))
+	var _x = Hood.found_player.connect(setup)
 	if Hood.player and is_instance_valid(Hood.player):
 		setup(Hood.player)
 
@@ -21,7 +21,7 @@ var player
 
 func setup(p):
 	player = p
-	player.call_deferred("highlight", "Kill The Snakes!")
+	player.hightlight.call_deferred("Kill The Snakes!")
 	Hood.notif("Kill the Snakes!")
 
 	find_snakes()
@@ -38,16 +38,16 @@ func find_snakes():
 			ss.append(e)
 
 	enemy_snakes = ss
-	emit_signal("count_total_update", str(enemy_snakes.size()))
+	count_total_update.emit(str(enemy_snakes.size()))
 
 
 
 func _on_destroyed(snake):
 	enemy_snakes.erase(snake)
 
-	emit_signal("count_remaining_update", enemy_snakes.size())
+	count_remaining_update.emit(enemy_snakes.size())
 	if not enemy_snakes:
 		Hood.notif("Enemies Cleared!")
-		emit_signal("quest_complete")
+		quest_complete.emit()
 	else:
 		Hood.notif(str(enemy_snakes.size(), " Enemies remaining!"))

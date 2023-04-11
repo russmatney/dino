@@ -89,7 +89,7 @@ func ensure_camera(cam_mode = null, opts={}, player=null):
 	if cam_mode:
 		cam.mode = cam_mode
 
-	Navi.current_scene.call_deferred("add_child", cam)
+	Navi.current_scene.add_child.call_deferred(cam)
 
 
 ##############################################################
@@ -143,7 +143,7 @@ func stop_slowmo(label):
 	# Debug.debug_label("[CAM] stop slowmo: ", label)
 	slowmos.erase(label)
 	slowmo_scales.erase(label)
-	emit_signal("slowmo_stopped", label)
+	slowmo_stopped.emit(label)
 	resume_slowmo()
 
 

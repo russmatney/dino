@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 
 func _ready():
-	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.transitioned.connect(on_transit)
 
 
 func on_transit(new_state):

@@ -32,7 +32,7 @@ func animate():
 	tween.tween_property(self, "position", og_pos, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
 		Tween.TRANS_CUBIC
 	)
-	tween.tween_callback(Callable(self,"animate")).set_delay(randf_range(0.3, 2.0))
+	tween.tween_callback(animate).set_delay(randf_range(0.3, 2.0))
 
 
 func kill():

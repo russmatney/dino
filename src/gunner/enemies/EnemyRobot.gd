@@ -114,7 +114,7 @@ signal dead
 func take_damage(body = null, d = 1):
 	Cam.freezeframe("enemy_damage_hitstop", 0.2, 0.3, 0.3)
 	health -= d
-	emit_signal("health_change", health)
+	health_change.emit(health)
 
 	GunnerSounds.play_sound("enemy_hit")
 
@@ -129,7 +129,7 @@ func take_damage(body = null, d = 1):
 
 func die(remove_at = false):
 	is_dead = true
-	emit_signal("dead")
+	dead.emit()
 
 	GunnerSounds.play_sound("enemy_dead")
 	if remove_at:
@@ -184,7 +184,7 @@ func fire_at_player():
 		var bullet = bullet_scene.instantiate()
 		bullet.position = bullet_position.get_global_position()
 		bullet.add_collision_exception_with(self)
-		Navi.current_scene.call_deferred("add_child", bullet)
+		Navi.current_scene.add_child.call_deferred(bullet)
 
 		var angle_to_player = bullet.position.direction_to(player.global_position + Vector2(0, -15))
 
@@ -192,4 +192,4 @@ func fire_at_player():
 		bullet.apply_impulse(angle_to_player * bullet_impulse, Vector2.ZERO)
 
 		GunnerSounds.play_sound("fire")
-		emit_signal("fired_bullet", bullet)
+		fired_bullet.emit(bullet)

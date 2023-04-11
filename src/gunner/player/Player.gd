@@ -20,14 +20,14 @@ func _enter_tree():
 func _ready():
 	Debug.pr("gunner player getting ready: ", anim)
 	reset_position = get_global_position()
-	machine.connect("transitioned",Callable(self,"on_transit"))
+	machine.transitioned.connect(on_transit)
 	face_left()
 
-	Cam.call_deferred("ensure_camera", 2)
+	Cam.ensure_camera.call_deferred(2)
 	Hood.ensure_hud()
 
 	Debug.pr("gunner player ready: ", anim)
-	machine.call_deferred("start")
+	machine.start.call_deferred()
 
 
 ############################################################
@@ -101,7 +101,7 @@ signal dead
 
 func take_damage(body = null, d = 1):
 	health -= d
-	emit_signal("health_change", health)
+	health_change.emit(health)
 	GunnerSounds.play_sound("player_hit")
 
 	var dir
@@ -118,7 +118,7 @@ func take_damage(body = null, d = 1):
 func die(remove_at = false):
 	is_dead = true
 	GunnerSounds.play_sound("player_dead")
-	emit_signal("dead")
+	dead.emit()
 	if remove_at:
 		queue_free()
 
@@ -239,11 +239,11 @@ func fire_bullet():
 	var bullet = bullet_scene.instantiate()
 	bullet.position = bullet_position.get_global_position()
 	bullet.add_collision_exception_with(self)
-	Navi.current_scene.call_deferred("add_child", bullet)
+	Navi.current_scene.add_child.call_deferred(bullet)
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(facing_dir * bullet_impulse, Vector2.ZERO)
 	GunnerSounds.play_sound("fire")
-	emit_signal("fired_bullet", bullet)
+	fired_bullet.emit(bullet)
 
 	# push player back when firing
 	var pos = get_global_position()
@@ -271,9 +271,9 @@ func notif(text, opts = {}):
 	if dupe:
 		label.set_global_position(notif_label.get_global_position())
 		Navi.add_child_to_current(label)
-		tween.tween_callback(Callable(label,"queue_free")).set_delay(ttl)
+		tween.tween_callback(label.queue_free).set_delay(ttl)
 	else:
-		tween.tween_callback(Callable(label,"set_visible").bind(false)).set_delay(ttl)
+		tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
 
 
 ######################################################################
@@ -294,7 +294,7 @@ func shine(_time = 1.0):
 	pass
 	# var tween = create_tween()
 	# anim.material.set("shader_parameter/speed", 1.0)
-	# tween.tween_callback(Callable(anim.material,"set").bind("shader_parameter/speed", 0.0)).set_delay(time)
+	# tween.tween_callback(anim.material.set.bind("shader_parameter/speed", 0.0)).set_delay(time)
 
 
 ######################################################################
@@ -311,7 +311,7 @@ func collect_pickup(pickup_type):
 		has_jetpack = true
 	else:
 		pickups.append(pickup_type)
-		emit_signal("pickups_changed", pickups)
+		pickups_changed.emit(pickups)
 
 
 ######################################################################

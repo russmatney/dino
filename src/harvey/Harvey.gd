@@ -10,7 +10,7 @@ func _ready():
 	time_up_menu = time_up_menu_scene.instantiate()
 	time_up_menu.hide()
 	time_up_container.add_child(time_up_menu)
-	call_deferred("add_child", time_up_container)
+	add_child.call_deferred(time_up_container)
 
 	setup_sounds()
 
@@ -54,7 +54,7 @@ signal new_produce_delivered(type)
 
 func produce_delivered(type):
 	sound_produce_delivered()
-	emit_signal("new_produce_delivered", type)
+	new_produce_delivered.emit(type)
 
 
 #########################################################################

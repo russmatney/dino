@@ -74,9 +74,9 @@ func spawn_player(pos):
 	for k in player_default_opts.keys():
 		player[k] = player_default_opts[k]
 	player.position = pos
-	player.connect("dead",Callable(self,"show_dead"))
+	player.dead.connect(show_dead)
 	Navi.add_child_to_current(player)
-	emit_signal("player_spawned", player)
+	player_spawned.emit(player)
 	GunnerSounds.play_sound("player_spawn")
 	return player
 

@@ -10,9 +10,9 @@ func _ready():
 		Cam.ensure_camera(2)
 		Hood.ensure_hud(hud_scene)
 
-	var _x = connect("food_picked_up",Callable(self,"_on_food_picked_up"))
-	var _y = connect("slowmo_start",Callable(self,"_on_slowmo_start"))
-	var _z = connect("slowmo_stop",Callable(self,"_on_slowmo_stop"))
+	var _x = food_picked_up.connect(_on_food_picked_up)
+	var _y = slowmo_start.connect(_on_slowmo_start)
+	var _z = slowmo_stop.connect(_on_slowmo_stop)
 
 	cell_anim = "player"
 	cell_head_anim = "playerhead"
@@ -87,9 +87,9 @@ func _unhandled_input(event):
 		move(Vector2.DOWN)
 
 	elif Trolley.is_event(event, "slowmo"):
-		emit_signal("slowmo_start")
+		slowmo_start.emit()
 	elif Trolley.is_event_released(event, "slowmo"):
-		emit_signal("slowmo_stop")
+		slowmo_stop.emit()
 
 func move(dir):
 	if walk_manually:
@@ -153,7 +153,7 @@ func attempt_collect(coord):
 	if c and c.has_method("should_inc_juice") and c.should_inc_juice():
 		highlight("[jump]juice++")
 		combo_juice += 1
-		emit_signal("inc_combo_juice", combo_juice)
+		inc_combo_juice.emit(combo_juice)
 		# Hood.notif(str("[jump]Combo Juice ++: ", combo_juice))
 
 ##################################################################
@@ -214,7 +214,7 @@ func leap_towards_food(next, f):
 
 func pickup_food(f):
 	food_count += 1
-	emit_signal("food_picked_up", f)
+	food_picked_up.emit(f)
 
 signal speed_increased
 
@@ -241,7 +241,7 @@ func _on_food_picked_up(f):
 		walk_every -= walk_every * 0.1
 		Cam.screenshake(0.3)
 		speed_level += 1
-		emit_signal("speed_increased")
+		speed_increased.emit()
 		SnakeSounds.play_sound("speedup")
 
 		# TODO move to combo levels

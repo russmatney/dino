@@ -21,7 +21,7 @@ func create_new_block(room, spawner):
 	# attach spawner to block
 	new_block.spawner = spawner
 
-	room.call_deferred("add_child", new_block)
+	room.add_child.call_deferred(new_block)
 
 
 func ensure_blocks(room):

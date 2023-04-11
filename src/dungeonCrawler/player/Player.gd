@@ -16,7 +16,7 @@ func _ready():
 	initial_pos = get_global_position()
 	anim.flip_h = facing == facing_dir.RIGHT
 
-	call_deferred("setup")
+	setup.call_deferred()
 
 
 func setup():
@@ -148,7 +148,7 @@ var player_bow_scene = preload("res://src/dungeonCrawler/weapons/BowWeapon.tscn"
 
 func attach_bow():
 	var bow = player_bow_scene.instantiate()
-	call_deferred("add_child", bow)
+	add_child.call_deferred(bow)
 	bow.transform.origin = weapon_pos.position
 
 
@@ -165,7 +165,7 @@ func fire_bow():
 	var arrow = arrow_scene.instantiate()
 	arrow.position = bow.get_global_position()  # maybe use weapon position?
 	# prefer to add bullets to the current scene, so they get cleaned up
-	Navi.current_scene.call_deferred("add_child", arrow)
+	Navi.current_scene.add_child.call_deferred(arrow)
 	arrow.rotation_degrees = bow.rotation_degrees + 90
 	var impulse_dir = Vector2(1, 0).rotated(deg_to_rad(bow.rotation_degrees))
 	arrow.apply_impulse(impulse_dir * arrow_impulse, Vector2.ZERO)

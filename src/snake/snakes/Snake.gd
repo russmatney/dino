@@ -229,7 +229,7 @@ func _on_step():
 	step_count += 1
 
 func walk_towards(next, should_drop_tail = true):
-	emit_signal("step")
+	step.emit()
 	if should_drop_tail:
 		drop_tail()
 	move_head(next)
@@ -252,7 +252,7 @@ func move_head(coord):
 	segment_coords.push_front(coord)
 	draw_segment(coord)
 	global_position = head_cell().global_position
-	emit_signal("did_move_head", coord)
+	did_move_head.emit(coord)
 
 ##################################################################
 # death
@@ -271,7 +271,7 @@ func destroy():
 		if is_instance_valid(cell):
 			cell.kill()
 
-	emit_signal("destroyed", self)
+	destroyed.emit(self)
 
 	await get_tree().create_timer(2.0).timeout
 	# after cells animate away

@@ -18,7 +18,7 @@ func render():
 
 
 func _ready():
-	Quest.connect("quest_update",Callable(self,"_on_quest_update"))
+	Quest.quest_update.connect(_on_quest_update)
 	_on_quest_update()
 
 func _on_quest_update():
