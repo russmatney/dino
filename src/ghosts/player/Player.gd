@@ -32,8 +32,11 @@ func die():
 
 ############################################################
 
+var hud = preload("res://src/ghosts/hud/HUD.tscn")
 
 func _ready():
+	Hood.ensure_hud(hud, self)
+
 	action_detector.setup(self, null, action_hint)
 
 	initial_pos = get_global_position()
@@ -133,7 +136,7 @@ func _on_Hurtbox_body_entered(body: Node):
 	if body.is_in_group("enemies"):
 		if body.can_hit_player():
 			hit(body)
-			Ghosts.create_notification("Youch!")
+			Hood.notif("Youch!")
 		elif body.player_can_hit():
 			if body.has_method("hit"):
 				var dir
@@ -153,7 +156,7 @@ var gloomba_kos = 0
 
 
 func gloomba_ko():
-	Ghosts.create_notification("Gloomba K.O.!")
+	Hood.notif("Gloomba K.O.!")
 	gloomba_kos += 1
 	gloomba_koed.emit(gloomba_kos)
 
@@ -171,7 +174,7 @@ func burst_gloomba():
 	update_burst_action()
 
 	if did_burst:
-		Ghosts.create_notification("Gloomba stunned!")
+		Hood.notif("Gloomba stunned!")
 		$Flashlight/AnimatedSprite2D.visible = true
 		$Flashlight/AnimatedSprite2D.play("burst")
 		await get_tree().create_timer(0.4).timeout

@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://drqyknqja7bhd"]
+[gd_scene load_steps=10 format=3 uid="uid://drqyknqja7bhd"]
 
 [ext_resource type="PackedScene" uid="uid://dy621hqwy41r4" path="res://src/ghosts/world/Door.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/ghosts/enemies/Glowmba.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/ghosts/hud/HUD.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/ghosts/world/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/ghosts/player/Camera.tscn" id="6"]
@@ -13,8 +12,6 @@
 
 [node name="Pit" type="Node2D"]
 script = ExtResource("10")
-
-[node name="HUD" parent="." instance=ExtResource("3")]
 
 [node name="Camera2D" parent="." instance=ExtResource("6")]
 

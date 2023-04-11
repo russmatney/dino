@@ -7,7 +7,6 @@ func _ready():
 	# TODO connect to player spawn signals instead
 	find_player.call_deferred()
 
-	var _x = Ghosts.notification.connect(new_notification)
 	var _y = Ghosts.room_entered.connect(update_room_name)
 
 
@@ -77,15 +76,3 @@ func update_room_name(room):
 	var label = get_node("%Room")
 	label.set_text(str("Room: ", room.name))
 
-
-###################################################################
-# Notifications
-
-var notif_label = preload("res://addons/hood/NotifLabel.tscn")
-
-
-func new_notification(notif):
-	var lbl = notif_label.instantiate()
-	lbl.text = notif["msg"]
-	lbl.ttl = notif["ttl"]
-	get_node("%Notifications").add_child(lbl)
