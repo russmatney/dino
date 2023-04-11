@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2j4iqtfpt4de"]
+[gd_scene load_steps=4 format=3 uid="uid://d2j4iqtfpt4de"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/ghosts/GhostsMenuList.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dwqrfiyhdjoeu" path="res://src/ghosts/hud/GhostsControls.tscn" id="3"]
-[ext_resource type="Script" path="res://addons/MaxSizeContainer/max_size_container.gd" id="4"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -25,13 +24,7 @@ text = "Ghost House"
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="MaxSizeContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("4")
-max_size = Vector2(130, -1)
-
-[node name="GhostsControls" parent="HBoxContainer/VBoxContainer/MaxSizeContainer" instance=ExtResource("3")]
+[node name="GhostsControls" parent="HBoxContainer/VBoxContainer" instance=ExtResource("3")]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1

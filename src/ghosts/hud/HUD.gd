@@ -36,9 +36,8 @@ func find_player():
 		player.health_change.connect(update_player_health)
 		player.gloomba_koed.connect(update_gloomba_kos)
 
-		# TODO restore zero state
-		# update_player_health(player.health)
-		# update_gloomba_kos(player.gloomba_kos)
+		update_player_health(player.health)
+		update_gloomba_kos(player.gloomba_kos)
 
 
 ###################################################################

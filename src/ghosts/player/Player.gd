@@ -225,7 +225,7 @@ func update_actions_ui():
 
 
 func call_action(action):
-	action["obj"].action["fname"].call_deferred()
+	action["obj"].call_deferred(action["fname"])
 
 
 func add_action(obj, fname):
