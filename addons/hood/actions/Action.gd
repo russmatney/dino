@@ -45,6 +45,10 @@ static func mk(opts) -> Action:
 	if label_fn != null:
 		ax.label_fn = label_fn
 
+	var src = opts.get("source")
+	if src != null:
+		ax.source = src
+
 	var input_action = opts.get("input_action")
 	if input_action != null:
 		ax.input_action = input_action

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6crwj175n8r"]
+[gd_scene load_steps=19 format=3 uid="uid://c6crwj175n8r"]
 
 [ext_resource type="SpriteFrames" uid="uid://dya6hn1wti0o0" path="res://src/ghosts/player/player_sprites.tres" id="1"]
 [ext_resource type="Script" path="res://src/ghosts/player/Player.gd" id="2"]
@@ -11,13 +11,15 @@
 [ext_resource type="Script" path="res://src/ghosts/player/Dead.gd" id="10"]
 [ext_resource type="PackedScene" uid="uid://bwaumvx2geh3k" path="res://src/ghosts/player/Flashlight.tscn" id="11"]
 [ext_resource type="Texture2D" uid="uid://d2txqhto2oicp" path="res://addons/core/assets/lights/light_smooth_sheet.png" id="12"]
+[ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="12_amjn1"]
+[ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="13_nmvo7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(27, 52)
 
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("8")
-shader_parameter/red_displacement = -1.0
+shader_parameter/red_displacement = -0.085838
 shader_parameter/green_displacement = 1.0
 shader_parameter/blue_displacement = 1.0
 shader_parameter/ghost = 0.0
@@ -32,7 +34,10 @@ size = Vector2(29, 48)
 [sub_resource type="CircleShape2D" id="5"]
 radius = 125.004
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixhtb"]
+size = Vector2(128, 128)
+
+[node name="Player" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
 script = ExtResource("2")
 max_health = 4
@@ -113,6 +118,14 @@ shape = SubResource("5")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(2, 5)
 texture = ExtResource("12")
+
+[node name="ActionDetector" parent="." instance=ExtResource("12_amjn1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource("RectangleShape2D_ixhtb")
+
+[node name="ActionHint" parent="." instance=ExtResource("13_nmvo7")]
+position = Vector2(0, -32)
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="body_entered" from="Burstbox" to="." method="_on_Burstbox_body_entered"]

@@ -19,7 +19,7 @@ var actions: Array = []
 ## register actions to be detected from this area
 func register_actions(axs, source=null):
 	for ax in axs:
-		if source:
+		if source and not ax.source:
 			ax.source = source
 		ax.area = self
 	actions = axs

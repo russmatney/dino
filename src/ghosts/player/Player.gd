@@ -18,6 +18,9 @@ var dead = false
 @onready var anim = $AnimatedSprite2D
 var tween
 
+@onready var action_detector = $ActionDetector
+@onready var action_hint = $ActionHint
+
 ############################################################
 
 signal player_died
@@ -31,12 +34,14 @@ func die():
 
 
 func _ready():
+	action_detector.setup(self, null, action_hint)
+
 	initial_pos = get_global_position()
 	machine.connect("transitioned",Callable(self,"on_transit"))
 	machine.call_deferred("start")
 
 	call_deferred("finish_setup")
-	# shader_loop()
+	shader_loop()
 
 
 func finish_setup():
@@ -71,10 +76,12 @@ func shader_loop():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("action"):
-		if current_action:
-			call_action(current_action)
-		# TODO update when gloombas become unstunned, maybe via signals
-		update_burst_action()
+		var did_execute = action_detector.execute_current_action()
+		if not did_execute:
+			if current_action:
+				call_action(current_action)
+			# TODO update when gloombas become unstunned, maybe via signals
+			update_burst_action()
 
 
 ############################################################

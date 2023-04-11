@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dy621hqwy41r4"]
+[gd_scene load_steps=11 format=3 uid="uid://dy621hqwy41r4"]
 
 [ext_resource type="Texture2D" uid="uid://ba1yri2mynwtc" path="res://assets/sprites/dungeon_door_sheet.png" id="1"]
 [ext_resource type="Script" path="res://src/ghosts/world/Door.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3"]
+[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="4_7ef0q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ywj5"]
 atlas = ExtResource("1")
@@ -31,10 +32,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(64, 56)
-
 [sub_resource type="FontFile" id="5"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 fallbacks = Array[Font]([ExtResource("3")])
 face_index = null
 embolden = null
@@ -49,6 +50,9 @@ cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 [sub_resource type="Theme" id="6"]
 Label/fonts/font = SubResource("5")
 
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(64, 56)
+
 [node name="Door" type="Node2D"]
 script = ExtResource("2")
 
@@ -56,14 +60,6 @@ script = ExtResource("2")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_bggw3")
 animation = &"closed"
-
-[node name="Detectbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
-position = Vector2(0, 4)
-shape = SubResource("4")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -48.0
@@ -73,5 +69,8 @@ offset_bottom = -30.0
 theme = SubResource("6")
 uppercase = true
 
-[connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
-[connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]
+[node name="ActionArea" parent="." instance=ExtResource("4_7ef0q")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+position = Vector2(0, 4)
+shape = SubResource("4")

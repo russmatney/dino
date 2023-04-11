@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c25comrsm8rkt"]
 
-[ext_resource type="PackedScene" path="res://src/ghosts/world/lights/SmallLight.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ddklv6bc7o134" path="res://src/ghosts/world/lights/SmallLight.tscn" id="1"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 2.0
@@ -166,5 +166,4 @@ softness = 10.0
 [node name="SmallLight" parent="." instance=ExtResource("1")]
 position = Vector2(0, 118)
 mass = 0.01
-gravity_scale = 1.0
 freeze_mode = 1
