@@ -36,6 +36,7 @@ var hud = preload("res://src/ghosts/hud/HUD.tscn")
 
 func _ready():
 	Hood.ensure_hud(hud, self)
+	Cam.ensure_camera(Cam.mode.FOLLOW_AND_POIS, null, self)
 
 	action_detector.setup(self, null, action_hint)
 

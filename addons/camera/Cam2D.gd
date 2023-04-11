@@ -1,7 +1,6 @@
 extends Camera2D
 
-enum cam_mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
-@export var mode: cam_mode = cam_mode.FOLLOW
+@export var mode: Cam.mode = Cam.mode.FOLLOW
 
 @export var follow_group: String = "player"
 @export var anchor_group: String = "camera_anchor"
@@ -43,7 +42,7 @@ func _ready():
 	# let's hope the camera parent doesn't need to rotate...
 	set_ignore_rotation(false)
 
-	if mode == cam_mode.FOLLOW_AND_POIS:
+	if mode == Cam.mode.FOLLOW_AND_POIS:
 		if poi_group:
 			update_pois()
 		elif poa_group:
@@ -89,10 +88,10 @@ func _process(delta):
 
 
 	match mode:
-		cam_mode.FOLLOW:
+		Cam.mode.FOLLOW:
 			if not following:
 				find_node_to_follow()
-		cam_mode.ANCHOR:
+		Cam.mode.ANCHOR:
 			if not following:
 				find_node_to_follow()
 			else:
@@ -100,7 +99,7 @@ func _process(delta):
 					attach_to_nearest_anchor()
 				else:
 					following = null
-		cam_mode.FOLLOW_AND_POIS:
+		Cam.mode.FOLLOW_AND_POIS:
 			if not following:
 				find_node_to_follow()
 
@@ -158,11 +157,11 @@ func zoom_dir(dir, n_levels = null):
 	# Debug.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
-		cam_mode.FOLLOW:
+		Cam.mode.FOLLOW:
 			update_zoom()
-		cam_mode.ANCHOR:
+		Cam.mode.ANCHOR:
 			update_zoom()
-		cam_mode.FOLLOW_AND_POIS:
+		Cam.mode.FOLLOW_AND_POIS:
 			# updated via _process
 			pass
 
@@ -192,11 +191,11 @@ func find_node_to_follow():
 	if nodes.size() > 0:
 		following = nodes[0]
 		match mode:
-			cam_mode.FOLLOW:
+			Cam.mode.FOLLOW:
 				reparent.call_deferred(following)
-			cam_mode.FOLLOW_AND_POIS:
+			Cam.mode.FOLLOW_AND_POIS:
 				reparent.call_deferred(following)
-			cam_mode.ANCHOR:
+			Cam.mode.ANCHOR:
 				attach_to_nearest_anchor()
 
 ###########################################################################

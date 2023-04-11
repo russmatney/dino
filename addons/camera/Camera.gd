@@ -2,6 +2,8 @@
 # Cam
 extends Node
 
+enum mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
+
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
