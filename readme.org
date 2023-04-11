@@ -10,7 +10,7 @@ some game assets (fonts) in the repo.
 
 --
 
-A monorepo with Godot games and addons.
+A monorepo/sandbox with Godot games and addons.
 Play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
 
 'Dino' sort of comes from 'demo', but with some personality and a cast of characters to pull from.

@@ -2,7 +2,7 @@
 extends Node
 
 func _ready():
-	Debug.prn("autoload ready")
+	Debug.prn("Hood autoload ready")
 	Debug.debug_label("Hood: loaded")
 
 ###########################################################################
