@@ -9,7 +9,7 @@ func _ready():
 
 	# TODO flip dependency and logic with Hood
 	Hood.found_player.connect(_on_player_found)
-	if Hood.player:
+	if Hood.player and is_instance_valid(Hood.player):
 		_on_player_found(Hood.player)
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)

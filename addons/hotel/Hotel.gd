@@ -225,6 +225,7 @@ func check_in_sfp(sfp: String, data: Dictionary):
 	var entry = first({scene_file_path=sfp})
 	if entry == null:
 		Debug.warn("No entry for sfp found", sfp)
+		return
 	var k = entry.get("key")
 	if k in scene_db:
 		update(k, data)
@@ -253,11 +254,15 @@ func query(q={}):
 	if "group" in q:
 		vals = vals.filter(func (s_dict): return q["group"] in s_dict.get("groups", []))
 
+	# TODO dry up data-dict match pattern
 	if "zone_name" in q:
 		vals = vals.filter(func (s_dict): return q["zone_name"] == s_dict.get("zone_name"))
 
 	if "room_name" in q:
 		vals = vals.filter(func (s_dict): return q["room_name"] == s_dict.get("room_name"))
+
+	if "scene_file_path" in q:
+		vals = vals.filter(func (s_dict): return q["scene_file_path"] == s_dict.get("scene_file_path"))
 
 	if "has_group" in q:
 		vals = vals.filter(func (s_dict): return len(s_dict.get("groups", [])) > 0)
