@@ -4,6 +4,11 @@ func _ready():
 	Hotel.entry_updated.connect(_on_entry_updated)
 	_on_entry_updated(Hotel.first({is_player=true}))
 
+	var rooms = Hotel.query({group=Ghosts.rooms_group})
+	# TODO sort by ready_at ? or some other 'current' flag?
+	if len(rooms) > 0:
+		set_room_name(rooms[0].get("name"))
+
 func _on_entry_updated(entry):
 	if "player" in entry["groups"]:
 		if entry.get("health") != null:

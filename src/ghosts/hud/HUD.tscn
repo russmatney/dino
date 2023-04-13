@@ -26,6 +26,8 @@ size_flags_vertical = 3
 [node name="HeartsContainer" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("5")]
 unique_name_in_owner = true
 layout_mode = 2
+alignment = 0
+flip_h = false
 
 [node name="Room" type="Label" parent="HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
