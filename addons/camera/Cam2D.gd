@@ -332,7 +332,7 @@ func update_focus():
 		elif obj.is_in_group(poa_group):
 			obj_pos = obj.global_position - poa_offset(obj)
 		else:
-			# pofs always in focus
+			# pofs, 'following' always in focus
 			obj_pos = obj.global_position
 
 		if obj_pos != null:
@@ -355,13 +355,12 @@ func update_focus():
 	self.global_position = focuses_rect.get_center()
 
 	update_zoom_level_for_bounds()
-
-	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
-	clamp_zoom_offset()
-
+	clamp_zoom()
 	update_zoom()
 
-func clamp_zoom_offset():
+func clamp_zoom():
+	zoom_level = clamp(zoom_level, min_zoom_level, max_zoom_level)
+
 	# prevent zoom offset moving beyond clamp
 	if zoom_level == min_zoom_level and zoom_offset < zoom_offset_previous:
 		zoom_offset = zoom_offset_previous
@@ -370,19 +369,15 @@ func clamp_zoom_offset():
 
 # TODO per zoom level margins?
 var zoom_rect_min = 50
-var zoom_min_margin = 50
+var zoom_margin_min = 50
 
 ## Attempts to determine a new zoom based on the passed rectangle of pofs
 ## camera2d zoom ~= viewport.size / desired_rect.size
 func update_zoom_level_for_bounds():
 	var vp_size = get_viewport().size
 
-	# Debug.debug_label("Focus Rect", focuses_rect)
-
-	var x = focuses_rect.size.x
-	var y = focuses_rect.size.y
-	var x_factor = max(focuses_rect.size.x, zoom_rect_min) + zoom_min_margin
-	var y_factor = max(focuses_rect.size.y, zoom_rect_min) + zoom_min_margin
+	var x_factor = max(focuses_rect.size.x, zoom_rect_min) + zoom_margin_min
+	var y_factor = max(focuses_rect.size.y, zoom_rect_min) + zoom_margin_min
 	var x_ratio = vp_size.x / x_factor
 	var y_ratio = vp_size.y / y_factor
 	zoom_level = min(x_ratio, y_ratio)
@@ -475,26 +470,26 @@ func screenshake_rotational(noise_ctx, delta):
 
 # TODO scrolling could move this min/max window
 
-var pof_max = Vector2(100.0, 80.0)
+var poa_max = Vector2(100.0, 80.0)
 
 ## How much should we move the poa towards the player?
 func poa_offset(poa) -> Vector2:
 	var v_diff = poa.global_position - following.global_position
 	var offset = Vector2()
 
-	if abs(v_diff.x) < pof_max.x:
+	if abs(v_diff.x) < poa_max.x:
 		offset.x = 0
 	elif v_diff.x < 0:
-		offset.x = v_diff.x + pof_max.x
+		offset.x = v_diff.x + poa_max.x
 	elif v_diff.x > 0:
-		offset.x = v_diff.x - pof_max.x
+		offset.x = v_diff.x - poa_max.x
 
-	if abs(v_diff.y) < pof_max.y:
+	if abs(v_diff.y) < poa_max.y:
 		offset.y = 0
 	elif v_diff.y < 0:
-		offset.y = v_diff.y + pof_max.y
+		offset.y = v_diff.y + poa_max.y
 	elif v_diff.y > 0:
-		offset.y = v_diff.y - pof_max.y
+		offset.y = v_diff.y - poa_max.y
 
 	return offset
 

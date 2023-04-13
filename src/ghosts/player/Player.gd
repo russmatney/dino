@@ -36,7 +36,9 @@ var hud = preload("res://src/ghosts/hud/HUD.tscn")
 
 func _ready():
 	Hood.ensure_hud(hud, self)
-	Cam.ensure_camera(Cam.mode.FOLLOW_AND_POIS, null, self)
+	Cam.ensure_camera(Cam.mode.FOLLOW_AND_POIS, {
+		zoom_rect_min=400
+		}, self)
 
 	action_detector.setup(self, null, action_hint)
 
@@ -80,6 +82,7 @@ func shader_loop():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("action"):
+		Cam.screenshake(0.2)
 		var did_execute = action_detector.execute_current_action()
 		if not did_execute:
 			if current_action:

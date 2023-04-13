@@ -60,8 +60,9 @@ func cam_window_rect():
 
 func ensure_camera(cam_mode = null, opts={}, player=null):
 	if not opts is Dictionary:
+		if opts != null:
+			Debug.warn("overwriting/ignoring camera opts", opts)
 		opts = {}
-		Debug.warn("overwriting/ignoring camera opts")
 
 	Debug.prn("ensuring camera for player", player)
 	if cam and is_instance_valid(cam):
@@ -87,6 +88,11 @@ func ensure_camera(cam_mode = null, opts={}, player=null):
 	cam.enabled = true
 	cam.zoom_offset = opts.get("zoom_offset", 500.0)
 	cam.zoom_level = opts.get("zoom_level", 1.0)
+
+	if opts.get("zoom_rect_min"):
+		cam.zoom_rect_min = opts.get("zoom_rect_min")
+	if opts.get("zoom_margin_min"):
+		cam.zoom_margin_min = opts.get("zoom_margin_min")
 
 	if cam_mode:
 		cam.mode = cam_mode
