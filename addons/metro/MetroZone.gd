@@ -24,7 +24,6 @@ func _ready():
 	# unmanaged game (dev mode) helpers
 	if not Engine.is_editor_hint() and not Game.is_managed:
 		Metro.ensure_current_zone(self)
-		Game.ensure_current_game(self)
 		Game.maybe_spawn_player.call_deferred({
 			# passing a fn b/c we don't want side-effects,
 			# and this avoids calling it when already respawning

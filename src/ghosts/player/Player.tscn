@@ -19,9 +19,9 @@ size = Vector2(27, 52)
 
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("8")
-shader_parameter/red_displacement = 1.0
+shader_parameter/red_displacement = -0.641055
 shader_parameter/green_displacement = -1.0
-shader_parameter/blue_displacement = 0.957163
+shader_parameter/blue_displacement = -1.0
 shader_parameter/ghost = 0.0
 shader_parameter/intensity = 1.0
 shader_parameter/scan_effect = 0.0

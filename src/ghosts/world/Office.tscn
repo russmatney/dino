@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://src/ghosts/world/GhostsRoom.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/ghosts/world/platforms/GhostBlock.tscn" id="10"]
 
-[node name="Office" type="Node2D"]
+[node name="Office" type="Node2D" groups=["ghost_rooms"]]
 script = ExtResource("9")
 
 [node name="IndoorBG" parent="." instance=ExtResource("5")]

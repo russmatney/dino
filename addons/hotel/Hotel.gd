@@ -1,7 +1,7 @@
 # Hotel is so-named because it is intended as a Room manager
 # 'Room' being a game unit, specifically the level I want to design at
 # A group of rooms is gathered into an 'Zone'. (These are MetroRoom
-# and MetroZones for now)
+# and MetroZones)
 #
 # Hotel is primarily a database.
 # It wants to be a light-weight manager for game state.
@@ -33,7 +33,11 @@ func drop_db():
 # key
 
 var hotel_root_group_name = "hotel_singletons"
-var root_groups = [Metro.zones_group, "player", hotel_root_group_name]
+var root_groups = [hotel_root_group_name, "player"]
+
+func add_root_group(group):
+	if not group in root_groups:
+		root_groups.append(group)
 
 func is_in_root_group(x):
 	if x is Dictionary:
@@ -118,6 +122,7 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 			entry["groups"].append_array(inst["groups"])
 
 		# update last_room based on groups
+		# TODO refactor Metro out of here
 		if Metro.rooms_group in entry["groups"]:
 			last_room = entry
 
@@ -135,10 +140,12 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 
 		# set zone and room names via parents
 		for p in ps:
+			# TODO refactor Metro out of here
 			if Metro.zones_group in p["groups"]:
 				entry["zone_name"] = p["name"]
 
 		for p in ps:
+			# TODO refactor Metro out of here
 			if Metro.rooms_group in p["groups"]:
 				entry["room_name"] = str(p["zone_name"], "/", p["name"])
 

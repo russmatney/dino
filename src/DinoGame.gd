@@ -9,6 +9,9 @@ func get_player_scene():
 		return
 	return get("player_scene")
 
+func on_player_spawned(_player):
+	pass
+
 func register():
 	Debug.warn("register() not implemented")
 

@@ -18,10 +18,9 @@ func _ready():
 # handling current_game (for dev-mode), could live elsewhere
 
 # NOTE these need to auto-load BEFORE Game.gd
-var games = [HatBot, DemoLand, DungeonCrawler]
+var games = [HatBot, DemoLand, DungeonCrawler, Ghosts]
 
 func game_for_scene(sfp):
-	Debug.log("games", games)
 	var gs = games.filter(func(g): return g and g.manages_scene(sfp))
 	if gs.size() == 1:
 		return gs[0]
@@ -36,12 +35,18 @@ func set_current_game_for_scene(sfp):
 		register_current_game(g)
 
 func ensure_current_game(sfp=null):
-	if not current_game:
+	if not current_game and sfp != null:
 		Debug.pr("No current_game, setting with passed sfp", sfp)
 		set_current_game_for_scene(sfp)
+
+	if not current_game:
+		var current_scene = get_tree().current_scene
+		if current_scene and current_scene.scene_file_path:
+			Debug.pr("No current_game, setting with current scene", current_scene)
+			set_current_game_for_scene(current_scene.scene_file_path)
+
 	if not current_game:
 		Debug.warn("No current_game!")
-		# TODO get cute about looking one up based on the scene tree or autoloads?
 
 ###########################################################
 # game lifecycle
@@ -55,7 +60,7 @@ func register_current_game(game):
 	current_game = game
 	game.register()
 
-func restart_game(game=null):
+func restart_game(game):
 	# indicate that we are not in dev-mode
 	is_managed = true
 
@@ -93,7 +98,7 @@ func _on_player_found(p):
 var spawning = false
 func respawn_player(opts={}):
 	if not current_game:
-		Debug.warn("No current_game, can't respawn player")
+		Debug.warn("No current_game, can't spawn (or respawn) player")
 		return
 	if not current_game.get_player_scene():
 		Debug.warn("current_game has not player_scene, can't respawn player", current_game)
@@ -133,6 +138,8 @@ func _respawn_player(opts={}):
 		# note that death/travel maintains some things that restart_game might clear
 		Hotel.check_in(player, {health=player.max_health})
 
+	current_game.on_player_spawned(player)
+
 	Navi.add_child_to_current(player)
 	current_game.update_world()
 	spawning = false
@@ -162,4 +169,5 @@ func respawn_coords():
 func maybe_spawn_player(opts={}):
 	if not is_managed and not Engine.is_editor_hint() and player == null and not spawning:
 		Debug.pr("Unmanaged game, player is null, spawning a new one", opts)
+		ensure_current_game()
 		respawn_player(opts)

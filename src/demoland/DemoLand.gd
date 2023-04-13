@@ -27,6 +27,7 @@ var first_zone
 
 func register():
 	Debug.pr("Registering DemoLand Zones")
+	Hotel.add_root_group(Metro.zones_group)
 
 	for sfp in demoland_zones:
 		Hotel.book(sfp)

@@ -23,7 +23,7 @@ var hud
 func ensure_hud(hud_preload=null, p=null):
 	ensure_jumbotron.call_deferred()
 
-	Debug.prn("ensuring hud")
+	Debug.pr("ensuring hud", hud_preload)
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
 

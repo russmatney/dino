@@ -1,77 +1,36 @@
 extends CanvasLayer
 
-var player
-
-
 func _ready():
-	# TODO connect to player spawn signals instead
-	find_player.call_deferred()
+	Hotel.entry_updated.connect(_on_entry_updated)
+	_on_entry_updated(Hotel.first({is_player=true}))
 
-	var _y = Ghosts.room_entered.connect(update_room_name)
-
-
-###################################################################
-# find player
-
-@export var player_group: String = "player"
-
-
-func find_player():
-	if player_group == null:
-		Debug.pr("[WARN] HUD has not player_group set")
-		return
-
-	var ps = get_tree().get_nodes_in_group(player_group)
-	if ps.size() > 1:
-		Debug.pr("[WARN] HUD found multiple in player_group: ", player_group)
-
-	if ps.size() > 0:
-		player = ps[0]
-		Debug.pr("[HUD] found player: ", player)
-	else:
-		Debug.pr("[WARN] HUD found zero in player_group: ", player_group)
-		return
-
-	if player:
-		player.health_change.connect(update_player_health)
-		player.gloomba_koed.connect(update_gloomba_kos)
-
-		update_player_health(player.health)
-		update_gloomba_kos(player.gloomba_kos)
-
-
-###################################################################
-# process
-
-
-func _process(_delta):
-	if not player:
-		find_player()
-
+func _on_entry_updated(entry):
+	if "player" in entry["groups"]:
+		if entry.get("health") != null:
+			set_health(entry["health"])
+		if entry.get("gloomba_kos") != null:
+			set_gloomba_kos(entry["gloomba_kos"])
+	if Ghosts.rooms_group in entry["groups"]:
+		Debug.prn("Ghosts rooms group entry update", entry)
+		set_room_name(entry["name"])
 
 ###################################################################
 # update health
 
-
-func update_player_health(health):
+func set_health(health):
 	var hearts = get_node("%HeartsContainer")
 	hearts.set_health(health)
 
-
 ###################################################################
 # gloomba count
 
-
-func update_gloomba_kos(gloomba_kos):
+func set_gloomba_kos(gloomba_kos):
 	var label = get_node("%GloombaKOs")
 	label.set_text(str("Gloomba K.O.s: ", gloomba_kos))
 
-
 ###################################################################
-# gloomba count
+# room name
 
-
-func update_room_name(room):
+func set_room_name(room_name):
 	var label = get_node("%Room")
-	label.set_text(str("Room: ", room.name))
-
+	label.set_text(str("Room: ", room_name))
