@@ -129,6 +129,8 @@ func _respawn_player(opts={}):
 	# check in new player health
 	# here we pass the data ourselves to not overwrite other fields (powerups)
 	if player_died:
+		# TODO some kind of initial_data() or reset() function for player data
+		# note that death/travel maintains some things that restart_game might clear
 		Hotel.check_in(player, {health=player.max_health})
 
 	Navi.add_child_to_current(player)

@@ -19,9 +19,9 @@ size = Vector2(27, 52)
 
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("8")
-shader_parameter/red_displacement = -0.085838
-shader_parameter/green_displacement = 1.0
-shader_parameter/blue_displacement = 1.0
+shader_parameter/red_displacement = 1.0
+shader_parameter/green_displacement = -1.0
+shader_parameter/blue_displacement = 0.957163
 shader_parameter/ghost = 0.0
 shader_parameter/intensity = 1.0
 shader_parameter/scan_effect = 0.0
@@ -40,7 +40,6 @@ size = Vector2(128, 128)
 [node name="Player" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
 script = ExtResource("2")
-max_health = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

@@ -34,35 +34,48 @@ func die():
 
 var hud = preload("res://src/ghosts/hud/HUD.tscn")
 
+func _enter_tree():
+	Hotel.book(self.scene_file_path)
+
 func _ready():
-	Hood.ensure_hud(hud, self)
-	Cam.ensure_camera({
-		player=self,
-		zoom_rect_min=400,
-		proximity_min=100,
-		proximity_max=450,
-		})
+	Hotel.register(self)
 
-	action_detector.setup(self, null, action_hint)
+	if not Engine.is_editor_hint():
+		Hood.ensure_hud(hud, self)
+		Cam.ensure_camera({
+			player=self,
+			zoom_rect_min=400,
+			proximity_min=100,
+			proximity_max=450,
+			})
 
-	initial_pos = get_global_position()
-	machine.transitioned.connect(on_transit)
-	machine.start.call_deferred()
+		action_detector.setup(self, null, action_hint)
 
-	finish_setup.call_deferred()
+		initial_pos = get_global_position()
+		machine.transitioned.connect(on_transit)
+		machine.start.call_deferred()
+
+		health_change.emit(health)
+
 	shader_loop()
-
-
-func finish_setup():
-	health_change.emit(health)
 
 
 func on_transit(new_state):
 	set_state_label(new_state)
 
-
 func set_state_label(label: String):
 	state_label.text = "[center]" + label + "[/center]"
+
+
+###########################################################################
+# hotel data
+
+func check_out(data):
+	health = data.get("health", max_health)
+	gloomba_kos = data.get("gloomba_kos", 0)
+
+func hotel_data():
+	return {health=health, gloomba_kos=gloomba_kos}
 
 
 ############################################################
@@ -125,6 +138,7 @@ func face_left():
 
 func hit(body):
 	health -= 1
+	Hotel.check_in(self)
 	health_change.emit(health)
 
 	var dir
@@ -165,6 +179,7 @@ var gloomba_kos = 0
 func gloomba_ko():
 	Hood.notif("Gloomba K.O.!")
 	gloomba_kos += 1
+	Hotel.check_in(self)
 	gloomba_koed.emit(gloomba_kos)
 
 

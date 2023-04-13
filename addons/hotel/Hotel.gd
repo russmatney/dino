@@ -195,6 +195,10 @@ func register(node, opts={}):
 
 signal entry_updated(entry)
 
+func update(key, data):
+	scene_db[key].merge(data, true)
+	entry_updated.emit(scene_db[key])
+
 ## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
 	if data == null:
@@ -205,13 +209,20 @@ func check_in(node: Node, data=null):
 
 	var key = node_to_entry_key(node)
 	if key in scene_db:
-		scene_db[key].merge(data, true)
-		entry_updated.emit(scene_db[key])
-		# if len(data):
-		# 	Hood.dev_notif(node, "check_in", data)
+		update(key, data)
 	else:
 		if not Engine.is_editor_hint():
 			Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
+
+func check_in_sfp(sfp: String, data: Dictionary):
+	var entry = first({scene_file_path=sfp})
+	if entry == null:
+		Debug.warn("No entry for sfp found", sfp)
+	var k = entry.get("key")
+	if k in scene_db:
+		update(k, data)
+	else:
+		Debug.warn("No entry for key (via sfp) found", sfp, k)
 
 ######################################################################
 # read
