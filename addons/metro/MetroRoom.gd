@@ -2,6 +2,81 @@
 class_name MetroRoom
 extends Node2D
 
+###########################################################
+# enter tree
+
+func _enter_tree():
+	add_to_group(Metro.rooms_group, true)
+
+###########################################
+# ready
+
+var zone
+
+func _ready():
+	Hotel.register(self)
+
+	ensure_room_box()
+	ensure_cam_points()
+
+	var p = get_parent()
+	if p is MetroZone:
+		zone = p
+
+###########################################
+# hotel
+
+func hotel_data(player=null):
+	var rect = used_rect()
+	var data = {
+		name=name,
+		scene_file_path=scene_file_path,
+		position=position,
+		rect=rect,
+		visited=visited,
+		}
+
+	if player and is_instance_valid(player):
+		var r = Rect2()
+		r.position = rect.position + position
+		r.size = rect.size
+		data["has_player"] = r.has_point(player.global_position)
+	return data
+
+func check_out(data):
+	room_data = data
+
+var room_data : Dictionary :
+	set(data):
+		room_data = data
+		if "visited" in room_data:
+			if room_data["visited"]:
+				visited = room_data["visited"]
+				_on_paused() if paused else _on_unpaused()
+
+###########################################
+# roombox signals
+
+var visited = false
+
+func _on_room_entered(body: Node2D):
+	if body.is_in_group("player"):
+		visited = true
+		Hotel.check_in(self, hotel_data(body))
+		Metro.update_zone()
+
+		for ch in get_children():
+			if ch.has_method("on_room_entered"):
+				# doors toggling focus properly
+				ch.on_room_entered()
+
+
+func _on_room_exited(body: Node2D):
+	if body.is_in_group("player"):
+		Hotel.check_in(self, hotel_data(body))
+		Metro.update_zone()
+
+
 ###########################################
 # tilemaps
 
@@ -88,81 +163,6 @@ func ensure_room_box():
 	# add child, set owner
 	add_child(room_box)
 	room_box.set_owner(self)
-
-###########################################
-# roombox signals
-
-var visited = false
-
-func _on_room_entered(body: Node2D):
-	if body.is_in_group("player"):
-		visited = true
-		Hotel.check_in(self, hotel_data(body))
-		Metro.update_zone()
-
-		for ch in get_children():
-			if ch.has_method("on_room_entered"):
-				# doors toggling focus properly
-				ch.on_room_entered()
-
-
-func _on_room_exited(body: Node2D):
-	if body.is_in_group("player"):
-		Hotel.check_in(self, hotel_data(body))
-		Metro.update_zone()
-
-###########################################
-# Hotel store/retrieve data
-
-func hotel_data(player=null):
-	var rect = used_rect()
-	var data = {
-		"name": name,
-		"scene_file_path": scene_file_path,
-		"position": position,
-		"rect": rect,
-		"visited": visited,
-		}
-
-	if player and is_instance_valid(player):
-		var r = Rect2()
-		r.position = rect.position + position
-		r.size = rect.size
-		data["has_player"] = r.has_point(player.global_position)
-	return data
-
-func check_out(data):
-	room_data = data
-
-var room_data : Dictionary :
-	set(data):
-		room_data = data
-		if "visited" in room_data:
-			if room_data["visited"]:
-				visited = room_data["visited"]
-				_on_paused() if paused else _on_unpaused()
-
-###########################################################
-# enter tree
-
-func _enter_tree():
-	add_to_group(Metro.rooms_group, true)
-
-###########################################
-# ready
-
-var zone
-
-func _ready():
-	Hotel.register(self)
-
-	ensure_room_box()
-	ensure_cam_points()
-
-	var p = get_parent()
-	if p is MetroZone:
-		zone = p
-
 
 ###########################################
 # pause
