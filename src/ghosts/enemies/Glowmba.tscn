@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://7svah6kabcqn"]
+[gd_scene load_steps=7 format=3 uid="uid://7svah6kabcqn"]
 
 [ext_resource type="SpriteFrames" uid="uid://dssioecwcl0c5" path="res://src/ghosts/enemies/glowmba_animated_sprites.tres" id="1"]
 [ext_resource type="Script" path="res://src/ghosts/enemies/Glowmba.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="4_c2qve"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 15.0
@@ -46,6 +47,9 @@ collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
 shape = SubResource("2")
+
+[node name="CamPOI" parent="." instance=ExtResource("4_c2qve")]
+importance = 0.6
 
 [connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
 [connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]

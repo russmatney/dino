@@ -1,6 +1,7 @@
 @tool
 extends CharacterBody2D
 
+@onready var cam_poi = $CamPOI
 
 func _ready():
 	match initial_dir:
@@ -119,6 +120,8 @@ func die():
 	$PointLight2D.enabled = false
 	$StunnedLight.enabled = false
 	$DeadLight.enabled = true
+
+	cam_poi.active = false
 
 
 func stun():

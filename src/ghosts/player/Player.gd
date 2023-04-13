@@ -36,7 +36,12 @@ var hud = preload("res://src/ghosts/hud/HUD.tscn")
 
 func _ready():
 	Hood.ensure_hud(hud, self)
-	Cam.ensure_camera({zoom_rect_min=400, player=self})
+	Cam.ensure_camera({
+		player=self,
+		zoom_rect_min=400,
+		proximity_min=100,
+		proximity_max=450,
+		})
 
 	action_detector.setup(self, null, action_hint)
 

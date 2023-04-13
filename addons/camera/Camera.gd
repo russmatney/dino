@@ -90,14 +90,13 @@ func ensure_camera(opts = {}):
 	cam = cam_scene.instantiate()
 	cam.enabled = true
 	cam.mode = opts.get("mode", mode.FOLLOW_AND_POIS)
-
 	cam.zoom_offset = opts.get("zoom_offset", 500.0)
 	cam.zoom_level = opts.get("zoom_level", 1.0)
 
-	if opts.get("zoom_rect_min") != null:
-		cam.zoom_rect_min = opts.get("zoom_rect_min")
-	if opts.get("zoom_margin_min") != null:
-		cam.zoom_margin_min = opts.get("zoom_margin_min")
+	# zoom_rect_min, zoom_margin_min, proximity_min, proximity_max
+	for k in opts:
+		if k in cam:
+			cam.set(k, opts.get(k))
 
 	Navi.current_scene.add_child.call_deferred(cam)
 
