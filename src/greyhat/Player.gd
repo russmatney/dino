@@ -8,7 +8,7 @@ extends CharacterBody2D
 # ready
 
 func _ready():
-	Cam.ensure_camera(2)
+	Cam.ensure_camera()
 	Hood.ensure_hud()
 	machine.start()
 

@@ -28,19 +28,7 @@ var restart_pos: Vector2
 func _ready():
 	restart_pos = global_position
 
-	ensure_camera.call_deferred()
-
-
-func ensure_camera():
-	# this might need to be deferred until the player and its children
-	# (and siblings?) have been created
-	var cam = get_tree().get_nodes_in_group("camera")
-	if cam.size() == 0:
-		Debug.pr("[CAMERA] cam not found, adding one to player")
-		# if no camera, add one
-		cam = fallback_camera.instantiate()
-		cam.current = true
-		add_child.call_deferred(cam)
+	Cam.ensure_camera.call_deferred()
 
 
 #######################################################################33

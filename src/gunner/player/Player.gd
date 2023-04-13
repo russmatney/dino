@@ -23,7 +23,7 @@ func _ready():
 	machine.transitioned.connect(on_transit)
 	face_left()
 
-	Cam.ensure_camera.call_deferred(2)
+	Cam.ensure_camera.call_deferred()
 	Hood.ensure_hud()
 
 	Debug.pr("gunner player ready: ", anim)

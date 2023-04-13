@@ -58,44 +58,46 @@ func cam_window_rect():
 # ensure camera
 
 
-func ensure_camera(cam_mode = null, opts={}, player=null):
+func ensure_camera(opts = {}):
+	Debug.pr("ensuring camera with opts:", opts)
 	if not opts is Dictionary:
-		if opts != null:
-			Debug.warn("overwriting/ignoring camera opts", opts)
+		Debug.warn("unexpected ensure_camera opts value", opts)
 		opts = {}
 
-	Debug.prn("ensuring camera for player", player)
+	var player = opts.get("player")
+
+	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
 		Debug.prn("found existing cam:", cam)
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
 			if not cam.get_parent():
-				Debug.prn("Setting cam parent to player:", cam)
+				Debug.pr("Setting cam parent to player:", cam)
 				cam.set_parent(player)
 			if cam.get_parent() != player:
-				Debug.prn("reparenting cam to player:", cam)
+				Debug.pr("reparenting cam to player:", cam)
 				cam.reparent(player)
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")
 	if cams and cams.size() > 0:
+		Debug.pr("Found unmanaged cams in 'camera' group, aborting 'ensure_camera'.", cams)
 		return
 
-	Debug.prn("No node found with 'camera' group, adding one.")
+	Debug.pr("No node found with 'camera' group, creating one.")
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true
+	cam.mode = opts.get("mode", mode.FOLLOW_AND_POIS)
+
 	cam.zoom_offset = opts.get("zoom_offset", 500.0)
 	cam.zoom_level = opts.get("zoom_level", 1.0)
 
-	if opts.get("zoom_rect_min"):
+	if opts.get("zoom_rect_min") != null:
 		cam.zoom_rect_min = opts.get("zoom_rect_min")
-	if opts.get("zoom_margin_min"):
+	if opts.get("zoom_margin_min") != null:
 		cam.zoom_margin_min = opts.get("zoom_margin_min")
-
-	if cam_mode:
-		cam.mode = cam_mode
 
 	Navi.current_scene.add_child.call_deferred(cam)
 
