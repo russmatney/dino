@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://3dyvaxmpj8vy"]
+[gd_scene load_steps=4 format=3 uid="uid://3dyvaxmpj8vy"]
 
-[ext_resource type="Script" path="res://addons/MaxSizeContainer/max_size_container.gd" id="1"]
 [ext_resource type="Script" path="res://src/tower/menus/TowerPauseButtonList.gd" id="3_5wpv7"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/tower/menus/TowerControls.tscn" id="6"]
@@ -38,10 +37,5 @@ alignment = 1
 layout_mode = 2
 script = ExtResource("3_5wpv7")
 
-[node name="MaxSizeContainer2" type="MarginContainer" parent="PanelContainer/CenterContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1")
-max_size = Vector2(250, -1)
-
-[node name="TowerControls" parent="PanelContainer/CenterContainer/VBoxContainer/HBoxContainer/MaxSizeContainer2" instance=ExtResource("6")]
+[node name="TowerControls" parent="PanelContainer/CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6")]
 layout_mode = 2

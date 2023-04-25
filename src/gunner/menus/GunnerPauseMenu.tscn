@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://byfux6jsj1da5"]
+[gd_scene load_steps=4 format=3 uid="uid://byfux6jsj1da5"]
 
-[ext_resource type="Script" path="res://addons/MaxSizeContainer/max_size_container.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/gunner/menus/GunnerControls.tscn" id="5"]
 [ext_resource type="Script" path="res://src/gunner/menus/GunnerPauseButtonList.gd" id="5_bnsl3"]
@@ -34,10 +33,5 @@ alignment = 1
 layout_mode = 2
 script = ExtResource("5_bnsl3")
 
-[node name="MaxSizeContainer2" type="MarginContainer" parent="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1")
-max_size = Vector2(250, 80)
-
-[node name="GunnerControls" parent="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer/MaxSizeContainer2" instance=ExtResource("5")]
+[node name="GunnerControls" parent="PanelContainer/CenterContainer/VBoxContainer2/HBoxContainer" instance=ExtResource("5")]
 layout_mode = 2

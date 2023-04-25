@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://l4dbmrptafi5"]
+[gd_scene load_steps=4 format=3 uid="uid://l4dbmrptafi5"]
 
-[ext_resource type="Script" path="res://addons/MaxSizeContainer/max_size_container.gd" id="1"]
 [ext_resource type="Script" path="res://src/harvey/menus/HarveyPauseButtonList.gd" id="2_yuxde"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/harvey/menus/HarveyControls.tscn" id="4"]
@@ -37,11 +36,6 @@ alignment = 1
 layout_mode = 2
 script = ExtResource("2_yuxde")
 
-[node name="MaxSizeContainer2" type="MarginContainer" parent="PanelContainer/CenterContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-script = ExtResource("1")
-max_size = Vector2(250, -1)
-
-[node name="HarveyControls" parent="PanelContainer/CenterContainer/VBoxContainer/HBoxContainer/MaxSizeContainer2" instance=ExtResource("4")]
+[node name="HarveyControls" parent="PanelContainer/CenterContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4")]
 layout_mode = 2
 alignment = 1

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://x1ymc5t5bxl4"]
+[gd_scene load_steps=5 format=3 uid="uid://x1ymc5t5bxl4"]
 
-[ext_resource type="Script" path="res://addons/MaxSizeContainer/max_size_container.gd" id="1"]
-[ext_resource type="PackedScene" path="res://src/tower/menus/TowerControls.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b08yhx4eeirf7" path="res://src/tower/menus/TowerControls.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="4"]
 [ext_resource type="Script" path="res://src/tower/menus/TowerMainMenuButtonList.gd" id="5"]
 [ext_resource type="Script" path="res://src/tower/menus/TowerMainMenu.gd" id="6"]
@@ -11,6 +10,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -38,25 +39,15 @@ layout_mode = 2
 layout_mode = 2
 script = ExtResource("5")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-alignment = 1
-
-[node name="MaxSizeContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("1")
-max_size = Vector2(200, -1)
-
-[node name="TowerControls" parent="VBoxContainer/HBoxContainer/MaxSizeContainer" instance=ExtResource("3")]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 text = "Destroy all Targets and Collect Robot Parts to Assemble a \"friend\""
+horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="TowerControls" parent="VBoxContainer" instance=ExtResource("3")]
+layout_mode = 2
