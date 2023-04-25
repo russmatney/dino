@@ -130,6 +130,7 @@ func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
 ###########################################################################
 # find_player
 
+# TODO remove in favor of Game.gd finding and passing in the player
 signal found_player(player)
 
 var player

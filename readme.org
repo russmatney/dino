@@ -1,29 +1,30 @@
 #+title: dino
 
-Godot 4 port mostly complete! Not all games working again yet, but the latest
-ones are fine.
+The Godot 4 port is mostly complete! Not all games working again yet, but most
+of them are fine.
 
 --
 
-NOTE: the recent hatbot/mvania game will not work out of the box b/c I'm not yet including
-some game assets (fonts) in the repo.
+NOTE: games that use the ActionHint (unfortunately most of them) will not work
+just yet, because I'm not yet including some game assets (third-party fonts) in
+the repo.
 
 --
 
-A monorepo/sandbox with Godot games and addons.
-Play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
+Dino is a monorepo/sandbox full of Godot games and addons.
 
-'Dino' sort of comes from 'demo', but with some personality and a cast of characters to pull from.
+You can play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
 
-Working in a monorepo decreases overhead for creating and sharing new ideas and
-tools across games. This repo is a sandbox for experimenting with new game and
-addon ideas.
+You can read more about Dino on my blog - the coverage could be more up-to-date
+there: [[https://danger.russmatney.com/note/dino.html][danger.russmatney.com/note/dino.html]].
 
 * Games
-** Mvania 19: HatBot
-A work-in-progress for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
+These (and future games) are discussed on my blog (linked above).
 
-Play the latest version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
+** Mvania 19: HatBot
+A submission for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
+
+Play the deployed version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
 
 Or the webversion: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19-web]]
 
@@ -31,7 +32,7 @@ See ~src/hatbot/*~ for the code.
 ** Snake
 A rough prototype for [[https://itch.io/jam/gdb-juice-jam-ii][Juice Jam 2]].
 
-Play the latest version here: [[https://russmatney.itch.io/snake][russmatney.itch.io/snake]]
+Play the deployed version here: [[https://russmatney.itch.io/snake][russmatney.itch.io/snake]]
 
 See ~src/snake/*~ for the code.
 ** Tower
@@ -39,35 +40,35 @@ A Jetpack-fueled mess of propulsion in some generated tilemaps.
 
 I built much of Reptile (a dino addon) while working on this game.
 
-Play the latest version here: [[https://russmatney.itch.io/tower][russmatney.itch.io/tower]]
+Play the deployed version here: [[https://russmatney.itch.io/tower][russmatney.itch.io/tower]]
 
 See ~src/{gunner,tower}/*~ for the code.
 ** Cozy Gunner
 A juicy gunner.
 
-Play the latest version here: [[https://russmatney.itch.io/gunner][russmatney.itch.io/gunner]]
+Play the deployed version here: [[https://russmatney.itch.io/gunner][russmatney.itch.io/gunner]]
 
 See ~src/gunner/*~ for the code.
 ** Harvey
-An overlooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
+An overcooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
 
-Play the latest version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
+Play the deployed version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
 
 See ~src/harvey/*~ for the code.
 ** Pluggs
 A fun character - just a bucket of plugs.
 
-Play the latest version here: [[https://russmatney.itch.io/pluggs][russmatney.itch.io/pluggs]]
+Play the deployed version here: [[https://russmatney.itch.io/pluggs][russmatney.itch.io/pluggs]]
 
 See ~src/pluggs/*~ for the code.
 ** Ghost House
-Play the latest version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
+Play the deployed version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
 
 A small something created for the [[https://itch.io/jam/godot-wild-jam-52][Godot Wild Jam #52]].
 
 See ~src/ghosts/*~ for the code.
 ** Runner
-Play the latest version here: [[https://russmatney.itch.io/runner][russmatney.itch.io/runner]]
+Play the deployed version here: [[https://russmatney.itch.io/runner][russmatney.itch.io/runner]]
 
 A catch-the-leaf inspired running game.
 
@@ -77,7 +78,7 @@ you should be able to toy with individual rooms in the ~src/runner/gyms~ as well
 The core of the logic is the Runner.gd script, which handles adding and removing
 rooms while the player moves across them until they are all complete.
 ** Dungeon Crawler
-Play the latest version here: [[https://russmatney.itch.io/dungeon-crawler][russmatney.itch.io/dungeon-crawler]]
+Play the deployed version here: [[https://russmatney.itch.io/dungeon-crawler][russmatney.itch.io/dungeon-crawler]]
 
 Part of my classic-game-clones adventure, in which I'm creating basic prototypes
 modeled after classic genres and games.
@@ -88,45 +89,55 @@ This was a chance to implement keys and door logic, and a basic boss state
 machine. The map is one giant scene, and the tiles use auto-tiling, which should
 make it simple to doodle a few more levels.
 * Addons
-These addons are intended to speed up prototyping and game-jam workflows, but should
+These addons are discussed in more detail on my blog (linked above).
+
+These are intended to speed up prototyping and game-jam workflows, but should
 also be useful in larger, long-running projects.
 
-Note that cross-dependencies between these addons is not yet solved - i.e. if
-you add 'navi', you will have trouble unless you also add 'core', 'trolley', and
-'dj', b/c the 'navi' code expects to use fonts/autoloads from those addons. I
-hope to resolve this dependency issue in ~bb-godot~'s install-addons flow.
+Note that cross-dependencies between these addons exist - i.e. if you add
+'navi', you will have trouble unless you also add 'core', 'trolley', and 'dj',
+b/c the 'navi' code expects to use fonts/autoloads from those addons. This may
+be dealt with overtime, but for now Dino is growing as a bit of a personal
+framework more than independent libraries.
 
 ** core
 A Util autoload and a slew of fonts.
 
 Generally, anything too small to go in an existing addon.
 ** beehive
-For working with state machines, behavior trees, maybe GOAP
-*** state machine
-Namespaces/keywords: 'machine', 'state', 'actor'
+For working with state machines, behavior trees, GOAP.
 ** camera
 2D Camera with modes for following the player, anchors, or centering based on
 points of focus/interest.
+
+Heavily taken from Squirrel Eiserloh Juicing Your Cameras with Math video:
+https://www.youtube.com/watch?v=tu-Qe66AvtY
 
 Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
 *** slow-mo
 *** hit-stop
 *** screenshake
-** trolley
-For handling controls inputs and remapping.
-*** Trolley autoload with ~move_dir()~ helpers
-returns a normalized vector according to ~move_{left,up,right,down}~ input actions
-*** basic (not passable) UI components derived from input map
-*** ControlsList helper
+** dj
+For sounds and music management, such as background music that is maintained
+across scene transitions.
+
+Whatever it takes to make playing sounds in Godot better.
 ** hood
 HUD UI components.
 
 Maybe camera goes in here?
 GUI and HUD should be camera-zoom-level related anyway.
+** hotel
+An in-memory game state db.
 
-*** Health Container
-*** Notifications
-*** Offscreen Indicator
+Discussed in more detail: [[https://danger.russmatney.com/note/hotel_dino_plugin.html][danger.russmatney.com/note/hotel_dino_plugin.html]]
+** metro
+~Metro.gd~, ~MetroZone.gd~, and ~MetroRoom.gd~ provide helpers for managing
+zones (areas) and rooms in map-based games. (Metroidvanias, roguelikes, dungeon
+crawlers, etc.)
+
+Originally built along side HatBot, it has since been refactored out
+into a reusable addon, and applied so far to ~src/dungeonCrawler~.
 ** navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
@@ -136,92 +147,52 @@ supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
 **** Pause Screen
 **** Win Screen
 **** Death Screen
-** dj
-For sounds and music management, such as background music that is maintained
-across scene transitions.
-
-Whatever it takes to make playing sounds in Godot better.
-*** GunnerSounds usage
-When implementing Gunner and Tower, I used a large map like:
-
-(note the .sfxr usage i got via gdfxr (or was it godot-sfxr ?))
-both were fine! just need a wrapper!
-
-#+begin_src gdscript
-extends Node
-
-func _ready():
-	setup_sounds()
-
-###########################################################################
-# sounds
-
-onready var sounds = {
-	"fire":
-	[
-		preload("res://assets/sounds/laser1.sfxr"),
-		preload("res://assets/sounds/laser2.sfxr"),
-	],
-	"jump":
-	[
-		preload("res://assets/sounds/jump1.sfxr"),
-		preload("res://assets/sounds/jump2.sfxr"),
-		preload("res://assets/sounds/jump3.sfxr"),
-	],
-	"pickup":
-	[
-		preload("res://assets/sounds/pickup1.sfxr"),
-	],
-}
-var sound_map
-
-func setup_sounds():
-	sound_map = DJ.setup_sound_map(sounds)
-
-func play_sound(name):
-	if name in sound_map:
-		var s = sound_map[name]
-		DJ.play_sound_rand(s, {"vary": 0.4})
-	else:
-		Debug.warn("no sound for name", name)
-
-func interrupt_sound(name):
-	if name in sound_map:
-		for s in sound_map[name]:
-			if s.is_playing():
-				s.stop()
-#+end_src
 ** reptile
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 
 Includes Reptile autoload and ReptileRoom, which are a base for some proc gen with tilemaps.
-
 ** thanks
 A simple Credits scene and/or script that scrolls credits from a .txt file
-* bb-godot
+** trolley
+For handling controls inputs and remapping.
+* bb-godot: some helpful babashka tasks
 Utilities for managing Godot Projects using Babashka (Clojure)
 
-- auto-exporting from aseprite
+- auto-exporting from aseprite on file-save
 - building a local web build
-- deploying to s3
-- installing addons from github
+- deploying via butler (itch.io's build/deploy tool)
 
 ** ~bb watch~
 A file watcher that runs other commands, which for now is just ~bb pixels~.
+
+TODO: expand this task to watch all relevant directories!
+(for now, see ~bb watch-reptile~, ~bb watch-core~, etc.)
 ** ~bb pixels~: Aseprite export
 and exports *.aesprite files as pngs, using the aseprite
 binary.
-** ~bb addons~
-An quick status check for your addons-map
-** ~bb install-addons~
+** ~bb build-web~: Build project for web
+Build your project, for web.
+
+Builds using godot's HTML5 template, in the ~./dist~ directory.
+
+This can be served locally with a web server helper (TODO: include task for
+serving a local game).
+** ~bb butler-push <game-name>~: Push project to matching itch.io game
+** ~bb zip~: Zip project
+zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
+
+** deprecated tasks
+*** symlinked addon support
 #+begin_quote
 NOTE: at this point I've moved to vendoring the deps completely within the
 project, to avoid burdening other folks with cloning/installing these deps to
 get Dino to run. These commands might still be useful in some cases, but are not
 required to run the project.
 #+end_quote
-
+**** ~bb addons~
+An quick status check for your addons-map
+**** ~bb install-addons~
 An approximation of a dependency manager.
 
 Clones and symlinks godot addons, using a clojure map as the manifest
@@ -255,23 +226,21 @@ A project consuming some of dino's addons (plus GUT) might look like:
      :beehive       :russmatney/dino})}}
 #+end_src
 
-** ~bb install-script-templates~
+**** ~bb install-script-templates~
 Copy templates from external paths into your project
 
 I needed this one time, tho it seems like addons should do this themselves?
 Maybe going through the asset library works that way?
-** ~bb build-web~: Build project for web
-Build your project, for web.
+*** deploying to s3
+#+begin_quote
+NOTE: I'm not doing this so much anymore, b/c butler and itch.io are great for
+hosting web games. Maybe it still works?
+#+end_quote
 
-Builds using godot's HTML5 template, in the ~./dist~ directory.
-** ~bb deploy-web <s3-bucket>~: Deploy project to s3
+**** ~bb deploy-web <s3-bucket>~: Deploy project to s3
 Deploy a project to an s3 bucket.
 
 Depends on a working and logged-in ~aws~ cli tool.
-** ~bb butler-push <game-name>~: Push project to matching itch.io game
-** ~bb zip~: Zip project
-zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
-
 * Assets
 Currently, a few assets are symlinked from my game-assets collection:
 
