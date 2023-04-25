@@ -68,24 +68,23 @@ var duration = 0.2
 var reset_duration = 0.2
 
 
-func deform(_direction):
-	# var deformationStrength = (
-	# 	clamp(max_dir_distance - direction.length(), 0, max_dir_distance)
-	# 	/ max_dir_distance
-	# )
-	# var deformationDirection = direction.normalized()
-	# var deformationScale = 0.5 * deformationDirection * deformationStrength
+func deform(direction):
+	var deformationStrength = (
+		clamp(max_dir_distance - direction.length(), 0, max_dir_distance)
+		/ max_dir_distance
+	)
+	var deformationDirection = direction.normalized()
+	var deformationScale = 0.5 * deformationDirection * deformationStrength
 
-	Debug.pr("TODO restore animation")
-	# var tween = create_tween()
-	# var anim = tool_icon
+	var tween = create_tween()
+	var anim = tool_icon
 
-	# tween.tween_property(anim.material, "shader_parameter/deformation", deformationScale, duration).set_trans(
-	# 	Tween.TRANS_CUBIC
-	# )
-	# tween.tween_property(anim.material, "shader_parameter/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
-	# 	Tween.EASE_IN_OUT
-	# )
+	tween.tween_property(anim.material, "shader_parameter/deformation", deformationScale, duration).set_trans(
+		Tween.TRANS_CUBIC
+	)
+	tween.tween_property(anim.material, "shader_parameter/deformation", Vector2.ZERO, reset_duration).set_trans(Tween.TRANS_CUBIC).set_ease(
+		Tween.EASE_IN_OUT
+	)
 
 
 ##########################################################
