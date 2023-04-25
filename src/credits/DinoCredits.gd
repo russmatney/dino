@@ -4,7 +4,7 @@ extends Credits
 var dino_credits = [
 	["Made with Godot, Aseprite, and Emacs"],
 	[
-		"Songs",
+		"Music",
 		"",
 		"Late Night Radio",
 		"by Kevin MacLeod (incompetech.com)",

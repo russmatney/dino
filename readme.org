@@ -272,13 +272,6 @@ Depends on a working and logged-in ~aws~ cli tool.
 ** ~bb zip~: Zip project
 zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
 
-* Credits
-** SuloSounds 100
-https://sulosounds.itch.io/100-songs
-
-Songs in ~assets/music/sulosounds/*~
-** Excellent fonts from VEXED
-https://v3x3d.itch.io/
 * Assets
 Currently, a few assets are symlinked from my game-assets collection:
 
@@ -286,6 +279,127 @@ Currently, a few assets are symlinked from my game-assets collection:
 ln -s ~/game-assets/fonts/vexed addons/core/assets/fonts/vexed
 #+end_src
 
-Unfortunately, this breaks some of the games. I'll look into safer handling for
-missing assets and brainstorm ways to include assets that artists prefer to keep
-out of open-source projects.
+Unfortunately, this breaks some (most) of the games, because certain control
+nodes can't load when they are missing fonts.
+
+I'll look into safer handling for missing assets and brainstorm ways to include
+assets that artists prefer to keep out of open-source projects.
+* Credits
+Hopefully in sync with ~src/credits/DinoCredits.gd~.
+
+** Music
+*** Late Night Radio
+by Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0
+MIT License
+
+*** field-stars-ambient-loop
+by SuloSounds
+https://sulosounds.itch.io/100-songs
+CC0 - Public Domain
+https://creativecommons.org/share-your-work/public-domain/cc0/
+** Sounds
+*** Most sounds generated via gdfxr (a godot sfxr addon)
+https://github.com/timothyqiu/gdfxr
+
+*** retro game weapon sound effects
+happysoulmusic.com
+https://happysoulmusic.com/retro-game-weapons-sound-effects/
+cc0
+https://creativecommons.org/publicdomain/zero/1.0/
+
+*** kenney assets sound packs
+https://kenney.nl/assets/category:Audio
+all cc0 - public domain
+
+https://creativecommons.org/publicdomain/zero/1.0/
+kenney interface sounds
+https://www.kenney.nl/assets/interface-sounds
+kenney scifi sounds
+https://www.kenney.nl/assets/sci-fi-sounds
+kenney impact sounds
+https://www.kenney.nl/assets/impact-sounds
+kenney voice over sounds (fighter)
+https://www.kenney.nl/assets/voiceover-pack-fighter
+kenney casino audio
+https://www.kenney.nl/assets/casino-audio
+kenney music jingles
+https://www.kenney.nl/assets/music-jingles
+kenney digital audio
+https://www.kenney.nl/assets/digital-audio
+kenney rpg audio
+https://www.kenney.nl/assets/rpg-audio
+
+** Fonts
+*** Arcade Cabinet
+by V3X3D
+https://v3x3d.itch.io/arcade-cabinet
+
+*** Enter Input
+by V3X3D
+https://v3x3d.itch.io/enter-input
+
+*** born2bsportyv2
+by japanyoshi
+http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=383
+Public Domain
+https://creativecommons.org/publicdomain/zero/1.0/
+
+*** at10
+by grafxkid
+https://grafxkid.itch.io/at01
+Public Domain
+https://creativecommons.org/publicdomain/zero/1.0/
+
+*** Adventurer
+by Brain J Smith
+http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=195
+Creative Commons Attribution
+** Color Palettes
+*** COLDFIRE GB
+By Kerrielake
+https://lospec.com/palette-list/coldfire-gb
+
+*** autumn glow
+by sonnenstein
+https://lospec.com/palette-list/autumn-glow
+
+*** funkyfuture 8
+by shamaboy11
+https://lospec.com/palette-list/funkyfuture-8
+
+*** twilight-5
+by star
+https://lospec.com/palette-list/twilight-5
+
+*** wildflowers
+by Sprog
+https://lospec.com/palette-list/wildflowers
+
+** Art
+*** Pirate Bomb Tile Set
+By Pixel Frog
+https://pixelfrog-assets.itch.io/pirate-bomb
+Public Domain
+https://creativecommons.org/publicdomain/zero/1.0/
+
+** Godot Addons
+*** gdfxr
+https://github.com/timothyqiu/gdfxr
+MIT License
+*** teeb.text-effects teeb.text_transitions
+https://github.com/teebarjunk/godot-text_effects
+MIT License
+
+** Code Contributors
+- Joshua Skrzypek
+** Patrons
+Many thanks to all my sponsors and patrons!
+
+- Cameron Kingsbury
+- Duaa Osman
+- Ryan Schmukler
+- Alex Chojnacki
+- Griffin Smith
+- Jake Bartlam
