@@ -31,7 +31,7 @@ var dino_credits = [
 		"https://creativecommons.org/publicdomain/zero/1.0/",
 		"",
 		"kenney assets sound packs",
-		"https://kenney.nl/assets/category:Audio"
+		"https://kenney.nl/assets/category:Audio",
 		"all cc0 - public domain",
 		"https://creativecommons.org/publicdomain/zero/1.0/",
 		"kenney interface sounds",
@@ -50,17 +50,17 @@ var dino_credits = [
 		"https://www.kenney.nl/assets/digital-audio",
 		"kenney rpg audio",
 		"https://www.kenney.nl/assets/rpg-audio",
-		],
+	],
 	[
 		"Fonts",
 		"",
 		"Arcade Cabinet",
 		"by V3X3D",
-		"https://v3x3d.itch.io/arcade-cabinet"
+		"https://v3x3d.itch.io/arcade-cabinet",
 		"",
 		"Enter Input",
 		"by V3X3D",
-		"https://v3x3d.itch.io/enter-input"
+		"https://v3x3d.itch.io/enter-input",
 		"",
 		"born2bsportyv2",
 		"by japanyoshi",
@@ -146,7 +146,7 @@ var dino_credits = [
 	[
 		"Many thanks to all the testers and brainstormers who listened and gave feedback!",
 		"",
-		"Thank you!"
+		"Thank you!",
 	],
 ]
 
