@@ -25,9 +25,7 @@ func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta
 	# TODO clamp fall speed?
 	actor.set_velocity(actor.velocity)
-	actor.set_up_direction(Vector2.UP)
 	actor.move_and_slide()
-	actor.velocity = actor.velocity
 
 	# if not actor.is_on_floor() and actor.velocity.y > 0:
 	# 	machine.transit("Fall")

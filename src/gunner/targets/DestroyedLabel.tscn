@@ -1,22 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://65w5a8rqpoiu"]
 
-[ext_resource path="res://src/gunner/InGameTextTheme.tres" type="Theme" id=1]
-[ext_resource path="res://addons/teeb.text_effects/resources/Cuss.tres" type="RichTextEffect" id=2]
-[ext_resource path="res://addons/teeb.text_effects/resources/Sparkle.tres" type="RichTextEffect" id=3]
-[ext_resource path="res://addons/teeb.text_effects/resources/Jump.tres" type="RichTextEffect" id=4]
-[ext_resource path="res://src/gunner/targets/DestroyedLabel.gd" type="Script" id=5]
+[ext_resource type="Theme" uid="uid://bk2l0olwstp57" path="res://src/gunner/InGameTextTheme.tres" id="1"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="2"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="3"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="4"]
+[ext_resource type="Script" path="res://src/gunner/targets/DestroyedLabel.gd" id="5"]
 
 [node name="DestroyedLabel" type="RichTextLabel"]
-modulate = Color( 0.819608, 0.486275, 0.486275, 1 )
+modulate = Color(0.819608, 0.486275, 0.486275, 1)
 offset_left = -34.0
 offset_top = -19.0
 offset_right = 34.0
 offset_bottom = 21.0
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 bbcode_enabled = true
-text = "[center][jump][sparkle freq=10.0 c1=#f6c6a8 c2=#d17c7c]TARGET DESTROYED"
-text = "TARGET DESTROYED"
-fit_content_height = true
+text = "[center]TARGET DESTROYED"
 scroll_active = false
-custom_effects = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 2 ) ]
-script = ExtResource( 5 )
+custom_effects = [ExtResource("3"), ExtResource("4"), ExtResource("2")]
+script = ExtResource("5")

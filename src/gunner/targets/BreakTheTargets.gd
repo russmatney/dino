@@ -27,12 +27,12 @@ func setup():
 
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
-		Util.ensure_connection(t, "destroyed", self, "_on_target_destroyed")
+		t.destroyed.connect(_on_target_destroyed)
 
 	find_hud()
 
-	Util.ensure_connection(Respawner, "respawn", self, "_on_respawn")
-	Util.ensure_connection(Cam, "slowmo_stopped", self, "_on_slowmo_stopped")
+	Respawner.respawn.connect(_on_respawn)
+	Cam.slowmo_stopped.connect(_on_slowmo_stopped)
 
 
 func find_hud():
@@ -66,7 +66,7 @@ func _process(delta):
 
 func _on_respawn(node):
 	if node.is_in_group("target"):
-		Util.ensure_connection(node, "destroyed", self, "_on_target_destroyed")
+		node.destroyed.connect(_on_target_destroyed)
 		targets.append(node)
 		target_change()
 		if hud:

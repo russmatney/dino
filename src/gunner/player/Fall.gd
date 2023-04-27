@@ -49,7 +49,3 @@ func physics_process(delta):
 		if not actor.can_wall_jump:
 			GunnerSounds.play_sound("step")
 			actor.can_wall_jump = true
-
-
-func exit():
-	pass

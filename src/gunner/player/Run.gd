@@ -18,9 +18,7 @@ func physics_process(delta):
 		# TODO clamp run speed
 
 		actor.set_velocity(actor.velocity)
-		actor.set_up_direction(Vector2.UP)
 		actor.move_and_slide()
-		actor.velocity = actor.velocity
 
 		if not actor.firing:
 			actor.update_facing()

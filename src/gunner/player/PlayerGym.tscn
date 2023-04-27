@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://coo2aee7h0hok"]
+[gd_scene load_steps=5 format=3 uid="uid://coo2aee7h0hok"]
 
 [ext_resource type="PackedScene" uid="uid://kaba3l5rrf7x" path="res://src/gunner/player/Player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://brcv2nlohhn4h" path="res://src/gunner/tiles/BasicTile.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://addons/camera/CamPOI.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://ckoswhkpkg1f8" path="res://src/gunner/targets/Target.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/gunner/targets/BreakTheTargets.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="6"]
 
 [node name="PlayerGym" type="Node2D"]
 
@@ -20,23 +19,8 @@ color = Color(0.435294, 0.462745, 0.415686, 1)
 position = Vector2(482, 366)
 layer_0/tile_data = PackedInt32Array(327669, 131072, 3, 327670, 131072, 3, 327671, 131072, 3, 327672, 131072, 3, 327673, 131072, 3, 327674, 131072, 3, 327675, 131072, 3, 327676, 131072, 3, 327677, 131072, 3, 327678, 131072, 3, 327679, 131072, 3, 262144, 131072, 3, 262145, 131072, 3, 262146, 131072, 3, 262147, 131072, 3, 262148, 131072, 3, 262149, 131072, 3, 262150, 131072, 3, 262151, 131072, 3, 262152, 131072, 3, 262153, 131072, 3, 262154, 131072, 3, 262155, 131072, 3)
 
-[node name="Target" parent="." instance=ExtResource("5")]
-position = Vector2(201, 241)
-
 [node name="Target2" parent="." instance=ExtResource("5")]
 position = Vector2(368, 376)
-
-[node name="Target4" parent="." instance=ExtResource("5")]
-position = Vector2(708, 341)
-
-[node name="Target5" parent="." instance=ExtResource("5")]
-position = Vector2(617, 141)
-
-[node name="Target6" parent="." instance=ExtResource("5")]
-position = Vector2(586, 374)
-
-[node name="Target7" parent="." instance=ExtResource("5")]
-position = Vector2(639, 341)
 
 [node name="Target8" parent="." instance=ExtResource("5")]
 position = Vector2(548, 374)
@@ -49,12 +33,6 @@ position = Vector2(750, 341)
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(440, 339)
-
-[node name="CamPOI" parent="." instance=ExtResource("3")]
-position = Vector2(210, 321)
-
-[node name="CamPOI2" parent="." instance=ExtResource("3")]
-position = Vector2(787, 188)
 
 [node name="BreakTheTargets" parent="." instance=ExtResource("6")]
 position = Vector2(-24, 42)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://kaba3l5rrf7x"]
+[gd_scene load_steps=23 format=3 uid="uid://kaba3l5rrf7x"]
 
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/player/Player.gd" id="2"]
@@ -8,11 +8,7 @@
 [ext_resource type="Theme" path="res://src/gunner/StateLabelTheme.tres" id="6"]
 [ext_resource type="Script" path="res://src/gunner/player/Jump.gd" id="7"]
 [ext_resource type="Script" path="res://src/gunner/player/Fall.gd" id="8"]
-[ext_resource type="PackedScene" path="res://addons/camera/CamPOF.tscn" id="9"]
-[ext_resource type="Theme" uid="uid://bk2l0olwstp57" path="res://src/gunner/InGameTextTheme.tres" id="10"]
-[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="11"]
-[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="12"]
-[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="13"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="9"]
 [ext_resource type="Shader" path="res://src/gunner/player/ColorReassignShader.gdshader" id="14"]
 [ext_resource type="Script" path="res://src/gunner/player/Jetpack.gd" id="15"]
 [ext_resource type="Script" path="res://src/gunner/player/Knockback.gd" id="17"]
@@ -114,13 +110,12 @@ script = ExtResource("17")
 script = ExtResource("18")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
-visible = false
 offset_left = -45.0
 offset_right = 45.0
 offset_bottom = 40.0
 theme = ExtResource("6")
 bbcode_enabled = true
-text = "state"
+text = "[center]state"
 scroll_active = false
 
 [node name="BulletPosition" type="Marker2D" parent="."]
@@ -131,17 +126,6 @@ position = Vector2(-182, -14)
 
 [node name="LookPOF2" parent="." instance=ExtResource("9")]
 position = Vector2(-1, -180)
-
-[node name="NotifLabel" type="RichTextLabel" parent="."]
-offset_left = -40.0
-offset_top = -70.0
-offset_right = 40.0
-offset_bottom = -30.0
-theme = ExtResource("10")
-bbcode_enabled = true
-text = "[sparkle freq=10.0 c1=#5b768d c2=#f6c6a8]some sparkle txt"
-scroll_active = false
-custom_effects = [ExtResource("11"), ExtResource("13"), ExtResource("12")]
 
 [node name="Jet" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -158,6 +142,14 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileAOEDetector"]
 position = Vector2(0, -16.5)
 shape = SubResource("14")
+
+[node name="NotifLabel" type="RichTextLabel" parent="."]
+offset_left = -40.0
+offset_top = -64.0
+offset_right = 40.0
+offset_bottom = -32.0
+bbcode_enabled = true
+text = "some sparkle"
 
 [connection signal="body_entered" from="TileAOEDetector" to="." method="_on_TileAOEDetector_body_entered"]
 [connection signal="body_exited" from="TileAOEDetector" to="." method="_on_TileAOEDetector_body_exited"]

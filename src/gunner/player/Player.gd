@@ -23,11 +23,11 @@ func _ready():
 	machine.transitioned.connect(on_transit)
 	face_left()
 
-	Cam.ensure_camera.call_deferred()
+	Cam.ensure_camera({player=self})
 	Hood.ensure_hud()
 
 	Debug.pr("gunner player ready: ", anim)
-	machine.start.call_deferred()
+	machine.start()
 
 
 ############################################################
@@ -41,24 +41,8 @@ var record_pos_in = 0
 @export var max_y: float = 10000.0
 
 
-func _process(delta):
+func _process(_delta):
 	move_dir = Trolley.move_dir()
-
-	if record_pos_in > 0:
-		record_pos_in = record_pos_in - delta
-	else:
-		record_pos_in = record_pos_every
-
-		positions.push_front(get_global_position())
-		if positions.size() > record_pos_n:
-			positions.pop_back()
-
-	var back = positions.back()
-	if back:
-		var target = back + Vector2(-45, 0)
-		var current = state_label.get_global_position()
-		var pos = target * 0.1 + current * 0.9
-		state_label.set_global_position(pos)
 
 	# TODO remove_at/replace with some other thing?
 	if get_global_position().y >= max_y:
@@ -256,6 +240,8 @@ func fire_bullet():
 
 
 func notif(text, opts = {}):
+	Debug.pr("notif", text)
+
 	var ttl = opts.get("ttl", 1.5)
 	var dupe = opts.get("dupe", false)
 	var label
@@ -264,10 +250,9 @@ func notif(text, opts = {}):
 	else:
 		label = notif_label
 
-	label.text = "[center][jump][sparkle freq=10.0 c1=#5b768d c2=#f6c6a8]" + text
+	label.text = "[center]" + text
 	label.set_visible(true)
 	var tween = create_tween()
-
 	if dupe:
 		label.set_global_position(notif_label.get_global_position())
 		Navi.add_child_to_current(label)
