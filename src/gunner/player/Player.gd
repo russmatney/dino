@@ -23,7 +23,12 @@ func _ready():
 	machine.transitioned.connect(on_transit)
 	face_left()
 
-	Cam.ensure_camera({player=self})
+	Cam.ensure_camera({
+		player=self,
+		zoom_rect_min=400,
+		proximity_min=100,
+		proximity_max=450,
+		})
 	Hood.ensure_hud()
 
 	Debug.pr("gunner player ready: ", anim)
