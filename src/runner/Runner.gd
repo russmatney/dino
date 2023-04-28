@@ -112,8 +112,8 @@ func prep_room():
 	# invoke RunnerRoom.room_width()
 	accumulated_room_width += next_room.room_width()
 
-	Util.ensure_connection(next_room, "player_entered", self, "room_entered", [next_room])
-	Util.ensure_connection(next_room, "player_exited", self, "room_exited", [next_room])
+	Util._connect(next_room.player_entered, room_entered.bind(next_room))
+	Util._connect(next_room.player_exited, room_exited.bind(next_room))
 
 	##############################
 	# invoke RunnerRoom.setup()

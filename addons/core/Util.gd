@@ -168,23 +168,17 @@ func set_collisions_enabled(node, enabled):
 ############################################################
 # connections
 
-func _connect(sig, callable):
+# NOTE connections can be deferred or one_shot via ConnectFlags
+func _connect(sig, callable, flags=null):
 	if sig.is_connected(callable):
 		return
-	sig.connect(callable)
-
-func ensure_connection(obj, sig, target, method, args = []):
-	if not obj.has_signal(sig):
-		Debug.pr("[Warn] obj has no signal for connection: ", obj, " :", sig)
 	var err
-	if not obj.is_connected(sig, target.method):
-		if args.size() > 0:
-			err = obj.connect(sig, target.method.bindv(args))
-		else:
-			err = obj.connect(sig, target.method)
+	if flags:
+		err = sig.connect(callable, flags)
+	else:
+		err = sig.connect(callable)
 	if err:
-		Debug.pr("[Error]: ", err)  # useless enum digit
-
+		Debug.pr("[Error]: ", err, sig, callable)  # useless enum digit
 
 
 ############################################################

@@ -136,13 +136,13 @@ func setup():
 	exitbox = get_node_or_null("ExitBox")
 
 	if roombox:
-		Util.ensure_connection(roombox, "body_entered", self, "_on_body_entered")
-		Util.ensure_connection(roombox, "body_exited", self, "_on_body_exited")
+		Util._connect(roombox.body_entered, _on_body_entered)
+		Util._connect(roombox.body_exited, _on_body_exited)
 
 	if enterbox:
-		Util.ensure_connection(enterbox, "body_entered", self, "_on_body_entered")
+		Util._connect(enterbox.body_entered, _on_body_entered)
 	if exitbox:
-		Util.ensure_connection(exitbox, "body_exited", self, "_on_body_exited")
+		Util._connect(exitbox.body_exited, _on_body_exited)
 
 
 func cleanup():

@@ -5,8 +5,8 @@ var runs = 0
 
 
 func _ready():
-	Util.ensure_connection(self, "player_entered", self, "_on_player_entered")
-	Util.ensure_connection(self, "player_exited", self, "_on_player_exited")
+	Util._connect(player_entered, _on_player_entered)
+	Util._connect(player_exited, _on_player_exited)
 
 	setup()
 
