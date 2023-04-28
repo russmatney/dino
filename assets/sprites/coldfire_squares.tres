@@ -145,7 +145,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("4")
 }],
-"loop": true,
+"loop": false,
 "name": &"basic",
 "speed": 5.0
 }, {
@@ -162,7 +162,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("9")
 }],
-"loop": true,
+"loop": false,
 "name": &"blue",
 "speed": 5.0
 }, {
@@ -179,7 +179,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("13")
 }],
-"loop": true,
+"loop": false,
 "name": &"dark",
 "speed": 5.0
 }, {
@@ -190,7 +190,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("32")
 }],
-"loop": true,
+"loop": false,
 "name": &"enemyhead",
 "speed": 5.0
 }, {
@@ -207,7 +207,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("24")
 }],
-"loop": true,
+"loop": false,
 "name": &"flash",
 "speed": 5.0
 }, {
@@ -221,7 +221,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("28")
 }],
-"loop": true,
+"loop": false,
 "name": &"player",
 "speed": 5.0
 }, {
@@ -232,7 +232,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("30")
 }],
-"loop": true,
+"loop": false,
 "name": &"playerhead",
 "speed": 5.0
 }, {
@@ -249,7 +249,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("17")
 }],
-"loop": true,
+"loop": false,
 "name": &"red",
 "speed": 5.0
 }, {
@@ -266,7 +266,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("21")
 }],
-"loop": true,
+"loop": false,
 "name": &"yellow",
 "speed": 5.0
 }]

@@ -240,14 +240,17 @@ func drop_tail():
 	else:
 		Debug.pr("[WARN] tail expected but not found in `segments`")
 
-func _on_move_head(_coord):
+func _on_move_head(coord):
+	Debug.pr("_on_move_head pre bounce", coord)
 	bounce_head()
 
 signal did_move_head(coord)
+
 func move_head(coord):
 	segment_coords.push_front(coord)
 	draw_segment(coord)
 	global_position = head_cell().global_position
+	Debug.pr("move_head should emit did-move-head", coord)
 	did_move_head.emit(coord)
 
 ##################################################################
@@ -337,7 +340,9 @@ func highlight(text):
 # tile bounce helpers
 
 func bounce_head():
-	head_cell().bounce_in()
+	pass
+	# TODO restore
+	# head_cell().bounce_in()
 
 func bounce_tail():
 	for t in tail_cells():

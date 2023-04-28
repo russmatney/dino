@@ -142,9 +142,11 @@ signal cell_touched(coord)
 
 func mark_touched(coord):
 	var cell = get_cell(coord)
+	Debug.pr("marking coord/cell touched", coord, cell)
 	if cell:
-		cell.animation = "blue"
+		cell.play("blue")
 		Util.set_random_frame(cell)
+		cell.pause()
 		cell_touched.emit(coord)
 
 func mark_cells_playing():
@@ -180,8 +182,9 @@ func init_grid(anim = "yellow"):
 	for coord in all_cell_coords():
 		var c = cell_scene.instantiate()
 		c.coord = coord
-		c.animation = anim
+		c.play(anim)
 		Util.set_random_frame(c)
+		c.pause()
 		c.position = coord_to_position(coord)
 		$Cells.add_child(c)
 

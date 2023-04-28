@@ -13,13 +13,15 @@ func _ready():
 var player
 
 func setup_player(p):
+	if not is_instance_valid(p):
+		return
 	player = p
 	Util._connect(player.step, update_steps)
 	Util._connect(player.speed_increased, update_speed)
 	Util._connect(player.food_picked_up, update_food_score)
 	Util._connect(player.inc_combo_juice, update_combo_juice)
-	update_speed()
 	update_steps()
+	update_speed()
 	update_food_score()
 	update_combo_juice()
 

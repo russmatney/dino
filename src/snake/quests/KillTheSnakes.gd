@@ -20,6 +20,8 @@ var enemy_snakes
 var player
 
 func setup(p):
+	if not is_instance_valid(p):
+		return
 	player = p
 	player.highlight.call_deferred("Kill The Snakes!")
 	Hood.notif("Kill the Snakes!")

@@ -20,6 +20,8 @@ var player
 var count_remaining
 
 func setup(p):
+	if not is_instance_valid(p):
+		return
 	player = p
 	player.highlight.call_deferred("Clear The Grid!")
 	Hood.notif("Clear the Grid!")

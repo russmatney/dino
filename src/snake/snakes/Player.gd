@@ -6,6 +6,7 @@ extends Snake
 # ready
 
 func _ready():
+	super._ready()
 	if not Engine.is_editor_hint():
 		Cam.ensure_camera()
 		Hood.ensure_hud(hud_scene)
@@ -135,6 +136,7 @@ func _on_step():
 	SnakeSounds.play_sound("walk")
 
 func _on_move_head(coord):
+	Debug.pr("_on_move_head in player", coord)
 	if not dead:
 		super._on_move_head(coord)
 		# ... in case we lost in the middle of this?
