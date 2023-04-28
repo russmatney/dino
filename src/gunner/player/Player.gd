@@ -9,6 +9,8 @@ var is_dead = false
 
 var has_jetpack: bool = false
 
+var hud_scene = preload("res://src/gunner/hud/HUD.tscn")
+
 ############################################################
 # _ready
 
@@ -29,7 +31,7 @@ func _ready():
 		proximity_min=100,
 		proximity_max=450,
 		})
-	Hood.ensure_hud()
+	Hood.ensure_hud(hud_scene, self)
 
 	Debug.pr("gunner player ready: ", anim)
 	machine.start()
