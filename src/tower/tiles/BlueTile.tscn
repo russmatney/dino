@@ -1,10 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://b3l3mw6opqvpk"]
 
-[ext_resource path="res://addons/reptile/tilesets/coldfire/ColdFireBlue.tres" type="TileSet" id=1]
+[ext_resource type="TileSet" uid="uid://dljr6o7d1o1oi" path="res://addons/reptile/tilesets/coldfire/ColdFireBlue.tres" id="1"]
 
 [node name="BlueTile" type="TileMap" groups=["bluetile"]]
-tile_set = ExtResource( 1 )
-cell_size = Vector2( 8, 8 )
-collision_layer = 64
-collision_mask = 0
-format = 1
+tile_set = ExtResource("1")
+format = 2

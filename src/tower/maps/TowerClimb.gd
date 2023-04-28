@@ -67,7 +67,7 @@ var enemies = []
 func enemies_alive():
 	var es = []
 	for e in enemies:
-		if e and is_instance_valid(e) and not e.dead:
+		if e and is_instance_valid(e) and not e.is_dead:
 			es.append(e)
 	return es
 
@@ -84,7 +84,7 @@ func _on_player_pickups_changed(pickups):
 			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
 			en.dead.connect(_on_robot_destroyed)
 			enemies.append(en)
-			Hood.hud.update_enemies_remaining(enemies_alive().size())
+			# Hood.hud.update_enemies_remaining(enemies_alive().size())
 
 		# clear player items
 		player.pickups = []
@@ -100,9 +100,10 @@ func _on_targets_cleared():
 
 func _on_robot_destroyed():
 	Hood.notif("Robot Destroyed!")
-	Hood.hud.update_enemies_remaining(enemies_alive().size())
+	# TODO move to writing/reading via Hotel
+	# Hood.hud.update_enemies_remaining(enemies_alive().size())
 	for e in enemies:
-		if not e.dead:
+		if not e.is_dead:
 			robots_destroyed = false
 			return
 	robots_destroyed = true

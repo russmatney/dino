@@ -63,6 +63,17 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ygel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikdjp")
+}],
+"loop": true,
+"name": &"init",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="14"]
@@ -134,7 +145,7 @@ material = SubResource("9")
 position = Vector2(0, 5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_uqnh7")
-animation = &"all"
+animation = &"init"
 
 [node name="TileAOEDetector" type="Area2D" parent="."]
 collision_layer = 0
