@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckoswhkpkg1f8"]
+[gd_scene load_steps=6 format=3 uid="uid://ckoswhkpkg1f8"]
 
 [ext_resource type="SpriteFrames" uid="uid://d1uqrh57tjmm6" path="res://assets/sprites/target_sprite_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/targets/Target.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://fsmrend5ith2" path="res://src/gunner/OffscreenIndicator.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="4_rmqk6"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.1245
@@ -26,6 +27,9 @@ visible = false
 position = Vector2(-87, -41)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CamPOI" parent="." instance=ExtResource("4_rmqk6")]
+importance = 0.36
 
 [connection signal="body_entered" from="." to="." method="_on_Target_body_entered"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
