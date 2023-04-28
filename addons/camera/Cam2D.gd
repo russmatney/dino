@@ -313,7 +313,9 @@ func update_focus():
 	# TODO refactor into reduce
 	for obj in focuses:
 		var obj_pos
-		if obj.is_in_group(poi_group):
+		if not is_instance_valid(obj):
+			obj_pos = Vector2.ZERO
+		elif obj.is_in_group(poi_group):
 			var weighted_dist = weighted_poi_offset(obj)
 			# ignore poi if it's so far that our proximity is zero
 			if weighted_dist.length() > 0:
