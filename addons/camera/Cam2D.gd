@@ -235,24 +235,14 @@ func update_pois():
 
 		var active_pois = []
 		for p in all_pois:
-			if p.has_method("is_active"):
-				if p.is_active():
+			if is_instance_valid(p):
+				if p.has_method("is_active"):
+					if p.is_active():
+						active_pois.append(p)
+				else:
 					active_pois.append(p)
-			else:
-				active_pois.append(p)
 
-		var nearby_pois = active_pois
-		# var nearby_pois = []
-
-		# if following:
-		# 	for poi in active_pois:
-		# 		var dist_vec = following.global_position - poi.global_position
-		# 		var dist_len = dist_vec.length()
-		# 		if dist_len <= poi_following_distance:
-		# 			nearby_pois.append(poi)
-
-		if nearby_pois:
-			poi_follows = nearby_pois
+		poi_follows = active_pois
 
 
 func update_poas():
@@ -263,11 +253,12 @@ func update_poas():
 
 			var to_focus = []
 			for p in poas:
-				if p.has_method("is_active"):
-					if p.is_active():
+				if is_instance_valid(p):
+					if p.has_method("is_active"):
+						if p.is_active():
+							to_focus.append(p)
+					else:
 						to_focus.append(p)
-				else:
-					to_focus.append(p)
 			poa_follows = to_focus
 
 func update_pofs():
@@ -278,11 +269,12 @@ func update_pofs():
 
 			var to_focus = []
 			for p in pofs:
-				if p.has_method("is_active"):
-					if p.is_active():
+				if is_instance_valid(p):
+					if p.has_method("is_active"):
+						if p.is_active():
+							to_focus.append(p)
+					else:
 						to_focus.append(p)
-				else:
-					to_focus.append(p)
 			pof_follows = to_focus
 
 ###########################################################################
