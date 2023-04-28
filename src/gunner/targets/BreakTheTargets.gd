@@ -13,11 +13,6 @@ signal targets_cleared
 
 
 func _ready():
-	# defer until everything has hit the scene tree
-	setup.call_deferred()
-
-
-func setup():
 	var players = get_tree().get_nodes_in_group("player")
 	if players:
 		player = players[0]
@@ -29,36 +24,14 @@ func setup():
 	for t in targets:
 		t.destroyed.connect(_on_target_destroyed)
 
-	find_hud()
+	# TODO refactor this reference away - hud (and quests like this) should depend on hotel instead
+	# if Hood.hud:
+	# 	Hood.hud.update_targets_remaining(targets.size())
+	# else:
+	# 	Hood.hud_ready.connect(func (): Hood.hud.update_targets_remaining(targets.size()))
 
 	Respawner.respawn.connect(_on_respawn)
 	Cam.slowmo_stopped.connect(_on_slowmo_stopped)
-
-
-func find_hud():
-	var huds = get_tree().get_nodes_in_group("hud")
-	if huds:
-		hud = huds[0]
-
-	if hud:
-		hud.update_targets_remaining(targets.size())
-
-
-var wait_for = 5
-var has_warned = false
-
-
-func _process(delta):
-	# TODO refactor to some sensible pattern
-	if wait_for > 0:
-		wait_for -= delta
-		if not hud:
-			find_hud()
-	else:
-		if not hud and not has_warned:
-			has_warned = true
-			Debug.warn("BreakTheTargets could not find HUD, giving up.")
-
 
 ###############################################################################
 # signals
