@@ -44,7 +44,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("5")
 }],
-"loop": true,
+"loop": false,
 "name": &"pop",
 "speed": 20.0
 }, {
