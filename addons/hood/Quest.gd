@@ -24,13 +24,13 @@ func register_quest(node, opts={}):
 		return
 
 	if node.has_signal("quest_complete"):
-		Util.ensure_connection(node, "quest_complete", self, "_on_complete", [node, opts])
+		node.quest_complete.connect(_on_complete.bind(node, opts))
 	if node.has_signal("quest_failed"):
-		Util.ensure_connection(node, "quest_failed", self, "_on_fail", [node, opts])
+		node.quest_failed.connect(_on_fail.bind(node, opts))
 	if node.has_signal("count_remaining_update"):
-		Util.ensure_connection(node, "count_remaining_update", self, "_on_count_remaining_update", [node, opts])
+		node.count_remaining_update.connect(_on_count_remaining_update.bind(node, opts))
 	if node.has_signal("count_total_update"):
-		Util.ensure_connection(node, "count_total_update", self, "_on_count_total_update", [node, opts])
+		node.count_total_update.connect(_on_count_total_update.bind(node, opts))
 
 	var quest = ActiveQuest.new()
 	quest.label = label

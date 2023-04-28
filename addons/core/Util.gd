@@ -168,6 +168,11 @@ func set_collisions_enabled(node, enabled):
 ############################################################
 # connections
 
+func _connect(sig, callable):
+	if sig.is_connected(callable):
+		return
+	sig.connect(callable)
+
 func ensure_connection(obj, sig, target, method, args = []):
 	if not obj.has_signal(sig):
 		Debug.pr("[Warn] obj has no signal for connection: ", obj, " :", sig)

@@ -149,11 +149,11 @@ func mark_touched(coord):
 
 func mark_cells_playing():
 	for c in all_cells():
-		c.playing = true
+		c.play()
 
 func mark_cells_not_playing():
 	for c in all_cells():
-		c.playing = false
+		c.stop()
 
 func deform_all_cells():
 	for c in all_cells():

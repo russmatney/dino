@@ -65,10 +65,9 @@ var cell_head_anim = "enemyhead"
 func draw_segment(coord):
 	var c = cell_scene.instantiate()
 	if should_flash:
-		c.set_animation("flash")
-		c.playing = true
+		c.play("flash")
 	else:
-		c.set_animation(cell_anim)
+		c.play(cell_anim)
 	Util.set_random_frame(c)
 	c.global_position = grid.coord_to_position(coord)
 	c.coord = coord
@@ -76,8 +75,7 @@ func draw_segment(coord):
 	segments[coord] = c
 
 func animate_head(cell):
-	cell.set_animation(cell_head_anim)
-	cell.playing = true
+	cell.play(cell_head_anim)
 	# TODO grow/lunge per step
 	match direction:
 		Vector2.LEFT:
@@ -96,9 +94,8 @@ func animate_head(cell):
 			pass
 
 func restore_tail_segment(cell):
-	cell.set_animation(cell_anim)
+	cell.play(cell_anim)
 	Util.set_random_frame(cell)
-	cell.playing = false
 
 func restore_segments():
 	var hd = head_cell()
@@ -113,9 +110,8 @@ func restore_segments():
 # flashing colors
 
 func cell_flash(cell):
-	cell.set_animation("flash")
+	cell.play("flash")
 	Util.set_random_frame(cell)
-	cell.playing = true
 
 func segments_flash_white():
 	for cell in segments.values():
@@ -126,7 +122,7 @@ func segments_flash_white():
 # snake segment helpers
 
 func head_cell():
-	if not segment_coords:
+	if len(segment_coords) == 0:
 		Debug.pr("no segment coords, can't get head")
 		return
 	elif not segment_coords[0] in segments:

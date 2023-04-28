@@ -14,10 +14,10 @@ var player
 
 func setup_player(p):
 	player = p
-	player.step.connect(update_steps)
-	player.speed_increased.connect(update_speed)
-	player.food_picked_up.connect(update_food_score)
-	player.inc_combo_juice.connect(update_combo_juice)
+	Util._connect(player.step, update_steps)
+	Util._connect(player.speed_increased, update_speed)
+	Util._connect(player.food_picked_up, update_food_score)
+	Util._connect(player.inc_combo_juice, update_combo_juice)
 	update_speed()
 	update_steps()
 	update_food_score()

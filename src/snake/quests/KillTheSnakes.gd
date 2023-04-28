@@ -21,7 +21,7 @@ var player
 
 func setup(p):
 	player = p
-	player.hightlight.call_deferred("Kill The Snakes!")
+	player.highlight.call_deferred("Kill The Snakes!")
 	Hood.notif("Kill the Snakes!")
 
 	find_snakes()
@@ -34,19 +34,18 @@ func find_snakes():
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for e in enemies:
 		if e.is_in_group("snakes"):
-			Util.ensure_connection(e, "destroyed", self, "_on_destroyed")
+			Util._connect(e.destroyed, _on_destroyed)
 			ss.append(e)
 
 	enemy_snakes = ss
 	count_total_update.emit(str(enemy_snakes.size()))
 
 
-
 func _on_destroyed(snake):
 	enemy_snakes.erase(snake)
 
 	count_remaining_update.emit(enemy_snakes.size())
-	if not enemy_snakes:
+	if len(enemy_snakes) == 0:
 		Hood.notif("Enemies Cleared!")
 		quest_complete.emit()
 	else:

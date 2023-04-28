@@ -28,8 +28,7 @@ func setup(p):
 		find_remaining_cells()
 		count_total_update.emit(count_remaining)
 
-
-	Util.ensure_connection(player.grid, "cell_touched", self, "_on_cell_touched")
+	Util._connect(player.grid.cell_touched, _on_cell_touched)
 
 func find_remaining_cells():
 	count_remaining = player.grid.untouched_cells().size()

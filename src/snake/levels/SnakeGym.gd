@@ -14,12 +14,12 @@ func setup():
 		if c.is_in_group("grids"):
 			grids.append(c)
 
-	if grids:
+	if len(grids) > 0:
 		Debug.pr("add snake in grid 0")
 		grids[0].add_snake()
 
 func _process(_d):
-	if not grids:
+	if len(grids) == 0:
 		setup()
 
 func _on_quest_failed(q):
