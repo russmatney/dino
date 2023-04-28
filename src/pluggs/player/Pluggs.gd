@@ -7,6 +7,14 @@ extends CharacterBody2D
 
 func _ready():
 	machine.transitioned.connect(on_transit)
+	machine.start()
+
+	Cam.ensure_camera({
+		player=self,
+		zoom_rect_min=250,
+		proximity_min=50,
+		proximity_max=250,
+		})
 
 
 func on_transit(new_state):
@@ -42,4 +50,4 @@ func face_left():
 
 func _on_animation_finished():
 	if anim.animation == "from-bucket":
-		anim.animation = "idle-standing"
+		anim.play("idle-standing")

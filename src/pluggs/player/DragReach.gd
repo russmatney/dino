@@ -5,7 +5,7 @@ var tt_drag
 
 
 func enter(_msg = {}):
-	owner.anim.animation = "drag-reach"
+	actor.anim.play("drag-reach")
 	tt_drag = drag_in_t
 
 
@@ -18,9 +18,9 @@ func process(delta: float):
 
 	var move_dir = Trolley.move_dir()
 	if move_dir.x > 0:
-		owner.face_right()
+		actor.face_right()
 	elif move_dir.x < 0:
-		owner.face_left()
+		actor.face_left()
 
 	tt_drag = tt_drag - delta
 	if tt_drag <= 0:
@@ -28,8 +28,6 @@ func process(delta: float):
 
 
 func physics_process(delta):
-	owner.velocity.y += owner.gravity * delta
-	owner.set_velocity(owner.velocity)
-	owner.set_up_direction(Vector2.UP)
-	owner.move_and_slide()
-	owner.velocity = owner.velocity
+	actor.velocity.y += actor.gravity * delta
+	actor.set_velocity(actor.velocity)
+	actor.move_and_slide()

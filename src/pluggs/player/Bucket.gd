@@ -4,9 +4,9 @@ extends State
 func enter(msg = {}):
 	if "animate" in msg and msg["animate"]:
 		# last frame is the bucket 'idle' state, so for now we just let this go and not loop
-		owner.anim.animation = "to-bucket"
+		actor.anim.play("to-bucket")
 	else:
-		owner.anim.animation = "bucket"
+		actor.anim.play("bucket")
 
 
 func process(_delta: float):

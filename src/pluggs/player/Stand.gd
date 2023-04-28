@@ -4,9 +4,9 @@ extends State
 func enter(msg = {}):
 	if "animate" in msg and msg["animate"]:
 		# owner moves us to idle-standing when this anim finishes
-		owner.anim.animation = "from-bucket"
+		owner.anim.play("from-bucket")
 	else:
-		owner.anim.animation = "idle-standing"
+		owner.anim.play("idle-standing")
 
 
 func process(_delta: float):
@@ -19,6 +19,4 @@ func process(_delta: float):
 func physics_process(delta):
 	owner.velocity.y += owner.gravity * delta
 	owner.set_velocity(owner.velocity)
-	owner.set_up_direction(Vector2.UP)
 	owner.move_and_slide()
-	owner.velocity = owner.velocity

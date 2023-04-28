@@ -5,13 +5,13 @@ var tt_reach
 
 
 func enter(_msg = {}):
-	owner.anim.animation = "drag-pull"
+	actor.anim.play("drag-pull")
 	tt_reach = drag_for_t
 
 
 func exit(_msg = {}):
 	# TODO not ideal, really we want a way to contrib a vector to velocity (steering)
-	owner.velocity.x = 0
+	actor.velocity.x = 0
 
 
 func process(delta: float):
@@ -23,9 +23,9 @@ func process(delta: float):
 
 	var move_dir = Trolley.move_dir()
 	if move_dir.x > 0:
-		owner.face_right()
+		actor.face_right()
 	elif move_dir.x < 0:
-		owner.face_left()
+		actor.face_left()
 
 	tt_reach = tt_reach - delta
 	if tt_reach <= 0:
@@ -34,9 +34,7 @@ func process(delta: float):
 
 func physics_process(delta):
 	var move_dir = Trolley.move_dir()
-	owner.velocity.x = owner.drag_speed * move_dir.x
-	owner.velocity.y += owner.gravity * delta
-	owner.set_velocity(owner.velocity)
-	owner.set_up_direction(Vector2.UP)
-	owner.move_and_slide()
-	owner.velocity = owner.velocity
+	actor.velocity.x = actor.drag_speed * move_dir.x
+	actor.velocity.y += actor.gravity * delta
+	actor.set_velocity(actor.velocity)
+	actor.move_and_slide()

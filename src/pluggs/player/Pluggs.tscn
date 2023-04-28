@@ -1,64 +1,58 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=3 uid="uid://2bgb2loy27c0"]
 
-[ext_resource path="res://src/pluggs/player/PluggsSpriteFrames.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/pluggs/player/Pluggs.gd" type="Script" id=2]
-[ext_resource path="res://src/pluggs/player/Stand.gd" type="Script" id=3]
-[ext_resource path="res://addons/beehive/machine.gd" type="Script" id=4]
-[ext_resource path="res://addons/core/assets/fonts/at01.ttf" type="FontFile" id=5]
-[ext_resource path="res://src/pluggs/player/Run.gd" type="Script" id=6]
-[ext_resource path="res://src/pluggs/player/Bucket.gd" type="Script" id=7]
-[ext_resource path="res://src/pluggs/player/DragReach.gd" type="Script" id=8]
-[ext_resource path="res://src/pluggs/player/DragPull.gd" type="Script" id=9]
+[ext_resource type="SpriteFrames" uid="uid://56tkepq2e4p6" path="res://src/pluggs/player/PluggsSpriteFrames.tres" id="1"]
+[ext_resource type="Script" path="res://src/pluggs/player/Pluggs.gd" id="2"]
+[ext_resource type="Script" path="res://src/pluggs/player/Stand.gd" id="3"]
+[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="4"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5"]
+[ext_resource type="Script" path="res://src/pluggs/player/Run.gd" id="6"]
+[ext_resource type="Script" path="res://src/pluggs/player/Bucket.gd" id="7"]
+[ext_resource type="Script" path="res://src/pluggs/player/DragReach.gd" id="8"]
+[ext_resource type="Script" path="res://src/pluggs/player/DragPull.gd" id="9"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 25.5, 21.5 )
-
-[sub_resource type="FontFile" id=2]
-font_data = ExtResource( 5 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(48, 43)
 
 [node name="Pluggs" type="CharacterBody2D" groups=["player"]]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2( 0, -32 )
-scale = Vector2( 2, 2 )
-sprite_frames = ExtResource( 1 )
-animation = "idle-standing"
-frame = 2
-playing = true
+position = Vector2(0, -18)
+scale = Vector2(2, 2)
+sprite_frames = ExtResource("1")
+animation = &"bucket"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.5, -21.5 )
-shape = SubResource( 1 )
+position = Vector2(0, -7.5)
+shape = SubResource("1")
 
 [node name="Machine" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource("4")
 initial_state = NodePath("Stand")
 
 [node name="Stand" type="Node" parent="Machine"]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Run" type="Node" parent="Machine"]
-script = ExtResource( 6 )
+script = ExtResource("6")
 
 [node name="Bucket" type="Node" parent="Machine"]
-script = ExtResource( 7 )
+script = ExtResource("7")
 
 [node name="DragReach" type="Node" parent="Machine"]
-script = ExtResource( 8 )
+script = ExtResource("8")
 
 [node name="DragPull" type="Node" parent="Machine"]
-script = ExtResource( 9 )
+script = ExtResource("9")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 offset_left = -64.0
-offset_top = -63.0
+offset_top = -64.0
 offset_right = 64.0
-offset_bottom = -45.0
-custom_fonts/normal_font = SubResource( 2 )
+offset_bottom = -46.0
+theme_override_fonts/normal_font = ExtResource("5")
 bbcode_enabled = true
-text = "[center]State[/center]"
-text = "State"
+text = "[center]State"
 scroll_active = false
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
