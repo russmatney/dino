@@ -8,12 +8,12 @@ func _ready():
 ###########################################################################
 # config
 
-@onready var fallback_hud_scene = preload("res://addons/hood/HUD.tscn")
+# we can't preload here b/c this scene depends on the Hood autoload (this script)
+var fallback_hud_scene = "res://addons/hood/HUD.tscn"
 
-func set_hud_scene(preloaded_scene):
-	Debug.prn("Overriding fallback HUD scene: ", preloaded_scene)
-	fallback_hud_scene = preloaded_scene
-
+func set_hud_scene(hud_scene_or_string):
+	Debug.prn("Overriding fallback HUD scene: ", hud_scene_or_string)
+	fallback_hud_scene = hud_scene_or_string
 
 ###########################################################################
 # ensure hud
@@ -33,9 +33,14 @@ func ensure_hud(hud_preload=null, p=null):
 		return
 
 	if not hud_preload:
+		if fallback_hud_scene is String:
+			fallback_hud_scene = load(fallback_hud_scene)
 		hud_preload = fallback_hud_scene
 
 	hud = hud_preload.instantiate()
+	if not hud:
+		Debug.err("failed to instantiate HUD scene", hud_preload)
+		return
 	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
