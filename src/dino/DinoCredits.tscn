@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3]
 
-[ext_resource path="res://src/credits/DinoCredits.gd" type="Script" id=1]
-[ext_resource path="res://addons/thanks/Credits.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/credits/Credits.gd" type="Script" id=3]
-[ext_resource path="res://addons/navi/ui/MenuButton.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://src/dino/DinoCredits.gd" id="1"]
+[ext_resource type="PackedScene" path="res://addons/thanks/Credits.tscn" id="2"]
+[ext_resource type="Script" path="res://src/dino/Credits.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://b3ivyg8cxtuof" path="res://addons/navi/ui/MenuButton.tscn" id="4"]
 
 [node name="Credits" type="Control"]
 anchor_right = 1.0

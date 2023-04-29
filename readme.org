@@ -254,7 +254,7 @@ nodes can't load when they are missing fonts.
 I'll look into safer handling for missing assets and brainstorm ways to include
 assets that artists prefer to keep out of open-source projects.
 * Credits
-Hopefully in sync with ~src/credits/DinoCredits.gd~.
+Hopefully in sync with ~src/dino/DinoCredits.gd~.
 
 ** Music
 *** Late Night Radio

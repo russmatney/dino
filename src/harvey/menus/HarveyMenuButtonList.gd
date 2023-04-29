@@ -5,7 +5,7 @@ var menu_scenes = [
 	{"label": "Play", "fn": Harvey.restart_game},
 	{
 		"label": "Credits",
-		"nav_to": "res://src/credits/DinoCredits.tscn",
+		"nav_to": "res://src/dino/DinoCredits.tscn",
 	},
 ]
 

@@ -91,7 +91,7 @@ func add_child_to_current(child):
 #####################################################################
 # main menu
 
-var main_menu_path = "res://src/menus/DinoMenu.tscn"
+var main_menu_path = "res://src/dino/DinoMenu.tscn"
 
 
 func set_main_menu(path):
