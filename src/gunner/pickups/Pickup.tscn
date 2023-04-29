@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc6imvynra566"]
+[gd_scene load_steps=4 format=3 uid="uid://j2xi1vfacy0p"]
 
 [ext_resource type="Script" path="res://src/gunner/pickups/Pickup.gd" id="1"]
 [ext_resource type="SpriteFrames" uid="uid://c52cbcht1rl78" path="res://src/gunner/pickups/pickup_spriteframes.tres" id="2"]
-[ext_resource type="PackedScene" uid="uid://fsmrend5ith2" path="res://src/gunner/OffscreenIndicator.tscn" id="4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(23, 41)
@@ -24,12 +23,4 @@ collision_mask = 2
 position = Vector2(1.5, 4.5)
 shape = SubResource("1")
 
-[node name="OffscreenIndicator" parent="." instance=ExtResource("4")]
-visible = false
-position = Vector2(-42, -28)
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

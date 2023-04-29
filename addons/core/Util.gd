@@ -237,3 +237,34 @@ func update_los_facing(facing, node):
 	elif facing == Vector2.LEFT and node.target_position.y < 0:
 		node.target_position.y = -node.target_position.y
 
+
+#################################################################
+## Animations
+
+
+func animate_rotate(node):
+	var tween = node.create_tween()
+	tween.set_loops(0)
+	tween.tween_property(node.anim, "rotation", node.rotation + PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
+		Tween.TRANS_CUBIC
+	)
+	tween.tween_property(node.anim, "rotation", node.rotation - PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
+		Tween.TRANS_CUBIC
+	)
+	tween.tween_interval(randf_range(0.1, 0.4))
+
+
+func animate(node):
+	var n = 10
+	var og_pos = node.position
+	var rand_offset = Vector2(randi() % n - n / 2.0, randi() % n - n / 2.0)
+	var tween = node.create_tween()
+
+	tween.set_loops(0)
+	tween.tween_property(node, "position", node.position + rand_offset, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
+		Tween.TRANS_CUBIC
+	)
+	tween.tween_property(node, "position", og_pos, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
+		Tween.TRANS_CUBIC
+	)
+	tween.tween_interval(randf_range(0.3, 2.0))

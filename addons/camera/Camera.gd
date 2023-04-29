@@ -245,3 +245,31 @@ func _input(event):
 		if cam:
 			# freezeframe("shake-watch", 0.2, 1.5)
 			cam.inc_trauma(0.1)
+
+
+###########################################################################
+# offscreen indicators
+
+var fallback_indicator_scene = "res://addons/camera/OffscreenIndicator.tscn"
+
+func maybe_activate_indicator(indicator, node, opts={}):
+	var is_active = opts.get("is_active", func(): return true)
+	if is_active.call():
+		indicator.activate(node)
+
+func add_offscreen_indicator(node, opts={}):
+	var indicator_scene = opts.get("indicator_scene", fallback_indicator_scene)
+	if indicator_scene is String:
+		indicator_scene = load(indicator_scene)
+
+	if not indicator_scene:
+		Debug.err("Failed to load indicator scene", indicator_scene, "on node", node)
+		return
+
+	var indicator = indicator_scene.instantiate()
+	var vis = VisibleOnScreenNotifier2D.new()
+
+	vis.screen_exited.connect(maybe_activate_indicator.bind(indicator, node, opts))
+	vis.screen_entered.connect(indicator.deactivate)
+	node.add_child(indicator)
+	node.add_child(vis)

@@ -17,6 +17,7 @@ func point_at(pos):
 	rotate(offset_rads)
 
 
+# debug code for pointing at the mouse
 # func _input(event):
 # 	if event is InputEventMouseButton:
 # 		point_at(get_global_mouse_position())
@@ -82,13 +83,10 @@ func position_onscreen():
 
 func activate(node):
 	target = node
-	if not showing:
-		showing = true
-		set_visible(true)
-	point_at(node.get_global_position())
+	showing = true
+	set_visible(true)
 
 
 func deactivate():
-	if showing:
-		showing = false
-		set_visible(false)
+	showing = false
+	set_visible(false)

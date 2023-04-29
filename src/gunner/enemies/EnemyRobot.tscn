@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://h4bfc1yuak7o"]
+[gd_scene load_steps=11 format=3 uid="uid://bbavlei44aw0o"]
 
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1"]
-[ext_resource type="PackedScene" uid="uid://fsmrend5ith2" path="res://src/gunner/OffscreenIndicator.tscn" id="3"]
 [ext_resource type="Script" path="res://src/gunner/enemies/EnemyRobot.gd" id="4"]
 [ext_resource type="Script" path="res://src/gunner/enemies/Idle.gd" id="5"]
 [ext_resource type="Script" path="res://addons/beehive/machine.gd" id="6"]
@@ -29,14 +28,6 @@ scale = Vector2(5, 5)
 sprite_frames = ExtResource("1")
 animation = &"idle"
 frame = 3
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(2, 8)
-scale = Vector2(1.4, 2.4)
-
-[node name="OffscreenIndicator" parent="." instance=ExtResource("3")]
-position = Vector2(-64, -48)
-scale = Vector2(3, 3)
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("6")
@@ -73,7 +64,5 @@ shape = SubResource("3")
 [node name="VisionRay" type="RayCast2D" parent="."]
 collision_mask = 3
 
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="body_entered" from="VisionBox" to="." method="_on_VisionBox_body_entered"]
 [connection signal="body_exited" from="VisionBox" to="." method="_on_VisionBox_body_exited"]

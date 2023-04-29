@@ -14,6 +14,13 @@ func _ready():
 	Respawner.register_respawn(self)
 	machine.start()
 
+	Cam.add_offscreen_indicator(self, {
+		# could instead depend on a fn like this directly on the passed node
+		is_active=should_show_offscreen_indicator})
+
+func should_show_offscreen_indicator():
+	return not machine.state.name == "Dead"
+
 
 ########################################################
 # process
@@ -22,12 +29,6 @@ func _ready():
 
 
 func _process(_delta):
-	# if target offscreen and player close enough/line-of-sight
-	if not on_screen and not machine.state.name == "Dead":
-		offscreen_indicator.activate(self)
-	else:
-		offscreen_indicator.deactivate()
-
 	if get_global_position().y >= max_y and not machine.state.name == "Dead":
 		die(true)
 
@@ -135,21 +136,6 @@ func die(remove_at = false):
 	GunnerSounds.play_sound("enemy_dead")
 	if remove_at:
 		queue_free()
-
-
-########################################################
-# offscreen indicator
-
-@onready var offscreen_indicator = $OffscreenIndicator
-var on_screen = false
-
-
-func _on_VisibilityNotifier2D_screen_entered():
-	on_screen = true
-
-
-func _on_VisibilityNotifier2D_screen_exited():
-	on_screen = false
 
 
 ########################################################
