@@ -28,7 +28,7 @@ var restart_pos: Vector2
 func _ready():
 	restart_pos = global_position
 
-	Cam.ensure_camera.call_deferred()
+	Cam.ensure_camera({player=self})
 
 
 #######################################################################33

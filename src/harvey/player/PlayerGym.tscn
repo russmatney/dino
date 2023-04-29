@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://ceixwvgfmkhf"]
 
-[ext_resource path="res://addons/camera/Cam2D.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/harvey/player/HarveyPlayer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/harvey/items/SeedBox.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" uid="uid://c4wk4oavufugc" path="res://src/harvey/player/HarveyPlayer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ct71m7st0mcr4" path="res://src/harvey/items/SeedBox.tscn" id="3"]
 
 [node name="PlayerGym" type="Node2D"]
 
@@ -11,12 +10,9 @@ offset_left = -103.0
 offset_top = -133.0
 offset_right = 122.0
 offset_bottom = 80.0
-color = Color( 0.435294, 0.32549, 0.32549, 1 )
+color = Color(0.435294, 0.32549, 0.32549, 1)
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource("2")]
 
-[node name="DinoCamera2D" parent="." instance=ExtResource( 1 )]
-mode = 2
-
-[node name="SeedBox" parent="." instance=ExtResource( 3 )]
-position = Vector2( 143, -92 )
+[node name="SeedBox" parent="." instance=ExtResource("3")]
+position = Vector2(143, -92)

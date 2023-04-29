@@ -1,25 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://c3j7q7dts6qw3"]
 
-[ext_resource path="res://src/runner/player/redhat_running_sprites.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/runner/player/Player.gd" type="Script" id=2]
-[ext_resource path="res://src/runner/player/PlayerHUD.tscn" type="PackedScene" id=3]
+[ext_resource type="SpriteFrames" uid="uid://byiv2lmrdsg4j" path="res://src/runner/player/redhat_running_sprites.tres" id="1"]
+[ext_resource type="Script" path="res://src/runner/player/Player.gd" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.5, 6 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(7, 12)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.5, 1 )
-shape = SubResource( 1 )
+position = Vector2(-0.5, 1)
+shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource( 1 )
-animation = "run"
+sprite_frames = ExtResource("1")
+animation = &"run"
 frame = 2
-playing = true
 flip_h = true
-
-[node name="PlayerHUD" parent="." instance=ExtResource( 3 )]
-visible = false

@@ -1,13 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://nl5hwgob1x7g"]
+[gd_scene load_steps=12 format=3 uid="uid://nl5hwgob1x7g"]
 
-[ext_resource type="PackedScene" path="res://src/runner/player/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://c3j7q7dts6qw3" path="res://src/runner/player/Player.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkCoin.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://bflpu7dhqovtc" path="res://addons/camera/Cam2D.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkCoinGuard.tscn" id="4"]
 [ext_resource type="Script" path="res://src/runner/Runner.gd" id="5"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkGap.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkWin.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://src/runner/park/rooms/ParkLeaf.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://dism2e7rlboit" path="res://src/runner/park/rooms/ParkWin.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://dr5modddxoi2o" path="res://src/runner/park/rooms/ParkLeaf.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/LeafSteps.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://src/runner/park/rooms/LeafDrop.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://d72nndjciiah" path="res://assets/concept-art/runner/leaf-backgrounds-middle_sheet.png" id="11"]
@@ -42,10 +41,3 @@ texture = ExtResource("11")
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(39, -24)
 scale = Vector2(1.5, 1.5)
-
-[node name="DinoCamera2D" parent="." instance=ExtResource("3")]
-offset = Vector2(200, -50)
-drag_vertical_enabled = true
-drag_top_margin = 0.8
-drag_bottom_margin = 0.6
-editor_draw_drag_margin = true
