@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://src/gunner/targets/BreakTheTargets.gd" id="1"]
 
-[node name="BreakTheTargets" type="Node2D"]
+[node name="BreakTheTargets" type="Node2D" groups=["quests"]]
 script = ExtResource("1")

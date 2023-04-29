@@ -33,7 +33,7 @@ func drop_db():
 # key
 
 var hotel_root_group_name = "hotel_singletons"
-var root_groups = [hotel_root_group_name, "player"]
+var root_groups = [hotel_root_group_name, "player", "quests"]
 
 func add_root_group(group):
 	if not group in root_groups:

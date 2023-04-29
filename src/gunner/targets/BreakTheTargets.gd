@@ -3,38 +3,40 @@ extends Node2D
 
 var targets = []
 var player
-var hud
 var destroyed_count = 0
 
 signal targets_cleared
 
+func _enter_tree():
+	Hotel.book(self.scene_file_path)
+
 ###############################################################################
 # ready
 
-
 func _ready():
-	var players = get_tree().get_nodes_in_group("player")
-	if players:
-		player = players[0]
-		player.notif.call_deferred("BREAK THE TARGETS")
-		Hood.notif("Break The Targets!")
-		Debug.pr("btt found player: ", player)
+	Hotel.register(self)
+	Game.player_found.connect(notify_player)
 
 	targets = get_tree().get_nodes_in_group("target")
 	for t in targets:
 		t.destroyed.connect(_on_target_destroyed)
 
-	# TODO refactor this reference away - hud (and quests like this) should depend on hotel instead
-	# if Hood.hud:
-	# 	Hood.hud.update_targets_remaining(targets.size())
-	# else:
-	# 	Hood.hud_ready.connect(func (): Hood.hud.update_targets_remaining(targets.size()))
-
 	Respawner.respawn.connect(_on_respawn)
 	Cam.slowmo_stopped.connect(_on_slowmo_stopped)
 
+func check_out(data):
+	destroyed_count = data.get("destroyed_count", destroyed_count)
+
+func hotel_data():
+	return {destroyed_count=destroyed_count, remaining_count=len(targets)}
+
 ###############################################################################
 # signals
+
+func notify_player(p):
+	player = p
+	player.notif.call_deferred("BREAK THE TARGETS")
+	Hood.notif("Break The Targets!")
 
 
 func _on_respawn(node):
@@ -42,8 +44,6 @@ func _on_respawn(node):
 		node.destroyed.connect(_on_target_destroyed)
 		targets.append(node)
 		target_change()
-		if hud:
-			hud.update_targets_remaining(targets.size())
 
 
 func _on_target_destroyed(t):
@@ -52,10 +52,7 @@ func _on_target_destroyed(t):
 	target_change({"was_destroy": true})
 
 	destroyed_count += 1
-
-	if hud:
-		hud.update_targets_destroyed(destroyed_count)
-		hud.update_targets_remaining(targets.size())
+	Hotel.check_in(self)
 
 
 ###############################################################################
