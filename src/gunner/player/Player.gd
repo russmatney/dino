@@ -17,9 +17,11 @@ var hud_scene = preload("res://src/gunner/hud/HUD.tscn")
 var reset_position
 
 func _enter_tree():
-	Debug.pr("enter tree")
+	Hotel.book(self.scene_file_path)
 
 func _ready():
+	Hotel.register(self)
+
 	Debug.pr("gunner player getting ready: ", anim)
 	reset_position = get_global_position()
 	machine.transitioned.connect(on_transit)
@@ -36,6 +38,15 @@ func _ready():
 	Debug.pr("gunner player ready: ", anim)
 	machine.start()
 
+###########################################################################
+# hotel data
+
+func check_out(data):
+	health = data.get("health", health)
+	pickups = data.get("pickups", pickups)
+
+func hotel_data():
+	return {health=health, pickups=pickups}
 
 ############################################################
 # _process
@@ -92,6 +103,7 @@ signal dead
 
 func take_damage(body = null, d = 1):
 	health -= d
+	Hotel.check_in(self, {health=health})
 	health_change.emit(health)
 	GunnerSounds.play_sound("player_hit")
 
@@ -305,6 +317,7 @@ func collect_pickup(pickup_type):
 		pickups.append(pickup_type)
 		pickups_changed.emit(pickups)
 
+	Hotel.check_in(self, {pickups=pickups})
 
 ######################################################################
 # tile color detection

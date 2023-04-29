@@ -2,55 +2,24 @@ extends CanvasLayer
 
 
 func _ready():
-	var _x = Hood.notification.connect(new_notification)
-
-	find_player.call_deferred()
-
-
-###################################################################
-# player setup
-
-var player
-var player_group = "player"
+	Hotel.entry_updated.connect(_on_entry_updated)
+	_on_entry_updated(Hotel.first({is_player=true}))
 
 
-func find_player():
-	var ps = get_tree().get_nodes_in_group(player_group)
-
-	if ps.size() > 1:
-		Debug.pr("[WARN] HUD found multiple in player_group: ", player_group)
-	if ps:
-		player = ps[0]
-		Debug.pr("[HUD] found player: ", player)
-	else:
-		Debug.pr("[WARN] HUD found zero in player_group: ", player_group)
-		return
-
-	if player:
-		player.health_change.connect(update_player_health)
-		update_player_health(player.health)
-		player.pickups_changed.connect(update_player_pickups)
-		update_player_pickups(player.pickups)
-
-
-###################################################################
-# Notifications
-
-var notif_label = preload("res://addons/hood/NotifLabel.tscn")
-
-
-func new_notification(notif):
-	var lbl = notif_label.instantiate()
-	lbl.text = notif["msg"]
-	lbl.ttl = notif["ttl"]
-	get_node("%Notifications").add_child(lbl)
+func _on_entry_updated(entry={}):
+	Debug.log("entry", entry)
+	if entry != null and "player" in entry.get("groups", {}):
+		if entry.get("health") != null:
+			set_health(entry["health"])
+		if entry.get("pickups") != null:
+			set_pickups(entry["pickups"])
 
 
 ###################################################################
 # update health
 
 
-func update_player_health(health):
+func set_health(health):
 	var hearts = get_node("%HeartsContainer")
 	hearts.set_health(health)
 
@@ -59,7 +28,7 @@ func update_player_health(health):
 # update pickups
 
 
-func update_player_pickups(pickups):
+func set_pickups(pickups):
 	var p = get_node("%PickupsContainer")
 	p.update_pickups(pickups)
 
