@@ -1,28 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dism2e7rlboit"]
 
-[ext_resource path="res://src/runner/park/Ground.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/runner/park/rooms/ParkWin.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/runner_leaf_friend_sheet.png" type="Texture2D" id=3]
+[ext_resource type="PackedScene" uid="uid://cnvt0oin03ds5" path="res://src/runner/park/Ground.tscn" id="1"]
+[ext_resource type="Script" path="res://src/runner/park/rooms/ParkWin.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cnqlhkc1en442" path="res://assets/sprites/runner_leaf_friend_sheet.png" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 256, 86 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(512, 172)
 
 [node name="ParkWin" type="Node2D"]
-script = ExtResource( 2 )
+script = ExtResource("2")
 
-[node name="Ground" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, 29.2 )
-scale = Vector2( 8, 0.899999 )
+[node name="Ground" parent="." instance=ExtResource("1")]
+position = Vector2(0, 29.2)
+scale = Vector2(8, 0.899999)
 
 [node name="RoomBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBox"]
-position = Vector2( 0, -78 )
-shape = SubResource( 1 )
+position = Vector2(0, -78)
+shape = SubResource("1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 29.0
 offset_top = -152.0
 offset_right = 157.0
 offset_bottom = -24.0
-texture = ExtResource( 3 )
+texture = ExtResource("3")

@@ -1,23 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b4civnrg7hymv"]
 
-[ext_resource path="res://assets/sprites/runner_ground_1_sheet.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://rnu5ucjjkl6o" path="res://assets/sprites/runner_ground_1_sheet.png" id="1"]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"sprite_frames": [ ExtResource( 1 ) ],
+[sub_resource type="AtlasTexture" id="AtlasTexture_uphcp"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qn3cp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uphcp")
+}],
 "loop": true,
-"name": "default",
+"name": &"default",
 "speed": 5.0
-} ]
+}]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 64, 32 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(128, 64)
 
 [node name="GroundLeaves" type="StaticBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2( 0, -5 )
-sprite_frames = SubResource( 1 )
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_qn3cp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")
