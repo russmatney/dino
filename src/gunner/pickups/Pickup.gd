@@ -2,9 +2,10 @@ extends Node2D
 
 @export var type = "jetpack" # (String, "jetpack", "hat", "body")
 
+@onready var anim = $AnimatedSprite2D
 
 func _ready():
-	$AnimatedSprite2D.animation = type
+	anim.animation = type
 	Respawner.register_respawn(self)
 	Cam.add_offscreen_indicator(self)
 	Util.animate(self)
