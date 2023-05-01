@@ -53,9 +53,9 @@ func _process(_delta):
 			Hood.notif("All coins found!")
 			Debug.pr("All coins found!")
 			door.open()
-			var on_close = Hood.jumbo_notif({header="Door opening!", body="All coins found."})
+			var on_close = Quest.jumbo_notif({header="Door opening!", body="All coins found."})
 			if on_close:
-				if not Hood.is_connected("jumbo_closed", _on_close_respawn):
+				if not Quest.jumbo_closed.is_connected(_on_close_respawn):
 					on_close.connect(_on_close_respawn.bind(on_close))
 
 func _on_close_respawn(on_close):

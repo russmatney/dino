@@ -85,11 +85,11 @@ func show_jumbotron(player):
 
 	if header:
 		player.move_to_target(global_position)
-		var on_close = Hood.jumbo_notif({
+		var on_close = Quest.jumbo_notif({
 			header=header, body=body, action=action, action_label_text=label,
 			})
 		if on_close:
-			if not Hood.is_connected("jumbo_closed", _on_close_respawn):
+			if not Quest.jumbo_closed.is_connected(_on_close_respawn):
 				on_close.connect(_on_close_respawn.bind(on_close, player))
 
 func _on_close_respawn(on_close, player):

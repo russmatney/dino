@@ -21,8 +21,6 @@ func set_hud_scene(hud_scene_or_string):
 var hud
 
 func ensure_hud(hud_preload=null):
-	ensure_jumbotron.call_deferred()
-
 	Debug.pr("ensuring hud", hud_preload)
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
@@ -86,43 +84,3 @@ func dev_notif(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=
 	else:
 		msg = Debug.to_printable(msgs)
 		notification.emit({msg=msg, rich=true, ttl=5.0})
-
-###########################################################################
-# jumbotron
-
-var jumbotron_scene = preload("res://addons/hood/Jumbotron.tscn")
-var jumbotron
-
-func ensure_jumbotron():
-	if jumbotron and is_instance_valid(jumbotron):
-		return
-
-	jumbotron = jumbotron_scene.instantiate()
-	jumbotron.set_visible(false)
-	Navi.add_child_to_current(jumbotron)
-
-signal jumbo_closed
-
-func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
-	if jumbotron:
-		if header and header is Dictionary:
-			body = header.get("body")
-			key_or_action = header.get("key")
-			key_or_action = header.get("action", key_or_action)
-			action_label_text = header.get("action_label_text")
-			header = header.get("header")
-
-		jumbotron.header_text = header
-		if body:
-			jumbotron.body_text = body
-		else:
-			jumbotron.body_text = ""
-		if key_or_action or action_label_text:
-			jumbotron.action_hint.display(key_or_action, action_label_text)
-		else:
-			jumbotron.action_hint.hide()
-
-		# pause game?
-		jumbotron.fade_in()
-
-		return jumbo_closed

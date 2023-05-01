@@ -4,6 +4,9 @@ signal all_quests_complete
 signal quest_failed
 signal quest_update
 
+func _ready():
+	ensure_jumbotron()
+
 ######################################################
 # data
 
@@ -106,3 +109,45 @@ func _on_count_remaining_update(remaining, node, opts):
 	var label = q_label(node, opts)
 	active_quests[label].remaining = remaining
 	quest_update.emit()
+
+
+
+###########################################################################
+# jumbotron
+
+var jumbotron_scene = preload("res://addons/quest/Jumbotron.tscn")
+var jumbotron
+
+func ensure_jumbotron():
+	if jumbotron and is_instance_valid(jumbotron):
+		return
+
+	jumbotron = jumbotron_scene.instantiate()
+	jumbotron.set_visible(false)
+	Navi.add_child(jumbotron)
+
+signal jumbo_closed
+
+func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
+	if jumbotron:
+		if header and header is Dictionary:
+			body = header.get("body")
+			key_or_action = header.get("key")
+			key_or_action = header.get("action", key_or_action)
+			action_label_text = header.get("action_label_text")
+			header = header.get("header")
+
+		jumbotron.header_text = header
+		if body:
+			jumbotron.body_text = body
+		else:
+			jumbotron.body_text = ""
+		if key_or_action or action_label_text:
+			jumbotron.action_hint.display(key_or_action, action_label_text)
+		else:
+			jumbotron.action_hint.hide()
+
+		# pause game?
+		jumbotron.fade_in()
+
+		return jumbo_closed

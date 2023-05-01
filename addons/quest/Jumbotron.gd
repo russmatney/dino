@@ -27,7 +27,7 @@ extends CanvasLayer
 func _unhandled_input(event):
 	if Trolley.is_close(event):
 		fade_out()
-		Hood.jumbo_closed.emit()
+		Quest.jumbo_closed.emit()
 		DJZ.play(DJZ.showjumbotron)
 
 func fade_in():
