@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://db4aadcckt033"]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_71epl"]
 [ext_resource type="PackedScene" path="res://src/demoland/zones/area01/01Entrance.tscn" id="1_vpwkf"]
@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" path="res://src/demoland/zones/area01/08DownTower.tscn" id="8_umldl"]
 [ext_resource type="PackedScene" path="res://src/demoland/zones/area01/09Elevator.tscn" id="9_pjsu1"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/PlayerSpawnPoint.tscn" id="11_oke76"]
-[ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="12_7ylae"]
-[ext_resource type="PackedScene" path="res://src/hatbot/enemies/Soldier.tscn" id="14_l82es"]
-[ext_resource type="PackedScene" path="res://src/hatbot/entities/Candle.tscn" id="15_r03j1"]
+[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="12_7ylae"]
+[ext_resource type="PackedScene" uid="uid://d2b2tuk47rndw" path="res://src/hatbot/enemies/Soldier.tscn" id="14_l82es"]
+[ext_resource type="PackedScene" uid="uid://j0nvr2rd56ca" path="res://src/hatbot/entities/Candle.tscn" id="15_r03j1"]
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Elevator.tscn" id="17_aao4x"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]

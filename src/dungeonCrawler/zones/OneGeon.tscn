@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dungeonCrawler/zones/Dungeon.gd" id="1_f4kpf"]
 [ext_resource type="PackedScene" uid="uid://cmaxg11lghsbw" path="res://addons/reptile/tilemaps/3x3TileMap.tscn" id="2_4a8w5"]
-[ext_resource type="PackedScene" uid="uid://gosjcf3y2i74" path="res://src/dungeonCrawler/Door.tscn" id="3_77bao"]
+[ext_resource type="PackedScene" path="res://src/dungeonCrawler/Door.tscn" id="3_77bao"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/player/PlayerSpawner.tscn" id="4_lwduf"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/BowItem.tscn" id="5_atoyt"]
 [ext_resource type="PackedScene" uid="uid://bqnlkmtoprs0x" path="res://src/dungeonCrawler/enemies/Goomba.tscn" id="6_koiet"]

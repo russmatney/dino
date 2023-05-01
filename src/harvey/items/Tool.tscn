@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://wq32yioprbpx"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://src/harvey/items/Tool.gd" id="1"]
 [ext_resource type="PackedScene" path="res://src/harvey/ToolIcon.tscn" id="2"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="3"]
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="4"]
-[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="5_grsnf"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="5_grsnf"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="6_8thnk"]
 
 [sub_resource type="CircleShape2D" id="1"]

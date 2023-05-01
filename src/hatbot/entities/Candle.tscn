@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://j0nvr2rd56ca"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://src/hatbot/entities/Candle.gd" id="1_7eirx"]
 [ext_resource type="SpriteFrames" uid="uid://63sc3onlnswo" path="res://src/hatbot/entities/CandleSpriteFrames.tres" id="1_ywigl"]
-[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="4_asdr1"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="4_asdr1"]
 [ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://assets/hatbot/light64px4.png" id="6_nahms"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/PlayerSpawnPoint.tscn" id="6_ttkix"]
 

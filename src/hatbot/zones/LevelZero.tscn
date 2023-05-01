@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cce1lf3w13yyc"]
+[gd_scene load_steps=25 format=3]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_qaiq7"]
 [ext_resource type="Shader" path="res://src/hatbot/BgBlur.gdshader" id="2_nb6de"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://btl4j2xap85np" path="res://addons/reptile/tilemaps/coldfire/ColdFireDark.tscn" id="4_paos8"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/PlayerSpawnPoint.tscn" id="5_f2j1h"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_ml4hm"]
-[ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="6_xoy8t"]
+[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="6_xoy8t"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="9_uk0fg"]
 [ext_resource type="PackedScene" uid="uid://j0nvr2rd56ca" path="res://src/hatbot/entities/Candle.tscn" id="10_urcpa"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="11_arac5"]

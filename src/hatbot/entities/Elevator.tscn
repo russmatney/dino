@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://assets/hatbot/door_sheet.png" id="1_6v2w8"]
 [ext_resource type="Script" path="res://src/hatbot/entities/Elevator.gd" id="1_87cqc"]
-[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_nrb31"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="3_nrb31"]
 [ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://assets/hatbot/light64px8.png" id="4_e46yd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtm3d"]

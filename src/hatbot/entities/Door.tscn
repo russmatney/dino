@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://blsiw37dhgfg4"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://buwix7wp71vf1" path="res://src/hatbot/entities/DoorSpriteFrames.tres" id="1_5m0uh"]
 [ext_resource type="Script" path="res://src/hatbot/entities/Door.gd" id="1_arj2e"]
-[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_ox5jh"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="3_ox5jh"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_oifqr"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="5_f3480"]
 

@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://gosjcf3y2i74"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://dtrjbne1a0g58" path="res://resources/sprites/DungeonDoor.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/Door.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="3_wk04p"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="3_wk04p"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bu74hpafpn5ee"]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://addons/quest/Jumbotron.gd" id="1_6gaau"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_uspvf"]
@@ -13,7 +13,7 @@
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="11_211di"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="12_ed630"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_8l30f"]
-[ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="14_1525f"]
+[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="14_1525f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vafy"]
 bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.470588)

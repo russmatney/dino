@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://fo52ujd4jco3"]
+[gd_scene load_steps=21 format=3]
 
 [ext_resource type="Script" path="res://src/harvey/plots/Plot.gd" id="2"]
 [ext_resource type="Script" path="res://src/harvey/plots/SeedPlanted.gd" id="3"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://src/harvey/plots/NeedsWater.gd" id="8"]
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="10"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="11"]
-[ext_resource type="PackedScene" uid="uid://yt5kb6c86xpu" path="res://addons/hood/actions/ActionArea.tscn" id="11_5d4ib"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="11_5d4ib"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="12_1v7m4"]
 
 [sub_resource type="ShaderMaterial" id="8"]

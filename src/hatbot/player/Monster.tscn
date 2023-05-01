@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ds7uyvpupe34x"]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://b7n3u8ytapvb4" path="res://src/hatbot/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/hatbot/player/Monster.gd" id="1_wj1cn"]
@@ -10,9 +10,9 @@
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Fall.gd" id="7_ovoef"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/KnockedBack.gd" id="8_rpcmv"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Dead.gd" id="9_betuw"]
-[ext_resource type="PackedScene" uid="uid://sw03ot27btw2" path="res://addons/hood/ActionHint.tscn" id="9_ocb0p"]
-[ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="10_68kyd"]
-[ext_resource type="PackedScene" path="res://src/hatbot/powerups/Sword.tscn" id="10_a54r4"]
+[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="9_ocb0p"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="10_68kyd"]
+[ext_resource type="PackedScene" uid="uid://beg2332ea720c" path="res://src/hatbot/powerups/Sword.tscn" id="10_a54r4"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Climb.gd" id="10_vycc5"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_8r4cy"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Sit.gd" id="12_7npxa"]

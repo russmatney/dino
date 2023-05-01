@@ -92,3 +92,5 @@ size_flags_vertical = 3
 [node name="Notifications" parent="HBoxContainer/VBoxContainer2/Panel2" instance=ExtResource("6_q4161")]
 layout_mode = 0
 anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0

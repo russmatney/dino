@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4wk4oavufugc"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/harvey/player/harvey_spriteframes.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/harvey/player/PlayerItem.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/harvey/player/Machine.tscn" id="3"]
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/debug-info-text.tres" id="4_b5bxh"]
 [ext_resource type="Script" path="res://src/harvey/player/HarveyPlayer.gd" id="5"]
-[ext_resource type="PackedScene" uid="uid://blgwmxet7aj7i" path="res://addons/hood/actions/ActionDetector.tscn" id="6_1tlex"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="6_1tlex"]
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="10"]
 
 [sub_resource type="RectangleShape2D" id="1"]
