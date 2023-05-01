@@ -16,7 +16,7 @@ Dino is a monorepo/sandbox full of Godot games and addons.
 You can play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
 
 You can read more about Dino on my blog - the coverage could be more up-to-date
-there: [[https://danger.russmatney.com/note/dino.html][danger.russmatney.com/note/dino.html]].
+there: [[https://russmatney.com/note/dino.html][russmatney.com/note/dino.html]].
 
 * Games
 These (and future games) are discussed on my blog (linked above).
@@ -130,7 +130,7 @@ GUI and HUD should be camera-zoom-level related anyway.
 ** hotel
 An in-memory game state db.
 
-Discussed in more detail: [[https://danger.russmatney.com/note/hotel_dino_plugin.html][danger.russmatney.com/note/hotel_dino_plugin.html]]
+Discussed in more detail: [[https://russmatney.com/note/hotel_dino_plugin.html][russmatney.com/note/hotel_dino_plugin.html]]
 ** metro
 ~Metro.gd~, ~MetroZone.gd~, and ~MetroRoom.gd~ provide helpers for managing
 zones (areas) and rooms in map-based games. (Metroidvanias, roguelikes, dungeon
