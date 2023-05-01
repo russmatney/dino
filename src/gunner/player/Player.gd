@@ -33,7 +33,7 @@ func _ready():
 		proximity_min=100,
 		proximity_max=450,
 		})
-	Hood.ensure_hud(hud_scene, self)
+	Hood.ensure_hud(hud_scene)
 
 	Debug.pr("gunner player ready: ", anim)
 	machine.start()

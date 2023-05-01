@@ -100,13 +100,13 @@ b/c the 'navi' code expects to use fonts/autoloads from those addons. This may
 be dealt with overtime, but for now Dino is growing as a bit of a personal
 framework more than independent libraries.
 
-** core
+** Core
 A Util autoload and a slew of fonts.
 
 Generally, anything too small to go in an existing addon.
-** beehive
+** Beehive
 For working with state machines, behavior trees, GOAP.
-** camera
+** Camera
 2D Camera with modes for following the player, anchors, or centering based on
 points of focus/interest.
 
@@ -117,28 +117,28 @@ Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
 *** slow-mo
 *** hit-stop
 *** screenshake
-** dj
+** DJ
 For sounds and music management, such as background music that is maintained
 across scene transitions.
 
 Whatever it takes to make playing sounds in Godot better.
-** hood
+** Hood
 HUD UI components.
 
 Maybe camera goes in here?
 GUI and HUD should be camera-zoom-level related anyway.
-** hotel
+** Hotel
 An in-memory game state db.
 
 Discussed in more detail: [[https://russmatney.com/note/hotel_dino_plugin.html][russmatney.com/note/hotel_dino_plugin.html]]
-** metro
+** Metro
 ~Metro.gd~, ~MetroZone.gd~, and ~MetroRoom.gd~ provide helpers for managing
 zones (areas) and rooms in map-based games. (Metroidvanias, roguelikes, dungeon
 crawlers, etc.)
 
 Originally built along side HatBot, it has since been refactored out
 into a reusable addon, and applied so far to ~src/dungeonCrawler~.
-** navi
+** Navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
 *** NaviMenu
@@ -147,14 +147,14 @@ supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
 **** Pause Screen
 **** Win Screen
 **** Death Screen
-** reptile
+** Reptile
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
 
 Includes Reptile autoload and ReptileRoom, which are a base for some proc gen with tilemaps.
-** thanks
+** Thanks
 A simple Credits scene and/or script that scrolls credits from a .txt file
-** trolley
+** Trolley
 For handling controls inputs and remapping.
 * bb-godot: some helpful babashka tasks
 Utilities for managing Godot Projects using Babashka (Clojure)

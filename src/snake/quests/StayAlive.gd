@@ -2,9 +2,9 @@ extends Node2D
 
 
 func _ready():
-	var _x = Hood.found_player.connect(setup)
-	if Hood.player and is_instance_valid(Hood.player):
-		setup(Hood.player)
+	Game.player_found.connect(setup)
+	if Game.player and is_instance_valid(Game.player):
+		setup(Game.player)
 
 	# when is this quest complete?
 	Quest.register_quest(self, {"check_not_failed": true, "label": "Stay Alive!"})

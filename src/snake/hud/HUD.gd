@@ -2,9 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
-	Debug.pr("ready")
-	var _x = Hood.found_player.connect(setup_player)
-	Hood.find_player.call_deferred()
+	Game.player_found.connect(setup_player)
 
 
 ###################################################################

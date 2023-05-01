@@ -41,7 +41,7 @@ func _ready():
 	Hotel.register(self)
 
 	if not Engine.is_editor_hint():
-		Hood.ensure_hud(hud, self)
+		Hood.ensure_hud(hud)
 		Cam.ensure_camera({
 			player=self,
 			zoom_rect_min=400,

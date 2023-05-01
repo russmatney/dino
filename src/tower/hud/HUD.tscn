@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bly75mfi7kcvd"]
+[gd_scene load_steps=7 format=3 uid="uid://bly75mfi7kcvd"]
 
-[ext_resource type="PackedScene" path="res://addons/hood/HudLabel.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://addons/hood/HeartsContainer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/gunner/hud/Pickups.tscn" id="3"]
 [ext_resource type="Script" path="res://src/tower/hud/HUD.gd" id="4"]
-[ext_resource type="PackedScene" path="res://src/tower/menus/TowerControls.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b08yhx4eeirf7" path="res://src/tower/menus/TowerControls.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="6_q4161"]
 
 [node name="HUD" type="CanvasLayer" groups=["hud"]]
 script = ExtResource("4")
@@ -23,7 +24,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Panel" type="Panel" parent="HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(106, 140)
+custom_minimum_size = Vector2(280, 200)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -32,12 +33,15 @@ size_flags_vertical = 0
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 104.0
-offset_bottom = 152.0
+offset_right = 284.0
+offset_bottom = 534.0
 
 [node name="HeartsContainer" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+alignment = 0
+h = 5
+flip_h = false
 
 [node name="PickupsContainer" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("3")]
 unique_name_in_owner = true
@@ -46,21 +50,26 @@ layout_mode = 2
 [node name="TargetsDestroyed" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("1")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 text = "Targets Destroyed: 0"
+autowrap_mode = 0
 
 [node name="TargetsRemaining" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("1")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 text = "Targets Remaining: 0"
 
 [node name="EnemiesDestroyed" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("1")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 text = "Enemies Destroyed: 0"
 
 [node name="EnemiesRemaining" parent="HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("1")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 text = "Enemies Remaining: 0"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
@@ -72,19 +81,14 @@ layout_mode = 2
 
 [node name="TowerControls" parent="HBoxContainer/VBoxContainer2/Panel" instance=ExtResource("5")]
 layout_mode = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 100.0
 offset_bottom = 108.0
 
 [node name="Panel2" type="Panel" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Notifications" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/Panel2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 160)
+[node name="Notifications" parent="HBoxContainer/VBoxContainer2/Panel2" instance=ExtResource("6_q4161")]
 layout_mode = 0
-offset_top = 3.0
+anchors_preset = 0

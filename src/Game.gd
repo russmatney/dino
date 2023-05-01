@@ -7,10 +7,9 @@ extends Node
 func _ready():
 	Debug.prn("Game autoload ready")
 
-	# TODO flip dependency and logic with Hood
-	Hood.found_player.connect(_on_player_found)
-	if Hood.player and is_instance_valid(Hood.player):
-		_on_player_found(Hood.player)
+	player_found.connect(_on_player_found)
+	player_spawned.connect(_find_player)
+	_find_player()
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
@@ -72,6 +71,7 @@ func restart_game(game):
 		return
 	current_game.start()
 
+
 ###########################################################
 # player
 
@@ -82,16 +82,38 @@ func _on_new_scene_instanced(scene):
 			Debug.prn("respawning player after new scene instanced")
 			respawn_player()
 
-var player
 
 signal player_found(player)
+signal player_spawned(player)
+
+var player
+var player_group = "player"
+
+func _find_player(p=null):
+	if p:
+		player = p
+
+	if player:
+		player_found.emit(player)
+		return
+
+	var ps = get_tree().get_nodes_in_group(player_group)
+
+	if len(ps) > 1:
+		Debug.warn("found multiple in player_group: ", player_group, ps)
+
+	if len(ps) > 0:
+		player = ps[0]
+		Debug.pr("found player: ", player)
+	else:
+		Debug.warn("could not find player, zero in player_group: ", player_group)
+		return
+
+	player_found.emit(player)
 
 func _on_player_found(p):
 	Debug.prn("Game.player found:", p)
-	if not player:
-		player = p
-
-	player_found.emit(player)
+	Hood.notif("Found player", p)
 	if current_game:
 		current_game.update_world()
 
@@ -130,6 +152,8 @@ func _respawn_player(opts={}):
 		player.position = spawn_coords
 	else:
 		Debug.err("No spawn coords found when respawning player")
+
+	player.ready.connect(func(): player_spawned.emit(player))
 
 	# check in new player health
 	# here we pass the data ourselves to not overwrite other fields (powerups)

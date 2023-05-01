@@ -20,16 +20,12 @@ func set_hud_scene(hud_scene_or_string):
 
 var hud
 
-func ensure_hud(hud_preload=null, p=null):
+func ensure_hud(hud_preload=null):
 	ensure_jumbotron.call_deferred()
 
 	Debug.pr("ensuring hud", hud_preload)
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
-
-		# support passing the player back into Hood
-		if p:
-			find_player(p)
 		return
 
 	if not hud_preload:
@@ -41,11 +37,10 @@ func ensure_hud(hud_preload=null, p=null):
 	if not hud:
 		Debug.err("failed to instantiate HUD scene", hud_preload)
 		return
+
 	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
 	Navi.add_child_to_current(hud)
-	if not player:
-		find_player.call_deferred()
 
 signal hud_ready
 
@@ -72,8 +67,8 @@ func notif(text, opts = {}):
 		queued_notifs.append([text, opts])
 		Debug.prn("[INFO] no hud yet, queuing notification", [text, opts])
 		return
-	if typeof(opts) == TYPE_STRING:
-		text += opts
+	if typeof(opts) == TYPE_STRING or not opts is Dictionary:
+		text += str(opts)
 		opts = {}
 	opts["msg"] = text
 	if not "ttl" in opts:
@@ -131,34 +126,3 @@ func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
 		jumbotron.fade_in()
 
 		return jumbo_closed
-
-###########################################################################
-# find_player
-
-# TODO remove in favor of Game.gd finding and passing in the player
-signal found_player(player)
-
-var player
-var player_group = "player"
-
-
-func find_player(p=null):
-	if p:
-		player = p
-
-	if player:
-		found_player.emit(player)
-		return
-
-	var ps = get_tree().get_nodes_in_group(player_group)
-
-	if ps.size() > 1:
-		Debug.warn("found multiple in player_group: ", player_group)
-	if ps:
-		player = ps[0]
-		Debug.pr("found player: ", player)
-	else:
-		Debug.warn("could not find player, zero in player_group: ", player_group)
-		return
-
-	found_player.emit(player)

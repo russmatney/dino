@@ -2,8 +2,7 @@ extends CanvasLayer
 
 
 func _ready():
-	var _x = Hood.notification.connect(new_notification)
-	var _y = Hood.found_player.connect(setup_player)
+	Game.player_found.connect(setup_player)
 	Hood.find_player.call_deferred()
 
 
@@ -19,19 +18,6 @@ func setup_player(p):
 	update_player_health(player.health)
 	player.pickups_changed.connect(update_player_pickups)
 	update_player_pickups(player.pickups)
-
-
-###################################################################
-# Notifications
-
-var notif_label = preload("res://addons/hood/NotifLabel.tscn")
-
-
-func new_notification(notif):
-	var lbl = notif_label.instantiate()
-	lbl.text = notif["msg"]
-	lbl.ttl = notif["ttl"]
-	get_node("%Notifications").add_child(lbl)
 
 
 ###################################################################

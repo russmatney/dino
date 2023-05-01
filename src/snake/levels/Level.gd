@@ -3,14 +3,15 @@ extends Node2D
 ##########################################################################
 # ready
 
+# TODO do we need this reference?
 var player
 
 func _ready():
-	var _x = Quest.quest_failed.connect(_on_quest_failed)
-	var _y = Quest.all_quests_complete.connect(_on_all_quests_complete)
-	var _z = Hood.found_player.connect(_on_found_player)
-	if Hood.player:
-		_on_found_player(Hood.player)
+	Quest.quest_failed.connect(_on_quest_failed)
+	Quest.all_quests_complete.connect(_on_all_quests_complete)
+	Game.player_found.connect(_on_found_player)
+	if Game.player:
+		_on_found_player(Game.player)
 
 	setup.call_deferred()
 

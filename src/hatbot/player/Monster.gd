@@ -28,7 +28,7 @@ func _enter_tree():
 func _ready():
 	og_position = position
 	Cam.ensure_camera({zoom_level=5.0, player=self})
-	Hood.ensure_hud.call_deferred(hud, self)
+	Hood.ensure_hud(hud)
 	machine.start()
 	machine.transitioned.connect(_on_transit)
 
