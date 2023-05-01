@@ -54,8 +54,9 @@ func node_to_entry_key(node):
 		parents = Util.get_all_parents(node)
 		# reverse so our join puts the furthest ancestor first
 		parents.reverse()
+
+		# remove nonsensy intermediary parents in editor
 		if Engine.is_editor_hint():
-			# remove nonsensy intermediary parents in editor
 			parents = parents.filter(func(node):
 				return not node.name.begins_with("@@") and not node.name == "MainScreen")
 	var key = to_entry_key({path=node.name}, parents)
@@ -83,12 +84,28 @@ func to_entry_key(data, parents=[]):
 # write
 
 ## add a packed scene (and children) to the scene_db. Accepts PackedScene or a path to one (sfp).
-func book(packed_scene_or_path: Variant):
-	var data = Util.packed_scene_data(packed_scene_or_path)
-	book_data(data)
+func book(bookable: Variant):
+	var data
+	if bookable is PackedScene:
+		data = Util.packed_scene_data(bookable)
+		book_data(data)
+	elif bookable is String:
+		data = Util.packed_scene_data(bookable)
+		book_data(data)
+	elif bookable is Node:
+		data = Util.packed_scene_data(bookable.scene_file_path)
+		book_data(data, {node=bookable})
+	else:
+		Debug.warn("Unexpected type passed to Hotel.book/1:", bookable,
+			", nothing doing.")
 
-func book_data(data: Dictionary, parents = null, last_room = null):
+func book_data(data: Dictionary, opts = {}):
 	var scene_name = data[^"."]["name"]
+	var parents = opts.get("parents")
+	var last_room = opts.get("last_room")
+	var node = opts.get("node")
+	if node != null and parents == null or (parents != null and len(parents) == 0):
+		parents = Util.get_all_parents(node).map(func(p): return {name=p.name})
 
 	if parents == null:
 		parents = [data.values()[0]]
@@ -96,7 +113,11 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 	for path in data.keys():
 		var ps = parents.duplicate()
 		var d = data.get(path)
-		var key = to_entry_key(d, ps)
+		var key
+		if node:
+			key = node_to_entry_key(node)
+		else:
+			key = to_entry_key(d, ps)
 
 		# basic properties
 		var entry = d.get("properties", {})
@@ -141,13 +162,13 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 		# set zone and room names via parents
 		for p in ps:
 			# TODO refactor Metro out of here
-			if Metro.zones_group in p["groups"]:
-				entry["zone_name"] = p["name"]
+			if Metro.zones_group in p.get("groups", []):
+				entry["zone_name"] = p.get("name")
 
 		for p in ps:
 			# TODO refactor Metro out of here
-			if Metro.rooms_group in p["groups"]:
-				entry["room_name"] = str(p["zone_name"], "/", p["name"])
+			if Metro.rooms_group in p.get("groups", []):
+				entry["room_name"] = str(p.get("zone_name"), "/", p.get("name"))
 
 		# set room name for non-room-instance children (which are flattened here)
 		if not "room_name" in entry and last_room != null:
@@ -163,7 +184,7 @@ func book_data(data: Dictionary, parents = null, last_room = null):
 		# we do this AFTER updating scene_db to prevent instance overwriting
 		if "instance" in d:
 			ps.append(entry)
-			book_data(d["instance"], ps, last_room)
+			book_data(d["instance"], {parents=ps, last_room=last_room})
 
 ######################################################################
 # register

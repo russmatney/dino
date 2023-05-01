@@ -3,6 +3,9 @@ extends Node2D
 @onready var anim = $AnimatedSprite2D
 @onready var light = $PointLight2D
 
+func _enter_tree():
+	Hotel.book(self)
+
 func _ready():
 	Hotel.register(self)
 

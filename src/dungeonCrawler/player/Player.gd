@@ -9,6 +9,17 @@ class_name Player
 
 var initial_pos
 
+func _enter_tree():
+	Hotel.book(self)
+
+func hotel_data():
+	return {coins=coins, health=health, items=items}
+
+func check_out(data):
+	coins = data.get("coins", coins)
+	health = data.get("health", health)
+	items = data.get("items", items)
+
 func _ready():
 	Cam.ensure_camera({player=self})
 	Hood.ensure_hud()
@@ -201,6 +212,7 @@ var coins = 0
 
 func add_coin():
 	coins += 1
+	Hotel.check_in(self)
 
 	remove_info_message(coin_info_dict(coins - 1))
 	add_info_message(coin_info_dict(coins))
@@ -229,6 +241,7 @@ func remove_item(it):
 
 
 func update_item_info():
+	Hotel.check_in(self)
 	var key_ct = 0
 	for it in items:
 		if it.get("type") == "key":
@@ -380,6 +393,7 @@ var dead = false
 func hit():
 	health -= 1
 	Debug.pr("[PLAYER HIT]: remaining health = ", health)
+	Hotel.check_in(self)
 
 	remove_info_message(health_info_dict(health + 1))
 	add_info_message(health_info_dict(health))
