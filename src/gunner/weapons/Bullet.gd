@@ -22,7 +22,7 @@ func kill():
 	if not dying:
 		dying = true
 		Cam.screenshake(0.1)
-		GunnerSounds.play_sound("bullet_pop")
+		DJZ.play(DJZ.bullet_pop)
 		anim.set_visible(false)
 		pop.set_visible(true)
 

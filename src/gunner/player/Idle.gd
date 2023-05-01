@@ -7,7 +7,7 @@ func enter(ctx = {}):
 	actor.jump_count = 0
 
 	if "shake" in ctx and ctx["shake"]:
-		GunnerSounds.play_sound("heavy_landing")
+		DJZ.play(DJZ.heavy_landing)
 		if typeof(ctx["shake"]) == TYPE_FLOAT:
 			Cam.screenshake(ctx["shake"])
 		else:

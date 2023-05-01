@@ -12,7 +12,7 @@ func enter(_ctx = {}):
 	actor.anim.animation = "jump"
 	actor.velocity.y -= actor.jump_impulse
 	actor.velocity.y = max(-actor.jump_impulse, actor.velocity.y)
-	GunnerSounds.play_sound("jump")
+	DJZ.play(DJZ.jump)
 	actor.can_wall_jump = false
 
 	create_jump_ring()
@@ -50,7 +50,7 @@ func physics_process(delta):
 
 	if actor.is_on_wall():
 		if not actor.can_wall_jump:
-			GunnerSounds.play_sound("step")
+			DJZ.play(DJZ.step)
 			actor.can_wall_jump = true
 
 	if actor.velocity.y > 0:

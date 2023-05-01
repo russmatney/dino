@@ -74,7 +74,7 @@ func swoop(spot):
 
 	swooping = true
 	actor.anim.play("swooping")
-	DJSounds.play_sound(DJSounds.boss_swoop)
+	DJZ.play(DJZ.boss_swoop)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "global_position", pos, 0.4)\

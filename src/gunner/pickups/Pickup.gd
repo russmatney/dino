@@ -13,7 +13,7 @@ func _ready():
 
 
 func kill():
-	GunnerSounds.play_sound("pickup")
+	DJZ.play(DJZ.pickup)
 	# TODO animate
 	queue_free()
 

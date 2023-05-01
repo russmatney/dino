@@ -1,7 +1,7 @@
 extends State
 
 func enter(_ctx={}):
-	DJSounds.play_sound(DJSounds.jump)
+	DJZ.play(DJZ.jump)
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
 

@@ -45,16 +45,16 @@ func _on_transitioned(_state_label):
 
 func _on_death(_soldier):
 	Cam.screenshake(0.3)
-	DJSounds.play_sound(DJSounds.soldierdead)
+	DJZ.play(DJZ.soldierdead)
 	Hotel.check_in(self)
 
 func _on_knocked_back(_soldier):
 	if health <= 0:
 		anim.play("dying")
-		DJSounds.play_sound(DJSounds.soldierdead)
+		DJZ.play(DJZ.soldierdead)
 	else:
 		anim.play("knockback")
-		DJSounds.play_sound(DJSounds.soldierhit)
+		DJZ.play(DJZ.soldierhit)
 
 ########################################################
 # kick

@@ -14,10 +14,10 @@ func _ready():
 	var s = snds()
 	_sound_map = DJ.setup_sound_map(s)
 
-func play_sound(nm):
+func play(nm):
 	DJ.play_sound(_sound_map, nm)
 
-func interrupt_sound(nm):
+func interrupt(nm):
 	DJ.interrupt_sound(_sound_map, nm)
 
 func play_song(nm):

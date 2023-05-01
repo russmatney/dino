@@ -23,7 +23,7 @@ func _on_Area2D_body_entered(body: Node):
 
 	if body.has_method("add_coin"):
 		body.add_coin()
-		DJSounds.play_sound(DJSounds.coin)
+		DJZ.play(DJZ.coin)
 		collected = true
 		on_collected.emit(self)
 		disable()

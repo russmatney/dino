@@ -118,7 +118,7 @@ func take_damage(body = null, d = 1):
 	health -= d
 	health_change.emit(health)
 
-	GunnerSounds.play_sound("enemy_hit")
+	DJZ.play(DJZ.enemy_hit)
 
 	var dir = Vector2.DOWN
 	if body and body.global_position.x > global_position.x:
@@ -133,7 +133,7 @@ func die(remove_at = false):
 	is_dead = true
 	dead.emit()
 
-	GunnerSounds.play_sound("enemy_dead")
+	DJZ.play(DJZ.enemy_dead)
 	if remove_at:
 		queue_free()
 
@@ -146,7 +146,7 @@ var player
 
 func _on_VisionBox_body_entered(body: Node):
 	if body.is_in_group("player") and not body.is_dead:
-		GunnerSounds.play_sound("enemy_sees_you")
+		DJZ.play(DJZ.enemy_sees_you)
 		player = body
 
 
@@ -178,5 +178,5 @@ func fire_at_player():
 		bullet.rotation = angle_to_player.angle()
 		bullet.apply_impulse(angle_to_player * bullet_impulse, Vector2.ZERO)
 
-		GunnerSounds.play_sound("fire")
+		DJZ.play(DJZ.fire)
 		fired_bullet.emit(bullet)

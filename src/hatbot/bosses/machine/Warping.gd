@@ -29,7 +29,7 @@ func physics_process(delta):
 		# animate
 		actor.global_position = next_warp_spot.global_position
 
-		DJSounds.play_sound(DJSounds.bosswarp)
+		DJZ.play(DJZ.bosswarp)
 		actor.anim.play("warp-arrive")
 
 		# TODO wait until current animation ends

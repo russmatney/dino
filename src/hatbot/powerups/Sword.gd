@@ -75,7 +75,7 @@ func swing():
 	swinging = true
 	bodies_this_swing = []
 	play("swing")
-	DJSounds.play_sound(DJSounds.swordswing)
+	DJZ.play(DJZ.swordswing)
 	Cam.screenshake(0.18)
 
 func _on_frame_changed():
@@ -100,7 +100,7 @@ func _on_frame_changed():
 				# TODO prevent extra calls on each hit-frame if already hit
 				var destroyed = b.destroy_tile_with_rid(bs[0])
 				if destroyed:
-					DJSounds.play_sound(DJSounds.destroyed_block)
+					DJZ.play(DJZ.destroyed_block)
 					if not b in needs_redraw:
 						needs_redraw.append(b)
 

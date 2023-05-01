@@ -5,7 +5,7 @@ func enter(ctx={}):
 	actor.skull_particles.set_emitting(true)
 	if not ctx.get("ignore_side_effects", false):
 		Cam.screenshake(0.3)
-		# DJSounds.play_sound(DJSounds.playerdead)
+		# DJZ.play(DJZ.playerdead)
 		actor.player_death.emit()
 
 

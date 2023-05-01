@@ -210,7 +210,7 @@ func attempt_walk(next):
 		["snake", _]:
 			var s = info[1]
 			if s == self:
-				SnakeSounds.play_sound("bump")
+				DJZ.play(DJZ.bump)
 				highlight("[jump]ow!")
 			else:
 				# TODO enemies only chomp player

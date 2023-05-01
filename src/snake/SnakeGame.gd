@@ -1,12 +1,12 @@
 @tool
 extends Node
 
-var song_name = "field-stars"
+var song_name = DJZ.field_stars
 
 func _ready():
 	# TODO restore music
 	# if not Engine.is_editor_hint():
-	# 	SnakeSounds.play_song(song_name)
+	# 	DJZ.play_song(song_name)
 
 	if OS.has_feature("snake"):
 		Navi.set_main_menu("res://src/snake/menus/SnakeMainMenu.tscn")
@@ -17,7 +17,7 @@ func start_game():
 
 func all_levels_complete():
 	Hood.notif("Game complete!")
-	SnakeSounds.interrupt_song(song_name)
+	DJZ.interrupt_song(song_name)
 	Navi.show_win_menu()
 
 var levels = [{
