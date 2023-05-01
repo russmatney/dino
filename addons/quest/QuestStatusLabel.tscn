@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource path="res://addons/hood/QuestStatusLabelTheme.tres" type="Theme" id=1]
+[ext_resource type="Theme" path="res://addons/quest/QuestStatusLabelTheme.tres" id="1"]
 
 [node name="QuestStatusLabel" type="RichTextLabel"]
 offset_left = 28.0

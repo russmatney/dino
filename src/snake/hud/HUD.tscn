@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj3rq7d2c2alj"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://src/snake/hud/HUD.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c1vqfi3lpr4kv" path="res://addons/hood/NotifLabel.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://c223urhhg7xv3" path="res://addons/hood/NotifRichLabel.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://addons/hood/QuestStatus.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://addons/quest/QuestStatus.tscn" id="7"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")

@@ -7,7 +7,7 @@ var hotel_ui
 var editor_interface
 
 func _enter_tree():
-	Debug.prn("<HOTEL>")
+	Debug.pr("<HOTEL>")
 
 	hotel_ui = HotelUI.instantiate()
 	editor_interface = get_editor_interface()
@@ -20,7 +20,7 @@ func _enter_tree():
 
 
 func _exit_tree():
-	Debug.prn("</HOTEL>")
+	Debug.pr("</HOTEL>")
 
 	if hotel_ui:
 		hotel_ui.queue_free()

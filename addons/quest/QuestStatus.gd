@@ -2,7 +2,7 @@ extends PanelContainer
 
 var quests
 
-var checkbox_scene = preload("res://addons/hood/QuestStatusCheck.tscn")
+var checkbox_scene = preload("res://addons/quest/QuestStatusCheck.tscn")
 
 func render():
 	for c in get_node("%QuestList").get_children():

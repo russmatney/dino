@@ -29,7 +29,7 @@ run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
 Debug="*res://addons/core/Debug.gd"
 Util="*res://addons/core/Util.gd"
 Hood="*res://addons/hood/Hood.gd"
-Quest="*res://addons/hood/Quest.gd"
+Quest="*res://addons/quest/Quest.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
 Reptile="*res://addons/reptile/Reptile.gd"
@@ -64,7 +64,7 @@ naming/scene_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/hotel/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/quest/plugin.cfg")
 
 [global]
 
