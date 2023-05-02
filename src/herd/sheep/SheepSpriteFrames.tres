@@ -164,7 +164,21 @@ animations = [{
 }],
 "loop": true,
 "name": &"follow",
-"speed": 5.0
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rw1xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6grp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oahn4")
+}],
+"loop": true,
+"name": &"grabbed",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -181,5 +195,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8avgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmd5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybd4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuiug")
+}],
+"loop": true,
+"name": &"thrown",
+"speed": 15.0
 }]

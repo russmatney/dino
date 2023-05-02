@@ -18,7 +18,7 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jate3"]
 radius = 64.0703
 
-[node name="Sheep" type="CharacterBody2D"]
+[node name="Sheep" type="CharacterBody2D" groups=["npcs"]]
 collision_layer = 512
 collision_mask = 533
 script = ExtResource("1_fs8bu")
@@ -30,7 +30,7 @@ shape = SubResource("CapsuleShape2D_lfhc5")
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(2.25, 2.25)
 sprite_frames = ExtResource("2_a12nd")
-animation = &"all"
+animation = &"follow"
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_kftt6")
@@ -57,5 +57,3 @@ shape = SubResource("CircleShape2D_jate3")
 
 [node name="ActionHint" parent="." instance=ExtResource("8_540xg")]
 position = Vector2(0, -21)
-label_text = "call"
-key_or_action = "action"
