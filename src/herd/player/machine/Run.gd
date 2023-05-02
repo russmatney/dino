@@ -16,7 +16,7 @@ func process(_delta):
 
 ## physics ###########################################################
 
-var move_speed = 3000
+var move_speed = 8000
 
 func physics_process(delta):
 	var move_dir = actor.input_move_dir
@@ -27,6 +27,6 @@ func physics_process(delta):
 
 	# move in direction
 	var move_vec = move_dir * move_speed * delta
-	actor.velocity = actor.velocity.lerp(move_vec, 0.7)
+	actor.velocity = actor.velocity.lerp(move_vec, 0.9)
 
 	actor.move_and_slide()
