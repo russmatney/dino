@@ -32,7 +32,7 @@ func _ready():
 
 	$ColorRect.set_visible(false)
 
-	action_area.register_actions(actions, self)
+	action_area.register_actions(actions, {source=self})
 
 	var p = get_parent()
 	if p is MetroRoom:

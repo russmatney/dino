@@ -36,7 +36,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	action_area.register_actions(actions, self)
+	action_area.register_actions(actions, {source=self})
 
 	# make sure any setup code is called so we're in the expected state
 	set_door_state(state)

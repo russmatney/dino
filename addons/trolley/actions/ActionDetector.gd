@@ -9,6 +9,8 @@ func _ready():
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
 
+	current_action_changed.connect(update_displayed_action)
+
 var actor
 var action_hint
 
@@ -116,15 +118,23 @@ func nearest_action():
 
 var selected_ax_idx
 
+signal current_action_changed(action)
+var cached_current_action
+
 ## Returns the current action. Defaults to the nearest 'immediate' action,
 ## but if selected_ax_idx is set, it will return the 'immediate' action at that index.
 func current_action():
 	var im_axs = immediate_actions()
+	var new_current_action
 	if im_axs != null and len(im_axs) > 0:
 		if selected_ax_idx != null and selected_ax_idx < len(im_axs):
-			return im_axs[selected_ax_idx]
+			new_current_action = im_axs[selected_ax_idx]
 		else:
-			return find_nearest(im_axs)
+			new_current_action = find_nearest(im_axs)
+	if new_current_action != cached_current_action:
+		cached_current_action = new_current_action
+		current_action_changed.emit(new_current_action)
+	return new_current_action
 
 ## Supports cycling forward through available actions.
 ## TODO cycle according to distance
@@ -156,9 +166,14 @@ func execute_current_action():
 # action display
 
 var warned_no_action_hint
-func update_displayed_action():
+func update_displayed_action(action=null):
 	if action_hint:
-		var c_ax = current_action()
+		var c_ax
+		if action == null:
+			c_ax = current_action()
+		else:
+			c_ax = action
+
 		if c_ax:
 			action_hint.display(c_ax.input_action, c_ax.get_label())
 		else:

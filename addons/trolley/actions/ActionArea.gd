@@ -15,9 +15,15 @@ func _ready():
 # actions registry
 
 var actions: Array = []
+var action_hint
+var source
 
 ## register actions to be detected from this area
-func register_actions(axs, source=null):
+func register_actions(axs, opts={}):
+	source = opts.get("source")
+	action_hint = opts.get("action_hint")
+	if action_hint:
+		action_hint.hide()
 	for ax in axs:
 		if source and not ax.source:
 			ax.source = source
@@ -32,26 +38,29 @@ var actors = []
 func _on_body_entered(body):
 	if body.is_in_group("actors"):
 		actors.append(body)
-		update_actor_actions(body)
+		Util._connect(body.action_detector.current_action_changed, update_displayed_action)
+		body.action_detector.current_action()
 
 func _on_body_exited(body):
 	if body.is_in_group("actors"):
 		actors.erase(body)
-		update_actor_actions(body)
+		body.action_detector.current_action()
 
-func update_actor_actions(actor):
-	# requires exact field on actors!
-	if actor.action_detector:
-		actor.action_detector.update_displayed_action()
+func update_displayed_action(action=null):
+	if action_hint:
+		if action and source and action.source == source:
+			action_hint.display(action.input_action, action.get_label())
+		else:
+			action_hint.hide()
 
 	action_display_updated.emit()
+
 
 ####################################################################
 # ask if an action can be performed
 
 func is_current_for_any_actor(action):
 	for actor in actors:
-		# requires exact field on actors!
 		if actor.action_detector:
 			if action == actor.action_detector.current_action():
 				return true
@@ -62,7 +71,6 @@ func is_current_for_any_actor(action):
 func current_actions():
 	var current_axs = {}
 	for actor in actors:
-		# requires exact field on actors!
 		if actor.action_detector:
 			var c_ax = actor.action_detector.current_action()
 			if c_ax in actions:

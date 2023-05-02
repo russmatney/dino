@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
 @onready var aa = $ActionArea
+@onready var action_hint = $ActionHint
 
 ###########################################################
 # enter tree
@@ -18,7 +19,7 @@ func _ready():
 	machine.start()
 	Cam.add_offscreen_indicator(self)
 
-	aa.register_actions(actions, self)
+	aa.register_actions(actions, {source=self, action_hint=action_hint})
 
 func hotel_data():
 	return {}

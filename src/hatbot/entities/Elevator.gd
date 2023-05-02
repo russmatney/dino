@@ -23,7 +23,7 @@ func _ready():
 	# TODO pass in validation function
 	Hotel.register(self)
 
-	action_area.register_actions(actions, self)
+	action_area.register_actions(actions, {source=self})
 	anim.animation_finished.connect(_on_anim_finished)
 
 	z_index = 10

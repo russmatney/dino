@@ -41,8 +41,8 @@ func update_state():
 func _ready():
 	Hotel.register(self)
 
-	front_action_area.register_actions(front_actions, self)
-	back_action_area.register_actions(back_actions, self)
+	front_action_area.register_actions(front_actions, {source=self})
+	back_action_area.register_actions(back_actions, {source=self})
 
 	update_state()
 	anim.animation_finished.connect(_on_animation_finished)

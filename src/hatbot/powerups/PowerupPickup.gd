@@ -26,7 +26,7 @@ var picked_up = false
 
 func _ready():
 	Hotel.register(self)
-	action_area.register_actions(actions, self)
+	action_area.register_actions(actions, {source=self})
 
 ##############################################################
 # hotel

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc5niorn445ij"]
+[gd_scene load_steps=11 format=3 uid="uid://bc5niorn445ij"]
 
 [ext_resource type="Script" path="res://src/herd/sheep/Sheep.gd" id="1_fs8bu"]
 [ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/herd/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Follow.gd" id="5_x6igx"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="6_6810x"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="7_sxgat"]
+[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="8_540xg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfhc5"]
 radius = 9.0
@@ -45,3 +46,8 @@ importance = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 shape = SubResource("CircleShape2D_jate3")
+
+[node name="ActionHint" parent="." instance=ExtResource("8_540xg")]
+position = Vector2(0, -21)
+label_text = "call"
+key_or_action = "action"
