@@ -1,8 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc5niorn445ij"]
+[gd_scene load_steps=11 format=3 uid="uid://6sj01yybi4qt"]
 
 [ext_resource type="Script" path="res://src/herd/sheep/Sheep.gd" id="1_fs8bu"]
 [ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/herd/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
-[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_7n2ch"]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_kftt6"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Idle.gd" id="4_ttqdq"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Follow.gd" id="5_x6igx"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="6_6810x"]
@@ -31,13 +31,15 @@ sprite_frames = ExtResource("2_a12nd")
 animation = &"all"
 
 [node name="Machine" type="Node" parent="."]
-script = ExtResource("3_7n2ch")
+script = ExtResource("3_kftt6")
 
 [node name="Idle" type="Node" parent="Machine"]
 script = ExtResource("4_ttqdq")
 
 [node name="Follow" type="Node" parent="Machine"]
 script = ExtResource("5_x6igx")
+
+[node name="Grabbed" type="Node" parent="Machine"]
 
 [node name="CamPOI" parent="." instance=ExtResource("6_6810x")]
 importance = 0.5

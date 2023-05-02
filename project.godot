@@ -61,7 +61,6 @@ window/stretch/aspect.runner="keep"
 
 [editor]
 
-script/templates_search_path="sres://script_templates"
 naming/scene_name_casing=1
 
 [editor_plugins]

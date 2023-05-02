@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://2bgb2loy27c0"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://56tkepq2e4p6" path="res://src/pluggs/player/PluggsSpriteFrames.tres" id="1"]
 [ext_resource type="Script" path="res://src/pluggs/player/Pluggs.gd" id="2"]
 [ext_resource type="Script" path="res://src/pluggs/player/Stand.gd" id="3"]
-[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="4"]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="4"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5"]
 [ext_resource type="Script" path="res://src/pluggs/player/Run.gd" id="6"]
 [ext_resource type="Script" path="res://src/pluggs/player/Bucket.gd" id="7"]

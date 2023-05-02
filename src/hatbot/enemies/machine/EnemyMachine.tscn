@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3]
 
-[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="1_avc5j"]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_avc5j"]
 [ext_resource type="Script" path="res://src/hatbot/enemies/machine/Idle.gd" id="2_08acf"]
 [ext_resource type="Script" path="res://src/hatbot/enemies/machine/Dead.gd" id="3_d45r6"]
 [ext_resource type="Script" path="res://src/hatbot/enemies/machine/KnockedBack.gd" id="4_nhn0v"]

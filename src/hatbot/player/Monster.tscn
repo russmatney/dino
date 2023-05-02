@@ -3,7 +3,7 @@
 [ext_resource type="SpriteFrames" uid="uid://b7n3u8ytapvb4" path="res://src/hatbot/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/hatbot/player/Monster.gd" id="1_wj1cn"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="2_go366"]
-[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_hxyr2"]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_hxyr2"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Idle.gd" id="4_h5e7h"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Run.gd" id="5_x1nnv"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Jump.gd" id="6_e7xnp"]

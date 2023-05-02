@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://kaba3l5rrf7x"]
+[gd_scene load_steps=24 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/player/Player.gd" id="2"]
 [ext_resource type="Script" path="res://src/gunner/player/Run.gd" id="3"]
 [ext_resource type="Script" path="res://src/gunner/player/Idle.gd" id="4"]
-[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="5"]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="5"]
 [ext_resource type="Theme" path="res://src/gunner/StateLabelTheme.tres" id="6"]
 [ext_resource type="Script" path="res://src/gunner/player/Jump.gd" id="7"]
 [ext_resource type="Script" path="res://src/gunner/player/Fall.gd" id="8"]

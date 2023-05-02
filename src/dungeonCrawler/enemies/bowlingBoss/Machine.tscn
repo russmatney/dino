@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource path="res://addons/beehive/machine.gd" type="Script" id=1]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Idle.gd" type="Script" id=2]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Attack.gd" type="Script" id=3]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Engaged.gd" type="Script" id=4]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Bowling.gd" type="Script" id=5]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Moving.gd" type="Script" id=6]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Dead.gd" type="Script" id=7]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/Idle.gd" id="2"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/Attack.gd" id="3"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/Engaged.gd" id="4"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/Bowling.gd" id="5"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/Moving.gd" id="6"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/Dead.gd" id="7"]
 
 [node name="Machine" type="Node"]
 script = ExtResource( 1 )
