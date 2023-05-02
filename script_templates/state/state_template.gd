@@ -1,3 +1,6 @@
+# meta-default: true
+# meta-description: Base template for Node with default Godot cycle methods
+
 extends State
 
 ## enter ###########################################################

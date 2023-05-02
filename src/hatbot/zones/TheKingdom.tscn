@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cryf8vod8ma6u"]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_javx7"]
 [ext_resource type="Shader" path="res://src/hatbot/BgBlur.gdshader" id="2_wvs4k"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Coin.tscn" id="7_6utu0"]
 [ext_resource type="PackedScene" path="res://src/hatbot/powerups/PowerupPickup.tscn" id="7_x20i6"]
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="8_1itx7"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/PlayerSpawnPoint.tscn" id="8_typcp"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="8_typcp"]
 [ext_resource type="PackedScene" uid="uid://bsqct20ehmuff" path="res://src/hatbot/bosses/monstroar/Monstroar.tscn" id="9_ggu7q"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/hatbot/bosses/WarpSpot.tscn" id="10_8esf0"]
 [ext_resource type="PackedScene" path="res://src/hatbot/CoinDoorQuest.tscn" id="11_4yi87"]

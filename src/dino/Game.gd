@@ -17,7 +17,7 @@ func _ready():
 # handling current_game (for dev-mode), could live elsewhere
 
 # NOTE these need to auto-load BEFORE Game.gd
-var games = [HatBot, DemoLand, DungeonCrawler, Ghosts]
+var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd]
 
 func game_for_scene(sfp):
 	var gs = games.filter(func(g): return g and g.manages_scene(sfp))
@@ -119,11 +119,11 @@ func _on_player_found(p):
 
 var spawning = false
 func respawn_player(opts={}):
-	if not current_game:
+	if current_game == null:
 		Debug.warn("No current_game, can't spawn (or respawn) player")
 		return
-	if not current_game.get_player_scene():
-		Debug.warn("current_game has not player_scene, can't respawn player", current_game)
+	if current_game.get_player_scene() == null:
+		Debug.warn("current_game has no player_scene, can't respawn player", current_game)
 		return
 
 	spawning = true

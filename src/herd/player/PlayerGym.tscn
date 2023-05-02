@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6vlvlwgsjv3y"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_4up0m"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="1_w00sm"]
+
+[node name="PlayerGym" type="Node"]
+script = ExtResource("1_4up0m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -72.0
+offset_top = -66.0
+offset_right = 91.0
+offset_bottom = 52.0
+color = Color(0.172549, 0.419608, 0.572549, 1)
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("1_w00sm")]
+position = Vector2(5, -3)

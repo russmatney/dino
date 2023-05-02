@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0n0fxf4ij0ht"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_70tql"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_46u0y"]
 [ext_resource type="PackedScene" uid="uid://cmaxg11lghsbw" path="res://addons/reptile/tilemaps/3x3TileMap.tscn" id="3_mknff"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/PlayerSpawnPoint.tscn" id="4_7lh34"]
-[ext_resource type="PackedScene" uid="uid://gosjcf3y2i74" path="res://src/dungeonCrawler/Door.tscn" id="5_bxy1b"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="4_7lh34"]
+[ext_resource type="PackedScene" path="res://src/dungeonCrawler/Door.tscn" id="5_bxy1b"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/BowItem.tscn" id="6_5iw3v"]
 [ext_resource type="PackedScene" uid="uid://bqnlkmtoprs0x" path="res://src/dungeonCrawler/enemies/Goomba.tscn" id="6_khx33"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Key.tscn" id="7_l36k0"]

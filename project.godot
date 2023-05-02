@@ -49,7 +49,8 @@ HatBot="*res://src/hatbot/HatBot.gd"
 DemoLand="*res://src/demoland/DemoLand.gd"
 DungeonCrawler="*res://src/dungeonCrawler/DungeonCrawler.gd"
 Metro="*res://addons/metro/Metro.gd"
-Game="*res://src/Game.gd"
+Herd="*res://src/herd/Herd.gd"
+Game="*res://src/dino/Game.gd"
 
 [display]
 
@@ -60,6 +61,7 @@ window/stretch/aspect.runner="keep"
 
 [editor]
 
+script/templates_search_path="sres://script_templates"
 naming/scene_name_casing=1
 
 [editor_plugins]

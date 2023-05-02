@@ -99,7 +99,7 @@ func player_spawn_coords() -> Vector2:
 	if Game.is_managed:
 		markers = markers.filter(func(ma): return not ma.dev_only)
 
-	markers.sort_custom(func(ma, mb): return ma.last_sat_at > mb.last_sat_at)
+	markers.sort_custom(func(ma, mb): return ma.last_visited > mb.last_visited)
 
 	if len(markers) > 0:
 		return markers[0].global_position
