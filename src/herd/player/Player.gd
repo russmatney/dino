@@ -28,3 +28,8 @@ func check_out(data):
 	Debug.pr("player check out", data)
 
 ######################################################
+
+var input_move_dir = Vector2.ZERO
+
+func _physics_process(_delta):
+	input_move_dir = Trolley.move_dir()

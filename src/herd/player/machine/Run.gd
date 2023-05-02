@@ -4,7 +4,7 @@ extends State
 
 
 func enter(_arg = {}):
-	actor.anim.play("idle")
+	actor.anim.play("run")
 
 
 ## process ###########################################################
@@ -16,6 +16,17 @@ func process(_delta):
 
 ## physics ###########################################################
 
+var move_speed = 3000
 
-func physics_process(_delta):
-	pass
+func physics_process(delta):
+	var move_dir = actor.input_move_dir
+
+	if move_dir.abs().length() < 0.01:
+		transit("Idle")
+		return
+
+	# move in direction
+	var move_vec = move_dir * move_speed * delta
+	actor.velocity = actor.velocity.lerp(move_vec, 0.7)
+
+	actor.move_and_slide()

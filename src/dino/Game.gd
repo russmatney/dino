@@ -106,7 +106,8 @@ func _find_player(p=null):
 		player = ps[0]
 		Debug.pr("found player: ", player)
 	else:
-		Debug.warn("could not find player, zero in player_group: ", player_group)
+		# too noisy, and corrected later on after startup
+		# Debug.warn("could not find player, zero in player_group: ", player_group)
 		return
 
 	player_found.emit(player)
