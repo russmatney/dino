@@ -17,9 +17,9 @@ func _enter_tree():
 func _ready():
 	Hotel.register(self)
 	Hood.ensure_hud()
-	Cam.ensure_camera({player=self})
+	Cam.ensure_camera({player=self, zoom_margin_min=100})
 	machine.start()
-	action_detector.setup(self, {action_hint=ah})
+	action_detector.setup(self)
 
 
 ######################################################
