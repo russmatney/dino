@@ -18,9 +18,8 @@ shape = SubResource("CapsuleShape2D_bwxwm")
 position = Vector2(7.15256e-07, 8.9407e-07)
 scale = Vector2(2.5, 3.75)
 sprite_frames = ExtResource("2_1bdvx")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
-frame_progress = 0.222651
 
 [node name="Machine" type="Node" parent="."]
 script = ExtResource("3_ths04")

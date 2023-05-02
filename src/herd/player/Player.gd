@@ -24,8 +24,8 @@ func _ready():
 func hotel_data():
 	return {}
 
-func check_out(data):
-	Debug.pr("player check out", data)
+func check_out(_data):
+	pass
 
 ######################################################
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6vlvlwgsjv3y"]
+[gd_scene load_steps=4 format=3 uid="uid://b6vlvlwgsjv3y"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_4up0m"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="1_w00sm"]
+[ext_resource type="PackedScene" uid="uid://kfqs21j80hus" path="res://src/herd/player/Player.tscn" id="3_llsrj"]
 
 [node name="PlayerGym" type="Node"]
 script = ExtResource("1_4up0m")
@@ -15,3 +16,6 @@ color = Color(0.172549, 0.419608, 0.572549, 1)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("1_w00sm")]
 position = Vector2(5, -3)
+
+[node name="Player" parent="." instance=ExtResource("3_llsrj")]
+position = Vector2(-31, -10)

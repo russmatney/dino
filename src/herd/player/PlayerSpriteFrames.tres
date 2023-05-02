@@ -146,6 +146,40 @@ animations = [{
 "texture": SubResource("AtlasTexture_imyvr")
 }],
 "loop": true,
+"name": &"all",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57x4l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c1xv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkp21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5gjh")
+}],
+"loop": true,
 "name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a21b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7d6g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1qt3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owm0j")
+}],
+"loop": true,
+"name": &"run",
 "speed": 3.0
 }]
