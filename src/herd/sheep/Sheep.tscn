@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://bc5niorn445ij"]
+
+[ext_resource type="Script" path="res://src/herd/sheep/Sheep.gd" id="1_fs8bu"]
+[ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/herd/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
+[ext_resource type="Script" path="res://addons/beehive/machine.gd" id="3_7n2ch"]
+[ext_resource type="Script" path="res://src/herd/sheep/machine/Idle.gd" id="4_ttqdq"]
+[ext_resource type="Script" path="res://src/herd/sheep/machine/Follow.gd" id="5_x6igx"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="6_6810x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfhc5"]
+radius = 9.0
+height = 18.0
+
+[node name="Sheep" type="CharacterBody2D"]
+script = ExtResource("1_fs8bu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lfhc5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(2.25, 2.25)
+sprite_frames = ExtResource("2_a12nd")
+animation = &"all"
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("3_7n2ch")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("4_ttqdq")
+
+[node name="Follow" type="Node" parent="Machine"]
+script = ExtResource("5_x6igx")
+
+[node name="CamPOI" parent="." instance=ExtResource("6_6810x")]
+importance = 0.5

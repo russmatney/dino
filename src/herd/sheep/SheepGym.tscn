@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://klp1ph3xr7x1"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_n5axb"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="2_mbd5v"]
+[ext_resource type="PackedScene" uid="uid://bc5niorn445ij" path="res://src/herd/sheep/Sheep.tscn" id="3_72myu"]
+
+[node name="SheepGym" type="Node"]
+script = ExtResource("1_n5axb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -194.0
+offset_top = -132.0
+offset_right = 183.0
+offset_bottom = 99.0
+color = Color(0.174225, 0.420002, 0.570602, 1)
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("2_mbd5v")]
+position = Vector2(-3, -3)
+
+[node name="Sheep" parent="." instance=ExtResource("3_72myu")]
+position = Vector2(63, -55)
+
+[node name="Sheep2" parent="." instance=ExtResource("3_72myu")]
+position = Vector2(77, -42)
+
+[node name="Sheep3" parent="." instance=ExtResource("3_72myu")]
+position = Vector2(100, -5)
+
+[node name="Sheep4" parent="." instance=ExtResource("3_72myu")]
+position = Vector2(-143, 32)
