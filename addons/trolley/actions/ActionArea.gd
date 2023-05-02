@@ -40,6 +40,7 @@ func _on_body_exited(body):
 		update_actor_actions(body)
 
 func update_actor_actions(actor):
+	# requires exact field on actors!
 	if actor.action_detector:
 		actor.action_detector.update_displayed_action()
 
@@ -50,6 +51,7 @@ func update_actor_actions(actor):
 
 func is_current_for_any_actor(action):
 	for actor in actors:
+		# requires exact field on actors!
 		if actor.action_detector:
 			if action == actor.action_detector.current_action():
 				return true
@@ -60,6 +62,7 @@ func is_current_for_any_actor(action):
 func current_actions():
 	var current_axs = {}
 	for actor in actors:
+		# requires exact field on actors!
 		if actor.action_detector:
 			var c_ax = actor.action_detector.current_action()
 			if c_ax in actions:

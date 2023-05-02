@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
+@onready var action_detector = $ActionDetector
+@onready var ah = $ActionHint
 
 ######################################################
 # enter_tree
@@ -17,6 +19,8 @@ func _ready():
 	Hood.ensure_hud()
 	Cam.ensure_camera({player=self})
 	machine.start()
+	action_detector.setup(self, {action_hint=ah})
+
 
 ######################################################
 # hotel
@@ -33,3 +37,7 @@ var input_move_dir = Vector2.ZERO
 
 func _physics_process(_delta):
 	input_move_dir = Trolley.move_dir()
+
+func _unhandled_input(event):
+	if Trolley.is_action(event):
+		action_detector.execute_current_action()

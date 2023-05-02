@@ -15,17 +15,15 @@ var action_hint
 # used to prevent player actions, e.g. while sitting
 var can_execute_any_actions = func(): return true
 
-func setup(a, can_execute_any=null, ac_hint=null):
+func setup(a, opts={}):
 	actor = a
 	# required to be added to ActionAreas
 	actor.add_to_group("actors", true)
+
+	can_execute_any_actions = opts.get("can_execute_any", func(): return true)
+	action_hint = opts.get("action_hint")
+
 	Debug.prn("actor configured: ", a)
-
-	if can_execute_any:
-		can_execute_any_actions = can_execute_any
-
-	if ac_hint:
-		action_hint = ac_hint
 
 ####################################################################
 # process

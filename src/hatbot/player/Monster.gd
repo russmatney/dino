@@ -37,7 +37,7 @@ func _ready():
 
 	Hotel.register(self)
 
-	action_detector.setup(self, can_execute_any_actions, action_hint)
+	action_detector.setup(self, {can_execute_any=can_execute_any_actions, action_hint=action_hint})
 
 	if not has_sword:
 		sword.set_visible(false)

@@ -23,7 +23,7 @@ func check_out(data):
 func _ready():
 	Cam.ensure_camera({player=self})
 	Hood.ensure_hud()
-	action_detector.setup(self, null, action_hint)
+	action_detector.setup(self, {action_hint=action_hint})
 
 	initial_pos = get_global_position()
 	anim.flip_h = facing == facing_dir.RIGHT

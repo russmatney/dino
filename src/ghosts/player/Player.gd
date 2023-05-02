@@ -49,7 +49,7 @@ func _ready():
 			proximity_max=450,
 			})
 
-		action_detector.setup(self, null, action_hint)
+		action_detector.setup(self, {action_hint=action_hint})
 
 		initial_pos = get_global_position()
 		machine.transitioned.connect(on_transit)
