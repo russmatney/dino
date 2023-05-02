@@ -14,6 +14,7 @@ var source_can_execute: Callable = func(): return true
 var actor_can_execute: Callable = func(_a): return true
 var area
 var requires_proximity: bool = true
+var maximum_distance: float
 var requires_line_of_sight: bool = true
 
 #################################################################
@@ -65,6 +66,11 @@ static func mk(opts) -> Action:
 	if requires_proximity != null:
 		ax.requires_proximity = requires_proximity
 
+	var maximum_distance = opts.get("maximum_distance")
+	if maximum_distance != null:
+		ax.maximum_distance = maximum_distance
+		ax.requires_proximity = true
+
 	var requires_line_of_sight = opts.get("requires_line_of_sight")
 	if requires_line_of_sight != null:
 		ax.requires_line_of_sight = requires_line_of_sight
@@ -82,6 +88,12 @@ func can_execute(actor) -> bool:
 
 func close_enough_to_execute(actor) -> bool:
 	if requires_proximity:
+		if maximum_distance != 0.0:
+			if area.source == null:
+				Debug.err("Cannot support `maximum_distance` without `area.source`")
+			else:
+				var dist = actor.global_position.distance_to(area.source.global_position)
+				return dist <= maximum_distance
 		return actor in area.actors
 	return true
 

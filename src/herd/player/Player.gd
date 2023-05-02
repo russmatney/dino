@@ -35,9 +35,36 @@ func check_out(_data):
 
 var input_move_dir = Vector2.ZERO
 
+var facing_dir
+
 func _physics_process(_delta):
 	input_move_dir = Trolley.move_dir()
+	if input_move_dir.abs().length() > 0:
+		# TODO snap/round to discrete angles
+		facing_dir = input_move_dir
+
+		# update current action while we're moving?
+		# might be annoying
+		action_detector.current_action()
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		action_detector.execute_current_action()
+
+######################################################
+# grab/throw
+
+var grabbing
+
+func can_grab():
+	return grabbing ==null
+
+func grab(node):
+	Debug.pr("grabbed", node)
+	grabbing = node
+
+func throw(node):
+	Debug.pr("throw", node, facing_dir)
+	grabbing = null
+	# could pass throw_speed
+	return {direction=facing_dir}

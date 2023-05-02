@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_4up0m"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="1_w00sm"]
-[ext_resource type="PackedScene" uid="uid://kfqs21j80hus" path="res://src/herd/player/Player.tscn" id="3_llsrj"]
+[ext_resource type="PackedScene" uid="uid://ifa4epqvkp5i" path="res://src/herd/player/Player.tscn" id="3_llsrj"]
 
 [node name="PlayerGym" type="Node"]
 script = ExtResource("1_4up0m")

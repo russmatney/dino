@@ -4,16 +4,11 @@ extends State
 ## enter ###########################################################
 
 
-func enter(opts = {}):
+func enter(_opts = {}):
 	actor.anim.play("follow")
-	actor.target = opts.get("target")
 
-
-## process ###########################################################
-
-func process(_delta):
-	pass
-
+func exit(_opts = {}):
+	actor.following = null
 
 ## physics ###########################################################
 
@@ -22,11 +17,11 @@ var move_speed = 5000
 
 
 func physics_process(delta):
-	if actor.target == null or not is_instance_valid(actor.target):
+	if actor.following == null or not is_instance_valid(actor.following):
 		transit("Idle")
 		return
 
-	var target_vec = actor.target.global_position - actor.global_position
+	var target_vec = actor.following.global_position - actor.global_position
 	var dist = target_vec.abs().length()
 	if dist > distance_threshold:
 		var move_vec = target_vec.normalized() * move_speed * delta

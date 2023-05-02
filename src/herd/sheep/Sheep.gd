@@ -32,14 +32,43 @@ func check_out(_data):
 var actions = [
 	Action.mk({
 		label_fn=func(): return str("Call ", name),
-		fn=call_from_player,
-		source_can_execute=func(): return target == null,
+		fn=called_by_player,
+		source_can_execute=func(): return following == null and grabbed_by == null,
+		}),
+	Action.mk({
+		label_fn=func(): return str("Grab ", name),
+		fn=grabbed_by_player,
+		maximum_distance=50.0,
+		source_can_execute=func(): return following != null,
+		actor_can_execute=func(player): return following == player and player.can_grab(),
+		}),
+	Action.mk({
+		label_fn=func(): return str("Throw ", name),
+		fn=thrown_by_player,
+		source_can_execute=func(): return grabbed_by != null,
+		actor_can_execute=func(player): return player.grabbing == self,
 		})
 	]
 
-var target
+var following
+var grabbed_by
 
-func call_from_player(player):
-	Debug.pr(name, "call from player", player)
+func called_by_player(player):
+	Debug.pr(name, "called by player", player)
+	following = player
+	machine.transit("Follow")
 
-	machine.transit("Follow", {target=player})
+func grabbed_by_player(player):
+	Debug.pr(name, "grabbed by player", player)
+	player.grab(self)
+	grabbed_by = player
+	machine.transit("Grabbed")
+
+func thrown_by_player(player):
+	Debug.pr(name, "thrown by player", player)
+	var opts = player.throw(self)
+	if opts != null:
+		machine.transit("Thrown", {
+			direction=opts.get("direction", Vector2.LEFT),
+			throw_speed=opts.get("throw_speed")
+			})

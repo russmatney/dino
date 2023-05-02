@@ -268,3 +268,14 @@ func animate(node):
 		Tween.TRANS_CUBIC
 	)
 	tween.tween_interval(randf_range(0.3, 2.0))
+
+
+#################################################################
+## dictionaries
+
+func get_(opts: Dictionary, key: String, default: Variant):
+	var v = opts.get(key)
+	if v:
+		return v
+	else:
+		return default
