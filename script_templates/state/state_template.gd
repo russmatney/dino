@@ -6,7 +6,7 @@ extends State
 ## enter ###########################################################
 
 
-func enter(_arg = {}):
+func enter(_opts = {}):
 	pass
 
 

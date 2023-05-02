@@ -31,10 +31,15 @@ func check_out(_data):
 
 var actions = [
 	Action.mk({
-		label="Call",
+		label_fn=func(): return str("Call ", name),
 		fn=call_from_player,
+		source_can_execute=func(): return target == null,
 		})
 	]
 
+var target
+
 func call_from_player(player):
-	Debug.pr("call from player", player)
+	Debug.pr(name, "call from player", player)
+
+	machine.transit("Follow", {target=player})

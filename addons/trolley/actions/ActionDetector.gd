@@ -65,7 +65,7 @@ func update_actions():
 	for area in action_areas:
 		actions.append_array(area.actions)
 
-	update_displayed_action()
+	current_action()
 
 	# maybe reset selection here? probably should maintain the current if it still exists
 	# selected_ax_idx = 0
@@ -123,6 +123,9 @@ var cached_current_action
 
 ## Returns the current action. Defaults to the nearest 'immediate' action,
 ## but if selected_ax_idx is set, it will return the 'immediate' action at that index.
+##
+## NOTE side-effects! this function emits `current_action_changed`
+## when the value changes, causing ui (action_hint) updates
 func current_action():
 	var im_axs = immediate_actions()
 	var new_current_action
@@ -142,7 +145,7 @@ func inc_selected_ax_idx():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		selected_ax_idx += 1 % len(im_axs)
-	update_displayed_action()
+	current_action()
 
 ## Supports cycling backwards through available actions.
 ## TODO cycle according to distance
@@ -150,7 +153,7 @@ func dec_selected_ax_idx():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
 		selected_ax_idx -= 1 % len(im_axs)
-	update_displayed_action()
+	current_action()
 
 ## Executes the result of `current_action()`.
 ## Does nothing if there is no 'immediate' action available.
@@ -158,7 +161,7 @@ func execute_current_action():
 	var c_ax = current_action()
 	if c_ax:
 		c_ax.execute(actor)
-		update_displayed_action()
+		current_action()
 		return true
 	return false
 

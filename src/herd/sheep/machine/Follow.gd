@@ -4,8 +4,9 @@ extends State
 ## enter ###########################################################
 
 
-func enter(_arg = {}):
+func enter(opts = {}):
 	actor.anim.play("follow")
+	actor.target = opts.get("target")
 
 
 ## process ###########################################################
