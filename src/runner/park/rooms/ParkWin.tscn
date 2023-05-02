@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dism2e7rlboit"]
+[gd_scene load_steps=6 format=3 uid="uid://dism2e7rlboit"]
 
 [ext_resource type="PackedScene" uid="uid://cnvt0oin03ds5" path="res://src/runner/park/Ground.tscn" id="1"]
 [ext_resource type="Script" path="res://src/runner/park/rooms/ParkWin.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cnqlhkc1en442" path="res://assets/sprites/runner_leaf_friend_sheet.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_bgcyr"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(512, 172)
@@ -26,3 +27,6 @@ offset_top = -152.0
 offset_right = 157.0
 offset_bottom = -24.0
 texture = ExtResource("3")
+
+[node name="CamPOF" parent="." instance=ExtResource("4_bgcyr")]
+position = Vector2(136, -152)

@@ -110,8 +110,11 @@ var roombox
 var enterbox
 var exitbox
 
+func _enter_tree():
+	Hotel.book(self)
 
 func _ready():
+	Hotel.register(self)
 	setup()
 
 	if Engine.is_editor_hint():
@@ -120,13 +123,18 @@ func _ready():
 	# useful when debugging room calcs
 	# my_print_debug.call_deferred()
 
-
 func my_print_debug():
 	Debug.pr("---------------------------------------------")
 	Debug.pr(name, " debug report")
 	Debug.pr("room_width(): ", room_width())
 	Debug.pr("x_offset(): ", x_offset())
 	Debug.pr("---------------------------------------------")
+
+func hotel_data():
+	return {is_finished=is_finished()}
+
+func check_out(data):
+	Debug.pr(data)
 
 
 # called in _ready() AND when unfinished rooms are re-added to the view

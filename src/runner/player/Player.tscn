@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3j7q7dts6qw3"]
+[gd_scene load_steps=5 format=3 uid="uid://c3j7q7dts6qw3"]
 
 [ext_resource type="SpriteFrames" uid="uid://byiv2lmrdsg4j" path="res://src/runner/player/redhat_running_sprites.tres" id="1"]
 [ext_resource type="Script" path="res://src/runner/player/Player.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="3_f427i"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(7, 12)
@@ -18,3 +19,6 @@ sprite_frames = ExtResource("1")
 animation = &"run"
 frame = 2
 flip_h = true
+
+[node name="CamPOF" parent="." instance=ExtResource("3_f427i")]
+position = Vector2(128, 0)

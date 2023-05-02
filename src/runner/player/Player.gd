@@ -24,12 +24,22 @@ var jump_velocity = Vector2(0, -700)
 
 var restart_pos: Vector2
 
+func _enter_tree():
+	Hotel.book(self)
 
 func _ready():
+	Hotel.register(self)
 	restart_pos = global_position
 
-	Cam.ensure_camera({player=self})
+	Cam.ensure_camera({player=self, zoom_rect_min=100, zoom_rect_max=300})
+	Hood.ensure_hud()
 
+func hotel_data():
+	return {coins=coins, leaves=leaves}
+
+func check_out(data):
+	coins = data.get("coins", coins)
+	leaves = data.get("leaves", leaves)
 
 #######################################################################33
 # input
@@ -117,27 +127,19 @@ func _physics_process(_delta):
 #######################################
 # pickups
 
-
-func update_hud():
-	Debug.pr("------------")
-	Debug.pr("player stats: coins: ", coins)
-	Debug.pr("leaves: ", leaves)
-
-
 var coins = 0
-
 
 func add_coin():
 	coins += 1
-	update_hud()
-
+	Hotel.check_in(self)
+	Hood.notif("Grabbed a coin!")
 
 var leaves = []
 
-
 func caught_leaf(leaf_data):
 	leaves.append(leaf_data)
-	update_hud()
+	Hotel.check_in(self)
+	Hood.notif("Caught a leaf!")
 
 
 ###########################################
