@@ -95,6 +95,7 @@ func _on_bullet_collided(
 func bullet_hit():
 	health -= 1
 	Hotel.check_in(self)
+	Cam.screenshake(0.3)
 
 	health = clamp(health, 0, max_health)
 

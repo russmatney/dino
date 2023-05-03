@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://csx6tdg3uv1w5"]
+
+[ext_resource type="Script" path="res://src/herd/hud/HUD.gd" id="1_d1hbh"]
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="1_dui23"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="2_m0eoj"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_d1hbh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeartsContainer" parent="HBoxContainer/VBoxContainer2" instance=ExtResource("1_dui23")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Notifications" parent="HBoxContainer/VBoxContainer2/ScrollContainer" instance=ExtResource("2_m0eoj")]
+layout_mode = 2
+alignment = 2

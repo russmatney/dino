@@ -17,9 +17,11 @@ func _enter_tree():
 ######################################################
 # ready
 
+var hud = preload("res://src/herd/hud/HUD.tscn")
+
 func _ready():
 	Hotel.register(self)
-	Hood.ensure_hud()
+	Hood.ensure_hud(hud)
 	Cam.ensure_camera({player=self,
 		zoom_margin_min=100,
 		zoom_rect_min=150,
@@ -90,6 +92,7 @@ func _on_bullet_collided(
 func bullet_hit():
 	health -= 1
 	Hotel.check_in(self)
+	Cam.screenshake(0.4)
 
 	health = clamp(health, 0, max_health)
 
