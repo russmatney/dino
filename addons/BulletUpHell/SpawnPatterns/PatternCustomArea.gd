@@ -3,6 +3,8 @@
 extends NavigationPolygon
 class_name PatternCustomArea
 
+var symmetric:bool = false
+
 var polygon:PackedVector2Array
 var pos:Array = []
 var center_pos:Vector2

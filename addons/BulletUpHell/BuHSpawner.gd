@@ -752,10 +752,12 @@ func get_RID_from_index(source_area:RID, index:int) -> RID:
 	return Phys.area_get_shape(source_area, index)
 
 func change_property(type:String, id:String, prop:String, new_value):
-	var res = call_deferred(type, id)
-	match type:
-		"pattern","container","trigger": res.set(prop, new_value)
-		"bullet": res[prop] = new_value
+	(func():
+		var res = call(type, id)
+		match type:
+			"pattern","container","trigger": res.set(prop, new_value)
+			"bullet": res[prop] = new_value
+		).call_deferred()
 
 func switch_property_of_bullet(b:Dictionary, new_props_id:String):
 	b["props"] = bullet(new_props_id)
@@ -949,8 +951,8 @@ func bullet_movement(delta:float):
 								LIST_ENDS.Stop:
 									B["homing_target"] = null
 					else: B["homing_target"] = null
-				
-				B["vel"] += ((target_pos-B["position"]).normalized()*B["speed"]-B["vel"]).normalized()*props["homing_steer"]*delta
+
+				B["vel"] += ((target_pos-B["position"]).normalized()*B["speed"]-B["vel"]).normalized()*props.get("homing_steer", 1)*delta
 #				B["vel"] = B["vel"].clamp(Vector2(0,0), Vector2(B["speed"],B["speed"]))
 				B["rotation"] = B["vel"].angle()
 				
@@ -1019,9 +1021,15 @@ func bullet_movement(delta:float):
 func _on_Homing_timeout(B:Dictionary, start:bool):
 	if start:
 		var props = B["props"]
-		if props.has("homing_target") or props.has("node_homing"): B["homing_target"] = props["node_homing"]
+		if props.has("homing_target") or props.has("node_homing"):
+			if props.has("node_homing"):
+				B["homing_target"] = props["node_homing"]
+			else:
+				var node_homing = get_node(props["homing_target"])
+				props["node_homing"] = node_homing
+				B["homing_target"] = node_homing
 		else: B["homing_target"] = props["homing_position"]
-		if props["homing_duration"] > 0:
+		if props.get("homing_duration", 0) > 0:
 			get_tree().create_timer(props["homing_duration"]).connect("timeout",Callable(self,"_on_Homing_timeout").bind(B,false))
 		if props.get("homing_select_in_group",-1) == GROUP_SELECT.Nearest_on_homing:
 			target_from_options(B)

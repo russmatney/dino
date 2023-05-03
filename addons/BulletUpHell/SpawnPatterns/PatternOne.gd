@@ -3,6 +3,8 @@
 extends NavigationPolygon
 class_name PatternOne
 
+var symmetric:bool = false
+
 var bullet:String = ""
 var nbr:int = 1
 var iterations:int = 1

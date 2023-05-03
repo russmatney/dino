@@ -66,7 +66,7 @@ var homing_list_nodes:Array[NodePath]
 var homing_list_ordered:bool = true
 var homing_when_list_ends:int = LIST_BEHAVIOUR.Stop
 var homing_position:Vector2
-var homing_steer = 0
+var homing_steer = 1
 var homing_time_start = 0
 var homing_duration = 999
 
