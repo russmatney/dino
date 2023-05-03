@@ -74,9 +74,13 @@ func closest_target():
 #############################################
 # fire
 
+@onready var bullets = $Bullets
+
 func fire():
 	if not target:
 		return
+
+	Spawning.spawn(bullets, "spawnPattern1")
 
 	# TODO cooldown
 	machine.transit("Idle")
