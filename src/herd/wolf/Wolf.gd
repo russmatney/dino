@@ -29,6 +29,13 @@ func check_out(_data):
 	pass
 
 #############################################
+# proc
+
+func _physics_process(_delta):
+	pass
+
+#############################################
+# bodies
 
 var bodies = []
 func _on_body_entered(body):
@@ -38,3 +45,38 @@ func _on_body_entered(body):
 
 func _on_body_exited(body):
 	bodies.erase(body)
+	if body == target:
+		target = null
+		Hood.notif("Target lost")
+
+#############################################
+# target
+
+func can_see(body):
+	los.target_position = body.global_position
+	return not los.is_colliding()
+
+var target
+
+func find_target():
+	var old_target = target
+	target = closest_target()
+	if target and target != old_target:
+		Hood.notif("Target Acquired")
+
+func closest_target():
+	if len(bodies) == 0:
+		return
+	var bds = bodies.filter(can_see)
+	return Util.nearest_node(self, bds)
+
+
+#############################################
+# fire
+
+func fire():
+	if not target:
+		return
+
+	# TODO cooldown
+	machine.transit("Idle")
