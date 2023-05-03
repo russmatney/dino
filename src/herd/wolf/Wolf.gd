@@ -74,13 +74,17 @@ func closest_target():
 #############################################
 # fire
 
-@onready var bullets = $Bullets
-
 func fire():
 	if not target:
 		return
 
-	Spawning.spawn(bullets, "spawnPattern1")
+	Spawning.change_property("bullet", "bulletPattern1", "homing_target", target.get_path())
+	Spawning.change_property("bullet", "bulletPattern1", "homing_steer", 100)
+	Spawning.change_property("bullet", "bulletPattern1", "homing_duration", 3)
+
+	Debug.pr(name, "firing")
+	# TODO create pool
+	Spawning.spawn(self, "spawnPattern1")
 
 	# TODO cooldown
 	machine.transit("Idle")

@@ -18,8 +18,8 @@ func _ready():
 	Hotel.register(self)
 	Hood.ensure_hud()
 	Cam.ensure_camera({player=self,
-		zoom_margin_min=200,
-		zoom_rect_min=300,
+		zoom_margin_min=100,
+		zoom_rect_min=150,
 		})
 	machine.start()
 	action_detector.setup(self)

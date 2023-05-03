@@ -1,14 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bstod1n1dqbyt"]
+[gd_scene load_steps=9 format=3 uid="uid://bstod1n1dqbyt"]
 
 [ext_resource type="Script" path="res://src/herd/wolf/Wolf.gd" id="1_1d058"]
 [ext_resource type="SpriteFrames" uid="uid://djaootvlyfr6n" path="res://src/herd/wolf/WolfSpriteFrames.tres" id="1_3bwit"]
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_3vgs8"]
 [ext_resource type="Script" path="res://src/herd/wolf/machine/Idle.gd" id="4_ttisi"]
 [ext_resource type="Script" path="res://src/herd/wolf/machine/Firing.gd" id="5_rtr3t"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHPattern.gd" id="6_p1re7"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternOne.gd" id="7_kny7e"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletProperties.gd" id="8_p1877"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BulletProps.gd" id="9_cug5c"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BuHSpawnPoint.gd" id="6_ns7va"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ml7v5"]
 radius = 8.0
@@ -16,147 +13,6 @@ height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fg8q3"]
 radius = 99.0
-
-[sub_resource type="Curve2D" id="Curve2D_0yx86"]
-
-[sub_resource type="Curve" id="Curve_ph2k6"]
-
-[sub_resource type="Curve" id="Curve_o07da"]
-
-[sub_resource type="PackedDataContainer" id="PackedDataContainer_apifm"]
-script = ExtResource("9_cug5c")
-speed = 100.0
-scale = 5.0
-angle = 0
-groups = []
-anim_idle_texture = "0"
-anim_spawn_texture = ""
-anim_waiting_texture = ""
-anim_delete_texture = ""
-anim_idle_collision = "0"
-anim_spawn_collision = ""
-anim_waiting_collision = ""
-anim_delete_collision = ""
-anim_idle_sfx = -1
-anim_spawn_sfx = -1
-anim_waiting_sfx = -1
-anim_delete_sfx = -1
-spec_bounces = 0
-spec_no_collision = false
-spec_modulate_loop = 0.0
-spec_skew = 0.0
-spec_trail_length = 0.0
-spec_trail_width = 0.0
-spec_trail_modulate = Color(1, 1, 1, 1)
-spec_rotating_speed = 0.0
-death_after_time = 30.0
-death_outside_box = Rect2(0, 0, 0, 0)
-death_from_collision = true
-a_direction_equation = ""
-a_curve_movement = 0
-a_speed_multiplier = SubResource("Curve_ph2k6")
-a_speed_multi_iterations = 0
-a_speed_multi_scale = 0.0
-trigger_container = ""
-trigger_wait_for_shot = true
-homing_type = 0
-homing_target = NodePath("")
-homing_steer = 0
-homing_time_start = 0
-homing_duration = 999
-scale_multi_iterations = 0
-scale_multiplier = SubResource("Curve_o07da")
-scale_multi_scale = 1
-r_randomisation_chances = 1.0
-r_speed_choice = ""
-r_speed_variation = Vector3(0, 0, 0)
-r_scale_choice = ""
-r_scale_variation = Vector3(0, 0, 0)
-r_angle_choice = ""
-r_angle_variation = Vector3(0, 0, 0)
-r_group_choice = []
-r_bounce_choice = ""
-r_bounce_variation = Vector3(0, 0, 0)
-r_no_coll_chances = 0.0
-r_modulate_variation = Vector3(0, 0, 0)
-r_trail_length_variation = Vector3(0, 0, 0)
-r_trail_color_variation = Vector3(0, 0, 0)
-r_rotating_variation = Vector3(0, 0, 0)
-r_death_after_choice = ""
-r_death_after_variation = Vector3(0, 0, 0)
-r_death_outside_chances = 0.0
-r_dir_equation_choice = ""
-r_curve_choice = []
-r_speed_multi_curve_choice = []
-r_speed_multi_iter_variation = Vector3(0, 0, 0)
-r_speed_multi_scale_variation = Vector3(0, 0, 0)
-r_trigger_choice = ""
-r_wait_for_shot_chances = 0.0
-r_homing_target_choice = []
-r_special_target_choice = ""
-r_group_target_choice = ""
-r_pos_target_choice = ""
-r_steer_choice = ""
-r_steer_variation = Vector3(0, 0, 0)
-r_homing_delay_choice = ""
-r_homing_delay_variation = Vector3(0, 0, 0)
-r_homing_dur_choice = ""
-r_homing_dur_variation = Vector3(0, 0, 0)
-r_beam_length_choice = ""
-r_beam_length_variation = Vector3(0, 0, 0)
-r_beam_bounce_choice = ""
-r_beam_width_variation = Vector3(0, 0, 0)
-r_scale_multi_curve_choice = []
-r_scale_multi_iter_variation = Vector3(0, 0, 0)
-r_scale_multi_scale_variation = Vector3(0, 0, 0)
-
-[sub_resource type="Curve2D" id="Curve2D_hkf70"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_0fdti"]
-resource_name = "PatternOne"
-script = ExtResource("7_kny7e")
-bullet = "bulletPattern1"
-iterations = 1
-follows_parent = false
-forced_angle = 0.0
-forced_target = NodePath("")
-forced_lookat_mouse = false
-forced_pattern_lookat = true
-cooldown_stasis = false
-cooldown_spawn = 0.017
-cooldown_shoot = 0.0
-cooldown_next_spawn = 0.0
-cooldown_next_shoot = 0.0
-wait_latence = 0
-wait_tween_momentum = 0
-wait_tween_length = 0.0
-wait_tween_time = 0.0
-layer_nbr = 1
-layer_cooldown_spawn = 0.0
-layer_pos_offset = 0.0
-layer_speed_offset = 0.0
-layer_angle_offset = 0.0
-r_randomisation_chances = 1.0
-r_bullet_choice = ""
-r_bullet_nbr_choice = ""
-r_bullet_nbr_variation = Vector3(0, 0, 0)
-r_pattern_angle_choice = ""
-r_pattern_angle_variation = Vector3(0, 0, 0)
-r_infinite_iter_chances = 0.0
-r_iterations_choice = ""
-r_iterations_variation = Vector3(0, 0, 0)
-r_forced_angle_choice = ""
-r_forced_angle_variation = Vector3(0, 0, 0)
-r_forced_target_choice = []
-r_stasis_chances = 0.0
-r_cooldown_spawn_choice = ""
-r_cooldown_spawn_variation = Vector3(0, 0, 0)
-r_cooldown_shoot_choice = ""
-r_cooldown_shoot_variation = Vector3(0, 0, 0)
-r_cooldown_n_spawn_choice = ""
-r_cooldown_n_spawn_variation = Vector3(0, 0, 0)
-r_cooldown_n_shoot_choice = ""
-r_cooldown_n_shoot_variation = Vector3(0, 0, 0)
 
 [node name="Wolf" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
@@ -192,16 +48,15 @@ collision_mask = 514
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox"]
 shape = SubResource("CircleShape2D_fg8q3")
 
-[node name="Bullets" type="Node2D" parent="."]
-
-[node name="BulletPattern" type="Path2D" parent="Bullets"]
-curve = SubResource("Curve2D_0yx86")
-script = ExtResource("8_p1877")
-id = "bulletPattern1"
-props = SubResource("PackedDataContainer_apifm")
-
-[node name="SpawnPattern" type="Path2D" parent="Bullets"]
-curve = SubResource("Curve2D_hkf70")
-script = ExtResource("6_p1re7")
-id = "spawnPattern1"
-pattern = SubResource("NavigationPolygon_0fdti")
+[node name="SpawnPoint" type="Node2D" parent="."]
+script = ExtResource("6_ns7va")
+active = true
+auto_pattern_id = "spawnPattern1"
+shared_area_name = "0"
+rotating_speed = 0.0
+pool_amount = 50
+auto_start_on_cam = false
+auto_start_after_time = 1.0
+auto_start_at_distance = 5.0
+auto_distance_from = NodePath("")
+trigger_container = NodePath("")

@@ -1,17 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://d14w4o1mvlo4j"]
+[gd_scene load_steps=12 format=3 uid="uid://wur0sejdlbi1"]
 
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHPattern.gd" id="1_ef7m1"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternOne.gd" id="2_ullf3"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletProperties.gd" id="3_8y013"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BulletProps.gd" id="4_opoi8"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHSpawnPoint.gd" id="5_30lwf"]
+[ext_resource type="Script" path="res://src/herd/HerdBulletPatterns.gd" id="1_icqmp"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BuHPattern.gd" id="1_vxyrj"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletProperties.gd" id="3_lxbib"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternLine.gd" id="3_v74m2"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BulletProps.gd" id="4_hwnik"]
 
-[sub_resource type="Curve2D" id="Curve2D_ccm4l"]
+[sub_resource type="Curve2D" id="Curve2D_xcitp"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_2j8sn"]
-resource_name = "PatternOne"
-script = ExtResource("2_ullf3")
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ugl8n"]
+resource_name = "PatternLine"
+script = ExtResource("3_v74m2")
+offset = Vector2(0, 0)
+center = 1
+symmetrical = null
 bullet = "bulletPattern1"
+nbr = 1
+pattern_angle = 0.0004
 iterations = 1
 follows_parent = false
 forced_angle = 0.0
@@ -22,7 +27,7 @@ cooldown_stasis = false
 cooldown_spawn = 0.017
 cooldown_shoot = 0.0
 cooldown_next_spawn = 0.0
-cooldown_next_shoot = 1.0
+cooldown_next_shoot = 0.0
 wait_latence = 0
 wait_tween_momentum = 0
 wait_tween_length = 0.0
@@ -33,6 +38,11 @@ layer_pos_offset = 0.0
 layer_speed_offset = 0.0
 layer_angle_offset = 0.0
 r_randomisation_chances = 1.0
+r_offset_choice = ""
+r_offset_x_variation = Vector3(0, 0, 0)
+r_offset_y_variation = Vector3(0, 0, 0)
+r_center_choice = ""
+r_symmetry_chances = 0.0
 r_bullet_choice = ""
 r_bullet_nbr_choice = ""
 r_bullet_nbr_variation = Vector3(0, 0, 0)
@@ -54,16 +64,16 @@ r_cooldown_n_spawn_variation = Vector3(0, 0, 0)
 r_cooldown_n_shoot_choice = ""
 r_cooldown_n_shoot_variation = Vector3(0, 0, 0)
 
-[sub_resource type="Curve2D" id="Curve2D_rxbwx"]
+[sub_resource type="Curve2D" id="Curve2D_ub470"]
 
 [sub_resource type="Curve" id="Curve_ia2cv"]
 
 [sub_resource type="Curve" id="Curve_xme3g"]
 
-[sub_resource type="PackedDataContainer" id="PackedDataContainer_rgvum"]
-script = ExtResource("4_opoi8")
-speed = 100.0
-scale = 5.0
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_7hiq8"]
+script = ExtResource("4_hwnik")
+speed = 70.0
+scale = 1.0
 angle = 0
 groups = []
 anim_idle_texture = "0"
@@ -147,29 +157,17 @@ r_scale_multi_curve_choice = []
 r_scale_multi_iter_variation = Vector3(0, 0, 0)
 r_scale_multi_scale_variation = Vector3(0, 0, 0)
 
-[node name="WolfBullets1" type="Node2D"]
+[node name="HerdBulletPatterns" type="Node2D"]
+script = ExtResource("1_icqmp")
 
 [node name="SpawnPattern" type="Path2D" parent="."]
-curve = SubResource("Curve2D_ccm4l")
-script = ExtResource("1_ef7m1")
+curve = SubResource("Curve2D_xcitp")
+script = ExtResource("1_vxyrj")
 id = "spawnPattern1"
-pattern = SubResource("NavigationPolygon_2j8sn")
+pattern = SubResource("NavigationPolygon_ugl8n")
 
 [node name="BulletPattern" type="Path2D" parent="."]
-curve = SubResource("Curve2D_rxbwx")
-script = ExtResource("3_8y013")
+curve = SubResource("Curve2D_ub470")
+script = ExtResource("3_lxbib")
 id = "bulletPattern1"
-props = SubResource("PackedDataContainer_rgvum")
-
-[node name="SpawnPoint" type="Node2D" parent="."]
-script = ExtResource("5_30lwf")
-active = true
-auto_pattern_id = "spawnPattern1"
-shared_area_name = "0"
-rotating_speed = 0.0
-pool_amount = 50
-auto_start_on_cam = true
-auto_start_after_time = 0.0
-auto_start_at_distance = 5.0
-auto_distance_from = NodePath("")
-trigger_container = NodePath("")
+props = SubResource("PackedDataContainer_7hiq8")
