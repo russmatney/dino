@@ -124,6 +124,10 @@ var dino_credits = [
 		"teeb.text-effects, teeb.text_transitions",
 		"https://github.com/teebarjunk/godot-text_effects",
 		"MIT License",
+		"",
+		"BulletUpHell",
+		"https://github.com/Dark-Peace/BulletUpHell",
+		"MIT License",
 	],
 	[
 		"Code Contributors",
