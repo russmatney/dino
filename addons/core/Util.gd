@@ -275,7 +275,7 @@ func animate(node):
 
 func get_(opts: Dictionary, key: String, default: Variant):
 	var v = opts.get(key)
-	if v:
+	if v != null:
 		return v
 	else:
 		return default

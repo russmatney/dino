@@ -5,6 +5,9 @@ extends CharacterBody2D
 @onready var action_detector = $ActionDetector
 @onready var ah = $ActionHint
 
+var max_health = 6
+var health = 6
+
 ######################################################
 # enter_tree
 
@@ -24,15 +27,17 @@ func _ready():
 	machine.start()
 	action_detector.setup(self)
 
+	# BulletUpHell global signal
+	Spawning.bullet_collided_body.connect(_on_bullet_collided)
 
 ######################################################
 # hotel
 
 func hotel_data():
-	return {}
+	return {health=health}
 
-func check_out(_data):
-	pass
+func check_out(data):
+	health = Util.get_(data, "health", health)
 
 ######################################################
 
@@ -71,3 +76,24 @@ func throw(node):
 	grabbing = null
 	# could pass throw_speed
 	return {direction=facing_dir}
+
+######################################################
+# bullets
+
+func _on_bullet_collided(
+		body:Node, _body_shape_index:int, _bullet:Dictionary,
+		_local_shape_index:int, _shared_area:Area2D
+	):
+	if body == self:
+		bullet_hit()
+
+func bullet_hit():
+	health -= 1
+	Hotel.check_in(self)
+
+	health = clamp(health, 0, max_health)
+
+	if health <= 0:
+		machine.transit("Die")
+	else:
+		machine.transit("Hit")

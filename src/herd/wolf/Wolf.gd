@@ -19,6 +19,8 @@ func _ready():
 	detect_box.body_entered.connect(_on_body_entered)
 	detect_box.body_exited.connect(_on_body_exited)
 
+	Spawning.create_pool("bulletPattern1", "EnemyBullets", 50)
+
 #############################################
 # hotel_data, check_out
 
@@ -84,7 +86,7 @@ func fire():
 
 	Debug.pr(name, "firing")
 	# TODO create pool
-	Spawning.spawn(self, "spawnPattern1")
+	Spawning.spawn(self, "spawnPattern1", "EnemyBullets")
 
 	# TODO cooldown
 	machine.transit("Idle")

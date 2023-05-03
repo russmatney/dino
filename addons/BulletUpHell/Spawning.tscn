@@ -55,6 +55,10 @@ cull_fixed_screen = true
 
 [node name="0" type="Area2D" parent="SharedAreas"]
 
+[node name="EnemyBullets" type="Area2D" parent="SharedAreas"]
+collision_layer = 16
+collision_mask = 515
+
 [node name="ShapeManager" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("1")

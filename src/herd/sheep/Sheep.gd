@@ -5,6 +5,9 @@ extends CharacterBody2D
 @onready var aa = $ActionArea
 @onready var action_hint = $ActionHint
 
+var max_health = 6
+var health = 6
+
 ###########################################################
 # enter tree
 
@@ -21,11 +24,17 @@ func _ready():
 
 	aa.register_actions(actions, {source=self, action_hint=action_hint})
 
-func hotel_data():
-	return {}
+	# BulletUpHell global signal
+	Spawning.bullet_collided_body.connect(_on_bullet_collided)
 
-func check_out(_data):
-	pass
+######################################################
+# hotel
+
+func hotel_data():
+	return {health=health}
+
+func check_out(data):
+	health = Util.get_(data, "health", health)
 
 ###########################################################
 
@@ -72,3 +81,24 @@ func thrown_by_player(player):
 			direction=opts.get("direction", Vector2.LEFT),
 			throw_speed=opts.get("throw_speed")
 			})
+
+######################################################
+# bullets
+
+func _on_bullet_collided(
+		body:Node, _body_shape_index:int, _bullet:Dictionary,
+		_local_shape_index:int, _shared_area:Area2D
+	):
+	if body == self:
+		bullet_hit()
+
+func bullet_hit():
+	health -= 1
+	Hotel.check_in(self)
+
+	health = clamp(health, 0, max_health)
+
+	if health <= 0:
+		machine.transit("Die")
+	else:
+		machine.transit("Hit")
