@@ -97,6 +97,28 @@ func bullet_hit():
 	health = clamp(health, 0, max_health)
 
 	if health <= 0:
-		machine.transit("Die")
+		machine.transit("Dead")
 	else:
 		machine.transit("Hit")
+
+######################################################
+# DEATH
+
+# TODO connect/remove follow/target from Sheep/Wolf
+signal dying
+
+func die():
+	dying.emit(self)
+
+	# tween shrink
+	var duration = 0.5
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(0.3, 0.3), duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "modulate:a", 0.3, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(clean_up_and_free)
+
+	# TODO respawn from Herd or Game?
+
+func clean_up_and_free():
+	Debug.pr("freeing player")
+	queue_free()

@@ -7,21 +7,14 @@ func enter(_arg = {}):
 	actor.anim.play("idle")
 
 
-## process ###########################################################
-
-
-func process(_delta):
-	pass
-
-
 ## physics ###########################################################
 
 
 func physics_process(_delta):
 	var move_dir = actor.input_move_dir
-
 	if move_dir.abs().length() > 0.01:
 		transit("Run")
+		return
 
 	if actor.velocity.abs().length() > 0:
 		# slow down
