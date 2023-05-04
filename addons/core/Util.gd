@@ -269,6 +269,17 @@ func animate(node):
 	)
 	tween.tween_interval(randf_range(0.3, 2.0))
 
+#################################################################
+## AnimatedSprite2D
+
+# plays the passed animation, then returns to the previous animation
+# NOTE the passed animation cannot be looping, or animation_finished will never fire
+func play_then_return(anim, animation):
+	var current_anim = anim.animation
+	anim.animation_finished.connect(func():
+		anim.play(current_anim),
+		ConnectFlags.CONNECT_ONE_SHOT)
+	anim.play(animation)
 
 #################################################################
 ## dictionaries

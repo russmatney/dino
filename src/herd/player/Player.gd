@@ -99,7 +99,7 @@ func bullet_hit():
 	if health <= 0:
 		machine.transit("Dead")
 	else:
-		machine.transit("Hit")
+		Util.play_then_return(anim, "hit")
 
 ######################################################
 # DEATH
