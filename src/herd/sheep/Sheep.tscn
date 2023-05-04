@@ -18,7 +18,7 @@ height = 18.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jate3"]
 radius = 64.0703
 
-[node name="Sheep" type="CharacterBody2D" groups=["npcs"]]
+[node name="Sheep" type="CharacterBody2D" groups=["enemy_bullet_attractors", "npcs"]]
 collision_layer = 512
 collision_mask = 533
 script = ExtResource("1_fs8bu")

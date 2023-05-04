@@ -52,7 +52,6 @@ Metro="*res://addons/metro/Metro.gd"
 Herd="*res://src/herd/Herd.gd"
 Game="*res://src/dino/Game.gd"
 Spawning="*res://addons/BulletUpHell/Spawning.tscn"
-HerdBulletPatterns="*res://src/herd/HerdBulletPatterns.tscn"
 
 [display]
 
