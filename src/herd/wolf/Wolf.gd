@@ -64,8 +64,9 @@ func _on_body_exited(body):
 # target
 
 func can_see(body):
-	los.target_position = body.global_position
-	return not los.is_colliding()
+	los.target_position = body.global_position - global_position
+	var coll = los.get_collider()
+	return body and coll and coll == body
 
 var target
 
@@ -97,5 +98,9 @@ func fire():
 
 	Spawning.spawn(self, spawn_pattern_id, "EnemyBullets")
 
-	# TODO cooldown
+	# TODO proper cooldown?
+	# clear target, idle searches again
+	target = null
+	# find_target()
+
 	machine.transit("Idle")

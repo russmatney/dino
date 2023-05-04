@@ -1,6 +1,9 @@
 @tool
 extends DinoGame
 
+######################################################
+# dino game api
+
 var player_scene = preload("res://src/herd/player/Player.tscn")
 
 func manages_scene(sfp):
@@ -11,3 +14,11 @@ func register():
 
 func update_world():
 	pass
+
+######################################################
+# level mgmt
+
+var levels = [
+	"res://src/herd/levels/LevelOne.tscn",
+	"res://src/herd/levels/LevelTwo.tscn"
+	]
