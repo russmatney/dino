@@ -11,10 +11,8 @@ const zones = [
 ###########################################################
 # register
 
-func manages_scene(scene_or_path):
-	if scene_or_path is String:
-		return scene_or_path in zones
-	return scene_or_path.scene_file_path in zones
+func manages_scene(scene):
+	return scene.scene_file_path in zones
 
 var first_zone
 

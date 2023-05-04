@@ -19,30 +19,26 @@ func _ready():
 # NOTE these need to auto-load BEFORE Game.gd
 var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd]
 
-func game_for_scene(sfp):
-	var gs = games.filter(func(g): return g and g.manages_scene(sfp))
+func game_for_scene(scene):
+	var gs = games.filter(func(g): return g and g.manages_scene(scene))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
-		Debug.warn("No game found to manage scene", sfp)
+		Debug.warn("No game found to manage scene", scene, scene.scene_file_path)
 	else:
-		Debug.warn("Multiple games manage scene", sfp, gs)
+		Debug.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
 
-func set_current_game_for_scene(sfp):
-	var g = game_for_scene(sfp)
+func set_current_game_for_scene(scene):
+	var g = game_for_scene(scene)
 	if g:
 		register_current_game(g)
 
-func ensure_current_game(sfp=null):
-	if not current_game and sfp != null:
-		Debug.pr("No current_game, setting with passed sfp", sfp)
-		set_current_game_for_scene(sfp)
-
+func ensure_current_game():
 	if not current_game:
 		var current_scene = get_tree().current_scene
 		if current_scene and current_scene.scene_file_path:
 			Debug.pr("No current_game, setting with current scene", current_scene)
-			set_current_game_for_scene(current_scene.scene_file_path)
+			set_current_game_for_scene(current_scene)
 
 	if not current_game:
 		Debug.warn("No current_game!")

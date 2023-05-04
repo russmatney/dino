@@ -18,10 +18,8 @@ const demoland_zones = [
 ###########################################################
 # register
 
-func manages_scene(scene_or_path):
-	if scene_or_path is String:
-		return scene_or_path in demoland_zones
-	return scene_or_path.scene_file_path in demoland_zones
+func manages_scene(scene):
+	return scene.scene_file_path in demoland_zones
 
 var first_zone
 
