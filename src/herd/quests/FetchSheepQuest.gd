@@ -20,6 +20,9 @@ func _get_configuration_warnings():
 # ready
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+
 	if not sheep_pen:
 		Debug.error("FetchSheepQuest expected $SheepPen Area2D to exist")
 		return
@@ -44,6 +47,8 @@ func _ready():
 # exit tree
 
 func _exit_tree():
+	if Engine.is_editor_hint():
+		return
 	Quest.unregister(self)
 
 ###########################################################

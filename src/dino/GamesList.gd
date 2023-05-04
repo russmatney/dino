@@ -39,6 +39,10 @@ var menu_scenes = [
 		label="Hatbot",
 		nav_to="res://src/hatbot/menus/MainMenu.tscn",
 	},
+	{
+		label="Herd",
+		nav_to="res://src/herd/menus/MainMenu.tscn",
+	},
 ]
 
 @export var button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")

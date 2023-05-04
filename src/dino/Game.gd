@@ -13,6 +13,9 @@ func _ready():
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
+	# makes lots of things work just b/c (e.g. menus)
+	# ensure_current_game()
+
 ###########################################################
 # handling current_game (for dev-mode), could live elsewhere
 
@@ -36,12 +39,12 @@ func set_current_game_for_scene(scene):
 func ensure_current_game():
 	if not current_game:
 		var current_scene = get_tree().current_scene
-		if current_scene and current_scene.scene_file_path:
+		if current_scene and "scene_file_path" in current_scene:
 			Debug.pr("No current_game, setting with current scene", current_scene)
 			set_current_game_for_scene(current_scene)
 
 	if not current_game:
-		Debug.warn("No current_game!")
+		Debug.warn("Failed to ensure current_game!")
 
 ###########################################################
 # game lifecycle

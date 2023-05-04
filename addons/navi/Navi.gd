@@ -133,8 +133,7 @@ func _unhandled_input(event):
 
 
 func toggle_pause():
-	var t = get_tree()
-	if t.paused:
+	if get_tree().paused:
 		resume()
 	else:
 		pause()
@@ -142,22 +141,18 @@ func toggle_pause():
 
 func pause():
 	Debug.prn("pausing")
-	var t = get_tree()
-	t.paused = true
+	get_tree().paused = true
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
-	# Navi implying DJ dep
 	DJ.pause_game_song()
 	DJ.resume_menu_song()
 
 
 func resume():
 	Debug.prn("unpausing")
-	var t = get_tree()
-	t.paused = false
+	get_tree().paused = false
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.hide()
-	# Navi implying DJ dep
 	DJ.pause_menu_song()
 	DJ.resume_game_song()
 

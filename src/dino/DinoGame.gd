@@ -25,7 +25,8 @@ func start():
 func update_world():
 	# trigger any world update based on the player's position
 	# (e.g. pausing/unpausing adjacent rooms)
-	Debug.warn("update_world not implemented")
+	# Debug.warn("update_world not implemented")
+	pass
 
 # func get_spawn_coords():
 # 	Debug.warn("get_spawn_coords not implemented")
