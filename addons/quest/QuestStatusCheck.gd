@@ -12,7 +12,7 @@ func set_quest(q):
 func status_label():
 	var label
 	if quest.total:
-		label = str(quest.label, " (", quest.remaining, "/", quest.total, ")")
+		label = str(quest.label, " (", quest.total - quest.remaining, "/", quest.total, ")")
 	else:
 		label = quest.label
 
