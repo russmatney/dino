@@ -5,8 +5,8 @@ extends CharacterBody2D
 @onready var aa = $ActionArea
 @onready var action_hint = $ActionHint
 
-var max_health = 6
-var health = 6
+var max_health = 3
+var health = 3
 
 ###########################################################
 # enter tree
@@ -90,16 +90,41 @@ func _on_bullet_collided(
 		_local_shape_index:int, _shared_area:Area2D
 	):
 	if body == self:
-		bullet_hit()
+		if not machine.state in ["Thrown", "Dead"]:
+			bullet_hit()
 
 func bullet_hit():
 	health -= 1
 	Hotel.check_in(self)
-	Cam.screenshake(0.3)
+	Cam.screenshake(0.25)
 
 	health = clamp(health, 0, max_health)
 
 	if health <= 0:
-		machine.transit("Die")
+		machine.transit("Dead")
 	else:
-		machine.transit("Hit")
+		Util.play_then_return(anim, "hit")
+
+
+######################################################
+# DEATH
+
+# TODO connect/remove from Player/Wolf
+signal dying
+
+func die():
+	dying.emit(self)
+	Hood.notif(name, "dying")
+
+	# tween shrink
+	var duration = 0.5
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2(0.3, 0.3), duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "modulate:a", 0.3, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(clean_up_and_free)
+
+	# TODO respawn from Herd or Game?
+
+func clean_up_and_free():
+	Debug.pr("freeing sheep", name)
+	queue_free()

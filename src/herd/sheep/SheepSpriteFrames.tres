@@ -151,6 +151,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_wuiug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8avgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yurkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yurkw")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_j2kw4")
 }, {
 "duration": 1.0,
@@ -179,6 +196,23 @@ animations = [{
 "loop": true,
 "name": &"grabbed",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8avgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuiug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8avgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wuiug")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
