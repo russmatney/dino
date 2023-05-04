@@ -64,11 +64,13 @@ var grabbed_by
 
 func called_by_player(player):
 	Debug.pr(name, "called by player", player)
+	player.dying.connect(on_player_dying)
 	following = player
 	machine.transit("Follow")
 
 func grabbed_by_player(player):
 	Debug.pr(name, "grabbed by player", player)
+	player.dying.connect(on_player_dying)
 	player.grab(self)
 	grabbed_by = player
 	machine.transit("Grabbed")
@@ -81,6 +83,10 @@ func thrown_by_player(player):
 			direction=opts.get("direction", Vector2.LEFT),
 			throw_speed=opts.get("throw_speed")
 			})
+
+func on_player_dying(_player):
+	following = null
+	grabbed_by = null
 
 ######################################################
 # bullets
@@ -109,12 +115,11 @@ func bullet_hit():
 ######################################################
 # DEATH
 
-# TODO connect/remove from Player/Wolf
 signal dying
 
 func die():
 	dying.emit(self)
-	Hood.notif(name, "dying")
+	Debug.pr(name, "dying")
 
 	# tween shrink
 	var duration = 0.5
@@ -122,8 +127,6 @@ func die():
 	tween.tween_property(self, "scale", Vector2(0.3, 0.3), duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(self, "modulate:a", 0.3, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(clean_up_and_free)
-
-	# TODO respawn from Herd or Game?
 
 func clean_up_and_free():
 	Debug.pr("freeing sheep", name)

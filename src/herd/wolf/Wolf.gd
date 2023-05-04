@@ -72,8 +72,14 @@ var target
 func find_target():
 	var old_target = target
 	target = closest_target()
+	if target and "dying" in target:
+		Util._connect(target.dying, on_target_dying)
 	if target and target != old_target:
 		Debug.pr("Target Acquired", target)
+
+func on_target_dying(node):
+	target = null
+	bodies.erase(node)
 
 func closest_target():
 	if len(bodies) == 0:
