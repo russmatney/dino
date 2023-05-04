@@ -64,13 +64,13 @@ var grabbed_by
 
 func called_by_player(player):
 	Debug.pr(name, "called by player", player)
-	player.dying.connect(on_player_dying)
+	Util._connect(player.dying, on_player_dying)
 	following = player
 	machine.transit("Follow")
 
 func grabbed_by_player(player):
 	Debug.pr(name, "grabbed by player", player)
-	player.dying.connect(on_player_dying)
+	Util._connect(player.dying, on_player_dying)
 	player.grab(self)
 	grabbed_by = player
 	machine.transit("Grabbed")

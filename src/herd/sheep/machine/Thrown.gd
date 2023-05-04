@@ -11,6 +11,8 @@ var direction = Vector2.ZERO
 var throw_speed = 15000
 
 func enter(opts = {}):
+	actor.set_collision_mask_value(1, false)
+
 	actor.anim.play("thrown")
 
 	ttl = Util.get_(opts, "time", time)
@@ -21,6 +23,8 @@ func enter(opts = {}):
 	og_pos = actor.global_position
 
 
+func exit():
+	actor.set_collision_mask_value(1, true)
 
 ## physics ###########################################################
 
