@@ -42,7 +42,7 @@ func register_quest(node, opts={}):
 	quest.check_not_failed = opts.get("check_not_failed", false)
 	active_quests[label] = quest
 
-	Hood.notif(str("Registered Quest: ", label))
+	Debug.pr(str("Registered Quest: ", label))
 	quest_update.emit()
 
 func unregister(node, opts={}):
@@ -80,12 +80,11 @@ func check_all_complete():
 				return
 
 	# all complete or not failed!
-	Hood.notif("All quests complete!")
+	Debug.pr("All quests complete!")
 	all_quests_complete.emit()
 
 ######################################################
 # signal updates
-
 
 func _on_complete(node, opts):
 	var label = q_label(node, opts)
@@ -109,8 +108,6 @@ func _on_count_remaining_update(remaining, node, opts):
 	var label = q_label(node, opts)
 	active_quests[label].remaining = remaining
 	quest_update.emit()
-
-
 
 ###########################################################################
 # jumbotron

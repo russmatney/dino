@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dyjqpthy70n1i"]
+
+[node name="SheepPen" type="Area2D"]
+collision_layer = 0
+collision_mask = 512

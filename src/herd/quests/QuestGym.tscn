@@ -1,26 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://daqra0xqsc40i"]
+[gd_scene load_steps=8 format=3 uid="uid://daqra0xqsc40i"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_sgk51"]
 [ext_resource type="PackedScene" uid="uid://b254u72nu1oj3" path="res://src/herd/quests/FetchSheepQuest.tscn" id="2_trqn6"]
+[ext_resource type="PackedScene" uid="uid://dyjqpthy70n1i" path="res://src/herd/quests/SheepPen.tscn" id="3_2ot7y"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/herd/sheep/Sheep.tscn" id="3_pw3t7"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/herd/tiles/FenceTiles.tscn" id="4_yl4o0"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="5_bbxnd"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jyr0"]
-size = Vector2(174, 143)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ptbo"]
+size = Vector2(170, 138)
 
 [node name="QuestGym" type="Node"]
 script = ExtResource("1_sgk51")
 
 [node name="FetchSheepQuest" parent="." instance=ExtResource("2_trqn6")]
 
-[node name="SheepPen" type="Area2D" parent="FetchSheepQuest"]
-collision_layer = 0
-collision_mask = 512
+[node name="SheepPen" parent="FetchSheepQuest" instance=ExtResource("3_2ot7y")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FetchSheepQuest/SheepPen"]
-position = Vector2(12, 84.5)
-shape = SubResource("RectangleShape2D_8jyr0")
+position = Vector2(11, 84)
+shape = SubResource("RectangleShape2D_0ptbo")
 
 [node name="Sheep" parent="." instance=ExtResource("3_pw3t7")]
 position = Vector2(-69, -98)
