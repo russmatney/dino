@@ -60,6 +60,8 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		action_detector.execute_current_action()
+	if Trolley.is_jump(event):
+		machine.transit("Jump")
 
 ######################################################
 # grab/throw

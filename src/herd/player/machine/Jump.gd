@@ -5,32 +5,31 @@ extends State
 var og_pos
 var time = 0.5
 var ttl
-var distance = 200
+var distance = 150
 var dtl
 var direction = Vector2.ZERO
-var throw_speed = 15000
+var jump_speed = 15000
 
 func enter(opts = {}):
 	actor.set_collision_mask_value(1, false)
-	actor.set_collision_mask_value(10, false)
 
-	actor.anim.play("thrown")
+	# actor.anim.play("jump")
 
 	ttl = Util.get_(opts, "time", time)
 	dtl = Util.get_(opts, "distance", distance)
-	direction = Util.get_(opts, "direction", direction)
-	throw_speed = Util.get_(opts, "throw_speed", throw_speed)
+	direction = Util.get_(opts, "direction", actor.input_move_dir)
 
 	og_pos = actor.global_position
 
 	var tween = create_tween()
-	tween.tween_property(actor, "scale", Vector2(1.5, 1.5), ttl/2.0)
+	tween.tween_property(actor, "scale", Vector2(1.3, 1.3), ttl/2.0)
 	tween.tween_property(actor, "scale", Vector2(1.0, 1.0), ttl/2.0)
 
 
+## exit ###########################################################
+
 func exit():
 	actor.set_collision_mask_value(1, true)
-	actor.set_collision_mask_value(10, true)
 
 ## physics ###########################################################
 
@@ -45,6 +44,6 @@ func physics_process(delta):
 		transit("Idle")
 		return
 
-	var move_vec = direction * throw_speed * delta
+	var move_vec = direction * jump_speed * delta
 	actor.velocity = actor.velocity.lerp(move_vec, 0.9)
 	actor.move_and_slide()

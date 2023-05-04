@@ -16,8 +16,8 @@ func physics_process(_delta):
 		transit("Run")
 		return
 
+	# slow down
 	if actor.velocity.abs().length() > 0:
-		# slow down
 		actor.velocity = actor.velocity.lerp(Vector2.ZERO, 0.2)
 
 	actor.move_and_slide()

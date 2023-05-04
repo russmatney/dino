@@ -8,15 +8,12 @@ func enter(_arg = {}):
 	actor.anim.play("idle")
 
 
-## process ###########################################################
-
-
-func process(_delta):
-	pass
-
-
 ## physics ###########################################################
 
 
 func physics_process(_delta):
-	pass
+	# slow down
+	if actor.velocity.abs().length() > 0:
+		actor.velocity = actor.velocity.lerp(Vector2.ZERO, 0.2)
+
+	actor.move_and_slide()
