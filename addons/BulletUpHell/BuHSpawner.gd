@@ -930,7 +930,7 @@ func bullet_movement(delta:float):
 				B["curve"] = expression.execute([B["curveDir_index"]])*100
 			
 			#homing
-			if B.get("homing_target", null):
+			if "homing_target" in B and B["homing_target"] and is_instance_valid(B["homing_target"]):
 				var target_angle:float
 				var target_pos:Vector2
 				if typeof(B["homing_target"]) == TYPE_OBJECT:
