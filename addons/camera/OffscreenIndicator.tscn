@@ -6,4 +6,6 @@
 [node name="OffscreenIndicator" type="AnimatedSprite2D"]
 rotation = 0.785398
 sprite_frames = ExtResource("1_kj8qa")
+autoplay = "default"
+frame_progress = 0.857011
 script = ExtResource("2_pagpy")
