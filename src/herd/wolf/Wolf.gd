@@ -58,7 +58,6 @@ func _on_body_exited(body):
 	bodies.erase(body)
 	if body == target:
 		target = null
-		Debug.pr("Target lost", target)
 
 #############################################
 # target
@@ -76,7 +75,8 @@ func find_target():
 	if target and "dying" in target:
 		Util._connect(target.dying, on_target_dying)
 	if target and target != old_target:
-		Debug.pr("Target Acquired", target)
+		pass
+		# Debug.pr("Target Acquired", target)
 
 func on_target_dying(node):
 	target = null
