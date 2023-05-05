@@ -45,7 +45,6 @@ func load_next_level():
 		Debug.err("level_idx too high, can't load next level")
 		return
 	load_level(level_idx)
-	next_level_menu.hide()
 
 func retry_level():
 	if len(levels) <= level_idx:
@@ -65,6 +64,7 @@ func load_level(idx):
 
 	# load level
 	Navi.nav_to(levels[idx])
+	next_level_menu.hide()
 
 func handle_level_complete():
 	if level_idx == len(levels) - 1:
