@@ -51,7 +51,7 @@ enum S {
 ###########################################################################
 # sounds
 
-var sounds = {
+@onready var sounds = {
 	S.bosswarp:
 	[
 			preload("res://assets/sounds/bosswarp1.sfxr"),

@@ -19,6 +19,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Toggle Hotel DB"
 
+[node name="ToggleDJTurnTable" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Toggle DJ TurnTable"
+
 [node name="RearrangeLabels" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Sort Labels"
@@ -28,4 +33,5 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/ToggleHotelDB" to="." method="_on_toggle_hotel_db_pressed"]
+[connection signal="pressed" from="VBoxContainer/ToggleDJTurnTable" to="." method="_on_toggle_dj_turn_table_pressed"]
 [connection signal="pressed" from="VBoxContainer/RearrangeLabels" to="." method="_on_rearrange_labels_pressed"]

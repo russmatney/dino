@@ -42,6 +42,8 @@ func play_sound_rand(sounds, opts = {}):
 	if sounds:
 		var i = randi() % sounds.size()
 		var s = sounds[i]
+		if not is_instance_valid(s):
+			return
 		if vary > 0.0:
 			s.pitch_scale = 1 - (randf() * vary)
 		s.play()

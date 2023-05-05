@@ -125,3 +125,14 @@ func _on_toggle_hotel_db_pressed():
 	else:
 		hotel_ui = hotel_ui_scene.instantiate()
 		$%ToggleHotelDB.add_sibling(hotel_ui)
+
+
+const dj_turntable_scene = preload("res://addons/dj/TurnTable.tscn")
+var dj_turntable
+
+func _on_toggle_dj_turn_table_pressed():
+	if dj_turntable and is_instance_valid(dj_turntable):
+		dj_turntable.queue_free()
+	else:
+		dj_turntable = dj_turntable_scene.instantiate()
+		$%ToggleDJTurnTable.add_sibling(dj_turntable)
