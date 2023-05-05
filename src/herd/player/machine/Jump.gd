@@ -13,6 +13,7 @@ var jump_speed = 15000
 func enter(opts = {}):
 	actor.set_collision_mask_value(11, false)
 
+	DJZ.play(DJZ.S.jump)
 	# actor.anim.play("jump")
 
 	ttl = Util.get_(opts, "time", time)

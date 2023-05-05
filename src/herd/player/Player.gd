@@ -20,6 +20,7 @@ func _enter_tree():
 var hud = preload("res://src/herd/hud/HUD.tscn")
 
 func _ready():
+	DJZ.play(DJZ.S.land)
 	Hotel.register(self)
 	Hood.ensure_hud(hud)
 	Cam.ensure_camera({player=self,
@@ -60,8 +61,10 @@ func _unhandled_input(event):
 	if Trolley.is_action(event):
 		action_detector.execute_current_action()
 	if Trolley.is_cycle_prev_action(event):
+		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_prev_action()
 	elif Trolley.is_cycle_next_action(event):
+		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 	if Trolley.is_jump(event):
 		machine.transit("Jump")
@@ -75,6 +78,7 @@ func can_grab():
 	return grabbing == null
 
 func grab(node):
+	DJZ.play(DJZ.S.candleout)
 	grabbing = node
 	Util._connect(node.dying, on_grabbing_dying)
 
@@ -82,6 +86,7 @@ func on_grabbing_dying(_node):
 	grabbing = null
 
 func throw(_node):
+	DJZ.play(DJZ.S.laser)
 	grabbing = null
 	# could pass throw_speed
 	return {direction=facing_dir}
@@ -102,6 +107,7 @@ func bullet_hit():
 	if is_dead:
 		return
 
+	DJZ.play(DJZ.S.playerhurt)
 	health -= 1
 	Hotel.check_in(self)
 	Cam.screenshake(0.35)

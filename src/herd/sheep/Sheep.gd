@@ -70,6 +70,7 @@ var following
 var grabbed_by
 
 func follow_player(player):
+	DJZ.play(DJZ.S.coin)
 	# check_in here also adds to HUD
 	# not a great pattern, if HUD grabs/inits automatically this is not necessary
 	Hotel.check_in(self)
@@ -111,6 +112,8 @@ func _on_bullet_collided(
 func bullet_hit():
 	if is_dead:
 		return
+
+	DJZ.play(DJZ.S.player_hit)
 
 	health -= 1
 	Hotel.check_in(self)

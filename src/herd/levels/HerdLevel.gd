@@ -16,10 +16,12 @@ func _ready():
 # quest updates
 
 func on_quests_complete():
+	DJZ.play(DJZ.S.fire)
 	Herd.level_complete = true
 	Herd.handle_level_complete()
 
 func on_quest_failed(_quest):
+	DJZ.play(DJZ.S.heavy_fall)
 	Herd.level_complete = true
 	Quest.jumbo_notif({header="All the sheep died.", body="Yeesh!",
 		action="close", action_label_text="Restart Level",

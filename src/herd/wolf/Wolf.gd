@@ -75,8 +75,7 @@ func find_target():
 	if target and "dying" in target:
 		Util._connect(target.dying, on_target_dying)
 	if target and target != old_target:
-		pass
-		# Debug.pr("Target Acquired", target)
+		DJZ.play(DJZ.S.enemy_spawn)
 
 func on_target_dying(node):
 	target = null
