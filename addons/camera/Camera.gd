@@ -21,7 +21,7 @@ func _on_debug_toggled(debugging):
 # cam_window_rect
 
 func cam_viewport():
-	if cam:
+	if cam and is_instance_valid(cam):
 		# TODO maybe we should create a subviewport here?
 		var vp = cam.get_viewport()
 		return vp
@@ -30,7 +30,7 @@ func cam_viewport():
 ## helpful for placing 'offscreen' indicators at the edges
 # tho perhaps that's easier with just a canvas layer
 func cam_window_rect():
-	if cam:
+	if cam and is_instance_valid(cam):
 		var v = cam_viewport()
 		var viewportRect: Rect2 = v.get_visible_rect()
 
@@ -106,10 +106,10 @@ func ensure_camera(opts = {}):
 
 
 func inc_trauma(inc = 0.1):
-	if cam:
+	if cam and is_instance_valid(cam):
 		cam.inc_trauma(inc)
 	else:
-		Debug.warn("inc_trauma called, but no 'cam' set.")
+		Debug.warn("inc_trauma called, but no valid 'cam' set.")
 
 
 func screenshake(trauma = 0.3):
@@ -179,13 +179,16 @@ func resume_slowmo():
 # zoom
 
 func zoom_to(level=null):
-	cam.zoom_dir("to", level)
+	if cam and is_instance_valid(cam):
+		cam.zoom_dir("to", level)
 
 func zoom_in(n_levels=null):
-	cam.zoom_dir("in", n_levels)
+	if cam and is_instance_valid(cam):
+		cam.zoom_dir("in", n_levels)
 
 func zoom_out(n_levels=null):
-	cam.zoom_dir("out", n_levels)
+	if cam and is_instance_valid(cam):
+		cam.zoom_dir("out", n_levels)
 
 
 ####################################################################
@@ -196,16 +199,16 @@ var poa_group = "poas"
 var poi_group = "pois"
 
 func update_poas():
-	if cam:
+	if cam and is_instance_valid(cam):
 		cam.update_poas()
 
 func update_pofs():
-	if cam:
+	if cam and is_instance_valid(cam):
 		# currently also called in cam._process() ...?
 		cam.update_pofs()
 
 func update_pois():
-	if cam:
+	if cam and is_instance_valid(cam):
 		cam.update_pois()
 
 
@@ -236,13 +239,13 @@ func remove_from_poas(node):
 
 func _input(event):
 	if Trolley.is_event(event, "zoom_in"):
-		if cam:
+		if cam and is_instance_valid(cam):
 			cam.zoom_dir("in")
 	elif Trolley.is_event(event, "zoom_out"):
-		if cam:
+		if cam and is_instance_valid(cam):
 			cam.zoom_dir("out")
 	if Trolley.is_action(event):
-		if cam:
+		if cam and is_instance_valid(cam):
 			# freezeframe("shake-watch", 0.2, 1.5)
 			cam.inc_trauma(0.1)
 
