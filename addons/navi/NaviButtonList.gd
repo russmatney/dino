@@ -39,6 +39,9 @@ func _ready():
 func get_buttons():
 	return get_children()
 
+func clear():
+	for b in get_buttons():
+		b.free()
 
 func no_op():
 	Debug.pr("button created with no method")
@@ -87,14 +90,11 @@ func add_menu_item(item):
 	for but in get_buttons():
 		texts.append(but.text)
 
-	var button_scene = default_button_scene
-	if "button_scene" in item:
-		button_scene = item["button_scene"]
-
-	if not button_scene:
-		pw("No button_scene: ", button_scene)
+	var hide_fn = item.get("hide_fn")
+	if hide_fn and hide_fn.call():
 		return
 
+	var button_scene = item.get("button_scene", default_button_scene)
 	var button = button_scene.instantiate()
 	var label = item.get("label", "Fallback Label")
 	if label in texts:
