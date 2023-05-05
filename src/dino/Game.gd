@@ -77,9 +77,10 @@ func restart_game(game):
 # TODO maybe better to let the zones respawn the player?
 func _on_new_scene_instanced(scene):
 	if current_game and current_game.manages_scene(scene):
-		if not player and not spawning:
-			Debug.prn("respawning player after new scene instanced")
-			respawn_player()
+		if current_game.should_spawn_player(scene):
+			if not player and not spawning:
+				Debug.prn("respawning player after new scene instanced")
+				respawn_player()
 
 
 signal player_found(player)

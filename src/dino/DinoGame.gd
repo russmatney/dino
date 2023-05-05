@@ -34,3 +34,6 @@ func update_world():
 func manages_scene(_scene):
 	# return true if the passed scene is managed by this game
 	Debug.warn("manages_scene not implemented")
+
+func should_spawn_player(_scene):
+	return true
