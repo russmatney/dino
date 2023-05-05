@@ -72,15 +72,13 @@ func can_grab():
 	return grabbing == null
 
 func grab(node):
-	Debug.pr("grabbed", node)
 	grabbing = node
 	Util._connect(node.dying, on_grabbing_dying)
 
 func on_grabbing_dying(_node):
 	grabbing = null
 
-func throw(node):
-	Debug.pr("throw", node, facing_dir)
+func throw(_node):
 	grabbing = null
 	# could pass throw_speed
 	return {direction=facing_dir}
@@ -124,7 +122,6 @@ func die():
 
 	is_dead = true
 	dying.emit(self)
-	Debug.pr(name, "dying")
 
 	# tween shrink
 	var duration = 0.5

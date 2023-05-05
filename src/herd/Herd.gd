@@ -67,7 +67,6 @@ func load_level(idx):
 	Navi.nav_to(levels[idx])
 
 func handle_level_complete():
-	level_complete = true
 	if level_idx == len(levels) - 1:
 		# TODO proper congrats
 		Navi.show_win_menu()

@@ -68,8 +68,6 @@ func update_quest():
 		# presumably, all the sheep died
 		quest_failed.emit()
 
-	Debug.pr(Quest.active_quests)
-
 ###########################################################
 # sheep death
 

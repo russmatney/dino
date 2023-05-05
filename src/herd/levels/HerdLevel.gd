@@ -16,10 +16,11 @@ func _ready():
 # quest updates
 
 func on_quests_complete():
+	Herd.level_complete = true
 	Herd.handle_level_complete()
 
-func on_quest_failed(quest):
-	Hood.notif("quest failed", quest)
-	# TODO maybe with a timer before jumping?
-	# OR start each level with at countdown
-	Herd.retry_level()
+func on_quest_failed(_quest):
+	Herd.level_complete = true
+	Quest.jumbo_notif({header="All the sheep died.", body="Yeesh!",
+		action="close", action_label_text="Restart Level",
+		on_close=Herd.retry_level})
