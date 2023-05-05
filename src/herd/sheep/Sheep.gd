@@ -43,28 +43,29 @@ func check_out(_data):
 var actions = [
 	Action.mk({
 		label_fn=func(): return str("Call ", name),
-		fn=called_by_player,
-		source_can_execute=func(): return following == null and grabbed_by == null,
+		fn=follow_player,
+		source_can_execute=func():
+		return following == null and grabbed_by == null and not machine.state.name in ["Thrown"] and not is_dead,
 		}),
 	Action.mk({
 		label_fn=func(): return str("Grab ", name),
 		fn=grabbed_by_player,
 		maximum_distance=50.0,
 		source_can_execute=func(): return following != null,
-		actor_can_execute=func(player): return following == player and player.can_grab(),
+		actor_can_execute=func(player): return following == player and player.can_grab() and not is_dead,
 		}),
 	Action.mk({
 		label_fn=func(): return str("Throw ", name),
 		fn=thrown_by_player,
 		source_can_execute=func(): return grabbed_by != null,
-		actor_can_execute=func(player): return player.grabbing == self,
+		actor_can_execute=func(player): return player.grabbing == self and not is_dead,
 		})
 	]
 
 var following
 var grabbed_by
 
-func called_by_player(player):
+func follow_player(player):
 	Util._connect(player.dying, on_player_dying)
 	following = player
 	machine.transit("Follow")
@@ -97,7 +98,7 @@ func _on_bullet_collided(
 	if Herd.level_complete:
 		return
 	if body == self:
-		if not machine.state in ["Thrown", "Dead"]:
+		if not machine.state.name in ["Thrown", "Dead"]:
 			bullet_hit()
 
 func bullet_hit():
