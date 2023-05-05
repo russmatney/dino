@@ -268,14 +268,9 @@ func _on_player_death():
 	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
 	t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
 
-	var on_close = Quest.jumbo_notif({header="You died", body="Close (Q) to respawn."})
-	if on_close:
-		if not Quest.jumbo_closed.is_connected(_on_close_respawn):
-			on_close.connect(_on_close_respawn.bind(on_close))
-
-func _on_close_respawn(on_close):
-	on_close.disconnect(_on_close_respawn)
-	Game.respawn_player({player_died=true})
+	Quest.jumbo_notif({header="You died", body="Sorry about it!",
+		action="close", action_label_text="Respawn",
+		on_close=Game.respawn_player.bind({player_died=true})})
 
 ########################################################
 # coins

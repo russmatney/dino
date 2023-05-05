@@ -124,26 +124,32 @@ func ensure_jumbotron():
 
 signal jumbo_closed
 
-func jumbo_notif(header, body=null, key_or_action=null, action_label_text=null):
-	if jumbotron:
-		if header and header is Dictionary:
-			body = header.get("body")
-			key_or_action = header.get("key")
-			key_or_action = header.get("action", key_or_action)
-			action_label_text = header.get("action_label_text")
-			header = header.get("header")
+func jumbo_notif(opts):
+	if not jumbotron or not is_instance_valid(jumbotron):
+		Debug.err("No valid jumbotron, cannot present jumbo_notif", opts)
+		return
 
-		jumbotron.header_text = header
-		if body:
-			jumbotron.body_text = body
-		else:
-			jumbotron.body_text = ""
-		if key_or_action or action_label_text:
-			jumbotron.action_hint.display(key_or_action, action_label_text)
-		else:
-			jumbotron.action_hint.hide()
+	var body = opts.get("body")
+	var key_or_action = opts.get("key")
+	key_or_action = opts.get("action", key_or_action)
+	var action_label_text = opts.get("action_label_text")
+	var header = opts.get("header")
+	var on_close = opts.get("on_close")
 
-		# pause game?
-		jumbotron.fade_in()
+	jumbotron.header_text = header
+	if body:
+		jumbotron.body_text = body
+	else:
+		jumbotron.body_text = ""
+	if key_or_action or action_label_text:
+		jumbotron.action_hint.display(key_or_action, action_label_text)
+	else:
+		jumbotron.action_hint.hide()
 
-		return jumbo_closed
+	if on_close:
+		jumbo_closed.connect(on_close, ConnectFlags.CONNECT_ONE_SHOT)
+
+	# pause game?
+	jumbotron.fade_in()
+
+	return jumbo_closed
