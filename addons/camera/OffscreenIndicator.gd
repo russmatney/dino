@@ -1,6 +1,9 @@
 @tool
 extends AnimatedSprite2D
 
+@onready var label = $%Label
+var label_x_offset = 8
+
 var offset_rads = PI / 4
 
 var target
@@ -11,10 +14,32 @@ var player
 func _ready():
 	player = Util.first_node_in_group("player")
 
+var label_side
+func set_label_side(side):
+	if side == label_side:
+		return
+
+	label_side = side
+	match label_side:
+		"left":
+			label.pivot_offset.x = label.size.x + label_x_offset
+			label.position.x = -label.size.x - label_x_offset
+		"right":
+			label.pivot_offset.x = -label_x_offset
+			label.position.x = label_x_offset
+
+func set_label_text(text):
+	label.set_text("[center]%s" % text)
 
 func point_at(pos):
 	look_at(pos)
 	rotate(offset_rads)
+	label.rotation = -rotation
+
+	if rotation_degrees > 90.0 or rotation_degrees < 0.0:
+		set_label_side("right")
+	else:
+		set_label_side("left")
 
 
 # debug code for pointing at the mouse

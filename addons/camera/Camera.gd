@@ -270,9 +270,11 @@ func add_offscreen_indicator(node, opts={}):
 		return
 
 	var indicator = indicator_scene.instantiate()
-	var vis = VisibleOnScreenNotifier2D.new()
+	indicator.ready.connect(indicator.set_label_text.bind(opts.get("label")))
 
+	var vis = VisibleOnScreenNotifier2D.new()
 	vis.screen_exited.connect(maybe_activate_indicator.bind(indicator, node, opts))
 	vis.screen_entered.connect(indicator.deactivate)
+
 	node.add_child(indicator)
 	node.add_child(vis)

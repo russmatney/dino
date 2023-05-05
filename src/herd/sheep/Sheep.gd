@@ -20,7 +20,7 @@ func _enter_tree():
 func _ready():
 	Hotel.register(self)
 	machine.start()
-	Cam.add_offscreen_indicator(self)
+	Cam.add_offscreen_indicator(self, {label="Sheep"})
 
 	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 
