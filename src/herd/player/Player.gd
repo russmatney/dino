@@ -60,6 +60,10 @@ func _physics_process(_delta):
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		action_detector.execute_current_action()
+	if Trolley.is_cycle_prev_action(event):
+		action_detector.cycle_prev_action()
+	elif Trolley.is_cycle_next_action(event):
+		action_detector.cycle_next_action()
 	if Trolley.is_jump(event):
 		machine.transit("Jump")
 

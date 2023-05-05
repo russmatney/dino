@@ -68,7 +68,7 @@ func update_actions():
 	current_action()
 
 	# maybe reset selection here? probably should maintain the current if it still exists
-	# selected_ax_idx = 0
+	# selected_ax_idx = null
 
 
 ## Returns actions that can be immediately executed
@@ -94,6 +94,10 @@ func find_nearest(axs=actions):
 	# this just returns a matching action for the nearest source
 	if nearest.size() > 0:
 		return nearest[0]
+
+func sort_nearest(axs=actions):
+	# TODO implement
+	return axs
 
 ## Return the nearest immediate action. If none, return the nearest potential action.
 ## Proximity is calced using the actor and the action's source node.
@@ -130,29 +134,39 @@ func current_action():
 	var im_axs = immediate_actions()
 	var new_current_action
 	if im_axs != null and len(im_axs) > 0:
+		var sorted = sort_nearest(im_axs)
+		var idx = 0
 		if selected_ax_idx != null and selected_ax_idx < len(im_axs):
-			new_current_action = im_axs[selected_ax_idx]
-		else:
-			new_current_action = find_nearest(im_axs)
+			idx = selected_ax_idx
+		Debug.pr("curr ax idx", idx)
+		new_current_action = sorted[idx]
+	else:
+		# clear when there are no actions
+		selected_ax_idx = null
 	if new_current_action != cached_current_action:
 		cached_current_action = new_current_action
 		current_action_changed.emit(new_current_action)
 	return new_current_action
 
 ## Supports cycling forward through available actions.
-## TODO cycle according to distance
-func inc_selected_ax_idx():
+func cycle_next_action():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
-		selected_ax_idx += 1 % len(im_axs)
+		if selected_ax_idx == null:
+			selected_ax_idx = 0
+		selected_ax_idx += 1
+		selected_ax_idx %= len(im_axs)
 	current_action()
 
 ## Supports cycling backwards through available actions.
-## TODO cycle according to distance
-func dec_selected_ax_idx():
+func cycle_prev_action():
 	var im_axs = immediate_actions()
 	if im_axs != null and len(im_axs) > 0:
-		selected_ax_idx -= 1 % len(im_axs)
+		if selected_ax_idx == null:
+			selected_ax_idx = 0
+		selected_ax_idx -= 1
+		if selected_ax_idx == -1:
+			selected_ax_idx = len(im_axs) - 1
 	current_action()
 
 ## Executes the result of `current_action()`.
@@ -162,6 +176,7 @@ func execute_current_action():
 	if c_ax:
 		c_ax.execute(actor)
 		current_action()
+		selected_ax_idx = null
 		return true
 	return false
 

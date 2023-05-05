@@ -114,6 +114,12 @@ func is_attack(event):
 func is_action(event):
 	return event.is_action_pressed("action")
 
+func is_cycle_next_action(event):
+	return event.is_action_pressed("cycle_next_action")
+
+func is_cycle_prev_action(event):
+	return event.is_action_pressed("cycle_previous_action")
+
 func is_pause(event):
 	return event.is_action_pressed("pause")
 
