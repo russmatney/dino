@@ -92,10 +92,15 @@ func _on_bullet_collided(
 		body:Node, _body_shape_index:int, _bullet:Dictionary,
 		_local_shape_index:int, _shared_area:Area2D
 	):
+	if Herd.level_complete:
+		return
 	if body == self:
 		bullet_hit()
 
 func bullet_hit():
+	if is_dead:
+		return
+
 	health -= 1
 	Hotel.check_in(self)
 	Cam.screenshake(0.35)
@@ -111,8 +116,13 @@ func bullet_hit():
 # DEATH
 
 signal dying
+var is_dead
 
 func die():
+	if is_dead:
+		return
+
+	is_dead = true
 	dying.emit(self)
 	Debug.pr(name, "dying")
 
@@ -121,8 +131,13 @@ func die():
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0.3, 0.3), duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(self, "modulate:a", 0.3, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(clean_up_and_free)
 
-func clean_up_and_free():
-	Debug.pr("freeing player")
-	queue_free()
+	if Game.is_managed:
+		tween.tween_callback(restart_level)
+	else:
+		tween.tween_callback(Game.respawn_player.bind({player_died=true}))
+
+func restart_level():
+	Quest.jumbo_notif({header="You died.", body="Sorry about it!",
+		action="close", action_label_text="Restart Level",
+		on_close=Herd.retry_level})

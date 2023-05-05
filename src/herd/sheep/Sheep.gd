@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
-@onready var aa = $ActionArea
+@onready var action_area = $ActionArea
 @onready var action_hint = $ActionHint
 
 var max_health = 3
@@ -22,7 +22,7 @@ func _ready():
 	machine.start()
 	Cam.add_offscreen_indicator(self)
 
-	aa.register_actions(actions, {source=self, action_hint=action_hint})
+	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 
 	# BulletUpHell global signal
 	Spawning.bullet_collided_body.connect(_on_bullet_collided)
@@ -33,8 +33,10 @@ func _ready():
 func hotel_data():
 	return {health=health}
 
-func check_out(data):
-	health = Util.get_(data, "health", health)
+func check_out(_data):
+	# reset sheep to full health for now
+	# health = Util.get_(data, "health", health)
+	pass
 
 ###########################################################
 
@@ -95,11 +97,16 @@ func _on_bullet_collided(
 		body:Node, _body_shape_index:int, _bullet:Dictionary,
 		_local_shape_index:int, _shared_area:Area2D
 	):
+	if Herd.level_complete:
+		return
 	if body == self:
 		if not machine.state in ["Thrown", "Dead"]:
 			bullet_hit()
 
 func bullet_hit():
+	if is_dead:
+		return
+
 	health -= 1
 	Hotel.check_in(self)
 	Cam.screenshake(0.25)
@@ -116,8 +123,13 @@ func bullet_hit():
 # DEATH
 
 signal dying
+var is_dead = false
 
 func die():
+	if is_dead:
+		return
+
+	is_dead = true
 	dying.emit(self)
 	Debug.pr(name, "dying")
 
