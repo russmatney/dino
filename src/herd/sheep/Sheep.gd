@@ -31,7 +31,7 @@ func _ready():
 # hotel
 
 func hotel_data():
-	return {health=health, is_dead=is_dead}
+	return {health=health, is_dead=is_dead, name=name}
 
 func check_out(_data):
 	# reset sheep to full health for now

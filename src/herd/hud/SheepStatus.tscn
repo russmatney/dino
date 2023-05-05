@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlc8ax7ok82s8"]
+
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="1_j7bdv"]
+[ext_resource type="Script" path="res://src/herd/hud/SheepStatus.gd" id="1_lflwa"]
+
+[node name="SheepStatus" type="HBoxContainer"]
+offset_right = 208.0
+offset_bottom = 32.0
+script = ExtResource("1_lflwa")
+
+[node name="SheepName" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="HeartsContainer" parent="." instance=ExtResource("1_j7bdv")]
+unique_name_in_owner = true
+layout_mode = 2
