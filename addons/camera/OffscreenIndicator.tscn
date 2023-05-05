@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxjdc2bc1eehj"]
 
-[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="1_ueoa7"]
+[ext_resource type="SpriteFrames" uid="uid://hpucvc64ie6" path="res://addons/camera/OffscreenIndicatorSpriteFrames.tres" id="1_kj8qa"]
 [ext_resource type="Script" path="res://addons/camera/OffscreenIndicator.gd" id="2_pagpy"]
 
 [node name="OffscreenIndicator" type="AnimatedSprite2D"]
-position = Vector2(2.75676e-06, 0.439367)
-rotation = 1.57079
-sprite_frames = ExtResource("1_ueoa7")
+rotation = 0.785398
+sprite_frames = ExtResource("1_kj8qa")
 script = ExtResource("2_pagpy")
