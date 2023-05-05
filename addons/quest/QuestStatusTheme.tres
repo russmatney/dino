@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cj6bkb12o0w0y"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cj6bkb12o0w0y"]
 
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="1"]
 
@@ -39,21 +39,9 @@ cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
-[sub_resource type="FontFile" id="1"]
-resource_local_to_scene = true
-fallbacks = Array[Font]([ExtResource("1")])
-face_index = null
-embolden = null
-transform = null
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
 [resource]
 CheckBox/fonts/font = SubResource("4")
 PanelContainer/styles/panel = SubResource("2")
 QuestStatusLabel/fonts/normal_font = SubResource("3")
-RichTextLabel/fonts/normal_font = SubResource("1")
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/normal_font = ExtResource("1")
