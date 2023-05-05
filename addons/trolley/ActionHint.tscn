@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=15 format=3 uid="uid://bfatjgmhlkjne"]
 
 [ext_resource type="Script" path="res://addons/trolley/ActionHint.gd" id="1_k2w1x"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_dkr3d"]
@@ -16,6 +16,7 @@
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_rvdlc"]
 
 [node name="ActionHint" type="Node2D"]
+z_index = 5
 script = ExtResource("1_k2w1x")
 
 [node name="Key" type="RichTextLabel" parent="."]
