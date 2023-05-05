@@ -53,9 +53,8 @@ func _physics_process(_delta):
 		# TODO snap/round to discrete angles
 		facing_dir = input_move_dir
 
-		# update current action while we're moving?
-		# might be annoying
-		action_detector.current_action()
+	action_detector.current_action()
+
 
 func _unhandled_input(event):
 	if Trolley.is_action(event):

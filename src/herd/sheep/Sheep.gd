@@ -42,20 +42,24 @@ func check_out(_data):
 
 var actions = [
 	Action.mk({
-		label_fn=func(): return str("Call ", name),
+		label="Call",
 		fn=follow_player,
 		source_can_execute=func():
 		return following == null and grabbed_by == null and not machine.state.name in ["Thrown"] and not is_dead,
 		}),
 	Action.mk({
-		label_fn=func(): return str("Grab ", name),
+		label="Grab",
 		fn=grabbed_by_player,
 		maximum_distance=50.0,
 		source_can_execute=func(): return following != null,
-		actor_can_execute=func(player): return following == player and player.can_grab() and not is_dead,
+		actor_can_execute=func(player):
+		return \
+		# player not moving
+		player.input_move_dir.length() <= 0.1 \
+		and following == player and player.can_grab() and not is_dead,
 		}),
 	Action.mk({
-		label_fn=func(): return str("Throw ", name),
+		label="Throw",
 		fn=thrown_by_player,
 		source_can_execute=func(): return grabbed_by != null,
 		actor_can_execute=func(player): return player.grabbing == self and not is_dead,

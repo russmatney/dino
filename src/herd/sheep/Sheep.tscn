@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Grabbed.gd" id="6_qiif0"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Thrown.gd" id="7_scirs"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="7_sxgat"]
-[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="8_540xg"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="8_540xg"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Dead.gd" id="8_xianj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfhc5"]

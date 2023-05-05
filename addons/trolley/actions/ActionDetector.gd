@@ -138,7 +138,6 @@ func current_action():
 		var idx = 0
 		if selected_ax_idx != null and selected_ax_idx < len(im_axs):
 			idx = selected_ax_idx
-		Debug.pr("curr ax idx", idx)
 		new_current_action = sorted[idx]
 	else:
 		# clear when there are no actions
