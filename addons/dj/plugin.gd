@@ -8,12 +8,13 @@ var editor_interface
 
 func _enter_tree():
 	Debug.prn("<DJ>")
-	add_autoload_singleton("DJ", "res://addons/dj/DJ.gd")
+	# add_autoload_singleton("DJ", "res://addons/dj/DJ.gd")
+	# add_autoload_singleton("DJZ", "res://addons/dj/DJZ.gd")
 
 	turn_table = TurnTable.instantiate()
 	editor_interface = get_editor_interface()
 	# Maybe want this to quickly reload the ui, like in hotelUI
-	# turn_table.editor_interface = editor_interface
+	turn_table.editor_interface = editor_interface
 
 	editor_interface.get_editor_main_screen().add_child(turn_table)
 
@@ -22,7 +23,8 @@ func _enter_tree():
 
 
 func _exit_tree():
-	remove_autoload_singleton("DJ")
+	# remove_autoload_singleton("DJ")
+	# remove_autoload_singleton("DJZ")
 	Debug.prn("</DJ>")
 
 

@@ -2,6 +2,31 @@
 extends Control
 
 #######################################################################
+# reload button
+
+var editor_interface
+func _on_reload_plugin_button_pressed():
+	if Engine.is_editor_hint():
+		Debug.prn(&"Reloading hotel plugin ----------------------------------")
+		editor_interface.set_plugin_enabled("hotel", false)
+		editor_interface.set_plugin_enabled("hotel", true)
+		editor_interface.set_main_screen_editor("HotelDB")
+		Debug.prn(&"Reloaded hotel plugin -----------------------------------")
+	else:
+		list_entries()
+
+#######################################################################
+# rebuild button
+
+func _on_rebuild_db_button_pressed():
+	Debug.prn(&"Rebuilding hotel db -----------------------------------")
+	Hotel.drop_db()
+	# TODO collect scene_file_paths and re-register with those instead
+	list_entries()
+	Debug.prn(&"Rebuilt hotel db --------------------------------------")
+
+
+#######################################################################
 # ready
 
 func _ready():
@@ -25,27 +50,6 @@ func check_out(data):
 
 func hotel_data():
 	return {query=query}
-
-#######################################################################
-# reload button
-
-var editor_interface
-func _on_reload_plugin_button_pressed():
-	if Engine.is_editor_hint():
-		Debug.prn(&"Reloading hotel plugin ----------------------------------")
-		editor_interface.set_plugin_enabled("hotel", false)
-		editor_interface.set_plugin_enabled("hotel", true)
-		editor_interface.set_main_screen_editor("HotelDB")
-		Debug.prn(&"Reloaded hotel plugin -----------------------------------")
-	else:
-		list_entries()
-
-func _on_rebuild_db_button_pressed():
-	Debug.prn(&"Rebuilding hotel db -----------------------------------")
-	Hotel.drop_db()
-	# TODO collect scene_file_paths and re-register with those instead
-	list_entries()
-	Debug.prn(&"Rebuilt hotel db --------------------------------------")
 
 #######################################################################
 # option buttons
