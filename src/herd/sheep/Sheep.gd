@@ -70,6 +70,9 @@ var following
 var grabbed_by
 
 func follow_player(player):
+	# check_in here also adds to HUD
+	# not a great pattern, if HUD grabs/inits automatically this is not necessary
+	Hotel.check_in(self)
 	Util._connect(player.dying, on_player_dying)
 	following = player
 	machine.transit("Follow")
