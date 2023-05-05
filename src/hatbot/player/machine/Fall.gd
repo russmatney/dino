@@ -1,9 +1,9 @@
 extends State
 
 var fall_shake_thresholds = [
-	{"threshold": 400, "shake": 0.3, "damage": 0, "sound": DJZ.fall},
-	{"threshold": 550, "shake": 0.6, "damage": 1, "sound": DJZ.heavy_fall},
-	{"threshold": 1000, "shake": 1.0, "damage": 2, "sound": DJZ.heavy_fall},
+	{"threshold": 400, "shake": 0.3, "damage": 0, "sound": DJZ.S.fall},
+	{"threshold": 550, "shake": 0.6, "damage": 1, "sound": DJZ.S.heavy_fall},
+	{"threshold": 1000, "shake": 1.0, "damage": 2, "sound": DJZ.S.heavy_fall},
 	]
 
 var coyote_time_t = 0.2

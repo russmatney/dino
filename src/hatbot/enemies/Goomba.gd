@@ -35,18 +35,18 @@ func _on_transitioned(state_label):
 func _on_death(_goomba):
 	Cam.screenshake(0.1)
 	# TODO goomba sounds
-	DJZ.play(DJZ.soldierdead)
+	DJZ.play(DJZ.S.soldierdead)
 	Hotel.check_in(self)
 
 func _on_knocked_back(_goomba):
 	if health <= 0:
 		anim.play(death_animation)
 		# TODO goomba sounds
-		DJZ.play(DJZ.soldierdead)
+		DJZ.play(DJZ.S.soldierdead)
 	else:
 		anim.play(death_animation)
 		# TODO goomba sounds
-		DJZ.play(DJZ.soldierhit)
+		DJZ.play(DJZ.S.soldierhit)
 
 ########################################################
 # health/hit

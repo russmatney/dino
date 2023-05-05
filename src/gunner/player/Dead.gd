@@ -7,7 +7,7 @@ func enter(ctx = {}):
 	actor.die()
 
 	if "shake" in ctx and ctx["shake"]:
-		DJZ.play(DJZ.heavy_landing)
+		DJZ.play(DJZ.S.heavy_landing)
 		if typeof(ctx["shake"]) == TYPE_FLOAT:
 			Cam.screenshake(ctx["shake"])
 		else:

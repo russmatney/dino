@@ -7,7 +7,7 @@ var double_jump_ttl
 func enter(ctx={}):
 	double_jumping = ctx.get("double_jumping", false)
 
-	DJZ.play(DJZ.jump)
+	DJZ.play(DJZ.S.jump)
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
 

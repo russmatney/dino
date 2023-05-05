@@ -6,7 +6,7 @@ var next_state
 
 func enter(ctx={}):
 	# actor.anim.play("laughing")
-	DJZ.play(DJZ.enemylaugh)
+	DJZ.play(DJZ.S.enemylaugh)
 
 	laugh_ttl = ctx.get("wait_for", laugh_at_least)
 

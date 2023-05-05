@@ -4,7 +4,7 @@ extends State
 func enter(ctx={}):
 	actor.knocked_back.emit(actor)
 
-	DJZ.play(DJZ.enemyhurt)
+	DJZ.play(DJZ.S.enemyhurt)
 
 	var dir = ctx.get("direction", Vector2.LEFT)
 	var dying = ctx.get("dying", false)

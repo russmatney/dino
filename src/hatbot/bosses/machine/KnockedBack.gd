@@ -15,11 +15,11 @@ func enter(opts={}):
 	if actor.dead:
 		kb_y = KNOCKBACK_DYING_Y
 		actor.anim.play("dying")
-		DJZ.play(DJZ.soldierdead)
+		DJZ.play(DJZ.S.soldierdead)
 	else:
 		kb_y = KNOCKBACK_Y
 		actor.anim.play("knocked-back")
-		DJZ.play(DJZ.soldierhit)
+		DJZ.play(DJZ.S.soldierhit)
 
 	if dir == Vector2.LEFT:
 		actor.face_right()

@@ -121,13 +121,13 @@ signal stunned(boss)
 
 func take_hit(opts={}):
 	if not machine.state.name in ["Stunned", "Firing", "Swoop", "Idle", "Laughing"]:
-		DJZ.play(DJZ.nodamageclang)
+		DJZ.play(DJZ.S.nodamageclang)
 		return
 
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.UP)
 
-	DJZ.play(DJZ.playerhurt)
+	DJZ.play(DJZ.S.playerhurt)
 
 	health -= damage
 	health = clamp(health, 0, initial_health)

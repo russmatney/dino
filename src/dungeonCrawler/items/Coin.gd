@@ -26,7 +26,7 @@ func _on_Area2D_body_entered(body: Node):
 
 	if body.has_method("add_coin"):
 		body.add_coin()
-		DJZ.play(DJZ.coin)
+		DJZ.play(DJZ.S.coin)
 		collected = true
 		on_collected.emit(self)
 		disable()

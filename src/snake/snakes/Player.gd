@@ -118,7 +118,7 @@ func attempt_walk(next):
 		["snake", _]:
 			var s = info[1]
 			if s == self:
-				DJZ.play(DJZ.bump)
+				DJZ.play(DJZ.S.bump)
 				highlight("[jump]ow!")
 			else:
 				highlight("[jump]chomp!")
@@ -133,7 +133,7 @@ func _on_step():
 		# TODO skipping step counter here
 		super._on_step()
 	bounce_food()
-	DJZ.play(DJZ.walk)
+	DJZ.play(DJZ.S.walk)
 
 func _on_move_head(coord):
 	Debug.pr("_on_move_head in player", coord)
@@ -169,7 +169,7 @@ func leap_towards_food(next, f):
 	leaping = true
 	segments_flash_white()
 	Cam.screenshake(0.1)
-	DJZ.play(DJZ.laser)
+	DJZ.play(DJZ.S.laser)
 
 	# first, take the step onto the food's row/col
 	walk_towards(next)
@@ -187,7 +187,7 @@ func leap_towards_food(next, f):
 				["snake", _]:
 					var s = info[1]
 					if s == self:
-						DJZ.play(DJZ.bump)
+						DJZ.play(DJZ.S.bump)
 						highlight("[jump]ow!")
 						highlight("[jump]derp.")
 					else:
@@ -225,7 +225,7 @@ var speed_level = 1
 func _on_food_picked_up(f):
 	var txt = Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"])
 	Hood.notif(txt, {"rich": true})
-	DJZ.play(DJZ.pickup)
+	DJZ.play(DJZ.S.pickup)
 	bounce_tail()
 	bounce_floor()
 
@@ -244,7 +244,7 @@ func _on_food_picked_up(f):
 		Cam.screenshake(0.3)
 		speed_level += 1
 		speed_increased.emit()
-		DJZ.play(DJZ.speedup)
+		DJZ.play(DJZ.S.speedup)
 
 		# TODO move to combo levels
 		grid.mark_cells_playing()

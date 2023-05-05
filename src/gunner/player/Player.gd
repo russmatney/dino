@@ -105,7 +105,7 @@ func take_damage(body = null, d = 1):
 	health -= d
 	Hotel.check_in(self, {health=health})
 	health_change.emit(health)
-	DJZ.play(DJZ.player_hit)
+	DJZ.play(DJZ.S.player_hit)
 
 	var dir
 	if body:
@@ -120,7 +120,7 @@ func take_damage(body = null, d = 1):
 
 func die(remove_at = false):
 	is_dead = true
-	DJZ.play(DJZ.player_dead)
+	DJZ.play(DJZ.S.player_dead)
 	dead.emit()
 	if remove_at:
 		queue_free()
@@ -245,7 +245,7 @@ func fire_bullet():
 	Navi.current_scene.add_child.call_deferred(bullet)
 	bullet.rotation = facing_dir.angle()
 	bullet.apply_impulse(facing_dir * bullet_impulse, Vector2.ZERO)
-	DJZ.play(DJZ.fire)
+	DJZ.play(DJZ.S.fire)
 	fired_bullet.emit(bullet)
 
 	# push player back when firing

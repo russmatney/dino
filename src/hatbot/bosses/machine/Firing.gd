@@ -64,7 +64,7 @@ var bullet_knockback = 1
 
 func fire():
 	actor.anim.play("firing")
-	DJZ.play(DJZ.boss_shoot)
+	DJZ.play(DJZ.S.boss_shoot)
 
 	fire_burst_ttl = fire_burst_rate()
 

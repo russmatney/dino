@@ -4,7 +4,7 @@ extends State
 func enter(_ctx={}):
 	actor.anim.play("climb")
 	actor.velocity.y = 0
-	DJZ.play(DJZ.climbstart)
+	DJZ.play(DJZ.S.climbstart)
 
 
 func physics_process(_delta):

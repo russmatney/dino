@@ -60,7 +60,7 @@ var bullet_impulse = 100
 var bullet_knockback = 0
 
 func fire():
-	DJZ.play(DJZ.boss_shoot)
+	DJZ.play(DJZ.S.boss_shoot)
 
 	var bullet = bullet_scene.instantiate()
 

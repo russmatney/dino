@@ -76,7 +76,7 @@ func spawn_player(pos):
 	player.dead.connect(show_dead)
 	Navi.add_child_to_current(player)
 	player_spawned.emit(player)
-	DJZ.play(DJZ.player_spawn)
+	DJZ.play(DJZ.S.player_spawn)
 	return player
 
 
@@ -95,5 +95,5 @@ func spawn_enemy(pos):
 	var enemy = enemy_robot_scene.instantiate()
 	enemy.position = pos
 	Navi.add_child_to_current(enemy)
-	DJZ.play(DJZ.enemy_spawn)
+	DJZ.play(DJZ.S.enemy_spawn)
 	return enemy

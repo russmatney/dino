@@ -22,7 +22,7 @@ func _animation_finished():
 
 func kill():
 	Hood.notif("Target Destroyed")
-	DJZ.play(DJZ.target_kill)
+	DJZ.play(DJZ.S.target_kill)
 	anim.play("pop")
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
 	destroyed.emit(self)

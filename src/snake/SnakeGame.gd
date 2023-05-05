@@ -1,7 +1,7 @@
 @tool
 extends Node
 
-var song_name = DJZ.field_stars
+var song_name = DJZ.S.field_stars
 
 func _ready():
 	# TODO restore music

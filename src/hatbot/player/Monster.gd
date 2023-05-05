@@ -231,7 +231,7 @@ var health = max_health
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.RIGHT)
-	DJZ.play(DJZ.playerhurt)
+	DJZ.play(DJZ.S.playerhurt)
 
 	health -= damage
 	health = clamp(health, 0, max_health)
@@ -239,7 +239,7 @@ func take_hit(opts={}):
 	machine.transit("KnockedBack", {"direction": direction})
 
 func heal(opts={}):
-	DJZ.play(DJZ.playerheal)
+	DJZ.play(DJZ.S.playerheal)
 	anim.play("sit")
 
 	# force one-shot emission

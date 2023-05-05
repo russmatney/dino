@@ -51,14 +51,14 @@ var actions = [
 	]
 
 func pickup(player):
-	DJZ.play(DJZ.collectpowerup)
+	DJZ.play(DJZ.S.collectpowerup)
 	player.add_powerup(powerup)
 	picked_up = true
 	Hotel.check_in(self)
 	show_jumbotron(player)
 
 func read_note(player):
-	DJZ.play(DJZ.showjumbotron)
+	DJZ.play(DJZ.S.showjumbotron)
 	show_jumbotron(player)
 
 func show_jumbotron(player):
