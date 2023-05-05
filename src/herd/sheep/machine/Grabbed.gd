@@ -2,12 +2,19 @@ extends State
 
 ## enter ###########################################################
 
-
 func enter(_opts = {}):
 	actor.anim.play("grabbed")
 
+	actor.set_collision_mask_value(10, false)
+	actor.set_collision_mask_value(11, false)
+
+## exit ###########################################################
+
 func exit(_opts = {}):
 	actor.grabbed_by = null
+
+	actor.set_collision_mask_value(10, true)
+	actor.set_collision_mask_value(11, true)
 
 ## physics ###########################################################
 
@@ -20,10 +27,8 @@ func physics_process(_delta):
 		transit("Idle")
 		return
 
+	# move toward just above the player
 	var target_pos = player.global_position + grab_offset
-
-	# move toward
-	# TODO incorporate delta?
 	actor.global_position = actor.global_position.lerp(target_pos, lerp_amount)
 
 	actor.move_and_slide()

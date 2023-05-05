@@ -57,7 +57,7 @@ cull_fixed_screen = true
 
 [node name="EnemyBullets" type="Area2D" parent="SharedAreas"]
 collision_layer = 16
-collision_mask = 515
+collision_mask = 1539
 
 [node name="ShapeManager" type="AnimatedSprite2D" parent="."]
 visible = false

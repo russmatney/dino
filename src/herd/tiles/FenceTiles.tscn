@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnhchumgoi6s7"]
 
-[ext_resource type="TileSet" uid="uid://dn26xh12hupr1" path="res://addons/reptile/tilesets/WoodenBoxesTiles8.tres" id="1_n8jr4"]
+[ext_resource type="TileSet" uid="uid://ulow1uu5rdd" path="res://src/herd/tiles/FenceTileSet.tres" id="1_bylna"]
 [ext_resource type="Script" path="res://src/herd/tiles/FenceTiles.gd" id="2_7fhm6"]
 
 [node name="FenceTiles" type="TileMap"]
-tile_set = ExtResource("1_n8jr4")
+tile_set = ExtResource("1_bylna")
 cell_quadrant_size = 8
 format = 2
 script = ExtResource("2_7fhm6")

@@ -21,7 +21,7 @@ radius = 64.0703
 
 [node name="Sheep" type="CharacterBody2D" groups=["enemy_bullet_attractors", "npcs", "sheep"]]
 collision_layer = 512
-collision_mask = 533
+collision_mask = 1557
 script = ExtResource("1_fs8bu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -11,7 +11,7 @@ var direction = Vector2.ZERO
 var jump_speed = 15000
 
 func enter(opts = {}):
-	actor.set_collision_mask_value(1, false)
+	actor.set_collision_mask_value(11, false)
 
 	# actor.anim.play("jump")
 
@@ -29,7 +29,7 @@ func enter(opts = {}):
 ## exit ###########################################################
 
 func exit():
-	actor.set_collision_mask_value(1, true)
+	actor.set_collision_mask_value(11, true)
 
 ## physics ###########################################################
 

@@ -171,7 +171,7 @@ r_scale_multi_scale_variation = Vector3(0, 0, 0)
 
 [node name="Wolf" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
-collision_mask = 527
+collision_mask = 1551
 script = ExtResource("1_1d058")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
