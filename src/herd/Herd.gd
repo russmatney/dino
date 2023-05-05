@@ -7,9 +7,6 @@ extends DinoGame
 var next_level_menu_sfp = preload("res://src/herd/menus/NextLevelMenu.tscn")
 var next_level_menu
 
-func show_next_level_menu():
-	next_level_menu.show()
-
 ######################################################
 # dino game api
 
@@ -68,7 +65,15 @@ func load_level(idx):
 
 func handle_level_complete():
 	if level_idx == len(levels) - 1:
-		# TODO proper congrats
-		Navi.show_win_menu()
+		next_level_menu.update_sheep_saved()
+		next_level_menu.update_hero_text("You Win!")
+		next_level_menu.update_buttons()
+		next_level_menu.show()
 	else:
-		show_next_level_menu()
+		next_level_menu.update_sheep_saved()
+		next_level_menu.update_hero_text("Level Complete!")
+		next_level_menu.update_buttons()
+		next_level_menu.show()
+
+func no_more_levels():
+	return level_idx >= len(levels) - 1
