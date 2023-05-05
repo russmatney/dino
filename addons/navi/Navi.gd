@@ -4,6 +4,12 @@ extends Node
 # https://docs.godotengine.org/en/latest/tutorials/io/background_loading.html#doc-background-loading
 
 func add_menu(scene):
+	for c in get_children():
+		var sfp = scene.resource_path
+		if c.scene_file_path == sfp:
+			c.hide()
+			return c
+
 	var menu = scene.instantiate()
 	menu.hide()
 	add_child.call_deferred(menu)
