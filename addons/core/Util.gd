@@ -115,6 +115,7 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 		sfp = packed_scene_or_path
 	elif packed_scene_or_path is PackedScene:
 		scene = packed_scene_or_path
+		sfp = packed_scene_or_path.resource_path
 	var state = scene.get_state()
 	var by_path = {}
 	for node_idx in state.get_node_count():
