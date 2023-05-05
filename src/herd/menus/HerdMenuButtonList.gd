@@ -6,6 +6,10 @@ var menu_scenes = [
 		"label": "Start Game",
 		"fn": Game.restart_game.bind(Herd),
 	},
+	{
+		label="Credits",
+		nav_to="res://src/dino/DinoCredits.tscn",
+	},
 ]
 
 # default button scene

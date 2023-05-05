@@ -1,4 +1,5 @@
-extends Control
+@tool
+extends CanvasLayer
 
 
 func _on_Button_pressed():

@@ -12,16 +12,9 @@ var initial_scroll_delay = 2.0
 var scroll_delay_per_line = 0.05
 var since_last_scroll = 0
 
-var expected_nodes = ["CreditsScrollContainer", "CreditsLinesContainer"]
-
-
 func _get_configuration_warnings():
-	var warnings = []
-	for n in expected_nodes:
-		var node = find_child(n)
-		if not node:
-			warnings.append("'Credits' node expects a child named '" + n + "'")
-	return warnings
+	return Util._config_warning({expected_nodes=[
+		"CreditsScrollContainer", "CreditsLinesContainer"]})
 
 
 var added_lines = []
@@ -75,6 +68,6 @@ var credits = [
 	["Made in Godot, Aseprite, and Emacs"],
 ]
 
-
+# overwrite in children
 func get_credit_lines():
 	return credits
