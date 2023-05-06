@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ifa4epqvkp5i"]
+[gd_scene load_steps=15 format=3 uid="uid://ifa4epqvkp5i"]
 
 [ext_resource type="Script" path="res://src/herd/player/Player.gd" id="1_0n50h"]
 [ext_resource type="SpriteFrames" uid="uid://cwbvodfvafihs" path="res://src/herd/player/PlayerSpriteFrames.tres" id="2_1bdvx"]
@@ -9,11 +9,27 @@
 [ext_resource type="Script" path="res://src/herd/player/machine/Jump.gd" id="7_mohdy"]
 [ext_resource type="Script" path="res://src/herd/player/machine/Dead.gd" id="7_n32gv"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="7_v86gy"]
+[ext_resource type="Texture2D" uid="uid://b70wb57nscbng" path="res://assets/sprites/offscreen-indicator_sheet.png" id="10_gkve5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwxwm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8piw"]
 size = Vector2(144, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqehv"]
+atlas = ExtResource("10_gkve5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljfhh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqehv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["enemy_bullet_attractors", "player"]]
 collision_layer = 2
@@ -52,3 +68,7 @@ shape = SubResource("RectangleShape2D_u8piw")
 
 [node name="ActionHint" parent="." instance=ExtResource("7_v86gy")]
 position = Vector2(0, -32)
+
+[node name="FacingArrow" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ljfhh")
+offset = Vector2(8, -8)

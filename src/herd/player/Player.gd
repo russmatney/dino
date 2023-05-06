@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var action_detector = $ActionDetector
 @onready var ah = $ActionHint
+@onready var facing_arrow = $FacingArrow
 
 var max_health = 6
 var health = 6
@@ -43,6 +44,14 @@ func check_out(data):
 	health = Util.get_(data, "health", health)
 
 ######################################################
+# facing_arrow
+
+var arrow_offset = PI/4
+func update_facing_arrow():
+	facing_arrow.rotation = facing_dir.angle() + arrow_offset
+
+######################################################
+# input
 
 var input_move_dir = Vector2.ZERO
 
@@ -53,6 +62,7 @@ func _physics_process(_delta):
 	if input_move_dir.abs().length() > 0:
 		# TODO snap/round to discrete angles
 		facing_dir = input_move_dir
+		update_facing_arrow()
 
 	action_detector.current_action()
 
