@@ -10,8 +10,8 @@ var should_log = false
 
 
 # should only be called when the owner is ready
-func start():
-	Debug.prn("[Start] actor: ", owner)
+func start(opts={}):
+	Debug.prn("[Start] actor: ", owner, opts)
 
 	if initial_state:
 		state = get_node(initial_state)
@@ -28,7 +28,7 @@ func start():
 			state = child
 
 	if state:
-		state.enter()
+		state.enter(opts)
 		transitioned.emit(state.name)
 
 

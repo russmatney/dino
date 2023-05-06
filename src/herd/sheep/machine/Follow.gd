@@ -18,7 +18,7 @@ var move_speed = 5000
 
 func physics_process(delta):
 	if actor.following == null or not is_instance_valid(actor.following):
-		transit("Idle")
+		transit("Idle", {home_position=actor.global_position})
 		return
 
 	var target_vec = actor.following.global_position - actor.global_position

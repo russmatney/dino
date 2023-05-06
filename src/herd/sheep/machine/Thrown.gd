@@ -1,5 +1,6 @@
 extends State
 
+
 ## enter ###########################################################
 
 var og_pos
@@ -11,6 +12,8 @@ var direction = Vector2.ZERO
 var throw_speed = 15000
 
 func enter(opts = {}):
+	og_pos = actor.global_position
+
 	actor.set_collision_mask_value(10, false)
 	actor.set_collision_mask_value(11, false)
 
@@ -21,8 +24,6 @@ func enter(opts = {}):
 	direction = Util.get_(opts, "direction", direction)
 	throw_speed = Util.get_(opts, "throw_speed", throw_speed)
 
-	og_pos = actor.global_position
-
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2(1.5, 1.5), ttl/2.0)
 	tween.tween_property(actor, "scale", Vector2(1.0, 1.0), ttl/2.0)
@@ -31,6 +32,7 @@ func enter(opts = {}):
 func exit():
 	actor.set_collision_mask_value(10, true)
 	actor.set_collision_mask_value(11, true)
+
 
 ## physics ###########################################################
 
@@ -42,7 +44,7 @@ func physics_process(delta):
 	ttl -= delta
 
 	if ttl <= 0 or dtl < dist:
-		transit("Idle")
+		transit("Idle", {home_position=actor.global_position})
 		return
 
 	var move_vec = direction * throw_speed * delta

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://6sj01yybi4qt"]
+[gd_scene load_steps=15 format=3 uid="uid://6sj01yybi4qt"]
 
 [ext_resource type="Script" path="res://src/herd/sheep/Sheep.gd" id="1_fs8bu"]
 [ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/herd/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="7_sxgat"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="8_540xg"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Dead.gd" id="8_xianj"]
+[ext_resource type="Script" path="res://src/herd/sheep/machine/Hop.gd" id="9_p4cjf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfhc5"]
 radius = 9.0
@@ -50,6 +51,9 @@ script = ExtResource("7_scirs")
 
 [node name="Dead" type="Node" parent="Machine"]
 script = ExtResource("8_xianj")
+
+[node name="Hop" type="Node" parent="Machine"]
+script = ExtResource("9_p4cjf")
 
 [node name="CamPOI" parent="." instance=ExtResource("6_6810x")]
 importance = 0.5
