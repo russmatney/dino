@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bstod1n1dqbyt"]
+[gd_scene load_steps=19 format=3 uid="uid://bstod1n1dqbyt"]
 
 [ext_resource type="Script" path="res://src/herd/wolf/Wolf.gd" id="1_1d058"]
 [ext_resource type="SpriteFrames" uid="uid://djaootvlyfr6n" path="res://src/herd/wolf/WolfSpriteFrames.tres" id="1_3bwit"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternLine.gd" id="7_48ef5"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletProperties.gd" id="8_p1877"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BulletProps.gd" id="9_cug5c"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="10_tlokw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ml7v5"]
 radius = 8.0
@@ -211,3 +212,6 @@ pattern = SubResource("NavigationPolygon_dwyo1")
 curve = SubResource("Curve2D_1408n")
 script = ExtResource("8_p1877")
 props = SubResource("PackedDataContainer_l1u1k")
+
+[node name="CamPOI" parent="." instance=ExtResource("10_tlokw")]
+importance = 0.5
