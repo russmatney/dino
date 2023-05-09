@@ -225,17 +225,17 @@ func remove_matching(arr, to_remove):
 # Facing
 
 func update_h_flip(facing, node):
-	if facing == Vector2.RIGHT and node.position.x < 0:
+	if facing.x > 0 and node.position.x < 0:
 		node.position.x = -node.position.x
 		node.scale.x = -node.scale.x
-	elif facing == Vector2.LEFT and node.position.x > 0:
+	elif facing.x < 0 and node.position.x > 0:
 		node.position.x = -node.position.x
 		node.scale.x = -node.scale.x
 
 func update_los_facing(facing, node):
-	if facing == Vector2.RIGHT and node.target_position.y > 0:
+	if facing.x > 0 and node.target_position.y > 0:
 		node.target_position.y = -node.target_position.y
-	elif facing == Vector2.LEFT and node.target_position.y < 0:
+	elif facing.x < 0 and node.target_position.y < 0:
 		node.target_position.y = -node.target_position.y
 
 

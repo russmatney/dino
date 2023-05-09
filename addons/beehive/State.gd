@@ -7,7 +7,7 @@ var actor = null
 ## input #####################################################################
 
 
-func handle_input(event: InputEvent):
+func unhandled_input(event: InputEvent):
 	pass
 
 

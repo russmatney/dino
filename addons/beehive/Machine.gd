@@ -37,7 +37,7 @@ func start(opts={}):
 
 func _unhandled_input(ev):
 	if state:
-		state.handle_input(ev)
+		state.unhandled_input(ev)
 
 
 ### process #####################################################################

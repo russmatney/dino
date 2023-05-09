@@ -11,6 +11,8 @@ radius = 15.0
 height = 38.0
 
 [node name="Goon" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 1025
 script = ExtResource("1_teuic")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

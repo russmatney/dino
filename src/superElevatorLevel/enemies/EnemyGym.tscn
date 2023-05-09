@@ -21,4 +21,4 @@ position = Vector2(-144, -114)
 position = Vector2(138, -94)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_k0omd")]
-position = Vector2(223, 73)
+position = Vector2(-13, -94)
