@@ -5,8 +5,9 @@ var punch_ttl
 
 var initial_punch_count = 0
 var punch_count
-
 var punched_again_pressed
+
+var hit_anything
 
 ## enter ###########################################################
 
@@ -16,10 +17,11 @@ func enter(opts = {}):
 	punched_again_pressed = false
 	punch_ttl = punch_time
 
-	actor.punch()
+	hit_anything = actor.punch()
 
 func exit():
 	punch_ttl = null
+
 
 ## unhandled_input ###########################################################
 
@@ -37,10 +39,10 @@ func physics_process(delta):
 	punch_ttl -= delta
 
 	if punch_ttl <= 0:
-		if punched_again_pressed and punch_count == 0:
+		if hit_anything and punched_again_pressed and punch_count == 0:
 			transit("Punch", {punch_count=1})
-		# elif punched_again_pressed and punch_count == 1:
-		# 	transit("Kick")
+		elif hit_anything and punched_again_pressed and punch_count == 1:
+			transit("Kick")
 		else:
 			transit("Idle")
 		return

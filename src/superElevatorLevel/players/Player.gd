@@ -27,6 +27,7 @@ func _ready():
 func _on_transit(label):
 	state_label.set_text("[center]%s" % label)
 
+
 ## input ###########################################################
 
 func _unhandled_input(event):
@@ -37,6 +38,7 @@ func _unhandled_input(event):
 	if Trolley.is_attack(event) and machine.state.name in ["Idle", "Walk"]:
 		machine.transit("Punch")
 		return
+
 
 ## physics_process ###########################################################
 
@@ -54,12 +56,24 @@ func update_facing():
 	Util.update_h_flip(facing_vector, punch_box)
 	Util.update_h_flip(facing_vector, grab_box)
 
+
 ## punching ###########################################################
 
 func punch():
+	var did_hit
 	for body in punch_box_bodies:
 		if "machine" in body:
 			body.machine.transit("Punched")
+			did_hit = true
+	return did_hit
+
+func kick():
+	var did_hit
+	for body in punch_box_bodies:
+		if "machine" in body:
+			body.machine.transit("Kicked", {direction=facing_vector})
+			did_hit = true
+	return did_hit
 
 var punch_box_bodies = []
 
@@ -69,6 +83,7 @@ func on_punchbox_body_entered(body):
 
 func on_punchbox_body_exited(body):
 	punch_box_bodies.erase(body)
+
 
 ## grabbing ###########################################################
 
