@@ -1,23 +1,22 @@
 extends State
 
 
-var og_pos
 var jump_time = 0.6
 var jump_ttl
-var distance = 100
-var allowed_dist
 var jump_speed = 15000
 
 var direction: Vector2
 
+var kick_pressed
+var kicked_bodies = []
+
+
 ## enter ###########################################################
 
 func enter(opts = {}):
-	Hood.notif("Jumping!")
-	og_pos = actor.global_position
-
+	kick_pressed = false
+	kicked_bodies = []
 	jump_ttl = Util.get_(opts, "jump_time", jump_time)
-	allowed_dist = Util.get_(opts, "distance", distance)
 	direction = Util.get_(opts, "direction", actor.move_vector)
 
 	var tween = create_tween()
@@ -25,21 +24,33 @@ func enter(opts = {}):
 	tween.tween_property(actor, "scale", Vector2.ONE, jump_ttl/2.0)
 
 
-## physics ###########################################################
+## input ###########################################################
 
-
-func physics_process(delta):
-	if og_pos == null:
+func unhandled_input(event):
+	if Trolley.is_attack(event) and not kick_pressed:
+		kick_pressed = true
+		# TODO jump-kick animation
 		return
 
-	# var dist_traveled = og_pos.distance_to(actor.global_position)
+
+## physics ###########################################################
+
+func physics_process(delta):
+	if jump_ttl == null:
+		return
+
 	jump_ttl -= delta
 
 	if jump_ttl <= 0:
-	# Vor dist_traveled > allowed_dist:
 		transit("Idle")
 		return
 
 	var move_vec = direction * jump_speed * delta
 	actor.velocity = actor.velocity.lerp(move_vec, 0.6)
 	actor.move_and_slide()
+
+	if kick_pressed:
+		for b in actor.punch_box_bodies:
+			if not b in kicked_bodies and "machine" in b:
+				b.machine.transit("Kicked", {direction=direction})
+				kicked_bodies.append(b)

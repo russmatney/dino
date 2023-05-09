@@ -15,8 +15,6 @@ func _ready():
 	Cam.ensure_camera({player=self})
 	Hood.ensure_hud()
 
-	Hood.notif("Player ready!")
-
 	punch_box.body_entered.connect(on_punchbox_body_entered)
 	punch_box.body_exited.connect(on_punchbox_body_exited)
 

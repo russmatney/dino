@@ -47,5 +47,7 @@ func physics_process(delta):
 	grab_ttl -= delta
 
 	if grab_ttl <= 0:
+		if grabbed.machine.state.name == "Grabbed":
+			grabbed.machine.transit("Idle")
 		transit("Idle")
 		return
