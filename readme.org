@@ -21,6 +21,14 @@ there: [[https://russmatney.com/note/dino.html][russmatney.com/note/dino.html]].
 * Games
 These (and future games) are discussed on my blog (linked above).
 
+** Herd: A sheep bullet hell
+See ~src/hatbot/*~ for the code.
+
+No separate itch page and build yet - but playable in Dino's main deploy:
+[[https://russmatney.itch.io/dino][russmatney.itch.io/dino]].
+
+I worked on this for the Bullet Hell Jam 2023, but didn't end up submitting -
+it's still very prototypey.
 ** Mvania 19: HatBot
 A submission for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
 
@@ -147,6 +155,8 @@ supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
 **** Pause Screen
 **** Win Screen
 **** Death Screen
+** Quest
+Basic signals and checks for completing one or more tasks in a scene.
 ** Reptile
 Tools scripts and ui to improve on Godot's TileSet UI gap.
 Includes some basic auto-tiles to speed up prototyping.
