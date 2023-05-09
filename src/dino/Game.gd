@@ -20,7 +20,8 @@ func _ready():
 # handling current_game (for dev-mode), could live elsewhere
 
 # NOTE these need to auto-load BEFORE Game.gd
-var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd]
+var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd, SuperElevatorLevel]
+
 
 func game_for_scene(scene):
 	var gs = games.filter(func(g): return g and g.manages_scene(scene))

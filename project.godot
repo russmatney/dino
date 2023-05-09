@@ -50,6 +50,7 @@ DemoLand="*res://src/demoland/DemoLand.gd"
 DungeonCrawler="*res://src/dungeonCrawler/DungeonCrawler.gd"
 Metro="*res://addons/metro/Metro.gd"
 Herd="*res://src/herd/Herd.gd"
+SuperElevatorLevel="*res://src/superElevatorLevel/SuperElevatorLevel.gd"
 Game="*res://src/dino/Game.gd"
 Spawning="*res://addons/BulletUpHell/Spawning.tscn"
 
