@@ -26,7 +26,7 @@ func _on_transit(label):
 ## input ###########################################################
 
 func _unhandled_input(event):
-	if Trolley.is_jump(event):
+	if Trolley.is_jump(event) and machine.state.name in ["Idle", "Walk"]:
 		machine.transit("Jump")
 
 ## physics_process ###########################################################
