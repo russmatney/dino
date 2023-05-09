@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuhse8n16im46"]
+[gd_scene load_steps=11 format=3 uid="uid://cuhse8n16im46"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_3kpnx"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Idle.gd" id="2_oxcoh"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Punch.gd" id="4_e05d6"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Jump.gd" id="5_154mq"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Punched.gd" id="6_68yeg"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Grab.gd" id="7_sfmr7"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Grabbed.gd" id="8_3jy6o"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Throw.gd" id="9_v31mg"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Thrown.gd" id="10_hdjpc"]
 
 [node name="BEUMachine" type="Node"]
 script = ExtResource("1_3kpnx")
@@ -24,3 +28,15 @@ script = ExtResource("5_154mq")
 
 [node name="Punched" type="Node" parent="."]
 script = ExtResource("6_68yeg")
+
+[node name="Grab" type="Node" parent="."]
+script = ExtResource("7_sfmr7")
+
+[node name="Grabbed" type="Node" parent="."]
+script = ExtResource("8_3jy6o")
+
+[node name="Throw" type="Node" parent="."]
+script = ExtResource("9_v31mg")
+
+[node name="Thrown" type="Node" parent="."]
+script = ExtResource("10_hdjpc")

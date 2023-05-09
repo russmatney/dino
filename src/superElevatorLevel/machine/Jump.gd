@@ -2,7 +2,7 @@ extends State
 
 
 var og_pos
-var jump_time = 0.8
+var jump_time = 0.6
 var jump_ttl
 var distance = 100
 var allowed_dist

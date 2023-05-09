@@ -13,9 +13,6 @@ func _ready():
 ## on_transit ###########################################################
 
 func _on_transit(label):
-	Debug.pr(label)
-	Debug.pr(machine.state)
-
 	state_label.set_text("[center]%s" % label)
 
 ## movement ###########################################################

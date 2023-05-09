@@ -3,8 +3,8 @@ extends State
 ## enter ###########################################################
 
 
-func enter(opts = {}):
-	Hood.notif("idle!", opts)
+func enter(_opts = {}):
+	pass
 
 
 ## physics ###########################################################
