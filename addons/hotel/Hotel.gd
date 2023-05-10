@@ -156,7 +156,7 @@ func book_data(data: Dictionary, opts = {}):
 				entry["script_path"] = inst["properties"]["script"].resource_path
 
 		# instance name
-		if "instance_name" in d:
+		if "instance_name" in d and path == ^".":
 			entry["instance_name"] = d["instance_name"]
 
 		# set zone and room names via parents
