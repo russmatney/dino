@@ -21,7 +21,7 @@ func enter(opts = {}):
 
 	hit_anything = actor.punch()
 
-	next_state = "Attack"
+	next_state = opts.get("next_state")
 
 func exit():
 	punch_ttl = null
