@@ -13,11 +13,11 @@ height = 38.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0rui7"]
 size = Vector2(26, 24)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_slgwo"]
-size = Vector2(20, 34)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_fg5y2"]
 radius = 165.027
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0fhh"]
+size = Vector2(10, 32)
 
 [node name="Goon" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
@@ -52,15 +52,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchBox"]
 shape = SubResource("RectangleShape2D_0rui7")
 
-[node name="GrabBox" type="Area2D" parent="."]
-position = Vector2(12, -8)
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBox"]
-position = Vector2(0, 7)
-shape = SubResource("RectangleShape2D_slgwo")
-
 [node name="NoticeBox" type="Area2D" parent="."]
 position = Vector2(80, 0)
 collision_layer = 0
@@ -68,3 +59,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeBox"]
 shape = SubResource("CircleShape2D_fg5y2")
+
+[node name="GrabBox" type="Area2D" parent="."]
+position = Vector2(8, 0)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBox"]
+shape = SubResource("RectangleShape2D_m0fhh")

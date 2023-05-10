@@ -13,7 +13,7 @@ height = 40.0
 size = Vector2(26, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kshg2"]
-size = Vector2(20, 34)
+size = Vector2(10, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yoh5"]
 size = Vector2(144, 96)
@@ -22,8 +22,6 @@ size = Vector2(144, 96)
 collision_layer = 2
 collision_mask = 1025
 script = ExtResource("1_10ddc")
-should_wander = null
-wander_speed = null
 
 [node name="BEUMachine" parent="." instance=ExtResource("1_uku6g")]
 
@@ -55,12 +53,11 @@ collision_mask = 136
 shape = SubResource("RectangleShape2D_hgr1e")
 
 [node name="GrabBox" type="Area2D" parent="."]
-position = Vector2(12, -8)
+position = Vector2(8, 0)
 collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBox"]
-position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_kshg2")
 
 [node name="NoticeBox" type="Area2D" parent="."]
