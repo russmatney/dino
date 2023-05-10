@@ -12,20 +12,19 @@ var directions = [
 	Vector2.DOWN + Vector2.LEFT,
 	]
 
-var direction
-
 
 ## enter ###########################################################
 
 func enter(_opts = {}):
 	wander_ttl = Util.rand_of(wander_times)
-	direction = Util.rand_of(directions)
+	actor.move_vector = Util.rand_of(directions)
 
 
 ## exit ###########################################################
 
 func exit():
 	wander_ttl = null
+	actor.move_vector = Vector2.ZERO
 
 
 ## physics ###########################################################
@@ -38,6 +37,6 @@ func physics_process(delta):
 		transit("Idle")
 		return
 
-	var new_vel = direction * actor.wander_speed * delta
+	var new_vel = actor.move_vector * actor.wander_speed * delta
 	actor.velocity = actor.velocity.lerp(new_vel, 0.7)
 	actor.move_and_slide()
