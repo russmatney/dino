@@ -3,7 +3,7 @@ extends PanelContainer
 
 @onready var portrait = $%Portrait
 @onready var hearts_container = $%HeartsContainer
-@onready var enemy_name = $%EnemyName
+@onready var entity_name = $%EntityName
 
 var delete_in
 var key
@@ -14,7 +14,7 @@ func set_status(opts):
 
 	if opts.get("name"):
 		key = opts.get("name")
-		enemy_name.text = "%s" % opts.get("name")
+		entity_name.text = "%s" % opts.get("name")
 
 	var h = opts.get("health")
 	if h != null:

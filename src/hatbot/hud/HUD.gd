@@ -91,7 +91,7 @@ var to_portrait_texture = {
 
 
 @onready var enemy_status_list = $%EnemyStatusList
-var status_scene = preload("res://addons/hood/EnemyStatus.tscn")
+var status_scene = preload("res://addons/hood/EntityStatus.tscn")
 
 func find_existing_status(enemy):
 	for ch in enemy_status_list.get_children():
