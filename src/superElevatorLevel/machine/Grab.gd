@@ -8,11 +8,7 @@ var grab_ttl
 ## enter ###########################################################
 
 func enter(opts = {}):
-	Debug.pr("Grab", opts)
-
 	grabbed = opts.get("grabbed")
-	Debug.pr("grabbed set", grabbed)
-
 	grab_ttl = grab_time
 
 
@@ -20,7 +16,6 @@ func enter(opts = {}):
 
 func exit():
 	grabbed = null
-	Hood.notif("Grab.grabbed cleared")
 
 
 ## input ###########################################################

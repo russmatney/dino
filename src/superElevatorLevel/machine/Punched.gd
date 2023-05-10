@@ -2,11 +2,13 @@ extends State
 
 var punched_time = 0.3
 var punched_ttl
+var punched_by
 
 ## enter ###########################################################
 
-func enter(_opts = {}):
-	Hood.notif("Punched!")
+func enter(opts = {}):
+	punched_by = opts.get("punched_by")
+	actor.take_damage("punch", punched_by)
 
 	punched_ttl = punched_time
 
@@ -17,6 +19,7 @@ func enter(_opts = {}):
 
 func exit():
 	punched_ttl = null
+	punched_by = null
 
 ## physics ###########################################################
 

@@ -44,7 +44,6 @@ func physics_process(delta):
 	if punch_ttl <= 0:
 		# TODO some enemies kick with a lower punch_count
 		if punch_count == 2:
-			# end of combo? move to notice/approach/circle?
 			transit("Kick")
 			punch_count = 0
 		else:

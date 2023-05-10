@@ -18,7 +18,15 @@ func _get_configuration_warnings():
 @export var throw_speed: int = 12000
 @export var wander_speed: int = 4000
 @export var walk_speed: int = 10000
+@export var kicked_speed: int = 7000
 @export var max_attackers: int = 1
+@export var initial_health: int = 20
+
+@export var punch_power: int = 3
+@export var kick_power: int = 5
+@export var throw_power: int = 3
+@export var weight: int = 4
+@export var defense: int = 1
 
 var machine
 var state_label
@@ -28,10 +36,18 @@ var notice_box
 
 var move_vector: Vector2
 var facing_vector: Vector2
+var health
+
+
+## enter_tree ###########################################################
+
+func _enter_tree():
+	Hotel.book(self)
 
 ## ready ###########################################################
 
 func _ready():
+	Hotel.register(self)
 	if not Engine.is_editor_hint():
 		machine = $BEUMachine
 		state_label = $StateLabel
@@ -51,11 +67,19 @@ func _ready():
 		notice_box.body_entered.connect(on_noticebox_body_entered)
 		notice_box.body_exited.connect(on_noticebox_body_exited)
 
-
 ## on_transit ###########################################################
 
 func _on_transit(label):
 	state_label.set_text("[center]%s" % label)
+
+
+## hotel ###########################################################
+
+func hotel_data():
+	return {health=health}
+
+func check_out(data):
+	health = Util.get_(data, "health", initial_health)
 
 
 ## facing ###########################################################
@@ -81,7 +105,7 @@ func punch():
 	var did_hit
 	for body in punch_box_bodies:
 		if "machine" in body:
-			body.machine.transit("Punched")
+			body.machine.transit("Punched", {punched_by=self})
 			did_hit = true
 	return did_hit
 
@@ -89,7 +113,7 @@ func kick():
 	var did_hit
 	for body in punch_box_bodies:
 		if "machine" in body:
-			body.machine.transit("Kicked", {direction=facing_vector})
+			body.machine.transit("Kicked", {kicked_by=self, direction=facing_vector})
 			did_hit = true
 	return did_hit
 
@@ -157,3 +181,26 @@ func on_noticebox_body_entered(body):
 
 func on_noticebox_body_exited(body):
 	notice_box_bodies.erase(body)
+
+
+## health ###########################################################
+
+func take_damage(hit_type, attacker):
+	var attack_power
+	match hit_type:
+		"punch":
+			attack_power = attacker.punch_power
+		"kick":
+			attack_power = attacker.kick_power
+		"throw":
+			attack_power = attacker.throw_power + weight
+
+	var damage = attack_power - defense
+
+	health -= damage
+	Hotel.check_in(self)
+
+	if health <= 0:
+		# TODO impl character death
+		health = initial_health
+		Hotel.check_in(self)

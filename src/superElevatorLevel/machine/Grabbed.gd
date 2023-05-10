@@ -2,8 +2,8 @@ extends State
 
 ## enter ###########################################################
 
-func enter(opts = {}):
-	Hood.notif("Grabbed", opts)
+func enter(_opts = {}):
+	pass
 
 
 ## exit ###########################################################

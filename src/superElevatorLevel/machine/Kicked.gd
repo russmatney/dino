@@ -2,8 +2,8 @@ extends State
 
 var kicked_time = 0.4
 var kicked_ttl
-var kicked_speed = 7000
 var direction: Vector2
+var kicked_by
 
 
 ## enter ###########################################################
@@ -12,6 +12,8 @@ func enter(opts = {}):
 	direction = opts.get("direction", direction)
 
 	kicked_ttl = kicked_time
+	kicked_by = opts.get("kicked_by")
+	actor.take_damage("kick", kicked_by)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*1.2, kicked_time/2.0)
@@ -37,6 +39,6 @@ func physics_process(delta):
 		transit("Idle")
 		return
 
-	var move_vec = direction * kicked_speed * delta
+	var move_vec = direction * actor.kicked_speed * delta
 	actor.velocity = actor.velocity.lerp(move_vec, 0.6)
 	actor.move_and_slide()

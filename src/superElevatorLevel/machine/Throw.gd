@@ -8,8 +8,6 @@ var thrown
 ## enter ###########################################################
 
 func enter(opts = {}):
-	Hood.notif("throw!", opts)
-
 	thrown = opts.get("body")
 	throw_ttl = throw_time
 
