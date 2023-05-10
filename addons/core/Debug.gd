@@ -152,6 +152,8 @@ func to_pretty(msg, newlines=false, indent_level=0):
 	elif msg is String:
 		if msg == "":
 			return '""'
+		if msg.contains("["):
+			msg = "<ACTUAL-TEXT-REPLACED>"
 		return color_wrap(msg, "dark_gray")
 	elif msg is StringName:
 		return '[color=%s]&[/color]"%s"' % ["coral", msg]
