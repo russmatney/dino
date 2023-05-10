@@ -4,41 +4,37 @@
 [ext_resource type="Script" path="res://addons/hood/HeartsContainer.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://c0krk73ogmw2j" path="res://assets/sprites/hearts_sheet.png" id="3_jsqon"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0v1w5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss0vn"]
+resource_local_to_scene = true
+atlas = ExtResource("3_jsqon")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf8gs"]
 resource_local_to_scene = true
 atlas = ExtResource("3_jsqon")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qj0no"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8wd0"]
 resource_local_to_scene = true
 atlas = ExtResource("3_jsqon")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sahk4"]
-resource_local_to_scene = true
-atlas = ExtResource("3_jsqon")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(64, 0, 32, 32)
 
 [node name="HeartsContainer" type="HBoxContainer"]
 offset_right = 104.0
 offset_bottom = 32.0
-alignment = 2
 script = ExtResource("3")
-flip_h = true
+h = 3
 
 [node name="HeartIcon" parent="." instance=ExtResource("1")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_0v1w5")
-flip_h = true
+texture = SubResource("AtlasTexture_ss0vn")
+state = "full"
 
 [node name="HeartIcon2" parent="." instance=ExtResource("1")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_qj0no")
-flip_h = true
-state = "full"
+texture = SubResource("AtlasTexture_uf8gs")
 
 [node name="HeartIcon3" parent="." instance=ExtResource("1")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_sahk4")
-flip_h = true
-state = "full"
+texture = SubResource("AtlasTexture_q8wd0")
+state = "empty"

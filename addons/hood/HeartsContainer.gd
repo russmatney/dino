@@ -21,18 +21,31 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
+var heart_icon_scene = preload("res://addons/hood/HeartIcon.tscn")
 
-# TODO extend to add and place more hearts, or layer a new color checked top
 ## Converts a passed int into a number of hearts to display.
+## As implemented, 1 heart is 2 HP.
 func set_health(health):
-	health = clamp(health, 0, health)
 	if health == null:
 		Debug.warn("[HOOD] WARN: set_health with null!")
 		return
 
+	health = clamp(health, 0, health)
+
 	var heart_icons = []
 
 	if len(heart_icons) == 0:
+		heart_icons = get_children()
+
+		# make extra certain we don't add more icons too early
+		if len(heart_icons) != null and len(heart_icons) > 0 \
+			and len(heart_icons) < health/2.0:
+			var to_add =  health / 2.0 - len(heart_icons)
+			to_add = ceil(to_add)
+			for _i in range(to_add):
+				var new_heart = heart_icon_scene.instantiate()
+				add_child(new_heart)
+
 		heart_icons = get_children()
 
 		if flip_h:
