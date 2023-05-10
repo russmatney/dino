@@ -39,3 +39,5 @@ func physics_process(delta):
 	var new_vel = diff.normalized() * actor.walk_speed * delta
 	actor.velocity = actor.velocity.lerp(new_vel, 0.7)
 	actor.move_and_slide()
+
+	actor.face_body(approaching)

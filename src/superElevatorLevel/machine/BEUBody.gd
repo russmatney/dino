@@ -58,17 +58,6 @@ func _on_transit(label):
 	state_label.set_text("[center]%s" % label)
 
 
-## physics_process ###########################################################
-
-func _physics_process(_delta):
-	if move_vector.abs().length() > 0:
-		if move_vector.x > 0:
-			facing_vector = Vector2.RIGHT
-		elif move_vector.x < 0:
-			facing_vector = Vector2.LEFT
-		update_facing()
-
-
 ## facing ###########################################################
 
 func update_facing():
@@ -137,10 +126,18 @@ func on_grabbox_body_exited(body):
 
 ## attackers ###########################################################
 
+var attackers = []
+
 func ready_for_new_attacker():
+	update_attackers()
 	return len(attackers) < max_attackers
 
-var attackers = []
+func update_attackers():
+	attackers = attackers.filter(func(att):
+		# only keep attackers in one of these states
+		return att.machine.state.name in [
+			"Punch", "Punched", "Approach", "Attack", "Kick", "Kicked",
+			])
 
 func add_attacker(body):
 	if not body in attackers:
