@@ -21,7 +21,8 @@ func set_status(opts):
 		hearts_container.h = h
 		if h == 0:
 			var ttl = opts.get("ttl", 5)
-			delete_in = ttl if ttl else 5
+			if ttl > 0:
+				delete_in = ttl if ttl else 5
 
 	var ttl = opts.get("ttl", 5)
 	if ttl > 0:
