@@ -109,19 +109,20 @@ var omit_vals_for_keys = ["layer_0/tile_data"]
 
 var max_array_size = 20
 
-func to_pretty(msg, newlines=false):
+func to_pretty(msg, newlines=false, indent_level=0):
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
 			prn("cutting down large array. size:", len(msg))
 			msg = msg.slice(0, max_array_size - 1)
-			# msg.append("...")
+			if newlines:
+				msg.append("...")
 
 		var tmp = color_wrap("[ ", "crimson")
 		var last = len(msg) - 1
 		for i in range(len(msg)):
 			if newlines and last > 1:
 				tmp += "\n\t"
-			tmp += to_pretty(msg[i], newlines)
+			tmp += to_pretty(msg[i], newlines, indent_level + 1)
 			if i != last:
 				tmp += color_wrap(", ", "crimson")
 		tmp += color_wrap(" ]", "crimson")
@@ -137,9 +138,12 @@ func to_pretty(msg, newlines=false):
 			if k in omit_vals_for_keys:
 				val = "..."
 			else:
-				val = to_pretty(msg[k], newlines)
+				val = to_pretty(msg[k], newlines, indent_level + 1)
 			if newlines and ct > 1:
-				tmp += "\n\t"
+				tmp += "\n\t" \
+					+ range(indent_level)\
+					.map(func(_i): return "\t")\
+						.reduce(func(a, b): return str(a, b), "")
 			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
 			if last and str(k) != str(last):
 				tmp += color_wrap(", ", "crimson")
