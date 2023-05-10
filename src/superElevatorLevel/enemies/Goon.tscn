@@ -23,13 +23,6 @@ size = Vector2(10, 32)
 collision_layer = 8
 collision_mask = 1025
 script = ExtResource("1_teuic")
-kicked_speed = null
-initial_health = null
-punch_power = null
-kick_power = null
-throw_power = null
-weight = null
-defense = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 5)

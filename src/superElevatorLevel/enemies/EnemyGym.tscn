@@ -19,14 +19,12 @@ position = Vector2(-144, -114)
 should_wander = true
 should_notice = true
 walk_speed = 8000
-kicked_speed = null
 
 [node name="Goon2" parent="." instance=ExtResource("2_byeku")]
 position = Vector2(138, -94)
 should_wander = true
 should_notice = true
 walk_speed = 8000
-kicked_speed = null
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_k0omd")]
 position = Vector2(13, 16)
