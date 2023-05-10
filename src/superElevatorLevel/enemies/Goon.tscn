@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://mfl8i2m62n51"]
+[gd_scene load_steps=9 format=3 uid="uid://mfl8i2m62n51"]
 
 [ext_resource type="SpriteFrames" uid="uid://c5tw5326wr6ra" path="res://src/superElevatorLevel/machine/BasicSpriteFrames.tres" id="1_2iwbk"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/enemies/Goon.gd" id="1_teuic"]
@@ -10,7 +10,13 @@
 radius = 15.0
 height = 38.0
 
-[node name="Goon" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0rui7"]
+size = Vector2(26, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slgwo"]
+size = Vector2(20, 34)
+
+[node name="Goon" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 1025
 script = ExtResource("1_teuic")
@@ -34,3 +40,20 @@ bbcode_enabled = true
 text = "[center]State"
 
 [node name="CamPOF" parent="." instance=ExtResource("5_5hwwr")]
+
+[node name="PunchBox" type="Area2D" parent="."]
+position = Vector2(20, 4)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PunchBox"]
+shape = SubResource("RectangleShape2D_0rui7")
+
+[node name="GrabBox" type="Area2D" parent="."]
+position = Vector2(12, -8)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBox"]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_slgwo")

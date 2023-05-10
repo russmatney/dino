@@ -3,7 +3,6 @@ extends State
 
 var jump_time = 0.6
 var jump_ttl
-var jump_speed = 15000
 
 var direction: Vector2
 
@@ -45,12 +44,12 @@ func physics_process(delta):
 		transit("Idle")
 		return
 
-	var move_vec = direction * jump_speed * delta
+	var move_vec = direction * actor.jump_speed * delta
 	actor.velocity = actor.velocity.lerp(move_vec, 0.6)
 	actor.move_and_slide()
 
 	if kick_pressed:
 		for b in actor.punch_box_bodies:
 			if not b in kicked_bodies and "machine" in b:
-				b.machine.transit("Kicked", {direction=direction})
+				b.machine.transit("Kicked", {direction=actor.facing_vector})
 				kicked_bodies.append(b)

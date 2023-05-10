@@ -296,8 +296,9 @@ func get_(opts: Dictionary, key: String, default: Variant):
 ## Configuration warnings
 
 func _config_warning(node, opts={}):
+	var warns = []
 	for node_name in opts.get("expected_nodes", []):
 		var n = node.find_child(node_name)
 		if n == null:
-			return ["Expected child named '" + node_name + "'"]
-	return []
+			warns.append("Expected child named '" + node_name + "'")
+	return warns
