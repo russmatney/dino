@@ -5,14 +5,10 @@ var approaching
 ## enter ###########################################################
 
 func enter(opts = {}):
-	approaching = opts.get("approaching")
-	approaching.add_attacker(actor)
-
-
-## exit ###########################################################
-
-func exit():
-	approaching = null
+	# reuse approaching if it hasn't been cleared
+	approaching = opts.get("approaching", approaching)
+	if approaching:
+		approaching.add_attacker(actor)
 
 
 ## physics ###########################################################
@@ -22,6 +18,7 @@ func physics_process(delta):
 		return
 
 	if not is_instance_valid(approaching):
+		approaching = null
 		transit("Idle")
 		return
 

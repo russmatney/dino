@@ -11,6 +11,7 @@ var last_hit_anything
 ## enter ###########################################################
 
 func enter(opts = {}):
+	# reuse attacking, ex. if we get back here from Punch
 	attacking = opts.get("attacking", attacking)
 	punch_ttl = Util.rand_of(punch_times)
 
@@ -22,7 +23,6 @@ func enter(opts = {}):
 ## exit ###########################################################
 
 func exit():
-	# attacking = null
 	punch_ttl = null
 
 
@@ -34,13 +34,15 @@ func physics_process(delta):
 
 	if not attacking in actor.punch_box_bodies:
 		# or maybe back to idle?
-		transit("Approach", {approaching=attacking})
+		# here we're expecting Approach to hold onto its 'approaching' var
+		attacking = null
+		transit("Approach")
 		return
 
 	punch_ttl -= delta
 
 	if punch_ttl <= 0:
-		# TODO some goons move to kick sooner?
+		# TODO some enemies kick with a lower punch_count
 		if punch_count == 2:
 			# end of combo? move to notice/approach/circle?
 			transit("Kick")
