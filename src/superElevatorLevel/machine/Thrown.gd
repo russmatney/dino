@@ -1,6 +1,6 @@
 extends State
 
-var thrown_time = 0.6
+var thrown_time = 0.8
 var thrown_ttl
 var throw_speed_fallback = 12000
 var thrown_speed
@@ -19,12 +19,15 @@ func enter(opts = {}):
 
 	if thrown_by:
 		thrown_speed = thrown_by.throw_speed
+		thrown_by.remove_attacker(actor)
 	else:
 		thrown_speed = throw_speed_fallback
 
 	var tween = create_tween()
-	tween.tween_property(actor, "scale", Vector2.ONE*1.8, thrown_ttl/2.0)
-	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/2.0)
+	tween.tween_property(actor, "scale", Vector2.ONE*1.8, thrown_ttl/3.0)
+	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/3.0)
+	tween.tween_property(actor, "scale", Vector2.ONE*1.4, thrown_ttl/6.0)
+	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/6.0)
 
 
 ## exit ###########################################################
