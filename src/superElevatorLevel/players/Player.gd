@@ -1,6 +1,7 @@
 @tool
 extends BEUBody
 
+var hud = preload("res://src/superElevatorLevel/hud/HUD.tscn")
 
 ## ready ###########################################################
 
@@ -9,7 +10,7 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		Cam.ensure_camera({player=self})
-		Hood.ensure_hud()
+		Hood.ensure_hud(hud)
 
 
 ## input ###########################################################
