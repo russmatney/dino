@@ -32,6 +32,12 @@ func exit():
 func physics_process(delta):
 	if wander_ttl == null:
 		return
+
+	if actor.should_notice:
+		if len(actor.notice_box_bodies) > 0:
+			transit("Notice", {noticing=actor.notice_box_bodies[0]})
+			return
+
 	wander_ttl -= delta
 	if wander_ttl <= 0:
 		transit("Idle")

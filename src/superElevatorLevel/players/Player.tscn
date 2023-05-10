@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlc4xb765ue6h"]
+[gd_scene load_steps=9 format=3 uid="uid://dlc4xb765ue6h"]
 
 [ext_resource type="Script" path="res://src/superElevatorLevel/players/Player.gd" id="1_10ddc"]
 [ext_resource type="PackedScene" uid="uid://cuhse8n16im46" path="res://src/superElevatorLevel/machine/BEUMachine.tscn" id="1_uku6g"]
@@ -14,6 +14,9 @@ size = Vector2(26, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kshg2"]
 size = Vector2(20, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3yoh5"]
+size = Vector2(144, 96)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -59,3 +62,11 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBox"]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_kshg2")
+
+[node name="NoticeBox" type="Area2D" parent="."]
+position = Vector2(80, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeBox"]
+shape = SubResource("RectangleShape2D_3yoh5")

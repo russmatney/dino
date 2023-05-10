@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cuhse8n16im46"]
+[gd_scene load_steps=18 format=3 uid="uid://cuhse8n16im46"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_3kpnx"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Idle.gd" id="2_oxcoh"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Throw.gd" id="9_v31mg"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Thrown.gd" id="10_hdjpc"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/machine/Wander.gd" id="13_h4yg6"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Notice.gd" id="14_osmac"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Circle.gd" id="15_d261b"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Approach.gd" id="16_pxtvy"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/machine/Attack.gd" id="17_kwfl7"]
 
 [node name="BEUMachine" type="Node"]
 script = ExtResource("1_3kpnx")
@@ -52,3 +56,15 @@ script = ExtResource("10_hdjpc")
 
 [node name="Wander" type="Node" parent="."]
 script = ExtResource("13_h4yg6")
+
+[node name="Notice" type="Node" parent="."]
+script = ExtResource("14_osmac")
+
+[node name="Circle" type="Node" parent="."]
+script = ExtResource("15_d261b")
+
+[node name="Approach" type="Node" parent="."]
+script = ExtResource("16_pxtvy")
+
+[node name="Attack" type="Node" parent="."]
+script = ExtResource("17_kwfl7")

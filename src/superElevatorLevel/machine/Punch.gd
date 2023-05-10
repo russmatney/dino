@@ -9,6 +9,8 @@ var punched_again_pressed
 
 var hit_anything
 
+var next_state
+
 ## enter ###########################################################
 
 func enter(opts = {}):
@@ -19,8 +21,11 @@ func enter(opts = {}):
 
 	hit_anything = actor.punch()
 
+	next_state = "Attack"
+
 func exit():
 	punch_ttl = null
+	next_state = null
 
 
 ## unhandled_input ###########################################################
@@ -39,7 +44,14 @@ func physics_process(delta):
 	punch_ttl -= delta
 
 	if punch_ttl <= 0:
-		if hit_anything and punched_again_pressed and punch_count == 0:
+		# AI combo support
+		if next_state != null:
+			transit(next_state, {
+				hit_anything=hit_anything,
+				punch_count=punch_count + 1,
+				})
+		# player combo support
+		elif hit_anything and punched_again_pressed and punch_count == 0:
 			transit("Punch", {punch_count=1})
 		elif hit_anything and punched_again_pressed and punch_count == 1:
 			transit("Kick")

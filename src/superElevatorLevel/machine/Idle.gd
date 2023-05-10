@@ -14,6 +14,11 @@ func enter(_opts = {}):
 ## physics ###########################################################
 
 func physics_process(delta):
+	if actor.should_notice:
+		if len(actor.notice_box_bodies) > 0:
+			transit("Notice", {noticing=actor.notice_box_bodies[0]})
+			return
+
 	if actor.should_wander:
 		if wander_in_t == null:
 			return
@@ -28,5 +33,4 @@ func physics_process(delta):
 
 	if actor.velocity.abs().length() > 0:
 		actor.velocity = actor.velocity.lerp(Vector2.ZERO, 0.7)
-
 	actor.move_and_slide()
