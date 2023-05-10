@@ -100,6 +100,8 @@ func update_enemy_status(enemy):
 	if texture:
 		enemy["texture"] = texture
 
+	enemy["ttl"] = 0 if "bosses" in enemy.get("groups", []) else 5
+
 	enemy_status_list.update_status(enemy)
 
 

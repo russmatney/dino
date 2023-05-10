@@ -7,8 +7,11 @@ extends PanelContainer
 
 var delete_in
 var key
+var ttl
 
 func set_status(opts):
+	ttl = opts.get("ttl", ttl)
+
 	if opts.get("texture"):
 		portrait.set_texture(opts.get("texture"))
 
@@ -20,12 +23,10 @@ func set_status(opts):
 	if h != null:
 		hearts_container.h = h
 		if h == 0:
-			var ttl = opts.get("ttl", 5)
-			if ttl > 0:
+			if ttl != null:
 				delete_in = ttl if ttl else 5
 
-	var ttl = opts.get("ttl", 5)
-	if ttl > 0:
+	if ttl != null:
 		delete_in = ttl
 
 func _process(delta):

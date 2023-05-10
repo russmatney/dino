@@ -27,14 +27,10 @@ func update_status(entry):
 		var status = status_scene.instantiate()
 		add_child(status)
 
-		var ttl = entry.get("ttl")
-		if ttl == null:
-			ttl = 0 if "bosses" in entry.get("groups", []) else 5
+		var opts = {name=nm, ttl=entry.get("ttl"), health=entry.get("health")}
 
-		var opts = {name=nm, ttl=ttl, health=entry.get("health")}
-
-		if opts.get("texture"):
-			opts["texture"] = opts.get("texture")
+		if entry.get("texture"):
+			opts["texture"] = entry.get("texture")
 
 		# call after adding so _ready has added elems
 		status.set_status(opts)

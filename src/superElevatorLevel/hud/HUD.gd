@@ -29,7 +29,6 @@ func update_player(entry):
 		player_status.set_status({
 			health=entry.get("health"),
 			name=entry.get("name"),
-			ttl=0, # never remove
 			texture=player_portrait,
 			})
 
@@ -46,13 +45,17 @@ var to_portrait_texture = {
 @onready var enemy_status_list = $%EnemyStatusList
 
 func update_enemy_status(enemy):
-	var inst = enemy.get("instance_name")
+	var opts = enemy.duplicate()
+	var nm = str(enemy.get("name"))
 	var texture
-	if inst and inst in to_portrait_texture:
-		texture = to_portrait_texture[inst]
+	if nm and nm in to_portrait_texture:
+		for k in to_portrait_texture.keys():
+			if nm.contains(k):
+				texture = to_portrait_texture[k]
+				break
 	if texture:
-		enemy["texture"] = texture
+		opts["texture"] = texture
 
-	enemy["ttl"] = 10
+	opts["ttl"] = 10
 
-	enemy_status_list.update_status(enemy)
+	enemy_status_list.update_status(opts)

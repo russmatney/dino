@@ -76,7 +76,7 @@ func _on_transit(label):
 ## hotel ###########################################################
 
 func hotel_data():
-	return {health=health}
+	return {health=health, name=name}
 
 func check_out(data):
 	health = Util.get_(data, "health", initial_health)
