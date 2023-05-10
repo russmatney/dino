@@ -1,16 +1,27 @@
 extends State
 
+var wander_in = [1.3, 2.0, 3.5]
+var wander_in_t
+
+
 ## enter ###########################################################
 
-
 func enter(_opts = {}):
-	pass
+	if actor.should_wander:
+		wander_in_t = Util.rand_of(wander_in)
 
 
 ## physics ###########################################################
 
+func physics_process(delta):
+	if actor.should_wander:
+		if wander_in_t == null:
+			return
+		wander_in_t -= delta
+		if wander_in_t <= 0:
+			transit("Wander")
+			return
 
-func physics_process(_delta):
 	if actor.move_vector.abs().length() > 0:
 		transit("Walk")
 		return

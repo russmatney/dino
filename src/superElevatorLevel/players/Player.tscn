@@ -19,6 +19,8 @@ size = Vector2(20, 34)
 collision_layer = 2
 collision_mask = 1025
 script = ExtResource("1_10ddc")
+should_wander = null
+wander_speed = null
 
 [node name="BEUMachine" parent="." instance=ExtResource("1_uku6g")]
 

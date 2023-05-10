@@ -9,10 +9,12 @@ func _get_configuration_warnings():
 		"BEUMachine", "StateLabel", "PunchBox", "GrabBox"]})
 
 
-#############################################################
+## vars #############################################################
 
+@export var should_wander: bool = false
 @export var jump_speed: int = 10000
 @export var throw_speed: int = 12000
+@export var wander_speed: int = 4000
 
 var machine
 var state_label
