@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://67cetdmlytic"]
+[gd_scene load_steps=14 format=3 uid="uid://67cetdmlytic"]
 
 [ext_resource type="Script" path="res://src/hatbot/hud/HUD.gd" id="1_swmch"]
 [ext_resource type="PackedScene" path="res://src/hatbot/hud/Minimap.tscn" id="2_hm6ex"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_eq15p"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="4_0rxhj"]
+[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="4_ue220"]
 [ext_resource type="Texture2D" path="res://src/hatbot/hud/ClimbingGlovesAtlasTexture.tres" id="5_lrx0n"]
 [ext_resource type="Texture2D" path="res://src/hatbot/hud/DoubleJumpAtlasTexture.tres" id="6_hd868"]
 [ext_resource type="Texture2D" path="res://src/hatbot/hud/SwordAtlasTexture.tres" id="7_u2dyi"]
@@ -83,10 +84,11 @@ scroll_active = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="EnemyStatusList" type="VBoxContainer" parent="HBoxContainer"]
+[node name="EnemyStatusList" parent="HBoxContainer" instance=ExtResource("4_ue220")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+max_children = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2

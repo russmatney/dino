@@ -91,43 +91,16 @@ var to_portrait_texture = {
 
 
 @onready var enemy_status_list = $%EnemyStatusList
-var status_scene = preload("res://addons/hood/EntityStatus.tscn")
-
-func find_existing_status(enemy):
-	for ch in enemy_status_list.get_children():
-		if ch.key == enemy.get("name"):
-			return ch
 
 func update_enemy_status(enemy):
-	var nm = enemy.get("name")
+	var inst = enemy.get("instance_name")
+	var texture
+	if inst and inst in to_portrait_texture:
+		texture = to_portrait_texture[inst]
+	if texture:
+		enemy["texture"] = texture
 
-	var existing = find_existing_status(enemy)
-	if existing and is_instance_valid(existing):
-		# assume it's just a health update
-		existing.set_status({health=enemy.get("health")})
-	else:
-		if len(enemy_status_list.get_children()) >= 3:
-			Debug.pr("Too many enemy_statuses, not adding one", enemy)
-			# TODO evict least-relevant status
-			return
-		var status = status_scene.instantiate()
-		enemy_status_list.add_child(status)
-
-		var opts = {
-			name=nm,
-			health=enemy.get("health"),
-			ttl=0 if "bosses" in enemy.get("groups", []) else 5,
-			}
-
-		var inst = enemy.get("instance_name")
-		var texture
-		if inst and inst in to_portrait_texture:
-			texture = to_portrait_texture[inst]
-		if texture:
-			opts["texture"] = texture
-
-		# call after adding so _ready has added elems
-		status.set_status(opts)
+	enemy_status_list.update_status(enemy)
 
 
 ##########################################
