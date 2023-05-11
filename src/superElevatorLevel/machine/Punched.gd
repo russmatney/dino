@@ -7,6 +7,7 @@ var punched_by
 ## enter ###########################################################
 
 func enter(opts = {}):
+	DJZ.play(DJZ.S.step)
 	punched_by = opts.get("punched_by")
 	actor.take_damage("punch", punched_by)
 

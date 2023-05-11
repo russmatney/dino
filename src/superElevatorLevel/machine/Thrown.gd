@@ -20,7 +20,10 @@ func enter(opts = {}):
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*1.8, thrown_ttl/3.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/3.0)
-	tween.tween_callback(func(): actor.take_damage("throw", thrown_by))
+	tween.tween_callback(func():
+		actor.take_damage("throw", thrown_by)
+		DJZ.play(DJZ.S.heavy_fall)
+		Cam.screenshake(0.3))
 	tween.tween_property(actor, "scale", Vector2.ONE*1.4, thrown_ttl/6.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/6.0)
 
@@ -41,6 +44,7 @@ func physics_process(delta):
 	thrown_ttl -= delta
 
 	if thrown_ttl <= 0:
+		# TODO: transit("Recover/GetUp/Stand")
 		transit("Idle")
 		return
 

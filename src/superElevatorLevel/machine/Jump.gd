@@ -13,6 +13,7 @@ var kicked_bodies = []
 ## enter ###########################################################
 
 func enter(opts = {}):
+	DJZ.play(DJZ.S.jump)
 	kick_pressed = false
 	kicked_bodies = []
 	jump_ttl = Util.get_(opts, "jump_time", jump_time)

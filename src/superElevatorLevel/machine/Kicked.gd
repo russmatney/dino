@@ -9,6 +9,8 @@ var kicked_by
 ## enter ###########################################################
 
 func enter(opts = {}):
+	DJZ.play(DJZ.S.showjumbotron)
+	Cam.screenshake(0.2)
 	direction = opts.get("direction", direction)
 
 	kicked_ttl = kicked_time

@@ -21,6 +21,10 @@ func enter(opts = {}):
 
 	hit_anything = actor.punch()
 
+	if hit_anything and punch_count >= 1:
+		# connected second punch of combo
+		Cam.screenshake(0.2)
+
 	next_state = opts.get("next_state")
 
 func exit():
