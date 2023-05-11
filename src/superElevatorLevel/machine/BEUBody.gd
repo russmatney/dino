@@ -38,6 +38,8 @@ var move_vector: Vector2
 var facing_vector: Vector2
 var health
 var is_dead
+var lives_lost: int = 0
+var kos: int = 0
 
 
 ## enter_tree ###########################################################
@@ -77,10 +79,13 @@ func _on_transit(label):
 ## hotel ###########################################################
 
 func hotel_data():
-	return {health=health, name=name}
+	return {health=health, name=name, lives_lost=lives_lost, kos=kos, is_dead=is_dead}
 
 func check_out(data):
 	health = Util.get_(data, "health", initial_health)
+	lives_lost = Util.get_(data, "lives_lost", lives_lost)
+	kos = Util.get_(data, "kos", kos)
+	is_dead = Util.get_(data, "is_dead", is_dead)
 
 
 ## facing ###########################################################
@@ -203,6 +208,8 @@ func take_damage(hit_type, attacker):
 
 	if health <= 0:
 		die()
+		attacker.kos += 1
+		Hotel.check_in(attacker)
 
 func die():
 	Debug.warn("This should be overwritten!")

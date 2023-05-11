@@ -9,6 +9,8 @@ func enter(_opts = {}):
 	ttl = dying_time
 
 	actor.is_dead = true
+	actor.lives_lost += 1
+	Hotel.check_in(self)
 
 
 ## exit ###########################################################

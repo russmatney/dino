@@ -22,7 +22,9 @@ func enter(_opts = {}):
 		Cam.screenshake.bind(0.3)
 		DJZ.play(DJZ.S.heavy_fall)
 		# show shiny invincible couple of seconds
-		actor.is_dead = false)
+		actor.is_dead = false
+		Hotel.check_in(actor)
+		)
 
 
 ## exit ###########################################################
