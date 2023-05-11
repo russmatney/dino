@@ -15,13 +15,18 @@ var kicked_bodies = []
 func enter(opts = {}):
 	DJZ.play(DJZ.S.jump)
 	kick_pressed = false
-	kicked_bodies = []
 	jump_ttl = Util.get_(opts, "jump_time", jump_time)
 	direction = Util.get_(opts, "direction", actor.move_vector)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*1.8, jump_ttl/2.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, jump_ttl/2.0)
+
+
+## exit ###########################################################
+
+func exit():
+	kicked_bodies = []
 
 
 ## input ###########################################################

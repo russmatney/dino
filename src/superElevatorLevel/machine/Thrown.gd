@@ -7,6 +7,12 @@ var thrown_by
 
 var direction
 
+# bodies collided with while thrown
+var hit_bodies = []
+
+var hit_ground
+var og_collision_mask
+
 ## enter ###########################################################
 
 func enter(opts = {}):
@@ -17,22 +23,34 @@ func enter(opts = {}):
 	thrown_speed = thrown_by.throw_speed
 	thrown_by.remove_attacker(actor)
 
+	hit_ground = false
+
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*1.8, thrown_ttl/3.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/3.0)
-	tween.tween_callback(func():
-		actor.take_damage("throw", thrown_by)
-		DJZ.play(DJZ.S.heavy_fall)
-		Cam.screenshake(0.4))
+	tween.tween_callback(on_first_bounce)
 	tween.tween_property(actor, "scale", Vector2.ONE*1.4, thrown_ttl/6.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/6.0)
 
+	og_collision_mask = actor.punch_box.collision_mask
+
+	actor.punch_box.set_collision_mask_value(2, true)
+	actor.punch_box.set_collision_mask_value(4, true)
+	actor.punch_box.set_collision_mask_value(8, true)
+	actor.punch_box.set_collision_mask_value(10, true)
+
+func on_first_bounce():
+	actor.take_damage("throw", thrown_by)
+	DJZ.play(DJZ.S.heavy_fall)
+	Cam.screenshake(0.4)
+	hit_ground = true
+	actor.punch_box.collision_mask = og_collision_mask
 
 ## exit ###########################################################
 
 func exit():
 	direction = null
-	thrown_by = null
+	hit_bodies = []
 
 ## physics ###########################################################
 
@@ -51,3 +69,11 @@ func physics_process(delta):
 	var move_vec = direction * thrown_speed * delta
 	actor.velocity = actor.velocity.lerp(move_vec, 0.6)
 	actor.move_and_slide()
+
+	if not hit_ground:
+		for b in actor.punch_box_bodies:
+			if not b in hit_bodies and "machine" in b and b != actor and b != thrown_by:
+				b.machine.transit("HitByThrow", {
+					direction=direction,
+					hit_by=actor})
+				hit_bodies.append(b)

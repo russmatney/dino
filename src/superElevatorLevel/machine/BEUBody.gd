@@ -191,15 +191,18 @@ func on_noticebox_body_exited(body):
 
 ## health ###########################################################
 
-func take_damage(hit_type, attacker):
+func take_damage(hit_type, body):
 	var attack_power
 	match hit_type:
 		"punch":
-			attack_power = attacker.punch_power
+			attack_power = body.punch_power
 		"kick":
-			attack_power = attacker.kick_power
+			attack_power = body.kick_power
 		"throw":
-			attack_power = attacker.throw_power + weight
+			attack_power = body.throw_power + weight
+		"hit_by_throw":
+			# damage based on weight of thrown body that hit us
+			attack_power = clamp(int(body.weight/2), 4, 2)
 
 	var damage = attack_power - defense
 
@@ -208,8 +211,8 @@ func take_damage(hit_type, attacker):
 
 	if health <= 0:
 		die()
-		attacker.kos += 1
-		Hotel.check_in(attacker)
+		body.kos += 1
+		Hotel.check_in(body)
 
 func die():
 	Debug.warn("This should be overwritten!")
