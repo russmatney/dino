@@ -37,6 +37,7 @@ var notice_box
 var move_vector: Vector2
 var facing_vector: Vector2
 var health
+var is_dead
 
 
 ## enter_tree ###########################################################
@@ -104,7 +105,7 @@ func face_body(body):
 func punch():
 	var did_hit
 	for body in punch_box_bodies:
-		if "machine" in body:
+		if not body.is_dead and "machine" in body:
 			body.machine.transit("Punched", {punched_by=self})
 			did_hit = true
 	return did_hit
@@ -112,7 +113,7 @@ func punch():
 func kick():
 	var did_hit
 	for body in punch_box_bodies:
-		if "machine" in body:
+		if not body.is_dead and "machine" in body:
 			body.machine.transit("Kicked", {kicked_by=self, direction=facing_vector})
 			did_hit = true
 	return did_hit
@@ -131,7 +132,7 @@ func on_punchbox_body_exited(body):
 
 func grab():
 	var body = Util.nearest_node(self, grab_box_bodies)
-	if body != null and "machine" in body:
+	if body != null and not body.is_dead and "machine" in body:
 		body.machine.transit("Grabbed", {grabbed_by=body})
 		machine.transit("Grab", {grabbed=body})
 
@@ -159,7 +160,7 @@ func ready_for_new_attacker():
 func update_attackers():
 	attackers = attackers.filter(func(att):
 		# only keep attackers in one of these states
-		return att.machine.state.name in [
+		return not att.is_dead and att.machine.state.name in [
 			"Punch", "Punched", "Approach", "Attack", "Kick", "Kicked",
 			])
 
@@ -201,6 +202,8 @@ func take_damage(hit_type, attacker):
 	Hotel.check_in(self)
 
 	if health <= 0:
-		# TODO impl character death
-		health = initial_health
-		Hotel.check_in(self)
+		die()
+
+func die():
+	Debug.warn("This should be overwritten!")
+	machine.transit("Die")
