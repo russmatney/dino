@@ -9,6 +9,7 @@ var hit_by
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("kicked")
 
 	DJZ.play(DJZ.S.kick)
 	Cam.screenshake(0.2)

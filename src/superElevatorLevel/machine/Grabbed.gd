@@ -7,6 +7,7 @@ var escape_in_t
 ## enter ###########################################################
 
 func enter(_opts = {}):
+	actor.anim.play("grabbed")
 	escape_in_t = Util.rand_of(escape_in)
 
 

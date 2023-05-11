@@ -11,6 +11,7 @@ func enter(_opts = {}):
 	actor.is_dead = true
 	actor.lives_lost += 1
 	Hotel.check_in(actor)
+	actor.anim.play("dead")
 
 
 ## exit ###########################################################

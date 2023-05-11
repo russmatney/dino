@@ -10,6 +10,7 @@ var throw_direction
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("grab")
 	grabbed = opts.get("grabbed")
 	grab_ttl = grab_time
 

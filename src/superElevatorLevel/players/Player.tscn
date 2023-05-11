@@ -36,6 +36,7 @@ position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_ivhib")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+clip_contents = false
 offset_left = -24.0
 offset_top = 16.0
 offset_right = 24.0
@@ -43,6 +44,8 @@ offset_bottom = 32.0
 theme_override_fonts/normal_font = ExtResource("4_1h66e")
 bbcode_enabled = true
 text = "[center]State"
+fit_content = true
+scroll_active = false
 metadata/_edit_use_anchors_ = true
 
 [node name="PunchBox" type="Area2D" parent="."]

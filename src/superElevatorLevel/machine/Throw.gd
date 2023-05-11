@@ -8,6 +8,7 @@ var thrown
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("throw")
 	thrown = opts.get("body")
 	throw_ttl = throw_time
 
@@ -27,6 +28,7 @@ func physics_process(delta):
 	if throw_ttl == null:
 		return
 
+	# TODO Consider ending after throw anim instead
 	throw_ttl -= delta
 
 	if throw_ttl <= 0:

@@ -16,9 +16,17 @@ var og_collision_mask
 ## enter ###########################################################
 
 func enter(opts = {}):
+	# TODO perfect the thrown + bounce animation timing
+	actor.anim.play("thrown")
+
+	actor.anim.animation_finished.connect(on_animation_finished)
+
 	thrown_ttl = Util.get_(opts, "thrown_time", thrown_time)
 	direction = Util.get_(opts, "direction", direction)
 	thrown_by = Util.get_(opts, "thrown_by", thrown_by)
+
+	actor.face_body(thrown_by)
+	actor.flip_facing()
 
 	thrown_speed = thrown_by.throw_speed
 	thrown_by.remove_attacker(actor)
@@ -52,8 +60,15 @@ func exit():
 	direction = null
 	hit_bodies = []
 
-## physics ###########################################################
+	actor.anim.animation_finished.disconnect(on_animation_finished)
 
+## anim finished ###########################################################
+
+func on_animation_finished():
+	if actor.anim.animation == "get_up":
+		transit("Idle")
+
+## physics ###########################################################
 
 func physics_process(delta):
 	if thrown_ttl == null:
@@ -62,8 +77,7 @@ func physics_process(delta):
 	thrown_ttl -= delta
 
 	if thrown_ttl <= 0:
-		# TODO: transit("Recover/GetUp/Stand")
-		transit("Idle")
+		actor.anim.play("get_up")
 		return
 
 	var move_vec = direction * thrown_speed * delta

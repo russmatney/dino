@@ -100,6 +100,14 @@ func update_facing():
 	Util.update_h_flip(facing_vector, notice_box)
 	anim.flip_h = facing_vector == Vector2.LEFT
 
+func flip_facing():
+	match facing_vector:
+		Vector2.LEFT:
+			facing_vector = Vector2.RIGHT
+		Vector2.RIGHT:
+			facing_vector = Vector2.LEFT
+	update_facing()
+
 func face_body(body):
 	var pos_diff = body.global_position - global_position
 	if pos_diff.x > 0:
