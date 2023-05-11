@@ -23,7 +23,7 @@ func enter(opts = {}):
 
 	if hit_anything and punch_count >= 1:
 		# connected second punch of combo
-		Cam.screenshake(0.2)
+		Cam.screenshake(0.3)
 
 	next_state = opts.get("next_state")
 

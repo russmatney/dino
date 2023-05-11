@@ -10,7 +10,7 @@ var kicked_by
 
 func enter(opts = {}):
 	DJZ.play(DJZ.S.kick)
-	Cam.screenshake(0.2)
+	Cam.screenshake(0.3)
 	direction = opts.get("direction", direction)
 
 	kicked_ttl = kicked_time

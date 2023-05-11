@@ -23,7 +23,7 @@ func enter(opts = {}):
 	tween.tween_callback(func():
 		actor.take_damage("throw", thrown_by)
 		DJZ.play(DJZ.S.heavy_fall)
-		Cam.screenshake(0.3))
+		Cam.screenshake(0.4))
 	tween.tween_property(actor, "scale", Vector2.ONE*1.4, thrown_ttl/6.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, thrown_ttl/6.0)
 
