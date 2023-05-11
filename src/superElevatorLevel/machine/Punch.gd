@@ -24,7 +24,7 @@ func enter(opts = {}):
 	if punch_count == 0:
 		actor.anim.play("punch")
 	else:
-		actor.anim.play("punch-2")
+		actor.anim.play("punch_2")
 
 	next_state = opts.get("next_state")
 
@@ -53,11 +53,11 @@ func punch():
 			# Cam.screenshake(0.3)
 
 func on_animation_finished():
-	if actor.anim.animation == "punch" or actor.anim.animation == "punch-2":
+	if actor.anim.animation == "punch" or actor.anim.animation == "punch_2":
 		finish_punch()
 
 func on_frame_changed():
-	if actor.anim.animation == "punch" or actor.anim.animation == "punch-2":
+	if actor.anim.animation == "punch" or actor.anim.animation == "punch_2":
 		if not actor.anim.frame in actor.passive_frames(actor.anim):
 			punch()
 

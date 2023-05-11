@@ -5,7 +5,7 @@ var tt_idle
 
 
 func enter(ctx = {}):
-	actor.anim.animation = "run"
+	actor.anim.play("run")
 	actor.move_dir = ctx.get("dir")
 	if not actor.move_dir:
 		actor.move_dir = [Vector2.RIGHT, Vector2.LEFT][randi() % 2]

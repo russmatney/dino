@@ -4,7 +4,7 @@ extends State
 
 
 func enter(_opts = {}):
-	pass
+	actor.anim.play("walk")
 
 
 ## physics ###########################################################

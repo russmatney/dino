@@ -9,6 +9,7 @@ var wait_ttl
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("idle")
 	noticing = opts.get("noticing")
 
 	actor.face_body(noticing)

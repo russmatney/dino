@@ -13,6 +13,7 @@ var kicked_bodies = []
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("jump")
 	DJZ.play(DJZ.S.jump)
 	kick_pressed = false
 	jump_ttl = Util.get_(opts, "jump_time", jump_time)
@@ -34,7 +35,7 @@ func exit():
 func unhandled_input(event):
 	if Trolley.is_attack(event) and not kick_pressed:
 		kick_pressed = true
-		# TODO jump-kick animation
+		actor.anim.play("jump_kick")
 		return
 
 

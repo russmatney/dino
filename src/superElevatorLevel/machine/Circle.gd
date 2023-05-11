@@ -8,6 +8,7 @@ var target_diff
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("walk")
 	circling = opts.get("circling")
 	circle_ttl = Util.rand_of(circle_times)
 

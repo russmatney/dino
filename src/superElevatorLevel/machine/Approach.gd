@@ -5,6 +5,7 @@ var approaching
 ## enter ###########################################################
 
 func enter(opts = {}):
+	actor.anim.play("walk")
 	# reuse approaching if it hasn't been cleared
 	approaching = opts.get("approaching", approaching)
 	if approaching:
