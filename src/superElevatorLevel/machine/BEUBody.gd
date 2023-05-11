@@ -7,7 +7,9 @@ class_name BEUBody
 func _get_configuration_warnings():
 	return Util._config_warning(self, {expected_nodes=[
 		"BEUMachine", "StateLabel",
-		"PunchBox", "GrabBox", "NoticeBox",]})
+		"PunchBox", "GrabBox", "NoticeBox",
+		"AnimatedSprite2D",
+		]})
 
 
 ## vars #############################################################
@@ -29,6 +31,7 @@ func _get_configuration_warnings():
 @export var defense: int = 1
 
 var machine
+var anim
 var state_label
 var punch_box
 var grab_box
@@ -57,6 +60,7 @@ func _ready():
 		punch_box = $PunchBox
 		grab_box = $GrabBox
 		notice_box = $NoticeBox
+		anim = $AnimatedSprite2D
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()
@@ -94,6 +98,7 @@ func update_facing():
 	Util.update_h_flip(facing_vector, punch_box)
 	Util.update_h_flip(facing_vector, grab_box)
 	Util.update_h_flip(facing_vector, notice_box)
+	anim.flip_h = facing_vector == Vector2.LEFT
 
 func face_body(body):
 	var pos_diff = body.global_position - global_position
@@ -106,22 +111,6 @@ func face_body(body):
 
 
 ## punching ###########################################################
-
-func punch():
-	var did_hit
-	for body in punch_box_bodies:
-		if not body.is_dead and "machine" in body:
-			body.machine.transit("Punched", {punched_by=self})
-			did_hit = true
-	return did_hit
-
-func kick():
-	var did_hit
-	for body in punch_box_bodies:
-		if not body.is_dead and "machine" in body:
-			body.machine.transit("Kicked", {kicked_by=self, direction=facing_vector})
-			did_hit = true
-	return did_hit
 
 var punch_box_bodies = []
 

@@ -19,6 +19,11 @@ func enter(opts = {}):
 	punched_again_pressed = false
 	punch_ttl = punch_time
 
+	if punch_count == 0:
+		actor.anim.play("punch")
+	else:
+		actor.anim.play("punch-2")
+
 	hit_anything = actor.punch()
 
 	if hit_anything and punch_count >= 1:
@@ -27,10 +32,23 @@ func enter(opts = {}):
 
 	next_state = opts.get("next_state")
 
+
+## exit ###########################################################
+
 func exit():
 	punch_ttl = null
 	next_state = null
 
+
+## punch ###########################################################
+
+func punch():
+	var did_hit
+	for body in actor.punch_box_bodies:
+		if not body.is_dead and "machine" in body:
+			body.machine.transit("Punched", {punched_by=actor})
+			did_hit = true
+	return did_hit
 
 ## unhandled_input ###########################################################
 

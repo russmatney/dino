@@ -11,8 +11,23 @@ func enter(_opts = {}):
 
 	hit_anything = actor.kick()
 
+
+## exit ###########################################################
+
 func exit():
 	kick_ttl = null
+
+
+## kick ###########################################################
+
+func kick():
+	var did_hit
+	for body in actor.punch_box_bodies:
+		if not body.is_dead and "machine" in body:
+			body.machine.transit("Kicked", {kicked_by=actor, direction=actor.facing_vector})
+			did_hit = true
+	return did_hit
+
 
 ## physics ###########################################################
 
