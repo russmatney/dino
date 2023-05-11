@@ -10,6 +10,10 @@ func enter(_opts = {}):
 	if actor.should_wander:
 		wander_in_t = Util.rand_of(wander_in)
 
+## exit ###########################################################
+
+func exit():
+	wander_in_t = null
 
 ## physics ###########################################################
 
