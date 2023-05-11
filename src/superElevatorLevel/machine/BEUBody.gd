@@ -109,6 +109,29 @@ func face_body(body):
 
 	update_facing()
 
+## animations ###########################################################
+
+## returns frames that do NOT imply a punch/kick/some kind of hit
+## Can be overwritten in sub-classes
+func passive_frames(an):
+	var frame_count = an.sprite_frames.get_frame_count(an.animation)
+
+	# 1 or 2 frames? probably both are hits
+	if frame_count in [1, 2]:
+		return []
+
+	# 3 frames, skip the first
+	if frame_count == 3:
+		return [0]
+
+	# 4 frames, skip the first
+	if frame_count == 4:
+		return [0, frame_count - 1]
+
+	# more frames? skip the first 2 and last
+	var frames = [0, 1, frame_count - 1]
+
+	return frames
 
 ## punching ###########################################################
 

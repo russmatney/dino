@@ -49,22 +49,16 @@ func punch():
 		if not body in punched_bodies and not body.is_dead and "machine" in body:
 			body.machine.transit("Punched", {punched_by=actor})
 			punched_bodies.append(body)
-			Cam.hitstop("punch", 0.1, 0.3, 0.1)
-			Cam.screenshake(0.3)
+			Cam.hitstop("punch", 0.1, 0.1, 0.2)
+			# Cam.screenshake(0.3)
 
 func on_animation_finished():
 	if actor.anim.animation == "punch" or actor.anim.animation == "punch-2":
 		finish_punch()
 
-func passive_frames(anim):
-	# ASSUMING the first two and last frame are not 'hits'
-	var last_frame = anim.sprite_frames.get_frame_count(anim.animation)
-	var frames = [0, 1, last_frame]
-	return frames
-
 func on_frame_changed():
 	if actor.anim.animation == "punch" or actor.anim.animation == "punch-2":
-		if not actor.anim.frame in passive_frames(actor.anim):
+		if not actor.anim.frame in actor.passive_frames(actor.anim):
 			punch()
 
 func finish_punch():
