@@ -1,3 +1,13 @@
+## BeatEmUp Body
+##
+## This class is closely integrated with the BEUMachine and it's states.
+## It expects to be subclassed for the player or any specific details
+## (e.g. overwriting passive_frames to tweak a specific animation+interaction).
+##
+## It provides configuration warnings that try to ensure expected nodes and
+## animations are present - note that missing some animations will render
+## certain states useless, because they depend on the animation_finished signal
+## to move to the next state.
 @tool
 extends CharacterBody2D
 class_name BEUBody
@@ -9,7 +19,13 @@ func _get_configuration_warnings():
 		"BEUMachine", "StateLabel",
 		"PunchBox", "GrabBox", "NoticeBox",
 		"AnimatedSprite2D",
-		]})
+		], expected_animations={"AnimatedSprite2D": [
+			"falling", "landed",
+			"idle", "walk",
+			"punch", "punch_2", "punched",
+			"kick", "kicked", "jump", "jump_kick",
+			"grab", "grabbed", "throw", "thrown",
+			"hit_ground", "get_up", "dead"]}})
 
 
 ## vars #############################################################

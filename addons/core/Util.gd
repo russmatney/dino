@@ -301,4 +301,12 @@ func _config_warning(node, opts={}):
 		var n = node.find_child(node_name)
 		if n == null:
 			warns.append("Expected child named '" + node_name + "'")
+	for node_name in opts.get("expected_animations", {}).keys():
+		var n = node.find_child(node_name)
+		if n != null:
+			var animations = n.sprite_frames.get_animation_names()
+			for animation in opts["expected_animations"][node_name]:
+				if animation not in animations:
+					warns.append("Expected animation named '%s' in node '%s'" % [animation, node_name])
+
 	return warns
