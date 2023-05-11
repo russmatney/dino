@@ -9,7 +9,7 @@ var kicked_by
 ## enter ###########################################################
 
 func enter(opts = {}):
-	DJZ.play(DJZ.S.showjumbotron)
+	DJZ.play(DJZ.S.kick)
 	Cam.screenshake(0.2)
 	direction = opts.get("direction", direction)
 

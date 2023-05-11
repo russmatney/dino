@@ -29,15 +29,17 @@ enum S {
 	jet_echo,
 	jet_init,
 	jump,
+	kick,
 	land,
 	laser,
 	nodamageclang,
 	pickup,
+	playerheal,
+	playerhurt,
 	player_dead,
 	player_hit,
 	player_spawn,
-	playerheal,
-	playerhurt,
+	punch,
 	showjumbotron,
 	soldierdead,
 	soldierhit,
@@ -194,6 +196,13 @@ enum S {
 			preload("res://assets/sounds/jump3.sfxr"),
 			preload("res://src/hatbot/sounds/jump1.sfxr"),
 		],
+	S.kick:
+	[
+		preload("res://assets/sounds/punch1.sfxr"),
+		preload("res://assets/sounds/punch2.sfxr"),
+		preload("res://assets/sounds/punch3.sfxr"),
+		preload("res://assets/sounds/punch4.sfxr"),
+		],
 	S.land:
 	[
 		preload("res://assets/sounds/step1.sfxr"),
@@ -245,6 +254,13 @@ enum S {
 	S.player_spawn:
 	[
 		preload("res://assets/sounds/player_spawn1.sfxr"),
+	],
+	S.punch:
+	[
+		preload("res://assets/sounds/punch1.sfxr"),
+		preload("res://assets/sounds/punch2.sfxr"),
+		preload("res://assets/sounds/punch3.sfxr"),
+		preload("res://assets/sounds/punch4.sfxr"),
 	],
 	S.showjumbotron:
 	[
