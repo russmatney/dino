@@ -9,7 +9,7 @@ var hit_anything
 func enter(_opts = {}):
 	kick_ttl = kick_time
 
-	hit_anything = actor.kick()
+	hit_anything = kick()
 
 
 ## exit ###########################################################
