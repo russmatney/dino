@@ -24,6 +24,10 @@ run/main_scene.snake="res://src/snake/menus/SnakeMainMenu.tscn"
 run/main_scene.gunner="res://src/gunner/player/PlayerGym.tscn"
 run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
 
+[aseprite]
+
+import/cleanup/automatically_hide_sprites_not_in_animation=true
+
 [autoload]
 
 Debug="*res://addons/core/Debug.gd"
@@ -67,7 +71,7 @@ naming/scene_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/BulletUpHell/plugin.cfg", "res://addons/dj/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/trolley/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/BulletUpHell/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/AsepriteWizard/plugin.cfg")
 
 [global]
 

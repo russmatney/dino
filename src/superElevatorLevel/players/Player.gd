@@ -1,7 +1,12 @@
 @tool
 extends BEUBody
+class_name BEUPlayer
 
 var hud = preload("res://src/superElevatorLevel/hud/HUD.tscn")
+
+func _enter_tree():
+	add_to_group("player", true)
+	super._enter_tree()
 
 ## ready ###########################################################
 

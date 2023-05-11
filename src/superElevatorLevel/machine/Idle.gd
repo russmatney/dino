@@ -7,6 +7,7 @@ var wander_in_t
 ## enter ###########################################################
 
 func enter(_opts = {}):
+	actor.anim.play("idle")
 	if actor.should_wander:
 		wander_in_t = Util.rand_of(wander_in)
 

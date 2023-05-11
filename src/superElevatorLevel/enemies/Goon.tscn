@@ -23,6 +23,9 @@ size = Vector2(10, 32)
 collision_layer = 8
 collision_mask = 1025
 script = ExtResource("1_teuic")
+should_wander = true
+should_notice = true
+walk_speed = 7000
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 5)

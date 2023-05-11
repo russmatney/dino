@@ -11,6 +11,8 @@ func enter(opts = {}):
 	punched_by = opts.get("punched_by")
 	actor.take_damage("punch", punched_by)
 
+	# TODO turn to face attacker
+
 	punched_ttl = punched_time
 
 	var tween = create_tween()
