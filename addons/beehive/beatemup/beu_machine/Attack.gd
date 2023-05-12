@@ -1,7 +1,7 @@
 extends State
 
 var attacking
-var punch_times = [0.3, 0.4, 0.9, 0.7, 0.8]
+var punch_times = [0.3, 0.35, 0.4, 0.45, 0.7, 0.8, 0.9]
 var punch_ttl
 
 var punch_count
