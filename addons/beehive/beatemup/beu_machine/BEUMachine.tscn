@@ -1,82 +1,86 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=22 format=3 uid="uid://mbx5r7m4xa41"]
 
-[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_3kpnx"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Respawn.gd" id="2_exvq3"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Idle.gd" id="2_oxcoh"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Walk.gd" id="3_dcnm6"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Punch.gd" id="4_e05d6"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Jump.gd" id="5_154mq"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Punched.gd" id="6_68yeg"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Grab.gd" id="7_sfmr7"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Kick.gd" id="7_sk8ni"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Kicked.gd" id="7_t5v77"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Grabbed.gd" id="8_3jy6o"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Throw.gd" id="9_v31mg"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Thrown.gd" id="10_hdjpc"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Wander.gd" id="13_h4yg6"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Notice.gd" id="14_osmac"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Circle.gd" id="15_d261b"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Approach.gd" id="16_pxtvy"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Attack.gd" id="17_kwfl7"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Die.gd" id="19_otce0"]
-[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/HitByThrow.gd" id="20_v5blb"]
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_12xf3"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Respawn.gd" id="2_jidqd"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Idle.gd" id="3_wt7x6"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Walk.gd" id="4_fs7y3"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Jump.gd" id="5_ba627"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Punch.gd" id="6_s2j6v"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Punched.gd" id="7_wildq"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Kick.gd" id="8_20tlo"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Kicked.gd" id="9_7f1i2"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Grab.gd" id="10_8nden"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Grabbed.gd" id="11_bt40m"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Throw.gd" id="12_vsl12"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Thrown.gd" id="13_p7kq2"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Wander.gd" id="14_sy648"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Notice.gd" id="15_ef3h3"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Circle.gd" id="16_1588l"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Approach.gd" id="17_qfmeh"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Attack.gd" id="18_hl2ut"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Dead.gd" id="19_iqn7c"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/HitByThrow.gd" id="20_3tmat"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/beu_machine/Dying.gd" id="21_yvnsj"]
 
 [node name="BEUMachine" type="Node"]
-script = ExtResource("1_3kpnx")
+script = ExtResource("1_12xf3")
 
 [node name="Respawn" type="Node" parent="."]
-script = ExtResource("2_exvq3")
+script = ExtResource("2_jidqd")
 
 [node name="Idle" type="Node" parent="."]
-script = ExtResource("2_oxcoh")
+script = ExtResource("3_wt7x6")
 
 [node name="Walk" type="Node" parent="."]
-script = ExtResource("3_dcnm6")
+script = ExtResource("4_fs7y3")
 
 [node name="Jump" type="Node" parent="."]
-script = ExtResource("5_154mq")
+script = ExtResource("5_ba627")
 
 [node name="Punch" type="Node" parent="."]
-script = ExtResource("4_e05d6")
+script = ExtResource("6_s2j6v")
 
 [node name="Punched" type="Node" parent="."]
-script = ExtResource("6_68yeg")
+script = ExtResource("7_wildq")
 
 [node name="Kick" type="Node" parent="."]
-script = ExtResource("7_sk8ni")
+script = ExtResource("8_20tlo")
 
 [node name="Kicked" type="Node" parent="."]
-script = ExtResource("7_t5v77")
+script = ExtResource("9_7f1i2")
 
 [node name="Grab" type="Node" parent="."]
-script = ExtResource("7_sfmr7")
+script = ExtResource("10_8nden")
 
 [node name="Grabbed" type="Node" parent="."]
-script = ExtResource("8_3jy6o")
+script = ExtResource("11_bt40m")
 
 [node name="Throw" type="Node" parent="."]
-script = ExtResource("9_v31mg")
+script = ExtResource("12_vsl12")
 
 [node name="Thrown" type="Node" parent="."]
-script = ExtResource("10_hdjpc")
+script = ExtResource("13_p7kq2")
 
 [node name="Wander" type="Node" parent="."]
-script = ExtResource("13_h4yg6")
+script = ExtResource("14_sy648")
 
 [node name="Notice" type="Node" parent="."]
-script = ExtResource("14_osmac")
+script = ExtResource("15_ef3h3")
 
 [node name="Circle" type="Node" parent="."]
-script = ExtResource("15_d261b")
+script = ExtResource("16_1588l")
 
 [node name="Approach" type="Node" parent="."]
-script = ExtResource("16_pxtvy")
+script = ExtResource("17_qfmeh")
 
 [node name="Attack" type="Node" parent="."]
-script = ExtResource("17_kwfl7")
+script = ExtResource("18_hl2ut")
 
-[node name="Die" type="Node" parent="."]
-script = ExtResource("19_otce0")
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("19_iqn7c")
 
 [node name="HitByThrow" type="Node" parent="."]
-script = ExtResource("20_v5blb")
+script = ExtResource("20_3tmat")
+
+[node name="Dying" type="Node" parent="."]
+script = ExtResource("21_yvnsj")

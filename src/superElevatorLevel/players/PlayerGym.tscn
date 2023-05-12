@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://uiydpq8sku37"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_kkcvj"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/BEUGym.gd" id="1_1lf74"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="2_344qf"]
 
 [node name="PlayerGym" type="Node"]
-script = ExtResource("1_kkcvj")
+script = ExtResource("1_1lf74")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -153.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://c8l4tj25lrrp0"]
 
 [ext_resource type="Script" path="res://addons/beehive/beatemup/BEUPlayer.gd" id="1_6rtba"]
-[ext_resource type="PackedScene" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_o04ft"]
+[ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_o04ft"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_xn1nd"]
 [ext_resource type="Texture2D" uid="uid://dnnmxre5spx75" path="res://src/superElevatorLevel/players/BEU_player_one.png" id="4_dr5pd"]
 

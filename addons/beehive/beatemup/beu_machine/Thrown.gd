@@ -13,11 +13,14 @@ var hit_bodies = []
 var hit_ground
 var og_collision_mask
 
+var next_state
+
 ## enter ###########################################################
 
 func enter(opts = {}):
 	# TODO perfect the thrown + bounce animation timing
 	actor.anim.play("thrown")
+	next_state = opts.get("next_state")
 
 	actor.anim.animation_finished.connect(on_animation_finished)
 
@@ -77,7 +80,10 @@ func physics_process(delta):
 	thrown_ttl -= delta
 
 	if thrown_ttl <= 0:
-		actor.anim.play("get_up")
+		if next_state:
+			transit(next_state)
+		else:
+			actor.anim.play("get_up")
 		return
 
 	var move_vec = direction * thrown_speed * delta

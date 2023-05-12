@@ -8,6 +8,8 @@
 ## animations are present - note that missing some animations will render
 ## certain states useless, because they depend on the animation_finished signal
 ## to move to the next state.
+##
+## All sprites should face RIGHT, otherwise all the facing logic will be backwards.
 @tool
 extends CharacterBody2D
 class_name BEUBody
@@ -38,6 +40,7 @@ func _get_configuration_warnings():
 @export var kicked_speed: int = 7000
 @export var max_attackers: int = 1
 @export var initial_health: int = 20
+var dying_knockback_speed: int = 11000
 
 @export var punch_power: int = 3
 @export var kick_power: int = 5
@@ -116,14 +119,11 @@ func update_facing():
 	Util.update_h_flip(facing_vector, punch_box)
 	Util.update_h_flip(facing_vector, grab_box)
 	Util.update_h_flip(facing_vector, notice_box)
+	# all art should face RIGHT by default
 	anim.flip_h = facing_vector == Vector2.LEFT
 
 func flip_facing():
-	match facing_vector:
-		Vector2.LEFT:
-			facing_vector = Vector2.RIGHT
-		Vector2.RIGHT:
-			facing_vector = Vector2.LEFT
+	facing_vector *= -1
 	update_facing()
 
 func face_body(body):
@@ -252,6 +252,10 @@ func take_damage(hit_type, body):
 		body.kos += 1
 		Hotel.check_in(body)
 
+signal died()
+
 func die():
-	Debug.warn("This should be overwritten!")
-	machine.transit("Die")
+	is_dead = true
+	lives_lost += 1
+	Hotel.check_in(self)
+	machine.transit("Dying", {direction=-1*facing_vector})
