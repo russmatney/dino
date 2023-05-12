@@ -4,6 +4,18 @@ extends NaviButtonList
 # TODO map Games.games with something like menu_link
 var menu_scenes = [
 	{
+		label="Hatbot",
+		nav_to="res://src/hatbot/menus/MainMenu.tscn",
+	},
+	{
+		label="Super Elevator Level",
+		nav_to="res://src/superElevatorLevel/menus/MainMenu.tscn",
+	},
+	{
+		label="Herd",
+		nav_to="res://src/herd/menus/MainMenu.tscn",
+	},
+	{
 		label="Dungeon Crawler",
 		nav_to="res://src/dungeonCrawler/zones/TwoGeon.tscn",
 	},
@@ -34,14 +46,6 @@ var menu_scenes = [
 	{
 		label="Snake",
 		nav_to="res://src/snake/menus/SnakeMainMenu.tscn",
-	},
-	{
-		label="Hatbot",
-		nav_to="res://src/hatbot/menus/MainMenu.tscn",
-	},
-	{
-		label="Herd",
-		nav_to="res://src/herd/menus/MainMenu.tscn",
 	},
 ]
 
