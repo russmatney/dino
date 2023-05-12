@@ -40,6 +40,22 @@ custom_effects = [ExtResource("1_a7bsi")]
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_pobh0")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Move: WASD
+Punch/Kick/Throw: m
+Jump: n[/center]"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("1_a7bsi")]
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
