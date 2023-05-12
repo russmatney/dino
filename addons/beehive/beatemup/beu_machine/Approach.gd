@@ -24,6 +24,7 @@ func physics_process(delta):
 		return
 
 	if approaching in actor.punch_box_bodies:
+		# TODO consider walking another view pixels closer, rather than stopping right on the edge
 		transit("Attack", {attacking=approaching})
 		return
 

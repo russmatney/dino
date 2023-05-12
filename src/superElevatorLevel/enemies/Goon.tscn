@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3]
+[gd_scene load_steps=49 format=3 uid="uid://dfusbqodk1yxw"]
 
 [ext_resource type="Script" path="res://src/superElevatorLevel/enemies/Goon.gd" id="1_teuic"]
 [ext_resource type="PackedScene" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ox2po"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://by8kuopodsemm" path="res://src/superElevatorLevel/enemies/BEU_goon.png" id="5_wxukf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tylhs"]
-radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fg5y2"]
 radius = 165.027
@@ -408,7 +407,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5cner"]
-size = Vector2(18, 21)
+size = Vector2(17, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75bvv"]
 size = Vector2(12, 20)
@@ -453,7 +452,6 @@ texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_vcpwc")
 animation = &"punch_2"
-frame = 2
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

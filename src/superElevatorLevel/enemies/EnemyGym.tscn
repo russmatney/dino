@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://1dcw7cbqq2dt"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_b14h7"]
-[ext_resource type="PackedScene" path="res://src/superElevatorLevel/enemies/Goon.tscn" id="2_byeku"]
+[ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/superElevatorLevel/enemies/Goon.tscn" id="2_byeku"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="3_k0omd"]
 
 [node name="EnemyGym" type="Node"]

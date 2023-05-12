@@ -77,7 +77,7 @@ func _ready():
 		grab_box = $GrabBox
 		notice_box = $NoticeBox
 		anim = $AnimatedSprite2D
-		if get_node("CamPOF"):
+		if get_node_or_null("CamPOF"):
 			cam_pof = get_node("CamPOF")
 
 		machine.transitioned.connect(_on_transit)
@@ -152,9 +152,9 @@ func passive_frames(an):
 
 	# 4 frames, skip the first
 	if frame_count == 4:
-		return [0, frame_count - 1]
+		return [0]
 
-	# more frames? skip the first 2 and last
+	# more than 4 frames, skip the first 2 and last
 	var frames = [0, 1, frame_count - 1]
 
 	return frames
