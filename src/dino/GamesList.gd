@@ -47,6 +47,10 @@ var menu_scenes = [
 		label="Snake",
 		nav_to="res://src/snake/menus/SnakeMainMenu.tscn",
 	},
+	{
+		label="DemoLand",
+		fn=Game.restart_game.bind(DemoLand),
+	},
 ]
 
 @export var button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")
