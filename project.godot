@@ -23,6 +23,7 @@ run/main_scene.tower="res://src/tower/menus/TowerMainMenu.tscn"
 run/main_scene.snake="res://src/snake/menus/SnakeMainMenu.tscn"
 run/main_scene.gunner="res://src/gunner/player/PlayerGym.tscn"
 run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
+run/main_scene.superelevatorlevel="res://src/superElevatorLevel/menus/MainMenu.tscn"
 
 [aseprite]
 

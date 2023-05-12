@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://dk40afousn3m3"]
 
 [ext_resource type="Script" path="res://addons/beehive/beatemup/BEUBody.gd" id="1_xw877"]
-[ext_resource type="PackedScene" path="res://src/superElevatorLevel/machine/BEUMachine.tscn" id="2_ev1i6"]
+[ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ev1i6"]
 
 [node name="BEUBody" type="CharacterBody2D"]
 script = ExtResource("1_xw877")
