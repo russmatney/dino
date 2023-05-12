@@ -51,6 +51,7 @@ var state_label
 var punch_box
 var grab_box
 var notice_box
+var cam_pof
 
 var move_vector: Vector2
 var facing_vector: Vector2
@@ -76,6 +77,8 @@ func _ready():
 		grab_box = $GrabBox
 		notice_box = $NoticeBox
 		anim = $AnimatedSprite2D
+		if get_node("CamPOF"):
+			cam_pof = get_node("CamPOF")
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()

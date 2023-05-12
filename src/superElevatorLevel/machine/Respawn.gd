@@ -8,6 +8,9 @@ var fall_height = 500
 ## enter ###########################################################
 
 func enter(_opts = {}):
+	if actor.cam_pof:
+		actor.cam_pof.deactivate()
+
 	actor.health = actor.initial_health
 	Hotel.check_in(actor)
 
@@ -36,6 +39,8 @@ func enter(_opts = {}):
 func exit():
 	respawn_ttl = null
 	actor.anim.animation_finished.disconnect(on_animation_finished)
+	if actor.cam_pof:
+		actor.cam_pof.activate()
 
 
 ## anim finished ###########################################################
