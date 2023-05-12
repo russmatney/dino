@@ -10,6 +10,8 @@ func find_existing_status(entry):
 		if ch.key == entry.get("name"):
 			return ch
 
+var warned_once = false
+
 # Expects to be handed a Hotel entry (a dict)
 func update_status(entry):
 	var nm = entry.get("name")
@@ -20,7 +22,9 @@ func update_status(entry):
 		existing.set_status({health=entry.get("health")})
 	else:
 		if len(get_children()) >= max_children:
-			Debug.pr("Too many entity_statuses, skipping add", entry)
+			if not warned_once:
+				Debug.warn("Too many entity_statuses, skipping add", entry)
+				warned_once = true
 			# TODO evict least-relevant/next-to-go status instead
 			return
 
