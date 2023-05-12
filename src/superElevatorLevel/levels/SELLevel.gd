@@ -29,7 +29,6 @@ func setup_enemy(e):
 		enemies.append(e)
 
 func _on_enemy_dead(e):
-	Debug.pr("enemy dead")
 	enemies.erase(e)
 
 	if len(enemies) == 0:
@@ -55,10 +54,12 @@ func _on_wave_complete():
 
 func spawn_next_wave(wave):
 	var goon_count = wave.get("goon_count")
-	for _i in range(goon_count):
+	enemy_spawn_positions.shuffle()
+	for i in range(goon_count):
+		# TODO better enemy names
 		var g = goon_scene.instantiate()
 		setup_enemy(g)
-		var sp = Util.rand_of(enemy_spawn_positions)
+		var sp = enemy_spawn_positions[i % len(enemy_spawn_positions)]
 		g.global_position = sp.global_position
 		add_child(g)
 
