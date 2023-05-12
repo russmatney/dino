@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlc4xb765ue6h"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://src/superElevatorLevel/players/Player.gd" id="1_10ddc"]
-[ext_resource type="PackedScene" uid="uid://cuhse8n16im46" path="res://src/superElevatorLevel/machine/BEUMachine.tscn" id="1_uku6g"]
-[ext_resource type="SpriteFrames" uid="uid://c5tw5326wr6ra" path="res://src/superElevatorLevel/machine/BasicSpriteFrames.tres" id="3_u2xpi"]
+[ext_resource type="Script" path="res://addons/beehive/beatemup/BEUPlayer.gd" id="1_10ddc"]
+[ext_resource type="PackedScene" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="1_uku6g"]
+[ext_resource type="SpriteFrames" uid="uid://c5tw5326wr6ra" path="res://addons/beehive/beatemup/BasicSpriteFrames.tres" id="3_u2xpi"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_1h66e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivhib"]
