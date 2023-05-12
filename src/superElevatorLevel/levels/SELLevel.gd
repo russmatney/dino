@@ -20,6 +20,11 @@ func _ready():
 		Debug.pr("Setting waves", self["waves"])
 		_waves = self["waves"].duplicate()
 
+	if len(enemies) == 0:
+		Debug.pr("No initial enemies, starting first wave")
+		spawn_next_wave(_waves.pop_front())
+
+
 ### enemies ####################################################
 
 func setup_enemy(e):
@@ -48,9 +53,7 @@ func _on_wave_complete():
 		level_complete.emit()
 	else:
 		Hood.notif("Wave complete")
-		var next_wave = _waves.pop_front()
-		Debug.pr("next wave: ", next_wave)
-		spawn_next_wave(next_wave)
+		spawn_next_wave(_waves.pop_front())
 
 func spawn_next_wave(wave):
 	var goon_count = wave.get("goon_count")

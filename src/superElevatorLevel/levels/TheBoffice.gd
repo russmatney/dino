@@ -1,0 +1,26 @@
+extends SELLevel
+
+func _ready():
+	super._ready()
+	Hood.notif("The Boss's Office")
+
+
+var waves = [
+	{goon_count=4},
+	{goon_count=3},
+	{goon_count=1},
+	{goon_count=8, final=true},
+	]
+
+func spawn_next_wave(wave):
+	if wave.get("final"):
+		Hood.notif("Final Wave!")
+
+	var tween = create_tween()
+	tween.set_loops(wave.get("animation_loops", 1))
+	tween.tween_callback(DJZ.play.bind(DJZ.S.step))
+	tween.tween_callback(Cam.screenshake.bind(wave.get("screenshake", 0.5)))
+
+	await get_tree().create_timer(wave.get("animation_time", 2.0)).timeout
+
+	super.spawn_next_wave(wave)

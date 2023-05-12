@@ -19,7 +19,7 @@ func register():
 var levels = [
 	preload("res://src/superElevatorLevel/levels/GroundFloor.tscn"),
 	preload("res://src/superElevatorLevel/levels/Elevator.tscn"),
-	# preload("res://src/superElevatorLevel/levels/Office.tscn"),
+	preload("res://src/superElevatorLevel/levels/TheBoffice.tscn"),
 	]
 
 var level_idx = 0

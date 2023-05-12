@@ -11,6 +11,8 @@ var waves = [
 func _ready():
 	super._ready()
 
+	Hood.notif("The Elevator")
+
 var floor_num = 1
 
 func spawn_next_wave(wave):
