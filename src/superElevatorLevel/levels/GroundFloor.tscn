@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://brgh77xahcugw"]
+[gd_scene load_steps=7 format=3 uid="uid://brgh77xahcugw"]
 
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="1_38glr"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/levels/GroundFloor.gd" id="1_ajnk1"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/superElevatorLevel/enemies/Goon.tscn" id="2_jnvos"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="3_17tte"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="5_s74g6"]
+[ext_resource type="PackedScene" uid="uid://c052pqd071auc" path="res://src/dino/SpawnPoint.tscn" id="6_1ohb7"]
 
 [node name="GroundFloor" type="Node2D"]
 script = ExtResource("1_ajnk1")
@@ -19,3 +21,27 @@ position = Vector2(565, 236)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_17tte")]
 position = Vector2(492, 383)
+
+[node name="CamPOA" parent="." instance=ExtResource("5_s74g6")]
+position = Vector2(360, 216)
+
+[node name="CamPOA2" parent="." instance=ExtResource("5_s74g6")]
+position = Vector2(360, 368)
+
+[node name="CamPOA3" parent="." instance=ExtResource("5_s74g6")]
+position = Vector2(616, 216)
+
+[node name="CamPOA4" parent="." instance=ExtResource("5_s74g6")]
+position = Vector2(616, 368)
+
+[node name="SpawnPoint" parent="." instance=ExtResource("6_1ohb7")]
+position = Vector2(384, 256)
+
+[node name="SpawnPoint2" parent="." instance=ExtResource("6_1ohb7")]
+position = Vector2(576, 320)
+
+[node name="SpawnPoint3" parent="." instance=ExtResource("6_1ohb7")]
+position = Vector2(448, 320)
+
+[node name="SpawnPoint4" parent="." instance=ExtResource("6_1ohb7")]
+position = Vector2(512, 255)
