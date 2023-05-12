@@ -451,7 +451,7 @@ shape = SubResource("CircleShape2D_fg5y2")
 texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_vcpwc")
-animation = &"punch_2"
+animation = &"idle"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -465,7 +465,7 @@ metadata/_aseprite_wizard_config_ = {
 [node name="PunchBox" type="Area2D" parent="."]
 position = Vector2(10, 5)
 collision_layer = 0
-collision_mask = 130
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchBox"]
 shape = SubResource("RectangleShape2D_5cner")

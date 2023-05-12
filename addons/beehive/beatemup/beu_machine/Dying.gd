@@ -7,6 +7,7 @@ var direction
 # bodies collided with while dying
 var hit_bodies = []
 
+var killed_by
 var hit_ground
 var og_collision_mask
 
@@ -15,6 +16,8 @@ var og_collision_mask
 func enter(opts = {}):
 	# TODO perfect the dying + bounce animation timing
 	actor.anim.play("thrown")
+
+	killed_by = opts.get("killed_by")
 
 	dying_ttl = Util.get_(opts, "dying_time", dying_time)
 	direction = Util.get_(opts, "direction", direction)
@@ -32,7 +35,6 @@ func enter(opts = {}):
 
 	actor.punch_box.set_collision_mask_value(2, true)
 	actor.punch_box.set_collision_mask_value(4, true)
-	actor.punch_box.set_collision_mask_value(8, true)
 	actor.punch_box.set_collision_mask_value(10, true)
 
 func on_first_bounce():
@@ -65,7 +67,7 @@ func physics_process(delta):
 
 	if not hit_ground:
 		for b in actor.punch_box_bodies:
-			if not b in hit_bodies and "machine" in b and b != actor:
+			if not b.is_dead and not b in hit_bodies and "machine" in b and b != actor and b != killed_by:
 				b.machine.transit("HitByThrow", {
 					direction=direction,
 					hit_by=actor})

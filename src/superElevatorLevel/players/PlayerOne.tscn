@@ -449,7 +449,7 @@ metadata/_edit_use_anchors_ = true
 [node name="PunchBox" type="Area2D" parent="."]
 position = Vector2(8, 8)
 collision_layer = 0
-collision_mask = 136
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PunchBox"]
 shape = SubResource("RectangleShape2D_w8knr")

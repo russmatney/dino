@@ -47,7 +47,6 @@ func enter(opts = {}):
 
 	actor.punch_box.set_collision_mask_value(2, true)
 	actor.punch_box.set_collision_mask_value(4, true)
-	actor.punch_box.set_collision_mask_value(8, true)
 	actor.punch_box.set_collision_mask_value(10, true)
 
 func on_first_bounce():
@@ -92,7 +91,7 @@ func physics_process(delta):
 
 	if not hit_ground:
 		for b in actor.punch_box_bodies:
-			if not b in hit_bodies and "machine" in b and b != actor and b != thrown_by:
+			if not b.is_dead and not b in hit_bodies and "machine" in b and b != actor and b != thrown_by:
 				b.machine.transit("HitByThrow", {
 					direction=direction,
 					hit_by=actor})

@@ -248,14 +248,17 @@ func take_damage(hit_type, body):
 	Hotel.check_in(self)
 
 	if health <= 0:
-		die()
+		die({killed_by=body})
 		body.kos += 1
 		Hotel.check_in(body)
 
 signal died()
 
-func die():
+func die(opts={}):
 	is_dead = true
 	lives_lost += 1
 	Hotel.check_in(self)
-	machine.transit("Dying", {direction=-1*facing_vector})
+	machine.transit("Dying", {
+		direction=-1*facing_vector,
+		killed_by=opts.get("killed_by"),
+		})
