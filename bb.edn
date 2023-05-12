@@ -48,24 +48,25 @@
                  ;; http-server installable via bbin
                  #_(tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))}
 
-  butler-push (let [arg          (some-> *command-line-args* first)
-                    arg          (or arg "dino")
-                    dir          (str "dist/" arg)
-                    [arg type]   (cond
-                                   (re-seq (re-pattern "-linux") arg)
-                                   [(-> arg (string/replace "-linux" "")) "linux-universal"]
-                                   (re-seq (re-pattern "-macos") arg)
-                                   (do
-                                     (println "DID YOU REMEMBER TO STAPLE IIIT???????")
-                                     [(-> arg (string/replace "-macos" "")) "osx-universal"])
-                                   (re-seq (re-pattern "-windows") arg)
-                                   [(-> arg (string/replace "-windows" "")) "windows"]
-                                   :else [(cond
-                                            (= arg "mvania19") "mvania19-web"
-                                            :else              arg)
-                                          "html5"])
-                    itch-project (str "russmatney/" arg ":" type)
-                    command      (str "butler push --if-changed " dir " " itch-project)]
+  butler-push (let [arg               (some-> *command-line-args* first)
+                    arg               (or arg "dino")
+                    itch-project-name (or (some-> *command-line-args* second) arg)
+                    dir               (str "dist/" arg)
+                    [arg type]        (cond
+                                        (re-seq (re-pattern "-linux") arg)
+                                        [(-> arg (string/replace "-linux" "")) "linux-universal"]
+                                        (re-seq (re-pattern "-macos") arg)
+                                        (do
+                                          (println "DID YOU REMEMBER TO STAPLE IIIT???????")
+                                          [(-> arg (string/replace "-macos" "")) "osx-universal"])
+                                        (re-seq (re-pattern "-windows") arg)
+                                        [(-> arg (string/replace "-windows" "")) "windows"]
+                                        :else [(cond
+                                                 (= arg "mvania19") "mvania19-web"
+                                                 :else              arg)
+                                               "html5"])
+                    itch-project      (str "russmatney/" itch-project-name ":" type)
+                    command           (str "butler push --if-changed " dir " " itch-project)]
 
                 (log command)
 
