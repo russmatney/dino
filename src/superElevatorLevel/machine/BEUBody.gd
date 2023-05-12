@@ -20,8 +20,7 @@ func _get_configuration_warnings():
 		"PunchBox", "GrabBox", "NoticeBox",
 		"AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
-			"falling", "landed",
-			"idle", "walk",
+			"falling", "landed", "idle", "walk",
 			"punch", "punch_2", "punched",
 			"kick", "kicked", "jump", "jump_kick",
 			"grab", "grabbed", "throw", "thrown",
