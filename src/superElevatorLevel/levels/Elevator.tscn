@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://0jpupreu70ir"]
+[gd_scene load_steps=9 format=3 uid="uid://0jpupreu70ir"]
 
 [ext_resource type="Script" path="res://src/superElevatorLevel/levels/Elevator.gd" id="1_b31x7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="2_tb4r3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="4_hddpq"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/superElevatorLevel/enemies/Goon.tscn" id="5_glxo7"]
 [ext_resource type="PackedScene" uid="uid://c052pqd071auc" path="res://src/dino/SpawnPoint.tscn" id="6_dkily"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://assets/hatbot/light64px8.png" id="8_700d8"]
 
 [node name="Elevator" type="Node2D"]
 script = ExtResource("1_b31x7")
@@ -51,3 +52,42 @@ position = Vector2(256, 128)
 
 [node name="SpawnPoint4" parent="." instance=ExtResource("6_dkily")]
 position = Vector2(256, 192)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(160, 128)
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("8_700d8")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(288, 128)
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("8_700d8")
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(224, 128)
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("8_700d8")
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(160, 184)
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("8_700d8")
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+position = Vector2(288, 184)
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("8_700d8")
+
+[node name="PointLight2D6" type="PointLight2D" parent="."]
+position = Vector2(224, 184)
+energy = 0.4
+shadow_enabled = true
+texture = ExtResource("8_700d8")

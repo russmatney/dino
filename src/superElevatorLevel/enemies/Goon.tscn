@@ -1,7 +1,8 @@
-[gd_scene load_steps=49 format=3 uid="uid://dfusbqodk1yxw"]
+[gd_scene load_steps=50 format=3 uid="uid://dfusbqodk1yxw"]
 
 [ext_resource type="Script" path="res://src/superElevatorLevel/enemies/Goon.gd" id="1_teuic"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ox2po"]
+[ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://assets/sprites/BEU_character_shadow_sheet.png" id="2_xyux5"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_k27u2"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_5hwwr"]
 [ext_resource type="Texture2D" uid="uid://by8kuopodsemm" path="res://src/superElevatorLevel/enemies/BEU_goon.png" id="5_wxukf"]
@@ -420,6 +421,14 @@ should_wander = true
 should_notice = true
 walk_speed = 7000
 
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+offset_left = -32.0
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = 24.0
+texture = ExtResource("2_xyux5")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_tylhs")
@@ -453,7 +462,7 @@ shape = SubResource("CircleShape2D_fg5y2")
 texture_filter = 1
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_vcpwc")
-animation = &"idle"
+animation = &"grab"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
