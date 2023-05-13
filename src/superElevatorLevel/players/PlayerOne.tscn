@@ -435,6 +435,7 @@ position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_632t5")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 offset_left = -24.0
 offset_top = 16.0
 offset_right = 24.0

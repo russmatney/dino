@@ -427,6 +427,7 @@ shape = SubResource("CapsuleShape2D_tylhs")
 [node name="BEUMachine" parent="." instance=ExtResource("2_ox2po")]
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = 16.0
 offset_right = 40.0
