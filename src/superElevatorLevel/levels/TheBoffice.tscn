@@ -49,7 +49,7 @@ position = Vector2(80, 160)
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(160, 104)
 scale = Vector2(2.5, 1.75)
-energy = 0.4
+energy = 0.65
 shadow_enabled = true
 texture = ExtResource("7_fh3ik")
 
