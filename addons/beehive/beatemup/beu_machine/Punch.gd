@@ -49,8 +49,6 @@ func punch():
 		if is_instance_valid(body) and not body in punched_bodies and not body.is_dead and "machine" in body:
 			body.machine.transit("Punched", {punched_by=actor})
 			punched_bodies.append(body)
-			Cam.hitstop("punch", 0.1, 0.1, 0.2)
-			# Cam.screenshake(0.3)
 
 func on_animation_finished():
 	if actor.anim.animation == "punch" or actor.anim.animation == "punch_2":

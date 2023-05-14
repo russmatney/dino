@@ -26,7 +26,7 @@ func enter(_opts = {}):
 	var tween = create_tween()
 	tween.tween_property(actor, "position", og_pos, respawn_ttl)
 	tween.tween_callback(func():
-		Cam.screenshake.bind(0.3)
+		Cam.screenshake.bind(0.2)
 		DJZ.play(DJZ.S.heavy_fall)
 		# show shiny invincible couple of seconds
 		actor.is_dead = false

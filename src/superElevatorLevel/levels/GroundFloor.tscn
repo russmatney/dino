@@ -26,7 +26,7 @@ display_name = "Harry"
 
 [node name="Goon2" parent="." instance=ExtResource("2_jnvos")]
 position = Vector2(303, 102)
-display_name = ""
+display_name = "Tom"
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_17tte")]
 position = Vector2(230, 249)

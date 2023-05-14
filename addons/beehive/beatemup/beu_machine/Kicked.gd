@@ -11,7 +11,7 @@ var kicked_by
 func enter(opts = {}):
 	actor.anim.play("kicked")
 	DJZ.play(DJZ.S.kick)
-	Cam.screenshake(0.3)
+	Cam.screenshake(0.2)
 	direction = opts.get("direction", direction)
 
 	kicked_ttl = kicked_time
