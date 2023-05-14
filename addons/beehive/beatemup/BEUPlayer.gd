@@ -32,10 +32,12 @@ func _unhandled_input(event):
 
 ## physics_process ###########################################################
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	move_vector = Trolley.move_dir()
 
-	if move_vector.abs().length() > 0:
+	if move_vector.abs().length() > 0 and machine.state.name in ["Walk", "Jump"]:
 		if move_vector.x > 0:
 			facing_vector = Vector2.RIGHT
 		elif move_vector.x < 0:
