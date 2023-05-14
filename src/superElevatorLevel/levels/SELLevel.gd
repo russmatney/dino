@@ -72,6 +72,9 @@ func spawn_next_wave(wave):
 	var goon_count = wave.get("goon_count", 0)
 	spawn_enemies(goon_scene, goon_count)
 
+	# quick way to get spawns to not collide (as much)
+	enemy_spawn_positions.reverse()
+
 	var boss_count = wave.get("boss_count", 0)
 	spawn_enemies(boss_scene, boss_count)
 
