@@ -15,8 +15,12 @@ func set_status(opts):
 	if opts.get("texture"):
 		portrait.set_texture(opts.get("texture"))
 
+	if opts.get("key"):
+		key = opts.get("key")
+
 	if opts.get("name"):
-		key = opts.get("name")
+		if key == null:
+			key = opts.get("name")
 		entity_name.text = "%s" % opts.get("name")
 
 	var h = opts.get("health")

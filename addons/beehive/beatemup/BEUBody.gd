@@ -31,6 +31,8 @@ func _get_configuration_warnings():
 
 ## vars #############################################################
 
+@export var display_name: String
+
 @export var should_wander: bool = false
 @export var should_notice: bool = false
 @export var jump_speed: int = 10000
@@ -115,13 +117,17 @@ func _on_transit(label):
 ## hotel ###########################################################
 
 func hotel_data():
-	return {health=health, name=name, lives_lost=lives_lost, kos=kos, is_dead=is_dead}
+	var d = {health=health, name=name, lives_lost=lives_lost, kos=kos, is_dead=is_dead}
+	if not display_name in ["", null]: # yay types! woo!
+		d["display_name"] = display_name
+	return d
 
 func check_out(data):
 	health = Util.get_(data, "health", initial_health)
 	lives_lost = Util.get_(data, "lives_lost", lives_lost)
 	kos = Util.get_(data, "kos", kos)
 	is_dead = Util.get_(data, "is_dead", is_dead)
+	display_name = Util.get_(data, "display_name", display_name)
 
 
 ## facing ###########################################################

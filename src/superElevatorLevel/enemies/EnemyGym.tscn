@@ -17,9 +17,11 @@ color = Color(0.276509, 0.383783, 0.504008, 1)
 
 [node name="Goon" parent="." instance=ExtResource("2_byeku")]
 position = Vector2(-144, -114)
+display_name = null
 
 [node name="Goon2" parent="." instance=ExtResource("2_byeku")]
 position = Vector2(138, -94)
+display_name = null
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_k0omd")]
 position = Vector2(13, 16)

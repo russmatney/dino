@@ -48,14 +48,17 @@ func update_enemy_status(enemy):
 	var opts = enemy.duplicate()
 	var nm = str(enemy.get("name"))
 	var texture
-	if nm and nm in to_portrait_texture:
-		for k in to_portrait_texture.keys():
+	if nm:
+		for k in to_portrait_texture:
 			if nm.contains(k):
 				texture = to_portrait_texture[k]
 				break
+
 	if texture:
 		opts["texture"] = texture
 
+	opts["key"] = nm
+	opts["name"] = opts.get("display_name", nm)
 	opts["ttl"] = 10
 
 	enemy_status_list.update_status(opts)

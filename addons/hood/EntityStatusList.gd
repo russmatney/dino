@@ -7,7 +7,7 @@ var status_scene = preload("res://addons/hood/EntityStatus.tscn")
 
 func find_existing_status(entry):
 	for ch in get_children():
-		if ch.key == entry.get("name"):
+		if ch.key == entry.get("key", entry.get("name")):
 			return ch
 
 var warned_once = false
@@ -19,7 +19,7 @@ func update_status(entry):
 	var existing = find_existing_status(entry)
 	if existing and is_instance_valid(existing):
 		# assume it's just a health update
-		existing.set_status({health=entry.get("health")})
+		existing.set_status({health=entry.get("health"), name=nm})
 	else:
 		if len(get_children()) >= max_children:
 			if not warned_once:
@@ -31,7 +31,7 @@ func update_status(entry):
 		var status = status_scene.instantiate()
 		add_child(status)
 
-		var opts = {name=nm, ttl=entry.get("ttl"), health=entry.get("health")}
+		var opts = {key=entry.get("key"), name=nm, ttl=entry.get("ttl"), health=entry.get("health")}
 
 		if entry.get("texture"):
 			opts["texture"] = entry.get("texture")
