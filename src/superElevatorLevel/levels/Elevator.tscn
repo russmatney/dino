@@ -37,11 +37,11 @@ position = Vector2(224, 192)
 
 [node name="Goon" parent="." instance=ExtResource("5_glxo7")]
 position = Vector2(160, 120)
-display_name = ""
+display_name = "Richard"
 
 [node name="Goon2" parent="." instance=ExtResource("5_glxo7")]
 position = Vector2(288, 120)
-display_name = ""
+display_name = "Richard"
 
 [node name="SpawnPoint" parent="." instance=ExtResource("6_dkily")]
 position = Vector2(192, 128)

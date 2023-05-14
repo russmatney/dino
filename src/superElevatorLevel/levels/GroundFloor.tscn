@@ -22,11 +22,11 @@ texture = ExtResource("3_prgxi")
 
 [node name="Goon" parent="." instance=ExtResource("2_jnvos")]
 position = Vector2(159, 105)
-display_name = null
+display_name = "Harry"
 
 [node name="Goon2" parent="." instance=ExtResource("2_jnvos")]
 position = Vector2(303, 102)
-display_name = null
+display_name = ""
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_17tte")]
 position = Vector2(230, 249)

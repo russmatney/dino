@@ -417,7 +417,6 @@ size = Vector2(12, 20)
 collision_layer = 8
 collision_mask = 1025
 script = ExtResource("1_teuic")
-display_name = null
 should_wander = true
 should_notice = true
 walk_speed = 7000

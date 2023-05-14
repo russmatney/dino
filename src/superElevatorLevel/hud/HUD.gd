@@ -22,7 +22,7 @@ func _on_entry_updated(entry):
 @onready var player_status = $%PlayerStatus
 
 # TODO get portrait from current player?
-var player_portrait = preload("res://assets/hatbot/portraits1.png")
+var player_portrait = preload("res://assets/sprites/status_portraits6.png")
 
 func update_player(entry):
 	if "health" in entry:
@@ -38,7 +38,8 @@ func update_player(entry):
 
 var to_portrait_texture = {
 	# TODO create portraits for player + enemies
-	"Goon": preload("res://assets/hatbot/portraits3.png"),
+	"Goon": preload("res://assets/sprites/status_portraits7.png"),
+	"Boss": preload("res://assets/sprites/status_portraits8.png"),
 	}
 
 
