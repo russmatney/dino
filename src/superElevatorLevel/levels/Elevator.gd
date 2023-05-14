@@ -3,9 +3,7 @@ extends SELLevel
 var waves = [
 	{goon_count=1, floor_count=3},
 	{goon_count=3, floor_count=8, screenshake=0.6, animation_loops=4},
-	{goon_count=2, floor_count=2, animation_loops=2},
-	{goon_count=4, floor_count=7, screenshake=0.5, animation_loops=4, animation_time=1.0},
-	{goon_count=1, floor_count=12},
+	{goon_count=4, floor_count=12, screenshake=0.5, animation_loops=4, animation_time=1.0},
 	]
 
 func _ready():

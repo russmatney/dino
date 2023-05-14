@@ -115,7 +115,6 @@ func _find_player(p=null):
 
 func _on_player_found(p):
 	Debug.prn("Game.player found:", p)
-	Hood.notif("Found player", p)
 	if current_game:
 		current_game.update_world()
 

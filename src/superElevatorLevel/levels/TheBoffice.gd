@@ -7,9 +7,9 @@ func _ready():
 
 var waves = [
 	{goon_count=4},
-	{goon_count=3},
-	{goon_count=1},
-	{goon_count=8, final=true},
+	{goon_count=2, boss_count=1},
+	{goon_count=2, boss_count=2},
+	{goon_count=1, boss_count=3, final=true},
 	]
 
 func spawn_next_wave(wave):

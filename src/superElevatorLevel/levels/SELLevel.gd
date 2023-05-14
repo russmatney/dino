@@ -45,6 +45,7 @@ signal level_complete
 signal wave_complete
 
 var goon_scene = preload("res://src/superElevatorLevel/enemies/Goon.tscn")
+var boss_scene = preload("res://src/superElevatorLevel/enemies/Boss.tscn")
 
 var _waves = []
 
@@ -55,16 +56,24 @@ func _on_wave_complete():
 		Hood.notif("Wave complete")
 		spawn_next_wave(_waves.pop_front())
 
+func spawn_enemies(enemy_scene, count):
+	if count:
+		for i in range(count):
+			# TODO better enemy names
+			var e = enemy_scene.instantiate()
+			setup_enemy(e)
+			var sp = enemy_spawn_positions[i % len(enemy_spawn_positions)]
+			e.global_position = sp.global_position
+			add_child(e)
+
 func spawn_next_wave(wave):
-	var goon_count = wave.get("goon_count")
 	enemy_spawn_positions.shuffle()
-	for i in range(goon_count):
-		# TODO better enemy names
-		var g = goon_scene.instantiate()
-		setup_enemy(g)
-		var sp = enemy_spawn_positions[i % len(enemy_spawn_positions)]
-		g.global_position = sp.global_position
-		add_child(g)
+
+	var goon_count = wave.get("goon_count", 0)
+	spawn_enemies(goon_scene, goon_count)
+
+	var boss_count = wave.get("boss_count", 0)
+	spawn_enemies(boss_scene, boss_count)
 
 ### level ####################################################
 
