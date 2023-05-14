@@ -1,6 +1,22 @@
 @tool
 extends BEUBody
 
+@onready var palettes = [null,
+	preload("res://src/superElevatorLevel/enemies/GoonAlt1.tres"),
+	preload("res://src/superElevatorLevel/enemies/GoonAlt2.tres"),
+	]
+
+## ready ###########################################################
+
+func _ready():
+	super._ready()
+
+	var pal = Util.rand_of(palettes)
+
+	if pal != null:
+		anim.material = pal
+
+
 # func _enter_tree():
 # 	Debug.prn("id", get_instance_id())
 # 	Debug.prn("inst", instance_from_id(get_instance_id()))
