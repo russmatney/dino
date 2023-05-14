@@ -7,6 +7,8 @@ var thrown
 
 ## enter ###########################################################
 
+# TODO refactor to be animation, not timing, based? or maybe grabbed is enough?
+
 func enter(opts = {}):
 	actor.anim.play("throw")
 	thrown = opts.get("body")

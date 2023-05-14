@@ -91,7 +91,7 @@ func physics_process(delta):
 
 	if not hit_ground:
 		for b in actor.punch_box_bodies:
-			if not b.is_dead and not b in hit_bodies and "machine" in b and b != actor and b != thrown_by:
+			if is_instance_valid(b) and not b.is_dead and not b in hit_bodies and "machine" in b and b != actor and b != thrown_by:
 				b.machine.transit("HitByThrow", {
 					direction=direction,
 					hit_by=actor})

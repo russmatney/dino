@@ -1,5 +1,7 @@
 extends State
 
+var entered
+
 var attacking
 var punch_times = [0.3, 0.35, 0.4, 0.45, 0.7, 0.8, 0.9]
 var punch_ttl
@@ -11,8 +13,17 @@ var last_hit_anything
 ## enter ###########################################################
 
 func enter(opts = {}):
+	entered = true
+
 	# reuse attacking, ex. if we get back here from Punch
-	attacking = opts.get("attacking", attacking)
+	# this safety handling is whack, but seems to prevent some crashing
+	if attacking and is_instance_valid(attacking):
+		attacking = Util.get_(opts, "attacking", attacking)
+	elif "attacking" in opts:
+		attacking = opts["attacking"]
+		if attacking and not is_instance_valid(attacking):
+			attacking = null
+
 	punch_ttl = Util.rand_of(punch_times)
 
 	punch_count = opts.get("punch_count", 0)
@@ -24,12 +35,18 @@ func enter(opts = {}):
 
 func exit():
 	punch_ttl = null
+	entered = false
 
 
 ## physics ###########################################################
 
 func physics_process(delta):
-	if attacking == null or punch_ttl == null:
+	if not entered:
+		return
+
+	if not is_instance_valid(attacking):
+		attacking = null
+		transit("Idle")
 		return
 
 	if not attacking in actor.punch_box_bodies:

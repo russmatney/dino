@@ -285,9 +285,19 @@ func play_then_return(anim, animation):
 #################################################################
 ## dictionaries
 
-func get_(opts: Dictionary, key: String, default: Variant):
-	var v = opts.get(key)
+# A get that:
+# - returns `default` if the value for key `k` in dict `d` is null.
+# - returns null if the value is a freed object (instead of crashing)
+# - returns null if both the value and default are invalid instances
+func get_(d: Dictionary, k: String, default: Variant=null):
+	var v
+	if k in d:
+		v = d[k]
+
 	if v != null:
+		if not is_instance_valid(v):
+			if is_instance_valid(default):
+				return default
 		return v
 	else:
 		return default

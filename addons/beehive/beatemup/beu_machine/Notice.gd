@@ -30,6 +30,10 @@ func physics_process(delta):
 	if not noticing or wait_ttl == null:
 		return
 
+	if not is_instance_valid(noticing):
+		transit("Idle")
+		return
+
 	if not noticing in actor.notice_box_bodies:
 		transit("Idle")
 		return
@@ -38,9 +42,11 @@ func physics_process(delta):
 	if wait_ttl <= 0:
 		# is the noticed body busy?
 		if noticing.ready_for_new_attacker():
-			transit("Approach", {approaching=noticing})
+			if is_instance_valid(noticing):
+				transit("Approach", {approaching=noticing})
 		else:
-			transit("Circle", {circling=noticing})
+			if is_instance_valid(noticing):
+				transit("Circle", {circling=noticing})
 		return
 
 	if actor.velocity.abs().length() > 0:

@@ -57,7 +57,7 @@ func physics_process(delta):
 
 	if kick_pressed:
 		for b in actor.punch_box_bodies:
-			if not b.is_dead and not b in kicked_bodies and "machine" in b:
+			if is_instance_valid(b) and not b.is_dead and not b in kicked_bodies and "machine" in b:
 				b.machine.transit("Kicked", {
 					direction=actor.facing_vector,
 					kicked_by=actor})

@@ -29,6 +29,11 @@ func physics_process(delta):
 	if circling == null or circle_ttl == null:
 		return
 
+	if not is_instance_valid(circling):
+		circling = null
+		transit("Idle")
+		return
+
 	circle_ttl -= delta
 
 	if circle_ttl < 0:

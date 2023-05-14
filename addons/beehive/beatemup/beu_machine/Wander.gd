@@ -36,8 +36,10 @@ func physics_process(delta):
 
 	if actor.should_notice:
 		if len(actor.notice_box_bodies) > 0:
-			transit("Notice", {noticing=actor.notice_box_bodies[0]})
-			return
+			var noticing = actor.notice_box_bodies[0]
+			if is_instance_valid(noticing):
+				transit("Notice", {noticing=noticing})
+				return
 
 	wander_ttl -= delta
 	if wander_ttl <= 0:

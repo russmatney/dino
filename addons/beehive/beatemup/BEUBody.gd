@@ -95,6 +95,17 @@ func _ready():
 		notice_box.body_entered.connect(on_noticebox_body_entered)
 		notice_box.body_exited.connect(on_noticebox_body_exited)
 
+## physics_process ###########################################################
+
+func remove_invalid(xs):
+	return xs.filter(func(x): return is_instance_valid(x))
+
+func _physics_process(_delta):
+	punch_box_bodies = remove_invalid(punch_box_bodies)
+	grab_box_bodies = remove_invalid(grab_box_bodies)
+	notice_box_bodies = remove_invalid(notice_box_bodies)
+
+
 ## on_transit ###########################################################
 
 func _on_transit(label):
@@ -203,7 +214,7 @@ func ready_for_new_attacker():
 func update_attackers():
 	attackers = attackers.filter(func(att):
 		# only keep attackers in one of these states
-		return not att.is_dead and att.machine.state.name in [
+		return is_instance_valid(att) and not att.is_dead and att.machine.state.name in [
 			"Punch", "Punched", "Approach", "Attack", "Kick", "Kicked",
 			])
 

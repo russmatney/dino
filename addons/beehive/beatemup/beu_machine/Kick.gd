@@ -30,7 +30,7 @@ var kicked_bodies = []
 
 func kick():
 	for body in actor.punch_box_bodies:
-		if not body in kicked_bodies and not body.is_dead and "machine" in body:
+		if is_instance_valid(body) and not body in kicked_bodies and not body.is_dead and "machine" in body:
 			body.machine.transit("Kicked", {kicked_by=actor, direction=actor.facing_vector})
 			kicked_bodies.append(body)
 			Cam.hitstop("kick", 0.05, 0.1, 0.3)
