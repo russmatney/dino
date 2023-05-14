@@ -1,6 +1,6 @@
 [gd_scene load_steps=48 format=3 uid="uid://c8l4tj25lrrp0"]
 
-[ext_resource type="Script" path="res://addons/beehive/beatemup/BEUPlayer.gd" id="1_6rtba"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/players/PlayerOne.gd" id="1_r201x"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_o04ft"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_xn1nd"]
 [ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://assets/sprites/BEU_character_shadow_sheet.png" id="3_y6nvn"]
@@ -427,8 +427,7 @@ animations = [{
 [node name="PlayerOne" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 513
-script = ExtResource("1_6rtba")
-max_attackers = 3
+script = ExtResource("1_r201x")
 
 [node name="BEUMachine" parent="." instance=ExtResource("2_o04ft")]
 
@@ -485,7 +484,7 @@ shape = SubResource("CircleShape2D_4qn8w")
 texture_filter = 1
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_b2ti4")
-animation = &"kick"
+animation = &"idle"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

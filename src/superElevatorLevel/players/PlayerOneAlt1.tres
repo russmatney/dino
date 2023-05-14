@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bri362cr13ump"]
+
+[ext_resource type="Shader" path="res://src/ColorSwapShader.gdshader" id="1_oxqiu"]
+
+[resource]
+shader = ExtResource("1_oxqiu")
+shader_parameter/original_0 = Color(0.92549, 0.152941, 0.247059, 1)
+shader_parameter/original_1 = Color(0.854902, 0.694118, 0.388235, 1)
+shader_parameter/original_2 = Color(0.219608, 0.34902, 0.701961, 1)
+shader_parameter/original_3 = Color(0.368627, 0.356863, 0.54902, 1)
+shader_parameter/original_4 = Color(0.635294, 0.427451, 0.247059, 1)
+shader_parameter/replace_0 = Color(0.819608, 0.854902, 0.219608, 1)
+shader_parameter/replace_1 = Color(0.431373, 0.329412, 0.137255, 1)
+shader_parameter/replace_2 = Color(0.266667, 0.662745, 0.337255, 1)
+shader_parameter/replace_3 = Color(0.0821942, 0.106177, 0.169178, 1)
+shader_parameter/replace_4 = Color(0.196078, 0.117647, 0.0470588, 1)
