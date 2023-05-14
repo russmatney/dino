@@ -428,6 +428,7 @@ animations = [{
 collision_layer = 2
 collision_mask = 513
 script = ExtResource("1_r201x")
+max_attackers = 3
 
 [node name="BEUMachine" parent="." instance=ExtResource("2_o04ft")]
 
