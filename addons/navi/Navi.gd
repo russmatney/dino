@@ -46,9 +46,9 @@ func nav_to(path_or_packed_scene):
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(path_or_packed_scene)
 	_deferred_goto_scene.call_deferred(path_or_packed_scene)
-	# Navi implying DJ dep
-	# TODO opt-in/out of pausing the music
-	DJ.pause_menu_song()
+
+	# TODO pause/resume menus/music fixes
+	resume()
 
 	if death_menu and is_instance_valid(death_menu):
 		# b/c you can pause the game and go to main instead of clicking go to main

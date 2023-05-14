@@ -3,12 +3,12 @@ extends NaviButtonList
 
 var button_defs = [
 	{
-		"label": "Credits",
-		"nav_to": "res://src/dino/DinoCredits.tscn",
+		label="Credits",
+		nav_to="res://src/dino/DinoCredits.tscn",
 	},
 	{
-		"label": "Return to Main Menu",
-		"fn": Navi.nav_to_main_menu,
+		label="Return to Main Menu",
+		fn=Game.load_main_menu,
 	},
 ]
 

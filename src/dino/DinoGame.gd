@@ -13,6 +13,8 @@ func get_player_scene():
 func on_player_spawned(_player):
 	pass
 
+var main_menu_scene
+
 func register():
 	# register any static zones/scenes with Hotel
 	Debug.warn("register() not implemented")

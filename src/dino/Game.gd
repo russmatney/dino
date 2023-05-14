@@ -73,6 +73,18 @@ func restart_game(game):
 
 
 ###########################################################
+# game main menu
+
+func load_main_menu():
+	if current_game and current_game.main_menu_scene != null:
+		Navi.nav_to(current_game.main_menu_scene)
+		return
+
+	Debug.pr("No current game or no main_menu_scene in current_game, naving to fallback main menu.")
+	Navi.nav_to_main_menu()
+
+
+###########################################################
 # player
 
 # TODO maybe better to let the zones respawn the player?

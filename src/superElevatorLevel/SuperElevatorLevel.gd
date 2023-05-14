@@ -11,8 +11,11 @@ func manages_scene(scene):
 
 	return scene.scene_file_path.begins_with("res://src/superElevatorLevel")
 
+func should_spawn_player(scene):
+	return not scene.scene_file_path.begins_with("res://src/superElevatorLevel/menus")
+
 func register():
-	pass
+	main_menu_scene = "res://src/superElevatorLevel/menus/MainMenu.tscn"
 
 func on_player_spawned(player):
 	player.died.connect(on_player_died.bind(player), CONNECT_ONE_SHOT)
