@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c6bgwn1saot5x"]
+
+[ext_resource type="Shader" path="res://src/ColorSwapShader.gdshader" id="1_filsb"]
+
+[resource]
+shader = ExtResource("1_filsb")
+shader_parameter/original_0 = Color(0.729412, 0.380392, 0.337255, 1)
+shader_parameter/original_1 = Color(0.94902, 0.65098, 0.368627, 1)
+shader_parameter/original_2 = Color(0.294118, 0.356863, 0.670588, 1)
+shader_parameter/original_3 = Color(0.690196, 0.188235, 0.360784, 1)
+shader_parameter/original_4 = Color(0.196078, 0.243137, 0.309804, 1)
+shader_parameter/replace_0 = Color(0.00784314, 0.619608, 0.00392157, 1)
+shader_parameter/replace_1 = Color(0.368627, 0.215686, 0.0470588, 1)
+shader_parameter/replace_2 = Color(0.564706, 0.129412, 0.164706, 1)
+shader_parameter/replace_3 = Color(0.47451, 0.564706, 0.976471, 1)
+shader_parameter/replace_4 = Color(0.0156863, 0.0470588, 0.00392157, 1)
