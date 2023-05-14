@@ -8,7 +8,7 @@ func _ready():
 	Debug.prn("Game autoload ready")
 
 	player_found.connect(_on_player_found)
-	player_spawned.connect(_find_player)
+	player_ready.connect(_find_player)
 	_find_player()
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
@@ -85,7 +85,7 @@ func _on_new_scene_instanced(scene):
 
 
 signal player_found(player)
-signal player_spawned(player)
+signal player_ready(player)
 
 var player
 var player_group = "player"
@@ -155,7 +155,7 @@ func _respawn_player(opts={}):
 	else:
 		Debug.err("No spawn coords found when respawning player")
 
-	player.ready.connect(func(): player_spawned.emit(player))
+	player.ready.connect(func(): player_ready.emit(player))
 
 	# check in new player health
 	# here we pass the data ourselves to not overwrite other fields (powerups)
