@@ -130,6 +130,7 @@ func respawn_player(opts={}):
 
 	spawning = true
 	if player:
+		Debug.pr("Respawn found player, will remove")
 		var p = player
 		player = null
 		if p and is_instance_valid(p):
@@ -143,7 +144,7 @@ func respawn_player(opts={}):
 	_respawn_player.call_deferred(opts)
 
 func _respawn_player(opts={}):
-	var player_died = opts.get("player_died", false)
+	var setup_fn = opts.get("setup_fn")
 	var spawn_coords = opts.get("spawn_coords")
 	if not spawn_coords:
 		var coords_fn = opts.get("spawn_coords_fn", respawn_coords)
@@ -157,12 +158,12 @@ func _respawn_player(opts={}):
 
 	player.ready.connect(func(): player_ready.emit(player))
 
-	# check in new player health
-	# here we pass the data ourselves to not overwrite other fields (powerups)
-	if player_died:
-		# TODO some kind of initial_data() or reset() function for player data
-		# note that death/travel maintains some things that restart_game might clear
-		Hotel.check_in(player, {health=player.max_health})
+	if setup_fn != null:
+		setup_fn.call(player)
+
+	# TODO handling like this via setup_fn in Hatbot/Demoland.... metro?
+	# if player_died:
+	# 	Hotel.check_in(player, {health=player.max_health})
 
 	current_game.on_player_spawned(player)
 

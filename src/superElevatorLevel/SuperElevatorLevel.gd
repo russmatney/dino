@@ -14,6 +14,14 @@ func manages_scene(scene):
 func register():
 	pass
 
+func on_player_spawned(player):
+	player.died.connect(on_player_died.bind(player), CONNECT_ONE_SHOT)
+
+func on_player_died(_player):
+	Game.respawn_player.call_deferred({setup_fn=func(p):
+		# restore player health
+		Hotel.check_in(p, {health=p.initial_health})})
+
 ## levels ####################################################################
 
 var levels = [

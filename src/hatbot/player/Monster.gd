@@ -270,7 +270,8 @@ func _on_player_death():
 
 	Quest.jumbo_notif({header="You died", body="Sorry about it!",
 		action="close", action_label_text="Respawn",
-		on_close=Game.respawn_player.bind({player_died=true})})
+		on_close=Game.respawn_player.bind({setup_fn=func(p):
+			Hotel.check_in(p, {health=p.max_health})})})
 
 ########################################################
 # coins

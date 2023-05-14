@@ -151,7 +151,8 @@ func die():
 	if Game.is_managed:
 		tween.tween_callback(restart_level)
 	else:
-		tween.tween_callback(Game.respawn_player.bind({player_died=true}))
+		tween.tween_callback(Game.respawn_player.bind({setup_fn=func(p):
+			Hotel.check_in(p, {health=p.max_health})}))
 
 func restart_level():
 	Quest.jumbo_notif({header="You died.", body="Sorry about it!",
