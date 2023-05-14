@@ -77,6 +77,8 @@ func restart_game(game):
 
 func load_main_menu():
 	if current_game and current_game.main_menu_scene != null:
+		Navi.death_menu.hide()
+		Navi.win_menu.hide()
 		Navi.nav_to(current_game.main_menu_scene)
 		return
 
