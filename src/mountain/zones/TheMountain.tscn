@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgulhe3x6nqub"]
+
+[ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_n6i7w"]
+
+[node name="TheMountain" type="Node2D" groups=["metro_zones"]]
+script = ExtResource("1_n6i7w")
