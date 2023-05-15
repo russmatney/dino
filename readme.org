@@ -21,6 +21,14 @@ there: [[https://russmatney.com/note/dino.html][russmatney.com/note/dino.html]].
 * Games
 These (and future games) are discussed on my blog (linked above).
 
+** Super Elevator Level:
+See ~src/superElevatorLevel/*~ and ~addons/beehive/beatemup/*~ for the code.
+
+Play the downloadable version here: [[https://russmatney.itch.io/super-elevator-level][russmatney.itch.io/super-elevator-level]]
+
+Or the webversion: [[https://russmatney.itch.io/super-elevator-level-web][russmatney.itch.io/super-elevator-level-web]]
+
+Submitted to the [[https://itch.io/jam/go-godot-jam-4][Go Godot Jam 4]]
 ** Herd: A sheep bullet hell
 See ~src/hatbot/*~ for the code.
 
@@ -32,7 +40,7 @@ it's still very prototypey.
 ** Mvania 19: HatBot
 A submission for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
 
-Play the deployed version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
+Play the downloadable version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
 
 Or the webversion: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19-web]]
 
