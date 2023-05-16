@@ -78,9 +78,6 @@ func _ready():
 	if not Engine.is_editor_hint():
 		machine = $BEUMachine
 		state_label = $StateLabel
-		punch_box = $PunchBox
-		grab_box = $GrabBox
-		notice_box = $NoticeBox
 		anim = $AnimatedSprite2D
 		if get_node_or_null("CamPOF"):
 			cam_pof = get_node("CamPOF")
@@ -88,12 +85,15 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
+		punch_box = $PunchBox
 		punch_box.body_entered.connect(on_punchbox_body_entered)
 		punch_box.body_exited.connect(on_punchbox_body_exited)
 
+		grab_box = $GrabBox
 		grab_box.body_entered.connect(on_grabbox_body_entered)
 		grab_box.body_exited.connect(on_grabbox_body_exited)
 
+		notice_box = $NoticeBox
 		notice_box.body_entered.connect(on_noticebox_body_entered)
 		notice_box.body_exited.connect(on_noticebox_body_exited)
 
@@ -268,6 +268,8 @@ func take_damage(hit_type, body):
 		die({killed_by=body})
 		body.kos += 1
 		Hotel.check_in(body)
+
+## death ###########################################################
 
 signal died()
 
