@@ -1,6 +1,15 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://b73k32om0cbr3"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://b73k32om0cbr3"]
 
+[ext_resource type="Texture2D" uid="uid://dml6j6ab6fs85" path="res://assets/sprites/64x64snake_tiles_sheet.png" id="1_fn13l"]
 [ext_resource type="Texture2D" uid="uid://0sbm1c6kmk2w" path="res://assets/sprites/32x40autumnglow_tiles_sheet.png" id="1_ucp5r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryuii"]
+atlas = ExtResource("1_fn13l")
+region = Rect2(16, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48hjd"]
+atlas = ExtResource("1_fn13l")
+region = Rect2(8, 32, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4lhm"]
 atlas = ExtResource("1_ucp5r")
@@ -50,6 +59,17 @@ region = Rect2(24, 16, 8, 8)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ryuii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48hjd")
+}],
+"loop": true,
+"name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_t4lhm")
 }, {
 "duration": 1.0,
@@ -80,7 +100,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s5ldr")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {

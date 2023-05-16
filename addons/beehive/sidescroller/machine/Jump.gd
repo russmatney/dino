@@ -24,6 +24,7 @@ func exit():
 	jump_released = false
 	actor.anim.animation_finished.disconnect(_on_anim_finished)
 
+
 ## anims ###########################################################
 
 func _on_anim_finished():

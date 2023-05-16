@@ -10,7 +10,6 @@
 [node name="SSPlayer" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_tdgh3")
-jump_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_odek5")
@@ -19,7 +18,7 @@ shape = SubResource("CapsuleShape2D_odek5")
 position = Vector2(2.38419e-07, 4.76837e-07)
 scale = Vector2(2.5, 3.75)
 sprite_frames = ExtResource("2_y5x1n")
-animation = &"fall"
+animation = &"air"
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false

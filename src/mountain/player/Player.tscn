@@ -5,9 +5,8 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfd8r"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_g0biv")
-jump_speed = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false

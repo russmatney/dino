@@ -7,7 +7,7 @@ class_name SSBody
 func _get_configuration_warnings():
 	return Util._config_warning(self, {expected_nodes=[
 		"SSMachine", "StateLabel", "AnimatedSprite2D",
-		], expected_animations={"AnimatedSprite2D": ["idle", "run"]}})
+		], expected_animations={"AnimatedSprite2D": ["idle", "run", "jump", "air", "fall"]}})
 
 ## vars ###########################################################
 
