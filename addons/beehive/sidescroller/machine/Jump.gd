@@ -1,29 +1,27 @@
 extends State
 
-var more_jump_ttl
-var peak_y_vel = 0.0
-var did_hit_ceiling
+var jump_released
+var initial_y
 
 ## enter ###########################################################
 
 func enter(_opts = {}):
+	initial_y = actor.global_position.y
+
+	jump_released = false
+
 	DJZ.play(DJZ.S.jump)
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
 
-	actor.velocity.y -= actor.base_jump_speed
-
-	more_jump_ttl = actor.more_jump_time
-	did_hit_ceiling = false
+	actor.velocity.y = -1 * actor.jump_velocity
 
 
 ## exit ###########################################################
 
 func exit():
-	did_hit_ceiling = false
-	Debug.pr("peak y", peak_y_vel)
-	peak_y_vel = 0.0
-	more_jump_ttl = null
+	initial_y = null
+	jump_released = false
 	actor.anim.animation_finished.disconnect(_on_anim_finished)
 
 ## anims ###########################################################
@@ -36,35 +34,31 @@ func _on_anim_finished():
 ## physics ###########################################################
 
 func physics_process(delta):
-	if more_jump_ttl != null:
-		more_jump_ttl -= delta
-		if more_jump_ttl <= 0:
-			more_jump_ttl = null
+	if initial_y == null:
+		return
 
-	# extra jump velocity while held, for some time
-	if more_jump_ttl != null and more_jump_ttl > 0.0 \
-		and actor.is_player and Input.is_action_pressed("jump")\
-		and not did_hit_ceiling:
-		actor.velocity.y -= actor.more_jump_speed * delta
-		# min/max reversed in clamp b/c up is negative-y
-		actor.velocity.y = clamp(actor.velocity.y, -actor.max_jump_speed, -actor.base_jump_speed)
+	if not jump_released and actor.is_player and Input.is_action_just_released("jump"):
+		jump_released = true
 
-	# prevent more jumping after button release
-	if Input.is_action_just_released("jump"):
-		more_jump_ttl = null
+	if jump_released:
+		var current_y = actor.global_position.y
+		var traveled_y = abs(current_y - initial_y)
+		var reached_jump_min = traveled_y >= actor.jump_min_height
 
-	if actor.velocity.y < peak_y_vel:
-		peak_y_vel = actor.velocity.y
+		# kill y velocity
+		if reached_jump_min:
+			actor.velocity.y = lerp(actor.velocity.y, 0.0, 0.5)
 
 	# apply gravity
 	if not actor.is_on_floor():
-		actor.velocity.y += actor.gravity * delta * 3
+		actor.velocity.y += actor.jump_gravity * delta
 
 	if actor.is_on_ceiling():
 		# maybe want this, but it's no fun when actually climbing
 		# i think we need a similar coyote treatment for this case
 		# (clipping a platform when jumping)
-		# did_hit_ceiling = true
+		# transit("Fall")
+		# return
 		actor.velocity.y = lerp(actor.velocity.y, 0.0, 0.4)
 
 	# apply left/right movement

@@ -17,12 +17,16 @@ func _get_configuration_warnings():
 @export var initial_health: int = 6
 @export var run_speed: float = 10000
 @export var air_speed: float = 9000 # horizontal movement in the air
-@export var base_jump_speed: float = 300
-@export var max_jump_speed: float = 250
-@export var more_jump_time: float = 0.4
-@export var more_jump_speed: float = 1000
 
-var gravity = 1000
+@export var jump_max_height: float = 100.0
+@export var jump_min_height: float = 40.0
+@export var jump_time: float = 0.3
+@export var fall_time: float = 0.3
+
+@onready var jump_velocity: float = ((2.0 * jump_max_height) / jump_time)
+@onready var jump_gravity: float = ((2.0 * jump_max_height) / (jump_time * jump_time)) # ~1000
+@onready var fall_gravity: float = ((2.0 * jump_max_height) / (fall_time * fall_time)) # ~2000
+var gravity = 1000 # for use in non-jump states
 
 # vars
 

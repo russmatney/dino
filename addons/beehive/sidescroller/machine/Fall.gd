@@ -1,9 +1,10 @@
 extends State
 
 var fall_shake_thresholds = [
-	{"threshold": 400, "shake": 0.3, "damage": 0, "sound": DJZ.S.fall},
-	{"threshold": 550, "shake": 0.6, "damage": 1, "sound": DJZ.S.heavy_fall},
-	{"threshold": 1000, "shake": 1.0, "damage": 2, "sound": DJZ.S.heavy_fall},
+	# TODO refactor in terms of height, not velocity
+	{"threshold": 750, "shake": 0.3, "damage": 0, "sound": DJZ.S.fall},
+	{"threshold": 1100, "shake": 0.6, "damage": 1, "sound": DJZ.S.heavy_fall},
+	{"threshold": 1500, "shake": 1.0, "damage": 2, "sound": DJZ.S.heavy_fall},
 	]
 
 var coyote_time = 0.4
@@ -39,7 +40,7 @@ func physics_process(delta):
 
 	# apply gravity
 	if not actor.is_on_floor():
-		actor.velocity.y += actor.gravity * delta
+		actor.velocity.y += actor.fall_gravity * delta
 
 	# apply left/right movement
 	if actor.move_vector:
