@@ -15,6 +15,7 @@ script = ExtResource("1_htbhe")
 run_speed = 10000
 air_speed = null
 base_jump_speed = null
+max_jump_speed = null
 more_jump_time = null
 more_jump_speed = null
 

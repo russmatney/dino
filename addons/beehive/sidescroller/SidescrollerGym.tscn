@@ -18,6 +18,7 @@ position = Vector2(-214, -11)
 run_speed = 10000
 air_speed = null
 base_jump_speed = null
+max_jump_speed = null
 more_jump_time = null
 more_jump_speed = null
 
@@ -26,6 +27,7 @@ position = Vector2(-128, -27)
 run_speed = 10000
 air_speed = null
 base_jump_speed = null
+max_jump_speed = null
 more_jump_time = null
 more_jump_speed = null
 
