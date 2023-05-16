@@ -5,6 +5,7 @@ extends Node
 var state: State
 
 var should_log = false
+var transitioning = false
 
 ### ready #####################################################################
 
@@ -12,6 +13,7 @@ var should_log = false
 # should only be called when the owner is ready
 func start(opts={}):
 	Debug.prn("[Start] actor: ", owner, opts)
+	transitioning = true
 
 	if initial_state:
 		state = get_node(initial_state)
@@ -30,13 +32,14 @@ func start(opts={}):
 	if state:
 		state.enter(opts)
 		transitioned.emit(state.name)
+	transitioning = false
 
 
 ### input #####################################################################
 
 
 func _unhandled_input(ev):
-	if state:
+	if state and not transitioning:
 		state.unhandled_input(ev)
 
 
@@ -44,13 +47,12 @@ func _unhandled_input(ev):
 
 
 func _process(delta):
-	if state:
+	if state and not transitioning:
 		state.process(delta)
 
 
 func _physics_process(delta):
-	if state:
-		# TODO warn a mofo that this isn't checked _physics_process
+	if state and not transitioning:
 		state.physics_process(delta)
 
 
@@ -60,6 +62,7 @@ signal transitioned(state_name)
 
 
 func transit(target_state_name: String, ctx: Dictionary = {}):
+	transitioning = true
 	var next_state
 	for child in get_children():
 		if child.name == target_state_name:
@@ -67,19 +70,11 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 
 	if next_state:
 		if should_log:
-			Debug.prn(
-				owner,
-				(
-					"Transition. Exiting '"
-					+ state.name
-					+ "', Entering '"
-					+ next_state.name
-					+ "'"
-				)
-			)
+			Debug.prn(owner, "Transition. Exiting '%s', Entering '%s'" % [state.name, next_state.name])
 		state.exit()
 		state = next_state
 		next_state.enter(ctx)
 		transitioned.emit(next_state.name)
 	else:
 		Debug.err("Error! no next state! derp!", target_state_name, ctx)
+	transitioning = false
