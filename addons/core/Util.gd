@@ -215,6 +215,14 @@ func _or(a, b = null, c = null, d = null, e = null):
 	if e:
 		return e
 
+func _and(a, b = null, c = null, d = null, e = null):
+	# TODO expand impl to support 5 inputs
+	# TODO support vars as callables, call if previous were non-nil
+	if a and b:
+		return b
+
+# TODO write Util._not() to replace (restore) gdscript `not`
+
 # could be more efficient
 # https://github.com/godotengine/godot-proposals/issues/3116#issuecomment-1363222780
 func remove_matching(arr, to_remove):

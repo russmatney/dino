@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyitqa5t3pxgt"]
+
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/SSBody.gd" id="1_m354g"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ko51v"]
+[ext_resource type="SpriteFrames" uid="uid://b73k32om0cbr3" path="res://addons/beehive/sidescroller/SSBasicSpriteFrames.tres" id="3_dehgq"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="4_7iqfw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgl7j"]
+radius = 14.0
+height = 38.0
+
+[node name="SSEnemy" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+script = ExtResource("1_m354g")
+
+[node name="StateLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = -24.0
+offset_top = 16.0
+offset_right = 24.0
+offset_bottom = 32.0
+theme_override_fonts/normal_font = ExtResource("2_ko51v")
+bbcode_enabled = true
+text = "[center]State"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3.57628e-07, 0)
+scale = Vector2(3.5, 4.75)
+sprite_frames = ExtResource("3_dehgq")
+animation = &"fall"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sgl7j")
+
+[node name="SSMachine" parent="." instance=ExtResource("4_7iqfw")]

@@ -134,12 +134,13 @@ func _on_player_found(p):
 
 var spawning = false
 func respawn_player(opts={}):
-	if current_game == null:
-		Debug.warn("No current_game, can't spawn (or respawn) player")
-		return
-	if current_game.get_player_scene() == null:
-		Debug.warn("current_game has no player_scene, can't respawn player", current_game)
-		return
+	if opts.get("player_scene") == null:
+		if current_game == null:
+			Debug.warn("No current_game, can't spawn (or respawn) player")
+			return
+		elif current_game.get_player_scene() == null:
+			Debug.warn("current_game has no player_scene, can't respawn player", current_game)
+			return
 
 	spawning = true
 	if player:
@@ -163,7 +164,14 @@ func _respawn_player(opts={}):
 		var coords_fn = opts.get("spawn_coords_fn", respawn_coords)
 		spawn_coords = coords_fn.call()
 
-	player = current_game.get_player_scene().instantiate()
+	var player_scene = opts.get("player_scene")
+	if player_scene == null and current_game != null:
+		player_scene = current_game.get_player_scene()
+	if player_scene == null:
+		Debug.err("Could not determine player_scene, cannot respawn")
+		spawning = false
+		return
+	player = player_scene.instantiate()
 	if not spawn_coords == null:
 		player.position = spawn_coords
 	else:
@@ -178,14 +186,16 @@ func _respawn_player(opts={}):
 	# if player_died:
 	# 	Hotel.check_in(player, {health=player.max_health})
 
-	current_game.on_player_spawned(player)
+	if current_game != null:
+		current_game.on_player_spawned(player)
 
 	Navi.add_child_to_current(player)
-	current_game.update_world()
+	if current_game != null:
+		current_game.update_world()
 	spawning = false
 
 func respawn_coords():
-	if current_game.has_method("get_spawn_coords"):
+	if current_game and current_game.has_method("get_spawn_coords"):
 		return current_game.get_spawn_coords()
 
 	# TODO better game-independent respawn logic
