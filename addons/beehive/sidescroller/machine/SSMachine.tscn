@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://dgan7tpytfkfo"]
+
+[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_3d800"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Idle.gd" id="2_pwwxs"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Respawn.gd" id="3_15sib"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Run.gd" id="4_16lar"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Jump.gd" id="5_c3ybh"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Fall.gd" id="6_2s03n"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/KnockedBack.gd" id="7_s7tsv"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Dying.gd" id="8_ceevh"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Dead.gd" id="9_64qx5"]
+
+[node name="SSMachine" type="Node"]
+script = ExtResource("1_3d800")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_pwwxs")
+
+[node name="Respawn" type="Node" parent="."]
+script = ExtResource("3_15sib")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("4_16lar")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("5_c3ybh")
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("6_2s03n")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("7_s7tsv")
+
+[node name="Dying" type="Node" parent="."]
+script = ExtResource("8_ceevh")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("9_64qx5")

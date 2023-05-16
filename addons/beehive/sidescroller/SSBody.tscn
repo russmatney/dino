@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbrc6143m3bdx"]
+
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/SSBody.gd" id="1_1ko7a"]
+[ext_resource type="PackedScene" uid="uid://b07hsjql2nthh" path="res://addons/beehive/sidescroller/SSMachine.tscn" id="1_krse1"]
+
+[node name="SSBody" type="CharacterBody2D"]
+script = ExtResource("1_1ko7a")
+
+[node name="SSMachine" parent="." instance=ExtResource("1_krse1")]
