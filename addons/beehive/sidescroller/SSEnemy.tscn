@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyitqa5t3pxgt"]
+[gd_scene load_steps=8 format=3 uid="uid://cyitqa5t3pxgt"]
 
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/SSBody.gd" id="1_m354g"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ko51v"]
 [ext_resource type="SpriteFrames" uid="uid://b73k32om0cbr3" path="res://addons/beehive/sidescroller/SSBasicSpriteFrames.tres" id="3_dehgq"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="4_7iqfw"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_qdy2f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgl7j"]
 radius = 14.0
@@ -16,10 +17,8 @@ height = 32.0
 [node name="SSEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 script = ExtResource("1_m354g")
-bump_damage = null
-defense = null
-knock_back_speed_y = null
-knock_back_speed_x = null
+knockback_speed_y = null
+knockback_speed_x = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -51,3 +50,5 @@ collision_mask = 514
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_wbeu2")
+
+[node name="CamPOF" parent="." instance=ExtResource("5_qdy2f")]

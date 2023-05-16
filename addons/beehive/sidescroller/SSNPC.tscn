@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyut5y6235tk2"]
+[gd_scene load_steps=7 format=3 uid="uid://dyut5y6235tk2"]
 
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/SSBody.gd" id="1_htbhe"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_71l2x"]
 [ext_resource type="SpriteFrames" uid="uid://b73k32om0cbr3" path="res://addons/beehive/sidescroller/SSBasicSpriteFrames.tres" id="3_bwqgt"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="4_ht50s"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_mrtx6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8ffx"]
 radius = 6.0
@@ -12,10 +13,8 @@ height = 20.0
 [node name="SSNPC" type="CharacterBody2D" groups=["npcs"]]
 collision_layer = 512
 script = ExtResource("1_htbhe")
-bump_damage = null
-defense = null
-knock_back_speed_y = null
-knock_back_speed_x = null
+knockback_speed_y = null
+knockback_speed_x = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -40,3 +39,5 @@ sprite_frames = ExtResource("3_bwqgt")
 animation = &"fall"
 
 [node name="SSMachine" parent="." instance=ExtResource("4_ht50s")]
+
+[node name="CamPOF" parent="." instance=ExtResource("5_mrtx6")]

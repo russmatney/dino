@@ -20,19 +20,24 @@ position = Vector2(-72, 28)
 
 [node name="SSEnemy" parent="." instance=ExtResource("4_4vdb5")]
 position = Vector2(-214, -11)
-bump_damage = 2
-defense = 1
-knock_back_speed_y = 1000.0
-knock_back_speed_x = 300.0
+should_wander = true
+knockback_speed_y = null
+knockback_speed_x = null
+
+[node name="SSEnemy2" parent="." instance=ExtResource("4_4vdb5")]
+position = Vector2(120, 5)
+should_wander = true
+knockback_speed_y = null
+knockback_speed_x = null
 
 [node name="SSNPC" parent="." instance=ExtResource("5_shk5o")]
 position = Vector2(-128, -27)
-bump_damage = 2
-defense = 1
-knock_back_speed_y = 1000.0
-knock_back_speed_x = 300.0
+should_wander = true
+knockback_speed_y = null
+knockback_speed_x = null
 
 [node name="SSBody" parent="." instance=ExtResource("7_i72gu")]
 position = Vector2(-241, -95)
-knock_back_speed_y = 1000.0
-knock_back_speed_x = 300.0
+should_wander = true
+knockback_speed_y = null
+knockback_speed_x = null

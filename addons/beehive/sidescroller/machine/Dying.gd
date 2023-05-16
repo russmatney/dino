@@ -8,10 +8,10 @@ var has_left_floor
 func enter(opts = {}):
 	actor.anim.play("dying")
 	killed_by = opts.get("killed_by")
-
-	actor.velocity.y = -1 * actor.knock_back_speed_y
 	actor.face_body(killed_by)
-	actor.velocity.x = actor.knock_back_speed_x * actor.facing_vector.x * -1 * 2
+
+	actor.velocity.y = -1 * actor.knockback_speed_y
+	actor.velocity.x = actor.knockback_speed_x * actor.facing_vector.x * -1 * 2
 
 	has_left_floor = false
 

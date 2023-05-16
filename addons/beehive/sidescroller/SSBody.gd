@@ -19,11 +19,13 @@ func _get_configuration_warnings():
 @export var initial_health: int = 6
 @export var bump_damage: int = 2
 @export var defense: int = 1
+@export var should_wander: bool
 
 @export var run_speed: float = 10000
 @export var air_speed: float = 9000 # horizontal movement in the air
-@export var knock_back_speed_y: float = 100
-@export var knock_back_speed_x: float = 30
+@export var knockback_speed_y: float = 100
+@export var knockback_speed_x: float = 30
+@export var wander_speed: float = 4000
 
 @export var jump_max_height: float = 100.0
 @export var jump_min_height: float = 40.0
@@ -62,7 +64,15 @@ func _ready():
 	Hotel.register(self)
 
 	if is_in_group("player"):
-		is_player = true
+		if is_player == null:
+			is_player = true
+		if should_wander == null:
+			should_wander = false
+	else:
+		if is_player == null:
+			is_player = false
+		if should_wander == null:
+			should_wander = true
 
 	if not Engine.is_editor_hint():
 		machine = $SSMachine
@@ -110,7 +120,6 @@ func flip_facing():
 	update_facing()
 
 func face_body(body):
-	Debug.pr("facing body", body)
 	var pos_diff = body.global_position - global_position
 	if pos_diff.x > 0:
 		facing_vector = Vector2.RIGHT
