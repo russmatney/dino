@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cyitqa5t3pxgt"]
+[gd_scene load_steps=7 format=3 uid="uid://cyitqa5t3pxgt"]
 
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/SSBody.gd" id="1_m354g"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ko51v"]
@@ -9,15 +9,17 @@
 radius = 14.0
 height = 38.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wbeu2"]
+radius = 12.0
+height = 32.0
+
 [node name="SSEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 script = ExtResource("1_m354g")
-run_speed = 10000
-air_speed = null
-jump_max_height = null
-jump_min_height = null
-jump_time = null
-fall_time = null
+bump_damage = null
+defense = null
+knock_back_speed_y = null
+knock_back_speed_x = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -42,3 +44,10 @@ animation = &"fall"
 shape = SubResource("CapsuleShape2D_sgl7j")
 
 [node name="SSMachine" parent="." instance=ExtResource("4_7iqfw")]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 514
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CapsuleShape2D_wbeu2")

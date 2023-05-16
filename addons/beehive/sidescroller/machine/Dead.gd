@@ -3,29 +3,12 @@ extends State
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	pass
-
-
-## exit ###########################################################
-
-func exit():
-	pass
-
-
-## input ###########################################################
-
-func unhandled_input(_event):
-	pass
-
-
-## process ###########################################################
-
-func process(_delta):
-	pass
+	actor.anim.play("dead")
+	actor.died.emit()
 
 
 ## physics ###########################################################
 
 func physics_process(_delta):
-	pass
-
+	actor.velocity = actor.velocity.lerp(Vector2.ZERO, 0.8)
+	actor.move_and_slide()

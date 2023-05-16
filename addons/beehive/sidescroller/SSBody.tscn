@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="4_tno08"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e8ms2"]
+radius = 7.0
+height = 18.0
 
 [node name="SSBody" type="CharacterBody2D"]
 script = ExtResource("1_1ko7a")
@@ -13,9 +15,9 @@ script = ExtResource("1_1ko7a")
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
 offset_left = -24.0
-offset_top = 16.0
+offset_top = 10.0
 offset_right = 24.0
-offset_bottom = 32.0
+offset_bottom = 26.0
 theme_override_fonts/normal_font = ExtResource("2_gkbgb")
 bbcode_enabled = true
 text = "[center]State"
@@ -27,7 +29,9 @@ metadata/_edit_use_anchors_ = true
 shape = SubResource("CapsuleShape2D_e8ms2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.19209e-07, 2.38419e-07)
+scale = Vector2(1.75, 2.5)
 sprite_frames = ExtResource("3_t322n")
-animation = &"fall"
+animation = &"dead"
 
 [node name="SSMachine" parent="." instance=ExtResource("4_tno08")]

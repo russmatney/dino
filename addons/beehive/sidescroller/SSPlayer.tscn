@@ -10,6 +10,10 @@
 [node name="SSPlayer" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_tdgh3")
+bump_damage = null
+defense = null
+knock_back_speed_y = null
+knock_back_speed_x = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_odek5")
@@ -23,9 +27,9 @@ animation = &"air"
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
 offset_left = -24.0
-offset_top = 16.0
+offset_top = 15.0
 offset_right = 24.0
-offset_bottom = 32.0
+offset_bottom = 31.0
 theme_override_fonts/normal_font = ExtResource("4_r4nvx")
 bbcode_enabled = true
 text = "[center]State"

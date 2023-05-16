@@ -7,7 +7,9 @@ class_name SSBody
 func _get_configuration_warnings():
 	return Util._config_warning(self, {expected_nodes=[
 		"SSMachine", "StateLabel", "AnimatedSprite2D",
-		], expected_animations={"AnimatedSprite2D": ["idle", "run", "jump", "air", "fall"]}})
+		], expected_animations={"AnimatedSprite2D": [
+			"idle", "run", "jump", "air", "fall",
+			"dead", "dying", "knocked_back",]}})
 
 ## vars ###########################################################
 
@@ -15,8 +17,13 @@ func _get_configuration_warnings():
 
 @export var display_name: String
 @export var initial_health: int = 6
+@export var bump_damage: int = 2
+@export var defense: int = 1
+
 @export var run_speed: float = 10000
 @export var air_speed: float = 9000 # horizontal movement in the air
+@export var knock_back_speed_y: float = 100
+@export var knock_back_speed_x: float = 30
 
 @export var jump_max_height: float = 100.0
 @export var jump_min_height: float = 40.0
@@ -42,6 +49,7 @@ var machine
 var state_label
 var anim
 var cam_pof
+var hurt_box
 
 ## enter_tree ###########################################################
 
@@ -63,8 +71,14 @@ func _ready():
 		if get_node_or_null("CamPOF"):
 			cam_pof = get_node("CamPOF")
 
+		if get_node_or_null("HurtBox"):
+			hurt_box = get_node("HurtBox")
+			hurt_box.body_entered.connect(on_hurt_box_entered)
+			hurt_box.body_exited.connect(on_hurt_box_exited)
+
 		machine.transitioned.connect(_on_transit)
 		machine.start()
+
 
 ## on_transit ###########################################################
 
@@ -96,6 +110,7 @@ func flip_facing():
 	update_facing()
 
 func face_body(body):
+	Debug.pr("facing body", body)
 	var pos_diff = body.global_position - global_position
 	if pos_diff.x > 0:
 		facing_vector = Vector2.RIGHT
@@ -111,4 +126,37 @@ signal died()
 func die(opts={}):
 	is_dead = true
 	Hotel.check_in(self)
-	machine.transit("Dying")
+
+## damage ###########################################################
+
+func take_hit(hit_type, body):
+	take_damage(hit_type, body)
+
+	if health <= 0:
+		die()
+		machine.transit("Dying", {killed_by=body})
+	else:
+		machine.transit("KnockedBack", {knocked_by=body, hit_type=hit_type})
+
+func take_damage(hit_type, body):
+	var attack_damage
+	match hit_type:
+		"bump":
+			attack_damage = body.bump_damage
+	var damage = attack_damage - defense
+	health -= damage
+	Hotel.check_in(self)
+
+## hurt_box ###########################################################
+
+var hurt_box_bodies = []
+
+func on_hurt_box_entered(body):
+	if body is SSBody:
+		if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+			if not body in hurt_box_bodies:
+				hurt_box_bodies.append(body)
+				body.take_hit("bump", self)
+
+func on_hurt_box_exited(body):
+	hurt_box_bodies.erase(body)
