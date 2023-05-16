@@ -1,57 +1,57 @@
 extends State
 
-# const SPEED = 300.0
-# const JUMP_VELOCITY = -400.0
-
-# # Get the gravity from the project settings to be synced with RigidBody nodes.
-# var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-
-# func _physics_process(delta):
-# 	# Add the gravity.
-# 	if not is_on_floor():
-# 		velocity.y += gravity * delta
-
-# 	# Handle Jump.
-# 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-# 		velocity.y = JUMP_VELOCITY
-
-# 	# Get the input direction and handle the movement/deceleration.
-# 	# As good practice, you should replace UI actions with custom gameplay actions.
-# 	var direction = Input.get_axis("ui_left", "ui_right")
-# 	if direction:
-# 		velocity.x = direction * SPEED
-# 	else:
-# 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-# 	move_and_slide()
+var more_jump_ttl
 
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	pass
+	DJZ.play(DJZ.S.jump)
+	actor.anim.play("jump")
+	actor.anim.animation_finished.connect(_on_anim_finished)
+
+	actor.velocity.y -= actor.base_jump_speed
+
+	more_jump_ttl = actor.more_jump_time
 
 
 ## exit ###########################################################
 
 func exit():
-	pass
+	more_jump_ttl = null
+	actor.anim.animation_finished.disconnect(_on_anim_finished)
 
+## anims ###########################################################
 
-## input ###########################################################
-
-func unhandled_input(_event):
-	pass
-
-
-## process ###########################################################
-
-func process(_delta):
-	pass
+func _on_anim_finished():
+	if actor.anim.animation == "jump":
+		actor.anim.play("air")
 
 
 ## physics ###########################################################
 
-func physics_process(_delta):
-	pass
+func physics_process(delta):
+	if more_jump_ttl != null:
+		more_jump_ttl -= delta
+		if more_jump_ttl <= 0:
+			more_jump_ttl = null
 
+	# extra jump velocity while held, for some time
+	if more_jump_ttl != null and more_jump_ttl > 0.0 \
+		and actor.is_player and Input.is_action_pressed("jump"):
+		actor.velocity.y -= actor.more_jump_speed * delta
+
+	# apply gravity
+	if not actor.is_on_floor():
+		actor.velocity.y += actor.gravity * delta
+
+	# apply left/right movement
+	if actor.move_vector:
+		var new_speed = actor.air_speed * actor.move_vector.x * delta
+		actor.velocity.x = lerp(actor.velocity.x, new_speed, 0.5)
+	else:
+		actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.5)
+
+	actor.move_and_slide()
+
+	if actor.velocity.y > 0.0:
+		machine.transit("Fall")

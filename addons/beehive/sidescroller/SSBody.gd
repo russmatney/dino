@@ -15,8 +15,13 @@ func _get_configuration_warnings():
 
 @export var display_name: String
 @export var initial_health: int = 6
-@export var jump_speed: int = 10000
-@export var run_speed: int = 10000
+@export var run_speed: float = 10000
+@export var air_speed: float = 9000 # horizontal movement in the air
+@export var base_jump_speed: float = 200
+@export var more_jump_time: float = 1.2
+@export var more_jump_speed: float = 1000
+
+var gravity = 1000
 
 # vars
 
@@ -24,6 +29,7 @@ var move_vector: Vector2
 var facing_vector: Vector2
 var health
 var is_dead
+var is_player
 
 # nodes
 
@@ -41,6 +47,9 @@ func _enter_tree():
 
 func _ready():
 	Hotel.register(self)
+
+	if is_in_group("player"):
+		is_player = true
 
 	if not Engine.is_editor_hint():
 		machine = $SSMachine

@@ -30,4 +30,4 @@ func process(_delta):
 ## physics ###########################################################
 
 func physics_process(_delta):
-	pass
+	actor.move_and_slide()

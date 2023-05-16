@@ -12,6 +12,11 @@ height = 38.0
 [node name="SSEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 script = ExtResource("1_m354g")
+run_speed = 10000
+air_speed = null
+base_jump_speed = null
+more_jump_time = null
+more_jump_speed = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false

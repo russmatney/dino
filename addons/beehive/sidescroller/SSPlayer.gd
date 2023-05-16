@@ -20,10 +20,11 @@ func _ready():
 
 ## input ###########################################################
 
-func _unhandled_input(event):
-	if Trolley.is_jump(event) and machine.state.name in ["Idle", "Run"]:
-		machine.transit("Jump")
-		return
+func _unhandled_input(_event):
+	pass
+	# if Trolley.is_jump(event) and machine.state.name in ["Idle", "Run"]:
+	# 	machine.transit("Jump")
+	# 	return
 
 
 ## physics_process ###########################################################
