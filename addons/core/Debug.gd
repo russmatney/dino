@@ -182,42 +182,46 @@ func to_printable(msgs, stack=[], newlines=false, pretty=true):
 			m += str(msg) + " "
 	return m
 
-func pr(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+var default_val = "somecrazydefault"
+func is_not_def(v):
+	return not v is String or (v is String and v != "somecrazydefault")
+
+func pr(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
+	msgs = msgs.filter(is_not_def)
 	var m = to_printable(msgs, get_stack())
 	print_rich(m)
 
-func info(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+func info(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
+	msgs = msgs.filter(is_not_def)
 	var m = to_printable(msgs, get_stack())
 	print_rich(m)
 
-func log(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+func log(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
+	msgs = msgs.filter(is_not_def)
 	var m = to_printable(msgs, get_stack())
 	print_rich(m)
 
-func prn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+func prn(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
+	msgs = msgs.filter(is_not_def)
 	var m = to_printable(msgs, get_stack(), true)
 	print_rich(m)
 
-func warn(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+func warn(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
+	msgs = msgs.filter(is_not_def)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=yellow][WARN][/color]")
 	print_rich(to_printable(rich_msgs, get_stack(), true))
 	var m = to_printable(msgs, get_stack(), true, false)
 	push_warning(m)
 
-func err(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+func err(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
+	msgs = msgs.filter(is_not_def)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=red][ERR][/color]")
 	print_rich(to_printable(rich_msgs, get_stack(), true))
