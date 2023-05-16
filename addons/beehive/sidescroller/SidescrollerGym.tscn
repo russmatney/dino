@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbgwlri2j185m"]
+[gd_scene load_steps=9 format=3 uid="uid://cbgwlri2j185m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_doqh3"]
 [ext_resource type="PackedScene" uid="uid://cjjjiscdb0ruh" path="res://addons/beehive/sidescroller/SSPlayer.tscn" id="2_nm067"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="4_4vdb5"]
 [ext_resource type="PackedScene" uid="uid://dyut5y6235tk2" path="res://addons/beehive/sidescroller/SSNPC.tscn" id="5_shk5o"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_nh527"]
+[ext_resource type="PackedScene" uid="uid://boxsq76goq8ev" path="res://addons/beehive/sidescroller/PatrolPoint.tscn" id="6_ogwas"]
 [ext_resource type="PackedScene" uid="uid://bbrc6143m3bdx" path="res://addons/beehive/sidescroller/SSBody.tscn" id="7_i72gu"]
 
 [node name="SidescrollerGym" type="Node"]
@@ -21,23 +22,37 @@ position = Vector2(-72, 28)
 [node name="SSEnemy" parent="." instance=ExtResource("4_4vdb5")]
 position = Vector2(-214, -11)
 should_wander = true
-knockback_speed_y = null
-knockback_speed_x = null
+should_patrol = true
+knockback_speed_y = 100.0
+knockback_speed_x = 30.0
 
 [node name="SSEnemy2" parent="." instance=ExtResource("4_4vdb5")]
 position = Vector2(120, 5)
 should_wander = true
-knockback_speed_y = null
-knockback_speed_x = null
+should_patrol = true
+knockback_speed_y = 100.0
+knockback_speed_x = 30.0
 
 [node name="SSNPC" parent="." instance=ExtResource("5_shk5o")]
 position = Vector2(-128, -27)
 should_wander = true
-knockback_speed_y = null
-knockback_speed_x = null
+knockback_speed_y = 100.0
+knockback_speed_x = 30.0
 
 [node name="SSBody" parent="." instance=ExtResource("7_i72gu")]
 position = Vector2(-241, -95)
 should_wander = true
-knockback_speed_y = null
-knockback_speed_x = null
+knockback_speed_y = 100.0
+knockback_speed_x = 30.0
+
+[node name="PatrolPoint" parent="." instance=ExtResource("6_ogwas")]
+position = Vector2(-292, 21)
+
+[node name="PatrolPoint2" parent="." instance=ExtResource("6_ogwas")]
+position = Vector2(-104, -27)
+
+[node name="PatrolPoint3" parent="." instance=ExtResource("6_ogwas")]
+position = Vector2(14, 21)
+
+[node name="PatrolPoint4" parent="." instance=ExtResource("6_ogwas")]
+position = Vector2(169, 0)

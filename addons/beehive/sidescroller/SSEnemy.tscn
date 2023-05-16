@@ -17,6 +17,7 @@ height = 32.0
 [node name="SSEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 script = ExtResource("1_m354g")
+should_patrol = null
 knockback_speed_y = null
 knockback_speed_x = null
 

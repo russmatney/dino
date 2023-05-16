@@ -20,6 +20,7 @@ func _get_configuration_warnings():
 @export var bump_damage: int = 2
 @export var defense: int = 1
 @export var should_wander: bool
+@export var should_patrol: bool
 
 @export var run_speed: float = 10000
 @export var air_speed: float = 9000 # horizontal movement in the air
@@ -64,15 +65,17 @@ func _ready():
 	Hotel.register(self)
 
 	if is_in_group("player"):
-		if is_player == null:
-			is_player = true
-		if should_wander == null:
-			should_wander = false
+		is_player = true
+		should_wander = false
+		should_patrol = false
+	elif is_in_group("enemies"):
+		is_player = false
+		should_wander = true
+		should_patrol = true
 	else:
-		if is_player == null:
-			is_player = false
-		if should_wander == null:
-			should_wander = true
+		is_player = false
+		should_wander = true
+		should_patrol = false
 
 	if not Engine.is_editor_hint():
 		machine = $SSMachine

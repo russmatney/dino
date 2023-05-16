@@ -1,7 +1,7 @@
 extends State
 
-var wander_in = [0.7, 1.3, 2.0]
-var wander_in_t
+var idle_times = [0.7, 1.3, 2.0]
+var idle_ttl
 
 ## enter ###########################################################
 
@@ -9,7 +9,7 @@ func enter(_opts = {}):
 	actor.anim.play("idle")
 
 	if actor.should_wander:
-		wander_in_t = Util.rand_of(wander_in)
+		idle_ttl = Util.rand_of(idle_times)
 
 
 ## exit ###########################################################
@@ -29,10 +29,13 @@ func physics_process(delta):
 		machine.transit("Run")
 		return
 
-	if actor.should_wander:
-		wander_in_t -= delta
-		if wander_in_t <= 0:
-			transit("Wander")
+	if actor.should_wander or actor.should_patrol:
+		idle_ttl -= delta
+		if idle_ttl <= 0:
+			if actor.should_patrol:
+				transit("Patrol")
+			elif actor.should_wander:
+				transit("Wander")
 			return
 
 	# slow down

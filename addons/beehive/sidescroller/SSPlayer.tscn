@@ -10,6 +10,7 @@
 [node name="SSPlayer" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_tdgh3")
+should_patrol = null
 knockback_speed_y = null
 knockback_speed_x = null
 

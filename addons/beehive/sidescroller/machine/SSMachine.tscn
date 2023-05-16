@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgan7tpytfkfo"]
+[gd_scene load_steps=12 format=3 uid="uid://dgan7tpytfkfo"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_3d800"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Idle.gd" id="2_pwwxs"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Dying.gd" id="8_ceevh"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Dead.gd" id="9_64qx5"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Wander.gd" id="10_xdsiu"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Patrol.gd" id="11_mun0w"]
 
 [node name="SSMachine" type="Node"]
 script = ExtResource("1_3d800")
@@ -40,3 +41,6 @@ script = ExtResource("9_64qx5")
 
 [node name="Wander" type="Node" parent="."]
 script = ExtResource("10_xdsiu")
+
+[node name="Patrol" type="Node" parent="."]
+script = ExtResource("11_mun0w")

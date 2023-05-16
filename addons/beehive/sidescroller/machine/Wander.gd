@@ -8,8 +8,8 @@ var wander_ttl
 
 func enter(_opts = {}):
 	actor.anim.play("run")
-	actor.move_vector = Util.rand_of(directions)
 	wander_ttl = Util.rand_of(wander_times)
+	actor.move_vector = Util.rand_of(directions)
 
 
 ## exit ###########################################################
@@ -32,7 +32,7 @@ func physics_process(delta):
 	if not actor.is_on_floor():
 		actor.velocity.y += actor.gravity * delta
 
-	# wander
+	# wander in direction
 	var move_speed = actor.wander_speed * actor.move_vector.x * delta
 	actor.velocity.x = lerp(actor.velocity.x, move_speed, 0.6)
 
