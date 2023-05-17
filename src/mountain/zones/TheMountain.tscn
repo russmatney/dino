@@ -1,41 +1,40 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgulhe3x6nqub"]
+[gd_scene load_steps=10 format=3 uid="uid://cgulhe3x6nqub"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_n6i7w"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_6e41n"]
-[ext_resource type="Texture2D" uid="uid://ca1qei0yboss5" path="res://assets/hatbot/background_mountains_sheet.png" id="2_jk1no"]
-[ext_resource type="Shader" path="res://src/ColorSwapShader.gdshader" id="2_ljsns"]
+[ext_resource type="Texture2D" uid="uid://p6pkgkw3n3db" path="res://assets/sprites/background_snow_sky_sheet.png" id="2_fj248"]
+[ext_resource type="Texture2D" uid="uid://clmjyi22fmy1n" path="res://assets/sprites/background_clouds_nobg_sheet.png" id="3_ixit7"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="4_1xi51"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="4_31evr"]
 [ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="5_p3d4k"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
 [ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rb3b1"]
-shader = ExtResource("2_ljsns")
-shader_parameter/original_0 = Color(0, 0, 0, 1)
-shader_parameter/original_1 = null
-shader_parameter/original_2 = null
-shader_parameter/original_3 = null
-shader_parameter/original_4 = null
-shader_parameter/replace_0 = Color(0.435294, 0.435294, 0.435294, 1)
-shader_parameter/replace_1 = null
-shader_parameter/replace_2 = null
-shader_parameter/replace_3 = null
-shader_parameter/replace_4 = null
-
 [node name="TheMountain" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n6i7w")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_rb3b1")
-offset_left = -2192.0
-offset_top = -1280.0
-offset_right = 2656.0
-offset_bottom = 3360.0
-texture = ExtResource("2_jk1no")
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1280, 0)
+
+[node name="Background" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1280.0
+offset_bottom = 360.0
+texture = ExtResource("2_fj248")
+stretch_mode = 4
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer2"]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("3_ixit7")
+stretch_mode = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.784314, 0.819608, 0.901961, 1)
+color = Color(0.686275, 0.733333, 0.85098, 1)
 
 [node name="DevPlayerSpawnPoint" parent="." instance=ExtResource("4_31evr")]
 position = Vector2(-48, -224)
@@ -55,7 +54,7 @@ layer_0/tile_data = PackedInt32Array(-655375, 65536, 7, -589839, 65536, 14, -589
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="Peak"]
 rotation = -0.513127
-color = Color(1, 1, 1, 0.909804)
+color = Color(0.335116, 0.335116, 0.335116, 0.188235)
 shadow_enabled = true
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]
