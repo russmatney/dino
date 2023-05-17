@@ -1,22 +1,24 @@
 #+title: dino
 
-The Godot 4 port is mostly complete! Not all games working again yet, but most
-of them are fine.
+The Godot 4 port is complete, with one or two exceptions - TowerJet's tilemaps
+aren't quite right, but those are going to be dropped/refactored anyway.
 
 --
 
 NOTE: games that use the ActionHint (unfortunately most of them) will not work
-just yet, because I'm not yet including some game assets (third-party fonts) in
-the repo.
+with naive clone just yet, because I'm not yet including some game assets
+(third-party fonts) in the repo. I'm hopeful to implement a technical solution
+to this, like working using a fallback font when the referenced one is missing.
 
 --
 
 Dino is a monorepo/sandbox full of Godot games and addons.
 
-You can play the latest version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]
+You can play the release version here, [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]] tho it's likely
+out of date. I hope to get CI setup one of these days, but am usually
+prioritizing on some game jam or other.
 
-You can read more about Dino on my blog - the coverage could be more up-to-date
-there: [[https://russmatney.com/note/dino.html][russmatney.com/note/dino.html]].
+You can find more about Dino on my mind-garden/blog: [[https://russmatney.com/note/dino.html][russmatney.com/note/dino.html]].
 
 * Games
 These (and future games) are discussed on my blog (linked above).
