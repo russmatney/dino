@@ -53,6 +53,7 @@ var state_label
 var anim
 var cam_pof
 var hurt_box
+var nav_agent
 
 ## enter_tree ###########################################################
 
@@ -83,6 +84,9 @@ func _ready():
 		anim = $AnimatedSprite2D
 		if get_node_or_null("CamPOF"):
 			cam_pof = get_node("CamPOF")
+
+		if get_node_or_null("NavigationAgent2D"):
+			nav_agent = get_node("NavigationAgent2D")
 
 		if get_node_or_null("HurtBox"):
 			hurt_box = get_node("HurtBox")

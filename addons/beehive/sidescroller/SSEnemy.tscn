@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_qdy2f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgl7j"]
-radius = 14.0
-height = 38.0
+radius = 9.0
+height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wbeu2"]
 radius = 12.0
@@ -17,9 +17,8 @@ height = 32.0
 [node name="SSEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 script = ExtResource("1_m354g")
-should_patrol = null
-knockback_speed_y = null
-knockback_speed_x = null
+should_wander = true
+should_patrol = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -53,3 +52,9 @@ collision_mask = 514
 shape = SubResource("CapsuleShape2D_wbeu2")
 
 [node name="CamPOF" parent="." instance=ExtResource("5_qdy2f")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 100.0
+avoidance_enabled = true
+radius = 50.0
+debug_enabled = true

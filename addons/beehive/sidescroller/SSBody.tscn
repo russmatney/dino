@@ -12,9 +12,7 @@ height = 18.0
 [node name="SSBody" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_1ko7a")
-should_patrol = null
-knockback_speed_y = null
-knockback_speed_x = null
+should_wander = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
