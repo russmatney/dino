@@ -17,7 +17,7 @@ func should_spawn_player(scene):
 ######################################################
 # player
 
-var player_scene = "res://src/mountain/player/Player.tscn"
+var player_scene = preload("res://src/mountain/player/Player.tscn")
 
 func on_player_spawned(_player):
 	pass
@@ -29,7 +29,7 @@ func get_spawn_coords():
 # register
 
 func register():
-	main_menu_scene = "res://src/mountain/menus/MainMenu.tscn"
+	main_menu_scene = load("res://src/mountain/menus/MainMenu.tscn")
 
 	# required?
 	Hotel.add_root_group(Metro.zones_group)

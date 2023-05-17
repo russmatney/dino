@@ -13,9 +13,7 @@ height = 20.0
 [node name="SSNPC" type="CharacterBody2D" groups=["npcs"]]
 collision_layer = 512
 script = ExtResource("1_htbhe")
-should_patrol = null
-knockback_speed_y = null
-knockback_speed_x = null
+should_wander = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false

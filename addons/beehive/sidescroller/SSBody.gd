@@ -9,7 +9,7 @@ func _get_configuration_warnings():
 		"SSMachine", "StateLabel", "AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "run", "jump", "air", "fall",
-			"dead", "dying", "knocked_back",]}})
+			"knocked_back", "dying", "dead",]}})
 
 ## vars ###########################################################
 
@@ -168,11 +168,12 @@ func take_damage(hit_type, body):
 var hurt_box_bodies = []
 
 func on_hurt_box_entered(body):
-	if body is SSBody:
-		if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
-			if not body in hurt_box_bodies:
-				hurt_box_bodies.append(body)
-				body.take_hit("bump", self)
+	# TODO ignore other bodies
+	# if body is SSBody: # can't write this in same-name class script
+	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+		if not body in hurt_box_bodies:
+			hurt_box_bodies.append(body)
+			body.take_hit("bump", self)
 
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
