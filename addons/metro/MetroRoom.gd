@@ -115,9 +115,17 @@ func used_rect() -> Rect2:
 var room_box
 
 func ensure_room_box():
+	var existing = []
 	for c in get_children():
 		if c.name == "RoomBox":
+			existing.append(c)
 			c.free()
+
+	if Engine.is_editor_hint():
+		existing.map(func(c): c.free)
+	elif len(existing) > 0:
+		# don't recreate unless in the editor
+		return
 
 	# room rect
 	var rect = used_rect()
@@ -153,21 +161,22 @@ func ensure_room_box():
 
 var paused
 
-func pause():
+func pause(opts={}):
 	paused = true
 	if not Engine.is_editor_hint():
-		deactivate_cam_points()
-		_on_paused()
+		if not opts.get("process_only"):
+			_on_paused()
 		set_process_mode.call_deferred(PROCESS_MODE_DISABLED)
 
-func unpause():
+func unpause(opts={}):
 	paused = false
 	if not Engine.is_editor_hint():
 		set_process_mode.call_deferred(PROCESS_MODE_INHERIT)
-		_on_unpaused()
-		activate_cam_points.call_deferred()
+		if not opts.get("process_only"):
+			_on_unpaused()
 
 func _on_paused():
+	deactivate_cam_points()
 	if visited:
 		set_visible(true)
 		to_faded()
@@ -175,6 +184,7 @@ func _on_paused():
 		set_visible(false)
 
 func _on_unpaused():
+	activate_cam_points.call_deferred()
 	set_visible(true)
 	to_normal()
 

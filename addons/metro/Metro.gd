@@ -90,21 +90,25 @@ func update_zone():
 
 	var new_current
 	for room in current_zone.rooms:
+		# TODO overlapping rooms (roomboxes) break this
+		# TODO move to a polygon, not a rectangle
 		var rect = room.used_rect()
 		rect.position += room.position
 
-		# NOTE overlapping rooms may break this
-		if player and is_instance_valid(player) and rect.has_point(player.global_position):
-			new_current = room
-		else:
-			# maybe want a cleanup here to clear bullets and things
-			room.pause()
+		if player and is_instance_valid(player):
+			if player.has_method("get_rect") and player.get_rect() and rect.intersects(player.get_rect()):
+				new_current = room
+				continue
+			elif rect.has_point(player.global_position):
+				new_current = room
+				continue
 
-	var current_room
+		# maybe want a cleanup here to clear bullets and things
+		room.pause()
+
 	if new_current:
-		current_room = new_current
+		Debug.pr("unpausing new current", new_current)
+		new_current.unpause()
 	else:
-		current_room = null
-
-	if current_room:
-		current_room.unpause()
+		# unpause all rooms, so the player is detected when entering one
+		current_zone.rooms.map(func(room): room.unpause({process_only=true}))
