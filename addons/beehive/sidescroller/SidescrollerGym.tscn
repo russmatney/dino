@@ -33,10 +33,6 @@ position = Vector2(120, 5)
 
 [node name="SSNPC" parent="." instance=ExtResource("5_shk5o")]
 position = Vector2(-128, -27)
-should_wander = true
-should_patrol = false
-knockback_speed_y = 100.0
-knockback_speed_x = 30.0
 
 [node name="SSBody" parent="." instance=ExtResource("7_i72gu")]
 position = Vector2(-241, -95)

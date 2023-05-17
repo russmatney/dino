@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 @onready var high_wall_check = $HighWallCheck
 @onready var low_wall_check = $LowWallCheck
-var wall_checks = []
+@onready var wall_checks = [high_wall_check, low_wall_check]
 @onready var near_ground_check = $NearGroundCheck
 
 @onready var heart_particles = $HeartParticles
@@ -41,8 +41,6 @@ func _ready():
 
 	if not has_sword:
 		sword.set_visible(false)
-
-	wall_checks = [high_wall_check, low_wall_check]
 
 	player_death.connect(_on_player_death)
 
