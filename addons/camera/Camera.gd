@@ -57,12 +57,17 @@ func cam_window_rect():
 ##############################################################
 # ensure camera
 
+var spawning_camera
 
 func ensure_camera(opts = {}):
 	Debug.pr("ensuring camera with opts:", opts)
 	if not opts is Dictionary:
 		Debug.warn("unexpected ensure_camera opts value", opts)
 		opts = {}
+
+	if spawning_camera:
+		Debug.warn("already spawning camera, ignoring ensure_camera call", opts)
+		return
 
 	var player = opts.get("player")
 
@@ -72,9 +77,11 @@ func ensure_camera(opts = {}):
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
-			if not cam.get_parent():
+			var cam_parent = cam.get_parent()
+			Debug.pr(cam_parent, player)
+			if cam_parent != null and is_instance_valid(cam_parent):
 				Debug.pr("Setting cam parent to player:", cam)
-				cam.set_parent(player)
+				player.add_child(cam)
 			if cam.get_parent() != player:
 				Debug.pr("reparenting cam to player:", cam)
 				cam.reparent(player)
@@ -97,6 +104,9 @@ func ensure_camera(opts = {}):
 	for k in opts:
 		if k in cam:
 			cam.set(k, opts.get(k))
+
+	spawning_camera = true
+	cam.ready.connect(func(): spawning_camera = false, CONNECT_ONE_SHOT)
 
 	Navi.current_scene.add_child.call_deferred(cam)
 
