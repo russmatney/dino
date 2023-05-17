@@ -90,30 +90,7 @@ func tilemaps() -> Array[TileMap]:
 ###########################################
 # rects
 
-func tilemap_rect() -> Rect2i:
-	var tm: TileMap
-	for tmap in tilemaps():
-		tm = tmap
-		# TODO select/combine tilemap rect building, likely with rect2.merge
-		break
-
-	if not tm:
-		push_error("MetroRoom without tilemap, returning zero rect")
-		return Rect2i()
-
-	return tm.get_used_rect()
-
-func used_rect() -> Rect2:
-	var tm: TileMap
-	for tmap in tilemaps():
-		tm = tmap
-		# TODO select/combine tilemap rect building, likely with rect2.merge
-		break
-
-	if not tm:
-		push_error("MetroRoom without tilemap, returning zero rect")
-		return Rect2()
-
+func tilemap_to_rect(tm: TileMap) -> Rect2:
 	var tm_rect = tm.get_used_rect()
 	var r = Rect2()
 	var tile_size = tm.tile_set.tile_size
@@ -123,6 +100,13 @@ func used_rect() -> Rect2:
 
 	r.position += tm.position
 
+	return r
+
+func used_rect() -> Rect2:
+	var r = Rect2()
+	for tmap in tilemaps():
+		var t_rect = tilemap_to_rect(tmap)
+		r = r.merge(t_rect)
 	return r
 
 ###########################################
