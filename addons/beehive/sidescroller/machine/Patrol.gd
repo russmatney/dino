@@ -18,8 +18,7 @@ func enter(_opts = {}):
 		target = Util.rand_of(pps)
 		last_target = target
 
-	if target:
-		# set actor's agent's target_position
+	if target and actor.nav_agent:
 		actor.nav_agent.target_position = target.global_position
 
 
@@ -34,6 +33,10 @@ func exit():
 var last_diff
 
 func physics_process(delta):
+	if actor.nav_agent == null:
+		Debug.warn("No nav_agent found on actor, exiting Patrol state", actor)
+		transit("Idle")
+		return
 
 	# TODO get next position from actor's agent
 	if actor.nav_agent.is_navigation_finished():
