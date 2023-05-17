@@ -98,6 +98,8 @@ func player_spawn_coords() -> Vector2:
 
 	if Game.is_managed:
 		markers = markers.filter(func(ma): return not ma.dev_only)
+	else:
+		markers.sort_custom(func(ma, mb): return ma.dev_only)
 
 	markers.sort_custom(func(ma, mb): return ma.last_visited > mb.last_visited)
 
