@@ -147,6 +147,8 @@ func toggle_pause():
 
 func pause():
 	Debug.prn("pausing")
+	# TODO don't pause when we're on a menu already
+
 	get_tree().paused = true
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
