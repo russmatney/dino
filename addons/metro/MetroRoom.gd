@@ -36,11 +36,7 @@ func hotel_data(player=null):
 		visited=visited,
 		}
 
-	if player and is_instance_valid(player):
-		var r = Rect2()
-		r.position = rect.position + position
-		r.size = rect.size
-		data["has_player"] = r.has_point(player.global_position)
+	data["has_player"] = contains_player(player)
 	return data
 
 func check_out(data):
@@ -108,6 +104,22 @@ func used_rect() -> Rect2:
 		var t_rect = tilemap_to_rect(tmap)
 		r = r.merge(t_rect)
 	return r
+
+func contains_player(player):
+	# TODO overlapping rooms (roomboxes) break this
+	# TODO move to a polygon, not a rectangle
+	if player == null or not is_instance_valid(player):
+		return
+
+	var rect = used_rect()
+	rect.position += position
+
+	if player.has_method("get_rect") and player.get_rect() and rect.intersects(player.get_rect()):
+		return true
+	elif rect.has_point(player.global_position):
+		return true
+
+	return false
 
 ###########################################
 # room_box
