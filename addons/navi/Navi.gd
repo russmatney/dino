@@ -137,6 +137,7 @@ func _unhandled_input(event):
 	if not Engine.is_editor_hint() and Trolley.is_pause(event):
 		Navi.toggle_pause()
 
+signal pause_toggled(paused)
 
 func toggle_pause():
 	if get_tree().paused:
@@ -154,6 +155,7 @@ func pause():
 		pause_menu.show()
 	DJ.pause_game_song()
 	DJ.resume_menu_song()
+	pause_toggled.emit(true)
 
 
 func resume():
@@ -163,6 +165,7 @@ func resume():
 		pause_menu.hide()
 	DJ.pause_menu_song()
 	DJ.resume_game_song()
+	pause_toggled.emit(false)
 
 
 ## death ###########################################
