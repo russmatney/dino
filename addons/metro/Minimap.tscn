@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjehx2kuswamk"]
+
+[ext_resource type="Script" path="res://addons/metro/Minimap.gd" id="1_4rvae"]
+
+[node name="Minimap" type="Node2D"]
+scale = Vector2(0.4, 0.4)
+script = ExtResource("1_4rvae")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -15
+limit_top = -15
+limit_right = 2146
+limit_bottom = 1794
+position_smoothing_enabled = true
+
+[node name="Peak" type="ColorRect" parent="."]
+offset_left = 1520.0
+offset_top = 176.0
+offset_right = 2576.0
+offset_bottom = 656.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="Summit" type="ColorRect" parent="."]
+offset_left = 2576.0
+offset_right = 3136.0
+offset_bottom = 512.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="SlopeOne" type="ColorRect" parent="."]
+offset_left = 2208.0
+offset_top = 640.0
+offset_right = 3216.0
+offset_bottom = 1104.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="SlopeTwo" type="ColorRect" parent="."]
+offset_left = 1520.0
+offset_top = 656.0
+offset_right = 2208.0
+offset_bottom = 1152.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="TreeViewBench" type="ColorRect" parent="."]
+offset_left = 576.0
+offset_top = 896.0
+offset_right = 1520.0
+offset_bottom = 1440.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="LogPondBench" type="ColorRect" parent="."]
+offset_left = 3216.0
+offset_top = 800.0
+offset_right = 4352.0
+offset_bottom = 1360.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="WaterfallBattle" type="ColorRect" parent="."]
+offset_left = 3664.0
+offset_top = 1360.0
+offset_right = 4288.0
+offset_bottom = 2016.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="TimberDodge" type="ColorRect" parent="."]
+offset_left = 1520.0
+offset_top = 1184.0
+offset_right = 2928.0
+offset_bottom = 2048.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="CaveEntrance" type="ColorRect" parent="."]
+offset_left = 2928.0
+offset_top = 1760.0
+offset_right = 3664.0
+offset_bottom = 2960.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="CaveHallway" type="ColorRect" parent="."]
+offset_left = 1088.0
+offset_top = 2225.0
+offset_right = 2928.0
+offset_bottom = 2961.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="CaveStaircase" type="ColorRect" parent="."]
+offset_top = 2224.0
+offset_right = 1424.0
+offset_bottom = 3648.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
+
+[node name="CaveDoom" type="ColorRect" parent="."]
+offset_left = 1424.0
+offset_top = 3056.0
+offset_right = 2832.0
+offset_bottom = 3632.0
+mouse_filter = 2
+color = Color(0.498039, 1, 0.831373, 0.2)
