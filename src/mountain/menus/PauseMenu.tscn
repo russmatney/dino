@@ -6,7 +6,7 @@
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="3_1it1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w0rx"]
-bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.756863)
+bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.623529)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw76l"]
 content_margin_left = 32.0

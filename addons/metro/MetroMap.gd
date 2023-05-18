@@ -1,32 +1,33 @@
 @tool
 extends Control
 
-# TODO center camera on current room
-# TODO update to fill in rooms as they are visited
+################################################################
+# vars
+
+var zone_data = {}
+var rooms = []
+
 
 ################################################################
 # ready
 
 func _ready():
-	Hotel.entry_updated.connect(update)
+	Hotel.entry_updated.connect(on_entry_updated)
+	resized.connect(update)
 
-	update_minimap_data()
+func update():
+	update_data()
 	update_map()
 
-
-func update(entry):
-	if Metro.zones_group in entry.get("groups", []):
-		update_minimap_data()
-		update_map()
-	if Metro.rooms_group in entry.get("groups", []):
-		update_minimap_data()
-		update_map()
-
 ################################################################
-# process
+# hotel entry_updated
 
-func _process(_delta):
-	pass
+func on_entry_updated(entry):
+	if Metro.zones_group in entry.get("groups", []):
+		update()
+	if Metro.rooms_group in entry.get("groups", []):
+		Debug.prn("metromap room update", entry)
+		update()
 
 ################################################################
 # helpers
@@ -47,29 +48,21 @@ func calc_scale_factor(merged_rect):
 		return Vector2.ONE * (size.x / merged_rect.size.x)
 
 func scale_rect(rect, factor):
-	return rect * Transform2D().scaled(factor)
-
+	var new_rect = Rect2(rect)
+	return new_rect * Transform2D().scaled(factor)
 
 func merged_and_offset(rms):
 	var merged = merged_rect(rms)
-	Debug.pr("merged", merged)
-
 	var scale_factor = calc_scale_factor(merged)
+	Debug.pr("scale_factor calced", scale_factor)
 	merged = scale_rect(merged, scale_factor)
-
-	Debug.pr("scaled merged", merged)
 
 	var offset = Vector2.ZERO
 	if merged.position.x < 0:
 		offset.x = -merged.position.x
 	if merged.position.y < 0:
 		offset.y = -merged.position.y
-
-	Debug.pr("offset", offset)
-
 	merged.position += offset
-
-	Debug.pr("scaled and adjusted merged", merged)
 
 	return {merged=merged, offset=offset, scale_factor=scale_factor}
 
@@ -77,9 +70,7 @@ func merged_and_offset(rms):
 ################################################################
 # update data
 
-var zone_data = {}
-
-func update_minimap_data():
+func update_data():
 	var current_zone = Metro.current_zone
 	if not current_zone:
 		if Engine.is_editor_hint():
@@ -92,10 +83,9 @@ func update_minimap_data():
 	if len(zones) > 0:
 		zone_data = zones[0]
 
+
 ################################################################
 # update_map
-
-var rooms = []
 
 var last_zone_name
 func update_map():
@@ -109,7 +99,6 @@ func update_map():
 
 	rooms = Hotel.query({zone_name=zone_name, group=Metro.rooms_group})
 	var res = merged_and_offset(rooms)
-	var merged = res.merged
 	var offset = res.offset
 	var scale_factor = res.scale_factor
 	update_rooms(offset, scale_factor)
@@ -122,8 +111,10 @@ func clear_map():
 
 func update_rooms(offset: Vector2, scale_factor):
 	for room_data in rooms:
-		var rect = room_data.get("rect")
-		if rect:
+		var room_rect = room_data.get("rect")
+		if room_rect:
+			# new one to prevent editing room_data's entry?
+			var rect = Rect2(room_rect)
 			rect.position += room_data["position"]
 			rect = scale_rect(rect, scale_factor)
 			rect.position += offset
@@ -165,7 +156,8 @@ func _draw():
 		draw_rect(merged, Color.MAGENTA, false)
 
 		for room in rms:
-			var room_rect = room.rect
+			# new one to prevent editing room_data's entry?
+			var room_rect = Rect2(room.rect)
 			room_rect.position += room.position
 			room_rect = scale_rect(room_rect, scale_factor)
 			room_rect.position += offset
