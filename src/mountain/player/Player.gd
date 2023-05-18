@@ -18,12 +18,12 @@ func _ready():
 			# zoom_margin_min=120,
 			})
 		Hood.ensure_hud(hud)
-
 	super._ready()
 
-	# TODO could we just Actions.register(self) or Trolley.register(self)?
-	# include opting into keybindings and current-ax updates
-	action_detector.setup(self, {actions=actions, action_hint=action_hint,})
+	if not Engine.is_editor_hint():
+		# TODO could we just Actions.register(self) or Trolley.register(self)?
+		# include opting into keybindings and current-ax updates
+		action_detector.setup(self, {actions=actions, action_hint=action_hint,})
 
 func get_rect():
 	if coll != null:
