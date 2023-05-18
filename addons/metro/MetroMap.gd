@@ -26,7 +26,6 @@ func on_entry_updated(entry):
 	if Metro.zones_group in entry.get("groups", []):
 		update()
 	if Metro.rooms_group in entry.get("groups", []):
-		Debug.prn("metromap room update", entry)
 		update()
 
 ################################################################
@@ -54,7 +53,6 @@ func scale_rect(rect, factor):
 func merged_and_offset(rms):
 	var merged = merged_rect(rms)
 	var scale_factor = calc_scale_factor(merged)
-	Debug.pr("scale_factor calced", scale_factor)
 	merged = scale_rect(merged, scale_factor)
 
 	var offset = Vector2.ZERO
@@ -76,7 +74,7 @@ func update_data():
 		if Engine.is_editor_hint():
 			current_zone = Hotel.first({group=Metro.zones_group})
 		else:
-			Debug.pr("No current zone")
+			Debug.warn("No current zone")
 			return
 
 	var zones = Hotel.query({zone_name=current_zone.name, group=Metro.zones_group})

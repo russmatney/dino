@@ -115,6 +115,8 @@ func rearrange_labels():
 func _on_rearrange_labels_pressed():
 	rearrange_labels()
 
+###############################################################
+# debug widgets
 
 const hotel_ui_scene = preload("res://addons/hotel/HotelUI.tscn")
 var hotel_ui
@@ -136,3 +138,13 @@ func _on_toggle_dj_turn_table_pressed():
 	else:
 		dj_turntable = dj_turntable_scene.instantiate()
 		$%ToggleDJTurnTable.add_sibling(dj_turntable)
+
+const metro_map_scene = preload("res://addons/metro/MetroMap.tscn")
+var metro_map
+
+func _on_toggle_metro_map_pressed():
+	if metro_map and is_instance_valid(metro_map):
+		metro_map.queue_free()
+	else:
+		metro_map = metro_map_scene.instantiate()
+		$%ToggleMetroMap.add_sibling(metro_map)
