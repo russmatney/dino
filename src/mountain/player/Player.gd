@@ -4,6 +4,7 @@ extends SSPlayer
 @onready var coll = $CollisionShape2D
 @onready var action_detector = $ActionDetector
 @onready var action_hint = $ActionHint
+@onready var warp_cast = $WarpCast
 
 
 ## ready ##################################################################

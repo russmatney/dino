@@ -354,3 +354,5 @@ shape = SubResource("RectangleShape2D_sursb")
 
 [node name="ActionHint" parent="." instance=ExtResource("6_m462i")]
 position = Vector2(0, -42)
+
+[node name="WarpCast" type="RayCast2D" parent="."]
