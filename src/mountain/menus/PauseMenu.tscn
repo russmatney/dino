@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwkxdbiipb52u"]
+[gd_scene load_steps=7 format=3 uid="uid://dwkxdbiipb52u"]
 
+[ext_resource type="PackedScene" uid="uid://bjehx2kuswamk" path="res://addons/metro/Minimap.tscn" id="1_dxrbj"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="1_n74b7"]
 [ext_resource type="Script" path="res://src/mountain/menus/MountainPauseButtonList.gd" id="1_peluv"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="3_1it1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w0rx"]
-bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.470588)
+bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.756863)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw76l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="PauseMenu" type="CanvasLayer"]
+layer = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -22,6 +27,28 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jw76l")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(638, 720)
+render_target_update_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Minimap" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport/VBoxContainer" instance=ExtResource("1_dxrbj")]
+scale = Vector2(0.1, 0.1)
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2

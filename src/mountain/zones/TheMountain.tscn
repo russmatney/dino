@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://clmjyi22fmy1n" path="res://assets/sprites/background_clouds_nobg_sheet.png" id="3_ixit7"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="4_1xi51"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="4_31evr"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="5_p3d4k"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
+[ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="5_p3d4k"]
+[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
+[ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
 
 [node name="TheMountain" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n6i7w")
