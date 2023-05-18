@@ -3,12 +3,8 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		label="Dino Menu",
-		nav_to="res://src/dino/DinoMenu.tscn",
-	},
-	{
-		label="Start HatBot",
-		fn=Game.restart_game.bind(HatBot),
+		label="Start",
+		fn=Game.restart_game.bind(Mountain),
 	},
 ]
 
@@ -22,3 +18,4 @@ func _ready():
 
 	if Engine.is_editor_hint():
 		request_ready()
+

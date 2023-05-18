@@ -2,6 +2,7 @@
 extends NaviButtonList
 
 # TODO map Games.games with something like menu_link
+# TODO create and include icons for each game
 var menu_scenes = [
 	{
 		label="Hatbot",
@@ -10,6 +11,10 @@ var menu_scenes = [
 	{
 		label="Super Elevator Level",
 		nav_to="res://src/superElevatorLevel/menus/MainMenu.tscn",
+	},
+	{
+		label="The Mountain",
+		nav_to="res://src/mountain/menus/MainMenu.tscn",
 	},
 	{
 		label="Herd",
