@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://bnty146n7pawp"]
 
 [ext_resource type="Script" path="res://src/hatbot/hud/HUD.gd" id="1_swmch"]
-[ext_resource type="PackedScene" uid="uid://b0xbo1cvd17n1" path="res://addons/metro/Minimap.tscn" id="2_hm6ex"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_eq15p"]
+[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/metro/MinimapContainer.tscn" id="2_2vxbw"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="4_0rxhj"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="4_ue220"]
 [ext_resource type="Texture2D" path="res://src/hatbot/hud/ClimbingGlovesAtlasTexture.tres" id="5_lrx0n"]
@@ -10,9 +9,6 @@
 [ext_resource type="Texture2D" path="res://src/hatbot/hud/SwordAtlasTexture.tres" id="7_u2dyi"]
 [ext_resource type="PackedScene" uid="uid://cteyd3m5jameg" path="res://addons/hood/HudLabel.tscn" id="8_fge0x"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="9_sdjxj"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]
-bg_color = Color(0.603922, 0.603922, 0.603922, 0.117647)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_culps"]
 content_margin_left = 3.0
@@ -43,46 +39,8 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="MinimapContainer" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_2vxbw")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_iv61c")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer"]
-disable_3d = true
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(256, 256)
-render_target_update_mode = 4
-
-[node name="Minimap" parent="HBoxContainer/VBoxContainer/PanelContainer/SubViewportContainer/SubViewport" instance=ExtResource("2_hm6ex")]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="ZoneName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_eq15p")
-bbcode_enabled = true
-text = "Zone Name"
-fit_content = true
-scroll_active = false
-
-[node name="RoomName" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("3_eq15p")
-bbcode_enabled = true
-text = "Room Name"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="EnemyStatusList" parent="HBoxContainer" instance=ExtResource("4_ue220")]
 unique_name_in_owner = true
@@ -109,7 +67,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_culps")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-h = 4
+h = 6
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
