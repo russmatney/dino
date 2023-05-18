@@ -107,7 +107,6 @@ func update_zone():
 		room.pause()
 
 	if new_current:
-		Debug.pr("unpausing new current", new_current)
 		new_current.unpause()
 	else:
 		# unpause all rooms, so the player is detected when entering one
