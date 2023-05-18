@@ -26,8 +26,6 @@ func warp_position_in_dir(actor, direction, opts={}):
 	var seen_tilemap = opts.get("seen_tilemap")
 
 	if seen_tilemap:
-		# in 'down', this logic needs to make sure there's another
-		# tileset down there to land on
 		if coll == null:
 			Debug.pr("no more coll, return last_collision_point")
 			return last_collision_point
@@ -40,15 +38,12 @@ func warp_position_in_dir(actor, direction, opts={}):
 		if coll is TileMap:
 			Debug.pr("ascend saw tilemap", coll)
 			opts["seen_tilemap"] = true
-
-			var coll_rid = actor.warp_cast.get_collider_rid()
-			actor.warp_cast.add_exception_rid(coll_rid)
-
-			return warp_position_in_dir(actor, direction, opts)
 		else:
-			Debug.pr("warp found something else!")
+			Debug.pr("warp found something else! adding exception for it", coll)
 
-		return coll.global_position
+		var coll_rid = actor.warp_cast.get_collider_rid()
+		actor.warp_cast.add_exception_rid(coll_rid)
+		return warp_position_in_dir(actor, direction, opts)
 
 func warp(actor, position):
 	# TODO disable collisions and tween to location
@@ -62,6 +57,7 @@ func physics_process(_delta):
 	var warp_position = warp_position_in_dir(actor, Vector2.UP)
 	if warp_position != null:
 		warp(actor, warp_position)
+		transit("Idle")
 		return
 
 	actor.move_and_slide()

@@ -42,6 +42,7 @@ var actions = [
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		action_detector.execute_current_action()
+		action_detector.current_action()
 
 	if Trolley.is_cycle_prev_action(event):
 		DJZ.play(DJZ.S.walk)
