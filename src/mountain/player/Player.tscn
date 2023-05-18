@@ -1,9 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://cutt56x8p5r7r"]
+[gd_scene load_steps=35 format=3 uid="uid://cutt56x8p5r7r"]
 
 [ext_resource type="Script" path="res://src/mountain/player/Player.gd" id="1_g0biv"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ctg72"]
 [ext_resource type="Texture2D" uid="uid://c6540fa51kh2a" path="res://src/mountain/player/mountain_player.png" id="3_xtsre"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="4_lc5om"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="5_tj1yg"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="6_m462i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfd8r"]
 
@@ -305,7 +307,10 @@ animations = [{
 "speed": 13.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sursb"]
+size = Vector2(239, 150)
+
+[node name="Player" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
 script = ExtResource("1_g0biv")
 
@@ -341,3 +346,11 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="SSMachine" parent="." instance=ExtResource("4_lc5om")]
+
+[node name="ActionDetector" parent="." instance=ExtResource("5_tj1yg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource("RectangleShape2D_sursb")
+
+[node name="ActionHint" parent="." instance=ExtResource("6_m462i")]
+position = Vector2(0, -42)

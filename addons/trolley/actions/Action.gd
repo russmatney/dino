@@ -86,8 +86,9 @@ func can_execute_now(actor) -> bool:
 func can_execute(actor) -> bool:
 	return source_can_execute.call() and actor_can_execute.call(actor)
 
+# Note this returns true if there is no assigned source.
 func close_enough_to_execute(actor) -> bool:
-	if requires_proximity:
+	if source != null and requires_proximity:
 		if maximum_distance != 0.0:
 			if area.source == null:
 				Debug.err("Cannot support `maximum_distance` without `area.source`")
@@ -98,6 +99,10 @@ func close_enough_to_execute(actor) -> bool:
 	return true
 
 func has_line_of_sight(actor) -> bool:
+	if source == null:
+		# no source? don't care, action can fire
+		return true
+
 	if requires_line_of_sight:
 		# TODO impl LOS between actor and action_source
 		return true

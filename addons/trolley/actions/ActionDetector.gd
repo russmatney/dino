@@ -13,6 +13,7 @@ func _ready():
 
 var actor
 var action_hint
+var actor_actions
 
 # used to prevent player actions, e.g. while sitting
 var can_execute_any_actions = func(): return true
@@ -24,8 +25,10 @@ func setup(a, opts={}):
 
 	can_execute_any_actions = opts.get("can_execute_any", func(): return true)
 	action_hint = opts.get("action_hint")
+	actor_actions = opts.get("actions", [])
 
-	Debug.prn("actor configured: ", a)
+	update_actions()
+	Debug.pr("actor configured: ", a)
 
 ####################################################################
 # process
@@ -62,6 +65,7 @@ var actions = []
 
 func update_actions():
 	actions = []
+	actions.append_array(actor_actions)
 	for area in action_areas:
 		actions.append_array(area.actions)
 
@@ -96,7 +100,7 @@ func find_nearest(axs=actions):
 		return nearest[0]
 
 func sort_nearest(axs=actions):
-	# TODO implement
+	# TODO implement, and don't filter out sourceless axs
 	return axs
 
 ## Return the nearest immediate action. If none, return the nearest potential action.
