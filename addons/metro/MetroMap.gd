@@ -7,6 +7,7 @@ extends Control
 var zone_data = {}
 var rooms = []
 
+var only_visited = false
 
 ################################################################
 # ready
@@ -96,6 +97,8 @@ func update_map():
 		last_zone_name = zone_name
 
 	rooms = Hotel.query({zone_name=zone_name, group=Metro.rooms_group})
+	if only_visited:
+		rooms = rooms.filter(func(rm): return rm.get("visited"))
 	var res = merged_and_offset(rooms)
 	var offset = res.offset
 	var scale_factor = res.scale_factor
@@ -146,6 +149,8 @@ func update_rooms(offset: Vector2, scale_factor):
 func _draw():
 	if not zone_data == null and len(zone_data) > 0:
 		var rms = Hotel.query({zone_name=zone_data["name"], group=Metro.rooms_group})
+		if only_visited:
+			rms = rms.filter(func(rm): return rm.get("visited"))
 		var res = merged_and_offset(rooms)
 		var merged = res.merged
 		var offset = res.offset
