@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjuwy3qtchj80"]
 
-[ext_resource type="TileSet" uid="uid://c0xyggq1a4gc" path="res://addons/reptile/tilesets/GrassyTiles16.tres" id="1_6lu6i"]
+[ext_resource type="TileSet" uid="uid://cvc56aldv1hyq" path="res://addons/reptile/tilesets/GrassyTiles16.tres" id="1_6lu6i"]
 [ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="2_0a0wb"]
 
 [node name="GrassTiles16" type="TileMap"]
