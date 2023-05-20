@@ -16,13 +16,16 @@ func _ready():
 ## on resize ###################################################################
 
 func on_resized():
-	var room_rect = room_data.get("rect")
-	var scale_factor = size / room_rect.size
-	for ch in checkpoints:
-		ch.position -= room_rect.position
-		ch.position *= scale_factor
-
+	checkpoints.map(set_checkpoint_position)
 	color_rect.size = size
+
+func set_checkpoint_position(ch):
+	var room_rect = room_data.get("rect")
+	if room_rect == null:
+		return
+	var scale_factor = size / room_rect.size
+	ch.position -= room_rect.position
+	ch.position *= scale_factor
 
 
 ## set room data ###################################################################
@@ -53,6 +56,9 @@ func add_checkpoint(data):
 	var checkpoint = ColorRect.new()
 	checkpoint.position = data.get("position")
 	checkpoint.size = Vector2.ONE * 10
+
+	set_checkpoint_position(checkpoint)
+
 	var color = Color(Color.RED, 0.7)
 	if data.get("visit_count", 0) > 0:
 		color = Color(Color.GREEN, 0.7)
