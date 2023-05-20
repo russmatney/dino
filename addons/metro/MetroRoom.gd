@@ -26,7 +26,7 @@ func _ready():
 ###########################################
 # hotel
 
-func hotel_data(player=null):
+func hotel_data(player=null, has_player=null):
 	var rect = used_rect()
 	var data = {
 		name=name,
@@ -36,7 +36,10 @@ func hotel_data(player=null):
 		visited=visited,
 		}
 
-	data["has_player"] = contains_player(player)
+	if has_player != null:
+		data["has_player"] = has_player
+	else:
+		data["has_player"] = contains_player(player)
 	return data
 
 func check_out(data):
@@ -58,7 +61,7 @@ var visited = false
 func _on_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		visited = true
-		Hotel.check_in(self, hotel_data(body))
+		Hotel.check_in(self, hotel_data(body, true))
 		Metro.update_zone()
 
 		for ch in get_children():
@@ -69,7 +72,7 @@ func _on_room_entered(body: Node2D):
 
 func _on_room_exited(body: Node2D):
 	if body.is_in_group("player"):
-		Hotel.check_in(self, hotel_data(body))
+		Hotel.check_in(self, hotel_data(body, false))
 		Metro.update_zone()
 
 
