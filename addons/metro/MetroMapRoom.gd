@@ -19,7 +19,6 @@ func on_resized():
 	var room_rect = room_data.get("rect")
 	var scale_factor = size / room_rect.size
 	for ch in checkpoints:
-		# ch pos is relative to room pos
 		ch.position -= room_rect.position
 		ch.position *= scale_factor
 
@@ -61,3 +60,18 @@ func add_checkpoint(data):
 	checkpoint.set_color(color)
 	checkpoints.append(checkpoint)
 	add_child(checkpoint)
+
+
+## draw ################################################################
+
+func _draw():
+	if len(room_data) == 0:
+		return
+
+	var room_rect = room_data.get("rect")
+	var scale_factor = size / room_rect.size
+
+	room_rect.position -= room_rect.position
+	room_rect = Rect2(room_rect) * Transform2D().scaled(scale_factor)
+
+	draw_rect(room_rect, Color(Color.PERU, 0.7), false, 5.0)

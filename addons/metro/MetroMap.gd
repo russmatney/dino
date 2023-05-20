@@ -51,8 +51,7 @@ func calc_scale_factor(merged_rect):
 		return Vector2.ONE * (size.x / merged_rect.size.x)
 
 func scale_rect(rect, factor):
-	var new_rect = Rect2(rect)
-	return new_rect * Transform2D().scaled(factor)
+	return Rect2(rect) * Transform2D().scaled(factor)
 
 func merged_and_offset(rms):
 	var merged = merged_rect(rms)
@@ -137,26 +136,3 @@ func update_rooms(offset: Vector2, scale_factor):
 			map_room.position = rect.position
 			map_room.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 			rooms.append(map_room)
-
-################################################################
-# draw
-
-func _draw():
-	if not zone_data == null and len(zone_data) > 0:
-		var rms = Hotel.query({zone_name=zone_data["name"], group=Metro.rooms_group})
-		if only_visited:
-			rms = rms.filter(func(rm): return rm.get("visited"))
-		var res = merged_and_offset(rooms)
-		var merged = res.merged
-		var offset = res.offset
-		var scale_factor = res.scale_factor
-
-		draw_rect(merged, Color.MAGENTA, false)
-
-		for room in rms:
-			# new one to prevent editing room_data's entry?
-			var room_rect = Rect2(room.rect)
-			room_rect.position += room.position
-			room_rect = scale_rect(room_rect, scale_factor)
-			room_rect.position += offset
-			draw_rect(room_rect, Color.PERU, false)
