@@ -1,6 +1,6 @@
 extends State
 
-var rest_time = 5.0
+var rest_time = 2.2
 var rest_ttl
 
 ## enter ###########################################################
