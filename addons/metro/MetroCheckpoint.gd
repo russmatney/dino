@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-# Maybe this is an action-something, it's pretty generic right now
+class_name MetroCheckpoint
 
 var visit_count = 0
 

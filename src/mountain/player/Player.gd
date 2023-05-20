@@ -23,19 +23,27 @@ func _ready():
 	if not Engine.is_editor_hint():
 		# TODO could we just Actions.register(self) or Trolley.register(self)?
 		# include opting into keybindings and current-ax updates
-		action_detector.setup(self, {actions=actions, action_hint=action_hint,})
+		action_detector.setup(self, {actions=actions, action_hint=action_hint,
+			can_execute_any=func(): return not machine.state.name in ["Rest"]})
 
 func get_rect():
 	if coll != null:
 		return coll.shape.get_rect()
 
+
 ## actions ##################################################################
 
 var actions = [
-	Action.mk({label="Ascend",
-		fn=func(player): player.machine.transit("Ascend"),}),
-	Action.mk({label="Descend",
-		fn=func(player): player.machine.transit("Descend"),})]
+	# Action.mk({label="Ascend",
+	# 	fn=func(player): player.machine.transit("Ascend"),
+	# 	actor_can_execute=func(p): return not p.is_dead,
+	# 	}),
+	# Action.mk({label="Descend",
+	# 	fn=func(player): player.machine.transit("Descend"),
+	# 	actor_can_execute=func(p): return not p.is_dead,
+	# 	})
+	]
+
 
 ## input ##################################################################
 

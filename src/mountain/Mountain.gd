@@ -26,9 +26,7 @@ func get_spawn_coords():
 	return Metro.get_spawn_coords()
 
 func _on_player_death():
-	Game.respawn_player({
-		setup_fn=func(p): p.recover_health()
-		})
+	Game.respawn_player({setup_fn=func(p): p.recover_health()})
 
 ######################################################
 # register
