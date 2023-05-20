@@ -29,7 +29,7 @@ func _ready():
 ## hotel ###########################################################
 
 func hotel_data():
-	return {visit_count=visit_count}
+	return {visit_count=visit_count, position=position}
 
 # maybe should support a data-driven check-out config
 func check_out(data):

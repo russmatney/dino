@@ -7,7 +7,7 @@ extends Control
 var zone_data = {}
 var rooms = []
 
-var only_visited = false
+var only_visited = true
 
 ################################################################
 # ready
@@ -15,6 +15,7 @@ var only_visited = false
 func _ready():
 	Hotel.entry_updated.connect(on_entry_updated)
 	resized.connect(update)
+	update()
 
 func update():
 	update_data()
@@ -27,6 +28,8 @@ func on_entry_updated(entry):
 	if Metro.zones_group in entry.get("groups", []):
 		update()
 	if Metro.rooms_group in entry.get("groups", []):
+		update()
+	if Metro.checkpoints_group in entry.get("groups", []):
 		update()
 
 ################################################################
@@ -107,41 +110,33 @@ func update_map():
 
 func clear_map():
 	for c in get_children():
-		if c is ColorRect:
+		if c is MetroMapRoom:
 			c.free()
+
+var map_room_scene = preload("res://addons/metro/MetroMapRoom.tscn")
 
 func update_rooms(offset: Vector2, scale_factor):
 	for room_data in rooms:
 		var room_rect = room_data.get("rect")
+
 		if room_rect:
-			# new one to prevent editing room_data's entry?
 			var rect = Rect2(room_rect)
 			rect.position += room_data["position"]
 			rect = scale_rect(rect, scale_factor)
 			rect.position += offset
 
-			var visited = room_data.get("visited")
-			var has_player = room_data.get("has_player")
 			var room_name = str(room_data.get("name"))
-
-			var c_rect = get_node_or_null(room_name)
-			if not c_rect:
-				c_rect = ColorRect.new()
-				c_rect.name = room_name
-				add_child(c_rect)
-				c_rect.set_owner(self)
-
-			c_rect.size = rect.size
-			c_rect.position = rect.position
-			c_rect.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
-			rooms.append(c_rect)
-
-			if has_player:
-				c_rect.set_color(Color(Color.PERU,0.8))
-			elif visited:
-				c_rect.set_color(Color(Color.GRAY, 0.7))
-			else:
-				c_rect.set_color(Color(Color.AQUAMARINE, 0.2))
+			var map_room = get_node_or_null(room_name)
+			if not map_room:
+				map_room = map_room_scene.instantiate()
+				map_room.name = room_name
+				add_child(map_room)
+				map_room.set_owner(self)
+			map_room.set_room_data(room_data)
+			map_room.size = rect.size
+			map_room.position = rect.position
+			map_room.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+			rooms.append(map_room)
 
 ################################################################
 # draw

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1v3sf4u84dp3"]
+[gd_scene load_steps=4 format=3 uid="uid://d1v3sf4u84dp3"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroMap.gd" id="1_ybr1s"]
+[ext_resource type="PackedScene" uid="uid://d08gsfs35aiod" path="res://addons/metro/MetroMapRoom.tscn" id="2_fa4kq"]
+[ext_resource type="Script" path="res://addons/metro/MetroMapRoom.gd" id="3_g8um4"]
 
 [node name="MetroMap" type="Control"]
 layout_mode = 3
@@ -9,112 +11,122 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 script = ExtResource("1_ybr1s")
 
-[node name="Peak" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="Peak" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 300.0
 offset_top = 34.7368
 offset_right = 508.421
 offset_bottom = 129.474
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="Summit" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="Summit" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 508.421
 offset_right = 618.947
 offset_bottom = 101.053
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="SlopeOne" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="SlopeOne" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 435.789
 offset_top = 126.316
 offset_right = 634.737
 offset_bottom = 217.895
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="SlopeTwo" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="SlopeTwo" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 300.0
 offset_top = 129.474
 offset_right = 435.789
 offset_bottom = 227.368
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="TreeViewBench" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="TreeViewBench" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 113.684
 offset_top = 176.842
 offset_right = 300.0
 offset_bottom = 284.211
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="LogPondBench" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="LogPondBench" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 634.737
 offset_top = 157.895
 offset_right = 858.947
 offset_bottom = 268.421
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="WaterfallBattle" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="WaterfallBattle" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 723.158
 offset_top = 268.421
 offset_right = 846.316
 offset_bottom = 397.895
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="TimberDodge" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="TimberDodge" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 300.0
 offset_top = 233.684
 offset_right = 577.895
 offset_bottom = 404.211
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="CaveEntrance" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="CaveEntrance" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 577.895
 offset_top = 347.368
 offset_right = 723.158
 offset_bottom = 584.211
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="CaveHallway" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="CaveHallway" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 214.737
 offset_top = 439.145
 offset_right = 577.895
 offset_bottom = 584.408
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="CaveStaircase" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="CaveStaircase" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_top = 438.947
 offset_right = 281.053
 offset_bottom = 720.0
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
 
-[node name="CaveDoom" type="ColorRect" parent="."]
-layout_mode = 0
+[node name="CaveDoom" type="Control" parent="." instance=ExtResource("2_fa4kq")]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 281.053
 offset_top = 603.158
 offset_right = 558.947
 offset_bottom = 716.842
 mouse_filter = 2
-color = Color(0.498039, 1, 0.831373, 0.2)
+script = ExtResource("3_g8um4")
