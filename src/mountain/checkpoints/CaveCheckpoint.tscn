@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkyb7ritrpatt"]
+
+[ext_resource type="Script" path="res://addons/metro/MetroCheckpoint.gd" id="1_3514d"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="2_xsmew"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="3_3c6sm"]
+[ext_resource type="Texture2D" uid="uid://dyft4sctcy2qv" path="res://src/mountain/checkpoints/MNT_cave_bench_checkpoint.png" id="4_cjefc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrrr1"]
+size = Vector2(16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27x6v"]
+atlas = ExtResource("4_cjefc")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4vyq6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27x6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="CaveCheckpoint" type="Node2D" groups=["metro_checkpoints"]]
+script = ExtResource("1_3514d")
+
+[node name="ActionArea" parent="." instance=ExtResource("2_xsmew")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_wrrr1")
+
+[node name="ActionHint" parent="." instance=ExtResource("3_3c6sm")]
+visible = false
+position = Vector2(0, -56)
+label_text = "Rest"
+key_or_action = "action"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-3, -32)
+sprite_frames = SubResource("SpriteFrames_4vyq6")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/sprites/MNT_cave_bench_checkpoint.aseprite"
+}

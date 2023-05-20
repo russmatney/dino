@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://6ipowiqbokqw"]
+[gd_scene load_steps=14 format=3 uid="uid://6ipowiqbokqw"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_n6i7w"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_6e41n"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
 [ext_resource type="PackedScene" uid="uid://bax62g5wrhfl7" path="res://src/mountain/checkpoints/LogCheckpoint.tscn" id="9_j1p4u"]
 [ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="9_jg13a"]
+[ext_resource type="PackedScene" uid="uid://dkyb7ritrpatt" path="res://src/mountain/checkpoints/CaveCheckpoint.tscn" id="10_riig2"]
+[ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/mountain/checkpoints/SnowCheckpoint.tscn" id="11_l3xsv"]
 
 [node name="TheMountain" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n6i7w")
@@ -43,7 +45,7 @@ stretch_mode = 1
 color = Color(0.686275, 0.733333, 0.85098, 1)
 
 [node name="DevPlayerSpawnPoint" parent="." instance=ExtResource("4_31evr")]
-position = Vector2(648, -104)
+position = Vector2(264, -48)
 
 [node name="Peak" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("2_6e41n")
@@ -67,7 +69,13 @@ shadow_enabled = true
 position = Vector2(740, 32)
 
 [node name="LogCheckpoint" parent="Peak" instance=ExtResource("9_j1p4u")]
-position = Vector2(616, 48)
+position = Vector2(180, 145)
+
+[node name="CaveCheckpoint" parent="Peak" instance=ExtResource("10_riig2")]
+position = Vector2(224, 146)
+
+[node name="SnowCheckpoint" parent="Peak" instance=ExtResource("11_l3xsv")]
+position = Vector2(274, 148)
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]
 position = Vector2(1152, -80)
