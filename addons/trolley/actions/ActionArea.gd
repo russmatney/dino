@@ -48,7 +48,7 @@ func _on_body_exited(body):
 
 func update_displayed_action(action=null):
 	if action_hint:
-		if action and source and action.source == source:
+		if action and source and action.source == source and action.show_on_source:
 			action_hint.display(action.input_action, action.get_label())
 		else:
 			action_hint.hide()

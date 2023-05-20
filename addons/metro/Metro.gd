@@ -3,6 +3,7 @@ extends Node
 
 const zones_group = "metro_zones"
 const rooms_group = "metro_rooms"
+const checkpoints_group = "metro_checkpoints"
 
 ###########################################################
 # start game

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6ipowiqbokqw"]
+[gd_scene load_steps=15 format=3 uid="uid://6ipowiqbokqw"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_n6i7w"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_6e41n"]
@@ -9,6 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="5_p3d4k"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
 [ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
+[ext_resource type="PackedScene" uid="uid://dok3gb7l2lgv5" path="res://addons/metro/MetroCheckpoint.tscn" id="8_34yde"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="9_i8ppc"]
+[ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="9_jg13a"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="10_f5bbk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8fe1"]
+size = Vector2(80, 48)
 
 [node name="TheMountain" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n6i7w")
@@ -60,6 +67,21 @@ layer_0/tile_data = PackedInt32Array(-655375, 65536, 7, -589839, 65536, 14, -589
 rotation = -0.513127
 color = Color(0.335116, 0.335116, 0.335116, 0.188235)
 shadow_enabled = true
+
+[node name="MetroCheckpoint" parent="Peak" groups=["metro_checkpoints"] instance=ExtResource("8_34yde")]
+position = Vector2(265, -30)
+
+[node name="ActionArea" parent="Peak/MetroCheckpoint" instance=ExtResource("9_i8ppc")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Peak/MetroCheckpoint/ActionArea"]
+position = Vector2(-1, 6)
+shape = SubResource("RectangleShape2D_h8fe1")
+
+[node name="ActionHint" parent="Peak/MetroCheckpoint" instance=ExtResource("10_f5bbk")]
+visible = false
+
+[node name="SSEnemy" parent="Peak" instance=ExtResource("9_jg13a")]
+position = Vector2(740, 32)
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]
 position = Vector2(1152, -80)

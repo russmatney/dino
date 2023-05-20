@@ -16,6 +16,8 @@ var area
 var requires_proximity: bool = true
 var maximum_distance: float
 var requires_line_of_sight: bool = true
+var show_on_source: bool = true
+var show_on_actor: bool = true
 
 #################################################################
 # get_label
@@ -74,6 +76,14 @@ static func mk(opts) -> Action:
 	var requires_line_of_sight = opts.get("requires_line_of_sight")
 	if requires_line_of_sight != null:
 		ax.requires_line_of_sight = requires_line_of_sight
+
+	var show_on_source = opts.get("show_on_source")
+	if show_on_source != null:
+		ax.show_on_source = show_on_source
+
+	var show_on_actor = opts.get("show_on_actor")
+	if show_on_actor != null:
+		ax.show_on_actor = show_on_actor
 
 	return ax
 

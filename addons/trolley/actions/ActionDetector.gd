@@ -195,7 +195,7 @@ func update_displayed_action(action=null):
 		else:
 			c_ax = action
 
-		if c_ax:
+		if c_ax and c_ax.show_on_actor:
 			action_hint.display(c_ax.input_action, c_ax.get_label())
 		else:
 			action_hint.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://bid88q8ils016"]
 
 [ext_resource type="Script" path="res://src/hatbot/entities/Candle.gd" id="1_7eirx"]
 [ext_resource type="SpriteFrames" uid="uid://63sc3onlnswo" path="res://src/hatbot/entities/CandleSpriteFrames.tres" id="1_ywigl"]
@@ -31,7 +31,7 @@ color = Color(0.11248, 0.245715, 0.115688, 1)
 sprite_frames = ExtResource("1_ywigl")
 animation = &"off"
 autoplay = "flicker"
-frame_progress = 0.124409
+frame_progress = 0.421367
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)

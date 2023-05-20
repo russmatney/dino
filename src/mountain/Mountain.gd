@@ -19,11 +19,16 @@ func should_spawn_player(scene):
 
 var player_scene = preload("res://src/mountain/player/Player.tscn")
 
-func on_player_spawned(_player):
-	pass
+func on_player_spawned(player):
+	player.died.connect(_on_player_death)
 
 func get_spawn_coords():
 	return Metro.get_spawn_coords()
+
+func _on_player_death():
+	Game.respawn_player({
+		setup_fn=func(p): p.recover_health()
+		})
 
 ######################################################
 # register

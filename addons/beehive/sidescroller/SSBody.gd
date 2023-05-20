@@ -163,6 +163,17 @@ func take_damage(hit_type, body):
 	health -= damage
 	Hotel.check_in(self)
 
+## recover health ###########################################################
+
+# if no arg passed, recover _all_ health
+func recover_health(h=null):
+	if h == null:
+		health = initial_health
+	else:
+		health += h
+	Hotel.check_in(self)
+
+
 ## hurt_box ###########################################################
 
 var hurt_box_bodies = []

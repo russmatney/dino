@@ -77,7 +77,7 @@ func light_up(_actor=null):
 	Hotel.check_in(self)
 
 	# marks spawn point active
-	spawn_point.sat_at()
+	spawn_point.visited()
 	Debug.pr("light up finished")
 
 func put_out(_actor=null):
