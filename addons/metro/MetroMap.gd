@@ -7,7 +7,7 @@ extends Control
 var zone_data = {}
 var rooms = []
 
-var only_visited = true
+var only_visited = false
 
 ################################################################
 # ready
@@ -88,6 +88,8 @@ func update_data():
 ################################################################
 # update_map
 
+signal new_merged_rect(rect)
+
 var last_zone_name
 func update_map():
 	if len(zone_data) == 0:
@@ -102,6 +104,7 @@ func update_map():
 	if only_visited:
 		rooms = rooms.filter(func(rm): return rm.get("visited"))
 	var res = merged_and_offset(rooms)
+	new_merged_rect.emit(res.merged)
 	var offset = res.offset
 	var scale_factor = res.scale_factor
 	update_rooms(offset, scale_factor)
@@ -113,6 +116,8 @@ func clear_map():
 			c.free()
 
 var map_room_scene = preload("res://addons/metro/MetroMapRoom.tscn")
+
+signal room_has_player(room_data)
 
 func update_rooms(offset: Vector2, scale_factor):
 	for room_data in rooms:
@@ -131,6 +136,10 @@ func update_rooms(offset: Vector2, scale_factor):
 				map_room.name = room_name
 				add_child(map_room)
 				map_room.set_owner(self)
+
+			if room_data.get("has_player"):
+				room_has_player.emit(room_data, rect)
+
 			map_room.set_room_data(room_data)
 			map_room.size = rect.size
 			map_room.position = rect.position
