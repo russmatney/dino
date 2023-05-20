@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://6ipowiqbokqw"]
+[gd_scene load_steps=18 format=3 uid="uid://eg3mtddsun80"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_n6i7w"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_6e41n"]
@@ -14,6 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://dkyb7ritrpatt" path="res://src/mountain/checkpoints/CaveCheckpoint.tscn" id="10_riig2"]
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/mountain/checkpoints/SnowCheckpoint.tscn" id="11_l3xsv"]
 [ext_resource type="PackedScene" uid="uid://dx8ixbc0fuojm" path="res://src/mountain/SnowFallParticles.tscn" id="12_xcbii"]
+[ext_resource type="PackedScene" uid="uid://c0pkrdt2pgivv" path="res://src/mountain/BlurryCircleParticles.tscn" id="13_oonb0"]
+[ext_resource type="Shader" path="res://src/SimpleBlurScreen.gdshader" id="14_j24i6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_alvbk"]
+resource_local_to_scene = true
+shader = ExtResource("14_j24i6")
+shader_parameter/lod = 5.0
 
 [node name="TheMountain" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n6i7w")
@@ -89,6 +96,10 @@ position = Vector2(352, -176)
 
 [node name="SnowFallParticles4" parent="Peak" instance=ExtResource("12_xcbii")]
 position = Vector2(544, -176)
+
+[node name="BlurryCircleParticles" parent="Peak" instance=ExtResource("13_oonb0")]
+material = SubResource("ShaderMaterial_alvbk")
+position = Vector2(264, -32)
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]
 position = Vector2(1152, -80)
