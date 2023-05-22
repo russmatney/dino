@@ -16,7 +16,7 @@ func _ready():
 	if label:
 		set_label(label)
 
-	if not destination == null and not FileAccess.file_exists(destination):
+	if not destination == null and not ResourceLoader.exists(destination):
 		Debug.warn("Ghosts door destination does not exist!", destination)
 
 

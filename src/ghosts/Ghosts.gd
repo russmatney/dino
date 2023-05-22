@@ -81,7 +81,7 @@ func update_world():
 #############################################################
 
 func load_next_room(room_path):
-	if room_path and not FileAccess.file_exists(room_path):
+	if room_path and not ResourceLoader.exists(room_path):
 		Debug.warn("Next room does not exist!", room_path)
 		return
 

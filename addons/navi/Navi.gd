@@ -21,7 +21,7 @@ var current_scene
 var last_scene_stack = []
 
 func _ready():
-	if not FileAccess.file_exists(main_menu_path):
+	if not ResourceLoader.exists(main_menu_path):
 		Debug.prn("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
 
 	process_mode = PROCESS_MODE_ALWAYS
@@ -101,7 +101,7 @@ var main_menu_path = "res://src/dino/DinoMenu.tscn"
 
 
 func set_main_menu(path):
-	if FileAccess.file_exists(path):
+	if ResourceLoader.exists(path):
 		Debug.prn("Updating main_menu_path: ", path)
 		main_menu_path = path
 	else:
@@ -109,7 +109,7 @@ func set_main_menu(path):
 
 
 func nav_to_main_menu():
-	if FileAccess.file_exists(main_menu_path):
+	if ResourceLoader.exists(main_menu_path):
 		death_menu.hide()
 		win_menu.hide()
 		nav_to(main_menu_path)
@@ -124,7 +124,7 @@ func nav_to_main_menu():
 var pause_menu
 
 func set_pause_menu(path):
-	if FileAccess.file_exists(path):
+	if ResourceLoader.exists(path):
 		Debug.prn("Updating pause_menu: ", path)
 		if pause_menu:
 			pause_menu.queue_free()
@@ -174,7 +174,7 @@ func resume():
 var death_menu
 
 func set_death_menu(path):
-	if FileAccess.file_exists(path):
+	if ResourceLoader.exists(path):
 		Debug.prn("Updating death_menu: ", path)
 		if death_menu:
 			death_menu.queue_free()
@@ -200,7 +200,7 @@ func hide_death_menu():
 var win_menu
 
 func set_win_menu(path):
-	if FileAccess.file_exists(path):
+	if ResourceLoader.exists(path):
 		Debug.prn("Updating win_menu: ", path)
 		if win_menu:
 			win_menu.queue_free()

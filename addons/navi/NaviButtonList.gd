@@ -66,7 +66,7 @@ func connect_pressed_to_action(button, item):
 		pw("Menu item missing handler", item)
 		return
 	elif nav_to:
-		if not FileAccess.file_exists(nav_to):  # TODO does resource exist?
+		if not ResourceLoader.exists(nav_to):  # TODO does resource exist?
 			button.set_disabled(true)
 			pw("Menu item with non-existent nav-to", item)
 			return
