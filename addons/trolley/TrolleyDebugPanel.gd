@@ -6,6 +6,12 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
+	var jpads = Input.get_connected_joypads()
+	Debug.pr("connected joypads", jpads)
+	for jp in jpads:
+		Debug.pr("jpad", jp, Input.get_joy_name(jp))
+
+
 
 ## reload button #######################################################################
 
@@ -21,7 +27,6 @@ func _on_reload_plugin_button_pressed():
 		Debug.pr("Trolley UI Reload Not impled outside of editor")
 
 
-
 ## process #######################################################################
 
 @onready var active_controls_label = $%ActiveControlsLabel
@@ -29,16 +34,8 @@ func _on_reload_plugin_button_pressed():
 func _process(_delta):
 	var label = "[center]Active Controls:[/center]"
 
-	# var jpads = Input.get_connected_joypads()
-	# Debug.pr("connected joypads", jpads)
-	# for jp in jpads:
-	# 	Debug.pr("jpad", jp, Input.get_joy_name(jp))
-
 	var move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var trolley_move_vector = Trolley.move_vector()
-
-	# Debug.pr("move vector", move_vector, "trolley move vector", trolley_move_vector)
-	# Debug.pr("anything pressed?", Input.is_anything_pressed())
 
 	label += "\nmove vector: %s, \ntrolley move vector: %s" % [
 		Debug.to_pretty(move_vector), Debug.to_pretty(trolley_move_vector)
@@ -63,13 +60,12 @@ func limit_input_list():
 
 
 func new_input_label(event):
-	Debug.pr(event)
 	var axs = Trolley.actions_for_input(event)
-	Debug.pr(axs)
 	var label = "[center]raw: %s[/center]" % Debug.to_pretty(event)
 	for ax in axs:
-		label += "\n\taction: %s, key: %s" % [
-			Debug.to_pretty(ax.action_label), Debug.to_pretty(ax.key_str)
+		label += "\n\t%s: %s" % [
+			Debug.to_pretty(ax.key_str),
+			Debug.to_pretty(ax.action_label),
 			]
 
 	var lbl = RichTextLabel.new()

@@ -104,20 +104,9 @@ func actions_for_input(event):
 
 # returns a normalized Vector2 based checked the controller's movement
 func move_dir():
-	var v_diff = Vector2()
+	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	if Input.is_action_pressed("move_right"):
-		v_diff.x += 1
-	if Input.is_action_pressed("move_left"):
-		v_diff.x -= 1
-	if Input.is_action_pressed("move_down"):
-		v_diff.y += 1
-	if Input.is_action_pressed("move_up"):
-		v_diff.y -= 1
-
-	return v_diff.normalized()
-
-# TODO rename everywhere
+# TODO rename move_dir everywhere
 func move_vector():
 	return move_dir()
 
