@@ -153,6 +153,7 @@ func pause():
 	get_tree().paused = true
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
+		pause_menu.set_focus()
 	DJ.pause_game_song()
 	DJ.resume_menu_song()
 	pause_toggled.emit(true)

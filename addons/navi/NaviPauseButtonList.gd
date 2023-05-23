@@ -3,12 +3,12 @@ extends NaviButtonList
 
 var button_defs = [
 	{
-		label="Return to Main Menu",
-		fn=Game.load_main_menu,
-	},
-	{
 		label="Resume",
 		fn=Navi.resume,
+	},
+	{
+		label="Return to Main Menu",
+		fn=Game.load_main_menu,
 	},
 ]
 
