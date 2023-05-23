@@ -38,8 +38,28 @@ func _ready():
 	Debug.prn("[Navi] Current scene: ", current_scene)
 
 
-## nav_to ###################################################################
+## process ###################################################################
 
+var focused_node
+func _process(_delta):
+	# PERF could only run this when in a menu/control/ui screen
+	var new_focused_node = get_viewport().gui_get_focus_owner()
+	if new_focused_node != focused_node:
+		focused_node = new_focused_node
+		_on_focus_changed(focused_node)
+
+
+## focus changes ###################################################################
+
+func _on_focus_changed(control: Control) -> void:
+	Debug.pr("focus change", control)
+	if control == null:
+		Debug.pr("no focused node, attempting set_focus", current_scene)
+		if current_scene.has_method("set_focus"):
+			current_scene.set_focus()
+
+
+## nav_to ###################################################################
 
 func nav_to(path_or_packed_scene):
 	Debug.prn("nav_to: ", path_or_packed_scene)
@@ -188,6 +208,7 @@ func show_death_menu():
 	Debug.prn("Show death screen")
 	DJ.pause_game_song()
 	death_menu.show()
+	death_menu.set_focus()
 
 
 func hide_death_menu():
@@ -213,6 +234,7 @@ func show_win_menu():
 	Debug.prn("Show win screen")
 	DJ.pause_game_song()
 	win_menu.show()
+	win_menu.set_focus()
 
 
 func hide_win_menu():

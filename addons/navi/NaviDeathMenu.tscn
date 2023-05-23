@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxhvx1wj86fq"]
+[gd_scene load_steps=4 format=3 uid="uid://dxhvx1wj86fq"]
 
+[ext_resource type="Script" path="res://addons/navi/NaviDeathMenu.gd" id="1_vbsm2"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="3"]
 [ext_resource type="Script" path="res://addons/navi/NaviDeathButtonList.gd" id="4_kb7uw"]
 
 [node name="DeathMenu" type="CanvasLayer"]
 layer = 2
+script = ExtResource("1_vbsm2")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -30,7 +32,8 @@ text = "[center]Death"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NaviDeathButtonList" type="VBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer"]
+[node name="DeathButtonList" type="VBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("4_kb7uw")

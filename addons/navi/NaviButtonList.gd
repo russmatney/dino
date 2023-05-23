@@ -40,6 +40,10 @@ func _ready():
 	else:
 		Debug.pr(self, "no children, can't grab focus")
 
+	var btns = get_buttons()
+	if len(btns) > 0:
+		btns[0].grab_focus()
+
 
 ## add_menu_item #####################################################################
 
@@ -113,5 +117,3 @@ func add_menu_item(item):
 	button.text = label
 	connect_pressed_to_action(button, item)
 	add_child(button)
-	if item.get("grab_focus"):
-		button.grab_focus()
