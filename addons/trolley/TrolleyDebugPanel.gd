@@ -50,16 +50,10 @@ func _process(_delta):
 ## unhandled input #######################################################################
 
 @onready var unhandled_input_list = $%UnhandledInputList
+
 var n = 15
-
-func new_input_label(event):
-	var lbl = RichTextLabel.new()
-	lbl.bbcode_enabled = true
-	lbl.text = "[center]%s[/center]" % Debug.to_pretty(event)
-	lbl.scroll_active = false
-	lbl.fit_content = true
-	unhandled_input_list.add_child(lbl)
-
+# limit the input list to `n` inputs
+func limit_input_list():
 	var children = unhandled_input_list.get_children()
 	if len(children) > n:
 		for i in range(0, len(children) - n):
@@ -67,6 +61,25 @@ func new_input_label(event):
 			# but it's fine, we're just trying to see the latest keypresses
 			unhandled_input_list.get_children()[i].queue_free()
 
-func _unhandled_input(event):
+
+func new_input_label(event):
 	Debug.pr(event)
+	var axs = Trolley.actions_for_input(event)
+	Debug.pr(axs)
+	var label = "[center]raw: %s[/center]" % Debug.to_pretty(event)
+	for ax in axs:
+		label += "\n\taction: %s, key: %s" % [
+			Debug.to_pretty(ax.action_label), Debug.to_pretty(ax.key_str)
+			]
+
+	var lbl = RichTextLabel.new()
+	lbl.bbcode_enabled = true
+	lbl.text = label
+	lbl.scroll_active = false
+	lbl.fit_content = true
+	unhandled_input_list.add_child(lbl)
+
+
+func _unhandled_input(event):
 	new_input_label(event)
+	limit_input_list()
