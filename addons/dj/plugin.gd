@@ -25,6 +25,9 @@ func _enter_tree():
 func _exit_tree():
 	# remove_autoload_singleton("DJ")
 	# remove_autoload_singleton("DJZ")
+	if turn_table:
+		turn_table.free()
+
 	Debug.prn("</DJ>")
 
 

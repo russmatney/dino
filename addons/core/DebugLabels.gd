@@ -118,6 +118,8 @@ func _on_rearrange_labels_pressed():
 ###############################################################
 # debug widgets
 
+# Hotel UI
+
 const hotel_ui_scene = preload("res://addons/hotel/HotelUI.tscn")
 var hotel_ui
 
@@ -128,6 +130,7 @@ func _on_toggle_hotel_db_pressed():
 		hotel_ui = hotel_ui_scene.instantiate()
 		$%ToggleHotelDB.add_sibling(hotel_ui)
 
+# DJ TurnTable
 
 const dj_turntable_scene = preload("res://addons/dj/TurnTable.tscn")
 var dj_turntable
@@ -139,6 +142,8 @@ func _on_toggle_dj_turn_table_pressed():
 		dj_turntable = dj_turntable_scene.instantiate()
 		$%ToggleDJTurnTable.add_sibling(dj_turntable)
 
+# Metro Map
+
 const metro_map_scene = preload("res://addons/metro/MetroMap.tscn")
 var metro_map
 
@@ -148,3 +153,15 @@ func _on_toggle_metro_map_pressed():
 	else:
 		metro_map = metro_map_scene.instantiate()
 		$%ToggleMetroMap.add_sibling(metro_map)
+
+# Trolley Debug
+
+const trolley_debug_scene = preload("res://addons/trolley/TrolleyDebugPanel.tscn")
+var trolley_debug
+
+func _on_toggle_trolley_debug_pressed():
+	if trolley_debug and is_instance_valid(trolley_debug):
+		trolley_debug.queue_free()
+	else:
+		trolley_debug = trolley_debug_scene.instantiate()
+		$%ToggleTrolleyDebug.add_sibling(trolley_debug)
