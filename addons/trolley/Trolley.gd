@@ -55,7 +55,7 @@ func inputs_list(opts={}):
 	if inputs_by_action_label == null or len(inputs_by_action_label) == 0:
 		build_inputs_dict()
 
-	var ignore_prefix = opts.get("ignore_prefix", "")
+	var ignore_prefix = opts.get("ignore_prefix", "ui_text_")
 	var only_prefix = opts.get("only_prefix", "")
 
 	var inputs_list = inputs_by_action_label.values()
