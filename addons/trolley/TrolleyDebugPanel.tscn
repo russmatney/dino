@@ -72,6 +72,19 @@ move vector: ([color=cornflower_blue]0[/color],[color=cornflower_blue]0[/color])
 trolley move vector: ([color=cornflower_blue]0[/color],[color=cornflower_blue]0[/color])[/color]"
 fit_content = true
 
+[node name="Joypads" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_02qw0")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]1 Joypads connected[/center]"
+fit_content = true
+
+[node name="JoypadList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="UnhandledInputsLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("5_02qw0")

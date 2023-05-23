@@ -1,18 +1,6 @@
 @tool
 extends Control
 
-
-func _ready():
-	if Engine.is_editor_hint():
-		request_ready()
-
-	var jpads = Input.get_connected_joypads()
-	Debug.pr("connected joypads", jpads)
-	for jp in jpads:
-		Debug.pr("jpad", jp, Input.get_joy_name(jp))
-
-
-
 ## reload button #######################################################################
 
 var editor_interface
@@ -25,6 +13,44 @@ func _on_reload_plugin_button_pressed():
 		Debug.pr(&"Reloaded trolley plugin -----------------------------------")
 	else:
 		Debug.pr("Trolley UI Reload Not impled outside of editor")
+
+
+## ready #######################################################################
+
+func _ready():
+	if Engine.is_editor_hint():
+		request_ready()
+
+	update_joypads()
+
+
+## joypads #######################################################################
+
+@onready var joypad_label = $%Joypads
+@onready var joypad_list = $%JoypadList
+
+func new_joypad_label(jp_id):
+	Debug.pr(jp_id, Input.get_joy_name(jp_id))
+	var label = "[center]%s: %s[/center]" % [jp_id, Input.get_joy_name(jp_id)]
+
+	var lbl = RichTextLabel.new()
+	lbl.bbcode_enabled = true
+	lbl.text = label
+	lbl.scroll_active = false
+	lbl.fit_content = true
+	joypad_list.add_child(lbl)
+
+func update_joypads():
+	var jpads = Input.get_connected_joypads()
+
+	if len(jpads) > 0:
+		joypad_label.text = "[center]%s[/center]" % str(len(jpads), " Joypads connected")
+
+	Debug.pr("connected joypads", jpads)
+
+	for ch in joypad_list.get_children():
+		ch.queue_free()
+	jpads.map(new_joypad_label)
 
 
 ## process #######################################################################
