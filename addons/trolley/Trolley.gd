@@ -1,15 +1,34 @@
 @tool
 extends Node
 
+## is this window focused?
+# https://docs.godotengine.org/en/stable/tutorials/inputs/controllers_gamepads_joysticks.html#window-focus
+var focused := true
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
+			focused = false
+		NOTIFICATION_APPLICATION_FOCUS_IN:
+			focused = true
+
+
+## input/action dicts ########################################################################
+
 var inputs_by_action_label
 var action_labels_by_input
 
+
+## ready ########################################################################
 
 func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
 	build_inputs_dict()
+
+
+## build inputs dict ########################################################################
 
 # TODO unit tests
 func build_inputs_dict():
@@ -47,6 +66,7 @@ func build_inputs_dict():
 		inputs_by_action_label[ac] = {events=evts, setting=setting, keys=keys, action=ac,
 			buttons=buttons}
 
+## inputs list ########################################################################
 
 class InputsSorter:
 	static func sort_alphabetical(a, b):
@@ -127,46 +147,52 @@ func actions_for_input(event):
 
 
 # returns a normalized Vector2 based checked the controller's movement
+# TODO rename to move_vector everywhere
 func move_dir():
-	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	return move_vector()
 
-# TODO rename move_dir everywhere
 func move_vector():
-	return move_dir()
+	if focused:
+		return Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	return Vector2.ZERO
 
 
 func is_event(event, event_name):
-	return event.is_action_pressed(event_name)
+	if focused:
+		return event.is_action_pressed(event_name)
+	return false
 
 func is_pressed(event, event_name):
-	return event.is_action_pressed(event_name)
+	return is_event(event, event_name)
 
 func is_held(event, event_name):
-	return event.is_action_pressed(event_name)
+	return is_event(event, event_name)
 
 func is_event_released(event, event_name):
-	return event.is_action_released(event_name)
+	if focused:
+		return event.is_action_released(event_name)
+	return false
 
 func is_jump(event):
-	return event.is_action_pressed("jump")
+	return is_event(event, "jump")
 
 func is_attack(event):
-	return event.is_action_pressed("attack")
+	return is_event(event, "attack")
 
 func is_action(event):
-	return event.is_action_pressed("action")
+	return is_event(event, "action")
 
 func is_cycle_next_action(event):
-	return event.is_action_pressed("cycle_next_action")
+	return is_event(event, "cycle_next_action")
 
 func is_cycle_prev_action(event):
-	return event.is_action_pressed("cycle_previous_action")
+	return is_event(event, "cycle_previous_action")
 
 func is_pause(event):
-	return event.is_action_pressed("pause")
+	return is_event(event, "pause")
 
 func is_close(event):
-	return event.is_action_pressed("close")
+	return is_event(event, "close")
 
 func is_debug_toggle(event):
-	return event.is_action_pressed("debug_toggle")
+	return is_event(event, "debug_toggle")
