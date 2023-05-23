@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://qm52orrv1o6a"]
+[gd_scene load_steps=6 format=3 uid="uid://qm52orrv1o6a"]
 
 [ext_resource type="Script" path="res://addons/trolley/TrolleyDebugPanel.gd" id="1_banen"]
 [ext_resource type="PackedScene" path="res://addons/trolley/TrolleyActionsList.tscn" id="2_6ywdq"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_pthux"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_jvsmn"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="5_02qw0"]
 
 [node name="TrolleyDebugPanel" type="Control"]
 layout_mode = 3
@@ -43,12 +44,46 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_jvsmn")
 text = "Reload"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ActionsList" parent="VBoxContainer/ScrollContainer" instance=ExtResource("2_6ywdq")]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ActionsList" parent="VBoxContainer/HBoxContainer2/ScrollContainer" instance=ExtResource("2_6ywdq")]
 layout_mode = 2
 ignore_prefix = ""
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActiveControlsLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_02qw0")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[color=dark_gray][center]Active Controls:[/center]
+move vector: ([color=cornflower_blue]0[/color],[color=cornflower_blue]0[/color]), 
+trolley move vector: ([color=cornflower_blue]0[/color],[color=cornflower_blue]0[/color])[/color]"
+fit_content = true
+
+[node name="UnhandledInputsLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_02qw0")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Unhandled Inputs:[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="UnhandledInputList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ReloadPluginButton" to="." method="_on_reload_plugin_button_pressed"]

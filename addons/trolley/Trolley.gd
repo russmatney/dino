@@ -43,9 +43,12 @@ class InputsSorter:
 
 # TODO write unit tests, use parse_input_event to test controls
 # TODO maybe support filtering out inputs by prefix
-func inputs_list(ignore_prefix = "", only_prefix = ""):
+func inputs_list(opts={}):
 	if inputs == null or len(inputs) == 0:
 		build_inputs_dict()
+
+	var ignore_prefix = opts.get("ignore_prefix", "")
+	var only_prefix = opts.get("only_prefix", "")
 
 	var inputs_list = inputs.values()
 	# TODO this prints bad-comparision function error?
@@ -91,6 +94,10 @@ func move_dir():
 		v_diff.y -= 1
 
 	return v_diff.normalized()
+
+# TODO rename everywhere
+func move_vector():
+	return move_dir()
 
 
 func is_event(event, event_name):

@@ -23,7 +23,7 @@ func _exit_tree():
 	# remove_autoload_singleton("Trolley")
 
 	if trolley_debug_panel:
-		trolley_debug_panel.free()
+		trolley_debug_panel.queue_free()
 	Debug.prn("</Trolley>")
 
 
