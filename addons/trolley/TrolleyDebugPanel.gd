@@ -30,9 +30,7 @@ func _ready():
 @onready var joypad_list = $%JoypadList
 
 func new_joypad_label(jp_id):
-	Debug.pr(jp_id, Input.get_joy_name(jp_id))
 	var label = "[center]%s: %s[/center]" % [jp_id, Input.get_joy_name(jp_id)]
-
 	var lbl = RichTextLabel.new()
 	lbl.bbcode_enabled = true
 	lbl.text = label
@@ -90,7 +88,7 @@ func new_input_label(event):
 	var label = "[center]raw: %s[/center]" % Debug.to_pretty(event)
 	for ax in axs:
 		label += "\n\t%s: %s" % [
-			Debug.to_pretty(ax.key_str),
+			Debug.to_pretty(ax.key_str) if "key_str" in ax else Debug.to_pretty(ax.btn_idx),
 			Debug.to_pretty(ax.action_label),
 			]
 

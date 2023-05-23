@@ -11,7 +11,6 @@ func _ready():
 
 	build_inputs_dict()
 
-
 # TODO unit tests
 func build_inputs_dict():
 	# apparently we need to reload this
@@ -25,6 +24,7 @@ func build_inputs_dict():
 		var setting = ProjectSettings.get_setting(str("input/", ac))
 
 		var keys = []
+		var buttons = []
 		for evt in evts:
 			if evt is InputEventKey:
 				var key_str = OS.get_keycode_string(evt.keycode)
@@ -33,10 +33,19 @@ func build_inputs_dict():
 
 				if not key_str in action_labels_by_input:
 					action_labels_by_input[key_str] = []
-
 				action_labels_by_input[key_str].append(ac)
 
-		inputs_by_action_label[ac] = {events=evts, setting=setting, keys=keys, action=ac}
+			elif evt is InputEventJoypadButton:
+				var btn_idx = evt.button_index
+				buttons.append(btn_idx)
+
+				# hopefully btn_idx doesn't collide with anything
+				if not btn_idx in action_labels_by_input:
+					action_labels_by_input[btn_idx] = []
+				action_labels_by_input[btn_idx].append(ac)
+
+		inputs_by_action_label[ac] = {events=evts, setting=setting, keys=keys, action=ac,
+			buttons=buttons}
 
 
 class InputsSorter:
@@ -83,17 +92,32 @@ func keys_for_input_action(action_label):
 	if action_label in inputs_by_action_label:
 		return inputs_by_action_label[action_label]["keys"]
 
+func _axs_for_input(input):
+	var axs = []
+	var action_labels = action_labels_by_input[input]
+	for ac in action_labels:
+		axs.append({
+			input=inputs_by_action_label[ac],
+			action_label=ac,
+			})
+	return axs
+
+
 func actions_for_input(event):
+	# Debug.prn(action_labels_by_input)
 	var axs = []
 	if event is InputEventKey:
 		var key_str = OS.get_keycode_string(event.keycode)
 		if key_str in action_labels_by_input:
-			var action_labels = action_labels_by_input[key_str]
-			for ac in action_labels:
-				axs.append({
-					input=inputs_by_action_label[ac],
-					action_label=ac,
-					key_str=key_str})
+			axs.append_array(_axs_for_input(key_str).map(func(ax):
+				ax["key_str"] = key_str
+				return ax))
+	if event is InputEventJoypadButton:
+		var btn_idx = event.button_index
+		if btn_idx in action_labels_by_input:
+			axs.append_array(_axs_for_input(btn_idx).map(func(ax):
+				ax["btn_idx"] = btn_idx
+				return ax))
 	return axs
 
 
