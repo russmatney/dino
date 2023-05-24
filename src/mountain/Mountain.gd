@@ -32,10 +32,9 @@ func _on_player_death():
 # register
 
 func register():
-	# look, two different menu mgmt systems!
-	# TODO pick one pattern for this
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
 	main_menu_scene = load("res://src/mountain/menus/MainMenu.tscn")
-	Navi.set_pause_menu("res://src/mountain/menus/PauseMenu.tscn")
+	register_menus()
 
 	# is this required anymore?
 	Hotel.add_root_group(Metro.zones_group)

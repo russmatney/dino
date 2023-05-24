@@ -17,7 +17,9 @@ func manages_scene(scene):
 var first_zone
 
 func register():
-	Debug.pr("Registering DungeonCrawler Zones")
+	Debug.pr("Registering DungeonCrawler")
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+	register_menus()
 
 	for sfp in zones:
 		Hotel.book(sfp)

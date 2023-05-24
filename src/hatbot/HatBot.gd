@@ -27,6 +27,10 @@ func manages_scene(scene):
 var first_zone
 
 func register():
+	# TODO um, hatbot should get it's own pause menu with a map
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+	register_menus()
+
 	Debug.pr("Registering HatBot Zones")
 	Hotel.add_root_group(Metro.zones_group)
 

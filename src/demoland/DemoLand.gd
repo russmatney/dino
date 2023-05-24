@@ -1,8 +1,7 @@
 @tool
 extends DinoGame
 
-###########################################################
-# zones
+## zones #########################################################
 
 const demoland_zones = [
 	"res://src/demoland/zones/area01/Area01.tscn",
@@ -15,8 +14,7 @@ const demoland_zones = [
 	"res://src/demoland/zones/Area08AllTheThings.tscn",
 	]
 
-###########################################################
-# register
+## register #########################################################
 
 func manages_scene(scene):
 	return scene.scene_file_path in demoland_zones
@@ -24,6 +22,9 @@ func manages_scene(scene):
 var first_zone
 
 func register():
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+	register_menus()
+
 	Debug.pr("Registering DemoLand Zones")
 	Hotel.add_root_group(Metro.zones_group)
 
@@ -37,8 +38,7 @@ func register():
 
 	Debug.pr("DemoLand registered", len(zones), "zones and first zone ", first_zone)
 
-###########################################################
-# player
+## player #########################################################
 
 var player_scene = preload("res://src/hatbot/player/Monster.tscn")
 
@@ -49,8 +49,7 @@ func get_spawn_coords():
 	# TODO consider non-global usage of Metro here
 	return Metro.get_spawn_coords()
 
-###########################################################
-# start
+## start #########################################################
 
 func start():
 	Debug.prn("Starting DemoLand!")

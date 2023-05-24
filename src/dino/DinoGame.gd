@@ -14,10 +14,18 @@ func on_player_spawned(_player):
 	pass
 
 var main_menu_scene
+@onready var pause_menu_scene = Navi.pause_menu_scene
+@onready var win_menu_scene = Navi.win_menu_scene
+@onready var death_menu_scene = Navi.death_menu_scene
 
+func register_menus():
+	Navi.set_pause_menu(pause_menu_scene)
+	Navi.set_win_menu(win_menu_scene)
+	Navi.set_death_menu(death_menu_scene)
+
+# register menus and static zones/scenes you may need in Hotel
 func register():
-	# register any static zones/scenes with Hotel
-	Debug.warn("register() not implemented")
+	register_menus()
 
 func start():
 	# load the first level, maybe pull from a saved game

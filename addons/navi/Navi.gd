@@ -119,8 +119,7 @@ func _deferred_goto_scene(path_or_packed_scene):
 	find_focus()
 
 
-#####################################################################
-# add child
+## add child ###################################################################
 
 
 # helper for adding a child to the current scene
@@ -129,8 +128,7 @@ func add_child_to_current(child):
 	current_scene.add_child.call_deferred(child)
 
 
-#####################################################################
-# main menu
+## main menu ###################################################################
 
 var main_menu_path = "res://src/dino/DinoMenu.tscn"
 
@@ -155,10 +153,22 @@ func nav_to_main_menu():
 
 ## pause ###################################################################
 
+# TODO move to Util
+func to_scene_path(path_or_scene):
+	var path
+	if path_or_scene is String:
+		path = path_or_scene
+	elif path_or_scene is PackedScene:
+		path = path_or_scene.resource_path
+	else:
+		Debug.warn("Unrecognized type in to_scene_path", path_or_scene)
+	return path
+
 @export var pause_menu_scene: PackedScene = preload("res://addons/navi/NaviPauseMenu.tscn")
 var pause_menu
 
-func set_pause_menu(path):
+func set_pause_menu(path_or_scene):
+	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if pause_menu:
 			if pause_menu.scene_file_path == path:
@@ -213,7 +223,8 @@ func resume():
 @export var death_menu_scene: PackedScene = preload("res://addons/navi/NaviDeathMenu.tscn")
 var death_menu
 
-func set_death_menu(path):
+func set_death_menu(path_or_scene):
+	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if death_menu:
 			if death_menu.scene_file_path == path:
@@ -243,7 +254,8 @@ func hide_death_menu():
 @export var win_menu_scene: PackedScene = preload("res://addons/navi/NaviWinMenu.tscn")
 var win_menu
 
-func set_win_menu(path):
+func set_win_menu(path_or_scene):
+	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if win_menu:
 			if win_menu.scene_file_path == path:
