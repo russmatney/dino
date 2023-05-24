@@ -41,10 +41,13 @@ func _ready():
 ## process ###################################################################
 
 var focused_node
+var attempted_focus_for_scene
 func _process(_delta):
 	# PERF could only run this when in a menu/control/ui screen
 	var new_focused_node = get_viewport().gui_get_focus_owner()
-	if new_focused_node != focused_node:
+	if new_focused_node == null and attempted_focus_for_scene != current_scene:
+		find_focus()
+	elif new_focused_node != focused_node:
 		focused_node = new_focused_node
 		_on_focus_changed(focused_node)
 
@@ -54,10 +57,22 @@ func _process(_delta):
 func _on_focus_changed(control: Control) -> void:
 	Debug.pr("focus change", control)
 	if control == null:
-		Debug.pr("no focused node, attempting set_focus", current_scene)
-		if current_scene.has_method("set_focus"):
-			current_scene.set_focus()
+		find_focus()
 
+# this might compete with grab_focus, should only be called if there is nothing in focus
+func find_focus():
+	attempted_focus_for_scene = current_scene
+	Debug.pr("no focused node, attempting set_focus", current_scene)
+	if current_scene.has_method("set_focus"):
+		current_scene.set_focus()
+	else:
+		Debug.pr("searching for something to focus on")
+		# TODO likely there are things besides button to focus on
+		var btns = current_scene.find_children("*", "BaseButton", true, false)
+		if len(btns) > 0:
+			btns[0].grab_focus()
+		else:
+			Debug.pr("no buttons, not sure what to focus on")
 
 ## nav_to ###################################################################
 
@@ -102,6 +117,9 @@ func _deferred_goto_scene(path_or_packed_scene):
 	get_tree().get_root().add_child(current_scene)
 	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
 	get_tree().set_current_scene(current_scene)
+
+	# set the focus for the current scene
+	find_focus()
 
 
 #####################################################################
