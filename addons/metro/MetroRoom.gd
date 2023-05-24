@@ -2,6 +2,9 @@
 class_name MetroRoom
 extends Node2D
 
+
+@export var debugging = false
+
 ###########################################################
 # enter tree
 
@@ -105,6 +108,8 @@ func used_rect() -> Rect2:
 	var r = Rect2()
 	for tmap in tilemaps():
 		var t_rect = tilemap_to_rect(tmap)
+		if r.position == Vector2.ZERO:
+			r.position = t_rect.position
 		r = r.merge(t_rect)
 	return r
 
