@@ -6,6 +6,11 @@ var menu_scenes = [
 		label="Start",
 		fn=Game.restart_game.bind(Mountain),
 	},
+	{
+		label="Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
+	},
 ]
 
 # default button scene

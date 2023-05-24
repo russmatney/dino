@@ -7,6 +7,11 @@ var button_defs = [
 		"label": "Start Game",
 		"fn": Game.restart_game.bind(HatBot),
 	},
+	{
+		label="Return to Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
+	},
 ]
 
 

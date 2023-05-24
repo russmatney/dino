@@ -7,8 +7,13 @@ var button_defs = [
 		nav_to="res://src/dino/DinoCredits.tscn",
 	},
 	{
-		label="Return to Main Menu",
+		label="Game Menu",
 		fn=Game.load_main_menu,
+	},
+	{
+		label="Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
 ]
 

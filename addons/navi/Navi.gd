@@ -55,24 +55,21 @@ func _process(_delta):
 ## focus changes ###################################################################
 
 func _on_focus_changed(control: Control) -> void:
-	Debug.pr("focus change", control)
 	if control == null:
 		find_focus()
 
 # this might compete with grab_focus, should only be called if there is nothing in focus
-func find_focus():
-	attempted_focus_for_scene = current_scene
-	Debug.pr("no focused node, attempting set_focus", current_scene)
-	if current_scene.has_method("set_focus"):
-		current_scene.set_focus()
+func find_focus(scene=null):
+	if scene == null:
+		scene = current_scene
+	attempted_focus_for_scene = scene
+	if scene.has_method("set_focus"):
+		scene.set_focus()
 	else:
-		Debug.pr("searching for something to focus on")
-		# TODO likely there are things besides button to focus on
-		var btns = current_scene.find_children("*", "BaseButton", true, false)
+		# TODO likely there are things besides buttons to focus on
+		var btns = scene.find_children("*", "BaseButton", true, false)
 		if len(btns) > 0:
 			btns[0].grab_focus()
-		else:
-			Debug.pr("no buttons, not sure what to focus on")
 
 ## nav_to ###################################################################
 
@@ -163,9 +160,13 @@ var pause_menu
 
 func set_pause_menu(path):
 	if ResourceLoader.exists(path):
-		Debug.prn("Updating pause_menu: ", path)
 		if pause_menu:
+			if pause_menu.scene_file_path == path:
+				Debug.prn("Same path, leaving current pause_menu in place", path)
+				return
+			# is there a race-case here?
 			pause_menu.queue_free()
+		Debug.prn("Updating pause_menu: ", path)
 		pause_menu = add_menu(load(path))
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set pause menu.")
@@ -191,7 +192,7 @@ func pause():
 	get_tree().paused = true
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
-		pause_menu.set_focus()
+		find_focus(pause_menu)
 	DJ.pause_game_song()
 	DJ.resume_menu_song()
 	pause_toggled.emit(true)
@@ -214,9 +215,12 @@ var death_menu
 
 func set_death_menu(path):
 	if ResourceLoader.exists(path):
-		Debug.prn("Updating death_menu: ", path)
 		if death_menu:
+			if death_menu.scene_file_path == path:
+				Debug.prn("Same path, leaving current death_menu in place", path)
+				return
 			death_menu.queue_free()
+		Debug.prn("Updating death_menu: ", path)
 		death_menu = add_menu(load(path))
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set death menu.")
@@ -226,7 +230,7 @@ func show_death_menu():
 	Debug.prn("Show death screen")
 	DJ.pause_game_song()
 	death_menu.show()
-	death_menu.set_focus()
+	find_focus(death_menu)
 
 
 func hide_death_menu():
@@ -241,9 +245,12 @@ var win_menu
 
 func set_win_menu(path):
 	if ResourceLoader.exists(path):
-		Debug.prn("Updating win_menu: ", path)
 		if win_menu:
+			if win_menu.scene_file_path == path:
+				Debug.prn("Same path, leaving current win_menu in place", path)
+				return
 			win_menu.queue_free()
+		Debug.prn("Updating win_menu: ", path)
 		win_menu = add_menu(load(path))
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set win menu.")
@@ -252,7 +259,7 @@ func show_win_menu():
 	Debug.prn("Show win screen")
 	DJ.pause_game_song()
 	win_menu.show()
-	win_menu.set_focus()
+	find_focus(win_menu)
 
 
 func hide_win_menu():

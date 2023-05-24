@@ -10,6 +10,11 @@ var menu_scenes = [
 		"label": "Credits",
 		"nav_to": "res://src/dino/DinoCredits.tscn",
 	},
+	{
+		label="Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
+	},
 ]
 
 

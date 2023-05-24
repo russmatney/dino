@@ -12,12 +12,17 @@ func restart():
 
 var button_defs = [
 	{
-		"label": "Restart",
-		"fn": self.restart,
+		label="Restart",
+		fn=self.restart,
 	},
 	{
-		"label": "Return to Main Menu",
-		"fn": self.return_to_main_menu,
+		label="Harvey Menu",
+		fn=Game.load_main_menu,
+	},
+	{
+		label="Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
 ]
 

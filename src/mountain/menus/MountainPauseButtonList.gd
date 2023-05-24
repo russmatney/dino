@@ -3,12 +3,17 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		label="Main Menu",
+		label="Resume Game",
+		fn=Navi.resume,
+	},
+	{
+		label="Game Menu",
 		fn=Game.load_main_menu,
 	},
 	{
-		label="Resume Game",
-		fn=Navi.resume,
+		label="Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
 ]
 
