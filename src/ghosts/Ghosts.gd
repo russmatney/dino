@@ -23,6 +23,8 @@ func manages_scene(scene):
 var first_room
 
 func register():
+	main_menu_scene = load("res://src/ghosts/GhostsMenu.tscn")
+	register_menus()
 	Debug.pr("Registering GhostHouse Rooms")
 	Hotel.add_root_group(rooms_group)
 

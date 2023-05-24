@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://du0rpv4iljlub"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_70tql"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_46u0y"]
