@@ -2,6 +2,7 @@ extends Node
 
 
 func _ready():
+	# TODO register in Game.register()
 	if OS.has_feature("harvey"):
 		Navi.set_main_menu("res://src/harvey/menus/HarveyMenu.tscn")
 		Navi.set_pause_menu("res://src/harvey/menus/HarveyPauseMenu.tscn")
@@ -37,6 +38,8 @@ func time_up(produce_counts):
 	t.paused = true
 	DJ.resume_menu_song()
 	time_up_menu.show()
+	# TODO fix in some centralized way
+	Navi.find_focus(time_up_menu)
 	time_up_menu.set_score(produce_counts)
 
 

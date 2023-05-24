@@ -22,9 +22,3 @@ func update_hero_text(text):
 
 func update_buttons():
 	buttons.rebuild()
-	set_focus()
-
-func set_focus():
-	var chs = buttons.get_children()
-	if len(chs) > 0:
-		chs[0].grab_focus()

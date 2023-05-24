@@ -72,11 +72,15 @@ func handle_level_complete():
 		next_level_menu.update_hero_text("You Win!")
 		next_level_menu.update_buttons()
 		next_level_menu.show()
+		# TODO fix in some centralized way
+		Navi.find_focus(next_level_menu)
 	else:
 		next_level_menu.update_sheep_saved()
 		next_level_menu.update_hero_text("Level Complete!")
 		next_level_menu.update_buttons()
 		next_level_menu.show()
+		# TODO fix in some centralized way
+		Navi.find_focus(next_level_menu)
 
 func no_more_levels():
 	return level_idx >= len(levels) - 1
