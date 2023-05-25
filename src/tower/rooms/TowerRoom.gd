@@ -166,7 +166,7 @@ func add_pickups():
 ########################################################################
 # player spawn point
 
-var player_spawner_scene = preload("res://src/tower/PlayerSpawner.tscn")
+var player_spawn_point_scene = preload("res://src/dino/PlayerSpawnPoint.tscn")
 
 
 func add_player_spawner():
@@ -195,7 +195,7 @@ func add_player_spawner():
 	if locs.size() > 0:
 		locs.shuffle()
 		var loc = locs[0]
-		var inst = player_spawner_scene.instantiate()
+		var inst = player_spawn_point_scene.instantiate()
 		inst.position = loc["position"]
 		add_child(inst)
 		inst.unique_name_in_owner = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/tower/menus/TowerPauseButtonList.gd" id="3_5wpv7"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/tower/menus/TowerControls.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://b08yhx4eeirf7" path="res://src/tower/menus/TowerControls.tscn" id="6"]
 
 [node name="TowerPauseMenu" type="CanvasLayer"]
 process_mode = 3

@@ -1,3 +1,0 @@
-[gd_scene format=3 uid="uid://c5pslhbdfglhs"]
-
-[node name="PlayerSpawner" type="Marker2D" groups=["player_spawners"]]

@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://drqyknqja7bhd"]
 
-[ext_resource type="PackedScene" uid="uid://dy621hqwy41r4" path="res://src/ghosts/world/Door.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://src/ghosts/world/Door.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/ghosts/enemies/Glowmba.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/ghosts/world/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/ghosts/world/platforms/IndoorTiles.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://c5pslhbdfglhs" path="res://src/ghosts/player/PlayerSpawner.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="8_i4ttr"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/ghosts/world/platforms/GhostBlock.tscn" id="9"]
 [ext_resource type="Script" path="res://src/ghosts/world/GhostsRoom.gd" id="10"]
 
@@ -118,5 +118,5 @@ position = Vector2(-288, 160)
 alpha_threshold = 0.3
 offset = 1.0
 
-[node name="PlayerSpawner" parent="." instance=ExtResource("8")]
-position = Vector2(-672, 864)
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("8_i4ttr")]
+position = Vector2(-672, 856)

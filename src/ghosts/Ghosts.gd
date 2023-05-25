@@ -53,7 +53,7 @@ func get_player_scene():
 	return player_scene
 
 func get_spawn_coords():
-	var player_spawner = Util.first_node_in_group("player_spawners")
+	var player_spawner = Util.first_node_in_group("player_spawn_points")
 	if not player_spawner:
 		Debug.warn("no node in 'player_spawner' group found")
 		return
