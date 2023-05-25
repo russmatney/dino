@@ -12,7 +12,7 @@ func physics_process(delta):
 		actor.velocity.x = 0
 		return
 
-	var move_dir = Trolley.move_dir()
+	var move_dir = Trolley.move_vector()
 	actor.velocity.x = actor.speed * move_dir.x
 	actor.velocity.y += actor.gravity * delta
 	actor.set_velocity(actor.velocity)

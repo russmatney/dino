@@ -75,7 +75,7 @@ func hotel_data():
 # actions
 
 func can_execute_any_actions():
-	return move_target == null
+	return move_target == null and not machine.state.name in ["Rest"]
 
 ###########################################################################
 # _input
@@ -109,18 +109,19 @@ var GRAVITY = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var move_dir = Vector2.ZERO
 var move_target
+var move_target_threshold = 10
 
 func get_move_dir():
 	if move_target != null:
 		var towards_target = move_target - position
 		var dist = towards_target.length()
-		if dist >= 10:
+		if dist >= move_target_threshold:
 			return towards_target.normalized()
 		else:
 			return Vector2.ZERO
 		# note, no movement can occur until move_target is unset
 	else:
-		return Trolley.move_dir()
+		return Trolley.move_vector()
 
 func _physics_process(_delta):
 	# assign move_dir

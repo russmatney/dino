@@ -63,7 +63,7 @@ var move_accel := 800
 var max_speed := 300
 
 func _process(delta):
-	var move_dir = Trolley.move_dir()
+	var move_dir = Trolley.move_vector()
 	update_facing(move_dir)
 	if move_dir.length() == 0:
 		velocity = lerp(velocity, Vector2.ZERO, 0.5)

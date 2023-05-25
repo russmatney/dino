@@ -74,7 +74,7 @@ var speed := 100
 
 # overwritten in subclass
 func get_move_dir():
-	return Trolley.move_dir()
+	return Trolley.move_vector()
 
 
 ############################################################

@@ -147,10 +147,6 @@ func actions_for_input(event):
 
 
 # returns a normalized Vector2 based checked the controller's movement
-# TODO rename to move_vector everywhere
-func move_dir():
-	return move_vector()
-
 func move_vector():
 	if focused:
 		return Input.get_vector("move_left", "move_right", "move_up", "move_down")

@@ -62,7 +62,7 @@ var record_pos_in = 0
 
 
 func _process(_delta):
-	move_dir = Trolley.move_dir()
+	move_dir = Trolley.move_vector()
 
 	# TODO remove_at/replace with some other thing?
 	if get_global_position().y >= max_y:

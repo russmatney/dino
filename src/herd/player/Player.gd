@@ -58,7 +58,7 @@ var input_move_dir = Vector2.ZERO
 var facing_dir
 
 func _physics_process(_delta):
-	input_move_dir = Trolley.move_dir()
+	input_move_dir = Trolley.move_vector()
 	if input_move_dir.abs().length() > 0:
 		# TODO snap/round to discrete angles
 		facing_dir = input_move_dir

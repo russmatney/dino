@@ -23,7 +23,7 @@ var move_dir = Vector2.ZERO
 
 func _physics_process(_delta):
 	# assign move_dir
-	move_dir = Trolley.move_dir()
+	move_dir = Trolley.move_vector()
 
 	# update facing
 	if move_dir.x > 0:

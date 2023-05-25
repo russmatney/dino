@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3]
+[gd_scene load_steps=23 format=3 uid="uid://bjjpkke0g6k6e"]
 
 [ext_resource type="SpriteFrames" uid="uid://b7n3u8ytapvb4" path="res://src/hatbot/player/player_sprite_frames.tres" id="1_w3vs6"]
 [ext_resource type="Script" path="res://src/hatbot/player/Monster.gd" id="1_wj1cn"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Fall.gd" id="7_ovoef"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/KnockedBack.gd" id="8_rpcmv"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Dead.gd" id="9_betuw"]
-[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="9_ocb0p"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="9_ocb0p"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="10_68kyd"]
 [ext_resource type="PackedScene" uid="uid://beg2332ea720c" path="res://src/hatbot/powerups/Sword.tscn" id="10_a54r4"]
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Climb.gd" id="10_vycc5"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://src/hatbot/player/machine/Sit.gd" id="12_7npxa"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="17_g1yjn"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="18_6urtn"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="19_4s80g"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_67gj4"]
 cull_mode = 2
@@ -82,6 +83,8 @@ script = ExtResource("12_7npxa")
 
 [node name="Sword" parent="." instance=ExtResource("10_a54r4")]
 position = Vector2(9, -10)
+frame = 0
+frame_progress = 0.0
 
 [node name="ActionHint" parent="." instance=ExtResource("9_ocb0p")]
 position = Vector2(0, -15)
@@ -120,3 +123,16 @@ target_position = Vector2(0, 40)
 [node name="HeartParticles" parent="." instance=ExtResource("17_g1yjn")]
 
 [node name="SkullParticles" parent="." instance=ExtResource("18_6urtn")]
+
+[node name="StateLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = -24.0
+offset_top = 15.0
+offset_right = 24.0
+offset_bottom = 31.0
+theme_override_fonts/normal_font = ExtResource("19_4s80g")
+bbcode_enabled = true
+text = "[center]State"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true
