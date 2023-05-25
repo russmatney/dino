@@ -1,8 +1,7 @@
 @tool
 extends Node
 
-###########################################################
-# ready
+## ready ##########################################################
 
 func _ready():
 	Debug.prn("Game autoload ready")
@@ -13,14 +12,22 @@ func _ready():
 
 	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
-	# makes lots of things work just b/c (e.g. menus)
-	# ensure_current_game()
 
-###########################################################
-# handling current_game (for dev-mode), could live elsewhere
+## games ##########################################################
 
 # NOTE these need to auto-load BEFORE Game.gd
-var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd, SuperElevatorLevel, Mountain, Tower, Gunner]
+var games = [
+	DemoLand,
+	DungeonCrawler,
+	Ghosts,
+	Gunner,
+	Harvey,
+	HatBot,
+	Herd,
+	Mountain,
+	SuperElevatorLevel,
+	Tower,
+	]
 
 
 func game_for_scene(scene):
@@ -42,13 +49,15 @@ func ensure_current_game():
 		var current_scene = get_tree().current_scene
 		if current_scene and "scene_file_path" in current_scene:
 			Debug.pr("No current_game, setting with current scene", current_scene)
+			if current_scene.scene_file_path.begins_with("res://src/dino"):
+				return
 			set_current_game_for_scene(current_scene)
 
 	if not current_game:
 		Debug.warn("Failed to ensure current_game!")
 
-###########################################################
-# game lifecycle
+## game lifecycle ##########################################################
+
 
 var current_game: DinoGame
 
@@ -74,8 +83,7 @@ func restart_game(game):
 	current_game.start()
 
 
-###########################################################
-# game main menu
+## game menus ##########################################################
 
 func load_main_menu(game=null):
 	if game == null:
@@ -91,8 +99,7 @@ func load_main_menu(game=null):
 	Navi.nav_to_main_menu()
 
 
-###########################################################
-# player
+## player ##########################################################
 
 # TODO maybe better to let the zones respawn the player?
 func _on_new_scene_instanced(scene):
@@ -221,9 +228,7 @@ func respawn_coords():
 		return elevator.global_position
 
 
-
-###########################################################
-# dev helper functions
+## dev helper functions ##########################################################
 
 func maybe_spawn_player(opts={}):
 	# we maybe don't care for this managed check anymore

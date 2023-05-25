@@ -5,16 +5,28 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		label="Maze",
-		nav_to="res://src/dungeonCrawler/zones/Maze.tscn",
+		label="Runner",
+		nav_to="res://src/runner/park/ThePark.tscn",
 	},
 	{
-		label="Mvania Demo Map",
-		nav_to="res://src/demoland/DemoMap.tscn",
+		label="DemoLand",
+		fn=Game.restart_game.bind(DemoLand),
 	},
 	{
-		label="Mvania DemoLand",
-		nav_to="res://src/demoland/zones/area01/Area01.tscn",
+		label="Gunner",
+		fn=Game.restart_game.bind(Gunner),
+	},
+	{
+		label="Pluggs",
+		nav_to="res://src/pluggs/factory/FactoryFloor.tscn",
+	},
+	{
+		label="The Mountain",
+		fn=Game.load_main_menu.bind(Mountain),
+	},
+	{
+		label="Dungeon Crawler",
+		fn=Game.restart_game.bind(DungeonCrawler),
 	},
 ]
 

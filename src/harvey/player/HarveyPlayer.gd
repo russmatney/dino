@@ -56,7 +56,7 @@ func _unhandled_input(event):
 
 
 func on_transit(new_state):
-	if Harvey.debug_mode():
+	if not Game.is_managed:
 		set_state_label(new_state)
 
 

@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends DinoGame
 
 var song_name = DJZ.S.field_stars
 
@@ -8,10 +8,18 @@ func _ready():
 	# if not Engine.is_editor_hint():
 	# 	DJZ.play_song(song_name)
 
-	if OS.has_feature("snake"):
-		Navi.set_main_menu("res://src/snake/menus/SnakeMainMenu.tscn")
+	main_menu_scene = load("res://src/snake/menus/SnakeMainMenu.tscn")
 
-func start_game():
+func manages_scene(scene):
+	return scene.scene_file_path.begins_with("res://src/snake")
+
+func register():
+	register_menus()
+
+func should_spawn_player(_scene):
+	return false
+
+func start():
 	current_level_idx = -1
 	load_next_level()
 

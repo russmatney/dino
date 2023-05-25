@@ -1,19 +1,9 @@
 extends NaviButtonList
 
-
-func return_to_main_menu():
-	owner.hide()
-	Navi.nav_to_main_menu()
-
-
-func restart():
-	owner.hide()
-	Harvey.restart_game()
-
 var button_defs = [
 	{
 		label="Restart",
-		fn=self.restart,
+		fn=Game.restart_game.bind(Harvey),
 	},
 	{
 		label="Harvey Menu",

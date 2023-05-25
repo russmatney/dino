@@ -13,7 +13,7 @@ var button_defs = [
 	},
 	{
 		label="Restart",
-		fn=self.restart,
+		fn=Game.restart_game.bind(Harvey)
 	},
 	{
 		label="Harvey Menu",

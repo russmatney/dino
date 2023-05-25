@@ -3,12 +3,12 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		"label": "Play",
-		"fn": SnakeGame.start_game,
+		label="Play",
+		fn=Game.restart_game.bind(SnakeGame),
 	},
 	{
-		"label": "Credits",
-		"nav_to": "res://src/dino/DinoCredits.tscn",
+		label="Credits",
+		nav_to="res://src/dino/DinoCredits.tscn",
 	},
 	{
 		label="Dino Menu",
