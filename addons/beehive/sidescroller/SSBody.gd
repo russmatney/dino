@@ -48,6 +48,7 @@ var is_player
 
 # nodes
 
+var coll
 var machine
 var state_label
 var anim
@@ -82,6 +83,7 @@ func _ready():
 		machine = $SSMachine
 		state_label = $StateLabel
 		anim = $AnimatedSprite2D
+		coll = $CollisionShape2D
 		if get_node_or_null("CamPOF"):
 			cam_pof = get_node("CamPOF")
 
@@ -96,6 +98,10 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
+
+func get_rect():
+	if coll != null:
+		return coll.shape.get_rect()
 
 ## on_transit ###########################################################
 
@@ -159,9 +165,16 @@ func take_damage(hit_type, body):
 	match hit_type:
 		"bump":
 			attack_damage = body.bump_damage
+		_:
+			Debug.warn("using fallback damage (1)")
+			attack_damage = 1
 	var damage = attack_damage - defense
 	health -= damage
 	Hotel.check_in(self)
+
+	# TODO restore sound on hurt?
+	# if is_player:
+	# 	DJZ.play(DJZ.S.playerhurt)
 
 ## recover health ###########################################################
 
@@ -173,6 +186,12 @@ func recover_health(h=null):
 		health += h
 	Hotel.check_in(self)
 
+	# TODO restore sound on heal
+	# if is_player:
+	# 	DJZ.play(DJZ.S.playerheal)
+	# # force one-shot emission
+	# heart_particles.set_emitting(true)
+	# heart_particles.restart()
 
 ## hurt_box ###########################################################
 

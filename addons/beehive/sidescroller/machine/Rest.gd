@@ -8,8 +8,14 @@ var rest_ttl
 func enter(opts = {}):
 	actor.anim.play("rest")
 	rest_ttl = opts.get("rest_time", rest_time)
-	actor.recover_health()
 
+	DJZ.play(DJZ.S.playerheal)
+	if "heart_particles" in actor:
+		# force one-shot emission
+		actor.heart_particles.set_emitting(true)
+		actor.heart_particles.restart()
+
+	actor.recover_health()
 
 ## exit ###########################################################
 

@@ -9,7 +9,8 @@ func _ready():
 ## player ####################################################################
 
 # TODO support player selection
-var player_scene = preload("res://src/superElevatorLevel/players/PlayerOne.tscn")
+func get_player_scene():
+	return load("res://src/superElevatorLevel/players/PlayerOne.tscn")
 
 func on_player_spawned(player):
 	player.died.connect(on_player_died.bind(player), CONNECT_ONE_SHOT)

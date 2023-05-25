@@ -1,7 +1,6 @@
 @tool
 extends SSPlayer
 
-@onready var coll = $CollisionShape2D
 @onready var action_detector = $ActionDetector
 @onready var action_hint = $ActionHint
 @onready var warp_cast = $WarpCast
@@ -25,10 +24,6 @@ func _ready():
 		# include opting into keybindings and current-ax updates
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return not machine.state.name in ["Rest"]})
-
-func get_rect():
-	if coll != null:
-		return coll.shape.get_rect()
 
 
 ## actions ##################################################################

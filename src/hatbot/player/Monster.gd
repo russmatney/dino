@@ -111,7 +111,7 @@ var move_dir = Vector2.ZERO
 var move_target
 var move_target_threshold = 10
 
-func get_move_dir():
+func get_move_vector():
 	if move_target != null:
 		var towards_target = move_target - position
 		var dist = towards_target.length()
@@ -125,7 +125,7 @@ func get_move_dir():
 
 func _physics_process(_delta):
 	# assign move_dir
-	move_dir = get_move_dir()
+	move_dir = get_move_vector()
 
 	if move_dir:
 		# update facing
@@ -159,7 +159,6 @@ func clear_move_target():
 func stamp(opts={}):
 	if not Engine.is_editor_hint() and move_target == null:
 		var new_scale = opts.get("scale", 0.3)
-		var ttl = opts.get("ttl", 0.5)
 		var new_anim = AnimatedSprite2D.new()
 		new_anim.sprite_frames = anim.sprite_frames
 		new_anim.animation = anim.animation
@@ -169,10 +168,10 @@ func stamp(opts={}):
 			var ax_hint = action_hint.duplicate()
 			new_anim.add_child(ax_hint)
 
-		# definitely more position work to do...?
 		new_anim.global_position = global_position + anim.position
 		Navi.add_child_to_current(new_anim)
 
+		var ttl = opts.get("ttl", 0.5)
 		if ttl > 0:
 			var t = create_tween()
 			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
@@ -226,6 +225,7 @@ signal player_death
 
 var max_health = 6
 var health = max_health
+var death_count = 0
 
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
@@ -242,7 +242,6 @@ func heal(opts={}):
 	anim.play("sit")
 
 	# force one-shot emission
-	Debug.pr(heart_particles)
 	heart_particles.set_emitting(true)
 	heart_particles.restart()
 
@@ -250,8 +249,6 @@ func heal(opts={}):
 	health += h
 	health = clamp(health, 0, max_health)
 	Hotel.check_in(self)
-
-var death_count = 0
 
 var death_jumbo_open = false
 
