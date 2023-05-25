@@ -1,9 +1,5 @@
 extends NaviButtonList
 
-func restart():
-	owner.hide()
-	Gunner.restart_game()
-
 var button_defs = [
 	{
 		label="Resume",
@@ -11,7 +7,7 @@ var button_defs = [
 	},
 	{
 		label="Restart",
-		fn=self.restart,
+		fn=Game.restart_game.bind(Gunner),
 	},
 	{
 		label="Gunner Menu",

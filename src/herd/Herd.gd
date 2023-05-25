@@ -1,6 +1,11 @@
 @tool
 extends DinoGame
 
+func _ready():
+	main_menu_scene = load("res://src/herd/menus/MainMenu.tscn")
+	# TODO build up navi menus helpers (re: focus handling, menu hiding on nav, etc)
+	next_level_menu = Navi.add_menu(next_level_menu_sfp)
+
 ######################################################
 # level menu
 
@@ -19,7 +24,7 @@ func should_spawn_player(scene):
 	return not scene.scene_file_path.begins_with("res://src/herd/menus")
 
 func register():
-	next_level_menu = Navi.add_menu(next_level_menu_sfp)
+	register_menus()
 
 ######################################################
 # level mgmt

@@ -5,24 +5,24 @@ extends NaviButtonList
 # TODO create and include icons for each game
 var menu_scenes = [
 	{
-		label="Hatbot",
-		nav_to="res://src/hatbot/menus/MainMenu.tscn",
+		label="HatBot",
+		fn=Game.load_main_menu.bind(HatBot),
 	},
 	{
 		label="Super Elevator Level",
-		nav_to="res://src/superElevatorLevel/menus/MainMenu.tscn",
+		fn=Game.load_main_menu.bind(SuperElevatorLevel),
 	},
 	{
 		label="The Mountain",
-		nav_to="res://src/mountain/menus/MainMenu.tscn",
+		fn=Game.load_main_menu.bind(Mountain),
 	},
 	{
 		label="Herd",
-		nav_to="res://src/herd/menus/MainMenu.tscn",
+		fn=Game.load_main_menu.bind(Herd),
 	},
 	{
 		label="Dungeon Crawler",
-		nav_to="res://src/dungeonCrawler/zones/TwoGeon.tscn",
+		fn=Game.restart_game.bind(DungeonCrawler),
 	},
 	{
 		label="Runner",
@@ -30,7 +30,7 @@ var menu_scenes = [
 	},
 	{
 		label="Ghost House",
-		nav_to="res://src/ghosts/GhostsMenu.tscn",
+		fn=Game.load_main_menu.bind(Ghosts),
 	},
 	{
 		label="Pluggs",
@@ -42,11 +42,11 @@ var menu_scenes = [
 	},
 	{
 		label="Gunner",
-		nav_to="res://src/gunner/player/PlayerGym.tscn",
+		fn=Game.restart_game.bind(Gunner),
 	},
 	{
 		label="Tower",
-		nav_to="res://src/tower/menus/TowerMainMenu.tscn",
+		fn=Game.load_main_menu.bind(Tower),
 	},
 	{
 		label="Snake",

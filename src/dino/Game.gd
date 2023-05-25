@@ -20,7 +20,7 @@ func _ready():
 # handling current_game (for dev-mode), could live elsewhere
 
 # NOTE these need to auto-load BEFORE Game.gd
-var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd, SuperElevatorLevel, Mountain]
+var games = [HatBot, DemoLand, DungeonCrawler, Ghosts, Herd, SuperElevatorLevel, Mountain, Tower, Gunner]
 
 
 func game_for_scene(scene):
@@ -60,6 +60,7 @@ func register_current_game(game):
 	game.register()
 
 func restart_game(game):
+	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
 	is_managed = true
 
@@ -75,14 +76,17 @@ func restart_game(game):
 ###########################################################
 # game main menu
 
-func load_main_menu():
-	if current_game and current_game.main_menu_scene != null:
+func load_main_menu(game=null):
+	if game == null:
+		game = current_game
+	if game and game.main_menu_scene != null:
 		Navi.death_menu.hide()
 		Navi.win_menu.hide()
-		Navi.nav_to(current_game.main_menu_scene)
+		Navi.pause_menu.hide()
+		Navi.nav_to(game.main_menu_scene)
 		return
 
-	Debug.pr("No current game or no main_menu_scene in current_game, naving to fallback main menu.")
+	Debug.pr("No main_menu_scene in game or current_game, naving to fallback main menu.")
 	Navi.nav_to_main_menu()
 
 

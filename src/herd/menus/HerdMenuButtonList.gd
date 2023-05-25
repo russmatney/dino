@@ -3,8 +3,13 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		"label": "Start Game",
-		"fn": Game.restart_game.bind(Herd),
+		label="Start Game",
+		fn=Game.restart_game.bind(Herd),
+	},
+	{
+		label="Dino Menu",
+		fn=Navi.nav_to_main_menu,
+		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
 	{
 		label="Credits",

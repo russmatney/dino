@@ -3,16 +3,12 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		"label": "Play",
-		"fn": Tower.restart_game.bind({"regen": true}),
+		label="Play",
+		fn=Game.restart_game.bind(Tower),
 	},
-	# {
-	# 	"label": "Play (fixed world)",
-	# 	"fn": Tower.restart_game,
-	# },
 	{
-		"label": "Credits",
-		"nav_to": "res://src/dino/DinoCredits.tscn",
+		label="Credits",
+		nav_to="res://src/dino/DinoCredits.tscn",
 	},
 	{
 		label="Return to Dino Menu",

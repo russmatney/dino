@@ -1,14 +1,19 @@
 @tool
 extends DinoGame
 
-###########################################################
-# hatbot data
+func _ready():
+	# TODO hatbot should get it's own pause menu with a map
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+	main_menu_scene = load("res://src/hatbot/menus/MainMenu.tscn")
+
+## data ##########################################################
+
 
 enum Powerup { Sword, DoubleJump, Climb, Read }
 var all_powerups = [Powerup.Sword, Powerup.DoubleJump, Powerup.Climb]
 
-###########################################################
-# hatbot zones
+
+## zones ##########################################################
 
 const zone_scenes = [
 	"res://src/hatbot/zones/LevelZero.tscn",
@@ -18,8 +23,8 @@ const zone_scenes = [
 	"res://src/hatbot/zones/Volcano.tscn",
 	]
 
-###########################################################
-# register
+
+## register ##########################################################
 
 func manages_scene(scene):
 	return scene.scene_file_path in zone_scenes
@@ -27,8 +32,6 @@ func manages_scene(scene):
 var first_zone
 
 func register():
-	# TODO um, hatbot should get it's own pause menu with a map
-	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
 	register_menus()
 
 	Debug.pr("Registering HatBot Zones")
@@ -46,8 +49,8 @@ func register():
 
 	Debug.pr("HatBot registered", len(zones), "zones and first zone ", first_zone)
 
-###########################################################
-# player
+
+## player ##########################################################
 
 var player_scene = preload("res://src/hatbot/player/Monster.tscn")
 
@@ -58,8 +61,8 @@ func get_spawn_coords():
 	# TODO consider non-global usage of Metro here
 	return Metro.get_spawn_coords()
 
-###########################################################
-# start
+
+## start ##########################################################
 
 func start():
 	Debug.prn("Starting HatBot!")

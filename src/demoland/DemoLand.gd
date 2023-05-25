@@ -1,6 +1,9 @@
 @tool
 extends DinoGame
 
+func _ready():
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+
 ## zones #########################################################
 
 const demoland_zones = [
@@ -22,7 +25,6 @@ func manages_scene(scene):
 var first_zone
 
 func register():
-	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
 	register_menus()
 
 	Debug.pr("Registering DemoLand Zones")

@@ -1,6 +1,9 @@
 @tool
 extends DinoGame
 
+func _ready():
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+
 ###########################################################
 # zones
 
@@ -18,7 +21,6 @@ var first_zone
 
 func register():
 	Debug.pr("Registering DungeonCrawler")
-	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
 	register_menus()
 
 	for sfp in zones:

@@ -1,12 +1,15 @@
 @tool
 extends DinoGame
 
+func _ready():
+	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
+	main_menu_scene = load("res://src/mountain/menus/MainMenu.tscn")
+
 const zones = [
 	"res://src/mountain/zones/TheMountain.tscn"
 	]
 
-######################################################
-# manages scene
+## manages #####################################################
 
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/mountain")
@@ -32,8 +35,6 @@ func _on_player_death():
 # register
 
 func register():
-	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
-	main_menu_scene = load("res://src/mountain/menus/MainMenu.tscn")
 	register_menus()
 
 	# is this required anymore?

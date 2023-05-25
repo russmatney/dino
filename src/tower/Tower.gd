@@ -1,30 +1,24 @@
 @tool
-extends Node
-
-var deving_tower = false
-
-@onready var tower_hud = preload("res://src/tower/hud/HUD.tscn")
-
+extends DinoGame
 
 func _ready():
-	if OS.has_feature("tower") or deving_tower:
-		Navi.set_pause_menu("res://src/tower/menus/TowerPauseMenu.tscn")
-		Navi.set_main_menu("res://src/tower/menus/TowerMainMenu.tscn")
-		Hood.set_hud_scene(tower_hud)
+	pause_menu_scene = load("res://src/tower/menus/TowerPauseMenu.tscn")
+	main_menu_scene = load("res://src/tower/menus/TowerMainMenu.tscn")
 
 
-func _unhandled_input(event):
-	# consider making this a hold-for-two-seconds
-	if deving_tower:
-		if Trolley.is_event(event, "restart"):
-			Hood.notif("Regenerating rooms")
-			Navi.current_scene.regen_all_rooms()
-			# Hood.notif("Restarting Game")
-			# restart_game()
+## register #########################################################################
+
+func register():
+	register_menus()
+
+func manages_scene(scene):
+	return scene.scene_file_path.begins_with("res://src/tower")
+
+func should_spawn_player(scene):
+	return not scene.scene_file_path.begins_with("res://src/tower/menus")
 
 
-###########################################################################
-# (re)start game
+## start game #########################################################################
 
 var levels = [
 	"res://src/tower/maps/TowerClimb1.tscn",
@@ -34,50 +28,37 @@ var levels = [
 	"res://src/tower/maps/TowerClimb5.tscn",
 ]
 
-
-func restart_game(opts = {}):
-	Debug.pr("[TOWER] restarting game: ", opts)
-	Navi.resume()  # ensure unpaused
+func start():
 	Respawner.reset_respawns()
-
-	var level_path = opts.get("level", levels[0])
+	var level_path = levels[0]
 	Navi.nav_to(level_path)
-
-	DJ.pause_menu_song()  # ensure menu music not playing
-
 
 func level_complete():
 	Debug.pr("[TOWER] level complete")
 
-	var curr = Navi.current_scene
-	var idx = levels.find(curr.scene_file_path)
+	var idx = levels.find(Navi.current_scene.scene_file_path)
 
 	if idx + 1 >= levels.size():
 		Navi.show_win_menu()
 	else:
-		restart_game({"level": levels[idx + 1]})
+		Respawner.reset_respawns()
+		var level_path = levels[idx + 1]
+		Navi.nav_to(level_path)
 
 
-###########################################################################
-# player
+## player #########################################################################
 
 var player_scene = preload("res://src/gunner/player/Player.tscn")
-var player
-signal player_spawned(player)
 
 var player_default_opts = {"has_jetpack": true}
 
 
-func spawn_player(pos):
-	player = player_scene.instantiate()
+func on_player_spawned(player):
 	for k in player_default_opts.keys():
 		player[k] = player_default_opts[k]
-	player.position = pos
+
 	player.dead.connect(show_dead)
-	Navi.add_child_to_current(player)
-	player_spawned.emit(player)
 	DJZ.play(DJZ.S.player_spawn)
-	return player
 
 
 func show_dead():

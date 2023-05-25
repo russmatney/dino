@@ -1,10 +1,13 @@
 @tool
 extends DinoGame
 
+func _ready():
+	main_menu_scene = load("res://src/ghosts/GhostsMenu.tscn")
+
 var rooms_group = "ghost_rooms"
 
-###########################################################
-# room_scenes
+
+## room_scenes ##########################################################
 
 const room_scenes = [
 	"res://src/ghosts/world/House.tscn",
@@ -14,8 +17,8 @@ const room_scenes = [
 	"res://src/ghosts/world/Cells.tscn",
 	]
 
-###########################################################
-# register
+
+## register ##########################################################
 
 func manages_scene(scene):
 	return scene.scene_file_path in room_scenes
@@ -23,9 +26,9 @@ func manages_scene(scene):
 var first_room
 
 func register():
-	main_menu_scene = load("res://src/ghosts/GhostsMenu.tscn")
+	Debug.pr("Registering GhostHouse")
 	register_menus()
-	Debug.pr("Registering GhostHouse Rooms")
+
 	Hotel.add_root_group(rooms_group)
 
 	for sfp in room_scenes:
@@ -38,8 +41,7 @@ func register():
 
 	Debug.pr("GhostHouse registered", len(rooms), "rooms and first room", first_room)
 
-###########################################################
-# player
+## player ##########################################################
 
 var player_sfp = "res://src/ghosts/player/Player.tscn"
 var player_scene = preload("res://src/ghosts/player/Player.tscn")
@@ -62,8 +64,8 @@ func get_spawn_coords():
 func on_player_spawned(player):
 	player.player_died.connect(on_player_died)
 
-###########################################################
-# start
+
+## start ##########################################################
 
 func start():
 	Debug.pr("Starting Ghost House!")

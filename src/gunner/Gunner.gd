@@ -1,38 +1,29 @@
-extends Node
-
-var deving_gunner = false
-
-@onready var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
-
-
-## ready #########################################################################
+extends DinoGame
 
 func _ready():
-	if OS.has_feature("gunner") or deving_gunner:
-		Navi.set_pause_menu("res://src/gunner/menus/GunnerPauseMenu.tscn")
-		Hood.set_hud_scene(gunner_hud)
+	pause_menu_scene = load("res://src/gunner/menus/GunnerPauseMenu.tscn")
 
+## register #########################################################################
 
-## input #########################################################################
+func register():
+	register_menus()
 
-func _unhandled_input(event):
-	# consider making this a hold-for-two-seconds
-	if deving_gunner:
-		if Trolley.is_event(event, "restart"):
-			Hood.notif("Restarting Game")
-			restart_game()
+func manages_scene(scene):
+	return scene.scene_file_path.begins_with("res://src/gunner")
 
-
-## (re)start game #########################################################################
+## start game #########################################################################
 
 var default_game_path = "res://src/gunner/player/PlayerGym.tscn"
 
-
-func restart_game():
-	Navi.resume()  # ensure unpaused
+func start():
 	Respawner.reset_respawns()
 
 	if Navi.current_scene.scene_file_path.match("*gunner*"):
+		# re-nav to same path, kind of weird
 		Navi.nav_to(Navi.current_scene.scene_file_path)
 	else:
 		Navi.nav_to(default_game_path)
+
+## player #########################################################################
+
+var player_scene = preload("res://src/gunner/player/Player.tscn")

@@ -1,75 +1,34 @@
 @tool
 extends Node2D
 
-
-func collect_tiles():
-	var ts = []
-	ts.append_array(get_tree().get_nodes_in_group("bluetile"))
-	ts.append_array(get_tree().get_nodes_in_group("redtile"))
-	ts.append_array(get_tree().get_nodes_in_group("darktile"))
-	ts.append_array(get_tree().get_nodes_in_group("yellowtile"))
-	return ts
-
-
-######################################################################
-# win
-
-var targets_destroyed
-var robots_destroyed
-
-
-func check_win():
-	if targets_destroyed and robots_destroyed:
-		Hood.notif(str("Level ", level_num, " Complete!"))
-		player.notif("Level Clear!")
-		Tower.level_complete()
-
-
-######################################################################
-# ready
-
 var tiles
-
 var player
-var player_spawner
+var enemies = []
+
 @onready var break_the_targets = $BreakTheTargets
 
 @export var level_num: String
 
-var scene_ready = false
 
+## ready ####################################################################
+
+var scene_ready = false
 
 func _ready():
 	scene_ready = true
 	calc_rect()
 
-	var _y = Hood.hud_ready.connect(_on_hud_ready)
-	break_the_targets.targets_cleared.connect(_on_targets_cleared)
-	var _x = Tower.player_spawned.connect(_on_player_spawned)
-
-	player_spawner = get_node_or_null("%PlayerSpawner")
-
-	if not player and player_spawner and not Engine.is_editor_hint():
-		player = Tower.spawn_player(player_spawner.global_position)
-
-
-func _on_hud_ready():
 	Hood.notif(str("Begin Level ", level_num))
+	break_the_targets.targets_cleared.connect(_on_targets_cleared)
+	Game.player_found.connect(_on_player_found)
 
+	Game.maybe_spawn_player()
 
-func _on_player_spawned(p):
+## player pickups ####################################################################
+
+func _on_player_found(p):
+	player = p
 	p.pickups_changed.connect(_on_player_pickups_changed)
-
-
-var enemies = []
-
-
-func enemies_alive():
-	var es = []
-	for e in enemies:
-		if e and is_instance_valid(e) and not e.is_dead:
-			es.append(e)
-	return es
 
 
 func _on_player_pickups_changed(pickups):
@@ -90,13 +49,14 @@ func _on_player_pickups_changed(pickups):
 		player.pickups = []
 		player.pickups_changed.emit(player.pickups)
 
+## enemies ####################################################################
 
-func _on_targets_cleared():
-	Hood.notif("Targets Destroyed!")
-	player.notif("All targets destroyed!")
-	targets_destroyed = true
-	check_win()
-
+func enemies_alive():
+	var es = []
+	for e in enemies:
+		if e and is_instance_valid(e) and not e.is_dead:
+			es.append(e)
+	return es
 
 func _on_robot_destroyed():
 	Hood.notif("Robot Destroyed!")
@@ -110,10 +70,19 @@ func _on_robot_destroyed():
 	player.notif("All robots destroyed!")
 	check_win()
 
+## targets ####################################################################
+
+func _on_targets_cleared():
+	Hood.notif("Targets Destroyed!")
+	player.notif("All targets destroyed!")
+	targets_destroyed = true
+	check_win()
+
+
+## physics ####################################################################
 
 func _physics_process(_delta):
 	wrap_thing(player)
-
 
 func wrap_thing(thing):
 	# TODO disable camera smoothing if we're wrapping across
@@ -246,3 +215,28 @@ func calc_rect():
 
 	rect = new_rect
 	return rect
+
+######################################################################
+# collect tiles
+
+func collect_tiles():
+	var ts = []
+	ts.append_array(get_tree().get_nodes_in_group("bluetile"))
+	ts.append_array(get_tree().get_nodes_in_group("redtile"))
+	ts.append_array(get_tree().get_nodes_in_group("darktile"))
+	ts.append_array(get_tree().get_nodes_in_group("yellowtile"))
+	return ts
+
+
+######################################################################
+# win
+
+var targets_destroyed
+var robots_destroyed
+
+
+func check_win():
+	if targets_destroyed and robots_destroyed:
+		Hood.notif(str("Level ", level_num, " Complete!"))
+		player.notif("Level Clear!")
+		Tower.level_complete()

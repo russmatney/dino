@@ -146,7 +146,6 @@ func nav_to_main_menu():
 		death_menu.hide()
 		win_menu.hide()
 		nav_to(main_menu_path)
-		resume()
 	else:
 		Debug.prn("No scene at path: ", main_menu_path, ", can't navigate.")
 

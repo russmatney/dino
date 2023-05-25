@@ -1,9 +1,5 @@
 extends NaviButtonList
 
-func restart():
-	owner.hide()
-	Tower.restart_game()
-
 var button_defs = [
 	{
 		label="Resume",
@@ -11,7 +7,7 @@ var button_defs = [
 	},
 	{
 		label="Restart",
-		fn=self.restart,
+		fn=Game.restart_game.bind(Tower),
 	},
 	{
 		label="Tower Jet Menu",
