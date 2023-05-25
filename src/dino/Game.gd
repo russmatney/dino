@@ -60,6 +60,7 @@ func register_current_game(game):
 	game.register()
 
 func restart_game(game):
+	remove_player()
 	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
 	is_managed = true
@@ -98,8 +99,8 @@ func _on_new_scene_instanced(scene):
 	if current_game and current_game.manages_scene(scene):
 		if current_game.should_spawn_player(scene):
 			if not player and not spawning:
-				Debug.prn("respawning player after new scene instanced")
-				respawn_player()
+				# defer to let the scene bring it's own player first
+				maybe_spawn_player.call_deferred({skip_managed_check=true})
 
 
 signal player_found(player)
@@ -136,6 +137,17 @@ func _on_player_found(p):
 	if current_game:
 		current_game.update_world()
 
+func remove_player():
+	var p = player
+	player = null
+	if p and is_instance_valid(p):
+		Navi.current_scene.remove_child(p)
+	if current_game:
+		current_game.update_world()
+	if p and is_instance_valid(p):
+		p.name = "DeadPlayer"
+		p.queue_free()
+
 var spawning = false
 func respawn_player(opts={}):
 	if opts.get("player_scene") == null:
@@ -149,14 +161,7 @@ func respawn_player(opts={}):
 	spawning = true
 	if player:
 		Debug.pr("Respawn found player, will remove")
-		var p = player
-		player = null
-		if p and is_instance_valid(p):
-			Navi.current_scene.remove_child(p)
-		current_game.update_world()
-		if p and is_instance_valid(p):
-			p.name = "DeadPlayer"
-			p.queue_free()
+		remove_player()
 
 	# defer to let player free safely
 	_respawn_player.call_deferred(opts)
@@ -221,7 +226,15 @@ func respawn_coords():
 # dev helper functions
 
 func maybe_spawn_player(opts={}):
-	if not is_managed and not Engine.is_editor_hint() and player == null and not spawning:
-		Debug.pr("Unmanaged game, player is null, spawning a new one", opts)
+	# we maybe don't care for this managed check anymore
+	if (not is_managed or opts.get("skip_managed_check")) \
+		and not Engine.is_editor_hint() \
+		and player == null and not spawning:
 		ensure_current_game()
-		respawn_player(opts)
+
+		# the player might already be in the scene
+		_find_player()
+
+		if player == null:
+			Debug.pr("Player is null, spawning a new one", opts)
+			respawn_player(opts)
