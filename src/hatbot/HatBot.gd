@@ -52,7 +52,6 @@ func register():
 
 ## player ##########################################################
 
-# var player_scene = preload("res://src/hatbot/player/Monster.tscn")
 var player_scene = preload("res://src/hatbot/player/Player.tscn")
 
 func get_spawn_coords():

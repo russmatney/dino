@@ -73,12 +73,14 @@ func sit(player):
 	sitting = true
 
 	# zoom in on player. perhaps this is a camera mode switch instead
-	room.deactivate_cam_points()
+	if room:
+		room.deactivate_cam_points()
 
 	var exit_cb = func():
 		put_out()
 		sitting = false
-		room.activate_cam_points()
+		if room:
+			room.activate_cam_points()
 
 	visit(player, {exit_cb=exit_cb})
 

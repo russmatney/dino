@@ -20,7 +20,7 @@ const demoland_zones = [
 ## register #########################################################
 
 func manages_scene(scene):
-	return scene.scene_file_path in demoland_zones
+	return scene.scene_file_path.begins_with("res://src/demoland")
 
 var first_zone
 
@@ -42,7 +42,7 @@ func register():
 
 ## player #########################################################
 
-var player_scene = preload("res://src/hatbot/player/Monster.tscn")
+var player_scene = preload("res://src/hatbot/player/Player.tscn")
 
 func get_player_scene():
 	return player_scene
