@@ -2,13 +2,17 @@
 extends Node2D
 class_name MetroCheckpoint
 
+@onready var action_area = $ActionArea
+@onready var action_hint = $ActionHint
+
 var visit_count = 0
+var room
+
 
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
 	return Util._config_warning(self, {expected_nodes=["ActionArea", "ActionHint"]})
-
 
 ## entry_tree ###########################################################
 
@@ -18,13 +22,14 @@ func _enter_tree():
 
 ## ready ###########################################################
 
-@onready var action_area = $ActionArea
-@onready var action_hint = $ActionHint
-
 func _ready():
 	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 
 	Hotel.register(self)
+
+	var p = get_parent()
+	if p is MetroRoom:
+		room = p
 
 ## hotel ###########################################################
 
@@ -47,10 +52,10 @@ var actions = [
 
 var player_spawn_point_scene = preload("res://src/dino/PlayerSpawnPoint.tscn")
 
-func visit(actor):
+func visit(actor, opts={}):
 	visit_count += 1
 
-	actor.machine.transit("Rest")
+	actor.machine.transit("Rest", opts)
 
 	# TODO some way to bookmark this version of the player
 	# generally we just restore their health and powerups when they respawn

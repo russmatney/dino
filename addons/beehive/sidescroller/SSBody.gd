@@ -186,14 +186,10 @@ func recover_health(h=null):
 		health = initial_health
 	else:
 		health += h
-	Hotel.check_in(self)
 
-	# TODO restore sound on heal
-	# if is_player:
-	# 	DJZ.play(DJZ.S.playerheal)
-	# # force one-shot emission
-	# heart_particles.set_emitting(true)
-	# heart_particles.restart()
+	health = clamp(health, 0, initial_health)
+
+	Hotel.check_in(self)
 
 ## hurt_box ###########################################################
 

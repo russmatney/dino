@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://src/hatbot/entities/Candle.gd" id="1_7eirx"]
 [ext_resource type="SpriteFrames" uid="uid://63sc3onlnswo" path="res://src/hatbot/entities/CandleSpriteFrames.tres" id="1_ywigl"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="4_asdr1"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="6_jrqog"]
 [ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://assets/hatbot/light64px4.png" id="6_nahms"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="6_ttkix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a1lts"]
 size = Vector2(32, 26)
@@ -19,19 +19,11 @@ lit = false
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_a1lts")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
-color = Color(0.11248, 0.245715, 0.115688, 1)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("1_ywigl")
 animation = &"off"
 autoplay = "flicker"
-frame_progress = 0.421367
+frame_progress = 0.726669
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -8)
@@ -42,6 +34,8 @@ shadow_enabled = true
 texture = ExtResource("6_nahms")
 texture_scale = 0.800037
 
-[node name="PlayerSpawnPoint" parent="." instance=ExtResource("6_ttkix")]
-active = false
-dev_only = false
+[node name="ActionHint" parent="." instance=ExtResource("6_jrqog")]
+visible = false
+position = Vector2(0, -26)
+label_text = "Rest"
+key_or_action = "action"
