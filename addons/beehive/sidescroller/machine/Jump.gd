@@ -3,9 +3,17 @@ extends State
 var jump_released
 var initial_y
 
+var double_jumping
+var double_jump_wait = 0.1
+var double_jump_ttl
+
 ## enter ###########################################################
 
-func enter(_opts = {}):
+func enter(opts = {}):
+	double_jumping = opts.get("double_jumping", false)
+	if actor.has_double_jump and not double_jumping:
+		double_jump_ttl = double_jump_wait
+
 	initial_y = actor.global_position.y
 
 	jump_released = false
@@ -21,6 +29,7 @@ func enter(_opts = {}):
 
 func exit():
 	initial_y = null
+	double_jump_ttl = null
 	jump_released = false
 	actor.anim.animation_finished.disconnect(_on_anim_finished)
 
@@ -35,7 +44,13 @@ func _on_anim_finished():
 ## physics ###########################################################
 
 func physics_process(delta):
-	if initial_y == null:
+	if actor.has_double_jump and not double_jumping:
+		double_jump_ttl -= delta
+
+	if jump_released and not double_jumping and actor.has_double_jump \
+		and double_jump_ttl <= 0 \
+		and Input.is_action_just_pressed("jump"):
+		machine.transit("Jump", {"double_jumping": true})
 		return
 
 	if not jump_released and actor.is_player and Input.is_action_just_released("jump"):
@@ -48,7 +63,7 @@ func physics_process(delta):
 
 		# kill y velocity
 		if reached_jump_min:
-			actor.velocity.y = lerp(actor.velocity.y, 0.0, 0.5)
+			actor.velocity.y = lerp(actor.velocity.y, 0.0, 0.3)
 
 	# apply gravity
 	if not actor.is_on_floor():
@@ -60,7 +75,7 @@ func physics_process(delta):
 		# (clipping a platform when jumping)
 		# transit("Fall")
 		# return
-		actor.velocity.y = lerp(actor.velocity.y, 0.0, 0.4)
+		actor.velocity.y = lerp(actor.velocity.y, 0.0, 0.3)
 
 	# apply left/right movement
 	if actor.move_vector:
@@ -76,4 +91,4 @@ func physics_process(delta):
 	actor.move_and_slide()
 
 	if actor.velocity.y > 0.0:
-		machine.transit("Fall")
+		machine.transit("Fall", {double_jumping=double_jumping})
