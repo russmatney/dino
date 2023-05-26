@@ -119,6 +119,7 @@ var dead
 signal died(boss)
 signal stunned(boss)
 
+# TODO refactor re: SSBoss class
 func take_hit(opts={}):
 	if not machine.state.name in ["Stunned", "Firing", "Swoop", "Idle", "Laughing"]:
 		DJZ.play(DJZ.S.nodamageclang)
@@ -151,9 +152,4 @@ func take_hit(opts={}):
 func _on_attack_box_entered(body: Node):
 	if machine.state.name in ["Swoop", "Idle"]:
 		if body.is_in_group("player") and body.has_method("take_hit"):
-			var dir
-			if global_position.x > body.global_position.x:
-				dir = Vector2.LEFT
-			else:
-				dir = Vector2.RIGHT
-			body.take_hit({"direction": dir})
+			body.take_hit({body=self})

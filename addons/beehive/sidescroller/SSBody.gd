@@ -153,8 +153,13 @@ func die(opts={}):
 
 ## damage ###########################################################
 
-func take_hit(hit_type, body):
-	take_damage(hit_type, body)
+func take_hit(opts):
+	take_damage(opts)
+	var hit_type = opts.get("type")
+	var body = opts.get("body")
+
+	# TODO different sound based on actor being hit, hit-type, etc
+	DJZ.play(DJZ.S.playerhurt)
 
 	if health <= 0:
 		die()
@@ -162,21 +167,21 @@ func take_hit(hit_type, body):
 	else:
 		machine.transit("KnockedBack", {knocked_by=body, hit_type=hit_type})
 
-func take_damage(hit_type, body):
-	var attack_damage
-	match hit_type:
-		"bump":
-			attack_damage = body.bump_damage
-		_:
-			Debug.warn("using fallback damage (1)")
-			attack_damage = 1
-	var damage = attack_damage - defense
-	health -= damage
-	Hotel.check_in(self)
+func take_damage(opts):
+	var hit_type = opts.get("type")
+	var body = opts.get("body")
+	var damage = opts.get("damage")
 
-	# TODO restore sound on hurt?
-	# if is_player:
-	# 	DJZ.play(DJZ.S.playerhurt)
+	if damage == null:
+		var attack_damage
+		match hit_type:
+			"bump":
+				damage = body.bump_damage
+			_:
+				damage = 1
+	health -= damage
+	health = clamp(health, 0, initial_health)
+	Hotel.check_in(self)
 
 ## recover health ###########################################################
 
@@ -201,7 +206,7 @@ func on_hurt_box_entered(body):
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
-			body.take_hit("bump", self)
+			body.take_hit({type="bump", body=self})
 
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)

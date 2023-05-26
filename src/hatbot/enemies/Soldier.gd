@@ -80,7 +80,7 @@ func _on_frame_changed():
 				if not b in bodies_this_kick:
 					Cam.hitstop("kickhit", 0.3, 0.1)
 					bodies_this_kick.append(b)
-					b.take_hit({damage=1, direction=facing})
+					b.take_hit({body=self})
 
 var bodies_this_kick = []
 
@@ -177,6 +177,7 @@ func _physics_process(_delta):
 var initial_health = 3
 var health
 
+# TODO dry up with SSEnemy or so
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.RIGHT)

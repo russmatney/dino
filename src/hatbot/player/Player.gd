@@ -192,9 +192,6 @@ func update_facing():
 
 ## health #######################################################
 
-# TODO update take_hit func usage (new args)
-# TODO update wherever 'heal' is called
-
 func _on_player_death():
 	if death_jumbo_open:
 		return

@@ -137,7 +137,7 @@ func _on_body_entered(body):
 
 	if machine.state.name in ["Idle", "Run"] and body.is_in_group("player"):
 		bodies.append(body)
-		body.take_hit({damage=1, direction=facing})
+		body.take_hit({body=self})
 
 func _on_body_exited(body):
 	bodies.erase(body)
