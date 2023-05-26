@@ -19,6 +19,9 @@ func _ready():
 		Hood.ensure_hud(hud)
 	super._ready()
 
+	has_double_jump = true
+	has_climb = true
+
 	if not Engine.is_editor_hint():
 		# TODO could we just Actions.register(self) or Trolley.register(self)?
 		# include opting into keybindings and current-ax updates

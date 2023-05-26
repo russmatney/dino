@@ -10,7 +10,6 @@
 [node name="SSPlayer" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_tdgh3")
-climb_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_odek5")

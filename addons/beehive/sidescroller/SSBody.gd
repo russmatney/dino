@@ -250,6 +250,10 @@ func add_climb():
 	has_climb = true
 
 func should_start_climb():
+	if near_ground_check == null:
+		return false
+	if len(wall_checks) == 0:
+		return false
 	if has_climb and is_on_wall_only()\
 		and not near_ground_check.is_colliding():
 		var coll = get_slide_collision(0)

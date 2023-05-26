@@ -14,7 +14,7 @@ func enter(opts = {}):
 	heal_t.tween_callback(func():
 		actor.recover_health(1)
 		DJZ.play(DJZ.S.playerheal)
-		if "heart_particles" in actor:
+		if actor.heart_particles != null:
 			# force one-shot emission
 			actor.heart_particles.set_emitting(true)
 			actor.heart_particles.restart()
