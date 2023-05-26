@@ -9,6 +9,7 @@ func enter(opts = {}):
 	actor.anim.play("rest")
 	rest_ttl = opts.get("rest_time", rest_time)
 
+	# TODO apply n times, for each health restored, maybe play 'sit' or 'heal' each time
 	DJZ.play(DJZ.S.playerheal)
 	if "heart_particles" in actor:
 		# force one-shot emission

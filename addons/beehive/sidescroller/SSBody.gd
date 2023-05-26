@@ -101,7 +101,9 @@ func _ready():
 
 func get_rect():
 	if coll != null:
-		return coll.shape.get_rect()
+		var rect = coll.shape.get_rect()
+		rect.position += coll.position + global_position
+		return rect
 
 ## on_transit ###########################################################
 

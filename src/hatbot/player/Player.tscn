@@ -302,6 +302,8 @@ animations = [{
 size = Vector2(96, 96)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 49
 script = ExtResource("1_20cuc")
 display_name = "HatBot"
 jump_max_height = 50.0
@@ -336,6 +338,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="Sword" parent="." instance=ExtResource("4_5nmtl")]
+visible = false
 position = Vector2(9, -10)
 frame = 0
 frame_progress = 0.0

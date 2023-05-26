@@ -5,14 +5,12 @@ extends Node2D
 
 @export var debugging = false
 
-###########################################################
-# enter tree
+## enter tree ##########################################################
 
 func _enter_tree():
 	add_to_group(Metro.rooms_group, true)
 
-###########################################
-# ready
+## ready ##########################################
 
 var zone
 
@@ -26,8 +24,7 @@ func _ready():
 	if p is MetroZone:
 		zone = p
 
-###########################################
-# hotel
+## hotel ##########################################
 
 func hotel_data(player=null, has_player=null):
 	var rect = used_rect()

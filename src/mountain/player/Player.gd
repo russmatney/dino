@@ -53,8 +53,3 @@ func _unhandled_input(event):
 	elif Trolley.is_cycle_next_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
-
-## physics_process ##################################################################
-
-# func _physics_process(_delta):
-# 	action_detector.current_action()
