@@ -338,7 +338,6 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="Sword" parent="." instance=ExtResource("4_5nmtl")]
-visible = false
 position = Vector2(9, -10)
 frame = 0
 frame_progress = 0.0

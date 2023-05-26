@@ -24,6 +24,7 @@ func _get_configuration_warnings():
 
 @export var run_speed: float = 10000
 @export var air_speed: float = 9000 # horizontal movement in the air
+@export var climb_speed: float = -100.0
 @export var knockback_speed_y: float = 100
 @export var knockback_speed_x: float = 30
 @export var wander_speed: float = 4000
@@ -56,6 +57,15 @@ var cam_pof
 var hurt_box
 var nav_agent
 
+var high_wall_check
+var low_wall_check
+var wall_checks = []
+var near_ground_check
+
+var heart_particles
+var skull_particles
+
+
 ## enter_tree ###########################################################
 
 func _enter_tree():
@@ -85,15 +95,29 @@ func _ready():
 		anim = $AnimatedSprite2D
 		coll = $CollisionShape2D
 		if get_node_or_null("CamPOF"):
-			cam_pof = get_node("CamPOF")
+			cam_pof = $CamPOF
 
 		if get_node_or_null("NavigationAgent2D"):
-			nav_agent = get_node("NavigationAgent2D")
+			nav_agent = $NavigationAgent2D
 
 		if get_node_or_null("HurtBox"):
-			hurt_box = get_node("HurtBox")
+			hurt_box = $HurtBox
 			hurt_box.body_entered.connect(on_hurt_box_entered)
 			hurt_box.body_exited.connect(on_hurt_box_exited)
+
+		if get_node_or_null("HighWallCheck"):
+			high_wall_check = $HighWallCheck
+		if get_node_or_null("LowWallCheck"):
+			low_wall_check = $LowWallCheck
+		if high_wall_check or low_wall_check:
+			wall_checks = [high_wall_check, low_wall_check]
+		if get_node_or_null("NearGroundCheck"):
+			near_ground_check = $NearGroundCheck
+
+		if get_node_or_null("HeartParticles"):
+			heart_particles = $HeartParticles
+		if get_node_or_null("SkullParticles"):
+			skull_particles = $SkullParticles
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()
@@ -185,7 +209,7 @@ func take_damage(opts):
 
 ## recover health ###########################################################
 
-# if no arg passed, recover _all_ health
+# if no arg passed, recovers _all_ health
 func recover_health(h=null):
 	if h == null:
 		health = initial_health
@@ -210,3 +234,29 @@ func on_hurt_box_entered(body):
 
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
+
+
+## double jump #######################################################
+
+var has_double_jump = false
+func add_double_jump():
+	has_double_jump = true
+
+
+## climb #######################################################
+
+var has_climb = false
+func add_climb():
+	has_climb = true
+
+func should_start_climb():
+	if has_climb and is_on_wall_only()\
+		and not near_ground_check.is_colliding():
+		var coll = get_slide_collision(0)
+		var x_diff = coll.get_position().x - global_position.x
+
+		if move_vector.x > 0 and x_diff > 0:
+			return true
+		if move_vector.x < 0 and x_diff < 0:
+			return true
+	return false

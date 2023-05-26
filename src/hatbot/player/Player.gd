@@ -8,14 +8,6 @@ extends SSPlayer
 @onready var light_occluder = $LightOccluder2D
 @onready var look_point = $LookPoint
 
-@onready var high_wall_check = $HighWallCheck
-@onready var low_wall_check = $LowWallCheck
-@onready var wall_checks = [high_wall_check, low_wall_check]
-@onready var near_ground_check = $NearGroundCheck
-
-@onready var heart_particles = $HeartParticles
-@onready var skull_particles = $SkullParticles
-
 @onready var sword = $Sword
 
 var og_position
@@ -27,8 +19,6 @@ var coins = 0
 
 var powerups = []
 var has_sword = false
-var has_double_jump = false
-var has_climb = false
 
 ## ready ##################################################################
 
@@ -42,8 +32,8 @@ func _ready():
 			})
 		Hood.ensure_hud(hud)
 
-	if not Game.is_managed:
-		powerups = HatBot.all_powerups
+		if not Game.is_managed:
+			powerups = HatBot.all_powerups
 
 	super._ready()
 
@@ -53,13 +43,13 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return not machine.state.name in ["Rest"]})
 
-	if not has_sword:
-		sword.set_visible(false)
+		if not has_sword:
+			sword.set_visible(false)
 
-	died.connect(_on_player_death)
+		died.connect(_on_player_death)
 
-	heart_particles.set_emitting(false)
-	skull_particles.set_emitting(false)
+		heart_particles.set_emitting(false)
+		skull_particles.set_emitting(false)
 
 func _on_transit(state):
 	# Debug.debug_label("Player State: ", state)
@@ -270,18 +260,6 @@ func aim_sword(dir):
 				sword.position.x = 9
 				sword.position.y = -10
 				sword.scale.x = 1
-
-
-## double jump #######################################################
-
-func add_double_jump():
-	has_double_jump = true
-
-
-## climb #######################################################
-
-func add_climb():
-	has_climb = true
 
 
 ## stamp frame ##########################################################################

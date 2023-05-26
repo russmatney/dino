@@ -69,6 +69,10 @@ func physics_process(delta):
 	else:
 		actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.5)
 
+	if actor.should_start_climb():
+		machine.transit("Climb")
+		return
+
 	actor.move_and_slide()
 
 	if actor.velocity.y > 0.0:

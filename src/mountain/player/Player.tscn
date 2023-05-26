@@ -363,6 +363,7 @@ size = Vector2(239, 150)
 [node name="Player" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
 script = ExtResource("1_g0biv")
+climb_speed = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
