@@ -133,6 +133,10 @@ func stop_firing():
 signal fired_bullet(bullet)
 
 func fire_bullet():
+	if facing_vector == null:
+		# TODO not sure why firing before moving falls flat
+		facing_vector = Vector2.RIGHT
+		update_facing()
 	var bullet = bullet_scene.instantiate()
 	bullet.position = bullet_position.get_global_position()
 	bullet.add_collision_exception_with(self)

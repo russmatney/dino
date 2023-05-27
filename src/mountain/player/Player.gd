@@ -18,6 +18,8 @@ func _ready():
 	actions = _actions
 	super._ready()
 
+	notif("[jump]Ready[/jump]")
+
 
 ## actions ##################################################################
 

@@ -243,20 +243,22 @@ func remove_matching(arr, to_remove):
 # check node type and rotation
 
 func update_h_flip(facing, node):
-	if node:
-		if facing.x > 0 and node.position.x < 0:
-			node.position.x = -node.position.x
-			node.scale.x = -node.scale.x
-		elif facing.x < 0 and node.position.x > 0:
-			node.position.x = -node.position.x
-			node.scale.x = -node.scale.x
+	if not node:
+		return
+	if facing.x > 0 and node.position.x < 0:
+		node.position.x = -node.position.x
+		node.scale.x = -node.scale.x
+	elif facing.x < 0 and node.position.x > 0:
+		node.position.x = -node.position.x
+		node.scale.x = -node.scale.x
 
 func update_los_facing(facing, node):
-	if node:
-		if facing.x > 0 and node.target_position.y > 0:
-			node.target_position.y = -node.target_position.y
-		elif facing.x < 0 and node.target_position.y < 0:
-			node.target_position.y = -node.target_position.y
+	if not node:
+		return
+	if facing.x > 0 and node.target_position.y > 0:
+		node.target_position.y = -node.target_position.y
+	elif facing.x < 0 and node.target_position.y < 0:
+		node.target_position.y = -node.target_position.y
 
 
 #################################################################

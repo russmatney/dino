@@ -240,6 +240,8 @@ func on_hurt_box_exited(body):
 ## notif #####################################################################
 
 func notif(text, opts = {}):
+	if not notif_label:
+		return
 	var ttl = opts.get("ttl", 1.5)
 	var dupe = opts.get("dupe", false)
 	var label

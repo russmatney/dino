@@ -489,3 +489,13 @@ position = Vector2(0, 22)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ro1o6")
 animation = &"init"
+
+[node name="NotifLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -40.0
+offset_top = -64.0
+offset_right = 40.0
+offset_bottom = -32.0
+theme_override_fonts/normal_font = ExtResource("2_ctg72")
+bbcode_enabled = true
+text = "some sparkle"
