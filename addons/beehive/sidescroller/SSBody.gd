@@ -363,9 +363,15 @@ func add_jetpack():
 ## ascend/descend #######################################################
 
 func add_ascend():
+	if not warp_cast:
+		Debug.warn("refusing to add ascend powerup")
+		return
 	# TODO add WarpCast dynamically
 	has_ascend = true
 
 func add_descend():
 	# TODO add WarpCast dynamically
+	if not warp_cast:
+		Debug.warn("refusing to add descend powerup")
+		return
 	has_descend = true

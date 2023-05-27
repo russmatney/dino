@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c0pkrdt2pgivv" path="res://src/mountain/BlurryCircleParticles.tscn" id="13_oonb0"]
 [ext_resource type="Shader" path="res://src/SimpleBlurScreen.gdshader" id="14_j24i6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_44nsn"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_coahw"]
 resource_local_to_scene = true
 shader = ExtResource("14_j24i6")
 shader_parameter/lod = 2.221
@@ -101,7 +101,7 @@ position = Vector2(352, -176)
 position = Vector2(544, -176)
 
 [node name="BlurryCircleParticles" parent="Peak" instance=ExtResource("13_oonb0")]
-material = SubResource("ShaderMaterial_44nsn")
+material = SubResource("ShaderMaterial_coahw")
 position = Vector2(264, -32)
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]

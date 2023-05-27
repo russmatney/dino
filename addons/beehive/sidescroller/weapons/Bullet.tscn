@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdwxqpq1ade5m"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="1"]
-[ext_resource type="Script" path="res://src/gunner/weapons/Bullet.gd" id="2"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/weapons/Bullet.gd" id="2"]
 [ext_resource type="SpriteFrames" uid="uid://dr2mp11jcusmn" path="res://assets/sprites/pop_sprite_frames.tres" id="3"]
 
 [sub_resource type="CapsuleShape2D" id="1"]

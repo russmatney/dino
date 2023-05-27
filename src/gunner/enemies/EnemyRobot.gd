@@ -158,7 +158,7 @@ func _on_VisionBox_body_exited(body: Node):
 ########################################################
 # fire
 
-@onready var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+@onready var bullet_scene = preload("res://addons/beehive/sidescroller/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 2

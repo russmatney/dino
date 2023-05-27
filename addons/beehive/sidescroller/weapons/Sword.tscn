@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://beg2332ea720c"]
+[gd_scene load_steps=4 format=3 uid="uid://cqlsxw8cv8mjw"]
 
-[ext_resource type="SpriteFrames" uid="uid://d16nn6a1ni5p2" path="res://src/hatbot/powerups/SwordSpriteFrames.tres" id="1_pttpo"]
-[ext_resource type="Script" path="res://src/hatbot/powerups/Sword.gd" id="2_220bt"]
+[ext_resource type="SpriteFrames" uid="uid://d16nn6a1ni5p2" path="res://addons/beehive/sidescroller/weapons/SwordSpriteFrames.tres" id="1_pttpo"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/weapons/Sword.gd" id="2_220bt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvao8"]
 size = Vector2(40, 24)

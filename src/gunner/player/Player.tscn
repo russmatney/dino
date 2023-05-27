@@ -108,7 +108,7 @@ text = "[center]state"
 scroll_active = false
 
 [node name="BulletPosition" type="Marker2D" parent="."]
-position = Vector2(-12, -14)
+position = Vector2(-12, -12)
 
 [node name="LookPOF" parent="." instance=ExtResource("9")]
 position = Vector2(-182, -14)

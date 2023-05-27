@@ -210,9 +210,11 @@ func collect_pickup(pickup_type):
 func update_with_powerup(powerup: SS.Powerup):
 	match (powerup):
 		SS.Powerup.Sword: add_sword()
+		SS.Powerup.Gun: add_gun()
+		SS.Powerup.Ascend: add_ascend()
+		SS.Powerup.Descend: add_descend()
 		SS.Powerup.DoubleJump: add_double_jump()
 		SS.Powerup.Climb: add_climb()
-		SS.Powerup.Gun: add_gun()
 		SS.Powerup.Jetpack: add_jetpack()
 
 func add_powerup(powerup: SS.Powerup):
@@ -232,14 +234,16 @@ func add_coin():
 func add_gun():
 	# TODO add bullet/gun scene if one not found
 	if not bullet_position:
-		Debug.warn("Refusing to add gun, no bullet_position set")
-		return
+		bullet_position = Marker2D.new()
+		bullet_position.name = "BulletPosition"
+		bullet_position.position = Vector2.ONE * -12
+		add_child(bullet_position)
 	has_gun = true
 
 var firing = false
 
 # TODO pull metadata into generic, reusable (customizable) bullet scene
-var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
+var bullet_scene = preload("res://addons/beehive/sidescroller/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 3
@@ -288,11 +292,14 @@ func fire_bullet():
 
 ## sword #######################################################
 
+var sword_scene = preload("res://addons/beehive/sidescroller/weapons/Sword.tscn")
+
 func add_sword():
-	# TODO add sword scene if one not found
 	if not sword:
-		Debug.warn("Refusing to add sword, none found")
-		return
+		Debug.pr("No sword found, adding one")
+		sword = sword_scene.instantiate()
+		add_child(sword)
+
 	sword.set_visible(true)
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
 	has_sword = true
