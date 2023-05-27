@@ -62,7 +62,7 @@ func get_spawn_coords():
 
 # invoked by Game.gd
 func on_player_spawned(player):
-	player.player_died.connect(on_player_died)
+	player.died.connect(on_player_died)
 
 
 ## start ##########################################################

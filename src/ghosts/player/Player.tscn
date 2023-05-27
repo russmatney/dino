@@ -1,25 +1,20 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://c8g7prvxfgj58"]
 
 [ext_resource type="SpriteFrames" uid="uid://dya6hn1wti0o0" path="res://src/ghosts/player/player_sprites.tres" id="1"]
 [ext_resource type="Script" path="res://src/ghosts/player/Player.gd" id="2"]
-[ext_resource type="Script" path="res://src/ghosts/player/Air.gd" id="4"]
-[ext_resource type="Script" path="res://src/ghosts/player/Run.gd" id="5"]
-[ext_resource type="Script" path="res://src/ghosts/player/PlayerMachine.gd" id="6"]
-[ext_resource type="Script" path="res://src/ghosts/player/Idle.gd" id="7"]
 [ext_resource type="Shader" path="res://src/ghosts/shaders/CartridgeTiltingGlitch.gdshader" id="8"]
-[ext_resource type="Script" path="res://src/ghosts/player/Knockback.gd" id="9"]
-[ext_resource type="Script" path="res://src/ghosts/player/Dead.gd" id="10"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="8_qe05b"]
 [ext_resource type="PackedScene" uid="uid://bwaumvx2geh3k" path="res://src/ghosts/player/Flashlight.tscn" id="11"]
 [ext_resource type="Texture2D" uid="uid://d2txqhto2oicp" path="res://addons/core/assets/lights/light_smooth_sheet.png" id="12"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="12_amjn1"]
-[ext_resource type="PackedScene" path="res://addons/trolley/ActionHint.tscn" id="13_nmvo7"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="13_nmvo7"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(27, 52)
 
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("8")
-shader_parameter/red_displacement = -0.641055
+shader_parameter/red_displacement = -0.970243
 shader_parameter/green_displacement = -1.0
 shader_parameter/blue_displacement = -1.0
 shader_parameter/ghost = 0.0
@@ -59,24 +54,6 @@ scale = Vector2(4, 4)
 sprite_frames = ExtResource("1")
 animation = &"idle"
 frame = 2
-
-[node name="Machine" type="Node" parent="."]
-script = ExtResource("6")
-
-[node name="Idle" type="Node" parent="Machine"]
-script = ExtResource("7")
-
-[node name="Run" type="Node" parent="Machine"]
-script = ExtResource("5")
-
-[node name="Air" type="Node" parent="Machine"]
-script = ExtResource("4")
-
-[node name="Knockback" type="Node" parent="Machine"]
-script = ExtResource("9")
-
-[node name="Dead" type="Node" parent="Machine"]
-script = ExtResource("10")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -125,6 +102,8 @@ shape = SubResource("RectangleShape2D_ixhtb")
 
 [node name="ActionHint" parent="." instance=ExtResource("13_nmvo7")]
 position = Vector2(0, -32)
+
+[node name="SSMachine" parent="." instance=ExtResource("8_qe05b")]
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
 [connection signal="body_entered" from="Burstbox" to="." method="_on_Burstbox_body_entered"]

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 
+# TODO refactor this to use hotel
 func _ready():
 	Game.player_found.connect(setup_player)
 	Hood.find_player.call_deferred()

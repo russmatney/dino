@@ -1,45 +1,13 @@
 @tool
-extends CharacterBody2D
+extends SSPlayer
 
-@export var jump_impulse: int = 1500
-@export var speed: int = 300
-@export var gravity: int = 4000
-
-@export var max_health: int = 6
-var health = max_health
-signal health_change
-
-var initial_pos
-var knocked_back = false
-var dead = false
-
-@onready var state_label = $StateLabel
-@onready var machine = $Machine
-@onready var anim = $AnimatedSprite2D
 var tween
-
-@onready var action_detector = $ActionDetector
-@onready var action_hint = $ActionHint
-
-############################################################
-
-signal player_died
-
-
-func die():
-	player_died.emit()
-
 
 ############################################################
 
 var hud = preload("res://src/ghosts/hud/HUD.tscn")
 
-func _enter_tree():
-	Hotel.book(self.scene_file_path)
-
 func _ready():
-	Hotel.register(self)
-
 	if not Engine.is_editor_hint():
 		Hood.ensure_hud(hud)
 		Cam.ensure_camera({
@@ -49,37 +17,24 @@ func _ready():
 			proximity_max=450,
 			})
 
-		action_detector.setup(self, {action_hint=action_hint})
-
-		initial_pos = get_global_position()
-		machine.transitioned.connect(on_transit)
-		machine.start.call_deferred()
-
-		health_change.emit(health)
-
 	shader_loop()
 
-
-func on_transit(new_state):
-	set_state_label(new_state)
-
-func set_state_label(label: String):
-	state_label.text = "[center]" + label + "[/center]"
+	super._ready()
 
 
 ###########################################################################
 # hotel data
 
 func check_out(data):
-	health = data.get("health", max_health)
+	super.check_out(data)
 	gloomba_kos = data.get("gloomba_kos", 0)
 
 func hotel_data():
-	return {health=health, gloomba_kos=gloomba_kos}
-
+	var d = super.hotel_data()
+	d["gloomba_kos"] = gloomba_kos
+	return d
 
 ############################################################
-
 
 func shader_loop():
 	tween = create_tween()
@@ -95,51 +50,17 @@ func shader_loop():
 
 ############################################################
 
-
-func _process(_delta):
-	if Input.is_action_just_pressed("action"):
-		Cam.screenshake(0.2)
-		var did_execute = action_detector.execute_current_action()
-		if not did_execute:
-			if current_action:
-				call_action(current_action)
-			# TODO update when gloombas become unstunned, maybe via signals
-			update_burst_action()
-
-
-############################################################
-
-enum DIR { left, right }
-var facing_direction = DIR.left
-
-
-func face_right():
-	facing_direction = DIR.right
-	anim.flip_h = true
-
-	if $Flashlight.position.x < 0:
-		$Flashlight.position.x = -$Flashlight.position.x
-		$Flashlight.scale.x = -$Flashlight.scale.x
-		$Burstbox.position.x = -$Burstbox.position.x
-
-
-func face_left():
-	facing_direction = DIR.left
-	anim.flip_h = false
-
-	if $Flashlight.position.x > 0:
-		$Flashlight.position.x = -$Flashlight.position.x
-		$Flashlight.scale.x = -$Flashlight.scale.x
-		$Burstbox.position.x = -$Burstbox.position.x
-
+func update_facing():
+	super.update_facing()
+	Util.update_h_flip(facing_vector, $Flashlight)
 
 ############################################################
 
 
+# TODO update to use take_hit/take_damage
 func hit(body):
 	health -= 1
 	Hotel.check_in(self)
-	health_change.emit(health)
 
 	var dir
 	if body.global_position.x > global_position.x:
@@ -152,8 +73,8 @@ func hit(body):
 
 func _on_Hurtbox_body_entered(body: Node):
 	# ignore if we're still recovering or dead
-	if knocked_back or dead:
-		return
+	# if knocked_back or dead:
+	# 	return
 	if body.is_in_group("enemies"):
 		if body.can_hit_player():
 			hit(body)
@@ -185,76 +106,44 @@ func gloomba_ko():
 
 var burstables = []
 
+# TODO refactor into ss/weapon/sword per-anim-frame-style attack
 
-func burst_gloomba():
-	var did_burst = false
-	for b in burstables:
-		if b.player_can_stun():
-			b.stun()
-			did_burst = true
+# func burst_gloomba():
+# 	var did_burst = false
+# 	for b in burstables:
+# 		if b.player_can_stun():
+# 			b.stun()
+# 			did_burst = true
 
-	update_burst_action()
+# 	# update_burst_action()
 
-	if did_burst:
-		Hood.notif("Gloomba stunned!")
-		$Flashlight/AnimatedSprite2D.visible = true
-		$Flashlight/AnimatedSprite2D.play("burst")
-		await get_tree().create_timer(0.4).timeout
-		$Flashlight/AnimatedSprite2D.visible = false
-		$Flashlight/AnimatedSprite2D.stop()
-
-
-func update_burst_action():
-	if burstables:
-		# add if one can be burst
-		for b in burstables:
-			if b.player_can_stun():
-				add_action(self, "burst_gloomba")
-				return
-
-	remove_action(self, "burst_gloomba")
+# 	if did_burst:
+# 		Hood.notif("Gloomba stunned!")
+# 		$Flashlight/AnimatedSprite2D.visible = true
+# 		$Flashlight/AnimatedSprite2D.play("burst")
+# 		await get_tree().create_timer(0.4).timeout
+# 		$Flashlight/AnimatedSprite2D.visible = false
+# 		$Flashlight/AnimatedSprite2D.stop()
 
 
-func _on_Burstbox_body_entered(body: Node):
-	if body.is_in_group("enemies"):
-		burstables.append(body)
-	update_burst_action()
+# func update_burst_action():
+# 	if burstables:
+# 		# add if one can be burst
+# 		for b in burstables:
+# 			if b.player_can_stun():
+# 				add_action(self, "burst_gloomba")
+# 				return
+
+# 	remove_action(self, "burst_gloomba")
 
 
-func _on_Burstbox_body_exited(body: Node):
-	if body.is_in_group("enemies"):
-		burstables.erase(body)
-	update_burst_action()
+# func _on_Burstbox_body_entered(body: Node):
+# 	if body.is_in_group("enemies"):
+# 		burstables.append(body)
+# 	update_burst_action()
 
 
-############################################################
-
-var actions = {}
-var current_action
-
-
-func update_actions_ui():
-	if actions:
-		# TODO support multiple actions, or preferred action?
-		# maybe actions can pass a priority
-		current_action = actions.values()[0]
-		$ActionLabel.text = str(
-			"[center]", current_action["fname"].capitalize(), "[/center]"
-		)
-	else:
-		current_action = null
-		$ActionLabel.text = ""
-
-
-func call_action(action):
-	action["obj"].call_deferred(action["fname"])
-
-
-func add_action(obj, fname):
-	actions[fname] = {"obj": obj, "fname": fname}
-	update_actions_ui()
-
-
-func remove_action(_obj, fname):
-	actions.erase(fname)
-	update_actions_ui()
+# func _on_Burstbox_body_exited(body: Node):
+# 	if body.is_in_group("enemies"):
+# 		burstables.erase(body)
+# 	update_burst_action()
