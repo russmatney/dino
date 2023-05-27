@@ -1,11 +1,8 @@
-extends CharacterBody2D
+@tool
+extends SSPlayer
 
-@onready var anim = $AnimatedSprite2D
 @onready var jet_anim = $Jet
 @onready var notif_label = $NotifLabel
-@onready var machine = $Machine
-
-var is_dead = false
 
 var has_jetpack: bool = false
 
@@ -13,196 +10,61 @@ var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
 # TODO support in tower's player class
 var tower_hud = preload("res://src/tower/hud/HUD.tscn")
 
-############################################################
-# _ready
-
-var reset_position
-
-func _enter_tree():
-	Hotel.book(self.scene_file_path)
+## ready ###########################################################
 
 func _ready():
-	Hotel.register(self)
+	if not Engine.is_editor_hint():
+		Cam.ensure_camera({
+			player=self,
+			zoom_rect_min=400,
+			proximity_min=100,
+			proximity_max=450,
+			})
+		Hood.ensure_hud(gunner_hud)
+	super._ready()
 
-	Debug.pr("gunner player getting ready: ", anim)
-	reset_position = get_global_position()
-	machine.transitioned.connect(on_transit)
-	face_left()
-
-	Cam.ensure_camera({
-		player=self,
-		zoom_rect_min=400,
-		proximity_min=100,
-		proximity_max=450,
-		})
-	Hood.ensure_hud(gunner_hud)
-
-	Debug.pr("gunner player ready: ", anim)
-	machine.start()
-
-###########################################################################
-# hotel data
+## hotel data ##########################################################################
 
 func check_out(data):
-	health = data.get("health", health)
+	super.check_out(data)
 	pickups = data.get("pickups", pickups)
 
 func hotel_data():
-	return {health=health, pickups=pickups}
+	var d = super.hotel_data()
+	d["pickups"] = pickups
+	return d
 
-############################################################
-# _process
-
-var positions = []
-var record_pos_n = 10
-var record_pos_every = 0.0005
-var record_pos_in = 0
-
-@export var max_y: float = 10000.0
-
-
-func _process(_delta):
-	move_dir = Trolley.move_vector()
-
-	# TODO remove_at/replace with some other thing?
-	if get_global_position().y >= max_y:
-		take_damage(null, 1)
-		position = reset_position
-		velocity = Vector2.ZERO
-
-
-############################################################
-# _unhandled_input
-
-var jump_count = 0
-
+## input ###########################################################
 
 func _unhandled_key_input(event):
 	if not is_dead and has_jetpack and Trolley.is_event(event, "jetpack"):
 		machine.transit("Jetpack")
-	elif not is_dead and Trolley.is_jump(event):
-		if can_wall_jump and is_on_wall():
-			machine.transit("Jump")
-		if state in ["Idle", "Run", "Fall"] and jump_count == 0:
-			machine.transit("Jump")
-	elif not is_dead and Trolley.is_event(event, "action"):
-		shine()
-	elif not is_dead and Trolley.is_event(event, "fire") and not state in ["Knockback"]:
+	elif not is_dead and Trolley.is_event(event, "fire") and not machine.state.name in ["KnockedBack"]:
 		fire()
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()
 
+## facing ###########################################################
 
-############################################################
-# health
-
-var initial_health = 6
-@onready var health = initial_health
-
-signal health_change(health)
-signal dead
-
-
-func take_damage(body = null, d = 1):
-	health -= d
-	Hotel.check_in(self, {health=health})
-	health_change.emit(health)
-	DJZ.play(DJZ.S.player_hit)
-
-	var dir
-	if body:
-		if body.global_position.x > global_position.x:
-			dir = Vector2.LEFT
-		else:
-			dir = Vector2.RIGHT
-		machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
-	elif health <= 0:
-		machine.transit("Dead", {"shake": 1.0})
-
-
-func die(remove_at = false):
-	is_dead = true
-	DJZ.play(DJZ.S.player_dead)
-	dead.emit()
-	if remove_at:
-		queue_free()
-
-
-############################################################
-# machine
-
-@onready var state_label = $StateLabel
-var state
-
-
-func on_transit(new_state):
-	state = new_state
-	set_state_label(new_state)
-
-
-func set_state_label(label: String):
-	var lbl = label
-	if machine.state.has_method("label"):
-		lbl = machine.state.label()
-	if in_blue:
-		lbl += " COLD"
-	if in_red:
-		lbl += " HOT"
-	state_label.text = "[center]" + lbl + "[/center]"
-
-
-############################################################
-# movement
-
-var move_dir = Vector2.ZERO  # controller input
-@export var speed: int = 220
-@export var air_speed: int = 200
-@export var max_fall_speed: int = 1500
-@export var jump_impulse: int = 400
-@export var gravity: int = 900
-@export var jetpack_boost: int = 800
-@export var max_jet_speed: int = -1200
-
-var can_wall_jump
-
-############################################################
-# facing
-
-var facing_dir = Vector2.ZERO
 @onready var look_pof = $LookPOF
 
-
 func update_facing():
-	if move_dir.x > 0:
-		face_right()
-	elif move_dir.x < 0:
-		face_left()
+	super.update_facing()
+	if move_vector.x > 0:
+		if bullet_position.position.x < 0:
+			bullet_position.position.x *= -1
+
+		if look_pof.position.x < 0:
+			look_pof.position.x *= -1
+	elif move_vector.x < 0:
+		if bullet_position.position.x > 0:
+			bullet_position.position.x *= -1
+
+		if look_pof.position.x > 0:
+			look_pof.position.x *= -1
 
 
-func face_right():
-	facing_dir = Vector2(1, 0)
-	anim.flip_h = true
-
-	if bullet_position.position.x < 0:
-		bullet_position.position.x *= -1
-
-	if look_pof.position.x < 0:
-		look_pof.position.x *= -1
-
-
-func face_left():
-	facing_dir = Vector2(-1, 0)
-	anim.flip_h = false
-
-	if bullet_position.position.x > 0:
-		bullet_position.position.x *= -1
-
-	if look_pof.position.x > 0:
-		look_pof.position.x *= -1
-
-
-############################################################
-# fire
+## fire ###########################################################
 
 @onready var bullet_position = $BulletPosition
 var firing = false
@@ -245,20 +107,18 @@ func fire_bullet():
 	bullet.position = bullet_position.get_global_position()
 	bullet.add_collision_exception_with(self)
 	Navi.current_scene.add_child.call_deferred(bullet)
-	bullet.rotation = facing_dir.angle()
-	bullet.apply_impulse(facing_dir * bullet_impulse, Vector2.ZERO)
+	bullet.rotation = facing_vector.angle()
+	bullet.apply_impulse(facing_vector * bullet_impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)
 	fired_bullet.emit(bullet)
 
 	# push player back when firing
 	var pos = get_global_position()
-	pos += -1 * facing_dir * bullet_knockback
+	pos += -1 * facing_vector * bullet_knockback
 	set_global_position(pos)
 
 
-######################################################################
-# notif
-
+## notif #####################################################################
 
 func notif(text, opts = {}):
 	Debug.pr("notif", text)
@@ -282,19 +142,12 @@ func notif(text, opts = {}):
 		tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
 
 
-######################################################################
-# level up
-
+## level up #####################################################################
 
 func level_up():
 	shine(2.0)
 	notif("LEVEL UP", {"dupe": true})
 	Hood.notif("Level Up")
-
-
-######################################################################
-# shine
-
 
 func shine(_time = 1.0):
 	pass
@@ -303,8 +156,7 @@ func shine(_time = 1.0):
 	# tween.tween_callback(anim.material.set.bind("shader_parameter/speed", 0.0)).set_delay(time)
 
 
-######################################################################
-# pickups
+## pickups #####################################################################
 
 var pickups = []
 
@@ -321,8 +173,7 @@ func collect_pickup(pickup_type):
 
 	Hotel.check_in(self, {pickups=pickups})
 
-######################################################################
-# tile color detection
+## tile color detection #####################################################################
 
 var current_tile_colors = []
 

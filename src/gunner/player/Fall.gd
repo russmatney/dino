@@ -35,7 +35,7 @@ func physics_process(delta):
 			# TODO player flash color and drop health
 			# TODO player hurt sound
 			shake = 1.0
-			actor.take_damage(null, 1)
+			actor.take_damage({damage=1})
 		elif fall_speed >= heavy_fall_speed_shake_threshold:
 			# TODO player flash color
 			shake = 0.6

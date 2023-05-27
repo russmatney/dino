@@ -1,5 +1,8 @@
 extends State
 
+var jetpack_boost: int = 800
+var max_jet_speed: int = -1200
+
 var is_jetting
 
 var jet_boost_ramp
@@ -91,9 +94,9 @@ func physics_process(delta):
 		else:
 			actor.jet_anim.animation = "init"
 
-		actor.velocity.y -= actor.jetpack_boost * boost_factor * delta
+		actor.velocity.y -= jetpack_boost * boost_factor * delta
 		actor.velocity.y += actor.gravity * delta / 4
-		actor.velocity.y = clamp(actor.velocity.y, actor.max_jet_speed, actor.velocity.y)
+		actor.velocity.y = clamp(actor.velocity.y, max_jet_speed, actor.velocity.y)
 	else:
 		actor.jet_anim.set_visible(false)
 		actor.velocity.y += actor.gravity * delta
