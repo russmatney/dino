@@ -43,6 +43,8 @@ var gravity = 1000 # for use in non-jump states
 @export var has_double_jump = false
 @export var has_climb = false
 @export var has_jetpack = false
+@export var has_ascend = false
+@export var has_descend = false
 
 # vars
 
@@ -65,6 +67,7 @@ var cam_pof
 var hurt_box
 var nav_agent
 var notif_label
+var warp_cast
 
 var high_wall_check
 var low_wall_check
@@ -110,6 +113,7 @@ func _ready():
 			near_ground_check="NearGroundCheck",
 			heart_particles="HeartParticles",
 			skull_particles="SkullParticles",
+			warp_cast="WarpCast",
 			})
 
 		if hurt_box:
@@ -156,6 +160,8 @@ func check_out(data):
 
 # TODO dry up against Util version
 func update_los_facing(p_facing, node):
+	if not node:
+		return
 	if p_facing == Vector2.RIGHT and node.scale.y < 0:
 		node.scale.y = 1
 		node.position.x = -node.position.x
@@ -353,3 +359,13 @@ func should_start_climb():
 func add_jetpack():
 	# TODO add jetpack anim, pull into beehive/sidescroller
 	has_jetpack = true
+
+## ascend/descend #######################################################
+
+func add_ascend():
+	# TODO add WarpCast dynamically
+	has_ascend = true
+
+func add_descend():
+	# TODO add WarpCast dynamically
+	has_descend = true

@@ -38,9 +38,20 @@ func _enter_tree():
 	# TODO set usual collision layers/masks
 	super._enter_tree()
 
-## ready ###########################################################
+## actions ###########################################################
 
-var actions = []
+var actions = [
+	Action.mk({label="Ascend",
+		fn=func(player): player.machine.transit("Ascend"),
+		actor_can_execute=func(p): return not p.is_dead and p.has_ascend,
+		}),
+	Action.mk({label="Descend",
+		fn=func(player): player.machine.transit("Descend"),
+		actor_can_execute=func(p): return not p.is_dead and p.has_descend,
+		})
+	]
+
+## ready ###########################################################
 
 func _ready():
 	Util.set_optional_nodes(self, {
@@ -58,7 +69,7 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
-		if not has_sword:
+		if not has_sword and sword:
 			sword.set_visible(false)
 
 	super._ready()
@@ -117,7 +128,7 @@ func _unhandled_input(event):
 
 	# generic attack
 	if Trolley.is_attack(event):
-		if has_sword:
+		if has_sword and sword:
 			sword.swing()
 			stamp({scale=2.0, ttl=1.0})
 
@@ -220,6 +231,9 @@ func add_coin():
 
 func add_gun():
 	# TODO add bullet/gun scene if one not found
+	if not bullet_position:
+		Debug.warn("Refusing to add gun, no bullet_position set")
+		return
 	has_gun = true
 
 var firing = false
@@ -276,6 +290,9 @@ func fire_bullet():
 
 func add_sword():
 	# TODO add sword scene if one not found
+	if not sword:
+		Debug.warn("Refusing to add sword, none found")
+		return
 	sword.set_visible(true)
 	sword.bodies_updated.connect(_on_sword_bodies_updated)
 	has_sword = true
@@ -290,25 +307,26 @@ func _on_sword_bodies_updated(bodies):
 		action_hint.hide()
 
 func aim_sword(dir):
-	if has_sword:
-		match (dir):
-			Vector2.UP:
-				sword.rotation_degrees = -90.0
-				sword.position.x = -8
-				sword.position.y = -10
-				sword.scale.x = 1
-			Vector2.DOWN:
-				sword.rotation_degrees = 90.0
-				sword.position.x = 9
-				sword.position.y = 12
-				sword.scale.x = 1
-			Vector2.LEFT:
-				sword.rotation_degrees = 0.0
-				sword.position.x = -9
-				sword.position.y = -10
-				sword.scale.x = -1
-			Vector2.RIGHT:
-				sword.rotation_degrees = 0.0
-				sword.position.x = 9
-				sword.position.y = -10
-				sword.scale.x = 1
+	if not has_sword or sword == null:
+		return
+	match (dir):
+		Vector2.UP:
+			sword.rotation_degrees = -90.0
+			sword.position.x = -8
+			sword.position.y = -10
+			sword.scale.x = 1
+		Vector2.DOWN:
+			sword.rotation_degrees = 90.0
+			sword.position.x = 9
+			sword.position.y = 12
+			sword.scale.x = 1
+		Vector2.LEFT:
+			sword.rotation_degrees = 0.0
+			sword.position.x = -9
+			sword.position.y = -10
+			sword.scale.x = -1
+		Vector2.RIGHT:
+			sword.rotation_degrees = 0.0
+			sword.position.x = 9
+			sword.position.y = -10
+			sword.scale.x = 1

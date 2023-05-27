@@ -78,20 +78,23 @@ func physics_process(delta):
 		is_jetting = false
 
 	if is_jetting and not actor.is_dead:
-		actor.jet_anim.set_visible(true)
+		if actor.jet_anim:
+			actor.jet_anim.set_visible(true)
 
 		var boost_factor = jet_boost_factor(delta)
 
-		if boost_factor > 0.5:
-			actor.jet_anim.play("all")
-		else:
-			actor.jet_anim.play("init")
+		if actor.jet_anim:
+			if boost_factor > 0.5:
+				actor.jet_anim.play("all")
+			else:
+				actor.jet_anim.play("init")
 
 		actor.velocity.y -= jetpack_boost * boost_factor * delta
 		actor.velocity.y += actor.gravity * delta / 4
 		actor.velocity.y = clamp(actor.velocity.y, max_jet_speed, actor.velocity.y)
 	else:
-		actor.jet_anim.set_visible(false)
+		if actor.jet_anim:
+			actor.jet_anim.set_visible(false)
 		actor.velocity.y += actor.gravity * delta
 
 	if actor.move_vector:

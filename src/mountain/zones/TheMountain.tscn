@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c0pkrdt2pgivv" path="res://src/mountain/BlurryCircleParticles.tscn" id="13_oonb0"]
 [ext_resource type="Shader" path="res://src/SimpleBlurScreen.gdshader" id="14_j24i6"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqj4k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44nsn"]
 resource_local_to_scene = true
 shader = ExtResource("14_j24i6")
 shader_parameter/lod = 2.221
@@ -75,7 +75,9 @@ color = Color(0.335116, 0.335116, 0.335116, 0.188235)
 shadow_enabled = true
 
 [node name="SSEnemy" parent="Peak" instance=ExtResource("9_jg13a")]
-position = Vector2(832, 32)
+position = Vector2(768, 32)
+has_ascend = null
+has_descend = null
 
 [node name="LogCheckpoint" parent="Peak" instance=ExtResource("9_j1p4u")]
 position = Vector2(180, 145)
@@ -99,7 +101,7 @@ position = Vector2(352, -176)
 position = Vector2(544, -176)
 
 [node name="BlurryCircleParticles" parent="Peak" instance=ExtResource("13_oonb0")]
-material = SubResource("ShaderMaterial_dqj4k")
+material = SubResource("ShaderMaterial_44nsn")
 position = Vector2(264, -32)
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]

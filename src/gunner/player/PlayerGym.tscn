@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://coo2aee7h0hok"]
 
 [ext_resource type="PackedScene" uid="uid://c5v7ka6hfytnk" path="res://src/gunner/player/Player.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_cn0yo"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_cn0yo"]
 [ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="6"]
 

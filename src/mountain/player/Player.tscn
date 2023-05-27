@@ -424,10 +424,13 @@ animations = [{
 collision_layer = 2
 script = ExtResource("1_g0biv")
 has_gun = true
+has_sword = true
 display_name = "HatBot"
 has_double_jump = true
 has_climb = true
 has_jetpack = true
+has_ascend = true
+has_descend = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
