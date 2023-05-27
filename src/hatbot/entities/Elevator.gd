@@ -69,7 +69,7 @@ func travel(player):
 	if room:
 		room.deactivate_cam_points()
 
-	player.move_to_target(global_position)
+	player.force_move_to_target(global_position)
 	traveling = true
 	z_index = 10
 	travel_dest = [destination_zone_name, destination_elevator_path]

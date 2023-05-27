@@ -7,50 +7,19 @@ var hud = preload("res://src/hatbot/hud/HUD.tscn")
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera({player=self,
-			# zoom_rect_min=200,
-			# zoom_margin_min=120,
-			})
+		Cam.ensure_camera({player=self})
 		Hood.ensure_hud(hud)
 
 		if not Game.is_managed:
 			powerups = SS.all_powerups
 
-	super._ready()
-
-	if not Engine.is_editor_hint():
 		died.connect(_on_player_death)
+
+	super._ready()
 
 func _on_transit(state):
 	if state in ["Fall", "Run"]:
 		stamp()
-
-
-## movement ##########################################################################
-
-# TODO re-incorporate guided movement, as a new state or variable
-var move_target
-var move_target_threshold = 10
-
-func get_move_vector():
-	if move_target != null:
-		var towards_target = move_target - position
-		var dist = towards_target.length()
-		if dist >= move_target_threshold:
-			return towards_target.normalized()
-		else:
-			return Vector2.ZERO
-		# note, no movement can occur until move_target is unset
-	else:
-		return Trolley.move_vector()
-
-# TODO perhaps a state for this
-func move_to_target(target_position):
-	move_target = target_position
-
-func clear_move_target():
-	move_target = null
-
 
 ## death anim, jumbotron #######################################################
 

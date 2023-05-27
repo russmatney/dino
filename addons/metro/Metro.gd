@@ -26,7 +26,7 @@ func travel_to(dest_zone_name, elevator_path):
 	if current_zone.name == dest_zone_name:
 		Debug.pr("Traveling in same zone", dest_zone_name, elevator_path)
 		current_zone.set_spawn_node(elevator_path)
-		Game.player.clear_move_target()
+		Game.player.clear_forced_movement_target()
 		Game.player.position = current_zone.player_spawn_coords()
 		return
 

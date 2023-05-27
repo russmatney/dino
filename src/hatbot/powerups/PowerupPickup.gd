@@ -1,4 +1,5 @@
 extends Node2D
+# TODO move to Beehive/sidescroller
 
 ##############################################################
 # powerup enum
@@ -84,14 +85,7 @@ func show_jumbotron(player):
 			label = "Toward wall"
 
 	if header:
-		player.move_to_target(global_position)
-		var on_close = Quest.jumbo_notif({
+		player.force_move_to_target(global_position)
+		Quest.jumbo_notif({
 			header=header, body=body, action=action, action_label_text=label,
-			})
-		if on_close:
-			if not Quest.jumbo_closed.is_connected(_on_close_respawn):
-				on_close.connect(_on_close_respawn.bind(on_close, player))
-
-func _on_close_respawn(on_close, player):
-	on_close.disconnect(_on_close_respawn)
-	player.clear_move_target()
+			on_close=player.clear_forced_move_target})

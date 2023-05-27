@@ -83,56 +83,31 @@ func check_out(data):
 	for p in powerups:
 		update_with_powerup(p)
 
-## pickups #####################################################################
-
-# TODO items abstraction, powerups handling
-var pickups = []
-
-signal pickups_changed(pickups)
-
-# TODO refactor jetpack pickup into ss powerup
-func collect_pickup(pickup_type):
-	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
-	pickups.append(pickup_type)
-	pickups_changed.emit(pickups)
-
-	Hotel.check_in(self, {pickups=pickups})
-
-## powerups #######################################################
-
-func update_with_powerup(powerup: SS.Powerup):
-	match (powerup):
-		SS.Powerup.Sword: add_sword()
-		SS.Powerup.DoubleJump: add_double_jump()
-		SS.Powerup.Climb: add_climb()
-		SS.Powerup.Gun: add_gun()
-		SS.Powerup.Jetpack: add_jetpack()
-
-func add_powerup(powerup: SS.Powerup):
-	powerups.append(powerup)
-	update_with_powerup(powerup)
-	Hotel.check_in(self)
-
-
 ## input ###########################################################
 
 func _unhandled_input(event):
-	# TODO move controls into the states?
-	if not is_dead and has_jetpack \
-		and Trolley.is_event(event, "jetpack"):
+	# prevent input
+	if block_control or is_dead or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+		return
+
+	# jetpack
+	if has_jetpack and Trolley.is_event(event, "jetpack"):
 		machine.transit("Jetpack")
-	if not is_dead and has_gun and Trolley.is_event(event, "fire") \
-		and not machine.state.name in ["KnockedBack"]:
+
+	# gun/fire
+	if has_gun and Trolley.is_event(event, "fire"):
 		fire()
 	elif has_gun and Trolley.is_event_released(event, "fire"):
 		stop_firing()
 
+	# generic action
 	if Trolley.is_action(event):
 		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		action_detector.execute_current_action()
 		action_detector.current_action()
 		Cam.hitstop("player_hitstop", 0.5, 0.2)
 
+	# action cycling
 	if Trolley.is_cycle_prev_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_prev_action()
@@ -140,6 +115,7 @@ func _unhandled_input(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 
+	# generic attack
 	if Trolley.is_attack(event):
 		if has_sword:
 			sword.swing()
@@ -148,9 +124,8 @@ func _unhandled_input(event):
 ## physics_process ###########################################################
 
 func _physics_process(_delta):
-	# super._physics_process(delta)
-
-	move_vector = Trolley.move_vector()
+	# checks forced_movement_target, then uses Trolley.move_vector
+	move_vector = get_move_vector()
 
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
@@ -178,6 +153,62 @@ func update_facing():
 	Util.update_h_flip(facing_vector, bullet_position)
 	Util.update_h_flip(facing_vector, look_pof)
 	Util.update_h_flip(facing_vector, light_occluder)
+
+## forced target ##########################################################################
+
+var block_control = false
+var forced_movement_target
+var forced_movement_target_threshold = 10
+
+func get_move_vector():
+	if forced_movement_target != null:
+		var towards_target = forced_movement_target - position
+		var dist = towards_target.length()
+		if dist >= forced_movement_target_threshold:
+			return towards_target.normalized()
+		else:
+			return Vector2.ZERO
+		# note, no movement can occur until forced_movement_target is unset
+	else:
+		return Trolley.move_vector()
+
+func force_move_to_target(target_position):
+	block_control = true
+	forced_movement_target = target_position
+
+func clear_forced_movement_target():
+	block_control = false
+	forced_movement_target = null
+
+## pickups #####################################################################
+
+var pickups = []
+
+signal pickups_changed(pickups)
+
+# TODO refactor jetpack pickup into ss powerup
+func collect_pickup(pickup_type):
+	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
+	pickups.append(pickup_type)
+	pickups_changed.emit(pickups)
+
+	Hotel.check_in(self, {pickups=pickups})
+
+## powerups #######################################################
+
+func update_with_powerup(powerup: SS.Powerup):
+	match (powerup):
+		SS.Powerup.Sword: add_sword()
+		SS.Powerup.DoubleJump: add_double_jump()
+		SS.Powerup.Climb: add_climb()
+		SS.Powerup.Gun: add_gun()
+		SS.Powerup.Jetpack: add_jetpack()
+
+func add_powerup(powerup: SS.Powerup):
+	powerups.append(powerup)
+	update_with_powerup(powerup)
+	Hotel.check_in(self)
+
 
 ## coins #######################################################
 
