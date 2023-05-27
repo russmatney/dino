@@ -232,24 +232,28 @@ func remove_matching(arr, to_remove):
 ############################################################
 # Facing
 
+# TODO dry these up into one helper
+# check node type and rotation
+
 func update_h_flip(facing, node):
-	if facing.x > 0 and node.position.x < 0:
-		node.position.x = -node.position.x
-		node.scale.x = -node.scale.x
-	elif facing.x < 0 and node.position.x > 0:
-		node.position.x = -node.position.x
-		node.scale.x = -node.scale.x
+	if node:
+		if facing.x > 0 and node.position.x < 0:
+			node.position.x = -node.position.x
+			node.scale.x = -node.scale.x
+		elif facing.x < 0 and node.position.x > 0:
+			node.position.x = -node.position.x
+			node.scale.x = -node.scale.x
 
 func update_los_facing(facing, node):
-	if facing.x > 0 and node.target_position.y > 0:
-		node.target_position.y = -node.target_position.y
-	elif facing.x < 0 and node.target_position.y < 0:
-		node.target_position.y = -node.target_position.y
+	if node:
+		if facing.x > 0 and node.target_position.y > 0:
+			node.target_position.y = -node.target_position.y
+		elif facing.x < 0 and node.target_position.y < 0:
+			node.target_position.y = -node.target_position.y
 
 
 #################################################################
 ## Animations
-
 
 func animate_rotate(node):
 	var tween = node.create_tween()
