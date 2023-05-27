@@ -8,7 +8,6 @@ func _enter_tree():
 	add_to_group("player", true)
 	super._enter_tree()
 
-
 ## ready ###########################################################
 
 func _ready():
@@ -17,15 +16,17 @@ func _ready():
 		Cam.ensure_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
 		Hood.ensure_hud()
 
-
 ## input ###########################################################
 
-func _unhandled_input(_event):
-	pass
+func _unhandled_input(event):
 	# if Trolley.is_jump(event) and machine.state.name in ["Idle", "Run"]:
 	# 	machine.transit("Jump")
 	# 	return
 
+	# TODO move controls into the states?
+	if not is_dead and has_jetpack \
+		and Trolley.is_event(event, "jetpack"):
+		machine.transit("Jetpack")
 
 ## physics_process ###########################################################
 

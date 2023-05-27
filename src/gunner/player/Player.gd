@@ -4,8 +4,6 @@ extends SSPlayer
 @onready var jet_anim = $Jet
 @onready var notif_label = $NotifLabel
 
-var has_jetpack: bool = false
-
 var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
 # TODO support in tower's player class
 var tower_hud = preload("res://src/tower/hud/HUD.tscn")
@@ -36,10 +34,10 @@ func hotel_data():
 
 ## input ###########################################################
 
-func _unhandled_key_input(event):
-	if not is_dead and has_jetpack and Trolley.is_event(event, "jetpack"):
-		machine.transit("Jetpack")
-	elif not is_dead and Trolley.is_event(event, "fire") and not machine.state.name in ["KnockedBack"]:
+func _unhandled_input(event):
+	super._unhandled_input(event)
+	if not is_dead and Trolley.is_event(event, "fire") \
+		and not machine.state.name in ["KnockedBack"]:
 		fire()
 	elif Trolley.is_event_released(event, "fire"):
 		stop_firing()

@@ -264,3 +264,9 @@ func should_start_climb():
 		if move_vector.x < 0 and x_diff < 0:
 			return true
 	return false
+
+## jetpack #######################################################
+
+var has_jetpack = false
+func add_jetpack():
+	has_jetpack = true

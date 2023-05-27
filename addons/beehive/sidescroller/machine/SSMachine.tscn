@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgan7tpytfkfo"]
+[gd_scene load_steps=17 format=3 uid="uid://dgan7tpytfkfo"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_3d800"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Idle.gd" id="2_pwwxs"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Descend.gd" id="13_2jjnq"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Rest.gd" id="14_l1437"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Climb.gd" id="15_q87oe"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/machine/Jetpack.gd" id="16_cfiwt"]
 
 [node name="SSMachine" type="Node"]
 script = ExtResource("1_3d800")
@@ -60,3 +61,6 @@ script = ExtResource("14_l1437")
 
 [node name="Climb" type="Node" parent="."]
 script = ExtResource("15_q87oe")
+
+[node name="Jetpack" type="Node" parent="."]
+script = ExtResource("16_cfiwt")
