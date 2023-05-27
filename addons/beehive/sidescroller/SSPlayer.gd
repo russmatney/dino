@@ -33,11 +33,7 @@ func _enter_tree():
 var actions = []
 
 func _ready():
-	# TODO util to dry up this assignment logic
-	if get_node_or_null("LookPOF"):
-		look_pof = $LookPOF
-	if get_node_or_null("BulletPosition"):
-		bullet_position = $BulletPosition
+	Util.set_optional_nodes(self, {look_pof="LookPOF", bullet_position="BulletPosition",})
 
 	if not Engine.is_editor_hint():
 		Cam.ensure_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
@@ -47,7 +43,7 @@ func _ready():
 		# TODO could we just Actions.register(self) or Trolley.register(self)?
 		# include opting into keybindings and current-ax updates
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
-			can_execute_any=func(): return machine and not machine.state.name in ["Rest"]})
+			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
 	super._ready()
 

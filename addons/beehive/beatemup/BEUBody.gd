@@ -50,9 +50,10 @@ var dying_knockback_speed: int = 11000
 @export var weight: int = 4
 @export var defense: int = 1
 
-var machine
-var anim
-var state_label
+@onready var machine = $BEUMachine
+@onready var anim = $AnimatedSprite2D
+@onready var state_label = $StateLabel
+
 var punch_box
 var grab_box
 var notice_box
@@ -76,11 +77,7 @@ func _enter_tree():
 func _ready():
 	Hotel.register(self)
 	if not Engine.is_editor_hint():
-		machine = $BEUMachine
-		state_label = $StateLabel
-		anim = $AnimatedSprite2D
-		if get_node_or_null("CamPOF"):
-			cam_pof = get_node("CamPOF")
+		Util.set_optional_nodes(self, {cam_pof="CamPOF"})
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()

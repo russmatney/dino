@@ -14,6 +14,13 @@ func p_script_vars(node):
 			Debug.pr("\t", prop["name"], ": ", self.get(prop["name"]))
 
 ############################################################
+# ready helpers
+
+func set_optional_nodes(node, node_map):
+	for k in node_map:
+		node[k] = node.get_node_or_null(node_map[k])
+
+############################################################
 # nearby
 
 # https://godotengine.org/qa/27869/how-to-get-the-nearest-object-in-a-group

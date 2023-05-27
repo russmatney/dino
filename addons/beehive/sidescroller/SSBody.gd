@@ -54,10 +54,11 @@ var is_player
 
 # nodes
 
-var coll
-var machine
-var state_label
-var anim
+@onready var coll = $CollisionShape2D
+@onready var anim = $AnimatedSprite2D
+@onready var machine = $SSMachine
+@onready var state_label = $StateLabel
+
 var jet_anim
 var cam_pof
 var hurt_box
@@ -97,41 +98,24 @@ func _ready():
 		should_patrol = false
 
 	if not Engine.is_editor_hint():
-		coll = $CollisionShape2D
-		anim = $AnimatedSprite2D
-		machine = $SSMachine
-		state_label = $StateLabel
+		Util.set_optional_nodes(self, {
+			jet_anim="Jet",
+			notif_label="NotifLabel",
+			cam_pof="CamPOF",
+			nav_agent="NavigationAgent2D",
+			hurt_box="HurtBox",
+			high_wall_check="HighWallCheck",
+			low_wall_check="LowWallCheck",
+			near_ground_check="NearGroundCheck",
+			heart_particles="HeartParticles",
+			skull_particles="SkullParticles",
+			})
 
-		if get_node_or_null("Jet"):
-			jet_anim = $Jet
-
-		if get_node_or_null("NotifLabel"):
-			notif_label = $NotifLabel
-
-		if get_node_or_null("CamPOF"):
-			cam_pof = $CamPOF
-
-		if get_node_or_null("NavigationAgent2D"):
-			nav_agent = $NavigationAgent2D
-
-		if get_node_or_null("HurtBox"):
-			hurt_box = $HurtBox
+		if hurt_box:
 			hurt_box.body_entered.connect(on_hurt_box_entered)
 			hurt_box.body_exited.connect(on_hurt_box_exited)
-
-		if get_node_or_null("HighWallCheck"):
-			high_wall_check = $HighWallCheck
-		if get_node_or_null("LowWallCheck"):
-			low_wall_check = $LowWallCheck
 		if high_wall_check or low_wall_check:
 			wall_checks = [high_wall_check, low_wall_check]
-		if get_node_or_null("NearGroundCheck"):
-			near_ground_check = $NearGroundCheck
-
-		if get_node_or_null("HeartParticles"):
-			heart_particles = $HeartParticles
-		if get_node_or_null("SkullParticles"):
-			skull_particles = $SkullParticles
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()
