@@ -7,6 +7,8 @@ class_name SSPlayer
 
 var look_pof
 var bullet_position
+var coins = 0
+
 
 @export var has_gun: bool
 
@@ -96,6 +98,12 @@ func update_facing():
 	super.update_facing()
 	Util.update_h_flip(facing_vector, bullet_position)
 	Util.update_h_flip(facing_vector, look_pof)
+
+## coins #######################################################
+
+func add_coin():
+	coins += 1
+	Hotel.check_in(self)
 
 ## gun/fire/bullets ###########################################################
 

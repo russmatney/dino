@@ -148,9 +148,20 @@ func check_out(data):
 
 ## facing ###########################################################
 
+# TODO dry up against Util version
+func update_los_facing(p_facing, node):
+	if p_facing == Vector2.RIGHT and node.scale.y < 0:
+		node.scale.y = 1
+		node.position.x = -node.position.x
+	elif p_facing == Vector2.LEFT and node.scale.y > 0:
+		node.scale.y = -1
+		node.position.x = -node.position.x
+
 func update_facing():
 	# all art should face RIGHT by default
 	anim.flip_h = facing_vector == Vector2.LEFT
+	update_los_facing(facing_vector, high_wall_check)
+	update_los_facing(facing_vector, low_wall_check)
 
 func flip_facing():
 	# assumes facing vector is always vec.left or vec.right

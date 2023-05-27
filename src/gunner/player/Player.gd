@@ -31,6 +31,7 @@ func hotel_data():
 
 ## pickups #####################################################################
 
+# TODO items abstraction, powerups handling
 var pickups = []
 
 signal pickups_changed(pickups)

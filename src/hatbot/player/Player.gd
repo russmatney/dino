@@ -12,7 +12,6 @@ var MAX_Y = 5000
 
 var death_count = 0
 var death_jumbo_open = false
-var coins = 0
 
 var powerups = []
 var has_sword = false
@@ -128,22 +127,11 @@ func clear_move_target():
 
 ## facing ##########################################################################
 
-# TODO dry up against Util version
-func update_los_facing(p_facing, node):
-	if p_facing == Vector2.RIGHT and node.scale.y < 0:
-		node.scale.y = 1
-		node.position.x = -node.position.x
-	elif p_facing == Vector2.LEFT and node.scale.y > 0:
-		node.scale.y = -1
-		node.position.x = -node.position.x
-
 func update_facing():
 	super.update_facing() # updates `facing_vector`
 	Util.update_h_flip(facing_vector, sword)
 	Util.update_h_flip(facing_vector, light_occluder)
 	Util.update_h_flip(facing_vector, look_point)
-	update_los_facing(facing_vector, high_wall_check)
-	update_los_facing(facing_vector, low_wall_check)
 
 
 ## health #######################################################
@@ -164,13 +152,6 @@ func _on_player_death():
 		action="close", action_label_text="Respawn",
 		on_close=Game.respawn_player.bind({setup_fn=func(p):
 			Hotel.check_in(p, {health=p.initial_health})})})
-
-
-## coins #######################################################
-
-func add_coin():
-	coins += 1
-	Hotel.check_in(self)
 
 ## powerups #######################################################
 
