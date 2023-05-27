@@ -2,8 +2,6 @@
 extends BEUBody
 class_name BEUPlayer
 
-var hud = preload("res://src/superElevatorLevel/hud/HUD.tscn")
-
 func _enter_tree():
 	add_to_group("player", true)
 	super._enter_tree()
@@ -15,7 +13,6 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		Cam.ensure_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
-		Hood.ensure_hud(hud)
 
 
 ## input ###########################################################
