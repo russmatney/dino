@@ -39,6 +39,11 @@ func _get_configuration_warnings():
 @onready var fall_gravity: float = ((2.0 * jump_max_height) / (fall_time * fall_time)) # ~2000
 var gravity = 1000 # for use in non-jump states
 
+# powerups
+@export var has_double_jump = false
+@export var has_climb = false
+@export var has_jetpack = false
+
 # vars
 
 var move_vector: Vector2
@@ -53,9 +58,11 @@ var coll
 var machine
 var state_label
 var anim
+var jet_anim
 var cam_pof
 var hurt_box
 var nav_agent
+var notif_label
 
 var high_wall_check
 var low_wall_check
@@ -90,10 +97,17 @@ func _ready():
 		should_patrol = false
 
 	if not Engine.is_editor_hint():
+		coll = $CollisionShape2D
+		anim = $AnimatedSprite2D
 		machine = $SSMachine
 		state_label = $StateLabel
-		anim = $AnimatedSprite2D
-		coll = $CollisionShape2D
+
+		if get_node_or_null("Jet"):
+			jet_anim = $Jet
+
+		if get_node_or_null("NotifLabel"):
+			notif_label = $NotifLabel
+
 		if get_node_or_null("CamPOF"):
 			cam_pof = $CamPOF
 
@@ -133,6 +147,7 @@ func get_rect():
 
 func _on_transit(label):
 	state_label.text = "[center]%s" % label
+
 
 ## hotel ###########################################################
 
@@ -235,17 +250,80 @@ func on_hurt_box_entered(body):
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
 
+#################################################################################
+## Effects #####################################################################
+
+## notif #####################################################################
+
+func notif(text, opts = {}):
+	var ttl = opts.get("ttl", 1.5)
+	var dupe = opts.get("dupe", false)
+	var label
+	if dupe:
+		label = notif_label.duplicate()
+	else:
+		label = notif_label
+
+	label.text = "[center]" + text
+	label.set_visible(true)
+	var tween = create_tween()
+	if dupe:
+		label.set_global_position(notif_label.get_global_position())
+		Navi.add_child_to_current(label)
+		tween.tween_callback(label.queue_free).set_delay(ttl)
+	else:
+		tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
+
+## level up #####################################################################
+
+func level_up():
+	shine(2.0)
+	notif("LEVEL UP", {"dupe": true})
+	Hood.notif("Level Up")
+
+## shine #####################################################################
+
+func shine(_time = 1.0):
+	pass
+	# var tween = create_tween()
+	# anim.material.set("shader_parameter/speed", 1.0)
+	# tween.tween_callback(anim.material.set.bind("shader_parameter/speed", 0.0)).set_delay(time)
+
+## stamp ##########################################################################
+
+func stamp(opts={}):
+	if not Engine.is_editor_hint():
+		var new_scale = opts.get("scale", 0.3)
+		var new_anim = AnimatedSprite2D.new()
+		new_anim.sprite_frames = anim.sprite_frames
+		new_anim.animation = anim.animation
+		new_anim.frame = anim.frame
+
+		if opts.get("include_action_hint", false) and self.get("action_hint"):
+			var ax_hint = self["action_hint"].duplicate()
+			new_anim.add_child(ax_hint)
+
+		new_anim.global_position = global_position + anim.position
+		Navi.add_child_to_current(new_anim)
+
+		var ttl = opts.get("ttl", 0.5)
+		if ttl > 0:
+			var t = create_tween()
+			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
+			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
+			t.tween_callback(new_anim.queue_free)
+
+#################################################################################
+## Powerups #####################################################################
 
 ## double jump #######################################################
 
-var has_double_jump = false
 func add_double_jump():
 	has_double_jump = true
 
 
 ## climb #######################################################
 
-var has_climb = false
 func add_climb():
 	has_climb = true
 
@@ -267,6 +345,5 @@ func should_start_climb():
 
 ## jetpack #######################################################
 
-var has_jetpack = false
 func add_jetpack():
 	has_jetpack = true

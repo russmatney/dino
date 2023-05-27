@@ -1,9 +1,6 @@
 @tool
 extends SSPlayer
 
-@onready var jet_anim = $Jet
-@onready var notif_label = $NotifLabel
-
 var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
 # TODO support in tower's player class
 var tower_hud = preload("res://src/tower/hud/HUD.tscn")
@@ -32,134 +29,11 @@ func hotel_data():
 	d["pickups"] = pickups
 	return d
 
-## input ###########################################################
-
-func _unhandled_input(event):
-	super._unhandled_input(event)
-	if not is_dead and Trolley.is_event(event, "fire") \
-		and not machine.state.name in ["KnockedBack"]:
-		fire()
-	elif Trolley.is_event_released(event, "fire"):
-		stop_firing()
-
-## facing ###########################################################
-
-@onready var look_pof = $LookPOF
-
-func update_facing():
-	super.update_facing()
-	if move_vector.x > 0:
-		if bullet_position.position.x < 0:
-			bullet_position.position.x *= -1
-
-		if look_pof.position.x < 0:
-			look_pof.position.x *= -1
-	elif move_vector.x < 0:
-		if bullet_position.position.x > 0:
-			bullet_position.position.x *= -1
-
-		if look_pof.position.x > 0:
-			look_pof.position.x *= -1
-
-
-## fire ###########################################################
-
-@onready var bullet_position = $BulletPosition
-var firing = false
-
-# per-bullet (gun) numbers
-
-var bullet_scene = preload("res://src/gunner/weapons/Bullet.tscn")
-var bullet_impulse = 800
-var fire_rate = 0.2
-var bullet_knockback = 2
-
-var fire_tween
-
-
-func fire():
-	firing = true
-
-	if fire_tween and fire_tween.is_running():
-		return
-
-	fire_tween = create_tween()
-	fire_bullet()
-	fire_tween.set_loops(0)
-	fire_tween.tween_callback(fire_bullet).set_delay(fire_rate)
-
-
-func stop_firing():
-	firing = false
-
-	# kill tween after last bullet
-	if fire_tween and fire_tween.is_running():
-		fire_tween.kill()
-
-
-signal fired_bullet(bullet)
-
-
-func fire_bullet():
-	var bullet = bullet_scene.instantiate()
-	bullet.position = bullet_position.get_global_position()
-	bullet.add_collision_exception_with(self)
-	Navi.current_scene.add_child.call_deferred(bullet)
-	bullet.rotation = facing_vector.angle()
-	bullet.apply_impulse(facing_vector * bullet_impulse, Vector2.ZERO)
-	DJZ.play(DJZ.S.fire)
-	fired_bullet.emit(bullet)
-
-	# push player back when firing
-	var pos = get_global_position()
-	pos += -1 * facing_vector * bullet_knockback
-	set_global_position(pos)
-
-
-## notif #####################################################################
-
-func notif(text, opts = {}):
-	Debug.pr("notif", text)
-
-	var ttl = opts.get("ttl", 1.5)
-	var dupe = opts.get("dupe", false)
-	var label
-	if dupe:
-		label = notif_label.duplicate()
-	else:
-		label = notif_label
-
-	label.text = "[center]" + text
-	label.set_visible(true)
-	var tween = create_tween()
-	if dupe:
-		label.set_global_position(notif_label.get_global_position())
-		Navi.add_child_to_current(label)
-		tween.tween_callback(label.queue_free).set_delay(ttl)
-	else:
-		tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
-
-
-## level up #####################################################################
-
-func level_up():
-	shine(2.0)
-	notif("LEVEL UP", {"dupe": true})
-	Hood.notif("Level Up")
-
-func shine(_time = 1.0):
-	pass
-	# var tween = create_tween()
-	# anim.material.set("shader_parameter/speed", 1.0)
-	# tween.tween_callback(anim.material.set.bind("shader_parameter/speed", 0.0)).set_delay(time)
-
-
 ## pickups #####################################################################
 
 var pickups = []
 
 signal pickups_changed(pickups)
-
 
 func collect_pickup(pickup_type):
 	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})

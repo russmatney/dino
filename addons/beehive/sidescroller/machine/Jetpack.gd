@@ -84,10 +84,10 @@ func physics_process(delta):
 
 		var boost_factor = jet_boost_factor(delta)
 
-		if actor.in_red:
-			boost_factor *= 2
-		if actor.in_blue:
-			boost_factor /= 8
+		# if actor.in_red:
+		# 	boost_factor *= 2
+		# if actor.in_blue:
+		# 	boost_factor /= 8
 
 		if boost_factor > 0.5:
 			actor.jet_anim.play("all")

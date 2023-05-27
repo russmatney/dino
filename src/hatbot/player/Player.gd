@@ -1,9 +1,6 @@
 @tool
 extends SSPlayer
 
-@onready var action_detector = $ActionDetector
-@onready var action_hint = $ActionHint
-
 @onready var light = $PointLight2D
 @onready var light_occluder = $LightOccluder2D
 @onready var look_point = $LookPoint
@@ -38,11 +35,6 @@ func _ready():
 	super._ready()
 
 	if not Engine.is_editor_hint():
-		# TODO could we just Actions.register(self) or Trolley.register(self)?
-		# include opting into keybindings and current-ax updates
-		action_detector.setup(self, {actions=actions, action_hint=action_hint,
-			can_execute_any=func(): return not machine.state.name in ["Rest"]})
-
 		if not has_sword:
 			sword.set_visible(false)
 
@@ -57,24 +49,6 @@ func _on_transit(state):
 
 	if state in ["Fall", "Run"]:
 		stamp()
-
-
-## actions ##########################################################################
-
-func can_execute_any_actions():
-	return move_target == null and not machine.state.name in ["Rest"]
-
-var actions = [
-	# Action.mk({label="Ascend",
-	# 	fn=func(player): player.machine.transit("Ascend"),
-	# 	actor_can_execute=func(p): return not p.is_dead,
-	# 	}),
-	# Action.mk({label="Descend",
-	# 	fn=func(player): player.machine.transit("Descend"),
-	# 	actor_can_execute=func(p): return not p.is_dead,
-	# 	})
-	]
-
 
 ## hotel data ##########################################################################
 
@@ -100,23 +74,15 @@ func check_out(data):
 ## input ##########################################################################
 
 func _unhandled_input(event):
+	super._unhandled_input(event)
 	if Trolley.is_action(event):
-		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		action_detector.execute_current_action()
 		action_detector.current_action()
-		Cam.hitstop("player_hitstop", 0.5, 0.2)
 
 	if Trolley.is_attack(event):
 		if has_sword:
 			sword.swing()
 			stamp({scale=2.0, ttl=1.0})
-
-	if Trolley.is_cycle_prev_action(event):
-		DJZ.play(DJZ.S.walk)
-		action_detector.cycle_prev_action()
-	elif Trolley.is_cycle_next_action(event):
-		DJZ.play(DJZ.S.walk)
-		action_detector.cycle_next_action()
 
 
 ## physics process ##########################################################################
@@ -206,7 +172,6 @@ func add_coin():
 	coins += 1
 	Hotel.check_in(self)
 
-
 ## powerups #######################################################
 
 func update_with_powerup(powerup: HatBot.Powerup):
@@ -260,28 +225,3 @@ func aim_sword(dir):
 				sword.position.x = 9
 				sword.position.y = -10
 				sword.scale.x = 1
-
-
-## stamp frame ##########################################################################
-
-func stamp(opts={}):
-	if not Engine.is_editor_hint() and move_target == null:
-		var new_scale = opts.get("scale", 0.3)
-		var new_anim = AnimatedSprite2D.new()
-		new_anim.sprite_frames = anim.sprite_frames
-		new_anim.animation = anim.animation
-		new_anim.frame = anim.frame
-
-		if opts.get("include_action_hint", false):
-			var ax_hint = action_hint.duplicate()
-			new_anim.add_child(ax_hint)
-
-		new_anim.global_position = global_position + anim.position
-		Navi.add_child_to_current(new_anim)
-
-		var ttl = opts.get("ttl", 0.5)
-		if ttl > 0:
-			var t = create_tween()
-			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
-			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
-			t.tween_callback(new_anim.queue_free)

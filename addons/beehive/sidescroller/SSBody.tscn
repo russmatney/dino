@@ -13,7 +13,6 @@ height = 18.0
 collision_layer = 0
 script = ExtResource("1_1ko7a")
 should_wander = true
-climb_speed = null
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
