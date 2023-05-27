@@ -6,11 +6,19 @@ class_name SSPlayer
 @onready var action_hint = $ActionHint
 
 var look_pof
+var light
+var light_occluder
+# TODO pull bullet into beehive/sidescroller
 var bullet_position
+# TODO pull Sword into beehive/sidescroller
+var sword
+
 var coins = 0
+var powerups = []
 
 
 @export var has_gun: bool
+@export var has_sword: bool
 
 ## config warning ###########################################################
 
@@ -35,7 +43,10 @@ func _enter_tree():
 var actions = []
 
 func _ready():
-	Util.set_optional_nodes(self, {look_pof="LookPOF", bullet_position="BulletPosition",})
+	Util.set_optional_nodes(self, {
+		look_pof="LookPOF", bullet_position="BulletPosition",
+		sword="Sword", light_occluder="LightOccluder2D", light="PointLight2D"
+		})
 
 	if not Engine.is_editor_hint():
 		Cam.ensure_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
@@ -47,7 +58,61 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
+		if not has_sword:
+			sword.set_visible(false)
+
 	super._ready()
+
+## hotel data ##########################################################################
+
+func hotel_data():
+	var d = super.hotel_data()
+	d["powerups"] = powerups
+	d["coins"] = coins
+	d["pickups"] = pickups
+	return d
+
+func check_out(data):
+	super.check_out(data)
+	coins = data.get("coins", coins)
+	pickups = data.get("pickups", pickups)
+	var stored_powerups = data.get("powerups", powerups)
+	if len(stored_powerups) > 0:
+		powerups = stored_powerups
+
+	for p in powerups:
+		update_with_powerup(p)
+
+## pickups #####################################################################
+
+# TODO items abstraction, powerups handling
+var pickups = []
+
+signal pickups_changed(pickups)
+
+# TODO refactor jetpack pickup into ss powerup
+func collect_pickup(pickup_type):
+	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
+	pickups.append(pickup_type)
+	pickups_changed.emit(pickups)
+
+	Hotel.check_in(self, {pickups=pickups})
+
+## powerups #######################################################
+
+func update_with_powerup(powerup: SS.Powerup):
+	match (powerup):
+		SS.Powerup.Sword: add_sword()
+		SS.Powerup.DoubleJump: add_double_jump()
+		SS.Powerup.Climb: add_climb()
+		SS.Powerup.Gun: add_gun()
+		SS.Powerup.Jetpack: add_jetpack()
+
+func add_powerup(powerup: SS.Powerup):
+	powerups.append(powerup)
+	update_with_powerup(powerup)
+	Hotel.check_in(self)
+
 
 ## input ###########################################################
 
@@ -75,6 +140,10 @@ func _unhandled_input(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 
+	if Trolley.is_attack(event):
+		if has_sword:
+			sword.swing()
+			stamp({scale=2.0, ttl=1.0})
 
 ## physics_process ###########################################################
 
@@ -92,12 +161,23 @@ func _physics_process(_delta):
 					facing_vector = Vector2.LEFT
 			update_facing()
 
+		if move_vector.abs().length() > 0 and has_sword:
+			# TODO perhaps we care about the deadzone here (for joysticks)
+			if move_vector.y > 0:
+				aim_sword(Vector2.DOWN)
+			elif move_vector.y < 0:
+				aim_sword(Vector2.UP)
+			else:
+				aim_sword(facing_vector)
+
 ## facing ###########################################################
 
 func update_facing():
 	super.update_facing()
+	Util.update_h_flip(facing_vector, sword)
 	Util.update_h_flip(facing_vector, bullet_position)
 	Util.update_h_flip(facing_vector, look_pof)
+	Util.update_h_flip(facing_vector, light_occluder)
 
 ## coins #######################################################
 
@@ -108,6 +188,7 @@ func add_coin():
 ## gun/fire/bullets ###########################################################
 
 func add_gun():
+	# TODO add bullet/gun scene if one not found
 	has_gun = true
 
 var firing = false
@@ -158,3 +239,45 @@ func fire_bullet():
 	var pos = get_global_position()
 	pos += -1 * facing_vector * bullet_knockback
 	set_global_position(pos)
+
+
+## sword #######################################################
+
+func add_sword():
+	# TODO add sword scene if one not found
+	sword.set_visible(true)
+	sword.bodies_updated.connect(_on_sword_bodies_updated)
+	has_sword = true
+
+func _on_sword_bodies_updated(bodies):
+	if len(bodies) > 0:
+		# TODO hide when we've seen some amount of sword action
+		# i.e. the player has learned it
+		# TODO combine with 'forget learned actions' pause button
+		action_hint.display("attack", "Sword")
+	else:
+		action_hint.hide()
+
+func aim_sword(dir):
+	if has_sword:
+		match (dir):
+			Vector2.UP:
+				sword.rotation_degrees = -90.0
+				sword.position.x = -8
+				sword.position.y = -10
+				sword.scale.x = 1
+			Vector2.DOWN:
+				sword.rotation_degrees = 90.0
+				sword.position.x = 9
+				sword.position.y = 12
+				sword.scale.x = 1
+			Vector2.LEFT:
+				sword.rotation_degrees = 0.0
+				sword.position.x = -9
+				sword.position.y = -10
+				sword.scale.x = -1
+			Vector2.RIGHT:
+				sword.rotation_degrees = 0.0
+				sword.position.x = 9
+				sword.position.y = -10
+				sword.scale.x = 1

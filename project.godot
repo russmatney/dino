@@ -33,6 +33,7 @@ import/cleanup/automatically_hide_sprites_not_in_animation=true
 
 Debug="*res://addons/core/Debug.gd"
 Util="*res://addons/core/Util.gd"
+SS="*res://addons/beehive/sidescroller/SideScroller.gd"
 Hood="*res://addons/hood/Hood.gd"
 Quest="*res://addons/quest/Quest.gd"
 Trolley="*res://addons/trolley/Trolley.gd"

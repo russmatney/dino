@@ -6,12 +6,6 @@ func _ready():
 	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
 	main_menu_scene = load("res://src/hatbot/menus/MainMenu.tscn")
 
-## data ##########################################################
-
-
-enum Powerup { Sword, DoubleJump, Climb, Read }
-var all_powerups = [Powerup.Sword, Powerup.DoubleJump, Powerup.Climb]
-
 
 ## zones ##########################################################
 

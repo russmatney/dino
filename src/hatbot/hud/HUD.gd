@@ -48,12 +48,12 @@ func set_health(health):
 @onready var climbing_gloves = $%ClimbingGlovesPowerup
 
 func set_powerups(powerups):
-	for p in HatBot.all_powerups:
+	for p in SS.all_powerups:
 		var vis = p in powerups
 		match(p):
-			HatBot.Powerup.Sword: sword.set_visible(vis)
-			HatBot.Powerup.DoubleJump: double_jump.set_visible(vis)
-			HatBot.Powerup.Climb: climbing_gloves.set_visible(vis)
+			SS.Powerup.Sword: sword.set_visible(vis)
+			SS.Powerup.DoubleJump: double_jump.set_visible(vis)
+			SS.Powerup.Climb: climbing_gloves.set_visible(vis)
 			_: pass
 
 ##########################################

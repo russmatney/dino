@@ -3,14 +3,14 @@ extends Node2D
 ##############################################################
 # powerup enum
 
-@export var powerup: HatBot.Powerup :
+@export var powerup: SS.Powerup :
 	set(v):
 		powerup = v
 		if anim:
 			match (powerup):
-				HatBot.Powerup.Sword: anim.play("sword")
-				HatBot.Powerup.DoubleJump: anim.play("doublejump")
-				HatBot.Powerup.Climb: anim.play("climbinggloves")
+				SS.Powerup.Sword: anim.play("sword")
+				SS.Powerup.DoubleJump: anim.play("doublejump")
+				SS.Powerup.Climb: anim.play("climbinggloves")
 				_: anim.play("read")
 
 ##############################################################
@@ -67,17 +67,17 @@ func show_jumbotron(player):
 	var action
 	var label
 	match (powerup):
-		HatBot.Powerup.Sword:
+		SS.Powerup.Sword:
 			header = "[jump]Sword[/jump]\nDiscovered!"
 			body = "Try it on wooden blocks!"
 			action = "attack"
 			label = "Swing"
-		HatBot.Powerup.DoubleJump:
+		SS.Powerup.DoubleJump:
 			header = "[jump]Double Jump[/jump]\nDiscovered!"
 			body = "....but how?"
 			action = "jump"
 			label = "Jump"
-		HatBot.Powerup.Climb:
+		SS.Powerup.Climb:
 			header = "[jump]Climbing Gloves[/jump]\nDiscovered!"
 			body = "Hold towards a wall to grab it."
 			action = "ad"

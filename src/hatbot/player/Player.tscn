@@ -359,7 +359,7 @@ active = false
 position = Vector2(2.08165e-12, 60)
 active = false
 
-[node name="LookPoint" parent="." instance=ExtResource("7_xveuf")]
+[node name="LookPOF" parent="." instance=ExtResource("7_xveuf")]
 position = Vector2(50, 2.08165e-12)
 active = false
 

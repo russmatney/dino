@@ -18,34 +18,6 @@ func _ready():
 		Hood.ensure_hud(gunner_hud)
 	super._ready()
 
-## hotel data ##########################################################################
-
-func check_out(data):
-	super.check_out(data)
-	pickups = data.get("pickups", pickups)
-
-func hotel_data():
-	var d = super.hotel_data()
-	d["pickups"] = pickups
-	return d
-
-## pickups #####################################################################
-
-# TODO items abstraction, powerups handling
-var pickups = []
-
-signal pickups_changed(pickups)
-
-func collect_pickup(pickup_type):
-	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
-	if pickup_type == "jetpack":
-		has_jetpack = true
-	else:
-		pickups.append(pickup_type)
-		pickups_changed.emit(pickups)
-
-	Hotel.check_in(self, {pickups=pickups})
-
 ## tile color detection #####################################################################
 
 var current_tile_colors = []

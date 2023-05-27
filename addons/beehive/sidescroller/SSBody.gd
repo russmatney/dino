@@ -51,6 +51,7 @@ var facing_vector: Vector2
 var health
 var is_dead
 var is_player
+var death_count = 0
 
 # nodes
 
@@ -116,6 +117,10 @@ func _ready():
 			hurt_box.body_exited.connect(on_hurt_box_exited)
 		if high_wall_check or low_wall_check:
 			wall_checks = [high_wall_check, low_wall_check]
+		if heart_particles:
+			heart_particles.set_emitting(false)
+		if skull_particles:
+			skull_particles.set_emitting(false)
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()
@@ -136,7 +141,7 @@ func _on_transit(label):
 ## hotel ###########################################################
 
 func hotel_data():
-	var d = {health=health, name=name, is_dead=is_dead}
+	var d = {health=health, name=name, is_dead=is_dead, death_count=death_count}
 	if not display_name in ["", null]: # yay types! woo!
 		d["display_name"] = display_name
 	return d
@@ -145,6 +150,7 @@ func check_out(data):
 	health = Util.get_(data, "health", initial_health)
 	is_dead = Util.get_(data, "is_dead", is_dead)
 	display_name = Util.get_(data, "display_name", display_name)
+	death_count = Util.get_(data, "death_count", death_count)
 
 ## facing ###########################################################
 
@@ -183,6 +189,7 @@ signal died()
 
 func die(opts={}):
 	is_dead = true
+	death_count += 1
 	Hotel.check_in(self)
 
 ## damage ###########################################################
@@ -288,6 +295,7 @@ func shine(_time = 1.0):
 
 ## stamp ##########################################################################
 
+# Supports 'perma-stamp' with ttl=0
 func stamp(opts={}):
 	if not Engine.is_editor_hint():
 		var new_scale = opts.get("scale", 0.3)
@@ -343,4 +351,5 @@ func should_start_climb():
 ## jetpack #######################################################
 
 func add_jetpack():
+	# TODO add jetpack anim, pull into beehive/sidescroller
 	has_jetpack = true
