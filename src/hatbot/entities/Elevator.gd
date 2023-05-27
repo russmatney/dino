@@ -8,6 +8,7 @@ extends Node2D
 # ready
 
 var actions = [
+	# TODO action hint on elevator
 	Action.mk({label_fn=get_dest_label, fn=travel})
 	]
 

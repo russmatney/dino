@@ -67,9 +67,8 @@ func physics_process(delta):
 	if Input.is_action_pressed("jetpack"):
 		if not is_jetting:
 			DJZ.interrupt(DJZ.S.jet_echo)
-			if not actor.in_blue:
-				DJZ.play(DJZ.S.jet_boost)
-				jet_sound_in = jet_sound_every
+			DJZ.play(DJZ.S.jet_boost)
+			jet_sound_in = jet_sound_every
 			is_jetting = true
 	else:
 		DJZ.interrupt(DJZ.S.jet_boost)
@@ -78,16 +77,10 @@ func physics_process(delta):
 		jet_boost_ramp = 0
 		is_jetting = false
 
-	# and not actor.in_blue
 	if is_jetting and not actor.is_dead:
 		actor.jet_anim.set_visible(true)
 
 		var boost_factor = jet_boost_factor(delta)
-
-		# if actor.in_red:
-		# 	boost_factor *= 2
-		# if actor.in_blue:
-		# 	boost_factor /= 8
 
 		if boost_factor > 0.5:
 			actor.jet_anim.play("all")
