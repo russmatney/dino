@@ -102,8 +102,12 @@ func _unhandled_input(event):
 		return
 
 	# jetpack
-	if has_jetpack and Trolley.is_event(event, "jetpack"):
+	if has_jetpack and Trolley.is_jetpack(event):
 		machine.transit("Jetpack")
+
+	# dash
+	if has_dash and Trolley.is_dash(event) and not machine.state.name in ["Dash"]:
+		machine.transit("Dash")
 
 	# gun/fire
 	if has_gun and Trolley.is_event(event, "fire"):

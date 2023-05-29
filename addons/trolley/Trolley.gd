@@ -172,6 +172,12 @@ func is_event_released(event, event_name):
 func is_jump(event):
 	return is_event(event, "jump")
 
+func is_dash(event):
+	return is_event(event, "dash")
+
+func is_jetpack(event):
+	return is_event(event, "jetpack")
+
 func is_attack(event):
 	return is_event(event, "attack")
 

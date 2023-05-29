@@ -45,6 +45,7 @@ var gravity = 1000 # for use in non-jump states
 @export var has_jetpack = false
 @export var has_ascend = false
 @export var has_descend = false
+@export var has_dash = false
 
 # vars
 
@@ -353,6 +354,12 @@ func should_start_climb():
 		if move_vector.x < 0 and x_diff < 0:
 			return true
 	return false
+
+## dash #######################################################
+
+func add_dash():
+	# TODO add dash anim, pull into beehive/sidescroller
+	has_dash = true
 
 ## jetpack #######################################################
 
