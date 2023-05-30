@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwaumvx2geh3k"]
+[gd_scene load_steps=11 format=3 uid="uid://bwaumvx2geh3k"]
 
 [ext_resource type="Texture2D" uid="uid://0mf16ugl1an6" path="res://addons/core/assets/lights/flashlight_sheet.png" id="1"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/weapons/Flashlight.gd" id="1_lfbsw"]
 [ext_resource type="Texture2D" uid="uid://bqef1c4gr30po" path="res://addons/core/assets/lights/flashlight_anim_sheet.png" id="2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4poe"]
@@ -46,7 +47,11 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4l6al"]
+radius = 108.019
+
 [node name="Flashlight" type="Node2D"]
+script = ExtResource("1_lfbsw")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(132, 1)
@@ -72,3 +77,9 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("8")
 animation = &"burst"
 autoplay = "burst"
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(109, 0)
+shape = SubResource("CircleShape2D_4l6al")

@@ -29,6 +29,7 @@ position = Vector2(750, 341)
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(440, 339)
+has_sword = Vector2(0, 0)
 has_climb = false
 has_ascend = false
 has_descend = false

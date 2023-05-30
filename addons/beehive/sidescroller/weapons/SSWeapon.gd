@@ -1,6 +1,11 @@
 extends Node2D
 class_name SSWeapon
 
+func _get_configuration_warnings():
+	return Util._config_warning(self, {expected_nodes=[
+		"HitBox", "AnimatedSprite2D",
+		]})
+
 ######################################################
 # vars
 

@@ -158,16 +158,6 @@ func _physics_process(_delta):
 			aim_vector = move_vector
 			aim_weapon(aim_vector)
 
-		# if move_vector.abs().length() > 0 and has_sword:
-		# 	# TODO maybe better done via an 'aim_vector' or 'look_vector'
-		# 	# TODO perhaps we care about the deadzone here (for joysticks)
-		# 	if move_vector.y > 0:
-		# 		aim_sword(Vector2.DOWN)
-		# 	elif move_vector.y < 0:
-		# 		aim_sword(Vector2.UP)
-		# 	else:
-		# 		aim_sword(facing_vector)
-
 ## facing ###########################################################
 
 func update_facing():
@@ -223,6 +213,7 @@ func collect_pickup(pickup_type):
 func update_with_powerup(powerup: SS.Powerup):
 	match (powerup):
 		SS.Powerup.Sword: add_sword()
+		SS.Powerup.Flashlight: add_flashlight()
 		SS.Powerup.Gun: add_gun()
 		SS.Powerup.Ascend: add_ascend()
 		SS.Powerup.Descend: add_descend()
@@ -314,5 +305,17 @@ func add_sword():
 		add_child(sword)
 
 	add_weapon(sword)
-	sword.set_visible(true)
 	has_sword = true
+
+## flashlight #######################################################
+
+var flashlight_scene = preload("res://addons/beehive/sidescroller/weapons/Flashlight.tscn")
+var flashlight
+
+func add_flashlight():
+	if not flashlight:
+		Debug.pr("No flashlight found, adding one")
+		flashlight = flashlight_scene.instantiate()
+		add_child(flashlight)
+
+	add_weapon(flashlight)
