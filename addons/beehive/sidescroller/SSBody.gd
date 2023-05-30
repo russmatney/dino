@@ -181,7 +181,9 @@ func update_facing():
 	update_los_facing(facing_vector, high_wall_check)
 	update_los_facing(facing_vector, low_wall_check)
 
-	# TODO update/flip weapons
+	# flip weapons
+	for w in weapons:
+		Util.update_h_flip(facing_vector, w)
 
 func flip_facing():
 	# assumes facing vector is always vec.left or vec.right

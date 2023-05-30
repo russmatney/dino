@@ -5,6 +5,7 @@
 [sub_resource type="CircleShape2D" id="1"]
 
 [node name="SmallLight" type="RigidBody2D"]
+collision_mask = 30
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -10.0

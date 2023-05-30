@@ -304,6 +304,7 @@ size = Vector2(96, 96)
 collision_layer = 2
 collision_mask = 49
 script = ExtResource("1_20cuc")
+has_flashlight = null
 display_name = "HatBot"
 jump_max_height = 50.0
 jump_min_height = 30.0

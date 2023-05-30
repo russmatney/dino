@@ -79,6 +79,8 @@ animation = &"burst"
 autoplay = "burst"
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(109, 0)

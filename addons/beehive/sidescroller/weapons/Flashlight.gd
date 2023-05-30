@@ -46,5 +46,5 @@ func burst():
 func _on_frame_changed():
 	if anim.animation == "burst" and anim.frame in [1, 2, 3]:
 		for b in bodies:
-			# TODO stun enemies
-			Debug.pr("stunning body:", b)
+			if b.has_method("stun"):
+				b.stun()

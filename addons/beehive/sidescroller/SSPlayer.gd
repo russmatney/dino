@@ -21,6 +21,7 @@ var aim_vector = Vector2.ZERO
 
 @export var has_gun: bool
 @export var has_sword: bool
+@export var has_flashlight: bool
 
 ## config warning ###########################################################
 
@@ -71,8 +72,11 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
-		if not has_sword and sword:
-			sword.set_visible(false)
+		# TODO maybe redundant in dev add-all-powerups mode
+		if has_sword:
+			add_sword()
+		if has_flashlight:
+			add_flashlight()
 
 	super._ready()
 
@@ -300,7 +304,6 @@ var sword_scene = preload("res://addons/beehive/sidescroller/weapons/Sword.tscn"
 
 func add_sword():
 	if not sword:
-		Debug.pr("No sword found, adding one")
 		sword = sword_scene.instantiate()
 		add_child(sword)
 
@@ -314,8 +317,8 @@ var flashlight
 
 func add_flashlight():
 	if not flashlight:
-		Debug.pr("No flashlight found, adding one")
 		flashlight = flashlight_scene.instantiate()
 		add_child(flashlight)
 
 	add_weapon(flashlight)
+	has_flashlight = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://qusnceo07dsy"]
 
-[ext_resource type="PackedScene" uid="uid://c8g7prvxfgj58" path="res://src/ghosts/player/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://c84hv83g7pen0" path="res://src/ghosts/player/Player.tscn" id="1"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(421, 20)
@@ -8,24 +8,6 @@ size = Vector2(421, 20)
 [node name="PlayerGym" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1")]
-has_gun = false
-has_sword = false
-display_name = "HatBot"
-initial_health = 6
-bump_damage = 2
-defense = 1
-should_wander = false
-should_patrol = false
-run_speed = 10000.0
-air_speed = 9000.0
-climb_speed = -100.0
-knockback_speed_y = 100.0
-knockback_speed_x = 30.0
-wander_speed = 4000.0
-jump_max_height = 100.0
-jump_min_height = 40.0
-jump_time = 0.3
-fall_time = 0.3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

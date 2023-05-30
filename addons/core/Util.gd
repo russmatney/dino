@@ -245,12 +245,16 @@ func remove_matching(arr, to_remove):
 func update_h_flip(facing, node):
 	if not node:
 		return
-	if facing.x > 0 and node.position.x < 0:
+	if facing.x > 0 and node.position.x <= 0:
 		node.position.x = -node.position.x
-		node.scale.x = -node.scale.x
-	elif facing.x < 0 and node.position.x > 0:
+		# forces positive x scale
+		if node.scale.x < 0:
+			node.scale.x = abs(node.scale.x)
+	elif facing.x < 0 and node.position.x >= 0:
 		node.position.x = -node.position.x
-		node.scale.x = -node.scale.x
+		# forces negative x scale
+		if node.scale.x > 0:
+			node.scale.x = -1 * abs(node.scale.x)
 
 func update_los_facing(facing, node):
 	if not node:
