@@ -1,59 +1,61 @@
-extends AnimatedSprite2D
+extends SSWeapon
 
-@onready var hitbox = $HitBox
+func aim(aim_vector: Vector2):
+	var dir
+
+	if aim_vector.y > 0:
+		dir = Vector2.DOWN
+	elif aim_vector.y < 0:
+		dir = Vector2.UP
+	elif aim_vector.x > 0:
+		dir = Vector2.RIGHT
+	elif aim_vector.x < 0:
+		dir = Vector2.LEFT
+
+	match (dir):
+		Vector2.UP:
+			rotation_degrees = -90.0
+			position.x = -8
+			position.y = -10
+			scale.x = 1
+		Vector2.DOWN:
+			rotation_degrees = 90.0
+			position.x = 9
+			position.y = 12
+			scale.x = 1
+		Vector2.LEFT:
+			rotation_degrees = 0.0
+			position.x = -9
+			position.y = -10
+			scale.x = -1
+		Vector2.RIGHT:
+			rotation_degrees = 0.0
+			position.x = 9
+			position.y = -10
+			scale.x = 1
+
+func activate():
+	pass
+
+func deactivate():
+	pass
+
+func use():
+	swing()
+
+func stop_using():
+	pass
 
 ######################################################
 # ready
 
-func _ready():
-	animation_finished.connect(_on_animation_finished)
-	hitbox.body_entered.connect(_on_body_entered)
-	hitbox.body_exited.connect(_on_body_exited)
-
-	hitbox.body_shape_entered.connect(_on_body_shape_entered)
-	hitbox.body_shape_exited.connect(_on_body_shape_exited)
-	bodies_updated.connect(_on_bodies_updated)
-	frame_changed.connect(_on_frame_changed)
+# func _ready():
+# 	super._ready()
 
 func _on_animation_finished():
-	if animation == "swing":
+	if anim.animation == "swing":
 		swinging = false
-		play("idle")
-
-func hit_rect():
-	var shape_rect = $HitBox/CollisionShape2D.shape.get_rect()
-	Debug.prn("shape_rect", shape_rect)
-	shape_rect.position = to_global(shape_rect.position)
-	return shape_rect
-
-
-######################################################
-# bodies
-
-signal bodies_updated(bodies)
-var bodies = []
-var body_shapes = []
-
-func _on_body_entered(body: Node2D):
-	bodies.append(body)
-	bodies_updated.emit(bodies)
-
-func _on_body_exited(body: Node2D):
-	bodies.erase(body)
-	bodies_updated.emit(bodies)
-
-func _on_bodies_updated(_bds):
-	pass
-	# Debug.debug_label("Sword bodies: ", bodies)
-	# Debug.debug_label("Sword body shapes: ", body_shapes)
-
-func _on_body_shape_entered(rid, body: Node2D, _bs_idx, _local_idx):
-	body_shapes.append([rid, body])
-	bodies_updated.emit(bodies)
-
-func _on_body_shape_exited(rid, body: Node2D, _bs_idx, _local_idx):
-	body_shapes.erase([rid, body])
-	bodies_updated.emit(bodies)
+		anim.play("idle")
 
 
 ######################################################
@@ -72,14 +74,16 @@ func swing():
 		# consider combos
 		return
 
+	Cam.hitstop("MEGAHITSTOP", 0.01, 0.4, 0.5)
+
 	swinging = true
 	bodies_this_swing = []
-	play("swing")
+	anim.play("swing")
 	DJZ.play(DJZ.S.swordswing)
 	Cam.screenshake(0.18)
 
 func _on_frame_changed():
-	if animation == "swing" and frame in [1, 2, 3]:
+	if anim.animation == "swing" and anim.frame in [1, 2, 3]:
 		for b in bodies:
 			if b.has_method("take_hit"):
 				if not b in bodies_this_swing:

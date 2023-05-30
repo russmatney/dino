@@ -112,9 +112,9 @@ func _unhandled_input(event):
 		machine.transit("Dash")
 
 	# generic weapon
-	if has_weapon() and Trolley.is_fire(event):
+	if has_weapon() and Trolley.is_attack(event):
 		use_weapon()
-	elif has_weapon() and Trolley.is_fire_released(event):
+	elif has_weapon() and Trolley.is_attack_released(event):
 		stop_using_weapon()
 
 	# gun/fire
@@ -122,12 +122,6 @@ func _unhandled_input(event):
 		fire()
 	elif has_gun and Trolley.is_fire_released(event):
 		stop_firing()
-
-	# generic attack/sword
-	if Trolley.is_attack(event):
-		if has_sword and sword:
-			sword.swing()
-			stamp({scale=2.0, ttl=1.0})
 
 	# generic action
 	if Trolley.is_action(event):
@@ -164,20 +158,21 @@ func _physics_process(_delta):
 			aim_vector = move_vector
 			aim_weapon(aim_vector)
 
-		if move_vector.abs().length() > 0 and has_sword:
-			# TODO maybe better done via an 'aim_vector' or 'look_vector'
-			# TODO perhaps we care about the deadzone here (for joysticks)
-			if move_vector.y > 0:
-				aim_sword(Vector2.DOWN)
-			elif move_vector.y < 0:
-				aim_sword(Vector2.UP)
-			else:
-				aim_sword(facing_vector)
+		# if move_vector.abs().length() > 0 and has_sword:
+		# 	# TODO maybe better done via an 'aim_vector' or 'look_vector'
+		# 	# TODO perhaps we care about the deadzone here (for joysticks)
+		# 	if move_vector.y > 0:
+		# 		aim_sword(Vector2.DOWN)
+		# 	elif move_vector.y < 0:
+		# 		aim_sword(Vector2.UP)
+		# 	else:
+		# 		aim_sword(facing_vector)
 
 ## facing ###########################################################
 
 func update_facing():
 	super.update_facing()
+	# TODO flip weapons (here or in ssbody)
 	Util.update_h_flip(facing_vector, sword)
 	Util.update_h_flip(facing_vector, bullet_position)
 	Util.update_h_flip(facing_vector, look_pof)
@@ -318,40 +313,6 @@ func add_sword():
 		sword = sword_scene.instantiate()
 		add_child(sword)
 
+	add_weapon(sword)
 	sword.set_visible(true)
-	sword.bodies_updated.connect(_on_sword_bodies_updated)
 	has_sword = true
-
-func _on_sword_bodies_updated(bodies):
-	if len(bodies) > 0:
-		# TODO hide when we've seen some amount of sword action
-		# i.e. the player has learned it
-		# TODO combine with 'forget learned actions' pause button
-		action_hint.display("attack", "Sword")
-	else:
-		action_hint.hide()
-
-func aim_sword(dir):
-	if not has_sword or sword == null:
-		return
-	match (dir):
-		Vector2.UP:
-			sword.rotation_degrees = -90.0
-			sword.position.x = -8
-			sword.position.y = -10
-			sword.scale.x = 1
-		Vector2.DOWN:
-			sword.rotation_degrees = 90.0
-			sword.position.x = 9
-			sword.position.y = 12
-			sword.scale.x = 1
-		Vector2.LEFT:
-			sword.rotation_degrees = 0.0
-			sword.position.x = -9
-			sword.position.y = -10
-			sword.scale.x = -1
-		Vector2.RIGHT:
-			sword.rotation_degrees = 0.0
-			sword.position.x = 9
-			sword.position.y = -10
-			sword.scale.x = 1

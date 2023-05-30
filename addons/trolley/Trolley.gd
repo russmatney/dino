@@ -187,6 +187,9 @@ func is_jetpack(event):
 func is_attack(event):
 	return is_event(event, "attack")
 
+func is_attack_released(event):
+	return is_event_released(event, "attack")
+
 func is_action(event):
 	return is_event(event, "action")
 

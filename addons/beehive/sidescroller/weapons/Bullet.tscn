@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://c7c6amq4jlid3"]
 
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="1"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/weapons/Bullet.gd" id="2"]

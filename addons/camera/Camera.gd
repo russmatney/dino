@@ -129,6 +129,7 @@ func screenshake(trauma = 0.3):
 ##############################################################
 # freezeframe
 
+# TODO refactor into opts based map apis
 
 # freezeframes called in parallel may compete/reset eachother
 # maybe register_slowmo is a viable workaround?
