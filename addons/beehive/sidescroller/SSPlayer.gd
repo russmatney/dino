@@ -16,6 +16,8 @@ var sword
 var coins = 0
 var powerups = []
 
+var aim_vector = Vector2.ZERO
+
 
 @export var has_gun: bool
 @export var has_sword: bool
@@ -109,11 +111,23 @@ func _unhandled_input(event):
 	if has_dash and Trolley.is_dash(event) and not machine.state.name in ["Dash"]:
 		machine.transit("Dash")
 
+	# generic weapon
+	if has_weapon() and Trolley.is_fire(event):
+		use_weapon()
+	elif has_weapon() and Trolley.is_fire_released(event):
+		stop_using_weapon()
+
 	# gun/fire
-	if has_gun and Trolley.is_event(event, "fire"):
+	if has_gun and Trolley.is_fire(event):
 		fire()
-	elif has_gun and Trolley.is_event_released(event, "fire"):
+	elif has_gun and Trolley.is_fire_released(event):
 		stop_firing()
+
+	# generic attack/sword
+	if Trolley.is_attack(event):
+		if has_sword and sword:
+			sword.swing()
+			stamp({scale=2.0, ttl=1.0})
 
 	# generic action
 	if Trolley.is_action(event):
@@ -130,12 +144,6 @@ func _unhandled_input(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 
-	# generic attack
-	if Trolley.is_attack(event):
-		if has_sword and sword:
-			sword.swing()
-			stamp({scale=2.0, ttl=1.0})
-
 ## physics_process ###########################################################
 
 func _physics_process(_delta):
@@ -151,7 +159,13 @@ func _physics_process(_delta):
 					facing_vector = Vector2.LEFT
 			update_facing()
 
+		if move_vector.abs().length() > 0 and has_weapon():
+			# maybe this just works?
+			aim_vector = move_vector
+			aim_weapon(aim_vector)
+
 		if move_vector.abs().length() > 0 and has_sword:
+			# TODO maybe better done via an 'aim_vector' or 'look_vector'
 			# TODO perhaps we care about the deadzone here (for joysticks)
 			if move_vector.y > 0:
 				aim_sword(Vector2.DOWN)

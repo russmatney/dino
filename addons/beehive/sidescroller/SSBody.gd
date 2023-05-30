@@ -47,6 +47,9 @@ var gravity = 1000 # for use in non-jump states
 @export var has_descend = false
 @export var has_dash = false
 
+# slot for Weapon impl - sword, gun, bow, flashlight, etc
+var weapons = []
+
 # vars
 
 var move_vector: Vector2
@@ -171,10 +174,14 @@ func update_los_facing(p_facing, node):
 		node.position.x = -node.position.x
 
 func update_facing():
+	# could we just flip the parent x-scale ?!?
+
 	# all art should face RIGHT by default
 	anim.flip_h = facing_vector == Vector2.LEFT
 	update_los_facing(facing_vector, high_wall_check)
 	update_los_facing(facing_vector, low_wall_check)
+
+	# TODO update/flip weapons
 
 func flip_facing():
 	# assumes facing vector is always vec.left or vec.right
@@ -382,3 +389,53 @@ func add_descend():
 		Debug.warn("refusing to add descend powerup")
 		return
 	has_descend = true
+
+## weapon #######################################################
+
+func add_weapon(weapon):
+	if not weapon in weapons:
+		weapons.append(weapon)
+
+func has_weapon():
+	return active_weapon() != null
+
+func active_weapon():
+	if len(weapons) > 0:
+		return weapons[0]
+
+func aim_weapon(aim_vector):
+	var w = active_weapon()
+	if w:
+		w.aim(aim_vector)
+
+# Drops the first weapon if none is passed
+func drop_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	# TODO drop/create new pickup/powerup?
+	if weapon in weapons:
+		weapons.erase(weapon)
+
+# maybe different from 'use' for multi-state things like the flashlight?
+func activate_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.activate()
+
+# turn off the flashlight, sheath the sword, holser the gun?
+func deactivate_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.deactivate()
+
+# Uses the first weapon if none is passed
+func use_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.use()
+
+# i.e. button released, stop firing or whatever continuous action
+func stop_using_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.stop_using()

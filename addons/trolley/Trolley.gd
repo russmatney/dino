@@ -169,6 +169,12 @@ func is_event_released(event, event_name):
 		return event.is_action_released(event_name)
 	return false
 
+func is_fire(event):
+	return is_event(event, "fire")
+
+func is_fire_released(event):
+	return is_event_released(event, "fire")
+
 func is_jump(event):
 	return is_event(event, "jump")
 
