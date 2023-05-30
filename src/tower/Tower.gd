@@ -57,17 +57,11 @@ func on_player_spawned(player):
 	for k in player_default_opts.keys():
 		player[k] = player_default_opts[k]
 
-	player.dead.connect(show_dead)
+	player.died.connect(Navi.show_death_menu)
 	DJZ.play(DJZ.S.player_spawn)
 
 
-func show_dead():
-	Debug.pr("[TOWER] player dead")
-	Navi.show_death_menu()
-
-
-###########################################################################
-# enemy
+## enemy ##########################################################################
 
 var enemy_robot_scene = preload("res://src/gunner/enemies/EnemyRobot.tscn")
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b08yhx4eeirf7"]
 
-[ext_resource type="PackedScene" path="res://addons/trolley/TrolleyActionLabel.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bk4bvkw3p7xfc" path="res://addons/trolley/TrolleyActionLabel.tscn" id="1"]
 
 [node name="TowerControls" type="VBoxContainer"]
 offset_right = 100.0
