@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="4_31evr"]
 [ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="5_p3d4k"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
+[ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
 [ext_resource type="PackedScene" uid="uid://bax62g5wrhfl7" path="res://src/mountain/checkpoints/LogCheckpoint.tscn" id="9_j1p4u"]
 [ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="9_jg13a"]
 [ext_resource type="PackedScene" uid="uid://dkyb7ritrpatt" path="res://src/mountain/checkpoints/CaveCheckpoint.tscn" id="10_riig2"]
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/mountain/checkpoints/SnowCheckpoint.tscn" id="11_l3xsv"]
 [ext_resource type="PackedScene" uid="uid://c8bdi1yxvp67w" path="res://src/mountain/SnowFallParticles.tscn" id="12_xcbii"]
-[ext_resource type="PackedScene" path="res://src/mountain/BlurryCircleParticles.tscn" id="13_oonb0"]
+[ext_resource type="PackedScene" uid="uid://c0pkrdt2pgivv" path="res://src/mountain/BlurryCircleParticles.tscn" id="13_oonb0"]
 [ext_resource type="Shader" path="res://src/SimpleBlurScreen.gdshader" id="14_j24i6"]
 [ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/mountain/RainFallParticles.tscn" id="16_bwnd5"]
 
@@ -31,7 +31,7 @@ adjustment_enabled = true
 adjustment_contrast = 1.77
 adjustment_saturation = 1.26
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w54py"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rgui"]
 resource_local_to_scene = true
 shader = ExtResource("14_j24i6")
 shader_parameter/lod = 2.221
@@ -118,7 +118,7 @@ position = Vector2(352, -176)
 position = Vector2(544, -176)
 
 [node name="BlurryCircleParticles" parent="Peak" instance=ExtResource("13_oonb0")]
-material = SubResource("ShaderMaterial_w54py")
+material = SubResource("ShaderMaterial_4rgui")
 position = Vector2(264, -32)
 
 [node name="Summit" type="Node2D" parent="." groups=["metro_rooms"]]

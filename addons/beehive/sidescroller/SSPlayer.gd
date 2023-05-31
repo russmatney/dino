@@ -9,7 +9,7 @@ var look_pof
 var light
 var light_occluder
 # TODO pull bullet into beehive/sidescroller
-var bullet_position
+var arrow_position
 # TODO pull Sword into beehive/sidescroller
 var sword
 
@@ -29,7 +29,7 @@ func _get_configuration_warnings():
 	var warns = super._get_configuration_warnings()
 	var more = Util._config_warning(self, {expected_nodes=[
 		"ActionDetector", "ActionHint",
-		"LookPOF", "BulletPosition",
+		"LookPOF", "ArrowPosition",
 		]})
 	warns.append_array(more)
 	return warns
@@ -58,7 +58,7 @@ var actions = [
 
 func _ready():
 	Util.set_optional_nodes(self, {
-		look_pof="LookPOF", bullet_position="BulletPosition",
+		look_pof="LookPOF", arrow_position="ArrowPosition",
 		sword="Sword", light_occluder="LightOccluder2D", light="PointLight2D"
 		})
 
@@ -168,7 +168,7 @@ func update_facing():
 	super.update_facing()
 	# TODO flip weapons (here or in ssbody)
 	Util.update_h_flip(facing_vector, sword)
-	Util.update_h_flip(facing_vector, bullet_position)
+	Util.update_h_flip(facing_vector, arrow_position)
 	Util.update_h_flip(facing_vector, look_pof)
 	Util.update_h_flip(facing_vector, light_occluder)
 
@@ -240,21 +240,20 @@ func add_coin():
 ## gun/fire/bullets ###########################################################
 
 func add_gun():
-	# TODO add bullet/gun scene if one not found
-	if not bullet_position:
-		bullet_position = Marker2D.new()
-		bullet_position.name = "BulletPosition"
-		bullet_position.position = Vector2.ONE * -12
-		add_child(bullet_position)
+	if not arrow_position:
+		arrow_position = Marker2D.new()
+		arrow_position.name = "ArrowPosition"
+		arrow_position.position = Vector2.ONE * -12
+		add_child(arrow_position)
 	has_gun = true
 
 var firing = false
 
 # TODO pull metadata into generic, reusable (customizable) bullet scene
-var bullet_scene = preload("res://addons/beehive/sidescroller/weapons/Bullet.tscn")
-var bullet_impulse = 800
+var arrow_scene = preload("res://addons/beehive/sidescroller/weapons/Arrow.tscn")
+var arrow_impulse = 800
 var fire_rate = 0.2
-var bullet_knockback = 3
+var arrow_knockback = 3
 
 var fire_tween
 
@@ -265,36 +264,36 @@ func fire():
 		return
 
 	fire_tween = create_tween()
-	fire_bullet()
+	fire_arrow()
 	fire_tween.set_loops(0)
-	fire_tween.tween_callback(fire_bullet).set_delay(fire_rate)
+	fire_tween.tween_callback(fire_arrow).set_delay(fire_rate)
 
 func stop_firing():
 	firing = false
 
-	# kill tween after last bullet
+	# kill tween after last arrow
 	if fire_tween and fire_tween.is_running():
 		fire_tween.kill()
 
-signal fired_bullet(bullet)
+signal fired_arrow(arrow)
 
-func fire_bullet():
+func fire_arrow():
 	if facing_vector == null:
 		# TODO not sure why firing before moving falls flat
 		facing_vector = Vector2.RIGHT
 		update_facing()
-	var bullet = bullet_scene.instantiate()
-	bullet.position = bullet_position.get_global_position()
-	bullet.add_collision_exception_with(self)
-	Navi.current_scene.add_child.call_deferred(bullet)
-	bullet.rotation = facing_vector.angle()
-	bullet.apply_impulse(facing_vector * bullet_impulse, Vector2.ZERO)
+	var arrow = arrow_scene.instantiate()
+	arrow.position = arrow_position.get_global_position()
+	arrow.add_collision_exception_with(self)
+	Navi.current_scene.add_child.call_deferred(arrow)
+	arrow.rotation = facing_vector.angle()
+	arrow.apply_impulse(facing_vector * arrow_impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)
-	fired_bullet.emit(bullet)
+	fired_arrow.emit(arrow)
 
 	# player push back when firing
 	var pos = get_global_position()
-	pos += -1 * facing_vector * bullet_knockback
+	pos += -1 * facing_vector * arrow_knockback
 	set_global_position(pos)
 
 

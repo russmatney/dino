@@ -49,7 +49,7 @@ var gravity = 900
 var facing_dir = Vector2.LEFT
 var move_dir
 
-@onready var bullet_position = $BulletPosition
+@onready var arrow_position = $ArrowPosition
 @onready var front_ray = $FrontRay
 @onready var vision_box = $VisionBox
 @onready var vision_ray = $VisionRay
@@ -73,8 +73,8 @@ func face_right():
 	facing_dir = Vector2.RIGHT
 	anim.flip_h = true
 
-	if bullet_position.position.x < 0:
-		bullet_position.position.x *= -1
+	if arrow_position.position.x < 0:
+		arrow_position.position.x *= -1
 
 	if front_ray.position.x < 0:
 		front_ray.position.x *= -1
@@ -90,8 +90,8 @@ func face_left():
 	facing_dir = Vector2.LEFT
 	anim.flip_h = false
 
-	if bullet_position.position.x > 0:
-		bullet_position.position.x *= -1
+	if arrow_position.position.x > 0:
+		arrow_position.position.x *= -1
 
 	if front_ray.position.x > 0:
 		front_ray.position.x *= -1
@@ -158,25 +158,22 @@ func _on_VisionBox_body_exited(body: Node):
 ########################################################
 # fire
 
-@onready var bullet_scene = preload("res://addons/beehive/sidescroller/weapons/Bullet.tscn")
-var bullet_impulse = 800
+@onready var arrow_scene = preload("res://addons/beehive/sidescroller/weapons/Arrow.tscn")
+var arrow_impulse = 800
 var fire_rate = 0.2
-var bullet_knockback = 2
-
-signal fired_bullet(bullet)
+var arrow_knockback = 2
 
 
 func fire_at_player():
 	if player and not player.is_dead and is_instance_valid(player):
-		var bullet = bullet_scene.instantiate()
-		bullet.position = bullet_position.get_global_position()
-		bullet.add_collision_exception_with(self)
-		Navi.current_scene.add_child.call_deferred(bullet)
+		var arrow = arrow_scene.instantiate()
+		arrow.position = arrow_position.get_global_position()
+		arrow.add_collision_exception_with(self)
+		Navi.current_scene.add_child.call_deferred(arrow)
 
-		var angle_to_player = bullet.position.direction_to(player.global_position + Vector2(0, -15))
+		var angle_to_player = arrow.position.direction_to(player.global_position + Vector2(0, -15))
 
-		bullet.rotation = angle_to_player.angle()
-		bullet.apply_impulse(angle_to_player * bullet_impulse, Vector2.ZERO)
+		arrow.rotation = angle_to_player.angle()
+		arrow.apply_impulse(angle_to_player * arrow_impulse, Vector2.ZERO)
 
 		DJZ.play(DJZ.S.fire)
-		fired_bullet.emit(bullet)

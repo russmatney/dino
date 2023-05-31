@@ -49,9 +49,6 @@ func stop_using():
 ######################################################
 # ready
 
-# func _ready():
-# 	super._ready()
-
 func _on_animation_finished():
 	if anim.animation == "swing":
 		swinging = false
@@ -71,10 +68,7 @@ var swinging
 var bodies_this_swing = []
 func swing():
 	if swinging:
-		# consider combos
 		return
-
-	Cam.hitstop("MEGAHITSTOP", 0.01, 0.4, 0.5)
 
 	swinging = true
 	bodies_this_swing = []

@@ -31,10 +31,7 @@ var bursting
 var bodies_this_swing = []
 func burst():
 	if bursting:
-		# consider combos
 		return
-
-	Cam.hitstop("MEGAHITSTOP", 0.01, 0.4, 0.5)
 
 	bursting = true
 	bodies_this_swing = []

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://b462pe2po5a1c"]
 
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/enemies/EnemyRobot.gd" id="4"]
@@ -47,7 +47,7 @@ script = ExtResource("9")
 [node name="Attack" type="Node" parent="Machine"]
 script = ExtResource("10")
 
-[node name="BulletPosition" type="Marker2D" parent="."]
+[node name="ArrowPosition" type="Marker2D" parent="."]
 position = Vector2(-21, 0)
 
 [node name="FrontRay" type="RayCast2D" parent="."]
