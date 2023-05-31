@@ -403,7 +403,7 @@ func has_weapon():
 
 func active_weapon():
 	if len(weapons) > 0:
-		return weapons[0]
+		return weapons.front()
 
 func aim_weapon(aim_vector):
 	var w = active_weapon()
@@ -417,6 +417,12 @@ func drop_weapon(weapon=null):
 	# TODO drop/create new pickup/powerup?
 	if weapon in weapons:
 		weapons.erase(weapon)
+
+func cycle_weapon():
+	var f = weapons.pop_front()
+	if f:
+		weapons.push_back(f)
+		activate_weapon()
 
 # maybe different from 'use' for multi-state things like the flashlight?
 func activate_weapon(weapon=null):

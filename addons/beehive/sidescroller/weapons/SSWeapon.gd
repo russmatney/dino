@@ -3,29 +3,40 @@ class_name SSWeapon
 
 func _get_configuration_warnings():
 	return Util._config_warning(self, {expected_nodes=[
-		"HitBox", "AnimatedSprite2D",
+		# "HitBox", "AnimatedSprite2D",
 		]})
 
 ######################################################
 # vars
 
-@onready var anim = $AnimatedSprite2D
-@onready var hitbox = $HitBox
-@onready var hitbox_coll = $HitBox/CollisionShape2D
+var anim = $AnimatedSprite2D
+var hitbox = $HitBox
+var hitbox_coll = $HitBox/CollisionShape2D
 
 var display_name: String
+var actor
 
 ######################################################
 # ready
 
 func _ready():
-	anim.animation_finished.connect(_on_animation_finished)
-	anim.frame_changed.connect(_on_frame_changed)
+	actor = get_parent()
 
-	hitbox.body_entered.connect(_on_body_entered)
-	hitbox.body_exited.connect(_on_body_exited)
-	hitbox.body_shape_entered.connect(_on_body_shape_entered)
-	hitbox.body_shape_exited.connect(_on_body_shape_exited)
+	Util.set_optional_nodes(self, {
+		anim="AnimatedSprite2D",
+		hitbox="HitBox",
+		hitbox_coll="HitBox/ColliionShape2D",
+		})
+
+	if anim:
+		anim.animation_finished.connect(_on_animation_finished)
+		anim.frame_changed.connect(_on_frame_changed)
+
+	if hitbox:
+		hitbox.body_entered.connect(_on_body_entered)
+		hitbox.body_exited.connect(_on_body_exited)
+		hitbox.body_shape_entered.connect(_on_body_shape_entered)
+		hitbox.body_shape_exited.connect(_on_body_shape_exited)
 
 
 ######################################################
@@ -48,11 +59,6 @@ func stop_using():
 
 ######################################################
 # helpers
-
-func hit_rect():
-	var shape_rect = hitbox_coll.shape.get_rect()
-	shape_rect.position = to_global(shape_rect.position)
-	return shape_rect
 
 func _on_animation_finished():
 	pass

@@ -1,16 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjjjiscdb0ruh"]
+[gd_scene load_steps=10 format=3 uid="uid://cjjjiscdb0ruh"]
 
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/SSPlayer.gd" id="1_tdgh3"]
 [ext_resource type="SpriteFrames" uid="uid://b73k32om0cbr3" path="res://addons/beehive/sidescroller/SSBasicSpriteFrames.tres" id="2_y5x1n"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="3_eqltd"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_r4nvx"]
+[ext_resource type="Script" path="res://addons/trolley/actions/ActionDetector.gd" id="5_3unf7"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="6_f0aop"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_5ew82"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odek5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc7iw"]
+size = Vector2(85, 67)
 
 [node name="SSPlayer" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_tdgh3")
-has_sword = null
+has_gun = true
 has_ascend = null
 has_descend = null
 
@@ -37,3 +43,14 @@ scroll_active = false
 metadata/_edit_use_anchors_ = true
 
 [node name="SSMachine" parent="." instance=ExtResource("3_eqltd")]
+
+[node name="ActionDetector" type="Area2D" parent="."]
+script = ExtResource("5_3unf7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource("RectangleShape2D_pc7iw")
+
+[node name="ActionHint" parent="." instance=ExtResource("6_f0aop")]
+
+[node name="LookPOF" parent="." instance=ExtResource("7_5ew82")]
+position = Vector2(64, 0)

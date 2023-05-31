@@ -8,17 +8,18 @@ class_name SSPlayer
 var look_pof
 var light
 var light_occluder
-# TODO pull bullet into beehive/sidescroller
-var arrow_position
-# TODO pull Sword into beehive/sidescroller
+
 var sword
+var gun
+var bow
+var flashlight
 
 var coins = 0
 var powerups = []
 
 var aim_vector = Vector2.ZERO
 
-
+@export var has_bow: bool
 @export var has_gun: bool
 @export var has_sword: bool
 @export var has_flashlight: bool
@@ -28,8 +29,7 @@ var aim_vector = Vector2.ZERO
 func _get_configuration_warnings():
 	var warns = super._get_configuration_warnings()
 	var more = Util._config_warning(self, {expected_nodes=[
-		"ActionDetector", "ActionHint",
-		"LookPOF", "ArrowPosition",
+		"ActionDetector", "ActionHint", "LookPOF",
 		]})
 	warns.append_array(more)
 	return warns
@@ -58,8 +58,7 @@ var actions = [
 
 func _ready():
 	Util.set_optional_nodes(self, {
-		look_pof="LookPOF", arrow_position="ArrowPosition",
-		sword="Sword", light_occluder="LightOccluder2D", light="PointLight2D"
+		look_pof="LookPOF", light_occluder="LightOccluder2D", light="PointLight2D"
 		})
 
 	if not Engine.is_editor_hint():
@@ -72,11 +71,14 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
-		# TODO maybe redundant in dev add-all-powerups mode
 		if has_sword:
 			add_sword()
 		if has_flashlight:
 			add_flashlight()
+		if has_bow:
+			add_bow()
+		if has_gun:
+			add_gun()
 
 	super._ready()
 
@@ -118,14 +120,10 @@ func _unhandled_input(event):
 	# generic weapon
 	if has_weapon() and Trolley.is_attack(event):
 		use_weapon()
+		# TODO should strafe?
 	elif has_weapon() and Trolley.is_attack_released(event):
 		stop_using_weapon()
-
-	# gun/fire
-	if has_gun and Trolley.is_fire(event):
-		fire()
-	elif has_gun and Trolley.is_fire_released(event):
-		stop_firing()
+		# TODO should stop strafe?
 
 	# generic action
 	if Trolley.is_action(event):
@@ -150,11 +148,12 @@ func _physics_process(_delta):
 
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
-			if not firing: # supports strafing (moving while firing without turning)
-				if move_vector.x > 0:
-					facing_vector = Vector2.RIGHT
-				elif move_vector.x < 0:
-					facing_vector = Vector2.LEFT
+			# TODO restore strafing - check if using a weapon that supports strafing?
+			# if not firing: # supports strafing (moving while firing without turning)
+			if move_vector.x > 0:
+				facing_vector = Vector2.RIGHT
+			elif move_vector.x < 0:
+				facing_vector = Vector2.LEFT
 			update_facing()
 
 		if move_vector.abs().length() > 0 and has_weapon():
@@ -166,9 +165,6 @@ func _physics_process(_delta):
 
 func update_facing():
 	super.update_facing()
-	# TODO flip weapons (here or in ssbody)
-	Util.update_h_flip(facing_vector, sword)
-	Util.update_h_flip(facing_vector, arrow_position)
 	Util.update_h_flip(facing_vector, look_pof)
 	Util.update_h_flip(facing_vector, light_occluder)
 
@@ -239,63 +235,27 @@ func add_coin():
 
 ## gun/fire/bullets ###########################################################
 
+var gun_scene = preload("res://addons/beehive/sidescroller/weapons/Gun.tscn")
+
 func add_gun():
-	if not arrow_position:
-		arrow_position = Marker2D.new()
-		arrow_position.name = "ArrowPosition"
-		arrow_position.position = Vector2.ONE * -12
-		add_child(arrow_position)
+	if not gun:
+		gun = gun_scene.instantiate()
+		add_child(gun)
+
+	add_weapon(gun)
 	has_gun = true
 
-var firing = false
+## bow ###########################################################
 
-# TODO pull metadata into generic, reusable (customizable) bullet scene
-var arrow_scene = preload("res://addons/beehive/sidescroller/weapons/Arrow.tscn")
-var arrow_impulse = 800
-var fire_rate = 0.2
-var arrow_knockback = 3
+var bow_scene = preload("res://addons/beehive/sidescroller/weapons/Bow.tscn")
 
-var fire_tween
+func add_bow():
+	if not bow:
+		bow = bow_scene.instantiate()
+		add_child(bow)
 
-func fire():
-	firing = true
-
-	if fire_tween and fire_tween.is_running():
-		return
-
-	fire_tween = create_tween()
-	fire_arrow()
-	fire_tween.set_loops(0)
-	fire_tween.tween_callback(fire_arrow).set_delay(fire_rate)
-
-func stop_firing():
-	firing = false
-
-	# kill tween after last arrow
-	if fire_tween and fire_tween.is_running():
-		fire_tween.kill()
-
-signal fired_arrow(arrow)
-
-func fire_arrow():
-	if facing_vector == null:
-		# TODO not sure why firing before moving falls flat
-		facing_vector = Vector2.RIGHT
-		update_facing()
-	var arrow = arrow_scene.instantiate()
-	arrow.position = arrow_position.get_global_position()
-	arrow.add_collision_exception_with(self)
-	Navi.current_scene.add_child.call_deferred(arrow)
-	arrow.rotation = facing_vector.angle()
-	arrow.apply_impulse(facing_vector * arrow_impulse, Vector2.ZERO)
-	DJZ.play(DJZ.S.fire)
-	fired_arrow.emit(arrow)
-
-	# player push back when firing
-	var pos = get_global_position()
-	pos += -1 * facing_vector * arrow_knockback
-	set_global_position(pos)
-
+	add_weapon(bow)
+	has_bow = true
 
 ## sword #######################################################
 
@@ -312,7 +272,6 @@ func add_sword():
 ## flashlight #######################################################
 
 var flashlight_scene = preload("res://addons/beehive/sidescroller/weapons/Flashlight.tscn")
-var flashlight
 
 func add_flashlight():
 	if not flashlight:

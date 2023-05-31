@@ -35,7 +35,7 @@ var last_diff
 
 func physics_process(delta):
 	if actor.nav_agent == null:
-		Debug.warn("No nav_agent found on actor, exiting Patrol state", actor)
+		# Debug.warn("No nav_agent found on actor, exiting Patrol state", actor)
 		transit("Idle")
 		return
 
@@ -54,9 +54,10 @@ func physics_process(delta):
 		# Jump!
 		jumping = true
 		actor.velocity.y = actor.jump_velocity * -1
-		Debug.pr("jumping in patrol!", actor.velocity.y)
+		# Debug.pr("jumping in patrol!", actor.velocity.y)
 	else:
-		Debug.pr("no need to jump, next pos diff:", diff)
+		pass
+		# Debug.pr("no need to jump, next pos diff:", diff)
 
 	# TODO get less precise
 	if last_diff and last_diff == diff:
