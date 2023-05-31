@@ -10,6 +10,7 @@ func aim(aim: Vector2):
 
 func activate():
 	Debug.pr("activating", self)
+	actor.notif(self.name)
 	# TODO gun loading sound effect?
 	DJZ.play(DJZ.S.laser)
 

@@ -275,6 +275,8 @@ func on_hurt_box_exited(body):
 
 ## notif #####################################################################
 
+var notif_tween
+
 func notif(text, opts = {}):
 	if not notif_label:
 		return
@@ -288,13 +290,15 @@ func notif(text, opts = {}):
 
 	label.text = "[center]" + text
 	label.set_visible(true)
-	var tween = create_tween()
+	if notif_tween:
+		notif_tween.kill()
+	notif_tween = create_tween()
 	if dupe:
 		label.set_global_position(notif_label.get_global_position())
 		Navi.add_child_to_current(label)
-		tween.tween_callback(label.queue_free).set_delay(ttl)
+		notif_tween.tween_callback(label.queue_free).set_delay(ttl)
 	else:
-		tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
+		notif_tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
 
 ## level up #####################################################################
 

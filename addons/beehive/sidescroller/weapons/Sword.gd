@@ -36,6 +36,7 @@ func aim(aim_vector: Vector2):
 
 func activate():
 	Debug.pr("activating", self)
+	actor.notif(self.name)
 	DJZ.play(DJZ.S.swordswing)
 
 func deactivate():

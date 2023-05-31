@@ -9,6 +9,7 @@ func aim(aim: Vector2):
 
 func activate():
 	Debug.pr("activating", self)
+	actor.notif(self.name)
 	DJZ.play(DJZ.S.laser)
 
 func deactivate():

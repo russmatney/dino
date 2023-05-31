@@ -5,6 +5,7 @@ func aim(_aim_vector: Vector2):
 
 func activate():
 	Debug.pr("activating", self)
+	actor.notif(self.name)
 	DJZ.play(DJZ.S.bump)
 
 func deactivate():
