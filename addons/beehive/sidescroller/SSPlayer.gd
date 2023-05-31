@@ -125,6 +125,9 @@ func _unhandled_input(event):
 		stop_using_weapon()
 		# TODO should stop strafe?
 
+	if Trolley.is_event(event, "cycle_weapon"):
+		cycle_weapon()
+
 	# generic action
 	if Trolley.is_action(event):
 		stamp({scale=2.0, ttl=1.0, include_action_hint=true})

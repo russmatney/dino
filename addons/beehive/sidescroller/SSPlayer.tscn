@@ -16,7 +16,10 @@ size = Vector2(85, 67)
 [node name="SSPlayer" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_tdgh3")
+has_bow = true
 has_gun = true
+has_sword = true
+has_flashlight = true
 has_ascend = null
 has_descend = null
 

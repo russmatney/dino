@@ -35,7 +35,8 @@ func aim(aim_vector: Vector2):
 			scale.x = 1
 
 func activate():
-	pass
+	Debug.pr("activating", self)
+	DJZ.play(DJZ.S.swordswing)
 
 func deactivate():
 	pass

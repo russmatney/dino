@@ -4,7 +4,8 @@ func aim(_aim_vector: Vector2):
 	pass
 
 func activate():
-	pass
+	Debug.pr("activating", self)
+	DJZ.play(DJZ.S.bump)
 
 func deactivate():
 	pass

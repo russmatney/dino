@@ -2,15 +2,13 @@
 extends SSWeapon
 
 var aim_vector
-# TODO consider setting a location for the gun?
-var arrow_position = Vector2.ZERO
+var arrow_offset = Vector2.ONE * -12
 
 func aim(aim: Vector2):
 	aim_vector = aim
 
 func activate():
 	Debug.pr("activating", self)
-	# TODO gun loading sound effect?
 	DJZ.play(DJZ.S.laser)
 
 func deactivate():
@@ -66,7 +64,7 @@ func fire_arrow():
 		aim_vector = Vector2.RIGHT
 
 	var arrow = arrow_scene.instantiate()
-	arrow.position = arrow_position
+	arrow.position = global_position + arrow_offset
 	arrow.add_collision_exception_with(actor)
 
 	Navi.current_scene.add_child.call_deferred(arrow)
@@ -75,6 +73,4 @@ func fire_arrow():
 	DJZ.play(DJZ.S.fire)
 
 	# player push back when firing
-	var pos = get_global_position()
-	pos.x += -1 * aim_vector.x * arrow_knockback
-	set_global_position(pos)
+	actor.global_position.x += -1 * aim_vector.x * arrow_knockback

@@ -191,6 +191,8 @@ func flip_facing():
 	update_facing()
 
 func face_body(body):
+	if not body:
+		return
 	var pos_diff = body.global_position - global_position
 	if pos_diff.x > 0:
 		facing_vector = Vector2.RIGHT
@@ -396,7 +398,9 @@ func add_descend():
 
 func add_weapon(weapon):
 	if not weapon in weapons:
-		weapons.append(weapon)
+		weapons.map(deactivate_weapon)
+		weapons.push_front(weapon)
+		activate_weapon()
 
 func has_weapon():
 	return active_weapon() != null
@@ -419,8 +423,9 @@ func drop_weapon(weapon=null):
 		weapons.erase(weapon)
 
 func cycle_weapon():
-	var f = weapons.pop_front()
-	if f:
+	if len(weapons) > 1:
+		weapons.map(deactivate_weapon)
+		var f = weapons.pop_front()
 		weapons.push_back(f)
 		activate_weapon()
 
@@ -428,12 +433,14 @@ func cycle_weapon():
 func activate_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
+	weapon.visible = true
 	weapon.activate()
 
 # turn off the flashlight, sheath the sword, holser the gun?
 func deactivate_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
+	weapon.visible = false
 	weapon.deactivate()
 
 # Uses the first weapon if none is passed
