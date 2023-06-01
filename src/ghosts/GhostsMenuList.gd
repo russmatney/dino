@@ -2,10 +2,10 @@
 extends NaviButtonList
 
 var menu_scenes = [
-	{"label": "Play", "fn": Game.restart_game.bind(Ghosts)},
+	{label="Play", fn=Game.restart_game.bind(Ghosts)},
 	{
-		"label": "Credits",
-		"nav_to": "res://src/dino/DinoCredits.tscn",
+		label="Credits",
+		nav_to="res://src/dino/DinoCredits.tscn",
 	},
 	{
 		label="Dino Menu",

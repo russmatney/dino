@@ -89,9 +89,8 @@ func load_main_menu(game=null):
 	if game == null:
 		game = current_game
 	if game and game.main_menu_scene != null:
-		Navi.death_menu.hide()
-		Navi.win_menu.hide()
-		Navi.pause_menu.hide()
+		# maybe we hide menus on every Navi.nav_to ?
+		Navi.hide_menus()
 		Navi.nav_to(game.main_menu_scene)
 		return
 

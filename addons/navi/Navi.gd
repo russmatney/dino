@@ -3,6 +3,8 @@ extends Node
 
 # https://docs.godotengine.org/en/latest/tutorials/io/background_loading.html#doc-background-loading
 
+var menus = []
+
 func add_menu(scene):
 	for c in get_children():
 		var sfp = scene.resource_path
@@ -12,8 +14,21 @@ func add_menu(scene):
 
 	var menu = scene.instantiate()
 	menu.hide()
+	menus.append(menu)
 	add_child.call_deferred(menu)
 	return menu
+
+func hide_menus():
+	menus = menus.filter(func(m): return is_instance_valid(m))
+	menus.map(func(m): m.hide())
+	find_focus()
+
+func show_menu(menu):
+	menus = menus.filter(func(m): return is_instance_valid(m))
+	if not menu in menus:
+		add_menu(menu)
+	menu.show()
+	find_focus(menu)
 
 ## ready ###################################################################
 
@@ -143,8 +158,7 @@ func set_main_menu(path):
 
 func nav_to_main_menu():
 	if ResourceLoader.exists(main_menu_path):
-		death_menu.hide()
-		win_menu.hide()
+		hide_menus()
 		nav_to(main_menu_path)
 	else:
 		Debug.prn("No scene at path: ", main_menu_path, ", can't navigate.")
@@ -210,8 +224,10 @@ func pause():
 func resume():
 	Debug.prn("unpausing")
 	get_tree().paused = false
-	if pause_menu and is_instance_valid(pause_menu):
-		pause_menu.hide()
+	# if pause_menu and is_instance_valid(pause_menu):
+	# 	pause_menu.hide()
+	# TODO maybe just...
+	hide_menus()
 	DJ.pause_menu_song()
 	DJ.resume_game_song()
 	pause_toggled.emit(false)

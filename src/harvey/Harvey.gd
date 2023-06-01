@@ -5,14 +5,14 @@ var hud
 
 ## ready ########################################################################
 
+var time_up_menu
+
 func _ready():
 	main_menu_scene = load("res://src/harvey/menus/HarveyMenu.tscn")
 	pause_menu_scene = load("res://src/harvey/menus/HarveyPauseMenu.tscn")
 
-	# TODO use navi menu support
-	time_up_menu = time_up_menu_scene.instantiate()
-	time_up_menu.hide()
-	add_child.call_deferred(time_up_menu)
+	var time_up_menu_scene = load("res://src/harvey/menus/TimeUpMenu.tscn")
+	time_up_menu = Navi.add_menu(time_up_menu_scene)
 
 ## register ########################################################################
 
@@ -27,6 +27,7 @@ func register():
 
 func start():
 	Navi.nav_to("res://src/harvey/maps/KitchenSink.tscn")
+	Navi.hide_menus()
 
 func setup():
 	# reset data
@@ -51,7 +52,7 @@ func inc_produce_count(type):
 
 ## timer ########################################################################
 
-var initial_time_remaining = 15
+var initial_time_remaining = 90
 var time_remaining
 func tick_timer():
 	if hud:
@@ -67,16 +68,11 @@ func tick_timer():
 
 ## time up ########################################################################
 
-var time_up_menu_scene = preload("res://src/harvey/menus/TimeUpMenu.tscn")
-var time_up_menu
-
 func time_up():
 	var t = get_tree()
 	t.paused = true
 	DJ.resume_menu_song()
-	time_up_menu.show()
-	# TODO fix in some centralized way
-	Navi.find_focus(time_up_menu)
+	Navi.show_menu(time_up_menu)
 	time_up_menu.set_score(produce_counts)
 
 
