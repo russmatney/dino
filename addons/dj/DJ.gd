@@ -5,6 +5,7 @@ extends Node
 var menu_song_player
 var playback_pos
 
+## ready ######################################################################
 
 func _ready():
 	# so we can play music while paused
@@ -17,6 +18,9 @@ func _ready():
 
 
 func resume_menu_song(song = null):
+	if muted_music:
+		Debug.warn("Cannot resume menu song, music is muted")
+		return
 	# TODO pause any playing sound_map songs
 
 	if song and menu_song != song:
@@ -31,6 +35,9 @@ func resume_menu_song(song = null):
 
 
 func pause_menu_song():
+	if muted_music:
+		Debug.warn("Cannot play menu song, music is muted")
+		return
 	menu_song_player.stop()
 	playback_pos = menu_song_player.get_playback_position()
 
@@ -86,6 +93,9 @@ func setup_sound_map(sound_map, default_opts=defaults):
 	return playables
 
 func play_sound(sound_map, name):
+	if muted_sound:
+		Debug.warn("Cannot play sound, sounds are muted")
+		return
 	if name in sound_map:
 		var sounds = sound_map[name]
 		play_sound_rand(sounds, {"vary": 0.4})
@@ -102,6 +112,7 @@ func interrupt_sound(sound_map, name):
 	else:
 		Debug.warn("no sound for name", name)
 
+
 #################################################
 # music map api
 
@@ -109,6 +120,9 @@ var playing_game_songs = []
 var paused_game_songs = []
 
 func play_song(sound_map, name):
+	if muted_music:
+		Debug.warn("Cannot play song, music is muted")
+		return
 	if name in sound_map:
 		var songs = sound_map[name]
 		var i = randi() % songs.size()
@@ -133,8 +147,42 @@ func pause_game_song():
 			paused_game_songs.append([song, song.get_playback_position()])
 
 func resume_game_song():
+	if muted_music:
+		Debug.warn("Cannot resume game song, music is muted")
+		return
 	# TODO store and resume at same playback_position?
 	for song_and_pos in paused_game_songs:
 		var song = song_and_pos[0]
 		var pos = song_and_pos[1]
 		song.play(pos)
+
+
+## mute ######################################################################
+
+var muted_sound = false
+var muted_music = false
+signal mute_toggle
+
+func mute_all():
+	toggle_mute_music(true)
+	toggle_mute_sound(true)
+
+func toggle_mute_music(should_mute=null):
+	if should_mute == null:
+		muted_music = not muted_music
+	else:
+		muted_music = should_mute
+
+	if muted_music:
+		pause_game_song()
+	else:
+		resume_game_song()
+
+	mute_toggle.emit()
+
+func toggle_mute_sound(should_mute=null):
+	if should_mute == null:
+		muted_sound = not muted_sound
+	else:
+		muted_sound = should_mute
+	mute_toggle.emit()
