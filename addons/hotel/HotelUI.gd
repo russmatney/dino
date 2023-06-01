@@ -20,8 +20,7 @@ func _on_reload_plugin_button_pressed():
 
 func _on_rebuild_db_button_pressed():
 	Debug.prn(&"Rebuilding hotel db -----------------------------------")
-	Hotel.drop_db()
-	# TODO collect scene_file_paths and re-register with those instead
+	Hotel.recreate_db()
 	list_entries()
 	Debug.prn(&"Rebuilt hotel db --------------------------------------")
 

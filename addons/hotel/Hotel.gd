@@ -25,9 +25,12 @@ func _ready():
 ## updated using passed nodes and dicts.
 var scene_db = {}
 
-func drop_db():
-	Debug.warn("Dropping scene_db")
+func recreate_db():
+	var scene_file_paths = query().map(func(it): return it.get("scene_file_path")).filter(func(x): return x != null)
+	Debug.pr("Recreating Hotel db with", len(scene_file_paths), "paths")
 	scene_db = {}
+	scene_file_paths.map(book)
+	Debug.pr("HotelDB recreated with", len(scene_db), "values")
 
 ######################################################################
 # key
