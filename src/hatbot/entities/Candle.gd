@@ -7,10 +7,12 @@ extends MetroCheckpoint
 var _actions = [
 	Action.mk({
 		label="Light", fn=light_up,
-		source_can_execute=func(): return not is_lit()}),
+		source_can_execute=func(): return not is_lit(),
+		show_on_source=true, show_on_actor=false,}),
 	Action.mk({
 		label="Sit", fn=sit,
-		source_can_execute=func(): return is_lit() and not sitting}),
+		source_can_execute=func(): return is_lit() and not sitting,
+		show_on_source=true, show_on_actor=false,}),
 	]
 
 #################################################################

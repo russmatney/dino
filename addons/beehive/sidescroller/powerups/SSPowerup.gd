@@ -1,5 +1,4 @@
 extends Node2D
-# TODO move to Beehive/sidescroller
 
 ##############################################################
 # powerup enum
@@ -37,7 +36,7 @@ func check_out(data):
 	powerup = data.get("powerup", powerup)
 
 func hotel_data():
-	return {powerup=powerup, picked_up=picked_up}
+	return {powerup=powerup, picked_up=picked_up, position=position}
 
 ##############################################################
 # actions
@@ -45,10 +44,12 @@ func hotel_data():
 var actions = [
 	Action.mk({
 		label="Pick Up", fn=pickup,
-		source_can_execute=func(): return not picked_up}),
+		source_can_execute=func(): return not picked_up,
+		show_on_source=true, show_on_actor=false,}),
 	Action.mk({
 		label="Read", fn=read_note,
-		source_can_execute=func(): return picked_up}),
+		source_can_execute=func(): return picked_up,
+		show_on_source=true, show_on_actor=false,}),
 	]
 
 func pickup(player):

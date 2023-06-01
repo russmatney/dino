@@ -6,6 +6,7 @@ var room_data = {}
 @onready var color_rect = $ColorRect
 
 var checkpoints = []
+var powerups = []
 
 ## ready ###################################################################
 
@@ -16,10 +17,11 @@ func _ready():
 ## on resize ###################################################################
 
 func on_resized():
-	checkpoints.map(set_checkpoint_position)
+	checkpoints.map(set_entity_position)
+	powerups.map(set_entity_position)
 	color_rect.size = size
 
-func set_checkpoint_position(ch):
+func set_entity_position(ch):
 	var room_rect = room_data.get("rect")
 	if room_rect == null:
 		return
@@ -30,14 +32,30 @@ func set_checkpoint_position(ch):
 
 ## set room data ###################################################################
 
+var entities = {
+	checkpoints={
+		group=Metro.checkpoints_group,
+		get_color=func(ent):
+		if ent.get("visit_count", 0) > 0:
+			return Color(Color.GREEN, 0.7)},
+	powerups={
+		group="powerups",
+		get_color=func(ent):
+		return Color(Color.GRAY, 0.9) if ent.get("picked_up") else Color(Color.GREEN, 0.7) }}
+
+func reset_entities(room_name):
+	for e in entities:
+		for ch in self.get(e):
+			remove_child(ch)
+		self[e] = []
+		Hotel.query({room_name=room_name, group=entities[e].group})\
+			.map(func(ent): add_entity(e, ent, entities[e].get_color))
+
+
 func set_room_data(data):
 	room_data = data
 
-	for ch in checkpoints:
-		remove_child(ch)
-	checkpoints = []
-	Hotel.query({room_name=data.get("room_name"), group=Metro.checkpoints_group})\
-		.map(add_checkpoint)
+	reset_entities(data.get("room_name"))
 
 	var visited = room_data.get("visited")
 	var has_player = room_data.get("has_player")
@@ -50,23 +68,27 @@ func set_room_data(data):
 		color_rect.set_color(Color(Color.GRAY, 0.6))
 
 
-## add_checkpoint ###################################################################
+## add_entity ###################################################################
 
-func add_checkpoint(data):
-	var checkpoint = ColorRect.new()
-	checkpoint.position = data.get("position")
-	checkpoint.size = Vector2.ONE * 10
+func add_entity(e_key, data, get_color=null):
+	var ent = ColorRect.new()
+	if data.get("position") == null:
+		Debug.warn("Cannot add entity without hotel db `position` attr")
+		return
+	ent.position = data.get("position")
+	ent.size = Vector2.ONE * 10
 
-	set_checkpoint_position(checkpoint)
+	set_entity_position(ent)
 
 	var color = Color(Color.RED, 0.7)
-	if data.get("visit_count", 0) > 0:
-		color = Color(Color.GREEN, 0.7)
+	if get_color != null:
+		var new_color = get_color.call(data)
+		if new_color != null:
+			color = new_color
 
-	checkpoint.set_color(color)
-	checkpoints.append(checkpoint)
-	add_child(checkpoint)
-
+	ent.set_color(color)
+	self[e_key].append(ent)
+	add_child(ent)
 
 ## draw ################################################################
 
