@@ -308,6 +308,7 @@ cycle_weapon={
 2d_physics/layer_9="actionAreas"
 2d_physics/layer_10="npcs"
 2d_physics/layer_11="fences, low-walls"
+2d_physics/layer_12="spikes"
 
 [physics]
 

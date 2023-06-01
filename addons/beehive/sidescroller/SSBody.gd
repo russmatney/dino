@@ -133,6 +133,21 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
+## process/physics_process ###########################################################
+
+# Should be called immediately after move_and_slide in physics_process
+# if it returns true, the calling physics_process should return to avoid moving to another state
+func collision_check():
+	# TODO some kind of invincibility after hitting?
+	# or, some handling for restarting the room, celeste-style?
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.is_in_group("spikes"):
+			take_hit({body=collider, damage=1, type="spikes"})
+			return true
+
+## rect ###########################################################
 
 func get_rect():
 	if coll != null:
@@ -400,7 +415,8 @@ func add_descend():
 		return
 	has_descend = true
 
-## weapon #######################################################
+#################################################################################
+## weapons #######################################################
 
 func add_weapon(weapon):
 	if not weapon in weapons:

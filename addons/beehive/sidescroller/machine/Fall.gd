@@ -63,7 +63,11 @@ func physics_process(delta):
 		return
 
 	var vel_before_coll = actor.velocity
-	actor.move_and_slide()
+	var collided = actor.move_and_slide()
+	if collided:
+		var should_exit = actor.collision_check()
+		if should_exit:
+			return
 
 	# return to idle
 	if actor.is_on_floor():

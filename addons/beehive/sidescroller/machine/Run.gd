@@ -30,7 +30,11 @@ func physics_process(delta):
 	else:
 		actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.5)
 
-	actor.move_and_slide()
+	var collided = actor.move_and_slide()
+	if collided:
+		var should_exit = actor.collision_check()
+		if should_exit:
+			return
 
 	if actor.velocity.y > 0:
 		machine.transit("Fall", {"coyote_time": true})

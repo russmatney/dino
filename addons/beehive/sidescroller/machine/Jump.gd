@@ -88,7 +88,11 @@ func physics_process(delta):
 		machine.transit("Climb")
 		return
 
-	actor.move_and_slide()
+	var collided = actor.move_and_slide()
+	if collided:
+		var should_exit = actor.collision_check()
+		if should_exit:
+			return
 
 	if actor.velocity.y > 0.0:
 		machine.transit("Fall", {double_jumping=double_jumping})
