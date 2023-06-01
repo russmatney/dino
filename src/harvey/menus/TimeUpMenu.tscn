@@ -8,7 +8,6 @@
 [node name="TimeUpMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 2
-follow_viewport_enabled = true
 script = ExtResource("5")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

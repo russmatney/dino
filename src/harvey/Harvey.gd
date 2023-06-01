@@ -1,6 +1,8 @@
 @tool
 extends DinoGame
 
+var hud
+
 ## ready ########################################################################
 
 func _ready():
@@ -8,12 +10,9 @@ func _ready():
 	pause_menu_scene = load("res://src/harvey/menus/HarveyPauseMenu.tscn")
 
 	# TODO use navi menu support
-	time_up_container = CanvasLayer.new()
 	time_up_menu = time_up_menu_scene.instantiate()
 	time_up_menu.hide()
-	time_up_container.add_child(time_up_menu)
-	add_child.call_deferred(time_up_container)
-
+	add_child.call_deferred(time_up_menu)
 
 ## register ########################################################################
 
@@ -29,15 +28,49 @@ func register():
 func start():
 	Navi.nav_to("res://src/harvey/maps/KitchenSink.tscn")
 
+func setup():
+	# reset data
+	produce_counts = {}
+	time_remaining = initial_time_remaining
+
+	# start timer
+	tick_timer()
+
+## produce counts ########################################################################
+
+var produce_counts = {}
+
+func inc_produce_count(type):
+	if type in produce_counts:
+		produce_counts[type] = produce_counts[type] + 1
+	else:
+		produce_counts[type] = 1
+
+	if hud:
+		hud.update_produce_counts(produce_counts)
+
+## timer ########################################################################
+
+var initial_time_remaining = 15
+var time_remaining
+func tick_timer():
+	if hud:
+		hud.update_time_remaining(time_remaining)
+
+	if time_remaining <= 0:
+		time_up()
+	else:
+		var tween = create_tween()
+		tween.tween_callback(tick_timer).set_delay(1.0)
+		time_remaining = time_remaining - 1
+
 
 ## time up ########################################################################
 
 var time_up_menu_scene = preload("res://src/harvey/menus/TimeUpMenu.tscn")
-var time_up_container
 var time_up_menu
 
-
-func time_up(produce_counts):
+func time_up():
 	var t = get_tree()
 	t.paused = true
 	DJ.resume_menu_song()
@@ -53,4 +86,4 @@ signal new_produce_delivered(type)
 
 func produce_delivered(type):
 	DJZ.play(DJZ.S.complete)
-	new_produce_delivered.emit(type)
+	inc_produce_count(type)

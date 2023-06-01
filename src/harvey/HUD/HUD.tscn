@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://hcuonrdt3k48"]
 
-[ext_resource path="res://src/harvey/menus/HarveyControls.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/harvey/HUDTheme.tres" type="Theme" id=2]
-[ext_resource path="res://src/harvey/HUD/HUD.gd" type="Script" id=3]
+[ext_resource type="PackedScene" path="res://src/harvey/menus/HarveyControls.tscn" id="1"]
+[ext_resource type="Theme" uid="uid://bmvv7vyaun6y8" path="res://src/harvey/HUDTheme.tres" id="2"]
+[ext_resource type="Script" path="res://src/harvey/HUD/HUD.gd" id="3"]
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
@@ -16,54 +17,40 @@ offset_right = -8.0
 offset_bottom = -8.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-offset_right = 496.0
-offset_bottom = 284.0
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-offset_right = 496.0
-offset_bottom = 98.0
+layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-offset_right = 392.0
-offset_bottom = 98.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Produce" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-offset_right = 392.0
-offset_bottom = 17.0
-custom_minimum_size = Vector2( 100, 0 )
-theme = ExtResource( 2 )
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("2")
 text = "Delivered"
-fit_content_height = true
+fit_content = true
 scroll_active = false
 
 [node name="ProduceList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
-offset_top = 21.0
-offset_right = 392.0
-offset_bottom = 21.0
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-offset_left = 396.0
-offset_right = 496.0
-offset_bottom = 98.0
+layout_mode = 2
 alignment = 2
 
 [node name="Time" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-offset_right = 100.0
-offset_bottom = 17.0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
 bbcode_enabled = true
-text = "[right]Time: 999[/right]"
 text = "Time: 999"
-fit_content_height = true
+fit_content = true
 scroll_active = false
 
-[node name="HarveyControls" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 1 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 21.0
-offset_right = 100.0
-offset_bottom = 98.0
+[node name="HarveyControls" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1")]
+layout_mode = 2

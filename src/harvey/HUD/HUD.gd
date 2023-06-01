@@ -1,45 +1,22 @@
 extends CanvasLayer
 
-
 func _ready():
-	var _x = Harvey.new_produce_delivered.connect(inc_produce_count)
+	# a fine register-self pattern?
+	Harvey.hud = self
 
-	tick_timer()
-
-
-###################################################################
-# timer
+## timer ##################################################################
 
 @onready var time = get_node("%Time")
-# TODO variable time?
-var time_remaining = 90
 
+func update_time_remaining(t):
+	time.text = "[right]Time: " + str(t)
 
-func tick_timer():
-	time.text = "[right]Time: " + str(time_remaining)
-
-	if time_remaining <= 0:
-		Harvey.time_up(produce_counts)
-	else:
-		var tween = create_tween()
-		tween.tween_callback(tick_timer).set_delay(1.0)
-		time_remaining = time_remaining - 1
-
-
-###################################################################
-# produce counts
+## produce counts ##################################################################
 
 @onready var produce_list = get_node("%ProduceList")
 var produce_count_scene = preload("res://src/harvey/HUD/ProduceCount.tscn")
-var produce_counts = {}
 
-
-func inc_produce_count(type):
-	if type in produce_counts:
-		produce_counts[type] = produce_counts[type] + 1
-	else:
-		produce_counts[type] = 1
-
+func update_produce_counts(produce_counts):
 	for c in produce_list.get_children():
 		c.queue_free()
 
