@@ -3,13 +3,13 @@ extends DinoGame
 
 func _ready():
 	main_menu_scene = load("res://src/herd/menus/MainMenu.tscn")
-	# TODO build up navi menus helpers (re: focus handling, menu hiding on nav, etc)
-	next_level_menu = Navi.add_menu(next_level_menu_sfp)
+
+	var next_level_menu_scene = load("res://src/herd/menus/NextLevelMenu.tscn")
+	next_level_menu = Navi.add_menu(next_level_menu_scene)
 
 ######################################################
 # level menu
 
-var next_level_menu_sfp = preload("res://src/herd/menus/NextLevelMenu.tscn")
 var next_level_menu
 
 ######################################################
@@ -69,23 +69,16 @@ func load_level(idx):
 
 	# load level
 	Navi.nav_to(levels[idx])
-	next_level_menu.hide()
+	Navi.hide_menus()
 
 func handle_level_complete():
 	if level_idx == len(levels) - 1:
-		next_level_menu.update_sheep_saved()
 		next_level_menu.update_hero_text("You Win!")
-		next_level_menu.update_buttons()
-		next_level_menu.show()
-		# TODO fix in some centralized way
-		Navi.find_focus(next_level_menu)
 	else:
-		next_level_menu.update_sheep_saved()
 		next_level_menu.update_hero_text("Level Complete!")
-		next_level_menu.update_buttons()
-		next_level_menu.show()
-		# TODO fix in some centralized way
-		Navi.find_focus(next_level_menu)
+	next_level_menu.update_sheep_saved()
+	next_level_menu.update_buttons()
+	Navi.show_menu(next_level_menu)
 
 func no_more_levels():
 	return level_idx >= len(levels) - 1
