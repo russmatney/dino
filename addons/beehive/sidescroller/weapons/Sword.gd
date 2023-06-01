@@ -85,14 +85,14 @@ func _on_frame_changed():
 				if not b in bodies_this_swing:
 					Cam.hitstop("swordhit", 0.3, 0.1)
 					bodies_this_swing.append(b)
-					var dir = facing_dir()
-					b.take_hit({"damage": 1, "direction": dir})
+					b.take_hit({damage=1, direction=facing_dir()})
 			if b.has_method("fire_back"):
 				if not b in bodies_this_swing:
 					Cam.hitstop("swordhit", 0.3, 0.2)
 					bodies_this_swing.append(b)
 					b.fire_back()
 
+		# TODO DRY up/clean up destructible tile impl
 		var needs_redraw = []
 		for bs in body_shapes:
 			var b = bs[1]

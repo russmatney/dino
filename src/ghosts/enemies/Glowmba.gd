@@ -28,7 +28,7 @@ func _ready():
 # physics process
 
 var stunned = false
-var dead = false
+var is_dead = false
 enum DIR { left, right }
 @export var initial_dir: DIR = DIR.left
 var move_dir = Vector2.RIGHT
@@ -54,7 +54,7 @@ func _physics_process(delta):
 			velocity = velocity
 			$AnimatedSprite2D.play("fly")
 
-		elif knocked_back or dead:
+		elif knocked_back or is_dead:
 			velocity.x = lerp(velocity.x, 0.0, 0.9)
 			set_velocity(velocity)
 			set_up_direction(Vector2.UP)
@@ -100,7 +100,13 @@ var knockback_time = 2
 var knocked_back = false
 
 
-func hit(dir):
+func take_hit(opts={}):
+	var body = opts.get("body")
+	var dir
+	if body.global_position.x < global_position.x:
+		dir = Vector2.LEFT
+	else:
+		dir = Vector2.RIGHT
 	$DeadLight.enabled = true
 	$StunnedLight.enabled = false
 	stunned = false
@@ -114,7 +120,7 @@ func hit(dir):
 
 func die():
 	stunned = false
-	dead = true
+	is_dead = true
 	$AnimatedSprite2D.play("fly")
 	$AnimatedSprite2D.stop.call_deferred()
 	$PointLight2D.enabled = false
@@ -137,14 +143,14 @@ func stun():
 
 	stunned = false
 
-	if not dead and not knocked_back:
+	if not is_dead and not knocked_back:
 		$PointLight2D.enabled = true
 		$AnimatedSprite2D.play()
 		$StunnedLight.enabled = false
 
 
 func player_can_stun():
-	return not stunned and not dead and not knocked_back
+	return not stunned and not is_dead and not knocked_back
 
 
 func player_can_hit():
@@ -152,7 +158,7 @@ func player_can_hit():
 
 
 func can_hit_player():
-	return not stunned and not dead and not knocked_back
+	return not stunned and not is_dead and not knocked_back
 
 
 #############################################################

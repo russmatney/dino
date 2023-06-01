@@ -50,44 +50,15 @@ func shader_loop():
 
 ############################################################
 
-func update_facing():
-	super.update_facing()
-	Util.update_h_flip(facing_vector, $Flashlight)
-
-############################################################
-
-
-# TODO update to use take_hit/take_damage
-func hit(body):
-	health -= 1
-	Hotel.check_in(self)
-
-	var dir
-	if body.global_position.x > global_position.x:
-		dir = Vector2.LEFT
-	else:
-		dir = Vector2.RIGHT
-
-	machine.transit("Knockback", {"dir": dir, "dead": health <= 0})
-
-
+# TODO should go away in favor of typical ss player/enemy interaction
 func _on_Hurtbox_body_entered(body: Node):
-	# ignore if we're still recovering or dead
-	# if knocked_back or dead:
-	# 	return
 	if body.is_in_group("enemies"):
 		if body.can_hit_player():
-			hit(body)
+			take_hit({body=body, damage=1})
 			Hood.notif("Youch!")
 		elif body.player_can_hit():
-			if body.has_method("hit"):
-				var dir
-				if body.global_position.x > global_position.x:
-					dir = Vector2.RIGHT
-				else:
-					dir = Vector2.LEFT
-
-				body.hit(dir)
+			if body.has_method("take_hit"):
+				body.take_hit({body=self, damage=1})
 				gloomba_ko()
 
 

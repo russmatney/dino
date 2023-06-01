@@ -21,7 +21,7 @@ func physics_process(delta):
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
 	actor.move_and_slide()
 
-	if actor.dead:
+	if actor.is_dead:
 		machine.transit("Dead", {ignore_side_effects=true})
 		return
 

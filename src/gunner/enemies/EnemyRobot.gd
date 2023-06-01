@@ -113,7 +113,9 @@ signal health_change(health)
 signal dead
 
 
-func take_damage(body = null, d = 1):
+func take_damage(opts={}):
+	var body = opts.get("body")
+	var d = opts.get("damage")
 	Cam.freezeframe("enemy_damage_hitstop", 0.2, 0.3, 0.3)
 	health -= d
 	health_change.emit(health)

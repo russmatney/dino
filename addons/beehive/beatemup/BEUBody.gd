@@ -243,6 +243,7 @@ func on_noticebox_body_exited(body):
 
 ## health ###########################################################
 
+# TODO refactor into opts-based api
 func take_damage(hit_type, body):
 	var attack_power
 	match hit_type:

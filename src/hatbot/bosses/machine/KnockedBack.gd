@@ -12,7 +12,7 @@ func enter(opts={}):
 	var dir = opts.get("direction", Vector2.RIGHT)
 
 	var kb_y
-	if actor.dead:
+	if actor.is_dead:
 		kb_y = KNOCKBACK_DYING_Y
 		actor.anim.play("dying")
 		DJZ.play(DJZ.S.soldierdead)
@@ -36,7 +36,7 @@ func physics_process(delta):
 
 	kb_ttl -= delta
 	if actor.is_on_floor() and kb_ttl <= 0:
-		if actor.dead:
+		if actor.is_dead:
 			transit("Dead")
 		else:
 			transit("Stunned")

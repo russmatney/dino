@@ -216,6 +216,8 @@ func take_hit(opts):
 	take_damage(opts)
 	var hit_type = opts.get("type")
 	var body = opts.get("body")
+	# TODO probably worth supporting direction as well
+	var _dir = opts.get("direction")
 
 	# TODO different sound based on actor being hit, hit-type, etc
 	DJZ.play(DJZ.S.playerhurt)

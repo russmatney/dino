@@ -56,7 +56,15 @@ var health
 
 func take_hit(opts={}):
 	var damage = opts.get("damage", 1)
-	var direction = opts.get("direction", Vector2.RIGHT)
+	var body = opts.get("body")
+	var direction = opts.get("direction")
+	if not direction and body:
+		if body.global_position.x < global_position.x:
+			direction = Vector2.LEFT
+		else:
+			direction = Vector2.RIGHT
+	else:
+		direction = Vector2.RIGHT
 
 	health -= damage
 	Hotel.check_in(self)

@@ -32,11 +32,9 @@ func kill():
 
 
 func _on_Bullet_body_entered(body: Node):
-	kill()
-
 	if body.is_in_group("darktile"):
 		body.hit(global_position)
-	elif body.is_in_group("enemy_robots") and not body.is_dead:
-		body.take_damage(self, 1)
-	elif body.is_in_group("player") and not body.is_dead:
-		body.take_damage(self, 1)
+	elif body.has_method("take_hit") and not body.is_dead:
+		body.take_hit({body=self, damage=1})
+
+	kill()

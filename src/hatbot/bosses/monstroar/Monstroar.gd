@@ -98,7 +98,7 @@ func _physics_process(_delta):
 		if los.is_colliding():
 			can_see_player = true
 
-			if not dead:
+			if not is_dead:
 				if los.target_position.x > 0:
 					face_right()
 				else:
@@ -114,7 +114,7 @@ signal fired_bullet(bullet)
 
 var initial_health = 5
 var health
-var dead
+var is_dead
 
 signal died(boss)
 signal stunned(boss)
@@ -135,9 +135,9 @@ func take_hit(opts={}):
 	Hotel.check_in(self)
 
 	if health <= 0:
-		dead = true
+		is_dead = true
 
-	if not dead and machine.state.name in ["Stunned"]:
+	if not is_dead and machine.state.name in ["Stunned"]:
 		machine.transit("Warping")
 	else:
 		machine.transit("KnockedBack", {

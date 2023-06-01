@@ -19,7 +19,7 @@ func reset_bosses():
 func remaining_bosses():
 	if len(bosses) == 0:
 		return null
-	return bosses.filter(func(b): return not b.dead)
+	return bosses.filter(func(b): return not b.is_dead)
 
 #####################################################
 # ready
