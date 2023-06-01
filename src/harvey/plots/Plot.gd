@@ -31,13 +31,13 @@ func on_transit(new_state):
 
 	match state:
 		"SeedPlanted":
-			Harvey.sound_seed_planted()
+			DJZ.play(DJZ.S.maximize)
 		"NeedsWater":
-			Harvey.sound_plant_needs_water()
+			DJZ.play(DJZ.S.minimize)
 		"Watered":
-			Harvey.sound_watering()
+			DJZ.play(DJZ.S.slime)
 		"ReadyForHarvest":
-			Harvey.sound_ready_for_harvest()
+			DJZ.play(DJZ.S.cure)
 		_:
 			Debug.prn("no sound")
 

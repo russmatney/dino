@@ -13,6 +13,8 @@ enum S {
 	climbstart,
 	coin,
 	collectpowerup,
+	complete,
+	cure,
 	destroyed_block,
 	enemy_dead,
 	enemy_hit,
@@ -32,6 +34,8 @@ enum S {
 	kick,
 	land,
 	laser,
+	maximize,
+	minimize,
 	nodamageclang,
 	pickup,
 	playerheal,
@@ -41,6 +45,7 @@ enum S {
 	player_spawn,
 	punch,
 	showjumbotron,
+	slime,
 	soldierdead,
 	soldierhit,
 	speedup,
@@ -112,6 +117,12 @@ enum S {
 	[
 			preload("res://assets/sounds/collectpowerup1.sfxr"),
 			preload("res://assets/sounds/collectpowerup2.sfxr"),
+		],
+	S.complete: [
+		preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - complete.ogg")
+		],
+	S.cure: [
+		preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - cure.ogg")
 		],
 	S.destroyed_block:
 	[
@@ -217,6 +228,8 @@ enum S {
 		preload("res://assets/sounds/snake/laser4.sfxr"),
 		preload("res://assets/sounds/snake/laser5.sfxr"),
 	],
+	S.maximize: [preload("res://assets/harvey/sounds/maximize_006.ogg")],
+	S.minimize: [preload("res://assets/harvey/sounds/minimize_006.ogg")],
 	S.nodamageclang:
 	[
 			preload("res://assets/sounds/nodamageclang.sfxr"),
@@ -268,6 +281,7 @@ enum S {
 			preload("res://assets/sounds/showjumbotron2.sfxr"),
 			preload("res://assets/sounds/showjumbotron3.sfxr"),
 		],
+	S.slime: [preload("res://assets/harvey/sounds/slime_001.ogg")],
 	S.soldierdead:
 	[
 			preload("res://src/hatbot/sounds/soldierdead1.sfxr"),
