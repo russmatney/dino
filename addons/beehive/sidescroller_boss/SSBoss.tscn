@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://blq7fe0pn0ugk"]
+
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/SSBoss.gd" id="1_0mh0v"]
+[ext_resource type="PackedScene" path="res://addons/beehive/sidescroller_boss/machine/SSBossMachine.tscn" id="2_qdouh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhmfd"]
+
+[node name="SSBoss" type="CharacterBody2D"]
+script = ExtResource("1_0mh0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qhmfd")
+
+[node name="SSBossMachine" parent="." instance=ExtResource("2_qdouh")]

@@ -1,16 +1,16 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=17 format=3 uid="uid://iek1yvone6at"]
 
 [ext_resource type="Script" path="res://src/hatbot/bosses/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="2_jbhjj"]
 [ext_resource type="SpriteFrames" uid="uid://basjfrbrmdubh" path="res://src/hatbot/bosses/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Idle.gd" id="4_rwt87"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Firing.gd" id="5_5chnv"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Idle.gd" id="4_kfdw7"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/KnockedBack.gd" id="6_fqcf7"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Dead.gd" id="7_oy4g0"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Stunned.gd" id="8_fhgq5"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Warping.gd" id="9_3hlyf"]
-[ext_resource type="Script" path="res://src/hatbot/bosses/machine/Laughing.gd" id="10_dgtvf"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Firing.gd" id="5_wonrn"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/KnockedBack.gd" id="6_toc5p"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Dead.gd" id="7_m6m7i"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Stunned.gd" id="8_b2iay"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Warping.gd" id="9_uxc60"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Laughing.gd" id="10_i7qd0"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="12_7xc6l"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="13_qnfjf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="14_s0hdd"]
@@ -40,25 +40,25 @@ animation = &"warp-leave"
 script = ExtResource("2_jbhjj")
 
 [node name="Idle" type="Node" parent="Machine"]
-script = ExtResource("4_rwt87")
+script = ExtResource("4_kfdw7")
 
 [node name="Firing" type="Node" parent="Machine"]
-script = ExtResource("5_5chnv")
+script = ExtResource("5_wonrn")
 
 [node name="KnockedBack" type="Node" parent="Machine"]
-script = ExtResource("6_fqcf7")
+script = ExtResource("6_toc5p")
 
 [node name="Dead" type="Node" parent="Machine"]
-script = ExtResource("7_oy4g0")
+script = ExtResource("7_m6m7i")
 
 [node name="Stunned" type="Node" parent="Machine"]
-script = ExtResource("8_fhgq5")
+script = ExtResource("8_b2iay")
 
 [node name="Warping" type="Node" parent="Machine"]
-script = ExtResource("9_3hlyf")
+script = ExtResource("9_uxc60")
 
 [node name="Laughing" type="Node" parent="Machine"]
-script = ExtResource("10_dgtvf")
+script = ExtResource("10_i7qd0")
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)
