@@ -2,26 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://diy4dgr2s4sh3" path="res://assets/hatbot/shootycrawly_sheet.png" id="1_e47ia"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v5wmw"]
-atlas = ExtResource("1_e47ia")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mygav"]
-atlas = ExtResource("1_e47ia")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_galhc"]
-atlas = ExtResource("1_e47ia")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kw06i"]
-atlas = ExtResource("1_e47ia")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4gcu"]
-atlas = ExtResource("1_e47ia")
-region = Rect2(128, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_8f84d"]
 atlas = ExtResource("1_e47ia")
 region = Rect2(368, 0, 16, 16)
@@ -61,6 +41,26 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_grjat"]
 atlas = ExtResource("1_e47ia")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5wmw"]
+atlas = ExtResource("1_e47ia")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mygav"]
+atlas = ExtResource("1_e47ia")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_galhc"]
+atlas = ExtResource("1_e47ia")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw06i"]
+atlas = ExtResource("1_e47ia")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4gcu"]
+atlas = ExtResource("1_e47ia")
+region = Rect2(128, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0rjo7"]
 atlas = ExtResource("1_e47ia")
@@ -102,26 +102,6 @@ region = Rect2(272, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v5wmw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mygav")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_galhc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kw06i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w4gcu")
-}],
-"loop": true,
-"name": &"crawl",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_8f84d")
 }],
 "loop": true,
@@ -145,7 +125,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_elcs5")
 }],
 "loop": true,
-"name": &"hit",
+"name": &"dying",
 "speed": 8.0
 }, {
 "frames": [{
@@ -164,6 +144,26 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5wmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mygav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_galhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw06i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4gcu")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,

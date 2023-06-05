@@ -6,9 +6,11 @@ func enter(ctx={}):
 
 	DJZ.play(DJZ.S.enemyhurt)
 
-	var dir = ctx.get("direction", Vector2.LEFT)
+	var dir = Util.get_(ctx, "direction", Vector2.LEFT)
 	var dying = ctx.get("dying", false)
-	var kb_vel = actor.DYING_VELOCITY if dying else actor.KNOCKBACK_VELOCITY
+	var kb_vel = actor.dying_velocity if dying else actor.knockback_velocity
+	if kb_vel == null:
+		kb_vel = 5
 
 	if not "crawl_on_side" in actor:
 		# look into the punch
@@ -17,12 +19,12 @@ func enter(ctx={}):
 		elif dir == Vector2.RIGHT:
 			actor.face_left()
 
-	actor.velocity += Vector2(0, kb_vel) + dir * actor.KNOCKBACK_VELOCITY_HORIZONTAL
+	actor.velocity += Vector2(0, kb_vel) + dir * actor.knockback_velocity_horizontal
 
 
 func physics_process(delta):
-	actor.velocity.y += actor.GRAVITY * delta
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)
+	actor.velocity.y += actor.gravity * delta
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed)
 	actor.move_and_slide()
 
 	# TODO wait for dying animation to end

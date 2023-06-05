@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddlibeeuuh12v"]
+[gd_scene load_steps=8 format=3 uid="uid://buqtf45kl281u"]
 
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_enemy/SSEnemy.gd" id="1_mo0rp"]
 [ext_resource type="SpriteFrames" uid="uid://dluh18k2o67ff" path="res://src/hatbot/enemies/goomba_sprite_frames.tres" id="1_s7guy"]
-[ext_resource type="Script" path="res://src/hatbot/enemies/Goomba.gd" id="1_vdsqm"]
-[ext_resource type="PackedScene" path="res://src/hatbot/enemies/machine/EnemyMachine.tscn" id="3_chfoy"]
+[ext_resource type="PackedScene" path="res://addons/beehive/sidescroller_enemy/machine/SSEnemyMachine.tscn" id="3_chfoy"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="4_507b1"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_cxn3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qexhu"]
 size = Vector2(24, 26)
@@ -14,7 +15,8 @@ radius = 14.0
 [node name="Goomba" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 8
 collision_mask = 9
-script = ExtResource("1_vdsqm")
+script = ExtResource("1_mo0rp")
+should_hurt_to_touch = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -31,7 +33,16 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_lrapw")
 
-[node name="Machine" parent="." instance=ExtResource("3_chfoy")]
+[node name="SSEnemyMachine" parent="." instance=ExtResource("3_chfoy")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("4_507b1")
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("5_cxn3s")
+text = "state"
+horizontal_alignment = 1

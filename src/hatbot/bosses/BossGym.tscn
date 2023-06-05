@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_t0fk6"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="2_5o6eg"]
-[ext_resource type="PackedScene" uid="uid://de26v8ovl64or" path="res://src/hatbot/bosses/Monstroar.tscn" id="3_r2tqp"]
+[ext_resource type="PackedScene" path="res://src/hatbot/bosses/Monstroar.tscn" id="3_r2tqp"]
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/hatbot/bosses/Beefstronaut.tscn" id="4_cgsg1"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="5_yb4vk"]
 

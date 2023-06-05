@@ -19,13 +19,22 @@ func _get_configuration_warnings():
 
 @export var speed = 200
 @export var gravity = 1000
+@export var initial_health = 5
 
 @export var can_float = false
 @export var can_swoop = false
 @export var can_fire = false
 
+var health
+var is_dead
 var facing
 var can_see_player
+
+## signals ###########################################################
+
+signal died(boss)
+signal stunned(boss)
+
 
 ## nodes ###########################################################
 
@@ -148,13 +157,6 @@ func _physics_process(_delta):
 
 
 ## take_hit ####################################################
-
-var initial_health = 5
-var health
-var is_dead
-
-signal died(boss)
-signal stunned(boss)
 
 func take_hit(opts={}):
 	if not machine.state.name in ["Stunned", "Swoop", "Firing", "Idle", "Laughing"]:

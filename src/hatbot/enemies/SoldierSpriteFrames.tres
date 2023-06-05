@@ -236,7 +236,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_auqap")
 }],
 "loop": true,
-"name": &"knockback",
+"name": &"knocked_back",
 "speed": 5.0
 }, {
 "frames": [{

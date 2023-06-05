@@ -1,7 +1,6 @@
 extends State
 
-#####################################################
-# enter
+## enter ####################################################
 
 func enter(_ctx={}):
 	actor.anim.play("shoot")
@@ -9,8 +8,7 @@ func enter(_ctx={}):
 	bullets_til_break = break_every
 	cool_down = 0
 
-#####################################################
-# physics
+## physics ####################################################
 
 var break_every = 2
 var bullets_til_break
@@ -30,12 +28,11 @@ func physics_process(delta):
 		machine.transit("Run")
 		return
 
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
-	actor.velocity.y = move_toward(actor.velocity.y, 0, actor.SPEED/5.0)
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)
+	actor.velocity.y = move_toward(actor.velocity.y, 0, actor.speed/5.0)
 	actor.move_and_slide()
 
-#####################################################
-# fire control
+## fire control ####################################################
 
 var fire_cooldown = 1
 func can_fire():
@@ -51,11 +48,9 @@ func _on_bullet_dying(_bullet):
 	if not actor.can_see_player:
 		machine.transit("Run")
 
-#####################################################
-# fire logic
+## fire ####################################################
 
-
-var bullet_scene = preload("res://src/hatbot/enemies/Spell.tscn")
+var bullet_scene = preload("res://addons/beehive/sidescroller_enemy/Spell.tscn")
 var bullet_impulse = 100
 var bullet_knockback = 0
 
@@ -80,9 +75,6 @@ func fire():
 	var impulse = to_player * bullet_impulse
 	var rot = to_player.angle()
 	bullet.fire(impulse, rot)
-
-	# signal
-	actor.fired_bullet.emit(bullet)
 
 	# push back when firing
 	var pos = actor.get_global_position()
