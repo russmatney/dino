@@ -6,8 +6,7 @@ var dying = false
 @onready var anim = $AnimatedSprite2D
 @onready var fb_hit_box = $FireBackHitBox
 
-#####################################################
-# ready
+## ready ####################################################
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -15,16 +14,14 @@ func _ready():
 
 	fb_hit_box.monitoring = false
 
-#####################################################
-# process
+## process ####################################################
 
 # func _process(delta):
 # 	ttl -= delta
 # 	if ttl <= 0:
 # 		kill()
 
-#####################################################
-# fire
+## fire ####################################################
 
 var og_impulse
 var og_rotation
@@ -36,8 +33,7 @@ func fire(impulse, rot):
 	rotation = rot
 	apply_central_impulse(impulse)
 
-#####################################################
-# fire_back
+## fire_back ####################################################
 
 var firing_back
 
@@ -53,8 +49,7 @@ func fire_back():
 	set_collision_layer_value(3, true)
 	set_collision_layer_value(5, false)
 
-#####################################################
-# kill
+## kill ####################################################
 
 signal bullet_dying(bullet)
 
@@ -70,8 +65,7 @@ func kill():
 		if is_instance_valid(self):
 			queue_free()
 
-#####################################################
-# collision
+## collision ####################################################
 
 signal hit()
 
