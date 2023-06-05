@@ -17,8 +17,8 @@ func exit():
 func physics_process(delta):
 	# TODO floaty wiggle
 	if not actor.can_float:
-		actor.velocity.y += actor.GRAVITY * delta
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
+		actor.velocity.y += actor.gravity * delta
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)
 	actor.move_and_slide()
 
 	if actor.is_dead:

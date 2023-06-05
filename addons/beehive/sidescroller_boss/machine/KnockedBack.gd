@@ -18,7 +18,7 @@ func enter(opts={}):
 		DJZ.play(DJZ.S.soldierdead)
 	else:
 		kb_y = KNOCKBACK_Y
-		actor.anim.play("knocked-back")
+		actor.anim.play("knocked_back")
 		DJZ.play(DJZ.S.soldierhit)
 
 	if dir == Vector2.LEFT:
@@ -29,8 +29,8 @@ func enter(opts={}):
 	actor.velocity += Vector2(0, kb_y) + dir * KNOCKBACK_X
 
 func physics_process(delta):
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
-	actor.velocity.y += actor.GRAVITY * delta
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)
+	actor.velocity.y += actor.gravity * delta
 
 	actor.move_and_slide()
 

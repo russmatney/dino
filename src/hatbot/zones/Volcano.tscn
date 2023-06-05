@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Coin.tscn" id="12_xkhi8"]
 [ext_resource type="PackedScene" path="res://src/hatbot/CoinDoorQuest.tscn" id="13_0bnqt"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/hatbot/bosses/WarpSpot.tscn" id="16_qc2ns"]
-[ext_resource type="PackedScene" path="res://src/hatbot/bosses/Beefstronaut.tscn" id="17_d3lge"]
+[ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/hatbot/bosses/Beefstronaut.tscn" id="17_d3lge"]
 [ext_resource type="PackedScene" path="res://src/hatbot/BossDefeatQuest.tscn" id="17_yxlqf"]
-[ext_resource type="PackedScene" path="res://src/hatbot/bosses/Monstroar.tscn" id="18_tygdy"]
+[ext_resource type="PackedScene" uid="uid://de26v8ovl64or" path="res://src/hatbot/bosses/Monstroar.tscn" id="18_tygdy"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="18_ye46h"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="19_pnysb"]
 

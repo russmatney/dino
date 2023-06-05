@@ -14,3 +14,8 @@ layer_0/tile_data = PackedInt32Array(851991, 196609, 4, 786455, 196609, 3, 72091
 
 [node name="SSBoss" parent="." instance=ExtResource("3_iabbp")]
 position = Vector2(-56, -102)
+speed = null
+gravity = null
+can_float = null
+can_swoop = null
+can_fire = null

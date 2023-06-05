@@ -27,7 +27,7 @@ func physics_process(delta):
 		if fire_burst_ttl <= 0:
 			fire_burst_ttl = null
 
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED/5.0)
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)
 	actor.move_and_slide()
 
 #####################################################
@@ -88,9 +88,6 @@ func fire():
 	var impulse = to_player * bullet_impulse
 	var rot = to_player.angle()
 	bullet.fire(impulse, rot)
-
-	# signal
-	actor.fired_bullet.emit(bullet)
 
 	# push back when firing
 	var pos = actor.get_global_position()

@@ -9,8 +9,10 @@ func _get_configuration_warnings():
 		"SSBossMachine", "StateLabel", "AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "knocked_back", "dying", "dead",
-			"firing", "laughing", "stunned", "warp_arrive", "warp_leave",
-			"preswoop", "swooping",
+			"laughing", "stunned", "warp_arrive", "warp_leave",
+			# optional/supporting optional attacks:
+			# "firing",
+			# "preswoop", "swooping",
 			]}})
 
 ## vars ###########################################################
@@ -20,6 +22,7 @@ func _get_configuration_warnings():
 
 @export var can_float = false
 @export var can_swoop = false
+@export var can_fire = false
 
 var facing
 var can_see_player
@@ -38,9 +41,9 @@ var skull_particles
 var attack_box
 var los
 
-var swoop_hint1 = $SwoopHint1
-var swoop_hint2 = $SwoopHint2
-var swoop_hint_player = $SwoopHintPlayer
+var swoop_hint1
+var swoop_hint2
+var swoop_hint_player
 var swoop_hints = []
 
 const warp_group = "warp_spots"
@@ -142,11 +145,6 @@ func _physics_process(_delta):
 					face_right()
 				else:
 					face_left()
-
-
-## attack ####################################################
-
-signal fired_bullet(bullet)
 
 
 ## take_hit ####################################################

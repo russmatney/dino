@@ -10,7 +10,7 @@ var warp_ttl = 1
 # enter
 
 func enter(_ctx={}):
-	actor.anim.play("warp-leave")
+	actor.anim.play("warp_leave")
 
 	var warp_options = actor.warp_spots.filter(func(ws): return ws != last_ws)
 	next_warp_spot = Util.rand_of(warp_options)
@@ -33,7 +33,7 @@ func physics_process(delta):
 		actor.global_position = next_warp_spot.global_position
 
 		DJZ.play(DJZ.S.bosswarp)
-		actor.anim.play("warp-arrive")
+		actor.anim.play("warp_arrive")
 
 		# TODO wait until current animation ends
 		machine.transit("Idle")

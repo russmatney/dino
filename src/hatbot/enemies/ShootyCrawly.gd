@@ -9,7 +9,6 @@ extends CharacterBody2D
 
 signal died(me)
 signal knocked_back(me)
-signal fired_bullet(spell)
 
 var death_animation = "dead"
 var dying_animation = "hit"

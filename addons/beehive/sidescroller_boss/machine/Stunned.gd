@@ -14,9 +14,9 @@ func enter(ctx={}):
 
 func physics_process(delta):
 	if not actor.is_on_floor():
-		actor.velocity.y += actor.GRAVITY * delta
+		actor.velocity.y += actor.gravity * delta
 
-	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)
+	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed)
 
 	actor.move_and_slide()
 

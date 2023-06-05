@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsktsolpjji3t"]
+[gd_scene load_steps=10 format=3 uid="uid://pot2dpd6w67m"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_0q0ok"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Idle.gd" id="2_fjqr0"]

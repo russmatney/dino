@@ -1,17 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://de26v8ovl64or"]
+[gd_scene load_steps=11 format=3 uid="uid://de26v8ovl64or"]
 
-[ext_resource type="Script" path="res://src/hatbot/bosses/Monstroar.gd" id="1_jqu05"]
+[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/SSBoss.gd" id="1_3346k"]
 [ext_resource type="SpriteFrames" uid="uid://cvrl5hva6wlar" path="res://src/hatbot/bosses/monstroar_sprite_frames.tres" id="2_55uo8"]
-[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_85gcx"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Idle.gd" id="4_bjx5n"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Firing.gd" id="5_gyuyn"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/KnockedBack.gd" id="6_tqixo"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Dead.gd" id="7_joakt"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Stunned.gd" id="8_c037x"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Warping.gd" id="9_ti6of"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Laughing.gd" id="10_kpdg2"]
+[ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://addons/beehive/sidescroller_boss/machine/SSBossMachine.tscn" id="8_kgjjp"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_d6bbg"]
-[ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/machine/Swoop.gd" id="11_kho6k"]
 [ext_resource type="PackedScene" path="res://src/hatbot/bosses/PositionHint.tscn" id="13_qubff"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="14_y6g7e"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="15_w3c60"]
@@ -27,7 +19,9 @@ height = 20.0
 [node name="Monstroar" type="CharacterBody2D" groups=["bosses", "enemies"]]
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_jqu05")
+script = ExtResource("1_3346k")
+can_float = true
+can_swoop = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6tidp")
@@ -35,34 +29,7 @@ shape = SubResource("RectangleShape2D_6tidp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = ExtResource("2_55uo8")
-animation = &"idle"
-
-[node name="Machine" type="Node" parent="."]
-script = ExtResource("3_85gcx")
-
-[node name="Idle" type="Node" parent="Machine"]
-script = ExtResource("4_bjx5n")
-
-[node name="Firing" type="Node" parent="Machine"]
-script = ExtResource("5_gyuyn")
-
-[node name="KnockedBack" type="Node" parent="Machine"]
-script = ExtResource("6_tqixo")
-
-[node name="Dead" type="Node" parent="Machine"]
-script = ExtResource("7_joakt")
-
-[node name="Stunned" type="Node" parent="Machine"]
-script = ExtResource("8_c037x")
-
-[node name="Warping" type="Node" parent="Machine"]
-script = ExtResource("9_ti6of")
-
-[node name="Laughing" type="Node" parent="Machine"]
-script = ExtResource("10_kpdg2")
-
-[node name="Swoop" type="Node" parent="Machine"]
-script = ExtResource("11_kho6k")
+animation = &"warp_leave"
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)
@@ -100,3 +67,5 @@ offset_bottom = 40.0
 theme_override_fonts/font = ExtResource("16_k3jf2")
 text = "state"
 horizontal_alignment = 1
+
+[node name="SSBossMachine" parent="." instance=ExtResource("8_kgjjp")]

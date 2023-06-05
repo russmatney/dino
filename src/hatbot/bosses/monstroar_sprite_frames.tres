@@ -191,7 +191,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ssrq4")
 }],
 "loop": false,
-"name": &"knocked-back",
+"name": &"knocked_back",
 "speed": 5.0
 }, {
 "frames": [{
@@ -273,7 +273,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ls3qc")
 }],
 "loop": false,
-"name": &"warp-arrive",
+"name": &"warp_arrive",
 "speed": 5.0
 }, {
 "frames": [{
@@ -296,6 +296,6 @@ animations = [{
 "texture": SubResource("AtlasTexture_qwhps")
 }],
 "loop": false,
-"name": &"warp-leave",
+"name": &"warp_leave",
 "speed": 5.0
 }]
