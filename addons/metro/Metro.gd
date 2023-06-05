@@ -63,6 +63,9 @@ func ensure_current_zone(zone=null):
 
 func get_spawn_coords():
 	ensure_current_zone()
+	if not current_zone:
+		Debug.warn("No current zone in metro, returning ZEROed spawn coords")
+		return Vector2.ZERO
 
 	var spawn_coords = current_zone.player_spawn_coords()
 

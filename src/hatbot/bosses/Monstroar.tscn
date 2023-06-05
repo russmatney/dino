@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3]
 
-[ext_resource type="Script" path="res://src/hatbot/bosses/monstroar/Monstroar.gd" id="1_jqu05"]
-[ext_resource type="SpriteFrames" uid="uid://cvrl5hva6wlar" path="res://src/hatbot/bosses/monstroar/monstroar_sprite_frames.tres" id="2_55uo8"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/Monstroar.gd" id="1_jqu05"]
+[ext_resource type="SpriteFrames" uid="uid://cvrl5hva6wlar" path="res://src/hatbot/bosses/monstroar_sprite_frames.tres" id="2_55uo8"]
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_85gcx"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Idle.gd" id="4_sls1w"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Firing.gd" id="5_tbca7"]

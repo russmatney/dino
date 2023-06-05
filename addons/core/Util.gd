@@ -123,6 +123,11 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 	elif packed_scene_or_path is PackedScene:
 		scene = packed_scene_or_path
 		sfp = packed_scene_or_path.resource_path
+	else:
+		Debug.warn("unexpected packed_scene_data input", packed_scene_or_path)
+	if not scene:
+		Debug.warn("could not create state in packed_scene_data", packed_scene_or_path)
+		return
 	var state = scene.get_state()
 	var by_path = {}
 	for node_idx in state.get_node_count():

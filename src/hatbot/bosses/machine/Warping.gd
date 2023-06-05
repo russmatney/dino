@@ -15,6 +15,9 @@ func enter(_ctx={}):
 	var warp_options = actor.warp_spots.filter(func(ws): return ws != last_ws)
 	next_warp_spot = Util.rand_of(warp_options)
 
+	if next_warp_spot == null:
+		next_warp_spot = {global_position=Vector2(randf_range(-10, 10), randf_range(-10, 10))}
+
 	warp_ttl = warp_in
 
 func exit():

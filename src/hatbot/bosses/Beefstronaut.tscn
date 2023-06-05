@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3]
 
-[ext_resource type="Script" path="res://src/hatbot/bosses/beefstronaut/Beefstronaut.gd" id="1_at5n1"]
+[ext_resource type="Script" path="res://src/hatbot/bosses/Beefstronaut.gd" id="1_at5n1"]
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="2_jbhjj"]
-[ext_resource type="SpriteFrames" uid="uid://basjfrbrmdubh" path="res://src/hatbot/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
+[ext_resource type="SpriteFrames" uid="uid://basjfrbrmdubh" path="res://src/hatbot/bosses/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Idle.gd" id="4_rwt87"]
 [ext_resource type="Script" path="res://src/hatbot/bosses/machine/Firing.gd" id="5_5chnv"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_15lvx"]

@@ -17,17 +17,28 @@ func enter(_ctx={}):
 	player_pos_set = false
 	finished_chasing_player = false
 
-	var positions = actor.warp_spots \
-		.filter(func(ws): return not Util.are_nodes_close(ws, actor)) \
-		.map(func(ws): return ws.global_position)
-	var rand_positions = Util.rand_of(positions, 2)
+	var warp_spots = actor.warp_spots
+
+	if len(warp_spots) == 0:
+		warp_spots = [
+			{global_position=Vector2(randf_range(-10, 10), randf_range(-10, 10))},
+			{global_position=Vector2(randf_range(-10, 10), randf_range(-10, 10))},
+			]
+
+	var positions = warp_spots
+	positions = positions.filter(func(ws): return not Util.are_nodes_close(ws, actor))
+	if len(positions) < 2:
+		positions = warp_spots
+
+	positions = Util.rand_of(positions, 2)
+	positions = positions.map(func(ws): return ws.global_position)
 
 	swoop_spots = [
-		[rand_positions[0], actor.swoop_hint1],
+		[positions[0], actor.swoop_hint1],
 		[func():
 			if Game.player and is_instance_valid(Game.player):
 				return Game.player.global_position, actor.swoop_hint_player],
-		[rand_positions[1], actor.swoop_hint2],
+		[positions[1], actor.swoop_hint2],
 		]
 
 	for spot in swoop_spots:

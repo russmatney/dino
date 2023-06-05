@@ -91,16 +91,22 @@ func book(bookable: Variant):
 	var data
 	if bookable is PackedScene:
 		data = Util.packed_scene_data(bookable)
-		book_data(data)
+		if data:
+			book_data(data)
 	elif bookable is String:
 		data = Util.packed_scene_data(bookable)
-		book_data(data)
+		if data:
+			book_data(data)
 	elif bookable is Node:
 		data = Util.packed_scene_data(bookable.scene_file_path)
-		book_data(data, {node=bookable})
+		if data:
+			book_data(data, {node=bookable})
 	else:
 		Debug.warn("Unexpected type passed to Hotel.book/1:", bookable,
 			", nothing doing.")
+
+	if data == null:
+		Debug.err("Hotel.book failed to find data with input", bookable)
 
 func book_data(data: Dictionary, opts = {}):
 	var scene_name = data[^"."]["name"]

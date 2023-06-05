@@ -21,7 +21,7 @@ const zone_scenes = [
 ## register ##########################################################
 
 func manages_scene(scene):
-	return scene.scene_file_path in zone_scenes
+	return scene.scene_file_path.begins_with("res://src/hatbot")
 
 var first_zone
 
