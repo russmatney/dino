@@ -6,3 +6,10 @@
 [node name="TopDownGym" type="Node"]
 script = ExtResource("1_8tyfg")
 player_scene = ExtResource("2_al8qk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -24.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 24.0
+color = Color(0.384314, 0.509804, 0.65098, 1)
