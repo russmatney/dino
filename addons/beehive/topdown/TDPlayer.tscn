@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0nbgfv56fvm1"]
+
+[ext_resource type="Script" path="res://addons/beehive/topdown/TDPlayer.gd" id="1_hodoi"]
+
+[node name="TDPlayer" type="CharacterBody2D"]
+script = ExtResource("1_hodoi")

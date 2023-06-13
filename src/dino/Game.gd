@@ -25,6 +25,7 @@ var games = [
 	HatBot,
 	Herd,
 	Mountain,
+	Shirt,
 	SuperElevatorLevel,
 	Tower,
 	]

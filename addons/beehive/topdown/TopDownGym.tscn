@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://roc04xciws4b"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_8tyfg"]
+[ext_resource type="PackedScene" uid="uid://d0nbgfv56fvm1" path="res://addons/beehive/topdown/TDPlayer.tscn" id="2_al8qk"]
+
+[node name="TopDownGym" type="Node"]
+script = ExtResource("1_8tyfg")
+player_scene = ExtResource("2_al8qk")

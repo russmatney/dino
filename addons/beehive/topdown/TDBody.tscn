@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bacb43b2t62dq"]
+
+[ext_resource type="Script" path="res://addons/beehive/topdown/TDBody.gd" id="1_hnl6t"]
+
+[node name="TDBody" type="CharacterBody2D"]
+script = ExtResource("1_hnl6t")
