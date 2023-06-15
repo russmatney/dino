@@ -18,16 +18,19 @@ func is_neighbor(cell_a, cell_b):
 		if abs(cell_a.x - cell_b.x) == 1:
 			return true
 
+func group_has_neighbor(group, cell):
+	# gen neighbors for cell, check if any in group
+	for g_cell in group:
+		if is_neighbor(cell, g_cell):
+			return true
+
 func split_connected_groups(cell, groups):
 	var connected = []
 	var disconnected = []
+	# should be able to filter out groups before checking every cell here, maybe with a stored min/max
 	for g in groups:
-		var found_neighbor
-		for g_cell in g:
-			if is_neighbor(cell, g_cell):
-				found_neighbor = true
-				break
-		if found_neighbor:
+		var is_neighbor = group_has_neighbor(g, cell)
+		if is_neighbor:
 			connected.append(g)
 		else:
 			disconnected.append(g)
@@ -46,7 +49,6 @@ func update_connected_groups(cell, groups):
 func build_connected_groups(cells, groups=[]):
 	for c in cells:
 		groups = update_connected_groups(c, groups)
-		Debug.pr("updated_connected_groups:", len(groups))
 	return groups
 
 func ensure_pit_detectors():
@@ -60,4 +62,4 @@ func ensure_pit_detectors():
 		Debug.pr(l, "used_cells", used_cells)
 
 		var connected_groups = build_connected_groups(used_cells)
-		Debug.prn(l, "connected_groups", connected_groups)
+		Debug.prn(l, "connected_groups", len(connected_groups))
