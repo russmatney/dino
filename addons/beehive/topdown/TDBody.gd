@@ -19,6 +19,7 @@ func _get_configuration_warnings():
 @export var initial_health: int = 6
 
 @export var run_speed: float = 10000
+@export var jump_speed: float = 10000
 
 # vars
 
@@ -26,6 +27,7 @@ var move_vector: Vector2
 var facing_vector: Vector2
 var health
 var is_dead
+var is_player
 
 # nodes
 
@@ -50,6 +52,9 @@ func _enter_tree():
 
 func _ready():
 	Hotel.register(self)
+
+	if is_in_group("player"):
+		is_player = true
 
 	if not Engine.is_editor_hint():
 		Util.set_optional_nodes(self, {

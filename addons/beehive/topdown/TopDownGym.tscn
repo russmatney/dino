@@ -18,6 +18,8 @@ color = Color(0.384314, 0.509804, 0.65098, 1)
 
 [node name="TDBody" parent="." instance=ExtResource("3_rvpkg")]
 position = Vector2(-56, -72)
+jump_speed = null
 
 [node name="TDBody2" parent="." instance=ExtResource("3_rvpkg")]
 position = Vector2(96, 56)
+jump_speed = null

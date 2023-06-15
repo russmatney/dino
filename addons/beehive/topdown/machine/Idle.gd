@@ -13,8 +13,11 @@ func exit():
 
 ## input ###########################################################
 
-func unhandled_input(_event):
-	pass
+func unhandled_input(event):
+	if actor.is_player:
+		if Trolley.is_jump(event):
+			machine.transit("Jump")
+			return
 
 
 ## process ###########################################################

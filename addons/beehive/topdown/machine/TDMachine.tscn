@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch8rasfmsvl5s"]
+[gd_scene load_steps=5 format=3 uid="uid://ch8rasfmsvl5s"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_bxawf"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Idle.gd" id="2_cjhxk"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Run.gd" id="4_6b8xb"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/machine/Jump.gd" id="4_683nd"]
 
 [node name="TDMachine" type="Node"]
 script = ExtResource("1_bxawf")
@@ -12,3 +13,6 @@ script = ExtResource("2_cjhxk")
 
 [node name="Run" type="Node" parent="."]
 script = ExtResource("4_6b8xb")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("4_683nd")
