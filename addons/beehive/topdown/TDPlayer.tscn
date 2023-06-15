@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d0nbgfv56fvm1"]
+[gd_scene load_steps=33 format=3 uid="uid://d0nbgfv56fvm1"]
 
 [ext_resource type="Script" path="res://addons/beehive/topdown/TDPlayer.gd" id="1_hodoi"]
 [ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://addons/beehive/topdown/topdown_player_64.png" id="2_q4ht8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="7_a0utl"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_e5yp5"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="7_vgh44"]
+[ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_6knpo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ah5wp"]
 
@@ -196,7 +197,6 @@ collision_layer = 2
 collision_mask = 3609
 script = ExtResource("1_hodoi")
 display_name = "P. Layer"
-jump_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ah5wp")
@@ -248,3 +248,8 @@ position = Vector2(0, -32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 shape = SubResource("CircleShape2D_7isbx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("8_6knpo")
+texture_scale = 4.0
