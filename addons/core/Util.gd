@@ -350,3 +350,18 @@ func _config_warning(node, opts={}):
 					warns.append("Expected animation named '%s' in node '%s'" % [animation, node_name])
 
 	return warns
+
+func sum(vals):
+	return vals.reduce(func(agg, x): return x + agg)
+
+func average(vals):
+	if len(vals) == 0:
+		return
+
+	if vals[0] is Vector2:
+		var mid = Vector2()
+		mid.x = average(vals.map(func(c): return c.x))
+		mid.y = average(vals.map(func(c): return c.y))
+		return mid
+	else:
+		return sum(vals)/len(vals)

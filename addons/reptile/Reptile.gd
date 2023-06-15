@@ -83,5 +83,7 @@ func normalized_val(stats, val):
 # tilemap/cell helpers
 
 
-func valid_neighbors(tilemap, cell):
-	return tilemap.get_surrounding_cells(cell)
+func valid_neighbors(tilemap, cell, layer=0):
+	var nbr_coords = tilemap.get_surrounding_cells(cell)
+	return nbr_coords.filter(func(coord):
+		return -1 != tilemap.get_cell_source_id(layer, coord))
