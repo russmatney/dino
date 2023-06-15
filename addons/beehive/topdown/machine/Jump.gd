@@ -19,11 +19,15 @@ func enter(opts = {}):
 	tween.tween_property(actor, "scale", Vector2.ONE*jump_scale_factor, jump_ttl/2.0)
 	tween.tween_property(actor, "scale", Vector2.ONE, jump_ttl/2.0)
 
+	# disable low-wall collisions
+	actor.set_collision_mask_value(11, false)
+
 
 ## exit ###########################################################
 
 func exit():
-	pass
+	# re-enable low-wall collisions
+	actor.set_collision_mask_value(11, true)
 
 
 ## input ###########################################################
