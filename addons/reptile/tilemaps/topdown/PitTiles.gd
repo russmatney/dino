@@ -91,16 +91,17 @@ func create_pit_detector(cells, layer):
 		if seen_points[p] < 4:
 			points.append(p)
 
-	Debug.pr(seen_points)
-	Debug.pr(points)
+	# Debug.pr(seen_points)
+	# Debug.pr(points)
 
 	# sort cells according to angle to midpoint
 	var mid = Util.average(points)
-	# TODO not perfect for convex shapes, but pretty much right
+	# TODO not perfect for convex shapes, but close
 	points.sort_custom(func (a,b):
 		var a_ang = mid.angle_to_point(a)
 		var b_ang = mid.angle_to_point(b)
-		if a_ang == b_ang:
+		var diff_ang = abs(a_ang - b_ang)
+		if diff_ang <= 0.05:
 			return mid.distance_to(a) <= mid.distance_to(b)
 		return a_ang >= b_ang)
 
@@ -119,10 +120,15 @@ func create_pit_detector(cells, layer):
 		area.add_child(coll_polygon)
 		coll_polygon.set_owner(owner)
 		area.add_to_group(generated_group, true)
-		).call_deferred()
 
-	# TODO set collision mask
-	# connect signals
+		area.set_collision_layer_value(13, true)
+		area.set_collision_mask_value(2, true)
+		# TODO add other masks
+
+		area.body_entered.connect(on_body_entered)
+		area.body_exited.connect(on_body_exited)
+
+		).call_deferred()
 
 ###################################################################
 # ensure_pit_detectors
@@ -143,3 +149,13 @@ func ensure_pit_detectors():
 
 		for cells in connected_groups:
 			create_pit_detector(cells, l.i)
+
+###################################################################
+
+func on_body_entered(body):
+	Debug.pr("body entered!")
+	if "is_player" in body and body.is_player:
+		body.machine.transit("Fall")
+
+func on_body_exited(_body):
+	Debug.pr("body exited!")
