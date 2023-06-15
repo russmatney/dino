@@ -185,7 +185,6 @@ animations = [{
 
 [node name="TDBody" type="CharacterBody2D"]
 script = ExtResource("1_hnl6t")
-jump_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wu65o")
