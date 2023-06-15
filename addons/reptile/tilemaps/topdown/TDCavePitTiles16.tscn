@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://g1xpunfo7e1u"]
+
+[ext_resource type="TileSet" uid="uid://co3os0t7u2nbl" path="res://addons/reptile/tilesets/topdown/TDCavePitTileSet16.tres" id="1_k6ecc"]
+
+[node name="TDCavePitTiles16" type="TileMap"]
+tile_set = ExtResource("1_k6ecc")
+format = 2

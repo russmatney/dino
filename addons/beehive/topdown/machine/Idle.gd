@@ -3,7 +3,11 @@ extends State
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	pass
+	# TODO remove, here just for funsies
+	if actor.heart_particles != null:
+		# force one-shot emission
+		actor.heart_particles.set_emitting(true)
+		actor.heart_particles.restart()
 
 ## exit ###########################################################
 
