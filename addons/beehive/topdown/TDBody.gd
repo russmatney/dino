@@ -95,6 +95,19 @@ func check_out(data):
 	is_dead = Util.get_(data, "is_dead", is_dead)
 	display_name = Util.get_(data, "display_name", display_name)
 
+## collision ###########################################################
+
+# Should be called immediately after move_and_slide in physics_process
+# if it returns true, the calling physics_process should return to avoid moving to another state
+# func collision_check():
+# 	Debug.pr("checking collision")
+# 	for i in get_slide_collision_count():
+# 		Debug.pr("checking collision", i)
+# 		var collision = get_slide_collision(i)
+# 		var collider = collision.get_collider()
+# 		if collider.is_in_group("pits"):
+# 			Debug.pr("pit hit", collider)
+
 ## facing ###########################################################
 
 func update_facing():

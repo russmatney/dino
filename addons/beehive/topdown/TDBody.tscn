@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://addons/beehive/topdown/machine/TDMachine.tscn" id="4_3sx8f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wu65o"]
+radius = 9.0
+height = 18.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmscq"]
 atlas = ExtResource("2_djwnc")
@@ -187,6 +189,7 @@ animations = [{
 script = ExtResource("1_hnl6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_wu65o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

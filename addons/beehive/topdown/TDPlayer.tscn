@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="10_hjude"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ah5wp"]
+radius = 8.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmscq"]
 atlas = ExtResource("2_q4ht8")
@@ -190,6 +192,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6v20"]
+radius = 8.0
+height = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7isbx"]
 radius = 80.399
@@ -201,6 +205,7 @@ script = ExtResource("1_hodoi")
 display_name = "P. Layer"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_ah5wp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -239,6 +244,7 @@ collision_layer = 0
 collision_mask = 2072
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_n6v20")
 
 [node name="LookPOF" parent="." instance=ExtResource("7_e5yp5")]

@@ -1,5 +1,6 @@
 @tool
 extends TileMap
+class_name RepTileMap
 
 
 @export var recalc_autotiles: bool :

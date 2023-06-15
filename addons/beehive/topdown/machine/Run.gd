@@ -39,6 +39,9 @@ func physics_process(delta):
 		actor.velocity = lerp(actor.velocity, Vector2.ZERO, 0.5)
 
 	actor.move_and_slide()
+	# var should_return = actor.collision_check()
+	# if should_return:
+	# 	return
 
 	if abs(actor.velocity.length()) < 1:
 		machine.transit("Idle")
