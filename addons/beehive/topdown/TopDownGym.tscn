@@ -1,15 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://roc04xciws4b"]
+[gd_scene load_steps=4 format=3 uid="uid://roc04xciws4b"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_8tyfg"]
 [ext_resource type="PackedScene" uid="uid://d0nbgfv56fvm1" path="res://addons/beehive/topdown/TDPlayer.tscn" id="2_al8qk"]
+[ext_resource type="PackedScene" uid="uid://bacb43b2t62dq" path="res://addons/beehive/topdown/TDBody.tscn" id="3_rvpkg"]
 
 [node name="TopDownGym" type="Node"]
 script = ExtResource("1_8tyfg")
 player_scene = ExtResource("2_al8qk")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -24.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 24.0
+offset_left = -128.0
+offset_top = -104.0
+offset_right = -88.0
+offset_bottom = -64.0
+scale = Vector2(6.39697, 5.19502)
 color = Color(0.384314, 0.509804, 0.65098, 1)
+
+[node name="TDBody" parent="." instance=ExtResource("3_rvpkg")]
+position = Vector2(-56, -72)
+
+[node name="TDBody2" parent="." instance=ExtResource("3_rvpkg")]
+position = Vector2(96, 56)

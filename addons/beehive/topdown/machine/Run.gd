@@ -3,17 +3,7 @@ extends State
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	if actor.facing_vector.y > 0:
-		actor.anim.play("run_down")
-	elif actor.facing_vector.y < 0:
-		actor.anim.play("run_up")
-	elif actor.facing_vector.x > 0:
-		actor.anim.play("run_right")
-	elif actor.facing_vector.x < 0:
-		# presuming anim h_flip is done elsewhere?
-		actor.anim.play("run_right")
-	else:
-		actor.anim.play("run_down")
+	pass
 
 
 ## exit ###########################################################
@@ -37,6 +27,7 @@ func process(_delta):
 ## physics ###########################################################
 
 func physics_process(delta):
+	actor.update_run_anim()
 	# apply move dir or slow down
 	if actor.move_vector:
 		var new_speed = actor.run_speed * actor.move_vector * delta

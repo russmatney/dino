@@ -94,20 +94,36 @@ func check_out(data):
 
 func update_facing():
 	# all art should face RIGHT by default
-	# TODO support 4/8 directions, not just 2
-	anim.flip_h = facing_vector == Vector2.LEFT
+	anim.flip_h = facing_vector.x < 0
 
 func face_body(body):
 	if not body:
 		return
 	var pos_diff = body.global_position - global_position
-	# TODO look toward body
-	if pos_diff.x > 0:
-		facing_vector = Vector2.RIGHT
-	elif pos_diff.x < 0:
-		facing_vector = Vector2.LEFT
-
+	facing_vector = pos_diff.normalized()
 	update_facing()
+
+func update_run_anim():
+	if move_vector.y > 0:
+		anim.play("run_down")
+	elif move_vector.y < 0:
+		anim.play("run_up")
+	elif move_vector.x > 0:
+		anim.play("run_right")
+	elif move_vector.x < 0:
+		# assumes anim h_flip is done elsewhere
+		anim.play("run_right")
+
+func update_idle_anim():
+	if facing_vector.y > 0:
+		anim.play("idle_down")
+	elif facing_vector.y < 0:
+		anim.play("idle_up")
+	elif facing_vector.x > 0:
+		anim.play("idle_right")
+	elif facing_vector.x < 0:
+		# assumes anim h_flip is done elsewhere
+		anim.play("idle_right")
 
 ## death ###########################################################
 
