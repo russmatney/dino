@@ -124,3 +124,12 @@ func force_move_to_target(target_position):
 func clear_forced_movement_target():
 	block_control = false
 	forced_movement_target = null
+
+## pits ###################################################################
+
+func on_pit_touched():
+	Debug.pr("pit touched")
+
+func on_entered_pit():
+	Debug.pr("pit entered")
+	machine.transit("Fall")

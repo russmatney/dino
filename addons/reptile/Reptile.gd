@@ -144,11 +144,7 @@ func cell_clusters(tilemap):
 	var clusters = []
 	for l in get_layers(tilemap):
 		var used_cells = tilemap.get_used_cells(l.i)
-		Debug.pr(l, "used_cells", used_cells)
-
 		var connected_groups = build_connected_groups(used_cells)
-		Debug.prn(l, "connected_groups", len(connected_groups))
-
 		clusters.append_array(connected_groups)
 	return clusters
 
