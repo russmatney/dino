@@ -74,6 +74,11 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 			in_group.append_array(get_children_in_group(c, group_name, include_nested))
 	return in_group
 
+func free_children_in_group(node: Node, group_name: String):
+	for c in node.get_children():
+		if c.is_in_group(group_name):
+			c.queue_free()
+
 ############################################################
 # children/parents/...siblings?
 

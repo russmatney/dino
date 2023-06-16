@@ -151,3 +151,48 @@ func cell_clusters(tilemap):
 
 		clusters.append_array(connected_groups)
 	return clusters
+
+func cells_to_polygon(tilemap, cells):
+	# get points from cell coordinates
+	var points = cells.map(func(c):
+		# assumes square tiles
+		var half_tile_size = tilemap.tile_set.tile_size.x / 2 * Vector2.ONE
+		var cell_center = tilemap.to_global(tilemap.map_to_local(c))
+		return [
+			cell_center + half_tile_size,
+			cell_center - half_tile_size,
+			cell_center + Vector2(-half_tile_size.x, half_tile_size.y),
+			cell_center + Vector2(half_tile_size.x, -half_tile_size.y),
+			]
+		).reduce(func(agg, pts):
+			agg.append_array(pts)
+			return agg, [])
+
+	# remove points found 4 times (these are all internal points)
+	var seen_points = {}
+	for p in points:
+		if p in seen_points:
+			seen_points[p] += 1
+		else:
+			seen_points[p] = 1
+	points = []
+	for p in seen_points:
+		if seen_points[p] < 4:
+			points.append(p)
+
+	# sort cells according to angle to midpoint
+	# NOTE not a perfect algo for convex shapes
+	var mid = Util.average(points)
+	points.sort_custom(func (a,b):
+		var a_ang = mid.angle_to_point(a)
+		var b_ang = mid.angle_to_point(b)
+		var diff_ang = abs(a_ang - b_ang)
+		if diff_ang <= 0.05:
+			return mid.distance_to(a) <= mid.distance_to(b)
+		return a_ang >= b_ang)
+
+	var polygon = PackedVector2Array()
+	for p in points:
+		polygon.append(p)
+
+	return polygon
