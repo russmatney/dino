@@ -17,6 +17,7 @@ func enter(opts = {}):
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*fall_scale_factor, fall_ttl)
+	tween.tween_property(actor, "modulate:a", 0.0, fall_ttl)
 
 	actor.stamp()
 

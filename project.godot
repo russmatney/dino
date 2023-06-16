@@ -311,6 +311,7 @@ cycle_weapon={
 2d_physics/layer_11="fences, low-walls"
 2d_physics/layer_12="spikes"
 2d_physics/layer_13="pits"
+2d_physics/layer_14="pit_fallers"
 
 [physics]
 

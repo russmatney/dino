@@ -19,3 +19,9 @@ func _ready():
 func _on_player_death():
 	# restart player
 	pass
+
+func on_pit_entered():
+	machine.transit("Fall")
+
+	await get_tree().create_timer(2.0).timeout
+	Game.respawn_player()

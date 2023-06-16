@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cl6kxw7uda7as"]
+[gd_scene load_steps=36 format=3 uid="uid://cl6kxw7uda7as"]
 
 [ext_resource type="Script" path="res://src/shirt/player/Player.gd" id="1_6g3gp"]
 [ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://addons/beehive/topdown/topdown_player_64.png" id="2_hr2dp"]
@@ -198,11 +198,14 @@ height = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vkuq"]
 radius = 80.399
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_t5m0m"]
+radius = 1.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3137
 script = ExtResource("1_6g3gp")
-display_name = "Shirty"
+display_name = "HatBot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -265,3 +268,10 @@ texture_scale = 4.0
 [node name="SkullParticles" parent="." instance=ExtResource("9_3njs1")]
 
 [node name="HeartParticles" parent="." instance=ExtResource("10_a46lu")]
+
+[node name="PitDetector" type="Area2D" parent="."]
+collision_layer = 8192
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PitDetector"]
+shape = SubResource("CircleShape2D_t5m0m")

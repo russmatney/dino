@@ -127,9 +127,6 @@ func clear_forced_movement_target():
 
 ## pits ###################################################################
 
-func on_pit_touched():
-	Debug.pr("pit touched")
-
-func on_entered_pit():
+func on_pit_entered():
 	Debug.pr("pit entered")
 	machine.transit("Fall")
