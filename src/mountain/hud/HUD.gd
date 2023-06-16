@@ -1,21 +1,12 @@
 @tool
-extends CanvasLayer
+extends HUD
 
-##########################################
-# ready
 
-func _ready():
-	Hotel.entry_updated.connect(_on_entry_updated)
-	_on_entry_updated(Hotel.first({is_player=true}))
+func _on_player_update(entry):
+	update_player(entry)
 
-##########################################
-# hotel update
-
-func _on_entry_updated(entry):
-	if "player" in entry.get("groups", []):
-		update_player(entry)
-	if "enemies" in entry.get("groups", []):
-		update_enemy_status(entry)
+func _on_enemy_update(entry):
+	update_enemy_status(entry)
 
 ##########################################
 # player status
@@ -29,7 +20,7 @@ func update_player(entry):
 	if "health" in entry:
 		player_status.set_status({
 			health=entry.get("health"),
-			name=entry.get("name"),
+			name=entry.get("display_name", entry.get("name")),
 			texture=player_portrait,
 			})
 

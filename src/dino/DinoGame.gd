@@ -7,6 +7,7 @@ func get_player_scene():
 	# defaults to returning a 'player_scene' var
 	if get("player_scene") == null:
 		Debug.err("no player_scene set")
+		# TODO try looking relative to current game (in player/Player.tscn)
 		return
 	return get("player_scene")
 
@@ -44,6 +45,9 @@ func update_world():
 func manages_scene(_scene):
 	# return true if the passed scene is managed by this game
 	Debug.warn("manages_scene not implemented")
+
+	# TODO impl fallback based on current game
+	# return scene.scene_file_path.begins_with("res://src/hatbot")
 
 func should_spawn_player(_scene):
 	return true

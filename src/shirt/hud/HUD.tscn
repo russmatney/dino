@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1fe2xly3pfd4"]
+
+[ext_resource type="PackedScene" path="res://addons/hood/Notifications.tscn" id="1_i2ua0"]
+[ext_resource type="Script" path="res://src/shirt/hud/HUD.gd" id="1_m3maa"]
+[ext_resource type="PackedScene" path="res://addons/metro/MinimapContainer.tscn" id="2_ioejp"]
+[ext_resource type="PackedScene" path="res://addons/hood/EntityStatus.tscn" id="3_vl0v5"]
+[ext_resource type="PackedScene" path="res://addons/hood/EntityStatusList.tscn" id="4_yyh2s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jotap"]
+bg_color = Color(0.223529, 0.223529, 0.223529, 0.360784)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_m3maa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MinimapContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("2_ioejp")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerStatus" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_vl0v5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnemyStatusList" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_yyh2s")]
+unique_name_in_owner = true
+layout_mode = 2
+max_children = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jotap")
+
+[node name="Notifications" parent="VBoxContainer/HBoxContainer2/PanelContainer" instance=ExtResource("1_i2ua0")]
+layout_mode = 2
+size_flags_horizontal = 3
