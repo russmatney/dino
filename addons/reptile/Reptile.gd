@@ -79,11 +79,75 @@ func normalized_val(stats, val):
 	return val / stats["variance"]
 
 
-######################################################################
-# tilemap/cell helpers
+## tilemap/cell helpers #####################################################################
+
+func get_layers(tilemap):
+	var layers = []
+	for i in range(tilemap.get_layers_count()):
+		# TODO could add more layer data to get layers as dicts here
+		layers.append({i=i, name=tilemap.get_layer_name(i)})
+	return layers
 
 
 func valid_neighbors(tilemap, cell, layer=0):
 	var nbr_coords = tilemap.get_surrounding_cells(cell)
 	return nbr_coords.filter(func(coord):
 		return -1 != tilemap.get_cell_source_id(layer, coord))
+
+# Does not check if either cell is valid, only checks that they are neighboring coordinates
+func is_neighbor(cell_a, cell_b):
+	if cell_a.x == cell_b.x:
+		if abs(cell_a.y - cell_b.y) == 1:
+			return true
+	if cell_a.y == cell_b.y:
+		if abs(cell_a.x - cell_b.x) == 1:
+			return true
+
+func group_has_neighbor(group, cell):
+	# gen neighbors for cell, check if any in group
+	for g_cell in group:
+		if is_neighbor(cell, g_cell):
+			return true
+
+func split_connected_groups(cell, groups):
+	var connected = []
+	var disconnected = []
+	# should be able to filter out groups before checking every cell here, maybe with a stored min/max
+	for g in groups:
+		var is_neighbor = group_has_neighbor(g, cell)
+		if is_neighbor:
+			connected.append(g)
+		else:
+			disconnected.append(g)
+	return {connected=connected, disconnected=disconnected}
+
+func update_connected_groups(cell, groups):
+	var split = split_connected_groups(cell, groups)
+	var disconnected_groups = split.disconnected
+	var new_group = [cell]
+	for g in split.connected:
+		# combine connected groups
+		new_group.append_array(g)
+	disconnected_groups.append(new_group)
+	return disconnected_groups
+
+# Given a list of coords from get_used_cells, returns lists of coords
+# grouped by connectivity - i.e. the clusters of connected tiles.
+func build_connected_groups(cells, groups=[]):
+	for c in cells:
+		groups = update_connected_groups(c, groups)
+	return groups
+
+# Returns coords grouped by adjacency - connected cells will be in the same group.
+# TODO maybe we want to include or group by layers, or expose a layer filter?
+func cell_clusters(tilemap):
+	var clusters = []
+	for l in get_layers(tilemap):
+		var used_cells = tilemap.get_used_cells(l.i)
+		Debug.pr(l, "used_cells", used_cells)
+
+		var connected_groups = build_connected_groups(used_cells)
+		Debug.prn(l, "connected_groups", len(connected_groups))
+
+		clusters.append_array(connected_groups)
+	return clusters
