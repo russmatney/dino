@@ -203,8 +203,6 @@ radius = 80.399
 collision_layer = 2
 collision_mask = 3137
 script = ExtResource("1_6g3gp")
-display_name = "HatBot"
-wander_speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -242,6 +240,7 @@ metadata/_edit_use_anchors_ = true
 [node name="TDMachine" parent="." instance=ExtResource("4_2xyvx")]
 
 [node name="HurtBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2072
 

@@ -44,32 +44,32 @@ collision_mask = 8192
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/PitDetector"]
 polygon = PackedVector2Array(240, -48, 240, -32, 256, -32, 272, -32, 288, -32, 304, -32, 304, -48, 304, -64, 304, -80, 288, -80, 272, -80, 256, -80, 240, -80, 240, -64)
 
-[node name="@PitDetector@34417" type="Area2D" parent="RoomTwo" groups=["_generated"]]
+[node name="@PitDetector@19708" type="Area2D" parent="RoomTwo" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@34417"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@19708"]
 polygon = PackedVector2Array(240, 64, 240, 80, 256, 80, 272, 80, 288, 80, 304, 80, 320, 80, 336, 80, 336, 64, 336, 48, 336, 32, 320, 32, 304, 32, 288, 32, 272, 32, 256, 32, 240, 32, 240, 48)
 
-[node name="@PitDetector@34418" type="Area2D" parent="RoomTwo" groups=["_generated"]]
+[node name="@PitDetector@19709" type="Area2D" parent="RoomTwo" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@34418"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@19709"]
 polygon = PackedVector2Array(336, 16, 336, 32, 352, 32, 368, 32, 384, 32, 400, 32, 416, 32, 416, 16, 416, 0, 416, -16, 400, -16, 384, -16, 368, -16, 352, -16, 336, -16, 336, 0)
 
-[node name="@PitDetector@34419" type="Area2D" parent="RoomTwo" groups=["_generated"]]
+[node name="@PitDetector@19710" type="Area2D" parent="RoomTwo" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@34419"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@19710"]
 polygon = PackedVector2Array(448, -48, 448, -32, 464, -32, 480, -32, 496, -32, 496, -48, 496, -64, 496, -80, 480, -80, 464, -80, 448, -80, 448, -64)
 
-[node name="@PitDetector@34420" type="Area2D" parent="RoomTwo" groups=["_generated"]]
+[node name="@PitDetector@19711" type="Area2D" parent="RoomTwo" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@34420"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomTwo/@PitDetector@19711"]
 polygon = PackedVector2Array(448, 64, 448, 80, 464, 80, 480, 80, 496, 80, 496, 64, 496, 48, 480, 48, 464, 48, 448, 48)
 
 [node name="RoomThree" type="Node2D" parent="." groups=["metro_rooms"]]
@@ -94,44 +94,44 @@ collision_mask = 8192
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/PitDetector"]
 polygon = PackedVector2Array(699, 92, 699, 108, 699, 124, 715, 124, 731, 124, 747, 124, 763, 124, 763, 108, 763, 92, 763, 76, 763, 60, 747, 60, 731, 60, 715, 60, 699, 60, 699, 76)
 
-[node name="@PitDetector@34421" type="Area2D" parent="RoomThree" groups=["_generated"]]
+[node name="@PitDetector@19712" type="Area2D" parent="RoomThree" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@34421"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@19712"]
 polygon = PackedVector2Array(651, 28, 651, 44, 667, 44, 667, 60, 683, 60, 699, 60, 699, 44, 699, 28, 699, 12, 699, -4, 683, -4, 667, -4, 651, -4, 651, 12)
 
-[node name="@PitDetector@34422" type="Area2D" parent="RoomThree" groups=["_generated"]]
+[node name="@PitDetector@19713" type="Area2D" parent="RoomThree" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@34422"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@19713"]
 polygon = PackedVector2Array(571, 140, 571, 156, 571, 172, 587, 172, 603, 172, 603, 156, 619, 156, 635, 156, 635, 140, 635, 124, 619, 124, 619, 108, 619, 92, 603, 92, 587, 92, 571, 92, 571, 108, 571, 124)
 
-[node name="@PitDetector@34423" type="Area2D" parent="RoomThree" groups=["_generated"]]
+[node name="@PitDetector@19714" type="Area2D" parent="RoomThree" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@34423"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@19714"]
 polygon = PackedVector2Array(523, 332, 523, 348, 523, 364, 539, 364, 555, 364, 571, 364, 587, 364, 603, 364, 603, 348, 603, 332, 603, 316, 587, 316, 571, 316, 571, 300, 571, 284, 571, 268, 555, 268, 539, 268, 523, 268, 523, 284, 523, 300, 523, 316)
 
-[node name="@PitDetector@34424" type="Area2D" parent="RoomThree" groups=["_generated"]]
+[node name="@PitDetector@19715" type="Area2D" parent="RoomThree" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@34424"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@19715"]
 polygon = PackedVector2Array(715, 396, 715, 412, 731, 412, 747, 412, 763, 412, 779, 412, 795, 412, 811, 412, 811, 396, 811, 380, 811, 364, 795, 364, 779, 364, 763, 364, 747, 364, 731, 364, 715, 364, 715, 380)
 
-[node name="@PitDetector@34425" type="Area2D" parent="RoomThree" groups=["_generated"]]
+[node name="@PitDetector@19716" type="Area2D" parent="RoomThree" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@34425"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@19716"]
 polygon = PackedVector2Array(859, 412, 859, 428, 875, 428, 891, 428, 907, 428, 923, 428, 939, 428, 955, 428, 955, 412, 955, 396, 939, 396, 923, 396, 907, 396, 891, 396, 875, 396, 859, 396)
 
-[node name="@PitDetector@34426" type="Area2D" parent="RoomThree" groups=["_generated"]]
+[node name="@PitDetector@19717" type="Area2D" parent="RoomThree" groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@34426"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RoomThree/@PitDetector@19717"]
 polygon = PackedVector2Array(811, 460, 811, 476, 811, 492, 827, 492, 843, 492, 859, 492, 859, 476, 859, 460, 859, 444, 859, 428, 843, 428, 827, 428, 811, 428, 811, 444)

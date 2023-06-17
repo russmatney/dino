@@ -2,6 +2,8 @@
 extends CharacterBody2D
 class_name TDBody
 
+var is_td_body = true
+
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
@@ -42,6 +44,7 @@ var is_player
 
 var notif_label
 var hurt_box
+var notice_box
 var pit_detector
 
 var heart_particles
@@ -65,6 +68,7 @@ func _ready():
 		Util.set_optional_nodes(self, {
 			notif_label="NotifLabel",
 			hurt_box="HurtBox",
+			notice_box="NoticeBox",
 			heart_particles="HeartParticles",
 			skull_particles="SkullParticles",
 			pit_detector="PitDetector",
@@ -73,6 +77,10 @@ func _ready():
 		if hurt_box:
 			hurt_box.body_entered.connect(on_hurt_box_entered)
 			hurt_box.body_exited.connect(on_hurt_box_exited)
+
+		if notice_box:
+			notice_box.body_entered.connect(on_notice_box_entered)
+			notice_box.body_exited.connect(on_notice_box_exited)
 
 		if heart_particles:
 			heart_particles.set_emitting(false)
@@ -209,15 +217,31 @@ func recover_health(h=null):
 var hurt_box_bodies = []
 
 func on_hurt_box_entered(body):
-	# TODO ignore other bodies
-	# if body is SSBody: # can't write this in same-name class script
+	if not "is_td_body" in body:
+		Debug.pr("hurt box entered by non td_body", body)
+		return
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
-			body.take_hit({type="bump", body=self})
+			self.take_hit({type="bump", body=body})
 
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
+
+## notice_box ###########################################################
+
+var notice_box_bodies = []
+
+func on_notice_box_entered(body):
+	if not "is_td_body" in body:
+		Debug.pr("notice box entered by non td_body", body)
+		return
+	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+		if not body in notice_box_bodies:
+			notice_box_bodies.append(body)
+
+func on_notice_box_exited(body):
+	notice_box_bodies.erase(body)
 
 #################################################################################
 ## Effects #####################################################################

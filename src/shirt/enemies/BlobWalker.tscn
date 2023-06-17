@@ -178,7 +178,6 @@ collision_layer = 8
 collision_mask = 5127
 script = ExtResource("1_vl047")
 display_name = "Blob Walker"
-wander_speed = null
 should_wander = true
 
 [node name="TDMachine" parent="." instance=ExtResource("2_spfi7")]

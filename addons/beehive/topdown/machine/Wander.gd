@@ -47,7 +47,7 @@ func physics_process(delta):
 	actor.velocity = actor.velocity.lerp(new_vel, 0.7)
 	actor.move_and_slide()
 
-	# TODO only flip if the wall/floor/ceil blocks the actor.move_vector
-	if actor.is_on_wall() or actor.is_on_ceiling() or actor.is_on_floor():
+	if (actor.move_vector.abs().x > 0 and actor.is_on_wall()) \
+		or (actor.move_vector.abs().y > 0 and (actor.is_on_ceiling() or actor.is_on_floor())):
 		actor.move_vector *= -1 * Vector2.ONE
 		actor.update_facing()

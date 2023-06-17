@@ -83,7 +83,9 @@ func _unhandled_input(event):
 
 func _physics_process(_delta):
 	# checks forced_movement_target, then uses Trolley.move_vector
-	move_vector = get_move_vector()
+	var mv = get_move_vector()
+	if mv != null:
+		move_vector = mv
 
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
