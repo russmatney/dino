@@ -1,6 +1,6 @@
 extends State
 
-var wander_in = [1.3, 2.0, 3.5]
+var wander_in = [0.8, 2.2, 1.5]
 var wander_in_t
 
 ## enter ###########################################################

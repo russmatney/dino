@@ -1,6 +1,6 @@
 extends State
 
-var wander_times = [0.4, 0.9, 0.5]
+var wander_times = [1.4, 0.9, 2.5]
 var wander_ttl
 
 var directions = [
@@ -14,7 +14,6 @@ var directions = [
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	actor.anim.play("run")
 	wander_ttl = Util.rand_of(wander_times)
 	actor.move_vector = Util.rand_of(directions)
 	actor.update_facing()
