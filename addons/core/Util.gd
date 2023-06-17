@@ -75,6 +75,8 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 	return in_group
 
 func free_children_in_group(node: Node, group_name: String):
+	if not node:
+		return
 	for c in node.get_children():
 		if c.is_in_group(group_name):
 			c.queue_free()
