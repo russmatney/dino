@@ -53,8 +53,7 @@ var room_data : Dictionary :
 				visited = room_data["visited"]
 				_on_paused() if paused else _on_unpaused()
 
-###########################################
-# roombox signals
+# roombox signals ###########################################
 
 var visited = false
 
@@ -76,8 +75,7 @@ func _on_room_exited(body: Node2D):
 		Metro.update_zone()
 
 
-###########################################
-# tilemaps
+# tilemaps ###########################################
 
 func tilemaps() -> Array[TileMap]:
 	var tmaps: Array[TileMap] = []
@@ -86,8 +84,7 @@ func tilemaps() -> Array[TileMap]:
 			tmaps.append(c)
 	return tmaps
 
-###########################################
-# rects
+## rects ##########################################
 
 func tilemap_to_rect(tm: TileMap) -> Rect2:
 	var tm_rect = tm.get_used_rect()
@@ -126,8 +123,7 @@ func contains_player(player):
 
 	return false
 
-###########################################
-# room_box
+## room_box ##########################################
 
 var room_box
 
@@ -173,8 +169,7 @@ func ensure_room_box():
 	add_child(room_box)
 	room_box.set_owner(self)
 
-###########################################
-# pause
+## pause ##########################################
 
 var paused
 
@@ -227,8 +222,7 @@ func to_normal():
 		normal_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		normal_tween.tween_property(self, "modulate:a", 1, 0.2)
 
-###########################################
-# cam points
+## cam points ##########################################
 
 var pof_scene = preload("res://addons/camera/CamPOF.tscn")
 var auto_pof_group = "auto_pofs"
