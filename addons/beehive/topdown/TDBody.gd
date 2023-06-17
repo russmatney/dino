@@ -224,8 +224,11 @@ func recover_health(h=null):
 ## hurt_box ###########################################################
 
 var hurt_box_bodies = []
+# var is_invincible = false
 
 func on_hurt_box_entered(body):
+	# if is_invincible:
+	# 	return
 	if not "is_td_body" in body:
 		Debug.pr("hurt box entered by non td_body", body)
 		return
@@ -233,6 +236,12 @@ func on_hurt_box_entered(body):
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
 			self.take_hit({type="bump", body=body})
+
+			# TODO invincible period, then clear hurt_box_bodies, eg.
+			# is_invincible = true
+			# await get_tree().create_timer(1.0).timeout
+			# is_invincible = false
+			# hurt_box_bodies = []
 
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
