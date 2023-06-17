@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name Door
 
 @onready var anim = $AnimatedSprite2D
 @onready var body = $StaticBody2D
@@ -32,6 +33,9 @@ func on_anim_finished():
 func update_door(new_state=null):
 	if new_state != null:
 		state = new_state
+	# ugh, support setget before _ready
+	if not anim or not body:
+		return
 	if state == door_state.CLOSED:
 		if not anim.animation in ["closed", "closing"]:
 			anim.play("closing")

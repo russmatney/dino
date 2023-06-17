@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2npdvscoywj8"]
+[gd_scene load_steps=10 format=3 uid="uid://b2npdvscoywj8"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_7w22y"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_1tmjl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="6_g0unp"]
 [ext_resource type="PackedScene" uid="uid://b0gmt6jeniemi" path="res://src/shirt/entities/Portal.tscn" id="7_5exth"]
 [ext_resource type="PackedScene" uid="uid://dol20hvibj80p" path="res://src/shirt/entities/Door.tscn" id="8_dxfek"]
+[ext_resource type="Script" path="res://src/shirt/zones/NeedsTwoShrinesDoor.gd" id="8_ohdbg"]
 
 [node name="CaveOne" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_7w22y")
@@ -47,8 +48,9 @@ layer_0/tile_data = PackedInt32Array(65566, 131072, 8, 30, 393216, 9, -65506, 19
 [node name="TDCavePitTiles16" parent="RoomTwo" instance=ExtResource("6_g0unp")]
 layer_0/tile_data = PackedInt32Array(-196590, 196608, 3, -262126, 196608, 2, -327662, 196608, 1, -196591, 131072, 3, -262127, 131072, 2, -327663, 131072, 1, -196592, 131072, 3, -262128, 131072, 2, -327664, 131072, 1, -196593, 65536, 3, -262129, 65536, 2, -327665, 65536, 1, 262164, 196608, 3, 196628, 196608, 2, 131092, 196608, 1, 262163, 131072, 3, 196627, 131072, 2, 131091, 131072, 1, 262162, 131072, 3, 196626, 131072, 2, 131090, 131072, 1, 262161, 131072, 3, 196625, 131072, 2, 131089, 131072, 1, 262160, 131072, 3, 196624, 131072, 2, 131088, 131072, 1, 262159, 65536, 3, 196623, 65536, 2, 131087, 65536, 1, 65561, 196608, 3, 25, 196608, 2, -65511, 196608, 1, 65560, 131072, 3, 24, 131072, 2, -65512, 131072, 1, 65559, 131072, 3, 23, 131072, 2, -65513, 131072, 1, 65558, 131072, 3, 22, 131072, 2, -65514, 131072, 1, 65557, 65536, 3, 21, 65536, 2, -65515, 65536, 1, -196578, 196608, 3, -262114, 196608, 2, -327650, 196608, 1, -196579, 131072, 3, -262115, 131072, 2, -327651, 131072, 1, -196580, 65536, 3, -262116, 65536, 2, -327652, 65536, 1, 262174, 196608, 3, 196638, 196608, 1, 262173, 131072, 3, 196637, 131072, 1, 262172, 65536, 3, 196636, 65536, 1)
 
-[node name="Door" parent="RoomTwo" instance=ExtResource("8_dxfek")]
+[node name="NeedsTwoShrinesDoor" parent="RoomTwo" instance=ExtResource("8_dxfek")]
 position = Vector2(376, -320)
+script = ExtResource("8_ohdbg")
 
 [node name="DevPlayerSpawnPoint" parent="RoomTwo" instance=ExtResource("5_tasgl")]
 position = Vector2(368, -240)

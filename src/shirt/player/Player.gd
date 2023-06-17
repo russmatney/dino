@@ -4,6 +4,8 @@ extends TDPlayer
 @export var zoom_rect_min = 100
 @export var zoom_margin_min = 100
 
+var shrine_gems = 0
+
 ## ready ##################################################################
 
 var hud = preload("res://src/shirt/hud/HUD.tscn")
@@ -17,6 +19,17 @@ func _ready():
 
 	super._ready()
 
+## hotel ##################################################################
+
+func check_out(data):
+	super.check_out(data)
+	shrine_gems = Util.get_(data, "shrine_gems", shrine_gems)
+
+func hotel_data():
+	var d = super.hotel_data()
+	d["shrine_gems"] = shrine_gems
+	return d
+
 ## death #######################################################
 
 func _on_player_death():
@@ -26,5 +39,14 @@ func _on_player_death():
 func on_pit_entered():
 	machine.transit("Fall")
 
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	Game.respawn_player()
+
+## shrine_gems #######################################################
+
+func has_shrine_gems(n):
+	return shrine_gems >= n
+
+func add_shrine_gem():
+	shrine_gems += 1
+	Hotel.check_in(self)
