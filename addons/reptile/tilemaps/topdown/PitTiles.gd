@@ -1,6 +1,7 @@
 @tool
 extends RepTileMap
 
+@export var add_areas_to_owner = false
 var generated_group = "_generated"
 var pit_detector_parent
 
@@ -29,10 +30,12 @@ func create_pit_detector(cells):
 
 	(func():
 		pit_detector_parent.add_child(area)
-		area.set_owner(owner)
+		if add_areas_to_owner:
+			area.set_owner(owner)
 
 		area.add_child(coll_polygon)
-		coll_polygon.set_owner(owner)
+		if add_areas_to_owner:
+			coll_polygon.set_owner(owner)
 		area.add_to_group(generated_group, true)
 
 		area.set_collision_layer_value(1, false)
