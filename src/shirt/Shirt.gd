@@ -1,6 +1,9 @@
 @tool
 extends DinoGame
 
+func _ready():
+	pause_menu_scene = load("res://src/shirt/menus/PauseMenu.tscn")
+	main_menu_scene = load("res://src/shirt/menus/MainMenu.tscn")
 
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/shirt")

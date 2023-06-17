@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ceupmxhlfty2x"]
+[gd_scene load_steps=9 format=3 uid="uid://ceupmxhlfty2x"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_y18jx"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_uyouh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="5_anma2"]
 [ext_resource type="PackedScene" uid="uid://b0gmt6jeniemi" path="res://src/shirt/entities/Portal.tscn" id="5_itieu"]
 [ext_resource type="PackedScene" uid="uid://w6sbcbxo5mnt" path="res://src/shirt/entities/ShrineGem.tscn" id="7_dtucs"]
+[ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="8_26aur"]
 
 [node name="ShrineTwo" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_y18jx")
@@ -39,3 +40,12 @@ layer_0/tile_data = PackedInt32Array(131100, 196608, 3, 65564, 196608, 2, 28, 19
 
 [node name="ShrineGem" parent="Shrine" instance=ExtResource("7_dtucs")]
 position = Vector2(1112, 0)
+
+[node name="BlobWalker" parent="Shrine" instance=ExtResource("8_26aur")]
+position = Vector2(528, 10)
+
+[node name="BlobWalker2" parent="Shrine" instance=ExtResource("8_26aur")]
+position = Vector2(984, -136)
+
+[node name="BlobWalker3" parent="Shrine" instance=ExtResource("8_26aur")]
+position = Vector2(968, 88)

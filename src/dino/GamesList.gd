@@ -5,6 +5,10 @@ extends NaviButtonList
 # TODO create and include icons for each game
 var menu_scenes = [
 	{
+		label="Shirt",
+		fn=Game.load_main_menu.bind(Shirt),
+	},
+	{
 		label="HatBot",
 		fn=Game.load_main_menu.bind(HatBot),
 	},

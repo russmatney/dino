@@ -23,6 +23,14 @@ You can find more about Dino on my mind-garden/blog: [[https://russmatney.com/no
 * Games
 These (and future games) are discussed on my blog (linked above).
 
+** Shirt:
+See ~src/shirt/*~ and ~addons/beehive/topdown/*~ for the code.
+
+Play the web version here: [[https://russmatney.itch.io/shirt][russmatney.itch.io/shirt]]
+
+A work-in-progress for the [[https://itch.io/jam/godot-wild-jam-58][Godot Wild Jam #58]]
+** Mountain:
+A work-in-progress.
 ** Super Elevator Level:
 See ~src/superElevatorLevel/*~ and ~addons/beehive/beatemup/*~ for the code.
 
