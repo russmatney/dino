@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cm222nj8qjh1m"]
+[gd_scene load_steps=6 format=3 uid="uid://cm222nj8qjh1m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_finpt"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="2_ipv74"]
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="3_2jibu"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="4_0uflp"]
+[ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/shirt/enemies/BlobChaser.tscn" id="5_8abxs"]
 
 [node name="EnemyGym" type="Node"]
 script = ExtResource("1_finpt")
@@ -23,30 +24,33 @@ position = Vector2(152, 40)
 [node name="BlobWalker3" parent="." instance=ExtResource("4_0uflp")]
 position = Vector2(216, -32)
 
-[node name="@PitDetector@22433" type="Area2D" parent="." groups=["_generated"]]
+[node name="BlobChaser" parent="." instance=ExtResource("5_8abxs")]
+position = Vector2(96, 104)
+
+[node name="PitDetector" type="Area2D" parent="." groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@22433"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitDetector"]
 polygon = PackedVector2Array(64, -64, 64, -48, 80, -48, 96, -48, 112, -48, 128, -48, 144, -48, 160, -48, 160, -64, 160, -80, 160, -96, 144, -96, 128, -96, 112, -96, 96, -96, 80, -96, 64, -96, 64, -80)
 
-[node name="@PitDetector@22434" type="Area2D" parent="." groups=["_generated"]]
+[node name="@PitDetector@39652" type="Area2D" parent="." groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@22434"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@39652"]
 polygon = PackedVector2Array(192, 48, 192, 64, 208, 64, 224, 64, 240, 64, 256, 64, 256, 48, 256, 32, 240, 32, 224, 32, 208, 32, 192, 32)
 
-[node name="@PitDetector@22435" type="Area2D" parent="." groups=["_generated"]]
+[node name="@PitDetector@39653" type="Area2D" parent="." groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@22435"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@39653"]
 polygon = PackedVector2Array(-48, 112, -48, 128, -32, 128, -16, 128, 0, 128, 16, 128, 32, 128, 32, 112, 32, 96, 32, 80, 16, 80, 0, 80, -16, 80, -32, 80, -48, 80, -48, 96)
 
-[node name="@PitDetector@22436" type="Area2D" parent="." groups=["_generated"]]
+[node name="@PitDetector@39654" type="Area2D" parent="." groups=["_generated"]]
 collision_layer = 4096
 collision_mask = 8192
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@22436"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@39654"]
 polygon = PackedVector2Array(64, 16, 64, 32, 80, 32, 96, 32, 112, 32, 112, 16, 112, 0, 96, 0, 80, 0, 64, 0)
