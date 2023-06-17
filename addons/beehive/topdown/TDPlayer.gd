@@ -81,7 +81,9 @@ func _unhandled_input(event):
 
 ## physics_process ###########################################################
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super._physics_process(delta)
+
 	# checks forced_movement_target, then uses Trolley.move_vector
 	var mv = get_move_vector()
 	if mv != null:

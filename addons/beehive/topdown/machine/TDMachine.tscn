@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ch8rasfmsvl5s"]
+[gd_scene load_steps=9 format=3 uid="uid://ch8rasfmsvl5s"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_bxawf"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Idle.gd" id="2_cjhxk"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Jump.gd" id="4_683nd"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Fall.gd" id="5_rytcm"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Wander.gd" id="6_pf1jk"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/machine/Notice.gd" id="7_7cfts"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/machine/Chase.gd" id="8_g5lmj"]
 
 [node name="TDMachine" type="Node"]
 script = ExtResource("1_bxawf")
@@ -24,3 +26,9 @@ script = ExtResource("5_rytcm")
 
 [node name="Wander" type="Node" parent="."]
 script = ExtResource("6_pf1jk")
+
+[node name="Notice" type="Node" parent="."]
+script = ExtResource("7_7cfts")
+
+[node name="Chase" type="Node" parent="."]
+script = ExtResource("8_g5lmj")

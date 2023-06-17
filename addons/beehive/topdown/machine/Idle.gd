@@ -6,6 +6,9 @@ var wander_in_t
 ## enter ###########################################################
 
 func enter(_opts = {}):
+	# clear movement input (so transting to idle doesn't get stuck in an idle/run loop)
+	actor.move_vector = Vector2.ZERO
+
 	if actor.should_wander:
 		wander_in_t = Util.rand_of(wander_in)
 

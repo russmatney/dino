@@ -90,6 +90,15 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
+## physics_process ###########################################################
+
+func _physics_process(_delta):
+	if notice_box:
+		# remove invalid bodies
+		notice_box_bodies = notice_box_bodies.filter(func(b): return is_instance_valid(b))
+		# TODO require line-of-sight for notice-box
+
+
 ## on_transit ###########################################################
 
 func _on_transit(label):
@@ -230,6 +239,7 @@ func on_hurt_box_exited(body):
 
 ## notice_box ###########################################################
 
+# TODO require line-of-sight, remove if los is broken
 var notice_box_bodies = []
 
 func on_notice_box_entered(body):

@@ -1,12 +1,10 @@
 extends State
 
 var approaching
-var entered
 
 ## enter ###########################################################
 
 func enter(opts = {}):
-	entered = true
 	actor.anim.play("walk")
 	# reuse approaching if it hasn't been cleared
 	approaching = opts.get("approaching", approaching)
@@ -14,14 +12,11 @@ func enter(opts = {}):
 		approaching.add_attacker(actor)
 
 func exit():
-	entered = false
+	pass
 
 ## physics ###########################################################
 
 func physics_process(delta):
-	if not entered:
-		return
-
 	if approaching and not is_instance_valid(approaching):
 		approaching = null
 		transit("Idle")
