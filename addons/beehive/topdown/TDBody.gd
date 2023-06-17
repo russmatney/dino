@@ -95,7 +95,8 @@ func _ready():
 func _physics_process(_delta):
 	if notice_box:
 		# remove invalid bodies
-		notice_box_bodies = notice_box_bodies.filter(func(b): return is_instance_valid(b))
+		notice_box_bodies = notice_box_bodies.filter(func(b):
+			return is_instance_valid(b) and not b.is_dead)
 		# TODO require line-of-sight for notice-box
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ch8rasfmsvl5s"]
+[gd_scene load_steps=12 format=3 uid="uid://ch8rasfmsvl5s"]
 
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="1_bxawf"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Idle.gd" id="2_cjhxk"]
@@ -8,6 +8,9 @@
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Wander.gd" id="6_pf1jk"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Notice.gd" id="7_7cfts"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/machine/Chase.gd" id="8_g5lmj"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/machine/KnockedBack.gd" id="9_t7yd2"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/machine/Dying.gd" id="10_80j2i"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/machine/Dead.gd" id="11_6peyk"]
 
 [node name="TDMachine" type="Node"]
 script = ExtResource("1_bxawf")
@@ -32,3 +35,12 @@ script = ExtResource("7_7cfts")
 
 [node name="Chase" type="Node" parent="."]
 script = ExtResource("8_g5lmj")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("9_t7yd2")
+
+[node name="Dying" type="Node" parent="."]
+script = ExtResource("10_80j2i")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("11_6peyk")
