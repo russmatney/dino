@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://w6sbcbxo5mnt"]
+
+[ext_resource type="Texture2D" uid="uid://cwvacjcwo3na6" path="res://src/shirt/entities/coin.png" id="1_6fyhm"]
+[ext_resource type="Script" path="res://src/shirt/entities/ShrineGem.gd" id="1_12h8n"]
+[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="3_m00wy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b085e"]
+atlas = ExtResource("1_6fyhm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojgrh"]
+atlas = ExtResource("1_6fyhm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy0fe"]
+atlas = ExtResource("1_6fyhm")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8sstc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b085e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojgrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oy0fe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ojgrh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b085e")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vilv7"]
+
+[node name="ShrineGem" type="Node2D"]
+script = ExtResource("1_12h8n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8sstc")
+animation = &"spin"
+autoplay = "spin"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/sprites/coin.aseprite"
+}
+
+[node name="ActionArea" parent="." instance=ExtResource("3_m00wy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_vilv7")

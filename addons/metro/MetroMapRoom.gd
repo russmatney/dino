@@ -60,12 +60,13 @@ func set_room_data(data):
 	var visited = room_data.get("visited")
 	var has_player = room_data.get("has_player")
 
-	if has_player:
-		color_rect.set_color(Color(Color.AQUAMARINE, 0.9))
-	elif visited:
-		color_rect.set_color(Color(Color.PERU, 0.8))
-	else:
-		color_rect.set_color(Color(Color.GRAY, 0.6))
+	if color_rect:
+		if has_player:
+			color_rect.set_color(Color(Color.AQUAMARINE, 0.9))
+		elif visited:
+			color_rect.set_color(Color(Color.PERU, 0.8))
+		else:
+			color_rect.set_color(Color(Color.GRAY, 0.6))
 
 
 ## add_entity ###################################################################
