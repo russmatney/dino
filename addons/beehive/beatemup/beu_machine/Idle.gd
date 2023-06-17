@@ -14,7 +14,7 @@ func enter(_opts = {}):
 ## exit ###########################################################
 
 func exit():
-	wander_in_t = null
+	pass
 
 ## physics ###########################################################
 
@@ -25,8 +25,6 @@ func physics_process(delta):
 			return
 
 	if actor.should_wander:
-		if wander_in_t == null:
-			return
 		wander_in_t -= delta
 		if wander_in_t <= 0:
 			transit("Wander")

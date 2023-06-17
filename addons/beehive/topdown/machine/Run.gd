@@ -45,3 +45,4 @@ func physics_process(delta):
 
 	if abs(actor.velocity.length()) < 1:
 		machine.transit("Idle")
+		return

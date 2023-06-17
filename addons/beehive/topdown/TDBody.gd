@@ -19,7 +19,11 @@ func _get_configuration_warnings():
 @export var initial_health: int = 6
 
 @export var run_speed: float = 10000
+@export var wander_speed: float = 6000
 @export var jump_speed: float = 10000
+
+@export var should_wander: bool = false
+@export var should_notice: bool = false
 
 # vars
 
@@ -113,6 +117,8 @@ func check_out(data):
 ## facing ###########################################################
 
 func update_facing():
+	if move_vector != Vector2.ZERO:
+		facing_vector = move_vector
 	# all art should face RIGHT by default
 	anim.flip_h = facing_vector.x < 0
 

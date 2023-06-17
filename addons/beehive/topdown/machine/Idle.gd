@@ -1,13 +1,13 @@
 extends State
 
+var wander_in = [1.3, 2.0, 3.5]
+var wander_in_t
+
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	# TODO remove, here just for funsies
-	if actor.heart_particles != null:
-		# force one-shot emission
-		actor.heart_particles.set_emitting(true)
-		actor.heart_particles.restart()
+	if actor.should_wander:
+		wander_in_t = Util.rand_of(wander_in)
 
 ## exit ###########################################################
 
@@ -23,21 +23,25 @@ func unhandled_input(event):
 			machine.transit("Jump")
 			return
 
-
-## process ###########################################################
-
-func process(_delta):
-	pass
-
-
 ## physics ###########################################################
 
-func physics_process(_delta):
-	if abs(actor.move_vector.length()) > 0:
+func physics_process(delta):
+	actor.update_idle_anim()
+
+	if actor.move_vector.abs().length() > 0:
 		machine.transit("Run")
 		return
 
-	actor.update_idle_anim()
+	if actor.should_notice:
+		if len(actor.notice_box_bodies) > 0:
+			transit("Notice", {noticing=actor.notice_box_bodies[0]})
+			return
+
+	if actor.should_wander:
+		wander_in_t -= delta
+		if wander_in_t <= 0:
+			transit("Wander")
+			return
 
 	# slow down
 	actor.velocity = lerp(actor.velocity, Vector2.ZERO, 0.5)

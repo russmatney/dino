@@ -203,6 +203,9 @@ collision_layer = 2
 collision_mask = 3609
 script = ExtResource("1_hodoi")
 display_name = "P. Layer"
+wander_speed = null
+should_wander = null
+should_notice = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

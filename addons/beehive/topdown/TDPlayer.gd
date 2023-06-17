@@ -87,10 +87,6 @@ func _physics_process(_delta):
 
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
-			# TODO restore strafing - check if using a weapon that supports strafing?
-			# if not firing: # supports strafing (moving while firing without turning)
-			# TODO lock into one of 8 directions?
-			facing_vector = move_vector
 			update_facing()
 
 ## facing ###########################################################

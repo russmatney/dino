@@ -22,6 +22,11 @@ layer_0/tile_data = PackedInt32Array(327690, 196608, 3, 262154, 196608, 2, 19661
 
 [node name="Player" parent="." instance=ExtResource("5_mherk")]
 position = Vector2(-43, 40)
+zoom_rect_min = null
+zoom_margin_min = null
+wander_speed = null
+should_wander = null
+should_notice = null
 
 [node name="@PitDetector@26005" type="Area2D" parent="." groups=["_generated"]]
 collision_layer = 4096

@@ -188,6 +188,9 @@ animations = [{
 
 [node name="TDBody" type="CharacterBody2D"]
 script = ExtResource("1_hnl6t")
+wander_speed = null
+should_wander = null
+should_notice = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
