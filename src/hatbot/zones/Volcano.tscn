@@ -62,7 +62,7 @@ layer_0/tile_data = PackedInt32Array(327682, 131073, 4, 262146, 131073, 3, 19661
 
 [node name="ToLandingSite" parent="ToLandingSite" instance=ExtResource("7_yfbgo")]
 destination_zone_name = "TheLandingSite"
-destination_elevator_path = "./ToVolcano/ToVolcano"
+destination_travel_point_path = "./ToVolcano/ToVolcano"
 
 [node name="DoubleJumpCoinRoom" type="Node2D" parent="." groups=["metro_rooms"]]
 position = Vector2(384, -192)

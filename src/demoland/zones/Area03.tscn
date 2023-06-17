@@ -21,7 +21,7 @@ layer_0/tile_data = PackedInt32Array(-458760, 131073, 0, -393224, 131073, 2, -32
 [node name="ToArea02" parent="01Elevator" instance=ExtResource("4_d4u5t")]
 position = Vector2(0, 32)
 destination_zone_name = "Area02"
-destination_elevator_path = "./05SomeRoom/ToArea03"
+destination_travel_point_path = "./05SomeRoom/ToArea03"
 
 [node name="Candle3" parent="01Elevator" instance=ExtResource("5_gq06a")]
 position = Vector2(32, 32)

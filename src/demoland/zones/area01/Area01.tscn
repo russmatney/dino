@@ -131,22 +131,22 @@ layer_0/tile_data = PackedInt32Array(786432, 131073, 2, 851968, 1, 2, 917504, 1,
 [node name="ToPurpleStone" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(24, 120)
 destination_zone_name = "Area06PurpleStone"
-destination_elevator_path = "./01StoneEntrance/Elevator"
+destination_travel_point_path = "./01StoneEntrance/Elevator"
 
 [node name="ToAllTheThings" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(48, 200)
 destination_zone_name = "Area08AllTheThings"
-destination_elevator_path = "./01Entrance/Elevator"
+destination_travel_point_path = "./01Entrance/Elevator"
 
 [node name="ToGrassyCaves" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(184, 200)
 destination_zone_name = "Area07GrassyCave"
-destination_elevator_path = "./01GrassyCaveEntrance/Elevator"
+destination_travel_point_path = "./01GrassyCaveEntrance/Elevator"
 
 [node name="ToSnow" parent="12WorldHub" instance=ExtResource("17_aao4x")]
 position = Vector2(280, 120)
 destination_zone_name = "Area05Snow"
-destination_elevator_path = "./01Entrance/Elevator"
+destination_travel_point_path = "./01Entrance/Elevator"
 
 [node name="Candle4" parent="12WorldHub" instance=ExtResource("15_r03j1")]
 position = Vector2(64, 160)

@@ -31,7 +31,7 @@ shadow_enabled = true
 [node name="ToArea01" parent="01Elevator" instance=ExtResource("4_e7ttu")]
 position = Vector2(0, 8)
 destination_zone_name = "Area01"
-destination_elevator_path = "./09Elevator/ToArea02"
+destination_travel_point_path = "./09Elevator/ToArea02"
 
 [node name="02Hallway" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
 show_behind_parent = true
@@ -99,7 +99,7 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 [node name="ToArea03" parent="05SomeRoom" instance=ExtResource("4_e7ttu")]
 position = Vector2(492, 152)
 destination_zone_name = "Area03"
-destination_elevator_path = "./01Elevator/ToArea02"
+destination_travel_point_path = "./01Elevator/ToArea02"
 
 [node name="06SomeOtherRoom" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
 show_behind_parent = true
@@ -112,7 +112,7 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 [node name="ToArea04" parent="06SomeOtherRoom" instance=ExtResource("4_e7ttu")]
 position = Vector2(464, 152)
 destination_zone_name = "Area04"
-destination_elevator_path = "./01Elevator/ToArea02"
+destination_travel_point_path = "./01Elevator/ToArea02"
 
 [node name="07HiddenRoom" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
 script = ExtResource("2_fhgi7")

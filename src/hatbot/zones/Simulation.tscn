@@ -64,7 +64,7 @@ layer_0/tile_data = PackedInt32Array(458759, 196609, 4, 393223, 196609, 3, 32768
 z_index = 10
 position = Vector2(0, 24)
 destination_zone_name = "TheLandingSite"
-destination_elevator_path = "./ToSimulation/ToSimulation"
+destination_travel_point_path = "./ToSimulation/ToSimulation"
 
 [node name="WoodenBoxesTiles8" parent="ToLandingSite" instance=ExtResource("5_tky8d")]
 layer_0/tile_data = PackedInt32Array(327676, 196609, 4, 262140, 196609, 2, 327675, 65537, 4, 262139, 65537, 2)
@@ -195,4 +195,4 @@ layer_0/tile_data = PackedInt32Array(262146, 196609, 5, 262145, 393217, 2, 26214
 z_index = 10
 position = Vector2(0, 16)
 destination_zone_name = "TheKingdom"
-destination_elevator_path = "./ToSimulation/ToSimulation"
+destination_travel_point_path = "./ToSimulation/ToSimulation"

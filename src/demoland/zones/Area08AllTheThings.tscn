@@ -29,7 +29,7 @@ script = ExtResource("2_73k7n")
 [node name="Elevator" parent="01Entrance" instance=ExtResource("3_745pf")]
 position = Vector2(-24, 32)
 destination_zone_name = "Area01"
-destination_elevator_path = "./12WorldHub/ToAllTheThings"
+destination_travel_point_path = "./12WorldHub/ToAllTheThings"
 
 [node name="Candle" parent="01Entrance" instance=ExtResource("4_pu2un")]
 position = Vector2(40, 24)
@@ -79,7 +79,7 @@ position = Vector2(424, 200)
 [node name="Elevator" parent="04MetalElevator" instance=ExtResource("3_745pf")]
 position = Vector2(360, 216)
 destination_zone_name = "Area08AllTheThings"
-destination_elevator_path = "./05WoodenElevator/Elevator2"
+destination_travel_point_path = "./05WoodenElevator/Elevator2"
 
 [node name="05WoodenElevator" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("2_73k7n")
@@ -93,4 +93,4 @@ position = Vector2(608, 200)
 [node name="Elevator2" parent="05WoodenElevator" instance=ExtResource("3_745pf")]
 position = Vector2(656, 216)
 destination_zone_name = "Area08AllTheThings"
-destination_elevator_path = "./04MetalElevator/Elevator"
+destination_travel_point_path = "./04MetalElevator/Elevator"

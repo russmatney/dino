@@ -18,6 +18,8 @@ func get_spawn_coords():
 
 const zone_scenes = [
 	"res://src/shirt/zones/CaveOne.tscn",
+	"res://src/shirt/zones/ShrineOne.tscn",
+	"res://src/shirt/zones/ShrineTwo.tscn",
 	]
 
 ## register ##########################################################
@@ -27,7 +29,7 @@ var first_zone
 func register():
 	register_menus()
 
-	Debug.pr("Registering HatBot Zones")
+	Debug.pr("Registering Shirt Zones")
 	Hotel.add_root_group(Metro.zones_group)
 
 	for sfp in zone_scenes:

@@ -28,7 +28,7 @@ script = ExtResource("2_7tnei")
 [node name="Elevator" parent="01StoneEntrance" instance=ExtResource("3_wwjab")]
 position = Vector2(136, -96)
 destination_zone_name = "Area01"
-destination_elevator_path = "./12WorldHub/ToPurpleStone"
+destination_travel_point_path = "./12WorldHub/ToPurpleStone"
 
 [node name="Candle3" parent="01StoneEntrance" instance=ExtResource("4_6jxld")]
 position = Vector2(192, -96)
@@ -78,4 +78,4 @@ position = Vector2(24, 32)
 [node name="Elevator2" parent="04Boss" instance=ExtResource("3_wwjab")]
 position = Vector2(-40, 32)
 destination_zone_name = "Area06PurpleStone"
-destination_elevator_path = "./01StoneEntrance/Elevator"
+destination_travel_point_path = "./01StoneEntrance/Elevator"

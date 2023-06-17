@@ -7,11 +7,7 @@ extends Node2D
 
 func _enter_tree():
 	add_to_group(Metro.zones_group, true)
-
-	# book this zone and children with the hotel
-	# TODO maybe we don't want to rebook every enter tree?
-	# or only do this when managing?
-	Hotel.book(self.scene_file_path)
+	Hotel.book(self)
 
 
 ###########################################################
@@ -78,6 +74,8 @@ var spawn_node_path
 func set_spawn_node(node_path: NodePath):
 	spawn_node_path = node_path
 
+var travel_points_group = "travel_points"
+
 ## NOTE this function has side-effects!
 ## It clears the spawn_node_path when used!
 ## TODO redesign
@@ -106,10 +104,10 @@ func player_spawn_coords() -> Vector2:
 	if len(markers) > 0:
 		return markers[0].global_position
 
-	var eles = Util.get_children_in_group(self, "elevators")
+	var eles = Util.get_children_in_group(self, travel_points_group)
 	for e in eles:
 		return e.global_position
 
-	Debug.warn("no spawn_node, parent_spawn_points, or elevators found, returning (0, 0)")
+	Debug.warn("no spawn_node, parent_spawn_points, or travel points found, returning (0, 0)")
 	return Vector2.ZERO
 

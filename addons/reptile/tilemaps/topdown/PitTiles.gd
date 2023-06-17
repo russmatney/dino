@@ -27,6 +27,8 @@ func create_pit_detector(cells):
 	coll_polygon.polygon = Reptile.cells_to_polygon(self, cells)
 	var area = Area2D.new()
 	area.name = "PitDetector"
+	if "position" in pit_detector_parent:
+		area.position -= pit_detector_parent.position
 
 	(func():
 		pit_detector_parent.add_child(area)
