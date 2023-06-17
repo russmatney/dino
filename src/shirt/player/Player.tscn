@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_3bhmx"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="9_3njs1"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="10_a46lu"]
+[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/shirt/PitDetector.tscn" id="11_nvb18"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8rjk4"]
 radius = 8.0
@@ -198,9 +199,6 @@ height = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5vkuq"]
 radius = 80.399
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_t5m0m"]
-radius = 1.0
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3137
@@ -269,9 +267,4 @@ texture_scale = 4.0
 
 [node name="HeartParticles" parent="." instance=ExtResource("10_a46lu")]
 
-[node name="PitDetector" type="Area2D" parent="."]
-collision_layer = 8192
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PitDetector"]
-shape = SubResource("CircleShape2D_t5m0m")
+[node name="PitDetector" parent="." instance=ExtResource("11_nvb18")]

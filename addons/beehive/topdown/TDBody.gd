@@ -38,6 +38,7 @@ var is_player
 
 var notif_label
 var hurt_box
+var pit_detector
 
 var heart_particles
 var skull_particles
@@ -62,6 +63,7 @@ func _ready():
 			hurt_box="HurtBox",
 			heart_particles="HeartParticles",
 			skull_particles="SkullParticles",
+			pit_detector="PitDetector",
 			})
 
 		if hurt_box:

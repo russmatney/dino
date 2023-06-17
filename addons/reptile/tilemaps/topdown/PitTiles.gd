@@ -2,16 +2,18 @@
 extends RepTileMap
 
 var generated_group = "_generated"
+var pit_detector_parent
 
 ## ready ##################################################################
 
 func _ready():
+	pit_detector_parent = get_parent()
 	ensure_pit_detectors()
 
 ## ensure_pit_detectors ##################################################################
 
 func ensure_pit_detectors():
-	Util.free_children_in_group(owner, generated_group)
+	Util.free_children_in_group(pit_detector_parent, generated_group)
 
 	for cells in Reptile.cell_clusters(self):
 		create_pit_detector(cells)
@@ -26,7 +28,7 @@ func create_pit_detector(cells):
 	area.name = "PitDetector"
 
 	(func():
-		owner.add_child(area)
+		pit_detector_parent.add_child(area)
 		area.set_owner(owner)
 
 		area.add_child(coll_polygon)

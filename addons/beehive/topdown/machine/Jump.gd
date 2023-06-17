@@ -22,12 +22,18 @@ func enter(opts = {}):
 	# disable low-wall collisions
 	actor.set_collision_mask_value(11, false)
 
+	if actor.pit_detector:
+		actor.pit_detector.deactivate()
+
 
 ## exit ###########################################################
 
 func exit():
 	# re-enable low-wall collisions
 	actor.set_collision_mask_value(11, true)
+
+	if actor.pit_detector:
+		actor.pit_detector.activate()
 
 
 ## input ###########################################################
