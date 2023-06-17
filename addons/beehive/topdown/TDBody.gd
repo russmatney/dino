@@ -146,27 +146,26 @@ func face_body(body):
 	facing_vector = pos_diff.normalized()
 	update_facing()
 
-func update_run_anim():
-	if move_vector.y > 0:
-		anim.play("run_down")
-	elif move_vector.y < 0:
-		anim.play("run_up")
-	elif move_vector.x > 0:
-		anim.play("run_right")
-	elif move_vector.x < 0:
+func update_directional_anim(vec, anim_prefix):
+	# favors x-dir over y-dir
+	if vec.x > 0:
+		anim.play(str(anim_prefix, "_right"))
+	elif vec.x < 0:
 		# assumes anim h_flip is done elsewhere
-		anim.play("run_right")
+		anim.play(str(anim_prefix, "_right"))
+	elif vec.y > 0:
+		anim.play(str(anim_prefix, "_down"))
+	elif vec.y < 0:
+		anim.play(str(anim_prefix, "_up"))
+
+func update_run_anim():
+	update_directional_anim(move_vector, "run")
 
 func update_idle_anim():
-	if facing_vector.y > 0:
-		anim.play("idle_down")
-	elif facing_vector.y < 0:
-		anim.play("idle_up")
-	elif facing_vector.x > 0:
-		anim.play("idle_right")
-	elif facing_vector.x < 0:
-		# assumes anim h_flip is done elsewhere
-		anim.play("idle_right")
+	update_directional_anim(facing_vector, "idle")
+
+func update_jump_anim():
+	update_directional_anim(move_vector, "jump")
 
 ## death ###########################################################
 

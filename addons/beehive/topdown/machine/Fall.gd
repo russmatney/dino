@@ -8,7 +8,7 @@ var fall_scale_factor = 0.2
 ## enter ###########################################################
 
 func enter(opts = {}):
-	# TODO apply damage?
+	# TODO apply damage
 
 	actor.anim.play("fall")
 	DJZ.play(DJZ.S.fall)

@@ -10,7 +10,6 @@ var direction: Vector2
 ## enter ###########################################################
 
 func enter(opts = {}):
-	actor.anim.play("jump")
 	DJZ.play(DJZ.S.jump)
 	jump_ttl = Util.get_(opts, "jump_time", jump_time)
 	direction = Util.get_(opts, "direction", actor.move_vector)
@@ -45,6 +44,7 @@ func unhandled_input(_event):
 ## physics ###########################################################
 
 func physics_process(delta):
+	actor.update_jump_anim()
 	jump_ttl -= delta
 
 	if jump_ttl <= 0:
