@@ -59,7 +59,7 @@ func hotel_data():
 ## actions ##################################################################
 
 var actions = [
-	Action.mk({label_fn=get_dest_label, fn=travel, show_on_source=true, show_on_player=false,})
+	Action.mk({label_fn=get_dest_label, fn=travel, show_on_source=true, show_on_actor=false,})
 	]
 
 func get_dest_label():

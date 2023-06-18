@@ -95,7 +95,9 @@ destination_travel_point_path = ""
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_xkyyo")
-animation = &"closed"
+animation = &"opening"
+frame = 4
+frame_progress = 1.0
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -112,4 +114,5 @@ metadata/_aseprite_wizard_config_ = {
 shape = SubResource("RectangleShape2D_vf8nx")
 
 [node name="ActionHint" parent="." instance=ExtResource("4_hd7a5")]
+visible = false
 position = Vector2(0, -32)
