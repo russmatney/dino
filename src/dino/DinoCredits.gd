@@ -83,6 +83,12 @@ var dino_credits = [
     [
 	"Color Palettes",
 	"",
+	"lospec 500",
+	"A collaboration, including Foxbutt, Rhoq, Dimi, Skeddles, MiggityMoogity,
+	PureAsbestos, Polyducks, SybilQ, Unsettled, DaaWeed, Moertel, KingW, Glacier,
+	WildLeoKnight and GooGroker",
+	"https://lospec.com/palette-list/lospec500",
+	"",
 	"COLDFIRE GB",
 	"By Kerrielake",
 	"https://lospec.com/palette-list/coldfire-gb",
