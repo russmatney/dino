@@ -295,7 +295,7 @@ collision_mask = 3137
 script = ExtResource("1_6g3gp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_8rjk4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -358,3 +358,4 @@ texture_scale = 4.0
 [node name="HeartParticles" parent="." instance=ExtResource("10_a46lu")]
 
 [node name="PitDetector" parent="." instance=ExtResource("11_nvb18")]
+position = Vector2(0, 8)

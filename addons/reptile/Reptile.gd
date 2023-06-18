@@ -148,7 +148,7 @@ func cell_clusters(tilemap):
 		clusters.append_array(connected_groups)
 	return clusters
 
-func cells_to_polygon(tilemap, cells):
+func cells_to_polygon(tilemap, cells, opts={}):
 	# get points from cell coordinates
 	var points = cells.map(func(c):
 		# assumes square tiles
@@ -176,9 +176,17 @@ func cells_to_polygon(tilemap, cells):
 		if seen_points[p] < 4:
 			points.append(p)
 
-	# sort cells according to angle to midpoint
-	# NOTE not a perfect algo for convex shapes
 	var mid = Util.average(points)
+
+	# move points toward midpoint
+	var padding = opts.get("padding", 0)
+	var adjusted_points = []
+	for p in points:
+		adjusted_points.append(p.move_toward(mid, padding))
+	points = adjusted_points
+
+	# sort points according to angle to midpoint
+	# NOTE not a perfect algo for convex shapes
 	points.sort_custom(func (a,b):
 		var a_ang = mid.angle_to_point(a)
 		var b_ang = mid.angle_to_point(b)
@@ -186,6 +194,8 @@ func cells_to_polygon(tilemap, cells):
 		if diff_ang <= 0.05:
 			return mid.distance_to(a) <= mid.distance_to(b)
 		return a_ang >= b_ang)
+
+
 
 	var polygon = PackedVector2Array()
 	for p in points:

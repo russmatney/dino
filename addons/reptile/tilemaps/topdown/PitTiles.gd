@@ -24,7 +24,7 @@ func ensure_pit_detectors():
 func create_pit_detector(cells):
 	var coll_polygon = CollisionPolygon2D.new()
 	coll_polygon.name = "CollisionPolygon2D"
-	coll_polygon.polygon = Reptile.cells_to_polygon(self, cells)
+	coll_polygon.polygon = Reptile.cells_to_polygon(self, cells, {padding=6})
 	var area = Area2D.new()
 	area.name = "PitDetector"
 	if "position" in pit_detector_parent:
