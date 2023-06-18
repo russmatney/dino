@@ -28,15 +28,25 @@ theme_override_font_sizes/normal_font_size = 128
 text = "[center][jump]Shirt[/jump][/center]"
 custom_effects = [ExtResource("2_0b1v1")]
 
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3_uyfv3")
 bbcode_enabled = true
 text = "[center]Movement: WASD
 Jump: N
-Actions: E[/center]"
+Boomerang: M
+Actions: E
+Pause: ESC[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2

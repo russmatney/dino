@@ -12,6 +12,10 @@ var button_defs = [
 		fn=Navi.nav_to_main_menu,
 		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
+	{
+		label="Credits",
+		nav_to="res://src/dino/DinoCredits.tscn",
+	},
 ]
 
 

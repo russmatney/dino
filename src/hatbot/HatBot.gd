@@ -23,6 +23,9 @@ const zone_scenes = [
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/hatbot")
 
+func should_spawn_player(scene):
+	return not scene.scene_file_path.begins_with("res://src/hatbot/menus")
+
 var first_zone
 
 func register():

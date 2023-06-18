@@ -2,6 +2,7 @@
 extends Credits
 
 var dino_credits = [
+	["Combined credits for _all_ games in Dino"],
     ["Made with Godot, Aseprite, and Emacs"],
     [
 	"Music",

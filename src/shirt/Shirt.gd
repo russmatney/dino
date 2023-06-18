@@ -8,6 +8,8 @@ func _ready():
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/shirt")
 
+func should_spawn_player(scene):
+	return not scene.scene_file_path.begins_with("res://src/shirt/menus")
 
 ## player ##########################################################
 
