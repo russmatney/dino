@@ -35,6 +35,8 @@ var health
 var is_dead
 var is_player
 
+var weapons = []
+
 # nodes
 
 @onready var coll = $CollisionShape2D
@@ -332,3 +334,65 @@ func stamp(opts={}):
 			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
 			t.tween_callback(new_anim.queue_free)
 
+
+## weapons #######################################################
+
+func add_weapon(weapon):
+	if not weapon in weapons:
+		weapons.map(deactivate_weapon)
+		weapons.push_front(weapon)
+		activate_weapon()
+
+func has_weapon():
+	return active_weapon() != null
+
+func active_weapon():
+	if len(weapons) > 0:
+		return weapons.front()
+
+func aim_weapon(aim_vector):
+	var w = active_weapon()
+	if w:
+		w.aim(aim_vector)
+
+# Drops the first weapon if none is passed
+func drop_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	# TODO drop/create new pickup/powerup?
+	# TODO remove child?
+	if weapon in weapons:
+		weapons.erase(weapon)
+
+func cycle_weapon():
+	if len(weapons) > 1:
+		weapons.map(deactivate_weapon)
+		var f = weapons.pop_front()
+		weapons.push_back(f)
+		activate_weapon()
+
+# maybe different from 'use' for multi-state things like the flashlight?
+func activate_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.visible = true
+	weapon.activate()
+
+# turn off the flashlight, sheath the sword, holser the gun?
+func deactivate_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.visible = false
+	weapon.deactivate()
+
+# Uses the first weapon if none is passed
+func use_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.use()
+
+# i.e. button released, stop firing or whatever continuous action
+func stop_using_weapon(weapon=null):
+	if not weapon:
+		weapon = active_weapon()
+	weapon.stop_using()

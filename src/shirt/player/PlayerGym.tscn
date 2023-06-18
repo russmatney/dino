@@ -23,27 +23,4 @@ add_areas_to_owner = null
 
 [node name="Player" parent="." instance=ExtResource("5_mherk")]
 position = Vector2(-43, 40)
-zoom_rect_min = null
-zoom_margin_min = null
 initial_health = 0
-
-[node name="PitDetector" type="Area2D" parent="." groups=["_generated"]]
-collision_layer = 4096
-collision_mask = 8192
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PitDetector"]
-polygon = PackedVector2Array(112, 64, 112, 80, 112, 96, 128, 96, 144, 96, 160, 96, 176, 96, 176, 80, 176, 64, 176, 48, 176, 32, 160, 32, 144, 32, 128, 32, 112, 32, 112, 48)
-
-[node name="@PitDetector@20237" type="Area2D" parent="." groups=["_generated"]]
-collision_layer = 4096
-collision_mask = 8192
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@20237"]
-polygon = PackedVector2Array(-48, -96, -48, -80, -32, -80, -16, -80, 0, -80, 16, -80, 32, -80, 32, -96, 32, -112, 16, -112, 0, -112, -16, -112, -32, -112, -48, -112)
-
-[node name="@PitDetector@20238" type="Area2D" parent="." groups=["_generated"]]
-collision_layer = 4096
-collision_mask = 8192
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="@PitDetector@20238"]
-polygon = PackedVector2Array(-160, 64, -160, 80, -144, 80, -128, 80, -112, 80, -112, 64, -112, 48, -128, 48, -144, 48, -160, 48)

@@ -7,7 +7,13 @@ class_name TDPlayer
 
 var look_pof
 
+var boomerang
+
 var coins = 0
+
+var aim_vector = Vector2.ZERO
+
+@export var has_boomerang: bool
 
 ## config warning ###########################################################
 
@@ -42,6 +48,9 @@ func _ready():
 		# include opting into keybindings and current-ax updates
 		action_detector.setup(self, {actions=[], action_hint=action_hint})
 
+		if has_boomerang:
+			add_boomerang()
+
 	super._ready()
 
 ## hotel data ##########################################################################
@@ -64,6 +73,17 @@ func _unhandled_input(event):
 		or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		return
 
+	# generic weapon
+	if has_weapon() and Trolley.is_attack(event):
+		use_weapon()
+		# TODO should strafe?
+	elif has_weapon() and Trolley.is_attack_released(event):
+		stop_using_weapon()
+		# TODO should stop strafe?
+
+	if Trolley.is_event(event, "cycle_weapon"):
+		cycle_weapon()
+
 	# generic action
 	if Trolley.is_action(event):
 		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
@@ -79,6 +99,7 @@ func _unhandled_input(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 
+
 ## physics_process ###########################################################
 
 func _physics_process(delta):
@@ -92,6 +113,11 @@ func _physics_process(delta):
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
 			update_facing()
+
+		if move_vector.abs().length() > 0 and has_weapon():
+			# maybe this just works?
+			aim_vector = move_vector
+			aim_weapon(aim_vector)
 
 ## facing ###########################################################
 
@@ -130,3 +156,15 @@ func clear_forced_movement_target():
 func on_pit_entered():
 	Debug.pr("pit entered")
 	machine.transit("Fall")
+
+## boomerang ###########################################################
+
+var boomerang_scene = preload("res://addons/beehive/topdown/weapons/Boomerang.tscn")
+
+func add_boomerang():
+	if not boomerang:
+		boomerang = boomerang_scene.instantiate()
+		add_child(boomerang)
+
+	add_weapon(boomerang)
+	has_boomerang = true
