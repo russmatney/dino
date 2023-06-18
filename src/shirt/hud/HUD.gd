@@ -3,6 +3,7 @@ extends HUD
 
 @onready var player_status = $%PlayerStatus
 @onready var enemy_status_list = $%EnemyStatusList
+@onready var shrine_gem_count = $%ShrineGemCount
 
 var to_portrait_texture = {
 	"Player": preload("res://assets/sprites/status_portraits6.png"),
@@ -17,6 +18,8 @@ func _on_player_update(data):
 			name=data.get("display_name", data.get("name")),
 			texture=to_portrait_texture["Player"],
 			})
+	if "shrine_gems" in data and shrine_gem_count:
+		shrine_gem_count.text = "[right]Shrine Gems: %s/2[/right]" % data.get("shrine_gems", 0)
 
 func _on_enemy_update(data):
 	var opts = data.duplicate()

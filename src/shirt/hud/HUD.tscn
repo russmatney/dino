@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1fe2xly3pfd4"]
+[gd_scene load_steps=8 format=3 uid="uid://d1fe2xly3pfd4"]
 
-[ext_resource type="PackedScene" path="res://addons/hood/Notifications.tscn" id="1_i2ua0"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_i2ua0"]
 [ext_resource type="Script" path="res://src/shirt/hud/HUD.gd" id="1_m3maa"]
-[ext_resource type="PackedScene" path="res://addons/metro/MinimapContainer.tscn" id="2_ioejp"]
-[ext_resource type="PackedScene" path="res://addons/hood/EntityStatus.tscn" id="3_vl0v5"]
-[ext_resource type="PackedScene" path="res://addons/hood/EntityStatusList.tscn" id="4_yyh2s"]
+[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/metro/MinimapContainer.tscn" id="2_ioejp"]
+[ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="3_vl0v5"]
+[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="4_yyh2s"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_tt27g"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jotap"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.360784)
@@ -41,6 +42,20 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 max_children = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ShrineGemCount" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("5_tt27g")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[right]Shrine Gems: 0/2[/right]"
+fit_content = true
+scroll_active = false
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
