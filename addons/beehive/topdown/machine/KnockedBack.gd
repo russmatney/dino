@@ -2,12 +2,18 @@ extends State
 
 var knocked_by
 var knock_force = 50
+var knocked_back_time = 1
+var kb_ttl
 
 ## enter ###########################################################
 
 func enter(opts = {}):
 	Util._connect(actor.anim.animation_finished, on_animation_finished, CONNECT_ONE_SHOT)
-	actor.anim.play("knocked_back")
+	if actor.anim.sprite_frames.has_animation("knocked_back"):
+		actor.anim.play("knocked_back")
+	else:
+		actor.anim.stop()
+		kb_ttl = knocked_back_time
 	knocked_by = opts.get("knocked_by")
 	actor.face_body(knocked_by)
 
@@ -27,5 +33,10 @@ func exit():
 ## physics ###########################################################
 
 func physics_process(delta):
+	if kb_ttl != null:
+		kb_ttl -= delta
+		if kb_ttl <= 0:
+			transit("Idle")
+
 	actor.velocity = actor.velocity.lerp(Vector2.ZERO, 1 - pow(0.1, delta))
 	actor.move_and_slide()
