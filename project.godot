@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dino"
 run/main_scene="res://src/dino/DinoMenu.tscn"
-config/features=PackedStringArray("4.0")
+config/features=PackedStringArray("4.1")
 config/icon="res://assets/icons/dino_sheet.png"
 run/main_scene.runner="res://src/runner/park/ThePark.tscn"
 run/main_scene.dungeon-crawler="res://src/dungeonCrawler/zones/TwoGeon.tscn"
@@ -48,6 +48,8 @@ Respawner="*res://addons/core/Respawner.gd"
 Clawe="res://src/clawe/Clawe.gd"
 TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 Metro="*res://addons/metro/Metro.gd"
+SnakeGame="*res://src/snake/SnakeGame.gd"
+Spawning="*res://addons/BulletUpHell/Spawning.tscn"
 DemoLand="*res://src/demoland/DemoLand.gd"
 DungeonCrawler="*res://src/dungeonCrawler/DungeonCrawler.gd"
 Ghosts="*res://src/ghosts/Ghosts.gd"
@@ -57,11 +59,9 @@ HatBot="*res://src/hatbot/HatBot.gd"
 Herd="*res://src/herd/Herd.gd"
 Mountain="*res://src/mountain/Mountain.gd"
 Shirt="*res://src/shirt/Shirt.gd"
-SnakeGame="*res://src/snake/SnakeGame.gd"
 SuperElevatorLevel="*res://src/superElevatorLevel/SuperElevatorLevel.gd"
 Tower="*res://src/tower/Tower.gd"
 Game="*res://src/dino/Game.gd"
-Spawning="*res://addons/BulletUpHell/Spawning.tscn"
 
 [display]
 
@@ -240,13 +240,13 @@ respawns={
 }
 zoom_in={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"pressed":false,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"canceled":false,"pressed":false,"double_click":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194320,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 zoom_out={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"pressed":false,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194322,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
