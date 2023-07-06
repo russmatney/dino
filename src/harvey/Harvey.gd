@@ -14,6 +14,8 @@ func _ready():
 	var time_up_menu_scene = load("res://src/harvey/menus/TimeUpMenu.tscn")
 	time_up_menu = Navi.add_menu(time_up_menu_scene)
 
+	icon_texture = load("res://assets/sprites/Harvey_icon_sheet.png")
+
 ## register ########################################################################
 
 func manages_scene(scene):

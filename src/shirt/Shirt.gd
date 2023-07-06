@@ -4,6 +4,7 @@ extends DinoGame
 func _ready():
 	pause_menu_scene = load("res://src/shirt/menus/PauseMenu.tscn")
 	main_menu_scene = load("res://src/shirt/menus/MainMenu.tscn")
+	icon_texture = load("res://assets/sprites/Shirt_icon_sheet.png")
 
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/shirt")

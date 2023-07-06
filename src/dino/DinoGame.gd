@@ -2,6 +2,7 @@
 class_name DinoGame
 extends Node
 
+var icon_texture = preload("res://assets/icons/dino_sheet.png")
 
 func get_player_scene():
 	# defaults to returning a 'player_scene' var

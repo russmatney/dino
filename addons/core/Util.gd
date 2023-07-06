@@ -115,6 +115,10 @@ func each_sibling(node: Node):
 	var p = node.get_parent()
 	return p.get_children().filter(func(ch): return ch != node)
 
+func free_children(node: Node):
+	node.get_children().map(func(c): c.queue_free())
+
+
 ############################################################
 # packed_scene reading
 
@@ -372,3 +376,10 @@ func average(vals):
 		return mid
 	else:
 		return sum(vals)/len(vals)
+
+# control/theme helpers
+
+func update_stylebox(node, stylebox_name, fn):
+	var stylebox = node.get_theme_stylebox(stylebox_name).duplicate()
+	fn.call(stylebox)
+	node.add_theme_stylebox_override(stylebox_name, stylebox)

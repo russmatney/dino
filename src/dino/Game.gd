@@ -26,6 +26,7 @@ var games = [
 	Herd,
 	Mountain,
 	Shirt,
+	SnakeGame,
 	SuperElevatorLevel,
 	Tower,
 	]
@@ -98,6 +99,15 @@ func load_main_menu(game=null):
 	Debug.pr("No main_menu_scene in game or current_game, naving to fallback main menu.")
 	Navi.nav_to_main_menu()
 
+## For a passed game, load it's main menu. If none is set, start it via restart_game
+func nav_to_game_menu_or_start(game):
+	if game.main_menu_scene != null:
+		# is this hide still necessary?
+		Navi.hide_menus()
+		Navi.nav_to(game.main_menu_scene)
+		return
+
+	restart_game(game)
 
 ## player ##########################################################
 

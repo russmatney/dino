@@ -1,3 +1,4 @@
+@tool
 extends DinoGame
 
 func _ready():

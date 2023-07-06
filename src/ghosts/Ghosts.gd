@@ -3,6 +3,7 @@ extends DinoGame
 
 func _ready():
 	main_menu_scene = load("res://src/ghosts/GhostsMenu.tscn")
+	icon_texture = load("res://assets/sprites/Ghost_House_icon_sheet.png")
 
 var rooms_group = "ghost_rooms"
 
