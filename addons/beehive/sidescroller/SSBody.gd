@@ -197,7 +197,7 @@ func update_facing():
 	update_los_facing(facing_vector, low_wall_check)
 
 	# flip weapons
-	for w in weapons:
+	for w in weapons.filter(func(w): return w.should_flip):
 		Util.update_h_flip(facing_vector, w)
 
 func flip_facing():

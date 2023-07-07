@@ -27,6 +27,7 @@ func stop_using():
 func _ready():
 	super._ready()
 	modulate.a = 0
+	should_flip = false
 
 func _on_animation_finished():
 	pass
@@ -42,7 +43,7 @@ var returning = false
 var bodies_this_throw = []
 
 var throw_time = 0.4
-var throw_distance = 120
+var throw_distance = 220
 
 var spin_tween
 var throw_tween

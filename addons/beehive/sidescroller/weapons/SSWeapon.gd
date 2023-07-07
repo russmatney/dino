@@ -14,6 +14,8 @@ var hitbox_coll
 var display_name: String
 var actor
 
+var should_flip = true
+
 ######################################################
 # ready
 
