@@ -16,13 +16,12 @@ func should_spawn_player(scene):
 var player_scene = preload("res://src/spike/player/Player.tscn")
 
 func get_spawn_coords():
-	# TODO consider non-global usage of Metro here
 	return Metro.get_spawn_coords()
 
 ## zones ##########################################################
 
 const zone_scenes = [
-	# "res://src/spike/zones/Tutorial.tscn",
+	"res://src/spike/zones/ZoneGym.tscn",
 	]
 
 ## register ##########################################################
@@ -38,8 +37,8 @@ func register():
 	for sfp in zone_scenes:
 		Hotel.book(sfp)
 
-	# if first_zone == null:
-	# 	first_zone = zone_scenes[0]
+	if first_zone == null:
+		first_zone = zone_scenes[0]
 
 	var zones = Hotel.query({"group": Metro.zones_group})
 
@@ -50,10 +49,8 @@ func register():
 func start():
 	Debug.prn("Starting Spike!")
 
-	# TODO pull from saved game?
 	Metro.load_zone(first_zone)
 
 ## Called to trigger a world update after the player is loaded or removed
 func update_world():
-	# TODO consider non-global usage of Metro here
 	Metro.update_zone()
