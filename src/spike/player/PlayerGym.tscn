@@ -15,7 +15,7 @@ layer_0/tile_data = PackedInt32Array(720917, 196608, 15, 655381, 196608, 14, 589
 layer_0/tile_data = PackedInt32Array(524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0)
 
 [node name="Blob" parent="." instance=ExtResource("4_o7sig")]
-position = Vector2(-137, 35)
+position = Vector2(-128, 72)
 
 [node name="Blob2" parent="." instance=ExtResource("4_o7sig")]
-position = Vector2(348, 48)
+position = Vector2(432, 56)

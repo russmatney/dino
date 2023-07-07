@@ -212,6 +212,7 @@ collision_layer = 2
 collision_mask = 3073
 script = ExtResource("1_pq3nr")
 has_sword = true
+jump_time = 0.5
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false

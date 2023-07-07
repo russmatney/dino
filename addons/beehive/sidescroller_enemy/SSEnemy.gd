@@ -138,7 +138,7 @@ func _on_transit(label):
 
 ## on death ####################################################
 
-func _on_death(_boss):
+func _on_death(_enemy):
 	Hotel.check_in(self)
 	Cam.screenshake(0.1)
 	DJZ.play(DJZ.S.soldierdead)
