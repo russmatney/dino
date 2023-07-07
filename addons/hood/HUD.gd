@@ -7,6 +7,8 @@ func _ready():
 	_on_entry_updated(Hotel.first({is_player=true}))
 
 func _on_entry_updated(entry):
+	if entry == null:
+		return
 	if "player" in entry.get("groups", []):
 		_on_player_update(entry)
 	if "enemies" in entry.get("groups", []):

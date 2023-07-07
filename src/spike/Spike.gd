@@ -2,19 +2,19 @@
 extends DinoGame
 
 func _ready():
-	pause_menu_scene = load("res://src/shirt/menus/PauseMenu.tscn")
-	main_menu_scene = load("res://src/shirt/menus/MainMenu.tscn")
-	icon_texture = load("res://assets/sprites/Shirt_icon_sheet.png")
+	pass
+	# pause_menu_scene = load("res://src/spike/menus/PauseMenu.tscn")
+	# main_menu_scene = load("res://src/spike/menus/MainMenu.tscn")
 
 func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/shirt")
+	return scene.scene_file_path.begins_with("res://src/spike")
 
 func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/shirt/menus")
+	return not scene.scene_file_path.begins_with("res://src/spike/menus")
 
 ## player ##########################################################
 
-var player_scene = preload("res://src/shirt/player/Player.tscn")
+var player_scene = preload("res://src/spike/player/Player.tscn")
 
 func get_spawn_coords():
 	# TODO consider non-global usage of Metro here
@@ -23,9 +23,7 @@ func get_spawn_coords():
 ## zones ##########################################################
 
 const zone_scenes = [
-	"res://src/shirt/zones/CaveOne.tscn",
-	"res://src/shirt/zones/ShrineOne.tscn",
-	"res://src/shirt/zones/ShrineTwo.tscn",
+	# "res://src/spike/zones/Tutorial.tscn",
 	]
 
 ## register ##########################################################
@@ -35,23 +33,23 @@ var first_zone
 func register():
 	register_menus()
 
-	Debug.pr("Registering Shirt Zones")
+	Debug.pr("Registering Spike Zones")
 	Hotel.add_root_group(Metro.zones_group)
 
 	for sfp in zone_scenes:
 		Hotel.book(sfp)
 
-	if first_zone == null:
-		first_zone = zone_scenes[0]
+	# if first_zone == null:
+	# 	first_zone = zone_scenes[0]
 
 	var zones = Hotel.query({"group": Metro.zones_group})
 
-	Debug.pr("Shirt registered", len(zones), "zones and first zone ", first_zone)
+	Debug.pr("Spike registered", len(zones), "zones and first zone ", first_zone)
 
 ## start ##########################################################
 
 func start():
-	Debug.prn("Starting Shirt!")
+	Debug.prn("Starting Spike!")
 
 	# TODO pull from saved game?
 	Metro.load_zone(first_zone)

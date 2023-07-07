@@ -27,10 +27,10 @@ var games = [
 	Mountain,
 	Shirt,
 	SnakeGame,
+	Spike,
 	SuperElevatorLevel,
 	Tower,
 	]
-
 
 func game_for_scene(scene):
 	var gs = games.filter(func(g): return g and g.manages_scene(scene))
