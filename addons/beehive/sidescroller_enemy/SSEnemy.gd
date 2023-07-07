@@ -161,7 +161,9 @@ func _on_knocked_back(_goomba):
 ## hotel ####################################################
 
 func check_out(data):
-	global_position = data.get("position", global_position)
+	var pos = data.get("position", global_position)
+	if pos != null and pos != Vector2.ZERO:
+		global_position = pos
 	health = data.get("health", initial_health)
 	facing_vector = data.get("facing_vector", facing_vector)
 	face(facing_vector)
