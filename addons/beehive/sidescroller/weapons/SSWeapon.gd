@@ -31,6 +31,8 @@ func _ready():
 		anim.frame_changed.connect(_on_frame_changed)
 
 	if hitbox:
+		hitbox.area_entered.connect(_on_body_entered)
+		hitbox.area_exited.connect(_on_body_exited)
 		hitbox.body_entered.connect(_on_body_entered)
 		hitbox.body_exited.connect(_on_body_exited)
 		hitbox.body_shape_entered.connect(_on_body_shape_entered)

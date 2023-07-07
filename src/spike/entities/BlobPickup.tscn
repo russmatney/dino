@@ -38,13 +38,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -4.46171)
+position = Vector2(0, -0.497506)
 script = ExtResource("1_41a3b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ueo2l")
 animation = &"spin"
+autoplay = "spin"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

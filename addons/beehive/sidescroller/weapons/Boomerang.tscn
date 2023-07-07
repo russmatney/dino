@@ -52,7 +52,7 @@ metadata/_aseprite_wizard_config_ = {
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 9
+collision_mask = 41
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource("CircleShape2D_htxc7")

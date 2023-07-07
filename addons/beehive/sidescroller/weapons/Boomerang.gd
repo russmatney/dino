@@ -87,6 +87,7 @@ func finish_return():
 	returning = false
 	global_position = actor.global_position
 	modulate.a = 0
+	bodies_this_throw = []
 
 ## process #####################################################
 
@@ -103,3 +104,8 @@ func _physics_process(delta):
 				bodies_this_throw.append(b)
 				if b.has_method("take_hit"):
 					b.take_hit({type="boomerang", body=self})
+
+				if b.has_method("gather_pickup"):
+					b.gather_pickup(actor)
+				if b.get_parent().has_method("gather_pickup"):
+					b.get_parent().gather_pickup(actor)
