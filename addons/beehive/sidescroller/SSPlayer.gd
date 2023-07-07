@@ -13,6 +13,7 @@ var sword
 var gun
 var bow
 var flashlight
+var boomerang
 
 var coins = 0
 var powerups = []
@@ -23,6 +24,7 @@ var aim_vector = Vector2.ZERO
 @export var has_gun: bool
 @export var has_sword: bool
 @export var has_flashlight: bool
+@export var has_boomerang: bool
 
 ## config warning ###########################################################
 
@@ -79,6 +81,8 @@ func _ready():
 			add_bow()
 		if has_gun:
 			add_gun()
+		if has_boomerang:
+			add_boomerang()
 
 	super._ready()
 
@@ -283,3 +287,15 @@ func add_flashlight():
 
 	add_weapon(flashlight)
 	has_flashlight = true
+
+## boomerang ###########################################################
+
+var boomerang_scene = preload("res://addons/beehive/sidescroller/weapons/Boomerang.tscn")
+
+func add_boomerang():
+	if not boomerang:
+		boomerang = boomerang_scene.instantiate()
+		add_child(boomerang)
+
+	add_weapon(boomerang)
+	has_boomerang = true

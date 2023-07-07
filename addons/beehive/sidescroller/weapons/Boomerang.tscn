@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://brn00fgoknly6"]
+
+[ext_resource type="Script" path="res://addons/beehive/sidescroller/weapons/Boomerang.gd" id="1_gamy2"]
+[ext_resource type="Texture2D" uid="uid://cydc8lch1oinl" path="res://addons/beehive/topdown/weapons/boomerang.png" id="2_owred"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h372t"]
+atlas = ExtResource("2_owred")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nedfq"]
+atlas = ExtResource("2_owred")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkpcf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h372t")
+}],
+"loop": false,
+"name": &"boomerang",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nedfq")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_htxc7"]
+radius = 13.0
+
+[node name="Boomerang" type="Node2D"]
+script = ExtResource("1_gamy2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_xkpcf")
+animation = &"boomerang"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/sprites/boomerang.aseprite"
+}
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_htxc7")
