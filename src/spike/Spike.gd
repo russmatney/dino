@@ -2,9 +2,8 @@
 extends DinoGame
 
 func _ready():
-	pass
-	# pause_menu_scene = load("res://src/spike/menus/PauseMenu.tscn")
-	# main_menu_scene = load("res://src/spike/menus/MainMenu.tscn")
+	pause_menu_scene = load("res://src/spike/menus/PauseMenu.tscn")
+	main_menu_scene = load("res://src/spike/menus/MainMenu.tscn")
 
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/spike")
