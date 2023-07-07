@@ -1,37 +1,34 @@
 [gd_scene load_steps=8 format=3 uid="uid://dby2hvvl027v3"]
 
 [ext_resource type="Script" path="res://src/spike/entities/BlobPickup.gd" id="1_41a3b"]
-[ext_resource type="Texture2D" uid="uid://guooj63y3i0o" path="res://src/spike/entities/coin.png" id="3_yn6ep"]
+[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/spike/entities/SPIKE_blob_pickup.png" id="2_ev8mv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w4vjy"]
-atlas = ExtResource("3_yn6ep")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqfnp"]
+atlas = ExtResource("2_ev8mv")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mo7r1"]
-atlas = ExtResource("3_yn6ep")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5vha"]
+atlas = ExtResource("2_ev8mv")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2otab"]
-atlas = ExtResource("3_yn6ep")
-region = Rect2(0, 16, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnmbp"]
+atlas = ExtResource("2_ev8mv")
+region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_k3res"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ueo2l"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w4vjy")
+"texture": SubResource("AtlasTexture_uqfnp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mo7r1")
+"texture": SubResource("AtlasTexture_d5vha")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2otab")
+"texture": SubResource("AtlasTexture_qnmbp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mo7r1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w4vjy")
+"texture": SubResource("AtlasTexture_d5vha")
 }],
 "loop": true,
 "name": &"spin",
@@ -41,11 +38,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
+position = Vector2(0, -4.46171)
 script = ExtResource("1_41a3b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_k3res")
+sprite_frames = SubResource("SpriteFrames_ueo2l")
 animation = &"spin"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -54,7 +52,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/coin.aseprite"
+"source": "res://assets/sprites/SPIKE_blob_pickup.aseprite"
 }
 
 [node name="Area2D" type="Area2D" parent="."]
