@@ -211,6 +211,7 @@ size = Vector2(236, 132)
 collision_layer = 2
 collision_mask = 3073
 script = ExtResource("1_pq3nr")
+has_sword = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -231,7 +232,7 @@ shape = SubResource("CapsuleShape2D_brt85")
 texture_filter = 1
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_wvhaw")
-animation = &"knocked_back"
+animation = &"idle"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

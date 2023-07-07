@@ -1,6 +1,9 @@
 extends SSPlayer
 
-@export var zoom_rect_min = 100
+func _get_configuration_warnings():
+	return super._get_configuration_warnings()
+
+@export var zoom_rect_min = 200
 @export var zoom_margin_min = 100
 
 ## ready ##################################################################
