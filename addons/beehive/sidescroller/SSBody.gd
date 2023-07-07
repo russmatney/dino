@@ -469,6 +469,8 @@ func deactivate_weapon(weapon=null):
 func use_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
+	if weapon.visible == false:
+		activate_weapon(weapon)
 	weapon.use()
 
 # i.e. button released, stop firing or whatever continuous action

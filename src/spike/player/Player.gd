@@ -17,6 +17,9 @@ func _ready():
 
 	super._ready()
 
+	for p in pickups:
+		add_orbit_item(p)
+
 ## hotel ##################################################################
 
 # func check_out(data):
@@ -27,3 +30,55 @@ func _ready():
 # 	var d = super.hotel_data()
 # 	d["shrine_gems"] = shrine_gems
 # 	return d
+
+## process ##################################################################
+
+func _process(_delta):
+	# super._process(delta)
+	if orbit_items.size() == 0:
+		remove_orbit_item_weapon()
+	else:
+		if not orbit_item_weapon or not orbit_item_weapon in weapons:
+			add_orbit_item_weapon()
+
+## orbiting items ##################################################################
+
+func collect_pickup(pickup_type):
+	super.collect_pickup(pickup_type)
+	add_orbit_item(pickup_type)
+
+@onready var orbit_item_scene = preload("res://src/spike/entities/OrbitItem.tscn")
+
+var orbit_items = []
+
+func add_orbit_item(pickup_type):
+	Debug.pr("adding orbit item", pickup_type)
+
+	var item = orbit_item_scene.instantiate()
+	item.show_behind_parent = true
+	item.pickup_type = pickup_type
+	# TODO show behind parent
+	# TODO set with pickup type
+	add_child.call_deferred(item)
+	orbit_items.append(item)
+
+func remove_orbit_item(pickup):
+	pickups.erase(pickup)
+	var its = get_children().filter(func(c): return "pickup_type" in c and c.pickup_type == pickup)
+	if its.size() > 0:
+		var it = its[0]
+		orbit_items.erase(it)
+		it.queue_free()
+
+var orbit_item_weapon_scene = preload("res://src/spike/entities/OrbitItemWeapon.tscn")
+var orbit_item_weapon
+
+func add_orbit_item_weapon():
+	if not orbit_item_weapon:
+		orbit_item_weapon = orbit_item_weapon_scene.instantiate()
+		add_child(orbit_item_weapon)
+	add_weapon(orbit_item_weapon)
+
+func remove_orbit_item_weapon():
+	if orbit_item_weapon:
+		drop_weapon(orbit_item_weapon)

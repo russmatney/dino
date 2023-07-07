@@ -123,6 +123,7 @@ func _unhandled_input(event):
 
 	# generic weapon
 	if has_weapon() and Trolley.is_attack(event):
+		Debug.prn("using weapon", weapons)
 		use_weapon()
 		# TODO should strafe?
 	elif has_weapon() and Trolley.is_attack_released(event):
@@ -131,6 +132,7 @@ func _unhandled_input(event):
 
 	if Trolley.is_event(event, "cycle_weapon"):
 		cycle_weapon()
+		Debug.prn("cycled weapons", weapons)
 
 	# generic action
 	if Trolley.is_action(event):
@@ -166,6 +168,7 @@ func _physics_process(_delta):
 		if move_vector.abs().length() > 0 and has_weapon():
 			# maybe this just works?
 			aim_vector = move_vector
+			Debug.pr("AIMING WEAPON??", aim_vector)
 			aim_weapon(aim_vector)
 
 ## facing ###########################################################
@@ -296,6 +299,8 @@ func add_boomerang():
 	if not boomerang:
 		boomerang = boomerang_scene.instantiate()
 		add_child(boomerang)
+
+	Debug.pr("adding boomerang to player", self)
 
 	add_weapon(boomerang)
 	has_boomerang = true

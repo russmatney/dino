@@ -3,32 +3,32 @@
 [ext_resource type="Script" path="res://src/spike/entities/BlobPickup.gd" id="1_41a3b"]
 [ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/spike/entities/SPIKE_blob_pickup.png" id="2_ev8mv"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uqfnp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrjyf"]
 atlas = ExtResource("2_ev8mv")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d5vha"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cndh1"]
 atlas = ExtResource("2_ev8mv")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qnmbp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq4l6"]
 atlas = ExtResource("2_ev8mv")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ueo2l"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_wexns"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uqfnp")
+"texture": SubResource("AtlasTexture_jrjyf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d5vha")
+"texture": SubResource("AtlasTexture_cndh1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qnmbp")
+"texture": SubResource("AtlasTexture_wq4l6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d5vha")
+"texture": SubResource("AtlasTexture_cndh1")
 }],
 "loop": true,
 "name": &"spin",
@@ -38,12 +38,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -4.90996)
+position = Vector2(0, -0.248158)
 script = ExtResource("1_41a3b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_ueo2l")
+sprite_frames = SubResource("SpriteFrames_wexns")
 animation = &"spin"
 autoplay = "spin"
 metadata/_aseprite_wizard_config_ = {

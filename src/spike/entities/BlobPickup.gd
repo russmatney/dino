@@ -4,6 +4,8 @@ extends Node2D
 @onready var pickup_box = $Area2D
 var pickup_type = "blob"
 
+var picked_up = false
+
 func _ready():
 	pickup_box.body_entered.connect(_on_body_entered)
 
@@ -25,22 +27,26 @@ func kill():
 	queue_free()
 
 func _on_body_entered(body: Node):
-	if body.is_in_group("player"):
-		if body.has_method("collect_pickup"):
-			if pickup_type:
-				body.collect_pickup(pickup_type)
-			kill()
+	if not picked_up:
+		if body.is_in_group("player"):
+			if body.has_method("collect_pickup"):
+				if pickup_type:
+					body.collect_pickup(pickup_type)
+					picked_up = true
+				kill()
 
 var following
 var follow_speed = 20
 
 func gather_pickup(actor):
 	following = actor
-	# var t = create_tween()
-	# t.tween_property(self, "global_position", actor.global_position, 1.0).set_trans(Tween.TRANS_CUBIC)
 
 func _physics_process(delta):
 	if following:
 		if float_tween and float_tween.is_running():
 			float_tween.kill()
-		global_position = global_position.lerp(following.global_position, 1 - pow(0.05, delta))
+		var dist = following.global_position.distance_to(global_position)
+		if dist > 10:
+			global_position = global_position.lerp(following.global_position, 1 - pow(0.05, delta))
+		else:
+			global_position = global_position.lerp(following.global_position, 0.5)

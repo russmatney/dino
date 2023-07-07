@@ -1,4 +1,3 @@
-@tool
 extends SSWeapon
 
 var aim_vector
