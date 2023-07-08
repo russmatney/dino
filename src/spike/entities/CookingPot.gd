@@ -12,6 +12,9 @@ var cooking_time = 0.0
 const cook_duration = 3.0
 const required_ingredient_count = 3
 
+func set_label(text):
+	label.text = "[center]%s[/center]" % text
+
 func _ready():
 	area.body_entered.connect(_on_body_entered)
 
@@ -35,12 +38,12 @@ func _process(delta):
 		if cooking_time > cook_duration:
 			var rem_ing_count = missing_ingredient_count()
 
-			label.text = ""
 			if rem_ing_count > 0:
-				label.text = "Need %s more" % rem_ing_count
+				set_label("%s more" % rem_ing_count)
 
-				# TODO start-to-burn logic
+				# TODO overcooking logic
 			else:
+				set_label("")
 				finish_cooking()
 
 func start_cooking(ingredient_data):
@@ -72,4 +75,4 @@ func finish_cooking():
 	cooking_time = 0
 	ingredients = []
 	bar.value = 0
-	label.text = "Need %s more" % missing_ingredient_count()
+	set_label("%s more" % missing_ingredient_count())

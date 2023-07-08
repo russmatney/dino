@@ -111,9 +111,9 @@ offset_top = -8.0
 offset_right = 88.0
 offset_bottom = 16.0
 theme_override_fonts/normal_font = ExtResource("3_m2042")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]Needs 3 More"
+text = "[center]3 more[/center]"
 scroll_active = false
 autowrap_mode = 0
 

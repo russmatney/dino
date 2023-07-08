@@ -24,12 +24,17 @@ func kill():
 	DJZ.play(DJZ.S.pickup)
 	queue_free()
 
-var following
-var follow_speed = 20
-
+#############################################################
 # supports boomerang-style pickup
+
 func gather_pickup(actor):
 	following = actor
+
+#############################################################
+# following impl
+
+var following
+var follow_speed = 20
 
 func _physics_process(delta):
 	if following:
@@ -39,6 +44,8 @@ func _physics_process(delta):
 		else:
 			global_position = global_position.lerp(following.global_position, 0.5)
 
+#############################################################
+# cooking pot integration
 
 func can_be_cooked():
 	# maybe some things need to be prepped first
@@ -46,3 +53,11 @@ func can_be_cooked():
 
 func ingredient_data():
 	return {pickup_type=pickup_type}
+
+
+#############################################################
+# delivery integration
+
+func is_delivery():
+	# TODO answer with pickup/ingredient data
+	return true

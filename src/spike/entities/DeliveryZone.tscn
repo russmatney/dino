@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0bnnom822e3w"]
+
+[ext_resource type="Script" path="res://src/spike/entities/DeliveryZone.gd" id="1_qvwfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42g1q"]
+size = Vector2(80, 80)
+
+[node name="DeliveryZone" type="Node2D"]
+script = ExtResource("1_qvwfl")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_42g1q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.580392)

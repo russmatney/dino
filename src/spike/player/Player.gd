@@ -83,7 +83,7 @@ func add_orbit_item_weapon():
 func remove_orbit_item_weapon():
 	if orbit_item_weapon:
 		drop_weapon(orbit_item_weapon)
-	orbit_item_weapon.visible = false
+		orbit_item_weapon.visible = false
 
 
 ## spiking ##################################################################

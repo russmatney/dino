@@ -69,10 +69,10 @@ func set_health(health):
 
 	# empty hearts indexed above health / 2
 	for x in range(hearts_floor, 1 + heart_icons.size()):
-		if heart_icons.size() > x:
+		if heart_icons.size() > x and x >= 0:
 			heart_icons[x].set_empty()
 
 	# half heart should overwrite an empty heart
 	if hearts > hearts_floor:
-		if heart_icons.size() > hearts_floor:
+		if heart_icons.size() > hearts_floor and hearts_floor >= 0:
 			heart_icons[hearts_floor].set_half()
