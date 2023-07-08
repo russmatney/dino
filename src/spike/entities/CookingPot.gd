@@ -22,6 +22,9 @@ func _ready():
 
 func _on_body_entered(body: Node):
 	if body.has_method("can_be_cooked") and body.has_method("get_ingredient_data"):
+		if missing_ingredient_count() == 0:
+			# ignore new ingredients if we're full
+			return
 		if body.can_be_cooked():
 			var ingredient_data = body.get_ingredient_data()
 			start_cooking(ingredient_data)
