@@ -168,7 +168,6 @@ func _physics_process(_delta):
 		if move_vector.abs().length() > 0 and has_weapon():
 			# maybe this just works?
 			aim_vector = move_vector
-			Debug.pr("AIMING WEAPON??", aim_vector)
 			aim_weapon(aim_vector)
 
 ## facing ###########################################################

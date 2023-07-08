@@ -57,7 +57,6 @@ func add_orbit_item(pickup_type):
 	var item = orbit_item_scene.instantiate()
 	item.show_behind_parent = true
 	item.pickup_type = pickup_type
-	# TODO show behind parent
 	# TODO set with pickup type
 	add_child.call_deferred(item)
 	orbit_items.append(item)
@@ -70,7 +69,7 @@ func remove_orbit_item(pickup):
 		orbit_items.erase(it)
 		it.queue_free()
 
-var orbit_item_weapon_scene = preload("res://src/spike/entities/OrbitItemWeapon.tscn")
+@onready var orbit_item_weapon_scene = preload("res://src/spike/entities/OrbitItemWeapon.tscn")
 var orbit_item_weapon
 
 func add_orbit_item_weapon():

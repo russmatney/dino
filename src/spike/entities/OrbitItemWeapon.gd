@@ -1,10 +1,11 @@
 extends SSWeapon
 
 var aim_vector
-var arrow_offset = Vector2.ONE * -12
+var toss_offset = Vector2.ONE * -12
 
 func aim(aim_v: Vector2):
 	aim_vector = aim_v
+	anim.rotation = aim_vector.angle()
 
 func activate():
 	Debug.pr("activating", self)
@@ -40,10 +41,9 @@ var tossing = false
 var cooldown = 0.2
 
 # TODO use/apply data for specifc pickup
-var item_scene = preload("res://addons/beehive/sidescroller/weapons/Arrow.tscn")
-
 # TODO pull stats from pickup
-var impulse = 200
+@onready var tossed_item_scene = preload("res://src/spike/entities/TossedItem.tscn")
+var impulse = 300
 var knockback = 1
 
 func toss(pickup):
@@ -53,17 +53,18 @@ func toss(pickup):
 	if aim_vector == null:
 		aim_vector = Vector2.RIGHT
 
-	var item = item_scene.instantiate()
-	item.position = global_position + arrow_offset
+	var item = tossed_item_scene.instantiate()
+	item.pickup_type = pickup
+	item.position = global_position + toss_offset
 	item.add_collision_exception_with(actor)
+
 
 	Navi.current_scene.add_child.call_deferred(item)
 	item.rotation = aim_vector.angle()
 	item.apply_impulse(aim_vector * impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)
 
-	# player push back when tossing
-	# actor.global_position.x += -1 * aim_vector.x * knockback
-
 	await get_tree().create_timer(cooldown).timeout
+	# be sure to remove the collision exception, or we can't pick it up again
+	item.remove_collision_exception_with(actor)
 	tossing = false

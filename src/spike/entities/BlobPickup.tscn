@@ -38,7 +38,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -0.248158)
+position = Vector2(0, -5.09246)
 script = ExtResource("1_41a3b")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
