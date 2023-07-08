@@ -95,6 +95,8 @@ func start_spike(pickup):
 # TODO animate the spike with a juicy trail/line graphic
 func do_spike(pickup):
 	Debug.pr("do spike pickup:", pickup)
+
+	# TODO auto-aim at delivery zone?
 	if aim_vector == null:
 		aim_vector = actor.move_vector
 

@@ -35,16 +35,13 @@ func _process(delta):
 	if cooking:
 		cooking_time += delta
 		bar.value = cooking_time
-		if cooking_time > cook_duration:
-			var rem_ing_count = missing_ingredient_count()
-
-			if rem_ing_count > 0:
-				set_label("%s more" % rem_ing_count)
-
-				# TODO overcooking logic
-			else:
-				set_label("")
-				finish_cooking()
+		var rem_ing_count = missing_ingredient_count()
+		if cooking_time > cook_duration and rem_ing_count == 0:
+			set_label("")
+			finish_cooking()
+		else:
+			set_label("%s more" % rem_ing_count)
+			# TODO overcooking logic
 
 func start_cooking(ingredient_data):
 	ingredients.append(ingredient_data)
