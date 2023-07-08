@@ -1,0 +1,66 @@
+extends Node2D
+
+@onready var anim = $AnimatedSprite2D
+@onready var area = $Area2D
+@onready var label = $RichTextLabel
+
+var ingredients = []
+var cooking = false
+var cooking_time = 0.0
+
+const cook_duration = 3.0
+const required_ingredient_count = 3
+
+func _ready():
+	area.body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: Node):
+	if body.has_method("can_be_cooked") and body.has_method("ingredient_data"):
+		if body.can_be_cooked():
+			var ingredient_data = body.ingredient_data()
+			ingredients.append(ingredient_data)
+
+			# TODO animate body jumping into pot
+			body.queue_free()
+			anim.play("cooking")
+
+			cooking = true
+
+			var min_cooking_time = cooking_time
+			if cooking_time > 1:
+				min_cooking_time = 1
+			cooking_time = clamp(cooking_time, min_cooking_time, cook_duration)
+			cooking_time -= 1
+			cooking_time = clamp(cooking_time, min_cooking_time, cook_duration)
+
+func missing_ingredient_count():
+	return required_ingredient_count - ingredients.size()
+
+func _process(delta):
+	if cooking:
+		cooking_time += delta
+		if cooking_time > cook_duration:
+			var rem_ing_count = missing_ingredient_count()
+
+			if rem_ing_count > 0:
+				label.text = "Need %s more" % rem_ing_count
+
+				# TODO start-to-burn logic
+			else:
+				finish_cooking()
+
+
+var drop_pickup_scene = preload("res://src/spike/entities/BlobPickup.tscn")
+
+func finish_cooking():
+	anim.play("empty")
+	Debug.pr("finished cooking", ingredients)
+
+	var drop = drop_pickup_scene.instantiate()
+	# TODO combine and attach ingredients
+	drop.global_position = global_position
+	Navi.current_scene.add_child.call_deferred(drop)
+
+	cooking = false
+	cooking_time = 0
+	ingredients = []

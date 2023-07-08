@@ -27,6 +27,7 @@ func kill():
 var following
 var follow_speed = 20
 
+# supports boomerang-style pickup
 func gather_pickup(actor):
 	following = actor
 
@@ -37,3 +38,11 @@ func _physics_process(delta):
 			global_position = global_position.lerp(following.global_position, 1 - pow(0.05, delta))
 		else:
 			global_position = global_position.lerp(following.global_position, 0.5)
+
+
+func can_be_cooked():
+	# maybe some things need to be prepped first
+	return true
+
+func ingredient_data():
+	return {pickup_type=pickup_type}

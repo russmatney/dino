@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://blr57x3unids8"]
+
+[ext_resource type="Texture2D" uid="uid://dxugvmk4fmygo" path="res://src/spike/entities/SPIKE_Cooking_pot.png" id="1_i1ti2"]
+[ext_resource type="Script" path="res://src/spike/entities/CookingPot.gd" id="1_jn4f3"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_m2042"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bohb"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awyrc"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0swwj"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uktn"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_234xo"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3nmp"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pkof4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bohb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awyrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0swwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uktn")
+}],
+"loop": true,
+"name": &"cooking",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_234xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3nmp")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjwu1"]
+size = Vector2(48, 40)
+
+[node name="CookingPot" type="Node2D"]
+script = ExtResource("1_jn4f3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_pkof4")
+animation = &"empty"
+autoplay = "empty"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/sprites/SPIKE_Cooking_pot.aseprite"
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_rjwu1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -88.0
+offset_top = -8.0
+offset_right = 88.0
+offset_bottom = 16.0
+theme_override_fonts/normal_font = ExtResource("3_m2042")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Needs 3 More"
+scroll_active = false
+autowrap_mode = 0

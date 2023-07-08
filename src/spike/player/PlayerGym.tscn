@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://crqg2j0oc5scf"]
+[gd_scene load_steps=6 format=3 uid="uid://crqg2j0oc5scf"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_jdnrv"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="2_ql3fu"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/reptile/tilemaps/SpikeTiles16.tscn" id="3_xlb2t"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="4_o7sig"]
+[ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="5_ox6xd"]
 
 [node name="PlayerGym" type="Node"]
 script = ExtResource("1_jdnrv")
@@ -22,3 +23,6 @@ position = Vector2(-232, -8)
 
 [node name="Blob2" parent="." instance=ExtResource("4_o7sig")]
 position = Vector2(432, 56)
+
+[node name="CookingPot" parent="." instance=ExtResource("5_ox6xd")]
+position = Vector2(208, 128)
