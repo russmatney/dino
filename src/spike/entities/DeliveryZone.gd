@@ -7,9 +7,9 @@ func _ready():
 
 func _on_body_entered(body: Node):
 	if body.has_method("is_delivery") and body.is_delivery():
-		Debug.pr("delivered", body)
+		Debug.pr("delivered", body, body.ingredient_data)
 
-		Hood.notif("Delivery!")
+		Hood.notif("Delivery!", body.ingredient_data.name)
 
 		# TODO animate delivery
 		body.queue_free()

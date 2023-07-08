@@ -1,11 +1,21 @@
 @tool
 extends Node2D
 
+@onready var anim = $AnimatedSprite2D
 @onready var pickup_box = $Area2D
-var pickup_type = "blob"
+@export var ingredient_type: Spike.Ingredient = Spike.Ingredient.GreyBlob
+
+var ingredient_data
 
 func _ready():
 	pickup_box.body_entered.connect(_on_body_entered)
+
+	ingredient_data = Spike.all_ingredients.get(ingredient_type)
+	if ingredient_data.anim_scene:
+		remove_child(anim)
+		anim.queue_free()
+		anim = ingredient_data.anim_scene.instantiate()
+		add_child(anim)
 
 	floaty_tween()
 
@@ -26,8 +36,9 @@ func kill():
 func _on_body_entered(body: Node):
 	if body.is_in_group("player"):
 		if body.has_method("collect_pickup"):
-			if pickup_type:
-				body.collect_pickup(pickup_type)
+			Debug.pr("collecting ingredient type", ingredient_type)
+			# pass ingredient data along
+			body.collect_pickup(ingredient_type)
 			kill()
 
 var following

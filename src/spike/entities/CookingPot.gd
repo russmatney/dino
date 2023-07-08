@@ -21,9 +21,9 @@ func _ready():
 	bar.max_value = cook_duration
 
 func _on_body_entered(body: Node):
-	if body.has_method("can_be_cooked") and body.has_method("ingredient_data"):
+	if body.has_method("can_be_cooked") and body.has_method("get_ingredient_data"):
 		if body.can_be_cooked():
-			var ingredient_data = body.ingredient_data()
+			var ingredient_data = body.get_ingredient_data()
 			start_cooking(ingredient_data)
 			# TODO animate body jumping into pot
 			body.queue_free()

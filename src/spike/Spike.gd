@@ -55,3 +55,47 @@ func start():
 ## Called to trigger a world update after the player is loaded or removed
 func update_world():
 	Metro.update_zone()
+
+## ingredients / meals ##########################################################
+
+class IngredientData:
+	var name: String
+	var anim_scene: PackedScene
+
+	var _can_cook: bool
+	var _can_be_delivered: bool
+
+	func can_cook():
+		return _can_cook
+
+	func can_be_delivered():
+		return _can_be_delivered
+
+	static func mk(opts={}):
+		var d = IngredientData.new()
+		d.name = opts.get("name")
+		d.anim_scene = opts.get("anim_scene")
+		d._can_cook = opts.get("can_cook", false)
+		d._can_be_delivered = opts.get("can_be_delivered", false)
+		return d
+
+enum Ingredient { GreyBlob, BlueBlob, RedBlob, GreenBlob }
+
+var all_ingredients = {
+	Ingredient.GreyBlob: IngredientData.mk({name="grey blob",
+		anim_scene=preload("res://src/spike/ingredients/GreyBlobAnim.tscn"),
+		can_cook=true,
+		}),
+	Ingredient.BlueBlob: IngredientData.mk({name="blue blob",
+		anim_scene=preload("res://src/spike/ingredients/BlueBlobAnim.tscn"),
+		can_cook=true,
+		}),
+	Ingredient.GreenBlob: IngredientData.mk({name="green blob",
+		anim_scene=preload("res://src/spike/ingredients/GreenBlobAnim.tscn"),
+		can_cook=true,
+		}),
+	Ingredient.RedBlob: IngredientData.mk({name="red blob",
+		anim_scene=preload("res://src/spike/ingredients/RedBlobAnim.tscn"),
+		can_be_delivered=true,
+		}),
+	}

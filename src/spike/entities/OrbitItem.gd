@@ -1,8 +1,18 @@
 extends Node2D
 
-var pickup_type
+var ingredient_type
+var ingredient_data
+
+@onready var anim = $AnimatedSprite2D
 
 func _ready():
+	ingredient_data = Spike.all_ingredients.get(ingredient_type)
+	if ingredient_data.anim_scene:
+		remove_child(anim)
+		anim.queue_free()
+		anim = ingredient_data.anim_scene.instantiate()
+		add_child(anim)
+
 	floaty_tween()
 
 var float_tween

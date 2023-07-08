@@ -1,60 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dby2hvvl027v3"]
+[gd_scene load_steps=4 format=3 uid="uid://dby2hvvl027v3"]
 
 [ext_resource type="Script" path="res://src/spike/entities/BlobPickup.gd" id="1_41a3b"]
-[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/spike/entities/SPIKE_blob_pickup.png" id="2_ev8mv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jrjyf"]
-atlas = ExtResource("2_ev8mv")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cndh1"]
-atlas = ExtResource("2_ev8mv")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wq4l6"]
-atlas = ExtResource("2_ev8mv")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wexns"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jrjyf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cndh1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wq4l6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cndh1")
-}],
-"loop": true,
-"name": &"spin",
-"speed": 10.0
-}]
+[ext_resource type="PackedScene" uid="uid://caxw371767hie" path="res://src/spike/ingredients/GreyBlobAnim.tscn" id="2_dhlr4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -5.09246)
+position = Vector2(0, -12.0837)
 script = ExtResource("1_41a3b")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_wexns")
-animation = &"spin"
-autoplay = "spin"
-metadata/_aseprite_wizard_config_ = {
-"layer": "",
-"o_ex_p": "",
-"o_folder": "",
-"o_name": "",
-"only_visible": false,
-"op_exp": false,
-"source": "res://assets/sprites/SPIKE_blob_pickup.aseprite"
-}
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_dhlr4")]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32

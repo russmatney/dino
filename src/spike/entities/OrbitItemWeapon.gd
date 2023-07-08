@@ -21,20 +21,20 @@ func deactivate():
 
 func use():
 	if not tossing and not spiking:
-		if actor.pickups.size() > 0:
-			var pickup_type = actor.pickups[0]
+		if actor.orbit_items.size() > 0:
+			var item = actor.orbit_items[0]
 			if actor.in_spike_zone():
 				actor.is_spiking = true
-				start_spike(pickup_type)
+				start_spike(item.ingredient_type)
 			else:
-				toss(pickup_type)
-			actor.remove_orbit_item(pickup_type)
+				toss(item.ingredient_type)
+			actor.remove_orbit_item(item)
 
 # TODO rename to use_pressed/use_released
 func stop_using():
 	Debug.pr("stop using orbit item")
-	if spiking and spiking_pickup:
-		do_spike(spiking_pickup)
+	if spiking and spiking_ingredient_type:
+		do_spike(spiking_ingredient_type)
 		actor.is_spiking = false
 
 ######################################################
@@ -59,15 +59,15 @@ var cooldown = 0.2
 var toss_impulse = 300
 var knockback = 1
 
-func toss(pickup):
-	Debug.pr("tossing pickup:", pickup)
+func toss(ingredient_type):
+	Debug.pr("tossing ingredient_type:", ingredient_type)
 	tossing = true
 
 	if aim_vector == null:
 		aim_vector = actor.move_vector
 
 	var item = tossed_item_scene.instantiate()
-	item.pickup_type = pickup
+	item.ingredient_type = ingredient_type
 	item.position = global_position + toss_offset
 	item.add_collision_exception_with(actor)
 
@@ -83,25 +83,25 @@ func toss(pickup):
 		item.remove_collision_exception_with(actor)
 	tossing = false
 
-var spiking_pickup
+var spiking_ingredient_type
 var spike_impulse = 1000
 
-func start_spike(pickup):
-	spiking_pickup = pickup
+func start_spike(ingredient_type):
+	spiking_ingredient_type = ingredient_type
 	Cam.start_slowmo("spike_slowmo", 0.1)
-	Debug.pr("start spike pickup:", pickup)
+	Debug.pr("start spike ingredient_type:", ingredient_type)
 	spiking = true
 
 # TODO animate the spike with a juicy trail/line graphic
-func do_spike(pickup):
-	Debug.pr("do spike pickup:", pickup)
+func do_spike(ingredient_type):
+	Debug.pr("do spike ingredient_type:", ingredient_type)
 
 	# TODO auto-aim at delivery zone?
 	if aim_vector == null:
 		aim_vector = actor.move_vector
 
 	var item = tossed_item_scene.instantiate()
-	item.pickup_type = pickup
+	item.ingredient_type = ingredient_type
 	item.position = global_position + toss_offset
 	item.add_collision_exception_with(actor)
 
@@ -117,4 +117,4 @@ func do_spike(pickup):
 	if is_instance_valid(item):
 		item.remove_collision_exception_with(actor)
 	spiking = false
-	spiking_pickup = null
+	spiking_ingredient_type = null

@@ -18,12 +18,15 @@ layer_0/tile_data = PackedInt32Array(524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 5
 
 [node name="Blob" parent="." instance=ExtResource("4_o7sig")]
 position = Vector2(-128, 72)
+drop_ingredient_type = 1
 
 [node name="Blob3" parent="." instance=ExtResource("4_o7sig")]
 position = Vector2(-232, -8)
+drop_ingredient_type = 2
 
 [node name="Blob2" parent="." instance=ExtResource("4_o7sig")]
 position = Vector2(432, 56)
+drop_ingredient_type = 3
 
 [node name="CookingPot" parent="." instance=ExtResource("5_ox6xd")]
 position = Vector2(208, 128)
