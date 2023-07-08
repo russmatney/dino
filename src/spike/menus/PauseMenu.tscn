@@ -106,8 +106,8 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]Move: WASD
 Jump: n
-Action: e
-Cycle Actions: Tab/ShiftTab[/center]"
+Boomerang/Throw: m
+Cycle action: ` (tick)[/center]"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("4_6gt0p")]
