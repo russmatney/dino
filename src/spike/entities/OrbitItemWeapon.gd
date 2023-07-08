@@ -5,6 +5,7 @@ var toss_offset = Vector2.ONE * -12
 
 func aim(aim_v: Vector2):
 	aim_vector = aim_v
+	# TODO point in aim direction (take flip_h into account?)
 	anim.rotation = aim_vector.angle()
 
 func activate():

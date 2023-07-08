@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://ylme3uv1h2xm"]
 
 [ext_resource type="Script" path="res://src/spike/entities/OrbitItemWeapon.gd" id="1_622rn"]
-[ext_resource type="Texture2D" uid="uid://di5hjeb32c01a" path="res://src/spike/player/SPIKE_aim_line.png" id="2_1x58p"]
+[ext_resource type="Texture2D" uid="uid://bn0qtgn2f348d" path="res://src/spike/entities/SPIKE_aim_line.png" id="2_qcjhx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gw7bh"]
-atlas = ExtResource("2_1x58p")
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mh7h"]
+atlas = ExtResource("2_qcjhx")
 region = Rect2(0, 0, 32, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_8ne2h"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_c7c48"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gw7bh")
+"texture": SubResource("AtlasTexture_1mh7h")
 }],
 "loop": true,
 "name": &"default",
@@ -24,7 +24,7 @@ script = ExtResource("1_622rn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(16, 0)
-sprite_frames = SubResource("SpriteFrames_8ne2h")
+sprite_frames = SubResource("SpriteFrames_c7c48")
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
