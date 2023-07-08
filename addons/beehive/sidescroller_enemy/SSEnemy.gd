@@ -232,6 +232,8 @@ func orient_to_wall(side):
 ## health/hit #######################################################
 
 func take_hit(opts={}):
+	if is_dead:
+		return
 	var damage = opts.get("damage", 1)
 	var body = opts.get("body")
 	var direction = opts.get("direction")
@@ -244,6 +246,7 @@ func take_hit(opts={}):
 		direction = Vector2.RIGHT
 
 	health -= damage
+	health = clamp(health, 0, health)
 	Hotel.check_in(self)
 	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
 
