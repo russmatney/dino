@@ -29,11 +29,16 @@ func use():
 			else:
 				toss(item.ingredient_type)
 			actor.remove_orbit_item(item)
+	elif spiking:
+		if spiking_ingredient_type != null:
+			stop_using()
+		else:
+			do_spike(null)
 
 # TODO rename to use_pressed/use_released
 func stop_using():
 	Debug.pr("stop using orbit item")
-	if spiking and spiking_ingredient_type:
+	if spiking and spiking_ingredient_type != null:
 		do_spike(spiking_ingredient_type)
 		actor.is_spiking = false
 
@@ -100,21 +105,24 @@ func do_spike(ingredient_type):
 	if aim_vector == null:
 		aim_vector = actor.move_vector
 
-	var item = tossed_item_scene.instantiate()
-	item.ingredient_type = ingredient_type
-	item.position = global_position + toss_offset
-	item.add_collision_exception_with(actor)
+	var item
+	if ingredient_type != null:
+		item = tossed_item_scene.instantiate()
+		item.ingredient_type = ingredient_type
+		item.position = global_position + toss_offset
+		item.add_collision_exception_with(actor)
 
-	Navi.current_scene.add_child.call_deferred(item)
-	# item.rotation = aim_vector.angle()
-	item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
+		Navi.current_scene.add_child.call_deferred(item)
+		# item.rotation = aim_vector.angle()
+		item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
+		DJZ.play(DJZ.S.fire)
 
 	Cam.stop_slowmo("spike_slowmo")
-	DJZ.play(DJZ.S.fire)
 
 	await get_tree().create_timer(cooldown).timeout
 	# be sure to remove the collision exception (if it exists), or we can't pick it up again
-	if is_instance_valid(item):
-		item.remove_collision_exception_with(actor)
+	if item != null:
+		if is_instance_valid(item):
+			item.remove_collision_exception_with(actor)
 	spiking = false
 	spiking_ingredient_type = null

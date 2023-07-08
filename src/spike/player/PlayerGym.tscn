@@ -22,7 +22,6 @@ drop_ingredient_type = 1
 
 [node name="Blob3" parent="." instance=ExtResource("4_o7sig")]
 position = Vector2(-232, -8)
-drop_ingredient_type = 2
 
 [node name="Blob2" parent="." instance=ExtResource("4_o7sig")]
 position = Vector2(432, 56)

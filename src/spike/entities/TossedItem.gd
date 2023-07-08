@@ -21,8 +21,7 @@ func _on_body_entered(body: Node):
 
 	if body.is_in_group("player"):
 		if body.has_method("collect_pickup"):
-			if ingredient_type:
-				body.collect_pickup(ingredient_type)
+			body.collect_pickup(ingredient_type)
 			kill()
 	elif body.has_method("take_hit") and not body.is_dead:
 		body.take_hit({body=self, damage=1})
