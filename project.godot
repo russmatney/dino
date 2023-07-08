@@ -25,6 +25,7 @@ run/main_scene.gunner="res://src/gunner/player/PlayerGym.tscn"
 run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
 run/main_scene.superelevatorlevel="res://src/superElevatorLevel/menus/MainMenu.tscn"
 run/main_scene.shirt="res://src/shirt/menus/MainMenu.tscn"
+run/main_scene.spike="res://src/spike/menus/MainMenu.tscn"
 
 [aseprite]
 
