@@ -22,7 +22,8 @@ func get_spawn_coords():
 ## zones ##########################################################
 
 const zone_scenes = [
-	"res://src/spike/zones/ZoneGym.tscn",
+	# "res://src/spike/zones/ZoneGym.tscn",
+	"res://src/spike/zones/FirstKitchen.tscn",
 	]
 
 ## register ##########################################################
