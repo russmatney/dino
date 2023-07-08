@@ -56,7 +56,7 @@ func throw():
 	modulate.a = 1
 
 	if aim_vector == null:
-		aim_vector = Vector2.RIGHT
+		aim_vector = actor.move_vector
 
 	# reparent to scene?
 	# reparent.call_deferred(Navi.current_scene)

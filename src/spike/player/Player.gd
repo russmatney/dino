@@ -33,9 +33,11 @@ func _ready():
 
 ## process ##################################################################
 
+var is_spiking = false
+
 func _process(_delta):
 	# super._process(delta)
-	if orbit_items.size() == 0:
+	if orbit_items.size() == 0 and is_spiking == false:
 		remove_orbit_item_weapon()
 	else:
 		if not orbit_item_weapon or not orbit_item_weapon in weapons:
@@ -81,3 +83,10 @@ func add_orbit_item_weapon():
 func remove_orbit_item_weapon():
 	if orbit_item_weapon:
 		drop_weapon(orbit_item_weapon)
+	orbit_item_weapon.visible = false
+
+
+## spiking ##################################################################
+
+func in_spike_zone():
+	return true
