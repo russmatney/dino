@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://crqg2j0oc5scf"]
+[gd_scene load_steps=8 format=3 uid="uid://crqg2j0oc5scf"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_jdnrv"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="2_ql3fu"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="4_o7sig"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="5_ox6xd"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="6_fpyyg"]
+[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="7_332f5"]
 
 [node name="PlayerGym" type="Node"]
 script = ExtResource("1_jdnrv")
@@ -28,7 +29,10 @@ position = Vector2(432, 56)
 drop_ingredient_type = 3
 
 [node name="CookingPot" parent="." instance=ExtResource("5_ox6xd")]
-position = Vector2(208, 128)
+position = Vector2(136, 56)
 
 [node name="DeliveryZone" parent="." instance=ExtResource("6_fpyyg")]
 position = Vector2(40, -80)
+
+[node name="OneWayPlatform" parent="." instance=ExtResource("7_332f5")]
+position = Vector2(136, 64)
