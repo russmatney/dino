@@ -38,7 +38,7 @@ position = Vector2(-224, 96)
 position = Vector2(8, 208)
 
 [node name="Blob" parent="FlatLandOne" instance=ExtResource("6_tsh74")]
-position = Vector2(-280, 64)
+position = Vector2(-144, 56)
 
 [node name="Blob2" parent="FlatLandOne" instance=ExtResource("6_tsh74")]
 position = Vector2(208, 48)
