@@ -24,6 +24,7 @@ func get_spawn_coords():
 const zone_scenes = [
 	# "res://src/spike/zones/ZoneGym.tscn",
 	"res://src/spike/zones/PantryOne.tscn",
+	"res://src/spike/zones/PantryTwo.tscn",
 	]
 
 ## register ##########################################################
@@ -56,6 +57,15 @@ func start():
 ## Called to trigger a world update after the player is loaded or removed
 func update_world():
 	Metro.update_zone()
+
+func handle_level_complete():
+	var curr_level_idx = zone_scenes.find(Navi.current_scene.scene_file_path)
+	var next_level_idx = curr_level_idx + 1
+	if next_level_idx < zone_scenes.size():
+		var next_level = zone_scenes[next_level_idx]
+		Metro.load_zone(next_level)
+	else:
+		Navi.show_win_menu()
 
 ## ingredients / meals ##########################################################
 

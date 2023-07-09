@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dlsfr0sy25s0c"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_qcmqu"]
+[ext_resource type="Script" path="res://src/spike/zones/SpikeZone.gd" id="1_bgp3v"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_dpln6"]
 [ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="3_xefju"]
 [ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="4_hsa2u"]
@@ -14,7 +14,7 @@
 size = Vector2(352, 64)
 
 [node name="PantryTwo" type="Node2D" groups=["metro_zones"]]
-script = ExtResource("1_qcmqu")
+script = ExtResource("1_bgp3v")
 
 [node name="InfiniteFaller" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("2_dpln6")

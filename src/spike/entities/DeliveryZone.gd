@@ -50,6 +50,6 @@ func update_quest():
 	count_remaining_update.emit(expected_delivery_count - delivery_count)
 	count_total_update.emit(expected_delivery_count)
 
-	if delivery_count > expected_delivery_count:
+	if delivery_count >= expected_delivery_count:
 		complete = true
 		quest_complete.emit()

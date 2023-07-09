@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cnbqgymivr74j"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_80chx"]
+[ext_resource type="Script" path="res://src/spike/zones/SpikeZone.gd" id="1_ohnu3"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_m1lks"]
 [ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="3_wessm"]
 [ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="4_1nvdq"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="8_17l7t"]
 
 [node name="PantryOne" type="Node2D" groups=["metro_zones"]]
-script = ExtResource("1_80chx")
+script = ExtResource("1_ohnu3")
 
 [node name="PantryOne" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("2_m1lks")
