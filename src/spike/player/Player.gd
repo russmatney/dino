@@ -15,7 +15,24 @@ func _ready():
 		Cam.ensure_camera({player=self, zoom_rect_min=zoom_rect_min, zoom_margin_min=zoom_margin_min})
 		Hood.ensure_hud(hud)
 
+		died.connect(_on_player_death)
+
 	super._ready()
+
+func _on_player_death():
+	stamp({ttl=0}) # perma stamp
+
+	var t = create_tween()
+	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
+	if light:
+		t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
+
+	# possibly we could share/re-use this, but meh, it'll probably need specific text
+	Quest.jumbo_notif({header="You died", body="Sorry about it!",
+		action="close", action_label_text="Respawn",
+		on_close=Game.respawn_player.bind({
+			setup_fn=func(p):
+			Hotel.check_in(p, {health=p.initial_health, is_dead=false})})})
 
 ## hotel ##################################################################
 
