@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://8dqe0wx5n3x8"]
+[gd_scene load_steps=8 format=3 uid="uid://8dqe0wx5n3x8"]
 
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="1_meg84"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="2_fjdiu"]
@@ -13,6 +13,9 @@ content_margin_left = 32.0
 content_margin_top = 32.0
 content_margin_right = 32.0
 content_margin_bottom = 32.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oshdy"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="PauseMenu" type="CanvasLayer"]
@@ -45,6 +48,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hkfys")
 
 [node name="QuestStatus" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" instance=ExtResource("1_meg84")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oshdy")
 header_text = "Feeeeeed the VOID"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
