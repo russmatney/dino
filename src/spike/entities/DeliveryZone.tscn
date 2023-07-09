@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0bnnom822e3w"]
+[gd_scene load_steps=4 format=3 uid="uid://b0bnnom822e3w"]
 
 [ext_resource type="Script" path="res://src/spike/entities/DeliveryZone.gd" id="1_qvwfl"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="2_u2j28"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42g1q"]
 size = Vector2(80, 80)
@@ -23,3 +24,5 @@ offset_top = -40.0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.0392157, 0.0392157, 0.0392157, 0.580392)
+
+[node name="CamPOF" parent="." instance=ExtResource("2_u2j28")]
