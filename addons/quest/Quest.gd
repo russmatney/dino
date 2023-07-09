@@ -13,7 +13,7 @@ func _ready():
 var active_quests = {}
 
 func q_label(node, opts):
-	return opts.get("label", node.name)
+	return str("%s-%s" % [opts.get("label"), node.name])
 
 var current_level_label = "Quest Status"
 
@@ -35,7 +35,7 @@ func register_quest(node, opts={}):
 		node.count_total_update.connect(_on_count_total_update.bind(node, opts))
 
 	var quest = ActiveQuest.new()
-	quest.label = label
+	quest.label = opts.get("label", node.name)
 	quest.node = node
 	quest.optional = opts.get("optional", false)
 	quest.check_not_failed = opts.get("check_not_failed", false)
