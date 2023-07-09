@@ -71,6 +71,7 @@ func handle_level_complete():
 
 class IngredientData:
 	var name: String
+	var display_type: String
 	var anim_scene: PackedScene
 
 	var _can_cook: bool
@@ -85,29 +86,37 @@ class IngredientData:
 	static func mk(opts={}):
 		var d = IngredientData.new()
 		d.name = opts.get("name")
+		d.display_type = opts.get("display_type")
 		d.anim_scene = opts.get("anim_scene")
 		d._can_cook = opts.get("can_cook", false)
-		# TODO perhaps only determined by delivery zones
-		d._can_be_delivered = opts.get("can_be_delivered", false)
+		# all can be delivered for now! delivery zone determines acceptance
+		d._can_be_delivered = true
 		return d
 
 enum Ingredient { GreyBlob, BlueBlob, RedBlob, GreenBlob }
 
 var all_ingredients = {
-	Ingredient.GreyBlob: IngredientData.mk({name="grey blob",
+	Ingredient.GreyBlob: IngredientData.mk({
+		name="grey blob",
+		display_type="GREY",
 		anim_scene=preload("res://src/spike/ingredients/GreyBlobAnim.tscn"),
 		can_cook=true,
 		}),
-	Ingredient.BlueBlob: IngredientData.mk({name="blue blob",
+	Ingredient.BlueBlob: IngredientData.mk({
+		name="blue blob",
+		display_type="BLUE",
 		anim_scene=preload("res://src/spike/ingredients/BlueBlobAnim.tscn"),
 		can_cook=true,
 		}),
-	Ingredient.GreenBlob: IngredientData.mk({name="green blob",
+	Ingredient.GreenBlob: IngredientData.mk({
+		name="green blob",
+		display_type="GREEN",
 		anim_scene=preload("res://src/spike/ingredients/GreenBlobAnim.tscn"),
 		can_cook=true,
 		}),
-	Ingredient.RedBlob: IngredientData.mk({name="red blob",
+	Ingredient.RedBlob: IngredientData.mk({
+		name="red blob",
+		display_type="RED",
 		anim_scene=preload("res://src/spike/ingredients/RedBlobAnim.tscn"),
-		can_be_delivered=true,
 		}),
 	}

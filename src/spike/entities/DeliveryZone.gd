@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var area = $Area2D
+@onready var label = $Label
 
 @export var expected_delivery_type: Spike.Ingredient = Spike.Ingredient.RedBlob
 @export var expected_delivery_count = 1
@@ -16,13 +17,13 @@ func _ready():
 	Quest.register_quest(self, {label=str("FEED THE VOID: %s" % ing_data.name)})
 	update_quest()
 
+	label.text = "[center]VOID WANT %s ORB[/center]" % ing_data.display_type
+
 func _on_body_entered(body: Node):
 	if body.has_method("is_delivery") and body.is_delivery():
 		if not complete and body.ingredient_type == expected_delivery_type:
 			delivery_count += 1
 			Debug.pr("delivered", body, body.ingredient_data)
-
-			Hood.notif("Delivery!", body.ingredient_data.name)
 
 			# TODO animate delivery/fade
 			body.queue_free()
@@ -30,7 +31,7 @@ func _on_body_entered(body: Node):
 		else:
 			# TODO THROW IT BACK
 			if complete:
-				Hood.notif("I'M FULL!")
+				Hood.notif("VOID FULL!")
 			else:
 				Hood.notif("THIS IS NOT MY ORDER!")
 
@@ -53,3 +54,5 @@ func update_quest():
 	if delivery_count >= expected_delivery_count:
 		complete = true
 		quest_complete.emit()
+		Hood.notif("VOID SATISFIED!")
+		label.text = "[center]VOID SATISFIED[/center]"
