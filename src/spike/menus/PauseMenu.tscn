@@ -60,7 +60,7 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_fjdiu")
 theme_override_font_sizes/normal_font_size = 96
 bbcode_enabled = true
-text = "[center]Spike[/center]"
+text = "[center]Void Spike[/center]"
 fit_content = true
 scroll_active = false
 
@@ -105,10 +105,10 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("2_fjdiu")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]Move: WASD
-Jump: n
-Boomerang/Throw: m
-Cycle action: ` (tick)[/center]"
+text = "[center]Move: WASD/d-pad
+Jump: n/bottom action
+Boomerang/Throw: m/right action
+Toggle Weapon: h/left action[/center]"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("4_6gt0p")]

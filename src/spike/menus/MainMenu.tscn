@@ -71,12 +71,12 @@ size_flags_vertical = 3
 [node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_jc264")
-theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]Move: WASD
-Jump: n
-Boomerang/Throw: m
-Cycle action: ` (tick)[/center]"
+text = "[center]Move: WASD/d-pad
+Jump: n/bottom action
+Boomerang/Throw: m/right action
+Toggle Weapon: h/left action[/center]"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("3_h7o4w")]

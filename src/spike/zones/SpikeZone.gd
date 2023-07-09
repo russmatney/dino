@@ -8,6 +8,7 @@ class_name SpikeZone
 
 func _ready():
 	Quest.all_quests_complete.connect(on_quests_complete)
+	super._ready()
 
 
 ######################################################
