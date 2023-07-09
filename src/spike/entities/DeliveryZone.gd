@@ -19,6 +19,8 @@ func _ready():
 
 	label.text = "[center]VOID WANT %s ORB[/center]" % ing_data.display_type
 
+var spike_impulse = 1000
+
 func _on_body_entered(body: Node):
 	if body.has_method("is_delivery") and body.is_delivery():
 		if not complete and body.ingredient_type == expected_delivery_type:
@@ -29,11 +31,12 @@ func _on_body_entered(body: Node):
 			body.queue_free()
 			update_quest()
 		else:
-			# TODO THROW IT BACK
 			if complete:
 				Hood.notif("VOID FULL!")
 			else:
 				Hood.notif("THIS IS NOT MY ORDER!")
+			# double reversed linear_velocity
+			body.apply_impulse(body.linear_velocity.normalized() * Vector2(-1, 1.1) * spike_impulse * 2, Vector2.ZERO)
 
 # quest impl
 
