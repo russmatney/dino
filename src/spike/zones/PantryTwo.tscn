@@ -16,6 +16,16 @@ size = Vector2(352, 64)
 [node name="PantryTwo" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_bgp3v")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -544.0
+offset_top = -432.0
+offset_right = 544.0
+offset_bottom = 456.0
+color = Color(0.384314, 0.509804, 0.65098, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.332287, 0.467804, 0.624987, 1)
+
 [node name="InfiniteFaller" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("2_dpln6")
 

@@ -1,15 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dby2hvvl027v3"]
 
 [ext_resource type="Script" path="res://src/spike/entities/BlobPickup.gd" id="1_41a3b"]
-[ext_resource type="PackedScene" uid="uid://caxw371767hie" path="res://src/spike/ingredients/GreyBlobAnim.tscn" id="2_dhlr4"]
+[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://assets/hatbot/light64px3.png" id="2_wqopt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -12.0837)
+position = Vector2(0, -14.4689)
 script = ExtResource("1_41a3b")
-
-[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_dhlr4")]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -17,3 +15,8 @@ collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_ecqju")
+
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_wqopt")
