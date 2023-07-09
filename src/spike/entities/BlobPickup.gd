@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@onready var anim = $AnimatedSprite2D
+var anim
 @onready var pickup_box = $Area2D
 @export var ingredient_type: Spike.Ingredient = Spike.Ingredient.GreyBlob
 
@@ -12,7 +12,6 @@ func _ready():
 
 	ingredient_data = Spike.all_ingredients.get(ingredient_type)
 	if ingredient_data.anim_scene:
-		remove_child(anim)
 		anim = ingredient_data.anim_scene.instantiate()
 		add_child(anim)
 
