@@ -45,6 +45,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hkfys")
 
 [node name="QuestStatus" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" instance=ExtResource("1_meg84")]
 layout_mode = 2
+header_text = "Feeeeeed the VOID"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2

@@ -5,7 +5,6 @@ var toss_offset = Vector2.ONE * -12
 
 func aim(aim_v: Vector2):
 	aim_vector = aim_v
-	# TODO point in aim direction (take flip_h into account?)
 	if actor.facing_vector.x < 0:
 		rotation = aim_vector.angle() + PI
 	else:
@@ -58,8 +57,6 @@ var tossing = false
 var spiking = false
 var cooldown = 0.2
 
-# TODO use/apply data for specifc pickup
-# TODO pull stats from pickup
 @onready var tossed_item_scene = preload("res://src/spike/entities/TossedItem.tscn")
 var toss_impulse = 300
 var knockback = 1

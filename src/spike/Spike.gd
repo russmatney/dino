@@ -87,6 +87,7 @@ class IngredientData:
 		d.name = opts.get("name")
 		d.anim_scene = opts.get("anim_scene")
 		d._can_cook = opts.get("can_cook", false)
+		# TODO perhaps only determined by delivery zones
 		d._can_be_delivered = opts.get("can_be_delivered", false)
 		return d
 
