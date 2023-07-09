@@ -24,12 +24,18 @@ You can find more about Dino on my mind-garden/blog: [[https://russmatney.com/no
 * Games
 These (and future games) are discussed on my blog (linked above).
 
+** Spike:
+See ~src/spike/*~ and ~addons/beehive/sidescroller/*~ for the code.
+
+Play the web version here: [[https://russmatney.itch.io/spike][russmatney.itch.io/spike]]
+
+A submission for the GMTK Game Jam 2023
 ** Shirt:
 See ~src/shirt/*~ and ~addons/beehive/topdown/*~ for the code.
 
 Play the web version here: [[https://russmatney.itch.io/shirt][russmatney.itch.io/shirt]]
 
-A work-in-progress for the [[https://itch.io/jam/godot-wild-jam-58][Godot Wild Jam #58]]
+A submission for the [[https://itch.io/jam/godot-wild-jam-58][Godot Wild Jam #58]]
 ** Mountain:
 A work-in-progress.
 ** Super Elevator Level:
