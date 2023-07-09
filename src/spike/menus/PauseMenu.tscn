@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://8dqe0wx5n3x8"]
 
-[ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/metro/MetroMap.tscn" id="1_6vo4v"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="1_meg84"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="2_fjdiu"]
 [ext_resource type="Script" path="res://src/spike/menus/SpikePauseButtonList.gd" id="3_xol0r"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="4_6gt0p"]
@@ -43,7 +43,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_hkfys")
 
-[node name="MetroMap" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" instance=ExtResource("1_6vo4v")]
+[node name="QuestStatus" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer" instance=ExtResource("1_meg84")]
 layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
