@@ -19,6 +19,7 @@ func _ready():
 	area.body_entered.connect(_on_body_entered)
 
 	bar.max_value = cook_duration
+	set_label("ready to cook")
 
 func _on_body_entered(body: Node):
 	if body.has_method("can_be_cooked") and body.has_method("get_ingredient_data"):
@@ -43,8 +44,10 @@ func _process(delta):
 			set_label("")
 			finish_cooking()
 		else:
-			set_label("%s more" % rem_ing_count)
-			# TODO overcooking logic
+			if rem_ing_count == 0:
+				set_label("creating orb")
+			else:
+				set_label("%s more" % rem_ing_count)
 
 func start_cooking(ingredient_data):
 	ingredients.append(ingredient_data)
@@ -78,4 +81,4 @@ func finish_cooking():
 	cooking_time = 0
 	ingredients = []
 	bar.value = 0
-	set_label("%s more" % missing_ingredient_count())
+	set_label("ready to cook")
