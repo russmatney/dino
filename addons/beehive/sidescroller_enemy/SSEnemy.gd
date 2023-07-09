@@ -71,8 +71,6 @@ func _enter_tree():
 ## ready ###########################################################
 
 func _ready():
-	Hotel.register(self)
-
 	if not Engine.is_editor_hint():
 		Util.set_optional_nodes(self, {
 			notif_label="NotifLabel",
@@ -93,6 +91,8 @@ func _ready():
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()
+
+	Hotel.register(self)
 
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
@@ -173,7 +173,7 @@ func check_out(data):
 		orient_to_wall(crawl_on_side)
 
 	if health <= 0:
-		if machine:
+		if machine and machine.is_started:
 			machine.transit("Dead", {ignore_side_effects=true})
 
 func hotel_data():

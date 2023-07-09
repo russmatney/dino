@@ -6,6 +6,7 @@ var state: State
 
 var should_log = false
 var transitioning = false
+var is_started = false
 
 ### ready #####################################################################
 
@@ -33,6 +34,7 @@ func start(opts={}):
 		state.enter(opts)
 		transitioned.emit(state.name)
 	transitioning = false
+	is_started = true
 
 
 ### input #####################################################################
