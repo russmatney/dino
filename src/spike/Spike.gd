@@ -27,7 +27,9 @@ const zone_scenes = [
 	"res://src/spike/zones/PantryOne.tscn",
 	"res://src/spike/zones/PantryTwo.tscn",
 	"res://src/spike/zones/FlatLandOne.tscn",
-	"res://src/spike/zones/FlatLandTwo.tscn",
+	# "res://src/spike/zones/FlatLandTwo.tscn",
+	"res://src/spike/zones/FinalZoneOne.tscn",
+	"res://src/spike/zones/FinalZoneTwo.tscn",
 	]
 
 ## register ##########################################################

@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dspqmcg2iysem"]
+[gd_scene load_steps=3 format=3 uid="uid://dspqmcg2iysem"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_metpu"]
 size = Vector2(128, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4sbaq"]
+closed = false
+polygon = PackedVector2Array(-64, -8, 64, -8, 64, 8, -64, 8)
 
 [node name="OneWayPlatform" type="StaticBody2D"]
 
@@ -15,3 +19,6 @@ offset_top = -8.0
 offset_right = 64.0
 offset_bottom = 8.0
 color = Color(0.107274, 0.449081, 0.339994, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_4sbaq")

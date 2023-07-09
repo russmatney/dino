@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://pt4xm7llb4ao"]
+[gd_scene load_steps=10 format=3 uid="uid://cac8ltdlk40xr"]
 
 [ext_resource type="Script" path="res://src/spike/zones/SpikeZone.gd" id="1_3u8mj"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_vx6qq"]
@@ -47,7 +47,8 @@ position = Vector2(208, 48)
 position = Vector2(120, 64)
 
 [node name="PlayerSpawnPoint" parent="FlatLandOne" instance=ExtResource("7_s0cqd")]
-position = Vector2(-120, -8)
+position = Vector2(-272, -32)
+dev_only = false
 
 [node name="PortalEdges" parent="FlatLandOne" instance=ExtResource("8_xdvd2")]
 

@@ -54,6 +54,7 @@ position = Vector2(120, 64)
 
 [node name="PlayerSpawnPoint" parent="FlatLandTwo" instance=ExtResource("7_4kbn1")]
 position = Vector2(-120, -8)
+dev_only = false
 
 [node name="PortalEdges" parent="FlatLandTwo" instance=ExtResource("8_ey2ot")]
 

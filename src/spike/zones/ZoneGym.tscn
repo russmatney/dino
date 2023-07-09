@@ -20,21 +20,19 @@ layer_0/tile_data = PackedInt32Array(458766, 196608, 15, 393230, 196608, 14, 327
 
 [node name="PlayerSpawnPoint" parent="RoomGymOne" instance=ExtResource("3_0c0n8")]
 position = Vector2(22, 8)
+dev_only = false
 
 [node name="SpikeTiles16" parent="RoomGymOne" instance=ExtResource("5_43vjs")]
 layer_0/tile_data = PackedInt32Array(327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0)
 
 [node name="Blob" parent="RoomGymOne" instance=ExtResource("6_7wtaw")]
 position = Vector2(-440, 56)
-drop_ingredient_type = null
 
 [node name="Blob2" parent="RoomGymOne" instance=ExtResource("6_7wtaw")]
 position = Vector2(-301, -22)
-drop_ingredient_type = null
 
 [node name="Blob3" parent="RoomGymOne" instance=ExtResource("6_7wtaw")]
 position = Vector2(-360, 40)
-drop_ingredient_type = null
 
 [node name="CookingPot" parent="RoomGymOne" instance=ExtResource("7_wvoro")]
 position = Vector2(-152, 64)
@@ -54,4 +52,3 @@ layer_0/tile_data = PackedInt32Array(327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 3
 
 [node name="Blob" parent="RoomGymTwo" instance=ExtResource("6_7wtaw")]
 position = Vector2(-72, -56)
-drop_ingredient_type = null
