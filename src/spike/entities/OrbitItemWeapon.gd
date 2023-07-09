@@ -12,8 +12,9 @@ func aim(aim_v: Vector2):
 
 func activate():
 	Debug.pr("activating", self)
-	actor.notif(self.name)
+	actor.notif(str("activated ", self.display_name))
 	DJZ.play(DJZ.S.laser)
+	aim(actor.facing_vector)
 
 func deactivate():
 	pass
@@ -43,6 +44,10 @@ func stop_using():
 
 ######################################################
 # ready
+
+func _ready():
+	super._ready()
+	display_name = "Orbs"
 
 func _on_animation_finished():
 	pass

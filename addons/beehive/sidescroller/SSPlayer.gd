@@ -133,7 +133,9 @@ func _unhandled_input(event):
 	if Trolley.is_event(event, "cycle_weapon"):
 		cycle_weapon()
 		Debug.prn("cycled weapons", weapons)
-		notif(active_weapon().name)
+		if weapons.size() > 0:
+			Hood.notif(str("Changed weapon: ", weapons[0].display_name))
+		notif(active_weapon().display_name)
 
 	# generic action
 	if Trolley.is_action(event):

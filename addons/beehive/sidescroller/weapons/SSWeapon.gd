@@ -22,6 +22,9 @@ var should_flip = true
 func _ready():
 	actor = get_parent()
 
+	if display_name == null or display_name == "":
+		display_name = name
+
 	Util.set_optional_nodes(self, {
 		anim="AnimatedSprite2D",
 		hitbox="HitBox",
