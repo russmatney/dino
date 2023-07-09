@@ -133,6 +133,9 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
+	if Game.is_managed:
+		state_label.set_visible(false)
+
 ## process/physics_process ###########################################################
 
 # Should be called immediately after move_and_slide in physics_process
