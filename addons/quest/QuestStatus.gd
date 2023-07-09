@@ -10,7 +10,7 @@ var quests
 var checkbox_scene = preload("res://addons/quest/QuestStatusCheck.tscn")
 
 func render():
-	for c in header.get_children():
+	for c in quest_list.get_children():
 		c.free()
 
 	for q in quests:
