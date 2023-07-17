@@ -102,14 +102,17 @@ func log_prefix(stack):
 		else:
 			return "[" + call_site["source"].get_file().get_basename() + "]: "
 
-func color_wrap(s, color):
-	return "[color=%s]%s[/color]" % [color, s]
+func color_wrap(s, color, use_color=true):
+	if use_color:
+		return "[color=%s]%s[/color]" % [color, s]
+	else:
+		return s
 
 var omit_vals_for_keys = ["layer_0/tile_data"]
 
 var max_array_size = 20
 
-func to_pretty(msg, newlines=false, indent_level=0):
+func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
 			prn("cutting down large array. size:", len(msg))
@@ -117,18 +120,18 @@ func to_pretty(msg, newlines=false, indent_level=0):
 			if newlines:
 				msg.append("...")
 
-		var tmp = color_wrap("[ ", "crimson")
+		var tmp = color_wrap("[ ", "crimson", use_color)
 		var last = len(msg) - 1
 		for i in range(len(msg)):
 			if newlines and last > 1:
 				tmp += "\n\t"
-			tmp += to_pretty(msg[i], newlines, indent_level + 1)
+			tmp += to_pretty(msg[i], newlines, use_color, indent_level + 1)
 			if i != last:
-				tmp += color_wrap(", ", "crimson")
-		tmp += color_wrap(" ]", "crimson")
+				tmp += color_wrap(", ", "crimson", use_color)
+		tmp += color_wrap(" ]", "crimson", use_color)
 		return tmp
 	elif msg is Dictionary:
-		var tmp = color_wrap("{ ", "crimson")
+		var tmp = color_wrap("{ ", "crimson", use_color)
 		var ct = len(msg)
 		var last
 		if len(msg) > 0:
@@ -138,16 +141,19 @@ func to_pretty(msg, newlines=false, indent_level=0):
 			if k in omit_vals_for_keys:
 				val = "..."
 			else:
-				val = to_pretty(msg[k], newlines, indent_level + 1)
+				val = to_pretty(msg[k], newlines, use_color, indent_level + 1)
 			if newlines and ct > 1:
 				tmp += "\n\t" \
 					+ range(indent_level)\
 					.map(func(_i): return "\t")\
 						.reduce(func(a, b): return str(a, b), "")
-			tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
+			if use_color:
+				tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
+			else:
+				tmp += '"%s": %s' % [k, val]
 			if last and str(k) != str(last):
-				tmp += color_wrap(", ", "crimson")
-		tmp += color_wrap(" }", "crimson")
+				tmp += color_wrap(", ", "crimson", use_color)
+		tmp += color_wrap(" }", "crimson", use_color)
 		return tmp
 	elif msg is String:
 		if msg == "":
@@ -155,29 +161,32 @@ func to_pretty(msg, newlines=false, indent_level=0):
 		# TODO check for known tags in here, like 'center'/'right'/'jump'/etc
 		# if msg.contains("["):
 		# 	msg = "<ACTUAL-TEXT-REPLACED>"
-		return color_wrap(msg, "dark_gray")
+		return color_wrap(msg, "dark_gray", use_color)
 	elif msg is StringName:
-		return '[color=%s]&[/color]"%s"' % ["coral", msg]
+		return str(color_wrap("&", "coral", use_color), '"%s"' % msg)
 	elif msg is NodePath:
-		return '[color=%s]^[/color]"%s"' % ["coral", msg]
+		return str(color_wrap("^", "coral", use_color), '"%s"' % msg)
 	elif msg is Vector2:
-		return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["cornflower_blue", msg.x, "cornflower_blue", msg.y]
+		if use_color:
+			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["cornflower_blue", msg.x, "cornflower_blue", msg.y]
+		else:
+			return '(%s,%s)' % [msg.x, msg.y]
 	else:
 		return str(msg)
 
-func to_printable(msgs, stack=[], newlines=false, pretty=true):
+func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=false):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
-		var color = "aquamarine" if prefix != null and prefix[0] == "[" else "peru"
-		if pretty:
-			m += "[color=%s]%s[/color]" % [color, prefix]
+		var c = "aquamarine" if prefix != null and prefix[0] == "[" else "peru"
+		if pretty and use_color:
+			m += "[color=%s]%s[/color]" % [c, prefix]
 		else:
 			m += prefix
 	for msg in msgs:
 		# add a space between msgs
 		if pretty:
-			m += to_pretty(msg, newlines) + " "
+			m += to_pretty(msg, newlines, use_color) + " "
 		else:
 			m += str(msg) + " "
 	return m

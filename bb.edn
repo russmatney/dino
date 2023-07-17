@@ -7,8 +7,8 @@
   :init
   (do
     (log "bb.edn running task")
-    (def gut "godot --headless --path $PWD -d -s addons/gut/gut_cmdln.gd ")
-    (def gut-with-window "godot -path $PWD -d -s addons/gut/gut_cmdln.gd ")
+    (def gut "godot --headless --path . -d -s addons/gut/gut_cmdln.gd ")
+    (def gut-with-window "godot -path . -d -s addons/gut/gut_cmdln.gd ")
 
     (def addons-map
       {:gut   :bitwes/Gut
