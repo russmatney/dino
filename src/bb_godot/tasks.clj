@@ -341,7 +341,7 @@
          build-dir   (str "dist/" export-name)]
      (println "build-web" export-name build-dir)
      (-> (p/$ mkdir -p ~build-dir) p/check)
-     (shell-and-log (str "godot --no-window --export " export-name "-web " build-dir "/index.html")))))
+     (shell-and-log (str "godot --headless --export " export-name "-web " build-dir "/index.html")))))
 
 (defn zip []
   (shell-and-log (str "zip " build-dir  ".zip " build-dir "/*")))
