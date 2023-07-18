@@ -2,15 +2,18 @@
 extends Object
 class_name ParsedGame
 
-var raw: String
-
 var section_parsers = {
 	"prelude": parse_prelude,
 	"objects": parse_objects,
+	"legend": parse_legend,
+	"sounds": parse_sounds,
+	"collision_layers": parse_collision_layers,
+	"rules": parse_rules,
+	"win_conditions": parse_win_conditions,
+	"levels": parse_levels,
 	}
 
 func parse(contents):
-	raw = contents
 	var parsed = {}
 
 	# force a similar prelude header
@@ -25,9 +28,9 @@ func parse(contents):
 		if parser:
 			chunks = Array(chunks).map(func(c): return c.split("\n"))
 			parsed[header.to_lower()] = parser.call(chunks)
-
-	Debug.pr("parsed", parsed)
 	return parsed
+
+## prelude #########################################################
 
 func parse_prelude(chunks):
 	var lines = chunks.reduce(func(acc, x):
@@ -44,9 +47,11 @@ func parse_prelude(chunks):
 		var val = true
 		if parts.size() > 0:
 			val = " ".join(parts)
-		# TODO cast val to non-string
+		# TODO cast val to non-string (int, float, bool, etc)
 		prelude[key] = val
 	return prelude
+
+## objects #########################################################
 
 func parse_objects(chunks):
 	var objs = {}
@@ -77,3 +82,41 @@ func parse_shape(lines):
 				row.append(int(c))
 		shape.append(row)
 	return shape
+
+## legend #########################################################
+
+func parse_legend(chunks):
+	var legend = {}
+	for lines in chunks:
+		for l in lines:
+			var parts = l.split(" = ")
+			# TODO support 'or' ?
+			var val_parts = parts[1].split(" and ")
+			legend[parts[0]] = Array(val_parts)
+
+	return legend
+
+## sounds #########################################################
+
+func parse_sounds(chunks):
+	return {}
+
+## collision_layers #########################################################
+
+func parse_collision_layers(chunks):
+	return {}
+
+## rules #########################################################
+
+func parse_rules(chunks):
+	return {}
+
+## win_conditions #########################################################
+
+func parse_win_conditions(chunks):
+	return {}
+
+## levels #########################################################
+
+func parse_levels(chunks):
+	return {}

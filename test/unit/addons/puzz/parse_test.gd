@@ -1,6 +1,6 @@
 extends GutTest
 
-class TestSimpleBlockPushingGame:
+class TestSimpleBlockPushingGamePrelude:
 	extends GutTest
 
 	var parsed
@@ -15,6 +15,17 @@ class TestSimpleBlockPushingGame:
 		assert_eq(parsed.prelude.author, "David Skinner")
 		assert_eq(parsed.prelude.homepage, "www.puzzlescript.net")
 		assert_eq(parsed.prelude.debug, true)
+
+
+class TestSimpleBlockPushingGameObjects:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
 
 	func test_objects():
 		assert_has(parsed, "objects", "objects not parsed")
@@ -80,12 +91,23 @@ class TestSimpleBlockPushingGame:
 			[0, 0, 0, 0, 0],
 			])
 
-	# func test_assert_all_sections():
-	# 	assert_true("prelude" in parsed)
-	# 	assert_true("objects" in parsed)
-	# 	assert_true("legend" in parsed)
-	# 	assert_true("sounds" in parsed)
-	# 	assert_true("collisionLayers" in parsed)
-	# 	assert_true("rules" in parsed)
-	# 	assert_true("winConditions" in parsed)
-	# 	assert_true("levels" in parsed)
+class TestSimpleBlockPushingGameLegend:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
+	func test_legend():
+		assert_has(parsed, "legend", "legend not parsed")
+
+		# TODO may need to distinguish and/or here?
+		assert_eq(parsed.legend["."], ["Background"])
+		assert_eq(parsed.legend["#"], ["Wall"])
+		assert_eq(parsed.legend["P"], ["Player"])
+		assert_eq(parsed.legend["*"], ["Crate"])
+		assert_eq(parsed.legend["@"], ["Crate", "Target"])
+		assert_eq(parsed.legend["O"], ["Target"])
+		assert_eq(parsed.legend["X"], ["Crate", "Player"])
