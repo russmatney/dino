@@ -122,7 +122,49 @@ func parse_collision_layers(chunks):
 ## rules #########################################################
 
 func parse_rules(chunks):
-	return {}
+	var rules = []
+	for lines in chunks:
+		for l in lines:
+			var parts = l.split(" -> ")
+			var pattern = parts[0]
+			var update = parts[1]
+			rules.append({
+				pattern=parse_pattern(parts[0]),
+				update=parse_pattern(parts[1]),
+				})
+	return rules
+
+func parse_pattern(rule_pattern_str):
+	var initial_terms = []
+	# initial terms
+	if not rule_pattern_str.begins_with("["):
+		var parts = rule_pattern_str.split(" ")
+		for p in parts:
+			if p.begins_with("["):
+				break
+			else:
+				initial_terms.append(p)
+
+	# parse between the brackets
+	var regex = RegEx.new()
+	regex.compile("\\[\\s*(.*)\\s*\\]")
+	var res = regex.search(rule_pattern_str)
+	var inner = res.get_string(1)
+
+	var inner_cells = inner.split(" | ")
+	var cells = []
+	for c in inner_cells:
+		var parts = c.split(" ")
+		var cell = []
+		for p in parts:
+			if len(p) > 0:
+				cell.append(p)
+		cells.append(cell)
+
+	var pattern = []
+	pattern.append_array(initial_terms)
+	pattern.append_array(cells)
+	return pattern
 
 ## win_conditions #########################################################
 

@@ -162,7 +162,11 @@ class TestSimpleBlockPushingGameRules:
 		assert_eq_deep(parsed.rules, [{
 				pattern=[[">", "Player"], ["Crate"]],
 				update=[[">", "Player"], [">", "Crate"]]
-				}])
+				}, {
+				pattern=["DOWN", [">", "Player"], ["Crate"]],
+				update=[[">", "Player"], [">", "Crate"]]
+				}
+			])
 
 class TestSimpleBlockPushingGameWinConditions:
 	extends GutTest
@@ -205,7 +209,6 @@ class TestSimpleBlockPushingGameLevels:
 
 	func test_level_second():
 		assert_eq(parsed.levels[1].message, "level 2 begins")
-		Debug.pr(parsed.levels[1])
 		assert_eq_deep(parsed.levels[1].shape, [
 			["#", "#", "#", "#", "#", "#"],
 			["#", null, null, null, null, "#"],
