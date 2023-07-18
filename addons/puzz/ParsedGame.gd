@@ -7,9 +7,9 @@ var section_parsers = {
 	"objects": parse_objects,
 	"legend": parse_legend,
 	"sounds": parse_sounds,
-	"collision_layers": parse_collision_layers,
+	"collisionlayers": parse_collision_layers,
 	"rules": parse_rules,
-	"win_conditions": parse_win_conditions,
+	"winconditions": parse_win_conditions,
 	"levels": parse_levels,
 	}
 
@@ -71,16 +71,19 @@ func parse_objects(chunks):
 
 	return objs
 
-func parse_shape(lines):
+func parse_shape(lines, parse_int=true):
 	var shape = []
 	for l in lines:
 		var row = []
 		for c in l:
 			if c == ".":
 				row.append(null)
-			else:
+			elif parse_int:
 				row.append(int(c))
-		shape.append(row)
+			else:
+				row.append(c)
+		if row.size() > 0:
+			shape.append(row)
 	return shape
 
 ## legend #########################################################
@@ -99,12 +102,22 @@ func parse_legend(chunks):
 ## sounds #########################################################
 
 func parse_sounds(chunks):
-	return {}
+	var sounds = []
+	for lines in chunks:
+		for l in lines:
+			var parts = l.split(" ")
+			sounds.append(Array(parts))
+	return sounds
 
 ## collision_layers #########################################################
 
 func parse_collision_layers(chunks):
-	return {}
+	var layers = []
+	for lines in chunks:
+		for l in lines:
+			var parts = l.split(", ")
+			layers.append(Array(parts))
+	return layers
 
 ## rules #########################################################
 
@@ -114,9 +127,28 @@ func parse_rules(chunks):
 ## win_conditions #########################################################
 
 func parse_win_conditions(chunks):
-	return {}
+	var conds = []
+	for lines in chunks:
+		for l in lines:
+			var parts = l.split(" ")
+			conds.append(Array(parts))
+	return conds
 
 ## levels #########################################################
 
 func parse_levels(chunks):
-	return {}
+	var levels = []
+	var msg
+	for lines in chunks:
+		if lines.size() == 1:
+			var parts = lines[0].split(" ", true, 1)
+			msg = parts[1]
+		else:
+			var lvl = {}
+			if msg != null:
+				lvl["message"] = msg
+				msg = null
+
+			lvl["shape"] = parse_shape(lines, false)
+			levels.append(lvl)
+	return levels

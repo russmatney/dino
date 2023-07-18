@@ -111,3 +111,107 @@ class TestSimpleBlockPushingGameLegend:
 		assert_eq(parsed.legend["@"], ["Crate", "Target"])
 		assert_eq(parsed.legend["O"], ["Target"])
 		assert_eq(parsed.legend["X"], ["Crate", "Player"])
+
+class TestSimpleBlockPushingGameSounds:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
+	func test_sounds():
+		assert_has(parsed, "sounds", "sounds not parsed")
+
+		assert_eq_deep(parsed.sounds, [
+			# TODO perhaps a map? and I'm sure there are lots of cases/other names
+			["Crate", "move", "36772507"]
+			])
+
+class TestSimpleBlockPushingGameCollisionLayers:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
+	func test_collision_layers():
+		assert_has(parsed, "collisionlayers", "collisionlayers not parsed")
+
+		assert_eq_deep(parsed.collisionlayers, [
+			["Background"],
+			["Target"],
+			["Player", "Wall", "Crate"],
+			])
+
+class TestSimpleBlockPushingGameRules:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
+	func test_rules():
+		# TODO add more rule variants
+		assert_has(parsed, "rules", "rules not parsed")
+		assert_eq_deep(parsed.rules, [{
+				pattern=[[">", "Player"], ["Crate"]],
+				update=[[">", "Player"], [">", "Crate"]]
+				}])
+
+class TestSimpleBlockPushingGameWinConditions:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
+	func test_winconditions():
+		# TODO add more win-cond variants
+		assert_has(parsed, "winconditions", "winconditions not parsed")
+		assert_eq_deep(parsed.winconditions, [["all", "Target", "on", "Crate"]])
+
+
+class TestSimpleBlockPushingGameLevels:
+	extends GutTest
+
+	var parsed
+
+	func before_all():
+		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
+		parsed = Puzz.parse_game(path)
+
+	func test_levels():
+		# TODO add more win-cond variants
+		assert_has(parsed, "levels", "levels not parsed")
+
+	func test_level_first():
+		assert_eq_deep(parsed.levels[0].shape, [
+			["#", "#", "#", "#", null, null],
+			["#", null, "O", "#", null, null],
+			["#", null, null, "#", "#", "#"],
+			["#", "@", "P", null, null, "#"],
+			["#", null, null, "*", null, "#"],
+			["#", null, null, "#", "#", "#"],
+			["#", "#", "#", "#", null, null],
+			])
+
+	func test_level_second():
+		assert_eq(parsed.levels[1].message, "level 2 begins")
+		Debug.pr(parsed.levels[1])
+		assert_eq_deep(parsed.levels[1].shape, [
+			["#", "#", "#", "#", "#", "#"],
+			["#", null, null, null, null, "#"],
+			["#", null, "#", "P", null, "#"],
+			["#", null, "*", "@", null, "#"],
+			["#", null, "O", "@", null, "#"],
+			["#", null, null, null, null, "#"],
+			["#", "#", "#", "#", "#", "#"],
+			])
