@@ -1,15 +1,21 @@
 @tool
 extends CanvasLayer
 
-var clawe_base_url = "http://localhost:3334"
-var clawe_pomodoro_url = str(clawe_base_url, "/api/pomodoros")
-var clawe_pomodoro_start_url = str(clawe_pomodoro_url, "/start")
-var clawe_pomodoro_stop_url = str(clawe_pomodoro_url, "/stop")
-
 var pomodoros = []
-var latest_durations = []
-var latest_breaks = []
+var durations = []
+var breaks = []
 var current
+var latest
+
+## ready ##################################################################
+
+func _ready():
+	Debug.pr("Clawe Dashboard ready")
+
+	await fetch_pomodoros()
+
+## pomodoro calcs ##################################################################
+## TODO should probably be done on the backend
 
 func date_str_to_int(ds):
 	# NOTE this parse timezones (trailing 'Z'), may be come a problem at some point
@@ -47,45 +53,73 @@ func sort_pomos_chrono(a, b):
 	else:
 		return false
 
+## set pomodoros ################################################
+
 func set_pomodoros(ps):
 	pomodoros = ps
-	Debug.pr(pomodoros)
 
-	current = ps.filter(func (p):
-		return p.get("pomodoro/is-current")).front()
+	var currents = ps.filter(func (p):
+		return p.get("pomodoro/is-current"))
+	if len(currents) > 0:
+		current = currents.front()
 
 	Debug.prn("current", current)
-	Debug.prn("current", date_str_to_int(current.get("pomodoro/started-at")))
 
 	# note, copy by reference
 	ps.sort_custom(sort_pomos_recent)
 	var last_8 = ps.slice(0, 7)
-	Debug.prn(last_8)
 
-	latest_durations = []
-	latest_breaks = []
-	var next = last_8[0]
+	durations = []
+	breaks = []
+
+	var _next
+	if len(last_8) > 0:
+		latest = last_8[0]
+		_next = last_8[0]
 	for p in last_8:
-		if p == next:
+		if p == _next:
 			continue
 		var d = secs_between_date_strs(p.get("pomodoro/finished-at"), p.get("pomodoro/started-at"))
-		latest_durations.append(secs_to_time_dict(d))
+		durations.append(secs_to_time_dict(d))
 
-		var b = secs_between_date_strs(next.get("pomodoro/started-at"), p.get("pomodoro/finished-at"))
-		latest_breaks.append(secs_to_time_dict(b))
+		var b = secs_between_date_strs(_next.get("pomodoro/started-at"), p.get("pomodoro/finished-at"))
+		breaks.append(secs_to_time_dict(b))
 
-		next = p
+		_next = p
 
-	Debug.prn("durs", latest_durations)
-	Debug.prn("breaks", latest_breaks)
+	show_current()
+	show_durations()
+	show_breaks()
 
+## pomodoros ui
 
-func _ready():
-	Debug.pr("Clawe Dashboard ready")
+@onready var current_text = $%Current
+@onready var breaks_text = $%Breaks
+@onready var durations_text = $%Durations
 
-	await fetch_pomodoros()
+func show_current():
+	if current:
+		var time_dict = secs_between_date_strs(Time.get_datetime_string_from_system(true), current.get("pomodoro/started-at"))
+		time_dict = secs_to_time_dict(time_dict)
+		current_text.text = Debug.to_pretty(time_dict, true)
+	elif latest:
+		var time_dict = secs_between_date_strs(Time.get_datetime_string_from_system(true), latest.get("pomodoro/finished-at"))
+		time_dict = secs_to_time_dict(time_dict)
+		current_text.text = Debug.to_pretty(time_dict, true)
+
+func show_durations():
+	Debug.prn(durations)
+	durations_text.text = Debug.to_pretty(durations, true)
+
+func show_breaks():
+	breaks_text.text = Debug.to_pretty(breaks, true)
 
 ## pomodoros api ##################################################################
+
+var clawe_base_url = "http://localhost:3334"
+var clawe_pomodoro_url = str(clawe_base_url, "/api/pomodoros")
+var clawe_pomodoro_start_url = str(clawe_pomodoro_url, "/start")
+var clawe_pomodoro_stop_url = str(clawe_pomodoro_url, "/stop")
 
 # Called when the HTTP request is completed.
 func _http_request_completed(result, response_code, headers, body):

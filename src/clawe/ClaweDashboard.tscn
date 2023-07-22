@@ -33,6 +33,40 @@ scroll_active = false
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Current" type="RichTextLabel" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=dark_gray][center]Break: { \"mins\": 35, \"hours\": 0, \"secs\": 2154 }[/center][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="Breaks" type="RichTextLabel" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=dark_gray][center]{ \"mins\": 14, \"hours\": 0, \"secs\": 886 }, { \"mins\": 40, \"hours\": 0, \"secs\": 2420 }, { \"mins\": 26, \"hours\": 0, \"secs\": 1615 }, { \"mins\": 42, \"hours\": 0, \"secs\": 2554 }, { \"mins\": 5592, \"hours\": 93, \"secs\": 335521 }, { \"mins\": 1148, \"hours\": 19, \"secs\": 68895 }[/center][/color]"
+fit_content = true
+scroll_active = false
+
+[node name="Durations" type="RichTextLabel" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[color=dark_gray][center]{ \"mins\": 34, \"hours\": 0, \"secs\": 2095 }, { \"mins\": 63, \"hours\": 1, \"secs\": 3795 }, { \"mins\": 0, \"hours\": 0, \"secs\": 4 }, { \"mins\": 0, \"hours\": 0, \"secs\": 10 }, { \"mins\": 83, \"hours\": 1, \"secs\": 4985 }, { \"mins\": 447, \"hours\": 7, \"secs\": 26852 }[/center][/color]"
+fit_content = true
+scroll_active = false
+
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
