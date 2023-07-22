@@ -115,7 +115,7 @@ var max_array_size = 20
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
-			prn("cutting down large array. size:", len(msg))
+			prn("[DEBUG]: truncating large array. total:", len(msg))
 			msg = msg.slice(0, max_array_size - 1)
 			if newlines:
 				msg.append("...")
@@ -174,7 +174,7 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	else:
 		return str(msg)
 
-func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=false):
+func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=true):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
