@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrnfjkcmpr8s"
-path="res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"
+uid="uid://dmgxiso6o6bpk"
+path="res://.godot/imported/Shirt_icon_itchio.png-5568fcf35efaf34875a3e86af31602fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gut/images/green.png"
-dest_files=["res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"]
+source_file="res://assets/sprites/Shirt_icon_itchio.png"
+dest_files=["res://.godot/imported/Shirt_icon_itchio.png-5568fcf35efaf34875a3e86af31602fa.ctex"]
 
 [params]
 

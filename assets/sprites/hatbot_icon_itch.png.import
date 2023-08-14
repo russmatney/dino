@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrnfjkcmpr8s"
-path="res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"
+uid="uid://b63iqp6vugudy"
+path="res://.godot/imported/hatbot_icon_itch.png-75e34a9b43c7c71f52f9acd312bb61ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gut/images/green.png"
-dest_files=["res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"]
+source_file="res://assets/sprites/hatbot_icon_itch.png"
+dest_files=["res://.godot/imported/hatbot_icon_itch.png-75e34a9b43c7c71f52f9acd312bb61ef.ctex"]
 
 [params]
 

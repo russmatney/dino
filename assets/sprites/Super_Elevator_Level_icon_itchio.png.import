@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrnfjkcmpr8s"
-path="res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"
+uid="uid://cnmtu0tftr2j3"
+path="res://.godot/imported/Super_Elevator_Level_icon_itchio.png-62fabd74ccf029acb4bb99185596fe87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gut/images/green.png"
-dest_files=["res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"]
+source_file="res://assets/sprites/Super_Elevator_Level_icon_itchio.png"
+dest_files=["res://.godot/imported/Super_Elevator_Level_icon_itchio.png-62fabd74ccf029acb4bb99185596fe87.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrnfjkcmpr8s"
-path="res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"
+uid="uid://cnbic2ancikei"
+path="res://.godot/imported/Ghost_House_icon_itchio.png-6e465688c7afb8665d6567f38118f187.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gut/images/green.png"
-dest_files=["res://.godot/imported/green.png-e3a17091688e10a7013279b38edc7f8a.ctex"]
+source_file="res://assets/sprites/Ghost_House_icon_itchio.png"
+dest_files=["res://.godot/imported/Ghost_House_icon_itchio.png-6e465688c7afb8665d6567f38118f187.ctex"]
 
 [params]
 
