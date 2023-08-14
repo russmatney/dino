@@ -2,6 +2,10 @@
 class_name DinoGame
 extends Node
 
+## Register self with Games list
+func _enter_tree():
+	Game.register_game(self)
+
 var icon_texture = preload("res://assets/icons/dino_sheet.png")
 
 func get_player_scene():

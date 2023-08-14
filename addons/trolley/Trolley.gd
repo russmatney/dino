@@ -27,6 +27,30 @@ func _ready():
 
 	build_inputs_dict()
 
+################################################
+# input
+
+func _unhandled_input(event):
+	if not Engine.is_editor_hint():
+		if is_debug_toggle(event):
+			Debug.toggle_debug()
+		elif is_event(event, "slowmo"):
+			slowmo_start()
+		elif is_event_released(event, "slowmo"):
+			slowmo_stop()
+
+################################################
+# slowmo toggle
+
+func slowmo_start():
+	Hood.notif("Slooooooow mooooootion")
+	Cam.start_slowmo("debug_overlay_slowmo", 0.3)
+
+func slowmo_stop():
+	Hood.notif("Back to full speed")
+	Cam.stop_slowmo("debug_overlay_slowmo")
+
+
 
 ## build inputs dict ########################################################################
 

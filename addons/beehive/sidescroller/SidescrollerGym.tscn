@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://cbgwlri2j185m"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_doqh3"]
+[ext_resource type="Script" path="res://addons/core/DinoGym.gd" id="1_doqh3"]
 [ext_resource type="PackedScene" uid="uid://cjjjiscdb0ruh" path="res://addons/beehive/sidescroller/SSPlayer.tscn" id="2_nm067"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="3_gkkpd"]
 [ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="4_4vdb5"]

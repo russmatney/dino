@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://crqg2j0oc5scf"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_jdnrv"]
+[ext_resource type="Script" path="res://addons/core/DinoGym.gd" id="1_jdnrv"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="2_ql3fu"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/reptile/tilemaps/SpikeTiles16.tscn" id="3_xlb2t"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="4_o7sig"]

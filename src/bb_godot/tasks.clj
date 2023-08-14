@@ -199,24 +199,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn input->godot-dep [input & dir-prefix]
+  ;; TODO refactor and unit tests - this impl isn't quite right
+  ;; should be able to easily dry up addon status checks from same repo
+  ;; also using this 'addon-name' as the addon/<addon-name>/ isn't always right,
+  ;; should instead use the last part of the 'repo-id' (which is also poorly named)
   (let [[addon-name repo-id] input
         addon-name           (if (keyword? addon-name)
                                (name addon-name)
                                addon-name)
-        repo-id              (if (keyword? repo-id)
-                               (if (namespace repo-id)
-                                 (str (namespace repo-id) "/" (name repo-id))
-                                 (name repo-id))
-                               repo-id)
-        addon-path           (cond
-                               (re-seq #"/addons/" repo-id)
-                               repo-id
+        repo-id              (cond (keyword? repo-id)
+                                   (if (namespace repo-id)
+                                     (str (namespace repo-id) "/" (name repo-id))
+                                     (name repo-id))
+                                   (string? repo-id)
 
-                               :else
-                               (str repo-id "/addons/" addon-name))
-        dir-prefix           (string/join
-                              "/"
-                              (conj dir-prefix (fs/home)))]
+                                   repo-id)
+        addon-path (cond
+                     (re-seq #"/addons/" repo-id)
+                     repo-id
+
+                     :else
+                     (str repo-id "/addons/" addon-name))
+        dir-prefix (string/join
+                     "/"
+                     (conj dir-prefix (fs/home)))]
     {:addon-name         addon-name
      :addon-path         addon-path
      :project-addon-path (str "./addons/" addon-name)
@@ -235,11 +241,14 @@
   (str (ns :bitwes/Gut) (name :bitwes/Gut))
   (=
     (->>
-      {:gut   "bitwes/Gut"
-       "gut"  "bitwes/Gut/addons/gut"
-       :gut-2 :bitwes/Gut}
+      {:gut     "bitwes/Gut"
+       "gut"    "bitwes/Gut/addons/gut"
+       :gut-2   :bitwes/Gut
+       :beehive :russmatney/dino
+       }
       (map input->godot-dep)
       (into []))
+
     [{:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
      {:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
      {:addon-name "gut-2", :addon-path "bitwes/Gut/addons/gut-2"}]))
@@ -273,6 +282,7 @@
   (apply dir-exists-addons addons dir-prefix)
   (apply git-status-addons addons dir-prefix))
 
+;; TODO maybe want this to clone directly into the repo via :project-addon-path
 (defn clone-addons [addons & dir-prefix]
   (doall
     (->>

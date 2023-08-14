@@ -15,29 +15,19 @@ func _ready():
 
 ## games ##########################################################
 
-# NOTE these need to auto-load BEFORE Game.gd
-var games = [
-	DemoLand,
-	DungeonCrawler,
-	Ghosts,
-	Gunner,
-	Harvey,
-	HatBot,
-	Herd,
-	Mountain,
-	Shirt,
-	SnakeGame,
-	Spike,
-	SuperElevatorLevel,
-	Tower,
-	]
+var games = []
+
+func register_game(g):
+	if not g in games:
+		games.append(g)
+		Debug.pr("Registered game: ", g)
 
 func game_for_scene(scene):
 	var gs = games.filter(func(g): return g and g.manages_scene(scene))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
-		Debug.warn("No game found to manage scene", scene, scene.scene_file_path)
+		Debug.warn("No game found to manage scene", scene, scene.scene_file_path, "games:", games)
 	else:
 		Debug.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
 
