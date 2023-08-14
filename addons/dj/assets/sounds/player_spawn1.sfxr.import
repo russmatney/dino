@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://wxvjhqfsy8et"
+path="res://.godot/imported/player_spawn1.sfxr-74ef2e84042088e35130e38ba54db18c.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/player_spawn1.sfxr"
+dest_files=["res://.godot/imported/player_spawn1.sfxr-74ef2e84042088e35130e38ba54db18c.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

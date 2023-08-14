@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bnuxxx0hg3520"
+path="res://.godot/imported/pickup2.sfxr-098fb96001277ba0bf90cbf851a95453.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/pickup2.sfxr"
+dest_files=["res://.godot/imported/pickup2.sfxr-098fb96001277ba0bf90cbf851a95453.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

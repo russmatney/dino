@@ -1,54 +1,39 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://dqm6oxmqhadga"]
-
-[ext_resource type="Texture2D" uid="uid://ba1tyxqdklvys" path="res://assets/hatbot/shootycrawlybullet_sheet.png" id="1_457bk"]
-[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://assets/sprites/pop_sheet.png" id="2_w8jpo"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://dqm6oxmqhadga"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fyt1v"]
-atlas = ExtResource("1_457bk")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rah7d"]
-atlas = ExtResource("1_457bk")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t7cxa"]
-atlas = ExtResource("1_457bk")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1scmo"]
-atlas = ExtResource("2_w8jpo")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qc1ef"]
-atlas = ExtResource("2_w8jpo")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jo3bp"]
-atlas = ExtResource("2_w8jpo")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3sqi"]
-atlas = ExtResource("2_w8jpo")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71ull"]
-atlas = ExtResource("2_w8jpo")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_66mb7"]
-atlas = ExtResource("1_457bk")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8el2d"]
-atlas = ExtResource("1_457bk")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yom3k"]
-atlas = ExtResource("1_457bk")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1wom"]
-atlas = ExtResource("1_457bk")
 region = Rect2(96, 0, 16, 16)
 
 [resource]

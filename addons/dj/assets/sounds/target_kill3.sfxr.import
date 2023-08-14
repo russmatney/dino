@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://dqrlegpfrndr1"
+path="res://.godot/imported/target_kill3.sfxr-33cdea8cf2900acb86f6a69716c97022.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/target_kill3.sfxr"
+dest_files=["res://.godot/imported/target_kill3.sfxr-33cdea8cf2900acb86f6a69716c97022.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

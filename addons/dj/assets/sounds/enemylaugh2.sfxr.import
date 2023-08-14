@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://clbk05bribmou"
+path="res://.godot/imported/enemylaugh2.sfxr-5c18b682eecc45ee0a4847e6cbb18dab.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/enemylaugh2.sfxr"
+dest_files=["res://.godot/imported/enemylaugh2.sfxr-5c18b682eecc45ee0a4847e6cbb18dab.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

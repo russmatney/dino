@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bucbrufu6is44"
+path="res://.godot/imported/walk2.sfxr-8355f5d6df1971c13fff11f4d9c8d52a.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/walk2.sfxr"
+dest_files=["res://.godot/imported/walk2.sfxr-8355f5d6df1971c13fff11f4d9c8d52a.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

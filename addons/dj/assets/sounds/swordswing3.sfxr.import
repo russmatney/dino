@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://ddwfgoedk0si1"
+path="res://.godot/imported/swordswing3.sfxr-e2c0b8989959fce02baa78e861bf63e8.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/swordswing3.sfxr"
+dest_files=["res://.godot/imported/swordswing3.sfxr-e2c0b8989959fce02baa78e861bf63e8.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

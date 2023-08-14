@@ -61,266 +61,266 @@ enum S {
 @onready var sounds = {
 	S.bosswarp:
 	[
-			preload("res://assets/sounds/bosswarp1.sfxr"),
-			preload("res://assets/sounds/bosswarp2.sfxr"),
+			preload("res://addons/dj/assets/sounds/bosswarp1.sfxr"),
+			preload("res://addons/dj/assets/sounds/bosswarp2.sfxr"),
 		],
 	S.bosslaugh:
 	[
-			preload("res://assets/sounds/bosslaugh1.sfxr"),
-			preload("res://assets/sounds/bosslaugh2.sfxr"),
-			preload("res://assets/sounds/bosslaugh3.sfxr"),
+			preload("res://addons/dj/assets/sounds/bosslaugh1.sfxr"),
+			preload("res://addons/dj/assets/sounds/bosslaugh2.sfxr"),
+			preload("res://addons/dj/assets/sounds/bosslaugh3.sfxr"),
 		],
 	S.boss_shoot:
 	[
-			preload("res://assets/sounds/boss_shoot1.sfxr"),
-			preload("res://assets/sounds/boss_shoot2.sfxr"),
-			preload("res://assets/sounds/boss_shoot3.sfxr"),
+			preload("res://addons/dj/assets/sounds/boss_shoot1.sfxr"),
+			preload("res://addons/dj/assets/sounds/boss_shoot2.sfxr"),
+			preload("res://addons/dj/assets/sounds/boss_shoot3.sfxr"),
 		],
 	S.boss_swoop:
 	[
-			preload("res://assets/sounds/boss_swoop1.sfxr"),
-			preload("res://assets/sounds/boss_swoop2.sfxr"),
-			preload("res://assets/sounds/boss_swoop3.sfxr"),
+			preload("res://addons/dj/assets/sounds/boss_swoop1.sfxr"),
+			preload("res://addons/dj/assets/sounds/boss_swoop2.sfxr"),
+			preload("res://addons/dj/assets/sounds/boss_swoop3.sfxr"),
 		],
 	S.bullet_pop:
 	[
-		preload("res://assets/sounds/small_explosion.sfxr"),
+		preload("res://addons/dj/assets/sounds/small_explosion.sfxr"),
 	],
 	S.bump:
 	[
-		preload("res://assets/sounds/snake/bump1.sfxr"),
-		preload("res://assets/sounds/snake/bump2.sfxr"),
-		preload("res://assets/sounds/snake/bump3.sfxr"),
+		preload("res://addons/dj/assets/sounds/bump1.sfxr"),
+		preload("res://addons/dj/assets/sounds/bump2.sfxr"),
+		preload("res://addons/dj/assets/sounds/bump3.sfxr"),
 	],
 	S.candlelit:
 	[
-			preload("res://assets/sounds/candlelit1.sfxr"),
-			preload("res://assets/sounds/candlelit2.sfxr"),
+			preload("res://addons/dj/assets/sounds/candlelit1.sfxr"),
+			preload("res://addons/dj/assets/sounds/candlelit2.sfxr"),
 		],
 	S.candleout:
 	[
-			preload("res://assets/sounds/candleout1.sfxr"),
-			preload("res://assets/sounds/candleout2.sfxr"),
+			preload("res://addons/dj/assets/sounds/candleout1.sfxr"),
+			preload("res://addons/dj/assets/sounds/candleout2.sfxr"),
 		],
 	S.climbstart:
 	[
-			preload("res://assets/sounds/climbstart1.sfxr"),
-			preload("res://assets/sounds/climbstart2.sfxr"),
+			preload("res://addons/dj/assets/sounds/climbstart1.sfxr"),
+			preload("res://addons/dj/assets/sounds/climbstart2.sfxr"),
 		],
 	S.coin:
 	[
-			preload("res://src/hatbot/sounds/coin1.sfxr"),
-			preload("res://src/hatbot/sounds/coin2.sfxr"),
-			preload("res://src/hatbot/sounds/coin3.sfxr"),
+			preload("res://addons/dj/assets/sounds/coin1.sfxr"),
+			preload("res://addons/dj/assets/sounds/coin2.sfxr"),
+			preload("res://addons/dj/assets/sounds/coin3.sfxr"),
 		],
 	S.collectpowerup:
 	[
-			preload("res://assets/sounds/collectpowerup1.sfxr"),
-			preload("res://assets/sounds/collectpowerup2.sfxr"),
+			preload("res://addons/dj/assets/sounds/collectpowerup1.sfxr"),
+			preload("res://addons/dj/assets/sounds/collectpowerup2.sfxr"),
 		],
 	S.complete: [
-		preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - complete.ogg")
+		preload("res://addons/dj/assets/sounds/Retro Game Weapons Sound Effects - complete.ogg")
 		],
 	S.cure: [
-		preload("res://assets/harvey/sounds/Retro Game Weapons Sound Effects - cure.ogg")
+		preload("res://addons/dj/assets/sounds/Retro Game Weapons Sound Effects - cure.ogg")
 		],
 	S.destroyed_block:
 	[
-			preload("res://assets/sounds/destroyedblock1.sfxr"),
-			preload("res://assets/sounds/destroyedblock2.sfxr"),
-			preload("res://assets/sounds/destroyedblock3.sfxr"),
+			preload("res://addons/dj/assets/sounds/destroyedblock1.sfxr"),
+			preload("res://addons/dj/assets/sounds/destroyedblock2.sfxr"),
+			preload("res://addons/dj/assets/sounds/destroyedblock3.sfxr"),
 		],
 	S.enemyhurt:
 	[
-			preload("res://assets/sounds/enemy_hurt1.sfxr"),
-			preload("res://assets/sounds/enemy_hurt2.sfxr"),
-			preload("res://assets/sounds/enemy_hurt3.sfxr"),
+			preload("res://addons/dj/assets/sounds/enemy_hurt1.sfxr"),
+			preload("res://addons/dj/assets/sounds/enemy_hurt2.sfxr"),
+			preload("res://addons/dj/assets/sounds/enemy_hurt3.sfxr"),
 		],
 	S.enemylaugh:
 	[
-			preload("res://assets/sounds/enemylaugh1.sfxr"),
-			preload("res://assets/sounds/enemylaugh2.sfxr"),
-			preload("res://assets/sounds/enemylaugh3.sfxr"),
+			preload("res://addons/dj/assets/sounds/enemylaugh1.sfxr"),
+			preload("res://addons/dj/assets/sounds/enemylaugh2.sfxr"),
+			preload("res://addons/dj/assets/sounds/enemylaugh3.sfxr"),
 		],
 	S.enemy_dead:
 	[
-		preload("res://assets/sounds/enemy_dead1.sfxr"),
+		preload("res://addons/dj/assets/sounds/enemy_dead1.sfxr"),
 	],
 	S.enemy_hit:
 	[
-		preload("res://assets/sounds/enemy_hurt1.sfxr"),
+		preload("res://addons/dj/assets/sounds/enemy_hurt1.sfxr"),
 	],
 	S.enemy_sees_you:
 	[
-		preload("res://assets/sounds/enemy_sees_you1.sfxr"),
+		preload("res://addons/dj/assets/sounds/enemy_sees_you1.sfxr"),
 	],
 	S.enemy_spawn:
 	[
-		preload("res://assets/sounds/enemy_spawn2.sfxr"),
+		preload("res://addons/dj/assets/sounds/enemy_spawn2.sfxr"),
 	],
 	S.fall:
 	[
-			preload("res://src/hatbot/sounds/fall1.sfxr"),
-			preload("res://src/hatbot/sounds/fall2.sfxr"),
-			preload("res://src/hatbot/sounds/fall3.sfxr"),
+			preload("res://addons/dj/assets/sounds/fall1.sfxr"),
+			preload("res://addons/dj/assets/sounds/fall2.sfxr"),
+			preload("res://addons/dj/assets/sounds/fall3.sfxr"),
 		],
 	S.field_stars:
 	[
 		[
-			preload("res://assets/music/sulosounds/field-stars-ambient-loop.wav"),
+			preload("res://addons/dj/assets/songs/sulosounds/field-stars-ambient-loop.wav"),
 			{"is_sound": false}
 		],
 	],
 	S.fire:
 	[
-		preload("res://assets/sounds/laser1.sfxr"),
-		preload("res://assets/sounds/laser2.sfxr"),
+		preload("res://addons/dj/assets/sounds/fire1.sfxr"),
+		preload("res://addons/dj/assets/sounds/fire2.sfxr"),
 	],
 	S.heavy_fall:
 	[
-			preload("res://src/hatbot/sounds/heavyfall1.sfxr"),
-			preload("res://src/hatbot/sounds/heavyfall2.sfxr"),
+			preload("res://addons/dj/assets/sounds/heavyfall1.sfxr"),
+			preload("res://addons/dj/assets/sounds/heavyfall2.sfxr"),
 		],
 	S.heavy_landing:
 	[
-		preload("res://assets/sounds/small_explosion.sfxr"),
-		preload("res://assets/sounds/heavy_landing1.sfxr"),
+		preload("res://addons/dj/assets/sounds/small_explosion.sfxr"),
+		preload("res://addons/dj/assets/sounds/heavy_landing1.sfxr"),
 	],
 	S.jet_boost:
 	[
-		preload("res://assets/sounds/jet2.sfxr"),
-		preload("res://assets/sounds/jet3.sfxr"),
+		preload("res://addons/dj/assets/sounds/jet2.sfxr"),
+		preload("res://addons/dj/assets/sounds/jet3.sfxr"),
 	],
 	S.jet_echo:
 	[
-		preload("res://assets/sounds/jet_echo1.sfxr"),
-		preload("res://assets/sounds/jet_echo2.sfxr"),
+		preload("res://addons/dj/assets/sounds/jet_echo1.sfxr"),
+		preload("res://addons/dj/assets/sounds/jet_echo2.sfxr"),
 	],
 	S.jet_init:
 	[
-		preload("res://assets/sounds/jet1.sfxr"),
+		preload("res://addons/dj/assets/sounds/jet1.sfxr"),
 	],
 	S.jump:
 	[
-			preload("res://assets/sounds/jump1.sfxr"),
-			preload("res://assets/sounds/jump2.sfxr"),
-			preload("res://assets/sounds/jump3.sfxr"),
-			preload("res://src/hatbot/sounds/jump1.sfxr"),
+			preload("res://addons/dj/assets/sounds/jump1.sfxr"),
+			preload("res://addons/dj/assets/sounds/jump2.sfxr"),
+			preload("res://addons/dj/assets/sounds/jump3.sfxr"),
+			preload("res://addons/dj/assets/sounds/jump4.sfxr"),
 		],
 	S.kick:
 	[
-		preload("res://assets/sounds/punch1.sfxr"),
-		preload("res://assets/sounds/punch2.sfxr"),
-		preload("res://assets/sounds/punch3.sfxr"),
-		preload("res://assets/sounds/punch4.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch1.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch2.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch3.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch4.sfxr"),
 		],
 	S.land:
 	[
-		preload("res://assets/sounds/step1.sfxr"),
-		preload("res://assets/sounds/step2.sfxr"),
-		preload("res://assets/sounds/step3.sfxr"),
+		preload("res://addons/dj/assets/sounds/step1.sfxr"),
+		preload("res://addons/dj/assets/sounds/step2.sfxr"),
+		preload("res://addons/dj/assets/sounds/step3.sfxr"),
 	],
 	S.laser:
 	[
-		preload("res://assets/sounds/snake/laser1.sfxr"),
-		preload("res://assets/sounds/snake/laser2.sfxr"),
-		preload("res://assets/sounds/snake/laser3.sfxr"),
-		preload("res://assets/sounds/snake/laser4.sfxr"),
-		preload("res://assets/sounds/snake/laser5.sfxr"),
+		preload("res://addons/dj/assets/sounds/laser1.sfxr"),
+		preload("res://addons/dj/assets/sounds/laser2.sfxr"),
+		preload("res://addons/dj/assets/sounds/laser3.sfxr"),
+		preload("res://addons/dj/assets/sounds/laser4.sfxr"),
+		preload("res://addons/dj/assets/sounds/laser5.sfxr"),
 	],
-	S.maximize: [preload("res://assets/harvey/sounds/maximize_006.ogg")],
-	S.minimize: [preload("res://assets/harvey/sounds/minimize_006.ogg")],
+	S.maximize: [preload("res://addons/dj/assets/sounds/maximize_006.ogg")],
+	S.minimize: [preload("res://addons/dj/assets/sounds/minimize_006.ogg")],
 	S.nodamageclang:
 	[
-			preload("res://assets/sounds/nodamageclang.sfxr"),
-			preload("res://assets/sounds/nodamageclang2.sfxr"),
-			preload("res://assets/sounds/nodamageclang3.sfxr"),
+			preload("res://addons/dj/assets/sounds/nodamageclang.sfxr"),
+			preload("res://addons/dj/assets/sounds/nodamageclang2.sfxr"),
+			preload("res://addons/dj/assets/sounds/nodamageclang3.sfxr"),
 		],
 	S.pickup:
 	[
-		preload("res://assets/sounds/snake/pickup1.sfxr"),
-		preload("res://assets/sounds/snake/pickup2.sfxr"),
-		preload("res://assets/sounds/snake/pickup3.sfxr"),
-		preload("res://assets/sounds/snake/pickup4.sfxr"),
-		preload("res://assets/sounds/snake/pickup5.sfxr"),
-		preload("res://assets/sounds/pickup1.sfxr"),
+		preload("res://addons/dj/assets/sounds/pickup1.sfxr"),
+		preload("res://addons/dj/assets/sounds/pickup2.sfxr"),
+		preload("res://addons/dj/assets/sounds/pickup3.sfxr"),
+		preload("res://addons/dj/assets/sounds/pickup4.sfxr"),
+		preload("res://addons/dj/assets/sounds/pickup5.sfxr"),
+		preload("res://addons/dj/assets/sounds/pickup6.sfxr"),
 	],
 	S.playerheal:
 	[
-			preload("res://assets/sounds/playerheal1.sfxr"),
-			preload("res://assets/sounds/playerheal2.sfxr"),
+			preload("res://addons/dj/assets/sounds/playerheal1.sfxr"),
+			preload("res://addons/dj/assets/sounds/playerheal2.sfxr"),
 		],
 	S.playerhurt:
 	[
-			preload("res://assets/sounds/player_hurt1.sfxr"),
-			preload("res://assets/sounds/player_hurt2.sfxr"),
-			preload("res://assets/sounds/player_hurt3.sfxr"),
+			preload("res://addons/dj/assets/sounds/player_hurt1.sfxr"),
+			preload("res://addons/dj/assets/sounds/player_hurt2.sfxr"),
+			preload("res://addons/dj/assets/sounds/player_hurt3.sfxr"),
 		],
 	S.player_hit:
 	[
-		preload("res://assets/sounds/player_hurt1.sfxr"),
+		preload("res://addons/dj/assets/sounds/player_hurt1.sfxr"),
 	],
 	S.player_dead:
 	[
-		preload("res://assets/sounds/player_dead1.sfxr"),
+		preload("res://addons/dj/assets/sounds/player_dead1.sfxr"),
 	],
 	S.player_spawn:
 	[
-		preload("res://assets/sounds/player_spawn1.sfxr"),
+		preload("res://addons/dj/assets/sounds/player_spawn1.sfxr"),
 	],
 	S.punch:
 	[
-		preload("res://assets/sounds/punch1.sfxr"),
-		preload("res://assets/sounds/punch2.sfxr"),
-		preload("res://assets/sounds/punch3.sfxr"),
-		preload("res://assets/sounds/punch4.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch1.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch2.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch3.sfxr"),
+		preload("res://addons/dj/assets/sounds/punch4.sfxr"),
 	],
 	S.showjumbotron:
 	[
-			preload("res://assets/sounds/showjumbotron1.sfxr"),
-			preload("res://assets/sounds/showjumbotron2.sfxr"),
-			preload("res://assets/sounds/showjumbotron3.sfxr"),
+			preload("res://addons/dj/assets/sounds/showjumbotron1.sfxr"),
+			preload("res://addons/dj/assets/sounds/showjumbotron2.sfxr"),
+			preload("res://addons/dj/assets/sounds/showjumbotron3.sfxr"),
 		],
-	S.slime: [preload("res://assets/harvey/sounds/slime_001.ogg")],
+	S.slime: [preload("res://addons/dj/assets/sounds/slime_001.ogg")],
 	S.soldierdead:
 	[
-			preload("res://src/hatbot/sounds/soldierdead1.sfxr"),
-			preload("res://src/hatbot/sounds/soldierdead2.sfxr"),
-			preload("res://src/hatbot/sounds/soldierdead3.sfxr"),
+			preload("res://addons/dj/assets/sounds/soldierdead1.sfxr"),
+			preload("res://addons/dj/assets/sounds/soldierdead2.sfxr"),
+			preload("res://addons/dj/assets/sounds/soldierdead3.sfxr"),
 		],
 	S.soldierhit:
 	[
-			preload("res://src/hatbot/sounds/soldierhit.sfxr"),
-			preload("res://src/hatbot/sounds/soldierhit1.sfxr"),
-			preload("res://src/hatbot/sounds/soldierhit2.sfxr"),
+			preload("res://addons/dj/assets/sounds/soldierhit.sfxr"),
+			preload("res://addons/dj/assets/sounds/soldierhit1.sfxr"),
+			preload("res://addons/dj/assets/sounds/soldierhit2.sfxr"),
 		],
 	S.speedup:
 	[
-		preload("res://assets/sounds/snake/speedup1.sfxr"),
-		preload("res://assets/sounds/snake/speedup2.sfxr"),
-		preload("res://assets/sounds/snake/speedup3.sfxr"),
+		preload("res://addons/dj/assets/sounds/speedup1.sfxr"),
+		preload("res://addons/dj/assets/sounds/speedup2.sfxr"),
+		preload("res://addons/dj/assets/sounds/speedup3.sfxr"),
 	],
 	S.step:
 	[
-		preload("res://assets/sounds/step1.sfxr"),
-		preload("res://assets/sounds/step2.sfxr"),
-		preload("res://assets/sounds/step3.sfxr"),
+		preload("res://addons/dj/assets/sounds/step1.sfxr"),
+		preload("res://addons/dj/assets/sounds/step2.sfxr"),
+		preload("res://addons/dj/assets/sounds/step3.sfxr"),
 	],
 	S.swordswing:
 	[
-			preload("res://src/hatbot/sounds/swordswing1.sfxr"),
-			preload("res://src/hatbot/sounds/swordswing2.sfxr"),
-			preload("res://src/hatbot/sounds/swordswing3.sfxr"),
+			preload("res://addons/dj/assets/sounds/swordswing1.sfxr"),
+			preload("res://addons/dj/assets/sounds/swordswing2.sfxr"),
+			preload("res://addons/dj/assets/sounds/swordswing3.sfxr"),
 		],
 	S.target_kill:
 	[
-		preload("res://assets/sounds/coin1.sfxr"),
-		preload("res://assets/sounds/coin2.sfxr"),
-		preload("res://assets/sounds/coin3.sfxr"),
+		preload("res://addons/dj/assets/sounds/target_kill1.sfxr"),
+		preload("res://addons/dj/assets/sounds/target_kill2.sfxr"),
+		preload("res://addons/dj/assets/sounds/target_kill3.sfxr"),
 	],
 	S.walk:
 	[
-		preload("res://assets/sounds/snake/walk1.sfxr"),
-		preload("res://assets/sounds/snake/walk2.sfxr"),
+		preload("res://addons/dj/assets/sounds/walk1.sfxr"),
+		preload("res://addons/dj/assets/sounds/walk2.sfxr"),
 	],
 }

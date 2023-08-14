@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cwu4ogtwl2lnx"
+path="res://.godot/imported/soldierdead1.sfxr-0352baf88f93c55a6d33cdc3ae7fc328.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/soldierdead1.sfxr"
+dest_files=["res://.godot/imported/soldierdead1.sfxr-0352baf88f93c55a6d33cdc3ae7fc328.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

@@ -7,4 +7,4 @@ func _enter_tree():
 
 
 func _exit_tree():
-	Debug.prn("</Beehive>")
+	print("</Beehive>")

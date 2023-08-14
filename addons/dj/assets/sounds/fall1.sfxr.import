@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cnk53bqfcvd4f"
+path="res://.godot/imported/fall1.sfxr-f9668586dff398212780a2291e08f9dc.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/fall1.sfxr"
+dest_files=["res://.godot/imported/fall1.sfxr-f9668586dff398212780a2291e08f9dc.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

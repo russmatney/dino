@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://d1l41c1mlts3m"
+path="res://.godot/imported/boss_shoot1.sfxr-6fd3ffdb0acddd0f3f60260392ca9228.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/boss_shoot1.sfxr"
+dest_files=["res://.godot/imported/boss_shoot1.sfxr-6fd3ffdb0acddd0f3f60260392ca9228.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

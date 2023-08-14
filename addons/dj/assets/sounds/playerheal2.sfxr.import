@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://uwb123gmhsti"
+path="res://.godot/imported/playerheal2.sfxr-ebbc399b697d56ed6283fe0409008fb4.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/playerheal2.sfxr"
+dest_files=["res://.godot/imported/playerheal2.sfxr-ebbc399b697d56ed6283fe0409008fb4.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

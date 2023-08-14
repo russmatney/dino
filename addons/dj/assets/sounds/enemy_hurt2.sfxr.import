@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bayyegv1wv0pd"
+path="res://.godot/imported/enemy_hurt2.sfxr-fbafc6196651be8c17497d4ce50c5574.sample"
+
+[deps]
+
+source_file="res://addons/dj/assets/sounds/enemy_hurt2.sfxr"
+dest_files=["res://.godot/imported/enemy_hurt2.sfxr-fbafc6196651be8c17497d4ce50c5574.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
