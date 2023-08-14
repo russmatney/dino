@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://pb7ag8sxpept"]
 
 [ext_resource type="Script" path="res://src/dino/StartGameButton.gd" id="1_5xyi5"]
-[ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://assets/icons/dino_sheet.png" id="2_uctkf"]
+[ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://addons/core/assets/dino_sheet.png" id="2_uctkf"]
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="3_1g6vj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnb2q"]

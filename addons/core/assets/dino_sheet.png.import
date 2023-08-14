@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://81wpywexarbn"
-path="res://.godot/imported/dino_sheet.png-b4e4a6b8f19eac16c6b1c1b50612c04a.ctex"
+path="res://.godot/imported/dino_sheet.png-b24cb6fcb9b99d6d27a5f977bb4b9902.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/dino_sheet.png"
-dest_files=["res://.godot/imported/dino_sheet.png-b4e4a6b8f19eac16c6b1c1b50612c04a.ctex"]
+source_file="res://addons/core/assets/dino_sheet.png"
+dest_files=["res://.godot/imported/dino_sheet.png-b24cb6fcb9b99d6d27a5f977bb4b9902.ctex"]
 
 [params]
 

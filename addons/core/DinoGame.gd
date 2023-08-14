@@ -6,7 +6,7 @@ extends Node
 func _enter_tree():
 	Game.register_game(self)
 
-var icon_texture = preload("res://assets/icons/dino_sheet.png")
+var icon_texture = preload("res://addons/core/assets/dino_sheet.png")
 
 func get_player_scene():
 	# defaults to returning a 'player_scene' var
