@@ -5,7 +5,7 @@ func _ready():
 	# TODO hatbot should get it's own pause menu with a map
 	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
 	main_menu_scene = load("res://src/hatbot/menus/MainMenu.tscn")
-	icon_texture = load("res://assets/sprites/hatbot_icon_sheet.png")
+	icon_texture = load("res://assets/gameicons/hatbot_icon_sheet.png")
 
 
 ## zones ##########################################################

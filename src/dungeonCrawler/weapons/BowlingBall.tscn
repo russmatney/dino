@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource path="res://resources/sprites/bowlingball.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://src/dungeonCrawler/weapons/BowlingBall.gd" type="Script" id=2]
-[ext_resource path="res://addons/core/assets/lights/light1_sheet.png" type="Texture2D" id=3]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/bowlingball.tres" id="1"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/weapons/BowlingBall.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c6s1vjer0om4o" path="res://addons/core/assets/lights/light1_sheet.png" id="3"]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.0

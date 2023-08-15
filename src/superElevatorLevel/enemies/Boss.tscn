@@ -1,7 +1,7 @@
 [gd_scene load_steps=40 format=3 uid="uid://rm4sl5w7gwyy"]
 
 [ext_resource type="Script" path="res://src/superElevatorLevel/enemies/Boss.gd" id="1_h403s"]
-[ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://assets/sprites/BEU_character_shadow_sheet.png" id="2_d5lih"]
+[ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://addons/beehive/assets/BEU_character_shadow_sheet.png" id="2_d5lih"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="3_plopl"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_u41bl"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_hh7iv"]

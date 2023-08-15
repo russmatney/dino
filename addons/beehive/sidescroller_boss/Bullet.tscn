@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://resources/sprites/arrow.tres" id="1_fvfvs"]
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/beehive/assets/arrow.tres" id="1_fvfvs"]
 [ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/Bullet.gd" id="1_s23kw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iexjs"]

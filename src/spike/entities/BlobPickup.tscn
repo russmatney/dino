@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dby2hvvl027v3"]
 
 [ext_resource type="Script" path="res://src/spike/entities/BlobPickup.gd" id="1_41a3b"]
-[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://assets/hatbot/light64px3.png" id="2_wqopt"]
+[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://addons/core/assets/lights/light64px3.png" id="2_wqopt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 

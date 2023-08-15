@@ -7,7 +7,7 @@ func _ready():
 	var next_level_menu_scene = load("res://src/herd/menus/NextLevelMenu.tscn")
 	next_level_menu = Navi.add_menu(next_level_menu_scene)
 
-	icon_texture = load("res://assets/sprites/Herd_icon_sheet.png")
+	icon_texture = load("res://assets/gameicons/Herd_icon_sheet.png")
 
 ######################################################
 # level menu

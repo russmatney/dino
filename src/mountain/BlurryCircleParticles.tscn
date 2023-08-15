@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0pkrdt2pgivv"]
 
 [ext_resource type="Shader" path="res://src/SimpleBlurScreen.gdshader" id="2_f8ovg"]
-[ext_resource type="Texture2D" uid="uid://d3acj8iqn8nxx" path="res://assets/sprites/particle_circle6.png" id="2_ohcky"]
+[ext_resource type="Texture2D" uid="uid://d3acj8iqn8nxx" path="res://addons/core/assets/particles/particle_circle6.png" id="2_ohcky"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uu32j"]
 resource_local_to_scene = true

@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://src/dungeonCrawler/items/Key.gd" type="Script" id=1]
-[ext_resource path="res://resources/sprites/key.tres" type="SpriteFrames" id=2]
+[ext_resource type="Script" path="res://src/dungeonCrawler/items/Key.gd" id="1"]
+[ext_resource type="SpriteFrames" uid="uid://c1fnu5yxgtioq" path="res://assets/sprites/key.tres" id="2"]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )

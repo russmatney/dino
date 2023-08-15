@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/beehive/sidescroller_enemy/SSEnemy.gd" id="1_gwuuk"]
 [ext_resource type="SpriteFrames" uid="uid://c4211wtij742s" path="res://src/hatbot/enemies/shootycrawly_sprite_frames.tres" id="1_vkef8"]
 [ext_resource type="PackedScene" path="res://addons/beehive/sidescroller_enemy/machine/SSEnemyMachine.tscn" id="4_ft7tc"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="4_lfa7i"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_lfa7i"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_qld6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njcjt"]

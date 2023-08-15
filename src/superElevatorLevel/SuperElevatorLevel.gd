@@ -5,7 +5,7 @@ extends DinoGame
 
 func _ready():
 	main_menu_scene = load("res://src/superElevatorLevel/menus/MainMenu.tscn")
-	icon_texture = load("res://assets/sprites/Super_Elevator_Level_icon_sheet.png")
+	icon_texture = load("res://assets/gameicons/Super_Elevator_Level_icon_sheet.png")
 
 ## player ####################################################################
 

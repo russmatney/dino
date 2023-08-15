@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=10 format=3]
 
-[ext_resource path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=1]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" type="Script" id=2]
-[ext_resource path="res://resources/sprites/barney32.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://resources/sprites/barney64.tres" type="SpriteFrames" id=4]
-[ext_resource path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" type="PackedScene" id=5]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="1"]
+[ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" id="2"]
+[ext_resource type="SpriteFrames" uid="uid://cq33i1pk7ht07" path="res://assets/sprites/barney32.tres" id="3"]
+[ext_resource type="SpriteFrames" uid="uid://l1t8172snt0n" path="res://assets/sprites/barney64.tres" id="4"]
+[ext_resource type="PackedScene" path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" id="5"]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 23.5 )

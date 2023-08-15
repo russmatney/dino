@@ -1,0 +1,59 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://y6eqsli8lr2t"]
+
+[ext_resource type="Texture2D" uid="uid://b6fxibqhnx8qh" path="res://addons/beehive/assets/arrow_sheet.png" id="1_r5jye"]
+[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://addons/beehive/assets/pop_sheet.png" id="2_ikoop"]
+
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("1_r5jye")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od6tw"]
+atlas = ExtResource("2_ikoop")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6job"]
+atlas = ExtResource("2_ikoop")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_refpr"]
+atlas = ExtResource("2_ikoop")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqx6e"]
+atlas = ExtResource("2_ikoop")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_527rm"]
+atlas = ExtResource("2_ikoop")
+region = Rect2(128, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od6tw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6job")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_refpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqx6e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_527rm")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 30.0
+}]

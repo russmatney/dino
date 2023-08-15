@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0ih7p2jp44x2" path="res://addons/hood/HeartIcon.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/hood/HeartsContainer.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://c0krk73ogmw2j" path="res://assets/sprites/hearts_sheet.png" id="3_jsqon"]
+[ext_resource type="Texture2D" uid="uid://c0krk73ogmw2j" path="res://addons/hood/assets/hearts_sheet.png" id="3_jsqon"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss0vn"]
 resource_local_to_scene = true

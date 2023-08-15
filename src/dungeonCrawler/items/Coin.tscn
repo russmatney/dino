@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3]
 
-[ext_resource type="SpriteFrames" uid="uid://c1f3hoppwx7cw" path="res://resources/sprites/coin.tres" id="1"]
+[ext_resource type="SpriteFrames" uid="uid://c1f3hoppwx7cw" path="res://assets/sprites/coin.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/items/Coin.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="3_ff1dw"]
 
