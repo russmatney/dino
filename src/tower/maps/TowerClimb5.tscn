@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://src/tower/maps/TowerClimb.gd" id="8"]
 [ext_resource type="Script" path="res://addons/reptile/ReptileGroup.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="11"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="11_5aajr"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="11_5aajr"]
 [ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://src/tower/EnemySpawner.tscn" id="19"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/beehive/beatemup/BEUGym.gd" id="1_tsgxw"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/superElevatorLevel/enemies/Goon.tscn" id="2_byeku"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="3_k0omd"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_k0omd"]
 [ext_resource type="PackedScene" uid="uid://rm4sl5w7gwyy" path="res://src/superElevatorLevel/enemies/Boss.tscn" id="4_18l87"]
 
 [node name="EnemyGym" type="Node"]

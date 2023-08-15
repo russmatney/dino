@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="5_1ixft"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="6_qs2rc"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="7_jg1sy"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="8_kban0"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_kban0"]
 [ext_resource type="PackedScene" uid="uid://xjxn23dvi1b6" path="res://src/spike/zones/PortalEdges.tscn" id="9_8h346"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5lic"]

@@ -50,7 +50,7 @@ var actions = [
 
 ## visit ###########################################################
 
-var player_spawn_point_scene = preload("res://src/dino/PlayerSpawnPoint.tscn")
+var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
 
 func visit(actor, opts={}):
 	visit_count += 1

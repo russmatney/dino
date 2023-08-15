@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="1_38glr"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/levels/GroundFloor.gd" id="1_ajnk1"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/superElevatorLevel/enemies/Goon.tscn" id="2_jnvos"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="3_17tte"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_17tte"]
 [ext_resource type="Texture2D" uid="uid://cx4vaf38c4f4v" path="res://assets/sprites/SEL_GroundFloor_background_sheet.png" id="3_prgxi"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="5_s74g6"]
 [ext_resource type="PackedScene" uid="uid://c052pqd071auc" path="res://src/dino/SpawnPoint.tscn" id="6_1ohb7"]

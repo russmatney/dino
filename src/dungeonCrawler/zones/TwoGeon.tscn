@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_70tql"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_46u0y"]
 [ext_resource type="PackedScene" uid="uid://cmaxg11lghsbw" path="res://addons/reptile/tilemaps/3x3TileMap.tscn" id="3_mknff"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="4_7lh34"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="4_7lh34"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/Door.tscn" id="5_bxy1b"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/BowItem.tscn" id="6_5iw3v"]
 [ext_resource type="PackedScene" uid="uid://bqnlkmtoprs0x" path="res://src/dungeonCrawler/enemies/Goomba.tscn" id="6_khx33"]

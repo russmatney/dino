@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/hatbot/enemies/ShootyCrawly.tscn" id="3_5ofkw"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="4_lo5kx"]
 [ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/hatbot/enemies/Goomba.tscn" id="5_5rrjq"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="6_4c0v0"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="6_4c0v0"]
 
 [node name="EnemyGym" type="Node"]
 script = ExtResource("1_fkg2u")

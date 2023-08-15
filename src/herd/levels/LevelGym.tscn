@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/herd/tiles/FenceTiles.tscn" id="3_hvnmb"]
 [ext_resource type="PackedScene" uid="uid://dyjqpthy70n1i" path="res://src/herd/quests/SheepPen.tscn" id="3_y0vms"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/herd/sheep/Sheep.tscn" id="4_verlv"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="5_abkn8"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="5_abkn8"]
 [ext_resource type="PackedScene" uid="uid://bstod1n1dqbyt" path="res://src/herd/wolf/Wolf.tscn" id="6_yp0tt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5hpu"]

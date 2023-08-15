@@ -3,7 +3,6 @@ extends DinoGame
 
 func _ready():
 	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
-	icon_texture = load("res://assets/icons/dino_sheet.png")
 
 ## zones #########################################################
 

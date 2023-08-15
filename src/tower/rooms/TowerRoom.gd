@@ -166,7 +166,7 @@ func add_pickups():
 ########################################################################
 # player spawn point
 
-var player_spawn_point_scene = preload("res://src/dino/PlayerSpawnPoint.tscn")
+var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
 
 
 func add_player_spawner():

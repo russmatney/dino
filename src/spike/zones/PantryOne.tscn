@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="5_10une"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="6_x81mv"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="7_65jgk"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/PlayerSpawnPoint.tscn" id="8_17l7t"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_17l7t"]
 
 [node name="PantryOne" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_ohnu3")
