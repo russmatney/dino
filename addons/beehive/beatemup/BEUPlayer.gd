@@ -8,10 +8,12 @@ func _enter_tree():
 
 ## ready ###########################################################
 
+var skip_cam_setup = false
+
 func _ready():
 	super._ready()
 
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and not skip_cam_setup:
 		Cam.ensure_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
 
 
@@ -34,7 +36,7 @@ func _physics_process(delta):
 
 	move_vector = Trolley.move_vector()
 
-	if move_vector.abs().length() > 0 and machine.state.name in ["Walk", "Jump"]:
+	if move_vector.abs().length() > 0 and "state" in machine and machine.state.name in ["Walk", "Jump"]:
 		if move_vector.x > 0:
 			facing_vector = Vector2.RIGHT
 		elif move_vector.x < 0:
