@@ -301,18 +301,33 @@
   (println addons)
   (doall
     (->>
-     addons
-     (map #(apply input->godot-dep % dir-prefix))
-     (map
+      addons
+      (map #(apply input->godot-dep % dir-prefix))
+      (map
+        (fn [{:keys [project-addon-path symlink-target]}]
+          (when (or (fs/sym-link? project-addon-path)
+                    (fs/exists? project-addon-path))
+            (println "deleting existing folder at target" project-addon-path)
+            (fs/delete-tree project-addon-path)
+            (fs/delete-if-exists project-addon-path)
+            (println "Success!"))
+          (println "creating symlink from" project-addon-path "to" symlink-target)
+          (fs/create-sym-link project-addon-path symlink-target))))))
+
+(comment
+  (fs/exists? (str (fs/home) "/russmatney/beatemup-city/addons/navi"))
+  (fs/sym-link? (str (fs/home) "/russmatney/beatemup-city/addons/navi"))
+  (->>
+    {:navi :russmatney/dino}
+    (map input->godot-dep)
+    (map
       (fn [{:keys [project-addon-path symlink-target]}]
-        (when
-         (fs/exists? project-addon-path)
+        (when (fs/exists? project-addon-path)
           (println "deleting existing folder at target" project-addon-path)
           (fs/delete-tree project-addon-path)
           (fs/delete-if-exists project-addon-path)
           (println "Success!"))
-        (println "creating symlink from" project-addon-path "to" symlink-target)
-        (fs/create-sym-link project-addon-path symlink-target))))))
+        (println "creating symlink from" project-addon-path "to" symlink-target)))))
 
 
 (defn install-script-templates [paths & dir-prefix]
