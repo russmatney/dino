@@ -267,6 +267,19 @@ func take_damage(hit_type, body):
 		body.kos += 1
 		Hotel.check_in(body)
 
+## recover health ###########################################################
+
+# if no arg passed, recovers _all_ health
+func recover_health(h=null):
+	if h == null:
+		health = initial_health
+	else:
+		health += h
+
+	health = clamp(health, 0, initial_health)
+
+	Hotel.check_in(self)
+
 ## death ###########################################################
 
 signal died()
