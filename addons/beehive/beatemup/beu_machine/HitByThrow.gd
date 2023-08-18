@@ -17,7 +17,7 @@ func enter(opts = {}):
 
 	hit_ttl = hit_time
 	hit_by = opts.get("hit_by")
-	actor.take_damage("hit_by_throw", hit_by)
+	actor.take_hit({hit_type="hit_by_throw", body=hit_by})
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*1.2, hit_time/2.0)

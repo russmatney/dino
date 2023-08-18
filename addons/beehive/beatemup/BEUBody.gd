@@ -85,6 +85,8 @@ func _ready():
 		punch_box = $PunchBox
 		punch_box.body_entered.connect(on_punchbox_body_entered)
 		punch_box.body_exited.connect(on_punchbox_body_exited)
+		punch_box.area_entered.connect(on_punchbox_area_entered)
+		punch_box.area_exited.connect(on_punchbox_area_exited)
 
 		grab_box = $GrabBox
 		grab_box.body_entered.connect(on_grabbox_body_entered)
@@ -184,6 +186,13 @@ func on_punchbox_body_entered(body):
 func on_punchbox_body_exited(body):
 	punch_box_bodies.erase(body)
 
+func on_punchbox_area_entered(area):
+	if not area in punch_box_bodies:
+		punch_box_bodies.append(area)
+
+func on_punchbox_area_exited(area):
+	punch_box_bodies.erase(area)
+
 
 ## grabbing ###########################################################
 
@@ -243,8 +252,24 @@ func on_noticebox_body_exited(body):
 
 ## health ###########################################################
 
+func take_hit(opts):
+	take_damage(opts)
+
+	var body = opts.get("body")
+	var hit_type = opts.get("hit_type")
+
+	if health <= 0:
+		die({killed_by=body})
+		# TODO not perfect
+		if hit_type != "hit_by_throw":
+			body.kos += 1
+		Hotel.check_in(body)
+
 # TODO refactor into opts-based api
-func take_damage(hit_type, body):
+func take_damage(opts):
+	var hit_type = opts.get("hit_type")
+	var body = opts.get("body")
+
 	var attack_power
 	match hit_type:
 		"punch":
@@ -261,11 +286,6 @@ func take_damage(hit_type, body):
 
 	health -= damage
 	Hotel.check_in(self)
-
-	if health <= 0:
-		die({killed_by=body})
-		body.kos += 1
-		Hotel.check_in(body)
 
 ## recover health ###########################################################
 

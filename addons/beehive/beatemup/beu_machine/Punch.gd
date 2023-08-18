@@ -46,8 +46,11 @@ var punched_bodies = []
 
 func punch():
 	for body in actor.punch_box_bodies:
-		if is_instance_valid(body) and not body in punched_bodies and not body.is_dead and "machine" in body:
-			body.machine.transit("Punched", {punched_by=actor})
+		if is_instance_valid(body) and not body in punched_bodies:
+			if "is_dead" in body and not body.is_dead and "machine" in body:
+				body.machine.transit("Punched", {punched_by=actor})
+			elif body.is_in_group("destructibles"):
+				body.take_hit({hit_type="punch"})
 			punched_bodies.append(body)
 
 func on_animation_finished():

@@ -30,10 +30,13 @@ var kicked_bodies = []
 
 func kick():
 	for body in actor.punch_box_bodies:
-		if is_instance_valid(body) and not body in kicked_bodies and not body.is_dead and "machine" in body:
-			body.machine.transit("Kicked", {kicked_by=actor, direction=actor.facing_vector})
+		if is_instance_valid(body) and not body in kicked_bodies:
+			if "is_dead" in body and not body.is_dead and "machine" in body:
+				body.machine.transit("Kicked", {kicked_by=actor, direction=actor.facing_vector})
+				Cam.hitstop("kick", 0.05, 0.1, 0.3)
+			elif body.is_in_group("destructibles"):
+				body.take_hit({hit_type="kick"})
 			kicked_bodies.append(body)
-			Cam.hitstop("kick", 0.05, 0.1, 0.3)
 
 func on_animation_finished():
 	if actor.anim.animation == "kick":

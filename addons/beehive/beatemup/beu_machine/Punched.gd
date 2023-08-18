@@ -10,7 +10,7 @@ func enter(opts = {}):
 	actor.anim.play("punched")
 	DJZ.play(DJZ.S.punch)
 	punched_by = opts.get("punched_by")
-	actor.take_damage("punch", punched_by)
+	actor.take_hit({hit_type="punch", body=punched_by})
 
 	# TODO turn to face attacker
 

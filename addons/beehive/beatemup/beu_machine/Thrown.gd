@@ -50,7 +50,7 @@ func enter(opts = {}):
 	actor.punch_box.set_collision_mask_value(10, true)
 
 func on_first_bounce():
-	actor.take_damage("throw", thrown_by)
+	actor.take_hit({hit_type="throw", body=thrown_by})
 	DJZ.play(DJZ.S.heavy_fall)
 	Cam.screenshake(0.3)
 	hit_ground = true
