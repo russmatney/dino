@@ -303,8 +303,10 @@ func recover_health(h=null):
 ## death ###########################################################
 
 signal died()
+signal dying()
 
 func die(opts={}):
+	dying.emit(self)
 	is_dead = true
 	lives_lost += 1
 	Hotel.check_in(self)
