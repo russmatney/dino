@@ -116,6 +116,11 @@ func book_data(data: Dictionary, opts = {}):
 	if node != null and parents == null or (parents != null and len(parents) == 0):
 		parents = Util.get_all_parents(node).map(func(p): return {name=p.name})
 
+	# if node != null:
+	# 	Debug.pr("book_data found node", node, " ", data.keys())
+	# else:
+	# 	Debug.pr("book_data found scene", scene_name, " ", data.keys())
+
 	if parents == null:
 		parents = [data.values()[0]]
 
@@ -184,6 +189,9 @@ func book_data(data: Dictionary, opts = {}):
 			if key.contains(last_room["key"]):
 				entry["room_name"] = last_room["key"]
 
+		if key.begins_with("@"):
+			continue
+		# Debug.pr("booking entry at key", key)
 		if key in scene_db:
 			scene_db[key].merge(entry)
 		else:
