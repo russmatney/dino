@@ -62,6 +62,7 @@ func physics_process(delta):
 					b.machine.transit("Kicked", {
 						direction=actor.facing_vector,
 						kicked_by=actor})
+					kicked_bodies.append(b)
 				elif b.is_in_group("destructibles"):
-					b.take_hit({hit_type="kick"})
-				kicked_bodies.append(b)
+					b.take_hit({hit_type="kick", body=actor})
+					kicked_bodies.append(b)
