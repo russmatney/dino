@@ -1,0 +1,144 @@
+[gd_scene load_steps=11 format=3 uid="uid://0bxxjjroysub"]
+
+[ext_resource type="Script" path="res://addons/pandora/ui/editor/pandora_editor.gd" id="1_bowve"]
+[ext_resource type="Texture2D" uid="uid://dojpd3ptnta4m" path="res://addons/pandora/icons/Object.svg" id="2_aj8uc"]
+[ext_resource type="Texture2D" uid="uid://b8sd2702bmm7h" path="res://addons/pandora/icons/Save.svg" id="2_wcf01"]
+[ext_resource type="PackedScene" uid="uid://ctmsh7eg6wypu" path="res://addons/pandora/ui/components/entity_tree/entity_tree.tscn" id="3_4ayq8"]
+[ext_resource type="PackedScene" uid="uid://clsxp8wg4ctet" path="res://addons/pandora/ui/editor/property_editor/property_editor.tscn" id="3_8d8dx"]
+[ext_resource type="Texture2D" uid="uid://dimpswbv6s8t2" path="res://addons/pandora/icons/Folder.svg" id="3_ehaql"]
+[ext_resource type="Texture2D" uid="uid://c8r1klbs37r1b" path="res://addons/pandora/icons/Clear.svg" id="4_c68uu"]
+[ext_resource type="Texture2D" uid="uid://bv43ytfd0mlq1" path="res://addons/pandora/icons/Search.svg" id="5_4i0xc"]
+[ext_resource type="Texture2D" uid="uid://bhcep67ihojnd" path="res://addons/pandora/icons/Reload.svg" id="5_qbvn0"]
+[ext_resource type="PackedScene" uid="uid://dsqfuyjkcdwvu" path="res://addons/pandora/ui/components/notification_label/notification_label.tscn" id="6_ftkgr"]
+
+[node name="PandoraEditor" type="MarginContainer"]
+clip_contents = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_bowve")
+
+[node name="Contents" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+
+[node name="HeaderBar" type="HBoxContainer" parent="Contents"]
+layout_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Contents/HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreateEntityButton" type="Button" parent="Contents/HeaderBar/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Create entity"
+disabled = true
+icon = ExtResource("2_aj8uc")
+
+[node name="CreateCategoryButton" type="Button" parent="Contents/HeaderBar/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Create category"
+icon = ExtResource("3_ehaql")
+
+[node name="DeleteButton" type="Button" parent="Contents/HeaderBar/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("4_c68uu")
+
+[node name="SaveButton" type="Button" parent="Contents/HeaderBar/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("2_wcf01")
+
+[node name="ResetButton" type="Button" parent="Contents/HeaderBar/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Reset data"
+icon = ExtResource("5_qbvn0")
+
+[node name="SaveLabel" parent="Contents/HeaderBar/Actions" instance=ExtResource("6_ftkgr")]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="Links" type="HBoxContainer" parent="Contents/HeaderBar"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 15
+
+[node name="Learn" type="LinkButton" parent="Contents/HeaderBar/Links"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Learn"
+underline = 1
+uri = "https://bitbra.in/pandora"
+
+[node name="Contribute" type="LinkButton" parent="Contents/HeaderBar/Links"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Contribute"
+underline = 1
+uri = "https://github.com/bitbrain/pandora"
+
+[node name="ReportBug" type="LinkButton" parent="Contents/HeaderBar/Links"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "🐛 Report a bug!"
+underline = 1
+uri = "https://github.com/bitbrain/pandora/issues/new?assignees=&labels=%F0%9F%90%9B+bug&projects=&template=bug_report.md&title="
+
+[node name="Version" type="Label" parent="Contents/HeaderBar/Links"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 0.27451)
+text = "Pandora v1.0-alpha1"
+horizontal_alignment = 2
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="DataContent" type="HBoxContainer" parent="Contents"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="Contents/DataContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntitySelection" type="VBoxContainer" parent="Contents/DataContent/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EntitySearch" type="LineEdit" parent="Contents/DataContent/HSplitContainer/EntitySelection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "Search..."
+right_icon = ExtResource("5_4i0xc")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Contents/DataContent/HSplitContainer/EntitySelection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EntityTree" parent="Contents/DataContent/HSplitContainer/EntitySelection/ScrollContainer" instance=ExtResource("3_4ayq8")]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PropertyEditor" parent="Contents/DataContent/HSplitContainer" instance=ExtResource("3_8d8dx")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 4.0
