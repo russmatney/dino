@@ -23,6 +23,9 @@ func enter(_opts = {}):
 	actor.anim.animation_finished.connect(on_animation_finished)
 	actor.anim.play("falling")
 
+	# reset modulate (un-fade from death anim)
+	actor.set_modulate(Color(1, 1, 1, 1))
+
 	var tween = create_tween()
 	tween.tween_property(actor, "position", og_pos, respawn_ttl)
 	tween.tween_callback(func():
