@@ -81,6 +81,12 @@ func free_children_in_group(node: Node, group_name: String):
 		if c.is_in_group(group_name):
 			c.queue_free()
 
+func free_children(node: Node):
+	if not node:
+		return
+	for c in node.get_children():
+		c.queue_free()
+
 ############################################################
 # children/parents/...siblings?
 
@@ -114,10 +120,6 @@ func get_all_parents(node: Node, parents=[]):
 func each_sibling(node: Node):
 	var p = node.get_parent()
 	return p.get_children().filter(func(ch): return ch != node)
-
-func free_children(node: Node):
-	node.get_children().map(func(c): c.queue_free())
-
 
 ############################################################
 # packed_scene reading
