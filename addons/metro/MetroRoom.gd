@@ -193,20 +193,23 @@ func move_children_up():
 ## pause ##########################################
 
 var paused
+var paused_ents = []
 
 func pause(opts={}):
 	paused = true
 
 	if room_box != null:
-		Debug.pr("checking roombox for overlapping bodies", room_box)
 		var ents_to_pause = room_box.get_overlapping_bodies()
 		ents_to_pause.append_array(room_box.get_overlapping_areas())
 		var chs = get_children()
 		ents_to_pause = ents_to_pause.filter(func(ent): return not ent in chs)
 		if len(ents_to_pause) > 0:
 			Debug.pr("paused room contains ents to pause", ents_to_pause)
-	else:
-		Debug.pr("no roombox")
+			for ent in ents_to_pause:
+				ent.set_process_mode.call_deferred(PROCESS_MODE_DISABLED)
+				paused_ents.append(ent)
+				# TODO paused ents should move back to IDLE
+				# (and attackers on player should be re-calced)
 
 	if not Engine.is_editor_hint():
 		if not opts.get("process_only"):
@@ -220,7 +223,14 @@ func unpause(opts={}):
 		if not opts.get("process_only"):
 			_on_unpaused()
 
+		# moved children up to the zone level
 		move_children_up()
+
+		# unpause any ents we paused
+		for ent in paused_ents:
+			ent.set_process_mode.call_deferred(PROCESS_MODE_INHERIT)
+		paused_ents = []
+
 
 func _on_paused():
 	deactivate_cam_points()
