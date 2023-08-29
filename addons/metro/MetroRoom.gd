@@ -135,7 +135,7 @@ func ensure_room_box():
 			c.free()
 
 	if Engine.is_editor_hint():
-		existing.map(func(c): c.free)
+		existing.map(func(c): c.free())
 	elif len(existing) > 0:
 		# don't recreate unless in the editor
 		return

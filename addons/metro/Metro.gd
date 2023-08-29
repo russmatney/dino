@@ -77,6 +77,8 @@ func get_spawn_coords():
 ###########################################################
 # world update
 
+var current_room
+
 func update_zone():
 	ensure_current_zone()
 
@@ -90,19 +92,26 @@ func update_zone():
 		# Debug.warn("Cannot update zero rooms.")
 		return
 
-	var player = Game.player
-
 	var new_current
+	var rooms_to_pause = []
 	for room in current_zone.rooms:
-		if room.contains_player(player):
+		if room.contains_player(Game.player):
 			new_current = room
 			continue
+		if not room.paused:
+			rooms_to_pause.append(room)
 
+	for room in rooms_to_pause:
+		if new_current == null and current_room == room:
+			# don't pause the current room if we didn't find a new one
+			continue
 		# maybe want a cleanup here to clear bullets and things
 		room.pause()
 
 	if new_current:
 		new_current.unpause()
-	else:
+		current_room = new_current
+	elif current_room == null:
 		# unpause all rooms, so the player is detected when entering one
-		current_zone.rooms.map(func(room): room.unpause({process_only=true}))
+		current_zone.rooms.map(func(room):
+			room.unpause({process_only=true}))
