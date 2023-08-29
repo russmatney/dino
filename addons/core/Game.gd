@@ -144,7 +144,9 @@ func _find_player(p=null):
 func _on_player_found(p):
 	Debug.prn("Game.player found:", p)
 	if current_game:
-		current_game.update_world()
+		# TODO could be a bug for some games? Do we need this? maybe maps/hud?
+		Debug.prn("skipping world update after found player")
+		# current_game.update_world()
 
 func remove_player():
 	var p = player
@@ -200,16 +202,16 @@ func _respawn_player(opts={}):
 	if setup_fn != null:
 		setup_fn.call(player)
 
-	# TODO handling like this via setup_fn in Hatbot/Demoland.... metro?
-	# if player_died:
-	# 	Hotel.check_in(player, {health=player.max_health})
-
 	if current_game != null:
 		current_game.on_player_spawned(player)
 
+	# NOTE this is deferred
 	Navi.add_child_to_current(player)
-	if current_game != null:
-		current_game.update_world()
+	player.ready.connect(func():
+		if current_game != null:
+			Debug.pr("_respawn_player updating world", player, player.global_position)
+			current_game.update_world())
+
 	spawning = false
 
 func respawn_coords():
