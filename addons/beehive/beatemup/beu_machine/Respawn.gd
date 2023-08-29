@@ -16,9 +16,9 @@ func enter(_opts = {}):
 
 	respawn_ttl = Util.rand_of(respawn_times)
 
-	var og_pos = actor.position
+	var og_pos = actor.global_position
 
-	actor.position = og_pos + Vector2.UP * fall_height
+	actor.global_position = og_pos + Vector2.UP * fall_height
 
 	actor.anim.animation_finished.connect(on_animation_finished)
 	actor.anim.play("falling")
@@ -27,11 +27,11 @@ func enter(_opts = {}):
 	actor.set_modulate(Color(1, 1, 1, 1))
 
 	var tween = create_tween()
-	tween.tween_property(actor, "position", og_pos, respawn_ttl)
+	tween.tween_property(actor, "global_position", og_pos, respawn_ttl)
 	tween.tween_callback(func():
 		Cam.screenshake.bind(0.2)
 		DJZ.play(DJZ.S.heavy_fall)
-		# show shiny invincible couple of seconds
+		# TODO show shiny invincible couple of seconds, or fade-pulse a bit
 		actor.is_dead = false
 		Hotel.check_in(actor)
 		actor.anim.play("landed"))
