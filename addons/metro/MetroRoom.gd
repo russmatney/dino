@@ -17,7 +17,7 @@ var zone
 func _ready():
 	Hotel.register(self)
 
-	ensure_room_box()
+	get_parent().ready.connect(ensure_room_box)
 	ensure_cam_points()
 
 	var p = get_parent()
@@ -108,10 +108,17 @@ func used_rect() -> Rect2:
 	return r
 
 func contains_player(player):
-	# TODO overlapping rooms (roomboxes) break this
-	# TODO move to a polygon, not a rectangle
 	if player == null or not is_instance_valid(player):
 		return
+
+	if room_box != null:
+		var room_box_contains = room_box.overlaps_body(player)
+		if room_box_contains:
+			return true
+		else:
+			return false
+	else:
+		Debug.warn("null room box for room", self)
 
 	var rect = used_rect()
 	rect.position += position
@@ -127,18 +134,20 @@ func contains_player(player):
 
 var room_box
 
+func room_box_name():
+	return "RoomBox_%s" % self.name
+
 func ensure_room_box():
 	var existing = []
-	for c in get_children():
-		if c.name == "RoomBox":
+	for c in get_parent().get_children():
+		if c.name == room_box_name():
 			existing.append(c)
-			c.free()
 
-	if Engine.is_editor_hint():
-		existing.map(func(c): c.free())
-	elif len(existing) > 0:
-		# don't recreate unless in the editor
-		return
+	if len(existing) > 0:
+		Debug.pr("renaming and freeing room box", existing)
+		existing.map(func(c):
+			c.name = "RoomBox_ToDelete"
+			c.free())
 
 	# room rect
 	var rect = used_rect()
@@ -155,19 +164,19 @@ func ensure_room_box():
 	# area2D
 	room_box = Area2D.new()
 	room_box.add_child(coll)
-	room_box.name = "RoomBox"
+	room_box.name = room_box_name()
 	room_box.set_collision_layer_value(1, false)
 	room_box.set_collision_mask_value(1, false)
 	room_box.set_collision_mask_value(2, true) # 2 for player
+	room_box.position = self.position
 	room_box.set_visible(false)
 
 	# signals
-	room_box.body_entered.connect(_on_room_entered)
-	room_box.body_exited.connect(_on_room_exited)
+	Util._connect(room_box.body_entered, _on_room_entered)
+	Util._connect(room_box.body_exited, _on_room_exited)
 
-	# add child, set owner
-	add_child(room_box)
-	room_box.set_owner(self)
+	# add child to parent, so room_boxes don't get paused along with rooms
+	get_parent().add_child.call_deferred(room_box)
 
 ## pause ##########################################
 

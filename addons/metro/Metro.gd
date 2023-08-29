@@ -77,8 +77,15 @@ func get_spawn_coords():
 ###########################################################
 # world update
 
-var current_room
+var last_containing_room
+var last_n_containing_rooms = []
+# TODO support setting this from Game.gd, maybe per-zone
+var unpaused_room_count = 3
 
+# Attempts to find a room containing the player, and pause the other rooms
+# If no room overlaps the player, the last room (last_containing_room) is left running
+# (i.e. unpaused) until another one is found.
+# TODO consider unpausing adjacent/nearby rooms (not just the current one)
 func update_zone():
 	ensure_current_zone()
 
@@ -92,26 +99,36 @@ func update_zone():
 		# Debug.warn("Cannot update zero rooms.")
 		return
 
-	var new_current
+	var current_containing_room
 	var rooms_to_pause = []
 	for room in current_zone.rooms:
+		# TODO consider overlapping roomboxes
+		# probably prefer the existing one until we're not overlapping
 		if room.contains_player(Game.player):
-			new_current = room
-			continue
-		if not room.paused:
+			current_containing_room = room
+		elif not room.paused:
 			rooms_to_pause.append(room)
 
-	for room in rooms_to_pause:
-		if new_current == null and current_room == room:
-			# don't pause the current room if we didn't find a new one
-			continue
-		# maybe want a cleanup here to clear bullets and things
-		room.pause()
+	# don't pause last_containing_room if no current_containing_room found
+	if current_containing_room == null and last_containing_room != null:
+		rooms_to_pause = rooms_to_pause.filter(func(r): return not r == last_containing_room)
 
-	if new_current:
-		new_current.unpause()
-		current_room = new_current
-	elif current_room == null:
-		# unpause all rooms, so the player is detected when entering one
-		current_zone.rooms.map(func(room):
-			room.unpause({process_only=true}))
+	rooms_to_pause = rooms_to_pause.filter(func(r): return not r in last_n_containing_rooms)
+
+	# pausing all unless we have never seen a room (new or existing)
+	# this guard might not be necessary anymore (b/c roomboxes are no longer 'paused' when rooms are paused)
+	if len(rooms_to_pause) > 0 and not (current_containing_room == null and last_containing_room == null):
+		for room in rooms_to_pause:
+			# maybe want a cleanup here to clear bullets and things
+			room.pause()
+
+	if current_containing_room:
+		if current_containing_room.paused:
+			current_containing_room.unpause()
+		last_containing_room = current_containing_room
+		if not current_containing_room in last_n_containing_rooms:
+			if len(last_n_containing_rooms) == unpaused_room_count:
+				last_n_containing_rooms.pop_front()
+			last_n_containing_rooms.push_back(current_containing_room)
+	else:
+		Debug.warn("No rooms containing player!")
