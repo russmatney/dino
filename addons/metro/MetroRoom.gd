@@ -168,6 +168,7 @@ func ensure_room_box():
 	room_box.set_collision_layer_value(1, false)
 	room_box.set_collision_mask_value(1, false)
 	room_box.set_collision_mask_value(2, true) # 2 for player
+	room_box.set_collision_mask_value(4, true) # 4 for enemies
 	room_box.position = self.position
 	room_box.set_visible(false)
 
@@ -178,12 +179,35 @@ func ensure_room_box():
 	# add child to parent, so room_boxes don't get paused along with rooms
 	get_parent().add_child.call_deferred(room_box)
 
+## move children ##########################################
+
+var children_moved = false
+func move_children_up():
+	if children_moved:
+		return
+	for c in get_children():
+		if c.is_in_group("enemies"):
+			c.reparent.call_deferred(get_parent(), true)
+	children_moved = true
+
 ## pause ##########################################
 
 var paused
 
 func pause(opts={}):
 	paused = true
+
+	if room_box != null:
+		Debug.pr("checking roombox for overlapping bodies", room_box)
+		var ents_to_pause = room_box.get_overlapping_bodies()
+		ents_to_pause.append_array(room_box.get_overlapping_areas())
+		var chs = get_children()
+		ents_to_pause = ents_to_pause.filter(func(ent): return not ent in chs)
+		if len(ents_to_pause) > 0:
+			Debug.pr("paused room contains ents to pause", ents_to_pause)
+	else:
+		Debug.pr("no roombox")
+
 	if not Engine.is_editor_hint():
 		if not opts.get("process_only"):
 			_on_paused()
@@ -195,6 +219,8 @@ func unpause(opts={}):
 		set_process_mode.call_deferred(PROCESS_MODE_INHERIT)
 		if not opts.get("process_only"):
 			_on_unpaused()
+
+		move_children_up()
 
 func _on_paused():
 	deactivate_cam_points()
