@@ -10,8 +10,13 @@ const checkpoints_group = "metro_checkpoints"
 
 var current_zone: MetroZone
 
-func load_zone(zone_scene_path, spawn_node_path=null):
-	var zone_scene_inst = load(zone_scene_path).instantiate()
+func load_zone(zone_scene_or_path, spawn_node_path=null):
+	var zone_scene
+	if zone_scene_or_path is String:
+		zone_scene = load(zone_scene_or_path)
+	else:
+		zone_scene = zone_scene_or_path
+	var zone_scene_inst = zone_scene.instantiate()
 	current_zone = zone_scene_inst
 
 	if spawn_node_path:
@@ -130,5 +135,5 @@ func update_zone():
 			if len(last_n_containing_rooms) == unpaused_room_count:
 				last_n_containing_rooms.pop_front()
 			last_n_containing_rooms.push_back(current_containing_room)
-	else:
-		Debug.warn("No rooms containing player!")
+	# else:
+	# 	Debug.warn("No rooms containing player!")
