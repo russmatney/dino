@@ -24,6 +24,14 @@ func load_zone(zone_scene_or_path, spawn_node_path=null):
 
 	Navi.nav_to(current_zone)
 
+func reload_current_zone():
+	if current_zone != null:
+		load_zone(current_zone)
+		return true
+	else:
+		Debug.warn("no current zone, metro could not reload.")
+		return false
+
 ###########################################################
 # Zone travel
 
