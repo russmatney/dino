@@ -1,0 +1,21 @@
+"AppBuild"
+{
+	"AppID" "2589550" // your AppID
+	"Desc" "Basic Dino build for Linux" // internal description for this build
+
+	"ContentRoot" "../dist/dino-linux/" // root content folder, relative to location of this file
+	"BuildOutput" "./build-output/" // build output folder for build logs and build cache files
+
+	"Depots"
+	{
+		"2589551" // your DepotID
+		{
+			"FileMapping"
+			{
+				"LocalPath" "*" // all files from contentroot folder
+				"DepotPath" "." // mapped into the root of the depot
+				"recursive" "1" // include all subfolders
+			}
+		}
+	}
+}
