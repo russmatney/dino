@@ -226,7 +226,8 @@ func register(node, opts={}):
 	var data = check_out(node)
 	if data == null:
 		if not Engine.is_editor_hint():
-			Debug.warn("No data found for node: ", node, "passing empty dict.")
+			pass
+			# Debug.warn("No data found for node: ", node, "passing empty dict.")
 		data = {}
 	node.check_out(data)
 
@@ -257,7 +258,8 @@ func check_in(node: Node, data=null):
 		update(key, data)
 	else:
 		if not Engine.is_editor_hint():
-			Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
+			pass
+			# Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 
 func check_in_sfp(sfp: String, data: Dictionary):
 	var entry = first({scene_file_path=sfp})
@@ -284,7 +286,8 @@ func check_out(node: Node):
 		return scene_db[key]
 	else:
 		if not Engine.is_editor_hint():
-			Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
+			pass
+			# Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
 ## Flexible access to the scene_db vals
 func query(q={}):

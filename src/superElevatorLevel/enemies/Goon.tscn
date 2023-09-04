@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dfusbqodk1yxw"]
+[gd_scene load_steps=51 format=3 uid="uid://dfusbqodk1yxw"]
 
 [ext_resource type="Script" path="res://src/superElevatorLevel/enemies/Goon.gd" id="1_teuic"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ox2po"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_k27u2"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_5hwwr"]
 [ext_resource type="Texture2D" uid="uid://by8kuopodsemm" path="res://src/superElevatorLevel/enemies/BEU_goon.png" id="5_wxukf"]
+[ext_resource type="Material" uid="uid://br44ctbmsst5r" path="res://src/superElevatorLevel/enemies/GoonAlt2.tres" id="6_wwcw8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tylhs"]
 
@@ -417,6 +418,7 @@ size = Vector2(12, 20)
 collision_layer = 8
 collision_mask = 1025
 script = ExtResource("1_teuic")
+display_name = "Richard"
 should_wander = true
 should_notice = true
 walk_speed = 7000
@@ -460,6 +462,7 @@ shape = SubResource("CircleShape2D_fg5y2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = ExtResource("6_wwcw8")
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_vcpwc")
 animation = &"grab"
