@@ -28,3 +28,4 @@ dist.zip
 /.godot/
 
 addons/core/assets/fonts/vexed
+build/build-output/
