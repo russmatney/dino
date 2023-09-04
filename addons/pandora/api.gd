@@ -3,25 +3,28 @@ extends Node
 
 
 const EntityIdFileGenerator = preload("res://addons/pandora/util/entity_id_file_generator.gd")
+const ScriptUtil = preload("res://addons/pandora/util/script_util.gd")
 
 
 signal data_loaded
+signal data_loaded_failure
 signal entity_added(entity:PandoraEntity)
 
 
 var _context_manager:PandoraContextManager
 var _storage:PandoraJsonDataStorage
-var _id_generator:PandoraIdGenerator
+var _id_generator:NanoIDGenerator
 var _entity_backend:PandoraEntityBackend
 
 
 var _loaded = false
+var _backend_load_state:PandoraEntityBackend.LoadState = PandoraEntityBackend.LoadState.NOT_LOADED
 
 	
 func _enter_tree() -> void:
 	self._storage = PandoraJsonDataStorage.new("res://")
 	self._context_manager = PandoraContextManager.new()
-	self._id_generator = PandoraIdGenerator.new()
+	self._id_generator = NanoIDGenerator.new(NanoIDAlphabets.URL, 10)
 	self._entity_backend = PandoraEntityBackend.new(_id_generator)
 	self._entity_backend.entity_added.connect(func(entity): entity_added.emit(entity))
 	load_data()
@@ -29,7 +32,10 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	_clear()
-
+	_entity_backend = null
+	_context_manager = null
+	_id_generator = null
+	_storage = null
 
 func get_context_id() -> String:
 	return _context_manager.get_context_id()
@@ -95,18 +101,22 @@ func load_data() -> void:
 		data_loaded.emit()
 		return
 	var all_object_data = _storage.get_all_data(_context_manager.get_context_id())
-	if all_object_data.has("_entity_data"):
-		_entity_backend.load_data(all_object_data["_entity_data"])
-	if all_object_data.has("_id_generator"):
-		_id_generator.load_data(all_object_data["_id_generator"])
-	_loaded = true
-	data_loaded.emit()
+	if all_object_data.has("_entity_data") and not all_object_data.is_empty():
+		_backend_load_state = _entity_backend.load_data(all_object_data["_entity_data"])
+	if all_object_data.is_empty() or _backend_load_state == PandoraEntityBackend.LoadState.LOADED:
+		_backend_load_state = PandoraEntityBackend.LoadState.LOADED
+		_loaded = true
+		data_loaded.emit()
+	else:
+		data_loaded_failure.emit()
 
 
 func save_data() -> void:
+	if not _loaded:
+		push_warning("Pandora: Skip saving data - data not loaded yet.")
+		return
 	var all_object_data = {
-			"_entity_data": _entity_backend.save_data(),
-			"_id_generator": _id_generator.save_data()
+			"_entity_data": _entity_backend.save_data()
 		}
 	_storage.store_all_data(all_object_data, _context_manager.get_context_id())
 
@@ -117,28 +127,33 @@ func is_loaded() -> bool:
 	return _loaded
 	
 	
-func serialize(instance:PandoraEntityInstance) -> Dictionary:
+func serialize(instance:PandoraEntity) -> Dictionary:
+	if instance is PandoraCategory:
+		push_warning("Cannot serialize a category!")
+		return {}
+	if not instance.is_instance():
+		var new_instance = instance.instantiate()
+		return new_instance.save_data()
 	return instance.save_data()
 	
 	
-func deserialize(data:Dictionary) -> PandoraEntityInstance:
-	if not data.has("_entity_id"):
-		push_error("Unable to deserialize data! Invalid PandoraEntityInstance format.")
+func deserialize(data:Dictionary) -> PandoraEntity:
+	if not _loaded:
+		push_warning("Pandora - cannot deserialize: data not initialized yet.")
+		return null
+	if not data.has("_instanced_from_id"):
+		push_error("Unable to deserialize data! Not an instance! Call PandoraEntity.instantiate() to create instances.")
 		return
-	var entity = Pandora.get_entity(data["_entity_id"])
+	var entity = Pandora.get_entity(data["_instanced_from_id"])
 	if not entity:
 		return
-	var InstanceClass = load(entity.get_instance_script_path())
-	if not InstanceClass:
-		push_error("Unable to deserialize data! Invalid instance script.")
-		return
-	var instance = InstanceClass.new("", [])
-	instance._load_data(data)
+	var instance = ScriptUtil.create_entity_from_script(entity.get_script_path(), "", "", "", "")
+	instance.load_data(data)
 	return instance
 
 
 # used for testing only and shutting down the addon
 func _clear() -> void:
 	_entity_backend._clear()
-	_id_generator.clear()
 	_loaded = false
+	_backend_load_state = PandoraEntityBackend.LoadState.NOT_LOADED

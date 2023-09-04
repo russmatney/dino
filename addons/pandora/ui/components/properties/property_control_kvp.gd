@@ -6,7 +6,7 @@ extends PanelContainer
 signal inherited_property_selected(category_id:String, property_name:String)
 
 ## called when an original property was selected
-signal original_property_selected(property:PandoraProperty, default_settings:Dictionary)
+signal original_property_selected(property:PandoraProperty)
 
 
 var _property:PandoraProperty:
@@ -30,6 +30,8 @@ var _backend:PandoraEntityBackend
 
 
 func init(property:PandoraProperty, control:PandoraPropertyControl, backend:PandoraEntityBackend) -> void:
+	if self._control != null:
+		_control.queue_free()
 	self._property = property
 	self._control = control
 	self._backend = backend
@@ -61,6 +63,8 @@ func _refresh_key() -> void:
 
 
 func _refresh_value() -> void:
+	for child in property_value.get_children():
+		child.queue_free()
 	property_value.get_children().clear()
 	property_value.add_child(_control)
 
@@ -101,7 +105,7 @@ func _delete_property() -> void:
 	
 
 func _property_key_focused() -> void:
-	original_property_selected.emit(_property, _control.get_default_settings())
+	original_property_selected.emit(_property)
 
 
 func _property_key_unfocused() -> void:
@@ -110,7 +114,7 @@ func _property_key_unfocused() -> void:
 
 func _control_value_focused() -> void:
 	if property_key_edit.visible:
-		original_property_selected.emit(_property, _control.get_default_settings())
+		original_property_selected.emit(_property)
 		
 	
 func _control_value_unfocused() -> void:

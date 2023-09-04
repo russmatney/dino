@@ -4,6 +4,20 @@
 class_name PandoraEntityBackend extends RefCounted
 
 
+const ScriptUtil = preload("res://addons/pandora/util/script_util.gd")
+
+
+enum LoadState {
+	# backend not initialized yet
+	NOT_LOADED,
+	# backend is currently loading
+	LOADING,
+	# backend is loaded and ready to be used
+	LOADED,
+	# a problem occured during loading
+	LOAD_ERROR
+}
+
 ## Emitted when an entity (or category) gets created
 signal entity_added(entity:PandoraEntity)
 
@@ -17,17 +31,18 @@ var _categories:Dictionary = {}
 # list of categories on the root level
 var _root_categories:Array[PandoraCategory] = []
 # generates ids for new entities
-var _id_generator:PandoraIdGenerator
+var _id_generator:NanoIDGenerator
+# tracks the current state of loading
+var _load_state:LoadState = LoadState.NOT_LOADED
 
 
-func _init(id_generator:PandoraIdGenerator) -> void:
+func _init(id_generator:NanoIDGenerator) -> void:
 	self._id_generator = id_generator
 
 
 ## Creates a new entity on the given PandoraCategory
 func create_entity(name:String, category:PandoraCategory) -> PandoraEntity:
-	var EntityClass = load(category.get_script_path())
-	var entity = EntityClass.new(_id_generator.generate(), name, "", category._id)
+	var entity = ScriptUtil.create_entity_from_script(category.get_script_path(), _id_generator.generate(), name, "", category._id)
 	_entities[entity._id] = entity
 	category._children.append(entity)
 	_propagate_properties(category)
@@ -37,7 +52,8 @@ func create_entity(name:String, category:PandoraCategory) -> PandoraEntity:
 
 ## Creates a new category on an optional parent category
 func create_category(name:String, parent_category:PandoraCategory = null) -> PandoraCategory:
-	var category = PandoraCategory.new(_id_generator.generate(), name, "", "")
+	var category = PandoraCategory.new()
+	category.init_entity(_id_generator.generate(), name, "", "")
 	if parent_category != null:
 		parent_category._children.append(category)
 		category._category_id = parent_category._id
@@ -51,11 +67,13 @@ func create_category(name:String, parent_category:PandoraCategory = null) -> Pan
 
 
 ## Creates a new property on the given category parent
-func create_property(on_category:PandoraCategory, name:String, type:String, defaultValue:Variant = null) -> PandoraProperty:
+func create_property(on_category:PandoraCategory, name:String, type:String, default_value:Variant = null) -> PandoraProperty:
 	if on_category.has_entity_property(name):
 		push_error("Unable to create property " + name + " - property with the same name exists.")
 		return null
-	var property = PandoraProperty.new(_id_generator.generate(), name, type, defaultValue if defaultValue else PandoraProperty.default_value_of(type))
+	var property = PandoraProperty.new(_id_generator.generate(), name, type)
+	if default_value != null:
+		property.set_default_value(default_value)
 	property._category_id = on_category._id
 	_properties[property._id] = property
 	on_category._properties.append(property)
@@ -161,37 +179,56 @@ func get_all_entities(parent:PandoraCategory = null, sort:Callable = func(a,b): 
 ## Initialize this backend with the given data dictionary.
 ## The data needs to come from a source that was produced via
 ## the save_data() method.
-func load_data(data:Dictionary) -> void:
+func load_data(data:Dictionary) -> LoadState:
+	_load_state = LoadState.LOADING
 	_root_categories.clear()
 	_categories = _deserialize_categories(data["_categories"])
+	if _categories == null:
+		_load_state = LoadState.LOAD_ERROR
+	if _load_state == LoadState.LOAD_ERROR:
+		return _load_state
 	_entities = _deserialize_entities(data["_entities"])
+	if _entities == null:
+		_load_state = LoadState.LOAD_ERROR
+	if _load_state == LoadState.LOAD_ERROR:
+		return _load_state
 	_properties = _deserialize_properties(data["_properties"])
+	if _properties == null:
+		_load_state = LoadState.LOAD_ERROR
+	if _load_state == LoadState.LOAD_ERROR:
+		return _load_state
 	for key in _categories:
 		var category = _categories[key] as PandoraCategory
 		if category._category_id:
 			if not _categories.has(category._category_id):
 				push_error("Pandora error: category " + category._category_id + " on category does not exist")
-				continue
+				_load_state = LoadState.LOAD_ERROR
+				return _load_state
 			var parent = _categories[category._category_id] as PandoraCategory
 			parent._children.append(category)
 	for key in _entities:
 		var entity = _entities[key] as PandoraEntity
 		if not _categories.has(entity._category_id):
 			push_error("Pandora error: category " + entity._category_id + " on entity does not exist")
-			continue
+			_load_state = LoadState.LOAD_ERROR
+			return _load_state
 		var category = _categories[entity._category_id] as PandoraCategory
 		category._children.append(entity)
 	for key in _properties:
 		var property = _properties[key] as PandoraProperty
 		if not _categories.has(property._category_id):
 			push_error("Pandora error: category " + property._category_id + " on property does not exist")
-			continue
+			_load_state = LoadState.LOAD_ERROR
+			return _load_state
 		var category = _categories[property._category_id] as PandoraCategory
 		category._properties.append(property)
 		
 	# propagate properties from roots
 	for root_category in _root_categories:
 		_propagate_properties(root_category)
+	
+	_load_state = LoadState.LOADED
+	return _load_state
 
 
 ## Returns a dictionary that can be used for further storage.
@@ -210,14 +247,18 @@ func _deserialize_entities(data:Array) -> Dictionary:
 		# only when entity has an overridden class, initialise it.
 		# otherwise rely on the script path of the parent category.
 		if entity_data.has("_script_path"):
-			var ScriptClass = load(entity_data["_script_path"])
-			var entity = ScriptClass.new("", "", "", "")
+			var entity = ScriptUtil.create_entity_from_script(entity_data["_script_path"], "", "", "", "")
+			if entity == null:
+				_load_state = LoadState.LOAD_ERROR
+				return {}
 			entity.load_data(entity_data)
 			dict[entity._id] = entity
 		else:
 			var parent_category = _categories[entity_data["_category_id"]]
-			var ScriptClass = load(parent_category.get_script_path())
-			var entity = ScriptClass.new("", "", "", "")
+			var entity = ScriptUtil.create_entity_from_script(parent_category.get_script_path(), "", "", "", "")
+			if entity == null:
+				_load_state = LoadState.LOAD_ERROR
+				return {}
 			entity.load_data(entity_data)
 			dict[entity._id] = entity
 	return dict
@@ -226,7 +267,7 @@ func _deserialize_entities(data:Array) -> Dictionary:
 func _deserialize_categories(data:Array) -> Dictionary:
 	var dict = {}
 	for category_data in data:
-		var category = PandoraCategory.new("", "", "", "")
+		var category = PandoraCategory.new()
 		category.load_data(category_data)
 		dict[category._id] = category
 		if category._category_id == "":
@@ -238,7 +279,7 @@ func _deserialize_categories(data:Array) -> Dictionary:
 func _deserialize_properties(data:Array) -> Dictionary:
 	var dict = {}
 	for property_data in data:
-		var property = PandoraProperty.new("", "", "", "")
+		var property = PandoraProperty.new("", "", "")
 		property.load_data(property_data)
 		dict[property._id] = property
 	return dict

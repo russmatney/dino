@@ -1,4 +1,4 @@
-class_name PandoraReference extends Resource
+class_name PandoraReference extends RefCounted
 
 
 enum Type {
@@ -36,3 +36,6 @@ func save_data() -> Dictionary:
 		"_entity_id": _entity_id,
 		"_type":_type
 	}
+
+func _to_string() -> String:
+	return "<PandoraReference" + str(get_entity()) + ">"
