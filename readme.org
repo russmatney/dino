@@ -3,9 +3,9 @@
 --
 
 NOTE: games that use the ActionHint (unfortunately most of them) will not work
-with naive clone just yet, because I'm not yet including some game assets
+with a shallow clone just yet, because I'm not yet including some game assets
 (third-party fonts) in the repo. I'm hopeful to implement a technical solution
-to this, like working using a fallback font when the referenced one is missing.
+to this, like using a fallback font when the referenced one is missing.
 
 --
 
