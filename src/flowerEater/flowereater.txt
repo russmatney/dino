@@ -1,0 +1,234 @@
+title Flower Eater
+author Russell Matney
+
+require_player_movement
+
+========
+OBJECTS
+========
+
+PlayerA
+Blue Green White Black
+.000.
+.010.
+01210
+33333
+.3.3.
+
+PlayerB
+Blue Red White Black
+.000.
+.010.
+01210
+33333
+.3.3.
+
+TrailBlockA
+Purple Red
+.000.
+0...0
+0.1.0
+0...0
+.000.
+
+TrailBlockB
+Purple Red
+.000.
+0...0
+0.1.0
+0...0
+.000.
+
+TrailOld
+Gray
+
+PrevA
+Green
+
+PrevB
+Red
+
+Flower
+Green YellowGreen
+..0..
+.010.
+01011
+.010.
+..1..
+
+FlowerEaten
+Green YellowGreen
+.....
+.100.
+.001.
+.010.
+.....
+
+Target
+Red Orange
+..0..
+.101.
+00100
+.101.
+..0..
+
+Background
+DarkBrown
+
+=======
+LEGEND
+=======
+
+. = Background
+a = PlayerA
+b = PlayerB
+o = Flower
+t = Target
+
+Player = a or b
+pt = Flower or Target
+x = PlayerA and FlowerEaten
+y = PlayerB and FlowerEaten
+
+=======
+SOUNDS
+=======
+
+sfx0 50392900 (platform sound)
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Flower, FlowerEaten, Target
+Player
+TrailOld, TrailBlockA, TrailBlockB
+PrevA, PrevB
+
+======
+RULES
+======
+
+(prevent moving toward the last spot. TODO: undo!)
+[ > PlayerA | ... | TrailBlockA ] -> [ PlayerA | ... | TrailBlockA ]
+([ > PlayerA | ... | TrailBlockA ] -> [ Flower | ... | PlayerA ])
+[ > PlayerB | ... | TrailBlockB ] -> [ PlayerB | ... | TrailBlockB ]
+([ > PlayerB | ... | TrailBlockB ] -> [ Flower | ... | PlayerB ])
+
+(prevent moving into the other player)
+(TODO cover more cases... this is quite hard-coded)
+[ > Player | Player ] -> [ Player | Player ]
+[ > Player | FlowerEaten | Player ] -> [ Player | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+[ > Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ] -> [ Player | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | FlowerEaten | Player ]
+
+(prevent moving if we've reached the target)
+[ > Player Target ] -> [ Player Target ]
+
+(move to platform or target, leaving last spot)
+[ > PlayerA | ... | pt ] -> [ TrailBlockA PrevA | ... | PlayerA pt ] sfx0
+[ > PlayerB | ... | pt ] -> [ TrailBlockB PrevB | ... | PlayerB pt ] sfx0
+
+(mark platform used)
+[ Player Flower ] -> [ Player FlowerEaten ]
+
+(otherwise! prevent movement)
+[ > Player ] -> [ Player ]
+
+(remove previous blocker)
+[ PrevA | ... | TrailBlockA ] -> [ PrevA | ... | ]
+[ PrevA ] -> [ ]
+[ PrevB  | ... | TrailBlockB  ] -> [ PrevB  | ... | ]
+[ PrevB  ] -> [ ]
+
+==============
+WINCONDITIONS
+==============
+
+No Flower
+All Player on Target
+
+=======
+LEVELS
+=======
+
+message "Eat all the flowers. The red/orange must be last."
+
+.......
+.xooot.
+.......
+
+...o..t
+.x...o.
+...o.o.
+
+.o.o...
+.x.....
+.t.o.o.
+.o...o.
+
+message "If you get stuck, remember z to undo"
+
+o..o.o.
+ox.o.ot
+...o.o.
+.......
+
+message "Show me whatcha got!"
+
+.o....o
+.x.ooo.
+.o.....
+.t.oooo
+
+oo..o.o
+ox.ooo.
+.o.....
+.t.oooo
+
+oo..o.o
+ox.ooo.
+.t.....
+.o.oooo
+
+message "Bonus level"
+
+xoooooo
+ooooooo
+ooooooo
+oooooot
+
+message "Now for something more interesting..."
+
+.......
+.xooot.
+.......
+.yooot.
+.......
+
+....o.o
+tx..o.o
+....o.o
+ty..o.o
+.......
+
+message "Not sure I like this one."
+
+....o.o
+tx..o.o
+......t
+oo.o.y.
+oo.o..o
+
+message "Final level!"
+
+xoooooy
+ooooooo
+ooooooo
+tooooot
+
+message "Thanks for playing!"

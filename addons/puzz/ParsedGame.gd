@@ -126,12 +126,10 @@ func parse_rules(chunks):
 	for lines in chunks:
 		for l in lines:
 			var parts = l.split(" -> ")
-			var pattern = parts[0]
-			var update = parts[1]
-			rules.append({
-				pattern=parse_pattern(parts[0]),
-				update=parse_pattern(parts[1]),
-				})
+			var new_rule = {pattern=parse_pattern(parts[0])}
+			if len(parts) > 1:
+				new_rule["update"] = parse_pattern(parts[1])
+			rules.append(new_rule)
 	return rules
 
 func parse_pattern(rule_pattern_str):
@@ -149,6 +147,10 @@ func parse_pattern(rule_pattern_str):
 	var regex = RegEx.new()
 	regex.compile("\\[\\s*(.*)\\s*\\]")
 	var res = regex.search(rule_pattern_str)
+
+	if res == null:
+		return initial_terms
+
 	var inner = res.get_string(1)
 
 	var inner_cells = inner.split(" | ")
