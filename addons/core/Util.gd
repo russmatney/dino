@@ -364,6 +364,13 @@ func _config_warning(node, opts={}):
 
 	return warns
 
+#################################################################
+## func
+
+func first(list):
+	if len(list) > 0:
+		return list[0]
+
 func sum(vals):
 	return vals.reduce(func(agg, x): return x + agg)
 
@@ -385,3 +392,12 @@ func update_stylebox(node, stylebox_name, fn):
 	var stylebox = node.get_theme_stylebox(stylebox_name).duplicate()
 	fn.call(stylebox)
 	node.add_theme_stylebox_override(stylebox_name, stylebox)
+
+
+# TODO move to Util
+func add_color_rect(node, pos, size, color):
+	var crect = ColorRect.new()
+	crect.color = color
+	crect.position = pos
+	crect.size = size
+	node.add_child(crect)

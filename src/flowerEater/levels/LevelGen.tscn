@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://tvyrug4jm0ci"]
+[gd_scene load_steps=3 format=3 uid="uid://tvyrug4jm0ci"]
 
 [ext_resource type="Script" path="res://src/flowerEater/levels/LevelGen.gd" id="1_hju81"]
+[ext_resource type="Script" path="res://src/flowerEater/levels/Level.gd" id="2_dxs0s"]
 
 [node name="LevelGen" type="Node2D"]
 script = ExtResource("1_hju81")
 puzz_file = "res://src/flowerEater/flowereater.txt"
+
+[node name="Level_0" type="Node2D" parent="."]
+script = ExtResource("2_dxs0s")

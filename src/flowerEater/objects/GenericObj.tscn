@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkceeg4fliwyc"]
+
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_c4416"]
+[ext_resource type="Script" path="res://src/flowerEater/objects/GenericObj.gd" id="1_mg6w2"]
+
+[node name="GenericObj" type="Node2D"]
+script = ExtResource("1_mg6w2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.364706, 0.368627, 0.541176)
+
+[node name="ObjectLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("1_c4416")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]label[/center]"
+fit_content = true
+scroll_active = false
