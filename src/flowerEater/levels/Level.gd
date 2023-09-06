@@ -187,9 +187,11 @@ func move_player_to_cell(player, cell):
 	if len(player.move_history) > 1:
 		var prev_undo_coord = player.move_history[1]
 		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
+		Debug.pr("undo erased", state.grid[prev_undo_coord.y])
 
 	# add new undo marker at current coord
 	state.grid[player.coord.y][player.coord.x].append("Undo")
+	Debug.pr("undo appended", state.grid[player.coord.y])
 
 	# update to new coord
 	player.coord = cell.coord
@@ -260,7 +262,9 @@ func undo_last_move(player):
 	var new_undo_coord = Util.first(player.move_history)
 	if new_undo_coord != null:
 		state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
+		Debug.pr("undo appended (in undo)", state.grid[new_undo_coord.y])
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
+	Debug.pr("undo erased (in undo)", state.grid[dest_cell.coord.y])
 
 	if last_pos == player.coord:
 		Debug.pr("Player already at last coord, no undo movement required")
@@ -289,16 +293,26 @@ func undo_last_move(player):
 
 ## move ##############################################################
 
+# attempt to move all players in move_dir
+# any undos (movement backwards) undos the last movement
+# if any player is stuck, only undo is allowed
+# otherwise, the player moves to the flower or target in the direction pressed
 func move(move_dir):
 	var moves_to_make = []
 	for p in state.players:
 		var cells = cells_in_dir(p.coord, move_dir)
 		if len(cells) == 0:
+			if p.stuck:
+				Debug.warn("stuck.", p.stuck)
+				moves_to_make.append(["stuck", p])
 			# TODO express/animate stuck/edge move
 			continue
 
 		cells = cells.filter(func(c): return c.objs != null)
 		if len(cells) == 0:
+			if p.stuck:
+				Debug.warn("stuck.", p.stuck)
+				moves_to_make.append(["stuck", p])
 			# TODO express/animate nothing in-direction move
 			continue
 
@@ -308,17 +322,19 @@ func move(move_dir):
 				# should be fine? worried about playerA finding playerB's undo?
 				moves_to_make.append(["undo", undo_last_move, p, cell])
 				break
-			if "Flower" in cell.objs and not p.stuck:
-				moves_to_make.append(["flower", move_to_flower, p, cell])
-				break
-			if "Target" in cell.objs and not p.stuck:
-				moves_to_make.append(["target", move_to_target, p, cell])
-				break
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
+				moves_to_make.append(["stuck", p])
 				break
-			else:
-				Debug.warn("unexpeced/unhandled cell in direction", cell, "stuck?", p.stuck)
+			if "FlowerEaten" in cell.objs:
+				continue
+			if "Flower" in cell.objs:
+				moves_to_make.append(["flower", move_to_flower, p, cell])
+				break
+			if "Target" in cell.objs:
+				moves_to_make.append(["target", move_to_target, p, cell])
+				break
+			Debug.warn("unexpeced/unhandled cell in direction", cell)
 
 	Debug.pr("move", move_dir, "moves to make", moves_to_make.map(func(m): return m[0]))
 
@@ -326,9 +342,14 @@ func move(move_dir):
 	if any_undo:
 		Debug.pr("should undo all!")
 		for m in moves_to_make:
-			# TODO refactor undo to handle no cell passed (get from history)
 			undo_last_move(m[2])
-		# prevent any other moves
+		# return to prevent any other moves
+		return
+
+	var any_stuck = moves_to_make.any(func(m): return m[0] == "stuck")
+	if any_stuck:
+		Debug.pr("player stuck, gotta undo")
+		# return to prevent any other moves
 		return
 
 	var any_move = moves_to_make.any(func(m): return m[0] in ["flower", "target"])
