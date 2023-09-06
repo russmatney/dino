@@ -11,6 +11,8 @@ var square_size = 64
 var cell_nodes = {}
 var state
 
+signal win
+
 var obj_scene = {
 	"fallback": preload("res://src/flowerEater/objects/GenericObj.tscn"),
 	"PlayerA": preload("res://src/flowerEater/objects/PlayerA.tscn"),
@@ -226,6 +228,7 @@ func move_to_target(cell):
 	move_player_to_cell(cell)
 	if all_flowers_eaten():
 		Debug.pr("win!")
+		win.emit()
 	else:
 		Debug.pr("stuck.")
 		state.stuck = true

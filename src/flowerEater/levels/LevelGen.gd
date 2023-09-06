@@ -23,8 +23,17 @@ func generate_level(num=0):
 	var level_node = Node2D.new()
 	level_node.name = level_node_name
 	level_node.set_script(level_script)
+	level_node.win.connect(func():
+		level_node.queue_free()
+		load_next(num + 1))
 	level_node.game_def = game_def
 	level_node.level_def = game_def.levels[num]
 	level_node.square_size = square_size
 	add_child(level_node)
 	level_node.set_owner(self)
+
+func load_next(next_num):
+	if next_num < len(game_def.levels):
+		generate_level(next_num)
+	else:
+		Debug.pr("win all!")
