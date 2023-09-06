@@ -13,6 +13,7 @@ func get_cell_objects(parsed, cell):
 	if cell == null:
 		return
 
-	var objs = parsed.legend.get(cell)
+	# note the duplicate here, so the returned array doesn't share state with every other cell
+	var objs = parsed.legend.get(cell).duplicate()
 	# TODO if or/and in objs, lookup again
 	return objs

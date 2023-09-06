@@ -82,7 +82,7 @@ func _unhandled_input(event):
 	if Trolley.is_move(event):
 		move(Trolley.move_vector())
 
-## game ##############################################################
+## game helpers ##############################################################
 
 var player_node
 
@@ -95,85 +95,121 @@ func init_game_state():
 		for x in len(row):
 			var cell = level_def.shape[y][x]
 			var objs = Puzz.get_cell_objects(game_def, cell)
-			if objs != null:
-				objs = objs.duplicate()
 			r.append(objs)
 			if objs != null and "PlayerA" in objs:
 				player_a_pos = Vector2(x, y)
-				player_node = Util.first(cell_nodes[str(x, y)].filter(func(c): return c.display_name == "PlayerA"))
+				player_node = cell_nodes[str(x, y)].filter(func(c): return c.display_name == "PlayerA").front()
 		grid.append(r)
 
 	state = {
 		grid=grid, player_a_position=player_a_pos,
-		grid_xs=len(grid[0]),
-		grid_ys=len(grid),
+		grid_xs=len(grid[0]), grid_ys=len(grid),
 		}
 
+# returns true if the passed coord is in the level's grid
 func pos_in_grid(pos):
 	return pos.x >= 0 and pos.y >= 0 and \
 		pos.x < state.grid_xs and pos.y < state.grid_ys
 
-func move(move_dir):
-	Debug.prn(move_dir, state.grid[1])
-	# TODO for each player...
-	var curr = state.player_a_position
-	var cells = cells_in_dir(curr, move_dir)
-	var dest_cell
-	var dest_coord
-	for cell in cells:
-		if cell.objs == null:
-			continue
-		if "Flower" in cell.objs:
-			Debug.pr("flower! eat it", cell)
-			dest_cell = cell
-			dest_coord = cell.coord
-			break
-		if "Target" in cell.objs:
-			Debug.pr("target! complete?", cell)
-			dest_cell = cell
-			dest_coord = cell.coord
-			break
-		Debug.pr("unhandled cell in direction")
-	if dest_coord == null:
-		Debug.pr("no valid landing coord, no-op!")
-		# TODO animate, sound, etc
-		return
-
-	var dest_nodes = cell_nodes.get(str(dest_coord.x, dest_coord.y))
-
-	Debug.pr("cell, nodes at dest", dest_coord, dest_cell, dest_nodes)
-
-	# flower eaten
-	var flower_node = Util.first(dest_nodes.filter(func(c): return c.display_name == "Flower"))
-	if flower_node:
-		cell_nodes[str(dest_coord.x, dest_coord.y)].erase(flower_node)
-		# TODO animate/kill/some api?
-		flower_node.queue_free()
-		add_obj_to_coord("FlowerEaten", dest_coord.x, dest_coord.y)
-		Debug.pr("erasing flower from state", state.grid[dest_coord.y])
-		state.grid[dest_coord.y][dest_coord.x].erase("Flower")
-		state.grid[dest_coord.y][dest_coord.x].append("FlowerEaten")
-		Debug.pr("erased flower from state", state.grid[dest_coord.y])
-
-	# TODO flower un-eaten
-
-	# move player
-	# TODO animate, etc
-	player_node.position = dest_coord * square_size
-	Debug.pr("moving player in state", state.grid[dest_coord.y])
-	state.grid[dest_coord.y][dest_coord.x].append("PlayerA")
-	state.grid[curr.y][curr.x].erase("PlayerA")
-	Debug.pr("moved player in state", state.grid[curr.y])
-	state.player_a_position = dest_coord
-
-	# check for win/stuck
-	pass
-
+# returns a list of cells from the passed position in the passed direction
+# the cells are dicts with a coord, a list of objs (string names), and a list of nodes
 func cells_in_dir(pos, dir):
 	var cells = []
 	var cursor = pos + dir
 	while pos_in_grid(cursor):
 		var cell = state.grid[cursor.y][cursor.x]
-		cells.append({objs=cell, coord=cursor})
+		var nodes = cell_nodes.get(str(cursor.x, cursor.y))
+		cells.append({objs=cell, coord=cursor, nodes=nodes})
 		cursor += dir
 	return cells
+
+# Move the player to the passed cell's coordinate.
+# also updates the game state
+# cell should have a `coord`
+# this depends on the level's `player_node` var
+func move_player_to_cell(cell):
+	# move player node
+	# TODO animate/tween/sound/fun
+	# probably a func to call on player node w/ the new position
+	player_node.position = cell.coord * square_size
+
+	# update game state
+	state.grid[cell.coord.y][cell.coord.x].append("PlayerA")
+	state.grid[state.player_a_position.y][state.player_a_position.x].erase("PlayerA")
+	state.player_a_position = cell.coord
+
+	# TODO maintain a last-position coord list (for undo)
+
+# converts the flower at the cell's coord to an eaten one
+# depends on cell for `coord` and `nodes`.
+func eat_flower_at_cell(cell):
+	var flower_node = cell.nodes.filter(func(c): return c.display_name == "Flower").front()
+
+	# update cell_nodes
+	cell_nodes[str(cell.coord.x, cell.coord.y)].erase(flower_node)
+
+	# animate flower -> flower-eaten
+	# TODO probably should be the same node, not a drop + add
+	flower_node.queue_free()
+	add_obj_to_coord("FlowerEaten", cell.coord.x, cell.coord.y)
+
+	# update game state
+	state.grid[cell.coord.y][cell.coord.x].erase("Flower")
+	state.grid[cell.coord.y][cell.coord.x].append("FlowerEaten")
+
+# Returns a list of cell object names
+func all_cells():
+	var cs = []
+	for row in state.grid:
+		for cell in row:
+			cs.append(cell)
+	return cs
+
+# Returns true if there are no "Flower" objects in the state grid
+func all_flowers_eaten():
+	return all_cells().map(func(c):
+		if c == null:
+			return true
+		for obj_name in c:
+			if obj_name == "Flower":
+				return false
+		return true).all(func(x): return x)
+
+## move ##############################################################
+
+func move(move_dir):
+	# TODO for each player...
+	var cells = cells_in_dir(state.player_a_position, move_dir)
+	if len(cells) == 0:
+		# TODO express/animate stuck/edge move
+		return
+	for cell in cells:
+		if cell.objs == null:
+			continue
+		if "Flower" in cell.objs:
+			Debug.pr("flower! eat it", cell)
+			move_to_flower(cell)
+			break
+		if "Target" in cell.objs:
+			Debug.pr("target! complete?", cell)
+			move_to_target(cell)
+			break
+		# TODO handled UNDO (flower un-eaten)
+		# TODO handled no cells in direction
+		Debug.warn("unexpeced/unhandled cell in direction", cell)
+
+## move to flower ##############################################################
+
+func move_to_flower(cell):
+	# consider handling these in the same step (depending on the animation)
+	move_player_to_cell(cell)
+	eat_flower_at_cell(cell)
+
+## move to target ##############################################################
+
+func move_to_target(cell):
+	move_player_to_cell(cell)
+	if all_flowers_eaten():
+		Debug.pr("win!")
+	else:
+		Debug.pr("stuck.")
