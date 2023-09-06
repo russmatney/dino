@@ -183,15 +183,15 @@ func move_player_to_cell(player, cell):
 	state.grid[cell.coord.y][cell.coord.x].append("Player")
 	state.grid[player.coord.y][player.coord.x].erase("Player")
 
-	# remove previous undo marker
-	var prev_undo_coord = Util.first(player.move_history)
-	if prev_undo_coord != null:
+	# remove previous undo marker - NOTE history has already been updated
+	if len(player.move_history) > 1:
+		var prev_undo_coord = player.move_history[1]
 		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
 
-	# add new undo marker
+	# add new undo marker at current coord
 	state.grid[player.coord.y][player.coord.x].append("Undo")
 
-	# set new player state position
+	# update to new coord
 	player.coord = cell.coord
 
 # converts the flower at the cell's coord to an eaten one
@@ -254,13 +254,18 @@ func move_to_target(player, cell):
 func undo_last_move(player):
 	# remove last move from move_history
 	var last_pos = player.move_history.pop_front()
+	var dest_cell = cell_at_coord(last_pos)
+
+	# need to walk back the grid's Undo markers
+	var new_undo_coord = Util.first(player.move_history)
+	if new_undo_coord != null:
+		state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
+	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
 
 	if last_pos == player.coord:
-		Debug.pr("Undo has nothing to do, player already at last coord.")
-		# TODO animate undo while staying in place
+		Debug.pr("Player already at last coord, no undo movement required")
+		# TODO animate player.node undo in place
 		return
-
-	var dest_cell = cell_at_coord(last_pos)
 
 	# move player node
 	# TODO animate/tween/sound/fun
@@ -278,11 +283,6 @@ func undo_last_move(player):
 	if "Target" in state.grid[player.coord.y][player.coord.x]:
 		# unstuck when undoing from the target
 		player.stuck = false
-
-	var new_undo_coord = Util.first(player.move_history)
-	if new_undo_coord != null:
-		state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
-	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
 
 	# update state player position
 	player.coord = dest_cell.coord
