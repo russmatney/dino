@@ -187,11 +187,11 @@ func move_player_to_cell(player, cell):
 	if len(player.move_history) > 1:
 		var prev_undo_coord = player.move_history[1]
 		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
-		Debug.pr("undo erased", state.grid[prev_undo_coord.y])
+		# Debug.pr("undo erased", state.grid[prev_undo_coord.y])
 
 	# add new undo marker at current coord
 	state.grid[player.coord.y][player.coord.x].append("Undo")
-	Debug.pr("undo appended", state.grid[player.coord.y])
+	# Debug.pr("undo appended", state.grid[player.coord.y])
 
 	# update to new coord
 	player.coord = cell.coord
@@ -262,9 +262,9 @@ func undo_last_move(player):
 	var new_undo_coord = Util.first(player.move_history)
 	if new_undo_coord != null:
 		state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
-		Debug.pr("undo appended (in undo)", state.grid[new_undo_coord.y])
+		# Debug.pr("undo appended (in undo)", state.grid[new_undo_coord.y])
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
-	Debug.pr("undo erased (in undo)", state.grid[dest_cell.coord.y])
+	# Debug.pr("undo erased (in undo)", state.grid[dest_cell.coord.y])
 
 	if last_pos == player.coord:
 		Debug.pr("Player already at last coord, no undo movement required")
@@ -304,7 +304,7 @@ func move(move_dir):
 		if len(cells) == 0:
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
-				moves_to_make.append(["stuck", p])
+				moves_to_make.append(["stuck", null, p])
 			# TODO express/animate stuck/edge move
 			continue
 
@@ -312,19 +312,23 @@ func move(move_dir):
 		if len(cells) == 0:
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
-				moves_to_make.append(["stuck", p])
+				moves_to_make.append(["stuck", null, p])
 			# TODO express/animate nothing in-direction move
 			continue
 
 		for cell in cells:
-			Debug.pr(cell.objs, p.move_history, cell.coord)
+			Debug.pr(p.coord, cell.coord, cell.objs, p.move_history)
+			# TODO instead of markers, read undo from the players move history?
 			if "Undo" in cell.objs and cell.coord in p.move_history:
 				# should be fine? worried about playerA finding playerB's undo?
 				moves_to_make.append(["undo", undo_last_move, p, cell])
 				break
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
-				moves_to_make.append(["stuck", p])
+				moves_to_make.append(["stuck", null, p])
+				break
+			if "Player" in cell.objs:
+				moves_to_make.append(["blocked_by_player", null, p])
 				break
 			if "FlowerEaten" in cell.objs:
 				continue
@@ -334,23 +338,9 @@ func move(move_dir):
 			if "Target" in cell.objs:
 				moves_to_make.append(["target", move_to_target, p, cell])
 				break
-			Debug.warn("unexpeced/unhandled cell in direction", cell)
+			Debug.warn("unexpected/unhandled cell in direction", cell)
 
 	Debug.pr("move", move_dir, "moves to make", moves_to_make.map(func(m): return m[0]))
-
-	var any_undo = moves_to_make.any(func(m): return m[0] == "undo")
-	if any_undo:
-		Debug.pr("should undo all!")
-		for m in moves_to_make:
-			undo_last_move(m[2])
-		# return to prevent any other moves
-		return
-
-	var any_stuck = moves_to_make.any(func(m): return m[0] == "stuck")
-	if any_stuck:
-		Debug.pr("player stuck, gotta undo")
-		# return to prevent any other moves
-		return
 
 	var any_move = moves_to_make.any(func(m): return m[0] in ["flower", "target"])
 	if any_move:
@@ -358,6 +348,24 @@ func move(move_dir):
 		for p in state.players:
 			p.move_history.push_front(p.coord)
 
-	for m in moves_to_make:
-		Debug.pr("making move:", move_dir, m[0], m[1])
-		m[1].call(m[2], m[3])
+		for m in moves_to_make:
+			if m[0] in ["flower", "target"]:
+				Debug.pr("making move:", move_dir, m[0])
+				m[1].call(m[2], m[3])
+
+		return
+
+	var any_undo = moves_to_make.any(func(m): return m[0] == "undo")
+	if any_undo:
+		Debug.pr("should undo all!")
+		for m in moves_to_make:
+			# TODO kind of wonky, should prolly use a dict/struct
+			undo_last_move(m[2])
+		# return to prevent any other moves
+		return
+
+	# var any_stuck = moves_to_make.any(func(m): return m[0] == "stuck")
+	# if any_stuck:
+	# 	Debug.pr("player stuck, gotta undo")
+	# 	# return to prevent any other moves
+	# 	return
