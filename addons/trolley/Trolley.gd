@@ -169,17 +169,6 @@ func actions_for_input(event):
 # public
 ##################################################################
 
-
-# returns a normalized Vector2 based checked the controller's movement
-func move_vector():
-	if focused:
-		return Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	return Vector2.ZERO
-
-func is_move(event):
-	return is_event(event, "move_left") or is_event(event, "move_right") or \
-		is_event(event, "move_up") or is_event(event, "move_down")
-
 func is_event(event, event_name):
 	if focused:
 		return event.is_action_pressed(event_name)
@@ -195,6 +184,23 @@ func is_event_released(event, event_name):
 	if focused:
 		return event.is_action_released(event_name)
 	return false
+
+
+# returns a normalized Vector2 based checked the controller's movement
+func move_vector():
+	if focused:
+		return Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	return Vector2.ZERO
+
+func is_move(event):
+	return is_event(event, "move_left") or is_event(event, "move_right") or \
+		is_event(event, "move_up") or is_event(event, "move_down")
+
+func is_restart(event):
+	return is_event(event, "restart")
+
+func is_undo(event):
+	return is_event(event, "undo")
 
 func is_fire(event):
 	return is_event(event, "fire")

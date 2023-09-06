@@ -15,6 +15,7 @@ signal win
 
 var obj_scene = {
 	"fallback": preload("res://src/flowerEater/objects/GenericObj.tscn"),
+	"Player": preload("res://src/flowerEater/objects/PlayerA.tscn"),
 	"PlayerA": preload("res://src/flowerEater/objects/PlayerA.tscn"),
 	"PlayerB": preload("res://src/flowerEater/objects/PlayerB.tscn"),
 	"Flower": preload("res://src/flowerEater/objects/Flower.tscn"),
@@ -48,6 +49,16 @@ func setup_level():
 			var cell = level_def.shape[y][x]
 			add_square(x, y, cell)
 
+func get_cell_objs(cell):
+	var objs = Puzz.get_cell_objects(game_def, cell)
+	if objs != null and len(objs) > 0:
+		objs = objs.map(func(n):
+			if n in ["PlayerA", "PlayerB"]:
+				return "Player"
+			else:
+				return n)
+	return objs
+
 func add_square(x, y, cell):
 	if cell == null:
 		var pos = Vector2(x, y) * square_size
@@ -55,9 +66,7 @@ func add_square(x, y, cell):
 		Util.add_color_rect(self, pos, size, Color.PERU)
 		return
 
-	var objs = Puzz.get_cell_objects(game_def, cell)
-
-	for obj_name in objs:
+	for obj_name in get_cell_objs(cell):
 		add_obj_to_coord(obj_name, x, y)
 
 func add_obj_to_coord(obj_name, x, y):
@@ -84,53 +93,58 @@ func _unhandled_input(event):
 	if Trolley.is_move(event):
 		move(Trolley.move_vector())
 
-## state/grid ##############################################################
+	# TODO update input maps to support these
+	# if Trolley.is_restart(event):
+	# 	setup_level()
+	# if Trolley.is_undo(event):
+	# 	for p in state.players:
+	# 		undo_last_move(p)
 
-var player_node
+## state/grid ##############################################################
 
 func init_game_state():
 	var grid = []
-	var player_a_pos
+	var players = []
 	for y in len(level_def.shape):
 		var row = level_def.shape[y]
 		var r = []
 		for x in len(row):
 			var cell = level_def.shape[y][x]
-			var objs = Puzz.get_cell_objects(game_def, cell)
+			var objs = get_cell_objs(cell)
 			r.append(objs)
-			if objs != null and "PlayerA" in objs:
-				player_a_pos = Vector2(x, y)
-				player_node = cell_nodes[str(x, y)].filter(func(c): return c.display_name == "PlayerA").front()
+			if objs != null and "Player" in objs:
+				players.append({
+					coord=Vector2(x,y),
+					node=cell_nodes[str(x, y)].filter(func(c): return c.display_name in ["Player", "PlayerA", "PlayerB"]).front(),
+					stuck=false,
+					move_history=[],
+					})
 		grid.append(r)
 
-	state = {
-		grid=grid, player_a_position=player_a_pos,
-		grid_xs=len(grid[0]), grid_ys=len(grid),
-		stuck=false, move_history=[],
-		}
+	state = {players=players, grid=grid, grid_xs=len(grid[0]), grid_ys=len(grid)}
 
 # returns true if the passed coord is in the level's grid
-func pos_in_grid(pos):
-	return pos.x >= 0 and pos.y >= 0 and \
-		pos.x < state.grid_xs and pos.y < state.grid_ys
+func coord_in_grid(coord:Vector2) -> bool:
+	return coord.x >= 0 and coord.y >= 0 and \
+		coord.x < state.grid_xs and coord.y < state.grid_ys
 
-func cell_at_coord(coord):
+func cell_at_coord(coord:Vector2) -> Dictionary:
 	var cell = state.grid[coord.y][coord.x]
 	var nodes = cell_nodes.get(str(coord.x, coord.y))
 	return {objs=cell, coord=coord, nodes=nodes}
 
 # returns a list of cells from the passed position in the passed direction
 # the cells are dicts with a coord, a list of objs (string names), and a list of nodes
-func cells_in_dir(pos, dir):
+func cells_in_dir(coord:Vector2, dir:Vector2) -> Array:
 	var cells = []
-	var cursor = pos + dir
-	while pos_in_grid(cursor):
+	var cursor = coord + dir
+	while coord_in_grid(cursor):
 		cells.append(cell_at_coord(cursor))
 		cursor += dir
 	return cells
 
 # Returns a list of cell object names
-func all_cells():
+func all_cells() -> Array[Variant]:
 	var cs = []
 	for row in state.grid:
 		for cell in row:
@@ -138,45 +152,47 @@ func all_cells():
 	return cs
 
 # Returns true if there are no "Flower" objects in the state grid
-func all_flowers_eaten():
-	return all_cells().map(func(c):
+func all_flowers_eaten() -> bool:
+	return all_cells().all(func(c):
 		if c == null:
 			return true
 		for obj_name in c:
 			if obj_name == "Flower":
 				return false
-		return true).all(func(x): return x)
+		return true)
+
+func all_players_on_target() -> bool:
+	return all_cells().filter(func(c):
+		if c != null and "Target" in c:
+			return true
+		).all(func(c): return "Player" in c)
 
 ## move/state-updates ##############################################################
 
 # Move the player to the passed cell's coordinate.
 # also updates the game state
 # cell should have a `coord`
-# this depends on the level's `player_node` var
-# TODO history for two players
-func move_player_to_cell(cell):
+# NOTE updating move_history is done after all players move
+func move_player_to_cell(player, cell):
 	# move player node
 	# TODO animate/tween/sound/fun
 	# probably a func to call on player node w/ the new position
-	player_node.position = cell.coord * square_size
+	player.node.position = cell.coord * square_size
 
 	# update game state
-	state.grid[cell.coord.y][cell.coord.x].append("PlayerA")
-	state.grid[state.player_a_position.y][state.player_a_position.x].erase("PlayerA")
+	state.grid[cell.coord.y][cell.coord.x].append("Player")
+	state.grid[player.coord.y][player.coord.x].erase("Player")
 
 	# remove previous undo marker
-	var prev_undo_coord = Util.first(state.move_history)
+	var prev_undo_coord = Util.first(player.move_history)
 	if prev_undo_coord != null:
-		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("PlayerAUndo")
+		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
 
 	# add new undo marker
-	state.grid[state.player_a_position.y][state.player_a_position.x].append("PlayerAUndo")
-
-	# update undo history
-	state.move_history.push_front(state.player_a_position)
+	state.grid[player.coord.y][player.coord.x].append("Undo")
 
 	# set new player state position
-	state.player_a_position = cell.coord
+	player.coord = cell.coord
 
 # converts the flower at the cell's coord to an eaten one
 # depends on cell for `coord` and `nodes`.
@@ -217,78 +233,110 @@ func uneat_flower_at_cell(cell):
 
 ## move to flower ##############################################################
 
-func move_to_flower(cell):
+func move_to_flower(player, cell):
 	# consider handling these in the same step (depending on the animation)
-	move_player_to_cell(cell)
+	move_player_to_cell(player, cell)
 	eat_flower_at_cell(cell)
 
 ## move to target ##############################################################
 
-func move_to_target(cell):
-	move_player_to_cell(cell)
-	if all_flowers_eaten():
+func move_to_target(player, cell):
+	move_player_to_cell(player, cell)
+	if all_flowers_eaten() and all_players_on_target():
 		Debug.pr("win!")
 		win.emit()
 	else:
 		Debug.pr("stuck.")
-		state.stuck = true
+		player.stuck = true
 
 ## undo last move ##############################################################
 
-func undo_last_move(cell):
+func undo_last_move(player):
+	# remove last move from move_history
+	var last_pos = player.move_history.pop_front()
+
+	if last_pos == player.coord:
+		Debug.pr("Undo has nothing to do, player already at last coord.")
+		# TODO animate undo while staying in place
+		return
+
+	var dest_cell = cell_at_coord(last_pos)
+
 	# move player node
 	# TODO animate/tween/sound/fun
 	# TODO note this should be an undo animation
 	# probably a func to call on player node w/ the new position
-	player_node.position = cell.coord * square_size
+	player.node.position = dest_cell.coord * square_size
 
 	# update game state
-	state.grid[cell.coord.y][cell.coord.x].append("PlayerA")
-	state.grid[state.player_a_position.y][state.player_a_position.x].erase("PlayerA")
+	state.grid[dest_cell.coord.y][dest_cell.coord.x].append("Player")
+	state.grid[player.coord.y][player.coord.x].erase("Player")
 
-	if "FlowerEaten" in state.grid[state.player_a_position.y][state.player_a_position.x]:
+	if "FlowerEaten" in state.grid[player.coord.y][player.coord.x]:
 		# uneat the flower in the current player position
-		uneat_flower_at_cell(cell_at_coord(state.player_a_position))
-	if "Target" in state.grid[state.player_a_position.y][state.player_a_position.x]:
+		uneat_flower_at_cell(cell_at_coord(player.coord))
+	if "Target" in state.grid[player.coord.y][player.coord.x]:
 		# unstuck when undoing from the target
-		state.stuck = false
+		player.stuck = false
 
-	# remove last move from move_history
-	state.move_history.pop_front()
-
-	var new_undo_coord = Util.first(state.move_history)
+	var new_undo_coord = Util.first(player.move_history)
 	if new_undo_coord != null:
-		state.grid[new_undo_coord.y][new_undo_coord.x].append("PlayerAUndo")
-	state.grid[cell.coord.y][cell.coord.x].erase("PlayerAUndo")
+		state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
+	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
 
 	# update state player position
-	state.player_a_position = cell.coord
+	player.coord = dest_cell.coord
 
 ## move ##############################################################
 
 func move(move_dir):
-	# TODO for each player...
-	var cells = cells_in_dir(state.player_a_position, move_dir)
-	if len(cells) == 0:
-		# TODO express/animate stuck/edge move
+	var moves_to_make = []
+	for p in state.players:
+		var cells = cells_in_dir(p.coord, move_dir)
+		if len(cells) == 0:
+			# TODO express/animate stuck/edge move
+			continue
+
+		cells = cells.filter(func(c): return c.objs != null)
+		if len(cells) == 0:
+			# TODO express/animate nothing in-direction move
+			continue
+
+		for cell in cells:
+			Debug.pr(cell.objs, p.move_history, cell.coord)
+			if "Undo" in cell.objs and cell.coord in p.move_history:
+				# should be fine? worried about playerA finding playerB's undo?
+				moves_to_make.append(["undo", undo_last_move, p, cell])
+				break
+			if "Flower" in cell.objs and not p.stuck:
+				moves_to_make.append(["flower", move_to_flower, p, cell])
+				break
+			if "Target" in cell.objs and not p.stuck:
+				moves_to_make.append(["target", move_to_target, p, cell])
+				break
+			if p.stuck:
+				Debug.warn("stuck.", p.stuck)
+				break
+			else:
+				Debug.warn("unexpeced/unhandled cell in direction", cell, "stuck?", p.stuck)
+
+	Debug.pr("move", move_dir, "moves to make", moves_to_make.map(func(m): return m[0]))
+
+	var any_undo = moves_to_make.any(func(m): return m[0] == "undo")
+	if any_undo:
+		Debug.pr("should undo all!")
+		for m in moves_to_make:
+			# TODO refactor undo to handle no cell passed (get from history)
+			undo_last_move(m[2])
+		# prevent any other moves
 		return
 
-	for cell in cells:
-		if cell.objs == null:
-			continue
-		if "PlayerAUndo" in cell.objs:
-			Debug.pr("Undo!")
-			undo_last_move(cell)
-			break
-		if "Flower" in cell.objs and not state.stuck:
-			Debug.pr("flower! eat it", cell)
-			move_to_flower(cell)
-			break
-		if "Target" in cell.objs and not state.stuck:
-			Debug.pr("target! complete?", cell)
-			move_to_target(cell)
-			break
-		# TODO prevent backwards movement
-		# TODO handle UNDO (flower un-eaten)
-		# TODO handle no cells in direction
-		Debug.warn("unexpeced/unhandled cell in direction", cell, "stuck?", state.stuck)
+	var any_move = moves_to_make.any(func(m): return m[0] in ["flower", "target"])
+	if any_move:
+		Debug.pr("at least one move to make, updating all history before moving")
+		for p in state.players:
+			p.move_history.push_front(p.coord)
+
+	for m in moves_to_make:
+		Debug.pr("making move:", move_dir, m[0], m[1])
+		m[1].call(m[2], m[3])
