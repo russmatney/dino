@@ -7,7 +7,7 @@ class TestSimpleBlockPushingGamePrelude:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_prelude():
 		assert_has(parsed, "prelude", "prelude not parsed")
@@ -24,7 +24,7 @@ class TestSimpleBlockPushingGameObjects:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 
 	func test_objects():
@@ -98,7 +98,7 @@ class TestSimpleBlockPushingGameLegend:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_legend():
 		assert_has(parsed, "legend", "legend not parsed")
@@ -119,7 +119,7 @@ class TestSimpleBlockPushingGameSounds:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_sounds():
 		assert_has(parsed, "sounds", "sounds not parsed")
@@ -136,7 +136,7 @@ class TestSimpleBlockPushingGameCollisionLayers:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_collision_layers():
 		assert_has(parsed, "collisionlayers", "collisionlayers not parsed")
@@ -154,7 +154,7 @@ class TestSimpleBlockPushingGameRules:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_rules():
 		# TODO add more rule variants
@@ -175,7 +175,7 @@ class TestSimpleBlockPushingGameWinConditions:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_winconditions():
 		# TODO add more win-cond variants
@@ -190,7 +190,7 @@ class TestSimpleBlockPushingGameLevels:
 
 	func before_all():
 		var path = "res://test/unit/addons/puzz/simple_block_pushing_game.ps"
-		parsed = Puzz.parse_game(path)
+		parsed = Puzz.parse_game_def(path)
 
 	func test_levels():
 		# TODO add more win-cond variants

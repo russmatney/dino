@@ -1,18 +1,23 @@
 @tool
 extends Node2D
 
+#####################################################################
+## vars
+
 @export_file var puzz_file: String
 @export var square_size: int = 64
 @export var level_num: int = 0
 
-var game_def
-var level_script = preload("res://src/flowerEater/levels/Level.gd")
+#####################################################################
+## ready
 
 func _ready():
-	game_def = Puzz.parse_game(puzz_file)
-	Debug.pr("Found", len(game_def.levels), "levels")
+	Debug.pr("Found", len(FlowerEater.game_def.levels), "levels")
 
 	generate_level(level_num)
+
+#####################################################################
+## generate level
 
 func generate_level(num=0):
 	var level_node_name = "Level_%s" % num
@@ -20,20 +25,20 @@ func generate_level(num=0):
 		if ch.name == level_node_name:
 			ch.free()
 
-	var level_node = Node2D.new()
-	level_node.name = level_node_name
-	level_node.set_script(level_script)
-	level_node.win.connect(func():
-		level_node.queue_free()
+	var node = FlowerEater.build_puzzle_node(num)
+	node.name = level_node_name
+	node.win.connect(func():
+		node.queue_free()
 		load_next(num + 1))
-	level_node.game_def = game_def
-	level_node.level_def = game_def.levels[num]
-	level_node.square_size = square_size
-	add_child(level_node)
-	level_node.set_owner(self)
+	node.square_size = square_size
+	add_child(node)
+	node.set_owner(self)
+
+#####################################################################
+## load next
 
 func load_next(next_num):
-	if next_num < len(game_def.levels):
+	if next_num < len(FlowerEater.game_def.levels):
 		generate_level(next_num)
 	else:
 		Debug.pr("win all!")

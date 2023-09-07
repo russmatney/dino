@@ -66,6 +66,7 @@ Shirt="*res://src/shirt/Shirt.gd"
 Spike="*res://src/spike/Spike.gd"
 SuperElevatorLevel="*res://src/superElevatorLevel/SuperElevatorLevel.gd"
 Tower="*res://src/tower/Tower.gd"
+FlowerEater="*res://src/flowerEater/FlowerEater.gd"
 
 [display]
 

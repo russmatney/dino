@@ -1,7 +1,7 @@
 @tool
 extends Node
 
-func parse_game(path):
+func parse_game_def(path):
 	# TODO make sure file exists
 	var file = FileAccess.open(path, FileAccess.READ)
 	var contents = file.get_as_text()

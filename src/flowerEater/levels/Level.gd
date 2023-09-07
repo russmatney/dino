@@ -121,7 +121,7 @@ func init_game_state():
 					})
 		grid.append(r)
 
-	state = {players=players, grid=grid, grid_xs=len(grid[0]), grid_ys=len(grid)}
+	state = {players=players, grid=grid, grid_xs=len(grid[0]), grid_ys=len(grid), win=false}
 
 # returns true if the passed coord is in the level's grid
 func coord_in_grid(coord:Vector2) -> bool:
@@ -246,6 +246,7 @@ func move_to_target(player, cell):
 	move_player_to_cell(player, cell)
 	if all_flowers_eaten() and all_players_on_target():
 		Debug.pr("win!")
+		state.win = true
 		win.emit()
 	else:
 		Debug.pr("stuck.")
