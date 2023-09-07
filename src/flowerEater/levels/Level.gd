@@ -59,7 +59,6 @@ func setup_level():
 	for ch in get_children():
 		ch.free()
 
-	Debug.pr(level_def)
 	if len(level_def.shape) == 0:
 		Debug.warn("setup_level() called with out level_def.shape", level_def)
 		return
@@ -290,7 +289,6 @@ func undo_last_move(player):
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
 
 	if last_pos == player.coord:
-		Debug.pr("Player already at last coord, no undo movement required")
 		# TODO animate player.node undo in place
 		return
 
@@ -340,7 +338,6 @@ func move(move_dir):
 			continue
 
 		for cell in cells:
-			Debug.pr(p.coord, cell.coord, cell.objs, p.move_history)
 			# TODO instead of markers, read undo from the players move history?
 			if "Undo" in cell.objs and cell.coord in p.move_history:
 				# should be fine? worried about playerA finding playerB's undo?
@@ -363,32 +360,19 @@ func move(move_dir):
 				break
 			Debug.warn("unexpected/unhandled cell in direction", cell)
 
-	Debug.pr("move", move_dir, "moves to make", moves_to_make.map(func(m): return m[0]))
-
 	var any_move = moves_to_make.any(func(m): return m[0] in ["flower", "target"])
 	if any_move:
-		Debug.pr("at least one move to make, updating all history before moving")
 		for p in state.players:
 			p.move_history.push_front(p.coord)
 
 		for m in moves_to_make:
 			if m[0] in ["flower", "target"]:
-				Debug.pr("making move:", move_dir, m[0])
 				m[1].call(m[2], m[3])
 
 		return
 
 	var any_undo = moves_to_make.any(func(m): return m[0] == "undo")
 	if any_undo:
-		Debug.pr("should undo all!")
 		for m in moves_to_make:
 			# TODO kind of wonky, should prolly use a dict/struct
 			undo_last_move(m[2])
-		# return to prevent any other moves
-		return
-
-	# var any_stuck = moves_to_make.any(func(m): return m[0] == "stuck")
-	# if any_stuck:
-	# 	Debug.pr("player stuck, gotta undo")
-	# 	# return to prevent any other moves
-	# 	return
