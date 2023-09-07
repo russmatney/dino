@@ -6,4 +6,4 @@
 position = Vector2(0, -1)
 script = ExtResource("1_hju81")
 puzz_file = "res://src/flowerEater/flowereater.txt"
-level_num = 11
+level_num = 2

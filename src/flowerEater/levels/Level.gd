@@ -1,21 +1,28 @@
 @tool
 extends Node2D
+class_name FlowerEaterLevel
 
 var game_def
 var level_def :
 	set(ld):
 		level_def = ld
 		init_game_state()
-var square_size = 64
+@export var square_size = 64
 var state
 
 signal win
 
+enum type {Flower, FlowerEaten, Target}
+
+var obj_type = {
+	"Flower": type.Flower,
+	"FlowerEaten": type.FlowerEaten,
+	"Target": type.Target,
+	}
+
 var obj_scene = {
 	"fallback": preload("res://src/flowerEater/objects/GenericObj.tscn"),
 	"Player": preload("res://src/flowerEater/objects/PlayerA.tscn"),
-	"PlayerA": preload("res://src/flowerEater/objects/PlayerA.tscn"),
-	"PlayerB": preload("res://src/flowerEater/objects/PlayerB.tscn"),
 	"Flower": preload("res://src/flowerEater/objects/Flower.tscn"),
 	"FlowerEaten": preload("res://src/flowerEater/objects/Flower.tscn"),
 	"Target": preload("res://src/flowerEater/objects/Target.tscn"),
@@ -25,6 +32,9 @@ func node_for_object_name(obj_name):
 	var scene = Util.get_(obj_scene, obj_name, obj_scene["fallback"])
 	var node = scene.instantiate()
 	node.display_name = obj_name
+	var t = obj_type.get(obj_name)
+	if t != null and "obj_type" in node:
+		node.obj_type = t
 	return node
 
 ## ready ##############################################################
@@ -52,6 +62,7 @@ func _unhandled_input(event):
 
 ## state/grid ##############################################################
 
+# sets up the state grid and some initial data based on the assigned level_def
 func init_game_state():
 	if len(level_def.shape) == 0:
 		Debug.warn("init_game_state() called with out level_def.shape", level_def)
@@ -99,19 +110,19 @@ func setup_nodes():
 			var objs = state.grid[y][x]
 			if objs == null:
 				continue
-			for obj_name in state.grid[y][x]:
-				var node = create_node_at_coord(obj_name, x, y)
+			for obj_name in objs:
+				var coord = Vector2(x, y)
+				var node = create_node_at_coord(obj_name, coord)
 				if obj_name == "Player":
-					state.players.append(init_player(Vector2(x,y), node))
+					state.players.append(init_player(coord, node))
 				else:
-					var coord_id = str(x,y)
-					if not coord_id in state.cell_nodes:
-						state.cell_nodes[coord_id] = []
-					state.cell_nodes[coord_id].append(node)
+					if not coord in state.cell_nodes:
+						state.cell_nodes[coord] = []
+					state.cell_nodes[coord].append(node)
 
-func create_node_at_coord(obj_name, x, y) -> Node:
+func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	var node = node_for_object_name(obj_name)
-	node.position = Vector2(x, y) * square_size
+	node.position = coord * square_size
 	node.square_size = square_size
 	add_child(node)
 	node.set_owner(self)
@@ -125,7 +136,7 @@ func coord_in_grid(coord:Vector2) -> bool:
 		coord.x < state.grid_xs and coord.y < state.grid_ys
 
 func cell_at_coord(coord:Vector2) -> Dictionary:
-	var nodes = state.cell_nodes.get(str(coord.x, coord.y))
+	var nodes = state.cell_nodes.get(coord)
 	return {objs=state.grid[coord.y][coord.x], coord=coord, nodes=nodes}
 
 # returns a list of cells from the passed position in the passed direction
@@ -202,10 +213,13 @@ func move_player_to_cell(player, cell):
 # converts the flower at the cell's coord to an eaten one
 # depends on cell for `coord` and `nodes`.
 func eat_flower_at_cell(cell):
-	var flower_node = cell.nodes.filter(func(c): return c.display_name == "Flower").front()
+	# TODO support multiple nodes per cell?
+	var node = Util.first(cell.nodes)
 
-	# TODO perform animated state change
-	flower_node.display_name = "FlowerEaten"
+	if node.has_method("eaten"):
+		node.eaten()
+	else:
+		node.display_name = "FlowerEaten"
 
 	# update game state
 	state.grid[cell.coord.y][cell.coord.x].erase("Flower")
@@ -214,13 +228,16 @@ func eat_flower_at_cell(cell):
 # converts an eatenFlower back into an uneaten one (undo!)
 # depends on cell for `coord` and `nodes`.
 func uneat_flower_at_cell(cell):
-	var eaten_flower_node = cell.nodes.filter(func(c): return c.display_name == "FlowerEaten").front()
-	if eaten_flower_node == null:
+	# TODO support multiple nodes per cell?
+	var node = Util.first(cell.nodes)
+	if node == null:
 		# undoing from target doesn't require any uneating
 		return
 
-	# TODO perform animated state change
-	eaten_flower_node.display_name = "Flower"
+	if node.has_method("uneaten"):
+		node.uneaten()
+	else:
+		node.display_name = "Flower"
 
 	# update game state
 	state.grid[cell.coord.y][cell.coord.x].erase("FlowerEaten")

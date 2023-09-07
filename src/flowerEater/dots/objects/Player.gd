@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@export var display_name = "eaten" :
+@export var display_name = "player" :
 	set(v):
 		display_name = v
 		setup()

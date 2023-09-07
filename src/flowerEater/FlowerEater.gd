@@ -5,7 +5,8 @@ extends DinoGame
 ## vars
 
 var game_def
-var level_script = preload("res://src/flowerEater/levels/Level.gd")
+# var level_script = preload("res://src/flowerEater/levels/Level.gd")
+var level_script = preload("res://src/flowerEater/dots/DotsLevel.gd")
 var fe_text = "res://src/flowerEater/flowereater.txt"
 
 func parse_game_def(force_reparse=false):
