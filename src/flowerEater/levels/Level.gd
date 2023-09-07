@@ -5,10 +5,8 @@ var game_def
 var level_def :
 	set(ld):
 		level_def = ld
-		setup_level()
 		init_game_state()
 var square_size = 64
-var cell_nodes = {}
 var state
 
 signal win
@@ -19,9 +17,15 @@ var obj_scene = {
 	"PlayerA": preload("res://src/flowerEater/objects/PlayerA.tscn"),
 	"PlayerB": preload("res://src/flowerEater/objects/PlayerB.tscn"),
 	"Flower": preload("res://src/flowerEater/objects/Flower.tscn"),
-	"FlowerEaten": preload("res://src/flowerEater/objects/FlowerEaten.tscn"),
+	"FlowerEaten": preload("res://src/flowerEater/objects/Flower.tscn"),
 	"Target": preload("res://src/flowerEater/objects/Target.tscn"),
 	}
+
+func node_for_object_name(obj_name):
+	var scene = Util.get_(obj_scene, obj_name, obj_scene["fallback"])
+	var node = scene.instantiate()
+	node.display_name = obj_name
+	return node
 
 ## ready ##############################################################
 
@@ -30,7 +34,6 @@ func _ready():
 		Debug.pr("level ready!", name)
 	else:
 		Debug.pr("level ready!", name, level_def.get("message"))
-		setup_level()
 		init_game_state()
 
 ## input ##############################################################
@@ -40,7 +43,6 @@ func _unhandled_input(event):
 		move(Trolley.move_vector())
 
 	elif Trolley.is_restart(event):
-		setup_level()
 		init_game_state()
 	elif Trolley.is_undo(event):
 		for p in state.players:
@@ -48,69 +50,11 @@ func _unhandled_input(event):
 	elif Trolley.is_debug_toggle(event):
 		Debug.prn(state.grid)
 
-## setup level ##############################################################
-
-func setup_level():
-	if level_def == null:
-		return
-
-	cell_nodes = {}
-
-	for ch in get_children():
-		ch.free()
-
-	if len(level_def.shape) == 0:
-		Debug.warn("setup_level() called with out level_def.shape", level_def)
-		return
-
-	for y in range(len(level_def.shape)):
-		for x in range(len(level_def.shape[y])):
-			var cell = level_def.shape[y][x]
-			add_square(x, y, cell)
-
-func get_cell_objs(cell):
-	var objs = Puzz.get_cell_objects(game_def, cell)
-	if objs != null and len(objs) > 0:
-		objs = objs.map(func(n):
-			if n in ["PlayerA", "PlayerB"]:
-				return "Player"
-			else:
-				return n)
-	return objs
-
-func add_square(x, y, cell):
-	if cell == null:
-		var pos = Vector2(x, y) * square_size
-		var size = Vector2.ONE * square_size
-		Util.add_color_rect(self, pos, size, Color.PERU)
-		return
-
-	for obj_name in get_cell_objs(cell):
-		add_obj_to_coord(obj_name, x, y)
-
-func add_obj_to_coord(obj_name, x, y):
-	var pos = Vector2(x, y) * square_size
-	var scene = Util.get_(obj_scene, obj_name, obj_scene["fallback"])
-	var obj = scene.instantiate()
-	obj.position = pos
-	add_child(obj)
-	obj.set_owner(self)
-
-	obj.display_name = obj_name
-	obj.square_size = square_size
-
-	var coord_id = str(x,y)
-	if not coord_id in cell_nodes:
-		cell_nodes[coord_id] = []
-	cell_nodes[coord_id].append(obj)
-
-	return obj
-
 ## state/grid ##############################################################
 
 func init_game_state():
 	if len(level_def.shape) == 0:
-		Debug.warn("setup_level() called with out level_def.shape", level_def)
+		Debug.warn("init_game_state() called with out level_def.shape", level_def)
 		return
 
 	var grid = []
@@ -122,16 +66,58 @@ func init_game_state():
 			var cell = level_def.shape[y][x]
 			var objs = get_cell_objs(cell)
 			r.append(objs)
-			if objs != null and "Player" in objs:
-				players.append({
-					coord=Vector2(x,y),
-					node=cell_nodes[str(x, y)].filter(func(c): return c.display_name in ["Player", "PlayerA", "PlayerB"]).front(),
-					stuck=false,
-					move_history=[],
-					})
 		grid.append(r)
 
-	state = {players=players, grid=grid, grid_xs=len(grid[0]), grid_ys=len(grid), win=false}
+	state = {players=players, grid=grid, grid_xs=len(grid[0]), grid_ys=len(grid), win=false, cell_nodes={}}
+
+	setup_nodes()
+
+func get_cell_objs(cell):
+	var objs = Puzz.get_cell_objects(game_def, cell)
+	if objs != null and len(objs) > 0:
+		objs = objs.map(func(n):
+			if n in ["PlayerA", "PlayerB"]:
+				return "Player"
+			else:
+				return n)
+	return objs
+
+## setup level ##############################################################
+
+func init_player(coord, node) -> Dictionary:
+	return {coord=coord, stuck=false, move_history=[], node=node}
+
+# Adds nodes for the object_names in each cell of the grid.
+# Tracks nodes (except for players) in a state.cell_nodes dict.
+# Tracks players in state.players list.
+func setup_nodes():
+	for ch in get_children():
+		ch.free()
+
+	for y in len(state.grid):
+		for x in len(state.grid[y]):
+			var objs = state.grid[y][x]
+			if objs == null:
+				continue
+			for obj_name in state.grid[y][x]:
+				var node = create_node_at_coord(obj_name, x, y)
+				if obj_name == "Player":
+					state.players.append(init_player(Vector2(x,y), node))
+				else:
+					var coord_id = str(x,y)
+					if not coord_id in state.cell_nodes:
+						state.cell_nodes[coord_id] = []
+					state.cell_nodes[coord_id].append(node)
+
+func create_node_at_coord(obj_name, x, y) -> Node:
+	var node = node_for_object_name(obj_name)
+	node.position = Vector2(x, y) * square_size
+	node.square_size = square_size
+	add_child(node)
+	node.set_owner(self)
+	return node
+
+## grid helpers ##############################################################
 
 # returns true if the passed coord is in the level's grid
 func coord_in_grid(coord:Vector2) -> bool:
@@ -139,13 +125,12 @@ func coord_in_grid(coord:Vector2) -> bool:
 		coord.x < state.grid_xs and coord.y < state.grid_ys
 
 func cell_at_coord(coord:Vector2) -> Dictionary:
-	var cell = state.grid[coord.y][coord.x]
-	var nodes = cell_nodes.get(str(coord.x, coord.y))
-	return {objs=cell, coord=coord, nodes=nodes}
+	var nodes = state.cell_nodes.get(str(coord.x, coord.y))
+	return {objs=state.grid[coord.y][coord.x], coord=coord, nodes=nodes}
 
 # returns a list of cells from the passed position in the passed direction
 # the cells are dicts with a coord, a list of objs (string names), and a list of nodes
-func cells_in_dir(coord:Vector2, dir:Vector2) -> Array:
+func cells_in_direction(coord:Vector2, dir:Vector2) -> Array:
 	var cells = []
 	var cursor = coord + dir
 	while coord_in_grid(cursor):
@@ -180,10 +165,9 @@ func all_players_on_target() -> bool:
 ## move/state-updates ##############################################################
 
 func previous_undo_coord(player, skip_coord, start_at=0):
-	# TODO need to dig for the last undo, which may not be the last spot in history
-	# (if another player moved but we didn't, we'll have our current loc in history potentially several times)
-	var moves = player.move_history.slice(start_at)
-	for m in moves:
+	# pulls the first coord from player history that does not match `skip_coord`,
+	# starting after `start_at`
+	for m in player.move_history.slice(start_at):
 		if m != skip_coord:
 			return m
 
@@ -220,13 +204,8 @@ func move_player_to_cell(player, cell):
 func eat_flower_at_cell(cell):
 	var flower_node = cell.nodes.filter(func(c): return c.display_name == "Flower").front()
 
-	# update cell_nodes
-	cell_nodes[str(cell.coord.x, cell.coord.y)].erase(flower_node)
-
-	# animate flower -> flower-eaten
-	# TODO probably should be the same node, not a drop + add
-	flower_node.queue_free()
-	add_obj_to_coord("FlowerEaten", cell.coord.x, cell.coord.y)
+	# TODO perform animated state change
+	flower_node.display_name = "FlowerEaten"
 
 	# update game state
 	state.grid[cell.coord.y][cell.coord.x].erase("Flower")
@@ -240,13 +219,8 @@ func uneat_flower_at_cell(cell):
 		# undoing from target doesn't require any uneating
 		return
 
-	# update cell_nodes
-	cell_nodes[str(cell.coord.x, cell.coord.y)].erase(eaten_flower_node)
-
-	# animate flower-eaten -> flower
-	# TODO probably should be the same node, not a drop + add
-	eaten_flower_node.queue_free()
-	add_obj_to_coord("Flower", cell.coord.x, cell.coord.y)
+	# TODO perform animated state change
+	eaten_flower_node.display_name = "Flower"
 
 	# update game state
 	state.grid[cell.coord.y][cell.coord.x].erase("FlowerEaten")
@@ -321,7 +295,7 @@ func undo_last_move(player):
 func move(move_dir):
 	var moves_to_make = []
 	for p in state.players:
-		var cells = cells_in_dir(p.coord, move_dir)
+		var cells = cells_in_direction(p.coord, move_dir)
 		if len(cells) == 0:
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
