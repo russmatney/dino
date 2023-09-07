@@ -171,14 +171,12 @@ func all_players_on_target() -> bool:
 
 ## move/state-updates ##############################################################
 
-func previous_undo_coord(player):
+func previous_undo_coord(player, skip_coord, start_at=0):
 	# TODO need to dig for the last undo, which may not be the last spot in history
 	# (if another player moved but we didn't, we'll have our current loc in history potentially several times)
-	if len(player.move_history) < 1:
-		return
-	var moves = player.move_history.slice(1)
+	var moves = player.move_history.slice(start_at)
 	for m in moves:
-		if m != player.coord:
+		if m != skip_coord:
 			return m
 
 # Move the player to the passed cell's coordinate.
@@ -195,8 +193,11 @@ func move_player_to_cell(player, cell):
 	state.grid[cell.coord.y][cell.coord.x].append("Player")
 	state.grid[player.coord.y][player.coord.x].erase("Player")
 
-	# remove previous undo marker - NOTE history has already been updated
-	var prev_undo_coord = previous_undo_coord(player)
+	# remove previous undo marker
+	# NOTE start_at 1 b/c history has already been updated
+	var prev_undo_coord
+	if len(player.move_history) > 1:
+		prev_undo_coord = previous_undo_coord(player, player.coord, 1)
 	if prev_undo_coord != null:
 		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
 
@@ -273,10 +274,10 @@ func undo_last_move(player):
 	var dest_cell = cell_at_coord(last_pos)
 
 	# need to walk back the grid's Undo markers
-	var new_undo_coord = Util.first(player.move_history)
-	if new_undo_coord != null:
-		if not "Undo" in state.grid[new_undo_coord.y][new_undo_coord.x]:
-			state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
+	var prev_undo_coord = previous_undo_coord(player, dest_cell.coord, 0)
+	if prev_undo_coord != null:
+		if not "Undo" in state.grid[prev_undo_coord.y][prev_undo_coord.x]:
+			state.grid[prev_undo_coord.y][prev_undo_coord.x].append("Undo")
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
 
 	if last_pos == player.coord:
