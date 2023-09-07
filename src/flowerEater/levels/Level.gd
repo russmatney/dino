@@ -171,6 +171,16 @@ func all_players_on_target() -> bool:
 
 ## move/state-updates ##############################################################
 
+func previous_undo_coord(player):
+	# TODO need to dig for the last undo, which may not be the last spot in history
+	# (if another player moved but we didn't, we'll have our current loc in history potentially several times)
+	if len(player.move_history) < 1:
+		return
+	var moves = player.move_history.slice(1)
+	for m in moves:
+		if m != player.coord:
+			return m
+
 # Move the player to the passed cell's coordinate.
 # also updates the game state
 # cell should have a `coord`
@@ -186,8 +196,8 @@ func move_player_to_cell(player, cell):
 	state.grid[player.coord.y][player.coord.x].erase("Player")
 
 	# remove previous undo marker - NOTE history has already been updated
-	if len(player.move_history) > 1:
-		var prev_undo_coord = player.move_history[1]
+	var prev_undo_coord = previous_undo_coord(player)
+	if prev_undo_coord != null:
 		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
 
 	# add new undo marker at current coord
