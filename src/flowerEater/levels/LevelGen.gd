@@ -27,6 +27,9 @@ func generate_level(num=0):
 			ch.free()
 
 	var node = FlowerEater.build_puzzle_node(num)
+	if node == null:
+		Debug.warn("No node generated for level num", num)
+		return
 	node.name = level_node_name
 	node.win.connect(func():
 		node.queue_free()

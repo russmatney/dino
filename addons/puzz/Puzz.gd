@@ -16,7 +16,11 @@ func get_cell_objects(parsed, cell):
 	if cell == null:
 		return
 
-	# note the duplicate here, so the returned array doesn't share state with every other cell
-	var objs = parsed.legend.get(cell).duplicate()
+	var objs = parsed.legend.get(cell)
+	if objs != null:
+		# duplicate, so the returned array doesn't share state with every other cell
+		# (we mutate the returned state in level.gd as the game state)
+		objs = objs.duplicate()
+
 	# TODO if or/and in objs, lookup again
 	return objs

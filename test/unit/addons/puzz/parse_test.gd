@@ -195,6 +195,7 @@ class TestSimpleBlockPushingGameLevels:
 	func test_levels():
 		# TODO add more win-cond variants
 		assert_has(parsed, "levels", "levels not parsed")
+		assert_eq(len(parsed.levels), 3)
 
 	func test_level_first():
 		assert_eq_deep(parsed.levels[0].shape, [
@@ -218,3 +219,8 @@ class TestSimpleBlockPushingGameLevels:
 			["#", null, null, null, null, "#"],
 			["#", "#", "#", "#", "#", "#"],
 			])
+
+	func test_level_final():
+		Debug.pr("parsed level", parsed.levels[2])
+		assert_eq(parsed.levels[2].message, "game complete!")
+		assert_eq(parsed.levels[2].shape, null)

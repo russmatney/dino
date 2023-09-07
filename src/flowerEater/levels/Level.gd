@@ -59,6 +59,11 @@ func setup_level():
 	for ch in get_children():
 		ch.free()
 
+	Debug.pr(level_def)
+	if len(level_def.shape) == 0:
+		Debug.warn("setup_level() called with out level_def.shape", level_def)
+		return
+
 	for y in range(len(level_def.shape)):
 		for x in range(len(level_def.shape[y])):
 			var cell = level_def.shape[y][x]
@@ -105,6 +110,10 @@ func add_obj_to_coord(obj_name, x, y):
 ## state/grid ##############################################################
 
 func init_game_state():
+	if len(level_def.shape) == 0:
+		Debug.warn("setup_level() called with out level_def.shape", level_def)
+		return
+
 	var grid = []
 	var players = []
 	for y in len(level_def.shape):

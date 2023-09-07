@@ -191,10 +191,14 @@ func parse_levels(chunks):
 	var levels = []
 	var msg
 	for lines in chunks:
+		lines = (lines as Array).filter(func(l): return not l == "")
 		if lines.size() == 1:
 			var parts = lines[0].split(" ", true, 1)
 			msg = parts[1]
 		else:
 			levels.append(parse_level(lines, msg))
 			msg = null
+	if msg != null:
+		# add final message as new level?
+		levels.append({message=msg, shape=null})
 	return levels

@@ -29,6 +29,10 @@ func build_puzzle_node(puzzle: Variant):
 	elif puzzle is Array:
 		level_def = Puzz.parse_level_def(puzzle)
 
+	if level_def.shape == null:
+		Debug.warn("no shape for puzzle - maybe it's just a message?", level_def)
+		return
+
 	var node = Node2D.new()
 	node.set_script(level_script)
 	node.game_def = game_def
