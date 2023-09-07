@@ -33,6 +33,21 @@ func _ready():
 		setup_level()
 		init_game_state()
 
+## input ##############################################################
+
+func _unhandled_input(event):
+	if Trolley.is_move(event):
+		move(Trolley.move_vector())
+
+	elif Trolley.is_restart(event):
+		setup_level()
+		init_game_state()
+	elif Trolley.is_undo(event):
+		for p in state.players:
+			undo_last_move(p)
+	elif Trolley.is_debug_toggle(event):
+		Debug.prn(state.grid)
+
 ## setup level ##############################################################
 
 func setup_level():
@@ -86,19 +101,6 @@ func add_obj_to_coord(obj_name, x, y):
 	cell_nodes[coord_id].append(obj)
 
 	return obj
-
-## input ##############################################################
-
-func _unhandled_input(event):
-	if Trolley.is_move(event):
-		move(Trolley.move_vector())
-
-	# TODO update input maps to support these
-	# if Trolley.is_restart(event):
-	# 	setup_level()
-	# if Trolley.is_undo(event):
-	# 	for p in state.players:
-	# 		undo_last_move(p)
 
 ## state/grid ##############################################################
 
@@ -187,11 +189,9 @@ func move_player_to_cell(player, cell):
 	if len(player.move_history) > 1:
 		var prev_undo_coord = player.move_history[1]
 		state.grid[prev_undo_coord.y][prev_undo_coord.x].erase("Undo")
-		# Debug.pr("undo erased", state.grid[prev_undo_coord.y])
 
 	# add new undo marker at current coord
 	state.grid[player.coord.y][player.coord.x].append("Undo")
-	# Debug.pr("undo appended", state.grid[player.coord.y])
 
 	# update to new coord
 	player.coord = cell.coord
@@ -255,6 +255,9 @@ func move_to_target(player, cell):
 ## undo last move ##############################################################
 
 func undo_last_move(player):
+	if len(player.move_history) == 0:
+		Debug.warn("Can't undo, no moves yet!")
+		return
 	# remove last move from move_history
 	var last_pos = player.move_history.pop_front()
 	var dest_cell = cell_at_coord(last_pos)
@@ -262,10 +265,9 @@ func undo_last_move(player):
 	# need to walk back the grid's Undo markers
 	var new_undo_coord = Util.first(player.move_history)
 	if new_undo_coord != null:
-		state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
-		# Debug.pr("undo appended (in undo)", state.grid[new_undo_coord.y])
+		if not "Undo" in state.grid[new_undo_coord.y][new_undo_coord.x]:
+			state.grid[new_undo_coord.y][new_undo_coord.x].append("Undo")
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
-	# Debug.pr("undo erased (in undo)", state.grid[dest_cell.coord.y])
 
 	if last_pos == player.coord:
 		Debug.pr("Player already at last coord, no undo movement required")

@@ -6,7 +6,7 @@
 [node name="LevelGen" type="Node2D"]
 script = ExtResource("1_hju81")
 puzz_file = "res://src/flowerEater/flowereater.txt"
-level_num = 8
+level_num = 9
 
-[node name="Level_8" type="Node2D" parent="."]
+[node name="Level_9" type="Node2D" parent="."]
 script = ExtResource("2_dxs0s")

@@ -180,6 +180,13 @@ func parse_win_conditions(chunks):
 
 ## levels #########################################################
 
+func parse_level(lines, msg=null):
+	var lvl = {}
+	if msg != null:
+		lvl["message"] = msg
+	lvl["shape"] = parse_shape(lines, false)
+	return lvl
+
 func parse_levels(chunks):
 	var levels = []
 	var msg
@@ -188,11 +195,6 @@ func parse_levels(chunks):
 			var parts = lines[0].split(" ", true, 1)
 			msg = parts[1]
 		else:
-			var lvl = {}
-			if msg != null:
-				lvl["message"] = msg
-				msg = null
-
-			lvl["shape"] = parse_shape(lines, false)
-			levels.append(lvl)
+			levels.append(parse_level(lines, msg))
+			msg = null
 	return levels

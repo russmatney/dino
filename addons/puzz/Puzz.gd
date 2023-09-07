@@ -9,6 +9,9 @@ func parse_game_def(path):
 	var parsed = game.parse(contents)
 	return parsed
 
+func parse_level_def(lines, msg=null):
+	return ParsedGame.new().parse_level(lines, msg)
+
 func get_cell_objects(parsed, cell):
 	if cell == null:
 		return

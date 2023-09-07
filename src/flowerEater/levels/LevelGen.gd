@@ -12,6 +12,7 @@ extends Node2D
 ## ready
 
 func _ready():
+	FlowerEater.parse_game_def()
 	Debug.pr("Found", len(FlowerEater.game_def.levels), "levels")
 
 	generate_level(level_num)

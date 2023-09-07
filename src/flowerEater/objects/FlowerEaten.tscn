@@ -8,17 +8,18 @@ script = ExtResource("1_6s17h")
 display_name = "FlowerEaten"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 16.0
+offset_bottom = 16.0
 color = Color(0.333333, 0.0235294, 0.121569, 0.882353)
 
 [node name="ObjectLabel" type="RichTextLabel" parent="."]
 clip_contents = false
+custom_minimum_size = Vector2(16, 16)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_fonts/normal_font = ExtResource("2_04wi0")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center]label[/center]"
+text = "[center]FlowerEaten[/center]"
 fit_content = true
 scroll_active = false
