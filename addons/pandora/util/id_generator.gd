@@ -1,28 +1,29 @@
-class_name PandoraIdGenerator extends RefCounted
+class_name PandoraIDGenerator
+extends RefCounted
 
 
-const DEFAULT_CONTEXT = "default"
-
-# string -> int
-var _ids_by_context:Dictionary = {}
+var _nanoid := PandoraNanoIDGenerator.new(10)
+var _sequential := PandoraSequentialIDGenerator.new()
 
 
-func generate(context:String = DEFAULT_CONTEXT) -> String:
-	if not _ids_by_context.has(context):
-		_ids_by_context[context] = 0
-	_ids_by_context[context] += 1
-	return str(_ids_by_context[context])
-	
+func generate() -> String:
+	var id_type := PandoraSettings.get_id_type()
+	match id_type:
+		PandoraSettings.IDType.SEQUENTIAL:
+			return _sequential.generate()
+		PandoraSettings.IDType.NANOID:
+			return _nanoid.generate()
+	push_error("unknown id type: %s" % id_type)
+	return _sequential.generate()
+
 
 func clear() -> void:
-	_ids_by_context.clear()
+	_sequential.clear()
 
 
-func load_data(data:Dictionary) -> void:
-	_ids_by_context = data["_ids_by_context"]
-	
-	
 func save_data() -> Dictionary:
-	return {
-		"_ids_by_context": _ids_by_context
-	}
+	return _sequential.save_data()
+
+
+func load_data(data: Dictionary) -> void:
+	_sequential.load_data(data)
