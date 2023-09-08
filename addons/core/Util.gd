@@ -368,7 +368,7 @@ func _config_warning(node, opts={}):
 ## func
 
 func first(list):
-	if len(list) > 0:
+	if list != null and len(list) > 0:
 		return list[0]
 
 func sum(vals):

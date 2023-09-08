@@ -249,6 +249,9 @@ func move_player_to_cell(player, cell):
 func mark_cell_dotted(cell):
 	# TODO support multiple nodes per cell?
 	var node = Util.first(cell.nodes)
+	if node == null:
+		Debug.warn("can't mark dotted, no node found!", cell)
+		return
 
 	if node.has_method("mark_dotted"):
 		node.mark_dotted()
