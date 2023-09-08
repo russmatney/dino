@@ -4,7 +4,7 @@ extends Node2D
 ## vars
 
 @export_file var game_def_path: String
-@export var puzzle_theme: PandoraEntity
+@export var puzzle_theme: DotHopTheme
 
 var game_def
 var puzzle_node
@@ -25,7 +25,7 @@ func _ready():
 func rebuild_puzzle():
 	if puzzle_node != null:
 		puzzle_node.queue_free()
-		# TODO is this a race case? or is it impossible?
+		# is this a race case? or is it impossible?
 		await puzzle_node.tree_exited
 
 	# load current level
@@ -38,7 +38,7 @@ func rebuild_puzzle():
 	puzzle_node.win.connect(on_puzzle_win)
 	puzzle_node.ready.connect(on_puzzle_ready)
 
-	# dispatch?
+	# defer?
 	add_child(puzzle_node)
 
 func on_puzzle_ready():
@@ -52,8 +52,8 @@ func on_puzzle_ready():
 ## load theme
 
 func load_theme():
-	pass
-	# puzzle_scene = puzzle_theme.get_puzzle_scene()
+	Debug.pr(puzzle_theme)
+	puzzle_scene = puzzle_theme.get_puzzle_scene()
 
 #####################################################################
 ## win

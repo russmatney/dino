@@ -24,6 +24,9 @@ var color_rect
 ## ready #########################################################
 
 func _ready():
+	if z_index == 0:
+		z_index = 5
+
 	Util.set_optional_nodes(self, {
 		label="ObjectLabel", color_rect="ColorRect"})
 

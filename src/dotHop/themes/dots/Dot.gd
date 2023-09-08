@@ -10,15 +10,16 @@ func _get_configuration_warnings():
 
 func _ready():
 	super._ready()
-	Debug.pr("dots dot ready")
 
 ## render ###########################################################
 
 func render():
-	Debug.pr("rendering dots dotHopDot", self)
 	super.render()
 
-	match type:
-		DotHop.dotType.Dot: Debug.pr("rendering dots dot")
-		DotHop.dotType.Dotted: Debug.pr("rendering dots dotted")
-		DotHop.dotType.Goal: Debug.pr("rendering dots goal")
+	if color_rect != null:
+		color_rect.size = Vector2.ONE * square_size
+
+		match type:
+			DotHop.dotType.Dot: color_rect.color = Color(1, 1, 1)
+			DotHop.dotType.Dotted: color_rect.color = Color(0, 0, 0)
+			DotHop.dotType.Goal: color_rect.color = Color(0, 1, 0)

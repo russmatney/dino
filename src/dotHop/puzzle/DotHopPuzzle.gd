@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name DotHopLevel
+class_name DotHopPuzzle
 
 ## vars ##############################################################
 
@@ -10,6 +10,11 @@ class_name DotHopLevel
 		if gdp != "":
 			game_def = Puzz.parse_game_def(gdp)
 			level_def = game_def.levels[0]
+
+@export var clear: bool = false:
+	set(v):
+		if v == true:
+			clear_nodes()
 
 var game_def
 var level_def :
@@ -108,12 +113,16 @@ func get_cell_objs(cell):
 func init_player(coord, node) -> Dictionary:
 	return {coord=coord, stuck=false, move_history=[], node=node}
 
+func clear_nodes():
+	for ch in get_children():
+		if ch.is_in_group("generated"):
+			ch.free()
+
 # Adds nodes for the object_names in each cell of the grid.
 # Tracks nodes (except for players) in a state.cell_nodes dict.
 # Tracks players in state.players list.
 func rebuild_nodes():
-	for ch in get_children():
-		ch.free()
+	clear_nodes()
 
 	for y in len(state.grid):
 		for x in len(state.grid[y]):
@@ -134,6 +143,7 @@ func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	var node = node_for_object_name(obj_name)
 	node.position = coord * square_size
 	node.square_size = square_size
+	node.add_to_group("generated", true)
 	add_child(node)
 	node.set_owner(self)
 	return node

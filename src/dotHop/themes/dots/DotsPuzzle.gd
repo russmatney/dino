@@ -1,5 +1,5 @@
 @tool
-extends DotHopLevel
+extends DotHopPuzzle
 
 var obj_scene_override = {
 	"Player": preload("res://src/dotHop/themes/dots/Player.tscn"),

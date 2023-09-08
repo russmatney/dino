@@ -89,6 +89,8 @@ var omit_vals_for_keys = ["layer_0/tile_data"]
 
 var max_array_size = 20
 
+# TODO refactor into opts dict
+# TODO refactor into pluggable pretty printer
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
@@ -148,6 +150,8 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["cornflower_blue", msg.x, "cornflower_blue", msg.y]
 		else:
 			return '(%s,%s)' % [msg.x, msg.y]
+	elif msg is PandoraEntity and msg.has_method("data"):
+		return to_pretty(msg.data(), newlines, use_color, indent_level)
 	else:
 		return str(msg)
 

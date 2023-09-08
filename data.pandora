@@ -4,76 +4,94 @@
 			{
 				"_category_id": "",
 				"_generate_ids": true,
+				"_icon_color": "ffffff00",
 				"_id": "1",
-				"_ids_generation_class": "DinoGameIds",
-				"_name": "DinoGame"
-			},
-			{
-				"_category_id": "",
-				"_generate_ids": true,
-				"_id": "7_Elh7XEgO",
-				"_ids_generation_class": "SelBodyIds",
-				"_name": "SELBody"
+				"_ids_generation_class": "DhTheme",
+				"_index": 0,
+				"_name": "DotHopTheme",
+				"_script_path": "res://src/dotHop/themes/DotHopTheme.gd"
 			}
 		],
 		"_entities": [
 			{
 				"_category_id": "1",
+				"_icon_color": "ffffff00",
 				"_id": "2",
-				"_name": "HatBot"
+				"_index": 0,
+				"_name": "Debug",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Debug Theme"
+					},
+					"is_unlocked": {
+						"type": "bool",
+						"value": true
+					}
+				}
 			},
 			{
 				"_category_id": "1",
+				"_icon_color": "ffffff00",
 				"_id": "3",
-				"_name": "SuperElevatorLevel"
+				"_index": 0,
+				"_name": "Dots",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Dots"
+					},
+					"is_unlocked": {
+						"type": "bool",
+						"value": true
+					},
+					"puzzle_scene": {
+						"type": "resource",
+						"value": "res://src/dotHop/themes/dots/DotsPuzzle.tscn"
+					}
+				}
 			},
 			{
 				"_category_id": "1",
-				"_id": "hu92GIyC74",
-				"_name": "Shirt"
-			},
-			{
-				"_category_id": "7_Elh7XEgO",
-				"_id": "fLJuER49T_",
-				"_name": "SkateALike",
+				"_icon_color": "ffffff00",
+				"_id": "4",
+				"_index": 0,
+				"_name": "Space",
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Skatie"
-					}
-				}
-			},
-			{
-				"_category_id": "7_Elh7XEgO",
-				"_id": "PXu9LkIy6C",
-				"_name": "SuitGoon",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Suit Goon"
-					}
-				}
-			},
-			{
-				"_category_id": "7_Elh7XEgO",
-				"_id": "UV_zyDUdiR",
-				"_name": "Bosstodon",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Bosstodon"
+						"value": "Space"
 					}
 				}
 			}
 		],
 		"_properties": [
 			{
-				"_category_id": "7_Elh7XEgO",
+				"_category_id": "1",
+				"_default_value": "res://src/dotHop/puzzle/DotHopPuzzle.tscn",
+				"_id": "5",
+				"_name": "puzzle_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "1",
 				"_default_value": "",
-				"_id": "IA4ApIf6Cr",
+				"_id": "6",
 				"_name": "display_name",
 				"_type": "string"
+			},
+			{
+				"_category_id": "1",
+				"_default_value": false,
+				"_id": "7",
+				"_name": "is_unlocked",
+				"_type": "bool"
 			}
 		]
+	},
+	"_id_generator": {
+		"_ids_by_context": {
+			"default": 7
+		}
 	}
 }
