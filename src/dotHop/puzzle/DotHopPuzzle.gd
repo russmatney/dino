@@ -2,6 +2,15 @@
 extends Node2D
 class_name DotHopLevel
 
+## vars ##############################################################
+
+@export_file var game_def_path: String = "res://src/dotHop/dothop.txt" :
+	set(gdp):
+		game_def_path = gdp
+		if gdp != "":
+			game_def = Puzz.parse_game_def(gdp)
+			level_def = game_def.levels[0]
+
 var game_def
 var level_def :
 	set(ld):
@@ -12,53 +21,52 @@ var state
 
 signal win
 
-enum type {Dot, Dotted, Goal}
-
 var obj_type = {
-	"Dot": type.Dot,
-	"Dotted": type.Dotted,
-	"Goal": type.Goal,
+	"Dot": DotHop.dotType.Dot,
+	"Dotted": DotHop.dotType.Dotted,
+	"Goal": DotHop.dotType.Goal,
 	}
 
+# NOTE these are overridden by each theme - essentially fallbacks for testing/debugging
 var obj_scene = {
-	"Player": preload("res://src/dotHop/objects/Player.tscn"),
-	"Dot": preload("res://src/dotHop/objects/Dot.tscn"),
-	"Dotted": preload("res://src/dotHop/objects/Dot.tscn"),
-	"Goal": preload("res://src/dotHop/objects/Dot.tscn"),
+	"Player": preload("res://src/dotHop/puzzle/Player.tscn"),
+	"Dot": preload("res://src/dotHop/puzzle/Dot.tscn"),
+	"Dotted": preload("res://src/dotHop/puzzle/Dot.tscn"),
+	"Goal": preload("res://src/dotHop/puzzle/Dot.tscn"),
 	}
-
-func node_for_object_name(obj_name):
-	var scene = obj_scene.get(obj_name)
-	if not scene:
-		Debug.err("No scene found for object name", obj_name)
-		return
-	var node = scene.instantiate()
-	node.display_name = obj_name
-	var t = obj_type.get(obj_name)
-	if t != null and "obj_type" in node:
-		node.obj_type = t
-	return node
 
 ## ready ##############################################################
 
 func _ready():
 	if level_def == null:
-		Debug.pr("level ready!", name)
+		Debug.pr("no level_def, trying backups!", name)
+		if game_def_path != "":
+			game_def = Puzz.parse_game_def(game_def_path)
+			level_def = game_def.levels[0]
+			init_game_state()
+		else:
+			Debug.err("no game_def_path!!")
 	else:
-		Debug.pr("level ready!", name, level_def.get("message"))
+		Debug.pr("ready, loading game state!")
 		init_game_state()
 
 ## input ##############################################################
 
 func _unhandled_input(event):
 	if Trolley.is_move(event):
+		if state == null:
+			Debug.warn("No state, ignoring move input")
+			return
 		move(Trolley.move_vector())
+	elif Trolley.is_undo(event):
+		if state == null:
+			Debug.warn("No state, ignoring undo input")
+			return
+		for p in state.players:
+			undo_last_move(p)
 
 	elif Trolley.is_restart(event):
 		init_game_state()
-	elif Trolley.is_undo(event):
-		for p in state.players:
-			undo_last_move(p)
 	elif Trolley.is_debug_toggle(event):
 		Debug.prn(state.grid)
 
@@ -83,7 +91,7 @@ func init_game_state():
 
 	state = {players=players, grid=grid, grid_xs=len(grid[0]), grid_ys=len(grid), win=false, cell_nodes={}}
 
-	setup_nodes()
+	rebuild_nodes()
 
 func get_cell_objs(cell):
 	var objs = Puzz.get_cell_objects(game_def, cell)
@@ -103,7 +111,7 @@ func init_player(coord, node) -> Dictionary:
 # Adds nodes for the object_names in each cell of the grid.
 # Tracks nodes (except for players) in a state.cell_nodes dict.
 # Tracks players in state.players list.
-func setup_nodes():
+func rebuild_nodes():
 	for ch in get_children():
 		ch.free()
 
@@ -128,6 +136,20 @@ func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	node.square_size = square_size
 	add_child(node)
 	node.set_owner(self)
+	return node
+
+func node_for_object_name(obj_name):
+	var scene = obj_scene.get(obj_name)
+	if not scene:
+		Debug.err("No scene found for object name", obj_name)
+		return
+	var node = scene.instantiate()
+	node.display_name = obj_name
+	var t = obj_type.get(obj_name)
+	if t != null and "type" in node:
+		node.type = t
+	elif obj_name not in ["Player"]:
+		Debug.warn("no type for object?", obj_name)
 	return node
 
 ## grid helpers ##############################################################

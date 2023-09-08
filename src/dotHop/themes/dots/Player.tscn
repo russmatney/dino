@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cifvwoalwila"]
 
-[ext_resource type="Script" path="res://src/dotHop/dots/Player.gd" id="1_ufxo6"]
+[ext_resource type="Script" path="res://src/dotHop/themes/dots/Player.gd" id="1_ufxo6"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_vp205"]
 
 [node name="Player" type="Node2D"]

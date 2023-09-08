@@ -1,12 +1,16 @@
 extends GutTest
+class_name DotHopTest
+
+func build_puzzle(puzzle):
+	return DotHop.build_puzzle_node({puzzle=puzzle, game_def_path="res://src/dotHop/dothop.txt"})
 
 class TestBasicMovement:
-	extends GutTest
+	extends DotHopTest
 
 	var level
 
 	func before_each():
-		level = DotHop.build_puzzle_node(["xoot"])
+		level = build_puzzle(["xoot"])
 		add_child(level)
 
 	func after_all():
@@ -52,12 +56,12 @@ class TestBasicMovement:
 
 
 class TestBasicMovementTwoPlayers:
-	extends GutTest
+	extends DotHopTest
 
 	var level
 
 	func before_each():
-		level = DotHop.build_puzzle_node(["xoot", "xoot"])
+		level = build_puzzle(["xoot", "xoot"])
 		add_child(level)
 
 	func after_all():
@@ -120,10 +124,10 @@ class TestBasicMovementTwoPlayers:
 		assert_eq(level.state.win, false)
 
 class TestTwoPlayerInPlaceUndoBugs:
-	extends GutTest
+	extends DotHopTest
 
 	func test_undo_obj_is_not_duplicated():
-		var level = DotHop.build_puzzle_node([
+		var level = build_puzzle([
 				"..oo",
 				"txoo",
 				"..oo",
@@ -153,7 +157,7 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.free()
 
 	func test_undo_obj_is_not_added_to_other_non_moving_player():
-		var level = DotHop.build_puzzle_node([
+		var level = build_puzzle([
 				"....o.o",
 				"tx..o.o",
 				"oo.o.x.",
@@ -204,7 +208,7 @@ class TestTwoPlayerInPlaceUndoBugs:
 		# 	[null, null, ["Dotted"], ["Dotted", "Undo"]])
 
 	func test_can_finish_level_10():
-		var level = DotHop.build_puzzle_node([
+		var level = build_puzzle([
 				"....o.o",
 				"tx..o.o",
 				"......t",

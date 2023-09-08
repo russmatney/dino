@@ -9,13 +9,9 @@ func _get_configuration_warnings():
 		expected_nodes=["ObjectLabel", "ColorRect"]
 		})
 
-## data #########################################################
-
-enum dotType { Dot, Dotted, Goal}
-
 ## vars #########################################################
 
-@export var type: dotType
+@export var type: DotHop.dotType
 @export var square_size = 16 :
 	set(v):
 		square_size = v
@@ -39,9 +35,9 @@ func _ready():
 func render():
 	if label != null:
 		match type:
-			dotType.Dot: display_name = "dot"
-			dotType.Dotted: display_name = "dotted"
-			dotType.Goal: display_name = "goal"
+			DotHop.dotType.Dot: display_name = "dot"
+			DotHop.dotType.Dotted: display_name = "dotted"
+			DotHop.dotType.Goal: display_name = "goal"
 
 		label.text = "[center]%s[/center]" % display_name
 		label.custom_minimum_size = Vector2.ONE * square_size
@@ -50,20 +46,20 @@ func render():
 		color_rect.size = Vector2.ONE * square_size
 
 		match type:
-			dotType.Dot: color_rect.color = Color(1, 0, 0)
-			dotType.Dotted: color_rect.color = Color(0, 1, 0)
-			dotType.Goal: color_rect.color = Color(0, 0, 1)
+			DotHop.dotType.Dot: color_rect.color = Color(1, 1, 0)
+			DotHop.dotType.Dotted: color_rect.color = Color(0, 1, 1)
+			DotHop.dotType.Goal: color_rect.color = Color(1, 0, 1)
 
 ## type changes #########################################################
 
 func mark_goal():
-	type = dotType.Goal
+	type = DotHop.dotType.Goal
 	render()
 
 func mark_dotted():
-	type = dotType.Dotted
+	type = DotHop.dotType.Dotted
 	render()
 
 func mark_undotted():
-	type = dotType.Dot
+	type = DotHop.dotType.Dot
 	render()

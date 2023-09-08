@@ -8,12 +8,14 @@ extends Node2D
 @export var square_size: int = 64
 @export var level_num: int = 0
 
+var game_def
+
 #####################################################################
 ## ready
 
 func _ready():
-	DotHop.parse_game_def()
-	Debug.pr("Found", len(DotHop.game_def.levels), "levels")
+	game_def = Puzz.parse_game_def(puzz_file)
+	Debug.pr("Found", len(game_def.levels), "levels")
 
 	generate_level(level_num)
 
@@ -26,7 +28,7 @@ func generate_level(num=0):
 		if ch.name == level_node_name:
 			ch.free()
 
-	var node = DotHop.build_puzzle_node(num)
+	var node = DotHop.build_puzzle_node({game_def=game_def, puzzle_num=num})
 	if node == null:
 		Debug.warn("No node generated for level num", num)
 		return
@@ -42,7 +44,7 @@ func generate_level(num=0):
 ## load next
 
 func load_next(next_num):
-	if next_num < len(DotHop.game_def.levels):
+	if next_num < len(game_def.levels):
 		generate_level(next_num)
 	else:
 		Debug.pr("win all!")

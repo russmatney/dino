@@ -19,6 +19,6 @@ func render():
 	super.render()
 
 	match type:
-		dotType.Dot: Debug.pr("rendering dots dot")
-		dotType.Dotted: Debug.pr("rendering dots dotted")
-		dotType.Goal: Debug.pr("rendering dots goal")
+		DotHop.dotType.Dot: Debug.pr("rendering dots dot")
+		DotHop.dotType.Dotted: Debug.pr("rendering dots dotted")
+		DotHop.dotType.Goal: Debug.pr("rendering dots goal")

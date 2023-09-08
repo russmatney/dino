@@ -2,40 +2,60 @@
 extends DinoGame
 
 #####################################################################
-## vars
+## vars/enums
 
-var game_def
-var level_script = preload("res://src/dotHop/DotHopLevel.gd")
-var fe_text = "res://src/dotHop/dothop.txt"
+var game_scene = "res://src/dotHop/DotHopGame.tscn"
+var fallback_puzzle_scene = "res://src/dotHop/puzzle/DotHopPuzzle.tscn"
 
-func parse_game_def(force_reparse=false):
-	if game_def == null or force_reparse:
-		game_def = Puzz.parse_game_def(fe_text)
-	return game_def
+enum dotType { Dot, Dotted, Goal}
 
-# Accepts a level number (which will fetch for the current game_def)
-# or a list of strings representing the level (using the current game_def's legend)
-# e.g. build_puzzle_node(["xoot"], "tutorial")
-func build_puzzle_node(puzzle: Variant):
+#####################################################################
+## build puzzle node
+
+# Builds and returns a "puzzle_scene" node, with a game_def and level_def set
+# Accepts several input options, but only 'game_def' or 'game_def_path' are required.
+#
+# A raw puzzle or puzzle_num can be specified to load/pick a level for a particular game_def.
+# `puzzle_scene` should be set according to the current theme.
+#
+# This func could live on the DotHopGame script, but a function like this is useful
+# for testing just the game logic (without loading a full DotHopGame)
+func build_puzzle_node(opts:Variant) -> Node2D:
+	# parse the puzzle script game, set game_def
+	var game_def_path = opts.get("game_def_path")
+	var game_def = opts.get("game_def")
+	if not game_def and game_def_path:
+		game_def = Puzz.parse_game_def(game_def_path)
+
 	if game_def == null:
-		parse_game_def()
-
-	var level_def
-	if puzzle is int:
-		if puzzle >= len(game_def.levels):
-			Debug.warn("no puzzle at puzzle_num", puzzle)
-			return
-		level_def = game_def.levels[puzzle]
-	elif puzzle is Array:
-		level_def = Puzz.parse_level_def(puzzle)
-
-	if level_def.shape == null:
-		Debug.warn("no shape for puzzle - maybe it's just a message?", level_def)
+		Debug.warn("No gamedef passed, cannot build_puzzle_node()", opts)
 		return
 
-	var node = Node2D.new()
+	# parse/pick the puzzle to load
+	var puzzle = opts.get("puzzle")
+	# default to loading the first level
+	var puzzle_num = opts.get("puzzle_num", 0)
+	var level_def
 
-	node.set_script(level_script)
+	if puzzle != null:
+		level_def = Puzz.parse_level(puzzle, opts.get("puzzle_message"))
+	elif puzzle_num != null:
+		level_def = game_def.levels[puzzle_num]
+	else:
+		pass
+
+	if level_def == null or level_def.shape == null:
+		Debug.warn("Could not determine level_def, cannot build_puzzle_node()", opts)
+		return
+
+	# PackedScene, string, or use fallback
+	var scene = opts.get("puzzle_scene")
+	if scene is String:
+		scene = load(scene)
+	elif scene == null:
+		scene = load(fallback_puzzle_scene)
+
+	var node = scene.instantiate()
 	node.game_def = game_def
 	node.level_def = level_def
 	return node
@@ -48,3 +68,8 @@ func manages_scene(scene):
 
 func should_spawn_player(_scene):
 	return false
+
+func start():
+	# TODO point to main menu?
+	# TODO consider loading + setting game_def_path based on a levels-select screen
+	Navi.nav_to(game_scene)
