@@ -34,6 +34,7 @@ func build_puzzle_node(puzzle: Variant):
 		return
 
 	var node = Node2D.new()
+
 	node.set_script(level_script)
 	node.game_def = game_def
 	node.level_def = level_def

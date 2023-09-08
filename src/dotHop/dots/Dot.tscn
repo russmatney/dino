@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtmmisey5adbv"]
 
-[ext_resource type="Script" path="res://src/dotHop/dots/objects/Dot.gd" id="1_3g0tk"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_61578"]
+[ext_resource type="Script" path="res://src/dotHop/dots/Dot.gd" id="1_k8c2i"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_micy1"]
 
 [node name="Dot" type="Node2D"]
-script = ExtResource("1_3g0tk")
+script = ExtResource("1_k8c2i")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 16.0
@@ -16,7 +16,7 @@ clip_contents = false
 custom_minimum_size = Vector2(16, 16)
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_fonts/normal_font = ExtResource("2_61578")
+theme_override_fonts/normal_font = ExtResource("2_micy1")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]goal[/center]"
