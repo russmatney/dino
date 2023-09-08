@@ -1,43 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cub0kguq12eo4"]
+[gd_scene load_steps=2 format=3 uid="uid://cub0kguq12eo4"]
 
 [ext_resource type="Script" path="res://src/dotHop/puzzle/DotHopPuzzle.gd" id="1_ckjkc"]
-[ext_resource type="PackedScene" uid="uid://b6wwc8int7l4p" path="res://src/dotHop/puzzle/Player.tscn" id="2_sipnq"]
-[ext_resource type="Script" path="res://src/dotHop/puzzle/Player.gd" id="3_ahmo1"]
-[ext_resource type="PackedScene" uid="uid://bhwmpvb57mv06" path="res://src/dotHop/puzzle/Dot.tscn" id="4_1tgux"]
-[ext_resource type="Script" path="res://src/dotHop/puzzle/Dot.gd" id="5_to31b"]
 
 [node name="DotHopPuzzle" type="Node2D"]
 script = ExtResource("1_ckjkc")
-
-[node name="Player" type="Node2D" parent="." groups=["generated"] instance=ExtResource("2_sipnq")]
-z_index = 5
-position = Vector2(64, 64)
-script = ExtResource("3_ahmo1")
-square_size = 64
-
-[node name="Dot" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_1tgux")]
-position = Vector2(64, 64)
-script = ExtResource("5_to31b")
-type = 1
-square_size = 64
-
-[node name="@Node2D@64708" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_1tgux")]
-position = Vector2(128, 64)
-script = ExtResource("5_to31b")
-square_size = 64
-
-[node name="@Node2D@64710" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_1tgux")]
-position = Vector2(192, 64)
-script = ExtResource("5_to31b")
-square_size = 64
-
-[node name="@Node2D@64712" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_1tgux")]
-position = Vector2(256, 64)
-script = ExtResource("5_to31b")
-square_size = 64
-
-[node name="@Node2D@64714" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_1tgux")]
-position = Vector2(320, 64)
-script = ExtResource("5_to31b")
-type = 2
-square_size = 64

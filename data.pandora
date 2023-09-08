@@ -61,6 +61,14 @@
 					"display_name": {
 						"type": "string",
 						"value": "Space"
+					},
+					"is_unlocked": {
+						"type": "bool",
+						"value": true
+					},
+					"puzzle_scene": {
+						"type": "resource",
+						"value": "res://src/dotHop/themes/space/SpacePuzzle.tscn"
 					}
 				}
 			}

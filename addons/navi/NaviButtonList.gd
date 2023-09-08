@@ -110,7 +110,7 @@ func add_menu_item(item):
 	var button = button_scene.instantiate()
 	var label = item.get("label", "Fallback Label")
 	if label in texts:
-		pw("Refusing to add button with existing label.", item)
+		# pw("Refusing to add button with existing label.", item)
 		button.free()
 		return
 

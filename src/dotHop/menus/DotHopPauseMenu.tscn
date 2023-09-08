@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvb2xnd1kbtbc"]
+
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_iq60s"]
+[ext_resource type="Script" path="res://src/dotHop/menus/DotHopPauseList.gd" id="1_uhwkb"]
+[ext_resource type="Script" path="res://src/dotHop/menus/ThemeButtonList.gd" id="2_parj4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1tngc"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 0.227451)
+
+[node name="DotHopPauseMenu" type="CanvasLayer"]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1tngc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer6" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("1_iq60s")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]Paused[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="PauseList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_uhwkb")
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="ThemeButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("2_parj4")
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MarginContainer7" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 3

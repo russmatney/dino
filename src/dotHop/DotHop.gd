@@ -10,6 +10,13 @@ var fallback_puzzle_scene = "res://src/dotHop/puzzle/DotHopPuzzle.tscn"
 enum dotType { Dot, Dotted, Goal}
 
 #####################################################################
+## ready
+
+func _ready():
+	main_menu_scene = load("res://src/dotHop/menus/DotHopMainMenu.tscn")
+	pause_menu_scene = load("res://src/dotHop/menus/DotHopPauseMenu.tscn")
+
+#####################################################################
 ## build puzzle node
 
 # Builds and returns a "puzzle_scene" node, with a game_def and level_def set
@@ -73,3 +80,17 @@ func start():
 	# TODO point to main menu?
 	# TODO consider loading + setting game_def_path based on a levels-select screen
 	Navi.nav_to(game_scene)
+
+var game
+func register_game(g):
+	game = g
+
+var current_theme
+func change_theme(theme):
+	if current_theme != theme:
+		current_theme = theme
+		if game != null:
+			game.puzzle_theme = theme
+			game.load_theme()
+			# TODO maintain current puzzle state?
+			game.rebuild_puzzle()

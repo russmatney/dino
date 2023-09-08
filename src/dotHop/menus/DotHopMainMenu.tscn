@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdv566f17j4jx"]
+
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_8ytxj"]
+[ext_resource type="Script" path="res://src/dotHop/menus/DotHopMenuList.gd" id="2_tegql"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a04u7"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 0.227451)
+
+[node name="DotHopMainMenu" type="CanvasLayer"]
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a04u7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer6" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("1_8ytxj")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]Dot Hop[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MenuList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_tegql")
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="MarginContainer7" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 3

@@ -15,6 +15,8 @@ var puzzle_scene
 ## ready
 
 func _ready():
+	DotHop.register_game(self)
+
 	game_def = Puzz.parse_game_def(game_def_path)
 	load_theme()
 	rebuild_puzzle()
@@ -52,7 +54,7 @@ func on_puzzle_ready():
 ## load theme
 
 func load_theme():
-	Debug.pr(puzzle_theme)
+	Debug.pr("game loading", puzzle_theme)
 	puzzle_scene = puzzle_theme.get_puzzle_scene()
 
 #####################################################################
