@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name FlowerEaterLevel
+class_name DotHopLevel
 
 var game_def
 var level_def :
@@ -12,24 +12,26 @@ var state
 
 signal win
 
-enum type {Flower, FlowerEaten, Target}
+enum type {Dot, Dotted, Goal}
 
 var obj_type = {
-	"Flower": type.Flower,
-	"FlowerEaten": type.FlowerEaten,
-	"Target": type.Target,
+	"Dot": type.Dot,
+	"Dotted": type.Dotted,
+	"Goal": type.Goal,
 	}
 
 var obj_scene = {
-	"fallback": preload("res://src/flowerEater/objects/GenericObj.tscn"),
-	"Player": preload("res://src/flowerEater/objects/PlayerA.tscn"),
-	"Flower": preload("res://src/flowerEater/objects/Flower.tscn"),
-	"FlowerEaten": preload("res://src/flowerEater/objects/Flower.tscn"),
-	"Target": preload("res://src/flowerEater/objects/Target.tscn"),
+	"Player": preload("res://src/dotHop/objects/Player.tscn"),
+	"Dot": preload("res://src/dotHop/objects/Dot.tscn"),
+	"Dotted": preload("res://src/dotHop/objects/Dot.tscn"),
+	"Goal": preload("res://src/dotHop/objects/Dot.tscn"),
 	}
 
 func node_for_object_name(obj_name):
-	var scene = Util.get_(obj_scene, obj_name, obj_scene["fallback"])
+	var scene = obj_scene.get(obj_name)
+	if not scene:
+		Debug.err("No scene found for object name", obj_name)
+		return
 	var node = scene.instantiate()
 	node.display_name = obj_name
 	var t = obj_type.get(obj_name)
@@ -157,19 +159,19 @@ func all_cells() -> Array[Variant]:
 			cs.append(cell)
 	return cs
 
-# Returns true if there are no "Flower" objects in the state grid
-func all_flowers_eaten() -> bool:
+# Returns true if there are no "dot" objects in the state grid
+func all_dotted() -> bool:
 	return all_cells().all(func(c):
 		if c == null:
 			return true
 		for obj_name in c:
-			if obj_name == "Flower":
+			if obj_name == "Dot":
 				return false
 		return true)
 
-func all_players_on_target() -> bool:
+func all_players_at_goal() -> bool:
 	return all_cells().filter(func(c):
-		if c != null and "Target" in c:
+		if c != null and "Goal" in c:
 			return true
 		).all(func(c): return "Player" in c)
 
@@ -210,51 +212,53 @@ func move_player_to_cell(player, cell):
 	# update to new coord
 	player.coord = cell.coord
 
-# converts the flower at the cell's coord to an eaten one
+# converts the dot at the cell's coord to a dotted one
 # depends on cell for `coord` and `nodes`.
-func eat_flower_at_cell(cell):
+func mark_cell_dotted(cell):
 	# TODO support multiple nodes per cell?
 	var node = Util.first(cell.nodes)
 
-	if node.has_method("eaten"):
-		node.eaten()
+	if node.has_method("mark_dotted"):
+		node.mark_dotted()
 	else:
-		node.display_name = "FlowerEaten"
+		Debug.warn("some strange node loaded?")
+		node.display_name = "Dotted"
 
 	# update game state
-	state.grid[cell.coord.y][cell.coord.x].erase("Flower")
-	state.grid[cell.coord.y][cell.coord.x].append("FlowerEaten")
+	state.grid[cell.coord.y][cell.coord.x].erase("Dot")
+	state.grid[cell.coord.y][cell.coord.x].append("Dotted")
 
-# converts an eatenFlower back into an uneaten one (undo!)
+# converts dotted back to dot (undo)
 # depends on cell for `coord` and `nodes`.
-func uneat_flower_at_cell(cell):
+func mark_cell_undotted(cell):
 	# TODO support multiple nodes per cell?
 	var node = Util.first(cell.nodes)
 	if node == null:
-		# undoing from target doesn't require any uneating
+		# undoing from goal doesn't require any undotting
 		return
 
-	if node.has_method("uneaten"):
-		node.uneaten()
+	if node.has_method("mark_undotted"):
+		node.mark_undotted()
 	else:
-		node.display_name = "Flower"
+		Debug.warn("some strange node loaded?")
+		node.display_name = "Dot"
 
 	# update game state
-	state.grid[cell.coord.y][cell.coord.x].erase("FlowerEaten")
-	state.grid[cell.coord.y][cell.coord.x].append("Flower")
+	state.grid[cell.coord.y][cell.coord.x].erase("Dotted")
+	state.grid[cell.coord.y][cell.coord.x].append("Dot")
 
-## move to flower ##############################################################
+## move to dot ##############################################################
 
-func move_to_flower(player, cell):
+func move_to_dot(player, cell):
 	# consider handling these in the same step (depending on the animation)
 	move_player_to_cell(player, cell)
-	eat_flower_at_cell(cell)
+	mark_cell_dotted(cell)
 
-## move to target ##############################################################
+## move to goal ##############################################################
 
-func move_to_target(player, cell):
+func move_to_goal(player, cell):
 	move_player_to_cell(player, cell)
-	if all_flowers_eaten() and all_players_on_target():
+	if all_dotted() and all_players_at_goal():
 		Debug.pr("win!")
 		state.win = true
 		win.emit()
@@ -293,11 +297,11 @@ func undo_last_move(player):
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].append("Player")
 	state.grid[player.coord.y][player.coord.x].erase("Player")
 
-	if "FlowerEaten" in state.grid[player.coord.y][player.coord.x]:
-		# uneat the flower in the current player position
-		uneat_flower_at_cell(cell_at_coord(player.coord))
-	if "Target" in state.grid[player.coord.y][player.coord.x]:
-		# unstuck when undoing from the target
+	if "Dotted" in state.grid[player.coord.y][player.coord.x]:
+		# undot at the current player position
+		mark_cell_undotted(cell_at_coord(player.coord))
+	if "Goal" in state.grid[player.coord.y][player.coord.x]:
+		# unstuck when undoing from the goal
 		player.stuck = false
 
 	# update state player position
@@ -308,7 +312,7 @@ func undo_last_move(player):
 # attempt to move all players in move_dir
 # any undos (movement backwards) undos the last movement
 # if any player is stuck, only undo is allowed
-# otherwise, the player moves to the flower or target in the direction pressed
+# otherwise, the player moves to the dot or goal in the direction pressed
 func move(move_dir):
 	var moves_to_make = []
 	for p in state.players:
@@ -341,23 +345,23 @@ func move(move_dir):
 			if "Player" in cell.objs:
 				moves_to_make.append(["blocked_by_player", null, p])
 				break
-			if "FlowerEaten" in cell.objs:
+			if "Dotted" in cell.objs:
 				continue
-			if "Flower" in cell.objs:
-				moves_to_make.append(["flower", move_to_flower, p, cell])
+			if "Dot" in cell.objs:
+				moves_to_make.append(["dot", move_to_dot, p, cell])
 				break
-			if "Target" in cell.objs:
-				moves_to_make.append(["target", move_to_target, p, cell])
+			if "Goal" in cell.objs:
+				moves_to_make.append(["goal", move_to_goal, p, cell])
 				break
 			Debug.warn("unexpected/unhandled cell in direction", cell)
 
-	var any_move = moves_to_make.any(func(m): return m[0] in ["flower", "target"])
+	var any_move = moves_to_make.any(func(m): return m[0] in ["dot", "goal"])
 	if any_move:
 		for p in state.players:
 			p.move_history.push_front(p.coord)
 
 		for m in moves_to_make:
-			if m[0] in ["flower", "target"]:
+			if m[0] in ["dot", "goal"]:
 				m[1].call(m[2], m[3])
 
 		return

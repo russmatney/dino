@@ -5,9 +5,8 @@ extends DinoGame
 ## vars
 
 var game_def
-# var level_script = preload("res://src/flowerEater/levels/Level.gd")
-var level_script = preload("res://src/flowerEater/dots/DotsLevel.gd")
-var fe_text = "res://src/flowerEater/flowereater.txt"
+var level_script = preload("res://src/dotHop/DotHopLevel.gd")
+var fe_text = "res://src/dotHop/dothop.txt"
 
 func parse_game_def(force_reparse=false):
 	if game_def == null or force_reparse:
@@ -44,7 +43,7 @@ func build_puzzle_node(puzzle: Variant):
 ## Dino game spec
 
 func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/flowerEater")
+	return scene.scene_file_path.begins_with("res://src/dotHop")
 
 func should_spawn_player(_scene):
 	return false

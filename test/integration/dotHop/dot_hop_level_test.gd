@@ -6,7 +6,7 @@ class TestBasicMovement:
 	var level
 
 	func before_each():
-		level = FlowerEater.build_puzzle_node(["xoot"])
+		level = DotHop.build_puzzle_node(["xoot"])
 		add_child(level)
 
 	func after_all():
@@ -14,40 +14,40 @@ class TestBasicMovement:
 
 	func test_level_one_win():
 		assert_eq_deep(level.state.grid[0],
-			[["Player", "FlowerEaten"], ["Flower"], ["Flower"], ["Target"]])
+			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten"], ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Target"]])
+			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten"], ["FlowerEaten"], ["FlowerEaten", "Undo"], ["Target", "Player"]])
+			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
 		assert_eq(level.state.win, true)
 
 	func test_level_one_undo():
 		assert_eq_deep(level.state.grid[0],
-			[["Player", "FlowerEaten"], ["Flower"], ["Flower"], ["Target"]])
+			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten"], ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Target"]])
+			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.LEFT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Undo"], ["FlowerEaten", "Player"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Dotted", "Player"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.LEFT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Player"], ["Flower"], ["Flower"], ["Target"]])
+			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 
 
@@ -57,7 +57,7 @@ class TestBasicMovementTwoPlayers:
 	var level
 
 	func before_each():
-		level = FlowerEater.build_puzzle_node(["xoot", "xoot"])
+		level = DotHop.build_puzzle_node(["xoot", "xoot"])
 		add_child(level)
 
 	func after_all():
@@ -65,65 +65,65 @@ class TestBasicMovementTwoPlayers:
 
 	func test_level_one_win():
 		assert_eq_deep(level.state.grid[0],
-			[["Player", "FlowerEaten"], ["Flower"], ["Flower"], ["Target"]])
+			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["Player", "FlowerEaten"], ["Flower"], ["Flower"], ["Target"]])
+			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten"], ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Target"]])
+			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten"], ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Target"]])
+			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten"], ["FlowerEaten"], ["FlowerEaten", "Undo"], ["Target", "Player"]])
+			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten"], ["FlowerEaten"], ["FlowerEaten", "Undo"], ["Target", "Player"]])
+			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
 		assert_eq(level.state.win, true)
 
 	func test_level_one_undo():
 		assert_eq_deep(level.state.grid[0],
-			[["Player", "FlowerEaten"], ["Flower"], ["Flower"], ["Target"]])
+			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["Player", "FlowerEaten"], ["Flower"], ["Flower"], ["Target"]])
+			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.RIGHT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten"], ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Target"]])
+			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten"], ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"], ["Target"]])
+			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.LEFT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Undo"], ["FlowerEaten", "Player"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Dotted", "Player"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten", "Undo"], ["FlowerEaten", "Player"], ["Flower"], ["Target"]])
+			[["Dotted", "Undo"], ["Dotted", "Player"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 		level.move(Vector2.LEFT)
 		assert_eq_deep(level.state.grid[0],
-			[["FlowerEaten", "Player"], ["Flower"], ["Flower"], ["Target"]])
+			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
-			[["FlowerEaten", "Player"], ["Flower"], ["Flower"], ["Target"]])
+			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
 
 class TestTwoPlayerInPlaceUndoBugs:
 	extends GutTest
 
 	func test_undo_obj_is_not_duplicated():
-		var level = FlowerEater.build_puzzle_node([
+		var level = DotHop.build_puzzle_node([
 				"..oo",
 				"txoo",
 				"..oo",
@@ -137,23 +137,23 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.move(Vector2.UP)
 
 		assert_eq_deep(level.state.grid[0],
-			[null, null, ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"]])
+			[null, null, ["Dotted", "Undo"], ["Player", "Dotted"]])
 		assert_eq_deep(level.state.grid[2],
-			[null, null, ["FlowerEaten"], ["FlowerEaten", "Undo"]])
+			[null, null, ["Dotted"], ["Dotted", "Undo"]])
 
 		level.move(Vector2.DOWN)
 
 		# This path was producing an extra "Undo" in the state grid,
 		# when the second player didn't move during an undo
 		assert_eq_deep(level.state.grid[0],
-			[null, null, ["FlowerEaten", "Undo"], ["Player", "FlowerEaten"]])
+			[null, null, ["Dotted", "Undo"], ["Player", "Dotted"]])
 		assert_eq_deep(level.state.grid[2],
-			[null, null, ["FlowerEaten", "Undo"], ["FlowerEaten", "Player"]])
+			[null, null, ["Dotted", "Undo"], ["Dotted", "Player"]])
 
 		level.free()
 
 	func test_undo_obj_is_not_added_to_other_non_moving_player():
-		var level = FlowerEater.build_puzzle_node([
+		var level = DotHop.build_puzzle_node([
 				"....o.o",
 				"tx..o.o",
 				"oo.o.x.",
@@ -167,33 +167,33 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.move(Vector2.LEFT)
 
 		assert_eq_deep(level.state.grid[1],
-			[["Target"], ["FlowerEaten", "Undo"], null, null, ["Player", "FlowerEaten"], null, ["Flower"]])
+			[["Goal"], ["Dotted", "Undo"], null, null, ["Player", "Dotted"], null, ["Dot"]])
 		assert_eq_deep(level.state.grid[2],
-			[["Player", "FlowerEaten"], ["FlowerEaten", "Undo"], null, ["FlowerEaten"], null, ["FlowerEaten"], null])
+			[["Player", "Dotted"], ["Dotted", "Undo"], null, ["Dotted"], null, ["Dotted"], null])
 
 		level.move(Vector2.DOWN)
 
 		assert_eq_deep(level.state.grid[1],
-			[["Target"], ["FlowerEaten", "Undo"], null, null, ["Player", "FlowerEaten"], null, ["Flower"]])
+			[["Goal"], ["Dotted", "Undo"], null, null, ["Player", "Dotted"], null, ["Dot"]])
 
 		level.move(Vector2.UP)
 
 		# here we should have moved the top player's undo along
 		assert_eq_deep(level.state.grid[1],
-			[["Target"], ["FlowerEaten"], null, null, ["FlowerEaten", "Undo"], null, ["Flower"]])
+			[["Goal"], ["Dotted"], null, null, ["Dotted", "Undo"], null, ["Dot"]])
 
 		level.move(Vector2.RIGHT)
 		level.move(Vector2.DOWN)
 
 		assert_eq_deep(level.state.grid[0],
-			[null, null, null, null, ["FlowerEaten"], null, ["FlowerEaten", "Undo"]])
+			[null, null, null, null, ["Dotted"], null, ["Dotted", "Undo"]])
 		assert_eq_deep(level.state.grid[1],
-			[["Target"], ["FlowerEaten" # extra UNDO here?
-				], null, null, ["FlowerEaten"], null, ["Player", "FlowerEaten"]])
+			[["Goal"], ["Dotted" # extra UNDO here?
+				], null, null, ["Dotted"], null, ["Player", "Dotted"]])
 		assert_eq_deep(level.state.grid[2],
-			[["FlowerEaten", "Undo"], ["FlowerEaten"], null, ["FlowerEaten"], null, ["FlowerEaten"], null])
+			[["Dotted", "Undo"], ["Dotted"], null, ["Dotted"], null, ["Dotted"], null])
 		assert_eq_deep(level.state.grid[3],
-			[["Target", "Player"], null, null, null, null, null, null])
+			[["Goal", "Player"], null, null, null, null, null, null])
 
 		level.move(Vector2.LEFT)
 		assert_eq(level.state.win, true)
@@ -201,10 +201,10 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.free()
 
 		# assert_eq_deep(level.state.grid[2],
-		# 	[null, null, ["FlowerEaten"], ["FlowerEaten", "Undo"]])
+		# 	[null, null, ["Dotted"], ["Dotted", "Undo"]])
 
 	func test_can_finish_level_10():
-		var level = FlowerEater.build_puzzle_node([
+		var level = DotHop.build_puzzle_node([
 				"....o.o",
 				"tx..o.o",
 				"......t",

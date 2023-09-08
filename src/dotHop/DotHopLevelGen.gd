@@ -12,8 +12,8 @@ extends Node2D
 ## ready
 
 func _ready():
-	FlowerEater.parse_game_def()
-	Debug.pr("Found", len(FlowerEater.game_def.levels), "levels")
+	DotHop.parse_game_def()
+	Debug.pr("Found", len(DotHop.game_def.levels), "levels")
 
 	generate_level(level_num)
 
@@ -26,7 +26,7 @@ func generate_level(num=0):
 		if ch.name == level_node_name:
 			ch.free()
 
-	var node = FlowerEater.build_puzzle_node(num)
+	var node = DotHop.build_puzzle_node(num)
 	if node == null:
 		Debug.warn("No node generated for level num", num)
 		return
@@ -42,7 +42,7 @@ func generate_level(num=0):
 ## load next
 
 func load_next(next_num):
-	if next_num < len(FlowerEater.game_def.levels):
+	if next_num < len(DotHop.game_def.levels):
 		generate_level(next_num)
 	else:
 		Debug.pr("win all!")

@@ -25,6 +25,7 @@
   watch          tasks/watch
   watch-reptile  (tasks/watch "addons/reptile/assets")
   watch-core     (tasks/watch "addons/core/assets")
+  watch-dothop   (tasks/watch "src/dotHop/assets")
   ;; TODO create a pixels-all (take a list of dirs)
   pixels         (let [dir (some-> *command-line-args* first)]
                    (if dir
