@@ -192,6 +192,10 @@ func move_vector():
 		return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	return Vector2.ZERO
 
+func discrete_move_vector():
+	# TODO provide more basic version to account for discrete joypad movement
+	pass
+
 func is_move(event):
 	return is_event(event, "move_left") or is_event(event, "move_right") or \
 		is_event(event, "move_up") or is_event(event, "move_down")
