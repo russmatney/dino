@@ -151,7 +151,7 @@ var dino_credits = [
 	"Duaa Osman",
 	"Ryan Schmukler",
 	"Alex Chojnacki",
-	"Griffin Smith",
+	"Aspen Smith",
 	"Jake Bartlam",
 	],
     [
