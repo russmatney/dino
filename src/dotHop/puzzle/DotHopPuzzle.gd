@@ -99,11 +99,10 @@ func restart_block_move_timer(t=0.2):
 	block_move = true
 	if block_move_timer != null:
 		block_move_timer.kill()
-	block_move_timer = get_tree().create_tween()
-	block_move_timer.tween_interval(t)
+	block_move_timer = create_tween()
 	block_move_timer.tween_callback(func():
 		block_move = false
-		check_move_input())
+		check_move_input()).set_delay(t)
 
 ## state/grid ##############################################################
 
