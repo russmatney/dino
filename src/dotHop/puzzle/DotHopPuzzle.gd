@@ -62,20 +62,48 @@ func _unhandled_input(event):
 		if state == null:
 			Debug.warn("No state, ignoring move input")
 			return
-		var move_vec = Trolley.grid_move_vector()
-		if move_vec != Vector2.ZERO:
-			move(move_vec)
-	elif Trolley.is_undo(event):
+		check_move_input()
+	elif Trolley.is_undo(event) and not block_move:
 		if state == null:
 			Debug.warn("No state, ignoring undo input")
 			return
 		for p in state.players:
 			undo_last_move(p)
+		restart_block_move_timer(0.1)
 
 	elif Trolley.is_restart(event):
+		# TODO add timer and animation before restarting
 		init_game_state()
 	elif Trolley.is_debug_toggle(event):
 		Debug.prn(state.grid)
+
+## check_move_input ##############################################################
+
+var block_move
+var last_move
+
+func check_move_input():
+	var move_vec = Trolley.grid_move_vector()
+
+	if move_vec != last_move:
+		# allow moving in a new direction
+		block_move = false
+
+	if move_vec != Vector2.ZERO and not block_move:
+		last_move = move_vec
+		move(move_vec)
+		restart_block_move_timer()
+
+var block_move_timer
+func restart_block_move_timer(t=0.2):
+	block_move = true
+	if block_move_timer != null:
+		block_move_timer.kill()
+	block_move_timer = get_tree().create_tween()
+	block_move_timer.tween_interval(t)
+	block_move_timer.tween_callback(func():
+		block_move = false
+		check_move_input())
 
 ## state/grid ##############################################################
 
@@ -143,6 +171,8 @@ func rebuild_nodes():
 
 func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	var node = node_for_object_name(obj_name)
+	# nodes should maybe set their own position
+	# (i.e. not be automatically moved, but stay on teh puzzle's origin)
 	node.position = coord * square_size
 	node.square_size = square_size
 	node.add_to_group("generated", true)
@@ -230,6 +260,7 @@ func move_player_to_cell(player, cell):
 	# move player node
 	# TODO animate/tween/sound/fun
 	# probably a func to call on player node w/ the new position
+	# TODO don't assign this, pass it to the node
 	player.node.position = cell.coord * square_size
 
 	# update game state
@@ -332,6 +363,7 @@ func undo_last_move(player):
 	# TODO animate/tween/sound/fun
 	# TODO note this should be an undo animation
 	# probably a func to call on player node w/ the new position
+	# TODO don't assign this, pass it to the node
 	player.node.position = dest_cell.coord * square_size
 
 	# update game state
@@ -339,7 +371,7 @@ func undo_last_move(player):
 	state.grid[player.coord.y][player.coord.x].erase("Player")
 
 	if "Dotted" in state.grid[player.coord.y][player.coord.x]:
-		# undot at the current player position
+		# undo at the current player position
 		mark_cell_undotted(cell_at_coord(player.coord))
 	if "Goal" in state.grid[player.coord.y][player.coord.x]:
 		# unstuck when undoing from the goal

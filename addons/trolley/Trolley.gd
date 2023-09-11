@@ -192,7 +192,7 @@ func move_vector():
 		return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	return Vector2.ZERO
 
-func grid_move_vector(thresh=0.70):
+func grid_move_vector(thresh=0.6):
 	var move = move_vector()
 	if move.x > thresh:
 		return Vector2.RIGHT
@@ -207,6 +207,10 @@ func grid_move_vector(thresh=0.70):
 func is_move(event):
 	return is_event(event, "move_left") or is_event(event, "move_right") or \
 		is_event(event, "move_up") or is_event(event, "move_down")
+
+func is_move_released(event):
+	return is_event_released(event, "move_left") or is_event_released(event, "move_right") or \
+		is_event_released(event, "move_up") or is_event_released(event, "move_down")
 
 func is_restart(event):
 	return is_event(event, "restart")
