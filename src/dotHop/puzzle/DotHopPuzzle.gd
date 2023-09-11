@@ -193,8 +193,11 @@ func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	var node = node_for_object_name(obj_name)
 	# nodes should maybe set their own position
 	# (i.e. not be automatically moved, but stay on teh puzzle's origin)
-	node.position = coord * square_size
 	node.square_size = square_size
+	if node.has_method("set_coord"):
+		node.set_initial_coord(coord)
+	else:
+		node.position = coord * square_size
 	node.add_to_group("generated", true)
 	add_child(node)
 	node.set_owner(self)
@@ -278,10 +281,10 @@ func previous_undo_coord(player, skip_coord, start_at=0):
 # NOTE updating move_history is done after all players move
 func move_player_to_cell(player, cell):
 	# move player node
-	# TODO animate/tween/sound/fun
-	# probably a func to call on player node w/ the new position
-	# TODO don't assign this, pass it to the node
-	player.node.position = cell.coord * square_size
+	if player.node.has_method("move_to_coord"):
+		player.node.move_to_coord(cell.coord)
+	else:
+		player.node.position = cell.coord * square_size
 
 	# update game state
 	state.grid[cell.coord.y][cell.coord.x].append("Player")
@@ -376,15 +379,15 @@ func undo_last_move(player):
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].erase("Undo")
 
 	if last_pos == player.coord:
-		# TODO animate player.node undo in place
+		if player.node.has_method("undo_to_same_coord"):
+			player.node.undo_to_same_coord()
 		return
 
 	# move player node
-	# TODO animate/tween/sound/fun
-	# TODO note this should be an undo animation
-	# probably a func to call on player node w/ the new position
-	# TODO don't assign this, pass it to the node
-	player.node.position = dest_cell.coord * square_size
+	if player.node.has_method("undo_to_coord"):
+		player.node.undo_to_coord(dest_cell.coord)
+	else:
+		player.node.position = dest_cell.coord * square_size
 
 	# update game state
 	state.grid[dest_cell.coord.y][dest_cell.coord.x].append("Player")
@@ -418,7 +421,11 @@ func move(move_dir):
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
 				moves_to_make.append(["stuck", null, p])
-			# TODO express/animate stuck/edge move
+				if p.node.has_method("move_attempt_stuck"):
+					p.node.move_attempt_stuck(move_dir)
+			else:
+				if p.node.has_method("move_attempt_away_from_edge"):
+					p.node.move_attempt_away_from_edge(move_dir)
 			continue
 
 		cells = cells.filter(func(c): return c.objs != null)
@@ -426,11 +433,15 @@ func move(move_dir):
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
 				moves_to_make.append(["stuck", null, p])
-			# TODO express/animate nothing in-direction move
+				if p.node.has_method("move_attempt_stuck"):
+					p.node.move_attempt_stuck(move_dir)
+			else:
+				if p.node.has_method("move_attempt_only_nulls"):
+					p.node.move_attempt_only_nulls(move_dir)
 			continue
 
 		for cell in cells:
-			# TODO instead of markers, read undo from the players move history?
+			# TODO instead of markers, read undo completely from the players move history?
 			if "Undo" in cell.objs and cell.coord in p.move_history:
 				# should be fine? worried about playerA finding playerB's undo?
 				moves_to_make.append(["undo", undo_last_move, p, cell])
@@ -438,11 +449,14 @@ func move(move_dir):
 			if p.stuck:
 				Debug.warn("stuck.", p.stuck)
 				moves_to_make.append(["stuck", null, p])
+				if p.node.has_method("move_attempt_stuck"):
+					p.node.move_attempt_stuck(move_dir)
 				break
 			if "Player" in cell.objs:
 				moves_to_make.append(["blocked_by_player", null, p])
 				break
 			if "Dotted" in cell.objs:
+				# TODO moving toward dotted has animation gap?
 				continue
 			if "Dot" in cell.objs:
 				moves_to_make.append(["dot", move_to_dot, p, cell])
