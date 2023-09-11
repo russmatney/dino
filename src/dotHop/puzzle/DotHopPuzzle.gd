@@ -62,7 +62,9 @@ func _unhandled_input(event):
 		if state == null:
 			Debug.warn("No state, ignoring move input")
 			return
-		move(Trolley.move_vector())
+		var move_vec = Trolley.grid_move_vector()
+		if move_vec != Vector2.ZERO:
+			move(move_vec)
 	elif Trolley.is_undo(event):
 		if state == null:
 			Debug.warn("No state, ignoring undo input")
@@ -176,10 +178,14 @@ func cell_at_coord(coord:Vector2) -> Dictionary:
 # returns a list of cells from the passed position in the passed direction
 # the cells are dicts with a coord, a list of objs (string names), and a list of nodes
 func cells_in_direction(coord:Vector2, dir:Vector2) -> Array:
+	if dir == Vector2.ZERO:
+		return []
 	var cells = []
 	var cursor = coord + dir
-	while coord_in_grid(cursor):
+	var last_cursor
+	while coord_in_grid(cursor) and last_cursor != cursor:
 		cells.append(cell_at_coord(cursor))
+		last_cursor = cursor
 		cursor += dir
 	return cells
 
@@ -349,6 +355,10 @@ func undo_last_move(player):
 # if any player is stuck, only undo is allowed
 # otherwise, the player moves to the dot or goal in the direction pressed
 func move(move_dir):
+	if move_dir == Vector2.ZERO:
+		# don't do anything!
+		return
+
 	var moves_to_make = []
 	for p in state.players:
 		var cells = cells_in_direction(p.coord, move_dir)
