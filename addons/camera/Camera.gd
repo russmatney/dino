@@ -133,6 +133,10 @@ func inc_trauma(inc = 0.1):
 func screenshake(trauma = 0.3):
 	inc_trauma(trauma)
 
+func screenshake_cancel():
+	if cam and is_instance_valid(cam):
+		cam.set_trauma(0.0)
+
 
 ##############################################################
 # freezeframe

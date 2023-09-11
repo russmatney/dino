@@ -389,6 +389,8 @@ var trauma_decrement_factor = 0.7
 func inc_trauma(inc):
 	trauma += inc
 	trauma = clamp(trauma, 0.0, 1.0)
+func set_trauma(val):
+	trauma = clamp(val, 0.0, 1.0)
 
 var shake_offset
 var shake_rotation
