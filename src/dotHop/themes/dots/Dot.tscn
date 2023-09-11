@@ -1,18 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl82y6gylisqo"]
+[gd_scene load_steps=8 format=3 uid="uid://cl82y6gylisqo"]
 
 [ext_resource type="Script" path="res://src/dotHop/themes/dots/Dot.gd" id="1_pofn5"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_4n18a"]
+[ext_resource type="Texture2D" uid="uid://mqp6x6wpgjc8" path="res://src/dotHop/themes/dots/blue_ring.png" id="3_gt0f5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_363vi"]
+atlas = ExtResource("3_gt0f5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xb84"]
+atlas = ExtResource("3_gt0f5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqgbf"]
+atlas = ExtResource("3_gt0f5")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_velks"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_363vi")
+}],
+"loop": true,
+"name": &"dot",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xb84")
+}],
+"loop": true,
+"name": &"dotted",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqgbf")
+}],
+"loop": true,
+"name": &"goal",
+"speed": 10.0
+}]
 
 [node name="Dot" type="Node2D"]
 script = ExtResource("1_pofn5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
 
 [node name="ObjectLabel" type="RichTextLabel" parent="."]
+visible = false
 clip_contents = false
 custom_minimum_size = Vector2(16, 16)
 offset_left = -19.0
@@ -25,3 +67,17 @@ bbcode_enabled = true
 text = "[center]dot[/center]"
 fit_content = true
 scroll_active = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_velks")
+animation = &"dot"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://src/dotHop/themes/dots/assets/blue_ring.aseprite"
+}

@@ -3,6 +3,9 @@ extends DotHopPlayer
 
 ## vars #########################################################
 
+var move_tween
+var scale_tween
+
 ## ready #########################################################
 
 func _ready():
@@ -21,9 +24,6 @@ func set_initial_coord(coord):
 	position = coord * square_size
 
 ## move #########################################################
-
-var move_tween
-var scale_tween
 
 func move_to_coord(coord):
 	current_coord = coord
