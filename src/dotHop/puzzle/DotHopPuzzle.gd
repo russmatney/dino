@@ -147,11 +147,32 @@ func clear_nodes():
 		if ch.is_in_group("generated"):
 			ch.free()
 
+var cam_anchor
+var cam_anchor_scene = preload("res://addons/camera/CamAnchor.tscn")
+func ensure_camera_anchor():
+	if len(state.grid) == 0:
+		return
+	if cam_anchor == null:
+		cam_anchor = cam_anchor_scene.instantiate()
+		cam_anchor.position = Vector2(len(state.grid[0]), len(state.grid)) * square_size / 2
+		add_child(cam_anchor)
+
+	Cam.ensure_camera({
+		anchor=cam_anchor,
+		# TODO dynamic zoom based on level size
+		zoom_level=2.5,
+		# zoom_offset=1000.0,
+		mode=Cam.mode.ANCHOR})
+
 # Adds nodes for the object_names in each cell of the grid.
 # Tracks nodes (except for players) in a state.cell_nodes dict.
 # Tracks players in state.players list.
 func rebuild_nodes():
 	clear_nodes()
+
+	if not Engine.is_editor_hint():
+		ensure_camera_anchor()
+		Hood.ensure_hud()
 
 	for y in len(state.grid):
 		for x in len(state.grid[y]):

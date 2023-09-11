@@ -21,14 +21,18 @@ var display_name = "Player"
 var label
 var color_rect
 
+## enter tree #########################################################
+
+func _enter_tree():
+	add_to_group("player", true)
+
 ## ready #########################################################
 
 func _ready():
 	if z_index == 0:
 		z_index = 5
 
-	Util.set_optional_nodes(self, {
-		label="ObjectLabel", color_rect="ColorRect"})
+	Util.set_optional_nodes(self, {label="ObjectLabel", color_rect="ColorRect"})
 
 	render()
 

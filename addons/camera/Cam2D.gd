@@ -49,6 +49,8 @@ func _ready():
 			update_poas()
 		elif pof_group:
 			update_pofs()
+	else:
+		update_zoom()
 
 	update_window_size()
 	# TODO recreate this? what to subscribe too?

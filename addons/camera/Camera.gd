@@ -70,6 +70,8 @@ func ensure_camera(opts = {}):
 		return
 
 	var player = opts.get("player")
+	var anchor = opts.get("anchor")
+	var cam_mode = opts.get("mode", mode.FOLLOW_AND_POIS)
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
@@ -78,13 +80,19 @@ func ensure_camera(opts = {}):
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
 			var cam_parent = cam.get_parent()
-			Debug.pr(cam_parent, player)
 			if cam_parent != null and is_instance_valid(cam_parent):
+				# not sure this makes sense...
 				Debug.pr("Setting cam parent to player:", cam)
 				player.add_child(cam)
 			if cam.get_parent() != player:
 				Debug.pr("reparenting cam to player:", cam)
 				cam.reparent(player)
+
+		if cam_mode == mode.ANCHOR and anchor:
+			var cam_parent = cam.get_parent()
+			if cam_parent == null or not is_instance_valid(cam_parent) or cam_parent != anchor:
+				cam.reparent(anchor, false)
+
 		return
 
 	var cams = get_tree().get_nodes_in_group("camera")
@@ -96,7 +104,7 @@ func ensure_camera(opts = {}):
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true
-	cam.mode = opts.get("mode", mode.FOLLOW_AND_POIS)
+	cam.mode = cam_mode
 	cam.zoom_offset = opts.get("zoom_offset", 500.0)
 	cam.zoom_level = opts.get("zoom_level", 1.0)
 

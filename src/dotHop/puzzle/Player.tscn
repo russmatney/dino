@@ -10,7 +10,7 @@ script = ExtResource("1_yw5a5")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 16.0
 offset_bottom = 16.0
-color = Color(0.192157, 0.360784, 0.839216, 1)
+color = Color(0, 0, 1, 1)
 
 [node name="ObjectLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -20,6 +20,6 @@ offset_bottom = 40.0
 theme_override_fonts/normal_font = ExtResource("2_m5rqw")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center]player[/center]"
+text = "[center]Player[/center]"
 fit_content = true
 scroll_active = false

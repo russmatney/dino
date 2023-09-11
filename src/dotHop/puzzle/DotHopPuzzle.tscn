@@ -9,7 +9,7 @@
 [node name="DotHopPuzzle" type="Node2D"]
 script = ExtResource("1_ckjkc")
 
-[node name="Player" type="Node2D" parent="." groups=["generated"] instance=ExtResource("2_srm8m")]
+[node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_srm8m")]
 z_index = 5
 position = Vector2(64, 64)
 script = ExtResource("3_ebisn")

@@ -16,7 +16,7 @@ offset_right = 1906.0
 offset_bottom = 1062.0
 color = Color(0.137255, 0.352941, 0.603922, 1)
 
-[node name="Player" type="Node2D" parent="." groups=["generated"] instance=ExtResource("2_cwxko")]
+[node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_cwxko")]
 z_index = 5
 position = Vector2(64, 64)
 script = ExtResource("3_rnk84")
