@@ -45,7 +45,7 @@ func build_puzzle_node(opts:Variant) -> Node2D:
 	var level_def
 
 	if puzzle != null:
-		level_def = Puzz.parse_level(puzzle, opts.get("puzzle_message"))
+		level_def = Puzz.parse_level_def(puzzle, opts.get("puzzle_message"))
 	elif puzzle_num != null:
 		level_def = game_def.levels[puzzle_num]
 	else:

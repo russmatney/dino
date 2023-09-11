@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dotHop/puzzle/Player.gd" id="1_yw5a5"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_m5rqw"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["player"]]
 z_index = 5
 script = ExtResource("1_yw5a5")
 
