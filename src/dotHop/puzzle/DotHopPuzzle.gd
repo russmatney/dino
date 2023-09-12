@@ -167,12 +167,13 @@ func ensure_camera_anchor():
 # Adds nodes for the object_names in each cell of the grid.
 # Tracks nodes (except for players) in a state.cell_nodes dict.
 # Tracks players in state.players list.
+var hud_scene = preload("res://src/dotHop/hud/HUD.tscn")
 func rebuild_nodes():
 	clear_nodes()
 
 	if not Engine.is_editor_hint():
 		ensure_camera_anchor()
-		Hood.ensure_hud()
+		Hood.ensure_hud(hud_scene)
 
 	for y in len(state.grid):
 		for x in len(state.grid[y]):

@@ -29,22 +29,22 @@ script = ExtResource("5_gtoa3")
 type = 1
 square_size = 32
 
-[node name="@Node2D@39593" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+[node name="@Node2D@19662" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
 position = Vector2(64, 32)
 script = ExtResource("5_gtoa3")
 square_size = 32
 
-[node name="@Node2D@39595" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+[node name="@Node2D@19664" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
 position = Vector2(96, 32)
 script = ExtResource("5_gtoa3")
 square_size = 32
 
-[node name="@Node2D@39597" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+[node name="@Node2D@19666" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
 position = Vector2(128, 32)
 script = ExtResource("5_gtoa3")
 square_size = 32
 
-[node name="@Node2D@39599" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+[node name="@Node2D@19668" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
 position = Vector2(160, 32)
 script = ExtResource("5_gtoa3")
 type = 2

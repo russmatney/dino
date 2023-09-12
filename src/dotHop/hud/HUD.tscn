@@ -1,0 +1,148 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmj60xakurhk0"]
+
+[ext_resource type="Script" path="res://src/dotHop/hud/DotHopHUD.gd" id="1_eiarx"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="2_4u8qe"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_cdvqc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_li620"]
+bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.156863)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_eiarx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="LevelNum" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdvqc")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]#3/12[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="LevelMessage" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdvqc")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Now for something a bit more interesting	[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="DotsRemaining" type="RichTextLabel" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdvqc")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center]0/8 Dots[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="Move" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdvqc")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Move: WASD/Arrows/joystick/DPad"
+fit_content = true
+scroll_active = false
+
+[node name="Undo" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdvqc")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Undo: X/Y"
+fit_content = true
+scroll_active = false
+
+[node name="Reset" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_cdvqc")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Reset: Hold X/Y"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_li620")
+
+[node name="Notifications" parent="VBoxContainer/HBoxContainer/PanelContainer" instance=ExtResource("2_4u8qe")]
+layout_mode = 2
