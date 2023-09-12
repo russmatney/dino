@@ -89,6 +89,33 @@ var omit_vals_for_keys = ["layer_0/tile_data"]
 
 var max_array_size = 20
 
+# supported colors:
+# - black
+# - red
+# - green
+# - yellow
+# - blue
+# - magenta
+# - pink
+# - purple
+# - cyan
+# - white
+# - orange
+# - gray
+# supported tags:
+# - b
+# - i
+# - u
+# - s
+# - indent
+# - code
+# - url
+# - center
+# - right
+# - color
+# - bgcolor
+# - fgcolor
+
 # TODO refactor into opts dict
 # TODO refactor into pluggable pretty printer
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
@@ -99,18 +126,18 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 			if newlines:
 				msg.append("...")
 
-		var tmp = color_wrap("[ ", "crimson", use_color)
+		var tmp = color_wrap("[ ", "red", use_color)
 		var last = len(msg) - 1
 		for i in range(len(msg)):
 			if newlines and last > 1:
 				tmp += "\n\t"
 			tmp += to_pretty(msg[i], newlines, use_color, indent_level + 1)
 			if i != last:
-				tmp += color_wrap(", ", "crimson", use_color)
-		tmp += color_wrap(" ]", "crimson", use_color)
+				tmp += color_wrap(", ", "red", use_color)
+		tmp += color_wrap(" ]", "red", use_color)
 		return tmp
 	elif msg is Dictionary:
-		var tmp = color_wrap("{ ", "crimson", use_color)
+		var tmp = color_wrap("{ ", "red", use_color)
 		var ct = len(msg)
 		var last
 		if len(msg) > 0:
@@ -127,27 +154,27 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 					.map(func(_i): return "\t")\
 						.reduce(func(a, b): return str(a, b), "")
 			if use_color:
-				tmp += '[color=%s]"%s"[/color]: %s' % ["cadet_blue", k, val]
+				tmp += '[color=%s]"%s"[/color]: %s' % ["magenta", k, val]
 			else:
 				tmp += '"%s": %s' % [k, val]
 			if last and str(k) != str(last):
-				tmp += color_wrap(", ", "crimson", use_color)
-		tmp += color_wrap(" }", "crimson", use_color)
+				tmp += color_wrap(", ", "red", use_color)
+		tmp += color_wrap(" }", "red", use_color)
 		return tmp
 	elif msg is String:
 		if msg == "":
 			return '""'
-		# TODO check for known tags in here, like 'center'/'right'/'jump'/etc
+		# TODO check for supported tags in here (see list above)
 		# if msg.contains("["):
 		# 	msg = "<ACTUAL-TEXT-REPLACED>"
-		return color_wrap(msg, "dark_gray", use_color)
+		return color_wrap(msg, "pink", use_color)
 	elif msg is StringName:
-		return str(color_wrap("&", "coral", use_color), '"%s"' % msg)
+		return str(color_wrap("&", "orange", use_color), '"%s"' % msg)
 	elif msg is NodePath:
-		return str(color_wrap("^", "coral", use_color), '"%s"' % msg)
+		return str(color_wrap("^", "orange", use_color), '"%s"' % msg)
 	elif msg is Vector2:
 		if use_color:
-			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["cornflower_blue", msg.x, "cornflower_blue", msg.y]
+			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["purple", msg.x, "purple", msg.y]
 		else:
 			return '(%s,%s)' % [msg.x, msg.y]
 	elif msg is PandoraEntity and msg.has_method("data"):
@@ -159,7 +186,7 @@ func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=true):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
-		var c = "aquamarine" if prefix != null and prefix[0] == "[" else "peru"
+		var c = "cyan" if prefix != null and prefix[0] == "[" else "green"
 		if pretty and use_color:
 			m += "[color=%s]%s[/color]" % [c, prefix]
 		else:
