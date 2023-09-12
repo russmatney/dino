@@ -90,6 +90,7 @@ func to_entry_key(data, parents=[]):
 
 ## add a packed scene (and children) to the scene_db. Accepts PackedScene, a path to one (sfp), or a node.
 func book(bookable: Variant):
+	Debug.pr("booking!", bookable)
 	var data
 	if bookable is PackedScene:
 		data = Util.packed_scene_data(bookable)
@@ -226,7 +227,7 @@ func register(node, opts={}):
 
 	var key = node_to_entry_key(node)
 	if not key in scene_db:
-		Debug.pr("Booking node from register")
+		Debug.pr("Booking node from register", node)
 		book(node)
 
 	# restore node state with data from hotel
@@ -250,9 +251,13 @@ signal entry_updated(entry)
 func update(key, data):
 	scene_db[key].merge(data, true)
 	entry_updated.emit(scene_db[key])
+	Debug.pr("entry updated", key, data)
 
 ## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
+	if not node.is_node_ready():
+		Debug.warn("node not ready, skipping check_in", node)
+		return
 	if data == null:
 		if node.has_method("hotel_data"):
 			data = node.hotel_data()

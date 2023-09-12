@@ -20,25 +20,30 @@ func set_hud_scene(hud_scene_or_string):
 
 var hud
 
-func ensure_hud(hud_preload=null):
-	Debug.pr("ensuring hud", hud_preload)
+func ensure_hud(hud_scene=null):
+	Debug.pr("ensuring hud", hud_scene)
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
 		return
 
-	if not hud_preload:
+	if not hud_scene:
 		if fallback_hud_scene is String:
 			fallback_hud_scene = load(fallback_hud_scene)
-		hud_preload = fallback_hud_scene
+		hud_scene = fallback_hud_scene
 
-	hud = hud_preload.instantiate()
+	if hud_scene is String:
+		hud_scene = load(hud_scene)
+	hud = hud_scene.instantiate()
 	if not hud:
-		Debug.err("failed to instantiate HUD scene", hud_preload)
+		Debug.err("failed to instantiate HUD scene", hud_scene)
 		return
 
 	hud.ready.connect(_on_hud_ready)
 	# make sure hud is included in usual scene lifecycle/clean up
+	# NOTE this is deferred!
 	Navi.add_child_to_current(hud)
+
+	return hud
 
 signal hud_ready
 
