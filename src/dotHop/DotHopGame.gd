@@ -54,7 +54,6 @@ func on_puzzle_ready():
 ## load theme
 
 func load_theme():
-	Debug.pr("game loading", puzzle_theme)
 	puzzle_scene = puzzle_theme.get_puzzle_scene()
 
 #####################################################################

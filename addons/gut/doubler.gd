@@ -33,7 +33,6 @@
 
 
 # ------------------------------------------------------------------------------
-# A stroke of genius if I do say so.  This allows for doubling a scene without
 # having  to write any files.  By overloading the "instantiate" method  we can
 # make whatever we want.
 # ------------------------------------------------------------------------------

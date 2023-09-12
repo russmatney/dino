@@ -21,7 +21,6 @@ func set_hud_scene(hud_scene_or_string):
 var hud
 
 func ensure_hud(hud_scene=null):
-	Debug.pr("ensuring hud", hud_scene)
 	if hud and is_instance_valid(hud):
 		Debug.prn("HUD exists, nothing doing.")
 		return
@@ -33,6 +32,9 @@ func ensure_hud(hud_scene=null):
 
 	if hud_scene is String:
 		hud_scene = load(hud_scene)
+	if hud_scene == null:
+		Debug.err("no hud scene, cannot ensure", hud_scene)
+		return
 	hud = hud_scene.instantiate()
 	if not hud:
 		Debug.err("failed to instantiate HUD scene", hud_scene)

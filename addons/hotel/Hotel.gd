@@ -90,7 +90,6 @@ func to_entry_key(data, parents=[]):
 
 ## add a packed scene (and children) to the scene_db. Accepts PackedScene, a path to one (sfp), or a node.
 func book(bookable: Variant):
-	Debug.pr("booking!", bookable)
 	var data
 	if bookable is PackedScene:
 		data = Util.packed_scene_data(bookable)
@@ -118,11 +117,6 @@ func book_data(data: Dictionary, opts = {}):
 	var node = opts.get("node")
 	if node != null and parents == null or (parents != null and len(parents) == 0):
 		parents = Util.get_all_parents(node).map(func(p): return {name=p.name})
-
-	# if node != null:
-	# 	Debug.pr("book_data found node", node, " ", data.keys())
-	# else:
-	# 	Debug.pr("book_data found scene", scene_name, " ", data.keys())
 
 	if parents == null:
 		parents = [data.values()[0]]
@@ -194,7 +188,6 @@ func book_data(data: Dictionary, opts = {}):
 
 		if key.begins_with("@"):
 			continue
-		# Debug.pr("booking entry at key", key)
 		if key in scene_db:
 			scene_db[key].merge(entry)
 		else:
@@ -227,7 +220,6 @@ func register(node, opts={}):
 
 	var key = node_to_entry_key(node)
 	if not key in scene_db:
-		Debug.pr("Booking node from register", node)
 		book(node)
 
 	# restore node state with data from hotel
@@ -251,7 +243,6 @@ signal entry_updated(entry)
 func update(key, data):
 	scene_db[key].merge(data, true)
 	entry_updated.emit(scene_db[key])
-	Debug.pr("entry updated", key, data)
 
 ## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
@@ -296,8 +287,7 @@ func check_out(node: Node):
 		return scene_db[key]
 	else:
 		if not Engine.is_editor_hint():
-			pass
-			# Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
+			Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
 ## Flexible access to the scene_db vals
 func query(q={}):
@@ -310,17 +300,17 @@ func query(q={}):
 	# 	vals = q.nodes.map(check_out)
 
 	if "group" in q:
-		vals = vals.filter(func (s_dict): return q["group"] in s_dict.get("groups", []))
+		vals = vals.filter(func (s_dict): return q.group in s_dict.get("groups", []))
 
 	# TODO dry up data-dict match pattern
 	if "zone_name" in q:
-		vals = vals.filter(func (s_dict): return q["zone_name"] == s_dict.get("zone_name"))
+		vals = vals.filter(func (s_dict): return q.zone_name == s_dict.get("zone_name"))
 
 	if "room_name" in q:
-		vals = vals.filter(func (s_dict): return q["room_name"] == s_dict.get("room_name"))
+		vals = vals.filter(func (s_dict): return q.room_name == s_dict.get("room_name"))
 
 	if "scene_file_path" in q:
-		vals = vals.filter(func (s_dict): return q["scene_file_path"] == s_dict.get("scene_file_path"))
+		vals = vals.filter(func (s_dict): return q.scene_file_path == s_dict.get("scene_file_path"))
 
 	if "has_group" in q:
 		vals = vals.filter(func (s_dict): return len(s_dict.get("groups", [])) > 0)

@@ -6,7 +6,8 @@ extends DinoGame
 
 var game_scene = "res://src/dotHop/DotHopGame.tscn"
 var fallback_puzzle_scene = "res://src/dotHop/puzzle/DotHopPuzzle.tscn"
-var hud_scene = "res://src/dotHop/hud/HUD.tscn"
+var hud_scene = "res://src/dotHop/hud/DotHopHUD.tscn"
+var puzzle_group = "dothop_puzzle"
 
 enum dotType { Dot, Dotted, Goal}
 

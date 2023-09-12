@@ -1,22 +1,20 @@
 extends GutTest
 
-var hud_scene = load("res://src/dotHop/hud/HUD.tscn")
-var hud
+var game
 
 func before_all():
-	var hud_dbl = double(hud_scene)
-	DotHop.hud_scene = hud_dbl
-
-func test_hud_receives_updates():
-	watch_signals(Hotel)
-
-	var game = load("res://src/dotHop/DotHopGame.tscn").instantiate()
+	game = load("res://src/dotHop/DotHopGame.tscn").instantiate()
 	add_child(game)
 	await Hood.hud_ready
 
-	assert_signal_emitted(Hotel, "entry_updated")
+func test_hud_loads_initial_state():
+	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 3)
+	assert_eq(Hood.hud.last_puzzle_update.dots_total, 4)
 
-	Debug.pr("hud ready?", Hood.hud.is_node_ready())
+func test_hud_receives_updates():
+	watch_signals(Hotel)
+	# assumes this is valid for the first puzzle in the game
+	game.puzzle_node.move(Vector2.RIGHT)
 
-	assert_called(Hood.hud, "_on_entry_updated")
-	# assert_called(Hood.hud, "_on_entry_updated", [{}])
+	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 2)
+	assert_eq(Hood.hud.last_puzzle_update.dots_total, 4)

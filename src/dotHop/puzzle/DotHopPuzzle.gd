@@ -42,13 +42,12 @@ var obj_scene = {
 
 ## enter_tree ##############################################################
 
-func _enter_tree():
-	add_to_group("dothop_puzzle", true)
+func _init():
+	add_to_group(DotHop.puzzle_group, true)
 
 ## ready ##############################################################
 
 func _ready():
-	# Hotel.register(self, {root=true})
 	Hotel.register(self)
 	if level_def == null:
 		Debug.pr("no level_def, trying backups!", name)
@@ -68,7 +67,6 @@ func check_out(_d):
 	pass
 
 func hotel_data():
-	Debug.pr("calcing puzzle hotel data")
 	var message
 	if level_def != null and "message" in level_def and level_def.message != "":
 		message = level_def.message
@@ -199,7 +197,6 @@ func rebuild_nodes():
 
 	if not Engine.is_editor_hint():
 		ensure_camera_anchor()
-		Debug.pr("ensuring hud", DotHop.hud_scene)
 		Hood.ensure_hud(DotHop.hud_scene)
 
 	for y in len(state.grid):
@@ -297,7 +294,7 @@ func dot_count(only_undotted=false):
 		for obj_name in c:
 			if only_undotted and obj_name == "Dot":
 				return true
-			elif obj_name in ["Dot", "Dotted"]:
+			elif not only_undotted and obj_name in ["Dot", "Dotted"]:
 				return true
 		return false))
 
@@ -517,6 +514,8 @@ func move(move_dir):
 			if m[0] in ["dot", "goal"]:
 				m[1].call(m[2], m[3])
 
+		# Update data/HUD
+		Hotel.check_in(self)
 		return
 
 	var any_undo = moves_to_make.any(func(m): return m[0] == "undo")
