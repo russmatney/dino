@@ -18,7 +18,7 @@ func _ready():
 func render():
 	super.render()
 
-	if color_rect != null:
+	# if color_rect != null:
 		# color_rect.size = Vector2.ONE * square_size
 
 		# match type:
@@ -26,7 +26,8 @@ func render():
 		# 	DotHop.dotType.Dotted: color_rect.color = Color(0, 0, 0)
 		# 	DotHop.dotType.Goal: color_rect.color = Color(0, 1, 0)
 
-	match type:
-		DotHop.dotType.Dot: anim.animation.play("dot")
-		DotHop.dotType.Dotted: anim.animation.play("dotted")
-		DotHop.dotType.Goal: anim.animation.play("goal")
+	if anim != null:
+		match type:
+			DotHop.dotType.Dot: anim.play("dot")
+			DotHop.dotType.Dotted: anim.play("dotted")
+			DotHop.dotType.Goal: anim.play("goal")

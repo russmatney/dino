@@ -8,43 +8,44 @@
 
 [node name="DotsPuzzle" type="Node2D"]
 script = ExtResource("1_g1ytu")
+square_size = 32
 
 [node name="Bg" type="ColorRect" parent="."]
 offset_left = -1314.0
 offset_top = -767.0
 offset_right = 1906.0
 offset_bottom = 1062.0
-color = Color(0.137255, 0.352941, 0.603922, 1)
+color = Color(0.694118, 0.270588, 0.145098, 1)
 
 [node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_cwxko")]
 z_index = 5
-position = Vector2(64, 64)
+position = Vector2(32, 32)
 script = ExtResource("3_rnk84")
-square_size = 64
+square_size = 32
 
 [node name="Dot" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
-position = Vector2(64, 64)
+position = Vector2(32, 32)
 script = ExtResource("5_gtoa3")
 type = 1
-square_size = 64
+square_size = 32
 
-[node name="@Node2D@20026" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
-position = Vector2(128, 64)
+[node name="@Node2D@39593" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+position = Vector2(64, 32)
 script = ExtResource("5_gtoa3")
-square_size = 64
+square_size = 32
 
-[node name="@Node2D@20028" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
-position = Vector2(192, 64)
+[node name="@Node2D@39595" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+position = Vector2(96, 32)
 script = ExtResource("5_gtoa3")
-square_size = 64
+square_size = 32
 
-[node name="@Node2D@20030" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
-position = Vector2(256, 64)
+[node name="@Node2D@39597" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+position = Vector2(128, 32)
 script = ExtResource("5_gtoa3")
-square_size = 64
+square_size = 32
 
-[node name="@Node2D@20032" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
-position = Vector2(320, 64)
+[node name="@Node2D@39599" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_nd7jl")]
+position = Vector2(160, 32)
 script = ExtResource("5_gtoa3")
 type = 2
-square_size = 64
+square_size = 32
