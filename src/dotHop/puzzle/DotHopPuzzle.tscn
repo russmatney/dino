@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bhwmpvb57mv06" path="res://src/dotHop/puzzle/Dot.tscn" id="4_i2h7b"]
 [ext_resource type="Script" path="res://src/dotHop/puzzle/Dot.gd" id="5_q56qr"]
 
-[node name="DotHopPuzzle" type="Node2D"]
+[node name="DotHopPuzzle" type="Node2D" groups=["dothop_puzzle", "hotel_singletons"]]
 script = ExtResource("1_ckjkc")
 
 [node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_srm8m")]
@@ -21,22 +21,22 @@ script = ExtResource("5_q56qr")
 type = 1
 square_size = 64
 
-[node name="@Node2D@19658" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@20221" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(128, 64)
 script = ExtResource("5_q56qr")
 square_size = 64
 
-[node name="@Node2D@19660" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@20223" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(192, 64)
 script = ExtResource("5_q56qr")
 square_size = 64
 
-[node name="@Node2D@19662" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@20225" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(256, 64)
 script = ExtResource("5_q56qr")
 square_size = 64
 
-[node name="@Node2D@19664" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@20227" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(320, 64)
 script = ExtResource("5_q56qr")
 type = 2

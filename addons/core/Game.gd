@@ -20,7 +20,7 @@ var games = []
 func register_game(g):
 	if not g in games:
 		games.append(g)
-		Debug.pr("Registered game: ", g)
+		# Debug.pr("Registered game: ", g)
 
 func game_for_scene(scene):
 	var gs = games.filter(func(g): return g and g.manages_scene(scene))

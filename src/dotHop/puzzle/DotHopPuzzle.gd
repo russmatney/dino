@@ -40,9 +40,17 @@ var obj_scene = {
 	"Goal": preload("res://src/dotHop/puzzle/Dot.tscn"),
 	}
 
+## enter_tree ##############################################################
+
+func _enter_tree():
+	add_to_group("dothop_puzzle", true)
+	Hotel.book(self)
+
 ## ready ##############################################################
 
 func _ready():
+	# Hotel.register(self, {root=true})
+	Hotel.register(self)
 	if level_def == null:
 		Debug.pr("no level_def, trying backups!", name)
 		if game_def_path != "":
@@ -54,6 +62,25 @@ func _ready():
 	else:
 		Debug.pr("ready, loading game state!")
 		init_game_state()
+
+## hotel ##############################################################
+
+func check_out(_d):
+	pass
+
+func hotel_data():
+	Debug.pr("calcing puzzle hotel data")
+	var message
+	if "message" in level_def and level_def.message != "":
+		message = level_def.message
+
+	var data = {
+		dots_total=dot_count(),
+		dots_remaining=dot_count(true),
+		}
+	if message != null:
+		data["level_message"] = message
+	return data
 
 ## input ##############################################################
 
@@ -71,8 +98,9 @@ func _unhandled_input(event):
 			undo_last_move(p)
 		restart_block_move_timer(0.1)
 
+	# TODO is_reset_held, is_reset_released
+	# add timer and animation before restarting
 	elif Trolley.is_restart(event):
-		# TODO add timer and animation before restarting
 		init_game_state()
 	elif Trolley.is_debug_toggle(event):
 		Debug.prn(state.grid)
@@ -190,6 +218,8 @@ func rebuild_nodes():
 						state.cell_nodes[coord] = []
 					state.cell_nodes[coord].append(node)
 
+	Hotel.check_in(self)
+
 func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	var node = node_for_object_name(obj_name)
 	# nodes should maybe set their own position
@@ -260,6 +290,18 @@ func all_dotted() -> bool:
 			if obj_name == "Dot":
 				return false
 		return true)
+
+func dot_count(only_undotted=false):
+	return len(all_cells().filter(func(c):
+		if c == null:
+			return false
+		for obj_name in c:
+			if only_undotted and obj_name == "Dot":
+				return true
+			elif obj_name in ["Dot", "Dotted"]:
+				return true
+		return false))
+
 
 func all_players_at_goal() -> bool:
 	return all_cells().filter(func(c):
@@ -483,3 +525,6 @@ func move(move_dir):
 		for m in moves_to_make:
 			# TODO kind of wonky, should prolly use a dict/struct
 			undo_last_move(m[2])
+
+	# Update data/HUD
+	Hotel.check_in(self)

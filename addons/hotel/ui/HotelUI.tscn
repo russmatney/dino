@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwms8iyspi7la"]
 
-[ext_resource type="Script" path="res://addons/hotel/HotelUI.gd" id="1_5mpd8"]
+[ext_resource type="Script" path="res://addons/hotel/ui/HotelUI.gd" id="1_5mpd8"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_t7d3y"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_kmkd5"]
 

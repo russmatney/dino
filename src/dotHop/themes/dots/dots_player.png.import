@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8xiuvg6w0gr2"
-path="res://.godot/imported/dots_player.png-cec9f3c88c8adff35f1d95477e60516e.ctex"
+path="res://.godot/imported/dots_player.png-501967330fead1847f025f795b4b3d07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dotHop/puzzle/dots_player.png"
-dest_files=["res://.godot/imported/dots_player.png-cec9f3c88c8adff35f1d95477e60516e.ctex"]
+source_file="res://src/dotHop/themes/dots/dots_player.png"
+dest_files=["res://.godot/imported/dots_player.png-501967330fead1847f025f795b4b3d07.ctex"]
 
 [params]
 

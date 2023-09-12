@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbyoe1xrjh0pf"]
 
-[ext_resource type="Script" path="res://addons/hotel/EntryDetail.gd" id="1_debfm"]
+[ext_resource type="Script" path="res://addons/hotel/ui/EntryDetail.gd" id="1_debfm"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="2_fomfn"]
 
 [node name="EntryDetail" type="VBoxContainer"]

@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-const HotelUI = preload("res://addons/hotel/HotelUI.tscn")
+const HotelUI = preload("res://addons/hotel/ui/HotelUI.tscn")
 
 var hotel_ui
 var editor_interface

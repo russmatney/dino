@@ -132,7 +132,7 @@ func reset_option_buttons():
 # db entries list
 
 @onready var db_entries = $%DBEntries
-const entry_label_scene = preload("res://addons/hotel/EntryLabel.tscn")
+const entry_label_scene = preload("res://addons/hotel/ui/EntryLabel.tscn")
 
 func list_entries():
 	var entries = Hotel.query(query)
@@ -168,7 +168,7 @@ func list_entries():
 # db detail entries list
 
 @onready var db_entry_details = $%DBEntryDetails
-const entry_detail_scene = preload("res://addons/hotel/EntryDetail.tscn")
+const entry_detail_scene = preload("res://addons/hotel/ui/EntryDetail.tscn")
 
 var selected_entries = []
 

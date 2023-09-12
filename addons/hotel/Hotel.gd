@@ -53,15 +53,17 @@ func node_to_entry_key(node):
 	var parents
 	if is_in_root_group(node):
 		parents = []
+	elif node.get_tree() == null:
+		Debug.warn("No tree found for node...", node)
+		parents = []
 	else:
 		parents = Util.get_all_parents(node)
 		# reverse so our join puts the furthest ancestor first
 		parents.reverse()
 
-		# remove nonsensy intermediary parents in editor
-		if Engine.is_editor_hint():
-			parents = parents.filter(func(node):
-				return not node.name.begins_with("@@") and not node.name == "MainScreen")
+		# remove nonsensy intermediary parents
+		parents = parents.filter(func(node):
+			return not node.name.begins_with("@@") and not node.name == "MainScreen")
 	var key = to_entry_key({path=node.name}, parents)
 	return key
 
@@ -86,7 +88,7 @@ func to_entry_key(data, parents=[]):
 ######################################################################
 # write
 
-## add a packed scene (and children) to the scene_db. Accepts PackedScene or a path to one (sfp).
+## add a packed scene (and children) to the scene_db. Accepts PackedScene, a path to one (sfp), or a node.
 func book(bookable: Variant):
 	var data
 	if bookable is PackedScene:
@@ -222,12 +224,16 @@ func register(node, opts={}):
 	if opts.get("root", false):
 		node.add_to_group(hotel_root_group_name, true)
 
+	var key = node_to_entry_key(node)
+	if not key in scene_db:
+		Debug.pr("Booking node from register")
+		book(node)
+
 	# restore node state with data from hotel
 	var data = check_out(node)
 	if data == null:
 		if not Engine.is_editor_hint():
-			pass
-			# Debug.warn("No data found for node: ", node, "passing empty dict.")
+			Debug.warn("No data found for node.check_out(d): ", node, "passing empty dict.")
 		data = {}
 	node.check_out(data)
 
@@ -258,8 +264,7 @@ func check_in(node: Node, data=null):
 		update(key, data)
 	else:
 		if not Engine.is_editor_hint():
-			pass
-			# Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
+			Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 
 func check_in_sfp(sfp: String, data: Dictionary):
 	var entry = first({scene_file_path=sfp})
@@ -292,6 +297,13 @@ func check_out(node: Node):
 ## Flexible access to the scene_db vals
 func query(q={}):
 	var vals = scene_db.values()
+
+	# consider opts for fetching with nodes?
+	# if "node" in q:
+	# 	return [check_out(q.node)]
+	# if "nodes" in q:
+	# 	vals = q.nodes.map(check_out)
+
 	if "group" in q:
 		vals = vals.filter(func (s_dict): return q["group"] in s_dict.get("groups", []))
 

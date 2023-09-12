@@ -74,10 +74,13 @@ func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg
 func log_prefix(stack):
 	if len(stack) > 1:
 		var call_site = stack[1]
-		if call_site["source"].match("*/addons/*"):
-			return "<" + call_site["source"].get_file().get_basename() + ">: "
+		var basename = call_site["source"].get_file().get_basename()
+		if call_site["source"].match("*/test/*"):
+			return "{" + basename + "}: "
+		elif call_site["source"].match("*/addons/*"):
+			return "<" + basename + ">: "
 		else:
-			return "[" + call_site["source"].get_file().get_basename() + "]: "
+			return "[" + basename + "]: "
 
 func color_wrap(s, color, use_color=true):
 	if use_color:
@@ -186,7 +189,13 @@ func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=true):
 	var m = ""
 	if len(stack) > 0:
 		var prefix = log_prefix(stack)
-		var c = "cyan" if prefix != null and prefix[0] == "[" else "green"
+		var c
+		if prefix != null and prefix[0] == "[":
+			c = "cyan"
+		elif prefix != null and prefix[0] == "{":
+			c = "green"
+		elif prefix != null and prefix[0] == "<":
+			c = "red"
 		if pretty and use_color:
 			m += "[color=%s]%s[/color]" % [c, prefix]
 		else:

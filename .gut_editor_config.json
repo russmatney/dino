@@ -24,7 +24,7 @@
  "paint_after": 0.1,
  "panel_options": {
   "font_name": "CourierPrime",
-  "font_size": 16,
+  "font_size": 30,
   "hide_output_text": false,
   "hide_result_tree": false,
   "hide_settings": false,
@@ -35,7 +35,7 @@
  "post_run_script": "",
  "pre_run_script": "",
  "prefix": "",
- "selected": null,
+ "selected": "basic_hotel_test.gd",
  "should_exit": true,
  "should_exit_on_success": false,
  "should_maximize": false,

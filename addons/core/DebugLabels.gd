@@ -120,7 +120,7 @@ func _on_rearrange_labels_pressed():
 
 # Hotel UI
 
-const hotel_ui_scene = preload("res://addons/hotel/HotelUI.tscn")
+const hotel_ui_scene = preload("res://addons/hotel/ui/HotelUI.tscn")
 var hotel_ui
 
 func _on_toggle_hotel_db_pressed():

@@ -108,6 +108,8 @@ func get_children_by_name(node: Node):
 
 ## Returns all of a node's parents EXCEPT the root.
 func get_all_parents(node: Node, parents=[]):
+	if node == null:
+		return []
 	var p = node.get_parent()
 	if p == node.get_tree().get_root():
 		return parents

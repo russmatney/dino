@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dotHop/themes/dots/Player.gd" id="1_ufxo6"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_vp205"]
-[ext_resource type="Texture2D" uid="uid://8xiuvg6w0gr2" path="res://src/dotHop/puzzle/dots_player.png" id="3_pr0kn"]
+[ext_resource type="Texture2D" uid="uid://8xiuvg6w0gr2" path="res://src/dotHop/themes/dots/dots_player.png" id="3_pr0kn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_frj44"]
 atlas = ExtResource("3_pr0kn")
