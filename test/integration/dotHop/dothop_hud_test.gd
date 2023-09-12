@@ -5,7 +5,8 @@ var game
 func before_all():
 	game = load("res://src/dotHop/DotHopGame.tscn").instantiate()
 	add_child(game)
-	await Hood.hud_ready
+	if not Hood.hud.is_node_ready():
+		await Hood.hud_ready
 
 func test_hud_loads_initial_state():
 	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 3)
