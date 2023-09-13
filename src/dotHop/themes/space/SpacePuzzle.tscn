@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/dotHop/themes/space/SpacePuzzle.gd" id="1_biqou"]
 [ext_resource type="Texture2D" uid="uid://bw2a0y4cvdx80" path="res://src/dotHop/themes/space/assets/spacebg1_sheet.png" id="2_bjihu"]
-[ext_resource type="PackedScene" uid="uid://cifvwoalwila" path="res://src/dotHop/themes/dots/Player.tscn" id="2_hc8x6"]
-[ext_resource type="Script" path="res://src/dotHop/themes/dots/Player.gd" id="3_nb44e"]
+[ext_resource type="PackedScene" uid="uid://csgpsdj4n3rfj" path="res://src/dotHop/themes/space/Player.tscn" id="3_i647e"]
 [ext_resource type="PackedScene" uid="uid://bmm1270drou5v" path="res://src/dotHop/themes/space/Dot.tscn" id="4_sim88"]
+[ext_resource type="Script" path="res://src/dotHop/themes/space/Player.gd" id="4_u1jx2"]
 [ext_resource type="Script" path="res://src/dotHop/themes/space/Dot.gd" id="5_3250r"]
 
 [node name="SpacePuzzle" type="Node2D" groups=["dothop_puzzle"]]
@@ -24,10 +24,10 @@ grow_vertical = 2
 texture = ExtResource("2_bjihu")
 stretch_mode = 1
 
-[node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_hc8x6")]
+[node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("3_i647e")]
 z_index = 5
 position = Vector2(32, 32)
-script = ExtResource("3_nb44e")
+script = ExtResource("4_u1jx2")
 square_size = 32
 
 [node name="Dot" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
@@ -36,22 +36,22 @@ script = ExtResource("5_3250r")
 type = 1
 square_size = 32
 
-[node name="@Node2D@48725" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+[node name="@Node2D@63021" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
 position = Vector2(64, 32)
 script = ExtResource("5_3250r")
 square_size = 32
 
-[node name="@Node2D@48726" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+[node name="@Node2D@63022" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
 position = Vector2(96, 32)
 script = ExtResource("5_3250r")
 square_size = 32
 
-[node name="@Node2D@48727" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+[node name="@Node2D@63023" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
 position = Vector2(128, 32)
 script = ExtResource("5_3250r")
 square_size = 32
 
-[node name="@Node2D@48728" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+[node name="@Node2D@63024" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
 position = Vector2(160, 32)
 script = ExtResource("5_3250r")
 type = 2
