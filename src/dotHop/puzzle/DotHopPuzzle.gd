@@ -326,6 +326,11 @@ func all_players_at_goal() -> bool:
 			return true
 		).all(func(c): return "Player" in c)
 
+func all_cell_nodes() -> Array[Variant]:
+	return state.cell_nodes.values().reduce(func(agg, nodes):
+		agg.append_array(nodes)
+		return agg)
+
 ## move/state-updates ##############################################################
 
 func previous_undo_coord(player, skip_coord, start_at=0):

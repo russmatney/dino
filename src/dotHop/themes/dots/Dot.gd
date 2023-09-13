@@ -47,3 +47,12 @@ func animate_entry():
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	entry_tween.parallel().tween_property(self, "position", og_position, entry_t)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+func animate_exit(t):
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE * 0.5, t)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "position", position - Vector2.ONE * 10, t)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, t)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

@@ -90,5 +90,9 @@ func on_puzzle_win():
 			Hood.notif("Win all")
 			Navi.show_win_menu()
 		else:
+			if puzzle_node.has_method("animate_exit"):
+				Debug.pr("animating exit")
+				await puzzle_node.animate_exit()
+			Debug.pr("done awaiting")
 			Hood.notif("Building next level!")
 			rebuild_puzzle()})
