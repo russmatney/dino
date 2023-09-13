@@ -36,7 +36,7 @@ func _unhandled_input(event):
 			Debug.toggle_debug()
 		elif is_event(event, "slowmo"):
 			slowmo_start()
-		elif is_event_released(event, "slowmo"):
+		elif is_released(event, "slowmo"):
 			slowmo_stop()
 
 ################################################
@@ -180,7 +180,7 @@ func is_pressed(event, event_name):
 func is_held(event, event_name):
 	return is_event(event, event_name)
 
-func is_event_released(event, event_name):
+func is_released(event, event_name):
 	if focused:
 		return event.is_action_released(event_name)
 	return false
@@ -209,11 +209,17 @@ func is_move(event):
 		is_event(event, "move_up") or is_event(event, "move_down")
 
 func is_move_released(event):
-	return is_event_released(event, "move_left") or is_event_released(event, "move_right") or \
-		is_event_released(event, "move_up") or is_event_released(event, "move_down")
+	return is_released(event, "move_left") or is_released(event, "move_right") or \
+		is_released(event, "move_up") or is_released(event, "move_down")
 
 func is_restart(event):
 	return is_event(event, "restart")
+
+func is_restart_held(event):
+	return is_held(event, "restart")
+
+func is_restart_released(event):
+	return is_released(event, "restart")
 
 func is_undo(event):
 	return is_event(event, "undo")
@@ -222,7 +228,7 @@ func is_fire(event):
 	return is_event(event, "fire")
 
 func is_fire_released(event):
-	return is_event_released(event, "fire")
+	return is_released(event, "fire")
 
 func is_jump(event):
 	return is_event(event, "jump")
@@ -237,7 +243,7 @@ func is_attack(event):
 	return is_event(event, "attack")
 
 func is_attack_released(event):
-	return is_event_released(event, "attack")
+	return is_released(event, "attack")
 
 func is_action(event):
 	return is_event(event, "action")

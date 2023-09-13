@@ -89,7 +89,7 @@ func _unhandled_input(event):
 
 	elif Trolley.is_event(event, "slowmo"):
 		slowmo_start.emit()
-	elif Trolley.is_event_released(event, "slowmo"):
+	elif Trolley.is_released(event, "slowmo"):
 		slowmo_stop.emit()
 
 func move(dir):
