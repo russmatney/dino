@@ -13,6 +13,8 @@ func _get_configuration_warnings():
 func _ready():
 	super._ready()
 
+	animate_entry()
+
 ## render ###########################################################
 
 func render():
@@ -31,3 +33,17 @@ func render():
 			DotHop.dotType.Dot: anim.play("dot")
 			DotHop.dotType.Dotted: anim.play("dotted")
 			DotHop.dotType.Goal: anim.play("goal")
+
+## entry animation ###########################################################
+
+var entry_tween
+var entry_t = 0.6
+func animate_entry():
+	var og_position = position
+	position = position - Vector2.ONE * 10
+	scale = Vector2.ONE * 0.5
+	entry_tween = create_tween()
+	entry_tween.tween_property(self, "scale", Vector2.ONE, entry_t)\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	entry_tween.parallel().tween_property(self, "position", og_position, entry_t)\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
