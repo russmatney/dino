@@ -20,18 +20,12 @@ func _ready():
 func render():
 	super.render()
 
-	# if color_rect != null:
-		# color_rect.size = Vector2.ONE * square_size
-
-		# match type:
-		# 	DotHop.dotType.Dot: color_rect.color = Color(1, 1, 1)
-		# 	DotHop.dotType.Dotted: color_rect.color = Color(0, 0, 0)
-		# 	DotHop.dotType.Goal: color_rect.color = Color(0, 1, 0)
-
 	if anim != null:
 		match type:
 			DotHop.dotType.Dot: anim.play("dot")
-			DotHop.dotType.Dotted: anim.play("dotted")
+			DotHop.dotType.Dotted:
+				await get_tree().create_timer(0.4).timeout
+				anim.play("dotted")
 			DotHop.dotType.Goal: anim.play("goal")
 
 ## entry animation ###########################################################

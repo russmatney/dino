@@ -25,6 +25,12 @@ func set_initial_coord(coord):
 	current_coord = coord
 	position = coord * square_size
 
+func current_position():
+	if current_coord != null:
+		return current_coord * square_size
+	else:
+		return position
+
 ## entry/exit anims ##########################################
 
 var entry_tween
@@ -51,6 +57,9 @@ func animate_exit(t):
 ## move #########################################################
 
 func move_to_coord(coord):
+	# first, reset position
+	position = current_position()
+
 	current_coord = coord
 
 	var target_pos = coord * square_size
@@ -69,6 +78,9 @@ func move_to_coord(coord):
 ## undo #########################################################
 
 func undo_to_coord(coord):
+	# first, reset position
+	position = current_position()
+
 	current_coord = coord
 	var target_pos = coord * square_size
 
@@ -92,9 +104,11 @@ func undo_to_same_coord():
 ## move attempts #########################################################
 
 func move_attempt_stuck(move_dir:Vector2):
+	Cam.screenshake(0.3)
+
 	var dist = 20.0
-	var og_pos = position
-	var pos = move_dir * dist + position
+	var og_pos = current_position()
+	var pos = move_dir * dist + current_position()
 	var t = 0.4
 	move_tween = create_tween()
 	move_tween.tween_property(self, "position", pos, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -105,9 +119,11 @@ func move_attempt_stuck(move_dir:Vector2):
 	scale_tween.tween_property(self, "scale", 1.0*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func move_attempt_away_from_edge(move_dir:Vector2):
+	Cam.screenshake(0.3)
+
 	var dist = 20.0
-	var og_pos = position
-	var pos = move_dir * dist + position
+	var og_pos = current_position()
+	var pos = move_dir * dist + current_position()
 	var t = 0.4
 	move_tween = create_tween()
 	move_tween.tween_property(self, "position", pos, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -118,9 +134,11 @@ func move_attempt_away_from_edge(move_dir:Vector2):
 	scale_tween.tween_property(self, "scale", 1.0*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func move_attempt_only_nulls(move_dir:Vector2):
+	Cam.screenshake(0.3)
+
 	var dist = 20.0
-	var og_pos = position
-	var pos = move_dir * dist + position
+	var og_pos = current_position()
+	var pos = move_dir * dist + current_position()
 	var t = 0.4
 	move_tween = create_tween()
 	move_tween.tween_property(self, "position", pos, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
