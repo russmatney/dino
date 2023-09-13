@@ -1,34 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://cub0kguq12eo4"]
+[gd_scene load_steps=6 format=3 uid="uid://cub0kguq12eo4"]
 
 [ext_resource type="Script" path="res://src/dotHop/puzzle/DotHopPuzzle.gd" id="1_ckjkc"]
 [ext_resource type="PackedScene" uid="uid://b6wwc8int7l4p" path="res://src/dotHop/puzzle/Player.tscn" id="2_srm8m"]
+[ext_resource type="Script" path="res://src/dotHop/puzzle/Player.gd" id="3_uww3u"]
 [ext_resource type="PackedScene" uid="uid://bhwmpvb57mv06" path="res://src/dotHop/puzzle/Dot.tscn" id="4_i2h7b"]
+[ext_resource type="Script" path="res://src/dotHop/puzzle/Dot.gd" id="5_gts4h"]
 
 [node name="DotHopPuzzle" type="Node2D" groups=["dothop_puzzle", "hotel_singletons"]]
 script = ExtResource("1_ckjkc")
 
-[node name="Player" parent="." groups=["generated"] instance=ExtResource("2_srm8m")]
+[node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_srm8m")]
+z_index = 5
 position = Vector2(64, 64)
+script = ExtResource("3_uww3u")
 square_size = 64
 
-[node name="Dot" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="Dot" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(64, 64)
+script = ExtResource("5_gts4h")
 type = 1
 square_size = 64
 
-[node name="@Node2D@20221" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@19757" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(128, 64)
+script = ExtResource("5_gts4h")
 square_size = 64
 
-[node name="@Node2D@20223" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@19759" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(192, 64)
+script = ExtResource("5_gts4h")
 square_size = 64
 
-[node name="@Node2D@20225" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@19761" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(256, 64)
+script = ExtResource("5_gts4h")
 square_size = 64
 
-[node name="@Node2D@20227" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
+[node name="@Node2D@19763" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_i2h7b")]
 position = Vector2(320, 64)
+script = ExtResource("5_gts4h")
 type = 2
 square_size = 64

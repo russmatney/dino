@@ -97,10 +97,25 @@ func _unhandled_input(event):
 
 	# TODO is_reset_held, is_reset_released
 	# add timer and animation before restarting
-	elif Trolley.is_restart(event):
-		init_game_state()
+	elif Trolley.is_restart_held(event):
+		hold_to_reset_puzzle()
+	elif Trolley.is_restart_released(event):
+		cancel_reset_puzzle()
 	elif Trolley.is_debug_toggle(event):
 		Debug.prn(state.grid)
+
+var reset_tween
+func hold_to_reset_puzzle():
+	if reset_tween != null and reset_tween.is_running():
+		# already holding
+		return
+	reset_tween = create_tween()
+	reset_tween.tween_callback(init_game_state).set_delay(DotHop.reset_hold_t)
+
+func cancel_reset_puzzle():
+	if reset_tween == null:
+		return
+	reset_tween.kill()
 
 ## check_move_input ##############################################################
 

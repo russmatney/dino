@@ -11,6 +11,8 @@ var puzzle_group = "dothop_puzzle"
 
 enum dotType { Dot, Dotted, Goal}
 
+var reset_hold_t = 0.4
+
 #####################################################################
 ## ready
 
