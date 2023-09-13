@@ -286,6 +286,8 @@ func cells_in_direction(coord:Vector2, dir:Vector2) -> Array:
 
 # Returns a list of cell object names
 func all_cells() -> Array[Variant]:
+	if state == null:
+		return []
 	var cs = []
 	for row in state.grid:
 		for cell in row:
