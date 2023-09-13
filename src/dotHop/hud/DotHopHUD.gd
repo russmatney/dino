@@ -44,17 +44,21 @@ func _on_entry_updated(entry):
 ## level number ########################################################
 
 func update_level_number(entry):
-	level_num_label.text = "[center]#%s/n[/center]" % entry.level_number
+	if "level_number" in entry:
+		level_num_label.text = "[center]#%s/n[/center]" % entry.level_number
 
 ## message ########################################################
 
 func update_level_message(entry):
-	level_message_label.text = "[center]%s[/center]" % entry.level_message
+	if "level_message" in entry:
+		level_message_label.text = "[center]%s[/center]" % entry.level_message
 
 ## dots remaining ########################################################
 
 func update_dots_remaining(entry):
-	dots_remaining_label.text = "[center]%s/%s dots[/center]" % [entry.dots_remaining, entry.dots_total]
+	var total = entry.dots_total
+	var found = total - entry.dots_remaining
+	dots_remaining_label.text = "[center]%s/%s dots[/center]" % [found, total]
 
 ## controls ########################################################
 

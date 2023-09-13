@@ -33,6 +33,7 @@ import/cleanup/automatically_hide_sprites_not_in_animation=true
 
 [autoload]
 
+Pandora="*res://addons/pandora/api.gd"
 Debug="*res://addons/core/Debug.gd"
 Util="*res://addons/core/Util.gd"
 SS="*res://addons/beehive/sidescroller/SideScroller.gd"
@@ -44,7 +45,6 @@ Reptile="*res://addons/reptile/Reptile.gd"
 Hotel="*res://addons/hotel/Hotel.gd"
 DJ="*res://addons/dj/DJ.gd"
 DJZ="*res://addons/dj/DJZ.gd"
-Pandora="*res://addons/pandora/api.gd"
 Cam="*res://addons/camera/Camera.gd"
 Respawner="*res://addons/core/Respawner.gd"
 Clawe="res://src/clawe/Clawe.gd"
