@@ -233,3 +233,35 @@ class TestTwoPlayerInPlaceUndoBugs:
 		assert_eq(level.state.win, true)
 
 		level.free()
+
+class TestUndoBugs:
+	extends DotHopTest
+
+	func test_can_undo_across_dotted_cells():
+		var level = build_puzzle([
+				"oooo.",
+				"oxoot",
+				"..oo.",
+				])
+		add_child(level)
+
+		level.move(Vector2.RIGHT)
+		level.move(Vector2.RIGHT)
+		level.move(Vector2.UP)
+		level.move(Vector2.LEFT)
+		level.move(Vector2.LEFT)
+		level.move(Vector2.LEFT)
+		level.move(Vector2.DOWN)
+		level.move(Vector2.RIGHT)
+
+		assert_eq_deep(level.state.grid[1],
+			[["Dotted", "Undo"], ["Dotted"], ["Dotted"], ["Dotted"], ["Goal", "Player"]])
+		assert_eq(level.state.players[0].stuck, true)
+
+		level.move(Vector2.LEFT)
+
+		assert_eq(level.state.players[0].stuck, false)
+		assert_eq_deep(level.state.grid[1],
+			[["Dotted", "Player"], ["Dotted"], ["Dotted"], ["Dotted"], ["Goal"]])
+
+		level.free()

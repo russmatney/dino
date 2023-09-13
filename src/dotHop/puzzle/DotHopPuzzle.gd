@@ -475,7 +475,7 @@ func move(move_dir):
 		var cells = cells_in_direction(p.coord, move_dir)
 		if len(cells) == 0:
 			if p.stuck:
-				Debug.warn("stuck.", p.stuck)
+				Debug.pr("stuck, but no cells in dir", p.stuck, move_dir)
 				moves_to_make.append(["stuck", null, p])
 				if p.node.has_method("move_attempt_stuck"):
 					p.node.move_attempt_stuck(move_dir)
@@ -487,7 +487,7 @@ func move(move_dir):
 		cells = cells.filter(func(c): return c.objs != null)
 		if len(cells) == 0:
 			if p.stuck:
-				Debug.warn("stuck.", p.stuck)
+				Debug.pr("stuck, only nulls in dir", p.stuck, move_dir)
 				moves_to_make.append(["stuck", null, p])
 				if p.node.has_method("move_attempt_stuck"):
 					p.node.move_attempt_stuck(move_dir)
@@ -496,31 +496,33 @@ func move(move_dir):
 					p.node.move_attempt_only_nulls(move_dir)
 			continue
 
-		for cell in cells:
-			# TODO instead of markers, read undo completely from the players move history?
-			if "Undo" in cell.objs and cell.coord in p.move_history:
-				# should be fine? worried about playerA finding playerB's undo?
-				moves_to_make.append(["undo", undo_last_move, p, cell])
-				break
-			if p.stuck:
-				Debug.warn("stuck.", p.stuck)
-				moves_to_make.append(["stuck", null, p])
-				if p.node.has_method("move_attempt_stuck"):
-					p.node.move_attempt_stuck(move_dir)
-				break
-			if "Player" in cell.objs:
-				moves_to_make.append(["blocked_by_player", null, p])
-				break
-			if "Dotted" in cell.objs:
-				# TODO moving toward dotted has animation gap?
-				continue
-			if "Dot" in cell.objs:
-				moves_to_make.append(["dot", move_to_dot, p, cell])
-				break
-			if "Goal" in cell.objs:
-				moves_to_make.append(["goal", move_to_goal, p, cell])
-				break
-			Debug.warn("unexpected/unhandled cell in direction", cell)
+		# instead of markers, read undo based on only the player move history?
+		var undo_cell_in_dir = Util.first(cells.filter(func(c): return "Undo" in c.objs and c.coord in p.move_history))
+
+		if undo_cell_in_dir != null:
+			moves_to_make.append(["undo", undo_last_move, p, undo_cell_in_dir])
+		else:
+			for cell in cells:
+				if p.stuck:
+					Debug.warn("stuck, didn't see an undo in dir", p.stuck, move_dir, p.move_history)
+					moves_to_make.append(["stuck", null, p])
+					if p.node.has_method("move_attempt_stuck"):
+						p.node.move_attempt_stuck(move_dir)
+					break
+				if "Player" in cell.objs:
+					moves_to_make.append(["blocked_by_player", null, p])
+					# TODO moving toward player animation?
+					break
+				if "Dotted" in cell.objs:
+					# TODO moving toward dotted 'blocked' animation?
+					continue
+				if "Dot" in cell.objs:
+					moves_to_make.append(["dot", move_to_dot, p, cell])
+					break
+				if "Goal" in cell.objs:
+					moves_to_make.append(["goal", move_to_goal, p, cell])
+					break
+				Debug.warn("unexpected/unhandled cell in direction", cell)
 
 	var any_move = moves_to_make.any(func(m): return m[0] in ["dot", "goal"])
 	if any_move:
