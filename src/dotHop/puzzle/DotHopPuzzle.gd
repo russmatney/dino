@@ -240,7 +240,7 @@ func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	# nodes should maybe set their own position
 	# (i.e. not be automatically moved, but stay on teh puzzle's origin)
 	node.square_size = square_size
-	if node.has_method("set_coord"):
+	if node.has_method("set_initial_coord"):
 		node.set_initial_coord(coord)
 	else:
 		node.position = coord * square_size

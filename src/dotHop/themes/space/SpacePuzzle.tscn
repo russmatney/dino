@@ -1,50 +1,58 @@
-[gd_scene load_steps=6 format=3 uid="uid://cggxk31fgnci7"]
+[gd_scene load_steps=7 format=3 uid="uid://cggxk31fgnci7"]
 
-[ext_resource type="Script" path="res://src/dotHop/puzzle/DotHopPuzzle.gd" id="1_kr64u"]
-[ext_resource type="PackedScene" uid="uid://b6wwc8int7l4p" path="res://src/dotHop/puzzle/Player.tscn" id="2_6v15c"]
-[ext_resource type="Script" path="res://src/dotHop/puzzle/Player.gd" id="3_7ch8i"]
-[ext_resource type="PackedScene" uid="uid://bhwmpvb57mv06" path="res://src/dotHop/puzzle/Dot.tscn" id="4_kblgg"]
-[ext_resource type="Script" path="res://src/dotHop/puzzle/Dot.gd" id="5_dqc1d"]
+[ext_resource type="Script" path="res://src/dotHop/themes/space/SpacePuzzle.gd" id="1_biqou"]
+[ext_resource type="Texture2D" uid="uid://bw2a0y4cvdx80" path="res://src/dotHop/themes/space/assets/spacebg1_sheet.png" id="2_bjihu"]
+[ext_resource type="PackedScene" uid="uid://cifvwoalwila" path="res://src/dotHop/themes/dots/Player.tscn" id="2_hc8x6"]
+[ext_resource type="Script" path="res://src/dotHop/themes/dots/Player.gd" id="3_nb44e"]
+[ext_resource type="PackedScene" uid="uid://bmm1270drou5v" path="res://src/dotHop/themes/space/Dot.tscn" id="4_sim88"]
+[ext_resource type="Script" path="res://src/dotHop/themes/space/Dot.gd" id="5_3250r"]
 
-[node name="SpacePuzzle" type="Node2D"]
-script = ExtResource("1_kr64u")
+[node name="SpacePuzzle" type="Node2D" groups=["dothop_puzzle"]]
+script = ExtResource("1_biqou")
+square_size = 32
 
-[node name="Bg" type="ColorRect" parent="."]
-offset_left = -1314.0
-offset_top = -767.0
-offset_right = 1906.0
-offset_bottom = 1062.0
-color = Color(6.08882e-05, 0.000399236, 0.00128596, 1)
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -285.0
+offset_right = 1565.0
+offset_bottom = 986.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bjihu")
+stretch_mode = 1
 
-[node name="Player" type="Node2D" parent="." groups=["generated"] instance=ExtResource("2_6v15c")]
+[node name="Player" type="Node2D" parent="." groups=["generated", "player"] instance=ExtResource("2_hc8x6")]
 z_index = 5
-position = Vector2(64, 64)
-script = ExtResource("3_7ch8i")
-square_size = 64
+position = Vector2(32, 32)
+script = ExtResource("3_nb44e")
+square_size = 32
 
-[node name="Dot" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_kblgg")]
-position = Vector2(64, 64)
-script = ExtResource("5_dqc1d")
+[node name="Dot" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+position = Vector2(32, 32)
+script = ExtResource("5_3250r")
 type = 1
-square_size = 64
+square_size = 32
 
-[node name="@Node2D@20388" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_kblgg")]
-position = Vector2(128, 64)
-script = ExtResource("5_dqc1d")
-square_size = 64
+[node name="@Node2D@48725" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+position = Vector2(64, 32)
+script = ExtResource("5_3250r")
+square_size = 32
 
-[node name="@Node2D@20390" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_kblgg")]
-position = Vector2(192, 64)
-script = ExtResource("5_dqc1d")
-square_size = 64
+[node name="@Node2D@48726" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+position = Vector2(96, 32)
+script = ExtResource("5_3250r")
+square_size = 32
 
-[node name="@Node2D@20392" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_kblgg")]
-position = Vector2(256, 64)
-script = ExtResource("5_dqc1d")
-square_size = 64
+[node name="@Node2D@48727" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+position = Vector2(128, 32)
+script = ExtResource("5_3250r")
+square_size = 32
 
-[node name="@Node2D@20394" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_kblgg")]
-position = Vector2(320, 64)
-script = ExtResource("5_dqc1d")
+[node name="@Node2D@48728" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_sim88")]
+position = Vector2(160, 32)
+script = ExtResource("5_3250r")
 type = 2
-square_size = 64
+square_size = 32

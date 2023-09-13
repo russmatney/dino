@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://src/dotHop/DotHopGame.gd" id="1_ak4mv"]
 [ext_resource type="Script" path="res://src/dotHop/themes/DotHopTheme.gd" id="2_qvaui"]
 
-[sub_resource type="Resource" id="Resource_pt7uu"]
+[sub_resource type="Resource" id="Resource_o03cj"]
 script = ExtResource("2_qvaui")
-_id = "3"
+_id = "4"
 
 [node name="DotHopGame" type="Node2D"]
 script = ExtResource("1_ak4mv")
 game_def_path = "res://src/dotHop/dothop.txt"
-puzzle_theme = SubResource("Resource_pt7uu")
+puzzle_theme = SubResource("Resource_o03cj")
