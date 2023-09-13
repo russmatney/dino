@@ -23,14 +23,21 @@ func _ready():
 ## unhandled_input ########################################################
 
 func _unhandled_input(event):
-	var keep_controls_hidden = Trolley.is_move(event) or Trolley.is_undo(event)
+	var is_undo = Trolley.is_undo(event)
+	var is_move = Trolley.is_move(event)
 	var is_restart_held = Trolley.is_restart_held(event)
 	var is_restart_released = Trolley.is_restart_released(event)
 
-	match true:
-		keep_controls_hidden: restart_fade_in_controls_tween()
-		is_restart_held: show_resetting()
-		is_restart_released: hide_resetting()
+	if is_undo:
+		animate_undo()
+
+	if is_move:
+		restart_fade_in_controls_tween()
+
+	if is_restart_held:
+		show_resetting()
+	elif is_restart_released:
+		hide_resetting()
 
 ## update ########################################################
 
@@ -66,10 +73,12 @@ func update_dots_remaining(entry):
 
 # TODO only show undo after a move has been made
 # TODO only show reset after several moves have been made
-func all_controls():
-	var cts = [move_label, undo_label]
+func controls():
+	var cts = [move_label]
 	if not resetting:
 		cts.append(reset_label)
+	if not undoing:
+		cts.append(undo_label)
 	return cts
 
 var fade_controls_tween
@@ -77,13 +86,18 @@ func fade_controls():
 	if fade_controls_tween != null and fade_controls_tween.is_running():
 		return
 	fade_controls_tween = create_tween()
-	all_controls().map(func(c):
+	# wait a bit before fading
+	fade_controls_tween.tween_interval(0.8)
+	controls().map(func(c):
 		fade_controls_tween.parallel().tween_property(c, "modulate:a", 0.1, 0.8))
 
 var show_controls_tween
 func show_controls():
+	if fade_controls_tween != null and fade_controls_tween.is_running():
+		fade_controls_tween.kill()
+		return
 	show_controls_tween = create_tween()
-	all_controls().map(func(c):
+	controls().map(func(c):
 		show_controls_tween.parallel().tween_property(c, "modulate:a", 0.9, 0.6))
 
 # could probably just use a timer, but meh
@@ -94,6 +108,22 @@ func restart_fade_in_controls_tween():
 		controls_tween.kill()
 	controls_tween = create_tween()
 	controls_tween.tween_callback(show_controls).set_delay(3.0)
+
+## undoing ########################################################
+
+var undoing
+var undo_tween
+var undo_t = 0.3
+func animate_undo():
+	undoing = true
+	if undo_tween != null and undo_tween.is_running():
+		return
+	show_controls()
+	undo_tween = create_tween()
+	undo_tween.tween_property(undo_label, "modulate:a", 1.0, undo_t/4)
+	undo_tween.parallel().tween_property(undo_label, "scale", Vector2.ONE*1.4, undo_t/2)
+	undo_tween.tween_property(undo_label, "scale", Vector2.ONE, undo_t/2)
+	undo_tween.tween_callback(func(): undoing = false)
 
 ## restarting ########################################################
 
