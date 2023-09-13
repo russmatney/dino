@@ -82,6 +82,10 @@ func hotel_data():
 ## input ##############################################################
 
 func _unhandled_input(event):
+	if state != null and state.win:
+		Debug.pr("Blocking input events b/c we're in a win state")
+		return
+
 	if Trolley.is_move(event):
 		if state == null:
 			Debug.warn("No state, ignoring move input")

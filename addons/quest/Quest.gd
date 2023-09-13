@@ -146,10 +146,13 @@ func jumbo_notif(opts):
 	else:
 		jumbotron.action_hint.hide()
 
-	if on_close:
-		jumbo_closed.connect(on_close, ConnectFlags.CONNECT_ONE_SHOT)
+	jumbo_closed.connect(func():
+		jumbotron.fade_out()
+		if on_close:
+			on_close.call(),
+		ConnectFlags.CONNECT_ONE_SHOT)
 
-	# pause game?
+	# maybe pause the game? probably? optionally?
 	jumbotron.fade_in()
 
 	return jumbo_closed

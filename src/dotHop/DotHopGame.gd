@@ -1,7 +1,6 @@
 extends Node2D
 
-#####################################################################
-## vars
+## vars #####################################################################
 
 @export_file var game_def_path: String
 @export var puzzle_theme: DotHopTheme
@@ -11,8 +10,10 @@ var puzzle_node
 var puzzle_scene
 @export var puzzle_num = 0
 
-#####################################################################
-## ready
+var dismiss_jumbo_signal
+
+
+## ready #####################################################################
 
 func _ready():
 	DotHop.register_game(self)
@@ -21,8 +22,15 @@ func _ready():
 	load_theme()
 	rebuild_puzzle()
 
-#####################################################################
-## rebuild puzzle
+## input #####################################################################
+
+func _unhandled_input(event):
+	if dismiss_jumbo_signal != null:
+		# jumbo already listens to Trolley "close", but here we add more
+		if Trolley.is_event(event, "ui_accept"):
+			dismiss_jumbo_signal.emit()
+
+## rebuild puzzle #####################################################################
 
 func rebuild_puzzle():
 	if puzzle_node != null:
@@ -50,14 +58,12 @@ func on_puzzle_ready():
 	# 	Hood.ensure_hud(self)
 		# TODO music, initial game sounds
 
-#####################################################################
-## load theme
+## load theme #####################################################################
 
 func load_theme():
 	puzzle_scene = puzzle_theme.get_puzzle_scene()
 
-#####################################################################
-## win
+## win #####################################################################
 
 func on_puzzle_win():
 	# TODO juicy win scene with button to advance
@@ -66,8 +72,23 @@ func on_puzzle_win():
 
 	puzzle_num += 1
 
-	if puzzle_num >= len(game_def.levels):
-		Hood.notif("Win all")
+	var game_complete = puzzle_num >= len(game_def.levels)
+
+	var header
+	var body
+	if game_complete:
+		header = "[jump]All %s Puzzles Complete![/jump]" % puzzle_num
+		body = "Your friends must think you're\npretty nerdy"
 	else:
-		Hood.notif("Next level!")
-		rebuild_puzzle()
+		header = "[jump]Puzzle %s Complete![/jump]" % puzzle_num
+		body = "....but how?"
+
+	dismiss_jumbo_signal = Quest.jumbo_notif({
+		header=header, body=body,
+		on_close=func():
+		if game_complete:
+			Hood.notif("Win all")
+			Navi.show_win_menu()
+		else:
+			Hood.notif("Building next level!")
+			rebuild_puzzle()})
