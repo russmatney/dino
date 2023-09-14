@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpn7mqij5du3n"]
+
+[ext_resource type="Script" path="res://src/dotHop/themes/fall/Player.gd" id="1_4prmm"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_4prmm")

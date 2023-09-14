@@ -71,6 +71,27 @@
 						"value": "res://src/dotHop/themes/space/SpacePuzzle.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "1",
+				"_icon_color": "ffffff00",
+				"_id": "8",
+				"_index": 0,
+				"_name": "Fall",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Fall"
+					},
+					"is_unlocked": {
+						"type": "bool",
+						"value": true
+					},
+					"puzzle_scene": {
+						"type": "resource",
+						"value": "res://src/dotHop/themes/fall/FallPuzzle.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -99,7 +120,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 7
+			"default": 8
 		}
 	}
 }
