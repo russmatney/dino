@@ -175,6 +175,7 @@ animations = [{
 script = ExtResource("1_l6y56")
 
 [node name="Green" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_w1q41")
 animation = &"twist"
@@ -189,6 +190,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="GreenRed" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_774ja")
 animation = &"twist"
@@ -206,6 +208,7 @@ metadata/_aseprite_wizard_config_ = {
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5u8eb")
 animation = &"twist"
+frame_progress = 0.514065
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -217,6 +220,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="RedOrange" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hx3e1")
 animation = &"twist"
@@ -231,6 +235,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="Yellow" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_f02i6")
 animation = &"twist"

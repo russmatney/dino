@@ -2,8 +2,7 @@
 extends DotHopPuzzle
 
 var obj_scene_override = {
-	# "Player": preload("res://src/dotHop/themes/fall/Player.tscn"),
-	"Player": preload("res://src/dotHop/themes/dots/Player.tscn"),
+	"Player": preload("res://src/dotHop/themes/fall/Player.tscn"),
 	"Dot": preload("res://src/dotHop/themes/fall/Leaf.tscn"),
 	"Dotted": preload("res://src/dotHop/themes/fall/Leaf.tscn"),
 	"Goal": preload("res://src/dotHop/themes/fall/Leaf.tscn"),

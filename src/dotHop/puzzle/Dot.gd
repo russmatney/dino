@@ -30,6 +30,16 @@ func _ready():
 
 	render()
 
+## set_initial_coord #########################################################
+
+var current_coord: Vector2
+func set_initial_coord(coord):
+	current_coord = coord
+	position = coord * square_size
+
+func current_position():
+	return current_coord * square_size
+
 ## render #########################################################
 
 func render():

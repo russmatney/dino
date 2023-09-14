@@ -3,7 +3,6 @@ extends Node2D
 
 enum leaf_colors { green, greenred, redorange, yellow, purple }
 
-
 func to_anim(c):
 	match c:
 		leaf_colors.green:
