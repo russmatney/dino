@@ -172,6 +172,8 @@ animations = [{
 }]
 
 [node name="Leaf" type="Node2D"]
+position = Vector2(-20, -20)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_l6y56")
 
 [node name="Green" type="AnimatedSprite2D" parent="."]
@@ -190,7 +192,6 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="GreenRed" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_774ja")
 animation = &"twist"
@@ -205,6 +206,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="Purple" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5u8eb")
 animation = &"twist"

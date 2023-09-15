@@ -18,7 +18,10 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["player"]]
+z_index = 5
+position = Vector2(-10, -10)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_4prmm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
