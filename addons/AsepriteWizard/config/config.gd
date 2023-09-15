@@ -67,11 +67,11 @@ func is_command_or_control_pressed() -> String:
 ######################################################
 func is_importer_enabled() -> bool:
 	return _get_project_setting(_IMPORTER_ENABLE_KEY, false)
-	
-	
+
+
 func is_exporter_enabled() -> bool:
 	return _get_project_setting(_EXPORTER_ENABLE_KEY, true)
-	
+
 
 func should_remove_source_files() -> bool:
 	return _get_project_setting(_REMOVE_SOURCE_FILES_KEY, true)
@@ -83,7 +83,7 @@ func is_default_animation_loop_enabled() -> bool:
 
 func get_animation_loop_exception_prefix() -> String:
 	return _get_project_setting(_LOOP_EXCEPTION_PREFIX, _DEFAULT_LOOP_EX_PREFIX)
-	
+
 func is_use_metadata_enabled() -> bool:
 	return _get_project_setting(_USE_METADATA, true)
 
@@ -232,7 +232,7 @@ func initialize_project_settings():
 
 	_initialize_project_cfg(_REMOVE_SOURCE_FILES_KEY, true, TYPE_BOOL)
 	_initialize_project_cfg(_IMPORTER_ENABLE_KEY, false, TYPE_BOOL)
-	
+
 	_initialize_project_cfg(_EXPORTER_ENABLE_KEY, true, TYPE_BOOL)
 
 	_initialize_project_cfg(_HISTORY_CONFIG_FILE_CFG_KEY, _DEFAULT_HISTORY_CONFIG_FILE_PATH, TYPE_STRING, PROPERTY_HINT_GLOBAL_FILE)
@@ -278,6 +278,7 @@ func _initialize_project_cfg(key: String, default_value, type: int, hint: int = 
 
 func _get_project_setting(key: String, default_value):
 	var p = ProjectSettings.get(key)
+	# TODO project settings as 'false' here eval to truthy!!
 	return p if p != null else default_value
 
 

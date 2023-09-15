@@ -63,11 +63,11 @@ func _remove_menu_entries():
 
 
 func _setup_importer():
-	import_plugin = ImportPlugin.new()
-	import_plugin.file_system = get_editor_interface().get_resource_filesystem()
-	import_plugin.config = config
-	add_import_plugin(import_plugin)
 	if config.is_importer_enabled():
+		import_plugin = ImportPlugin.new()
+		import_plugin.file_system = get_editor_interface().get_resource_filesystem()
+		import_plugin.config = config
+		add_import_plugin(import_plugin)
 		_importer_enabled = true
 
 
@@ -77,8 +77,8 @@ func _configure_preset():
 
 
 func _remove_importer():
-	remove_import_plugin(import_plugin)
 	if _importer_enabled:
+		remove_import_plugin(import_plugin)
 		_importer_enabled = false
 
 

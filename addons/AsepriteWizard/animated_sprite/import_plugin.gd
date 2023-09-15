@@ -44,8 +44,6 @@ func _get_import_order():
 
 
 func _get_import_options(_path, _i):
-	if not config.is_importer_enabled():
-		return []
 	return [
 		{"name": "split_layers",           "default_value": false},
 		{"name": "exclude_layers_pattern", "default_value": config.get_default_exclusion_pattern()},
@@ -60,7 +58,7 @@ func _get_import_options(_path, _i):
 
 
 func _get_option_visibility(path, option, options):
-	return config.is_importer_enabled()
+	return true
 
 
 static func replace_vars(pattern : String, vars : Dictionary):
@@ -81,11 +79,6 @@ static func get_sheet_type_hint_string() -> String:
 
 var warned = false
 func _import(source_file, save_path, options, platform_variants, gen_files):
-	if not config.is_importer_enabled():
-		if not warned:
-			warned = true
-			print("NOTE: Automatic Aseprite Importer is not enabled. If desired, you can enable it via Project Settings > Aseprite")
-		return OK
 	var absolute_source_file = ProjectSettings.globalize_path(source_file)
 	var absolute_save_path = ProjectSettings.globalize_path(save_path)
 
