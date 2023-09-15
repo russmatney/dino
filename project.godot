@@ -30,6 +30,7 @@ run/main_scene.spike="res://src/spike/menus/MainMenu.tscn"
 [aseprite]
 
 import/cleanup/automatically_hide_sprites_not_in_animation=true
+import/import_plugin/enable_automatic_importer=false
 
 [autoload]
 
