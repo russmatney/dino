@@ -13,10 +13,10 @@ square_size = 32
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.780392)
-offset_left = -183.0
-offset_top = -97.0
-offset_right = 594.0
-offset_bottom = 455.0
+offset_left = -791.0
+offset_top = -629.0
+offset_right = 1632.0
+offset_bottom = 1173.0
 texture = ExtResource("2_g10aw")
 stretch_mode = 1
 
@@ -34,22 +34,22 @@ script = ExtResource("5_fs1is")
 type = 1
 square_size = 32
 
-[node name="@Node2D@20687" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
+[node name="@Node2D@25032" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
 position = Vector2(64, 32)
 script = ExtResource("5_fs1is")
 square_size = 32
 
-[node name="@Node2D@20688" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
+[node name="@Node2D@25033" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
 position = Vector2(96, 32)
 script = ExtResource("5_fs1is")
 square_size = 32
 
-[node name="@Node2D@20689" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
+[node name="@Node2D@25034" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
 position = Vector2(128, 32)
 script = ExtResource("5_fs1is")
 square_size = 32
 
-[node name="@Node2D@20690" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
+[node name="@Node2D@25035" type="Node2D" parent="." groups=["generated"] instance=ExtResource("4_30rss")]
 position = Vector2(160, 32)
 script = ExtResource("5_fs1is")
 type = 2
