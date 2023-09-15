@@ -9,5 +9,6 @@ _id = "8"
 
 [node name="DotHopGame" type="Node2D"]
 script = ExtResource("1_ak4mv")
-game_def_path = "res://src/dotHop/dothop-two.txt"
+game_def_path = "res://src/dotHop/dothop-three.txt"
 puzzle_theme = SubResource("Resource_aqwgl")
+puzzle_num = 7

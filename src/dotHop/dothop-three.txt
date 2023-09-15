@@ -1,0 +1,253 @@
+title DotHopThree
+author Russell Matney
+
+require_player_movement
+
+========
+OBJECTS
+========
+
+PlayerA
+Blue Green White Black
+.000.
+.010.
+01210
+33333
+.3.3.
+
+PlayerB
+Blue Red White Black
+.000.
+.010.
+01210
+33333
+.3.3.
+
+TrailBlockA
+Purple Red
+.000.
+0...0
+0.1.0
+0...0
+.000.
+
+TrailBlockB
+Purple Red
+.000.
+0...0
+0.1.0
+0...0
+.000.
+
+TrailOld
+Gray
+
+PrevA
+Green
+
+PrevB
+Red
+
+Dot
+Green YellowGreen
+..0..
+.010.
+01011
+.010.
+..1..
+
+Dotted
+Green YellowGreen
+.....
+.100.
+.001.
+.010.
+.....
+
+Goal
+Red Orange
+..0..
+.101.
+00100
+.101.
+..0..
+
+Background
+DarkBrown
+
+=======
+LEGEND
+=======
+
+. = Background
+a = PlayerA
+b = PlayerB
+o = Dot
+t = Goal
+
+Player = a or b
+pt = Dot or Goal
+x = PlayerA and Dotted
+y = PlayerB and Dotted
+
+=======
+SOUNDS
+=======
+
+sfx0 50392900 (platform sound)
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Dot, Dotted, Goal
+Player
+TrailOld, TrailBlockA, TrailBlockB
+PrevA, PrevB
+
+======
+RULES
+======
+
+(prevent moving toward the last spot. TODO: undo!)
+[ > PlayerA | ... | TrailBlockA ] -> [ PlayerA | ... | TrailBlockA ]
+([ > PlayerA | ... | TrailBlockA ] -> [ Dot | ... | PlayerA ])
+[ > PlayerB | ... | TrailBlockB ] -> [ PlayerB | ... | TrailBlockB ]
+([ > PlayerB | ... | TrailBlockB ] -> [ Dot | ... | PlayerB ])
+
+(prevent moving into the other player)
+(TODO cover more cases... this is quite hard-coded)
+[ > Player | Player ] -> [ Player | Player ]
+[ > Player | Dotted | Player ] -> [ Player | Dotted | Player ]
+[ > Player | Dotted | Dotted | Player ] -> [ Player | Dotted | Dotted | Player ]
+[ > Player | Dotted | Dotted | Dotted | Player ] -> [ Player | Dotted | Dotted | Dotted | Player ]
+[ > Player | Dotted | Dotted | Dotted | Dotted | Player ] -> [ Player | Dotted | Dotted | Dotted | Dotted | Player ]
+[ > Player | Dotted | Dotted | Dotted | Dotted | Dotted | Player ] -> [ Player | Dotted | Dotted | Dotted | Dotted | Dotted | Player ]
+[ > Player | Dotted | Dotted | Dotted | Dotted | Dotted | Dotted | Player ] -> [ Player | Dotted | Dotted | Dotted | Dotted | Dotted | Dotted | Player ]
+
+(prevent moving if we've reached the Goal)
+[ > Player Goal ] -> [ Player Goal ]
+
+(move to platform or Goal, leaving last spot)
+[ > PlayerA | ... | pt ] -> [ TrailBlockA PrevA | ... | PlayerA pt ] sfx0
+[ > PlayerB | ... | pt ] -> [ TrailBlockB PrevB | ... | PlayerB pt ] sfx0
+
+(mark platform used)
+[ Player Dot ] -> [ Player Dotted ]
+
+(otherwise! prevent movement)
+[ > Player ] -> [ Player ]
+
+(remove previous blocker)
+[ PrevA | ... | TrailBlockA ] -> [ PrevA | ... | ]
+[ PrevA ] -> [ ]
+[ PrevB  | ... | TrailBlockB  ] -> [ PrevB  | ... | ]
+[ PrevB  ] -> [ ]
+
+==============
+WINCONDITIONS
+==============
+
+No Dot
+All Player on Goal
+
+=======
+LEVELS
+=======
+
+message "Can't get enough, eh? Let's dive in"
+
+oo.
+oxt
+
+message "A growing problem"
+
+o.o.o
+..t.o
+o.xo.
+o.oo.
+
+message "Related, but not the same"
+
+o.o..
+o..oo
+t.o.o
+..xo.
+..oo.
+
+message "More paths? Or Fewer?"
+
+o.o...
+o.o...
+o..ooo
+t.o.o.
+..xo..
+..oo.o
+
+message "An apendage of a path. Apathdage?"
+
+o.o....
+o.o....
+o..oooo
+t.o.ooo
+..xo.oo
+..oo.oo
+
+
+message "A roundabout."
+
+.o.o...
+..o.o..
+xo.o.ot
+...oo..
+..o..o.
+
+message "Neither here nor over there."
+
+ooo.oooo
+oo.o.o..
+.xo...ot
+....oo..
+...o..o.
+
+message "But it's RIGHT. THERE."
+
+ooo..oo..
+....oo.oo
+o...xto.o
+o.o.oo.o.
+ooo...o..
+
+
+message ""
+
+.........
+.........
+.........
+.........
+.........
+
+message ""
+
+.........
+.........
+.........
+.........
+.........
+
+message ""
+
+.........
+.........
+.........
+.........
+.........
+
+message ""
+
+.........
+.........
+.........
+.........
+.........
