@@ -33,7 +33,7 @@ func register_menus():
 func register():
 	register_menus()
 
-func start():
+func start(opts={}):
 	# load the first level, maybe pull from a saved game
 	# could accept params for which level to start
 	Debug.warn("start() not implemented")

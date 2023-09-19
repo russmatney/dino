@@ -60,7 +60,7 @@ func register_current_game(game):
 	current_game = game
 	game.register()
 
-func restart_game(game=null):
+func restart_game(game=null, opts=null):
 	remove_player()
 	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
@@ -74,7 +74,9 @@ func restart_game(game=null):
 	if not current_game:
 		Debug.err("No current_game set")
 		return
-	current_game.start()
+	if opts == null:
+		opts = {}
+	current_game.start(opts)
 
 
 ## game menus ##########################################################

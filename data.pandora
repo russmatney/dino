@@ -10,6 +10,16 @@
 				"_index": 0,
 				"_name": "DotHopTheme",
 				"_script_path": "res://src/dotHop/themes/DotHopTheme.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "cccb5cff",
+				"_id": "9",
+				"_ids_generation_class": "DhPuzzleSet",
+				"_index": 0,
+				"_name": "DotHopPuzzleSet",
+				"_script_path": "res://src/dotHop/DotHopPuzzleSet.gd"
 			}
 		],
 		"_entities": [
@@ -22,7 +32,7 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Debug Theme"
+						"value": "Debug"
 					},
 					"is_unlocked": {
 						"type": "bool",
@@ -92,6 +102,45 @@
 						"value": "res://src/dotHop/themes/fall/FallPuzzle.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "9",
+				"_icon_color": "ffffff00",
+				"_id": "12",
+				"_index": 0,
+				"_name": "One",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "The Original!"
+					}
+				}
+			},
+			{
+				"_category_id": "9",
+				"_icon_color": "ffffff00",
+				"_id": "13",
+				"_index": 0,
+				"_name": "Two",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Two"
+					}
+				}
+			},
+			{
+				"_category_id": "9",
+				"_icon_color": "ffffff00",
+				"_id": "14",
+				"_index": 0,
+				"_name": "Three",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Three"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -115,12 +164,26 @@
 				"_id": "7",
 				"_name": "is_unlocked",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "9",
+				"_default_value": null,
+				"_id": "10",
+				"_name": "puzzle_script_file",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "9",
+				"_default_value": "",
+				"_id": "11",
+				"_name": "display_name",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 8
+			"default": 14
 		}
 	}
 }
