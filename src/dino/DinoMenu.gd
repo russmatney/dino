@@ -23,6 +23,8 @@ func set_focus():
 func build_games_grid():
 	Util.free_children(games_grid_container)
 
+	# TODO build games from pandora db, not Game.games
+
 	for g in Game.games:
 		var game_button = start_game_button.instantiate()
 		game_button.set_game(g)

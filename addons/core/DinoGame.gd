@@ -2,6 +2,8 @@
 class_name DinoGame
 extends Node
 
+var game_entity: DinoGameEntity
+
 ## Register self with Games list
 func _enter_tree():
 	Game.register_game(self)

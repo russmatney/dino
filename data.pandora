@@ -20,6 +20,13 @@
 				"_index": 0,
 				"_name": "DotHopPuzzleSet",
 				"_script_path": "res://src/dotHop/DotHopPuzzleSet.gd"
+			},
+			{
+				"_category_id": "",
+				"_icon_color": "ffffff00",
+				"_id": "17",
+				"_index": 0,
+				"_name": "DinoGame"
 			}
 		],
 		"_entities": [
@@ -174,6 +181,34 @@
 						}
 					}
 				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "18",
+				"_index": 0,
+				"_name": "DotHop"
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "19",
+				"_index": 0,
+				"_name": "SuperElevatorLevel"
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "20",
+				"_index": 0,
+				"_name": "VoidSpike"
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "21",
+				"_index": 0,
+				"_name": "Shirt"
 			}
 		],
 		"_properties": [
@@ -218,12 +253,54 @@
 				"_id": "16",
 				"_name": "theme",
 				"_type": "reference"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "",
+				"_id": "22",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
+				"_id": "23",
+				"_name": "icon_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": null,
+				"_id": "24",
+				"_name": "main_menu",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "res://addons/navi/NaviPauseMenu.tscn",
+				"_id": "25",
+				"_name": "pause_menu",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "res://addons/navi/NaviWinMenu.tscn",
+				"_id": "26",
+				"_name": "win_menu",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "res://addons/navi/NaviDeathMenu.tscn",
+				"_id": "27",
+				"_name": "death_menu",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 16
+			"default": 27
 		}
 	}
 }
