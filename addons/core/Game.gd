@@ -94,7 +94,16 @@ func load_main_menu(game=null):
 	Navi.nav_to_main_menu()
 
 ## For a passed game, load it's main menu. If none is set, start it via restart_game
-func nav_to_game_menu_or_start(game):
+func nav_to_game_menu_or_start(game_or_entity):
+	var game
+	if game_or_entity is DinoGameEntity:
+		# TODO get game for entity, maybe instance and load it
+		Debug.err("Not impled!", game_or_entity)
+		return
+		# game = ?
+	else:
+		game = game_or_entity
+
 	if game.main_menu_scene != null:
 		# is this hide still necessary?
 		Navi.hide_menus()

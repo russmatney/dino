@@ -2,6 +2,7 @@
 extends PanelContainer
 
 var game: DinoGame
+var game_entity: DinoGameEntity
 
 @onready var label = $%GameLabel
 @onready var icon = $%Icon
@@ -9,6 +10,8 @@ var game: DinoGame
 func _ready():
 	if Engine.is_editor_hint():
 		if not game:
+			# TODO double check autofocus when this is removed
+			# Debug.warn("no default game! cannot set_game")
 			var g = Game.games[0]
 			set_game(g)
 
@@ -21,15 +24,23 @@ func _ready():
 func set_game(g: DinoGame):
 	game = g
 
+func set_game_entity(g: DinoGameEntity):
+	game_entity = g
+
 func setup():
-	if game:
+	if game_entity:
+		label.text = "[center]%s[/center]" % str(game_entity.get_display_name())
+		icon.texture_normal = game_entity.get_icon_texture()
+	elif game:
 		label.text = "[center]%s[/center]" % str(game.name)
 		icon.texture_normal = game.icon_texture
 	else:
-		Debug.warn("no game, cannot setup")
+		Debug.warn("no game or entity, cannot setup")
 
 func start_game():
-	if game:
+	if game_entity:
+		Game.nav_to_game_menu_or_start(game_entity)
+	elif game:
 		Game.nav_to_game_menu_or_start(game)
 	else:
 		Debug.err("Cannot start game, no game set!")

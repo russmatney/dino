@@ -4,11 +4,22 @@ extends Node
 
 var game_entity: DinoGameEntity
 
-## Register self with Games list
+# TODO delete all these (and pull from game_entity)
+var icon_texture
+var main_menu_scene
+var pause_menu_scene
+var win_menu_scene
+var death_menu_scene
+
 func _enter_tree():
 	Game.register_game(self)
+	# Debug.error("_entry_tree() should assign game_entity", self)
 
-var icon_texture = preload("res://addons/core/assets/icons/dino_sheet.png")
+func _ready():
+	Debug.pr("dino game ready", self, game_entity)
+	main_menu_scene = game_entity.get_main_menu_scene()
+	icon_texture = game_entity.get_icon_texture()
+
 
 func get_player_scene():
 	# defaults to returning a 'player_scene' var
@@ -21,15 +32,10 @@ func get_player_scene():
 func on_player_spawned(_player):
 	pass
 
-var main_menu_scene
-@onready var pause_menu_scene = Navi.pause_menu_scene
-@onready var win_menu_scene = Navi.win_menu_scene
-@onready var death_menu_scene = Navi.death_menu_scene
-
 func register_menus():
-	Navi.set_pause_menu(pause_menu_scene)
-	Navi.set_win_menu(win_menu_scene)
-	Navi.set_death_menu(death_menu_scene)
+	Navi.set_pause_menu(game_entity.get_pause_menu_scene())
+	Navi.set_win_menu(game_entity.get_win_menu_scene())
+	Navi.set_death_menu(game_entity.get_death_menu_scene())
 
 # register menus and static zones/scenes you may need in Hotel
 func register():

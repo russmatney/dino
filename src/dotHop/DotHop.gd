@@ -13,15 +13,13 @@ enum dotType { Dot, Dotted, Goal}
 
 var reset_hold_t = 0.4
 
-#####################################################################
-## ready
+## enter_tree #####################################################################
 
-func _ready():
-	main_menu_scene = load("res://src/dotHop/menus/DotHopMainMenu.tscn")
-	pause_menu_scene = load("res://src/dotHop/menus/DotHopPauseMenu.tscn")
+func _enter_tree():
+	super._enter_tree()
+	game_entity = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
 
-#####################################################################
-## build puzzle node
+## build puzzle node #####################################################################
 
 # Builds and returns a "puzzle_scene" node, with a game_def and level_def set
 # Accepts several input options, but only 'game_def' or 'game_def_path' are required.

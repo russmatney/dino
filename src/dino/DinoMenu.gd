@@ -23,6 +23,15 @@ func set_focus():
 func build_games_grid():
 	Util.free_children(games_grid_container)
 
+	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
+	var game_entities = Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+
+	for ge in game_entities:
+		var game_button = start_game_button.instantiate()
+		game_button.set_game_entity(ge)
+		games_grid_container.add_child(game_button)
+
+
 	# TODO build games from pandora db, not Game.games
 
 	for g in Game.games:

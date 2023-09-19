@@ -23,10 +23,13 @@
 			},
 			{
 				"_category_id": "",
+				"_generate_ids": true,
 				"_icon_color": "ffffff00",
 				"_id": "17",
+				"_ids_generation_class": "DinoGameEntityIds",
 				"_index": 0,
-				"_name": "DinoGame"
+				"_name": "DinoGame",
+				"_script_path": "res://addons/core/DinoGameEntity.gd"
 			}
 		],
 		"_entities": [
@@ -187,28 +190,68 @@
 				"_icon_color": "ffffff00",
 				"_id": "18",
 				"_index": 0,
-				"_name": "DotHop"
+				"_name": "DotHop",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Dot Hop"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/dotHop/menus/DotHopMainMenu.tscn"
+					}
+				}
 			},
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
 				"_id": "19",
 				"_index": 0,
-				"_name": "SuperElevatorLevel"
+				"_name": "SuperElevatorLevel",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Super Elevator Level"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/Super_Elevator_Level_icon_sheet.png"
+					}
+				}
 			},
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
 				"_id": "20",
 				"_index": 0,
-				"_name": "VoidSpike"
+				"_name": "VoidSpike",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Void Spike"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+					}
+				}
 			},
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
 				"_id": "21",
 				"_index": 0,
-				"_name": "Shirt"
+				"_name": "Shirt",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Shirt"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -295,12 +338,19 @@
 				"_id": "27",
 				"_name": "death_menu",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": null,
+				"_id": "28",
+				"_name": "game_scene",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 27
+			"default": 28
 		}
 	}
 }

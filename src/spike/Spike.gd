@@ -1,10 +1,16 @@
 @tool
 extends DinoGame
 
-func _ready():
-	pause_menu_scene = load("res://src/spike/menus/PauseMenu.tscn")
-	main_menu_scene = load("res://src/spike/menus/MainMenu.tscn")
-	icon_texture = load("res://assets/gameicons/Spike_icon.png")
+## enter_tree #####################################################################
+
+func _enter_tree():
+	super._enter_tree()
+	game_entity = Pandora.get_entity(DinoGameEntityIds.VOIDSPIKE)
+
+# func _ready():
+# 	pause_menu_scene = load("res://src/spike/menus/PauseMenu.tscn")
+# 	main_menu_scene = load("res://src/spike/menus/MainMenu.tscn")
+# 	icon_texture = load("res://assets/gameicons/Spike_icon.png")
 
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/spike")
