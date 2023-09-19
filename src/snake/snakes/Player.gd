@@ -50,7 +50,7 @@ signal slowmo_stop
 var slowing_down
 var walk_manually
 
-func _on_slowmo_start():
+func _on_slowmo_start(_opts={}):
 	slowing_down = true
 	walk_manually = false
 	steps_til_stop = slow_steps_before_pause

@@ -50,7 +50,7 @@ func register():
 
 ## start ##########################################################
 
-func start():
+func start(_opts={}):
 	Debug.prn("Starting Shirt!")
 
 	# TODO pull from saved game?

@@ -16,7 +16,7 @@ func manages_scene(scene):
 
 var default_game_path = "res://src/gunner/player/PlayerGym.tscn"
 
-func start():
+func start(_opts={}):
 	Respawner.reset_respawns()
 
 	if Navi.current_scene.scene_file_path.match("*gunner*"):

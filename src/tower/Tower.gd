@@ -28,7 +28,7 @@ var levels = [
 	"res://src/tower/maps/TowerClimb5.tscn",
 ]
 
-func start():
+func start(_opts={}):
 	Respawner.reset_respawns()
 	var level_path = levels[0]
 	Navi.nav_to(level_path)

@@ -1,7 +1,7 @@
 extends NaviButtonList
 
 
-func restart():
+func restart(_opts={}):
 	owner.hide()
 	Harvey.restart_game()
 

@@ -59,7 +59,7 @@ func get_spawn_coords():
 
 ## start ##########################################################
 
-func start():
+func start(_opts={}):
 	Debug.prn("Starting HatBot!")
 
 	# TODO pull from saved game?

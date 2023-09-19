@@ -48,7 +48,7 @@ func get_spawn_coords():
 ###########################################################
 # start
 
-func start():
+func start(_opts={}):
 	Debug.prn("Starting DungeonCrawler!")
 
 	# TODO pull from saved game?

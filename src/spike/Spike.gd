@@ -54,7 +54,7 @@ func register():
 
 ## start ##########################################################
 
-func start():
+func start(_opts={}):
 	Debug.prn("Starting Spike!")
 
 	Metro.load_zone(first_zone)

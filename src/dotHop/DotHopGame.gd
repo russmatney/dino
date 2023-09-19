@@ -4,6 +4,7 @@ extends Node2D
 
 @export_file var game_def_path: String
 @export var puzzle_theme: DotHopTheme
+@export var puzzle_set: DotHopPuzzleSet
 
 var game_def
 var puzzle_node
@@ -18,6 +19,10 @@ var dismiss_jumbo_signal
 func _ready():
 	DotHop.register_game(self)
 
+	# TODO if not a managed game, honor the dev loop (game_def_path, puzzle_num)
+	if puzzle_set != null:
+		game_def_path = puzzle_set.get_puzzle_script_path()
+		puzzle_theme = puzzle_set.get_theme()
 	game_def = Puzz.parse_game_def(game_def_path)
 	load_theme()
 	rebuild_puzzle()

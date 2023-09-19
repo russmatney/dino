@@ -80,12 +80,10 @@ func manages_scene(scene):
 func should_spawn_player(_scene):
 	return false
 
-var current_puzzle_set
 func start(opts={}):
-	current_puzzle_set = opts.get("puzzle_set")
-	# TODO point to main menu?
-	# TODO consider loading + setting game_def_path based on a levels-select screen
-	Navi.nav_to(game_scene)
+	var g = load(game_scene).instantiate()
+	g.puzzle_set = opts.get("puzzle_set")
+	Navi.nav_to(g)
 
 var game
 func register_game(g):

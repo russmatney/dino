@@ -46,7 +46,7 @@ var levels = [
 
 var level_idx = 0
 
-func start():
+func start(_opts={}):
 	level_idx = 0
 	load_level()
 

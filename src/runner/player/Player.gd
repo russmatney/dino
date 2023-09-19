@@ -85,7 +85,7 @@ func _process(_delta):
 signal player_resetting
 
 
-func restart():
+func restart(_opts={}):
 	# TODO disable/reenable collision detection?
 	# or, work checked a timer - first remove_at, then wait a bit, then restart
 	position = restart_pos

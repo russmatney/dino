@@ -88,11 +88,12 @@ func find_focus(scene=null):
 
 ## nav_to ###################################################################
 
-func nav_to(path_or_packed_scene):
-	Debug.prn("nav_to: ", path_or_packed_scene)
+# Supports a path, packed_scene, or instance of a scene
+func nav_to(scene):
+	Debug.prn("nav_to: ", scene)
 	# NOTE this scene stack grows forever!
-	last_scene_stack.push_back(path_or_packed_scene)
-	_deferred_goto_scene.call_deferred(path_or_packed_scene)
+	last_scene_stack.push_back(scene)
+	_deferred_goto_scene.call_deferred(scene)
 
 	# TODO pause/resume menus/music fixes
 	resume()
@@ -105,21 +106,21 @@ func nav_to(path_or_packed_scene):
 signal new_scene_instanced(inst)
 
 
-func _deferred_goto_scene(path_or_packed_scene):
+func _deferred_goto_scene(scene):
 	# It is now safe to remove_at the current scene
 	current_scene.free()
 
-	Debug.prn("Instancing new scene: ", path_or_packed_scene)
+	Debug.prn("Instancing new scene: ", scene)
 
 	var next_scene
-	if path_or_packed_scene is String:
-		var s = ResourceLoader.load(path_or_packed_scene)
+	if scene is String:
+		var s = ResourceLoader.load(scene)
 		next_scene = s.instantiate()
-	elif path_or_packed_scene is PackedScene:
-		next_scene = path_or_packed_scene.instantiate()
+	elif scene is PackedScene:
+		next_scene = scene.instantiate()
 	else:
 		# assuming it is already instantiated
-		next_scene = path_or_packed_scene
+		next_scene = scene
 
 	current_scene = next_scene
 	Debug.prn("New current_scene: ", current_scene)

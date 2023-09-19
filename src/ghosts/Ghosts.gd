@@ -68,7 +68,7 @@ func on_player_spawned(player):
 
 ## start ##########################################################
 
-func start():
+func start(_opts={}):
 	Debug.pr("Starting Ghost House!")
 	reset_player_data()
 	load_next_room(first_room)

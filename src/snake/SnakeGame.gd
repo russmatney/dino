@@ -19,7 +19,7 @@ func register():
 func should_spawn_player(_scene):
 	return false
 
-func start():
+func start(_opts={}):
 	current_level_idx = -1
 	load_next_level()
 

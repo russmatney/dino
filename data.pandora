@@ -113,6 +113,17 @@
 					"display_name": {
 						"type": "string",
 						"value": "The Original!"
+					},
+					"puzzle_script_path": {
+						"type": "string",
+						"value": "res://src/dotHop/dothop.txt"
+					},
+					"theme": {
+						"type": "reference",
+						"value": {
+							"_entity_id": "3",
+							"_type": 0
+						}
 					}
 				}
 			},
@@ -126,6 +137,17 @@
 					"display_name": {
 						"type": "string",
 						"value": "Two"
+					},
+					"puzzle_script_path": {
+						"type": "string",
+						"value": "res://src/dotHop/dothop-two.txt"
+					},
+					"theme": {
+						"type": "reference",
+						"value": {
+							"_entity_id": "4",
+							"_type": 0
+						}
 					}
 				}
 			},
@@ -139,6 +161,17 @@
 					"display_name": {
 						"type": "string",
 						"value": "Three"
+					},
+					"puzzle_script_path": {
+						"type": "string",
+						"value": "res://src/dotHop/dothop-three.txt"
+					},
+					"theme": {
+						"type": "reference",
+						"value": {
+							"_entity_id": "8",
+							"_type": 0
+						}
 					}
 				}
 			}
@@ -167,23 +200,30 @@
 			},
 			{
 				"_category_id": "9",
-				"_default_value": null,
-				"_id": "10",
-				"_name": "puzzle_script_file",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "9",
 				"_default_value": "",
 				"_id": "11",
 				"_name": "display_name",
 				"_type": "string"
+			},
+			{
+				"_category_id": "9",
+				"_default_value": "",
+				"_id": "15",
+				"_name": "puzzle_script_path",
+				"_type": "string"
+			},
+			{
+				"_category_id": "9",
+				"_default_value": null,
+				"_id": "16",
+				"_name": "theme",
+				"_type": "reference"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 14
+			"default": 16
 		}
 	}
 }
