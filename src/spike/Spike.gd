@@ -1,12 +1,6 @@
 @tool
 extends DinoGame
 
-## enter_tree #####################################################################
-
-func _enter_tree():
-	super._enter_tree()
-	game_entity = Pandora.get_entity(DinoGameEntityIds.VOIDSPIKE)
-
 func manages_scene(scene):
 	return scene.scene_file_path.begins_with("res://src/spike")
 

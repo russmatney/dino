@@ -281,7 +281,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+						"value": "res://assets/gameicons/Shirt_icon_sheet.png"
 					},
 					"main_menu": {
 						"type": "resource",
@@ -307,6 +307,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/hatbot/HatBot.gd"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/hatbot_icon_sheet.png"
 					},
 					"main_menu": {
 						"type": "resource",
@@ -491,6 +495,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/herd/Herd.gd"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/Herd_icon_sheet.png"
 					},
 					"main_menu": {
 						"type": "resource",

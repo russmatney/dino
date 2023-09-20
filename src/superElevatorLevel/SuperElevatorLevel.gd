@@ -1,18 +1,6 @@
 @tool
 extends DinoGame
 
-## enter_tree #####################################################################
-
-func _enter_tree():
-	super._enter_tree()
-	game_entity = Pandora.get_entity(DinoGameEntityIds.SUPERELEVATORLEVEL)
-
-## ready ####################################################################
-
-# func _ready():
-# 	main_menu_scene = load("res://src/superElevatorLevel/menus/MainMenu.tscn")
-# 	icon_texture = load("res://assets/gameicons/Super_Elevator_Level_icon_sheet.png")
-
 ## player ####################################################################
 
 # TODO support player selection

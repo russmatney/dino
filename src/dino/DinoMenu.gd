@@ -30,11 +30,3 @@ func build_games_grid():
 		var game_button = start_game_button.instantiate()
 		game_button.set_game_entity(ge)
 		games_grid_container.add_child(game_button)
-
-
-	# TODO build games from pandora db, not Game.games
-
-	for g in Game.games:
-		var game_button = start_game_button.instantiate()
-		game_button.set_game(g)
-		games_grid_container.add_child(game_button)

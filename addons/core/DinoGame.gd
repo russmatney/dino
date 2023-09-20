@@ -13,12 +13,23 @@ var death_menu_scene
 
 func _enter_tree():
 	Game.register_game(self)
-	# Debug.error("_entry_tree() should assign game_entity", self)
+
+	# find and assign the game entity
+	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
+	var ents = Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+	for e in ents:
+		var s = e.get_singleton()
+		if s == null:
+			continue
+		if get_script().resource_path == s.resource_path:
+			# NOTE this breaks when entities share a singleton...?
+			game_entity = e
+			break
 
 func _ready():
 	Debug.pr("dino game ready", self, game_entity)
 	if game_entity != null:
-		main_menu_scene = game_entity.get_main_menu_scene()
+		main_menu_scene = game_entity.get_main_menu()
 		icon_texture = game_entity.get_icon_texture()
 
 
@@ -35,9 +46,9 @@ func on_player_spawned(_player):
 
 func register_menus():
 	if game_entity != null:
-		Navi.set_pause_menu(game_entity.get_pause_menu_scene())
-		Navi.set_win_menu(game_entity.get_win_menu_scene())
-		Navi.set_death_menu(game_entity.get_death_menu_scene())
+		Navi.set_pause_menu(game_entity.get_pause_menu())
+		Navi.set_win_menu(game_entity.get_win_menu())
+		Navi.set_death_menu(game_entity.get_death_menu())
 
 # register menus and static zones/scenes you may need in Hotel
 func register():

@@ -97,10 +97,21 @@ func load_main_menu(game=null):
 func nav_to_game_menu_or_start(game_or_entity):
 	var game
 	if game_or_entity is DinoGameEntity:
-		# TODO get game for entity, maybe instance and load it
-		Debug.err("Not impled!", game_or_entity)
-		return
-		# game = ?
+		var singleton = game_or_entity.get_singleton()
+		if singleton == null:
+			Debug.warn("No singleton found for game_entity", game_or_entity)
+			return
+
+		# TODO some other way to do this lookup without registering all the games?
+		for g in games:
+			if g.get_script().resource_path == singleton.resource_path:
+				game = g
+				# kind of an awkward required assignment
+				game.game_entity = game_or_entity
+				break
+		if game == null:
+			Debug.warn("Could not find game for game entity", game_or_entity)
+			return
 	else:
 		game = game_or_entity
 

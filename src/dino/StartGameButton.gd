@@ -9,7 +9,9 @@ var game_entity: DinoGameEntity
 
 func _ready():
 	if Engine.is_editor_hint():
-		if not game:
+		if not game_entity:
+			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
+		if not game_entity and not game and len(Game.games) > 0:
 			# TODO double check autofocus when this is removed
 			# Debug.warn("no default game! cannot set_game")
 			var g = Game.games[0]
