@@ -17,8 +17,9 @@ func _enter_tree():
 
 func _ready():
 	Debug.pr("dino game ready", self, game_entity)
-	main_menu_scene = game_entity.get_main_menu_scene()
-	icon_texture = game_entity.get_icon_texture()
+	if game_entity != null:
+		main_menu_scene = game_entity.get_main_menu_scene()
+		icon_texture = game_entity.get_icon_texture()
 
 
 func get_player_scene():
@@ -33,9 +34,10 @@ func on_player_spawned(_player):
 	pass
 
 func register_menus():
-	Navi.set_pause_menu(game_entity.get_pause_menu_scene())
-	Navi.set_win_menu(game_entity.get_win_menu_scene())
-	Navi.set_death_menu(game_entity.get_death_menu_scene())
+	if game_entity != null:
+		Navi.set_pause_menu(game_entity.get_pause_menu_scene())
+		Navi.set_win_menu(game_entity.get_win_menu_scene())
+		Navi.set_death_menu(game_entity.get_death_menu_scene())
 
 # register menus and static zones/scenes you may need in Hotel
 func register():

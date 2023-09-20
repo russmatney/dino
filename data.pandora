@@ -4,7 +4,7 @@
 			{
 				"_category_id": "",
 				"_generate_ids": true,
-				"_icon_color": "ffffff00",
+				"_icon_color": "b3b25fff",
 				"_id": "1",
 				"_ids_generation_class": "DhTheme",
 				"_index": 0,
@@ -24,7 +24,7 @@
 			{
 				"_category_id": "",
 				"_generate_ids": true,
-				"_icon_color": "ffffff00",
+				"_icon_color": "1f9828ff",
 				"_id": "17",
 				"_ids_generation_class": "DinoGameEntityIds",
 				"_index": 0,
@@ -196,9 +196,17 @@
 						"type": "string",
 						"value": "Dot Hop"
 					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/dotHop/DotHop.gd"
+					},
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/dotHop/menus/DotHopMainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/dotHop/menus/DotHopPauseMenu.tscn"
 					}
 				}
 			},
@@ -213,9 +221,17 @@
 						"type": "string",
 						"value": "Super Elevator Level"
 					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/superElevatorLevel/SuperElevatorLevel.gd"
+					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Super_Elevator_Level_icon_sheet.png"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/superElevatorLevel/menus/MainMenu.tscn"
 					}
 				}
 			},
@@ -230,9 +246,21 @@
 						"type": "string",
 						"value": "Void Spike"
 					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/spike/Spike.gd"
+					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/spike/menus/MainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/spike/menus/PauseMenu.tscn"
 					}
 				}
 			},
@@ -247,9 +275,277 @@
 						"type": "string",
 						"value": "Shirt"
 					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/shirt/Shirt.gd"
+					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/shirt/menus/MainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/shirt/menus/PauseMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "29",
+				"_index": 0,
+				"_name": "HatBot",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "HatBot"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/hatbot/HatBot.gd"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/hatbot/menus/MainMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "30",
+				"_index": 0,
+				"_name": "TheMountain",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "The Mountain"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/mountain/Mountain.gd"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/The_Mountain_icon_sheet.png"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/mountain/menus/MainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/mountain/menus/PauseMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "31",
+				"_index": 0,
+				"_name": "GhostHouse",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Ghost House"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/ghosts/Ghosts.gd"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/Ghost_House_icon_sheet.png"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/ghosts/GhostsMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "32",
+				"_index": 0,
+				"_name": "DungeonCrawler",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Dungeon Crawler"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/dungeonCrawler/DungeonCrawler.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "33",
+				"_index": 0,
+				"_name": "Runner",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Runner"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/runner/Runner.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "34",
+				"_index": 0,
+				"_name": "TowerJet",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Tower Jet"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/tower/Tower.gd"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/tower/menus/TowerMainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/tower/menus/TowerPauseMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "35",
+				"_index": 0,
+				"_name": "Gunner",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Gunner"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/gunner/Gunner.gd"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/gunner/menus/GunnerPauseMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "36",
+				"_index": 0,
+				"_name": "Harvey",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Harvey"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/harvey/Harvey.gd"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/Harvey_icon_sheet.png"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/harvey/menus/HarveyMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/harvey/menus/HarveyPauseMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "37",
+				"_index": 0,
+				"_name": "Herd",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Herd"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/herd/Herd.gd"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/herd/menus/MainMenu.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "38",
+				"_index": 0,
+				"_name": "DemoLand",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Demo Land"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/demoland/DemoLand.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "39",
+				"_index": 0,
+				"_name": "Pluggs",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Pluggs McGee"
+					}
+				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "40",
+				"_index": 0,
+				"_name": "Snake",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Snake"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/snake/SnakeGame.gd"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/snake/menus/SnakeMainMenu.tscn"
 					}
 				}
 			}
@@ -343,14 +639,14 @@
 				"_category_id": "17",
 				"_default_value": null,
 				"_id": "28",
-				"_name": "game_scene",
+				"_name": "game_singleton",
 				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 28
+			"default": 40
 		}
 	}
 }

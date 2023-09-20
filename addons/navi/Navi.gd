@@ -182,6 +182,9 @@ func to_scene_path(path_or_scene):
 var pause_menu
 
 func set_pause_menu(path_or_scene):
+	if path_or_scene == null:
+		Debug.warn("Null passed to set_pause_menu, returning")
+		return
 	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if pause_menu:
@@ -240,6 +243,9 @@ func resume():
 var death_menu
 
 func set_death_menu(path_or_scene):
+	if path_or_scene == null:
+		Debug.warn("Null passed to set_pause_menu, returning")
+		return
 	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if death_menu:
@@ -271,6 +277,9 @@ func hide_death_menu():
 var win_menu
 
 func set_win_menu(path_or_scene):
+	if path_or_scene == null:
+		Debug.warn("Null passed to set_pause_menu, returning")
+		return
 	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if win_menu:
