@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0iqc0g2kgl5s"]
+
+[ext_resource type="Script" path="res://src/woods/world/WorldGen.gd" id="1_wf82b"]
+
+[node name="WorldGen" type="Node2D"]
+script = ExtResource("1_wf82b")
+room_count = 16
+
+[node name="Rooms" type="Node2D" parent="."]
+unique_name_in_owner = true
