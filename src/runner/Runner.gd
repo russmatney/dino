@@ -1,10 +1,10 @@
 @tool
 extends Node2D
 
-@export var initial_room_options = [] # (Array, PackedScene)
+@export var initial_room_options: Array[PackedScene] = []
 var room_options = []
 @export var final_room: PackedScene
-@export var gap_room_options = [] # (Array, PackedScene)
+@export var gap_room_options: Array[PackedScene] =  []
 
 var room_queue = []
 var current_rooms = []

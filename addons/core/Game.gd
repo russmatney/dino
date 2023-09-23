@@ -110,8 +110,10 @@ func nav_to_game_menu_or_start(game_or_entity):
 				game.game_entity = game_or_entity
 				break
 		if game == null:
-			Debug.warn("Could not find game for game entity", game_or_entity)
-			return
+			game = singleton.new()
+			var game_name = singleton.resource_path.get_basename().get_file()
+			Debug.pr("Registering in game singleton", game_name, game)
+			Engine.register_singleton(game_name, game)
 	else:
 		game = game_or_entity
 

@@ -556,6 +556,23 @@
 						"value": "res://src/snake/menus/SnakeMainMenu.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "41",
+				"_index": 0,
+				"_name": "TheWoods",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "The Woods"
+					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/woods/Woods.gd"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -654,7 +671,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 40
+			"default": 41
 		}
 	}
 }
