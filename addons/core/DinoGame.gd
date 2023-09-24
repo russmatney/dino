@@ -69,6 +69,7 @@ func update_world():
 # 	Debug.warn("get_spawn_coords not implemented")
 
 func manages_scene(_scene):
+	# TODO impl in terms of game entity, via default directory
 	# return true if the passed scene is managed by this game
 	Debug.warn("manages_scene not implemented")
 
@@ -76,4 +77,5 @@ func manages_scene(_scene):
 	# return scene.scene_file_path.begins_with("res://src/hatbot")
 
 func should_spawn_player(_scene):
+	# TODO impl in terms of game entity, via default directory
 	return true
