@@ -1,6 +1,8 @@
 @tool
 extends DinoGame
 
+# NOTE needs update re: DinoGameEntity
+
 ######################################################
 # manages scene
 
@@ -30,7 +32,7 @@ func register():
 # start
 
 # load the first level, maybe load from a saved game
-func start():
+func start(_opts={}):
 	pass
 
 ######################################################
