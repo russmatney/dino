@@ -4,7 +4,7 @@
 
 [node name="WorldGen" type="Node2D"]
 script = ExtResource("1_wf82b")
-room_count = 16
+room_count = 8
 
 [node name="Rooms" type="Node2D" parent="."]
 unique_name_in_owner = true
