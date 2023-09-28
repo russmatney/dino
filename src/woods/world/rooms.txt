@@ -6,7 +6,7 @@ LEGEND
 
 . = Empty
 p = Player
-x = tile
+x = Tile
 
 =======
 ROOMS

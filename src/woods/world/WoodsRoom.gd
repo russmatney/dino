@@ -4,11 +4,11 @@ class_name WoodsRoom
 
 ## vars, data ##################################################################
 
-# TODO consider 'START'/'END'
 enum t {START, END, SQUARE, LONG, CLIMB, FALL}
 
 var rect
 var room_def
+var tilemap
 
 ## room parse ##################################################################
 
@@ -26,7 +26,6 @@ static func parse_room_defs():
 	parsed_room_defs = RoomParser.parse(contents)
 	return parsed_room_defs
 
-# TODO room for opts with start/end support
 static func room_for_type(type):
 	var rooms_by_type = {}
 	parse_room_defs()
@@ -90,6 +89,8 @@ static func room_opts(last_room, last_opts=null, overrides=null):
 
 	return {position=pos, size=size, type=type, color=color}
 
+static var tmap_scene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
+
 static func create_room(opts) -> WoodsRoom:
 	Debug.pr("Creating room", opts)
 
@@ -105,10 +106,30 @@ static func create_room(opts) -> WoodsRoom:
 	rec.color = Util.get_(opts, "color", Color.PERU)
 
 	room.rect = rec
-	room.add_child(rec)
 
 	var def = room_for_type(type)
 	room.room_def = def
-	Debug.pr(room.room_def.room_type)
+
+	room.tilemap = tmap_scene.instantiate()
+
+	# TODO calculate tilemap scaling properly
+	# var tile_size = room.tilemap
+	# var tile_dims = len(def.shape)
+	room.tilemap.scale = Vector2.ONE * 2
+
+	var tile_cells = []
+	for y in len(def.shape):
+		var row = def.shape[y]
+		for x in len(row):
+			var coord = Vector2(x, y)
+			var def_cell = def.shape[y][x]
+			if def_cell != null and "Tile" in def_cell:
+				tile_cells.append(coord)
+
+	room.tilemap.set_cells_terrain_connect(0, tile_cells, 0, 0)
+	room.tilemap.force_update()
+
+	room.add_child(rec)
+	room.add_child(room.tilemap)
 
 	return room

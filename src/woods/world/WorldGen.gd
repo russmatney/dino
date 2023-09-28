@@ -5,13 +5,15 @@ extends Node2D
 
 @export var run_gen: bool:
 	set(v):
-		if v:
+		if v and Engine.is_editor_hint():
 			generate()
 
 @export var room_base_dim = 512
 @export var room_count = 5
 
 @onready var rooms_node = $%Rooms
+@onready var player = $%Player
+var player_pos
 
 var room_idx = 0
 
@@ -20,6 +22,19 @@ var room_idx = 0
 func _ready():
 	if Engine.is_editor_hint():
 		Debug.pr("World Gen ready")
+	else:
+		Debug.pr("World Gen test ready")
+
+		player_pos = player.position
+
+func _unhandled_input(event):
+	if Engine.is_editor_hint():
+		return
+
+	if Trolley.is_restart(event):
+		Debug.pr("Regen + restart")
+		generate()
+		player.position = player_pos
 
 ## generate ######################################################################
 
@@ -57,6 +72,10 @@ func create_room(opts=null):
 	var room = WoodsRoom.create_room(opts)
 
 	room_idx += 1
+	room.ready.connect(func():
+		room.set_owner(self)
+		room.rect.set_owner(self)
+		room.tilemap.set_owner(self))
 	rooms_node.add_child(room)
 
 	return {room=room, opts=opts}
