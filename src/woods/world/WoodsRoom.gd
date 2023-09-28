@@ -5,7 +5,7 @@ class_name WoodsRoom
 ## vars, data ##################################################################
 
 # TODO consider 'START'/'END'
-enum t {NORM, LONG, CLIMB, FALL}
+enum t {START, END, SQUARE, LONG, CLIMB, FALL}
 
 var rect
 var room_def
@@ -37,8 +37,9 @@ static func room_for_type(type):
 
 	var type_s
 	match type:
-		# TODO move 'NORM' to 'SQUARE'
-		t.NORM: type_s = "SQUARE"
+		t.START: type_s = "START"
+		t.END: type_s = "END"
+		t.SQUARE: type_s = "SQUARE"
 		t.CLIMB: type_s = "CLIMB"
 		t.FALL: type_s = "FALL"
 		t.LONG: type_s = "LONG"
@@ -55,19 +56,19 @@ static func room_opts(last_room, last_opts=null, overrides=null):
 
 	var type = overrides.get("type")
 	if type == null:
-		type = Util.rand_of([t.NORM, t.LONG, t.CLIMB, t.FALL])
+		type = Util.rand_of([t.SQUARE, t.LONG, t.CLIMB, t.FALL])
 
 	var room_base_dim = overrides.get("room_base_dim", 256)
 
 	var size
 	match type:
-		t.NORM: size = Vector2.ONE * room_base_dim
+		t.SQUARE, t.START, t.END: size = Vector2.ONE * room_base_dim
 		t.CLIMB, t.FALL: size = Vector2.ONE * room_base_dim * Vector2(1, 2)
 		t.LONG: size = Vector2.ONE * room_base_dim * Vector2(2, 1)
 
 	var pos
 	match type:
-		t.NORM, t.FALL, t.LONG: pos = Vector2(
+		t.START, t.END, t.SQUARE, t.FALL, t.LONG: pos = Vector2(
 			last_room.position.x + last_room.rect.size.x, last_room.position.y
 			)
 		t.CLIMB: pos = Vector2(
@@ -82,7 +83,7 @@ static func room_opts(last_room, last_opts=null, overrides=null):
 
 	var color
 	match type:
-		t.NORM: color = Color.PERU
+		t.SQUARE, t.START, t.END: color = Color.PERU
 		t.LONG: color = Color.FUCHSIA
 		t.FALL: color = Color.CRIMSON
 		t.CLIMB: color = Color.AQUAMARINE
@@ -93,7 +94,7 @@ static func create_room(opts) -> WoodsRoom:
 	Debug.pr("Creating room", opts)
 
 	var room_base_dim = Util.get_(opts, "room_base_dim", 256)
-	var type = Util.get_(opts, "type", t.NORM)
+	var type = Util.get_(opts, "type", t.SQUARE)
 
 	var room = WoodsRoom.new()
 	room.position = Util.get_(opts, "position", Vector2.ZERO)

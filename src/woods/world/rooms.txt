@@ -12,7 +12,7 @@ x = tile
 ROOMS
 =======
 
-room_type SQUARE
+room_type START
 is_start
 
 xxxxxxxx
@@ -24,7 +24,7 @@ x.......
 x.......
 xxxxxxxx
 
-room_type SQUARE
+room_type END
 is_end
 
 xxxxxxxx

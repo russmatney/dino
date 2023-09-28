@@ -33,24 +33,21 @@ func generate():
 	# generate
 	Debug.pr("Generating world")
 
-	var default_opts = {room_base_dim=room_base_dim}
-
 	# first room
-	var last = create_room(default_opts)
+	var last = create_room({type=WoodsRoom.t.START})
 	var last_room = last["room"]
 	var last_opts = last["opts"].duplicate(true)
 
 	# most rooms
 	for _i in range(room_count - 2):
-		var next_room_opts = WoodsRoom.room_opts(last_room, last_opts, default_opts)
+		var next_room_opts = WoodsRoom.room_opts(last_room, last_opts)
 		last = create_room(next_room_opts)
 		last_room = last["room"]
 		last_opts = last["opts"].duplicate(true)
 
 	# last room
-	var def_opts = default_opts.duplicate(true)
-	def_opts.merge({type=WoodsRoom.t.NORM})
-	create_room(WoodsRoom.room_opts(last_room, last_opts, def_opts))
+	var end_opts = {type=WoodsRoom.t.END}
+	create_room(WoodsRoom.room_opts(last_room, last_opts, end_opts))
 
 ## create_room ######################################################################
 
