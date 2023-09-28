@@ -334,7 +334,10 @@ func play_then_return(anim, animation):
 # - returns `default` if the value for key `k` in dict `d` is null.
 # - returns null if the value is a freed object (instead of crashing)
 # - returns null if both the value and default are invalid instances
-func get_(d: Dictionary, k: String, default: Variant=null):
+func get_(d, k: String, default: Variant=null):
+	if d == null:
+		return default
+
 	var v
 	if k in d:
 		v = d[k]
