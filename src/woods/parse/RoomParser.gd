@@ -2,14 +2,13 @@
 extends Object
 class_name RoomParser
 
-static var section_parsers = {
-	"prelude": RoomParser.parse_prelude,
-	"legend": RoomParser.parse_legend,
-	"rooms": RoomParser.parse_rooms,
-	}
-
 static func parse(contents):
 	var parsed = {}
+	var section_parsers = {
+		"prelude": RoomParser.parse_prelude,
+		"legend": RoomParser.parse_legend,
+		"rooms": RoomParser.parse_rooms,
+	}
 
 	# force a similar prelude header
 	contents = "=======\nPRELUDE\n=======\n\n" + contents
@@ -97,7 +96,6 @@ static func parse_room(parsed, shape_lines, raw_meta):
 	return room
 
 static func parse_rooms(parsed, chunks):
-	Debug.pr("room - chunks", chunks)
 	var rooms = []
 	for i in len(chunks):
 		if i % 2 == 1:

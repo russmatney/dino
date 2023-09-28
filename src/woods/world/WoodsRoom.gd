@@ -2,7 +2,50 @@
 extends Node2D
 class_name WoodsRoom
 
+## vars, data ##################################################################
+
+# TODO consider 'START'/'END'
 enum t {NORM, LONG, CLIMB, FALL}
+
+var rect
+var room_def
+
+## room parse ##################################################################
+
+static var parsed_room_defs = {}
+
+static func parse_room_defs():
+	# if parsed_room_defs != null and len(parsed_room_defs) > 0:
+	# 	Debug.warn("skipping parsed_room_defs parse")
+	# 	return parsed_room_defs
+
+	var path = "res://src/woods/world/rooms.txt"
+	var file = FileAccess.open(path, FileAccess.READ)
+	var contents = file.get_as_text()
+
+	parsed_room_defs = RoomParser.parse(contents)
+	return parsed_room_defs
+
+# TODO room for opts with start/end support
+static func room_for_type(type):
+	var rooms_by_type = {}
+	parse_room_defs()
+	for room in parsed_room_defs.rooms:
+		var rms = Util.get_(rooms_by_type, room.room_type, [])
+		rms.append(room)
+		rooms_by_type[room.room_type] = rms
+
+	var type_s
+	match type:
+		# TODO move 'NORM' to 'SQUARE'
+		t.NORM: type_s = "SQUARE"
+		t.CLIMB: type_s = "CLIMB"
+		t.FALL: type_s = "FALL"
+		t.LONG: type_s = "LONG"
+
+	return Util.rand_of(rooms_by_type[type_s])
+
+## room_opts ##################################################################
 
 static func room_opts(last_room, last_opts=null, overrides=null):
 	if last_opts == null:
@@ -46,12 +89,11 @@ static func room_opts(last_room, last_opts=null, overrides=null):
 
 	return {position=pos, size=size, type=type, color=color}
 
-var rect
-
 static func create_room(opts) -> WoodsRoom:
 	Debug.pr("Creating room", opts)
 
 	var room_base_dim = Util.get_(opts, "room_base_dim", 256)
+	var type = Util.get_(opts, "type", t.NORM)
 
 	var room = WoodsRoom.new()
 	room.position = Util.get_(opts, "position", Vector2.ZERO)
@@ -63,5 +105,9 @@ static func create_room(opts) -> WoodsRoom:
 
 	room.rect = rec
 	room.add_child(rec)
+
+	var def = room_for_type(type)
+	room.room_def = def
+	Debug.pr(room.room_def.room_type)
 
 	return room
