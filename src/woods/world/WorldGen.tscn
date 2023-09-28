@@ -9,100 +9,116 @@
 
 [node name="WorldGen" type="Node2D"]
 script = ExtResource("1_wf82b")
-room_count = 6
+room_count = 7
 
 [node name="Rooms" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="@Node2D@316047" type="Node2D" parent="Rooms"]
+[node name="@Node2D@326382" type="Node2D" parent="Rooms"]
 script = ExtResource("2_a50g1")
 
-[node name="@ColorRect@316046" type="ColorRect" parent="Rooms/@Node2D@316047"]
+[node name="@ColorRect@326381" type="ColorRect" parent="Rooms/@Node2D@326382"]
 offset_right = 256.0
 offset_bottom = 256.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@316047" instance=ExtResource("3_864a5")]
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326382" instance=ExtResource("3_864a5")]
 scale = Vector2(2, 2)
 tile_set = ExtResource("4_ee2mt")
 format = 2
 layer_0/tile_data = PackedInt32Array(458759, 196608, 4, 458758, 131072, 4, 458757, 131072, 4, 458756, 131072, 4, 458755, 131072, 4, 458754, 131072, 4, 458753, 131072, 4, 458752, 327680, 4, 393216, 262144, 2, 327680, 262144, 2, 262144, 262144, 2, 196608, 262144, 2, 131072, 262144, 2, 65536, 262144, 2, 7, 196608, 4, 6, 131072, 4, 5, 131072, 4, 4, 131072, 4, 3, 131072, 4, 2, 131072, 4, 1, 131072, 4, 0, 327680, 1)
 script = ExtResource("5_lpwf6")
 
-[node name="@Node2D@316049" type="Node2D" parent="Rooms"]
+[node name="@Node2D@326384" type="Node2D" parent="Rooms"]
 position = Vector2(256, 0)
 script = ExtResource("2_a50g1")
 
-[node name="@ColorRect@316048" type="ColorRect" parent="Rooms/@Node2D@316049"]
-offset_right = 256.0
-offset_bottom = 256.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
-
-[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@316049" instance=ExtResource("3_864a5")]
-scale = Vector2(2, 2)
-tile_set = ExtResource("4_ee2mt")
-format = 2
-layer_0/tile_data = PackedInt32Array(458759, 196608, 4, 458758, 131072, 4, 458757, 131072, 4, 458756, 131072, 4, 458755, 131072, 4, 458754, 131072, 4, 458753, 131072, 4, 458752, 65536, 4, 7, 196608, 4, 6, 131072, 4, 5, 131072, 4, 4, 131072, 4, 3, 131072, 4, 2, 131072, 4, 1, 131072, 4, 0, 65536, 4)
-script = ExtResource("5_lpwf6")
-
-[node name="@Node2D@316051" type="Node2D" parent="Rooms"]
-position = Vector2(512, -256)
-script = ExtResource("2_a50g1")
-
-[node name="@ColorRect@316050" type="ColorRect" parent="Rooms/@Node2D@316051"]
-offset_right = 256.0
-offset_bottom = 512.0
-color = Color(0.498039, 1, 0.831373, 1)
-
-[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@316051" instance=ExtResource("3_864a5")]
-scale = Vector2(2, 2)
-tile_set = ExtResource("4_ee2mt")
-format = 2
-layer_0/tile_data = PackedInt32Array(983047, 524288, 4, 983046, 131072, 4, 983045, 131072, 4, 983044, 131072, 4, 983043, 131072, 4, 983042, 131072, 4, 983041, 131072, 4, 983040, 65536, 4, 917511, 262144, 2, 851975, 262144, 2, 786439, 262144, 2, 720903, 262144, 2, 655367, 262144, 2, 589831, 262144, 2, 524295, 262144, 2, 524288, 262144, 3, 458759, 262144, 1, 458752, 262144, 2, 393216, 262144, 2, 327680, 262144, 2, 262144, 262144, 2, 196608, 262144, 2, 131072, 262144, 2, 65536, 262144, 2, 7, 196608, 4, 6, 131072, 4, 5, 131072, 4, 4, 131072, 4, 3, 131072, 4, 2, 131072, 4, 1, 131072, 4, 0, 327680, 1)
-script = ExtResource("5_lpwf6")
-
-[node name="@Node2D@316053" type="Node2D" parent="Rooms"]
-position = Vector2(768, -512)
-script = ExtResource("2_a50g1")
-
-[node name="@ColorRect@316052" type="ColorRect" parent="Rooms/@Node2D@316053"]
-offset_right = 256.0
-offset_bottom = 512.0
-color = Color(0.498039, 1, 0.831373, 1)
-
-[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@316053" instance=ExtResource("3_864a5")]
-scale = Vector2(2, 2)
-tile_set = ExtResource("4_ee2mt")
-format = 2
-layer_0/tile_data = PackedInt32Array(983047, 524288, 4, 983046, 131072, 4, 983045, 131072, 4, 983044, 131072, 4, 983043, 131072, 4, 983042, 131072, 4, 983041, 131072, 4, 983040, 65536, 4, 917511, 262144, 2, 851975, 262144, 2, 786439, 262144, 2, 720903, 262144, 2, 655367, 262144, 2, 589831, 262144, 2, 524295, 262144, 2, 524288, 262144, 3, 458759, 262144, 1, 458752, 262144, 2, 393216, 262144, 2, 327680, 262144, 2, 262144, 262144, 2, 196608, 262144, 2, 131072, 262144, 2, 65536, 262144, 2, 7, 196608, 4, 6, 131072, 4, 5, 131072, 4, 4, 131072, 4, 3, 131072, 4, 2, 131072, 4, 1, 131072, 4, 0, 327680, 1)
-script = ExtResource("5_lpwf6")
-
-[node name="@Node2D@316055" type="Node2D" parent="Rooms"]
-position = Vector2(1024, -512)
-script = ExtResource("2_a50g1")
-
-[node name="@ColorRect@316054" type="ColorRect" parent="Rooms/@Node2D@316055"]
+[node name="@ColorRect@326383" type="ColorRect" parent="Rooms/@Node2D@326384"]
 offset_right = 512.0
 offset_bottom = 256.0
 color = Color(1, 0, 1, 1)
 
-[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@316055" instance=ExtResource("3_864a5")]
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326384" instance=ExtResource("3_864a5")]
+scale = Vector2(2, 2)
+tile_set = ExtResource("4_ee2mt")
+format = 2
+layer_0/tile_data = PackedInt32Array(458767, 196608, 4, 458766, 131072, 4, 458765, 393216, 4, 458764, 131072, 3, 458763, 131072, 3, 458762, 131072, 3, 458761, 131072, 3, 458760, 131072, 3, 458759, 131072, 3, 458758, 131072, 3, 458757, 131072, 3, 458756, 131072, 3, 458755, 131072, 3, 458754, 458752, 4, 458753, 131072, 4, 458752, 65536, 4, 393229, 196608, 1, 393228, 131072, 1, 393227, 131072, 1, 393226, 131072, 1, 393225, 131072, 1, 393224, 131072, 1, 393223, 131072, 1, 393222, 131072, 1, 393221, 131072, 1, 393220, 131072, 1, 393219, 131072, 1, 393218, 65536, 1, 65549, 196608, 3, 65548, 131072, 3, 65547, 131072, 3, 65546, 131072, 3, 65545, 131072, 3, 65544, 131072, 3, 65543, 131072, 3, 65542, 131072, 3, 65541, 131072, 3, 65540, 131072, 3, 65539, 131072, 3, 65538, 65536, 3, 15, 196608, 4, 14, 131072, 4, 13, 393216, 1, 12, 131072, 1, 11, 131072, 1, 10, 131072, 1, 9, 131072, 1, 8, 131072, 1, 7, 131072, 1, 6, 131072, 1, 5, 131072, 1, 4, 131072, 1, 3, 131072, 1, 2, 458752, 1, 1, 131072, 4, 0, 65536, 4)
+script = ExtResource("5_lpwf6")
+
+[node name="@Node2D@326386" type="Node2D" parent="Rooms"]
+position = Vector2(768, 0)
+script = ExtResource("2_a50g1")
+
+[node name="@ColorRect@326385" type="ColorRect" parent="Rooms/@Node2D@326386"]
+offset_right = 512.0
+offset_bottom = 256.0
+color = Color(1, 0, 1, 1)
+
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326386" instance=ExtResource("3_864a5")]
 scale = Vector2(2, 2)
 tile_set = ExtResource("4_ee2mt")
 format = 2
 layer_0/tile_data = PackedInt32Array(458767, 196608, 4, 458766, 131072, 4, 458765, 131072, 4, 458764, 131072, 4, 458763, 131072, 4, 458762, 131072, 4, 458761, 131072, 4, 458760, 131072, 4, 458759, 131072, 4, 458758, 131072, 4, 458757, 131072, 4, 458756, 131072, 4, 458755, 131072, 4, 458754, 131072, 4, 458753, 131072, 4, 458752, 65536, 4, 15, 196608, 4, 14, 131072, 4, 13, 131072, 4, 12, 131072, 4, 11, 131072, 4, 10, 131072, 4, 9, 131072, 4, 8, 131072, 4, 7, 131072, 4, 6, 131072, 4, 5, 131072, 4, 4, 131072, 4, 3, 131072, 4, 2, 131072, 4, 1, 131072, 4, 0, 65536, 4)
 script = ExtResource("5_lpwf6")
 
-[node name="@Node2D@316057" type="Node2D" parent="Rooms"]
-position = Vector2(1536, -512)
+[node name="@Node2D@326388" type="Node2D" parent="Rooms"]
+position = Vector2(1280, 0)
 script = ExtResource("2_a50g1")
 
-[node name="@ColorRect@316056" type="ColorRect" parent="Rooms/@Node2D@316057"]
+[node name="@ColorRect@326387" type="ColorRect" parent="Rooms/@Node2D@326388"]
 offset_right = 256.0
 offset_bottom = 256.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@316057" instance=ExtResource("3_864a5")]
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326388" instance=ExtResource("3_864a5")]
+scale = Vector2(2, 2)
+tile_set = ExtResource("4_ee2mt")
+format = 2
+layer_0/tile_data = PackedInt32Array(458759, 196608, 4, 458758, 131072, 4, 458757, 131072, 4, 458756, 131072, 4, 458755, 131072, 4, 458754, 131072, 4, 458753, 131072, 4, 458752, 65536, 4, 327685, 196608, 4, 327684, 131072, 4, 327683, 131072, 4, 327682, 131072, 4, 327681, 65536, 4, 7, 196608, 4, 6, 131072, 4, 5, 131072, 4, 4, 131072, 4, 3, 131072, 4, 2, 131072, 4, 1, 131072, 4, 0, 65536, 4)
+script = ExtResource("5_lpwf6")
+
+[node name="@Node2D@326390" type="Node2D" parent="Rooms"]
+position = Vector2(1536, 0)
+script = ExtResource("2_a50g1")
+
+[node name="@ColorRect@326389" type="ColorRect" parent="Rooms/@Node2D@326390"]
+offset_right = 256.0
+offset_bottom = 512.0
+color = Color(0.862745, 0.0784314, 0.235294, 1)
+
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326390" instance=ExtResource("3_864a5")]
+scale = Vector2(2, 2)
+tile_set = ExtResource("4_ee2mt")
+format = 2
+layer_0/tile_data = PackedInt32Array(983047, 196608, 3, 983046, 131072, 3, 983045, 131072, 3, 983044, 131072, 3, 983043, 131072, 3, 983042, 131072, 3, 983041, 131072, 3, 983040, 65536, 3, 917511, 196608, 1, 917510, 131072, 1, 917509, 131072, 1, 917508, 131072, 1, 917507, 131072, 1, 917506, 131072, 1, 917505, 393216, 3, 917504, 65536, 2, 851969, 196608, 2, 851968, 65536, 2, 786433, 196608, 2, 786432, 65536, 2, 720897, 196608, 2, 720896, 65536, 2, 655361, 196608, 2, 655360, 65536, 2, 589825, 196608, 2, 589824, 65536, 2, 524295, 196608, 3, 524294, 65536, 3, 524289, 196608, 2, 524288, 65536, 2, 458759, 196608, 2, 458758, 65536, 2, 458753, 196608, 1, 458752, 65536, 1, 393223, 196608, 2, 393222, 65536, 2, 327687, 196608, 2, 327686, 65536, 2, 262151, 196608, 2, 262150, 65536, 2, 196615, 196608, 2, 196614, 65536, 2, 131079, 196608, 2, 131078, 65536, 2, 65543, 196608, 2, 65542, 458752, 2, 65541, 131072, 3, 65540, 131072, 3, 65539, 131072, 3, 65538, 131072, 3, 65537, 131072, 3, 65536, 65536, 3, 7, 196608, 1, 6, 131072, 1, 5, 131072, 1, 4, 131072, 1, 3, 131072, 1, 2, 131072, 1, 1, 131072, 1, 0, 65536, 1)
+script = ExtResource("5_lpwf6")
+
+[node name="@Node2D@326392" type="Node2D" parent="Rooms"]
+position = Vector2(1792, 256)
+script = ExtResource("2_a50g1")
+
+[node name="@ColorRect@326391" type="ColorRect" parent="Rooms/@Node2D@326392"]
+offset_right = 512.0
+offset_bottom = 256.0
+color = Color(1, 0, 1, 1)
+
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326392" instance=ExtResource("3_864a5")]
+scale = Vector2(2, 2)
+tile_set = ExtResource("4_ee2mt")
+format = 2
+layer_0/tile_data = PackedInt32Array(458767, 196608, 4, 458766, 131072, 4, 458765, 393216, 4, 458764, 131072, 3, 458763, 131072, 3, 458762, 131072, 3, 458761, 131072, 3, 458760, 131072, 3, 458759, 131072, 3, 458758, 131072, 3, 458757, 131072, 3, 458756, 131072, 3, 458755, 131072, 3, 458754, 458752, 4, 458753, 131072, 4, 458752, 65536, 4, 393229, 196608, 1, 393228, 131072, 1, 393227, 131072, 1, 393226, 131072, 1, 393225, 131072, 1, 393224, 131072, 1, 393223, 131072, 1, 393222, 131072, 1, 393221, 131072, 1, 393220, 131072, 1, 393219, 131072, 1, 393218, 65536, 1, 65549, 196608, 3, 65548, 131072, 3, 65547, 131072, 3, 65546, 131072, 3, 65545, 131072, 3, 65544, 131072, 3, 65543, 131072, 3, 65542, 131072, 3, 65541, 131072, 3, 65540, 131072, 3, 65539, 131072, 3, 65538, 65536, 3, 15, 196608, 4, 14, 131072, 4, 13, 393216, 1, 12, 131072, 1, 11, 131072, 1, 10, 131072, 1, 9, 131072, 1, 8, 131072, 1, 7, 131072, 1, 6, 131072, 1, 5, 131072, 1, 4, 131072, 1, 3, 131072, 1, 2, 458752, 1, 1, 131072, 4, 0, 65536, 4)
+script = ExtResource("5_lpwf6")
+
+[node name="@Node2D@326394" type="Node2D" parent="Rooms"]
+position = Vector2(2304, 256)
+script = ExtResource("2_a50g1")
+
+[node name="@ColorRect@326393" type="ColorRect" parent="Rooms/@Node2D@326394"]
+offset_right = 256.0
+offset_bottom = 256.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="CaveTiles16" type="TileMap" parent="Rooms/@Node2D@326394" instance=ExtResource("3_864a5")]
 scale = Vector2(2, 2)
 tile_set = ExtResource("4_ee2mt")
 format = 2
