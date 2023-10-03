@@ -9,13 +9,13 @@ func before_all():
 		await Hood.hud_ready
 
 func test_hud_loads_initial_state():
-	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 3)
-	assert_eq(Hood.hud.last_puzzle_update.dots_total, 4)
+	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 4)
+	assert_eq(Hood.hud.last_puzzle_update.dots_total, 5)
 
 func test_hud_receives_updates():
 	watch_signals(Hotel)
 	# assumes this is valid for the first puzzle in the game
 	game.puzzle_node.move(Vector2.RIGHT)
 
-	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 2)
-	assert_eq(Hood.hud.last_puzzle_update.dots_total, 4)
+	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 3)
+	assert_eq(Hood.hud.last_puzzle_update.dots_total, 5)
