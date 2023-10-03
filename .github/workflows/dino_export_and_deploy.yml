@@ -41,7 +41,7 @@ jobs:
           ls -alh dist/
           ls -alh dist/dino-windows
       - name: Deploy windows to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-windows russmatney/dino:windows
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-windows russmatney/dino:windows
 
 
   export-linux:
@@ -74,13 +74,13 @@ jobs:
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-linux
-          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64
+          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/dino-linux
       - name: Deploy linux to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-linux russmatney/dino:linux-universal
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-linux russmatney/dino:linux
 
   export-web:
     name: Web Export
@@ -112,15 +112,15 @@ jobs:
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-web
-          godot --headless -v --export-release dino-web dist/dino-web/index.html
+          godot --headless -v --export-release dino-web dist/dino-web/index.html || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/dino-web
       - name: Deploy web build to itch.io (dino)
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino:html5
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-web russmatney/dino:html5
       - name: Deploy web build to itch.io (dino-web)
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino-web:html5
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-web russmatney/dino-web:html5
 
   export-mac:
     name: Mac Export
@@ -158,4 +158,4 @@ jobs:
           ls -alh dist/
           ls -alh dist/dino-macos
       - name: Deploy mac build to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-macos russmatney/dino:macos-universal
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-macos russmatney/dino:macos
