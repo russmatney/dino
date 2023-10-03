@@ -13,7 +13,7 @@
   "log_level": 1,
   "opacity": 100,
   "should_exit": true,
-  "should_exit_on_success": false,
+  "should_exit_on_success": true,
   "should_maximize": false,
   "compact_mode": false,
   "suffix": "_test.gd",
