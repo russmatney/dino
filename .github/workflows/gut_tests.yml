@@ -29,7 +29,7 @@ jobs:
         unzip Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64.zip
         mv Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64 /usr/local/bin/godot
         godot --quiet --editor --headless -s addons/core/initial_import.gd
-        godot --editor --headless --quit
+        godot --editor --headless --quit || exit 0
 
     - name: Run tests
       shell: bash

@@ -9,5 +9,4 @@ func _process(delta):
 
 	if delay > max_delay:
 		push_warning("Initial import complete, exiting")
-		# OS.set_exit_code(0)
-		quit()
+		quit(0)
