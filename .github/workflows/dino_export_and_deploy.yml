@@ -32,14 +32,9 @@ jobs:
         run: |
           mkdir -v -p dist/dino-windows
           godot --headless -v --export-release dino-windows dist/dino-windows/$EXPORT_NAME.exe || exit 0
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: windows
-          path: dist/dino-windows
-
       - name: Deploy windows to itch.io
-        run: butler push ./dist/dino-windows russmatney/dino:windows
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push ./dist/dino-windows russmatney/dino:windows
+
 
   export-linux:
     name: Linux Export
@@ -67,14 +62,8 @@ jobs:
         run: |
           mkdir -v -p dist/dino-linux
           godot --headless -v --export-release dino-linux dist/dino-linux/$EXPORT_NAME.x86_64 || exit 0
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: linux
-          path: dist/dino-linux
-
       - name: Deploy linux to itch.io
-        run: butler push ./dist/dino-linux russmatney/dino:linux-universal
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push ./dist/dino-linux russmatney/dino:linux-universal
 
   export-web:
     name: Web Export
@@ -102,25 +91,10 @@ jobs:
         run: |
           mkdir -v -p dist/dino-web
           godot --headless -v --export-release dino-web dist/dino-web/index.html || exit 0
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: web
-          path: dist/dino-web
-
       - name: Deploy web build to itch.io (dino)
-        run: butler push ./dist/dino-web russmatney/dino:html5
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push ./dist/dino-web russmatney/dino:html5
       - name: Deploy web build to itch.io (dino-web)
-        run: butler push ./dist/dino-web russmatney/dino-web:html5
-
-      # - name: Install rsync 📚
-      #   run: |
-      #     apt-get update && apt-get install -y rsync
-      # - name: Deploy to GitHub Pages 🚀
-      #   uses: JamesIves/github-pages-deploy-action@releases/v4
-      #   with:
-      #     branch: gh-pages # The branch the action should deploy to.
-      #     folder: dist/dino-web # The folder the action should deploy.
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push ./dist/dino-web russmatney/dino-web:html5
 
   export-mac:
     name: Mac Export
@@ -148,10 +122,5 @@ jobs:
         run: |
           mkdir -v -p dist/dino-macos
           godot --headless -v --export-release dino-macos dist/dino-macos/$EXPORT_NAME.dmg || exit 0
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: mac
-          path: dist/dino-macos
       - name: Deploy mac build to itch.io
-        run: butler push ./dist/dino-macos russmatney/dino:macos-universal
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push ./dist/dino-macos russmatney/dino:macos-universal
