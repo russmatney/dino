@@ -33,4 +33,4 @@ jobs:
 
     - name: Run tests
       shell: bash
-      run: godot --headless --path . -d -s addons/gut/gut_cmdln.gd -gexit
+      run: godot --headless --path . --debug --script addons/gut/gut_cmdln.gd -gexit
