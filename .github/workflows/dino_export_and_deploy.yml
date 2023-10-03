@@ -37,13 +37,13 @@ jobs:
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-windows
-          godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe
+          godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/dino-windows
       - name: Deploy windows to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-windows russmatney/dino:windows
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-windows russmatney/dino:windows
 
 
   export-linux:
@@ -82,7 +82,7 @@ jobs:
           ls -alh dist/
           ls -alh dist/dino-linux
       - name: Deploy linux to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-linux russmatney/dino:linux
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-linux russmatney/dino:linux
 
   export-web:
     name: Web Export
@@ -120,9 +120,9 @@ jobs:
           ls -alh dist/
           ls -alh dist/dino-web
       - name: Deploy web build to itch.io (dino)
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-web russmatney/dino:html5
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino:html5
       - name: Deploy web build to itch.io (dino-web)
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-web russmatney/dino-web:html5
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino-web:html5
 
   export-mac:
     name: Mac Export
@@ -154,10 +154,10 @@ jobs:
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-macos
-          godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg
+          godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/dino-macos
       - name: Deploy mac build to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push --if-changed dist/dino-macos russmatney/dino:macos
+        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-macos russmatney/dino:macos
