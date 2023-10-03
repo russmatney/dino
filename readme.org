@@ -1,5 +1,9 @@
 #+title: dino
 
+<a href="https://github.com/russmatney/dino/actions/workflows/gut_tests.yml">
+      <img src="https://github.com/russmatney/dino/actions/workflows/gut_tests.yml/badge.svg" alt="Workflow status badge" loading="lazy" height="20">
+</a>
+
 --
 
 NOTE: games that use the ActionHint (unfortunately most of them) will not work
