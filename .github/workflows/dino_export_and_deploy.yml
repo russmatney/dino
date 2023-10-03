@@ -1,5 +1,5 @@
 name: Godot Export and Itch Deploy
-on: [ push ]
+# on: [ push ]
 
 env:
   GODOT_VERSION: 4.1.1
