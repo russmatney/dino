@@ -1,0 +1,131 @@
+name: "godot-ci export"
+on: push
+
+env:
+  GODOT_VERSION: 4.1.1
+  EXPORT_NAME: dino
+  PROJECT_PATH: .
+
+jobs:
+  environment: Godot Dev Env
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.1.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Windows Build
+        run: |
+          mkdir -v -p dist/dino-windows
+          cd $PROJECT_PATH
+          godot -v --export "Windows Desktop" ../dist/dino-windows/$EXPORT_NAME.exe
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows
+          path: dist/dino-windows
+
+      - name: Deploy windows to itch.io
+        run: butler push ./dist/dino-windows russmatney/dino:windows
+
+  export-linux:
+    name: Linux Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.1.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Linux Build
+        run: |
+          mkdir -v -p dist/dino-linux
+          cd $PROJECT_PATH
+          godot -v --export "Linux/X11" ../dist/dino-linux/$EXPORT_NAME.x86_64
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: linux
+          path: dist/dino-linux
+
+      - name: Deploy linux to itch.io
+        run: butler push ./dist/dino-linux russmatney/dino:linux-universal
+
+  export-web:
+    name: Web Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.1.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Web Build
+        run: |
+          mkdir -v -p dist/dino-web
+          cd $PROJECT_PATH
+          godot -v --export "HTML5" ../dist/dino-web/index.html
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: web
+          path: dist/dino-web
+
+      - name: Deploy web build to itch.io (dino)
+        run: butler push ./dist/dino-web russmatney/dino:html5
+      - name: Deploy web build to itch.io (dino-web)
+        run: butler push ./dist/dino-web russmatney/dino-web:html5
+
+      # - name: Install rsync 📚
+      #   run: |
+      #     apt-get update && apt-get install -y rsync
+      # - name: Deploy to GitHub Pages 🚀
+      #   uses: JamesIves/github-pages-deploy-action@releases/v4
+      #   with:
+      #     branch: gh-pages # The branch the action should deploy to.
+      #     folder: dist/dino-web # The folder the action should deploy.
+
+  export-mac:
+    name: Mac Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.1.1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/templates
+          mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Mac Build
+        run: |
+          mkdir -v -p dist/dino-macos
+          cd $PROJECT_PATH
+          godot -v --export "Mac OSX" ../dist/dino-macos/$EXPORT_NAME.dmg
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: mac
+          path: dist/dino-macos
+      - name: Deploy mac build to itch.io
+        run: butler push ./dist/dino-macos russmatney/dino:macos-universal
