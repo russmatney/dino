@@ -26,11 +26,16 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Initial Godot import
+        shell: bash
+        run: |
+          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --editor --headless --quit || exit 0
       - name: Windows Build
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-windows
-          godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe || exit 0
+          godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe
       - name: Sanity check
         run: |
           ls -alh dist/
@@ -60,15 +65,20 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Initial Godot import
+        shell: bash
+        run: |
+          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --editor --headless --quit || exit 0
       - name: Linux Build
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-linux
-          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0
+          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64
       - name: Sanity check
         run: |
           ls -alh dist/
-          ls -alh dist/dino-windows
+          ls -alh dist/dino-linux
       - name: Deploy linux to itch.io
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-linux russmatney/dino:linux-universal
 
@@ -93,15 +103,20 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Initial Godot import
+        shell: bash
+        run: |
+          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --editor --headless --quit || exit 0
       - name: Web Build
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-web
-          godot --headless -v --export-release dino-web dist/dino-web/index.html || exit 0
+          godot --headless -v --export-release dino-web dist/dino-web/index.html
       - name: Sanity check
         run: |
           ls -alh dist/
-          ls -alh dist/dino-windows
+          ls -alh dist/dino-web
       - name: Deploy web build to itch.io (dino)
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino:html5
       - name: Deploy web build to itch.io (dino-web)
@@ -128,14 +143,19 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
+      - name: Initial Godot import
+        shell: bash
+        run: |
+          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --editor --headless --quit || exit 0
       - name: Mac Build
         # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-macos
-          godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg || exit 0
+          godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg
       - name: Sanity check
         run: |
           ls -alh dist/
-          ls -alh dist/dino-windows
+          ls -alh dist/dino-macos
       - name: Deploy mac build to itch.io
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-macos russmatney/dino:macos-universal
