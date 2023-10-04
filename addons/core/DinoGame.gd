@@ -27,7 +27,6 @@ func _enter_tree():
 			break
 
 func _ready():
-	Debug.pr("dino game ready", self, game_entity)
 	if game_entity != null:
 		main_menu_scene = game_entity.get_main_menu()
 		icon_texture = game_entity.get_icon_texture()

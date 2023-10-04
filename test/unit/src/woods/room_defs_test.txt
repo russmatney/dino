@@ -1,0 +1,37 @@
+title WoodsRooms
+
+=======
+LEGEND
+=======
+
+. = Empty
+p = Player
+x = Tile
+
+=======
+ROOMS
+=======
+
+room_type START
+
+xxx
+xp.
+xxx
+
+room_type END
+
+xxx
+..x
+xxx
+
+room_type SQUARE
+
+xxx
+.p.
+xxx
+
+room_type LONG
+
+xxxxxx
+......
+xxxxxx

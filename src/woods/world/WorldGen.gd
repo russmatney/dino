@@ -76,6 +76,7 @@ func create_room(opts=null):
 		room.set_owner(self)
 		room.rect.set_owner(self)
 		room.tilemap.set_owner(self))
+	room.name = "Room_%s" % room_idx
 	rooms_node.add_child(room)
 
 	return {room=room, opts=opts}

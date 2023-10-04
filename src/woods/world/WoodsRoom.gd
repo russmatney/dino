@@ -14,21 +14,21 @@ var tilemap
 
 static var parsed_room_defs = {}
 
-static func parse_room_defs():
+static func parse_room_defs(opts={}):
 	# if parsed_room_defs != null and len(parsed_room_defs) > 0:
 	# 	Debug.warn("skipping parsed_room_defs parse")
 	# 	return parsed_room_defs
 
-	var path = "res://src/woods/world/rooms.txt"
+	var path = Util.get_(opts, "room_defs_path", "res://src/woods/world/rooms.txt")
 	var file = FileAccess.open(path, FileAccess.READ)
 	var contents = file.get_as_text()
 
 	parsed_room_defs = RoomParser.parse(contents)
 	return parsed_room_defs
 
-static func room_for_type(type):
+static func room_for_type(type, opts={}):
 	var rooms_by_type = {}
-	parse_room_defs()
+	parse_room_defs(opts)
 	for room in parsed_room_defs.rooms:
 		var rms = Util.get_(rooms_by_type, room.room_type, [])
 		rms.append(room)
@@ -102,12 +102,13 @@ static func create_room(opts) -> WoodsRoom:
 
 	# position should apply to room, not the rect
 	var rec = ColorRect.new()
+	rec.name = "ColorRect"
 	rec.size = Util.get_(opts, "size", Vector2.ONE * room_base_dim)
 	rec.color = Util.get_(opts, "color", Color.PERU)
 
 	room.rect = rec
 
-	var def = room_for_type(type)
+	var def = room_for_type(type, opts)
 	room.room_def = def
 
 	room.tilemap = tmap_scene.instantiate()
