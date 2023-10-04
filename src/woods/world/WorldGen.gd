@@ -51,18 +51,16 @@ func generate():
 	# first room
 	var last = create_room({type=WoodsRoom.t.START})
 	var last_room = last["room"]
-	var last_opts = last["opts"].duplicate(true)
 
 	# most rooms
 	for _i in range(room_count - 2):
-		var next_room_opts = WoodsRoom.room_opts(last_room, last_opts)
+		var next_room_opts = WoodsRoom.next_room_opts(last_room)
 		last = create_room(next_room_opts)
 		last_room = last["room"]
-		last_opts = last["opts"].duplicate(true)
 
 	# last room
-	var end_opts = {type=WoodsRoom.t.END}
-	create_room(WoodsRoom.room_opts(last_room, last_opts, end_opts))
+	var opts = {type=WoodsRoom.t.END}
+	create_room(WoodsRoom.next_room_opts(last_room, opts))
 
 ## create_room ######################################################################
 

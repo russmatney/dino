@@ -35,3 +35,21 @@ room_type LONG
 xxxxxx
 ......
 xxxxxx
+
+room_type FALL
+
+xxx
+..x
+x.x
+x.x
+x..
+xxx
+
+room_type CLIMB
+
+xxx
+x..
+x.x
+x.x
+..x
+xxx

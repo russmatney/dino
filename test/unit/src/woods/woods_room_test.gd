@@ -45,6 +45,24 @@ room_type LONG
 xxxxxx
 ......
 xxxxxx
+
+room_type FALL
+
+xxx
+..x
+x.x
+x.x
+x..
+xxx
+
+room_type CLIMB
+
+xxx
+x..
+x.x
+x.x
+..x
+xxx
 "
 
 var room_defs_path = "res://test/unit/src/woods/room_defs_test.txt"
@@ -55,12 +73,13 @@ func before_all():
 	var file = FileAccess.open(room_defs_path, FileAccess.WRITE)
 	file.store_string(room_defs_txt)
 
-## create room ###########################################################
+## create_room ###########################################################
 
 func test_create_room_empty_dict():
 	var room = WoodsRoom.create_room({room_defs_path=room_defs_path})
 
 	assert_eq(room.position, Vector2.ZERO)
+	assert_eq(room.type, WoodsRoom.t.SQUARE)
 	assert_eq(room.room_def.room_type, "SQUARE")
 	assert_eq_set(room.tilemap.get_used_cells(0), [
 		Vector2i(0, 2),
@@ -78,6 +97,7 @@ func test_create_room_start():
 		})
 
 	assert_eq(room.position, Vector2.ZERO)
+	assert_eq(room.type, WoodsRoom.t.START)
 	assert_eq(room.room_def.room_type, "START")
 	assert_eq_set(room.tilemap.get_used_cells(0), [
 		Vector2i(0, 2),
@@ -96,6 +116,7 @@ func test_create_room_end():
 		})
 
 	assert_eq(room.position, Vector2.ZERO)
+	assert_eq(room.type, WoodsRoom.t.END)
 	assert_eq(room.room_def.room_type, "END")
 	assert_eq_set(room.tilemap.get_used_cells(0), [
 		Vector2i(0, 2),
@@ -114,6 +135,7 @@ func test_create_room_square():
 		})
 
 	assert_eq(room.position, Vector2.ZERO)
+	assert_eq(room.type, WoodsRoom.t.SQUARE)
 	assert_eq(room.room_def.room_type, "SQUARE")
 	assert_eq_set(room.tilemap.get_used_cells(0), [
 		Vector2i(0, 2),
@@ -131,6 +153,7 @@ func test_create_room_long():
 		})
 
 	assert_eq(room.position, Vector2.ZERO)
+	assert_eq(room.type, WoodsRoom.t.LONG)
 	assert_eq(room.room_def.room_type, "LONG")
 	assert_eq_set(room.tilemap.get_used_cells(0), [
 		Vector2i(0, 0),
@@ -146,3 +169,132 @@ func test_create_room_long():
 		Vector2i(4, 2),
 		Vector2i(5, 2),
 		])
+
+## next_room_opts ###########################################################
+
+func test_next_room_opts_after_start_or_square():
+	var dim = 16
+	var tests = [
+		{type=WoodsRoom.t.SQUARE, expected={
+			size=Vector2(dim, dim),
+			position=Vector2(dim, 0)}},
+		{type=WoodsRoom.t.LONG, expected={
+			size=Vector2(dim*2, dim),
+			position=Vector2(dim, 0)}},
+		{type=WoodsRoom.t.CLIMB, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, -1*dim)}},
+		{type=WoodsRoom.t.FALL, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, 0)}}
+		]
+	var start_room = WoodsRoom.create_room({
+		type=WoodsRoom.t.START,
+		room_defs_path=room_defs_path,
+		room_base_dim=dim,
+		})
+
+	var square_room = WoodsRoom.create_room({
+		type=WoodsRoom.t.SQUARE,
+		room_defs_path=room_defs_path,
+		room_base_dim=dim,
+		})
+
+	assert_gt(len(tests), 0)
+	for test in tests:
+		var opts = WoodsRoom.next_room_opts(start_room, {
+			type=test.type, room_base_dim=dim})
+		assert_eq(opts.size, test.expected.size)
+		assert_eq(opts.position, test.expected.position)
+
+		var opts_sq = WoodsRoom.next_room_opts(square_room, {
+			type=test.type, room_base_dim=dim})
+		assert_eq(opts_sq.size, test.expected.size)
+		assert_eq(opts_sq.position, test.expected.position)
+
+func test_next_room_opts_after_long():
+	var dim = 16
+	var tests = [
+		{type=WoodsRoom.t.SQUARE, expected={
+			size=Vector2(dim, dim),
+			position=Vector2(dim, 0)}},
+		{type=WoodsRoom.t.LONG, expected={
+			size=Vector2(dim*2, dim),
+			position=Vector2(dim, 0)}},
+		{type=WoodsRoom.t.CLIMB, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, -1*dim)}},
+		{type=WoodsRoom.t.FALL, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, 0)}}
+		]
+	var long_room = WoodsRoom.create_room({
+		type=WoodsRoom.t.LONG,
+		room_defs_path=room_defs_path,
+		room_base_dim=dim,
+		})
+
+	assert_gt(len(tests), 0)
+	for test in tests:
+		var opts = WoodsRoom.next_room_opts(long_room, {
+			type=test.type, room_base_dim=dim})
+		assert_eq(opts.size, test.expected.size)
+		assert_eq(opts.position, test.expected.position)
+
+func test_next_room_opts_after_fall():
+	var dim = 16
+	var tests = [
+		{type=WoodsRoom.t.SQUARE, expected={
+			size=Vector2(dim, dim),
+			position=Vector2(dim, dim)}},
+		{type=WoodsRoom.t.LONG, expected={
+			size=Vector2(dim*2, dim),
+			position=Vector2(dim, dim)}},
+		{type=WoodsRoom.t.CLIMB, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, -1*dim)}},
+		{type=WoodsRoom.t.FALL, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, dim)}}
+		]
+	var fall_room = WoodsRoom.create_room({
+		type=WoodsRoom.t.FALL,
+		room_defs_path=room_defs_path,
+		room_base_dim=dim,
+		})
+
+	assert_gt(len(tests), 0)
+	for test in tests:
+		var opts = WoodsRoom.next_room_opts(fall_room, {
+			type=test.type, room_base_dim=dim})
+		assert_eq(opts.size, test.expected.size)
+		assert_eq(opts.position, test.expected.position)
+
+func test_next_room_opts_after_climb():
+	var dim = 16
+	var tests = [
+		{type=WoodsRoom.t.SQUARE, expected={
+			size=Vector2(dim, dim),
+			position=Vector2(dim, 0)}},
+		{type=WoodsRoom.t.LONG, expected={
+			size=Vector2(dim*2, dim),
+			position=Vector2(dim, 0)}},
+		{type=WoodsRoom.t.CLIMB, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, -2*dim)}},
+		{type=WoodsRoom.t.FALL, expected={
+			size=Vector2(dim, dim*2),
+			position=Vector2(dim, 0)}}
+		]
+	var climb_room = WoodsRoom.create_room({
+		type=WoodsRoom.t.CLIMB,
+		room_defs_path=room_defs_path,
+		room_base_dim=dim,
+		})
+
+	assert_gt(len(tests), 0)
+	for test in tests:
+		var opts = WoodsRoom.next_room_opts(climb_room, {
+			type=test.type, room_base_dim=dim})
+		assert_eq(opts.size, test.expected.size)
+		assert_eq(opts.position, test.expected.position)

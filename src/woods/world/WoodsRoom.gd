@@ -7,6 +7,7 @@ class_name WoodsRoom
 enum t {START, END, SQUARE, LONG, CLIMB, FALL}
 
 var rect
+var type
 var room_def
 var tilemap
 
@@ -26,7 +27,7 @@ static func parse_room_defs(opts={}):
 	parsed_room_defs = RoomParser.parse(contents)
 	return parsed_room_defs
 
-static func room_for_type(type, opts={}):
+static func room_for_type(typ, opts={}):
 	var rooms_by_type = {}
 	parse_room_defs(opts)
 	for room in parsed_room_defs.rooms:
@@ -35,7 +36,7 @@ static func room_for_type(type, opts={}):
 		rooms_by_type[room.room_type] = rms
 
 	var type_s
-	match type:
+	match typ:
 		t.START: type_s = "START"
 		t.END: type_s = "END"
 		t.SQUARE: type_s = "SQUARE"
@@ -47,26 +48,24 @@ static func room_for_type(type, opts={}):
 
 ## room_opts ##################################################################
 
-static func room_opts(last_room, last_opts=null, overrides=null):
-	if last_opts == null:
-		last_opts = {}
-	if overrides == null:
-		overrides = {}
+static func next_room_opts(last_room, opts=null):
+	if opts == null:
+		opts = {}
 
-	var type = overrides.get("type")
-	if type == null:
-		type = Util.rand_of([t.SQUARE, t.LONG, t.CLIMB, t.FALL])
+	var typ = opts.get("type")
+	if typ == null:
+		typ = Util.rand_of([t.SQUARE, t.LONG, t.CLIMB, t.FALL])
 
-	var room_base_dim = overrides.get("room_base_dim", 256)
+	var room_base_dim = opts.get("room_base_dim", 256)
 
 	var size
-	match type:
+	match typ:
 		t.SQUARE, t.START, t.END: size = Vector2.ONE * room_base_dim
 		t.CLIMB, t.FALL: size = Vector2.ONE * room_base_dim * Vector2(1, 2)
 		t.LONG: size = Vector2.ONE * room_base_dim * Vector2(2, 1)
 
 	var pos
-	match type:
+	match typ:
 		t.START, t.END, t.SQUARE, t.FALL, t.LONG: pos = Vector2(
 			last_room.position.x + last_room.rect.size.x, last_room.position.y
 			)
@@ -74,20 +73,20 @@ static func room_opts(last_room, last_opts=null, overrides=null):
 			last_room.position.x + last_room.rect.size.x,
 			last_room.position.y + last_room.rect.size.y - size.y,
 			)
-	if last_opts and "type" in last_opts:
-		match [last_opts.type, type]:
+	if last_room != null and "type" in last_room:
+		match [last_room.type, typ]:
 			[t.CLIMB, t.CLIMB]: pos.y -= room_base_dim
 			[_, t.CLIMB]: pass
 			[t.FALL, _]: pos.y += room_base_dim
 
 	var color
-	match type:
+	match typ:
 		t.SQUARE, t.START, t.END: color = Color.PERU
 		t.LONG: color = Color.FUCHSIA
 		t.FALL: color = Color.CRIMSON
 		t.CLIMB: color = Color.AQUAMARINE
 
-	return {position=pos, size=size, type=type, color=color}
+	return {position=pos, size=size, type=typ, color=color}
 
 static var tmap_scene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
@@ -95,10 +94,11 @@ static func create_room(opts) -> WoodsRoom:
 	Debug.pr("Creating room", opts)
 
 	var room_base_dim = Util.get_(opts, "room_base_dim", 256)
-	var type = Util.get_(opts, "type", t.SQUARE)
+	var typ = Util.get_(opts, "type", t.SQUARE)
 
 	var room = WoodsRoom.new()
 	room.position = Util.get_(opts, "position", Vector2.ZERO)
+	room.type = typ
 
 	# position should apply to room, not the rect
 	var rec = ColorRect.new()
@@ -108,7 +108,7 @@ static func create_room(opts) -> WoodsRoom:
 
 	room.rect = rec
 
-	var def = room_for_type(type, opts)
+	var def = room_for_type(typ, opts)
 	room.room_def = def
 
 	room.tilemap = tmap_scene.instantiate()
