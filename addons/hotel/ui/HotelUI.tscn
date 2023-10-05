@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwms8iyspi7la"]
 
 [ext_resource type="Script" path="res://addons/hotel/ui/HotelUI.gd" id="1_5mpd8"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_t7d3y"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_t7d3y"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_kmkd5"]
 
 [node name="HotelUI" type="Control" groups=["hotel_singletons"]]
@@ -78,12 +78,16 @@ unique_name_in_owner = true
 layout_mode = 2
 flat = true
 alignment = 2
-item_count = 2
+item_count = 4
 selected = 0
 popup/item_0/text = "hotel_singletons"
 popup/item_0/id = 0
-popup/item_1/text = "Clear"
+popup/item_1/text = "player"
 popup/item_1/id = 1
+popup/item_2/text = "pofs"
+popup/item_2/id = 2
+popup/item_3/text = "Clear"
+popup/item_3/id = 3
 
 [node name="HasGroupToggle" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
