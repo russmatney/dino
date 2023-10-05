@@ -1,11 +1,18 @@
 name: Godot Export and Itch Deploy
-# on: [ push ]
+
+on:
+  workflow_run:
+    workflows: [GUT Tests]
+    types:
+      - completed
+    branches: [main]
 
 env:
   GODOT_VERSION: 4.1.1
 
 jobs:
   export-windows:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Windows Export
     runs-on: ubuntu-20.04
     container:
@@ -42,11 +49,13 @@ jobs:
         run: |
           ls -alh dist/
           ls -alh dist/dino-windows
+          stat dist/dino-windows/wrong-file.exe
       - name: Deploy windows to itch.io
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-windows russmatney/dino:windows
 
 
   export-linux:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
@@ -81,10 +90,12 @@ jobs:
         run: |
           ls -alh dist/
           ls -alh dist/dino-linux
+          stat dist/dino-linux/dino.x86_64
       - name: Deploy linux to itch.io
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-linux russmatney/dino:linux
 
   export-web:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Web Export
     runs-on: ubuntu-20.04
     container:
@@ -119,12 +130,14 @@ jobs:
         run: |
           ls -alh dist/
           ls -alh dist/dino-web
+          stat dist/dino-web/index.html
       - name: Deploy web build to itch.io (dino)
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino:html5
       - name: Deploy web build to itch.io (dino-web)
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino-web:html5
 
   export-mac:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Mac Export
     runs-on: ubuntu-20.04
     container:
@@ -159,5 +172,6 @@ jobs:
         run: |
           ls -alh dist/
           ls -alh dist/dino-macos
+          stat dist/dino-macos/dino.dmg
       - name: Deploy mac build to itch.io
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-macos russmatney/dino:macos
