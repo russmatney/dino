@@ -27,5 +27,4 @@ dist.zip
 .gut_editor_config.json
 /.godot/
 
-addons/core/assets/fonts/vexed
 build/build-output/

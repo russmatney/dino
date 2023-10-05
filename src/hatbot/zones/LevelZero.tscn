@@ -224,7 +224,7 @@ metadata/_edit_lock_ = true
 [node name="font-thanks4" parent="ArtAssetCredits" instance=ExtResource("13_q2rk4")]
 position = Vector2(155, -54)
 scale = Vector2(0.5, 0.5)
-text = "VEXED"
+text = "V3X3D"
 font = ExtResource("12_cjkwf")
 
 [node name="PointLight2D2" type="PointLight2D" parent="ArtAssetCredits/font-thanks4"]

@@ -3,14 +3,8 @@
 #+name: GUT Tests
 [[https://github.com/russmatney/dino/actions/workflows/gut_tests.yml/badge.svg]]
 
---
-
-NOTE: games that use the ActionHint (unfortunately most of them) will not work
-with a shallow clone just yet, because I'm not yet including some game assets
-(third-party fonts) in the repo. I'm hopeful to implement a technical solution
-to this, like using a fallback font when the referenced one is missing.
-
---
+#+name: Dino Itch Deploy
+[[https://github.com/russmatney/dino/actions/workflows/dino_export_and_deploy.yml/badge.svg]]
 
 Dino is a monorepo/sandbox full of Godot games and addons.
 
@@ -18,11 +12,24 @@ Dino is a monorepo/sandbox full of Godot games and addons.
 #+caption: An incomplete list of rough icons
 [[images/all_icons_bg_8x.png]]
 
-You can play the release version here, [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]] tho it's likely
-out of date. I hope to get CI setup one of these days, but am usually
-prioritizing on some game jam or other.
+You can play the release version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]. I have a working
+version available on Steam as well, and will setup sharing keys in the coming
+weeks - ping me if you're interested!
 
-You can find more about Dino on my mind-garden/blog: [[https://russmatney.com/note/dino.html][russmatney.com/note/dino.html]].
+You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind-garden/blog]], or follow me on [[https://mastodon.gamedev.place/@russmatney][mastodon]], [[https://programming.dev/u/russmatney][lemmy]],
+or [[https://twitch.tv/russmatney][twitch]] for updates. You can also support me on [[https://patreon.com/russmatney][Patreon]].
+
+* NOTE: Assets must be purchased before using!
+Dino's games and addons use third-party assets that must be purchased
+before use in your own project!
+
+Fonts:
+
+- [[https://v3x3d.itch.io/arcade-cabinet][Arcade Cabinet by V3X3D]]
+- [[https://v3x3d.itch.io/enter-input][Enter Input by V3X3D]]
+
+These are available (after purchase) under the CC4 licence:
+https://creativecommons.org/licenses/by/4.0/legalcode
 
 * Games
 These (and future games) are discussed on my blog (linked above).
@@ -279,20 +286,8 @@ hosting web games. Maybe it still works?
 Deploy a project to an s3 bucket.
 
 Depends on a working and logged-in ~aws~ cli tool.
-* Assets
-Currently, a few assets are symlinked from my game-assets collection:
-
-#+begin_src sh
-ln -s ~/game-assets/fonts/vexed addons/core/assets/fonts/vexed
-#+end_src
-
-Unfortunately, this breaks some (most) of the games, because certain control
-nodes can't load when they are missing fonts.
-
-I'll look into safer handling for missing assets and brainstorm ways to include
-assets that artists prefer to keep out of open-source projects.
 * Credits
-Hopefully in sync with ~src/dino/DinoCredits.gd~.
+Hopefully this stays in sync with ~src/dino/DinoCredits.gd~.
 
 ** Music
 *** Late Night Radio
@@ -339,13 +334,22 @@ kenney rpg audio
 https://www.kenney.nl/assets/rpg-audio
 
 ** Fonts
-*** Arcade Cabinet
+*** V3X3D
+The vexed fonts are not available for free distribution until they are
+purchased! They can be purchased individually or as part of various bundles from
+V3X3D's itch page: https://v3x3d.itch.io
+
+Please also consider supporting V3X3D on patreon: https://www.patreon.com/V3X3D
+
+**** Arcade Cabinet
 by V3X3D
 https://v3x3d.itch.io/arcade-cabinet
+https://creativecommons.org/licenses/by/4.0/legalcode
 
-*** Enter Input
+**** Enter Input
 by V3X3D
 https://v3x3d.itch.io/enter-input
+https://creativecommons.org/licenses/by/4.0/legalcode
 
 *** born2bsportyv2
 by japanyoshi
