@@ -335,9 +335,9 @@ https://www.kenney.nl/assets/rpg-audio
 
 ** Fonts
 *** V3X3D
-The vexed fonts are not available for free distribution until they are
-purchased! They can be purchased individually or as part of various bundles from
-V3X3D's itch page: https://v3x3d.itch.io
+The vexed fonts are not available for distribution until they are purchased!
+They can be purchased individually or as part of various bundles from V3X3D's
+itch page: https://v3x3d.itch.io
 
 Please also consider supporting V3X3D on patreon: https://www.patreon.com/V3X3D
 
