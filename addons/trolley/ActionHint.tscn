@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://bfatjgmhlkjne"]
 
 [ext_resource type="Script" path="res://addons/trolley/ActionHint.gd" id="1_k2w1x"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_dkr3d"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_dkr3d"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="3_q3lvy"]
 [ext_resource type="RichTextEffect" uid="uid://cxd4xajdoafoh" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="3_uu0q6"]
-[ext_resource type="FontFile" uid="uid://mxcssnh2gipt" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="4_wg2uw"]
+[ext_resource type="FontFile" uid="uid://c6j24vm8je66p" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="4_wg2uw"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="4_ynxsy"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Heart.tres" id="5_qh4rj"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="7_ro6ke"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_n0xf0"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="2_6lgty"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_3awlh"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="3_3awlh"]
 [ext_resource type="Script" path="res://src/herd/menus/HerdMenuButtonList.gd" id="4_erao7"]
 
 [node name="MainMenu" type="CanvasLayer"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://idppjgt76c6l"]
 
 [ext_resource type="Script" path="res://addons/dj/TurnTable.gd" id="1_7jl3k"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_ihsvu"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_ihsvu"]
 [ext_resource type="PackedScene" uid="uid://b4qyb66xixys8" path="res://addons/dj/DJZSoundBoard.tscn" id="2_u6pk3"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_o7tfw"]
 

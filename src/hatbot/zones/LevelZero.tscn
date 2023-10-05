@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3]
+[gd_scene load_steps=25 format=3 uid="uid://cp6u64j76x4l8"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_qaiq7"]
 [ext_resource type="Shader" path="res://src/hatbot/BgBlur.gdshader" id="2_nb6de"]
@@ -9,14 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="5_f2j1h"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_ml4hm"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="6_xoy8t"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://assets/hatbot/light64px1.png" id="9_uk0fg"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="9_uk0fg"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="10_urcpa"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="11_arac5"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="12_cjkwf"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="12_cjkwf"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Coin.tscn" id="12_ma4mf"]
-[ext_resource type="FontFile" uid="uid://mxcssnh2gipt" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="13_f5ilp"]
+[ext_resource type="FontFile" uid="uid://c6j24vm8je66p" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="13_f5ilp"]
 [ext_resource type="PackedScene" uid="uid://bv8w3f0w1s18a" path="res://addons/hood/InGameText.tscn" id="13_q2rk4"]
-[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://assets/hatbot/light64px8.png" id="13_t8su5"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="13_t8su5"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="15_fr2us"]
 [ext_resource type="PackedScene" uid="uid://65i2r7duvw0r" path="res://src/hatbot/RevealOnContact.tscn" id="16_41guf"]
 
@@ -105,7 +105,7 @@ key_or_action = "jump"
 scale = Vector2(3, 3)
 texture = ExtResource("9_uk0fg")
 
-[node name="Candle" parent="FirstRoom" instance=ExtResource("10_urcpa")]
+[node name="Candle" parent="FirstRoom" groups=["metro_checkpoints"] instance=ExtResource("10_urcpa")]
 position = Vector2(128, -64)
 
 [node name="Title" type="Node2D" parent="." groups=["metro_rooms"]]
