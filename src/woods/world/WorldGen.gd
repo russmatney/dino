@@ -49,25 +49,21 @@ func generate():
 	Debug.pr("Generating world")
 
 	# first room
-	var last = create_room({type=WoodsRoom.t.START})
-	var last_room = last["room"]
+	var last_room = create_room({type=WoodsRoom.t.START})
 
 	# most rooms
 	for _i in range(room_count - 2):
-		var next_room_opts = WoodsRoom.next_room_opts(last_room)
-		last = create_room(next_room_opts)
-		last_room = last["room"]
+		last_room = create_room({}, last_room)
 
 	# last room
-	var opts = {type=WoodsRoom.t.END}
-	create_room(WoodsRoom.next_room_opts(last_room, opts))
+	create_room({type=WoodsRoom.t.END}, last_room)
 
 ## create_room ######################################################################
 
-func create_room(opts=null):
+func create_room(opts=null, last_room=null):
 	if opts == null:
 		opts = {}
-	var room = WoodsRoom.create_room(opts)
+	var room = WoodsRoom.create_room(opts, last_room)
 
 	room_idx += 1
 	room.ready.connect(func():
@@ -77,4 +73,4 @@ func create_room(opts=null):
 	room.name = "Room_%s" % room_idx
 	rooms_node.add_child(room)
 
-	return {room=room, opts=opts}
+	return room

@@ -90,8 +90,9 @@ static func next_room_opts(last_room, opts=null):
 
 static var tmap_scene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
-static func create_room(opts) -> WoodsRoom:
-	Debug.pr("Creating room", opts)
+static func create_room(opts={}, last_room=null) -> WoodsRoom:
+	if last_room != null:
+		opts = next_room_opts(last_room, opts)
 
 	var room_base_dim = Util.get_(opts, "room_base_dim", 256)
 	var typ = Util.get_(opts, "type", t.SQUARE)
