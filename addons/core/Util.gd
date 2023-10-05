@@ -96,6 +96,12 @@ func change_parent(child: Node, new_parent: Node):
 
 func do_change_parent(child, new_parent):
 	# TODO need to set owner as well to support creating PackedScenes
+	if not is_instance_valid(child):
+		Debug.warn("Cannot change parent, child is not valid")
+		return
+	if not is_instance_valid(new_parent):
+		Debug.warn("Cannot change parent, new_parent is not valid")
+		return
 	var old_parent = child.get_parent()
 	old_parent.remove_child(child)
 	new_parent.add_child(child)

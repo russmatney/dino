@@ -12,7 +12,7 @@
   "junit_xml_timestamp": false,
   "log_level": 1,
   "opacity": 100,
-  "post_run_script": "",
+  "post_run_script": "res://test/unit/GutPostRun.gd",
   "pre_run_script": "",
   "prefix": "",
   "selected": "",

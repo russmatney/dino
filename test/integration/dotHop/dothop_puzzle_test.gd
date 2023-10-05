@@ -7,16 +7,10 @@ func build_puzzle(puzzle):
 class TestBasicMovement:
 	extends DotHopTest
 
-	var level
-
-	func before_each():
-		level = build_puzzle(["xoot"])
+	func test_level_one_win():
+		var level = build_puzzle(["xoot"])
 		add_child(level)
 
-	func after_all():
-		level.free()
-
-	func test_level_one_win():
 		assert_eq_deep(level.state.grid[0],
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
@@ -33,7 +27,13 @@ class TestBasicMovement:
 			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
 		assert_eq(level.state.win, true)
 
+		level.free()
+
 	func test_level_one_undo():
+
+		var level = build_puzzle(["xoot"])
+		add_child(level)
+
 		assert_eq_deep(level.state.grid[0],
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
@@ -53,21 +53,17 @@ class TestBasicMovement:
 		assert_eq_deep(level.state.grid[0],
 			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
+
+		level.free()
 
 
 class TestBasicMovementTwoPlayers:
 	extends DotHopTest
 
-	var level
-
-	func before_each():
-		level = build_puzzle(["xoot", "xoot"])
+	func test_level_one_win():
+		var level = build_puzzle(["xoot", "xoot"])
 		add_child(level)
 
-	func after_all():
-		level.free()
-
-	func test_level_one_win():
 		assert_eq_deep(level.state.grid[0],
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
@@ -91,8 +87,12 @@ class TestBasicMovementTwoPlayers:
 		assert_eq_deep(level.state.grid[1],
 			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
 		assert_eq(level.state.win, true)
+		level.free()
 
 	func test_level_one_undo():
+		var level = build_puzzle(["xoot", "xoot"])
+		add_child(level)
+
 		assert_eq_deep(level.state.grid[0],
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq_deep(level.state.grid[1],
@@ -122,6 +122,7 @@ class TestBasicMovementTwoPlayers:
 		assert_eq_deep(level.state.grid[1],
 			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
 		assert_eq(level.state.win, false)
+		level.free()
 
 class TestTwoPlayerInPlaceUndoBugs:
 	extends DotHopTest

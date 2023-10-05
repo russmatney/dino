@@ -89,6 +89,7 @@ func test_create_room_empty_dict():
 		Vector2i(1, 0),
 		Vector2i(0, 0),
 		])
+	room.free()
 
 func test_create_room_start():
 	var room = WoodsRoom.create_room({
@@ -108,6 +109,7 @@ func test_create_room_start():
 		Vector2i(2, 0),
 		Vector2i(2, 2),
 		])
+	room.free()
 
 func test_create_room_end():
 	var room = WoodsRoom.create_room({
@@ -127,6 +129,7 @@ func test_create_room_end():
 		Vector2i(2, 1),
 		Vector2i(2, 2),
 		])
+	room.free()
 
 func test_create_room_square():
 	var room = WoodsRoom.create_room({
@@ -145,6 +148,7 @@ func test_create_room_square():
 		Vector2i(1, 0),
 		Vector2i(0, 0),
 		])
+	room.free()
 
 func test_create_room_long():
 	var room = WoodsRoom.create_room({
@@ -169,6 +173,7 @@ func test_create_room_long():
 		Vector2i(4, 2),
 		Vector2i(5, 2),
 		])
+	room.free()
 
 ## create_room based on last room ###########################################################
 
@@ -209,6 +214,10 @@ func test_create_room_after_start_or_square():
 		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, square_room)
 		assert_eq(room_sq.rect.size, test.expected.size)
 		assert_eq(room_sq.position, test.expected.position)
+		room.free()
+		room_sq.free()
+	start_room.free()
+	square_room.free()
 
 func test_create_room_after_long():
 	var dim = 16
@@ -237,6 +246,8 @@ func test_create_room_after_long():
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, long_room)
 		assert_eq(room.rect.size, test.expected.size)
 		assert_eq(room.position, test.expected.position)
+		room.free()
+	long_room.free()
 
 func test_create_room_after_fall():
 	var dim = 16
@@ -265,6 +276,8 @@ func test_create_room_after_fall():
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, fall_room)
 		assert_eq(room.rect.size, test.expected.size)
 		assert_eq(room.position, test.expected.position)
+		room.free()
+	fall_room.free()
 
 func test_create_room_after_climb():
 	var dim = 16
@@ -293,3 +306,5 @@ func test_create_room_after_climb():
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, climb_room)
 		assert_eq(room.rect.size, test.expected.size)
 		assert_eq(room.position, test.expected.position)
+		room.free()
+	climb_room.free()

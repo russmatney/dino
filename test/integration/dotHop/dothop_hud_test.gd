@@ -8,6 +8,9 @@ func before_all():
 	if not Hood.hud.is_node_ready():
 		await Hood.hud_ready
 
+func after_all():
+	game.free()
+
 func test_hud_loads_initial_state():
 	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 4)
 	assert_eq(Hood.hud.last_puzzle_update.dots_total, 5)

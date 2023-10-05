@@ -9,3 +9,5 @@ func test_hotel_loads_puzzle():
 
 	assert_not_null(puzzle)
 	assert_eq(puzzle.groups as Array, [DotHop.puzzle_group])
+
+	game.free()
