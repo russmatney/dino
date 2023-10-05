@@ -13,24 +13,22 @@ var tilemap
 
 ## room parse ##################################################################
 
-static var parsed_room_defs = {}
-
 static func parse_room_defs(opts={}):
-	# if parsed_room_defs != null and len(parsed_room_defs) > 0:
-	# 	Debug.warn("skipping parsed_room_defs parse")
-	# 	return parsed_room_defs
+	if "parsed_room_defs" in opts:
+		return opts.parsed_room_defs
+
+	Debug.warn("parsing room defs")
 
 	var path = Util.get_(opts, "room_defs_path", "res://src/woods/world/rooms.txt")
 	var file = FileAccess.open(path, FileAccess.READ)
 	var contents = file.get_as_text()
 
-	parsed_room_defs = RoomParser.parse(contents)
-	return parsed_room_defs
+	return RoomParser.parse(contents)
 
 static func room_for_type(typ, opts={}):
 	var rooms_by_type = {}
-	parse_room_defs(opts)
-	for room in parsed_room_defs.rooms:
+	var room_defs = parse_room_defs(opts)
+	for room in room_defs.rooms:
 		var rms = Util.get_(rooms_by_type, room.room_type, [])
 		rms.append(room)
 		rooms_by_type[room.room_type] = rms
@@ -86,9 +84,23 @@ static func next_room_opts(last_room, opts=null):
 		t.FALL: color = Color.CRIMSON
 		t.CLIMB: color = Color.AQUAMARINE
 
-	return {position=pos, size=size, type=typ, color=color}
+	opts.merge({
+		position=pos, size=size, type=typ, color=color
+		})
+	return opts
 
-static var tmap_scene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
+# TODO assign tilemap into scene, maybe fetch based on room_def
+static var fallback_tmap_scene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
+
+static func calc_tilemap_scale_factor(room: WoodsRoom, room_base_dim: int):
+	# Assumes we have square tiles
+	var tile_size = room.tilemap.tile_set.tile_size
+	# Assumes room def rows are all the same len
+	var room_def_dims = Vector2(len(room.room_def.shape), len(room.room_def.shape[0]))
+	# get shortest dimension
+	var base_dim = room_def_dims.x if room_def_dims.x < room_def_dims.y else room_def_dims.y
+	var base_tile_size = base_dim * tile_size.x
+	return room_base_dim / base_tile_size
 
 static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	if last_room != null:
@@ -112,12 +124,9 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	var def = room_for_type(typ, opts)
 	room.room_def = def
 
+	var tmap_scene = Util.get_(opts, "tilemap_scene", fallback_tmap_scene)
 	room.tilemap = tmap_scene.instantiate()
-
-	# TODO calculate tilemap scaling properly
-	# var tile_size = room.tilemap
-	# var tile_dims = len(def.shape)
-	room.tilemap.scale = Vector2.ONE * 2
+	room.tilemap.scale = Vector2.ONE * calc_tilemap_scale_factor(room, room_base_dim)
 
 	var tile_cells = []
 	for y in len(def.shape):

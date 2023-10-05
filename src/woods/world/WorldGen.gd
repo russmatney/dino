@@ -10,6 +10,10 @@ extends Node2D
 
 @export var room_base_dim = 512
 @export var room_count = 5
+@export_file var room_defs_path = "res://src/woods/world/rooms.txt"
+var parsed_room_defs
+
+@export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
 @onready var rooms_node = $%Rooms
 @onready var player = $%Player
@@ -44,6 +48,7 @@ func generate():
 
 	# reset
 	room_idx = 0
+	parsed_room_defs = WoodsRoom.parse_room_defs({room_defs_path=room_defs_path})
 
 	# generate
 	Debug.pr("Generating world")
@@ -63,6 +68,10 @@ func generate():
 func create_room(opts=null, last_room=null):
 	if opts == null:
 		opts = {}
+	opts.merge({
+		room_base_dim=room_base_dim,
+		parsed_room_defs=parsed_room_defs,
+		tilemap_scene=tilemap_scene})
 	var room = WoodsRoom.create_room(opts, last_room)
 
 	room_idx += 1
