@@ -102,10 +102,17 @@ static func calc_tilemap_scale_factor(room: WoodsRoom, room_base_dim: int):
 	var base_tile_size = base_dim * tile_size.x
 	return room_base_dim / base_tile_size
 
+static func calc_coord_factor(room: WoodsRoom, room_base_dim: int):
+	# Assumes room def rows are all the same len
+	var room_def_dims = Vector2(len(room.room_def.shape), len(room.room_def.shape[0]))
+	# get shortest dimension
+	var base_dim = room_def_dims.x if room_def_dims.x < room_def_dims.y else room_def_dims.y
+	return room_base_dim / base_dim
+
+static var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
 static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	if last_room != null:
 		opts = next_room_opts(last_room, opts)
-
 	var room_base_dim = Util.get_(opts, "room_base_dim", 256)
 	var typ = Util.get_(opts, "type", t.SQUARE)
 
@@ -126,9 +133,12 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 
 	var tmap_scene = Util.get_(opts, "tilemap_scene", fallback_tmap_scene)
 	room.tilemap = tmap_scene.instantiate()
-	room.tilemap.scale = Vector2.ONE * calc_tilemap_scale_factor(room, room_base_dim)
+	var tilemap_scale_factor = calc_tilemap_scale_factor(room, room_base_dim)
+	room.tilemap.scale = Vector2.ONE * tilemap_scale_factor
 
 	var tile_cells = []
+	var player_cells = []
+	var leaf_cells = []
 	for y in len(def.shape):
 		var row = def.shape[y]
 		for x in len(row):
@@ -136,9 +146,24 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 			var def_cell = def.shape[y][x]
 			if def_cell != null and "Tile" in def_cell:
 				tile_cells.append(coord)
+			if def_cell != null and "Player" in def_cell:
+				player_cells.append(coord)
+			if def_cell != null and "Leaf" in def_cell:
+				leaf_cells.append(coord)
 
 	room.tilemap.set_cells_terrain_connect(0, tile_cells, 0, 0)
 	room.tilemap.force_update()
+
+	var coord_factor = calc_coord_factor(room, room_base_dim)
+	for p in player_cells:
+		var spawn_point = player_spawn_point_scene.instantiate()
+		spawn_point.position = p * coord_factor
+		room.add_child(spawn_point)
+
+	for l in leaf_cells:
+		var pos = l * coord_factor
+		Debug.pr("leaf spawn position", pos)
+		# TODO create leaf spawn point at position
 
 	room.add_child(rec)
 	room.add_child(room.tilemap)
