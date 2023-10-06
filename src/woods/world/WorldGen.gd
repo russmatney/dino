@@ -49,19 +49,48 @@ func generate():
 	# reset
 	room_idx = 0
 	parsed_room_defs = WoodsRoom.parse_room_defs({room_defs_path=room_defs_path})
+	var rooms = []
 
 	# generate
 	Debug.pr("Generating world")
 
 	# first room
 	var last_room = create_room({type=WoodsRoom.t.START})
+	rooms.append(last_room)
 
 	# most rooms
 	for _i in range(room_count - 2):
 		last_room = create_room({}, last_room)
+		rooms.append(last_room)
 
 	# last room
-	create_room({type=WoodsRoom.t.END}, last_room)
+	var room = create_room({type=WoodsRoom.t.END}, last_room)
+	rooms.append(room)
+
+	promote_tilemaps(rooms)
+
+func promote_tilemaps(rooms):
+	var tile_coords = []
+	var addl_idx = 0
+	for r in rooms:
+		var used_cells = r.tilemap.get_used_cells(0)
+
+		# adjust used_cells based on room width
+		used_cells = used_cells.map(func(coord):
+			coord.x += addl_idx
+			return coord)
+		addl_idx += len(r.room_def.shape[0])
+		Debug.pr("addl_idx", addl_idx)
+
+		tile_coords.append_array(used_cells)
+		r.remove_child(r.tilemap)
+
+	var tilemap = tilemap_scene.instantiate()
+	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+	tilemap.force_update()
+
+	rooms_node.add_child(tilemap)
+	tilemap.ready.connect(func(): tilemap.set_owner(self))
 
 ## create_room ######################################################################
 
