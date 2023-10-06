@@ -76,7 +76,8 @@ func before_all():
 ## create_room ###########################################################
 
 func test_create_room_empty_dict():
-	var room = WoodsRoom.create_room({room_defs_path=room_defs_path})
+	var room = WoodsRoom.create_room({room_defs_path=room_defs_path,
+		filler_tile_count=0})
 
 	assert_eq(room.position, Vector2.ZERO)
 	assert_eq(room.type, WoodsRoom.t.SQUARE)
@@ -93,6 +94,7 @@ func test_create_room_empty_dict():
 
 func test_create_room_start():
 	var room = WoodsRoom.create_room({
+		filler_tile_count=0,
 		room_defs_path=room_defs_path,
 		type=WoodsRoom.t.START,
 		})
@@ -113,6 +115,7 @@ func test_create_room_start():
 
 func test_create_room_end():
 	var room = WoodsRoom.create_room({
+		filler_tile_count=0,
 		room_defs_path=room_defs_path,
 		type=WoodsRoom.t.END,
 		})
@@ -133,6 +136,7 @@ func test_create_room_end():
 
 func test_create_room_square():
 	var room = WoodsRoom.create_room({
+		filler_tile_count=0,
 		room_defs_path=room_defs_path,
 		type=WoodsRoom.t.SQUARE,
 		})
@@ -152,6 +156,7 @@ func test_create_room_square():
 
 func test_create_room_long():
 	var room = WoodsRoom.create_room({
+		filler_tile_count=0,
 		room_defs_path=room_defs_path,
 		type=WoodsRoom.t.LONG,
 		})
