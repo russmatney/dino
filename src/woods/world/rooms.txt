@@ -133,19 +133,19 @@ room_type CLIMB
 ........
 ......xx
 ......xx
-......xx
-......xx
-......xx
-......xx
-......xx
-xxxxxxxx
+.......x
+.......x
+.......x
+.......x
+.......x
+xx...xxx
 xxxxxxxx
 
 room_type FALL
 
-.......x
-.......x
-.......x
+....xxxx
+.....xxx
+......xx
 .......x
 .......x
 .......x
@@ -154,10 +154,10 @@ x......x
 x......x
 x.......
 x.......
-x.......
-x.......
-x.......
-x.......
+xxx.....
+xxxx....
+xxxxx...
+xxxxxx..
 xxxxxxxx
 
 room_type FALL

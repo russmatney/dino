@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://c052pqd071auc"]
+[gd_scene load_steps=2 format=3 uid="uid://bn6lhbid1dt8i"]
+
+[ext_resource type="Script" path="res://src/dino/SpawnPoint.gd" id="1_ujspe"]
 
 [node name="SpawnPoint" type="Marker2D" groups=["spawn_points"]]
+script = ExtResource("1_ujspe")

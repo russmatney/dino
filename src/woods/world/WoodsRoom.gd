@@ -110,6 +110,9 @@ static func calc_coord_factor(room: WoodsRoom, room_base_dim: int):
 	return room_base_dim / base_dim
 
 static var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
+# TODO maybe want a first class Spawn addon for spawn points + restarts
+static var spawn_point_scene = preload("res://src/Dino/SpawnPoint.tscn")
+static var leaf_scene = preload("res://src/woods/entities/Leaf.tscn")
 static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	if last_room != null:
 		opts = next_room_opts(last_room, opts)
@@ -187,9 +190,11 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 		room.add_child(spawn_point)
 
 	for l in leaf_cells:
-		var pos = l * coord_factor
-		Debug.pr("leaf spawn position", pos)
-		# TODO create leaf spawn point at position
+		var spawn_point = spawn_point_scene.instantiate()
+		spawn_point.position = l * coord_factor
+		spawn_point.spawn_f = func():
+			return leaf_scene.instantiate()
+		room.add_child(spawn_point)
 
 	room.add_child(rec)
 	room.add_child(room.tilemap)
