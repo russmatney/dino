@@ -125,6 +125,7 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	rec.name = "ColorRect"
 	rec.size = Util.get_(opts, "size", Vector2.ONE * room_base_dim)
 	rec.color = Util.get_(opts, "color", Color.PERU)
+	rec.visible = opts.get("show_color_rect", false)
 
 	room.rect = rec
 
