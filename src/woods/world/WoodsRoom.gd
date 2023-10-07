@@ -140,7 +140,7 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	var player_cells = []
 	var leaf_cells = []
 	var filler_tile_count = opts.get("filler_tile_count", 50)
-	var filler_above = opts.get("filler_above", true)
+	var filler_above = opts.get("filler_above", false)
 	for y in len(def.shape):
 		var first_row = y == 0
 		var last_row = y == len(def.shape) - 1
