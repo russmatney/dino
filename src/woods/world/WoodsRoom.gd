@@ -10,6 +10,7 @@ var rect
 var type
 var room_def
 var tilemap
+var spawn_points = []
 
 ## room parse ##################################################################
 
@@ -112,7 +113,9 @@ static func calc_coord_factor(room: WoodsRoom, room_base_dim: int):
 static var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
 # TODO maybe want a first class Spawn addon for spawn points + restarts
 static var spawn_point_scene = preload("res://src/Dino/SpawnPoint.tscn")
+
 static var leaf_scene = preload("res://src/woods/entities/Leaf.tscn")
+
 static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	if last_room != null:
 		opts = next_room_opts(last_room, opts)
@@ -195,8 +198,18 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 		spawn_point.spawn_f = func():
 			return leaf_scene.instantiate()
 		room.add_child(spawn_point)
+		room.spawn_points.append(spawn_point)
 
 	room.add_child(rec)
 	room.add_child(room.tilemap)
 
 	return room
+
+###################################################################################
+
+func spawn():
+	Debug.pr("Spawning via spawn_f in woods_room")
+	for ch in get_children():
+		if "spawn_f" in ch:
+			Debug.pr("found child with spawn_f", ch)
+			ch.spawn_f.call()

@@ -69,6 +69,7 @@ func generate():
 
 	promote_tilemaps(rooms)
 
+
 func promote_tilemaps(rooms):
 	var cell_positions = []
 	for r in rooms:
@@ -102,9 +103,11 @@ func create_room(opts=null, last_room=null):
 
 	room_idx += 1
 	room.ready.connect(func():
+		room.spawn()
 		room.set_owner(self)
 		room.get_children().map(func(ch): ch.set_owner(self)))
 	room.name = "Room_%s" % room_idx
+
 	rooms_node.add_child(room)
 
 	return room

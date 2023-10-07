@@ -1,6 +1,7 @@
 @tool
 extends WoodsEntity
 
+
 ## vars ###########################################################
 
 @onready var anim_green = $Green
@@ -20,8 +21,9 @@ var anim
 func _ready():
 	hide_anims()
 	anim = Util.rand_of(all_anims())
+	Debug.pr("leaf rendering anim", anim)
 	super._ready()
-	animate_entry()
+	render()
 
 func hide_anims():
 	all_anims().map(func(a): a.set_visible(false))
@@ -50,12 +52,12 @@ func animate_entry():
 	entry_tween.parallel().tween_property(self, "modulate:a", 1.0, entry_t)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
-func animate_exit(t):
+func animate_exit(time):
 	position = current_position()
 	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE * 0.5, t)\
+	tween.tween_property(self, "scale", Vector2.ONE * 0.5, time)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "position", position - Vector2.ONE * 10, t)\
+	tween.parallel().tween_property(self, "position", position - Vector2.ONE * 10, time)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "modulate:a", 0.0, t)\
+	tween.parallel().tween_property(self, "modulate:a", 0.0, time)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

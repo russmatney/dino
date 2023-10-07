@@ -19,11 +19,12 @@ var color_rect: ColorRect
 ## ready #########################################################
 
 func _ready():
-	Debug.pr("Woods Entity", self)
+	Util.set_optional_nodes(self, {
+		label="DebugLabel",
+		color_rect="ColorRect",
+		})
 
-	# TODO helper to read/do this via data
-	label = $%DebugLabel
-	color_rect = $%ColorRect
+	Debug.pr("Woods Entity", self)
 
 ## debug and render #########################################################
 

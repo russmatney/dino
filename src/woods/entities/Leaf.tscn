@@ -1,6 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://dhma0vanfafyo"]
 
-[ext_resource type="Script" path="res://src/woods/entities/Entity.gd" id="1_dfj0h"]
+[ext_resource type="Script" path="res://src/woods/entities/LeafEntity.gd" id="1_1akrk"]
 [ext_resource type="Texture2D" uid="uid://d23a8ljxjvq0x" path="res://src/dotHop/themes/fall/leaf_green.png" id="2_k8fmg"]
 [ext_resource type="Texture2D" uid="uid://f6v5qu873jn1" path="res://src/dotHop/themes/fall/leaf_greenred.png" id="3_lsb4r"]
 [ext_resource type="Texture2D" uid="uid://b46m768vfaimt" path="res://src/dotHop/themes/fall/leaf_purple.png" id="4_fblw5"]
@@ -172,13 +172,13 @@ animations = [{
 }]
 
 [node name="Leaf" type="Node2D"]
-script = ExtResource("1_dfj0h")
+script = ExtResource("1_1akrk")
 
 [node name="Green" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_m1tvd")
 animation = &"twist"
+frame_progress = 0.802637
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -190,9 +190,11 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="GreenRed" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_774n1")
 animation = &"twist"
+autoplay = "twist"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -208,6 +210,7 @@ visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_23crv")
 animation = &"twist"
+frame_progress = 0.953198
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

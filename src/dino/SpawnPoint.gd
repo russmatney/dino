@@ -1,3 +1,4 @@
+@tool
 extends Marker2D
 
 @export var active = true
@@ -5,6 +6,8 @@ extends Marker2D
 
 var last_visited = 0
 var visit_count = 0
+
+var spawn_f: Callable
 
 func _enter_tree():
 	Hotel.book(self)
