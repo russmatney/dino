@@ -140,6 +140,7 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	var player_cells = []
 	var leaf_cells = []
 	var filler_tile_count = opts.get("filler_tile_count", 50)
+	var filler_above = opts.get("filler_above", true)
 	for y in len(def.shape):
 		var first_row = y == 0
 		var last_row = y == len(def.shape) - 1
@@ -150,7 +151,7 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 			var def_cell = def.shape[y][x]
 			if def_cell != null and "Tile" in def_cell:
 				tile_cells.append(coord)
-				if first_row:
+				if filler_above and first_row:
 					for i in filler_tile_count:
 						tile_cells.append(Vector2(x, y - i))
 				if last_row:
@@ -164,13 +165,15 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	if room.type == t.START:
 		for i in filler_tile_count:
 			for j in filler_tile_count:
-				tile_cells.append(Vector2(-i, -j))
+				if filler_above:
+					tile_cells.append(Vector2(-i, -j))
 				tile_cells.append(Vector2(-i, j))
 	if room.type == t.END:
 		var w = len(def.shape[0])
 		for i in filler_tile_count:
 			for j in filler_tile_count:
-				tile_cells.append(Vector2(i+w, -j))
+				if filler_above:
+					tile_cells.append(Vector2(i+w, -j))
 				tile_cells.append(Vector2(i+w, j))
 
 	room.tilemap.set_cells_terrain_connect(0, tile_cells, 0, 0)

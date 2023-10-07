@@ -70,32 +70,19 @@ func generate():
 	promote_tilemaps(rooms)
 
 func promote_tilemaps(rooms):
-	var tile_coords = []
-	var addl_idx = 0
+	var cell_positions = []
 	for r in rooms:
 		var used_cells = r.tilemap.get_used_cells(0)
-
-		# TODO need same logic as used for positioning rooms in WoodsRoom
-		var y_offset = 0
-		if r.position.y != 0:
-			y_offset = int(room_base_dim / r.position.y) * len(r.room_def.shape)
-		Debug.pr("r.position", r.position.y, room_base_dim)
-		Debug.pr("r.room_def.shape len", len(r.room_def.shape))
-		Debug.pr("y_offset", y_offset)
-
-		# adjust used_cells based on room width
-		used_cells = used_cells.map(func(coord):
-			coord.x += addl_idx
-			coord.y += y_offset
-			return coord)
-		addl_idx += len(r.room_def.shape[0])
-		Debug.pr("addl_idx", addl_idx)
-
-		tile_coords.append_array(used_cells)
+		var poses = used_cells.map(func(coord):
+			return r.tilemap.map_to_local(coord) + (r.position / r.tilemap.scale) + r.tilemap.position)
+		cell_positions.append_array(poses)
 		r.remove_child(r.tilemap)
 
 	var tilemap = tilemap_scene.instantiate()
+	# NOTE assumes rooms all have the same scale
 	tilemap.scale = rooms[0].tilemap.scale
+	var tile_coords = cell_positions.map(func(pos):
+		return tilemap.local_to_map(pos))
 	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
 	tilemap.force_update()
 
