@@ -10,14 +10,8 @@ func _ready():
 
 	main_menu_scene = load("res://src/snake/menus/SnakeMainMenu.tscn")
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/snake")
-
 func register():
 	register_menus()
-
-func should_spawn_player(_scene):
-	return false
 
 func start(_opts={}):
 	current_level_idx = -1

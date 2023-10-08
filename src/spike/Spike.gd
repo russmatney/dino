@@ -1,12 +1,6 @@
 @tool
 extends DinoGame
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/spike")
-
-func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/spike/menus")
-
 ## player ##########################################################
 
 var player_scene = preload("res://src/spike/player/Player.tscn")

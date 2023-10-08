@@ -14,9 +14,6 @@ const zones = [
 ###########################################################
 # register
 
-func manages_scene(scene):
-	return scene.scene_file_path in zones
-
 var first_zone
 
 func register():

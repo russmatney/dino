@@ -20,15 +20,7 @@ func on_player_died(_player):
 func register():
 	register_menus()
 
-func manages_scene(scene):
-	var level_paths = levels.map(func(l): return l.resource_path)
-	if scene.scene_file_path in level_paths:
-		level_idx = level_paths.find(scene.scene_file_path)
-
-	return scene.scene_file_path.begins_with("res://src/superElevatorLevel")
-
-func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/superElevatorLevel/menus")
+# TODO manages scene used to set a level_idx here as a dev helper
 
 ## levels ####################################################################
 

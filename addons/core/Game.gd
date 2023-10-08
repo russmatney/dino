@@ -134,8 +134,8 @@ func nav_to_game_menu_or_start(game_or_entity):
 
 # TODO maybe better to let the zones respawn the player?
 func _on_new_scene_instanced(scene):
-	if current_game and current_game.manages_scene(scene):
-		if current_game.should_spawn_player(scene):
+	if current_game and current_game.game_entity.manages_scene(scene):
+		if current_game.game_entity.should_spawn_player(scene):
 			if not player and not spawning:
 				# defer to let the scene bring it's own player first
 				maybe_spawn_player.call_deferred({skip_managed_check=true})

@@ -11,13 +11,6 @@ func _ready():
 func register():
 	register_menus()
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/tower")
-
-func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/tower/menus")
-
-
 ## start game #########################################################################
 
 var levels = [

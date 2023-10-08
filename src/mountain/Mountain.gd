@@ -10,14 +10,6 @@ const zones = [
 	"res://src/mountain/zones/TheMountain.tscn"
 	]
 
-## manages #####################################################
-
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/mountain")
-
-func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/mountain/menus")
-
 ######################################################
 # player
 

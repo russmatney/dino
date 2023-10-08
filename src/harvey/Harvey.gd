@@ -18,9 +18,6 @@ func _ready():
 
 ## register ########################################################################
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/harvey")
-
 func register():
 	register_menus()
 

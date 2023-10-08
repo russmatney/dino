@@ -19,12 +19,6 @@ var next_level_menu
 
 var player_scene = preload("res://src/herd/player/Player.tscn")
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/herd")
-
-func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/herd/menus")
-
 func register():
 	register_menus()
 

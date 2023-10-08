@@ -9,9 +9,6 @@ func _ready():
 func register():
 	register_menus()
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/gunner")
-
 ## start game #########################################################################
 
 var default_game_path = "res://src/gunner/player/PlayerGym.tscn"

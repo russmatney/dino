@@ -16,9 +16,6 @@ const demoland_zones = [
 
 ## register #########################################################
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/demoland")
-
 var first_zone
 
 func register():

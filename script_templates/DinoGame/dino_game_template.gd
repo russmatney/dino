@@ -4,15 +4,6 @@ extends DinoGame
 # NOTE needs update re: DinoGameEntity
 
 ######################################################
-# manages scene
-
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/<game>")
-
-func should_spawn_player(scene):
-	return not scene.scene_file_path.begins_with("res://src/<game>/menus")
-
-######################################################
 # player
 
 var player_scene = "res://src/<game>/player/Player.tscn"

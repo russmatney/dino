@@ -66,12 +66,6 @@ func build_puzzle_node(opts:Variant) -> Node2D:
 #####################################################################
 ## Dino game spec
 
-func manages_scene(scene):
-	return scene.scene_file_path.begins_with("res://src/dotHop")
-
-func should_spawn_player(_scene):
-	return false
-
 func start(opts={}):
 	var g = load(game_scene).instantiate()
 	g.puzzle_set = opts.get("puzzle_set")

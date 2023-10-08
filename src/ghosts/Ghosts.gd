@@ -21,9 +21,6 @@ const room_scenes = [
 
 ## register ##########################################################
 
-func manages_scene(scene):
-	return scene.scene_file_path in room_scenes
-
 var first_room
 
 func register():
