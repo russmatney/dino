@@ -1,3 +1,4 @@
+@tool
 extends SSPlayer
 
 func _get_configuration_warnings():

@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://uup3qahbxmw3"]
+
+[ext_resource type="Script" path="res://src/woods/hud/WoodsHUD.gd" id="1_577cd"]
+[ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="2_cgi0b"]
+[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="3_ta4sb"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="4_i52so"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="5_clmgc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2pgx"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="WoodsHUD" type="CanvasLayer"]
+script = ExtResource("1_577cd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+
+[node name="PlayerStatus" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_cgi0b")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnemyStatusList" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_ta4sb")]
+unique_name_in_owner = true
+layout_mode = 2
+max_children = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuestStatus" parent="VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_i52so")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j2pgx")
+header_text = "The VOID is HUNGRY"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Notifications" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("5_clmgc")]
+layout_mode = 2
+size_flags_horizontal = 3
