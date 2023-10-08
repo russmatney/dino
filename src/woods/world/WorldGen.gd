@@ -102,7 +102,10 @@ func create_room(opts=null, last_room=null):
 	room_idx += 1
 	room.ready.connect(func():
 		room.set_owner(self)
-		room.get_children().map(func(ch): ch.set_owner(self)))
+		room.get_children().map(func(ch):
+			ch.set_owner(self)
+			if ch.name == "EndBox":
+				ch.get_children().map(func(c): c.set_owner(self))))
 	room.name = "Room_%s" % room_idx
 
 	rooms_node.add_child(room)

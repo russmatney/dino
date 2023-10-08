@@ -22,7 +22,6 @@ var hud
 
 func ensure_hud(hud_scene=null):
 	if hud and is_instance_valid(hud):
-		Debug.prn("HUD exists, nothing doing.")
 		return
 
 	if not hud_scene:

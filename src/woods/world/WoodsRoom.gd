@@ -11,6 +11,7 @@ var type
 var room_def
 var tilemap
 var spawn_points = []
+var end_box
 
 ##########################################################################
 ## static ##################################################################
@@ -137,6 +138,7 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	rec.visible = opts.get("show_color_rect", false)
 
 	room.rect = rec
+	room.add_child(rec)
 
 	var def = room_for_type(typ, opts)
 	room.room_def = def
@@ -188,6 +190,7 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 
 	room.tilemap.set_cells_terrain_connect(0, tile_cells, 0, 0)
 	room.tilemap.force_update()
+	room.add_child(room.tilemap)
 
 	var coord_factor = calc_coord_factor(room, room_base_dim)
 	for p in player_cells:
@@ -203,8 +206,25 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 		room.spawn_points.append(spawn_point)
 		room.add_child(spawn_point)
 
-	room.add_child(rec)
-	room.add_child(room.tilemap)
+	# add detection for end-reached
+	if room.type == t.END:
+		var shape = RectangleShape2D.new()
+		shape.size = rec.size
+		var coll = CollisionShape2D.new()
+		coll.name = "CollisionShape2D"
+		coll.set_shape(shape)
+		coll.position = rec.position + (rec.size / 2.0)
+
+		var box = Area2D.new()
+		box.add_child(coll)
+		coll.set_owner(box)
+		box.name = "EndBox"
+		box.set_collision_layer_value(1, false)
+		box.set_collision_mask_value(1, false)
+		box.set_collision_mask_value(2, true) # 2 for player
+
+		room.end_box = box
+		room.add_child(box)
 
 	return room
 
@@ -215,6 +235,16 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 
 func _ready():
 	spawn({only_if=func(sp): return len(sp.get_children()) == 0})
+	if end_box == null:
+		end_box = get_node_or_null("EndBox")
+	if end_box != null:
+		Util._connect(end_box.body_entered, _on_end_entered)
+
+func _on_end_entered(body):
+	Debug.pr("entered?", body)
+	if body.is_in_group("player"):
+		if body.has_method("entered_end_box"):
+			body.entered_end_box()
 
 ## spawn ##################################################################
 

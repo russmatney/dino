@@ -23,3 +23,8 @@ func _ready():
 func collect(entity: WoodsEntity, opts={}):
 	match entity.type:
 		WoodsEntity.t.Leaf: Debug.pr("player collected leaf")
+
+## reach end ##################################################################
+
+func entered_end_box():
+	Debug.pr("Player entered end box!")
