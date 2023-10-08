@@ -4,13 +4,6 @@ extends Node
 
 var game_entity: DinoGameEntity
 
-# TODO delete all these (and pull from game_entity)
-var icon_texture
-var main_menu_scene
-var pause_menu_scene
-var win_menu_scene
-var death_menu_scene
-
 func _enter_tree():
 	# find and assign the game entity
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
@@ -23,12 +16,6 @@ func _enter_tree():
 			# NOTE this breaks when entities share a singleton...?
 			game_entity = e
 			break
-
-func _ready():
-	if game_entity != null:
-		main_menu_scene = game_entity.get_main_menu()
-		icon_texture = game_entity.get_icon_texture()
-
 
 func get_player_scene():
 	# defaults to returning a 'player_scene' var

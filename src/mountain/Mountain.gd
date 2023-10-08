@@ -1,11 +1,6 @@
 @tool
 extends DinoGame
 
-func _ready():
-	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
-	main_menu_scene = load("res://src/mountain/menus/MainMenu.tscn")
-	icon_texture = load("res://assets/gameicons/The_Mountain_icon_sheet.png")
-
 const zones = [
 	"res://src/mountain/zones/TheMountain.tscn"
 	]

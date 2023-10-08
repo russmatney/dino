@@ -1,16 +1,6 @@
 @tool
 extends DinoGame
 
-func _ready():
-	pause_menu_scene = load("res://src/tower/menus/TowerPauseMenu.tscn")
-	main_menu_scene = load("res://src/tower/menus/TowerMainMenu.tscn")
-
-
-## register #########################################################################
-
-func register():
-	register_menus()
-
 ## start game #########################################################################
 
 var levels = [

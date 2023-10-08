@@ -1,14 +1,6 @@
 @tool
 extends DinoGame
 
-func _ready():
-	pause_menu_scene = load("res://src/gunner/menus/GunnerPauseMenu.tscn")
-
-## register #########################################################################
-
-func register():
-	register_menus()
-
 ## start game #########################################################################
 
 var default_game_path = "res://src/gunner/player/PlayerGym.tscn"

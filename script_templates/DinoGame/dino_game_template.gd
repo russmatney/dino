@@ -15,9 +15,8 @@ func on_player_spawned(_player):
 # register
 
 # register any static zones/scenes with Hotel
-# register any menus with Navi
 func register():
-	main_menu_scene = "res://src/<game>/menus/MainMenu.tscn"
+	pass
 
 ######################################################
 # start

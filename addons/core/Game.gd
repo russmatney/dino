@@ -102,16 +102,18 @@ func restart_game(game=null, opts=null):
 
 ## game menus ##########################################################
 
+# TODO where is this called?
 func load_main_menu(game=null):
 	if game == null:
 		game = current_game
-	if game and game.main_menu_scene != null:
+	# TODO ensure_current_game()
+	if game and game.game_entity.get_main_menu() != null:
 		# maybe we hide menus on every Navi.nav_to ?
 		Navi.hide_menus()
-		Navi.nav_to(game.main_menu_scene)
+		Navi.nav_to(game.game_entity.get_main_menu())
 		return
 
-	Debug.pr("No main_menu_scene in game or current_game, naving to fallback main menu.")
+	Debug.pr("No main_menu in game_entity, naving to fallback main menu.")
 	Navi.nav_to_main_menu()
 
 ## For a passed game, load it's main menu. If none is set, start it via restart_game
@@ -122,10 +124,10 @@ func nav_to_game_menu_or_start(game_or_entity):
 	else:
 		game = game_or_entity
 
-	if game.main_menu_scene != null:
+	if game.game_entity.get_main_menu() != null:
 		# is this hide still necessary?
 		Navi.hide_menus()
-		Navi.nav_to(game.main_menu_scene)
+		Navi.nav_to(game.game_entity.get_main_menu())
 		return
 
 	restart_game(game)

@@ -1,9 +1,6 @@
 @tool
 extends DinoGame
 
-func _ready():
-	pause_menu_scene = load("res://src/mountain/menus/PauseMenu.tscn")
-
 ###########################################################
 # zones
 

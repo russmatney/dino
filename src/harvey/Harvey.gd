@@ -8,19 +8,8 @@ var hud
 var time_up_menu
 
 func _ready():
-	main_menu_scene = load("res://src/harvey/menus/HarveyMenu.tscn")
-	pause_menu_scene = load("res://src/harvey/menus/HarveyPauseMenu.tscn")
-
 	var time_up_menu_scene = load("res://src/harvey/menus/TimeUpMenu.tscn")
 	time_up_menu = Navi.add_menu(time_up_menu_scene)
-
-	icon_texture = load("res://assets/gameicons/Harvey_icon_sheet.png")
-
-## register ########################################################################
-
-func register():
-	register_menus()
-
 
 ## start ########################################################################
 

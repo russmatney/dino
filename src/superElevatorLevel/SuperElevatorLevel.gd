@@ -15,11 +15,6 @@ func on_player_died(_player):
 		# restore player health
 		Hotel.check_in(p, {health=p.initial_health})})
 
-## register ####################################################################
-
-func register():
-	register_menus()
-
 # TODO manages scene used to set a level_idx here as a dev helper
 
 ## levels ####################################################################

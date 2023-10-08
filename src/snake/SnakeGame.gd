@@ -3,16 +3,6 @@ extends DinoGame
 
 var song_name = DJZ.S.field_stars
 
-func _ready():
-	# TODO restore music
-	# if not Engine.is_editor_hint():
-	# 	DJZ.play_song(song_name)
-
-	main_menu_scene = load("res://src/snake/menus/SnakeMainMenu.tscn")
-
-func register():
-	register_menus()
-
 func start(_opts={}):
 	current_level_idx = -1
 	load_next_level()
