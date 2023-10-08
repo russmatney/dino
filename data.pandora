@@ -680,6 +680,14 @@
 						"type": "resource",
 						"value": "res://src/woods/Woods.gd"
 					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/woods/menus/MainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/woods/menus/PauseMenu.tscn"
+					},
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/woods/player/WoodsPlayer.tscn"
