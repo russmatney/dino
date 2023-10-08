@@ -5,7 +5,7 @@ extends NaviButtonList
 var button_defs = [
 	{
 		"label": "Start Game",
-		"fn": Game.restart_game.bind(HatBot),
+		"fn": Game.restart_game,
 	},
 	{
 		label="Return to Dino Menu",

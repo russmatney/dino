@@ -8,7 +8,7 @@ var menu_scenes = [
 	},
 	{
 		label="Start HatBot",
-		fn=Game.restart_game.bind(HatBot),
+		fn=Game.restart_game,
 	},
 ]
 

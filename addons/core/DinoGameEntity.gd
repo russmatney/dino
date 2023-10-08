@@ -2,6 +2,8 @@
 class_name DinoGameEntity
 extends PandoraEntity
 
+## getters ##########################################################
+
 func get_display_name() -> String:
 	return get_string("display_name")
 
@@ -23,6 +25,11 @@ func get_death_menu() -> PackedScene:
 func get_singleton() -> Texture:
 	return get_resource("game_singleton")
 
+func get_scene_path_prefix() -> String:
+	return get_string("scene_path_prefix")
+
+## data ##########################################################
+
 func data():
 	return {
 		display_name=get_display_name(),
@@ -32,4 +39,17 @@ func data():
 		win_menu=get_win_menu(),
 		death_menu=get_death_menu(),
 		singleton=get_singleton(),
+		scene_path_prefix=get_scene_path_prefix(),
 		}
+
+## helpers ##########################################################
+
+func manages_scene(scene):
+	var prefix = get_scene_path_prefix()
+	if prefix in [null, ""]:
+		return false
+	return scene.scene_file_path.begins_with(prefix)
+
+func should_spawn_player(scene):
+	# TODO probably need an opt-in/out from this default
+	return not scene.scene_file_path.contains("menus")

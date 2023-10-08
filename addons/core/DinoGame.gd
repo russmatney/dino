@@ -12,8 +12,6 @@ var win_menu_scene
 var death_menu_scene
 
 func _enter_tree():
-	Game.register_game(self)
-
 	# find and assign the game entity
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
 	var ents = Pandora.get_all_entities(Pandora.get_category(ent._category_id))

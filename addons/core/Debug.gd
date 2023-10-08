@@ -122,6 +122,8 @@ var max_array_size = 20
 # TODO refactor into opts dict
 # TODO refactor into pluggable pretty printer
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
+	if not is_instance_valid(msg):
+		return str(msg)
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
 			prn("[DEBUG]: truncating large array. total:", len(msg))

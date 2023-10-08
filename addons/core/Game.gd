@@ -1,6 +1,27 @@
 @tool
 extends Node
 
+func all_game_entities():
+	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
+	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+
+func game_for_entity(ent: DinoGameEntity):
+	var singleton = ent.get_singleton()
+	if singleton == null:
+		Debug.warn("No singleton found for game_entity", ent)
+		return
+
+	var game = singleton.new()
+	# TODO remove? this is also set in dinogame.enter_tree
+	game.game_entity = ent
+	var game_name = singleton.resource_path.get_basename().get_file()
+	if Engine.has_singleton(game_name):
+		Debug.pr("Found engine singleton", game_name)
+		return Engine.get_singleton(game_name)
+	Debug.pr("Registering game singleton", game_name, game)
+	Engine.register_singleton(game_name, game)
+	return game
+
 ## ready ##########################################################
 
 func _ready():
@@ -15,26 +36,21 @@ func _ready():
 
 ## games ##########################################################
 
-var games = []
-
-func register_game(g):
-	if not g in games:
-		games.append(g)
-		# Debug.pr("Registered game: ", g)
-
-func game_for_scene(scene):
-	var gs = games.filter(func(g): return g and g.manages_scene(scene))
+func game_entity_for_scene(scene):
+	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(scene))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
-		Debug.warn("No game found to manage scene", scene, scene.scene_file_path, "games:", games)
+		Debug.warn("No game found to manage scene", scene, scene.scene_file_path)
 	else:
 		Debug.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
 
 func set_current_game_for_scene(scene):
-	var g = game_for_scene(scene)
-	if g:
-		register_current_game(g)
+	var ent = game_entity_for_scene(scene)
+	if ent:
+		var game = game_for_entity(ent)
+		if game:
+			register_current_game(game)
 
 func ensure_current_game():
 	if not current_game:
@@ -44,6 +60,8 @@ func ensure_current_game():
 			if current_scene.scene_file_path.begins_with("res://src/dino"):
 				return
 			set_current_game_for_scene(current_scene)
+		# else:
+		# 	Debug.pr("No current_scene", current_scene)
 
 	if not current_game:
 		Debug.warn("Failed to ensure current_game!")
@@ -52,27 +70,30 @@ func ensure_current_game():
 
 
 var current_game: DinoGame
+var current_game_entity: DinoGameEntity
 
 var is_managed: bool = false
 
 func register_current_game(game):
 	Debug.pr("Registering current game", game)
 	current_game = game
+	current_game_entity = game.game_entity
 	game.register()
 
+# TODO does this sometimes restart the wrong game?
 func restart_game(game=null, opts=null):
 	remove_player()
 	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
 	is_managed = true
 
+	# TODO support a passed game_entity and/or game_ent_id
 	if game:
 		register_current_game(game)
-	elif not current_game and len(games) == 1:
-		register_current_game(games[0])
 
 	if not current_game:
-		Debug.err("No current_game set")
+		ensure_current_game()
+	if not current_game:
 		return
 	if opts == null:
 		opts = {}
@@ -97,23 +118,7 @@ func load_main_menu(game=null):
 func nav_to_game_menu_or_start(game_or_entity):
 	var game
 	if game_or_entity is DinoGameEntity:
-		var singleton = game_or_entity.get_singleton()
-		if singleton == null:
-			Debug.warn("No singleton found for game_entity", game_or_entity)
-			return
-
-		# TODO some other way to do this lookup without registering all the games?
-		for g in games:
-			if g.get_script().resource_path == singleton.resource_path:
-				game = g
-				# kind of an awkward required assignment
-				game.game_entity = game_or_entity
-				break
-		if game == null:
-			game = singleton.new()
-			var game_name = singleton.resource_path.get_basename().get_file()
-			Debug.pr("Registering in game singleton", game_name, game)
-			Engine.register_singleton(game_name, game)
+		game = game_for_entity(game_or_entity)
 	else:
 		game = game_or_entity
 
@@ -206,7 +211,8 @@ func _respawn_player(opts={}):
 	var spawn_coords = opts.get("spawn_coords")
 	if not spawn_coords:
 		var coords_fn = opts.get("spawn_coords_fn", respawn_coords)
-		spawn_coords = coords_fn.call()
+		if coords_fn.is_valid():
+			spawn_coords = coords_fn.call()
 
 	var player_scene = opts.get("player_scene")
 	if player_scene == null and current_game != null:

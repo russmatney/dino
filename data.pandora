@@ -207,6 +207,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/dotHop/menus/DotHopPauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/dotHop"
 					}
 				}
 			},
@@ -232,6 +236,10 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/superElevatorLevel/menus/MainMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/superElevatorLevel"
 					}
 				}
 			},
@@ -261,6 +269,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/spike/menus/PauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/spike"
 					}
 				}
 			},
@@ -290,6 +302,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/shirt/menus/PauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/shirt"
 					}
 				}
 			},
@@ -315,6 +331,10 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/hatbot/menus/MainMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/hatbot"
 					}
 				}
 			},
@@ -344,6 +364,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/mountain/menus/PauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/mountain"
 					}
 				}
 			},
@@ -369,6 +393,10 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/ghosts/GhostsMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/ghosts"
 					}
 				}
 			},
@@ -386,6 +414,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/dungeonCrawler/DungeonCrawler.gd"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/dungeonCrawler"
 					}
 				}
 			},
@@ -403,6 +435,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/runner/Runner.gd"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/runner"
 					}
 				}
 			},
@@ -428,6 +464,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/tower/menus/TowerPauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/tower"
 					}
 				}
 			},
@@ -449,6 +489,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/gunner/menus/GunnerPauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/gunner"
 					}
 				}
 			},
@@ -478,6 +522,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/harvey/menus/HarveyPauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/harvey"
 					}
 				}
 			},
@@ -503,6 +551,10 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/herd/menus/MainMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/herd"
 					}
 				}
 			},
@@ -520,6 +572,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/demoland/DemoLand.gd"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/demoland"
 					}
 				}
 			},
@@ -533,6 +589,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Pluggs McGee"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/pluggs"
 					}
 				}
 			},
@@ -554,6 +614,10 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/snake/menus/SnakeMainMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/snake"
 					}
 				}
 			},
@@ -571,6 +635,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/woods/Woods.gd"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/woods"
 					}
 				}
 			}
@@ -666,12 +734,19 @@
 				"_id": "28",
 				"_name": "game_singleton",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "",
+				"_id": "42",
+				"_name": "scene_path_prefix",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 41
+			"default": 42
 		}
 	}
 }
