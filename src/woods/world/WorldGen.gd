@@ -42,7 +42,7 @@ func _unhandled_input(event):
 
 func generate():
 	# clear
-	rooms_node.get_children().map(func(c): c.free())
+	rooms_node.get_children().map(func(c): c.queue_free())
 
 	# reset
 	room_idx = 0

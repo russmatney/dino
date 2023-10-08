@@ -14,7 +14,7 @@ size = Vector2(128, 128)
 [node name="WorldGen" type="Node2D"]
 script = ExtResource("1_wf82b")
 room_base_dim = 128
-room_count = 3
+room_count = 9
 tilemap_scene = ExtResource("2_b38ch")
 
 [node name="ColorRect" type="ColorRect" parent="."]

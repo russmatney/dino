@@ -28,3 +28,10 @@ func collect(entity: WoodsEntity, opts={}):
 
 func entered_end_box():
 	Debug.pr("Player entered end box!")
+
+	var cs = Navi.current_scene
+	if cs.has_method("generate"):
+		Debug.pr("quick n dirty replay")
+		cs.generate()
+		Game.respawn_player()
+		return
