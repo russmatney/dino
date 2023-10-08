@@ -17,3 +17,9 @@ func _ready():
 		Hood.ensure_hud(hud)
 
 	super._ready()
+
+## collect ##################################################################
+
+func collect(entity: WoodsEntity, opts={}):
+	match entity.type:
+		WoodsEntity.t.Leaf: Debug.pr("player collected leaf")

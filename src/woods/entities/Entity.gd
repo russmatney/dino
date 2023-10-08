@@ -15,6 +15,7 @@ enum t {
 
 var label: Label
 var color_rect: ColorRect
+var collect_box: Area2D
 
 ## ready #########################################################
 
@@ -22,7 +23,14 @@ func _ready():
 	Util.set_optional_nodes(self, {
 		label="DebugLabel",
 		color_rect="ColorRect",
+		collect_box="CollectBox",
 		})
+
+	if collect_box != null:
+		collect_box.body_entered.connect(on_collect_box_entered)
+
+func on_collect_box_entered(_body):
+	Debug.warn("on_collect_box_entered not impled")
 
 ## debug and render #########################################################
 

@@ -34,3 +34,23 @@ func render():
 	if anim != null:
 		anim.set_visible(true)
 		anim.play("twist")
+
+# TODO juicy animate to the HUD?
+func animate_collected():
+	var time = 0.4
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE * 0.5, time)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "position", position - Vector2.ONE * 10, time)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, time)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(queue_free)
+
+## on_collect_box_entered ###########################################################
+
+func on_collect_box_entered(body):
+	if body.is_in_group("player"):
+		if body.has_method("collect"):
+			body.collect(self)
+			animate_collected()

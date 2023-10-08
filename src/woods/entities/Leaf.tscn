@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dhma0vanfafyo"]
+[gd_scene load_steps=29 format=3 uid="uid://dhma0vanfafyo"]
 
 [ext_resource type="Script" path="res://src/woods/entities/LeafEntity.gd" id="1_1akrk"]
 [ext_resource type="Texture2D" uid="uid://d23a8ljxjvq0x" path="res://src/dotHop/themes/fall/leaf_green.png" id="2_k8fmg"]
@@ -171,10 +171,15 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgtjr"]
+size = Vector2(32, 32)
+
 [node name="Leaf" type="Node2D"]
 script = ExtResource("1_1akrk")
+collect_on_touch = null
 
 [node name="Green" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_m1tvd")
 animation = &"twist"
@@ -237,10 +242,10 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="Yellow" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4jdhi")
 animation = &"twist"
+frame_progress = 0.645739
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -250,3 +255,10 @@ metadata/_aseprite_wizard_config_ = {
 "op_exp": false,
 "source": "res://src/dotHop/themes/fall/assets/leaf_yellow.aseprite"
 }
+
+[node name="CollectBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectBox"]
+shape = SubResource("RectangleShape2D_qgtjr")
