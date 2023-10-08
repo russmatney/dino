@@ -1,3 +1,4 @@
+@tool
 extends Marker2D
 
 @export var active = true

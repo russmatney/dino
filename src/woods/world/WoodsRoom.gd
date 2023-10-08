@@ -12,6 +12,9 @@ var room_def
 var tilemap
 var spawn_points = []
 
+##########################################################################
+## static ##################################################################
+
 ## room parse ##################################################################
 
 static func parse_room_defs(opts={}):
@@ -112,7 +115,7 @@ static func calc_coord_factor(room: WoodsRoom, room_base_dim: int):
 
 static var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
 # TODO maybe want a first class Spawn addon for spawn points + restarts
-static var spawn_point_scene = preload("res://src/Dino/SpawnPoint.tscn")
+static var spawn_point_scene = preload("res://src/dino/SpawnPoint.tscn")
 
 static var leaf_scene = preload("res://src/woods/entities/Leaf.tscn")
 
@@ -195,21 +198,38 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	for l in leaf_cells:
 		var spawn_point = spawn_point_scene.instantiate()
 		spawn_point.position = l * coord_factor
-		spawn_point.spawn_f = func():
-			return leaf_scene.instantiate()
-		room.add_child(spawn_point)
+		spawn_point.spawn_scene = leaf_scene
+		spawn_point.name = "LeafSpawnPoint_%s_%s" % [l.x, l.y]
 		room.spawn_points.append(spawn_point)
+		room.add_child(spawn_point)
 
 	room.add_child(rec)
 	room.add_child(room.tilemap)
 
 	return room
 
-###################################################################################
+##############################################################################
+## instance ##################################################################
 
-func spawn():
-	Debug.pr("Spawning via spawn_f in woods_room")
+## ready ##################################################################
+
+func _ready():
+	spawn({only_if=func(sp): return len(sp.get_children()) == 0})
+
+## spawn ##################################################################
+
+func spawn(opts=null):
 	for ch in get_children():
-		if "spawn_f" in ch:
-			Debug.pr("found child with spawn_f", ch)
-			ch.spawn_f.call()
+		if ch is DinoSpawnPoint:
+			if opts != null and "only_if" in opts:
+				if opts.only_if.call(ch):
+					spawn_one(ch)
+			else:
+				spawn_one(ch)
+
+func spawn_one(sp: DinoSpawnPoint):
+	var new_ent = sp.spawn_entity()
+	if new_ent != null:
+		var o = get_owner()
+		new_ent.ready.connect(func(): new_ent.set_owner(o))
+		sp.add_child(new_ent)

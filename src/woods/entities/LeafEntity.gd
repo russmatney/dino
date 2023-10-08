@@ -11,53 +11,26 @@ extends WoodsEntity
 @onready var anim_yellow = $Yellow
 
 func all_anims() -> Array:
-	return [anim_green, anim_greenred, anim_purple, anim_redorange,
-		# using yellow for 'goal' for now
-		# anim_yellow
-		]
+	return [anim_green, anim_greenred, anim_purple, anim_redorange, anim_yellow]
 
 var anim
 
 func _ready():
 	hide_anims()
 	anim = Util.rand_of(all_anims())
-	Debug.pr("leaf rendering anim", anim)
 	super._ready()
 	render()
 
 func hide_anims():
-	all_anims().map(func(a): a.set_visible(false))
-	anim_yellow.set_visible(false)
+	all_anims().map(func(a):
+		if a != null:
+			a.set_visible(false))
+	if anim_yellow != null:
+		anim_yellow.set_visible(false)
 
 ## render ###########################################################
 
 func render():
-	anim.set_visible(true)
-	anim.play("twist")
-	animate_entry()
-
-## entry animation ###########################################################
-
-var entry_tween
-var entry_t = 0.3
-func animate_entry():
-	var og_position = current_position()
-	position = position - Vector2.ONE * 10
-	scale = Vector2.ONE * 0.5
-	entry_tween = create_tween()
-	entry_tween.tween_property(self, "scale", Vector2.ONE, entry_t)\
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	entry_tween.parallel().tween_property(self, "position", og_position, entry_t)\
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	entry_tween.parallel().tween_property(self, "modulate:a", 1.0, entry_t)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
-func animate_exit(time):
-	position = current_position()
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE * 0.5, time)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "position", position - Vector2.ONE * 10, time)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "modulate:a", 0.0, time)\
-		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	if anim != null:
+		anim.set_visible(true)
+		anim.play("twist")

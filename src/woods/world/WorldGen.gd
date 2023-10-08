@@ -103,7 +103,6 @@ func create_room(opts=null, last_room=null):
 
 	room_idx += 1
 	room.ready.connect(func():
-		room.spawn()
 		room.set_owner(self)
 		room.get_children().map(func(ch): ch.set_owner(self)))
 	room.name = "Room_%s" % room_idx

@@ -24,8 +24,6 @@ func _ready():
 		color_rect="ColorRect",
 		})
 
-	Debug.pr("Woods Entity", self)
-
 ## debug and render #########################################################
 
 @export var square_size = 16 :
@@ -41,13 +39,3 @@ func render():
 	if color_rect != null:
 		color_rect.size = Vector2.ONE * square_size
 		color_rect.color = Color(1, 1, 0)
-
-## set_initial_coord #########################################################
-
-var current_coord: Vector2
-func set_initial_coord(coord):
-	current_coord = coord
-	position = coord * square_size
-
-func current_position():
-	return current_coord * square_size
