@@ -7,7 +7,7 @@ var button_defs = [
 	},
 	{
 		label="Restart",
-		fn=Game.restart_game.bind(Gunner),
+		fn=Game.restart_game,
 	},
 	{
 		label="Gunner Menu",

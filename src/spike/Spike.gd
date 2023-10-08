@@ -61,6 +61,8 @@ func handle_level_complete():
 
 ## ingredients / meals ##########################################################
 
+# TODO autoloads for data? enums? maybe move this to a type/class elsewhere, maybe a pandora entity
+
 class IngredientData:
 	var name: String
 	var display_type: String

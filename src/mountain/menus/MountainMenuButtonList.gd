@@ -4,7 +4,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		label="Start",
-		fn=Game.restart_game.bind(Mountain),
+		fn=Game.restart_game,
 	},
 	{
 		label="Dino Menu",

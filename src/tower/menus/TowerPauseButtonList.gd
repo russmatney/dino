@@ -7,7 +7,7 @@ var button_defs = [
 	},
 	{
 		label="Restart",
-		fn=Game.restart_game.bind(Tower),
+		fn=Game.restart_game,
 	},
 	{
 		label="Tower Jet Menu",

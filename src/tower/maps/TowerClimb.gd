@@ -40,7 +40,8 @@ func _on_player_pickups_changed(pickups):
 		var enemy_spawners = get_tree().get_nodes_in_group("enemy_spawner")
 		enemy_spawners.shuffle()
 		if enemy_spawners:
-			var en = Tower.spawn_enemy(enemy_spawners[0].global_position)
+			var t = Engine.get_singleton("Tower")
+			var en = t.spawn_enemy(enemy_spawners[0].global_position)
 			en.dead.connect(_on_robot_destroyed)
 			enemies.append(en)
 			# Hood.hud.update_enemies_remaining(enemies_alive().size())
@@ -239,4 +240,5 @@ func check_win():
 	if targets_destroyed and robots_destroyed:
 		Hood.notif(str("Level ", level_num, " Complete!"))
 		player.notif("Level Clear!")
-		Tower.level_complete()
+		var t = Engine.get_singleton("Tower")
+		t.level_complete()

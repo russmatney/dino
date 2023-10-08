@@ -83,4 +83,6 @@ func spawn_next_wave(wave):
 func _on_level_complete():
 	Hood.notif("Level complete!")
 
-	SuperElevatorLevel.load_next_level()
+	# TODO pattern via Game/DinoGame or pandora?
+	var sel = Engine.get_singleton("SuperElevatorLevel")
+	sel.load_next_level()
