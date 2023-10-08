@@ -17,14 +17,6 @@ func _enter_tree():
 			game_entity = e
 			break
 
-func get_player_scene():
-	# defaults to returning a 'player_scene' var
-	if get("player_scene") == null:
-		Debug.err("no player_scene set")
-		# TODO try looking relative to current game (in player/Player.tscn)
-		return
-	return get("player_scene")
-
 func on_player_spawned(_player):
 	pass
 

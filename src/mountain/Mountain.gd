@@ -8,8 +8,6 @@ const zones = [
 ######################################################
 # player
 
-var player_scene = preload("res://src/mountain/player/Player.tscn")
-
 func on_player_spawned(player):
 	player.died.connect(_on_player_death)
 

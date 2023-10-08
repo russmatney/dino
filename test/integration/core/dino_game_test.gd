@@ -26,7 +26,7 @@ func test_ensure_current_game():
 	Game.ensure_current_game()
 
 	# probably want to drop this
-	assert_eq(Game.current_game_entity.get_singleton().resource_path, "res://src/hatbot/HatBot.gd")
+	assert_eq(Game.current_game.game_entity.get_singleton().resource_path, "res://src/hatbot/HatBot.gd")
 	assert_eq(Game.current_game.get_script().resource_path, "res://src/hatbot/HatBot.gd")
 
 	inst.free()

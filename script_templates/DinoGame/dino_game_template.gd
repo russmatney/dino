@@ -6,8 +6,6 @@ extends DinoGame
 ######################################################
 # player
 
-var player_scene = "res://src/<game>/player/Player.tscn"
-
 func on_player_spawned(_player):
 	pass
 

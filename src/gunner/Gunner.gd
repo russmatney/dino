@@ -13,7 +13,3 @@ func start(_opts={}):
 		Navi.nav_to(Navi.current_scene.scene_file_path)
 	else:
 		Navi.nav_to(default_game_path)
-
-## player #########################################################################
-
-var player_scene = preload("res://src/gunner/player/Player.tscn")

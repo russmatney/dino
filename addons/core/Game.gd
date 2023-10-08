@@ -16,17 +16,13 @@ func game_for_entity(ent: DinoGameEntity):
 	game.game_entity = ent
 	var game_name = singleton.resource_path.get_basename().get_file()
 	if Engine.has_singleton(game_name):
-		Debug.pr("Found engine singleton", game_name)
 		return Engine.get_singleton(game_name)
-	Debug.pr("Registering game singleton", game_name, game)
 	Engine.register_singleton(game_name, game)
 	return game
 
 ## ready ##########################################################
 
 func _ready():
-	Debug.prn("Game autoload ready")
-
 	player_found.connect(_on_player_found)
 	player_ready.connect(_find_player)
 	_find_player()
@@ -48,36 +44,38 @@ func game_entity_for_scene(scene):
 func set_current_game_for_scene(scene):
 	var ent = game_entity_for_scene(scene)
 	if ent:
-		var game = game_for_entity(ent)
-		if game:
-			register_current_game(game)
+		set_current_game_for_ent(ent)
+
+func set_current_game_for_ent(ent):
+	var game = game_for_entity(ent)
+	if game:
+		register_current_game(game)
 
 func ensure_current_game():
-	if not current_game:
+	if current_game:
 		var current_scene = get_tree().current_scene
 		if current_scene and "scene_file_path" in current_scene:
-			Debug.pr("No current_game, setting with current scene", current_scene)
 			if current_scene.scene_file_path.begins_with("res://src/dino"):
 				return
 			set_current_game_for_scene(current_scene)
-		# else:
-		# 	Debug.pr("No current_scene", current_scene)
 
 	if not current_game:
 		Debug.warn("Failed to ensure current_game!")
+
+func reset_current_game():
+	current_game = null
+	ensure_current_game()
 
 ## game lifecycle ##########################################################
 
 
 var current_game: DinoGame
-var current_game_entity: DinoGameEntity
 
 var is_managed: bool = false
 
 func register_current_game(game):
 	Debug.pr("Registering current game", game)
 	current_game = game
-	current_game_entity = game.game_entity
 	game.register()
 
 # TODO does this sometimes restart the wrong game?
@@ -105,15 +103,16 @@ func restart_game(game=null, opts=null):
 # TODO where is this called?
 func load_main_menu(game=null):
 	if game == null:
+		# reset current game _before_ setting
+		reset_current_game()
 		game = current_game
-	# TODO ensure_current_game()
 	if game and game.game_entity.get_main_menu() != null:
 		# maybe we hide menus on every Navi.nav_to ?
 		Navi.hide_menus()
 		Navi.nav_to(game.game_entity.get_main_menu())
 		return
 
-	Debug.pr("No main_menu in game_entity, naving to fallback main menu.")
+	Debug.warn("No main_menu in game_entity, naving to fallback main menu.")
 	Navi.nav_to_main_menu()
 
 ## For a passed game, load it's main menu. If none is set, start it via restart_game
@@ -123,6 +122,11 @@ func nav_to_game_menu_or_start(game_or_entity):
 		game = game_for_entity(game_or_entity)
 	else:
 		game = game_or_entity
+
+	# be sure to register/update Game.current_game here!
+	# could rely on manages_scene via reset_current_game,
+	# but we'd have to wait for the menu/game scene to load
+	register_current_game(game)
 
 	if game.game_entity.get_main_menu() != null:
 		# is this hide still necessary?
@@ -164,7 +168,6 @@ func _find_player(p=null):
 
 	if len(ps) > 0:
 		player = ps[0]
-		Debug.pr("found player: ", player)
 	else:
 		# too noisy, and corrected later on after startup
 		# Debug.warn("could not find player, zero in player_group: ", player_group)
@@ -172,12 +175,8 @@ func _find_player(p=null):
 
 	player_found.emit(player)
 
-func _on_player_found(p):
-	Debug.prn("Game.player found:", p)
-	if current_game:
-		# TODO could be a bug for some games? Do we need this? maybe maps/hud?
-		Debug.prn("skipping world update after found player")
-		# current_game.update_world()
+func _on_player_found(_p):
+	pass
 
 func remove_player():
 	var p = player
@@ -196,7 +195,7 @@ func respawn_player(opts={}):
 		if current_game == null:
 			Debug.warn("No current_game, can't spawn (or respawn) player")
 			return
-		elif current_game.get_player_scene() == null:
+		elif current_game.game_entity.get_player_scene() == null:
 			Debug.warn("current_game has no player_scene, can't respawn player", current_game)
 			return
 
@@ -218,7 +217,7 @@ func _respawn_player(opts={}):
 
 	var player_scene = opts.get("player_scene")
 	if player_scene == null and current_game != null:
-		player_scene = current_game.get_player_scene()
+		player_scene = current_game.game_entity.get_player_scene()
 	if player_scene == null:
 		Debug.err("Could not determine player_scene, cannot respawn")
 		spawning = false

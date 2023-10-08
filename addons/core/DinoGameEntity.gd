@@ -28,6 +28,9 @@ func get_singleton() -> Texture:
 func get_scene_path_prefix() -> String:
 	return get_string("scene_path_prefix")
 
+func get_player_scene() -> PackedScene:
+	return get_resource("player_scene")
+
 ## data ##########################################################
 
 func data():
@@ -40,6 +43,7 @@ func data():
 		death_menu=get_death_menu(),
 		singleton=get_singleton(),
 		scene_path_prefix=get_scene_path_prefix(),
+		player_scene=get_player_scene(),
 		}
 
 ## helpers ##########################################################

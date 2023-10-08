@@ -34,15 +34,11 @@ func register():
 
 	Debug.pr("HatBot registered", len(zones), "zones and first zone ", first_zone)
 
-
 ## player ##########################################################
-
-var player_scene = preload("res://src/hatbot/player/Player.tscn")
 
 func get_spawn_coords():
 	# TODO consider non-global usage of Metro here
 	return Metro.get_spawn_coords()
-
 
 ## start ##########################################################
 

@@ -31,10 +31,7 @@ func level_complete():
 
 ## player #########################################################################
 
-var player_scene = preload("res://src/gunner/player/Player.tscn")
-
 var player_default_opts = {"has_jetpack": true}
-
 
 func on_player_spawned(player):
 	for k in player_default_opts.keys():

@@ -36,11 +36,6 @@ func register():
 
 ## player #########################################################
 
-var player_scene = preload("res://src/hatbot/player/Player.tscn")
-
-func get_player_scene():
-	return player_scene
-
 func get_spawn_coords():
 	# TODO consider non-global usage of Metro here
 	return Metro.get_spawn_coords()

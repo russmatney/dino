@@ -3,10 +3,6 @@ extends DinoGame
 
 ## player ####################################################################
 
-# TODO support player selection
-func get_player_scene():
-	return load("res://src/superElevatorLevel/players/PlayerOne.tscn")
-
 func on_player_spawned(player):
 	player.died.connect(on_player_died.bind(player), CONNECT_ONE_SHOT)
 

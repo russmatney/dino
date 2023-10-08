@@ -11,11 +11,6 @@ func _ready():
 var next_level_menu
 
 ######################################################
-# dino game api
-
-var player_scene = preload("res://src/herd/player/Player.tscn")
-
-######################################################
 # level mgmt
 
 var levels = [

@@ -237,6 +237,10 @@
 						"type": "resource",
 						"value": "res://src/superElevatorLevel/menus/MainMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/superElevatorLevel/players/PlayerOne.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/superElevatorLevel"
@@ -269,6 +273,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/spike/menus/PauseMenu.tscn"
+					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/spike/player/Player.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -303,6 +311,10 @@
 						"type": "resource",
 						"value": "res://src/shirt/menus/PauseMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/shirt/player/Player.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/shirt"
@@ -331,6 +343,10 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/hatbot/menus/MainMenu.tscn"
+					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/hatbot/player/Player.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -365,6 +381,10 @@
 						"type": "resource",
 						"value": "res://src/mountain/menus/PauseMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/mountain/player/Player.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/mountain"
@@ -394,6 +414,10 @@
 						"type": "resource",
 						"value": "res://src/ghosts/GhostsMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/ghosts/player/Player.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/ghosts"
@@ -414,6 +438,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/dungeonCrawler/DungeonCrawler.gd"
+					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/dungeonCrawler/player/Player.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -465,6 +493,10 @@
 						"type": "resource",
 						"value": "res://src/tower/menus/TowerPauseMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/gunner/player/Player.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/tower"
@@ -489,6 +521,10 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/gunner/menus/GunnerPauseMenu.tscn"
+					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/gunner/player/Player.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -552,6 +588,10 @@
 						"type": "resource",
 						"value": "res://src/herd/menus/MainMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/herd/player/Player.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/herd"
@@ -572,6 +612,10 @@
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/demoland/DemoLand.gd"
+					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/hatbot/player/Player.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -741,12 +785,19 @@
 				"_id": "42",
 				"_name": "scene_path_prefix",
 				"_type": "string"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": null,
+				"_id": "44",
+				"_name": "player_scene",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 42
+			"default": 44
 		}
 	}
 }

@@ -38,13 +38,9 @@ func register():
 ## player ##########################################################
 
 var player_sfp = "res://src/ghosts/player/Player.tscn"
-var player_scene = preload("res://src/ghosts/player/Player.tscn")
 
 func reset_player_data():
 	Hotel.check_in_sfp(player_sfp, {health=6, gloomba_kos=0})
-
-func get_player_scene():
-	return player_scene
 
 func get_spawn_coords():
 	var player_spawner = Util.first_node_in_group("player_spawn_points")

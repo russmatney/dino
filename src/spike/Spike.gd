@@ -3,8 +3,6 @@ extends DinoGame
 
 ## player ##########################################################
 
-var player_scene = preload("res://src/spike/player/Player.tscn")
-
 func get_spawn_coords():
 	return Metro.get_spawn_coords()
 

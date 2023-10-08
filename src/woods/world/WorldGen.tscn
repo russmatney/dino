@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0iqc0g2kgl5s"]
+[gd_scene load_steps=8 format=3 uid="uid://d0iqc0g2kgl5s"]
 
 [ext_resource type="Script" path="res://src/woods/world/WorldGen.gd" id="1_wf82b"]
 [ext_resource type="PackedScene" uid="uid://y36u368o2aip" path="res://addons/reptile/tilemaps/WoodsFloorTiles16.tscn" id="2_b38ch"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="4_imc5y"]
 [ext_resource type="PackedScene" uid="uid://bn6lhbid1dt8i" path="res://src/dino/SpawnPoint.tscn" id="6_rrf06"]
 [ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/woods/entities/Leaf.tscn" id="8_iglx1"]
-[ext_resource type="Script" path="res://src/woods/entities/LeafEntity.gd" id="9_e5wn6"]
 
 [node name="WorldGen" type="Node2D"]
 script = ExtResource("1_wf82b")
@@ -34,8 +33,7 @@ position = Vector2(64, 128)
 position = Vector2(192, 160)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_1/LeafSpawnPoint_6_5" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_1/LeafSpawnPoint_6_5" instance=ExtResource("8_iglx1")]
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
 visible = false
@@ -51,22 +49,19 @@ script = ExtResource("3_5tynl")
 position = Vector2(96, 128)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_2/LeafSpawnPoint_3_4" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_2/LeafSpawnPoint_3_4" instance=ExtResource("8_iglx1")]
 
 [node name="LeafSpawnPoint_4_7" parent="Rooms/Room_2" instance=ExtResource("6_rrf06")]
 position = Vector2(128, 224)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_2/LeafSpawnPoint_4_7" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_2/LeafSpawnPoint_4_7" instance=ExtResource("8_iglx1")]
 
 [node name="LeafSpawnPoint_6_11" parent="Rooms/Room_2" instance=ExtResource("6_rrf06")]
 position = Vector2(192, 352)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_2/LeafSpawnPoint_6_11" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_2/LeafSpawnPoint_6_11" instance=ExtResource("8_iglx1")]
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_2"]
 visible = false
@@ -82,15 +77,13 @@ script = ExtResource("3_5tynl")
 position = Vector2(160, 192)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_3/LeafSpawnPoint_5_6" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_3/LeafSpawnPoint_5_6" instance=ExtResource("8_iglx1")]
 
 [node name="LeafSpawnPoint_2_11" parent="Rooms/Room_3" instance=ExtResource("6_rrf06")]
 position = Vector2(64, 352)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_3/LeafSpawnPoint_2_11" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_3/LeafSpawnPoint_2_11" instance=ExtResource("8_iglx1")]
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_3"]
 visible = false
@@ -106,22 +99,19 @@ script = ExtResource("3_5tynl")
 position = Vector2(160, 96)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_4/LeafSpawnPoint_5_3" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_4/LeafSpawnPoint_5_3" instance=ExtResource("8_iglx1")]
 
 [node name="LeafSpawnPoint_8_3" parent="Rooms/Room_4" instance=ExtResource("6_rrf06")]
 position = Vector2(256, 96)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_4/LeafSpawnPoint_8_3" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_4/LeafSpawnPoint_8_3" instance=ExtResource("8_iglx1")]
 
 [node name="LeafSpawnPoint_12_3" parent="Rooms/Room_4" instance=ExtResource("6_rrf06")]
 position = Vector2(384, 96)
 spawn_scene = ExtResource("8_iglx1")
 
-[node name="Leaf" type="Node2D" parent="Rooms/Room_4/LeafSpawnPoint_12_3" instance=ExtResource("8_iglx1")]
-script = ExtResource("9_e5wn6")
+[node name="Leaf" parent="Rooms/Room_4/LeafSpawnPoint_12_3" instance=ExtResource("8_iglx1")]
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_4"]
 visible = false
