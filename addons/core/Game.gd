@@ -52,11 +52,9 @@ func set_current_game_for_ent(ent):
 		register_current_game(game)
 
 func ensure_current_game():
-	if current_game:
+	if not current_game:
 		var current_scene = get_tree().current_scene
 		if current_scene and "scene_file_path" in current_scene:
-			if current_scene.scene_file_path.begins_with("res://src/dino"):
-				return
 			set_current_game_for_scene(current_scene)
 
 	if not current_game:
@@ -74,7 +72,7 @@ var current_game: DinoGame
 var is_managed: bool = false
 
 func register_current_game(game):
-	Debug.pr("Registering current game", game)
+	Debug.pr("Registering current game", game.game_entity.get_display_name())
 	current_game = game
 	game.register()
 
@@ -240,7 +238,6 @@ func _respawn_player(opts={}):
 	Navi.add_child_to_current(player)
 	player.ready.connect(func():
 		if current_game != null:
-			Debug.pr("_respawn_player updating world", player, player.global_position)
 			current_game.update_world())
 
 	spawning = false

@@ -16,8 +16,6 @@ var parsed_room_defs
 @export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
 @onready var rooms_node = $%Rooms
-@onready var player = $%Player
-var player_pos
 
 var room_idx = 0
 
@@ -29,7 +27,7 @@ func _ready():
 	else:
 		Debug.pr("World Gen test ready")
 
-		player_pos = player.position
+	Game.maybe_spawn_player()
 
 func _unhandled_input(event):
 	if Engine.is_editor_hint():
@@ -38,7 +36,7 @@ func _unhandled_input(event):
 	if Trolley.is_restart(event):
 		Debug.pr("Regen + restart")
 		generate()
-		player.position = player_pos
+		Game.respawn_player()
 
 ## generate ######################################################################
 

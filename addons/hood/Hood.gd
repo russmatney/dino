@@ -1,9 +1,9 @@
 @tool
 extends Node
 
-func _ready():
-	Debug.prn("Hood autoload ready")
-	Debug.debug_label("Hood: loaded")
+# func _ready():
+# 	Debug.prn("Hood autoload ready")
+# 	Debug.debug_label("Hood: loaded")
 
 ###########################################################################
 # config

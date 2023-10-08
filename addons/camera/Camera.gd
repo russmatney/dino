@@ -75,7 +75,7 @@ func ensure_camera(opts = {}):
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
-		Debug.prn("found existing cam:", cam)
+		Debug.pr("found existing cam:", cam)
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
@@ -99,8 +99,6 @@ func ensure_camera(opts = {}):
 	if cams and cams.size() > 0:
 		Debug.pr("Found unmanaged cams in 'camera' group, aborting 'ensure_camera'.", cams)
 		return
-
-	Debug.pr("No node found with 'camera' group, creating one.")
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true

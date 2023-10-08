@@ -50,7 +50,7 @@ func _ready():
 
 	if "node_path" in current_scene:
 		last_scene_stack.push_back(current_scene.node_path)
-	Debug.prn("[Navi] Current scene: ", current_scene)
+	Debug.pr("Current scene: ", current_scene)
 
 
 ## process ###################################################################
@@ -192,11 +192,9 @@ func set_pause_menu(path_or_scene):
 	if ResourceLoader.exists(path):
 		if pause_menu:
 			if pause_menu.scene_file_path == path:
-				Debug.prn("Same path, leaving current pause_menu in place", path)
 				return
 			# is there a race-case here?
 			pause_menu.queue_free()
-		Debug.prn("Updating pause_menu: ", path)
 		pause_menu = add_menu(load(path))
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set pause menu.")
@@ -253,10 +251,8 @@ func set_death_menu(path_or_scene):
 	if ResourceLoader.exists(path):
 		if death_menu:
 			if death_menu.scene_file_path == path:
-				Debug.prn("Same path, leaving current death_menu in place", path)
 				return
 			death_menu.queue_free()
-		Debug.prn("Updating death_menu: ", path)
 		death_menu = add_menu(load(path))
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set death menu.")
@@ -287,10 +283,8 @@ func set_win_menu(path_or_scene):
 	if ResourceLoader.exists(path):
 		if win_menu:
 			if win_menu.scene_file_path == path:
-				Debug.prn("Same path, leaving current win_menu in place", path)
 				return
 			win_menu.queue_free()
-		Debug.prn("Updating win_menu: ", path)
 		win_menu = add_menu(load(path))
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set win menu.")

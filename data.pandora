@@ -680,6 +680,10 @@
 						"type": "resource",
 						"value": "res://src/woods/Woods.gd"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/woods/player/WoodsPlayer.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/woods"

@@ -2,8 +2,8 @@
 # Reptile
 extends Node
 
-func _ready():
-	Debug.prn("Reptile autoload ready")
+# func _ready():
+# 	Debug.prn("Reptile autoload ready")
 
 ######################################################################
 # generate random image

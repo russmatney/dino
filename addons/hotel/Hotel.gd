@@ -9,14 +9,14 @@
 @tool
 extends Node
 
-func _enter_tree():
-	Debug.prn("<Hotel>")
+# func _enter_tree():
+# 	Debug.prn("<Hotel>")
 
-func _exit_tree():
-	Debug.prn("</Hotel>")
+# func _exit_tree():
+# 	Debug.prn("</Hotel>")
 
-func _ready():
-	Debug.prn("Hotel ready")
+# func _ready():
+# 	Debug.prn("Hotel ready")
 
 ######################################################################
 # scene_db
