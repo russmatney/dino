@@ -239,7 +239,7 @@ func update(key, data):
 func check_in(node: Node, data=null):
 	if not node.is_node_ready():
 		# TODO couldn't we do something anyway, maybe if data is passed?
-		Debug.warn("node not ready, skipping check_in", node)
+		# Debug.warn("node not ready, skipping check_in", node)
 		return
 	if data == null:
 		if node.has_method("hotel_data"):

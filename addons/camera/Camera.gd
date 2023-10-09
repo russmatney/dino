@@ -66,7 +66,7 @@ func ensure_camera(opts = {}):
 		opts = {}
 
 	if spawning_camera:
-		Debug.warn("already spawning camera, ignoring ensure_camera call", opts)
+		# Debug.warn("already spawning camera, ignoring ensure_camera call", opts)
 		return
 
 	var player = opts.get("player")

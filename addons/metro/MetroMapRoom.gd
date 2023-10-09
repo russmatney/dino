@@ -50,6 +50,7 @@ func reset_entities(room_name):
 			ch.queue_free()
 		self[e] = []
 		Hotel.query({room_name=room_name, group=entities[e].group})\
+			.filter(func(ent): return ent.get("position"))\
 			.map(func(ent): add_entity(e, ent, entities[e].get_color))
 
 
@@ -73,10 +74,10 @@ func set_room_data(data):
 ## add_entity ###################################################################
 
 func add_entity(e_key, data, get_color=null):
-	var ent = ColorRect.new()
 	if data.get("position") == null:
 		Debug.warn("Cannot add entity without hotel db `position` attr")
 		return
+	var ent = ColorRect.new()
 	ent.position = data.get("position")
 	ent.size = Vector2.ONE * 10
 
