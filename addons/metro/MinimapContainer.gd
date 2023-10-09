@@ -23,5 +23,5 @@ func _on_entry_updated(entry):
 
 func update_minimap(room):
 	if room.get("has_player"):
-		zone_name.text = room.get("zone_name").capitalize()
-		room_name.text = room.get("name").capitalize()
+		zone_name.text = room.get("zone_name", "").capitalize()
+		room_name.text = room.get("name", "").capitalize()
