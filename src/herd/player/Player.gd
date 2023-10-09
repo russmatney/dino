@@ -31,9 +31,6 @@ func _ready():
 	machine.start()
 	action_detector.setup(self)
 
-	# BulletUpHell global signal
-	Spawning.bullet_collided_body.connect(_on_bullet_collided)
-
 ######################################################
 # hotel
 

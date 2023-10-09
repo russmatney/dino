@@ -24,9 +24,6 @@ func _ready():
 
 	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 
-	# BulletUpHell global signal
-	Spawning.bullet_collided_body.connect(_on_bullet_collided)
-
 ######################################################
 # hotel
 

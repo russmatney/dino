@@ -53,7 +53,6 @@ Puzz="*res://addons/puzz/Puzz.gd"
 DotHop="*res://src/dotHop/DotHop.gd"
 Metro="*res://addons/metro/Metro.gd"
 SnakeGame="*res://src/snake/SnakeGame.gd"
-Spawning="*res://addons/BulletUpHell/Spawning.tscn"
 Spike="*res://src/spike/Spike.gd"
 Ghosts="*res://src/ghosts/Ghosts.gd"
 Harvey="*res://src/harvey/Harvey.gd"
@@ -73,7 +72,7 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/BulletUpHell/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/puzz/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/puzz/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
 
 [global]
 

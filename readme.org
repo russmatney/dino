@@ -406,9 +406,9 @@ MIT License
 *** teeb.text-effects teeb.text_transitions
 https://github.com/teebarjunk/godot-text_effects
 MIT License
-*** BulletUpHell
-https://github.com/Dark-Peace/BulletUpHell
-MIT License
+*** GUT
+*** AsepriteWizard
+*** Pandora
 ** Code Contributors
 - Joshua Skrzypek
 ** Patrons

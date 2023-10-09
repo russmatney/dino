@@ -9,16 +9,7 @@ extends CharacterBody2D
 #############################################
 # enter_tree, ready
 
-var spawn_pattern_id
-var bullet_pattern_id
-
 func _enter_tree():
-	bullet_pattern_id = str("bulletPatternID", self.name)
-	spawn_pattern_id = str("spawnPatternID", self.name)
-	$BulletPattern.id = bullet_pattern_id
-	$SpawnPattern.id = spawn_pattern_id
-	$SpawnPattern.pattern.bullet = bullet_pattern_id
-
 	Hotel.book(self)
 
 func _ready():
@@ -27,8 +18,6 @@ func _ready():
 	machine.start()
 	detect_box.body_entered.connect(_on_body_entered)
 	detect_box.body_exited.connect(_on_body_exited)
-
-	Spawning.create_pool(bullet_pattern_id, "EnemyBullets", 50)
 
 #############################################
 # hotel_data, check_out
@@ -94,8 +83,6 @@ func closest_target():
 func fire():
 	if not target:
 		return
-
-	Spawning.spawn(self, spawn_pattern_id, "EnemyBullets")
 
 	# TODO proper cooldown?
 	# clear target, idle searches again
