@@ -19,6 +19,7 @@ var ActionLabel = preload("res://addons/trolley/TrolleyActionLabel.tscn")
 func build_actions_list():
 	for ch in get_children():
 		remove_child(ch)
+		ch.queue_free()
 
 	for ac in Trolley.inputs_list({
 		ignore_prefix=ignore_prefix, only_prefix=only_prefix}):

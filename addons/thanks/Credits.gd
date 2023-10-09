@@ -29,6 +29,7 @@ func _ready():
 	# support ready creating a clean credits view
 	for l in added_lines:
 		credits_lines_container.remove_child(l)
+		l.queue_free()
 
 	added_lines = []
 

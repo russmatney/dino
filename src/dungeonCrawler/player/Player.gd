@@ -457,6 +457,7 @@ func remove_debug_message(msg):
 
 	if to_remove:
 		debug_list.remove_child(to_remove)
+		to_remove.queue_free()
 
 	debug_messages.erase(msg)
 
@@ -488,5 +489,6 @@ func remove_info_message(msg):
 
 	if to_remove:
 		info_list.remove_child(to_remove)
+		to_remove.queue_free()
 
 	info_messages.erase(msg)

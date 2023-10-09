@@ -40,5 +40,6 @@ func _ready():
 		var key_list = get_node("%KeyList")
 		for c in key_list.get_children():
 			key_list.remove_child(c)
+			c.queue_free()
 
 		add_key(key)

@@ -47,6 +47,7 @@ func reset_entities(room_name):
 	for e in entities:
 		for ch in self.get(e):
 			remove_child(ch)
+			ch.queue_free()
 		self[e] = []
 		Hotel.query({room_name=room_name, group=entities[e].group})\
 			.map(func(ent): add_entity(e, ent, entities[e].get_color))

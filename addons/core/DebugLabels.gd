@@ -107,6 +107,7 @@ func rearrange_labels():
 
 	for c in container.get_children():
 		container.remove_child(c)
+		c.queue_free()
 
 	for c in children_sorted_by_source:
 		container.add_child(c)

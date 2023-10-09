@@ -76,6 +76,7 @@ func promote_tilemaps(rooms):
 			return r.tilemap.map_to_local(coord) + (r.position / r.tilemap.scale) + r.tilemap.position)
 		cell_positions.append_array(poses)
 		r.remove_child(r.tilemap)
+		r.tilemap.queue_free()
 
 	var tilemap = tilemap_scene.instantiate()
 	# NOTE assumes rooms all have the same scale
