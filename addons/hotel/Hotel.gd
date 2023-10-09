@@ -247,6 +247,7 @@ func update(key, data):
 ## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
 	if not node.is_node_ready():
+		# TODO couldn't we do something anyway, maybe if data is passed?
 		Debug.warn("node not ready, skipping check_in", node)
 		return
 	if data == null:

@@ -58,7 +58,6 @@ func _ready():
 		else:
 			Debug.err("no game_def_path!!")
 	else:
-		Debug.pr("ready, loading game state!")
 		init_game_state()
 
 ## hotel ##############################################################
@@ -419,11 +418,9 @@ func move_to_dot(player, cell):
 func move_to_goal(player, cell):
 	move_player_to_cell(player, cell)
 	if all_dotted() and all_players_at_goal():
-		Debug.pr("win!")
 		state.win = true
 		win.emit()
 	else:
-		Debug.pr("stuck.")
 		player.stuck = true
 
 ## undo last move ##############################################################
@@ -484,7 +481,6 @@ func move(move_dir):
 		var cells = cells_in_direction(p.coord, move_dir)
 		if len(cells) == 0:
 			if p.stuck:
-				Debug.pr("stuck, but no cells in dir", p.stuck, move_dir)
 				moves_to_make.append(["stuck", null, p])
 				if p.node.has_method("move_attempt_stuck"):
 					p.node.move_attempt_stuck(move_dir)
@@ -496,7 +492,6 @@ func move(move_dir):
 		cells = cells.filter(func(c): return c.objs != null)
 		if len(cells) == 0:
 			if p.stuck:
-				Debug.pr("stuck, only nulls in dir", p.stuck, move_dir)
 				moves_to_make.append(["stuck", null, p])
 				if p.node.has_method("move_attempt_stuck"):
 					p.node.move_attempt_stuck(move_dir)

@@ -221,6 +221,5 @@ class TestSimpleBlockPushingGameLevels:
 			])
 
 	func test_level_final():
-		Debug.pr("parsed level", parsed.levels[2])
 		assert_eq(parsed.levels[2].message, "game complete!")
 		assert_eq(parsed.levels[2].shape, null)

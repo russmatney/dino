@@ -22,8 +22,6 @@ static func parse_room_defs(opts={}):
 	if "parsed_room_defs" in opts:
 		return opts.parsed_room_defs
 
-	Debug.warn("parsing room defs")
-
 	var path = Util.get_(opts, "room_defs_path", "res://src/woods/world/rooms.txt")
 	var file = FileAccess.open(path, FileAccess.READ)
 	var contents = file.get_as_text()

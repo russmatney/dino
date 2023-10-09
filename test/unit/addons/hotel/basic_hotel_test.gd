@@ -13,7 +13,6 @@ func after_all():
 func test_registered_data():
 	var data = Hotel.check_out(node)
 	assert_not_null(data)
-	Debug.pr(data)
 
 	# assert on basic properties
 	assert_eq(data.scene_file_path, "res://test/unit/addons/hotel/BasicHotelScene.tscn")

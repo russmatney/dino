@@ -59,8 +59,8 @@ func cam_window_rect():
 
 var spawning_camera
 
+# TODO maybe better as 'request_camera'
 func ensure_camera(opts = {}):
-	Debug.pr("ensuring camera with opts:", opts)
 	if not opts is Dictionary:
 		Debug.warn("unexpected ensure_camera opts value", opts)
 		opts = {}
@@ -75,7 +75,7 @@ func ensure_camera(opts = {}):
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
-		Debug.pr("found existing cam:", cam)
+		# TODO make sure existing cam matches the requested cam
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
