@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://ep3d44f7wi8f"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_7pucc"]
-[ext_resource type="PackedScene" uid="uid://bgkiy2tme7sae" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_33sd2"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_33sd2"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="3_4d6ds"]
 [ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="4_xd6e3"]
 
@@ -16,18 +16,30 @@ visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CamPOA" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
+[node name="CamPOA" parent="." groups=["auto_poas"] instance=ExtResource("3_4d6ds")]
+position = Vector2(-136, -80)
+
+[node name="@CamPOA@55728" parent="." groups=["auto_poas"] instance=ExtResource("3_4d6ds")]
+position = Vector2(112, 48)
+
+[node name="@CamPOA@55729" parent="." groups=["auto_poas"] instance=ExtResource("3_4d6ds")]
+position = Vector2(112, -80)
+
+[node name="@CamPOA@55730" parent="." groups=["auto_poas"] instance=ExtResource("3_4d6ds")]
+position = Vector2(-136, 48)
+
+[node name="@Marker2D@22417" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
 position = Vector2(-136, -80)
 script = ExtResource("4_xd6e3")
 
-[node name="@CamPOA@55728" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
+[node name="@Marker2D@22418" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
 position = Vector2(112, 48)
 script = ExtResource("4_xd6e3")
 
-[node name="@CamPOA@55729" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
+[node name="@Marker2D@22419" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
 position = Vector2(112, -80)
 script = ExtResource("4_xd6e3")
 
-[node name="@CamPOA@55730" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
+[node name="@Marker2D@22420" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_4d6ds")]
 position = Vector2(-136, 48)
 script = ExtResource("4_xd6e3")
