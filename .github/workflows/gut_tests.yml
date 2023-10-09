@@ -38,3 +38,4 @@ jobs:
     - name: Run tests
       shell: bash
       run: godot --headless --path . --debug --script addons/gut/gut_cmdln.gd -gexit
+      timeout-minutes: 10
