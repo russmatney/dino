@@ -7,6 +7,9 @@ func before_all():
 	node = scene.instantiate()
 	add_child(node)
 
+func after_all():
+	node.queue_free()
+
 func test_registered_data():
 	var data = Hotel.check_out(node)
 	assert_not_null(data)

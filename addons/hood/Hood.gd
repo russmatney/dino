@@ -22,7 +22,17 @@ var hud
 
 func ensure_hud(hud_scene=null):
 	if hud and is_instance_valid(hud):
-		return
+		if hud_scene == null:
+			hud_scene = load(fallback_hud_scene)
+		var expected_path
+		if hud_scene is String:
+			expected_path = hud_scene
+		elif hud_scene is PackedScene:
+			expected_path = hud_scene.resource_path
+
+		if expected_path == hud.scene_file_path:
+			# do nothing if correct hud already loaded
+			return
 
 	if not hud_scene:
 		if fallback_hud_scene is String:
