@@ -20,7 +20,7 @@ func _ready():
 
 ## collect ##################################################################
 
-func collect(entity: WoodsEntity, opts={}):
+func collect(entity: WoodsEntity, _opts={}):
 	match entity.type:
 		WoodsEntity.t.Leaf: Debug.pr("player collected leaf")
 

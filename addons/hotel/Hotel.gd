@@ -9,15 +9,6 @@
 @tool
 extends Node
 
-# func _enter_tree():
-# 	Debug.prn("<Hotel>")
-
-# func _exit_tree():
-# 	Debug.prn("</Hotel>")
-
-# func _ready():
-# 	Debug.prn("Hotel ready")
-
 ######################################################################
 # scene_db
 
@@ -100,9 +91,15 @@ func book(bookable: Variant):
 		if data:
 			book_data(data)
 	elif bookable is Node:
-		data = Util.packed_scene_data(bookable.scene_file_path)
-		if data:
-			book_data(data, {node=bookable})
+		var sfp = bookable.scene_file_path
+		if sfp:
+			data = Util.packed_scene_data(bookable.scene_file_path)
+			if data:
+				book_data(data, {node=bookable})
+		else:
+			# TODO get owner, then book props?
+			data = {}
+			book_node(bookable)
 	else:
 		Debug.warn("Unexpected type passed to Hotel.book/1:", bookable,
 			", nothing doing.")
@@ -110,10 +107,22 @@ func book(bookable: Variant):
 	if data == null:
 		Debug.err("Hotel.book failed to find data with input", bookable)
 
+func book_node(node):
+	var key = node_to_entry_key(node)
+
+	var entry = {
+		name=node.name,
+		key=key,
+		groups=node.get_groups(),
+		}
+
+	if key in scene_db:
+		scene_db[key].merge(entry)
+	else:
+		scene_db[key] = entry
+
 func book_data(data: Dictionary, opts = {}):
-	var scene_name = data[^"."]["name"]
 	var parents = opts.get("parents")
-	var last_room = opts.get("last_room")
 	var node = opts.get("node")
 	if node != null and parents == null or (parents != null and len(parents) == 0):
 		parents = Util.get_all_parents(node).map(func(p): return {name=p.name})
@@ -131,7 +140,10 @@ func book_data(data: Dictionary, opts = {}):
 			key = to_entry_key(d, ps)
 
 		# basic properties
-		var entry = d.get("properties", {})
+		var entry = {}
+
+		if d != null:
+			entry.merge(d.get("properties", {}))
 
 		# basic metadata
 		entry.merge({path=path, key=key, name=d.get("name")})
@@ -153,11 +165,6 @@ func book_data(data: Dictionary, opts = {}):
 			var inst = d["instance"][^"."]
 			entry["groups"].append_array(inst["groups"])
 
-		# update last_room based on groups
-		# TODO refactor Metro out of here
-		if Metro.rooms_group in entry["groups"]:
-			last_room = entry
-
 		# set script data
 		if "script" in entry:
 			entry["script_path"] = entry["script"].resource_path
@@ -170,22 +177,6 @@ func book_data(data: Dictionary, opts = {}):
 		if "instance_name" in d and path == ^".":
 			entry["instance_name"] = d["instance_name"]
 
-		# set zone and room names via parents
-		for p in ps:
-			# TODO refactor Metro out of here
-			if Metro.zones_group in p.get("groups", []):
-				entry["zone_name"] = p.get("name")
-
-		for p in ps:
-			# TODO refactor Metro out of here
-			if Metro.rooms_group in p.get("groups", []):
-				entry["room_name"] = str(p.get("zone_name"), "/", p.get("name"))
-
-		# set room name for non-room-instance children (which are flattened here)
-		if not "room_name" in entry and last_room != null:
-			if key.contains(last_room["key"]):
-				entry["room_name"] = last_room["key"]
-
 		if key.begins_with("@"):
 			continue
 		if key in scene_db:
@@ -197,7 +188,7 @@ func book_data(data: Dictionary, opts = {}):
 		# we do this AFTER updating scene_db to prevent instance overwriting
 		if "instance" in d:
 			ps.append(entry)
-			book_data(d["instance"], {parents=ps, last_room=last_room})
+			book_data(d["instance"], {parents=ps})
 
 ######################################################################
 # register
@@ -302,13 +293,6 @@ func query(q={}):
 
 	if "group" in q:
 		vals = vals.filter(func (s_dict): return q.group in s_dict.get("groups", []))
-
-	# TODO dry up data-dict match pattern
-	if "zone_name" in q:
-		vals = vals.filter(func (s_dict): return q.zone_name == s_dict.get("zone_name"))
-
-	if "room_name" in q:
-		vals = vals.filter(func (s_dict): return q.room_name == s_dict.get("room_name"))
 
 	if "scene_file_path" in q:
 		vals = vals.filter(func (s_dict): return q.scene_file_path == s_dict.get("scene_file_path"))
