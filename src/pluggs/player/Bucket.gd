@@ -6,7 +6,7 @@ func enter(msg = {}):
 		# last frame is the bucket 'idle' state, so for now we just let this go and not loop
 		actor.anim.play("to-bucket")
 	else:
-		actor.anim.play("bucket")
+		actor.anim.play("idle-bucket")
 
 
 func process(_delta: float):

@@ -37,12 +37,12 @@ var facing_direction = DIR.left
 
 func face_right():
 	facing_direction = DIR.right
-	anim.flip_h = true
+	anim.flip_h = false
 
 
 func face_left():
 	facing_direction = DIR.left
-	anim.flip_h = false
+	anim.flip_h = true
 
 
 ############################################################

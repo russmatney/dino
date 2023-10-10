@@ -282,7 +282,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+						"value": "res://assets/gameicons/Spike_icon.png"
 					},
 					"main_menu": {
 						"type": "resource",
@@ -650,11 +650,15 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Pluggs McGee"
+						"value": "Pluggs"
 					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/pluggs/Pluggs.gd"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/pluggs_icon_4x.png"
 					},
 					"main_menu": {
 						"type": "resource",
