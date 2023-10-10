@@ -6,9 +6,6 @@ extends Marker2D
 
 var last_visited = 0
 
-func _enter_tree():
-	Hotel.book(self)
-
 func _ready():
 	Hotel.register(self)
 

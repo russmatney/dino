@@ -21,18 +21,8 @@ var first_zone
 func register():
 	register_menus()
 
-	Debug.pr("Registering DemoLand Zones")
-	Hotel.add_root_group(Metro.zones_group)
-
-	for sfp in demoland_zones:
-		Hotel.book(sfp)
-
 	if first_zone == null:
 		first_zone = demoland_zones[0]
-
-	var zones = Hotel.query({"group": Metro.zones_group})
-
-	Debug.pr("DemoLand registered", len(zones), "zones and first zone ", first_zone)
 
 ## player #########################################################
 

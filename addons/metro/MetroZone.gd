@@ -2,16 +2,12 @@
 class_name MetroZone
 extends Node2D
 
-###########################################################
-# enter tree
+## enter tree ##########################################################
 
 func _enter_tree():
 	add_to_group(Metro.zones_group, true)
-	Hotel.book(self)
 
-
-###########################################################
-# ready
+## ready ##########################################################
 
 func _ready():
 	pause_rooms()
@@ -26,8 +22,10 @@ func _ready():
 			spawn_coords_fn=player_spawn_coords,
 			})
 
-###########################################################
-# Hotel data
+## Hotel data ##########################################################
+
+func is_hotel_root():
+	return true
 
 func hotel_data():
 	return {scene_file_path=scene_file_path}
@@ -36,16 +34,14 @@ func check_out(_data):
 	pass
 
 
-###########################################################
-# draw
+## draw ##########################################################
 
 func _draw():
 	if Engine.is_editor_hint():
 		for room in rooms:
 			draw_room_outline(room)
 
-###########################################################
-# rooms
+## rooms ##########################################################
 
 var rooms: Array[MetroRoom] = []
 
@@ -65,10 +61,7 @@ func draw_room_outline(room: MetroRoom):
 	rect.position += room.position
 	draw_rect(rect, Color.MAGENTA, false, 2.0)
 
-
-
-###########################################################
-# spawn coords
+## spawn coords ##########################################################
 
 var spawn_node_path
 func set_spawn_node(node_path: NodePath):

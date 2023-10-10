@@ -3,7 +3,6 @@ extends DinoGame
 
 var rooms_group = "ghost_rooms"
 
-
 ## room_scenes ##########################################################
 
 const room_scenes = [
@@ -14,7 +13,6 @@ const room_scenes = [
 	"res://src/ghosts/world/Cells.tscn",
 	]
 
-
 ## register ##########################################################
 
 var first_room
@@ -23,24 +21,15 @@ func register():
 	Debug.pr("Registering GhostHouse")
 	register_menus()
 
-	Hotel.add_root_group(rooms_group)
-
-	for sfp in room_scenes:
-		Hotel.book(sfp)
-
 	if first_room == null:
 		first_room = room_scenes[0]
-
-	var rooms = Hotel.query({group=rooms_group})
-
-	Debug.pr("GhostHouse registered", len(rooms), "rooms and first room", first_room)
 
 ## player ##########################################################
 
 var player_sfp = "res://src/ghosts/player/Player.tscn"
 
 func reset_player_data():
-	Hotel.check_in_sfp(player_sfp, {health=6, gloomba_kos=0})
+	Debug.warn("Ghost player reset not impled!")
 
 func get_spawn_coords():
 	var player_spawner = Util.first_node_in_group("player_spawn_points")

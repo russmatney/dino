@@ -19,20 +19,8 @@ var first_zone
 func register():
 	register_menus()
 
-	Debug.pr("Registering HatBot Zones")
-	Hotel.add_root_group(Metro.zones_group)
-
-	# TODO include game ('hatbot') on hatbot zones, rooms, entities
-	# TODO filter by game in hotel queries
-	for sfp in zone_scenes:
-		Hotel.book(sfp)
-
 	if first_zone == null:
 		first_zone = zone_scenes[0]
-
-	var zones = Hotel.query({"group": Metro.zones_group})
-
-	Debug.pr("HatBot registered", len(zones), "zones and first zone ", first_zone)
 
 ## player ##########################################################
 

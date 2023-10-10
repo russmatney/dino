@@ -22,18 +22,8 @@ var first_zone
 func register():
 	register_menus()
 
-	Debug.pr("Registering Shirt Zones")
-	Hotel.add_root_group(Metro.zones_group)
-
-	for sfp in zone_scenes:
-		Hotel.book(sfp)
-
 	if first_zone == null:
 		first_zone = zone_scenes[0]
-
-	var zones = Hotel.query({"group": Metro.zones_group})
-
-	Debug.pr("Shirt registered", len(zones), "zones and first zone ", first_zone)
 
 ## start ##########################################################
 

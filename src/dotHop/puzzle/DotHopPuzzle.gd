@@ -232,7 +232,9 @@ func rebuild_nodes():
 						state.cell_nodes[coord] = []
 					state.cell_nodes[coord].append(node)
 
-	Hotel.check_in(self)
+	if is_node_ready():
+		# triggering a HUD update?
+		Hotel.check_in(self)
 
 func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 	var node = node_for_object_name(obj_name)

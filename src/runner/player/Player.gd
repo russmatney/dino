@@ -24,9 +24,6 @@ var jump_velocity = Vector2(0, -700)
 
 var restart_pos: Vector2
 
-func _enter_tree():
-	Hotel.book(self)
-
 func _ready():
 	Hotel.register(self)
 	restart_pos = global_position

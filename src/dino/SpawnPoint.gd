@@ -11,9 +11,6 @@ var visit_count = 0
 @export var spawn_scene: PackedScene
 var spawns = []
 
-func _enter_tree():
-	Hotel.book(self)
-
 func _ready():
 	Hotel.register(self)
 

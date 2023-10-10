@@ -63,11 +63,6 @@ var high_los
 
 var line_of_sights = []
 
-## enter_tree ###########################################################
-
-func _enter_tree():
-	Hotel.book(self)
-
 ## ready ###########################################################
 
 func _ready():

@@ -14,18 +14,10 @@ const zones = [
 var first_zone
 
 func register():
-	Debug.pr("Registering DungeonCrawler")
 	register_menus()
-
-	for sfp in zones:
-		Hotel.book(sfp)
 
 	if first_zone == null:
 		first_zone = zones[0]
-
-	var zs = Hotel.query({"group": Metro.zones_group})
-
-	Debug.pr("DungeonCrawler registered", len(zs), "zones and first zone ", first_zone)
 
 ###########################################################
 # player

@@ -110,9 +110,6 @@ var roombox
 var enterbox
 var exitbox
 
-func _enter_tree():
-	Hotel.book(self)
-
 func _ready():
 	Hotel.register(self)
 	setup()

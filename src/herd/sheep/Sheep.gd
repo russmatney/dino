@@ -9,12 +9,6 @@ var max_health = 3
 var health = 3
 
 ###########################################################
-# enter tree
-
-func _enter_tree():
-	Hotel.book(self)
-
-###########################################################
 # ready
 
 func _ready():

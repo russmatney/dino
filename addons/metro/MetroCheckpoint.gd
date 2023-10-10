@@ -18,7 +18,6 @@ func _get_configuration_warnings():
 
 func _enter_tree():
 	add_to_group(Metro.checkpoints_group, true)
-	Hotel.book(self)
 
 ## ready ###########################################################
 

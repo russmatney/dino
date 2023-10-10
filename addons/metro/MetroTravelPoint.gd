@@ -25,9 +25,6 @@ var group_name = "travel_points"
 
 func _on_enter_tree():
 	add_to_group(group_name, true)
-	Debug.pr("booking metro travel point", self)
-	Hotel.book(self)
-
 
 ## ready ##################################################################
 

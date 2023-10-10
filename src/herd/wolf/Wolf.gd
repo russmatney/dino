@@ -9,9 +9,6 @@ extends CharacterBody2D
 #############################################
 # enter_tree, ready
 
-func _enter_tree():
-	Hotel.book(self)
-
 func _ready():
 	Hotel.register(self)
 	Cam.add_offscreen_indicator(self, {label="Wolf"})

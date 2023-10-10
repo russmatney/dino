@@ -52,12 +52,6 @@ var pit_detector
 var heart_particles
 var skull_particles
 
-
-## enter_tree ###########################################################
-
-func _enter_tree():
-	Hotel.book(self)
-
 ## ready ###########################################################
 
 func _ready():

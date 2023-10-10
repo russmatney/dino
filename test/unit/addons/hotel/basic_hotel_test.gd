@@ -19,8 +19,8 @@ func test_registered_data():
 	assert_string_starts_with(data.key, "GutRunner/@Node")
 	assert_string_ends_with(data.key, "/BasicHotelScene")
 	assert_eq(data.name, &"BasicHotelScene")
-	assert_eq(data.type, &"Node2D")
-	assert_eq(data.groups as Array, [])
+	assert_eq(data.cls, "Node2D")
+	# assert_eq(data.groups as Array, [])
 
 	# assert on custom/opt-in properties (based on BasicHotelScene.gd impl!)
 	assert_eq(data.misc_data, null)

@@ -18,19 +18,6 @@ func _on_player_death():
 	Game.respawn_player({setup_fn=func(p): p.recover_health()})
 
 ######################################################
-# register
-
-func register():
-	register_menus()
-
-	# is this required anymore?
-	Hotel.add_root_group(Metro.zones_group)
-
-	for z in zones:
-		Hotel.book(z)
-
-
-######################################################
 # start
 
 func start(_opts={}):

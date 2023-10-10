@@ -29,8 +29,7 @@ func _on_rebuild_db_button_pressed():
 # ready
 
 func _ready():
-	Hotel.book(self.scene_file_path)
-	Hotel.register(self, {"root": true})
+	Hotel.register(self)
 
 	list_entries()
 	reset_option_buttons()

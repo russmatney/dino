@@ -66,12 +66,6 @@ var is_dead
 var lives_lost: int = 0
 var kos: int = 0
 
-
-## enter_tree ###########################################################
-
-func _enter_tree():
-	Hotel.book(self)
-
 ## ready ###########################################################
 
 func _ready():

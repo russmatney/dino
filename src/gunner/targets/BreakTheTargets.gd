@@ -7,9 +7,6 @@ var destroyed_count = 0
 
 signal targets_cleared
 
-func _enter_tree():
-	Hotel.book(self.scene_file_path)
-
 ###############################################################################
 # ready
 

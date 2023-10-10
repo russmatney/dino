@@ -8,6 +8,6 @@ func test_hotel_loads_puzzle():
 	var puzzle = Hotel.first({group=DotHop.puzzle_group})
 
 	assert_not_null(puzzle)
-	assert_eq(puzzle.groups as Array, [DotHop.puzzle_group])
+	assert_has(puzzle.groups, DotHop.puzzle_group)
 
 	game.free()

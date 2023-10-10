@@ -58,11 +58,6 @@ var swoop_hints = []
 const warp_group = "warp_spots"
 var warp_spots = []
 
-## enter_tree ###########################################################
-
-func _enter_tree():
-	Hotel.book(self)
-
 ## ready ###########################################################
 
 func _ready():

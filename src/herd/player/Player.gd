@@ -10,12 +10,6 @@ var max_health = 6
 var health = 6
 
 ######################################################
-# enter_tree
-
-func _enter_tree():
-	Hotel.book(self)
-
-######################################################
 # ready
 
 var hud = preload("res://src/herd/hud/HUD.tscn")

@@ -9,9 +9,6 @@ class_name Player
 
 var initial_pos
 
-func _enter_tree():
-	Hotel.book(self)
-
 func hotel_data():
 	return {coins=coins, health=health, items=items}
 
@@ -21,6 +18,8 @@ func check_out(data):
 	items = data.get("items", items)
 
 func _ready():
+	Hotel.register(self)
+
 	Cam.ensure_camera({player=self})
 	Hood.ensure_hud()
 	action_detector.setup(self, {action_hint=action_hint})

@@ -12,7 +12,7 @@ func on_player_spawned(_player):
 ######################################################
 # register
 
-# register any static zones/scenes with Hotel
+# setup/load/cleanup any state
 func register():
 	pass
 
