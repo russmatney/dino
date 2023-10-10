@@ -652,6 +652,22 @@
 						"type": "string",
 						"value": "Pluggs McGee"
 					},
+					"game_singleton": {
+						"type": "resource",
+						"value": "res://src/pluggs/Pluggs.gd"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/pluggs/menus/MainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/pluggs/menus/PauseMenu.tscn"
+					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/pluggs/player/Pluggs.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/pluggs"
