@@ -30,6 +30,24 @@
 				"_index": 0,
 				"_name": "DinoGame",
 				"_script_path": "res://addons/core/DinoGameEntity.gd"
+			},
+			{
+				"_category_id": "",
+				"_icon_color": "eb4f4fff",
+				"_id": "45",
+				"_ids_generation_class": "MetroTravelPointIds",
+				"_index": 0,
+				"_name": "MetroTravelPoint",
+				"_script_path": "res://addons/metro/MetroTravelPointEntity.gd"
+			},
+			{
+				"_category_id": "45",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "46",
+				"_ids_generation_class": "DemoLandTravelPointIds",
+				"_index": 0,
+				"_name": "DemoLandTravelPoint"
 			}
 		],
 		"_entities": [
@@ -697,6 +715,110 @@
 						"value": "res://src/woods"
 					}
 				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "47",
+				"_index": 0,
+				"_name": "Area01Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/area01/Area01.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "54",
+				"_index": 0,
+				"_name": "Area02Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/area02/Area02.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "55",
+				"_index": 0,
+				"_name": "Area03Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/Area03.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "56",
+				"_index": 0,
+				"_name": "Area04Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/Area04.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "57",
+				"_index": 0,
+				"_name": "Area05Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/Area05.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "58",
+				"_index": 0,
+				"_name": "Area06Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/Area06PurpleStone.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "59",
+				"_index": 0,
+				"_name": "Area07Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/Area07GrassyCave.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "46",
+				"_icon_color": "ffffff00",
+				"_id": "60",
+				"_index": 0,
+				"_name": "Area08Door01",
+				"_property_overrides": {
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/demoland/zones/Area08AllTheThings.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -804,12 +926,26 @@
 				"_id": "44",
 				"_name": "player_scene",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "45",
+				"_default_value": "",
+				"_id": "50",
+				"_name": "destination_node_path",
+				"_type": "string"
+			},
+			{
+				"_category_id": "45",
+				"_default_value": null,
+				"_id": "53",
+				"_name": "destination_zone",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 44
+			"default": 60
 		}
 	}
 }

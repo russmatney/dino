@@ -35,26 +35,19 @@ func reload_current_zone():
 ###########################################################
 # Zone travel
 
-func travel_to(dest_zone_name, elevator_path):
-	if current_zone.name == dest_zone_name:
-		Debug.pr("Traveling in same zone", dest_zone_name, elevator_path)
-		current_zone.set_spawn_node(elevator_path)
-		Game.player.clear_forced_movement_target()
-		Game.player.position = current_zone.player_spawn_coords()
-		return
+func travel_to(dest_zone, elevator_path=null):
+	# TODO restore same-zone travel
+	# if current_zone.name == dest_zone_name:
+	# 	Debug.pr("Traveling in same zone", dest_zone_name, elevator_path)
+	# 	if elevator_path:
+	# 		current_zone.set_spawn_node(elevator_path)
+	# 	Game.player.clear_forced_movement_target()
+	# 	Game.player.position = current_zone.player_spawn_coords()
+	# 	return
 
-	Debug.pr("Traveling to zone", dest_zone_name, elevator_path)
+	Debug.pr("Traveling to zone", dest_zone, elevator_path)
 
-	var dest_zone = Hotel.first({group=Metro.zones_group, zone_name=dest_zone_name})
-	if dest_zone == null:
-		Debug.warn("Can't travel_to(), no zone found", dest_zone_name, elevator_path)
-		return
-
-	if not "scene_file_path" in dest_zone:
-		Debug.warn("Can't travel_to(), no scene_file_path in zone", dest_zone)
-		return
-
-	load_zone(dest_zone["scene_file_path"], elevator_path)
+	load_zone(dest_zone, elevator_path)
 
 ###########################################################
 # world update

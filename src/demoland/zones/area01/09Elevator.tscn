@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcu418utbav6s"]
+[gd_scene load_steps=9 format=3 uid="uid://dcu418utbav6s"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_2onbw"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_0xsm0"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_0mkwh"]
+[ext_resource type="Script" path="res://addons/metro/MetroTravelPointEntity.gd" id="4_mlbpj"]
 [ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="5_0dxrk"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="5_61naw"]
+
+[sub_resource type="Resource" id="Resource_ji4th"]
+script = ExtResource("4_mlbpj")
+_id = "54"
 
 [node name="09Elevator" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_2onbw")
@@ -15,7 +20,7 @@ layer_0/tile_data = PackedInt32Array(-327687, 1, 0, -262151, 131073, 2, -196615,
 
 [node name="ToArea02" parent="." instance=ExtResource("3_0xsm0")]
 position = Vector2(0, 24)
-destination_zone_name = "Area02"
+destination_travel_point = SubResource("Resource_ji4th")
 destination_travel_point_path = "./01Elevator/ToArea01"
 
 [node name="CamPOF" parent="." groups=["auto_pofs"] instance=ExtResource("4_0mkwh")]
@@ -83,18 +88,102 @@ position = Vector2(56, -48)
 [node name="@CamPOA@61760" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
 position = Vector2(-56, 56)
 
-[node name="@Marker2D@23457" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
+[node name="@Marker2D@23457" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@23458" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@23459" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@23460" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@24151" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@24152" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@24153" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@24154" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@30047" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@30048" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@30049" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@30050" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@32112" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@32113" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@32114" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@32115" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@35384" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@35385" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@35386" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@35387" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@20520" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@20521" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@20522" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@20523" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@21984" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, -48)
+
+[node name="@Marker2D@21985" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, 56)
+
+[node name="@Marker2D@21986" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(56, -48)
+
+[node name="@Marker2D@21987" parent="." groups=["auto_poas"] instance=ExtResource("5_61naw")]
+position = Vector2(-56, 56)
+
+[node name="@Marker2D@26933" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
 position = Vector2(-56, -48)
 script = ExtResource("5_0dxrk")
 
-[node name="@Marker2D@23458" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
+[node name="@Marker2D@26934" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
 position = Vector2(56, 56)
 script = ExtResource("5_0dxrk")
 
-[node name="@Marker2D@23459" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
+[node name="@Marker2D@26935" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
 position = Vector2(56, -48)
 script = ExtResource("5_0dxrk")
 
-[node name="@Marker2D@23460" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
+[node name="@Marker2D@26936" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("5_61naw")]
 position = Vector2(-56, 56)
 script = ExtResource("5_0dxrk")

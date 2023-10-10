@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://8f4hlmjcovq2"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_u3uiw"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_fhgi7"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="3_dq8nu"]
-[ext_resource type="PackedScene" path="res://src/hatbot/entities/Elevator.tscn" id="4_e7ttu"]
-[ext_resource type="PackedScene" path="res://src/hatbot/entities/Candle.tscn" id="5_re77u"]
-[ext_resource type="PackedScene" path="res://src/hatbot/enemies/Soldier.tscn" id="6_tmpjk"]
+[ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="4_e7ttu"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="5_re77u"]
+[ext_resource type="Script" path="res://addons/metro/MetroTravelPointEntity.gd" id="5_xu4kg"]
+[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="6_tmpjk"]
 [ext_resource type="PackedScene" path="res://src/demoland/zones/area02/04BossTime.tscn" id="7_l0w3e"]
+
+[sub_resource type="Resource" id="Resource_p4o6o"]
+script = ExtResource("5_xu4kg")
+_id = "47"
 
 [node name="Area02" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_u3uiw")
@@ -14,7 +19,7 @@ script = ExtResource("1_u3uiw")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.454902, 0.423529, 0.486275, 1)
 
-[node name="01Elevator" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
+[node name="01Elevator" type="Node2D" parent="." groups=["metro_rooms"]]
 show_behind_parent = true
 script = ExtResource("2_fhgi7")
 
@@ -30,10 +35,11 @@ shadow_enabled = true
 
 [node name="ToArea01" parent="01Elevator" instance=ExtResource("4_e7ttu")]
 position = Vector2(0, 8)
+destination_travel_point = SubResource("Resource_p4o6o")
 destination_zone_name = "Area01"
 destination_travel_point_path = "./09Elevator/ToArea02"
 
-[node name="02Hallway" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
+[node name="02Hallway" type="Node2D" parent="." groups=["metro_rooms"]]
 show_behind_parent = true
 position = Vector2(144, 0)
 script = ExtResource("2_fhgi7")
@@ -48,16 +54,16 @@ rotation = 2.55691
 color = Color(0.160784, 0.482353, 0.568627, 1)
 shadow_enabled = true
 
-[node name="Candle" parent="02Hallway" instance=ExtResource("5_re77u")]
+[node name="Candle" parent="02Hallway" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(-4, -8)
 
-[node name="Candle2" parent="02Hallway" instance=ExtResource("5_re77u")]
+[node name="Candle2" parent="02Hallway" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(84, -8)
 
 [node name="Soldier" parent="02Hallway" instance=ExtResource("6_tmpjk")]
 position = Vector2(-40, 0)
 
-[node name="03Crossroads" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
+[node name="03Crossroads" type="Node2D" parent="." groups=["metro_rooms"]]
 show_behind_parent = true
 position = Vector2(312, 120)
 script = ExtResource("2_fhgi7")
@@ -72,23 +78,23 @@ rotation = 2.55691
 color = Color(0.160784, 0.482353, 0.568627, 1)
 shadow_enabled = true
 
-[node name="Candle3" parent="03Crossroads" instance=ExtResource("5_re77u")]
+[node name="Candle3" parent="03Crossroads" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(64, -24)
 
-[node name="Candle4" parent="03Crossroads" instance=ExtResource("5_re77u")]
+[node name="Candle4" parent="03Crossroads" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(53, 40)
 
-[node name="04BossTime" parent="." groups=["metro_rooms"] instance=ExtResource("7_l0w3e")]
+[node name="04BossTime" parent="." instance=ExtResource("7_l0w3e")]
 show_behind_parent = true
 position = Vector2(64, 160)
 
-[node name="Candle5" parent="04BossTime" instance=ExtResource("5_re77u")]
+[node name="Candle5" parent="04BossTime" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(132, 136)
 
-[node name="Candle6" parent="04BossTime" instance=ExtResource("5_re77u")]
+[node name="Candle6" parent="04BossTime" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(237, 176)
 
-[node name="05SomeRoom" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
+[node name="05SomeRoom" type="Node2D" parent="." groups=["metro_rooms"]]
 show_behind_parent = true
 script = ExtResource("2_fhgi7")
 
@@ -98,10 +104,11 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 
 [node name="ToArea03" parent="05SomeRoom" instance=ExtResource("4_e7ttu")]
 position = Vector2(492, 152)
+destination_travel_point = SubResource("Resource_p4o6o")
 destination_zone_name = "Area03"
 destination_travel_point_path = "./01Elevator/ToArea02"
 
-[node name="06SomeOtherRoom" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
+[node name="06SomeOtherRoom" type="Node2D" parent="." groups=["metro_rooms"]]
 show_behind_parent = true
 position = Vector2(-328, -16)
 script = ExtResource("2_fhgi7")
@@ -111,10 +118,11 @@ layer_0/tile_data = PackedInt32Array(589878, 1, 0, 655414, 131073, 0, 720950, 13
 
 [node name="ToArea04" parent="06SomeOtherRoom" instance=ExtResource("4_e7ttu")]
 position = Vector2(464, 152)
+destination_travel_point = SubResource("Resource_p4o6o")
 destination_zone_name = "Area04"
 destination_travel_point_path = "./01Elevator/ToArea02"
 
-[node name="07HiddenRoom" type="Node2D" parent="." groups=["metro_rooms", "metro_rooms"]]
+[node name="07HiddenRoom" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("2_fhgi7")
 
 [node name="DemoTiles" parent="07HiddenRoom" instance=ExtResource("3_dq8nu")]
@@ -123,5 +131,5 @@ layer_0/tile_data = PackedInt32Array(1966092, 131073, 0, 1966091, 1, 2, 2031627,
 [node name="Soldier" parent="07HiddenRoom" instance=ExtResource("6_tmpjk")]
 position = Vector2(-16, 432)
 
-[node name="Candle7" parent="07HiddenRoom" instance=ExtResource("5_re77u")]
+[node name="Candle7" parent="07HiddenRoom" groups=["metro_checkpoints"] instance=ExtResource("5_re77u")]
 position = Vector2(20, 440)

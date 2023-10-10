@@ -12,6 +12,8 @@ func _get_configuration_warnings():
 
 ## vars ###########################################################
 
+@export var destination_travel_point: MetroTravelPointEntity
+
 @onready var action_area = $ActionArea
 @onready var anim = $AnimatedSprite2D
 @onready var action_hint = $ActionHint
@@ -29,8 +31,6 @@ func _on_enter_tree():
 ## ready ##################################################################
 
 func _ready():
-	Hotel.register(self)
-
 	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 	anim.animation_finished.connect(_on_anim_finished)
 
@@ -41,19 +41,6 @@ func _ready():
 	if p is MetroRoom:
 		room = p
 
-
-## hotel ##################################################################
-
-func check_out(_data):
-	pass
-
-func hotel_data():
-	return {
-		destination_zone_name=destination_zone_name,
-		destination_travel_point_path=destination_travel_point_path,
-		}
-
-
 ## actions ##################################################################
 
 var actions = [
@@ -61,13 +48,14 @@ var actions = [
 	]
 
 func get_dest_label():
-	if destination_zone_name:
-		return "To %s" % destination_zone_name.capitalize()
+	Debug.pr("dest label?", destination_travel_point)
+
+	if destination_travel_point:
+		return "To %s" % destination_travel_point.get_destination_name().capitalize()
 	else:
 		return "Travel"
 
 ## on_anim_finished ##################################################################
-
 
 func _on_anim_finished():
 	if anim.animation == "opening":
@@ -80,8 +68,7 @@ func _on_anim_finished():
 		else:
 			z_index = 0
 
-###################################################################
-# travel to destination
+## travel to destination ##################################################################
 
 func travel(player):
 	if is_traveling:
@@ -93,76 +80,7 @@ func travel(player):
 	player.force_move_to_target(global_position)
 	is_traveling = true
 	z_index = 10
-	travel_dest = [destination_zone_name, destination_travel_point_path]
+	# TODO get and pass the node_path
+	# TODO set a callable instead of this args hand-off none-sense
+	travel_dest = [destination_travel_point.get_destination_zone(), null]
 	anim.play("closing")
-
-###################################################################
-# fancy exported destination vars
-
-## Helper to clear the destination area/travel_point path
-@export var clear: bool :
-	set(v):
-		clear = v
-		if v:
-			destination_zone_name = ""
-			destination_travel_point_path = ""
-
-var destination_zone_name: String :
-	set(v):
-		destination_zone_name = v
-		notify_property_list_changed()
-
-var destination_travel_point_path: String :
-	set(v):
-		destination_travel_point_path = v
-		notify_property_list_changed()
-
-func _get_property_list() -> Array:
-	var dest_travel_point_usage = PROPERTY_USAGE_NO_EDITOR
-	if not destination_zone_name == null and len(destination_zone_name) > 0:
-		dest_travel_point_usage = PROPERTY_USAGE_DEFAULT
-
-	return [{
-			name = "destination_zone_name",
-			type = TYPE_STRING,
-			hint = PROPERTY_HINT_ENUM,
-			hint_string = list_zone_names()
-		}, {
-			name = "destination_travel_point_path",
-			type = TYPE_STRING,
-			usage = dest_travel_point_usage,
-			hint = PROPERTY_HINT_ENUM,
-			hint_string = list_travel_point_paths()
-		}]
-
-func list_zone_names():
-	var areas = Hotel.query({"group": Metro.zones_group})
-	return ",".join(areas.map(func(area): return area.get("name")))
-
-func travel_point_path(entry):
-	var rm = str(entry.get("room_name")).replace(destination_zone_name, ".")
-	var path = str(entry.get("path"))
-	if path.contains(rm):
-		return str(path)
-	else:
-		return str(rm.path_join(path)).replace("/./", "/")
-
-func list_travel_point_paths():
-	if destination_zone_name == null or len(destination_zone_name) == 0:
-		return ""
-
-	var travel_points = Hotel.query({
-		"group": group_name,
-		"zone_name": destination_zone_name,
-		# TODO fix/restore/remove this?
-		# exclude THIS travel_point
-		# "filter": func(travel_point): return travel_point["name"] != name \
-		# include this to avoid excluding travel_point nodes that aren't renamed
-		# or name == "Elevator",
-		})
-
-	if len(travel_points) == 1:
-		destination_travel_point_path = travel_point_path(travel_points[0])
-		return destination_travel_point_path
-
-	return ",".join(travel_points.map(travel_point_path))

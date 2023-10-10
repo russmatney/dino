@@ -8,7 +8,6 @@ class_name MetroCheckpoint
 var visit_count = 0
 var room
 
-
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
@@ -39,13 +38,11 @@ func hotel_data():
 func check_out(data):
 	visit_count = Util.get_(data, "visit_count", visit_count)
 
-
 ## actions ###########################################################
 
 var actions = [
 	Action.mk({label="Checkpoint", fn=visit, show_on_actor=false}),
 	]
-
 
 ## visit ###########################################################
 
