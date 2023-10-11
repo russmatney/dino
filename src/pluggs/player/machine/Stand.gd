@@ -10,13 +10,24 @@ func enter(msg = {}):
 
 
 func process(_delta: float):
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
+		machine.transit("Jump")
+		return
+
+	if actor.move_vector.x != 0:
 		machine.transit("Run")
-	elif Input.is_action_pressed("move_down"):
+		return
+
+	if Input.is_action_pressed("move_down"):
 		machine.transit("Bucket", {"animate": true})
 
 
 func physics_process(delta):
-	actor.velocity.y += actor.gravity * delta
-	actor.set_velocity(actor.velocity)
+	# slow down
+	actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.5)
+
+	# gravity
+	if not actor.is_on_floor():
+		actor.velocity.y += actor.gravity * delta
+
 	actor.move_and_slide()

@@ -1,27 +1,39 @@
 extends State
 
-
 func enter(_ctx = {}):
 	actor.anim.play("running")
-
 
 func physics_process(delta):
 	if Input.is_action_pressed("move_down"):
 		machine.transit("Bucket", {"animate": true})
-		# probably not ideal, maybe we want a slow down
+		# TODO do a slow-down/slide
 		actor.velocity.x = 0
 		return
 
-	var move_dir = Trolley.move_vector()
-	actor.velocity.x = actor.speed * move_dir.x
-	actor.velocity.y += actor.gravity * delta
-	actor.set_velocity(actor.velocity)
-	actor.move_and_slide()
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
+		machine.transit("Jump")
+		return
 
-	if move_dir.x > 0:
-		actor.face_right()
-	elif move_dir.x < 0:
-		actor.face_left()
+	# gravity
+	if not actor.is_on_floor():
+		actor.velocity.y += actor.gravity * delta
 
-	if is_equal_approx(move_dir.x, 0.0):
+	# apply move dir or slow down
+	if actor.move_vector.length() > 0.01:
+		var new_speed = actor.run_speed * actor.move_vector.x * delta
+		actor.velocity.x = lerp(actor.velocity.x, new_speed, 0.5)
+	else:
+		actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.5)
+
+	var collided = actor.move_and_slide()
+	if collided:
+		var should_exit = actor.collision_check()
+		if should_exit:
+			return
+
+	if actor.velocity.y > 0:
+		machine.transit("Fall", {"coyote_time": true})
+		return
+
+	if abs(actor.velocity.x) < 1:
 		machine.transit("Stand")

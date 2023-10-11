@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ciqiqgf3wxq7n"]
+[gd_scene load_steps=32 format=3 uid="uid://ciqiqgf3wxq7n"]
 
 [ext_resource type="Script" path="res://src/pluggs/player/Pluggs.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://epufx5aihbhp" path="res://src/pluggs/player/pluggs32.png" id="2_lye74"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://src/pluggs/player/machine/Bucket.gd" id="6_c32yk"]
 [ext_resource type="Script" path="res://src/pluggs/player/machine/DragReach.gd" id="7_mortt"]
 [ext_resource type="Script" path="res://src/pluggs/player/machine/DragPull.gd" id="8_q0o2r"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/Jump.gd" id="9_slvwt"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/Fall.gd" id="10_ch8k1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87bpj"]
 atlas = ExtResource("2_lye74")
@@ -199,7 +201,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(48, 43)
+size = Vector2(16, 25)
 
 [node name="Pluggs" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("2")
@@ -207,9 +209,8 @@ script = ExtResource("2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -18)
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_erj5l")
-animation = &"idle-standing"
+animation = &"idle-bucket"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -221,7 +222,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -7.5)
+position = Vector2(0, -12.5)
 shape = SubResource("1")
 
 [node name="Machine" type="Node" parent="."]
@@ -242,6 +243,12 @@ script = ExtResource("7_mortt")
 
 [node name="DragPull" type="Node" parent="Machine"]
 script = ExtResource("8_q0o2r")
+
+[node name="Jump" type="Node" parent="Machine"]
+script = ExtResource("9_slvwt")
+
+[node name="Fall" type="Node" parent="Machine"]
+script = ExtResource("10_ch8k1")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 offset_left = -64.0
