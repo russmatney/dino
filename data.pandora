@@ -689,6 +689,10 @@
 						"type": "string",
 						"value": "Snake"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": false
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/snake/SnakeGame.gd"

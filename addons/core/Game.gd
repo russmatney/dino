@@ -68,6 +68,9 @@ func ensure_current_game():
 		Debug.warn("Failed to ensure current_game in scene:", get_tree().current_scene)
 
 func reset_current_game():
+	current_game.cleanup()
+	# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
+	# current_game.queue_free()
 	current_game = null
 	ensure_current_game()
 

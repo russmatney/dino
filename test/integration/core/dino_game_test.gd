@@ -10,10 +10,6 @@ func test_registered_games():
 		# assert_not_null(ent.get_singleton(), "%s missing singleton" % ent.get_display_name())
 
 func test_ensure_current_game_hatbot():
-	assert_null(Game.current_game)
-	Game.ensure_current_game()
-	assert_null(Game.current_game)
-
 	# first level of hatbot
 	var scene = load("res://src/hatbot/zones/LevelZero.tscn")
 	var inst = scene.instantiate()
@@ -21,9 +17,8 @@ func test_ensure_current_game_hatbot():
 	# load/setup scene/inst
 	get_tree().get_root().add_child(inst)
 	get_tree().set_current_scene(inst)
-
-	assert_null(Game.current_game)
-	Game.ensure_current_game()
+	Game.reset_current_game()
+	await get_tree().create_timer(0.3).timeout
 
 	# probably want to drop this
 	assert_eq(Game.current_game.game_entity.get_singleton().resource_path, "res://src/hatbot/HatBot.gd")

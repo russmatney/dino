@@ -7,8 +7,6 @@ extends CanvasLayer
 var all_sheep = []
 
 func _ready():
-	Game.ensure_current_game()
-
 	update_sheep_saved()
 
 func update_sheep_saved():
