@@ -41,11 +41,11 @@ func render():
 
 	if anim != null:
 		match type:
-			DotHop.dotType.Dot:
+			DHData.dotType.Dot:
 				anim.set_visible(true)
 				anim.play("twist")
 				animate_entry()
-			DotHop.dotType.Dotted:
+			DHData.dotType.Dotted:
 				var t = 0.4
 				animate_exit(t)
 				await get_tree().create_timer(t).timeout
@@ -53,7 +53,7 @@ func render():
 				# TODO animate crunch/pickup
 				# TODO crunch sound
 				anim.set_visible(false)
-			DotHop.dotType.Goal:
+			DHData.dotType.Goal:
 				hide_anims()
 				anim_yellow.set_visible(true)
 				anim_yellow.play("twist")

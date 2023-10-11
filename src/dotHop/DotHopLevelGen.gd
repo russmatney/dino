@@ -28,7 +28,7 @@ func generate_level(num=0):
 		if ch.name == level_node_name:
 			ch.free()
 
-	var node = DotHop.build_puzzle_node({game_def=game_def, puzzle_num=num})
+	var node = DotHopPuzzle.build_puzzle_node({game_def=game_def, puzzle_num=num})
 	if node == null:
 		Debug.warn("No node generated for level num", num)
 		return

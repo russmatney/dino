@@ -17,7 +17,11 @@ var dismiss_jumbo_signal
 ## ready #####################################################################
 
 func _ready():
-	DotHop.register_game(self)
+	if Engine.has_singleton("DotHop"):
+		var dh = Engine.get_singleton("DotHop")
+		dh.register_game(self)
+	else:
+		Debug.warn("No dothop singleton found, some feats may not work")
 
 	# TODO if not a managed game, honor the dev loop (game_def_path, puzzle_num)
 	if puzzle_set != null:
@@ -44,7 +48,7 @@ func rebuild_puzzle():
 		await puzzle_node.tree_exited
 
 	# load current level
-	puzzle_node = DotHop.build_puzzle_node({
+	puzzle_node = DotHopPuzzle.build_puzzle_node({
 		game_def=game_def,
 		puzzle_num=puzzle_num,
 		puzzle_scene=puzzle_scene

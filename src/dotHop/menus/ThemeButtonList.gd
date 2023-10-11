@@ -10,5 +10,7 @@ func _ready():
 	for th in themes:
 		add_menu_item({
 			label=th.get_display_name(),
-			fn=DotHop.change_theme.bind(th),
+			fn=func(): # TODO build an event bus so we don't need refs like this
+				var dh = Engine.get_singleton("DotHop")
+				dh.change_theme(th),
 			})

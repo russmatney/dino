@@ -2,7 +2,7 @@ extends GutTest
 class_name DotHopTest
 
 func build_puzzle(puzzle):
-	return DotHop.build_puzzle_node({puzzle=puzzle, game_def_path="res://src/dotHop/dothop.txt"})
+	return DotHopPuzzle.build_puzzle_node({puzzle=puzzle, game_def_path="res://src/dotHop/dothop.txt"})
 
 class TestBasicMovement:
 	extends DotHopTest

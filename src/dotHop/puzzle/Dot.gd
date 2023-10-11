@@ -11,7 +11,7 @@ func _get_configuration_warnings():
 
 ## vars #########################################################
 
-@export var type: DotHop.dotType
+@export var type: DHData.dotType
 @export var square_size = 16 :
 	set(v):
 		square_size = v
@@ -45,9 +45,9 @@ func current_position():
 func render():
 	if label != null:
 		match type:
-			DotHop.dotType.Dot: display_name = "dot"
-			DotHop.dotType.Dotted: display_name = "dotted"
-			DotHop.dotType.Goal: display_name = "goal"
+			DHData.dotType.Dot: display_name = "dot"
+			DHData.dotType.Dotted: display_name = "dotted"
+			DHData.dotType.Goal: display_name = "goal"
 
 		label.text = "[center]%s[/center]" % display_name
 		label.custom_minimum_size = Vector2.ONE * square_size
@@ -56,20 +56,20 @@ func render():
 		color_rect.size = Vector2.ONE * square_size
 
 		match type:
-			DotHop.dotType.Dot: color_rect.color = Color(1, 1, 0)
-			DotHop.dotType.Dotted: color_rect.color = Color(0, 1, 1)
-			DotHop.dotType.Goal: color_rect.color = Color(1, 0, 1)
+			DHData.dotType.Dot: color_rect.color = Color(1, 1, 0)
+			DHData.dotType.Dotted: color_rect.color = Color(0, 1, 1)
+			DHData.dotType.Goal: color_rect.color = Color(1, 0, 1)
 
 ## type changes #########################################################
 
 func mark_goal():
-	type = DotHop.dotType.Goal
+	type = DHData.dotType.Goal
 	render()
 
 func mark_dotted():
-	type = DotHop.dotType.Dotted
+	type = DHData.dotType.Dotted
 	render()
 
 func mark_undotted():
-	type = DotHop.dotType.Dot
+	type = DHData.dotType.Dot
 	render()

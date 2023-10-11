@@ -14,7 +14,7 @@ var buttons = [
 	},
 	{
 		label="Restart Game",
-		fn=Game.restart_game.bind(Herd),
+		fn=Game.restart_game,
 		hide_fn=func (): return not Herd.no_more_levels()
 	},
 	{

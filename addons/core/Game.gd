@@ -88,22 +88,16 @@ func register_current_game(game):
 
 ## restart game ##########################################################
 
-func restart_game(game=null, opts=null):
+func restart_game(opts=null):
 	remove_player()
 	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
 	is_managed = true
 
-	# TODO support a passed game_entity and/or game_ent_id
-	if game and is_instance_valid(game):
-		register_current_game(game)
-	elif game:
-		Debug.warn("Attempted to restart freed game, aborting")
-		return
-
 	if not current_game:
 		ensure_current_game()
 	if not current_game:
+		Debug.warn("Cannot restart_game, no current game")
 		return
 	if opts == null:
 		opts = {}
@@ -126,7 +120,7 @@ func launch(game_entity):
 		Navi.nav_to(game.game_entity.get_main_menu())
 		return
 
-	restart_game(game)
+	restart_game()
 
 ## load game menu ##########################################################
 

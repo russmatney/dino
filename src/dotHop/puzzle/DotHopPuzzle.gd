@@ -2,6 +2,58 @@
 extends Node2D
 class_name DotHopPuzzle
 
+## static ##########################################################################
+
+static var fallback_puzzle_scene = "res://src/dotHop/puzzle/DotHopPuzzle.tscn"
+
+# Builds and returns a "puzzle_scene" node, with a game_def and level_def set
+# Accepts several input options, but only 'game_def' or 'game_def_path' are required.
+#
+# A raw puzzle or puzzle_num can be specified to load/pick a level for a particular game_def.
+# `puzzle_scene` should be set according to the current theme.
+#
+# This func could live on the DotHopGame script, but a function like this is useful
+# for testing just the game logic (without loading a full DotHopGame)
+static func build_puzzle_node(opts:Variant) -> Node2D:
+	# parse the puzzle script game, set game_def
+	var game_def_p = opts.get("game_def_path")
+	var _game_def = opts.get("game_def")
+	if not _game_def and game_def_p:
+		_game_def = Puzz.parse_game_def(game_def_p)
+
+	if _game_def == null:
+		Debug.warn("No gamedef passed, cannot build_puzzle_node()", opts)
+		return
+
+	# parse/pick the puzzle to load
+	var puzzle = opts.get("puzzle")
+	# default to loading the first level
+	var puzzle_num = opts.get("puzzle_num", 0)
+	var _level_def
+
+	if puzzle != null:
+		_level_def = Puzz.parse_level_def(puzzle, opts.get("puzzle_message"))
+	elif puzzle_num != null:
+		_level_def = _game_def.levels[puzzle_num]
+	else:
+		pass
+
+	if _level_def == null or _level_def.shape == null:
+		Debug.warn("Could not determine _level_def, cannot build_puzzle_node()", opts)
+		return
+
+	# PackedScene, string, or use fallback
+	var scene = opts.get("puzzle_scene")
+	if scene is String:
+		scene = load(scene)
+	elif scene == null:
+		scene = load(fallback_puzzle_scene)
+
+	var node = scene.instantiate()
+	node.game_def = _game_def
+	node.level_def = _level_def
+	return node
+
 ## vars ##############################################################
 
 @export_file var game_def_path: String = "res://src/dotHop/dothop.txt" :
@@ -27,9 +79,9 @@ var state
 signal win
 
 var obj_type = {
-	"Dot": DotHop.dotType.Dot,
-	"Dotted": DotHop.dotType.Dotted,
-	"Goal": DotHop.dotType.Goal,
+	"Dot": DHData.dotType.Dot,
+	"Dotted": DHData.dotType.Dotted,
+	"Goal": DHData.dotType.Goal,
 	}
 
 # NOTE these are overridden by each theme - essentially fallbacks for testing/debugging
@@ -43,7 +95,7 @@ var obj_scene = {
 ## enter_tree ##############################################################
 
 func _init():
-	add_to_group(DotHop.puzzle_group, true)
+	add_to_group(DHData.puzzle_group, true)
 
 ## ready ##############################################################
 
@@ -113,7 +165,7 @@ func hold_to_reset_puzzle():
 		# already holding
 		return
 	reset_tween = create_tween()
-	reset_tween.tween_callback(init_game_state).set_delay(DotHop.reset_hold_t)
+	reset_tween.tween_callback(init_game_state).set_delay(DHData.reset_hold_t)
 
 func cancel_reset_puzzle():
 	if reset_tween == null:
@@ -215,7 +267,7 @@ func rebuild_nodes():
 
 	if not Engine.is_editor_hint():
 		ensure_camera_anchor()
-		Hood.ensure_hud(DotHop.hud_scene)
+		Hood.ensure_hud(DHData.hud_scene)
 
 	for y in len(state.grid):
 		for x in len(state.grid[y]):

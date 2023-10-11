@@ -2,7 +2,6 @@
 extends NaviButtonList
 
 var button_defs = [
-	# TODO puzzle set select
 	{
 		label="Dino Menu",
 		fn=Navi.nav_to_main_menu,
@@ -18,7 +17,7 @@ func _ready():
 	for ps in puzzle_sets:
 		add_menu_item({
 			label=ps.get_display_name(),
-			fn=Game.restart_game.bind(DotHop, {puzzle_set=ps}),
+			fn=Game.restart_game.bind({puzzle_set=ps}),
 			})
 
 	for def in button_defs:

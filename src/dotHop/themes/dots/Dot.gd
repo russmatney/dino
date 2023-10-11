@@ -22,11 +22,11 @@ func render():
 
 	if anim != null:
 		match type:
-			DotHop.dotType.Dot: anim.play("dot")
-			DotHop.dotType.Dotted:
+			DHData.dotType.Dot: anim.play("dot")
+			DHData.dotType.Dotted:
 				await get_tree().create_timer(0.4).timeout
 				anim.play("dotted")
-			DotHop.dotType.Goal: anim.play("goal")
+			DHData.dotType.Goal: anim.play("goal")
 
 ## entry animation ###########################################################
 

@@ -21,11 +21,11 @@ func render():
 
 	if anim != null:
 		match type:
-			DotHop.dotType.Dot: anim.play("spin")
-			DotHop.dotType.Dotted:
+			DHData.dotType.Dot: anim.play("spin")
+			DHData.dotType.Dotted:
 				await get_tree().create_timer(0.4).timeout
 				anim.play("floating")
-			DotHop.dotType.Goal: anim.play("rubble")
+			DHData.dotType.Goal: anim.play("rubble")
 
 ## entry animation ###########################################################
 

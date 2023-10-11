@@ -14,7 +14,7 @@ extends CanvasLayer
 
 func _ready():
 	Hotel.entry_updated.connect(_on_entry_updated)
-	var initial_puzzle = Hotel.first({group=DotHop.puzzle_group})
+	var initial_puzzle = Hotel.first({group=DHData.puzzle_group})
 	if initial_puzzle == null:
 		Debug.warn("No initial puzzle found!")
 	else:
@@ -130,7 +130,7 @@ func animate_undo():
 var resetting
 var reset_tween
 func show_resetting():
-	var hold_t = DotHop.reset_hold_t
+	var hold_t = DHData.reset_hold_t
 	resetting = true
 	reset_label.text = "Keep holding to reset..."
 
