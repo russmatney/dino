@@ -6,7 +6,7 @@ var ingredient_data
 @onready var anim = $AnimatedSprite2D
 
 func _ready():
-	ingredient_data = Spike.all_ingredients.get(ingredient_type)
+	ingredient_data = SpikeData.all_ingredients.get(ingredient_type)
 	if ingredient_data.anim_scene:
 		remove_child(anim)
 		anim.queue_free()

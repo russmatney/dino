@@ -2,7 +2,7 @@
 extends SSEnemy
 
 @onready var drop_pickup_scene = preload("res://src/spike/entities/BlobPickup.tscn")
-@export var drop_ingredient_type: Spike.Ingredient = Spike.Ingredient.GreyBlob
+@export var drop_ingredient_type: SpikeData.Ingredient = SpikeData.Ingredient.GreyBlob
 
 func _get_configuration_warnings():
 	return super._get_configuration_warnings()

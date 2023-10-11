@@ -8,7 +8,7 @@ var ingredient_data
 func _ready():
 	body_entered.connect(_on_body_entered)
 
-	ingredient_data = Spike.all_ingredients.get(ingredient_type)
+	ingredient_data = SpikeData.all_ingredients.get(ingredient_type)
 	if ingredient_data.anim_scene:
 		remove_child(anim)
 		anim.queue_free()

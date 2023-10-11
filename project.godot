@@ -52,7 +52,6 @@ Game="*res://addons/core/Game.gd"
 Puzz="*res://addons/puzz/Puzz.gd"
 Metro="*res://addons/metro/Metro.gd"
 SnakeGame="*res://src/snake/SnakeGame.gd"
-Spike="*res://src/spike/Spike.gd"
 Herd="*res://src/herd/Herd.gd"
 
 [display]

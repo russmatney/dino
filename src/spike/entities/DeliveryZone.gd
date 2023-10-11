@@ -3,7 +3,7 @@ extends Node2D
 @onready var area = $Area2D
 @onready var label = $Label
 
-@export var expected_delivery_type: Spike.Ingredient = Spike.Ingredient.RedBlob
+@export var expected_delivery_type: SpikeData.Ingredient = SpikeData.Ingredient.RedBlob
 @export var expected_delivery_count = 1
 var delivery_count = 0
 
@@ -12,7 +12,7 @@ var complete = false
 func _ready():
 	area.body_entered.connect(_on_body_entered)
 
-	var ing_data = Spike.all_ingredients[expected_delivery_type]
+	var ing_data = SpikeData.all_ingredients[expected_delivery_type]
 
 	Quest.register_quest(self, {label=str("FEED THE VOID: %s" % ing_data.name)})
 	update_quest()

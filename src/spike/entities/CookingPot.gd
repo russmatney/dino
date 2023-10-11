@@ -64,7 +64,7 @@ func start_cooking(ingredient_data):
 	cooking_time = clamp(cooking_time, min_cooking_time, cook_duration)
 
 var drop_pickup_scene = preload("res://src/spike/entities/BlobPickup.tscn")
-var drop_ingredient_type = Spike.Ingredient.RedBlob
+var drop_ingredient_type = SpikeData.Ingredient.RedBlob
 
 func finish_cooking():
 	anim.play("empty")

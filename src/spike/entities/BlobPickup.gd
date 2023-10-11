@@ -3,14 +3,14 @@ extends Node2D
 
 var anim
 @onready var pickup_box = $Area2D
-@export var ingredient_type: Spike.Ingredient = Spike.Ingredient.GreyBlob
+@export var ingredient_type: SpikeData.Ingredient = SpikeData.Ingredient.GreyBlob
 
 var ingredient_data
 
 func _ready():
 	pickup_box.body_entered.connect(_on_body_entered)
 
-	ingredient_data = Spike.all_ingredients.get(ingredient_type)
+	ingredient_data = SpikeData.all_ingredients.get(ingredient_type)
 	if ingredient_data.anim_scene:
 		anim = ingredient_data.anim_scene.instantiate()
 		add_child(anim)
