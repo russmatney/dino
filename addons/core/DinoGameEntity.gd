@@ -31,6 +31,9 @@ func get_scene_path_prefix() -> String:
 func get_player_scene() -> PackedScene:
 	return get_resource("player_scene")
 
+func is_enabled() -> bool:
+	return get_bool("enabled")
+
 ## data ##########################################################
 
 func data():

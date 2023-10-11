@@ -1,9 +1,26 @@
 @tool
 extends Node
 
+## vars ##########################################################
+
+var current_game: DinoGame
+var is_managed: bool = false
+
+## ready ##########################################################
+
+func _ready():
+	player_found.connect(_on_player_found)
+	player_ready.connect(_find_player)
+	_find_player()
+
+	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
+
+## game entities ##########################################################
+
 func all_game_entities():
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
-	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
+		.filter(func(ent): return ent.is_enabled())
 
 func game_for_entity(ent: DinoGameEntity):
 	var singleton = ent.get_singleton()
@@ -20,18 +37,6 @@ func game_for_entity(ent: DinoGameEntity):
 	Engine.register_singleton(game_name, game)
 	return game
 
-## ready ##########################################################
-
-func _ready():
-	player_found.connect(_on_player_found)
-	player_ready.connect(_find_player)
-	_find_player()
-
-	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
-
-
-## games ##########################################################
-
 func game_entity_for_scene(scene):
 	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(scene))
 	if gs.size() == 1:
@@ -41,6 +46,8 @@ func game_entity_for_scene(scene):
 	else:
 		Debug.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
 
+## current game ##########################################################
+
 func set_current_game_for_scene(scene):
 	var ent = game_entity_for_scene(scene)
 	if ent:
@@ -48,7 +55,7 @@ func set_current_game_for_scene(scene):
 
 func set_current_game_for_ent(ent):
 	var game = game_for_entity(ent)
-	if game:
+	if game and is_instance_valid(game):
 		register_current_game(game)
 
 func ensure_current_game():
@@ -64,19 +71,23 @@ func reset_current_game():
 	current_game = null
 	ensure_current_game()
 
-## game lifecycle ##########################################################
-
-
-var current_game: DinoGame
-
-var is_managed: bool = false
-
 func register_current_game(game):
-	Debug.pr("Registering current game", game.game_entity.get_display_name())
-	current_game = game
-	game.register()
+	if game == null or not is_instance_valid(game):
+		Debug.warn("Attempted to register invalid game, aborting", game)
+		return
 
-# TODO does this sometimes restart the wrong game?
+	if current_game != null and current_game != game:
+		current_game.cleanup()
+		# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
+		# current_game.queue_free()
+		Debug.pr("Waiting for cleanup: ", current_game.game_entity.get_display_name())
+		await get_tree().create_timer(0.1).timeout
+	Debug.pr("Registering game: ", game.game_entity.get_display_name())
+	current_game = game
+	current_game.register()
+
+## restart game ##########################################################
+
 func restart_game(game=null, opts=null):
 	remove_player()
 	Navi.resume()  # ensure unpaused
@@ -84,8 +95,11 @@ func restart_game(game=null, opts=null):
 	is_managed = true
 
 	# TODO support a passed game_entity and/or game_ent_id
-	if game:
+	if game and is_instance_valid(game):
 		register_current_game(game)
+	elif game:
+		Debug.warn("Attempted to restart freed game, aborting")
+		return
 
 	if not current_game:
 		ensure_current_game()
@@ -93,46 +107,38 @@ func restart_game(game=null, opts=null):
 		return
 	if opts == null:
 		opts = {}
+
+	Debug.pr("Starting game", current_game.game_entity.get_display_name())
 	current_game.start(opts)
 
+## launch game ######################################################
 
-## game menus ##########################################################
-
-# TODO where is this called?
-func load_main_menu(game=null):
-	if game == null:
-		# reset current game _before_ setting
-		reset_current_game()
-		game = current_game
-	if game and game.game_entity.get_main_menu() != null:
-		# maybe we hide menus on every Navi.nav_to ?
-		Navi.hide_menus()
-		Navi.nav_to(game.game_entity.get_main_menu())
+## For a passed game, load it's main menu. If no menu set, start the game via restart_game
+func launch(game_entity):
+	var game = game_for_entity(game_entity)
+	if game == null or not is_instance_valid(game):
+		Debug.warn("No valid game found for entity, aborting launch", game_entity)
 		return
 
-	Debug.warn("No main_menu in game_entity, naving to fallback main menu.")
-	Navi.nav_to_main_menu()
-
-## For a passed game, load it's main menu. If none is set, start it via restart_game
-func nav_to_game_menu_or_start(game_or_entity):
-	var game
-	if game_or_entity is DinoGameEntity:
-		game = game_for_entity(game_or_entity)
-	else:
-		game = game_or_entity
-
-	# be sure to register/update Game.current_game here!
-	# could rely on manages_scene via reset_current_game,
-	# but we'd have to wait for the menu/game scene to load
 	register_current_game(game)
 
 	if game.game_entity.get_main_menu() != null:
-		# is this hide still necessary?
-		Navi.hide_menus()
 		Navi.nav_to(game.game_entity.get_main_menu())
 		return
 
 	restart_game(game)
+
+## load game menu ##########################################################
+
+# called from most pause menus to return to the game's main menu
+func load_main_menu():
+	reset_current_game()
+	if current_game and current_game.game_entity.get_main_menu() != null:
+		Navi.nav_to(current_game.game_entity.get_main_menu())
+		return
+
+	Debug.warn("No main_menu in game_entity, naving to fallback main menu.")
+	Navi.nav_to_main_menu()
 
 ## player ##########################################################
 

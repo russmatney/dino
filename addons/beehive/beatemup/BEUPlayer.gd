@@ -4,7 +4,6 @@ class_name BEUPlayer
 
 func _enter_tree():
 	add_to_group("player", true)
-	super._enter_tree()
 
 ## ready ###########################################################
 

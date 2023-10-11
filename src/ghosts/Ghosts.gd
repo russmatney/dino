@@ -18,7 +18,6 @@ const room_scenes = [
 var first_room
 
 func register():
-	Debug.pr("Registering GhostHouse")
 	register_menus()
 
 	if first_room == null:

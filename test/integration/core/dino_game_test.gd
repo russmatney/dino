@@ -9,7 +9,7 @@ func test_registered_games():
 		assert_ne(ent.get_display_name(), "")
 		# assert_not_null(ent.get_singleton(), "%s missing singleton" % ent.get_display_name())
 
-func test_ensure_current_game():
+func test_ensure_current_game_hatbot():
 	assert_null(Game.current_game)
 	Game.ensure_current_game()
 	assert_null(Game.current_game)
@@ -30,3 +30,5 @@ func test_ensure_current_game():
 	assert_eq(Game.current_game.get_script().resource_path, "res://src/hatbot/HatBot.gd")
 
 	inst.queue_free()
+
+## per game launch tests

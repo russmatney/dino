@@ -30,6 +30,11 @@ func show_menu(menu):
 	menu.show()
 	find_focus(menu)
 
+func clear_menus():
+	menus = menus.filter(func(m): return is_instance_valid(m))
+	for m in menus:
+		m.queue_free()
+
 ## ready ###################################################################
 
 var current_scene
@@ -93,14 +98,12 @@ func nav_to(scene):
 	Debug.prn("nav_to: ", scene)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(scene)
+	hide_menus()
 	_deferred_goto_scene.call_deferred(scene)
 
 	# TODO pause/resume menus/music fixes
 	resume()
 
-	if death_menu and is_instance_valid(death_menu):
-		# b/c you can pause the game and go to main instead of clicking go to main
-		death_menu.hide()
 
 
 signal new_scene_instanced(inst)
@@ -190,7 +193,7 @@ func set_pause_menu(path_or_scene):
 		return
 	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
-		if pause_menu:
+		if pause_menu and is_instance_valid(pause_menu):
 			if pause_menu.scene_file_path == path:
 				return
 			# is there a race-case here?
@@ -249,7 +252,7 @@ func set_death_menu(path_or_scene):
 		return
 	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
-		if death_menu:
+		if death_menu and is_instance_valid(death_menu):
 			if death_menu.scene_file_path == path:
 				return
 			death_menu.queue_free()
@@ -281,7 +284,7 @@ func set_win_menu(path_or_scene):
 		return
 	var path = to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
-		if win_menu:
+		if win_menu and is_instance_valid(win_menu):
 			if win_menu.scene_file_path == path:
 				return
 			win_menu.queue_free()

@@ -35,7 +35,7 @@ func inc_produce_count(type):
 	else:
 		produce_counts[type] = 1
 
-	if hud:
+	if hud and is_instance_valid(hud):
 		hud.update_produce_counts(produce_counts)
 
 ## timer ########################################################################
@@ -43,7 +43,7 @@ func inc_produce_count(type):
 var initial_time_remaining = 90
 var time_remaining
 func tick_timer():
-	if hud:
+	if hud and is_instance_valid(hud):
 		hud.update_time_remaining(time_remaining)
 
 	if time_remaining <= 0:

@@ -30,7 +30,6 @@ func _get_configuration_warnings():
 func _enter_tree():
 	add_to_group("player", true)
 	# TODO set usual collision layers/masks
-	super._enter_tree()
 
 ## ready ###########################################################
 

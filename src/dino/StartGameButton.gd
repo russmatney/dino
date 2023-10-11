@@ -30,7 +30,7 @@ func setup():
 
 func start_game():
 	if game_entity:
-		Game.nav_to_game_menu_or_start(game_entity)
+		Game.launch(game_entity)
 	else:
 		Debug.err("Cannot start game, no game_entity set!")
 

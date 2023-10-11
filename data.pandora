@@ -478,9 +478,9 @@
 						"type": "string",
 						"value": "Runner"
 					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/runner/Runner.gd"
+					"enabled": {
+						"type": "bool",
+						"value": false
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -960,12 +960,19 @@
 				"_id": "53",
 				"_name": "destination_zone",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": true,
+				"_id": "61",
+				"_name": "enabled",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 60
+			"default": 61
 		}
 	}
 }

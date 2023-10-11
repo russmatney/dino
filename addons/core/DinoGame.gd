@@ -26,9 +26,15 @@ func register_menus():
 		Navi.set_win_menu(game_entity.get_win_menu())
 		Navi.set_death_menu(game_entity.get_death_menu())
 
+func _clear_menus():
+	Navi.clear_menus()
+
 # register menus and static zones/scenes you may need in Hotel
 func register():
 	register_menus()
+
+func cleanup():
+	_clear_menus()
 
 func start(opts={}):
 	# load the first level, maybe pull from a saved game

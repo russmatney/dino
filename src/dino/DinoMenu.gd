@@ -22,10 +22,8 @@ func set_focus():
 var seen_games = false
 func _process(_delta):
 	if not seen_games:
-		var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
-		var game_entities = Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+		var game_entities = Game.all_game_entities()
 		if len(game_entities) > 0:
-			Debug.pr("found game entries")
 			build_games_grid()
 			seen_games = true
 		else:
@@ -34,8 +32,7 @@ func _process(_delta):
 func build_games_grid():
 	Util.free_children(games_grid_container)
 
-	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
-	var game_entities = Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+	var game_entities = Game.all_game_entities()
 
 	for ge in game_entities:
 		var game_button = start_game_button.instantiate()
