@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c8h6jkmy43gsi"]
 
-[ext_resource type="Texture2D" uid="uid://crl61p4mqd7qg" path="res://assets/sprites/greyhat_hat_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://crl61p4mqd7qg" path="res://src/tower/assets/greyhat_hat_sheet.png" id="1_g7w2n"]
 
 [sub_resource type="AtlasTexture" id="1"]
-atlas = ExtResource("1")
+atlas = ExtResource("1_g7w2n")
 region = Rect2(0, 0, 16, 16)
 
 [resource]

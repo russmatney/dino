@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bxcbs6d74l221"]
+
+[ext_resource type="Texture2D" uid="uid://b138yles7l4g1" path="res://src/dungeonCrawler/assets/fred32_sheet.png" id="1"]
+
+[sub_resource type="AtlasTexture" id="1"]
+atlas = ExtResource("1")
+region = Rect2(0, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

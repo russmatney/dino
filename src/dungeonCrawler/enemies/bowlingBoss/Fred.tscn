@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bluovkoat1mev"]
 
 [ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" id="2"]
-[ext_resource type="SpriteFrames" uid="uid://bxcbs6d74l221" path="res://assets/sprites/fred32.tres" id="3"]
+[ext_resource type="SpriteFrames" uid="uid://bxcbs6d74l221" path="res://src/dungeonCrawler/assets/fred32.tres" id="3"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" id="4"]
-[ext_resource type="SpriteFrames" uid="uid://dtn7nfisialjc" path="res://assets/sprites/fred64.tres" id="6"]
+[ext_resource type="SpriteFrames" uid="uid://dtn7nfisialjc" path="res://src/dungeonCrawler/assets/fred64.tres" id="6"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(25, 55)

@@ -86,7 +86,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/gem.aseprite"
+"source": "res://src/shirt/assets/gem.aseprite"
 }
 
 [node name="ActionArea" parent="." instance=ExtResource("3_m00wy")]

@@ -6,9 +6,9 @@ extends HUD
 @onready var shrine_gem_count = $%ShrineGemCount
 
 var to_portrait_texture = {
-	"Player": preload("res://assets/sprites/status_portraits9.png"),
-	"BlobWalker": preload("res://assets/sprites/status_portraits10.png"),
-	"BlobChaser": preload("res://assets/sprites/status_portraits11.png"),
+	"Player": preload("res://src/shirt/assets/status_portraits9.png"),
+	"BlobWalker": preload("res://src/shirt/assets/status_portraits10.png"),
+	"BlobChaser": preload("res://src/shirt/assets/status_portraits11.png"),
 	}
 
 func _on_player_update(data):

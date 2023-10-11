@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="SpriteFrames" path="res://assets/sprites/bowlingball.tres" id="1"]
+[ext_resource type="SpriteFrames" path="res://src/dungeonCrawler/assets/bowlingball.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/weapons/BowlingBall.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://c6s1vjer0om4o" path="res://addons/core/assets/lights/light1_sheet.png" id="3"]
 

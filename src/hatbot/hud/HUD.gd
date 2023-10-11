@@ -80,11 +80,11 @@ func set_coins(count):
 # enemy status list
 
 var to_portrait_texture = {
-	"Beefstronaut": preload("res://assets/hatbot/portraits1.png"),
-	"Monstroar": preload("res://assets/hatbot/portraits2.png"),
-	"Goomba": preload("res://assets/hatbot/portraits3.png"),
-	"Soldier": preload("res://assets/hatbot/portraits4.png"),
-	"ShootyCrawly": preload("res://assets/hatbot/portraits5.png"),
+	"Beefstronaut": preload("res://src/hatbot/assets/portraits1.png"),
+	"Monstroar": preload("res://src/hatbot/assets/portraits2.png"),
+	"Goomba": preload("res://src/hatbot/assets/portraits3.png"),
+	"Soldier": preload("res://src/hatbot/assets/portraits4.png"),
+	"ShootyCrawly": preload("res://src/hatbot/assets/portraits5.png"),
 	}
 
 

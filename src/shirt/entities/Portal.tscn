@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcyhacm2p2xax" path="res://src/shirt/entities/portal.png" id="2_d8pbh"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="2_x4qlq"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="4_hd7a5"]
-[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://assets/hatbot/light64px8.png" id="5_vihct"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://src/hatbot/assets/light64px8.png" id="5_vihct"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwdef"]
 atlas = ExtResource("2_d8pbh")
@@ -110,7 +110,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/portal.aseprite"
+"source": "res://src/shirt/assets/portal.aseprite"
 }
 
 [node name="ActionArea" parent="." instance=ExtResource("2_x4qlq")]

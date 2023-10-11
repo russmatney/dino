@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="6_m462i"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_ex2u0"]
 [ext_resource type="Shader" path="res://src/gunner/player/ColorReassignShader.gdshader" id="8_jsau3"]
-[ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://assets/sprites/greyhat_jetflame_sheet.png" id="9_ik71i"]
+[ext_resource type="Texture2D" path="res://src/tower/assets/greyhat_jetflame_sheet.png" id="9_ik71i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfd8r"]
 
@@ -460,7 +460,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/mountain_player.aseprite"
+"source": "res://src/mountain/assets/mountain_player.aseprite"
 }
 
 [node name="ActionDetector" parent="." instance=ExtResource("5_tj1yg")]

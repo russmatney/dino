@@ -94,7 +94,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": true,
-"source": "res://assets/sprites/wide_door.aseprite"
+"source": "res://src/shirt/assets/wide_door.aseprite"
 }
 
 [node name="ActionArea" parent="." instance=ExtResource("3_moscc")]

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cnvt0oin03ds5" path="res://src/runner/park/Ground.tscn" id="1"]
 [ext_resource type="Script" path="res://src/runner/park/rooms/ParkWin.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cnqlhkc1en442" path="res://assets/sprites/runner_leaf_friend_sheet.png" id="3"]
+[ext_resource type="Texture2D" path="res://src/runner/assets/runner_leaf_friend_sheet.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_bgcyr"]
 
 [sub_resource type="RectangleShape2D" id="1"]

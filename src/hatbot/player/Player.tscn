@@ -334,7 +334,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/hatbot/lilbighat.aseprite"
+"source": "res://src/hatbot/assets/lilbighat.aseprite"
 }
 
 [node name="ActionHint" parent="." instance=ExtResource("5_ddh8j")]

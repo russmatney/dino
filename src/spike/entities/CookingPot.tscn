@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/spike/entities/CookingPot.gd" id="1_jn4f3"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_m2042"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_1xdos"]
-[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://assets/hatbot/light64px3.png" id="5_nrjap"]
+[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://src/hatbot/assets/light64px3.png" id="5_nrjap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4bohb"]
 atlas = ExtResource("1_i1ti2")
@@ -96,7 +96,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/SPIKE_Cooking_pot.aseprite"
+"source": "res://src/spike/assets/SPIKE_Cooking_pot.aseprite"
 }
 
 [node name="Area2D" type="Area2D" parent="."]

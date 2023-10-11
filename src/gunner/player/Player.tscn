@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://c5v7ka6hfytnk"]
 
-[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://assets/sprites/greyhat_frames.tres" id="1"]
+[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/tower/assets/greyhat_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/player/Player.gd" id="2"]
 [ext_resource type="Theme" path="res://src/gunner/StateLabelTheme.tres" id="6"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="8_ygun7"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="10_cs1u4"]
 [ext_resource type="Shader" path="res://src/gunner/player/ColorReassignShader.gdshader" id="14"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="15_xmugl"]
-[ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://assets/sprites/greyhat_jetflame_sheet.png" id="18_f0lfb"]
+[ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/tower/assets/greyhat_jetflame_sheet.png" id="18_f0lfb"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(14, 24)

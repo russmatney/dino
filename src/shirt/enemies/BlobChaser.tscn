@@ -217,7 +217,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/shirt_blob_64.aseprite"
+"source": "res://src/shirt/assets/shirt_blob_64.aseprite"
 }
 
 [node name="StateLabel" type="RichTextLabel" parent="."]

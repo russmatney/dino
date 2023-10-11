@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b1b2xp5vyilk3"]
 
-[ext_resource type="Texture2D" uid="uid://rb2p6m72dteh" path="res://assets/sprites/runner_leaf_greenred_sheet.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://ckxbl4ceqy26f" path="res://assets/sprites/runner_leaf_green_sheet.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://hankldevlcvd" path="res://assets/sprites/runner_leaf_yellow_sheet.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://t4kmfg36p642" path="res://assets/sprites/runner_leaf_redorange_sheet.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://d054mgcgnvhvr" path="res://assets/sprites/runner_leaf_purple_sheet.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://rb2p6m72dteh" path="res://src/runner/assets/runner_leaf_greenred_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://ckxbl4ceqy26f" path="res://src/runner/assets/runner_leaf_green_sheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://hankldevlcvd" path="res://src/runner/assets/runner_leaf_yellow_sheet.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://t4kmfg36p642" path="res://src/runner/assets/runner_leaf_redorange_sheet.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://d054mgcgnvhvr" path="res://src/runner/assets/runner_leaf_purple_sheet.png" id="5"]
 [ext_resource type="Script" path="res://src/runner/pickups/Leaf.gd" id="6"]
 
 [sub_resource type="RectangleShape2D" id="2"]

@@ -425,5 +425,5 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/SEL_Boss.aseprite"
+"source": "res://src/superElevatorLevel/assets/SEL_Boss.aseprite"
 }

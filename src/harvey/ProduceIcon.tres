@@ -1,8 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=2]
+[gd_resource type="SpriteFrames" load_steps=4 format=3]
 
-[ext_resource path="res://assets/harvey/onion-icon_sheet.png" type="Texture2D" id=1]
-[ext_resource path="res://assets/harvey/tomato-icon_sheet.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/harvey/carrot-icon_sheet.png" type="Texture2D" id=3]
+[ext_resource type="Texture2D" uid="uid://c15501bmx3y5e" path="res://src/harvey/assets/onion-icon_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://brwot5oum04sm" path="res://src/harvey/assets/tomato-icon_sheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b316pvcas4vre" path="res://src/harvey/assets/carrot-icon_sheet.png" id="3"]
 
 [resource]
 animations = [ {

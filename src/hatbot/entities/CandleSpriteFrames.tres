@@ -1,21 +1,21 @@
 [gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://63sc3onlnswo"]
 
-[ext_resource type="Texture2D" uid="uid://dnp56m8kln68v" path="res://assets/hatbot/candle_sheet.png" id="1_3fkcs"]
+[ext_resource type="Texture2D" uid="uid://dnp56m8kln68v" path="res://src/hatbot/assets/candle_sheet.png" id="1_e7fx5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2g85l"]
-atlas = ExtResource("1_3fkcs")
+atlas = ExtResource("1_e7fx5")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7ogu"]
-atlas = ExtResource("1_3fkcs")
+atlas = ExtResource("1_e7fx5")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sseg1"]
-atlas = ExtResource("1_3fkcs")
+atlas = ExtResource("1_e7fx5")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f5fc6"]
-atlas = ExtResource("1_3fkcs")
+atlas = ExtResource("1_e7fx5")
 region = Rect2(0, 0, 32, 32)
 
 [resource]

@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/enemies/bowlingBoss/BowlingBoss.gd" id="2"]
-[ext_resource type="SpriteFrames" uid="uid://cq33i1pk7ht07" path="res://assets/sprites/barney32.tres" id="3"]
-[ext_resource type="SpriteFrames" uid="uid://l1t8172snt0n" path="res://assets/sprites/barney64.tres" id="4"]
+[ext_resource type="SpriteFrames" uid="uid://cq33i1pk7ht07" path="res://src/dungeonCrawler/assets/barney32.tres" id="3"]
+[ext_resource type="SpriteFrames" uid="uid://l1t8172snt0n" path="res://src/dungeonCrawler/assets/barney64.tres" id="4"]
 [ext_resource type="PackedScene" path="res://src/dungeonCrawler/enemies/bowlingBoss/Machine.tscn" id="5"]
 
 [sub_resource type="RectangleShape2D" id=1]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_1bdcv"]
 [ext_resource type="Shader" path="res://src/hatbot/BgBlur.gdshader" id="2_48np1"]
 [ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/reptile/tilemaps/SpaceshipTiles8.tscn" id="3_3kbfw"]
-[ext_resource type="Texture2D" uid="uid://q2pnjmesx2xc" path="res://assets/hatbot/background_city_sheet.png" id="3_3rpyx"]
+[ext_resource type="Texture2D" uid="uid://q2pnjmesx2xc" path="res://src/hatbot/assets/background_city_sheet.png" id="3_3rpyx"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="4_0thwe"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="4_obeiq"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_tky8d"]

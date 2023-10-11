@@ -13,7 +13,7 @@ func _on_enemy_update(entry):
 
 @onready var player_status = $%PlayerStatus
 
-var player_portrait = preload("res://assets/sprites/status_portraits12.png")
+var player_portrait = preload("res://src/spike/assets/status_portraits12.png")
 
 func update_player(entry):
 	if "health" in entry:
@@ -28,7 +28,7 @@ func update_player(entry):
 # enemy status
 
 var to_portrait_texture = {
-	"Blob": preload("res://assets/sprites/status_portraits13.png"),
+	"Blob": preload("res://src/spike/assets/status_portraits13.png"),
 	}
 
 

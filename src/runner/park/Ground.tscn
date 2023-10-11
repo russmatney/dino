@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnvt0oin03ds5"]
 
-[ext_resource type="SpriteFrames" path="res://assets/sprites/godot-logo.tres" id="1"]
-[ext_resource type="Texture2D" uid="uid://rnu5ucjjkl6o" path="res://assets/sprites/runner_ground_1_sheet.png" id="2"]
+[ext_resource type="SpriteFrames" path="res://src/ghosts/assets/godot-logo.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://rnu5ucjjkl6o" path="res://src/runner/assets/runner_ground_1_sheet.png" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(64, 64)

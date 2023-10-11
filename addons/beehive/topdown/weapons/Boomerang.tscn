@@ -47,7 +47,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/boomerang.aseprite"
+"source": "res://addons/beehive/assets/boomerang.aseprite"
 }
 
 [node name="HitBox" type="Area2D" parent="."]

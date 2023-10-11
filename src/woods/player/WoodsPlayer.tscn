@@ -237,7 +237,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/soft-soft-hoodie.aseprite"
+"source": "res://src/spike/assets/soft-soft-hoodie.aseprite"
 }
 
 [node name="StateLabel" type="RichTextLabel" parent="."]

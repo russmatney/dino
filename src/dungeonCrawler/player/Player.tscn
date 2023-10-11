@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3]
 
-[ext_resource type="SpriteFrames" uid="uid://cftno75kwes1u" path="res://assets/sprites/redhat.tres" id="1"]
+[ext_resource type="SpriteFrames" uid="uid://cftno75kwes1u" path="res://src/gunner/assets/redhat.tres" id="1"]
 [ext_resource type="Script" path="res://src/dungeonCrawler/player/Player.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="4_6y2b6"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="4_yxejb"]

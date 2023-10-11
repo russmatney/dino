@@ -224,7 +224,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://assets/sprites/topdown_player_64.aseprite"
+"source": "res://addons/beehive/assets/topdown_player_64.aseprite"
 }
 
 [node name="StateLabel" type="RichTextLabel" parent="."]

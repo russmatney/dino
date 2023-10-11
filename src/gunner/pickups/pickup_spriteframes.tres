@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://c52cbcht1rl78"]
 
-[ext_resource type="Texture2D" uid="uid://crl61p4mqd7qg" path="res://assets/sprites/greyhat_hat_sheet.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://b7h2sh8psdbtl" path="res://assets/sprites/greyhat_body_sheet.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://dyo0o7lff5bf6" path="res://assets/sprites/chicken_sheet.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://crl61p4mqd7qg" path="res://src/tower/assets/greyhat_hat_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://b7h2sh8psdbtl" path="res://src/tower/assets/greyhat_body_sheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dyo0o7lff5bf6" path="res://src/dungeonCrawler/assets/chicken_sheet.png" id="3"]
 
 [sub_resource type="AtlasTexture" id="2"]
 atlas = ExtResource("2")

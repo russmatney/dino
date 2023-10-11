@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://dx2sj4ijj8tlh"]
 
-[ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://assets/hatbot/door_sheet.png" id="1_6v2w8"]
+[ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://src/hatbot/assets/door_sheet.png" id="1_6v2w8"]
 [ext_resource type="Script" path="res://src/hatbot/entities/Elevator.gd" id="1_87cqc"]
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="3_nrb31"]
 [ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="4_e46yd"]

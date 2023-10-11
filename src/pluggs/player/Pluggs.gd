@@ -6,9 +6,9 @@ extends CharacterBody2D
 @onready var machine = $Machine
 @onready var anim = $AnimatedSprite2D
 
-@export var run_speed := 3000
+@export var run_speed := 3500
 @export var drag_speed := 50
-@export var air_speed: float = 2400 # horizontal movement in the air
+@export var air_speed: float = 3000 # horizontal movement in the air
 
 @export var jump_max_height: float = 60.0
 @export var jump_min_height: float = 30.0

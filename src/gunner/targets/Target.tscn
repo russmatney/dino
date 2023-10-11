@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4inidtgbuwlg"]
 
-[ext_resource type="SpriteFrames" uid="uid://d1uqrh57tjmm6" path="res://assets/sprites/target_sprite_frames.tres" id="1"]
+[ext_resource type="SpriteFrames" uid="uid://d1uqrh57tjmm6" path="res://src/gunner/assets/target_sprite_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/gunner/targets/Target.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="4_rmqk6"]
 

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://cj0dcnlcb2sjb"]
 
-[ext_resource type="Texture2D" uid="uid://bhkcms8a3wapl" path="res://assets/sprites/coin_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bhkcms8a3wapl" path="res://src/dungeonCrawler/assets/coin_sheet.png" id="1"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("1")

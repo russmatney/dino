@@ -6,8 +6,6 @@ func enter(_ctx = {}):
 func physics_process(delta):
 	if Input.is_action_pressed("move_down"):
 		machine.transit("Bucket", {"animate": true})
-		# TODO do a slow-down/slide
-		actor.velocity.x = 0
 		return
 
 	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
