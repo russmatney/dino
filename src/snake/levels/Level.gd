@@ -1,7 +1,6 @@
 extends Node2D
 
-##########################################################################
-# ready
+## ready #########################################################################
 
 # TODO do we need this reference?
 var player
@@ -18,8 +17,7 @@ func _ready():
 func _on_found_player(p):
 	player = p
 
-##########################################################################
-# setup
+## setup #########################################################################
 
 var grids = []
 
@@ -35,12 +33,11 @@ func setup():
 	if grids:
 		grids[0].add_snake()
 
-##########################################################################
-# signals
+## signals #########################################################################
 
 func _on_quest_failed(q):
 	Hood.notif(str("Quest failed: ", q.label))
-	SnakeGame.reload_current_level()
+	reload_current_level()
 
 var fired_once
 func _on_all_quests_complete():
@@ -48,4 +45,30 @@ func _on_all_quests_complete():
 
 	if not fired_once:
 		fired_once = true
-		SnakeGame.load_next_level()
+		load_next_level()
+
+## next level #########################################################################
+
+func all_levels_complete():
+	Hood.notif("Game complete!")
+	Navi.show_win_menu()
+
+var current_level_idx = 0
+
+func load_next_level():
+	Debug.pr("snake game loading next level")
+	if current_level_idx == null:
+		current_level_idx = 0
+	else:
+		current_level_idx += 1
+
+	if current_level_idx < SnakeData.levels.size():
+		var lvl = SnakeData.levels[current_level_idx]
+		Quest.current_level_label = lvl["label"]
+		Debug.pr("Navi.nav_to: ", lvl["label"])
+		Navi.nav_to(lvl["scene"])
+	else:
+		all_levels_complete()
+
+func reload_current_level():
+	Navi.nav_to(SnakeData.levels[current_level_idx]["scene"])
