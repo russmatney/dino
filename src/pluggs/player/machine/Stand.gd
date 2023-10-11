@@ -2,11 +2,11 @@ extends State
 
 
 func enter(msg = {}):
-	if "animate" in msg and msg["animate"]:
-		# owner moves us to idle-standing when this anim finishes
-		owner.anim.play("from-bucket")
+	if Util.get_(msg, "animate"):
+		# actor moves us to idle-standing when this anim finishes
+		actor.anim.play("from-bucket")
 	else:
-		owner.anim.play("idle-standing")
+		actor.anim.play("idle-standing")
 
 
 func process(_delta: float):
@@ -17,6 +17,6 @@ func process(_delta: float):
 
 
 func physics_process(delta):
-	owner.velocity.y += owner.gravity * delta
-	owner.set_velocity(owner.velocity)
-	owner.move_and_slide()
+	actor.velocity.y += actor.gravity * delta
+	actor.set_velocity(actor.velocity)
+	actor.move_and_slide()

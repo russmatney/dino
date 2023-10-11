@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://src/pluggs/player/Pluggs.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://epufx5aihbhp" path="res://src/pluggs/player/pluggs32.png" id="2_lye74"]
-[ext_resource type="Script" path="res://src/pluggs/player/Stand.gd" id="3"]
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="4"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/Stand.gd" id="4_i3vuh"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5"]
-[ext_resource type="Script" path="res://src/pluggs/player/Run.gd" id="6"]
-[ext_resource type="Script" path="res://src/pluggs/player/Bucket.gd" id="7"]
-[ext_resource type="Script" path="res://src/pluggs/player/DragReach.gd" id="8"]
-[ext_resource type="Script" path="res://src/pluggs/player/DragPull.gd" id="9"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/Run.gd" id="5_sihy0"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/Bucket.gd" id="6_c32yk"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/DragReach.gd" id="7_mortt"]
+[ext_resource type="Script" path="res://src/pluggs/player/machine/DragPull.gd" id="8_q0o2r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87bpj"]
 atlas = ExtResource("2_lye74")
@@ -229,19 +229,19 @@ script = ExtResource("4")
 initial_state = NodePath("Stand")
 
 [node name="Stand" type="Node" parent="Machine"]
-script = ExtResource("3")
+script = ExtResource("4_i3vuh")
 
 [node name="Run" type="Node" parent="Machine"]
-script = ExtResource("6")
+script = ExtResource("5_sihy0")
 
 [node name="Bucket" type="Node" parent="Machine"]
-script = ExtResource("7")
+script = ExtResource("6_c32yk")
 
 [node name="DragReach" type="Node" parent="Machine"]
-script = ExtResource("8")
+script = ExtResource("7_mortt")
 
 [node name="DragPull" type="Node" parent="Machine"]
-script = ExtResource("9")
+script = ExtResource("8_q0o2r")
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 offset_left = -64.0
