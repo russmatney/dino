@@ -19,18 +19,13 @@ func _ready():
 	if not destination == null and not ResourceLoader.exists(destination):
 		Debug.warn("Ghosts door destination does not exist!", destination)
 
-
 func set_label(text):
 	$Label.text = text
 
-
 #############################################################
 
-
-## Not stateless! depends on _this_ door's destination
 func open_door(_actor=null):
 	Debug.pr("open_door called, with dest: ", destination)
 	# TODO pause tree?
 	# TODO animate door
-	Ghosts.load_next_room(destination)
-
+	Navi.nav_to(destination)

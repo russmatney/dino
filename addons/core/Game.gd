@@ -65,7 +65,7 @@ func ensure_current_game():
 			set_current_game_for_scene(current_scene)
 
 	if not current_game:
-		Debug.warn("Failed to ensure current_game!")
+		Debug.warn("Failed to ensure current_game in scene:", get_tree().current_scene)
 
 func reset_current_game():
 	current_game = null
@@ -119,6 +119,7 @@ func launch(game_entity):
 	if game.game_entity.get_main_menu() != null:
 		Navi.nav_to(game.game_entity.get_main_menu())
 		return
+	Debug.pr("no menu for game, launching!", game, game.game_entity, game.game_entity.get_main_menu())
 
 	restart_game()
 

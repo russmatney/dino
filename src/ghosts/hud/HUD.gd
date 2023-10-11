@@ -4,7 +4,7 @@ func _ready():
 	Hotel.entry_updated.connect(_on_entry_updated)
 	_on_entry_updated(Hotel.first({is_player=true}))
 
-	var rooms = Hotel.query({group=Ghosts.rooms_group})
+	var rooms = Hotel.query({group=GhostsData.rooms_group})
 	# TODO sort by ready_at ? or some other 'current' flag?
 	if len(rooms) > 0:
 		set_room_name(rooms[0].get("name"))
@@ -15,7 +15,7 @@ func _on_entry_updated(entry):
 			set_health(entry["health"])
 		if entry.get("gloomba_kos") != null:
 			set_gloomba_kos(entry["gloomba_kos"])
-	if Ghosts.rooms_group in entry["groups"]:
+	if GhostsData.rooms_group in entry["groups"]:
 		Debug.prn("Ghosts rooms group entry update", entry)
 		set_room_name(entry["name"])
 

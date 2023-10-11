@@ -1,8 +1,6 @@
 @tool
 extends DinoGame
 
-var rooms_group = "ghost_rooms"
-
 ## room_scenes ##########################################################
 
 const room_scenes = [
@@ -42,30 +40,14 @@ func get_spawn_coords():
 func on_player_spawned(player):
 	player.died.connect(on_player_died)
 
-
 ## start ##########################################################
 
 func start(_opts={}):
 	Debug.pr("Starting Ghost House!")
 	reset_player_data()
-	load_next_room(first_room)
+	Navi.nav_to(first_room)
 
 func on_player_died():
 	Navi.show_death_menu()
 	DJ.resume_menu_song()
 
-
-#############################################################
-
-func update_world():
-	pass
-
-#############################################################
-
-func load_next_room(room_path):
-	if room_path and not ResourceLoader.exists(room_path):
-		Debug.warn("Next room does not exist!", room_path)
-		return
-
-	# load the next level (note this is deferred)
-	Navi.nav_to(room_path)

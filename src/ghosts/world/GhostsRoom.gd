@@ -5,7 +5,7 @@ extends Node
 # enter tree
 
 func _enter_tree():
-	add_to_group(Ghosts.rooms_group, true)
+	add_to_group(GhostsData.rooms_group, true)
 
 ###########################################################
 # ready
