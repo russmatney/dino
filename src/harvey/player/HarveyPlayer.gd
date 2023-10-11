@@ -4,9 +4,7 @@ extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var action_detector = $ActionDetector
 
-############################################################
-# ready
-
+## ready ###########################################################
 
 func _ready():
 	machine.transitioned.connect(on_transit)
@@ -16,15 +14,12 @@ func _ready():
 
 	Cam.ensure_camera({player=self})
 
-
 ############################################################
 # process
-
 
 func _process(_delta):
 	update_action_label()
 	point_arrow()
-
 
 func point_arrow():
 	if action_detector.actions.size() == 0:
@@ -37,45 +32,34 @@ func point_arrow():
 		var rot = get_angle_to(ax.source.get_global_position()) + (PI / 2)
 		action_arrow.set_rotation(rot)
 
-
-############################################################
-# _input
-
+## _input ###########################################################
 
 # overwritten in subclass
 func _unhandled_input(event):
 	if Trolley.is_action(event):
 		action_detector.execute_current_action()
 
-
-############################################################
-# machine
+## machine ###########################################################
 
 @onready var machine = $Machine
 @onready var state_label = $StateLabel
-
 
 func on_transit(new_state):
 	if not Game.is_managed:
 		set_state_label(new_state)
 
-
 func set_state_label(label: String):
 	state_label.set_visible(true)
 	state_label.text = "[center]" + label + "[/center]"
 
-
-############################################################
-# movement
+## movement ###########################################################
 
 # overwritten in subclass
 var speed := 100
 
-
 # overwritten in subclass
 func get_move_dir():
 	return Trolley.move_vector()
-
 
 ############################################################
 # facing
@@ -83,24 +67,20 @@ func get_move_dir():
 enum DIR { left, right }
 var facing_direction = DIR.left
 
-
 func face_right():
 	facing_direction = DIR.right
 	anim.flip_h = true
-
 
 func face_left():
 	facing_direction = DIR.left
 	anim.flip_h = false
 
+## action detection ###########################################################
 
-############################################################
-# action detection
 # TODO move to ActionDetector script
 
 @onready var action_label = $ActionLabel
 @onready var action_arrow = $ActionArrow
-
 
 func update_action_label():
 	var ax = action_detector.nearest_action()
@@ -119,8 +99,7 @@ func update_action_label():
 	else:
 		action_label.modulate.a = 0.4
 
-############################################################
-# items
+## items ###########################################################
 
 var item_seed
 var item_tool
@@ -130,7 +109,6 @@ var item_produce
 @onready var seed_icon = $Item/SeedIcon
 @onready var seed_type_icon = $Item/SeedIcon/SeedTypeIcon
 @onready var tool_icon = $Item/ToolIcon
-
 
 func drop_held_item():
 	# TODO animation, sounds
@@ -143,13 +121,11 @@ func drop_held_item():
 	item_tool = null
 	item_produce = null
 
-
 func pickup_seed(produce_type):
 	drop_held_item()
 	seed_icon.set_visible(true)
 	seed_type_icon.animation = produce_type
 	item_seed = produce_type
-
 
 func pickup_produce(produce_type):
 	drop_held_item()
@@ -157,24 +133,19 @@ func pickup_produce(produce_type):
 	produce_icon.animation = produce_type
 	item_produce = produce_type
 
-
 func pickup_tool(tool_type):
 	drop_held_item()
 	tool_icon.set_visible(true)
 	tool_icon.animation = tool_type
 	item_tool = tool_type
 
-
-############################################################
-# seeds
-
+## seeds ###########################################################
 
 func has_seed():
 	if item_seed:
 		return true
 	else:
 		return false
-
 
 func plant_seed():
 	var type = item_seed
@@ -184,10 +155,7 @@ func plant_seed():
 
 	return type
 
-
-############################################################
-# tools, water
-
+## tools, water ###########################################################
 
 func has_tool():
 	if item_tool:
@@ -195,17 +163,14 @@ func has_tool():
 	else:
 		return false
 
-
 func has_water():
 	if item_tool == "watering-pail":
 		return true
 	else:
 		return false
 
-
 func water_plant():
 	pass
-
 
 func action_source_needs_water():
 	for src in action_detector.actions.map(func(ax): return ax.source):
@@ -213,14 +178,10 @@ func action_source_needs_water():
 			if src.needs_water():
 				return true
 
-
-############################################################
-# produce
-
+## produce ############################################################
 
 func harvest_produce(produce_type):
 	pickup_produce(produce_type)
-
 
 func has_produce():
 	if item_produce:
@@ -228,7 +189,8 @@ func has_produce():
 	else:
 		return false
 
+signal produce_delivered(item_produce)
 
 func deliver_produce():
-	Harvey.produce_delivered(item_produce)
+	produce_delivered.emit(item_produce)
 	drop_held_item()

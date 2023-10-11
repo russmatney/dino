@@ -1,22 +1,17 @@
 class_name HarveyBot
 extends HarveyPlayer
 
-#########################################################
-# ready
-
+## ready #########################################################
 
 func _ready():
 	# TODO should be a Hood.notify
 	Debug.prn("HarveyBot online: ", self.name)
 
-	# overwrite parent speed
 	speed = 70
 
 	super._ready()
 
-#########################################################
-# process
-
+## process ########################################################
 
 func _process(_delta):
 	update_action_label()
@@ -25,11 +20,7 @@ func _process(_delta):
 	# if we can, go ahead and perform an action
 	action_detector.execute_current_action()
 
-
-
-#########################################################
-# move_dir
-
+## move_dir ########################################################
 
 func get_move_dir():
 	var ax = action_detector.nearest_action()

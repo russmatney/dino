@@ -38,32 +38,5 @@ func reload_scene():
 	editor_interface.reload_scene_from_path(edited_scene.scene_file_path)
 	Debug.pr("-------------------------------------------------")
 
-
-## Unfortunately we can't access the games in Game.gd here, b/c of plugin load order issues
-var game_defs = [
-	["DemoLand", "res://src/demoland/DemoLand.gd"],
-	["DungeonCrawler", "res://src/dungeonCrawler/DungeonCrawler.gd"],
-	["Ghosts", "res://src/ghosts/Ghosts.gd"],
-	["Gunner", "res://src/gunner/Gunner.gd"],
-	["Harvey", "res://src/harvey/Harvey.gd"],
-	["HatBot", "res://src/hatbot/HatBot.gd"],
-	["Herd", "res://src/herd/Herd.gd"],
-	["Mountain", "res://src/mountain/Mountain.gd"],
-	["Shirt", "res://src/shirt/Shirt.gd"],
-	["Snake", "res://src/snake/SnakeGame.gd"],
-	["SuperElevatorLevel", "res://src/superElevatorLevel/SuperElevatorLevel.gd"],
-	["Tower", "res://src/tower/Tower.gd"],
-	["Game", "res://src/dino/Game.gd"],
-	]
-
 func reload_games():
-	Debug.pr("-------------------------------------------------")
-	Debug.pr("[ReloadGames] ", Time.get_time_string_from_system())
-
-	for tup in game_defs:
-		remove_autoload_singleton(tup[0])
-
-	for tup in game_defs:
-		add_autoload_singleton(tup[0], tup[1])
-
-	Debug.pr("-------------------------------------------------")
+	Debug.pr("not impled!")

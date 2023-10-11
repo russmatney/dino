@@ -1,9 +1,5 @@
 extends CanvasLayer
 
-func _ready():
-	# a fine register-self pattern?
-	Harvey.hud = self
-
 ## timer ##################################################################
 
 @onready var time = get_node("%Time")

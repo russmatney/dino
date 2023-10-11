@@ -1,11 +1,5 @@
 extends NaviButtonList
 
-
-func restart(_opts={}):
-	owner.hide()
-	Harvey.restart_game()
-
-
 var button_defs = [
 	{
 		label="Resume",
