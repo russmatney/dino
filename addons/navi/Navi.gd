@@ -37,6 +37,7 @@ func clear_menus():
 
 ## ready ###################################################################
 
+var first_scene
 var current_scene
 var last_scene_stack = []
 
@@ -47,15 +48,15 @@ func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 
 	var root = get_tree().get_root()
-	current_scene = root.get_child(root.get_child_count() - 1)
+	var first = root.get_child(root.get_child_count() - 1)
+	var main_scene_path = ProjectSettings.get_setting("application/run/main_scene")
+	if first.scene_file_path == main_scene_path:
+		first_scene = first
+
 
 	pause_menu = add_menu(pause_menu_scene)
 	death_menu = add_menu(death_menu_scene)
 	win_menu = add_menu(win_menu_scene)
-
-	if "node_path" in current_scene:
-		last_scene_stack.push_back(current_scene.node_path)
-	Debug.pr("Current scene: ", current_scene)
 
 
 ## process ###################################################################
@@ -82,6 +83,8 @@ func _on_focus_changed(control: Control) -> void:
 func find_focus(scene=null):
 	if scene == null:
 		scene = current_scene
+	if scene == null:
+		return
 	attempted_focus_for_scene = scene
 	if scene.has_method("set_focus"):
 		scene.set_focus()
@@ -107,12 +110,10 @@ func nav_to(scene):
 signal new_scene_instanced(inst)
 
 func _deferred_goto_scene(scene):
-	# skip freeing the first scene, b/c it's just some unsuspecting autoload
-	# TODO more resilient way to do this?
-	if len(last_scene_stack) > 1:
+	if first_scene != null and is_instance_valid(first_scene):
+		first_scene.free()
+	if current_scene != null and is_instance_valid(current_scene):
 		current_scene.free()
-
-	Debug.prn("Instancing new scene: ", scene)
 
 	var next_scene
 	if scene is String:
