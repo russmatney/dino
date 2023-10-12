@@ -1,35 +1,50 @@
 @tool
 extends NaviButtonList
 
+func load_next_level():
+	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	level_idx += 1
+	if len(HerdData.levels) <= level_idx:
+		Debug.err("level_idx too high, can't load next level")
+		return
+	Navi.nav_to(HerdData.levels[level_idx])
+
+func retry_level():
+	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	if len(HerdData.levels) <= level_idx:
+		Debug.err("level_idx too high, can't retry level")
+		return
+	Navi.nav_to(HerdData.levels[level_idx])
+
+func no_more_levels():
+	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	return level_idx >= len(HerdData.levels) - 1
+
 var buttons = [
 	{
 		label="Next Level",
-		fn=Herd.load_next_level,
-		hide_fn=Herd.no_more_levels
+		fn=load_next_level,
+		hide_fn=no_more_levels
 	},
 	{
 		label="Play Level Again",
-		fn=Herd.retry_level,
-		hide_fn=Herd.no_more_levels
+		fn=retry_level,
+		hide_fn=no_more_levels
 	},
 	{
 		label="Restart Game",
 		fn=Game.restart_game,
-		hide_fn=func (): return not Herd.no_more_levels()
+		hide_fn=func (): return not no_more_levels()
 	},
 	{
 		label="Credits",
-		fn=func():
-		Herd.next_level_menu.hide()
-		Navi.nav_to("res://src/dino/DinoCredits.tscn"),
-		hide_fn=func (): return not Herd.no_more_levels()
+		fn=Navi.nav_to.bind("res://src/dino/DinoCredits.tscn"),
+		hide_fn=func (): return not no_more_levels()
 	},
 	{
 		label="Return to Main Menu",
-		fn=func():
-		Herd.next_level_menu.hide()
-		Navi.nav_to_main_menu(),
-		hide_fn=func (): return not Herd.no_more_levels()
+		fn=func(): Navi.nav_to_main_menu(),
+		hide_fn=func (): return not no_more_levels()
 	},
 	{
 		label="Return to Dino Menu",

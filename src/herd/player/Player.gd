@@ -99,8 +99,6 @@ func _on_bullet_collided(
 		body:Node, _body_shape_index:int, _bullet:Dictionary,
 		_local_shape_index:int, _shared_area:Area2D
 	):
-	if Herd.level_complete:
-		return
 	if body == self:
 		bullet_hit()
 
@@ -148,4 +146,11 @@ func die():
 func restart_level():
 	Quest.jumbo_notif({header="You died.", body="Sorry about it!",
 		action="close", action_label_text="Restart Level",
-		on_close=Herd.retry_level})
+		on_close=retry_level})
+
+func retry_level():
+	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	if len(HerdData.levels) <= level_idx:
+		Debug.err("level_idx too high, can't retry level")
+		return
+	Navi.nav_to(HerdData.levels[level_idx])

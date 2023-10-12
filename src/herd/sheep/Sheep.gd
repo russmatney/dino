@@ -94,8 +94,6 @@ func _on_bullet_collided(
 		body:Node, _body_shape_index:int, _bullet:Dictionary,
 		_local_shape_index:int, _shared_area:Area2D
 	):
-	if Herd.level_complete:
-		return
 	if body == self:
 		if not machine.state.name in ["Thrown", "Dead"]:
 			bullet_hit()
