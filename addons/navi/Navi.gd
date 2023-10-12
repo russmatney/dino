@@ -104,14 +104,13 @@ func nav_to(scene):
 	# TODO pause/resume menus/music fixes
 	resume()
 
-
-
 signal new_scene_instanced(inst)
 
-
 func _deferred_goto_scene(scene):
-	# It is now safe to remove_at the current scene
-	current_scene.free()
+	# skip freeing the first scene, b/c it's just some unsuspecting autoload
+	# TODO more resilient way to do this?
+	if len(last_scene_stack) > 1:
+		current_scene.free()
 
 	Debug.prn("Instancing new scene: ", scene)
 
@@ -137,9 +136,7 @@ func _deferred_goto_scene(scene):
 	# set the focus for the current scene
 	find_focus()
 
-
 ## add child ###################################################################
-
 
 # helper for adding a child to the current scene
 func add_child_to_current(child, deferred=true):
@@ -149,11 +146,9 @@ func add_child_to_current(child, deferred=true):
 	else:
 		current_scene.add_child(child)
 
-
 ## main menu ###################################################################
 
 var main_menu_path = "res://src/dino/DinoMenu.tscn"
-
 
 func set_main_menu(path):
 	if ResourceLoader.exists(path):
@@ -162,14 +157,12 @@ func set_main_menu(path):
 	else:
 		Debug.prn("No scene at path: ", main_menu_path, ", can't set main menu.")
 
-
 func nav_to_main_menu():
 	if ResourceLoader.exists(main_menu_path):
 		hide_menus()
 		nav_to(main_menu_path)
 	else:
 		Debug.prn("No scene at path: ", main_menu_path, ", can't navigate.")
-
 
 ## pause ###################################################################
 
@@ -202,7 +195,6 @@ func set_pause_menu(path_or_scene):
 	else:
 		Debug.prn("No scene at path: ", path, ", can't set pause menu.")
 
-
 func _unhandled_input(event):
 	if not Engine.is_editor_hint() and Trolley.is_pause(event):
 		Navi.toggle_pause()
@@ -214,7 +206,6 @@ func toggle_pause():
 		resume()
 	else:
 		pause()
-
 
 func pause():
 	Debug.prn("pausing")
@@ -297,7 +288,6 @@ func show_win_menu():
 	DJ.pause_game_song()
 	win_menu.show()
 	find_focus(win_menu)
-
 
 func hide_win_menu():
 	Debug.prn("Hide win screen")

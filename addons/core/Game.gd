@@ -68,10 +68,11 @@ func ensure_current_game():
 		Debug.warn("Failed to ensure current_game in scene:", get_tree().current_scene)
 
 func reset_current_game():
-	current_game.cleanup()
-	# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
-	# current_game.queue_free()
-	current_game = null
+	if current_game != null and is_instance_valid(current_game):
+		current_game.cleanup()
+		# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
+		# current_game.queue_free()
+		current_game = null
 	ensure_current_game()
 
 func register_current_game(game):
@@ -84,7 +85,7 @@ func register_current_game(game):
 		# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
 		# current_game.queue_free()
 		Debug.pr("Waiting for cleanup: ", current_game.game_entity.get_display_name())
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2).timeout
 	Debug.pr("Registering game: ", game.game_entity.get_display_name())
 	current_game = game
 	current_game.register()
