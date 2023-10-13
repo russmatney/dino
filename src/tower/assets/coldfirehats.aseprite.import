@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bsmrx8klh4prd"
+path="res://.godot/imported/coldfirehats.aseprite-034a0ff401313b1206afaea3283d1323.res"
+
+[deps]
+
+source_file="res://src/tower/assets/coldfirehats.aseprite"
+dest_files=["res://.godot/imported/coldfirehats.aseprite-034a0ff401313b1206afaea3283d1323.res"]
+
+[params]
+

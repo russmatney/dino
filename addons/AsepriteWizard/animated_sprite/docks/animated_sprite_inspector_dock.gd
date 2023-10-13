@@ -40,10 +40,6 @@ func _ready():
 
 	sprite_frames_creator.init(config, file_system)
 
-	_source_field.aseprite_file_dropped.connect(func(path):
-		_set_source(path)
-		_save_config()
-		)
 
 func _load_config(cfg):
 	if cfg.has("source"):
@@ -161,7 +157,7 @@ func _create_aseprite_file_selection():
 	var file_dialog = FileDialog.new()
 	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	file_dialog.connect("file_selected", _on_aseprite_file_selected)
+	file_dialog.connect("file_selected",Callable(self,"_on_aseprite_file_selected"))
 	file_dialog.set_filters(PackedStringArray(["*.ase","*.aseprite"]))
 	return file_dialog
 

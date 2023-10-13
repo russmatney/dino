@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cykyd4x3b8u55"
+path="res://.godot/imported/MNT_log_bench_checkpoint.aseprite-7abc50cde2898fc4761efd44a638c64b.res"
+
+[deps]
+
+source_file="res://src/mountain/assets/MNT_log_bench_checkpoint.aseprite"
+dest_files=["res://.godot/imported/MNT_log_bench_checkpoint.aseprite-7abc50cde2898fc4761efd44a638c64b.res"]
+
+[params]
+

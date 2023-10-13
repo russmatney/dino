@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bf83sakla1vkg"
+path="res://.godot/imported/Reptile_icon.aseprite-9ef0e48bb29f6ece60ed1bf36a75481d.res"
+
+[deps]
+
+source_file="res://assets/gameicons/Reptile_icon.aseprite"
+dest_files=["res://.godot/imported/Reptile_icon.aseprite-9ef0e48bb29f6ece60ed1bf36a75481d.res"]
+
+[params]
+

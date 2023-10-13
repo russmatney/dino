@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://8wrirseufvn6"
+path="res://.godot/imported/SPIKE_blob_pickup.aseprite-3b2aa3c7cbae71e7933ab1a0cf5a0fe4.res"
+
+[deps]
+
+source_file="res://src/spike/assets/SPIKE_blob_pickup.aseprite"
+dest_files=["res://.godot/imported/SPIKE_blob_pickup.aseprite-3b2aa3c7cbae71e7933ab1a0cf5a0fe4.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dgrae0rvwlj72"
+path="res://.godot/imported/SPIKE_aim_line.aseprite-6f24edb0e7acebda8b3a196bd91bbb55.res"
+
+[deps]
+
+source_file="res://src/spike/assets/SPIKE_aim_line.aseprite"
+dest_files=["res://.godot/imported/SPIKE_aim_line.aseprite-6f24edb0e7acebda8b3a196bd91bbb55.res"]
+
+[params]
+

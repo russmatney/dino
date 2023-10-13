@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ctmiv64ldk552"
+path="res://.godot/imported/Herd_icon_itchio.aseprite-d229a758ecc19d7cfb3e2fd26cb1a560.res"
+
+[deps]
+
+source_file="res://assets/gameicons/Herd_icon_itchio.aseprite"
+dest_files=["res://.godot/imported/Herd_icon_itchio.aseprite-d229a758ecc19d7cfb3e2fd26cb1a560.res"]
+
+[params]
+

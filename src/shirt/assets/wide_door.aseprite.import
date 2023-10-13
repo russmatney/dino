@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bx4gybyenfbxx"
+path="res://.godot/imported/wide_door.aseprite-e6fb564b291154bcb61e388f144e77aa.res"
+
+[deps]
+
+source_file="res://src/shirt/assets/wide_door.aseprite"
+dest_files=["res://.godot/imported/wide_door.aseprite-e6fb564b291154bcb61e388f144e77aa.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bh6tbrg3xetc5"
+path="res://.godot/imported/greyhat_body.aseprite-76176a6f3b369f5f699461301cffca6f.res"
+
+[deps]
+
+source_file="res://src/tower/assets/greyhat_body.aseprite"
+dest_files=["res://.godot/imported/greyhat_body.aseprite-76176a6f3b369f5f699461301cffca6f.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dit1cn4ye7x5"
+path="res://.godot/imported/blue_ring.aseprite-ef7d58017f511eed02b37585310b933f.res"
+
+[deps]
+
+source_file="res://src/dotHop/themes/dots/assets/blue_ring.aseprite"
+dest_files=["res://.godot/imported/blue_ring.aseprite-ef7d58017f511eed02b37585310b933f.res"]
+
+[params]
+

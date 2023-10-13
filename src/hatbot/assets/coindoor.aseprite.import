@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bmhkihs1hv3wr"
+path="res://.godot/imported/coindoor.aseprite-fc9eaad58ec0b6826993f21784a350b4.res"
+
+[deps]
+
+source_file="res://src/hatbot/assets/coindoor.aseprite"
+dest_files=["res://.godot/imported/coindoor.aseprite-fc9eaad58ec0b6826993f21784a350b4.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://y0gki24krw6k"
+path="res://.godot/imported/runner_leaf_purple.aseprite-4803b26861bf64bdfd82606cf1d279d0.res"
+
+[deps]
+
+source_file="res://src/runner/assets/runner_leaf_purple.aseprite"
+dest_files=["res://.godot/imported/runner_leaf_purple.aseprite-4803b26861bf64bdfd82606cf1d279d0.res"]
+
+[params]
+

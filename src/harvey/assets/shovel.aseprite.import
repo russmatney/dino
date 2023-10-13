@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c5e4katctcdcn"
+path="res://.godot/imported/shovel.aseprite-c5734c9e4372da54bcfff6b0b98a5746.res"
+
+[deps]
+
+source_file="res://src/harvey/assets/shovel.aseprite"
+dest_files=["res://.godot/imported/shovel.aseprite-c5734c9e4372da54bcfff6b0b98a5746.res"]
+
+[params]
+

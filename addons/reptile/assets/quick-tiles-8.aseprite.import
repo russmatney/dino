@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c58gd8bij3tnv"
+path="res://.godot/imported/quick-tiles-8.aseprite-9389ab1bc6cfd1dbedce6cdbe37e6104.res"
+
+[deps]
+
+source_file="res://addons/reptile/assets/quick-tiles-8.aseprite"
+dest_files=["res://.godot/imported/quick-tiles-8.aseprite-9389ab1bc6cfd1dbedce6cdbe37e6104.res"]
+
+[params]
+

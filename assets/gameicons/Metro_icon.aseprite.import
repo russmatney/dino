@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://lmhr6c55bwb"
+path="res://.godot/imported/Metro_icon.aseprite-93f62227e01761a0a21720317fe11284.res"
+
+[deps]
+
+source_file="res://assets/gameicons/Metro_icon.aseprite"
+dest_files=["res://.godot/imported/Metro_icon.aseprite-93f62227e01761a0a21720317fe11284.res"]
+
+[params]
+

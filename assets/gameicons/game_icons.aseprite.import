@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bvynkrowcn4vu"
+path="res://.godot/imported/game_icons.aseprite-8a806e5b9a3003d16bdf399996e05f50.res"
+
+[deps]
+
+source_file="res://assets/gameicons/game_icons.aseprite"
+dest_files=["res://.godot/imported/game_icons.aseprite-8a806e5b9a3003d16bdf399996e05f50.res"]
+
+[params]
+

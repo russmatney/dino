@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c7ge6pwj0tbvs"
+path="res://.godot/imported/all_icons_bg_1600-400.aseprite-f52ad9d8b08f4c8de5926709aed1440f.res"
+
+[deps]
+
+source_file="res://assets/gameicons/all_icons_bg_1600-400.aseprite"
+dest_files=["res://.godot/imported/all_icons_bg_1600-400.aseprite-f52ad9d8b08f4c8de5926709aed1440f.res"]
+
+[params]
+

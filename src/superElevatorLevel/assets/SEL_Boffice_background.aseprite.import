@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://js43hbabvqqn"
+path="res://.godot/imported/SEL_Boffice_background.aseprite-e30ff3a236d72d408111ec5eac09034b.res"
+
+[deps]
+
+source_file="res://src/superElevatorLevel/assets/SEL_Boffice_background.aseprite"
+dest_files=["res://.godot/imported/SEL_Boffice_background.aseprite-e30ff3a236d72d408111ec5eac09034b.res"]
+
+[params]
+

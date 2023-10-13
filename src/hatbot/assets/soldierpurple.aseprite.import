@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cp4tyfmxcpuci"
+path="res://.godot/imported/soldierpurple.aseprite-4561d9b2a093633abc1a2787d9acf2db.res"
+
+[deps]
+
+source_file="res://src/hatbot/assets/soldierpurple.aseprite"
+dest_files=["res://.godot/imported/soldierpurple.aseprite-4561d9b2a093633abc1a2787d9acf2db.res"]
+
+[params]
+

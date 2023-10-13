@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dheiv3rgtimfp"
+path="res://.godot/imported/64x64coldfire.aseprite-858ce9274817e4a9512d4e9319fdd2a4.res"
+
+[deps]
+
+source_file="res://addons/reptile/assets/64x64coldfire.aseprite"
+dest_files=["res://.godot/imported/64x64coldfire.aseprite-858ce9274817e4a9512d4e9319fdd2a4.res"]
+
+[params]
+

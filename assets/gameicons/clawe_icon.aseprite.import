@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dk08l3eolwo81"
+path="res://.godot/imported/clawe_icon.aseprite-34969413acf7757226f3eeaed9e14cb0.res"
+
+[deps]
+
+source_file="res://assets/gameicons/clawe_icon.aseprite"
+dest_files=["res://.godot/imported/clawe_icon.aseprite-34969413acf7757226f3eeaed9e14cb0.res"]
+
+[params]
+

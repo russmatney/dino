@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dtn2j2eggimci"
+path="res://.godot/imported/coldfire_body.aseprite-062471d1558b2113dfa7febaefca7a20.res"
+
+[deps]
+
+source_file="res://src/tower/assets/coldfire_body.aseprite"
+dest_files=["res://.godot/imported/coldfire_body.aseprite-062471d1558b2113dfa7febaefca7a20.res"]
+
+[params]
+

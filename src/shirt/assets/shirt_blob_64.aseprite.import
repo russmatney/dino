@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ba03f67g355u0"
+path="res://.godot/imported/shirt_blob_64.aseprite-4072ab01650d8d2cc9043dfc9d8c1f61.res"
+
+[deps]
+
+source_file="res://src/shirt/assets/shirt_blob_64.aseprite"
+dest_files=["res://.godot/imported/shirt_blob_64.aseprite-4072ab01650d8d2cc9043dfc9d8c1f61.res"]
+
+[params]
+

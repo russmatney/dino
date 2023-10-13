@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://65htx1ybl1mo"
+path="res://.godot/imported/chicken.aseprite-571a7ede1095ad6ba9e49ca6aaa3d519.res"
+
+[deps]
+
+source_file="res://src/dungeonCrawler/assets/chicken.aseprite"
+dest_files=["res://.godot/imported/chicken.aseprite-571a7ede1095ad6ba9e49ca6aaa3d519.res"]
+
+[params]
+

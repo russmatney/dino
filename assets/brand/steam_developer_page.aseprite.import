@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cxi8ll0m47deo"
+path="res://.godot/imported/steam_developer_page.aseprite-5f49e8025471633644ace6cbd2ae5658.res"
+
+[deps]
+
+source_file="res://assets/brand/steam_developer_page.aseprite"
+dest_files=["res://.godot/imported/steam_developer_page.aseprite-5f49e8025471633644ace6cbd2ae5658.res"]
+
+[params]
+

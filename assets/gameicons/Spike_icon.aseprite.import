@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://btd0ijnwmi3c3"
+path="res://.godot/imported/Spike_icon.aseprite-806db580adc149831b601ca678e9bad8.res"
+
+[deps]
+
+source_file="res://assets/gameicons/Spike_icon.aseprite"
+dest_files=["res://.godot/imported/Spike_icon.aseprite-806db580adc149831b601ca678e9bad8.res"]
+
+[params]
+

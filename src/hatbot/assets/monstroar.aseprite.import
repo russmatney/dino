@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://deq3qedpj7klf"
+path="res://.godot/imported/monstroar.aseprite-1c86925bf73f681c66471d51f28b2993.res"
+
+[deps]
+
+source_file="res://src/hatbot/assets/monstroar.aseprite"
+dest_files=["res://.godot/imported/monstroar.aseprite-1c86925bf73f681c66471d51f28b2993.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c34ifq8jldrl2"
+path="res://.godot/imported/dino_main_capsule.aseprite-f0d06df875acdf81e0d87be5dc548b2b.res"
+
+[deps]
+
+source_file="res://assets/brand/dino_main_capsule.aseprite"
+dest_files=["res://.godot/imported/dino_main_capsule.aseprite-f0d06df875acdf81e0d87be5dc548b2b.res"]
+
+[params]
+

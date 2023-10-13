@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dsqqkb8md78ae"
+path="res://.godot/imported/MNT_snow_bench_checkpoint.aseprite-2ae9674b8b02b68381155f232e418ad1.res"
+
+[deps]
+
+source_file="res://src/mountain/assets/MNT_snow_bench_checkpoint.aseprite"
+dest_files=["res://.godot/imported/MNT_snow_bench_checkpoint.aseprite-2ae9674b8b02b68381155f232e418ad1.res"]
+
+[params]
+

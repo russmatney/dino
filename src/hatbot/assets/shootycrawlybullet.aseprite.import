@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://yqfupcfayc4o"
+path="res://.godot/imported/shootycrawlybullet.aseprite-ac2d7506c7dfd57bac4cf8ebb4d33d3c.res"
+
+[deps]
+
+source_file="res://src/hatbot/assets/shootycrawlybullet.aseprite"
+dest_files=["res://.godot/imported/shootycrawlybullet.aseprite-ac2d7506c7dfd57bac4cf8ebb4d33d3c.res"]
+
+[params]
+

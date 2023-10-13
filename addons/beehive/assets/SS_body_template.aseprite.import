@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bgl6kvev4kmfl"
+path="res://.godot/imported/SS_body_template.aseprite-eb54651a48426feb3115af1b998f83e4.res"
+
+[deps]
+
+source_file="res://addons/beehive/assets/SS_body_template.aseprite"
+dest_files=["res://.godot/imported/SS_body_template.aseprite-eb54651a48426feb3115af1b998f83e4.res"]
+
+[params]
+

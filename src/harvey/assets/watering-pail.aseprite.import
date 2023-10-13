@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://vphlkc14rbvr"
+path="res://.godot/imported/watering-pail.aseprite-494fff48ea01f8aad1c4b74bdbb934f8.res"
+
+[deps]
+
+source_file="res://src/harvey/assets/watering-pail.aseprite"
+dest_files=["res://.godot/imported/watering-pail.aseprite-494fff48ea01f8aad1c4b74bdbb934f8.res"]
+
+[params]
+

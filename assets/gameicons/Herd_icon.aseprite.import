@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cw7ox48n53pqi"
+path="res://.godot/imported/Herd_icon.aseprite-df8b5ff2549ff1dc2bcc4adf3f6406f7.res"
+
+[deps]
+
+source_file="res://assets/gameicons/Herd_icon.aseprite"
+dest_files=["res://.godot/imported/Herd_icon.aseprite-df8b5ff2549ff1dc2bcc4adf3f6406f7.res"]
+
+[params]
+

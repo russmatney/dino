@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dsn82cqsq10p6"
+path="res://.godot/imported/hatbot_icon.aseprite-c0d05611a628c6ecf5a13bcdce1ffeeb.res"
+
+[deps]
+
+source_file="res://assets/gameicons/hatbot_icon.aseprite"
+dest_files=["res://.godot/imported/hatbot_icon.aseprite-c0d05611a628c6ecf5a13bcdce1ffeeb.res"]
+
+[params]
+

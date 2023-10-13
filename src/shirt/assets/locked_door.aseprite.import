@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dfava60mnuynr"
+path="res://.godot/imported/locked_door.aseprite-e35da9866936ab5f046df7c41a6db894.res"
+
+[deps]
+
+source_file="res://src/shirt/assets/locked_door.aseprite"
+dest_files=["res://.godot/imported/locked_door.aseprite-e35da9866936ab5f046df7c41a6db894.res"]
+
+[params]
+

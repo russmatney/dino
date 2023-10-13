@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dt0bgimgvtp42"
+path="res://.godot/imported/The_Mountain_icon.aseprite-cff3aa32634d63da26db2ed65e40fc96.res"
+
+[deps]
+
+source_file="res://assets/gameicons/The_Mountain_icon.aseprite"
+dest_files=["res://.godot/imported/The_Mountain_icon.aseprite-cff3aa32634d63da26db2ed65e40fc96.res"]
+
+[params]
+

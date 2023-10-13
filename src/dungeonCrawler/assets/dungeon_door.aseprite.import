@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bhesjovhtrau7"
+path="res://.godot/imported/dungeon_door.aseprite-9d0f50a27c377e97ddc7c6569fa904f3.res"
+
+[deps]
+
+source_file="res://src/dungeonCrawler/assets/dungeon_door.aseprite"
+dest_files=["res://.godot/imported/dungeon_door.aseprite-9d0f50a27c377e97ddc7c6569fa904f3.res"]
+
+[params]
+

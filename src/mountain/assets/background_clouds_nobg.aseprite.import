@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b1p8t8xvs61lv"
+path="res://.godot/imported/background_clouds_nobg.aseprite-4206bc75fb5b57bf581ba9b1e324f7e1.res"
+
+[deps]
+
+source_file="res://src/mountain/assets/background_clouds_nobg.aseprite"
+dest_files=["res://.godot/imported/background_clouds_nobg.aseprite-4206bc75fb5b57bf581ba9b1e324f7e1.res"]
+
+[params]
+

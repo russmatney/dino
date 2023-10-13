@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cljenrpjfll8j"
+path="res://.godot/imported/bowling_ball.aseprite-697987ad459413420cbe049b83ad42ae.res"
+
+[deps]
+
+source_file="res://src/dungeonCrawler/assets/bowling_ball.aseprite"
+dest_files=["res://.godot/imported/bowling_ball.aseprite-697987ad459413420cbe049b83ad42ae.res"]
+
+[params]
+
