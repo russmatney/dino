@@ -114,7 +114,7 @@ func ensure_camera(opts = {}):
 	spawning_camera = true
 	cam.ready.connect(func(): spawning_camera = false, CONNECT_ONE_SHOT)
 
-	Navi.current_scene.add_child.call_deferred(cam)
+	get_tree().current_scene.add_child.call_deferred(cam)
 
 
 ##############################################################

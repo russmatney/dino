@@ -185,7 +185,7 @@ func remove_player():
 	var p = player
 	player = null
 	if p and is_instance_valid(p):
-		Navi.current_scene.remove_child(p)
+		get_tree().current_scene.remove_child(p)
 	if current_game:
 		current_game.update_world()
 	if p and is_instance_valid(p):
@@ -239,8 +239,7 @@ func _respawn_player(opts={}):
 	if current_game != null:
 		current_game.on_player_spawned(player)
 
-	# NOTE this is deferred
-	Navi.add_child_to_current(player)
+	get_tree().current_scene.add_child.call_deferred(player)
 	player.ready.connect(func():
 		if current_game != null:
 			current_game.update_world())
