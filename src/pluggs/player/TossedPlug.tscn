@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://by1oangkr8ngb"]
+
+[ext_resource type="Texture2D" uid="uid://buiygb7df5acu" path="res://src/pluggs/player/tossed_plug.png" id="1_l6py6"]
+[ext_resource type="Script" path="res://src/pluggs/player/TossedPlug.gd" id="1_ox3yg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ujcu"]
+atlas = ExtResource("1_l6py6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1b3hm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ujcu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wd60e"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p2hj4"]
+radius = 3.0
+
+[node name="TossedPlug" type="RigidBody2D"]
+collision_layer = 4
+script = ExtResource("1_ox3yg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_1b3hm")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://src/pluggs/assets/tossed_plug.aseprite"
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wd60e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p2hj4")

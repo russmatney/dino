@@ -263,6 +263,7 @@ animations = [{
 size = Vector2(16, 25)
 
 [node name="Pluggs" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -318,5 +319,8 @@ theme_override_fonts/normal_font = ExtResource("5")
 bbcode_enabled = true
 text = "[center]State"
 scroll_active = false
+
+[node name="PlugSource" type="Marker2D" parent="."]
+position = Vector2(0, -11)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]

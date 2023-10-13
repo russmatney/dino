@@ -229,7 +229,7 @@ func _respawn_player(opts={}):
 	if not spawn_coords == null:
 		player.position = spawn_coords
 	else:
-		Debug.err("No spawn coords found when respawning player")
+		Debug.warn("No spawn coords found when respawning player")
 
 	player.ready.connect(func(): player_ready.emit(player))
 

@@ -64,6 +64,7 @@ func _unhandled_input(event):
 		# action_detector.execute_current_action()
 		# action_detector.current_action()
 		Cam.hitstop("player_hitstop", 0.5, 0.2)
+		toss_plug()
 
 	# action cycling
 	if Trolley.is_cycle_prev_action(event):
@@ -89,9 +90,11 @@ func _on_animation_finished():
 
 func face_right():
 	anim.flip_h = false
+	facing_vector = Vector2.RIGHT
 
 func face_left():
 	anim.flip_h = true
+	facing_vector = Vector2.LEFT
 
 func update_facing():
 	if facing_vector == Vector2.RIGHT:
@@ -136,3 +139,19 @@ func force_move_to_target(target_position):
 func clear_forced_movement_target():
 	block_control = false
 	forced_movement_target = null
+
+
+## toss plug ##########################################################
+
+@onready var plug_source = $PlugSource
+var tossed_plug_scene = preload("res://src/pluggs/player/TossedPlug.tscn")
+
+func toss_plug():
+	var plug = tossed_plug_scene.instantiate()
+	plug.global_position = plug_source.global_position
+	get_tree().current_scene.add_child(plug)
+
+	# TODO get dir/angle towards nearby socket
+	var dir = (facing_vector + Vector2(0, -0.7)).normalized()
+
+	plug.toss(dir)

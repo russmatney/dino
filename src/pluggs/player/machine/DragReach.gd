@@ -8,6 +8,11 @@ func enter(_msg = {}):
 	actor.anim.play("drag-reach")
 	tt_drag = drag_in_t
 
+	var move_dir = Trolley.move_vector()
+	if move_dir.x > 0:
+		actor.face_right()
+	elif move_dir.x < 0:
+		actor.face_left()
 
 func process(delta: float):
 	if not Input.is_action_pressed("move_left") \
