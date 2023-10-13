@@ -10,7 +10,8 @@ func enter(_msg = {}):
 
 
 func process(delta: float):
-	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+	if not Input.is_action_pressed("move_left") \
+		and not Input.is_action_pressed("move_right"):
 		machine.transit("Bucket", {"animate": false})
 
 	var move_dir = Trolley.move_vector()

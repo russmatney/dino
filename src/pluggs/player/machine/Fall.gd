@@ -62,7 +62,7 @@ func physics_process(delta):
 
 		if filtered.size() > 0:
 			var thresh = filtered[0]
-			var shake = thresh.shound
+			var shake = thresh.shake
 			# var damage = thresh.damage
 			Cam.screenshake(shake*0.3)
 			DJZ.play(thresh.sound)
