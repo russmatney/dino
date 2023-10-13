@@ -8,10 +8,13 @@ func enter(msg = {}):
 	else:
 		actor.anim.play("idle-bucket")
 
+func unhandled_input(event):
+	if Trolley.is_jump(event):
+		machine.transit("Stand", {animate=true})
 
 func process(_delta: float):
 	if Input.is_action_pressed("move_up"):
-		machine.transit("Stand", {"animate": true})
+		machine.transit("Stand", {animate=true})
 
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
 		machine.transit("DragReach")

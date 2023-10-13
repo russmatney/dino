@@ -34,6 +34,9 @@ func _process(delta):
 			cord_length += global_position.distance_to(cord.get_point_position(cord.get_point_count() - 1))
 			cord.add_point(global_position)
 
+			if cord_length >= max_cord_length:
+				reached_length()
+
 ## toss ############################################################################
 
 func toss(direction: Vector2):
@@ -45,3 +48,14 @@ func toss(direction: Vector2):
 	rotation = direction.angle() + PI/2.0
 
 	apply_central_impulse(direction * impulse_force)
+
+var is_at_max = false
+func reached_length():
+	is_at_max = true
+
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.1, 0.5)
+	tween.parallel().tween_property(cord, "modulate:a", 0.1, 0.5)
+	tween.tween_callback(func():
+		queue_free()
+		cord.queue_free()).set_delay(1.0)
