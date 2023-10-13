@@ -1,15 +1,47 @@
 extends RigidBody2D
 
+## vars ############################################################################
+
 @onready var anim = $AnimatedSprite2D
 @onready var area = $Area2D
+var cord_scene = preload("res://src/pluggs/player/Cord.tscn")
 
+var max_cord_length = 50
 var impulse_force = 300
+
+# sibling - not a child
+var cord
+var cord_length = 0
+
+## ready ############################################################################
 
 func _ready():
 	pass
 
+var cord_point_time = 0.1
+var cord_point_ttl = 0.1
+
+## process ############################################################################
+
+func _process(delta):
+	if cord != null and is_instance_valid(cord):
+		cord_point_ttl -= delta
+		if cord_point_ttl < 0:
+			# TODO some minimum distance before adding another point
+			# TODO check against max-allowed length
+			cord_point_ttl = cord_point_time
+			# TODO Util, don't fail me now!
+			cord_length += global_position.distance_to(cord.get_point_position(cord.get_point_count() - 1))
+			cord.add_point(global_position)
+
+## toss ############################################################################
+
 func toss(direction: Vector2):
-	Debug.pr("tossing in direction", direction)
+	cord = cord_scene.instantiate()
+
+	get_tree().current_scene.add_child(cord)
+	cord.add_point(global_position)
+
 	rotation = direction.angle() + PI/2.0
-	Debug.pr("rotating to angle", rotation)
+
 	apply_central_impulse(direction * impulse_force)
