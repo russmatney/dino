@@ -72,6 +72,8 @@ func _load_config(cfg):
 
 
 func _load_default_config():
+	if config == null:
+		return
 	_ex_pattern_field.text = config.get_default_exclusion_pattern()
 	_set_options_visible(false)
 
