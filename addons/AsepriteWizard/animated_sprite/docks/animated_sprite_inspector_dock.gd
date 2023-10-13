@@ -30,6 +30,19 @@ var _layer_default := "[all]"
 @onready var _visible_layers_field =  $margin/VBoxContainer/options/visible_layers/CheckButton
 @onready var _ex_pattern_field = $margin/VBoxContainer/options/ex_pattern/LineEdit
 
+@onready var _resource_picker = $%AsepriteResourcePicker
+
+func _on_resource_changed(resource:Resource):
+	_resource_picker.set_edited_resource(resource)
+
+	if resource != null:
+		var path = resource.resource_path
+		_set_source(ProjectSettings.localize_path(path))
+		_save_config()
+	else:
+		_set_source("")
+		_save_config()
+
 func _ready():
 	var cfg = wizard_config.load_config(sprite)
 

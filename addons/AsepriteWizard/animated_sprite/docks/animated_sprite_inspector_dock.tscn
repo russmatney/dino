@@ -40,6 +40,11 @@ size_flags_stretch_ratio = 2.0
 text = "[empty]"
 clip_text = true
 
+[node name="AsepriteResourcePicker" type="EditorResourcePicker" parent="margin/VBoxContainer/source"]
+unique_name_in_owner = true
+layout_mode = 2
+base_type = "PackedDataContainer"
+
 [node name="layer" type="HBoxContainer" parent="margin/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Aseprite layer to be used in the animation. By default all layers are included."
@@ -138,6 +143,7 @@ layout_mode = 2
 text = "Import"
 
 [connection signal="pressed" from="margin/VBoxContainer/source/button" to="." method="_on_source_pressed"]
+[connection signal="resource_changed" from="margin/VBoxContainer/source/AsepriteResourcePicker" to="." method="_on_resource_changed"]
 [connection signal="button_down" from="margin/VBoxContainer/layer/options" to="." method="_on_layer_button_down"]
 [connection signal="item_selected" from="margin/VBoxContainer/layer/options" to="." method="_on_layer_item_selected"]
 [connection signal="toggled" from="margin/VBoxContainer/options_title/options_title" to="." method="_on_options_title_toggled"]
