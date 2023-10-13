@@ -10,7 +10,7 @@ func enter(msg = {}):
 
 
 func process(_delta: float):
-	if not Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("move_up"):
 		machine.transit("Stand", {"animate": true})
 
 	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):

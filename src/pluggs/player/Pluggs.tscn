@@ -229,14 +229,14 @@ shape = SubResource("1")
 script = ExtResource("4")
 initial_state = NodePath("Stand")
 
+[node name="Bucket" type="Node" parent="Machine"]
+script = ExtResource("6_c32yk")
+
 [node name="Stand" type="Node" parent="Machine"]
 script = ExtResource("4_i3vuh")
 
 [node name="Run" type="Node" parent="Machine"]
 script = ExtResource("5_sihy0")
-
-[node name="Bucket" type="Node" parent="Machine"]
-script = ExtResource("6_c32yk")
 
 [node name="DragReach" type="Node" parent="Machine"]
 script = ExtResource("7_mortt")

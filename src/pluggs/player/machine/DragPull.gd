@@ -9,16 +9,13 @@ func enter(_msg = {}):
 	tt_reach = drag_for_t
 
 
-func exit(_msg = {}):
-	# TODO not ideal, really we want a way to contrib a vector to velocity (steering)
+func exit():
 	actor.velocity.x = 0
 
 
 func process(delta: float):
-	if not Input.is_action_pressed("move_down"):
-		machine.transit("Stand", {"animate": true})
-
-	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
+	if not Input.is_action_pressed("move_left") \
+		and not Input.is_action_pressed("move_right"):
 		machine.transit("Bucket", {"animate": false})
 
 	var move_dir = Trolley.move_vector()
@@ -36,5 +33,4 @@ func physics_process(delta):
 	var move_dir = Trolley.move_vector()
 	actor.velocity.x = actor.drag_speed * move_dir.x
 	actor.velocity.y += actor.gravity * delta
-	actor.set_velocity(actor.velocity)
 	actor.move_and_slide()

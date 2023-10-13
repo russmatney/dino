@@ -12,7 +12,6 @@ func physics_process(delta):
 		machine.transit("Jump")
 		return
 
-	# gravity
 	if not actor.is_on_floor():
 		actor.velocity.y += actor.gravity * delta
 

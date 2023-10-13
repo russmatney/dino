@@ -10,9 +10,6 @@ func enter(_msg = {}):
 
 
 func process(delta: float):
-	if not Input.is_action_pressed("move_down"):
-		machine.transit("Stand", {"animate": true})
-
 	if not Input.is_action_pressed("move_left") and not Input.is_action_pressed("move_right"):
 		machine.transit("Bucket", {"animate": false})
 
@@ -29,5 +26,4 @@ func process(delta: float):
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta
-	actor.set_velocity(actor.velocity)
 	actor.move_and_slide()

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgbpthsgdwbrb"]
+
+[ext_resource type="Script" path="res://addons/core/DinoGym.gd" id="1_edbko"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="2_kxlna"]
+
+[node name="PluggsGym" type="Node"]
+script = ExtResource("1_edbko")
+
+[node name="MetalTiles8" parent="." instance=ExtResource("2_kxlna")]
+layer_0/tile_data = PackedInt32Array(131063, 262145, 2, 196599, 262145, 3, 262135, 262145, 3, 327671, 327681, 5, 327672, 524289, 2, 393208, 327681, 5, 393209, 131073, 5, 393210, 131073, 5, 393211, 131073, 5, 393212, 131073, 5, 458750, 65537, 5, 393213, 196609, 5, 458751, 131073, 5, 393216, 131073, 5, 393217, 131073, 5, 393218, 131073, 5, 393219, 131073, 5, 393220, 131073, 5, 393221, 131073, 5, 393223, 131073, 5, 393222, 131073, 5, 327689, 65537, 5, 393224, 196609, 5, 262155, 65537, 5, 327690, 196609, 5, 262156, 131073, 5, 196622, 65537, 5, 262157, 196609, 5, 196623, 131073, 5, 196624, 196609, 5, 131089, 65537, 5, 65555, 262145, 5, 131090, 196609, 5, 20, 65537, 5, 22, 196609, 5, 21, 131073, 5, -65513, 262145, 5)
