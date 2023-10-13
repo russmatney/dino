@@ -248,14 +248,15 @@ func _on_end_entered(body):
 
 func spawn(opts=null):
 	for ch in get_children():
-		if ch is DinoSpawnPoint:
+		# should be DinoSpawnPoint
+		if ch is Marker2D:
 			if opts != null and "only_if" in opts:
 				if opts.only_if.call(ch):
 					spawn_one(ch)
 			else:
 				spawn_one(ch)
 
-func spawn_one(sp: DinoSpawnPoint):
+func spawn_one(sp):
 	var new_ent = sp.spawn_entity()
 	if new_ent != null:
 		var o = get_owner()
