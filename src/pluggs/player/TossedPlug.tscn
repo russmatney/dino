@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://by1oangkr8ngb"]
+[gd_scene load_steps=7 format=3 uid="uid://w8vxxajcute5"]
 
 [ext_resource type="Texture2D" uid="uid://buiygb7df5acu" path="res://src/pluggs/player/tossed_plug.png" id="1_l6py6"]
 [ext_resource type="Script" path="res://src/pluggs/player/TossedPlug.gd" id="1_ox3yg"]

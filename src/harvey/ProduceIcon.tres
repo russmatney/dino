@@ -1,23 +1,32 @@
-[gd_resource type="SpriteFrames" load_steps=4 format=3]
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://6ecpxk6e8xva"]
 
 [ext_resource type="Texture2D" uid="uid://c15501bmx3y5e" path="res://src/harvey/assets/onion-icon_sheet.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://brwot5oum04sm" path="res://src/harvey/assets/tomato-icon_sheet.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://b316pvcas4vre" path="res://src/harvey/assets/carrot-icon_sheet.png" id="3"]
 
 [resource]
-animations = [ {
-"frames": [ ExtResource( 3 ) ],
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
 "loop": true,
-"name": "carrot",
+"name": &"carrot",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1")
+}],
 "loop": true,
-"name": "onion",
+"name": &"onion",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2")
+}],
 "loop": true,
-"name": "tomato",
+"name": &"tomato",
 "speed": 5.0
-} ]
+}]
