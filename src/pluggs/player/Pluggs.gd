@@ -144,7 +144,7 @@ func clear_forced_movement_target():
 ## toss plug ##########################################################
 
 @onready var plug_source = $PlugSource
-var tossed_plug_scene = preload("res://src/pluggs/player/TossedPlug.tscn")
+var tossed_plug_scene = preload("res://src/pluggs/plug/TossedPlug.tscn")
 
 func toss_plug():
 	var plug = tossed_plug_scene.instantiate()

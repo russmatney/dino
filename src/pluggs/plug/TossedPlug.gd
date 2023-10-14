@@ -4,10 +4,10 @@ extends RigidBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var area = $Area2D
-var cord_scene = preload("res://src/pluggs/player/Cord.tscn")
+var cord_scene = preload("res://src/pluggs/plug/Cord.tscn")
 
 var max_cord_length = 50
-var max_cord_lengths = [50, 64, 72, 81]
+var max_cord_lengths = [50, 60, 40, 55, 45]
 var impulse_force = 300
 
 # sibling - not a child
@@ -25,6 +25,8 @@ var cord_point_ttl = 0.1
 ## process ############################################################################
 
 func _process(delta):
+	if is_latched:
+		return
 	if cord != null and is_instance_valid(cord):
 		cord_point_ttl -= delta
 		if cord_point_ttl < 0:
@@ -56,11 +58,13 @@ func toss(direction: Vector2):
 
 	apply_central_impulse(direction * impulse_force)
 
+## reached_length ############################################################################
+
 var is_at_max = false
 func reached_length():
 	is_at_max = true
 
-	# TODO convert cord into a proper rope
+	# TODO convert cord into a 'rope'
 	# TODO reel it back in
 
 	var tween = create_tween()
@@ -69,3 +73,18 @@ func reached_length():
 	tween.tween_callback(func():
 		queue_free()
 		cord.queue_free()).set_delay(1.0)
+
+## latch ############################################################################
+
+var is_latched = false
+func latch(socket) -> bool:
+	if is_at_max:
+		return false
+	is_latched = true
+
+	set_deferred("freeze", true)
+	var target_pos = socket.global_position
+
+	var tween = create_tween()
+	tween.tween_property(self, "position", target_pos, 0.3)
+	return true
