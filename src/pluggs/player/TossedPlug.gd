@@ -7,6 +7,7 @@ extends RigidBody2D
 var cord_scene = preload("res://src/pluggs/player/Cord.tscn")
 
 var max_cord_length = 50
+var max_cord_lengths = [50, 64, 72, 81]
 var impulse_force = 300
 
 # sibling - not a child
@@ -16,7 +17,7 @@ var cord_length = 0
 ## ready ############################################################################
 
 func _ready():
-	pass
+	max_cord_length = Util.rand_of(max_cord_lengths)
 
 var cord_point_time = 0.1
 var cord_point_ttl = 0.1
@@ -37,6 +38,12 @@ func _process(delta):
 			if cord_length >= max_cord_length:
 				reached_length()
 
+var killed_velocity = false
+func _integrate_forces(state):
+	if not killed_velocity and is_at_max and state.linear_velocity.abs().length() > 1:
+		state.linear_velocity = Vector2.ZERO
+		killed_velocity = true
+
 ## toss ############################################################################
 
 func toss(direction: Vector2):
@@ -52,6 +59,9 @@ func toss(direction: Vector2):
 var is_at_max = false
 func reached_length():
 	is_at_max = true
+
+	# TODO convert cord into a proper rope
+	# TODO reel it back in
 
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.1, 0.5)
