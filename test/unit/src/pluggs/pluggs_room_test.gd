@@ -1,5 +1,10 @@
 extends GutTest
 
+func assert_eq_set(a, b):
+	a.sort()
+	b.sort()
+	assert_eq_deep(a, b)
+
 ## gen_room_def ##################################################################
 
 func test_gen_room_def_basic():
@@ -126,4 +131,17 @@ func test_create_room_color_rect():
 	assert_eq(room.name, "Test Room")
 	assert_eq(room.position, Vector2.ZERO)
 	assert_eq(room.rect.size, Vector2(48, 48))
+	room.free()
+
+func test_create_room_tilemap():
+	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
+	assert_eq(room.name, "Test Room")
+	assert_eq(room.position, Vector2.ZERO)
+	assert_eq_set(room.tilemap.get_used_cells(0), [
+		Vector2i(0,0),
+		Vector2i(1,0),
+		Vector2i(2,0),
+		Vector2i(0,1),
+		Vector2i(0,2),
+		])
 	room.free()
