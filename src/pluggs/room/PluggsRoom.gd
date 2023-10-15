@@ -2,10 +2,6 @@
 extends Node2D
 class_name PluggsRoom
 
-var def: Dictionary # a room def (TODO consider proper type)
-var rect: ColorRect
-var tilemap: TileMap
-
 ##########################################################################
 ## static ##################################################################
 
@@ -73,7 +69,7 @@ static func gen_room_def(opts={}):
 
 	return Util.rand_of(room_defs)
 
-## create room ##################################################################
+## next room position ##################################################################
 
 static func next_room_position(opts: Dictionary, _room, last_room):
 	var x = last_room.position.x + PluggsRoom.width(last_room, opts)
@@ -81,6 +77,8 @@ static func next_room_position(opts: Dictionary, _room, last_room):
 	# TODO move up/down based on last_room and room def?
 	var y = last_room.position.y
 	return Vector2(x, y)
+
+## create room ##################################################################
 
 static func create_room(opts, last_room=null):
 	# TODO not sure i buy this default - maybe room_unit_size is cleaner
@@ -97,3 +95,17 @@ static func create_room(opts, last_room=null):
 
 
 	return room
+
+##########################################################################
+## instance ##################################################################
+
+## vars
+
+var def: Dictionary # a room def (TODO consider proper type)
+var rect: ColorRect
+var tilemap: TileMap
+
+## ready #############################################################
+
+func _ready():
+	pass

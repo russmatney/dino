@@ -1,0 +1,33 @@
+title PluggsRoomsTest
+
+=======
+LEGEND
+=======
+
+. = Empty
+p = Player
+x = Tile
+
+=======
+ROOMS
+=======
+
+name Room One
+
+..................
+....p.............
+..................
+...xxxx....xx.....
+xxxxxxxxx......xxx
+xxxxxxxxxxx...xxxx
+xxxxxxxxxxx..xxxxx
+
+name Room Two
+
+..................
+..................
+..................
+.xxx......xxxx....
+xx....xxxxxxxxxx..
+xx...xxxxxxxxxxxxx
+xx..xxxxxxxxxxxxxx

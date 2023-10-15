@@ -111,7 +111,6 @@ xp.
 x..
 "
 
-
 func test_create_room_basic():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
 	assert_eq(room.name, "Test Room")
