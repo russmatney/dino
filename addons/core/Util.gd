@@ -356,6 +356,18 @@ func get_(d, k: String, default: Variant=null):
 	else:
 		return default
 
+func ensure_default(d, k: String, default: Variant):
+	if d == null:
+		return {k=default}
+
+	if d.get(k):
+		# k already set, do nothing
+		return d
+
+	# set (in-place!) and return
+	d[k] = default
+	return d
+
 #################################################################
 ## Configuration warnings
 
