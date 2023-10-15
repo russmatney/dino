@@ -93,7 +93,7 @@ func create_room(opts=null, last_room=null):
 		opts = {}
 	opts.merge({
 		room_base_dim=room_base_dim,
-		room_tile_size=room_tile_size,
+		tile_size=room_tile_size,
 		parsed_room_defs=parsed_room_defs,
 		tilemap_scene=tilemap_scene})
 	var room = PluggsRoom.create_room(opts, last_room)
