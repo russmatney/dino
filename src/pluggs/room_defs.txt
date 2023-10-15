@@ -31,3 +31,39 @@ name Room Two
 xx....xxxxxxxxxx..
 xx...xxxxxxxxxxxxx
 xx..xxxxxxxxxxxxxx
+
+name Room Three
+
+..................
+..................
+..................
+xxxxxxxxxx.....xxx
+xxxxxxxxxxxx..xxxx
+xxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxx
+
+name Room Four
+
+......................................
+......................................
+......................................
+xxxxxxxxxx.....xxxxxxx...........xxxxx
+xxxxxxxxxxxx..xxxxxxxxxx.......xxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxx...xxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+name Room Five
+
+......................................
+......................................
+......................................
+xxx..............................xxxxx
+xxx............................xxxxxxx
+xxx...xxx....................xxxxxxxxx
+xxx.........xxxx............xxxxxxxxxx
+xxx.........xxxxxxxx........xxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
