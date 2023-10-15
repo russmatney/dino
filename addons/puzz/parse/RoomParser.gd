@@ -2,6 +2,26 @@
 extends Object
 class_name RoomParser
 
+## public api #####################################################
+
+static func parse_room_defs(opts={}):
+	# kind of odd... some caching convenience use-case?
+	if "parsed_room_defs" in opts:
+		return opts.parsed_room_defs
+
+	var contents = Util.get_(opts, "contents")
+	if contents == null:
+		var path = Util.get_(opts, "room_defs_path")
+		if path == null:
+			Debug.err("Cannot parse_room_defs, no room_defs_path")
+			return
+		var file = FileAccess.open(path, FileAccess.READ)
+		contents = file.get_as_text()
+
+	return RoomParser.parse(contents)
+
+## parser #####################################################
+
 static func parse(contents):
 	var parsed = {}
 	var section_parsers = {

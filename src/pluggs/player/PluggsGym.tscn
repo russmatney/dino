@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b1mny45alxkfk"]
 
 [ext_resource type="Script" path="res://addons/core/DinoGym.gd" id="1_edbko"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="2_kxlna"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="2_kxlna"]
 [ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/pluggs/plug/Socket.tscn" id="3_km3d3"]
 
 [node name="PluggsGym" type="Node"]

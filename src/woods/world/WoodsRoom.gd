@@ -18,19 +18,9 @@ var end_box
 
 ## room parse ##################################################################
 
-static func parse_room_defs(opts={}):
-	if "parsed_room_defs" in opts:
-		return opts.parsed_room_defs
-
-	var path = Util.get_(opts, "room_defs_path", "res://src/woods/world/rooms.txt")
-	var file = FileAccess.open(path, FileAccess.READ)
-	var contents = file.get_as_text()
-
-	return RoomParser.parse(contents)
-
 static func room_for_type(typ, opts={}):
 	var rooms_by_type = {}
-	var room_defs = parse_room_defs(opts)
+	var room_defs = RoomParser.parse_room_defs(opts)
 	for room in room_defs.rooms:
 		var rms = Util.get_(rooms_by_type, room.room_type, [])
 		rms.append(room)
