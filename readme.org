@@ -12,9 +12,9 @@ Dino is a monorepo/sandbox full of Godot games and addons.
 #+caption: An incomplete list of rough icons
 [[images/all_icons_bg_8x.png]]
 
-You can play the release version here: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]]. I have a working
-version available on Steam as well, and will setup sharing keys in the coming
-weeks - ping me if you're interested!
+You can play the latest version on itch.io: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]].
+
+A steam release is coming soon - download the demo and wishlist [[https://store.steampowered.com/app/2589550/Dino/][on steam]].
 
 You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind-garden/blog]], or follow me on [[https://mastodon.gamedev.place/@russmatney][mastodon]], [[https://programming.dev/u/russmatney][lemmy]],
 or [[https://twitch.tv/russmatney][twitch]] for updates. You can also support me on [[https://patreon.com/russmatney][Patreon]].
