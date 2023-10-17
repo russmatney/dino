@@ -1,4 +1,4 @@
-name: Godot Export and Itch Deploy
+name: Itch.io Deploy
 
 on:
   workflow_run:

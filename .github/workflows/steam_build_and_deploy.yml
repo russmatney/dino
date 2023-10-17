@@ -1,0 +1,63 @@
+name: Steam Deploy
+
+# on:
+#   workflow_run:
+#     workflows: [GUT Tests]
+#     types:
+#       - completed
+#     branches: [main]
+
+env:
+  GODOT_VERSION: 4.1.1
+
+jobs:
+  export-and-deploy-linux:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    name: Linux Build and Deploy
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.1.1
+    environment: Godot Dev Env
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+      - name: Issue 120
+        run: |
+          mkdir -p /github/home/.config/godot
+          cp /root/.config/godot/editor_settings-4.tres /github/home/.config/godot/
+      - name: Sanity check
+        run: ls /root/.local/share/godot/export_templates
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Initial Godot import
+        shell: bash
+        run: |
+          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --editor --headless --quit || exit 0
+      - name: Linux Build
+        # TODO remove forced exit 0 here (export without errors!)
+        run: |
+          mkdir -v -p dist/dino-linux
+          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0
+      - name: Sanity check
+        run: |
+          ls -alh dist/
+          ls -alh dist/dino-linux
+          stat dist/dino-linux/dino.x86_64
+
+      - uses: CyberAndrii/steam-totp@v1
+        name: Generate TOTP
+        id: steam-totp
+        with:
+          shared_secret: ${{ secrets.STEAM_SHARED_SECRET }}
+
+      - name: Deploy to Steam
+        uses: docker://steamcmd/steamcmd:latest
+        run: build/steam_deploy.sh
+        env:
+          steam_username: ${{ secrets.STEAM_USERNAME }}
+          steam_totp: ${{ steps.steam-totp.outputs.code }}
