@@ -4,9 +4,8 @@ on:
   workflow_run:
     workflows: [GUT Tests]
     types: [completed]
-    branches: [main]
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+    branches:
+      - refs/tags/v[0-9]+.[0-9]+.[0-9]+-[0-9]+
 
 env:
   GODOT_VERSION: 4.1.1
