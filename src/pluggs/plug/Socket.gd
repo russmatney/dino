@@ -11,6 +11,12 @@ signal unplugged(plug)
 func _ready():
 	area.body_entered.connect(_on_body_entered)
 
+func unplug():
+	if plug != null and is_instance_valid(plug):
+		plug.reached_length()
+		unplugged.emit(plug)
+	plug = null
+
 func _on_body_entered(body):
 	if plug != null:
 		return
@@ -20,10 +26,3 @@ func _on_body_entered(body):
 		if latched:
 			plug = body
 			plugged.emit(plug)
-
-func _on_body_exited(body):
-	Debug.pr("socket body exited", body)
-
-	if body == plug and body.is_in_group("plug"):
-		unplugged.emit(plug)
-		plug = null

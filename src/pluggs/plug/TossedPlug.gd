@@ -71,6 +71,8 @@ func reached_length():
 
 var is_latched = false
 func latch(socket) -> bool:
+	cord.socket = socket
+
 	if is_at_max:
 		return false
 	is_latched = true

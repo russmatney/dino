@@ -12,6 +12,8 @@ var max_reached = false
 var last_thresh
 
 var player
+var socket
+var plug
 
 ## _process ###########################################
 
@@ -33,7 +35,7 @@ func update_opts():
 
 	if len(os) == 0:
 		max_reached = true
-		Debug.pr("pull the plug!")
+		unplug()
 		return
 
 	os.sort_custom(func(a, b): return a.max_length < b.max_length)
@@ -47,19 +49,19 @@ func update_opts():
 
 ## length ###########################################
 
-var last_point_count
-var last_len
 func length():
-	var point_count = get_point_count()
-	if last_point_count == point_count:
-		return last_len
-	last_point_count = point_count
-
 	var dist = 0
 	var last_p
+	var point_count = get_point_count()
+
 	for i in range(point_count):
 		if last_p != null:
 			dist += last_p.distance_to(get_point_position(i))
 		last_p = get_point_position(i)
-	last_len = dist
 	return dist
+
+func unplug():
+	if socket != null and is_instance_valid(socket):
+		socket.unplug()
+		remove_point(get_point_count()-1)
+		pass
