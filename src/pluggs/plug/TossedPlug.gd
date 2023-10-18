@@ -11,12 +11,11 @@ var impulse_force = 300
 
 # sibling - not a child
 var cord
-var cord_length = 0
 
 ## ready ############################################################################
 
 var cord_point_time = 0.1
-var cord_point_ttl = 0.1
+var cord_point_ttl = 0.0
 
 ## process ############################################################################
 
@@ -30,10 +29,9 @@ func _process(delta):
 			# TODO check against max-allowed length
 			cord_point_ttl = cord_point_time
 			# TODO Util, don't fail me now!
-			cord_length += global_position.distance_to(cord.get_point_position(cord.get_point_count() - 1))
 			cord.add_point(global_position)
 
-			if cord_length >= max_cord_length:
+			if cord.length() >= max_cord_length:
 				reached_length()
 
 var killed_velocity = false
@@ -44,11 +42,10 @@ func _integrate_forces(state):
 
 ## toss ############################################################################
 
-func toss(direction: Vector2):
+func toss(player, direction: Vector2):
 	cord = cord_scene.instantiate()
-
+	cord.player = player
 	get_tree().current_scene.add_child(cord)
-	cord.add_point(global_position)
 
 	rotation = direction.angle() + PI/2.0
 
@@ -80,6 +77,7 @@ func latch(socket) -> bool:
 
 	set_deferred("freeze", true)
 	var target_pos = socket.global_position
+	cord.add_point(target_pos)
 
 	var tween = create_tween()
 	tween.tween_property(self, "position", target_pos, 0.3)

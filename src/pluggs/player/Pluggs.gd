@@ -155,4 +155,4 @@ func toss_plug():
 	# TODO get dir/angle towards nearby socket
 	var dir = (facing_vector + Vector2(0, -0.7)).normalized()
 
-	plug.toss(dir)
+	plug.toss(self, dir)
