@@ -8,20 +8,13 @@ on:
 
 jobs:
   export-and-deploy-linux:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
     name: Linux Build and Deploy
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.1.2
     environment: Godot Dev Env
     steps:
-      - name: Check Tag
-        id: check-tag
-        shell: bash
-        run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
-              echo "match=true" >> $GITHUB_OUTPUT
-          fi
       - name: Checkout
         uses: actions/checkout@v4
         with:

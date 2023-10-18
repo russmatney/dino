@@ -8,20 +8,13 @@ on:
 
 jobs:
   export-windows:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
     name: Windows Export
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.1.2
     environment: Godot Dev Env
     steps:
-      - name: Check Tag
-        id: check-tag
-        shell: bash
-        run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
-              echo "match=true" >> $GITHUB_OUTPUT
-          fi
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -58,20 +51,13 @@ jobs:
 
 
   export-linux:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.1.1
     environment: Godot Dev Env
     steps:
-      - name: Check Tag
-        id: check-tag
-        shell: bash
-        run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
-              echo "match=true" >> $GITHUB_OUTPUT
-          fi
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -105,20 +91,13 @@ jobs:
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-linux russmatney/dino:linux
 
   export-web:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
     name: Web Export
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.1.1
     environment: Godot Dev Env
     steps:
-      - name: Check Tag
-        id: check-tag
-        shell: bash
-        run: |
-          if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
-              echo "match=true" >> $GITHUB_OUTPUT
-          fi
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -154,20 +133,13 @@ jobs:
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino-web:html5
 
   # export-mac:
-  #   if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  #   if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
   #   name: Mac Export
   #   runs-on: ubuntu-20.04
   #   container:
   #     image: barichello/godot-ci:4.1.1
   #   environment: Godot Dev Env
   #   steps:
-  #     - name: Check Tag
-  #       id: check-tag
-  #       shell: bash
-  #       run: |
-  #         if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+.* ]]; then
-  #             echo "match=true" >> $GITHUB_OUTPUT
-  #         fi
   #     - name: Checkout
   #       uses: actions/checkout@v4
   #       with:
