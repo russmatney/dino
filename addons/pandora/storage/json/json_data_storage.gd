@@ -1,19 +1,16 @@
 @tool
 class_name PandoraJsonDataStorage extends PandoraDataStorage
 
-const ICON = preload("res://addons/pandora/icons/pandora-json-icon.svg")
-
-
 var data_directory: String = "user://pandora"
 
 func get_backend_name() -> String:
 	return "Pandora JSON"
-	
+
 func get_backend_description() -> String:
 	return "Stores data via json at the data_directory provided."
 
 func get_backend_icon() -> Texture:
-	return ICON
+	return load("res://addons/pandora/icons/pandora-json-icon.svg")
 
 func _init(data_dir: String):
 	data_directory = data_dir
@@ -65,7 +62,7 @@ func get_decompressed_data(file_path : String) -> Dictionary:
 
 
 func _get_directory_path(context_id: String) -> String:
-	var directory_path = "" 
+	var directory_path = ""
 	if data_directory.ends_with("//"):
 		directory_path = "%s%s" % [data_directory, context_id] if context_id != "" else data_directory
 	else:

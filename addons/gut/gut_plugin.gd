@@ -21,4 +21,5 @@ func _exit_tree():
 	# Clean-up of the plugin goes here
 	# Always remember to remove_at it from the engine when deactivated
 	remove_control_from_bottom_panel(_bottom_panel)
-	_bottom_panel.free()
+	if _bottom_panel != null and is_instance_valid(_bottom_panel):
+		_bottom_panel.free()

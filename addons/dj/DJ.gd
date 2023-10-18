@@ -1,7 +1,8 @@
 @tool
 extends Node
 
-@onready var menu_song = preload("res://addons/dj/assets/songs/Late Night Radio.mp3")
+# maybe drop preload
+var menu_song = preload("res://addons/dj/assets/songs/Late Night Radio.mp3")
 var menu_song_player
 var playback_pos
 

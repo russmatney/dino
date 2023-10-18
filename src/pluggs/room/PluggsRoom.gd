@@ -74,7 +74,7 @@ static func gen_room_def(opts={}):
 static func next_room_position(opts: Dictionary, _room, last_room):
 	var x = last_room.position.x + PluggsRoom.width(last_room, opts)
 
-	# TODO move up/down based on last_room and room def?
+	# TODO set next y position based on aligning empty 'edge-floor' tiles
 	var y = last_room.position.y
 	return Vector2(x, y)
 
