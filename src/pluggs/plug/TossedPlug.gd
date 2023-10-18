@@ -6,8 +6,7 @@ extends RigidBody2D
 @onready var area = $Area2D
 var cord_scene = preload("res://src/pluggs/plug/Cord.tscn")
 
-var max_cord_length = 50
-var max_cord_lengths = [50, 60, 40, 55, 45]
+var max_cord_length = 170
 var impulse_force = 300
 
 # sibling - not a child
@@ -15,9 +14,6 @@ var cord
 var cord_length = 0
 
 ## ready ############################################################################
-
-func _ready():
-	max_cord_length = Util.rand_of(max_cord_lengths)
 
 var cord_point_time = 0.1
 var cord_point_ttl = 0.1
