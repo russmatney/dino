@@ -68,4 +68,5 @@ jobs:
         uses: ./.github/actions/steam_deploy
         env:
           steam_username: ${{ secrets.STEAM_USERNAME }}
+          steam_password: ${{ secrets.STEAM_PASSWORD }}
           steam_totp: ${{ steps.steam-totp.outputs.code }}

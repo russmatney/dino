@@ -20,8 +20,8 @@ if [ -n "$steam_totp" ]; then
   echo ""
 fi
 
-# test locin
-steamcmd +set_steam_guard_code "$steam_totp" +login "$steam_username" +quit;
+# test login
+steamcmd +login "$steam_username" "$steam_password" "$steam_totp" +quit;
 
 ret=$?
 if [ $ret -eq 0 ]; then
