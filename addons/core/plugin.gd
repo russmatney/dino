@@ -2,7 +2,7 @@
 extends EditorPlugin
 
 var reload_scene_btn = Button.new()
-var reload_games_btn = Button.new()
+# var reload_games_btn = Button.new()
 var container = 0
 var editor_interface
 
@@ -19,9 +19,9 @@ func _enter_tree():
 	reload_scene_btn.text = "Reload Scene"
 	add_control_to_container(container, reload_scene_btn)
 
-	reload_games_btn.pressed.connect(reload_games)
-	reload_games_btn.text = "Reload Games"
-	add_control_to_container(container, reload_games_btn)
+	# reload_games_btn.pressed.connect(reload_games)
+	# reload_games_btn.text = "Reload Games"
+	# add_control_to_container(container, reload_games_btn)
 
 
 func _exit_tree():
@@ -38,5 +38,5 @@ func reload_scene():
 	editor_interface.reload_scene_from_path(edited_scene.scene_file_path)
 	Debug.pr("-------------------------------------------------")
 
-func reload_games():
-	Debug.pr("not impled!")
+# func reload_games():
+# 	Debug.pr("not impled!")

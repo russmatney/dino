@@ -11,17 +11,17 @@ func _enter_tree():
 	# add_autoload_singleton("DJ", "res://addons/dj/DJ.gd")
 	# add_autoload_singleton("DJZ", "res://addons/dj/DJZ.gd")
 
-	turn_table = TurnTable.instantiate()
-	if turn_table == null:
-		Debug.warn("turn_table failed to init")
-	else:
-		editor_interface = get_editor_interface()
-		# Maybe want this to quickly reload the ui, like in hotelUI
-		turn_table.editor_interface = editor_interface
-		editor_interface.get_editor_main_screen().add_child(turn_table)
+	# turn_table = TurnTable.instantiate()
+	# if turn_table == null:
+	# 	Debug.warn("turn_table failed to init")
+	# else:
+	# 	editor_interface = get_editor_interface()
+	# 	# Maybe want this to quickly reload the ui, like in hotelUI
+	# 	turn_table.editor_interface = editor_interface
+	# 	editor_interface.get_editor_main_screen().add_child(turn_table)
 
-		# hide at initial load
-		_make_visible(false)
+	# 	# hide at initial load
+	# 	_make_visible(false)
 
 
 func _exit_tree():
@@ -33,8 +33,8 @@ func _exit_tree():
 	Debug.prn("</DJ>")
 
 
-func _has_main_screen():
-	return true
+# func _has_main_screen():
+# 	return true
 
 
 func _make_visible(visible):
