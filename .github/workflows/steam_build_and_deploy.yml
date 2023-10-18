@@ -62,6 +62,7 @@ jobs:
         id: steam-totp
         with:
           shared_secret: ${{ secrets.STEAM_SHARED_SECRET }}
+          time_offset: 20
 
       - name: Deploy to Steam
         uses: ./.github/actions/steam_deploy
