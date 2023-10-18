@@ -8,7 +8,7 @@ on:
 
 jobs:
   export-and-deploy-linux:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Linux Build and Deploy
     runs-on: ubuntu-20.04
     container:
