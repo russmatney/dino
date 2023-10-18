@@ -6,16 +6,13 @@ on:
     types: [completed]
     branches: [main]
 
-env:
-  GODOT_VERSION: 4.1.1
-
 jobs:
   export-and-deploy-linux:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Linux Build and Deploy
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.1.1
+      image: barichello/godot-ci:4.1.2
     environment: Godot Dev Env
     steps:
       - name: Check Tag
@@ -37,7 +34,7 @@ jobs:
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          mv /root/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable ~/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable
       - name: Initial Godot import
         shell: bash
         run: |
