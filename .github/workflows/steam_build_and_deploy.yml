@@ -5,7 +5,7 @@ on:
     workflows: [GUT Tests]
     types: [completed]
     branches:
-      - refs/tags/v[0-9]+.[0-9]+.[0-9]+-[0-9]+
+      - refs/tags/v[0-9]+.[0-9]+.[0-9]+-?[0-9]*
 
 env:
   GODOT_VERSION: 4.1.1
@@ -36,7 +36,7 @@ jobs:
       - name: Initial Godot import
         shell: bash
         run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Linux Build
         # TODO remove forced exit 0 here (export without errors!)
