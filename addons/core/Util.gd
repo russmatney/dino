@@ -125,6 +125,16 @@ func get_all_parents(node: Node, parents=[]):
 	else:
 		return parents
 
+## Returns all of a node's children
+func get_all_children(node: Node):
+	if node == null:
+		return []
+	var chs = []
+	for ch in node.get_children():
+		chs.append(ch)
+		chs.append_array(get_all_children(ch))
+	return chs
+
 func each_sibling(node: Node):
 	var p = node.get_parent()
 	return p.get_children().filter(func(ch): return ch != node)
