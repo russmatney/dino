@@ -39,24 +39,6 @@ else
       exit $ret
 fi
 
-steamcmd +login "$steam_username" +quit;
-
-ret=$?
-if [ $ret -eq 0 ]; then
-    echo ""
-    echo "#################################"
-    echo "#        Successful login       #"
-    echo ""
-else
-      echo ""
-      echo "#################################"
-      echo "#        FAILED login           #"
-      echo ""
-      echo "Exit code: $ret"
-
-      exit $ret
-fi
-
 echo ""
 echo "######## Uploading build ########"
 echo ""
