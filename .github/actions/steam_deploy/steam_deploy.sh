@@ -21,7 +21,25 @@ if [ -n "$steam_totp" ]; then
 fi
 
 # test login
-steamcmd +login "$steam_username" "$steam_password" "$steam_totp" +quit;
+steamcmd +set_steam_guard_code "$steam_totp" +login "$steam_username" "$steam_password" "$steam_totp" +quit;
+
+ret=$?
+if [ $ret -eq 0 ]; then
+    echo ""
+    echo "#################################"
+    echo "#        Successful login       #"
+    echo ""
+else
+      echo ""
+      echo "#################################"
+      echo "#        FAILED login           #"
+      echo ""
+      echo "Exit code: $ret"
+
+      exit $ret
+fi
+
+steamcmd +login "$steam_username" +quit;
 
 ret=$?
 if [ $ret -eq 0 ]; then
@@ -47,44 +65,43 @@ steamcmd +login "$steam_username" +run_app_build "$manifest_path" +quit || (
     echo ""
     echo "#################################"
     echo "#             Errors            #"
-    echo "#################################"
-    echo ""
-    echo "Listing current folder"
-    echo ""
-    ls -alh
-    echo ""
-    echo "Listing logs folder:"
-    echo ""
-    ls -Ralph "$steamdir/logs/"
+    # echo "#################################"
+    # echo ""
+    # echo "Listing current folder"
+    # echo ""
+    # ls -alh
+    # echo ""
+    # echo "Listing logs folder:"
+    # echo ""
+    # ls -Ralph "$steamdir/logs/"
 
-    for f in "$steamdir"/logs/*; do
-      if [ -e "$f" ]; then
-        echo "######## $f"
-        cat "$f"
-        echo
-      fi
-    done
+    # for f in "$steamdir"/logs/*; do
+    #   if [ -e "$f" ]; then
+    #     echo "######## $f"
+    #     cat "$f"
+    #     echo
+    #   fi
+    # done
 
-    echo ""
-    echo "Displaying error log"
-    echo ""
-    cat "$steamdir/logs/stderr.txt"
-    echo ""
-    echo "Displaying bootstrapper log"
-    echo ""
-    cat "$steamdir/logs/bootstrap_log.txt"
-    echo ""
-    echo "#################################"
-    echo "#             Output            #"
-    echo "#################################"
-    echo ""
-    ls -Ralph BuildOutput
+    # echo ""
+    # echo "Displaying error log"
+    # echo ""
+    # cat "$steamdir/logs/stderr.txt"
+    # echo ""
+    # echo "Displaying bootstrapper log"
+    # echo ""
+    # cat "$steamdir/logs/bootstrap_log.txt"
+    # echo ""
+    # echo "#################################"
+    # echo "#             Output            #"
+    # echo ""
+    # ls -Ralph BuildOutput
 
-    for f in BuildOutput/*.log; do
-      echo "######## $f"
-      cat "$f"
-      echo
-    done
+    # for f in BuildOutput/*.log; do
+    #   echo "######## $f"
+    #   cat "$f"
+    #   echo
+    # done
 
     exit 1
   )
