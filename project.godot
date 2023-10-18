@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dino"
 run/main_scene="res://src/dino/DinoMenu.tscn"
-config/features=PackedStringArray("4.2")
+config/features=PackedStringArray("4.1")
 config/icon="res://addons/core/assets/icons/dino_sheet.png"
 run/main_scene.runner="res://src/runner/park/ThePark.tscn"
 run/main_scene.dungeon-crawler="res://src/dungeonCrawler/zones/TwoGeon.tscn"

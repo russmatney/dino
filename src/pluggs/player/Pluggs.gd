@@ -40,6 +40,7 @@ func _ready():
 ## physics process ##########################################################
 
 func _physics_process(_delta):
+	# TODO should this be assigned in an *_input() handler?
 	move_vector = get_move_vector()
 
 	if not Engine.is_editor_hint():
