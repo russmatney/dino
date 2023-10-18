@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-IFS=$'\n\t'
 
 # based on https://raw.githubusercontent.com/game-ci/steam-deploy/main/steam_deploy.sh
 

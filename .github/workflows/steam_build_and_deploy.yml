@@ -50,11 +50,12 @@ jobs:
       #     ls -alh dist/dino-linux
       #     stat dist/dino-linux/dino.x86_64
 
-      - name: wspc
-        run: |
-          echo "gh workspace $GITHUB_WORKSPACE"
-          pwd
-          ls -alh .
+      # - name: wspc
+      #   run: |
+      #     echo "gh workspace $GITHUB_WORKSPACE"
+      #     pwd
+      #     ls -alh .
+      #     stat /__w/dino/dino/build/steam_deploy.sh
 
       - uses: CyberAndrii/steam-totp@v1
         name: Generate TOTP
@@ -63,9 +64,7 @@ jobs:
           shared_secret: ${{ secrets.STEAM_SHARED_SECRET }}
 
       - name: Deploy to Steam
-        uses: docker://steamcmd/steamcmd:latest
-        with:
-          entrypoint: /__w/dino/dino/build/steam_deploy.sh
+        uses: ./.github/actions/steam_deploy
         env:
           steam_username: ${{ secrets.STEAM_USERNAME }}
           steam_totp: ${{ steps.steam-totp.outputs.code }}

@@ -1,0 +1,5 @@
+name: Dino Steam Deploy
+author: russell.matney@gmail.com
+runs:
+  using: docker
+  image: Dockerfile
