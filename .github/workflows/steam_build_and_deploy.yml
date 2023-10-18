@@ -1,5 +1,6 @@
 name: Steam Deploy
 
+on: [ push ]
 # on:
 #   workflow_run:
 #     workflows: [GUT Tests]
@@ -12,7 +13,7 @@ env:
 
 jobs:
   export-and-deploy-linux:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Linux Build and Deploy
     runs-on: ubuntu-20.04
     container:
@@ -20,7 +21,7 @@ jobs:
     environment: Godot Dev Env
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Issue 120
@@ -57,7 +58,8 @@ jobs:
 
       - name: Deploy to Steam
         uses: docker://steamcmd/steamcmd:latest
-        run: build/steam_deploy.sh
+        with:
+          entrypoint: ${GITHUB_WORKSPACE}/dino/build/steam_deploy.sh
         env:
           steam_username: ${{ secrets.STEAM_USERNAME }}
           steam_totp: ${{ steps.steam-totp.outputs.code }}

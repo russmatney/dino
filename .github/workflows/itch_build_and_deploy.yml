@@ -20,7 +20,7 @@ jobs:
     environment: Godot Dev Env
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Issue 120
@@ -63,7 +63,7 @@ jobs:
     environment: Godot Dev Env
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Issue 120
@@ -103,7 +103,7 @@ jobs:
     environment: Godot Dev Env
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Issue 120
@@ -145,7 +145,7 @@ jobs:
   #   environment: Godot Dev Env
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v2
+  #       uses: actions/checkout@v4
   #       with:
   #         lfs: true
   #     - name: Issue 120
