@@ -359,6 +359,21 @@
 
 (def build-dir "dist")
 
+(defn export
+  ([] (export nil))
+  ([export-name] (export export-name nil))
+  ([export-name opts]
+   (let [debug?      (:debug? opts)
+         export-name (or export-name "dino-linux")
+         build-dir   (str "dist/" export-name)
+         executable  (case export-name
+                       "dino-linux" "dino.x86_64")]
+     (println "export" export-name build-dir)
+     (-> (p/$ mkdir -p ~build-dir) p/check)
+     (shell-and-log (str "godot --headless "
+                         (if debug? "--export-debug" "--export-release")
+                         " " export-name " " build-dir "/" executable)))))
+
 (defn build-web
   ([] (build-web nil))
   ([export-name]

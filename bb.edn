@@ -34,6 +34,9 @@
   pixels-reptile (tasks/pixels "addons/reptile/assets")
   pixels-core    (tasks/pixels "addons/core/assets")
 
+  export       (tasks/export (some-> *command-line-args* first))
+  export-debug (tasks/export (some-> *command-line-args* first) {:debug? true})
+
   build-web (tasks/build-web (some-> *command-line-args* first))
   ;; TODO rename/rework in the context of butler
   ;; deploy-web (tasks/deploy-web "s3://danger.russmatney.com")
