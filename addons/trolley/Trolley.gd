@@ -212,6 +212,12 @@ func is_move_released(event):
 	return is_released(event, "move_left") or is_released(event, "move_right") or \
 		is_released(event, "move_up") or is_released(event, "move_down")
 
+func is_move_up(event):
+	return is_event(event, "move_up")
+
+func is_move_down(event):
+	return is_event(event, "move_down")
+
 func is_restart(event):
 	return is_event(event, "restart")
 

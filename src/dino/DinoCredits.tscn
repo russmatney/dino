@@ -18,7 +18,6 @@ color = Color(0.2, 0.227451, 0.309804, 1)
 
 [node name="DinoCredits" parent="panel" instance=ExtResource("2")]
 layout_mode = 1
-anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")

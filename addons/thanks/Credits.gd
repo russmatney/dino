@@ -6,9 +6,9 @@ class_name Credits
 var credits_lines_container: VBoxContainer
 
 var credits_scroll_container: ScrollContainer
-var speed = 200
 
-var initial_scroll_delay = 2.0
+var pause_scroll_delay = 2.0
+var scroll_delay
 var scroll_delay_per_line = 0.05
 var since_last_scroll = 0
 
@@ -19,8 +19,11 @@ func _get_configuration_warnings():
 
 var added_lines = []
 
+## ready ############################################################
 
 func _ready():
+	scroll_delay = pause_scroll_delay
+
 	credits_scroll_container = find_child("CreditsScrollContainer")
 	assert(credits_scroll_container) #,"Expected ScrollContainer node")
 	credits_lines_container = find_child("CreditsLinesContainer")
@@ -51,17 +54,37 @@ func _ready():
 	# credits implying DJ dep
 	DJ.resume_menu_song()
 
+## input ############################################################
+
+var scroll_held = Vector2.ZERO
+
+func _unhandled_input(event):
+	if Trolley.is_move_up(event):
+		scroll_held = Vector2.UP
+	elif Trolley.is_move_down(event):
+		scroll_held = Vector2.DOWN
+	if Trolley.is_move_released(event):
+		scroll_held = Vector2.ZERO
+
+## process ############################################################
 
 func _process(delta):
-	if initial_scroll_delay <= 0:
+	if scroll_held != Vector2.ZERO:
+		match scroll_held:
+			Vector2.UP: credits_scroll_container.scroll_vertical -= 30
+			Vector2.DOWN: credits_scroll_container.scroll_vertical += 30
+		return
+
+	if scroll_delay <= 0:
 		if since_last_scroll <= 0:
 			credits_scroll_container.scroll_vertical += 1
 			since_last_scroll = scroll_delay_per_line
 		else:
 			since_last_scroll -= delta
 	else:
-		initial_scroll_delay -= delta
+		scroll_delay -= delta
 
+## credits ############################################################
 
 var credits = [
 	["A game"],
