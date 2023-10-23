@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2ipf7t7godiy"]
+[gd_scene load_steps=4 format=3 uid="uid://d2ipf7t7godiy"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/dino/DinoMenu.gd" id="2"]
+[ext_resource type="Script" path="res://src/dino/OtherList.gd" id="3_odklj"]
 
 [node name="DinoMenu" type="CanvasLayer"]
 script = ExtResource("2")
@@ -17,27 +18,57 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1")]
 layout_mode = 2
 text = "[center]Dino Games"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/CenterContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 432)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+
+[node name="OtherButtons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("3_odklj")
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2

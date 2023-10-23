@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://pb7ag8sxpept"]
 
 [ext_resource type="Script" path="res://src/dino/StartGameButton.gd" id="1_5xyi5"]
-[ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://addons/core/assets/icons/dino_sheet.png" id="2_uctkf"]
+[ext_resource type="Texture2D" uid="uid://ba2udap4d027f" path="res://assets/gameicons/Shirt_icon_sheet.png" id="2_vpulv"]
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="3_1g6vj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wnb2q"]
@@ -23,7 +23,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture_normal = ExtResource("2_uctkf")
+texture_normal = ExtResource("2_vpulv")
 stretch_mode = 5
 
 [node name="GameLabel" type="RichTextLabel" parent="VBoxContainer"]
@@ -33,6 +33,6 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3_1g6vj")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]DemoLand[/center]"
+text = "[center]Shirt[/center]"
 fit_content = true
 scroll_active = false
