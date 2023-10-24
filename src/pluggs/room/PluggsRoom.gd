@@ -71,11 +71,33 @@ static func gen_room_def(opts={}):
 
 ## next room position ##################################################################
 
-static func next_room_position(opts: Dictionary, _room, last_room):
+static func next_room_position(opts: Dictionary, room, last_room):
 	var x = last_room.position.x + PluggsRoom.width(last_room, opts)
 
+	# TODO build columns, not rows!!!
+	var last_room_final_col = last_room.def.shape[len(last_room.def.shape) - 1]
+	last_room_final_col.reverse()
+	var tile_count = 0
+	for c in last_room_final_col:
+		if c is Array and "Tile" in c:
+			tile_count += 1
+	Debug.pr("last_col", last_room_final_col, tile_count)
+	var last_room_offset_tile_count = len(last_room_final_col) - tile_count
+
+	Debug.pr("this room def shape", room.def.shape)
+	var this_room_first_col = room.def.shape[0]
+	this_room_first_col.reverse()
+	tile_count = 0
+	for c in this_room_first_col:
+		if c is Array and "Tile" in c:
+			tile_count += 1
+	Debug.pr("first_col", this_room_first_col, tile_count)
+	var this_room_offset_tile_count = len(this_room_first_col) - tile_count
+
+	var y_offset = (-last_room_offset_tile_count + this_room_offset_tile_count) * opts.tile_size
+
 	# TODO set next y position based on aligning empty 'edge-floor' tiles
-	var y = last_room.position.y
+	var y = last_room.position.y + y_offset
 	return Vector2(x, y)
 
 ## create room ##################################################################
