@@ -18,10 +18,7 @@ func _ready():
 ## game entities ##########################################################
 
 func all_game_entities():
-	Debug.pr("fetching game ent with const", DinoGameEntityIds.DOTHOP)
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
-	Debug.pr("loading game ents with ent", ent)
-	Debug.pr("unfiltered games", Pandora.get_all_entities(Pandora.get_category(ent._category_id)))
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
 		.filter(func(ent): return ent.is_enabled())
 

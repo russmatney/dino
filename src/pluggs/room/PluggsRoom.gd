@@ -10,6 +10,7 @@ class_name PluggsRoom
 static func width(room: PluggsRoom, opts: Dictionary):
 	return len(room.def.shape[0]) * opts.tile_size
 
+# move to RoomDef
 static func column(room: PluggsRoom, idx: int):
 	var col = []
 	for row in room.def.shape:
@@ -29,6 +30,9 @@ static func size(room: PluggsRoom, opts: Dictionary):
 	var y = len(room.def.shape) * opts.tile_size
 	var x = len(room.def.shape[0]) * opts.tile_size
 	return Vector2(x, y)
+
+static func crd_to_position(crd, opts: Dictionary):
+	return crd.coord * opts.tile_size
 
 static func coords(room: PluggsRoom):
 	var crds = []
@@ -60,6 +64,23 @@ static func add_tilemap(room, opts, crds):
 	room.tilemap.force_update()
 	room.add_child(room.tilemap)
 
+## entities ##################################################################
+
+static func add_entity(crd, room, scene, opts):
+	var ent = scene.instantiate()
+	ent.position = crd_to_position(crd, opts)
+	room.add_child(ent)
+	room.entities.append(ent)
+
+# static var fb_machine_scene = preload("res://addons/reptile/tilemaps/MetalTiles8.tscn")
+static var fb_light_scene = preload("res://src/pluggs/entities/Light.tscn")
+
+static func add_entities(room, opts, crds):
+	var light_scene = Util.get_(opts, "light_scene", fb_light_scene)
+	# var machine_scene = Util.get_(opts, "machine_scene", fb_machine_scene)
+
+	crds.filter(func(c): return "Light" in c.cell).map(func(crd): add_entity(crd, room, light_scene, opts))
+	# crds.filter(func(c): return "Machine" in c.cell).map(func(crd): add_entity(crd, room, machine_scene, opts))
 
 ## color rect ##################################################################
 
@@ -123,7 +144,7 @@ static func create_room(opts, last_room=null):
 	add_rect(room, opts)
 	var crds = coords(room)
 	add_tilemap(room, opts, crds)
-
+	add_entities(room, opts, crds)
 
 	return room
 
@@ -132,9 +153,11 @@ static func create_room(opts, last_room=null):
 
 ## vars
 
-var def: Dictionary # a room def (TODO consider proper type)
+var def: Dictionary
+# var def: RoomDef # TODO refactor to support this
 var rect: ColorRect
 var tilemap: TileMap
+var entities: Array
 
 ## ready #############################################################
 
