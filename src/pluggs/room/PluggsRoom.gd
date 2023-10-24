@@ -10,6 +10,21 @@ class_name PluggsRoom
 static func width(room: PluggsRoom, opts: Dictionary):
 	return len(room.def.shape[0]) * opts.tile_size
 
+static func column(room: PluggsRoom, idx: int):
+	var col = []
+	for row in room.def.shape:
+		if idx >= len(row):
+			Debug.error("idx outside of row width, cannot build column")
+			return []
+		col.append(row[idx])
+	return col
+
+static func last_column(room: PluggsRoom):
+	return column(room, len(room.def.shape[0]) - 1)
+
+static func first_column(room: PluggsRoom):
+	return column(room, 0)
+
 static func size(room: PluggsRoom, opts: Dictionary):
 	var y = len(room.def.shape) * opts.tile_size
 	var x = len(room.def.shape[0]) * opts.tile_size
@@ -71,30 +86,24 @@ static func gen_room_def(opts={}):
 
 ## next room position ##################################################################
 
+static func tile_count_from_floor(col: Array):
+	col.reverse()
+	var tile_count = 0
+	for c in col:
+		if c is Array and "Tile" in c:
+			tile_count += 1
+	return tile_count
+
 static func next_room_position(opts: Dictionary, room, last_room):
 	var x = last_room.position.x + PluggsRoom.width(last_room, opts)
 
-	# TODO build columns, not rows!!!
-	var last_room_final_col = last_room.def.shape[len(last_room.def.shape) - 1]
-	last_room_final_col.reverse()
-	var tile_count = 0
-	for c in last_room_final_col:
-		if c is Array and "Tile" in c:
-			tile_count += 1
-	Debug.pr("last_col", last_room_final_col, tile_count)
-	var last_room_offset_tile_count = len(last_room_final_col) - tile_count
+	var last_room_final_col = last_column(last_room)
+	var last_room_offset_tile_count = len(last_room_final_col) - tile_count_from_floor(last_room_final_col)
 
-	Debug.pr("this room def shape", room.def.shape)
-	var this_room_first_col = room.def.shape[0]
-	this_room_first_col.reverse()
-	tile_count = 0
-	for c in this_room_first_col:
-		if c is Array and "Tile" in c:
-			tile_count += 1
-	Debug.pr("first_col", this_room_first_col, tile_count)
-	var this_room_offset_tile_count = len(this_room_first_col) - tile_count
+	var this_room_first_col = first_column(room)
+	var this_room_offset_tile_count = len(this_room_first_col) - tile_count_from_floor(this_room_first_col)
 
-	var y_offset = (-last_room_offset_tile_count + this_room_offset_tile_count) * opts.tile_size
+	var y_offset = (last_room_offset_tile_count - this_room_offset_tile_count) * opts.tile_size
 
 	# TODO set next y position based on aligning empty 'edge-floor' tiles
 	var y = last_room.position.y + y_offset
