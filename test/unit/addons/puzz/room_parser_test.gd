@@ -73,3 +73,52 @@ x.....
 		[["Tile"], null, null, null, ["Player"], null],
 		[["Tile"], null, null, null, null, null],
 		])
+
+
+func test_trailing_empty_lines():
+	var parsed = RoomParser.parse("title PuzzRooms
+
+=======
+LEGEND
+=======
+
+. = Empty
+x = Tile
+
+=======
+ROOMS
+=======
+
+room_name A
+
+xxx
+x..
+x..
+
+room_name B
+
+xxxxxx
+x.....
+x.....
+
+
+")
+
+	assert_has(parsed, "rooms", "rooms not parsed")
+	assert_eq(len(parsed.rooms), 2)
+
+	# arbitrary metadata
+	assert_eq(parsed.rooms[0].room_name, "A")
+	assert_eq(parsed.rooms[1].room_name, "B")
+
+	# shape
+	assert_eq(parsed.rooms[0].shape, [
+		[["Tile"], ["Tile"], ["Tile"]],
+		[["Tile"], null, null],
+		[["Tile"], null, null]
+		])
+	assert_eq(parsed.rooms[1].shape, [
+		[["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"]],
+		[["Tile"], null, null, null, null, null],
+		[["Tile"], null, null, null, null, null],
+		])

@@ -41,6 +41,9 @@ static func parse(contents):
 		var parser = section_parsers.get(header.to_lower())
 		if parser:
 			chunks = Array(chunks).map(func(c): return c.split("\n"))
+			chunks = chunks.map(func(chunk):
+				return Array(chunk).filter(func(c): return c != "")
+				).filter(func(chunk): return len(chunk) > 0)
 			parsed[header.to_lower()] = parser.call(parsed, chunks)
 	return parsed
 
