@@ -4,11 +4,11 @@ on:
   workflow_run:
     workflows: [GUT Tests]
     types: [completed]
-    branches: [main]
+    branches: [edge, prod]
 
 jobs:
   export-windows:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Windows Export
     runs-on: ubuntu-20.04
     container:
@@ -50,7 +50,7 @@ jobs:
 
 
   export-linux:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
@@ -89,7 +89,7 @@ jobs:
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-linux russmatney/dino:linux
 
   export-web:
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Web Export
     runs-on: ubuntu-20.04
     container:
@@ -130,7 +130,7 @@ jobs:
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino-web:html5
 
   # export-mac:
-  #   if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.ref_type == 'tag' }}
+  #   if: ${{ github.event.workflow_run.conclusion == 'success' }}
   #   name: Mac Export
   #   runs-on: ubuntu-20.04
   #   container:

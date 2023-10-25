@@ -4,7 +4,7 @@ on:
   workflow_run:
     workflows: [GUT Tests]
     types: [completed]
-    branches: [main]
+    branches: [edge, prod]
 
 jobs:
   export-and-deploy-linux:
