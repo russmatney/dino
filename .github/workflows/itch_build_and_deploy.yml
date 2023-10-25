@@ -54,7 +54,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.1.1
+      image: barichello/godot-ci:4.1.2
     environment: Godot Dev Env
     steps:
       - name: Checkout
@@ -93,7 +93,7 @@ jobs:
     name: Web Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.1.1
+      image: barichello/godot-ci:4.1.2
     environment: Godot Dev Env
     steps:
       - name: Checkout
@@ -134,7 +134,7 @@ jobs:
   #   name: Mac Export
   #   runs-on: ubuntu-20.04
   #   container:
-  #     image: barichello/godot-ci:4.1.1
+  #     image: barichello/godot-ci:4.1.2
   #   environment: Godot Dev Env
   #   steps:
   #     - name: Checkout
