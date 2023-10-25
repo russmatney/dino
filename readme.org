@@ -3,8 +3,11 @@
 #+name: GUT Tests
 [[https://github.com/russmatney/dino/actions/workflows/gut_tests.yml/badge.svg]]
 
-#+name: Dino Itch Deploy
-[[https://github.com/russmatney/dino/actions/workflows/dino_export_and_deploy.yml/badge.svg]]
+#+name: Itch Deploy
+[[https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg]]
+
+#+name: Steam Deploy
+[[https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml/badge.svg]]
 
 Dino is a monorepo/sandbox full of Godot games and addons.
 
