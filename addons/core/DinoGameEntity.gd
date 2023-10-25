@@ -58,5 +58,5 @@ func manages_scene(scene):
 	return scene.scene_file_path.begins_with(prefix)
 
 func should_spawn_player(scene):
-	# TODO probably need an opt-in/out from this default
+	# TODO probably need an opt-in/out/option re: this default
 	return not scene.scene_file_path.contains("menu")

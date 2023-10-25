@@ -82,7 +82,6 @@ static func next_room_opts(last_room, opts=null):
 		})
 	return opts
 
-# TODO assign tilemap into scene, maybe fetch based on room_def
 static var fallback_tmap_scene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
 static func calc_tilemap_scale_factor(room: WoodsRoom, room_base_dim: int):
@@ -103,7 +102,6 @@ static func calc_coord_factor(room: WoodsRoom, room_base_dim: int):
 	return room_base_dim / base_dim
 
 static var player_spawn_point_scene = preload("res://addons/core/PlayerSpawnPoint.tscn")
-# TODO maybe want a first class Spawn addon for spawn points + restarts
 static var spawn_point_scene = preload("res://src/dino/SpawnPoint.tscn")
 
 static var leaf_scene = preload("res://src/woods/entities/Leaf.tscn")

@@ -44,6 +44,3 @@ func _on_cell_touched(_coord):
 		quest_complete.emit()
 	else:
 		pass
-	# TODO highlight this via Hood
-		# player.highlight("--cells remaining")
-		# Hood.notif(str("remaining cells: ", count_remaining))

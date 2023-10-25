@@ -2,20 +2,11 @@ extends Node2D
 
 ## ready #########################################################################
 
-# TODO do we need this reference?
-var player
-
 func _ready():
 	Quest.quest_failed.connect(_on_quest_failed)
 	Quest.all_quests_complete.connect(_on_all_quests_complete)
-	Game.player_found.connect(_on_found_player)
-	if Game.player:
-		_on_found_player(Game.player)
 
 	setup.call_deferred()
-
-func _on_found_player(p):
-	player = p
 
 ## setup #########################################################################
 
@@ -41,8 +32,6 @@ func _on_quest_failed(q):
 
 var fired_once
 func _on_all_quests_complete():
-	# TODO animation/scene transition/delay
-
 	if not fired_once:
 		fired_once = true
 		load_next_level()

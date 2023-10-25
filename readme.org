@@ -212,20 +212,14 @@ Utilities for managing Godot Projects using Babashka (Clojure)
 - deploying via butler (itch.io's build/deploy tool)
 
 ** ~bb watch~
-A file watcher that runs other commands, which for now is just ~bb pixels~.
-
-TODO: expand this task to watch all relevant directories!
-(for now, see ~bb watch-reptile~, ~bb watch-core~, etc.)
-** ~bb pixels~: Aseprite export
-and exports *.aesprite files as pngs, using the aseprite
-binary.
+A file watcher that runs other commands, which for now is automatically
+exporting Aseprite files as pngs.
 ** ~bb build-web~: Build project for web
 Build your project, for web.
 
 Builds using godot's HTML5 template, in the ~./dist~ directory.
 
-This can be served locally with a web server helper (TODO: include task for
-serving a local game).
+This can be served locally with a web server helper.
 ** ~bb butler-push <game-name>~: Push project to matching itch.io game
 ** ~bb zip~: Zip project
 zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io

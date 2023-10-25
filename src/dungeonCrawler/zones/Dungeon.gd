@@ -56,7 +56,6 @@ func is_win():
 					if not boss.get("dead"):
 						return false
 				# win if all found bosses and they are dead
-				# TODO better way to capture/encode this?
 				return true
 
 	return false

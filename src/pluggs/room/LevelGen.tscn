@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck2mu48ptffu8"]
+[gd_scene load_steps=5 format=3 uid="uid://ck2mu48ptffu8"]
 
 [ext_resource type="Script" path="res://src/pluggs/room/LevelGen.gd" id="1_pdd7e"]
 [ext_resource type="Script" path="res://src/pluggs/room/PluggsRoom.gd" id="2_ql56y"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="3_5tll4"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="3_5tll4"]
 [ext_resource type="PackedScene" uid="uid://dusu5spdidajr" path="res://src/pluggs/entities/Light.tscn" id="3_jpwsx"]
-[ext_resource type="TileSet" uid="uid://dgkfewk2df8x7" path="res://addons/reptile/tilesets/MetalTiles8.tres" id="4_c2b7q"]
-[ext_resource type="Script" path="res://src/pluggs/entities/Light.gd" id="4_jfm2p"]
-[ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="5_dihnl"]
 
 [node name="LevelGen" type="Node2D"]
 script = ExtResource("1_pdd7e")
@@ -24,13 +21,11 @@ offset_right = 288.0
 offset_bottom = 112.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="Light" type="Node2D" parent="Rooms/@Node2D@30275" instance=ExtResource("3_jpwsx")]
+[node name="Light" parent="Rooms/@Node2D@30275" instance=ExtResource("3_jpwsx")]
 position = Vector2(96, 32)
-script = ExtResource("4_jfm2p")
 
-[node name="@Node2D@30274" type="Node2D" parent="Rooms/@Node2D@30275" instance=ExtResource("3_jpwsx")]
+[node name="@Node2D@30274" parent="Rooms/@Node2D@30275" instance=ExtResource("3_jpwsx")]
 position = Vector2(208, 32)
-script = ExtResource("4_jfm2p")
 
 [node name="Room_2" type="Node2D" parent="Rooms"]
 position = Vector2(288, 16)
@@ -41,24 +36,18 @@ offset_right = 288.0
 offset_bottom = 160.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="Light" type="Node2D" parent="Rooms/Room_2" instance=ExtResource("3_jpwsx")]
+[node name="Light" parent="Rooms/Room_2" instance=ExtResource("3_jpwsx")]
 position = Vector2(272, 48)
-script = ExtResource("4_jfm2p")
 
-[node name="@Node2D@30276" type="Node2D" parent="Rooms/Room_2" instance=ExtResource("3_jpwsx")]
+[node name="@Node2D@30276" parent="Rooms/Room_2" instance=ExtResource("3_jpwsx")]
 position = Vector2(16, 64)
-script = ExtResource("4_jfm2p")
 
-[node name="@Node2D@30277" type="Node2D" parent="Rooms/Room_2" instance=ExtResource("3_jpwsx")]
+[node name="@Node2D@30277" parent="Rooms/Room_2" instance=ExtResource("3_jpwsx")]
 position = Vector2(128, 64)
-script = ExtResource("4_jfm2p")
 
-[node name="MetalTiles8" type="TileMap" parent="Rooms" instance=ExtResource("3_5tll4")]
+[node name="MetalTiles8" parent="Rooms" instance=ExtResource("3_5tll4")]
 scale = Vector2(2, 2)
-tile_set = ExtResource("4_c2b7q")
-format = 2
 layer_0/tile_data = PackedInt32Array(393234, 458753, 2, 393235, 131073, 2, 393236, 196609, 2, 393242, 262145, 2, 393249, 65537, 2, 393250, 131073, 2, 393251, 196609, 2, 458770, 65537, 3, 458771, 131073, 3, 458772, 393217, 4, 458773, 196609, 2, 458776, 65537, 2, 458777, 131073, 2, 458778, 589825, 4, 458779, 196609, 2, 458784, 65537, 2, 458785, 458753, 4, 458786, 131073, 3, 458787, 196609, 3, 524306, 65537, 3, 524307, 131073, 3, 524308, 131073, 3, 524309, 393217, 4, 524310, 131073, 2, 524311, 131073, 2, 524312, 458753, 4, 524313, 131073, 3, 524314, 131073, 3, 524315, 393217, 4, 524316, 196609, 2, 524319, 65537, 2, 524320, 458753, 4, 524321, 131073, 3, 524322, 131073, 3, 524323, 196609, 3, 589842, 65537, 3, 589843, 131073, 3, 589844, 131073, 3, 589845, 131073, 3, 589846, 131073, 3, 589847, 131073, 3, 589848, 131073, 3, 589849, 131073, 3, 589850, 131073, 3, 589851, 131073, 3, 589852, 393217, 4, 589853, 131073, 2, 589854, 131073, 2, 589855, 458753, 4, 589856, 131073, 3, 589857, 131073, 3, 589858, 131073, 3, 589859, 196609, 3, 655378, 65537, 4, 655379, 131073, 4, 655380, 131073, 4, 655381, 131073, 4, 655382, 131073, 4, 655383, 131073, 4, 655384, 131073, 4, 655385, 131073, 4, 655386, 131073, 4, 655387, 131073, 4, 655388, 131073, 4, 655389, 131073, 4, 655390, 131073, 4, 655391, 131073, 4, 655392, 131073, 4, 655393, 131073, 4, 655394, 131073, 4, 655395, 196609, 4, 65536, 262145, 2, 131072, 262145, 3, 196608, 327681, 4, 196609, 393217, 2, 196610, 131073, 5, 196611, 196609, 5, 196616, 65537, 2, 196617, 131073, 2, 196618, 131073, 2, 196619, 196609, 2, 262144, 65537, 3, 262145, 196609, 3, 262150, 65537, 2, 262151, 131073, 2, 262152, 458753, 4, 262153, 131073, 3, 262154, 131073, 3, 262155, 393217, 4, 262156, 131073, 2, 262157, 196609, 2, 327680, 65537, 3, 327681, 196609, 3, 327685, 65537, 2, 327686, 458753, 4, 327687, 131073, 3, 327688, 131073, 3, 327689, 131073, 3, 327690, 131073, 3, 327691, 131073, 3, 327692, 131073, 3, 327693, 393217, 4, 327694, 131073, 2, 327695, 196609, 2, 393216, 65537, 4, 393217, 196609, 4, 393220, 65537, 5, 393221, 65537, 4, 393222, 131073, 4, 393223, 131073, 4, 393224, 131073, 4, 393225, 131073, 4, 393226, 131073, 4, 393227, 131073, 4, 393228, 131073, 4, 393229, 131073, 4, 393230, 131073, 4, 393231, 393217, 5, 393232, 131073, 5, 393233, 131073, 5)
-script = ExtResource("5_dihnl")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.662745, 0.662745, 0.662745, 1)

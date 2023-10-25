@@ -37,7 +37,6 @@ func _on_entry_updated(entry):
 @onready var hearts = $%HeartsContainer
 
 func set_health(health):
-	# TODO tween/jiggle hearts on change!
 	hearts.h = health
 
 ##########################################
@@ -63,14 +62,12 @@ func set_powerups(powerups):
 @onready var coins_label = $%CoinsLabel
 
 func set_deaths(count):
-	# TODO tween/jiggle on change!
 	if count > 0:
 		deaths_label.text = "[right]Deaths [jump]%s[/jump][/right]" % count
 	else:
 		deaths_label.text = ""
 
 func set_coins(count):
-	# TODO tween/jiggle on change!
 	if count > 0:
 		coins_label.text = "[right]Coins [jump]%s[/jump][/right]" % count
 	else:

@@ -95,7 +95,6 @@ func coord_to_position(coord):
 
 func get_cell(coord):
 	if coord in cells:
-		# TODO consider returning food or snake segment (or enemy?)
 		return cells[coord]
 	else:
 		Debug.pr("[WARN] no coord in grid!")

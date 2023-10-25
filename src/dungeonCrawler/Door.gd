@@ -61,7 +61,7 @@ func set_door_state(val):
 				coll_shape.set_disabled(false)
 		door_state.LOCKED:
 			if anim:
-				anim.animation = "closed"  # TODO support "locked"
+				anim.animation = "closed"
 			if coll_shape:
 				coll_shape.set_disabled(false)
 

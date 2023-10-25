@@ -81,7 +81,6 @@ func fire():
 	if not target:
 		return
 
-	# TODO proper cooldown?
 	# clear target, idle searches again
 	target = null
 	# find_target()

@@ -12,14 +12,11 @@ var player
 
 
 func _ready():
-	# TODO probably never want to do this in more than one place
 	if spawn_on_ready:
 		spawn_player.call_deferred()
 
 
 func spawn_player():
-	# TODO probably better to create and spawn from our autoload/gamestate
-	# or better yet, create a SuperPlayer autoload for drying up separate player states
 	player = player_scene.instantiate()
 	player.position = global_position
 

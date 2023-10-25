@@ -33,7 +33,7 @@ func attach_to_nearest_anchor():
 		Debug.warn("Camera found no anchor nodes, attaching to player")
 		Util.change_parent(self, following)
 	else:
-		# TODO this may be too expensive to run per process-loop, there's likely an optimization...
+		# this may be too expensive to run per process-loop, there's likely an optimization...
 		# maybe only run this when the player moves some distance?
 		# or make it disable-able/only called from an autoload/at specific times
 

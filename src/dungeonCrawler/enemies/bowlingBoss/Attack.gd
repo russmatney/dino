@@ -15,7 +15,6 @@ func process(_delta: float):
 
 	var target = actor.bodies[0]
 
-	# TODO tell before attacking, pause/move after
 	if once:
 		actor.bowl_attack(target)
 		once = false

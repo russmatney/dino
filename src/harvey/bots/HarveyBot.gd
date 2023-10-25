@@ -4,7 +4,6 @@ extends HarveyPlayer
 ## ready #########################################################
 
 func _ready():
-	# TODO should be a Hood.notify
 	Debug.prn("HarveyBot online: ", self.name)
 
 	speed = 70

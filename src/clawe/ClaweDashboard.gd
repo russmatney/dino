@@ -15,7 +15,7 @@ func _ready():
 	await fetch_pomodoros()
 
 ## pomodoro calcs ##################################################################
-## TODO should probably be done on the backend
+## could be done on the backend
 
 func date_str_to_int(ds):
 	# NOTE this parse timezones (trailing 'Z'), may be come a problem at some point
@@ -33,7 +33,6 @@ func secs_between_date_strs(a, b):
 func secs_to_time_dict(secs):
 	var hours = secs / 3600
 	var mins = secs / 60
-	# TODO proper remainder
 	# secs = secs % 3600
 	return {mins=mins, hours=hours, secs=secs}
 

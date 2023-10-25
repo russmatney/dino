@@ -17,7 +17,6 @@ func _ready():
 
 func _on_body_entered(body: Node):
 	Debug.pr("Tossed item body entered: ", body)
-	# TODO start combining blobs
 
 	if body.is_in_group("player"):
 		if body.has_method("collect_pickup"):
@@ -33,7 +32,6 @@ func kill():
 #############################################################
 # supports boomerang-style pickup
 
-# TODO DRY UP against BlobPickup, other 'gathered' items
 func gather_pickup(actor):
 	following = actor
 

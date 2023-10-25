@@ -33,8 +33,6 @@ func _on_player_found(p):
 
 func _on_player_pickups_changed(pickups):
 	if "hat" in pickups and "body" in pickups:
-		# TODO animate assembly/enemy spawning
-		# anim the items flying to the spot?
 		Hood.notif("Robot Assembled")
 
 		var enemy_spawners = get_tree().get_nodes_in_group("enemy_spawner")
@@ -61,8 +59,6 @@ func enemies_alive():
 
 func _on_robot_destroyed():
 	Hood.notif("Robot Destroyed!")
-	# TODO move to writing/reading via Hotel
-	# Hood.hud.update_enemies_remaining(enemies_alive().size())
 	for e in enemies:
 		if not e.is_dead:
 			robots_destroyed = false
@@ -86,7 +82,6 @@ func _physics_process(_delta):
 	wrap_thing(player)
 
 func wrap_thing(thing):
-	# TODO disable camera smoothing if we're wrapping across
 	if thing and is_instance_valid(thing):
 		thing.position.x = wrapf(thing.position.x, rect.position.x, rect.end.x)
 		thing.position.y = wrapf(thing.position.y, rect.position.y, rect.end.y)
@@ -133,7 +128,6 @@ func regen_all_rooms():
 	break_the_targets.setup()
 
 
-# TODO restore export (String, "middle", "end")
 @export var next_room_type = "middle" : set = set_next_room_type
 
 

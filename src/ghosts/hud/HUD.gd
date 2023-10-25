@@ -5,7 +5,6 @@ func _ready():
 	_on_entry_updated(Hotel.first({is_player=true}))
 
 	var rooms = Hotel.query({group=GhostsData.rooms_group})
-	# TODO sort by ready_at ? or some other 'current' flag?
 	if len(rooms) > 0:
 		set_room_name(rooms[0].get("name"))
 

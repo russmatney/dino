@@ -1,7 +1,6 @@
 @tool
 extends NaviButtonList
 
-# TODO move these helpers to static methods on HerdLevel
 func load_next_level():
 	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
 	level_idx += 1

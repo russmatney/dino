@@ -72,7 +72,7 @@ func _process(_delta):
 	if is_on_floor() and abs(velocity.x) > 2:
 		anim.set_animation("run")
 	else:
-		anim.set_animation("idle")  # TODO jump anim
+		anim.set_animation("idle")
 
 	# quick restart
 	if global_position.y > 700:
@@ -83,8 +83,6 @@ signal player_resetting
 
 
 func restart(_opts={}):
-	# TODO disable/reenable collision detection?
-	# or, work checked a timer - first remove_at, then wait a bit, then restart
 	position = restart_pos
 	velocity = Vector2.ZERO
 	stop = false

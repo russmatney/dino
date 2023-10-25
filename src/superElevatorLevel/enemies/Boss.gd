@@ -1,7 +1,5 @@
 extends BEUBody
 
-# TODO hitstop on punches?
-
 @onready var palettes = [null,
 	preload("res://src/superElevatorLevel/enemies/BossAlt1.tres"),
 	preload("res://src/superElevatorLevel/enemies/BossAlt2.tres"),

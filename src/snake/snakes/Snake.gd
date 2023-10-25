@@ -76,7 +76,6 @@ func draw_segment(coord):
 
 func animate_head(cell):
 	cell.play(cell_head_anim)
-	# TODO grow/lunge per step
 	match direction:
 		Vector2.LEFT:
 			cell.flip_h = true
@@ -187,7 +186,6 @@ func walk_in_dir(dir=null):
 			direction = next_dir
 		else:
 			# moving against current direction
-			# TODO switch head to tail? stop in place?
 			Cam.screenshake(0.3)
 
 	if dir:
@@ -213,7 +211,6 @@ func attempt_walk(next):
 				DJZ.play(DJZ.S.bump)
 				highlight("[jump]ow!")
 			else:
-				# TODO enemies only chomp player
 				# reverse direction when two enemies interact?
 				highlight("[jump]chomp!")
 				chomp_snake(s, next)
@@ -341,7 +338,6 @@ func highlight(text):
 
 func bounce_head():
 	pass
-	# TODO restore
 	# head_cell().bounce_in()
 
 func bounce_tail():

@@ -1,8 +1,5 @@
 extends Node
 
-# TODO what's the quest api again?
-# feels like this kind of sibling-search and signal/wiring could be dried up
-
 var coins = []
 var door
 
@@ -30,7 +27,6 @@ func _ready():
 # signal reactions
 
 func _on_collected(coin):
-	# TODO ascending sound here
 	Debug.pr("coin collected", coin.hotel_data())
 	# Hood.dev_notif("coin collected", coin.hotel_data())
 

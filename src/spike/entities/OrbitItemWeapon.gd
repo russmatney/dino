@@ -35,7 +35,6 @@ func use():
 		else:
 			do_spike(null)
 
-# TODO rename to use_pressed/use_released
 func stop_using():
 	Debug.pr("stop using orbit item")
 	if spiking and spiking_ingredient_type != null:
@@ -99,11 +98,9 @@ func start_spike(ingredient_type):
 	Debug.pr("start spike ingredient_type:", ingredient_type)
 	spiking = true
 
-# TODO animate the spike with a juicy trail/line graphic
 func do_spike(ingredient_type):
 	Debug.pr("do spike ingredient_type:", ingredient_type)
 
-	# TODO auto-aim at delivery zone?
 	if aim_vector == null:
 		aim_vector = actor.move_vector
 

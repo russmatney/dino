@@ -23,7 +23,6 @@ func check_out(data):
 		orient_to_wall(crawl_on_side)
 
 	# overwritten to prevent replaying from leaving enemies dead
-	# TODO proper hotel reset api
 	if health <= 0:
 		health = initial_health
 

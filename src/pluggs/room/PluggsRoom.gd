@@ -53,7 +53,6 @@ static func add_tilemap(room, opts, crds):
 	var tmap_scene = Util.get_(opts, "tilemap_scene", fallback_tmap_scene)
 	room.tilemap = tmap_scene.instantiate()
 
-	# TODO tilemap scaling?
 	var tilemap_tile_size = room.tilemap.tile_set.tile_size
 	var tilemap_scale_factor = opts.tile_size*Vector2.ONE/(tilemap_tile_size as Vector2)
 	room.tilemap.scale = Vector2.ONE * tilemap_scale_factor
@@ -126,14 +125,12 @@ static func next_room_position(opts: Dictionary, room, last_room):
 
 	var y_offset = (last_room_offset_tile_count - this_room_offset_tile_count) * opts.tile_size
 
-	# TODO set next y position based on aligning empty 'edge-floor' tiles
 	var y = last_room.position.y + y_offset
 	return Vector2(x, y)
 
 ## create room ##################################################################
 
 static func create_room(opts, last_room=null):
-	# TODO not sure i buy this default - maybe room_unit_size is cleaner
 	Util.ensure_default(opts, "tile_size", 16)
 
 	var room = PluggsRoom.new()

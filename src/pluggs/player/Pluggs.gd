@@ -40,7 +40,6 @@ func _ready():
 ## physics process ##########################################################
 
 func _physics_process(_delta):
-	# TODO should this be assigned in an *_input() handler?
 	move_vector = get_move_vector()
 
 	if not Engine.is_editor_hint():
@@ -106,8 +105,6 @@ func update_facing():
 ## collision checks ##########################################################
 
 func collision_check():
-	# TODO some kind of invincibility after hitting?
-	# or, some handling for restarting the room, celeste-style?
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()

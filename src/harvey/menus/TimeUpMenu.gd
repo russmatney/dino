@@ -16,7 +16,6 @@ func set_score(produce_counts):
 	for c in produce_list.get_children():
 		c.queue_free()
 
-	# TODO animate?
 	for k in produce_counts:
 		var ct = produce_counts[k]
 		var p_count_inst = produce_count_scene.instantiate()

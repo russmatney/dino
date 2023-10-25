@@ -21,7 +21,6 @@ func _on_entry_updated(entry):
 
 @onready var player_status = $%PlayerStatus
 
-# TODO get portrait from current player?
 var player_portrait = preload("res://src/superElevatorLevel/assets/status_portraits6.png")
 
 func update_player(entry):
@@ -37,7 +36,6 @@ func update_player(entry):
 # enemy status
 
 var to_portrait_texture = {
-	# TODO create portraits for player + enemies
 	"Goon": preload("res://src/superElevatorLevel/assets/status_portraits7.png"),
 	"Boss": preload("res://src/superElevatorLevel/assets/status_portraits8.png"),
 	}

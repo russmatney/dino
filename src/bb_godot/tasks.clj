@@ -82,7 +82,6 @@
            ["osascript" "-e" (str "display notification \""
                                   (cond
                                     (string? body) body
-                                    ;; TODO escape stringified bodies for osascript's standards
                                     (not body)     "no body"
                                     :else          "unsupported body")
                                   "\""
@@ -94,7 +93,6 @@
              replaces-process
              (conj "--replaces-process" replaces-process)))
          _                (when print?
-                            ;; TODO use dynamic global bool to print all notifs
                             (println subject (when body (str "\n" body))))
          proc             (p/process (conj exec-strs) {:out :string})]
 
@@ -187,11 +185,8 @@
 ;; Deps
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; DEPRECATED
 (defn input->godot-dep [input & dir-prefix]
-  ;; TODO refactor and unit tests - this impl isn't quite right
-  ;; should be able to easily dry up addon status checks from same repo
-  ;; also using this 'addon-name' as the addon/<addon-name>/ isn't always right,
-  ;; should instead use the last part of the 'repo-id' (which is also poorly named)
   (let [[addon-name repo-id] input
         addon-name           (if (keyword? addon-name)
                                (name addon-name)
@@ -271,7 +266,7 @@
   (apply dir-exists-addons addons dir-prefix)
   (apply git-status-addons addons dir-prefix))
 
-;; TODO maybe want this to clone directly into the repo via :project-addon-path
+;; probably should clone directly into the repo via :project-addon-path
 (defn clone-addons [addons & dir-prefix]
   (doall
     (->>

@@ -42,7 +42,6 @@ func clear_current_rooms():
 var no_more_rooms = false
 
 
-# TODO unit test for this function
 func choose_next_room_instance():
 	# no rooms yet? start in a gap room
 	if current_rooms == null or current_rooms.size() == 0:
@@ -135,7 +134,6 @@ func add_rooms_to_scene(count: int):
 				add_child.call_deferred(room, true)
 
 
-# TODO add unit tests
 func room_entered(_player, room):
 	if not "Gap" in room.name:
 		Debug.pr("\n\n--------------------------------------------------------------------")
@@ -150,11 +148,7 @@ func room_entered(_player, room):
 		add_rooms_to_scene(rooms_to_make)
 
 
-# TODO add unit tests
 func room_exited(_player, room):
-	# TODO maybe there's a later place to fire this?
-	# it happens too quickly this way, the blocks
-	# disappear checked-screen.
 	room.cleanup()
 
 	var exited_room_index = current_rooms.find(room)
@@ -170,7 +164,6 @@ func room_exited(_player, room):
 
 	for idx in exited_room_index - 2:  # subtract 2 for some buffer
 		var r = current_rooms[idx]
-		# TODO this feels like an extra is_finished call... :/
 		if r.is_finished():
 			to_delete.append(r)
 		else:

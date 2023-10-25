@@ -71,7 +71,6 @@ func set_action_label():
 		action_label.set_visible(false)
 		return
 
-	# TODO what to do when two different actions are current (for two actors)
 	var ax = axs[0]
 
 	action_label.text = "[center]" + ax.label.capitalize() + "[/center]"

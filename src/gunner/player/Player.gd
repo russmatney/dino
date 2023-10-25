@@ -2,7 +2,6 @@
 extends SSPlayer
 
 var gunner_hud = preload("res://src/gunner/hud/HUD.tscn")
-# TODO support in tower's player class
 var tower_hud = preload("res://src/tower/hud/HUD.tscn")
 
 ## ready ###########################################################

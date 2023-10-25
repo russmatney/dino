@@ -31,7 +31,6 @@ func _process(_delta):
 		if player.velocity.y != 0:
 			position.y = player.position.y + initial_y_rel
 
-		# TODO move to reaction to player signal to get out of process loop
 		match player.facing_direction:
 			player.DIR.right:
 				position.x = player.position.x + initial_x_rel

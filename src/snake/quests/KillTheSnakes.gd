@@ -28,8 +28,6 @@ func setup(p):
 
 	find_snakes()
 
-	# TODO consider connecting to snake created signal
-
 
 func find_snakes():
 	var ss = []

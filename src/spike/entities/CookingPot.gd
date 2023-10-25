@@ -29,7 +29,6 @@ func _on_body_entered(body: Node):
 		if body.can_be_cooked():
 			var ingredient_data = body.get_ingredient_data()
 			start_cooking(ingredient_data)
-			# TODO animate body jumping into pot
 			body.queue_free()
 
 func missing_ingredient_count():
@@ -71,7 +70,6 @@ func finish_cooking():
 	Debug.pr("finished cooking", ingredients)
 
 	var drop = drop_pickup_scene.instantiate()
-	# TODO combine and attach ingredients
 	drop.ingredient_type = drop_ingredient_type
 
 	drop.global_position = global_position

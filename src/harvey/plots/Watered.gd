@@ -10,8 +10,6 @@ func enter(_arg = {}):
 	owner.anim.animation = "watered"
 	tt_transit = transit_in
 
-	# TODO sound
-
 
 ## process ###########################################################
 

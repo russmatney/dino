@@ -59,10 +59,8 @@ func _on_slowmo_start(_opts={}):
 
 	Cam.start_slowmo("snake_slowmo", 0.3)
 
-	# TODO need special rules zoom for slowmo, allow us to go below minimum zoom
 	old_zoom_level = Cam.cam.zoom_level
 	Cam.zoom_in(2)
-	# TODO sound
 
 func _on_slowmo_stop():
 	slowing_down = false
@@ -70,7 +68,6 @@ func _on_slowmo_stop():
 	Hood.notif("Back to full speed")
 	Cam.stop_slowmo("snake_slowmo")
 	Cam.zoom_out(old_zoom_level)
-	# TODO sound
 
 
 ###########################################################################
@@ -109,7 +106,6 @@ func attempt_walk(next):
 
 	match info:
 		["facing_food", _]:
-			# TODO move behind combo/level/unlock wall?
 			leap_towards_food(next, info[1])
 		["food", _]:
 			walk_towards(next, false)
@@ -130,7 +126,6 @@ func attempt_walk(next):
 
 func _on_step():
 	if not leaping:
-		# TODO skipping step counter here
 		super._on_step()
 	bounce_food()
 	DJZ.play(DJZ.S.walk)
@@ -197,7 +192,6 @@ func leap_towards_food(next, f):
 					restore_segments()
 					return
 				_:
-					# TODO skip steps in this walk (b/c we leap)
 					walk_towards(next_cell)
 					if next_cell == target_cell:
 						break
@@ -233,7 +227,6 @@ func _on_food_picked_up(f):
 
 	grid.remove_food(f)
 
-	# TODO flash some text, hitstop lines
 	Cam.freezeframe("snake_collecting_food", 0.01, 1.6, 0.2)
 
 	# pass next to exclude it from new food places
@@ -246,7 +239,6 @@ func _on_food_picked_up(f):
 		speed_increased.emit()
 		DJZ.play(DJZ.S.speedup)
 
-		# TODO move to combo levels
 		grid.mark_cells_playing()
 		await get_tree().create_timer(3.0).timeout
 		grid.mark_cells_not_playing()

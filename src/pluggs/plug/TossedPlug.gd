@@ -28,7 +28,6 @@ func _process(delta):
 			# TODO some minimum distance before adding another point
 			# TODO check against max-allowed length
 			cord_point_ttl = cord_point_time
-			# TODO Util, don't fail me now!
 			cord.add_point(global_position)
 
 			if cord.length() >= max_cord_length:

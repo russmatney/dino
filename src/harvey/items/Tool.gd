@@ -40,7 +40,7 @@ func could_perform_action(player):
 	if player.has_produce():
 		return false
 
-	# TODO has the bot seen a NeedsWater?
+	# has the bot seen a NeedsWater?
 	# hmmmmm this is a bit odd... action cross-deps
 	# maybe need action-planning
 	match tool_type:

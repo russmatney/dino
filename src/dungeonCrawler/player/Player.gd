@@ -77,8 +77,6 @@ func _process(delta):
 	move_and_slide()
 	velocity = velocity
 
-	# TODO cache or otherwise store current_target
-	# TODO animate rotation, pass delta in
 	point_at_target()
 
 	pull_items(delta)
@@ -110,7 +108,6 @@ var weapon
 
 func update_weapon():
 	if weapons.size() > 0:
-		# TODO select new weapon? keep current?
 		weapon = weapons[0]
 	else:
 		weapon = null
@@ -268,7 +265,6 @@ func can_unlock_door():
 
 
 func use_key():
-	# TODO how to determine/sort small vs boss key?
 	var key_item
 	for it in items:
 		if it["type"] == "key":
@@ -286,7 +282,6 @@ var bodies = []
 
 
 func _on_LockOnDetectArea2D_body_entered(body: Node):
-	# TODO ignore tilemaps properly, maybe via collision layers
 	if body != self and body.name != "DungeonWalls":
 		bodies.append(body)
 		# Debug.pr("[player-lockon-bodies]:", bodies)
@@ -328,7 +323,6 @@ var targets = []
 
 
 func current_target():
-	# TODO sort by 'closest'
 	if bodies.size():
 		for body in bodies:
 			if in_line_of_sight(body) and not body.get("dead"):
@@ -340,7 +334,6 @@ func current_target():
 func point_at_target():
 	var target = current_target()
 	if target:
-		# TODO should probably be generic (vs bow specific)
 		var bow = Util.get_first_child_in_group(self, "bow")
 		if bow:
 			bow.look_at(target.global_position)
@@ -400,7 +393,6 @@ func hit():
 	if health <= 0:
 		die()
 	else:
-		# TODO API helper for this whole debug msg thing?
 		var msg = {"label": "health -= 1"}
 		add_debug_message(msg)
 		await get_tree().create_timer(2.0).timeout
@@ -413,7 +405,6 @@ func die():
 	queue_free()
 	# death menu
 	Navi.show_death_menu()
-	# TODO restart behavior - just this dungeon? load last checkpoint?
 
 
 func _on_Hurtbox_body_entered(body: Node):

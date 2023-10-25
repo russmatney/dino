@@ -7,8 +7,6 @@ var tt_transit
 
 
 func enter(_arg = {}):
-	# TODO sound
-
 	owner.anim.animation = "seed-planted"
 
 	tt_transit = transit_in

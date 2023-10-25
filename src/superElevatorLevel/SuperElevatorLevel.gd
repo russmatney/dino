@@ -11,8 +11,6 @@ func on_player_died(_player):
 		# restore player health
 		Hotel.check_in(p, {health=p.initial_health})})
 
-# TODO manages scene used to set a level_idx here as a dev helper
-
 ## levels ####################################################################
 
 var levels = [
@@ -36,7 +34,6 @@ func reload_level():
 
 func load_level():
 	if level_idx >= len(levels):
-		# TODO custom win screen
 		Navi.show_win_menu()
 		return
 

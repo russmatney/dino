@@ -59,7 +59,6 @@ func _on_wave_complete():
 func spawn_enemies(enemy_scene, count):
 	if count:
 		for i in range(count):
-			# TODO better enemy names
 			var e = enemy_scene.instantiate()
 			setup_enemy(e)
 			var sp = enemy_spawn_positions[i % len(enemy_spawn_positions)]
@@ -83,6 +82,5 @@ func spawn_next_wave(wave):
 func _on_level_complete():
 	Hood.notif("Level complete!")
 
-	# TODO pattern via Game/DinoGame or pandora?
 	var sel = Engine.get_singleton("SuperElevatorLevel")
 	sel.load_next_level()

@@ -7,7 +7,6 @@ var game_entity: DinoGameEntity
 @onready var icon = $%Icon
 
 func _ready():
-	# TODO double check autofocus
 	if Engine.is_editor_hint():
 		if not game_entity:
 			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)

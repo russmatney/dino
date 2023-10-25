@@ -9,7 +9,6 @@ func _ready():
 
 func kill():
 	DJZ.play(DJZ.S.pickup)
-	# TODO collect anim
 	queue_free()
 
 

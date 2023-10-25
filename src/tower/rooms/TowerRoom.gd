@@ -65,7 +65,6 @@ func free_children_in_group(group_name):
 
 func n_random(locs, n):
 	if locs.size() > n:
-		# TODO should be a minimum distance apart
 		locs.shuffle()
 		return locs.slice(0, n - 1)
 	return locs

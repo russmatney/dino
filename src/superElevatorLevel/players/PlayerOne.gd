@@ -16,7 +16,6 @@ func _ready():
 	super._ready()
 
 	if not Engine.is_editor_hint():
-		# TODO choose a pallette
 		# right now this swaps after you die
 		var pal = Util.rand_of(palettes)
 

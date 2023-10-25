@@ -26,6 +26,4 @@ func set_label(text):
 
 func open_door(_actor=null):
 	Debug.pr("open_door called, with dest: ", destination)
-	# TODO pause tree?
-	# TODO animate door
 	Navi.nav_to(destination)

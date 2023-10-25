@@ -95,7 +95,6 @@ func change_parent(child: Node, new_parent: Node):
 
 
 func do_change_parent(child, new_parent):
-	# TODO need to set owner as well to support creating PackedScenes
 	if not is_instance_valid(child):
 		Debug.warn("Cannot change parent, child is not valid")
 		return
@@ -264,8 +263,6 @@ func _and(a, b = null, c = null, d = null, e = null):
 	if a and b:
 		return b
 
-# TODO write Util._not() to replace (restore) gdscript `not`
-
 # could be more efficient
 # https://github.com/godotengine/godot-proposals/issues/3116#issuecomment-1363222780
 func remove_matching(arr, to_remove):
@@ -274,9 +271,6 @@ func remove_matching(arr, to_remove):
 
 ############################################################
 # Facing
-
-# TODO dry these up into one helper
-# check node type and rotation
 
 func update_h_flip(facing, node):
 	if not node:
@@ -427,7 +421,6 @@ func update_stylebox(node, stylebox_name, fn):
 	node.add_theme_stylebox_override(stylebox_name, stylebox)
 
 
-# TODO move to Util
 func add_color_rect(node, pos, size, color):
 	var crect = ColorRect.new()
 	crect.color = color

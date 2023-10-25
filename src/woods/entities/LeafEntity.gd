@@ -35,7 +35,6 @@ func render():
 		anim.set_visible(true)
 		anim.play("twist")
 
-# TODO juicy animate to the HUD?
 func animate_collected():
 	var time = 0.4
 	var tween = create_tween()

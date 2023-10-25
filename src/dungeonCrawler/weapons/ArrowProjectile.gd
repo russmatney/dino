@@ -21,8 +21,6 @@ func _ready():
 
 
 func kill():
-	# TODO body destroyed animation/shrink/something?
-	# TODO still valid?
 	queue_free()
 
 

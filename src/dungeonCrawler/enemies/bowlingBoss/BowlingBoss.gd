@@ -87,7 +87,6 @@ var dead = false
 func hit():
 	health -= 1
 	Debug.pr(name, " health: ", health)
-	# TODO flash sprite white - via shader
 
 	if health == 1:
 		# switch to small body
@@ -103,5 +102,3 @@ func kill():
 	small_body.visible = false
 	dead = true
 	machine.transit("Dead")
-	# TODO death anim
-	# queue_free()

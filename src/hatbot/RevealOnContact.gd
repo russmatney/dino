@@ -10,7 +10,6 @@ func _on_body_entered(body):
 		reveal()
 
 func reveal():
-	# TODO fade in?
 	for n in node_paths:
 		var node = get_node(n)
 		if node:

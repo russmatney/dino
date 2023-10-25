@@ -57,7 +57,6 @@ func _exit_tree():
 func update_quest():
 	var remaining = all_sheep.filter(func(s): return not s in penned_sheep)
 
-	# TODO feels like we should update these at the same time, maybe with one emit or Quests fn call
 	count_remaining_update.emit(len(remaining))
 	count_total_update.emit(len(all_sheep))
 

@@ -27,7 +27,6 @@ func _on_body_entered(body: Node):
 			delivery_count += 1
 			Debug.pr("delivered", body, body.ingredient_data)
 
-			# TODO animate delivery/fade
 			body.queue_free()
 			update_quest()
 		else:

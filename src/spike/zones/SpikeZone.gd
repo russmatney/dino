@@ -15,7 +15,6 @@ func on_quests_complete():
 
 	Quest.jumbo_notif({header="Congrats on feeding the void.", body="woo-hoo.",
 		action="close", action_label_text="Next Level",
-		# TODO get from spike singleton
 		on_close=handle_level_complete})
 
 ## level_complete ######################################################

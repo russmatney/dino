@@ -77,8 +77,6 @@ func face_left():
 
 ## action detection ###########################################################
 
-# TODO move to ActionDetector script
-
 @onready var action_label = $ActionLabel
 @onready var action_arrow = $ActionArrow
 
@@ -111,8 +109,6 @@ var item_produce
 @onready var tool_icon = $Item/ToolIcon
 
 func drop_held_item():
-	# TODO animation, sounds
-
 	produce_icon.set_visible(false)
 	seed_icon.set_visible(false)
 	tool_icon.set_visible(false)
