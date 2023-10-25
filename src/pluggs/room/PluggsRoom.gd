@@ -71,15 +71,15 @@ static func add_entity(crd, room, scene, opts):
 	room.add_child(ent)
 	room.entities.append(ent)
 
-# static var fb_machine_scene = preload("res://addons/reptile/tilemaps/MetalTiles8.tscn")
+static var fb_machine_scene = preload("res://src/pluggs/entities/ArcadeMachine.tscn")
 static var fb_light_scene = preload("res://src/pluggs/entities/Light.tscn")
 
 static func add_entities(room, opts, crds):
 	var light_scene = Util.get_(opts, "light_scene", fb_light_scene)
-	# var machine_scene = Util.get_(opts, "machine_scene", fb_machine_scene)
+	var machine_scene = Util.get_(opts, "machine_scene", fb_machine_scene)
 
 	crds.filter(func(c): return "Light" in c.cell).map(func(crd): add_entity(crd, room, light_scene, opts))
-	# crds.filter(func(c): return "Machine" in c.cell).map(func(crd): add_entity(crd, room, machine_scene, opts))
+	crds.filter(func(c): return "Machine" in c.cell).map(func(crd): add_entity(crd, room, machine_scene, opts))
 
 ## color rect ##################################################################
 
