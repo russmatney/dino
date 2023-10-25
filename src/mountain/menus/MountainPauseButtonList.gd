@@ -15,6 +15,10 @@ var menu_scenes = [
 		fn=Navi.nav_to_main_menu,
 		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
 	},
+	{
+		label="Quit Game",
+		fn=func(): get_tree().quit(),
+	},
 ]
 
 # default button scene
