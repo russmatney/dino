@@ -50,7 +50,7 @@ func shader_loop():
 
 ############################################################
 
-# TODO should go away in favor of typical ss player/enemy interaction
+# should go away in favor of typical ss player/enemy interaction
 func _on_Hurtbox_body_entered(body: Node):
 	if body.is_in_group("enemies"):
 		if body.can_hit_player():

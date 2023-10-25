@@ -192,6 +192,16 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 		by_path[path] = node_data
 	return by_path
 
+func to_scene_path(path_or_scene):
+	var path
+	if path_or_scene is String:
+		path = path_or_scene
+	elif path_or_scene is PackedScene:
+		path = path_or_scene.resource_path
+	else:
+		Debug.warn("Unrecognized type in to_scene_path", path_or_scene)
+	return path
+
 ############################################################
 # collisions
 
@@ -258,8 +268,8 @@ func _or(a, b = null, c = null, d = null, e = null):
 		return e
 
 func _and(a, b = null, c = null, d = null, e = null):
-	# TODO expand impl to support 5 inputs
-	# TODO support vars as callables, call if previous were non-nil
+	# expand impl to support 5 inputs
+	# support vars as callables, call if previous were non-nil
 	if a and b:
 		return b
 

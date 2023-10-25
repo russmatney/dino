@@ -119,8 +119,8 @@ var max_array_size = 20
 # - bgcolor
 # - fgcolor
 
-# TODO refactor into opts dict
-# TODO refactor into pluggable pretty printer
+# refactor into opts dict
+# refactor into pluggable pretty printer
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	if not is_instance_valid(msg):
 		return str(msg)
@@ -169,7 +169,7 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	elif msg is String:
 		if msg == "":
 			return '""'
-		# TODO check for supported tags in here (see list above)
+		# could check for supported tags in the string (see list above)
 		# if msg.contains("["):
 		# 	msg = "<ACTUAL-TEXT-REPLACED>"
 		return color_wrap(msg, "pink", use_color)

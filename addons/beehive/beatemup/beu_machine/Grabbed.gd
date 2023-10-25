@@ -24,7 +24,7 @@ func physics_process(delta):
 		return
 	escape_in_t -= delta
 	if escape_in_t <= 0:
-		# TODO: transit("Escape")
+		# transit("Escape")
 		transit("Idle")
 		return
 

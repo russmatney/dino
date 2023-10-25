@@ -53,7 +53,7 @@ func visit(actor, opts={}):
 
 	actor.machine.transit("Rest", opts)
 
-	# TODO some way to bookmark this version of the player
+	# some way to bookmark this version of the player?
 	# generally we just restore their health and powerups when they respawn
 	# Hotel.check_in(actor)
 

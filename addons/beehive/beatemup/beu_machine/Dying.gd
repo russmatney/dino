@@ -14,7 +14,6 @@ var og_collision_mask
 ## enter ###########################################################
 
 func enter(opts = {}):
-	# TODO perfect the dying + bounce animation timing
 	actor.anim.play("thrown")
 
 	killed_by = opts.get("killed_by")

@@ -39,7 +39,6 @@ func physics_process(delta):
 		transit("Idle")
 		return
 
-	# TODO get next position from actor's agent
 	if actor.nav_agent.is_navigation_finished():
 		target = null
 		transit("Idle")
@@ -49,7 +48,7 @@ func physics_process(delta):
 	var diff = next_position - actor.global_position
 	actor.move_vector.x = diff.normalized().x
 
-	# TODO when to jump? probably need a bunch of ray-casts
+	# when to jump? probably need a bunch of ray-casts
 	if diff.y < -10 and not jumping:
 		# Jump!
 		jumping = true
@@ -59,10 +58,8 @@ func physics_process(delta):
 		pass
 		# Debug.pr("no need to jump, next pos diff:", diff)
 
-	# TODO get less precise
 	if last_diff and last_diff == diff:
 		# rebuild the path
-		# TODO handle still-stuck after rebuilding this
 		actor.nav_agent.target_position = target.global_position
 		last_diff = null
 
@@ -83,9 +80,7 @@ func physics_process(delta):
 
 	actor.move_and_slide()
 
-
-	# TODO just do path finding
-	# TODO jump if....
+	# jump if....
 	# ... target is above us
 	# ... wall in our face
 	# ... gap we need to get across

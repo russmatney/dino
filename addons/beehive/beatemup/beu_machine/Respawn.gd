@@ -31,7 +31,6 @@ func enter(_opts = {}):
 	tween.tween_callback(func():
 		Cam.screenshake.bind(0.2)
 		DJZ.play(DJZ.S.heavy_fall)
-		# TODO show shiny invincible couple of seconds, or fade-pulse a bit
 		actor.is_dead = false
 		Hotel.check_in(actor)
 		actor.anim.play("landed"))
@@ -52,14 +51,3 @@ func on_animation_finished():
 	if actor.anim.animation == "landed":
 		transit("Idle")
 
-
-## physics ###########################################################
-
-# func physics_process(delta):
-# 	if respawn_ttl == null:
-# 		return
-
-# 	respawn_ttl -= delta
-
-# 	if respawn_ttl <= 0:
-# 		transit("Idle")

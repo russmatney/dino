@@ -18,12 +18,7 @@ var plug
 ## _process ###########################################
 
 func _process(_delta):
-	# update player position
 	set_point_position(0, player.global_position)
-
-	# TODO update rest of positions to 'move' cord along with player
-	# or just get into this proper rope + pinjoint situation
-
 	update_opts()
 
 ## update_opts ###########################################

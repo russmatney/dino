@@ -36,7 +36,6 @@ func _ready():
 
 	added_lines = []
 
-	# TODO render at tool-time
 	for lines in get_credit_lines():
 		var new_line = credit_line_scene.instantiate()
 		new_line.text = "[center]\n"
@@ -46,12 +45,6 @@ func _ready():
 		added_lines.append(new_line)
 		credits_lines_container.add_child(new_line)
 
-	if Engine.is_editor_hint():
-		request_ready()
-
-	# TODO opt-out if desired
-	# TODO support passing a custom song
-	# credits implying DJ dep
 	DJ.resume_menu_song()
 
 ## input ############################################################

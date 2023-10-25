@@ -72,8 +72,6 @@ func update_dots_remaining(entry):
 
 ## controls ########################################################
 
-# TODO only show undo after a move has been made
-# TODO only show reset after several moves have been made
 func controls():
 	var cts = [move_label]
 	if not resetting:

@@ -37,7 +37,6 @@ jobs:
           godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Windows Build
-        # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-windows
           godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe || exit 0
@@ -78,7 +77,6 @@ jobs:
           godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Linux Build
-        # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-linux
           godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0
@@ -118,7 +116,6 @@ jobs:
           godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Web Build
-        # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-web
           godot --headless -v --export-release dino-web dist/dino-web/index.html || exit 0
@@ -160,7 +157,6 @@ jobs:
   #         godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
   #         godot --editor --headless --quit || exit 0
   #     - name: Mac Build
-  #       # TODO remove forced exit 0 here (export without errors!)
   #       run: |
   #         mkdir -v -p dist/dino-macos
   #         godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg || exit 0

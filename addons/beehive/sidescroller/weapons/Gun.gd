@@ -2,7 +2,6 @@
 extends SSWeapon
 
 var aim_vector
-# TODO consider setting a location for the gun?
 var bullet_offset = Vector2.ONE * -12
 
 func aim(aim: Vector2):
@@ -11,7 +10,6 @@ func aim(aim: Vector2):
 func activate():
 	Debug.pr("activating", self)
 	actor.notif(self.name)
-	# TODO gun loading sound effect?
 	DJZ.play(DJZ.S.laser)
 
 func deactivate():

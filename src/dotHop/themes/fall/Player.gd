@@ -16,7 +16,6 @@ func _ready():
 ## process #########################################################
 
 func _process(_delta):
-	# TODO add trail
 	pass
 
 ## set_initial_coord #########################################################

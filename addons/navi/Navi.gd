@@ -89,7 +89,7 @@ func find_focus(scene=null):
 	if scene.has_method("set_focus"):
 		scene.set_focus()
 	else:
-		# TODO likely there are things besides buttons to focus on
+		# there are things besides buttons to focus on...
 		var btns = scene.find_children("*", "BaseButton", true, false)
 		if len(btns) > 0:
 			btns[0].grab_focus()
@@ -104,7 +104,6 @@ func nav_to(scene):
 	hide_menus()
 	_deferred_goto_scene.call_deferred(scene)
 
-	# TODO pause/resume menus/music fixes
 	resume()
 
 signal new_scene_instanced(inst)
@@ -167,17 +166,6 @@ func nav_to_main_menu():
 
 ## pause ###################################################################
 
-# TODO move to Util
-func to_scene_path(path_or_scene):
-	var path
-	if path_or_scene is String:
-		path = path_or_scene
-	elif path_or_scene is PackedScene:
-		path = path_or_scene.resource_path
-	else:
-		Debug.warn("Unrecognized type in to_scene_path", path_or_scene)
-	return path
-
 @export var pause_menu_scene: PackedScene = preload("res://addons/navi/NaviPauseMenu.tscn")
 var pause_menu
 
@@ -185,7 +173,7 @@ func set_pause_menu(path_or_scene):
 	if path_or_scene == null:
 		Debug.warn("Null passed to set_pause_menu, returning")
 		return
-	var path = to_scene_path(path_or_scene)
+	var path = Util.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if pause_menu and is_instance_valid(pause_menu):
 			if pause_menu.scene_file_path == path:
@@ -210,7 +198,6 @@ func toggle_pause():
 
 func pause():
 	Debug.prn("pausing")
-	# TODO don't pause when we're on a menu already
 
 	get_tree().paused = true
 	if pause_menu and is_instance_valid(pause_menu):
@@ -224,9 +211,6 @@ func pause():
 func resume():
 	Debug.prn("unpausing")
 	get_tree().paused = false
-	# if pause_menu and is_instance_valid(pause_menu):
-	# 	pause_menu.hide()
-	# TODO maybe just...
 	hide_menus()
 	DJ.pause_menu_song()
 	DJ.resume_game_song()
@@ -242,7 +226,7 @@ func set_death_menu(path_or_scene):
 	if path_or_scene == null:
 		Debug.warn("Null passed to set_pause_menu, returning")
 		return
-	var path = to_scene_path(path_or_scene)
+	var path = Util.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if death_menu and is_instance_valid(death_menu):
 			if death_menu.scene_file_path == path:
@@ -274,7 +258,7 @@ func set_win_menu(path_or_scene):
 	if path_or_scene == null:
 		Debug.warn("Null passed to set_pause_menu, returning")
 		return
-	var path = to_scene_path(path_or_scene)
+	var path = Util.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if win_menu and is_instance_valid(win_menu):
 			if win_menu.scene_file_path == path:

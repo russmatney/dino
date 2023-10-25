@@ -39,7 +39,6 @@ func physics_process(delta):
 	hit_ttl -= delta
 
 	if hit_ttl <= 0:
-		# TODO stay down for a sec/recovery state?
 		transit("Idle")
 		return
 

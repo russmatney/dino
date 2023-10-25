@@ -149,7 +149,6 @@ func toss_plug():
 	plug.global_position = plug_source.global_position
 	get_tree().current_scene.add_child(plug)
 
-	# TODO get dir/angle towards nearby socket
 	var dir = (facing_vector + Vector2(0, -0.7)).normalized()
 
 	plug.toss(self, dir)

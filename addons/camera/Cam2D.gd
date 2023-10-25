@@ -53,7 +53,7 @@ func _ready():
 		update_zoom()
 
 	update_window_size()
-	# TODO recreate this? what to subscribe too?
+	# recreate this? what to subscribe too?
 	# var _x = get_tree().screen_resized.connect(update_window_size)
 
 	if not following:
@@ -153,10 +153,7 @@ func zoom_dir(dir, n_levels = null):
 			zoom_offset = calc_zoom_offset_increment() * n_levels
 
 	if zoom_level >= max_zoom_level or zoom_level <= min_zoom_level:
-		Debug.prn("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
-
-	# TODO Debug throttle/debounce log option
-	# Debug.prn("[LOG] Zoom updated level:: ", zoom_level, " offset: ", zoom_offset)
+		Debug.pr("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		Cam.mode.FOLLOW:
@@ -212,7 +209,7 @@ func attach_to_nearest_anchor():
 		Debug.warn("Camera found no anchor nodes, attaching to player")
 		Util.change_parent(self, following)
 	else:
-		# TODO this may be too expensive to run per process-loop, there's likely an optimization...
+		# maybe too expensive to run per process-loop, there's likely an optimization...
 		# maybe only run this when the player moves some distance?
 		# or make it disable-able/only called from an autoload/at specific times
 
@@ -312,7 +309,7 @@ func update_focus():
 	var max_top
 	var max_bottom
 
-	# TODO refactor into reduce
+	# refactor into reduce
 	for obj in focuses:
 		var obj_pos
 		if not is_instance_valid(obj):
@@ -363,7 +360,7 @@ func clamp_zoom():
 	elif zoom_level == max_zoom_level and zoom_offset > zoom_offset_previous:
 		zoom_offset = zoom_offset_previous
 
-# TODO per zoom level margins?
+# per zoom level margins?
 var zoom_rect_min = 50
 var zoom_margin_min = 50
 
@@ -466,7 +463,7 @@ func screenshake_rotational(noise_ctx, delta):
 ################################################################
 # debug
 
-# TODO scrolling could move this min/max window
+# scrolling could move this min/max window
 
 var poa_max = Vector2(100.0, 80.0)
 

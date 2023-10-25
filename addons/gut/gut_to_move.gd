@@ -16,7 +16,7 @@ func directory_delete_files(path):
 	# Traversing a directory is kinda odd.  You have to start the process of listing
 	# the contents of a directory with list_dir_begin then use get_next until it
 	# returns an empty string.  Then I guess you should end it.
-	d.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	d.list_dir_begin() # couldGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 	var thing = d.get_next() # could be a dir or a file or something else maybe?
 	var full_path = ''
 	while(thing != ''):

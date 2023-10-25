@@ -18,7 +18,6 @@ var next_state
 ## enter ###########################################################
 
 func enter(opts = {}):
-	# TODO perfect the thrown + bounce animation timing
 	actor.anim.play("thrown")
 	next_state = opts.get("next_state")
 

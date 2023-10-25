@@ -22,7 +22,7 @@ func _on_debug_toggled(debugging):
 
 func cam_viewport():
 	if cam and is_instance_valid(cam):
-		# TODO maybe we should create a subviewport here?
+		# create a subviewport here?
 		var vp = cam.get_viewport()
 		return vp
 
@@ -35,7 +35,7 @@ func cam_window_rect():
 		var viewportRect: Rect2 = v.get_visible_rect()
 
 		# https://github.com/godotengine/godot/issues/34805
-		# TODO restore this size correction
+		# restore this size correction
 		# var viewport_base_size = (
 		# 	v.get_size_2d_override()
 		# 	if v.get_size_2d_override()
@@ -59,7 +59,7 @@ func cam_window_rect():
 
 var spawning_camera
 
-# TODO maybe better as 'request_camera'
+# maybe better as 'request_camera'
 func ensure_camera(opts = {}):
 	if not opts is Dictionary:
 		Debug.warn("unexpected ensure_camera opts value", opts)
@@ -75,7 +75,7 @@ func ensure_camera(opts = {}):
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
-		# TODO make sure existing cam matches the requested cam
+		# make sure existing cam matches the requested cam
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
@@ -139,7 +139,7 @@ func screenshake_cancel():
 ##############################################################
 # freezeframe
 
-# TODO refactor into opts based map apis
+# could refactor into opts based map apis
 
 # freezeframes called in parallel may compete/reset eachother
 # maybe register_slowmo is a viable workaround?

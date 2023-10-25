@@ -20,7 +20,7 @@ func physics_process(delta):
 	elif actor.move_vector.x < 0:
 		actor.face_left()
 
-	# TODO consider a new state for when we can see the player
+	# consider a new state for when we can see the player
 	if actor.front_ray:
 		if not actor.front_ray.is_colliding():
 			if len(actor.line_of_sights) > 0:

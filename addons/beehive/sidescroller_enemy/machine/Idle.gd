@@ -23,7 +23,7 @@ func physics_process(delta):
 
 	actor.move_and_slide()
 
-	# TODO consider a new state for when we can see the player
+	# consider a new state for when we can see the player
 	var los = actor.line_of_sights if "line_of_sights" in actor else []
 	for lo in los:
 		if lo.is_colliding():

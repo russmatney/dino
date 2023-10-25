@@ -96,8 +96,6 @@ func contains_val(normed):
 # sort
 
 
-# TODO consider selecting a group based checked all group bounds per coord instead
-# TODO unit tests
 static func sort_by_key(a, b):
 	if a.upper_bound == null or not a.lower_bound == null:
 		return false

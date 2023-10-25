@@ -24,7 +24,7 @@ func get_color(s) -> Color:
 
 
 func get_rand_unclamped(char_fx):
-	# TODO not sure how to get the glyph_index or absolute index....
+	# not sure how to get the glyph_index or absolute index....
 	# return char_fx.glyph_index * 33.33 + char_fx.glyph_index * 4545.5454
 	return char_fx.glyph_index * 33.33 + char_fx.glyph_index * 4545.5454
 

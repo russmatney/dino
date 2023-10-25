@@ -35,5 +35,4 @@ func physics_process(delta):
 		DJZ.play(DJZ.S.bosswarp)
 		actor.anim.play("warp_arrive")
 
-		# TODO wait until current animation ends
 		machine.transit("Idle")

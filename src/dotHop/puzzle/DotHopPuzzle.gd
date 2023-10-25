@@ -150,8 +150,6 @@ func _unhandled_input(event):
 			undo_last_move(p)
 		restart_block_move_timer(0.1)
 
-	# TODO is_reset_held, is_reset_released
-	# add timer and animation before restarting
 	elif Trolley.is_restart_held(event):
 		hold_to_reset_puzzle()
 	elif Trolley.is_restart_released(event):
@@ -254,7 +252,7 @@ func ensure_camera_anchor():
 
 	Cam.ensure_camera({
 		anchor=cam_anchor,
-		# TODO dynamic zoom based on level size
+		# could use dynamic zoom based on level size
 		zoom_level=2.5,
 		# zoom_offset=1000.0,
 		mode=Cam.mode.ANCHOR})
@@ -425,7 +423,7 @@ func move_player_to_cell(player, cell):
 # converts the dot at the cell's coord to a dotted one
 # depends on cell for `coord` and `nodes`.
 func mark_cell_dotted(cell):
-	# TODO support multiple nodes per cell?
+	# support multiple nodes per cell?
 	var node = Util.first(cell.nodes)
 	if node == null:
 		Debug.warn("can't mark dotted, no node found!", cell)
@@ -444,7 +442,7 @@ func mark_cell_dotted(cell):
 # converts dotted back to dot (undo)
 # depends on cell for `coord` and `nodes`.
 func mark_cell_undotted(cell):
-	# TODO support multiple nodes per cell?
+	# support multiple nodes per cell?
 	var node = Util.first(cell.nodes)
 	if node == null:
 		# undoing from goal doesn't require any undotting
@@ -569,10 +567,10 @@ func move(move_dir):
 					break
 				if "Player" in cell.objs:
 					moves_to_make.append(["blocked_by_player", null, p])
-					# TODO moving toward player animation?
+					# moving toward player animation?
 					break
 				if "Dotted" in cell.objs:
-					# TODO moving toward dotted 'blocked' animation?
+					# moving toward dotted 'blocked' animation?
 					continue
 				if "Dot" in cell.objs:
 					moves_to_make.append(["dot", move_to_dot, p, cell])
@@ -598,7 +596,7 @@ func move(move_dir):
 	var any_undo = moves_to_make.any(func(m): return m[0] == "undo")
 	if any_undo:
 		for m in moves_to_make:
-			# TODO kind of wonky, should prolly use a dict/struct
+			# kind of wonky, could refactor to use a dict/struct
 			undo_last_move(m[2])
 
 	# Update data/HUD

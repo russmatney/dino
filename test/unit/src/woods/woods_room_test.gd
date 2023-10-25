@@ -1,6 +1,5 @@
 extends GutTest
 
-# TODO add to gut or some gut util
 func assert_eq_set(a, b):
 	a.sort()
 	b.sort()

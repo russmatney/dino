@@ -80,7 +80,7 @@ func travel(player):
 	player.force_move_to_target(global_position)
 	is_traveling = true
 	z_index = 10
-	# TODO get and pass the node_path
-	# TODO set a callable instead of this args hand-off none-sense
+	# get and pass the node_path
+	# pass a callable instead of this arg hand-off non-sense
 	travel_dest = [destination_travel_point.get_destination_zone(), null]
 	anim.play("closing")

@@ -29,7 +29,6 @@ jobs:
         unzip Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64.zip
         mv Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64 /usr/local/bin/godot
 
-    # TODO one day, don't override with exit 0 here
     - name: Initial Godot import
       shell: bash
       run: |

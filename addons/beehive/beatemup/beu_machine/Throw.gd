@@ -7,8 +7,6 @@ var thrown
 
 ## enter ###########################################################
 
-# TODO refactor to be animation, not timing, based? or maybe grabbed is enough?
-
 func enter(opts = {}):
 	actor.anim.play("throw")
 	thrown = opts.get("body")
@@ -30,7 +28,6 @@ func physics_process(delta):
 	if throw_ttl == null:
 		return
 
-	# TODO Consider ending after throw anim instead
 	throw_ttl -= delta
 
 	if throw_ttl <= 0:

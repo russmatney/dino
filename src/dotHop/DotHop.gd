@@ -8,7 +8,6 @@ func start(opts={}):
 	g.puzzle_set = opts.get("puzzle_set", Pandora.get_entity(DhPuzzleSet.ONE))
 	Navi.nav_to(g)
 
-# TODO remove in favor of a shared event bus
 var game
 func register_game(g):
 	game = g
@@ -20,5 +19,4 @@ func change_theme(theme):
 		if game != null:
 			game.puzzle_theme = theme
 			game.load_theme()
-			# TODO maintain current puzzle state?
 			game.rebuild_puzzle()

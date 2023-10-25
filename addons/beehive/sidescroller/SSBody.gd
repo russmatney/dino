@@ -136,8 +136,6 @@ func _ready():
 # Should be called immediately after move_and_slide in physics_process
 # if it returns true, the calling physics_process should return to avoid moving to another state
 func collision_check():
-	# TODO some kind of invincibility after hitting?
-	# or, some handling for restarting the room, celeste-style?
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
@@ -175,7 +173,6 @@ func check_out(data):
 
 ## facing ###########################################################
 
-# TODO dry up against Util version
 func update_los_facing(p_facing, node):
 	if not node:
 		return
@@ -229,10 +226,8 @@ func take_hit(opts):
 	take_damage(opts)
 	var hit_type = opts.get("type")
 	var body = opts.get("body")
-	# TODO probably worth supporting direction as well
 	var _dir = opts.get("direction")
 
-	# TODO different sound based on actor being hit, hit-type, etc
 	DJZ.play(DJZ.S.playerhurt)
 
 	if health <= 0:
@@ -275,7 +270,6 @@ func recover_health(h=null):
 var hurt_box_bodies = []
 
 func on_hurt_box_entered(body):
-	# TODO ignore other bodies
 	# if body is SSBody: # can't write this in same-name class script
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in hurt_box_bodies:
@@ -388,13 +382,11 @@ func should_start_climb():
 ## dash #######################################################
 
 func add_dash():
-	# TODO add dash anim, pull into beehive/sidescroller
 	has_dash = true
 
 ## jetpack #######################################################
 
 func add_jetpack():
-	# TODO add jetpack anim, pull into beehive/sidescroller
 	has_jetpack = true
 
 ## ascend/descend #######################################################
@@ -403,11 +395,9 @@ func add_ascend():
 	if not warp_cast:
 		Debug.warn("refusing to add ascend powerup")
 		return
-	# TODO add WarpCast dynamically
 	has_ascend = true
 
 func add_descend():
-	# TODO add WarpCast dynamically
 	if not warp_cast:
 		Debug.warn("refusing to add descend powerup")
 		return
@@ -438,7 +428,6 @@ func aim_weapon(aim_vector):
 func drop_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
-	# TODO drop/create new pickup/powerup?
 	if weapon in weapons:
 		weapons.erase(weapon)
 

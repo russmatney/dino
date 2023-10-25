@@ -71,7 +71,6 @@ var travel_points_group = "travel_points"
 
 ## NOTE this function has side-effects!
 ## It clears the spawn_node_path when used!
-## TODO redesign
 func player_spawn_coords() -> Vector2:
 	ensure_rooms()
 

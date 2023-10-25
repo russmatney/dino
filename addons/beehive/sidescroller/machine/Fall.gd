@@ -1,7 +1,6 @@
 extends State
 
 var fall_shake_thresholds = [
-	# TODO refactor in terms of height, not velocity
 	{"threshold": 750, "shake": 0.3, "damage": 0, "sound": DJZ.S.fall},
 	{"threshold": 1100, "shake": 0.6, "damage": 1, "sound": DJZ.S.heavy_fall},
 	{"threshold": 1500, "shake": 1.0, "damage": 2, "sound": DJZ.S.heavy_fall},
@@ -84,6 +83,5 @@ func physics_process(delta):
 			Cam.screenshake(shake*0.3)
 			DJZ.play(thresh["sound"])
 
-		# TODO apply damage
 		machine.transit("Idle")
 		return

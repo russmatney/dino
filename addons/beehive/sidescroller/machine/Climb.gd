@@ -25,4 +25,4 @@ func physics_process(_delta):
 	if not actor.wall_checks.any(func(w): return w.is_colliding()):
 		machine.transit("Fall", {"can_jump": true})
 
-	# TODO if low but not high, climb over the corner
+	# if low but not high, climb over the corner

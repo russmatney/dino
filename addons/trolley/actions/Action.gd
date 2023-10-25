@@ -114,7 +114,7 @@ func has_line_of_sight(actor) -> bool:
 		return true
 
 	if requires_line_of_sight:
-		# TODO impl LOS between actor and action_source
+		# impl LOS between actor and action_source
 		return true
 	else:
 		return true
@@ -122,6 +122,5 @@ func has_line_of_sight(actor) -> bool:
 #################################################################
 # execute
 
-# TODO args?
 func execute(actor=null):
 	fn.call(actor)

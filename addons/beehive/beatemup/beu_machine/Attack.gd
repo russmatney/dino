@@ -59,7 +59,6 @@ func physics_process(delta):
 	punch_ttl -= delta
 
 	if punch_ttl <= 0:
-		# TODO some enemies kick with a lower punch_count
 		if punch_count == 2:
 			transit("Kick")
 			punch_count = 0

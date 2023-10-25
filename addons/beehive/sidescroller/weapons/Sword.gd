@@ -92,12 +92,10 @@ func _on_frame_changed():
 					bodies_this_swing.append(b)
 					b.fire_back()
 
-		# TODO DRY up/clean up destructible tile impl
 		var needs_redraw = []
 		for bs in body_shapes:
 			var b = bs[1]
 			if b.has_method("destroy_tile_with_rid"):
-				# TODO prevent extra calls on each hit-frame if already hit
 				var destroyed = b.destroy_tile_with_rid(bs[0])
 				if destroyed:
 					DJZ.play(DJZ.S.destroyed_block)

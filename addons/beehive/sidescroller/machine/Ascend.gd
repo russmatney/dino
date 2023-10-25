@@ -46,14 +46,11 @@ func warp_position_in_dir(actor, direction, opts={}):
 		return warp_position_in_dir(actor, direction, opts)
 
 func warp(actor, position):
-	# TODO disable collisions and tween to location
 	actor.global_position = position + Vector2.UP * 50
 
 ## physics ###########################################################
 
 func physics_process(_delta):
-	# TODO maybe wait bit, do some animating along the way
-
 	var warp_position = warp_position_in_dir(actor, Vector2.UP)
 	if warp_position != null:
 		warp(actor, warp_position)

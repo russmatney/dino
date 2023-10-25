@@ -66,7 +66,7 @@ func _book(node: Node):
 		key=key,
 		groups=node.get_groups(),
 		cls=node.get_class(),
-		# TODO consider optional properties from a scene_file_path
+		# consider optional properties from a scene_file_path
 		}
 
 	if node.scene_file_path:
@@ -101,8 +101,9 @@ func register(node, opts={}):
 		if not Engine.is_editor_hint():
 			Debug.warn("No data found for node.check_out(d): ", node, "passing empty dict.")
 		data = {}
-	# TODO this can overwrite things like position, if run in the editor
-	node.check_out(data)
+
+	if not Engine.is_editor_hint():
+		node.check_out(data)
 
 	# calls node.hotel_data(), stores the data in the db
 	check_in(node)
@@ -117,11 +118,6 @@ func _update(key, data):
 
 ## check-in more data using an instanced node. This is 'Hotel.update'.
 func check_in(node: Node, data=null):
-	# if not node.is_node_ready():
-	# 	# TODO couldn't we do something anyway, maybe if data is passed?
-	# 	Debug.warn("node not ready, skipping check_in", node)
-	# 	return
-
 	if data == null:
 		if node.has_method("hotel_data"):
 			data = node.hotel_data()

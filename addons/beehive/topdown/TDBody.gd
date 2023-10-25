@@ -90,10 +90,8 @@ func _ready():
 
 func _physics_process(_delta):
 	if notice_box:
-		# remove invalid bodies
 		notice_box_bodies = notice_box_bodies.filter(func(b):
 			return is_instance_valid(b) and not b.is_dead)
-		# TODO require line-of-sight for notice-box
 
 
 ## on_transit ###########################################################
@@ -178,10 +176,9 @@ func take_hit(opts):
 	take_damage(opts)
 	var hit_type = opts.get("type")
 	var body = opts.get("body")
-	# TODO probably worth supporting direction as well
+	# probably worth supporting direction as well
 	var _dir = opts.get("direction")
 
-	# TODO different sound based on actor being hit, hit-type, etc
 	DJZ.play(DJZ.S.playerhurt)
 
 	if health <= 0:
@@ -233,7 +230,6 @@ func on_hurt_box_entered(body):
 			hurt_box_bodies.append(body)
 			self.take_hit({type="bump", body=body})
 
-			# TODO invincible period, then clear hurt_box_bodies, eg.
 			# is_invincible = true
 			# await get_tree().create_timer(1.0).timeout
 			# is_invincible = false
@@ -244,7 +240,6 @@ func on_hurt_box_exited(body):
 
 ## notice_box ###########################################################
 
-# TODO require line-of-sight, remove if los is broken
 var notice_box_bodies = []
 
 func on_notice_box_entered(body):
@@ -353,8 +348,7 @@ func aim_weapon(aim_vector):
 func drop_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
-	# TODO drop/create new pickup/powerup?
-	# TODO remove child?
+	# drop+create new pickup/powerup? remove child?
 	if weapon in weapons:
 		weapons.erase(weapon)
 

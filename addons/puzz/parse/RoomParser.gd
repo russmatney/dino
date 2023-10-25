@@ -58,7 +58,6 @@ static func parse_metadata(lines):
 		var val = true
 		if parts.size() > 0:
 			val = " ".join(parts)
-		# TODO cast val to non-string (int, float, bool, etc)
 		data[key] = val
 	return data
 
@@ -96,7 +95,7 @@ static func parse_legend(_parsed, chunks):
 			if l == "":
 				continue
 			var parts = l.split(" = ")
-			# TODO support 'or'
+			# support 'or'
 			var val_parts = parts[1].split(" and ")
 			legend[parts[0]] = Array(val_parts)
 

@@ -31,5 +31,5 @@ func test_start_every_game():
 		assert_eq(Game.current_game.game_entity, ent)
 		Game.restart_game()
 
-		# TODO some kind of per-game assertion?
+		# some kind of per-game assertion?
 		await get_tree().create_timer(0.2).timeout

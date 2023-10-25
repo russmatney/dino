@@ -35,7 +35,6 @@ jobs:
           godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Linux Build
-        # TODO remove forced exit 0 here (export without errors!)
         run: |
           mkdir -v -p dist/dino-linux
           godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0

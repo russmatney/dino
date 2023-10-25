@@ -1,8 +1,7 @@
 @tool
 extends Control
 
-# TODO handle hard-coding/mis-coding of keys for actions?
-# we should pass an action and lookup the key via Trolley instead of setting it raw here
+# we could pass an action and lookup the key via Trolley instead of setting it raw here
 @export var action: String = ""
 @export var key: String = ""
 

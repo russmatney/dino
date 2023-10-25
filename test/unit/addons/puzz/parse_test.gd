@@ -103,7 +103,7 @@ class TestSimpleBlockPushingGameLegend:
 	func test_legend():
 		assert_has(parsed, "legend", "legend not parsed")
 
-		# TODO may need to distinguish and/or here?
+		# add coverage for 'and' vs 'or'
 		assert_eq(parsed.legend["."], ["Background"])
 		assert_eq(parsed.legend["#"], ["Wall"])
 		assert_eq(parsed.legend["P"], ["Player"])
@@ -125,7 +125,7 @@ class TestSimpleBlockPushingGameSounds:
 		assert_has(parsed, "sounds", "sounds not parsed")
 
 		assert_eq_deep(parsed.sounds, [
-			# TODO perhaps a map? and I'm sure there are lots of cases/other names
+			# perhaps a map? I'm sure there are lots of cases/other names
 			["Crate", "move", "36772507"]
 			])
 
@@ -157,7 +157,6 @@ class TestSimpleBlockPushingGameRules:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_rules():
-		# TODO add more rule variants
 		assert_has(parsed, "rules", "rules not parsed")
 		assert_eq_deep(parsed.rules, [{
 				pattern=[[">", "Player"], ["Crate"]],
@@ -178,7 +177,6 @@ class TestSimpleBlockPushingGameWinConditions:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_winconditions():
-		# TODO add more win-cond variants
 		assert_has(parsed, "winconditions", "winconditions not parsed")
 		assert_eq_deep(parsed.winconditions, [["all", "Target", "on", "Crate"]])
 
@@ -193,7 +191,6 @@ class TestSimpleBlockPushingGameLevels:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_levels():
-		# TODO add more win-cond variants
 		assert_has(parsed, "levels", "levels not parsed")
 		assert_eq(len(parsed.levels), 3)
 

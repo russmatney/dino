@@ -27,7 +27,6 @@ func generate_image(inputs):
 	noise.fractal_gain = inputs.get("gain", inputs.get("persistence"))
 	noise.frequency = inputs.get("frequency", 1.0 / inputs.get("period", 20.0))
 
-	# TODO may want to use normalize here to simplify the stats bit?
 	return noise.get_seamless_image(inputs["img_size"], inputs["img_size"])
 
 
@@ -44,10 +43,8 @@ func all_coords(img):
 
 
 func rotate(img):
-	false # img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	var new_img = Image.new()
 	new_img.copy_from(img)
-	false # new_img.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	for coord in all_coords(img):
 		new_img.set_pixel(coord.y, coord.x, img.get_pixelv(coord))
 	return new_img
@@ -84,7 +81,6 @@ func normalized_val(stats, val):
 func get_layers(tilemap):
 	var layers = []
 	for i in range(tilemap.get_layers_count()):
-		# TODO could add more layer data to get layers as dicts here
 		layers.append({i=i, name=tilemap.get_layer_name(i)})
 	return layers
 
@@ -139,7 +135,6 @@ func build_connected_groups(cells, groups=[]):
 	return groups
 
 # Returns coords grouped by adjacency - connected cells will be in the same group.
-# TODO maybe we want to include or group by layers, or expose a layer filter?
 func cell_clusters(tilemap):
 	var clusters = []
 	for l in get_layers(tilemap):

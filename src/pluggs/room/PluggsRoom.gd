@@ -151,7 +151,7 @@ static func create_room(opts, last_room=null):
 ## vars
 
 var def: Dictionary
-# var def: RoomDef # TODO refactor to support this
+# var def: RoomDef
 var rect: ColorRect
 var tilemap: TileMap
 var entities: Array

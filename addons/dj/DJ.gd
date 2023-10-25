@@ -9,20 +9,13 @@ var playback_pos
 ## ready ######################################################################
 
 func _ready():
-	# so we can play music while paused
 	process_mode = PROCESS_MODE_ALWAYS
-
-	# if menu_song:
-	# 	Debug.prn("Menu song configured")
-
 	menu_song_player = setup_sound(menu_song, {"is_sound": false})
-
 
 func resume_menu_song(song = null):
 	if muted_music:
 		Debug.warn("Cannot resume menu song, music is muted")
 		return
-	# TODO pause any playing sound_map songs
 
 	if song and menu_song != song:
 		menu_song = song
@@ -34,15 +27,12 @@ func resume_menu_song(song = null):
 		else:
 			menu_song_player.play()
 
-
 func pause_menu_song():
 	if muted_music:
 		Debug.warn("Cannot play menu song, music is muted")
 		return
 	menu_song_player.stop()
 	playback_pos = menu_song_player.get_playback_position()
-
-	# TODO resume any playing sound_map songs
 
 func play_sound_rand(sounds, opts = {}):
 	var vary = opts.get("vary", 0.0)
@@ -65,7 +55,7 @@ func setup_sound(sound, opts = {}):
 	asp.name = sound.resource_path.get_file()
 	add_child(asp, true)
 	if "is_sound" in opts and opts["is_sound"]:
-		# TODO also force no looping for sounds? it's determined by the input rn
+		# how to force no looping for sounds? it's determined by the input rn
 		asp.set_volume_db(default_sound_vol_db)
 
 	if "vol_db" in opts:
@@ -151,7 +141,7 @@ func resume_game_song():
 	if muted_music:
 		Debug.warn("Cannot resume game song, music is muted")
 		return
-	# TODO store and resume at same playback_position?
+	# could store and resume at same playback_position
 	for song_and_pos in paused_game_songs:
 		var song = song_and_pos[0]
 		var pos = song_and_pos[1]

@@ -25,8 +25,6 @@ func _process(delta):
 	if cord != null and is_instance_valid(cord):
 		cord_point_ttl -= delta
 		if cord_point_ttl < 0:
-			# TODO some minimum distance before adding another point
-			# TODO check against max-allowed length
 			cord_point_ttl = cord_point_time
 			cord.add_point(global_position)
 
@@ -55,9 +53,6 @@ func toss(player, direction: Vector2):
 var is_at_max = false
 func reached_length():
 	is_at_max = true
-
-	# TODO convert cord into a 'rope'
-	# TODO reel it back in
 
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.1, 0.5)

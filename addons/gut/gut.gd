@@ -53,7 +53,7 @@ var ignore_pause_before_teardown = _ignore_pause_before_teardown :
 	get: return _ignore_pause_before_teardown
 	set(val): _ignore_pause_before_teardown = val
 
-# TODO remove this
+# could remove this
 var _temp_directory = 'user://gut_temp_directory'
 ## The directory where GUT stores any temporary information during a run.
 var temp_directory = _temp_directory :
@@ -67,7 +67,7 @@ var log_level = _log_level:
 	get: return _log_level
 	set(val): _set_log_level(val)
 
-# TODO 4.0
+# could 4.0
 # This appears to not be used anymore.  Going to wait for more tests to be
 # ported before removing.
 var _disable_strict_datatype_checks = false
@@ -91,7 +91,7 @@ var include_subdirectories = _include_subdirectories :
 
 
 var _double_strategy = GutUtils.DOUBLE_STRATEGY.SCRIPT_ONLY
-## TODO rework what this is and then document it here.
+## could rework what this is and then document it here.
 var double_strategy = _double_strategy  :
 	get: return _double_strategy
 	set(val):
@@ -261,7 +261,7 @@ var _awaiter = _utils.Awaiter.new()
 # prevents tests from being run if they were exported and ensures that the
 # error displayed is seen since importing generates a lot of text.
 #
-# TODO this appears to only be checked and never set anywhere.  Verify that this
+# could this appears to only be checked and never set anywhere.  Verify that this
 # was not broken somewhere and remove if no longer used.
 var _cancel_import = false
 
@@ -281,7 +281,7 @@ func _init():
 	_doubler.set_spy(_spy)
 	_doubler.set_gut(self)
 
-	# TODO remove_at these, universal logger should fix this.
+	# could remove_at these, universal logger should fix this.
 	_doubler.set_logger(_lgr)
 	_spy.set_logger(_lgr)
 	_stubber.set_logger(_lgr)
@@ -887,7 +887,7 @@ func _get_files(path, prefix, suffix):
 
 	var d = DirAccess.open(path)
 	# true parameter tells list_dir_begin not to include "." and ".." directories.
-	d.list_dir_begin() # TODO 4.0 fill missing arguments https://github.com/godotengine/godot/pull/40547
+	d.list_dir_begin() # could 4.0 fill missing arguments https://github.com/godotengine/godot/pull/40547
 
 	# Traversing a directory is kinda odd.  You have to start the process of listing
 	# the contents of a directory with list_dir_begin then use get_next until it

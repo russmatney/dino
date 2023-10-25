@@ -29,7 +29,6 @@ func _get_configuration_warnings():
 
 func _enter_tree():
 	add_to_group("player", true)
-	# TODO set usual collision layers/masks
 
 ## ready ###########################################################
 
@@ -43,8 +42,6 @@ func _ready():
 		# support some assigned 'hud'
 		Hood.ensure_hud(self.get("hud"))
 
-		# TODO could we just Actions.register(self) or Trolley.register(self)?
-		# include opting into keybindings and current-ax updates
 		action_detector.setup(self, {actions=[], action_hint=action_hint})
 
 		if has_boomerang:
@@ -68,17 +65,17 @@ func check_out(data):
 func _unhandled_input(event):
 	# prevent input
 	if block_control or is_dead \
-		# TODO could be a boolean callback on the state itself
+		# could be a boolean callback on the state itself
 		or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		return
 
 	# generic weapon
 	if has_weapon() and Trolley.is_attack(event):
 		use_weapon()
-		# TODO should strafe?
+		# should strafe?
 	elif has_weapon() and Trolley.is_attack_released(event):
 		stop_using_weapon()
-		# TODO should stop strafe?
+		# should stop strafe?
 
 	if Trolley.is_event(event, "cycle_weapon"):
 		cycle_weapon()

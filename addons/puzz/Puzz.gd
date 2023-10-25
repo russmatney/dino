@@ -2,7 +2,7 @@
 extends Node
 
 func parse_game_def(path):
-	# TODO make sure file exists
+	# could make sure file exists
 	var file = FileAccess.open(path, FileAccess.READ)
 	var contents = file.get_as_text()
 	var game = ParsedGame.new()
@@ -22,5 +22,5 @@ func get_cell_objects(parsed, cell):
 		# (we mutate the returned state in level.gd as the game state)
 		objs = objs.duplicate()
 
-	# TODO if or/and in objs, lookup again
+	# if or/and in objs, lookup again
 	return objs

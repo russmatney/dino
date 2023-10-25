@@ -63,7 +63,7 @@ func physics_process(delta):
 		jet_sound_in = jet_sound_every
 		Cam.screenshake(0.2)
 
-	# TODO get_action_strength for shoulder buttons
+	# get_action_strength for shoulder buttons
 	if Input.is_action_pressed("jetpack"):
 		if not is_jetting:
 			DJZ.interrupt(DJZ.S.jet_echo)

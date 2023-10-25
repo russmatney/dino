@@ -29,7 +29,7 @@ func secs_between_date_strs(a, b):
 	if a and b:
 		return date_str_to_int(a) - date_str_to_int(b)
 
-# TODO subtract hours from mins, hours+mins from secs
+# subtract hours from mins, hours+mins from secs
 func secs_to_time_dict(secs):
 	var hours = secs / 3600
 	var mins = secs / 60

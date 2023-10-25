@@ -25,7 +25,7 @@ func update_status(entry):
 			if not warned_once:
 				Debug.warn("Too many entity_statuses, skipping add", entry)
 				warned_once = true
-			# TODO evict least-relevant/next-to-go status instead
+			# should evict least-relevant/next-to-go status instead
 			return
 
 		var status = status_scene.instantiate()

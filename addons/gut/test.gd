@@ -882,7 +882,7 @@ func assert_string_ends_with(text, search, match_case=true):
 # ------------------------------------------------------------------------------
 # Assert that a method was called on an instance of a doubled class.  If
 # parameters are supplied then the params passed in when called must match.
-# TODO make 3rd parameter "param_or_text" and add fourth parameter of "text" and
+# could make 3rd parameter "param_or_text" and add fourth parameter of "text" and
 #      then work some magic so this can have a "text" parameter without being
 #      annoying.
 # ------------------------------------------------------------------------------
@@ -1405,7 +1405,7 @@ func simulate(obj, times, delta, check_is_processing: bool = false):
 #
 # The node that was replaced is queued to be freed.
 #
-# TODO see replace_by method, this could simplify the logic here.
+# could see replace_by method, this could simplify the logic here.
 # ------------------------------------------------------------------------------
 func replace_node(base_node, path_or_node, with_this):
 	var path = path_or_node

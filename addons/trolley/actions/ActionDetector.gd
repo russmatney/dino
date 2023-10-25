@@ -88,19 +88,19 @@ func potential_actions():
 
 ## Returns the nearest of all the actions, regardless of executability.
 func find_nearest(axs=actions):
-	# TODO filter/sort by line-of-sight
+	# should filter/sort by line-of-sight
 	var srcs = axs.filter(func(ax): return ax.source).map(func(ax): return ax.source)
 	var nearest_src = Util.nearest_node(self, srcs)
 	if not nearest_src:
 		return
-	# TODO sources with multiple actions - which action to return?
+	# sources with multiple actions - which action to return?
 	var nearest = axs.filter(func(ax): return ax.source == nearest_src)
 	# this just returns a matching action for the nearest source
 	if nearest.size() > 0:
 		return nearest[0]
 
 func sort_nearest(axs=actions):
-	# TODO implement, and don't filter out sourceless axs
+	# should implement, and don't filter out sourceless axs
 	return axs
 
 ## Return the nearest immediate action. If none, return the nearest potential action.

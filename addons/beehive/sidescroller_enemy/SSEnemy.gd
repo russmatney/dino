@@ -146,11 +146,9 @@ func _on_death(_enemy):
 func _on_knocked_back(_goomba):
 	if health <= 0:
 		anim.play("dead")
-		# TODO goomba sounds
 		DJZ.play(DJZ.S.soldierdead)
 	else:
 		anim.play("dead")
-		# TODO goomba sounds
 		DJZ.play(DJZ.S.soldierhit)
 
 ## hotel ####################################################
@@ -269,7 +267,7 @@ func _on_body_exited(body):
 ########################################################
 # kick
 
-# TODO move this to the machine's idle and kick states
+# should move this to the machine's idle and kick states
 
 func _on_animation_finished():
 	if anim.animation == "kick":

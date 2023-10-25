@@ -22,7 +22,7 @@ func _export_tests(collected_script):
 
 	return to_return
 
-# TODO
+# could
 #	errors
 func _export_scripts(collector):
 	if(collector == null):
@@ -61,7 +61,7 @@ func _make_results_dict():
 	return result
 
 
-# TODO
+# could
 #	time
 #	errors
 func get_results_dictionary(gut, include_scripts=true):

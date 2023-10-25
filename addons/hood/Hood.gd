@@ -91,7 +91,6 @@ func notif(text, opts = {}):
 
 var queued_notifs_dev = []
 
-# TODO only fire in dev mode?
 func dev_notif(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
 	msgs = msgs.filter(func(m): return m)

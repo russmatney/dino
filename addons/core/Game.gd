@@ -29,7 +29,7 @@ func game_for_entity(ent: DinoGameEntity):
 		return
 
 	var game = singleton.new()
-	# TODO remove? this is also set in dinogame.enter_tree
+	# remove? this is also set in dinogame.enter_tree
 	game.game_entity = ent
 	var game_name = singleton.resource_path.get_basename().get_file()
 	if Engine.has_singleton(game_name):
@@ -70,7 +70,7 @@ func ensure_current_game():
 func reset_current_game():
 	if current_game != null and is_instance_valid(current_game):
 		current_game.cleanup()
-		# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
+		# free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
 		# current_game.queue_free()
 		current_game = null
 	ensure_current_game()
@@ -82,7 +82,7 @@ func register_current_game(game):
 
 	if current_game != null and current_game != game:
 		current_game.cleanup()
-		# TODO free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
+		# free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
 		# current_game.queue_free()
 		Debug.pr("Waiting for cleanup: ", current_game.game_entity.get_display_name())
 		await get_tree().create_timer(0.2).timeout
@@ -141,7 +141,7 @@ func load_main_menu():
 
 ## player ##########################################################
 
-# TODO maybe better to let the zones respawn the player?
+# maybe better to let the zones respawn the player?
 func _on_new_scene_instanced(scene):
 	if current_game and current_game.game_entity.manages_scene(scene):
 		if current_game.game_entity.should_spawn_player(scene):
@@ -249,12 +249,6 @@ func _respawn_player(opts={}):
 func respawn_coords():
 	if current_game and current_game.has_method("get_spawn_coords"):
 		return current_game.get_spawn_coords()
-
-	# TODO better game-independent respawn logic
-	# probably via player_spawn_points group
-	# collect nodes in groups
-	# apply some kind of sort
-	# return first preferred global position
 
 	var psp = Util.first_node_in_group("player_spawn_points")
 	if psp:

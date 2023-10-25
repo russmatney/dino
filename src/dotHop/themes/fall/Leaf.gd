@@ -49,9 +49,6 @@ func render():
 				var t = 0.4
 				animate_exit(t)
 				await get_tree().create_timer(t).timeout
-
-				# TODO animate crunch/pickup
-				# TODO crunch sound
 				anim.set_visible(false)
 			DHData.dotType.Goal:
 				hide_anims()

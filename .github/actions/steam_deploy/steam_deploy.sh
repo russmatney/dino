@@ -4,14 +4,10 @@ set -euo pipefail
 # based on https://raw.githubusercontent.com/game-ci/steam-deploy/main/steam_deploy.sh
 
 steamdir=${STEAM_HOME:-$HOME/Steam}
-# TODO maybe want this as env as well (set per-step)
 manifest_path=$(pwd)/build/steam_dino_linux_build.vdf
 
 echo "steamdir: $steamdir"
 echo "manifest_path: $manifest_path"
-
-# TODO set a build description with a sem-ver str
-# TODO set a release branch
 
 if [ -n "$steam_totp" ]; then
   echo ""

@@ -47,7 +47,6 @@ func parse_prelude(chunks):
 		var val = true
 		if parts.size() > 0:
 			val = " ".join(parts)
-		# TODO cast val to non-string (int, float, bool, etc)
 		prelude[key] = val
 	return prelude
 
@@ -93,7 +92,7 @@ func parse_legend(chunks):
 	for lines in chunks:
 		for l in lines:
 			var parts = l.split(" = ")
-			# TODO support 'or' ?
+			# support 'or' ?
 			var val_parts = parts[1].split(" and ")
 			legend[parts[0]] = Array(val_parts)
 

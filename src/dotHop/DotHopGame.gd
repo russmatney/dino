@@ -23,7 +23,6 @@ func _ready():
 	else:
 		Debug.warn("No dothop singleton found, some feats may not work")
 
-	# TODO if not a managed game, honor the dev loop (game_def_path, puzzle_num)
 	if puzzle_set != null:
 		game_def_path = puzzle_set.get_puzzle_script_path()
 		puzzle_theme = puzzle_set.get_theme()
@@ -62,10 +61,6 @@ func rebuild_puzzle():
 
 func on_puzzle_ready():
 	pass
-	# if not Engine.is_editor_hint():
-	# 	Cam.ensure_cam(self)
-	# 	Hood.ensure_hud(self)
-		# TODO music, initial game sounds
 
 ## load theme #####################################################################
 
@@ -75,7 +70,7 @@ func load_theme():
 ## win #####################################################################
 
 func on_puzzle_win():
-	# TODO juicy win scene with button to advance
+	# juicy win scene with button to advance
 	# metrics like number of moves, time
 	# leaderboard via that wolf thing?
 

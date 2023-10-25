@@ -54,7 +54,7 @@ func unregister(node, opts={}):
 # public helper
 
 func flash_quest_status():
-	# TODO briefly show quest status
+	# briefly show quest status
 	pass
 
 ######################################################

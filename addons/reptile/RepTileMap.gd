@@ -13,8 +13,6 @@ class_name RepTileMap
 func destroy_tile_with_rid(rid):
 	var coords = get_coords_for_body_rid(rid)
 	if coords:
-
-		# TODO animate tile destruction
 		var tile_data = get_cell_tile_data(0, coords)
 		if tile_data:
 			var mat = tile_data.material

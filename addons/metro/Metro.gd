@@ -36,7 +36,7 @@ func reload_current_zone():
 # Zone travel
 
 func travel_to(dest_zone, elevator_path=null):
-	# TODO restore same-zone travel
+	# could restore same-zone travel
 	# if current_zone.name == dest_zone_name:
 	# 	Debug.pr("Traveling in same zone", dest_zone_name, elevator_path)
 	# 	if elevator_path:
@@ -85,13 +85,12 @@ func get_spawn_coords():
 
 var last_containing_room
 var last_n_containing_rooms = []
-# TODO support setting this from Game.gd, maybe per-zone
+# support setting this from Game.gd, more nuanced per-game behavior
 var unpaused_room_count = 3
 
 # Attempts to find a room containing the player, and pause the other rooms
 # If no room overlaps the player, the last room (last_containing_room) is left running
 # (i.e. unpaused) until another one is found.
-# TODO consider unpausing adjacent/nearby rooms (not just the current one)
 func update_zone():
 	ensure_current_zone()
 
@@ -108,7 +107,7 @@ func update_zone():
 	var current_containing_room
 	var rooms_to_pause = []
 	for room in current_zone.rooms:
-		# TODO consider overlapping roomboxes
+		# consider overlapping roomboxes (player in more than one room)
 		# probably prefer the existing one until we're not overlapping
 		if room.contains_player(Game.player):
 			current_containing_room = room

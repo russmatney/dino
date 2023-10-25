@@ -254,12 +254,10 @@ func take_hit(opts):
 
 	if health <= 0:
 		die({killed_by=body})
-		# TODO not perfect
 		if hit_type != "hit_by_throw":
 			body.kos += 1
 		Hotel.check_in(body)
 
-# TODO refactor into opts-based api
 func take_damage(opts):
 	var hit_type = opts.get("hit_type")
 	var body = opts.get("body")

@@ -54,7 +54,6 @@ func slowmo_stop():
 
 ## build inputs dict ########################################################################
 
-# TODO unit tests
 func build_inputs_dict():
 	# apparently we need to reload this
 	InputMap.load_from_project_settings()
@@ -71,7 +70,7 @@ func build_inputs_dict():
 		for evt in evts:
 			if evt is InputEventKey:
 				var key_str = OS.get_keycode_string(evt.keycode)
-				# TODO support 'Enter, Shift, etc'
+				# could support 'Enter, Shift, etc'
 				keys.append(key_str)
 
 				if not key_str in action_labels_by_input:
@@ -102,8 +101,6 @@ class InputsSorter:
 		return false
 
 
-# TODO write unit tests, use parse_input_event to test controls
-# TODO maybe support filtering out inputs by prefix
 func inputs_list(opts={}):
 	if inputs_by_action_label == null or len(inputs_by_action_label) == 0:
 		build_inputs_dict()
@@ -112,8 +109,6 @@ func inputs_list(opts={}):
 	var only_prefix = opts.get("only_prefix", "")
 
 	var inputs_list = inputs_by_action_label.values()
-	# TODO this prints bad-comparision function error?
-	# inputs_list.sort_custom(Callable(InputsSorter, "sort_alphabetical"))
 
 	var inps = []
 	for inp in inputs_list:
@@ -131,7 +126,6 @@ func inputs_list(opts={}):
 
 
 func keys_for_input_action(action_label):
-	# TODO no need to rebuild in prod... or at all?
 	build_inputs_dict()
 	if action_label in inputs_by_action_label:
 		return inputs_by_action_label[action_label]["keys"]

@@ -40,7 +40,6 @@ func _get_configuration_warnings():
 
 func _enter_tree():
 	add_to_group("player", true)
-	# TODO set usual collision layers/masks
 
 ## actions ###########################################################
 
@@ -67,8 +66,6 @@ func _ready():
 		# support some assigned 'hud'
 		Hood.ensure_hud(self.get("hud"))
 
-		# TODO could we just Actions.register(self) or Trolley.register(self)?
-		# include opting into keybindings and current-ax updates
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
@@ -124,10 +121,10 @@ func _unhandled_input(event):
 	if has_weapon() and Trolley.is_attack(event):
 		Debug.prn("using weapon", weapons)
 		use_weapon()
-		# TODO should strafe?
+		# should strafe?
 	elif has_weapon() and Trolley.is_attack_released(event):
 		stop_using_weapon()
-		# TODO should stop strafe?
+		# should stop strafe?
 
 	if Trolley.is_event(event, "cycle_weapon"):
 		cycle_weapon()
@@ -159,7 +156,7 @@ func _physics_process(_delta):
 
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
-			# TODO restore strafing - check if using a weapon that supports strafing?
+			# restore strafing - check if using a weapon that supports strafing?
 			# if not firing: # supports strafing (moving while firing without turning)
 			if move_vector.x > 0:
 				facing_vector = Vector2.RIGHT
@@ -211,7 +208,6 @@ var pickups = []
 
 signal pickups_changed(pickups)
 
-# TODO refactor jetpack pickup into ss powerup
 func collect_pickup(pickup_type):
 	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
 	pickups.append(pickup_type)

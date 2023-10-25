@@ -5,7 +5,6 @@ class_name NaviButtonList
 @export var default_button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")
 
 # set a local member for the Navi autoload, to ease testing
-# TODO consider loading/falling back checked a load instead?
 var _navi = Navi
 
 
@@ -78,7 +77,7 @@ func connect_pressed_to_action(button, item):
 		pw("Menu item missing handler", item)
 		return
 	elif nav_to:
-		if not ResourceLoader.exists(nav_to):  # TODO does resource exist?
+		if not ResourceLoader.exists(nav_to):
 			button.set_disabled(true)
 			pw("Menu item with non-existent nav-to", item)
 			return

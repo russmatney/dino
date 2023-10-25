@@ -208,7 +208,7 @@ func pause(opts={}):
 			for ent in ents_to_pause:
 				ent.set_process_mode.call_deferred(PROCESS_MODE_DISABLED)
 				paused_ents.append(ent)
-				# TODO paused ents should move back to IDLE
+				# paused ents should move back to IDLE
 				# (and attackers on player should be re-calced)
 
 	if not Engine.is_editor_hint():

@@ -8,8 +8,6 @@ var fall_scale_factor = 0.2
 ## enter ###########################################################
 
 func enter(opts = {}):
-	# TODO apply damage
-
 	actor.anim.play("fall")
 	DJZ.play(DJZ.S.fall)
 	fall_ttl = Util.get_(opts, "fall_time", fall_time)
@@ -46,7 +44,7 @@ func physics_process(delta):
 	fall_ttl -= delta
 
 	if fall_ttl <= 0:
-		# TODO reset handler? move back to safe position? die?
+		# reset handler? move back to safe position? die? fire signal?
 		return
 
 	actor.move_and_slide()
