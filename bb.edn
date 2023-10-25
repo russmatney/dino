@@ -2,6 +2,7 @@
  :tasks
  {:requires ([bb-godot.tasks :as tasks]
              [bb-godot.logger :refer [log]]
+             [babashka.fs :as fs]
              [clojure.string :as string])
 
   :init
@@ -21,33 +22,18 @@
   test-match-script (let [arg (some-> *command-line-args* first)]
                       (tasks/shell-and-log (str gut " -gexit -gselect=" arg)))
 
-  ;; TODO create a watch-all (take a list of dirs)
-  watch          tasks/watch
-  watch-reptile  (tasks/watch "addons/reptile/assets")
-  watch-core     (tasks/watch "addons/core/assets")
-  watch-dothop   (tasks/watch "src/dotHop/assets")
-  ;; TODO create a pixels-all (take a list of dirs)
-  pixels         (let [dir (some-> *command-line-args* first)]
-                   (if dir
-                     (tasks/pixels dir)
-                     (tasks/pixels)))
-  pixels-reptile (tasks/pixels "addons/reptile/assets")
-  pixels-core    (tasks/pixels "addons/core/assets")
+  watch tasks/watch
 
   export       (tasks/export (some-> *command-line-args* first))
   export-debug (tasks/export (some-> *command-line-args* first) {:debug? true})
 
   build-web (tasks/build-web (some-> *command-line-args* first))
-  ;; TODO rename/rework in the context of butler
-  ;; deploy-web (tasks/deploy-web "s3://danger.russmatney.com")
-  ;; zip       tasks/zip
 
   serve-built
   {:extra-deps {org.babashka/http-server {:local/root "../../babashka/http-server"}}
    :requires   ([babashka.http-server :as http-server])
    :task       (let [arg (some-> *command-line-args* first)
                      arg (or arg "dino")]
-                 ;; TODO add :header support to bb/http-server inputs
                  (http-server/exec {:port 3010 :dir (str  "dist/" arg)})
                  ;; http-server installable via bbin
                  #_(tasks/shell-and-log (str "http-server --port 3010 --dir dist/" arg)))}
