@@ -21,6 +21,8 @@ var end_box
 static func room_for_type(typ, opts={}):
 	var rooms_by_type = {}
 	var room_defs = RoomParser.parse_room_defs(opts)
+	if room_defs == null:
+		return
 	for room in room_defs.rooms:
 		var rms = Util.get_(rooms_by_type, room.room_type, [])
 		rms.append(room)

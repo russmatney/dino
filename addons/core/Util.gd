@@ -374,11 +374,11 @@ func ensure_default(d, k: String, default: Variant):
 	if d == null:
 		return {k=default}
 
-	if d.get(k):
+	if k in d and d.get(k) != null:
 		# k already set, do nothing
 		return d
 
-	# set (in-place!) and return
+	# set (in-place!) and return the whole dict
 	d[k] = default
 	return d
 

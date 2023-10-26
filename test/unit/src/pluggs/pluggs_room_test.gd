@@ -106,9 +106,9 @@ ROOMS
 
 name Test Room
 
-xxx
+...
 xp.
-x..
+xxx
 "
 
 func test_create_room_basic():
@@ -121,7 +121,8 @@ func test_create_room_based_on_last_room():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
 	var another_room = PluggsRoom.create_room({contents=pluggs_room_contents}, room)
 	assert_eq(another_room.name, "Test Room")
-	assert_eq(another_room.position, Vector2(48,0)) # 3 x 16 = 48
+	# y is 16 b/c of the align-floor logic - moves down to smoothly transition between rooms
+	assert_eq(another_room.position, Vector2(48,16)) # 3 x 16 = 48
 	room.free()
 	another_room.free()
 
@@ -137,10 +138,9 @@ func test_create_room_tilemap():
 	assert_eq(room.name, "Test Room")
 	assert_eq(room.position, Vector2.ZERO)
 	assert_eq_set(room.tilemap.get_used_cells(0), [
-		Vector2i(0,0),
-		Vector2i(1,0),
-		Vector2i(2,0),
 		Vector2i(0,1),
 		Vector2i(0,2),
+		Vector2i(1,2),
+		Vector2i(2,2),
 		])
 	room.free()

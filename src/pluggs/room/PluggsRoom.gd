@@ -99,6 +99,9 @@ static func add_rect(room: PluggsRoom, opts: Dictionary):
 ## room gen ##################################################################
 
 static func gen_room_def(opts={}):
+	Util.ensure_default(opts, "flags", [])
+	Util.ensure_default(opts, "skip_flags", [])
+
 	var parsed_rooms_def = RoomParser.parse_room_defs(opts)
 	var room_defs = parsed_rooms_def.rooms
 
