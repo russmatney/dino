@@ -8,6 +8,13 @@ extends Node2D
 		if v and Engine.is_editor_hint():
 			generate()
 
+@export var _seed: int
+@export var gen_with_random_seed: bool:
+	set(v):
+		if v and Engine.is_editor_hint():
+			_seed = randi()
+			generate()
+
 @export var room_base_dim = 256
 @export var room_tile_size = 8
 @export var room_count = 5
@@ -53,8 +60,11 @@ func generate():
 	parsed_room_defs = RoomParser.parse_room_defs({room_defs_path=room_defs_path})
 	var rooms = []
 
+	# seed - may want to read from a global seed at some point
+	seed(_seed)
+
 	# generate
-	Debug.pr("Generating level")
+	Debug.pr("Generating level with seed:", _seed)
 
 	# first room
 	var last_room = create_room({flags=["first"]})
@@ -97,6 +107,7 @@ func promote_tilemaps(rooms):
 
 func reboot_world():
 	Hood.notif("Rebooting world....")
+	_seed = randi() # may want this to happen at a global level at some point
 	await get_tree().create_timer(3.0).timeout
 	generate()
 	Game.respawn_player()
@@ -109,7 +120,8 @@ func create_room(opts=null, last_room=null):
 		room_base_dim=room_base_dim,
 		tile_size=room_tile_size,
 		parsed_room_defs=parsed_room_defs,
-		tilemap_scene=tilemap_scene})
+		tilemap_scene=tilemap_scene,
+		})
 	var room = PluggsRoom.create_room(opts, last_room)
 
 	room_idx += 1
