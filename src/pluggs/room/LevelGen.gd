@@ -25,15 +25,22 @@ var room_idx = 0
 func _ready():
 	Debug.pr("LevelGen ready")
 	Game.maybe_spawn_player()
+	connect_to_rooms()
 
 func _unhandled_input(event):
 	if Engine.is_editor_hint():
 		return
 
 	if Trolley.is_restart(event):
-		Debug.pr("Regen + restart")
-		generate()
-		Game.respawn_player()
+		reboot_world()
+
+# Needs to be called on _ready (for static rooms) and after regenerating new rooms
+func connect_to_rooms():
+	if Engine.is_editor_hint():
+		return
+	for r in rooms_node.get_children():
+		if r is PluggsRoom:
+			r.machine_plugged.connect(reboot_world)
 
 ## generate ######################################################################
 
@@ -87,6 +94,13 @@ func promote_tilemaps(rooms):
 	rooms_node.add_child(tilemap)
 
 ## create_room ######################################################################
+
+func reboot_world():
+	Hood.notif("Rebooting world....")
+	await get_tree().create_timer(3.0).timeout
+	generate()
+	Game.respawn_player()
+	connect_to_rooms()
 
 func create_room(opts=null, last_room=null):
 	if opts == null:

@@ -70,6 +70,7 @@ static func add_entity(crd, room, scene, opts):
 	ent.position = crd_to_position(crd, opts) + Vector2.DOWN * opts.tile_size
 	room.add_child(ent)
 	room.entities.append(ent)
+	return ent
 
 static var player_spawn_point = preload("res://addons/core/PlayerSpawnPoint.tscn")
 static var fb_machine_scene = preload("res://src/pluggs/entities/ArcadeMachine.tscn")
@@ -80,8 +81,8 @@ static func add_entities(room, opts, crds):
 	var machine_scene = Util.get_(opts, "machine_scene", fb_machine_scene)
 
 	crds.filter(func(c): return "Light" in c.cell).map(func(crd): add_entity(crd, room, light_scene, opts))
-	crds.filter(func(c): return "Machine" in c.cell).map(func(crd): add_entity(crd, room, machine_scene, opts))
 	crds.filter(func(c): return "Player" in c.cell).map(func(crd): add_entity(crd, room, player_spawn_point, opts))
+	crds.filter(func(c): return "Machine" in c.cell).map(func(crd): add_entity(crd, room, machine_scene, opts))
 
 ## color rect ##################################################################
 
@@ -177,7 +178,20 @@ var rect: ColorRect
 var tilemap: TileMap
 var entities: Array
 
+signal machine_plugged
+
 ## ready #############################################################
 
 func _ready():
-	pass
+	if Engine.is_editor_hint():
+		return
+
+	for e in get_children():
+		if e.is_in_group("arcade_machine"):
+			e.plugged.connect(on_machine_plugged)
+			Debug.pr("connected room to arcade machine plugged signal")
+
+## plugged #############################################################
+
+func on_machine_plugged():
+	machine_plugged.emit()

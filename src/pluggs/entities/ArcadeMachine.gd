@@ -6,6 +6,8 @@ extends Node2D
 
 var is_plugged = false
 
+signal plugged
+
 func _ready():
 	socket.plugged.connect(_on_plugged)
 	socket.unplugged.connect(_on_unplugged)
@@ -18,6 +20,7 @@ func _ready():
 func _on_plugged(_plug=null):
 	anim.play("idle-on")
 	light.set_enabled(true)
+	plugged.emit()
 
 func _on_unplugged(_plug=null):
 	anim.play("idle-off")

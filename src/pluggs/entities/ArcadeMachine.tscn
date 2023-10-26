@@ -74,7 +74,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="ArcadeMachine" type="Node2D"]
+[node name="ArcadeMachine" type="Node2D" groups=["arcade_machine"]]
 script = ExtResource("1_a0slm")
 
 [node name="ColorRect" type="ColorRect" parent="."]

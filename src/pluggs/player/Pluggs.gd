@@ -26,10 +26,13 @@ var is_dead: bool
 
 ## ready ######################################################
 
+var hud = preload("res://src/pluggs/hud/HUD.tscn")
+
 func _ready():
 	machine.transitioned.connect(on_transit)
 	machine.start()
 
+	Hood.ensure_hud(hud)
 	Cam.ensure_camera({
 		player=self,
 		zoom_rect_min=250,

@@ -18,7 +18,8 @@ var plug
 ## _process ###########################################
 
 func _process(_delta):
-	set_point_position(0, player.global_position)
+	if player != null and is_instance_valid(player):
+		set_point_position(0, player.global_position)
 	update_opts()
 
 ## update_opts ###########################################

@@ -141,6 +141,10 @@ func _deferred_goto_scene(scene):
 # helper for adding a child to the current scene
 func add_child_to_current(child, deferred=true):
 	# could use the scene_tree's current_scene directly
+	if current_scene == null:
+		current_scene = get_tree().get_root()
+		get_tree().set_current_scene(current_scene)
+
 	if deferred:
 		current_scene.add_child.call_deferred(child)
 	else:
