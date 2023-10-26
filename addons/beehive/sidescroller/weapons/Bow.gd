@@ -67,7 +67,7 @@ func fire_arrow():
 	arrow.position = global_position + arrow_offset
 	arrow.add_collision_exception_with(actor)
 
-	Navi.current_scene.add_child.call_deferred(arrow)
+	Navi.add_child_to_current(arrow)
 	arrow.rotation = aim_vector.angle()
 	arrow.apply_impulse(aim_vector * arrow_impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)

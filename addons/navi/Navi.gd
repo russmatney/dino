@@ -136,6 +136,14 @@ func _deferred_goto_scene(scene):
 	# set the focus for the current scene
 	find_focus()
 
+## current_scene_path ###################################################################
+
+func current_scene_path():
+	if current_scene == null:
+		current_scene = get_tree().get_root()
+		get_tree().set_current_scene(current_scene)
+	return current_scene.scene_file_path
+
 ## add child ###################################################################
 
 # helper for adding a child to the current scene

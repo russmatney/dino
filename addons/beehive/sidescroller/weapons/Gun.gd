@@ -68,7 +68,7 @@ func fire_bullet():
 	bullet.position = global_position + bullet_offset
 	bullet.add_collision_exception_with(actor)
 
-	Navi.current_scene.add_child.call_deferred(bullet)
+	Navi.add_child_to_current(bullet)
 	bullet.rotation = aim_vector.angle()
 	bullet.apply_impulse(aim_vector * bullet_impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)

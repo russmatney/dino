@@ -20,7 +20,7 @@ func on_quests_complete():
 ## level_complete ######################################################
 
 func handle_level_complete():
-	var curr_level_idx = SpikeData.zone_scenes.find(Navi.current_scene.scene_file_path)
+	var curr_level_idx = SpikeData.zone_scenes.find(Navi.current_scene_path())
 	var next_level_idx = curr_level_idx + 1
 	if next_level_idx < SpikeData.zone_scenes.size():
 		var next_level = SpikeData.zone_scenes[next_level_idx]

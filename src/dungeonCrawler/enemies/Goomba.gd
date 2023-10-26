@@ -39,7 +39,7 @@ var fallback_drop_scenes = [preload("res://src/dungeonCrawler/items/Coin.tscn")]
 func emit_drop(scene):
 	var drop = scene.instantiate()
 	drop.global_position = get_global_position()
-	Navi.current_scene.add_child.call_deferred(drop)
+	Navi.add_child_to_current(drop)
 
 	# eh? particle physics?
 	# drop.apply_impulse(impulse_dir * arrow_impulse, Vector2.ZERO)

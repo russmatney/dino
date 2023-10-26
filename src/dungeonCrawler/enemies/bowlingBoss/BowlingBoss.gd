@@ -66,7 +66,7 @@ var bowl_speed = 200
 func bowl_attack(target):
 	var ball = ball_scene.instantiate()
 	ball.position = get_global_position()
-	Navi.current_scene.add_child.call_deferred(ball)
+	Navi.add_child_to_current(ball)
 
 	var bowl_dir = target.get_global_position() - ball.position
 	ball.velocity = bowl_dir.normalized() * bowl_speed

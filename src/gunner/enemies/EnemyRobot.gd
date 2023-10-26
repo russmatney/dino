@@ -171,7 +171,7 @@ func fire_at_player():
 		var arrow = arrow_scene.instantiate()
 		arrow.position = arrow_position.get_global_position()
 		arrow.add_collision_exception_with(self)
-		Navi.current_scene.add_child.call_deferred(arrow)
+		Navi.add_child_to_current(arrow)
 
 		var angle_to_player = arrow.position.direction_to(player.global_position + Vector2(0, -15))
 

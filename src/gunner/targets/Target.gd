@@ -29,7 +29,7 @@ func kill():
 
 	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())
-	Navi.current_scene.add_child.call_deferred(lbl)
+	Navi.add_child_to_current(lbl)
 
 
 func _on_Target_body_entered(body: Node):

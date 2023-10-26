@@ -79,7 +79,7 @@ func fire():
 	bullet.position = actor.get_global_position()
 
 	# add child
-	Navi.current_scene.add_child.call_deferred(bullet)
+	Navi.add_child_to_current(bullet)
 
 	# rotate and impulse
 	# using los.target_position for player position

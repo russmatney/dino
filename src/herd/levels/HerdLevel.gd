@@ -39,7 +39,7 @@ func on_quest_failed(_quest):
 		on_close=retry_level})
 
 func retry_level():
-	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	var level_idx = HerdData.levels.find(Navi.current_scene_path())
 	if len(HerdData.levels) <= level_idx:
 		Debug.err("level_idx too high, can't retry level")
 		return
@@ -48,7 +48,7 @@ func retry_level():
 ## level_complete #####################################################
 
 func handle_level_complete():
-	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	var level_idx = HerdData.levels.find(Navi.current_scene_path())
 	if level_idx == len(HerdData.levels) - 1:
 		next_level_menu.update_hero_text("You Win!")
 	else:

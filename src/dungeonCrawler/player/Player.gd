@@ -173,7 +173,7 @@ func fire_bow():
 	var arrow = arrow_scene.instantiate()
 	arrow.position = bow.get_global_position()  # maybe use weapon position?
 	# prefer to add bullets to the current scene, so they get cleaned up
-	Navi.current_scene.add_child.call_deferred(arrow)
+	Navi.add_child_to_current(arrow)
 	arrow.rotation_degrees = bow.rotation_degrees + 90
 	var impulse_dir = Vector2(1, 0).rotated(deg_to_rad(bow.rotation_degrees))
 	arrow.apply_impulse(impulse_dir * arrow_impulse, Vector2.ZERO)

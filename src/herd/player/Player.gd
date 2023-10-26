@@ -149,7 +149,7 @@ func restart_level():
 		on_close=retry_level})
 
 func retry_level():
-	var level_idx = HerdData.levels.find(Navi.current_scene.scene_file_path)
+	var level_idx = HerdData.levels.find(Navi.current_scene_path())
 	if len(HerdData.levels) <= level_idx:
 		Debug.err("level_idx too high, can't retry level")
 		return
