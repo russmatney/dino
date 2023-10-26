@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dd1p22k4dhgdg"]
+[gd_scene load_steps=14 format=3 uid="uid://dd1p22k4dhgdg"]
 
 [ext_resource type="Script" path="res://src/pluggs/entities/ArcadeMachine.gd" id="1_a0slm"]
 [ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/pluggs/plug/Socket.tscn" id="2_57gb2"]
 [ext_resource type="Texture2D" uid="uid://bq21u7y3lvxrl" path="res://src/pluggs/entities/arcade_machine_01.png" id="2_nl2ir"]
+[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="4_ls151"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qbtk"]
 atlas = ExtResource("2_nl2ir")
@@ -76,6 +77,14 @@ animations = [{
 [node name="ArcadeMachine" type="Node2D"]
 script = ExtResource("1_a0slm")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -320.0
+offset_top = -256.0
+offset_right = 320.0
+offset_bottom = 256.0
+color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(4, -38)
@@ -93,3 +102,8 @@ metadata/_aseprite_wizard_config_ = {
 
 [node name="Socket" parent="." instance=ExtResource("2_57gb2")]
 position = Vector2(0, -11)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -32)
+shadow_enabled = true
+texture = ExtResource("4_ls151")

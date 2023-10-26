@@ -67,7 +67,7 @@ static func add_tilemap(room, opts, crds):
 
 static func add_entity(crd, room, scene, opts):
 	var ent = scene.instantiate()
-	ent.position = crd_to_position(crd, opts)
+	ent.position = crd_to_position(crd, opts) + Vector2.DOWN * opts.tile_size
 	room.add_child(ent)
 	room.entities.append(ent)
 
