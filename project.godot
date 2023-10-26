@@ -69,7 +69,12 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/puzz/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/puzz/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
+
+[gdunit4]
+
+report/godot/push_error=true
+report/assert/strict_number_type_compare=false
 
 [global]
 
