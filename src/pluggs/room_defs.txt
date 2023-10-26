@@ -15,6 +15,7 @@ ROOMS
 =======
 
 name Room One
+first
 
 ..................
 ....p.............
@@ -25,6 +26,7 @@ xxxxxxxxxxx...xxxx
 xxxxxxxxxxx..xxxxx
 
 name Room One Alt
+first
 
 ..................
 ..................
@@ -106,15 +108,20 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 name ArcadeRoom
+last
 
-..............................
-..............................
-..............................
-..............................
-..............................
-........................m.....
-..................xxxxxxxxxxxx
-..................xxxxxxxxxxxx
-...............xxxxxxxxxxxxxxx
-xxxxxxx......xxxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+..............................xxxxxx
+........................m.....xxxxxx
+..................xxxxxxxxxxxxxxxxxx
+..................xxxxxxxxxxxxxxxxxx
+...............xxxxxxxxxxxxxxxxxxxxx
+xxxxxxx......xxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

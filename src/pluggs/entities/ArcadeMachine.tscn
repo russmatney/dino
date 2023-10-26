@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd1p22k4dhgdg"]
+[gd_scene load_steps=14 format=3 uid="uid://cneo2kpbyfao5"]
 
 [ext_resource type="Script" path="res://src/pluggs/entities/ArcadeMachine.gd" id="1_a0slm"]
 [ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/pluggs/plug/Socket.tscn" id="2_57gb2"]

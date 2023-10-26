@@ -71,6 +71,7 @@ static func add_entity(crd, room, scene, opts):
 	room.add_child(ent)
 	room.entities.append(ent)
 
+static var player_spawn_point = preload("res://addons/core/PlayerSpawnPoint.tscn")
 static var fb_machine_scene = preload("res://src/pluggs/entities/ArcadeMachine.tscn")
 static var fb_light_scene = preload("res://src/pluggs/entities/Light.tscn")
 
@@ -80,6 +81,7 @@ static func add_entities(room, opts, crds):
 
 	crds.filter(func(c): return "Light" in c.cell).map(func(crd): add_entity(crd, room, light_scene, opts))
 	crds.filter(func(c): return "Machine" in c.cell).map(func(crd): add_entity(crd, room, machine_scene, opts))
+	crds.filter(func(c): return "Player" in c.cell).map(func(crd): add_entity(crd, room, player_spawn_point, opts))
 
 ## color rect ##################################################################
 
@@ -101,6 +103,23 @@ static func gen_room_def(opts={}):
 
 	if opts.get("filter_rooms"):
 		room_defs = room_defs.filter(opts.filter_rooms)
+
+	if len(opts.flags) > 0:
+		room_defs = room_defs.filter(func(r):
+			for flag in opts.flags:
+				if flag in r and r[flag]: #move to room.meta when RoomDef type exists
+					return true)
+
+	if len(opts.skip_flags) > 0:
+		room_defs = room_defs.filter(func(r):
+			for flag in opts.skip_flags:
+				if flag in r and r[flag]: #move to room.meta when RoomDef type exists
+					return false
+			return true)
+
+	if len(room_defs) == 0:
+		Debug.err("Could not find room_def matching `filter_rooms` and `flags`", opts.flags)
+		return
 
 	return Util.rand_of(room_defs)
 
@@ -132,6 +151,8 @@ static func next_room_position(opts: Dictionary, room, last_room):
 
 static func create_room(opts, last_room=null):
 	Util.ensure_default(opts, "tile_size", 16)
+	Util.ensure_default(opts, "flags", [])
+	Util.ensure_default(opts, "skip_flags", [])
 
 	var room = PluggsRoom.new()
 	room.def = gen_room_def(opts)

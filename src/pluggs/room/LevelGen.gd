@@ -50,16 +50,16 @@ func generate():
 	Debug.pr("Generating level")
 
 	# first room
-	var last_room = create_room({})
+	var last_room = create_room({flags=["first"]})
 	rooms.append(last_room)
 
 	# most rooms
 	for _i in range(room_count - 2):
-		last_room = create_room({}, last_room)
+		last_room = create_room({skip_flags=["first", "last"]}, last_room)
 		rooms.append(last_room)
 
 	# last room
-	var room = create_room({}, last_room)
+	var room = create_room({flags=["last"]}, last_room)
 	rooms.append(room)
 
 	promote_tilemaps(rooms)
