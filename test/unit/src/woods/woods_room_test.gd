@@ -3,16 +3,6 @@ extends GdUnitTestSuite
 @warning_ignore("unused_parameter")
 @warning_ignore("return_value_discarded")
 
-func test_with_script_error():
-	var x = {}
-
-	x.hello()
-
-# func assert_eq_set(a, b):
-# 	a.sort()
-# 	b.sort()
-# 	assert_eq_deep(a, b)
-
 ## data ###########################################################
 
 var room_defs_txt = "title WoodsRooms
@@ -86,17 +76,17 @@ func test_create_room_empty_dict():
 	var room = WoodsRoom.create_room({room_defs_path=room_defs_path,
 		filler_tile_count=0})
 
-	# assert_eq(room.position, Vector2.ZERO)
-	# assert_eq(room.type, WoodsRoom.t.SQUARE)
-	# assert_eq(room.room_def.room_type, "SQUARE")
-	# assert_eq_set(room.tilemap.get_used_cells(0), [
-	# 	Vector2i(0, 2),
-	# 	Vector2i(1, 2),
-	# 	Vector2i(2, 2),
-	# 	Vector2i(2, 0),
-	# 	Vector2i(1, 0),
-	# 	Vector2i(0, 0),
-	# 	])
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
+	assert_that(room.room_def.room_type).is_equal("SQUARE")
+	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+		Vector2i(0, 2),
+		Vector2i(1, 2),
+		Vector2i(2, 2),
+		Vector2i(2, 0),
+		Vector2i(1, 0),
+		Vector2i(0, 0),
+		])
 	room.free()
 
 func test_create_room_start():
@@ -106,18 +96,18 @@ func test_create_room_start():
 		type=WoodsRoom.t.START,
 		})
 
-	# assert_eq(room.position, Vector2.ZERO)
-	# assert_eq(room.type, WoodsRoom.t.START)
-	# assert_eq(room.room_def.room_type, "START")
-	# assert_eq_set(room.tilemap.get_used_cells(0), [
-	# 	Vector2i(0, 2),
-	# 	Vector2i(0, 1),
-	# 	Vector2i(0, 0),
-	# 	Vector2i(1, 0),
-	# 	Vector2i(1, 2),
-	# 	Vector2i(2, 0),
-	# 	Vector2i(2, 2),
-	# 	])
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.type).is_equal(WoodsRoom.t.START)
+	assert_that(room.room_def.room_type).is_equal("START")
+	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+		Vector2i(0, 2),
+		Vector2i(0, 1),
+		Vector2i(0, 0),
+		Vector2i(1, 0),
+		Vector2i(1, 2),
+		Vector2i(2, 0),
+		Vector2i(2, 2),
+		])
 	room.free()
 
 func test_create_room_end():
@@ -127,18 +117,18 @@ func test_create_room_end():
 		type=WoodsRoom.t.END,
 		})
 
-	# assert_eq(room.position, Vector2.ZERO)
-	# assert_eq(room.type, WoodsRoom.t.END)
-	# assert_eq(room.room_def.room_type, "END")
-	# assert_eq_set(room.tilemap.get_used_cells(0), [
-	# 	Vector2i(0, 2),
-	# 	Vector2i(0, 0),
-	# 	Vector2i(1, 0),
-	# 	Vector2i(1, 2),
-	# 	Vector2i(2, 0),
-	# 	Vector2i(2, 1),
-	# 	Vector2i(2, 2),
-	# 	])
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.type).is_equal(WoodsRoom.t.END)
+	assert_that(room.room_def.room_type).is_equal("END")
+	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+		Vector2i(0, 2),
+		Vector2i(0, 0),
+		Vector2i(1, 0),
+		Vector2i(1, 2),
+		Vector2i(2, 0),
+		Vector2i(2, 1),
+		Vector2i(2, 2),
+		])
 	room.free()
 
 func test_create_room_square():
@@ -148,17 +138,17 @@ func test_create_room_square():
 		type=WoodsRoom.t.SQUARE,
 		})
 
-	# assert_eq(room.position, Vector2.ZERO)
-	# assert_eq(room.type, WoodsRoom.t.SQUARE)
-	# assert_eq(room.room_def.room_type, "SQUARE")
-	# assert_eq_set(room.tilemap.get_used_cells(0), [
-	# 	Vector2i(0, 2),
-	# 	Vector2i(1, 2),
-	# 	Vector2i(2, 2),
-	# 	Vector2i(2, 0),
-	# 	Vector2i(1, 0),
-	# 	Vector2i(0, 0),
-	# 	])
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
+	assert_that(room.room_def.room_type).is_equal("SQUARE")
+	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+		Vector2i(0, 2),
+		Vector2i(1, 2),
+		Vector2i(2, 2),
+		Vector2i(2, 0),
+		Vector2i(1, 0),
+		Vector2i(0, 0),
+		])
 	room.free()
 
 func test_create_room_long():
@@ -168,23 +158,23 @@ func test_create_room_long():
 		type=WoodsRoom.t.LONG,
 		})
 
-	# assert_eq(room.position, Vector2.ZERO)
-	# assert_eq(room.type, WoodsRoom.t.LONG)
-	# assert_eq(room.room_def.room_type, "LONG")
-	# assert_eq_set(room.tilemap.get_used_cells(0), [
-	# 	Vector2i(0, 0),
-	# 	Vector2i(1, 0),
-	# 	Vector2i(2, 0),
-	# 	Vector2i(3, 0),
-	# 	Vector2i(4, 0),
-	# 	Vector2i(5, 0),
-	# 	Vector2i(0, 2),
-	# 	Vector2i(1, 2),
-	# 	Vector2i(2, 2),
-	# 	Vector2i(3, 2),
-	# 	Vector2i(4, 2),
-	# 	Vector2i(5, 2),
-	# 	])
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.type).is_equal(WoodsRoom.t.LONG)
+	assert_that(room.room_def.room_type).is_equal("LONG")
+	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+		Vector2i(0, 0),
+		Vector2i(1, 0),
+		Vector2i(2, 0),
+		Vector2i(3, 0),
+		Vector2i(4, 0),
+		Vector2i(5, 0),
+		Vector2i(0, 2),
+		Vector2i(1, 2),
+		Vector2i(2, 2),
+		Vector2i(3, 2),
+		Vector2i(4, 2),
+		Vector2i(5, 2),
+		])
 	room.free()
 
 ## create_room based on last room ###########################################################
@@ -217,17 +207,17 @@ func test_create_room_after_start_or_square():
 		room_base_dim=dim,
 		})
 
-	# assert_gt(len(tests), 0)
-	# for test in tests:
-	# 	var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, start_room)
-	# 	assert_eq(room.rect.size, test.expected.size)
-	# 	assert_eq(room.position, test.expected.position)
+	assert_that(len(tests)).is_greater(0)
+	for test in tests:
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, start_room)
+		assert_that(room.rect.size).is_equal(test.expected.size)
+		assert_that(room.position).is_equal(test.expected.position)
 
-	# 	var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, square_room)
-	# 	assert_eq(room_sq.rect.size, test.expected.size)
-	# 	assert_eq(room_sq.position, test.expected.position)
-	# 	room.free()
-	# 	room_sq.free()
+		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, square_room)
+		assert_that(room_sq.rect.size).is_equal(test.expected.size)
+		assert_that(room_sq.position).is_equal(test.expected.position)
+		room.free()
+		room_sq.free()
 	start_room.free()
 	square_room.free()
 
@@ -253,12 +243,12 @@ func test_create_room_after_long():
 		room_base_dim=dim,
 		})
 
-	# assert_gt(len(tests), 0)
-	# for test in tests:
-	# 	var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, long_room)
-	# 	assert_eq(room.rect.size, test.expected.size)
-	# 	assert_eq(room.position, test.expected.position)
-	# 	room.free()
+	assert_that(len(tests)).is_greater(0)
+	for test in tests:
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, long_room)
+		assert_that(room.rect.size).is_equal(test.expected.size)
+		assert_that(room.position).is_equal(test.expected.position)
+		room.free()
 	long_room.free()
 
 func test_create_room_after_fall():
@@ -283,12 +273,12 @@ func test_create_room_after_fall():
 		room_base_dim=dim,
 		})
 
-	# assert_gt(len(tests), 0)
-	# for test in tests:
-	# 	var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, fall_room)
-	# 	assert_eq(room.rect.size, test.expected.size)
-	# 	assert_eq(room.position, test.expected.position)
-	# 	room.free()
+	assert_that(len(tests)).is_greater(0)
+	for test in tests:
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, fall_room)
+		assert_that(room.rect.size).is_equal(test.expected.size)
+		assert_that(room.position).is_equal(test.expected.position)
+		room.free()
 	fall_room.free()
 
 func test_create_room_after_climb():
@@ -313,10 +303,10 @@ func test_create_room_after_climb():
 		room_base_dim=dim,
 		})
 
-	# assert_gt(len(tests), 0)
-	# for test in tests:
-	# 	var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, climb_room)
-	# 	assert_eq(room.rect.size, test.expected.size)
-	# 	assert_eq(room.position, test.expected.position)
-	# 	room.free()
+	assert_that(len(tests)).is_greater(0)
+	for test in tests:
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, climb_room)
+		assert_that(room.rect.size).is_equal(test.expected.size)
+		assert_that(room.position).is_equal(test.expected.position)
+		room.free()
 	climb_room.free()
