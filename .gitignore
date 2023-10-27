@@ -24,7 +24,8 @@ dist.zip
 /.clj-kondo/.cache
 /.lsp
 
-.gut_editor_config.json
 /.godot/
 
 build/build-output/
+
+reports/
