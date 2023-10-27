@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: Godot Dev Env
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
 
     - name: Cache Godot files
       id: cache-godot
@@ -29,18 +30,6 @@ jobs:
         unzip Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64.zip
         mv Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64 /usr/local/bin/godot
 
-
-    # - name: Initial Godot import
-    #   shell: bash
-    #   run: |
-    #     godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
-    #     godot --editor --headless --quit || exit 0
-
-    # - name: Run tests
-    #   shell: bash
-    #   run: godot --headless --path . --debug --script addons/gut/gut_cmdln.gd -gexit
-    #   timeout-minutes: 10
-
     # https://github.com/MikeSchulze/gdUnit4/blob/master/.github/workflows/ci-pr-example.yml
     - name: "Update Project"
       shell: bash
@@ -53,20 +42,3 @@ jobs:
       run: |
         chmod +x ./addons/gdUnit4/runtest.sh
         xvfb-run --auto-servernum ./addons/gdUnit4/runtest.sh --add "res://test" --audio-driver Dummy --display-driver x11 --rendering-driver opengl3 --screen 0 --continue
-
-    - name: "Publish Test Report"
-      uses: dorny/test-reporter@v1.6.0
-      with:
-        name: "test_report"
-        path: "reports/**/results.xml"
-        reporter: java-junit
-        fail-on-error: 'false'
-
-    - name: "Upload Unit Test Reports"
-      uses: actions/upload-artifact@v3
-      with:
-        name: "test_report"
-        path: |
-          reports/**
-          /var/lib/systemd/coredump/**
-          /var/log/syslog
