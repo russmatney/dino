@@ -1,7 +1,7 @@
 #+title: dino
 
-#+name: GUT Tests
-[[https://github.com/russmatney/dino/actions/workflows/gut_tests.yml/badge.svg]]
+#+name: Unit Tests
+[[https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg]]
 
 #+name: Itch Deploy
 [[https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg]]

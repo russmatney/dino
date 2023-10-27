@@ -2,7 +2,7 @@ name: Itch.io Deploy
 
 on:
   workflow_run:
-    workflows: [GUT Tests]
+    workflows: ["Unit Tests"]
     types: [completed]
     branches: [edge, prod]
 
