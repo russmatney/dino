@@ -1,9 +1,7 @@
-extends GutTest
-
-func assert_eq_set(a, b):
-	a.sort()
-	b.sort()
-	assert_eq_deep(a, b)
+class_name PluggsRoomTest
+extends GdUnitTestSuite
+@warning_ignore("unused_parameter")
+@warning_ignore("return_value_discarded")
 
 ## gen_room_def ##################################################################
 
@@ -30,8 +28,8 @@ xp.
 x..
 "})
 
-	assert_eq(room.name, "Test Room")
-	assert_eq(room.shape, [
+	assert_that(room.name).is_equal("Test Room")
+	assert_that(room.shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], ["Player"], null],
 		[["Tile"], null, null]
@@ -70,8 +68,8 @@ x..
 		contents=contents,
 		filter_rooms=func(room): return room.get("funky")})
 
-	assert_eq(room.name, "Funky Test Room")
-	assert_eq(room.shape, [
+	assert_that(room.name).is_equal("Funky Test Room")
+	assert_that(room.shape).is_equal([
 		[null, null, null],
 		[null, null, null],
 		[["Tile"], null, null]
@@ -81,8 +79,8 @@ x..
 		contents=contents,
 		filter_rooms=func(room): return not room.get("funky")})
 
-	assert_eq(room_2.name, "Test Room")
-	assert_eq(room_2.shape, [
+	assert_that(room_2.name).is_equal("Test Room")
+	assert_that(room_2.shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], ["Player"], null],
 		[["Tile"], null, null]
@@ -113,31 +111,31 @@ xxx
 
 func test_create_room_basic():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
-	assert_eq(room.name, "Test Room")
-	assert_eq(room.position, Vector2.ZERO)
+	assert_that(room.name).is_equal("Test Room")
+	assert_that(room.position).is_equal(Vector2.ZERO)
 	room.free()
 
 func test_create_room_based_on_last_room():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
 	var another_room = PluggsRoom.create_room({contents=pluggs_room_contents}, room)
-	assert_eq(another_room.name, "Test Room")
+	assert_that(another_room.name).is_equal("Test Room")
 	# y is 16 b/c of the align-floor logic - moves down to smoothly transition between rooms
-	assert_eq(another_room.position, Vector2(48,16)) # 3 x 16 = 48
+	assert_that(another_room.position).is_equal(Vector2(48,16)) # 3 x 16 = 48
 	room.free()
 	another_room.free()
 
 func test_create_room_color_rect():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
-	assert_eq(room.name, "Test Room")
-	assert_eq(room.position, Vector2.ZERO)
-	assert_eq(room.rect.size, Vector2(48, 48))
+	assert_that(room.name).is_equal("Test Room")
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.rect.size).is_equal(Vector2(48,48))
 	room.free()
 
 func test_create_room_tilemap():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
-	assert_eq(room.name, "Test Room")
-	assert_eq(room.position, Vector2.ZERO)
-	assert_eq_set(room.tilemap.get_used_cells(0), [
+	assert_that(room.name).is_equal("Test Room")
+	assert_that(room.position).is_equal(Vector2.ZERO)
+	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0,1),
 		Vector2i(0,2),
 		Vector2i(1,2),

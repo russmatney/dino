@@ -129,6 +129,9 @@ static func create_room(opts={}, last_room=null) -> WoodsRoom:
 	room.add_child(rec)
 
 	var def = room_for_type(typ, opts)
+	if def == null:
+		Debug.err("No room def created for type", typ, opts)
+		return
 	room.room_def = def
 
 	var tmap_scene = Util.get_(opts, "tilemap_scene", fallback_tmap_scene)

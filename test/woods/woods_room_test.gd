@@ -62,7 +62,7 @@ x.x
 xxx
 "
 
-var room_defs_path = "res://test/unit/src/woods/room_defs_test.txt"
+var room_defs_path = "res://test/woods/room_defs_test.txt"
 
 ## setup ###########################################################
 
@@ -73,7 +73,8 @@ func before_all():
 ## create_room ###########################################################
 
 func test_create_room_empty_dict():
-	var room = WoodsRoom.create_room({room_defs_path=room_defs_path,
+	var room = WoodsRoom.create_room({
+		room_defs_path=room_defs_path,
 		filler_tile_count=0})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
@@ -209,11 +210,15 @@ func test_create_room_after_start_or_square():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, start_room)
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+			room_defs_path=room_defs_path,
+			}, start_room)
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 
-		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, square_room)
+		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+			room_defs_path=room_defs_path,
+			}, square_room)
 		assert_that(room_sq.rect.size).is_equal(test.expected.size)
 		assert_that(room_sq.position).is_equal(test.expected.position)
 		room.free()
@@ -245,7 +250,9 @@ func test_create_room_after_long():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, long_room)
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+			room_defs_path=room_defs_path,
+			}, long_room)
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 		room.free()
@@ -275,7 +282,9 @@ func test_create_room_after_fall():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, fall_room)
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+			room_defs_path=room_defs_path,
+			}, fall_room)
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 		room.free()
@@ -305,7 +314,9 @@ func test_create_room_after_climb():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim}, climb_room)
+		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+			room_defs_path=room_defs_path,
+			}, climb_room)
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 		room.free()
