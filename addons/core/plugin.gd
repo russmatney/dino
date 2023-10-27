@@ -11,7 +11,7 @@ func _enter_tree():
 	add_autoload_singleton("Util", "res://addons/core/Util.gd")
 	add_autoload_singleton("Debug", "res://addons/core/Debug.gd")
 
-	Debug.prn("<Core>")
+	print("<Core>")
 
 	editor_interface = get_editor_interface()
 
@@ -25,7 +25,7 @@ func _enter_tree():
 
 
 func _exit_tree():
-	Debug.prn("</Core>")
+	print("</Core>")
 	remove_autoload_singleton("Util")
 	remove_autoload_singleton("Debug")
 

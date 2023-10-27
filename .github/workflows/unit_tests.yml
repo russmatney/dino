@@ -45,7 +45,7 @@ jobs:
     - name: "Update Project"
       shell: bash
       run: |
-        godot -e --path . -s res://addons/gdUnit4/bin/ProjectScanner.gd --headless --audio-driver Dummy
+        godot -e --path . -s res://addons/gdUnit4/bin/ProjectScanner.gd --headless --audio-driver Dummy || exit 0
 
     - name: "Run Unit Tests"
       timeout-minutes: 10
