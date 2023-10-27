@@ -389,7 +389,7 @@ func _initialize():
 
 
 func _finalize():
-	prints("Finallize ..")
+	prints("Finalize ..")
 	_cli_runner.free()
 	prints("-Orphan nodes report-----------------------")
 	Window.print_orphan_nodes()
