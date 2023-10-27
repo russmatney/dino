@@ -214,29 +214,6 @@
      :repo-id            repo-id
      :repo-path          (str dir-prefix "/" repo-id)}))
 
-(comment
-  (name :gut)
-  (name :bitwes/Gut)
-  (name "gut")
-  (namespace "gut")
-  (str :bitwes/Gut)
-  (namespace :bitwes/Gut)
-  (namespace :gut)
-  (str (ns :bitwes/Gut) (name :bitwes/Gut))
-  (=
-    (->>
-      {:gut     "bitwes/Gut"
-       "gut"    "bitwes/Gut/addons/gut"
-       :gut-2   :bitwes/Gut
-       :beehive :russmatney/dino
-       }
-      (map input->godot-dep)
-      (into []))
-
-    [{:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
-     {:addon-name "gut", :addon-path "bitwes/Gut/addons/gut"}
-     {:addon-name "gut-2", :addon-path "bitwes/Gut/addons/gut-2"}]))
-
 (defn git-status-addons [addons & dir-prefix]
   (doall
     (->>

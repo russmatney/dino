@@ -251,7 +251,7 @@ Here's a bit of the current bb.edn for this project
      :gut           :bitwes/Gut})}}
 #+end_src
 
-A project consuming some of dino's addons (plus GUT) might look like:
+A project consuming some of dino's addons (plus gdunit) might look like:
 
 #+begin_src clojure
 {:tasks
@@ -259,7 +259,7 @@ A project consuming some of dino's addons (plus GUT) might look like:
 
   install-addons
   (tasks/install-addons
-    {:gut           :bitwes/Gut
+    {:gdUnit4       :MikeSchulze/gdUnit4
      :navi          :russmatney/dino
      :dj            :russmatney/dino
      :trolley       :russmatney/dino
@@ -403,9 +403,12 @@ MIT License
 *** teeb.text-effects teeb.text_transitions
 https://github.com/teebarjunk/godot-text_effects
 MIT License
-*** GUT
+*** GDUnit4
+https://github.com/MikeSchulze/gdUnit4
 *** AsepriteWizard
+https://github.com/viniciusgerevini/godot-aseprite-wizard
 *** Pandora
+https://github.com/bitbrain/pandora
 ** Code Contributors
 - Joshua Skrzypek
 ** Patrons

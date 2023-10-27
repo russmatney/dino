@@ -2,16 +2,14 @@
 extends EditorPlugin
 
 var reload_scene_btn = Button.new()
-# var reload_games_btn = Button.new()
 var container = 0
 var editor_interface
 
 
 func _enter_tree():
+	print("<Core>")
 	add_autoload_singleton("Util", "res://addons/core/Util.gd")
 	add_autoload_singleton("Debug", "res://addons/core/Debug.gd")
-
-	print("<Core>")
 
 	editor_interface = get_editor_interface()
 
@@ -19,15 +17,11 @@ func _enter_tree():
 	reload_scene_btn.text = "Reload Scene"
 	add_control_to_container(container, reload_scene_btn)
 
-	# reload_games_btn.pressed.connect(reload_games)
-	# reload_games_btn.text = "Reload Games"
-	# add_control_to_container(container, reload_games_btn)
-
 
 func _exit_tree():
-	print("</Core>")
 	remove_autoload_singleton("Util")
 	remove_autoload_singleton("Debug")
+	print("</Core>")
 
 
 func reload_scene():
