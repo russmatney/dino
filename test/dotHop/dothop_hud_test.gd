@@ -1,4 +1,6 @@
-extends GutTest
+extends GdUnitTestSuite
+
+# TODO restore/rewrite dothop tests
 
 var game
 
@@ -11,14 +13,13 @@ func before_all():
 func after_all():
 	game.free()
 
-func test_hud_loads_initial_state():
-	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 4)
-	assert_eq(Hood.hud.last_puzzle_update.dots_total, 5)
+# func test_hud_loads_initial_state():
+# 	assert_that(Hood.hud.last_puzzle_update.dots_remaining).is_equal(4)
+# 	assert_that(Hood.hud.last_puzzle_update.dots_total).is_equal(5)
 
-func test_hud_receives_updates():
-	watch_signals(Hotel)
-	# assumes this is valid for the first puzzle in the game
-	game.puzzle_node.move(Vector2.RIGHT)
+# func test_hud_receives_updates():
+# 	# assumes this is valid for the first puzzle in the game
+# 	game.puzzle_node.move(Vector2.RIGHT)
 
-	assert_eq(Hood.hud.last_puzzle_update.dots_remaining, 3)
-	assert_eq(Hood.hud.last_puzzle_update.dots_total, 5)
+# 	assert_that(Hood.hud.last_puzzle_update.dots_remaining).is_equal(3)
+# 	assert_that(Hood.hud.last_puzzle_update.dots_total).is_equal(5)

@@ -1,4 +1,4 @@
-extends GutTest
+extends GdUnitTestSuite
 class_name DotHopTest
 
 func build_puzzle(puzzle):
@@ -11,21 +11,21 @@ class TestBasicMovement:
 		var level = build_puzzle(["xoot"])
 		add_child(level)
 
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
-		assert_eq(level.state.win, true)
+		assert_that(level.state.win).is_equal(true)
 
 		level.free()
 
@@ -34,25 +34,25 @@ class TestBasicMovement:
 		var level = build_puzzle(["xoot"])
 		add_child(level)
 
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.LEFT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Undo"], ["Dotted", "Player"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.LEFT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 
 		level.free()
 
@@ -64,64 +64,64 @@ class TestBasicMovementTwoPlayers:
 		var level = build_puzzle(["xoot", "xoot"])
 		add_child(level)
 
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted"], ["Dotted"], ["Dotted", "Undo"], ["Goal", "Player"]])
-		assert_eq(level.state.win, true)
+		assert_that(level.state.win).is_equal(true)
 		level.free()
 
 	func test_level_one_undo():
 		var level = build_puzzle(["xoot", "xoot"])
 		add_child(level)
 
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Player", "Dotted"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted", "Undo"], ["Player", "Dotted"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.RIGHT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted"], ["Dotted", "Undo"], ["Player", "Dotted"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.LEFT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Undo"], ["Dotted", "Player"], ["Dot"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted", "Undo"], ["Dotted", "Player"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.move(Vector2.LEFT)
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted", "Player"], ["Dot"], ["Dot"], ["Goal"]])
-		assert_eq(level.state.win, false)
+		assert_that(level.state.win).is_equal(false)
 		level.free()
 
 class TestTwoPlayerInPlaceUndoBugs:
@@ -141,18 +141,18 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.move(Vector2.RIGHT)
 		level.move(Vector2.UP)
 
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[null, null, ["Dotted", "Undo"], ["Player", "Dotted"]])
-		assert_eq_deep(level.state.grid[2],
+		assert_that(level.state.grid[2]).is_equal(
 			[null, null, ["Dotted"], ["Dotted", "Undo"]])
 
 		level.move(Vector2.DOWN)
 
 		# This path was producing an extra "Undo" in the state grid,
 		# when the second player didn't move during an undo
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[null, null, ["Dotted", "Undo"], ["Player", "Dotted"]])
-		assert_eq_deep(level.state.grid[2],
+		assert_that(level.state.grid[2]).is_equal(
 			[null, null, ["Dotted", "Undo"], ["Dotted", "Player"]])
 
 		level.free()
@@ -171,41 +171,41 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.move(Vector2.LEFT)
 		level.move(Vector2.LEFT)
 
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Goal"], ["Dotted", "Undo"], null, null, ["Player", "Dotted"], null, ["Dot"]])
-		assert_eq_deep(level.state.grid[2],
+		assert_that(level.state.grid[2]).is_equal(
 			[["Player", "Dotted"], ["Dotted", "Undo"], null, ["Dotted"], null, ["Dotted"], null])
 
 		level.move(Vector2.DOWN)
 
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Goal"], ["Dotted", "Undo"], null, null, ["Player", "Dotted"], null, ["Dot"]])
 
 		level.move(Vector2.UP)
 
 		# here we should have moved the top player's undo along
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Goal"], ["Dotted"], null, null, ["Dotted", "Undo"], null, ["Dot"]])
 
 		level.move(Vector2.RIGHT)
 		level.move(Vector2.DOWN)
 
-		assert_eq_deep(level.state.grid[0],
+		assert_that(level.state.grid[0]).is_equal(
 			[null, null, null, null, ["Dotted"], null, ["Dotted", "Undo"]])
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Goal"], ["Dotted" # extra UNDO here?
 				], null, null, ["Dotted"], null, ["Player", "Dotted"]])
-		assert_eq_deep(level.state.grid[2],
+		assert_that(level.state.grid[2]).is_equal(
 			[["Dotted", "Undo"], ["Dotted"], null, ["Dotted"], null, ["Dotted"], null])
-		assert_eq_deep(level.state.grid[3],
+		assert_that(level.state.grid[3]).is_equal(
 			[["Goal", "Player"], null, null, null, null, null, null])
 
 		level.move(Vector2.LEFT)
-		assert_eq(level.state.win, true)
+		assert_that(level.state.win).is_equal(true)
 
 		level.free()
 
-		# assert_eq_deep(level.state.grid[2],
+		# assert_that(level.state.grid[2],
 		# 	[null, null, ["Dotted"], ["Dotted", "Undo"]])
 
 	func test_can_finish_level_10():
@@ -231,7 +231,7 @@ class TestTwoPlayerInPlaceUndoBugs:
 		level.move(Vector2.DOWN)
 		level.move(Vector2.LEFT)
 
-		assert_eq(level.state.win, true)
+		assert_that(level.state.win).is_equal(true)
 
 		level.free()
 
@@ -255,14 +255,14 @@ class TestUndoBugs:
 		level.move(Vector2.DOWN)
 		level.move(Vector2.RIGHT)
 
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted", "Undo"], ["Dotted"], ["Dotted"], ["Dotted"], ["Goal", "Player"]])
-		assert_eq(level.state.players[0].stuck, true)
+		assert_that(level.state.players[0].stuck).is_equal(true)
 
 		level.move(Vector2.LEFT)
 
-		assert_eq(level.state.players[0].stuck, false)
-		assert_eq_deep(level.state.grid[1],
+		assert_that(level.state.players[0].stuck).is_equal(false)
+		assert_that(level.state.grid[1]).is_equal(
 			[["Dotted", "Player"], ["Dotted"], ["Dotted"], ["Dotted"], ["Goal"]])
 
 		level.free()

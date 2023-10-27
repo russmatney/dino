@@ -1,7 +1,5 @@
 class_name PluggsRoomTest
 extends GdUnitTestSuite
-@warning_ignore("unused_parameter")
-@warning_ignore("return_value_discarded")
 
 ## gen_room_def ##################################################################
 

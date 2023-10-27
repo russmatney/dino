@@ -1,7 +1,7 @@
-extends GutTest
+extends GdUnitTestSuite
 
 class TestSimpleBlockPushingGamePrelude:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -10,15 +10,15 @@ class TestSimpleBlockPushingGamePrelude:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_prelude():
-		assert_has(parsed, "prelude", "prelude not parsed")
-		assert_eq(parsed.prelude.title, "Simple Block Pushing Game")
-		assert_eq(parsed.prelude.author, "David Skinner")
-		assert_eq(parsed.prelude.homepage, "www.puzzlescript.net")
-		assert_eq(parsed.prelude.debug, true)
+		assert_that(parsed).contains_keys(["prelude"])
+		assert_that(parsed.prelude.title).is_equal("Simple Block Pushing Game")
+		assert_that(parsed.prelude.author).is_equal("David Skinner")
+		assert_that(parsed.prelude.homepage).is_equal("www.puzzlescript.net")
+		assert_that(parsed.prelude.debug).is_equal(true)
 
 
 class TestSimpleBlockPushingGameObjects:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -28,13 +28,13 @@ class TestSimpleBlockPushingGameObjects:
 
 
 	func test_objects():
-		assert_has(parsed, "objects", "objects not parsed")
+		assert_that(parsed).contains_keys(["objects"])
 
 	func test_objects_background():
-		assert_has(parsed.objects, "Background", "Background object not parsed")
-		assert_eq(parsed.objects.Background.name, "Background")
-		assert_eq_deep(parsed.objects.Background.colors, ["lightgreen", "green"])
-		assert_eq_deep(parsed.objects.Background.shape, [
+		assert_that(parsed.objects).contains_keys("Background")
+		assert_that(parsed.objects.Background.name).is_equal("Background")
+		assert_that(parsed.objects.Background.colors).is_equal(["lightgreen", "green"])
+		assert_that(parsed.objects.Background.shape).is_equal([
 			[1, 1, 1, 1, 1],
 			[0, 1, 1, 1, 1],
 			[1, 1, 1, 0, 1],
@@ -43,10 +43,10 @@ class TestSimpleBlockPushingGameObjects:
 			])
 
 	func test_objects_target():
-		assert_has(parsed.objects, "Target", "Target object not parsed")
-		assert_eq(parsed.objects.Target.name, "Target")
-		assert_eq(parsed.objects.Target.colors, ["darkblue"])
-		assert_eq(parsed.objects.Target.shape, [
+		assert_that(parsed.objects).contains_keys("Target")
+		assert_that(parsed.objects.Target.name).is_equal("Target")
+		assert_that(parsed.objects.Target.colors).is_equal(["darkblue"])
+		assert_that(parsed.objects.Target.shape).is_equal([
 			[null, null, null, null, null],
 			[null, 0, 0, 0, null],
 			[null, 0, null, 0, null],
@@ -55,10 +55,10 @@ class TestSimpleBlockPushingGameObjects:
 			])
 
 	func test_objects_wall():
-		assert_has(parsed.objects, "Wall", "Wall object not parsed")
-		assert_eq(parsed.objects.Wall.name, "Wall")
-		assert_eq(parsed.objects.Wall.colors, ["brown", "darkbrown"])
-		assert_eq(parsed.objects.Wall.shape, [
+		assert_that(parsed.objects).contains_keys(["Wall"])
+		assert_that(parsed.objects.Wall.name).is_equal("Wall")
+		assert_that(parsed.objects.Wall.colors).is_equal(["brown", "darkbrown"])
+		assert_that(parsed.objects.Wall.shape).is_equal([
 			[0, 0, 0, 1, 0],
 			[1, 1, 1, 1, 1],
 			[0, 1, 0, 0, 0],
@@ -67,11 +67,11 @@ class TestSimpleBlockPushingGameObjects:
 			])
 
 	func test_objects_player():
-		assert_has(parsed.objects, "Player", "Player object not parsed")
-		assert_eq(parsed.objects.Player.name, "Player")
-		assert_eq(parsed.objects.Player.symbol, "P")
-		assert_eq(parsed.objects.Player.colors, ["black", "orange", "white", "blue"])
-		assert_eq(parsed.objects.Player.shape, [
+		assert_that(parsed.objects).contains_keys(["Player"])
+		assert_that(parsed.objects.Player.name).is_equal("Player")
+		assert_that(parsed.objects.Player.symbol).is_equal("P")
+		assert_that(parsed.objects.Player.colors).is_equal(["black", "orange", "white", "blue"])
+		assert_that(parsed.objects.Player.shape).is_equal([
 			[null, 0, 0, 0, null],
 			[null, 1, 1, 1, null],
 			[2, 2, 2, 2, 2],
@@ -80,10 +80,10 @@ class TestSimpleBlockPushingGameObjects:
 			])
 
 	func test_objects_crate():
-		assert_has(parsed.objects, "Crate", "Crate object not parsed")
-		assert_eq(parsed.objects.Crate.name, "Crate")
-		assert_eq(parsed.objects.Crate.colors, ["orange"])
-		assert_eq(parsed.objects.Crate.shape, [
+		assert_that(parsed.objects).contains_keys(["Crate"])
+		assert_that(parsed.objects.Crate.name).is_equal("Crate")
+		assert_that(parsed.objects.Crate.colors).is_equal(["orange"])
+		assert_that(parsed.objects.Crate.shape).is_equal([
 			[0, 0, 0, 0, 0],
 			[0, null, null, null, 0],
 			[0, null, null, null, 0],
@@ -92,7 +92,7 @@ class TestSimpleBlockPushingGameObjects:
 			])
 
 class TestSimpleBlockPushingGameLegend:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -101,19 +101,19 @@ class TestSimpleBlockPushingGameLegend:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_legend():
-		assert_has(parsed, "legend", "legend not parsed")
+		assert_that(parsed).contains_keys(["legend"])
 
 		# add coverage for 'and' vs 'or'
-		assert_eq(parsed.legend["."], ["Background"])
-		assert_eq(parsed.legend["#"], ["Wall"])
-		assert_eq(parsed.legend["P"], ["Player"])
-		assert_eq(parsed.legend["*"], ["Crate"])
-		assert_eq(parsed.legend["@"], ["Crate", "Target"])
-		assert_eq(parsed.legend["O"], ["Target"])
-		assert_eq(parsed.legend["X"], ["Crate", "Player"])
+		assert_that(parsed.legend["."]).is_equal(["Background"])
+		assert_that(parsed.legend["#"]).is_equal(["Wall"])
+		assert_that(parsed.legend["P"]).is_equal(["Player"])
+		assert_that(parsed.legend["*"]).is_equal(["Crate"])
+		assert_that(parsed.legend["@"]).is_equal(["Crate", "Target"])
+		assert_that(parsed.legend["O"]).is_equal(["Target"])
+		assert_that(parsed.legend["X"]).is_equal(["Crate", "Player"])
 
 class TestSimpleBlockPushingGameSounds:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -122,15 +122,14 @@ class TestSimpleBlockPushingGameSounds:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_sounds():
-		assert_has(parsed, "sounds", "sounds not parsed")
-
-		assert_eq_deep(parsed.sounds, [
+		assert_that(parsed).contains_keys(["sounds"])
+		assert_that(parsed.sounds).is_equal([
 			# perhaps a map? I'm sure there are lots of cases/other names
 			["Crate", "move", "36772507"]
 			])
 
 class TestSimpleBlockPushingGameCollisionLayers:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -139,16 +138,15 @@ class TestSimpleBlockPushingGameCollisionLayers:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_collision_layers():
-		assert_has(parsed, "collisionlayers", "collisionlayers not parsed")
-
-		assert_eq_deep(parsed.collisionlayers, [
+		assert_that(parsed).contains_keys(["collisionlayers"])
+		assert_that(parsed.collisionlayers).is_equal([
 			["Background"],
 			["Target"],
 			["Player", "Wall", "Crate"],
 			])
 
 class TestSimpleBlockPushingGameRules:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -157,8 +155,8 @@ class TestSimpleBlockPushingGameRules:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_rules():
-		assert_has(parsed, "rules", "rules not parsed")
-		assert_eq_deep(parsed.rules, [{
+		assert_that(parsed).contains_keys(["rules"])
+		assert_that(parsed.rules).is_equal([{
 				pattern=[[">", "Player"], ["Crate"]],
 				update=[[">", "Player"], [">", "Crate"]]
 				}, {
@@ -168,7 +166,7 @@ class TestSimpleBlockPushingGameRules:
 			])
 
 class TestSimpleBlockPushingGameWinConditions:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -177,12 +175,12 @@ class TestSimpleBlockPushingGameWinConditions:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_winconditions():
-		assert_has(parsed, "winconditions", "winconditions not parsed")
-		assert_eq_deep(parsed.winconditions, [["all", "Target", "on", "Crate"]])
+		assert_that(parsed).contains_keys(["winconditions"])
+		assert_that(parsed.winconditions).is_equal([["all", "Target", "on", "Crate"]])
 
 
 class TestSimpleBlockPushingGameLevels:
-	extends GutTest
+	extends GdUnitTestSuite
 
 	var parsed
 
@@ -191,11 +189,11 @@ class TestSimpleBlockPushingGameLevels:
 		parsed = Puzz.parse_game_def(path)
 
 	func test_levels():
-		assert_has(parsed, "levels", "levels not parsed")
-		assert_eq(len(parsed.levels), 3)
+		assert_that(parsed).contains_keys(["levels"])
+		assert_that(len(parsed.levels)).is_equal(3)
 
 	func test_level_first():
-		assert_eq_deep(parsed.levels[0].shape, [
+		assert_that(parsed.levels[0].shape).is_equal([
 			["#", "#", "#", "#", null, null],
 			["#", null, "O", "#", null, null],
 			["#", null, null, "#", "#", "#"],
@@ -206,8 +204,8 @@ class TestSimpleBlockPushingGameLevels:
 			])
 
 	func test_level_second():
-		assert_eq(parsed.levels[1].message, "level 2 begins")
-		assert_eq_deep(parsed.levels[1].shape, [
+		assert_that(parsed.levels[1].message).is_equal("level 2 begins")
+		assert_that(parsed.levels[1].shape).is_equal([
 			["#", "#", "#", "#", "#", "#"],
 			["#", null, null, null, null, "#"],
 			["#", null, "#", "P", null, "#"],
@@ -218,5 +216,5 @@ class TestSimpleBlockPushingGameLevels:
 			])
 
 	func test_level_final():
-		assert_eq(parsed.levels[2].message, "game complete!")
-		assert_eq(parsed.levels[2].shape, null)
+		assert_that(parsed.levels[2].message).is_equal("game complete!")
+		assert_that(parsed.levels[2].shape).is_null()

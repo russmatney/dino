@@ -1,11 +1,11 @@
-extends GutTest
+extends GdUnitTestSuite
 
 
 func test_prelude():
 	var parsed = RoomParser.parse("title PuzzRooms")
 
-	assert_has(parsed, "prelude", "prelude not parsed")
-	assert_eq(parsed.prelude.title, "PuzzRooms")
+	assert_that(parsed).contains_keys(["prelude"])
+	assert_that(parsed.prelude.title).is_equal("PuzzRooms")
 
 func test_legend():
 	var parsed = RoomParser.parse("title PuzzRooms
@@ -19,10 +19,10 @@ p = Player
 x = Tile
 ")
 
-	assert_has(parsed, "legend", "legend not parsed")
-	assert_eq(parsed.legend["."], ["Empty"])
-	assert_eq(parsed.legend["p"], ["Player"])
-	assert_eq(parsed.legend["x"], ["Tile"])
+	assert_that(parsed).contains_keys(["legend"])
+	assert_that(parsed.legend["."]).is_equal(["Empty"])
+	assert_that(parsed.legend["p"]).is_equal(["Player"])
+	assert_that(parsed.legend["x"]).is_equal(["Tile"])
 
 
 func test_rooms():
@@ -54,21 +54,21 @@ x...p.
 x.....
 ")
 
-	assert_has(parsed, "rooms", "rooms not parsed")
-	assert_eq(len(parsed.rooms), 2)
+	assert_that(parsed).contains_keys(["rooms"])
+	assert_that(len(parsed.rooms)).is_equal(2)
 
 	# arbitrary metadata
-	assert_eq(parsed.rooms[0].room_type, "SQUARE")
-	assert_eq(parsed.rooms[1].room_type, "LONG")
-	assert_eq(parsed.rooms[0].is_start, true)
+	assert_that(parsed.rooms[0].room_type).is_equal("SQUARE")
+	assert_that(parsed.rooms[1].room_type).is_equal("LONG")
+	assert_that(parsed.rooms[0].is_start).is_equal(true)
 
 	# shape
-	assert_eq(parsed.rooms[0].shape, [
+	assert_that(parsed.rooms[0].shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], ["Player"], null],
 		[["Tile"], null, null]
 		])
-	assert_eq(parsed.rooms[1].shape, [
+	assert_that(parsed.rooms[1].shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], null, null, null, ["Player"], null],
 		[["Tile"], null, null, null, null, null],
@@ -104,20 +104,20 @@ x.....
 
 ")
 
-	assert_has(parsed, "rooms", "rooms not parsed")
-	assert_eq(len(parsed.rooms), 2)
+	assert_that(parsed).contains_keys(["rooms"])
+	assert_that(len(parsed.rooms)).is_equal(2)
 
 	# arbitrary metadata
-	assert_eq(parsed.rooms[0].room_name, "A")
-	assert_eq(parsed.rooms[1].room_name, "B")
+	assert_that(parsed.rooms[0].room_name).is_equal("A")
+	assert_that(parsed.rooms[1].room_name).is_equal("B")
 
 	# shape
-	assert_eq(parsed.rooms[0].shape, [
+	assert_that(parsed.rooms[0].shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], null, null],
 		[["Tile"], null, null]
 		])
-	assert_eq(parsed.rooms[1].shape, [
+	assert_that(parsed.rooms[1].shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], null, null, null, null, null],
 		[["Tile"], null, null, null, null, null],
