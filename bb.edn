@@ -6,21 +6,11 @@
              [clojure.string :as string])
 
   :init
-  (do
-    (log "bb.edn running task")
-    (def gut "godot --headless --path . -d -s addons/gut/gut_cmdln.gd ")
-    (def gut-with-window "godot -path . -d -s addons/gut/gut_cmdln.gd ")
+  (do (log "bb.edn running task"))
 
-    (def addons-map
-      {:gut   :bitwes/Gut
-       :inkgd :ephread/inkgd}))
-
-  test-with-window  (tasks/shell-and-log (str gut-with-window " -gexit"))
-  test              (tasks/shell-and-log (str gut " -gexit"))
-  test-match        (let [arg (some-> *command-line-args* first)]
-                      (tasks/shell-and-log (str gut " -gexit -gunit_test_name=" arg)))
-  test-match-script (let [arg (some-> *command-line-args* first)]
-                      (tasks/shell-and-log (str gut " -gexit -gselect=" arg)))
+  test       (tasks/shell-and-log (str "./addons/gdUnit4/runtest.sh -c -a test"))
+  test-match (let [arg (some-> *command-line-args* first)]
+               (tasks/shell-and-log (str "./addons/gdUnit4/runtest.sh -c -a " arg)))
 
   watch tasks/watch
 
@@ -62,13 +52,4 @@
 
                 ;; (println command)
                 ;; http-server installable via bbin
-                (tasks/shell-and-log command))
-
-  install-script-templates
-  (apply tasks/install-script-templates
-         #{"kagenash1/godot-behavior-tree/script_templates"}
-         *command-line-args*)
-
-  addons         (apply tasks/addons addons-map *command-line-args*)
-  addons-install (apply tasks/install-addons addons-map *command-line-args*)
-  addons-clone   (apply tasks/clone-addons addons-map *command-line-args*)}}
+                (tasks/shell-and-log command))}}
