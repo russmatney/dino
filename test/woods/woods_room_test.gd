@@ -79,7 +79,7 @@ func test_create_room_empty_dict():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
-	assert_that(room.room_def.room_type).is_equal("SQUARE")
+	assert_that(room.room_def.meta.room_type).is_equal("SQUARE")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(1, 2),
@@ -99,7 +99,7 @@ func test_create_room_start():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.START)
-	assert_that(room.room_def.room_type).is_equal("START")
+	assert_that(room.room_def.meta.room_type).is_equal("START")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(0, 1),
@@ -120,7 +120,7 @@ func test_create_room_end():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.END)
-	assert_that(room.room_def.room_type).is_equal("END")
+	assert_that(room.room_def.meta.room_type).is_equal("END")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(0, 0),
@@ -141,7 +141,7 @@ func test_create_room_square():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
-	assert_that(room.room_def.room_type).is_equal("SQUARE")
+	assert_that(room.room_def.meta.room_type).is_equal("SQUARE")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(1, 2),
@@ -161,7 +161,7 @@ func test_create_room_long():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.LONG)
-	assert_that(room.room_def.room_type).is_equal("LONG")
+	assert_that(room.room_def.meta.room_type).is_equal("LONG")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 0),
 		Vector2i(1, 0),

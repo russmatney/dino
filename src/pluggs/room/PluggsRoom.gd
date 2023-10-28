@@ -100,33 +100,13 @@ static func add_rect(room: PluggsRoom, opts: Dictionary):
 ## room gen ##################################################################
 
 static func gen_room_def(opts={}):
-	Util.ensure_default(opts, "flags", [])
-	Util.ensure_default(opts, "skip_flags", [])
+	var room_defs = RoomParser.parse(opts)
+	Debug.pr("parsed room_defs", room_defs)
+	var filtered_rooms = room_defs.filter(opts)
+	Debug.pr("filtered rooms", filtered_rooms)
 
-	var parsed_rooms_def = RoomParser.parse_room_defs(opts)
-	var room_defs = parsed_rooms_def.rooms
-
-	if opts.get("filter_rooms"):
-		room_defs = room_defs.filter(opts.filter_rooms)
-
-	if len(opts.flags) > 0:
-		room_defs = room_defs.filter(func(r):
-			for flag in opts.flags:
-				if flag in r and r[flag]: #move to room.meta when RoomDef type exists
-					return true)
-
-	if len(opts.skip_flags) > 0:
-		room_defs = room_defs.filter(func(r):
-			for flag in opts.skip_flags:
-				if flag in r and r[flag]: #move to room.meta when RoomDef type exists
-					return false
-			return true)
-
-	if len(room_defs) == 0:
-		Debug.err("Could not find room_def matching `filter_rooms` and `flags`", opts.flags)
-		return
-
-	return Util.rand_of(room_defs)
+	if filtered_rooms != null:
+		return Util.rand_of(filtered_rooms)
 
 ## next room position ##################################################################
 
@@ -161,7 +141,7 @@ static func create_room(opts, last_room=null):
 
 	var room = PluggsRoom.new()
 	room.def = gen_room_def(opts)
-	room.name = room.def.get("name", "PluggsRoom")
+	room.name = Util._or(room.def.name, "PluggsRoom")
 	room.position = Vector2.ZERO if last_room == null else PluggsRoom.next_room_position(opts, room, last_room)
 
 	add_rect(room, opts)
@@ -176,7 +156,7 @@ static func create_room(opts, last_room=null):
 
 ## vars
 
-var def: Dictionary
+var def
 # var def: RoomDef
 var rect: ColorRect
 var tilemap: TileMap

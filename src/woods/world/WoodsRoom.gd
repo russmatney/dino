@@ -24,9 +24,9 @@ static func room_for_type(typ, opts={}):
 	if room_defs == null:
 		return
 	for room in room_defs.rooms:
-		var rms = Util.get_(rooms_by_type, room.room_type, [])
+		var rms = Util.get_(rooms_by_type, room.meta.room_type, [])
 		rms.append(room)
-		rooms_by_type[room.room_type] = rms
+		rooms_by_type[room.meta.room_type] = rms
 
 	var type_s
 	match typ:

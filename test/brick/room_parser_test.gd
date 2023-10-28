@@ -24,9 +24,6 @@ is_start
 xxx
 xp.
 x.."})
-
-	Debug.pr("parsed", res)
-
 	assert_that(res.name).is_equal("PuzzRooms")
 	assert_that(res.prelude.name).is_equal("PuzzRooms")
 	assert_that(res.prelude).is_equal({name="PuzzRooms"})
@@ -105,14 +102,14 @@ x.....
 
 	# shape
 	assert_that(parsed.rooms[0].shape).is_equal([
-		[["Tile"], ["Tile"], ["Tile"]],
-		[["Tile"], ["Player"], null],
-		[["Tile"], null, null]
+		["x", "x", "x"],
+		["x", "p", null],
+		["x", null, null]
 		])
 	assert_that(parsed.rooms[1].shape).is_equal([
-		[["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"]],
-		[["Tile"], null, null, null, ["Player"], null],
-		[["Tile"], null, null, null, null, null],
+		["x", "x", "x", "x", "x", "x"],
+		["x", null, null, null, "p", null],
+		["x", null, null, null, null, null],
 		])
 
 
@@ -154,12 +151,12 @@ x.....
 
 	# shape
 	assert_that(parsed.rooms[0].shape).is_equal([
-		[["Tile"], ["Tile"], ["Tile"]],
-		[["Tile"], null, null],
-		[["Tile"], null, null]
+		["x", "x", "x"],
+		["x", null, null],
+		["x", null, null]
 		])
 	assert_that(parsed.rooms[1].shape).is_equal([
-		[["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"]],
-		[["Tile"], null, null, null, null, null],
-		[["Tile"], null, null, null, null, null],
+		["x", "x", "x", "x", "x", "x"],
+		["x", null, null, null, null, null],
+		["x", null, null, null, null, null],
 		])

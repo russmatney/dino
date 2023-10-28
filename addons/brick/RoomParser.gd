@@ -4,23 +4,6 @@ class_name RoomParser
 
 ## public types #####################################################
 
-class RoomDefs:
-	# could write out to a pandora entity
-	extends Object
-
-	var path: String
-	var name: String
-	var prelude: Dictionary
-	var legend: Dictionary
-	var rooms: Array[RoomDef]
-
-class RoomDef:
-	extends Object
-
-	var name: String
-	var shape: Array
-	var meta: Dictionary
-
 ## public api #####################################################
 
 # Returns a RoomDefs with RoomDef(s) and other metadata
