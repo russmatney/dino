@@ -16,12 +16,10 @@ func filter(opts: Dictionary):
 	Util.ensure_default(opts, "skip_flags", [])
 
 	var xs = rooms
-	Debug.pr("rooms in rd", xs)
 
 	# filter out unless 'filter_rooms' returns true
 	if opts.get("filter_rooms"):
 		xs = xs.filter(opts.filter_rooms)
-	Debug.pr("filtered rooms", xs)
 
 	# only keep if any matching truthy piece of room 'meta' data
 	if len(opts.flags) > 0:

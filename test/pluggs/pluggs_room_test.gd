@@ -62,12 +62,9 @@ funky
 x..
 "
 
-	# TODO set seed for this test that fails, or write to be not-flaky
 	var room = PluggsRoom.gen_room_def({
 		contents=contents,
-		filter_rooms=func(room):
-		Debug.pr("filtering room", room, room.has_flag("funky"))
-		return room.has_flag("funky")})
+		filter_rooms=func(room): return room.has_flag("funky")})
 
 	assert_that(room.name).is_equal("Funky Test Room")
 	assert_that(room.shape).is_equal([
@@ -78,7 +75,7 @@ x..
 
 	var room_2 = PluggsRoom.gen_room_def({
 		contents=contents,
-		filter_rooms=func(room): return not room.get("funky")})
+		filter_rooms=func(room): return not room.has_flag("funky")})
 
 	assert_that(room_2.name).is_equal("Test Room")
 	assert_that(room_2.shape).is_equal([
