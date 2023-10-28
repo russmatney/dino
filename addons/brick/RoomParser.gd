@@ -2,6 +2,18 @@
 extends Object
 class_name RoomParser
 
+## public types #####################################################
+
+class RoomDefs:
+	# could write out to a pandora entity
+	extends Object
+
+	var path: String
+	var name: String
+	var prelude: Dictionary
+	var legend: Dictionary
+	var rooms: Array[RoomDef]
+
 class RoomDef:
 	extends Object
 
@@ -11,25 +23,60 @@ class RoomDef:
 
 ## public api #####################################################
 
-static func parse_room_defs(opts={}):
+# Returns a RoomDefs with RoomDef(s) and other metadata
+static func parse(opts={}) -> RoomDefs:
 	# kind of odd... some caching convenience use-case?
 	if "parsed_room_defs" in opts:
 		return opts.parsed_room_defs
+
+	var room_defs = RoomDefs.new()
 
 	var contents = Util.get_(opts, "contents")
 	if contents == null:
 		var path = Util.get_(opts, "room_defs_path")
 		if path == null:
-			Debug.err("Cannot parse_room_defs, no room_defs_path")
-			return
+			Debug.err("Cannot parse, no room_defs_path")
+			# This is where we'd want a union type, or nil punning
+			return null
+		room_defs.path = path
 		var file = FileAccess.open(path, FileAccess.READ)
 		contents = file.get_as_text()
 
-	return RoomParser.parse(contents)
+	var parsed = RoomParser.parse_raw(contents)
+
+	room_defs.prelude = parsed.prelude
+	if "name" in room_defs.prelude:
+		room_defs.name = room_defs.prelude.name
+	room_defs.legend = parsed.legend
+
+	var rooms: Array[RoomDef] = []
+	for r in parsed.rooms:
+		var def = RoomDef.new()
+		def.meta = r
+
+		var n = r.get("name", r.get("room_name"))
+		if n != null:
+			def.name = n
+
+		var shape = []
+		for row in r.shape:
+			var new_row = []
+			for col in row:
+				new_row.append(parsed.legend.get(col, col))
+			shape.append(new_row)
+		def.shape = shape
+
+		rooms.append(def)
+
+	if len(rooms) > 0:
+		room_defs.rooms = rooms
+
+	return room_defs
 
 ## parser #####################################################
 
-static func parse(contents):
+# returns a Dictionary with nothing fancy, just plain types
+static func parse_raw(contents) -> Dictionary:
 	var parsed = {}
 	var section_parsers = {
 		"prelude": RoomParser.parse_prelude,
@@ -51,7 +98,7 @@ static func parse(contents):
 			chunks = chunks.map(func(chunk):
 				return Array(chunk).filter(func(c): return c != "")
 				).filter(func(chunk): return len(chunk) > 0)
-			parsed[header.to_lower()] = parser.call(parsed, chunks)
+			parsed[header.to_lower()] = parser.call(chunks)
 	return parsed
 
 static func parse_metadata(lines):
@@ -85,7 +132,7 @@ static func parse_shape(lines, parse_int=true):
 
 ## prelude #########################################################
 
-static func parse_prelude(_parsed, chunks):
+static func parse_prelude(chunks):
 	var lines = chunks.reduce(func(acc, x):
 		acc.append_array(x)
 		# fking update-in-place with no return bs
@@ -95,7 +142,7 @@ static func parse_prelude(_parsed, chunks):
 
 ## legend #########################################################
 
-static func parse_legend(_parsed, chunks):
+static func parse_legend(chunks):
 	var legend = {}
 	for lines in chunks:
 		for l in lines:
@@ -110,21 +157,14 @@ static func parse_legend(_parsed, chunks):
 
 ## rooms #########################################################
 
-static func parse_room(parsed, shape_lines, raw_meta):
+static func parse_room(shape_lines, raw_meta):
 	var room = parse_metadata(raw_meta)
 	var raw_shape = parse_shape(shape_lines, false)
 
-	var shape = []
-	for row in raw_shape:
-		var new_row = []
-		for col in row:
-			new_row.append(parsed.legend.get(col, col))
-		shape.append(new_row)
-
-	room["shape"] = shape
+	room["shape"] = raw_shape
 	return room
 
-static func parse_rooms(parsed, chunks):
+static func parse_rooms(chunks):
 	var rooms = []
 	for i in len(chunks):
 		if i % 2 == 1:
@@ -132,5 +172,5 @@ static func parse_rooms(parsed, chunks):
 			continue
 		var raw_meta = chunks[i]
 		var shape_lines = chunks[i+1]
-		rooms.append(parse_room(parsed, shape_lines, raw_meta))
+		rooms.append(parse_room(shape_lines, raw_meta))
 	return rooms

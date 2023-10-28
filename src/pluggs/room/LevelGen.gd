@@ -57,7 +57,7 @@ func generate():
 
 	# reset
 	room_idx = 0
-	parsed_room_defs = RoomParser.parse_room_defs({room_defs_path=room_defs_path})
+	parsed_room_defs = RoomParser.parse({room_defs_path=room_defs_path})
 	var rooms = []
 
 	# seed - may want to read from a global seed at some point
