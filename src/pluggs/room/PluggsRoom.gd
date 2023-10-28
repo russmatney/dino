@@ -12,39 +12,20 @@ class_name PluggsRoom
 static func width(room: PluggsRoom, opts: Dictionary):
 	return len(room.def.shape[0]) * opts.tile_size
 
-static func column(room: PluggsRoom, idx: int):
-	var col = []
-	for row in room.def.shape:
-		if idx >= len(row):
-			Debug.error("idx outside of row width, cannot build column")
-			return []
-		col.append(row[idx])
-	return col
-
-static func last_column(room: PluggsRoom):
-	return column(room, len(room.def.shape[0]) - 1)
-
-static func first_column(room: PluggsRoom):
-	return column(room, 0)
+static func height(room: PluggsRoom, opts: Dictionary):
+	return len(room.def.shape) * opts.tile_size
 
 static func size(room: PluggsRoom, opts: Dictionary):
-	var y = len(room.def.shape) * opts.tile_size
-	var x = len(room.def.shape[0]) * opts.tile_size
-	return Vector2(x, y)
+	return Vector2(width(room, opts), height(room, opts))
+
+static func last_column(room: PluggsRoom):
+	return room.def.column(len(room.def.shape[0]) - 1)
+
+static func first_column(room: PluggsRoom):
+	return room.def.column(0)
 
 static func crd_to_position(crd, opts: Dictionary):
 	return crd.coord * opts.tile_size
-
-static func coords(room: PluggsRoom):
-	var crds = []
-	for y in len(room.def.shape):
-		var row = room.def.shape[y]
-		for x in len(row):
-			var coord = Vector2(x, y)
-			var cell = room.def.shape[y][x]
-			if cell != null:
-				crds.append({coord=coord, cell=cell})
-	return crds
 
 ## tilemap ##################################################################
 
@@ -101,12 +82,10 @@ static func add_rect(room: PluggsRoom, opts: Dictionary):
 
 static func gen_room_def(opts={}):
 	var room_defs = RoomParser.parse(opts)
-	Debug.pr("parsed room_defs", room_defs)
 	var filtered_rooms = room_defs.filter(opts)
-	Debug.pr("filtered rooms", filtered_rooms)
-
 	if filtered_rooms != null:
 		return Util.rand_of(filtered_rooms)
+	Debug.error("Failed to generated room_def with opts", opts)
 
 ## next room position ##################################################################
 
@@ -145,7 +124,7 @@ static func create_room(opts, last_room=null):
 	room.position = Vector2.ZERO if last_room == null else PluggsRoom.next_room_position(opts, room, last_room)
 
 	add_rect(room, opts)
-	var crds = coords(room)
+	var crds = room.def.coords()
 	add_tilemap(room, opts, crds)
 	add_entities(room, opts, crds)
 
