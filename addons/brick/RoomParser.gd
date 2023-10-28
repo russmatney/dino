@@ -2,6 +2,13 @@
 extends Object
 class_name RoomParser
 
+class RoomDef:
+	extends Object
+
+	var name: String
+	var shape: Array
+	var meta: Dictionary
+
 ## public api #####################################################
 
 static func parse_room_defs(opts={}):
