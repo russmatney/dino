@@ -7,10 +7,11 @@ class_name PluggsRoom
 
 ## helpers ##################################################################
 
+# move all of these to BrickRoom
+# (which expects/has/pulls `BrickOpts` (blackboard? part of levelgen?))
 static func width(room: PluggsRoom, opts: Dictionary):
 	return len(room.def.shape[0]) * opts.tile_size
 
-# move to RoomDef
 static func column(room: PluggsRoom, idx: int):
 	var col = []
 	for row in room.def.shape:
