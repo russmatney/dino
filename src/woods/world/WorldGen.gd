@@ -58,11 +58,11 @@ func generate():
 
 	# most rooms
 	for _i in range(room_count - 2):
-		last_room = create_room({}, last_room)
+		last_room = create_room({last_room=last_room})
 		rooms.append(last_room)
 
 	# last room
-	var room = create_room({type=WoodsRoom.t.END}, last_room)
+	var room = create_room({type=WoodsRoom.t.END, last_room=last_room})
 	rooms.append(room)
 
 	promote_tilemaps(rooms)
@@ -91,14 +91,14 @@ func promote_tilemaps(rooms):
 
 ## create_room ######################################################################
 
-func create_room(opts=null, last_room=null):
+func create_room(opts=null):
 	if opts == null:
 		opts = {}
 	opts.merge({
 		room_base_dim=room_base_dim,
 		parsed_room_defs=parsed_room_defs,
 		tilemap_scene=tilemap_scene})
-	var room = WoodsRoom.create_room(opts, last_room)
+	var room = WoodsRoom.create_room(opts)
 
 	room_idx += 1
 	room.ready.connect(func():

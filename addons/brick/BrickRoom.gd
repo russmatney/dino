@@ -48,18 +48,20 @@ static func add_tilemap(room, opts):
 
 ## entities ##################################################################
 
-static func add_entity(crd, room, scene, opts):
-	var ent = scene.instantiate()
+static func add_entity(crd, room, ent_opts, opts):
+	var ent = ent_opts.scene.instantiate()
 	ent.position = crd_to_position(crd, opts) + Vector2.DOWN * opts.tile_size
+	if ent_opts.get("setup"):
+		ent_opts.setup.call(ent)
 	room.add_child(ent)
 	room.entities.append(ent)
 	return ent
 
 static func add_entities(room, opts):
 	var crds = room.def.coords()
-	for label in opts.label_to_entity_scene:
+	for label in opts.label_to_entity:
 		crds.filter(func(c): return label in c.cell).map(func(crd):
-			add_entity(crd, room, opts.label_to_entity_scene.get(label), opts))
+			add_entity(crd, room, opts.label_to_entity.get(label), opts))
 
 ## color rect ##################################################################
 
@@ -135,7 +137,8 @@ func gen(opts: Dictionary):
 	var last_room = opts.get("last_room")
 
 	def = gen_room_def(opts)
-	name = def.name # may be null
+	if def.name != null and def.name != "":
+		name = def.name
 
 	# TODO support configurable next-room-position patterns (door alignment, etc)
 	position = Vector2.ZERO if last_room == null else BrickRoom.next_room_position(opts, self, last_room)
@@ -144,3 +147,9 @@ func gen(opts: Dictionary):
 	BrickRoom.add_rect(self, opts)
 	BrickRoom.add_tilemap(self, opts)
 	BrickRoom.add_entities(self, opts)
+
+## _ready ####################################################################
+
+func _ready():
+	# TODO find and set rect, tilemap, entities.... def?
+	pass

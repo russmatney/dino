@@ -12,10 +12,10 @@ static func create_room(opts):
 
 	opts["tilemap_scene"] = load("res://addons/reptile/tilemaps/MetalTiles8.tscn")
 
-	opts["label_to_entity_scene"] = {
-		"Player": load("res://addons/core/PlayerSpawnPoint.tscn"),
-		"Machine": load("res://src/pluggs/entities/ArcadeMachine.tscn"),
-		"Light": load("res://src/pluggs/entities/Light.tscn"),
+	opts["label_to_entity"] = {
+		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+		"Machine": {scene=load("res://src/pluggs/entities/ArcadeMachine.tscn")},
+		"Light": {scene=load("res://src/pluggs/entities/Light.tscn")},
 		}
 
 	room.gen(opts)

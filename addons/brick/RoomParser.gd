@@ -35,14 +35,14 @@ static func parse(opts={}) -> RoomDefs:
 	var rooms: Array[RoomDef] = []
 	for r in parsed.rooms:
 		var def = RoomDef.new()
-		def.meta = r
+		def.meta = r.duplicate(true)
 
-		var n = r.get("name", r.get("room_name"))
+		var n = def.meta.get("name", def.meta.get("room_name"))
 		if n != null:
 			def.name = n
 
 		var shape = []
-		for row in r.shape:
+		for row in r.get("shape"):
 			var new_row = []
 			for col in row:
 				new_row.append(parsed.legend.get(col, col))
@@ -145,7 +145,8 @@ static func parse_room(shape_lines, raw_meta):
 	var raw_shape = parse_shape(shape_lines, false)
 
 	room["shape"] = raw_shape
-	return room
+	# maybe want to optimize away from this?
+	return room.duplicate(true)
 
 static func parse_rooms(chunks):
 	var rooms = []

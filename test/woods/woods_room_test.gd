@@ -62,24 +62,16 @@ x.x
 xxx
 "
 
-var room_defs_path = "res://test/woods/room_defs_test.txt"
-
-## setup ###########################################################
-
-func before_all():
-	var file = FileAccess.open(room_defs_path, FileAccess.WRITE)
-	file.store_string(room_defs_txt)
-
 ## create_room ###########################################################
 
-func test_create_room_empty_dict():
-	var room = WoodsRoom.create_room({
-		room_defs_path=room_defs_path,
-		filler_tile_count=0})
+func test_create_room_no_options():
+	var room = WoodsRoom.create_room({contents=room_defs_txt})
 
+	Debug.pr("created room:", room)
+	Debug.pr("created room:", room.tilemap)
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
-	assert_that(room.room_def.meta.room_type).is_equal("SQUARE")
+	assert_that(room.def.meta.room_type).is_equal("SQUARE")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(1, 2),
@@ -92,14 +84,15 @@ func test_create_room_empty_dict():
 
 func test_create_room_start():
 	var room = WoodsRoom.create_room({
-		filler_tile_count=0,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		type=WoodsRoom.t.START,
 		})
 
+	Debug.pr("created room:", room)
+	Debug.pr("created room:", room.tilemap)
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.START)
-	assert_that(room.room_def.meta.room_type).is_equal("START")
+	assert_that(room.def.meta.room_type).is_equal("START")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(0, 1),
@@ -113,14 +106,15 @@ func test_create_room_start():
 
 func test_create_room_end():
 	var room = WoodsRoom.create_room({
-		filler_tile_count=0,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		type=WoodsRoom.t.END,
 		})
 
+	Debug.pr("created room:", room)
+	Debug.pr("created room:", room.tilemap)
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.END)
-	assert_that(room.room_def.meta.room_type).is_equal("END")
+	assert_that(room.def.meta.room_type).is_equal("END")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(0, 0),
@@ -134,14 +128,13 @@ func test_create_room_end():
 
 func test_create_room_square():
 	var room = WoodsRoom.create_room({
-		filler_tile_count=0,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		type=WoodsRoom.t.SQUARE,
 		})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
-	assert_that(room.room_def.meta.room_type).is_equal("SQUARE")
+	assert_that(room.def.meta.room_type).is_equal("SQUARE")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(1, 2),
@@ -154,14 +147,13 @@ func test_create_room_square():
 
 func test_create_room_long():
 	var room = WoodsRoom.create_room({
-		filler_tile_count=0,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		type=WoodsRoom.t.LONG,
 		})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.LONG)
-	assert_that(room.room_def.meta.room_type).is_equal("LONG")
+	assert_that(room.def.meta.room_type).is_equal("LONG")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 0),
 		Vector2i(1, 0),
@@ -198,27 +190,27 @@ func test_create_room_after_start_or_square():
 		]
 	var start_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.START,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		room_base_dim=dim,
 		})
 
 	var square_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.SQUARE,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		room_base_dim=dim,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
-			room_defs_path=room_defs_path,
-			}, start_room)
+			contents=room_defs_txt,
+			last_room=start_room})
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 
 		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
-			room_defs_path=room_defs_path,
-			}, square_room)
+			contents=room_defs_txt,
+			last_room=square_room})
 		assert_that(room_sq.rect.size).is_equal(test.expected.size)
 		assert_that(room_sq.position).is_equal(test.expected.position)
 		room.free()
@@ -244,15 +236,15 @@ func test_create_room_after_long():
 		]
 	var long_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.LONG,
-		room_defs_path=room_defs_path,
+		contents=room_defs_txt,
 		room_base_dim=dim,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
-			room_defs_path=room_defs_path,
-			}, long_room)
+			contents=room_defs_txt,
+			last_room=long_room})
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 		room.free()
@@ -276,15 +268,15 @@ func test_create_room_after_fall():
 		]
 	var fall_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.FALL,
-		room_defs_path=room_defs_path,
+			contents=room_defs_txt,
 		room_base_dim=dim,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
-			room_defs_path=room_defs_path,
-			}, fall_room)
+			contents=room_defs_txt,
+			last_room=fall_room})
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 		room.free()
@@ -308,15 +300,14 @@ func test_create_room_after_climb():
 		]
 	var climb_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.CLIMB,
-		room_defs_path=room_defs_path,
+			contents=room_defs_txt,
 		room_base_dim=dim,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
-			room_defs_path=room_defs_path,
-			}, climb_room)
+			contents=room_defs_txt, last_room=climb_room})
 		assert_that(room.rect.size).is_equal(test.expected.size)
 		assert_that(room.position).is_equal(test.expected.position)
 		room.free()
