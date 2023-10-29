@@ -25,13 +25,13 @@ func filter(opts: Dictionary):
 	# only keep if any matching truthy piece of room 'meta' data
 	if len(opts.flags) > 0:
 		xs = xs.filter(func(r):
-			for flag in opts.skip_flags:
+			for flag in opts.flags:
 				return r.has_flag(flag))
 
 	# skip if any matching flag
 	if len(opts.skip_flags) > 0:
 		xs = xs.filter(func(r):
-			for flag in opts.flags:
+			for flag in opts.skip_flags:
 				if r.has_flag(flag):
 					return false
 			return true)
