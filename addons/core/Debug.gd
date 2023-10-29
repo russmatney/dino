@@ -185,7 +185,7 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	elif msg is PandoraEntity and msg.has_method("data"):
 		return to_pretty(msg.data(), newlines, use_color, indent_level)
 	elif msg.has_method("to_pretty"):
-		return msg.to_pretty(msg, newlines, use_color, indent_level)
+		return msg.to_pretty(newlines, use_color, indent_level)
 	else:
 		return str(msg)
 

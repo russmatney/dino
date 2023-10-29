@@ -123,6 +123,9 @@ var rect: ColorRect
 var tilemap: TileMap
 var entities: Array
 
+func to_pretty(a, b, c):
+	return Debug.to_pretty(["BrickRoom", {def=Debug.to_pretty(def, a, b, c), rect=rect, entities=entities}], a, b, c)
+
 ## gen #############################################################
 
 func gen(opts: Dictionary):

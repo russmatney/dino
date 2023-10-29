@@ -1,3 +1,4 @@
+@tool
 # could write out to a pandora entity
 class_name RoomDefs
 extends Object
@@ -8,7 +9,7 @@ var prelude: Dictionary
 var legend: Dictionary
 var rooms: Array[RoomDef]
 
-func to_pretty(obj, a, b, c):
+func to_pretty(a, b, c):
 	return Debug.to_pretty({prelude=prelude, legend=legend}, a, b, c)
 
 func filter(opts: Dictionary):
