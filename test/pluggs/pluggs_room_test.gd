@@ -115,7 +115,7 @@ func test_create_room_basic():
 
 func test_create_room_based_on_last_room():
 	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
-	var another_room = PluggsRoom.create_room({contents=pluggs_room_contents}, room)
+	var another_room = PluggsRoom.create_room({contents=pluggs_room_contents, last_room=room})
 	assert_that(another_room.name).is_equal("Test Room")
 	# y is 16 b/c of the align-floor logic - moves down to smoothly transition between rooms
 	assert_that(another_room.position).is_equal(Vector2(48,16)) # 3 x 16 = 48

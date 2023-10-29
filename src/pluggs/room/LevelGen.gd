@@ -72,11 +72,11 @@ func generate():
 
 	# most rooms
 	for _i in range(room_count - 2):
-		last_room = create_room({skip_flags=["first", "last"]}, last_room)
+		last_room = create_room({skip_flags=["first", "last"], last_room=last_room})
 		rooms.append(last_room)
 
 	# last room
-	var room = create_room({flags=["last"]}, last_room)
+	var room = create_room({flags=["last"], last_room=last_room})
 	rooms.append(room)
 
 	promote_tilemaps(rooms)
@@ -113,7 +113,7 @@ func reboot_world():
 	Game.respawn_player()
 	connect_to_rooms()
 
-func create_room(opts=null, last_room=null):
+func create_room(opts=null):
 	if opts == null:
 		opts = {}
 	opts.merge({
@@ -122,7 +122,7 @@ func create_room(opts=null, last_room=null):
 		parsed_room_defs=parsed_room_defs,
 		tilemap_scene=tilemap_scene,
 		})
-	var room = PluggsRoom.create_room(opts, last_room)
+	var room = PluggsRoom.create_room(opts)
 
 	room_idx += 1
 	room.ready.connect(func():
