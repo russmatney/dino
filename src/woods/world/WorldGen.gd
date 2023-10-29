@@ -58,7 +58,13 @@ func generate():
 
 	# most rooms
 	for _i in range(room_count - 2):
-		last_room = create_room({last_room=last_room})
+		last_room = create_room({last_room=last_room,
+			type=Util.rand_of([
+				WoodsRoom.t.SQUARE,
+				WoodsRoom.t.LONG,
+				WoodsRoom.t.CLIMB,
+				WoodsRoom.t.FALL]),
+			})
 		rooms.append(last_room)
 
 	# last room
