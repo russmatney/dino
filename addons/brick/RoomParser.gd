@@ -36,6 +36,7 @@ static func parse(opts={}) -> RoomDefs:
 	for r in parsed.rooms:
 		var def = RoomDef.new()
 		def.meta = r.duplicate(true)
+		def.meta.erase("shape")
 
 		var n = def.meta.get("name", def.meta.get("room_name"))
 		if n != null:

@@ -10,6 +10,8 @@ enum t {START, END, SQUARE, LONG, CLIMB, FALL}
 ## create room ##################################################################
 
 static func create_room(opts):
+	Util.ensure_default(opts, "tile_size", 16)
+
 	var room = WoodsRoom.new()
 
 	opts["tilemap_scene"] = load("res://addons/reptile/tilemaps/CaveTiles16.tscn")
@@ -29,7 +31,6 @@ static func create_room(opts):
 
 	var typ = Util.get_(opts, "type", t.SQUARE)
 	room.type = typ
-
 	opts["filter_rooms"] = func(r):
 		var type_s
 		match room.type:
@@ -70,7 +71,7 @@ static func create_room(opts):
 ##############################################################################
 ## instance ##################################################################
 
-var type
+var type: t
 var spawn_points = []
 var end_box
 
@@ -93,8 +94,7 @@ func _on_end_entered(body):
 
 func spawn(opts=null):
 	for ch in get_children():
-		# should be DinoSpawnPoint
-		if ch is Marker2D:
+		if ch is DinoSpawnPoint:
 			if opts != null and "only_if" in opts:
 				if opts.only_if.call(ch):
 					spawn_one(ch)
