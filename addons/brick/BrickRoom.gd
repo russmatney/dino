@@ -22,6 +22,12 @@ static func last_column(room: BrickRoom):
 static func first_column(room: BrickRoom):
 	return room.def.column(0)
 
+static func last_row(room: BrickRoom):
+	return room.def.row(len(room.def.shape) - 1)
+
+static func first_row(room: BrickRoom):
+	return room.def.row(0)
+
 static func crd_to_position(crd, opts: Dictionary):
 	return crd.coord * opts.tile_size
 
@@ -108,16 +114,40 @@ static func count_to_floor_tile(col: Array):
 
 	return v_count - from_bottom_count
 
-static func next_room_position(opts: Dictionary, room, last_room):
+static func next_room_pos_right(opts, room):
+	var last_room = opts.last_room
+
 	var x = last_room.position.x + BrickRoom.width(last_room, opts)
 
 	var lr_offset = count_to_floor_tile(last_column(last_room))
 	var tr_offset = count_to_floor_tile(first_column(room))
-
 	var y_offset = (lr_offset - tr_offset) * opts.tile_size
 
 	var y = last_room.position.y + y_offset
 	return Vector2(x, y)
+
+static func next_room_pos_top(opts, room):
+	var last_room = opts.last_room
+
+	var y = last_room.position.y + BrickRoom.height(room, opts)
+
+	var lr_offset = count_to_floor_tile(first_row(last_room))
+	var tr_offset = count_to_floor_tile(last_row(room))
+	var x_offset = (lr_offset - tr_offset) * opts.tile_size
+
+	var x = last_room.position.x + x_offset
+	return Vector2(x, y)
+
+static func next_room_position(opts: Dictionary, room):
+	if opts.get("last_room") == null:
+		return Vector2.ZERO
+
+	match opts.side:
+		Vector2.RIGHT: return BrickRoom.next_room_pos_right(opts, room)
+		Vector2.UP: return BrickRoom.next_room_pos_top(opts, room)
+
+	Debug.warn("Unsupported 'side' option passed", opts.side)
+
 
 ## create room ##################################################################
 
@@ -142,6 +172,7 @@ func to_pretty(a, b, c):
 ## gen #############################################################
 
 func gen(opts: Dictionary):
+	Util.ensure_default(opts, "side", Vector2.RIGHT)
 	Util.ensure_default(opts, "tile_size", 16)
 	Util.ensure_default(opts, "flags", [])
 	Util.ensure_default(opts, "skip_flags", [])
@@ -153,8 +184,7 @@ func gen(opts: Dictionary):
 	if def.name != null and def.name != "":
 		name = def.name
 
-	# TODO support configurable next-room-position patterns (door alignment, etc)
-	position = Vector2.ZERO if last_room == null else BrickRoom.next_room_position(opts, self, last_room)
+	position = BrickRoom.next_room_position(opts, self)
 
 	# will we need to overwrite `gen` completely? maybe need to decouple this class?
 	BrickRoom.add_rect(self, opts)

@@ -58,7 +58,7 @@ xxx
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	room.free()
 
-## room_positioning ##################################################################
+## count_to_floor_tile helper ##################################################################
 
 func test_count_to_floor_tile():
 	var res = BrickRoom.count_to_floor_tile([null, ["Tile"], null])
@@ -78,6 +78,8 @@ func test_count_to_floor_tile():
 	assert_that(res).is_equal(0)
 	res = BrickRoom.count_to_floor_tile([["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"], ["Tile"]])
 	assert_that(res).is_equal(0)
+
+## adjacent 'door' alignment ##################################################################
 
 var next_room_1 = "test Room Defs
 
@@ -124,6 +126,8 @@ func test_next_room_position_aligns_empty_tiles():
 	room_1.free()
 	room_2.free()
 
+## adjacent 'door' alignment, open ceiling ##################################################
+
 var next_room_2 = "test Room Defs
 
 =======
@@ -168,3 +172,66 @@ func test_next_room_position_aligns_empty_tiles_open_tops():
 
 	room_1.free()
 	room_2.free()
+
+## adjacent 'door' alignment, added above last room ######################################
+
+func create_rooms(room_opts):
+	var last_room
+	var rooms = []
+	for i in len(room_opts):
+		var opts = room_opts[i]
+		if last_room != null:
+			opts.last_room = last_room
+		last_room = auto_free(BrickRoom.create_room(room_opts[i]))
+		rooms.append(last_room)
+	return rooms
+
+
+var next_room_3 = "test Room Defs
+
+=======
+LEGEND
+=======
+
+p = Player
+x = Tile
+
+=======
+ROOMS
+=======
+
+name Start Room
+start
+
+x.x
+xp.
+xxx
+
+name End Room
+end
+
+xxx
+..x
+xxx
+
+name Corner
+from_below
+
+xxx
+x..
+x.x
+"
+
+func test_next_room_position_added_to_top():
+	var rooms = create_rooms([
+		{contents=next_room_3, flags=["start"]},
+		{contents=next_room_3, flags=["from_below"], side=Vector2.UP},
+		{contents=next_room_3, flags=["end"], side=Vector2.RIGHT},
+		])
+	var room_1 = rooms[0]
+	var room_2 = rooms[1]
+	var room_3 = rooms[2]
+	assert_that(room_1.name).is_equal("Start Room")
+	assert_that(room_2.name).is_equal("Corner")
+	assert_that(room_2.position).is_equal(Vector2(0, 3) * 16)
+	assert_that(room_3.position).is_equal(Vector2(3, 3) * 16)

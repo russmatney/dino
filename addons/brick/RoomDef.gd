@@ -22,6 +22,11 @@ func column(idx: int):
 		col.append(row[idx])
 	return col
 
+func row(idx: int):
+	if idx <= len(shape):
+		return shape[idx]
+	Debug.error("idx outside of row width, cannot return row")
+
 # Returns an array of dicts like [{"coord": Vector2, "cell": Array[String]}]
 func coords() -> Array:
 	var crds = []
