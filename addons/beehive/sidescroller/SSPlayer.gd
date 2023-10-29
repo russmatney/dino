@@ -62,7 +62,7 @@ func _ready():
 		})
 
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera({player=self, zoom_rect_min=600, zoom_margin_min=120})
+		Cam.request_camera({player=self, zoom_rect_min=600, zoom_margin_min=120})
 		# support some assigned 'hud'
 		Hood.ensure_hud(self.get("hud"))
 

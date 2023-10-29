@@ -13,7 +13,7 @@ func _ready():
 	super._ready()
 
 	if not Engine.is_editor_hint() and not skip_cam_setup:
-		Cam.ensure_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
+		Cam.request_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
 
 
 ## input ###########################################################

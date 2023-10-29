@@ -7,6 +7,12 @@ enum mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
+func get_cam(node=null):
+	if node and is_instance_valid(node):
+		return node.get_viewport().get_camera()
+	return get_viewport().get_camera()
+
+
 ##############################################################
 # ready
 
@@ -20,18 +26,12 @@ func _on_debug_toggled(debugging):
 ##############################################################
 # cam_window_rect
 
-func cam_viewport():
-	if cam and is_instance_valid(cam):
-		# create a subviewport here?
-		var vp = cam.get_viewport()
-		return vp
-
-
 ## helpful for placing 'offscreen' indicators at the edges
 # tho perhaps that's easier with just a canvas layer
 func cam_window_rect():
-	if cam and is_instance_valid(cam):
-		var v = cam_viewport()
+	var c = get_cam()
+	if c and is_instance_valid(c):
+		var v = c.get_viewport()
 		var viewportRect: Rect2 = v.get_visible_rect()
 
 		# https://github.com/godotengine/godot/issues/34805
@@ -55,19 +55,18 @@ func cam_window_rect():
 
 
 ##############################################################
-# ensure camera
+# request camera
 
 var spawning_camera
 
-# maybe better as 'request_camera'
-func ensure_camera(opts = {}):
+func request_camera(opts = {}):
 	if not opts is Dictionary:
-		Debug.warn("unexpected ensure_camera opts value", opts)
+		Debug.warn("unexpected request_camera opts value", opts)
 		opts = {}
 
 	if spawning_camera:
-		# Debug.warn("already spawning camera, ignoring ensure_camera call", opts)
-		return
+		# Debug.warn("already spawning camera, ignoring request_camera call", opts)
+		return cam
 
 	var player = opts.get("player")
 	var anchor = opts.get("anchor")
@@ -93,12 +92,12 @@ func ensure_camera(opts = {}):
 			if cam_parent == null or not is_instance_valid(cam_parent) or cam_parent != anchor:
 				cam.reparent(anchor, false)
 
-		return
+		return cam
 
 	var cams = get_tree().get_nodes_in_group("camera")
 	if cams and cams.size() > 0:
-		Debug.pr("Found unmanaged cams in 'camera' group, aborting 'ensure_camera'.", cams)
-		return
+		Debug.pr("Found unmanaged cams in 'camera' group, aborting 'request_camera'.", cams)
+		return cam
 
 	cam = cam_scene.instantiate()
 	cam.enabled = true
@@ -115,6 +114,8 @@ func ensure_camera(opts = {}):
 	cam.ready.connect(func(): spawning_camera = false, CONNECT_ONE_SHOT)
 
 	get_tree().current_scene.add_child.call_deferred(cam)
+
+	return cam
 
 
 ##############################################################

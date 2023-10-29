@@ -13,7 +13,7 @@ var hud = preload("res://src/woods/hud/WoodsHUD.tscn")
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera({player=self, zoom_rect_min=zoom_rect_min, zoom_margin_min=zoom_margin_min})
+		Cam.request_camera({player=self, zoom_rect_min=zoom_rect_min, zoom_margin_min=zoom_margin_min})
 		Hood.ensure_hud(hud)
 
 	super._ready()

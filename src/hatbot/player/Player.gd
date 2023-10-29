@@ -7,7 +7,7 @@ var hud = preload("res://src/hatbot/hud/HUD.tscn")
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera({player=self})
+		Cam.request_camera({player=self})
 		Hood.ensure_hud(hud)
 
 		if not Game.is_managed:

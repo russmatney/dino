@@ -28,7 +28,7 @@ func _ready():
 	Hotel.register(self)
 	restart_pos = global_position
 
-	Cam.ensure_camera({player=self, zoom_rect_min=100, zoom_margin_min=100})
+	Cam.request_camera({player=self, zoom_rect_min=100, zoom_margin_min=100})
 	Hood.ensure_hud()
 
 func hotel_data():

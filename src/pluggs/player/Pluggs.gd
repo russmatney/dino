@@ -33,7 +33,7 @@ func _ready():
 	machine.start()
 
 	Hood.ensure_hud(hud)
-	Cam.ensure_camera({
+	Cam.request_camera({
 		player=self,
 		zoom_rect_min=250,
 		proximity_min=50,

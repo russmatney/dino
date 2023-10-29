@@ -20,7 +20,7 @@ func check_out(data):
 func _ready():
 	Hotel.register(self)
 
-	Cam.ensure_camera({player=self})
+	Cam.request_camera({player=self})
 	Hood.ensure_hud()
 	action_detector.setup(self, {action_hint=action_hint})
 

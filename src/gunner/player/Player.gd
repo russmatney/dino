@@ -8,7 +8,7 @@ var tower_hud = preload("res://src/tower/hud/HUD.tscn")
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera({
+		Cam.request_camera({
 			player=self,
 			zoom_rect_min=400,
 			proximity_min=100,

@@ -12,7 +12,7 @@ var hud = preload("res://src/shirt/hud/HUD.tscn")
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.ensure_camera({player=self, zoom_rect_min=zoom_rect_min, zoom_margin_min=zoom_margin_min})
+		Cam.request_camera({player=self, zoom_rect_min=zoom_rect_min, zoom_margin_min=zoom_margin_min})
 		Hood.ensure_hud(hud)
 
 		died.connect(_on_player_death)

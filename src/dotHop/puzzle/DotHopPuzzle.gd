@@ -250,7 +250,7 @@ func ensure_camera_anchor():
 		cam_anchor.position = Vector2(len(state.grid[0]), len(state.grid)) * square_size / 2
 		add_child(cam_anchor)
 
-	Cam.ensure_camera({
+	Cam.request_camera({
 		anchor=cam_anchor,
 		# could use dynamic zoom based on level size
 		zoom_level=2.5,

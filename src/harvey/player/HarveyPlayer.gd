@@ -12,7 +12,7 @@ func _ready():
 
 	action_detector.setup(self)
 
-	Cam.ensure_camera({player=self})
+	Cam.request_camera({player=self})
 
 ############################################################
 # process
