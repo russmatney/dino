@@ -86,24 +86,35 @@ static func gen_room_def(opts={}):
 
 ## next room position ##################################################################
 
-static func tile_count_from_floor(col: Array):
-	col.reverse()
-	var tile_count = 0
-	for c in col:
+# returns the number of tiles from the top to the first null above a Tile
+# (the first "floor" from the top)
+# if there are no tiles to stand on, or no tiles with an empty tile above them, returns 0.
+static func count_to_floor_tile(col: Array):
+	var v_count = len(col)
+	var _col = col.duplicate()
+
+	_col.reverse()
+	var from_bottom_count = 0
+	var seen_tile = false
+	for c in _col:
 		if c is Array and "Tile" in c:
-			tile_count += 1
-	return tile_count
+			from_bottom_count += 1
+			seen_tile = true
+		elif c == null and not seen_tile:
+			from_bottom_count += 1
+
+		if seen_tile and from_bottom_count > 0 and c == null:
+			break
+
+	return v_count - from_bottom_count
 
 static func next_room_position(opts: Dictionary, room, last_room):
 	var x = last_room.position.x + BrickRoom.width(last_room, opts)
 
-	var last_room_final_col = last_column(last_room)
-	var last_room_offset_tile_count = len(last_room_final_col) - tile_count_from_floor(last_room_final_col)
+	var lr_offset = count_to_floor_tile(last_column(last_room))
+	var tr_offset = count_to_floor_tile(first_column(room))
 
-	var this_room_first_col = first_column(room)
-	var this_room_offset_tile_count = len(this_room_first_col) - tile_count_from_floor(this_room_first_col)
-
-	var y_offset = (last_room_offset_tile_count - this_room_offset_tile_count) * opts.tile_size
+	var y_offset = (lr_offset - tr_offset) * opts.tile_size
 
 	var y = last_room.position.y + y_offset
 	return Vector2(x, y)
@@ -134,6 +145,8 @@ func gen(opts: Dictionary):
 	Util.ensure_default(opts, "tile_size", 16)
 	Util.ensure_default(opts, "flags", [])
 	Util.ensure_default(opts, "skip_flags", [])
+	Util.ensure_default(opts, "tilemap_scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
+	Util.ensure_default(opts, "label_to_entity", {})
 	var last_room = opts.get("last_room")
 
 	def = gen_room_def(opts)
