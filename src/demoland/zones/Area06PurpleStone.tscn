@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=3 uid="uid://bpunlarwlfelv"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_tmvuu"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_7tnei"]
-[ext_resource type="PackedScene" uid="uid://b18v8a4sg3rak" path="res://src/hatbot/entities/Elevator.tscn" id="3_wwjab"]
-[ext_resource type="PackedScene" uid="uid://b8uyfy5lmgykl" path="res://src/hatbot/entities/Candle.tscn" id="4_6jxld"]
+[ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_wwjab"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="4_6jxld"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
 
 [node name="Area06PurpleStone" type="Node2D" groups=["metro_zones"]]
@@ -27,10 +27,8 @@ script = ExtResource("2_7tnei")
 
 [node name="Elevator" parent="01StoneEntrance" instance=ExtResource("3_wwjab")]
 position = Vector2(136, -96)
-destination_zone_name = "Area01"
-destination_travel_point_path = "./12WorldHub/ToPurpleStone"
 
-[node name="Candle3" parent="01StoneEntrance" instance=ExtResource("4_6jxld")]
+[node name="Candle3" parent="01StoneEntrance" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(192, -96)
 
 [node name="PurpleStoneTiles" parent="01StoneEntrance" instance=ExtResource("5_q8ouj")]
@@ -40,10 +38,10 @@ layer_0/tile_data = PackedInt32Array(-327671, 131072, 2, -524279, 131072, 4, -32
 position = Vector2(-64, -368)
 script = ExtResource("2_7tnei")
 
-[node name="Candle" parent="02StoneClimb" instance=ExtResource("4_6jxld")]
+[node name="Candle" parent="02StoneClimb" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(-144, -192)
 
-[node name="Candle2" parent="02StoneClimb" instance=ExtResource("4_6jxld")]
+[node name="Candle2" parent="02StoneClimb" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(-112, -16)
 
 [node name="PurpleStoneTiles" parent="02StoneClimb" instance=ExtResource("5_q8ouj")]
@@ -53,10 +51,10 @@ layer_0/tile_data = PackedInt32Array(458745, 131072, 4, 393209, 131072, 3, 32767
 position = Vector2(16, -528)
 script = ExtResource("2_7tnei")
 
-[node name="Candle4" parent="03StoneCandleRoom" instance=ExtResource("4_6jxld")]
+[node name="Candle4" parent="03StoneCandleRoom" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(-99, 64)
 
-[node name="Candle" parent="03StoneCandleRoom" instance=ExtResource("4_6jxld")]
+[node name="Candle" parent="03StoneCandleRoom" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(-48, 64)
 
 [node name="PurpleStoneTiles" parent="03StoneCandleRoom" instance=ExtResource("5_q8ouj")]
@@ -69,13 +67,11 @@ script = ExtResource("2_7tnei")
 [node name="PurpleStoneTiles" parent="04Boss" instance=ExtResource("5_q8ouj")]
 layer_0/tile_data = PackedInt32Array(262152, 196608, 4, 196616, 196608, 3, 131080, 196608, 3, 65544, 196608, 3, 8, 196608, 3, -65528, 196608, 2, -262136, 196608, 4, -327672, 196608, 2, 262151, 131072, 4, 196615, 458752, 4, 131079, 65536, 3, 65543, 65536, 3, 7, 65536, 3, -65529, 65536, 2, -262137, 131072, 4, -327673, 131072, 2, 262150, 131072, 4, 196614, 131072, 2, -262138, 131072, 4, -327674, 131072, 2, 262149, 131072, 4, 196613, 131072, 2, -262139, 131072, 4, -327675, 131072, 2, 262148, 131072, 4, 196612, 131072, 2, -262140, 131072, 4, -327676, 131072, 2, 262147, 131072, 4, 196611, 131072, 2, -262141, 131072, 4, -327677, 131072, 2, 262146, 131072, 4, 196610, 131072, 2, -262142, 131072, 4, -327678, 131072, 2, 262145, 131072, 4, 196609, 131072, 2, -262143, 131072, 4, -327679, 131072, 2, 262144, 131072, 4, 196608, 131072, 2, -262144, 131072, 4, -327680, 131072, 2, 327679, 131072, 4, 262143, 131072, 2, -196609, 131072, 4, -262145, 131072, 2, 327678, 131072, 4, 262142, 131072, 2, -196610, 131072, 4, -262146, 131072, 2, 327677, 131072, 4, 262141, 131072, 2, -196611, 131072, 4, -262147, 131072, 2, 327676, 131072, 4, 262140, 131072, 2, -196612, 131072, 4, -262148, 131072, 2, 327675, 131072, 4, 262139, 131072, 2, -196613, 131072, 4, -262149, 131072, 2, 327674, 131072, 4, 262138, 393216, 4, 196602, 196608, 3, 131066, 196608, 3, 65530, 196608, 3, -6, 196608, 3, -65542, 196608, 3, -131078, 196608, 3, -196614, 393216, 3, -262150, 131072, 2, 327673, 65536, 4, 262137, 65536, 3, 196601, 65536, 3, 131065, 65536, 3, 65529, 65536, 3, -7, 65536, 3, -65543, 65536, 3, -131079, 65536, 3, -196615, 65536, 3, -262151, 65536, 2)
 
-[node name="Candle" parent="04Boss" instance=ExtResource("4_6jxld")]
+[node name="Candle" parent="04Boss" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(88, 32)
 
-[node name="Candle2" parent="04Boss" instance=ExtResource("4_6jxld")]
+[node name="Candle2" parent="04Boss" groups=["metro_checkpoints"] instance=ExtResource("4_6jxld")]
 position = Vector2(24, 32)
 
 [node name="Elevator2" parent="04Boss" instance=ExtResource("3_wwjab")]
 position = Vector2(-40, 32)
-destination_zone_name = "Area06PurpleStone"
-destination_travel_point_path = "./01StoneEntrance/Elevator"
