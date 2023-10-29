@@ -74,6 +74,8 @@ func request_camera(opts = {}):
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
+		# Debug.pr("freeing existing camera, creating a new one")
+		# cam.free()
 		# make sure existing cam matches the requested cam
 
 		# require player group to avoid reparenting cameras on bots
@@ -113,7 +115,9 @@ func request_camera(opts = {}):
 	spawning_camera = true
 	cam.ready.connect(func(): spawning_camera = false, CONNECT_ONE_SHOT)
 
-	get_tree().current_scene.add_child.call_deferred(cam)
+	var cs = get_tree().current_scene
+	if cs:
+		cs.add_child.call_deferred(cam)
 
 	return cam
 
