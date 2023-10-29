@@ -67,8 +67,6 @@ xxx
 func test_create_room_no_options():
 	var room = WoodsRoom.create_room({contents=room_defs_txt})
 
-	Debug.pr("created room:", room)
-	Debug.pr("created room:", room.tilemap)
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
 	assert_that(room.def.meta.room_type).is_equal("SQUARE")
@@ -88,8 +86,6 @@ func test_create_room_start():
 		type=WoodsRoom.t.START,
 		})
 
-	Debug.pr("created room:", room)
-	Debug.pr("created room:", room.tilemap)
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.START)
 	assert_that(room.def.meta.room_type).is_equal("START")
@@ -110,8 +106,6 @@ func test_create_room_end():
 		type=WoodsRoom.t.END,
 		})
 
-	Debug.pr("created room:", room)
-	Debug.pr("created room:", room.tilemap)
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.type).is_equal(WoodsRoom.t.END)
 	assert_that(room.def.meta.room_type).is_equal("END")
@@ -205,14 +199,14 @@ func test_create_room_after_start_or_square():
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
 			contents=room_defs_txt,
 			last_room=start_room})
-		assert_that(room.rect.size).is_equal(test.expected.size)
-		assert_that(room.position).is_equal(test.expected.position)
+		assert_that(room.rect.size).is_equal(test.expected.size * 3)
+		assert_that(room.position).is_equal(test.expected.position * 3)
 
 		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
 			contents=room_defs_txt,
 			last_room=square_room})
-		assert_that(room_sq.rect.size).is_equal(test.expected.size)
-		assert_that(room_sq.position).is_equal(test.expected.position)
+		assert_that(room_sq.rect.size).is_equal(test.expected.size * 3)
+		assert_that(room_sq.position).is_equal(test.expected.position * 3)
 		room.free()
 		room_sq.free()
 	start_room.free()
@@ -223,16 +217,16 @@ func test_create_room_after_long():
 	var tests = [
 		{type=WoodsRoom.t.SQUARE, expected={
 			size=Vector2(dim, dim),
-			position=Vector2(dim, 0)}},
+			position=Vector2(dim*2, 0)}},
 		{type=WoodsRoom.t.LONG, expected={
 			size=Vector2(dim*2, dim),
-			position=Vector2(dim, 0)}},
+			position=Vector2(dim*2, 0)}},
 		{type=WoodsRoom.t.CLIMB, expected={
 			size=Vector2(dim, dim*2),
-			position=Vector2(dim, -1*dim)}},
+			position=Vector2(dim*2, -1*dim)}},
 		{type=WoodsRoom.t.FALL, expected={
 			size=Vector2(dim, dim*2),
-			position=Vector2(dim, 0)}}
+			position=Vector2(dim*2, 0)}}
 		]
 	var long_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.LONG,
@@ -245,8 +239,8 @@ func test_create_room_after_long():
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
 			contents=room_defs_txt,
 			last_room=long_room})
-		assert_that(room.rect.size).is_equal(test.expected.size)
-		assert_that(room.position).is_equal(test.expected.position)
+		assert_that(room.rect.size).is_equal(test.expected.size * 3)
+		assert_that(room.position).is_equal(test.expected.position * 3)
 		room.free()
 	long_room.free()
 
@@ -261,7 +255,7 @@ func test_create_room_after_fall():
 			position=Vector2(dim, dim)}},
 		{type=WoodsRoom.t.CLIMB, expected={
 			size=Vector2(dim, dim*2),
-			position=Vector2(dim, -1*dim)}},
+			position=Vector2(dim, 0)}},
 		{type=WoodsRoom.t.FALL, expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, dim)}}
@@ -277,8 +271,8 @@ func test_create_room_after_fall():
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
 			contents=room_defs_txt,
 			last_room=fall_room})
-		assert_that(room.rect.size).is_equal(test.expected.size)
-		assert_that(room.position).is_equal(test.expected.position)
+		assert_that(room.rect.size).is_equal(test.expected.size * 3)
+		assert_that(room.position).is_equal(test.expected.position * 3)
 		room.free()
 	fall_room.free()
 
@@ -293,7 +287,7 @@ func test_create_room_after_climb():
 			position=Vector2(dim, 0)}},
 		{type=WoodsRoom.t.CLIMB, expected={
 			size=Vector2(dim, dim*2),
-			position=Vector2(dim, -2*dim)}},
+			position=Vector2(dim, -1*dim)}},
 		{type=WoodsRoom.t.FALL, expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, 0)}}
@@ -308,7 +302,7 @@ func test_create_room_after_climb():
 	for test in tests:
 		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
 			contents=room_defs_txt, last_room=climb_room})
-		assert_that(room.rect.size).is_equal(test.expected.size)
-		assert_that(room.position).is_equal(test.expected.position)
+		assert_that(room.rect.size).is_equal(test.expected.size * 3)
+		assert_that(room.position).is_equal(test.expected.position * 3)
 		room.free()
 	climb_room.free()
