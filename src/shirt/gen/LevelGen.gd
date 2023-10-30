@@ -15,12 +15,12 @@ extends Node2D
 			_seed = randi()
 			generate()
 
-@export var room_tile_size = 8
+@export var room_tile_size = 16
 @export var room_count = 5
-@export_file var room_defs_path = "res://src/pluggs/room_defs.txt"
+@export_file var room_defs_path = "res://src/shirt/gen/room_defs.txt"
 var parsed_room_defs
 
-@export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/MetalTiles8.tscn")
+@export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
 @onready var rooms_node = $%Rooms
 
@@ -44,43 +44,50 @@ func _unhandled_input(event):
 func connect_to_rooms():
 	if Engine.is_editor_hint():
 		return
-	for r in rooms_node.get_children():
-		if r is PluggsRoom:
-			r.machine_plugged.connect(reboot_world)
+	# TODO any shirt setup
+	pass
 
 ## generate ######################################################################
 
-func generate():
+func reset():
 	# clear
 	rooms_node.get_children().map(func(c): c.queue_free())
 
 	# reset
 	room_idx = 0
 	parsed_room_defs = RoomParser.parse({room_defs_path=room_defs_path})
-	var rooms = []
 
-	# seed - may want to read from a global seed at some point
+func generate():
+	reset()
+
 	seed(_seed)
-
-	# generate
 	Debug.pr("Generating level with seed:", _seed)
 
-	# first room
-	var last_room = create_room({flags=["first"]})
-	rooms.append(last_room)
+	var rooms = []
 
-	# most rooms
-	for _i in range(room_count - 2):
-		last_room = create_room({skip_flags=["first", "last"], last_room=last_room})
-		rooms.append(last_room)
+	var room_opts = [
+		{flags=["first"]},
+		{side=Vector2.RIGHT},
+		{side=Vector2.UP},
+		{side=Vector2.RIGHT},
+		{side=Vector2.DOWN},
+		]
 
-	# last room
-	var room = create_room({flags=["last"], last_room=last_room})
-	rooms.append(room)
+	for opt in room_opts:
+		opt.merge({
+			tile_size=room_tile_size,
+			parsed_room_defs=parsed_room_defs,
+			tilemap_scene=tilemap_scene,
+			})
+
+	rooms = BrickRoom.create_rooms(room_opts)
+	for r in rooms:
+		setup_room(r)
 
 	promote_tilemaps(rooms)
 
 
+# TODO DRY up on BrickRoom / some other gen helper
 func promote_tilemaps(rooms):
 	var cell_positions = []
 	for r in rooms:
@@ -112,17 +119,7 @@ func reboot_world():
 	Game.respawn_player()
 	connect_to_rooms()
 
-func create_room(opts=null):
-	if opts == null:
-		opts = {}
-	opts.merge({
-		room_base_dim=room_base_dim,
-		tile_size=room_tile_size,
-		parsed_room_defs=parsed_room_defs,
-		tilemap_scene=tilemap_scene,
-		})
-	var room = PluggsRoom.create_room(opts)
-
+func setup_room(room):
 	room_idx += 1
 	room.ready.connect(func():
 		room.set_owner(self)

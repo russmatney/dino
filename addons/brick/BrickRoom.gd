@@ -232,6 +232,17 @@ static func create_room(opts):
 	room.gen(opts)
 	return room
 
+static func create_rooms(room_opts):
+	var last_room
+	var rooms = []
+	for i in len(room_opts):
+		var opts = room_opts[i]
+		if last_room != null:
+			opts.last_room = last_room
+		last_room = BrickRoom.create_room(room_opts[i])
+		rooms.append(last_room)
+	return rooms
+
 ##########################################################################
 ## instance ##################################################################
 

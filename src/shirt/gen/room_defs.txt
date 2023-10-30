@@ -1,0 +1,33 @@
+name Shirt Room Defs
+
+==============
+LEGEND
+==============
+
+. = Floor
+x = Tile
+p = Player
+
+==============
+ROOMS
+==============
+
+name Start
+first
+
+xxxxxxx
+x......
+x..p...
+x......
+x......
+xxxxxxx
+
+name Cross
+
+xx...xx
+xx...xx
+.......
+.......
+.......
+xx...xx
+xx...xx
