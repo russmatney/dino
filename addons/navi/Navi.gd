@@ -140,7 +140,8 @@ func _deferred_goto_scene(scene):
 
 func current_scene_path():
 	if current_scene == null:
-		current_scene = get_tree().get_root()
+		var root = get_tree().get_root()
+		current_scene = root.get_children()[-1]
 		get_tree().set_current_scene(current_scene)
 	return current_scene.scene_file_path
 
@@ -150,7 +151,8 @@ func current_scene_path():
 func add_child_to_current(child, deferred=true):
 	# could use the scene_tree's current_scene directly
 	if current_scene == null:
-		current_scene = get_tree().get_root()
+		var root = get_tree().get_root()
+		current_scene = root.get_children()[-1]
 		get_tree().set_current_scene(current_scene)
 
 	if deferred:
