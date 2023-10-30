@@ -203,13 +203,13 @@ func test_create_room_after_start_or_square():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
+		var room = BrickRoom.create_room({filter_rooms=test.filter_rooms,
 			contents=room_defs_txt,
 			last_room=start_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
 		assert_that(room.position).is_equal(test.expected.position * 3)
 
-		var room_sq = BrickRoom.create_room({filter_rooms=has_type(test.type),
+		var room_sq = BrickRoom.create_room({filter_rooms=test.filter_rooms,
 			contents=room_defs_txt,
 			last_room=square_room})
 		assert_that(room_sq.rect.size).is_equal(test.expected.size * 3)
@@ -242,7 +242,7 @@ func test_create_room_after_long():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
+		var room = BrickRoom.create_room({filter_rooms=test.filter_rooms,
 			contents=room_defs_txt,
 			last_room=long_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
@@ -270,7 +270,7 @@ func test_create_room_after_fall():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
+		var room = BrickRoom.create_room({filter_rooms=test.filter_rooms,
 			contents=room_defs_txt,
 			last_room=fall_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
@@ -298,7 +298,7 @@ func test_create_room_after_climb():
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
+		var room = BrickRoom.create_room({filter_rooms=test.filter_rooms,
 			contents=room_defs_txt, last_room=climb_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
 		assert_that(room.position).is_equal(test.expected.position * 3)
