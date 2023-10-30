@@ -11,7 +11,6 @@ func test_gen_room_def_basic():
 LEGEND
 =======
 
-. = Empty
 p = Player
 x = Tile
 
@@ -40,7 +39,6 @@ func test_gen_room_def_filter():
 LEGEND
 =======
 
-. = Empty
 p = Player
 x = Tile
 
@@ -92,7 +90,6 @@ var pluggs_room_contents = "test Pluggs Room Defs
 LEGEND
 =======
 
-. = Empty
 p = Player
 x = Tile
 

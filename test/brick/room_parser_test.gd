@@ -33,6 +33,40 @@ x.."})
 	assert_that(res.rooms[0].meta.is_start).is_true()
 	assert_that(res.rooms[0].shape).is_equal([
 		[["Tile"], ["Tile"], ["Tile"]],
+		[["Tile"], ["Player"], ["Empty"]],
+		[["Tile"], ["Empty"], ["Empty"]]
+		])
+
+func test_parse_returns_room_defs_without_empty():
+	var res = RoomParser.parse({contents="
+name PuzzRooms
+
+=======
+LEGEND
+=======
+
+p = Player
+x = Tile
+
+=======
+ROOMS
+=======
+
+room_type SQUARE
+is_start
+
+xxx
+xp.
+x.."})
+	assert_that(res.name).is_equal("PuzzRooms")
+	assert_that(res.prelude.name).is_equal("PuzzRooms")
+	assert_that(res.prelude).is_equal({name="PuzzRooms"})
+	assert_that(res.legend).is_equal({"p": ["Player"], "x": ["Tile"]})
+	assert_that(len(res.rooms)).is_equal(1)
+	assert_that(res.rooms[0].meta.room_type).is_equal("SQUARE")
+	assert_that(res.rooms[0].meta.is_start).is_true()
+	assert_that(res.rooms[0].shape).is_equal([
+		[["Tile"], ["Tile"], ["Tile"]],
 		[["Tile"], ["Player"], null],
 		[["Tile"], null, null]
 		])
@@ -103,13 +137,13 @@ x.....
 	# shape
 	assert_that(parsed.rooms[0].shape).is_equal([
 		["x", "x", "x"],
-		["x", "p", null],
-		["x", null, null]
+		["x", "p", "."],
+		["x", ".", "."]
 		])
 	assert_that(parsed.rooms[1].shape).is_equal([
 		["x", "x", "x", "x", "x", "x"],
-		["x", null, null, null, "p", null],
-		["x", null, null, null, null, null],
+		["x", ".", ".", ".", "p", "."],
+		["x", ".", ".", ".", ".", "."],
 		])
 
 
@@ -152,11 +186,11 @@ x.....
 	# shape
 	assert_that(parsed.rooms[0].shape).is_equal([
 		["x", "x", "x"],
-		["x", null, null],
-		["x", null, null]
+		["x", ".", "."],
+		["x", ".", "."]
 		])
 	assert_that(parsed.rooms[1].shape).is_equal([
 		["x", "x", "x", "x", "x", "x"],
-		["x", null, null, null, null, null],
-		["x", null, null, null, null, null],
+		["x", ".", ".", ".", ".", "."],
+		["x", ".", ".", ".", ".", "."],
 		])

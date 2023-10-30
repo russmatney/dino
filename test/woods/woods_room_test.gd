@@ -11,7 +11,6 @@ var room_defs_txt = "title WoodsRooms
 LEGEND
 =======
 
-. = Empty
 p = Player
 x = Tile
 

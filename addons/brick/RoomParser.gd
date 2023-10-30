@@ -55,7 +55,11 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 		for row in r.get("shape"):
 			var new_row = []
 			for col in row:
-				new_row.append(parsed.legend.get(col, col))
+				var val = parsed.legend.get(col)
+				if val == null:
+					if col != ".":
+						val = col
+				new_row.append(val)
 			shape.append(new_row)
 		def.shape = shape
 
@@ -108,17 +112,12 @@ static func parse_metadata(lines):
 		data[key] = val
 	return data
 
-static func parse_shape(lines, parse_int=true):
+static func parse_shape(lines):
 	var shape = []
 	for l in lines:
 		var row = []
 		for c in l:
-			if c == ".":
-				row.append(null)
-			elif parse_int:
-				row.append(int(c))
-			else:
-				row.append(c)
+			row.append(c)
 		if row.size() > 0:
 			shape.append(row)
 	return shape
@@ -152,7 +151,7 @@ static func parse_legend(chunks):
 
 static func parse_room(shape_lines, raw_meta):
 	var room = parse_metadata(raw_meta)
-	var raw_shape = parse_shape(shape_lines, false)
+	var raw_shape = parse_shape(shape_lines)
 
 	room["shape"] = raw_shape
 	# maybe want to optimize away from this?
