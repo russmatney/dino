@@ -19,42 +19,42 @@ room_tile_size = 24
 [node name="Rooms" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="@Node2D@30094" type="Node2D" parent="Rooms"]
+[node name="Room_1" type="Node2D" parent="Rooms"]
 script = ExtResource("2_6yls3")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@30094"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
 offset_right = 168.0
 offset_bottom = 144.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="@Node2D@30095" type="Node2D" parent="Rooms"]
+[node name="Room_2" type="Node2D" parent="Rooms"]
 position = Vector2(168, 0)
 script = ExtResource("2_6yls3")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@30095"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_2"]
 offset_right = 168.0
 offset_bottom = 168.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="Room_3" type="Node2D" parent="Rooms"]
+[node name="@Node2D@32649" type="Node2D" parent="Rooms"]
 position = Vector2(168, 168)
 script = ExtResource("2_6yls3")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/Room_3"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@32649"]
 offset_right = 168.0
 offset_bottom = 168.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="Room_4" type="Node2D" parent="Rooms"]
+[node name="@Node2D@32650" type="Node2D" parent="Rooms"]
 position = Vector2(336, -48)
 script = ExtResource("2_6yls3")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/Room_4"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@32650"]
 offset_right = 336.0
 offset_bottom = 336.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="CaveTiles16" type="TileMap" parent="Rooms" instance=ExtResource("3_e26sm")]
+[node name="@TileMap@32651" type="TileMap" parent="Rooms" instance=ExtResource("3_e26sm")]
 scale = Vector2(1.5, 1.5)
 tile_set = ExtResource("4_fxl4x")
 format = 2
@@ -64,12 +64,12 @@ script = ExtResource("5_tp1lp")
 [node name="Entities" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="PlayerSpawnPoint" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("6_5yray")]
+[node name="@Marker2D@32652" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("6_5yray")]
 position = Vector2(72, 72)
 script = ExtResource("7_boakg")
 dev_only = false
 
-[node name="BlobWalker" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("8_1sp5k")]
+[node name="@CharacterBody2D@32653" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("8_1sp5k")]
 position = Vector2(264, 120)
 collision_layer = 8
 collision_mask = 5127
@@ -78,7 +78,7 @@ display_name = "Blob Walker"
 initial_health = 2
 should_wander = true
 
-[node name="@CharacterBody2D@30096" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("10_1pp0i")]
+[node name="BlobChaser" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("10_1pp0i")]
 position = Vector2(216, 240)
 collision_layer = 8
 collision_mask = 5127

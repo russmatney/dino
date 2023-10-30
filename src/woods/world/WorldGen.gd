@@ -53,22 +53,22 @@ func generate():
 	Debug.pr("Generating world")
 
 	# first room
-	var last_room = create_room({type=WoodsRoom.t.START})
+	var last_room = create_room({type=WoodsData.t.START})
 	rooms.append(last_room)
 
 	# most rooms
 	for _i in range(room_count - 2):
 		last_room = create_room({last_room=last_room,
 			type=Util.rand_of([
-				WoodsRoom.t.SQUARE,
-				WoodsRoom.t.LONG,
-				WoodsRoom.t.CLIMB,
-				WoodsRoom.t.FALL]),
+				WoodsData.t.SQUARE,
+				WoodsData.t.LONG,
+				WoodsData.t.CLIMB,
+				WoodsData.t.FALL]),
 			})
 		rooms.append(last_room)
 
 	# last room
-	var room = create_room({type=WoodsRoom.t.END, last_room=last_room})
+	var room = create_room({type=WoodsData.t.END, last_room=last_room})
 	rooms.append(room)
 
 	promote_tilemaps(rooms)
@@ -104,7 +104,56 @@ func create_room(opts=null):
 		tile_size=tile_size,
 		parsed_room_defs=parsed_room_defs,
 		tilemap_scene=tilemap_scene})
-	var room = WoodsRoom.create_room(opts)
+
+	opts["tilemap_scene"] = load("res://addons/reptile/tilemaps/CaveTiles16.tscn")
+
+	opts["label_to_entity"] = {
+		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+		"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
+
+		# not used (at the time of writing), but maybe a quick win idea
+		"Spawn": {scene=load("res://src/dino/SpawnPoint.tscn")},
+# 		var spawn_point = spawn_point_scene.instantiate()
+# 		spawn_point.position = l * coord_factor
+# 		spawn_point.spawn_scene = leaf_scene
+# 		spawn_point.name = "LeafSpawnPoint_%s_%s" % [l.x, l.y]
+		"Light": {scene=load("res://src/pluggs/entities/Light.tscn")},
+		}
+
+	var typ = Util.get_(opts, "type", WoodsData.t.SQUARE)
+	opts["filter_rooms"] = func(r):
+		var type_s
+		match typ:
+			WoodsData.t.START: type_s = "START"
+			WoodsData.t.END: type_s = "END"
+			WoodsData.t.SQUARE: type_s = "SQUARE"
+			WoodsData.t.CLIMB: type_s = "CLIMB"
+			WoodsData.t.FALL: type_s = "FALL"
+			WoodsData.t.LONG: type_s = "LONG"
+
+		if type_s != null:
+			return type_s == r.meta.get("room_type")
+
+	var room = BrickRoom.create_room(opts)
+
+	# add detection for end-reached
+	if typ == WoodsData.t.END:
+		var shape = RectangleShape2D.new()
+		shape.size = room.rect.size
+		var coll = CollisionShape2D.new()
+		coll.name = "CollisionShape2D"
+		coll.set_shape(shape)
+		coll.position = room.rect.position + (room.rect.size / 2.0)
+
+		var box = Area2D.new()
+		box.add_child(coll)
+		coll.set_owner(box)
+		box.name = "EndBox"
+		box.set_collision_layer_value(1, false)
+		box.set_collision_mask_value(1, false)
+		box.set_collision_mask_value(2, true) # 2 for player
+
+		room.add_child(box)
 
 	room_idx += 1
 	room.ready.connect(func():

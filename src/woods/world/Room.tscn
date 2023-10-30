@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://rvwj1l4phooc"]
-
-[ext_resource type="Script" path="res://src/woods/world/WoodsRoom.gd" id="1_qfhul"]
-
-[node name="WoodsRoom" type="Node2D"]
-script = ExtResource("1_qfhul")

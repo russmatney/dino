@@ -64,10 +64,9 @@ xxx
 ## create_room ###########################################################
 
 func test_create_room_no_options():
-	var room = WoodsRoom.create_room({contents=room_defs_txt})
+	var room = BrickRoom.create_room({contents=room_defs_txt})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
 	assert_that(room.def.meta.room_type).is_equal("SQUARE")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
@@ -79,14 +78,28 @@ func test_create_room_no_options():
 		])
 	room.free()
 
+
+func has_type(typ):
+	return func(r):
+		var type_s
+		match typ:
+			WoodsData.t.START: type_s = "START"
+			WoodsData.t.END: type_s = "END"
+			WoodsData.t.SQUARE: type_s = "SQUARE"
+			WoodsData.t.CLIMB: type_s = "CLIMB"
+			WoodsData.t.FALL: type_s = "FALL"
+			WoodsData.t.LONG: type_s = "LONG"
+
+		if type_s != null:
+			return type_s == r.meta.get("room_type")
+
 func test_create_room_start():
-	var room = WoodsRoom.create_room({
+	var room = BrickRoom.create_room({
 		contents=room_defs_txt,
-		type=WoodsRoom.t.START,
+		filter_rooms=has_type(WoodsData.t.START),
 		})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.type).is_equal(WoodsRoom.t.START)
 	assert_that(room.def.meta.room_type).is_equal("START")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
@@ -100,13 +113,12 @@ func test_create_room_start():
 	room.free()
 
 func test_create_room_end():
-	var room = WoodsRoom.create_room({
+	var room = BrickRoom.create_room({
 		contents=room_defs_txt,
-		type=WoodsRoom.t.END,
+		filter_rooms=has_type(WoodsData.t.END),
 		})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.type).is_equal(WoodsRoom.t.END)
 	assert_that(room.def.meta.room_type).is_equal("END")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
@@ -120,13 +132,12 @@ func test_create_room_end():
 	room.free()
 
 func test_create_room_square():
-	var room = WoodsRoom.create_room({
+	var room = BrickRoom.create_room({
 		contents=room_defs_txt,
-		type=WoodsRoom.t.SQUARE,
+		filter_rooms=has_type(WoodsData.t.SQUARE),
 		})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.type).is_equal(WoodsRoom.t.SQUARE)
 	assert_that(room.def.meta.room_type).is_equal("SQUARE")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 2),
@@ -139,13 +150,12 @@ func test_create_room_square():
 	room.free()
 
 func test_create_room_long():
-	var room = WoodsRoom.create_room({
+	var room = BrickRoom.create_room({
 		contents=room_defs_txt,
-		type=WoodsRoom.t.LONG,
+		filter_rooms=has_type(WoodsData.t.LONG),
 		})
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.type).is_equal(WoodsRoom.t.LONG)
 	assert_that(room.def.meta.room_type).is_equal("LONG")
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0, 0),
@@ -168,38 +178,38 @@ func test_create_room_long():
 func test_create_room_after_start_or_square():
 	var dim = 16
 	var tests = [
-		{type=WoodsRoom.t.SQUARE, expected={
+		{filter_rooms=has_type(WoodsData.t.SQUARE), expected={
 			size=Vector2(dim, dim),
 			position=Vector2(dim, 0)}},
-		{type=WoodsRoom.t.LONG, expected={
+		{filter_rooms=has_type(WoodsData.t.LONG), expected={
 			size=Vector2(dim*2, dim),
 			position=Vector2(dim, 0)}},
-		{type=WoodsRoom.t.CLIMB, expected={
+		{filter_rooms=has_type(WoodsData.t.CLIMB), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, -1*dim)}},
-		{type=WoodsRoom.t.FALL, expected={
+		{filter_rooms=has_type(WoodsData.t.FALL), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, 0)}}
 		]
-	var start_room = WoodsRoom.create_room({
-		type=WoodsRoom.t.START,
+	var start_room = BrickRoom.create_room({
+		filter_rooms=has_type(WoodsData.t.START),
 		contents=room_defs_txt,
 		})
 
-	var square_room = WoodsRoom.create_room({
-		type=WoodsRoom.t.SQUARE,
+	var square_room = BrickRoom.create_room({
+		filter_rooms=has_type(WoodsData.t.SQUARE),
 		contents=room_defs_txt,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type,
+		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
 			contents=room_defs_txt,
 			last_room=start_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
 		assert_that(room.position).is_equal(test.expected.position * 3)
 
-		var room_sq = WoodsRoom.create_room({type=test.type,
+		var room_sq = BrickRoom.create_room({filter_rooms=has_type(test.type),
 			contents=room_defs_txt,
 			last_room=square_room})
 		assert_that(room_sq.rect.size).is_equal(test.expected.size * 3)
@@ -212,27 +222,27 @@ func test_create_room_after_start_or_square():
 func test_create_room_after_long():
 	var dim = 16
 	var tests = [
-		{type=WoodsRoom.t.SQUARE, expected={
+		{filter_rooms=has_type(WoodsData.t.SQUARE), expected={
 			size=Vector2(dim, dim),
 			position=Vector2(dim*2, 0)}},
-		{type=WoodsRoom.t.LONG, expected={
+		{filter_rooms=has_type(WoodsData.t.LONG), expected={
 			size=Vector2(dim*2, dim),
 			position=Vector2(dim*2, 0)}},
-		{type=WoodsRoom.t.CLIMB, expected={
+		{filter_rooms=has_type(WoodsData.t.CLIMB), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim*2, -1*dim)}},
-		{type=WoodsRoom.t.FALL, expected={
+		{filter_rooms=has_type(WoodsData.t.FALL), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim*2, 0)}}
 		]
-	var long_room = WoodsRoom.create_room({
-		type=WoodsRoom.t.LONG,
+	var long_room = BrickRoom.create_room({
+		filter_rooms=has_type(WoodsData.t.LONG),
 		contents=room_defs_txt,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type,
+		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
 			contents=room_defs_txt,
 			last_room=long_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
@@ -243,24 +253,24 @@ func test_create_room_after_long():
 func test_create_room_after_fall():
 	var dim = 16
 	var tests = [
-		{type=WoodsRoom.t.SQUARE, expected={
+		{filter_rooms=has_type(WoodsData.t.SQUARE), expected={
 			size=Vector2(dim, dim),
 			position=Vector2(dim, dim)}},
-		{type=WoodsRoom.t.LONG, expected={
+		{filter_rooms=has_type(WoodsData.t.LONG), expected={
 			size=Vector2(dim*2, dim),
 			position=Vector2(dim, dim)}},
-		{type=WoodsRoom.t.CLIMB, expected={
+		{filter_rooms=has_type(WoodsData.t.CLIMB), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, 0)}},
-		{type=WoodsRoom.t.FALL, expected={
+		{filter_rooms=has_type(WoodsData.t.FALL), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, dim)}}
 		]
-	var fall_room = WoodsRoom.create_room({type=WoodsRoom.t.FALL, contents=room_defs_txt,})
+	var fall_room = BrickRoom.create_room({filter_rooms=has_type(WoodsData.t.FALL), contents=room_defs_txt,})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type,
+		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
 			contents=room_defs_txt,
 			last_room=fall_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
@@ -271,24 +281,24 @@ func test_create_room_after_fall():
 func test_create_room_after_climb():
 	var dim = 16
 	var tests = [
-		{type=WoodsRoom.t.SQUARE, expected={
+		{filter_rooms=has_type(WoodsData.t.SQUARE), expected={
 			size=Vector2(dim, dim),
 			position=Vector2(dim, 0)}},
-		{type=WoodsRoom.t.LONG, expected={
+		{filter_rooms=has_type(WoodsData.t.LONG), expected={
 			size=Vector2(dim*2, dim),
 			position=Vector2(dim, 0)}},
-		{type=WoodsRoom.t.CLIMB, expected={
+		{filter_rooms=has_type(WoodsData.t.CLIMB), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, -1*dim)}},
-		{type=WoodsRoom.t.FALL, expected={
+		{filter_rooms=has_type(WoodsData.t.FALL), expected={
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, 0)}}
 		]
-	var climb_room = WoodsRoom.create_room({type=WoodsRoom.t.CLIMB, contents=room_defs_txt,})
+	var climb_room = BrickRoom.create_room({filter_rooms=has_type(WoodsData.t.CLIMB), contents=room_defs_txt,})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type,
+		var room = BrickRoom.create_room({filter_rooms=has_type(test.type),
 			contents=room_defs_txt, last_room=climb_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
 		assert_that(room.position).is_equal(test.expected.position * 3)
