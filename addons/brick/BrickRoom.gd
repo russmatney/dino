@@ -150,19 +150,20 @@ static func gen_room_def(opts: BrickRoomOpts, d_opts: Dictionary={}):
 # if there are no tiles to stand on, or no tiles with an empty tile above them, returns 0.
 static func count_to_floor_tile(col: Array):
 	var v_count = len(col)
-	var _col = col.duplicate()
+	var _col = col.duplicate(true)
 
 	_col.reverse()
 	var from_bottom_count = 0
 	var seen_tile = false
 	for c in _col:
-		if c is Array and "Tile" in c:
+		var c_has_tile = c is Array and "Tile" in c
+		if c_has_tile:
 			from_bottom_count += 1
 			seen_tile = true
-		elif c == null and not seen_tile:
+		elif not seen_tile:
 			from_bottom_count += 1
 
-		if seen_tile and from_bottom_count > 0 and c == null:
+		if seen_tile and from_bottom_count > 0 and not c_has_tile:
 			break
 
 	return v_count - from_bottom_count

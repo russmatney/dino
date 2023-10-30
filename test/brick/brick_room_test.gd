@@ -325,12 +325,13 @@ func test_create_rooms_going_up():
 
 ## discovered issues/use-cases #########
 
-var shirt_room_defs_alignment = "name Shirt Room Defs
+var shirt_room_defs_alignment_with_floor_legend = "name Shirt Room Defs
 
 ==============
 LEGEND
 ==============
 
+. = Floor
 x = Tile
 
 ==============
@@ -358,10 +359,11 @@ xx...xx
 xx...xx
 "
 
-func test_create_rooms_align_shirt_walker_fix():
+# test from when the ". = Floor" cost me a few hours
+func test_create_rooms_align_shirt_walker_with_floor():
 	var rooms = create_rooms([
-		{contents=shirt_room_defs_alignment, flags=["first"]},
-		{contents=shirt_room_defs_alignment, skip_flags=["first"], side=Vector2.RIGHT},
+		{contents=shirt_room_defs_alignment_with_floor_legend, flags=["first"]},
+		{contents=shirt_room_defs_alignment_with_floor_legend, skip_flags=["first"], side=Vector2.RIGHT},
 		])
 	var room_1 = rooms[0]
 	var room_2 = rooms[1]
