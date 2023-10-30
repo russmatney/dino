@@ -89,6 +89,7 @@ func generate():
 		setup_room(r)
 
 	promote_tilemaps(rooms)
+	promote_entities(rooms)
 
 
 # TODO DRY up on BrickRoom / some other gen helper
@@ -112,6 +113,12 @@ func promote_tilemaps(rooms):
 
 	tilemap.ready.connect(func(): tilemap.set_owner(self))
 	rooms_node.add_child(tilemap)
+
+func promote_entities(rooms):
+	for room in rooms:
+		for ent in room.entities:
+			ent.reparent(rooms_node, true)
+			ent.set_owner(self)
 
 ## create_room ######################################################################
 
