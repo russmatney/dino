@@ -4,7 +4,7 @@ extends GdUnitTestSuite
 ## gen_room_def ##################################################################
 
 func test_gen_room_def_basic():
-	var room = PluggsRoom.gen_room_def(null, {
+	var room = BrickRoom.gen_room_def(null, {
 		contents="title PluggsRoomsTest
 
 =======
@@ -60,7 +60,7 @@ funky
 x..
 "
 
-	var room = PluggsRoom.gen_room_def(null, {
+	var room = BrickRoom.gen_room_def(null, {
 		contents=contents,
 		filter_rooms=func(room): return room.has_flag("funky")})
 
@@ -71,7 +71,7 @@ x..
 		[["Tile"], null, null]
 		])
 
-	var room_2 = PluggsRoom.gen_room_def(null, {
+	var room_2 = BrickRoom.gen_room_def(null, {
 		contents=contents,
 		filter_rooms=func(room): return not room.has_flag("funky")})
 
@@ -105,14 +105,14 @@ xxx
 "
 
 func test_create_room_basic():
-	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
+	var room = BrickRoom.create_room({contents=pluggs_room_contents})
 	assert_that(room.name).is_equal("Test Room")
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	room.free()
 
 func test_create_room_based_on_last_room():
-	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
-	var another_room = PluggsRoom.create_room({contents=pluggs_room_contents, last_room=room})
+	var room = BrickRoom.create_room({contents=pluggs_room_contents})
+	var another_room = BrickRoom.create_room({contents=pluggs_room_contents, last_room=room})
 	assert_that(another_room.name).is_equal("Test Room")
 	# y is 16 b/c of the align-floor logic - moves down to smoothly transition between rooms
 	assert_that(another_room.position).is_equal(Vector2(48,16)) # 3 x 16 = 48
@@ -120,14 +120,14 @@ func test_create_room_based_on_last_room():
 	another_room.free()
 
 func test_create_room_color_rect():
-	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
+	var room = BrickRoom.create_room({contents=pluggs_room_contents})
 	assert_that(room.name).is_equal("Test Room")
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.rect.size).is_equal(Vector2(48,48))
 	room.free()
 
 func test_create_room_tilemap():
-	var room = PluggsRoom.create_room({contents=pluggs_room_contents})
+	var room = BrickRoom.create_room({contents=pluggs_room_contents})
 	assert_that(room.name).is_equal("Test Room")
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([

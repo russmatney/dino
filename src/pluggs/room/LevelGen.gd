@@ -45,8 +45,11 @@ func connect_to_rooms():
 	if Engine.is_editor_hint():
 		return
 	for r in rooms_node.get_children():
-		if r is PluggsRoom:
-			r.machine_plugged.connect(reboot_world)
+		if r is BrickRoom:
+			for e in r.get_children():
+				if e.is_in_group("arcade_machine"):
+					e.plugged.connect(reboot_world)
+					Debug.pr("connected room to arcade machine plugged signal")
 
 ## generate ######################################################################
 
@@ -115,12 +118,21 @@ func reboot_world():
 func create_room(opts=null):
 	if opts == null:
 		opts = {}
+
+	opts["tilemap_scene"] = load("res://addons/reptile/tilemaps/MetalTiles8.tscn")
+
+	opts["label_to_entity"] = {
+		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+		"Machine": {scene=load("res://src/pluggs/entities/ArcadeMachine.tscn")},
+		"Light": {scene=load("res://src/pluggs/entities/Light.tscn")},
+		}
+
 	opts.merge({
 		tile_size=room_tile_size,
 		parsed_room_defs=parsed_room_defs,
 		tilemap_scene=tilemap_scene,
 		})
-	var room = PluggsRoom.create_room(opts)
+	var room = BrickRoom.create_room(opts)
 
 	room_idx += 1
 	room.ready.connect(func():

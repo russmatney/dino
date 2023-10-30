@@ -15,7 +15,7 @@ func create_rooms(room_opts):
 ## gen_room_def ##################################################################
 
 func test_gen_room_def_basic():
-	var room = PluggsRoom.gen_room_def(null, {
+	var room = BrickRoom.gen_room_def(null, {
 		contents="title BrickRoomTest
 
 =======
