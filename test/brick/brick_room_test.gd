@@ -322,3 +322,62 @@ func test_create_rooms_going_up():
 	assert_that(room_1.name).is_equal("Top")
 	assert_that(room_2.name).is_equal("Bottom")
 	assert_that(room_2.position).is_equal(Vector2(0, -3) * 16)
+
+## discovered issues/use-cases #########
+
+var shirt_room_defs_alignment = "name Shirt Room Defs
+
+==============
+LEGEND
+==============
+
+x = Tile
+
+==============
+ROOMS
+==============
+
+name Start
+first
+
+xxxxxxx
+x......
+x..p...
+x......
+x......
+xxxxxxx
+
+name Walker
+
+xxx..xx
+xxx..xx
+xx...xx
+.......
+....w..
+xx...xx
+xx...xx
+"
+
+func test_create_rooms_align_shirt_walker_fix():
+	var rooms = create_rooms([
+		{contents=shirt_room_defs_alignment, flags=["first"]},
+		{contents=shirt_room_defs_alignment, skip_flags=["first"], side=Vector2.RIGHT},
+		])
+	var room_1 = rooms[0]
+	var room_2 = rooms[1]
+	assert_that(room_1.name).is_equal("Start")
+	assert_that(room_2.name).is_equal("Walker")
+
+	"
+	y-offset should end up as zero!
+	xxxxxxx xxx..xx
+	x......	xxx..xx
+	x..p...	xx...xx
+	x......	.......
+	x......	....w..
+	xxxxxxx	xx...xx
+			xx...xx
+	"
+
+	assert_that(room_1.position).is_equal(Vector2(0, 0))
+	assert_that(room_2.position).is_equal(Vector2(7, 0) * 16)

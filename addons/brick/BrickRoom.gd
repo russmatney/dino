@@ -57,6 +57,9 @@ class BrickRoomOpts:
 	func data():
 		return _opts
 
+	func to_pretty(a, b, c):
+		return Debug.to_pretty(data(), a, b, c)
+
 ##########################################################################
 ## static ##################################################################
 

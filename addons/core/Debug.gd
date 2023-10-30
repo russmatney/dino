@@ -182,7 +182,7 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["purple", msg.x, "purple", msg.y]
 		else:
 			return '(%s,%s)' % [msg.x, msg.y]
-	elif msg is PandoraEntity and msg.has_method("data"):
+	elif msg.has_method("data"):
 		return to_pretty(msg.data(), newlines, use_color, indent_level)
 	elif msg.has_method("to_pretty"):
 		return msg.to_pretty(newlines, use_color, indent_level)
