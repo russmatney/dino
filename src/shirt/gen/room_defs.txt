@@ -7,6 +7,8 @@ LEGEND
 . = Floor
 x = Tile
 p = Player
+c = Chaser
+w = Walker
 
 ==============
 ROOMS
@@ -29,5 +31,25 @@ xx...xx
 .......
 .......
 .......
+xx...xx
+xx...xx
+
+name Chaser
+
+xx...xx
+xx...xx
+..c....
+.......
+.......
+xx...xx
+xx...xx
+
+name Walker
+
+xx...xx
+xx...xx
+.......
+.......
+....w..
 xx...xx
 xx...xx

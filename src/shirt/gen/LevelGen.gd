@@ -78,7 +78,11 @@ func generate():
 			tile_size=room_tile_size,
 			parsed_room_defs=parsed_room_defs,
 			tilemap_scene=tilemap_scene,
-			})
+			label_to_entity={
+				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+				"Chaser": {scene=load("res://src/shirt/enemies/BlobChaser.tscn")},
+				"Walker": {scene=load("res://src/shirt/enemies/BlobWalker.tscn")},
+				}})
 
 	rooms = BrickRoom.create_rooms(room_opts)
 	for r in rooms:
