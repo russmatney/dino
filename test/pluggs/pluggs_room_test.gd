@@ -4,7 +4,7 @@ extends GdUnitTestSuite
 ## gen_room_def ##################################################################
 
 func test_gen_room_def_basic():
-	var room = PluggsRoom.gen_room_def({
+	var room = PluggsRoom.gen_room_def(null, {
 		contents="title PluggsRoomsTest
 
 =======
@@ -62,7 +62,7 @@ funky
 x..
 "
 
-	var room = PluggsRoom.gen_room_def({
+	var room = PluggsRoom.gen_room_def(null, {
 		contents=contents,
 		filter_rooms=func(room): return room.has_flag("funky")})
 
@@ -73,7 +73,7 @@ x..
 		[["Tile"], null, null]
 		])
 
-	var room_2 = PluggsRoom.gen_room_def({
+	var room_2 = PluggsRoom.gen_room_def(null, {
 		contents=contents,
 		filter_rooms=func(room): return not room.has_flag("funky")})
 

@@ -4,7 +4,7 @@ extends GdUnitTestSuite
 ## gen_room_def ##################################################################
 
 func test_gen_room_def_basic():
-	var room = PluggsRoom.gen_room_def({
+	var room = PluggsRoom.gen_room_def(null, {
 		contents="title BrickRoomTest
 
 =======

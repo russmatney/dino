@@ -4,16 +4,69 @@ extends Node2D
 
 # TODO consider a stronger type for the opts Dictionary in here
 
+class BrickRoomOpts:
+	extends Object
+
+	var parsed_room_defs: RoomDefs
+	var room_defs_path: String
+	var contents: String
+
+	var tile_size: int
+	var side: Vector2
+	var flags: Array
+	var skip_flags: Array
+	var tilemap_scene: PackedScene
+	var label_to_entity: Dictionary
+	var color: Color
+	var show_color_rect: bool
+
+	# does this need to be optional?
+	var last_room: BrickRoom
+
+	# the input with defaults applied
+	# useful for a quick data() func, and passing this down to other funcs
+	var _opts: Dictionary
+
+	func _init(opts):
+		Util.ensure_default(opts, "side", Vector2.RIGHT)
+		Util.ensure_default(opts, "tile_size", 16)
+		Util.ensure_default(opts, "flags", [])
+		Util.ensure_default(opts, "skip_flags", [])
+		Util.ensure_default(opts, "tilemap_scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
+		Util.ensure_default(opts, "label_to_entity", {})
+		Util.ensure_default(opts, "color", Color.PERU)
+		Util.ensure_default(opts, "show_color_rect", true)
+
+		_opts = opts
+
+		parsed_room_defs = opts.get("parsed_room_defs")
+		room_defs_path = opts.get("room_defs_path", "")
+		contents = opts.get("contents", "")
+
+		tile_size = opts.tile_size
+		side = opts.side
+		flags = opts.flags
+		skip_flags = opts.skip_flags
+		tilemap_scene = opts.tilemap_scene
+		label_to_entity = opts.label_to_entity
+		color = opts.color
+		show_color_rect = opts.show_color_rect
+
+		last_room = opts.get("last_room")
+
+	func data():
+		return _opts
+
 ##########################################################################
 ## static ##################################################################
 
-static func width(room: BrickRoom, opts: Dictionary):
+static func width(room: BrickRoom, opts: BrickRoomOpts):
 	return len(room.def.shape[0]) * opts.tile_size
 
-static func height(room: BrickRoom, opts: Dictionary):
+static func height(room: BrickRoom, opts: BrickRoomOpts):
 	return len(room.def.shape) * opts.tile_size
 
-static func size(room: BrickRoom, opts: Dictionary):
+static func size(room: BrickRoom, opts: BrickRoomOpts):
 	return Vector2(width(room, opts), height(room, opts))
 
 static func last_column(room: BrickRoom):
@@ -28,18 +81,13 @@ static func last_row(room: BrickRoom):
 static func first_row(room: BrickRoom):
 	return room.def.row(0)
 
-static func crd_to_position(crd, opts: Dictionary):
+static func crd_to_position(crd: Dictionary, opts: BrickRoomOpts):
 	return crd.coord * opts.tile_size
 
 ## tilemap ##################################################################
 
-static func add_tilemap(room, opts):
-	var tmap_scene = Util.get_(opts, "tilemap_scene")
-	if tmap_scene == null:
-		Debug.error("No tilemap scene passed to add_tilemap", opts)
-		return
-
-	room.tilemap = tmap_scene.instantiate()
+static func add_tilemap(room: BrickRoom, opts: BrickRoomOpts):
+	room.tilemap = opts.tilemap_scene.instantiate()
 
 	var tilemap_tile_size = room.tilemap.tile_set.tile_size
 	var tilemap_scale_factor = opts.tile_size*Vector2.ONE/(tilemap_tile_size as Vector2)
@@ -54,7 +102,7 @@ static func add_tilemap(room, opts):
 
 ## entities ##################################################################
 
-static func add_entity(crd, room, ent_opts, opts):
+static func add_entity(crd, room: BrickRoom, ent_opts, opts: BrickRoomOpts):
 	var ent = ent_opts.scene.instantiate()
 	ent.position = crd_to_position(crd, opts) + Vector2.DOWN * opts.tile_size
 	if ent_opts.get("setup"):
@@ -71,11 +119,11 @@ static func add_entities(room, opts):
 
 ## color rect ##################################################################
 
-static func add_rect(room: BrickRoom, opts: Dictionary):
+static func add_rect(room: BrickRoom, opts: BrickRoomOpts):
 	var rec = ColorRect.new()
 	rec.name = "ColorRect"
-	rec.size = Util.get_(opts, "size", BrickRoom.size(room, opts))
-	rec.color = Util.get_(opts, "color", Color.PERU)
+	rec.size = BrickRoom.size(room, opts)
+	rec.color = opts.color
 	# rec.visible = opts.get("show_color_rect", false)
 
 	room.rect = rec
@@ -83,9 +131,11 @@ static func add_rect(room: BrickRoom, opts: Dictionary):
 
 ## room gen ##################################################################
 
-static func gen_room_def(opts={}):
-	var room_defs = RoomParser.parse(opts)
-	var filtered_rooms = room_defs.filter(opts)
+static func gen_room_def(opts: BrickRoomOpts, d_opts: Dictionary={}):
+	if opts == null:
+		opts = BrickRoomOpts.new(d_opts)
+	var room_defs = RoomParser.parse(opts.data())
+	var filtered_rooms = room_defs.filter(opts.data())
 	if filtered_rooms != null:
 		return Util.rand_of(filtered_rooms)
 	Debug.error("Failed to generated room_def with opts", opts)
@@ -114,7 +164,7 @@ static func count_to_floor_tile(col: Array):
 
 	return v_count - from_bottom_count
 
-static func next_room_pos_right(opts, room):
+static func next_room_pos_right(room: BrickRoom, opts: BrickRoomOpts):
 	var last_room = opts.last_room
 
 	var x = last_room.position.x + BrickRoom.width(last_room, opts)
@@ -126,7 +176,7 @@ static func next_room_pos_right(opts, room):
 	var y = last_room.position.y + y_offset
 	return Vector2(x, y)
 
-static func next_room_pos_top(opts, room):
+static func next_room_pos_top(room: BrickRoom, opts: BrickRoomOpts):
 	var last_room = opts.last_room
 
 	var y = last_room.position.y + BrickRoom.height(room, opts)
@@ -138,13 +188,13 @@ static func next_room_pos_top(opts, room):
 	var x = last_room.position.x + x_offset
 	return Vector2(x, y)
 
-static func next_room_position(opts: Dictionary, room):
+static func next_room_position(room: BrickRoom, opts: BrickRoomOpts):
 	if opts.get("last_room") == null:
 		return Vector2.ZERO
 
 	match opts.side:
-		Vector2.RIGHT: return BrickRoom.next_room_pos_right(opts, room)
-		Vector2.UP: return BrickRoom.next_room_pos_top(opts, room)
+		Vector2.RIGHT: return BrickRoom.next_room_pos_right(room, opts)
+		Vector2.UP: return BrickRoom.next_room_pos_top(room, opts)
 
 	Debug.warn("Unsupported 'side' option passed", opts.side)
 
@@ -172,24 +222,18 @@ func to_pretty(a, b, c):
 ## gen #############################################################
 
 func gen(opts: Dictionary):
-	Util.ensure_default(opts, "side", Vector2.RIGHT)
-	Util.ensure_default(opts, "tile_size", 16)
-	Util.ensure_default(opts, "flags", [])
-	Util.ensure_default(opts, "skip_flags", [])
-	Util.ensure_default(opts, "tilemap_scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
-	Util.ensure_default(opts, "label_to_entity", {})
-	var last_room = opts.get("last_room")
+	var brick_opts = BrickRoomOpts.new(opts)
 
-	def = gen_room_def(opts)
+	def = gen_room_def(brick_opts)
 	if def.name != null and def.name != "":
 		name = def.name
 
-	position = BrickRoom.next_room_position(opts, self)
+	position = BrickRoom.next_room_position(self, brick_opts)
 
 	# will we need to overwrite `gen` completely? maybe need to decouple this class?
-	BrickRoom.add_rect(self, opts)
-	BrickRoom.add_tilemap(self, opts)
-	BrickRoom.add_entities(self, opts)
+	BrickRoom.add_rect(self, brick_opts)
+	BrickRoom.add_tilemap(self, brick_opts)
+	BrickRoom.add_entities(self, brick_opts)
 
 ## _ready ####################################################################
 

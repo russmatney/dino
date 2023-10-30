@@ -4,20 +4,29 @@ class_name RoomParser
 
 ## public types #####################################################
 
+# TODO consider validating dictionary/converting to this obj
+class RoomParserOpts:
+	extends Object
+
+	# all optional
+	var parsed_room_defs: RoomDefs
+	var room_defs_path: String
+	var contents: String
+
 ## public api #####################################################
 
 # Returns a RoomDefs with RoomDef(s) and other metadata
-static func parse(opts={}) -> RoomDefs:
+static func parse(opts: Dictionary={}) -> RoomDefs:
 	# kind of odd... some caching convenience use-case?
-	if "parsed_room_defs" in opts:
+	if "parsed_room_defs" in opts and opts.parsed_room_defs:
 		return opts.parsed_room_defs
 
 	var room_defs = RoomDefs.new()
 
 	var contents = Util.get_(opts, "contents")
-	if contents == null:
+	if contents == null and contents != "":
 		var path = Util.get_(opts, "room_defs_path")
-		if path == null:
+		if path == null and path != "":
 			Debug.err("Cannot parse, no room_defs_path")
 			# This is where we'd want a union type, or nil punning
 			return null
