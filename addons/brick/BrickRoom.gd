@@ -176,13 +176,37 @@ static func next_room_pos_right(room: BrickRoom, opts: BrickRoomOpts):
 	var y = last_room.position.y + y_offset
 	return Vector2(x, y)
 
+static func next_room_pos_left(room: BrickRoom, opts: BrickRoomOpts):
+	var last_room = opts.last_room
+
+	var x = last_room.position.x - BrickRoom.width(room, opts)
+
+	var lr_offset = count_to_floor_tile(first_column(last_room))
+	var tr_offset = count_to_floor_tile(last_column(room))
+	var y_offset = (lr_offset - tr_offset) * opts.tile_size
+
+	var y = last_room.position.y + y_offset
+	return Vector2(x, y)
+
 static func next_room_pos_top(room: BrickRoom, opts: BrickRoomOpts):
 	var last_room = opts.last_room
 
-	var y = last_room.position.y + BrickRoom.height(room, opts)
+	var y = last_room.position.y - BrickRoom.height(room, opts)
 
 	var lr_offset = count_to_floor_tile(first_row(last_room))
 	var tr_offset = count_to_floor_tile(last_row(room))
+	var x_offset = (lr_offset - tr_offset) * opts.tile_size
+
+	var x = last_room.position.x + x_offset
+	return Vector2(x, y)
+
+static func next_room_pos_bottom(room: BrickRoom, opts: BrickRoomOpts):
+	var last_room = opts.last_room
+
+	var y = last_room.position.y + BrickRoom.height(last_room, opts)
+
+	var lr_offset = count_to_floor_tile(last_row(last_room))
+	var tr_offset = count_to_floor_tile(first_row(room))
 	var x_offset = (lr_offset - tr_offset) * opts.tile_size
 
 	var x = last_room.position.x + x_offset
@@ -194,7 +218,9 @@ static func next_room_position(room: BrickRoom, opts: BrickRoomOpts):
 
 	match opts.side:
 		Vector2.RIGHT: return BrickRoom.next_room_pos_right(room, opts)
+		Vector2.LEFT: return BrickRoom.next_room_pos_left(room, opts)
 		Vector2.UP: return BrickRoom.next_room_pos_top(room, opts)
+		Vector2.DOWN: return BrickRoom.next_room_pos_bottom(room, opts)
 
 	Debug.warn("Unsupported 'side' option passed", opts.side)
 
