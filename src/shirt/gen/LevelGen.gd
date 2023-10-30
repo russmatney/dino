@@ -67,10 +67,10 @@ func generate():
 
 	var room_opts = [
 		{flags=["first"]},
-		{side=Vector2.RIGHT},
-		{side=Vector2.UP},
-		{side=Vector2.RIGHT},
-		{side=Vector2.DOWN},
+		{skip_flags=["first"], side=Vector2.RIGHT},
+		{skip_flags=["first"], side=Vector2.UP},
+		{skip_flags=["first"], side=Vector2.RIGHT},
+		{skip_flags=["first"], side=Vector2.DOWN},
 		]
 
 	for opt in room_opts:
