@@ -122,7 +122,7 @@ var max_array_size = 20
 # refactor into opts dict
 # refactor into pluggable pretty printer
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
-	if not is_instance_valid(msg):
+	if msg is Node and not is_instance_valid(msg):
 		return str(msg)
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
@@ -182,9 +182,9 @@ func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["purple", msg.x, "purple", msg.y]
 		else:
 			return '(%s,%s)' % [msg.x, msg.y]
-	elif msg.has_method("data"):
+	elif msg is Object and msg.has_method("data"):
 		return to_pretty(msg.data(), newlines, use_color, indent_level)
-	elif msg.has_method("to_pretty"):
+	elif msg is Object and msg.has_method("to_pretty"):
 		return msg.to_pretty(newlines, use_color, indent_level)
 	else:
 		return str(msg)
