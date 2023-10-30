@@ -1,62 +1,104 @@
-[gd_scene load_steps=6 format=3 uid="uid://b058xjositmw5"]
+[gd_scene load_steps=11 format=3 uid="uid://b058xjositmw5"]
 
 [ext_resource type="Script" path="res://src/shirt/gen/LevelGen.gd" id="1_x2mps"]
 [ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="2_6yls3"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="3_e26sm"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_j3w5h"]
+[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="4_1ycpg"]
 [ext_resource type="TileSet" uid="uid://b0rg8dver31j6" path="res://addons/reptile/tilesets/CaveTiles16.tres" id="4_fxl4x"]
 [ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="5_tp1lp"]
+[ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/shirt/enemies/BlobChaser.tscn" id="5_vreg3"]
+[ext_resource type="Script" path="res://addons/beehive/topdown/TDBody.gd" id="6_88cvn"]
+[ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="7_xqolh"]
 
 [node name="LevelGen" type="Node2D"]
 script = ExtResource("1_x2mps")
+_seed = 828322675
+room_tile_size = 24
 
-[node name="Rooms" type="Node" parent="."]
+[node name="Rooms" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="Room_1" type="Node2D" parent="Rooms"]
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
-offset_right = 112.0
-offset_bottom = 96.0
+offset_right = 168.0
+offset_bottom = 144.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
+[node name="PlayerSpawnPoint" type="Marker2D" parent="Rooms/Room_1" groups=["player_spawn_points"] instance=ExtResource("3_j3w5h")]
+position = Vector2(72, 72)
+script = ExtResource("4_1ycpg")
+dev_only = false
+
 [node name="Room_2" type="Node2D" parent="Rooms"]
-position = Vector2(112, 0)
+position = Vector2(168, 0)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_2"]
-offset_right = 112.0
-offset_bottom = 112.0
+offset_right = 168.0
+offset_bottom = 168.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
+[node name="BlobChaser" type="CharacterBody2D" parent="Rooms/Room_2" groups=["enemies"] instance=ExtResource("5_vreg3")]
+position = Vector2(48, 72)
+collision_layer = 8
+collision_mask = 5127
+script = ExtResource("6_88cvn")
+display_name = "Blob Chaser"
+initial_health = 2
+should_wander = true
+should_notice = true
+
 [node name="Room_3" type="Node2D" parent="Rooms"]
-position = Vector2(112, -112)
+position = Vector2(168, -168)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_3"]
-offset_right = 112.0
-offset_bottom = 112.0
+offset_right = 168.0
+offset_bottom = 168.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
+[node name="BlobChaser" type="CharacterBody2D" parent="Rooms/Room_3" groups=["enemies"] instance=ExtResource("5_vreg3")]
+position = Vector2(48, 72)
+collision_layer = 8
+collision_mask = 5127
+script = ExtResource("6_88cvn")
+display_name = "Blob Chaser"
+initial_health = 2
+should_wander = true
+should_notice = true
+
 [node name="Room_4" type="Node2D" parent="Rooms"]
-position = Vector2(224, -112)
+position = Vector2(336, -168)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_4"]
-offset_right = 112.0
-offset_bottom = 112.0
+offset_right = 168.0
+offset_bottom = 168.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
+[node name="BlobWalker" type="CharacterBody2D" parent="Rooms/Room_4" groups=["enemies"] instance=ExtResource("7_xqolh")]
+position = Vector2(96, 120)
+collision_layer = 8
+collision_mask = 5127
+script = ExtResource("6_88cvn")
+display_name = "Blob Walker"
+initial_health = 2
+should_wander = true
+
 [node name="Room_5" type="Node2D" parent="Rooms"]
-position = Vector2(224, 0)
+position = Vector2(336, 0)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_5"]
-offset_right = 112.0
-offset_bottom = 112.0
+offset_right = 168.0
+offset_bottom = 168.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
 [node name="CaveTiles16" type="TileMap" parent="Rooms" instance=ExtResource("3_e26sm")]
+scale = Vector2(1.5, 1.5)
 tile_set = ExtResource("4_fxl4x")
 format = 2
 layer_0/tile_data = PackedInt32Array(14, 131072, 2, 15, 196608, 2, 19, 65536, 2, 20, 196608, 2, 65550, 131072, 3, 65551, 196608, 3, 65555, 65536, 3, 65556, 196608, 3, 327694, 131072, 1, 327695, 196608, 1, 327699, 65536, 1, 327700, 196608, 1, 393230, 131072, 3, 393231, 196608, 3, 393235, 65536, 3, 393236, 196608, 3, -458738, 131072, 1, -458737, 196608, 1, -458733, 65536, 1, -458732, 196608, 1, -393202, 131072, 3, -393201, 196608, 3, -393197, 65536, 3, -393196, 196608, 3, -131058, 131072, 1, -131057, 196608, 1, -131053, 65536, 1, -131052, 196608, 1, -65522, 131072, 2, -65521, 196608, 2, -65517, 65536, 2, -65516, 196608, 2, -458745, 65536, 1, -458744, 196608, 1, -458740, 65536, 1, -458739, 131072, 1, -393209, 65536, 3, -393208, 196608, 3, -393204, 65536, 3, -393203, 131072, 3, -131065, 65536, 1, -131064, 196608, 1, -131060, 65536, 1, -131059, 131072, 1, -65529, 65536, 2, -65528, 196608, 2, -65524, 65536, 2, -65523, 131072, 2, 7, 458752, 5, 8, 196608, 2, 12, 65536, 2, 13, 131072, 2, 65543, 65536, 3, 65544, 196608, 3, 65548, 65536, 3, 65549, 131072, 3, 327687, 458752, 1, 327688, 196608, 1, 327692, 65536, 1, 327693, 131072, 1, 393223, 65536, 3, 393224, 196608, 3, 393228, 65536, 3, 393229, 131072, 3, 0, 327680, 1, 1, 131072, 4, 2, 131072, 4, 3, 131072, 4, 4, 131072, 4, 5, 131072, 4, 6, 131072, 4, 65536, 262144, 2, 131072, 262144, 2, 196608, 262144, 2, 262144, 262144, 2, 327680, 327680, 4, 327681, 131072, 4, 327682, 131072, 4, 327683, 131072, 4, 327684, 131072, 4, 327685, 131072, 4, 327686, 131072, 4)
