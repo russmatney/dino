@@ -116,7 +116,6 @@ func create_room(opts=null):
 	if opts == null:
 		opts = {}
 	opts.merge({
-		room_base_dim=room_base_dim,
 		tile_size=room_tile_size,
 		parsed_room_defs=parsed_room_defs,
 		tilemap_scene=tilemap_scene,

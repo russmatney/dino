@@ -185,24 +185,22 @@ func test_create_room_after_start_or_square():
 	var start_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.START,
 		contents=room_defs_txt,
-		room_base_dim=dim,
 		})
 
 	var square_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.SQUARE,
 		contents=room_defs_txt,
-		room_base_dim=dim,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+		var room = WoodsRoom.create_room({type=test.type,
 			contents=room_defs_txt,
 			last_room=start_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
 		assert_that(room.position).is_equal(test.expected.position * 3)
 
-		var room_sq = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+		var room_sq = WoodsRoom.create_room({type=test.type,
 			contents=room_defs_txt,
 			last_room=square_room})
 		assert_that(room_sq.rect.size).is_equal(test.expected.size * 3)
@@ -231,12 +229,11 @@ func test_create_room_after_long():
 	var long_room = WoodsRoom.create_room({
 		type=WoodsRoom.t.LONG,
 		contents=room_defs_txt,
-		room_base_dim=dim,
 		})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+		var room = WoodsRoom.create_room({type=test.type,
 			contents=room_defs_txt,
 			last_room=long_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
@@ -260,15 +257,11 @@ func test_create_room_after_fall():
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, dim)}}
 		]
-	var fall_room = WoodsRoom.create_room({
-		type=WoodsRoom.t.FALL,
-			contents=room_defs_txt,
-		room_base_dim=dim,
-		})
+	var fall_room = WoodsRoom.create_room({type=WoodsRoom.t.FALL, contents=room_defs_txt,})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+		var room = WoodsRoom.create_room({type=test.type,
 			contents=room_defs_txt,
 			last_room=fall_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
@@ -292,15 +285,11 @@ func test_create_room_after_climb():
 			size=Vector2(dim, dim*2),
 			position=Vector2(dim, 0)}}
 		]
-	var climb_room = WoodsRoom.create_room({
-		type=WoodsRoom.t.CLIMB,
-			contents=room_defs_txt,
-		room_base_dim=dim,
-		})
+	var climb_room = WoodsRoom.create_room({type=WoodsRoom.t.CLIMB, contents=room_defs_txt,})
 
 	assert_that(len(tests)).is_greater(0)
 	for test in tests:
-		var room = WoodsRoom.create_room({type=test.type, room_base_dim=dim,
+		var room = WoodsRoom.create_room({type=test.type,
 			contents=room_defs_txt, last_room=climb_room})
 		assert_that(room.rect.size).is_equal(test.expected.size * 3)
 		assert_that(room.position).is_equal(test.expected.position * 3)
