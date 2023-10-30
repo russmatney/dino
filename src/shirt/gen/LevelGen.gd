@@ -89,28 +89,77 @@ func generate():
 	for r in rooms:
 		setup_room(r)
 
-	var tmap = promote_tilemaps(rooms)
-	wrap_tilemap(tmap)
+	promote_tilemaps(rooms, {add_borders=true})
+	# wrap_tilemap(tmap)
 	promote_entities(rooms)
 
+func room_tilemap_coord_to_new_tilemap_coord(room, coord, tilemap):
+	var new_pos = room.tilemap.map_to_local(coord) + (room.position / room.tilemap.scale) + room.tilemap.position
+	return tilemap.local_to_map(new_pos)
 
 # TODO DRY up on BrickRoom / some other gen helper
-func promote_tilemaps(rooms):
-	var cell_positions = []
-	for r in rooms:
-		var used_cells = r.tilemap.get_used_cells(0)
-		var poses = used_cells.map(func(coord):
-			return r.tilemap.map_to_local(coord) + (r.position / r.tilemap.scale) + r.tilemap.position)
-		cell_positions.append_array(poses)
-		r.remove_child(r.tilemap)
-		r.tilemap.queue_free()
+func promote_tilemaps(rooms, opts={}):
+	var add_borders = opts.get("add_borders")
+
+	var new_cell_coords = []
+	var border_cells = {}
 
 	var tilemap = tilemap_scene.instantiate()
 	# NOTE assumes rooms all have the same scale
 	tilemap.scale = rooms[0].tilemap.scale
-	var tile_coords = cell_positions.map(func(pos):
-		return tilemap.local_to_map(pos))
-	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+
+	for r in rooms:
+		var used_cells = r.tilemap.get_used_cells(0)
+		var poses = used_cells.map(func(coord):
+			return room_tilemap_coord_to_new_tilemap_coord(r, coord, tilemap))
+		if add_borders:
+			var border_coords = tilemap_border_coords(r.tilemap)
+			for c in border_coords.top_coords:
+				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
+				border_cells[coord] = "top"
+			for c in border_coords.bottom_coords:
+				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
+				border_cells[coord] = "bottom"
+			for c in border_coords.left_coords:
+				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
+				border_cells[coord] = "left"
+			for c in border_coords.right_coords:
+				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
+				border_cells[coord] = "right"
+		new_cell_coords.append_array(poses)
+		r.remove_child(r.tilemap)
+		r.tilemap.queue_free()
+
+	if add_borders:
+		for coord in border_cells.keys():
+			if not border_cells.has(coord):
+				# already removed
+				continue
+			var nbr
+			var match_target
+			match border_cells[coord]:
+				"top":
+					nbr = coord + Vector2i.DOWN
+					match_target = "bottom"
+				"bottom":
+					nbr = coord + Vector2i.UP
+					match_target = "top"
+				"left":
+					nbr = coord + Vector2i.RIGHT
+					match_target = "right"
+				"right":
+					nbr = coord + Vector2i.LEFT
+					match_target = "left"
+
+			if match_target and border_cells.get(nbr) == match_target:
+				border_cells.erase(coord)
+				border_cells.erase(nbr)
+
+		new_cell_coords.append_array(border_cells.keys())
+
+
+
+	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 	tilemap.force_update()
 
 	tilemap.ready.connect(func(): tilemap.set_owner(self))
@@ -121,26 +170,36 @@ func promote_tilemaps(rooms):
 func tilemap_border_coords(tilemap):
 	var rect = tilemap.get_used_rect()
 	rect = rect.grow_individual(1, 1, 0, 0)
-	var border_coords = [ # corners
+	var corners = [ # corners
 		Vector2i(rect.position.x, rect.position.y),
 		Vector2i(rect.position.x + rect.size.x, rect.position.y),
 		Vector2i(rect.position.x, rect.position.y + rect.size.y),
 		Vector2i(rect.position.x + rect.size.x, rect.position.y + rect.size.y),
 		]
+	var top_coords = []
+	var bottom_coords = []
 	for x in range(rect.position.x, rect.position.x + rect.size.x):
-		border_coords.append(Vector2i(x, rect.position.y))
-		border_coords.append(Vector2i(x, rect.position.y + rect.size.y))
+		top_coords.append(Vector2i(x, rect.position.y))
+		bottom_coords.append(Vector2i(x, rect.position.y + rect.size.y))
+	var left_coords = []
+	var right_coords = []
 	for y in range(rect.position.y, rect.position.y + rect.size.y):
-		border_coords.append(Vector2i(rect.position.x, y))
-		border_coords.append(Vector2i(rect.position.x + rect.size.x, y))
-	return border_coords
+		left_coords.append(Vector2i(rect.position.x, y))
+		right_coords.append(Vector2i(rect.position.x + rect.size.x, y))
+	return {corners=corners, top_coords=top_coords, bottom_coords=bottom_coords,
+		left_coords=left_coords, right_coords=right_coords}
 
 func wrap_tilemap(tilemap):
 	var coords = tilemap.get_used_cells(0)
 
-	var border_coords = tilemap_border_coords(tilemap)
+	var border_coords = tilemap_border_coords(tilemap).values().reduce(func(acc, xs):
+		acc.append_array(xs)
+		return acc, [])
+
+	var fill_coords = []
 
 	coords.append_array(border_coords)
+	coords.append_array(fill_coords)
 	tilemap.set_cells_terrain_connect(0, coords, 0, 0)
 	tilemap.force_update()
 
