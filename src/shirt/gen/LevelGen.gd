@@ -23,6 +23,7 @@ var parsed_room_defs
 @export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
 @onready var rooms_node = $%Rooms
+@onready var entities_node = $%Entities
 
 var room_idx = 0
 
@@ -52,6 +53,7 @@ func connect_to_rooms():
 func reset():
 	# clear
 	rooms_node.get_children().map(func(c): c.queue_free())
+	entities_node.get_children().map(func(c): c.queue_free())
 
 	# reset
 	room_idx = 0
@@ -68,9 +70,8 @@ func generate():
 	var room_opts = [
 		{flags=["first"]},
 		{skip_flags=["first"], side=Vector2.RIGHT},
-		{skip_flags=["first"], side=Vector2.UP},
-		{skip_flags=["first"], side=Vector2.RIGHT},
-		{skip_flags=["first"], side=Vector2.DOWN},
+		{skip_flags=["first"], side=Util.rand_of([Vector2.UP, Vector2.DOWN])},
+		{skip_flags=["first"], side=Util.rand_of([Vector2.RIGHT, Vector2.LEFT])},
 		]
 
 	for opt in room_opts:
@@ -88,7 +89,8 @@ func generate():
 	for r in rooms:
 		setup_room(r)
 
-	promote_tilemaps(rooms)
+	var tmap = promote_tilemaps(rooms)
+	wrap_tilemap(tmap)
 	promote_entities(rooms)
 
 
@@ -114,10 +116,38 @@ func promote_tilemaps(rooms):
 	tilemap.ready.connect(func(): tilemap.set_owner(self))
 	rooms_node.add_child(tilemap)
 
+	return tilemap
+
+func tilemap_border_coords(tilemap):
+	var rect = tilemap.get_used_rect()
+	rect = rect.grow_individual(1, 1, 0, 0)
+	var border_coords = [ # corners
+		Vector2i(rect.position.x, rect.position.y),
+		Vector2i(rect.position.x + rect.size.x, rect.position.y),
+		Vector2i(rect.position.x, rect.position.y + rect.size.y),
+		Vector2i(rect.position.x + rect.size.x, rect.position.y + rect.size.y),
+		]
+	for x in range(rect.position.x, rect.position.x + rect.size.x):
+		border_coords.append(Vector2i(x, rect.position.y))
+		border_coords.append(Vector2i(x, rect.position.y + rect.size.y))
+	for y in range(rect.position.y, rect.position.y + rect.size.y):
+		border_coords.append(Vector2i(rect.position.x, y))
+		border_coords.append(Vector2i(rect.position.x + rect.size.x, y))
+	return border_coords
+
+func wrap_tilemap(tilemap):
+	var coords = tilemap.get_used_cells(0)
+
+	var border_coords = tilemap_border_coords(tilemap)
+
+	coords.append_array(border_coords)
+	tilemap.set_cells_terrain_connect(0, coords, 0, 0)
+	tilemap.force_update()
+
 func promote_entities(rooms):
 	for room in rooms:
 		for ent in room.entities:
-			ent.reparent(rooms_node, true)
+			ent.reparent(entities_node, true)
 			ent.set_owner(self)
 
 ## create_room ######################################################################
