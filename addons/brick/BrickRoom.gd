@@ -233,7 +233,18 @@ static func next_room_position(room: BrickRoom, opts: BrickRoomOpts):
 
 static func create_room(opts):
 	var room = BrickRoom.new()
-	room.gen(opts)
+	var brick_opts = BrickRoomOpts.new(opts)
+
+	room.def = gen_room_def(brick_opts)
+	if room.def.name != null and room.def.name != "":
+		room.name = room.def.name
+
+	room.position = BrickRoom.next_room_position(room, brick_opts)
+
+	# will we need to overwrite `gen` completely? maybe need to decouple this class?
+	BrickRoom.add_rect(room, brick_opts)
+	BrickRoom.add_tilemap(room, brick_opts)
+	BrickRoom.add_entities(room, brick_opts)
 	return room
 
 static func create_rooms(room_opts):
@@ -257,27 +268,5 @@ var rect: ColorRect
 var tilemap: TileMap
 var entities: Array
 
-func to_pretty(a, b, c):
-	return Debug.to_pretty(["BrickRoom", {def=Debug.to_pretty(def, a, b, c), rect=rect, entities=entities}], a, b, c)
-
-## gen #############################################################
-
-func gen(opts: Dictionary):
-	var brick_opts = BrickRoomOpts.new(opts)
-
-	def = gen_room_def(brick_opts)
-	if def.name != null and def.name != "":
-		name = def.name
-
-	position = BrickRoom.next_room_position(self, brick_opts)
-
-	# will we need to overwrite `gen` completely? maybe need to decouple this class?
-	BrickRoom.add_rect(self, brick_opts)
-	BrickRoom.add_tilemap(self, brick_opts)
-	BrickRoom.add_entities(self, brick_opts)
-
-## _ready ####################################################################
-
-func _ready():
-	# TODO find and set rect, tilemap, entities.... def?
-	pass
+func data():
+	return {name=name, def=def, entities=entities}
