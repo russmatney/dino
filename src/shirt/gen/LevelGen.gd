@@ -102,62 +102,40 @@ func promote_tilemaps(rooms, opts={}):
 	var add_borders = opts.get("add_borders")
 
 	var new_cell_coords = []
-	var border_cells = {}
+	var border_cells = []
 
 	var tilemap = tilemap_scene.instantiate()
 	# NOTE assumes rooms all have the same scale
 	tilemap.scale = rooms[0].tilemap.scale
+
+	var room_rects = []
+	for r in rooms:
+		var rect = r.tilemap.get_used_rect()
+		rect.position = r.tilemap.local_to_map(r.position / r.tilemap.scale + r.tilemap.position)
+		room_rects.append(rect)
 
 	for r in rooms:
 		var used_cells = r.tilemap.get_used_cells(0)
 		var poses = used_cells.map(func(coord):
 			return room_tilemap_coord_to_new_tilemap_coord(r, coord, tilemap))
 		if add_borders:
-			var border_coords = tilemap_border_coords(r.tilemap)
-			for c in border_coords.top_coords:
+			var border_coords = all_tilemap_border_coords(r.tilemap)
+			for c in border_coords:
 				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
-				border_cells[coord] = "top"
-			for c in border_coords.bottom_coords:
-				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
-				border_cells[coord] = "bottom"
-			for c in border_coords.left_coords:
-				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
-				border_cells[coord] = "left"
-			for c in border_coords.right_coords:
-				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
-				border_cells[coord] = "right"
+				var overlaps = false
+				for rect in room_rects:
+					if rect.has_point(coord):
+						overlaps = true
+						break
+				if not overlaps:
+					border_cells.append(coord)
+
 		new_cell_coords.append_array(poses)
 		r.remove_child(r.tilemap)
 		r.tilemap.queue_free()
 
 	if add_borders:
-		for coord in border_cells.keys():
-			if not border_cells.has(coord):
-				# already removed
-				continue
-			var nbr
-			var match_target
-			match border_cells[coord]:
-				"top":
-					nbr = coord + Vector2i.DOWN
-					match_target = "bottom"
-				"bottom":
-					nbr = coord + Vector2i.UP
-					match_target = "top"
-				"left":
-					nbr = coord + Vector2i.RIGHT
-					match_target = "right"
-				"right":
-					nbr = coord + Vector2i.LEFT
-					match_target = "left"
-
-			if match_target and border_cells.get(nbr) == match_target:
-				border_cells.erase(coord)
-				border_cells.erase(nbr)
-
-		new_cell_coords.append_array(border_cells.keys())
-
-
+		new_cell_coords.append_array(border_cells)
 
 	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 	tilemap.force_update()
@@ -189,13 +167,15 @@ func tilemap_border_coords(tilemap):
 	return {corners=corners, top_coords=top_coords, bottom_coords=bottom_coords,
 		left_coords=left_coords, right_coords=right_coords}
 
-func wrap_tilemap(tilemap):
-	var coords = tilemap.get_used_cells(0)
-
-	var border_coords = tilemap_border_coords(tilemap).values().reduce(func(acc, xs):
+func all_tilemap_border_coords(tilemap):
+	return tilemap_border_coords(tilemap).values().reduce(func(acc, xs):
 		acc.append_array(xs)
 		return acc, [])
 
+func wrap_tilemap(tilemap):
+	var coords = tilemap.get_used_cells(0)
+
+	var border_coords = all_tilemap_border_coords(tilemap)
 	var fill_coords = []
 
 	coords.append_array(border_coords)
