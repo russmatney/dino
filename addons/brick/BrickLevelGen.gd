@@ -118,7 +118,7 @@ func promote_tilemaps(rooms, opts={}):
 		var poses = used_cells.map(func(coord):
 			return room_tilemap_coord_to_new_tilemap_coord(r, coord, tilemap))
 		if add_borders:
-			var border_coords = all_tilemap_border_coords(r.tilemap)
+			var border_coords = Reptile.all_tilemap_border_coords(r.tilemap)
 			for c in border_coords:
 				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
 				var overlaps = false
@@ -140,35 +140,6 @@ func promote_tilemaps(rooms, opts={}):
 	tilemap.force_update()
 
 	return tilemap
-
-## TODO move to tilemap helpers (util/reptile?) ######################################################################
-
-func tilemap_border_coords(tilemap):
-	var rect = tilemap.get_used_rect()
-	rect = rect.grow_individual(1, 1, 0, 0)
-	var corners = [ # corners
-		Vector2i(rect.position.x, rect.position.y),
-		Vector2i(rect.position.x + rect.size.x, rect.position.y),
-		Vector2i(rect.position.x, rect.position.y + rect.size.y),
-		Vector2i(rect.position.x + rect.size.x, rect.position.y + rect.size.y),
-		]
-	var top_coords = []
-	var bottom_coords = []
-	for x in range(rect.position.x, rect.position.x + rect.size.x):
-		top_coords.append(Vector2i(x, rect.position.y))
-		bottom_coords.append(Vector2i(x, rect.position.y + rect.size.y))
-	var left_coords = []
-	var right_coords = []
-	for y in range(rect.position.y, rect.position.y + rect.size.y):
-		left_coords.append(Vector2i(rect.position.x, y))
-		right_coords.append(Vector2i(rect.position.x + rect.size.x, y))
-	return {corners=corners, top_coords=top_coords, bottom_coords=bottom_coords,
-		left_coords=left_coords, right_coords=right_coords}
-
-func all_tilemap_border_coords(tilemap):
-	return tilemap_border_coords(tilemap).values().reduce(func(acc, xs):
-		acc.append_array(xs)
-		return acc, [])
 
 ## promote entities ######################################################################
 

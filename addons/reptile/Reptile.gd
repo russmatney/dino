@@ -2,8 +2,7 @@
 extends Object
 class_name Reptile
 
-######################################################################
-# generate random image
+## generate random image ######################################################################
 
 static func generate_image(inputs):
 	# validating inputs
@@ -21,10 +20,7 @@ static func generate_image(inputs):
 
 	return noise.get_seamless_image(inputs["img_size"], inputs["img_size"])
 
-
-######################################################################
-# img helpers
-
+## img helpers #####################################################################
 
 static func all_coords(img):
 	var coords = []
@@ -33,7 +29,6 @@ static func all_coords(img):
 			coords.append(Vector2(x, y))
 	return coords
 
-
 static func rotate(img):
 	var new_img = Image.new()
 	new_img.copy_from(img)
@@ -41,10 +36,7 @@ static func rotate(img):
 		new_img.set_pixel(coord.y, coord.x, img.get_pixelv(coord))
 	return new_img
 
-
-######################################################################
-# img stats
-
+## img stats #####################################################################
 
 static func img_stats(img):
 	var vals = []
@@ -62,11 +54,9 @@ static func img_stats(img):
 	# stats["vals"] = vals
 	return stats
 
-
 static func normalized_val(stats, val):
 	val = val - stats["min"]
 	return val / stats["variance"]
-
 
 ## tilemap/cell helpers #####################################################################
 
@@ -75,7 +65,6 @@ static func get_layers(tilemap):
 	for i in range(tilemap.get_layers_count()):
 		layers.append({i=i, name=tilemap.get_layer_name(i)})
 	return layers
-
 
 static func valid_neighbors(tilemap, cell, layer=0):
 	var nbr_coords = tilemap.get_surrounding_cells(cell)
@@ -182,10 +171,37 @@ static func cells_to_polygon(tilemap, cells, opts={}):
 			return mid.distance_to(a) <= mid.distance_to(b)
 		return a_ang >= b_ang)
 
-
-
 	var polygon = PackedVector2Array()
 	for p in points:
 		polygon.append(p)
 
 	return polygon
+
+## tilemap borders #####################################################################
+
+static func tilemap_border_coords(tilemap):
+	var rect = tilemap.get_used_rect()
+	rect = rect.grow_individual(1, 1, 0, 0)
+	var corners = [ # corners
+		Vector2i(rect.position.x, rect.position.y),
+		Vector2i(rect.position.x + rect.size.x, rect.position.y),
+		Vector2i(rect.position.x, rect.position.y + rect.size.y),
+		Vector2i(rect.position.x + rect.size.x, rect.position.y + rect.size.y),
+		]
+	var top_coords = []
+	var bottom_coords = []
+	for x in range(rect.position.x, rect.position.x + rect.size.x):
+		top_coords.append(Vector2i(x, rect.position.y))
+		bottom_coords.append(Vector2i(x, rect.position.y + rect.size.y))
+	var left_coords = []
+	var right_coords = []
+	for y in range(rect.position.y, rect.position.y + rect.size.y):
+		left_coords.append(Vector2i(rect.position.x, y))
+		right_coords.append(Vector2i(rect.position.x + rect.size.x, y))
+	return {corners=corners, top_coords=top_coords, bottom_coords=bottom_coords,
+		left_coords=left_coords, right_coords=right_coords}
+
+static func all_tilemap_border_coords(tilemap):
+	return Reptile.tilemap_border_coords(tilemap).values().reduce(func(acc, xs):
+		acc.append_array(xs)
+		return acc, [])
