@@ -1,22 +1,31 @@
-[gd_scene load_steps=11 format=3 uid="uid://c1k06267gxk5t"]
+[gd_scene load_steps=16 format=3 uid="uid://c1k06267gxk5t"]
 
 [ext_resource type="Script" path="res://src/woods/level/WoodsLevelGen.gd" id="1_ayd6d"]
 [ext_resource type="Script" path="res://src/woods/level/WoodsLevel.gd" id="1_lfrcs"]
 [ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="2_1d3ch"]
-[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="3_6u8ff"]
+[ext_resource type="PackedScene" uid="uid://y36u368o2aip" path="res://addons/reptile/tilemaps/WoodsFloorTiles16.tscn" id="4_vabkg"]
+[ext_resource type="TileSet" uid="uid://bemhu6sx6pnw1" path="res://addons/reptile/tilesets/WoodsFloorTileSet16.tres" id="5_l1l0y"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="6_kpwee"]
+[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="7_gpn03"]
 [ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/woods/entities/Leaf.tscn" id="8_fkwgv"]
+[ext_resource type="Script" path="res://src/woods/entities/LeafEntity.gd" id="9_2jc1e"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qpk8"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7pju"]
 size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eebbm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cd5bb"]
 size = Vector2(256, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6guxl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e57uu"]
 size = Vector2(128, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqc5"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyy84"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thkfi"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8q40d"]
 size = Vector2(128, 128)
 
 [node name="WoodsLevel" type="Node2D"]
@@ -24,113 +33,197 @@ script = ExtResource("1_lfrcs")
 
 [node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
 script = ExtResource("1_ayd6d")
-room_count = 4
-room_defs_path = "res://src/woods/world/rooms.txt"
+room_count = 6
+room_defs_path = "res://src/woods/level/rooms.txt"
 entities_node = NodePath("../Entities")
 tilemaps_node = NodePath("../Tilemaps")
 rooms_node = NodePath("../Rooms")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1270.0
+offset_top = -1085.0
+offset_right = 4073.0
+offset_bottom = 2041.0
+color = Color(0.0156252, 0.046891, 0.035172, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.266667, 0.662745, 0.337255, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = -0.418879
+color = Color(0.819608, 0.854902, 0.219608, 1)
+energy = 4.63
+shadow_enabled = true
+
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="@Node2D@58290" type="Node2D" parent="Rooms"]
+[node name="Room_0" type="Node2D" parent="Rooms"]
 script = ExtResource("2_1d3ch")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58290"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_0"]
 visible = false
 offset_right = 128.0
 offset_bottom = 128.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58290" groups=["roombox"]]
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_0" groups=["roombox"]]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58290/RoomBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_0/RoomBox"]
 position = Vector2(64, 64)
-shape = SubResource("RectangleShape2D_2qpk8")
+shape = SubResource("RectangleShape2D_l7pju")
 
-[node name="@Node2D@58291" type="Node2D" parent="Rooms"]
+[node name="Room_1" type="Node2D" parent="Rooms"]
 position = Vector2(128, 0)
 script = ExtResource("2_1d3ch")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58291"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
 visible = false
 offset_right = 256.0
 offset_bottom = 128.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58291" groups=["roombox"]]
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_1" groups=["roombox"]]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58291/RoomBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_1/RoomBox"]
 position = Vector2(128, 64)
-shape = SubResource("RectangleShape2D_eebbm")
+shape = SubResource("RectangleShape2D_cd5bb")
 
-[node name="@Node2D@58292" type="Node2D" parent="Rooms"]
+[node name="Room_2" type="Node2D" parent="Rooms"]
 position = Vector2(384, -112)
 script = ExtResource("2_1d3ch")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58292"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_2"]
 visible = false
 offset_right = 128.0
 offset_bottom = 256.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58292" groups=["roombox"]]
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_2" groups=["roombox"]]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58292/RoomBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_2/RoomBox"]
 position = Vector2(64, 128)
-shape = SubResource("RectangleShape2D_6guxl")
+shape = SubResource("RectangleShape2D_e57uu")
 
-[node name="@Node2D@58293" type="Node2D" parent="Rooms"]
-position = Vector2(512, -112)
+[node name="Room_3" type="Node2D" parent="Rooms"]
+position = Vector2(512, -224)
 script = ExtResource("2_1d3ch")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58293"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_3"]
+visible = false
+offset_right = 128.0
+offset_bottom = 256.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_3" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_3/RoomBox"]
+position = Vector2(64, 128)
+shape = SubResource("RectangleShape2D_uyy84")
+
+[node name="Room_4" type="Node2D" parent="Rooms"]
+position = Vector2(640, -224)
+script = ExtResource("2_1d3ch")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_4"]
+visible = false
+offset_right = 128.0
+offset_bottom = 256.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_4" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_4/RoomBox"]
+position = Vector2(64, 128)
+shape = SubResource("RectangleShape2D_thkfi")
+
+[node name="Room_5" type="Node2D" parent="Rooms"]
+position = Vector2(768, -96)
+script = ExtResource("2_1d3ch")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_5"]
 visible = false
 offset_right = 128.0
 offset_bottom = 128.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58293" groups=["roombox"]]
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_5" groups=["roombox"]]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58293/RoomBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_5/RoomBox"]
 position = Vector2(64, 64)
-shape = SubResource("RectangleShape2D_vmqc5")
+shape = SubResource("RectangleShape2D_8q40d")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
-[node name="@TileMap@58289" parent="Tilemaps" instance=ExtResource("3_6u8ff")]
-layer_0/tile_data = PackedInt32Array(-458713, 262144, 1, -393177, 262144, 2, -327641, 262144, 2, -262105, 262144, 2, -196569, 262144, 2, -131033, 262144, 2, -65497, 262144, 2, 32, 131072, 4, 33, 131072, 4, 34, 131072, 4, 35, 131072, 4, 36, 131072, 4, 37, 131072, 4, 38, 131072, 4, 39, 524288, 4, 30, 65536, 1, 31, 393216, 1, 65566, 65536, 3, 65567, 524288, 2, 131103, 262144, 2, 196639, 262144, 2, 262175, 262144, 2, 327711, 262144, 2, 393247, 262144, 2, 458776, 458752, 1, 458777, 196608, 1, 458781, 65536, 1, 458782, 131072, 1, 458783, 524288, 3, 524312, 65536, 3, 524313, 393216, 4, 524314, 131072, 4, 524315, 131072, 4, 524316, 131072, 4, 524317, 458752, 4, 524318, 131072, 3, 524319, 196608, 3, 393226, 65536, 1, 393227, 131072, 1, 393228, 131072, 1, 393229, 131072, 1, 393230, 131072, 1, 393231, 131072, 1, 393232, 131072, 1, 393233, 131072, 1, 393234, 131072, 1, 393235, 131072, 1, 393236, 131072, 1, 393237, 196608, 1, 458760, 131072, 4, 458761, 131072, 4, 458762, 458752, 4, 458763, 131072, 3, 458764, 131072, 3, 458765, 131072, 3, 458766, 131072, 3, 458767, 131072, 3, 458768, 131072, 3, 458769, 131072, 3, 458770, 131072, 3, 458771, 131072, 3, 458772, 131072, 3, 458773, 393216, 4, 458774, 131072, 4, 458775, 131072, 4, 0, 262144, 1, 65536, 262144, 2, 131072, 262144, 2, 196608, 262144, 2, 262144, 262144, 2, 327680, 262144, 2, 393216, 262144, 2, 458752, 327680, 4, 458753, 131072, 4, 458754, 131072, 4, 458755, 131072, 4, 458756, 131072, 4, 458757, 131072, 4, 458758, 131072, 4, 458759, 131072, 4)
+[node name="WoodsFloorTiles16" type="TileMap" parent="Tilemaps" instance=ExtResource("4_vabkg")]
+tile_set = ExtResource("5_l1l0y")
+format = 2
+layer_0/tile_data = PackedInt32Array(-393161, 262144, 7, -327625, 262144, 8, -262089, 262144, 2, -196553, 262144, 8, -131017, 262144, 8, -65481, 262144, 2, 55, 262144, 8, 65584, 131072, 4, 65585, 131072, 4, 65586, 131072, 10, 65587, 131072, 16, 65588, 131072, 4, 65589, 131072, 4, 65590, 131072, 4, 65591, 262144, 15, -917460, 65536, 10, -917459, 65536, 13, -917458, 131072, 13, -917457, 196608, 1, -851923, 65536, 3, -851922, 131072, 8, -851921, 196608, 14, -786386, 65536, 3, -786385, 196608, 8, -720849, 262144, 14, -655313, 262144, 14, -589777, 262144, 2, -524241, 262144, 14, -458712, 196608, 1, -458705, 262144, 15, -393176, 196608, 8, -327640, 196608, 2, -262104, 196608, 2, -196568, 131072, 8, -196567, 131072, 1, -196566, 196608, 13, -131032, 131072, 2, -131031, 131072, 14, -131030, 131072, 14, -131029, 196608, 7, -65496, 131072, 8, -65495, 131072, 2, -65494, 131072, 2, -65493, 131072, 2, -65492, 196608, 7, 40, 131072, 8, 41, 131072, 14, 42, 131072, 14, 43, 131072, 8, 44, 131072, 2, 45, 196608, 7, 65576, 131072, 15, 65577, 131072, 15, 65578, 131072, 15, 65579, 131072, 3, 65580, 131072, 15, 65581, 131072, 9, 65582, 131072, 4, 65583, 131072, 16, -458714, 65536, 1, -458713, 131072, 1, -393178, 65536, 3, -393177, 131072, 14, -327641, 65536, 14, -262105, 65536, 8, -196569, 65536, 8, -131033, 65536, 8, -65497, 65536, 2, 32, 131072, 7, 33, 196608, 7, 37, 65536, 7, 38, 131072, 7, 39, 131072, 14, 65568, 131072, 15, 65569, 131072, 15, 65570, 131072, 16, 65571, 131072, 4, 65572, 131072, 4, 65573, 65536, 15, 65574, 131072, 15, 65575, 131072, 9, 30, 65536, 7, 31, 131072, 1, 65566, 65536, 3, 65567, 131072, 3, 131103, 262144, 1, 196639, 262144, 8, 262175, 262144, 14, 327711, 262144, 2, 393247, 262144, 8, 458776, 65536, 13, 458777, 196608, 7, 458781, 65536, 7, 458782, 131072, 13, 458783, 196608, 1, 524312, 65536, 15, 524313, 131072, 3, 524314, 131072, 4, 524315, 131072, 10, 524316, 131072, 4, 524317, 65536, 3, 524318, 131072, 3, 524319, 196608, 15, 393226, 65536, 1, 393227, 131072, 1, 393228, 131072, 13, 393229, 131072, 1, 393230, 131072, 7, 393231, 131072, 13, 393232, 131072, 1, 393233, 131072, 7, 393234, 131072, 13, 393235, 131072, 1, 393236, 131072, 1, 393237, 196608, 7, 458760, 131072, 4, 458761, 131072, 16, 458762, 65536, 15, 458763, 131072, 9, 458764, 131072, 3, 458765, 131072, 15, 458766, 131072, 9, 458767, 131072, 15, 458768, 131072, 3, 458769, 131072, 9, 458770, 131072, 3, 458771, 131072, 9, 458772, 131072, 9, 458773, 131072, 3, 458774, 131072, 16, 458775, 196608, 10, 0, 262144, 7, 65536, 262144, 14, 131072, 262144, 8, 196608, 262144, 14, 262144, 262144, 8, 327680, 262144, 8, 393216, 262144, 8, 458752, 65536, 4, 458753, 131072, 4, 458754, 131072, 10, 458755, 131072, 10, 458756, 131072, 16, 458757, 131072, 10, 458758, 131072, 10, 458759, 131072, 4)
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="@Marker2D@58285" parent="Entities" instance=ExtResource("6_kpwee")]
+[node name="PlayerSpawnPoint" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("6_kpwee")]
 position = Vector2(32, 80)
+script = ExtResource("7_gpn03")
+dev_only = false
 
-[node name="@Node2D@58286" parent="Entities" instance=ExtResource("8_fkwgv")]
+[node name="Leaf" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
 position = Vector2(96, 96)
+script = ExtResource("9_2jc1e")
 
-[node name="@Node2D@58287" parent="Entities" instance=ExtResource("8_fkwgv")]
+[node name="@Node2D@64326" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
 position = Vector2(208, 64)
+script = ExtResource("9_2jc1e")
 
-[node name="@Node2D@58282" parent="Entities" instance=ExtResource("8_fkwgv")]
+[node name="@Node2D@64320" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
 position = Vector2(256, 64)
+script = ExtResource("9_2jc1e")
 
-[node name="@Node2D@58283" parent="Entities" instance=ExtResource("8_fkwgv")]
+[node name="@Node2D@64321" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
 position = Vector2(320, 64)
+script = ExtResource("9_2jc1e")
 
-[node name="@Node2D@58288" parent="Entities" instance=ExtResource("8_fkwgv")]
+[node name="@Node2D@64327" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
 position = Vector2(480, -16)
+script = ExtResource("9_2jc1e")
 
-[node name="@Node2D@58284" parent="Entities" instance=ExtResource("8_fkwgv")]
+[node name="@Node2D@64322" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
 position = Vector2(432, 96)
+script = ExtResource("9_2jc1e")
+
+[node name="@Node2D@64328" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(608, -128)
+script = ExtResource("9_2jc1e")
+
+[node name="@Node2D@64323" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(560, -16)
+script = ExtResource("9_2jc1e")
+
+[node name="@Node2D@64329" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(688, -144)
+script = ExtResource("9_2jc1e")
+
+[node name="@Node2D@64324" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(704, -96)
+script = ExtResource("9_2jc1e")
+
+[node name="@Node2D@64325" type="Node2D" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(736, -32)
+script = ExtResource("9_2jc1e")

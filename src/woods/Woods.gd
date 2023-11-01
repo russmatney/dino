@@ -1,7 +1,7 @@
 @tool
 extends DinoGame
 
-var game_scene = preload("res://src/woods/world/WorldGen.tscn")
+var game_scene = preload("res://src/woods/level/WoodsLevel.tscn")
 
 func start(opts={}):
 	Debug.pr("starting The Woods", opts)

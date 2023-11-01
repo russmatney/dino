@@ -29,7 +29,7 @@ func get_room_opts(_opts):
 	for opt in room_opts:
 		opt.merge({
 			label_to_tilemap={"Tile": {
-				scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn"),
+				scene=load("res://addons/reptile/tilemaps/WoodsFloorTiles16.tscn"),
 				}},
 			label_to_entity={
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
