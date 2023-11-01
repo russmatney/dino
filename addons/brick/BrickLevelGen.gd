@@ -185,21 +185,22 @@ func generate():
 	var data = BrickLevelGen.generate_level(opts)
 
 	(func():
-		if not entities_node:
-			entities_node = Node2D.new()
-			entities_node.name = "Entities"
-			get_parent().add_child(entities_node)
-			entities_node.set_owner(get_owner())
-		if not tilemaps_node:
-			tilemaps_node = Node2D.new()
-			tilemaps_node.name = "Tilemaps"
-			get_parent().add_child(tilemaps_node)
-			tilemaps_node.set_owner(get_owner())
+		# created in this order to get entities on top (last)
 		if not rooms_node:
 			rooms_node = Node2D.new()
 			rooms_node.name = "Rooms"
 			get_parent().add_child(rooms_node)
 			rooms_node.set_owner(get_owner())
+		if not tilemaps_node:
+			tilemaps_node = Node2D.new()
+			tilemaps_node.name = "Tilemaps"
+			get_parent().add_child(tilemaps_node)
+			tilemaps_node.set_owner(get_owner())
+		if not entities_node:
+			entities_node = Node2D.new()
+			entities_node.name = "Entities"
+			get_parent().add_child(entities_node)
+			entities_node.set_owner(get_owner())
 
 		entities_node.get_children().map(func(c): c.queue_free())
 		for node in data.entities:
