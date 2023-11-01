@@ -167,6 +167,10 @@ signal new_data_generated(data: Dictionary)
 @export var room_count = 5
 @export_file var room_defs_path
 
+@export var entities_node: Node
+@export var tilemaps_node: Node
+@export var rooms_node: Node
+
 ## generate ######################################################################
 
 func generate():
@@ -181,4 +185,31 @@ func generate():
 
 	var data = BrickLevelGen.generate_level(opts)
 
-	new_data_generated.emit(data)
+	(func():
+		if entities_node:
+			entities_node.get_children().map(func(c): c.queue_free())
+			for node in data.entities:
+				node.reparent(entities_node, true)
+				node.set_owner(self.get_owner())
+
+		if tilemaps_node:
+			tilemaps_node.get_children().map(func(c): c.queue_free())
+			for node in data.tilemaps:
+				tilemaps_node.add_child(node)
+				node.set_owner(self.get_owner())
+
+		if rooms_node:
+			rooms_node.get_children().map(func(c): c.queue_free())
+			for node in data.rooms:
+				rooms_node.add_child(node)
+				node.set_owner(self.get_owner())
+				for ch in node.get_children():
+					ch.set_owner(self.get_owner())
+					# how deep must we go?
+					for cch in ch.get_children():
+						cch.set_owner(self.get_owner())
+
+		Debug.pr("new data gend with seed", [data.seed], data)
+		new_data_generated.emit(data)
+
+		).call_deferred()

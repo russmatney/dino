@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=3 uid="uid://c1k06267gxk5t"]
+
+[ext_resource type="Script" path="res://src/woods/level/WoodsLevelGen.gd" id="1_ayd6d"]
+[ext_resource type="Script" path="res://src/woods/level/WoodsLevel.gd" id="1_lfrcs"]
+[ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="2_1d3ch"]
+[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="3_6u8ff"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="6_kpwee"]
+[ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/woods/entities/Leaf.tscn" id="8_fkwgv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qpk8"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eebbm"]
+size = Vector2(256, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6guxl"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vmqc5"]
+size = Vector2(128, 128)
+
+[node name="WoodsLevel" type="Node2D"]
+script = ExtResource("1_lfrcs")
+
+[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
+script = ExtResource("1_ayd6d")
+room_count = 4
+room_defs_path = "res://src/woods/world/rooms.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="@Node2D@58290" type="Node2D" parent="Rooms"]
+script = ExtResource("2_1d3ch")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58290"]
+visible = false
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58290" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58290/RoomBox"]
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_2qpk8")
+
+[node name="@Node2D@58291" type="Node2D" parent="Rooms"]
+position = Vector2(128, 0)
+script = ExtResource("2_1d3ch")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58291"]
+visible = false
+offset_right = 256.0
+offset_bottom = 128.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58291" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58291/RoomBox"]
+position = Vector2(128, 64)
+shape = SubResource("RectangleShape2D_eebbm")
+
+[node name="@Node2D@58292" type="Node2D" parent="Rooms"]
+position = Vector2(384, -112)
+script = ExtResource("2_1d3ch")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58292"]
+visible = false
+offset_right = 128.0
+offset_bottom = 256.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58292" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58292/RoomBox"]
+position = Vector2(64, 128)
+shape = SubResource("RectangleShape2D_6guxl")
+
+[node name="@Node2D@58293" type="Node2D" parent="Rooms"]
+position = Vector2(512, -112)
+script = ExtResource("2_1d3ch")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@58293"]
+visible = false
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@58293" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@58293/RoomBox"]
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_vmqc5")
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="@TileMap@58289" parent="Tilemaps" instance=ExtResource("3_6u8ff")]
+layer_0/tile_data = PackedInt32Array(-458713, 262144, 1, -393177, 262144, 2, -327641, 262144, 2, -262105, 262144, 2, -196569, 262144, 2, -131033, 262144, 2, -65497, 262144, 2, 32, 131072, 4, 33, 131072, 4, 34, 131072, 4, 35, 131072, 4, 36, 131072, 4, 37, 131072, 4, 38, 131072, 4, 39, 524288, 4, 30, 65536, 1, 31, 393216, 1, 65566, 65536, 3, 65567, 524288, 2, 131103, 262144, 2, 196639, 262144, 2, 262175, 262144, 2, 327711, 262144, 2, 393247, 262144, 2, 458776, 458752, 1, 458777, 196608, 1, 458781, 65536, 1, 458782, 131072, 1, 458783, 524288, 3, 524312, 65536, 3, 524313, 393216, 4, 524314, 131072, 4, 524315, 131072, 4, 524316, 131072, 4, 524317, 458752, 4, 524318, 131072, 3, 524319, 196608, 3, 393226, 65536, 1, 393227, 131072, 1, 393228, 131072, 1, 393229, 131072, 1, 393230, 131072, 1, 393231, 131072, 1, 393232, 131072, 1, 393233, 131072, 1, 393234, 131072, 1, 393235, 131072, 1, 393236, 131072, 1, 393237, 196608, 1, 458760, 131072, 4, 458761, 131072, 4, 458762, 458752, 4, 458763, 131072, 3, 458764, 131072, 3, 458765, 131072, 3, 458766, 131072, 3, 458767, 131072, 3, 458768, 131072, 3, 458769, 131072, 3, 458770, 131072, 3, 458771, 131072, 3, 458772, 131072, 3, 458773, 393216, 4, 458774, 131072, 4, 458775, 131072, 4, 0, 262144, 1, 65536, 262144, 2, 131072, 262144, 2, 196608, 262144, 2, 262144, 262144, 2, 327680, 262144, 2, 393216, 262144, 2, 458752, 327680, 4, 458753, 131072, 4, 458754, 131072, 4, 458755, 131072, 4, 458756, 131072, 4, 458757, 131072, 4, 458758, 131072, 4, 458759, 131072, 4)
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="@Marker2D@58285" parent="Entities" instance=ExtResource("6_kpwee")]
+position = Vector2(32, 80)
+
+[node name="@Node2D@58286" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(96, 96)
+
+[node name="@Node2D@58287" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(208, 64)
+
+[node name="@Node2D@58282" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(256, 64)
+
+[node name="@Node2D@58283" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(320, 64)
+
+[node name="@Node2D@58288" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(480, -16)
+
+[node name="@Node2D@58284" parent="Entities" instance=ExtResource("8_fkwgv")]
+position = Vector2(432, 96)

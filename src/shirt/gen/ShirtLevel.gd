@@ -22,7 +22,6 @@ func _ready():
 ## new data generated #########################################
 
 func _on_new_data_generated(data: Dictionary):
-	Debug.pr("new data gend with seed", [data.seed], data)
 	_seed = data.seed
 
 	entities.get_children().map(func(c): c.queue_free())

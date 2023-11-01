@@ -130,15 +130,39 @@ static func add_entities(room, opts):
 
 ## color rect ##################################################################
 
-static func add_rect(room: BrickRoom, opts: BrickRoomOpts):
+static func add_color_rect(room: BrickRoom, opts: BrickRoomOpts):
 	var rec = ColorRect.new()
 	rec.name = "ColorRect"
 	rec.size = BrickRoom.size(room, opts)
 	rec.color = opts.color
+	rec.set_visible(false)
 	# rec.visible = opts.get("show_color_rect", false)
 
 	room.rect = rec
 	room.add_child(rec)
+
+## area2d ######################################################################
+
+static func add_roombox(room: BrickRoom, _opts: BrickRoomOpts):
+	var shape = RectangleShape2D.new()
+	shape.size = room.rect.size
+	var coll = CollisionShape2D.new()
+	coll.name = "CollisionShape2D"
+	coll.set_shape(shape)
+	coll.position = room.rect.position + (room.rect.size / 2.0)
+
+	var box = Area2D.new()
+	box.add_child(coll)
+	coll.set_owner(box)
+	box.name = "RoomBox"
+	box.set_visible(false)
+	box.add_to_group("roombox", true)
+
+	box.set_collision_layer_value(1, false)
+	box.set_collision_mask_value(1, false)
+	box.set_collision_mask_value(2, true) # 2 for player
+
+	room.add_child(box)
 
 ## room gen ##################################################################
 
@@ -249,7 +273,8 @@ static func create_room(opts):
 
 	room.position = BrickRoom.next_room_position(room, brick_opts)
 
-	BrickRoom.add_rect(room, brick_opts)
+	BrickRoom.add_color_rect(room, brick_opts)
+	BrickRoom.add_roombox(room, brick_opts)
 	BrickRoom.add_tilemaps(room, brick_opts)
 	BrickRoom.add_entities(room, brick_opts)
 	return room
