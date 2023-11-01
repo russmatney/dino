@@ -10,7 +10,7 @@ func _ready():
 ## get room opts #########################################
 
 # TODO test setup, maybe testing specific seeds?
-func get_room_opts():
+func get_room_opts(_opts):
 	var default_room_opt = {skip_flags=["first"]}
 
 	var initial_rooms = [

@@ -44,6 +44,3 @@ func _on_new_data_generated(data: Dictionary):
 		node.set_owner(self)
 		for ch in node.get_children():
 			ch.set_owner(self)
-
-	Debug.pr("resetting generator")
-	generator.reset()
