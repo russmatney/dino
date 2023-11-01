@@ -13,8 +13,6 @@ class BrickRoomOpts:
 	var side: Vector2
 	var flags: Array
 	var skip_flags: Array
-	# TODO drop tilemap_scene
-	var tilemap_scene: PackedScene
 	var label_to_tilemap: Dictionary
 	var label_to_entity: Dictionary
 	var color: Color
@@ -32,8 +30,6 @@ class BrickRoomOpts:
 		Util.ensure_default(opts, "tile_size", 16)
 		Util.ensure_default(opts, "flags", [])
 		Util.ensure_default(opts, "skip_flags", [])
-		# TODO drop tilemap_scene
-		Util.ensure_default(opts, "tilemap_scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
 		Util.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://addons/reptile/tilemaps/MetalTiles8.tscn")}})
 		Util.ensure_default(opts, "label_to_entity", {})
 		Util.ensure_default(opts, "color", Color.PERU)
@@ -49,7 +45,7 @@ class BrickRoomOpts:
 		side = opts.side
 		flags = opts.flags
 		skip_flags = opts.skip_flags
-		tilemap_scene = opts.tilemap_scene
+		label_to_tilemap = opts.label_to_tilemap
 		label_to_entity = opts.label_to_entity
 		color = opts.color
 		show_color_rect = opts.show_color_rect
@@ -91,19 +87,28 @@ static func crd_to_position(crd: Dictionary, opts: BrickRoomOpts):
 
 ## tilemap ##################################################################
 
-static func add_tilemap(room: BrickRoom, opts: BrickRoomOpts):
-	room.tilemap = opts.tilemap_scene.instantiate()
+static func add_tilemap(room: BrickRoom, opts: BrickRoomOpts, label: String, tmap_opts: Dictionary):
+	var tilemap = tmap_opts.scene.instantiate()
 
-	var tilemap_tile_size = room.tilemap.tile_set.tile_size
+	var tilemap_tile_size = tilemap.tile_set.tile_size
 	var tilemap_scale_factor = opts.tile_size*Vector2.ONE/(tilemap_tile_size as Vector2)
-	room.tilemap.scale = Vector2.ONE * tilemap_scale_factor
+	tilemap.scale = Vector2.ONE * tilemap_scale_factor
 
 	var crds = room.def.coords()
-	var tile_coords = crds.filter(func(c): return "Tile" in c.cell).map(func(c): return c.coord)
+	var tile_coords = crds.filter(func(c): return label in c.cell).map(func(c): return c.coord)
+	if len(tile_coords) == 0:
+		# no tiles for label in this room
+		return
 
-	room.tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
-	room.tilemap.force_update()
-	room.add_child(room.tilemap)
+	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+	tilemap.force_update()
+
+	room.tilemaps[label] = tilemap
+	room.add_child(tilemap)
+
+static func add_tilemaps(room: BrickRoom, opts: BrickRoomOpts):
+	for label in opts.label_to_tilemap:
+		add_tilemap(room, opts, label, opts.label_to_tilemap.get(label))
 
 ## entities ##################################################################
 
@@ -243,9 +248,8 @@ static func create_room(opts):
 
 	room.position = BrickRoom.next_room_position(room, brick_opts)
 
-	# will we need to overwrite `gen` completely? maybe need to decouple this class?
 	BrickRoom.add_rect(room, brick_opts)
-	BrickRoom.add_tilemap(room, brick_opts)
+	BrickRoom.add_tilemaps(room, brick_opts)
 	BrickRoom.add_entities(room, brick_opts)
 	return room
 
@@ -267,9 +271,8 @@ static func create_rooms(room_opts):
 
 var def: RoomDef
 var rect: ColorRect
-# TODO move to dict like tilemap_by_label
-var tilemap: TileMap
+var tilemaps: Dictionary = {}
 var entities: Array
 
 func data():
-	return {name=name, def=def, entities=entities}
+	return {name=name, def=def, entities=entities, tilemaps=tilemaps}

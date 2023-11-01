@@ -35,9 +35,17 @@ func get_room_opts():
 
 	for opt in agg.room_opts:
 		opt.merge({
-			# TODO remove when lable_to_tilemap is supported
-			tilemap_scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn"),
-			label_to_tilemap={"Tile": {scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn")}},
+			label_to_tilemap={"Tile": {
+				scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn"),
+				add_borders=true
+				},
+				"Floor":{
+					scene=load("res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn")
+					},
+				"Pit":{
+					scene=load("res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn")
+					}
+				},
 			label_to_entity={
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 				"Chaser": {scene=load("res://src/shirt/enemies/BlobChaser.tscn")},

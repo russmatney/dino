@@ -54,35 +54,42 @@ func reset():
 
 ## generate ######################################################################
 
-func generate():
+func generate() -> Dictionary:
 	reset()
 	seed(_seed)
 	Debug.pr("Generating level with seed:", [_seed])
 
 	var room_opts = get_room_opts()
 	for opt in room_opts:
-		opt.merge({tile_size=room_tile_size,
-			parsed_room_defs=parsed_room_defs,})
+		opt.merge({tile_size=room_tile_size, parsed_room_defs=parsed_room_defs,})
 	if room_opts == null:
 		Debug.warn("No room_opts returned from get_room_opts, nothing to generate")
-		return
+		return {}
 	rooms = BrickRoom.create_rooms(room_opts)
 
 	for r in rooms:
 		r.name = "Room_%s" % room_idx
 		room_idx += 1
 
-	# TODO extend to handle multiple tilemaps
-	var tmap = promote_tilemaps(rooms, {add_borders=true})
-	tilemaps.append(tmap)
-	entities = promote_entities(rooms)
+	tilemaps = combine_tilemaps(rooms, room_opts)
 
-	new_data_generated.emit({
+	# collect entities
+	entities = []
+	for room in rooms:
+		for ent in room.entities:
+			entities.append(ent)
+
+	# emit updates
+	var data = {
 		seed=_seed,
 		rooms=rooms,
 		entities=entities,
 		tilemaps=tilemaps,
-		})
+		}
+
+	new_data_generated.emit(data)
+
+	return data
 
 # overwrite in subclass
 func get_room_opts():
@@ -92,35 +99,65 @@ func get_room_opts():
 
 ## promote tilemaps ######################################################################
 
-func room_tilemap_coord_to_new_tilemap_coord(room, coord, tilemap):
-	var new_pos = room.tilemap.map_to_local(coord) + (room.position / room.tilemap.scale) + room.tilemap.position
+func combine_tilemaps(rooms, room_opts):
+	var label_to_tilemap = room_opts[0].label_to_tilemap
+
+	var tmaps = []
+	for label in label_to_tilemap:
+		tmaps.append(combine_tilemap(rooms, label, label_to_tilemap[label]))
+
+	return tmaps
+
+# converts a coord in a room's tilemap to a coord in the 'combined' passed tilemap
+func room_tilemap_coord_to_new_tilemap_coord(room, room_tilemap, coord, tilemap):
+	var new_pos = room_tilemap.map_to_local(coord) + (room.position / room_tilemap.scale) + room_tilemap.position
 	return tilemap.local_to_map(new_pos)
 
-func promote_tilemaps(rooms, opts={}):
-	# TODO pass in brick_opts, read from label_to_tilemap
+func combine_tilemap(rooms, label, opts):
 	var add_borders = opts.get("add_borders")
+
+	assert(opts.scene, "No scene passed in tilemap opts")
+	var tilemap = opts.scene.instantiate()
+
+	var room_tilemap = func(room):
+		return room.tilemaps.get(label)
+
+	var is_scale_set = false
+
+	var room_rects = []
+	for r in rooms:
+		var tmap = room_tilemap.call(r)
+		if tmap == null:
+			continue
+
+		# set tilemap scale
+		if not is_scale_set:
+			tilemap.scale = tmap.scale
+			is_scale_set = true
+
+		# collect rects
+		if add_borders:
+			var rect = tmap.get_used_rect()
+			rect.position = tmap.local_to_map(r.position / tmap.scale + tmap.position)
+			room_rects.append(rect)
 
 	var new_cell_coords = []
 	var border_cells = []
 
-	var tilemap = tilemap_scene.instantiate()
-	# NOTE assumes rooms all have the same scale
-	tilemap.scale = rooms[0].tilemap.scale
-
-	var room_rects = []
 	for r in rooms:
-		var rect = r.tilemap.get_used_rect()
-		rect.position = r.tilemap.local_to_map(r.position / r.tilemap.scale + r.tilemap.position)
-		room_rects.append(rect)
+		var tmap = room_tilemap.call(r)
+		if tmap == null:
+			continue
 
-	for r in rooms:
-		var used_cells = r.tilemap.get_used_cells(0)
-		var poses = used_cells.map(func(coord):
-			return room_tilemap_coord_to_new_tilemap_coord(r, coord, tilemap))
+		new_cell_coords.append_array(tmap.get_used_cells(0).map(func(coord):
+			return room_tilemap_coord_to_new_tilemap_coord(r, tmap, coord, tilemap)))
+
 		if add_borders:
-			var border_coords = Reptile.all_tilemap_border_coords(r.tilemap)
+			# add border coords that don't overlap room_rects
+			# NOTE assumes rooms are rectangles until this function gets more nuanced
+			var border_coords = Reptile.all_tilemap_border_coords(tmap)
 			for c in border_coords:
-				var coord = room_tilemap_coord_to_new_tilemap_coord(r, c, tilemap)
+				var coord = room_tilemap_coord_to_new_tilemap_coord(r, tmap, c, tilemap)
 				var overlaps = false
 				for rect in room_rects:
 					if rect.has_point(coord):
@@ -129,9 +166,9 @@ func promote_tilemaps(rooms, opts={}):
 				if not overlaps:
 					border_cells.append(coord)
 
-		new_cell_coords.append_array(poses)
-		r.remove_child(r.tilemap)
-		r.tilemap.queue_free()
+		# this clean up might not be necessary
+		r.remove_child(tmap)
+		tmap.queue_free()
 
 	if add_borders:
 		new_cell_coords.append_array(border_cells)
@@ -140,12 +177,3 @@ func promote_tilemaps(rooms, opts={}):
 	tilemap.force_update()
 
 	return tilemap
-
-## promote entities ######################################################################
-
-func promote_entities(rooms):
-	var ents = []
-	for room in rooms:
-		for ent in room.entities:
-			ents.append(ent)
-	return ents
