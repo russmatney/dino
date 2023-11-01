@@ -25,7 +25,7 @@ func column(idx: int):
 func row(idx: int):
 	if idx <= len(shape):
 		return shape[idx]
-	Debug.error("idx outside of row width, cannot return row")
+	Debug.error("idx outside of width, cannot return row")
 
 # Returns an array of dicts like [{"coord": Vector2, "cell": Array[String]}]
 func coords() -> Array:

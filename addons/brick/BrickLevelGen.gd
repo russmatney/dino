@@ -6,6 +6,8 @@ class_name BrickLevelGen
 ## static ######################################################################
 
 static func generate_level(opts: Dictionary) -> Dictionary:
+	Util.ensure_default(opts, "seed", 1)
+	Util.ensure_default(opts, "tile_size", 16)
 	Debug.pr("Generating level with seed:", [opts.seed])
 
 	# parse once
@@ -20,8 +22,9 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 	# get room opts
 	var get_room_opts = opts.get("get_room_opts", BrickLevelGen.default_room_opts)
 	var room_opts = get_room_opts.call(opts)
-	for opt in room_opts:
-		opt.merge({tile_size=opts.tile_size, parsed_room_defs=parsed_room_defs,})
+	for room_opt in room_opts:
+		room_opt.merge(opts) # merge tile_size and other passed opts
+		room_opt.merge({parsed_room_defs=parsed_room_defs,})
 	if room_opts == null:
 		Debug.warn("No room_opts returned from get_room_opts, nothing to generate")
 		return {}
@@ -77,9 +80,8 @@ static func room_tilemap_coord_to_new_tilemap_coord(room, room_tilemap, coord, t
 
 static func combine_tilemap(rooms, label, opts):
 	var add_borders = opts.get("add_borders")
-
-	assert(opts.scene, "No scene passed in tilemap opts")
-	var tilemap = opts.scene.instantiate()
+	var scene = opts.get("scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
+	var tilemap = scene.instantiate()
 
 	var room_tilemap = func(room):
 		return room.tilemaps.get(label)

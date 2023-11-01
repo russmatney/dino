@@ -88,7 +88,8 @@ static func crd_to_position(crd: Dictionary, opts: BrickRoomOpts):
 ## tilemap ##################################################################
 
 static func add_tilemap(room: BrickRoom, opts: BrickRoomOpts, label: String, tmap_opts: Dictionary):
-	var tilemap = tmap_opts.scene.instantiate()
+	var scene = tmap_opts.get("scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
+	var tilemap = scene.instantiate()
 
 	var tilemap_tile_size = tilemap.tile_set.tile_size
 	var tilemap_scale_factor = opts.tile_size*Vector2.ONE/(tilemap_tile_size as Vector2)
