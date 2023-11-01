@@ -2,8 +2,6 @@
 class_name BrickRoom
 extends Node2D
 
-# TODO consider a stronger type for the opts Dictionary in here
-
 class BrickRoomOpts:
 	extends Object
 
@@ -15,7 +13,9 @@ class BrickRoomOpts:
 	var side: Vector2
 	var flags: Array
 	var skip_flags: Array
+	# TODO drop tilemap_scene
 	var tilemap_scene: PackedScene
+	var label_to_tilemap: Dictionary
 	var label_to_entity: Dictionary
 	var color: Color
 	var show_color_rect: bool
@@ -32,7 +32,9 @@ class BrickRoomOpts:
 		Util.ensure_default(opts, "tile_size", 16)
 		Util.ensure_default(opts, "flags", [])
 		Util.ensure_default(opts, "skip_flags", [])
+		# TODO drop tilemap_scene
 		Util.ensure_default(opts, "tilemap_scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
+		Util.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://addons/reptile/tilemaps/MetalTiles8.tscn")}})
 		Util.ensure_default(opts, "label_to_entity", {})
 		Util.ensure_default(opts, "color", Color.PERU)
 		Util.ensure_default(opts, "show_color_rect", true)
@@ -265,6 +267,7 @@ static func create_rooms(room_opts):
 
 var def: RoomDef
 var rect: ColorRect
+# TODO move to dict like tilemap_by_label
 var tilemap: TileMap
 var entities: Array
 

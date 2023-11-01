@@ -4,7 +4,8 @@ class_name RoomParser
 
 ## public types #####################################################
 
-# TODO consider validating dictionary/converting to this obj
+# NOTE this is not used! just a thought.
+# consider validating dictionary/converting to this obj
 class RoomParserOpts:
 	extends Object
 

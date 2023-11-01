@@ -78,6 +78,7 @@ func generate():
 	entities = promote_entities(rooms)
 
 	new_data_generated.emit({
+		seed=_seed,
 		rooms=rooms,
 		entities=entities,
 		tilemaps=tilemaps,
@@ -86,8 +87,8 @@ func generate():
 # overwrite in subclass
 func get_room_opts():
 	Debug.err("Not impled!")
-	# provide a sane default? rooms, path, etc?
-
+	# provide a sane, opts-driven default
+	# (so you don't _need_ to write a sub-class)
 
 ## promote tilemaps ######################################################################
 
