@@ -105,3 +105,32 @@ xtx", seed=1, room_count=2, label_to_tilemap={"Tile": {}, "Pit": {}}})
 		])
 
 	free_data(data)
+
+
+## Entities ####################################################################
+
+func test_generate_entities():
+	var data = BrickLevelGen.generate_level({contents="name Rooms
+
+=======
+LEGEND
+=======
+
+p = Player
+x = Tile
+
+=======
+ROOMS
+=======
+
+room one
+
+xpx", room_count=1, seed=1, label_to_entity={"Player": {
+	scene=load("res://addons/beehive/topdown/TDPlayer.tscn")}}})
+
+	assert_that(len(data.entities)).is_equal(1)
+	var p = data.entities[0]
+	assert_that(p.scene_file_path).is_equal("res://addons/beehive/topdown/TDPlayer.tscn")
+	assert_that(p.position).is_equal(Vector2(1,1) * 16)
+
+	free_data(data)
