@@ -10,6 +10,7 @@ p = Player and Floor
 c = Chaser and Floor
 w = Walker and Floor
 t = Pit and Floor
+g = Gem and Floor
 
 ==============
 ROOMS
@@ -44,6 +45,16 @@ xx...xx
 xx...xx
 xx...xx
 xx...xx
+
+name Gem!
+
+xxtttxx
+xxtttxx
+tt...tt
+tt.g.tt
+tt...tt
+xxtttxx
+xxtttxx
 
 name Walker
 

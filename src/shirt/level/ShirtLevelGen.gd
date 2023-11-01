@@ -50,6 +50,7 @@ func get_room_opts(_opts):
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 				"Chaser": {scene=load("res://src/shirt/enemies/BlobChaser.tscn")},
 				"Walker": {scene=load("res://src/shirt/enemies/BlobWalker.tscn")},
+				"Gem": {scene=load("res://src/shirt/entities/ShrineGem.tscn")},
 				}})
 
 	return agg.room_opts
