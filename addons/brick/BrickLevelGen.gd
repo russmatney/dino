@@ -8,7 +8,6 @@ class_name BrickLevelGen
 static func generate_level(opts: Dictionary) -> Dictionary:
 	Util.ensure_default(opts, "seed", 1)
 	Util.ensure_default(opts, "tile_size", 16)
-	Debug.pr("Generating level with seed:", [opts.seed])
 
 	# parse once
 	var parsed_room_defs = RoomParser.parse({
@@ -167,9 +166,9 @@ signal new_data_generated(data: Dictionary)
 @export var room_count = 5
 @export_file var room_defs_path
 
-@export var entities_node: Node
-@export var tilemaps_node: Node
-@export var rooms_node: Node
+@export var entities_node: Node2D
+@export var tilemaps_node: Node2D
+@export var rooms_node: Node2D
 
 ## generate ######################################################################
 
@@ -186,11 +185,26 @@ func generate():
 	var data = BrickLevelGen.generate_level(opts)
 
 	(func():
-		if entities_node:
-			entities_node.get_children().map(func(c): c.queue_free())
-			for node in data.entities:
-				node.reparent(entities_node, true)
-				node.set_owner(self.get_owner())
+		if not entities_node:
+			entities_node = Node2D.new()
+			entities_node.name = "Entities"
+			get_parent().add_child(entities_node)
+			entities_node.set_owner(get_owner())
+		if not tilemaps_node:
+			tilemaps_node = Node2D.new()
+			tilemaps_node.name = "Tilemaps"
+			get_parent().add_child(tilemaps_node)
+			tilemaps_node.set_owner(get_owner())
+		if not rooms_node:
+			rooms_node = Node2D.new()
+			rooms_node.name = "Rooms"
+			get_parent().add_child(rooms_node)
+			rooms_node.set_owner(get_owner())
+
+		entities_node.get_children().map(func(c): c.queue_free())
+		for node in data.entities:
+			node.reparent(entities_node, true)
+			node.set_owner(self.get_owner())
 
 		if tilemaps_node:
 			tilemaps_node.get_children().map(func(c): c.queue_free())
@@ -209,7 +223,7 @@ func generate():
 					for cch in ch.get_children():
 						cch.set_owner(self.get_owner())
 
-		Debug.pr("new data gend with seed", [data.seed], data)
+		Debug.pr("new data gend with seed", [data.seed], data.keys())
 		new_data_generated.emit(data)
 
 		).call_deferred()

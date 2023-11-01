@@ -1,8 +1,7 @@
 @tool
 extends DinoGame
 
-# var first_scene = "res://src/pluggs/player/PluggsGym.tscn"
-var first_scene = "res://src/pluggs/room/LevelGen.tscn"
+var first_scene = "res://src/pluggs/level/PluggsLevel.tscn"
 
 func start(_opts={}):
 	Navi.nav_to(first_scene)
