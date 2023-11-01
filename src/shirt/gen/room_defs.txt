@@ -6,10 +6,10 @@ LEGEND
 
 . = Floor
 x = Tile
-p = Player
-c = Chaser
-w = Walker
-t = Pit
+p = Player and Floor
+c = Chaser and Floor
+w = Walker and Floor
+t = Pit and Floor
 
 ==============
 ROOMS

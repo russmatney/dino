@@ -20,7 +20,7 @@ signal new_data_generated(data: Dictionary)
 			_seed = randi()
 			generate()
 
-@export var room_tile_size = 16
+@export var tile_size = 16
 @export var room_count = 5
 @export_file var room_defs_path
 var parsed_room_defs
@@ -50,27 +50,37 @@ func reset():
 
 	# reset
 	room_idx = 0
-	parsed_room_defs = RoomParser.parse({room_defs_path=room_defs_path})
 
 ## generate ######################################################################
 
 func generate() -> Dictionary:
-	reset()
-	seed(_seed)
 	Debug.pr("Generating level with seed:", [_seed])
 
+	# reset vars
+	reset()
+
+	# parse once
+	parsed_room_defs = RoomParser.parse({room_defs_path=room_defs_path})
+
+	# set seed
+	seed(_seed)
+
+	# get room opts
 	var room_opts = get_room_opts()
 	for opt in room_opts:
-		opt.merge({tile_size=room_tile_size, parsed_room_defs=parsed_room_defs,})
+		opt.merge({tile_size=tile_size, parsed_room_defs=parsed_room_defs,})
 	if room_opts == null:
 		Debug.warn("No room_opts returned from get_room_opts, nothing to generate")
 		return {}
+
+	# gen rooms
 	rooms = BrickRoom.create_rooms(room_opts)
 
 	for r in rooms:
 		r.name = "Room_%s" % room_idx
 		room_idx += 1
 
+	# combine tilemaps
 	tilemaps = combine_tilemaps(rooms, room_opts)
 
 	# collect entities
@@ -79,7 +89,7 @@ func generate() -> Dictionary:
 		for ent in room.entities:
 			entities.append(ent)
 
-	# emit updates
+	# build update dict
 	var data = {
 		seed=_seed,
 		rooms=rooms,
@@ -88,7 +98,6 @@ func generate() -> Dictionary:
 		}
 
 	new_data_generated.emit(data)
-
 	return data
 
 # overwrite in subclass

@@ -87,14 +87,36 @@ LEGEND
 =======
 
 . = Empty
-p = Player
+p = Player and Tile
 x = Tile
 ")
 
 	assert_that(parsed).contains_keys(["legend"])
 	assert_that(parsed.legend["."]).is_equal(["Empty"])
-	assert_that(parsed.legend["p"]).is_equal(["Player"])
+	assert_that(parsed.legend["p"]).is_equal(["Player", "Tile"])
 	assert_that(parsed.legend["x"]).is_equal(["Tile"])
+
+func test_parse_legend_and():
+	var parsed = RoomParser.parse({contents="name PuzzRooms
+
+=======
+LEGEND
+=======
+
+p = Player and Tile
+x = Tile
+
+=======
+ROOMS
+=======
+
+room 1
+
+xpx
+"})
+	assert_that(parsed.rooms[0].shape).is_equal([
+		[["Tile"], ["Player", "Tile"], ["Tile"],]
+		])
 
 
 func test_rooms():
