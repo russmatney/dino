@@ -437,3 +437,13 @@ func add_color_rect(node, pos, size, color):
 	crect.position = pos
 	crect.size = size
 	node.add_child(crect)
+
+
+########################################################
+
+func ensure_node(_self, nm):
+	var node = _self.get_node_or_null(nm)
+	if node == null:
+		node = Node2D.new()
+		_self.add_child(node)
+	return node

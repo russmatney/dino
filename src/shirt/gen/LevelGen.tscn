@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b058xjositmw5"]
+[gd_scene load_steps=11 format=3 uid="uid://b058xjositmw5"]
 
 [ext_resource type="Script" path="res://src/shirt/gen/LevelGen.gd" id="1_x2mps"]
 [ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="2_6yls3"]
@@ -7,13 +7,13 @@
 [ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="5_tp1lp"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="6_5yray"]
 [ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="7_boakg"]
+[ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="8_w1k67"]
 [ext_resource type="Script" path="res://addons/beehive/topdown/TDBody.gd" id="9_4do0v"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/shirt/enemies/BlobChaser.tscn" id="10_1pp0i"]
 
 [node name="LevelGen" type="Node2D"]
 script = ExtResource("1_x2mps")
-_seed = 3146943906
-room_tile_size = 24
+_seed = 291748862
 
 [node name="Rooms" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -22,54 +22,53 @@ unique_name_in_owner = true
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
-offset_right = 168.0
-offset_bottom = 144.0
+offset_right = 112.0
+offset_bottom = 96.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
 [node name="Room_2" type="Node2D" parent="Rooms"]
-position = Vector2(168, 24)
+position = Vector2(112, 16)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_2"]
-offset_right = 168.0
-offset_bottom = 168.0
+offset_right = 112.0
+offset_bottom = 112.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
 [node name="Room_3" type="Node2D" parent="Rooms"]
-position = Vector2(168, 192)
+position = Vector2(112, 128)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_3"]
-offset_right = 168.0
-offset_bottom = 168.0
+offset_right = 112.0
+offset_bottom = 112.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
 [node name="Room_4" type="Node2D" parent="Rooms"]
-position = Vector2(-168, -24)
+position = Vector2(0, 128)
 script = ExtResource("2_6yls3")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_4"]
-offset_right = 336.0
-offset_bottom = 336.0
+offset_right = 112.0
+offset_bottom = 112.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="@TileMap@60460" type="TileMap" parent="Rooms" instance=ExtResource("3_e26sm")]
-scale = Vector2(1.5, 1.5)
+[node name="@TileMap@24268" type="TileMap" parent="Rooms" instance=ExtResource("3_e26sm")]
 tile_set = ExtResource("4_fxl4x")
 format = 2
-layer_0/tile_data = PackedInt32Array(7, 655360, 1, -65529, 196608, 2, -131065, 196608, 1, 851960, 327680, 3, 786424, 262144, 2, 720888, 262144, 2, 655352, 262144, 2, 589816, 262144, 2, 524280, 262144, 2, 458744, 262144, 2, 393208, 262144, 2, 327672, 262144, 2, 262136, 262144, 2, 196600, 262144, 2, 131064, 262144, 2, 65528, 262144, 2, -8, 327680, 2, -65544, 65536, 1, 851974, 458752, 5, 851973, 131072, 4, 851972, 131072, 4, 851971, 131072, 4, 851970, 131072, 4, 851969, 131072, 4, 851968, 131072, 4, 917503, 131072, 4, 917502, 131072, 4, 917501, 131072, 4, 917500, 131072, 4, 917499, 131072, 4, 917498, 131072, 4, 917497, 393216, 4, 917496, 65536, 3, -131066, 458752, 1, -131067, 131072, 4, -131068, 131072, 4, -131069, 131072, 4, -131070, 131072, 4, -131071, 131072, 4, -131072, 131072, 4, -65537, 131072, 4, -65538, 131072, 4, -65539, 131072, 4, -65540, 131072, 4, -65541, 131072, 4, -65542, 131072, 4, -65543, 393216, 1, 917518, 196608, 2, 851982, 196608, 2, 786446, 524288, 3, 720910, 262144, 2, 655374, 262144, 2, 589838, 524288, 2, 524302, 196608, 2, 458766, 196608, 2, 917510, 65536, 2, 983053, 131072, 3, 983052, 458752, 4, 983051, 131072, 4, 983050, 131072, 4, 983049, 131072, 4, 983048, 393216, 4, 983047, 131072, 3, 983046, 65536, 3, 983054, 196608, 3, 393230, 196608, 2, 327694, 524288, 3, 262158, 262144, 2, 196622, 262144, 2, 131086, 524288, 2, 65550, 196608, 2, 14, 196608, 1, 13, 131072, 1, 12, 458752, 1, 11, 131072, 4, 10, 131072, 4, 9, 131072, 4, 8, 393216, 1, -7, 196608, 3, -65530, 65536, 2, 851961, 196608, 1, 786438, 65536, 1, 524295, 65536, 2, 524296, 196608, 2, 524300, 65536, 2, 524301, 131072, 2, 589831, 65536, 3, 589832, 196608, 3, 589836, 65536, 3, 589837, 131072, 3, 786439, 131072, 1, 786440, 196608, 1, 786444, 65536, 1, 786445, 131072, 1, 851975, 131072, 2, 851976, 196608, 2, 851980, 65536, 2, 851981, 131072, 2, 917511, 131072, 2, 917512, 196608, 2, 917516, 65536, 2, 917517, 131072, 2, 65543, 65536, 2, 65544, 196608, 2, 65548, 65536, 2, 65549, 131072, 2, 131079, 65536, 3, 131080, 196608, 3, 131084, 65536, 3, 131085, 131072, 3, 327687, 458752, 1, 327688, 196608, 1, 327692, 65536, 1, 327693, 131072, 1, 393223, 65536, 2, 393224, 196608, 2, 393228, 65536, 2, 393229, 131072, 2, 458759, 65536, 2, 458760, 196608, 2, 458764, 65536, 2, 458765, 131072, 2, 0, 327680, 1, 1, 131072, 4, 2, 131072, 4, 3, 131072, 4, 4, 131072, 4, 5, 131072, 4, 6, 458752, 4, 65536, 262144, 2, 131072, 262144, 2, 196608, 262144, 2, 262144, 262144, 2, 327680, 327680, 4, 327681, 131072, 4, 327682, 131072, 4, 327683, 131072, 4, 327684, 131072, 4, 327685, 131072, 4, 327686, 131072, 4)
+layer_0/tile_data = PackedInt32Array(983039, 65536, 2, 917503, 327680, 3, 851967, 262144, 2, 786431, 262144, 2, 720895, 262144, 2, 655359, 327680, 2, 589823, 65536, 2, 524287, 65536, 2, 983046, 131072, 3, 983045, 458752, 4, 983044, 131072, 4, 983043, 131072, 4, 983042, 131072, 4, 983041, 393216, 4, 983040, 131072, 3, 1048575, 65536, 3, 458758, 131072, 2, 458757, 458752, 2, 458756, 131072, 3, 458755, 131072, 3, 458754, 131072, 3, 458753, 393216, 2, 458752, 131072, 2, 983047, 131072, 3, 917518, 196608, 2, 851982, 524288, 3, 786446, 262144, 2, 720910, 262144, 2, 655374, 524288, 2, 589838, 196608, 2, 524302, 196608, 2, 458766, 196608, 2, 983053, 131072, 3, 983052, 458752, 4, 983051, 131072, 4, 983050, 131072, 4, 983049, 131072, 4, 983048, 393216, 4, 983054, 196608, 3, 393230, 196608, 2, 327694, 524288, 3, 262158, 262144, 2, 196622, 262144, 2, 131086, 524288, 2, 65550, 196608, 2, 14, 196608, 1, 393222, 131072, 2, 13, 131072, 1, 12, 458752, 1, 11, 131072, 4, 10, 131072, 4, 9, 131072, 4, 8, 393216, 1, 7, 655360, 1, -65529, 196608, 1, 393215, 65536, 2, 327679, 65536, 2, 262143, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 1, 393221, 131072, 2, 393220, 131072, 2, 393219, 131072, 2, 393218, 131072, 2, 393217, 131072, 2, 393216, 131072, 2, 458751, 65536, 2, -65530, 131072, 1, -65531, 131072, 1, -65532, 131072, 1, -65533, 131072, 1, -65534, 131072, 1, -65535, 131072, 1, -65536, 131072, 1, 524288, 131072, 2, 524289, 196608, 2, 524293, 65536, 2, 524294, 131072, 2, 589824, 131072, 3, 589825, 196608, 3, 589829, 65536, 3, 589830, 131072, 3, 851968, 131072, 1, 851969, 196608, 1, 851973, 65536, 1, 851974, 131072, 1, 917504, 131072, 2, 917505, 196608, 2, 917509, 65536, 2, 917510, 131072, 2, 524295, 131072, 2, 524296, 393216, 3, 524297, 196608, 1, 524300, 65536, 2, 524301, 131072, 2, 589831, 458752, 2, 589832, 393216, 2, 589833, 196608, 3, 589836, 65536, 2, 589837, 131072, 2, 655367, 65536, 3, 655368, 196608, 3, 655372, 65536, 3, 655373, 131072, 3, 851975, 131072, 1, 851976, 196608, 1, 851980, 65536, 1, 851981, 131072, 1, 917511, 131072, 2, 917512, 196608, 2, 917516, 65536, 2, 917517, 131072, 2, 65543, 65536, 2, 65544, 196608, 2, 65548, 65536, 2, 65549, 131072, 2, 131079, 65536, 3, 131080, 196608, 3, 131084, 65536, 3, 131085, 131072, 3, 327687, 131072, 1, 327688, 196608, 1, 327692, 65536, 1, 327693, 131072, 1, 393223, 131072, 2, 393224, 196608, 2, 393228, 65536, 2, 393229, 131072, 2, 458759, 131072, 2, 458760, 196608, 2, 458764, 65536, 2, 458765, 131072, 2, 0, 393216, 2, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 65536, 196608, 2, 131072, 196608, 2, 196608, 196608, 2, 262144, 196608, 2, 327680, 393216, 3, 327681, 131072, 1, 327682, 131072, 1, 327683, 131072, 1, 327684, 131072, 1, 327685, 131072, 1, 327686, 131072, 1)
 script = ExtResource("5_tp1lp")
 
 [node name="Entities" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="@Marker2D@60461" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("6_5yray")]
-position = Vector2(72, 72)
+[node name="@Marker2D@24269" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("6_5yray")]
+position = Vector2(48, 48)
 script = ExtResource("7_boakg")
 dev_only = false
 
-[node name="BlobChaser" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("10_1pp0i")]
-position = Vector2(216, 96)
+[node name="@CharacterBody2D@24270" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("10_1pp0i")]
+position = Vector2(144, 64)
 collision_layer = 8
 collision_mask = 5127
 script = ExtResource("9_4do0v")
@@ -78,12 +77,11 @@ initial_health = 2
 should_wander = true
 should_notice = true
 
-[node name="@CharacterBody2D@60462" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("10_1pp0i")]
-position = Vector2(216, 264)
+[node name="BlobWalker" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("8_w1k67")]
+position = Vector2(176, 208)
 collision_layer = 8
 collision_mask = 5127
 script = ExtResource("9_4do0v")
-display_name = "Blob Chaser"
+display_name = "Blob Walker"
 initial_health = 2
 should_wander = true
-should_notice = true

@@ -1,6 +1,10 @@
 @tool
 extends Node2D
 
+## signals ######################################################################
+
+signal new_data_generated(data: Dictionary)
+
 ## vars/triggers ######################################################################
 
 @export var run_gen: bool:
@@ -89,9 +93,15 @@ func generate():
 	for r in rooms:
 		setup_room(r)
 
-	promote_tilemaps(rooms, {add_borders=true})
+	var tmap = promote_tilemaps(rooms, {add_borders=true})
 	# wrap_tilemap(tmap)
 	promote_entities(rooms)
+
+	new_data_generated.emit({
+		rooms=rooms,
+		entities=entities_node.get_children(),
+		tilemaps=[tmap],
+		})
 
 func room_tilemap_coord_to_new_tilemap_coord(room, coord, tilemap):
 	var new_pos = room.tilemap.map_to_local(coord) + (room.position / room.tilemap.scale) + room.tilemap.position
