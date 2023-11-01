@@ -27,7 +27,8 @@ func _on_new_data_generated(nodes: Dictionary):
 	rooms.get_children().map(func(c): c.queue_free())
 
 	for node in nodes.entities:
-		node.reparent(entities)
+		Debug.pr("entity position", node.position, node.global_position)
+		node.reparent(entities, true)
 		node.set_owner(self)
 
 	for node in nodes.tilemaps:
