@@ -34,7 +34,7 @@ var room_idx = 0
 ## ready ######################################################################
 
 func _ready():
-	Debug.pr("LevelGen ready")
+	Debug.pr("shirt LevelGen ready")
 	Game.maybe_spawn_player()
 	connect_to_rooms()
 

@@ -27,41 +27,27 @@ var parsed_room_defs
 
 @export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
 
+########################################################################
 
-
-
-@onready var rooms_node = $%Rooms
-@onready var entities_node = $%Entities
+var rooms = []
+var entities = []
+var tilemaps = []
 
 var room_idx = 0
 
 ## ready ######################################################################
 
 func _ready():
-	Debug.pr("LevelGen ready")
+	Debug.pr([&"Brick"], "BrickLevelGen ready")
 	Game.maybe_spawn_player()
-	connect_to_rooms()
-
-func _unhandled_input(event):
-	if Engine.is_editor_hint():
-		return
-
-	if Trolley.is_restart(event):
-		reboot_world()
-
-# Needs to be called on _ready (for static rooms) and after regenerating new rooms
-func connect_to_rooms():
-	if Engine.is_editor_hint():
-		return
-	# TODO any shirt setup
-	pass
 
 ## generate ######################################################################
 
 func reset():
 	# clear
-	rooms_node.get_children().map(func(c): c.queue_free())
-	entities_node.get_children().map(func(c): c.queue_free())
+	rooms = []
+	entities = []
+	tilemaps = []
 
 	# reset
 	room_idx = 0
@@ -72,8 +58,6 @@ func generate():
 
 	seed(_seed)
 	Debug.pr("Generating level with seed:", _seed)
-
-	var rooms = []
 
 	var room_opts = [
 		{flags=["first"]},
@@ -94,17 +78,20 @@ func generate():
 				}})
 
 	rooms = BrickRoom.create_rooms(room_opts)
+
 	for r in rooms:
-		setup_room(r)
+		r.name = "Room_%s" % room_idx
+		room_idx += 1
 
 	var tmap = promote_tilemaps(rooms, {add_borders=true})
-	# wrap_tilemap(tmap)
-	promote_entities(rooms)
+
+	entities = promote_entities(rooms)
+	tilemaps.append(tmap)
 
 	new_data_generated.emit({
 		rooms=rooms,
-		entities=entities_node.get_children(),
-		tilemaps=[tmap],
+		entities=entities,
+		tilemaps=tilemaps,
 		})
 
 func room_tilemap_coord_to_new_tilemap_coord(room, coord, tilemap):
@@ -154,9 +141,6 @@ func promote_tilemaps(rooms, opts={}):
 	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 	tilemap.force_update()
 
-	tilemap.ready.connect(func(): tilemap.set_owner(self))
-	rooms_node.add_child(tilemap)
-
 	return tilemap
 
 func tilemap_border_coords(tilemap):
@@ -198,28 +182,8 @@ func wrap_tilemap(tilemap):
 	tilemap.force_update()
 
 func promote_entities(rooms):
+	var ents = []
 	for room in rooms:
 		for ent in room.entities:
-			ent.reparent(entities_node, true)
-			ent.set_owner(self)
-
-## create_room ######################################################################
-
-func reboot_world():
-	Hood.notif("Rebooting world....")
-	_seed = randi() # may want this to happen at a global level at some point
-	await get_tree().create_timer(3.0).timeout
-	generate()
-	Game.respawn_player()
-	connect_to_rooms()
-
-func setup_room(room):
-	room_idx += 1
-	room.ready.connect(func():
-		room.set_owner(self)
-		room.get_children().map(func(ch): ch.set_owner(self)))
-	room.name = "Room_%s" % room_idx
-
-	rooms_node.add_child(room)
-
-	return room
+			ents.append(ent)
+	return ents
