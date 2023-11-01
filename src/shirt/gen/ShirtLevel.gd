@@ -24,21 +24,21 @@ func _on_new_data_generated(nodes: Dictionary):
 
 	entities.get_children().map(func(c): c.queue_free())
 	tilemaps.get_children().map(func(c): c.queue_free())
-	# rooms.get_children().map(func(c): c.queue_free())
+	rooms.get_children().map(func(c): c.queue_free())
 
 	for node in nodes.entities:
-		Debug.pr("moving ent")
 		node.reparent(entities)
 		node.set_owner(self)
 
 	for node in nodes.tilemaps:
-		Debug.pr("moving tilemap")
 		tilemaps.add_child(node)
 		node.set_owner(self)
 
-	# for node in nodes.rooms:
-	# 	node.reparent(rooms)
-	# 	node.set_owner(self)
+	# TODO maybe we want area2ds or direct color rects for these?
+	for node in nodes.rooms:
+		rooms.add_child(node)
+		# node.reparent(rooms)
+		node.set_owner(self)
 
 	Debug.pr("resetting generator")
 	generator.reset()

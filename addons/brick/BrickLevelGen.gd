@@ -22,17 +22,16 @@ signal new_data_generated(data: Dictionary)
 
 @export var room_tile_size = 16
 @export var room_count = 5
-@export_file var room_defs_path = "res://src/shirt/gen/room_defs.txt"
+@export_file var room_defs_path
 var parsed_room_defs
 
-@export var tilemap_scene: PackedScene = preload("res://addons/reptile/tilemaps/CaveTiles16.tscn")
+@export var tilemap_scene: PackedScene
 
 ########################################################################
 
 var rooms = []
 var entities = []
 var tilemaps = []
-
 var room_idx = 0
 
 ## ready ######################################################################
@@ -41,7 +40,7 @@ func _ready():
 	Debug.pr([&"Brick"], "BrickLevelGen ready")
 	Game.maybe_spawn_player()
 
-## generate ######################################################################
+## reset ######################################################################
 
 func reset():
 	# clear
@@ -53,40 +52,30 @@ func reset():
 	room_idx = 0
 	parsed_room_defs = RoomParser.parse({room_defs_path=room_defs_path})
 
+## generate ######################################################################
+
 func generate():
 	reset()
-
 	seed(_seed)
-	Debug.pr("Generating level with seed:", _seed)
+	Debug.pr("Generating level with seed:", [_seed])
 
-	var room_opts = [
-		{flags=["first"]},
-		{skip_flags=["first"], side=Vector2.RIGHT},
-		{skip_flags=["first"], side=Util.rand_of([Vector2.UP, Vector2.DOWN])},
-		{skip_flags=["first"], side=Util.rand_of([Vector2.RIGHT, Vector2.LEFT])},
-		]
-
+	var room_opts = get_room_opts()
 	for opt in room_opts:
-		opt.merge({
-			tile_size=room_tile_size,
-			parsed_room_defs=parsed_room_defs,
-			tilemap_scene=tilemap_scene,
-			label_to_entity={
-				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
-				"Chaser": {scene=load("res://src/shirt/enemies/BlobChaser.tscn")},
-				"Walker": {scene=load("res://src/shirt/enemies/BlobWalker.tscn")},
-				}})
-
+		opt.merge({tile_size=room_tile_size,
+			parsed_room_defs=parsed_room_defs,})
+	if room_opts == null:
+		Debug.warn("No room_opts returned from get_room_opts, nothing to generate")
+		return
 	rooms = BrickRoom.create_rooms(room_opts)
 
 	for r in rooms:
 		r.name = "Room_%s" % room_idx
 		room_idx += 1
 
+	# TODO extend to handle multiple tilemaps
 	var tmap = promote_tilemaps(rooms, {add_borders=true})
-
-	entities = promote_entities(rooms)
 	tilemaps.append(tmap)
+	entities = promote_entities(rooms)
 
 	new_data_generated.emit({
 		rooms=rooms,
@@ -94,12 +83,20 @@ func generate():
 		tilemaps=tilemaps,
 		})
 
+# overwrite in subclass
+func get_room_opts():
+	Debug.err("Not impled!")
+	# provide a sane default? rooms, path, etc?
+
+
+## promote tilemaps ######################################################################
+
 func room_tilemap_coord_to_new_tilemap_coord(room, coord, tilemap):
 	var new_pos = room.tilemap.map_to_local(coord) + (room.position / room.tilemap.scale) + room.tilemap.position
 	return tilemap.local_to_map(new_pos)
 
-# TODO DRY up on BrickRoom / some other gen helper
 func promote_tilemaps(rooms, opts={}):
+	# TODO pass in brick_opts, read from label_to_tilemap
 	var add_borders = opts.get("add_borders")
 
 	var new_cell_coords = []
@@ -143,6 +140,8 @@ func promote_tilemaps(rooms, opts={}):
 
 	return tilemap
 
+## TODO move to tilemap helpers (util/reptile?) ######################################################################
+
 func tilemap_border_coords(tilemap):
 	var rect = tilemap.get_used_rect()
 	rect = rect.grow_individual(1, 1, 0, 0)
@@ -170,16 +169,7 @@ func all_tilemap_border_coords(tilemap):
 		acc.append_array(xs)
 		return acc, [])
 
-func wrap_tilemap(tilemap):
-	var coords = tilemap.get_used_cells(0)
-
-	var border_coords = all_tilemap_border_coords(tilemap)
-	var fill_coords = []
-
-	coords.append_array(border_coords)
-	coords.append_array(fill_coords)
-	tilemap.set_cells_terrain_connect(0, coords, 0, 0)
-	tilemap.force_update()
+## promote entities ######################################################################
 
 func promote_entities(rooms):
 	var ents = []

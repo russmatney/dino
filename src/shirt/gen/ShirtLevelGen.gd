@@ -1,3 +1,47 @@
 @tool
 extends BrickLevelGen
 
+## ready #########################################
+
+func _ready():
+	if room_defs_path in [null, ""]:
+		room_defs_path = "res://src/shirt/gen/room_defs.txt"
+
+## get room opts #########################################
+
+# TODO test setup, maybe testing specific seeds?
+func get_room_opts():
+	var default_room_opt = {skip_flags=["first"]}
+
+	var initial_rooms = [
+		{flags=["first"]},
+		{skip_flags=["first"],
+			# TODO maybe better as 'extend_side' or 'direction'
+			side=Vector2.RIGHT},
+		]
+
+	var agg = range(room_count - len(initial_rooms)).reduce(func(agg, _i):
+		var next_room_opt = default_room_opt.duplicate(true)
+
+		var side_opts = [
+			Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT
+			].filter(func(s): return s != agg.last_side)
+		next_room_opt["side"] = Util.rand_of(side_opts)
+
+		agg.room_opts.append(next_room_opt)
+		agg.last_side = next_room_opt.side
+
+		return agg, {room_opts=initial_rooms, last_side=Vector2.RIGHT})
+
+	for opt in agg.room_opts:
+		opt.merge({
+			# TODO remove when lable_to_tilemap is supported
+			tilemap_scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn"),
+			label_to_tilemap={"Tile": {scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn")}},
+			label_to_entity={
+				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+				"Chaser": {scene=load("res://src/shirt/enemies/BlobChaser.tscn")},
+				"Walker": {scene=load("res://src/shirt/enemies/BlobWalker.tscn")},
+				}})
+
+	return agg.room_opts
