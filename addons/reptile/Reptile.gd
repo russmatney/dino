@@ -1,19 +1,11 @@
 @tool
-# Reptile
-extends Node
-
-# func _ready():
-# 	Debug.prn("Reptile autoload ready")
+extends Object
+class_name Reptile
 
 ######################################################################
 # generate random image
 
-# var temp_img_path = "res://addons/reptile/generated/temp_"
-# var p = temp_img_path + str(Time.get_unix_time_from_system()) + ".png"
-# var res = img.save_png(p)
-
-# REPTILE.generate_image({:seed 1337})
-func generate_image(inputs):
+static func generate_image(inputs):
 	# validating inputs
 	if not "octaves" in inputs:
 		Debug.pr("[WARN] nil octaves...")
@@ -34,7 +26,7 @@ func generate_image(inputs):
 # img helpers
 
 
-func all_coords(img):
+static func all_coords(img):
 	var coords = []
 	for x in img.get_width():
 		for y in img.get_height():
@@ -42,7 +34,7 @@ func all_coords(img):
 	return coords
 
 
-func rotate(img):
+static func rotate(img):
 	var new_img = Image.new()
 	new_img.copy_from(img)
 	for coord in all_coords(img):
@@ -54,7 +46,7 @@ func rotate(img):
 # img stats
 
 
-func img_stats(img):
+static func img_stats(img):
 	var vals = []
 	var stats = {"min": 1, "max": 0}
 	for x in img.get_width():
@@ -71,27 +63,27 @@ func img_stats(img):
 	return stats
 
 
-func normalized_val(stats, val):
+static func normalized_val(stats, val):
 	val = val - stats["min"]
 	return val / stats["variance"]
 
 
 ## tilemap/cell helpers #####################################################################
 
-func get_layers(tilemap):
+static func get_layers(tilemap):
 	var layers = []
 	for i in range(tilemap.get_layers_count()):
 		layers.append({i=i, name=tilemap.get_layer_name(i)})
 	return layers
 
 
-func valid_neighbors(tilemap, cell, layer=0):
+static func valid_neighbors(tilemap, cell, layer=0):
 	var nbr_coords = tilemap.get_surrounding_cells(cell)
 	return nbr_coords.filter(func(coord):
 		return -1 != tilemap.get_cell_source_id(layer, coord))
 
 # Does not check if either cell is valid, only checks that they are neighboring coordinates
-func is_neighbor(cell_a, cell_b):
+static func is_neighbor(cell_a, cell_b):
 	if cell_a.x == cell_b.x:
 		if abs(cell_a.y - cell_b.y) == 1:
 			return true
@@ -99,26 +91,26 @@ func is_neighbor(cell_a, cell_b):
 		if abs(cell_a.x - cell_b.x) == 1:
 			return true
 
-func group_has_neighbor(group, cell):
+static func group_has_neighbor(group, cell):
 	# gen neighbors for cell, check if any in group
 	for g_cell in group:
-		if is_neighbor(cell, g_cell):
+		if Reptile.is_neighbor(cell, g_cell):
 			return true
 
-func split_connected_groups(cell, groups):
+static func split_connected_groups(cell, groups):
 	var connected = []
 	var disconnected = []
 	# should be able to filter out groups before checking every cell here, maybe with a stored min/max
 	for g in groups:
-		var is_neighbor = group_has_neighbor(g, cell)
+		var is_neighbor = Reptile.group_has_neighbor(g, cell)
 		if is_neighbor:
 			connected.append(g)
 		else:
 			disconnected.append(g)
 	return {connected=connected, disconnected=disconnected}
 
-func update_connected_groups(cell, groups):
-	var split = split_connected_groups(cell, groups)
+static func update_connected_groups(cell, groups):
+	var split = Reptile.split_connected_groups(cell, groups)
 	var disconnected_groups = split.disconnected
 	var new_group = [cell]
 	for g in split.connected:
@@ -129,21 +121,21 @@ func update_connected_groups(cell, groups):
 
 # Given a list of coords from get_used_cells, returns lists of coords
 # grouped by connectivity - i.e. the clusters of connected tiles.
-func build_connected_groups(cells, groups=[]):
+static func build_connected_groups(cells, groups=[]):
 	for c in cells:
-		groups = update_connected_groups(c, groups)
+		groups = Reptile.update_connected_groups(c, groups)
 	return groups
 
 # Returns coords grouped by adjacency - connected cells will be in the same group.
-func cell_clusters(tilemap):
+static func cell_clusters(tilemap):
 	var clusters = []
-	for l in get_layers(tilemap):
+	for l in Reptile.get_layers(tilemap):
 		var used_cells = tilemap.get_used_cells(l.i)
-		var connected_groups = build_connected_groups(used_cells)
+		var connected_groups = Reptile.build_connected_groups(used_cells)
 		clusters.append_array(connected_groups)
 	return clusters
 
-func cells_to_polygon(tilemap, cells, opts={}):
+static func cells_to_polygon(tilemap, cells, opts={}):
 	# get points from cell coordinates
 	var points = cells.map(func(c):
 		# assumes square tiles
