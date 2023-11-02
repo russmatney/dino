@@ -25,6 +25,7 @@ func get_move_dir():
 	var ax = action_detector.nearest_action()
 
 	if ax and ax.source:
+		# TODO head toward nearest part/center of the action area
 		var dir = ax.source.global_position - self.global_position
 
 		# if we're close, stop moving

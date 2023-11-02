@@ -1,34 +1,26 @@
-[gd_scene load_steps=22 format=3 uid="uid://crfd7jx8d7vbx"]
+[gd_scene load_steps=13 format=3 uid="uid://crfd7jx8d7vbx"]
 
 [ext_resource type="Script" path="res://src/harvey/level/HarveyLevel.gd" id="1_a4iwi"]
 [ext_resource type="Script" path="res://src/harvey/level/HarveyLevelGen.gd" id="2_pxq3d"]
 [ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_7qv1b"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="4_plfih"]
-[ext_resource type="TileSet" uid="uid://b0rg8dver31j6" path="res://addons/reptile/tilesets/CaveTiles16.tres" id="5_nn0wx"]
-[ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="6_6t53s"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="7_rfteh"]
-[ext_resource type="TileSet" uid="uid://busrg4na2qqk5" path="res://addons/reptile/tilesets/topdown/TDCaveFloorTileSet16.tres" id="8_0m58q"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="12_twtuf"]
-[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="13_an0oc"]
-[ext_resource type="PackedScene" path="res://src/harvey/plots/Plot.tscn" id="14_3tdnf"]
-[ext_resource type="Script" path="res://src/harvey/plots/Plot.gd" id="15_s0kfp"]
+[ext_resource type="PackedScene" uid="uid://cbkmdov158pc8" path="res://src/harvey/plots/Plot.tscn" id="14_3tdnf"]
 [ext_resource type="PackedScene" uid="uid://c50rr61e7pe3y" path="res://src/harvey/items/SeedBox.tscn" id="16_gqtv0"]
-[ext_resource type="Script" path="res://src/harvey/items/SeedBox.gd" id="17_to5xs"]
 [ext_resource type="PackedScene" uid="uid://kdjxtd0s6qfx" path="res://src/harvey/items/Tool.tscn" id="18_irl4w"]
-[ext_resource type="Script" path="res://src/harvey/items/Tool.gd" id="19_pf2s3"]
 [ext_resource type="PackedScene" uid="uid://d1ntbjt8i83ot" path="res://src/harvey/items/DeliveryBox.tscn" id="20_c88fx"]
-[ext_resource type="Script" path="res://src/harvey/items/DeliveryBox.gd" id="21_isqx6"]
 [ext_resource type="PackedScene" path="res://src/harvey/bots/HarveyBot.tscn" id="22_dr3hr"]
-[ext_resource type="Script" path="res://src/harvey/bots/HarveyBot.gd" id="23_y2xgb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv4gc"]
-size = Vector2(448, 448)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sy87c"]
+size = Vector2(384, 288)
 
 [node name="HarveyLevel" type="Node2D"]
 script = ExtResource("1_a4iwi")
 
 [node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
 script = ExtResource("2_pxq3d")
+_seed = 2946530496
 tile_size = 32
 room_count = 1
 room_defs_path = "res://src/harvey/level/rooms.txt"
@@ -38,114 +30,152 @@ rooms_node = NodePath("../Rooms")
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="Room_0" type="Node2D" parent="Rooms"]
+[node name="@Node2D@148540" type="Node2D" parent="Rooms"]
 script = ExtResource("3_7qv1b")
 
-[node name="ColorRect" type="ColorRect" parent="Rooms/Room_0"]
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@148540"]
 visible = false
-offset_right = 448.0
-offset_bottom = 448.0
+offset_right = 384.0
+offset_bottom = 288.0
 color = Color(0.803922, 0.521569, 0.247059, 1)
 
-[node name="RoomBox" type="Area2D" parent="Rooms/Room_0" groups=["roombox"]]
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@148540" groups=["roombox"]]
 visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_0/RoomBox"]
-position = Vector2(224, 224)
-shape = SubResource("RectangleShape2D_yv4gc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@148540/RoomBox"]
+position = Vector2(192, 144)
+shape = SubResource("RectangleShape2D_sy87c")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
-[node name="CaveTiles16" type="TileMap" parent="Tilemaps" instance=ExtResource("4_plfih")]
+[node name="@TileMap@148538" parent="Tilemaps" instance=ExtResource("4_plfih")]
 scale = Vector2(2, 2)
-tile_set = ExtResource("5_nn0wx")
-format = 2
-layer_0/tile_data = PackedInt32Array(851982, 524288, 3, 786446, 262144, 2, 720910, 262144, 2, 655374, 262144, 2, 589838, 262144, 2, 524302, 262144, 2, 458766, 262144, 2, 393230, 262144, 2, 327694, 262144, 2, 262158, 262144, 2, 196622, 262144, 2, 131086, 262144, 2, 65550, 262144, 2, 14, 524288, 2, -65522, 196608, 1, 917503, 327680, 3, 851967, 262144, 2, 786431, 262144, 2, 720895, 262144, 2, 655359, 262144, 2, 589823, 262144, 2, 524287, 262144, 2, 458751, 262144, 2, 393215, 262144, 2, 327679, 262144, 2, 262143, 262144, 2, 196607, 262144, 2, 131071, 262144, 2, 65535, 327680, 2, -1, 65536, 1, 917517, 458752, 4, 917516, 131072, 4, 917515, 131072, 4, 917514, 131072, 4, 917513, 131072, 4, 917512, 131072, 4, 917511, 131072, 4, 917510, 131072, 4, 917509, 131072, 4, 917508, 131072, 4, 917507, 131072, 4, 917506, 131072, 4, 917505, 131072, 4, 917504, 393216, 4, 983039, 65536, 3, -65523, 458752, 1, -65524, 131072, 4, -65525, 131072, 4, -65526, 131072, 4, -65527, 131072, 4, -65528, 131072, 4, -65529, 131072, 4, -65530, 131072, 4, -65531, 131072, 4, -65532, 131072, 4, -65533, 131072, 4, -65534, 131072, 4, -65535, 131072, 4, -65536, 393216, 1, 917518, 196608, 3, 0, 196608, 3, 13, 65536, 3, 851968, 196608, 1, 851981, 65536, 1)
-script = ExtResource("6_6t53s")
+layer_0/tile_data = PackedInt32Array(0, 65536, 1, 1, 393216, 1, 2, 131072, 4, 3, 196608, 4, 8, 65536, 4, 9, 131072, 4, 10, 458752, 1, 11, 196608, 1, 65536, 327680, 2, 65537, 196608, 3, 65546, 65536, 3, 65547, 524288, 2, 131072, 262144, 3, 131083, 262144, 3, 393216, 262144, 1, 393227, 262144, 1, 458752, 327680, 3, 458753, 196608, 1, 458762, 65536, 1, 458763, 524288, 3, 524288, 65536, 3, 524289, 393216, 4, 524290, 131072, 4, 524291, 196608, 4, 524296, 65536, 4, 524297, 131072, 4, 524298, 458752, 4, 524299, 196608, 3)
 
-[node name="TDCaveFloorTiles16" type="TileMap" parent="Tilemaps" instance=ExtResource("7_rfteh")]
+[node name="@TileMap@148539" parent="Tilemaps" instance=ExtResource("7_rfteh")]
 scale = Vector2(2, 2)
-tile_set = ExtResource("8_0m58q")
-format = 2
-layer_0/tile_data = PackedInt32Array(1, 65536, 1, 2, 131072, 1, 3, 131072, 1, 4, 131072, 1, 5, 131072, 1, 6, 131072, 1, 7, 131072, 1, 8, 131072, 1, 9, 131072, 1, 10, 131072, 1, 11, 131072, 1, 12, 196608, 1, 65536, 65536, 1, 65537, 458752, 3, 65538, 131072, 2, 65539, 131072, 2, 65540, 131072, 2, 65541, 131072, 2, 65542, 131072, 2, 65543, 131072, 2, 65544, 131072, 2, 65545, 131072, 2, 65546, 131072, 2, 65547, 131072, 2, 65548, 393216, 3, 65549, 196608, 1, 131072, 65536, 2, 131073, 131072, 2, 131074, 131072, 2, 131075, 131072, 2, 131076, 131072, 2, 131077, 131072, 2, 131078, 131072, 2, 131079, 131072, 2, 131080, 131072, 2, 131081, 131072, 2, 131082, 131072, 2, 131083, 131072, 2, 131084, 131072, 2, 131085, 196608, 2, 196608, 65536, 2, 196609, 131072, 2, 196610, 131072, 2, 196611, 131072, 2, 196612, 131072, 2, 196613, 131072, 2, 196614, 131072, 2, 196615, 131072, 2, 196616, 131072, 2, 196617, 131072, 2, 196618, 131072, 2, 196619, 131072, 2, 196620, 131072, 2, 196621, 196608, 2, 262144, 65536, 2, 262145, 131072, 2, 262146, 131072, 2, 262147, 131072, 2, 262148, 131072, 2, 262149, 131072, 2, 262150, 131072, 2, 262151, 131072, 2, 262152, 131072, 2, 262153, 131072, 2, 262154, 131072, 2, 262155, 131072, 2, 262156, 131072, 2, 262157, 196608, 2, 327680, 65536, 2, 327681, 131072, 2, 327682, 131072, 2, 327683, 131072, 2, 327684, 131072, 2, 327685, 131072, 2, 327686, 131072, 2, 327687, 131072, 2, 327688, 131072, 2, 327689, 131072, 2, 327690, 131072, 2, 327691, 131072, 2, 327692, 131072, 2, 327693, 196608, 2, 393216, 65536, 2, 393217, 131072, 2, 393218, 131072, 2, 393219, 131072, 2, 393220, 131072, 2, 393221, 131072, 2, 393222, 131072, 2, 393223, 131072, 2, 393224, 131072, 2, 393225, 131072, 2, 393226, 131072, 2, 393227, 131072, 2, 393228, 131072, 2, 393229, 196608, 2, 458752, 65536, 2, 458753, 131072, 2, 458754, 131072, 2, 458755, 131072, 2, 458756, 131072, 2, 458757, 131072, 2, 458758, 131072, 2, 458759, 131072, 2, 458760, 131072, 2, 458761, 131072, 2, 458762, 131072, 2, 458763, 131072, 2, 458764, 131072, 2, 458765, 196608, 2, 524288, 65536, 2, 524289, 131072, 2, 524290, 131072, 2, 524291, 131072, 2, 524292, 131072, 2, 524293, 131072, 2, 524294, 131072, 2, 524295, 131072, 2, 524296, 131072, 2, 524297, 131072, 2, 524298, 131072, 2, 524299, 131072, 2, 524300, 131072, 2, 524301, 196608, 2, 589824, 65536, 2, 589825, 131072, 2, 589826, 131072, 2, 589827, 131072, 2, 589828, 131072, 2, 589829, 131072, 2, 589830, 131072, 2, 589831, 131072, 2, 589832, 131072, 2, 589833, 131072, 2, 589834, 131072, 2, 589835, 131072, 2, 589836, 131072, 2, 589837, 196608, 2, 655360, 65536, 2, 655361, 131072, 2, 655362, 131072, 2, 655363, 131072, 2, 655364, 131072, 2, 655365, 131072, 2, 655366, 131072, 2, 655367, 131072, 2, 655368, 131072, 2, 655369, 131072, 2, 655370, 131072, 2, 655371, 131072, 2, 655372, 131072, 2, 655373, 196608, 2, 720896, 65536, 2, 720897, 131072, 2, 720898, 131072, 2, 720899, 131072, 2, 720900, 131072, 2, 720901, 131072, 2, 720902, 131072, 2, 720903, 131072, 2, 720904, 131072, 2, 720905, 131072, 2, 720906, 131072, 2, 720907, 131072, 2, 720908, 131072, 2, 720909, 196608, 2, 786432, 65536, 3, 786433, 458752, 2, 786434, 131072, 2, 786435, 131072, 2, 786436, 131072, 2, 786437, 131072, 2, 786438, 131072, 2, 786439, 131072, 2, 786440, 131072, 2, 786441, 131072, 2, 786442, 131072, 2, 786443, 131072, 2, 786444, 393216, 2, 786445, 196608, 3, 851969, 65536, 3, 851970, 131072, 3, 851971, 131072, 3, 851972, 131072, 3, 851973, 131072, 3, 851974, 131072, 3, 851975, 131072, 3, 851976, 131072, 3, 851977, 131072, 3, 851978, 131072, 3, 851979, 131072, 3, 851980, 196608, 3)
+layer_0/tile_data = PackedInt32Array(4, 65536, 1, 5, 131072, 1, 6, 131072, 1, 7, 196608, 1, 65538, 65536, 1, 65539, 131072, 1, 65540, 458752, 3, 65541, 131072, 2, 65542, 131072, 2, 65543, 393216, 3, 65544, 131072, 1, 65545, 196608, 1, 131073, 65536, 1, 131074, 458752, 3, 131075, 131072, 2, 131076, 131072, 2, 131077, 131072, 2, 131078, 131072, 2, 131079, 131072, 2, 131080, 131072, 2, 131081, 393216, 3, 131082, 196608, 1, 196608, 65536, 1, 196609, 458752, 3, 196610, 131072, 2, 196611, 131072, 2, 196612, 131072, 2, 196613, 131072, 2, 196614, 131072, 2, 196615, 131072, 2, 196616, 131072, 2, 196617, 131072, 2, 196618, 393216, 3, 196619, 196608, 1, 262144, 65536, 2, 262145, 131072, 2, 262146, 131072, 2, 262147, 131072, 2, 262148, 131072, 2, 262149, 131072, 2, 262150, 131072, 2, 262151, 131072, 2, 262152, 131072, 2, 262153, 131072, 2, 262154, 131072, 2, 262155, 196608, 2, 327680, 65536, 3, 327681, 458752, 2, 327682, 131072, 2, 327683, 131072, 2, 327684, 131072, 2, 327685, 131072, 2, 327686, 131072, 2, 327687, 131072, 2, 327688, 131072, 2, 327689, 131072, 2, 327690, 393216, 2, 327691, 196608, 3, 393217, 65536, 3, 393218, 458752, 2, 393219, 131072, 2, 393220, 131072, 2, 393221, 131072, 2, 393222, 131072, 2, 393223, 131072, 2, 393224, 131072, 2, 393225, 393216, 2, 393226, 196608, 3, 458754, 65536, 3, 458755, 131072, 3, 458756, 458752, 2, 458757, 131072, 2, 458758, 131072, 2, 458759, 393216, 2, 458760, 131072, 3, 458761, 196608, 3, 524292, 65536, 3, 524293, 131072, 3, 524294, 131072, 3, 524295, 196608, 3)
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="PlayerSpawnPoint" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("12_twtuf")]
-position = Vector2(96, 352)
-script = ExtResource("13_an0oc")
-dev_only = false
+[node name="@Marker2D@148532" parent="Entities" instance=ExtResource("12_twtuf")]
+position = Vector2(256, 64)
 
-[node name="Plot" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(160, 192)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148533" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(128, 96)
 
-[node name="@Node2D@81227" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(192, 192)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148455" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(160, 96)
 
-[node name="@Node2D@81230" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(224, 192)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148458" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(192, 96)
 
-[node name="@Node2D@81233" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(256, 192)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148461" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(224, 96)
 
-[node name="@Node2D@81236" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(160, 224)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148464" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(128, 128)
 
-[node name="@Node2D@81239" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(192, 224)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148467" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(224, 128)
 
-[node name="@Node2D@81242" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(224, 224)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148470" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(128, 160)
 
-[node name="@Node2D@81245" type="Node2D" parent="Entities" groups=["pois"] instance=ExtResource("14_3tdnf")]
-position = Vector2(256, 224)
-script = ExtResource("15_s0kfp")
+[node name="@Node2D@148473" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(160, 160)
 
-[node name="SeedBox" type="StaticBody2D" parent="Entities" groups=["pois"] instance=ExtResource("16_gqtv0")]
+[node name="@Node2D@148476" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(192, 160)
+
+[node name="@Node2D@148479" parent="Entities" instance=ExtResource("14_3tdnf")]
+position = Vector2(224, 160)
+
+[node name="@StaticBody2D@148534" parent="Entities" instance=ExtResource("16_gqtv0")]
 position = Vector2(64, 64)
-collision_mask = 2
-script = ExtResource("17_to5xs")
 
-[node name="@StaticBody2D@81248" type="StaticBody2D" parent="Entities" groups=["pois"] instance=ExtResource("16_gqtv0")]
-position = Vector2(96, 64)
-collision_mask = 2
-script = ExtResource("17_to5xs")
+[node name="@StaticBody2D@148482" parent="Entities" instance=ExtResource("16_gqtv0")]
+position = Vector2(64, 192)
 produce_type = "onion"
 
-[node name="@StaticBody2D@81250" type="StaticBody2D" parent="Entities" groups=["pois"] instance=ExtResource("16_gqtv0")]
-position = Vector2(128, 64)
-collision_mask = 2
-script = ExtResource("17_to5xs")
+[node name="@StaticBody2D@148484" parent="Entities" instance=ExtResource("16_gqtv0")]
+position = Vector2(288, 192)
 produce_type = "tomato"
 
-[node name="Tool" type="CharacterBody2D" parent="Entities" groups=["pois"] instance=ExtResource("18_irl4w")]
-position = Vector2(288, 96)
-collision_layer = 32
-collision_mask = 2
-script = ExtResource("19_pf2s3")
+[node name="@CharacterBody2D@148535" parent="Entities" instance=ExtResource("18_irl4w")]
+position = Vector2(160, 128)
 
-[node name="DeliveryBox" type="StaticBody2D" parent="Entities" groups=["pois"] instance=ExtResource("20_c88fx")]
-position = Vector2(288, 416)
-collision_mask = 2
-script = ExtResource("21_isqx6")
+[node name="@CharacterBody2D@148487" parent="Entities" instance=ExtResource("18_irl4w")]
+position = Vector2(192, 128)
 
-[node name="HarveyBot" type="CharacterBody2D" parent="Entities" groups=["bot"] instance=ExtResource("22_dr3hr")]
-position = Vector2(320, 288)
-collision_layer = 512
-collision_mask = 0
-script = ExtResource("23_y2xgb")
+[node name="@StaticBody2D@148536" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(160, 288)
+rotation = -3.14159
 
-[node name="@CharacterBody2D@81257" type="CharacterBody2D" parent="Entities" groups=["bot"] instance=ExtResource("22_dr3hr")]
-position = Vector2(288, 320)
-collision_layer = 512
-collision_mask = 0
-script = ExtResource("23_y2xgb")
+[node name="@StaticBody2D@148490" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(192, 288)
+rotation = -3.14159
+
+[node name="@StaticBody2D@148492" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(224, 288)
+rotation = -3.14159
+
+[node name="@StaticBody2D@148494" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(256, 288)
+rotation = -3.14159
+
+[node name="@StaticBody2D@148496" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(128, 0)
+
+[node name="@StaticBody2D@148498" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(160, 0)
+
+[node name="@StaticBody2D@148500" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(192, 0)
+
+[node name="@StaticBody2D@148502" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(224, 0)
+
+[node name="@StaticBody2D@148504" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(384, 96)
+rotation = 1.5708
+
+[node name="@StaticBody2D@148506" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(384, 128)
+rotation = 1.5708
+
+[node name="@StaticBody2D@148508" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(384, 160)
+rotation = 1.5708
+
+[node name="@StaticBody2D@148510" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(0, 128)
+rotation = -1.5708
+
+[node name="@StaticBody2D@148512" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(0, 160)
+rotation = -1.5708
+
+[node name="@StaticBody2D@148514" parent="Entities" instance=ExtResource("20_c88fx")]
+position = Vector2(0, 192)
+rotation = -1.5708
+
+[node name="@CharacterBody2D@148537" parent="Entities" instance=ExtResource("22_dr3hr")]
+position = Vector2(160, 32)
+
+[node name="@CharacterBody2D@148519" parent="Entities" instance=ExtResource("22_dr3hr")]
+position = Vector2(192, 32)
+
+[node name="@CharacterBody2D@148522" parent="Entities" instance=ExtResource("22_dr3hr")]
+position = Vector2(32, 128)
+
+[node name="@CharacterBody2D@148525" parent="Entities" instance=ExtResource("22_dr3hr")]
+position = Vector2(320, 128)
+
+[node name="@CharacterBody2D@148528" parent="Entities" instance=ExtResource("22_dr3hr")]
+position = Vector2(160, 224)
+
+[node name="@CharacterBody2D@148531" parent="Entities" instance=ExtResource("22_dr3hr")]
+position = Vector2(192, 224)

@@ -6,32 +6,66 @@ LEGEND
 
 . = Floor
 x = Wall
-p = Player and Floor
+h = Player and Floor
 c = CarrotSeedBox and Floor
 o = OnionSeedBox and Floor
 t = TomatoSeedBox and Floor
 l = Plot and Floor
 w = WateringPail and Floor
-d = DeliveryBox and Floor
-b = Bot and Floor
+^ = UpDeliveryBox and Floor
+v = DownDeliveryBox and Floor
+< = LeftDeliveryBox and Floor
+> = RightDeliveryBox and Floor
+r = Bot and Floor
 
 ==============
 ROOMS
 ==============
 
-name Big Room
+name Basic Room
 
-x............x
-..cot.........
-.........w....
-..............
-..............
-.....llll.....
-.....llll.....
-..............
-..........b...
-.........b....
-...p..........
-..............
-.........d....
-x............x
+xxxxxxxxxxxx
+xx........xx
+x..cot...w.x
+x..........x
+x...llll...x
+x........r.x
+x.h.....r..x
+xx........xx
+xxxxx^^xxxxx
+
+name Wall Plots
+
+xxxxxxxxxxxx
+xx........xx
+x...c......x
+xl....w..h.<
+xl..o......<
+xl.......r.<
+x...t...r..x
+xx........xx
+xxxxxxxxxxxx
+
+name Deliver Top
+
+xxxxxvvxxxxx
+xx......llxx
+x.......lllx
+xc.......h.x
+xo..w......x
+xt.......r.x
+x.......r..x
+xx........xx
+xxxxxxxxxxxx
+
+name Deliver All
+
+xxxxvvvvxxxx
+xx...rr...xx
+x.c.....h..x
+>...llll...<
+>r..lwwl..r<
+>...llll...<
+x.o......t.x
+xx...rr...xx
+xxxx^^^^xxxx

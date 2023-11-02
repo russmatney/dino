@@ -40,29 +40,29 @@ collision_mask = 2
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(16, 16)
 shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("5")
-position = Vector2(0, -16)
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_7ojcq")
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
-offset_left = -32.0
-offset_top = -96.0
-offset_right = 32.0
-offset_bottom = -72.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 48.0
 theme = ExtResource("4")
 bbcode_enabled = true
-text = "action"
+text = "[center]action"
 scroll_active = false
 
 [node name="ActionArea" parent="." instance=ExtResource("5_2gqyg")]
+position = Vector2(16, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 position = Vector2(0, 4)
 shape = SubResource("4")
 
 [node name="CamPOA" parent="." instance=ExtResource("6_lnbds")]
-position = Vector2(0, -70)
+position = Vector2(16, 16)

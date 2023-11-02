@@ -41,41 +41,41 @@ shader_parameter/sideWaysDeformationFactor = 5.0
 shader_parameter/knockbackFactor = 0.4
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(48, 24)
+size = Vector2(48, 48)
 
 [node name="SeedBox" type="StaticBody2D" groups=["pois"]]
 collision_mask = 2
 script = ExtResource("3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(16, 16)
 shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("6")
-position = Vector2(0, -16)
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_udds0")
 
 [node name="ProduceIcon" parent="." instance=ExtResource("2")]
 material = SubResource("7")
-position = Vector2(0, -20)
+position = Vector2(16, 12)
 animation = &"carrot"
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
-offset_left = -30.0
-offset_top = -88.0
-offset_right = 30.0
-offset_bottom = -70.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 48.0
 theme = ExtResource("5")
 bbcode_enabled = true
-text = "action"
+text = "[center]action"
 scroll_active = false
 
 [node name="ActionArea" parent="." instance=ExtResource("6_2okg2")]
+position = Vector2(16, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
-position = Vector2(0, 4)
+position = Vector2(0, -16)
 shape = SubResource("4")
 
 [node name="CamPOA" parent="." instance=ExtResource("7_oli3n")]
-position = Vector2(0, -70)
+position = Vector2(16, 16)
