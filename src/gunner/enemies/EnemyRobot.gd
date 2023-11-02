@@ -112,6 +112,8 @@ var initial_health = 2
 signal health_change(health)
 signal dead
 
+func take_hit(opts={}):
+	take_damage(opts)
 
 func take_damage(opts={}):
 	var body = opts.get("body")

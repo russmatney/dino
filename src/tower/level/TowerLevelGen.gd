@@ -12,13 +12,9 @@ func get_room_opts(opts):
 		agg.room_opts.append(next_room_opt)
 		return agg, {room_opts=initial_rooms})
 
-	Debug.pr(agg)
-
 	var room_opts = []
 	room_opts.append_array(agg.room_opts) # includes initial rooms already
 	room_opts.append_array(final_rooms)
-
-	Debug.pr(room_opts)
 
 	for opt in room_opts:
 		opt.merge({
