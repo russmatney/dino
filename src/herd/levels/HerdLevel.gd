@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 class_name HerdLevel
 
@@ -9,19 +8,18 @@ var next_level_menu
 ## ready #####################################################
 
 func _ready():
-	if not Engine.is_editor_hint():
-		var next_level_menu_scene = load("res://src/herd/menus/NextLevelMenu.tscn")
-		next_level_menu = Navi.add_menu(next_level_menu_scene)
+	var next_level_menu_scene = load("res://src/herd/menus/NextLevelMenu.tscn")
+	next_level_menu = Navi.add_menu(next_level_menu_scene)
 
-		level_complete = false
+	level_complete = false
 
-		if Game.player and is_instance_valid(Game.player):
-			Hotel.check_in(Game.player, {health=Game.player.max_health})
+	if Game.player and is_instance_valid(Game.player):
+		Hotel.check_in(Game.player, {health=Game.player.max_health})
 
-		Quest.all_quests_complete.connect(on_quests_complete)
-		Quest.quest_failed.connect(on_quest_failed)
+	Quest.all_quests_complete.connect(on_quests_complete)
+	Quest.quest_failed.connect(on_quest_failed)
 
-		Game.maybe_spawn_player()
+	Game.maybe_spawn_player()
 
 	var tilemaps = get_node_or_null("Tilemaps")
 	if tilemaps:
@@ -41,12 +39,6 @@ func create_pen(tilemap):
 	quest.add_child(area)
 
 	add_child(quest)
-
-	# quest.set_owner.call_deferred(self)
-	# area.set_owner.call_deferred(self)
-	# for ch in area.get_children():
-	# 	ch.set_owner.call_deferred(self)
-
 
 ## quest updates #####################################################
 
