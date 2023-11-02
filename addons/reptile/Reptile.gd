@@ -205,3 +205,29 @@ static func all_tilemap_border_coords(tilemap):
 	return Reptile.tilemap_border_coords(tilemap).values().reduce(func(acc, xs):
 		acc.append_array(xs)
 		return acc, [])
+
+## tilemap borders #####################################################################
+
+static func to_area2D(tilemap=null, rect=null):
+	# naive! TODO impl to match the tiles, not just the rect
+	if rect == null:
+		rect = Rect2(tilemap.get_used_rect())
+		rect.position = tilemap.map_to_local(rect.position)
+		rect.size = tilemap.map_to_local(rect.size) # ? multiply by tile_size?
+
+	# shape
+	var shape = RectangleShape2D.new()
+	shape.size = rect.size
+
+	# collision shape
+	var coll = CollisionShape2D.new()
+	coll.set_shape(shape)
+	coll.position = rect.position + (rect.size / 2.0)
+
+	# area2D
+	var area = Area2D.new()
+	area.add_child(coll)
+	if tilemap:
+		area.position = tilemap.position
+
+	return area

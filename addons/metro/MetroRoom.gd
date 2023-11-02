@@ -152,18 +152,8 @@ func ensure_room_box():
 	# room rect
 	var rect = used_rect()
 
-	# shape
-	var shape = RectangleShape2D.new()
-	shape.size = rect.size
+	room_box = Reptile.to_area2D(null, rect)
 
-	# collision shape
-	var coll = CollisionShape2D.new()
-	coll.set_shape(shape)
-	coll.position = rect.position + (rect.size / 2.0)
-
-	# area2D
-	room_box = Area2D.new()
-	room_box.add_child(coll)
 	room_box.name = room_box_name()
 	room_box.set_collision_layer_value(1, false)
 	room_box.set_collision_mask_value(1, false)
