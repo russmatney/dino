@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="6_lnbds"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(60, 47)
+size = Vector2(32, 32)
 
 [sub_resource type="ShaderMaterial" id="5"]
 resource_local_to_scene = true
@@ -33,20 +33,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(128, 56)
+size = Vector2(48, 24)
 
 [node name="DeliveryBox" type="StaticBody2D" groups=["pois"]]
 collision_mask = 2
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -46.5)
+position = Vector2(0, -16)
 shape = SubResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("5")
-position = Vector2(0, -40)
-scale = Vector2(2, 2)
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_7ojcq")
 
 [node name="ActionLabel" type="RichTextLabel" parent="."]
@@ -62,7 +61,7 @@ scroll_active = false
 [node name="ActionArea" parent="." instance=ExtResource("5_2gqyg")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
-position = Vector2(0, -4)
+position = Vector2(0, 4)
 shape = SubResource("4")
 
 [node name="CamPOA" parent="." instance=ExtResource("6_lnbds")]

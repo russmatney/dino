@@ -1,8 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://6p8s43n5euf5"]
 
-[ext_resource path="res://src/harvey/ProduceIcon.tres" type="SpriteFrames" id=1]
+[ext_resource type="SpriteFrames" uid="uid://6ecpxk6e8xva" path="res://src/harvey/ProduceIcon.tres" id="1"]
 
 [node name="ProduceIcon" type="AnimatedSprite2D"]
-scale = Vector2( 2, 2 )
-sprite_frames = ExtResource( 1 )
-animation = "tomato"
+sprite_frames = ExtResource("1")
+animation = &"tomato"

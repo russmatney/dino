@@ -577,6 +577,10 @@
 						"type": "resource",
 						"value": "res://src/harvey/menus/HarveyPauseMenu.tscn"
 					},
+					"player_scene": {
+						"type": "resource",
+						"value": "res://src/harvey/player/HarveyPlayer.tscn"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/harvey"

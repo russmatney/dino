@@ -14,23 +14,19 @@ func get_room_opts(_opts):
 	for opt in agg.room_opts:
 		opt.merge({
 			label_to_tilemap={
-				"Tile": {
+				"Wall": {
 					scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn"),
 					add_borders=true
 				},
 				"Floor":{
 					scene=load("res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn")
 				},
-				"Pit":{
-					scene=load("res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn")
-				}
 			},
 			label_to_entity={
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 				"Plot": {scene=load("res://src/harvey/plots/Plot.tscn")},
 				"CarrotSeedBox": {
 					scene=load("res://src/harvey/items/SeedBox.tscn"),
-					# TODO support 'setup'
 					setup=func(s): s.produce_type = "carrot",
 					},
 				"OnionSeedBox": {

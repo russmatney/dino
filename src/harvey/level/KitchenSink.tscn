@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" path="res://src/harvey/bots/HarveyBot.tscn" id="1"]
 [ext_resource type="Script" path="res://src/harvey/level/HarveyLevel.gd" id="1_s7v85"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/SeedBox.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c50rr61e7pe3y" path="res://src/harvey/items/SeedBox.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://hcuonrdt3k48" path="res://src/harvey/HUD/HUD.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/harvey/player/HarveyPlayer.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/Tool.tscn" id="5"]
-[ext_resource type="PackedScene" path="res://src/harvey/items/DeliveryBox.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://kdjxtd0s6qfx" path="res://src/harvey/items/Tool.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://d1ntbjt8i83ot" path="res://src/harvey/items/DeliveryBox.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://src/harvey/plots/Plot.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="7_l753w"]
 
 [node name="KitchenSink" type="Node2D"]
 script = ExtResource("1_s7v85")
@@ -57,7 +57,7 @@ position = Vector2(80, 112)
 position = Vector2(216, 48)
 rotation = 1.57079
 
-[node name="Player" parent="." instance=ExtResource("4")]
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("7_l753w")]
 
 [node name="HarveyBot" parent="." instance=ExtResource("1")]
 position = Vector2(136, -16)
