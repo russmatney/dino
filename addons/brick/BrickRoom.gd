@@ -33,7 +33,7 @@ class BrickRoomOpts:
 		Util.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://addons/reptile/tilemaps/MetalTiles8.tscn")}})
 		Util.ensure_default(opts, "label_to_entity", {})
 		Util.ensure_default(opts, "color", Color.PERU)
-		Util.ensure_default(opts, "show_color_rect", true)
+		Util.ensure_default(opts, "show_color_rect", false)
 
 		_opts = opts
 
@@ -135,8 +135,7 @@ static func add_color_rect(room: BrickRoom, opts: BrickRoomOpts):
 	rec.name = "ColorRect"
 	rec.size = BrickRoom.size(room, opts)
 	rec.color = opts.color
-	rec.set_visible(false)
-	# rec.visible = opts.get("show_color_rect", false)
+	rec.visible = opts.show_color_rect
 
 	room.rect = rec
 	room.add_child(rec)

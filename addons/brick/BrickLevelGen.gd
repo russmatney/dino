@@ -169,6 +169,7 @@ signal new_data_generated(data: Dictionary)
 @export var entities_node: Node2D
 @export var tilemaps_node: Node2D
 @export var rooms_node: Node2D
+@export var show_color_rect: bool
 
 ## generate ######################################################################
 
@@ -178,6 +179,7 @@ func generate():
 		tile_size=tile_size,
 		room_count=room_count,
 		room_defs_path=room_defs_path,
+		show_color_rect=show_color_rect,
 		}
 	if self.has_method("get_room_opts"):
 		opts["get_room_opts"] = self.get_room_opts
