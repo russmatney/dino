@@ -7,12 +7,6 @@ enum mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
 var cam_scene = preload("res://addons/camera/Cam2D.tscn")
 var cam
 
-func get_cam(node=null):
-	if node and is_instance_valid(node):
-		return node.get_viewport().get_camera()
-	return get_viewport().get_camera()
-
-
 ##############################################################
 # ready
 
@@ -29,29 +23,27 @@ func _on_debug_toggled(debugging):
 ## helpful for placing 'offscreen' indicators at the edges
 # tho perhaps that's easier with just a canvas layer
 func cam_window_rect():
-	var c = get_cam()
-	if c and is_instance_valid(c):
-		var v = c.get_viewport()
-		var viewportRect: Rect2 = v.get_visible_rect()
+	var v = get_viewport()
+	var viewportRect: Rect2 = v.get_visible_rect()
 
-		# https://github.com/godotengine/godot/issues/34805
-		# restore this size correction
-		# var viewport_base_size = (
-		# 	v.get_size_2d_override()
-		# 	if v.get_size_2d_override()
-		# 	else v.size
-		# )
-		var viewport_base_size = v.size
+	# https://github.com/godotengine/godot/issues/34805
+	# restore this size correction
+	# var viewport_base_size = (
+	# 	v.get_size_2d_override()
+	# 	if v.get_size_2d_override()
+	# 	else v.size
+	# )
+	var viewport_base_size = v.size
 
-		var scale_factor = DisplayServer.window_get_size() / viewport_base_size
-		viewportRect.size = (viewport_base_size * scale_factor) as Vector2
+	var scale_factor = DisplayServer.window_get_size() / viewport_base_size
+	viewportRect.size = (viewport_base_size * scale_factor) as Vector2
 
-		# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
-		var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
-		var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
-		var viewportRectGlobal: Rect2 = viewportToGlobalTransform * viewportRect
+	# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
+	var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
+	var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
+	var viewportRectGlobal: Rect2 = viewportToGlobalTransform * viewportRect
 
-		return viewportRectGlobal
+	return viewportRectGlobal
 
 
 ##############################################################
