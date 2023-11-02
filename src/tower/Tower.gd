@@ -4,11 +4,11 @@ extends DinoGame
 ## start game #########################################################################
 
 var levels = [
-	"res://src/tower/maps/TowerClimb1.tscn",
-	"res://src/tower/maps/TowerClimb2.tscn",
-	"res://src/tower/maps/TowerClimb3.tscn",
-	"res://src/tower/maps/TowerClimb4.tscn",
-	"res://src/tower/maps/TowerClimb5.tscn",
+	"res://src/tower/level/TowerClimb1.tscn",
+	"res://src/tower/level/TowerClimb2.tscn",
+	"res://src/tower/level/TowerClimb3.tscn",
+	"res://src/tower/level/TowerClimb4.tscn",
+	"res://src/tower/level/TowerClimb5.tscn",
 ]
 
 func start(_opts={}):

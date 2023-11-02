@@ -17,6 +17,7 @@ height = 31.0
 size = Vector2(1200, 800)
 
 [node name="EnemyRobot" type="CharacterBody2D" groups=["enemy_robots"]]
+collision_layer = 8
 script = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

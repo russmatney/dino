@@ -105,7 +105,7 @@ func physics_process(delta):
 	actor.set_velocity(actor.velocity)
 	actor.move_and_slide()
 
-	if not actor.firing:
+	if "firing" in actor and not actor.firing:
 		actor.update_facing()
 
 	if not is_jetting and actor.is_on_floor():

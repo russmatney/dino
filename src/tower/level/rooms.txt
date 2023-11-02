@@ -1,0 +1,115 @@
+name Tower Rooms
+
+============
+LEGEND
+============
+
+p = Player
+x = Tile
+o = Target
+e = Enemy
+
+============
+ROOMS
+============
+
+name Start
+bottom
+
+xxx.....................xxx
+xxx...............o.....xxx
+xxx..............xxx....xxx
+xxx.....................xxx
+xxx......o..............xxx
+xxx.....xxx.............xxx
+xxx..............xxx....xxx
+xxx.....................xxx
+xxx.....................xxx
+xxx.o..........o........xxx
+xxxxxx........xxx.......xxx
+xxx......p..........xxxxxxx
+xxxo...xxxx...........o.xxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+name Middle Plain
+middle
+
+xxx.....................xxx
+xxxxxxx.................xxx
+xxx.....................xxx
+xxx.....................xxx
+xxx..........xxxxxx.....xxx
+xxx.....................xxx
+xxx.....................xxx
+xxx.....................xxx
+xxx.....................xxx
+xxx...xxxxxx............xxx
+xxx.....................xxx
+xxx...............xxxxxxxxx
+xxx.....................xxx
+
+name Middle
+middle
+
+xxx.....................xxx
+xxx...............o.....xxx
+xxx..............xxx....xxx
+xxx.....................xxx
+xxx......o..............xxx
+xxx.....xxx.............xxx
+xxx..............xxx....xxx
+xxx.....................xxx
+xxx.....................xxx
+xxx.o..........o........xxx
+xxxxxxxx......xxx.......xxx
+xxx.................xxxxxxx
+xxxo..................o.xxx
+
+name Middle Two Enemies
+middle
+
+xxx.....................xxx
+xxx.....................xxx
+xxx..............xxx....xxx
+xxx.....................xxx
+xxx..................e..xxx
+xxx.....xxx.............xxx
+xxx..............xxxxxxxxxx
+xxx.....................xxx
+xxx..................e..xxx
+xxx.....................xxx
+xxxxxx........xxxxxxxxxxxxx
+xxx.....................xxx
+xxx.....................xxx
+
+
+name Top
+top
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxx.....................xxx
+xxx........................
+xxx........................
+xxx........................
+xxx...............xxxxxxxxx
+xxx............xxxxxxxxxxxx
+xxx.....................xxx
+xxxxxxxxx...............xxx
+xxx.xxxxxx..............xxx
+xxx...xxxxxx............xxx
+xxxo.....xxxxxx.........xxx
+xxx........xxxxxx.......xxx
+
+name End
+end
+
+xxxxxxxxxxxxxx
+xxxxxxxxxxxxxx
+...........xxx
+...........xxx
+...........xxx
+...........xxx
+xxxxxxxxxxxxxx
+xxxxxxxxxxxxxx
