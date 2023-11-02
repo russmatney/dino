@@ -1,0 +1,269 @@
+[gd_scene load_steps=16 format=3 uid="uid://vklao2gvscv"]
+
+[ext_resource type="Script" path="res://src/gunner/level/GunnerLevel.gd" id="1_3of0r"]
+[ext_resource type="Script" path="res://src/gunner/level/GunnerLevelGen.gd" id="2_s4yna"]
+[ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_r4b62"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="4_eqxxm"]
+[ext_resource type="TileSet" uid="uid://dgkfewk2df8x7" path="res://addons/reptile/tilesets/MetalTiles8.tres" id="5_vp4xi"]
+[ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="6_aviti"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="7_vjqqf"]
+[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="8_kw3vn"]
+[ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="9_85601"]
+[ext_resource type="Script" path="res://src/gunner/targets/Target.gd" id="10_0n658"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/gunner/enemies/EnemyRobot.tscn" id="11_kary2"]
+[ext_resource type="Script" path="res://src/gunner/enemies/EnemyRobot.gd" id="12_4oo5h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5704"]
+size = Vector2(768, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r73o"]
+size = Vector2(768, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yuqfl"]
+size = Vector2(864, 224)
+
+[node name="GunnerLevel" type="Node2D"]
+script = ExtResource("1_3of0r")
+
+[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
+script = ExtResource("2_s4yna")
+_seed = 970678976
+tile_size = 32
+room_count = 3
+room_defs_path = "res://src/gunner/level/rooms.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Room_0" type="Node2D" parent="Rooms"]
+script = ExtResource("3_r4b62")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_0"]
+visible = false
+offset_right = 768.0
+offset_bottom = 224.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_0" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_0/RoomBox"]
+position = Vector2(384, 112)
+shape = SubResource("RectangleShape2D_r5704")
+
+[node name="Room_1" type="Node2D" parent="Rooms"]
+position = Vector2(768, 160)
+script = ExtResource("3_r4b62")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
+visible = false
+offset_right = 768.0
+offset_bottom = 224.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_1" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_1/RoomBox"]
+position = Vector2(384, 112)
+shape = SubResource("RectangleShape2D_0r73o")
+
+[node name="@Node2D@37112" type="Node2D" parent="Rooms"]
+position = Vector2(1536, 64)
+script = ExtResource("3_r4b62")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@37112"]
+visible = false
+offset_right = 864.0
+offset_bottom = 224.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@37112" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@37112/RoomBox"]
+position = Vector2(432, 112)
+shape = SubResource("RectangleShape2D_yuqfl")
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="MetalTiles8" type="TileMap" parent="Tilemaps" instance=ExtResource("4_eqxxm")]
+scale = Vector2(4, 4)
+tile_set = ExtResource("5_vp4xi")
+format = 2
+layer_0/tile_data = PackedInt32Array(262195, 65537, 5, 262196, 131073, 5, 262197, 196609, 5, 262206, 65537, 5, 262207, 131073, 5, 262208, 196609, 5, 327748, 65537, 5, 327749, 131073, 5, 327750, 196609, 5, 393271, 65537, 2, 393272, 131073, 2, 393273, 131073, 2, 393274, 196609, 2, 458800, 131073, 2, 458801, 131073, 2, 458802, 131073, 2, 458803, 131073, 2, 458804, 131073, 2, 458805, 131073, 2, 458806, 131073, 2, 458807, 458753, 4, 458808, 131073, 3, 458809, 131073, 3, 458810, 393217, 4, 458811, 131073, 2, 458812, 131073, 2, 458813, 131073, 2, 458814, 131073, 2, 458815, 131073, 2, 458816, 131073, 2, 458817, 131073, 2, 458818, 131073, 2, 458819, 131073, 2, 458820, 131073, 2, 458821, 131073, 2, 458822, 131073, 2, 458823, 131073, 2, 458824, 131073, 2, 458825, 131073, 2, 458826, 196609, 2, 524336, 131073, 4, 524337, 131073, 4, 524338, 131073, 4, 524339, 131073, 4, 524340, 131073, 4, 524341, 131073, 4, 524342, 131073, 4, 524343, 131073, 4, 524344, 131073, 4, 524345, 131073, 4, 524346, 131073, 4, 524347, 131073, 4, 524348, 131073, 4, 524349, 131073, 4, 524350, 131073, 4, 524351, 131073, 4, 524352, 131073, 4, 524353, 131073, 4, 524354, 131073, 4, 524355, 131073, 4, 524356, 131073, 4, 524357, 131073, 4, 524358, 131073, 4, 524359, 131073, 4, 524360, 131073, 4, 524361, 131073, 4, 524362, 196609, 4, 327704, 131073, 2, 327705, 196609, 2, 393240, 458753, 3, 393241, 196609, 3, 458776, 65537, 3, 458777, 393217, 4, 458778, 196609, 2, 458786, 65537, 5, 458787, 131073, 5, 458788, 131073, 5, 458789, 196609, 5, 458798, 65537, 2, 458799, 131073, 2, 524312, 65537, 3, 524313, 131073, 3, 524314, 393217, 4, 524315, 196609, 2, 524332, 65537, 2, 524333, 131073, 2, 524334, 458753, 4, 524335, 393217, 3, 589848, 65537, 3, 589849, 131073, 3, 589850, 131073, 3, 589851, 393217, 4, 589852, 131073, 2, 589853, 196609, 2, 589865, 65537, 2, 589866, 131073, 2, 589867, 131073, 2, 589868, 458753, 4, 589869, 131073, 3, 589870, 131073, 3, 589871, 196609, 3, 655384, 65537, 3, 655385, 131073, 3, 655386, 131073, 3, 655387, 131073, 3, 655388, 131073, 3, 655389, 393217, 4, 655390, 131073, 2, 655391, 131073, 2, 655392, 131073, 2, 655393, 131073, 2, 655394, 131073, 2, 655395, 131073, 2, 655396, 131073, 2, 655397, 131073, 2, 655398, 131073, 2, 655399, 131073, 2, 655400, 131073, 2, 655401, 458753, 4, 655402, 131073, 3, 655403, 131073, 3, 655404, 131073, 3, 655405, 131073, 3, 655406, 131073, 3, 655407, 196609, 3, 720920, 65537, 4, 720921, 131073, 4, 720922, 131073, 4, 720923, 131073, 4, 720924, 131073, 4, 720925, 131073, 4, 720926, 131073, 4, 720927, 131073, 4, 720928, 131073, 4, 720929, 131073, 4, 720930, 131073, 4, 720931, 131073, 4, 720932, 131073, 4, 720933, 131073, 4, 720934, 131073, 4, 720935, 131073, 4, 720936, 131073, 4, 720937, 131073, 4, 720938, 131073, 4, 720939, 131073, 4, 720940, 131073, 4, 720941, 131073, 4, 720942, 131073, 4, 720943, 196609, 4, 131076, 65537, 5, 131077, 131073, 5, 131078, 131073, 5, 131079, 196609, 5, 131088, 65537, 5, 131089, 131073, 5, 131090, 131073, 5, 131091, 196609, 5, 262151, 65537, 2, 262152, 131073, 2, 262153, 131073, 2, 262154, 131073, 2, 262155, 131073, 2, 262156, 131073, 2, 262157, 131073, 2, 262158, 131073, 2, 262159, 131073, 2, 262160, 196609, 2, 327680, 65537, 2, 327681, 131073, 2, 327682, 131073, 2, 327683, 131073, 2, 327684, 131073, 2, 327685, 131073, 2, 327686, 131073, 2, 327687, 458753, 4, 327688, 131073, 3, 327689, 131073, 3, 327690, 131073, 3, 327691, 131073, 3, 327692, 131073, 3, 327693, 131073, 3, 327694, 131073, 3, 327695, 131073, 3, 327696, 393217, 4, 327697, 131073, 2, 327698, 131073, 2, 327699, 131073, 2, 327700, 131073, 2, 327701, 131073, 2, 327702, 131073, 2, 327703, 131073, 2, 393216, 65537, 4, 393217, 131073, 4, 393218, 131073, 4, 393219, 131073, 4, 393220, 131073, 4, 393221, 131073, 4, 393222, 131073, 4, 393223, 131073, 4, 393224, 131073, 4, 393225, 131073, 4, 393226, 131073, 4, 393227, 131073, 4, 393228, 131073, 4, 393229, 131073, 4, 393230, 131073, 4, 393231, 131073, 4, 393232, 131073, 4, 393233, 131073, 4, 393234, 131073, 4, 393235, 131073, 4, 393236, 131073, 4, 393237, 131073, 4, 393238, 131073, 4, 393239, 131073, 4)
+script = ExtResource("6_aviti")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="PlayerSpawnPoint" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("7_vjqqf")]
+position = Vector2(384, 96)
+script = ExtResource("8_kw3vn")
+dev_only = false
+
+[node name="Target" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(176, 48)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37092" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(592, 48)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37093" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(272, 112)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37094" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(496, 112)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37095" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(48, 144)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37096" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(720, 144)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Marker2D@37107" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("7_vjqqf")]
+position = Vector2(1120, 192)
+script = ExtResource("8_kw3vn")
+dev_only = false
+
+[node name="@Area2D@37108" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(880, 208)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37097" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1456, 208)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37098" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(912, 240)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37099" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1392, 240)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37100" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(976, 272)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37101" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1296, 272)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37102" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1072, 304)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37103" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1200, 304)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Marker2D@37109" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("7_vjqqf")]
+position = Vector2(1824, 160)
+script = ExtResource("8_kw3vn")
+dev_only = false
+
+[node name="@Area2D@37110" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1680, 112)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37104" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(2032, 112)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37105" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(1648, 208)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@Area2D@37106" type="Area2D" parent="Entities" groups=["target"] instance=ExtResource("9_85601")]
+z_index = 10
+position = Vector2(2256, 208)
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("10_0n658")
+
+[node name="@CharacterBody2D@37111" type="CharacterBody2D" parent="Entities" groups=["enemy_robots"] instance=ExtResource("11_kary2")]
+position = Vector2(2208, 64)
+script = ExtResource("12_4oo5h")
+
+[connection signal="body_entered" from="Entities/Target" to="Entities/Target" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37092" to="Entities/@Area2D@37092" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37093" to="Entities/@Area2D@37093" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37094" to="Entities/@Area2D@37094" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37095" to="Entities/@Area2D@37095" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37096" to="Entities/@Area2D@37096" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37108" to="Entities/@Area2D@37108" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37097" to="Entities/@Area2D@37097" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37098" to="Entities/@Area2D@37098" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37099" to="Entities/@Area2D@37099" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37100" to="Entities/@Area2D@37100" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37101" to="Entities/@Area2D@37101" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37102" to="Entities/@Area2D@37102" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37103" to="Entities/@Area2D@37103" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37110" to="Entities/@Area2D@37110" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37104" to="Entities/@Area2D@37104" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37105" to="Entities/@Area2D@37105" method="_on_Target_body_entered" flags=18]
+[connection signal="body_entered" from="Entities/@Area2D@37106" to="Entities/@Area2D@37106" method="_on_Target_body_entered" flags=18]
