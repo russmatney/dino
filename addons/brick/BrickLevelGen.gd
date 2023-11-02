@@ -139,6 +139,9 @@ static func combine_tilemap(rooms, label, opts):
 	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 	tilemap.force_update()
 
+	if "setup" in opts:
+		opts.setup.call(tilemap)
+
 	return tilemap
 
 ################################################################################
