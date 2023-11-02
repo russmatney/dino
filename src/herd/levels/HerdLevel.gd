@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 class_name HerdLevel
 
@@ -8,18 +9,43 @@ var next_level_menu
 ## ready #####################################################
 
 func _ready():
-	var next_level_menu_scene = load("res://src/herd/menus/NextLevelMenu.tscn")
-	next_level_menu = Navi.add_menu(next_level_menu_scene)
+	if not Engine.is_editor_hint():
+		var next_level_menu_scene = load("res://src/herd/menus/NextLevelMenu.tscn")
+		next_level_menu = Navi.add_menu(next_level_menu_scene)
 
-	level_complete = false
+		level_complete = false
 
-	if Game.player and is_instance_valid(Game.player):
-		Hotel.check_in(Game.player, {health=Game.player.max_health})
+		if Game.player and is_instance_valid(Game.player):
+			Hotel.check_in(Game.player, {health=Game.player.max_health})
 
-	Quest.all_quests_complete.connect(on_quests_complete)
-	Quest.quest_failed.connect(on_quest_failed)
+		Quest.all_quests_complete.connect(on_quests_complete)
+		Quest.quest_failed.connect(on_quest_failed)
 
-	Game.maybe_spawn_player()
+		Game.maybe_spawn_player()
+
+	var tilemaps = get_node_or_null("Tilemaps")
+	if tilemaps:
+		for ch in tilemaps.get_children():
+			if ch.is_in_group("pen"):
+				create_pen(ch)
+
+func create_pen(tilemap):
+	var area = Reptile.to_area2D(tilemap)
+	area.name = "SheepPen"
+	area.set_collision_layer_value(1, false)
+	area.set_collision_mask_value(1, false)
+	area.set_collision_mask_value(10, true) # 10 for npc
+
+	var quest = Node.new()
+	quest.script = load("res://src/herd/quests/FetchSheepQuest.gd")
+	quest.add_child(area)
+
+	add_child(quest)
+
+	# quest.set_owner.call_deferred(self)
+	# area.set_owner.call_deferred(self)
+	# for ch in area.get_children():
+	# 	ch.set_owner.call_deferred(self)
 
 
 ## quest updates #####################################################

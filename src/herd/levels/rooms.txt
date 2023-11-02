@@ -1,0 +1,29 @@
+name Herd Rooms
+
+==============
+LEGEND
+==============
+
+. = Floor
+_ = Pen
+x = Wall
+f = Fence and Pen
+p = Player and Floor
+s = Sheep and Floor
+w = Wolf and Floor
+
+==============
+ROOMS
+==============
+
+name Basic
+
+xxxxx....ffffffxxxx
+.........f_____f...
+......s..f_____f...
+.......s.____ff....
+...................
+.......s...........
+......s....p.......
+...................
+xxxxx..........xxxx

@@ -211,9 +211,15 @@ static func all_tilemap_border_coords(tilemap):
 static func to_area2D(tilemap=null, rect=null):
 	# naive! TODO impl to match the tiles, not just the rect
 	if rect == null:
-		rect = Rect2(tilemap.get_used_rect())
-		rect.position = tilemap.map_to_local(rect.position)
-		rect.size = tilemap.map_to_local(rect.size) # ? multiply by tile_size?
+		rect = tilemap.get_used_rect()
+		rect = Rect2(rect)
+		# this seems weird
+		# map_to_local seems to return the position at the CENTER of the tile, not the top-left
+		# and i guess size after that is also half a tile too big?
+		# maybe this is the collisionshape's position's job?
+		var half_a_tile = Vector2(tilemap.tile_set.tile_size) / 2.0
+		rect.position = (tilemap.map_to_local(rect.position) - half_a_tile) * tilemap.scale
+		rect.size = (tilemap.map_to_local(rect.size) - half_a_tile) * tilemap.scale
 
 	# shape
 	var shape = RectangleShape2D.new()
@@ -227,7 +233,7 @@ static func to_area2D(tilemap=null, rect=null):
 	# area2D
 	var area = Area2D.new()
 	area.add_child(coll)
-	if tilemap:
-		area.position = tilemap.position
+	# if tilemap:
+	# 	area.position = tilemap.position
 
 	return area

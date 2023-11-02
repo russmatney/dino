@@ -10,14 +10,12 @@ signal quest_failed
 signal count_remaining_update
 signal count_total_update
 
-###########################################################
-# config warning
+## config warning ##########################################################
 
 func _get_configuration_warnings():
 	return Util._config_warning(self, {expected_nodes=["SheepPen"]})
 
-###########################################################
-# ready
+## ready ##########################################################
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -43,16 +41,14 @@ func _ready():
 
 	update_quest()
 
-###########################################################
-# exit tree
+## exit tree ##########################################################
 
 func _exit_tree():
 	if Engine.is_editor_hint():
 		return
 	Quest.unregister(self)
 
-###########################################################
-# quest update
+## quest update ##########################################################
 
 func update_quest():
 	var remaining = all_sheep.filter(func(s): return not s in penned_sheep)
@@ -67,18 +63,17 @@ func update_quest():
 		# presumably, all the sheep died
 		quest_failed.emit()
 
-###########################################################
-# sheep death
+## sheep death ##########################################################
 
 func sheep_died(s):
 	all_sheep.erase(s)
 	update_quest()
 
-###########################################################
-# sheep returned
+## sheep returned ##########################################################
 
 var penned_sheep = []
 func on_body_entered(body):
+	Debug.pr("body entered pen", body)
 	if body in all_sheep and body not in penned_sheep:
 		penned_sheep.append(body)
 		update_quest()
