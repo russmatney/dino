@@ -1,22 +1,14 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0s0hdbrpek1p"]
+[gd_scene load_steps=16 format=3 uid="uid://c0s0hdbrpek1p"]
 
 [ext_resource type="Script" path="res://src/shirt/level/ShirtLevel.gd" id="1_om7n1"]
 [ext_resource type="Script" path="res://src/shirt/level/ShirtLevelGen.gd" id="2_xdkoa"]
 [ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_kpty8"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="4_hf3uk"]
-[ext_resource type="TileSet" uid="uid://b0rg8dver31j6" path="res://addons/reptile/tilesets/CaveTiles16.tres" id="5_88ipv"]
-[ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="6_jt5wk"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="7_5h0qf"]
-[ext_resource type="TileSet" uid="uid://busrg4na2qqk5" path="res://addons/reptile/tilesets/topdown/TDCaveFloorTileSet16.tres" id="8_oijgt"]
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="9_k3wwp"]
-[ext_resource type="TileSet" uid="uid://co3os0t7u2nbl" path="res://addons/reptile/tilesets/topdown/TDCavePitTileSet16.tres" id="10_1w3y6"]
-[ext_resource type="Script" path="res://addons/reptile/tilemaps/topdown/PitTiles.gd" id="11_4qovu"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="12_qd08m"]
-[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="13_aj6d4"]
 [ext_resource type="PackedScene" uid="uid://w6sbcbxo5mnt" path="res://src/shirt/entities/ShrineGem.tscn" id="14_dqxck"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/shirt/enemies/BlobChaser.tscn" id="14_vgbxt"]
-[ext_resource type="Script" path="res://src/shirt/entities/ShrineGem.gd" id="15_h54gg"]
-[ext_resource type="Script" path="res://addons/beehive/topdown/TDBody.gd" id="15_m1vhu"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="16_484va"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y3oxt"]
@@ -144,52 +136,28 @@ shape = SubResource("RectangleShape2D_1jubk")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
-[node name="CaveTiles16" type="TileMap" parent="Tilemaps" instance=ExtResource("4_hf3uk")]
+[node name="CaveTiles16" parent="Tilemaps" instance=ExtResource("4_hf3uk")]
 scale = Vector2(1.5, 1.5)
-tile_set = ExtResource("5_88ipv")
-format = 2
 layer_0/tile_data = PackedInt32Array(458773, 196608, 2, 393237, 524288, 3, 327701, 262144, 2, 262165, 262144, 2, 196629, 524288, 2, 131093, 196608, 2, 65557, 196608, 2, 21, 196608, 2, 524308, 131072, 3, 524307, 458752, 4, 524306, 131072, 4, 524305, 131072, 4, 524304, 131072, 4, 524303, 393216, 4, 524302, 131072, 3, 524301, 131072, 3, 524309, 196608, 3, -65515, 524288, 3, -131051, 262144, 2, -196587, 262144, 2, -262123, 262144, 2, -327659, 524288, 2, -393195, 196608, 2, -458731, 196608, 1, -458739, 131072, 1, -458732, 131072, 1, -458733, 458752, 1, -458734, 131072, 4, -458735, 131072, 4, -458736, 131072, 4, -458737, 393216, 1, -458738, 131072, 1, -65530, 589824, 3, -131066, 262144, 2, -196602, 262144, 2, -262138, 262144, 2, -327674, 327680, 2, -393210, 65536, 2, -458746, 65536, 1, -458740, 458752, 1, -458741, 131072, 4, -458742, 131072, 4, -458743, 131072, 4, -458744, 393216, 1, -458745, 131072, 1, 458758, 65536, 2, 393222, 458752, 2, 524300, 458752, 4, 524299, 131072, 4, 524298, 131072, 4, 524297, 131072, 4, 524296, 393216, 4, 524295, 131072, 3, 524294, 65536, 3, 393215, 65536, 2, 327679, 65536, 2, 262143, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 1, 393221, 131072, 3, 393220, 131072, 3, 393219, 131072, 3, 393218, 131072, 3, 393217, 131072, 3, 393216, 131072, 3, 458751, 65536, 3, -65531, 131072, 1, -65532, 131072, 1, -65533, 131072, 1, -65534, 131072, 1, -65535, 131072, 1, -65536, 131072, 1, 65550, 131072, 2, 65551, 393216, 3, 65552, 196608, 1, 65555, 65536, 2, 65556, 131072, 2, 131086, 458752, 2, 131087, 393216, 2, 131088, 196608, 3, 131091, 65536, 2, 131092, 131072, 2, 196622, 65536, 3, 196623, 196608, 3, 196627, 65536, 3, 196628, 131072, 3, 393230, 131072, 1, 393231, 196608, 1, 393235, 65536, 1, 393236, 131072, 1, 458766, 131072, 2, 458767, 196608, 2, 458771, 65536, 2, 458772, 131072, 2, -393202, 131072, 2, -393201, 196608, 2, -393197, 65536, 2, -393196, 131072, 2, -327666, 131072, 3, -327665, 196608, 3, -327661, 65536, 3, -327660, 131072, 3, -65522, 131072, 1, -65521, 196608, 1, -65517, 65536, 1, -65516, 131072, 1, 14, 131072, 2, 15, 196608, 2, 19, 65536, 2, 20, 131072, 2, -393209, 131072, 2, -393208, 196608, 2, -393204, 65536, 2, -393203, 131072, 2, -327673, 131072, 3, -327672, 196608, 3, -327668, 65536, 3, -327667, 131072, 3, -65529, 131072, 1, -65528, 196608, 1, -65524, 65536, 1, -65523, 131072, 1, 7, 458752, 2, 8, 196608, 2, 12, 65536, 2, 13, 131072, 2, 65543, 65536, 2, 65544, 196608, 2, 65548, 65536, 2, 65549, 131072, 2, 131079, 65536, 3, 131080, 196608, 3, 131084, 65536, 3, 131085, 131072, 3, 327687, 131072, 1, 327688, 196608, 1, 327692, 65536, 1, 327693, 196608, 1, 393223, 131072, 2, 393224, 196608, 2, 393228, 65536, 2, 393229, 393216, 3, 458759, 131072, 2, 458760, 196608, 2, 458764, 65536, 2, 458765, 131072, 2, 0, 393216, 2, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 65536, 196608, 2, 131072, 196608, 2, 196608, 196608, 2, 262144, 196608, 2, 327680, 393216, 3, 327681, 131072, 1, 327682, 131072, 1, 327683, 131072, 1, 327684, 131072, 1, 327685, 131072, 1, 327686, 131072, 1)
-script = ExtResource("6_jt5wk")
 
-[node name="TDCaveFloorTiles16" type="TileMap" parent="Tilemaps" instance=ExtResource("7_5h0qf")]
+[node name="TDCaveFloorTiles16" parent="Tilemaps" instance=ExtResource("7_5h0qf")]
 scale = Vector2(1.5, 1.5)
-tile_set = ExtResource("8_oijgt")
-format = 2
 layer_0/tile_data = PackedInt32Array(65553, 65536, 2, 65554, 196608, 2, 131089, 65536, 2, 131090, 196608, 2, 196624, 65536, 1, 196625, 458752, 3, 196626, 196608, 2, 262158, 458752, 1, 262159, 131072, 1, 262160, 458752, 3, 262161, 131072, 2, 262162, 393216, 3, 262163, 131072, 1, 262164, 196608, 1, 327694, 65536, 3, 327695, 131072, 3, 327696, 458752, 2, 327697, 131072, 2, 327698, 393216, 2, 327699, 131072, 3, 327700, 196608, 3, 393232, 65536, 2, 393233, 131072, 2, 393234, 196608, 2, 458768, 65536, 3, 458769, 131072, 3, 458770, 196608, 3, -393200, 65536, 1, -393199, 131072, 1, -393198, 196608, 1, -327664, 65536, 2, -327663, 131072, 2, -327662, 196608, 2, -262130, 131072, 1, -262129, 131072, 1, -262128, 458752, 3, -262127, 131072, 2, -262126, 393216, 3, -262125, 131072, 1, -262124, 196608, 1, -196594, 131072, 2, -196593, 131072, 2, -196592, 131072, 2, -196591, 131072, 2, -196590, 131072, 2, -196589, 131072, 2, -196588, 196608, 2, -131058, 131072, 3, -131057, 131072, 3, -131056, 458752, 2, -131055, 131072, 2, -131054, 393216, 2, -131053, 131072, 3, -131052, 196608, 3, -65520, 65536, 2, -65519, 131072, 2, -65518, 196608, 2, 16, 65536, 3, 17, 458752, 2, 18, 196608, 2, -393207, 65536, 1, -393206, 131072, 1, -393205, 196608, 1, -327671, 65536, 2, -327670, 131072, 2, -327669, 196608, 2, -262137, 65536, 1, -262136, 131072, 1, -262135, 458752, 3, -262134, 131072, 2, -262133, 393216, 3, -262132, 131072, 1, -262131, 131072, 1, -196601, 65536, 2, -196600, 131072, 2, -196599, 131072, 2, -196598, 131072, 2, -196597, 131072, 2, -196596, 131072, 2, -196595, 131072, 2, -131065, 65536, 3, -131064, 131072, 3, -131063, 458752, 2, -131062, 131072, 2, -131061, 393216, 2, -131060, 131072, 3, -131059, 131072, 3, -65527, 65536, 2, -65526, 131072, 2, -65525, 196608, 2, 9, 65536, 2, 10, 131072, 2, 11, 196608, 2, 65545, 65536, 2, 65546, 131072, 2, 65547, 196608, 2, 131081, 65536, 2, 131082, 131072, 2, 131083, 196608, 2, 196615, 131072, 1, 196616, 131072, 1, 196617, 458752, 3, 196618, 131072, 2, 196619, 393216, 3, 196620, 131072, 1, 196621, 196608, 1, 262151, 131072, 3, 262152, 131072, 3, 262153, 458752, 2, 262154, 131072, 2, 262155, 393216, 2, 262156, 131072, 3, 262157, 393216, 4, 327689, 65536, 2, 327690, 131072, 2, 327691, 196608, 2, 393225, 65536, 2, 393226, 131072, 2, 393227, 196608, 2, 458761, 65536, 3, 458762, 131072, 3, 458763, 196608, 3, 65537, 65536, 1, 65538, 131072, 1, 65539, 131072, 1, 65540, 131072, 1, 65541, 131072, 1, 65542, 196608, 1, 131073, 65536, 2, 131074, 131072, 2, 131075, 131072, 2, 131076, 131072, 2, 131077, 131072, 2, 131078, 196608, 2, 196609, 65536, 2, 196610, 131072, 2, 196611, 131072, 2, 196612, 131072, 2, 196613, 131072, 2, 196614, 393216, 3, 262145, 65536, 3, 262146, 131072, 3, 262147, 131072, 3, 262148, 131072, 3, 262149, 131072, 3, 262150, 131072, 3)
 
-[node name="TDCavePitTiles16" type="TileMap" parent="Tilemaps" groups=["pits"] instance=ExtResource("9_k3wwp")]
+[node name="TDCavePitTiles16" parent="Tilemaps" instance=ExtResource("9_k3wwp")]
 scale = Vector2(1.5, 1.5)
-tile_set = ExtResource("10_1w3y6")
-format = 2
 layer_0/tile_data = PackedInt32Array(-393207, 65536, 1, -393206, 131072, 1, -393205, 196608, 1, -327671, 65536, 3, -327670, 131072, 3, -327669, 196608, 3, -262137, 65536, 1, -262136, 196608, 1, -262132, 65536, 1, -262131, 196608, 1, -196601, 65536, 2, -196600, 196608, 2, -196596, 65536, 2, -196595, 196608, 2, -131065, 65536, 3, -131064, 196608, 3, -131060, 65536, 3, -131059, 196608, 3, -65527, 65536, 1, -65526, 131072, 1, -65525, 196608, 1, 9, 65536, 3, 10, 131072, 3, 11, 196608, 3)
-script = ExtResource("11_4qovu")
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="PlayerSpawnPoint" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("12_qd08m")]
+[node name="PlayerSpawnPoint" parent="Entities" instance=ExtResource("12_qd08m")]
 position = Vector2(72, 72)
-script = ExtResource("13_aj6d4")
-dev_only = false
 
-[node name="@CharacterBody2D@24604" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("14_vgbxt")]
+[node name="@CharacterBody2D@24604" parent="Entities" instance=ExtResource("14_vgbxt")]
 position = Vector2(216, 96)
-collision_layer = 8
-collision_mask = 5127
-script = ExtResource("15_m1vhu")
-display_name = "Blob Chaser"
-initial_health = 2
-should_wander = true
-should_notice = true
 
-[node name="ShrineGem" type="Node2D" parent="Entities" instance=ExtResource("14_dqxck")]
+[node name="ShrineGem" parent="Entities" instance=ExtResource("14_dqxck")]
 position = Vector2(240, -48)
-script = ExtResource("15_h54gg")
 
-[node name="BlobWalker" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("16_484va")]
+[node name="BlobWalker" parent="Entities" instance=ExtResource("16_484va")]
 position = Vector2(432, 144)
-collision_layer = 8
-collision_mask = 5127
-script = ExtResource("15_m1vhu")
-display_name = "Blob Walker"
-initial_health = 2
-should_wander = true

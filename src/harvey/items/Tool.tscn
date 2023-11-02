@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://kdjxtd0s6qfx"]
 
 [ext_resource type="Script" path="res://src/harvey/items/Tool.gd" id="1"]
 [ext_resource type="PackedScene" path="res://src/harvey/ToolIcon.tscn" id="2"]

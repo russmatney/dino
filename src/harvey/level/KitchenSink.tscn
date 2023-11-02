@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch6jdbh2vfwon"]
 
 [ext_resource type="PackedScene" path="res://src/harvey/bots/HarveyBot.tscn" id="1"]
-[ext_resource type="Script" path="res://src/harvey/maps/HarveyLevel.gd" id="1_s7v85"]
+[ext_resource type="Script" path="res://src/harvey/level/HarveyLevel.gd" id="1_s7v85"]
 [ext_resource type="PackedScene" path="res://src/harvey/items/SeedBox.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://hcuonrdt3k48" path="res://src/harvey/HUD/HUD.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/harvey/player/HarveyPlayer.tscn" id="4"]

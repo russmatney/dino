@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=14 format=3 uid="uid://c50rr61e7pe3y"]
 
 [ext_resource type="PackedScene" path="res://src/harvey/ProduceIcon.tscn" id="2"]
 [ext_resource type="Script" path="res://src/harvey/items/SeedBox.gd" id="3"]
