@@ -276,6 +276,10 @@
 						"type": "string",
 						"value": "Void Spike"
 					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/spike/level/SpikeLevel.tscn"
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/spike/Spike.gd"
@@ -312,6 +316,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Shirt"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/shirt/level/ShirtLevel.tscn"
 					},
 					"game_singleton": {
 						"type": "resource",
@@ -499,6 +507,10 @@
 						"type": "string",
 						"value": "Tower Jet"
 					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/tower/level/TowerLevel.tscn"
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/tower/Tower.gd"
@@ -532,6 +544,10 @@
 						"type": "string",
 						"value": "Gunner"
 					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/gunner/level/GunnerLevel.tscn"
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/gunner/Gunner.gd"
@@ -560,6 +576,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Harvey"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/harvey/level/HarveyLevel.tscn"
 					},
 					"game_singleton": {
 						"type": "resource",
@@ -597,6 +617,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Herd"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/herd/levels/HerdLevel.tscn"
 					},
 					"game_singleton": {
 						"type": "resource",
@@ -655,6 +679,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Pluggs"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/pluggs/level/PluggsLevel.tscn"
 					},
 					"game_singleton": {
 						"type": "resource",
@@ -975,12 +1003,19 @@
 				"_id": "61",
 				"_name": "enabled",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": null,
+				"_id": "63",
+				"_name": "first_level",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 61
+			"default": 63
 		}
 	}
 }

@@ -36,10 +36,20 @@ func register():
 func cleanup():
 	_clear_menus()
 
-func start(opts={}):
-	# load the first level, maybe pull from a saved game
-	# could accept params for which level to start
-	Debug.warn("start() not implemented")
+# consider handling/passing opts here
+func start(_opts={}):
+	var first_level
+
+	if game_entity != null:
+		first_level = game_entity.get_first_level_scene()
+	else:
+		Debug.warn("DinoGame.start() missing 'game_entity'")
+
+	if first_level:
+		Navi.nav_to(first_level)
+		return
+
+	Debug.warn("DinoGame.start() missing 'first_level'")
 
 func update_world():
 	# trigger any world update based on the player's position

@@ -34,6 +34,9 @@ func get_player_scene() -> PackedScene:
 func is_enabled() -> bool:
 	return get_bool("enabled")
 
+func get_first_level_scene() -> PackedScene:
+	return get_resource("first_level")
+
 ## data ##########################################################
 
 func data():
@@ -47,6 +50,7 @@ func data():
 		singleton=get_singleton(),
 		scene_path_prefix=get_scene_path_prefix(),
 		player_scene=get_player_scene(),
+		first_level_scene=get_first_level_scene(),
 		}
 
 ## helpers ##########################################################
