@@ -82,7 +82,6 @@ position = Vector2(144, -56)
 
 [node name="PlayerSpawnPoint" parent="InfiniteFaller" instance=ExtResource("8_kban0")]
 position = Vector2(16, 48)
-dev_only = false
 
 [node name="PortalEdges" parent="InfiniteFaller" instance=ExtResource("9_8h346")]
 

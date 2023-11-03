@@ -1,0 +1,55 @@
+name Spike Rooms
+
+==============
+LEGEND
+==============
+
+p = Player
+x = Tile
+b = Blob
+c = CookingPot
+d = Void
+- = OneWayPlatform
+^ = PortalBottom
+v = PortalTop
+
+==============
+ROOMS
+==============
+
+name Pantry One
+
+xxxxxxxxxxxxxxx
+xx...........xx
+xx...........xx
+xx.....c.....xx
+xx....---....xx
+xx..b.....b..xx
+xx----...----xx
+...............
+.d..b.....b...d
+xx----...----xx
+xx...........xx
+xx..b.....b..xx
+xx----...----xx
+xx...........xx
+xx.....p.....xx
+xxxxxxxxxxxxxxx
+
+name Pantry Two
+
+xx.......v.......xx
+xx...............xx
+xx.......c.......xx
+xx.....-----.....xx
+xx..b.........b..xx
+xx-----.....-----xx
+...................
+.d..b.........b...d
+xx-----.....-----xx
+xx...............xx
+xx..b.........b..xx
+xx-----.....-----xx
+xx...............xx
+xx...............xx
+xx^^^^^^^^^^^^^^^xx

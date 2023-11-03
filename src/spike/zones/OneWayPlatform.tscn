@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dspqmcg2iysem"]
+[gd_scene load_steps=4 format=3 uid="uid://dspqmcg2iysem"]
+
+[ext_resource type="Script" path="res://src/spike/zones/OneWayPlatform.gd" id="1_8tqpp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_metpu"]
+resource_local_to_scene = true
 size = Vector2(128, 16)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4sbaq"]
@@ -8,6 +11,7 @@ closed = false
 polygon = PackedVector2Array(-64, -8, 64, -8, 64, 8, -64, 8)
 
 [node name="OneWayPlatform" type="StaticBody2D"]
+script = ExtResource("1_8tqpp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_metpu")
@@ -21,4 +25,5 @@ offset_bottom = 8.0
 color = Color(0.107274, 0.449081, 0.339994, 1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 occluder = SubResource("OccluderPolygon2D_4sbaq")

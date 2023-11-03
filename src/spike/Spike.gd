@@ -1,27 +1,31 @@
 @tool
 extends DinoGame
 
-## player ##########################################################
+# ## player ##########################################################
 
-func get_spawn_coords():
-	return Metro.get_spawn_coords()
+# func get_spawn_coords():
+# 	return Metro.get_spawn_coords()
 
-## register ##########################################################
+# ## register ##########################################################
 
-var first_zone
+# var first_zone
 
-func register():
-	register_menus()
+# func register():
+# 	register_menus()
 
-	if first_zone == null:
-		first_zone = SpikeData.zone_scenes[0]
+# 	if first_zone == null:
+# 		first_zone = SpikeData.zone_scenes[0]
 
-## start ##########################################################
+# ## start ##########################################################
+
+# func start(_opts={}):
+# 	Debug.prn("Starting Spike!")
+
+# 	Metro.load_zone(first_zone)
+
+# func update_world():
+# 	Metro.update_zone()
 
 func start(_opts={}):
 	Debug.prn("Starting Spike!")
-
-	Metro.load_zone(first_zone)
-
-func update_world():
-	Metro.update_zone()
+	Navi.nav_to("res://src/spike/level/SpikeLevel.gd")

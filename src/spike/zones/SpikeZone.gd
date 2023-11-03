@@ -5,7 +5,8 @@ class_name SpikeZone
 ## ready #####################################################
 
 func _ready():
-	Quest.all_quests_complete.connect(on_quests_complete)
+	if not Engine.is_editor_hint():
+		Quest.all_quests_complete.connect(on_quests_complete)
 	super._ready()
 
 ## quest updates ######################################################

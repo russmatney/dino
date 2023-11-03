@@ -1,0 +1,259 @@
+[gd_scene load_steps=18 format=3 uid="uid://ca8yu63e25pwb"]
+
+[ext_resource type="Script" path="res://src/spike/level/SpikeLevel.gd" id="1_fnfm7"]
+[ext_resource type="Script" path="res://src/spike/level/SpikeLevelGen.gd" id="2_1wddm"]
+[ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_wv3my"]
+[ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="4_shnmc"]
+[ext_resource type="TileSet" uid="uid://cvc56aldv1hyq" path="res://addons/reptile/tilesets/GrassyTiles16.tres" id="5_g5a4w"]
+[ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="6_1l0ew"]
+[ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="7_3hivo"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="7_x32p6"]
+[ext_resource type="Script" path="res://src/spike/entities/CookingPot.gd" id="8_m13ry"]
+[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="8_nw0dn"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="9_d2gor"]
+[ext_resource type="Script" path="res://src/spike/enemies/Blob.gd" id="10_wx05e"]
+[ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="11_0pinu"]
+[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="11_a2u68"]
+[ext_resource type="Script" path="res://src/spike/entities/DeliveryZone.gd" id="12_n5yb1"]
+[ext_resource type="Script" path="res://src/spike/zones/OneWayPlatform.gd" id="16_p0h2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krg4y"]
+size = Vector2(480, 512)
+
+[node name="SpikeLevel" type="Node2D"]
+script = ExtResource("1_fnfm7")
+
+[node name="SpikeLevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
+script = ExtResource("2_1wddm")
+_seed = 4162492688
+tile_size = 32
+room_count = 1
+room_defs_path = "res://src/spike/level/rooms.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="@Node2D@78559" type="Node2D" parent="Rooms"]
+script = ExtResource("3_wv3my")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@78559"]
+visible = false
+offset_right = 480.0
+offset_bottom = 512.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@78559" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@78559/RoomBox"]
+position = Vector2(240, 256)
+shape = SubResource("RectangleShape2D_krg4y")
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="@TileMap@78558" type="TileMap" parent="Tilemaps" instance=ExtResource("4_shnmc")]
+scale = Vector2(2, 2)
+tile_set = ExtResource("5_g5a4w")
+format = 2
+layer_0/tile_data = PackedInt32Array(983055, 196608, 2, 917519, 196608, 2, 851983, 196608, 2, 786447, 196608, 2, 720911, 196608, 2, 655375, 196608, 2, 589839, 524288, 3, 524303, 262144, 2, 458767, 262144, 2, 393231, 524288, 2, 327695, 196608, 2, 262159, 196608, 2, 196623, 196608, 2, 131087, 196608, 2, 65551, 196608, 2, 15, 196608, 2, -65521, 196608, 1, 1048575, 65536, 2, 983039, 65536, 2, 917503, 65536, 2, 851967, 65536, 2, 786431, 65536, 2, 720895, 65536, 2, 655359, 327680, 3, 589823, 262144, 2, 524287, 262144, 3, 458751, 327680, 2, 393215, 65536, 2, 327679, 65536, 2, 262143, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 1, 1048590, 131072, 3, 1048589, 131072, 3, 1048588, 131072, 3, 1048587, 131072, 3, 1048586, 131072, 3, 1048585, 131072, 3, 1048584, 131072, 3, 1048583, 131072, 3, 1048582, 131072, 3, 1048581, 131072, 3, 1048580, 131072, 3, 1048579, 131072, 3, 1048578, 131072, 3, 1048577, 131072, 3, 1048576, 131072, 3, 1114111, 65536, 3, -65522, 131072, 1, -65523, 131072, 1, -65524, 131072, 1, -65525, 131072, 1, -65526, 131072, 1, -65527, 131072, 1, -65528, 131072, 1, -65529, 131072, 1, -65530, 131072, 1, -65531, 131072, 1, -65532, 131072, 1, -65533, 131072, 1, -65534, 131072, 1, -65535, 131072, 1, -65536, 131072, 1, 1048591, 196608, 3, 0, 131072, 2, 1, 393216, 2, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 7, 131072, 3, 8, 131072, 3, 9, 131072, 3, 10, 131072, 3, 11, 131072, 3, 12, 131072, 3, 13, 458752, 2, 14, 131072, 2, 65536, 131072, 2, 65537, 196608, 2, 65549, 65536, 2, 65550, 131072, 2, 131072, 131072, 2, 131073, 196608, 2, 131085, 65536, 2, 131086, 131072, 2, 196608, 131072, 2, 196609, 196608, 2, 196621, 65536, 2, 196622, 131072, 2, 262144, 131072, 2, 262145, 196608, 2, 262157, 65536, 2, 262158, 131072, 2, 327680, 131072, 2, 327681, 196608, 2, 327693, 65536, 2, 327694, 131072, 2, 393216, 131072, 3, 393217, 196608, 3, 393229, 65536, 3, 393230, 131072, 3, 589824, 131072, 1, 589825, 196608, 1, 589837, 65536, 1, 589838, 131072, 1, 655360, 131072, 2, 655361, 196608, 2, 655373, 65536, 2, 655374, 131072, 2, 720896, 131072, 2, 720897, 196608, 2, 720909, 65536, 2, 720910, 131072, 2, 786432, 131072, 2, 786433, 196608, 2, 786445, 65536, 2, 786446, 131072, 2, 851968, 131072, 2, 851969, 196608, 2, 851981, 65536, 2, 851982, 131072, 2, 917504, 131072, 2, 917505, 196608, 2, 917517, 65536, 2, 917518, 131072, 2, 983040, 131072, 2, 983041, 393216, 3, 983042, 131072, 1, 983043, 131072, 1, 983044, 131072, 1, 983045, 131072, 1, 983046, 131072, 1, 983047, 131072, 1, 983048, 131072, 1, 983049, 131072, 1, 983050, 131072, 1, 983051, 131072, 1, 983052, 131072, 1, 983053, 458752, 3, 983054, 131072, 2)
+script = ExtResource("6_1l0ew")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="@Marker2D@78554" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("7_x32p6")]
+position = Vector2(224, 448)
+script = ExtResource("8_nw0dn")
+dev_only = false
+
+[node name="@Node2D@78555" type="Node2D" parent="Entities" instance=ExtResource("7_3hivo")]
+position = Vector2(240, 128)
+script = ExtResource("8_m13ry")
+
+[node name="@CharacterBody2D@78556" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("9_d2gor")]
+position = Vector2(128, 160)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("10_wx05e")
+should_hurt_to_touch = true
+
+[node name="@CharacterBody2D@78520" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("9_d2gor")]
+position = Vector2(320, 160)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("10_wx05e")
+should_hurt_to_touch = true
+
+[node name="@CharacterBody2D@78521" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("9_d2gor")]
+position = Vector2(128, 256)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("10_wx05e")
+should_hurt_to_touch = true
+
+[node name="@CharacterBody2D@78522" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("9_d2gor")]
+position = Vector2(320, 256)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("10_wx05e")
+should_hurt_to_touch = true
+
+[node name="@CharacterBody2D@78523" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("9_d2gor")]
+position = Vector2(128, 352)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("10_wx05e")
+should_hurt_to_touch = true
+
+[node name="@CharacterBody2D@78524" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("9_d2gor")]
+position = Vector2(320, 352)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("10_wx05e")
+should_hurt_to_touch = true
+
+[node name="DeliveryZone" type="Node2D" parent="Entities" instance=ExtResource("11_0pinu")]
+position = Vector2(32, 256)
+script = ExtResource("12_n5yb1")
+
+[node name="@Node2D@78527" type="Node2D" parent="Entities" instance=ExtResource("11_0pinu")]
+position = Vector2(448, 256)
+script = ExtResource("12_n5yb1")
+
+[node name="@StaticBody2D@78557" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(208, 136)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78528" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(240, 136)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78529" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(272, 136)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78530" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(80, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78531" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(112, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78532" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(144, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78533" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(176, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78534" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(304, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78535" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(336, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78536" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(368, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78537" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(400, 200)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78538" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(80, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78539" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(112, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78540" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(144, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78541" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(176, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78542" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(304, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78543" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(336, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78544" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(368, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78545" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(400, 296)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78546" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(80, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78547" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(112, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78548" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(144, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78549" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(176, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78550" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(304, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78551" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(336, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78552" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(368, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0
+
+[node name="@StaticBody2D@78553" type="StaticBody2D" parent="Entities" instance=ExtResource("11_a2u68")]
+position = Vector2(400, 392)
+script = ExtResource("16_p0h2s")
+max_width = 32.0

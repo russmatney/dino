@@ -78,4 +78,3 @@ position = Vector2(144, -56)
 
 [node name="PlayerSpawnPoint" parent="PantryOne" instance=ExtResource("8_17l7t")]
 position = Vector2(16, 88)
-dev_only = false
