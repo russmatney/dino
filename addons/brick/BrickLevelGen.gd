@@ -48,12 +48,13 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 		for ent in room.entities:
 			entities.append(ent)
 
-	for label in opts.label_to_entity:
-		var ent_opts = opts.label_to_entity[label]
-		if "find_entity" in ent_opts and "setup_with_entities" in ent_opts:
-			var ent = ent_opts.find_entity.call(entities)
-			if ent != null:
-				entities = ent_opts.setup_with_entities.call(ent, entities)
+	if "label_to_entity" in opts:
+		for label in opts.label_to_entity:
+			var ent_opts = opts.label_to_entity[label]
+			if "find_entity" in ent_opts and "setup_with_entities" in ent_opts:
+				var ent = ent_opts.find_entity.call(entities)
+				if ent != null:
+					entities = ent_opts.setup_with_entities.call(ent, entities)
 
 	# build update dict
 	var data = {

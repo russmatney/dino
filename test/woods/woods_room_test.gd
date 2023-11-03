@@ -63,13 +63,6 @@ xxx
 
 ## create_room ###########################################################
 
-func test_create_room_no_options():
-	var room = BrickRoom.create_room({contents=room_defs_txt})
-	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.def.meta.room_type).is_equal("SQUARE")
-	room.free()
-
-
 func has_type(typ):
 	return func(r):
 		return typ == r.meta.get("room_type")

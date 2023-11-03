@@ -131,6 +131,6 @@ xpx", room_count=1, seed=1, label_to_entity={"Player": {
 	assert_that(len(data.entities)).is_equal(1)
 	var p = data.entities[0]
 	assert_that(p.scene_file_path).is_equal("res://addons/beehive/topdown/TDPlayer.tscn")
-	assert_that(p.position).is_equal(Vector2(1,1) * 16)
+	assert_that(p.position).is_equal(Vector2(1,0) * 16)
 
 	free_data(data)

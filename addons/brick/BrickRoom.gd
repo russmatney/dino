@@ -115,10 +115,10 @@ static func add_tilemaps(room: BrickRoom, opts: BrickRoomOpts):
 
 static func add_entity(crd, room: BrickRoom, ent_opts, opts: BrickRoomOpts):
 	var ent
-	if "scene" in ent_opts:
-		ent = ent_opts.scene.instantiate()
 	if "new_node" in ent_opts:
 		ent = ent_opts.new_node.call()
+	elif "scene" in ent_opts:
+		ent = ent_opts.scene.instantiate()
 	ent.position = crd_to_position(crd, opts)
 	if ent_opts.get("setup"):
 		ent_opts.setup.call(ent)

@@ -130,7 +130,7 @@ func test_create_room_tilemap():
 	var room = BrickRoom.create_room({contents=pluggs_room_contents})
 	assert_that(room.name).is_equal("Test Room")
 	assert_that(room.position).is_equal(Vector2.ZERO)
-	assert_that(room.tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(room.tilemaps.values()[0].get_used_cells(0)).contains_exactly_in_any_order([
 		Vector2i(0,1),
 		Vector2i(0,2),
 		Vector2i(1,2),
