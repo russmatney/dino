@@ -391,6 +391,10 @@
 						"type": "string",
 						"value": "The Mountain"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": false
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/mountain/Mountain.gd"
@@ -428,6 +432,10 @@
 						"type": "string",
 						"value": "Ghost House"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": false
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/ghosts/Ghosts.gd"
@@ -460,6 +468,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Dungeon Crawler"
+					},
+					"enabled": {
+						"type": "bool",
+						"value": false
 					},
 					"game_singleton": {
 						"type": "resource",
@@ -749,6 +761,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "The Woods"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/woods/level/WoodsLevel.tscn"
 					},
 					"game_singleton": {
 						"type": "resource",
