@@ -74,6 +74,7 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 
 report/godot/push_error=true
 report/assert/strict_number_type_compare=false
+report/verbose_orphans=false
 
 [global]
 

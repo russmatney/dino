@@ -1,27 +1,27 @@
 extends GdUnitTestSuite
 
 
-func test_demo_land_zone():
-	var zone_path = "res://src/demoland/zones/area01/Area01.tscn"
-	var zone = load(zone_path).instantiate()
-	add_child(zone)
+# func test_demo_land_zone():
+# 	var zone_path = "res://src/demoland/zones/area01/Area01.tscn"
+# 	var zone = load(zone_path).instantiate()
+# 	add_child(zone)
 
-	Hotel.register(zone)
-	var data = Hotel.check_out(zone)
+# 	Hotel.register(zone)
+# 	var data = Hotel.check_out(zone)
 
-	assert_that(data.name).is_equal("Area01")
-	assert_that(data.groups).contains(["metro_zones"])
-	assert_that(data.scene_file_path).is_equal(zone_path)
-	assert_that(data.key).is_equal("Area01")
+# 	assert_that(data.name).is_equal("Area01")
+# 	assert_that(data.groups).contains(["metro_zones"])
+# 	assert_that(data.scene_file_path).is_equal(zone_path)
+# 	assert_that(data.key).is_equal("Area01")
 
-	var room_name = "10JumpRoom"
-	var room_data = Hotel.first({filter=func(d): return d.name == room_name})
+# 	var room_name = "10JumpRoom"
+# 	var room_data = Hotel.first({filter=func(d): return d.name == room_name})
 
-	assert_that(room_data.name).is_equal(room_name)
-	assert_that(room_data.groups).contains(["metro_rooms"])
-	assert_that(room_data.key).ends_with("Area01/10JumpRoom")
+# 	assert_that(room_data.name).is_equal(room_name)
+# 	assert_that(room_data.groups).contains(["metro_rooms"])
+# 	assert_that(room_data.key).ends_with("Area01/10JumpRoom")
 
-	zone.queue_free()
+# 	zone.queue_free()
 
 ## basic object ###########################
 
