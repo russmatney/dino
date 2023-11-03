@@ -48,18 +48,12 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 		for ent in room.entities:
 			entities.append(ent)
 
-	Debug.pr("ents", entities)
 	for label in opts.label_to_entity:
 		var ent_opts = opts.label_to_entity[label]
 		if "find_entity" in ent_opts and "setup_with_entities" in ent_opts:
 			var ent = ent_opts.find_entity.call(entities)
 			if ent != null:
 				entities = ent_opts.setup_with_entities.call(ent, entities)
-			# else:
-			# 	Debug.warn("could not find expected entity before setup_with_entities", label)
-
-	Debug.pr([1], "adjusted ents", entities)
-
 
 	# build update dict
 	var data = {
@@ -234,11 +228,20 @@ func generate():
 
 		entities_node.get_children().map(func(c): c.queue_free())
 		for node in data.entities:
+			var had_parent
 			if node.get_parent():
+				had_parent = true
 				node.reparent(entities_node, true)
 			else:
+				# entities from tilemaps have no parent yet
 				entities_node.add_child(node)
 			node.set_owner(self.get_owner())
+			if not had_parent:
+				# maybe want an explicit opt-in to this - had_parent might not be the right flag
+				for ch in node.get_children():
+					ch.set_owner(self.get_owner())
+					for cch in ch.get_children():
+						cch.set_owner(self.get_owner())
 
 		if tilemaps_node:
 			tilemaps_node.get_children().map(func(c): c.queue_free())

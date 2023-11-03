@@ -118,7 +118,7 @@ static func add_entity(crd, room: BrickRoom, ent_opts, opts: BrickRoomOpts):
 	if "scene" in ent_opts:
 		ent = ent_opts.scene.instantiate()
 	if "new_node" in ent_opts:
-		ent = ent_opts.new_node()
+		ent = ent_opts.new_node.call()
 	ent.position = crd_to_position(crd, opts)
 	if ent_opts.get("setup"):
 		ent_opts.setup.call(ent)

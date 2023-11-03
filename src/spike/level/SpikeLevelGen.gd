@@ -1,7 +1,6 @@
 @tool
 extends BrickLevelGen
 
-# var delivery_zone_scene = preload("res://src/spike/entities/DeliveryZone.tscn")
 var portal_edges_scene = preload("res://src/spike/zones/PortalEdges.tscn")
 
 ## get room opts #########################################
@@ -17,29 +16,28 @@ func get_room_opts(opts):
 
 	opts.merge({
 		label_to_tilemap={
-			"Tile": {
-				scene=load("res://addons/reptile/tilemaps/GrassTiles16.tscn"),
-				add_borders=true
-			},
-			# may want to support something like this
-			# "Void": {
-			# 	scene=load("res://addons/reptile/tilemaps/GrassTiles16.tscn"),
-			# 	# support tilemap -> entity
-			# 	setup=func(t):
-			# 	var areas = Reptile.to_areas(t)
-			# 	for area in areas:
-			# 		var delivery_zone = delivery_zone_scene.instantiate()
-			# 		delivery_zone.set_area(area)
-			# 	},
+			"Tile": {scene=load("res://addons/reptile/tilemaps/GrassTiles16.tscn")},
 			"PortalBottom": {
 				# some scene that gets replaced anyway
 				scene=load("res://addons/reptile/tilemaps/MetalTiles8.tscn"),
 				to_entities=func(t):
-				# TODO opt-out when there are no tiles!!
+				var rect = t.get_used_rect()
+				if rect.size.x == 0:
+					# opt-out when there are no tiles
+					return []
 
 				# should support getting multiple areas from a tilemap
 				var area = Reptile.to_area2D(t)
 				area.name = "Bottom"
+
+				area.set_collision_layer_value(1, false)
+				area.set_collision_mask_value(1, false)
+				area.set_collision_mask_value(2, true)
+				area.set_collision_mask_value(3, true)
+				area.set_collision_mask_value(4, true)
+				area.set_collision_mask_value(5, true)
+				area.set_collision_mask_value(6, true)
+				area.set_collision_mask_value(10, true)
 
 				var portal_edges = portal_edges_scene.instantiate()
 				portal_edges.add_child(area)
@@ -50,8 +48,7 @@ func get_room_opts(opts):
 		label_to_entity={
 			"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 			"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
-				setup=func(p):
-				p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
+				setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 				},
 			"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
 			"Void": {scene=load("res://src/spike/entities/DeliveryZone.tscn")},
@@ -62,6 +59,7 @@ func get_room_opts(opts):
 				p.position.x += opts.tile_size/2.0
 				p.position.y += opts.tile_size/4.0
 				},
+			# NOTE using the roombox for this portal/warping/wraping might be alot easier
 			"PortalTop": {
 				new_node=func():
 					var top = Marker2D.new()
@@ -76,11 +74,9 @@ func get_room_opts(opts):
 					# find portal_edges, add yourself to it?
 					for ent in entities:
 						if ent.name == "PortalEdges":
-							Debug.pr("found portal edges, reparenting", top)
-							# top.reparent(ent)
+							top.reparent(ent)
 							break
 					# return updated entities
-					Debug.pr("returning ents pre filter", entities)
 					return entities.filter(func(ent): return ent.name != "Top")
 					},
 			}})

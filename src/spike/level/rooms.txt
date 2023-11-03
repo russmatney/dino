@@ -38,7 +38,7 @@ xxxxxxxxxxxxxxx
 
 name Pantry Two
 
-xx.......v.......xx
+xx.......vp......xx
 xx...............xx
 xx.......c.......xx
 xx.....-----.....xx
