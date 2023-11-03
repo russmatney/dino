@@ -37,13 +37,29 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 		room_idx += 1
 
 	# combine tilemaps
-	var tilemaps = BrickLevelGen.combine_tilemaps(rooms, room_opts)
+	var res = BrickLevelGen.combine_tilemaps(rooms, room_opts)
+	var tilemaps = res[0]
 
-	# collect entities
-	var entities = []
+	# collect entities from tilemaps
+	var entities = res[1]
+
+	# add normal entities
 	for room in rooms:
 		for ent in room.entities:
 			entities.append(ent)
+
+	Debug.pr("ents", entities)
+	for label in opts.label_to_entity:
+		var ent_opts = opts.label_to_entity[label]
+		if "find_entity" in ent_opts and "setup_with_entities" in ent_opts:
+			var ent = ent_opts.find_entity.call(entities)
+			if ent != null:
+				entities = ent_opts.setup_with_entities.call(ent, entities)
+			# else:
+			# 	Debug.warn("could not find expected entity before setup_with_entities", label)
+
+	Debug.pr([1], "adjusted ents", entities)
+
 
 	# build update dict
 	var data = {
@@ -67,10 +83,14 @@ static func combine_tilemaps(rooms, room_opts):
 	var label_to_tilemap = room_opts[0].label_to_tilemap
 
 	var tmaps = []
+	var entities = []
 	for label in label_to_tilemap:
-		tmaps.append(BrickLevelGen.combine_tilemap(rooms, label, label_to_tilemap[label]))
+		var res = BrickLevelGen.combine_tilemap(rooms, label, label_to_tilemap[label])
+		if res[0]:
+			tmaps.append(res[0])
+		entities.append_array(res[1])
 
-	return tmaps
+	return [tmaps, entities]
 
 # converts a coord in a room's tilemap to a coord in the 'combined' passed tilemap
 static func room_tilemap_coord_to_new_tilemap_coord(room, room_tilemap, coord, tilemap):
@@ -81,6 +101,8 @@ static func combine_tilemap(rooms, label, opts):
 	var add_borders = opts.get("add_borders")
 	var scene = opts.get("scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
 	var tilemap = scene.instantiate()
+
+	var entities = []
 
 	var room_tilemap = func(room):
 		return room.tilemaps.get(label)
@@ -141,8 +163,11 @@ static func combine_tilemap(rooms, label, opts):
 
 	if "setup" in opts:
 		opts.setup.call(tilemap)
+	if "to_entities" in opts:
+		entities = opts.to_entities.call(tilemap)
+		tilemap = null
 
-	return tilemap
+	return [tilemap, entities]
 
 ################################################################################
 ## instance ######################################################################
@@ -209,7 +234,10 @@ func generate():
 
 		entities_node.get_children().map(func(c): c.queue_free())
 		for node in data.entities:
-			node.reparent(entities_node, true)
+			if node.get_parent():
+				node.reparent(entities_node, true)
+			else:
+				entities_node.add_child(node)
 			node.set_owner(self.get_owner())
 
 		if tilemaps_node:
