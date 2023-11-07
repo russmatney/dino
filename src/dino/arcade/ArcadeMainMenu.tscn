@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca57linvp4uxm"]
+[gd_scene load_steps=3 format=3 uid="uid://diksn25hdkgwq"]
 
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mxvc2"]
-[ext_resource type="Script" path="res://src/dino/roulette/RouletteMainMenuButtonList.gd" id="2_gvqcl"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_lxp1a"]
+[ext_resource type="Script" path="res://src/dino/arcade/ArcadeMainMenuButtonList.gd" id="2_12a41"]
 
-[node name="RouletteMainMenu" type="CanvasLayer"]
+[node name="ArcadeMainMenu" type="CanvasLayer"]
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -20,9 +20,9 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_mxvc2")]
+[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_lxp1a")]
 layout_mode = 2
-text = "[center]Dino Roulette!"
+text = "[center]Dino Arcade!"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -33,9 +33,9 @@ size_flags_vertical = 3
 layout_mode = 2
 alignment = 1
 
-[node name="RouletteMainMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ArcadeMainMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-script = ExtResource("2_gvqcl")
+script = ExtResource("2_12a41")
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

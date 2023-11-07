@@ -902,6 +902,35 @@
 						"value": "src/dino/roulette"
 					}
 				}
+			},
+			{
+				"_category_id": "65",
+				"_icon_color": "ffffff00",
+				"_id": "68",
+				"_index": 0,
+				"_name": "Arcade",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Arcade"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/dino/arcade/Arcade.tscn"
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/dino/arcade/ArcadeMainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/dino/arcade/ArcadePauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "res://src/dino/arcade"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1058,7 +1087,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 67
+			"default": 68
 		}
 	}
 }

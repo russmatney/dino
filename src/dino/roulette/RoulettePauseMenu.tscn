@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpvhxndrptbgv"]
+[gd_scene load_steps=3 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_hmcq1"]
-[ext_resource type="Script" path="res://src/dino/roulette/RoulettePauseMenuButtonList.gd" id="2_u3ekc"]
+[ext_resource type="Script" path="res://src/dino/roulette/RoulettePauseMenuButtonList.gd" id="2_fafvr"]
 
 [node name="RoulettePauseMenu" type="CanvasLayer"]
 
@@ -35,7 +35,7 @@ alignment = 1
 
 [node name="RoulettePauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-script = ExtResource("2_u3ekc")
+script = ExtResource("2_fafvr")
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
