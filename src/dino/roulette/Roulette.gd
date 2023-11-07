@@ -13,7 +13,8 @@ var games = [
 	]
 
 @export var current_game_entity: DinoGameEntity
-var current_game: DinoGame
+# var current_game: DinoGame
+var current_game_node: Node2D
 
 @export var _seed: int
 @export var set_random_seed: bool:
@@ -32,6 +33,18 @@ func _ready():
 		var eid = Util.rand_of(games)
 		current_game_entity = Pandora.get_entity(eid)
 
-	Debug.pr("would start", current_game_entity)
+	if not current_game_entity:
+		Debug.warn("Could not find current_game_entity!")
 
-	# TODO load and launch first level (via Game/DinoGame api?)
+	Debug.pr("would start", current_game_entity.get_display_name())
+
+	# TODO transition plan!
+	current_game_node = Game.launch_in_game_mode(self, current_game_entity, {seed=_seed})
+	current_game_node.ready.connect(_on_game_ready)
+	# TODO levels should transition in/out smoothly
+	add_child(current_game_node)
+
+## on game ready ##################################################3
+
+func _on_game_ready():
+	Game.maybe_spawn_player()

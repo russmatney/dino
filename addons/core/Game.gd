@@ -5,6 +5,7 @@ extends Node
 
 var current_game: DinoGame
 var is_managed: bool = false
+var is_in_game_mode: bool = false
 
 ## ready ##########################################################
 
@@ -76,7 +77,12 @@ func register_current_game(game):
 		Debug.warn("Attempted to register invalid game, aborting", game)
 		return
 
+	if game is DinoGameEntity:
+		game = game_for_entity(game)
+
 	if current_game != null and current_game != game:
+		# remove player before clearing current_game
+		remove_player()
 		current_game.cleanup()
 		# free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
 		# current_game.queue_free()
@@ -88,8 +94,33 @@ func register_current_game(game):
 
 ## restart game ##########################################################
 
+func launch_in_game_mode(mode_node, entity, opts: Dictionary={}) -> Node2D:
+	if not current_game:
+		ensure_current_game()
+	# TODO move to static Game.gd, pass known DinoGameEntitys/ids around
+	if not current_game.game_entity.is_game_mode():
+		Debug.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
+		return
+	Debug.pr("Launching game in mode:", entity.get_display_name(), current_game.game_entity.get_display_name())
+
+	# won't this clear the current game-mode?
+	var game = game_for_entity(entity)
+
+	Navi.resume() # remove if not needed
+
+	is_managed = true
+	is_in_game_mode = true
+
+	var scene = entity.get_first_level_scene()
+	var fl_node = scene.instantiate()
+	if fl_node.has_method("set_game_opts"):
+		fl_node.set_game_opts(opts)
+	elif len(opts) > 0:
+		Debug.warn("first_level node does not support 'set_game_opts', dropping passed opts", entity.get_display_name(), opts)
+
+	return fl_node
+
 func restart_game(opts=null):
-	remove_player()
 	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
 	is_managed = true

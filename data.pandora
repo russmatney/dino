@@ -899,7 +899,7 @@
 					},
 					"scene_path_prefix": {
 						"type": "string",
-						"value": "src/dino/roulette"
+						"value": "res://src/dino/roulette"
 					}
 				}
 			},
