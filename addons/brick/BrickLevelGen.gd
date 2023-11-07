@@ -120,8 +120,11 @@ static func combine_tilemap(rooms, label, opts):
 			is_scale_set = true
 
 		# collect rects
-		if add_borders:
-			var rect = tmap.get_used_rect()
+		if add_borders or len(border_depth) > 0:
+			# var rect = tmap.get_used_rect()
+			var rect = Rect2i()
+			var size = BrickRoom.size(r, {tile_size=tmap.tile_set.tile_size.x})
+			rect.size = tmap.local_to_map(size)
 			rect.position = tmap.local_to_map(r.position / tmap.scale + tmap.position)
 			room_rects.append(rect)
 
@@ -143,6 +146,7 @@ static func combine_tilemap(rooms, label, opts):
 			for c in border_coords:
 				var coord = BrickLevelGen.room_tilemap_coord_to_new_tilemap_coord(r, tmap, c, tilemap)
 				var overlaps = false
+				# more efficient way to do this?
 				for rect in room_rects:
 					if rect.has_point(coord):
 						overlaps = true
@@ -185,6 +189,22 @@ static func combine_tilemap(rooms, label, opts):
 			depth_cells.append_array(Reptile.cells_in_rect(r))
 
 		new_cell_coords.append_array(depth_cells)
+
+		# fill inner gaps
+		var inner_gap_coords = []
+		var all_rect_coords = Reptile.cells_in_rect(rect)
+		for c in all_rect_coords:
+			var overlaps = false
+			# more efficient way to do this?
+			for r in room_rects:
+				if r.has_point(c):
+					overlaps = true
+					break
+			if not overlaps:
+				inner_gap_coords.append(c)
+
+		new_cell_coords.append_array(inner_gap_coords)
+
 		tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 		tilemap.force_update()
 

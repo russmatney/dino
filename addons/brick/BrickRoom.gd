@@ -61,13 +61,13 @@ class BrickRoomOpts:
 ##########################################################################
 ## static ##################################################################
 
-static func width(room: BrickRoom, opts: BrickRoomOpts):
+static func width(room: BrickRoom, opts: Variant):
 	return len(room.def.shape[0]) * opts.tile_size
 
-static func height(room: BrickRoom, opts: BrickRoomOpts):
+static func height(room: BrickRoom, opts: Variant):
 	return len(room.def.shape) * opts.tile_size
 
-static func size(room: BrickRoom, opts: BrickRoomOpts):
+static func size(room: BrickRoom, opts: Variant):
 	return Vector2(width(room, opts), height(room, opts))
 
 static func last_column(room: BrickRoom):
