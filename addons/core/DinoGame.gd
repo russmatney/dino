@@ -4,19 +4,6 @@ extends Node
 
 var game_entity: DinoGameEntity
 
-func _enter_tree():
-	# find and assign the game entity
-	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
-	var ents = Pandora.get_all_entities(Pandora.get_category(ent._category_id))
-	for e in ents:
-		var s = e.get_singleton()
-		if s == null:
-			continue
-		if get_script().resource_path == s.resource_path:
-			# NOTE this breaks when entities share a singleton...?
-			game_entity = e
-			break
-
 func on_player_spawned(_player):
 	pass
 

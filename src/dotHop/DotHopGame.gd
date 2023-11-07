@@ -17,11 +17,12 @@ var dismiss_jumbo_signal
 ## ready #####################################################################
 
 func _ready():
-	if Engine.has_singleton("DotHop"):
-		var dh = Engine.get_singleton("DotHop")
-		dh.register_game(self)
-	else:
-		Debug.warn("No dothop singleton found, some feats may not work")
+	# TODO update theme handling to avoid the singleton
+	# if Engine.has_singleton("DotHop"):
+	# 	var dh = Engine.get_singleton("DotHop")
+	# 	dh.register_game(self)
+	# else:
+	# 	Debug.warn("No dothop singleton found, some feats may not work")
 
 	if puzzle_set != null:
 		game_def_path = puzzle_set.get_puzzle_script_path()

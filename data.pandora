@@ -48,6 +48,13 @@
 				"_ids_generation_class": "DemoLandTravelPointIds",
 				"_index": 0,
 				"_name": "DemoLandTravelPoint"
+			},
+			{
+				"_category_id": "17",
+				"_icon_color": "ffffff00",
+				"_id": "65",
+				"_index": 0,
+				"_name": "GameMode"
 			}
 		],
 		"_entities": [
@@ -247,10 +254,6 @@
 						"type": "resource",
 						"value": "res://src/superElevatorLevel/levels/SELLevel.tscn"
 					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/superElevatorLevel/SuperElevatorLevel.gd"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Super_Elevator_Level_icon_sheet.png"
@@ -283,10 +286,6 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/spike/level/SpikeLevel.tscn"
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/spike/Spike.gd"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -324,10 +323,6 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/shirt/level/ShirtLevel.tscn"
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/shirt/Shirt.gd"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -527,10 +522,6 @@
 						"type": "resource",
 						"value": "res://src/tower/level/TowerLevel.tscn"
 					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/tower/Tower.gd"
-					},
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/tower/menus/TowerMainMenu.tscn"
@@ -564,10 +555,6 @@
 						"type": "resource",
 						"value": "res://src/gunner/level/GunnerLevel.tscn"
 					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/gunner/Gunner.gd"
-					},
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/gunner/menus/GunnerPauseMenu.tscn"
@@ -596,10 +583,6 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/harvey/level/HarveyLevel.tscn"
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/harvey/Harvey.gd"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -637,10 +620,6 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/herd/levels/HerdLevel.tscn"
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/herd/Herd.gd"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -699,10 +678,6 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/pluggs/level/PluggsLevel.tscn"
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/pluggs/Pluggs.gd"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -769,10 +744,6 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/woods/level/WoodsLevel.tscn"
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/woods/Woods.gd"
 					},
 					"main_menu": {
 						"type": "resource",
@@ -893,6 +864,42 @@
 					"destination_zone": {
 						"type": "resource",
 						"value": "res://src/demoland/zones/Area08AllTheThings.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "65",
+				"_icon_color": "ffffff00",
+				"_icon_path": "res://addons/pandora/icons/Object.svg",
+				"_id": "64",
+				"_index": 1,
+				"_name": "Roulette",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Roulette"
+					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/dino/roulette/Roulette.tscn"
+					},
+					"games": {
+						"type": "array",
+						"value": {
+
+						}
+					},
+					"main_menu": {
+						"type": "resource",
+						"value": "res://src/dino/roulette/RouletteMainMenu.tscn"
+					},
+					"pause_menu": {
+						"type": "resource",
+						"value": "res://src/dino/roulette/RoulettePauseMenu.tscn"
+					},
+					"scene_path_prefix": {
+						"type": "string",
+						"value": "src/dino/roulette"
 					}
 				}
 			}
@@ -1030,12 +1037,28 @@
 				"_id": "63",
 				"_name": "first_level",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "65",
+				"_default_value": {
+
+				},
+				"_id": "66",
+				"_name": "games",
+				"_type": "array"
+			},
+			{
+				"_category_id": "65",
+				"_default_value": true,
+				"_id": "67",
+				"_name": "is_game_mode",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 63
+			"default": 67
 		}
 	}
 }

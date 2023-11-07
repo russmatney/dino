@@ -2,6 +2,7 @@
 class_name DinoGameEntityIds
 
 
+const ROULETTE = "64"
 const DOTHOP = "18"
 const SUPERELEVATORLEVEL = "19"
 const VOIDSPIKE = "20"

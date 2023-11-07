@@ -24,17 +24,13 @@ func all_game_entities():
 
 func game_for_entity(ent: DinoGameEntity):
 	var singleton = ent.get_singleton()
+	var game
 	if singleton == null:
-		Debug.warn("No singleton found for game_entity", ent)
-		return
-
-	var game = singleton.new()
-	# remove? this is also set in dinogame.enter_tree
+		# TODO combine DinoGame and DinoGameEntity (i.e. drop dinogame, move funcs to dinogameentity, adjust naming)
+		game = DinoGame.new()
+	else:
+		game = singleton.new() # should inherit from dino game
 	game.game_entity = ent
-	var game_name = singleton.resource_path.get_basename().get_file()
-	if Engine.has_singleton(game_name):
-		return Engine.get_singleton(game_name)
-	Engine.register_singleton(game_name, game)
 	return game
 
 func game_entity_for_scene(scene):
