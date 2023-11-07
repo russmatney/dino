@@ -28,8 +28,6 @@ func build_games_grid():
 		Debug.pr("game entities loaded, skipping grid rebuild", game_entities)
 		return
 	var new_game_entities = Game.all_game_entities()
-	Debug.pr("game entities", Game.all_game_entities())
-	Debug.pr("len entities", len(new_game_entities))
 
 	attempts += 1
 	if len(new_game_entities) > 0:
