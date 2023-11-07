@@ -37,6 +37,11 @@ func is_enabled() -> bool:
 func get_first_level_scene() -> PackedScene:
 	return get_resource("first_level")
 
+func is_game_mode() -> bool:
+	if (is_instance() and _instance_properties.has("is_game_mode")) or has_entity_property("is_game_mode"):
+		return get_bool("is_game_mode")
+	return false
+
 ## data ##########################################################
 
 func data():
@@ -51,6 +56,7 @@ func data():
 		scene_path_prefix=get_scene_path_prefix(),
 		player_scene=get_player_scene(),
 		first_level_scene=get_first_level_scene(),
+		is_game_mode=is_game_mode(),
 		}
 
 ## helpers ##########################################################
