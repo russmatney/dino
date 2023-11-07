@@ -55,6 +55,7 @@ position = Vector2(-21, 0)
 position = Vector2(-16, 0)
 
 [node name="VisionBox" type="Area2D" parent="."]
+visible = false
 position = Vector2(-180, -69)
 collision_layer = 0
 collision_mask = 2
