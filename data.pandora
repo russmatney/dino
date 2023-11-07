@@ -243,6 +243,10 @@
 						"type": "string",
 						"value": "Super Elevator Level"
 					},
+					"first_level": {
+						"type": "resource",
+						"value": "res://src/superElevatorLevel/levels/SELLevel.tscn"
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/superElevatorLevel/SuperElevatorLevel.gd"

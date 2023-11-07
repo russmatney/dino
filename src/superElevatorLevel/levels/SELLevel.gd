@@ -85,6 +85,3 @@ func spawn_next_wave(wave):
 
 func _on_level_complete():
 	Hood.notif("Level complete!")
-
-	var sel = Engine.get_singleton("SuperElevatorLevel")
-	sel.load_next_level()
