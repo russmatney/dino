@@ -213,6 +213,14 @@ static func cells_in_rect(rect: Rect2i):
 			cells.append(Vector2i(x,y))
 	return cells
 
+static func to_rect2i(opts: Dictionary):
+	var pos = opts.get("position")
+	var end = opts.get("end")
+	var r = Rect2i()
+	r.position = pos
+	r.end = end
+	return r
+
 ## tilemap borders #####################################################################
 
 static func to_area2D(tilemap=null, rect=null):

@@ -164,30 +164,25 @@ static func combine_tilemap(rooms, label, opts):
 		var depth_cells = []
 		var rect = tilemap.get_used_rect()
 
-		for side in border_depth:
-			var depth = border_depth[side]
-			var border_rect = Rect2i()
-			match side:
-				"up":
-					border_rect.position = Vector2i(rect.position.x, rect.position.y + depth * Vector2.UP.y)
-					border_rect.end = Vector2i(rect.position.x + rect.size.x - 1, rect.position.y)
-				"down":
-					border_rect.position = Vector2i(rect.position.x, rect.position.y + rect.size.y)
-					border_rect.end = Vector2i(rect.position.x + rect.size.x - 1, rect.position.y + rect.size.y + depth * Vector2.DOWN.y)
-				"left":
-					border_rect.position = Vector2i(rect.position.x + depth * Vector2.LEFT.x, rect.position.y)
-					border_rect.end = Vector2i(rect.position.x, rect.position.y + rect.size.y - 1)
-				"right":
-					border_rect.position = Vector2i(rect.position.x + rect.size.x, rect.position.y)
-					border_rect.end = Vector2i(rect.position.x + rect.size.x + depth * Vector2.RIGHT.x, rect.position.y + rect.size.y - 1)
+		var rect_top_left = rect.position
+		var rect_top_right = rect.position + rect.size.x * Vector2i.RIGHT
+		var rect_bottom_left = rect.position + rect.size * Vector2i.DOWN
+		var rect_bottom_right = rect.end
 
-			var b_cells = Reptile.cells_in_rect(border_rect)
-			Debug.pr("border cells for rect", border_rect, b_cells, side, depth)
+		var border_top_left = rect.position - Vector2i.ONE * max(border_depth.get("left", 0), border_depth.get("up", 0))
+		var border_top_right = rect_top_right + Vector2i.UP * border_depth.get("up", 0) + Vector2i.RIGHT * border_depth.get("right", 0)
+		var border_bottom_left = rect_bottom_left + Vector2i.DOWN * border_depth.get("down", 0) + Vector2i.LEFT * border_depth.get("left", 0)
+		var border_bottom_right = rect_bottom_right + Vector2i.ONE * max(border_depth.get("right", 0), border_depth.get("bottom", 0))
 
-			# TODO fill internal border gaps
-			# TODO reduce the iterations to one loop?
-			# TODO fill 'corners'
-			depth_cells.append_array(b_cells)
+		# TODO fill internal border gaps
+		# TODO reduce the iterations to one loop?
+		var top = Reptile.to_rect2i({position=Vector2i(rect_top_left.x, border_top_left.y), end=rect_top_right})
+		var bottom = Reptile.to_rect2i({position=rect_bottom_left, end=Vector2i(rect_bottom_right.x, border_bottom_right.y)})
+		var left = Reptile.to_rect2i({position=border_top_left, end=Vector2i(rect_bottom_left.x, border_bottom_left.y)})
+		var right = Reptile.to_rect2i({position=Vector2i(rect_top_right.x, border_top_right.y), end=border_bottom_right})
+
+		for r in [top, bottom, left, right]:
+			depth_cells.append_array(Reptile.cells_in_rect(r))
 
 		new_cell_coords.append_array(depth_cells)
 		tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
