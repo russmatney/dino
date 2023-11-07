@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bnj82g0f5doyw"]
+
+[ext_resource type="Script" path="res://src/superElevatorLevel/levels/SELLevel.gd" id="1_7i3oh"]
+[ext_resource type="Script" path="res://src/superElevatorLevel/levels/SELLevelGen.gd" id="2_ourn3"]
+[ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_p608g"]
+[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="4_wbmrw"]
+[ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="7_bhk1n"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="9_1txhr"]
+[ext_resource type="PackedScene" uid="uid://bn6lhbid1dt8i" path="res://src/dino/SpawnPoint.tscn" id="11_b6m00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am8s3"]
+size = Vector2(208, 208)
+
+[node name="SELLevel" type="Node2D"]
+script = ExtResource("1_7i3oh")
+
+[node name="SELLevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
+script = ExtResource("2_ourn3")
+_seed = 20433184
+room_count = 1
+room_defs_path = "res://src/superElevatorLevel/levels/rooms.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Room_0" type="Node2D" parent="Rooms"]
+script = ExtResource("3_p608g")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/Room_0"]
+visible = false
+offset_right = 208.0
+offset_bottom = 208.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/Room_0" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_0/RoomBox"]
+position = Vector2(104, 104)
+shape = SubResource("RectangleShape2D_am8s3")
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="CaveTiles16" parent="Tilemaps" instance=ExtResource("4_wbmrw")]
+layer_0/tile_data = PackedInt32Array(786445, 196608, 2, 720909, 196608, 2, 655373, 196608, 2, 589837, 196608, 2, 524301, 196608, 2, 458765, 196608, 2, 393229, 196608, 2, 327693, 196608, 2, 262157, 196608, 2, 196621, 196608, 2, 131085, 196608, 2, 65549, 196608, 2, 13, 196608, 2, -65523, 196608, 1, 851967, 65536, 2, 786431, 65536, 2, 720895, 65536, 2, 655359, 65536, 2, 589823, 65536, 2, 524287, 65536, 2, 458751, 65536, 2, 393215, 65536, 2, 327679, 65536, 2, 262143, 65536, 2, 196607, 65536, 2, 131071, 65536, 2, 65535, 65536, 2, -1, 65536, 1, 851980, 131072, 3, 851979, 131072, 3, 851978, 131072, 3, 851977, 131072, 3, 851976, 131072, 3, 851975, 131072, 3, 851974, 131072, 3, 851973, 131072, 3, 851972, 131072, 3, 851971, 131072, 3, 851970, 131072, 3, 851969, 131072, 3, 851968, 131072, 3, 917503, 65536, 3, -65524, 131072, 1, -65525, 131072, 1, -65526, 131072, 1, -65527, 131072, 1, -65528, 131072, 1, -65529, 131072, 1, -65530, 131072, 1, -65531, 131072, 1, -65532, 131072, 1, -65533, 131072, 1, -65534, 131072, 1, -65535, 131072, 1, -65536, 131072, 1, 851981, 196608, 3, 0, 393216, 2, 1, 131072, 3, 2, 131072, 3, 3, 131072, 3, 4, 131072, 3, 5, 131072, 3, 6, 131072, 3, 7, 131072, 3, 8, 131072, 3, 9, 131072, 3, 10, 131072, 3, 11, 131072, 3, 12, 458752, 2, 65536, 196608, 2, 65548, 65536, 2, 131072, 196608, 2, 131084, 65536, 2, 196608, 196608, 2, 196620, 65536, 2, 262144, 196608, 2, 262156, 65536, 2, 327680, 196608, 2, 327692, 65536, 2, 393216, 196608, 2, 393228, 65536, 2, 458752, 196608, 2, 458764, 65536, 2, 524288, 196608, 2, 524300, 65536, 2, 589824, 196608, 2, 589836, 65536, 2, 655360, 196608, 2, 655372, 65536, 2, 720896, 196608, 2, 720908, 65536, 2, 786432, 393216, 3, 786433, 131072, 1, 786434, 131072, 1, 786435, 131072, 1, 786436, 131072, 1, 786437, 131072, 1, 786438, 131072, 1, 786439, 131072, 1, 786440, 131072, 1, 786441, 131072, 1, 786442, 131072, 1, 786443, 131072, 1, 786444, 458752, 3)
+
+[node name="TDCaveFloorTiles16" parent="Tilemaps" instance=ExtResource("7_bhk1n")]
+layer_0/tile_data = PackedInt32Array(65537, 65536, 1, 65538, 131072, 1, 65539, 131072, 1, 65540, 131072, 1, 65541, 131072, 1, 65542, 131072, 1, 65543, 131072, 1, 65544, 131072, 1, 65545, 131072, 1, 65546, 131072, 1, 65547, 196608, 1, 131073, 65536, 2, 131074, 131072, 2, 131075, 131072, 2, 131076, 131072, 2, 131077, 131072, 2, 131078, 131072, 2, 131079, 131072, 2, 131080, 131072, 2, 131081, 131072, 2, 131082, 131072, 2, 131083, 196608, 2, 196609, 65536, 2, 196610, 131072, 2, 196611, 131072, 2, 196612, 131072, 2, 196613, 131072, 2, 196614, 131072, 2, 196615, 131072, 2, 196616, 131072, 2, 196617, 131072, 2, 196618, 131072, 2, 196619, 196608, 2, 262145, 65536, 2, 262146, 131072, 2, 262147, 131072, 2, 262148, 131072, 2, 262149, 131072, 2, 262150, 131072, 2, 262151, 131072, 2, 262152, 131072, 2, 262153, 131072, 2, 262154, 131072, 2, 262155, 196608, 2, 327681, 65536, 2, 327682, 131072, 2, 327683, 131072, 2, 327684, 131072, 2, 327685, 131072, 2, 327686, 131072, 2, 327687, 131072, 2, 327688, 131072, 2, 327689, 131072, 2, 327690, 131072, 2, 327691, 196608, 2, 393217, 65536, 2, 393218, 131072, 2, 393219, 131072, 2, 393220, 131072, 2, 393221, 131072, 2, 393222, 131072, 2, 393223, 131072, 2, 393224, 131072, 2, 393225, 131072, 2, 393226, 131072, 2, 393227, 196608, 2, 458753, 65536, 2, 458754, 131072, 2, 458755, 131072, 2, 458756, 131072, 2, 458757, 131072, 2, 458758, 131072, 2, 458759, 131072, 2, 458760, 131072, 2, 458761, 131072, 2, 458762, 131072, 2, 458763, 196608, 2, 524289, 65536, 2, 524290, 131072, 2, 524291, 131072, 2, 524292, 131072, 2, 524293, 131072, 2, 524294, 131072, 2, 524295, 131072, 2, 524296, 131072, 2, 524297, 131072, 2, 524298, 131072, 2, 524299, 196608, 2, 589825, 65536, 2, 589826, 131072, 2, 589827, 131072, 2, 589828, 131072, 2, 589829, 131072, 2, 589830, 131072, 2, 589831, 131072, 2, 589832, 131072, 2, 589833, 131072, 2, 589834, 131072, 2, 589835, 196608, 2, 655361, 65536, 2, 655362, 131072, 2, 655363, 131072, 2, 655364, 131072, 2, 655365, 131072, 2, 655366, 131072, 2, 655367, 131072, 2, 655368, 131072, 2, 655369, 131072, 2, 655370, 131072, 2, 655371, 196608, 2, 720897, 65536, 3, 720898, 131072, 3, 720899, 131072, 3, 720900, 131072, 3, 720901, 131072, 3, 720902, 131072, 3, 720903, 131072, 3, 720904, 131072, 3, 720905, 131072, 3, 720906, 131072, 3, 720907, 196608, 3)
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="PlayerSpawnPoint" parent="Entities" instance=ExtResource("9_1txhr")]
+position = Vector2(96, 96)
+
+[node name="SpawnPoint" parent="Entities" instance=ExtResource("11_b6m00")]
+position = Vector2(48, 48)
+
+[node name="@Marker2D@36605" parent="Entities" instance=ExtResource("11_b6m00")]
+position = Vector2(144, 48)
+
+[node name="@Marker2D@36606" parent="Entities" instance=ExtResource("11_b6m00")]
+position = Vector2(48, 144)
+
+[node name="@Marker2D@36607" parent="Entities" instance=ExtResource("11_b6m00")]
+position = Vector2(144, 144)

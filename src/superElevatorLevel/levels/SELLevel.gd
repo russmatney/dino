@@ -22,7 +22,11 @@ func _ready():
 
 	if len(enemies) == 0:
 		Debug.pr("No initial enemies, starting first wave")
-		spawn_next_wave(_waves.pop_front())
+		var wave = _waves.pop_front()
+		if wave:
+			spawn_next_wave(wave)
+		else:
+			Debug.warn("no wave found in SELLevel _waves, cannot spawn")
 
 
 ### enemies ####################################################
@@ -47,7 +51,7 @@ signal wave_complete
 var goon_scene = preload("res://src/superElevatorLevel/enemies/Goon.tscn")
 var boss_scene = preload("res://src/superElevatorLevel/enemies/Boss.tscn")
 
-var _waves = []
+var _waves = [{goon_count=2}, {boss_count=1}]
 
 func _on_wave_complete():
 	if len(_waves) == 0:

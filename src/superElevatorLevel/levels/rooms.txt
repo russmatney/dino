@@ -1,0 +1,50 @@
+title Super Elevator Level Rooms
+
+======================
+LEGEND
+======================
+
+. = Floor
+p = Player and Floor
+w = Wall
+e = Enemy and Floor
+
+======================
+ROOMS
+======================
+
+name Basic
+
+wwwwwwwwwwwww
+w...........w
+w..e.....e..w
+w.....p.....w
+w..e.....e..w
+w...........w
+wwwwwwwwwwwww
+
+name Wide
+
+wwwwwwwwwwwwwwwwwwwwww
+w....................w
+w..e..............e..w
+w..........p.........w
+w..e..............e..w
+w....................w
+wwwwwwwwwwwwwwwwwwwwww
+
+name Tall
+
+wwwwwwwwwwwww
+w...........w
+w...........w
+w..e.....e..w
+w...........w
+w...........w
+w.....p.....w
+w...........w
+w...........w
+w..e.....e..w
+w...........w
+w...........w
+wwwwwwwwwwwww
