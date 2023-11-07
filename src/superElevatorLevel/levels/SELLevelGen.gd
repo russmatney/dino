@@ -17,7 +17,8 @@ func get_room_opts(_opts):
 			label_to_tilemap={
 				"Wall": {
 				scene=load("res://addons/reptile/tilemaps/CaveTiles16.tscn"),
-				add_borders=true
+				add_borders=true,
+				border_depth=10,
 				},
 				"Floor":{
 					scene=load("res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn")

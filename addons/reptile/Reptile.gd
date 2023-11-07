@@ -206,6 +206,13 @@ static func all_tilemap_border_coords(tilemap):
 		acc.append_array(xs)
 		return acc, [])
 
+static func cells_in_rect(rect: Rect2i):
+	var cells = []
+	for x in range(rect.position.x, rect.position.x + rect.size.x):
+		for y in range(rect.position.y, rect.position.y + rect.size.y):
+			cells.append(Vector2i(x,y))
+	return cells
+
 ## tilemap borders #####################################################################
 
 static func to_area2D(tilemap=null, rect=null):

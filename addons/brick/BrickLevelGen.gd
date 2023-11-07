@@ -94,6 +94,10 @@ static func room_tilemap_coord_to_new_tilemap_coord(room, room_tilemap, coord, t
 
 static func combine_tilemap(rooms, label, opts):
 	var add_borders = opts.get("add_borders")
+	var border_depth = opts.get("border_depth", {})
+	if border_depth is int and border_depth > 0:
+		border_depth = {"up"=border_depth, "down"=border_depth, "left"=border_depth, "right"=border_depth}
+		add_borders = true
 	var scene = opts.get("scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
 	var tilemap = scene.instantiate()
 
@@ -155,6 +159,39 @@ static func combine_tilemap(rooms, label, opts):
 
 	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 	tilemap.force_update()
+
+	if add_borders:
+		var depth_cells = []
+		var rect = tilemap.get_used_rect()
+
+		for side in border_depth:
+			var depth = border_depth[side]
+			var border_rect = Rect2i()
+			match side:
+				"up":
+					border_rect.position = Vector2i(rect.position.x, rect.position.y + depth * Vector2.UP.y)
+					border_rect.end = Vector2i(rect.position.x + rect.size.x - 1, rect.position.y)
+				"down":
+					border_rect.position = Vector2i(rect.position.x, rect.position.y + rect.size.y)
+					border_rect.end = Vector2i(rect.position.x + rect.size.x - 1, rect.position.y + rect.size.y + depth * Vector2.DOWN.y)
+				"left":
+					border_rect.position = Vector2i(rect.position.x + depth * Vector2.LEFT.x, rect.position.y)
+					border_rect.end = Vector2i(rect.position.x, rect.position.y + rect.size.y - 1)
+				"right":
+					border_rect.position = Vector2i(rect.position.x + rect.size.x, rect.position.y)
+					border_rect.end = Vector2i(rect.position.x + rect.size.x + depth * Vector2.RIGHT.x, rect.position.y + rect.size.y - 1)
+
+			var b_cells = Reptile.cells_in_rect(border_rect)
+			Debug.pr("border cells for rect", border_rect, b_cells, side, depth)
+
+			# TODO fill internal border gaps
+			# TODO reduce the iterations to one loop?
+			# TODO fill 'corners'
+			depth_cells.append_array(b_cells)
+
+		new_cell_coords.append_array(depth_cells)
+		tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
+		tilemap.force_update()
 
 	if "setup" in opts:
 		opts.setup.call(tilemap)
