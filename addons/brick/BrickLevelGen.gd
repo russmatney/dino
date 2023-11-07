@@ -93,11 +93,11 @@ static func room_tilemap_coord_to_new_tilemap_coord(room, room_tilemap, coord, t
 	return tilemap.local_to_map(new_pos)
 
 static func combine_tilemap(rooms, label, opts):
+	# add_borders and border_depth are slightly different use-cases and not necessarily compatible :/
 	var add_borders = opts.get("add_borders")
 	var border_depth = opts.get("border_depth", {})
 	if border_depth is int and border_depth > 0:
-		border_depth = {"up"=border_depth, "down"=border_depth, "left"=border_depth, "right"=border_depth}
-		add_borders = true
+		border_depth = {up=border_depth, down=border_depth, left=border_depth, right=border_depth}
 	var scene = opts.get("scene", load("res://addons/reptile/tilemaps/MetalTiles8.tscn"))
 	var tilemap = scene.instantiate()
 
@@ -160,7 +160,7 @@ static func combine_tilemap(rooms, label, opts):
 	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
 	tilemap.force_update()
 
-	if add_borders:
+	if len(border_depth) > 0:
 		var depth_cells = []
 		var rect = tilemap.get_used_rect()
 
@@ -169,10 +169,10 @@ static func combine_tilemap(rooms, label, opts):
 		var rect_bottom_left = rect.position + rect.size * Vector2i.DOWN
 		var rect_bottom_right = rect.end
 
-		var border_top_left = rect.position - Vector2i.ONE * max(border_depth.get("left", 0), border_depth.get("up", 0))
+		var border_top_left = rect.position + Vector2i.UP * border_depth.get("up", 0) + Vector2i.LEFT * border_depth.get("left", 0)
 		var border_top_right = rect_top_right + Vector2i.UP * border_depth.get("up", 0) + Vector2i.RIGHT * border_depth.get("right", 0)
 		var border_bottom_left = rect_bottom_left + Vector2i.DOWN * border_depth.get("down", 0) + Vector2i.LEFT * border_depth.get("left", 0)
-		var border_bottom_right = rect_bottom_right + Vector2i.ONE * max(border_depth.get("right", 0), border_depth.get("bottom", 0))
+		var border_bottom_right = rect_bottom_right + Vector2i.DOWN * border_depth.get("down", 0) + Vector2i.RIGHT * border_depth.get("right", 0)
 
 		# TODO fill internal border gaps
 		# TODO reduce the iterations to one loop?

@@ -30,6 +30,8 @@ func get_room_opts(_opts):
 		opt.merge({
 			label_to_tilemap={"Tile": {
 				scene=load("res://addons/reptile/tilemaps/WoodsFloorTiles16.tscn"),
+				# add_borders=true,
+				border_depth={down=30, left=20, right=20},
 				}},
 			label_to_entity={
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
