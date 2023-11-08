@@ -1,8 +1,18 @@
 extends Node2D
 class_name SELLevel
 
+### vars ####################################################
+
 var enemies = []
 var enemy_spawn_positions = []
+
+signal level_complete
+signal wave_complete
+
+var goon_scene = preload("res://src/superElevatorLevel/enemies/Goon.tscn")
+var boss_scene = preload("res://src/superElevatorLevel/enemies/Boss.tscn")
+
+var _waves = [{goon_count=2}, {boss_count=1}]
 
 ### ready ####################################################
 
@@ -44,14 +54,6 @@ func _on_enemy_dead(e):
 		wave_complete.emit()
 
 ### waves ####################################################
-
-signal level_complete
-signal wave_complete
-
-var goon_scene = preload("res://src/superElevatorLevel/enemies/Goon.tscn")
-var boss_scene = preload("res://src/superElevatorLevel/enemies/Boss.tscn")
-
-var _waves = [{goon_count=2}, {boss_count=1}]
 
 func _on_wave_complete():
 	if len(_waves) == 0:

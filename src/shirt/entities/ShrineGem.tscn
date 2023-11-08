@@ -72,7 +72,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vilv7"]
 size = Vector2(32, 32)
 
-[node name="ShrineGem" type="Node2D"]
+[node name="ShrineGem" type="Node2D" groups=["gems"]]
 script = ExtResource("1_12h8n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

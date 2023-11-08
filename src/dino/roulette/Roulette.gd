@@ -29,6 +29,7 @@ var game_node: Node2D
 ## ready ##################################################3
 
 func _ready():
+	_seed = randi()
 	Debug.pr("Roulette ready with seed!", _seed)
 	seed(_seed)
 

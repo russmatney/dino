@@ -1,8 +1,12 @@
 extends Node2D
 
-## ready ###################################################
+## vars ###################################################
 
 @onready var level_gen = $LevelGen
+
+signal level_complete
+
+## ready ###################################################
 
 func _ready():
 	Game.maybe_spawn_player()
@@ -10,6 +14,8 @@ func _ready():
 	level_gen.new_data_generated.connect(setup)
 
 	setup()
+
+## setup ###################################################
 
 func setup(_data=null):
 	connect_to_end_room()
@@ -26,20 +32,22 @@ func connect_to_end_room():
 
 func _on_end_room_entered(body: Node2D):
 	if body.is_in_group("player"):
-		Debug.pr("level complete")
+		level_complete.emit()
 
-		await get_tree().create_timer(0.3).timeout
-		# clean up nodes/player
-		Game.player.queue_free()
+	# 	Debug.pr("level complete")
 
-		# pick new seed
-		level_gen._seed = randi()
-		Debug.pr("new seed: ", level_gen._seed)
+	# 	await get_tree().create_timer(0.3).timeout
+	# 	# clean up nodes/player
+	# 	Game.player.queue_free()
 
-		await get_tree().create_timer(0.3).timeout
-		# regen level
-		level_gen.generate()
+	# 	# pick new seed
+	# 	level_gen._seed = randi()
+	# 	Debug.pr("new seed: ", level_gen._seed)
 
-		await get_tree().create_timer(0.4).timeout
-		# respawn player
-		Game.maybe_spawn_player.call_deferred()
+	# 	await get_tree().create_timer(0.3).timeout
+	# 	# regen level
+	# 	level_gen.generate()
+
+	# 	await get_tree().create_timer(0.4).timeout
+	# 	# respawn player
+	# 	Game.maybe_spawn_player.call_deferred()

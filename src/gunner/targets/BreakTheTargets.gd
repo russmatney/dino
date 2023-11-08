@@ -17,6 +17,8 @@ func setup():
 	Hotel.register(self)
 
 	targets = []
+	if not is_inside_tree():
+		return
 	for t in get_tree().get_nodes_in_group("target"):
 		if not is_instance_valid(t):
 			continue
@@ -44,7 +46,6 @@ func _on_respawn(_node):
 	setup()
 
 func _on_target_destroyed(t):
-	Debug.pr("on target destroyed", t, destroyed_count)
 	# needs to happen before t is queue_freed
 	targets.erase(t)
 	target_change({"was_destroy": true})
@@ -75,5 +76,6 @@ func _on_slowmo_stopped(label):
 		if player:
 			player.level_up()
 
-		await get_tree().create_timer(2.0).timeout
-		targets_cleared.emit()
+		if is_inside_tree():
+			await get_tree().create_timer(2.0).timeout
+			targets_cleared.emit()

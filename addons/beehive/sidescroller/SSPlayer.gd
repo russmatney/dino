@@ -119,7 +119,6 @@ func _unhandled_input(event):
 
 	# generic weapon
 	if has_weapon() and Trolley.is_attack(event):
-		Debug.prn("using weapon", weapons)
 		use_weapon()
 		# should strafe?
 	elif has_weapon() and Trolley.is_attack_released(event):
