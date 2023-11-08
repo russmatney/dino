@@ -33,6 +33,8 @@ func ensure_hud(hud_scene=null):
 		if expected_path == hud.scene_file_path:
 			# do nothing if correct hud already loaded
 			return
+		else:
+			hud.queue_free()
 
 	if not hud_scene:
 		if fallback_hud_scene is String:
