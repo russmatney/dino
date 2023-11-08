@@ -15,7 +15,7 @@ func _on_entry_updated(entry):
 		_on_enemy_update(entry)
 
 func _on_player_update(player):
-	Debug.warn("player update not impled", player)
+	Debug.warn("player update not impled")
 
 func _on_enemy_update(enemy):
-	Debug.warn("enemy update not impled", enemy)
+	Debug.warn("enemy update not impled")
