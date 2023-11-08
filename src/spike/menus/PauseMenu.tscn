@@ -19,6 +19,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
 layer = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

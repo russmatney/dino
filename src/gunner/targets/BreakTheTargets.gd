@@ -1,5 +1,6 @@
-@tool
 extends Node2D
+
+## vars ##############################################################################
 
 var targets = []
 var player
@@ -7,8 +8,7 @@ var destroyed_count = 0
 
 signal targets_cleared
 
-###############################################################################
-# ready
+## ready ##############################################################################
 
 func _ready():
 	setup()
@@ -27,10 +27,6 @@ func setup():
 			Util._connect(t.destroyed, _on_target_destroyed)
 			Util._connect(t.tree_exiting, _on_target_exiting.bind(t))
 
-	if not Engine.is_editor_hint():
-		Respawner.respawn.connect(_on_respawn)
-		Cam.slowmo_stopped.connect(_on_slowmo_stopped)
-
 	target_change()
 
 func check_out(data):
@@ -39,11 +35,7 @@ func check_out(data):
 func hotel_data():
 	return {destroyed_count=destroyed_count, remaining_count=len(targets)}
 
-###############################################################################
-# signals
-
-func _on_respawn(_node):
-	setup()
+## signals ##############################################################################
 
 func _on_target_destroyed(t):
 	# needs to happen before t is queue_freed
@@ -56,26 +48,15 @@ func _on_target_destroyed(t):
 func _on_target_exiting(t):
 	targets.erase(t)
 
-###############################################################################
-# update
-
+## update ##############################################################################
 
 func target_change(opts = {}):
 	if targets.size() == 1 and opts.get("was_destroy"):
 		if player:
 			player.notif("ONE TARGET REMAINING")
-		Cam.freezeframe("one-target-left", 0.3, 0.5)
+		Cam.freezeframe("one-target-left", 0.3, 0.3)
 	elif targets.is_empty() and opts.get("was_destroy"):
 		if player:
 			player.notif("TARGETS CLEARED")
-		Cam.freezeframe("targets-cleared", 0.01, 3)
-
-
-func _on_slowmo_stopped(label):
-	if label == "targets-cleared":
-		if player:
-			player.level_up()
-
-		if is_inside_tree():
-			await get_tree().create_timer(2.0).timeout
-			targets_cleared.emit()
+		Cam.freezeframe("targets-cleared", 0.1, 0.3)
+		targets_cleared.emit()

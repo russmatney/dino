@@ -8,6 +8,8 @@
 bg_color = Color(0.180392, 0.180392, 0.180392, 0.227451)
 
 [node name="DotHopPauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
