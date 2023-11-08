@@ -60,7 +60,6 @@ func _on_target_exiting(t):
 
 
 func target_change(opts = {}):
-	Debug.pr("targets remaining", targets.size(), targets)
 	if targets.size() == 1 and opts.get("was_destroy"):
 		if player:
 			player.notif("ONE TARGET REMAINING")

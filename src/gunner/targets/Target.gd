@@ -31,7 +31,6 @@ func kill():
 	DJZ.play(DJZ.S.target_kill)
 	anim.play("pop")
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
-	Debug.pr("emitting signal 'destroyed'")
 	destroyed.emit(self)
 
 	var lbl = destroyed_label_scene.instantiate()

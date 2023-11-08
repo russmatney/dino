@@ -4,16 +4,18 @@ extends Node2D
 
 @onready var level_gen = $LevelGen
 
+signal level_complete
+
 ## ready ###################################################
 
 func _ready():
 	Game.maybe_spawn_player()
-	level_gen.new_data_generated.connect(setup)
+	level_gen.nodes_transferred.connect(setup)
 	setup()
 
 ## setup ###################################################
 
-func setup(_opts=null):
+func setup():
 	connect_to_rooms()
 
 func connect_to_rooms():
@@ -28,10 +30,12 @@ func connect_to_rooms():
 func on_arcade_machine_plugged():
 	Debug.pr("arcade machine plugged!")
 
-	Hood.notif("Rebooting world....")
-	await get_tree().create_timer(0.3).timeout
-	level_gen._seed = randi() # may want this to happen at a global level at some point
-	Hood.notif("New seed....", level_gen._seed)
-	level_gen.generate()
-	await get_tree().create_timer(0.3).timeout
-	Game.respawn_player()
+	level_complete.emit()
+
+	# Hood.notif("Rebooting world....")
+	# await get_tree().create_timer(0.3).timeout
+	# level_gen._seed = randi() # may want this to happen at a global level at some point
+	# Hood.notif("New seed....", level_gen._seed)
+	# level_gen.generate()
+	# await get_tree().create_timer(0.3).timeout
+	# Game.respawn_player()
