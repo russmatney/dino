@@ -18,7 +18,7 @@ size = Vector2(768, 224)
 script = ExtResource("1_3of0r")
 regen_on_ready = true
 
-[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
+[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
 script = ExtResource("2_s4yna")
 _seed = 2846387537
 tile_size = 32

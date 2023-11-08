@@ -253,6 +253,11 @@ signal nodes_transferred()
 			ensure_containers()
 			clear_containers()
 
+## enter_tree ######################################################################
+
+func _enter_tree():
+	add_to_group("brick_generators", true)
+
 ## generate ######################################################################
 
 func generate(opts={}):

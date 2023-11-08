@@ -10,4 +10,4 @@ func _ready():
 
 
 func refresh():
-	regen_menu.setup()
+	regen_menu.refresh()
