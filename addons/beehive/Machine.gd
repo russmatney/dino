@@ -13,7 +13,7 @@ var is_started = false
 
 # should only be called when the owner is ready
 func start(opts={}):
-	Debug.prn("[Start] actor: ", owner, opts)
+	# Debug.prn("[Start] actor: ", owner, opts)
 	transitioning = true
 
 	if initial_state:

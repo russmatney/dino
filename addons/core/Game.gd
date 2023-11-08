@@ -212,6 +212,11 @@ func remove_player():
 
 var spawning = false
 func respawn_player(opts={}):
+	if spawning:
+		Debug.pr("player already spawning, skipping respawn_player")
+		return
+
+	Debug.pr("Spawning new player")
 	if opts.get("player_scene") == null:
 		if current_game == null:
 			Debug.warn("No current_game, can't spawn (or respawn) player")
@@ -292,10 +297,14 @@ func maybe_spawn_player(opts={}):
 			Debug.pr("Player is null, spawning a new one", opts)
 			respawn_player(opts)
 	elif player != null:
-		Debug.pr("player not null, ignoring maybe_spawn_player")
+		pass
+		# Debug.pr("player not null, ignoring maybe_spawn_player")
 	elif spawning:
-		Debug.pr("player spawning, ignoring maybe_spawn_player")
+		pass
+		# Debug.pr("player spawning, ignoring maybe_spawn_player")
 	elif is_managed:
-		Debug.pr("game is managed, ignoring maybe_spawn_player")
+		pass
+		# Debug.pr("game is managed, ignoring maybe_spawn_player")
 	elif Engine.is_editor_hint():
-		Debug.pr("in editor, ignoring maybe_spawn_player")
+		pass
+		# Debug.pr("in editor, ignoring maybe_spawn_player")

@@ -5,15 +5,21 @@ extends Node2D
 @onready var level_gen = $LevelGen
 
 signal level_complete
+signal regeneration_complete
 
 ## ready ###################################################
 
 func _ready():
 	Game.maybe_spawn_player()
-
-	level_gen.new_data_generated.connect(setup)
-
+	level_gen.nodes_transferred.connect(func():
+		setup()
+		regeneration_complete.emit())
 	setup()
+
+## regenerate ###################################################3
+
+func regenerate(opts=null):
+	level_gen.generate(opts)
 
 ## setup ###################################################
 
@@ -21,7 +27,6 @@ func setup(_data=null):
 	connect_to_end_room()
 
 func connect_to_end_room():
-	# TODO should fire when rooms are added
 	var rooms = $Rooms.get_children()
 	var end_room = rooms[len(rooms) - 1]
 	for ch in end_room.get_children():

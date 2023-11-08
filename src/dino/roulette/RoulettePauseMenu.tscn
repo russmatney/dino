@@ -63,8 +63,3 @@ size_flags_horizontal = 3
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-text = "some regular button"

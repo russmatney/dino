@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpvhxndrptbgv"]
+[gd_scene load_steps=4 format=3 uid="uid://bpvhxndrptbgv"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mrc12"]
 [ext_resource type="Script" path="res://src/dino/arcade/ArcadePauseMenuButtonList.gd" id="2_b810k"]
+[ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/brick/BrickRegenMenu.tscn" id="2_cuxsf"]
 
 [node name="ArcadePauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -20,7 +21,6 @@ layout_mode = 2
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_mrc12")]
 layout_mode = 2
@@ -29,17 +29,35 @@ text = "[center]Dino Arcade!"
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-alignment = 1
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_cuxsf")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ArcadePauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+alignment = 1
 script = ExtResource("2_b810k")
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_vertical = 3
