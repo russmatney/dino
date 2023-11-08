@@ -122,7 +122,7 @@ var max_array_size = 20
 # refactor into opts dict
 # refactor into pluggable pretty printer
 func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
-	if msg is Node and not is_instance_valid(msg):
+	if not is_instance_valid(msg) and typeof(msg) == TYPE_OBJECT:
 		return str(msg)
 	if msg is Array or msg is PackedStringArray:
 		if len(msg) > max_array_size:
