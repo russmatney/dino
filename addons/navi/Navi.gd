@@ -223,7 +223,6 @@ func pause():
 
 
 func resume():
-	Debug.prn("unpausing")
 	get_tree().paused = false
 	hide_menus()
 	DJ.pause_menu_song()

@@ -23,5 +23,3 @@ animation = &"target"
 
 [node name="CamPOI" parent="." instance=ExtResource("4_rmqk6")]
 importance = 0.36
-
-[connection signal="body_entered" from="." to="." method="_on_Target_body_entered"]

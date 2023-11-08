@@ -94,31 +94,22 @@ func register_current_game(game):
 
 ## restart game ##########################################################
 
-func launch_in_game_mode(mode_node, entity, opts: Dictionary={}) -> Node2D:
+func launch_in_game_mode(mode_node, entity, opts: Dictionary={}):
+	# do we really need all this?
 	if not current_game:
 		ensure_current_game()
-	# TODO move to static Game.gd, pass known DinoGameEntitys/ids around
 	if not current_game.game_entity.is_game_mode():
 		Debug.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
 		return
-	Debug.pr("Launching game in mode:", entity.get_display_name(), current_game.game_entity.get_display_name())
 
-	# won't this clear the current game-mode?
-	var game = game_for_entity(entity)
+	Debug.pr("Launching game", entity.get_display_name(), "in mode", current_game.game_entity.get_display_name())
 
-	Navi.resume() # remove if not needed
+	# var game = game_for_entity(entity)
+	# Navi.resume() # remove if not needed
 
 	is_managed = true
 	is_in_game_mode = true
 
-	var scene = entity.get_first_level_scene()
-	var fl_node = scene.instantiate()
-	if fl_node.has_method("set_game_opts"):
-		fl_node.set_game_opts(opts)
-	elif len(opts) > 0:
-		Debug.warn("first_level node does not support 'set_game_opts', dropping passed opts", entity.get_display_name(), opts)
-
-	return fl_node
 
 func restart_game(opts=null):
 	Navi.resume()  # ensure unpaused
@@ -300,3 +291,11 @@ func maybe_spawn_player(opts={}):
 		if player == null:
 			Debug.pr("Player is null, spawning a new one", opts)
 			respawn_player(opts)
+	elif player != null:
+		Debug.pr("player not null, ignoring maybe_spawn_player")
+	elif spawning:
+		Debug.pr("player spawning, ignoring maybe_spawn_player")
+	elif is_managed:
+		Debug.pr("game is managed, ignoring maybe_spawn_player")
+	elif Engine.is_editor_hint():
+		Debug.pr("in editor, ignoring maybe_spawn_player")

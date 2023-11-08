@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://coo2aee7h0hok"]
 
 [ext_resource type="PackedScene" uid="uid://c5v7ka6hfytnk" path="res://src/gunner/player/Player.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_cn0yo"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_cn0yo"]
 [ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="6"]
 
@@ -29,8 +29,6 @@ position = Vector2(750, 341)
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(440, 339)
-has_sword = Vector2(0, 0)
-has_flashlight = null
 has_climb = false
 has_ascend = false
 has_descend = false

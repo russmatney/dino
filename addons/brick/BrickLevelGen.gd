@@ -222,6 +222,7 @@ static func combine_tilemap(rooms, label, opts):
 ## signals ######################################################################
 
 signal new_data_generated(data: Dictionary)
+signal nodes_transferred()
 
 ## vars/triggers ######################################################################
 
@@ -246,74 +247,89 @@ signal new_data_generated(data: Dictionary)
 @export var rooms_node: Node2D
 @export var show_color_rect: bool
 
+@export var _clear_containers: bool:
+	set(v):
+		if v:
+			ensure_containers()
+			clear_containers()
+
 ## generate ######################################################################
 
-func generate():
-	var opts = {
+func generate(opts={}):
+	opts.merge({ # does NOT overwrite unless `true` passed as flag (we should prefer passed opts)
 		seed=_seed,
 		tile_size=tile_size,
 		room_count=room_count,
 		room_defs_path=room_defs_path,
 		show_color_rect=show_color_rect,
-		}
+		})
 	if self.has_method("get_room_opts"):
 		opts["get_room_opts"] = self.get_room_opts
 
 	var data = BrickLevelGen.generate_level(opts)
+	new_data_generated.emit(data)
 
 	(func():
-		# created in this order to get entities on top (last)
-		if not rooms_node:
-			rooms_node = Node2D.new()
-			rooms_node.name = "Rooms"
-			get_parent().add_child(rooms_node)
-			rooms_node.set_owner(get_owner())
-		if not tilemaps_node:
-			tilemaps_node = Node2D.new()
-			tilemaps_node.name = "Tilemaps"
-			get_parent().add_child(tilemaps_node)
-			tilemaps_node.set_owner(get_owner())
-		if not entities_node:
-			entities_node = Node2D.new()
-			entities_node.name = "Entities"
-			get_parent().add_child(entities_node)
-			entities_node.set_owner(get_owner())
-
-		entities_node.get_children().map(func(c): c.queue_free())
-		for node in data.entities:
-			var had_parent
-			if node.get_parent():
-				had_parent = true
-				node.reparent(entities_node, true)
-			else:
-				# entities from tilemaps have no parent yet
-				entities_node.add_child(node)
-			node.set_owner(self.get_owner())
-			if not had_parent:
-				# maybe want an explicit opt-in to this - had_parent might not be the right flag
-				for ch in node.get_children():
-					ch.set_owner(self.get_owner())
-					for cch in ch.get_children():
-						cch.set_owner(self.get_owner())
-
-		if tilemaps_node:
-			tilemaps_node.get_children().map(func(c): c.queue_free())
-			for node in data.tilemaps:
-				tilemaps_node.add_child(node)
-				node.set_owner(self.get_owner())
-
-		if rooms_node:
-			rooms_node.get_children().map(func(c): c.queue_free())
-			for node in data.rooms:
-				rooms_node.add_child(node)
-				node.set_owner(self.get_owner())
-				for ch in node.get_children():
-					ch.set_owner(self.get_owner())
-					# how deep must we go?
-					for cch in ch.get_children():
-						cch.set_owner(self.get_owner())
-
-		Debug.pr("new data gend with seed", [data.seed], data.keys())
-		new_data_generated.emit(data)
-
+		ensure_containers()
+		clear_containers()
+		transfer_nodes(data)
+		Debug.pr("GENERATE: new data generated with seed", [data.seed], data.keys())
 		).call_deferred()
+
+func ensure_containers():
+	if not rooms_node:
+		rooms_node = Node2D.new()
+		rooms_node.name = "Rooms"
+		get_parent().add_child(rooms_node)
+		rooms_node.set_owner(get_owner())
+	if not tilemaps_node:
+		tilemaps_node = Node2D.new()
+		tilemaps_node.name = "Tilemaps"
+		get_parent().add_child(tilemaps_node)
+		tilemaps_node.set_owner(get_owner())
+	if not entities_node:
+		entities_node = Node2D.new()
+		entities_node.name = "Entities"
+		get_parent().add_child(entities_node)
+		entities_node.set_owner(get_owner())
+
+func clear_containers():
+	entities_node.get_children().map(func(c): c.queue_free())
+	if tilemaps_node:
+		tilemaps_node.get_children().map(func(c): c.queue_free())
+	if rooms_node:
+		rooms_node.get_children().map(func(c): c.queue_free())
+
+func transfer_nodes(data):
+	for node in data.entities:
+		var had_parent
+		if node.get_parent():
+			had_parent = true
+			node.reparent(entities_node, true)
+		else:
+			# entities from tilemaps have no parent yet
+			entities_node.add_child(node)
+		node.set_owner(self.get_owner())
+		if not had_parent:
+			# maybe want an explicit opt-in to this - had_parent might not be the right flag
+			for ch in node.get_children():
+				ch.set_owner(self.get_owner())
+				for cch in ch.get_children():
+					cch.set_owner(self.get_owner())
+
+	if tilemaps_node:
+		for node in data.tilemaps:
+			tilemaps_node.add_child(node)
+			node.set_owner(self.get_owner())
+
+	if rooms_node:
+		for node in data.rooms:
+			rooms_node.add_child(node)
+			node.set_owner(self.get_owner())
+			for ch in node.get_children():
+				ch.set_owner(self.get_owner())
+				# how deep must we go?
+				for cch in ch.get_children():
+					cch.set_owner(self.get_owner())
+
+	nodes_transferred.emit()

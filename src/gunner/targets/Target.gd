@@ -1,38 +1,46 @@
 extends Area2D
 
+## vars
+
 @onready var anim = $AnimatedSprite2D
 @onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
 
 signal destroyed(target)
 
+## ready
 
 func _ready():
-	Debug.pr("target ready")
 	anim.animation_finished.connect(_animation_finished)
 	Respawner.register_respawn(self)
 	Cam.add_offscreen_indicator(self)
-	Util.animate(self)
-	Util.animate_rotate(self)
+	# TODO how to work with animations and positions after regen bug
+	# Util.animate(self)
+	# Util.animate_rotate(self)
+	body_entered.connect(_on_body_entered)
 
+## anim finished
 
 func _animation_finished():
 	if anim.animation == "pop":
 		queue_free()
 
+## kill
 
 func kill():
 	Hood.notif("Target Destroyed")
 	DJZ.play(DJZ.S.target_kill)
 	anim.play("pop")
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
+	Debug.pr("emitting signal 'destroyed'")
 	destroyed.emit(self)
 
 	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())
 	Navi.add_child_to_current(lbl)
 
+## body entered
 
-func _on_Target_body_entered(body: Node):
+func _on_body_entered(body: Node2D):
 	if body.is_in_group("bullet"):
 		if body.has_method("kill"):
 			body.kill()
