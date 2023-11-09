@@ -6,6 +6,27 @@
 #+html:   <a href="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml"><img alt="Steam Deploy" src="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml/badge.svg" /></a>
 #+html:  </p>
 
+#+html: <p align="center">
+#+html: <a href="https://www.patreon.com/russmatney">
+#+html: <img alt="Patreon" src=https://img.shields.io/badge/Patreon-Support%20this%20Project-%23f1465a?style=for-the-badge />
+#+html: </a>
+#+html: <a href="https://discord.gg/xZHWtGfAvF">
+#+html: <img alt="Discord" src="https://img.shields.io/discord/758750490015563776?style=style-for-the-badge&logo=discord&logoColor=fff&label=discord">
+#+html: </a>
+#+html: <a href="https://russmatney.itch.io/dino">
+#+html: <img alt="Itch.io" src="https://img.shields.io/badge/dino%20-%20?style=for-the-badge&logo=itch.io&logoColor=fff&label=itch.io">
+#+html: </a>
+#+html: <a href="https://store.steampowered.com/app/2589550/Dino/">
+#+html: <img alt="Steam" src="https://img.shields.io/badge/add%20to%20wishlist%20-%20?style=for-the-badge&logo=steam&label=steam">
+#+html: </a>
+#+html:  <a href="https://mastodon.gamedev.place/@russmatney">
+#+html:    <img src="https://img.shields.io/badge/Mastodon-teal?style=for-the-badge&logo=mastodon&logoColor=white" alt="Mastodon Badge"/>
+#+html:  </a>
+#+html:  <a href="https://www.twitch.tv/russmatney">
+#+html:    <img src="https://img.shields.io/badge/Twitch-purple?style=for-the-badge&logo=twitch&logoColor=white" alt="Twitch Badge"/>
+#+html:  </a>
+#+html: </p>
+
 Dino is a monorepo/sandbox full of Godot games and addons.
 
 #+name: Dino Games and Addons
@@ -16,8 +37,9 @@ You can play the latest version on itch.io: [[https://russmatney.itch.io/dino][r
 
 A steam release is coming soon - download the demo and wishlist [[https://store.steampowered.com/app/2589550/Dino/][on steam]].
 
-You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind-garden/blog]], or follow me on [[https://mastodon.gamedev.place/@russmatney][mastodon]], [[https://programming.dev/u/russmatney][lemmy]],
-or [[https://twitch.tv/russmatney][twitch]] for updates. You can also support me on [[https://patreon.com/russmatney][Patreon]].
+You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind-garden/blog]], or follow me on [[https://mastodon.gamedev.place/@russmatney][mastodon]],
+[[https://programming.dev/u/russmatney][lemmy]], or [[https://twitch.tv/russmatney][twitch]] for updates, or pop in [[https://discord.gg/xZHWtGfAvF][the discord]] and ping me. You can also
+support me on [[https://patreon.com/russmatney][Patreon]].
 
 * NOTE: Assets must be purchased before using!
 Dino's games and addons use third-party assets that must be purchased
