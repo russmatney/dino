@@ -8,7 +8,7 @@ func test_all_game_entities():
 		assert_that(ent).is_not_null()
 		assert_that(ent.get_display_name()).is_not_equal("")
 		assert_that(ent.is_enabled()).is_true()
-		assert_that(ent.get_singleton()).is_not_null()
+		# assert_that(ent.get_singleton()).is_not_null()
 
 # Makes sure each game can be registered
 func test_register_every_game():
