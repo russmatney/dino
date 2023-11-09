@@ -223,6 +223,8 @@ func respawn_player(opts={}):
 			opts["player_scene"] = player.scene_file_path
 		else:
 			if current_game == null:
+				ensure_current_game()
+			if current_game == null:
 				Debug.warn("No current_game, can't spawn (or respawn) player")
 				return
 			elif current_game.game_entity.get_player_scene() == null:

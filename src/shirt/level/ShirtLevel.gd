@@ -19,7 +19,8 @@ func _ready():
 	level_gen.nodes_transferred.connect(func():
 		regeneration_complete.emit()
 		setup_level())
-	setup_level()
+	if not Game.is_managed:
+		setup_level()
 
 ## regenerate ###################################################3
 
@@ -33,7 +34,7 @@ func setup_level():
 	Util._connect(Q.quest_failed, on_quest_failed)
 	Q.setup_quests()
 
-	Game.maybe_spawn_player()
+	Game.respawn_player()
 
 func on_quests_complete():
 	Hood.notif("Shirt level complete")
