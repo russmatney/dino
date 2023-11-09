@@ -1,12 +1,6 @@
 @tool
 extends BrickLevelGen
 
-## ready #########################################
-
-func _ready():
-	if room_defs_path in [null, ""]:
-		room_defs_path = "res://src/shirt/gen/room_defs.txt"
-
 ## get room opts #########################################
 
 # TODO test setup, maybe testing specific seeds?

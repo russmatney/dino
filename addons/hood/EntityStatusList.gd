@@ -23,7 +23,7 @@ func update_status(entry):
 	else:
 		if len(get_children()) >= max_children:
 			if not warned_once:
-				Debug.warn("Too many entity_statuses, skipping add", entry)
+				Debug.warn("Too many entity_statuses, skipping add", entry.display_name)
 				warned_once = true
 			# should evict least-relevant/next-to-go status instead
 			return
