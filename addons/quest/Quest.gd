@@ -116,6 +116,7 @@ func _on_count_remaining_update(remaining, node, opts):
 	quest_update.emit()
 
 ## jumbotron ##########################################################################
+# TODO move all this to Jumbotron.gd static helpers
 
 var jumbotron_scene = preload("res://addons/quest/Jumbotron.tscn")
 var jumbotron
@@ -133,6 +134,7 @@ func jumbo_notif(opts):
 	key_or_action = opts.get("action", key_or_action)
 	var action_label_text = opts.get("action_label_text")
 	var on_close = opts.get("on_close")
+	var pause = opts.get("pause", true)
 
 	# reset data
 	jumbotron.header_text = header
@@ -145,10 +147,16 @@ func jumbo_notif(opts):
 	jumbo_closed.connect(func():
 		jumbotron.fade_out()
 		if on_close:
-			on_close.call(),
+			on_close.call()
+		if pause:
+			get_tree().paused = false,
 		ConnectFlags.CONNECT_ONE_SHOT)
+
+	if pause:
+		get_tree().paused = true
 
 	# maybe pause the game? probably? optionally?
 	jumbotron.fade_in()
+
 
 	return jumbo_closed

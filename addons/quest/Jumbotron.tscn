@@ -23,7 +23,8 @@ bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.470588)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrs0h"]
 
 [node name="Jumbotron" type="CanvasLayer"]
-layer = 4
+process_mode = 3
+layer = 5
 script = ExtResource("1_6gaau")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
