@@ -50,7 +50,7 @@ func select_game():
 
 ## launch game ##################################################3
 
-func setup_game(node, entity):
+func setup_game(node):
 	node.ready.connect(_on_game_ready)
 
 	if node.has_signal("level_complete"):
@@ -70,7 +70,7 @@ func launch_game(entity):
 
 	var scene = entity.get_first_level_scene()
 	game_node = scene.instantiate()
-	setup_game(game_node, entity)
+	setup_game(game_node)
 
 	# TODO games/levels should transition IN smoothly
 	add_child(game_node)

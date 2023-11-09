@@ -38,8 +38,8 @@ func exit():
 
 func _on_anim_finished():
 	if actor.anim.animation == "jump":
-		actor.anim.play("air")
-
+		if actor.anim.sprite_frames.has_animation("air"):
+			actor.anim.play("air")
 
 ## physics ###########################################################
 

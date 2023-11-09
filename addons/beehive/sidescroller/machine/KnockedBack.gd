@@ -6,7 +6,8 @@ var has_left_floor
 ## enter ###########################################################
 
 func enter(opts = {}):
-	actor.anim.play("knocked_back")
+	if actor.anim.sprite_frames.has_animation("knocked_back"):
+		actor.anim.play("knocked_back")
 	knocked_by = opts.get("knocked_by")
 	actor.face_body(knocked_by)
 

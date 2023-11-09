@@ -22,7 +22,9 @@ func setup():
 ## get_targets ##############################################################################
 
 func get_targets():
-	return get_tree().get_nodes_in_group("target")
+	var t = get_tree()
+	if t:
+		return get_tree().get_nodes_in_group("target")
 
 ## update ##############################################################################
 
