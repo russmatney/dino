@@ -2,54 +2,34 @@ extends Node2D
 
 ## vars ###################################################3
 
-@export var regen_on_ready: bool = false
+@onready var level_gen: BrickLevelGen = $LevelGen
 
-var level_opts : Dictionary :
-	set(opts):
-		level_opts = opts
-func set_level_opts(opts):
-	level_opts = opts
-
-signal regeneration_complete
 signal level_complete
-
-var level_gen: BrickLevelGen
-
-# TODO could add programatically, could handle multiple quests, or otherwise integrate with Quest
-@onready var break_the_targets = $BreakTheTargets
 
 ## ready ###################################################3
 
 func _ready():
-	regeneration_complete.connect(setup_level)
-	break_the_targets.targets_cleared.connect(func():
-		on_targets_cleared())
-
-	level_gen = get_node_or_null("LevelGen")
-	if regen_on_ready and level_gen:
-		Debug.pr("GunnerLevel regenerating with opts", level_opts)
-		regenerate()
-	else:
-		setup_level()
-
+	Debug.pr("Gunner level!")
+	level_gen.nodes_transferred.connect(setup_level)
 
 ## regenerate ###################################################3
 
 func regenerate(opts=null):
-	if opts:
-		level_opts = opts
-	level_gen.generate(level_opts)
-	level_gen.nodes_transferred.connect(func(): regeneration_complete.emit())
+	level_gen.generate(opts)
 
 ## setup_level ###################################################3
 
 func setup_level():
-	break_the_targets.setup()
+	Util._connect(Q.all_quests_complete, on_quests_complete)
+	Util._connect(Q.quest_failed, on_quest_failed)
+	Q.setup_quests()
 
-	Game.maybe_spawn_player()
+	Game.respawn_player()
 
-## level complete ###############################################
-
-func on_targets_cleared():
+func on_quests_complete():
 	Hood.notif("Gunner level complete")
 	level_complete.emit()
+
+func on_quest_failed():
+	Hood.notif("Gunner quest failed")
+	Game.respawn_player()

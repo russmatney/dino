@@ -12,9 +12,6 @@ func _ready():
 	Debug.pr("Shirt level!")
 	level_gen.nodes_transferred.connect(setup_level)
 
-	if not Game.is_managed:
-		setup_level()
-
 ## regenerate ###################################################3
 
 func regenerate(opts=null):

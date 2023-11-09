@@ -19,12 +19,6 @@ func _on_entry_updated(entry={}):
 			set_health(entry["health"])
 		if entry.get("pickups") != null:
 			set_pickups(entry["pickups"])
-	if "quests" in entry.get("groups"):
-		# yucky string deps
-		if entry.get("destroyed_count") != null:
-			set_targets_destroyed(entry.get("destroyed_count"))
-		if entry.get("remaining_count") != null:
-			set_targets_remaining(entry.get("remaining_count"))
 
 
 ###################################################################
@@ -44,15 +38,3 @@ func set_pickups(pickups):
 	var p = get_node("%PickupsContainer")
 	p.update_pickups(pickups)
 
-
-###################################################################
-# update targets
-
-func set_targets_destroyed(count):
-	var destroyed_label = get_node("%TargetsDestroyed")
-	destroyed_label.text = "Targets Destroyed: " + str(count)
-
-
-func set_targets_remaining(count):
-	var remaining_label = get_node("%TargetsRemaining")
-	remaining_label.text = "Targets Remaining: " + str(count)

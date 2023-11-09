@@ -8,7 +8,6 @@ var total
 
 func _ready():
 	label = "Collect All Gems"
-	setup()
 
 ## setup ##########################################################
 

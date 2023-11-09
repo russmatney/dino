@@ -4,7 +4,6 @@ extends Quest
 
 func _ready():
 	label = "Kill All Enemies"
-	setup()
 
 ## setup ##########################################################
 

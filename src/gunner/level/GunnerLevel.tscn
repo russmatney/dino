@@ -1,22 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://vklao2gvscv"]
+[gd_scene load_steps=4 format=3 uid="uid://vklao2gvscv"]
 
 [ext_resource type="Script" path="res://src/gunner/level/GunnerLevel.gd" id="1_3of0r"]
 [ext_resource type="Script" path="res://src/gunner/level/GunnerLevelGen.gd" id="2_s4yna"]
-[ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_r4b62"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="4_eqxxm"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="7_vjqqf"]
-[ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="9_85601"]
 [ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="11_llbt2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xari3"]
-size = Vector2(768, 224)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sri5"]
-size = Vector2(768, 224)
 
 [node name="GunnerLevel" type="Node2D"]
 script = ExtResource("1_3of0r")
-regen_on_ready = true
 
 [node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
 script = ExtResource("2_s4yna")
@@ -30,97 +19,8 @@ rooms_node = NodePath("../Rooms")
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="@Node2D@34659" type="Node2D" parent="Rooms"]
-script = ExtResource("3_r4b62")
-
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@34659"]
-visible = false
-offset_right = 768.0
-offset_bottom = 224.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
-
-[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@34659" groups=["roombox"]]
-visible = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@34659/RoomBox"]
-position = Vector2(384, 112)
-shape = SubResource("RectangleShape2D_xari3")
-
-[node name="@Node2D@34660" type="Node2D" parent="Rooms"]
-position = Vector2(768, -96)
-script = ExtResource("3_r4b62")
-
-[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@34660"]
-visible = false
-offset_right = 768.0
-offset_bottom = 224.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
-
-[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@34660" groups=["roombox"]]
-visible = false
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@34660/RoomBox"]
-position = Vector2(384, 112)
-shape = SubResource("RectangleShape2D_8sri5")
-
 [node name="Tilemaps" type="Node2D" parent="."]
 
-[node name="@TileMap@34658" parent="Tilemaps" instance=ExtResource("4_eqxxm")]
-scale = Vector2(4, 4)
-layer_0/tile_data = PackedInt32Array(-65508, 65537, 5, -65507, 131073, 5, -65506, 131073, 5, -65505, 196609, 5, -65496, 65537, 5, -65495, 131073, 5, -65494, 131073, 5, -65493, 196609, 5, 65567, 65537, 2, 65568, 131073, 2, 65569, 131073, 2, 65570, 131073, 2, 65571, 131073, 2, 65572, 131073, 2, 65573, 131073, 2, 65574, 131073, 2, 65575, 131073, 2, 65576, 196609, 2, 131096, 131073, 2, 131097, 131073, 2, 131098, 131073, 2, 131099, 131073, 2, 131100, 131073, 2, 131101, 131073, 2, 131102, 131073, 2, 131103, 458753, 4, 131104, 131073, 3, 131105, 131073, 3, 131106, 131073, 3, 131107, 131073, 3, 131108, 131073, 3, 131109, 131073, 3, 131110, 131073, 3, 131111, 131073, 3, 131112, 393217, 4, 131113, 131073, 2, 131114, 131073, 2, 131115, 131073, 2, 131116, 131073, 2, 131117, 131073, 2, 131118, 131073, 2, 131119, 196609, 2, 196632, 131073, 4, 196633, 131073, 4, 196634, 131073, 4, 196635, 131073, 4, 196636, 131073, 4, 196637, 131073, 4, 196638, 131073, 4, 196639, 131073, 4, 196640, 131073, 4, 196641, 131073, 4, 196642, 131073, 4, 196643, 131073, 4, 196644, 131073, 4, 196645, 131073, 4, 196646, 131073, 4, 196647, 131073, 4, 196648, 131073, 4, 196649, 131073, 4, 196650, 131073, 4, 196651, 131073, 4, 196652, 131073, 4, 196653, 131073, 4, 196654, 131073, 4, 196655, 196609, 4, 0, 65537, 2, 1, 196609, 2, 65536, 65537, 3, 65537, 196609, 3, 131072, 65537, 3, 131073, 393217, 4, 131074, 196609, 2, 131082, 65537, 5, 131083, 131073, 5, 131084, 131073, 5, 131085, 196609, 5, 131094, 65537, 2, 131095, 131073, 2, 196608, 65537, 3, 196609, 131073, 3, 196610, 393217, 4, 196611, 196609, 2, 196628, 65537, 2, 196629, 131073, 2, 196630, 458753, 4, 196631, 393217, 3, 262144, 65537, 3, 262145, 131073, 3, 262146, 131073, 3, 262147, 393217, 4, 262148, 131073, 2, 262149, 196609, 2, 262161, 65537, 2, 262162, 131073, 2, 262163, 131073, 2, 262164, 458753, 4, 262165, 131073, 3, 262166, 131073, 3, 262167, 196609, 3, 327680, 65537, 3, 327681, 131073, 3, 327682, 131073, 3, 327683, 131073, 3, 327684, 131073, 3, 327685, 393217, 4, 327686, 131073, 2, 327687, 131073, 2, 327688, 131073, 2, 327689, 131073, 2, 327690, 131073, 2, 327691, 131073, 2, 327692, 131073, 2, 327693, 131073, 2, 327694, 131073, 2, 327695, 131073, 2, 327696, 131073, 2, 327697, 458753, 4, 327698, 131073, 3, 327699, 131073, 3, 327700, 131073, 3, 327701, 131073, 3, 327702, 131073, 3, 327703, 196609, 3, 393216, 65537, 4, 393217, 131073, 4, 393218, 131073, 4, 393219, 131073, 4, 393220, 131073, 4, 393221, 131073, 4, 393222, 131073, 4, 393223, 131073, 4, 393224, 131073, 4, 393225, 131073, 4, 393226, 131073, 4, 393227, 131073, 4, 393228, 131073, 4, 393229, 131073, 4, 393230, 131073, 4, 393231, 131073, 4, 393232, 131073, 4, 393233, 131073, 4, 393234, 131073, 4, 393235, 131073, 4, 393236, 131073, 4, 393237, 131073, 4, 393238, 131073, 4, 393239, 196609, 4)
-
 [node name="Entities" type="Node2D" parent="."]
-
-[node name="@Marker2D@34654" parent="Entities" instance=ExtResource("7_vjqqf")]
-position = Vector2(352, 32)
-
-[node name="@Area2D@34655" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(112, 48)
-
-[node name="@Area2D@34642" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(688, 48)
-
-[node name="@Area2D@34643" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(144, 80)
-
-[node name="@Area2D@34644" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(624, 80)
-
-[node name="@Area2D@34645" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(208, 112)
-
-[node name="@Area2D@34646" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(528, 112)
-
-[node name="@Area2D@34647" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(304, 144)
-
-[node name="@Area2D@34648" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(432, 144)
-
-[node name="@Marker2D@34656" parent="Entities" instance=ExtResource("7_vjqqf")]
-position = Vector2(1152, 0)
-
-[node name="@Area2D@34657" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(944, -48)
-
-[node name="@Area2D@34649" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(1360, -48)
-
-[node name="@Area2D@34650" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(1040, 16)
-
-[node name="@Area2D@34651" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(1264, 16)
-
-[node name="@Area2D@34652" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(816, 48)
-
-[node name="@Area2D@34653" parent="Entities" instance=ExtResource("9_85601")]
-position = Vector2(1488, 48)
 
 [node name="BreakTheTargets" parent="." instance=ExtResource("11_llbt2")]

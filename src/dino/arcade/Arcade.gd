@@ -61,10 +61,9 @@ func setup_game(node, entity):
 func launch_game(entity):
 	current_game_entity = entity
 
-	# clean up current game, if any
+	# TODO games/levels should transition OUT smoothly
+	# TODO save any stats/metrics?
 	if game_node:
-		# TODO games/levels should transition OUT smoothly
-		# TODO save any stats/metrics?
 		remove_child(game_node)
 
 	Game.launch_in_game_mode(self, entity)
@@ -83,11 +82,8 @@ func _on_game_ready():
 
 	if game_node.has_method("regenerate"):
 		game_node.regenerate(level_opts)
-
-	# TODO should the game-mode consume Quests directly?
-	# Util._connect(Q.all_quests_complete, _on_level_complete)
-	# Util._connect(Q.quest_failed, on_quest_failed)
-	# Q.setup_quests()
+	else:
+		Debug.warn("Game/Level missing expected regenerate function!", game_node)
 
 func _on_level_complete():
 	_seed = randi()

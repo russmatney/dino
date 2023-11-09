@@ -91,6 +91,10 @@ func register_current_game(game):
 
 ## restart game ##########################################################
 
+# not used, but maybe more useful than the whole maybe_spawn_player/respawn_player thing?
+func set_player_scene(scene):
+	player_scene = scene
+
 func launch_in_game_mode(mode_node, entity, opts: Dictionary={}):
 	# do we really need all this?
 	if not current_game:
@@ -101,8 +105,7 @@ func launch_in_game_mode(mode_node, entity, opts: Dictionary={}):
 
 	Debug.pr("Launching game", entity.get_display_name(), "in mode", current_game.game_entity.get_display_name())
 
-	# var game = game_for_entity(entity)
-	# Navi.resume() # remove if not needed
+	player_scene = entity.get_player_scene()
 
 	is_managed = true
 	is_in_game_mode = true
@@ -160,6 +163,7 @@ signal player_found(player)
 signal player_ready(player)
 
 var player
+var player_scene
 var player_group = "player"
 
 func _find_player(p=null):
@@ -203,9 +207,9 @@ func respawn_player(opts={}):
 
 	Debug.pr("Spawning new player")
 	if opts.get("player_scene") == null:
-		if player:
-			# support calling respawn_player() without knowing the player scene
-			opts["player_scene"] = player.scene_file_path
+		if player_scene:
+			# support reading a cached player_scene
+			opts["player_scene"] = player_scene
 		else:
 			if current_game == null:
 				ensure_current_game()
@@ -232,15 +236,16 @@ func _respawn_player(opts={}):
 		if coords_fn.is_valid():
 			spawn_coords = coords_fn.call()
 
-	var player_scene = opts.get("player_scene")
-	if player_scene == null and current_game != null:
-		player_scene = current_game.game_entity.get_player_scene()
-	if player_scene == null:
+	var p_scene = opts.get("player_scene")
+	if p_scene == null and current_game != null:
+		p_scene = current_game.game_entity.get_player_scene()
+	if p_scene == null:
 		Debug.err("Could not determine player_scene, cannot respawn")
 		spawning = false
 		return
-	if player_scene is String:
-		player_scene = load(player_scene)
+	if p_scene is String:
+		p_scene = load(p_scene)
+	player_scene = p_scene
 	player = player_scene.instantiate()
 	if not spawn_coords == null:
 		player.position = spawn_coords
