@@ -21,10 +21,11 @@ func setup():
 
 ## get_targets ##############################################################################
 
-func get_targets():
+func get_targets() -> Array:
 	var t = get_tree()
 	if t:
 		return get_tree().get_nodes_in_group("target")
+	return []
 
 ## update ##############################################################################
 

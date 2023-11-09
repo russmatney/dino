@@ -2,7 +2,7 @@ extends Quest
 
 ## vars ##########################################################
 
-var total
+var total = 0
 
 ## ready ##########################################################
 
@@ -14,7 +14,6 @@ func _ready():
 func setup():
 	set_total()
 	for g in get_gems():
-		Debug.pr("connecting to gem tree_exit")
 		Util._connect(g.tree_exited, update_quest)
 	update_quest()
 
@@ -25,19 +24,20 @@ func set_total():
 
 ## getter ##########################################################
 
-func get_gems():
+func get_gems() -> Array:
 	var t = get_tree()
 	if t:
 		return t.get_nodes_in_group("gems")
+	return []
 
 ## update ##########################################################
 
 func update_quest():
-	Debug.pr("gem exited tree")
+	if not is_inside_tree():
+		return
 	count_total_update.emit(total)
 	var remaining = get_gems()
-	if remaining:
-		count_remaining_update.emit(len(remaining))
 
-		if len(remaining) == 0 and total > 0:
-			quest_complete.emit()
+	count_remaining_update.emit(len(remaining))
+	if len(remaining) == 0 and total > 0:
+		quest_complete.emit()

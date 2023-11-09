@@ -79,7 +79,7 @@ func launch_game(entity):
 	current_game_entity = entity
 
 	if game_node:
-		remove_child(game_node)
+		game_node.queue_free()
 
 	Game.launch_in_game_mode(self, entity)
 

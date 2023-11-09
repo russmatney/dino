@@ -14,12 +14,17 @@ func setup():
 
 ## getter ##########################################################
 
-func get_enemies():
-	return get_tree().get_nodes_in_group("enemies")
+func get_enemies() -> Array:
+	var t = get_tree()
+	if t:
+		return t.get_nodes_in_group("enemies")
+	return []
 
 ## update ##########################################################
 
 func update_quest():
+	if not is_inside_tree():
+		return
 	var enemies = get_enemies()
 	count_total_update.emit(len(enemies))
 
