@@ -11,7 +11,6 @@ signal level_complete
 
 func _ready():
 	Debug.pr("Shirt level!")
-	Game.maybe_spawn_player()
 
 	for ch in get_children():
 		if ch is BrickLevelGen:
@@ -29,34 +28,17 @@ func regenerate(opts=null):
 
 ## setup_level ###################################################3
 
-var gems = []
-var enemies = []
-
 func setup_level():
-	# collect/connect to gems and enemies
+	Q.all_quests_complete.connect(on_quests_complete)
+	Q.quest_failed.connect(on_quest_failed)
+	Q.setup_quests()
+
 	Game.maybe_spawn_player()
 
-	gems = []
-	enemies = []
-	for ent in $Entities.get_children():
-		if ent.is_in_group("gems"):
-			gems.append(ent)
-			ent.tree_exiting.connect(on_gem_exiting.bind(ent))
-		if ent.is_in_group("enemies"):
-			enemies.append(ent)
-			ent.died.connect(on_enemy_exiting.bind(ent))
+func on_quests_complete():
+	Hood.notif("Shirt level complete")
+	level_complete.emit()
 
-func on_gem_exiting(g):
-	gems.erase(g)
-	check_win()
-
-func on_enemy_exiting(b):
-	enemies.erase(b)
-	check_win()
-
-## level complete ###############################################
-
-func check_win():
-	if len(gems) == 0 and len(enemies) == 0:
-		Hood.notif("Shirt level complete")
-		level_complete.emit()
+func on_quest_failed():
+	Hood.notif("Shirt quest failed")
+	Game.respawn_player()

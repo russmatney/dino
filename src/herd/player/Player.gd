@@ -144,7 +144,7 @@ func die():
 			Hotel.check_in(p, {health=p.max_health})}))
 
 func restart_level():
-	Quest.jumbo_notif({header="You died.", body="Sorry about it!",
+	Q.jumbo_notif({header="You died.", body="Sorry about it!",
 		action="close", action_label_text="Restart Level",
 		on_close=retry_level})
 

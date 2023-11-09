@@ -7,10 +7,10 @@ func _ready():
 		setup(Game.player)
 
 	# when is this quest complete?
-	Quest.register_quest(self, {"check_not_failed": true, "label": "Stay Alive!"})
+	Q.register_quest(self, {"check_not_failed": true, "label": "Stay Alive!"})
 
 func _exit_tree():
-	Quest.unregister(self, {"check_not_failed": true, "label": "Stay Alive!"})
+	Q.unregister(self, {"check_not_failed": true, "label": "Stay Alive!"})
 
 
 # signal quest_complete

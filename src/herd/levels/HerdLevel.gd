@@ -16,8 +16,8 @@ func _ready():
 	if Game.player and is_instance_valid(Game.player):
 		Hotel.check_in(Game.player, {health=Game.player.max_health})
 
-	Quest.all_quests_complete.connect(on_quests_complete)
-	Quest.quest_failed.connect(on_quest_failed)
+	Q.all_quests_complete.connect(on_quests_complete)
+	Q.quest_failed.connect(on_quest_failed)
 
 	Game.maybe_spawn_player()
 
@@ -52,7 +52,7 @@ func on_quests_complete():
 func on_quest_failed(_quest):
 	DJZ.play(DJZ.S.heavy_fall)
 	level_complete = true
-	Quest.jumbo_notif({header="All the sheep died.", body="Yeesh!",
+	Q.jumbo_notif({header="All the sheep died.", body="Yeesh!",
 		action="close", action_label_text="Restart Level",
 		on_close=retry_level})
 

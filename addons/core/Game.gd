@@ -218,12 +218,16 @@ func respawn_player(opts={}):
 
 	Debug.pr("Spawning new player")
 	if opts.get("player_scene") == null:
-		if current_game == null:
-			Debug.warn("No current_game, can't spawn (or respawn) player")
-			return
-		elif current_game.game_entity.get_player_scene() == null:
-			Debug.warn("current_game has no player_scene, can't respawn player", current_game)
-			return
+		if player:
+			# support calling respawn_player() without knowing the player scene
+			opts["player_scene"] = player.scene_file_path
+		else:
+			if current_game == null:
+				Debug.warn("No current_game, can't spawn (or respawn) player")
+				return
+			elif current_game.game_entity.get_player_scene() == null:
+				Debug.warn("current_game has no player_scene, can't respawn player", current_game)
+				return
 
 	spawning = true
 	if player:
@@ -248,6 +252,8 @@ func _respawn_player(opts={}):
 		Debug.err("Could not determine player_scene, cannot respawn")
 		spawning = false
 		return
+	if player_scene is String:
+		player_scene = load(player_scene)
 	player = player_scene.instantiate()
 	if not spawn_coords == null:
 		player.position = spawn_coords

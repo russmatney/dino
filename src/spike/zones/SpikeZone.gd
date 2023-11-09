@@ -6,7 +6,7 @@ class_name SpikeZone
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Quest.all_quests_complete.connect(on_quests_complete)
+		Q.all_quests_complete.connect(on_quests_complete)
 	super._ready()
 
 ## quest updates ######################################################
@@ -14,7 +14,7 @@ func _ready():
 func on_quests_complete():
 	DJZ.play(DJZ.S.fire)
 
-	Quest.jumbo_notif({header="Congrats on feeding the void.", body="woo-hoo.",
+	Q.jumbo_notif({header="Congrats on feeding the void.", body="woo-hoo.",
 		action="close", action_label_text="Next Level",
 		on_close=handle_level_complete})
 

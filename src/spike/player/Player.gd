@@ -29,7 +29,7 @@ func _on_player_death():
 		t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
 
 	# possibly we could share/re-use this, but meh, it'll probably need specific text
-	Quest.jumbo_notif({header="You died", body="Sorry about it!",
+	Q.jumbo_notif({header="You died", body="Sorry about it!",
 		action="close", action_label_text="Respawn",
 		on_close=Game.respawn_player.bind({
 			setup_fn=func(p):

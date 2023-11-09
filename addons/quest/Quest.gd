@@ -8,14 +8,34 @@ signal quest_update
 
 var active_quests = {}
 
-func q_label(node, opts):
-	return str("%s-%s" % [opts.get("label"), node.name])
-
 var current_level_label = "Quest Status"
+
+## label #####################################################
+
+func q_label(node, opts):
+	var label = node.get("label")
+	if label in [null, ""]:
+		label = opts.get("label", "Fallback Label")
+	return str("%s-%s" % [label, node.name])
+
+func get_quest(node, opts={}):
+	return active_quests.get(q_label(node, opts))
 
 ## register quest and updates #####################################################
 
+func setup_quests():
+	for q in active_quests.values():
+		q.queue_free()
+
+	active_quests = {}
+	for q in get_tree().get_nodes_in_group("quests"):
+		q.setup()
+		register_quest(q)
+
 func register_quest(node, opts={}):
+	if node == null:
+		Debug.warn("passed quest is null, skipping", node, opts)
+		return
 	var label = q_label(node, opts)
 	if label in active_quests:
 		Debug.warn("OVERWRITING existing quest with node.label:", label)
@@ -72,25 +92,31 @@ func check_all_complete():
 
 func _on_complete(node, opts):
 	var label = q_label(node, opts)
-	active_quests[label].complete = true
+	Debug.pr("Quest complete!", label)
+	var q = get_quest(node, opts)
+	if q:
+		q.complete = true
 
 	quest_update.emit()
 	check_all_complete()
 
 func _on_fail(node, opts):
-	var label = q_label(node, opts)
-	active_quests[label].failed = true
+	var q = get_quest(node, opts)
+	if q:
+		q.failed = true
+		quest_failed.emit(q)
 	quest_update.emit()
-	quest_failed.emit(active_quests[label])
 
 func _on_count_total_update(total, node, opts):
-	var label = q_label(node, opts)
-	active_quests[label].total = total
+	var q = get_quest(node, opts)
+	if q:
+		q.total = total
 	quest_update.emit()
 
 func _on_count_remaining_update(remaining, node, opts):
-	var label = q_label(node, opts)
-	active_quests[label].remaining = remaining
+	var q = get_quest(node, opts)
+	if q:
+		q.remaining = remaining
 	quest_update.emit()
 
 ## jumbotron ##########################################################################
@@ -105,11 +131,11 @@ func jumbo_notif(opts):
 		jumbotron = jumbotron_scene.instantiate()
 		Navi.add_child(jumbotron)
 
+	var header = opts.get("header")
 	var body = opts.get("body", "")
 	var key_or_action = opts.get("key")
 	key_or_action = opts.get("action", key_or_action)
 	var action_label_text = opts.get("action_label_text")
-	var header = opts.get("header")
 	var on_close = opts.get("on_close")
 
 	# reset data

@@ -29,7 +29,7 @@ func _ready():
 	sheep_pen.body_entered.connect(on_body_entered)
 	sheep_pen.body_exited.connect(on_body_exited)
 
-	Quest.register_quest(self, {label="Fetch all the sheep!"})
+	Q.register_quest(self, {label="Fetch all the sheep!"})
 
 	all_sheep = get_tree().get_nodes_in_group("sheep")
 
@@ -47,7 +47,7 @@ func _ready():
 func _exit_tree():
 	if Engine.is_editor_hint():
 		return
-	Quest.unregister(self)
+	Q.unregister(self)
 
 ## quest update ##########################################################
 

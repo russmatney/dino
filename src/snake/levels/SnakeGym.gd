@@ -2,7 +2,7 @@ extends Node2D
 
 
 func _ready():
-	var _x = Quest.quest_failed.connect(_on_quest_failed)
+	var _x = Q.quest_failed.connect(_on_quest_failed)
 
 	setup.call_deferred()
 

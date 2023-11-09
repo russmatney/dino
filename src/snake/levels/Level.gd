@@ -3,8 +3,8 @@ extends Node2D
 ## ready #########################################################################
 
 func _ready():
-	Quest.quest_failed.connect(_on_quest_failed)
-	Quest.all_quests_complete.connect(_on_all_quests_complete)
+	Q.quest_failed.connect(_on_quest_failed)
+	Q.all_quests_complete.connect(_on_all_quests_complete)
 
 	setup.call_deferred()
 
@@ -53,7 +53,7 @@ func load_next_level():
 
 	if current_level_idx < SnakeData.levels.size():
 		var lvl = SnakeData.levels[current_level_idx]
-		Quest.current_level_label = lvl["label"]
+		Q.current_level_label = lvl["label"]
 		Debug.pr("Navi.nav_to: ", lvl["label"])
 		Navi.nav_to(lvl["scene"])
 	else:

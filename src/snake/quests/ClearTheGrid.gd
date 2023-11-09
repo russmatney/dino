@@ -6,10 +6,10 @@ func _ready():
 	if Game.player and is_instance_valid(Game.player):
 		setup(Game.player)
 
-	Quest.register_quest(self)
+	Q.register_quest(self)
 
 func _exit_tree():
-	Quest.unregister(self)
+	Q.unregister(self)
 
 signal quest_complete
 # signal quest_failed

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1fe2xly3pfd4"]
+[gd_scene load_steps=9 format=3 uid="uid://d1fe2xly3pfd4"]
 
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_i2ua0"]
 [ext_resource type="Script" path="res://src/shirt/hud/HUD.gd" id="1_m3maa"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="3_vl0v5"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="4_yyh2s"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_tt27g"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="6_woicm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jotap"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.360784)
@@ -65,7 +66,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="QuestStatus" parent="VBoxContainer/HBoxContainer2" instance=ExtResource("6_woicm")]
 layout_mode = 2
 size_flags_horizontal = 3
 

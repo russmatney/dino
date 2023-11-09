@@ -31,8 +31,8 @@ name Cross
 xx...xx
 xx...xx
 .......
-.......
-.......
+...g...
+....w..
 xx...xx
 xx...xx
 
@@ -41,7 +41,7 @@ name Chaser
 xx...xx
 xx...xx
 ..c....
-.......
+....g..
 xx...xx
 xx...xx
 xx...xx
@@ -50,7 +50,7 @@ name Gem!
 
 xxtttxx
 xxtttxx
-tt...tt
+tt.w.tt
 tt.g.tt
 tt...tt
 xxtttxx
@@ -61,10 +61,14 @@ name Walker
 xxx..xx
 xxx..xx
 xx...xx
-.......
+..g....
 ....w..
 xx...xx
 xx...xx
+
+==============
+WIP
+==============
 
 name Big Open Space
 

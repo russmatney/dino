@@ -14,7 +14,7 @@ func _ready():
 
 	var ing_data = SpikeData.all_ingredients[expected_delivery_type]
 
-	Quest.register_quest(self, {label=str("FEED THE VOID: %s" % ing_data.name)})
+	Q.register_quest(self, {label=str("FEED THE VOID: %s" % ing_data.name)})
 	update_quest()
 
 	label.text = "[center]VOID WANT %s ORB[/center]" % ing_data.display_type
@@ -42,7 +42,7 @@ func _on_body_entered(body: Node):
 func _exit_tree():
 	if Engine.is_editor_hint():
 		return
-	Quest.unregister(self)
+	Q.unregister(self)
 
 signal quest_complete
 signal quest_failed

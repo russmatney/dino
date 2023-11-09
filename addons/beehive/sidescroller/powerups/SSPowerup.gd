@@ -87,6 +87,6 @@ func show_jumbotron(player):
 
 	if header:
 		player.force_move_to_target(global_position)
-		Quest.jumbo_notif({
+		Q.jumbo_notif({
 			header=header, body=body, action=action, action_label_text=label,
 			on_close=player.clear_forced_move_target})
