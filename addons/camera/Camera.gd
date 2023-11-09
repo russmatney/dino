@@ -73,7 +73,7 @@ func request_camera(opts = {}):
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
 			if cam.get_parent() == player:
-				Debug.pr("player already has cam parent")
+				# Debug.pr("player already has cam parent")
 				return cam
 
 			var cam_parent = cam.get_parent()

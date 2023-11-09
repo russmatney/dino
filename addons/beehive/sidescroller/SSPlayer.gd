@@ -62,6 +62,8 @@ func _ready():
 		})
 
 	if not Engine.is_editor_hint():
+		# TODO maybe skip or never call these in beehive bodies (leave for game overwrites)
+		# could otherwise be optional (opt-in or opt-out)
 		Cam.request_camera({player=self, zoom_rect_min=600, zoom_margin_min=120})
 		# support some assigned 'hud'
 		Hood.ensure_hud(self.get("hud"))

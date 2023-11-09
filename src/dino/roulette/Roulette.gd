@@ -57,7 +57,10 @@ func next_random_game():
 	else:
 		gs = game_ids
 
-	Debug.pr("selecting game from gids", gs, "excluding current", current_game_entity.get_entity_id())
+	if current_game_entity:
+		Debug.pr("selecting game from gids", gs, "excluding current", current_game_entity.get_entity_id())
+	else:
+		Debug.pr("selecting game from gids", gs)
 
 	var eid = Util.rand_of(gs)
 	var entity = Pandora.get_entity(eid)
