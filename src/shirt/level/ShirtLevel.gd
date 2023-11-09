@@ -23,6 +23,13 @@ func setup_level():
 	Util._connect(Q.all_quests_complete, on_quests_complete)
 	Util._connect(Q.quest_failed, on_quest_failed)
 	Q.setup_quests()
+	Game.remove_player()
+
+	var closed = Q.jumbo_notif({
+		header="Welcome to Shirt!",
+		body="Toss that boomerang, crawl that dungeon!"
+		})
+	await closed
 
 	Game.respawn_player()
 

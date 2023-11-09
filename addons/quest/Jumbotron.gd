@@ -1,6 +1,7 @@
 @tool
 extends CanvasLayer
 
+# TODO rip setup out of Quest and into some static funcs
 
 @onready var header = $%Header
 @onready var body = $%Body
