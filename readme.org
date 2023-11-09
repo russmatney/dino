@@ -1,6 +1,10 @@
 #+title: dino
 
-#+html: <p align="center"><a href="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml"><img alt="Unit Tests" src="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg" /></a><a href="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml"><img alt="Itch Deploy" src="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg" /></a><a href="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml"><img alt="Steam Deploy" src="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml/badge.svg" /></a></p>
+#+html: <p align="center">
+#+html:   <a href="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml"><img alt="Unit Tests" src="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg" /></a>
+#+html:   <a href="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml"><img alt="Itch Deploy" src="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg" /></a>
+#+html:   <a href="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml"><img alt="Steam Deploy" src="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml/badge.svg" /></a>
+#+html:  </p>
 
 Dino is a monorepo/sandbox full of Godot games and addons.
 
