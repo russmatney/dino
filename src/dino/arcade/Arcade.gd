@@ -32,7 +32,6 @@ func _ready():
 
 	var entity = current_game_entity
 	if not entity:
-		# TODO popup menu to let player select one
 		entity = select_game()
 
 	if not entity:
@@ -61,8 +60,6 @@ func setup_game(node):
 func launch_game(entity):
 	current_game_entity = entity
 
-	# TODO games/levels should transition OUT smoothly
-	# TODO save any stats/metrics?
 	if game_node:
 		remove_child(game_node)
 
@@ -72,7 +69,6 @@ func launch_game(entity):
 	game_node = scene.instantiate()
 	setup_game(game_node)
 
-	# TODO games/levels should transition IN smoothly
 	add_child(game_node)
 
 ## game level signals ##################################################3

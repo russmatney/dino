@@ -14,7 +14,7 @@ func get_room_opts(_opts):
 			side=Vector2.RIGHT},
 		]
 
-	var agg = range(room_count - len(initial_rooms)).reduce(func(agg, _i):
+	var agg = range(room_count - len(initial_rooms) - 1).reduce(func(agg, _i):
 		var next_room_opt = default_room_opt.duplicate(true)
 
 		var side_opts = [
