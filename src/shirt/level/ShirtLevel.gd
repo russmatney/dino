@@ -17,14 +17,15 @@ func _ready():
 		if ch is BrickLevelGen:
 			level_gen = ch
 
-	regeneration_complete.connect(setup_level)
+	level_gen.nodes_transferred.connect(func():
+		regeneration_complete.emit()
+		setup_level())
 	setup_level()
 
 ## regenerate ###################################################3
 
 func regenerate(opts=null):
 	level_gen.generate(opts)
-	level_gen.nodes_transferred.connect(func(): regeneration_complete.emit())
 
 ## setup_level ###################################################3
 

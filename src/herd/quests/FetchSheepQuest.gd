@@ -1,6 +1,7 @@
 @tool
 extends Node
 
+# TODO refactor to find and support multiple pens, regardless of node structure
 @onready var sheep_pen = $SheepPen
 
 var all_sheep = []

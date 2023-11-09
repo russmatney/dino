@@ -1,14 +1,10 @@
 extends Node
 
+## vars #####################################################
+
 signal all_quests_complete
 signal quest_failed
 signal quest_update
-
-func _ready():
-	ensure_jumbotron()
-
-######################################################
-# data
 
 var active_quests = {}
 
@@ -17,8 +13,7 @@ func q_label(node, opts):
 
 var current_level_label = "Quest Status"
 
-######################################################
-# register quest and updates
+## register quest and updates #####################################################
 
 func register_quest(node, opts={}):
 	var label = q_label(node, opts)
@@ -49,16 +44,7 @@ func unregister(node, opts={}):
 	active_quests.erase(label)
 	quest_update.emit()
 
-
-######################################################
-# public helper
-
-func flash_quest_status():
-	# briefly show quest status
-	pass
-
-######################################################
-# all complete?
+## all complete? #####################################################
 
 func check_all_complete():
 	var incomplete = []
@@ -82,8 +68,7 @@ func check_all_complete():
 	Debug.pr("All quests complete!")
 	all_quests_complete.emit()
 
-######################################################
-# signal updates
+## signal updates #####################################################
 
 func _on_complete(node, opts):
 	var label = q_label(node, opts)
@@ -108,43 +93,32 @@ func _on_count_remaining_update(remaining, node, opts):
 	active_quests[label].remaining = remaining
 	quest_update.emit()
 
-###########################################################################
-# jumbotron
+## jumbotron ##########################################################################
 
 var jumbotron_scene = preload("res://addons/quest/Jumbotron.tscn")
 var jumbotron
-
-func ensure_jumbotron():
-	if jumbotron and is_instance_valid(jumbotron):
-		return
-
-	jumbotron = jumbotron_scene.instantiate()
-	jumbotron.set_visible(false)
-	Navi.add_child(jumbotron)
 
 signal jumbo_closed
 
 func jumbo_notif(opts):
 	if not jumbotron or not is_instance_valid(jumbotron):
-		Debug.err("No valid jumbotron, cannot present jumbo_notif", opts)
-		return
+		jumbotron = jumbotron_scene.instantiate()
+		Navi.add_child(jumbotron)
 
-	var body = opts.get("body")
+	var body = opts.get("body", "")
 	var key_or_action = opts.get("key")
 	key_or_action = opts.get("action", key_or_action)
 	var action_label_text = opts.get("action_label_text")
 	var header = opts.get("header")
 	var on_close = opts.get("on_close")
 
+	# reset data
 	jumbotron.header_text = header
-	if body:
-		jumbotron.body_text = body
-	else:
-		jumbotron.body_text = ""
+	jumbotron.body_text = body
+	jumbotron.action_hint.hide()
+
 	if key_or_action or action_label_text:
 		jumbotron.action_hint.display(key_or_action, action_label_text)
-	else:
-		jumbotron.action_hint.hide()
 
 	jumbo_closed.connect(func():
 		jumbotron.fade_out()
