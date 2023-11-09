@@ -11,13 +11,13 @@
 #+html: <img alt="Patreon" src=https://img.shields.io/badge/Patreon-Support%20this%20Project-%23f1465a?style=for-the-badge />
 #+html: </a>
 #+html: <a href="https://discord.gg/xZHWtGfAvF">
-#+html: <img alt="Discord" src="https://img.shields.io/discord/758750490015563776?style=style-for-the-badge&logo=discord&logoColor=fff&label=discord">
+#+html: <img alt="Discord" src="https://img.shields.io/discord/758750490015563776?style=for-the-badge&logo=discord&logoColor=fff&label=discord" />
 #+html: </a>
 #+html: <a href="https://russmatney.itch.io/dino">
-#+html: <img alt="Itch.io" src="https://img.shields.io/badge/dino%20-%20?style=for-the-badge&logo=itch.io&logoColor=fff&label=itch.io">
+#+html: <img alt="Itch.io" src="https://img.shields.io/badge/dino%20-%20?style=for-the-badge&logo=itch.io&logoColor=fff&label=itch.io&color=ef99ab" />
 #+html: </a>
 #+html: <a href="https://store.steampowered.com/app/2589550/Dino/">
-#+html: <img alt="Steam" src="https://img.shields.io/badge/add%20to%20wishlist%20-%20?style=for-the-badge&logo=steam&label=steam">
+#+html: <img alt="Steam" src="https://img.shields.io/badge/add%20to%20wishlist%20-%20?style=for-the-badge&logo=steam&label=steam&color=55abef" />
 #+html: </a>
 #+html:  <a href="https://mastodon.gamedev.place/@russmatney">
 #+html:    <img src="https://img.shields.io/badge/Mastodon-teal?style=for-the-badge&logo=mastodon&logoColor=white" alt="Mastodon Badge"/>
