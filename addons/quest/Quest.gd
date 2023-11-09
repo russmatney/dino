@@ -41,13 +41,13 @@ func register_quest(node, opts={}):
 		Debug.warn("OVERWRITING existing quest with node.label:", label)
 
 	if node.has_signal("quest_complete"):
-		node.quest_complete.connect(_on_complete.bind(node, opts))
+		Util._connect(node.quest_complete, _on_complete.bind(node, opts))
 	if node.has_signal("quest_failed"):
-		node.quest_failed.connect(_on_fail.bind(node, opts))
+		Util._connect(node.quest_failed, _on_fail.bind(node, opts))
 	if node.has_signal("count_remaining_update"):
-		node.count_remaining_update.connect(_on_count_remaining_update.bind(node, opts))
+		Util._connect(node.count_remaining_update, _on_count_remaining_update.bind(node, opts))
 	if node.has_signal("count_total_update"):
-		node.count_total_update.connect(_on_count_total_update.bind(node, opts))
+		Util._connect(node.count_total_update, _on_count_total_update.bind(node, opts))
 
 	var quest = ActiveQuest.new()
 	quest.label = opts.get("label", node.name)

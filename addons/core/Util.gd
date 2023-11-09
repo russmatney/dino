@@ -223,6 +223,9 @@ func set_collisions_enabled(node, enabled):
 
 # NOTE connections can be deferred or one_shot via ConnectFlags
 func _connect(sig, callable, flags=null):
+	if sig == null:
+		Debug.warn("Could not connect null signal")
+		return
 	if sig.is_connected(callable):
 		return
 	var err
@@ -233,9 +236,11 @@ func _connect(sig, callable, flags=null):
 	if err:
 		Debug.pr("[Error]: ", err, sig, callable)  # useless enum digit
 
+func call_in(callable, s):
+	await get_tree().create_timer(1.0).timeout
+	callable.call()
 
-############################################################
-# random
+## random ###########################################################
 
 func rand_of(arr, n=1):
 	if len(arr) == 0:
@@ -247,13 +252,10 @@ func rand_of(arr, n=1):
 	else:
 		return arr.slice(0, n)
 
-
 func set_random_frame(anim):
 	anim.frame = randi() % anim.sprite_frames.get_frame_count(anim.animation)
 
-
-############################################################
-# misc functional
+## misc functional ###########################################################
 
 func _or(a, b = null, c = null, d = null, e = null):
 	if a:

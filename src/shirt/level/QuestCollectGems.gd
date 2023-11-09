@@ -15,7 +15,7 @@ func _ready():
 func setup():
 	set_total()
 	for g in get_gems():
-		g.tree_exited.connect(update_quest)
+		Util._connect(g.tree_exited, update_quest)
 	update_quest()
 
 func set_total():

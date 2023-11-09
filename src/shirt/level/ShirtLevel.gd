@@ -29,8 +29,8 @@ func regenerate(opts=null):
 ## setup_level ###################################################3
 
 func setup_level():
-	Q.all_quests_complete.connect(on_quests_complete)
-	Q.quest_failed.connect(on_quest_failed)
+	Util._connect(Q.all_quests_complete, on_quests_complete)
+	Util._connect(Q.quest_failed, on_quest_failed)
 	Q.setup_quests()
 
 	Game.maybe_spawn_player()
