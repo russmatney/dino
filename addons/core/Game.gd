@@ -10,11 +10,8 @@ var is_in_game_mode: bool = false
 ## ready ##########################################################
 
 func _ready():
-	player_found.connect(_on_player_found)
 	player_ready.connect(_find_player)
 	_find_player()
-
-	Navi.new_scene_instanced.connect(_on_new_scene_instanced)
 
 ## game entities ##########################################################
 
@@ -159,15 +156,6 @@ func load_main_menu():
 
 ## player ##########################################################
 
-# maybe better to let the zones respawn the player?
-func _on_new_scene_instanced(scene):
-	if current_game and current_game.game_entity.manages_scene(scene):
-		if current_game.game_entity.should_spawn_player(scene):
-			if not player and not spawning:
-				# defer to let the scene bring it's own player first
-				maybe_spawn_player.call_deferred({skip_managed_check=true})
-
-
 signal player_found(player)
 signal player_ready(player)
 
@@ -195,9 +183,6 @@ func _find_player(p=null):
 		return
 
 	player_found.emit(player)
-
-func _on_player_found(_p):
-	pass
 
 func remove_player():
 	var p = player
