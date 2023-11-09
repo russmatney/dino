@@ -1,13 +1,6 @@
 #+title: dino
 
-#+name: Unit Tests
-[[https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg]]
-
-#+name: Itch Deploy
-[[https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg]]
-
-#+name: Steam Deploy
-[[https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml/badge.svg]]
+#+html: <p align="center"><a href="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml"><img alt="Unit Tests" src="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg" /></a><a href="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml"><img alt="Itch Deploy" src="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg" /></a><a href="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml"><img alt="Steam Deploy" src="https://github.com/russmatney/dino/actions/workflows/steam_build_and_deploy.yml/badge.svg" /></a></p>
 
 Dino is a monorepo/sandbox full of Godot games and addons.
 
