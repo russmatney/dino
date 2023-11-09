@@ -10,3 +10,5 @@ _id = "21"
 [node name="Arcade" type="Node2D"]
 script = ExtResource("1_tnk8n")
 current_game_entity = SubResource("Resource_bvnsd")
+_seed = null
+set_random_seed = null

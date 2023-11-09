@@ -2,23 +2,16 @@ extends Node2D
 
 ## vars ######################################################
 
-var level_gen: BrickLevelGen
+@onready var level_gen: BrickLevelGen = $LevelGen
 
-signal regeneration_complete
 signal level_complete
 
 ## ready ######################################################
 
 func _ready():
 	Debug.pr("Shirt level!")
+	level_gen.nodes_transferred.connect(setup_level)
 
-	for ch in get_children():
-		if ch is BrickLevelGen:
-			level_gen = ch
-
-	level_gen.nodes_transferred.connect(func():
-		regeneration_complete.emit()
-		setup_level())
 	if not Game.is_managed:
 		setup_level()
 

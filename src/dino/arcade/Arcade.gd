@@ -50,6 +50,14 @@ func select_game():
 
 ## launch game ##################################################3
 
+func setup_game(node, entity):
+	node.ready.connect(_on_game_ready)
+
+	if node.has_signal("level_complete"):
+		node.level_complete.connect(_on_level_complete)
+	else:
+		Debug.warn("game node has no 'level_complete' signal!", node)
+
 func launch_game(entity):
 	current_game_entity = entity
 
@@ -63,16 +71,7 @@ func launch_game(entity):
 
 	var scene = entity.get_first_level_scene()
 	game_node = scene.instantiate()
-
-	game_node.ready.connect(_on_game_ready)
-
-	if game_node.has_signal("level_complete"):
-		game_node.level_complete.connect(_on_level_complete)
-	else:
-		Debug.warn("game node has no 'level_complete' signal!", game_node)
-
-	if game_node.has_signal("regeneration_complete"):
-		game_node.regeneration_complete.connect(_on_regen_complete)
+	setup_game(game_node, entity)
 
 	# TODO games/levels should transition IN smoothly
 	add_child(game_node)
@@ -85,15 +84,13 @@ func _on_game_ready():
 	if game_node.has_method("regenerate"):
 		game_node.regenerate(level_opts)
 
-	# force player respawn in no-regen case
-	_on_regen_complete()
-
-func _on_regen_complete():
-	# what player opts to pass? hud/cam/misc other state?
-	Game.respawn_player({player_scene=current_game_entity.get_player_scene()})
+	# TODO should the game-mode consume Quests directly?
+	# Util._connect(Q.all_quests_complete, _on_level_complete)
+	# Util._connect(Q.quest_failed, on_quest_failed)
+	# Q.setup_quests()
 
 func _on_level_complete():
-	# start next level
 	_seed = randi()
+	await get_tree().create_timer(1.0).timeout
 	Hood.notif("Loading next level....")
 	_on_game_ready()

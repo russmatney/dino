@@ -24,7 +24,9 @@ func set_total():
 ## getter ##########################################################
 
 func get_gems():
-	return get_tree().get_nodes_in_group("gems")
+	var t = get_tree()
+	if t:
+		return t.get_nodes_in_group("gems")
 
 ## update ##########################################################
 
