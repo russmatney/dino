@@ -59,9 +59,11 @@ func setup_level():
 	Game.respawn_player()
 
 func on_quests_complete():
-	Hood.notif("DinoLevel Level Complete", self)
+	Hood.notif("DinoLevel Level Complete", self.name)
+	Q.drop_quests()
 	level_complete.emit()
 
 func on_quest_failed():
-	Hood.notif("DinoLevel Restarting", self)
+	Hood.notif("DinoLevel Restarting", self.name)
+	Q.drop_quests()
 	regenerate()

@@ -29,8 +29,14 @@ func setup_quests():
 
 	active_quests = {}
 	for q in get_tree().get_nodes_in_group("quests"):
-		q.setup()
 		register_quest(q)
+	for q in active_quests.values():
+		q.node.setup()
+
+func drop_quests():
+	for q in active_quests.values():
+		q.queue_free()
+	active_quests = {}
 
 func register_quest(node, opts={}):
 	if node == null:
@@ -45,6 +51,7 @@ func register_quest(node, opts={}):
 	Util._connect(node.count_remaining_update, _on_count_remaining_update.bind(node, opts))
 	Util._connect(node.count_total_update, _on_count_total_update.bind(node, opts))
 
+	# TODO rename QuestData?
 	var quest = ActiveQuest.new()
 	quest.label = opts.get("label", node.name)
 	quest.node = node

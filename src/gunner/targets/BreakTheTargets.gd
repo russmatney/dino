@@ -12,10 +12,11 @@ func _ready():
 ## setup ##############################################################################
 
 func setup():
+	Debug.pr("break the targets setting up")
 	var targets = get_targets()
 	total = len(targets)
 	for t in targets:
-		Util._connect(t.tree_exited, update_quest)
+		Util._connect(t.destroyed, func(_t): update_quest())
 
 	update_quest()
 
@@ -29,9 +30,10 @@ func get_targets() -> Array:
 ## update ##############################################################################
 
 func update_quest():
+	Debug.pr("break the targets update_quest")
 	count_total_update.emit(total)
 
-	var remaining = get_targets()
+	var remaining = get_targets().filter(func(t): return not t.is_dead)
 	count_remaining_update.emit(len(remaining))
 
 	if len(remaining) == 0 and total > 0:

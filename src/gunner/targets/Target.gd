@@ -6,6 +6,7 @@ extends Area2D
 @onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
 
 signal destroyed(target)
+var is_dead = false
 
 ## ready
 
@@ -27,6 +28,7 @@ func _animation_finished():
 ## kill
 
 func kill():
+	is_dead = true
 	# TODO aggregate dupe/same-id notifs
 	# Hood.notif("Target Destroyed")
 	DJZ.play(DJZ.S.target_kill)

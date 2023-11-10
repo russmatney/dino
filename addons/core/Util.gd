@@ -244,7 +244,7 @@ func call_in(callable, s):
 
 func rand_of(arr, n=1):
 	if len(arr) == 0:
-		push_warning("Util.rand_of passed empty array")
+	# 	push_warning("Util.rand_of passed empty array")
 		return
 	arr.shuffle()
 	if n == 1:

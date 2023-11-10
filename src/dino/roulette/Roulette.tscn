@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckyjgpyqno21y"]
+[gd_scene load_steps=4 format=3 uid="uid://ckyjgpyqno21y"]
 
 [ext_resource type="Script" path="res://src/dino/roulette/Roulette.gd" id="1_ygq6p"]
+[ext_resource type="Script" path="res://addons/core/DinoGameEntity.gd" id="2_qfuy2"]
+
+[sub_resource type="Resource" id="Resource_qceeo"]
+script = ExtResource("2_qfuy2")
+_id = "35"
 
 [node name="Roulette" type="Node2D"]
 script = ExtResource("1_ygq6p")
-game_ids = [null, null]
+current_game_entity = SubResource("Resource_qceeo")
 set_random_seed = true

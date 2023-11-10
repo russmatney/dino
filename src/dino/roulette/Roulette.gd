@@ -28,57 +28,54 @@ var game_node: Node2D
 			_seed = randi()
 
 @export var room_count: int = 1
+@export var round_num: int = 1
 
 signal round_complete
 
 ## ready ##################################################3
 
 func _ready():
-	if game_ids.filter(func(x): return x).is_empty():
-		game_ids = fb_game_ids
-
 	round_complete.connect(_on_round_complete)
 
 	_seed = randi()
 	Debug.pr("Roulette ready with seed!", _seed)
 	seed(_seed)
 
-	var entity = current_game_entity
-	if not entity:
-		entity = next_random_game()
-	played_game_records.append({entity=entity})
+	start_round(current_game_entity)
 
-	if not entity:
-		Debug.warn("Could not find game_entity!")
-	else:
-		Debug.pr("Launching", entity.get_display_name())
-		launch_game(entity)
-
-## next random game ##################################################3
+## start_round ##################################################3
 
 func next_random_game():
-	var id
-	if current_game_entity:
-		id = current_game_entity.get_entity_id()
-
-	var gs
-	if id:
-		var played_ids = played_game_records.map(func(x): return x.entity.get_entity_id())
-		gs = game_ids.filter(func(g_id): return not g_id in played_ids)
-	else:
-		gs = game_ids
-
-	if current_game_entity:
-		Debug.pr("selecting game from gids", gs, "excluding current", current_game_entity.get_entity_id())
-	else:
-		Debug.pr("selecting game from gids", gs)
-
+	# PlayedGameRecords maybe a collection that manages this index+filter (and game selection?)
+	var played_ids = played_game_records.map(func(x): return x.entity.get_entity_id())
+	var gs = game_ids.filter(func(g_id): return not g_id in played_ids)
 	var eid = Util.rand_of(gs)
 	if eid:
 		var entity = Pandora.get_entity(eid)
 		return entity
 
-## launch game ##################################################3
+func start_round(entity=null):
+	_seed = randi()
+	seed(_seed)
+	Debug.pr("Roulette starting round with seed:", _seed)
+	reset_game_ids()
+
+	if not entity:
+		entity = next_random_game()
+
+	if entity:
+		launch_game(entity)
+		return
+
+	Debug.pr("No entity to launch in start_round")
+
+func reset_game_ids():
+	if game_ids.filter(func(x): return x).is_empty():
+		game_ids = fb_game_ids
+	played_game_records = []
+	Debug.pr("reset game ids: ", game_ids)
+
+## launch_game ##################################################3
 
 func setup_game(node):
 	node.ready.connect(_on_game_ready)
@@ -90,9 +87,10 @@ func setup_game(node):
 
 func launch_game(entity):
 	current_game_entity = entity
+	played_game_records.append({entity=entity})
 
 	if game_node:
-		remove_child(game_node)
+		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
 	Game.launch_in_game_mode(self, entity)
@@ -101,11 +99,12 @@ func launch_game(entity):
 	game_node = scene.instantiate()
 	setup_game(game_node)
 
-	add_child(game_node)
+	add_child.call_deferred(game_node)
 
 ## game level signals ##################################################3
 
 func _on_game_ready():
+	# increase difficulty with `round_num`
 	var level_opts = {seed=_seed, room_count=room_count,}
 
 	if game_node.has_method("regenerate"):
@@ -114,18 +113,23 @@ func _on_game_ready():
 		Debug.warn("Game/Level missing expected regenerate function!", game_node)
 
 func _on_level_complete():
-	var record = played_game_records[len(played_game_records) - 1]
-
-	record["completed_at"] = Time.get_datetime_dict_from_system()
 	Debug.pr("Roulette Level Complete!")
+
+	# TODO helper class/object?
+	var record = played_game_records[len(played_game_records) - 1]
+	record["completed_at"] = Time.get_datetime_dict_from_system()
 
 	var entity = next_random_game()
 	if entity:
 		launch_game(entity)
+		return # don't emit if we launched a new game
 
 	round_complete.emit()
 
 func _on_round_complete():
+	round_num += 1
+	Debug.pr("Roulette Round Complete!")
+
 	await Jumbotron.jumbo_notif({
 		header="Round complete!",
 		body="Try a different seed!",
@@ -140,6 +144,4 @@ func _on_round_complete():
 			])
 		})
 
-	_seed = randi()
-	Debug.pr("Roulette reseeded:", _seed)
-	seed(_seed)
+	start_round()
