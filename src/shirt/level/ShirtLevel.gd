@@ -25,11 +25,10 @@ func setup_level():
 	Q.setup_quests()
 	Game.remove_player()
 
-	var closed = Q.jumbo_notif({
+	await Q.jumbo_notif({
 		header="Welcome to Shirt!",
 		body="Toss that boomerang, crawl that dungeon!"
 		})
-	await closed
 
 	Game.respawn_player()
 

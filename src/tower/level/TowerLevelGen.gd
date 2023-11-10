@@ -4,8 +4,8 @@ extends BrickLevelGen
 func get_room_opts(opts):
 	var default_room_opt = {flags=["middle"], side=Vector2.UP}
 
-	var initial_rooms = [{flags=["bottom"]}]
-	var final_rooms = [{flags=["top"], side=Vector2.UP}, {flags=["end"], side=Vector2.RIGHT}]
+	var initial_rooms = [{flags=["bottom", "quick"]}]
+	var final_rooms = [{flags=["top", "quick"], side=Vector2.UP}, {flags=["end"], side=Vector2.RIGHT}]
 
 	var agg = range(room_count - len(initial_rooms) - len(final_rooms)).reduce(func(agg, _i):
 		var next_room_opt = default_room_opt.duplicate(true)

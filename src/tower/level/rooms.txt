@@ -15,6 +15,18 @@ ROOMS
 
 name Start
 bottom
+quick
+
+x.....................x
+x.....................x
+x.o..........o........x
+xxx.........xxx.......x
+xxxo...p..........xxxxx
+xxx..xxxx........oxxxxx
+xxxxxxxxxxxxxxxxxxxxxxx
+
+name Start
+bottom
 
 xxx.....................xxx
 xxx...............o.....xxx
@@ -83,6 +95,21 @@ xxxxxx........xxxxxxxxxxxxx
 xxx.....................xxx
 xxx.....................xxx
 
+
+name Top
+top
+quick
+
+xxxxxxxxxxxxxxxxxxxxxxx
+x......................
+x......................
+x......................
+x...............xxxxxxx
+x............xxxxxxxxxx
+x.....................x
+xxxxxxx...............x
+xxxxxxxx..............x
+xxxxxxxxxx............x
 
 name Top
 top

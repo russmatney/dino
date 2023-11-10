@@ -27,7 +27,8 @@ func _animation_finished():
 ## kill
 
 func kill():
-	Hood.notif("Target Destroyed")
+	# TODO aggregate dupe/same-id notifs
+	# Hood.notif("Target Destroyed")
 	DJZ.play(DJZ.S.target_kill)
 	anim.play("pop")
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
