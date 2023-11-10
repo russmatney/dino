@@ -52,7 +52,7 @@ func on_quests_complete():
 func on_quest_failed(_quest):
 	DJZ.play(DJZ.S.heavy_fall)
 	level_complete = true
-	Q.jumbo_notif({header="All the sheep died.", body="Yeesh!",
+	Jumbotron.jumbo_notif({header="All the sheep died.", body="Yeesh!",
 		action="close", action_label_text="Restart Level",
 		on_close=retry_level})
 

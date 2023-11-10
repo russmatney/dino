@@ -73,7 +73,7 @@ func quest_complete():
 	if room:
 		room.pause()
 
-	var on_close = Q.jumbo_notif({
+	var on_close = Jumbotron.jumbo_notif({
 		header=header, body=body, action=action,
 		action_label_text=action_label_text,
 		})

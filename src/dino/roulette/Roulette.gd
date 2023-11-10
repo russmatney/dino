@@ -127,12 +127,12 @@ func _on_level_complete():
 	round_complete.emit()
 
 func _on_round_complete():
-	await Q.jumbo_notif({
+	await Jumbotron.jumbo_notif({
 		header="Round complete!",
 		body="Try a different seed!",
 		})
 
-	await Q.jumbo_notif({
+	await Jumbotron.jumbo_notif({
 		header="Did you know?",
 		body=Util.rand_of([
 			"You can change the number of rooms in the Pause menu!",

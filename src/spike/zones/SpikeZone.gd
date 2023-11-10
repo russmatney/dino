@@ -14,7 +14,7 @@ func _ready():
 func on_quests_complete():
 	DJZ.play(DJZ.S.fire)
 
-	Q.jumbo_notif({header="Congrats on feeding the void.", body="woo-hoo.",
+	Jumbotron.jumbo_notif({header="Congrats on feeding the void.", body="woo-hoo.",
 		action="close", action_label_text="Next Level",
 		on_close=handle_level_complete})
 

@@ -25,7 +25,7 @@ func setup_level():
 	Q.setup_quests()
 	Game.remove_player()
 
-	var closed = Q.jumbo_notif({
+	var closed = Jumbotron.jumbo_notif({
 		header="Break the targets!",
 		body="Good luck, little one."
 		})

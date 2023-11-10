@@ -49,7 +49,7 @@ func _process(_delta):
 			Hood.notif("All coins found!")
 			Debug.pr("All coins found!")
 			door.open()
-			var on_close = Q.jumbo_notif({header="Door opening!", body="All coins found."})
+			var on_close = Jumbotron.jumbo_notif({header="Door opening!", body="All coins found."})
 			if on_close:
 				if not Q.jumbo_closed.is_connected(_on_close_respawn):
 					on_close.connect(_on_close_respawn.bind(on_close))

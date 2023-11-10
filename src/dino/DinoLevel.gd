@@ -25,7 +25,7 @@ func get_exit_jumbo_opts():
 
 func _exit_tree():
 	Debug.pr("dino level exiting tree", self)
-	await Q.jumbo_notif(get_exit_jumbo_opts())
+	await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
 
 ## regenerate ###################################################3
 
@@ -54,7 +54,7 @@ func setup_level():
 	Game.remove_player()
 
 	# mk this is kind of cool
-	await Q.jumbo_notif(get_splash_jumbo_opts())
+	await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
 
 	Game.respawn_player()
 

@@ -88,7 +88,7 @@ func on_puzzle_win():
 		header = "[jump]Puzzle %s Complete![/jump]" % puzzle_num
 		body = "....but how?"
 
-	dismiss_jumbo_signal = Q.jumbo_notif({
+	dismiss_jumbo_signal = Jumbotron.jumbo_notif({
 		header=header, body=body,
 		on_close=func():
 		if game_complete:

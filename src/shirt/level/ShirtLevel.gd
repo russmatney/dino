@@ -25,7 +25,7 @@ func setup_level():
 	Q.setup_quests()
 	Game.remove_player()
 
-	await Q.jumbo_notif({
+	await Jumbotron.jumbo_notif({
 		header="Welcome to Shirt!",
 		body="Toss that boomerang, crawl that dungeon!"
 		})
