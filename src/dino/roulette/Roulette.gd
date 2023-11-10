@@ -11,8 +11,7 @@ extends Node2D
 var fb_game_ids = [
 	# DinoGameEntityIds.SHIRT,
 	DinoGameEntityIds.GUNNER,
-	# DinoGameEntityIds.TOWERJET,
-
+	DinoGameEntityIds.TOWERJET,
 	# DinoGameEntityIds.SUPERELEVATORLEVEL,
 	# DinoGameEntityIds.THEWOODS,
 	# DinoGameEntityIds.PLUGGS,
@@ -140,4 +139,7 @@ func _on_round_complete():
 			"You can change the tile_size in the Pause menu! I like 16x16!",
 			])
 		})
+
 	_seed = randi()
+	Debug.pr("Roulette reseeded:", _seed)
+	seed(_seed)
