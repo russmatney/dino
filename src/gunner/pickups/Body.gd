@@ -3,10 +3,6 @@ extends Node2D
 var type = "body"
 
 
-func _ready():
-	Respawner.register_respawn(self)
-
-
 func kill():
 	DJZ.play(DJZ.S.pickup)
 	queue_free()

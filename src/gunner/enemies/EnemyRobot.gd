@@ -11,7 +11,6 @@ var is_dead = false
 
 
 func _ready():
-	Respawner.register_respawn(self)
 	machine.start()
 
 	Cam.add_offscreen_indicator(self, {

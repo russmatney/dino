@@ -6,7 +6,6 @@ extends Node2D
 
 func _ready():
 	anim.animation = type
-	Respawner.register_respawn(self)
 	Cam.add_offscreen_indicator(self)
 	U.animate(self)
 	U.animate_rotate(self)

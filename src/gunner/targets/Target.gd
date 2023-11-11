@@ -12,7 +12,6 @@ var is_dead = false
 
 func _ready():
 	anim.animation_finished.connect(_animation_finished)
-	Respawner.register_respawn(self)
 	Cam.add_offscreen_indicator(self)
 	# TODO how to work with animations and positions after regen bug
 	# U.animate(self)
