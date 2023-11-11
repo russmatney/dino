@@ -216,18 +216,18 @@ func collect_pickup(pickup_type):
 
 ## powerups #######################################################
 
-func update_with_powerup(powerup: SS.Powerup):
+func update_with_powerup(powerup: SSData.Powerup):
 	match (powerup):
-		SS.Powerup.Sword: add_sword()
-		SS.Powerup.Flashlight: add_flashlight()
-		SS.Powerup.Gun: add_gun()
-		SS.Powerup.Ascend: add_ascend()
-		SS.Powerup.Descend: add_descend()
-		SS.Powerup.DoubleJump: add_double_jump()
-		SS.Powerup.Climb: add_climb()
-		SS.Powerup.Jetpack: add_jetpack()
+		SSData.Powerup.Sword: add_sword()
+		SSData.Powerup.Flashlight: add_flashlight()
+		SSData.Powerup.Gun: add_gun()
+		SSData.Powerup.Ascend: add_ascend()
+		SSData.Powerup.Descend: add_descend()
+		SSData.Powerup.DoubleJump: add_double_jump()
+		SSData.Powerup.Climb: add_climb()
+		SSData.Powerup.Jetpack: add_jetpack()
 
-func add_powerup(powerup: SS.Powerup):
+func add_powerup(powerup: SSData.Powerup):
 	powerups.append(powerup)
 	update_with_powerup(powerup)
 	Hotel.check_in(self)

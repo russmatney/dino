@@ -26,7 +26,6 @@ import/import_plugin/default_automatic_importer="No Import"
 
 TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 Pandora="*res://addons/pandora/api.gd"
-SS="*res://addons/beehive/sidescroller/SideScroller.gd"
 Debug="*res://addons/core/Debug.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"

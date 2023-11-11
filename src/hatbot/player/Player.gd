@@ -11,7 +11,7 @@ func _ready():
 		Hood.ensure_hud(hud)
 
 		if not Game.is_managed:
-			powerups = SS.all_powerups
+			powerups = SSData.all_powerups
 
 		died.connect(_on_player_death)
 
