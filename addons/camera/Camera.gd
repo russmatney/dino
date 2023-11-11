@@ -15,7 +15,7 @@ func _ready():
 
 func _on_debug_toggled(debugging):
 	if debugging:
-		Debug.pr("debugging camera!")
+		Log.pr("debugging camera!")
 
 ##############################################################
 # cam_window_rect
@@ -53,11 +53,11 @@ var spawning_camera
 
 func request_camera(opts = {}):
 	if not opts is Dictionary:
-		Debug.warn("unexpected request_camera opts value", opts)
+		Log.warn("unexpected request_camera opts value", opts)
 		opts = {}
 
 	if spawning_camera:
-		# Debug.warn("already spawning camera, ignoring request_camera call", opts)
+		# Log.warn("already spawning camera, ignoring request_camera call", opts)
 		return cam
 
 	var player = opts.get("player")
@@ -66,22 +66,22 @@ func request_camera(opts = {}):
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
-		# Debug.pr("freeing existing camera, creating a new one")
+		# Log.pr("freeing existing camera, creating a new one")
 		# cam.free()
 		# make sure existing cam matches the requested cam
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
 			if cam.get_parent() == player:
-				# Debug.pr("player already has cam parent")
+				# Log.pr("player already has cam parent")
 				return cam
 
 			var cam_parent = cam.get_parent()
 			if cam_parent != null and is_instance_valid(cam_parent) and cam.get_parent() != player:
-				Debug.pr("reparenting cam to player:", cam)
+				Log.pr("reparenting cam to player:", cam)
 				cam.reparent(player)
 			else:
-				Debug.pr("Setting cam parent to player:", cam)
+				Log.pr("Setting cam parent to player:", cam)
 				player.add_child(cam)
 
 		if cam_mode == mode.ANCHOR and anchor:
@@ -93,7 +93,7 @@ func request_camera(opts = {}):
 
 	var cams = get_tree().get_nodes_in_group("camera")
 	if cams and cams.size() > 0:
-		Debug.pr("Found unmanaged cams in 'camera' group, aborting 'request_camera'.", cams)
+		Log.pr("Found unmanaged cams in 'camera' group, aborting 'request_camera'.", cams)
 		return cam
 
 	cam = cam_scene.instantiate()
@@ -125,7 +125,7 @@ func inc_trauma(inc = 0.1):
 	if cam and is_instance_valid(cam):
 		cam.inc_trauma(inc)
 	else:
-		Debug.warn("inc_trauma called, but no valid 'cam' set.")
+		Log.warn("inc_trauma called, but no valid 'cam' set.")
 
 
 func screenshake(trauma = 0.3):
@@ -287,7 +287,7 @@ func add_offscreen_indicator(node, opts={}):
 		indicator_scene = load(indicator_scene)
 
 	if not indicator_scene:
-		Debug.err("Failed to load indicator scene", indicator_scene, "on node", node)
+		Log.err("Failed to load indicator scene", indicator_scene, "on node", node)
 		return
 
 	var indicator = indicator_scene.instantiate()

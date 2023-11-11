@@ -393,13 +393,13 @@ func add_jetpack():
 
 func add_ascend():
 	if not warp_cast:
-		Debug.warn("refusing to add ascend powerup")
+		Log.warn("refusing to add ascend powerup")
 		return
 	has_ascend = true
 
 func add_descend():
 	if not warp_cast:
-		Debug.warn("refusing to add descend powerup")
+		Log.warn("refusing to add descend powerup")
 		return
 	has_descend = true
 

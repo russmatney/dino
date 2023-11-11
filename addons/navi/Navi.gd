@@ -43,7 +43,7 @@ var last_scene_stack = []
 
 func _ready():
 	if not ResourceLoader.exists(main_menu_path):
-		Debug.prn("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
+		Log.prn("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
 
 	process_mode = PROCESS_MODE_ALWAYS
 
@@ -98,7 +98,7 @@ func find_focus(scene=null):
 
 # Supports a path, packed_scene, or instance of a scene
 func nav_to(scene):
-	Debug.prn("nav_to: ", scene)
+	Log.prn("nav_to: ", scene)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(scene)
 	hide_menus()
@@ -125,7 +125,7 @@ func _deferred_goto_scene(scene):
 		next_scene = scene
 
 	current_scene = next_scene
-	Debug.prn("New current_scene: ", current_scene)
+	Log.prn("New current_scene: ", current_scene)
 	new_scene_instanced.emit(current_scene)
 
 	# Add it to the active scene, as child of root.
@@ -166,17 +166,17 @@ var main_menu_path = "res://src/dino/DinoMenu.tscn"
 
 func set_main_menu(path):
 	if ResourceLoader.exists(path):
-		Debug.prn("Updating main_menu_path: ", path)
+		Log.prn("Updating main_menu_path: ", path)
 		main_menu_path = path
 	else:
-		Debug.prn("No scene at path: ", main_menu_path, ", can't set main menu.")
+		Log.prn("No scene at path: ", main_menu_path, ", can't set main menu.")
 
 func nav_to_main_menu():
 	if ResourceLoader.exists(main_menu_path):
 		hide_menus()
 		nav_to(main_menu_path)
 	else:
-		Debug.prn("No scene at path: ", main_menu_path, ", can't navigate.")
+		Log.prn("No scene at path: ", main_menu_path, ", can't navigate.")
 
 ## pause ###################################################################
 
@@ -185,7 +185,7 @@ var pause_menu
 
 func set_pause_menu(path_or_scene):
 	if path_or_scene == null:
-		Debug.warn("Null passed to set_pause_menu, returning")
+		Log.warn("Null passed to set_pause_menu, returning")
 		return
 	var path = Util.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
@@ -196,7 +196,7 @@ func set_pause_menu(path_or_scene):
 			pause_menu.queue_free()
 		pause_menu = add_menu(load(path))
 	else:
-		Debug.prn("No scene at path: ", path, ", can't set pause menu.")
+		Log.prn("No scene at path: ", path, ", can't set pause menu.")
 
 func _unhandled_input(event):
 	if not Engine.is_editor_hint() and Trolley.is_pause(event):
@@ -235,7 +235,7 @@ var death_menu
 
 func set_death_menu(path_or_scene):
 	if path_or_scene == null:
-		Debug.warn("Null passed to set_pause_menu, returning")
+		Log.warn("Null passed to set_pause_menu, returning")
 		return
 	var path = Util.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
@@ -245,18 +245,18 @@ func set_death_menu(path_or_scene):
 			death_menu.queue_free()
 		death_menu = add_menu(load(path))
 	else:
-		Debug.prn("No scene at path: ", path, ", can't set death menu.")
+		Log.prn("No scene at path: ", path, ", can't set death menu.")
 
 
 func show_death_menu():
-	Debug.prn("Show death screen")
+	Log.prn("Show death screen")
 	DJ.pause_game_song()
 	death_menu.show()
 	find_focus(death_menu)
 
 
 func hide_death_menu():
-	Debug.prn("Hide death screen")
+	Log.prn("Hide death screen")
 	death_menu.hide()
 
 
@@ -267,7 +267,7 @@ var win_menu
 
 func set_win_menu(path_or_scene):
 	if path_or_scene == null:
-		Debug.warn("Null passed to set_pause_menu, returning")
+		Log.warn("Null passed to set_pause_menu, returning")
 		return
 	var path = Util.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
@@ -277,14 +277,14 @@ func set_win_menu(path_or_scene):
 			win_menu.queue_free()
 		win_menu = add_menu(load(path))
 	else:
-		Debug.prn("No scene at path: ", path, ", can't set win menu.")
+		Log.prn("No scene at path: ", path, ", can't set win menu.")
 
 func show_win_menu():
-	Debug.prn("Show win screen")
+	Log.prn("Show win screen")
 	DJ.pause_game_song()
 	win_menu.show()
 	find_focus(win_menu)
 
 func hide_win_menu():
-	Debug.prn("Hide win screen")
+	Log.prn("Hide win screen")
 	win_menu.hide()

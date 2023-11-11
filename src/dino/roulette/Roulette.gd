@@ -38,7 +38,7 @@ func _ready():
 	round_complete.connect(_on_round_complete)
 
 	_seed = randi()
-	Debug.pr("Roulette ready with seed!", _seed)
+	Log.pr("Roulette ready with seed!", _seed)
 	seed(_seed)
 
 	start_round(current_game_entity)
@@ -57,7 +57,7 @@ func next_random_game():
 func start_round(entity=null):
 	_seed = randi()
 	seed(_seed)
-	Debug.pr("Roulette starting round with seed:", _seed)
+	Log.pr("Roulette starting round with seed:", _seed)
 	reset_game_ids()
 
 	if not entity:
@@ -67,13 +67,13 @@ func start_round(entity=null):
 		launch_game(entity)
 		return
 
-	Debug.pr("No entity to launch in start_round")
+	Log.pr("No entity to launch in start_round")
 
 func reset_game_ids():
 	if game_ids.filter(func(x): return x).is_empty():
 		game_ids = fb_game_ids
 	played_game_records = []
-	Debug.pr("reset game ids: ", game_ids)
+	Log.pr("reset game ids: ", game_ids)
 
 ## launch_game ##################################################3
 
@@ -83,7 +83,7 @@ func setup_game(node):
 	if node.has_signal("level_complete"):
 		node.level_complete.connect(_on_level_complete)
 	else:
-		Debug.warn("game node has no 'level_complete' signal!", node)
+		Log.warn("game node has no 'level_complete' signal!", node)
 
 func launch_game(entity):
 	current_game_entity = entity
@@ -110,10 +110,10 @@ func _on_game_ready():
 	if game_node.has_method("regenerate"):
 		game_node.regenerate(level_opts)
 	else:
-		Debug.warn("Game/Level missing expected regenerate function!", game_node)
+		Log.warn("Game/Level missing expected regenerate function!", game_node)
 
 func _on_level_complete():
-	Debug.pr("Roulette Level Complete!")
+	Log.pr("Roulette Level Complete!")
 
 	# TODO helper class/object?
 	var record = played_game_records[len(played_game_records) - 1]
@@ -128,7 +128,7 @@ func _on_level_complete():
 
 func _on_round_complete():
 	round_num += 1
-	Debug.pr("Roulette Round Complete!")
+	Log.pr("Roulette Round Complete!")
 
 	await Jumbotron.jumbo_notif({
 		header="Round complete!",

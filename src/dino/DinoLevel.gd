@@ -9,7 +9,7 @@ signal level_complete
 ## ready ######################################################
 
 func _ready():
-	Debug.pr("DinoLevel ready: ", name)
+	Log.pr("DinoLevel ready: ", name)
 
 	# call setup_level every time we get new nodes
 	# could use a better name for :gen/finished-hook

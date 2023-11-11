@@ -139,14 +139,14 @@ var weapons = []
 
 func add_weapon(wp):
 	weapons.append(wp)
-	Debug.pr("[player weapons]: ", weapons)
+	Log.pr("[player weapons]: ", weapons)
 
 	update_weapon()
 
 
 func remove_weapon(wp):
 	weapons.erase(wp)
-	Debug.pr("[player weapons]: ", weapons)
+	Log.pr("[player weapons]: ", weapons)
 
 
 # bow
@@ -167,7 +167,7 @@ var arrow_impulse = 400
 func fire_bow():
 	var bow = Util.get_first_child_in_group(self, "bow")
 	if bow == null:
-		Debug.pr("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
+		Log.pr("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
 		return
 
 	var arrow = arrow_scene.instantiate()
@@ -226,13 +226,13 @@ var items = []
 
 func add_item(it):
 	items.append(it)
-	Debug.pr("[player items]: ", items)
+	Log.pr("[player items]: ", items)
 	update_item_info()
 
 
 func remove_item(it):
 	items.erase(it)
-	Debug.pr("[player items]: ", items)
+	Log.pr("[player items]: ", items)
 	update_item_info()
 
 
@@ -284,12 +284,12 @@ var bodies = []
 func _on_LockOnDetectArea2D_body_entered(body: Node):
 	if body != self and body.name != "DungeonWalls":
 		bodies.append(body)
-		# Debug.pr("[player-lockon-bodies]:", bodies)
+		# Log.pr("[player-lockon-bodies]:", bodies)
 
 
 func _on_LockOnDetectArea2D_body_exited(body: Node):
 	bodies.erase(body)
-	# Debug.pr("[player-lockon-bodies]:", bodies)
+	# Log.pr("[player-lockon-bodies]:", bodies)
 
 
 var areas = []
@@ -297,12 +297,12 @@ var areas = []
 
 func _on_LockOnDetectArea2D_area_entered(area: Area2D):
 	areas.append(area)
-	# Debug.pr("[player-lockon-areas]:", areas)
+	# Log.pr("[player-lockon-areas]:", areas)
 
 
 func _on_LockOnDetectArea2D_area_exited(area: Area2D):
 	areas.erase(area)
-	# Debug.pr("[player-lockon-areas]:", areas)
+	# Log.pr("[player-lockon-areas]:", areas)
 
 
 @onready var line_of_sight = $LineOfSightRayCast2D
@@ -347,12 +347,12 @@ var nearby_items = []
 
 func _on_ItemPullArea2D_area_entered(area: Area2D):
 	nearby_items.append(area)
-	# Debug.pr("[player-nearby-items]: ", nearby_items)
+	# Log.pr("[player-nearby-items]: ", nearby_items)
 
 
 func _on_ItemPullArea2D_area_exited(area: Area2D):
 	nearby_items.erase(area)
-	# Debug.pr("[player-nearby-items]: ", nearby_items)
+	# Log.pr("[player-nearby-items]: ", nearby_items)
 
 
 var move_speed = 400
@@ -384,7 +384,7 @@ var dead = false
 
 func hit():
 	health -= 1
-	Debug.pr("[PLAYER HIT]: remaining health = ", health)
+	Log.pr("[PLAYER HIT]: remaining health = ", health)
 	Hotel.check_in(self)
 
 	remove_info_message(health_info_dict(health + 1))
@@ -400,7 +400,7 @@ func hit():
 
 
 func die():
-	Debug.pr("[PLAYER DEATH]")
+	Log.pr("[PLAYER DEATH]")
 	dead = true
 	queue_free()
 	# death menu

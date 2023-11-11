@@ -7,7 +7,7 @@ var editor_interface
 
 
 func _enter_tree():
-	Debug.prn("<Trolley>")
+	Log.prn("<Trolley>")
 	add_autoload_singleton("Trolley", "res://addons/trolley/Trolley.gd")
 
 	# trolley_debug_panel = trolley_debug_panel_scene.instantiate()
@@ -24,7 +24,7 @@ func _exit_tree():
 
 	# if trolley_debug_panel:
 	# 	trolley_debug_panel.free()
-	Debug.prn("</Trolley>")
+	Log.prn("</Trolley>")
 
 
 # func _has_main_screen():

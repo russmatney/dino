@@ -25,13 +25,13 @@ func setup():
 		label.text = "[center]%s[/center]" % str(game_entity.get_display_name())
 		icon.texture_normal = game_entity.get_icon_texture()
 	else:
-		Debug.warn("no game_entity, cannot setup")
+		Log.warn("no game_entity, cannot setup")
 
 func start_game():
 	if game_entity:
 		Game.launch(game_entity)
 	else:
-		Debug.err("Cannot start game, no game_entity set!")
+		Log.err("Cannot start game, no game_entity set!")
 
 func set_focus():
 	icon.grab_focus()

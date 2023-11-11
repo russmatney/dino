@@ -7,13 +7,13 @@ var turn_table
 var editor_interface
 
 func _enter_tree():
-	Debug.pr("<DJ>")
+	Log.pr("<DJ>")
 	# add_autoload_singleton("DJ", "res://addons/dj/DJ.gd")
 	# add_autoload_singleton("DJZ", "res://addons/dj/DJZ.gd")
 
 	# turn_table = TurnTable.instantiate()
 	# if turn_table == null:
-	# 	Debug.warn("turn_table failed to init")
+	# 	Log.warn("turn_table failed to init")
 	# else:
 	# 	editor_interface = get_editor_interface()
 	# 	# Maybe want this to quickly reload the ui, like in hotelUI
@@ -30,7 +30,7 @@ func _exit_tree():
 	if turn_table != null and is_instance_valid(turn_table):
 		turn_table.free()
 
-	Debug.prn("</DJ>")
+	Log.prn("</DJ>")
 
 
 # func _has_main_screen():

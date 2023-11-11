@@ -22,7 +22,7 @@ static func build_puzzle_node(opts:Variant) -> Node2D:
 		_game_def = Puzz.parse_game_def(game_def_p)
 
 	if _game_def == null:
-		Debug.warn("No gamedef passed, cannot build_puzzle_node()", opts)
+		Log.warn("No gamedef passed, cannot build_puzzle_node()", opts)
 		return
 
 	# parse/pick the puzzle to load
@@ -39,7 +39,7 @@ static func build_puzzle_node(opts:Variant) -> Node2D:
 		pass
 
 	if _level_def == null or _level_def.shape == null:
-		Debug.warn("Could not determine _level_def, cannot build_puzzle_node()", opts)
+		Log.warn("Could not determine _level_def, cannot build_puzzle_node()", opts)
 		return
 
 	# PackedScene, string, or use fallback
@@ -102,13 +102,13 @@ func _init():
 func _ready():
 	Hotel.register(self)
 	if level_def == null:
-		Debug.pr("no level_def, trying backups!", name)
+		Log.pr("no level_def, trying backups!", name)
 		if game_def_path != "":
 			game_def = Puzz.parse_game_def(game_def_path)
 			level_def = game_def.levels[0]
 			init_game_state()
 		else:
-			Debug.err("no game_def_path!!")
+			Log.err("no game_def_path!!")
 	else:
 		init_game_state()
 
@@ -134,17 +134,17 @@ func hotel_data():
 
 func _unhandled_input(event):
 	if state != null and state.win:
-		Debug.pr("Blocking input events b/c we're in a win state")
+		Log.pr("Blocking input events b/c we're in a win state")
 		return
 
 	if Trolley.is_move(event):
 		if state == null:
-			Debug.warn("No state, ignoring move input")
+			Log.warn("No state, ignoring move input")
 			return
 		check_move_input()
 	elif Trolley.is_undo(event) and not block_move:
 		if state == null:
-			Debug.warn("No state, ignoring undo input")
+			Log.warn("No state, ignoring undo input")
 			return
 		for p in state.players:
 			undo_last_move(p)
@@ -155,7 +155,7 @@ func _unhandled_input(event):
 	elif Trolley.is_restart_released(event):
 		cancel_reset_puzzle()
 	elif Trolley.is_debug_toggle(event):
-		Debug.prn(state.grid)
+		Log.prn(state.grid)
 
 var reset_tween
 func hold_to_reset_puzzle():
@@ -202,7 +202,7 @@ func restart_block_move_timer(t=0.2):
 # sets up the state grid and some initial data based on the assigned level_def
 func init_game_state():
 	if len(level_def.shape) == 0:
-		Debug.warn("init_game_state() called with out level_def.shape", level_def)
+		Log.warn("init_game_state() called with out level_def.shape", level_def)
 		return
 
 	var grid = []
@@ -303,7 +303,7 @@ func create_node_at_coord(obj_name:String, coord:Vector2) -> Node:
 func node_for_object_name(obj_name):
 	var scene = obj_scene.get(obj_name)
 	if not scene:
-		Debug.err("No scene found for object name", obj_name)
+		Log.err("No scene found for object name", obj_name)
 		return
 	var node = scene.instantiate()
 	node.display_name = obj_name
@@ -311,7 +311,7 @@ func node_for_object_name(obj_name):
 	if t != null and "type" in node:
 		node.type = t
 	elif obj_name not in ["Player"]:
-		Debug.warn("no type for object?", obj_name)
+		Log.warn("no type for object?", obj_name)
 	return node
 
 ## grid helpers ##############################################################
@@ -426,13 +426,13 @@ func mark_cell_dotted(cell):
 	# support multiple nodes per cell?
 	var node = Util.first(cell.nodes)
 	if node == null:
-		Debug.warn("can't mark dotted, no node found!", cell)
+		Log.warn("can't mark dotted, no node found!", cell)
 		return
 
 	if node.has_method("mark_dotted"):
 		node.mark_dotted()
 	else:
-		Debug.warn("some strange node loaded?")
+		Log.warn("some strange node loaded?")
 		node.display_name = "Dotted"
 
 	# update game state
@@ -451,7 +451,7 @@ func mark_cell_undotted(cell):
 	if node.has_method("mark_undotted"):
 		node.mark_undotted()
 	else:
-		Debug.warn("some strange node loaded?")
+		Log.warn("some strange node loaded?")
 		node.display_name = "Dot"
 
 	# update game state
@@ -479,7 +479,7 @@ func move_to_goal(player, cell):
 
 func undo_last_move(player):
 	if len(player.move_history) == 0:
-		Debug.warn("Can't undo, no moves yet!")
+		Log.warn("Can't undo, no moves yet!")
 		return
 	# remove last move from move_history
 	var last_pos = player.move_history.pop_front()
@@ -560,7 +560,7 @@ func move(move_dir):
 		else:
 			for cell in cells:
 				if p.stuck:
-					Debug.warn("stuck, didn't see an undo in dir", p.stuck, move_dir, p.move_history)
+					Log.warn("stuck, didn't see an undo in dir", p.stuck, move_dir, p.move_history)
 					moves_to_make.append(["stuck", null, p])
 					if p.node.has_method("move_attempt_stuck"):
 						p.node.move_attempt_stuck(move_dir)
@@ -578,7 +578,7 @@ func move(move_dir):
 				if "Goal" in cell.objs:
 					moves_to_make.append(["goal", move_to_goal, p, cell])
 					break
-				Debug.warn("unexpected/unhandled cell in direction", cell)
+				Log.warn("unexpected/unhandled cell in direction", cell)
 
 	var any_move = moves_to_make.any(func(m): return m[0] in ["dot", "goal"])
 	if any_move:

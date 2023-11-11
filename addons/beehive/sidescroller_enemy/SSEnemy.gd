@@ -248,7 +248,7 @@ func take_hit(opts={}):
 var bodies = []
 
 func _on_body_entered(body):
-	Debug.prn("body entered", body)
+	Log.prn("body entered", body)
 
 	if machine.state.name in ["Idle", "Run"] and body.is_in_group("player"):
 		bodies.append(body)

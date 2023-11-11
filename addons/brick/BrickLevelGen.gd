@@ -25,7 +25,7 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 		room_opt.merge(opts) # merge tile_size and other passed opts
 		room_opt.merge({parsed_room_defs=parsed_room_defs,})
 	if room_opts == null:
-		Debug.warn("No room_opts returned from get_room_opts, nothing to generate")
+		Log.warn("No room_opts returned from get_room_opts, nothing to generate")
 		return {}
 
 	# create the rooms
@@ -266,7 +266,7 @@ func _ready():
 
 func maybe_regen():
 	if len(rooms_node.get_children()) == 0:
-		Debug.pr("no rooms, generating!")
+		Log.pr("no rooms, generating!")
 		generate()
 
 ## generate ######################################################################
@@ -288,7 +288,7 @@ func generate(opts={}):
 	(func():
 		clear_containers()
 		transfer_nodes(data)
-		Debug.pr("GENERATE: new data generated with seed", [data.seed], data.keys())
+		Log.pr("GENERATE: new data generated with seed", [data.seed], data.keys())
 		).call_deferred()
 
 func ensure_containers():

@@ -2,7 +2,7 @@ extends State
 
 
 func enter(_msg = {}):
-	Debug.pr("[IDLE]", actor)
+	Log.pr("[IDLE]", actor)
 	# owner points to the root node of a packed scene
 	# actor.velocity = Vector2.ZERO
 

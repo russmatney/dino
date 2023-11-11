@@ -39,7 +39,7 @@ func _on_end_room_entered(body: Node2D):
 	if body.is_in_group("player"):
 		level_complete.emit()
 
-	# 	Debug.pr("level complete")
+	# 	Log.pr("level complete")
 
 	# 	await get_tree().create_timer(0.3).timeout
 	# 	# clean up nodes/player
@@ -47,7 +47,7 @@ func _on_end_room_entered(body: Node2D):
 
 	# 	# pick new seed
 	# 	level_gen._seed = randi()
-	# 	Debug.pr("new seed: ", level_gen._seed)
+	# 	Log.pr("new seed: ", level_gen._seed)
 
 	# 	await get_tree().create_timer(0.3).timeout
 	# 	# regen level

@@ -2,4 +2,4 @@ extends State
 
 
 func enter(_msg = {}):
-	Debug.pr("[DEAD]", actor)
+	Log.pr("[DEAD]", actor)

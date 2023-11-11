@@ -15,7 +15,7 @@ func _on_entry_updated(entry):
 		if entry.get("gloomba_kos") != null:
 			set_gloomba_kos(entry["gloomba_kos"])
 	if GhostsData.rooms_group in entry["groups"]:
-		Debug.prn("Ghosts rooms group entry update", entry)
+		Log.prn("Ghosts rooms group entry update", entry)
 		set_room_name(entry["name"])
 
 ###################################################################

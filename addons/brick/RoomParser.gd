@@ -28,7 +28,7 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 	if contents == null and contents != "":
 		var path = Util.get_(opts, "room_defs_path")
 		if path == null and path != "":
-			Debug.err("Cannot parse, no room_defs_path")
+			Log.err("Cannot parse, no room_defs_path")
 			# This is where we'd want a union type, or nil punning
 			return null
 		room_defs.path = path

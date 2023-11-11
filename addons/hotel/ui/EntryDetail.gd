@@ -30,7 +30,7 @@ func _ready():
 func setup():
 	if entry and entry_name and data:
 		entry_name.text = entry_to_label(entry)
-		data.text = Debug.to_pretty(entry, true)
+		data.text = Log.to_pretty(entry, true)
 
 #######################################################################
 # testing ui
@@ -42,7 +42,7 @@ func setup():
 			var entries = Hotel.query()
 			if len(entries) > 0:
 				var e = entries[3]
-				Debug.prn("testing with entry: ", e)
+				Log.prn("testing with entry: ", e)
 				entry = e
 		else:
 			entry = null

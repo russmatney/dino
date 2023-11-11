@@ -11,7 +11,7 @@ func node_name_from_path(path):
 func p_script_vars(node):
 	for prop in node.get_property_list():
 		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
-			Debug.pr("\t", prop["name"], ": ", self.get(prop["name"]))
+			Log.pr("\t", prop["name"], ": ", self.get(prop["name"]))
 
 ############################################################
 # ready helpers
@@ -96,10 +96,10 @@ func change_parent(child: Node, new_parent: Node):
 
 func do_change_parent(child, new_parent):
 	if not is_instance_valid(child):
-		Debug.warn("Cannot change parent, child is not valid")
+		Log.warn("Cannot change parent, child is not valid")
 		return
 	if not is_instance_valid(new_parent):
-		Debug.warn("Cannot change parent, new_parent is not valid")
+		Log.warn("Cannot change parent, new_parent is not valid")
 		return
 	var old_parent = child.get_parent()
 	old_parent.remove_child(child)
@@ -154,9 +154,9 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 		scene = packed_scene_or_path
 		sfp = packed_scene_or_path.resource_path
 	else:
-		Debug.warn("unexpected packed_scene_data input", packed_scene_or_path)
+		Log.warn("unexpected packed_scene_data input", packed_scene_or_path)
 	if not scene:
-		Debug.warn("could not create state in packed_scene_data", packed_scene_or_path)
+		Log.warn("could not create state in packed_scene_data", packed_scene_or_path)
 		return
 	var state = scene.get_state()
 	var by_path = {}
@@ -199,7 +199,7 @@ func to_scene_path(path_or_scene):
 	elif path_or_scene is PackedScene:
 		path = path_or_scene.resource_path
 	else:
-		Debug.warn("Unrecognized type in to_scene_path", path_or_scene)
+		Log.warn("Unrecognized type in to_scene_path", path_or_scene)
 	return path
 
 ############################################################
@@ -224,7 +224,7 @@ func set_collisions_enabled(node, enabled):
 # NOTE connections can be deferred or one_shot via ConnectFlags
 func _connect(sig, callable, flags=null):
 	if sig == null:
-		Debug.warn("Could not connect null signal")
+		Log.warn("Could not connect null signal")
 		return
 	if sig.is_connected(callable):
 		return
@@ -234,7 +234,7 @@ func _connect(sig, callable, flags=null):
 	else:
 		err = sig.connect(callable)
 	if err:
-		Debug.pr("[Error]: ", err, sig, callable)  # useless enum digit
+		Log.pr("[Error]: ", err, sig, callable)  # useless enum digit
 
 func call_in(callable, s):
 	await get_tree().create_timer(1.0).timeout

@@ -3,8 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	Debug.pr("<QUEST>")
+	Log.pr("<QUEST>")
 
 
 func _exit_tree():
-	Debug.pr("</QUEST>")
+	Log.pr("</QUEST>")

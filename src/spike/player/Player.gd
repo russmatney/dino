@@ -67,7 +67,7 @@ func collect_pickup(ingredient_type):
 var orbit_items = []
 
 func add_orbit_item(ingredient_type):
-	Debug.pr("adding orbit item", ingredient_type)
+	Log.pr("adding orbit item", ingredient_type)
 
 	var item = orbit_item_scene.instantiate()
 	item.show_behind_parent = true

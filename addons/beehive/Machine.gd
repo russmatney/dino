@@ -13,7 +13,7 @@ var is_started = false
 
 # should only be called when the owner is ready
 func start(opts={}):
-	# Debug.prn("[Start] actor: ", owner, opts)
+	# Log.prn("[Start] actor: ", owner, opts)
 	transitioning = true
 
 	if initial_state:
@@ -72,11 +72,11 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 
 	if next_state:
 		if should_log:
-			Debug.prn(owner, "Transition. Exiting '%s', Entering '%s'" % [state.name, next_state.name])
+			Log.prn(owner, "Transition. Exiting '%s', Entering '%s'" % [state.name, next_state.name])
 		state.exit()
 		state = next_state
 		next_state.enter(ctx)
 		transitioned.emit(next_state.name)
 	else:
-		Debug.err("Error! no next state! derp!", target_state_name, ctx)
+		Log.err("Error! no next state! derp!", target_state_name, ctx)
 	transitioning = false

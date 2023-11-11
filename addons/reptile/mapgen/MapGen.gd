@@ -26,7 +26,7 @@ func _ready():
 
 func do_image_regen(_val = null):
 	if scene_ready or ready_override:
-		Debug.pr("-------------------")
+		Log.pr("-------------------")
 		regenerate_image()
 
 
@@ -60,7 +60,7 @@ func regenerate_image():
 
 func do_clear(_v):
 	if scene_ready:
-		Debug.prn("Clear")
+		Log.prn("Clear")
 		var node = get_node_or_null(room_node_path)
 		if node:
 			node.queue_free()
@@ -138,7 +138,7 @@ func ensure_image_node(name, i=0, img=null):
 	texture_rect.expand = true
 
 	if img:
-		Debug.pr("setting texture with img: ", img)
+		Log.pr("setting texture with img: ", img)
 		var img_texture = ImageTexture.create_from_image(img)
 		# img_texture.set_size_override(Vector2(w/2, h/2))
 		texture_rect.texture = img_texture
@@ -146,13 +146,13 @@ func ensure_image_node(name, i=0, img=null):
 func colorize_coord(ctx):
 	if ctx.group:
 		if not ctx.img:
-			Debug.warn("colorize_coord ctx without img")
+			Log.warn("colorize_coord ctx without img")
 			return
-		# Debug.pr("setting coord to color: ", ctx.coord, " ", ctx.group.color)
+		# Log.pr("setting coord to color: ", ctx.coord, " ", ctx.group.color)
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
 func colorize_image(img):
-	Debug.pr("colorizing img: ", img)
+	Log.pr("colorizing img: ", img)
 	# copy this image b/c we're about to mutate it
 	var n = Image.new()
 	n.copy_from(img)
@@ -168,7 +168,7 @@ func colorize_image(img):
 
 func do_persist_tilemap(_val = null):
 	if scene_ready:
-		Debug.prn("persisting tilemap: ", Time.get_time_string_from_system())
+		Log.prn("persisting tilemap: ", Time.get_time_string_from_system())
 		persist_tilemap_to_disk()
 
 
@@ -188,7 +188,7 @@ func persist_tilemap_to_disk():
 		push_error(str("No node found for node_path: ", persist_node_path))
 
 	if not node.get_children().size():
-		Debug.prn(persist_node_path, " has no children, skipping persist")
+		Log.prn(persist_node_path, " has no children, skipping persist")
 		return
 
 	for c in node.get_children():
@@ -206,6 +206,6 @@ func persist_tilemap_to_disk():
 		var error = ResourceSaver.save(scene, path)
 		if error != OK:
 			push_error("Error while saving Map")
-			Debug.prn("E: ", error)
+			Log.prn("E: ", error)
 		else:
-			Debug.prn("Successfully saved new map: ", path)
+			Log.prn("Successfully saved new map: ", path)

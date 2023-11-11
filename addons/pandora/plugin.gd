@@ -80,9 +80,9 @@ class PandoraExportPlugin extends EditorExportPlugin:
 		# 	file = FileAccess.open(pandora_path, FileAccess.READ)
 		# 	if file == null:
 		# 		var err = FileAccess.get_open_error()
-		# 		Debug.pr("Error:", err, pandora_path, path)
+		# 		Log.pr("Error:", err, pandora_path, path)
 
-		# Debug.pr("exported pandora db file", file)
+		# Log.pr("exported pandora db file", file)
 
 		if file:
 			add_file(pandora_path, file.get_buffer(file.get_length()), false)

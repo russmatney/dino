@@ -7,7 +7,7 @@ class_name Reptile
 static func generate_image(inputs):
 	# validating inputs
 	if not "octaves" in inputs:
-		Debug.pr("[WARN] nil octaves...")
+		Log.pr("[WARN] nil octaves...")
 		return
 
 	var noise = FastNoiseLite.new()

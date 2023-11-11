@@ -56,7 +56,7 @@ class BrickRoomOpts:
 		return _opts
 
 	func to_pretty(a, b, c):
-		return Debug.to_pretty(data(), a, b, c)
+		return Log.to_pretty(data(), a, b, c)
 
 ##########################################################################
 ## static ##################################################################
@@ -176,7 +176,7 @@ static func gen_room_def(opts: BrickRoomOpts, d_opts: Dictionary={}):
 	var filtered_rooms = room_defs.filter(opts.data())
 	if filtered_rooms != null:
 		return Util.rand_of(filtered_rooms)
-	Debug.error("Failed to generated room_def with opts", opts)
+	Log.error("Failed to generated room_def with opts", opts)
 
 ## next room position ##################################################################
 
@@ -261,7 +261,7 @@ static func next_room_position(room: BrickRoom, opts: BrickRoomOpts):
 		Vector2.UP: return BrickRoom.next_room_pos_top(room, opts)
 		Vector2.DOWN: return BrickRoom.next_room_pos_bottom(room, opts)
 
-	Debug.warn("Unsupported 'side' option passed", opts.side)
+	Log.warn("Unsupported 'side' option passed", opts.side)
 
 
 ## create room ##################################################################

@@ -32,7 +32,7 @@ func deactivate():
 
 func spawn_entity():
 	if spawn_scene == null:
-		Debug.warn("No spawn_scene set, cannot spawn entity", self)
+		Log.warn("No spawn_scene set, cannot spawn entity", self)
 		return
 	spawns = spawns.filter(func(sp): return is_instance_valid(sp))
 	var ent = spawn_scene.instantiate()

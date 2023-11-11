@@ -27,7 +27,7 @@ var heart_icon_scene = preload("res://addons/hood/HeartIcon.tscn")
 ## As implemented, 1 heart is 2 HP.
 func set_health(health):
 	if health == null:
-		Debug.warn("[HOOD] WARN: set_health with null!")
+		Log.warn("[HOOD] WARN: set_health with null!")
 		return
 
 	health = clamp(health, 0, health)

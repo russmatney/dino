@@ -32,7 +32,7 @@ func update_pickups(ps = pickups):
 					inst = body_scene.instantiate()
 					inst.position.y = -2
 				_:
-					Debug.pr("unknown pickup, falling back checked hat scene")
+					Log.pr("unknown pickup, falling back checked hat scene")
 					inst = hat_scene.instantiate()
 					inst.position.y = 19
 			inst.position.x = x_pos(i)

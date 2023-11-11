@@ -4,7 +4,7 @@ var wait_time: int = 0
 
 
 func enter(_msg = {}):
-	Debug.pr("[ENGAGED]", actor)
+	Log.pr("[ENGAGED]", actor)
 	wait_time = 100
 
 

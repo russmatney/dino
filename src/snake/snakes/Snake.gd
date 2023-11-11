@@ -122,17 +122,17 @@ func segments_flash_white():
 
 func head_cell():
 	if len(segment_coords) == 0:
-		Debug.pr("no segment coords, can't get head")
+		Log.pr("no segment coords, can't get head")
 		return
 	elif not segment_coords[0] in segments:
-		Debug.pr("first segment coord not in segments")
+		Log.pr("first segment coord not in segments")
 		return
 
 	var hd = segments[segment_coords[0]]
 	if is_instance_valid(hd):
 		return hd
 	else:
-		Debug.pr("head cell invalid")
+		Log.pr("head cell invalid")
 
 func tail_cells():
 	if segment_coords.size() <= 1:
@@ -144,18 +144,18 @@ func tail_cells():
 			if is_instance_valid(t):
 				ts.append(t)
 			else:
-				Debug.pr("tail cell invalid")
+				Log.pr("tail cell invalid")
 		else:
-			Debug.pr("[WARN] tail coord not in segments")
+			Log.pr("[WARN] tail coord not in segments")
 	return ts
 
 func print_snake_meta():
 	var hc = head_cell()
 	if hc:
-		Debug.pr("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
+		Log.pr("head cell pos: ", hc.coord, " ", hc.position, " ", hc.global_position)
 	for t in tail_cells():
 		if t:
-			Debug.pr("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
+			Log.pr("tail cell pos: ", t.coord, " ", t.position, " ", t.global_position)
 
 ###########################################################################
 # process
@@ -235,10 +235,10 @@ func drop_tail():
 		if is_instance_valid(c):
 			c.queue_free()
 	else:
-		Debug.pr("[WARN] tail expected but not found in `segments`")
+		Log.pr("[WARN] tail expected but not found in `segments`")
 
 func _on_move_head(coord):
-	Debug.pr("_on_move_head pre bounce", coord)
+	Log.pr("_on_move_head pre bounce", coord)
 	bounce_head()
 
 signal did_move_head(coord)
@@ -247,7 +247,7 @@ func move_head(coord):
 	segment_coords.push_front(coord)
 	draw_segment(coord)
 	global_position = head_cell().global_position
-	Debug.pr("move_head should emit did-move-head", coord)
+	Log.pr("move_head should emit did-move-head", coord)
 	did_move_head.emit(coord)
 
 ##################################################################

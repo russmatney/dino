@@ -7,7 +7,7 @@ var dash_dist = 100
 
 func enter(_opts = {}):
 	target_pos = dash_dist * actor.facing_vector + actor.global_position
-	Debug.pr("Dashing!", actor.global_position, target_pos)
+	Log.pr("Dashing!", actor.global_position, target_pos)
 
 
 ## exit ###########################################################

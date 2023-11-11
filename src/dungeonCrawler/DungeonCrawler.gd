@@ -29,7 +29,7 @@ func get_spawn_coords():
 # start
 
 func start(_opts={}):
-	Debug.prn("Starting DungeonCrawler!")
+	Log.prn("Starting DungeonCrawler!")
 	Metro.load_zone(first_zone)
 
 func update_world():

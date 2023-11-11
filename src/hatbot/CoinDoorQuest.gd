@@ -18,16 +18,16 @@ func _ready():
 			door = ch
 
 	if not door:
-		Debug.warn("expected 'doors' node")
+		Log.warn("expected 'doors' node")
 
 	if not len(coins):
-		Debug.warn("no coins found")
+		Log.warn("no coins found")
 
 #########################################################
 # signal reactions
 
 func _on_collected(coin):
-	Debug.pr("coin collected", coin.hotel_data())
+	Log.pr("coin collected", coin.hotel_data())
 	# Hood.dev_notif("coin collected", coin.hotel_data())
 
 
@@ -47,7 +47,7 @@ func _process(_delta):
 		if len(remaining_coins()) <= 0 and seen_coins:
 			complete = true
 			Hood.notif("All coins found!")
-			Debug.pr("All coins found!")
+			Log.pr("All coins found!")
 			door.open()
 			var on_close = Jumbotron.jumbo_notif({header="Door opening!", body="All coins found."})
 			if on_close:
@@ -67,7 +67,7 @@ var seen_coins = false
 func remaining_coins():
 	var remaining = coins.filter(func(c): return not c.collected)
 	if not seen_coins and len(remaining) > 0:
-		Debug.pr("We've seen some coins!")
+		Log.pr("We've seen some coins!")
 		seen_coins = true
 	return remaining
 

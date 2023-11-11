@@ -15,7 +15,7 @@ var active_room_count = 5
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if initial_room_options == null or initial_room_options.size() > 0:
-		Debug.pr("[WARN]: no room options!")
+		Log.pr("[WARN]: no room options!")
 
 	room_options = initial_room_options.duplicate()
 	clear_current_rooms()
@@ -87,11 +87,11 @@ func prep_room():
 
 	var next_room = choose_next_room_instance()
 	if not next_room:
-		Debug.pr("[WARN] no next_room!")
+		Log.pr("[WARN] no next_room!")
 		return
 
 	if not next_room.has_method("x_offset"):
-		Debug.pr("[WARN] next_room has no x_offset?: ", next_room)
+		Log.pr("[WARN] next_room has no x_offset?: ", next_room)
 
 	##############################
 	# invoke RunnerRoom.x_offset()
@@ -99,7 +99,7 @@ func prep_room():
 
 	# don't try `.is_null()` here! floats can't handle it
 	if next_offset == null:
-		Debug.pr("[WARN] nil next_offset calculated for room: ", next_room)
+		Log.pr("[WARN] nil next_offset calculated for room: ", next_room)
 		next_offset = 0
 
 	# could abstract this prep out, it's runner specific
@@ -136,8 +136,8 @@ func add_rooms_to_scene(count: int):
 
 func room_entered(_player, room):
 	if not "Gap" in room.name:
-		Debug.pr("\n\n--------------------------------------------------------------------")
-		Debug.pr("entered: ", room)
+		Log.pr("\n\n--------------------------------------------------------------------")
+		Log.pr("entered: ", room)
 
 	var current_room_index = current_rooms.find(room)
 	var current_room_count = current_rooms.size()

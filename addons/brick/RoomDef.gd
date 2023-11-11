@@ -7,7 +7,7 @@ var shape: Array
 var meta: Dictionary
 
 func to_pretty(a, b, c):
-	return Debug.to_pretty({name=name, meta=meta}, a, b, c)
+	return Log.to_pretty({name=name, meta=meta}, a, b, c)
 
 func has_flag(f):
 	if f in meta:
@@ -17,7 +17,7 @@ func column(idx: int):
 	var col = []
 	for row in shape:
 		if idx >= len(row):
-			Debug.error("idx outside of row width, cannot build column")
+			Log.error("idx outside of row width, cannot build column")
 			return []
 		col.append(row[idx])
 	return col
@@ -25,7 +25,7 @@ func column(idx: int):
 func row(idx: int):
 	if idx <= len(shape):
 		return shape[idx]
-	Debug.error("idx outside of width, cannot return row")
+	Log.error("idx outside of width, cannot return row")
 
 # Returns an array of dicts like [{"coord": Vector2, "cell": Array[String]}]
 func coords() -> Array:

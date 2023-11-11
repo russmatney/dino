@@ -30,7 +30,7 @@ func _ready():
 		collect_box.body_entered.connect(on_collect_box_entered)
 
 func on_collect_box_entered(_body):
-	Debug.warn("on_collect_box_entered not impled")
+	Log.warn("on_collect_box_entered not impled")
 
 ## debug and render #########################################################
 

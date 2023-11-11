@@ -36,9 +36,9 @@ func game_entity_for_scene(scene):
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
-		Debug.warn("No game found to manage scene", scene, scene.scene_file_path)
+		Log.warn("No game found to manage scene", scene, scene.scene_file_path)
 	else:
-		Debug.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
+		Log.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
 
 ## current game ##########################################################
 
@@ -59,7 +59,7 @@ func ensure_current_game():
 			set_current_game_for_scene(current_scene)
 
 	if not current_game:
-		Debug.warn("Failed to ensure current_game in scene:", get_tree().current_scene)
+		Log.warn("Failed to ensure current_game in scene:", get_tree().current_scene)
 
 func reset_current_game():
 	if current_game != null and is_instance_valid(current_game):
@@ -71,7 +71,7 @@ func reset_current_game():
 
 func register_current_game(game):
 	if game == null or not is_instance_valid(game):
-		Debug.warn("Attempted to register invalid game, aborting", game)
+		Log.warn("Attempted to register invalid game, aborting", game)
 		return
 
 	if game is DinoGameEntity:
@@ -83,9 +83,9 @@ func register_current_game(game):
 		current_game.cleanup()
 		# free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
 		# current_game.queue_free()
-		Debug.pr("Waiting for cleanup: ", current_game.game_entity.get_display_name())
+		Log.pr("Waiting for cleanup: ", current_game.game_entity.get_display_name())
 		await get_tree().create_timer(0.2).timeout
-	Debug.pr("Registering game: ", game.game_entity.get_display_name())
+	Log.pr("Registering game: ", game.game_entity.get_display_name())
 	current_game = game
 	current_game.register()
 
@@ -100,10 +100,10 @@ func launch_in_game_mode(mode_node, entity, opts: Dictionary={}):
 	if not current_game:
 		ensure_current_game()
 	if not current_game.game_entity.is_game_mode():
-		Debug.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
+		Log.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
 		return
 
-	Debug.pr("Launching game", entity.get_display_name(), "in mode", current_game.game_entity.get_display_name())
+	Log.pr("Launching game", entity.get_display_name(), "in mode", current_game.game_entity.get_display_name())
 
 	player_scene = entity.get_player_scene()
 
@@ -119,12 +119,12 @@ func restart_game(opts=null):
 	if not current_game:
 		ensure_current_game()
 	if not current_game:
-		Debug.warn("Cannot restart_game, no current game")
+		Log.warn("Cannot restart_game, no current game")
 		return
 	if opts == null:
 		opts = {}
 
-	Debug.pr("Starting game", current_game.game_entity.get_display_name())
+	Log.pr("Starting game", current_game.game_entity.get_display_name())
 	current_game.start(opts)
 
 ## launch game ######################################################
@@ -133,7 +133,7 @@ func restart_game(opts=null):
 func launch(game_entity):
 	var game = game_for_entity(game_entity)
 	if game == null or not is_instance_valid(game):
-		Debug.warn("No valid game found for entity, aborting launch", game_entity)
+		Log.warn("No valid game found for entity, aborting launch", game_entity)
 		return
 
 	register_current_game(game)
@@ -141,7 +141,7 @@ func launch(game_entity):
 	if game.game_entity.get_main_menu() != null:
 		Navi.nav_to(game.game_entity.get_main_menu())
 		return
-	Debug.pr("no menu for game, launching!", game, game.game_entity, game.game_entity.get_main_menu())
+	Log.pr("no menu for game, launching!", game, game.game_entity, game.game_entity.get_main_menu())
 
 	restart_game()
 
@@ -154,7 +154,7 @@ func load_main_menu():
 		Navi.nav_to(current_game.game_entity.get_main_menu())
 		return
 
-	Debug.warn("No main_menu in game_entity, naving to fallback main menu.")
+	Log.warn("No main_menu in game_entity, naving to fallback main menu.")
 	Navi.nav_to_main_menu()
 
 ## player ##########################################################
@@ -177,13 +177,13 @@ func _find_player(p=null):
 	var ps = get_tree().get_nodes_in_group(player_group)
 
 	if len(ps) > 1:
-		Debug.warn("found multiple in player_group: ", player_group, ps)
+		Log.warn("found multiple in player_group: ", player_group, ps)
 
 	if len(ps) > 0:
 		player = ps[0]
 	else:
 		# too noisy, and corrected later on after startup
-		# Debug.warn("could not find player, zero in player_group: ", player_group)
+		# Log.warn("could not find player, zero in player_group: ", player_group)
 		return
 
 	player_found.emit(player)
@@ -202,10 +202,10 @@ func remove_player():
 var spawning = false
 func respawn_player(opts={}):
 	if spawning:
-		Debug.pr("player already spawning, skipping respawn_player")
+		Log.pr("player already spawning, skipping respawn_player")
 		return
 
-	Debug.pr("Spawning new player")
+	Log.pr("Spawning new player")
 	if opts.get("player_scene") == null:
 		if player_scene:
 			# support reading a cached player_scene
@@ -214,15 +214,15 @@ func respawn_player(opts={}):
 			if current_game == null:
 				ensure_current_game()
 			if current_game == null:
-				Debug.warn("No current_game, can't spawn (or respawn) player")
+				Log.warn("No current_game, can't spawn (or respawn) player")
 				return
 			elif current_game.game_entity.get_player_scene() == null:
-				Debug.warn("current_game has no player_scene, can't respawn player", current_game)
+				Log.warn("current_game has no player_scene, can't respawn player", current_game)
 				return
 
 	spawning = true
 	if player:
-		Debug.pr("Respawn found player, will remove")
+		Log.pr("Respawn found player, will remove")
 		remove_player()
 
 	# defer to let player free safely
@@ -240,7 +240,7 @@ func _respawn_player(opts={}):
 	if p_scene == null and current_game != null:
 		p_scene = current_game.game_entity.get_player_scene()
 	if p_scene == null:
-		Debug.err("Could not determine player_scene, cannot respawn")
+		Log.err("Could not determine player_scene, cannot respawn")
 		spawning = false
 		return
 	if p_scene is String:
@@ -250,7 +250,7 @@ func _respawn_player(opts={}):
 	if not spawn_coords == null:
 		player.position = spawn_coords
 	else:
-		Debug.warn("No spawn coords found when respawning player")
+		Log.warn("No spawn coords found when respawning player")
 
 	player.ready.connect(func(): player_ready.emit(player))
 
@@ -292,17 +292,17 @@ func maybe_spawn_player(opts={}):
 		_find_player()
 
 		if player == null:
-			Debug.pr("Player is null, spawning a new one", opts)
+			Log.pr("Player is null, spawning a new one", opts)
 			respawn_player(opts)
 	elif player != null:
 		pass
-		# Debug.pr("player not null, ignoring maybe_spawn_player")
+		# Log.pr("player not null, ignoring maybe_spawn_player")
 	elif spawning:
 		pass
-		# Debug.pr("player spawning, ignoring maybe_spawn_player")
+		# Log.pr("player spawning, ignoring maybe_spawn_player")
 	elif is_managed:
 		pass
-		# Debug.pr("game is managed, ignoring maybe_spawn_player")
+		# Log.pr("game is managed, ignoring maybe_spawn_player")
 	elif Engine.is_editor_hint():
 		pass
-		# Debug.pr("in editor, ignoring maybe_spawn_player")
+		# Log.pr("in editor, ignoring maybe_spawn_player")

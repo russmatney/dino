@@ -7,7 +7,7 @@ func aim(aim: Vector2):
 	aim_vector = aim
 
 func activate():
-	Debug.pr("activating", self)
+	Log.pr("activating", self)
 	actor.notif(self.name)
 	DJZ.play(DJZ.S.laser)
 

@@ -75,7 +75,7 @@ func set_room_data(data):
 
 func add_entity(e_key, data, get_color=null):
 	if data.get("position") == null:
-		Debug.warn("Cannot add entity without hotel db `position` attr")
+		Log.warn("Cannot add entity without hotel db `position` attr")
 		return
 	var ent = ColorRect.new()
 	ent.position = data.get("position")

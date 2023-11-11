@@ -37,8 +37,6 @@ import/import_plugin/default_automatic_importer="No Import"
 [autoload]
 
 Pandora="*res://addons/pandora/api.gd"
-Debug="*res://addons/core/Debug.gd"
-Util="*res://addons/core/Util.gd"
 SS="*res://addons/beehive/sidescroller/SideScroller.gd"
 Hood="*res://addons/hood/Hood.gd"
 Q="*res://addons/quest/Quest.gd"

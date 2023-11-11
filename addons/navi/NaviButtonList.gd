@@ -10,9 +10,9 @@ var _navi = Navi
 
 func pw(msg: String, item = {}):
 	if item:
-		Debug.warn(msg, "item:", item)
+		Log.warn(msg, "item:", item)
 	else:
-		Debug.warn(msg)
+		Log.warn(msg)
 
 
 ## config warnings #####################################################################
@@ -37,7 +37,7 @@ func _ready():
 	if len(chs) > 0:
 		chs[0].grab_focus()
 	else:
-		Debug.pr(self, "no children, can't grab focus")
+		Log.pr(self, "no children, can't grab focus")
 
 	var btns = get_buttons()
 	if len(btns) > 0:
@@ -55,7 +55,7 @@ func clear():
 		b.free()
 
 func no_op():
-	Debug.pr("button created with no method")
+	Log.pr("button created with no method")
 
 
 func connect_pressed_to_action(button, item):

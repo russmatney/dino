@@ -28,7 +28,7 @@ func setup(a, opts={}):
 	actor_actions = opts.get("actions", [])
 
 	update_actions()
-	# Debug.pr("actor configured: ", a)
+	# Log.pr("actor configured: ", a)
 
 ####################################################################
 # process
@@ -201,5 +201,5 @@ func update_displayed_action(action=null):
 			action_hint.hide()
 	else:
 		if not warned_no_action_hint:
-			Debug.warn("Cannot display available action, no action_hint")
+			Log.warn("Cannot display available action, no action_hint")
 			warned_no_action_hint = true

@@ -81,7 +81,7 @@ func player_spawn_coords() -> Vector2:
 			spawn_node_path = null
 			return spawn_node.global_position
 		else:
-			Debug.warn("Invalid spawn_node_path", self, spawn_node_path)
+			Log.warn("Invalid spawn_node_path", self, spawn_node_path)
 
 	var markers = Util.get_children_in_group(self, "player_spawn_points")
 	markers = markers.filter(func(ma): return ma.active)
@@ -100,6 +100,6 @@ func player_spawn_coords() -> Vector2:
 	for e in eles:
 		return e.global_position
 
-	Debug.warn("no spawn_node, parent_spawn_points, or travel points found, returning (0, 0)")
+	Log.warn("no spawn_node, parent_spawn_points, or travel points found, returning (0, 0)")
 	return Vector2.ZERO
 

@@ -45,7 +45,7 @@ func all_levels_complete():
 var current_level_idx = 0
 
 func load_next_level():
-	Debug.pr("snake game loading next level")
+	Log.pr("snake game loading next level")
 	if current_level_idx == null:
 		current_level_idx = 0
 	else:
@@ -54,7 +54,7 @@ func load_next_level():
 	if current_level_idx < SnakeData.levels.size():
 		var lvl = SnakeData.levels[current_level_idx]
 		Q.current_level_label = lvl["label"]
-		Debug.pr("Navi.nav_to: ", lvl["label"])
+		Log.pr("Navi.nav_to: ", lvl["label"])
 		Navi.nav_to(lvl["scene"])
 	else:
 		all_levels_complete()

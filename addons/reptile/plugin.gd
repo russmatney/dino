@@ -3,8 +3,8 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	Debug.prn("<REPTILE>")
+	Log.prn("<REPTILE>")
 
 
 func _exit_tree():
-	Debug.prn("</REPTILE>")
+	Log.prn("</REPTILE>")

@@ -41,7 +41,7 @@ func _to_string():
 
 static func mk(opts) -> Action:
 	var ax = Action.new()
-	ax.fn = opts.get("fn", func(): Debug.pr("No-op action"))
+	ax.fn = opts.get("fn", func(): Log.pr("No-op action"))
 
 	ax.label = opts.get("label", "Action")
 	var label_fn = opts.get("label_fn")
@@ -101,7 +101,7 @@ func close_enough_to_execute(actor) -> bool:
 	if source != null and requires_proximity:
 		if maximum_distance != 0.0:
 			if area.source == null:
-				Debug.err("Cannot support `maximum_distance` without `area.source`")
+				Log.err("Cannot support `maximum_distance` without `area.source`")
 			else:
 				var dist = actor.global_position.distance_to(area.source.global_position)
 				return dist <= maximum_distance

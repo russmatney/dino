@@ -164,7 +164,7 @@ var stop = false
 
 
 func hit(body):
-	Debug.pr("player hit by: ", body)
+	Log.pr("player hit by: ", body)
 	velocity = Vector2.ZERO
 	stop = true
 	await get_tree().create_timer(1.0).timeout

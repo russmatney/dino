@@ -118,7 +118,7 @@ func contains_player(player):
 		else:
 			return false
 	else:
-		Debug.warn("null room box for room", self)
+		Log.warn("null room box for room", self)
 
 	var rect = used_rect()
 	rect.position += position
@@ -144,7 +144,7 @@ func ensure_room_box():
 			existing.append(c)
 
 	if len(existing) > 0:
-		Debug.pr("renaming and freeing room box", existing)
+		Log.pr("renaming and freeing room box", existing)
 		existing.map(func(c):
 			c.name = "RoomBox_ToDelete"
 			c.free())
@@ -194,7 +194,7 @@ func pause(opts={}):
 		var chs = get_children()
 		ents_to_pause = ents_to_pause.filter(func(ent): return not ent in chs)
 		if len(ents_to_pause) > 0:
-			Debug.pr("paused room contains ents to pause", ents_to_pause)
+			Log.pr("paused room contains ents to pause", ents_to_pause)
 			for ent in ents_to_pause:
 				ent.set_process_mode.call_deferred(PROCESS_MODE_DISABLED)
 				paused_ents.append(ent)

@@ -32,7 +32,7 @@ func get_spawn_coords():
 ## start #########################################################
 
 func start(_opts={}):
-	Debug.prn("Starting DemoLand!")
+	Log.prn("Starting DemoLand!")
 
 	Metro.load_zone(first_zone)
 

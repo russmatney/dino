@@ -30,19 +30,19 @@ func start(_opts={}):
 	if game_entity != null:
 		first_level = game_entity.get_first_level_scene()
 	else:
-		Debug.warn("DinoGame.start() missing 'game_entity'")
+		Log.warn("DinoGame.start() missing 'game_entity'")
 
 	if first_level:
 		Navi.nav_to(first_level)
 		return
 
-	Debug.warn("DinoGame.start() missing 'first_level'")
+	Log.warn("DinoGame.start() missing 'first_level'")
 
 func update_world():
 	# trigger any world update based on the player's position
 	# (e.g. pausing/unpausing adjacent rooms)
-	# Debug.warn("update_world not implemented")
+	# Log.warn("update_world not implemented")
 	pass
 
 # func get_spawn_coords():
-# 	Debug.warn("get_spawn_coords not implemented")
+# 	Log.warn("get_spawn_coords not implemented")

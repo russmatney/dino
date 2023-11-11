@@ -10,7 +10,7 @@ var latest
 ## ready ##################################################################
 
 func _ready():
-	Debug.pr("Clawe Dashboard ready")
+	Log.pr("Clawe Dashboard ready")
 
 	await fetch_pomodoros()
 
@@ -21,8 +21,8 @@ func date_str_to_int(ds):
 	# NOTE this parse timezones (trailing 'Z'), may be come a problem at some point
 	# var dt_dict = Time.get_datetime_dict_from_datetime_string(ds, false)
 	var dt_ms = Time.get_unix_time_from_datetime_string(ds)
-	# Debug.pr("dt_dict", dt_dict)
-	# Debug.pr("dt_ms", dt_ms)
+	# Log.pr("dt_dict", dt_dict)
+	# Log.pr("dt_ms", dt_ms)
 	return dt_ms
 
 func secs_between_date_strs(a, b):
@@ -62,7 +62,7 @@ func set_pomodoros(ps):
 	if len(currents) > 0:
 		current = currents.front()
 
-	Debug.prn("current", current)
+	Log.prn("current", current)
 
 	# note, copy by reference
 	ps.sort_custom(sort_pomos_recent)
@@ -100,18 +100,18 @@ func show_current():
 	if current:
 		var time_dict = secs_between_date_strs(Time.get_datetime_string_from_system(true), current.get("pomodoro/started-at"))
 		time_dict = secs_to_time_dict(time_dict)
-		current_text.text = Debug.to_pretty(time_dict, true)
+		current_text.text = Log.to_pretty(time_dict, true)
 	elif latest:
 		var time_dict = secs_between_date_strs(Time.get_datetime_string_from_system(true), latest.get("pomodoro/finished-at"))
 		time_dict = secs_to_time_dict(time_dict)
-		current_text.text = Debug.to_pretty(time_dict, true)
+		current_text.text = Log.to_pretty(time_dict, true)
 
 func show_durations():
-	Debug.prn(durations)
-	durations_text.text = Debug.to_pretty(durations, true)
+	Log.prn(durations)
+	durations_text.text = Log.to_pretty(durations, true)
 
 func show_breaks():
-	breaks_text.text = Debug.to_pretty(breaks, true)
+	breaks_text.text = Log.to_pretty(breaks, true)
 
 ## pomodoros api ##################################################################
 
@@ -122,11 +122,11 @@ var clawe_pomodoro_stop_url = str(clawe_pomodoro_url, "/stop")
 
 # Called when the HTTP request is completed.
 func _http_request_completed(result, response_code, headers, body):
-	Debug.pr(result, response_code, headers)
+	Log.pr(result, response_code, headers)
 	match response_code:
-		404: Debug.warn("http response: 404. Does the attempted url exist?")
+		404: Log.warn("http response: 404. Does the attempted url exist?")
 		200: _http_success(body)
-		_: Debug.warn("Unespected http response: ", response_code, result)
+		_: Log.warn("Unespected http response: ", response_code, result)
 
 func _http_success(body):
 	var json = JSON.new()

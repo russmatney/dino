@@ -37,7 +37,7 @@ func room_width():
 	if enterbox_shape:
 		return room_width_enterbox()
 
-	Debug.pr("[WARN] room_width not supported for room!", self)
+	Log.pr("[WARN] room_width not supported for room!", self)
 
 
 func room_width_roombox(coll_shape):
@@ -72,7 +72,7 @@ func x_offset():
 	if enterbox_shape:
 		return x_offset_enterbox(enterbox_shape)
 
-	Debug.pr("[WARN] x_offset not supported for room!", self)
+	Log.pr("[WARN] x_offset not supported for room!", self)
 
 
 func x_offset_roombox(coll_shape):
@@ -121,17 +121,17 @@ func _ready():
 	# my_print_debug.call_deferred()
 
 func my_print_debug():
-	Debug.pr("---------------------------------------------")
-	Debug.pr(name, " debug report")
-	Debug.pr("room_width(): ", room_width())
-	Debug.pr("x_offset(): ", x_offset())
-	Debug.pr("---------------------------------------------")
+	Log.pr("---------------------------------------------")
+	Log.pr(name, " debug report")
+	Log.pr("room_width(): ", room_width())
+	Log.pr("x_offset(): ", x_offset())
+	Log.pr("---------------------------------------------")
 
 func hotel_data():
 	return {is_finished=is_finished()}
 
 func check_out(data):
-	Debug.pr(data)
+	Log.pr(data)
 
 
 # called in _ready() AND when unfinished rooms are re-added to the view

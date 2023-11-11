@@ -27,16 +27,16 @@ func _ready():
 	enemies.map(setup_enemy)
 
 	if "waves" in self:
-		Debug.pr("Setting waves", self["waves"])
+		Log.pr("Setting waves", self["waves"])
 		_waves = self["waves"].duplicate()
 
 	if len(enemies) == 0:
-		Debug.pr("No initial enemies, starting first wave")
+		Log.pr("No initial enemies, starting first wave")
 		var wave = _waves.pop_front()
 		if wave:
 			spawn_next_wave(wave)
 		else:
-			Debug.warn("no wave found in SELLevel _waves, cannot spawn")
+			Log.warn("no wave found in SELLevel _waves, cannot spawn")
 
 
 ### enemies ####################################################

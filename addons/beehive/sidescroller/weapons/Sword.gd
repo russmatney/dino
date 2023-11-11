@@ -35,7 +35,7 @@ func aim(aim_vector: Vector2):
 			scale.x = 1
 
 func activate():
-	Debug.pr("activating", self)
+	Log.pr("activating", self)
 	actor.notif(self.name)
 	DJZ.play(DJZ.S.swordswing)
 

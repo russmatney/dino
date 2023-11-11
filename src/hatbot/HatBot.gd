@@ -30,7 +30,7 @@ func get_spawn_coords():
 ## start ##########################################################
 
 func start(_opts={}):
-	Debug.prn("Starting HatBot!")
+	Log.prn("Starting HatBot!")
 
 	Metro.load_zone(first_zone)
 

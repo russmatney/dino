@@ -25,7 +25,7 @@ func _on_body_entered(body: Node):
 	if body.has_method("is_delivery") and body.is_delivery():
 		if not complete and body.ingredient_type == expected_delivery_type:
 			delivery_count += 1
-			Debug.pr("delivered", body, body.ingredient_data)
+			Log.pr("delivered", body, body.ingredient_data)
 
 			body.queue_free()
 			update_quest()

@@ -22,7 +22,7 @@ func _ready():
 	# 	var dh = Engine.get_singleton("DotHop")
 	# 	dh.register_game(self)
 	# else:
-	# 	Debug.warn("No dothop singleton found, some feats may not work")
+	# 	Log.warn("No dothop singleton found, some feats may not work")
 
 	if puzzle_set != null:
 		game_def_path = puzzle_set.get_puzzle_script_path()
@@ -96,8 +96,8 @@ func on_puzzle_win():
 			Navi.show_win_menu()
 		else:
 			if puzzle_node.has_method("animate_exit"):
-				Debug.pr("animating exit")
+				Log.pr("animating exit")
 				await puzzle_node.animate_exit()
-			Debug.pr("done awaiting")
+			Log.pr("done awaiting")
 			Hood.notif("Building next level!")
 			rebuild_puzzle()})

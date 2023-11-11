@@ -26,12 +26,12 @@ func register():
 var player_sfp = "res://src/ghosts/player/Player.tscn"
 
 func reset_player_data():
-	Debug.warn("Ghost player reset not impled!")
+	Log.warn("Ghost player reset not impled!")
 
 func get_spawn_coords():
 	var player_spawner = Util.first_node_in_group("player_spawn_points")
 	if not player_spawner:
-		Debug.warn("no node in 'player_spawner' group found")
+		Log.warn("no node in 'player_spawner' group found")
 		return
 
 	return player_spawner.global_position
@@ -43,7 +43,7 @@ func on_player_spawned(player):
 ## start ##########################################################
 
 func start(_opts={}):
-	Debug.pr("Starting Ghost House!")
+	Log.pr("Starting Ghost House!")
 	reset_player_data()
 	Navi.nav_to(first_room)
 

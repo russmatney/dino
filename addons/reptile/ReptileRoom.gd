@@ -376,7 +376,7 @@ func add_tile_at_coord(ctx):
 	if ctx.group:
 		var t = ctx.group.tilemap
 		if t and is_instance_valid(t):
-			# Debug.pr("adding tile at coord: ", t.name, " ", ctx.coord)
+			# Log.pr("adding tile at coord: ", t.name, " ", ctx.coord)
 			# restore random tile selector for godot 4 api
 			# may want to support source_id/atlas_coords/alternative_tile
 			# var t_ids = t.tile_set.get_tiles_ids()
@@ -419,11 +419,11 @@ func regen_tilemaps(image = null, inputs=null):
 		img = Reptile.rotate(img)
 
 	if groups == null or groups.size() == 0:
-		Debug.prn("No groups, re-finding")
+		Log.prn("No groups, re-finding")
 		find_groups()
 
 	if not groups_valid():
-		Debug.prn("Invalid groups config")
+		Log.prn("Invalid groups config")
 		return
 
 	init_tilemaps()

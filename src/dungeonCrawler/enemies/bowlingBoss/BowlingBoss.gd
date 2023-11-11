@@ -26,7 +26,7 @@ func _get_configuration_warnings():
 
 
 func _ready():
-	Debug.pr("bowling boss ready")
+	Log.pr("bowling boss ready")
 	initial_pos = get_global_position()
 	machine.transitioned.connect(on_transit)
 	machine.start.call_deferred()
@@ -86,7 +86,7 @@ var dead = false
 
 func hit():
 	health -= 1
-	Debug.pr(name, " health: ", health)
+	Log.pr(name, " health: ", health)
 
 	if health == 1:
 		# switch to small body

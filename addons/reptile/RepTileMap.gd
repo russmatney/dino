@@ -6,7 +6,7 @@ class_name RepTileMap
 @export var recalc_autotiles: bool :
 	set(v):
 		if v and Engine.is_editor_hint():
-			Debug.prn("recalc autotiles")
+			Log.prn("recalc autotiles")
 			var cells = get_used_cells(0)
 			set_cells_terrain_connect(0, cells, 0, 0)
 
@@ -19,8 +19,8 @@ func destroy_tile_with_rid(rid):
 			if mat is ShaderMaterial:
 				mat.set_shader_parameter("offset", mat.get_shader_parameter("fade"))
 
-				Debug.pr("mat", mat)
-				Debug.pr("tiledata", tile_data)
+				Log.pr("mat", mat)
+				Log.pr("tiledata", tile_data)
 			else:
 				erase_cell(0, coords)
 		else:

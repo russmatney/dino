@@ -3,7 +3,7 @@ extends EditorPlugin
 
 
 func _enter_tree():
-	Debug.prn("<Cam>")
+	Log.prn("<Cam>")
 
 
 func _exit_tree():

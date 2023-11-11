@@ -15,7 +15,7 @@ func update_player_data():
 	if player_data != null:
 		_on_entry_updated(player_data)
 	else:
-		Debug.warn("no player data yet, can't update hud")
+		Log.warn("no player data yet, can't update hud")
 		# call with timeout until initial success?
 
 func _on_entry_updated(entry):

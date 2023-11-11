@@ -14,7 +14,7 @@ func _ready():
 
 func resume_menu_song(song = null):
 	if muted_music:
-		Debug.warn("Cannot resume menu song, music is muted")
+		Log.warn("Cannot resume menu song, music is muted")
 		return
 
 	if song and menu_song != song:
@@ -29,7 +29,7 @@ func resume_menu_song(song = null):
 
 func pause_menu_song():
 	if muted_music:
-		Debug.warn("Cannot play menu song, music is muted")
+		Log.warn("Cannot play menu song, music is muted")
 		return
 	menu_song_player.stop()
 	playback_pos = menu_song_player.get_playback_position()
@@ -85,13 +85,13 @@ func setup_sound_map(sound_map, default_opts=defaults):
 
 func play_sound(sound_map, name):
 	if muted_sound:
-		Debug.warn("Cannot play sound, sounds are muted")
+		Log.warn("Cannot play sound, sounds are muted")
 		return
 	if name in sound_map:
 		var sounds = sound_map[name]
 		play_sound_rand(sounds, {"vary": 0.4})
 	else:
-		Debug.warn("no sound for name", name)
+		Log.warn("no sound for name", name)
 
 func interrupt_sound(sound_map, name):
 	if name in sound_map:
@@ -101,7 +101,7 @@ func interrupt_sound(sound_map, name):
 				s.stop()
 				return s
 	else:
-		Debug.warn("no sound for name", name)
+		Log.warn("no sound for name", name)
 
 
 #################################################
@@ -112,7 +112,7 @@ var paused_game_songs = []
 
 func play_song(sound_map, name):
 	if muted_music:
-		Debug.warn("Cannot play song, music is muted")
+		Log.warn("Cannot play song, music is muted")
 		return
 	if name in sound_map:
 		var songs = sound_map[name]
@@ -123,7 +123,7 @@ func play_song(sound_map, name):
 			s.play()
 			playing_game_songs.append(s)
 	else:
-		Debug.warn("no song for name", name)
+		Log.warn("no song for name", name)
 
 func interrupt_song(sound_map, name):
 	var song = interrupt_sound(sound_map, name)
@@ -139,7 +139,7 @@ func pause_game_song():
 
 func resume_game_song():
 	if muted_music:
-		Debug.warn("Cannot resume game song, music is muted")
+		Log.warn("Cannot resume game song, music is muted")
 		return
 	# could store and resume at same playback_position
 	for song_and_pos in paused_game_songs:

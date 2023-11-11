@@ -31,7 +31,7 @@ var machine = null
 
 
 func enter(_ctx := {}):
-	Debug.pr("WARN: enter func expected to be overwritten")
+	Log.pr("WARN: enter func expected to be overwritten")
 
 
 func exit():

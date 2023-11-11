@@ -11,7 +11,7 @@ func aim(aim_v: Vector2):
 		rotation = aim_vector.angle()
 
 func activate():
-	Debug.pr("activating", self)
+	Log.pr("activating", self)
 	actor.notif(str("activated ", self.display_name))
 	DJZ.play(DJZ.S.laser)
 	aim(actor.facing_vector)
@@ -36,7 +36,7 @@ func use():
 			do_spike(null)
 
 func stop_using():
-	Debug.pr("stop using orbit item")
+	Log.pr("stop using orbit item")
 	if spiking and spiking_ingredient_type != null:
 		do_spike(spiking_ingredient_type)
 		actor.is_spiking = false
@@ -66,7 +66,7 @@ var toss_impulse = 300
 var knockback = 1
 
 func toss(ingredient_type):
-	Debug.pr("tossing ingredient_type:", ingredient_type)
+	Log.pr("tossing ingredient_type:", ingredient_type)
 	tossing = true
 
 	if aim_vector == null:
@@ -95,11 +95,11 @@ var spike_impulse = 1000
 func start_spike(ingredient_type):
 	spiking_ingredient_type = ingredient_type
 	Cam.start_slowmo("spike_slowmo", 0.1)
-	Debug.pr("start spike ingredient_type:", ingredient_type)
+	Log.pr("start spike ingredient_type:", ingredient_type)
 	spiking = true
 
 func do_spike(ingredient_type):
-	Debug.pr("do spike ingredient_type:", ingredient_type)
+	Log.pr("do spike ingredient_type:", ingredient_type)
 
 	if aim_vector == null:
 		aim_vector = actor.move_vector

@@ -23,7 +23,7 @@ func _ready():
 		return
 
 	if not sheep_pen:
-		Debug.error("FetchSheepQuest expected $SheepPen Area2D to exist")
+		Log.error("FetchSheepQuest expected $SheepPen Area2D to exist")
 		return
 
 	sheep_pen.body_entered.connect(on_body_entered)
@@ -34,7 +34,7 @@ func _ready():
 	all_sheep = get_tree().get_nodes_in_group("sheep")
 
 	if len(all_sheep) == 0:
-		Debug.error("FetchSheepQuest found zero sheep")
+		Log.error("FetchSheepQuest found zero sheep")
 		return
 
 	for s in all_sheep:
@@ -74,7 +74,7 @@ func sheep_died(s):
 
 var penned_sheep = []
 func on_body_entered(body):
-	Debug.pr("body entered pen", body)
+	Log.pr("body entered pen", body)
 	if body in all_sheep and body not in penned_sheep:
 		penned_sheep.append(body)
 		update_quest()

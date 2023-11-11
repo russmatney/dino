@@ -40,11 +40,11 @@ func drop_quests():
 
 func register_quest(node, opts={}):
 	if node == null:
-		Debug.warn("passed quest is null, skipping", node, opts)
+		Log.warn("passed quest is null, skipping", node, opts)
 		return
 	var label = q_label(node, opts)
 	if label in active_quests:
-		Debug.warn("OVERWRITING existing quest with node.label:", label)
+		Log.warn("OVERWRITING existing quest with node.label:", label)
 
 	Util._connect(node.quest_complete, _on_complete.bind(node, opts))
 	Util._connect(node.quest_failed, _on_fail.bind(node, opts))
@@ -59,7 +59,7 @@ func register_quest(node, opts={}):
 	quest.check_not_failed = opts.get("check_not_failed", false)
 	active_quests[label] = quest
 
-	Debug.pr(str("Registered Quest: ", label))
+	Log.pr(str("Registered Quest: ", label))
 	quest_update.emit()
 
 func unregister(node, opts={}):
@@ -88,14 +88,14 @@ func check_all_complete():
 				return
 
 	# all complete or not failed!
-	Debug.pr("All quests complete!")
+	Log.pr("All quests complete!")
 	all_quests_complete.emit()
 
 ## signal updates #####################################################
 
 func _on_complete(node, opts):
 	var label = q_label(node, opts)
-	Debug.pr("Quest complete!", label)
+	Log.pr("Quest complete!", label)
 	var q = get_quest(node, opts)
 	if q:
 		q.complete = true

@@ -10,7 +10,7 @@ var legend: Dictionary
 var rooms: Array[RoomDef]
 
 func to_pretty(a, b, c):
-	return Debug.to_pretty({prelude=prelude, legend=legend}, a, b, c)
+	return Log.to_pretty({prelude=prelude, legend=legend}, a, b, c)
 
 func filter(opts: Dictionary):
 	Util.ensure_default(opts, "flags", [])
@@ -37,7 +37,7 @@ func filter(opts: Dictionary):
 			return true)
 
 	if len(xs) == 0:
-		Debug.err("Could not find room_def matching `filter_rooms` and/or `flags`", opts.flags)
+		Log.err("Could not find room_def matching `filter_rooms` and/or `flags`", opts.flags)
 		return
 
 	return xs

@@ -5,14 +5,14 @@ func load_next_level():
 	var level_idx = HerdData.levels.find(Navi.current_scene_path())
 	level_idx += 1
 	if len(HerdData.levels) <= level_idx:
-		Debug.err("level_idx too high, can't load next level")
+		Log.err("level_idx too high, can't load next level")
 		return
 	Navi.nav_to(HerdData.levels[level_idx])
 
 func retry_level():
 	var level_idx = HerdData.levels.find(Navi.current_scene_path())
 	if len(HerdData.levels) <= level_idx:
-		Debug.err("level_idx too high, can't retry level")
+		Log.err("level_idx too high, can't retry level")
 		return
 	Navi.nav_to(HerdData.levels[level_idx])
 

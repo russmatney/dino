@@ -127,7 +127,7 @@ func _unhandled_input(event):
 
 	if Trolley.is_event(event, "cycle_weapon"):
 		cycle_weapon()
-		Debug.prn("cycled weapons", weapons)
+		Log.prn("cycled weapons", weapons)
 		if weapons.size() > 0:
 			Hood.notif(str("Changed weapon: ", weapons[0].display_name))
 		notif(active_weapon().display_name)
@@ -296,7 +296,7 @@ func add_boomerang():
 		boomerang = boomerang_scene.instantiate()
 		add_child(boomerang)
 
-	Debug.pr("adding boomerang to player", self)
+	Log.pr("adding boomerang to player", self)
 
 	add_weapon(boomerang)
 	has_boomerang = true

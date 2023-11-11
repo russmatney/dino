@@ -29,7 +29,7 @@ func reload_current_zone():
 		load_zone(current_zone)
 		return true
 	else:
-		Debug.warn("no current zone, metro could not reload.")
+		Log.warn("no current zone, metro could not reload.")
 		return false
 
 ###########################################################
@@ -38,14 +38,14 @@ func reload_current_zone():
 func travel_to(dest_zone, elevator_path=null):
 	# could restore same-zone travel
 	# if current_zone.name == dest_zone_name:
-	# 	Debug.pr("Traveling in same zone", dest_zone_name, elevator_path)
+	# 	Log.pr("Traveling in same zone", dest_zone_name, elevator_path)
 	# 	if elevator_path:
 	# 		current_zone.set_spawn_node(elevator_path)
 	# 	Game.player.clear_forced_movement_target()
 	# 	Game.player.position = current_zone.player_spawn_coords()
 	# 	return
 
-	Debug.pr("Traveling to zone", dest_zone, elevator_path)
+	Log.pr("Traveling to zone", dest_zone, elevator_path)
 
 	load_zone(dest_zone, elevator_path)
 
@@ -58,7 +58,7 @@ func ensure_current_zone(zone=null):
 		return
 	# what situation does get used in?
 	if not current_zone:
-		Debug.warn("Metro had to seek out a current_zone")
+		Log.warn("Metro had to seek out a current_zone")
 		for c in get_tree().get_root().get_children():
 			# could use groups instead
 			if c is MetroZone:
@@ -70,13 +70,13 @@ func ensure_current_zone(zone=null):
 func get_spawn_coords():
 	ensure_current_zone()
 	if not current_zone:
-		Debug.warn("No current zone in metro, returning ZEROed spawn coords")
+		Log.warn("No current zone in metro, returning ZEROed spawn coords")
 		return Vector2.ZERO
 
 	var spawn_coords = current_zone.player_spawn_coords()
 
 	if spawn_coords == null:
-		Debug.warn("No spawn coords found for zone", current_zone)
+		Log.warn("No spawn coords found for zone", current_zone)
 
 	return spawn_coords
 
@@ -95,13 +95,13 @@ func update_zone():
 	ensure_current_zone()
 
 	if not current_zone or not is_instance_valid(current_zone):
-		Debug.warn("No current zone, cannot update rooms")
+		Log.warn("No current zone, cannot update rooms")
 		return
 
 	if len(current_zone.rooms) == 0:
 		# this _should_ only happen when the room is being unloaded
 		# commenting out the spammy warning for now
-		# Debug.warn("Cannot update zero rooms.")
+		# Log.warn("Cannot update zero rooms.")
 		return
 
 	var current_containing_room
@@ -136,4 +136,4 @@ func update_zone():
 				last_n_containing_rooms.pop_front()
 			last_n_containing_rooms.push_back(current_containing_room)
 	# else:
-	# 	Debug.warn("No rooms containing player!")
+	# 	Log.warn("No rooms containing player!")

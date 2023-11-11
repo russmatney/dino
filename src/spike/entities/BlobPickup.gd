@@ -34,7 +34,7 @@ func kill():
 func _on_body_entered(body: Node):
 	if body.is_in_group("player"):
 		if body.has_method("collect_pickup"):
-			Debug.pr("collecting ingredient type", ingredient_type)
+			Log.pr("collecting ingredient type", ingredient_type)
 			# pass ingredient data along
 			body.collect_pickup(ingredient_type)
 			kill()

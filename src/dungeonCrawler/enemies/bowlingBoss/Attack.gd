@@ -2,7 +2,7 @@ extends State
 
 
 func enter(_msg = {}):
-	Debug.pr("entering attack state for actor: ", actor)
+	Log.pr("entering attack state for actor: ", actor)
 
 
 var once = true

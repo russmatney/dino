@@ -97,7 +97,7 @@ func get_cell(coord):
 	if coord in cells:
 		return cells[coord]
 	else:
-		Debug.pr("[WARN] no coord in grid!")
+		Log.pr("[WARN] no coord in grid!")
 
 func all_cells():
 	return cells.values()
@@ -141,7 +141,7 @@ signal cell_touched(coord)
 
 func mark_touched(coord):
 	var cell = get_cell(coord)
-	Debug.pr("marking coord/cell touched", coord, cell)
+	Log.pr("marking coord/cell touched", coord, cell)
 	if cell:
 		cell.play("blue")
 		Util.set_random_frame(cell)
@@ -211,7 +211,7 @@ func add_snake():
 @onready var enemy_scene = preload("res://src/snake/snakes/Enemy.tscn")
 
 func add_enemy():
-	Debug.pr("adding enemy to grid")
+	Log.pr("adding enemy to grid")
 	var initial_cell = random_coord()
 	var initial_direction = Vector2.RIGHT
 	var e = enemy_scene.instantiate()
@@ -240,7 +240,7 @@ func init_food():
 func add_food(exclude=null):
 	var empty_cell = random_empty_coord(exclude)
 	if empty_cell == null:
-		Debug.pr("[SNAKE] No empty cells! Cannot place food.")
+		Log.pr("[SNAKE] No empty cells! Cannot place food.")
 		return
 
 	var f = food_scene.instantiate()

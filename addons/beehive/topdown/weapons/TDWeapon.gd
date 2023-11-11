@@ -41,19 +41,19 @@ func _ready():
 # public api
 
 func aim(aim_vector: Vector2):
-	Debug.pr("impl aim!", self)
+	Log.pr("impl aim!", self)
 
 func activate():
-	Debug.pr("impl activate!", self)
+	Log.pr("impl activate!", self)
 
 func deactivate():
-	Debug.pr("impl deactivate!", self)
+	Log.pr("impl deactivate!", self)
 
 func use():
-	Debug.pr("impl use!", self)
+	Log.pr("impl use!", self)
 
 func stop_using():
-	Debug.pr("impl stop using!", self)
+	Log.pr("impl stop using!", self)
 
 ######################################################
 # helpers

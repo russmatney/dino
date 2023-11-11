@@ -16,9 +16,9 @@ func _enter_tree():
 	add_to_group("quests", true)
 
 	if not has_method("setup"):
-		Debug.warn("Quest missing expected setup() method", self)
+		Log.warn("Quest missing expected setup() method", self)
 	if not has_method("update_quest"):
-		Debug.warn("Quest missing expected update_quest() method", self)
+		Log.warn("Quest missing expected update_quest() method", self)
 
 ## exit tree ##########################################################
 

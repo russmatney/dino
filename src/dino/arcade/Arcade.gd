@@ -27,7 +27,7 @@ var game_node: Node2D
 
 func _ready():
 	_seed = randi()
-	Debug.pr("Arcade ready with seed!", _seed)
+	Log.pr("Arcade ready with seed!", _seed)
 	seed(_seed)
 
 	var entity = current_game_entity
@@ -35,9 +35,9 @@ func _ready():
 		entity = select_game()
 
 	if not entity:
-		Debug.warn("Could not find game_entity!")
+		Log.warn("Could not find game_entity!")
 	else:
-		Debug.pr("Launching", entity.get_display_name())
+		Log.pr("Launching", entity.get_display_name())
 		launch_game(entity)
 
 ## select a game ##################################################3
@@ -55,7 +55,7 @@ func setup_game(node):
 	if node.has_signal("level_complete"):
 		node.level_complete.connect(_on_level_complete)
 	else:
-		Debug.warn("game node has no 'level_complete' signal!", node)
+		Log.warn("game node has no 'level_complete' signal!", node)
 
 func launch_game(entity):
 	current_game_entity = entity
@@ -79,7 +79,7 @@ func _on_game_ready():
 	if game_node.has_method("regenerate"):
 		game_node.regenerate(level_opts)
 	else:
-		Debug.warn("Game/Level missing expected regenerate function!", game_node)
+		Log.warn("Game/Level missing expected regenerate function!", game_node)
 
 func _on_level_complete():
 	_seed = randi()

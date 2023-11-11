@@ -16,7 +16,7 @@ func _ready():
 		add_child(anim)
 
 func _on_body_entered(body: Node):
-	Debug.pr("Tossed item body entered: ", body)
+	Log.pr("Tossed item body entered: ", body)
 
 	if body.is_in_group("player"):
 		if body.has_method("collect_pickup"):

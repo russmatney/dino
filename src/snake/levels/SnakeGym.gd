@@ -15,7 +15,7 @@ func setup():
 			grids.append(c)
 
 	if len(grids) > 0:
-		Debug.pr("add snake in grid 0")
+		Log.pr("add snake in grid 0")
 		grids[0].add_snake()
 
 func _process(_d):
@@ -23,4 +23,4 @@ func _process(_d):
 		setup()
 
 func _on_quest_failed(q):
-	Debug.pr("Quest failed: ", q.label)
+	Log.pr("Quest failed: ", q.label)

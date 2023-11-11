@@ -17,7 +17,7 @@ func _ready():
 		set_label(label)
 
 	if not destination == null and not ResourceLoader.exists(destination):
-		Debug.warn("Ghosts door destination does not exist!", destination)
+		Log.warn("Ghosts door destination does not exist!", destination)
 
 func set_label(text):
 	$Label.text = text
@@ -25,5 +25,5 @@ func set_label(text):
 #############################################################
 
 func open_door(_actor=null):
-	Debug.pr("open_door called, with dest: ", destination)
+	Log.pr("open_door called, with dest: ", destination)
 	Navi.nav_to(destination)

@@ -12,7 +12,7 @@ extends Node
 var scene_db = {}
 
 func recreate_db():
-	Debug.pr("not impled")
+	Log.pr("not impled")
 
 ## keys #####################################################################
 
@@ -24,7 +24,7 @@ func _node_to_entry_key(node):
 	if _is_root(node):
 		parents = []
 	elif node.get_tree() == null:
-		Debug.warn("No tree found for node...", node)
+		Log.warn("No tree found for node...", node)
 		parents = []
 	else:
 		parents = Util.get_all_parents(node)
@@ -81,14 +81,14 @@ func _book(node: Node):
 
 func register(node, opts={}):
 	if not node.has_method("hotel_data"):
-		Debug.warn("skipping hotel register.", node, "missing expected hotel_data() method")
+		Log.warn("skipping hotel register.", node, "missing expected hotel_data() method")
 		return
 	if not node.has_method("check_out"):
-		Debug.warn("skipping hotel register.", node, "missing expected check_out() method")
+		Log.warn("skipping hotel register.", node, "missing expected check_out() method")
 		return
 
 	if not node.get_tree():
-		Debug.warn("skipping hotel register.", node, "Node not in a tree")
+		Log.warn("skipping hotel register.", node, "Node not in a tree")
 		return
 
 	var key = _node_to_entry_key(node)
@@ -99,7 +99,7 @@ func register(node, opts={}):
 	var data = check_out(node)
 	if data == null:
 		if not Engine.is_editor_hint():
-			Debug.warn("No data found for node.check_out(d): ", node, "passing empty dict.")
+			Log.warn("No data found for node.check_out(d): ", node, "passing empty dict.")
 		data = {}
 
 	if not Engine.is_editor_hint():
@@ -122,14 +122,14 @@ func check_in(node: Node, data=null):
 		if node.has_method("hotel_data"):
 			data = node.hotel_data()
 		else:
-			Debug.warn(node, "does not implement hotel_data()")
+			Log.warn(node, "does not implement hotel_data()")
 			return
 
 	var key = _node_to_entry_key(node)
 	if key in scene_db:
 		_update(key, data)
 	else:
-		Debug.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
+		Log.warn("Cannot check_in. No entry in scene_db for node/key: ", node, key)
 
 ## read #####################################################################
 
@@ -143,7 +143,7 @@ func check_out(node: Node):
 	if key in scene_db:
 		return scene_db[key]
 	else:
-		Debug.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
+		Log.warn("Cannot check_out. No entry in scene_db for node: ", node, key)
 
 ## Flexible access to the scene_db vals
 func query(q={}):

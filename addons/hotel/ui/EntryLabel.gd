@@ -24,7 +24,7 @@ func entry_to_label(e):
 func set_label():
 	if entry_name:
 		if entry == null:
-			Debug.warn("No entry set, cannot set label")
+			Log.warn("No entry set, cannot set label")
 			entry_name.text = ""
 			return
 
@@ -51,7 +51,7 @@ func set_selected(selected):
 			var entries = Hotel.query()
 			if len(entries) > 0:
 				var e = entries[3]
-				Debug.prn("testing with entry: ", e)
+				Log.prn("testing with entry: ", e)
 				entry = e
 		else:
 			entry = null

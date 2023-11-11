@@ -4,7 +4,7 @@ func aim(_aim_vector: Vector2):
 	pass
 
 func activate():
-	Debug.pr("activating", self)
+	Log.pr("activating", self)
 	actor.notif(self.name)
 	DJZ.play(DJZ.S.bump)
 

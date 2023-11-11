@@ -14,7 +14,7 @@ func reset_bosses():
 			bosses.append(sib)
 
 	if len(bosses) > 0:
-		Debug.pr("found bosses!", bosses)
+		Log.pr("found bosses!", bosses)
 
 func remaining_bosses():
 	if len(bosses) == 0:
@@ -25,7 +25,7 @@ func remaining_bosses():
 # ready
 
 func _ready():
-	Debug.pr("Boss Defeat Quest ready!")
+	Log.pr("Boss Defeat Quest ready!")
 	reset_bosses()
 
 	var r = get_parent()
@@ -46,7 +46,7 @@ func _process(_delta):
 # quest_complete
 
 func quest_complete():
-	Debug.pr("Boss quest complete!")
+	Log.pr("Boss quest complete!")
 	complete = true
 
 	var header = "Boss Defeated"

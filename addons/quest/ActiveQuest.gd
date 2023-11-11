@@ -12,7 +12,7 @@ var optional: bool
 var check_not_failed: bool
 
 func _to_string():
-	return Debug.to_pretty({
+	return Log.to_pretty({
 		label=label,
 		complete=complete,
 		failed=failed,

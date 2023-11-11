@@ -6,13 +6,13 @@ extends Control
 var editor_interface
 func _on_reload_plugin_button_pressed():
 	if Engine.is_editor_hint():
-		Debug.pr(&"Reloading trolley plugin ----------------------------------")
+		Log.pr(&"Reloading trolley plugin ----------------------------------")
 		editor_interface.set_plugin_enabled("trolley", false)
 		editor_interface.set_plugin_enabled("trolley", true)
 		editor_interface.set_main_screen_editor("Trolley")
-		Debug.pr(&"Reloaded trolley plugin -----------------------------------")
+		Log.pr(&"Reloaded trolley plugin -----------------------------------")
 	else:
-		Debug.pr("Trolley UI Reload Not impled outside of editor")
+		Log.pr("Trolley UI Reload Not impled outside of editor")
 
 
 ## ready #######################################################################
@@ -44,7 +44,7 @@ func update_joypads():
 	if len(jpads) > 0:
 		joypad_label.text = "[center]%s[/center]" % str(len(jpads), " Joypads connected")
 
-	Debug.pr("connected joypads", jpads)
+	Log.pr("connected joypads", jpads)
 
 	for ch in joypad_list.get_children():
 		ch.queue_free()
@@ -62,10 +62,10 @@ func _process(_delta):
 	var trolley_move_vector = Trolley.move_vector()
 
 	label += "\nmove vector: %s, \ntrolley move vector: %s" % [
-		Debug.to_pretty(move_vector), Debug.to_pretty(trolley_move_vector)
+		Log.to_pretty(move_vector), Log.to_pretty(trolley_move_vector)
 		]
 
-	active_controls_label.text = Debug.to_pretty(label)
+	active_controls_label.text = Log.to_pretty(label)
 
 
 ## unhandled input #######################################################################
@@ -85,11 +85,11 @@ func limit_input_list():
 
 func new_input_label(event):
 	var axs = Trolley.actions_for_input(event)
-	var label = "[center]raw: %s[/center]" % Debug.to_pretty(event)
+	var label = "[center]raw: %s[/center]" % Log.to_pretty(event)
 	for ax in axs:
 		label += "\n\t%s: %s" % [
-			Debug.to_pretty(ax.key_str) if "key_str" in ax else Debug.to_pretty(ax.btn_idx),
-			Debug.to_pretty(ax.action_label),
+			Log.to_pretty(ax.key_str) if "key_str" in ax else Log.to_pretty(ax.btn_idx),
+			Log.to_pretty(ax.action_label),
 			]
 
 	var lbl = RichTextLabel.new()
