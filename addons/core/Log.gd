@@ -1,9 +1,7 @@
 extends Object
 class_name Log
 
-
-############################################################################
-# logger
+## misc ###########################################################################
 
 static func log_prefix(stack):
 	if len(stack) > 1:
@@ -52,6 +50,8 @@ static var max_array_size = 20
 # - color
 # - bgcolor
 # - fgcolor
+
+## to_pretty ###########################################################################
 
 # refactor into opts dict
 # refactor into pluggable pretty printer
@@ -123,6 +123,8 @@ static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	else:
 		return str(msg)
 
+## to_printable ###########################################################################
+
 static func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=true):
 	var m = ""
 	if len(stack) > 0:
@@ -146,55 +148,56 @@ static func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=
 			m += str(msg) + " "
 	return m
 
-static var default_val = "somecrazydefault"
-static func is_not_def(v):
-	return not v is String or (v is String and v != default_val)
+static func is_not_default(v):
+	return not v is String or (v is String and v != "ZZZDEF")
 
-static func pr(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+## public print fns ###########################################################################
+
+static func pr(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var m = Log.to_printable(msgs, get_stack())
 	print_rich(m)
 
-static func info(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+static func info(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var m = Log.to_printable(msgs, get_stack())
 	print_rich(m)
 
-static func log(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+static func log(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var m = Log.to_printable(msgs, get_stack())
 	print_rich(m)
 
-static func prn(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+static func prn(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var m = Log.to_printable(msgs, get_stack(), true)
 	print_rich(m)
 
-static func warn(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+static func warn(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=yellow][WARN][/color]")
 	print_rich(Log.to_printable(rich_msgs, get_stack(), true))
 	var m = Log.to_printable(msgs, get_stack(), true, false)
 	push_warning(m)
 
-static func err(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+static func err(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=red][ERR][/color]")
 	print_rich(Log.to_printable(rich_msgs, get_stack(), true))
 	var m = Log.to_printable(msgs, get_stack(), true, false)
 	push_error(m)
 
-static func error(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
+static func error(msg, msg2="ZZZDEF", msg3="ZZZDEF", msg4="ZZZDEF", msg5="ZZZDEF", msg6="ZZZDEF", msg7="ZZZDEF"):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(Log.is_not_def)
+	msgs = msgs.filter(Log.is_not_default)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=red][ERR][/color]")
 	print_rich(Log.to_printable(rich_msgs, get_stack(), true))
