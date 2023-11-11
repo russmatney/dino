@@ -14,7 +14,7 @@ func _enter_tree():
 	reload_scene_btn.pressed.connect(reload_scene)
 	reload_scene_btn.text = "R"
 	add_control_to_container(CONTAINER_TOOLBAR, reload_scene_btn)
-	reload_scene_btn.get_parent().move_child(reload_scene_btn, 0)
+	reload_scene_btn.get_parent().move_child(reload_scene_btn, reload_scene_btn.get_index() - 2)
 
 
 func _exit_tree():

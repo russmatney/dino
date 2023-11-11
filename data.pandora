@@ -460,27 +460,6 @@
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
-				"_id": "33",
-				"_index": 0,
-				"_name": "Runner",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Runner"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/runner"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
 				"_id": "34",
 				"_index": 0,
 				"_name": "TowerJet",

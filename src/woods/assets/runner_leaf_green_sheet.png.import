@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d054mgcgnvhvr"
-path="res://.godot/imported/runner_leaf_purple_sheet.png-7c5cdd34efcb80e495db0423a5510c22.ctex"
+uid="uid://ckxbl4ceqy26f"
+path="res://.godot/imported/runner_leaf_green_sheet.png-a98c939cc349c1d7002173e033372efa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/runner/assets/runner_leaf_purple_sheet.png"
-dest_files=["res://.godot/imported/runner_leaf_purple_sheet.png-7c5cdd34efcb80e495db0423a5510c22.ctex"]
+source_file="res://src/woods/assets/runner_leaf_green_sheet.png"
+dest_files=["res://.godot/imported/runner_leaf_green_sheet.png-a98c939cc349c1d7002173e033372efa.ctex"]
 
 [params]
 
