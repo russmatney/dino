@@ -5,15 +5,16 @@ var container := preload("./ToolBarButtons.gd").new()
 var file_dialog := preload("./ScenesFileDialog.gd").new()
 var config := preload("./PluginConfig.gd").new(_get_root_dir())
 
-
 func _enter_tree() -> void:
 	scene_changed.connect(_on_scene_changed)
 	main_screen_changed.connect(_on_screen_changed)
 	config.load_settings()
 
+	scene_changed.connect(container.editor_scene_changed)
+
 	container.scene_path = config.scene_path
 	container.file_browser_button.icon = _get_icon("File")
-	container.remove_button.icon = _get_icon("Close")
+	container.clear_button.icon = _get_icon("Close")
 	container.open_root_dir_button.icon = _get_icon("ActionPaste")
 	container.pin_button.icon = _get_icon("Pin")
 	container.run_button.icon = _get_icon("PlayStart")
@@ -65,10 +66,12 @@ func _on_scene_path_changed(new_text: String) -> void:
 		config.was_manually_set = false
 		container.pin_button.button_pressed = false
 		config.scene_path = ""
+	else:
+		config.scene_path = new_text
 
 
 func _on_scene_changed(new_scene: Node):
-	if config.was_manually_set:
+	if config.was_manually_set: # i.e. is pinned
 		return
 	if new_scene == null:
 		return
@@ -83,7 +86,6 @@ func _on_screen_changed(new_screen: String) -> void:
 
 func _on_run_button_pressed() -> void:
 	config.load_settings()  # Godot bug forces us to reload config
-	print("config", config, config.scene_path)
 	if not config.scene_path:
 		return
 	get_editor_interface().play_custom_scene(config.scene_path)

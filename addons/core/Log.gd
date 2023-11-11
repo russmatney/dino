@@ -22,8 +22,6 @@ static func color_wrap(s, color, use_color=true):
 
 static var omit_vals_for_keys = ["layer_0/tile_data"]
 
-static var max_array_size = 20
-
 # supported colors:
 # - black
 # - red
@@ -56,12 +54,13 @@ static var max_array_size = 20
 # refactor into opts dict
 # refactor into pluggable pretty printer
 static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
+	var max_array_size = 20
 	if not is_instance_valid(msg) and typeof(msg) == TYPE_OBJECT:
 		return str(msg)
 	if msg is Array or msg is PackedStringArray:
-		if len(msg) > Log.max_array_size:
+		if len(msg) > max_array_size:
 			prn("[DEBUG]: truncating large array. total:", len(msg))
-			msg = msg.slice(0, Log.max_array_size - 1)
+			msg = msg.slice(0, max_array_size - 1)
 			if newlines:
 				msg.append("...")
 

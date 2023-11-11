@@ -37,12 +37,10 @@ func get_config_path() -> String:
 
 
 func set_scene_path(new_path: String) -> void:
-	print("saving scene path", new_path)
 	_save_setting("scene_path", new_path)
 
 
 func get_scene_path() -> String:
-	print("getting scene path", _load_setting("scene_path", ""))
 	return _load_setting("scene_path", "") as String
 
 
