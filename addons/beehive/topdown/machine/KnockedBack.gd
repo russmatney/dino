@@ -8,7 +8,7 @@ var kb_ttl
 ## enter ###########################################################
 
 func enter(opts = {}):
-	Util._connect(actor.anim.animation_finished, on_animation_finished, CONNECT_ONE_SHOT)
+	U._connect(actor.anim.animation_finished, on_animation_finished, CONNECT_ONE_SHOT)
 	if actor.anim.sprite_frames.has_animation("knocked_back"):
 		actor.anim.play("knocked_back")
 	else:

@@ -9,7 +9,7 @@ func _ready():
 
 func setup():
 	for e in get_enemies():
-		Util._connect(e.died, update_quest)
+		U._connect(e.died, update_quest)
 	update_quest()
 
 ## getter ##########################################################

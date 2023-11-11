@@ -14,7 +14,7 @@ func _ready():
 ## ensure_pit_detectors ##################################################################
 
 func ensure_pit_detectors():
-	Util.free_children_in_group(pit_detector_parent, generated_group)
+	U.free_children_in_group(pit_detector_parent, generated_group)
 
 	for cells in Reptile.cell_clusters(self):
 		create_pit_detector(cells)

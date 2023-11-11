@@ -34,7 +34,7 @@ func find_snakes():
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for e in enemies:
 		if e.is_in_group("snakes"):
-			Util._connect(e.destroyed, _on_destroyed)
+			U._connect(e.destroyed, _on_destroyed)
 			ss.append(e)
 
 	enemy_snakes = ss

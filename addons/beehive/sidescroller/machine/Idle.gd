@@ -9,7 +9,7 @@ func enter(_opts = {}):
 	actor.anim.play("idle")
 
 	if actor.should_wander:
-		idle_ttl = Util.rand_of(idle_times)
+		idle_ttl = U.rand_of(idle_times)
 
 
 ## exit ###########################################################

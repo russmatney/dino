@@ -30,7 +30,7 @@ var aim_vector = Vector2.ZERO
 
 func _get_configuration_warnings():
 	var warns = super._get_configuration_warnings()
-	var more = Util._config_warning(self, {expected_nodes=[
+	var more = U._config_warning(self, {expected_nodes=[
 		"ActionDetector", "ActionHint", "LookPOF",
 		]})
 	warns.append_array(more)
@@ -57,7 +57,7 @@ var actions = [
 ## ready ###########################################################
 
 func _ready():
-	Util.set_optional_nodes(self, {
+	U.set_optional_nodes(self, {
 		look_pof="LookPOF", light_occluder="LightOccluder2D", light="PointLight2D"
 		})
 
@@ -172,8 +172,8 @@ func _physics_process(_delta):
 
 func update_facing():
 	super.update_facing()
-	Util.update_h_flip(facing_vector, look_pof)
-	Util.update_h_flip(facing_vector, light_occluder)
+	U.update_h_flip(facing_vector, look_pof)
+	U.update_h_flip(facing_vector, light_occluder)
 
 ## forced target ##########################################################################
 

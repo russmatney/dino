@@ -27,7 +27,7 @@ func _node_to_entry_key(node):
 		Log.warn("No tree found for node...", node)
 		parents = []
 	else:
-		parents = Util.get_all_parents(node)
+		parents = U.get_all_parents(node)
 		# reverse so our join puts the furthest ancestor first
 		parents.reverse()
 

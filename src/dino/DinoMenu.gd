@@ -30,7 +30,7 @@ func build_games_grid():
 
 	attempts += 1
 	if len(new_game_entities) > 0:
-		Util.free_children(games_grid_container)
+		U.free_children(games_grid_container)
 
 		game_entities = new_game_entities
 		game_entities.sort_custom(func(a, b):

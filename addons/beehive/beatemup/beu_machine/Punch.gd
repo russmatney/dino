@@ -12,7 +12,7 @@ var next_state
 ## enter ###########################################################
 
 func enter(opts = {}):
-	punch_count = Util.get_(opts, "punch_count", initial_punch_count)
+	punch_count = U.get_(opts, "punch_count", initial_punch_count)
 
 	actor.anim.animation_finished.connect(on_animation_finished)
 	actor.anim.frame_changed.connect(on_frame_changed)

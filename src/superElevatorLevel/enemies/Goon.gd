@@ -13,11 +13,11 @@ var names = ["Tom", "Richard", "Harry"]
 func _ready():
 	super._ready()
 
-	var pal = Util.rand_of(palettes)
+	var pal = U.rand_of(palettes)
 
 	if pal != null:
 		anim.material = pal
 
 	if display_name in ["", null]:
-		display_name = Util.rand_of(names)
+		display_name = U.rand_of(names)
 		Hotel.check_in(self)

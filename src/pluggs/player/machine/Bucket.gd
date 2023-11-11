@@ -2,7 +2,7 @@ extends State
 
 
 func enter(msg = {}):
-	if Util.get_(msg, "animate"):
+	if U.get_(msg, "animate"):
 		# last frame is the bucket 'idle' state, so for now we just let this go and not loop
 		actor.anim.play("to-bucket")
 	else:

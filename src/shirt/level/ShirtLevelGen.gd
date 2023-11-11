@@ -20,7 +20,7 @@ func get_room_opts(_opts):
 		var side_opts = [
 			Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT
 			].filter(func(s): return s != agg.last_side)
-		next_room_opt["side"] = Util.rand_of(side_opts)
+		next_room_opt["side"] = U.rand_of(side_opts)
 
 		agg.room_opts.append(next_room_opt)
 		agg.last_side = next_room_opt.side

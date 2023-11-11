@@ -20,7 +20,7 @@ var collect_box: Area2D
 ## ready #########################################################
 
 func _ready():
-	Util.set_optional_nodes(self, {
+	U.set_optional_nodes(self, {
 		label="DebugLabel",
 		color_rect="ColorRect",
 		collect_box="CollectBox",

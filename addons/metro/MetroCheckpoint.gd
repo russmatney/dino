@@ -11,7 +11,7 @@ var room
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=["ActionArea", "ActionHint"]})
+	return U._config_warning(self, {expected_nodes=["ActionArea", "ActionHint"]})
 
 ## entry_tree ###########################################################
 
@@ -36,7 +36,7 @@ func hotel_data():
 
 # maybe should support a data-driven check-out config
 func check_out(data):
-	visit_count = Util.get_(data, "visit_count", visit_count)
+	visit_count = U.get_(data, "visit_count", visit_count)
 
 ## actions ###########################################################
 

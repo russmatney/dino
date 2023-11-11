@@ -5,7 +5,7 @@ class_name MetroTravelPoint
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[
+	return U._config_warning(self, {expected_nodes=[
 		"ActionArea", "AnimatedSprite2D", "ActionHint",
 		], expected_animations={"AnimatedSprite2D": [
 			"open", "opening", "closed", "closing"]}})

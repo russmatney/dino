@@ -9,7 +9,7 @@ var home_position
 
 func enter(opts = {}):
 	actor.anim.play("idle")
-	hop_in = Util.rand_of(hop_every)
+	hop_in = U.rand_of(hop_every)
 
 	home_position = opts.get("home_position", home_position)
 

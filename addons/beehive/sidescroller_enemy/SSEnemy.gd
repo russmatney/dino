@@ -5,7 +5,7 @@ class_name SSEnemy
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[
+	return U._config_warning(self, {expected_nodes=[
 		"SSEnemyMachine", "StateLabel", "AnimatedSprite2D", "Hitbox"
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "run", "knocked_back", "dying", "dead",
@@ -67,7 +67,7 @@ var line_of_sights = []
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Util.set_optional_nodes(self, {
+		U.set_optional_nodes(self, {
 			notif_label="NotifLabel",
 			cam_pof="CamPOF",
 			nav_agent="NavigationAgent2D",
@@ -204,10 +204,10 @@ func face_left():
 	update_facing()
 
 func update_facing():
-	Util.update_h_flip(facing_vector, hitbox)
-	Util.update_h_flip(facing_vector, front_ray)
+	U.update_h_flip(facing_vector, hitbox)
+	U.update_h_flip(facing_vector, front_ray)
 	for los in line_of_sights:
-		Util.update_los_facing(facing_vector, los)
+		U.update_los_facing(facing_vector, los)
 
 ## wall crawlers #######################################################
 
@@ -277,10 +277,10 @@ func _on_frame_changed():
 	if anim.animation == "idle":
 		if anim.frame in [3, 4, 5, 6]:
 			for los in line_of_sights:
-				Util.update_los_facing(-1*facing_vector, los)
+				U.update_los_facing(-1*facing_vector, los)
 		else:
 			for los in line_of_sights:
-				Util.update_los_facing(facing_vector, los)
+				U.update_los_facing(facing_vector, los)
 
 	elif anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
 		for b in bodies:

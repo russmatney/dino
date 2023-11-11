@@ -9,7 +9,7 @@ var bosses = []
 
 func reset_bosses():
 	bosses = []
-	for sib in Util.each_sibling(self):
+	for sib in U.each_sibling(self):
 		if sib.is_in_group("bosses"):
 			bosses.append(sib)
 

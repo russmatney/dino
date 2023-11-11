@@ -5,7 +5,7 @@ class_name SSBoss
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[
+	return U._config_warning(self, {expected_nodes=[
 		"SSBossMachine", "StateLabel", "AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "knocked_back", "dying", "dead",
@@ -64,7 +64,7 @@ func _ready():
 	Hotel.register(self)
 
 	if not Engine.is_editor_hint():
-		Util.set_optional_nodes(self, {
+		U.set_optional_nodes(self, {
 			notif_label="NotifLabel",
 			cam_pof="CamPOF",
 			nav_agent="NavigationAgent2D",
@@ -90,7 +90,7 @@ func _ready():
 		machine.start()
 
 	# look for sibling warp_spots
-	warp_spots = Util.get_children_in_group(get_parent(), warp_group, false)
+	warp_spots = U.get_children_in_group(get_parent(), warp_group, false)
 
 	died.connect(_on_death)
 

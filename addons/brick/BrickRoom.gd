@@ -26,14 +26,14 @@ class BrickRoomOpts:
 	var _opts: Dictionary
 
 	func _init(opts):
-		Util.ensure_default(opts, "side", Vector2.RIGHT)
-		Util.ensure_default(opts, "tile_size", 16)
-		Util.ensure_default(opts, "flags", [])
-		Util.ensure_default(opts, "skip_flags", [])
-		Util.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://addons/reptile/tilemaps/MetalTiles8.tscn")}})
-		Util.ensure_default(opts, "label_to_entity", {})
-		Util.ensure_default(opts, "color", Color.PERU)
-		Util.ensure_default(opts, "show_color_rect", false)
+		U.ensure_default(opts, "side", Vector2.RIGHT)
+		U.ensure_default(opts, "tile_size", 16)
+		U.ensure_default(opts, "flags", [])
+		U.ensure_default(opts, "skip_flags", [])
+		U.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://addons/reptile/tilemaps/MetalTiles8.tscn")}})
+		U.ensure_default(opts, "label_to_entity", {})
+		U.ensure_default(opts, "color", Color.PERU)
+		U.ensure_default(opts, "show_color_rect", false)
 
 		_opts = opts
 
@@ -175,7 +175,7 @@ static func gen_room_def(opts: BrickRoomOpts, d_opts: Dictionary={}):
 	var room_defs = RoomParser.parse(opts.data())
 	var filtered_rooms = room_defs.filter(opts.data())
 	if filtered_rooms != null:
-		return Util.rand_of(filtered_rooms)
+		return U.rand_of(filtered_rooms)
 	Log.error("Failed to generated room_def with opts", opts)
 
 ## next room position ##################################################################

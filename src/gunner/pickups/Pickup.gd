@@ -8,8 +8,8 @@ func _ready():
 	anim.animation = type
 	Respawner.register_respawn(self)
 	Cam.add_offscreen_indicator(self)
-	Util.animate(self)
-	Util.animate_rotate(self)
+	U.animate(self)
+	U.animate_rotate(self)
 
 
 func kill():

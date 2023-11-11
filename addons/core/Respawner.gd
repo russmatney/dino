@@ -45,4 +45,4 @@ func respawn_missing():
 			Navi.add_child_to_current(ins)
 			respawn.emit(ins)
 
-	respawns = Util.remove_matching(respawns, to_remove)
+	respawns = U.remove_matching(respawns, to_remove)

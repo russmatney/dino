@@ -59,7 +59,7 @@ func find_target():
 	var old_target = target
 	target = closest_target()
 	if target and "dying" in target:
-		Util._connect(target.dying, on_target_dying)
+		U._connect(target.dying, on_target_dying)
 	if target and target != old_target:
 		DJZ.play(DJZ.S.enemy_spawn)
 
@@ -71,7 +71,7 @@ func closest_target():
 	if len(bodies) == 0:
 		return
 	var bds = bodies.filter(can_see)
-	return Util.nearest_node(self, bds)
+	return U.nearest_node(self, bds)
 
 
 #############################################

@@ -26,7 +26,7 @@ func hotel_data():
 
 func check_out(_data):
 	# reset sheep to full health for now
-	# health = Util.get_(data, "health", health)
+	# health = U.get_(data, "health", health)
 	pass
 
 ###########################################################
@@ -65,12 +65,12 @@ func follow_player(player):
 	# check_in here also adds to HUD
 	# not a great pattern, if HUD grabs/inits automatically this is not necessary
 	Hotel.check_in(self)
-	Util._connect(player.dying, on_player_dying)
+	U._connect(player.dying, on_player_dying)
 	following = player
 	machine.transit("Follow")
 
 func grabbed_by_player(player):
-	Util._connect(player.dying, on_player_dying)
+	U._connect(player.dying, on_player_dying)
 	player.grab(self)
 	grabbed_by = player
 	machine.transit("Grabbed")
@@ -113,7 +113,7 @@ func bullet_hit():
 	if health <= 0:
 		machine.transit("Dead")
 	else:
-		Util.play_then_return(anim, "hit")
+		U.play_then_return(anim, "hit")
 
 
 ######################################################

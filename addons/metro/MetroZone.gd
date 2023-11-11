@@ -83,7 +83,7 @@ func player_spawn_coords() -> Vector2:
 		else:
 			Log.warn("Invalid spawn_node_path", self, spawn_node_path)
 
-	var markers = Util.get_children_in_group(self, "player_spawn_points")
+	var markers = U.get_children_in_group(self, "player_spawn_points")
 	markers = markers.filter(func(ma): return ma.active)
 
 	if Game.is_managed:
@@ -96,7 +96,7 @@ func player_spawn_coords() -> Vector2:
 	if len(markers) > 0:
 		return markers[0].global_position
 
-	var eles = Util.get_children_in_group(self, travel_points_group)
+	var eles = U.get_children_in_group(self, travel_points_group)
 	for e in eles:
 		return e.global_position
 

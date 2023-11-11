@@ -29,7 +29,7 @@ func reset_player_data():
 	Log.warn("Ghost player reset not impled!")
 
 func get_spawn_coords():
-	var player_spawner = Util.first_node_in_group("player_spawn_points")
+	var player_spawner = U.first_node_in_group(self, "player_spawn_points")
 	if not player_spawner:
 		Log.warn("no node in 'player_spawner' group found")
 		return

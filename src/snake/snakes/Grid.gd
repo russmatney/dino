@@ -77,7 +77,7 @@ func random_empty_coord(exclude=null):
 	if exclude:
 		coords.erase(exclude)
 	if coords:
-		return Util.rand_of(coords)
+		return U.rand_of(coords)
 
 
 func wrap_edges(next):
@@ -144,7 +144,7 @@ func mark_touched(coord):
 	Log.pr("marking coord/cell touched", coord, cell)
 	if cell:
 		cell.play("blue")
-		Util.set_random_frame(cell)
+		U.set_random_frame(cell)
 		cell.pause()
 		cell_touched.emit(coord)
 
@@ -182,7 +182,7 @@ func init_grid(anim = "yellow"):
 		var c = cell_scene.instantiate()
 		c.coord = coord
 		c.play(anim)
-		Util.set_random_frame(c)
+		U.set_random_frame(c)
 		c.pause()
 		c.position = coord_to_position(coord)
 		$Cells.add_child(c)
@@ -245,7 +245,7 @@ func add_food(exclude=null):
 
 	var f = food_scene.instantiate()
 	f.coord = empty_cell
-	Util.set_random_frame(f)
+	U.set_random_frame(f)
 	f.position = coord_to_position(empty_cell)
 	add_child(f)
 	food.append(f)

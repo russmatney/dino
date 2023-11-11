@@ -68,7 +68,7 @@ func draw_segment(coord):
 		c.play("flash")
 	else:
 		c.play(cell_anim)
-	Util.set_random_frame(c)
+	U.set_random_frame(c)
 	c.global_position = grid.coord_to_position(coord)
 	c.coord = coord
 	grid.add_child(c)
@@ -94,7 +94,7 @@ func animate_head(cell):
 
 func restore_tail_segment(cell):
 	cell.play(cell_anim)
-	Util.set_random_frame(cell)
+	U.set_random_frame(cell)
 
 func restore_segments():
 	var hd = head_cell()
@@ -110,7 +110,7 @@ func restore_segments():
 
 func cell_flash(cell):
 	cell.play("flash")
-	Util.set_random_frame(cell)
+	U.set_random_frame(cell)
 
 func segments_flash_white():
 	for cell in segments.values():

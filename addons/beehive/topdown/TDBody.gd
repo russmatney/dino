@@ -7,7 +7,7 @@ var is_td_body = true
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[
+	return U._config_warning(self, {expected_nodes=[
 		"TDMachine", "StateLabel", "AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle_down", "idle_up", "idle_right",
@@ -61,7 +61,7 @@ func _ready():
 		is_player = true
 
 	if not Engine.is_editor_hint():
-		Util.set_optional_nodes(self, {
+		U.set_optional_nodes(self, {
 			notif_label="NotifLabel",
 			hurt_box="HurtBox",
 			notice_box="NoticeBox",
@@ -109,9 +109,9 @@ func hotel_data():
 	return d
 
 func check_out(data):
-	health = Util.get_(data, "health", initial_health)
-	is_dead = Util.get_(data, "is_dead", is_dead)
-	display_name = Util.get_(data, "display_name", display_name)
+	health = U.get_(data, "health", initial_health)
+	is_dead = U.get_(data, "is_dead", is_dead)
+	display_name = U.get_(data, "display_name", display_name)
 
 ## collision ###########################################################
 

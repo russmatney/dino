@@ -16,9 +16,9 @@ func enter(opts = {}):
 	DJZ.play(DJZ.S.jump)
 	# actor.anim.play("jump")
 
-	ttl = Util.get_(opts, "time", time)
-	dtl = Util.get_(opts, "distance", distance)
-	direction = Util.get_(opts, "direction", actor.input_move_dir)
+	ttl = U.get_(opts, "time", time)
+	dtl = U.get_(opts, "distance", distance)
+	direction = U.get_(opts, "direction", actor.input_move_dir)
 
 	og_pos = actor.global_position
 

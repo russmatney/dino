@@ -5,7 +5,7 @@ class_name SSBody
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[
+	return U._config_warning(self, {expected_nodes=[
 		"SSMachine", "StateLabel", "AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "run", "jump", "air", "fall",
@@ -101,7 +101,7 @@ func _ready():
 		should_patrol = false
 
 	if not Engine.is_editor_hint():
-		Util.set_optional_nodes(self, {
+		U.set_optional_nodes(self, {
 			jet_anim="Jet",
 			notif_label="NotifLabel",
 			cam_pof="CamPOF",
@@ -166,10 +166,10 @@ func hotel_data():
 	return d
 
 func check_out(data):
-	health = Util.get_(data, "health", initial_health)
-	is_dead = Util.get_(data, "is_dead", is_dead)
-	display_name = Util.get_(data, "display_name", display_name)
-	death_count = Util.get_(data, "death_count", death_count)
+	health = U.get_(data, "health", initial_health)
+	is_dead = U.get_(data, "is_dead", is_dead)
+	display_name = U.get_(data, "display_name", display_name)
+	death_count = U.get_(data, "death_count", death_count)
 
 ## facing ###########################################################
 
@@ -193,7 +193,7 @@ func update_facing():
 
 	# flip weapons
 	for w in weapons.filter(func(w): return w.should_flip):
-		Util.update_h_flip(facing_vector, w)
+		U.update_h_flip(facing_vector, w)
 
 func flip_facing():
 	# assumes facing vector is always vec.left or vec.right

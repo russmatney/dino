@@ -4,7 +4,7 @@ var to_bucket_time = 1.4
 var to_bucket_ttl
 
 func enter(msg = {}):
-	if Util.get_(msg, "animate"):
+	if U.get_(msg, "animate"):
 		# actor moves us to idle-standing when this anim finishes
 		actor.anim.play("from-bucket")
 		to_bucket_ttl = to_bucket_time + 0.5

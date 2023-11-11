@@ -9,7 +9,7 @@ var height
 ## config warning ##########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=["Bottom", "Top"]})
+	return U._config_warning(self, {expected_nodes=["Bottom", "Top"]})
 
 ## ready ##########################################################
 

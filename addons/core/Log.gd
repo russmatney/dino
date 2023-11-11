@@ -59,34 +59,34 @@ static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	if not is_instance_valid(msg) and typeof(msg) == TYPE_OBJECT:
 		return str(msg)
 	if msg is Array or msg is PackedStringArray:
-		if len(msg) > max_array_size:
+		if len(msg) > Log.max_array_size:
 			prn("[DEBUG]: truncating large array. total:", len(msg))
-			msg = msg.slice(0, max_array_size - 1)
+			msg = msg.slice(0, Log.max_array_size - 1)
 			if newlines:
 				msg.append("...")
 
-		var tmp = color_wrap("[ ", "red", use_color)
+		var tmp = Log.color_wrap("[ ", "red", use_color)
 		var last = len(msg) - 1
 		for i in range(len(msg)):
 			if newlines and last > 1:
 				tmp += "\n\t"
-			tmp += to_pretty(msg[i], newlines, use_color, indent_level + 1)
+			tmp += Log.to_pretty(msg[i], newlines, use_color, indent_level + 1)
 			if i != last:
-				tmp += color_wrap(", ", "red", use_color)
-		tmp += color_wrap(" ]", "red", use_color)
+				tmp += Log.color_wrap(", ", "red", use_color)
+		tmp += Log.color_wrap(" ]", "red", use_color)
 		return tmp
 	elif msg is Dictionary:
-		var tmp = color_wrap("{ ", "red", use_color)
+		var tmp = Log.color_wrap("{ ", "red", use_color)
 		var ct = len(msg)
 		var last
 		if len(msg) > 0:
 			last = msg.keys()[-1]
 		for k in msg.keys():
 			var val
-			if k in omit_vals_for_keys:
+			if k in Log.omit_vals_for_keys:
 				val = "..."
 			else:
-				val = to_pretty(msg[k], newlines, use_color, indent_level + 1)
+				val = Log.to_pretty(msg[k], newlines, use_color, indent_level + 1)
 			if newlines and ct > 1:
 				tmp += "\n\t" \
 					+ range(indent_level)\
@@ -97,8 +97,8 @@ static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 			else:
 				tmp += '"%s": %s' % [k, val]
 			if last and str(k) != str(last):
-				tmp += color_wrap(", ", "red", use_color)
-		tmp += color_wrap(" }", "red", use_color)
+				tmp += Log.color_wrap(", ", "red", use_color)
+		tmp += Log.color_wrap(" }", "red", use_color)
 		return tmp
 	elif msg is String:
 		if msg == "":
@@ -106,27 +106,27 @@ static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 		# could check for supported tags in the string (see list above)
 		# if msg.contains("["):
 		# 	msg = "<ACTUAL-TEXT-REPLACED>"
-		return color_wrap(msg, "pink", use_color)
+		return Log.color_wrap(msg, "pink", use_color)
 	elif msg is StringName:
-		return str(color_wrap("&", "orange", use_color), '"%s"' % msg)
+		return str(Log.color_wrap("&", "orange", use_color), '"%s"' % msg)
 	elif msg is NodePath:
-		return str(color_wrap("^", "orange", use_color), '"%s"' % msg)
+		return str(Log.color_wrap("^", "orange", use_color), '"%s"' % msg)
 	elif msg is Vector2:
 		if use_color:
 			return '([color=%s]%s[/color],[color=%s]%s[/color])' % ["purple", msg.x, "purple", msg.y]
 		else:
 			return '(%s,%s)' % [msg.x, msg.y]
 	elif msg is Object and msg.has_method("data"):
-		return to_pretty(msg.data(), newlines, use_color, indent_level)
+		return Log.to_pretty(msg.data(), newlines, use_color, indent_level)
 	elif msg is Object and msg.has_method("to_pretty"):
-		return msg.to_pretty(newlines, use_color, indent_level)
+		return msg.Log.to_pretty(newlines, use_color, indent_level)
 	else:
 		return str(msg)
 
 static func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=true):
 	var m = ""
 	if len(stack) > 0:
-		var prefix = log_prefix(stack)
+		var prefix = Log.log_prefix(stack)
 		var c
 		if prefix != null and prefix[0] == "[":
 			c = "cyan"
@@ -141,62 +141,62 @@ static func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=
 	for msg in msgs:
 		# add a space between msgs
 		if pretty:
-			m += to_pretty(msg, newlines, use_color) + " "
+			m += Log.to_pretty(msg, newlines, use_color) + " "
 		else:
 			m += str(msg) + " "
 	return m
 
 static var default_val = "somecrazydefault"
 static func is_not_def(v):
-	return not v is String or (v is String and v != "somecrazydefault")
+	return not v is String or (v is String and v != default_val)
 
-static func pr(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func pr(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
-	var m = to_printable(msgs, get_stack())
+	msgs = msgs.filter(Log.is_not_def)
+	var m = Log.to_printable(msgs, get_stack())
 	print_rich(m)
 
-static func info(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func info(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
-	var m = to_printable(msgs, get_stack())
+	msgs = msgs.filter(Log.is_not_def)
+	var m = Log.to_printable(msgs, get_stack())
 	print_rich(m)
 
-static func log(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func log(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
-	var m = to_printable(msgs, get_stack())
+	msgs = msgs.filter(Log.is_not_def)
+	var m = Log.to_printable(msgs, get_stack())
 	print_rich(m)
 
-static func prn(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func prn(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
-	var m = to_printable(msgs, get_stack(), true)
+	msgs = msgs.filter(Log.is_not_def)
+	var m = Log.to_printable(msgs, get_stack(), true)
 	print_rich(m)
 
-static func warn(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func warn(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
+	msgs = msgs.filter(Log.is_not_def)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=yellow][WARN][/color]")
-	print_rich(to_printable(rich_msgs, get_stack(), true))
-	var m = to_printable(msgs, get_stack(), true, false)
+	print_rich(Log.to_printable(rich_msgs, get_stack(), true))
+	var m = Log.to_printable(msgs, get_stack(), true, false)
 	push_warning(m)
 
-static func err(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func err(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
+	msgs = msgs.filter(Log.is_not_def)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=red][ERR][/color]")
-	print_rich(to_printable(rich_msgs, get_stack(), true))
-	var m = to_printable(msgs, get_stack(), true, false)
+	print_rich(Log.to_printable(rich_msgs, get_stack(), true))
+	var m = Log.to_printable(msgs, get_stack(), true, false)
 	push_error(m)
 
-static func error(msg, msg2=default_val, msg3=default_val, msg4=default_val, msg5=default_val, msg6=default_val, msg7=default_val):
+static func error(msg, msg2=Log.default_val, msg3=Log.default_val, msg4=Log.default_val, msg5=Log.default_val, msg6=Log.default_val, msg7=Log.default_val):
 	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(is_not_def)
+	msgs = msgs.filter(Log.is_not_def)
 	var rich_msgs = msgs.duplicate()
 	rich_msgs.push_front("[color=red][ERR][/color]")
-	print_rich(to_printable(rich_msgs, get_stack(), true))
-	var m = to_printable(msgs, get_stack(), true, false)
+	print_rich(Log.to_printable(rich_msgs, get_stack(), true))
+	var m = Log.to_printable(msgs, get_stack(), true, false)
 	push_error(m)

@@ -13,10 +13,10 @@ func enter(_opts = {}):
 	actor.anim.play("run")
 
 	if target == null:
-		patrol_points = Util.get_children_in_group(actor.get_parent(), "patrol_points", true)
+		patrol_points = U.get_children_in_group(actor.get_parent(), "patrol_points", true)
 		var pps = patrol_points.filter(func(p): return p != last_target)
 		if len(pps) > 0:
-			target = Util.rand_of(pps)
+			target = U.rand_of(pps)
 			last_target = target
 
 	if target and actor.nav_agent:

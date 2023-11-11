@@ -6,8 +6,8 @@ class_name BrickLevelGen
 ## static ######################################################################
 
 static func generate_level(opts: Dictionary) -> Dictionary:
-	Util.ensure_default(opts, "seed", 1)
-	Util.ensure_default(opts, "tile_size", 16)
+	U.ensure_default(opts, "seed", 1)
+	U.ensure_default(opts, "tile_size", 16)
 
 	# parse once
 	var parsed_room_defs = RoomParser.parse({
@@ -262,7 +262,7 @@ func _ready():
 	ensure_containers()
 
 	if not Game.is_managed and not Engine.is_editor_hint():
-		Util.call_in.call_deferred(maybe_regen, 1.0)
+		U.call_in.call_deferred(self, maybe_regen, 1.0)
 
 func maybe_regen():
 	if len(rooms_node.get_children()) == 0:

@@ -43,7 +43,7 @@ func get_noise_input():
 	var options = [
 		{
 			"seed": randf_range(0, 100000),
-			"octaves": Util.rand_of([2, 3, 4]),
+			"octaves": U.rand_of([2, 3, 4]),
 			"frequency": 1/randf_range(15, 40),
 			"persistence": randf_range(0.3, 0.5),
 			"lacunarity": randf_range(2.5, 4.0),

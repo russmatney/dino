@@ -31,13 +31,13 @@ func regenerate(opts=null):
 func get_splash_jumbo_opts():
 	return {
 		header="Welcome to %s" % self.name,
-		body=Util.rand_of(["Good luck, padawan", "I give you 1 in 10 odds"])
+		body=U.rand_of(["Good luck, padawan", "I give you 1 in 10 odds"])
 		}
 
 # recursively setup any signals and initial data
 func setup_level():
-	Util._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
-	Util._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
+	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
+	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()
 	Game.remove_player()
 
@@ -49,7 +49,7 @@ func setup_level():
 func get_exit_jumbo_opts():
 	return {
 		header="%s complete!" % self.name,
-		body=Util.rand_of(["Seriously, wow.", "OMG YOU DID IT", "Yo! Way to go!"])
+		body=U.rand_of(["Seriously, wow.", "OMG YOU DID IT", "Yo! Way to go!"])
 		}
 
 func on_quests_complete():

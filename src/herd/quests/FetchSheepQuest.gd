@@ -14,7 +14,7 @@ signal count_total_update
 ## config warning ##########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=["SheepPen"]})
+	return U._config_warning(self, {expected_nodes=["SheepPen"]})
 
 ## ready ##########################################################
 

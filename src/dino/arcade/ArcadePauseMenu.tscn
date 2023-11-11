@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpvhxndrptbgv"]
+[gd_scene load_steps=6 format=3 uid="uid://bpvhxndrptbgv"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mrc12"]
 [ext_resource type="Script" path="res://src/dino/arcade/ArcadePauseMenuButtonList.gd" id="2_b810k"]
 [ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/brick/BrickRegenMenu.tscn" id="2_cuxsf"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="4_jrnr6"]
+[ext_resource type="PackedScene" uid="uid://b3ivyg8cxtuof" path="res://addons/navi/ui/MenuButton.tscn" id="5_hmeb7"]
 
 [node name="ArcadePauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -56,6 +57,7 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 script = ExtResource("2_b810k")
+default_button_scene = ExtResource("5_hmeb7")
 
 [node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)

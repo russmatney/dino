@@ -23,9 +23,9 @@ func enter(opts = {}):
 
 	actor.anim.animation_finished.connect(on_animation_finished)
 
-	thrown_ttl = Util.get_(opts, "thrown_time", thrown_time)
-	direction = Util.get_(opts, "direction", direction)
-	thrown_by = Util.get_(opts, "thrown_by", thrown_by)
+	thrown_ttl = U.get_(opts, "thrown_time", thrown_time)
+	direction = U.get_(opts, "direction", direction)
+	thrown_by = U.get_(opts, "thrown_by", thrown_by)
 
 	actor.face_body(thrown_by)
 	actor.flip_facing()

@@ -10,9 +10,9 @@ var target_diff
 func enter(opts = {}):
 	actor.anim.play("walk")
 	circling = opts.get("circling")
-	circle_ttl = Util.rand_of(circle_times)
+	circle_ttl = U.rand_of(circle_times)
 
-	target_diff = Vector2(0, 150) * Util.rand_of([1, -1])
+	target_diff = Vector2(0, 150) * U.rand_of([1, -1])
 
 
 ## exit ###########################################################

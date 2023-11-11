@@ -140,7 +140,7 @@ func get_noise_input():
 	var options = [
 		{
 			"seed": randf_range(0, 50000),
-			"octaves": Util.rand_of([2, 3, 4]),
+			"octaves": U.rand_of([2, 3, 4]),
 			"frequency": 1/randf_range(5, 30),
 			"persistence": randf_range(0.3, 0.7),
 			"lacunarity": randf_range(2.0, 4.0),
@@ -181,7 +181,7 @@ func set_groups(new_groups):
 	clear_groups()
 
 	for g in new_groups:
-		g.tree_entered.connect(g.set_owner.bind(Util._or(owner, self)))
+		g.tree_entered.connect(g.set_owner.bind(U._or(owner, self)))
 		g.name = "Group"
 		add_child(g)
 	groups = new_groups
@@ -367,7 +367,7 @@ func init_tilemaps():
 			else:
 				scale_by = 1
 			t.scale = Vector2(scale_by, scale_by)
-			t.tree_entered.connect(t.set_owner.bind(Util._or(owner, self)))
+			t.tree_entered.connect(t.set_owner.bind(U._or(owner, self)))
 			add_child(t)
 			group.tilemap = t
 

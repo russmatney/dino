@@ -19,10 +19,10 @@ func enter(opts = {}):
 
 	actor.anim.play("thrown")
 
-	ttl = Util.get_(opts, "time", time)
-	dtl = Util.get_(opts, "distance", distance)
-	direction = Util.get_(opts, "direction", direction)
-	throw_speed = Util.get_(opts, "throw_speed", throw_speed)
+	ttl = U.get_(opts, "time", time)
+	dtl = U.get_(opts, "distance", distance)
+	direction = U.get_(opts, "direction", direction)
+	throw_speed = U.get_(opts, "throw_speed", throw_speed)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2(1.5, 1.5), ttl/2.0)

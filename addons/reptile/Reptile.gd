@@ -152,7 +152,7 @@ static func cells_to_polygon(tilemap, cells, opts={}):
 		if seen_points[p] < 4:
 			points.append(p)
 
-	var mid = Util.average(points)
+	var mid = U.average(points)
 
 	# move points toward midpoint
 	var padding = opts.get("padding", 0)

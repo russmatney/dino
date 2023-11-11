@@ -1,22 +1,23 @@
 @tool
 extends Node
+class_name U
 
 ############################################################
 # misc
 
-func node_name_from_path(path):
+static func node_name_from_path(path):
 	var parts = path.split("/")
 	return parts[-1]
 
-func p_script_vars(node):
+static func p_script_vars(node):
 	for prop in node.get_property_list():
-		if "usage" in prop and prop["usage"] & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
-			Log.pr("\t", prop["name"], ": ", self.get(prop["name"]))
+		if "usage" in prop and prop.get("usage") & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
+			Log.pr("\t", prop.get("name"), ": ", node.get(prop["name"]))
 
 ############################################################
 # ready helpers
 
-func set_optional_nodes(node, node_map):
+static func set_optional_nodes(node, node_map):
 	for k in node_map:
 		node[k] = node.get_node_or_null(node_map[k])
 
@@ -24,7 +25,7 @@ func set_optional_nodes(node, node_map):
 # nearby
 
 # https://godotengine.org/qa/27869/how-to-get-the-nearest-object-in-a-group
-func nearest_node(source: Node, targets) -> Node:
+static func nearest_node(source: Node, targets) -> Node:
 	if targets == null or targets.size() == 0:
 		return null
 
@@ -41,22 +42,22 @@ func nearest_node(source: Node, targets) -> Node:
 
 	return nearest_target
 
-func are_points_close(a, b, diff=5):
+static func are_points_close(a, b, diff=5):
 	return abs(a.x - b.x) < diff and abs(a.y - b.y) < diff
 
-func are_nodes_close(a, b, diff=5):
+static func are_nodes_close(a, b, diff=5):
 	return are_points_close(a.global_position, b.global_position, diff)
 
 ############################################################
 # groups
 
-func first_node_in_group(group_name: String) -> Node:
-	for c in get_tree().get_nodes_in_group(group_name):
+static func first_node_in_group(node, group_name: String) -> Node:
+	for c in node.get_tree().get_nodes_in_group(group_name):
 		return c
 	return null
 
 
-func get_first_child_in_group(node: Node, group_name: String) -> Node:
+static func get_first_child_in_group(node: Node, group_name: String) -> Node:
 	# only checks first children
 	for c in node.get_children():
 		if c.is_in_group(group_name):
@@ -64,7 +65,7 @@ func get_first_child_in_group(node: Node, group_name: String) -> Node:
 	return null
 
 
-func get_children_in_group(node: Node, group_name: String, include_nested=true) -> Array:
+static func get_children_in_group(node: Node, group_name: String, include_nested=true) -> Array:
 	var in_group = []
 	for c in node.get_children():
 		if c.is_in_group(group_name):
@@ -74,14 +75,14 @@ func get_children_in_group(node: Node, group_name: String, include_nested=true) 
 			in_group.append_array(get_children_in_group(c, group_name, include_nested))
 	return in_group
 
-func free_children_in_group(node: Node, group_name: String):
+static func free_children_in_group(node: Node, group_name: String):
 	if not node:
 		return
 	for c in node.get_children():
 		if c.is_in_group(group_name):
 			c.queue_free()
 
-func free_children(node: Node):
+static func free_children(node: Node):
 	if not node:
 		return
 	for c in node.get_children():
@@ -90,11 +91,11 @@ func free_children(node: Node):
 ############################################################
 # children/parents/...siblings?
 
-func change_parent(child: Node, new_parent: Node):
+static func change_parent(child: Node, new_parent: Node):
 	do_change_parent.call_deferred(child, new_parent)
 
 
-func do_change_parent(child, new_parent):
+static func do_change_parent(child, new_parent):
 	if not is_instance_valid(child):
 		Log.warn("Cannot change parent, child is not valid")
 		return
@@ -105,14 +106,14 @@ func do_change_parent(child, new_parent):
 	old_parent.remove_child(child)
 	new_parent.add_child(child)
 
-func get_children_by_name(node: Node):
+static func get_children_by_name(node: Node):
 	var by_name = {}
 	for ch in node.get_children():
 		by_name[ch.name] = ch
 	return by_name
 
 ## Returns all of a node's parents EXCEPT the root.
-func get_all_parents(node: Node, parents=[]):
+static func get_all_parents(node: Node, parents=[]):
 	if node == null:
 		return []
 	var p = node.get_parent()
@@ -125,7 +126,7 @@ func get_all_parents(node: Node, parents=[]):
 		return parents
 
 ## Returns all of a node's children
-func get_all_children(node: Node):
+static func get_all_children(node: Node):
 	if node == null:
 		return []
 	var chs = []
@@ -134,7 +135,7 @@ func get_all_children(node: Node):
 		chs.append_array(get_all_children(ch))
 	return chs
 
-func each_sibling(node: Node):
+static func each_sibling(node: Node):
 	var p = node.get_parent()
 	return p.get_children().filter(func(ch): return ch != node)
 
@@ -144,7 +145,7 @@ func each_sibling(node: Node):
 # Returns a dict full of data for the passed packed_scene or path to one.
 # If a path is passed, the scene_file_path will be included as a property
 # on the first dictionary (the root of the packed scene).
-func packed_scene_data(packed_scene_or_path, include_properties=false):
+static func packed_scene_data(packed_scene_or_path, include_properties=false):
 	var scene
 	var sfp
 	if packed_scene_or_path is String:
@@ -192,7 +193,7 @@ func packed_scene_data(packed_scene_or_path, include_properties=false):
 		by_path[path] = node_data
 	return by_path
 
-func to_scene_path(path_or_scene):
+static func to_scene_path(path_or_scene):
 	var path
 	if path_or_scene is String:
 		path = path_or_scene
@@ -207,7 +208,7 @@ func to_scene_path(path_or_scene):
 
 # https://github.com/godotengine/godot-proposals/issues/3424#issuecomment-943703969
 # unconfirmed
-func set_collisions_enabled(node, enabled):
+static func set_collisions_enabled(node, enabled):
 	if enabled:
 		if node.has_meta("col_mask"):
 			node.collision_mask = node.get_meta("col_mask")
@@ -222,7 +223,7 @@ func set_collisions_enabled(node, enabled):
 # connections
 
 # NOTE connections can be deferred or one_shot via ConnectFlags
-func _connect(sig, callable, flags=null):
+static func _connect(sig, callable, flags=null):
 	if sig == null:
 		Log.warn("Could not connect null signal")
 		return
@@ -236,15 +237,15 @@ func _connect(sig, callable, flags=null):
 	if err:
 		Log.pr("[Error]: ", err, sig, callable)  # useless enum digit
 
-func call_in(callable, s):
-	await get_tree().create_timer(1.0).timeout
+static func call_in(node, callable, s):
+	await node.get_tree().create_timer(1.0).timeout
 	callable.call()
 
 ## random ###########################################################
 
-func rand_of(arr, n=1):
+static func rand_of(arr, n=1):
 	if len(arr) == 0:
-	# 	push_warning("Util.rand_of passed empty array")
+	# 	push_warning("U.rand_of passed empty array")
 		return
 	arr.shuffle()
 	if n == 1:
@@ -252,12 +253,12 @@ func rand_of(arr, n=1):
 	else:
 		return arr.slice(0, n)
 
-func set_random_frame(anim):
+static func set_random_frame(anim):
 	anim.frame = randi() % anim.sprite_frames.get_frame_count(anim.animation)
 
 ## misc functional ###########################################################
 
-func _or(a, b = null, c = null, d = null, e = null):
+static func _or(a, b = null, c = null, d = null, e = null):
 	if a:
 		return a
 	if b:
@@ -269,7 +270,7 @@ func _or(a, b = null, c = null, d = null, e = null):
 	if e:
 		return e
 
-func _and(a, b = null, c = null, d = null, e = null):
+static func _and(a, b = null, c = null, d = null, e = null):
 	# expand impl to support 5 inputs
 	# support vars as callables, call if previous were non-nil
 	if a and b:
@@ -277,14 +278,14 @@ func _and(a, b = null, c = null, d = null, e = null):
 
 # could be more efficient
 # https://github.com/godotengine/godot-proposals/issues/3116#issuecomment-1363222780
-func remove_matching(arr, to_remove):
+static func remove_matching(arr, to_remove):
 	return arr.filter(func(a): return a in to_remove)
 
 
 ############################################################
 # Facing
 
-func update_h_flip(facing, node):
+static func update_h_flip(facing, node):
 	if not node:
 		return
 	if facing.x > 0 and node.position.x <= 0:
@@ -298,7 +299,7 @@ func update_h_flip(facing, node):
 		if node.scale.x > 0:
 			node.scale.x = -1 * abs(node.scale.x)
 
-func update_los_facing(facing, node):
+static func update_los_facing(facing, node):
 	if not node:
 		return
 	if facing.x > 0 and node.target_position.y > 0:
@@ -310,7 +311,7 @@ func update_los_facing(facing, node):
 #################################################################
 ## Animations
 
-func animate_rotate(node):
+static func animate_rotate(node):
 	var tween = node.create_tween()
 	tween.set_loops(0)
 	tween.tween_property(node.anim, "rotation", node.rotation + PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
@@ -322,7 +323,7 @@ func animate_rotate(node):
 	tween.tween_interval(randf_range(0.1, 0.4))
 
 
-func animate(node):
+static func animate(node):
 	var n = 10
 	var og_pos = node.position
 	var rand_offset = Vector2(randi() % n - n / 2.0, randi() % n - n / 2.0)
@@ -342,7 +343,7 @@ func animate(node):
 
 # plays the passed animation, then returns to the previous animation
 # NOTE the passed animation cannot be looping, or animation_finished will never fire
-func play_then_return(anim, animation):
+static func play_then_return(anim, animation):
 	var current_anim = anim.animation
 	anim.animation_finished.connect(func():
 		anim.play(current_anim),
@@ -356,7 +357,7 @@ func play_then_return(anim, animation):
 # - returns `default` if the value for key `k` in dict `d` is null.
 # - returns null if the value is a freed object (instead of crashing)
 # - returns null if both the value and default are invalid instances
-func get_(d, k: String, default: Variant=null):
+static func get_(d, k: String, default: Variant=null):
 	if d == null:
 		return default
 
@@ -372,7 +373,7 @@ func get_(d, k: String, default: Variant=null):
 	else:
 		return default
 
-func ensure_default(d, k: String, default: Variant):
+static func ensure_default(d, k: String, default: Variant):
 	if d == null:
 		return {k=default}
 
@@ -387,7 +388,7 @@ func ensure_default(d, k: String, default: Variant):
 #################################################################
 ## Configuration warnings
 
-func _config_warning(node, opts={}):
+static func _config_warning(node, opts={}):
 	var warns = []
 	for node_name in opts.get("expected_nodes", []):
 		var n = node.find_child(node_name)
@@ -406,14 +407,14 @@ func _config_warning(node, opts={}):
 #################################################################
 ## func
 
-func first(list):
+static func first(list):
 	if list != null and len(list) > 0:
 		return list[0]
 
-func sum(vals):
+static func sum(vals):
 	return vals.reduce(func(agg, x): return x + agg)
 
-func average(vals):
+static func average(vals):
 	if len(vals) == 0:
 		return
 
@@ -427,13 +428,13 @@ func average(vals):
 
 # control/theme helpers
 
-func update_stylebox(node, stylebox_name, fn):
+static func update_stylebox(node, stylebox_name, fn):
 	var stylebox = node.get_theme_stylebox(stylebox_name).duplicate()
 	fn.call(stylebox)
 	node.add_theme_stylebox_override(stylebox_name, stylebox)
 
 
-func add_color_rect(node, pos, size, color):
+static func add_color_rect(node, pos, size, color):
 	var crect = ColorRect.new()
 	crect.color = color
 	crect.position = pos
@@ -443,7 +444,7 @@ func add_color_rect(node, pos, size, color):
 
 ########################################################
 
-func ensure_node(_self, nm):
+static func ensure_node(_self, nm):
 	var node = _self.get_node_or_null(nm)
 	if node == null:
 		node = Node2D.new()

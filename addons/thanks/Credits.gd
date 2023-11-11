@@ -13,7 +13,7 @@ var scroll_delay_per_line = 0.05
 var since_last_scroll = 0
 
 func _get_configuration_warnings():
-	return Util._config_warning({expected_nodes=[
+	return U._config_warning({expected_nodes=[
 		"CreditsScrollContainer", "CreditsLinesContainer"]})
 
 

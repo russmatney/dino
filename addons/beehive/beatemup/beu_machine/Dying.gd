@@ -18,8 +18,8 @@ func enter(opts = {}):
 
 	killed_by = opts.get("killed_by")
 
-	dying_ttl = Util.get_(opts, "dying_time", dying_time)
-	direction = Util.get_(opts, "direction", direction)
+	dying_ttl = U.get_(opts, "dying_time", dying_time)
+	direction = U.get_(opts, "direction", direction)
 
 	hit_ground = false
 

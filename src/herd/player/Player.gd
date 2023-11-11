@@ -32,7 +32,7 @@ func hotel_data():
 	return {health=health}
 
 func check_out(data):
-	health = Util.get_(data, "health", health)
+	health = U.get_(data, "health", health)
 
 ######################################################
 # facing_arrow
@@ -81,7 +81,7 @@ func can_grab():
 func grab(node):
 	DJZ.play(DJZ.S.candleout)
 	grabbing = node
-	Util._connect(node.dying, on_grabbing_dying)
+	U._connect(node.dying, on_grabbing_dying)
 
 func on_grabbing_dying(_node):
 	grabbing = null
@@ -116,7 +116,7 @@ func bullet_hit():
 	if health <= 0:
 		machine.transit("Dead")
 	else:
-		Util.play_then_return(anim, "hit")
+		U.play_then_return(anim, "hit")
 
 ######################################################
 # DEATH

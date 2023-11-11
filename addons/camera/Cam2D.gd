@@ -207,7 +207,7 @@ func attach_to_nearest_anchor():
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
 		Log.warn("Camera found no anchor nodes, attaching to player")
-		Util.change_parent(self, following)
+		U.change_parent(self, following)
 	else:
 		# maybe too expensive to run per process-loop, there's likely an optimization...
 		# maybe only run this when the player moves some distance?
@@ -215,10 +215,10 @@ func attach_to_nearest_anchor():
 
 		# handling in case the player dies before here
 		if is_instance_valid(following):
-			var nearest_anchor = Util.nearest_node(following, anchors)
+			var nearest_anchor = U.nearest_node(following, anchors)
 			if nearest_anchor != current_anchor:
 				current_anchor = nearest_anchor
-				Util.change_parent(self, current_anchor)
+				U.change_parent(self, current_anchor)
 		else:
 			following = null
 

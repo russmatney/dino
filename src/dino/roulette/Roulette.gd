@@ -49,7 +49,7 @@ func next_random_game():
 	# PlayedGameRecords maybe a collection that manages this index+filter (and game selection?)
 	var played_ids = played_game_records.map(func(x): return x.entity.get_entity_id())
 	var gs = game_ids.filter(func(g_id): return not g_id in played_ids)
-	var eid = Util.rand_of(gs)
+	var eid = U.rand_of(gs)
 	if eid:
 		var entity = Pandora.get_entity(eid)
 		return entity
@@ -137,7 +137,7 @@ func _on_round_complete():
 
 	await Jumbotron.jumbo_notif({
 		header="Did you know?",
-		body=Util.rand_of([
+		body=U.rand_of([
 			"You can change the number of rooms in the Pause menu!",
 			"You can change the tileset in the Pause menu! (TODO lol)",
 			"You can change the tile_size in the Pause menu! I like 16x16!",

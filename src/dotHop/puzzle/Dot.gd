@@ -5,7 +5,7 @@ class_name DotHopDot
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {
+	return U._config_warning(self, {
 		expected_nodes=["ObjectLabel", "ColorRect"]
 		})
 
@@ -25,7 +25,7 @@ var color_rect
 ## ready #########################################################
 
 func _ready():
-	Util.set_optional_nodes(self, {
+	U.set_optional_nodes(self, {
 		label="ObjectLabel", color_rect="ColorRect"})
 
 	render()

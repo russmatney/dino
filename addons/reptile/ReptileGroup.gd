@@ -99,8 +99,8 @@ func contains_val(normed):
 static func sort_by_key(a, b):
 	if a.upper_bound == null or not a.lower_bound == null:
 		return false
-	if a.upper_bound <= Util._or(b.upper_bound, 1.1):
+	if a.upper_bound <= U._or(b.upper_bound, 1.1):
 		return true
-	if a.lower_bound >= Util._or(b.lower_bound, -0.1):
+	if a.lower_bound >= U._or(b.lower_bound, -0.1):
 		return true
 	return false

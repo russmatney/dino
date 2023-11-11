@@ -163,8 +163,8 @@ func ensure_room_box():
 	room_box.set_visible(false)
 
 	# signals
-	Util._connect(room_box.body_entered, _on_room_entered)
-	Util._connect(room_box.body_exited, _on_room_exited)
+	U._connect(room_box.body_entered, _on_room_entered)
+	U._connect(room_box.body_exited, _on_room_exited)
 
 	# add child to parent, so room_boxes don't get paused along with rooms
 	get_parent().add_child.call_deferred(room_box)
@@ -291,33 +291,33 @@ func ensure_cam_points():
 		create_point(poa_scene, auto_poa_group, p)
 
 func deactivate_cam_points():
-	var poas = Util.get_children_in_group(self, Cam.poa_group)
+	var poas = U.get_children_in_group(self, Cam.poa_group)
 	for p in poas:
 		if p.has_method("deactivate"):
 			p.deactivate()
 
-	var pofs = Util.get_children_in_group(self, Cam.pof_group)
+	var pofs = U.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("deactivate"):
 			p.deactivate()
 
-	var pois = Util.get_children_in_group(self, Cam.poi_group)
+	var pois = U.get_children_in_group(self, Cam.poi_group)
 	for p in pois:
 		if p.has_method("deactivate"):
 			p.deactivate()
 
 func activate_cam_points():
-	var poas = Util.get_children_in_group(self, Cam.poa_group)
+	var poas = U.get_children_in_group(self, Cam.poa_group)
 	for p in poas:
 		if p.has_method("activate"):
 			p.activate()
 
-	var pofs = Util.get_children_in_group(self, Cam.pof_group)
+	var pofs = U.get_children_in_group(self, Cam.pof_group)
 	for p in pofs:
 		if p.has_method("activate"):
 			p.activate()
 
-	var pois = Util.get_children_in_group(self, Cam.poi_group)
+	var pois = U.get_children_in_group(self, Cam.poi_group)
 	for p in pois:
 		if p.has_method("activate"):
 			p.activate()

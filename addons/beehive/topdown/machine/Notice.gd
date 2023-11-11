@@ -14,7 +14,7 @@ func enter(opts = {}):
 	noticing = opts.get("noticing")
 	actor.face_body(noticing)
 	actor.update_idle_anim()
-	wait_ttl = Util.rand_of(wait_times)
+	wait_ttl = U.rand_of(wait_times)
 
 
 ## exit ###########################################################

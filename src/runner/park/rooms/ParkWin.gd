@@ -4,7 +4,7 @@ extends RunnerRoom
 
 
 func _ready():
-	Util._connect(player_entered, _on_player_entered)
+	U._connect(player_entered, _on_player_entered)
 
 
 func _on_player_entered(p):

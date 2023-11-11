@@ -14,7 +14,7 @@ func enter(opts = {}):
 
 	actor.face_body(noticing)
 
-	wait_ttl = Util.rand_of(wait_times)
+	wait_ttl = U.rand_of(wait_times)
 
 
 ## exit ###########################################################

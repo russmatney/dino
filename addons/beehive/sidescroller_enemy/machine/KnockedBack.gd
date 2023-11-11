@@ -6,7 +6,7 @@ func enter(ctx={}):
 
 	DJZ.play(DJZ.S.enemyhurt)
 
-	var dir = Util.get_(ctx, "direction", Vector2.LEFT)
+	var dir = U.get_(ctx, "direction", Vector2.LEFT)
 	var dying = ctx.get("dying", false)
 	var kb_vel = actor.dying_velocity if dying else actor.knockback_velocity
 	if kb_vel == null:

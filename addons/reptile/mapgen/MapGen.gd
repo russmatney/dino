@@ -31,19 +31,19 @@ func do_image_regen(_val = null):
 
 
 func regenerate_image():
-	var room = Util._or(owner, self).get_node_or_null(room_node_path)
+	var room = U._or(owner, self).get_node_or_null(room_node_path)
 	if not room:
 		room = ReptileRoom.new()
-		var o = Util._or(owner, self)
+		var o = U._or(owner, self)
 		o.add_child(room)
 		room.set_owner(o)
 
-	room.set_room_name(Util.node_name_from_path(room_node_path))
+	room.set_room_name(U.node_name_from_path(room_node_path))
 	room.set_groups(default_groups())
 	randomize()
 	room.regen_tilemaps(null, {
 			"seed": randf_range(0, 500000),
-			"octaves": Util.rand_of([2, 3, 4]),
+			"octaves": U.rand_of([2, 3, 4]),
 			"frequency": 1/randf_range(5, 30),
 			"persistence": randf_range(0.3, 0.7),
 			"lacunarity": randf_range(2.0, 4.0),
@@ -128,7 +128,7 @@ func ensure_image_node(name, i=0, img=null):
 	if not texture_rect:
 		texture_rect = TextureRect.new()
 		add_child(texture_rect)
-		texture_rect.set_owner(Util._or(owner, self))
+		texture_rect.set_owner(U._or(owner, self))
 		texture_rect.name = name
 
 	var w = 3200

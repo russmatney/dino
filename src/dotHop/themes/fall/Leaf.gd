@@ -26,7 +26,7 @@ var anim
 
 func _ready():
 	hide_anims()
-	anim = Util.rand_of(all_anims())
+	anim = U.rand_of(all_anims())
 	super._ready()
 	animate_entry()
 

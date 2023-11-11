@@ -11,8 +11,8 @@ var direction: Vector2
 
 func enter(opts = {}):
 	DJZ.play(DJZ.S.jump)
-	jump_ttl = Util.get_(opts, "jump_time", jump_time)
-	direction = Util.get_(opts, "direction", actor.move_vector)
+	jump_ttl = U.get_(opts, "jump_time", jump_time)
+	direction = U.get_(opts, "direction", actor.move_vector)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*jump_scale_factor, jump_ttl/2.0)

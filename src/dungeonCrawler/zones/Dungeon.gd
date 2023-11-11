@@ -9,7 +9,7 @@ var player
 
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=["PlayerStart"]})
+	return U._config_warning(self, {expected_nodes=["PlayerStart"]})
 
 
 enum w_type { DEFEAT_BOSS, GET_TREASURE }

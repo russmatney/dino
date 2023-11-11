@@ -424,7 +424,7 @@ func move_player_to_cell(player, cell):
 # depends on cell for `coord` and `nodes`.
 func mark_cell_dotted(cell):
 	# support multiple nodes per cell?
-	var node = Util.first(cell.nodes)
+	var node = U.first(cell.nodes)
 	if node == null:
 		Log.warn("can't mark dotted, no node found!", cell)
 		return
@@ -443,7 +443,7 @@ func mark_cell_dotted(cell):
 # depends on cell for `coord` and `nodes`.
 func mark_cell_undotted(cell):
 	# support multiple nodes per cell?
-	var node = Util.first(cell.nodes)
+	var node = U.first(cell.nodes)
 	if node == null:
 		# undoing from goal doesn't require any undotting
 		return
@@ -553,7 +553,7 @@ func move(move_dir):
 			continue
 
 		# instead of markers, read undo based on only the player move history?
-		var undo_cell_in_dir = Util.first(cells.filter(func(c): return "Undo" in c.objs and c.coord in p.move_history))
+		var undo_cell_in_dir = U.first(cells.filter(func(c): return "Undo" in c.objs and c.coord in p.move_history))
 
 		if undo_cell_in_dir != null:
 			moves_to_make.append(["undo", undo_last_move, p, undo_cell_in_dir])

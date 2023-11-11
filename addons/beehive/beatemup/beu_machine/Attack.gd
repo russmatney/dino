@@ -18,13 +18,13 @@ func enter(opts = {}):
 	# reuse attacking, ex. if we get back here from Punch
 	# this safety handling is whack, but seems to prevent some crashing
 	if attacking and is_instance_valid(attacking):
-		attacking = Util.get_(opts, "attacking", attacking)
+		attacking = U.get_(opts, "attacking", attacking)
 	elif "attacking" in opts:
 		attacking = opts["attacking"]
 		if attacking and not is_instance_valid(attacking):
 			attacking = null
 
-	punch_ttl = Util.rand_of(punch_times)
+	punch_ttl = U.rand_of(punch_times)
 
 	punch_count = opts.get("punch_count", 0)
 	punch_count = clamp(punch_count, 0, 2)

@@ -26,11 +26,11 @@ func enter(_ctx={}):
 			]
 
 	var positions = warp_spots
-	positions = positions.filter(func(ws): return not Util.are_nodes_close(ws, actor))
+	positions = positions.filter(func(ws): return not U.are_nodes_close(ws, actor))
 	if len(positions) < 2:
 		positions = warp_spots
 
-	positions = Util.rand_of(positions, 2)
+	positions = U.rand_of(positions, 2)
 	positions = positions.map(func(ws): return ws.global_position)
 
 	swoop_spots = [

@@ -21,7 +21,7 @@ var game_node: Node2D
 		if v and Engine.is_editor_hint():
 			_seed = randi()
 
-@export var room_count: int = Util.rand_of(range(1,4))
+@export var room_count: int = U.rand_of(range(1,4))
 
 ## ready ##################################################3
 
@@ -43,7 +43,7 @@ func _ready():
 ## select a game ##################################################3
 
 func select_game():
-	var eid = Util.rand_of(game_ids)
+	var eid = U.rand_of(game_ids)
 	var entity = Pandora.get_entity(eid)
 	return entity
 

@@ -30,10 +30,10 @@ static func jumbo_notif(opts):
 		if on_close:
 			on_close.call()
 		if pause:
-			Util.get_tree().paused = false)
+			Navi.get_tree().paused = false)
 
 	if pause:
-		Util.get_tree().paused = true
+		Navi.get_tree().paused = true
 
 	# maybe pause the game? probably? optionally?
 	jumbotron.fade_in()

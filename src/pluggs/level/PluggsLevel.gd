@@ -23,7 +23,7 @@ func connect_to_rooms():
 		return
 	for ent in $Entities.get_children():
 		if ent.is_in_group("arcade_machine"):
-			Util._connect(ent.plugged, on_arcade_machine_plugged)
+			U._connect(ent.plugged, on_arcade_machine_plugged)
 
 ## on plugged ###################################################
 

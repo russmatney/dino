@@ -9,7 +9,7 @@ var main_scene_path = ProjectSettings.get("application/run/main_scene")
 # 	await main_menu.ready
 
 # 	var something_focused
-# 	for c in Util.get_all_children(main_menu):
+# 	for c in U.get_all_children(main_menu):
 # 		if c.has_method("has_focus") and c.has_focus():
 # 			something_focused = true
 # 			break

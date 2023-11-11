@@ -217,7 +217,7 @@ signal speed_increased
 var speed_level = 1
 
 func _on_food_picked_up(f):
-	var txt = Util.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"])
+	var txt = U.rand_of(["[jump]Am nam nam[/jump]", "[jump]Yummy![/jump]"])
 	Hood.notif(txt, {"rich": true})
 	DJZ.play(DJZ.S.pickup)
 	bounce_tail()

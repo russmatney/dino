@@ -8,8 +8,8 @@ var wander_ttl
 
 func enter(_opts = {}):
 	actor.anim.play("run")
-	wander_ttl = Util.rand_of(wander_times)
-	actor.move_vector = Util.rand_of(directions)
+	wander_ttl = U.rand_of(wander_times)
+	actor.move_vector = U.rand_of(directions)
 
 
 ## exit ###########################################################

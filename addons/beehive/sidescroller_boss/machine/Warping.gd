@@ -13,7 +13,7 @@ func enter(_ctx={}):
 	actor.anim.play("warp_leave")
 
 	var warp_options = actor.warp_spots.filter(func(ws): return ws != last_ws)
-	next_warp_spot = Util.rand_of(warp_options)
+	next_warp_spot = U.rand_of(warp_options)
 
 	if next_warp_spot == null:
 		next_warp_spot = {global_position=Vector2(randf_range(-10, 10), randf_range(-10, 10))}

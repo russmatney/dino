@@ -14,7 +14,7 @@ func enter(_opts = {}):
 	actor.health = actor.initial_health
 	Hotel.check_in(actor)
 
-	respawn_ttl = Util.rand_of(respawn_times)
+	respawn_ttl = U.rand_of(respawn_times)
 
 	var og_pos = actor.global_position
 

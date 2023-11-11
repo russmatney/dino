@@ -39,12 +39,12 @@ func enter(opts = {}):
 			direction = actor.global_position - opts.get("home_position")
 
 	if direction == null:
-		direction = Util.rand_of(directions)
+		direction = U.rand_of(directions)
 
-	dtl = Util.get_(opts, "distance", Util.rand_of(distances) * 1.4)
+	dtl = U.get_(opts, "distance", U.rand_of(distances) * 1.4)
 
-	ttl = Util.get_(opts, "time", time)
-	hop_speed = Util.get_(opts, "hop_speed", hop_speed)
+	ttl = U.get_(opts, "time", time)
+	hop_speed = U.get_(opts, "hop_speed", hop_speed)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE * 1.5, ttl/2.0)

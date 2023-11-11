@@ -17,7 +17,7 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		# right now this swaps after you die
-		var pal = Util.rand_of(palettes)
+		var pal = U.rand_of(palettes)
 
 		if pal != null:
 			anim.material = pal

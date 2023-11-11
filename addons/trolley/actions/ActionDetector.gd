@@ -90,7 +90,7 @@ func potential_actions():
 func find_nearest(axs=actions):
 	# should filter/sort by line-of-sight
 	var srcs = axs.filter(func(ax): return ax.source).map(func(ax): return ax.source)
-	var nearest_src = Util.nearest_node(self, srcs)
+	var nearest_src = U.nearest_node(self, srcs)
 	if not nearest_src:
 		return
 	# sources with multiple actions - which action to return?

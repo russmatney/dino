@@ -2,7 +2,7 @@ extends Node2D
 class_name TDWeapon
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[]})
+	return U._config_warning(self, {expected_nodes=[]})
 
 ######################################################
 # vars
@@ -20,7 +20,7 @@ var actor
 func _ready():
 	actor = get_parent()
 
-	Util.set_optional_nodes(self, {
+	U.set_optional_nodes(self, {
 		anim="AnimatedSprite2D",
 		hitbox="HitBox",
 		hitbox_coll="HitBox/ColliionShape2D",

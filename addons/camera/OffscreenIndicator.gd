@@ -12,7 +12,7 @@ var player
 
 
 func _ready():
-	player = Util.first_node_in_group("player")
+	player = U.first_node_in_group(self, "player")
 
 var label_side
 func set_label_side(side):
@@ -58,7 +58,7 @@ func _physics_process(_delta):
 
 func find_player():
 	if not Engine.is_editor_hint():
-		player = Util.first_node_in_group("player")
+		player = U.first_node_in_group(self, "player")
 
 
 func position_onscreen():

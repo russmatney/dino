@@ -38,7 +38,7 @@ var actors = []
 func _on_body_entered(body):
 	if body.is_in_group("actors"):
 		actors.append(body)
-		Util._connect(body.action_detector.current_action_changed, update_displayed_action)
+		U._connect(body.action_detector.current_action_changed, update_displayed_action)
 		body.action_detector.current_action()
 
 func _on_body_exited(body):

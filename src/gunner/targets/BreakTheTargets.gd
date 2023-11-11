@@ -16,7 +16,7 @@ func setup():
 	var targets = get_targets()
 	total = len(targets)
 	for t in targets:
-		Util._connect(t.destroyed, func(_t): update_quest())
+		U._connect(t.destroyed, func(_t): update_quest())
 
 	update_quest()
 

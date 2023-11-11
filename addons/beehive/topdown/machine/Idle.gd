@@ -10,7 +10,7 @@ func enter(_opts = {}):
 	actor.move_vector = Vector2.ZERO
 
 	if actor.should_wander:
-		wander_in_t = Util.rand_of(wander_in)
+		wander_in_t = U.rand_of(wander_in)
 
 ## exit ###########################################################
 

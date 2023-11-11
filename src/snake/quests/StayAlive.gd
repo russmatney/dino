@@ -22,7 +22,7 @@ var player
 
 func setup(p):
 	player = p
-	Util._connect(p.destroyed, _on_player_destroyed)
+	U._connect(p.destroyed, _on_player_destroyed)
 
 func _on_player_destroyed(_snake):
 	quest_failed.emit()

@@ -5,7 +5,7 @@ class_name DotHopPlayer
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {
+	return U._config_warning(self, {
 		expected_nodes=["ObjectLabel", "ColorRect"]
 		})
 
@@ -33,7 +33,7 @@ func _ready():
 	if z_index == 0:
 		z_index = 5
 
-	Util.set_optional_nodes(self, {label="ObjectLabel", color_rect="ColorRect"})
+	U.set_optional_nodes(self, {label="ObjectLabel", color_rect="ColorRect"})
 
 	render()
 

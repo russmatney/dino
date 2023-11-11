@@ -15,8 +15,8 @@ func _ready():
 	Respawner.register_respawn(self)
 	Cam.add_offscreen_indicator(self)
 	# TODO how to work with animations and positions after regen bug
-	# Util.animate(self)
-	# Util.animate_rotate(self)
+	# U.animate(self)
+	# U.animate_rotate(self)
 	body_entered.connect(_on_body_entered)
 
 ## anim finished

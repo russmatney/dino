@@ -17,7 +17,7 @@ class_name BEUBody
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return Util._config_warning(self, {expected_nodes=[
+	return U._config_warning(self, {expected_nodes=[
 		"BEUMachine", "StateLabel",
 		"PunchBox", "GrabBox", "NoticeBox",
 		"AnimatedSprite2D",
@@ -71,7 +71,7 @@ var kos: int = 0
 func _ready():
 	Hotel.register(self)
 	if not Engine.is_editor_hint():
-		Util.set_optional_nodes(self, {cam_pof="CamPOF"})
+		U.set_optional_nodes(self, {cam_pof="CamPOF"})
 
 		machine.transitioned.connect(_on_transit)
 		machine.start()
@@ -116,19 +116,19 @@ func hotel_data():
 	return d
 
 func check_out(data):
-	health = Util.get_(data, "health", initial_health)
-	lives_lost = Util.get_(data, "lives_lost", lives_lost)
-	kos = Util.get_(data, "kos", kos)
-	is_dead = Util.get_(data, "is_dead", is_dead)
-	display_name = Util.get_(data, "display_name", display_name)
+	health = U.get_(data, "health", initial_health)
+	lives_lost = U.get_(data, "lives_lost", lives_lost)
+	kos = U.get_(data, "kos", kos)
+	is_dead = U.get_(data, "is_dead", is_dead)
+	display_name = U.get_(data, "display_name", display_name)
 
 
 ## facing ###########################################################
 
 func update_facing():
-	Util.update_h_flip(facing_vector, punch_box)
-	Util.update_h_flip(facing_vector, grab_box)
-	Util.update_h_flip(facing_vector, notice_box)
+	U.update_h_flip(facing_vector, punch_box)
+	U.update_h_flip(facing_vector, grab_box)
+	U.update_h_flip(facing_vector, notice_box)
 	# all art should face RIGHT by default
 	anim.flip_h = facing_vector == Vector2.LEFT
 
@@ -191,7 +191,7 @@ func on_punchbox_area_exited(area):
 ## grabbing ###########################################################
 
 func grab():
-	var body = Util.nearest_node(self, grab_box_bodies)
+	var body = U.nearest_node(self, grab_box_bodies)
 	if body != null and not body.is_dead and "machine" in body:
 		body.machine.transit("Grabbed", {grabbed_by=body})
 		machine.transit("Grab", {grabbed=body})

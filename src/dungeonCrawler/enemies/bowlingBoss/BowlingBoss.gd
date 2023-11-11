@@ -92,13 +92,13 @@ func hit():
 		# switch to small body
 		small_body.visible = true
 		normal_body.visible = false
-		Util.set_collisions_enabled(normal_body, false)
+		U.set_collisions_enabled(normal_body, false)
 	elif health <= 0:
 		kill()
 
 
 func kill():
-	Util.set_collisions_enabled(small_body, false)
+	U.set_collisions_enabled(small_body, false)
 	small_body.visible = false
 	dead = true
 	machine.transit("Dead")

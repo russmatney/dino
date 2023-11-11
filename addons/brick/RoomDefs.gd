@@ -13,8 +13,8 @@ func to_pretty(a, b, c):
 	return Log.to_pretty({prelude=prelude, legend=legend}, a, b, c)
 
 func filter(opts: Dictionary):
-	Util.ensure_default(opts, "flags", [])
-	Util.ensure_default(opts, "skip_flags", [])
+	U.ensure_default(opts, "flags", [])
+	U.ensure_default(opts, "skip_flags", [])
 
 	var xs = rooms
 

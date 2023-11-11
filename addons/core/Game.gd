@@ -271,10 +271,10 @@ func respawn_coords():
 	if current_game and current_game.has_method("get_spawn_coords"):
 		return current_game.get_spawn_coords()
 
-	var psp = Util.first_node_in_group("player_spawn_points")
+	var psp = U.first_node_in_group(self, "player_spawn_points")
 	if psp:
 		return psp.global_position
-	var elevator = Util.first_node_in_group("elevator")
+	var elevator = U.first_node_in_group(self, "elevator")
 	if elevator:
 		return elevator.global_position
 

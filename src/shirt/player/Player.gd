@@ -23,7 +23,7 @@ func _ready():
 
 func check_out(data):
 	super.check_out(data)
-	shrine_gems = Util.get_(data, "shrine_gems", shrine_gems)
+	shrine_gems = U.get_(data, "shrine_gems", shrine_gems)
 
 func hotel_data():
 	var d = super.hotel_data()

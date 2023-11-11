@@ -165,7 +165,7 @@ var arrow_impulse = 400
 
 
 func fire_bow():
-	var bow = Util.get_first_child_in_group(self, "bow")
+	var bow = U.get_first_child_in_group(self, "bow")
 	if bow == null:
 		Log.pr("[WARN]: attempted to fire bow, but no bow found (expected node group 'bow')")
 		return
@@ -180,7 +180,7 @@ func fire_bow():
 
 
 func point_bow(dir):
-	var bow = Util.get_first_child_in_group(self, "bow")
+	var bow = U.get_first_child_in_group(self, "bow")
 	if bow:
 		match dir:
 			facing_dir.RIGHT:
@@ -334,7 +334,7 @@ func current_target():
 func point_at_target():
 	var target = current_target()
 	if target:
-		var bow = Util.get_first_child_in_group(self, "bow")
+		var bow = U.get_first_child_in_group(self, "bow")
 		if bow:
 			bow.look_at(target.global_position)
 

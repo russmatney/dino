@@ -37,7 +37,7 @@ func set_focus():
 	icon.grab_focus()
 
 func on_focused():
-	Util.update_stylebox(self, "panel", func(box): box.border_color = Color.AQUAMARINE)
+	U.update_stylebox(self, "panel", func(box): box.border_color = Color.AQUAMARINE)
 
 func on_unfocused():
-	Util.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
+	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
