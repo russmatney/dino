@@ -17,15 +17,6 @@ boot_splash/bg_color=Color(0.819608, 0.509804, 0.576471, 1)
 boot_splash/image="res://assets/gameicons/dino_splash_sheet.png"
 config/icon="res://addons/core/assets/icons/dino_sheet.png"
 boot_splash/minimum_display_time=300
-run/main_scene.ghosts="res://src/ghosts/GhostsMenu.tscn"
-run/main_scene.pluggs="res://src/pluggs/factory/FactoryFloor.tscn"
-run/main_scene.harvey="res://src/harvey/menus/HarveyMenu.tscn"
-run/main_scene.tower="res://src/tower/menus/TowerMainMenu.tscn"
-run/main_scene.gunner="res://src/gunner/player/PlayerGym.tscn"
-run/main_scene.hatbot="res://src/hatbot/menus/MainMenu.tscn"
-run/main_scene.superelevatorlevel="res://src/superElevatorLevel/menus/MainMenu.tscn"
-run/main_scene.shirt="res://src/shirt/menus/MainMenu.tscn"
-run/main_scene.spike="res://src/spike/menus/MainMenu.tscn"
 
 [aseprite]
 
@@ -33,20 +24,19 @@ import/import_plugin/default_automatic_importer="No Import"
 
 [autoload]
 
+TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 Pandora="*res://addons/pandora/api.gd"
-Debug="*res://addons/core/Debug.gd"
 SS="*res://addons/beehive/sidescroller/SideScroller.gd"
-Hood="*res://addons/hood/Hood.gd"
-Q="*res://addons/quest/Quest.gd"
+Debug="*res://addons/core/Debug.gd"
 Trolley="*res://addons/trolley/Trolley.gd"
 Navi="*res://addons/navi/Navi.gd"
+Hood="*res://addons/hood/Hood.gd"
 Hotel="*res://addons/hotel/Hotel.gd"
 DJ="*res://addons/dj/DJ.gd"
 DJZ="*res://addons/dj/DJZ.gd"
+Q="*res://addons/quest/Quest.gd"
 Cam="*res://addons/camera/Camera.gd"
-TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 Game="*res://addons/core/Game.gd"
-Puzz="*res://addons/puzz/Puzz.gd"
 Metro="*res://addons/metro/Metro.gd"
 
 [display]

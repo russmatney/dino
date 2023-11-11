@@ -1,7 +1,7 @@
-@tool
 extends Node
+class_name Puzz
 
-func parse_game_def(path):
+static func parse_game_def(path):
 	# could make sure file exists
 	var file = FileAccess.open(path, FileAccess.READ)
 	var contents = file.get_as_text()
@@ -9,10 +9,10 @@ func parse_game_def(path):
 	var parsed = game.parse(contents)
 	return parsed
 
-func parse_level_def(lines, msg=null):
+static func parse_level_def(lines, msg=null):
 	return ParsedGame.new().parse_level(lines, msg)
 
-func get_cell_objects(parsed, cell):
+static func get_cell_objects(parsed, cell):
 	if cell == null:
 		return
 
