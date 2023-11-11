@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://b73k32om0cbr3"]
 
-[ext_resource type="Texture2D" uid="uid://dml6j6ab6fs85" path="res://src/snake/assets/64x64snake_tiles_sheet.png" id="1_fn13l"]
+[ext_resource type="Texture2D" uid="uid://dml6j6ab6fs85" path="res://addons/beehive/assets/64x64snake_tiles_sheet.png" id="1_fn13l"]
 [ext_resource type="Texture2D" uid="uid://0sbm1c6kmk2w" path="res://addons/beehive/assets/32x40autumnglow_tiles_sheet.png" id="1_ucp5r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryuii"]

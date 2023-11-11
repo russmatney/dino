@@ -95,12 +95,6 @@ Play the downloadable version here: [[https://russmatney.itch.io/mvania19][russm
 Or the webversion: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19-web]]
 
 See ~src/hatbot/*~ for the code.
-** Snake
-A rough prototype for [[https://itch.io/jam/gdb-juice-jam-ii][Juice Jam 2]].
-
-Play the deployed version here: [[https://russmatney.itch.io/snake][russmatney.itch.io/snake]]
-
-See ~src/snake/*~ for the code.
 ** Tower
 A Jetpack-fueled mess of propulsion in some generated tilemaps.
 
@@ -133,7 +127,11 @@ Play the deployed version here: [[https://russmatney.itch.io/ghosts][russmatney.
 A small something created for the [[https://itch.io/jam/godot-wild-jam-52][Godot Wild Jam #52]].
 
 See ~src/ghosts/*~ for the code.
-** Runner
+** Snake (Deleted 11/11/23)
+A rough prototype for [[https://itch.io/jam/gdb-juice-jam-ii][Juice Jam 2]].
+
+Play the deployed version here: [[https://russmatney.itch.io/snake][russmatney.itch.io/snake]]
+** Runner (deleted: 11/11/23)
 Play the deployed version here: [[https://russmatney.itch.io/runner][russmatney.itch.io/runner]]
 
 A catch-the-leaf inspired running game.
@@ -143,7 +141,7 @@ you should be able to toy with individual rooms in the ~src/runner/gyms~ as well
 
 The core of the logic is the Runner.gd script, which handles adding and removing
 rooms while the player moves across them until they are all complete.
-** Dungeon Crawler (deleted: 11/11/23, see 'posterity:year-one' tag for code)
+** Dungeon Crawler (deleted: 11/11/23)
 Play the deployed version here: [[https://russmatney.itch.io/dungeon-crawler][russmatney.itch.io/dungeon-crawler]]
 
 Part of my classic-game-clones adventure, in which I'm creating basic prototypes

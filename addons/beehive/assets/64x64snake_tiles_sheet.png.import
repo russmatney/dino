@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwpxb02avkvuh"
-path="res://.godot/imported/snakehead_sheet.png-cca6e6039da0c9e78447c74de3f5b256.ctex"
+uid="uid://dml6j6ab6fs85"
+path="res://.godot/imported/64x64snake_tiles_sheet.png-f023beaeb35398e93fc6c4f5a74a7cdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/snake/assets/snakehead_sheet.png"
-dest_files=["res://.godot/imported/snakehead_sheet.png-cca6e6039da0c9e78447c74de3f5b256.ctex"]
+source_file="res://addons/beehive/assets/64x64snake_tiles_sheet.png"
+dest_files=["res://.godot/imported/64x64snake_tiles_sheet.png-f023beaeb35398e93fc6c4f5a74a7cdf.ctex"]
 
 [params]
 

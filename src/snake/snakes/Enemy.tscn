@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/snake/snakes/Enemy.gd" type="Script" id=1]
-
-[node name="SnakeEnemy" type="Node2D" groups=["enemy", "pofs", "snakes"]]
-script = ExtResource( 1 )

@@ -654,35 +654,6 @@
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
-				"_id": "40",
-				"_index": 0,
-				"_name": "Snake",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Snake"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/snake/SnakeGame.gd"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/snake/menus/SnakeMainMenu.tscn"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/snake"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
 				"_id": "41",
 				"_index": 0,
 				"_name": "TheWoods",

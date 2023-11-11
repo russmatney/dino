@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dml6j6ab6fs85"
-path="res://.godot/imported/64x64snake_tiles_sheet.png-93e6853eb0827d3a375b63953909e569.ctex"
+uid="uid://dnftipxroyuws"
+path="res://.godot/imported/64x64white_tiles_sheet.png-4244889c5ab8e92dc467bd6c8a224403.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/snake/assets/64x64snake_tiles_sheet.png"
-dest_files=["res://.godot/imported/64x64snake_tiles_sheet.png-93e6853eb0827d3a375b63953909e569.ctex"]
+source_file="res://addons/beehive/assets/64x64white_tiles_sheet.png"
+dest_files=["res://.godot/imported/64x64white_tiles_sheet.png-4244889c5ab8e92dc467bd6c8a224403.ctex"]
 
 [params]
 

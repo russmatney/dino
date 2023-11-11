@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://addons/core/assets/lights/small_light4_nobg_sheet.png" type="Texture2D" id=1]
-[ext_resource path="res://src/snake/DustParticlesMaterial.tres" type="Material" id=2]
-
-[node name="Dust" type="GPUParticles2D"]
-process_material = ExtResource( 2 )
-texture = ExtResource( 1 )
