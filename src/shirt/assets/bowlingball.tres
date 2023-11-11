@@ -1,0 +1,11 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" uid="uid://df7667w5dshs7" path="res://src/shirt/assets/bowling_ball_sheet.png" id="1"]
+
+[resource]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]

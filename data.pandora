@@ -460,35 +460,6 @@
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
-				"_id": "32",
-				"_index": 0,
-				"_name": "DungeonCrawler",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Dungeon Crawler"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"game_singleton": {
-						"type": "resource",
-						"value": "res://src/dungeonCrawler/DungeonCrawler.gd"
-					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/dungeonCrawler/player/Player.tscn"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/dungeonCrawler"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
 				"_id": "33",
 				"_index": 0,
 				"_name": "Runner",

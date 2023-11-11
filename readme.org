@@ -143,13 +143,11 @@ you should be able to toy with individual rooms in the ~src/runner/gyms~ as well
 
 The core of the logic is the Runner.gd script, which handles adding and removing
 rooms while the player moves across them until they are all complete.
-** Dungeon Crawler
+** Dungeon Crawler (deleted: 11/11/23, see 'posterity:year-one' tag for code)
 Play the deployed version here: [[https://russmatney.itch.io/dungeon-crawler][russmatney.itch.io/dungeon-crawler]]
 
 Part of my classic-game-clones adventure, in which I'm creating basic prototypes
 modeled after classic genres and games.
-
-See ~src/dungeonCrawler/*~ for the code.
 
 This was a chance to implement keys and door logic, and a basic boss state
 machine. The map is one giant scene, and the tiles use auto-tiling, which should

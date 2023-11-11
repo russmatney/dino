@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="5_q6axq"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_cqiek"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="7_2jren"]
-[ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Coin.tscn" id="7_6utu0"]
+[ext_resource type="PackedScene" path="res://src/shirt/entities/Coin.tscn" id="7_6utu0"]
 [ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://addons/beehive/sidescroller/powerups/SSPowerup.tscn" id="7_x20i6"]
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="8_1itx7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_typcp"]

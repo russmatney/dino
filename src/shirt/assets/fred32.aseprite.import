@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b0tns652nvvm3"
+path="res://.godot/imported/fred32.aseprite-4ba8a50e720bd21f69e94fa084d099ae.res"
+
+[deps]
+
+source_file="res://src/shirt/assets/fred32.aseprite"
+dest_files=["res://.godot/imported/fred32.aseprite-4ba8a50e720bd21f69e94fa084d099ae.res"]
+
+[params]
+

@@ -1,25 +1,25 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://cj0dcnlcb2sjb"]
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://c1f3hoppwx7cw"]
 
-[ext_resource type="Texture2D" uid="uid://bhkcms8a3wapl" path="res://src/shirt/assets/coin_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bhkcms8a3wapl" path="res://src/shirt/assets/coin_sheet.png" id="1_8yasg"]
 
 [sub_resource type="AtlasTexture" id="1"]
-atlas = ExtResource("1")
+atlas = ExtResource("1_8yasg")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="2"]
-atlas = ExtResource("1")
+atlas = ExtResource("1_8yasg")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="3"]
-atlas = ExtResource("1")
+atlas = ExtResource("1_8yasg")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="4"]
-atlas = ExtResource("1")
+atlas = ExtResource("1_8yasg")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="5"]
-atlas = ExtResource("1")
+atlas = ExtResource("1_8yasg")
 region = Rect2(64, 0, 16, 16)
 
 [resource]
@@ -42,5 +42,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 12.0
 }]

@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="12_ecmpw"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://addons/beehive/sidescroller_boss/WarpSpot.tscn" id="12_m4nn0"]
 [ext_resource type="PackedScene" path="res://src/hatbot/BossDefeatQuest.tscn" id="13_gqy3q"]
-[ext_resource type="PackedScene" path="res://src/dungeonCrawler/items/Coin.tscn" id="13_ogxn3"]
+[ext_resource type="PackedScene" path="res://src/shirt/entities/Coin.tscn" id="13_ogxn3"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="14_8cf58"]
 [ext_resource type="PackedScene" path="res://src/hatbot/CoinDoorQuest.tscn" id="14_kdew4"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="18_weixt"]

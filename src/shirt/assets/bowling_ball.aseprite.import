@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cljenrpjfll8j"
+path="res://.godot/imported/bowling_ball.aseprite-682b2591544575dd3d8c376209cc0acc.res"
+
+[deps]
+
+source_file="res://src/shirt/assets/bowling_ball.aseprite"
+dest_files=["res://.godot/imported/bowling_ball.aseprite-682b2591544575dd3d8c376209cc0acc.res"]
+
+[params]
+

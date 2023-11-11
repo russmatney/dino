@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="SpriteFrames" uid="uid://d0wao72qmyyp8" path="res://addons/beehive/assets/bow.tres" id="1"]
-
-[node name="BowWeapon" type="AnimatedSprite2D" groups=["bow"]]
-sprite_frames = ExtResource( 1 )
