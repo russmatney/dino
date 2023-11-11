@@ -27,10 +27,8 @@ static func jumbo_notif(opts):
 		jumbotron.action_hint.display(key_or_action, action_label_text)
 
 	jumbotron.jumbo_closed.connect(func():
-		jumbotron.fade_out()
 		if on_close:
-			on_close.call())
-	jumbotron.tree_exiting.connect(func():
+			on_close.call()
 		if pause:
 			Util.get_tree().paused = false)
 
@@ -40,7 +38,7 @@ static func jumbo_notif(opts):
 	# maybe pause the game? probably? optionally?
 	jumbotron.fade_in()
 
-	return jumbotron.tree_exited
+	return jumbotron.jumbo_closed
 
 ## instance ##########################################################################
 
@@ -70,7 +68,7 @@ signal jumbo_closed
 
 func _unhandled_input(event):
 	if Trolley.is_close(event):
-		jumbo_closed.emit()
+		fade_out()
 		DJZ.play(DJZ.S.showjumbotron)
 
 func fade_in():
@@ -83,4 +81,4 @@ func fade_out():
 	var t = create_tween()
 	t.tween_property($PanelContainer, "modulate:a", 0, 0.4)
 	t.tween_callback(set_visible.bind(false))
-	t.tween_callback(queue_free)
+	t.tween_callback(func(): jumbo_closed.emit())

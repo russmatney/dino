@@ -15,18 +15,6 @@ func _ready():
 	# could use a better name for :gen/finished-hook
 	level_gen.nodes_transferred.connect(setup_level)
 
-## _exit_tree ######################################################
-
-func get_exit_jumbo_opts():
-	return {
-		header="%s complete!" % self.name,
-		body=Util.rand_of(["Seriously, wow.", "OMG YOU DID IT", "Yo! Way to go!"])
-		}
-
-func _exit_tree():
-	Debug.pr("dino level exiting tree", self)
-	await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
-
 ## regenerate ###################################################3
 
 # regenerate the level with whatever passed opts
@@ -58,8 +46,17 @@ func setup_level():
 
 	Game.respawn_player()
 
+func get_exit_jumbo_opts():
+	return {
+		header="%s complete!" % self.name,
+		body=Util.rand_of(["Seriously, wow.", "OMG YOU DID IT", "Yo! Way to go!"])
+		}
+
 func on_quests_complete():
 	Hood.notif("DinoLevel Level Complete", self.name)
+
+	await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
+
 	Q.drop_quests()
 	level_complete.emit()
 
