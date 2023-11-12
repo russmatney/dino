@@ -9,12 +9,12 @@ extends Node2D
 # @export var game_ids: Array[DinoGameEntity] = []
 @export var game_ids: Array = []
 var fb_game_ids = [
-	# DinoGameEntityIds.SHIRT,
+	DinoGameEntityIds.SHIRT,
 	DinoGameEntityIds.GUNNER,
 	DinoGameEntityIds.TOWERJET,
 	# DinoGameEntityIds.SUPERELEVATORLEVEL,
 	DinoGameEntityIds.THEWOODS,
-	# DinoGameEntityIds.PLUGGS,
+	DinoGameEntityIds.PLUGGS,
 	]
 
 @export var current_game_entity: DinoGameEntity
