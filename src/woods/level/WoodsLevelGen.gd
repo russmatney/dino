@@ -13,10 +13,7 @@ func get_room_opts(_opts):
 		{filter_rooms=func(r): return r.meta.get("room_type") == "START"},
 		]
 
-	var final_room = {filter_rooms=func(r): return r.meta.get("room_type") == "END",
-		side=Vector2.RIGHT}
-
-	var agg = range(room_count - 2).reduce(func(agg, _i):
+	var agg = range(room_count - 1).reduce(func(agg, _i):
 		var next_room_opt = default_room_opt.duplicate(true)
 
 		agg.room_opts.append(next_room_opt)
@@ -24,7 +21,6 @@ func get_room_opts(_opts):
 		return agg, {room_opts=initial_rooms})
 
 	var room_opts = agg.room_opts
-	room_opts.append(final_room)
 
 	for opt in room_opts:
 		opt.merge({

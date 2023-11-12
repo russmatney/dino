@@ -13,7 +13,7 @@ var fb_game_ids = [
 	DinoGameEntityIds.GUNNER,
 	DinoGameEntityIds.TOWERJET,
 	# DinoGameEntityIds.SUPERELEVATORLEVEL,
-	# DinoGameEntityIds.THEWOODS,
+	DinoGameEntityIds.THEWOODS,
 	# DinoGameEntityIds.PLUGGS,
 	]
 

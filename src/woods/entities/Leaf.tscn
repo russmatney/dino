@@ -174,16 +174,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgtjr"]
 size = Vector2(32, 32)
 
-[node name="Leaf" type="Node2D"]
+[node name="Leaf" type="Node2D" groups=["leaves"]]
 script = ExtResource("1_1akrk")
-collect_on_touch = null
 
 [node name="Green" type="AnimatedSprite2D" parent="."]
-visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_m1tvd")
 animation = &"twist"
-frame_progress = 0.802637
+frame_progress = 0.686166
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -215,7 +213,7 @@ visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_23crv")
 animation = &"twist"
-frame_progress = 0.953198
+frame_progress = 0.95711
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -242,6 +240,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 
 [node name="Yellow" type="AnimatedSprite2D" parent="."]
+visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_4jdhi")
 animation = &"twist"
