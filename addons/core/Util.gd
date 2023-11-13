@@ -89,22 +89,7 @@ static func free_children(node: Node):
 		c.queue_free()
 
 ############################################################
-# children/parents/...siblings?
-
-static func change_parent(child: Node, new_parent: Node):
-	do_change_parent.call_deferred(child, new_parent)
-
-
-static func do_change_parent(child, new_parent):
-	if not is_instance_valid(child):
-		Log.warn("Cannot change parent, child is not valid")
-		return
-	if not is_instance_valid(new_parent):
-		Log.warn("Cannot change parent, new_parent is not valid")
-		return
-	var old_parent = child.get_parent()
-	old_parent.remove_child(child)
-	new_parent.add_child(child)
+# children/parents/...siblings? familes?
 
 static func get_children_by_name(node: Node):
 	var by_name = {}

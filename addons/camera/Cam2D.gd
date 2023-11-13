@@ -164,8 +164,7 @@ func zoom_dir(dir, n_levels = null):
 			# updated via _process
 			pass
 
-###########################################################################
-# update zoom
+## update zoom ##########################################################################
 
 var zoom_tween
 
@@ -177,9 +176,7 @@ func update_zoom():
 		Tween.EASE_OUT
 	)
 
-###########################################################################
-# follow mode
-
+## follow mode ##########################################################################
 
 func find_node_to_follow():
 	var nodes = get_tree().get_nodes_in_group(follow_group)
@@ -197,8 +194,7 @@ func find_node_to_follow():
 			Cam.mode.ANCHOR:
 				attach_to_nearest_anchor()
 
-###########################################################################
-# anchor mode
+## anchor mode ##########################################################################
 
 func attach_to_nearest_anchor():
 	# assumes `following` is set as desired
@@ -207,7 +203,7 @@ func attach_to_nearest_anchor():
 	var anchors = get_tree().get_nodes_in_group(anchor_group)
 	if anchors.size() == 0:
 		Log.warn("Camera found no anchor nodes, attaching to player")
-		U.change_parent(self, following)
+		reparent.call_deferred(following)
 	else:
 		# maybe too expensive to run per process-loop, there's likely an optimization...
 		# maybe only run this when the player moves some distance?
@@ -218,13 +214,11 @@ func attach_to_nearest_anchor():
 			var nearest_anchor = U.nearest_node(following, anchors)
 			if nearest_anchor != current_anchor:
 				current_anchor = nearest_anchor
-				U.change_parent(self, current_anchor)
+				reparent.call_deferred(current_anchor)
 		else:
 			following = null
 
-
-###########################################################################
-# update pofs/pois
+## update pofs/pois ##########################################################################
 
 # how often should we check for more follows?
 # maybe trigger via signal/singleton when adding new nodes?

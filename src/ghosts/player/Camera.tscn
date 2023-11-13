@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/ghosts/player/Camera.gd" type="Script" id=1]
-
-[node name="Camera2D" type="Camera2D"]
-current = true
-zoom = Vector2( 2, 2 )
-follow_smoothing_enabled = true
-script = ExtResource( 1 )
