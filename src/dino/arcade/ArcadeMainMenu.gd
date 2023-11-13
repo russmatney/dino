@@ -33,6 +33,9 @@ func select_game(game_entity):
 	selected_game_entity = game_entity
 	reset_menu_buttons()
 
+	for ch in games_grid_container.get_children():
+		ch.is_selected = ch.game_entity == selected_game_entity
+
 func build_games_grid():
 	game_entities = Game.all_game_entities()
 	U.free_children(games_grid_container)
