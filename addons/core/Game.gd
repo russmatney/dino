@@ -3,7 +3,6 @@ extends Node
 
 ## vars ##########################################################
 
-var current_game: DinoGame
 var is_managed: bool = false
 var is_in_game_mode: bool = false
 
@@ -27,17 +26,6 @@ func all_game_modes():
 		.filter(func(ent): return ent.is_enabled())\
 		.filter(func(ent): return ent.is_game_mode())
 
-func game_for_entity(ent: DinoGameEntity):
-	var singleton = ent.get_singleton()
-	var game
-	if singleton == null:
-		# TODO combine DinoGame and DinoGameEntity (i.e. drop dinogame, move funcs to dinogameentity, adjust naming)
-		game = DinoGame.new()
-	else:
-		game = singleton.new() # should inherit from dino game
-	game.game_entity = ent
-	return game
-
 func game_entity_for_scene(scene):
 	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(scene))
 	if gs.size() == 1:
@@ -47,121 +35,80 @@ func game_entity_for_scene(scene):
 	else:
 		Log.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
 
+## Navi.menu register/cleanup ##########################################################
+
+func register_menus(ent):
+	Navi.set_pause_menu(ent.get_pause_menu())
+	Navi.set_win_menu(ent.get_win_menu())
+	Navi.set_death_menu(ent.get_death_menu())
+
+func clear_menus():
+	Navi.clear_menus()
+
 ## current game ##########################################################
 
-func set_current_game_for_scene(scene):
-	var ent = game_entity_for_scene(scene)
-	if ent:
-		set_current_game_for_ent(ent)
+func get_current_game():
+	var scene = get_tree().current_scene
+	if scene and "scene_file_path" in scene:
+		return game_entity_for_scene(scene)
+	else:
+		Log.warn("Could not determine current_game from scene", scene)
 
-func set_current_game_for_ent(ent):
-	var game = game_for_entity(ent)
-	if game and is_instance_valid(game):
-		register_current_game(game)
+## launch game ##########################################################
 
-func ensure_current_game():
-	if not current_game:
-		var current_scene = get_tree().current_scene
-		if current_scene and "scene_file_path" in current_scene:
-			set_current_game_for_scene(current_scene)
+# set a cached player_scene to support simple respawn_player() calls
+func set_player_scene(game):
+	var ps = game.get_player_scene()
+	if ps:
+		player_scene = ps
 
-	if not current_game:
-		Log.warn("Failed to ensure current_game in scene:", get_tree().current_scene)
+# set player_scene, but do not register menus
+func launch_in_game_mode(mode_node, game: DinoGameEntity, opts: Dictionary={}):
+	Log.pr("Launching game", game.get_display_name(), "in mode node", mode_node)
 
-func reset_current_game():
-	if current_game != null and is_instance_valid(current_game):
-		current_game.cleanup()
-		# free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
-		# current_game.queue_free()
-		current_game = null
-	ensure_current_game()
-
-func register_current_game(game):
-	if game == null or not is_instance_valid(game):
-		Log.warn("Attempted to register invalid game, aborting", game)
-		return
-
-	if game is DinoGameEntity:
-		game = game_for_entity(game)
-
-	if current_game != null and current_game != game:
-		# remove player before clearing current_game
-		remove_player()
-		current_game.cleanup()
-		# free game singletons, update engine.singletons, re-create singletons from dino-game-entity?
-		# current_game.queue_free()
-		Log.pr("Waiting for cleanup: ", current_game.game_entity.get_display_name())
-		await get_tree().create_timer(0.2).timeout
-	Log.pr("Registering game: ", game.game_entity.get_display_name())
-	current_game = game
-	current_game.register()
-
-## restart game ##########################################################
-
-# not used, but maybe more useful than the whole maybe_spawn_player/respawn_player thing?
-func set_player_scene(scene):
-	player_scene = scene
-
-func launch_in_game_mode(mode_node, entity, opts: Dictionary={}):
-	# do we really need all this?
-	# if not current_game:
-	# 	ensure_current_game()
-	# if not current_game:
-	# 	Log.warn("no current game!")
-	# 	return
-	# if not current_game.game_entity.is_game_mode():
-	# 	Log.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
-	# 	return
-
-	Log.pr("Launching game", entity.get_display_name(), "in mode node", mode_node)
-
-	player_scene = entity.get_player_scene()
+	set_player_scene(game)
 
 	is_managed = true
 	is_in_game_mode = true
 
+## For a passed game, load it's main menu. If no menu set, start the game via restart_game
+func launch(game: DinoGameEntity):
+	if game.get_main_menu() != null:
+		Navi.nav_to(game.get_main_menu())
+		return
+	restart_game()
 
 func restart_game(opts=null):
 	Navi.resume()  # ensure unpaused
 	# indicate that we are not in dev-mode
 	is_managed = true
 
-	if not current_game:
-		ensure_current_game()
-	if not current_game:
-		Log.warn("Cannot restart_game, no current game")
+	var game = get_current_game()
+	if game:
+		Log.warn("Cannot (re)start_game, no current game")
 		return
 	if opts == null:
 		opts = {}
 
-	Log.pr("Starting game", current_game.game_entity.get_display_name())
-	current_game.start(opts)
+	Log.pr("Starting game", game.get_display_name())
 
-## launch game ######################################################
+	register_menus(game)
+	set_player_scene(game)
 
-## For a passed game, load it's main menu. If no menu set, start the game via restart_game
-func launch(game_entity):
-	var game = game_for_entity(game_entity)
-	if game == null or not is_instance_valid(game):
-		Log.warn("No valid game found for entity, aborting launch", game_entity)
+	var	first_level = game.get_first_level_scene()
+	if first_level:
+		Navi.nav_to(first_level)
 		return
 
-	register_current_game(game)
+	Log.warn("DinoGameEntity missing 'first_level', cannot start", game)
 
-	if game.game_entity.get_main_menu() != null:
-		Navi.nav_to(game.game_entity.get_main_menu())
-		return
-	Log.pr("no menu for game, launching!", game, game.game_entity, game.game_entity.get_main_menu())
-
-	restart_game()
-
-## load game menu ##########################################################
+## load main menu helper ##########################################################
 
 # called from most pause menus to return to the game's main menu
 func load_main_menu():
-	reset_current_game()
-	if current_game and current_game.game_entity.get_main_menu() != null:
-		Navi.nav_to(current_game.game_entity.get_main_menu())
+	var game = get_current_game()
+	if game and game.get_main_menu() != null:
+		Navi.nav_to(game.get_main_menu())
 		return
 
 	Log.warn("No main_menu in game_entity, naving to fallback main menu.")
@@ -203,8 +150,6 @@ func remove_player():
 	player = null
 	if p and is_instance_valid(p):
 		get_tree().current_scene.remove_child(p)
-	if current_game:
-		current_game.update_world()
 	if p and is_instance_valid(p):
 		p.name = "DeadPlayer"
 		p.queue_free()
@@ -221,21 +166,22 @@ func respawn_player(opts={}):
 			# support reading a cached player_scene
 			opts["player_scene"] = player_scene
 		else:
-			if current_game == null:
-				ensure_current_game()
-			if current_game == null:
+			var game = get_current_game()
+
+			if game == null:
 				Log.warn("No current_game, can't spawn (or respawn) player")
 				return
-			elif current_game.game_entity.get_player_scene() == null:
-				Log.warn("current_game has no player_scene, can't respawn player", current_game)
+			elif game.get_player_scene() == null:
+				Log.warn("current_game has no player_scene, can't respawn player", game)
 				return
+
+			opts["player_scene"] = game.get_player_scene()
 
 	spawning = true
 	if player:
 		Log.pr("Respawn found player, will remove")
 		remove_player()
 
-	# defer to let player free safely
 	_respawn_player.call_deferred(opts)
 
 func _respawn_player(opts={}):
@@ -247,8 +193,7 @@ func _respawn_player(opts={}):
 			spawn_coords = coords_fn.call()
 
 	var p_scene = opts.get("player_scene")
-	if p_scene == null and current_game != null:
-		p_scene = current_game.game_entity.get_player_scene()
+	# TODO maybe get_current_game() here?
 	if p_scene == null:
 		Log.err("Could not determine player_scene, cannot respawn")
 		spawning = false
@@ -267,27 +212,17 @@ func _respawn_player(opts={}):
 	if setup_fn != null:
 		setup_fn.call(player)
 
-	if current_game != null:
-		current_game.on_player_spawned(player)
-
 	get_tree().current_scene.add_child.call_deferred(player)
-	player.ready.connect(func():
-		if current_game != null:
-			current_game.update_world())
 
 	spawning = false
 
 func respawn_coords():
-	if current_game and current_game.has_method("get_spawn_coords"):
-		return current_game.get_spawn_coords()
-
 	var psp = U.first_node_in_group(self, "player_spawn_points")
 	if psp:
 		return psp.global_position
 	var elevator = U.first_node_in_group(self, "elevator")
 	if elevator:
 		return elevator.global_position
-
 
 ## dev helper functions ##########################################################
 
@@ -296,8 +231,6 @@ func maybe_spawn_player(opts={}):
 	if (not is_managed or opts.get("skip_managed_check")) \
 		and not Engine.is_editor_hint() \
 		and player == null and not spawning:
-		ensure_current_game()
-
 		# the player might already be in the scene
 		_find_player()
 
