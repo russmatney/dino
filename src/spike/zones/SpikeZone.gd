@@ -7,6 +7,12 @@ class_name SpikeZone
 func _ready():
 	if not Engine.is_editor_hint():
 		Q.all_quests_complete.connect(on_quests_complete)
+
+		var quest = QuestFeedTheVoid.new()
+		add_child(quest)
+
+		Q.setup_quests()
+
 	super._ready()
 
 ## quest updates ######################################################

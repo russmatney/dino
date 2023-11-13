@@ -14,7 +14,7 @@ var warned_once = false
 
 # Expects to be handed a Hotel entry (a dict)
 func update_status(entry):
-	var nm = entry.get("name")
+	var nm = entry.get("display_name", entry.get("name"))
 
 	var existing = find_existing_status(entry)
 	if existing and is_instance_valid(existing):
@@ -23,7 +23,7 @@ func update_status(entry):
 	else:
 		if len(get_children()) >= max_children:
 			if not warned_once:
-				Log.warn("Too many entity_statuses, skipping add", entry.display_name)
+				Log.warn("Too many entity_statuses, skipping add", nm)
 				warned_once = true
 			# should evict least-relevant/next-to-go status instead
 			return

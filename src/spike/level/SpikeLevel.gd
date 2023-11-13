@@ -1,6 +1,7 @@
-extends Node2D
+extends DinoLevel
 
 ## ready #######################################################
 
-func _ready():
-	Game.maybe_spawn_player()
+func _init():
+	var quest = QuestFeedTheVoid.new()
+	add_child(quest)

@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42g1q"]
 size = Vector2(64, 64)
 
-[node name="DeliveryZone" type="Node2D"]
+[node name="DeliveryZone" type="Node2D" groups=["voids"]]
 script = ExtResource("1_qvwfl")
 
 [node name="Area2D" type="Area2D" parent="."]
