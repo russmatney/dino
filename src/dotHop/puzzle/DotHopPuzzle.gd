@@ -39,7 +39,7 @@ static func build_puzzle_node(opts:Variant) -> Node2D:
 		pass
 
 	if _level_def == null or _level_def.shape == null:
-		Log.warn("Could not determine _level_def, cannot build_puzzle_node()", opts)
+		Log.warn("Could not determine _level_def, cannot build_puzzle_node()")
 		return
 
 	# PackedScene, string, or use fallback

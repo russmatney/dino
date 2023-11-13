@@ -11,8 +11,6 @@ var puzzle_node
 var puzzle_scene
 @export var puzzle_num = 0
 
-var dismiss_jumbo_signal
-
 ## ready #####################################################################
 
 func _ready():
@@ -26,18 +24,11 @@ func _ready():
 	load_theme()
 	rebuild_puzzle()
 
-## input #####################################################################
-
-func _unhandled_input(event):
-	if dismiss_jumbo_signal != null:
-		# jumbo already listens to Trolley "close", but here we add more
-		if Trolley.is_event(event, "ui_accept"):
-			dismiss_jumbo_signal.emit()
-
 ## rebuild puzzle #####################################################################
 
 func rebuild_puzzle():
 	if puzzle_node != null:
+		remove_child.call_deferred(puzzle_node)
 		puzzle_node.queue_free()
 		# is this a race case? or is it impossible?
 		await puzzle_node.tree_exited
@@ -49,11 +40,15 @@ func rebuild_puzzle():
 		puzzle_scene=puzzle_scene
 		})
 
+	if puzzle_node == null:
+		Log.pr("Failed to create puzzle_node, probably a win?")
+		Navi.show_win_menu()
+		return
+
 	puzzle_node.win.connect(on_puzzle_win)
 	puzzle_node.ready.connect(on_puzzle_ready)
 
-	# defer?
-	add_child(puzzle_node)
+	add_child.call_deferred(puzzle_node)
 
 func on_puzzle_ready():
 	pass
@@ -89,16 +84,14 @@ func on_puzzle_win():
 		header = "[jump]Puzzle %s Complete![/jump]" % puzzle_num
 		body = "....but how?"
 
-	dismiss_jumbo_signal = Jumbotron.jumbo_notif({
-		header=header, body=body,
+	Jumbotron.jumbo_notif({
+		header=header, body=body, pause=false,
 		on_close=func():
 		if game_complete:
 			Hood.notif("Win all")
 			Navi.show_win_menu()
 		else:
 			if puzzle_node.has_method("animate_exit"):
-				Log.pr("animating exit")
 				await puzzle_node.animate_exit()
-			Log.pr("done awaiting")
 			Hood.notif("Building next level!")
 			rebuild_puzzle()})
