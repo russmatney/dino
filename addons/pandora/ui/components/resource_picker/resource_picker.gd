@@ -18,14 +18,14 @@ func _ready() -> void:
 	load_file_button.pressed.connect(file_dialog.popup)
 	file_dialog.file_selected.connect(_path_changed)
 
-
+	
 func set_resource_path(path:String) -> void:
 	var resource = load(path) as Resource
 	if resource != null:
 		line_edit.text = path
 		self.resource_path = path
-
-
+	
+	
 func _path_changed(new_path:String) -> void:
 	if new_path.begins_with("res://"):
 		var resource = load(new_path) as Resource

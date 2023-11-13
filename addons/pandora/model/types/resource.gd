@@ -10,12 +10,11 @@ func _init() -> void:
 
 
 func parse_value(variant:Variant, settings:Dictionary = {}) -> Variant:
-	# TODO friendlier error when a script fails to load
 	if variant is String:
 		return load(variant)
 	return variant
-
-
+	
+	
 func write_value(variant:Variant) -> Variant:
 	if variant is Resource:
 		return variant.resource_path
