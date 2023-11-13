@@ -20,6 +20,9 @@ func all_game_entities():
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
 		.filter(func(ent): return ent.is_enabled())
 
+func all_game_modes():
+	return all_game_entities().filter(func(ent): return ent.is_game_mode())
+
 func game_for_entity(ent: DinoGameEntity):
 	var singleton = ent.get_singleton()
 	var game

@@ -20,8 +20,6 @@ static func color_wrap(s, color, use_color=true):
 	else:
 		return s
 
-static var omit_vals_for_keys = ["layer_0/tile_data"]
-
 # supported colors:
 # - black
 # - red
@@ -55,6 +53,7 @@ static var omit_vals_for_keys = ["layer_0/tile_data"]
 # refactor into pluggable pretty printer
 static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	var max_array_size = 20
+	var omit_vals_for_keys = ["layer_0/tile_data"]
 	if not is_instance_valid(msg) and typeof(msg) == TYPE_OBJECT:
 		return str(msg)
 	if msg is Array or msg is PackedStringArray:
@@ -82,7 +81,7 @@ static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 			last = msg.keys()[-1]
 		for k in msg.keys():
 			var val
-			if k in Log.omit_vals_for_keys:
+			if k in omit_vals_for_keys:
 				val = "..."
 			else:
 				val = Log.to_pretty(msg[k], newlines, use_color, indent_level + 1)
@@ -142,9 +141,9 @@ static func to_printable(msgs, stack=[], newlines=false, pretty=true, use_color=
 	for msg in msgs:
 		# add a space between msgs
 		if pretty:
-			m += Log.to_pretty(msg, newlines, use_color) + " "
+			m += "%s " % Log.to_pretty(msg, newlines, use_color)
 		else:
-			m += str(msg) + " "
+			m += "%s " % str(msg)
 	return m
 
 static func is_not_default(v):

@@ -38,7 +38,7 @@ var buttons = [
 	},
 	{
 		label="Credits",
-		fn=Navi.nav_to.bind("res://src/dino/DinoCredits.tscn"),
+		fn=Navi.nav_to.bind("res://src/dino/menus/DinoCredits.tscn"),
 		hide_fn=func (): return not no_more_levels()
 	},
 	{

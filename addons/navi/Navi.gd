@@ -162,7 +162,7 @@ func add_child_to_current(child, deferred=true):
 
 ## main menu ###################################################################
 
-var main_menu_path = "res://src/dino/DinoMenu.tscn"
+var main_menu_path = "res://src/dino/menus/DinoMenu.tscn"
 
 func set_main_menu(path):
 	if ResourceLoader.exists(path):

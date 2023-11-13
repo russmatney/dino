@@ -6,12 +6,13 @@ var game_entity: DinoGameEntity
 @onready var label = $%GameLabel
 @onready var icon = $%Icon
 
+signal icon_pressed
+
 func _ready():
 	if Engine.is_editor_hint():
 		if not game_entity:
 			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 
-	icon.pressed.connect(start_game)
 	icon.focus_entered.connect(on_focused)
 	icon.focus_exited.connect(on_unfocused)
 
@@ -26,12 +27,6 @@ func setup():
 		icon.texture_normal = game_entity.get_icon_texture()
 	else:
 		Log.warn("no game_entity, cannot setup")
-
-func start_game():
-	if game_entity:
-		Game.launch(game_entity)
-	else:
-		Log.err("Cannot start game, no game_entity set!")
 
 func set_focus():
 	icon.grab_focus()

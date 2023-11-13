@@ -4,7 +4,7 @@ extends NaviButtonList
 var button_defs = [
 	{
 		label="Credits",
-		nav_to="res://src/dino/DinoCredits.tscn",
+		nav_to="res://src/dino/menus/DinoCredits.tscn",
 	},
 	{
 		label="Game Menu",
