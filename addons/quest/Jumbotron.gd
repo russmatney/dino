@@ -30,7 +30,8 @@ static func jumbo_notif(opts):
 		if on_close:
 			on_close.call()
 		if pause:
-			Navi.get_tree().paused = false)
+			Navi.get_tree().paused = false
+		jumbotron.queue_free())
 
 	if pause:
 		Navi.get_tree().paused = true
