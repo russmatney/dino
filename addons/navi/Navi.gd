@@ -21,6 +21,10 @@ func add_menu(scene):
 func hide_menus():
 	menus = menus.filter(func(m): return is_instance_valid(m))
 	menus.map(func(m): m.hide())
+
+	var other_menus = get_tree().get_nodes_in_group("menus")
+	other_menus.map(func(m): m.hide())
+
 	find_focus()
 
 func show_menu(menu):
@@ -97,18 +101,18 @@ func find_focus(scene=null):
 ## nav_to ###################################################################
 
 # Supports a path, packed_scene, or instance of a scene
-func nav_to(scene):
+func nav_to(scene, opts={}):
 	Log.prn("nav_to: ", scene)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(scene)
 	hide_menus()
-	_deferred_goto_scene.call_deferred(scene)
+	_deferred_goto_scene.call_deferred(scene, opts)
 
 	resume()
 
 signal new_scene_instanced(inst)
 
-func _deferred_goto_scene(scene):
+func _deferred_goto_scene(scene, opts={}):
 	if first_scene != null and is_instance_valid(first_scene):
 		first_scene.free()
 	if current_scene != null and is_instance_valid(current_scene):
@@ -123,6 +127,9 @@ func _deferred_goto_scene(scene):
 	else:
 		# assuming it is already instantiated
 		next_scene = scene
+
+	if "setup" in opts:
+		opts.setup.call(next_scene)
 
 	current_scene = next_scene
 	Log.prn("New current_scene: ", current_scene)
