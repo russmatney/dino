@@ -13,6 +13,7 @@ func _ready():
 		if not game_entity:
 			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 
+	icon.pressed.connect(func(): icon_pressed.emit())
 	icon.focus_entered.connect(on_focused)
 	icon.focus_exited.connect(on_unfocused)
 

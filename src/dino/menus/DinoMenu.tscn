@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/dino/menus/DinoMenu.gd" id="2"]
 [ext_resource type="Script" path="res://src/dino/menus/OtherList.gd" id="3_odklj"]
 
-[node name="DinoMenu" type="CanvasLayer"]
+[node name="DinoMenu" type="CanvasLayer" groups=["menus"]]
 script = ExtResource("2")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -26,7 +26,7 @@ layout_mode = 2
 text = "[center]Dino Games"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]

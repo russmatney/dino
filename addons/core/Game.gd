@@ -18,10 +18,14 @@ func _ready():
 func all_game_entities():
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
-		.filter(func(ent): return ent.is_enabled())
+		.filter(func(ent): return ent.is_enabled())\
+		.filter(func(ent): return not ent.is_game_mode())
 
 func all_game_modes():
-	return all_game_entities().filter(func(ent): return ent.is_game_mode())
+	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
+	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
+		.filter(func(ent): return ent.is_enabled())\
+		.filter(func(ent): return ent.is_game_mode())
 
 func game_for_entity(ent: DinoGameEntity):
 	var singleton = ent.get_singleton()
@@ -100,13 +104,16 @@ func set_player_scene(scene):
 
 func launch_in_game_mode(mode_node, entity, opts: Dictionary={}):
 	# do we really need all this?
-	if not current_game:
-		ensure_current_game()
-	if not current_game.game_entity.is_game_mode():
-		Log.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
-		return
+	# if not current_game:
+	# 	ensure_current_game()
+	# if not current_game:
+	# 	Log.warn("no current game!")
+	# 	return
+	# if not current_game.game_entity.is_game_mode():
+	# 	Log.warn("launch_in_game_mode called from a non-mode DinoGame", current_game, ". Abort!")
+	# 	return
 
-	Log.pr("Launching game", entity.get_display_name(), "in mode", current_game.game_entity.get_display_name())
+	Log.pr("Launching game", entity.get_display_name(), "in mode node", mode_node)
 
 	player_scene = entity.get_player_scene()
 

@@ -357,6 +357,10 @@
 						"type": "string",
 						"value": "HatBot"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": false
+					},
 					"game_singleton": {
 						"type": "resource",
 						"value": "res://src/hatbot/HatBot.gd"
@@ -599,6 +603,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Demo Land"
+					},
+					"enabled": {
+						"type": "bool",
+						"value": false
 					},
 					"game_singleton": {
 						"type": "resource",

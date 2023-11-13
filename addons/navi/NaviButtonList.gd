@@ -87,6 +87,11 @@ func connect_pressed_to_action(button, item):
 		pw("Menu item handler invalid", item)
 		return
 
+	if item.get("is_disabled"):
+		if item.is_disabled.call():
+			button.set_disabled(true)
+			return
+
 	if arg:
 		button.pressed.connect(fn.bind(arg))
 	elif argv:
@@ -116,3 +121,8 @@ func add_menu_item(item):
 	button.text = label
 	connect_pressed_to_action(button, item)
 	add_child(button)
+
+func set_menu_items(items):
+	clear()
+	for it in items:
+		add_menu_item(it)

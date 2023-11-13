@@ -3,7 +3,6 @@ extends CanvasLayer
 
 @onready var games_grid_container = $%GamesGridContainer
 
-var game_button = preload("res://src/dino/menus/GameButton.tscn")
 var game_mode_button = preload("res://src/dino/menus/GameModeButton.tscn")
 
 func _ready():
@@ -35,5 +34,5 @@ func build_games_grid():
 	for gm in game_modes:
 		var button = game_mode_button.instantiate()
 		button.set_game_entity(gm)
-		button.icon_pressed.connect(func(): Debug.pr("overwriting on-pressed", gm))
+		button.icon_pressed.connect(func(): start_mode(gm))
 		games_grid_container.add_child(button)

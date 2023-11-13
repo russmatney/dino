@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ca57linvp4uxm"]
+[gd_scene load_steps=4 format=3 uid="uid://ca57linvp4uxm"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mxvc2"]
-[ext_resource type="Script" path="res://src/dino/roulette/RouletteMainMenuButtonList.gd" id="2_gvqcl"]
+[ext_resource type="Script" path="res://src/dino/roulette/RouletteMainMenu.gd" id="1_oluih"]
+[ext_resource type="Script" path="res://addons/navi/NaviButtonList.gd" id="3_mrnfn"]
 
-[node name="RouletteMainMenu" type="CanvasLayer"]
+[node name="RouletteMainMenu" type="CanvasLayer" groups=["menus"]]
+script = ExtResource("1_oluih")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -33,9 +35,26 @@ size_flags_vertical = 3
 layout_mode = 2
 alignment = 1
 
-[node name="RouletteMainMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 432)
 layout_mode = 2
-script = ExtResource("2_gvqcl")
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="ButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_mrnfn")
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
