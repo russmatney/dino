@@ -14,18 +14,18 @@ func get_room_opts(_opts):
 			side=Vector2.RIGHT},
 		]
 
-	var agg = range(room_count - len(initial_rooms) - 1).reduce(func(agg, _i):
+	var agg = range(room_count - len(initial_rooms) - 1).reduce(func(acc, _i):
 		var next_room_opt = default_room_opt.duplicate(true)
 
 		var side_opts = [
 			Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT
-			].filter(func(s): return s != agg.last_side)
+			].filter(func(s): return s != acc.last_side)
 		next_room_opt["side"] = U.rand_of(side_opts)
 
-		agg.room_opts.append(next_room_opt)
-		agg.last_side = next_room_opt.side
+		acc.room_opts.append(next_room_opt)
+		acc.last_side = next_room_opt.side
 
-		return agg, {room_opts=initial_rooms, last_side=Vector2.RIGHT})
+		return acc, {room_opts=initial_rooms, last_side=Vector2.RIGHT})
 
 	for opt in agg.room_opts:
 		opt.merge({

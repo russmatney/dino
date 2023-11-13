@@ -27,7 +27,7 @@ func _process(_delta):
 func update_opts():
 	var l = length()
 
-	var os = opts.values().filter(func(opt): return opt.max_length > l)
+	var os = opts.values().filter(func(o): return o.max_length > l)
 
 	if len(os) == 0:
 		max_reached = true

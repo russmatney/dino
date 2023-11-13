@@ -13,12 +13,12 @@ func get_room_opts(_opts):
 		{filter_rooms=func(r): return r.meta.get("room_type") == "START"},
 		]
 
-	var agg = range(room_count - 1).reduce(func(agg, _i):
+	var agg = range(room_count - 1).reduce(func(acc, _i):
 		var next_room_opt = default_room_opt.duplicate(true)
 
-		agg.room_opts.append(next_room_opt)
+		acc.room_opts.append(next_room_opt)
 
-		return agg, {room_opts=initial_rooms})
+		return acc, {room_opts=initial_rooms})
 
 	var room_opts = agg.room_opts
 

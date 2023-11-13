@@ -7,10 +7,10 @@ func get_room_opts(_opts):
 	var default_room_opt = {}
 	var initial_rooms = []
 
-	var agg = range(room_count - len(initial_rooms)).reduce(func(agg, _i):
+	var agg = range(room_count - len(initial_rooms)).reduce(func(acc, _i):
 		var next_room_opt = default_room_opt.duplicate(true)
-		agg.room_opts.append(next_room_opt)
-		return agg, {room_opts=initial_rooms})
+		acc.room_opts.append(next_room_opt)
+		return acc, {room_opts=initial_rooms})
 
 	for opt in agg.room_opts:
 		opt.merge({

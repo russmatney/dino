@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/spike/enemies/Blob.gd" id="1_iayeh"]
 [ext_resource type="Texture2D" uid="uid://d04wj7j68qxuq" path="res://src/spike/enemies/SPIKE_blob.png" id="2_1fu8s"]
 [ext_resource type="PackedScene" path="res://addons/beehive/sidescroller_enemy/machine/SSEnemyMachine.tscn" id="3_g3gm0"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://src/hatbot/assets/light64px1.png" id="4_b6fg4"]
+[ext_resource type="Texture2D" path="res://addons/core/assets/lights/light64px1.png" id="4_b6fg4"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_udret"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="6_fsp6w"]
 

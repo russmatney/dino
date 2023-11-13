@@ -8,10 +8,10 @@ func get_room_opts(_opts):
 	var initial_rooms = [{flags=["first"]}]
 	var final_room = {flags=["last"], side=Vector2.RIGHT}
 
-	var agg = range(room_count - 2).reduce(func(agg, _i):
+	var agg = range(room_count - 2).reduce(func(acc, _i):
 		var next_room_opt = default_room_opt.duplicate(true)
-		agg.room_opts.append(next_room_opt)
-		return agg, {room_opts=initial_rooms})
+		acc.room_opts.append(next_room_opt)
+		return acc, {room_opts=initial_rooms})
 
 	var room_opts = agg.room_opts
 	room_opts.append(final_room)

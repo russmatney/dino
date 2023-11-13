@@ -62,7 +62,7 @@ x..
 
 	var room = BrickRoom.gen_room_def(null, {
 		contents=contents,
-		filter_rooms=func(room): return room.has_flag("funky")})
+		filter_rooms=func(r): return r.has_flag("funky")})
 
 	assert_that(room.name).is_equal("Funky Test Room")
 	assert_that(room.shape).is_equal([
@@ -73,7 +73,7 @@ x..
 
 	var room_2 = BrickRoom.gen_room_def(null, {
 		contents=contents,
-		filter_rooms=func(room): return not room.has_flag("funky")})
+		filter_rooms=func(r): return not r.has_flag("funky")})
 
 	assert_that(room_2.name).is_equal("Test Room")
 	assert_that(room_2.shape).is_equal([
