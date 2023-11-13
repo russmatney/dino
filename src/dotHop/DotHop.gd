@@ -1,22 +1,3 @@
 @tool
 extends DinoGame
 
-var game_scene = "res://src/dotHop/DotHopGame.tscn"
-
-func start(opts={}):
-	var g = load(game_scene).instantiate()
-	g.puzzle_set = opts.get("puzzle_set", Pandora.get_entity(DhPuzzleSet.ONE))
-	Navi.nav_to(g)
-
-var game
-func register_game(g):
-	game = g
-
-var current_theme
-func change_theme(theme):
-	if current_theme != theme:
-		current_theme = theme
-		if game != null:
-			game.puzzle_theme = theme
-			game.load_theme()
-			game.rebuild_puzzle()

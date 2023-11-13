@@ -13,16 +13,11 @@ var puzzle_scene
 
 var dismiss_jumbo_signal
 
-
 ## ready #####################################################################
 
 func _ready():
-	# TODO update theme handling to avoid the singleton
-	# if Engine.has_singleton("DotHop"):
-	# 	var dh = Engine.get_singleton("DotHop")
-	# 	dh.register_game(self)
-	# else:
-	# 	Log.warn("No dothop singleton found, some feats may not work")
+	if puzzle_set == null:
+		puzzle_set = Pandora.get_entity(DhPuzzleSet.ONE)
 
 	if puzzle_set != null:
 		game_def_path = puzzle_set.get_puzzle_script_path()
@@ -67,6 +62,12 @@ func on_puzzle_ready():
 
 func load_theme():
 	puzzle_scene = puzzle_theme.get_puzzle_scene()
+
+func change_theme(theme):
+	if puzzle_theme != theme:
+		puzzle_theme = theme
+		load_theme()
+		rebuild_puzzle()
 
 ## win #####################################################################
 

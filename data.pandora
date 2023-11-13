@@ -221,9 +221,9 @@
 						"type": "string",
 						"value": "Dot Hop"
 					},
-					"game_singleton": {
+					"first_level": {
 						"type": "resource",
-						"value": "res://src/dotHop/DotHop.gd"
+						"value": "res://src/dotHop/DotHopGame.tscn"
 					},
 					"main_menu": {
 						"type": "resource",
@@ -361,9 +361,9 @@
 						"type": "bool",
 						"value": false
 					},
-					"game_singleton": {
+					"first_level": {
 						"type": "resource",
-						"value": "res://src/hatbot/HatBot.gd"
+						"value": "res://src/hatbot/zones/LevelZero.tscn"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -398,9 +398,9 @@
 						"type": "bool",
 						"value": false
 					},
-					"game_singleton": {
+					"first_level": {
 						"type": "resource",
-						"value": "res://src/mountain/Mountain.gd"
+						"value": "res://src/mountain/zones/TheMountain.tscn"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -439,9 +439,9 @@
 						"type": "bool",
 						"value": false
 					},
-					"game_singleton": {
+					"first_level": {
 						"type": "resource",
-						"value": "res://src/ghosts/Ghosts.gd"
+						"value": "res://src/ghosts/world/House.tscn"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -608,9 +608,9 @@
 						"type": "bool",
 						"value": false
 					},
-					"game_singleton": {
+					"first_level": {
 						"type": "resource",
-						"value": "res://src/demoland/DemoLand.gd"
+						"value": "res://src/demoland/zones/area01/Area01.tscn"
 					},
 					"player_scene": {
 						"type": "resource",
