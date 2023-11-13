@@ -14,10 +14,6 @@ const _LOOP_ENABLED = 'aseprite/animation/loop/enabled'
 const _LOOP_EXCEPTION_PREFIX = 'aseprite/animation/loop/exception_prefix'
 const _USE_METADATA = 'aseprite/animation/storage/use_metadata'
 
-# custom preset
-const _IMPORT_PRESET_ENABLED = 'aseprite/import/preset/enable_custom_preset'
-const _IMPORT_PRESET_KEY = 'aseprite/import/preset/preset'
-const _PIXEL_2D_PRESET_CFG = 'res://addons/AsepriteWizard/config/2d_pixel_preset.cfg'
 
 # cleanup
 const _REMOVE_SOURCE_FILES_KEY = 'aseprite/import/cleanup/remove_json_file'
@@ -30,6 +26,7 @@ const _DEFAULT_IMPORTER_KEY = 'aseprite/import/import_plugin/default_automatic_i
 
 const IMPORTER_SPRITEFRAMES_NAME = "SpriteFrames"
 const IMPORTER_NOOP_NAME = "No Import"
+const TILESET_TEXTURE_NAME = "Tileset Texture"
 
 # wizard history
 const _HISTORY_CONFIG_FILE_CFG_KEY = 'aseprite/wizard/history/cache_file_path'
@@ -102,10 +99,6 @@ func get_default_exclusion_pattern() -> String:
 	return _get_project_setting(_DEFAULT_EXCLUSION_PATTERN_KEY, "")
 
 
-func is_import_preset_enabled() -> bool:
-	return _get_project_setting(_IMPORT_PRESET_ENABLED, false)
-
-
 func is_single_file_history() -> bool:
 	return ProjectSettings.get(_HISTORY_SINGLE_ENTRY_KEY) == true
 
@@ -143,20 +136,6 @@ func save_import_history(history: Array):
 
 func _get_history_file_path() -> String:
 	return _get_project_setting(_HISTORY_CONFIG_FILE_CFG_KEY, _DEFAULT_HISTORY_CONFIG_FILE_PATH)
-
-
-func create_import_preset_setting() -> void:
-	if ProjectSettings.has_setting(_IMPORT_PRESET_KEY) && (ProjectSettings.get_setting(_IMPORT_PRESET_KEY) as Dictionary).size() > 0:
-		return
-
-	var preset := ConfigFile.new()
-	preset.load(_PIXEL_2D_PRESET_CFG)
-
-	var dict = {}
-	for key in preset.get_section_keys("preset"):
-		dict[key] = preset.get_value("preset", key)
-
-	_initialize_project_cfg(_IMPORT_PRESET_KEY, dict, TYPE_DICTIONARY)
 
 
 #######################################################
@@ -238,15 +217,13 @@ func initialize_project_settings():
 	_initialize_project_cfg(_LOOP_EXCEPTION_PREFIX, _DEFAULT_LOOP_EX_PREFIX, TYPE_STRING)
 	_initialize_project_cfg(_USE_METADATA, true, TYPE_BOOL)
 
-	_initialize_project_cfg(_IMPORT_PRESET_ENABLED, false, TYPE_BOOL)
-
 	_initialize_project_cfg(_REMOVE_SOURCE_FILES_KEY, true, TYPE_BOOL)
 	_initialize_project_cfg(
 		_DEFAULT_IMPORTER_KEY,
-		IMPORTER_NOOP_NAME if is_importer_enabled() else IMPORTER_SPRITEFRAMES_NAME,
+		IMPORTER_SPRITEFRAMES_NAME if is_importer_enabled() else IMPORTER_NOOP_NAME,
 		TYPE_STRING,
 		PROPERTY_HINT_ENUM,
-		"%s,%s" % [IMPORTER_NOOP_NAME, IMPORTER_SPRITEFRAMES_NAME]
+		"%s,%s,%s" % [IMPORTER_NOOP_NAME, IMPORTER_SPRITEFRAMES_NAME, TILESET_TEXTURE_NAME]
 	)
 
 	_initialize_project_cfg(_EXPORTER_ENABLE_KEY, true, TYPE_BOOL)
@@ -267,8 +244,6 @@ func clear_project_settings():
 		_LOOP_ENABLED,
 		_LOOP_EXCEPTION_PREFIX,
 		_USE_METADATA,
-		_IMPORT_PRESET_ENABLED,
-		_IMPORT_PRESET_KEY,
 		_REMOVE_SOURCE_FILES_KEY,
 		_DEFAULT_IMPORTER_KEY,
 		_EXPORTER_ENABLE_KEY,
@@ -299,25 +274,6 @@ func _get_project_setting(key: String, default_value):
 
 	var p = ProjectSettings.get(key)
 	return p if p != null else default_value
-
-
-func create_import_file(data: Dictionary) -> void:
-	if !ProjectSettings.has_setting(_IMPORT_PRESET_KEY):
-		push_warning("no import settings found for 'aseprite_texture' in Project Settings")
-		return
-
-	var file_path := "%s.import" % [data.sprite_sheet]
-	var import_file := ConfigFile.new()
-	if import_file.load(file_path) == OK:
-		return
-
-	import_file.set_value("remap", "importer", "texture")
-	import_file.set_value("remap", "type", "CompressedTexture2D")
-	import_file.set_value("deps", "source_file", data.sprite_sheet)
-	var preset: Dictionary = ProjectSettings.get_setting(_IMPORT_PRESET_KEY)
-	for key in preset:
-		import_file.set_value("params", key, preset[key])
-	import_file.save(file_path)
 
 
 func _initialize_editor_cfg(key: String, default_value, type: int, hint: int = PROPERTY_HINT_NONE):

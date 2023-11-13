@@ -53,8 +53,6 @@ static func _is_wizard_config(cfg) -> bool:
 
 
 static func load_config(node:Node):
-	if node == null:
-		return
 	if node.has_meta(WIZARD_CONFIG_META_NAME):
 		return node.get_meta(WIZARD_CONFIG_META_NAME)
 
