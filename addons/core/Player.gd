@@ -81,6 +81,8 @@ func respawn_player(opts={}):
 func _respawn_player(opts={}):
 	var setup = opts.get("setup")
 	var spawn_coords = opts.get("spawn_coords")
+	if spawn_coords == null:
+		spawn_coords = get_spawn_coords()
 
 	var p_scene = opts.get("player_scene")
 	if p_scene == null:
@@ -107,7 +109,7 @@ func _respawn_player(opts={}):
 
 ## respawn_coords ################################################
 
-func respawn_coords():
+func get_spawn_coords():
 	var psp = U.first_node_in_group(self, "player_spawn_points")
 	if psp:
 		return psp.global_position
