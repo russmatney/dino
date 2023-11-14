@@ -42,7 +42,7 @@ func _integrate_forces(state):
 func toss(player, direction: Vector2):
 	cord = cord_scene.instantiate()
 	cord.player = player
-	U.add_child_to_level(self, cord)
+	U.add_child_to_level(player, cord)
 
 	rotation = direction.angle() + PI/2.0
 

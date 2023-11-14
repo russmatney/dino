@@ -443,7 +443,12 @@ static func add_child_to_level(node, child):
 	# in that case, just be sure it's actually an ancestor of the passed node
 	var parent = node.get_parent()
 	if parent == null:
-		node.get_tree().current_scene.add_child.call_deferred(child)
+		var t = node.get_tree()
+		if t == null:
+			Log.warn("Adding child while outside of tree!", child)
+			Navi.get_tree().current_scene.add_child.call_deferred(child)
+		else:
+			node.get_tree().current_scene.add_child.call_deferred(child)
 	elif parent.has_method("add_child_to_level"):
 		parent.add_child_to_level.call_deferred(node, child)
 	else:
