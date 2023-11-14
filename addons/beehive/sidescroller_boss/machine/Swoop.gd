@@ -8,6 +8,8 @@ var swoop_spots = []
 var player_pos_set
 var finished_chasing_player
 
+var player
+
 #####################################################
 # enter
 
@@ -33,11 +35,13 @@ func enter(_ctx={}):
 	positions = U.rand_of(positions, 2)
 	positions = positions.map(func(ws): return ws.global_position)
 
+	player = Game.get_player()
+
 	swoop_spots = [
 		[positions[0], actor.swoop_hint1],
 		[func():
-			if Game.player and is_instance_valid(Game.player):
-				return Game.player.global_position, actor.swoop_hint_player],
+			if player and is_instance_valid(player):
+				return player.global_position, actor.swoop_hint_player],
 		[positions[1], actor.swoop_hint2],
 		]
 
@@ -104,8 +108,8 @@ func update_player_swoop_hint():
 	if player_pos_set or finished_chasing_player:
 		return
 
-	if Game.player and is_instance_valid(Game.player):
-		var pos = Game.player.global_position
+	if player and is_instance_valid(player):
+		var pos = player.global_position
 		actor.swoop_hint_player.global_position = pos
 
 func set_player_swoop_hint(pos):

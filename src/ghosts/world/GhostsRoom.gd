@@ -12,7 +12,6 @@ func _enter_tree():
 
 func _ready():
 	Hotel.register(self)
-	Game.maybe_spawn_player.call_deferred()
 
 	if not Engine.is_editor_hint():
 		Hotel.check_in(self, {ready_at=Time.get_unix_time_from_system()})

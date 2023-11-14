@@ -20,8 +20,6 @@ func _ready():
 	wave_complete.connect(_on_wave_complete)
 	level_complete.connect(_on_level_complete)
 
-	Game.maybe_spawn_player()
-
 	enemies = get_tree().get_nodes_in_group("enemies")
 	enemy_spawn_positions = get_tree().get_nodes_in_group("spawn_points")
 	enemies.map(setup_enemy)

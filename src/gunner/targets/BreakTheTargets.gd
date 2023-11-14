@@ -12,7 +12,6 @@ func _ready():
 ## setup ##############################################################################
 
 func setup():
-	Log.pr("break the targets setting up")
 	var targets = get_targets()
 	total = len(targets)
 	for t in targets:
@@ -30,7 +29,6 @@ func get_targets() -> Array:
 ## update ##############################################################################
 
 func update_quest():
-	Log.pr("break the targets update_quest")
 	count_total_update.emit(total)
 
 	var remaining = get_targets().filter(func(t): return not t.is_dead)

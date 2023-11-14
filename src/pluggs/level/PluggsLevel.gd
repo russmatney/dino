@@ -5,9 +5,9 @@ extends DinoLevel
 func setup_level():
 	connect_to_rooms()
 
-	Game.remove_player()
+	P.remove_player()
 	await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
-	Game.respawn_player()
+	P.respawn_player()
 
 func connect_to_rooms():
 	if Engine.is_editor_hint():

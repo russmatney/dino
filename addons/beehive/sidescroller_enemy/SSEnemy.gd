@@ -98,8 +98,7 @@ func _ready():
 	died.connect(_on_death)
 	knocked_back.connect(_on_knocked_back)
 
-	if Game.is_managed:
-		state_label.set_visible(false)
+	state_label.set_visible(false)
 
 ## physics process ####################################################
 
@@ -114,8 +113,9 @@ func _physics_process(_delta):
 		if crawl_on_side != null:
 			orient_to_wall(crawl_on_side)
 
-	if Game.player and is_instance_valid(Game.player) and should_see_player and los:
-		# var player_pos = Game.player.global_position
+	var player = Game.get_player()
+	if player and is_instance_valid(player) and should_see_player and los:
+		# var player_pos = player.global_position
 		# los.target_position = to_local(player_pos)
 
 		if los.is_colliding():

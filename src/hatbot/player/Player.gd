@@ -10,8 +10,7 @@ func _ready():
 		Cam.request_camera({player=self})
 		Hood.ensure_hud(hud)
 
-		if not Game.is_managed:
-			powerups = SSData.all_powerups
+		# powerups = SSData.all_powerups
 
 		died.connect(_on_player_death)
 
@@ -34,7 +33,7 @@ func _on_player_death():
 	# possibly we could share/re-use this, but meh, it'll probably need specific text
 	Jumbotron.jumbo_notif({header="You died", body="Sorry about it!",
 		action="close", action_label_text="Respawn",
-		on_close=Game.respawn_player.bind({
-			setup_fn=func(p):
+		on_close=P.respawn_player.bind({
+			setup=func(p):
 			p.is_dead = false
 			Hotel.check_in(p, {health=p.initial_health})})})

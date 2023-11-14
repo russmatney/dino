@@ -128,8 +128,7 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
-	if Game.is_managed:
-		state_label.set_visible(false)
+	state_label.set_visible(false)
 
 ## process/physics_process ###########################################################
 

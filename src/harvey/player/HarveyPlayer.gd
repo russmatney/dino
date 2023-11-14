@@ -44,9 +44,9 @@ func _unhandled_input(event):
 @onready var machine = $Machine
 @onready var state_label = $StateLabel
 
-func on_transit(new_state):
-	if not Game.is_managed:
-		set_state_label(new_state)
+func on_transit(_new_state):
+	pass
+	# set_state_label(new_state)
 
 func set_state_label(label: String):
 	state_label.set_visible(true)

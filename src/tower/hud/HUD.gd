@@ -2,29 +2,30 @@ extends CanvasLayer
 
 
 func _ready():
-	Game.player_found.connect(setup_player)
-	Hood.find_player.call_deferred()
+	Hotel.entry_updated.connect(_on_entry_updated)
 
 
-###################################################################
-# player setup
+	# starting to feel like we want a hotel-data init right before the game starts
+	_on_entry_updated(Hotel.first({is_player=true}))
+	var quests = Hotel.query({group="quests"})
+	quests.map(_on_entry_updated)
 
-var player
 
-func setup_player(p):
-	player = p
-
-	player.health_change.connect(update_player_health)
-	update_player_health(player.health)
-	player.pickups_changed.connect(update_player_pickups)
-	update_player_pickups(player.pickups)
+func _on_entry_updated(entry={}):
+	if entry == null:
+		return
+	if "player" in entry.get("groups"):
+		if entry.get("health") != null:
+			set_health(entry["health"])
+		if entry.get("pickups") != null:
+			set_pickups(entry["pickups"])
 
 
 ###################################################################
 # update health
 
 
-func update_player_health(health):
+func set_health(health):
 	var hearts = get_node("%HeartsContainer")
 	hearts.set_health(health)
 
@@ -33,8 +34,7 @@ func update_player_health(health):
 # update pickups
 
 
-func update_player_pickups(pickups):
+func set_pickups(pickups):
 	var p = get_node("%PickupsContainer")
 	p.update_pickups(pickups)
-
 

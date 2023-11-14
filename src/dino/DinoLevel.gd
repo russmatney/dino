@@ -40,12 +40,12 @@ func setup_level():
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()
-	Game.remove_player()
+	P.remove_player()
 
 	# mk this is kind of cool
 	await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
 
-	Game.respawn_player()
+	P.respawn_player()
 
 func get_exit_jumbo_opts():
 	return {

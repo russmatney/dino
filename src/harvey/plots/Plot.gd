@@ -26,8 +26,7 @@ var state
 
 func on_transit(new_state):
 	state = new_state
-	if not Game.is_managed:
-		set_state_label(new_state)
+	# set_state_label(new_state)
 
 	match state:
 		"SeedPlanted":

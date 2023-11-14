@@ -94,8 +94,7 @@ func _ready():
 
 	died.connect(_on_death)
 
-	if Game.is_managed:
-		state_label.set_visible(false)
+	state_label.set_visible(false)
 
 ## on transit ####################################################
 
@@ -137,8 +136,9 @@ func face_left():
 ## physics process ####################################################
 
 func _physics_process(_delta):
-	if Game.player and is_instance_valid(Game.player):
-		var player_pos = Game.player.global_position
+	var player = Game.get_player()
+	if player and is_instance_valid(player):
+		var player_pos = player.global_position
 		los.target_position = to_local(player_pos)
 
 		if los.is_colliding():

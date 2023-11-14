@@ -137,11 +137,7 @@ func die():
 	tween.tween_property(self, "scale", Vector2(0.3, 0.3), duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.parallel().tween_property(self, "modulate:a", 0.3, duration).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
-	if Game.is_managed:
-		tween.tween_callback(restart_level)
-	else:
-		tween.tween_callback(Game.respawn_player.bind({setup_fn=func(p):
-			Hotel.check_in(p, {health=p.max_health})}))
+	tween.tween_callback(restart_level)
 
 func restart_level():
 	Jumbotron.jumbo_notif({header="You died.", body="Sorry about it!",

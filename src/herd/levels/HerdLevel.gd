@@ -13,13 +13,8 @@ func _ready():
 
 	level_complete = false
 
-	if Game.player and is_instance_valid(Game.player):
-		Hotel.check_in(Game.player, {health=Game.player.max_health})
-
 	Q.all_quests_complete.connect(on_quests_complete)
 	Q.quest_failed.connect(on_quest_failed)
-
-	Game.maybe_spawn_player()
 
 	var tilemaps = get_node_or_null("Tilemaps")
 	if tilemaps:

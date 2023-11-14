@@ -20,33 +20,6 @@ func _ready():
 
 	Hood.notif(str("Begin Level ", level_num))
 	break_the_targets.targets_cleared.connect(_on_targets_cleared)
-	# Game.player_found.connect(_on_player_found)
-
-	Game.maybe_spawn_player()
-
-## player pickups ####################################################################
-
-# func _on_player_found(p):
-# 	player = p
-# 	p.pickups_changed.connect(_on_player_pickups_changed)
-
-
-# func _on_player_pickups_changed(pickups):
-# 	if "hat" in pickups and "body" in pickups:
-# 		Hood.notif("Robot Assembled")
-
-# 		var enemy_spawners = get_tree().get_nodes_in_group("enemy_spawner")
-# 		enemy_spawners.shuffle()
-# 		if enemy_spawners:
-# 			var t = Engine.get_singleton("Tower")
-# 			var en = t.spawn_enemy(enemy_spawners[0].global_position)
-# 			en.dead.connect(_on_robot_destroyed)
-# 			enemies.append(en)
-# 			# Hood.hud.update_enemies_remaining(enemies_alive().size())
-
-# 		# clear player items
-# 		player.pickups = []
-# 		player.pickups_changed.emit(player.pickups)
 
 ## enemies ####################################################################
 

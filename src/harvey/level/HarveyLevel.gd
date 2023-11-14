@@ -8,8 +8,6 @@ var time_up_menu_scene = preload("res://src/harvey/menus/TimeUpMenu.tscn")
 var time_up_menu
 
 func _ready():
-	Game.maybe_spawn_player()
-
 	time_up_menu = Navi.add_menu(time_up_menu_scene)
 
 	# probably flaky, but works for now

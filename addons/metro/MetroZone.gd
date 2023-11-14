@@ -13,15 +13,6 @@ func _ready():
 	pause_rooms()
 	Hotel.register(self)
 
-	# unmanaged game (dev mode) helpers
-	if not Engine.is_editor_hint() and not Game.is_managed:
-		Metro.ensure_current_zone(self)
-		Game.maybe_spawn_player.call_deferred({
-			# passing a fn b/c we don't want side-effects,
-			# and this avoids calling it when already respawning
-			spawn_coords_fn=player_spawn_coords,
-			})
-
 ## Hotel data ##########################################################
 
 func is_hotel_root():
@@ -86,10 +77,10 @@ func player_spawn_coords() -> Vector2:
 	var markers = U.get_children_in_group(self, "player_spawn_points")
 	markers = markers.filter(func(ma): return ma.active)
 
-	if Game.is_managed:
-		markers = markers.filter(func(ma): return not ma.dev_only)
-	else:
-		markers.sort_custom(func(ma, mb): return ma.dev_only)
+	# # prod mode
+	# markers = markers.filter(func(ma): return not ma.dev_only)
+	# # debug mode
+	# markers.sort_custom(func(ma, mb): return ma.dev_only)
 
 	markers.sort_custom(func(ma, mb): return ma.last_visited > mb.last_visited)
 
