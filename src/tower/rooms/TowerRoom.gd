@@ -101,7 +101,7 @@ var target_scene = preload("res://src/gunner/targets/Target.tscn")
 
 
 func spawn_targets():
-	free_children_in_group("target")
+	free_children_in_group("targets")
 
 	var locs = []
 	for t_cell in tilemap_cells({"group": "yellowtile"}):

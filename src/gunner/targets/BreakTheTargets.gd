@@ -1,38 +1,10 @@
 extends Quest
-
-## vars ##############################################################################
-
-var total = 0
+class_name QuestBreakTheTargets
 
 ## ready ##########################################################
 
-func _ready():
+func _init():
 	label = "Break The Targets"
-
-## setup ##############################################################################
-
-func setup():
-	var targets = get_targets()
-	total = len(targets)
-	for t in targets:
-		U._connect(t.destroyed, func(_t): update_quest())
-
-	update_quest()
-
-## get_targets ##############################################################################
-
-func get_targets() -> Array:
-	if is_inside_tree():
-		return get_tree().get_nodes_in_group("target")
-	return []
-
-## update ##############################################################################
-
-func update_quest():
-	count_total_update.emit(total)
-
-	var remaining = get_targets().filter(func(t): return not t.is_dead)
-	count_remaining_update.emit(len(remaining))
-
-	if len(remaining) == 0 and total > 0:
-		quest_complete.emit()
+	get_xs_group = "targets"
+	x_update_signal = func(t): return t.destroyed
+	is_remaining = func(t): return not t.is_dead

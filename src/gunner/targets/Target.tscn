@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.1245
 
-[node name="Target" type="Area2D" groups=["target"]]
+[node name="Target" type="Area2D" groups=["targets"]]
 z_index = 10
 position = Vector2(16, 16)
 collision_layer = 0

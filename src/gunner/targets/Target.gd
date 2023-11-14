@@ -5,7 +5,7 @@ extends Area2D
 @onready var anim = $AnimatedSprite2D
 @onready var destroyed_label_scene = preload("res://src/gunner/targets/DestroyedLabel.tscn")
 
-signal destroyed(target)
+signal destroyed
 var is_dead = false
 
 ## ready
@@ -33,7 +33,7 @@ func kill():
 	DJZ.play(DJZ.S.target_kill)
 	anim.play("pop")
 	Cam.freezeframe("target-destroyed", 0.05, 0.4)
-	destroyed.emit(self)
+	destroyed.emit()
 
 	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())
