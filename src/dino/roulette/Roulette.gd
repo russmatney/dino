@@ -73,7 +73,10 @@ func reset_game_ids():
 	if game_ids.filter(func(x): return x).is_empty():
 		game_ids = fb_game_ids
 	played_game_records = []
-	Log.pr("reset game ids: ", game_ids)
+
+func update_game_ids(games):
+	current_game_entity = null
+	game_ids = games.map(func(e): return e.get_entity_id())
 
 ## launch_game ##################################################3
 

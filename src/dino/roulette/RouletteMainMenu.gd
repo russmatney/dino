@@ -56,7 +56,8 @@ func build_games_grid():
 var roulette_scene = "res://src/dino/roulette/Roulette.tscn"
 func start_with_games(ents):
 	Navi.nav_to(roulette_scene, {setup=func(scene):
-		scene.game_ids = ents.map(func(e): return e.get_entity_id())})
+		scene.update_game_ids(ents)
+		})
 
 ## menu buttons ##################################################
 

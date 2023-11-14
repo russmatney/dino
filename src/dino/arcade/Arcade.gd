@@ -32,7 +32,7 @@ func _ready():
 
 	var entity = current_game_entity
 	if not entity:
-		entity = select_game()
+		entity = random_game()
 
 	if not entity:
 		Log.warn("Could not find game_entity!")
@@ -42,7 +42,7 @@ func _ready():
 
 ## select a game ##################################################3
 
-func select_game():
+func random_game():
 	var eid = U.rand_of(game_ids)
 	var entity = Pandora.get_entity(eid)
 	return entity
