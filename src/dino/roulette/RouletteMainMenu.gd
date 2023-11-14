@@ -35,6 +35,9 @@ func select_game(game_entity):
 	else:
 		selected_game_entities.append(game_entity)
 
+	reset_ui()
+
+func reset_ui():
 	reset_menu_buttons()
 
 	for ch in games_grid_container.get_children():
@@ -67,6 +70,13 @@ func get_menu_buttons():
 			label="Start with %d games!" % len(selected_game_entities),
 			is_disabled=func(): return len(selected_game_entities) < 1,
 			fn=func(): start_with_games(selected_game_entities),
+		},
+		{
+			label="Deselect all",
+			fn=func():
+			selected_game_entities = []
+			reset_ui.call_deferred(),
+			is_disabled=func(): return len(selected_game_entities) == 0,
 		},
 		{
 			label="Back to Dino Menu",
