@@ -57,7 +57,6 @@ func _ready():
 	if first.scene_file_path == main_scene_path:
 		first_scene = first
 
-
 	pause_menu = add_menu(pause_menu_scene)
 	death_menu = add_menu(death_menu_scene)
 	win_menu = add_menu(win_menu_scene)
@@ -107,10 +106,8 @@ func nav_to(scene, opts={}):
 	last_scene_stack.push_back(scene)
 	hide_menus()
 	_deferred_goto_scene.call_deferred(scene, opts)
-
+	# ensure unpaused
 	resume()
-
-signal new_scene_instanced(inst)
 
 func _deferred_goto_scene(scene, opts={}):
 	if first_scene != null and is_instance_valid(first_scene):
@@ -133,11 +130,10 @@ func _deferred_goto_scene(scene, opts={}):
 
 	current_scene = next_scene
 	Log.prn("New current_scene: ", current_scene)
-	new_scene_instanced.emit(current_scene)
 
-	# Add it to the active scene, as child of root.
+	# Add it as a child of root
 	get_tree().get_root().add_child(current_scene)
-	# Optionally, to make it compatible with the SceneTree.change_scene_to_file() API.
+	# compatibility with SceneTree.change_scene_to_file()
 	get_tree().set_current_scene(current_scene)
 
 	# set the focus for the current scene

@@ -15,14 +15,14 @@ func all_game_modes():
 		.filter(func(ent): return ent.is_enabled())\
 		.filter(func(ent): return ent.is_game_mode())
 
-func game_entity_for_scene(scene):
-	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(scene))
+func game_entity_for_scene(scene_file_path):
+	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(scene_file_path))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
-		Log.warn("No game found to manage scene", scene, scene.scene_file_path)
+		Log.warn("No game found to manage scene", scene_file_path)
 	else:
-		Log.warn("Multiple games manage scene", scene, scene.scene_file_path, gs)
+		Log.warn("Multiple games manage scene", scene_file_path, gs)
 
 ## Navi.menu register/cleanup ##########################################################
 
@@ -37,11 +37,12 @@ func clear_menus():
 ## current game ##########################################################
 
 func get_current_game():
-	var scene = get_tree().current_scene
-	if scene and "scene_file_path" in scene:
-		return game_entity_for_scene(scene)
-	else:
-		Log.warn("Could not determine current_game from scene", scene)
+	var sfp = Navi.current_scene_path()
+	if sfp:
+		var game_entity = game_entity_for_scene(sfp)
+		if game_entity:
+			return game_entity
+	Log.warn("Could not determine current_game from scene", sfp)
 
 ## launch game ##########################################################
 
@@ -64,8 +65,6 @@ func launch(game: DinoGameEntity):
 	restart_game()
 
 func restart_game(opts=null):
-	Navi.resume()  # ensure unpaused
-
 	var game = get_current_game()
 	if game:
 		Log.warn("Cannot (re)start_game, no current game")

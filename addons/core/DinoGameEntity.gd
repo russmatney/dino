@@ -61,12 +61,8 @@ func data():
 
 ## helpers ##########################################################
 
-func manages_scene(scene):
+func manages_scene(scene_file_path):
 	var prefix = get_scene_path_prefix()
 	if prefix in [null, ""]:
 		return false
-	return scene.scene_file_path.begins_with(prefix)
-
-func should_spawn_player(scene):
-	# probably need an opt-in/out/option re: this default
-	return not scene.scene_file_path.contains("menu")
+	return scene_file_path.begins_with(prefix)
