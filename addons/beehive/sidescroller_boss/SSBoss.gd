@@ -136,7 +136,7 @@ func face_left():
 ## physics process ####################################################
 
 func _physics_process(_delta):
-	var player = Game.get_player()
+	var player = P.get_player()
 	if player and is_instance_valid(player):
 		var player_pos = player.global_position
 		los.target_position = to_local(player_pos)

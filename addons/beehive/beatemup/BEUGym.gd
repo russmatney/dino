@@ -1,4 +1,3 @@
-@tool
 extends DinoGym
 class_name BEUGym
 

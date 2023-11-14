@@ -37,7 +37,7 @@ func reload_current_zone():
 
 func travel_to(dest_zone, elevator_path=null):
 	# could restore same-zone travel
-	# var player = Game.get_player()
+	# var player = P.get_player()
 	# if player and is_instance_valid(player) and current_zone.name == dest_zone_name:
 	# 	Log.pr("Traveling in same zone", dest_zone_name, elevator_path)
 	# 	if elevator_path:
@@ -107,7 +107,7 @@ func update_zone():
 
 	var current_containing_room
 	var rooms_to_pause = []
-	var player = Game.get_player()
+	var player = P.get_player()
 	for room in current_zone.rooms:
 		# consider overlapping roomboxes (player in more than one room)
 		# probably prefer the existing one until we're not overlapping

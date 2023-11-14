@@ -84,7 +84,8 @@ func _respawn_player(opts={}):
 	var spawn_point
 	if spawn_coords == null:
 		spawn_point = get_spawn_point()
-		spawn_coords = spawn_point.global_position
+		if spawn_point:
+			spawn_coords = spawn_point.global_position
 
 	var p_scene = opts.get("player_scene")
 	if p_scene == null:

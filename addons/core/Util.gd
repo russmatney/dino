@@ -443,7 +443,6 @@ static func add_child_to_level(node, child):
 	# in that case, just be sure it's actually an ancestor of the passed node
 	var parent = node.get_parent()
 	if parent == null:
-		Log.pr("no suitable parent found for node", node)
 		node.get_tree().current_scene.add_child.call_deferred(child)
 	elif parent.has_method("add_child_to_level"):
 		parent.add_child_to_level.call_deferred(node, child)

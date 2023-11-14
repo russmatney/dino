@@ -113,7 +113,7 @@ func _physics_process(_delta):
 		if crawl_on_side != null:
 			orient_to_wall(crawl_on_side)
 
-	var player = Game.get_player()
+	var player = P.get_player()
 	if player and is_instance_valid(player) and should_see_player and los:
 		# var player_pos = player.global_position
 		# los.target_position = to_local(player_pos)
