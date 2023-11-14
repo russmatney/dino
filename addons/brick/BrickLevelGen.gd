@@ -242,9 +242,9 @@ signal nodes_transferred()
 @export var room_count = 5
 @export_file var room_defs_path
 
-@export var entities_node: Node2D
-@export var tilemaps_node: Node2D
-@export var rooms_node: Node2D
+@export var entities_node: Node
+@export var tilemaps_node: Node
+@export var rooms_node: Node
 @export var show_color_rect: bool
 
 @export var _clear_containers: bool:
@@ -293,23 +293,26 @@ func generate(opts={}):
 
 func ensure_containers():
 	if not rooms_node:
-		rooms_node = Node2D.new()
+		rooms_node = Node.new()
 		rooms_node.name = "Rooms"
-		get_parent().add_child(rooms_node)
 		if Engine.is_editor_hint():
-			rooms_node.set_owner(get_owner())
+			rooms_node.ready.connect(func():
+				rooms_node.set_owner(get_owner()))
+		get_parent().add_child.call_deferred(rooms_node)
 	if not tilemaps_node:
-		tilemaps_node = Node2D.new()
+		tilemaps_node = Node.new()
 		tilemaps_node.name = "Tilemaps"
-		get_parent().add_child(tilemaps_node)
 		if Engine.is_editor_hint():
-			tilemaps_node.set_owner(get_owner())
+			tilemaps_node.ready.connect(func():
+				tilemaps_node.set_owner(get_owner()))
+		get_parent().add_child.call_deferred(tilemaps_node)
 	if not entities_node:
-		entities_node = Node2D.new()
+		entities_node = Node.new()
 		entities_node.name = "Entities"
-		get_parent().add_child(entities_node)
 		if Engine.is_editor_hint():
-			entities_node.set_owner(get_owner())
+			entities_node.ready.connect(func():
+				entities_node.set_owner(get_owner()))
+		get_parent().add_child.call_deferred(entities_node)
 
 func clear_containers():
 	entities_node.get_children().map(func(c): c.queue_free())

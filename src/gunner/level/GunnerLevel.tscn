@@ -11,16 +11,16 @@ script = ExtResource("1_bvur8")
 script = ExtResource("2_s4yna")
 _seed = 2846387537
 tile_size = 32
-room_count = 2
+room_count = 3
 room_defs_path = "res://src/gunner/level/rooms.txt"
 entities_node = NodePath("../Entities")
 tilemaps_node = NodePath("../Tilemaps")
 rooms_node = NodePath("../Rooms")
 
-[node name="Rooms" type="Node2D" parent="."]
-
-[node name="Tilemaps" type="Node2D" parent="."]
-
-[node name="Entities" type="Node2D" parent="."]
-
 [node name="BreakTheTargets" parent="." instance=ExtResource("11_llbt2")]
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Tilemaps" type="Node" parent="."]
+
+[node name="Entities" type="Node" parent="."]
