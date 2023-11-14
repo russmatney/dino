@@ -1,4 +1,4 @@
-class_name ActiveQuest
+class_name QuestData
 extends Node
 
 var label: String

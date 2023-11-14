@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var quest: ActiveQuest : set = set_quest
+var quest: QuestData : set = set_quest
 
 func set_quest(q):
 	quest = q
