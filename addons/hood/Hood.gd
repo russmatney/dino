@@ -52,8 +52,6 @@ func ensure_hud(hud_scene=null):
 		return
 
 	hud.ready.connect(_on_hud_ready)
-	# make sure hud is included in usual scene lifecycle/clean up
-	# NOTE this is deferred!
 	Navi.add_child_to_current(hud)
 
 	return hud

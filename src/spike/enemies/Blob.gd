@@ -39,4 +39,4 @@ func _on_death(enemy):
 		drop.ingredient_type = drop_ingredient_type
 		drop.global_position = global_position
 		await get_tree().create_timer(0.5).timeout
-		Navi.add_child_to_current(drop)
+		U.add_child_to_level(self, drop)

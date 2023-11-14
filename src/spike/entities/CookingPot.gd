@@ -73,7 +73,7 @@ func finish_cooking():
 	drop.ingredient_type = drop_ingredient_type
 
 	drop.global_position = global_position
-	Navi.add_child_to_current(drop)
+	U.add_child_to_level(self, drop)
 
 	cooking = false
 	cooking_time = 0

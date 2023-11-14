@@ -435,3 +435,17 @@ static func ensure_node(_self, nm):
 		node = Node2D.new()
 		_self.add_child(node)
 	return node
+
+# walks the node's owners until it finds one that implements `add_child_to_level`.
+# if none is found, adds the child to the 'current_scene'
+static func add_child_to_level(node, child):
+	# TODO consider faster impls - like getting nodes in a group
+	# in that case, just be sure it's actually an ancestor of the passed node
+	var parent = node.get_parent()
+	if parent == null:
+		Log.pr("no suitable parent found for node", node)
+		node.get_tree().current_scene.add_child.call_deferred(child)
+	elif parent.has_method("add_child_to_level"):
+		parent.add_child_to_level.call_deferred(node, child)
+	else:
+		add_child_to_level(parent, child)

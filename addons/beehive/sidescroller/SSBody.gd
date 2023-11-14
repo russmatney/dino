@@ -303,7 +303,7 @@ func notif(text, opts = {}):
 	notif_tween = create_tween()
 	if dupe:
 		label.set_global_position(notif_label.get_global_position())
-		Navi.add_child_to_current(label)
+		U.add_child_to_level(self, label)
 		notif_tween.tween_callback(label.queue_free).set_delay(ttl)
 	else:
 		notif_tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
@@ -339,7 +339,7 @@ func stamp(opts={}):
 			new_anim.add_child(ax_hint)
 
 		new_anim.global_position = global_position + anim.position
-		Navi.add_child_to_current(new_anim)
+		U.add_child_to_level(self, new_anim)
 
 		var ttl = opts.get("ttl", 0.5)
 		if ttl > 0:

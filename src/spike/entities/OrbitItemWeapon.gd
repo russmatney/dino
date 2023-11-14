@@ -77,8 +77,7 @@ func toss(ingredient_type):
 	item.position = global_position + toss_offset
 	item.add_collision_exception_with(actor)
 
-
-	Navi.add_child_to_current(item)
+	U.add_child_to_level(self, item)
 	# item.rotation = aim_vector.angle()
 	item.apply_impulse(aim_vector * toss_impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)
@@ -111,7 +110,7 @@ func do_spike(ingredient_type):
 		item.position = global_position + toss_offset
 		item.add_collision_exception_with(actor)
 
-		Navi.add_child_to_current(item)
+		U.add_child_to_level(self, item)
 		# item.rotation = aim_vector.angle()
 		item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
 		DJZ.play(DJZ.S.fire)

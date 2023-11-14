@@ -41,7 +41,7 @@ func remove_player():
 	var p = player
 	player = null
 	if p and is_instance_valid(p):
-		get_tree().current_scene.remove_child(p)
+		p.get_parent().remove_child(p)
 	if p and is_instance_valid(p):
 		p.name = "DeadPlayer"
 		p.queue_free()
@@ -81,8 +81,10 @@ func respawn_player(opts={}):
 func _respawn_player(opts={}):
 	var setup = opts.get("setup")
 	var spawn_coords = opts.get("spawn_coords")
+	var spawn_point
 	if spawn_coords == null:
-		spawn_coords = get_spawn_coords()
+		spawn_point = get_spawn_point()
+		spawn_coords = spawn_point.global_position
 
 	var p_scene = opts.get("player_scene")
 	if p_scene == null:
@@ -103,16 +105,20 @@ func _respawn_player(opts={}):
 	if setup != null:
 		setup.call(player)
 
-	get_tree().current_scene.add_child.call_deferred(player)
+	if spawn_point:
+		U.add_child_to_level(spawn_point, player)
+	else:
+		Log.warn("No spawn_point found, adding player to current_scene")
+		get_tree().current_scene.add_child.call_deferred(player)
 
 	spawning = false
 
 ## respawn_coords ################################################
 
-func get_spawn_coords():
+func get_spawn_point():
 	var psp = U.first_node_in_group(self, "player_spawn_points")
 	if psp:
-		return psp.global_position
+		return psp
 	var elevator = U.first_node_in_group(self, "elevator")
 	if elevator:
-		return elevator.global_position
+		return elevator

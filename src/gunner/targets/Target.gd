@@ -37,7 +37,7 @@ func kill():
 
 	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())
-	Navi.add_child_to_current(lbl)
+	U.add_child_to_level(self, lbl)
 
 ## body entered
 

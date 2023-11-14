@@ -150,7 +150,7 @@ var tossed_plug_scene = preload("res://src/pluggs/plug/TossedPlug.tscn")
 func toss_plug():
 	var plug = tossed_plug_scene.instantiate()
 	plug.global_position = plug_source.global_position
-	get_tree().current_scene.add_child(plug)
+	U.add_child_to_level(self, plug)
 
 	var dir = (facing_vector + Vector2(0, -0.7)).normalized()
 

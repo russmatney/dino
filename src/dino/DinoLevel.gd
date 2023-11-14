@@ -29,12 +29,6 @@ func regenerate(opts=null):
 
 ## setup_level ###################################################3
 
-func get_splash_jumbo_opts():
-	return {
-		header="Welcome to %s" % self.name,
-		body=U.rand_of(["Good luck, padawan", "I give you 1 in 10 odds"])
-		}
-
 # recursively setup any signals and initial data
 func setup_level():
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
@@ -47,11 +41,21 @@ func setup_level():
 
 	P.respawn_player()
 
+## ui opts ###################################################3
+
+func get_splash_jumbo_opts():
+	return {
+		header="Welcome to %s" % self.name,
+		body=U.rand_of(["Good luck, padawan", "I give you 1 in 10 odds"])
+		}
+
 func get_exit_jumbo_opts():
 	return {
 		header="%s complete!" % self.name,
 		body=U.rand_of(["Seriously, wow.", "OMG YOU DID IT", "Yo! Way to go!"])
 		}
+
+## quest reactions ###################################################3
 
 func on_quests_complete():
 	Hood.notif("DinoLevel Level Complete", self.name)
@@ -65,3 +69,8 @@ func on_quest_failed():
 	Hood.notif("DinoLevel Restarting", self.name)
 	Q.drop_quests()
 	regenerate()
+
+## add_child_to_level ###################################################3
+
+func add_child_to_level(_node, child):
+	$Entities.add_child(child)
