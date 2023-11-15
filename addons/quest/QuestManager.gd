@@ -54,7 +54,7 @@ func register_quest(node, opts={}):
 
 	# TODO rename QuestData?
 	var quest = QuestData.new()
-	quest.label = opts.get("label", node.name)
+	quest.label = node.label
 	quest.node = node
 	quest.optional = opts.get("optional", false)
 	quest.check_not_failed = opts.get("check_not_failed", false)

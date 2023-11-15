@@ -1,29 +1,38 @@
-extends Node2D
+extends DinoLevel
 
 @onready var hud = $HUD
 
 ## ready ########################################################################
 
-var time_up_menu_scene = preload("res://src/harvey/menus/TimeUpMenu.tscn")
-var time_up_menu
+# var time_up_menu_scene = preload("res://src/harvey/menus/TimeUpMenu.tscn")
+# var time_up_menu
 
 func _ready():
-	time_up_menu = Navi.add_menu(time_up_menu_scene)
+	# time_up_menu = Navi.add_menu(time_up_menu_scene)
 
-	# probably flaky, but works for now
-	for ch in get_children():
-		if ch.has_signal("produce_delivered"):
-			ch.produce_delivered.connect(_on_produce_delivered)
+	P.player_ready.connect(func():
+		# connect to signals on player and bots
+		for ch in $Entities.get_children():
+			if ch.has_signal("produce_delivered"):
+				ch.produce_delivered.connect(_on_produce_delivered))
 
-	setup()
+	super._ready()
 
-func setup():
-	# reset data
-	produce_counts = {}
-	time_remaining = initial_time_remaining
+## init ########################################################################
 
-	# start timer
-	tick_timer()
+var carrot_quest
+var onion_quest
+var tomato_quest
+
+func _init():
+	carrot_quest = QuestDeliverProduce.new({type="carrot"})
+	add_child(carrot_quest)
+
+	onion_quest = QuestDeliverProduce.new({type="onion"})
+	add_child(onion_quest)
+
+	tomato_quest = QuestDeliverProduce.new({type="tomato"})
+	add_child(tomato_quest)
 
 ## produce counts ########################################################################
 
@@ -35,8 +44,27 @@ func inc_produce_count(type):
 	else:
 		produce_counts[type] = 1
 
+	match type:
+		"carrot": carrot_quest.produce_delivered()
+		"onion": onion_quest.produce_delivered()
+		"tomato": tomato_quest.produce_delivered()
+		_: Log.warn("unexpected produce type delivered!")
+
 	if hud and is_instance_valid(hud):
 		hud.update_produce_counts(produce_counts)
+
+## new produce #######################################################################
+
+func _on_produce_delivered(type):
+	DJZ.play(DJZ.S.complete)
+	inc_produce_count(type)
+
+## reset ########################################################################
+
+func reset():
+	produce_counts = {}
+	time_remaining = initial_time_remaining
+	tick_timer()
 
 ## timer ########################################################################
 
@@ -59,11 +87,5 @@ func time_up():
 	var t = get_tree()
 	t.paused = true
 	DJ.resume_menu_song()
-	Navi.show_menu(time_up_menu)
-	time_up_menu.set_score(produce_counts)
-
-## new produce #######################################################################
-
-func _on_produce_delivered(type):
-	DJZ.play(DJZ.S.complete)
-	inc_produce_count(type)
+	# Navi.show_menu(time_up_menu)
+	# time_up_menu.set_score(produce_counts)

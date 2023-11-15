@@ -3,6 +3,8 @@ extends Node
 
 ## vars ##########################################################
 
+signal player_ready
+
 var player
 var player_scene
 var player_group = "player"
@@ -105,6 +107,8 @@ func _respawn_player(opts={}):
 
 	if setup != null:
 		setup.call(player)
+
+	player.ready.connect(func(): player_ready.emit())
 
 	if spawn_point:
 		U.add_child_to_level(spawn_point, player)
