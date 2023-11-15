@@ -1,37 +1,22 @@
-@tool
-extends Node
+extends Quest
+class_name FetchSheepQuest
 
-# TODO refactor to find and support multiple pens, regardless of node structure
-@onready var sheep_pen = $SheepPen
+## vars ##########################################################
 
 var all_sheep = []
-
-signal quest_complete
-signal quest_failed
-signal count_remaining_update
-signal count_total_update
-
-## config warning ##########################################################
-
-func _get_configuration_warnings():
-	return U._config_warning(self, {expected_nodes=["SheepPen"]})
+var penned_sheep = []
 
 ## ready ##########################################################
 
 func _ready():
-	if Engine.is_editor_hint():
-		return
+	label = "Fetch all the sheep!"
 
-	if not sheep_pen:
-		Log.error("FetchSheepQuest expected $SheepPen Area2D to exist")
-		return
+## setup ##########################################################
 
-	sheep_pen.body_entered.connect(on_body_entered)
-	sheep_pen.body_exited.connect(on_body_exited)
-
-	Q.register_quest(self, {label="Fetch all the sheep!"})
-
-	all_sheep = get_tree().get_nodes_in_group("sheep")
+func setup():
+	var level_root = U.find_level_root(self)
+	Log.pr("looking for sheep in level_root", level_root)
+	all_sheep = U.get_children_in_group(level_root, "sheep")
 
 	if len(all_sheep) == 0:
 		Log.error("FetchSheepQuest found zero sheep")
@@ -40,18 +25,37 @@ func _ready():
 	for s in all_sheep:
 		s.dying.connect(sheep_died)
 
+	var found_pen = false
+	for p in U.get_children_in_group(level_root, "pen"):
+		if p is Area2D:
+			p.body_entered.connect(on_body_entered)
+			p.body_exited.connect(on_body_exited)
+			found_pen = true
+	if not found_pen:
+		Log.error("FetchSheepQuest found no 'pen' Area2Ds")
+		return
+
 	update_quest()
 
-## exit tree ##########################################################
+## sheep/pen signals ##########################################################
 
-func _exit_tree():
-	if Engine.is_editor_hint():
-		return
-	Q.unregister(self)
+func on_body_entered(body):
+	Log.pr("body entered pen", body)
+	if body in all_sheep and body not in penned_sheep:
+		penned_sheep.append(body)
+		update_quest()
+
+func on_body_exited(body):
+	penned_sheep.erase(body)
+	update_quest()
+
+func sheep_died(s):
+	all_sheep.erase(s)
+	update_quest()
 
 ## quest update ##########################################################
 
-func update_quest():
+func update_quest(_x=null):
 	var remaining = all_sheep.filter(func(s): return not s in penned_sheep)
 
 	count_remaining_update.emit(len(remaining))
@@ -63,22 +67,3 @@ func update_quest():
 	if len(all_sheep) == 0:
 		# presumably, all the sheep died
 		quest_failed.emit()
-
-## sheep death ##########################################################
-
-func sheep_died(s):
-	all_sheep.erase(s)
-	update_quest()
-
-## sheep returned ##########################################################
-
-var penned_sheep = []
-func on_body_entered(body):
-	Log.pr("body entered pen", body)
-	if body in all_sheep and body not in penned_sheep:
-		penned_sheep.append(body)
-		update_quest()
-
-func on_body_exited(body):
-	penned_sheep.erase(body)
-	update_quest()

@@ -24,6 +24,7 @@ func get_room_opts(_opts):
 				"Pen":{
 					scene=load("res://addons/reptile/tilemaps/GrassFloorTiles16.tscn"),
 					setup=func(t):
+					# TODO convert to entity
 					t.add_to_group("pen", true)
 					},
 				"Fence":{

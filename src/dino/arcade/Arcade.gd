@@ -57,10 +57,13 @@ func setup_game(node):
 	else:
 		Log.warn("game node has no 'level_complete' signal!", node)
 
-func launch_game(entity):
+func launch_game(entity=null):
+	if entity == null:
+		entity = current_game_entity
 	current_game_entity = entity
 
 	if game_node:
+		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
 	P.set_player_scene(entity)
@@ -69,7 +72,7 @@ func launch_game(entity):
 	game_node = scene.instantiate()
 	setup_game(game_node)
 
-	add_child(game_node)
+	add_child.call_deferred(game_node)
 
 ## game level signals ##################################################3
 
@@ -85,4 +88,4 @@ func _on_level_complete():
 	_seed = randi()
 	await get_tree().create_timer(1.0).timeout
 	Hood.notif("Loading next level....")
-	_on_game_ready()
+	launch_game()

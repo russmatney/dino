@@ -439,17 +439,25 @@ static func ensure_node(_self, nm):
 # walks the node's owners until it finds one that implements `add_child_to_level`.
 # if none is found, adds the child to the 'current_scene'
 static func add_child_to_level(node, child):
+	var level = find_level_root(node)
+	if level.has_method("add_child_to_level"):
+		level.add_child_to_level.call_deferred(level, child)
+	else:
+		level.add_child.call_deferred(child)
+
+# returns the first parent node that impls add_child_to_level (i.e. the level root)
+# otherwise returns the root's current_scene
+static func find_level_root(node):
 	# TODO consider faster impls - like getting nodes in a group
 	# in that case, just be sure it's actually an ancestor of the passed node
 	var parent = node.get_parent()
 	if parent == null:
 		var t = node.get_tree()
 		if t == null:
-			Log.warn("Adding child while outside of tree!", child)
-			Navi.get_tree().current_scene.add_child.call_deferred(child)
+			return Navi.get_tree().current_scene
 		else:
-			node.get_tree().current_scene.add_child.call_deferred(child)
+			return node.get_tree().current_scene
 	elif parent.has_method("add_child_to_level"):
-		parent.add_child_to_level.call_deferred(node, child)
+		return parent
 	else:
-		add_child_to_level(parent, child)
+		return find_level_root(parent)
