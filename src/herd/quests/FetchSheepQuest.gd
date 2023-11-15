@@ -15,7 +15,6 @@ func _ready():
 
 func setup():
 	var level_root = U.find_level_root(self)
-	Log.pr("looking for sheep in level_root", level_root)
 	all_sheep = U.get_children_in_group(level_root, "sheep")
 
 	if len(all_sheep) == 0:
@@ -40,7 +39,6 @@ func setup():
 ## sheep/pen signals ##########################################################
 
 func on_body_entered(body):
-	Log.pr("body entered pen", body)
 	if body in all_sheep and body not in penned_sheep:
 		penned_sheep.append(body)
 		update_quest()

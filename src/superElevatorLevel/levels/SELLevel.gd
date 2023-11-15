@@ -1,4 +1,4 @@
-extends Node2D
+extends DinoLevel
 class_name SELLevel
 
 ### vars ####################################################
@@ -6,20 +6,16 @@ class_name SELLevel
 var enemies = []
 var enemy_spawn_positions = []
 
-signal level_complete
-signal wave_complete
-
 var goon_scene = preload("res://src/superElevatorLevel/enemies/Goon.tscn")
 var boss_scene = preload("res://src/superElevatorLevel/enemies/Boss.tscn")
 
+# TODO pull waves down into levelGen
 var _waves = [{goon_count=2}, {boss_count=1}]
 
-### ready ####################################################
+### setup_level ####################################################
 
-func _ready():
-	wave_complete.connect(_on_wave_complete)
-	level_complete.connect(_on_level_complete)
-
+func setup_level():
+	Log.pr("setup_level()")
 	enemies = get_tree().get_nodes_in_group("enemies")
 	enemy_spawn_positions = get_tree().get_nodes_in_group("spawn_points")
 	enemies.map(setup_enemy)
@@ -36,6 +32,8 @@ func _ready():
 		else:
 			Log.warn("no wave found in SELLevel _waves, cannot spawn")
 
+	super.setup_level()
+
 
 ### enemies ####################################################
 
@@ -49,13 +47,17 @@ func _on_enemy_dead(e):
 	enemies.erase(e)
 
 	if len(enemies) == 0:
-		wave_complete.emit()
+		wave_complete()
 
 ### waves ####################################################
 
-func _on_wave_complete():
+func all_waves_complete():
+	# opt-in to DinoLevel quest completion
+	on_quests_complete()
+
+func wave_complete():
 	if len(_waves) == 0:
-		level_complete.emit()
+		all_waves_complete()
 	else:
 		Hood.notif("Wave complete")
 		spawn_next_wave(_waves.pop_front())
@@ -67,7 +69,7 @@ func spawn_enemies(enemy_scene, count):
 			setup_enemy(e)
 			var sp = enemy_spawn_positions[i % len(enemy_spawn_positions)]
 			e.global_position = sp.global_position
-			add_child(e)
+			$Entities.add_child(e)
 
 func spawn_next_wave(wave):
 	enemy_spawn_positions.shuffle()
@@ -80,8 +82,3 @@ func spawn_next_wave(wave):
 
 	var boss_count = wave.get("boss_count", 0)
 	spawn_enemies(boss_scene, boss_count)
-
-### level ####################################################
-
-func _on_level_complete():
-	Hood.notif("Level complete!")

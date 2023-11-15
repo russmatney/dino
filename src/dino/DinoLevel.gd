@@ -10,6 +10,9 @@ signal level_complete
 ## ready ######################################################
 
 func _ready():
+	if level_gen == null:
+		Log.error("DinoLevel missing expected 'LevelGen' node")
+
 	Log.pr("DinoLevel ready: ", name)
 
 	# call setup_level every time we get new nodes
