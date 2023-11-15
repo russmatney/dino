@@ -221,6 +221,10 @@
 						"type": "string",
 						"value": "Dot Hop"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": false
+					},
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/dotHop/DotHopGame.tscn"
