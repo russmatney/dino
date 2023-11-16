@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dg48upoxdbyi"
+path="res://.godot/imported/gunner_icon.aseprite-76955f05ffd42629d083032bdf73ef38.res"
+
+[deps]
+
+source_file="res://assets/gameicons/gunner_icon.aseprite"
+dest_files=["res://.godot/imported/gunner_icon.aseprite-76955f05ffd42629d083032bdf73ef38.res"]
+
+[params]
+

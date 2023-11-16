@@ -480,6 +480,10 @@
 						"type": "resource",
 						"value": "res://src/tower/level/TowerLevel.tscn"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/tower_icon_sheet.png"
+					},
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/tower/menus/TowerMainMenu.tscn"
@@ -512,6 +516,10 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/gunner/level/GunnerLevel.tscn"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/gunner_icon_sheet.png"
 					},
 					"pause_menu": {
 						"type": "resource",
@@ -677,6 +685,10 @@
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/woods/level/WoodsLevel.tscn"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/woods_icon_sheet.png"
 					},
 					"main_menu": {
 						"type": "resource",

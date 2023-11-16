@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://drmkda8got0cn"
+path="res://.godot/imported/woods_icon.aseprite-86acf75a3a94e14a9e87d660d5d4fe6c.res"
+
+[deps]
+
+source_file="res://assets/gameicons/woods_icon.aseprite"
+dest_files=["res://.godot/imported/woods_icon.aseprite-86acf75a3a94e14a9e87d660d5d4fe6c.res"]
+
+[params]
+
