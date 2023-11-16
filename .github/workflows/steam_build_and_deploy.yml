@@ -37,7 +37,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p dist/dino-linux
-          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0
+          godot --headless -v --export-debug dino-linux dist/dino-linux/dino.x86_64 || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/

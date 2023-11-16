@@ -39,7 +39,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p dist/dino-windows
-          godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe || exit 0
+          godot --headless -v --export-debug dino-windows dist/dino-windows/dino.exe || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
@@ -79,7 +79,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p dist/dino-linux
-          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64 || exit 0
+          godot --headless -v --export-debug dino-linux dist/dino-linux/dino.x86_64 || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
@@ -118,7 +118,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p dist/dino-web
-          godot --headless -v --export-release dino-web dist/dino-web/index.html || exit 0
+          godot --headless -v --export-debug dino-web dist/dino-web/index.html || exit 0
       - name: Sanity check
         run: |
           ls -alh dist/
@@ -159,7 +159,7 @@ jobs:
   #     - name: Mac Build
   #       run: |
   #         mkdir -v -p dist/dino-macos
-  #         godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg || exit 0
+  #         godot --headless -v --export-debug dino-macos dist/dino-macos/dino.dmg || exit 0
   #     - name: Sanity check
   #       run: |
   #         ls -alh dist/
