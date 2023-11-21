@@ -965,13 +965,6 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": null,
-				"_id": "28",
-				"_name": "game_singleton",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "17",
 				"_default_value": "",
 				"_id": "42",
 				"_name": "scene_path_prefix",

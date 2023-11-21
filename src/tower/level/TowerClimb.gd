@@ -207,5 +207,3 @@ func check_win():
 	if targets_destroyed and robots_destroyed:
 		Hood.notif(str("Level ", level_num, " Complete!"))
 		player.notif("Level Clear!")
-		# var t = Engine.get_singleton("Tower")
-		# t.level_complete()

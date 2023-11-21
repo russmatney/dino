@@ -22,9 +22,6 @@ func get_win_menu() -> PackedScene:
 func get_death_menu() -> PackedScene:
 	return get_resource("death_menu")
 
-func get_singleton() -> Texture:
-	return get_resource("game_singleton")
-
 func get_scene_path_prefix() -> String:
 	return get_string("scene_path_prefix")
 
@@ -52,7 +49,6 @@ func data():
 		pause_menu=get_pause_menu(),
 		win_menu=get_win_menu(),
 		death_menu=get_death_menu(),
-		singleton=get_singleton(),
 		scene_path_prefix=get_scene_path_prefix(),
 		player_scene=get_player_scene(),
 		first_level_scene=get_first_level_scene(),
