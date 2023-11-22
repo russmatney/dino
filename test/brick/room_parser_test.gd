@@ -200,12 +200,9 @@ x.....
 
 	assert_that(parsed).contains_keys(["rooms"])
 	assert_that(len(parsed.rooms)).is_equal(2)
-
-	# arbitrary metadata
 	assert_that(parsed.rooms[0].room_name).is_equal("A")
 	assert_that(parsed.rooms[1].room_name).is_equal("B")
 
-	# shape
 	assert_that(parsed.rooms[0].shape).is_equal([
 		["x", "x", "x"],
 		["x", ".", "."],
@@ -215,4 +212,35 @@ x.....
 		["x", "x", "x", "x", "x", "x"],
 		["x", ".", ".", ".", ".", "."],
 		["x", ".", ".", ".", ".", "."],
+		])
+
+
+func test_trailing_spaces_or_tabs():
+	var parsed = RoomParser.parse_raw("name PuzzRooms
+
+=======
+LEGEND
+=======
+
+. = Empty
+x = Tile
+
+=======
+ROOMS
+=======
+
+room_name A
+
+xxx
+x..
+x..
+	")
+
+	assert_that(parsed).contains_keys(["rooms"])
+	assert_that(len(parsed.rooms)).is_equal(1)
+	assert_that(parsed.rooms[0].room_name).is_equal("A")
+	assert_that(parsed.rooms[0].shape).is_equal([
+		["x", "x", "x"],
+		["x", ".", "."],
+		["x", ".", "."]
 		])

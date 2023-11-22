@@ -94,7 +94,8 @@ static func parse_raw(contents) -> Dictionary:
 		if parser:
 			chunks = Array(chunks).map(func(c): return c.split("\n"))
 			chunks = chunks.map(func(chunk):
-				return Array(chunk).filter(func(c): return c != "")
+				return Array(chunk).filter(func(c):
+					return c != "" and c != "\t" and c != "\t\t" and c != "\t\t\t")
 				).filter(func(chunk): return len(chunk) > 0)
 			parsed[header.to_lower()] = parser.call(chunks)
 	return parsed
