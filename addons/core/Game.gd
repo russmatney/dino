@@ -24,6 +24,9 @@ func game_entity_for_scene(scene_file_path):
 	else:
 		Log.warn("Multiple games manage scene", scene_file_path, gs)
 
+func get_game_entity(ent_id):
+	return Pandora.get_entity(ent_id)
+
 ## Navi.menu register/cleanup ##########################################################
 
 func register_menus(ent):

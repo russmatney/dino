@@ -105,8 +105,10 @@ func check_out(data):
 ## input ###########################################################
 
 func _unhandled_input(event):
+	Log.pr("unhandled player input", event)
 	# prevent input
 	if block_control or is_dead or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+		Log.pr("blocking ss player control")
 		return
 
 	# jetpack
@@ -119,9 +121,11 @@ func _unhandled_input(event):
 
 	# generic weapon
 	if has_weapon() and Trolley.is_attack(event):
+		Log.pr("using ss player weapon")
 		use_weapon()
 		# should strafe?
 	elif has_weapon() and Trolley.is_attack_released(event):
+		Log.pr("stop using ss player weapon")
 		stop_using_weapon()
 		# should stop strafe?
 
@@ -152,6 +156,7 @@ func _unhandled_input(event):
 func _physics_process(_delta):
 	# checks forced_movement_target, then uses Trolley.move_vector
 	move_vector = get_move_vector()
+	Log.pr("trolley move vec", move_vector)
 
 	if not Engine.is_editor_hint():
 		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:

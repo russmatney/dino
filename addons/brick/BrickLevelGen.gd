@@ -279,6 +279,11 @@ func generate(opts={}):
 		room_defs_path=room_defs_path,
 		show_color_rect=show_color_rect,
 		})
+
+	# overwrite so that get_room_opts can read from the updated node props
+	room_count = opts.get("room_count", room_count)
+	tile_size = opts.get("tile_size", tile_size)
+	_seed = opts.get("seed", _seed)
 	if self.has_method("get_room_opts"):
 		opts["get_room_opts"] = self.get_room_opts
 

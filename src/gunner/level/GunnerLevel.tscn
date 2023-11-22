@@ -16,6 +16,7 @@ room_defs_path = "res://src/gunner/level/rooms.txt"
 entities_node = NodePath("../Entities")
 tilemaps_node = NodePath("../Tilemaps")
 rooms_node = NodePath("../Rooms")
+metadata/_edit_lock_ = true
 
 [node name="BreakTheTargets" parent="." instance=ExtResource("11_llbt2")]
 

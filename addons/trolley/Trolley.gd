@@ -159,9 +159,44 @@ func actions_for_input(event):
 	return axs
 
 
-##################################################################
-# public
-##################################################################
+## simulate ################################################################
+
+func sim_action_pressed(action, release_after=null):
+	var evt = InputEventAction.new()
+	evt.action = action
+	evt.pressed = true
+	Log.pr("evt", evt)
+	Input.parse_input_event(evt)
+	if release_after != null:
+		await get_tree().create_timer(release_after).timeout
+		sim_action_released.call_deferred(action)
+
+func sim_action_released(action):
+	var evt = InputEventAction.new()
+	evt.action = action
+	evt.pressed = false
+	Input.parse_input_event(evt)
+
+func close():
+	sim_action_pressed("close", 0.2)
+
+func attack(t=0.5):
+	if t:
+		sim_action_pressed("attack", t)
+	else:
+		sim_action_pressed("attack")
+
+func sim_move(dir: Vector2, release_after=0.8):
+	match dir:
+		Vector2.LEFT: sim_action_pressed("move_left", release_after)
+		Vector2.RIGHT: sim_action_pressed("move_right", release_after)
+		Vector2.UP: sim_action_pressed("move_up", release_after)
+		Vector2.DOWN: sim_action_pressed("move_down", release_after)
+		_: Log.warn("Not-impled: simulated input in non-cardinal directions", dir)
+
+
+
+## public #################################################################
 
 func is_event(event, event_name):
 	if focused:

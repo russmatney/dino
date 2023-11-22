@@ -4,8 +4,9 @@ class_name DinoLevel
 ## vars ######################################################
 
 @onready var level_gen: BrickLevelGen = $LevelGen
-
+var level_opts: Dictionary
 signal level_complete
+signal level_setup
 
 ## ready ######################################################
 
@@ -23,12 +24,12 @@ func _ready():
 
 # regenerate the level with whatever passed opts
 # presumably invokes the nodes_transferred signal when it's done
-var last_level_opts
 func regenerate(opts=null):
-	if opts == null and last_level_opts:
-		opts = last_level_opts
+	if opts == null and level_opts != null:
+		opts = level_opts
 	level_gen.generate(opts)
-	last_level_opts = opts
+	# i _think_ this helps support regen from the pause menu
+	level_opts = opts
 
 ## setup_level ###################################################3
 
@@ -38,11 +39,11 @@ func setup_level():
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()
 	P.remove_player()
+	P.respawn_player()
+	level_setup.emit()
 
 	# mk this is kind of cool
 	await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
-
-	P.respawn_player()
 
 ## ui opts ###################################################3
 
