@@ -53,16 +53,16 @@ func is_managed():
 
 ## For a passed game, load its main menu.
 ## If no menu set, start the game via restart_game
-func launch(game: DinoGameEntity):
+func launch(game: DinoGameEntity, opts={}):
 	_is_managed = true
 	register_menus(game)
 	P.set_player_scene(game)
 
 	if game.get_main_menu() != null:
-		Navi.nav_to(game.get_main_menu())
+		Navi.nav_to(game.get_main_menu(), opts)
 		return
 
-	restart_game()
+	restart_game(opts)
 
 func restart_game(opts=null):
 	var game = get_current_game()
@@ -76,7 +76,7 @@ func restart_game(opts=null):
 
 	var	first_level = game.get_first_level_scene()
 	if first_level:
-		Navi.nav_to(first_level)
+		Navi.nav_to(first_level, opts)
 		return
 
 	Log.warn("DinoGameEntity missing 'first_level', cannot start", game)
