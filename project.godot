@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dino"
 run/main_scene="res://src/dino/menus/DinoMenu.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(0.819608, 0.509804, 0.576471, 1)
 boot_splash/image="res://assets/gameicons/dino_splash_sheet.png"
 config/icon="res://addons/core/assets/icons/dino_sheet.png"
@@ -44,6 +44,7 @@ window/stretch/aspect.runner="keep"
 
 [editor]
 
+movie_writer/movie_file="/home/russ/russmatney/dino/clips/gameplay_latest.avi"
 naming/scene_name_casing=1
 export/convert_text_resources_to_binary=false
 
