@@ -8,6 +8,9 @@ var level_opts: Dictionary
 signal level_complete
 signal level_setup
 
+var skip_splash_intro = false
+var skip_splash_outro = false
+
 ## ready ######################################################
 
 func _ready():
@@ -42,8 +45,8 @@ func setup_level():
 	P.respawn_player()
 	level_setup.emit()
 
-	# mk this is kind of cool
-	await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
+	if not skip_splash_intro:
+		await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
 
 ## ui opts ###################################################3
 
@@ -64,7 +67,8 @@ func get_exit_jumbo_opts():
 func on_quests_complete():
 	Hood.notif("DinoLevel Level Complete", self.name)
 
-	await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
+	if not skip_splash_outro:
+		await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
 
 	Q.drop_quests()
 	level_complete.emit()

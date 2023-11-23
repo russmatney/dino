@@ -165,7 +165,6 @@ func sim_action_pressed(action, release_after=null):
 	var evt = InputEventAction.new()
 	evt.action = action
 	evt.pressed = true
-	Log.pr("evt", evt)
 	Input.parse_input_event(evt)
 	if release_after != null:
 		await get_tree().create_timer(release_after).timeout

@@ -14,6 +14,8 @@ func test_gunner_dino_level_completion():
 	P.set_player_scene(ent)
 
 	var level = monitor_signals(sc.instantiate())
+	level.skip_splash_intro = true
+	level.skip_splash_outro = true
 	level.level_opts = {room_count=1,
 		contents="
 name Gunner Test Rooms
@@ -34,12 +36,7 @@ name Basic
 
 ......
 .p..o.
-xxxxxx
-		"
-		}
-
-	# TODO pass some basic opts?
-	# TODO use Game api + launch?
+xxxxxx"}
 	add_child(level)
 	await assert_signal(level).is_emitted("ready")
 	level.regenerate()
@@ -47,14 +44,9 @@ xxxxxx
 	await assert_signal(P).is_emitted("player_ready")
 	await assert_signal(level).is_emitted("level_setup")
 
-	# close jumbotron
-	Trolley.close()
-
-	# wait for scene to settle
-	# await get_tree().create_timer(0.2).timeout
 	# aim right
 	Trolley.sim_move(Vector2.RIGHT)
 	# shoot target
 	Trolley.attack()
 
-	await assert_signal(level).wait_until(1600).is_emitted("level_complete")
+	await assert_signal(level).wait_until(500).is_emitted("level_complete")
