@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ca57linvp4uxm"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mxvc2"]
-[ext_resource type="Script" path="res://src/dino/roulette/RouletteMainMenu.gd" id="1_oluih"]
+[ext_resource type="Script" path="res://src/dino/menus/RouletteMainMenu.gd" id="1_oluih"]
 [ext_resource type="Script" path="res://addons/navi/NaviButtonList.gd" id="3_mrnfn"]
 
 [node name="RouletteMainMenu" type="CanvasLayer" groups=["menus"]]
@@ -55,6 +55,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("3_mrnfn")
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PlayersGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

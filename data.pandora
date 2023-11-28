@@ -836,7 +836,7 @@
 					},
 					"first_level": {
 						"type": "resource",
-						"value": "res://src/dino/roulette/Roulette.tscn"
+						"value": "res://src/dino/modes/Roulette.tscn"
 					},
 					"games": {
 						"type": "array",
@@ -846,11 +846,11 @@
 					},
 					"main_menu": {
 						"type": "resource",
-						"value": "res://src/dino/roulette/RouletteMainMenu.tscn"
+						"value": "res://src/dino/menus/RouletteMainMenu.tscn"
 					},
 					"pause_menu": {
 						"type": "resource",
-						"value": "res://src/dino/roulette/RoulettePauseMenu.tscn"
+						"value": "res://src/dino/menus/RoulettePauseMenu.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -871,15 +871,15 @@
 					},
 					"first_level": {
 						"type": "resource",
-						"value": "res://src/dino/arcade/Arcade.tscn"
+						"value": "res://src/dino/modes/Arcade.tscn"
 					},
 					"main_menu": {
 						"type": "resource",
-						"value": "res://src/dino/arcade/ArcadeMainMenu.tscn"
+						"value": "res://src/dino/menus/ArcadeMainMenu.tscn"
 					},
 					"pause_menu": {
 						"type": "resource",
-						"value": "res://src/dino/arcade/ArcadePauseMenu.tscn"
+						"value": "res://src/dino/menus/ArcadePauseMenu.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -1112,28 +1112,28 @@
 			},
 			{
 				"_category_id": "69",
-				"_default_value": null,
+				"_default_value": "res://src/dino/players/hatbot/SSHatBot.tscn",
 				"_id": "75",
 				"_name": "sidescroller_scene",
 				"_type": "resource"
 			},
 			{
 				"_category_id": "69",
-				"_default_value": null,
+				"_default_value": "res://src/dino/players/hairo/TDHairo.tscn",
 				"_id": "76",
 				"_name": "topdown_scene",
 				"_type": "resource"
 			},
 			{
 				"_category_id": "69",
-				"_default_value": null,
+				"_default_value": "res://src/dino/players/romeo/BEURomeo.tscn",
 				"_id": "77",
 				"_name": "beatemup_scene",
 				"_type": "resource"
 			},
 			{
 				"_category_id": "69",
-				"_default_value": null,
+				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
 				"_id": "78",
 				"_name": "icon_texture",
 				"_type": "resource"

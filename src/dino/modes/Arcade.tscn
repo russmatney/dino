@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8m2lhbv2cerv"]
 
-[ext_resource type="Script" path="res://src/dino/arcade/Arcade.gd" id="1_tnk8n"]
+[ext_resource type="Script" path="res://src/dino/modes/Arcade.gd" id="1_tnk8n"]
 [ext_resource type="Script" path="res://addons/core/DinoGameEntity.gd" id="2_ox3dc"]
 
 [sub_resource type="Resource" id="Resource_5p26p"]
