@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cutt56x8p5r7r"]
+[gd_scene load_steps=45 format=3 uid="uid://cutt56x8p5r7r"]
 
 [ext_resource type="Script" path="res://src/mountain/player/Player.gd" id="1_g0biv"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ctg72"]
@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="5_tj1yg"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="6_m462i"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_ex2u0"]
-[ext_resource type="Shader" path="res://src/gunner/player/ColorReassignShader.gdshader" id="8_jsau3"]
-[ext_resource type="Texture2D" path="res://src/tower/assets/greyhat_jetflame_sheet.png" id="9_ik71i"]
+[ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/tower/assets/greyhat_jetflame_sheet.png" id="9_ik71i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfd8r"]
 
@@ -363,11 +362,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sursb"]
 size = Vector2(239, 150)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwg0d"]
-shader = ExtResource("8_jsau3")
-shader_parameter/outline = Color(0.819608, 0.486275, 0.486275, 1)
-shader_parameter/accent = Color(0.964706, 0.776471, 0.658824, 1)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ygel"]
 atlas = ExtResource("9_ik71i")
 region = Rect2(0, 0, 16, 16)
@@ -433,6 +427,7 @@ has_ascend = true
 has_descend = true
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 clip_contents = false
 offset_left = -24.0
 offset_top = 16.0
@@ -487,7 +482,6 @@ position = Vector2(0, -90)
 
 [node name="Jet" type="AnimatedSprite2D" parent="."]
 visible = false
-material = SubResource("ShaderMaterial_bwg0d")
 position = Vector2(0, 22)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ro1o6")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ss1sln4x0t0a"
-path="res://.godot/imported/status_portraits12.png-e041383c1f512cfb59af9e50c5ee95bb.ctex"
+uid="uid://dp75inigix2ir"
+path="res://.godot/imported/soft-soft-hoodie.png-73575504442619b6375a186b678af45e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/spike/assets/status_portraits12.png"
-dest_files=["res://.godot/imported/status_portraits12.png-e041383c1f512cfb59af9e50c5ee95bb.ctex"]
+source_file="res://src/dino/players/hoodie/soft-soft-hoodie.png"
+dest_files=["res://.godot/imported/soft-soft-hoodie.png-73575504442619b6375a186b678af45e.ctex"]
 
 [params]
 

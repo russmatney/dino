@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://mb2g5dllvicj"
+path="res://.godot/imported/topdown_player_64.aseprite-f7030b9d4c73241cba20e12d4950929f.res"
+
+[deps]
+
+source_file="res://src/dino/players/hairo/topdown_player_64.aseprite"
+dest_files=["res://.godot/imported/topdown_player_64.aseprite-f7030b9d4c73241cba20e12d4950929f.res"]
+
+[params]
+

@@ -55,6 +55,16 @@
 				"_id": "65",
 				"_index": 0,
 				"_name": "GameMode"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "00a4ffff",
+				"_id": "69",
+				"_ids_generation_class": "DinoPlayerEntityIds",
+				"_index": 0,
+				"_name": "DinoPlayer",
+				"_script_path": "res://src/dino/players/DinoPlayerEntity.gd"
 			}
 		],
 		"_entities": [
@@ -876,6 +886,78 @@
 						"value": "res://src/dino/arcade"
 					}
 				}
+			},
+			{
+				"_category_id": "69",
+				"_icon_color": "ffffff00",
+				"_id": "70",
+				"_index": 0,
+				"_name": "HatBotPlayer",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Hat Bot"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hatbot/SSHatBot.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "69",
+				"_icon_color": "ffffff00",
+				"_id": "71",
+				"_index": 0,
+				"_name": "RomeoPlayer",
+				"_property_overrides": {
+					"beatemup_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/romeo/BEURomeo.tscn"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Romeo"
+					}
+				}
+			},
+			{
+				"_category_id": "69",
+				"_icon_color": "ffffff00",
+				"_id": "72",
+				"_index": 0,
+				"_name": "HoodiePlayer",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Hoodie"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/players/hoodie/status_portraits12.png"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hoodie/SSHoodie.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "69",
+				"_icon_color": "ffffff00",
+				"_id": "73",
+				"_index": 0,
+				"_name": "HarioPlayer",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Hairo"
+					},
+					"topdown_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hairo/TDHairo.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1020,12 +1102,47 @@
 				"_id": "67",
 				"_name": "is_game_mode",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "69",
+				"_default_value": "",
+				"_id": "74",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "69",
+				"_default_value": null,
+				"_id": "75",
+				"_name": "sidescroller_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "69",
+				"_default_value": null,
+				"_id": "76",
+				"_name": "topdown_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "69",
+				"_default_value": null,
+				"_id": "77",
+				"_name": "beatemup_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "69",
+				"_default_value": null,
+				"_id": "78",
+				"_name": "icon_texture",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 68
+			"default": 78
 		}
 	}
 }
