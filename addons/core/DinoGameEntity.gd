@@ -39,6 +39,9 @@ func is_game_mode() -> bool:
 		return get_bool("is_game_mode")
 	return false
 
+func get_player_type() -> String:
+	return get_string("player_type")
+
 ## data ##########################################################
 
 func data():

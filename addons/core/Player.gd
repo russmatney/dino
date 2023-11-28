@@ -6,16 +6,55 @@ extends Node
 signal player_ready
 
 var player
+var fallback_player_scene
 var player_scene
+var player_entity
 var player_group = "player"
+
+enum PlayerType {SideScroller, TopDown, BeatEmUp}
+var player_type: PlayerType
 
 ## player_scene #################################################
 
-# set a cached player_scene to support simple respawn_player() calls
-func set_player_scene(game):
+# setup player type and a fallback scene for the passed game entity
+func setup_player(game: DinoGameEntity):
+	var typ = game.get_player_type()
+	if typ != null:
+		match typ:
+			"sidescroller": set_player_type(PlayerType.SideScroller)
+			"topdown": set_player_type(PlayerType.TopDown)
+			"beatemup": set_player_type(PlayerType.BeatEmUp)
+
 	var ps = game.get_player_scene()
 	if ps:
-		player_scene = ps
+		fallback_player_scene = ps
+
+func set_player_entity(ent):
+	player_entity = ent
+	# do more get_player_scene logic here?
+
+func set_player_type(player_type: PlayerType):
+	player_type = player_type
+	# do more get_player_scene logic here?
+
+func get_player_scene():
+	# consider smthihng like:
+	# var game = Game.get_current_game()
+
+	var p_scene
+	if player_entity != null and player_type != null:
+		match player_type:
+			PlayerType.SideScroller: p_scene = player_entity.get_sidescroller_scene()
+			PlayerType.TopDown: p_scene = player_entity.get_topdown_scene()
+			PlayerType.BeatEmUp: p_scene = player_entity.get_beatemup_scene()
+
+	if p_scene != null:
+		return p_scene
+	Log.warn("No player scene found for player_entity and player_type", player_entity, player_type)
+
+	if fallback_player_scene:
+		return fallback_player_scene
+	Log.pr("No fallback_player_scene set")
 
 ## get player #################################################
 
@@ -57,21 +96,13 @@ func respawn_player(opts={}):
 		return
 
 	Log.pr("Spawning new player")
+	# overwriting this is generally for debugging only
 	if opts.get("player_scene") == null:
 		if player_scene:
 			# support reading a cached player_scene
 			opts["player_scene"] = player_scene
 		else:
-			var game = Game.get_current_game()
-
-			if game == null:
-				Log.warn("No current_game, can't spawn (or respawn) player")
-				return
-			elif game.get_player_scene() == null:
-				Log.warn("current_game has no player_scene, can't respawn player", game)
-				return
-
-			opts["player_scene"] = game.get_player_scene()
+			opts["player_scene"] = get_player_scene()
 
 	spawning = true
 	if player:

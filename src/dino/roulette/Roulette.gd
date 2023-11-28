@@ -96,7 +96,7 @@ func launch_game(entity):
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
-	P.set_player_scene(entity)
+	P.setup_player(entity)
 
 	var scene = entity.get_first_level_scene()
 	game_node = scene.instantiate()

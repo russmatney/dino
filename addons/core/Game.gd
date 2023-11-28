@@ -59,7 +59,7 @@ func is_managed():
 func launch(game: DinoGameEntity, opts={}):
 	_is_managed = true
 	register_menus(game)
-	P.set_player_scene(game)
+	P.setup_player(game)
 
 	if game.get_main_menu() != null:
 		Navi.nav_to(game.get_main_menu(), opts)

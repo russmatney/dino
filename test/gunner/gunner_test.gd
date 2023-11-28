@@ -11,7 +11,7 @@ func test_gunner_game_entity():
 func test_gunner_dino_level_completion():
 	var ent = Game.get_game_entity(DinoGameEntityIds.GUNNER)
 	var sc = ent.get_first_level_scene()
-	P.set_player_scene(ent)
+	P.setup_player(ent)
 
 	var level = monitor_signals(sc.instantiate())
 	level.skip_splash_intro = true
