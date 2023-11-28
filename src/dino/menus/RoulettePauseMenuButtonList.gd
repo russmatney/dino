@@ -4,7 +4,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		label="Roulette Main Menu",
-		fn=func(): Navi.nav_to("res://src/dino/roulette/RouletteMainMenu.tscn"),
+		fn=func(): Navi.nav_to("res://src/dino/menus/RouletteMainMenu.tscn"),
 	},
 	{
 		label="Back to Dino Menu",

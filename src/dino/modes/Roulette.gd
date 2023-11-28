@@ -82,6 +82,9 @@ func update_game_ids(games):
 	current_game_entity = null
 	game_ids = games.map(func(e): return e.get_entity_id())
 
+func update_player_entity(ent: DinoPlayerEntity):
+	player_entity = ent
+
 ## launch_game ##################################################3
 
 func setup_game(node):

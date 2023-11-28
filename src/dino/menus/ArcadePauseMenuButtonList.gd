@@ -4,7 +4,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		label="Arcade Main Menu",
-		fn=func(): Navi.nav_to("res://src/dino/arcade/ArcadeMainMenu.tscn"),
+		fn=func(): Navi.nav_to("res://src/dino/menus/ArcadeMainMenu.tscn"),
 	},
 	{
 		label="Back to Dino Menu",

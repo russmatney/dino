@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://ca57linvp4uxm"]
 
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mxvc2"]
-[ext_resource type="Script" path="res://src/dino/menus/RouletteMainMenu.gd" id="1_oluih"]
-[ext_resource type="Script" path="res://addons/navi/NaviButtonList.gd" id="3_mrnfn"]
+[ext_resource type="Script" path="res://src/dino/menus/RouletteMainMenu.gd" id="1_lm481"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2_cs5qr"]
+[ext_resource type="Script" path="res://addons/navi/NaviButtonList.gd" id="3_x823t"]
 
 [node name="RouletteMainMenu" type="CanvasLayer" groups=["menus"]]
-script = ExtResource("1_oluih")
+script = ExtResource("1_lm481")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
@@ -22,7 +22,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_mxvc2")]
+[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_cs5qr")]
 layout_mode = 2
 text = "[center]Dino Roulette!"
 
@@ -35,14 +35,27 @@ size_flags_vertical = 3
 layout_mode = 2
 alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 432)
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 182)
+layout_mode = 2
+
+[node name="PlayersGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 282)
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 5
@@ -54,14 +67,7 @@ layout_mode = 2
 [node name="ButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("3_mrnfn")
-
-[node name="ScrollContainer2" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="PlayersGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
+script = ExtResource("3_x823t")
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bpvhxndrptbgv"]
 
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_mrc12"]
-[ext_resource type="Script" path="res://src/dino/arcade/ArcadePauseMenuButtonList.gd" id="2_b810k"]
-[ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/brick/BrickRegenMenu.tscn" id="2_cuxsf"]
-[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="4_jrnr6"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1_2lj36"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="2_3awy4"]
+[ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/brick/BrickRegenMenu.tscn" id="3_fpqof"]
+[ext_resource type="Script" path="res://src/dino/menus/ArcadePauseMenuButtonList.gd" id="4_b1wha"]
 
 [node name="ArcadePauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -23,7 +23,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_mrc12")]
+[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1_2lj36")]
 layout_mode = 2
 text = "[center]Dino Arcade!"
 
@@ -35,7 +35,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="QuestStatus" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_jrnr6")]
+[node name="QuestStatus" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_3awy4")]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -43,7 +43,7 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_cuxsf")]
+[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_fpqof")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -55,7 +55,7 @@ layout_mode = 2
 [node name="ArcadePauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 1
-script = ExtResource("2_b810k")
+script = ExtResource("4_b1wha")
 
 [node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(50, 50)
