@@ -14,6 +14,12 @@ var player_group = "player"
 enum PlayerType {SideScroller, TopDown, BeatEmUp}
 var player_type: PlayerType
 
+## entities #################################################
+
+func all_player_entities():
+	var ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+
 ## player_scene #################################################
 
 # setup player type and a fallback scene for the passed game entity

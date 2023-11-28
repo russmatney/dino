@@ -2,11 +2,16 @@
 extends CanvasLayer
 
 @onready var games_grid_container = $%GamesGridContainer
+@onready var players_grid_container = $%PlayersGridContainer
 @onready var button_list = $%ButtonList
 
 var game_button = preload("res://src/dino/menus/GameButton.tscn")
 var game_entities = []
 var selected_game_entities = []
+
+var player_button = preload("res://src/dino/menus/PlayerButton.tscn")
+var player_entities = []
+var selected_player_entity
 
 ## ready ##################################################
 
@@ -15,7 +20,8 @@ func _ready():
 		request_ready()
 
 	build_games_grid()
-	reset_menu_buttons()
+	build_players_grid()
+	reset_ui()
 
 	DJ.resume_menu_song()
 	set_focus()
@@ -27,6 +33,17 @@ func set_focus():
 	if len(chs) > 0:
 		chs[0].set_focus()
 
+## reset ui ##################################################
+
+func reset_ui():
+	reset_menu_buttons()
+
+	for ch in games_grid_container.get_children():
+		ch.is_selected = ch.game_entity in selected_game_entities
+
+	for pl in players_grid_container.get_children():
+		pl.is_selected = pl.player_entity == selected_player_entity
+
 ## games grid ##################################################
 
 func select_game(game_entity):
@@ -36,12 +53,6 @@ func select_game(game_entity):
 		selected_game_entities.append(game_entity)
 
 	reset_ui()
-
-func reset_ui():
-	reset_menu_buttons()
-
-	for ch in games_grid_container.get_children():
-		ch.is_selected = ch.game_entity in selected_game_entities
 
 func build_games_grid():
 	game_entities = Game.all_game_entities()
@@ -54,12 +65,30 @@ func build_games_grid():
 		button.icon_pressed.connect(func(): select_game(gm))
 		games_grid_container.add_child(button)
 
+## players grid ##################################################
+
+func select_player(player_entity):
+	selected_player_entity = player_entity
+	reset_ui()
+
+func build_players_grid():
+	player_entities = P.all_player_entities()
+	selected_player_entity = player_entities[0]
+	U.free_children(players_grid_container)
+
+	for pl in player_entities:
+		var button = player_button.instantiate()
+		button.set_player_entity(pl)
+		button.icon_pressed.connect(func(): select_player(pl))
+		players_grid_container.add_child(button)
+
 ## start game ##################################################
 
-var roulette_scene = "res://src/dino/roulette/Roulette.tscn"
-func start_with_games(ents):
+var roulette_scene = preload("res://src/dino/modes/Roulette.tscn")
+func start():
 	Navi.nav_to(roulette_scene, {setup=func(scene):
-		scene.update_game_ids(ents)
+		scene.update_game_ids(selected_game_entities)
+		scene.update_player_entity(selected_player_entity)
 		})
 
 ## menu buttons ##################################################
@@ -69,7 +98,7 @@ func get_menu_buttons():
 		{
 			label="Start with %d games!" % len(selected_game_entities),
 			is_disabled=func(): return len(selected_game_entities) < 1,
-			fn=func(): start_with_games(selected_game_entities),
+			fn=start,
 		},
 		{
 			label="Deselect all",
