@@ -62,7 +62,7 @@
 				"_icon_color": "00a4ffff",
 				"_id": "69",
 				"_ids_generation_class": "DinoPlayerEntityIds",
-				"_index": 0,
+				"_index": 1,
 				"_name": "DinoPlayer",
 				"_script_path": "res://src/dino/players/DinoPlayerEntity.gd"
 			}

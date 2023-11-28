@@ -80,6 +80,13 @@ func _ready():
 		if has_boomerang:
 			add_boomerang()
 
+	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, true)
+	set_collision_mask_value(1, true)
+	set_collision_mask_value(4, true)
+	set_collision_mask_value(5, true)
+	set_collision_mask_value(6, true)
+
 	super._ready()
 
 ## hotel data ##########################################################################

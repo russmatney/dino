@@ -17,6 +17,7 @@ var fb_game_ids = [
 	DinoGameEntityIds.PLUGGS,
 	]
 
+@export var player_entity: DinoPlayerEntity
 @export var current_game_entity: DinoGameEntity
 var played_game_records = []
 var game_node: Node2D
@@ -40,6 +41,9 @@ func _ready():
 	_seed = randi()
 	Log.pr("Roulette ready with seed!", _seed)
 	seed(_seed)
+
+	if player_entity == null:
+		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 
 	start_round(current_game_entity)
 
@@ -97,6 +101,7 @@ func launch_game(entity):
 		game_node.queue_free()
 
 	P.setup_player(entity)
+	P.set_player_entity(player_entity)
 
 	var scene = entity.get_first_level_scene()
 	game_node = scene.instantiate()

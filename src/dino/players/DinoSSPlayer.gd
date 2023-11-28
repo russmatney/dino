@@ -11,6 +11,9 @@ func _ready():
 			proximity_min=100,
 			proximity_max=450,
 			})
+
+	has_gun = true
+	has_boomerang = true
 	super._ready()
 
 ## collect ##################################################################

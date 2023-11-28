@@ -13,6 +13,7 @@ var game_ids = [
 	]
 
 @export var current_game_entity: DinoGameEntity
+@export var player_entity: DinoPlayerEntity
 var game_node: Node2D
 
 @export var _seed: int
@@ -33,6 +34,9 @@ func _ready():
 	var entity = current_game_entity
 	if not entity:
 		entity = random_game()
+
+	if player_entity == null:
+		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 
 	if not entity:
 		Log.warn("Could not find game_entity!")
@@ -67,6 +71,7 @@ func launch_game(entity=null):
 		game_node.queue_free()
 
 	P.setup_player(entity)
+	P.set_player_entity(player_entity)
 
 	var scene = entity.get_first_level_scene()
 	game_node = scene.instantiate()

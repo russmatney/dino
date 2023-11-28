@@ -13,14 +13,14 @@ func _on_enemy_update(entry):
 
 @onready var player_status = $%PlayerStatus
 
-var player_portrait = preload("res://src/spike/assets/status_portraits12.png")
+# var player_portrait = preload("res://src/spike/assets/status_portraits12.png")
 
 func update_player(entry):
 	if "health" in entry:
 		player_status.set_status({
 			health=entry.get("health"),
 			name=entry.get("display_name", entry.get("name")),
-			texture=player_portrait,
+			# texture=player_portrait,
 			})
 
 
