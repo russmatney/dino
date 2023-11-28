@@ -14,6 +14,12 @@ func _ready():
 
 	has_gun = true
 	has_boomerang = true
+	has_double_jump = true
+
+	# has_climb = true
+	# has_jetpack = true
+	# has_dash = false
+
 	super._ready()
 
 ## collect ##################################################################
