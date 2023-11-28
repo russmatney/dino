@@ -898,6 +898,10 @@
 						"type": "string",
 						"value": "Hat Bot"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/players/hatbot/greyhat_portrait1.png"
+					},
 					"sidescroller_scene": {
 						"type": "resource",
 						"value": "res://src/dino/players/hatbot/SSHatBot.tscn"
@@ -918,6 +922,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Romeo"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/players/romeo/romeo_portrait1.png"
 					}
 				}
 			},
@@ -934,7 +942,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/players/hoodie/status_portraits12.png"
+						"value": "res://src/dino/players/hoodie/soft-soft-hoodie_portrait1.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
@@ -952,6 +960,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Hairo"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/players/hairo/topdown_player_portrait1.png"
 					},
 					"topdown_scene": {
 						"type": "resource",
