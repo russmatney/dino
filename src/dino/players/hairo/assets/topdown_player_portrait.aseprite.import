@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dbibq2h4p7qtg"
+path="res://.godot/imported/topdown_player_portrait.aseprite-b75250e9d8c2ee65efd1fcb4e355bcc7.res"
+
+[deps]
+
+source_file="res://src/dino/players/hairo/assets/topdown_player_portrait.aseprite"
+dest_files=["res://.godot/imported/topdown_player_portrait.aseprite-b75250e9d8c2ee65efd1fcb4e355bcc7.res"]
+
+[params]
+

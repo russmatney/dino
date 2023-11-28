@@ -280,6 +280,10 @@
 						"type": "resource",
 						"value": "res://src/superElevatorLevel/players/PlayerOne.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "beatemup"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/superElevatorLevel"
@@ -316,6 +320,10 @@
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/spike/player/Player.tscn"
+					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -354,6 +362,10 @@
 						"type": "resource",
 						"value": "res://src/shirt/player/Player.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "topdown"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/shirt"
@@ -390,6 +402,10 @@
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/hatbot/player/Player.tscn"
+					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -432,6 +448,10 @@
 						"type": "resource",
 						"value": "res://src/mountain/player/Player.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/mountain"
@@ -468,6 +488,10 @@
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/ghosts/player/Player.tscn"
+					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -506,6 +530,10 @@
 						"type": "resource",
 						"value": "res://src/gunner/player/Player.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/tower"
@@ -538,6 +566,10 @@
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/gunner/player/Player.tscn"
+					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -576,6 +608,10 @@
 						"type": "resource",
 						"value": "res://src/harvey/player/HarveyPlayer.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "topdown"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/harvey"
@@ -609,6 +645,10 @@
 						"type": "resource",
 						"value": "res://src/herd/player/Player.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "topdown"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/herd"
@@ -637,6 +677,10 @@
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/hatbot/player/Player.tscn"
+					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -675,6 +719,10 @@
 						"type": "resource",
 						"value": "res://src/pluggs/player/Pluggs.tscn"
 					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
+					},
 					"scene_path_prefix": {
 						"type": "string",
 						"value": "res://src/pluggs"
@@ -711,6 +759,10 @@
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/woods/player/WoodsPlayer.tscn"
+					},
+					"player_type": {
+						"type": "string",
+						"value": "sidescroller"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -894,17 +946,25 @@
 				"_index": 0,
 				"_name": "HatBotPlayer",
 				"_property_overrides": {
+					"beatemup_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hatbot/BEUHatBot.tscn"
+					},
 					"display_name": {
 						"type": "string",
 						"value": "Hat Bot"
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/players/hatbot/greyhat_portrait1.png"
+						"value": "res://src/dino/players/hatbot/assets/greyhat_portrait1.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
 						"value": "res://src/dino/players/hatbot/SSHatBot.tscn"
+					},
+					"topdown_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hatbot/TDHatBot.tscn"
 					}
 				}
 			},
@@ -925,7 +985,15 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/players/romeo/romeo_portrait1.png"
+						"value": "res://src/dino/players/romeo/assets/romeo_portrait1.png"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/romeo/SSRomeo.tscn"
+					},
+					"topdown_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/romeo/TDRomeo.tscn"
 					}
 				}
 			},
@@ -936,17 +1004,25 @@
 				"_index": 0,
 				"_name": "HoodiePlayer",
 				"_property_overrides": {
+					"beatemup_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hoodie/BEUHoodie.tscn"
+					},
 					"display_name": {
 						"type": "string",
 						"value": "Hoodie"
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/players/hoodie/soft-soft-hoodie_portrait1.png"
+						"value": "res://src/dino/players/hoodie/assets/soft-soft-hoodie_portrait1.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
 						"value": "res://src/dino/players/hoodie/SSHoodie.tscn"
+					},
+					"topdown_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hoodie/TDHoodie.tscn"
 					}
 				}
 			},
@@ -957,13 +1033,21 @@
 				"_index": 0,
 				"_name": "HarioPlayer",
 				"_property_overrides": {
+					"beatemup_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hairo/BEUHairo.tscn"
+					},
 					"display_name": {
 						"type": "string",
 						"value": "Hairo"
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/players/hairo/topdown_player_portrait1.png"
+						"value": "res://src/dino/players/hairo/assets/topdown_player_portrait1.png"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/hairo/SSHairo.tscn"
 					},
 					"topdown_scene": {
 						"type": "resource",
@@ -1149,12 +1233,19 @@
 				"_id": "78",
 				"_name": "icon_texture",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": "",
+				"_id": "79",
+				"_name": "player_type",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 78
+			"default": 79
 		}
 	}
 }

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://s65uhhmekk0m"
+path="res://.godot/imported/soft-soft-hoodie_portrait.aseprite-7a67fe9bf36191cb2b5a31563ca55dd6.res"
+
+[deps]
+
+source_file="res://src/dino/players/hoodie/assets/soft-soft-hoodie_portrait.aseprite"
+dest_files=["res://.godot/imported/soft-soft-hoodie_portrait.aseprite-7a67fe9bf36191cb2b5a31563ca55dd6.res"]
+
+[params]
+

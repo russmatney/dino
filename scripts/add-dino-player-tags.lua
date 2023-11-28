@@ -11,7 +11,8 @@ local tags = {
   "_dead",
 
   -- SS tags
-  "running", "air",
+  "running", -- TODO move SS from 'run' to 'running'
+  "air",
   "_knocked_back", "_dying",
 
   -- TD tags

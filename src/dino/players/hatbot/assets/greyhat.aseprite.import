@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://gggf63p6imy8"
+path="res://.godot/imported/greyhat.aseprite-f318bbdab56cd7c2ecbb3c83c4c71b96.res"
+
+[deps]
+
+source_file="res://src/dino/players/hatbot/assets/greyhat.aseprite"
+dest_files=["res://.godot/imported/greyhat.aseprite-f318bbdab56cd7c2ecbb3c83c4c71b96.res"]
+
+[params]
+

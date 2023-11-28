@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bqkxsle2dv3vr"
+path="res://.godot/imported/BEU_player_one.aseprite-184e7bf1d65b92009e14a6fcf29b07a9.res"
+
+[deps]
+
+source_file="res://src/dino/players/romeo/assets/BEU_player_one.aseprite"
+dest_files=["res://.godot/imported/BEU_player_one.aseprite-184e7bf1d65b92009e14a6fcf29b07a9.res"]
+
+[params]
+
