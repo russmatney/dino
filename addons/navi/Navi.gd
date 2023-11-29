@@ -101,7 +101,7 @@ func find_focus(scene=null):
 
 # Supports a path, packed_scene, or instance of a scene
 func nav_to(scene, opts={}):
-	Log.prn("nav_to: ", scene)
+	Log.prn("nav_to: ", scene, opts)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(scene)
 	hide_menus()
@@ -111,9 +111,9 @@ func nav_to(scene, opts={}):
 
 func _deferred_goto_scene(scene, opts={}):
 	if first_scene != null and is_instance_valid(first_scene):
-		first_scene.free()
+		first_scene.queue_free()
 	if current_scene != null and is_instance_valid(current_scene):
-		current_scene.free()
+		current_scene.queue_free()
 
 	var next_scene
 	if scene is String:
@@ -126,10 +126,10 @@ func _deferred_goto_scene(scene, opts={}):
 		next_scene = scene
 
 	if "setup" in opts:
-		opts.setup.call(next_scene)
+		if opts.setup != null:
+			opts.setup.call(next_scene)
 
 	current_scene = next_scene
-	Log.prn("New current_scene: ", current_scene)
 
 	# Add it as a child of root
 	get_tree().get_root().add_child(current_scene)
