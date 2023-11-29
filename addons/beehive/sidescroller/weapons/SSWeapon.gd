@@ -4,8 +4,7 @@ class_name SSWeapon
 func _get_configuration_warnings():
 	return U._config_warning(self, {expected_nodes=[]})
 
-######################################################
-# vars
+## vars #####################################################
 
 var anim
 var hitbox
@@ -16,8 +15,12 @@ var actor
 
 var should_flip = true
 
-######################################################
-# ready
+## enter_tree #####################################################
+
+func _enter_tree():
+	add_to_group("weapons", true)
+
+## ready #####################################################
 
 func _ready():
 	actor = get_parent()
@@ -43,9 +46,7 @@ func _ready():
 		hitbox.body_shape_entered.connect(_on_body_shape_entered)
 		hitbox.body_shape_exited.connect(_on_body_shape_exited)
 
-
-######################################################
-# public api
+## public api #####################################################
 
 func aim(aim_vector: Vector2):
 	Log.pr("impl aim!", self)
@@ -62,8 +63,7 @@ func use():
 func stop_using():
 	Log.pr("impl stop using!", self)
 
-######################################################
-# helpers
+## helpers #####################################################
 
 func _on_animation_finished():
 	pass
@@ -71,8 +71,7 @@ func _on_animation_finished():
 func _on_frame_changed():
 	pass
 
-######################################################
-# bodies
+## bodies #####################################################
 
 var bodies = []
 var body_shapes = []

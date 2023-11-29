@@ -46,3 +46,5 @@ func _on_body_entered(body: Node2D):
 		if body.has_method("kill"):
 			body.kill()
 		kill()
+	if body.is_in_group("weapons"):
+		kill()
