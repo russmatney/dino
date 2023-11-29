@@ -10,7 +10,7 @@ var cooking = false
 var cooking_time = 0.0
 
 const cook_duration = 3.0
-const required_ingredient_count = 3
+const required_ingredient_count = 1 # 3
 
 func set_label(text):
 	label.text = "[center]%s[/center]" % text

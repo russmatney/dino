@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="5_66onq"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="6_xes5p"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_q0s7p"]
-[ext_resource type="Texture2D" path="res://addons/core/assets/lights/light64px4.png" id="8_yatdx"]
+[ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://addons/core/assets/lights/light64px4.png" id="8_yatdx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_brt85"]
 
@@ -210,12 +210,13 @@ size = Vector2(236, 132)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 3073
+collision_mask = 3129
 script = ExtResource("1_pq3nr")
 has_boomerang = true
 jump_time = 0.5
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 clip_contents = false
 offset_left = -24.0
 offset_top = 16.0
