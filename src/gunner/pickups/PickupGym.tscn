@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://chy1v6mscw7ar"]
 
-[ext_resource type="PackedScene" path="res://src/gunner/player/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://djculbglj2yia" path="res://src/dino/players/hatbot/SSHatBot.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dvuq5awybwrvr" path="res://src/gunner/pickups/Hat.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://b0tvu2n4gaf67" path="res://src/gunner/pickups/Body.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="5"]
