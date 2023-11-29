@@ -10,12 +10,14 @@ func _enter_tree():
 var skip_cam_setup = false
 
 func _ready():
-	set_collision_layer_value(1, false)
-	set_collision_layer_value(2, true) # Player
+	set_collision_layer_value(1, false) # walls,doors,env
+	set_collision_layer_value(2, true) # player
 	set_collision_mask_value(1, true)
-	set_collision_mask_value(4, true) # Enemies
-	set_collision_mask_value(5, true) # Enemy projectiles
-	set_collision_mask_value(6, true) # Items
+	set_collision_mask_value(4, true) # enemies
+	set_collision_mask_value(5, true) # enemy projectiles
+	set_collision_mask_value(6, true) # items
+	set_collision_mask_value(11, true) # fences, low-walls
+	set_collision_mask_value(12, true) # spikes
 
 	if not Engine.is_editor_hint() and not skip_cam_setup:
 		Cam.request_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
