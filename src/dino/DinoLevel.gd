@@ -82,3 +82,15 @@ func on_quest_failed():
 
 func add_child_to_level(_node, child):
 	$Entities.add_child(child)
+
+## player reactions ##################################################3
+
+func _on_player_death(_p):
+	# TODO show player lifespan/stats/progress? (hopefully not per player-type! should be in game-mode/dino-level)
+	# inspiration: Spelunky, Ape Out
+	# ideas: framing the dead player, splashy letters in sync with drums
+
+	# possibly we could share/re-use this, but meh, it'll probably need specific text
+	Jumbotron.jumbo_notif({header="You died", body="Sorry about it!",
+		action="close", action_label_text="Respawn",
+		on_close=Navi.nav_to_main_menu()})

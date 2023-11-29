@@ -11,7 +11,22 @@ var shrine_gems = 0
 func _ready():
 	if not Engine.is_editor_hint():
 		Cam.request_camera({player=self, zoom_rect_min=zoom_rect_min, zoom_margin_min=zoom_margin_min})
+
+		died.connect(_on_player_death)
+
+		var level = U.find_level_root(self)
+		if level.has_method("_on_player_death"):
+			died.connect(level._on_player_death.bind(self))
+
 	super._ready()
+
+func _on_player_death():
+	stamp({ttl=0}) # perma stamp
+
+	var t = create_tween()
+	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
+	# if light:
+	# 	t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
 
 ## death #######################################################
 

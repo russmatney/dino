@@ -295,7 +295,7 @@ func recover_health(h=null):
 ## death ###########################################################
 
 signal died()
-signal dying()
+signal dying(body)
 
 func die(opts={}):
 	dying.emit(self)
