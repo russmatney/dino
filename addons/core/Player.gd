@@ -5,8 +5,9 @@ extends Node
 
 signal player_ready
 
+# some of these states might be problemmatic as an autoload
+# we might want to manage more than one player at once
 var player
-var fallback_player_scene
 var player_scene
 var player_entity
 var player_group = "player"
@@ -22,8 +23,14 @@ func all_player_entities():
 
 ## player_scene #################################################
 
-# setup player type and a fallback scene for the passed game entity
+# If the game specifies a player_scene, set that.
+# Otherwise, set the player type based on the game's player_type
 func setup_player(game: DinoGameEntity):
+	var ps = game.get_player_scene()
+	if ps:
+		player_scene = ps
+		return
+
 	var typ = game.get_player_type()
 	if typ != null:
 		match typ:
@@ -31,9 +38,9 @@ func setup_player(game: DinoGameEntity):
 			"topdown": set_player_type(PlayerType.TopDown)
 			"beatemup": set_player_type(PlayerType.BeatEmUp)
 
-	var ps = game.get_player_scene()
-	if ps:
-		fallback_player_scene = ps
+# we'll probably want to call this at some point
+func clear_player_scene():
+	player_scene = null
 
 func set_player_entity(ent):
 	player_entity = ent
@@ -44,8 +51,11 @@ func set_player_type(player_type: PlayerType):
 	# do more get_player_scene logic here?
 
 func get_player_scene():
-	# consider smthihng like:
+	# consider smthihng like this here, or persisting the game from setup_player():
 	# var game = Game.get_current_game()
+
+	if player_scene:
+		return player_scene
 
 	var p_scene
 	if player_entity != null and player_type != null:
@@ -57,10 +67,6 @@ func get_player_scene():
 	if p_scene != null:
 		return p_scene
 	Log.warn("No player scene found for player_entity and player_type", player_entity, player_type)
-
-	if fallback_player_scene:
-		return fallback_player_scene
-	Log.pr("No fallback_player_scene set")
 
 ## get player #################################################
 

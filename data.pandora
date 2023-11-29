@@ -54,7 +54,13 @@
 				"_icon_color": "ffffff00",
 				"_id": "65",
 				"_index": 0,
-				"_name": "GameMode"
+				"_name": "GameMode",
+				"_property_overrides": {
+					"enabled": {
+						"type": "bool",
+						"value": false
+					}
+				}
 			},
 			{
 				"_category_id": "",
@@ -276,10 +282,6 @@
 						"type": "resource",
 						"value": "res://src/superElevatorLevel/menus/MainMenu.tscn"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/superElevatorLevel/players/PlayerOne.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "beatemup"
@@ -316,10 +318,6 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/spike/menus/PauseMenu.tscn"
-					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/spike/player/Player.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -358,10 +356,6 @@
 						"type": "resource",
 						"value": "res://src/shirt/menus/PauseMenu.tscn"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/shirt/player/Player.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
@@ -398,10 +392,6 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/hatbot/menus/MainMenu.tscn"
-					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/hatbot/player/Player.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -444,10 +434,6 @@
 						"type": "resource",
 						"value": "res://src/mountain/menus/PauseMenu.tscn"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/mountain/player/Player.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -484,10 +470,6 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/ghosts/GhostsMenu.tscn"
-					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/ghosts/player/Player.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -526,10 +508,6 @@
 						"type": "resource",
 						"value": "res://src/tower/menus/TowerPauseMenu.tscn"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/gunner/player/Player.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -562,10 +540,6 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/gunner/menus/GunnerPauseMenu.tscn"
-					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/gunner/player/Player.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -674,10 +648,6 @@
 						"type": "resource",
 						"value": "res://src/demoland/zones/area01/Area01.tscn"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/hatbot/player/Player.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -755,10 +725,6 @@
 					"pause_menu": {
 						"type": "resource",
 						"value": "res://src/woods/menus/PauseMenu.tscn"
-					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/woods/player/WoodsPlayer.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -886,6 +852,10 @@
 						"type": "string",
 						"value": "Roulette"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": true
+					},
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/dino/modes/Roulette.tscn"
@@ -920,6 +890,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Arcade"
+					},
+					"enabled": {
+						"type": "bool",
+						"value": true
 					},
 					"first_level": {
 						"type": "resource",
