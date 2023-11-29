@@ -16,6 +16,7 @@ func _ready():
 	# TODO how to work with animations and positions after regen bug
 	# U.animate(self)
 	# U.animate_rotate(self)
+	area_entered.connect(_on_body_entered)
 	body_entered.connect(_on_body_entered)
 
 ## anim finished
@@ -46,5 +47,12 @@ func _on_body_entered(body: Node2D):
 		if body.has_method("kill"):
 			body.kill()
 		kill()
+		return
+
 	if body.is_in_group("weapons"):
 		kill()
+		return
+
+	if body.get_parent().is_in_group("weapons"):
+		kill()
+		return

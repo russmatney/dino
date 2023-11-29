@@ -16,7 +16,7 @@ func _ready():
 
 		var level = U.find_level_root(self)
 		if level.has_method("_on_player_death"):
-			died.connect(level._on_player_death.bind(self)
+			died.connect(level._on_player_death.bind(self))
 
 	has_gun = true
 	has_boomerang = true

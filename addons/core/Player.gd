@@ -30,9 +30,12 @@ func setup_player(game: DinoGameEntity):
 	if ps:
 		player_scene = ps
 		return
+	# no player on current game? be sure to clear the player_scene!
+	clear_player_scene()
 
 	var typ = game.get_player_type()
 	if typ != null:
+		Log.pr("game setting player type", game, typ)
 		match typ:
 			"sidescroller": set_player_type(PlayerType.SideScroller)
 			"topdown": set_player_type(PlayerType.TopDown)
@@ -46,11 +49,13 @@ func set_player_entity(ent):
 	player_entity = ent
 	# do more get_player_scene logic here?
 
-func set_player_type(player_type: PlayerType):
-	player_type = player_type
+func set_player_type(type: PlayerType):
+	Log.pr("game setting player type", type)
+	player_type = type
 	# do more get_player_scene logic here?
 
 func get_player_scene():
+	Log.pr("determining player scene", player_entity, player_type)
 	# consider smthihng like this here, or persisting the game from setup_player():
 	# var game = Game.get_current_game()
 
@@ -108,13 +113,6 @@ func respawn_player(opts={}):
 		return
 
 	Log.pr("Spawning new player")
-	# overwriting this is generally for debugging only
-	if opts.get("player_scene") == null:
-		if player_scene:
-			# support reading a cached player_scene
-			opts["player_scene"] = player_scene
-		else:
-			opts["player_scene"] = get_player_scene()
 
 	spawning = true
 	if player:
@@ -132,7 +130,7 @@ func _respawn_player(opts={}):
 		if spawn_point:
 			spawn_coords = spawn_point.global_position
 
-	var p_scene = opts.get("player_scene")
+	var p_scene = opts.get("player_scene", get_player_scene())
 	if p_scene == null:
 		Log.err("Could not determine player_scene, cannot respawn")
 		spawning = false
@@ -140,8 +138,7 @@ func _respawn_player(opts={}):
 	if p_scene is String:
 		p_scene = load(p_scene)
 
-	player_scene = p_scene
-	player = player_scene.instantiate()
+	player = p_scene.instantiate()
 
 	if spawn_coords != null:
 		player.position = spawn_coords

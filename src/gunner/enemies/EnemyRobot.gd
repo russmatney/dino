@@ -116,7 +116,7 @@ func take_hit(opts={}):
 
 func take_damage(opts={}):
 	var body = opts.get("body")
-	var d = opts.get("damage")
+	var d = opts.get("damage", 1)
 	Cam.freezeframe("enemy_damage_hitstop", 0.2, 0.3, 0.3)
 	health -= d
 	health_change.emit(health)
