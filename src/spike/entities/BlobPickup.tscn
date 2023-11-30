@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
 [node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -14.4689)
+position = Vector2(0, -20.3954)
 script = ExtResource("1_41a3b")
 
 [node name="Area2D" type="Area2D" parent="."]
