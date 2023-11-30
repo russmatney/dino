@@ -487,8 +487,9 @@ radius = 80.399
 
 [node name="TDRomeo" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 57
+collision_mask = 3129
 script = ExtResource("1_2sx3t")
+has_boomerang = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

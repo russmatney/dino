@@ -35,7 +35,6 @@ func setup_player(game: DinoGameEntity):
 
 	var typ = game.get_player_type()
 	if typ != null:
-		Log.pr("game setting player type", game, typ)
 		match typ:
 			"sidescroller": set_player_type(PlayerType.SideScroller)
 			"topdown": set_player_type(PlayerType.TopDown)
@@ -50,12 +49,10 @@ func set_player_entity(ent):
 	# do more get_player_scene logic here?
 
 func set_player_type(type: PlayerType):
-	Log.pr("game setting player type", type)
 	player_type = type
 	# do more get_player_scene logic here?
 
 func get_player_scene():
-	Log.pr("determining player scene", player_entity, player_type)
 	# consider smthihng like this here, or persisting the game from setup_player():
 	# var game = Game.get_current_game()
 
@@ -112,7 +109,7 @@ func respawn_player(opts={}):
 		Log.pr("player already spawning, skipping respawn_player")
 		return
 
-	Log.pr("Spawning new player")
+	Log.pr("Spawning new player", opts)
 
 	spawning = true
 	if player:

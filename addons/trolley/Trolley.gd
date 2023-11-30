@@ -161,7 +161,7 @@ func actions_for_input(event):
 
 ## simulate ################################################################
 
-func sim_action_pressed(action, release_after=null):
+func sim_action_pressed(action, release_after=null, released=null):
 	var evt = InputEventAction.new()
 	evt.action = action
 	evt.pressed = true
@@ -169,6 +169,8 @@ func sim_action_pressed(action, release_after=null):
 	if release_after != null:
 		await get_tree().create_timer(release_after).timeout
 		sim_action_released.call_deferred(action)
+		if released != null:
+			released.emit()
 
 func sim_action_released(action):
 	var evt = InputEventAction.new()
@@ -185,14 +187,13 @@ func attack(t=0.5):
 	else:
 		sim_action_pressed("attack")
 
-func sim_move(dir: Vector2, release_after=0.8):
+func sim_move(dir: Vector2, release_after=0.8, released=null):
 	match dir:
-		Vector2.LEFT: sim_action_pressed("move_left", release_after)
-		Vector2.RIGHT: sim_action_pressed("move_right", release_after)
-		Vector2.UP: sim_action_pressed("move_up", release_after)
-		Vector2.DOWN: sim_action_pressed("move_down", release_after)
+		Vector2.LEFT: sim_action_pressed("move_left", release_after, released)
+		Vector2.RIGHT: sim_action_pressed("move_right", release_after, released)
+		Vector2.UP: sim_action_pressed("move_up", release_after, released)
+		Vector2.DOWN: sim_action_pressed("move_down", release_after, released)
 		_: Log.warn("Not-impled: simulated input in non-cardinal directions", dir)
-
 
 
 ## public #################################################################

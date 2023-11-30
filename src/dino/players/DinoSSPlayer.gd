@@ -50,7 +50,6 @@ func collect(_entity, _opts={}):
 var is_spiking = false
 
 func _process(_delta):
-	# super._process(delta)
 	if orbit_items.size() == 0 and is_spiking == false:
 		remove_orbit_item_weapon()
 	else:

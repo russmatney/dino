@@ -18,7 +18,6 @@ var should_flip = true
 ## enter_tree #####################################################
 
 func _enter_tree():
-	Log.pr("weapon entering tree")
 	add_to_group("weapons", true)
 
 ## ready #####################################################
