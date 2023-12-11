@@ -11,6 +11,9 @@ signal level_setup
 var skip_splash_intro = false
 var skip_splash_outro = false
 
+var hud_scene = preload("res://src/dino/hud/DinoHUD.tscn")
+var hud
+
 ## ready ######################################################
 
 func _ready():
@@ -18,6 +21,8 @@ func _ready():
 		Log.error("DinoLevel missing expected 'LevelGen' node")
 
 	Log.pr("DinoLevel ready: ", name)
+	hud = hud_scene.instantiate()
+	add_child.call_deferred(hud)
 
 	# call setup_level every time we get new nodes
 	# could use a better name for :gen/finished-hook

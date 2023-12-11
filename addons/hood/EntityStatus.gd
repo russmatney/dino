@@ -12,16 +12,20 @@ var ttl
 func set_status(opts):
 	ttl = opts.get("ttl", ttl)
 
-	if opts.get("texture"):
-		portrait.set_texture(opts.get("texture"))
+	var ent = opts.get("entity")
+
+	var texture = opts.get("texture", ent.get_icon_texture() if ent else null)
+	if texture:
+		portrait.set_texture(texture)
 
 	if opts.get("key"):
 		key = opts.get("key")
 
-	if opts.get("name"):
+	var display_name = opts.get("name", ent.get_display_name() if ent else null)
+	if display_name:
 		if key == null:
-			key = opts.get("name")
-		entity_name.text = "%s" % opts.get("name")
+			key = display_name
+		entity_name.text = "%s" % display_name
 
 	var h = opts.get("health")
 	if h != null:

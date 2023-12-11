@@ -1,6 +1,6 @@
 extends DinoLevel
 
-@onready var hud = $HUD
+# @onready var hud = $HUD
 
 ## ready ########################################################################
 
