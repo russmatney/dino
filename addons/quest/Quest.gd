@@ -52,8 +52,11 @@ func setup():
 func update_quest(_x=null):
 	count_total_update.emit(total)
 
-	var remaining = get_xs.call().filter(is_remaining)
-	count_remaining_update.emit(len(remaining))
+	var remaining = len(get_xs.call().filter(is_remaining))
+	count_remaining_update.emit(remaining)
 
-	if len(remaining) == 0 and total > 0:
+	if has_method("on_quest_update"):
+		self["on_quest_update"].call({total=total, remaining=remaining})
+
+	if remaining == 0 and total > 0:
 		quest_complete.emit()

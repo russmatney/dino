@@ -71,20 +71,24 @@ func _on_hud_ready():
 ###########################################################################
 # notifs
 
-signal notification(text)
+signal notification(notif)
 
 var queued_notifs = []
 
 func notif(text, opts = {}):
 	Log.prn("notif: ", text)
-	if not hud:
-		queued_notifs.append([text, opts])
-		Log.prn("[INFO] no hud yet, queuing notification", [text, opts])
-		return
+	# TODO decide if this queuing is useful
+	# if not hud:
+	# 	queued_notifs.append([text, opts])
+	# 	Log.prn("[INFO] no hud yet, queuing notification", [text, opts])
+	# 	return
+	if text is Dictionary:
+		opts.merge(text)
+		text = opts.get("text", opts.get("msg"))
 	if typeof(opts) == TYPE_STRING or not opts is Dictionary:
 		text += str(opts)
 		opts = {}
-	opts["msg"] = text
+	opts["text"] = text
 	if not "ttl" in opts:
 		opts["ttl"] = 3.0
 	notification.emit(opts)
