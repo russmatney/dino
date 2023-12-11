@@ -669,6 +669,10 @@
 						"type": "string",
 						"value": "Pluggs"
 					},
+					"enabled": {
+						"type": "bool",
+						"value": false
+					},
 					"first_level": {
 						"type": "resource",
 						"value": "res://src/pluggs/level/PluggsLevel.tscn"
