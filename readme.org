@@ -42,8 +42,8 @@ You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind
 [[https://programming.dev/u/russmatney][lemmy]], or [[https://twitch.tv/russmatney][twitch]] for updates, or pop in [[https://discord.gg/xZHWtGfAvF][the discord]] and ping me. You can also
 support me on [[https://patreon.com/russmatney][Patreon]].
 
-* NOTE: Assets must be purchased before using!
-Dino's games and addons use third-party assets that must be purchased
+*** NOTE: Some included assets must be purchased to use
+Some of Dino's games and addons use third-party assets that must be purchased
 before use in your own project!
 
 Fonts:
