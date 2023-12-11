@@ -39,6 +39,8 @@ func regenerate(opts=null):
 	# i _think_ this helps support regen from the pause menu
 	level_opts = opts
 
+	hud.set_level_opts(opts)
+
 ## setup_level ###################################################3
 
 # recursively setup any signals and initial data

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://sisqkgg1lwpf"]
+[gd_scene load_steps=4 format=3 uid="uid://sisqkgg1lwpf"]
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="2_7c6hy"]
+[ext_resource type="PackedScene" uid="uid://rthdsotd137p" path="res://src/dino/hud/LevelOpts.tscn" id="3_40syy"]
 
 [node name="DinoHUD" type="CanvasLayer"]
 script = ExtResource("1_cqjfn")
@@ -20,6 +21,10 @@ layout_mode = 2
 [node name="Top" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/Top"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
 [node name="PlayerStatus" parent="VBoxContainer/Top" instance=ExtResource("2_7c6hy")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -27,6 +32,14 @@ layout_mode = 2
 [node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="LevelOpts" parent="VBoxContainer/Top" instance=ExtResource("3_40syy")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer/Top"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
