@@ -29,6 +29,8 @@ func update_player_status():
 		player_status.set_status({"entity": p_ent})
 
 func update_level_opts():
+	if level_opts == null:
+		return
 	var s = level_opts.get("seed", 0)
 	var ct = level_opts.get("room_count", 0)
 
