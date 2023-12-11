@@ -28,9 +28,6 @@ func resume_menu_song(song = null):
 			menu_song_player.play()
 
 func pause_menu_song():
-	if muted_music:
-		Log.warn("Cannot play menu song, music is muted")
-		return
 	menu_song_player.stop()
 	playback_pos = menu_song_player.get_playback_position()
 
@@ -154,9 +151,9 @@ var muted_sound = false
 var muted_music = false
 signal mute_toggle
 
-func mute_all():
-	toggle_mute_music(true)
-	toggle_mute_sound(true)
+func mute_all(should_mute=true):
+	toggle_mute_music(should_mute)
+	toggle_mute_sound(should_mute)
 
 func toggle_mute_music(should_mute=null):
 	if should_mute == null:
@@ -166,8 +163,11 @@ func toggle_mute_music(should_mute=null):
 
 	if muted_music:
 		pause_game_song()
+		pause_menu_song()
 	else:
+		# TODO refactor to avoid multiple songs playing at the same time
 		resume_game_song()
+		resume_menu_song()
 
 	mute_toggle.emit()
 

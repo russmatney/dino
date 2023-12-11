@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2ipf7t7godiy"]
+[gd_scene load_steps=5 format=3 uid="uid://d2ipf7t7godiy"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/dino/menus/DinoMenu.gd" id="2"]
 [ext_resource type="Script" path="res://src/dino/menus/OtherList.gd" id="3_odklj"]
+[ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/dj/MuteButtonList.tscn" id="4_iavjf"]
 
 [node name="DinoMenu" type="CanvasLayer" groups=["menus"]]
 script = ExtResource("2")
@@ -58,10 +59,17 @@ custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OtherButtons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="OtherButtons" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 script = ExtResource("3_odklj")
+
+[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_iavjf")]
+layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(25, 0)
@@ -69,6 +77,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
