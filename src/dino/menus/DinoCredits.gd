@@ -162,6 +162,7 @@ var dino_credits = [
 	"Alex Chojnacki",
 	"Aspen Smith",
 	"Jake Bartlam",
+	"Ellie Matney",
 	],
     [
 	"Many thanks to all the testers and brainstormers who listened and gave feedback!",
