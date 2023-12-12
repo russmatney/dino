@@ -3,13 +3,9 @@ extends SSPlayer
 
 ## ready ##################################################################
 
-var hud = preload("res://src/hatbot/hud/HUD.tscn")
-
 func _ready():
 	if not Engine.is_editor_hint():
 		Cam.request_camera({player=self})
-		Hood.ensure_hud(hud)
-
 		# powerups = SSData.all_powerups
 
 		died.connect(_on_player_death)

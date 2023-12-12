@@ -265,7 +265,6 @@ func rebuild_nodes():
 
 	if not Engine.is_editor_hint():
 		ensure_camera_anchor()
-		Hood.ensure_hud(DHData.hud_scene)
 
 	for y in len(state.grid):
 		for x in len(state.grid[y]):

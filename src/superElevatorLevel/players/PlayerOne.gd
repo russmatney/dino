@@ -6,13 +6,9 @@ extends BEUPlayer
 	preload("res://src/superElevatorLevel/players/PlayerOneAlt2.tres"),
 	]
 
-var hud = preload("res://src/superElevatorLevel/hud/HUD.tscn")
-
 ## ready ###########################################################
 
 func _ready():
-	if not Engine.is_editor_hint():
-		Hood.ensure_hud(hud)
 	super._ready()
 
 	if not Engine.is_editor_hint():

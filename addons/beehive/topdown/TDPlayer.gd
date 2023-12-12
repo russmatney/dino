@@ -39,9 +39,6 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		Cam.request_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
-		# support some assigned 'hud'
-		Hood.ensure_hud(self.get("hud"))
-
 		action_detector.setup(self, {actions=[], action_hint=action_hint})
 
 		if has_boomerang:

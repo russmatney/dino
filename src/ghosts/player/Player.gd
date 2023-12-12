@@ -5,11 +5,8 @@ var tween
 
 ############################################################
 
-var hud = preload("res://src/ghosts/hud/HUD.tscn")
-
 func _ready():
 	if not Engine.is_editor_hint():
-		Hood.ensure_hud(hud)
 		Cam.request_camera({
 			player=self,
 			zoom_rect_min=400,

@@ -12,12 +12,9 @@ var health = 6
 ######################################################
 # ready
 
-var hud = preload("res://src/herd/hud/HUD.tscn")
-
 func _ready():
 	DJZ.play(DJZ.S.land)
 	Hotel.register(self)
-	Hood.ensure_hud(hud)
 	Cam.request_camera({player=self,
 		zoom_margin_min=100,
 		zoom_rect_min=150,

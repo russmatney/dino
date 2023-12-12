@@ -7,8 +7,8 @@ var game
 func before_all():
 	game = load("res://src/dotHop/DotHopGame.tscn").instantiate()
 	add_child(game)
-	if not Hood.hud.is_node_ready():
-		await Hood.hud_ready
+	# if not Hood.hud.is_node_ready():
+	# 	await Hood.hud_ready
 
 func after_all():
 	game.free()

@@ -24,8 +24,6 @@ func setup_regen_menu(g):
 			fn=func():
 			g.room_count += 1
 			g.generate()
-			await g.nodes_transferred
-			P.respawn_player()
 			refresh()
 			})
 	menu.add_menu_item(
@@ -34,16 +32,12 @@ func setup_regen_menu(g):
 			g.room_count -= 1
 			g.room_count = max(1, g.room_count)
 			g.generate()
-			await g.nodes_transferred
-			P.respawn_player()
 			refresh()
 			})
 	menu.add_menu_item(
 		{label="Regenerate Level",
 			fn=func():
 			g.generate()
-			await g.nodes_transferred
-			P.respawn_player()
 			refresh()
 			})
 	menu.add_menu_item(
@@ -51,8 +45,6 @@ func setup_regen_menu(g):
 			fn=func():
 			g._seed = randi()
 			g.generate()
-			await g.nodes_transferred
-			P.respawn_player()
 			refresh()
 			})
 

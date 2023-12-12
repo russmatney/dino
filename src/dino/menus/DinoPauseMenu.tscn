@@ -27,6 +27,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("2_v0p6k")]
+unique_name_in_owner = true
 layout_mode = 2
 text = "[center]Dino Roulette!"
 
@@ -34,48 +35,37 @@ text = "[center]Dino Roulette!"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 2
 
-[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-
-[node name="QuestStatus" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_gr3ki")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+[node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_gr3ki")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_oarvi")]
+[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_oarvi")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="DinoPauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="DinoPauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("4_wcgkx")
 
-[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_ai6py")]
+[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/TabContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_ai6py")]
 layout_mode = 2
-
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
