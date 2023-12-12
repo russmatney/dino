@@ -15,11 +15,18 @@ var scene_ready
 		if txt and scene_ready:
 			_on_notification({"msg": txt, "rich": true})
 
+@export var _clear : bool :
+	set(v):
+		for ch in get_children():
+			ch.queue_free()
+
+@export var side = "left"
+
 #############################################################
 
 func _ready():
 	Hood.notification.connect(_on_notification)
-	Hood.notif("[HOOD] Notifications online.")
+	Hood.notif("[HOOD] Notifications online.", {id="initial"})
 	scene_ready = true
 
 #############################################################
@@ -29,12 +36,13 @@ var notif_rich_label = preload("res://addons/hood/NotifRichLabel.tscn")
 
 var id_notifs = {}
 
-# TODO support 'id' on notifs so we can update them in-place
 # TODO support passed icon to decorate the notif/toast
 func _on_notification(notif: Dictionary):
 	var lbl
 
-	var id = notif.get("id")
+	var text = notif.get("text", notif.get("msg"))
+
+	var id = notif.get("id", text)
 	var found_existing = false
 	if id != null:
 		if id in id_notifs:
@@ -42,21 +50,18 @@ func _on_notification(notif: Dictionary):
 			if is_instance_valid(l) and not l.is_queued_for_deletion():
 				lbl = l
 				found_existing = true
-				# TODO reset ttl/countdown, pull up to top
 			else:
 				id_notifs.erase(id)
 
-	var text = notif.get("text", notif.get("msg"))
-
 	if not found_existing and notif.get("rich"):
 		lbl = notif_rich_label.instantiate()
-		lbl.text = "[right]%s[/right]" % text
+		lbl.text = "[%s]%s[/%s]" % [side, text, side]
 	elif not found_existing:
 		lbl = notif_label.instantiate()
 		lbl.text = text
 
 	if notif.get("rich"):
-		lbl.text = "[right]%s[/right]" % text
+		lbl.text = "[%s]%s[/%s]" % [side, text, side]
 	else:
 		lbl.text = text
 	lbl.ttl = notif.get("ttl", 3.0)
