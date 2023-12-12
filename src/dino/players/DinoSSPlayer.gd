@@ -18,13 +18,10 @@ func _ready():
 		if level.has_method("_on_player_death"):
 			died.connect(level._on_player_death.bind(self))
 
-	has_gun = true
-	has_boomerang = true
+	# TODO should maybe be instances
+	add_weapon_entity(DinoWeaponEntityIds.GUN)
+	add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
 	has_double_jump = true
-
-	# has_climb = true
-	# has_jetpack = true
-	# has_dash = false
 
 	super._ready()
 
@@ -39,7 +36,6 @@ func _on_player_death():
 
 ## collect ##################################################################
 
-# TODO promote to SSPlayer so other players can do this
 func collect(_entity, _opts={}):
 	pass
 	# match entity.type:
@@ -50,11 +46,11 @@ func collect(_entity, _opts={}):
 var is_spiking = false
 
 func _process(_delta):
+	# TODO don't fire these every process loop!
 	if orbit_items.size() == 0 and is_spiking == false:
-		remove_orbit_item_weapon()
+		remove_weapon_entity(DinoWeaponEntityIds.ORBS)
 	else:
-		if not orbit_item_weapon or not orbit_item_weapon in weapons:
-			add_orbit_item_weapon()
+		add_weapon_entity(DinoWeaponEntityIds.ORBS)
 
 ## orbiting items ##################################################################
 
@@ -81,21 +77,6 @@ func remove_orbit_item(item):
 		if ch == item:
 			orbit_items.erase(ch)
 			ch.queue_free()
-
-@onready var orbit_item_weapon_scene = preload("res://src/spike/entities/OrbitItemWeapon.tscn")
-var orbit_item_weapon
-
-func add_orbit_item_weapon():
-	if not orbit_item_weapon:
-		orbit_item_weapon = orbit_item_weapon_scene.instantiate()
-		add_child(orbit_item_weapon)
-	add_weapon(orbit_item_weapon)
-
-func remove_orbit_item_weapon():
-	if orbit_item_weapon:
-		drop_weapon(orbit_item_weapon)
-		orbit_item_weapon.visible = false
-
 
 ## spiking ##################################################################
 

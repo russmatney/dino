@@ -6,6 +6,8 @@ func _get_configuration_warnings():
 
 ## vars #####################################################
 
+var entity: DinoWeaponEntity
+
 var anim
 var hitbox
 var hitbox_coll

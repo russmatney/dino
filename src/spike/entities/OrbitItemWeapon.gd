@@ -1,6 +1,7 @@
 extends SSWeapon
 
 var aim_vector
+# TODO look for aim-point on actor
 var toss_offset = Vector2.ONE * -12
 
 func aim(aim_v: Vector2):

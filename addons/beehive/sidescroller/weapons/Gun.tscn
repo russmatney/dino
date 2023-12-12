@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://addons/beehive/sidescroller/weapons/Gun.gd" id="1_feap0"]
 
-[node name="Gun" type="Node2D"]
+[node name="Gun" type="Node2D" groups=["weapons"]]
 script = ExtResource("1_feap0")

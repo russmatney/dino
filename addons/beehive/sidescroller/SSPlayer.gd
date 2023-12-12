@@ -21,7 +21,6 @@ var powerups = []
 var aim_vector = Vector2.ZERO
 
 @export var has_bow: bool
-@export var has_gun: bool
 @export var has_sword: bool
 @export var has_flashlight: bool
 @export var has_boomerang: bool
@@ -69,16 +68,11 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
-		if has_sword:
-			add_sword()
-		if has_flashlight:
-			add_flashlight()
-		if has_bow:
-			add_bow()
-		if has_gun:
-			add_gun()
-		if has_boomerang:
-			add_boomerang()
+		# add_weapon_entity(DinoWeaponEntityIds.GUN)
+		# add_weapon_entity(DinoWeaponEntityIds.SWORD)
+		# add_weapon_entity(DinoWeaponEntityIds.FLASHLIGHT)
+		# add_weapon_entity(DinoWeaponEntityIds.BOW)
+		# add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -140,7 +134,7 @@ func _unhandled_input(event):
 		Log.prn("cycled weapons", weapons)
 		if weapons.size() > 0:
 			Hood.notif(str("Changed weapon: ", weapons[0].display_name))
-		notif(active_weapon().display_name)
+			notif(active_weapon().display_name)
 
 	# generic action
 	if Trolley.is_action(event):
@@ -228,9 +222,12 @@ func collect_pickup(pickup_type):
 
 func update_with_powerup(powerup: SSData.Powerup):
 	match (powerup):
-		SSData.Powerup.Sword: add_sword()
-		SSData.Powerup.Flashlight: add_flashlight()
-		SSData.Powerup.Gun: add_gun()
+		SSData.Powerup.Sword: add_weapon_entity(DinoWeaponEntityIds.SWORD)
+		SSData.Powerup.Flashlight: add_weapon_entity(DinoWeaponEntityIds.FLASHLIGHT)
+		SSData.Powerup.Gun: add_weapon_entity(DinoWeaponEntityIds.GUN)
+		SSData.Powerup.Bow: add_weapon_entity(DinoWeaponEntityIds.BOW)
+		SSData.Powerup.Boomerang: add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
+
 		SSData.Powerup.Ascend: add_ascend()
 		SSData.Powerup.Descend: add_descend()
 		SSData.Powerup.DoubleJump: add_double_jump()
@@ -242,71 +239,9 @@ func add_powerup(powerup: SSData.Powerup):
 	update_with_powerup(powerup)
 	Hotel.check_in(self)
 
-
 ## coins #######################################################
 
 func add_coin():
 	coins += 1
 	Hotel.check_in(self)
 
-## gun/fire/bullets ###########################################################
-
-var gun_scene = preload("res://addons/beehive/sidescroller/weapons/Gun.tscn")
-
-func add_gun():
-	if not gun:
-		gun = gun_scene.instantiate()
-		add_child(gun)
-
-	add_weapon(gun)
-	has_gun = true
-
-## bow ###########################################################
-
-var bow_scene = preload("res://addons/beehive/sidescroller/weapons/Bow.tscn")
-
-func add_bow():
-	if not bow:
-		bow = bow_scene.instantiate()
-		add_child(bow)
-
-	add_weapon(bow)
-	has_bow = true
-
-## sword #######################################################
-
-var sword_scene = preload("res://addons/beehive/sidescroller/weapons/Sword.tscn")
-
-func add_sword():
-	if not sword:
-		sword = sword_scene.instantiate()
-		add_child(sword)
-
-	add_weapon(sword)
-	has_sword = true
-
-## flashlight #######################################################
-
-var flashlight_scene = preload("res://addons/beehive/sidescroller/weapons/Flashlight.tscn")
-
-func add_flashlight():
-	if not flashlight:
-		flashlight = flashlight_scene.instantiate()
-		add_child(flashlight)
-
-	add_weapon(flashlight)
-	has_flashlight = true
-
-## boomerang ###########################################################
-
-var boomerang_scene = preload("res://addons/beehive/sidescroller/weapons/Boomerang.tscn")
-
-func add_boomerang():
-	if not boomerang:
-		boomerang = boomerang_scene.instantiate()
-		add_child(boomerang)
-
-	Log.pr("adding boomerang to player", self)
-
-	add_weapon(boomerang)
-	has_boomerang = true

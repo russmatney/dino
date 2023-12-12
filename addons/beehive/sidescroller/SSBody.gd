@@ -406,14 +406,43 @@ func add_descend():
 #################################################################################
 ## weapons #######################################################
 
-func add_weapon(weapon):
+func get_existing_weapon_for_entity(ent_id):
+	for w in weapons:
+		if w.entity.get_entity_id() == ent_id:
+			return w
+
+func add_weapon_entity(ent_id):
+	var existing = get_existing_weapon_for_entity(ent_id)
+	if existing:
+		# Log.pr("Refusing to add dupe weapon", ent_id, existing)
+		return
+	var ent = Pandora.get_entity(ent_id)
+	Log.pr("ent", ent)
+	var scene = ent.get_sidescroller_scene()
+	Log.pr("scene", scene)
+	var w = scene.instantiate()
+	w.entity = ent
+	add_child(w)
+	add_weapon_scene(w)
+
+func remove_weapon_entity(ent_id):
+	var weapon = get_existing_weapon_for_entity(ent_id)
+	if weapon:
+		drop_weapon(weapon)
+
+func add_weapon_scene(weapon: SSWeapon):
 	if not weapon in weapons:
 		weapons.map(deactivate_weapon)
 		weapons.push_front(weapon)
 		activate_weapon()
+		Log.pr("added weapon", weapon)
+	Log.pr("weapons", weapons)
 
 func has_weapon():
 	return active_weapon() != null
+
+func has_weapon_entity(ent_id):
+	return get_existing_weapon_for_entity(ent_id)
 
 func active_weapon():
 	if len(weapons) > 0:

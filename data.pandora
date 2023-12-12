@@ -1021,6 +1021,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Sword"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://addons/beehive/sidescroller/weapons/Sword.tscn"
 					}
 				}
 			},
@@ -1034,6 +1038,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Bow"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://addons/beehive/sidescroller/weapons/Bow.tscn"
 					}
 				}
 			},
@@ -1047,6 +1055,14 @@
 					"display_name": {
 						"type": "string",
 						"value": "Boomerang"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://addons/beehive/sidescroller/weapons/Boomerang.tscn"
+					},
+					"topdown_scene": {
+						"type": "resource",
+						"value": "res://addons/beehive/topdown/weapons/Boomerang.tscn"
 					}
 				}
 			},
@@ -1060,6 +1076,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Gun"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://addons/beehive/sidescroller/weapons/Gun.tscn"
 					}
 				}
 			},
@@ -1073,6 +1093,27 @@
 					"display_name": {
 						"type": "string",
 						"value": "Flashlight"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://addons/beehive/sidescroller/weapons/Flashlight.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "80",
+				"_icon_color": "ffffff00",
+				"_id": "91",
+				"_index": 0,
+				"_name": "Orbs",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Orbs"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://src/spike/entities/OrbitItemWeapon.tscn"
 					}
 				}
 			}
@@ -1280,7 +1321,7 @@
 				"_category_id": "80",
 				"_default_value": null,
 				"_id": "83",
-				"_name": "sidescoller_scene",
+				"_name": "sidescroller_scene",
 				"_type": "resource"
 			},
 			{
@@ -1301,7 +1342,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 90
+			"default": 91
 		}
 	}
 }

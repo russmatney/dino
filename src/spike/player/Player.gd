@@ -1,6 +1,8 @@
 @tool
 extends SSPlayer
 
+# TODO delete
+
 func _get_configuration_warnings():
 	return super._get_configuration_warnings()
 
@@ -86,7 +88,7 @@ func add_orbit_item_weapon():
 	if not orbit_item_weapon:
 		orbit_item_weapon = orbit_item_weapon_scene.instantiate()
 		add_child(orbit_item_weapon)
-	add_weapon(orbit_item_weapon)
+	# add_weapon(orbit_item_weapon)
 
 func remove_orbit_item_weapon():
 	if orbit_item_weapon:
