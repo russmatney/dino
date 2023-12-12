@@ -68,6 +68,7 @@ func _on_notification(notif: Dictionary):
 
 	if found_existing:
 		lbl.reset_ttl()
+		lbl.reemphasize()
 
 	if id != null:
 		id_notifs[id] = lbl

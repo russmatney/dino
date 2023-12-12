@@ -27,3 +27,8 @@ func reset_ttl(t=null):
 	tween.kill()
 	modulate.a = 1.0
 	kill_in_ttl.call_deferred()
+
+func reemphasize():
+	var t = create_tween()
+	t.tween_property(self, "scale", Vector2.ONE*1.2, 0.1)
+	t.tween_property(self, "scale", Vector2.ONE, 0.1)
