@@ -49,6 +49,7 @@ var gravity = 1000 # for use in non-jump states
 
 # slot for Weapon impl - sword, gun, bow, flashlight, etc
 var weapons = []
+signal changed_weapon(weapon)
 
 # vars
 
@@ -436,6 +437,7 @@ func cycle_weapon():
 		var f = weapons.pop_front()
 		weapons.push_back(f)
 		activate_weapon()
+		changed_weapon.emit(active_weapon())
 
 # maybe different from 'use' for multi-state things like the flashlight?
 func activate_weapon(weapon=null):

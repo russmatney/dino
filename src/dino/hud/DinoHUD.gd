@@ -4,6 +4,7 @@ extends CanvasLayer
 
 @onready var player_status = $%PlayerStatus
 @onready var level_opts_comp = $%LevelOpts
+@onready var current_weapon_comp = $%CurrentWeapon
 
 var level_opts
 
@@ -15,10 +16,14 @@ func set_level_opts(opts: Dictionary):
 ## _ready ############################################################33
 
 func _ready():
-	Log.pr("Dino HUD ready")
-	P.player_ready.connect(update_player_status)
+	P.player_ready.connect(func():
+		update_player_status()
+		update_current_weapon()
+		P.player.changed_weapon.connect(func(_w):
+			update_current_weapon()))
 	update_player_status()
 	update_level_opts()
+	update_current_weapon()
 
 ## updates ############################################################33
 
@@ -36,3 +41,11 @@ func update_level_opts():
 
 	level_opts_comp.set_seed(s)
 	level_opts_comp.set_room_count(ct)
+
+func update_current_weapon():
+	var p = P.player
+	if p == null:
+		return
+
+	if len(p.weapons) > 0:
+		current_weapon_comp.set_weapon_label(p.weapons[0].display_name)

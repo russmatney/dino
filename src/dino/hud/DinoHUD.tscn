@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://sisqkgg1lwpf"]
+[gd_scene load_steps=6 format=3 uid="uid://sisqkgg1lwpf"]
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="2_7c6hy"]
 [ext_resource type="PackedScene" uid="uid://rthdsotd137p" path="res://src/dino/hud/LevelOpts.tscn" id="3_40syy"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="4_4ubwc"]
+[ext_resource type="PackedScene" uid="uid://b8xviteaqhluu" path="res://src/dino/hud/CurrentWeapon.tscn" id="4_ehsrk"]
 
 [node name="DinoHUD" type="CanvasLayer"]
 script = ExtResource("1_cqjfn")
@@ -43,28 +44,37 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Middle" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Middle"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Notifications" parent="VBoxContainer/Middle" instance=ExtResource("4_4ubwc")]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Bottom" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Bottom"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Notifications" parent="VBoxContainer/Bottom" instance=ExtResource("4_4ubwc")]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+alignment = 2
+
+[node name="CurrentWeapon" parent="VBoxContainer/Bottom/VBoxContainer" instance=ExtResource("4_ehsrk")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/Bottom"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
