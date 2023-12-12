@@ -82,7 +82,7 @@ func setup_sound_map(sound_map, default_opts=defaults):
 
 func play_sound(sound_map, name):
 	if muted_sound:
-		Log.warn("Cannot play sound, sounds are muted")
+		# Log.warn("Cannot play sound, sounds are muted")
 		return
 	if name in sound_map:
 		var sounds = sound_map[name]

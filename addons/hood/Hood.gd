@@ -8,7 +8,7 @@ signal notification(notif)
 var queued_notifs = []
 
 func notif(text, opts = {}):
-	Log.pr("notif: ", text)
+	# Log.pr("notif: ", text)
 	if text is Dictionary:
 		opts.merge(text)
 		text = opts.get("text", opts.get("msg"))
