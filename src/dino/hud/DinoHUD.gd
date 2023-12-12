@@ -20,8 +20,9 @@ func _ready():
 	P.player_ready.connect(func():
 		update_player_status()
 		update_current_weapon()
-		P.player.changed_weapon.connect(func(_w):
-			update_current_weapon()))
+		if P.player and P.player.has_signal("changed_weapon"):
+			P.player.changed_weapon.connect(func(_w):
+				update_current_weapon()))
 	update_player_status()
 	update_level_opts()
 	update_current_weapon()
@@ -48,7 +49,7 @@ func update_current_weapon():
 	if p == null:
 		return
 
-	if len(p.weapons) > 0:
+	if "weapons" in p and len(p.weapons) > 0:
 		current_weapon_comp.set_weapon_label(p.weapons[0].display_name)
 
 func update_time(t):

@@ -315,10 +315,6 @@
 						"type": "resource",
 						"value": "res://src/spike/menus/MainMenu.tscn"
 					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/spike/menus/PauseMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -351,10 +347,6 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/shirt/menus/MainMenu.tscn"
-					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/shirt/menus/PauseMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -430,10 +422,6 @@
 						"type": "resource",
 						"value": "res://src/mountain/menus/MainMenu.tscn"
 					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/mountain/menus/PauseMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -504,10 +492,6 @@
 						"type": "resource",
 						"value": "res://src/tower/menus/TowerMainMenu.tscn"
 					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/tower/menus/TowerPauseMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -536,10 +520,6 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/gunner_icon_sheet.png"
-					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/gunner/menus/GunnerPauseMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -573,10 +553,6 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/harvey/menus/HarveyMenu.tscn"
-					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/harvey/menus/HarveyPauseMenu.tscn"
 					},
 					"player_scene": {
 						"type": "resource",
@@ -685,10 +661,6 @@
 						"type": "resource",
 						"value": "res://src/pluggs/menus/MainMenu.tscn"
 					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/pluggs/menus/PauseMenu.tscn"
-					},
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/pluggs/player/Pluggs.tscn"
@@ -725,10 +697,6 @@
 					"main_menu": {
 						"type": "resource",
 						"value": "res://src/woods/menus/MainMenu.tscn"
-					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/woods/menus/PauseMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -876,7 +844,7 @@
 					},
 					"pause_menu": {
 						"type": "resource",
-						"value": "res://src/dino/menus/RoulettePauseMenu.tscn"
+						"value": "res://src/dino/menus/DinoPauseMenu.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -909,7 +877,7 @@
 					},
 					"pause_menu": {
 						"type": "resource",
-						"value": "res://src/dino/menus/ArcadePauseMenu.tscn"
+						"value": "res://src/dino/menus/DinoPauseMenu.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -1100,7 +1068,7 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "res://addons/navi/NaviPauseMenu.tscn",
+				"_default_value": "res://src/dino/menus/DinoPauseMenu.tscn",
 				"_id": "25",
 				"_name": "pause_menu",
 				"_type": "resource"

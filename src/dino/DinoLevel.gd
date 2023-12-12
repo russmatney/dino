@@ -30,6 +30,9 @@ func _ready():
 	# could use a better name for :gen/finished-hook
 	level_gen.nodes_transferred.connect(setup_level)
 
+	if not Game.is_managed():
+		Game.debug_register_current_game()
+
 ## process ######################################################
 
 func _process(delta):
@@ -53,7 +56,7 @@ func regenerate(opts=null):
 
 ## setup_level ###################################################3
 
-# recursively setup any signals and initial data
+# setup any signals and initial data
 func setup_level():
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)

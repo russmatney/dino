@@ -49,6 +49,15 @@ func get_current_game():
 
 ## launch game ##########################################################
 
+## Invoked from Dino Level in a non-managed game
+func debug_register_current_game():
+	var ent = get_current_game()
+	Log.pr("Registering current game with fallback player entity: ", ent)
+	register_menus(ent)
+	P.setup_player(ent)
+	var player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+	P.set_player_entity(player_entity)
+
 var _is_managed = false
 func is_managed():
 	# TODO how to support this without state/autoload/node
