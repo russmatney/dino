@@ -31,9 +31,9 @@ DJ="*res://addons/dj/DJ.gd"
 DJZ="*res://addons/dj/DJZ.gd"
 Q="*res://addons/quest/QuestManager.gd"
 Cam="*res://addons/camera/Camera.gd"
-Game="*res://addons/core/Game.gd"
+Game="*res://src/dino/Game.gd"
 Metro="*res://addons/metro/Metro.gd"
-P="*res://addons/core/Player.gd"
+P="*res://src/dino/Player.gd"
 
 [display]
 

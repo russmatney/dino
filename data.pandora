@@ -29,7 +29,7 @@
 				"_ids_generation_class": "DinoGameEntityIds",
 				"_index": 0,
 				"_name": "DinoGame",
-				"_script_path": "res://addons/core/DinoGameEntity.gd"
+				"_script_path": "res://src/dino/DinoGameEntity.gd"
 			},
 			{
 				"_category_id": "",

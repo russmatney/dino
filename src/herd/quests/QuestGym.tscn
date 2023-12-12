@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://daqra0xqsc40i"]
 
-[ext_resource type="Script" path="res://addons/core/DinoGym.gd" id="1_sgk51"]
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_sgk51"]
 [ext_resource type="PackedScene" uid="uid://b254u72nu1oj3" path="res://src/herd/quests/FetchSheepQuest.tscn" id="2_trqn6"]
 [ext_resource type="PackedScene" uid="uid://dyjqpthy70n1i" path="res://src/herd/quests/SheepPen.tscn" id="3_2ot7y"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/herd/sheep/Sheep.tscn" id="3_pw3t7"]
