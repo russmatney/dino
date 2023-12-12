@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://src/dino/modes/Roulette.gd" id="1_coksv"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_bsg7k"]
-[ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="3_21jm3"]
+[ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="3_bv8hs"]
 
 [sub_resource type="Resource" id="Resource_svj3p"]
 script = ExtResource("2_bsg7k")
 _id = "70"
 
 [sub_resource type="Resource" id="Resource_vuyj7"]
-script = ExtResource("3_21jm3")
+script = ExtResource("3_bv8hs")
 _id = "35"
 
 [node name="Roulette" type="Node2D"]

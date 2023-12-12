@@ -6,23 +6,23 @@ extends Node
 func all_game_entities():
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
-		.filter(func(ent): return ent.is_enabled())\
-		.filter(func(ent): return not ent.is_game_mode())
+		.filter(func(e): return e.is_enabled())\
+		.filter(func(e): return not e.is_game_mode())
 
 func all_game_modes():
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
-		.filter(func(ent): return ent.is_enabled())\
-		.filter(func(ent): return ent.is_game_mode())
+		.filter(func(e): return e.is_enabled())\
+		.filter(func(e): return e.is_game_mode())
 
-func game_entity_for_scene(scene_file_path):
-	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(scene_file_path))
+func game_entity_for_scene(sfp):
+	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(sfp))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
-		Log.warn("No game found to manage scene", scene_file_path)
+		Log.warn("No game found to manage scene", sfp)
 	else:
-		Log.warn("Multiple games manage scene", scene_file_path, gs)
+		Log.warn("Multiple games manage scene", sfp, gs)
 
 func get_game_entity(ent_id):
 	return Pandora.get_entity(ent_id)

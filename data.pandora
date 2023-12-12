@@ -71,6 +71,15 @@
 				"_index": 1,
 				"_name": "DinoPlayer",
 				"_script_path": "res://src/dino/players/DinoPlayerEntity.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "f9f555dd",
+				"_id": "80",
+				"_ids_generation_class": "DinoWeaponEntityIds",
+				"_index": 0,
+				"_name": "DinoWeapon"
 			}
 		],
 		"_entities": [
@@ -1186,12 +1195,47 @@
 				"_id": "79",
 				"_name": "player_type",
 				"_type": "string"
+			},
+			{
+				"_category_id": "80",
+				"_default_value": "",
+				"_id": "81",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "80",
+				"_default_value": "res://assets/icon.png",
+				"_id": "82",
+				"_name": "icon_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "80",
+				"_default_value": null,
+				"_id": "83",
+				"_name": "sidescoller_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "80",
+				"_default_value": null,
+				"_id": "84",
+				"_name": "topdown_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "80",
+				"_default_value": null,
+				"_id": "85",
+				"_name": "beatemup_scene",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 79
+			"default": 85
 		}
 	}
 }
