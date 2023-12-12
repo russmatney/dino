@@ -13,6 +13,8 @@ var skip_splash_outro = false
 
 var hud_scene = preload("res://src/dino/hud/DinoHUD.tscn")
 var hud
+var time: float = 0
+var time_int = 0
 
 ## ready ######################################################
 
@@ -27,6 +29,14 @@ func _ready():
 	# call setup_level every time we get new nodes
 	# could use a better name for :gen/finished-hook
 	level_gen.nodes_transferred.connect(setup_level)
+
+## process ######################################################
+
+func _process(delta):
+	time += delta
+	if time > time_int:
+		time_int = int(time) + 1
+		hud.update_time(time_int)
 
 ## regenerate ###################################################3
 

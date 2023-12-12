@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://sisqkgg1lwpf"]
+[gd_scene load_steps=7 format=3 uid="uid://sisqkgg1lwpf"]
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="2_7c6hy"]
 [ext_resource type="PackedScene" uid="uid://rthdsotd137p" path="res://src/dino/hud/LevelOpts.tscn" id="3_40syy"]
+[ext_resource type="FontFile" uid="uid://cknft5w5ywf7n" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet_Monospace.ttf" id="3_wovs3"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="4_4ubwc"]
 [ext_resource type="PackedScene" uid="uid://b8xviteaqhluu" path="res://src/dino/hud/CurrentWeapon.tscn" id="4_ehsrk"]
 
@@ -22,6 +23,7 @@ layout_mode = 2
 
 [node name="Top" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/Top"]
 custom_minimum_size = Vector2(10, 0)
@@ -30,8 +32,27 @@ layout_mode = 2
 [node name="PlayerStatus" parent="VBoxContainer/Top" instance=ExtResource("2_7c6hy")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 1
 
 [node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Top"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="TimeLabel" type="RichTextLabel" parent="VBoxContainer/Top/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_wovs3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]00[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer7" type="MarginContainer" parent="VBoxContainer/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
 

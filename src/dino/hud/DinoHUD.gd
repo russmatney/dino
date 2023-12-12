@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var player_status = $%PlayerStatus
 @onready var level_opts_comp = $%LevelOpts
 @onready var current_weapon_comp = $%CurrentWeapon
+@onready var time_label = $%TimeLabel
 
 var level_opts
 
@@ -49,3 +50,6 @@ func update_current_weapon():
 
 	if len(p.weapons) > 0:
 		current_weapon_comp.set_weapon_label(p.weapons[0].display_name)
+
+func update_time(t):
+	time_label.text = "[center]%02d[/center]" % t
