@@ -32,41 +32,54 @@ layout_mode = 2
 text = "[center]Dino Roulette!"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="PanelContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
 current_tab = 2
 
-[node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_gr3ki")]
+[node name="Options" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("3_oarvi")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Options"]
 layout_mode = 2
 
-[node name="DinoPauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/HBoxContainer/VBoxContainer"]
+[node name="DinoPauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Options/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource("4_wcgkx")
 
-[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/TabContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_ai6py")]
+[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/TabContainer/Options/VBoxContainer" instance=ExtResource("5_ai6py")]
 layout_mode = 2
 
+[node name="Level" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("3_oarvi")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Quest" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer/Quest" instance=ExtResource("3_gr3ki")]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2

@@ -461,3 +461,18 @@ static func find_level_root(node):
 		return parent
 	else:
 		return find_level_root(parent)
+
+## focus ######################################################
+
+static func get_focusable_children(container: Node) -> Array[Node]:
+	var chs: Array[Node] = []
+	for ch in container.get_children():
+		if ch is Control and ch.focus_mode != Control.FOCUS_NONE:
+			chs.append_array(get_focusable_children(ch))
+	return chs
+
+
+static func focus_first_control(container: Node) -> void:
+	for child in get_focusable_children(container):
+		Log.pr("grabbing focus", child)
+		child.grab_focus()

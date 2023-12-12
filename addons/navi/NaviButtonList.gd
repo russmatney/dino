@@ -20,9 +20,9 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	grab_focus()
+	set_focus()
 
-func grab_focus():
+func set_focus():
 	# nice default... if nothing else has focus?
 	# do parents still get to override this?
 	var chs = get_children()
