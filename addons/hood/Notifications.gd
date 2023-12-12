@@ -75,5 +75,5 @@ func _on_notification(notif: Dictionary):
 
 	if not found_existing:
 		add_child(lbl)
-	if Engine.is_editor_hint():
-		lbl.set_owner(owner)
+	# if Engine.is_editor_hint():
+	# 	lbl.set_owner(owner)

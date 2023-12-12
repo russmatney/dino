@@ -30,5 +30,7 @@ func reset_ttl(t=null):
 
 func reemphasize():
 	var t = create_tween()
+	if not t:
+		return # prevent weird crash
 	t.tween_property(self, "scale", Vector2.ONE*1.2, 0.1)
 	t.tween_property(self, "scale", Vector2.ONE, 0.1)

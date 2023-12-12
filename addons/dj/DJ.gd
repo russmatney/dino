@@ -14,7 +14,7 @@ func _ready():
 
 func resume_menu_song(song = null):
 	if muted_music:
-		Log.warn("Cannot resume menu song, music is muted")
+		# Log.warn("Cannot resume menu song, music is muted")
 		return
 
 	if song and menu_song != song:
@@ -109,7 +109,7 @@ var paused_game_songs = []
 
 func play_song(sound_map, name):
 	if muted_music:
-		Log.warn("Cannot play song, music is muted")
+		# Log.warn("Cannot play song, music is muted")
 		return
 	if name in sound_map:
 		var songs = sound_map[name]
@@ -136,7 +136,7 @@ func pause_game_song():
 
 func resume_game_song():
 	if muted_music:
-		Log.warn("Cannot resume game song, music is muted")
+		# Log.warn("Cannot resume game song, music is muted")
 		return
 	# could store and resume at same playback_position
 	for song_and_pos in paused_game_songs:
