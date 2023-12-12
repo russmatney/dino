@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cdguplx04mn1p"
+path="res://.godot/imported/orb_icon.aseprite-8f2476893af4d9c20a6c96d08bc281a3.res"
+
+[deps]
+
+source_file="res://addons/beehive/assets/orb_icon.aseprite"
+dest_files=["res://.godot/imported/orb_icon.aseprite-8f2476893af4d9c20a6c96d08bc281a3.res"]
+
+[params]
+

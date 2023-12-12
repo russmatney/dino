@@ -12,6 +12,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="WeaponIcon" type="TextureRect" parent="HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
@@ -21,6 +22,7 @@ alignment = 1
 
 [node name="WeaponLabel" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]weapon[/center]"

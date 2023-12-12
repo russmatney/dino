@@ -49,8 +49,11 @@ func update_current_weapon():
 	if p == null:
 		return
 
-	if "weapons" in p and len(p.weapons) > 0:
-		current_weapon_comp.set_weapon_label(p.weapons[0].display_name)
+	var w = p.active_weapon()
+	if w:
+		var ent = w.entity
+		# current_weapon_comp.set_label(ent.get_display_name())
+		current_weapon_comp.set_icon(ent.get_icon_texture())
 
 func update_time(t):
 	time_label.text = "[center]%02d[/center]" % t
