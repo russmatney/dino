@@ -9,7 +9,7 @@ extends VBoxContainer
 @export var entities: Array[DinoWeaponEntity] = []
 @export var active_entity: DinoWeaponEntity
 
-var weapon_icon_scene = preload("res://src/dino/hud/HUDWeaponIcon.tscn")
+var weapon_icon_scene = preload("res://src/dino/ui/WeaponIcon.tscn")
 
 ## ready ######################################
 
@@ -19,11 +19,10 @@ func _ready():
 ## render ######################################
 
 func render():
-	U.remove_children(inactive_icons, {defer=true})
-
 	active_icon.entity = active_entity
 	active_icon.render()
 
+	U.remove_children(inactive_icons, {defer=true})
 	for w in entities.filter(func(w): return not w == active_entity):
 		var icon = weapon_icon_scene.instantiate()
 		icon.entity = w

@@ -1,22 +1,22 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcqi8ogxvdge"]
 
-[ext_resource type="Script" path="res://src/dino/hud/HUDWeaponIcon.gd" id="1_berk2"]
-[ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="2_t2v7p"]
-[ext_resource type="Texture2D" uid="uid://b3muncfegx7hb" path="res://addons/beehive/assets/boomerang_icon.png" id="3_olqeh"]
+[ext_resource type="Script" path="res://src/dino/ui/WeaponIcon.gd" id="1_m1rqk"]
+[ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="2_yi53c"]
+[ext_resource type="Texture2D" uid="uid://b3muncfegx7hb" path="res://addons/beehive/assets/boomerang_icon.png" id="3_y8ei5"]
 
 [sub_resource type="Resource" id="Resource_368pm"]
-script = ExtResource("2_t2v7p")
+script = ExtResource("2_yi53c")
 _id = "88"
 
-[node name="HUDWeaponIcon" type="PanelContainer"]
-script = ExtResource("1_berk2")
+[node name="WeaponIcon" type="PanelContainer"]
+script = ExtResource("1_m1rqk")
 entity = SubResource("Resource_368pm")
 
 [node name="WeaponIcon" type="TextureRect" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("3_olqeh")
+texture = ExtResource("3_y8ei5")
 stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cv53ihv60agsg"]
 
-[ext_resource type="Script" path="res://src/dino/menus/GameButton.gd" id="1_1svhu"]
+[ext_resource type="Script" path="res://src/dino/ui/GameButton.gd" id="1_1svhu"]
 [ext_resource type="Texture2D" uid="uid://ba2udap4d027f" path="res://assets/gameicons/Shirt_icon_sheet.png" id="2_2ksis"]
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="2_uw1jr"]
 

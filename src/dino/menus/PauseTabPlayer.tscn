@@ -1,0 +1,200 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxe4y5m8yhs4m"]
+
+[ext_resource type="Script" path="res://src/dino/menus/PauseTabPlayer.gd" id="1_ibsoa"]
+[ext_resource type="Texture2D" uid="uid://c7jw4eir0vw0f" path="res://src/dino/players/hatbot/assets/greyhat_portrait1.png" id="1_qwsl8"]
+[ext_resource type="PackedScene" uid="uid://bm2cgpwup8xds" path="res://src/dino/ui/PlayerButton.tscn" id="3_ef0io"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="4_5k1e2"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="6_i2ugf"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_la6u1"]
+[ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/dino/ui/WeaponIcon.tscn" id="8_kmyt0"]
+[ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="9_bfb4x"]
+
+[sub_resource type="Resource" id="Resource_6armv"]
+script = ExtResource("4_5k1e2")
+_id = "72"
+
+[sub_resource type="Resource" id="Resource_e2lo1"]
+script = ExtResource("4_5k1e2")
+_id = "71"
+
+[sub_resource type="Resource" id="Resource_72b7y"]
+script = ExtResource("4_5k1e2")
+_id = "73"
+
+[sub_resource type="Resource" id="Resource_gvmx5"]
+script = ExtResource("9_bfb4x")
+_id = "89"
+
+[sub_resource type="Resource" id="Resource_yafbw"]
+script = ExtResource("9_bfb4x")
+_id = "90"
+
+[node name="PauseTabPlayerAndWeapon" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ibsoa")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("1_qwsl8")
+stretch_mode = 4
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PlayerName" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("6_i2ugf")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Hatbot"
+fit_content = true
+scroll_active = false
+
+[node name="PlayerDescription" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("7_la6u1")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "A very good description of the selected player."
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="OtherPlayersGrid" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+columns = 3
+
+[node name="PlayerButton" parent="VBoxContainer/OtherPlayersGrid" instance=ExtResource("3_ef0io")]
+layout_mode = 2
+player_entity = SubResource("Resource_6armv")
+
+[node name="PlayerButton2" parent="VBoxContainer/OtherPlayersGrid" instance=ExtResource("3_ef0io")]
+layout_mode = 2
+player_entity = SubResource("Resource_e2lo1")
+
+[node name="PlayerButton3" parent="VBoxContainer/OtherPlayersGrid" instance=ExtResource("3_ef0io")]
+layout_mode = 2
+player_entity = SubResource("Resource_72b7y")
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+
+[node name="SelectedWeaponIcon" parent="VBoxContainer2/HBoxContainer2" instance=ExtResource("8_kmyt0")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SelectedWeaponName" type="RichTextLabel" parent="VBoxContainer2/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("6_i2ugf")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Weapon Of Champions"
+fit_content = true
+scroll_active = false
+
+[node name="SelectedWeaponDescription" type="RichTextLabel" parent="VBoxContainer2/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("7_la6u1")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "A very good description of the selected weapon."
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WeaponsGrid" type="GridContainer" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+
+[node name="WeaponIcon" parent="VBoxContainer2/WeaponsGrid" instance=ExtResource("8_kmyt0")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+entity = SubResource("Resource_gvmx5")
+
+[node name="WeaponIcon3" parent="VBoxContainer2/WeaponsGrid" instance=ExtResource("8_kmyt0")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+entity = SubResource("Resource_yafbw")
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2

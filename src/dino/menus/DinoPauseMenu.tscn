@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0r7m71tr77vo"]
+[gd_scene load_steps=8 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenu.gd" id="1_7pfpx"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/brick/BrickRegenMenu.tscn" id="3_oarvi"]
 [ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenuButtonList.gd" id="4_wcgkx"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/dj/MuteButtonList.tscn" id="5_ai6py"]
+[ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/PauseTabPlayer.tscn" id="7_ipd6p"]
 
 [node name="DinoPauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -44,7 +45,9 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 2
+
+[node name="Player" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("7_ipd6p")]
+layout_mode = 2
 
 [node name="Options" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false
@@ -73,6 +76,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Quest" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 

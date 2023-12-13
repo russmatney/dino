@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/hud/WeaponList.gd" id="1_adwn5"]
 [ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="2_i7ph3"]
-[ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/dino/hud/HUDWeaponIcon.tscn" id="2_s8pfp"]
+[ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/dino/ui/WeaponIcon.tscn" id="2_s8pfp"]
 
 [sub_resource type="Resource" id="Resource_0v4wk"]
 script = ExtResource("2_i7ph3")
