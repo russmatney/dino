@@ -18,7 +18,7 @@ func _ready():
 		if level.has_method("_on_player_death"):
 			died.connect(level._on_player_death.bind(self))
 
-	add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
+		add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
 
 	super._ready()
 

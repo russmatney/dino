@@ -124,6 +124,15 @@ static func each_sibling(node: Node):
 	var p = node.get_parent()
 	return p.get_children().filter(func(ch): return ch != node)
 
+static func remove_children(node: Node, opts={}):
+	for ch in node.get_children():
+		if opts.get("defer", false):
+			node.remove_child.call_deferred(ch)
+			ch.queue_free()
+		else:
+			node.remove_child(ch)
+			ch.queue_free()
+
 ############################################################
 # packed_scene reading
 

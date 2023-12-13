@@ -4,9 +4,8 @@ extends CanvasLayer
 
 @onready var player_status = $%PlayerStatus
 @onready var level_opts_comp = $%LevelOpts
-@onready var current_weapon_comp = $%CurrentWeapon
 @onready var time_label = $%TimeLabel
-
+@onready var weapon_list = $%WeaponList
 var level_opts
 
 ## setters ############################################################33
@@ -19,13 +18,13 @@ func set_level_opts(opts: Dictionary):
 func _ready():
 	P.player_ready.connect(func():
 		update_player_status()
-		update_current_weapon()
+		update_weapon_stack()
 		if P.player and P.player.has_signal("changed_weapon"):
 			P.player.changed_weapon.connect(func(_w):
-				update_current_weapon()))
+				update_weapon_stack()))
 	update_player_status()
 	update_level_opts()
-	update_current_weapon()
+	update_weapon_stack()
 
 ## updates ############################################################33
 
@@ -44,16 +43,16 @@ func update_level_opts():
 	level_opts_comp.set_seed(s)
 	level_opts_comp.set_room_count(ct)
 
-func update_current_weapon():
+func update_weapon_stack():
 	var p = P.player
-	if p == null:
+	if p == null or len(p.weapons) == 0:
 		return
 
-	var w = p.active_weapon()
-	if w:
-		var ent = w.entity
-		# current_weapon_comp.set_label(ent.get_display_name())
-		current_weapon_comp.set_icon(ent.get_icon_texture())
+	var ws: Array[DinoWeaponEntity] = []
+	ws.assign(p.weapons.map(func(w): return w.entity))
+	weapon_list.entities = ws
+	weapon_list.active_entity = p.active_weapon().entity
+	weapon_list.render()
 
 func update_time(t):
 	time_label.text = "[center]%02d[/center]" % t

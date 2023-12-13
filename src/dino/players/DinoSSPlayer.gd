@@ -18,10 +18,12 @@ func _ready():
 		if level.has_method("_on_player_death"):
 			died.connect(level._on_player_death.bind(self))
 
-	# TODO should maybe be instances
-	add_weapon_entity(DinoWeaponEntityIds.GUN)
-	add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
-	has_double_jump = true
+		# could be instances with randomized stats, etc
+		add_weapon_entity(DinoWeaponEntityIds.GUN)
+		add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
+		add_weapon_entity(DinoWeaponEntityIds.FLASHLIGHT)
+		add_weapon_entity(DinoWeaponEntityIds.SWORD)
+		has_double_jump = true
 
 	super._ready()
 

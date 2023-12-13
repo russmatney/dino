@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://byj0we053kbu4"]
+
+[ext_resource type="Script" path="res://src/dino/hud/WeaponList.gd" id="1_adwn5"]
+[ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="2_i7ph3"]
+[ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/dino/hud/HUDWeaponIcon.tscn" id="2_s8pfp"]
+
+[sub_resource type="Resource" id="Resource_0v4wk"]
+script = ExtResource("2_i7ph3")
+_id = "86"
+
+[node name="WeaponList" type="VBoxContainer"]
+alignment = 2
+script = ExtResource("1_adwn5")
+active_entity = SubResource("Resource_0v4wk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 2
+
+[node name="InactiveWeapons" type="VBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="ActiveWeapon" parent="." instance=ExtResource("2_s8pfp")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+entity = SubResource("Resource_0v4wk")
