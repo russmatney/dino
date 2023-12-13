@@ -13,8 +13,6 @@ var coins = 0
 
 var aim_vector = Vector2.ZERO
 
-@export var has_boomerang: bool
-
 ## config warning ###########################################################
 
 func _get_configuration_warnings():
@@ -40,9 +38,6 @@ func _ready():
 	if not Engine.is_editor_hint():
 		Cam.request_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
 		action_detector.setup(self, {actions=[], action_hint=action_hint})
-
-		if has_boomerang:
-			add_boomerang()
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -158,15 +153,3 @@ func clear_forced_movement_target():
 func on_pit_entered():
 	Log.pr("pit entered")
 	machine.transit("Fall")
-
-## boomerang ###########################################################
-
-var boomerang_scene = preload("res://addons/beehive/topdown/weapons/Boomerang.tscn")
-
-func add_boomerang():
-	if not boomerang:
-		boomerang = boomerang_scene.instantiate()
-		add_child(boomerang)
-
-	add_weapon(boomerang)
-	has_boomerang = true

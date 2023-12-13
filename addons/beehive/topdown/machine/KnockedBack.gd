@@ -11,6 +11,7 @@ func enter(opts = {}):
 	U._connect(actor.anim.animation_finished, on_animation_finished, CONNECT_ONE_SHOT)
 	if actor.anim.sprite_frames.has_animation("knocked_back"):
 		actor.anim.play("knocked_back")
+		kb_ttl = knocked_back_time * 2 # fallback
 	else:
 		actor.anim.stop()
 		kb_ttl = knocked_back_time

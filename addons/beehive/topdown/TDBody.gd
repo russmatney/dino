@@ -36,6 +36,7 @@ var is_dead
 var is_player
 
 var weapons = []
+signal changed_weapon(weapon)
 
 # nodes
 
@@ -173,6 +174,7 @@ func die(opts={}):
 ## damage ###########################################################
 
 func take_hit(opts):
+	Log.pr("tdbody taking hit", self, opts)
 	take_damage(opts)
 	var hit_type = opts.get("type")
 	var body = opts.get("body")
@@ -229,6 +231,7 @@ func on_hurt_box_entered(body):
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
 			self.take_hit({type="bump", body=body})
+			Log.pr("bumpin' body", body, "ready", body.is_node_ready())
 
 			# is_invincible = true
 			# await get_tree().create_timer(1.0).timeout
@@ -324,9 +327,33 @@ func stamp(opts={}):
 			t.tween_callback(new_anim.queue_free)
 
 
+
+#################################################################################
 ## weapons #######################################################
 
-func add_weapon(weapon):
+func get_existing_weapon_for_entity(ent_id):
+	for w in weapons:
+		if w.entity.get_entity_id() == ent_id:
+			return w
+
+func add_weapon_entity(ent_id):
+	var existing = get_existing_weapon_for_entity(ent_id)
+	if existing:
+		# Log.pr("Refusing to add dupe weapon", ent_id, existing)
+		return
+	var ent = Pandora.get_entity(ent_id)
+	var scene = ent.get_topdown_scene()
+	var w = scene.instantiate()
+	w.entity = ent
+	add_child(w)
+	add_weapon_scene(w)
+
+func remove_weapon_entity(ent_id):
+	var weapon = get_existing_weapon_for_entity(ent_id)
+	if weapon:
+		drop_weapon(weapon)
+
+func add_weapon_scene(weapon: TDWeapon):
 	if not weapon in weapons:
 		weapons.map(deactivate_weapon)
 		weapons.push_front(weapon)
@@ -334,6 +361,9 @@ func add_weapon(weapon):
 
 func has_weapon():
 	return active_weapon() != null
+
+func has_weapon_entity(ent_id):
+	return get_existing_weapon_for_entity(ent_id)
 
 func active_weapon():
 	if len(weapons) > 0:
@@ -348,7 +378,6 @@ func aim_weapon(aim_vector):
 func drop_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
-	# drop+create new pickup/powerup? remove child?
 	if weapon in weapons:
 		weapons.erase(weapon)
 
@@ -358,6 +387,7 @@ func cycle_weapon():
 		var f = weapons.pop_front()
 		weapons.push_back(f)
 		activate_weapon()
+		changed_weapon.emit(active_weapon())
 
 # maybe different from 'use' for multi-state things like the flashlight?
 func activate_weapon(weapon=null):
@@ -377,6 +407,8 @@ func deactivate_weapon(weapon=null):
 func use_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
+	if weapon.visible == false:
+		activate_weapon(weapon)
 	weapon.use()
 
 # i.e. button released, stop firing or whatever continuous action

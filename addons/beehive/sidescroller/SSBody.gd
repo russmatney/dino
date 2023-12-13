@@ -417,9 +417,7 @@ func add_weapon_entity(ent_id):
 		# Log.pr("Refusing to add dupe weapon", ent_id, existing)
 		return
 	var ent = Pandora.get_entity(ent_id)
-	Log.pr("ent", ent)
 	var scene = ent.get_sidescroller_scene()
-	Log.pr("scene", scene)
 	var w = scene.instantiate()
 	w.entity = ent
 	add_child(w)
@@ -435,8 +433,6 @@ func add_weapon_scene(weapon: SSWeapon):
 		weapons.map(deactivate_weapon)
 		weapons.push_front(weapon)
 		activate_weapon()
-		Log.pr("added weapon", weapon)
-	Log.pr("weapons", weapons)
 
 func has_weapon():
 	return active_weapon() != null

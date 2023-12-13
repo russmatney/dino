@@ -229,7 +229,10 @@ animations = [{
 size = Vector2(96, 96)
 
 [node name="SSHatBot" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 3129
 script = ExtResource("1_xvlky")
+has_double_jump = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
