@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cv53ihv60agsg"]
 
-[ext_resource type="Script" path="res://src/dino/ui/GameButton.gd" id="1_1svhu"]
-[ext_resource type="Texture2D" uid="uid://ba2udap4d027f" path="res://assets/gameicons/Shirt_icon_sheet.png" id="2_2ksis"]
-[ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="2_uw1jr"]
+[ext_resource type="Script" path="res://src/dino/ui/EntityButton.gd" id="1_wq6tl"]
+[ext_resource type="Texture2D" uid="uid://ba2udap4d027f" path="res://assets/gameicons/Shirt_icon_sheet.png" id="2_rtaak"]
+[ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="3_b55y8"]
 
 [node name="GameModeButton" type="PanelContainer"]
 anchors_preset = 15
@@ -12,7 +12,7 @@ offset_right = -1024.0
 offset_bottom = -400.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1svhu")
+script = ExtResource("1_wq6tl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -21,7 +21,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture_normal = ExtResource("2_2ksis")
+texture_normal = ExtResource("2_rtaak")
 stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
@@ -29,11 +29,11 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="GameLabel" type="RichTextLabel" parent="VBoxContainer/VBoxContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_uw1jr")
+theme_override_fonts/normal_font = ExtResource("3_b55y8")
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center]Shirt[/center]"

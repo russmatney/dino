@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var games_grid_container = $%GamesGridContainer
 @onready var button_list = $%ButtonList
 
-var game_button = preload("res://src/dino/menus/GameButton.tscn")
+var game_button = preload("res://src/dino/ui/EntityButton.tscn")
 var game_entities = []
 var selected_game_entity
 

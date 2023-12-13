@@ -3,7 +3,8 @@ extends HBoxContainer
 
 ## vars ###################################333
 
-var player_button = preload("res://src/dino/ui/PlayerButton.tscn")
+var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
+
 var player_entities = []
 var selected_player_entity
 
@@ -24,6 +25,9 @@ var weapon_icon_scene = preload("res://src/dino/ui/WeaponIcon.tscn")
 
 func _ready():
 	render()
+	visibility_changed.connect(func():
+		if visible:
+			render())
 
 ## render ##################################
 
@@ -55,10 +59,10 @@ func update_player_data(player_ent):
 func update_players_grid(player_ent):
 	var player_ents = P.all_player_entities().filter(func(e): return not e == player_ent)
 	U.free_children(players_grid)
-	for pl in player_ents:
-		var button = player_button.instantiate()
-		button.set_player_entity(pl)
-		button.icon_pressed.connect(func(): select_player(pl))
+	for p in player_ents:
+		var button = entity_button.instantiate()
+		button.set_player_entity(p)
+		button.icon_pressed.connect(func(): select_player(p))
 		players_grid.add_child(button)
 
 func update_weapon_data(player):
@@ -81,12 +85,15 @@ func update_weapons_grid(player):
 	var active_weapon_ent = player.active_weapon().entity
 	U.remove_children(weapons_grid, {defer=true})
 	for w in player.weapons.filter(func(w): return w.entity != active_weapon_ent):
-		var icon = weapon_icon_scene.instantiate()
-		icon.entity = w
-		icon.is_active = false
-		weapons_grid.add_child(icon)
+		var button = entity_button.instantiate()
+		button.set_weapon_entity(w.entity)
+		button.icon_pressed.connect(func(): select_weapon(w.entity))
+		weapons_grid.add_child(button)
 
 ## select player ##################################
 
-func select_player(_ent):
-	pass
+func select_player(player_ent):
+	Log.pr("player ent selected", player_ent)
+
+func select_weapon(weapon_ent):
+	Log.pr("weapon ent selected", weapon_ent)

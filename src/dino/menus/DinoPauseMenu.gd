@@ -26,6 +26,9 @@ func set_focus():
 	Log.pr("Focusing tab bar")
 	var tabbar = tabs.get_tab_bar()
 	tabbar.grab_focus()
+	# var active_tab = tabs.get_current_tab_control()
+	# if active_tab.has_method("render"):
+	# 	active_tab.render()
 
 ## update ##########################################
 

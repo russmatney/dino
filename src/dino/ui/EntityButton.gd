@@ -2,13 +2,16 @@
 extends PanelContainer
 
 var game_entity: DinoGameEntity
+var player_entity: DinoPlayerEntity
+var weapon_entity: DinoWeaponEntity
+
 @export var is_selected: bool :
 	set(v):
 		if v in [true, false]:
 			is_selected = v
 			update_selected()
 
-@onready var label = $%GameLabel
+@onready var label = $%Label
 @onready var icon = $%Icon
 
 signal icon_pressed
@@ -17,7 +20,7 @@ signal icon_pressed
 
 func _ready():
 	if Engine.is_editor_hint():
-		if not game_entity:
+		if not get_entity():
 			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 
 	icon.pressed.connect(func(): icon_pressed.emit())
@@ -26,17 +29,31 @@ func _ready():
 
 	setup()
 
+func get_entity():
+	if game_entity:
+		return game_entity
+	if player_entity:
+		return player_entity
+	if weapon_entity:
+		return weapon_entity
+
 func set_game_entity(g: DinoGameEntity):
 	game_entity = g
+
+func set_player_entity(g: DinoPlayerEntity):
+	player_entity = g
+
+func set_weapon_entity(g: DinoWeaponEntity):
+	weapon_entity = g
 
 ## setup #######################################
 
 func setup():
-	if game_entity:
-		label.text = "[center]%s[/center]" % str(game_entity.get_display_name())
-		icon.texture_normal = game_entity.get_icon_texture()
+	if get_entity():
+		label.text = "[center]%s[/center]" % str(get_entity().get_display_name())
+		icon.texture_normal = get_entity().get_icon_texture()
 	else:
-		Log.warn("no game_entity, cannot setup")
+		Log.warn("no entity, cannot setup", self)
 
 ## focus #######################################
 

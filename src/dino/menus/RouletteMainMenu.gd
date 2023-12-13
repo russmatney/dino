@@ -5,11 +5,10 @@ extends CanvasLayer
 @onready var players_grid_container = $%PlayersGridContainer
 @onready var button_list = $%ButtonList
 
-var game_button = preload("res://src/dino/menus/GameButton.tscn")
+var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
+
 var game_entities = []
 var selected_game_entities = []
-
-var player_button = preload("res://src/dino/menus/PlayerButton.tscn")
 var player_entities = []
 var selected_player_entity
 
@@ -60,7 +59,7 @@ func build_games_grid():
 	U.free_children(games_grid_container)
 
 	for gm in game_entities:
-		var button = game_button.instantiate()
+		var button = entity_button.instantiate()
 		button.set_game_entity(gm)
 		button.icon_pressed.connect(func(): select_game(gm))
 		games_grid_container.add_child(button)
@@ -77,7 +76,7 @@ func build_players_grid():
 	U.free_children(players_grid_container)
 
 	for pl in player_entities:
-		var button = player_button.instantiate()
+		var button = entity_button.instantiate()
 		button.set_player_entity(pl)
 		button.icon_pressed.connect(func(): select_player(pl))
 		players_grid_container.add_child(button)

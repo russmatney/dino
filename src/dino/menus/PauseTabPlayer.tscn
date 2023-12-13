@@ -1,25 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxe4y5m8yhs4m"]
+[gd_scene load_steps=10 format=3 uid="uid://bxe4y5m8yhs4m"]
 
 [ext_resource type="Script" path="res://src/dino/menus/PauseTabPlayer.gd" id="1_ibsoa"]
 [ext_resource type="Texture2D" uid="uid://c7jw4eir0vw0f" path="res://src/dino/players/hatbot/assets/greyhat_portrait1.png" id="1_qwsl8"]
-[ext_resource type="PackedScene" uid="uid://bm2cgpwup8xds" path="res://src/dino/ui/PlayerButton.tscn" id="3_ef0io"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="4_5k1e2"]
+[ext_resource type="PackedScene" uid="uid://pb7ag8sxpept" path="res://src/dino/ui/EntityButton.tscn" id="5_jgt1l"]
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="6_i2ugf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_la6u1"]
 [ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/dino/ui/WeaponIcon.tscn" id="8_kmyt0"]
 [ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="9_bfb4x"]
-
-[sub_resource type="Resource" id="Resource_6armv"]
-script = ExtResource("4_5k1e2")
-_id = "72"
-
-[sub_resource type="Resource" id="Resource_e2lo1"]
-script = ExtResource("4_5k1e2")
-_id = "71"
-
-[sub_resource type="Resource" id="Resource_72b7y"]
-script = ExtResource("4_5k1e2")
-_id = "73"
 
 [sub_resource type="Resource" id="Resource_gvmx5"]
 script = ExtResource("9_bfb4x")
@@ -35,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 script = ExtResource("1_ibsoa")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -49,6 +37,7 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 alignment = 1
 
@@ -94,23 +83,17 @@ scroll_active = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="OtherPlayersGrid" type="GridContainer" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="OtherPlayersGrid" type="GridContainer" parent="VBoxContainer/CenterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 columns = 3
 
-[node name="PlayerButton" parent="VBoxContainer/OtherPlayersGrid" instance=ExtResource("3_ef0io")]
+[node name="EntityButton" parent="VBoxContainer/CenterContainer/OtherPlayersGrid" instance=ExtResource("5_jgt1l")]
 layout_mode = 2
-player_entity = SubResource("Resource_6armv")
-
-[node name="PlayerButton2" parent="VBoxContainer/OtherPlayersGrid" instance=ExtResource("3_ef0io")]
-layout_mode = 2
-player_entity = SubResource("Resource_e2lo1")
-
-[node name="PlayerButton3" parent="VBoxContainer/OtherPlayersGrid" instance=ExtResource("3_ef0io")]
-layout_mode = 2
-player_entity = SubResource("Resource_72b7y")
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -176,17 +159,20 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="WeaponsGrid" type="GridContainer" parent="VBoxContainer2"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="WeaponsGrid" type="GridContainer" parent="VBoxContainer2/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 4
 
-[node name="WeaponIcon" parent="VBoxContainer2/WeaponsGrid" instance=ExtResource("8_kmyt0")]
+[node name="WeaponIcon" parent="VBoxContainer2/CenterContainer/WeaponsGrid" instance=ExtResource("8_kmyt0")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 entity = SubResource("Resource_gvmx5")
 
-[node name="WeaponIcon3" parent="VBoxContainer2/WeaponsGrid" instance=ExtResource("8_kmyt0")]
+[node name="WeaponIcon3" parent="VBoxContainer2/CenterContainer/WeaponsGrid" instance=ExtResource("8_kmyt0")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 entity = SubResource("Resource_yafbw")
