@@ -28,7 +28,7 @@ func start_mode(game_mode):
 
 var game_modes = []
 func build_games_grid():
-	game_modes = Game.all_game_modes()
+	game_modes = Game.game_modes()
 	U.free_children(games_grid_container)
 
 	for gm in game_modes:

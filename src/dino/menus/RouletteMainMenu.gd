@@ -55,7 +55,7 @@ func select_game(game_entity):
 	reset_ui()
 
 func build_games_grid():
-	game_entities = Game.all_game_entities()
+	game_entities = Game.basic_game_entities()
 	selected_game_entities = game_entities
 	U.free_children(games_grid_container)
 

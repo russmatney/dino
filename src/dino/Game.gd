@@ -6,17 +6,20 @@ extends Node
 func all_game_entities():
 	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
-		.filter(func(e): return e.is_enabled())\
-		.filter(func(e): return not e.is_game_mode())
+		.filter(func(e): return e.is_enabled())
 
-func all_game_modes():
-	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
-	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
-		.filter(func(e): return e.is_enabled())\
-		.filter(func(e): return e.is_game_mode())
+func basic_game_entities():
+	return all_game_entities().filter(func(e): return not e.is_game_mode())
 
-func game_entity_for_scene(sfp):
-	var gs = all_game_entities().filter(func(g): return g and g.manages_scene(sfp))
+func game_modes():
+	return all_game_entities().filter(func(e): return e.is_game_mode())
+
+func game_entity_for_scene(sfp, opts={}):
+	var gs
+	if opts.get("all"):
+		gs = all_game_entities().filter(func(g): return g and g.manages_scene(sfp))
+	else:
+		gs = basic_game_entities().filter(func(g): return g and g.manages_scene(sfp))
 	if gs.size() == 1:
 		return gs[0]
 	elif gs.size() == 0:
@@ -30,6 +33,8 @@ func get_game_entity(ent_id):
 ## Navi.menu register/cleanup ##########################################################
 
 func register_menus(ent):
+	if ent == null:
+		return
 	Navi.set_pause_menu(ent.get_pause_menu())
 	Navi.set_win_menu(ent.get_win_menu())
 	Navi.set_death_menu(ent.get_death_menu())
@@ -39,24 +44,30 @@ func clear_menus():
 
 ## current game ##########################################################
 
-func get_current_game():
+func get_current_game(opts={}):
 	var sfp = Navi.current_scene_path()
 	if sfp:
-		var game_entity = game_entity_for_scene(sfp)
-		if game_entity:
-			return game_entity
+		if opts.get("all"):
+			var game_entity = game_entity_for_scene(sfp, opts)
+			if game_entity:
+				return game_entity
+		else:
+			var game_entity = game_entity_for_scene(sfp)
+			if game_entity:
+				return game_entity
 	Log.warn("Could not determine current_game from scene", sfp)
 
 ## launch game ##########################################################
 
 ## Invoked from Dino Level in a non-managed game
 func debug_register_current_game():
-	var ent = get_current_game()
-	Log.pr("Registering current game with fallback player entity: ", ent)
-	register_menus(ent)
-	P.setup_player(ent)
-	var player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
-	P.set_player_entity(player_entity)
+	var ent = get_current_game({all=true})
+	if ent:
+		Log.pr("Registering current game with fallback player entity: ", ent)
+		register_menus(ent)
+		P.setup_player(ent)
+		var player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+		P.set_player_entity(player_entity)
 
 var _is_managed = false
 func is_managed():
