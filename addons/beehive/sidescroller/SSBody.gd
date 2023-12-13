@@ -414,14 +414,14 @@ func get_existing_weapon_for_entity(ent_id):
 func add_weapon_entity(ent_id):
 	var existing = get_existing_weapon_for_entity(ent_id)
 	if existing:
-		# Log.pr("Refusing to add dupe weapon", ent_id, existing)
-		return
-	var ent = Pandora.get_entity(ent_id)
-	var scene = ent.get_sidescroller_scene()
-	var w = scene.instantiate()
-	w.entity = ent
-	add_child(w)
-	add_weapon_scene(w)
+		add_weapon_scene(existing)
+	else:
+		var ent = Pandora.get_entity(ent_id)
+		var scene = ent.get_sidescroller_scene()
+		var w = scene.instantiate()
+		w.entity = ent
+		add_child(w)
+		add_weapon_scene(w)
 
 func remove_weapon_entity(ent_id):
 	var weapon = get_existing_weapon_for_entity(ent_id)
@@ -429,10 +429,12 @@ func remove_weapon_entity(ent_id):
 		drop_weapon(weapon)
 
 func add_weapon_scene(weapon: SSWeapon):
-	if not weapon in weapons:
-		weapons.map(deactivate_weapon)
-		weapons.push_front(weapon)
-		activate_weapon()
+	if weapon in weapons:
+		weapons.erase(weapon)
+
+	weapons.map(deactivate_weapon)
+	weapons.push_front(weapon)
+	activate_weapon()
 
 func has_weapon():
 	return active_weapon() != null
@@ -464,10 +466,20 @@ func cycle_weapon():
 		activate_weapon()
 		changed_weapon.emit(active_weapon())
 
-# maybe different from 'use' for multi-state things like the flashlight?
+func activate_weapon_entity(entity):
+	var w = get_existing_weapon_for_entity(entity.get_entity_id())
+	if w:
+		activate_weapon(w)
+
+# move the passed weapon to index 0, and call w.activate()
 func activate_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
+	else:
+		weapons.erase(weapon)
+		weapons.push_front(weapon)
+		(func(): changed_weapon.emit(active_weapon())).call_deferred()
+
 	weapon.visible = true
 	weapon.activate()
 

@@ -4,10 +4,6 @@ extends HBoxContainer
 ## vars ###################################333
 
 var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
-
-var player_entities = []
-var selected_player_entity
-
 var weapon_icon_scene = preload("res://src/dino/ui/WeaponIcon.tscn")
 
 @onready var player_icon = $%PlayerIcon
@@ -20,6 +16,11 @@ var weapon_icon_scene = preload("res://src/dino/ui/WeaponIcon.tscn")
 @onready var weapon_description = $%SelectedWeaponDescription
 @onready var weapons_grid = $%WeaponsGrid
 
+var selected_player
+var current_player
+
+var selected_weapon
+var current_weapon
 
 ## ready ###################################333
 
@@ -41,16 +42,17 @@ func render():
 	update_players_grid(p_ent)
 
 	var p = P.player
-	if not p:
+	if not p or not p.has_weapon():
 		# TODO zero state for weapons
 		return
 
-	update_weapon_data(p)
+	update_weapon_data(p.active_weapon().entity)
 	update_weapons_grid(p)
 
 ## player updates ##################################
 
 func update_player_data(player_ent):
+	current_player = player_ent
 	player_icon.set_texture(player_ent.get_icon_texture())
 	player_name.text = "[center]%s[/center]" % player_ent.get_display_name()
 	# TODO player descriptions
@@ -65,18 +67,13 @@ func update_players_grid(player_ent):
 		button.icon_pressed.connect(func(): select_player(p))
 		players_grid.add_child(button)
 
-func update_weapon_data(player):
-	if not player.has_weapon():
-		return
-
-	var ent = player.active_weapon().entity
-
-	weapon_icon.entity = ent
+func update_weapon_data(weapon_entity):
+	current_weapon = weapon_entity
+	weapon_icon.entity = weapon_entity
 	weapon_icon.render()
-
-	weapon_name.text = "[center]%s[/center]" % ent.get_display_name()
+	weapon_name.text = "[center]%s[/center]" % weapon_entity.get_display_name()
 	# TODO weapon descriptions
-	weapon_description.text = "[center]A very good description of the %s.[/center]" % ent.get_display_name()
+	weapon_description.text = "[center]A very good description of the %s.[/center]" % weapon_entity.get_display_name()
 
 func update_weapons_grid(player):
 	if not player.has_weapon():
@@ -87,13 +84,31 @@ func update_weapons_grid(player):
 	for w in player.weapons.filter(func(w): return w.entity != active_weapon_ent):
 		var button = entity_button.instantiate()
 		button.set_weapon_entity(w.entity)
-		button.icon_pressed.connect(func(): select_weapon(w.entity))
+		button.icon_pressed.connect(func(): if w: select_weapon(w.entity))
 		weapons_grid.add_child(button)
 
-## select player ##################################
+## select interactions ##################################
 
 func select_player(player_ent):
-	Log.pr("player ent selected", player_ent)
+	selected_player = player_ent
+	P.set_player_entity(player_ent)
+	P.clear_player_scene()
+
+	Hood.notif({text="Switched to %s" % player_ent.get_display_name(), id="player-switch"})
+
+	# respawn at current position? regen level?
+	P.respawn_player()
+
+	# clearing b/c these buttons are invalid until the player is setup (after unpausing)
+	U.remove_children(weapons_grid, {defer=true})
+	render.call_deferred()
 
 func select_weapon(weapon_ent):
-	Log.pr("weapon ent selected", weapon_ent)
+	selected_weapon = weapon_ent
+
+	# move behind some confirmation?
+	var p = P.player
+	p.activate_weapon_entity(weapon_ent)
+
+	Hood.notif({text="Switched to %s" % weapon_ent.get_display_name(), id="weapon-switch"})
+	render.call_deferred()
