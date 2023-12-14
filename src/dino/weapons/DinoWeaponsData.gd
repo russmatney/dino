@@ -12,3 +12,10 @@ static func sidescroller_weapon_entities():
 static func topdown_weapon_entities():
 	return all_weapon_entities().filter(func(ent):
 		return ent.get_topdown_scene())
+
+## weapons crud ################################################
+
+static func weapon_with_id(weapons, id):
+	for w in weapons:
+		if w.entity.get_entity_id() == id:
+			return w

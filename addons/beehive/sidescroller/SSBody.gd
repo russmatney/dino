@@ -407,9 +407,9 @@ func add_descend():
 ## weapons #######################################################
 
 func get_existing_weapon_for_entity(ent_id):
-	for w in weapons:
-		if w.entity.get_entity_id() == ent_id:
-			return w
+	# this dependency points into dino...
+	# ideally we're not writing weapon logic in this file at all
+	return DinoWeaponsData.weapon_with_id(weapons, ent_id)
 
 func add_weapon_entity(ent_id):
 	var existing = get_existing_weapon_for_entity(ent_id)
