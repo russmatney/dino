@@ -71,6 +71,7 @@ func _process(_delta):
 ## unhandled input #######################################################################
 
 @onready var unhandled_input_list = $%UnhandledInputList
+var show_raw = false # TODO support toggle
 
 var n = 15
 # limit the input list to `n` inputs
@@ -85,12 +86,20 @@ func limit_input_list():
 
 func new_input_label(event):
 	var axs = Trolley.actions_for_input(event)
-	var label = "[center]raw: %s[/center]" % Log.to_pretty(event)
+	var label = ""
+	if show_raw:
+		label = "raw: %s" % Log.to_pretty(event)
+	if "action" in event:
+		label += "action: %s" % event["action"]
 	for ax in axs:
 		label += "\n\t%s: %s" % [
 			Log.to_pretty(ax.key_str) if "key_str" in ax else Log.to_pretty(ax.btn_idx),
 			Log.to_pretty(ax.action_label),
 			]
+
+	if label == "":
+		# consider a log or shorter raw event
+		return
 
 	var lbl = RichTextLabel.new()
 	lbl.bbcode_enabled = true
@@ -98,6 +107,7 @@ func new_input_label(event):
 	lbl.scroll_active = false
 	lbl.fit_content = true
 	unhandled_input_list.add_child(lbl)
+	lbl.grab_focus()
 
 
 func _unhandled_input(event):
