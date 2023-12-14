@@ -12,8 +12,8 @@ func aim(aim_v: Vector2):
 		rotation = aim_vector.angle()
 
 func activate():
-	Log.pr("activating", self)
-	actor.notif(str("activated ", self.display_name))
+	if actor:
+		actor.notif(str("activated ", self.display_name))
 	DJZ.play(DJZ.S.laser)
 	aim(actor.facing_vector)
 

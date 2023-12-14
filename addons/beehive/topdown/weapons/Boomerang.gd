@@ -7,7 +7,6 @@ func aim(aim: Vector2):
 	aim_vector = aim.normalized()
 
 func activate():
-	Log.pr("activating", self)
 	if actor and actor.has_method("notif"):
 		actor.notif(self.name)
 	DJZ.play(DJZ.S.laser)
