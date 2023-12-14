@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0r7m71tr77vo"]
+[gd_scene load_steps=12 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenu.gd" id="1_7pfpx"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/metro/MetroMap.tscn" id="7_bx1bw"]
 [ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/PauseTabPlayer.tscn" id="7_ipd6p"]
 [ext_resource type="PackedScene" uid="uid://qm52orrv1o6a" path="res://addons/trolley/TrolleyDebugPanel.tscn" id="8_0a5jm"]
+[ext_resource type="PackedScene" uid="uid://duncni63m4vm0" path="res://src/dino/ui/PlayedGameRecords.tscn" id="9_k7cqm"]
 [ext_resource type="PackedScene" uid="uid://idppjgt76c6l" path="res://addons/dj/TurnTable.tscn" id="9_oe4cd"]
 
 [node name="DinoPauseMenu" type="CanvasLayer"]
@@ -48,7 +49,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 2
+current_tab = 3
 
 [node name="Player" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("7_ipd6p")]
 visible = false
@@ -71,25 +72,28 @@ script = ExtResource("4_wcgkx")
 [node name="MuteButtonList" parent="PanelContainer/VBoxContainer/TabContainer/Options/VBoxContainer" instance=ExtResource("5_ai6py")]
 layout_mode = 2
 
-[node name="Level" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("3_oarvi")]
+[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/TabContainer/Options" instance=ExtResource("3_oarvi")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MetroMap" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("7_bx1bw")]
-layout_mode = 2
-
-[node name="Quest" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+[node name="Level" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer/Quest" instance=ExtResource("3_gr3ki")]
+[node name="MetroMap" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("7_bx1bw")]
+layout_mode = 2
+
+[node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("3_gr3ki")]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Progress" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayedGameRecords" parent="PanelContainer/VBoxContainer/TabContainer/Progress" instance=ExtResource("9_k7cqm")]
+layout_mode = 2
 
 [node name="Debug" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false

@@ -107,7 +107,7 @@ func new_input_label(event):
 	lbl.scroll_active = false
 	lbl.fit_content = true
 	unhandled_input_list.add_child(lbl)
-	lbl.grab_focus()
+	# lbl.grab_focus()
 
 
 func _unhandled_input(event):

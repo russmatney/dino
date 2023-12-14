@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3 uid="uid://duncni63m4vm0"]
+
+[ext_resource type="Script" path="res://src/dino/ui/PlayedGameRecords.gd" id="1_etqxx"]
+
+[node name="PlayedGameRecords" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_etqxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="PlayedGameIcons" type="GridContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="GameLabel" type="RichTextLabel" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "Shirt"
+fit_content = true
+scroll_active = false
+
+[node name="GameRecordText" type="RichTextLabel" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+text = "pretty printed game record"
+fit_content = true
+scroll_active = false
+
+[node name="PlayerIcons" type="GridContainer" parent="VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2

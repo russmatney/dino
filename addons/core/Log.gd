@@ -117,7 +117,7 @@ static func to_pretty(msg, newlines=false, use_color=true, indent_level=0):
 	elif msg is Object and msg.has_method("data"):
 		return Log.to_pretty(msg.data(), newlines, use_color, indent_level)
 	elif msg is Object and msg.has_method("to_pretty"):
-		return msg.Log.to_pretty(newlines, use_color, indent_level)
+		return msg.to_pretty(newlines, use_color, indent_level)
 	else:
 		return str(msg)
 

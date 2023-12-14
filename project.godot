@@ -34,6 +34,7 @@ Cam="*res://addons/camera/Camera.gd"
 Game="*res://src/dino/Game.gd"
 Metro="*res://addons/metro/Metro.gd"
 P="*res://src/dino/Player.gd"
+Records="*res://src/dino/Records.gd"
 
 [display]
 

@@ -57,6 +57,11 @@ func get_current_game(opts={}):
 				return game_entity
 	Log.warn("Could not determine current_game from scene", sfp)
 
+func get_current_game_mode():
+	var g = get_current_game({all=true})
+	if g and g.is_game_mode():
+		return g
+
 ## launch game ##########################################################
 
 ## Invoked from Dino Level in a non-managed game

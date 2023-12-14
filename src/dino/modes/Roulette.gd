@@ -51,7 +51,7 @@ func _ready():
 
 func next_random_game():
 	# PlayedGameRecords maybe a collection that manages this index+filter (and game selection?)
-	var played_ids = played_game_records.map(func(x): return x.entity.get_entity_id())
+	var played_ids = played_game_records.map(func(x): return x.game_entity.get_entity_id())
 	var gs = game_ids.filter(func(g_id): return not g_id in played_ids)
 	var eid = U.rand_of(gs)
 	if eid:
@@ -95,18 +95,20 @@ func setup_game(node):
 	else:
 		Log.warn("game node has no 'level_complete' signal!", node)
 
-func launch_game(entity):
-	current_game_entity = entity
-	played_game_records.append({entity=entity})
+func launch_game(game_entity):
+	current_game_entity = game_entity
+	played_game_records.append({game_entity=game_entity})
+
+	Records.start_game({game_entity=game_entity, player_entity=P.player_entity})
 
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
-	P.setup_player(entity)
+	P.setup_player(game_entity)
 	P.set_player_entity(player_entity)
 
-	var scene = entity.get_first_level_scene()
+	var scene = game_entity.get_first_level_scene()
 	game_node = scene.instantiate()
 	setup_game(game_node)
 
@@ -126,9 +128,7 @@ func _on_game_ready():
 func _on_level_complete():
 	Log.pr("Roulette Level Complete!")
 
-	# TODO helper class/object?
-	var record = played_game_records[len(played_game_records) - 1]
-	record["completed_at"] = Time.get_datetime_dict_from_system()
+	Records.complete_game({player_entity=P.player_entity})
 
 	var entity = next_random_game()
 	if entity:
