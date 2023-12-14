@@ -36,7 +36,8 @@ func aim(aim_vector: Vector2):
 
 func activate():
 	Log.pr("activating", self)
-	actor.notif(self.name)
+	if actor and actor.has_method("notif"):
+		actor.notif(self.name)
 	DJZ.play(DJZ.S.swordswing)
 
 func deactivate():
