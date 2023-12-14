@@ -66,6 +66,11 @@ var is_dead
 var lives_lost: int = 0
 var kos: int = 0
 
+# TODO proper weapons support (this just prevents a crash for now)
+var weapons = []
+func has_weapon():
+	return false
+
 ## ready ###########################################################
 
 func _ready():
