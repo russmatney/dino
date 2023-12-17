@@ -49,10 +49,12 @@ var is_spiking = false
 
 func _process(_delta):
 	# TODO don't fire these every process loop!
-	if orbit_items.size() == 0 and is_spiking == false:
-		remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
-	else:
-		add_weapon(DinoWeaponEntityIds.ORBS)
+	if has_weapon_id(DinoWeaponEntityIds.ORBS):
+		if orbit_items.size() == 0 and is_spiking == false:
+			remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
+	if not has_weapon_id(DinoWeaponEntityIds.ORBS):
+		if orbit_items.size() > 0:
+			add_weapon(DinoWeaponEntityIds.ORBS)
 
 ## orbiting items ##################################################################
 

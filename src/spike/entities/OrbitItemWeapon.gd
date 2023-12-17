@@ -14,8 +14,8 @@ func aim(aim_v: Vector2):
 func activate():
 	if actor:
 		actor.notif(str("activated ", self.display_name))
+		aim(actor.facing_vector)
 	DJZ.play(DJZ.S.laser)
-	aim(actor.facing_vector)
 
 func deactivate():
 	pass

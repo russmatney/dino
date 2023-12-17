@@ -63,7 +63,7 @@ func add_weapon_to_stack(weapon: Variant):
 func has_weapon():
 	return active_weapon() != null
 
-func has_weapon_entity(ent_id):
+func has_weapon_id(ent_id):
 	return weapon_for_id(ent_id)
 
 func active_weapon():
