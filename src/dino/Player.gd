@@ -53,9 +53,6 @@ func set_player_type(type: PlayerType):
 	# do more get_player_scene logic here?
 
 func get_player_scene():
-	# consider smthihng like this here, or persisting the game from setup_player():
-	# var game = Game.get_current_game()
-
 	if player_scene:
 		return player_scene
 

@@ -30,9 +30,6 @@ func _ready():
 	# could use a better name for :gen/finished-hook
 	level_gen.nodes_transferred.connect(setup_level)
 
-	if not Game.is_managed():
-		Game.debug_register_current_game()
-
 ## process ######################################################
 
 func _process(delta):

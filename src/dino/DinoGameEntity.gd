@@ -65,3 +65,13 @@ func manages_scene(scene_file_path):
 	if prefix in [null, ""]:
 		return false
 	return scene_file_path.begins_with(prefix)
+
+## static helpers ##########################################################
+
+static func all_game_entities():
+	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
+	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
+		.filter(func(e): return e.is_enabled())
+
+static func basic_game_entities():
+	return DinoGameEntity.all_game_entities().filter(func(e): return not e.is_game_mode())

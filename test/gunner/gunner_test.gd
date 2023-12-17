@@ -2,7 +2,7 @@ extends GdUnitTestSuite
 class_name GunnerTest
 
 func test_gunner_game_entity():
-	var ent = Game.get_game_entity(DinoGameEntityIds.GUNNER)
+	var ent = Pandora.get_entity(DinoGameEntityIds.GUNNER)
 
 	assert_that(ent).is_not_null()
 	assert_that(ent.get_first_level_scene()).is_not_null()
@@ -11,7 +11,7 @@ func test_gunner_game_entity():
 signal key_release
 
 func test_gunner_dino_level_completion():
-	var game_ent = Game.get_game_entity(DinoGameEntityIds.GUNNER)
+	var game_ent = Pandora.get_entity(DinoGameEntityIds.GUNNER)
 	var sc = game_ent.get_first_level_scene()
 	P.setup_player(game_ent)
 	var player_ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)

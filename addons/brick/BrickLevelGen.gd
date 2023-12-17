@@ -261,9 +261,6 @@ func _enter_tree():
 func _ready():
 	ensure_containers()
 
-	# if not Game.is_managed() and not Engine.is_editor_hint():
-	# 	U.call_in.call_deferred(self, maybe_regen, 1.0)
-
 func maybe_regen():
 	if len(rooms_node.get_children()) == 0:
 		Log.pr("no rooms, generating!")

@@ -19,7 +19,7 @@ func _ready():
 		# TODO pull records from various sources (disk?)
 		records = Records.current_records
 
-	if not Game.is_managed() and len(records) == 0:
+	if Engine.is_editor_hint() and len(records) == 0:
 		Log.pr("building fake game records for ui debugging")
 		records = DinoRecords.mk_records([{
 				game_entity=Pandora.get_entity(DinoGameEntityIds.GUNNER),
