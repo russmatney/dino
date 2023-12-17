@@ -1,0 +1,374 @@
+[gd_scene load_steps=27 format=3 uid="uid://c4854dwgk67cd"]
+
+[ext_resource type="Script" path="res://src/dino/DinoLevel.gd" id="1_chctc"]
+[ext_resource type="Script" path="res://src/dino/levels/WildcardLevelGen.gd" id="2_h4345"]
+[ext_resource type="Script" path="res://addons/brick/BrickRoom.gd" id="3_v34hg"]
+[ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/reptile/tilemaps/GrassTiles16.tscn" id="4_edqwp"]
+[ext_resource type="TileSet" uid="uid://cvc56aldv1hyq" path="res://addons/reptile/tilesets/GrassyTiles16.tres" id="5_i8xvd"]
+[ext_resource type="Script" path="res://addons/reptile/RepTileMap.gd" id="6_g71y2"]
+[ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="7_uh4qx"]
+[ext_resource type="Script" path="res://src/spike/entities/DeliveryZone.gd" id="8_d0v15"]
+[ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="9_583dj"]
+[ext_resource type="Script" path="res://src/gunner/targets/Target.gd" id="10_7t3rk"]
+[ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="11_4lwgf"]
+[ext_resource type="Script" path="res://src/spike/entities/CookingPot.gd" id="12_h4u84"]
+[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="13_b4s1m"]
+[ext_resource type="Script" path="res://src/spike/zones/OneWayPlatform.gd" id="14_w6rvr"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/gunner/enemies/EnemyRobot.tscn" id="15_lyve8"]
+[ext_resource type="Script" path="res://src/gunner/enemies/EnemyRobot.gd" id="16_m7g67"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="17_473xj"]
+[ext_resource type="Script" path="res://src/spike/enemies/Blob.gd" id="18_tng3o"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="19_8ko2r"]
+[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="20_3q6mg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8swu6"]
+size = Vector2(256, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2adt"]
+size = Vector2(176, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvk75"]
+size = Vector2(176, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jkxj2"]
+size = Vector2(384, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4oo2"]
+size = Vector2(240, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnqvv"]
+size = Vector2(224, 128)
+
+[node name="WildcardLevel" type="Node2D"]
+script = ExtResource("1_chctc")
+
+[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node")]
+script = ExtResource("2_h4345")
+_seed = 537859834
+room_defs_path = "res://src/dino/levels/levels.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="@Node2D@25285" type="Node2D" parent="Rooms"]
+script = ExtResource("3_v34hg")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@25285"]
+visible = false
+offset_right = 256.0
+offset_bottom = 128.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@25285" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@25285/RoomBox"]
+position = Vector2(128, 64)
+shape = SubResource("RectangleShape2D_8swu6")
+
+[node name="@Node2D@25286" type="Node2D" parent="Rooms"]
+position = Vector2(256, -16)
+script = ExtResource("3_v34hg")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@25286"]
+visible = false
+offset_right = 176.0
+offset_bottom = 96.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@25286" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@25286/RoomBox"]
+position = Vector2(88, 48)
+shape = SubResource("RectangleShape2D_w2adt")
+
+[node name="@Node2D@25287" type="Node2D" parent="Rooms"]
+position = Vector2(432, -32)
+script = ExtResource("3_v34hg")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@25287"]
+visible = false
+offset_right = 176.0
+offset_bottom = 144.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@25287" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@25287/RoomBox"]
+position = Vector2(88, 72)
+shape = SubResource("RectangleShape2D_tvk75")
+
+[node name="@Node2D@25288" type="Node2D" parent="Rooms"]
+position = Vector2(608, 64)
+script = ExtResource("3_v34hg")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@25288"]
+visible = false
+offset_right = 384.0
+offset_bottom = 112.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@25288" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@25288/RoomBox"]
+position = Vector2(192, 56)
+shape = SubResource("RectangleShape2D_jkxj2")
+
+[node name="@Node2D@25289" type="Node2D" parent="Rooms"]
+position = Vector2(992, 96)
+script = ExtResource("3_v34hg")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@25289"]
+visible = false
+offset_right = 240.0
+offset_bottom = 192.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@25289" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@25289/RoomBox"]
+position = Vector2(120, 96)
+shape = SubResource("RectangleShape2D_g4oo2")
+
+[node name="@Node2D@25290" type="Node2D" parent="Rooms"]
+position = Vector2(1232, 0)
+script = ExtResource("3_v34hg")
+
+[node name="ColorRect" type="ColorRect" parent="Rooms/@Node2D@25290"]
+visible = false
+offset_right = 224.0
+offset_bottom = 128.0
+color = Color(0.803922, 0.521569, 0.247059, 1)
+
+[node name="RoomBox" type="Area2D" parent="Rooms/@Node2D@25290" groups=["roombox"]]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/@Node2D@25290/RoomBox"]
+position = Vector2(112, 64)
+shape = SubResource("RectangleShape2D_qnqvv")
+
+[node name="Tilemaps" type="Node" parent="."]
+
+[node name="@TileMap@25284" type="TileMap" parent="Tilemaps" instance=ExtResource("4_edqwp")]
+tile_set = ExtResource("5_i8xvd")
+format = 2
+layer_0/tile_data = PackedInt32Array(393293, 131072, 1, 393294, 131072, 1, 393295, 131072, 1, 393296, 131072, 1, 393297, 131072, 1, 393298, 131072, 1, 393299, 131072, 1, 393300, 131072, 1, 393301, 131072, 1, 393302, 131072, 1, 393303, 131072, 1, 393304, 131072, 1, 393305, 131072, 1, 393306, 196608, 1, 458829, 131072, 3, 458830, 131072, 3, 458831, 131072, 3, 458832, 131072, 3, 458833, 131072, 3, 458834, 131072, 3, 458835, 131072, 3, 458836, 131072, 3, 458837, 131072, 3, 458838, 131072, 3, 458839, 131072, 3, 458840, 131072, 3, 458841, 131072, 3, 458842, 196608, 3, 393278, 131072, 1, 393279, 196608, 1, 393291, 65536, 1, 393292, 131072, 1, 458814, 131072, 2, 458815, 196608, 2, 458827, 65536, 2, 458828, 393216, 2, 524350, 131072, 2, 524351, 196608, 2, 524363, 65536, 2, 524364, 196608, 2, 589886, 131072, 2, 589887, 196608, 2, 589899, 65536, 2, 589900, 196608, 2, 655422, 458752, 2, 655423, 196608, 2, 655435, 65536, 2, 655436, 196608, 2, 720958, 65536, 2, 720959, 196608, 2, 720971, 65536, 2, 720972, 196608, 2, 786494, 65536, 2, 786495, 196608, 2, 786507, 65536, 2, 786508, 196608, 2, 852030, 65536, 2, 852031, 196608, 2, 852043, 65536, 2, 852044, 196608, 2, 917566, 65536, 2, 917567, 196608, 2, 917579, 65536, 2, 917580, 196608, 2, 983102, 65536, 2, 983103, 196608, 2, 983115, 65536, 2, 983116, 196608, 2, 1048638, 65536, 2, 1048639, 393216, 3, 1048640, 131072, 1, 1048641, 131072, 1, 1048642, 131072, 1, 1048643, 131072, 1, 1048644, 131072, 1, 1048645, 131072, 1, 1048646, 131072, 1, 1048647, 131072, 1, 1048648, 131072, 1, 1048649, 131072, 1, 1048650, 131072, 1, 1048651, 458752, 3, 1048652, 196608, 2, 1114174, 65536, 3, 1114175, 131072, 3, 1114176, 131072, 3, 1114177, 131072, 3, 1114178, 131072, 3, 1114179, 131072, 3, 1114180, 131072, 3, 1114181, 131072, 3, 1114182, 131072, 3, 1114183, 131072, 3, 1114184, 131072, 3, 1114185, 131072, 3, 1114186, 131072, 3, 1114187, 131072, 3, 1114188, 196608, 3, 262182, 131072, 1, 262183, 196608, 1, 327718, 131072, 2, 327719, 196608, 2, 393254, 589824, 2, 393255, 393216, 3, 393256, 196608, 1, 393264, 65536, 4, 393265, 131072, 4, 393266, 131072, 4, 393267, 196608, 4, 393276, 65536, 1, 393277, 131072, 1, 458790, 65536, 2, 458791, 131072, 2, 458792, 393216, 3, 458793, 196608, 1, 458810, 65536, 1, 458811, 131072, 1, 458812, 458752, 3, 458813, 131072, 2, 524326, 65536, 2, 524327, 131072, 2, 524328, 131072, 2, 524329, 393216, 3, 524330, 131072, 1, 524331, 196608, 1, 524343, 65536, 1, 524344, 131072, 1, 524345, 131072, 1, 524346, 458752, 3, 524347, 131072, 2, 524348, 131072, 2, 524349, 131072, 2, 589862, 65536, 2, 589863, 131072, 2, 589864, 131072, 2, 589865, 131072, 2, 589866, 131072, 2, 589867, 393216, 3, 589868, 131072, 1, 589869, 131072, 1, 589870, 131072, 1, 589871, 131072, 1, 589872, 131072, 1, 589873, 131072, 1, 589874, 131072, 1, 589875, 131072, 1, 589876, 131072, 1, 589877, 131072, 1, 589878, 131072, 1, 589879, 458752, 3, 589880, 131072, 2, 589881, 131072, 2, 589882, 131072, 2, 589883, 131072, 2, 589884, 131072, 2, 589885, 131072, 2, 655398, 65536, 3, 655399, 131072, 3, 655400, 131072, 3, 655401, 131072, 3, 655402, 131072, 3, 655403, 131072, 3, 655404, 131072, 3, 655405, 131072, 3, 655406, 131072, 3, 655407, 131072, 3, 655408, 131072, 3, 655409, 131072, 3, 655410, 131072, 3, 655411, 131072, 3, 655412, 131072, 3, 655413, 131072, 3, 655414, 131072, 3, 655415, 131072, 3, 655416, 131072, 3, 655417, 131072, 3, 655418, 131072, 3, 655419, 131072, 3, 655420, 131072, 3, 655421, 131072, 3, 131101, 65536, 1, 131102, 131072, 1, 131103, 131072, 1, 131104, 196608, 1, 196637, 65536, 2, 196638, 131072, 2, 196639, 131072, 2, 196640, 196608, 2, 262171, 458752, 1, 262172, 131072, 1, 262173, 458752, 3, 262174, 131072, 2, 262175, 131072, 2, 262176, 393216, 3, 262177, 131072, 1, 262178, 131072, 1, 262179, 131072, 1, 262180, 131072, 1, 262181, 131072, 1, 327707, 65536, 2, 327708, 131072, 2, 327709, 131072, 2, 327710, 131072, 2, 327711, 131072, 2, 327712, 131072, 2, 327713, 131072, 2, 327714, 131072, 2, 327715, 131072, 2, 327716, 131072, 2, 327717, 131072, 2, 393243, 65536, 3, 393244, 131072, 3, 393245, 131072, 3, 393246, 131072, 3, 393247, 131072, 3, 393248, 131072, 3, 393249, 131072, 3, 393250, 131072, 3, 393251, 131072, 3, 393252, 131072, 3, 393253, 131072, 3, 262160, 131072, 4, 262161, 589824, 4, 262162, 131072, 4, 262163, 589824, 4, 262164, 589824, 4, 262165, 131072, 4, 262166, 589824, 4, 262167, 589824, 4, 262168, 589824, 4, 262169, 589824, 4, 262170, 589824, 4, 262144, 65536, 1, 262145, 131072, 1, 262146, 131072, 1, 262147, 131072, 1, 262148, 131072, 1, 262149, 131072, 1, 262150, 196608, 1, 262157, 65536, 1, 262158, 131072, 1, 262159, 393216, 1, 327680, 65536, 2, 327681, 131072, 2, 327682, 131072, 2, 327683, 131072, 2, 327684, 131072, 2, 327685, 131072, 2, 327686, 393216, 3, 327687, 131072, 1, 327688, 131072, 1, 327689, 196608, 1, 327692, 65536, 1, 327693, 458752, 3, 327694, 131072, 2, 327695, 196608, 2, 393216, 65536, 2, 393217, 131072, 2, 393218, 131072, 2, 393219, 131072, 2, 393220, 131072, 2, 393221, 131072, 2, 393222, 131072, 2, 393223, 131072, 2, 393224, 131072, 2, 393225, 196608, 2, 393228, 65536, 2, 393229, 131072, 2, 393230, 131072, 2, 393231, 196608, 2, 458752, 65536, 3, 458753, 131072, 3, 458754, 131072, 3, 458755, 131072, 3, 458756, 131072, 3, 458757, 131072, 3, 458758, 131072, 3, 458759, 131072, 3, 458760, 131072, 3, 458761, 393216, 4, 458762, 131072, 4, 458763, 131072, 4, 458764, 458752, 4, 458765, 131072, 3, 458766, 131072, 3, 458767, 196608, 3)
+script = ExtResource("6_g71y2")
+
+[node name="Entities" type="Node" parent="."]
+
+[node name="@Node2D@25273" type="Node2D" parent="Entities" groups=["voids"] instance=ExtResource("7_uh4qx")]
+position = Vector2(176, 96)
+script = ExtResource("8_d0v15")
+
+[node name="@Area2D@25274" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(56, 40)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Area2D@25247" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(168, 40)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Node2D@25275" type="Node2D" parent="Entities" instance=ExtResource("11_4lwgf")]
+position = Vector2(344, 16)
+script = ExtResource("12_h4u84")
+
+[node name="@StaticBody2D@25276" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(328, 20)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25249" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(344, 20)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25250" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(360, 20)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@CharacterBody2D@25277" type="CharacterBody2D" parent="Entities" groups=["enemy_robots"] instance=ExtResource("15_lyve8")]
+position = Vector2(480, 0)
+collision_layer = 8
+script = ExtResource("16_m7g67")
+
+[node name="@Area2D@25278" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(952, 88)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Area2D@25251" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(680, 104)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Area2D@25252" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(872, 120)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Area2D@25253" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(760, 136)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@CharacterBody2D@25279" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("17_473xj")]
+position = Vector2(1056, 192)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("18_tng3o")
+should_hurt_to_touch = true
+
+[node name="@CharacterBody2D@25254" type="CharacterBody2D" parent="Entities" groups=["enemies"] instance=ExtResource("17_473xj")]
+position = Vector2(1152, 192)
+collision_layer = 8
+collision_mask = 2049
+script = ExtResource("18_tng3o")
+should_hurt_to_touch = true
+
+[node name="@StaticBody2D@25280" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1096, 148)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25255" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1112, 148)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25256" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1128, 148)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25257" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1032, 164)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25258" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1048, 164)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25259" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1176, 164)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25260" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1192, 164)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25261" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1032, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25262" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1048, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25263" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1064, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25264" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1080, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25265" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1144, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25266" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1160, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25267" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1176, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25268" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1192, 212)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@Area2D@25281" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(1048, 120)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Area2D@25269" type="Area2D" parent="Entities" groups=["targets"] instance=ExtResource("9_583dj")]
+z_index = 10
+position = Vector2(1176, 120)
+collision_layer = 128
+collision_mask = 6
+script = ExtResource("10_7t3rk")
+
+[node name="@Marker2D@25282" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("19_8ko2r")]
+position = Vector2(1328, 32)
+script = ExtResource("20_3q6mg")
+dev_only = false
+
+[node name="@StaticBody2D@25283" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1320, 52)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25270" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1336, 52)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25271" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1352, 52)
+script = ExtResource("14_w6rvr")
+max_width = 16.0
+
+[node name="@StaticBody2D@25272" type="StaticBody2D" parent="Entities" instance=ExtResource("13_b4s1m")]
+position = Vector2(1368, 52)
+script = ExtResource("14_w6rvr")
+max_width = 16.0

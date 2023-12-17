@@ -1,0 +1,93 @@
+name Wild Card Rooms
+
+==============
+LEGEND
+==============
+
+b = Blob
+c = CookingPot
+d = Void
+e = Enemy
+o = Target
+p = Player
+x = Tile
+- = OneWayPlatform
+
+==============
+ROOMS
+==============
+
+name Player spawn
+has_player
+
+..............
+..............
+......p.......
+.....----.....
+..............
+..............
+xxxxxxxxxxxxxx
+xxxxxxxxxxxxxx
+
+name Kitchen One
+has_cooking_pot
+
+...........
+.....c.....
+....---....
+...........
+...........
+xxxxxxxxxxx
+
+name Void
+has_void
+
+................
+................
+...o......o.....
+................
+xxxxxxx......xxx
+xxxxxxxxxx..xxxx
+xxxxxxxxxx.dxxxx
+xxxxxxxxxxxxxxxx
+
+name Blog pit
+has_blobs
+
+xx...........xx
+xx.o.......o.xx
+xx...........xx
+xx....---....xx
+xx--.......--xx
+xx...........xx
+xx..b.....b..xx
+xx----...----xx
+xx...........xx
+xx...........xx
+xxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxx
+
+name Target Practice
+has_targets
+
+xx......................
+xx...................o..
+xxx.o.....xxxx........xx
+xxxx............o...xxxx
+xxxxxx...o.......xxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx
+
+
+name Enemy tower
+has_enemies
+
+...........
+...........
+...e.......
+...........
+..xxxx.....
+..xxxx.....
+xxxxxxxxxxx
+xxxxxxxxxxx
+xxxxxxxxxxx
