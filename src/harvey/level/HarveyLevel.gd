@@ -10,11 +10,12 @@ extends DinoLevel
 func _ready():
 	# time_up_menu = Navi.add_menu(time_up_menu_scene)
 
-	P.player_ready.connect(func():
-		# connect to signals on player and bots
-		for ch in $Entities.get_children():
-			if ch.has_signal("produce_delivered"):
-				ch.produce_delivered.connect(_on_produce_delivered))
+	# TODO restore!
+	# P.player_ready.connect(func():
+	# 	# connect to signals on player and bots
+	# 	for ch in $Entities.get_children():
+	# 		if ch.has_signal("produce_delivered"):
+	# 			ch.produce_delivered.connect(_on_produce_delivered))
 
 	super._ready()
 

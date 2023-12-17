@@ -13,9 +13,11 @@ signal key_release
 func test_gunner_dino_level_completion():
 	var game_ent = Pandora.get_entity(DinoGameEntityIds.GUNNER)
 	var sc = game_ent.get_first_level_scene()
-	P.setup_player(game_ent)
-	var player_ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
-	P.set_player_entity(player_ent)
+
+	Dino.setup_player({
+		type=DinoData.GameType.SideScroller,
+		entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
+		})
 
 	var level = monitor_signals(sc.instantiate())
 	level.skip_splash_intro = true
@@ -45,7 +47,7 @@ xxxxxx"}
 	await assert_signal(level).is_emitted("ready")
 	level.regenerate()
 
-	await assert_signal(P).is_emitted("player_ready")
+	await assert_signal(Dino).is_emitted("player_ready")
 	await assert_signal(level).is_emitted("level_setup")
 
 	# aim right

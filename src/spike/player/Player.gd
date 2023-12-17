@@ -28,11 +28,11 @@ func _on_player_death():
 		t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
 
 	# possibly we could share/re-use this, but meh, it'll probably need specific text
-	Jumbotron.jumbo_notif({header="You died", body="Sorry about it!",
-		action="close", action_label_text="Respawn",
-		on_close=P.respawn_player.bind({
-			setup=func(p):
-			Hotel.check_in(p, {health=p.initial_health, is_dead=false})})})
+	# Jumbotron.jumbo_notif({header="You died", body="Sorry about it!",
+	# 	action="close", action_label_text="Respawn",
+	# 	on_close=P.respawn_player.bind({
+	# 		setup=func(p):
+	# 		Hotel.check_in(p, {health=p.initial_health, is_dead=false})})})
 
 ## hotel ##################################################################
 

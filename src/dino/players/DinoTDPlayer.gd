@@ -36,7 +36,7 @@ func on_pit_entered():
 	machine.transit("Fall")
 
 	await get_tree().create_timer(1.0).timeout
-	P.respawn_player()
+	Dino.respawn_player({player=self})
 
 ## shrine_gems #######################################################
 

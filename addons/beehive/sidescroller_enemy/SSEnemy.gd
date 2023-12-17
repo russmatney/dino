@@ -113,17 +113,18 @@ func _physics_process(_delta):
 		if crawl_on_side != null:
 			orient_to_wall(crawl_on_side)
 
-	var player = P.get_player()
-	if player and is_instance_valid(player) and should_see_player and los:
-		# var player_pos = player.global_position
-		# los.target_position = to_local(player_pos)
+	# TODO restore!
+	# var player = P.get_player()
+	# if player and is_instance_valid(player) and should_see_player and los:
+	# 	# var player_pos = player.global_position
+	# 	# los.target_position = to_local(player_pos)
 
-		if los.is_colliding():
-			var body = los.get_collider()
-			if body.is_in_group("player"):
-				can_see_player = true
-			else:
-				can_see_player = false
+	# 	if los.is_colliding():
+	# 		var body = los.get_collider()
+	# 		if body.is_in_group("player"):
+	# 			can_see_player = true
+	# 		else:
+	# 			can_see_player = false
 
 ## on transit ####################################################
 

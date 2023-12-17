@@ -33,7 +33,7 @@ func _ready():
 ## render ##################################
 
 func render():
-	var p_ent = P.player_entity
+	var p_ent = Dino.current_player_entity()
 	if not p_ent:
 		# TODO support select player if none
 		return
@@ -41,7 +41,7 @@ func render():
 	update_player_data(p_ent)
 	update_players_grid(p_ent)
 
-	var p = P.player
+	var p = Dino.current_player()
 	if not p or not p.has_weapon():
 		# TODO zero state for weapons
 		return
@@ -88,16 +88,18 @@ func update_weapons_grid(player):
 		weapons_grid.add_child(button)
 
 ## select interactions ##################################
+# TODO restore this menu's interactions!
 
 func select_player(player_ent):
 	selected_player = player_ent
-	P.set_player_entity(player_ent)
-	P.clear_player_scene()
+
+	# P.set_player_entity(player_ent)
+	# P.clear_player_scene()
 
 	Hood.notif({text="Switched to %s" % player_ent.get_display_name(), id="player-switch"})
 
 	# respawn at current position? regen level?
-	P.respawn_player()
+	# P.respawn_player()
 
 	# clearing b/c these buttons are invalid until the player is setup (after unpausing)
 	U.remove_children(weapons_grid, {defer=true})
@@ -107,8 +109,8 @@ func select_weapon(weapon_ent):
 	selected_weapon = weapon_ent
 
 	# move behind some confirmation?
-	var p = P.player
-	p.activate_weapon(weapon_ent)
+	# var p = P.player
+	# p.activate_weapon(weapon_ent)
 
 	Hood.notif({text="Switched to %s" % weapon_ent.get_display_name(), id="weapon-switch"})
 	render.call_deferred()

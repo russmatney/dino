@@ -35,7 +35,8 @@ func enter(_ctx={}):
 	positions = U.rand_of(positions, 2)
 	positions = positions.map(func(ws): return ws.global_position)
 
-	player = P.get_player()
+	# TODO restore!
+	# player = P.get_player()
 
 	swoop_spots = [
 		[positions[0], actor.swoop_hint1],

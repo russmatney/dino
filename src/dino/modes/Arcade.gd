@@ -31,25 +31,25 @@ func _ready():
 	Log.pr("Arcade ready with seed!", _seed)
 	seed(_seed)
 
-	var entity = current_game_entity
-	if not entity:
-		entity = random_game()
+	var game_entity = current_game_entity
+	if not game_entity:
+		game_entity = random_game()
 
 	if player_entity == null:
 		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 
-	if not entity:
+	if not game_entity:
 		Log.warn("Could not find game_entity!")
 	else:
-		Log.pr("Launching", entity.get_display_name())
-		launch_game(entity)
+		Log.pr("Launching", game_entity.get_display_name())
+		launch_game(game_entity)
 
 ## select a game ##################################################3
 
 func random_game():
 	var eid = U.rand_of(game_ids)
-	var entity = Pandora.get_entity(eid)
-	return entity
+	var game_entity = Pandora.get_entity(eid)
+	return game_entity
 
 ## launch game ##################################################3
 
@@ -61,19 +61,21 @@ func setup_game(node):
 	else:
 		Log.warn("game node has no 'level_complete' signal!", node)
 
-func launch_game(entity=null):
-	if entity == null:
-		entity = current_game_entity
-	current_game_entity = entity
+func launch_game(game_entity=null):
+	if game_entity == null:
+		game_entity = current_game_entity
+	current_game_entity = game_entity
 
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
-	P.setup_player(entity)
-	P.set_player_entity(player_entity)
+	Dino.setup_player({
+		type=DinoData.to_game_type(game_entity.get_player_type()),
+		entity=player_entity,
+		})
 
-	var scene = entity.get_first_level_scene()
+	var scene = game_entity.get_first_level_scene()
 	game_node = scene.instantiate()
 	setup_game(game_node)
 

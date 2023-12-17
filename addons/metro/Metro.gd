@@ -107,13 +107,14 @@ func update_zone():
 
 	var current_containing_room
 	var rooms_to_pause = []
-	var player = P.get_player()
+	# var player = P.get_player()
 	for room in current_zone.rooms:
 		# consider overlapping roomboxes (player in more than one room)
 		# probably prefer the existing one until we're not overlapping
-		if player and room.contains_player(player):
-			current_containing_room = room
-		elif not room.paused:
+		# if player and room.contains_player(player):
+		# 	current_containing_room = room
+		# elif not room.paused:
+		if not room.paused:
 			rooms_to_pause.append(room)
 
 	# don't pause last_containing_room if no current_containing_room found

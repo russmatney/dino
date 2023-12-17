@@ -99,14 +99,16 @@ func launch_game(game_entity):
 	current_game_entity = game_entity
 	played_game_records.append({game_entity=game_entity})
 
-	Records.start_game({game_entity=game_entity, player_entity=P.player_entity})
+	Records.start_game({game_entity=game_entity})
 
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
-	P.setup_player(game_entity)
-	P.set_player_entity(player_entity)
+	Dino.setup_player({
+		type=DinoData.to_game_type(game_entity.get_player_type()),
+		entity=player_entity,
+		})
 
 	var scene = game_entity.get_first_level_scene()
 	game_node = scene.instantiate()
@@ -128,7 +130,7 @@ func _on_game_ready():
 func _on_level_complete():
 	Log.pr("Roulette Level Complete!")
 
-	Records.complete_game({player_entity=P.player_entity})
+	Records.complete_game({})
 
 	var entity = next_random_game()
 	if entity:
