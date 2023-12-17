@@ -77,12 +77,12 @@ func update_data():
 		if Engine.is_editor_hint():
 			current_zone = Hotel.first({group=Metro.zones_group})
 		else:
-			Log.warn("No current zone")
+			# Log.warn("No current zone")
 			return
 
-	var zones = Hotel.query({zone_name=current_zone.name, group=Metro.zones_group})
-	if len(zones) > 0:
-		zone_data = zones[0]
+	# var zones = Hotel.query({zone_name=current_zone.name, group=Metro.zones_group})
+	# if len(zones) > 0:
+	# 	zone_data = zones[0]
 
 
 ################################################################

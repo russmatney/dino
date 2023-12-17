@@ -3,6 +3,8 @@ extends Node
 
 ## vars ##########################################################
 
+const player_group = "player"
+
 signal player_ready
 
 # some of these states might be problemmatic as an autoload
@@ -10,10 +12,8 @@ signal player_ready
 var player
 var player_scene
 var player_entity
-var player_group = "player"
 
-enum PlayerType {SideScroller, TopDown, BeatEmUp}
-var player_type: PlayerType
+var player_type: DinoData.GameType
 
 ## player_scene #################################################
 
@@ -28,13 +28,8 @@ func setup_player(game: DinoGameEntity):
 	clear_player_scene()
 
 	var typ = game.get_player_type()
-	if typ != null:
-		match typ:
-			"sidescroller": set_player_type(PlayerType.SideScroller)
-			"topdown": set_player_type(PlayerType.TopDown)
-			"beatemup": set_player_type(PlayerType.BeatEmUp)
+	set_player_type(DinoData.to_game_type(typ))
 
-# we'll probably want to call this at some point
 func clear_player_scene():
 	player_scene = null
 
@@ -42,7 +37,7 @@ func set_player_entity(ent):
 	player_entity = ent
 	# do more get_player_scene logic here?
 
-func set_player_type(type: PlayerType):
+func set_player_type(type: DinoData.GameType):
 	player_type = type
 	# do more get_player_scene logic here?
 
@@ -52,17 +47,14 @@ func get_player_scene():
 
 	var p_scene
 	if player_entity != null and player_type != null:
-		match player_type:
-			PlayerType.SideScroller: p_scene = player_entity.get_sidescroller_scene()
-			PlayerType.TopDown: p_scene = player_entity.get_topdown_scene()
-			PlayerType.BeatEmUp: p_scene = player_entity.get_beatemup_scene()
+		p_scene = player_entity.get_player_scene(player_type)
 
 	if p_scene != null:
 		return p_scene
 
 	Log.warn("Player scene not found, using debug falling backs")
 	if Dino.is_debug_mode():
-		set_player_type(PlayerType.SideScroller)
+		set_player_type(DinoData.GameType.SideScroller)
 		set_player_entity(Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER))
 		p_scene = player_entity.get_sidescroller_scene()
 		return p_scene

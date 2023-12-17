@@ -1,6 +1,19 @@
+@tool
 extends Node
 class_name DinoData
 
+## static data/helpers ########################################################
+
+enum GameType {SideScroller, TopDown, BeatEmUp}
+
+static func to_game_type(s: String) -> GameType:
+	match s:
+		"sidescroller": return GameType.SideScroller
+		"topdown": return GameType.TopDown
+		"beatemup": return GameType.BeatEmUp
+		_:
+			Log.warn("no match in to_game_type, returning fallback", s)
+			return GameType.SideScroller
 
 ## current game ##########################################################
 
@@ -29,3 +42,13 @@ func restart_game(opts=null):
 	Log.pr("Starting game mode", mode.get_display_name())
 	mode.start(opts)
 
+## player(s) ########################################################
+
+var player_set = PlayerSet.new()
+
+func spawn_player():
+	pass
+
+func respawn_player():
+	# var p = players.filter(func(p): return p.is_focused)
+	pass

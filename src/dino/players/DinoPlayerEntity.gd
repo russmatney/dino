@@ -30,9 +30,19 @@ func data():
 		beatemup_scene=get_beatemup_scene(),
 		}
 
-
-## entities #################################################
+## static #################################################
 
 static func all_entities():
 	var ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+
+## instance #################################################
+
+func get_player_scene(type: DinoData.GameType) -> PackedScene:
+	match type:
+		DinoData.GameType.SideScroller: return get_sidescroller_scene()
+		DinoData.GameType.TopDown: return get_topdown_scene()
+		DinoData.GameType.BeatEmUp: return get_beatemup_scene()
+		_:
+			Log.warn("no match in get_player_scene, returning fallback", self)
+			return get_sidescroller_scene()

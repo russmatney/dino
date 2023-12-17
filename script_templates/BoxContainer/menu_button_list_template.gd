@@ -6,10 +6,6 @@ var menu_scenes = [
 		label="Dino Menu",
 		nav_to="res://src/dino/DinoMenu.tscn",
 	},
-	{
-		label="Start HatBot",
-		fn=Game.restart_game,
-	},
 ]
 
 # default button scene
