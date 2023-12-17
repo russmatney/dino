@@ -6,10 +6,10 @@ var button_defs = [
 		label="Resume",
 		fn=Navi.resume,
 	},
-	{
-		label="Game Menu",
-		fn=Game.load_main_menu,
-	},
+	# {
+	# 	label="Game Menu",
+	# 	fn=Game.load_main_menu,
+	# },
 	{
 		label="Dino Menu",
 		fn=Navi.nav_to_main_menu,

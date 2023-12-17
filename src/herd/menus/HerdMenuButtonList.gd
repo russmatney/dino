@@ -2,10 +2,10 @@
 extends NaviButtonList
 
 var menu_scenes = [
-	{
-		label="Start Game",
-		fn=Game.restart_game,
-	},
+	# {
+	# 	label="Start Game",
+	# 	fn=Game.restart_game,
+	# },
 	{
 		label="Dino Menu",
 		fn=Navi.nav_to_main_menu,

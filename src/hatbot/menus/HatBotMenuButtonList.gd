@@ -3,10 +3,10 @@ extends NaviButtonList
 
 
 var button_defs = [
-	{
-		"label": "Start Game",
-		"fn": Game.restart_game,
-	},
+	# {
+	# 	"label": "Start Game",
+	# 	"fn": Game.restart_game,
+	# },
 	{
 		label="Return to Dino Menu",
 		fn=Navi.nav_to_main_menu,

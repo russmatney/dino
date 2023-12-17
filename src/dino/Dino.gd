@@ -1,5 +1,6 @@
-@tool
 extends Node
+class_name DinoData
+
 
 ## current game ##########################################################
 
@@ -13,6 +14,7 @@ func get_game_mode():
 ## launch game ##########################################################
 
 func launch(mode: DinoModeEntity, opts={}):
+	game_mode = mode
 	# TODO menu should support a mode with or without a menu
 	if mode.get_menu() != null:
 		mode.nav_to_menu()

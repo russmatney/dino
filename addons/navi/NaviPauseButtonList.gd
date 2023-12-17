@@ -7,10 +7,6 @@ var button_defs = [
 		fn=Navi.resume,
 	},
 	{
-		label="Game Menu",
-		fn=Game.load_main_menu,
-	},
-	{
 		label="Dino Menu",
 		fn=Navi.nav_to_main_menu,
 		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),

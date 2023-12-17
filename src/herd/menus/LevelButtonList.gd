@@ -31,11 +31,11 @@ var buttons = [
 		fn=retry_level,
 		hide_fn=no_more_levels
 	},
-	{
-		label="Restart Game",
-		fn=Game.restart_game,
-		hide_fn=func (): return not no_more_levels()
-	},
+	# {
+	# 	label="Restart Game",
+	# 	fn=Game.restart_game,
+	# 	hide_fn=func (): return not no_more_levels()
+	# },
 	{
 		label="Credits",
 		fn=Navi.nav_to.bind("res://src/dino/menus/DinoCredits.tscn"),

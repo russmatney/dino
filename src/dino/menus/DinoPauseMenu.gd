@@ -37,6 +37,6 @@ func refresh():
 		regen_menu.refresh()
 
 func update_hero():
-	var m = Game.get_game_mode()
+	var m = Dino.get_game_mode()
 	if m != null:
 		hero_label.text = "[center]%s[/center]" % m.get_display_name()

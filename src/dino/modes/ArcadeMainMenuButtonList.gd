@@ -4,7 +4,7 @@ extends NaviButtonList
 var menu_scenes = [
 	{
 		label="Start!",
-		fn=Game.restart_game,
+		fn=Dino.start.bind(Pandora.get_entity(ModeIds.ARCADE)),
 	},
 	{
 		label="Back to Dino Menu",

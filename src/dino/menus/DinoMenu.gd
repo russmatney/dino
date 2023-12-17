@@ -22,7 +22,7 @@ func set_focus():
 
 func start_mode(mode):
 	if mode:
-		Game.launch(mode)
+		Dino.launch(mode)
 	else:
 		Log.err("Cannot start game, no game_entity passed!")
 

@@ -1,14 +1,14 @@
 extends NaviButtonList
 
 var button_defs = [
-	{
-		label="Restart",
-		fn=Game.restart_game,
-	},
-	{
-		label="Harvey Menu",
-		fn=Game.load_main_menu,
-	},
+	# {
+	# 	label="Restart",
+	# 	fn=Game.restart_game,
+	# },
+	# {
+	# 	label="Harvey Menu",
+	# 	fn=Game.load_main_menu,
+	# },
 	{
 		label="Dino Menu",
 		fn=Navi.nav_to_main_menu,
