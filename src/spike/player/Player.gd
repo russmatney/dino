@@ -47,13 +47,13 @@ func _on_player_death():
 
 var is_spiking = false
 
-func _process(_delta):
-	# super._process(delta)
-	if orbit_items.size() == 0 and is_spiking == false:
-		remove_orbit_item_weapon()
-	else:
-		if not orbit_item_weapon or not orbit_item_weapon in weapons:
-			add_orbit_item_weapon()
+# func _process(_delta):
+# 	# super._process(delta)
+# 	if orbit_items.size() == 0 and is_spiking == false:
+# 		remove_orbit_item_weapon()
+# 	else:
+# 		if not orbit_item_weapon or not orbit_item_weapon in weapons:
+# 			add_orbit_item_weapon()
 
 ## orbiting items ##################################################################
 
@@ -92,7 +92,7 @@ func add_orbit_item_weapon():
 
 func remove_orbit_item_weapon():
 	if orbit_item_weapon:
-		drop_weapon(orbit_item_weapon)
+		remove_weapon_by_id(orbit_item_weapon.entity.get_entity_id())
 		orbit_item_weapon.visible = false
 
 

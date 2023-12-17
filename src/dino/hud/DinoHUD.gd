@@ -45,11 +45,12 @@ func update_level_opts():
 
 func update_weapon_stack():
 	var p = P.player
-	if p == null or len(p.weapons) == 0:
+	if p == null or not p.has_weapon():
 		return
 
+	# TODO rewrite as well-typed weapon_set func
 	var ws: Array[DinoWeaponEntity] = []
-	ws.assign(p.weapons.map(func(w): return w.entity))
+	ws.assign(p.weapon_set.list().map(func(w): return w.entity))
 	weapon_list.entities = ws
 	weapon_list.active_entity = p.active_weapon().entity
 	weapon_list.render()

@@ -66,10 +66,8 @@ var is_dead
 var lives_lost: int = 0
 var kos: int = 0
 
-# TODO proper weapons support (this just prevents a crash for now)
-var weapons = []
-func has_weapon():
-	return false
+signal changed_weapon(weapon)
+var weapon_set: WeaponSet = WeaponSet.new("beu")
 
 ## ready ###########################################################
 
@@ -94,6 +92,9 @@ func _ready():
 		notice_box = $NoticeBox
 		notice_box.body_entered.connect(on_noticebox_body_entered)
 		notice_box.body_exited.connect(on_noticebox_body_exited)
+
+		weapon_set.changed_weapon.connect(func(w):
+			changed_weapon.emit(w))
 
 ## physics_process ###########################################################
 
@@ -311,3 +312,45 @@ func die(opts={}):
 		direction=-1*facing_vector,
 		killed_by=opts.get("killed_by"),
 		})
+
+
+#################################################################################
+## weapons #######################################################
+
+func add_weapon(ent_id):
+	var w = weapon_set.add_weapon(ent_id)
+	if w:
+		# no new child returned if weapon_ent already exists on a weapon
+		add_child(w)
+
+func remove_weapon_by_id(ent_id):
+	var w = weapon_set.remove_weapon_by_id(ent_id)
+	if w:
+		remove_child(w)
+		w.queue_free()
+
+func has_weapon():
+	return weapon_set.has_weapon()
+
+func has_weapon_id(ent_id):
+	return weapon_set.has_weapon_id(ent_id)
+
+func active_weapon():
+	return weapon_set.active_weapon()
+
+func aim_weapon(aim_vector):
+	return weapon_set.aim_weapon(aim_vector)
+
+func cycle_weapon():
+	return weapon_set.cycle_weapon()
+
+func activate_weapon(entity):
+	return weapon_set.activate_weapon_with_entity(entity)
+
+# Uses the first weapon if none is passed
+func use_weapon(weapon=null):
+	return weapon_set.use_weapon(weapon)
+
+# i.e. button released, stop firing or whatever continuous action
+func stop_using_weapon(weapon=null):
+	return weapon_set.stop_using_weapon(weapon)

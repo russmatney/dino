@@ -41,7 +41,7 @@ func test_add_weapon_ss():
 	var w_ent = DinoWeaponsData.sidescroller_weapon_entities()[0]
 
 	# adding a weapon
-	p.add_weapon_entity(w_ent.get_entity_id())
+	p.add_weapon(w_ent.get_entity_id())
 
 	# implies the active weapon
 	var w = p.active_weapon()
@@ -56,7 +56,7 @@ func test_add_weapon_td():
 	var w_ent = DinoWeaponsData.topdown_weapon_entities()[0]
 
 	# adding a weapon
-	p.add_weapon_entity(w_ent.get_entity_id())
+	p.add_weapon(w_ent.get_entity_id())
 
 	# implies the active weapon
 	var w = p.active_weapon()
@@ -72,12 +72,12 @@ func test_change_weapon():
 	var w
 
 	# add the weapons
-	p.add_weapon_entity(w_ents[0].get_entity_id())
-	p.add_weapon_entity(w_ents[1].get_entity_id())
-	p.add_weapon_entity(w_ents[2].get_entity_id())
+	p.add_weapon(w_ents[0].get_entity_id())
+	p.add_weapon(w_ents[1].get_entity_id())
+	p.add_weapon(w_ents[2].get_entity_id())
 
 	for i in range(3):
-		p.activate_weapon_entity(w_ents[i])
+		p.activate_weapon(w_ents[i])
 		w = p.active_weapon()
 		assert_that(w.entity).is_equal(w_ents[i])
 
@@ -87,9 +87,9 @@ func test_cycle_weapon():
 	var w_ents = DinoWeaponsData.sidescroller_weapon_entities()
 
 	# add the weapons
-	p.add_weapon_entity(w_ents[0].get_entity_id())
-	p.add_weapon_entity(w_ents[1].get_entity_id())
-	p.add_weapon_entity(w_ents[2].get_entity_id())
+	p.add_weapon(w_ents[0].get_entity_id())
+	p.add_weapon(w_ents[1].get_entity_id())
+	p.add_weapon(w_ents[2].get_entity_id())
 
 	var w_a = p.active_weapon()
 	assert_that(w_a).is_equal(p.active_weapon())

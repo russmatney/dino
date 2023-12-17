@@ -68,11 +68,11 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
-		# add_weapon_entity(DinoWeaponEntityIds.GUN)
-		# add_weapon_entity(DinoWeaponEntityIds.SWORD)
-		# add_weapon_entity(DinoWeaponEntityIds.FLASHLIGHT)
-		# add_weapon_entity(DinoWeaponEntityIds.BOW)
-		# add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
+		# add_weapon(DinoWeaponEntityIds.GUN)
+		# add_weapon(DinoWeaponEntityIds.SWORD)
+		# add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
+		# add_weapon(DinoWeaponEntityIds.BOW)
+		# add_weapon(DinoWeaponEntityIds.BOOMERANG)
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -131,9 +131,8 @@ func _unhandled_input(event):
 
 	if Trolley.is_event(event, "cycle_weapon"):
 		cycle_weapon()
-		Log.prn("cycled weapons", weapons)
-		if weapons.size() > 0:
-			Hood.notif(str("Changed weapon: ", weapons[0].display_name))
+		if weapon_set.list().size() > 0:
+			Hood.notif(str("Changed weapon: ", weapon_set.active_weapon().display_name))
 			notif(active_weapon().display_name)
 
 	# generic action
@@ -222,11 +221,11 @@ func collect_pickup(pickup_type):
 
 func update_with_powerup(powerup: SSData.Powerup):
 	match (powerup):
-		SSData.Powerup.Sword: add_weapon_entity(DinoWeaponEntityIds.SWORD)
-		SSData.Powerup.Flashlight: add_weapon_entity(DinoWeaponEntityIds.FLASHLIGHT)
-		SSData.Powerup.Gun: add_weapon_entity(DinoWeaponEntityIds.GUN)
-		SSData.Powerup.Bow: add_weapon_entity(DinoWeaponEntityIds.BOW)
-		SSData.Powerup.Boomerang: add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
+		SSData.Powerup.Sword: add_weapon(DinoWeaponEntityIds.SWORD)
+		SSData.Powerup.Flashlight: add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
+		SSData.Powerup.Gun: add_weapon(DinoWeaponEntityIds.GUN)
+		SSData.Powerup.Bow: add_weapon(DinoWeaponEntityIds.BOW)
+		SSData.Powerup.Boomerang: add_weapon(DinoWeaponEntityIds.BOOMERANG)
 
 		SSData.Powerup.Ascend: add_ascend()
 		SSData.Powerup.Descend: add_descend()
@@ -244,4 +243,3 @@ func add_powerup(powerup: SSData.Powerup):
 func add_coin():
 	coins += 1
 	Hotel.check_in(self)
-

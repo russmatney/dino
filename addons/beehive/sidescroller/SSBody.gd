@@ -48,8 +48,8 @@ var gravity = 1000 # for use in non-jump states
 @export var has_dash = false
 
 # slot for Weapon impl - sword, gun, bow, flashlight, etc
-var weapons = []
 signal changed_weapon(weapon)
+var weapon_set: WeaponSet = WeaponSet.new("ss")
 
 # vars
 
@@ -129,6 +129,9 @@ func _ready():
 		machine.transitioned.connect(_on_transit)
 		machine.start()
 
+		weapon_set.changed_weapon.connect(func(w):
+			changed_weapon.emit(w))
+
 	state_label.set_visible(false)
 
 ## process/physics_process ###########################################################
@@ -192,7 +195,7 @@ func update_facing():
 	update_los_facing(facing_vector, low_wall_check)
 
 	# flip weapons
-	for w in weapons.filter(func(w): return w.should_flip):
+	for w in weapon_set.list().filter(func(w): return w.should_flip):
 		U.update_h_flip(facing_vector, w)
 
 func flip_facing():
@@ -406,100 +409,40 @@ func add_descend():
 #################################################################################
 ## weapons #######################################################
 
-func get_existing_weapon_for_entity(ent_id):
-	# this dependency points into dino...
-	# ideally we're not writing weapon logic in this file at all
-	return DinoWeaponsData.weapon_with_id(weapons, ent_id)
-
-func add_weapon_entity(ent_id):
-	var existing = get_existing_weapon_for_entity(ent_id)
-	if existing:
-		add_weapon_scene(existing)
-	else:
-		var ent = Pandora.get_entity(ent_id)
-		var scene = ent.get_sidescroller_scene()
-		var w = scene.instantiate()
-		w.entity = ent
+func add_weapon(ent_id):
+	var w = weapon_set.add_weapon(ent_id)
+	if w:
+		# no new child returned if weapon_ent already exists on a weapon
 		add_child(w)
-		add_weapon_scene(w)
 
-func remove_weapon_entity(ent_id):
-	var weapon = get_existing_weapon_for_entity(ent_id)
-	if weapon:
-		drop_weapon(weapon)
-
-func add_weapon_scene(weapon: SSWeapon):
-	if weapon in weapons:
-		weapons.erase(weapon)
-
-	weapons.map(deactivate_weapon)
-	weapons.push_front(weapon)
-	activate_weapon()
+func remove_weapon_by_id(ent_id):
+	var w = weapon_set.remove_weapon_by_id(ent_id)
+	if w:
+		remove_child(w)
+		w.queue_free()
 
 func has_weapon():
-	return active_weapon() != null
+	return weapon_set.has_weapon()
 
-func has_weapon_entity(ent_id):
-	return get_existing_weapon_for_entity(ent_id)
+func has_weapon_id(ent_id):
+	return weapon_set.has_weapon_id(ent_id)
 
 func active_weapon():
-	if len(weapons) > 0:
-		return weapons.front()
+	return weapon_set.active_weapon()
 
 func aim_weapon(aim_vector):
-	var w = active_weapon()
-	if w:
-		w.aim(aim_vector)
-
-# Drops the first weapon if none is passed
-func drop_weapon(weapon=null):
-	if not weapon:
-		weapon = active_weapon()
-	if weapon in weapons:
-		weapons.erase(weapon)
+	return weapon_set.aim_weapon(aim_vector)
 
 func cycle_weapon():
-	if len(weapons) > 1:
-		weapons.map(deactivate_weapon)
-		var f = weapons.pop_front()
-		weapons.push_back(f)
-		activate_weapon()
-		changed_weapon.emit(active_weapon())
+	return weapon_set.cycle_weapon()
 
-func activate_weapon_entity(entity):
-	var w = get_existing_weapon_for_entity(entity.get_entity_id())
-	if w:
-		activate_weapon(w)
-
-# move the passed weapon to index 0, and call w.activate()
-func activate_weapon(weapon=null):
-	if not weapon:
-		weapon = active_weapon()
-	else:
-		weapons.erase(weapon)
-		weapons.push_front(weapon)
-		(func(): changed_weapon.emit(active_weapon())).call_deferred()
-
-	weapon.visible = true
-	weapon.activate()
-
-# turn off the flashlight, sheath the sword, holser the gun?
-func deactivate_weapon(weapon=null):
-	if not weapon:
-		weapon = active_weapon()
-	weapon.visible = false
-	weapon.deactivate()
+func activate_weapon(entity):
+	return weapon_set.activate_weapon_with_entity(entity)
 
 # Uses the first weapon if none is passed
 func use_weapon(weapon=null):
-	if not weapon:
-		weapon = active_weapon()
-	if weapon.visible == false:
-		activate_weapon(weapon)
-	weapon.use()
+	return weapon_set.use_weapon(weapon)
 
 # i.e. button released, stop firing or whatever continuous action
 func stop_using_weapon(weapon=null):
-	if not weapon:
-		weapon = active_weapon()
-	weapon.stop_using()
+	return weapon_set.stop_using_weapon(weapon)

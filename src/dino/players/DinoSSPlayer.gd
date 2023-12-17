@@ -19,10 +19,10 @@ func _ready():
 			died.connect(level._on_player_death.bind(self))
 
 		# could be instances with randomized stats, etc
-		add_weapon_entity(DinoWeaponEntityIds.GUN)
-		add_weapon_entity(DinoWeaponEntityIds.BOOMERANG)
-		add_weapon_entity(DinoWeaponEntityIds.FLASHLIGHT)
-		add_weapon_entity(DinoWeaponEntityIds.SWORD)
+		add_weapon(DinoWeaponEntityIds.GUN)
+		add_weapon(DinoWeaponEntityIds.BOOMERANG)
+		add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
+		add_weapon(DinoWeaponEntityIds.SWORD)
 		has_double_jump = true
 
 	super._ready()
@@ -50,9 +50,9 @@ var is_spiking = false
 func _process(_delta):
 	# TODO don't fire these every process loop!
 	if orbit_items.size() == 0 and is_spiking == false:
-		remove_weapon_entity(DinoWeaponEntityIds.ORBS)
+		remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
 	else:
-		add_weapon_entity(DinoWeaponEntityIds.ORBS)
+		add_weapon(DinoWeaponEntityIds.ORBS)
 
 ## orbiting items ##################################################################
 

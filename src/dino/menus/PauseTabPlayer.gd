@@ -81,7 +81,7 @@ func update_weapons_grid(player):
 
 	var active_weapon_ent = player.active_weapon().entity
 	U.remove_children(weapons_grid, {defer=true})
-	for w in player.weapons.filter(func(w): return w.entity != active_weapon_ent):
+	for w in player.weapon_set.list().filter(func(w): return w.entity != active_weapon_ent):
 		var button = entity_button.instantiate()
 		button.set_weapon_entity(w.entity)
 		button.icon_pressed.connect(func(): if w: select_weapon(w.entity))
@@ -108,7 +108,7 @@ func select_weapon(weapon_ent):
 
 	# move behind some confirmation?
 	var p = P.player
-	p.activate_weapon_entity(weapon_ent)
+	p.activate_weapon(weapon_ent)
 
 	Hood.notif({text="Switched to %s" % weapon_ent.get_display_name(), id="weapon-switch"})
 	render.call_deferred()
