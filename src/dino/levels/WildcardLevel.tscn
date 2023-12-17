@@ -8,7 +8,7 @@ script = ExtResource("1_chctc")
 
 [node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
 script = ExtResource("2_h4345")
-_seed = 3996521491
+_seed = 1228009149
 room_defs_path = "res://src/dino/levels/levels.txt"
 entities_node = NodePath("../Entities")
 tilemaps_node = NodePath("../Tilemaps")

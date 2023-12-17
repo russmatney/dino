@@ -13,22 +13,31 @@ func _ready():
 		kill_in_ttl.call_deferred()
 
 func kill_in_ttl():
+	if not is_inside_tree():
+		return
 	var time_to_kill = ttl
 	if not time_to_kill:
 		time_to_kill = 3.0
 
 	tween = create_tween()
+	if not tween:
+		return # prevent weird crash
 	tween.tween_property(self, "modulate:a", 0.0, 2.0).set_delay(time_to_kill)
 	tween.tween_callback(queue_free)
 
 func reset_ttl(t=null):
 	if t != null:
 		ttl = t
-	tween.kill()
+	if tween:
+		tween.kill()
 	modulate.a = 1.0
 	kill_in_ttl.call_deferred()
 
 func reemphasize():
+	if not is_inside_tree():
+		return
 	var t = create_tween()
+	if not t:
+		return # prevent weird crash
 	t.tween_property(self, "scale", Vector2.ONE*1.2, 0.1)
 	t.tween_property(self, "scale", Vector2.ONE, 0.1)

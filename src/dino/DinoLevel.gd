@@ -62,10 +62,20 @@ func regenerate(opts=null):
 
 	hud.set_level_opts(opts)
 
+## add_quests ###################################################3
+
+func add_quests():
+	var ents = $Entities.get_children()
+	var qs = DinoLevelGenData.quests_for_entities(ents)
+	for q in qs:
+		add_child(q)
+
 ## setup_level ###################################################3
 
 # setup any signals and initial data
 func setup_level():
+	add_quests()
+
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()

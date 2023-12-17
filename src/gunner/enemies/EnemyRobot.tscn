@@ -16,7 +16,7 @@ height = 31.0
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(1200, 800)
 
-[node name="EnemyRobot" type="CharacterBody2D" groups=["enemy_robots"]]
+[node name="EnemyRobot" type="CharacterBody2D" groups=["enemies", "enemy_robots"]]
 collision_layer = 8
 script = ExtResource("4")
 

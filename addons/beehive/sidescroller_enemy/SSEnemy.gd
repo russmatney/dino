@@ -95,7 +95,6 @@ func _ready():
 	anim.animation_finished.connect(_on_animation_finished)
 	anim.frame_changed.connect(_on_frame_changed)
 
-	died.connect(_on_death)
 	knocked_back.connect(_on_knocked_back)
 
 	state_label.set_visible(false)
@@ -134,7 +133,9 @@ func _on_transit(label):
 
 ## on death ####################################################
 
-func _on_death(_enemy):
+func die():
+	is_dead = true
+	died.emit(self)
 	Hotel.check_in(self)
 	Cam.screenshake(0.1)
 	DJZ.play(DJZ.S.soldierdead)

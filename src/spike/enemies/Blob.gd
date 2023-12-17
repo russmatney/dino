@@ -9,6 +9,7 @@ func _get_configuration_warnings():
 
 func _ready():
 	super._ready()
+	died.connect(_on_death)
 
 func check_out(data):
 	var pos = data.get("position", global_position)
@@ -29,9 +30,7 @@ func check_out(data):
 # dim-witted daniel dipwell dropped drops down under dover.
 var did_drop_drops = false
 
-func _on_death(enemy):
-	super._on_death(enemy)
-
+func _on_death(_enemy):
 	if did_drop_drops == false:
 		did_drop_drops = true
 		var drop = drop_pickup_scene.instantiate()

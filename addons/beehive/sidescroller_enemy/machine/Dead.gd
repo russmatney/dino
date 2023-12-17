@@ -5,7 +5,7 @@ func enter(ctx={}):
 	actor.anim.play("dead")
 	# maybe 'no_emit' is a better flag
 	if not ctx.get("ignore_side_effects", false):
-		actor.died.emit(actor)
+		actor.die()
 
 
 func physics_process(delta):

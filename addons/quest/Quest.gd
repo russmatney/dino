@@ -1,6 +1,17 @@
 extends Node
 class_name Quest
 
+## static
+
+func has_required_entities(entities: Array[Node]):
+	if xs_group == "":
+		Log.warn("No xs_group, fallback has_required_entities pred returning false")
+		return false
+	for e in entities:
+		if e.is_in_group(xs_group):
+			return true
+	return false
+
 ## vars ##########################################################
 
 signal quest_complete
@@ -10,10 +21,10 @@ signal count_total_update
 
 var total = 0
 var label
-var get_xs_group = ""
+var xs_group = ""
 var get_xs = func():
 	if is_inside_tree():
-		return get_tree().get_nodes_in_group(get_xs_group)
+		return get_tree().get_nodes_in_group(xs_group)
 	return []
 var x_update_signal = func(x): return null
 var is_remaining = func(x): return true

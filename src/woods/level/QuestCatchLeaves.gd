@@ -3,6 +3,6 @@ class_name QuestCatchLeaves
 
 func _init():
 	label = "Catch The Leaves"
-	get_xs_group = "leaves"
+	xs_group = "leaves"
 	x_update_signal = func(x): return x.caught
 	is_remaining = func(x): return not x.is_caught

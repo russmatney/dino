@@ -1,6 +1,16 @@
 extends Quest
 class_name FetchSheepQuest
 
+func has_required_entities(_entities: Array[Node]):
+	return false
+	# TODO has sheep, has pen
+	# var has_cooking_pot
+	# for e in entities:
+	# 	if e.is_in_group("cooking_pots"):
+	# 		has_cooking_pot = true
+	# 		break
+	# return has_cooking_pot
+
 ## vars ##########################################################
 
 var all_sheep = []

@@ -109,7 +109,7 @@ var initial_health = 2
 @onready var health = initial_health
 
 signal health_change(health)
-signal dead
+signal died
 
 func take_hit(opts={}):
 	take_damage(opts)
@@ -134,7 +134,7 @@ func take_damage(opts={}):
 
 func die(remove_at = false):
 	is_dead = true
-	dead.emit()
+	died.emit()
 
 	DJZ.play(DJZ.S.enemy_dead)
 	if remove_at:

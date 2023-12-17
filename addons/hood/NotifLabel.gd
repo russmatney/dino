@@ -28,7 +28,8 @@ func kill_in_ttl():
 func reset_ttl(t=null):
 	if t != null:
 		ttl = t
-	tween.kill()
+	if tween:
+		tween.kill()
 	modulate.a = 1.0
 	kill_in_ttl.call_deferred()
 
