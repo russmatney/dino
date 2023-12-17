@@ -8,10 +8,12 @@ var game_mode
 func get_game_mode():
 	if game_mode:
 		return game_mode
-	Log.warn("No game mode set, returning Debug mode")
 	return Pandora.get_entity(ModeIds.DEBUG)
 
-## launch game ##########################################################
+func is_debug_mode():
+	return get_game_mode().get_entity_id() == ModeIds.DEBUG
+
+## launch/start game ##########################################################
 
 func launch(mode: DinoModeEntity, opts={}):
 	game_mode = mode
@@ -27,9 +29,3 @@ func restart_game(opts=null):
 	Log.pr("Starting game mode", mode.get_display_name())
 	mode.start(opts)
 
-## load main menu helper ##########################################################
-
-# called from most pause menus to return to the game's main menu
-# TODO drop and use navi? or move navi menu logic here?
-func load_main_menu():
-	Navi.nav_to_main_menu()

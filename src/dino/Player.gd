@@ -15,12 +15,6 @@ var player_group = "player"
 enum PlayerType {SideScroller, TopDown, BeatEmUp}
 var player_type: PlayerType
 
-## entities #################################################
-
-func all_player_entities():
-	var ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
-	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
-
 ## player_scene #################################################
 
 # If the game specifies a player_scene, set that.
@@ -65,7 +59,13 @@ func get_player_scene():
 
 	if p_scene != null:
 		return p_scene
-	Log.warn("No player scene found for player_entity and player_type", player_entity, player_type)
+
+	Log.warn("Player scene not found, using debug falling backs")
+	if Dino.is_debug_mode():
+		set_player_type(PlayerType.SideScroller)
+		set_player_entity(Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER))
+		p_scene = player_entity.get_sidescroller_scene()
+		return p_scene
 
 ## get player #################################################
 
@@ -73,18 +73,12 @@ func get_player():
 	if player and is_instance_valid(player):
 		return player
 
+	# useful for gyms that run with an existing player
 	var ps = get_tree().get_nodes_in_group(player_group)
-
 	if len(ps) > 1:
 		Log.warn("found multiple in player_group: ", player_group, ps)
-
 	if len(ps) > 0:
 		player = ps[0]
-	else:
-		# too noisy, and corrected later on after startup
-		# Log.warn("could not find player, zero in player_group: ", player_group)
-		return
-
 	return player
 
 ## remove player #################################################
