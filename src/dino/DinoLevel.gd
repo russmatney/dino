@@ -3,6 +3,8 @@ class_name DinoLevel
 
 ## vars ######################################################
 
+@export var type: DinoData.GameType
+
 @onready var level_gen: BrickLevelGen = $LevelGen
 var level_opts: Dictionary
 signal level_complete
@@ -32,6 +34,11 @@ func _ready():
 
 	if Dino.is_debug_mode():
 		Log.pr("debug mode: regenerating")
+		if type == null:
+			type = DinoData.GameType.SideScroller
+		Dino.ensure_player_setup({type=type,
+			entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
+		})
 		regenerate()
 
 ## process ######################################################
@@ -62,8 +69,7 @@ func setup_level():
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()
-	P.remove_player()
-	P.respawn_player()
+	Dino.spawn_player()
 	level_setup.emit()
 
 	if not skip_splash_intro:

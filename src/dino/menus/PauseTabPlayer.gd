@@ -41,7 +41,7 @@ func render():
 	update_player_data(p_ent)
 	update_players_grid(p_ent)
 
-	var p = Dino.current_player()
+	var p = Dino.current_player_node()
 	if not p or not p.has_weapon():
 		# TODO zero state for weapons
 		return

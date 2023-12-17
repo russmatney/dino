@@ -70,10 +70,11 @@ func launch_game(game_entity=null):
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
-	Dino.setup_player({
-		type=DinoData.to_game_type(game_entity.get_player_type()),
-		entity=player_entity,
-		})
+	if not Dino.current_player_entity():
+		Dino.create_new_player({
+			type=DinoData.to_game_type(game_entity.get_player_type()),
+			entity=player_entity,
+			})
 
 	var scene = game_entity.get_first_level_scene()
 	game_node = scene.instantiate()

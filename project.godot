@@ -32,7 +32,6 @@ DJZ="*res://addons/dj/DJZ.gd"
 Q="*res://addons/quest/QuestManager.gd"
 Cam="*res://addons/camera/Camera.gd"
 Metro="*res://addons/metro/Metro.gd"
-P="*res://src/dino/Player.gd"
 Records="*res://src/dino/Records.gd"
 Dino="*res://src/dino/Dino.gd"
 

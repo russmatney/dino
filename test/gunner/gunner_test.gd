@@ -14,7 +14,8 @@ func test_gunner_dino_level_completion():
 	var game_ent = Pandora.get_entity(DinoGameEntityIds.GUNNER)
 	var sc = game_ent.get_first_level_scene()
 
-	Dino.setup_player({
+	# may need to clear/reset dino state here
+	Dino.create_new_player({
 		type=DinoData.GameType.SideScroller,
 		entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})

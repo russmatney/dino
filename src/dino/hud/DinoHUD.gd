@@ -16,11 +16,11 @@ func set_level_opts(opts: Dictionary):
 ## _ready ############################################################33
 
 func _ready():
-	P.player_ready.connect(func():
+	Dino.player_ready.connect(func(player):
 		update_player_status()
 		update_weapon_stack()
-		if P.player and P.player.has_signal("changed_weapon"):
-			P.player.changed_weapon.connect(func(_w):
+		if player and player.has_signal("changed_weapon"):
+			player.changed_weapon.connect(func(_w):
 				update_weapon_stack()))
 	update_player_status()
 	update_level_opts()
@@ -29,7 +29,7 @@ func _ready():
 ## updates ############################################################33
 
 func update_player_status():
-	var p_ent = P.player_entity
+	var p_ent = Dino.current_player_entity()
 
 	if p_ent != null:
 		player_status.set_status({"entity": p_ent})
@@ -44,7 +44,7 @@ func update_level_opts():
 	level_opts_comp.set_room_count(ct)
 
 func update_weapon_stack():
-	var p = P.player
+	var p = Dino.current_player_node()
 	if p == null or not p.has_weapon():
 		return
 

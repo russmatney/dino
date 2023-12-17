@@ -20,6 +20,14 @@ static func to_game_type(s: String) -> GameType:
 var player_set = PlayerSet.new()
 var game_mode: DinoModeEntity
 
+signal player_ready(player)
+
+## ready ##########################################################
+
+func _ready():
+	player_set.new_player_ready.connect(func(p):
+		player_ready.emit(p))
+
 ## current game ##########################################################
 
 func get_game_mode():
@@ -48,25 +56,28 @@ func restart_game(opts=null):
 
 ## player(s) ########################################################
 
-func setup_player(opts):
-	# TODO do we want a unique id for these players?
-	# maybe create a unique instance with one life here
-	var type = opts.get("type", GameType.SideScroller)
-	var p_ent = opts.get("entity")
-	var p_ent_id = opts.get("entity_id")
-	var player_entity
-	if p_ent:
-		player_entity = p_ent
-	elif p_ent_id:
-		player_entity = Pandora.get_entity(p_ent_id)
+func create_new_player(opts):
+	# maybe create a unique player instance here?
+	player_set.create_new(opts)
 
-	# should create a 'template' to spawn players from
-	player_set.setup_player({player_entity=player_entity, type=type})
+# only creates a player if none exists
+# intended for debug/dev mode
+func ensure_player_setup(opts):
+	if not current_player_entity():
+		create_new_player(opts)
 
 func spawn_player():
-	pass
+	player_set.spawn_new()
 
-func respawn_player(opts={}):
-	# TODO support opts.player passed here for topdown pit use-case
-	player_set.respawn_player(opts)
-	# var p = players.filter(func(p): return p.is_focused)
+func respawn_active_player(opts={}):
+	player_set.respawn_active_player(opts)
+
+func current_player_node():
+	var p = player_set.active_player()
+	if p:
+		return p.node
+
+func current_player_entity():
+	var p = player_set.active_player()
+	if p:
+		return p.entity

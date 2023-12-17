@@ -4,7 +4,7 @@ class_name BEUGym
 var beu_bodies = []
 
 func _ready():
-	super._ready()
+	# super._ready()
 
 	beu_bodies = []
 	for c in get_children():
