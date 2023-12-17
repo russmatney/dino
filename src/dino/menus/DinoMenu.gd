@@ -20,19 +20,19 @@ func set_focus():
 		chs[0].set_focus()
 
 
-func start_mode(game_mode):
-	if game_mode:
-		Game.launch(game_mode)
+func start_mode(mode):
+	if mode:
+		Game.launch(mode)
 	else:
 		Log.err("Cannot start game, no game_entity passed!")
 
-var game_modes = []
+var modes = []
 func build_games_grid():
-	game_modes = Game.game_modes()
+	modes = DinoModeEntity.all_modes()
 	U.free_children(games_grid_container)
 
-	for gm in game_modes:
+	for m in modes:
 		var button = game_mode_button.instantiate()
-		button.set_game_entity(gm)
-		button.icon_pressed.connect(func(): start_mode(gm))
+		button.set_mode_entity(m)
+		button.icon_pressed.connect(func(): start_mode(m))
 		games_grid_container.add_child(button)

@@ -11,9 +11,6 @@ func all_game_entities():
 func basic_game_entities():
 	return all_game_entities().filter(func(e): return not e.is_game_mode())
 
-func game_modes():
-	return all_game_entities().filter(func(e): return e.is_game_mode())
-
 func game_entity_for_scene(sfp, opts={}):
 	var gs
 	if opts.get("all"):
@@ -29,18 +26,6 @@ func game_entity_for_scene(sfp, opts={}):
 
 func get_game_entity(ent_id):
 	return Pandora.get_entity(ent_id)
-
-## Navi.menu register/cleanup ##########################################################
-
-func register_menus(ent):
-	if ent == null:
-		return
-	Navi.set_pause_menu(ent.get_pause_menu())
-	Navi.set_win_menu(ent.get_win_menu())
-	Navi.set_death_menu(ent.get_death_menu())
-
-func clear_menus():
-	Navi.clear_menus()
 
 ## current game ##########################################################
 
@@ -69,7 +54,6 @@ func debug_register_current_game():
 	var ent = get_current_game({all=true})
 	if ent:
 		Log.pr("Registering current game with fallback player entity: ", ent)
-		register_menus(ent)
 		P.setup_player(ent)
 		var player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 		P.set_player_entity(player_entity)
@@ -83,7 +67,6 @@ func is_managed():
 ## If no menu set, start the game via restart_game
 func launch(game: DinoGameEntity, opts={}):
 	_is_managed = true
-	register_menus(game)
 	P.setup_player(game)
 
 	if game.get_main_menu() != null:
@@ -112,12 +95,6 @@ func restart_game(opts=null):
 ## load main menu helper ##########################################################
 
 # called from most pause menus to return to the game's main menu
+# TODO drop and use navi? or move navi menu logic here?
 func load_main_menu():
-	var game = get_current_game()
-	if game and game.get_main_menu() != null:
-		Navi.nav_to(game.get_main_menu())
-		return
-
-	Log.warn("No main_menu in game_entity, naving to fallback main menu.")
 	Navi.nav_to_main_menu()
-

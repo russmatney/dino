@@ -81,6 +81,16 @@
 				"_index": 0,
 				"_name": "DinoWeapon",
 				"_script_path": "res://src/dino/DinoWeaponEntity.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "ea53efff",
+				"_id": "92",
+				"_ids_generation_class": "ModeIds",
+				"_index": 0,
+				"_name": "DinoMode",
+				"_script_path": "res://src/dino/modes/DinoModeEntity.gd"
 			}
 		],
 		"_entities": [
@@ -850,7 +860,7 @@
 					},
 					"main_menu": {
 						"type": "resource",
-						"value": "res://src/dino/menus/RouletteMainMenu.tscn"
+						"value": "res://src/dino/modes/RouletteMainMenu.tscn"
 					},
 					"pause_menu": {
 						"type": "resource",
@@ -883,7 +893,7 @@
 					},
 					"main_menu": {
 						"type": "resource",
-						"value": "res://src/dino/menus/ArcadeMainMenu.tscn"
+						"value": "res://src/dino/modes/ArcadeMainMenu.tscn"
 					},
 					"pause_menu": {
 						"type": "resource",
@@ -1140,6 +1150,78 @@
 						"value": "res://src/spike/entities/OrbitItemWeapon.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "96",
+				"_index": 0,
+				"_name": "Arcade",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Arcade"
+					},
+					"menu": {
+						"type": "resource",
+						"value": "res://src/dino/modes/ArcadeMainMenu.tscn"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/Arcade.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "97",
+				"_index": 0,
+				"_name": "Roulette",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Roulette"
+					},
+					"menu": {
+						"type": "resource",
+						"value": "res://src/dino/modes/RouletteMainMenu.tscn"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/Roulette.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "98",
+				"_index": 0,
+				"_name": "Classic",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Classic"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "101",
+				"_index": 0,
+				"_name": "Debug",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Debug"
+					},
+					"is_debug": {
+						"type": "bool",
+						"value": true
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1361,12 +1443,47 @@
 				"_id": "85",
 				"_name": "beatemup_scene",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "92",
+				"_default_value": "",
+				"_id": "93",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "92",
+				"_default_value": "res://assets/icon.png",
+				"_id": "94",
+				"_name": "icon_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "92",
+				"_default_value": null,
+				"_id": "95",
+				"_name": "root_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "92",
+				"_default_value": null,
+				"_id": "100",
+				"_name": "menu",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "92",
+				"_default_value": false,
+				"_id": "102",
+				"_name": "is_debug",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 91
+			"default": 102
 		}
 	}
 }

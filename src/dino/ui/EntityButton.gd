@@ -2,6 +2,7 @@
 extends PanelContainer
 
 var game_entity: DinoGameEntity
+var mode_entity: DinoGameEntity
 var player_entity: DinoPlayerEntity
 var weapon_entity: DinoWeaponEntity
 
@@ -30,12 +31,17 @@ func _ready():
 	setup()
 
 func get_entity():
+	if mode_entity:
+		return mode_entity
 	if game_entity:
 		return game_entity
 	if player_entity:
 		return player_entity
 	if weapon_entity:
 		return weapon_entity
+
+func set_mode_entity(g: DinoGameEntity):
+	mode_entity = g
 
 func set_game_entity(g: DinoGameEntity):
 	game_entity = g
