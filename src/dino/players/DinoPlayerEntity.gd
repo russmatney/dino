@@ -29,3 +29,10 @@ func data():
 		topdown_scene=get_topdown_scene(),
 		beatemup_scene=get_beatemup_scene(),
 		}
+
+
+## entities #################################################
+
+static func all_entities():
+	var ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))

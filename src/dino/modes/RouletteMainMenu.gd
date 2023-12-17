@@ -71,7 +71,7 @@ func select_player(player_entity):
 	reset_ui()
 
 func build_players_grid():
-	player_entities = P.all_player_entities()
+	player_entities = DinoPlayerEntity.all_entities()
 	selected_player_entity = player_entities[0]
 	U.free_children(players_grid_container)
 

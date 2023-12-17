@@ -59,7 +59,7 @@ func update_player_data(player_ent):
 	player_description.text = "[center]A very good description of %s[/center]" % player_ent.get_display_name()
 
 func update_players_grid(player_ent):
-	var player_ents = P.all_player_entities().filter(func(e): return not e == player_ent)
+	var player_ents = DinoPlayerEntity.all_entities().filter(func(e): return not e == player_ent)
 	U.free_children(players_grid)
 	for p in player_ents:
 		var button = entity_button.instantiate()

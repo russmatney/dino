@@ -36,7 +36,7 @@ func test_weapons_data():
 
 
 func test_add_weapon_ss():
-	var p_ent = P.all_player_entities()[0]
+	var p_ent = DinoPlayerEntity.all_entities()[0]
 	var p = auto_free(p_ent.get_sidescroller_scene().instantiate())
 	var w_ent = DinoWeaponsData.sidescroller_weapon_entities()[0]
 
@@ -51,7 +51,7 @@ func test_add_weapon_ss():
 
 
 func test_add_weapon_td():
-	var p_ent = P.all_player_entities()[0]
+	var p_ent = DinoPlayerEntity.all_entities()[0]
 	var p = auto_free(p_ent.get_topdown_scene().instantiate())
 	var w_ent = DinoWeaponsData.topdown_weapon_entities()[0]
 
@@ -66,7 +66,7 @@ func test_add_weapon_td():
 
 
 func test_change_weapon():
-	var p_ent = P.all_player_entities()[0]
+	var p_ent = DinoPlayerEntity.all_entities()[0]
 	var p = auto_free(p_ent.get_sidescroller_scene().instantiate())
 	var w_ents = DinoWeaponsData.sidescroller_weapon_entities()
 	var w
@@ -82,7 +82,7 @@ func test_change_weapon():
 		assert_that(w.entity).is_equal(w_ents[i])
 
 func test_cycle_weapon():
-	var p_ent = P.all_player_entities()[0]
+	var p_ent = DinoPlayerEntity.all_entities()[0]
 	var p = auto_free(p_ent.get_sidescroller_scene().instantiate())
 	var w_ents = DinoWeaponsData.sidescroller_weapon_entities()
 
