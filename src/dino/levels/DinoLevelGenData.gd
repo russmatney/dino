@@ -11,6 +11,9 @@ static func label_to_entity(opts):
 		"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
 		"Enemy": {scene=load("res://src/gunner/enemies/EnemyRobot.tscn")},
 
+		# pickups
+		"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
+
 		# entities
 		"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
 			setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)

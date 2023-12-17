@@ -132,6 +132,7 @@ rounded = true
 show_percentage = false
 
 [node name="CamPOF" parent="." instance=ExtResource("4_1xdos")]
+active = false
 
 [node name="Light" type="PointLight2D" parent="."]
 position = Vector2(1.13687e-13, -40)
