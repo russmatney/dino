@@ -7,15 +7,6 @@ class_name DinoLevel
 static func create_level(def: LevelDef):
 	var l = DinoLevel.new()
 	l.level_def = def
-
-	l.level_opts = {
-		tile_size=def.get_base_square_size(),
-		# could instead read in LevelDef/as resource, and pass as 'contents'
-		room_defs_path = def.get_def_path(),
-		# .... maybe.
-		label_to_tilemap = {"Tile": {scene=def.get_tiles_scene()}},
-		}
-
 	return l
 
 ## exports/triggers ######################################################
@@ -25,15 +16,14 @@ static func create_level(def: LevelDef):
 
 @export var _regen_with_level_def: bool = false :
 	set(v):
+		if not Engine.is_editor_hint():
+			return
 		if level_def:
 			regen_with_def(level_def)
 
 func regen_with_def(def):
 	if not def:
 		return
-
-	Log.pr("ought to update level_opts with level_def here")
-	Log.pr(level_def, level_opts)
 
 	# ensure level gen node
 	level_gen.set_script(def.get_level_gen_script())
@@ -120,6 +110,16 @@ func _process(delta):
 func regenerate(opts=null):
 	if opts == null and level_opts != null:
 		opts = level_opts
+
+	if level_def:
+		opts.merge({
+			tile_size=level_def.get_base_square_size(),
+			# could instead read in LevelDef/as resource, and pass as 'contents'
+			room_defs_path = level_def.get_def_path(),
+			# .... maybe.
+			label_to_tilemap = {"Tile": {scene=level_def.get_tiles_scene()}},
+			})
+
 	level_gen.generate(opts)
 	# i _think_ this helps support regen from the pause menu
 	level_opts = opts

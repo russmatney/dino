@@ -1213,6 +1213,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Classic"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/Classic.tscn"
 					}
 				}
 			},
@@ -1259,7 +1263,7 @@
 				"_property_overrides": {
 					"base_square_size": {
 						"type": "int",
-						"value": 16
+						"value": 8
 					},
 					"def_path": {
 						"type": "string",

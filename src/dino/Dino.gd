@@ -30,6 +30,9 @@ func _ready():
 
 ## current game ##########################################################
 
+func set_game_mode(mode: DinoModeEntity):
+	game_mode = mode
+
 func get_game_mode():
 	if game_mode:
 		return game_mode
