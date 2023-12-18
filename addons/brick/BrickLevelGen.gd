@@ -295,29 +295,36 @@ func generate(opts={}):
 
 func ensure_containers():
 	if not rooms_node:
-		rooms_node = Node.new()
-		rooms_node.name = "Rooms"
-		if Engine.is_editor_hint():
-			rooms_node.ready.connect(func():
-				rooms_node.set_owner(get_owner()))
-		get_parent().add_child.call_deferred(rooms_node)
+		rooms_node = get_node_or_null("../Rooms")
+		if not rooms_node:
+			rooms_node = Node.new()
+			rooms_node.name = "Rooms"
+			if Engine.is_editor_hint():
+				rooms_node.ready.connect(func():
+					rooms_node.set_owner(get_owner()))
+			get_parent().add_child.call_deferred(rooms_node)
 	if not tilemaps_node:
-		tilemaps_node = Node.new()
-		tilemaps_node.name = "Tilemaps"
-		if Engine.is_editor_hint():
-			tilemaps_node.ready.connect(func():
-				tilemaps_node.set_owner(get_owner()))
-		get_parent().add_child.call_deferred(tilemaps_node)
+		tilemaps_node = get_node_or_null("../Tilemaps")
+		if not tilemaps_node:
+			tilemaps_node = Node.new()
+			tilemaps_node.name = "Tilemaps"
+			if Engine.is_editor_hint():
+				tilemaps_node.ready.connect(func():
+					tilemaps_node.set_owner(get_owner()))
+			get_parent().add_child.call_deferred(tilemaps_node)
 	if not entities_node:
-		entities_node = Node.new()
-		entities_node.name = "Entities"
-		if Engine.is_editor_hint():
-			entities_node.ready.connect(func():
-				entities_node.set_owner(get_owner()))
-		get_parent().add_child.call_deferred(entities_node)
+		entities_node = get_node_or_null("../Entities")
+		if not entities_node:
+			entities_node = Node.new()
+			entities_node.name = "Entities"
+			if Engine.is_editor_hint():
+				entities_node.ready.connect(func():
+					entities_node.set_owner(get_owner()))
+			get_parent().add_child.call_deferred(entities_node)
 
 func clear_containers():
-	entities_node.get_children().map(func(c): c.queue_free())
+	if entities_node:
+		entities_node.get_children().map(func(c): c.queue_free())
 	if tilemaps_node:
 		tilemaps_node.get_children().map(func(c): c.queue_free())
 	if rooms_node:

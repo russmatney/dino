@@ -1,0 +1,45 @@
+name Break The Targets
+
+============
+LEGEND
+============
+
+p = Player
+x = Tile
+o = Target
+e = Enemy
+
+============
+ROOMS
+============
+
+name Basic
+
+.....................e.....
+....o..........o...........
+...xxx........xxx..........
+.........p..........xxx....
+...o...xxxx...........o....
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+name Targets Only
+
+........................
+.....o............o.....
+....xxxx........xxxx....
+........o...p..o........
+.o.....xxxxxxxxxx.....o.
+xxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx
+
+name Valley
+
+xx......................
+xx.o.......p.........o..
+xxx.o.....xxxx.....o..xx
+xxxx..o.........o...xxxx
+xxxxxx...o...o...xxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxx

@@ -1,12 +1,56 @@
+@tool
 extends Node2D
 class_name DinoLevel
 
-## vars ######################################################
+## static
+
+static func create_level(def: LevelDef):
+	var l = DinoLevel.new()
+	l.level_def = def
+
+	l.level_opts = {
+		tile_size=def.get_base_square_size(),
+		# could instead read in LevelDef/as resource, and pass as 'contents'
+		room_defs_path = def.get_def_path(),
+		# .... maybe.
+		label_to_tilemap = {"Tile": {scene=def.get_tiles_scene()}},
+		}
+
+	return l
+
+## exports/triggers ######################################################
 
 @export var type: DinoData.GameType
+@export var level_def: LevelDef
+
+@export var _regen_with_level_def: bool = false :
+	set(v):
+		if level_def:
+			regen_with_def(level_def)
+
+func regen_with_def(def):
+	if not def:
+		return
+
+	Log.pr("ought to update level_opts with level_def here")
+	Log.pr(level_def, level_opts)
+
+	# ensure level gen node
+	level_gen.set_script(def.get_level_gen_script())
+
+	# set level_opts
+	level_opts.tile_size = def.get_base_square_size()
+	# could instead read and pass as 'contents'
+	level_opts.room_defs_path = def.get_def_path()
+	# .... maybe.
+	level_opts.label_to_tilemap = {"Tile": {scene=def.get_tiles_scene()}}
+
+	regenerate()
+
+## vars ######################################################
 
 @onready var level_gen: BrickLevelGen = $LevelGen
-var level_opts: Dictionary
+var level_opts: Dictionary = {}
 signal level_complete
 signal level_setup
 
@@ -18,9 +62,26 @@ var hud
 var time: float = 0
 var time_int = 0
 
+## enter_tree ###############################################
+
+func _enter_tree():
+	var gen = get_node_or_null("LevelGen")
+	if gen == null:
+		gen = BrickLevelGen.new()
+		gen.ready.connect(func(): gen.set_owner(self))
+		gen.name = "LevelGen"
+
+		add_child(gen)
+
+	if level_def and level_def.get_level_gen_script():
+		gen.set_script(level_def.get_level_gen_script())
+
 ## ready ######################################################
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+
 	if level_gen == null:
 		Log.error("DinoLevel missing expected 'LevelGen' node")
 
@@ -44,6 +105,9 @@ func _ready():
 ## process ######################################################
 
 func _process(delta):
+	if Engine.is_editor_hint():
+		return
+
 	time += delta
 	if time > time_int:
 		time_int = int(time) + 1
@@ -60,7 +124,8 @@ func regenerate(opts=null):
 	# i _think_ this helps support regen from the pause menu
 	level_opts = opts
 
-	hud.set_level_opts(opts)
+	if not Engine.is_editor_hint():
+		hud.set_level_opts(opts)
 
 ## add_quests ###################################################3
 

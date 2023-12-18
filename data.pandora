@@ -80,7 +80,7 @@
 				"_ids_generation_class": "DinoWeaponEntityIds",
 				"_index": 0,
 				"_name": "DinoWeapon",
-				"_script_path": "res://src/dino/DinoWeaponEntity.gd"
+				"_script_path": "res://src/dino/weapons/DinoWeaponEntity.gd"
 			},
 			{
 				"_category_id": "",
@@ -99,7 +99,8 @@
 				"_id": "103",
 				"_ids_generation_class": "LevelDefIds",
 				"_index": 0,
-				"_name": "LevelDef"
+				"_name": "LevelDef",
+				"_script_path": "res://src/dino/levels/LevelDef.gd"
 			}
 		],
 		"_entities": [
@@ -1242,6 +1243,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Wildcard"
+					},
+					"tiles_scene": {
+						"type": "resource",
+						"value": "res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn"
 					}
 				}
 			},
@@ -1252,6 +1257,10 @@
 				"_index": 0,
 				"_name": "BreakTheTargets",
 				"_property_overrides": {
+					"base_square_size": {
+						"type": "int",
+						"value": 16
+					},
 					"def_path": {
 						"type": "string",
 						"value": "res://src/dino/levels/break_the_targets_level_def.txt"
@@ -1260,9 +1269,46 @@
 						"type": "string",
 						"value": "Break The Targets"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/gunner_icon_sheet.png"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/BreakTheTargetsGen.gd"
+					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/reptile/tilesets/MetalTiles8.tres"
+						"value": "res://addons/reptile/tilemaps/SpaceshipTiles8.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "113",
+				"_index": 0,
+				"_name": "LeafRunner",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/leaf_runner_level_def.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Leaf Runner"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://assets/gameicons/woods_icon_sheet.png"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/LeafRunnerGen.gd"
+					},
+					"tiles_scene": {
+						"type": "resource",
+						"value": "res://addons/reptile/tilemaps/GrassFloorTiles16.tscn"
 					}
 				}
 			}
@@ -1552,7 +1598,7 @@
 			},
 			{
 				"_category_id": "103",
-				"_default_value": "res://addons/reptile/tilesets/WoodsFloorTileSet16.tres",
+				"_default_value": "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
 				"_id": "111",
 				"_name": "tiles_scene",
 				"_type": "resource"
@@ -1568,7 +1614,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 112
+			"default": 113
 		}
 	}
 }

@@ -4,3 +4,4 @@ class_name LevelDefIds
 
 const WILDCARD = "106"
 const BREAKTHETARGETS = "110"
+const LEAFRUNNER = "113"

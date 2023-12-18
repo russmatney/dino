@@ -10,8 +10,8 @@ func get_display_name() -> String:
 func get_icon_texture() -> Texture:
 	return get_resource("icon_texture")
 
-func get_def_path() -> PackedScene:
-	return get_resource("def_path")
+func get_def_path() -> String:
+	return get_string("def_path")
 
 func get_level_gen_script() -> Script:
 	return get_resource("level_gen_script")
