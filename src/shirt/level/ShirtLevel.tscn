@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0s0hdbrpek1p"]
 
-[ext_resource type="Script" path="res://src/dino/DinoLevel.gd" id="1_xro15"]
+[ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_xro15"]
 [ext_resource type="Script" path="res://src/shirt/level/ShirtLevelGen.gd" id="2_xdkoa"]
 [ext_resource type="Script" path="res://src/shirt/level/QuestKillEnemies.gd" id="10_g0ars"]
 [ext_resource type="Script" path="res://src/shirt/level/QuestCollectGems.gd" id="11_1hgig"]

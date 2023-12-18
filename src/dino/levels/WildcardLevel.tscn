@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4854dwgk67cd"]
 
-[ext_resource type="Script" path="res://src/dino/DinoLevel.gd" id="1_chctc"]
+[ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_chctc"]
 [ext_resource type="Script" path="res://src/dino/levels/WildcardLevelGen.gd" id="2_h4345"]
 
 [node name="WildcardLevel" type="Node2D"]

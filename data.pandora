@@ -91,6 +91,15 @@
 				"_index": 0,
 				"_name": "DinoMode",
 				"_script_path": "res://src/dino/modes/DinoModeEntity.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "32f2e0ff",
+				"_id": "103",
+				"_ids_generation_class": "LevelDefIds",
+				"_index": 0,
+				"_name": "LevelDef"
 			}
 		],
 		"_entities": [
@@ -1222,6 +1231,40 @@
 						"value": true
 					}
 				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "106",
+				"_index": 0,
+				"_name": "Wildcard",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Wildcard"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "110",
+				"_index": 0,
+				"_name": "BreakTheTargets",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/break_the_targets_level_def.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Break The Targets"
+					},
+					"tiles_scene": {
+						"type": "resource",
+						"value": "res://addons/reptile/tilesets/MetalTiles8.tres"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1478,12 +1521,54 @@
 				"_id": "102",
 				"_name": "is_debug",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "103",
+				"_default_value": "",
+				"_id": "104",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "103",
+				"_default_value": "res://assets/icon.png",
+				"_id": "105",
+				"_name": "icon_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "103",
+				"_default_value": "res://src/dino/levels/wildcard_level_def.txt",
+				"_id": "108",
+				"_name": "def_path",
+				"_type": "string"
+			},
+			{
+				"_category_id": "103",
+				"_default_value": "res://src/dino/levels/WildcardLevelGen.gd",
+				"_id": "109",
+				"_name": "level_gen_script",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "103",
+				"_default_value": "res://addons/reptile/tilesets/WoodsFloorTileSet16.tres",
+				"_id": "111",
+				"_name": "tiles_scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "103",
+				"_default_value": 16,
+				"_id": "112",
+				"_name": "base_square_size",
+				"_type": "int"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 102
+			"default": 112
 		}
 	}
 }

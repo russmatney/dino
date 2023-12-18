@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="6_i2ugf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_la6u1"]
 [ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/dino/ui/WeaponIcon.tscn" id="8_kmyt0"]
-[ext_resource type="Script" path="res://src/dino/DinoWeaponEntity.gd" id="9_bfb4x"]
+[ext_resource type="Script" path="res://src/dino/weapons/DinoWeaponEntity.gd" id="9_bfb4x"]
 
 [sub_resource type="Resource" id="Resource_gvmx5"]
 script = ExtResource("9_bfb4x")
