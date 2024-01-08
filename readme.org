@@ -28,7 +28,12 @@
 #+html:  </a>
 #+html: </p>
 
-Dino is a monorepo/sandbox full of Godot games and addons.
+Dino was a monorepo/sandbox full of Godot games and addons. At this point this
+readme needs an update! Dino is in the midst of a comprehensive refactor. The
+games are being deconstructed and DRYed up, so that combinations of them can be
+generated and played with much more variety! Stay tuned for updates!
+
+--
 
 #+name: Dino Games and Addons
 #+caption: An incomplete list of rough icons
@@ -36,7 +41,8 @@ Dino is a monorepo/sandbox full of Godot games and addons.
 
 You can play the latest version on itch.io: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]].
 
-A steam release is coming soon - download the demo and wishlist [[https://store.steampowered.com/app/2589550/Dino/][on steam]].
+A steam release is coming soon - download the demo and wishlist [[https://store.steampowered.com/app/2589550/Dino/][on steam]]. If
+you're interested in beta testing, I have codes! Feel free to ping me on Discord.
 
 You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind-garden/blog]], or follow me on [[https://mastodon.gamedev.place/@russmatney][mastodon]],
 [[https://programming.dev/u/russmatney][lemmy]], or [[https://twitch.tv/russmatney][twitch]] for updates, or pop in [[https://discord.gg/xZHWtGfAvF][the discord]] and ping me. You can also
