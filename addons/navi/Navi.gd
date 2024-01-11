@@ -86,6 +86,9 @@ func _deferred_goto_scene(scene, opts={}):
 	var next_scene
 	if scene is String:
 		var s = ResourceLoader.load(scene)
+		if s == null:
+			Log.warn("Cannot instantiate passed scene, failed to load", scene)
+			return
 		next_scene = s.instantiate()
 	elif scene is PackedScene:
 		next_scene = scene.instantiate()

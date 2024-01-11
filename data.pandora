@@ -1263,7 +1263,7 @@
 				"_property_overrides": {
 					"base_square_size": {
 						"type": "int",
-						"value": 8
+						"value": 16
 					},
 					"def_path": {
 						"type": "string",

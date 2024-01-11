@@ -19,10 +19,10 @@ func _ready():
 			died.connect(level._on_player_death.bind(self))
 
 		# could be instances with randomized stats, etc
-		add_weapon(DinoWeaponEntityIds.GUN)
-		add_weapon(DinoWeaponEntityIds.BOOMERANG)
 		add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
 		add_weapon(DinoWeaponEntityIds.SWORD)
+		add_weapon(DinoWeaponEntityIds.GUN)
+		add_weapon(DinoWeaponEntityIds.BOOMERANG)
 		has_double_jump = true
 
 	super._ready()
