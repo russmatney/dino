@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://4p5erkba5khs"
+path="res://.godot/imported/leaf_purple.aseprite-d8acce6cf5d6afb5fa2c7354ad18d5c3.res"
+
+[deps]
+
+source_file="res://assets/art/fall/leaf_purple.aseprite"
+dest_files=["res://.godot/imported/leaf_purple.aseprite-d8acce6cf5d6afb5fa2c7354ad18d5c3.res"]
+
+[params]
+

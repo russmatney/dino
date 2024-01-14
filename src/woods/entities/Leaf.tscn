@@ -1,170 +1,170 @@
 [gd_scene load_steps=29 format=3 uid="uid://dhma0vanfafyo"]
 
 [ext_resource type="Script" path="res://src/woods/entities/LeafEntity.gd" id="1_1akrk"]
-[ext_resource type="Texture2D" uid="uid://d23a8ljxjvq0x" path="res://src/dotHop/themes/fall/leaf_green.png" id="2_k8fmg"]
-[ext_resource type="Texture2D" uid="uid://f6v5qu873jn1" path="res://src/dotHop/themes/fall/leaf_greenred.png" id="3_lsb4r"]
-[ext_resource type="Texture2D" uid="uid://b46m768vfaimt" path="res://src/dotHop/themes/fall/leaf_purple.png" id="4_fblw5"]
-[ext_resource type="Texture2D" uid="uid://bvkai7ky5c1qa" path="res://src/dotHop/themes/fall/leaf_redorange.png" id="5_kyw58"]
-[ext_resource type="Texture2D" uid="uid://db1aoxx6bupyd" path="res://src/dotHop/themes/fall/leaf_yellow.png" id="6_qwoyw"]
+[ext_resource type="Texture2D" uid="uid://twjcqls3w7j0" path="res://src/woods/entities/leaf_green.png" id="2_1b5ov"]
+[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/woods/entities/leaf_greenred.png" id="3_32ltg"]
+[ext_resource type="Texture2D" uid="uid://blxnv51h4ng52" path="res://src/woods/entities/leaf_purple.png" id="4_1kosg"]
+[ext_resource type="Texture2D" uid="uid://bgdgddeojp2g6" path="res://src/woods/entities/leaf_redorange.png" id="5_t2nsq"]
+[ext_resource type="Texture2D" uid="uid://pi1jxrc3ggju" path="res://src/woods/entities/leaf_yellow.png" id="6_xd72u"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n8dvo"]
-atlas = ExtResource("2_k8fmg")
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmnml"]
+atlas = ExtResource("2_1b5ov")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x6cbv"]
-atlas = ExtResource("2_k8fmg")
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0t43"]
+atlas = ExtResource("2_1b5ov")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1j101"]
-atlas = ExtResource("2_k8fmg")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvo1q"]
+atlas = ExtResource("2_1b5ov")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_m1tvd"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_dipl8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n8dvo")
+"texture": SubResource("AtlasTexture_wmnml")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x6cbv")
+"texture": SubResource("AtlasTexture_k0t43")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n8dvo")
+"texture": SubResource("AtlasTexture_wmnml")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1j101")
+"texture": SubResource("AtlasTexture_rvo1q")
 }],
 "loop": true,
 "name": &"twist",
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_stwg6"]
-atlas = ExtResource("3_lsb4r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6md4b"]
+atlas = ExtResource("3_32ltg")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_77lql"]
-atlas = ExtResource("3_lsb4r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0e0a"]
+atlas = ExtResource("3_32ltg")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6wi7j"]
-atlas = ExtResource("3_lsb4r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_370tf"]
+atlas = ExtResource("3_32ltg")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_774n1"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8m26"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_stwg6")
+"texture": SubResource("AtlasTexture_6md4b")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_77lql")
+"texture": SubResource("AtlasTexture_w0e0a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_stwg6")
+"texture": SubResource("AtlasTexture_6md4b")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6wi7j")
+"texture": SubResource("AtlasTexture_370tf")
 }],
 "loop": true,
 "name": &"twist",
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q22ns"]
-atlas = ExtResource("4_fblw5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilpl8"]
+atlas = ExtResource("4_1kosg")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_in5ck"]
-atlas = ExtResource("4_fblw5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_06805"]
+atlas = ExtResource("4_1kosg")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w8qnd"]
-atlas = ExtResource("4_fblw5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwqjm"]
+atlas = ExtResource("4_1kosg")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_23crv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_yovo4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q22ns")
+"texture": SubResource("AtlasTexture_ilpl8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_in5ck")
+"texture": SubResource("AtlasTexture_06805")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q22ns")
+"texture": SubResource("AtlasTexture_ilpl8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w8qnd")
+"texture": SubResource("AtlasTexture_rwqjm")
 }],
 "loop": true,
 "name": &"twist",
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o8nwj"]
-atlas = ExtResource("5_kyw58")
+[sub_resource type="AtlasTexture" id="AtlasTexture_esgbv"]
+atlas = ExtResource("5_t2nsq")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xdb4w"]
-atlas = ExtResource("5_kyw58")
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq3r0"]
+atlas = ExtResource("5_t2nsq")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_815hm"]
-atlas = ExtResource("5_kyw58")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mca1o"]
+atlas = ExtResource("5_t2nsq")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c6na0"]
-atlas = ExtResource("5_kyw58")
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3e0n"]
+atlas = ExtResource("5_t2nsq")
 region = Rect2(32, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_oexnm"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gqun"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o8nwj")
+"texture": SubResource("AtlasTexture_esgbv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xdb4w")
+"texture": SubResource("AtlasTexture_fq3r0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_815hm")
+"texture": SubResource("AtlasTexture_mca1o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c6na0")
+"texture": SubResource("AtlasTexture_n3e0n")
 }],
 "loop": true,
 "name": &"twist",
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ko5yt"]
-atlas = ExtResource("6_qwoyw")
+[sub_resource type="AtlasTexture" id="AtlasTexture_drxba"]
+atlas = ExtResource("6_xd72u")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_owyp4"]
-atlas = ExtResource("6_qwoyw")
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4d7o"]
+atlas = ExtResource("6_xd72u")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0845f"]
-atlas = ExtResource("6_qwoyw")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg805"]
+atlas = ExtResource("6_xd72u")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4jdhi"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4eq1c"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ko5yt")
+"texture": SubResource("AtlasTexture_drxba")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_owyp4")
+"texture": SubResource("AtlasTexture_g4d7o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ko5yt")
+"texture": SubResource("AtlasTexture_drxba")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0845f")
+"texture": SubResource("AtlasTexture_xg805")
 }],
 "loop": true,
 "name": &"twist",
@@ -179,9 +179,9 @@ script = ExtResource("1_1akrk")
 
 [node name="Green" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_m1tvd")
+sprite_frames = SubResource("SpriteFrames_dipl8")
 animation = &"twist"
-frame_progress = 0.686166
+frame_progress = 0.081978
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -189,13 +189,13 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/dotHop/themes/fall/assets/leaf_green.aseprite"
+"source": "res://assets/art/fall/leaf_green.aseprite"
 }
 
 [node name="GreenRed" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_774n1")
+sprite_frames = SubResource("SpriteFrames_o8m26")
 animation = &"twist"
 autoplay = "twist"
 metadata/_aseprite_wizard_config_ = {
@@ -205,15 +205,14 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/dotHop/themes/fall/assets/leaf_greenred.aseprite"
+"source": "res://assets/art/fall/leaf_greenred.aseprite"
 }
 
 [node name="Purple" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_23crv")
+sprite_frames = SubResource("SpriteFrames_yovo4")
 animation = &"twist"
-frame_progress = 0.95711
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -221,13 +220,13 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/dotHop/themes/fall/assets/leaf_purple.aseprite"
+"source": "res://assets/art/fall/leaf_purple.aseprite"
 }
 
 [node name="RedOrange" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_oexnm")
+sprite_frames = SubResource("SpriteFrames_6gqun")
 animation = &"twist"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -236,15 +235,14 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/dotHop/themes/fall/assets/leaf_redorange.aseprite"
+"source": "res://assets/art/fall/leaf_redorange.aseprite"
 }
 
 [node name="Yellow" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
-sprite_frames = SubResource("SpriteFrames_4jdhi")
+sprite_frames = SubResource("SpriteFrames_4eq1c")
 animation = &"twist"
-frame_progress = 0.645739
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -252,7 +250,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/dotHop/themes/fall/assets/leaf_yellow.aseprite"
+"source": "res://assets/art/fall/leaf_yellow.aseprite"
 }
 
 [node name="CollectBox" type="Area2D" parent="."]

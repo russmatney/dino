@@ -69,7 +69,7 @@ func manages_scene(scene_file_path):
 ## static helpers ##########################################################
 
 static func all_game_entities():
-	var ent = Pandora.get_entity(DinoGameEntityIds.DOTHOP)
+	var ent = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
 		.filter(func(e): return e.is_enabled())
 
