@@ -19,16 +19,14 @@ signal round_complete
 signal game_complete
 
 var round_defs = [[
-		LevelDefIds.BREAKTHETARGETS,
 		LevelDefIds.LEAFRUNNER,
 		LevelDefIds.WILDCARD,
 	], [
 		LevelDefIds.BREAKTHETARGETS,
-	], [
-		LevelDefIds.LEAFRUNNER,
-		LevelDefIds.WILDCARD,
 	# ], [
-	# TODO boss battle! polygon team! beat up a car!
+	# TODO polygon team! beat up a car! giant hario!
+	], [
+		LevelDefIds.BOSSBATTLE
 	],
 	]
 

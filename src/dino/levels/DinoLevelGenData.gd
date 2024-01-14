@@ -3,9 +3,16 @@ extends Object
 class_name DinoLevelGenData
 
 static func label_to_entity(opts):
+	# TODO these should optionally reference pandora entities,
+	# and use scene as a fallback
 	return {
 		# player
 		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+
+		# bosses
+		"Boss": {scene=load("res://src/hatbot/bosses/Monstroar.tscn")},
+		"Monstroar": {scene=load("res://src/hatbot/bosses/Monstroar.tscn")},
+		"Beefstronaut": {scene=load("res://src/hatbot/bosses/Beefstronaut.tscn")},
 
 		# enemies
 		"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},

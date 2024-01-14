@@ -181,7 +181,7 @@ script = ExtResource("1_1akrk")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_dipl8")
 animation = &"twist"
-frame_progress = 0.081978
+frame_progress = 0.922239
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",

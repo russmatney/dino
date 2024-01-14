@@ -60,6 +60,7 @@ texture = ExtResource("14_y6g7e")
 [node name="SkullParticles" parent="." instance=ExtResource("15_w3c60")]
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = 16.0
 offset_right = 40.0

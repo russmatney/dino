@@ -8,12 +8,10 @@ point_count = 3
 curve = SubResource("Curve_ytr46")
 
 [resource]
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 8.95
-particle_flag_disable_z = true
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 radial_accel_min = -100.0
 radial_accel_max = -79.4
 scale_min = 10.0

@@ -1110,6 +1110,27 @@
 						"value": "res://addons/reptile/tilemaps/GrassFloorTiles16.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "114",
+				"_index": 0,
+				"_name": "BossBattle",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/boss_battle/boss_battle_level_def.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Boss Battle"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/boss_battle/BossBattleLevelGen.gd"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1371,7 +1392,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 113
+			"default": 114
 		}
 	}
 }
