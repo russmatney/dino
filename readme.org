@@ -48,9 +48,24 @@ You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind
 [[https://programming.dev/u/russmatney][lemmy]], or [[https://twitch.tv/russmatney][twitch]] for updates, or pop in [[https://discord.gg/xZHWtGfAvF][the discord]] and ping me. You can also
 support me on [[https://patreon.com/russmatney][Patreon]].
 
-*** NOTE: Some included assets must be purchased to use
-Some of Dino's games and addons use third-party assets that must be purchased
-before use in your own project!
+** Copyright Notice
+Dino © 2022-2024 by Russell Matney is licensed under CC BY-NC-ND 4.0. To view a copy
+of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+That's ~Attribution Required~, ~No-Derivatives~, and ~Non-Commerical~ use only!
+
+Dino is 'Source Available' (as opposed to 'Open Source'). The code and some
+assets are available for reference and educational purposes, but you cannot copy
+and redistribute the game, the code, or the assets without explicit permission.
+
+#+begin_quote
+I'm in the process of breaking the addons and reusable parts of this codebase
+out into properly licensed open source repos, so stay tuned!
+#+end_quote
+
+*** Note: Third-party assets in this repo must be purchased to use
+Dino uses third-party assets that must be purchased before they can be used in
+your own projects!
 
 Fonts:
 
