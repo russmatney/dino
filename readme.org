@@ -1,5 +1,7 @@
 #+title: dino
 
+Check out the [[https://www.youtube.com/watch?v=9cyAnNLGrZI][Dino Year One DevLog on YouTube]].
+
 * _
 #+html: <p align="center">
 #+html:   <a href="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml"><img alt="Unit Tests" src="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg" /></a>
@@ -26,7 +28,14 @@
 #+html:  <a href="https://www.twitch.tv/russmatney">
 #+html:    <img alt="russmatney on Twitch" src="https://img.shields.io/badge/Twitch-purple?style=for-the-badge&logo=twitch&logoColor=white" />
 #+html:  </a>
+#+html: <a href="https://www.youtube.com/@russmatney">
+#+html:   <img src="https://img.shields.io/badge/Youtube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
+#+html: </a>
 #+html: </p>
+
+--
+
+UPDATE:
 
 Dino was a monorepo/sandbox full of Godot games and addons. At this point this
 readme needs an update! Dino is in the midst of a comprehensive refactor. The
