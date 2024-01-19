@@ -1,8 +1,5 @@
 #+title: dino
 
-Check out the [[https://www.youtube.com/watch?v=9cyAnNLGrZI][Dino Year One DevLog on YouTube]].
-
-* _
 #+html: <p align="center">
 #+html:   <a href="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml"><img alt="Unit Tests" src="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg" /></a>
 #+html:   <a href="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml"><img alt="Itch Deploy" src="https://github.com/russmatney/dino/actions/workflows/itch_build_and_deploy.yml/badge.svg" /></a>
@@ -33,31 +30,36 @@ Check out the [[https://www.youtube.com/watch?v=9cyAnNLGrZI][Dino Year One DevLo
 #+html: </a>
 #+html: </p>
 
---
-
-UPDATE:
-
-Dino was a monorepo/sandbox full of Godot games and addons. At this point this
-readme needs an update! Dino is in the midst of a comprehensive refactor. The
-games are being deconstructed and DRYed up, so that combinations of them can be
-generated and played with much more variety! Stay tuned for updates!
-
---
-
 #+name: Dino Games and Addons
 #+caption: An incomplete list of rough icons
 [[images/all_icons_bg_8x.png]]
 
-You can play the latest version on itch.io: [[https://russmatney.itch.io/dino][russmatney.itch.io/dino]].
+Dino was a sandbox full of Godot games and addons, but is now in the midst of a
+major refactor. The games are being DRYed up and mixed into something cohesive.
+I'm currently pushing for a Q1 release (fingers-crossed).
 
-A steam release is coming soon - download the demo and wishlist [[https://store.steampowered.com/app/2589550/Dino/][on steam]]. If
-you're interested in beta testing, I have codes! Feel free to ping me on Discord.
+If you're interested in beta testing, I have steam codes available and would love any
+ideas or feedback! Feel free to ping me [[https://discord.gg/xZHWtGfAvF][on Discord]].
 
-You can find more about Dino on my [[https://russmatney.com/note/dino.html][mind-garden/blog]], or follow me on [[https://mastodon.gamedev.place/@russmatney][mastodon]],
-[[https://programming.dev/u/russmatney][lemmy]], or [[https://twitch.tv/russmatney][twitch]] for updates, or pop in [[https://discord.gg/xZHWtGfAvF][the discord]] and ping me. You can also
-support me on [[https://patreon.com/russmatney][Patreon]].
+*** DevLogs
+- Check out the [[https://www.youtube.com/watch?v=9cyAnNLGrZI][Dino Year One DevLog on YouTube]].
+*** Docs
+- [[file:docs/games.org][docs/games.org]]
+- [[file:docs/addons.org][docs/addons.org]]
+- [[file:docs/bb_godot.org][docs/bb_godot.org]]
+- [[file:docs/credits.org][docs/credits.org]]
 
-** Copyright Notice
+*** Patrons
+Many thanks to my patrons!
+
+- Cameron Kingsbury
+- Duaa Osman
+- Ryan Schmukler
+- Alex Chojnacki
+- Aspen Smith
+- Jake Bartlam
+- Ellie Matney
+*** Copyright Notice
 Dino © 2022-2024 by Russell Matney is licensed under CC BY-NC-ND 4.0. To view a copy
 of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/
 
@@ -72,7 +74,7 @@ I'm in the process of breaking the addons and reusable parts of this codebase
 out into properly licensed open source repos, so stay tuned!
 #+end_quote
 
-*** Note: Third-party assets in this repo must be purchased to use
+**** Note: Third-party assets in this repo must be purchased to use
 Dino uses third-party assets that must be purchased before they can be used in
 your own projects!
 
@@ -83,387 +85,3 @@ Fonts:
 
 These are available (after purchase) under the CC4 licence:
 https://creativecommons.org/licenses/by/4.0/legalcode
-
-* Games
-These (and future games) are discussed on my blog (linked above).
-
-** Spike:
-See ~src/spike/*~ and ~addons/beehive/sidescroller/*~ for the code.
-
-Play the web version here: [[https://russmatney.itch.io/spike][russmatney.itch.io/spike]]
-
-A submission for the GMTK Game Jam 2023
-** Shirt:
-See ~src/shirt/*~ and ~addons/beehive/topdown/*~ for the code.
-
-Play the web version here: [[https://russmatney.itch.io/shirt][russmatney.itch.io/shirt]]
-
-A submission for the [[https://itch.io/jam/godot-wild-jam-58][Godot Wild Jam #58]]
-** Mountain:
-A work-in-progress.
-** Super Elevator Level:
-See ~src/superElevatorLevel/*~ and ~addons/beehive/beatemup/*~ for the code.
-
-Play the downloadable version here: [[https://russmatney.itch.io/super-elevator-level][russmatney.itch.io/super-elevator-level]]
-
-Or the webversion: [[https://russmatney.itch.io/super-elevator-level-web][russmatney.itch.io/super-elevator-level-web]]
-
-Submitted to the [[https://itch.io/jam/go-godot-jam-4][Go Godot Jam 4]]
-** Herd: A sheep bullet hell
-See ~src/hatbot/*~ for the code.
-
-No separate itch page and build yet - but playable in Dino's main deploy:
-[[https://russmatney.itch.io/dino][russmatney.itch.io/dino]].
-
-I worked on this for the Bullet Hell Jam 2023, but didn't end up submitting -
-it's still very prototypey.
-** Mvania 19: HatBot
-A submission for [[https://itch.io/jam/metroidvania-month-19][Metroidvania Month-long Jam 19]].
-
-Play the downloadable version here: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19]]
-
-Or the webversion: [[https://russmatney.itch.io/mvania19][russmatney.itch.io/mvania19-web]]
-
-See ~src/hatbot/*~ for the code.
-** Tower
-A Jetpack-fueled mess of propulsion in some generated tilemaps.
-
-I built much of Reptile (a dino addon) while working on this game.
-
-Play the deployed version here: [[https://russmatney.itch.io/tower][russmatney.itch.io/tower]]
-
-See ~src/{gunner,tower}/*~ for the code.
-** Cozy Gunner
-A juicy gunner.
-
-Play the deployed version here: [[https://russmatney.itch.io/gunner][russmatney.itch.io/gunner]]
-
-See ~src/gunner/*~ for the code.
-** Harvey
-An overcooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
-
-Play the deployed version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
-
-See ~src/harvey/*~ for the code.
-** Pluggs
-A fun character - just a bucket of plugs.
-
-Play the deployed version here: [[https://russmatney.itch.io/pluggs][russmatney.itch.io/pluggs]]
-
-See ~src/pluggs/*~ for the code.
-** Ghost House
-Play the deployed version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
-
-A small something created for the [[https://itch.io/jam/godot-wild-jam-52][Godot Wild Jam #52]].
-
-See ~src/ghosts/*~ for the code.
-** Snake (Deleted 11/11/23)
-A rough prototype for [[https://itch.io/jam/gdb-juice-jam-ii][Juice Jam 2]].
-
-Play the deployed version here: [[https://russmatney.itch.io/snake][russmatney.itch.io/snake]]
-** Runner (deleted: 11/11/23)
-Play the deployed version here: [[https://russmatney.itch.io/runner][russmatney.itch.io/runner]]
-
-A catch-the-leaf inspired running game.
-
-The code is all in ~src/runner/*~ - the ~ThePark~ scene is the original, but
-you should be able to toy with individual rooms in the ~src/runner/gyms~ as well.
-
-The core of the logic is the Runner.gd script, which handles adding and removing
-rooms while the player moves across them until they are all complete.
-** Dungeon Crawler (deleted: 11/11/23)
-Play the deployed version here: [[https://russmatney.itch.io/dungeon-crawler][russmatney.itch.io/dungeon-crawler]]
-
-Part of my classic-game-clones adventure, in which I'm creating basic prototypes
-modeled after classic genres and games.
-
-This was a chance to implement keys and door logic, and a basic boss state
-machine. The map is one giant scene, and the tiles use auto-tiling, which should
-make it simple to doodle a few more levels.
-* Addons
-These addons are discussed in more detail on my blog (linked above).
-
-These are intended to speed up prototyping and game-jam workflows, but should
-also be useful in larger, long-running projects.
-
-Note that cross-dependencies between these addons exist - i.e. if you add
-'navi', you will have trouble unless you also add 'core', 'trolley', and 'dj',
-b/c the 'navi' code expects to use fonts/autoloads from those addons. This may
-be dealt with overtime, but for now Dino is growing as a bit of a personal
-framework more than independent libraries.
-
-** Core
-A Util autoload and a slew of fonts.
-
-Generally, anything too small to go in an existing addon.
-** Beehive
-For working with state machines, behavior trees, GOAP.
-** Camera
-2D Camera with modes for following the player, anchors, or centering based on
-points of focus/interest.
-
-Heavily taken from Squirrel Eiserloh Juicing Your Cameras with Math video:
-https://www.youtube.com/watch?v=tu-Qe66AvtY
-
-Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
-*** slow-mo
-*** hit-stop
-*** screenshake
-** DJ
-For sounds and music management, such as background music that is maintained
-across scene transitions.
-
-Whatever it takes to make playing sounds in Godot better.
-** Hood
-HUD UI components.
-
-Maybe camera goes in here?
-GUI and HUD should be camera-zoom-level related anyway.
-** Hotel
-An in-memory game state db.
-
-Discussed in more detail: [[https://russmatney.com/note/hotel_dino_plugin.html][russmatney.com/note/hotel_dino_plugin.html]]
-** Metro
-~Metro.gd~, ~MetroZone.gd~, and ~MetroRoom.gd~ provide helpers for managing
-zones (areas) and rooms in map-based games. (Metroidvanias, roguelikes, dungeon
-crawlers, etc.)
-
-Originally built along side HatBot, it has since been refactored out
-into a reusable addon, and applied so far to ~src/dungeonCrawler~.
-** Navi
-Basic menus, pausing, and credits, plus a scene loader for navigating between
-them all.
-*** NaviMenu
-supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
-*** Basic popovers
-**** Pause Screen
-**** Win Screen
-**** Death Screen
-** Quest
-Basic signals and checks for completing one or more tasks in a scene.
-** Reptile
-Tools scripts and ui to improve on Godot's TileSet UI gap.
-Includes some basic auto-tiles to speed up prototyping.
-
-Includes Reptile autoload and ReptileRoom, which are a base for some proc gen with tilemaps.
-** Thanks
-A simple Credits scene and/or script that scrolls credits from a .txt file
-** Trolley
-For handling controls inputs and remapping.
-* bb-godot: some helpful babashka tasks
-Utilities for managing Godot Projects using Babashka (Clojure)
-
-- auto-exporting from aseprite on file-save
-- building a local web build
-- deploying via butler (itch.io's build/deploy tool)
-
-** ~bb watch~
-A file watcher that runs other commands, which for now is automatically
-exporting Aseprite files as pngs.
-** ~bb build-web~: Build project for web
-Build your project, for web.
-
-Builds using godot's HTML5 template, in the ~./dist~ directory.
-
-This can be served locally with a web server helper.
-** ~bb butler-push <game-name>~: Push project to matching itch.io game
-** ~bb zip~: Zip project
-zip the ~./dist~ dir into a ~dist.zip~, which can be uploaded to itch.io
-
-** deprecated tasks
-*** symlinked addon support
-#+begin_quote
-NOTE: at this point I've moved to vendoring the deps completely within the
-project, to avoid burdening other folks with cloning/installing these deps to
-get Dino to run. These commands might still be useful in some cases, but are not
-required to run the project.
-#+end_quote
-**** ~bb addons~
-An quick status check for your addons-map
-**** ~bb install-addons~
-An approximation of a dependency manager.
-
-Clones and symlinks godot addons, using a clojure map as the manifest
-
-Here's a bit of the current bb.edn for this project
-
-#+begin_src clojure
-{:tasks
- {:requires ([bb-godot.tasks :as tasks])
-
-  install-addons
-  (tasks/install-addons
-    {:behavior_tree :kagenash1/godot-behavior-tree
-     :gut           :bitwes/Gut})}}
-#+end_src
-
-A project consuming some of dino's addons (plus gdunit) might look like:
-
-#+begin_src clojure
-{:tasks
- {:requires ([bb-godot.tasks :as tasks])
-
-  install-addons
-  (tasks/install-addons
-    {:gdUnit4       :MikeSchulze/gdUnit4
-     :navi          :russmatney/dino
-     :dj            :russmatney/dino
-     :trolley       :russmatney/dino
-     :core          :russmatney/dino
-     :reptile       :russmatney/dino
-     :beehive       :russmatney/dino})}}
-#+end_src
-
-**** ~bb install-script-templates~
-Copy templates from external paths into your project
-
-I needed this one time, tho it seems like addons should do this themselves?
-Maybe going through the asset library works that way?
-*** deploying to s3
-#+begin_quote
-NOTE: I'm not doing this so much anymore, b/c butler and itch.io are great for
-hosting web games. Maybe it still works?
-#+end_quote
-
-**** ~bb deploy-web <s3-bucket>~: Deploy project to s3
-Deploy a project to an s3 bucket.
-
-Depends on a working and logged-in ~aws~ cli tool.
-* Credits
-Hopefully this stays in sync with ~src/dino/DinoCredits.gd~.
-
-** Music
-*** Late Night Radio
-by Kevin MacLeod (incompetech.com)
-Licensed under Creative Commons: By Attribution 4.0 License
-http://creativecommons.org/licenses/by/4.0
-MIT License
-
-*** field-stars-ambient-loop
-by SuloSounds
-https://sulosounds.itch.io/100-songs
-CC0 - Public Domain
-https://creativecommons.org/share-your-work/public-domain/cc0/
-** Sounds
-*** Most sounds generated via gdfxr (a godot sfxr addon)
-https://github.com/timothyqiu/gdfxr
-
-*** retro game weapon sound effects
-happysoulmusic.com
-https://happysoulmusic.com/retro-game-weapons-sound-effects/
-cc0
-https://creativecommons.org/publicdomain/zero/1.0/
-
-*** kenney assets sound packs
-https://kenney.nl/assets/category:Audio
-all cc0 - public domain
-
-https://creativecommons.org/publicdomain/zero/1.0/
-kenney interface sounds
-https://www.kenney.nl/assets/interface-sounds
-kenney scifi sounds
-https://www.kenney.nl/assets/sci-fi-sounds
-kenney impact sounds
-https://www.kenney.nl/assets/impact-sounds
-kenney voice over sounds (fighter)
-https://www.kenney.nl/assets/voiceover-pack-fighter
-kenney casino audio
-https://www.kenney.nl/assets/casino-audio
-kenney music jingles
-https://www.kenney.nl/assets/music-jingles
-kenney digital audio
-https://www.kenney.nl/assets/digital-audio
-kenney rpg audio
-https://www.kenney.nl/assets/rpg-audio
-
-** Fonts
-*** V3X3D
-The vexed fonts are not available for distribution until they are purchased!
-They can be purchased individually or as part of various bundles from V3X3D's
-itch page: https://v3x3d.itch.io
-
-Please also consider supporting V3X3D on patreon: https://www.patreon.com/V3X3D
-
-**** Arcade Cabinet
-by V3X3D
-https://v3x3d.itch.io/arcade-cabinet
-https://creativecommons.org/licenses/by/4.0/legalcode
-
-**** Enter Input
-by V3X3D
-https://v3x3d.itch.io/enter-input
-https://creativecommons.org/licenses/by/4.0/legalcode
-
-*** born2bsportyv2
-by japanyoshi
-http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=383
-Public Domain
-https://creativecommons.org/publicdomain/zero/1.0/
-
-*** at10
-by grafxkid
-https://grafxkid.itch.io/at01
-Public Domain
-https://creativecommons.org/publicdomain/zero/1.0/
-
-*** Adventurer
-by Brain J Smith
-http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=195
-Creative Commons Attribution
-** Color Palettes
-*** lospec 500
-A collaboration, including Foxbutt, Rhoq, Dimi, Skeddles, MiggityMoogity, PureAsbestos, Polyducks, SybilQ, Unsettled, DaaWeed, Moertel, KingW, Glacier, WildLeoKnight and GooGroker
-https://lospec.com/palette-list/lospec500
-
-*** COLDFIRE GB
-By Kerrielake
-https://lospec.com/palette-list/coldfire-gb
-
-*** autumn glow
-by sonnenstein
-https://lospec.com/palette-list/autumn-glow
-
-*** funkyfuture 8
-by shamaboy11
-https://lospec.com/palette-list/funkyfuture-8
-
-*** twilight-5
-by star
-https://lospec.com/palette-list/twilight-5
-
-*** wildflowers
-by Sprog
-https://lospec.com/palette-list/wildflowers
-
-** Art
-*** Pirate Bomb Tile Set
-By Pixel Frog
-https://pixelfrog-assets.itch.io/pirate-bomb
-Public Domain
-https://creativecommons.org/publicdomain/zero/1.0/
-
-** Godot Addons
-*** gdfxr
-https://github.com/timothyqiu/gdfxr
-MIT License
-*** teeb.text-effects teeb.text_transitions
-https://github.com/teebarjunk/godot-text_effects
-MIT License
-*** GDUnit4
-https://github.com/MikeSchulze/gdUnit4
-*** AsepriteWizard
-https://github.com/viniciusgerevini/godot-aseprite-wizard
-*** Pandora
-https://github.com/bitbrain/pandora
-** Code Contributors
-- Joshua Skrzypek
-** Patrons
-Many thanks to all my sponsors and patrons!
-
-- Cameron Kingsbury
-- Duaa Osman
-- Ryan Schmukler
-- Alex Chojnacki
-- Aspen Smith
-- Jake Bartlam
-- Ellie Matney
