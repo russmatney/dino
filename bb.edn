@@ -52,4 +52,9 @@
 
                 ;; (println command)
                 ;; http-server installable via bbin
-                (tasks/shell-and-log command))}}
+                (tasks/shell-and-log command))
+
+  gd-plug
+  (tasks/shell-and-log
+    (str "godot --no-window -s plug.gd " (string/join " " *command-line-args*)))
+  }}
