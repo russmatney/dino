@@ -47,10 +47,10 @@ func register_cbv(cmd_name: String, cb: Callable) -> CmdCommandHandler:
 	return self
 
 
-func _validate() -> Result:
+func _validate() -> GdUnitResult:
 	var errors: = PackedStringArray()
 	var registered_cbs: = Dictionary()
-	
+
 	for cmd_name in _command_cbs.keys():
 		var cb: Callable = _command_cbs[cmd_name][CB_SINGLE_ARG] if _command_cbs[cmd_name][CB_SINGLE_ARG] else _command_cbs[cmd_name][CB_MULTI_ARGS]
 		if cb != NO_CB and not cb.is_valid():
@@ -61,17 +61,17 @@ func _validate() -> Result:
 		if _enhanced_fr_test and cb != NO_CB:
 			var cb_method: = cb.get_method()
 			if registered_cbs.has(cb_method):
-				var already_registered_cmd = registered_cbs[cb_method] 
+				var already_registered_cmd = registered_cbs[cb_method]
 				errors.append("The function reference '%s' already registerd for command '%s'!" % [cb_method, already_registered_cmd])
 			else:
 				registered_cbs[cb_method] = cmd_name
 	if errors.is_empty():
-		return Result.success(true)
+		return GdUnitResult.success(true)
 	else:
-		return Result.error("\n".join(errors))
+		return GdUnitResult.error("\n".join(errors))
 
 
-func execute(commands :Array) -> Result:
+func execute(commands :Array) -> GdUnitResult:
 	var result := _validate()
 	if result.is_error():
 		return result
@@ -81,12 +81,20 @@ func execute(commands :Array) -> Result:
 		var cmd_name := cmd.name()
 		if _command_cbs.has(cmd_name):
 			var cb_s :Callable = _command_cbs.get(cmd_name)[CB_SINGLE_ARG]
-			var cb_m :Callable = _command_cbs.get(cmd_name)[CB_MULTI_ARGS]
-			if cmd.arguments().is_empty():
+			var arguments := cmd.arguments()
+			if cb_s and arguments.size() == 0:
 				cb_s.call()
+			elif cb_s:
+				cb_s.call(arguments[0])
 			else:
-				if cmd.arguments().size() == 1:
-					cb_s.call(cmd.arguments()[CB_SINGLE_ARG])
-				else:
-					cb_m.callv(cmd.arguments())
-	return Result.success(true)
+				var cb_m :Callable = _command_cbs.get(cmd_name)[CB_MULTI_ARGS]
+				# we need to find the method and determin the arguments to call the right function
+				for m in cb_m.get_object().get_method_list():
+					if m["name"] == cb_m.get_method():
+						if m["args"].size() > 1:
+							cb_m.callv(arguments)
+							break
+						else:
+							cb_m.call(arguments)
+							break
+	return GdUnitResult.success(true)

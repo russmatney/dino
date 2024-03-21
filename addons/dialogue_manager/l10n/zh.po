@@ -164,7 +164,7 @@ msgstr "忽略全局变量缺失错误（不建议）"
 msgid "settings.custom_test_scene"
 msgstr "自定义测试场景（必须继承自BaseDialogueTestScene）"
 
-msgid "settings.default_csv_local"
+msgid "settings.default_csv_locale"
 msgstr "默认 CSV 区域格式"
 
 msgid "settings.states_shortcuts"
@@ -376,15 +376,6 @@ msgstr "文件中存在{errrors}个错误。请查看调试输出。"
 
 msgid "runtime.invalid_expression"
 msgstr "表达式“{expression}”无效：{error}"
-
-msgid "runtime.unsupported_array_method"
-msgstr "不支持的数组方法{method_name}。"
-
-msgid "runtime.unsupported_dictionary_method"
-msgstr "不支持的字典方法{method_name}。"
-
-msgid "runtime.unsupported_quaternion_method"
-msgstr "不支持的 Quarternion 方法{method_name}。"
 
 msgid "runtime.array_index_out_of_bounds"
 msgstr "数组索引“{index}”越界。（数组名：“{array}”）"

@@ -57,84 +57,6 @@ const ID_ERROR_TITLE_HAS_NO_BODY = "title has no body"
 const ID_END = "end"
 const ID_END_CONVERSATION = "end!"
 
-# Runtime primitive methods
-
-const SUPPORTED_PRIMITIVES = [TYPE_ARRAY, TYPE_DICTIONARY, TYPE_QUATERNION, TYPE_COLOR, TYPE_SIGNAL]
-const SUPPORTED_ARRAY_METHODS = [
-	"assign",
-	"append",
-	"append_array",
-	"back",
-	"count",
-	"clear",
-	"erase",
-	"has",
-	"insert",
-	"is_empty",
-	"max",
-	"min",
-	"pick_random",
-	"pop_at",
-	"pop_back",
-	"pop_front",
-	"push_back",
-	"push_front",
-	"remove_at",
-	"reverse",
-	"shuffle",
-	"size",
-	"sort"
-]
-const SUPPORTED_DICTIONARY_METHODS = ["has", "has_all", "get", "keys", "values", "size"]
-const SUPPORTED_QUATERNION_METHODS = [
-	"angle_to",
-	"dot",
-	"exp",
-	"from_euler",
-	"get_angle",
-	"get_axis",
-	"get_euler",
-	"inverse",
-	"is_equal_approx",
-	"is_finite",
-	"is_normalized",
-	"length",
-	"length_squared",
-	"log",
-	"normalized",
-	"slerp",
-	"slerpni",
-	"spherical_cubic_interpolate",
-	"spherical_cubic_interpolate_in_time"
-]
-const SUPPORTED_COLOR_METHODS = [
-	"blend",
-	"clamp",
-	"darkened",
-	"from_hsv",
-	"from_ok_hsl",
-	"from_rgbe9995",
-	"from_string",
-	"get_luminance",
-	"hex",
-	"hex64",
-	"html",
-	"html_is_valid",
-	"inverted",
-	"is_equal_approx",
-	"lerp",
-	"lightened",
-	"linear_to_srgb",
-	"srgb_to_linear",
-	"to_abgr32",
-	"to_abgr64",
-	"to_argb32",
-	"to_argb64",
-	"to_html",
-	"to_rgba32",
-	"to_rgba64"
-]
-
 # Errors
 
 const ERR_ERRORS_IN_IMPORTED_FILE = 100
@@ -255,9 +177,11 @@ static func get_error_message(error: int) -> String:
 
 
 static func translate(string: String) -> String:
+	var base_path = new().get_script().resource_path.get_base_dir()
+
 	var language: String = TranslationServer.get_tool_locale()
-	var translations_path: String = "res://addons/dialogue_manager/l10n/%s.po" % language
-	var fallback_translations_path: String = "res://addons/dialogue_manager/l10n/"+TranslationServer.get_tool_locale().substr(0, 2)+".po"
-	var en_translations_path: String = "res://addons/dialogue_manager/l10n/en.po"
+	var translations_path: String = "%s/l10n/%s.po" % [base_path, language]
+	var fallback_translations_path: String = "%s/l10n/%s.po" % [base_path, TranslationServer.get_tool_locale().substr(0, 2)]
+	var en_translations_path: String = "%s/l10n/en.po" % base_path
 	var translations: Translation = load(translations_path if FileAccess.file_exists(translations_path) else (fallback_translations_path if FileAccess.file_exists(fallback_translations_path) else en_translations_path))
 	return translations.get_message(string)

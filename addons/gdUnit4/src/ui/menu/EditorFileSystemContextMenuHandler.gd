@@ -31,7 +31,7 @@ func on_context_menu_show(context_menu :PopupMenu, file_tree :Tree) -> void:
 	context_menu.add_separator()
 	var current_index := context_menu.get_item_count()
 	var selected_test_suites := collect_testsuites(_context_menus.values()[0], file_tree)
-	
+
 	for menu_id in _context_menus.keys():
 		var menu_item :GdUnitContextMenuItem = _context_menus[menu_id]
 		if selected_test_suites.size() != 0:
@@ -59,7 +59,7 @@ func collect_testsuites(_menu_item :GdUnitContextMenuItem, file_tree :Tree) -> P
 		var is_dir := DirAccess.dir_exists_absolute(resource_path)
 		if is_dir:
 			selected_test_suites.append(resource_path)
-		elif is_dir or file_type == "GDScript":
+		elif is_dir or file_type == "GDScript" or file_type == "CSharpScript":
 			# find a performant way to check if the selected item a testsuite
 			#var resource := ResourceLoader.load(resource_path, "GDScript", ResourceLoader.CACHE_MODE_REUSE)
 			#prints("loaded", resource)

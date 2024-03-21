@@ -30,7 +30,6 @@ const SETTINGS_SHORTCUT_MAPPING := {
 	GdUnitSettings.SHORTCUT_FILESYSTEM_RUN_TEST_DEBUG : GdUnitShortcut.ShortCut.RUN_TESTCASE_DEBUG
 }
 
-
 var _editor_interface :EditorInterface
 # the current test runner config
 var _runner_config := GdUnitRunnerConfig.new()
@@ -54,7 +53,7 @@ static func instance() -> GdUnitCommandHandler:
 
 func _init():
 	assert_shortcut_mappings(SETTINGS_SHORTCUT_MAPPING)
-	
+
 	if Engine.is_editor_hint():
 		var editor :EditorPlugin = Engine.get_meta("GdUnitEditorPlugin")
 		_editor_interface = editor.get_editor_interface()
@@ -66,8 +65,8 @@ func _init():
 	_runner_config.load_config()
 
 	init_shortcuts()
-	var is_running = func(_script :GDScript) : return _is_running
-	var is_not_running = func(_script :GDScript) : return !_is_running
+	var is_running = func(_script :Script) : return _is_running
+	var is_not_running = func(_script :Script) : return !_is_running
 	register_command(GdUnitCommand.new(CMD_RUN_OVERALL, is_not_running, cmd_run_overall.bind(true), GdUnitShortcut.ShortCut.RUN_TESTS_OVERALL))
 	register_command(GdUnitCommand.new(CMD_RUN_TESTCASE, is_not_running, cmd_editor_run_test.bind(false), GdUnitShortcut.ShortCut.RUN_TESTCASE))
 	register_command(GdUnitCommand.new(CMD_RUN_TESTCASE_DEBUG, is_not_running, cmd_editor_run_test.bind(true), GdUnitShortcut.ShortCut.RUN_TESTCASE_DEBUG))

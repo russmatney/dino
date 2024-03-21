@@ -125,7 +125,19 @@ msgstr ""
 msgid "buffer.show_in_filesystem"
 msgstr ""
 
+msgid "settings.invalid_test_scene"
+msgstr ""
+
 msgid "settings.revert_to_default_test_scene"
+msgstr ""
+
+msgid "settings.default_balloon_hint"
+msgstr ""
+
+msgid "settings.revert_to_default_balloon"
+msgstr ""
+
+msgid "settings.default_balloon_path"
 msgstr ""
 
 msgid "settings.autoload"
@@ -158,7 +170,7 @@ msgstr ""
 msgid "settings.custom_test_scene"
 msgstr ""
 
-msgid "settings.default_csv_local"
+msgid "settings.default_csv_locale"
 msgstr ""
 
 msgid "settings.states_shortcuts"
@@ -168,6 +180,27 @@ msgid "settings.states_message"
 msgstr ""
 
 msgid "settings.states_hint"
+msgstr ""
+
+msgid "settings.recompile_warning"
+msgstr ""
+
+msgid "settings.create_lines_for_responses_with_characters"
+msgstr ""
+
+msgid "settings.open_in_external_editor"
+msgstr ""
+
+msgid "settings.external_editor_warning"
+msgstr ""
+
+msgid "settings.include_characters_in_translations"
+msgstr ""
+
+msgid "settings.include_notes_in_translations"
+msgstr ""
+
+msgid "settings.check_for_updates"
 msgstr ""
 
 msgid "n_of_n"
@@ -374,15 +407,6 @@ msgstr ""
 msgid "runtime.invalid_expression"
 msgstr ""
 
-msgid "runtime.unsupported_array_method"
-msgstr ""
-
-msgid "runtime.unsupported_dictionary_method"
-msgstr ""
-
-msgid "runtime.unsupported_quaternion_method"
-msgstr ""
-
 msgid "runtime.array_index_out_of_bounds"
 msgstr ""
 
@@ -414,4 +438,13 @@ msgid "runtime.unknown_autoload"
 msgstr ""
 
 msgid "runtime.something_went_wrong"
+msgstr ""
+
+msgid "runtime.expected_n_got_n_args"
+msgstr ""
+
+msgid "runtime.unsupported_array_type"
+msgstr ""
+
+msgid "runtime.dialogue_balloon_missing_start_method"
 msgstr ""

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" uid="uid://c5dwobjd34w3p" path="res://addons/AsepriteWizard/interface/docks/wizard/as_wizard_window.tscn" id="1"]
+[ext_resource type="Script" path="res://addons/AsepriteWizard/interface/docks/wizard/as_wizard_dock_container.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cyoin5ncul0fm" path="res://addons/AsepriteWizard/interface/docks/wizard/sprite_frames_import_history.tscn" id="3"]
+
+[node name="AsWizardDockContainer" type="TabContainer"]
+offset_right = 281.0
+offset_bottom = 36.0
+tab_alignment = 2
+use_hidden_tabs_for_min_size = true
+script = ExtResource( 2 )
+
+[node name="Import" parent="." instance=ExtResource( 1 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
+tooltip_text = "SpriteFrames Importer"
+
+[node name="History" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[connection signal="tab_changed" from="." to="." method="_on_AsWizardDockContainer_tab_changed"]

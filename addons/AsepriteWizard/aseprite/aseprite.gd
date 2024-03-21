@@ -16,6 +16,7 @@ func export_file(file_name: String, output_folder: String, options: Dictionary) 
 	var exception_pattern = options.get('exception_pattern', "")
 	var only_visible_layers = options.get('only_visible_layers', false)
 	var output_name = file_name if options.get('output_filename') == "" else options.get('output_filename', file_name)
+	var first_frame_only = options.get("first_frame_only", false)
 	var basename = _get_file_basename(output_name)
 	var output_dir = ProjectSettings.globalize_path(output_folder)
 	var data_file = "%s/%s.json" % [output_dir, basename]
@@ -25,6 +26,10 @@ func export_file(file_name: String, output_folder: String, options: Dictionary) 
 
 	if not only_visible_layers:
 		arguments.push_front("--all-layers")
+
+	if first_frame_only:
+		arguments.push_front("'[0, 0]'")
+		arguments.push_front("--frame-range")
 
 	_add_sheet_type_arguments(arguments, options)
 
@@ -67,10 +72,15 @@ func export_layer(file_name: String, layer_name: String, output_folder: String, 
 	var output_dir = output_folder.replace("res://", "./").strip_edges()
 	var data_file = "%s/%s%s.json" % [output_dir, output_prefix, layer_name]
 	var sprite_sheet = "%s/%s%s.png" % [output_dir, output_prefix, layer_name]
+	var first_frame_only = options.get("first_frame_only", false)
 	var output = []
 	var arguments = _export_command_common_arguments(file_name, data_file, sprite_sheet)
 	arguments.push_front(layer_name)
 	arguments.push_front("--layer")
+
+	if first_frame_only:
+		arguments.push_front("'[0, 0]'")
+		arguments.push_front("--frame-range")
 
 	_add_sheet_type_arguments(arguments, options)
 
@@ -145,10 +155,32 @@ func list_layers(file_name: String, only_visible = false) -> Array:
 	return sanitized
 
 
+func list_slices(file_name: String) -> Array:
+	var output = []
+	var arguments = ["-b", "--list-slices", file_name]
+
+	var exit_code = _execute(arguments, output)
+
+	if exit_code != 0:
+		printerr('aseprite: failed listing slices')
+		printerr(output)
+		return []
+
+	if output.is_empty():
+		return output
+
+	var raw = output[0].split('\n')
+	var sanitized = []
+	for s in raw:
+		sanitized.append(s.strip_edges())
+	return sanitized
+
+
 func _export_command_common_arguments(source_name: String, data_path: String, spritesheet_path: String) -> Array:
 	return [
 		"-b",
 		"--list-tags",
+		"--list-slices",
 		"--data",
 		data_path,
 		"--format",
@@ -193,6 +225,17 @@ func is_valid_spritesheet(content):
 
 func get_content_frames(content):
 	return content.frames if typeof(content.frames) == TYPE_ARRAY  else content.frames.values()
+
+
+func get_slice_rect(content: Dictionary, slice_name: String) -> Variant:
+	if not content.has("meta") or not content.meta.has("slices"):
+		return null
+	for slice in content.meta.slices:
+		if slice.name == slice_name:
+			if slice.keys.size() > 0:
+				var p = slice.keys[0].bounds
+				return Rect2(p.x, p.y, p.w, p.h)
+	return null
 
 
 ##

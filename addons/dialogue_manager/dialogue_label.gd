@@ -1,5 +1,7 @@
 @icon("./assets/icon.svg")
 
+@tool
+
 ## A RichTextLabel specifically for use with [b]Dialogue Manager[/b] dialogue.
 class_name DialogueLabel extends RichTextLabel
 
@@ -17,14 +19,25 @@ signal skipped_typing()
 signal finished_typing()
 
 
-## The action to press to skip typing.
-@export var skip_action: String = "ui_cancel"
+# The action to press to skip typing.
+@export var skip_action: StringName = &"ui_cancel"
 
 ## The speed with which the text types out.
 @export var seconds_per_step: float = 0.02
 
 ## Automatically have a brief pause when these characters are encountered.
 @export var pause_at_characters: String = ".?!"
+
+## Don't auto pause if the charcter after the pause is one of these.
+@export var skip_pause_at_character_if_followed_by: String = ")\""
+
+## Don't auto pause after these abbreviations (only if "." is in `pause_at_characters`).[br]
+## Abbreviations are limitted to 5 characters in length [br]
+## Does not support multi-period abbreviations (ex. "p.m.")
+@export var skip_pause_at_abbreviations: PackedStringArray = ["Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex"]
+
+## The amount of time to pause when exposing a character present in pause_at_characters.
+@export var seconds_per_pause_step: float = 0.3
 
 
 ## The current line of dialogue.
@@ -39,15 +52,17 @@ var dialogue_line:
 ## Whether the label is currently typing itself out.
 var is_typing: bool = false:
 	set(value):
-		if is_typing != value and value == false:
-			finished_typing.emit()
+		var is_finished: bool = is_typing != value and value == false
 		is_typing = value
+		if is_finished:
+			finished_typing.emit()
 	get:
 		return is_typing
 
 var _last_wait_index: int = -1
 var _last_mutation_index: int = -1
 var _waiting_seconds: float = 0
+var _is_awaiting_mutation: bool = false
 
 
 func _process(delta: float) -> void:
@@ -67,7 +82,10 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if self.is_typing and visible_ratio < 1 and event.is_action_pressed(skip_action):
+	# Note: this will no longer be reached if using Dialogue Manager > 2.32.2. To make skip handling
+	# simpler (so all of mouse/keyboard/joypad are together) it is now the responsibility of the
+	# dialogue balloon.
+	if self.is_typing and visible_ratio < 1 and InputMap.has_action(skip_action) and event.is_action_pressed(skip_action):
 		get_viewport().set_input_as_handled()
 		skip_typing()
 
@@ -104,18 +122,21 @@ func skip_typing() -> void:
 
 # Type out the next character(s)
 func _type_next(delta: float, seconds_needed: float) -> void:
+	if _is_awaiting_mutation: return
+
 	if visible_characters == get_total_character_count():
 		return
 
 	if _last_mutation_index != visible_characters:
 		_last_mutation_index = visible_characters
 		_mutate_inline_mutations(visible_characters)
+		if _is_awaiting_mutation: return
 
 	var additional_waiting_seconds: float = _get_pause(visible_characters)
 
 	# Pause on characters like "."
 	if _should_auto_pause():
-		additional_waiting_seconds += seconds_per_step * 15
+		additional_waiting_seconds += seconds_per_pause_step
 
 	# Pause at literal [wait] directives
 	if _last_wait_index != visible_characters and additional_waiting_seconds > 0:
@@ -162,8 +183,10 @@ func _mutate_inline_mutations(index: int) -> void:
 		if inline_mutation[0] > index:
 			return
 		if inline_mutation[0] == index:
+			_is_awaiting_mutation = true
 			# The DialogueManager can't be referenced directly here so we need to get it by its path
-			Engine.get_singleton("DialogueManager").mutate(inline_mutation[1], dialogue_line.extra_game_states, true)
+			await Engine.get_singleton("DialogueManager").mutate(inline_mutation[1], dialogue_line.extra_game_states, true)
+			_is_awaiting_mutation = false
 
 
 # Determine if the current autopause character at the cursor should qualify to pause typing.
@@ -172,11 +195,28 @@ func _should_auto_pause() -> bool:
 
 	var parsed_text: String = get_parsed_text()
 
+	# Avoid outofbounds when the label auto-translates and the text changes to one shorter while typing out
+	# Note: visible characters can be larger than parsed_text after a translation event
+	if visible_characters >= parsed_text.length(): return false
+
+	# Ignore pause characters if they are next to a non-pause character
+	if parsed_text[visible_characters] in skip_pause_at_character_if_followed_by.split():
+		return false
+
 	# Ignore "." if it's between two numbers
 	if visible_characters > 3 and parsed_text[visible_characters - 1] == ".":
 		var possible_number: String = parsed_text.substr(visible_characters - 2, 3)
 		if str(float(possible_number)) == possible_number:
 			return false
+
+	# Ignore "." if it's used in an abbreviation
+	# Note: does NOT support multi-period abbreviations (ex. p.m.)
+	if "." in pause_at_characters and parsed_text[visible_characters - 1] == ".":
+		for abbreviation in skip_pause_at_abbreviations:
+			if visible_characters >= abbreviation.length():
+				var previous_characters: String = parsed_text.substr(visible_characters - abbreviation.length() - 1, abbreviation.length())
+				if previous_characters == abbreviation:
+					return false
 
 	# Ignore two non-"." characters next to each other
 	var other_pause_characters: PackedStringArray = pause_at_characters.replace(".", "").split()
