@@ -34,9 +34,12 @@
 #+caption: An incomplete list of rough icons
 [[images/all_icons_bg_8x.png]]
 
-Dino was a sandbox full of Godot games and addons, but is now in the midst of a
-major refactor. The games are being DRYed up and mixed into something cohesive.
-I'm currently pushing for a Q1 release (fingers-crossed).
+Dino _was_ a monorepo I started in late 2022 for learning Godot, doing game
+jams, and starting some addons/libraries. Since late 2023, I've been reimagining
+and refactoring - the games mechanics are being deconstructed, DRYed up into
+reusable code, and remixed into something cohesive.
+
+I'm currently pushing for a late May/early June 2024 release [[https://store.steampowered.com/app/2589550/Dino/][on steam]]! Stay tuned to see where this goes!
 
 If you're interested in beta testing, I have steam codes available and would love any
 ideas or feedback! Feel free to ping me [[https://discord.gg/xZHWtGfAvF][on Discord]].
