@@ -65,7 +65,7 @@ func render():
 
 func show_record(record):
 	game_label.text = "%s" % record.game_entity.get_display_name()
-	game_record_text.text = "%s" % Log.to_pretty(record)
+	game_record_text.text = "%s" % Log.to_printable([record])
 
 	U.free_children(player_icons)
 	for p in record.player_entities:

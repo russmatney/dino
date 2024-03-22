@@ -9,8 +9,8 @@ var prelude: Dictionary
 var legend: Dictionary
 var rooms: Array[RoomDef]
 
-func to_pretty(a, b, c):
-	return Log.to_pretty({prelude=prelude, legend=legend}, a, b, c)
+func to_printable():
+	return {prelude=prelude, legend=legend}
 
 func filter(opts: Dictionary):
 	U.ensure_default(opts, "flags", [])

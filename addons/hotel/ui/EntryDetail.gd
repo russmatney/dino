@@ -30,7 +30,7 @@ func _ready():
 func setup():
 	if entry and entry_name and data:
 		entry_name.text = entry_to_label(entry)
-		data.text = Log.to_pretty(entry, true)
+		data.text = Log.to_printable([entry], {newlines=true})
 
 #######################################################################
 # testing ui

@@ -100,18 +100,18 @@ func show_current():
 	if current:
 		var time_dict = secs_between_date_strs(Time.get_datetime_string_from_system(true), current.get("pomodoro/started-at"))
 		time_dict = secs_to_time_dict(time_dict)
-		current_text.text = Log.to_pretty(time_dict, true)
+		current_text.text = Log._to_pretty(time_dict)
 	elif latest:
 		var time_dict = secs_between_date_strs(Time.get_datetime_string_from_system(true), latest.get("pomodoro/finished-at"))
 		time_dict = secs_to_time_dict(time_dict)
-		current_text.text = Log.to_pretty(time_dict, true)
+		current_text.text = Log._to_pretty(time_dict)
 
 func show_durations():
 	Log.prn(durations)
-	durations_text.text = Log.to_pretty(durations, true)
+	durations_text.text = Log._to_pretty(durations)
 
 func show_breaks():
-	breaks_text.text = Log.to_pretty(breaks, true)
+	breaks_text.text = Log._to_pretty(breaks)
 
 ## pomodoros api ##################################################################
 

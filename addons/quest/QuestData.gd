@@ -12,7 +12,7 @@ var optional: bool
 var check_not_failed: bool
 
 func _to_string():
-	return Log.to_pretty({
+	return Log.to_printable([{
 		label=label,
 		complete=complete,
 		failed=failed,
@@ -21,4 +21,4 @@ func _to_string():
 		total=total,
 		optional=optional,
 		check_not_failed=check_not_failed,
-		})
+		}])

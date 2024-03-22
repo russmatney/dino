@@ -17,8 +17,8 @@ class GameRecord:
 		game_entity = game_ent
 		level_opts = _level_opts
 
-	func to_pretty(a, b, c):
-		return Log.to_pretty([game_entity, completed_at, player_entities], a, b, c)
+	func to_printable():
+		return [game_entity, completed_at, player_entities]
 
 static func mk_record(opts):
 	var rec = GameRecord.new(opts.get("game_entity"))

@@ -62,10 +62,10 @@ func _process(_delta):
 	var trolley_move_vector = Trolley.move_vector()
 
 	label += "\nmove vector: %s, \ntrolley move vector: %s" % [
-		Log.to_pretty(move_vector), Log.to_pretty(trolley_move_vector)
+		Log._to_pretty(move_vector), Log._to_pretty(trolley_move_vector)
 		]
 
-	active_controls_label.text = Log.to_pretty(label)
+	active_controls_label.text = Log._to_pretty(label)
 
 
 ## unhandled input #######################################################################
@@ -88,13 +88,13 @@ func new_input_label(event):
 	var axs = Trolley.actions_for_input(event)
 	var label = ""
 	if show_raw:
-		label = "raw: %s" % Log.to_pretty(event)
+		label = "raw: %s" % Log._to_pretty(event)
 	if "action" in event:
 		label += "action: %s" % event["action"]
 	for ax in axs:
 		label += "\n\t%s: %s" % [
-			Log.to_pretty(ax.key_str) if "key_str" in ax else Log.to_pretty(ax.btn_idx),
-			Log.to_pretty(ax.action_label),
+			Log._to_pretty(ax.key_str) if "key_str" in ax else Log._to_pretty(ax.btn_idx),
+			Log._to_pretty(ax.action_label),
 			]
 
 	if label == "":
