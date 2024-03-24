@@ -8,6 +8,10 @@
 
 config_version=5
 
+[addons]
+
+metroidvania_system/settings_file="res://MetSysSettings.tres"
+
 [application]
 
 config/name="Dino"
@@ -34,6 +38,7 @@ Cam="*res://addons/camera/Camera.gd"
 Metro="*res://addons/metro/Metro.gd"
 Records="*res://src/dino/Records.gd"
 Dino="*res://src/dino/Dino.gd"
+MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 
 [display]
 
@@ -50,7 +55,7 @@ export/convert_text_resources_to_binary=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/brick/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/custom-scene-launcher/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/beehive/plugin.cfg", "res://addons/brick/plugin.cfg", "res://addons/camera/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/custom-scene-launcher/plugin.cfg", "res://addons/dj/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/hood/plugin.cfg", "res://addons/hotel/plugin.cfg", "res://addons/metro/plugin.cfg", "res://addons/navi/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/quest/plugin.cfg", "res://addons/reptile/plugin.cfg", "res://addons/thanks/plugin.cfg", "res://addons/trolley/plugin.cfg")
 
 [gdunit4]
 

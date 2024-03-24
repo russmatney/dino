@@ -10,3 +10,4 @@ func _plugging():
 	plug("timothyqiu/gdfxr")
 	plug("viniciusgerevini/godot-aseprite-wizard", {include=["addons/AsepriteWizard"]})
 	plug("russmatney/log.gd", {include=["addons/log"]})
+	plug("KoBeWi/Metroidvania-System", {include=["addons/MetroidvaniaSystem"]})
