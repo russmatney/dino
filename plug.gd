@@ -11,3 +11,4 @@ func _plugging():
 	plug("viniciusgerevini/godot-aseprite-wizard", {include=["addons/AsepriteWizard"]})
 	plug("russmatney/log.gd", {include=["addons/log"]})
 	plug("KoBeWi/Metroidvania-System", {include=["addons/MetroidvaniaSystem"]})
+	plug("KoBeWi/Godot-Custom-Runner", {include=["addons/CustomRunner"], exclude=["ExampleProject"]})
