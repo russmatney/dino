@@ -2,6 +2,8 @@ extends Node2D
 
 ## vars ##################################################3
 
+var vania_game_scene = preload("res://src/dino/modes/vania/VaniaGame.tscn")
+
 @export var player_entity: DinoPlayerEntity
 var game_node: Node2D
 
@@ -46,9 +48,15 @@ func start_game():
 		game_node.queue_free()
 
 	var level_def = Pandora.get_entity(LevelDefIds.BOSSBATTLE)
-	game_node = DinoLevel.create_level(level_def)
-	game_node.ready.connect(_on_game_ready)
-	game_node.level_complete.connect(_on_level_complete)
+	game_node = vania_game_scene.instantiate()
+
+	game_node.setup_level(level_def, {seed=_seed})
+
+	# yikes
+	game_node.level_node.level_complete.connect(_on_level_complete)
+	var p = Dino.current_player_node()
+	if p:
+		game_node.set_player(p)
 
 	add_child.call_deferred(game_node)
 
@@ -60,15 +68,6 @@ func setup_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
 
 ## game level signals ##################################################3
-
-func _on_game_ready():
-	# increase difficulty with `round_num`
-	var level_opts = {seed=_seed, }
-
-	if game_node.has_method("regenerate"):
-		game_node.regenerate(level_opts)
-	else:
-		Log.warn("Game/Level missing expected regenerate function!", game_node)
 
 func _on_level_complete():
 	Log.pr("Level Complete!")
