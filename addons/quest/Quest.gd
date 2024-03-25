@@ -29,6 +29,9 @@ var get_xs = func():
 var x_update_signal = func(x): return null
 var is_remaining = func(x): return true
 
+func to_printable():
+	return {label=label, total=total, xs_group=xs_group}
+
 ## enter tree ##########################################################
 
 func _enter_tree():

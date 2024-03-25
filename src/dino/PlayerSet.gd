@@ -14,7 +14,7 @@ class PData:
 	var scene: PackedScene
 	var entity_id
 	var entity: DinoPlayerEntity
-	var type: DinoData.GameType
+	var game_type: DinoData.GameType
 	# var state: State
 
 	func _init(opts):
@@ -27,8 +27,8 @@ class PData:
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
 
-		type = opts.get("type")
-		scene = entity.get_player_scene(type)
+		game_type = opts.get("game_type")
+		scene = entity.get_player_scene(game_type)
 
 ## vars #################################################
 

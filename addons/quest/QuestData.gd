@@ -11,8 +11,8 @@ var total: int
 var optional: bool
 var check_not_failed: bool
 
-func _to_string():
-	return Log.to_printable([{
+func to_printable():
+	return {
 		label=label,
 		complete=complete,
 		failed=failed,
@@ -21,4 +21,7 @@ func _to_string():
 		total=total,
 		optional=optional,
 		check_not_failed=check_not_failed,
-		}])
+	}
+
+func _to_string():
+	return Log.to_printable([self])

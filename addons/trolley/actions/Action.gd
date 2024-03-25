@@ -30,6 +30,9 @@ func get_label():
 #################################################################
 # to string
 
+func to_printable():
+	return {label=get_label()}
+
 func _to_string():
 	if source:
 		return "Action: %s on source: %s" % [get_label(), source]

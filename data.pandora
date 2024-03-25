@@ -1131,6 +1131,23 @@
 						"value": "res://src/dino/levels/boss_battle/BossBattleLevelGen.gd"
 					}
 				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "115",
+				"_index": 0,
+				"_name": "Vania",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Vania"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/vania/Vania.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1392,7 +1409,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 114
+			"default": 115
 		}
 	}
 }

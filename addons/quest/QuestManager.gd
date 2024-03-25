@@ -60,7 +60,7 @@ func register_quest(node, opts={}):
 	quest.check_not_failed = opts.get("check_not_failed", false)
 	active_quests[label] = quest
 
-	Log.pr(str("Registered Quest: ", label))
+	Log.pr(str("Registered Quest: ", quest))
 	quest_update.emit()
 
 func unregister(node, opts={}):
@@ -96,7 +96,7 @@ func check_all_complete():
 
 func _on_complete(node, opts):
 	var label = q_label(node, opts)
-	Log.pr("Quest complete!", label)
+	Log.pr("Quest complete!", node)
 	var q = get_quest(node, opts)
 	if q:
 		q.complete = true

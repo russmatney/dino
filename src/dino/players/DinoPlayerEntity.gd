@@ -38,8 +38,8 @@ static func all_entities():
 
 ## instance #################################################
 
-func get_player_scene(type: DinoData.GameType) -> PackedScene:
-	match type:
+func get_player_scene(game_type: DinoData.GameType) -> PackedScene:
+	match game_type:
 		DinoData.GameType.SideScroller: return get_sidescroller_scene()
 		DinoData.GameType.TopDown: return get_topdown_scene()
 		DinoData.GameType.BeatEmUp: return get_beatemup_scene()

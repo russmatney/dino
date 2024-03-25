@@ -118,6 +118,7 @@ func _on_game_ready():
 	var level_opts = {seed=_seed, }
 
 	if game_node.has_method("regenerate"):
+		# this seems weird - why not generate in DinoLevel.create_level ?
 		game_node.regenerate(level_opts)
 	else:
 		Log.warn("Game/Level missing expected regenerate function!", game_node)

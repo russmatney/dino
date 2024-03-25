@@ -11,7 +11,7 @@ static func create_level(def: LevelDef):
 
 ## exports/triggers ######################################################
 
-@export var type: DinoData.GameType
+@export var game_type: DinoData.GameType
 @export var level_def: LevelDef
 
 @export var _regen_with_level_def: bool = false :
@@ -54,6 +54,13 @@ var time_int = 0
 
 ## enter_tree ###############################################
 
+func to_printable():
+	if level_def != null:
+		return {game_type=game_type, level_def=level_def.get_display_name(), level_opts=level_opts}
+	return {game_type=game_type, level_opts=level_opts}
+
+## enter_tree ###############################################
+
 func _enter_tree():
 	var gen = get_node_or_null("LevelGen")
 	if gen == null:
@@ -75,7 +82,7 @@ func _ready():
 	if level_gen == null:
 		Log.error("DinoLevel missing expected 'LevelGen' node")
 
-	Log.pr("DinoLevel ready: ", name)
+	Log.pr("DinoLevel ready: ", self)
 	hud = hud_scene.instantiate()
 	add_child.call_deferred(hud)
 
@@ -85,9 +92,9 @@ func _ready():
 
 	if Dino.is_debug_mode():
 		Log.pr("debug mode: regenerating")
-		if type == null:
-			type = DinoData.GameType.SideScroller
-		Dino.ensure_player_setup({type=type,
+		if game_type == null:
+			game_type = DinoData.GameType.SideScroller
+		Dino.ensure_player_setup({game_type=game_type,
 			entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})
 		regenerate()
