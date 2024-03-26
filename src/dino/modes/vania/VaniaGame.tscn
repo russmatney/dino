@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=3 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaGame.gd" id="1_38knr"]
+[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_8rx10"]
 
 [node name="VaniaGame" type="Node2D"]
 script = ExtResource("1_38knr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Minimap" parent="CanvasLayer" instance=ExtResource("2_8rx10")]
+area = Vector2i(5, 5)
