@@ -37,29 +37,39 @@ func start_game():
 	seed(_seed)
 	Log.pr("Vania game starting with seed:", self)
 
+	# establish current player stack
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
 			game_type=DinoData.GameType.SideScroller,
 			entity=player_entity,
 			})
 
+	# setup level
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
 	var level_def = Pandora.get_entity(LevelDefIds.BOSSBATTLE)
-	game_node = vania_game_scene.instantiate()
+	var level_node = DinoLevel.create_level(level_def)
+	level_node.skip_splash_intro = true
+	var level_opts = {seed=_seed}
 
-	game_node.setup_level(level_def, {seed=_seed})
+	level_node.ready.connect(func():
+		if level_node.has_method("regenerate"):
+			level_node.regenerate(level_opts)
+		else:
+			Log.warn("Game/Level missing expected regenerate function!", level_node))
 
-	# yikes
-	game_node.level_node.level_complete.connect(_on_level_complete)
-	var p = Dino.current_player_node()
-	if p:
-		game_node.set_player(p)
+	level_node.level_setup.connect(func():
+		game_node = vania_game_scene.instantiate()
 
-	add_child.call_deferred(game_node)
+		game_node.add_level(level_node, level_def, level_opts)
 
+		game_node.level_node.level_complete.connect(_on_level_complete)
+
+		add_child.call_deferred(game_node))
+
+	add_child(level_node)
 
 ## setup_player_entity #################################333
 
