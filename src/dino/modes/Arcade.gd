@@ -72,7 +72,7 @@ func launch_game(game_entity=null):
 
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
-			type=DinoData.to_game_type(game_entity.get_player_type()),
+			game_type=DinoData.to_game_type(game_entity.get_player_type()),
 			entity=player_entity,
 			})
 

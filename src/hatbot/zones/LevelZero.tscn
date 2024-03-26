@@ -67,6 +67,7 @@ color = Color(0.384314, 0.509804, 0.65098, 1)
 script = ExtResource("4_al0vp")
 
 [node name="ToLandingSite" parent="Reception" instance=ExtResource("3_hrl45")]
+z_index = 10
 
 [node name="ColdFireDark" parent="Reception" instance=ExtResource("4_paos8")]
 rendering_quadrant_size = 8
@@ -399,6 +400,7 @@ position = Vector2(-128, 0)
 script = ExtResource("4_al0vp")
 
 [node name="ToTheKingdom" parent="SecretEntrance" instance=ExtResource("3_hrl45")]
+z_index = 10
 
 [node name="ColdFireDark2" parent="SecretEntrance" instance=ExtResource("4_paos8")]
 rendering_quadrant_size = 8

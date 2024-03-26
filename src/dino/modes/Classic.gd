@@ -102,7 +102,7 @@ func launch_level(level_def):
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
 			# HARDCODED!
-			type=DinoData.GameType.SideScroller,
+			game_type=DinoData.GameType.SideScroller,
 			entity=player_entity,
 			})
 

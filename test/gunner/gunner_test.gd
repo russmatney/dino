@@ -16,7 +16,7 @@ func test_gunner_dino_level_completion():
 
 	# may need to clear/reset dino state here
 	Dino.create_new_player({
-		type=DinoData.GameType.SideScroller,
+		game_type=DinoData.GameType.SideScroller,
 		entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})
 
