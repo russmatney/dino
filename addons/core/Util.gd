@@ -52,6 +52,12 @@ static func are_nodes_close(a, b, diff=5):
 # groups
 
 static func first_node_in_group(node, group_name: String) -> Node:
+	if not node.is_inside_tree():
+		var chs = get_children_in_group(node, group_name, true)
+		if len(chs) > 0:
+			return chs[0]
+		Log.warn("No child in group found", node, group_name)
+		return null
 	for c in node.get_tree().get_nodes_in_group(group_name):
 		return c
 	return null
@@ -448,12 +454,18 @@ static func ensure_node(_self, nm):
 
 # walks the node's owners until it finds one that implements `add_child_to_level`.
 # if none is found, adds the child to the 'current_scene'
-static func add_child_to_level(node, child):
+static func add_child_to_level(node, child, deferred=true):
 	var level = find_level_root(node)
 	if level.has_method("add_child_to_level"):
-		level.add_child_to_level.call_deferred(level, child)
+		if deferred:
+			level.add_child_to_level.call_deferred(level, child)
+		else:
+			level.add_child_to_level(level, child)
 	else:
-		level.add_child.call_deferred(child)
+		if deferred:
+			level.add_child.call_deferred(child)
+		else:
+			level.add_child(child)
 
 # returns the first parent node that impls add_child_to_level (i.e. the level root)
 # otherwise returns the root's current_scene

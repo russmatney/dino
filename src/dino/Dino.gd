@@ -69,8 +69,8 @@ func ensure_player_setup(opts):
 	if not current_player_entity():
 		create_new_player(opts)
 
-func spawn_player():
-	player_set.spawn_new()
+func spawn_player(opts={}):
+	player_set.spawn_new(opts)
 
 func respawn_active_player(opts={}):
 	player_set.respawn_active_player(opts)

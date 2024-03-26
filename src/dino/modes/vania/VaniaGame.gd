@@ -8,6 +8,7 @@ func _ready():
 	MetSys.set_save_data()
 
 	var p = Dino.current_player_node()
+	Log.pr("current player node", p)
 	if p:
 		set_player(p)
 
@@ -33,3 +34,5 @@ func add_level(node, def, opts):
 	level_node = node
 	level_def = def
 	level_opts = opts
+
+	add_child(level_node)

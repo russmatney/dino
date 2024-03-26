@@ -242,34 +242,21 @@ signal nodes_transferred()
 @export var room_count = 5
 @export_file var room_defs_path
 
-@export var entities_node: Node
-@export var tilemaps_node: Node
-@export var rooms_node: Node
-@export var show_color_rect: bool
+var entities_node: Node2D
+var tilemaps_node: Node2D
+var rooms_node: Node2D
 
-@export var _clear_containers: bool:
-	set(v):
-		if v:
-			ensure_containers()
-			clear_containers()
+@export var show_color_rect: bool
 
 ## enter_tree ######################################################################
 
 func _enter_tree():
 	add_to_group("brick_generators", true)
 
-func _ready():
-	ensure_containers()
-
-func maybe_regen():
-	if len(rooms_node.get_children()) == 0:
-		Log.pr("no rooms, generating!")
-		generate()
-
 ## generate ######################################################################
 
 func generate(opts={}):
-	opts.merge({ # does NOT overwrite unless `true` passed as flag (we should prefer passed opts)
+	opts.merge({ # merge does NOT overwrite unless `true` passed as flag (we should prefer passed opts)
 		seed=_seed,
 		tile_size=tile_size,
 		room_count=room_count,
@@ -281,54 +268,19 @@ func generate(opts={}):
 	room_count = opts.get("room_count", room_count)
 	tile_size = opts.get("tile_size", tile_size)
 	_seed = opts.get("seed", _seed)
+
 	if self.has_method("get_room_opts"):
 		opts["get_room_opts"] = self.get_room_opts
 
 	var data = BrickLevelGen.generate_level(opts)
 	new_data_generated.emit(data)
 
-	(func():
-		clear_containers()
-		transfer_nodes(data)
-		Log.pr("GENERATE: new data generated with seed", [data.seed], data.keys())
-		).call_deferred()
+	entities_node = get_node("../Entities")
+	tilemaps_node = get_node("../Tilemaps")
+	rooms_node = get_node("../Rooms")
 
-func ensure_containers():
-	if not rooms_node:
-		rooms_node = get_node_or_null("../Rooms")
-		if not rooms_node:
-			rooms_node = Node.new()
-			rooms_node.name = "Rooms"
-			if Engine.is_editor_hint():
-				rooms_node.ready.connect(func():
-					rooms_node.set_owner(get_owner()))
-			get_parent().add_child.call_deferred(rooms_node)
-	if not tilemaps_node:
-		tilemaps_node = get_node_or_null("../Tilemaps")
-		if not tilemaps_node:
-			tilemaps_node = Node.new()
-			tilemaps_node.name = "Tilemaps"
-			if Engine.is_editor_hint():
-				tilemaps_node.ready.connect(func():
-					tilemaps_node.set_owner(get_owner()))
-			get_parent().add_child.call_deferred(tilemaps_node)
-	if not entities_node:
-		entities_node = get_node_or_null("../Entities")
-		if not entities_node:
-			entities_node = Node.new()
-			entities_node.name = "Entities"
-			if Engine.is_editor_hint():
-				entities_node.ready.connect(func():
-					entities_node.set_owner(get_owner()))
-			get_parent().add_child.call_deferred(entities_node)
-
-func clear_containers():
-	if entities_node:
-		entities_node.get_children().map(func(c): c.queue_free())
-	if tilemaps_node:
-		tilemaps_node.get_children().map(func(c): c.queue_free())
-	if rooms_node:
-		rooms_node.get_children().map(func(c): c.queue_free())
+	transfer_nodes(data)
+	Log.pr("GENERATE: new data generated with seed", [data.seed], data.keys())
 
 func transfer_nodes(data):
 	for node in data.entities:
@@ -339,6 +291,7 @@ func transfer_nodes(data):
 		else:
 			# entities from tilemaps have no parent yet
 			entities_node.add_child(node)
+
 		if Engine.is_editor_hint():
 			node.set_owner(self.get_owner())
 			if not had_parent:
@@ -351,12 +304,14 @@ func transfer_nodes(data):
 	if tilemaps_node:
 		for node in data.tilemaps:
 			tilemaps_node.add_child(node)
+
 			if Engine.is_editor_hint():
 				node.set_owner(self.get_owner())
 
 	if rooms_node:
 		for node in data.rooms:
 			rooms_node.add_child(node)
+
 			if Engine.is_editor_hint():
 				node.set_owner(self.get_owner())
 				for ch in node.get_children():

@@ -75,11 +75,25 @@ func spawn_new(opts={}):
 	p.node.ready.connect(func(): new_player_ready.emit(p.node))
 
 	# add child
-	if spawn_point:
-		U.add_child_to_level(spawn_point, p.node)
+	var level_node = opts.get("level_node")
+	var deferred = opts.get("deferred", true)
+	if level_node:
+		if deferred:
+			level_node.add_child.call_deferred(p.node)
+		else:
+			Log.pr("immediately spawning player in level")
+			level_node.add_child(p.node)
+	elif spawn_point:
+		if deferred:
+			U.add_child_to_level(spawn_point, p.node)
+		else:
+			U.add_child_to_level(spawn_point, p.node, false)
 	else:
 		Log.warn("No spawn_point found, adding player to current_scene")
-		Navi.get_tree().current_scene.add_child.call_deferred(p.node)
+		if deferred:
+			Navi.get_tree().current_scene.add_child.call_deferred(p.node)
+		else:
+			Navi.get_tree().current_scene.add_child(p.node)
 
 ## respawn #################################################
 
@@ -102,16 +116,17 @@ func get_spawn_point_and_coords(opts):
 	var spawn_coords = opts.get("spawn_coords")
 	var spawn_point
 	if spawn_coords == null:
-		spawn_point = get_spawn_point()
+		spawn_point = get_spawn_point(opts)
 		if spawn_point:
 			spawn_coords = spawn_point.global_position
 
 	return [spawn_point, spawn_coords]
 
-func get_spawn_point():
-	var psp = U.first_node_in_group(Navi, "player_spawn_points")
+func get_spawn_point(opts={}):
+	var level_node = opts.get("level_node", Navi)
+	var psp = U.first_node_in_group(level_node, "player_spawn_points")
 	if psp:
 		return psp
-	var elevator = U.first_node_in_group(Navi, "elevator")
+	var elevator = U.first_node_in_group(level_node, "elevator")
 	if elevator:
 		return elevator
