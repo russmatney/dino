@@ -90,8 +90,9 @@ func get_door_cells_to_neighbor(neighbor):
 	var cell_width = MetSys.settings.in_game_cell_size.x
 	var cell_height = MetSys.settings.in_game_cell_size.y
 
-	var border_width = tile_border_width * 16
-	var door_width = tile_door_width * 16
+	var tile_size = 16
+	var border_width = tile_border_width * tile_size
+	var door_width = tile_door_width * tile_size
 
 	var door_rect = Rect2()
 	match wall:
@@ -108,10 +109,10 @@ func get_door_cells_to_neighbor(neighbor):
 			door_rect.position.x += (cell_width - door_width) / 2
 			door_rect.size = Vector2(door_width, border_width)
 		Vector2.DOWN:
-			door_rect.position = cell_rect.position
-			door_rect.position.y += (cell_height - border_width)
+			door_rect.position = Vector2(cell_rect.position.x, cell_rect.end.y)
+			door_rect.position.y -= border_width
 			door_rect.position.x += (cell_width - door_width) / 2
-			door_rect.size = Vector2(door_width, border_width)
+			door_rect.size = Vector2(door_width, border_width + tile_size)
 
 	var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
 	return Reptile.cells_in_rect(rect)
