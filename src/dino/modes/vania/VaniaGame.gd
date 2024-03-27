@@ -30,11 +30,7 @@ func _ready():
 
 func init_room():
 	Log.pr("room entered", MetSys.get_current_room_instance())
-	Log.pr("map ", MetSys.get_save_data())
-	Log.pr("map data ", MetSys.map_data)
-	Log.pr("map data cells", MetSys.map_data.cells)
-	Log.pr("map data assigned scenes", MetSys.map_data.assigned_scenes)
-	Log.pr("player corods", MetSys.get_current_coords())
+	Log.pr("player coords", MetSys.get_current_coords())
 	Log.pr("this room's cells", MetSys.get_current_room_instance().get_local_cells())
 	# MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)
 	# player.on_enter()

@@ -2,8 +2,6 @@ extends RefCounted
 class_name VaniaGenerator
 
 const GEN_MAP_DIR = "user://vania_maps"
-const MAP_CELL_BG_COLOR = Color.BLACK
-const MAP_CELL_BORDER_COLOR = Color.WHITE
 
 const vania_room = preload("res://src/dino/modes/vania/maps/VaniaRoom.tscn")
 const vania_room_wide = preload("res://src/dino/modes/vania/maps/VaniaRoomWide.tscn")
@@ -11,6 +9,11 @@ const vania_room_tall = preload("res://src/dino/modes/vania/maps/VaniaRoomTall.t
 const vania_room_4x = preload("res://src/dino/modes/vania/maps/VaniaRoom4x.tscn")
 
 ## generate_map ##########################################################
+
+var default_cell_opts = {
+	bg_color=Color.BLACK,
+	border_color=Color.WHITE,
+	}
 
 var room_defs = [
 	{
@@ -29,7 +32,7 @@ var room_defs = [
 			Vector3i(5, 1, 0), Vector3i(5, 2, 0),
 			]
 	}
-	]
+	].map(func(opts): return U.merge(opts, default_cell_opts))
 
 func generate_map():
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
@@ -45,10 +48,10 @@ func generate_map():
 
 		for coord in coords:
 			var cell := builder.create_cell(coord)
-			cell.color = MAP_CELL_BG_COLOR
+			cell.color = opts.bg_color
 			for i in 4:
 				cell.borders[i] = 0
-				cell.border_colors[i] = MAP_CELL_BORDER_COLOR
+				cell.border_colors[i] = opts.border_color
 
 			if not new_room_path:
 				new_room_path = build_scene_name(U.merge(opts, {idx=len(room_paths)}))
