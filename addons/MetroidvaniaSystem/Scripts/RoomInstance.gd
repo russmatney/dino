@@ -125,6 +125,12 @@ func get_local_cells() -> Array[Vector2i]:
 		return Vector2i(coords.x - min_cell.x, coords.y - min_cell.y)))
 	return ret
 
+func to_local_cell(coords: Vector3i) -> Vector2i:
+	return Vector2i(coords.x - min_cell.x, coords.y - min_cell.y)
+
+func get_cell_rect(cell: Vector2i) -> Rect2:
+	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
+
 ## Returns the top-left cell's flat coordinates within the room's rectangle.
 func get_base_coords() -> Vector2i:
 	return min_cell
@@ -142,7 +148,7 @@ func get_room_position_offset(other: Node2D) -> Vector2:
 	return Vector2(get_base_coords() - other.get_base_coords()) * MetSys.settings.in_game_cell_size
 
 ## Returns the names of rooms connected to the current room instance. The rooms are determined based on border passages and adjacent cells. Useful for preloading adjacent rooms.
-func get_neighbor_rooms() -> Array[String]:
+func get_neighbor_rooms(check_borders=true) -> Array[String]:
 	var ret: Array[String]
 
 	for coords in cells:
@@ -151,7 +157,7 @@ func get_neighbor_rooms() -> Array[String]:
 		for i in 4:
 			var fwd: Vector2i = MetroidvaniaSystem.MapData.FWD[i]
 
-			if cell_data.borders[i] > 0:
+			if (check_borders and cell_data.borders[i] > 0) or !check_borders:
 				var scene: String = MetSys.map_data.get_assigned_scene_at(coords + Vector3i(fwd.x, fwd.y, 0))
 				if not scene.is_empty() and scene != room_name and not scene in ret:
 					ret.append(scene)

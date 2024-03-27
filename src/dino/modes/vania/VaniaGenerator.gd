@@ -21,17 +21,17 @@ var room_defs = [
 	}, {
 		room_type=DinoData.RoomType.TopDown,
 		room_scene=vania_room_wide,
-		coords=[Vector3i(1, 0, 0), Vector3i(2, 0, 0),]
+		coords=[Vector3i(0, -1, 0), Vector3i(1, -1, 0),]
 	}, {
 		room_type=DinoData.RoomType.SideScroller,
 		room_scene=vania_room_tall,
-		coords=[Vector3i(3, 0, 0), Vector3i(3, 1, 0),]
+		coords=[Vector3i(1, 0, 0), Vector3i(1, 1, 0),]
 	}, {
 		room_type=DinoData.RoomType.TopDown,
 		room_scene=vania_room_4x,
 		coords=[
-			Vector3i(4, 1, 0), Vector3i(4, 2, 0),
-			Vector3i(5, 1, 0), Vector3i(5, 2, 0),
+			Vector3i(2, 0, 0), Vector3i(3, 0, 0),
+			Vector3i(2, 1, 0), Vector3i(3, 1, 0),
 			]
 	}
 	].map(func(opts): return U.merge(opts, default_cell_opts))
