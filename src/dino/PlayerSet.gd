@@ -11,7 +11,6 @@ class PData:
 	extends Object
 
 	var node: Node2D
-	var scene: PackedScene
 	var entity_id
 	var entity: DinoPlayerEntity
 	var room_type: DinoData.RoomType
@@ -28,7 +27,7 @@ class PData:
 			Log.err("PData created without player entity info", opts)
 
 		room_type = opts.get("room_type")
-		scene = entity.get_player_scene(room_type)
+
 
 ## vars #################################################
 
@@ -57,7 +56,7 @@ func spawn_new(opts={}):
 	if not p:
 		Log.err("No active player, cannot spawn", stack)
 		return
-	p.node = p.scene.instantiate()
+	p.node = p.entity.get_player_scene(p.room_type).instantiate()
 
 	var sp = get_spawn_point_and_coords(opts)
 	var spawn_point = sp[0]
@@ -103,7 +102,13 @@ func respawn_active_player(opts):
 	if p:
 		_remove_player(p, opts)
 
-	spawn_new.call_deferred(opts)
+	if opts.get("new_room_type") != null:
+		p.room_type = opts.get("new_room_type")
+
+	if opts.get("deferred", true):
+		spawn_new.call_deferred(opts)
+	else:
+		spawn_new(opts)
 
 ## helpers #################################################
 

@@ -35,9 +35,7 @@ func _ready():
 
 	Dino.spawn_player({level_node=self, deferred=false})
 
-	var p = Dino.current_player_node()
-	if p:
-		set_player(p)
+	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
 	add_custom_module.call_deferred(VaniaRoomTransitions)
 
@@ -47,6 +45,11 @@ func init_room():
 	Log.pr("this room's cells", MetSys.get_current_room_instance().get_local_cells())
 	# MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)
 	# player.on_enter()
+
+func _set_player_position():
+	var p = Dino.current_player_node()
+	if p:
+		MetSys.set_player_position(p.position)
 
 ## dino level ##########################################################
 
