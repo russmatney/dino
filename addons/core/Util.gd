@@ -386,6 +386,11 @@ static func ensure_default(d, k: String, default: Variant):
 	d[k] = default
 	return d
 
+static func merge(d, kv):
+	var new_d = d.duplicate()
+	new_d.merge(kv)
+	return new_d
+
 #################################################################
 ## Configuration warnings
 

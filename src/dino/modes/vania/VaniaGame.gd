@@ -10,13 +10,14 @@ func _ready():
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-	generator.generate_map()
+	var room_paths = generator.generate_map()
 
 	room_loaded.connect(init_room, CONNECT_DEFERRED)
-	if new_generated_maps.is_empty():
-		load_room(starting_map)
+	if room_paths.is_empty():
+		Log.warn("No room_paths returned, did the generator fail?")
+		return
 	else:
-		load_room(new_generated_maps[0])
+		load_room(room_paths[0])
 
 	Dino.spawn_player({level_node=self, deferred=false})
 
