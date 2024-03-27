@@ -83,6 +83,8 @@ func prepare_scene(opts={}):
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = opts.get("room_scene").instantiate()
 
+	# TODO generate tiles, add entities, default doors, etc
+
 	# do things like hide/show exits based on room opts, neighbors
 
 	var ps := PackedScene.new()

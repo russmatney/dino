@@ -43,6 +43,7 @@ func init_room():
 	Log.pr("room entered", MetSys.get_current_room_instance())
 	Log.pr("player coords", MetSys.get_current_coords())
 	Log.pr("this room's cells", MetSys.get_current_room_instance().get_local_cells())
+	Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms())
 	# MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)
 	# player.on_enter()
 
