@@ -14,7 +14,7 @@ class PData:
 	var scene: PackedScene
 	var entity_id
 	var entity: DinoPlayerEntity
-	var game_type: DinoData.GameType
+	var room_type: DinoData.RoomType
 	# var state: State
 
 	func _init(opts):
@@ -27,8 +27,8 @@ class PData:
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
 
-		game_type = opts.get("game_type")
-		scene = entity.get_player_scene(game_type)
+		room_type = opts.get("room_type")
+		scene = entity.get_player_scene(room_type)
 
 ## vars #################################################
 
@@ -81,7 +81,6 @@ func spawn_new(opts={}):
 		if deferred:
 			level_node.add_child.call_deferred(p.node)
 		else:
-			Log.pr("immediately spawning player in level")
 			level_node.add_child(p.node)
 	elif spawn_point:
 		if deferred:

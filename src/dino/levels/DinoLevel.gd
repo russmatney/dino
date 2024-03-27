@@ -50,7 +50,7 @@ static func create_level(def: LevelDef, opts={}):
 
 ## exports/triggers ######################################################
 
-@export var game_type: DinoData.GameType
+@export var room_type: DinoData.RoomType
 @export var level_def: LevelDef
 
 @export var _regen_with_level_def: bool = false :
@@ -98,8 +98,8 @@ var time_int = 0
 
 func to_printable():
 	if level_def != null:
-		return {game_type=game_type, level_def=level_def.get_display_name()}
-	return {game_type=game_type}
+		return {room_type=room_type, level_def=level_def.get_display_name()}
+	return {room_type=room_type}
 
 ## enter_tree ###############################################
 
@@ -137,9 +137,9 @@ func _ready():
 
 	if Dino.is_debug_mode():
 		Log.pr("debug mode: regenerating")
-		if game_type == null:
-			game_type = DinoData.GameType.SideScroller
-		Dino.ensure_player_setup({game_type=game_type,
+		if room_type == null:
+			room_type = DinoData.RoomType.SideScroller
+		Dino.ensure_player_setup({room_type=room_type,
 			entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})
 		regenerate()
@@ -195,7 +195,8 @@ func setup_level():
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()
-	# Dino.spawn_player()
+	if not Dino.current_player_node():
+		Dino.spawn_player()
 	level_setup.emit()
 
 	if not skip_splash_intro:

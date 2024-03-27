@@ -38,11 +38,11 @@ static func all_entities():
 
 ## instance #################################################
 
-func get_player_scene(game_type: DinoData.GameType) -> PackedScene:
-	match game_type:
-		DinoData.GameType.SideScroller: return get_sidescroller_scene()
-		DinoData.GameType.TopDown: return get_topdown_scene()
-		DinoData.GameType.BeatEmUp: return get_beatemup_scene()
+func get_player_scene(room_type: DinoData.RoomType) -> PackedScene:
+	match room_type:
+		DinoData.RoomType.SideScroller: return get_sidescroller_scene()
+		DinoData.RoomType.TopDown: return get_topdown_scene()
+		DinoData.RoomType.BeatEmUp: return get_beatemup_scene()
 		_:
 			Log.warn("no match in get_player_scene, returning fallback", self)
 			return get_sidescroller_scene()

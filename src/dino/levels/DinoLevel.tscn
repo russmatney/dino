@@ -12,11 +12,8 @@ _id = "114"
 script = ExtResource("1_thmin")
 level_def = SubResource("Resource_buo6s")
 
-[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
+[node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
 script = ExtResource("3_qwcul")
-entities_node = NodePath("../Entities")
-tilemaps_node = NodePath("../Tilemaps")
-rooms_node = NodePath("../Rooms")
 
 [node name="Rooms" type="Node" parent="."]
 

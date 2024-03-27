@@ -8,8 +8,6 @@ const vania_room_wide = preload("res://src/dino/modes/vania/maps/VaniaRoomWide.t
 const vania_room_tall = preload("res://src/dino/modes/vania/maps/VaniaRoomTall.tscn")
 const vania_room_4x = preload("res://src/dino/modes/vania/maps/VaniaRoom4x.tscn")
 
-## generate_map ##########################################################
-
 var default_cell_opts = {
 	bg_color=Color.BLACK,
 	border_color=Color.WHITE,
@@ -17,15 +15,19 @@ var default_cell_opts = {
 
 var room_defs = [
 	{
+		room_type=DinoData.RoomType.SideScroller,
 		room_scene=vania_room,
 		coords=[Vector3i(0, 0, 0)],
 	}, {
+		room_type=DinoData.RoomType.TopDown,
 		room_scene=vania_room_wide,
 		coords=[Vector3i(1, 0, 0), Vector3i(2, 0, 0),]
 	}, {
+		room_type=DinoData.RoomType.SideScroller,
 		room_scene=vania_room_tall,
 		coords=[Vector3i(3, 0, 0), Vector3i(3, 1, 0),]
 	}, {
+		room_type=DinoData.RoomType.TopDown,
 		room_scene=vania_room_4x,
 		coords=[
 			Vector3i(4, 1, 0), Vector3i(4, 2, 0),
@@ -34,8 +36,13 @@ var room_defs = [
 	}
 	].map(func(opts): return U.merge(opts, default_cell_opts))
 
-func generate_map():
+## generate_rooms ##########################################################
+
+func generate_rooms():
+	# ensure directory exists
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
+
+	# delete contents in directory
 	for file in DirAccess.get_files_at(GEN_MAP_DIR):
 		DirAccess.remove_absolute(GEN_MAP_DIR.path_join(file))
 
@@ -55,7 +62,7 @@ func generate_map():
 
 			if not new_room_path:
 				new_room_path = build_scene_name(U.merge(opts, {idx=len(room_paths)}))
-				room_paths.append(new_room_path)
+				opts["room_path"] = new_room_path
 
 			cell.set_assigned_scene(new_room_path)
 
@@ -64,12 +71,11 @@ func generate_map():
 
 	builder.update_map()
 
-	return room_paths
+	return room_defs
 
 func build_scene_name(opts={}) -> String:
 	var res_path = opts.get("room_scene").resource_path
 	var basename = res_path.get_file().get_basename()
-	Log.pr("resource path", res_path, "basename", basename)
 	var new_map = "%s%d.tscn" % [basename, opts.get("idx") + 1]
 	return GEN_MAP_DIR.path_join(new_map)
 
