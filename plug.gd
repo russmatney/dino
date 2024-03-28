@@ -12,3 +12,4 @@ func _plugging():
 	plug("russmatney/log.gd", {include=["addons/log"]})
 	plug("KoBeWi/Metroidvania-System", {include=["addons/MetroidvaniaSystem"]})
 	plug("KoBeWi/Godot-Custom-Runner", {include=["addons/CustomRunner"], exclude=["ExampleProject"]})
+	plug("SirLich/asset-explorer", {include=["addons/gd_explorer"]})
