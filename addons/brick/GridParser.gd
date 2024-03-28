@@ -12,20 +12,23 @@ class GridParserOpts:
 
 	# all optional
 	var parsed_room_defs: GridDefs
-	var room_defs_path: String
+	var defs_path: String
 	var contents: String
 
 	func _init(opts):
 		parsed_room_defs = opts.get("parsed_room_defs")
-		if opts.get("room_defs_path"):
-			room_defs_path = opts.get("room_defs_path")
+
+		if opts.get("defs_path"):
+			defs_path = opts.get("defs_path")
+		elif opts.get("room_defs_path"):
+			defs_path = opts.get("room_defs_path")
 		if opts.get("contents"):
 			contents = opts.get("contents")
 
 	func to_printable():
 		return {
 			# parsed_room_defs=parsed_room_defs,
-			room_defs_path=room_defs_path,
+			defs_path=defs_path,
 			# contents=contents,
 			}
 
@@ -39,26 +42,26 @@ static func parse(opts: Dictionary={}) -> GridDefs:
 	if rp_opts.parsed_room_defs:
 		return rp_opts.parsed_room_defs
 
-	var room_defs = GridDefs.new()
+	var grid_defs = GridDefs.new()
 
 	var contents = rp_opts.contents
 	if not contents:
-		var path = rp_opts.room_defs_path
+		var path = rp_opts.defs_path
 		if not path:
-			Log.err("Cannot parse, no room_defs_path", rp_opts)
+			Log.err("Cannot parse, no defs_path", rp_opts)
 			return null
-		room_defs.path = path
+		grid_defs.path = path
 		var file = FileAccess.open(path, FileAccess.READ)
 		contents = file.get_as_text()
 
 	var parsed = GridParser.parse_raw(contents)
 
-	room_defs.prelude = parsed.prelude
-	if "name" in room_defs.prelude:
-		room_defs.name = room_defs.prelude.name
-	room_defs.legend = parsed.legend
+	grid_defs.prelude = parsed.prelude
+	if "name" in grid_defs.prelude:
+		grid_defs.name = grid_defs.prelude.name
+	grid_defs.legend = parsed.legend
 
-	var rooms: Array[GridDef] = []
+	var grids: Array[GridDef] = []
 	var to_parse = []
 	if "rooms" in parsed:
 		to_parse = parsed.rooms
@@ -87,14 +90,14 @@ static func parse(opts: Dictionary={}) -> GridDefs:
 			shape.append(new_row)
 		def.shape = shape
 
-		rooms.append(def)
+		grids.append(def)
 
-	if len(rooms) > 0:
-		room_defs.rooms = rooms
+	if len(grids) > 0:
+		grid_defs.grids = grids
 	else:
 		Log.warn("No grids parsed in GridParser!", opts)
 
-	return room_defs
+	return grid_defs
 
 ## parser #####################################################
 

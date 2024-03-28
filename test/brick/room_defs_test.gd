@@ -8,7 +8,7 @@ func test_room_defs_filter():
 	rm_1.meta["some_flag"] = true
 	var rm_2 = GridDef.new()
 	rm_2.name = "room_2"
-	rd.rooms.append_array([rm_1, rm_2])
+	rd.grids.append_array([rm_1, rm_2])
 
 	var rooms = rd.filter({filter_rooms=func(room): return room.has_flag("some_flag")})
 

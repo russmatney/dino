@@ -5,7 +5,7 @@ func free_data(data):
 	var nodes = []
 	nodes.append_array(data.entities)
 	nodes.append_array(data.tilemaps)
-	nodes.append_array(data.rooms)
+	nodes.append_array(data.grids)
 	for node in nodes:
 		node.queue_free()
 

@@ -7,7 +7,7 @@ var path: String
 var name: String
 var prelude: Dictionary
 var legend: Dictionary
-var rooms: Array[GridDef]
+var grids: Array[GridDef]
 
 func to_printable():
 	return {prelude=prelude, legend=legend}
@@ -16,7 +16,7 @@ func filter(opts: Dictionary):
 	U.ensure_default(opts, "flags", [])
 	U.ensure_default(opts, "skip_flags", [])
 
-	var xs = rooms
+	var xs = grids
 
 	# filter out unless 'filter_rooms' returns true
 	if opts.get("filter_rooms"):
