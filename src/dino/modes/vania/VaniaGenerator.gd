@@ -8,11 +8,13 @@ const vania_room_wide = preload("res://src/dino/modes/vania/maps/VaniaRoomWide.t
 const vania_room_tall = preload("res://src/dino/modes/vania/maps/VaniaRoomTall.tscn")
 const vania_room_4x = preload("res://src/dino/modes/vania/maps/VaniaRoom4x.tscn")
 
-## init ##########################################################
-
 var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
 var entity_grid_defs: GridDefs
 var room_defs: Array[VaniaRoomDef] = []
+
+var tile_size = 16 # TODO fixed? dynamic?
+
+## init ##########################################################
 
 func _init():
 	entity_grid_defs = GridParser.parse({defs_path=entity_defs_path})
@@ -20,24 +22,29 @@ func _init():
 	var defs = [{
 			room_type=DinoData.RoomType.SideScroller,
 			room_scene=vania_room,
+			entities=["Candle", "Player"],
 			coords=[Vector3i(0, 0, 0)],
 		}, {
 			room_type=DinoData.RoomType.SideScroller,
 			room_scene=vania_room_wide,
+			entities=["Target", "Target"],
 			coords=[Vector3i(0, -1, 0), Vector3i(1, -1, 0),]
 		}, {
 			room_type=DinoData.RoomType.SideScroller,
 			room_scene=vania_room_tall,
+			entities=["Leaf", "Leaf"],
 			coords=[Vector3i(1, 0, 0), Vector3i(1, 1, 0),]
 		}, {
 			room_type=DinoData.RoomType.SideScroller,
 			room_scene=vania_room_4x,
+			entities=["Enemy", "Enemy"],
 			coords=[
 				Vector3i(2, 0, 0), Vector3i(3, 0, 0),
 				Vector3i(2, 1, 0), Vector3i(3, 1, 0),
 				]
 		}].map(func(opts):
 			opts["entity_defs"] = entity_grid_defs
+			opts["tile_size"] = tile_size
 			return VaniaRoomDef.new(opts))
 	room_defs.assign(defs)
 
@@ -69,12 +76,13 @@ func generate_rooms():
 
 			cell.set_assigned_scene(room_def.room_path)
 
-		# Does this need to be called before set_assigned_scene ?
 		prepare_scene(room_def)
 
 	builder.update_map()
 
 	return room_defs
+
+## build_scene_name ##############################################################
 
 func build_scene_name(room_def) -> String:
 	var res_path = room_def.room_scene.resource_path
@@ -82,16 +90,16 @@ func build_scene_name(room_def) -> String:
 	var new_map = "%s%d.tscn" % [basename, room_def.index + 1]
 	return GEN_MAP_DIR.path_join(new_map)
 
+## prepare scene ##############################################################
+
 func prepare_scene(room_def):
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = room_def.room_scene.instantiate()
 
-	Log.pr("prepping room def", room_def)
-	Log.pr("has entity_defs", room_def.entity_defs)
+	room.set_room_def(room_def)
 
 	# TODO generate tiles, add entities, default doors, etc
-
-	# do things like hide/show exits based on room opts, neighbors
+	# hide/show exits based on room opts, neighbors
 
 	var ps := PackedScene.new()
 	ps.pack(room)

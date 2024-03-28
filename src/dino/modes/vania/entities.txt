@@ -5,6 +5,7 @@ LEGEND
 ==============
 
 b = Blob
+c = Candle
 e = Enemy
 l = Leaf
 o = Target
@@ -30,6 +31,13 @@ name Player
 ...
 .p.
 ...
+xxx
+
+name Candle
+
+...
+...
+.c.
 xxx
 
 name Target

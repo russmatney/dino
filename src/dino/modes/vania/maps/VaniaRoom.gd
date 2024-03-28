@@ -4,9 +4,12 @@ extends Node2D
 @onready var room_instance = $RoomInstance
 
 @export var tilemap_scenes: Array[PackedScene] = []
+
 var tile_border_width = 4
 var tile_door_width = 4
-
+var room_def: VaniaRoomDef
+func set_room_def(def: VaniaRoomDef):
+	room_def = def
 var tilemap: TileMap
 
 ## init ###############################################################
@@ -27,7 +30,21 @@ func ensure_tilemap():
 func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
+		if not room_def:
+			room_def = VaniaRoomDef.new()
+	else:
+		if not room_def:
+			Log.warn("No room_def on vania room!")
 
+	setup_walls_and_doors()
+	add_entities()
+
+## setup_walls_and_doors ##############################################################
+
+# Draws a border around the room
+# cuts away space for 'doors' between neighboring rooms
+# TODO rewrite to not need the room_instance (and work before _ready())
+func setup_walls_and_doors():
 	var neighbors = get_possible_neighbor_doors()
 	var door_cells = []
 	for ngbr in neighbors:
@@ -90,9 +107,8 @@ func get_door_cells_to_neighbor(neighbor):
 	var cell_width = MetSys.settings.in_game_cell_size.x
 	var cell_height = MetSys.settings.in_game_cell_size.y
 
-	var tile_size = 16
-	var border_width = tile_border_width * tile_size
-	var door_width = tile_door_width * tile_size
+	var border_width = tile_border_width * room_def.tile_size
+	var door_width = tile_door_width * room_def.tile_size
 
 	var door_rect = Rect2()
 	match wall:
@@ -112,7 +128,36 @@ func get_door_cells_to_neighbor(neighbor):
 			door_rect.position = Vector2(cell_rect.position.x, cell_rect.end.y)
 			door_rect.position.y -= border_width
 			door_rect.position.x += (cell_width - door_width) / 2
-			door_rect.size = Vector2(door_width, border_width + tile_size)
+			door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
 
 	var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
 	return Reptile.cells_in_rect(rect)
+
+## add_entities ##############################################################
+
+func build_tilemap_data():
+	var tmap_data = {}
+	for cell in tilemap.get_used_cells(0):
+		tmap_data[cell] = ["Tile"]
+	return tmap_data
+
+func add_entities():
+	Log.pr("Adding entities", room_def.entities)
+
+	var tmap_data = build_tilemap_data()
+
+	for ent in room_def.entities:
+		var entity_opts = room_def.label_to_entity.get(ent)
+		var grids = room_def.entity_defs.grids_with_entity(ent)
+		var grid = grids.pick_random()
+		Log.pr("grid with ent", grid, grid.shape, grid.rect(), grid.get_shape_dict())
+
+		# find place to put entity
+
+func possible_positions(tmap_data, entity_shape):
+	var offset = Vector2.ZERO
+	var positions = []
+
+	# TODO impl
+
+	return positions

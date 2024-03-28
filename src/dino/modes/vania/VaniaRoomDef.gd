@@ -13,6 +13,11 @@ var border_color: Color = Color.WHITE
 var index: int
 
 var entity_defs: GridDefs
+var entities: Array #[String]
+
+var label_to_entity
+var label_to_tilemap
+var tile_size: int = 16
 
 func _init(opts={}):
 	room_type = opts.get("room_type", room_type)
@@ -24,3 +29,15 @@ func _init(opts={}):
 	border_color = opts.get("border_color", border_color)
 
 	entity_defs = opts.get("entity_defs")
+	if opts.get("entities"):
+		entities = opts.get("entities")
+		Log.pr("setting entities", entities)
+	tile_size = opts.get("tile_size", tile_size)
+
+	label_to_entity = DinoLevelGenData.label_to_entity({tile_size=tile_size})
+	label_to_tilemap = {
+			"Tile": {
+				scene=load("res://addons/reptile/tilemaps/GrassTiles16.tscn"),
+				# border_depth={down=30, left=20, right=20},
+				}
+		}

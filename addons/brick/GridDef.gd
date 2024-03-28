@@ -13,6 +13,12 @@ func has_flag(f):
 	if f in meta:
 		return meta.get(f)
 
+func has_label(label) -> bool:
+	for coord in coords():
+		if label in coord.cell:
+			return true
+	return false
+
 func column(idx: int):
 	var col = []
 	for row in shape:
@@ -27,14 +33,29 @@ func row(idx: int):
 		return shape[idx]
 	Log.error("idx outside of width, cannot return row")
 
+func size() -> Vector2i:
+	return Vector2i(len(shape[0]), len(shape))
+
+func rect() -> Rect2i:
+	return Rect2i(Vector2i(), size())
+
+func get_shape_dict():
+	var shape_dict = {}
+	for coord in coords(false):
+		shape_dict[Vector2i(coord.coord)] = coord.cell
+	return shape_dict
+
 # Returns an array of dicts like [{"coord": Vector2, "cell": Array[String]}]
-func coords() -> Array:
+func coords(skip_nulls=true) -> Array:
 	var crds = []
 	for y in len(shape):
 		var row = shape[y]
 		for x in len(row):
 			var coord = Vector2(x, y)
 			var cell = shape[y][x]
-			if cell != null:
+			if skip_nulls:
+				if cell != null:
+					crds.append({coord=coord, cell=cell})
+			else:
 				crds.append({coord=coord, cell=cell})
 	return crds

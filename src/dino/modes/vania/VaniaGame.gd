@@ -31,7 +31,9 @@ func _ready():
 		Log.warn("No room_defs returned, did the generator fail?")
 		return
 	else:
-		load_room(room_defs[0].room_path)
+		var p = room_defs[0].room_path
+		load_room(p, {setup=func(room):
+			room.set_room_def(get_room_def(p))})
 
 	Dino.spawn_player({level_node=self, deferred=false})
 

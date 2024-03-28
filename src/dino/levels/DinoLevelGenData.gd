@@ -22,6 +22,7 @@ static func label_to_entity(opts):
 		"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
 
 		# entities
+		"Candle": {scene=load("res://src/hatbot/entities/Candle.tscn")},
 		"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
 			setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 			},

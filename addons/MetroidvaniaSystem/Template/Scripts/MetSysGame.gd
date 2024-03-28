@@ -28,17 +28,19 @@ func _physics_tick():
 	MetSys.set_player_position(player.position)
 
 ## Loads a map and adds as a child of this node. If a map already exists, it will be removed before the new one is loaded. This method is asynchronous, so you should call it with [code]await[/code] if you want to do something after the map is loaded. Alternatively, you can use [signal room_loaded].
-func load_room(path: String):
+func load_room(path: String, opts={}):
 	if not path.is_absolute_path():
 		path = MetSys.get_full_room_path(path)
-	
+
 	if map:
 		map.queue_free()
 		await map.tree_exited
 		map = null
-	
+
 	map = load(path).instantiate()
+	if opts.get("setup"):
+		opts.get("setup").call(map)
 	add_child(map)
-	
+
 	MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
 	room_loaded.emit()

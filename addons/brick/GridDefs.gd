@@ -12,6 +12,8 @@ var grids: Array[GridDef]
 func to_printable():
 	return {prelude=prelude, legend=legend}
 
+## filter ##############################################################
+
 func filter(opts: Dictionary):
 	U.ensure_default(opts, "flags", [])
 	U.ensure_default(opts, "skip_flags", [])
@@ -41,3 +43,8 @@ func filter(opts: Dictionary):
 		return []
 
 	return xs
+
+## grids_with_entities ##############################################################
+
+func grids_with_entity(entity_label):
+	return grids.filter(func(g): return g.has_label(entity_label))
