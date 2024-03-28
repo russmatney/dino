@@ -137,6 +137,8 @@ func get_door_cells_to_neighbor(neighbor):
 
 func build_tilemap_data():
 	var tmap_data = {}
+	for cell in Reptile.cells_in_rect(tilemap.get_used_rect()):
+		tmap_data[cell] = null
 	for cell in tilemap.get_used_cells(0):
 		tmap_data[cell] = ["Tile"]
 	return tmap_data
@@ -150,14 +152,42 @@ func add_entities():
 		var entity_opts = room_def.label_to_entity.get(ent)
 		var grids = room_def.entity_defs.grids_with_entity(ent)
 		var grid = grids.pick_random()
-		Log.pr("grid with ent", grid, grid.shape, grid.rect(), grid.get_shape_dict())
+		Log.pr("grid with ent", grid, grid.get_shape_dict())
 
 		# find place to put entity
+		var shape_dict = grid.get_shape_dict()
+		var entity_coords = []
+		for k in shape_dict.keys():
+			if shape_dict.get(k) == [ent]:
+				entity_coords.append(k)
+				shape_dict[k] = null
+
+		# TODO exclude doorways
+		var valid_starting_coords = possible_positions(tmap_data, shape_dict)
+
+		for e_coord in entity_coords:
+			var starting_coord = valid_starting_coords.pick_random()
+			valid_starting_coords.erase(starting_coord)
+
+			var position = tilemap.map_to_local(e_coord + starting_coord)
+			var entity = entity_opts.scene.instantiate()
+			entity.position = position
+			add_child(entity)
 
 func possible_positions(tmap_data, entity_shape):
-	var offset = Vector2.ZERO
 	var positions = []
-
-	# TODO impl
-
+	for coord in tmap_data.keys():
+		if is_fit(coord, tmap_data, entity_shape):
+			positions.append(coord)
 	return positions
+
+func is_fit(coord: Vector2i, tmap_data, entity_shape):
+	var matches = 0
+	for e_coord in entity_shape.keys():
+		var e_val = entity_shape.get(e_coord)
+		var t_val = tmap_data.get(coord + e_coord)
+		if e_val != t_val:
+			return false
+		else:
+			matches += 1
+	return true

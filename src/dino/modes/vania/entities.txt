@@ -36,8 +36,8 @@ xxx
 name Candle
 
 ...
-...
 .c.
+...
 xxx
 
 name Target
@@ -45,6 +45,11 @@ name Target
 ...
 .o.
 ...
+
+name Target (Double)
+
+o.
+.o
 
 name Target near ceiling
 
