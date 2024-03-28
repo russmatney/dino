@@ -6,7 +6,7 @@ const main_panel = preload("res://addons/gd_explorer/explorer.tscn")
 var main_panel_instance : Control
 
 func _input(event: InputEvent) -> void:
-	if main_panel_instance.visible:
+	if main_panel_instance != null and main_panel_instance.visible:
 		main_panel_instance._input(event)
 
 func _enter_tree():
