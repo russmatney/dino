@@ -37,7 +37,7 @@ func filter(opts: Dictionary):
 			return true)
 
 	if len(xs) == 0:
-		Log.err("Could not find room_def matching `filter_rooms` and/or `flags`", opts.flags)
-		return
+		Log.warn("Could not find room_def matching `filter_rooms` and/or `flags`/`skip_flags`", opts)
+		return []
 
 	return xs

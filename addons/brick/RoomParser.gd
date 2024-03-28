@@ -1,6 +1,7 @@
 @tool
 extends Object
 class_name RoomParser
+# TODO rename to GridParser? ShapeParser?
 
 ## public types #####################################################
 
@@ -14,22 +15,37 @@ class RoomParserOpts:
 	var room_defs_path: String
 	var contents: String
 
+	func _init(opts):
+		parsed_room_defs = opts.get("parsed_room_defs")
+		if opts.get("room_defs_path"):
+			room_defs_path = opts.get("room_defs_path")
+		if opts.get("contents"):
+			contents = opts.get("contents")
+
+	func to_printable():
+		return {
+			# parsed_room_defs=parsed_room_defs,
+			room_defs_path=room_defs_path,
+			# contents=contents,
+			}
+
 ## public api #####################################################
 
 # Returns a RoomDefs with RoomDef(s) and other metadata
 static func parse(opts: Dictionary={}) -> RoomDefs:
+	var rp_opts = RoomParserOpts.new(opts)
+
 	# kind of odd... some caching convenience use-case?
-	if "parsed_room_defs" in opts and opts.parsed_room_defs:
-		return opts.parsed_room_defs
+	if rp_opts.parsed_room_defs:
+		return rp_opts.parsed_room_defs
 
 	var room_defs = RoomDefs.new()
 
-	var contents = U.get_(opts, "contents")
-	if contents == null and contents != "":
-		var path = U.get_(opts, "room_defs_path")
-		if path == null and path != "":
-			Log.err("Cannot parse, no room_defs_path")
-			# This is where we'd want a union type, or nil punning
+	var contents = rp_opts.contents
+	if not contents:
+		var path = rp_opts.room_defs_path
+		if not path:
+			Log.err("Cannot parse, no room_defs_path", rp_opts)
 			return null
 		room_defs.path = path
 		var file = FileAccess.open(path, FileAccess.READ)
@@ -43,7 +59,14 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 	room_defs.legend = parsed.legend
 
 	var rooms: Array[RoomDef] = []
-	for r in parsed.rooms:
+	var to_parse = []
+	if "rooms" in parsed:
+		to_parse = parsed.rooms
+	elif "entities" in parsed:
+		to_parse = parsed.entities
+	elif "chunks" in parsed:
+		to_parse = parsed.chunks
+	for r in to_parse:
 		var def = RoomDef.new()
 		def.meta = r.duplicate(true)
 		def.meta.erase("shape")
@@ -68,6 +91,8 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 
 	if len(rooms) > 0:
 		room_defs.rooms = rooms
+	else:
+		Log.warn("No grids parsed in GridParser!", opts)
 
 	return room_defs
 
@@ -79,7 +104,9 @@ static func parse_raw(contents) -> Dictionary:
 	var section_parsers = {
 		"prelude": RoomParser.parse_prelude,
 		"legend": RoomParser.parse_legend,
-		"rooms": RoomParser.parse_rooms,
+		"rooms": RoomParser.parse_grids,
+		"chunks": RoomParser.parse_grids,
+		"entities": RoomParser.parse_grids,
 	}
 
 	# force a similar prelude header
@@ -149,23 +176,23 @@ static func parse_legend(chunks):
 
 	return legend
 
-## rooms #########################################################
+## grids #########################################################
 
-static func parse_room(shape_lines, raw_meta):
-	var room = parse_metadata(raw_meta)
+static func parse_grid(shape_lines, raw_meta):
+	var grid = parse_metadata(raw_meta)
 	var raw_shape = parse_shape(shape_lines)
 
-	room["shape"] = raw_shape
+	grid["shape"] = raw_shape
 	# maybe want to optimize away from this?
-	return room.duplicate(true)
+	return grid.duplicate(true)
 
-static func parse_rooms(chunks):
-	var rooms = []
+static func parse_grids(chunks):
+	var grids = []
 	for i in len(chunks):
 		if i % 2 == 1:
 			# only run evens
 			continue
 		var raw_meta = chunks[i]
 		var shape_lines = chunks[i+1]
-		rooms.append(parse_room(shape_lines, raw_meta))
-	return rooms
+		grids.append(parse_grid(shape_lines, raw_meta))
+	return grids

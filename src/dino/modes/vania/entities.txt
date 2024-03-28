@@ -1,0 +1,83 @@
+name Entities List
+
+==============
+LEGEND
+==============
+
+b = Blob
+e = Enemy
+l = Leaf
+o = Target
+p = Player
+x = Tile
+- = OneWayPlatform
+
+==============
+ENTITIES
+==============
+
+name OneWayPlatform
+
+...
+...
+---
+...
+...
+xxx
+
+name Player
+
+...
+.p.
+...
+xxx
+
+name Target
+
+...
+.o.
+...
+
+name Target near ceiling
+
+xxx
+.o.
+...
+
+name Target on floor
+
+...
+.o.
+xxx
+
+name Blob
+
+...
+.b.
+...
+xxx
+
+name Enemy
+
+...
+.e.
+...
+xxx
+
+name Leaf
+
+...
+.l.
+...
+
+name Leaf near ceiling
+
+xxx
+.l.
+...
+
+name Leaf on floor
+
+...
+.l.
+xxx
