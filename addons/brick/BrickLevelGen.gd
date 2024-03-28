@@ -11,7 +11,7 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 
 	# parse once
 	var parsed_room_defs = GridParser.parse({
-		room_defs_path=opts.get("room_defs_path"),
+		defs_path=opts.get("defs_path"),
 		contents=opts.get("contents"),
 		})
 

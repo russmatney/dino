@@ -12,6 +12,8 @@ var border_color: Color = Color.WHITE
 
 var index: int
 
+var entity_defs: GridDefs
+
 func _init(opts={}):
 	room_type = opts.get("room_type", room_type)
 	# TODO create this dynamically - does it really need to be represented in the main map?
@@ -20,3 +22,5 @@ func _init(opts={}):
 
 	bg_color = opts.get("bg_color", bg_color)
 	border_color = opts.get("border_color", border_color)
+
+	entity_defs = opts.get("entity_defs")

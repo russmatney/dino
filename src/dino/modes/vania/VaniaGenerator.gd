@@ -8,38 +8,38 @@ const vania_room_wide = preload("res://src/dino/modes/vania/maps/VaniaRoomWide.t
 const vania_room_tall = preload("res://src/dino/modes/vania/maps/VaniaRoomTall.tscn")
 const vania_room_4x = preload("res://src/dino/modes/vania/maps/VaniaRoom4x.tscn")
 
-var room_defs = [
-	{
-		room_type=DinoData.RoomType.SideScroller,
-		room_scene=vania_room,
-		coords=[Vector3i(0, 0, 0)],
-	}, {
-		room_type=DinoData.RoomType.SideScroller,
-		room_scene=vania_room_wide,
-		coords=[Vector3i(0, -1, 0), Vector3i(1, -1, 0),]
-	}, {
-		room_type=DinoData.RoomType.SideScroller,
-		room_scene=vania_room_tall,
-		coords=[Vector3i(1, 0, 0), Vector3i(1, 1, 0),]
-	}, {
-		room_type=DinoData.RoomType.SideScroller,
-		room_scene=vania_room_4x,
-		coords=[
-			Vector3i(2, 0, 0), Vector3i(3, 0, 0),
-			Vector3i(2, 1, 0), Vector3i(3, 1, 0),
-			]
-	}
-	].map(func(opts): return VaniaRoomDef.new(opts))
-
 ## init ##########################################################
 
-var entity_defs
 var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
+var entity_grid_defs: GridDefs
+var room_defs: Array[VaniaRoomDef] = []
 
 func _init():
-	var grid_defs = GridParser.parse({defs_path=entity_defs_path})
-	Log.pr("brick room defs", grid_defs)
-	Log.pr("brick room defs grids", grid_defs.grids)
+	entity_grid_defs = GridParser.parse({defs_path=entity_defs_path})
+
+	var defs = [{
+			room_type=DinoData.RoomType.SideScroller,
+			room_scene=vania_room,
+			coords=[Vector3i(0, 0, 0)],
+		}, {
+			room_type=DinoData.RoomType.SideScroller,
+			room_scene=vania_room_wide,
+			coords=[Vector3i(0, -1, 0), Vector3i(1, -1, 0),]
+		}, {
+			room_type=DinoData.RoomType.SideScroller,
+			room_scene=vania_room_tall,
+			coords=[Vector3i(1, 0, 0), Vector3i(1, 1, 0),]
+		}, {
+			room_type=DinoData.RoomType.SideScroller,
+			room_scene=vania_room_4x,
+			coords=[
+				Vector3i(2, 0, 0), Vector3i(3, 0, 0),
+				Vector3i(2, 1, 0), Vector3i(3, 1, 0),
+				]
+		}].map(func(opts):
+			opts["entity_defs"] = entity_grid_defs
+			return VaniaRoomDef.new(opts))
+	room_defs.assign(defs)
 
 
 ## generate_rooms ##########################################################
@@ -85,6 +85,9 @@ func build_scene_name(room_def) -> String:
 func prepare_scene(room_def):
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = room_def.room_scene.instantiate()
+
+	Log.pr("prepping room def", room_def)
+	Log.pr("has entity_defs", room_def.entity_defs)
 
 	# TODO generate tiles, add entities, default doors, etc
 
