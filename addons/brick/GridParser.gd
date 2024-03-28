@@ -1,13 +1,13 @@
 @tool
 extends Object
-class_name RoomParser
+class_name GridParser
 # TODO rename to GridParser? ShapeParser?
 
 ## public types #####################################################
 
 # NOTE this is not used! just a thought.
 # consider validating dictionary/converting to this obj
-class RoomParserOpts:
+class GridParserOpts:
 	extends Object
 
 	# all optional
@@ -33,7 +33,7 @@ class RoomParserOpts:
 
 # Returns a RoomDefs with RoomDef(s) and other metadata
 static func parse(opts: Dictionary={}) -> RoomDefs:
-	var rp_opts = RoomParserOpts.new(opts)
+	var rp_opts = GridParserOpts.new(opts)
 
 	# kind of odd... some caching convenience use-case?
 	if rp_opts.parsed_room_defs:
@@ -51,7 +51,7 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 		var file = FileAccess.open(path, FileAccess.READ)
 		contents = file.get_as_text()
 
-	var parsed = RoomParser.parse_raw(contents)
+	var parsed = GridParser.parse_raw(contents)
 
 	room_defs.prelude = parsed.prelude
 	if "name" in room_defs.prelude:
@@ -102,11 +102,11 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 static func parse_raw(contents) -> Dictionary:
 	var parsed = {}
 	var section_parsers = {
-		"prelude": RoomParser.parse_prelude,
-		"legend": RoomParser.parse_legend,
-		"rooms": RoomParser.parse_grids,
-		"chunks": RoomParser.parse_grids,
-		"entities": RoomParser.parse_grids,
+		"prelude": GridParser.parse_prelude,
+		"legend": GridParser.parse_legend,
+		"rooms": GridParser.parse_grids,
+		"chunks": GridParser.parse_grids,
+		"entities": GridParser.parse_grids,
 	}
 
 	# force a similar prelude header

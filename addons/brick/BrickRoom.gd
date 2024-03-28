@@ -169,7 +169,7 @@ static func add_roombox(room: BrickRoom, _opts: BrickRoomOpts):
 static func gen_room_def(opts: BrickRoomOpts, d_opts: Dictionary={}):
 	if opts == null:
 		opts = BrickRoomOpts.new(d_opts)
-	var room_defs = RoomParser.parse(opts.data())
+	var room_defs = GridParser.parse(opts.data())
 	var filtered_rooms = room_defs.filter(opts.data())
 	if filtered_rooms != null:
 		return U.rand_of(filtered_rooms)

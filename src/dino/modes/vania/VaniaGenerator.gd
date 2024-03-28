@@ -37,7 +37,7 @@ var entity_defs
 var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
 
 func _init():
-	var brickRoomDefs = RoomParser.parse({room_defs_path=entity_defs_path})
+	var brickRoomDefs = GridParser.parse({room_defs_path=entity_defs_path})
 	Log.pr("brick room defs", brickRoomDefs)
 	Log.pr("brick room defs rooms", brickRoomDefs.rooms)
 

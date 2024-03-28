@@ -10,7 +10,7 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 	U.ensure_default(opts, "tile_size", 16)
 
 	# parse once
-	var parsed_room_defs = RoomParser.parse({
+	var parsed_room_defs = GridParser.parse({
 		room_defs_path=opts.get("room_defs_path"),
 		contents=opts.get("contents"),
 		})
