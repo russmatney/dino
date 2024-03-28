@@ -1,12 +1,12 @@
 extends GdUnitTestSuite
 
 func test_room_defs_filter():
-	var rd = RoomDefs.new()
+	var rd = GridDefs.new()
 
-	var rm_1 = RoomDef.new()
+	var rm_1 = GridDef.new()
 	rm_1.name = "room_1"
 	rm_1.meta["some_flag"] = true
-	var rm_2 = RoomDef.new()
+	var rm_2 = GridDef.new()
 	rm_2.name = "room_2"
 	rd.rooms.append_array([rm_1, rm_2])
 

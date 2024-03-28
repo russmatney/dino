@@ -1,5 +1,5 @@
 @tool
-class_name RoomDef
+class_name GridDef
 extends Object
 
 var name: String

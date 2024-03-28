@@ -1,13 +1,13 @@
 @tool
 # could write out to a pandora entity
-class_name RoomDefs
+class_name GridDefs
 extends Object
 
 var path: String
 var name: String
 var prelude: Dictionary
 var legend: Dictionary
-var rooms: Array[RoomDef]
+var rooms: Array[GridDef]
 
 func to_printable():
 	return {prelude=prelude, legend=legend}

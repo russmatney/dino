@@ -11,7 +11,7 @@ class GridParserOpts:
 	extends Object
 
 	# all optional
-	var parsed_room_defs: RoomDefs
+	var parsed_room_defs: GridDefs
 	var room_defs_path: String
 	var contents: String
 
@@ -31,15 +31,15 @@ class GridParserOpts:
 
 ## public api #####################################################
 
-# Returns a RoomDefs with RoomDef(s) and other metadata
-static func parse(opts: Dictionary={}) -> RoomDefs:
+# Returns a GridDefs with GridDef(s) and other metadata
+static func parse(opts: Dictionary={}) -> GridDefs:
 	var rp_opts = GridParserOpts.new(opts)
 
 	# kind of odd... some caching convenience use-case?
 	if rp_opts.parsed_room_defs:
 		return rp_opts.parsed_room_defs
 
-	var room_defs = RoomDefs.new()
+	var room_defs = GridDefs.new()
 
 	var contents = rp_opts.contents
 	if not contents:
@@ -58,7 +58,7 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 		room_defs.name = room_defs.prelude.name
 	room_defs.legend = parsed.legend
 
-	var rooms: Array[RoomDef] = []
+	var rooms: Array[GridDef] = []
 	var to_parse = []
 	if "rooms" in parsed:
 		to_parse = parsed.rooms
@@ -67,7 +67,7 @@ static func parse(opts: Dictionary={}) -> RoomDefs:
 	elif "chunks" in parsed:
 		to_parse = parsed.chunks
 	for r in to_parse:
-		var def = RoomDef.new()
+		var def = GridDef.new()
 		def.meta = r.duplicate(true)
 		def.meta.erase("shape")
 

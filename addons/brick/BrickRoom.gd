@@ -5,7 +5,7 @@ extends Node2D
 class BrickRoomOpts:
 	extends Object
 
-	var parsed_room_defs: RoomDefs
+	var parsed_room_defs: GridDefs
 	var room_defs_path: String
 	var contents: String
 
@@ -295,7 +295,7 @@ static func create_rooms(room_opts):
 
 ## vars
 
-var def: RoomDef
+var def: GridDef
 var rect: ColorRect
 var tilemaps: Dictionary = {}
 var entities: Array
