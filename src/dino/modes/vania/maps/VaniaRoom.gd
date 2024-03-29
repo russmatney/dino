@@ -153,11 +153,11 @@ func add_tile_chunks():
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
-		var start_coord = start_coords.pick_random()
-		if start_coord == null:
+		if start_coords.is_empty():
 			Log.warn("No position found for tile chunk!", tile_chunk)
-			# TODO try a different chunk
+			# TODO try a different chunk, maybe flip/rotate it
 			continue
+		var start_coord = start_coords.pick_random()
 
 		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
 			tile_coords.append(e_coord + start_coord)
@@ -186,10 +186,10 @@ func add_entities():
 		var start_coords = possible_positions(tmap_data, shape_dict)
 
 		for e_coord in grid.get_coords_for_entity(ent):
-			var start_coord = start_coords.pick_random()
-			if start_coord == null:
+			if start_coords.is_empty():
 				Log.warn("No position found for entity!", ent)
 				continue
+			var start_coord = start_coords.pick_random()
 			start_coords.erase(start_coord)
 
 			# place entity at random start cord

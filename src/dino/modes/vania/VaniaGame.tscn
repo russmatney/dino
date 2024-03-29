@@ -81,7 +81,7 @@ unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("4_k2nl2")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "seed: x
 room: blah.tscn"
@@ -95,7 +95,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("6_1pq7u")

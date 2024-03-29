@@ -1,9 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bvd007nsath2b"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bvd007nsath2b"]
+
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_713xp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jlnan"]
 bg_color = Color(0.831373, 0.431373, 0.764706, 0.478431)
 
 [resource]
+Button/font_sizes/font_size = 64
+Button/fonts/font = ExtResource("1_713xp")
 Button/styles/disabled = SubResource("StyleBoxFlat_jlnan")
 Button/styles/focus = SubResource("StyleBoxFlat_jlnan")
 Button/styles/hover = SubResource("StyleBoxFlat_jlnan")

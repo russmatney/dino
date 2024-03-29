@@ -22,9 +22,18 @@ var game_mode: DinoModeEntity
 
 signal player_ready(player)
 
+## seeding ##########################################################
+
+var egg: int
+
+func reseed():
+	egg = randi()
+	seed(egg)
+
 ## ready ##########################################################
 
 func _ready():
+	reseed()
 	player_set.new_player_ready.connect(func(p):
 		player_ready.emit(p))
 

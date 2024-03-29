@@ -7,18 +7,17 @@ var vania_game_scene = preload("res://src/dino/modes/vania/VaniaGame.tscn")
 @export var player_entity: DinoPlayerEntity
 var game_node: Node2D
 
-@export var _seed: int
 @export var set_random_seed: bool:
 	set(v):
 		if v and Engine.is_editor_hint():
-			_seed = randi()
+			Dino.reseed()
 
 func to_printable():
 	if player_entity != null:
 		return {
-			seed=_seed,
+			egg=Dino.egg,
 			player=player_entity.get_display_name(),}
-	return {seed=_seed}
+	return {egg=Dino.egg}
 
 ## ready ##################################################3
 
@@ -33,9 +32,7 @@ func _ready():
 ## start_game ##################################################3
 
 func start_game():
-	_seed = randi()
-	seed(_seed)
-	Log.pr("Vania game starting with seed:", self)
+	Log.pr("Vania game starting:", self)
 
 	# establish current player stack
 	if not Dino.current_player_entity():

@@ -52,6 +52,11 @@ func on_respawn_player_pressed():
 func update_room_def():
 	if current_room_def:
 		Log.pr("current rd", current_room_def)
-		regen_data_label.text = Log.to_printable([current_room_def])
+		regen_data_label.text = Log.to_printable([{
+			egg=Dino.egg,
+			room=current_room_def.room_path.get_file(),
+			neighbors=MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file()),
+			entities=current_room_def.entities,
+		}], {newlines=true})
 	else:
 		regen_data_label.text = ""

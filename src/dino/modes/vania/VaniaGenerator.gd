@@ -12,7 +12,6 @@ var tile_size = 16 # TODO fixed? dynamic?
 
 func reset_map_data():
 	for coord in cell_override_coords:
-		Log.pr("clearing cell at", coord)
 		MetSys.get_cell_override(coord, false).destroy()
 		MetSys.save_data.discovered_cells.erase(coord)
 	cell_override_coords = []
@@ -54,7 +53,6 @@ func generate_rooms():
 			set_room_scene_path(room_def)
 
 		for coord in room_def.map_cells:
-			Log.pr("assigning cell at", coord)
 			var cell := builder.create_cell(coord)
 			cell_override_coords.append(coord)
 			cell.color = room_def.bg_color

@@ -16,11 +16,12 @@ var room_defs_by_path = {}
 ## ready #######################################################
 
 func _ready():
-
 	add_custom_module.call_deferred(VaniaRoomTransitions)
 	add_custom_module.call_deferred(PassageAutomapper)
 
 	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
+
+	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
 	regenerate_rooms()
 	load_initial_room()
@@ -57,8 +58,6 @@ func setup_player():
 		Dino.respawn_active_player({level_node=self, deferred=false})
 	else:
 		Dino.spawn_player({level_node=self, deferred=false})
-
-	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
 func _set_player_position():
 	var p = Dino.current_player_node()
