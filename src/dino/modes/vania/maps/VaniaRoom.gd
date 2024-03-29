@@ -56,11 +56,11 @@ func setup_walls_and_doors():
 
 	tilemap.force_update()
 
-func is_border_coord(rect, coord):
-	return (abs(rect.position.x - coord.x) < tile_border_width) \
-		or (abs(rect.end.x - coord.x) <= tile_border_width) \
-		or (abs(rect.position.y - coord.y) < tile_border_width) \
-		or (abs(rect.end.y - coord.y) <= tile_border_width)
+func is_border_coord(rect, coord, offset=0):
+	return (abs(rect.position.x - coord.x) < tile_border_width - offset) \
+		or (abs(rect.end.x - coord.x) <= tile_border_width - offset) \
+		or (abs(rect.position.y - coord.y) < tile_border_width - offset) \
+		or (abs(rect.end.y - coord.y) <= tile_border_width - offset)
 
 func fill_tilemap_borders(opts={}):
 	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_instance.get_size()))
@@ -152,7 +152,6 @@ func add_entities():
 		var entity_opts = room_def.label_to_entity.get(ent)
 		var grids = room_def.entity_defs.grids_with_entity(ent)
 		var grid = grids.pick_random()
-		Log.pr("grid with ent", grid, grid.get_shape_dict())
 
 		# find place to put entity
 		var shape_dict = grid.get_shape_dict()
@@ -169,25 +168,26 @@ func add_entities():
 			var starting_coord = valid_starting_coords.pick_random()
 			valid_starting_coords.erase(starting_coord)
 
-			var position = tilemap.map_to_local(e_coord + starting_coord)
+			var pos = tilemap.map_to_local(e_coord + starting_coord)
 			var entity = entity_opts.scene.instantiate()
-			entity.position = position
+			entity.position = pos
 			add_child(entity)
 
 func possible_positions(tmap_data, entity_shape):
 	var positions = []
+	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_instance.get_size()))
 	for coord in tmap_data.keys():
+		# skip all but innermost border
+		if is_border_coord(rect, coord, 1):
+			continue
 		if is_fit(coord, tmap_data, entity_shape):
 			positions.append(coord)
 	return positions
 
 func is_fit(coord: Vector2i, tmap_data, entity_shape):
-	var matches = 0
 	for e_coord in entity_shape.keys():
 		var e_val = entity_shape.get(e_coord)
 		var t_val = tmap_data.get(coord + e_coord)
 		if e_val != t_val:
 			return false
-		else:
-			matches += 1
 	return true
