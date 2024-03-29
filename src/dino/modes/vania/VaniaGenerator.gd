@@ -86,7 +86,6 @@ func prepare_scene(room_def):
 # Finds valid cells to place rooms on the map
 # sets `map_cells` on each room_def
 func attach_rooms(defs: Array[VaniaRoomDef]):
-	Log.pr("attaching rooms, cells:", MetSys.map_data.cells)
 	var map_cells = {}
 	for coord in MetSys.map_data.cells.keys():
 		if coord.x < 0 and coord.y < 0:
@@ -95,24 +94,23 @@ func attach_rooms(defs: Array[VaniaRoomDef]):
 			continue
 		map_cells[coord] = true
 
+	var is_first = true
 	for def in defs:
-		attach_room(map_cells, def)
+		attach_room(map_cells, def, is_first)
+		is_first = false
 
-func attach_room(map_cells, def):
+func attach_room(map_cells, def, is_first):
 	var def_rect = Reptile.get_recti(def.local_cells)
 	var map_rect = Reptile.get_recti(map_cells.keys())
 	var possible_rect = map_rect
 	possible_rect.position -= def_rect.position
 	possible_rect.size += def_rect.size
 
-	Log.pr("def_rect", def_rect)
-	Log.pr("map_rect", map_rect)
-	Log.pr("possible rect", possible_rect)
-
 	var possible_start_coords = []
 	for start_coord in Reptile.cells_in_rect(possible_rect):
 		start_coord = Vector3i(start_coord.x, start_coord.y, 0)
-		if is_fit(start_coord, map_cells, def.get_local_cells_dict()):
+		if no_conflicting_cells(start_coord, map_cells, def.get_local_cells_dict()) and \
+			(is_first or has_neighbor(start_coord, map_cells, def.get_local_cells_dict())):
 			possible_start_coords.append(start_coord)
 
 	if possible_start_coords.is_empty():
@@ -120,7 +118,6 @@ func attach_room(map_cells, def):
 		return
 
 	var start_coord = possible_start_coords.pick_random()
-	Log.pr("found valid start_coord", start_coord)
 
 	for cell in def.local_cells:
 		# set room's map_cells for drawing
@@ -129,9 +126,26 @@ func attach_room(map_cells, def):
 		map_cells[start_coord + cell] = true
 
 
-func is_fit(start_coord, map_cells, local_cells):
+func no_conflicting_cells(start_coord, map_cells, local_cells):
 	for coord in local_cells:
 		var map_val = map_cells.get(coord + start_coord)
 		if map_val == true: # already cell here!
 			return false
 	return true
+
+func neighbor_coords(coord):
+	return [
+		coord + Vector3i(1, 0, 0),
+		coord + Vector3i(-1, 0, 0),
+		coord + Vector3i(0, 1, 0),
+		coord + Vector3i(0, -1, 0),
+		]
+
+func has_neighbor(start_coord, map_cells, local_cells):
+	for coord in local_cells:
+		var map_coord = coord + start_coord
+		var nbr_coords = neighbor_coords(map_coord)
+		var has_nbr = nbr_coords.any(func(nc): return map_cells.get(nc))
+		if has_nbr:
+			return true
+	return false
