@@ -6,6 +6,7 @@ class_name VaniaGame
 
 var generator = VaniaGenerator.new()
 var VaniaRoomTransitions = "res://src/dino/modes/vania/VaniaRoomTransitions.gd"
+var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
 var room_defs = []
 var room_defs_by_path = {}
@@ -40,6 +41,7 @@ func _ready():
 	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
 	add_custom_module.call_deferred(VaniaRoomTransitions)
+	add_custom_module.call_deferred(PassageAutomapper)
 
 func init_room():
 	Log.pr("room entered", MetSys.get_current_room_instance())

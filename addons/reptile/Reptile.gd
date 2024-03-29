@@ -262,3 +262,22 @@ static func to_area2D(tilemap=null, rect=null):
 	# 	area.position = tilemap.position
 
 	return area
+
+### misc rectangle/cell helpers
+
+static func get_width(coords):
+	var minx = U.min_of(coords, func(coord): return coord.x, 0)
+	var maxx = U.max_of(coords, func(coord): return coord.x, 0)
+	return maxx - minx + 1
+
+static func get_height(coords):
+	var miny = U.min_of(coords, func(coord): return coord.y, 0)
+	var maxy = U.max_of(coords, func(coord): return coord.y, 0)
+	return maxy - miny + 1
+
+static func get_recti(coords):
+	var minx = U.min_of(coords, func(coord): return coord.x, 0)
+	var maxx = U.max_of(coords, func(coord): return coord.x, 0) + 1
+	var miny = U.min_of(coords, func(coord): return coord.y, 0)
+	var maxy = U.max_of(coords, func(coord): return coord.y, 0) + 1
+	return Rect2i(Vector2i(minx, miny), Vector2i(maxx, maxy))

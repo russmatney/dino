@@ -3,13 +3,7 @@ class_name VaniaGenerator
 
 const GEN_MAP_DIR = "user://vania_maps"
 
-const vania_room = preload("res://src/dino/modes/vania/maps/VaniaRoom.tscn")
-const vania_room_wide = preload("res://src/dino/modes/vania/maps/VaniaRoomWide.tscn")
-const vania_room_tall = preload("res://src/dino/modes/vania/maps/VaniaRoomTall.tscn")
-const vania_room_4x = preload("res://src/dino/modes/vania/maps/VaniaRoom4x.tscn")
-
 var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
-var entity_grid_defs: GridDefs
 var room_defs: Array[VaniaRoomDef] = []
 
 var tile_size = 16 # TODO fixed? dynamic?
@@ -17,39 +11,13 @@ var tile_size = 16 # TODO fixed? dynamic?
 ## init ##########################################################
 
 func _init():
-	entity_grid_defs = GridParser.parse({defs_path=entity_defs_path})
+	var entity_defs = GridParser.parse({defs_path=entity_defs_path})
 
-	var defs = [{
-			room_type=DinoData.RoomType.SideScroller,
-			room_scene=vania_room,
-			entities=["Candle", "Player"],
-			coords=[Vector3i(0, 0, 0)],
-		}, {
-			room_type=DinoData.RoomType.SideScroller,
-			room_scene=vania_room_wide,
-			entities=["Target", "Target"],
-			coords=[Vector3i(0, -1, 0), Vector3i(1, -1, 0),]
-		}, {
-			room_type=DinoData.RoomType.SideScroller,
-			room_scene=vania_room_tall,
-			entities=["Leaf", "Leaf"],
-			coords=[Vector3i(1, 0, 0), Vector3i(1, 1, 0),]
-		}, {
-			room_type=DinoData.RoomType.SideScroller,
-			room_scene=vania_room_4x,
-			entities=["Enemy", "Enemy"],
-			coords=[
-				Vector3i(2, 0, 0), Vector3i(3, 0, 0),
-				Vector3i(2, 1, 0), Vector3i(3, 1, 0),
-				]
-		}]
-	room_defs = []
-	for i in range(len(defs)):
-		defs[i]["entity_defs"] = entity_grid_defs
-		defs[i]["tile_size"] = tile_size
-		defs[i]["index"] = i
-		room_defs.append(VaniaRoomDef.new(defs[i]))
-	room_defs.assign(defs)
+	room_defs = VaniaRoomDef.generate_defs({
+		entity_defs=entity_defs,
+		tile_size=tile_size,
+		count=6,
+		})
 
 
 ## generate_rooms ##########################################################
@@ -64,44 +32,106 @@ func generate_rooms():
 
 	var builder := MetSys.get_map_builder()
 
+	attach_rooms(room_defs)
+	var defs = []
+
 	for room_def in room_defs:
-		for coord in room_def.coords:
+		if room_def.map_cells.is_empty():
+			Log.warn("Cannot create room without map_cells", room_def)
+			continue
+
+		if not room_def.room_path:
+			set_room_scene_path(room_def)
+
+		for coord in room_def.map_cells:
 			var cell := builder.create_cell(coord)
 			cell.color = room_def.bg_color
 			for i in 4:
 				cell.borders[i] = 0
 				cell.border_colors[i] = room_def.border_color
-
-			if not room_def.room_path:
-				room_def.room_path = build_scene_name(room_def)
-
 			cell.set_assigned_scene(room_def.room_path)
 
 		prepare_scene(room_def)
+		defs.append(room_def)
 
 	builder.update_map()
 
-	return room_defs
+	return defs
 
-## build_scene_name ##############################################################
+## set_room_scene_path ##############################################################
 
-func build_scene_name(room_def) -> String:
-	var res_path = room_def.room_scene.resource_path
-	var basename = res_path.get_file().get_basename()
+func set_room_scene_path(room_def):
+	var basename = room_def.base_scene_path.get_file().get_basename()
 	var new_map = "%s%d.tscn" % [basename, room_def.index + 1]
-	return GEN_MAP_DIR.path_join(new_map)
+	room_def.room_path = GEN_MAP_DIR.path_join(new_map)
 
 ## prepare scene ##############################################################
 
 func prepare_scene(room_def):
 	# Prepare the actual scene (maybe deferred if threading)
-	var room: Node2D = room_def.room_scene.instantiate()
+	var room: Node2D = load(room_def.base_scene_path).instantiate()
 
 	room.set_room_def(room_def)
 
 	# TODO generate tiles, add entities, default doors, etc
 	# hide/show exits based on room opts, neighbors
 
+	# pack and write to room_def.room_path
 	var ps := PackedScene.new()
 	ps.pack(room)
 	ResourceSaver.save(ps, room_def.room_path)
+
+## attach_rooms ##########################################################
+
+# Finds valid cells to place rooms on the map
+# sets `map_cells` on each room_def
+func attach_rooms(defs: Array[VaniaRoomDef]):
+	Log.pr("attaching rooms, cells:", MetSys.map_data.cells)
+	var map_cells = {}
+	for coord in MetSys.map_data.cells.keys():
+		if coord.x < 0 and coord.y < 0:
+			# HEADS UP! skipping 'test' rooms in the negative quadrant
+			# TODO use layers instead
+			continue
+		map_cells[coord] = true
+
+	for def in defs:
+		attach_room(map_cells, def)
+
+func attach_room(map_cells, def):
+	var def_rect = Reptile.get_recti(def.local_cells)
+	var map_rect = Reptile.get_recti(map_cells.keys())
+	var possible_rect = map_rect
+	possible_rect.position -= def_rect.position
+	possible_rect.size += def_rect.size
+
+	Log.pr("def_rect", def_rect)
+	Log.pr("map_rect", map_rect)
+	Log.pr("possible rect", possible_rect)
+
+	var possible_start_coords = []
+	for start_coord in Reptile.cells_in_rect(possible_rect):
+		start_coord = Vector3i(start_coord.x, start_coord.y, 0)
+		if is_fit(start_coord, map_cells, def.get_local_cells_dict()):
+			possible_start_coords.append(start_coord)
+
+	if possible_start_coords.is_empty():
+		Log.warn("Could not find a possible start coord for room def", def)
+		return
+
+	var start_coord = possible_start_coords.pick_random()
+	Log.pr("found valid start_coord", start_coord)
+
+	for cell in def.local_cells:
+		# set room's map_cells for drawing
+		def.map_cells.append(start_coord + cell)
+		# update map_cells (in-place!) for the next room
+		map_cells[start_coord + cell] = true
+
+
+func is_fit(start_coord, map_cells, local_cells):
+	for coord in local_cells:
+		var map_val = map_cells.get(coord + start_coord)
+		if map_val == true: # already cell here!
+			return false
+	return true

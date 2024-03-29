@@ -282,6 +282,29 @@ static func _and(a, b = null, c = null, d = null, e = null):
 static func remove_matching(arr, to_remove):
 	return arr.filter(func(a): return a in to_remove)
 
+static func min_of(arr, to_val, default=null):
+	var m
+	for x in arr:
+		var val = to_val.call(x)
+		if m == null:
+			m = val
+		if val < m:
+			m = val
+	if m == null:
+		return default
+	return m
+
+static func max_of(arr, to_val, default=null):
+	var m
+	for x in arr:
+		var val = to_val.call(x)
+		if m == null:
+			m = val
+		if val > m:
+			m = val
+	if m == null:
+		return default
+	return m
 
 ############################################################
 # Facing
