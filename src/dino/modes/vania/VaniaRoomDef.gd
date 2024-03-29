@@ -26,6 +26,13 @@ var label_to_entity
 var label_to_tilemap
 var tile_size: int = 16
 
+func to_printable():
+	return {
+		entities=entities,
+		room_path=room_path.get_file(),
+		local_cells=local_cells,
+		}
+
 ## init #####################################################3
 
 func _init(opts={}):

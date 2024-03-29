@@ -49,17 +49,7 @@ func start_game():
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 
-	# setup level
-	# var level_def = Pandora.get_entity(LevelDefIds.BOSSBATTLE)
-	# var level_opts = {seed=_seed, skip_splash_intro=true}
-	# var level_node = DinoLevel.create_level(level_def, level_opts)
-
-	# Dino.spawn_player({level_node=level_node, deferred=false})
-
-	# level_node.level_complete.connect(_on_level_complete)
-
 	game_node = vania_game_scene.instantiate()
-	# game_node.add_level(level_node, level_def, level_opts)
 
 	add_child.call_deferred(game_node)
 

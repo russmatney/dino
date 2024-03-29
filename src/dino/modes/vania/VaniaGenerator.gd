@@ -4,25 +4,35 @@ class_name VaniaGenerator
 const GEN_MAP_DIR = "user://vania_maps"
 
 var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
-var room_defs: Array[VaniaRoomDef] = []
+var cell_override_coords: Array[Vector3i] = []
 
 var tile_size = 16 # TODO fixed? dynamic?
 
-## init ##########################################################
+## reset data ##########################################################
 
-func _init():
+func reset_map_data():
+	for coord in cell_override_coords:
+		Log.pr("clearing cell at", coord)
+		MetSys.get_cell_override(coord, false).destroy()
+		MetSys.save_data.discovered_cells.erase(coord)
+	cell_override_coords = []
+
+	MetSys.reset_state()
+	MetSys.set_save_data()
+
+## generate_rooms ##########################################################
+
+func generate_rooms():
 	var entity_defs = GridParser.parse({defs_path=entity_defs_path})
 
-	room_defs = VaniaRoomDef.generate_defs({
+	var room_defs = VaniaRoomDef.generate_defs({
 		entity_defs=entity_defs,
 		tile_size=tile_size,
 		count=6,
 		})
 
+	reset_map_data()
 
-## generate_rooms ##########################################################
-
-func generate_rooms():
 	# ensure directory exists
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
 
@@ -44,7 +54,9 @@ func generate_rooms():
 			set_room_scene_path(room_def)
 
 		for coord in room_def.map_cells:
+			Log.pr("assigning cell at", coord)
 			var cell := builder.create_cell(coord)
+			cell_override_coords.append(coord)
 			cell.color = room_def.bg_color
 			for i in 4:
 				cell.borders[i] = 0

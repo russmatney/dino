@@ -42,13 +42,16 @@ func on_edit_room_def_pressed():
 	pass
 
 func on_regen_pressed():
-	pass
+	game.regenerate_rooms()
+	game.load_initial_room()
+	game.setup_player()
 
 func on_respawn_player_pressed():
 	Dino.respawn_active_player()
 
 func update_room_def():
 	if current_room_def:
+		Log.pr("current rd", current_room_def)
 		regen_data_label.text = Log.to_printable([current_room_def])
 	else:
 		regen_data_label.text = ""
