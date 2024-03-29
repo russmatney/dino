@@ -37,6 +37,7 @@ func _ready():
 			Log.warn("No room_def on vania room!")
 
 	setup_walls_and_doors()
+	add_tile_chunks()
 	add_entities()
 
 ## setup_walls_and_doors ##############################################################
@@ -133,15 +134,40 @@ func get_door_cells_to_neighbor(neighbor):
 	var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
 	return Reptile.cells_in_rect(rect)
 
-## add_entities ##############################################################
+## add_tile_chunks ##############################################################
 
-func build_tilemap_data():
-	var tmap_data = {}
-	for cell in Reptile.cells_in_rect(tilemap.get_used_rect()):
-		tmap_data[cell] = null
-	for cell in tilemap.get_used_cells(0):
-		tmap_data[cell] = ["Tile"]
-	return tmap_data
+func add_tile_chunks():
+	Log.pr("Adding tile chunks")
+	var grids = room_def.entity_defs.grids_with_flag("tile_chunk")
+	if grids.is_empty():
+		Log.warn("No tile chunks!")
+		return
+
+	var tmap_data = build_tilemap_data()
+
+	# var count = [1, 2, 3].pick_random()
+	var count = 3
+
+	var tile_coords = []
+	for i in range(count):
+		var tile_chunk = grids.pick_random()
+		var start_coords = possible_positions(tmap_data,
+			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
+		var start_coord = start_coords.pick_random()
+		if start_coord == null:
+			Log.warn("No position found for tile chunk!", tile_chunk)
+			# TODO try a different chunk
+			continue
+
+		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
+			tile_coords.append(e_coord + start_coord)
+
+	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+
+	tilemap.force_update()
+
+
+## add_entities ##############################################################
 
 func add_entities():
 	Log.pr("Adding entities", room_def.entities)
@@ -154,24 +180,33 @@ func add_entities():
 		var grid = grids.pick_random()
 
 		# find place to put entity
-		var shape_dict = grid.get_shape_dict()
-		var entity_coords = []
-		for k in shape_dict.keys():
-			if shape_dict.get(k) == [ent]:
-				entity_coords.append(k)
-				shape_dict[k] = null
+		var shape_dict = grid.get_shape_dict({drop_entity=ent})
 
 		# TODO exclude doorways
-		var valid_starting_coords = possible_positions(tmap_data, shape_dict)
+		var start_coords = possible_positions(tmap_data, shape_dict)
 
-		for e_coord in entity_coords:
-			var starting_coord = valid_starting_coords.pick_random()
-			valid_starting_coords.erase(starting_coord)
+		for e_coord in grid.get_coords_for_entity(ent):
+			var start_coord = start_coords.pick_random()
+			if start_coord == null:
+				Log.warn("No position found for entity!", ent)
+				continue
+			start_coords.erase(start_coord)
 
-			var pos = tilemap.map_to_local(e_coord + starting_coord)
+			# place entity at random start cord
+			var pos = tilemap.map_to_local(e_coord + start_coord)
 			var entity = entity_opts.scene.instantiate()
 			entity.position = pos
 			add_child(entity)
+
+## fit helpers ##############################################################
+
+func build_tilemap_data():
+	var tmap_data = {}
+	for cell in Reptile.cells_in_rect(tilemap.get_used_rect()):
+		tmap_data[cell] = null
+	for cell in tilemap.get_used_cells(0):
+		tmap_data[cell] = ["Tile"]
+	return tmap_data
 
 func possible_positions(tmap_data, entity_shape):
 	var positions = []

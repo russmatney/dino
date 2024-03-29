@@ -39,10 +39,16 @@ func size() -> Vector2i:
 func rect() -> Rect2i:
 	return Rect2i(Vector2i(), size())
 
-func get_shape_dict():
+func get_shape_dict(opts={}):
 	var shape_dict = {}
 	for coord in coords(false):
 		shape_dict[Vector2i(coord.coord)] = coord.cell
+
+	if opts.get("drop_entity"):
+		for k in shape_dict.keys():
+			if shape_dict.get(k) == [opts.get("drop_entity")]:
+				shape_dict[k] = null
+
 	return shape_dict
 
 # Returns an array of dicts like [{"coord": Vector2, "cell": Array[String]}]
@@ -59,3 +65,10 @@ func coords(skip_nulls=true) -> Array:
 			else:
 				crds.append({coord=coord, cell=cell})
 	return crds
+
+func get_coords_for_entity(ent: String):
+	var entity_coords = []
+	for coord in coords():
+		if ent in coord.cell:
+			entity_coords.append(Vector2i(coord.coord))
+	return entity_coords

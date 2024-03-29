@@ -26,15 +26,15 @@ func filter(opts: Dictionary):
 
 	# only keep if any matching truthy piece of room 'meta' data
 	if len(opts.flags) > 0:
-		xs = xs.filter(func(r):
+		xs = xs.filter(func(x):
 			for flag in opts.flags:
-				return r.has_flag(flag))
+				return x.has_flag(flag))
 
 	# skip if any matching flag
 	if len(opts.skip_flags) > 0:
-		xs = xs.filter(func(r):
+		xs = xs.filter(func(x):
 			for flag in opts.skip_flags:
-				if r.has_flag(flag):
+				if x.has_flag(flag):
 					return false
 			return true)
 
@@ -48,3 +48,6 @@ func filter(opts: Dictionary):
 
 func grids_with_entity(entity_label):
 	return grids.filter(func(g): return g.has_label(entity_label))
+
+func grids_with_flag(flag):
+	return grids.filter(func(g): return g.has_flag(flag))
