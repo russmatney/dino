@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b8wgf0eb4hoxg"]
+
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="1_2n7xh"]
+
+[resource]
+EditorHeader/fonts/normal_font = ExtResource("1_2n7xh")
+RichTextLabel/font_sizes/normal_font_size = 48
+RichTextLabel/fonts/normal_font = ExtResource("1_2n7xh")

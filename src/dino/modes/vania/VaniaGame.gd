@@ -15,6 +15,11 @@ func get_room_def(path):
 	if path in room_defs_by_path:
 		return room_defs_by_path[path]
 
+func current_room_def():
+	var path = MetSys.get_current_room_name()
+	if path in room_defs_by_path:
+		return room_defs_by_path[path]
+
 func add_custom_module(module_path: String):
 	modules.append(load(module_path).new(self))
 
@@ -36,6 +41,11 @@ func _ready():
 		load_room(p, {setup=func(room):
 			room.set_room_def(get_room_def(p))})
 
+	if not Dino.current_player_entity():
+		Dino.create_new_player({
+			room_type=DinoData.RoomType.SideScroller,
+			entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
+			})
 	Dino.spawn_player({level_node=self, deferred=false})
 
 	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)

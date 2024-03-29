@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=9 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaGame.gd" id="1_38knr"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_8rx10"]
+[ext_resource type="Script" path="res://src/dino/modes/vania/VaniaEditor.gd" id="3_7omv4"]
+[ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="4_f2s0g"]
+[ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="4_k2nl2"]
+[ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="5_5mv8r"]
+[ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="6_1pq7u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li3ee"]
+content_margin_left = 16.0
+content_margin_right = 16.0
 
 [node name="VaniaGame" type="Node2D"]
 script = ExtResource("1_38knr")
@@ -10,3 +19,105 @@ script = ExtResource("1_38knr")
 
 [node name="Minimap" parent="CanvasLayer" instance=ExtResource("2_8rx10")]
 area = Vector2i(5, 5)
+
+[node name="VaniaEditor" type="CanvasLayer" parent="."]
+script = ExtResource("3_7omv4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VaniaEditor/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme = ExtResource("4_f2s0g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_k2nl2")
+bbcode_enabled = true
+text = "[center]Editor[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="TabContainer" type="TabContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Regeneration" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("4_k2nl2")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Regeneration[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="RegenDataLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("4_k2nl2")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "seed: x
+room: blah.tscn"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_1pq7u")
+
+[node name="RegenButtonList" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EditRoomDefButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_5mv8r")
+text = "Edit Room Def"
+
+[node name="RegenButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_5mv8r")
+text = "Regen!"
+
+[node name="RespawnPlayerButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_5mv8r")
+text = "Respawn player"
