@@ -41,3 +41,19 @@ func _init(opts={}):
 				# border_depth={down=30, left=20, right=20},
 				}
 		}
+
+func set_room_type(t: DinoData.RoomType) -> VaniaRoomDef:
+	self.room_type = t
+	return self
+
+func set_scene(sc: PackedScene) -> VaniaRoomDef:
+	self.room_scene = sc
+	return self
+
+func add_entities(ents: Array) -> VaniaRoomDef:
+	self.entities = ents
+	return self
+
+func set_coords(crds) -> VaniaRoomDef:
+	self.coords = crds
+	return self

@@ -42,10 +42,13 @@ func _init():
 				Vector3i(2, 0, 0), Vector3i(3, 0, 0),
 				Vector3i(2, 1, 0), Vector3i(3, 1, 0),
 				]
-		}].map(func(opts):
-			opts["entity_defs"] = entity_grid_defs
-			opts["tile_size"] = tile_size
-			return VaniaRoomDef.new(opts))
+		}]
+	room_defs = []
+	for i in range(len(defs)):
+		defs[i]["entity_defs"] = entity_grid_defs
+		defs[i]["tile_size"] = tile_size
+		defs[i]["index"] = i
+		room_defs.append(VaniaRoomDef.new(defs[i]))
 	room_defs.assign(defs)
 
 
@@ -62,8 +65,7 @@ func generate_rooms():
 	var builder := MetSys.get_map_builder()
 
 	for room_def in room_defs:
-		for index in range(len(room_def.coords)):
-			var coord = room_def.coords[index]
+		for coord in room_def.coords:
 			var cell := builder.create_cell(coord)
 			cell.color = room_def.bg_color
 			for i in 4:
@@ -71,7 +73,6 @@ func generate_rooms():
 				cell.border_colors[i] = room_def.border_color
 
 			if not room_def.room_path:
-				room_def.index = index
 				room_def.room_path = build_scene_name(room_def)
 
 			cell.set_assigned_scene(room_def.room_path)
