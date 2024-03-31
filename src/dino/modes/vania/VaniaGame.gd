@@ -121,8 +121,11 @@ func on_room_loaded():
 	Log.pr("room entered", MetSys.get_current_room_instance())
 	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
 
-	# MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)
-	# player.on_enter()
+	# var p = Dino.current_player_node()
+	# if p != null:
+	# 	var cam = p.get_node("Cam2D")
+	# 	if cam != null:
+	# 		MetSys.get_current_room_instance().adjust_camera_limits(cam)
 
 ## load room #######################################################
 
