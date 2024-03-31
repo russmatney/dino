@@ -6,7 +6,13 @@ extends CanvasLayer
 var game: VaniaGame
 var current_room_def: VaniaRoomDef
 
-@onready var regen_data_label = $%RegenDataLabel
+@onready var seed_label = $%SeedLabel
+@onready var current_room_label = $%CurrentRoomLabel
+@onready var room_entities_label = $%RoomEntitiesLabel
+@onready var neighbors_label = $%NeighborsLabel
+@onready var room_tiles_label = $%RoomTilesLabel
+@onready var room_count_label = $%RoomCountLabel
+
 @onready var edit_room_def_button = $%EditRoomDefButton
 @onready var regen_button = $%RegenButton
 @onready var respawn_player_button = $%RespawnPlayerButton
@@ -50,11 +56,9 @@ func on_respawn_player_pressed():
 func update_room_def():
 	if current_room_def:
 		Log.pr("current rd", current_room_def)
-		regen_data_label.text = Log.to_printable([{
-			egg=Dino.egg,
-			room=current_room_def.room_path.get_file(),
-			neighbors=MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file()),
-			entities=current_room_def.entities,
-		}], {newlines=true})
-	else:
-		regen_data_label.text = ""
+		seed_label.text = "seed: %s" % Dino.egg
+		current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
+		room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
+		neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
+		# room_tiles_label.text = Log.to_printable([current_room_def.entities])
+		room_count_label.text = "rooms: %s" % len(game.room_defs)
