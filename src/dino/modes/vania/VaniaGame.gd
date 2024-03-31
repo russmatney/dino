@@ -11,7 +11,6 @@ var VaniaRoomTransitions = "res://src/dino/modes/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
 var room_defs = []
-var room_defs_by_path = {}
 
 # capture as RoomGenInputs
 var tile_size = 16 # TODO fixed? dynamic?
@@ -35,9 +34,12 @@ func _ready():
 func init_rooms():
 	room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=initial_room_count})
 
-	room_defs = generator.add_rooms_to_map(room_defs, {clear_all_rooms=true})
+	room_defs = generator.add_rooms_to_map(room_defs)
+	Log.pr(len(room_defs), " room defs in play")
+
 	for rd in room_defs:
-		room_defs_by_path[rd.room_path] = rd
+		for coord in rd.map_cells:
+			MetSys.discover_cell(coord)
 
 	load_initial_room()
 	setup_player()
@@ -45,14 +47,24 @@ func init_rooms():
 # regenerate rooms besides the current one
 func regenerate_other_rooms():
 	var other_room_defs = []
-	for path in room_defs_by_path.keys():
-		if MetSys.get_current_room_name() == path:
+	for rd in room_defs:
+		if MetSys.get_current_room_name() == rd.room_path:
 			continue
-		other_room_defs.append(room_defs_by_path[path])
+		other_room_defs.append(rd)
 
-	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=len(other_room_defs)})
+	var new_room_defs = VaniaRoomDef.generate_defs({
+		tile_size=tile_size, count=len(other_room_defs),
+		})
+	new_room_defs = generator.add_rooms_to_map(new_room_defs, {clear_rooms=other_room_defs})
+	new_room_defs.append(current_room_def())
 
-	generator.add_rooms_to_map(new_room_defs, {clear_rooms=other_room_defs})
+	room_defs = new_room_defs
+	Log.pr(len(room_defs), " room defs in play")
+
+	for rd in room_defs:
+		for coord in rd.map_cells:
+			MetSys.discover_cell(coord)
+
 	# redo the current room's doors
 	map.setup_walls_and_doors()
 
@@ -100,13 +112,13 @@ func _set_player_position():
 ## room defs #######################################################
 
 func get_room_def(path):
-	if path in room_defs_by_path:
-		return room_defs_by_path[path]
+	for rd in room_defs:
+		if path == rd.room_path:
+			return rd
 
 func current_room_def():
 	var path = MetSys.get_current_room_name()
-	if path in room_defs_by_path:
-		return room_defs_by_path[path]
+	return get_room_def(path)
 
 ## metsys misc #######################################################
 

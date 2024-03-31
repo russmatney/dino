@@ -21,10 +21,7 @@ func _on_room_changed(target_room: String):
 		room.set_room_def(game.get_room_def(target_room))})
 
 	var og_player = Dino.current_player_node()
-	Log.pr("og player velocity", og_player.velocity)
 	if (new_room_def.room_type != prev_room_def.room_type):
-		Log.pr("room type change, need to update player!")
-
 		var player_parent = og_player.get_parent()
 		# TODO carry over velocity/momentum, plus probably other stats (health,items,etc)
 		Dino.respawn_active_player({

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=10 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaGame.gd" id="1_38knr"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_3mcvu"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_8rx10"]
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaEditor.gd" id="3_7omv4"]
 [ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="4_f2s0g"]
@@ -15,10 +16,17 @@ content_margin_right = 16.0
 [node name="VaniaGame" type="Node2D"]
 script = ExtResource("1_38knr")
 
+[node name="DinoHUD" parent="." instance=ExtResource("2_3mcvu")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Minimap" parent="CanvasLayer" instance=ExtResource("2_8rx10")]
-area = Vector2i(5, 5)
+offset_top = 174.0
+offset_right = 240.0
+offset_bottom = 334.0
+area = Vector2i(13, 13)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="VaniaEditor" type="CanvasLayer" parent="."]
 script = ExtResource("3_7omv4")
