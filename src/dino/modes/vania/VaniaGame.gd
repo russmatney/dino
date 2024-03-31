@@ -96,9 +96,9 @@ func remove_room(count=1):
 			continue
 		other_room_defs.append(rd)
 
-	# TODO when removing, don't leave orphans!!
+	# TODO when removing, don't leave orphans.... unless they're fun to work with?
 	var room_defs_to_remove = []
-	other_room_defs.shuffle()
+	other_room_defs.reverse() # prefer to remove the latest room for now
 	for rd in other_room_defs:
 		if len(room_defs_to_remove) >= count:
 			break
