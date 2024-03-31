@@ -13,9 +13,16 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 var room_defs = []
 var room_defs_by_path = {}
 
+# capture as RoomGenInputs
+var tile_size = 16 # TODO fixed? dynamic?
+var initial_room_count = 3
+
 ## ready #######################################################
 
 func _ready():
+	MetSys.reset_state()
+	MetSys.set_save_data()
+
 	add_custom_module.call_deferred(VaniaRoomTransitions)
 	add_custom_module.call_deferred(PassageAutomapper)
 
@@ -23,9 +30,32 @@ func _ready():
 
 	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
-	regenerate_rooms()
+	init_rooms()
+
+func init_rooms():
+	room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=initial_room_count})
+
+	room_defs = generator.add_rooms_to_map(room_defs, {clear_all_rooms=true})
+	for rd in room_defs:
+		room_defs_by_path[rd.room_path] = rd
+
 	load_initial_room()
 	setup_player()
+
+# regenerate rooms besides the current one
+func regenerate_other_rooms():
+	var other_room_defs = []
+	for path in room_defs_by_path.keys():
+		if MetSys.get_current_room_name() == path:
+			continue
+		other_room_defs.append(room_defs_by_path[path])
+
+	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=len(other_room_defs)})
+
+	generator.add_rooms_to_map(new_room_defs, {clear_rooms=other_room_defs})
+	# redo the current room's doors
+	map.setup_walls_and_doors()
+
 
 func on_room_loaded():
 	Log.pr("room entered", MetSys.get_current_room_instance())
@@ -41,8 +71,11 @@ func load_initial_room():
 		Log.warn("No room_defs returned, did the generator fail?")
 		return
 	else:
-		# TODO filter for room with player entity
-		var p = room_defs[0].room_path
+		var rooms = room_defs.filter(func(rd): return "Player" in rd.entities)
+		if rooms.is_empty():
+			Log.warn("No room with player entity! Picking random start room")
+			rooms = room_defs
+		var p = rooms.pick_random().room_path
 		load_room(p, {setup=func(room):
 			room.set_room_def(get_room_def(p))})
 
@@ -65,11 +98,6 @@ func _set_player_position():
 		MetSys.set_player_position(p.position)
 
 ## room defs #######################################################
-
-func regenerate_rooms():
-	room_defs = generator.generate_rooms() # add new rooms/cells to metsys map_data
-	for rd in room_defs:
-		room_defs_by_path[rd.room_path] = rd
 
 func get_room_def(path):
 	if path in room_defs_by_path:

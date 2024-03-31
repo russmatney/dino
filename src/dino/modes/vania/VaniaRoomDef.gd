@@ -19,6 +19,7 @@ var border_color: Color = Color.WHITE
 
 var index: int
 
+var tile_defs: GridDefs
 var entity_defs: GridDefs
 var entities: Array #[String]
 
@@ -109,12 +110,20 @@ func select_entities():
 ## static #####################################################3
 
 static func generate_defs(opts={}):
+	var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
+	var e_defs = GridParser.parse({defs_path=entity_defs_path})
+	var tile_defs_path = "res://src/dino/modes/vania/tiles.txt"
+	var t_defs = GridParser.parse({defs_path=tile_defs_path})
+
 	var defs: Array[VaniaRoomDef] = []
 	var fixed = [
 		{entities=["Candle", "Player", "Target", "Leaf"]}
 		]
 	for i in range(opts.get("count", 4)):
-		var data = {entity_defs=opts.get("entity_defs"), tile_size=opts.get("tile_size"),}
+		var data = {
+			entity_defs=e_defs,
+			tile_defs=t_defs,
+			tile_size=opts.get("tile_size"),}
 		if i < len(fixed):
 			data.merge(fixed[i])
 

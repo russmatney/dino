@@ -3,34 +3,26 @@ class_name VaniaGenerator
 
 const GEN_MAP_DIR = "user://vania_maps"
 
-var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
-var cell_override_coords: Array[Vector3i] = []
-
-var tile_size = 16 # TODO fixed? dynamic?
-
 ## reset data ##########################################################
 
-func reset_map_data():
-	for coord in cell_override_coords:
-		MetSys.get_cell_override(coord, false).destroy()
-		MetSys.save_data.discovered_cells.erase(coord)
-	cell_override_coords = []
+func reset_map_data(opts={}):
+	var coords = []
+	if not opts.get("clear_rooms", []).is_empty():
+		opts.get("clear_rooms").map(func(rd):
+			coords.append_array(rd.map_cells))
+	if opts.get("clear_all_rooms"):
+		coords = MetSys.map_data.cells.keys()
 
-	MetSys.reset_state()
-	MetSys.set_save_data()
+	for coord in coords:
+		var override = MetSys.get_cell_override(coord, false)
+		if override != null:
+			override.destroy()
+			MetSys.save_data.discovered_cells.erase(coord)
 
-## generate_rooms ##########################################################
+## add_rooms_to_map ##########################################################
 
-func generate_rooms():
-	var entity_defs = GridParser.parse({defs_path=entity_defs_path})
-
-	var room_defs = VaniaRoomDef.generate_defs({
-		entity_defs=entity_defs,
-		tile_size=tile_size,
-		count=6,
-		})
-
-	reset_map_data()
+func add_rooms_to_map(room_defs, opts={}):
+	reset_map_data(opts)
 
 	# ensure directory exists
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
@@ -41,7 +33,8 @@ func generate_rooms():
 
 	var builder := MetSys.get_map_builder()
 
-	attach_rooms(room_defs)
+	place_rooms(room_defs)
+
 	var defs = []
 
 	for room_def in room_defs:
@@ -54,7 +47,6 @@ func generate_rooms():
 
 		for coord in room_def.map_cells:
 			var cell := builder.create_cell(coord)
-			cell_override_coords.append(coord)
 			cell.color = room_def.bg_color
 			for i in 4:
 				cell.borders[i] = 0
@@ -91,11 +83,11 @@ func prepare_scene(room_def):
 	ps.pack(room)
 	ResourceSaver.save(ps, room_def.room_path)
 
-## attach_rooms ##########################################################
+## place_rooms ##########################################################
 
 # Finds valid cells to place rooms on the map
 # sets `map_cells` on each room_def
-func attach_rooms(defs: Array[VaniaRoomDef]):
+func place_rooms(defs: Array[VaniaRoomDef]):
 	var map_cells = {}
 	for coord in MetSys.map_data.cells.keys():
 		if coord.x < 0 and coord.y < 0:
@@ -134,7 +126,6 @@ func attach_room(map_cells, def, is_first):
 		def.map_cells.append(start_coord + cell)
 		# update map_cells (in-place!) for the next room
 		map_cells[start_coord + cell] = true
-
 
 func no_conflicting_cells(start_coord, map_cells, local_cells):
 	for coord in local_cells:

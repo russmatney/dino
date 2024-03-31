@@ -50,6 +50,9 @@ static func parse(opts: Dictionary={}) -> GridDefs:
 		if not path:
 			Log.err("Cannot parse, no defs_path", rp_opts)
 			return null
+		if not FileAccess.file_exists(path):
+			Log.err("Cannot parse defs_path, file does not exist", rp_opts)
+			return null
 		grid_defs.path = path
 		var file = FileAccess.open(path, FileAccess.READ)
 		contents = file.get_as_text()

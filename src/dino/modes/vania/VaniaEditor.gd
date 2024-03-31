@@ -42,9 +42,7 @@ func on_edit_room_def_pressed():
 	pass
 
 func on_regen_pressed():
-	game.regenerate_rooms()
-	game.load_initial_room()
-	game.setup_player()
+	game.regenerate_other_rooms()
 
 func on_respawn_player_pressed():
 	Dino.respawn_active_player()
