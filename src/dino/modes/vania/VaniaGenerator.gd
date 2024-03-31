@@ -2,6 +2,7 @@ extends RefCounted
 class_name VaniaGenerator
 
 const GEN_MAP_DIR = "user://vania_maps"
+var global_room_num = 0
 
 ## reset data ##########################################################
 
@@ -69,7 +70,8 @@ func add_rooms_to_map(room_defs, opts={}):
 
 func set_room_scene_path(room_def):
 	var basename = room_def.base_scene_path.get_file().get_basename()
-	var new_map = "%s%d.tscn" % [basename, room_def.index + 1]
+	var new_map = "%s%d.tscn" % [basename, global_room_num]
+	global_room_num += 1
 	room_def.room_path = GEN_MAP_DIR.path_join(new_map)
 
 ## prepare scene ##############################################################
