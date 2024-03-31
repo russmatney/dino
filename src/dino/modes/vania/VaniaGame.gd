@@ -14,7 +14,16 @@ var room_defs = []
 
 # capture as RoomGenInputs
 var tile_size = 16 # TODO fixed? dynamic?
-var initial_room_count = 3
+var desired_room_count = 3
+
+func increment_room_count():
+	desired_room_count += 1
+	add_new_room(1)
+
+func decrement_room_count():
+	desired_room_count -= 1
+	desired_room_count = maxi(1, desired_room_count)
+	remove_room(1)
 
 ## ready #######################################################
 
@@ -32,10 +41,9 @@ func _ready():
 	init_rooms()
 
 func init_rooms():
-	room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=initial_room_count})
+	room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=desired_room_count})
 
 	room_defs = generator.add_rooms_to_map(room_defs)
-	Log.pr(len(room_defs), " room defs in play")
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -53,13 +61,53 @@ func regenerate_other_rooms():
 		other_room_defs.append(rd)
 
 	var new_room_defs = VaniaRoomDef.generate_defs({
-		tile_size=tile_size, count=len(other_room_defs),
+		tile_size=tile_size, count=desired_room_count - 1,
 		})
-	new_room_defs = generator.add_rooms_to_map(new_room_defs, {clear_rooms=other_room_defs})
+	generator.remove_rooms_from_map(other_room_defs)
+	new_room_defs = generator.add_rooms_to_map(new_room_defs)
 	new_room_defs.append(current_room_def())
 
 	room_defs = new_room_defs
-	Log.pr(len(room_defs), " room defs in play")
+
+	for rd in room_defs:
+		for coord in rd.map_cells:
+			MetSys.discover_cell(coord)
+
+	# redo the current room's doors
+	map.setup_walls_and_doors()
+
+func add_new_room(count=1):
+	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=count})
+	new_room_defs = generator.add_rooms_to_map(new_room_defs)
+	room_defs.append_array(new_room_defs)
+	Log.pr(len(room_defs), " new rooms added")
+
+	for rd in room_defs:
+		for coord in rd.map_cells:
+			MetSys.discover_cell(coord)
+
+	# redo the current room's doors
+	map.setup_walls_and_doors()
+
+func remove_room(count=1):
+	var other_room_defs = []
+	for rd in room_defs:
+		if MetSys.get_current_room_name() == rd.room_path:
+			continue
+		other_room_defs.append(rd)
+
+	# TODO when removing, don't leave orphans!!
+	var room_defs_to_remove = []
+	other_room_defs.shuffle()
+	for rd in other_room_defs:
+		if len(room_defs_to_remove) >= count:
+			break
+		room_defs_to_remove.append(rd)
+		room_defs.erase(rd)
+
+	generator.remove_rooms_from_map(room_defs_to_remove)
+
+	Log.pr(len(room_defs), " new rooms added")
 
 	for rd in room_defs:
 		for coord in rd.map_cells:

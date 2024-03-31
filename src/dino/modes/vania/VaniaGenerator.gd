@@ -6,16 +6,15 @@ var global_room_num = 0
 
 ## reset data ##########################################################
 
-func reset_map_data(opts={}):
+func remove_rooms_from_map(room_defs):
 	var coords = []
 
-	var clear_rooms = opts.get("clear_rooms", [])
-	if not clear_rooms.is_empty():
-		Log.pr("clearing ", len(clear_rooms), "from the map")
-		clear_rooms.map(func(rd):
+	if not room_defs.is_empty():
+		Log.pr("clearing ", len(room_defs), "from the map")
+		room_defs.map(func(rd):
 			coords.append_array(rd.map_cells))
 
-	# TODO also clear discovered cells? they seem to stick around
+	# TODO also clear visited cells? they seem to stick around
 	for coord in coords:
 		var override = MetSys.get_cell_override(coord, false)
 		if override != null:
@@ -26,15 +25,14 @@ func reset_map_data(opts={}):
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
 
 	# delete contents in directory
-	var cleared_room_paths = clear_rooms.map(func(rd): return rd.room_path)
+	var cleared_room_paths = room_defs.map(func(rd): return rd.room_path)
 	for file in DirAccess.get_files_at(GEN_MAP_DIR):
 		if file in cleared_room_paths:
 			DirAccess.remove_absolute(GEN_MAP_DIR.path_join(file))
 
 ## add_rooms_to_map ##########################################################
 
-func add_rooms_to_map(room_defs, opts={}):
-	reset_map_data(opts)
+func add_rooms_to_map(room_defs):
 	Log.pr("adding ", len(room_defs), "to the map")
 
 	var builder := MetSys.get_map_builder()

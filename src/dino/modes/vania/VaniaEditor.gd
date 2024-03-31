@@ -14,8 +14,11 @@ var current_room_def: VaniaRoomDef
 @onready var room_count_label = $%RoomCountLabel
 
 @onready var edit_room_def_button = $%EditRoomDefButton
-@onready var regen_button = $%RegenButton
 @onready var respawn_player_button = $%RespawnPlayerButton
+
+@onready var regen_button = $%RegenButton
+@onready var inc_room_count_button = $%IncRoomCountButton
+@onready var dec_room_count_button = $%DecRoomCountButton
 
 ## enter tree ######################################################
 
@@ -35,8 +38,11 @@ func _ready():
 	update_room_def()
 
 	edit_room_def_button.pressed.connect(on_edit_room_def_pressed)
-	regen_button.pressed.connect(on_regen_pressed)
 	respawn_player_button.pressed.connect(on_respawn_player_pressed)
+
+	regen_button.pressed.connect(on_regen_pressed)
+	inc_room_count_button.pressed.connect(on_inc_room_count_pressed)
+	dec_room_count_button.pressed.connect(on_dec_room_count_pressed)
 
 func on_room_loaded():
 	current_room_def = game.current_room_def()
@@ -50,6 +56,15 @@ func on_edit_room_def_pressed():
 func on_regen_pressed():
 	game.regenerate_other_rooms()
 
+func on_inc_room_count_pressed():
+	game.increment_room_count()
+	update_room_def()
+
+func on_dec_room_count_pressed():
+	game.decrement_room_count()
+	update_room_def()
+
+
 func on_respawn_player_pressed():
 	Dino.respawn_active_player()
 
@@ -61,4 +76,4 @@ func update_room_def():
 		room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
 		neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
 		# room_tiles_label.text = Log.to_printable([current_room_def.entities])
-		room_count_label.text = "rooms: %s" % len(game.room_defs)
+		room_count_label.text = "rooms: %s (%s)" % [len(game.room_defs), game.desired_room_count]

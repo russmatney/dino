@@ -192,6 +192,23 @@ layout_mode = 2
 theme = ExtResource("5_5mv8r")
 text = "Edit Room Def"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+layout_mode = 2
+
+[node name="IncRoomCountButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_5mv8r")
+text = "++rooms"
+
+[node name="DecRoomCountButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_5mv8r")
+text = "--rooms"
+
 [node name="RegenButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
