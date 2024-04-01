@@ -36,9 +36,22 @@ func _ready():
 		if not room_def:
 			Log.warn("No room_def on vania room!")
 
+	setup_tileset()
 	setup_walls_and_doors()
 	add_tile_chunks()
 	add_entities()
+
+func setup_tileset():
+	if not room_def:
+		Log.warn("cannot setup tileset without room_def")
+		return
+	var rd_tilemap = room_def.label_to_tilemap.get("Tile")
+	if rd_tilemap:
+		Log.pr("setting up tileset:", rd_tilemap)
+		var inst = rd_tilemap.scene.instantiate()
+		tilemap.set_tileset(inst.get_tileset())
+	else:
+		Log.warn("cannot setup tileset without room_def.label_to_tilemap.get('Tile')")
 
 ## setup_walls_and_doors ##############################################################
 

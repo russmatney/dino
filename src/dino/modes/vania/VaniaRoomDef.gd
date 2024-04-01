@@ -24,7 +24,7 @@ var entity_defs: GridDefs
 var entities: Array #[String]
 
 var label_to_entity
-var label_to_tilemap
+var label_to_tilemap = {}
 var tile_size: int = 16
 
 func to_printable():
@@ -54,12 +54,6 @@ func _init(opts={}):
 	tile_size = opts.get("tile_size", tile_size)
 
 	label_to_entity = DinoLevelGenData.label_to_entity({tile_size=tile_size})
-	label_to_tilemap = {
-			"Tile": {
-				scene=load("res://addons/reptile/tilemaps/GrassTiles16.tscn"),
-				# border_depth={down=30, left=20, right=20},
-				}
-		}
 
 ## setters #####################################################3
 
@@ -107,6 +101,25 @@ func select_entities():
 	self.entities = ents
 	return self
 
+var tilemap_scenes = [
+		# "res://addons/reptile/tilemaps/GrassTiles16.tscn",
+		# "res://addons/reptile/tilemaps/SnowTiles16.tscn",
+		# "res://addons/reptile/tilemaps/CaveTiles16.tscn",
+		# "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
+		"res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",
+		"res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",
+		"res://addons/reptile/tilemaps/VolcanoTiles8.tscn",
+		"res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",
+		"res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",
+	]
+
+func select_tilemap():
+	var tilemap_scene = tilemap_scenes.pick_random()
+	self.label_to_tilemap = {
+			"Tile": {scene=load(tilemap_scene)}
+		}
+	return self
+
 ## static #####################################################3
 
 static func generate_defs(opts={}):
@@ -133,6 +146,8 @@ static func generate_defs(opts={}):
 
 		if def.entities.is_empty():
 			def.select_entities()
+
+		def.select_tilemap()
 
 		def.index = i
 		defs.append(def)
