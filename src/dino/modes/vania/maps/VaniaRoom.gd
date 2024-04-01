@@ -55,15 +55,19 @@ func setup_tileset():
 	if rd_tilemap:
 		Log.pr("setting up tileset:", rd_tilemap)
 		var inst = rd_tilemap.scene.instantiate()
-		tilemap.set_tileset(inst.get_tileset())
-		bg_tilemap.set_tileset(inst.get_tileset())
-		bg_tilemap.set("modulate:a", 0.4)
-		# bg_tilemap.get_tileset().set_collision_layer_value(1, false)
-		# bg_tilemap.get_tileset().set_collision_mask_value(1, false)
-		bg_tilemap.set_z_index(-5)
+		tilemap.set_tileset(inst.get_tileset().duplicate(true))
 
+		# TODO support multiple bg_tilesets
+		bg_tilemap.set_tileset(inst.get_tileset().duplicate(true))
+		Reptile.disable_collisions(bg_tilemap)
+
+		bg_tilemap.modulate.a = 0.3
+		bg_tilemap.set_z_index(-5)
 	else:
 		Log.warn("cannot setup tileset without room_def.label_to_tilemap.get('Tile')")
+
+func clear_background_tiles():
+	bg_tilemap.clear()
 
 func add_background_tiles():
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
@@ -71,10 +75,10 @@ func add_background_tiles():
 		Log.warn("No tile chunks!")
 		return
 
-	var tmap_data = build_tilemap_data()
+	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
 
 	# var count = [1, 2, 3].pick_random()
-	var count = 8
+	var count = 50
 
 	var tile_coords = []
 	for i in range(count):
@@ -95,7 +99,6 @@ func add_background_tiles():
 	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
 
 	bg_tilemap.force_update()
-	pass
 
 ## setup_walls_and_doors ##############################################################
 
@@ -209,7 +212,7 @@ func add_tile_chunks():
 	var tmap_data = build_tilemap_data()
 
 	# var count = [1, 2, 3].pick_random()
-	var count = 3
+	var count = 0
 
 	var tile_coords = []
 	for i in range(count):

@@ -177,7 +177,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("6_1pq7u")
@@ -191,6 +191,12 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_5mv8r")
 text = "Edit Room Def"
+
+[node name="RerenderBackgroundButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_5mv8r")
+text = "Rerender Background"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 layout_mode = 2

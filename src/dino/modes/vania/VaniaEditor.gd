@@ -19,6 +19,7 @@ var current_room_def: VaniaRoomDef
 @onready var regen_button = $%RegenButton
 @onready var inc_room_count_button = $%IncRoomCountButton
 @onready var dec_room_count_button = $%DecRoomCountButton
+@onready var rerender_background_button = $%RerenderBackgroundButton
 
 ## enter tree ######################################################
 
@@ -43,6 +44,7 @@ func _ready():
 	regen_button.pressed.connect(on_regen_pressed)
 	inc_room_count_button.pressed.connect(on_inc_room_count_pressed)
 	dec_room_count_button.pressed.connect(on_dec_room_count_pressed)
+	rerender_background_button.pressed.connect(on_rerender_background_pressed)
 
 func on_room_loaded():
 	current_room_def = game.current_room_def()
@@ -64,6 +66,9 @@ func on_dec_room_count_pressed():
 	game.decrement_room_count()
 	update_room_def()
 
+func on_rerender_background_pressed():
+	game.map.clear_background_tiles()
+	game.map.add_background_tiles()
 
 func on_respawn_player_pressed():
 	Dino.respawn_active_player()

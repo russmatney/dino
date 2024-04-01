@@ -281,3 +281,11 @@ static func get_recti(coords):
 	var miny = U.min_of(coords, func(coord): return coord.y, 0)
 	var maxy = U.max_of(coords, func(coord): return coord.y, 0) + 1
 	return Rect2i(Vector2i(minx, miny), Vector2i(maxx, maxy))
+
+### Tilesets
+
+static func disable_collisions(tilemap):
+	var tileset = tilemap.get_tileset()
+	for i in range(tileset.get_physics_layers_count()):
+		tileset.set_physics_layer_collision_layer(i, 0)
+		tileset.set_physics_layer_collision_mask(i, 0)
