@@ -50,6 +50,7 @@ func _ready():
 	add_tile_chunks()
 	add_entities()
 
+# TODO use neighbor tileset as background near the door
 func setup_tileset():
 	var rd_tilemap = room_def.label_to_tilemap.get("Tile")
 	if rd_tilemap:

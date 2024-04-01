@@ -80,5 +80,5 @@ func update_room_def():
 		current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
 		room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
 		neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
-		# room_tiles_label.text = Log.to_printable([current_room_def.entities])
+		room_tiles_label.text = "tileset: %s" % current_room_def.label_to_tilemap.get("Tile").scene.resource_path.get_file()
 		room_count_label.text = "rooms: %s (%s)" % [len(game.room_defs), game.desired_room_count]
