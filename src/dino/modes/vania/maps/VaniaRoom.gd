@@ -11,6 +11,7 @@ var room_def: VaniaRoomDef
 func set_room_def(def: VaniaRoomDef):
 	room_def = def
 var tilemap: TileMap
+var bg_tilemap: TileMap
 
 ## init ###############################################################
 
@@ -21,9 +22,15 @@ func ensure_tilemap():
 	if tilemap == null:
 		tilemap = get_node_or_null("TileMap")
 	if tilemap == null and not tilemap_scenes.is_empty():
-		tilemap = tilemap_scenes[0].instantiate()
+		tilemap = TileMap.new()
 		add_child(tilemap)
 		tilemap.set_owner(self)
+
+	if bg_tilemap == null:
+		bg_tilemap = get_node_or_null("BackgroundTileMap")
+	bg_tilemap = TileMap.new()
+	add_child(bg_tilemap)
+	bg_tilemap.set_owner(self)
 
 ## ready ##############################################################
 
@@ -35,23 +42,60 @@ func _ready():
 	else:
 		if not room_def:
 			Log.warn("No room_def on vania room!")
+			return
 
 	setup_tileset()
+	add_background_tiles()
 	setup_walls_and_doors()
 	add_tile_chunks()
 	add_entities()
 
 func setup_tileset():
-	if not room_def:
-		Log.warn("cannot setup tileset without room_def")
-		return
 	var rd_tilemap = room_def.label_to_tilemap.get("Tile")
 	if rd_tilemap:
 		Log.pr("setting up tileset:", rd_tilemap)
 		var inst = rd_tilemap.scene.instantiate()
 		tilemap.set_tileset(inst.get_tileset())
+		bg_tilemap.set_tileset(inst.get_tileset())
+		bg_tilemap.set("modulate:a", 0.4)
+		# bg_tilemap.get_tileset().set_collision_layer_value(1, false)
+		# bg_tilemap.get_tileset().set_collision_mask_value(1, false)
+		bg_tilemap.set_z_index(-5)
+
 	else:
 		Log.warn("cannot setup tileset without room_def.label_to_tilemap.get('Tile')")
+
+func add_background_tiles():
+	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
+	if grids.is_empty():
+		Log.warn("No tile chunks!")
+		return
+
+	var tmap_data = build_tilemap_data()
+
+	# var count = [1, 2, 3].pick_random()
+	var count = 8
+
+	var tile_coords = []
+	for i in range(count):
+		var tile_chunk = grids.pick_random()
+		var start_coords = possible_positions(tmap_data,
+			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
+		if start_coords.is_empty():
+			Log.warn("No position found for tile chunk!", tile_chunk)
+			# TODO try a different chunk, maybe flip/rotate it
+			continue
+		var start_coord = start_coords.pick_random()
+
+		for e_coord in tile_chunk.get_coords_for_entity("Tile"):
+			tile_coords.append(e_coord + start_coord)
+		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
+			tile_coords.append(e_coord + start_coord)
+
+	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+
+	bg_tilemap.force_update()
+	pass
 
 ## setup_walls_and_doors ##############################################################
 
@@ -157,7 +201,7 @@ func get_door_cells_to_neighbor(neighbor):
 
 func add_tile_chunks():
 	Log.pr("Adding tile chunks")
-	var grids = room_def.entity_defs.grids_with_flag("tile_chunk")
+	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
 		return

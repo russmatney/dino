@@ -47,6 +47,7 @@ func _init(opts={}):
 	bg_color = opts.get("bg_color", bg_color)
 	border_color = opts.get("border_color", border_color)
 
+	tile_defs = opts.get("tile_defs")
 	entity_defs = opts.get("entity_defs")
 	if opts.get("entities"):
 		entities = opts.get("entities")
