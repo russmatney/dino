@@ -111,41 +111,47 @@ func get_possible_neighbor_doors():
 	return neighbors
 
 func get_door_cells_to_neighbor(neighbor):
-	var door = neighbor.possible_doors.pick_random()
-	var wall = door[1] - door[0]
-	wall = Vector2(wall.x, wall.y)
+	# var door = neighbor.possible_doors.pick_random()
+	# for now, open _all_ neighbor doors
+	var doors = neighbor.possible_doors
+	var door_cells = []
 
-	var room_cell = room_instance.to_local_cell(door[0])
-	var cell_rect = room_instance.get_cell_rect(room_cell)
+	for door in doors:
+		var wall = door[1] - door[0]
+		wall = Vector2(wall.x, wall.y)
 
-	var cell_width = MetSys.settings.in_game_cell_size.x
-	var cell_height = MetSys.settings.in_game_cell_size.y
+		var room_cell = room_instance.to_local_cell(door[0])
+		var cell_rect = room_instance.get_cell_rect(room_cell)
 
-	var border_width = tile_border_width * room_def.tile_size
-	var door_width = tile_door_width * room_def.tile_size
+		var cell_width = MetSys.settings.in_game_cell_size.x
+		var cell_height = MetSys.settings.in_game_cell_size.y
 
-	var door_rect = Rect2()
-	match wall:
-		Vector2.LEFT:
-			door_rect.position = cell_rect.position
-			door_rect.position.y += (cell_height - door_width) / 2
-			door_rect.size = Vector2(border_width, door_width)
-		Vector2.RIGHT:
-			door_rect.position = cell_rect.position + Vector2.RIGHT * (cell_width - border_width)
-			door_rect.position.y += (cell_height - door_width) / 2
-			door_rect.size = Vector2(border_width, door_width)
-		Vector2.UP:
-			door_rect.position = cell_rect.position
-			door_rect.position.x += (cell_width - door_width) / 2
-			door_rect.size = Vector2(door_width, border_width)
-		Vector2.DOWN:
-			door_rect.position = Vector2(cell_rect.position.x, cell_rect.end.y)
-			door_rect.position.y -= border_width
-			door_rect.position.x += (cell_width - door_width) / 2
-			door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
+		var border_width = tile_border_width * room_def.tile_size
+		var door_width = tile_door_width * room_def.tile_size
 
-	var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
-	return Reptile.cells_in_rect(rect)
+		var door_rect = Rect2()
+		match wall:
+			Vector2.LEFT:
+				door_rect.position = cell_rect.position
+				door_rect.position.y += (cell_height - door_width) / 2
+				door_rect.size = Vector2(border_width, door_width)
+			Vector2.RIGHT:
+				door_rect.position = cell_rect.position + Vector2.RIGHT * (cell_width - border_width)
+				door_rect.position.y += (cell_height - door_width) / 2
+				door_rect.size = Vector2(border_width, door_width)
+			Vector2.UP:
+				door_rect.position = cell_rect.position
+				door_rect.position.x += (cell_width - door_width) / 2
+				door_rect.size = Vector2(door_width, border_width)
+			Vector2.DOWN:
+				door_rect.position = Vector2(cell_rect.position.x, cell_rect.end.y)
+				door_rect.position.y -= border_width
+				door_rect.position.x += (cell_width - door_width) / 2
+				door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
+
+		var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
+		door_cells.append_array(Reptile.cells_in_rect(rect))
+	return door_cells
 
 ## add_tile_chunks ##############################################################
 
