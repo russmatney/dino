@@ -75,6 +75,7 @@ func clear_background_tiles():
 	bg_tilemap.clear()
 
 func add_background_tiles():
+	# tile defs maybe change per room def
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
@@ -83,7 +84,7 @@ func add_background_tiles():
 	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
 
 	# var count = [1, 2, 3].pick_random()
-	var count = 50
+	var count = 10 # based on room size? and probably a whole input on it's own
 
 	var tile_coords = []
 	for i in range(count):

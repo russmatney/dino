@@ -80,12 +80,11 @@ func add_new_room(count=1):
 	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=count})
 	new_room_defs = generator.add_rooms_to_map(new_room_defs)
 	room_defs.append_array(new_room_defs)
-	Log.pr(len(room_defs), " new rooms added")
+	Log.pr(len(new_room_defs), " rooms added")
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
-
 
 	# redo the current room's doors
 	map.setup_walls_and_doors()
