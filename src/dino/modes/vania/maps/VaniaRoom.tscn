@@ -20,14 +20,9 @@ z_index = -5
 tile_set = ExtResource("1_r8bn3")
 format = 2
 layer_0/name = "base"
+layer_0/z_index = 1
 
 [node name="RoomInstance" parent="." instance=ExtResource("2_1wsgr")]
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_v8p0c")]
 position = Vector2(112, 59)
-
-[node name="@TileMap@43281" type="TileMap" parent="."]
-format = 2
-
-[node name="@TileMap@18739" type="TileMap" parent="."]
-format = 2

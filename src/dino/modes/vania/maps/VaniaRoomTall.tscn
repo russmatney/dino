@@ -18,6 +18,3 @@ layer_0/tile_data = PackedInt32Array(2293791, 196609, 4, 2228255, 196609, 3, 216
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_5asli")]
 position = Vector2(112, 59)
-
-[node name="@TileMap@18738" type="TileMap" parent="."]
-format = 2

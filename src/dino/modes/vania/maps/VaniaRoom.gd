@@ -11,26 +11,6 @@ func set_room_def(def: VaniaRoomDef):
 var tilemap: TileMap
 var bg_tilemap: TileMap
 
-## init ###############################################################
-
-func _enter_tree():
-	ensure_tilemap()
-
-func ensure_tilemap():
-	if tilemap == null:
-		tilemap = get_node_or_null("TileMap")
-	if tilemap == null:
-		tilemap = TileMap.new()
-		add_child(tilemap)
-		tilemap.set_owner(self)
-
-	if bg_tilemap == null:
-		bg_tilemap = get_node_or_null("BackgroundTileMap")
-	if bg_tilemap == null:
-		bg_tilemap = TileMap.new()
-		add_child(bg_tilemap)
-		bg_tilemap.set_owner(self)
-
 ## ready ##############################################################
 
 func _ready():
@@ -46,13 +26,30 @@ func _ready():
 	# useful fallback for when neighbors are added/removed
 	setup_walls_and_doors() # be nice to easily persist a change like this
 
+## build room ##############################################################
+
 func build_room():
-	ensure_tilemap()
+	ensure_tilemaps()
 	setup_tileset()
 	add_background_tiles()
 	setup_walls_and_doors()
 	add_tile_chunks()
 	add_entities()
+
+func ensure_tilemaps():
+	if tilemap == null:
+		tilemap = get_node_or_null("TileMap")
+	if tilemap == null:
+		tilemap = TileMap.new()
+		add_child(tilemap)
+		tilemap.set_owner(self)
+
+	if bg_tilemap == null:
+		bg_tilemap = get_node_or_null("BackgroundTileMap")
+	if bg_tilemap == null:
+		bg_tilemap = TileMap.new()
+		add_child(bg_tilemap)
+		bg_tilemap.set_owner(self)
 
 # TODO use neighbor tileset as background near the door
 func setup_tileset():

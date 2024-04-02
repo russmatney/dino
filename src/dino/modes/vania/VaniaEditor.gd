@@ -33,6 +33,7 @@ func _enter_tree():
 func _ready():
 	if not game:
 		Log.warn("VaniaEditor could not find game")
+		return
 	Log.pr("Vania Editor ready", game.room_defs)
 
 	game.room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
