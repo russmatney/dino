@@ -74,6 +74,7 @@ func update_room_def():
 func update_edit_entities():
 	if not current_room_def:
 		return
+
 	var items = []
 	items.append_array(current_room_def.entities.map(func(ent):
 		return {label="Remove '%s'" % ent, on_select=func(): current_room_def.entities.erase(ent)}))
@@ -81,20 +82,10 @@ func update_edit_entities():
 		return {label="Add '%s'" % ent, on_select=func(): current_room_def.entities.append(ent)}))
 
 	var popup = edit_entities_menu_button.get_popup()
-
-	popup.clear()
-	for conn in popup.index_pressed.get_connections():
-		popup.index_pressed.disconnect(conn.callable)
-
-	for it in items:
-		popup.add_item(it.label)
-
-	popup.index_pressed.connect(func(index):
-		var item = items[index]
+	U.setup_popup_items(popup, items, func(item):
 		item.on_select.call()
 		game.generator.build_and_prep_scene(current_room_def)
-		game.reload_current_room()
-		, CONNECT_ONE_SHOT)
+		game.reload_current_room())
 
 func update_edit_tilesets():
 	if not current_room_def:
@@ -105,20 +96,10 @@ func update_edit_tilesets():
 		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scene = load(tm)}))
 
 	var popup = edit_tileset_menu_button.get_popup()
-
-	popup.clear()
-	for conn in popup.index_pressed.get_connections():
-		popup.index_pressed.disconnect(conn.callable)
-
-	for it in items:
-		popup.add_item(it.label)
-
-	popup.index_pressed.connect(func(index):
-		var item = items[index]
+	U.setup_popup_items(popup, items, func(item):
 		item.on_select.call()
 		game.generator.build_and_prep_scene(current_room_def)
-		game.reload_current_room()
-		, CONNECT_ONE_SHOT)
+		game.reload_current_room())
 
 ## buttons pressed ######################################################
 

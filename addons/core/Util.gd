@@ -242,6 +242,28 @@ static func call_in(node, callable, s):
 	await node.get_tree().create_timer(1.0).timeout
 	callable.call()
 
+############################################################
+# menus/buttons/popup
+
+func setup_popup_items(popup: PopupMenu, items: Array, on_select: Callable):
+	# clear items
+	popup.clear()
+
+	# clear connections
+	for conn in popup.index_pressed.get_connections():
+		popup.index_pressed.disconnect(conn.callable)
+
+	# add items using item.label
+	for item in items:
+		popup.add_item(item.label)
+
+	# when selected
+	popup.index_pressed.connect(func(index):
+		# call passed func with selected item
+		on_select.call(items[index]), CONNECT_ONE_SHOT)
+
+
+############################################################
 ## random ###########################################################
 
 static func rand_of(arr, n=1):
