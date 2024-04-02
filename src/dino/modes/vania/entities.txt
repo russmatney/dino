@@ -12,11 +12,19 @@ o = Target
 p = Player
 x = Tile
 n = NewTile
+m = Monstroar
 - = OneWayPlatform
 
 ==============
 ENTITIES
 ==============
+
+name Boss room
+
+...
+.m.
+...
+xxx
 
 name Player
 

@@ -11,8 +11,12 @@ var room_type: DinoData.RoomType = DinoData.RoomType.SideScroller
 var base_scene_path: String
 var room_scene: PackedScene
 var room_path: String
+
 var local_cells: Array #[Vector3i]
 var map_cells: Array #[Vector3i]
+
+var min_map_cell := Vector2i.MAX
+var max_map_cell := Vector2i.MIN
 
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
@@ -70,6 +74,14 @@ func add_entities(ents: Array) -> VaniaRoomDef:
 	self.entities = ents
 	return self
 
+func calc_cell_meta():
+	for p in map_cells:
+		min_map_cell.x = mini(min_map_cell.x, p.x)
+		min_map_cell.y = mini(min_map_cell.y, p.y)
+		max_map_cell.x = maxi(max_map_cell.x, p.x)
+		max_map_cell.y = maxi(max_map_cell.y, p.y)
+
+
 ## random data builders #####################################################3
 
 func select_room_type():
@@ -94,9 +106,11 @@ func select_entities():
 	var entity_groups = [
 		# ["Candle"],
 		# ["Player"],
-		["Target", "Target", "Target"],
-		["Leaf", "Leaf", "Leaf"],
+		# ["Target", "Target", "Target"],
+		# ["Leaf", "Leaf", "Leaf"],
+		# ["Candle", "Candle"],
 		["Enemy", "Enemy", "Enemy"],
+		["Monstroar", "Target"],
 		]
 	var ents = entity_groups.pick_random()
 	self.entities = ents
@@ -163,8 +177,11 @@ func get_local_cells_dict():
 		local[coord] = true
 	return local
 
-func get_local_width():
+func get_local_width() -> Vector2i:
 	return Reptile.get_width(local_cells)
 
-func get_local_height():
+func get_local_height() -> Vector2i:
 	return Reptile.get_height(local_cells)
+
+func get_size() -> Vector2:
+	return Vector2(max_map_cell - min_map_cell + Vector2i.ONE) * MetSys.settings.in_game_cell_size

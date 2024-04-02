@@ -104,6 +104,7 @@ func place_rooms(defs: Array[VaniaRoomDef]):
 
 	for def in defs:
 		attach_room(map_cells, def)
+		def.calc_cell_meta()
 
 func attach_room(map_cells, def):
 	var def_rect = Reptile.get_recti(def.local_cells)

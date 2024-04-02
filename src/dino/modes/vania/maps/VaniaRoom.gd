@@ -125,7 +125,7 @@ func is_border_coord(rect, coord, offset=0):
 		or (abs(rect.end.y - coord.y) <= tile_border_width - offset)
 
 func fill_tilemap_borders(opts={}):
-	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_instance.get_size()))
+	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
 	var t_cells = Reptile.cells_in_rect(rect).filter(func(coord):
 		if opts.get("skip_cells"):
 			if opts.get("skip_cells").has(coord):
@@ -221,7 +221,7 @@ func add_tile_chunks():
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for tile chunk!", tile_chunk)
+			# Log.warn("No position found for tile chunk!", tile_chunk)
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()
@@ -277,7 +277,7 @@ func build_tilemap_data():
 
 func possible_positions(tmap_data, entity_shape):
 	var positions = []
-	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_instance.get_size()))
+	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
 	for coord in tmap_data.keys():
 		# skip all but innermost border
 		if is_border_coord(rect, coord, 1):
