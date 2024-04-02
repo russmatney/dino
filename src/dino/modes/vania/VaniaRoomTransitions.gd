@@ -5,13 +5,18 @@ func _initialize():
 
 var PLAYER_POS_OFFSET = 30
 
-func _on_room_changed(target_room: String):
-	if target_room == MetSys.get_current_room_name():
+func _on_room_changed(target_room: String, ignore_same_room=true):
+	if ignore_same_room and target_room == MetSys.get_current_room_name():
 		# This can happen when teleporting to another room.
 		return
 
 	var new_room_def = game.get_room_def(target_room)
 	var prev_room_def = game.get_room_def(MetSys.get_current_room_name())
+
+	if new_room_def == null:
+		Log.warn("No new room def in room transition, aborting", target_room)
+	if prev_room_def == null:
+		Log.warn("No prev room def in room transition, aborting", MetSys.get_current_room_name())
 
 	var prev_room_instance := MetSys.get_current_room_instance()
 	if prev_room_instance:

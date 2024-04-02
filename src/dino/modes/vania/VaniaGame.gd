@@ -144,6 +144,9 @@ func load_initial_room():
 		load_room(p, {setup=func(room):
 			room.set_room_def(get_room_def(p))})
 
+func reload_current_room():
+	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)
+
 ## player #######################################################
 
 func setup_player():

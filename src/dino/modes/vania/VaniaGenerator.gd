@@ -57,7 +57,7 @@ func add_rooms_to_map(room_defs):
 				cell.border_colors[i] = room_def.border_color
 			cell.set_assigned_scene(room_def.room_path)
 
-		prepare_scene(room_def)
+		build_and_prep_scene(room_def)
 		defs.append(room_def)
 
 	builder.update_map()
@@ -74,16 +74,10 @@ func set_room_scene_path(room_def):
 
 ## prepare scene ##############################################################
 
-func prepare_scene(room_def):
+func build_and_prep_scene(room_def):
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
-
-	# i think this does nothing! it's set in vania_room_transition
-	room.set_room_def(room_def)
-	room.build_room()
-
-	# TODO generate tiles, add entities, default doors, etc
-	# hide/show exits based on room opts, neighbors
+	room.build_room(room_def)
 
 	# pack and write to room_def.room_path
 	var ps := PackedScene.new()

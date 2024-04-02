@@ -8,10 +8,14 @@ var current_room_def: VaniaRoomDef
 
 @onready var seed_label = $%SeedLabel
 @onready var current_room_label = $%CurrentRoomLabel
-@onready var room_entities_label = $%RoomEntitiesLabel
-@onready var neighbors_label = $%NeighborsLabel
-@onready var room_tiles_label = $%RoomTilesLabel
 @onready var room_count_label = $%RoomCountLabel
+@onready var neighbors_label = $%NeighborsLabel
+
+@onready var room_entities_label = $%RoomEntitiesLabel
+@onready var room_tiles_label = $%RoomTilesLabel
+
+@onready var edit_entities_menu_button = $%EditEntitiesMenuButton
+@onready var edit_tileset_menu_button = $%EditTilesetMenuButton
 
 @onready var edit_room_def_button = $%EditRoomDefButton
 @onready var respawn_player_button = $%RespawnPlayerButton
@@ -50,8 +54,73 @@ func _ready():
 func on_room_loaded():
 	current_room_def = game.current_room_def()
 	update_room_def()
+	update_edit_entities()
+	update_edit_tilesets()
 
-########################################################
+
+## rerender ######################################################
+
+func update_room_def():
+	if not current_room_def:
+		return
+	Log.pr("current rd", current_room_def)
+	seed_label.text = "seed: %s" % Dino.egg
+	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
+	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
+	neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
+	room_tiles_label.text = "tileset: %s" % current_room_def.tilemap_scene.resource_path.get_file()
+	room_count_label.text = "rooms: %s (%s)" % [len(game.room_defs), game.desired_room_count]
+
+func update_edit_entities():
+	if not current_room_def:
+		return
+	var items = []
+	items.append_array(current_room_def.entities.map(func(ent):
+		return {label="Remove '%s'" % ent, on_select=func(): current_room_def.entities.erase(ent)}))
+	items.append_array(current_room_def.all_entities.map(func(ent):
+		return {label="Add '%s'" % ent, on_select=func(): current_room_def.entities.append(ent)}))
+
+	var popup = edit_entities_menu_button.get_popup()
+
+	popup.clear()
+	for conn in popup.index_pressed.get_connections():
+		popup.index_pressed.disconnect(conn.callable)
+
+	for it in items:
+		popup.add_item(it.label)
+
+	popup.index_pressed.connect(func(index):
+		var item = items[index]
+		item.on_select.call()
+		game.generator.build_and_prep_scene(current_room_def)
+		game.reload_current_room()
+		, CONNECT_ONE_SHOT)
+
+func update_edit_tilesets():
+	if not current_room_def:
+		return
+
+	var items = []
+	items.append_array(current_room_def.all_tilemap_scenes.map(func(tm):
+		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scene = load(tm)}))
+
+	var popup = edit_tileset_menu_button.get_popup()
+
+	popup.clear()
+	for conn in popup.index_pressed.get_connections():
+		popup.index_pressed.disconnect(conn.callable)
+
+	for it in items:
+		popup.add_item(it.label)
+
+	popup.index_pressed.connect(func(index):
+		var item = items[index]
+		item.on_select.call()
+		game.generator.build_and_prep_scene(current_room_def)
+		game.reload_current_room()
+		, CONNECT_ONE_SHOT)
+
+## buttons pressed ######################################################
 
 func on_edit_room_def_pressed():
 	pass
@@ -73,13 +142,3 @@ func on_rerender_background_pressed():
 
 func on_respawn_player_pressed():
 	Dino.respawn_active_player()
-
-func update_room_def():
-	if current_room_def:
-		Log.pr("current rd", current_room_def)
-		seed_label.text = "seed: %s" % Dino.egg
-		current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
-		room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
-		neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
-		room_tiles_label.text = "tileset: %s" % current_room_def.label_to_tilemap.get("Tile").scene.resource_path.get_file()
-		room_count_label.text = "rooms: %s (%s)" % [len(game.room_defs), game.desired_room_count]

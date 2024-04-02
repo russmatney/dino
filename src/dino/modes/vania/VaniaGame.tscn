@@ -93,6 +93,21 @@ text = "seed: x"
 fit_content = true
 scroll_active = false
 
+[node name="PanelContainer7" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="RoomCountLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer7"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("4_k2nl2")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "rooms: 3"
+fit_content = true
+scroll_active = false
+
 [node name="PanelContainer3" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
@@ -105,21 +120,6 @@ theme = ExtResource("4_k2nl2")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "room: Blah.tscn"
-fit_content = true
-scroll_active = false
-
-[node name="PanelContainer4" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="RoomEntitiesLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("4_k2nl2")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "entities: []"
 fit_content = true
 scroll_active = false
 
@@ -138,14 +138,42 @@ text = "neighbors: []"
 fit_content = true
 scroll_active = false
 
+[node name="PanelContainer4" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4"]
+layout_mode = 2
+
+[node name="RoomEntitiesLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_k2nl2")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "entities: []"
+fit_content = true
+scroll_active = false
+
+[node name="EditEntitiesMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Edit Entities"
+
 [node name="PanelContainer6" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
 
-[node name="RoomTilesLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6"]
+layout_mode = 2
+
+[node name="RoomTilesLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
+size_flags_horizontal = 3
 theme = ExtResource("4_k2nl2")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
@@ -153,20 +181,10 @@ text = "tiles: []"
 fit_content = true
 scroll_active = false
 
-[node name="PanelContainer7" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="RoomCountLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer7"]
+[node name="EditTilesetMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
 unique_name_in_owner = true
-clip_contents = false
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "rooms: 3"
-fit_content = true
-scroll_active = false
+text = "Edit Tileset"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
 custom_minimum_size = Vector2(0, 30)

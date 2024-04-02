@@ -33,7 +33,8 @@ func _ready():
 
 ## build room ##############################################################
 
-func build_room():
+func build_room(def: VaniaRoomDef):
+	room_def = def
 	ensure_tilemaps()
 	setup_tileset()
 	add_background_tiles()
@@ -60,10 +61,10 @@ func ensure_tilemaps():
 
 # TODO use neighbor tileset as background near the door
 func setup_tileset():
-	var rd_tilemap = room_def.label_to_tilemap.get("Tile")
+	var rd_tilemap = room_def.tilemap_scene
 	if rd_tilemap:
 		Log.pr("setting up tileset:", rd_tilemap)
-		var inst = rd_tilemap.scene.instantiate()
+		var inst = rd_tilemap.instantiate()
 		tilemap.set_tileset(inst.get_tileset().duplicate(true))
 
 		# TODO support multiple bg_tilesets
@@ -73,7 +74,7 @@ func setup_tileset():
 		bg_tilemap.modulate.a = 0.3
 		bg_tilemap.set_z_index(-5)
 	else:
-		Log.warn("cannot setup tileset without room_def.label_to_tilemap.get('Tile')")
+		Log.warn("cannot setup tileset without room_def.tilemap_scene")
 
 func clear_background_tiles():
 	bg_tilemap.clear()
@@ -252,6 +253,10 @@ func add_entities():
 	for ent in room_def.entities:
 		var entity_opts = room_def.label_to_entity.get(ent)
 		var grids = room_def.entity_defs.grids_with_entity(ent)
+		if grids.is_empty():
+			# TODO fallback to puttin it in the center?
+			Log.warn("No grids for entity, skipping: ", ent)
+			continue
 		var grid = grids.pick_random()
 
 		# find place to put entity

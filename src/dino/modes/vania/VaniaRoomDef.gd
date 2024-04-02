@@ -28,7 +28,8 @@ var entity_defs: GridDefs
 var entities: Array #[String]
 
 var label_to_entity
-var label_to_tilemap = {}
+
+var tilemap_scene
 var tile_size: int = 16
 
 func to_printable():
@@ -102,6 +103,15 @@ func select_room_shape():
 	self.base_scene_path = shape[1]
 	return self
 
+var all_entities = [
+	"Candle",
+	"Target",
+	"Leaf",
+	"Enemy",
+	"Monstroar",
+	"Beefstronaut", # TODO support adding entity without a grid def
+	]
+
 func select_entities():
 	var entity_groups = [
 		# ["Candle"],
@@ -116,7 +126,7 @@ func select_entities():
 	self.entities = ents
 	return self
 
-var tilemap_scenes = [
+var all_tilemap_scenes = [
 		# "res://addons/reptile/tilemaps/GrassTiles16.tscn",
 		# "res://addons/reptile/tilemaps/SnowTiles16.tscn",
 		# "res://addons/reptile/tilemaps/CaveTiles16.tscn",
@@ -129,10 +139,7 @@ var tilemap_scenes = [
 	]
 
 func select_tilemap():
-	var tilemap_scene = tilemap_scenes.pick_random()
-	self.label_to_tilemap = {
-			"Tile": {scene=load(tilemap_scene)}
-		}
+	tilemap_scene = load(all_tilemap_scenes.pick_random())
 	return self
 
 ## static #####################################################3
