@@ -3,8 +3,6 @@ extends Node2D
 
 @onready var room_instance = $RoomInstance
 
-@export var tilemap_scenes: Array[PackedScene] = []
-
 var tile_border_width = 4
 var tile_door_width = 4
 var room_def: VaniaRoomDef
@@ -21,16 +19,17 @@ func _enter_tree():
 func ensure_tilemap():
 	if tilemap == null:
 		tilemap = get_node_or_null("TileMap")
-	if tilemap == null and not tilemap_scenes.is_empty():
+	if tilemap == null:
 		tilemap = TileMap.new()
 		add_child(tilemap)
 		tilemap.set_owner(self)
 
 	if bg_tilemap == null:
 		bg_tilemap = get_node_or_null("BackgroundTileMap")
-	bg_tilemap = TileMap.new()
-	add_child(bg_tilemap)
-	bg_tilemap.set_owner(self)
+	if bg_tilemap == null:
+		bg_tilemap = TileMap.new()
+		add_child(bg_tilemap)
+		bg_tilemap.set_owner(self)
 
 ## ready ##############################################################
 
@@ -44,7 +43,11 @@ func _ready():
 			Log.warn("No room_def on vania room!")
 			return
 
-	# TODO call in prepare_scene (and set owners), not in _ready
+	# useful fallback for when neighbors are added/removed
+	setup_walls_and_doors() # be nice to easily persist a change like this
+
+func build_room():
+	ensure_tilemap()
 	setup_tileset()
 	add_background_tiles()
 	setup_walls_and_doors()
@@ -264,6 +267,7 @@ func add_entities():
 			var entity = entity_opts.scene.instantiate()
 			entity.position = pos
 			add_child(entity)
+			entity.set_owner(self)
 
 ## fit helpers ##############################################################
 

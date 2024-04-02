@@ -80,6 +80,7 @@ func prepare_scene(room_def):
 
 	# i think this does nothing! it's set in vania_room_transition
 	room.set_room_def(room_def)
+	room.build_room()
 
 	# TODO generate tiles, add entities, default doors, etc
 	# hide/show exits based on room opts, neighbors

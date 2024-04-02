@@ -86,8 +86,10 @@ func add_new_room(count=1):
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
 
+
 	# redo the current room's doors
 	map.setup_walls_and_doors()
+	# TODO redo walls/doors for neighbors of new room
 
 func remove_room(count=1):
 	var other_room_defs = []
@@ -107,7 +109,7 @@ func remove_room(count=1):
 
 	generator.remove_rooms_from_map(room_defs_to_remove)
 
-	Log.pr(len(room_defs), " new rooms added")
+	Log.pr(len(room_defs_to_remove), " rooms removed")
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -115,6 +117,7 @@ func remove_room(count=1):
 
 	# redo the current room's doors
 	map.setup_walls_and_doors()
+	# TODO redo walls/doors for neighbors of removed room
 
 
 func on_room_loaded():
