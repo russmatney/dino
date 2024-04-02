@@ -44,6 +44,7 @@ func _ready():
 			Log.warn("No room_def on vania room!")
 			return
 
+	# TODO call in prepare_scene (and set owners), not in _ready
 	setup_tileset()
 	add_background_tiles()
 	setup_walls_and_doors()
@@ -87,7 +88,7 @@ func add_background_tiles():
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for tile chunk!", tile_chunk)
+			# Log.warn("No position found for tile chunk!", tile_chunk)
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()
@@ -105,7 +106,6 @@ func add_background_tiles():
 
 # Draws a border around the room
 # cuts away space for 'doors' between neighboring rooms
-# TODO rewrite to not need the room_instance (and work before _ready())
 func setup_walls_and_doors():
 	var neighbors = get_possible_neighbor_doors()
 	var door_cells = []
@@ -142,10 +142,10 @@ func is_neighbor(a: Vector3i, b: Vector3i) -> bool:
 	return false
 
 func get_possible_neighbor_doors():
-	var room_cells = MetSys.map_data.get_cells_assigned_to(room_instance.room_name)
+	var room_cells = MetSys.map_data.get_cells_assigned_to(room_def.room_path)
 	var neighbors = []
 
-	var neighbor_paths = room_instance.get_neighbor_rooms(false)
+	var neighbor_paths = room_def.get_neighbor_room_paths()
 	for p in neighbor_paths:
 		neighbors.append({path=p, cells=MetSys.map_data.get_cells_assigned_to(p)})
 
@@ -168,8 +168,8 @@ func get_door_cells_to_neighbor(neighbor):
 		var wall = door[1] - door[0]
 		wall = Vector2(wall.x, wall.y)
 
-		var room_cell = room_instance.to_local_cell(door[0])
-		var cell_rect = room_instance.get_cell_rect(room_cell)
+		var room_cell = room_def.to_local_cell(door[0])
+		var cell_rect = room_def.get_cell_rect(room_cell)
 
 		var cell_width = MetSys.settings.in_game_cell_size.x
 		var cell_height = MetSys.settings.in_game_cell_size.y

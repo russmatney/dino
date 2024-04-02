@@ -185,3 +185,23 @@ func get_local_height() -> Vector2i:
 
 func get_size() -> Vector2:
 	return Vector2(max_map_cell - min_map_cell + Vector2i.ONE) * MetSys.settings.in_game_cell_size
+
+func to_local_cell(cell: Vector3i) -> Vector2i:
+	return Vector2i(cell.x - min_map_cell.x, cell.y - min_map_cell.y)
+
+func get_cell_rect(cell: Vector2i) -> Rect2:
+	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
+
+func get_neighbor_room_paths() -> Array[String]:
+	var ret: Array[String] = []
+
+	for cell in map_cells:
+		var cell_data: MetroidvaniaSystem.MapData.CellData = MetSys.map_data.get_cell_at(cell)
+		assert(cell_data)
+		for i in 4:
+			var fwd: Vector2i = MetroidvaniaSystem.MapData.FWD[i]
+			var nbr_room_path: String = MetSys.map_data.get_assigned_scene_at(cell + Vector3i(fwd.x, fwd.y, 0))
+			if not nbr_room_path.is_empty() and nbr_room_path != room_path and not nbr_room_path in ret:
+				ret.append(nbr_room_path)
+
+	return ret

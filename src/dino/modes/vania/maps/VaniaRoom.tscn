@@ -28,3 +28,6 @@ position = Vector2(112, 59)
 
 [node name="@TileMap@43281" type="TileMap" parent="."]
 format = 2
+
+[node name="@TileMap@18739" type="TileMap" parent="."]
+format = 2
