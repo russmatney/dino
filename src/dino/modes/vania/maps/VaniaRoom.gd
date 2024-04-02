@@ -11,6 +11,11 @@ func set_room_def(def: VaniaRoomDef):
 var tilemap: TileMap
 var bg_tilemap: TileMap
 
+## enter_tree #####################################################
+
+func _enter_tree():
+	ensure_tilemaps()
+
 ## ready ##############################################################
 
 func _ready():
@@ -41,6 +46,7 @@ func ensure_tilemaps():
 		tilemap = get_node_or_null("TileMap")
 	if tilemap == null:
 		tilemap = TileMap.new()
+		tilemap.name = "TileMap"
 		add_child(tilemap)
 		tilemap.set_owner(self)
 
@@ -48,6 +54,7 @@ func ensure_tilemaps():
 		bg_tilemap = get_node_or_null("BackgroundTileMap")
 	if bg_tilemap == null:
 		bg_tilemap = TileMap.new()
+		bg_tilemap.name = "BackgroundTileMap"
 		add_child(bg_tilemap)
 		bg_tilemap.set_owner(self)
 
