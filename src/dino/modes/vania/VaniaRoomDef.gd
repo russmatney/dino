@@ -87,7 +87,7 @@ func _init(opts={}):
 
 	tile_size = opts.get("tile_size", tile_size)
 
-## helpers #####################################################3
+## map_cells #####################################################
 
 func calc_cell_meta():
 	for p in map_cells:
@@ -95,20 +95,6 @@ func calc_cell_meta():
 		min_map_cell.y = mini(min_map_cell.y, p.y)
 		max_map_cell.x = maxi(max_map_cell.x, p.x)
 		max_map_cell.y = maxi(max_map_cell.y, p.y)
-
-### misc helpers
-
-func get_local_cells_dict():
-	var local = {}
-	for coord in local_cells:
-		local[coord] = true
-	return local
-
-func get_local_width() -> Vector2i:
-	return Reptile.get_width(local_cells)
-
-func get_local_height() -> Vector2i:
-	return Reptile.get_height(local_cells)
 
 func get_size() -> Vector2:
 	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
@@ -122,6 +108,22 @@ func to_local_cell(cell: Vector3i) -> Vector2i:
 
 func get_cell_rect(cell: Vector2i) -> Rect2:
 	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
+
+## local_cells ######################################################
+
+func get_local_cells_dict():
+	var local = {}
+	for coord in local_cells:
+		local[coord] = true
+	return local
+
+func get_local_width() -> Vector2i:
+	return Reptile.get_width(local_cells)
+
+func get_local_height() -> Vector2i:
+	return Reptile.get_height(local_cells)
+
+## neighbors ######################################################
 
 func get_neighbor_room_paths() -> Array[String]:
 	var ret: Array[String] = []
