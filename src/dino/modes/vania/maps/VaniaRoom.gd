@@ -54,13 +54,11 @@ func setup_tileset():
 	ensure_tilemaps()
 	var primary_tilemap = room_def.get_primary_tilemap()
 	if primary_tilemap:
-		Log.pr("setting up tileset:", primary_tilemap)
 		var primary = load(primary_tilemap).instantiate()
 		tilemap.set_tileset(primary.get_tileset().duplicate(true))
 
 	var secondary_tilemap = room_def.get_secondary_tilemap()
 	if secondary_tilemap:
-		Log.pr("setting up tileset:", primary_tilemap)
 		var secondary = load(secondary_tilemap).instantiate()
 		bg_tilemap.set_tileset(secondary.get_tileset().duplicate(true))
 		Reptile.disable_collisions(bg_tilemap)
@@ -80,57 +78,26 @@ func clear_all_tiles():
 func clear_background_tiles():
 	bg_tilemap.clear()
 
-## background tiles ##############################################################
-
-func add_background_tiles():
-	# tile defs maybe change per room def
-	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
-	if grids.is_empty():
-		Log.warn("No tile chunks!")
-		return
-
-	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
-
-	# var count = [1, 2, 3].pick_random()
-	var count = 10 # based on room size? and probably a whole input on it's own
-
-	var tile_coords = []
-	for i in range(count):
-		var tile_chunk = grids.pick_random()
-		var start_coords = possible_positions(tmap_data,
-			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
-		if start_coords.is_empty():
-			# Log.warn("No position found for tile chunk!", tile_chunk)
-			# TODO try a different chunk, maybe flip/rotate it
-			continue
-		var start_coord = start_coords.pick_random()
-
-		for e_coord in tile_chunk.get_coords_for_entity("Tile"):
-			tile_coords.append(e_coord + start_coord)
-		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
-			tile_coords.append(e_coord + start_coord)
-
-	Log.pr("bg_tilemap setting bg tiles", len(tile_coords))
-	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
-
-	bg_tilemap.force_update()
-
 ## walls and doors ##############################################################
 
 # Draws a border around the room
 # cuts away space for 'doors' between neighboring rooms
-func setup_walls_and_doors():
-	var neighbors = room_def.get_neighbor_data()
-
-	var door_tile_coords = []
-	for n in neighbors:
-		for door in n.possible_doors:
-			var tile_coords = get_tile_coords_for_doorway(door)
-			door_tile_coords.append_array(tile_coords)
+func setup_walls_and_doors(opts={}):
+	var door_tile_coords = get_neighbor_door_tile_coords(opts)
 
 	fill_tilemap_borders({skip_cells=door_tile_coords})
 
 	tilemap.force_update()
+
+func get_neighbor_door_tile_coords(opts={}):
+	var neighbors = room_def.get_neighbor_data(opts)
+	var coords = []
+	for n in neighbors:
+		for door in n.possible_doors:
+			var tile_coords = get_tile_coords_for_doorway(door)
+			coords.append_array(tile_coords)
+
+	return coords
 
 func is_border_coord(rect, coord, offset=0):
 	return (abs(rect.position.x - coord.x) < tile_border_width - offset) \
@@ -181,8 +148,40 @@ func get_tile_coords_for_doorway(map_cell_pair):
 			door_rect.position.x += (cell_width - door_width) / 2
 			door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
 
-	var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
-	return Reptile.cells_in_rect(rect)
+	return Reptile.cells_in_local_rect(tilemap, door_rect)
+
+## background tiles ##############################################################
+
+# this depends on build_tilemap_data, which expects the base tilemap to have borders already
+func add_background_tiles(opts={}):
+	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
+	if grids.is_empty():
+		Log.warn("No tile chunks!")
+		return
+
+	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
+
+	var tile_coords = []
+	for i in range(opts.get("count", 10)):
+		var tile_chunk = grids.pick_random()
+		var start_coords = possible_positions(tmap_data,
+			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
+		if start_coords.is_empty():
+			Log.warn("No position found for tile chunk!", tile_chunk)
+			# TODO try a different chunk, maybe flip/rotate it
+			continue
+		var start_coord = start_coords.pick_random()
+
+		if opts.get("re_add_existing_tiles", false):
+			for e_coord in tile_chunk.get_coords_for_entity("Tile"):
+				tile_coords.append(e_coord + start_coord)
+		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
+			tile_coords.append(e_coord + start_coord)
+
+	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+
+	bg_tilemap.force_update()
+
 
 ## add_tile_chunks ##############################################################
 

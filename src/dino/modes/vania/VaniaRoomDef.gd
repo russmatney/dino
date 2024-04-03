@@ -123,18 +123,18 @@ func get_size() -> Vector2:
 		calc_cell_meta()
 	return Vector2(max_map_cell - min_map_cell + Vector2i.ONE) * MetSys.settings.in_game_cell_size
 
-func _to_local_cell(cell: Vector3i) -> Vector2i:
+func map_cell_to_local_cell(cell: Vector3i) -> Vector2i:
 	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
 		calc_cell_meta()
 	return Vector2i(cell.x - min_map_cell.x, cell.y - min_map_cell.y)
 
-func _get_local_cell_rect(cell: Vector2i) -> Rect2:
+func get_local_rect(cell: Vector2i) -> Rect2:
 	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size,
 		MetSys.settings.in_game_cell_size)
 
 # returns a local rect (position/size) of a rect around the passed map_cell coord
 func get_map_cell_rect(map_cell: Vector3i) -> Rect2:
-	return _get_local_cell_rect(_to_local_cell(map_cell))
+	return get_local_rect(map_cell_to_local_cell(map_cell))
 
 ## local_cells ######################################################
 
@@ -152,6 +152,22 @@ func get_local_height() -> Vector2i:
 
 ## neighbors ######################################################
 
+func get_neighbor_data(opts={}):
+	var neighbors = opts.get("neighbor_data", [])
+	if neighbors.is_empty():
+		var neighbor_paths = get_neighbor_room_paths()
+		for p in neighbor_paths:
+			neighbors.append({room_path=p, map_cells=MetSys.map_data.get_cells_assigned_to(p)})
+
+	for ngbr in neighbors:
+		ngbr.possible_doors = []
+		for n_cell in ngbr.map_cells:
+			for r_cell in map_cells:
+				if is_neighboring_cell(n_cell, r_cell):
+					ngbr.possible_doors.append([r_cell, n_cell])
+
+	return neighbors
+
 func get_neighbor_room_paths() -> Array[String]:
 	var ret: Array[String] = []
 
@@ -165,22 +181,6 @@ func get_neighbor_room_paths() -> Array[String]:
 				ret.append(nbr_room_path)
 
 	return ret
-
-func get_neighbor_data():
-	var neighbor_paths = get_neighbor_room_paths()
-
-	var neighbors = []
-	for p in neighbor_paths:
-		neighbors.append({room_path=p, map_cells=MetSys.map_data.get_cells_assigned_to(p)})
-
-	for ngbr in neighbors:
-		ngbr.possible_doors = []
-		for n_cell in ngbr.cells:
-			for r_cell in map_cells:
-				if is_neighboring_cell(n_cell, r_cell):
-					ngbr.possible_doors.append([r_cell, n_cell])
-
-	return neighbors
 
 func is_neighboring_cell(a: Vector3i, b: Vector3i) -> bool:
 	if a.x - b.x == 0:
