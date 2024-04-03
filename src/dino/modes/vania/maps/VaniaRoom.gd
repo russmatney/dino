@@ -75,6 +75,9 @@ func clear_all_tiles():
 	tilemap.clear()
 	bg_tilemap.clear()
 
+func clear_tilemap_tiles():
+	tilemap.clear()
+
 func clear_background_tiles():
 	bg_tilemap.clear()
 
@@ -85,6 +88,9 @@ func clear_background_tiles():
 func setup_walls_and_doors(opts={}):
 	var door_tile_coords = get_neighbor_door_tile_coords(opts)
 
+	# TODO include neighbor data when building rooms
+	# but also, support updating doors when new neighbors are created
+	clear_tilemap_tiles()
 	fill_tilemap_borders({skip_cells=door_tile_coords})
 
 	tilemap.force_update()
@@ -96,6 +102,7 @@ func get_neighbor_door_tile_coords(opts={}):
 		for door in n.possible_doors:
 			var tile_coords = get_tile_coords_for_doorway(door)
 			coords.append_array(tile_coords)
+	Log.pr("neighbor door coords", coords)
 
 	return coords
 
@@ -106,6 +113,7 @@ func is_border_coord(rect, coord, offset=0):
 		or (abs(rect.end.y - coord.y) <= tile_border_width - offset)
 
 func fill_tilemap_borders(opts={}):
+	Log.pr("filling tilemap borders", opts)
 	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
 	var t_cells = Reptile.cells_in_rect(rect).filter(func(coord):
 		if opts.get("skip_cells"):
@@ -162,12 +170,12 @@ func add_background_tiles(opts={}):
 	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
 
 	var tile_coords = []
-	for i in range(opts.get("count", 10)):
+	for i in range(opts.get("count", 5)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for tile chunk!", tile_chunk)
+			Log.warn("No position found for background tile!", tile_chunk)
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()
@@ -208,9 +216,9 @@ func add_tile_chunks(opts={}):
 		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
 			tile_coords.append(e_coord + start_coord)
 
-	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
-
-	tilemap.force_update()
+	if not tile_coords.is_empty():
+		tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+		tilemap.force_update()
 
 
 ## add_entities ##############################################################
