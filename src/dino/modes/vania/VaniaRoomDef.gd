@@ -87,6 +87,25 @@ func _init(opts={}):
 
 	tile_size = opts.get("tile_size", tile_size)
 
+## tilemap helpers #####################################################
+
+func get_primary_tilemap():
+	if tilemap_scenes.is_empty():
+		Log.warn("No tilemap_scenes on room_def, cannot return primary tilemap")
+		return
+	else:
+		return tilemap_scenes[0]
+
+func get_secondary_tilemap():
+	if tilemap_scenes.is_empty():
+		Log.warn("No tilemap_scenes on room_def, cannot return secondary tilemap")
+		return
+	else:
+		if len(tilemap_scenes) > 1:
+			return tilemap_scenes[1]
+		else:
+			return tilemap_scenes[0]
+
 ## map_cells #####################################################
 
 func calc_cell_meta():

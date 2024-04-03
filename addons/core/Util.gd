@@ -140,6 +140,17 @@ static func each_sibling(node: Node):
 	var p = node.get_parent()
 	return p.get_children().filter(func(ch): return ch != node)
 
+static func ensure_owned_child(parent, var_name, node_name, cls):
+	if parent.get(var_name) == null:
+		parent.set(var_name, parent.get_node_or_null(node_name))
+	if parent.get(var_name) == null:
+		var node = cls.new()
+		node.name = node_name
+		parent.set(var_name, node)
+		parent.add_child(node)
+		node.set_owner(parent)
+
+
 ############################################################
 # packed_scene reading
 

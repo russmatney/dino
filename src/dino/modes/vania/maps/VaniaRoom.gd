@@ -43,36 +43,30 @@ func build_room(def: VaniaRoomDef):
 	add_tile_chunks()
 	add_entities()
 
-func ensure_tilemaps():
-	if tilemap == null:
-		tilemap = get_node_or_null("TileMap")
-	if tilemap == null:
-		tilemap = TileMap.new()
-		tilemap.name = "TileMap"
-		add_child(tilemap)
-		tilemap.set_owner(self)
+## setup tilemaps ##############################################################
 
-	if bg_tilemap == null:
-		bg_tilemap = get_node_or_null("BackgroundTileMap")
-	if bg_tilemap == null:
-		bg_tilemap = TileMap.new()
-		bg_tilemap.name = "BackgroundTileMap"
-		add_child(bg_tilemap)
-		bg_tilemap.set_owner(self)
+func ensure_tilemaps():
+	U.ensure_owned_child(self, "tilemap", "TileMap", TileMap)
+	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", TileMap)
 
 # TODO use neighbor tileset as background near the door
 func setup_tileset():
 	ensure_tilemaps()
-	var rd_tilemap = room_def.tilemap_scenes[0]
-	if rd_tilemap:
-		Log.pr("setting up tileset:", rd_tilemap)
-		var inst = load(rd_tilemap).instantiate()
-		tilemap.set_tileset(inst.get_tileset().duplicate(true))
+	var primary_tilemap = room_def.get_primary_tilemap()
+	if primary_tilemap:
+		Log.pr("setting up tileset:", primary_tilemap)
+		var primary = load(primary_tilemap).instantiate()
+		tilemap.set_tileset(primary.get_tileset().duplicate(true))
 
-		# TODO support multiple bg_tilesets
-		bg_tilemap.set_tileset(inst.get_tileset().duplicate(true))
+	var secondary_tilemap = room_def.get_secondary_tilemap()
+	if secondary_tilemap:
+		Log.pr("setting up tileset:", primary_tilemap)
+		var secondary = load(secondary_tilemap).instantiate()
+		bg_tilemap.set_tileset(secondary.get_tileset().duplicate(true))
 		Reptile.disable_collisions(bg_tilemap)
 
+		# TODO support multiple bg_tilemap layers
+		# TODO darken instead of alpha
 		bg_tilemap.modulate.a = 0.3
 		bg_tilemap.set_z_index(-5)
 	else:
@@ -85,6 +79,8 @@ func clear_all_tiles():
 
 func clear_background_tiles():
 	bg_tilemap.clear()
+
+## background tiles ##############################################################
 
 func add_background_tiles():
 	# tile defs maybe change per room def
@@ -118,7 +114,7 @@ func add_background_tiles():
 
 	bg_tilemap.force_update()
 
-## setup_walls_and_doors ##############################################################
+## walls and doors ##############################################################
 
 # Draws a border around the room
 # cuts away space for 'doors' between neighboring rooms
