@@ -4,32 +4,42 @@ name Entities List
 LEGEND
 ==============
 
+- = OneWayPlatform
+B = Beefstronaut
 b = Blob
 c = Candle
+C = CookingPot
 e = Enemy
 l = Leaf
+M = Monstroar
 o = Target
 p = Player
+v = Void
 x = Tile
-n = NewTile
-m = Monstroar
-- = OneWayPlatform
 
 ==============
 ENTITIES
 ==============
 
-name Boss room
+name OneWayPlatform
 
 ...
-.m.
+...
+---
+...
+...
+
+name Blob
+
+...
+.b.
 ...
 xxx
 
-name Player
+name Beefstronaut room
 
 ...
-.p.
+.B.
 ...
 xxx
 
@@ -40,33 +50,10 @@ name Candle
 ...
 xxx
 
-name Target
+name CookingPot
 
 ...
-.o.
-...
-
-name Target (Double)
-
-o.
-.o
-
-name Target near ceiling
-
-xxx
-.o.
-...
-
-name Target on floor
-
-...
-.o.
-xxx
-
-name Blob
-
-...
-.b.
+.C.
 ...
 xxx
 
@@ -86,11 +73,54 @@ name Leaf
 name Leaf near ceiling
 
 xxx
-.l.
 ...
+.l.
 
 name Leaf on floor
 
-...
 .l.
+...
 xxx
+
+name Monstroar room
+
+...
+.M.
+...
+xxx
+
+name Target
+
+...
+.o.
+...
+
+name Target (Double)
+
+o.
+.o
+
+name Target near ceiling
+
+xxx
+...
+.o.
+
+name Target on floor
+
+.o.
+...
+xxx
+
+name Player
+
+...
+.p.
+...
+xxx
+
+name Void
+
+v.
+..
+xx

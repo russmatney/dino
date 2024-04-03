@@ -27,10 +27,61 @@ var tile_defs: GridDefs
 var entity_defs: GridDefs
 var entities: Array #[String]
 
-var label_to_entity
-
 var tilemap_scene
 var tile_size: int = 16
+
+# TODO support pandora entities instead of scenes directly?
+var label_to_entity = {
+	# player
+	"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+
+	# bosses
+	"Monstroar": {scene=load("res://src/hatbot/bosses/Monstroar.tscn")},
+	"Beefstronaut": {scene=load("res://src/hatbot/bosses/Beefstronaut.tscn")},
+
+	# enemies
+	"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
+	"Enemy": {scene=load("res://src/gunner/enemies/EnemyRobot.tscn")},
+
+	# pickups
+	"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
+
+	# entities
+	"Candle": {scene=load("res://src/hatbot/entities/Candle.tscn")},
+	"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
+		setup=func(p, opts): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
+		},
+	"Target": {scene=load("res://src/gunner/targets/Target.tscn"),
+		setup=func(t, opts):
+		t.position += Vector2.RIGHT * opts.tile_size / 2.0
+		t.position += Vector2.DOWN * opts.tile_size / 2.0
+		},
+	"Void": {scene=load("res://src/spike/entities/DeliveryZone.tscn")},
+
+	# platforms/walls
+	"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
+		# resize to match tile_size
+		setup=func(p, opts):
+		p.max_width = opts.tile_size
+		p.position.x += opts.tile_size/2.0
+		p.position.y += opts.tile_size/4.0
+		},
+	}
+
+var skip_entities = ["CookingPot", "Void", "Player"]
+var all_entities = []
+
+var all_tilemap_scenes = [
+		# "res://addons/reptile/tilemaps/GrassTiles16.tscn",
+		# "res://addons/reptile/tilemaps/SnowTiles16.tscn",
+		# "res://addons/reptile/tilemaps/CaveTiles16.tscn",
+		# "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
+		"res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",
+		"res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",
+		"res://addons/reptile/tilemaps/VolcanoTiles8.tscn",
+		"res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",
+		"res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",
+	]
 
 func to_printable():
 	return {
@@ -42,6 +93,8 @@ func to_printable():
 ## init #####################################################3
 
 func _init(opts={}):
+	all_entities = label_to_entity.keys().filter(func(x): return not x in skip_entities)
+
 	room_type = opts.get("room_type", room_type)
 	if opts.get("base_scene_path"):
 		base_scene_path = opts.get("base_scene_path")
@@ -58,8 +111,6 @@ func _init(opts={}):
 		entities = opts.get("entities")
 		Log.pr("setting entities", entities)
 	tile_size = opts.get("tile_size", tile_size)
-
-	label_to_entity = DinoLevelGenData.label_to_entity({tile_size=tile_size})
 
 ## setters #####################################################3
 
@@ -93,50 +144,19 @@ func select_room_type():
 func select_room_shape():
 	var shapes = [
 		[[Vector3i()], vania_room_path],
-		[[Vector3i(), Vector3i(1, 0, 0),], vania_room_path_wide,],
-		[[Vector3i(), Vector3i(0, 1, 0),], vania_room_path_tall],
+		[[Vector3i(), Vector3i(1, 0, 0),], vania_room_path,],
+		[[Vector3i(), Vector3i(0, 1, 0),], vania_room_path],
 		[[Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-			Vector3i(0, 1, 0), Vector3i(1, 1, 0),], vania_room_path_4x],
+			Vector3i(0, 1, 0), Vector3i(1, 1, 0),], vania_room_path],
 		]
 	var shape = shapes.pick_random()
 	self.local_cells = shape[0]
 	self.base_scene_path = shape[1]
 	return self
 
-var all_entities = [
-	"Candle",
-	"Target",
-	"Leaf",
-	"Enemy",
-	"Monstroar",
-	"Beefstronaut", # TODO support adding entity without a grid def
-	]
-
 func select_entities():
-	var entity_groups = [
-		# ["Candle"],
-		# ["Player"],
-		# ["Target", "Target", "Target"],
-		# ["Leaf", "Leaf", "Leaf"],
-		# ["Candle", "Candle"],
-		["Enemy", "Enemy", "Enemy"],
-		["Monstroar", "Target"],
-		]
-	var ents = entity_groups.pick_random()
-	self.entities = ents
+	self.entities = U.rand_of(all_entities, U.rand_of([2,3,4]))
 	return self
-
-var all_tilemap_scenes = [
-		# "res://addons/reptile/tilemaps/GrassTiles16.tscn",
-		# "res://addons/reptile/tilemaps/SnowTiles16.tscn",
-		# "res://addons/reptile/tilemaps/CaveTiles16.tscn",
-		# "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
-		"res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",
-		"res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",
-		"res://addons/reptile/tilemaps/VolcanoTiles8.tscn",
-		"res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",
-		"res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",
-	]
 
 func select_tilemap():
 	tilemap_scene = load(all_tilemap_scenes.pick_random())

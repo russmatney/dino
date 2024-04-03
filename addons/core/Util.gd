@@ -245,7 +245,7 @@ static func call_in(node, callable, s):
 ############################################################
 # menus/buttons/popup
 
-func setup_popup_items(popup: PopupMenu, items: Array, on_select: Callable):
+static func setup_popup_items(popup: PopupMenu, items: Array, on_select: Callable):
 	# clear items
 	popup.clear()
 

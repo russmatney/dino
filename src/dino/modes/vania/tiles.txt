@@ -4,12 +4,6 @@ name Tiles List
 LEGEND
 ==============
 
-b = Blob
-c = Candle
-e = Enemy
-l = Leaf
-o = Target
-p = Player
 x = Tile
 n = NewTile
 - = OneWayPlatform

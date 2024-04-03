@@ -36,6 +36,7 @@ func _ready():
 func build_room(def: VaniaRoomDef):
 	room_def = def
 	ensure_tilemaps()
+	clear_all_tiles()
 	setup_tileset()
 	add_background_tiles()
 	setup_walls_and_doors()
@@ -75,6 +76,11 @@ func setup_tileset():
 		bg_tilemap.set_z_index(-5)
 	else:
 		Log.warn("cannot setup tileset without room_def.tilemap_scene")
+
+func clear_all_tiles():
+	ensure_tilemaps()
+	tilemap.clear()
+	bg_tilemap.clear()
 
 func clear_background_tiles():
 	bg_tilemap.clear()
@@ -276,6 +282,8 @@ func add_entities():
 			var pos = tilemap.map_to_local(e_coord + start_coord)
 			var entity = entity_opts.scene.instantiate()
 			entity.position = pos
+			if entity_opts.get("setup"):
+				entity_opts.setup.call(entity, {tile_size=room_def.tile_size})
 			add_child(entity)
 			entity.set_owner(self)
 
