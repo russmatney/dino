@@ -38,6 +38,25 @@ static var all_room_shapes = {
 	# 						Vector3i(0, 1, 0),], # T shape
 	}
 
+static var all_constraints = [
+	IN_LARGE_ROOM,
+	IN_SMALL_ROOM,
+	IN_WOODEN_BOXES,
+	IN_SPACESHIP,
+	IN_KINGDOM,
+	IN_VOLCANO,
+	IN_GRASSY_CAVE,
+	HAS_BOSS,
+	HAS_ENEMY,
+	HAS_TARGET,
+	HAS_LEAF,
+	IS_COOKING_ROOM,
+	HAS_COOKING_POT,
+	HAS_BLOB,
+	HAS_VOID,
+	HAS_PLAYER,
+	]
+
 var entities
 var room_shape
 var room_shapes
@@ -102,6 +121,46 @@ func overwrite_tilemap(inp: RoomInputs):
 
 static func merge_many(inputs):
 	return inputs.reduce(func(a, b): return a.merge(b))
+
+static func apply_constraints(conses):
+	return conses.reduce(RoomInputs.apply_constraint, RoomInputs.new())
+
+static func apply_constraint(inp: RoomInputs, constraint):
+	var cons_inp = RoomInputs.get_constraint_data(constraint)
+	return inp.merge(cons_inp)
+
+static func get_constraint_data(constraint):
+	match constraint:
+		IN_LARGE_ROOM: return large_room()
+		IN_SMALL_ROOM: return small_room()
+		IN_WOODEN_BOXES: return wooden_boxes()
+		IN_SPACESHIP: return spaceship()
+		IN_KINGDOM: return kingdom()
+		IN_VOLCANO: return volcano()
+		IN_GRASSY_CAVE: return grassy_cave()
+		IS_COOKING_ROOM: return cooking_room()
+
+		HAS_BOSS: return boss_room()
+		HAS_ENEMY: return enemy_room()
+		HAS_TARGET: return target_room()
+		HAS_LEAF: return leaf_room()
+		HAS_COOKING_POT: return has_entity("CookingPot")
+		HAS_BLOB: return has_entity("Blob")
+		HAS_VOID: return has_entity("Void")
+		HAS_PLAYER: return spaceship()
+		_: return RoomInputs.new()
+
+static func has_entity(ent):
+	var cons
+	match ent:
+		"CookingPot": cons = HAS_COOKING_POT
+		"Blob": cons = HAS_BLOB
+		"Void": cons = HAS_VOID
+	var ri = RoomInputs.new({entities=[ent]})
+	if cons:
+		ri.constraints = [cons]
+	return ri
+
 
 ## room components ######################################################33
 
@@ -186,6 +245,7 @@ const HAS_BOSS = "has_boss"
 const HAS_ENEMY = "has_enemy"
 const HAS_TARGET = "has_target"
 const HAS_LEAF = "has_leaf"
+const IS_COOKING_ROOM = "is_cooking_room"
 const HAS_COOKING_POT = "has_cooking_pot"
 const HAS_BLOB = "has_blob"
 const HAS_VOID = "has_void"
@@ -240,7 +300,7 @@ static func cooking_room():
 			["Blob", "CookingPot", "Void"],
 			["Blob", "Blob", "CookingPot", "Void"],
 			].pick_random(),
-		constraints=[HAS_COOKING_POT, HAS_BLOB, HAS_VOID],
+		constraints=[IS_COOKING_ROOM],
 		}).merge(large_room())
 
 static func player_room():

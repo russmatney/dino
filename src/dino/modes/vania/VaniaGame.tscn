@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=11 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaGame.gd" id="1_38knr"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_3mcvu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="4_k2nl2"]
 [ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="5_5mv8r"]
 [ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="6_1pq7u"]
+[ext_resource type="Theme" uid="uid://dx8buylqr7olg" path="res://src/themes/EditorPopupMenus.tres" id="7_5blm1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li3ee"]
 content_margin_left = 16.0
@@ -160,6 +161,7 @@ scroll_active = false
 [node name="EditEntitiesMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("7_5blm1")
 text = "Edit Entities"
 
 [node name="PanelContainer6" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
@@ -184,7 +186,33 @@ scroll_active = false
 [node name="EditTilesetMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("7_5blm1")
 text = "Edit Tileset"
+
+[node name="PanelContainer8" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8"]
+layout_mode = 2
+
+[node name="RoomConstraintsLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_k2nl2")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "constraints: []"
+fit_content = true
+scroll_active = false
+
+[node name="EditConstraintsMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_5blm1")
+text = "Edit Constraints"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
 custom_minimum_size = Vector2(0, 30)
@@ -204,6 +232,7 @@ layout_mode = 2
 
 [node name="EditRoomDefButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme = ExtResource("5_5mv8r")
 text = "Edit Room Def"
@@ -231,11 +260,17 @@ size_flags_horizontal = 3
 theme = ExtResource("5_5mv8r")
 text = "--rooms"
 
-[node name="RegenButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+[node name="RegenOtherRoomsButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("5_5mv8r")
-text = "Regen!"
+text = "Regen Other Rooms"
+
+[node name="ReloadThisRoomButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_5mv8r")
+text = "Reload room"
 
 [node name="RespawnPlayerButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true

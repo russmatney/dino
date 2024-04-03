@@ -12,15 +12,19 @@ var current_room_def: VaniaRoomDef
 @onready var neighbors_label = $%NeighborsLabel
 
 @onready var room_entities_label = $%RoomEntitiesLabel
-@onready var room_tiles_label = $%RoomTilesLabel
-
 @onready var edit_entities_menu_button = $%EditEntitiesMenuButton
+
+@onready var room_tiles_label = $%RoomTilesLabel
 @onready var edit_tileset_menu_button = $%EditTilesetMenuButton
+
+@onready var room_constraints_label = $%RoomConstraintsLabel
+@onready var edit_constraints_menu_button = $%EditConstraintsMenuButton
 
 @onready var edit_room_def_button = $%EditRoomDefButton
 @onready var respawn_player_button = $%RespawnPlayerButton
 
-@onready var regen_button = $%RegenButton
+@onready var regen_other_rooms_button = $%RegenOtherRoomsButton
+@onready var reload_this_room_button = $%ReloadThisRoomButton
 @onready var inc_room_count_button = $%IncRoomCountButton
 @onready var dec_room_count_button = $%DecRoomCountButton
 @onready var rerender_background_button = $%RerenderBackgroundButton
@@ -46,7 +50,8 @@ func _ready():
 	edit_room_def_button.pressed.connect(on_edit_room_def_pressed)
 	respawn_player_button.pressed.connect(on_respawn_player_pressed)
 
-	regen_button.pressed.connect(on_regen_pressed)
+	regen_other_rooms_button.pressed.connect(on_regen_other_rooms_pressed)
+	reload_this_room_button.pressed.connect(on_reload_this_room_pressed)
 	inc_room_count_button.pressed.connect(on_inc_room_count_pressed)
 	dec_room_count_button.pressed.connect(on_dec_room_count_pressed)
 	rerender_background_button.pressed.connect(on_rerender_background_pressed)
@@ -56,6 +61,7 @@ func on_room_loaded():
 	update_room_def()
 	update_edit_entities()
 	update_edit_tilesets()
+	update_edit_constraints()
 
 
 ## rerender ######################################################
@@ -65,11 +71,13 @@ func update_room_def():
 		return
 	Log.pr("current rd", current_room_def)
 	seed_label.text = "seed: %s" % Dino.egg
-	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
-	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
-	neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
-	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().get_file()
 	room_count_label.text = "rooms: %s (%s)" % [len(game.room_defs), game.desired_room_count]
+	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
+	neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
+
+	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
+	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().get_file()
+	room_constraints_label.text = "constraints: %s" % Log.to_printable([current_room_def.constraints])
 
 func update_edit_entities():
 	if not current_room_def:
@@ -101,14 +109,36 @@ func update_edit_tilesets():
 		game.generator.build_and_prep_scene(current_room_def)
 		game.reload_current_room())
 
+func update_edit_constraints():
+	if not current_room_def:
+		return
+
+	var items = []
+	items.append_array(current_room_def.constraints.map(func(cons):
+		return {label="Remove '%s'" % cons, on_select=func(): current_room_def.constraints.erase(cons)}))
+	items.append_array(RoomInputs.all_constraints.map(func(cons):
+		return {label="Add '%s'" % cons, on_select=func(): current_room_def.constraints.append(cons)}))
+
+	var popup = edit_constraints_menu_button.get_popup()
+	U.setup_popup_items(popup, items, func(item):
+		item.on_select.call()
+
+		# TODO when changing room shape, this updates local_cells, but not map_cells
+		current_room_def.reapply_constraints()
+
+		game.generator.build_and_prep_scene(current_room_def)
+		game.reload_current_room())
 
 ## buttons pressed ######################################################
 
 func on_edit_room_def_pressed():
 	pass
 
-func on_regen_pressed():
+func on_regen_other_rooms_pressed():
 	game.regenerate_other_rooms()
+
+func on_reload_this_room_pressed():
+	game.reload_current_room()
 
 func on_inc_room_count_pressed():
 	game.increment_room_count()

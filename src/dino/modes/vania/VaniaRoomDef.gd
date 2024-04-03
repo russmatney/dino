@@ -160,6 +160,13 @@ func get_neighbor_room_paths() -> Array[String]:
 
 	return ret
 
+## constraints #####################################################3
+
+func reapply_constraints():
+	var ri = RoomInputs.apply_constraints(constraints)
+	Log.pr("Reapplying constraints to room def", ri)
+	ri.update_def(self)
+
 ## static #####################################################3
 
 static func generate_defs(opts={}):
