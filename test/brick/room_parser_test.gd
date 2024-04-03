@@ -149,20 +149,20 @@ x.....
 ")
 
 	assert_that(parsed).contains_keys(["rooms"])
-	assert_that(len(parsed.grids)).is_equal(2)
+	assert_that(len(parsed.rooms)).is_equal(2)
 
 	# arbitrary metadata
-	assert_that(parsed.grids[0].room_type).is_equal("SQUARE")
-	assert_that(parsed.grids[1].room_type).is_equal("LONG")
-	assert_that(parsed.grids[0].is_start).is_equal(true)
+	assert_that(parsed.rooms[0].room_type).is_equal("SQUARE")
+	assert_that(parsed.rooms[1].room_type).is_equal("LONG")
+	assert_that(parsed.rooms[0].is_start).is_equal(true)
 
 	# shape
-	assert_that(parsed.grids[0].shape).is_equal([
+	assert_that(parsed.rooms[0].shape).is_equal([
 		["x", "x", "x"],
 		["x", "p", "."],
 		["x", ".", "."]
 		])
-	assert_that(parsed.grids[1].shape).is_equal([
+	assert_that(parsed.rooms[1].shape).is_equal([
 		["x", "x", "x", "x", "x", "x"],
 		["x", ".", ".", ".", "p", "."],
 		["x", ".", ".", ".", ".", "."],
@@ -199,16 +199,16 @@ x.....
 ")
 
 	assert_that(parsed).contains_keys(["rooms"])
-	assert_that(len(parsed.grids)).is_equal(2)
-	assert_that(parsed.grids[0].room_name).is_equal("A")
-	assert_that(parsed.grids[1].room_name).is_equal("B")
+	assert_that(len(parsed.rooms)).is_equal(2)
+	assert_that(parsed.rooms[0].room_name).is_equal("A")
+	assert_that(parsed.rooms[1].room_name).is_equal("B")
 
-	assert_that(parsed.grids[0].shape).is_equal([
+	assert_that(parsed.rooms[0].shape).is_equal([
 		["x", "x", "x"],
 		["x", ".", "."],
 		["x", ".", "."]
 		])
-	assert_that(parsed.grids[1].shape).is_equal([
+	assert_that(parsed.rooms[1].shape).is_equal([
 		["x", "x", "x", "x", "x", "x"],
 		["x", ".", ".", ".", ".", "."],
 		["x", ".", ".", ".", ".", "."],
@@ -237,9 +237,9 @@ x..
 	")
 
 	assert_that(parsed).contains_keys(["rooms"])
-	assert_that(len(parsed.grids)).is_equal(1)
-	assert_that(parsed.grids[0].room_name).is_equal("A")
-	assert_that(parsed.grids[0].shape).is_equal([
+	assert_that(len(parsed.rooms)).is_equal(1)
+	assert_that(parsed.rooms[0].room_name).is_equal("A")
+	assert_that(parsed.rooms[0].shape).is_equal([
 		["x", "x", "x"],
 		["x", ".", "."],
 		["x", ".", "."]
