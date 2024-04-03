@@ -163,7 +163,6 @@ func get_neighbor_room_paths() -> Array[String]:
 ## constraints #####################################################3
 
 func reapply_constraints():
-	# TODO prevent changing room shape via this func
 	RoomInputs.apply_constraints(constraints, self)
 
 ## static #####################################################3
@@ -183,18 +182,14 @@ static func generate_defs(opts={}):
 			RoomInputs.IN_SPACESHIP,
 			RoomInputs.IN_SMALL_ROOM,
 		], [
-			RoomInputs.HAS_LEAF,
-			RoomInputs.HAS_LEAF,
+			{RoomInputs.HAS_LEAF: {count=2}},
 			RoomInputs.IN_GRASSY_CAVE,
 			RoomInputs.IN_WIDE_ROOM,
-		], [
-			RoomInputs.HAS_TARGET,
-			RoomInputs.HAS_TARGET,
-			RoomInputs.IN_VOLCANO,
-		], [
-			RoomInputs.HAS_ENEMY,
-			RoomInputs.HAS_ENEMY,
-			RoomInputs.HAS_ENEMY,
+		], {
+			RoomInputs.HAS_TARGET: {count=3},
+			RoomInputs.IN_VOLCANO: {}
+		}, [
+			{RoomInputs.HAS_ENEMY: {count=3}},
 			RoomInputs.IN_LARGE_ROOM,
 		], [
 			RoomInputs.HAS_TARGET,
@@ -206,19 +201,16 @@ static func generate_defs(opts={}):
 			RoomInputs.IN_SPACESHIP,
 		],
 			RoomInputs.random_room(),
-		[
-			RoomInputs.HAS_ENEMY,
-		], [
+		{
+			RoomInputs.HAS_ENEMY: {count=3},
+		}, [
 			RoomInputs.IS_COOKING_ROOM,
-		], [
-			RoomInputs.HAS_TARGET,
-			RoomInputs.HAS_TARGET,
-			RoomInputs.HAS_ENEMY,
-			RoomInputs.HAS_ENEMY,
-			RoomInputs.IN_LARGE_ROOM,
-		], [
-			RoomInputs.HAS_BOSS,
-			RoomInputs.HAS_BOSS,
+		], {
+			RoomInputs.HAS_TARGET: {count=5},
+			RoomInputs.HAS_ENEMY: {count=2},
+			RoomInputs.IN_LARGE_ROOM: {},
+		}, [
+			{RoomInputs.HAS_BOSS: {count=2}},
 			RoomInputs.IN_LARGE_ROOM,
 			RoomInputs.IN_SPACESHIP,
 		]

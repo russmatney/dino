@@ -130,11 +130,11 @@ static func merge_many(inputs):
 	return inputs.reduce(func(a, b): return a.merge(b))
 
 static func apply_constraints(conses, def: VaniaRoomDef):
-	def.constraints = conses
-
 	var existing_shape = def.local_cells
 
 	if conses is RoomInputs:
+		def.constraints = [conses]
+
 		conses.update_def(def)
 		if existing_shape != null and not existing_shape.is_empty():
 			# maintain current local_cells
@@ -148,6 +148,7 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 		Log.warn("Unhandled constraint collection passed to apply_constraints, aborting", conses)
 		return
 
+	def.constraints = conses
 	var ri = conses.map(func(cons):
 		# map constants to dicts with default opts
 		if cons is String:
@@ -308,13 +309,15 @@ static func has_entity(ent, opts={}):
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
-static func has_boss(_opts={}):
-	return RoomInputs.new({
-		entities=[
-			["Monstroar"],
-			["Beefstronaut"],
-			].pick_random(),
-		})
+static func has_boss(opts={}):
+	if opts.get("count", 1):
+		return RoomInputs.new({
+			entities=[["Monstroar"], ["Beefstronaut"]].pick_random(),
+			})
+	else:
+		return RoomInputs.new({
+			entities=["Monstroar", "Beefstronaut"],
+			})
 
 ## encounters ######################################################33
 

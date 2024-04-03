@@ -115,15 +115,14 @@ func update_edit_constraints():
 
 	var items = []
 	items.append_array(current_room_def.constraints.map(func(cons):
-		return {label="Remove '%s'" % cons, on_select=func(): current_room_def.constraints.erase(cons)}))
+		return {label="Remove '%s'" % Log.to_printable([cons]), on_select=func(): current_room_def.constraints.erase(cons)}))
 	items.append_array(RoomInputs.all_constraints.map(func(cons):
-		return {label="Add '%s'" % cons, on_select=func(): current_room_def.constraints.append(cons)}))
+		return {label="Add '%s'" % Log.to_printable([cons]), on_select=func(): current_room_def.constraints.append(cons)}))
 
 	var popup = edit_constraints_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
 		item.on_select.call()
 
-		# TODO when changing room shape, this updates local_cells, but not map_cells
 		current_room_def.reapply_constraints()
 
 		game.generator.build_and_prep_scene(current_room_def)
