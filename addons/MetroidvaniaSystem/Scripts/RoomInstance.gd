@@ -125,12 +125,6 @@ func get_local_cells() -> Array[Vector2i]:
 		return Vector2i(coords.x - min_cell.x, coords.y - min_cell.y)))
 	return ret
 
-func to_local_cell(coords: Vector3i) -> Vector2i:
-	return Vector2i(coords.x - min_cell.x, coords.y - min_cell.y)
-
-func get_cell_rect(cell: Vector2i) -> Rect2:
-	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
-
 ## Returns the top-left cell's flat coordinates within the room's rectangle.
 func get_base_coords() -> Vector2i:
 	return min_cell

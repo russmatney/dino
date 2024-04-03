@@ -117,18 +117,24 @@ func calc_cell_meta():
 		max_map_cell.x = maxi(max_map_cell.x, p.x)
 		max_map_cell.y = maxi(max_map_cell.y, p.y)
 
+# the size of the entire room in pixels
 func get_size() -> Vector2:
 	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
 		calc_cell_meta()
 	return Vector2(max_map_cell - min_map_cell + Vector2i.ONE) * MetSys.settings.in_game_cell_size
 
-func to_local_cell(cell: Vector3i) -> Vector2i:
+func _to_local_cell(cell: Vector3i) -> Vector2i:
 	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
 		calc_cell_meta()
 	return Vector2i(cell.x - min_map_cell.x, cell.y - min_map_cell.y)
 
-func get_cell_rect(cell: Vector2i) -> Rect2:
-	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
+func _get_local_cell_rect(cell: Vector2i) -> Rect2:
+	return Rect2(Vector2(cell) * MetSys.settings.in_game_cell_size,
+		MetSys.settings.in_game_cell_size)
+
+# returns a local rect (position/size) of a rect around the passed map_cell coord
+func get_map_cell_rect(map_cell: Vector3i) -> Rect2:
+	return _get_local_cell_rect(_to_local_cell(map_cell))
 
 ## local_cells ######################################################
 
@@ -160,6 +166,29 @@ func get_neighbor_room_paths() -> Array[String]:
 
 	return ret
 
+func get_neighbor_data():
+	var neighbor_paths = get_neighbor_room_paths()
+
+	var neighbors = []
+	for p in neighbor_paths:
+		neighbors.append({room_path=p, map_cells=MetSys.map_data.get_cells_assigned_to(p)})
+
+	for ngbr in neighbors:
+		ngbr.possible_doors = []
+		for n_cell in ngbr.cells:
+			for r_cell in map_cells:
+				if is_neighboring_cell(n_cell, r_cell):
+					ngbr.possible_doors.append([r_cell, n_cell])
+
+	return neighbors
+
+func is_neighboring_cell(a: Vector3i, b: Vector3i) -> bool:
+	if a.x - b.x == 0:
+		return abs(a.y - b.y) == 1
+	if a.y - b.y == 0:
+		return abs(a.x - b.x) == 1
+	return false
+
 ## constraints #####################################################3
 
 func reapply_constraints():
@@ -188,32 +217,33 @@ static func generate_defs(opts={}):
 		], {
 			RoomInputs.HAS_TARGET: {count=3},
 			RoomInputs.IN_VOLCANO: {}
-		}, [
-			{RoomInputs.HAS_ENEMY: {count=3}},
-			RoomInputs.IN_LARGE_ROOM,
-		], [
-			RoomInputs.HAS_TARGET,
-			RoomInputs.HAS_LEAF,
-			RoomInputs.IN_WOODEN_BOXES,
-		], [
-			RoomInputs.HAS_BOSS,
-			RoomInputs.IN_LARGE_ROOM,
-			RoomInputs.IN_SPACESHIP,
-		],
-			RoomInputs.random_room(),
-		{
-			RoomInputs.HAS_ENEMY: {count=3},
-		}, [
-			RoomInputs.IS_COOKING_ROOM,
-		], {
-			RoomInputs.HAS_TARGET: {count=5},
-			RoomInputs.HAS_ENEMY: {count=2},
-			RoomInputs.IN_LARGE_ROOM: {},
-		}, [
-			{RoomInputs.HAS_BOSS: {count=2}},
-			RoomInputs.IN_LARGE_ROOM,
-			RoomInputs.IN_SPACESHIP,
-		]
+		},
+		# [
+		# 	{RoomInputs.HAS_ENEMY: {count=3}},
+		# 	RoomInputs.IN_LARGE_ROOM,
+		# ], [
+		# 	RoomInputs.HAS_TARGET,
+		# 	RoomInputs.HAS_LEAF,
+		# 	RoomInputs.IN_WOODEN_BOXES,
+		# ], [
+		# 	RoomInputs.HAS_BOSS,
+		# 	RoomInputs.IN_LARGE_ROOM,
+		# 	RoomInputs.IN_SPACESHIP,
+		# ],
+		# 	RoomInputs.random_room(),
+		# {
+		# 	RoomInputs.HAS_ENEMY: {count=3},
+		# }, [
+		# 	RoomInputs.IS_COOKING_ROOM,
+		# ], {
+		# 	RoomInputs.HAS_TARGET: {count=5},
+		# 	RoomInputs.HAS_ENEMY: {count=2},
+		# 	RoomInputs.IN_LARGE_ROOM: {},
+		# }, [
+		# 	{RoomInputs.HAS_BOSS: {count=2}},
+		# 	RoomInputs.IN_LARGE_ROOM,
+		# 	RoomInputs.IN_SPACESHIP,
+		# ]
 		]
 
 	for inputs in room_inputs:

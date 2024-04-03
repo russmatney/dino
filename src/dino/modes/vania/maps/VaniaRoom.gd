@@ -38,8 +38,8 @@ func build_room(def: VaniaRoomDef):
 	room_def = def
 	clear_all_tiles()
 	setup_tileset()
-	add_background_tiles()
 	setup_walls_and_doors()
+	add_background_tiles()
 	add_tile_chunks()
 	add_entities()
 
@@ -110,6 +110,7 @@ func add_background_tiles():
 		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
 			tile_coords.append(e_coord + start_coord)
 
+	Log.pr("bg_tilemap setting bg tiles", len(tile_coords))
 	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
 
 	bg_tilemap.force_update()
@@ -119,14 +120,15 @@ func add_background_tiles():
 # Draws a border around the room
 # cuts away space for 'doors' between neighboring rooms
 func setup_walls_and_doors():
-	var neighbors = get_possible_neighbor_doors()
-	var door_cells = []
-	for ngbr in neighbors:
-		door_cells.append_array(get_door_cells_to_neighbor(ngbr))
-	for c in door_cells:
-		tilemap.erase_cell(0, c)
+	var neighbors = room_def.get_neighbor_data()
 
-	fill_tilemap_borders({skip_cells=door_cells})
+	var door_tile_coords = []
+	for n in neighbors:
+		for door in n.possible_doors:
+			var tile_coords = get_tile_coords_for_doorway(door)
+			door_tile_coords.append_array(tile_coords)
+
+	fill_tilemap_borders({skip_cells=door_tile_coords})
 
 	tilemap.force_update()
 
@@ -146,72 +148,41 @@ func fill_tilemap_borders(opts={}):
 
 	tilemap.set_cells_terrain_connect(0, t_cells, 0, 0)
 
-func is_neighbor(a: Vector3i, b: Vector3i) -> bool:
-	if a.x - b.x == 0:
-		return abs(a.y - b.y) == 1
-	if a.y - b.y == 0:
-		return abs(a.x - b.x) == 1
-	return false
+func get_tile_coords_for_doorway(map_cell_pair):
+	var wall = map_cell_pair[1] - map_cell_pair[0]
+	wall = Vector2(wall.x, wall.y)
 
-func get_possible_neighbor_doors():
-	var room_cells = MetSys.map_data.get_cells_assigned_to(room_def.room_path)
-	var neighbors = []
+	# local rect (position, size) of the cell for the doorway
+	var cell_rect = room_def.get_map_cell_rect(map_cell_pair[0])
 
-	var neighbor_paths = room_def.get_neighbor_room_paths()
-	for p in neighbor_paths:
-		neighbors.append({path=p, cells=MetSys.map_data.get_cells_assigned_to(p)})
+	var cell_width = MetSys.settings.in_game_cell_size.x
+	var cell_height = MetSys.settings.in_game_cell_size.y
 
-	for ngbr in neighbors:
-		ngbr.possible_doors = []
-		for n_cell in ngbr.cells:
-			for r_cell in room_cells:
-				if is_neighbor(n_cell, r_cell):
-					ngbr.possible_doors.append([r_cell, n_cell])
+	var border_width = tile_border_width * room_def.tile_size
+	var door_width = tile_door_width * room_def.tile_size
 
-	return neighbors
+	var door_rect = Rect2()
+	match wall:
+		Vector2.LEFT:
+			door_rect.position = cell_rect.position
+			door_rect.position.y += (cell_height - door_width) / 2
+			door_rect.size = Vector2(border_width, door_width)
+		Vector2.RIGHT:
+			door_rect.position = cell_rect.position + Vector2.RIGHT * (cell_width - border_width)
+			door_rect.position.y += (cell_height - door_width) / 2
+			door_rect.size = Vector2(border_width, door_width)
+		Vector2.UP:
+			door_rect.position = cell_rect.position
+			door_rect.position.x += (cell_width - door_width) / 2
+			door_rect.size = Vector2(door_width, border_width)
+		Vector2.DOWN:
+			door_rect.position = Vector2(cell_rect.position.x, cell_rect.end.y)
+			door_rect.position.y -= border_width
+			door_rect.position.x += (cell_width - door_width) / 2
+			door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
 
-func get_door_cells_to_neighbor(neighbor):
-	# var door = neighbor.possible_doors.pick_random()
-	# for now, open _all_ neighbor doors
-	var doors = neighbor.possible_doors
-	var door_cells = []
-
-	for door in doors:
-		var wall = door[1] - door[0]
-		wall = Vector2(wall.x, wall.y)
-
-		var room_cell = room_def.to_local_cell(door[0])
-		var cell_rect = room_def.get_cell_rect(room_cell)
-
-		var cell_width = MetSys.settings.in_game_cell_size.x
-		var cell_height = MetSys.settings.in_game_cell_size.y
-
-		var border_width = tile_border_width * room_def.tile_size
-		var door_width = tile_door_width * room_def.tile_size
-
-		var door_rect = Rect2()
-		match wall:
-			Vector2.LEFT:
-				door_rect.position = cell_rect.position
-				door_rect.position.y += (cell_height - door_width) / 2
-				door_rect.size = Vector2(border_width, door_width)
-			Vector2.RIGHT:
-				door_rect.position = cell_rect.position + Vector2.RIGHT * (cell_width - border_width)
-				door_rect.position.y += (cell_height - door_width) / 2
-				door_rect.size = Vector2(border_width, door_width)
-			Vector2.UP:
-				door_rect.position = cell_rect.position
-				door_rect.position.x += (cell_width - door_width) / 2
-				door_rect.size = Vector2(door_width, border_width)
-			Vector2.DOWN:
-				door_rect.position = Vector2(cell_rect.position.x, cell_rect.end.y)
-				door_rect.position.y -= border_width
-				door_rect.position.x += (cell_width - door_width) / 2
-				door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
-
-		var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
-		door_cells.append_array(Reptile.cells_in_rect(rect))
-	return door_cells
+	var rect = Reptile.rect_to_local_rect(tilemap, door_rect)
+	return Reptile.cells_in_rect(rect)
 
 ## add_tile_chunks ##############################################################
 
