@@ -13,7 +13,7 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 var room_defs = []
 
 # capture as RoomGenInputs
-var tile_size = 16 # TODO fixed? dynamic?
+var tile_size = 16
 var desired_room_count = 3
 
 func increment_room_count():

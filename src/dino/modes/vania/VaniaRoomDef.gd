@@ -28,7 +28,7 @@ var entity_defs: GridDefs
 var entities: Array #[String]
 
 var tilemap_scene
-var tile_size: int = 16
+var tile_size
 
 # TODO support pandora entities instead of scenes directly?
 var label_to_entity = {
@@ -62,7 +62,7 @@ var label_to_entity = {
 	"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
 		# resize to match tile_size
 		setup=func(p, opts):
-		p.max_width = opts.tile_size
+		p.max_width = opts.tile_size * 3
 		p.position.x += opts.tile_size/2.0
 		p.position.y += opts.tile_size/4.0
 		},
@@ -172,7 +172,7 @@ static func generate_defs(opts={}):
 
 	var defs: Array[VaniaRoomDef] = []
 	var fixed = [
-		{entities=["Candle", "Player", "Target", "Leaf"]}
+		# {entities=["Candle", "Player", "Target", "Leaf"]}
 		]
 	for i in range(opts.get("count", 4)):
 		var data = {
