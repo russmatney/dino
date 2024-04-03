@@ -4,8 +4,10 @@ class_name VaniaGeneratorTest
 func test_build_room_sets_tilemap_borders():
 	var room = VaniaRoom.new()
 	var def = VaniaRoomDef.new()
-	# set a tileset and small room
-	RoomInputs.spaceship().merge(RoomInputs.small_room()).update_def(def)
+	RoomInputs.apply_constraints([
+		RoomInputs.IN_SPACESHIP,
+		RoomInputs.IN_SMALL_ROOM,
+	], def)
 
 	room.set_room_def(def)
 	room.setup_tileset()
@@ -42,7 +44,10 @@ x..
 
 	var room = VaniaRoom.new()
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInputs.spaceship().merge(RoomInputs.small_room()).update_def(def)
+	RoomInputs.apply_constraints([
+		RoomInputs.IN_SPACESHIP,
+		RoomInputs.IN_SMALL_ROOM,
+	], def)
 
 	room.set_room_def(def)
 	room.setup_tileset()
@@ -80,7 +85,11 @@ xxx
 
 	var room = VaniaRoom.new()
 	var def = VaniaRoomDef.new({entity_defs=ent_defs})
-	RoomInputs.player_room().merge(RoomInputs.spaceship()).update_def(def)
+	RoomInputs.apply_constraints([
+		RoomInputs.IN_SPACESHIP,
+		RoomInputs.HAS_PLAYER,
+		RoomInputs.IN_SMALL_ROOM,
+	], def)
 
 	room.set_room_def(def)
 	room.setup_tileset()
