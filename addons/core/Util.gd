@@ -275,7 +275,10 @@ static func setup_popup_items(popup: PopupMenu, items: Array, on_select: Callabl
 
 
 ############################################################
-## random ###########################################################
+## repeate/random ###########################################################
+
+static func repeat(s, n):
+	return range(n).map(func(_x): return s)
 
 static func rand_of(arr, n=1):
 	if len(arr) == 0:

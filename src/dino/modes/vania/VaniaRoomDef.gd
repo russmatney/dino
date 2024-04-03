@@ -229,12 +229,7 @@ static func generate_defs(opts={}):
 			entity_defs=e_defs, tile_defs=t_defs,
 			tile_size=opts.get("tile_size")
 			})
-		if inputs is RoomInputs:
-			inputs.update_def(def)
-		elif inputs is Array:
-			RoomInputs.apply_constraints(inputs, def)
-		elif inputs is Dictionary:
-			RoomInputs.apply_constraints(inputs, def)
+		RoomInputs.apply_constraints(inputs, def)
 		defs.append(def)
 
 	return defs

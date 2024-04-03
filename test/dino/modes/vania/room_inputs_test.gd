@@ -175,7 +175,7 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 	assert_array(def.tilemap_scenes).contains(inp.tilemap_scenes)
 	assert_array(def.tilemap_scenes).is_not_empty()
 
-	assert_array(inp.room_shape).is_not_null()
+	assert_that(inp.room_shape).is_not_null()
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.local_cells).is_equal(inp.room_shape)
 
@@ -218,3 +218,54 @@ func test_apply_constraints_keeps_local_cells():
 	_inp = RoomInputs.apply_constraints([RoomInputs.IN_SMALL_ROOM,], def)
 
 	assert_array(def.local_cells).is_equal(my_local_cells)
+
+func test_apply_constraints_appends_multiple_entities():
+	var def = VaniaRoomDef.new()
+	var inp = RoomInputs.apply_constraints([
+			RoomInputs.HAS_TARGET,
+			RoomInputs.HAS_TARGET,
+			RoomInputs.HAS_PLAYER,
+			], def)
+
+	assert_array(inp.entities).contains(["Target", "Player"])
+	assert_int(len(inp.entities)).is_equal(3)
+	assert_array(def.entities).contains(["Target", "Player"])
+	assert_int(len(def.entities)).is_equal(3)
+
+func test_apply_constraints_supports_dicts_and_opts():
+	var def = VaniaRoomDef.new()
+	# pass just a dict
+	var inp = RoomInputs.apply_constraints({
+			RoomInputs.HAS_TARGET: {count=4},
+			RoomInputs.HAS_PLAYER: {}
+			}, def)
+
+	assert_array(inp.entities).contains(["Target", "Player"])
+	assert_int(len(inp.entities)).is_equal(5)
+	assert_array(def.entities).contains(["Target", "Player"])
+	assert_int(len(def.entities)).is_equal(5)
+
+	def = VaniaRoomDef.new()
+	# pass just an array of dict
+	inp = RoomInputs.apply_constraints([{
+			RoomInputs.HAS_TARGET: {count=4},
+			RoomInputs.HAS_PLAYER: {}
+			}], def)
+
+	assert_array(inp.entities).contains(["Target", "Player"])
+	assert_int(len(inp.entities)).is_equal(5)
+	assert_array(def.entities).contains(["Target", "Player"])
+	assert_int(len(def.entities)).is_equal(5)
+
+	def = VaniaRoomDef.new()
+	# pass just an array of dicts
+	inp = RoomInputs.apply_constraints([{
+			RoomInputs.HAS_TARGET: {count=4},
+		}, {
+			RoomInputs.HAS_PLAYER: {}
+		}], def)
+
+	assert_array(inp.entities).contains(["Target", "Player"])
+	assert_int(len(inp.entities)).is_equal(5)
+	assert_array(def.entities).contains(["Target", "Player"])
+	assert_int(len(def.entities)).is_equal(5)
