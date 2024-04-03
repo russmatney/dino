@@ -21,7 +21,7 @@ var tile_defs: GridDefs
 var entity_defs: GridDefs
 var entities: Array #[String]
 
-var tilemap_scene
+var tilemap_scenes
 var tile_size
 
 # TODO support pandora entities instead of scenes directly?
@@ -62,20 +62,7 @@ var label_to_entity = {
 		},
 	}
 
-var skip_entities = ["CookingPot", "Void", "Player"]
 var all_entities = []
-
-var all_tilemap_scenes = [
-		# "res://addons/reptile/tilemaps/GrassTiles16.tscn",
-		# "res://addons/reptile/tilemaps/SnowTiles16.tscn",
-		# "res://addons/reptile/tilemaps/CaveTiles16.tscn",
-		# "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
-		"res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",
-		"res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",
-		"res://addons/reptile/tilemaps/VolcanoTiles8.tscn",
-		"res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",
-		"res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",
-	]
 
 func to_printable():
 	return {
@@ -87,7 +74,7 @@ func to_printable():
 ## init #####################################################3
 
 func _init(opts={}):
-	all_entities = label_to_entity.keys().filter(func(x): return not x in skip_entities)
+	all_entities = label_to_entity.keys()
 
 	room_type = opts.get("room_type", room_type)
 	local_cells = opts.get("local_cells", [])
@@ -97,9 +84,7 @@ func _init(opts={}):
 
 	tile_defs = opts.get("tile_defs")
 	entity_defs = opts.get("entity_defs")
-	if opts.get("entities"):
-		entities = opts.get("entities")
-		Log.pr("setting entities", entities)
+
 	tile_size = opts.get("tile_size", tile_size)
 
 ## helpers #####################################################3
@@ -110,75 +95,6 @@ func calc_cell_meta():
 		min_map_cell.y = mini(min_map_cell.y, p.y)
 		max_map_cell.x = maxi(max_map_cell.x, p.x)
 		max_map_cell.y = maxi(max_map_cell.y, p.y)
-
-
-## random data builders #####################################################3
-
-func select_room_type():
-	var types = [DinoData.RoomType.SideScroller, DinoData.RoomType.TopDown]
-	self.room_type = types.pick_random()
-	return self
-
-func select_room_shape():
-	var shapes = [
-		[Vector3i()], # 1x1
-		[Vector3i(), Vector3i(1, 0, 0),], # 2x1
-		[Vector3i(), Vector3i(0, 1, 0),], # 1x2
-		[Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-			Vector3i(0, 1, 0), Vector3i(1, 1, 0),], # 2x2
-		# [
-		# 	Vector3i(0, 0, 0),
-		# 	Vector3i(0, 1, 0), Vector3i(1, 1, 0),], # L shape
-		# [
-		# 	Vector3i(-1, 0, 0), Vector3i(0, 0, 0),
-		# 						Vector3i(0, 1, 0),], # 7 shape
-		# [
-		# 	Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-		# 						Vector3i(0, 1, 0),], # T shape
-		]
-	self.local_cells = shapes.pick_random()
-	return self
-
-func select_entities():
-	self.entities = U.rand_of(all_entities, U.rand_of([2,3,4]))
-	return self
-
-func select_tilemap():
-	tilemap_scene = load(all_tilemap_scenes.pick_random())
-	return self
-
-## static #####################################################3
-
-static func generate_defs(opts={}):
-	var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
-	var e_defs = GridParser.parse({defs_path=entity_defs_path})
-	var tile_defs_path = "res://src/dino/modes/vania/tiles.txt"
-	var t_defs = GridParser.parse({defs_path=tile_defs_path})
-
-	var defs: Array[VaniaRoomDef] = []
-	var fixed = [
-		# {entities=["Candle", "Player", "Target", "Leaf"]}
-		]
-	for i in range(opts.get("count", 4)):
-		var data = {
-			entity_defs=e_defs,
-			tile_defs=t_defs,
-			tile_size=opts.get("tile_size"),}
-		if i < len(fixed):
-			data.merge(fixed[i])
-
-		var def = VaniaRoomDef.new(data)
-
-		def.select_room_shape()
-
-		if def.entities.is_empty():
-			def.select_entities()
-
-		def.select_tilemap()
-
-		defs.append(def)
-
-	return defs
 
 ### misc helpers
 
@@ -220,3 +136,44 @@ func get_neighbor_room_paths() -> Array[String]:
 				ret.append(nbr_room_path)
 
 	return ret
+
+## static #####################################################3
+
+static func generate_defs(opts={}):
+	var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
+	var e_defs = GridParser.parse({defs_path=entity_defs_path})
+	var tile_defs_path = "res://src/dino/modes/vania/tiles.txt"
+	var t_defs = GridParser.parse({defs_path=tile_defs_path})
+
+	var defs: Array[VaniaRoomDef] = []
+
+	var room_inputs = [
+		RoomInputs.player_room().merge(RoomInputs.spaceship()),
+		RoomInputs.leaf_room().merge(RoomInputs.kingdom()),
+		RoomInputs.target_room().merge(RoomInputs.volcano()),
+		RoomInputs.enemy_room().merge(RoomInputs.grassy_cave()),
+		RoomInputs.merge_many([
+			RoomInputs.target_room(), RoomInputs.leaf_room(),
+			RoomInputs.wooden_boxes()
+			]),
+		RoomInputs.boss_room().merge(RoomInputs.spaceship()),
+		RoomInputs.random_room(),
+		RoomInputs.enemy_room().merge(RoomInputs.random_tilemaps()),
+		RoomInputs.cooking_room().merge(RoomInputs.random_tilemaps()),
+		RoomInputs.merge_many([
+			RoomInputs.target_room(), RoomInputs.target_room(),
+			RoomInputs.target_room(), RoomInputs.enemy_room(),
+			]).overwrite_room(RoomInputs.large_room()).merge(RoomInputs.random_tilemaps()),
+		RoomInputs.boss_room().merge(RoomInputs.volcano()),
+		]
+
+	for inputs in room_inputs:
+		var def = VaniaRoomDef.new({
+			entity_defs=e_defs, tile_defs=t_defs,
+			tile_size=opts.get("tile_size")
+			})
+		inputs.update_def(def)
+		defs.append(def)
+
+	return defs
+

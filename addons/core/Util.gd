@@ -437,6 +437,27 @@ static func merge(d, kv):
 	return new_d
 
 #################################################################
+## arrays
+
+static func append(arr, x):
+	arr.append(x)
+	return arr
+
+static func append_array(arr, arr_b):
+	arr.append_array(arr_b)
+	return arr
+
+static func distinct(arr):
+	var exists = {}
+	var out = []
+	for x in arr:
+		if exists.get(x):
+			continue
+		exists[x] = true
+		out.append(x)
+	return out
+
+#################################################################
 ## Configuration warnings
 
 static func _config_warning(node, opts={}):

@@ -1,5 +1,6 @@
 @tool
 extends Node2D
+class_name VaniaRoom
 
 @onready var room_instance = $RoomInstance
 
@@ -29,13 +30,12 @@ func _ready():
 			return
 
 	# useful fallback for when neighbors are added/removed
-	setup_walls_and_doors() # be nice to easily persist a change like this
+	setup_walls_and_doors() # be nice to easily persist a change like this to the packed scene
 
 ## build room ##############################################################
 
 func build_room(def: VaniaRoomDef):
 	room_def = def
-	ensure_tilemaps()
 	clear_all_tiles()
 	setup_tileset()
 	add_background_tiles()
@@ -62,10 +62,11 @@ func ensure_tilemaps():
 
 # TODO use neighbor tileset as background near the door
 func setup_tileset():
-	var rd_tilemap = room_def.tilemap_scene
+	ensure_tilemaps()
+	var rd_tilemap = room_def.tilemap_scenes[0]
 	if rd_tilemap:
 		Log.pr("setting up tileset:", rd_tilemap)
-		var inst = rd_tilemap.instantiate()
+		var inst = load(rd_tilemap).instantiate()
 		tilemap.set_tileset(inst.get_tileset().duplicate(true))
 
 		# TODO support multiple bg_tilesets
@@ -75,7 +76,7 @@ func setup_tileset():
 		bg_tilemap.modulate.a = 0.3
 		bg_tilemap.set_z_index(-5)
 	else:
-		Log.warn("cannot setup tileset without room_def.tilemap_scene")
+		Log.warn("cannot setup tileset without room_def.tilemap_scenes")
 
 func clear_all_tiles():
 	ensure_tilemaps()
@@ -218,7 +219,7 @@ func get_door_cells_to_neighbor(neighbor):
 
 ## add_tile_chunks ##############################################################
 
-func add_tile_chunks():
+func add_tile_chunks(opts={}):
 	Log.pr("Adding tile chunks")
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
@@ -227,16 +228,13 @@ func add_tile_chunks():
 
 	var tmap_data = build_tilemap_data()
 
-	# var count = [1, 2, 3].pick_random()
-	var count = 0
-
 	var tile_coords = []
-	for i in range(count):
+	for i in range(opts.get("count", 0)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			# Log.warn("No position found for tile chunk!", tile_chunk)
+			Log.warn("No position found for tile chunk!", tile_chunk)
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()

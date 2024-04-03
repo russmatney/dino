@@ -14,7 +14,7 @@ var room_defs = []
 
 # capture as RoomGenInputs
 var tile_size = 16
-var desired_room_count = 3
+var desired_room_count = 7
 
 func increment_room_count():
 	desired_room_count += 1

@@ -149,8 +149,8 @@ static var COLORS_PRETTY_V1 = {
 
 
 static func color_scheme(opts={}):
-	# return Log.COLORS_TERMINAL_SAFE
-	return Log.COLORS_PRETTY_V1
+	return Log.COLORS_TERMINAL_SAFE
+	# return Log.COLORS_PRETTY_V1
 
 static func color_wrap(s, opts={}):
 	var use_color = opts.get("use_color", true)

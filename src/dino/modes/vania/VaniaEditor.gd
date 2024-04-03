@@ -68,7 +68,7 @@ func update_room_def():
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
 	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
 	neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
-	room_tiles_label.text = "tileset: %s" % current_room_def.tilemap_scene.resource_path.get_file()
+	room_tiles_label.text = "tileset: %s" % current_room_def.tilemap_scenes[0].get_file()
 	room_count_label.text = "rooms: %s (%s)" % [len(game.room_defs), game.desired_room_count]
 
 func update_edit_entities():
@@ -92,8 +92,8 @@ func update_edit_tilesets():
 		return
 
 	var items = []
-	items.append_array(current_room_def.all_tilemap_scenes.map(func(tm):
-		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scene = load(tm)}))
+	items.append_array(current_room_def.tilemap_scenes.map(func(tm):
+		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = tm}))
 
 	var popup = edit_tileset_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
