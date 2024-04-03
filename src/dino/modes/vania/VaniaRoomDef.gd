@@ -2,14 +2,10 @@
 extends RefCounted
 class_name VaniaRoomDef
 
-const vania_room_path = "res://src/dino/modes/vania/maps/VaniaRoom.tscn"
-const vania_room_path_wide = "res://src/dino/modes/vania/maps/VaniaRoomWide.tscn"
-const vania_room_path_tall = "res://src/dino/modes/vania/maps/VaniaRoomTall.tscn"
-const vania_room_path_4x = "res://src/dino/modes/vania/maps/VaniaRoom4x.tscn"
+var base_scene_path = "res://src/dino/modes/vania/maps/VaniaRoom.tscn"
 
+# TODO rename to genre type or machine type?
 var room_type: DinoData.RoomType = DinoData.RoomType.SideScroller
-var base_scene_path: String
-var room_scene: PackedScene
 var room_path: String
 
 var local_cells: Array #[Vector3i]
@@ -20,8 +16,6 @@ var max_map_cell := Vector2i.MIN
 
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
-
-var index: int
 
 var tile_defs: GridDefs
 var entity_defs: GridDefs
@@ -62,7 +56,7 @@ var label_to_entity = {
 	"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
 		# resize to match tile_size
 		setup=func(p, opts):
-		p.max_width = opts.tile_size * 3
+		p.max_width = opts.tile_size * 6
 		p.position.x += opts.tile_size/2.0
 		p.position.y += opts.tile_size/4.0
 		},
@@ -96,10 +90,6 @@ func _init(opts={}):
 	all_entities = label_to_entity.keys().filter(func(x): return not x in skip_entities)
 
 	room_type = opts.get("room_type", room_type)
-	if opts.get("base_scene_path"):
-		base_scene_path = opts.get("base_scene_path")
-	# TODO create this dynamically - does it really need to be represented in the main map?
-	room_scene = opts.get("room_scene")
 	local_cells = opts.get("local_cells", [])
 
 	bg_color = opts.get("bg_color", bg_color)
@@ -112,19 +102,7 @@ func _init(opts={}):
 		Log.pr("setting entities", entities)
 	tile_size = opts.get("tile_size", tile_size)
 
-## setters #####################################################3
-
-func set_room_type(t: DinoData.RoomType) -> VaniaRoomDef:
-	self.room_type = t
-	return self
-
-func set_base_scene(path) -> VaniaRoomDef:
-	self.base_scene_path = path
-	return self
-
-func add_entities(ents: Array) -> VaniaRoomDef:
-	self.entities = ents
-	return self
+## helpers #####################################################3
 
 func calc_cell_meta():
 	for p in map_cells:
@@ -143,15 +121,22 @@ func select_room_type():
 
 func select_room_shape():
 	var shapes = [
-		[[Vector3i()], vania_room_path],
-		[[Vector3i(), Vector3i(1, 0, 0),], vania_room_path,],
-		[[Vector3i(), Vector3i(0, 1, 0),], vania_room_path],
-		[[Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-			Vector3i(0, 1, 0), Vector3i(1, 1, 0),], vania_room_path],
+		[Vector3i()], # 1x1
+		[Vector3i(), Vector3i(1, 0, 0),], # 2x1
+		[Vector3i(), Vector3i(0, 1, 0),], # 1x2
+		[Vector3i(0, 0, 0), Vector3i(1, 0, 0),
+			Vector3i(0, 1, 0), Vector3i(1, 1, 0),], # 2x2
+		# [
+		# 	Vector3i(0, 0, 0),
+		# 	Vector3i(0, 1, 0), Vector3i(1, 1, 0),], # L shape
+		# [
+		# 	Vector3i(-1, 0, 0), Vector3i(0, 0, 0),
+		# 						Vector3i(0, 1, 0),], # 7 shape
+		# [
+		# 	Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),
+		# 						Vector3i(0, 1, 0),], # T shape
 		]
-	var shape = shapes.pick_random()
-	self.local_cells = shape[0]
-	self.base_scene_path = shape[1]
+	self.local_cells = shapes.pick_random()
 	return self
 
 func select_entities():
@@ -191,7 +176,6 @@ static func generate_defs(opts={}):
 
 		def.select_tilemap()
 
-		def.index = i
 		defs.append(def)
 
 	return defs
@@ -211,9 +195,13 @@ func get_local_height() -> Vector2i:
 	return Reptile.get_height(local_cells)
 
 func get_size() -> Vector2:
+	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
+		calc_cell_meta()
 	return Vector2(max_map_cell - min_map_cell + Vector2i.ONE) * MetSys.settings.in_game_cell_size
 
 func to_local_cell(cell: Vector3i) -> Vector2i:
+	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
+		calc_cell_meta()
 	return Vector2i(cell.x - min_map_cell.x, cell.y - min_map_cell.y)
 
 func get_cell_rect(cell: Vector2i) -> Rect2:
