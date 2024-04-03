@@ -24,6 +24,8 @@ var entities: Array #[String]
 var tilemap_scenes
 var tile_size
 
+var constraints = []
+
 # TODO support pandora entities instead of scenes directly?
 var label_to_entity = {
 	# player

@@ -42,12 +42,14 @@ var entities
 var room_shape
 var room_shapes
 var tilemap_scenes
+var constraints
 
 func _init(opts={}):
 	entities = opts.get("entities", [])
 	room_shape = opts.get("room_shape")
 	room_shapes = opts.get("room_shapes", [])
 	tilemap_scenes = opts.get("tilemap_scenes", [])
+	constraints = opts.get("constraints", [])
 
 ## merge ######################################################
 
@@ -57,11 +59,14 @@ func merge(b: RoomInputs):
 		room_shape=U._or(b.room_shape, room_shape),
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
+		constraints=U.append_array(constraints, b.constraints),
 		})
 
 ## update room def ######################################################
 
 func update_def(def: VaniaRoomDef):
+	def.constraints = constraints
+
 	if room_shape:
 		def.local_cells = room_shape
 	elif not room_shapes.is_empty():
@@ -122,44 +127,69 @@ static func random_room():
 
 ## room size ######################################################33
 
+const IN_LARGE_ROOM = "in_large_room"
+const IN_SMALL_ROOM = "in_small_room"
+
 static func large_room():
 	return RoomInputs.new({
-		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random()
+		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
+		constraints=[IN_LARGE_ROOM]
 		})
 
 static func small_room():
 	return RoomInputs.new({
 		room_shape=all_room_shapes.small,
+		constraints=[IN_SMALL_ROOM]
 		})
 
 ## tilemaps ######################################################33
 
+const IN_WOODEN_BOXES = "on_wooden_boxes"
+const IN_SPACESHIP = "in_spaceship"
+const IN_KINGDOM = "in_kingdom"
+const IN_VOLCANO = "in_volcano"
+const IN_GRASSY_CAVE = "in_grassy_cave"
+
 static func wooden_boxes():
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",]
+		tilemap_scenes=["res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",],
+		constraints=[IN_WOODEN_BOXES]
 		})
 
 static func spaceship():
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",]
+		tilemap_scenes=["res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",],
+		constraints=[IN_SPACESHIP]
 		})
 
 static func kingdom():
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",]
+		tilemap_scenes=["res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",],
+		constraints=[IN_KINGDOM]
 		})
 
 static func volcano():
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/VolcanoTiles8.tscn",]
+		tilemap_scenes=["res://addons/reptile/tilemaps/VolcanoTiles8.tscn",],
+		constraints=[IN_VOLCANO]
 		})
 
 static func grassy_cave():
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",]
+		tilemap_scenes=["res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",],
+		constraints=[IN_GRASSY_CAVE]
 		})
 
 ## encounters ######################################################33
+
+const HAS_BOSS = "has_boss"
+const HAS_ENEMY = "has_enemy"
+const HAS_TARGET = "has_target"
+const HAS_LEAF = "has_leaf"
+const HAS_COOKING_POT = "has_cooking_pot"
+const HAS_BLOB = "has_blob"
+const HAS_VOID = "has_void"
+const HAS_PLAYER = "has_player"
 
 static func boss_room():
 	return RoomInputs.new({
@@ -168,6 +198,7 @@ static func boss_room():
 			["Beefstronaut"],
 			["Monstroar", "Beefstronaut"]
 			].pick_random(),
+		constraints=[HAS_BOSS],
 		}).merge(large_room())
 
 static func enemy_room():
@@ -179,6 +210,7 @@ static func enemy_room():
 			["Enemy", "Enemy", "Enemy"],
 			["Enemy", "Enemy", "Enemy", "Candle"]
 			].pick_random(),
+		constraints=[HAS_ENEMY],
 		})
 
 static func target_room():
@@ -189,6 +221,7 @@ static func target_room():
 			["Target", "Target", "Target", "Blob"],
 			["Target", "Target", "Target", "Target", "Enemy"],
 			].pick_random(),
+		constraints=[HAS_TARGET],
 		})
 
 static func leaf_room():
@@ -198,14 +231,16 @@ static func leaf_room():
 			["Leaf", "Leaf", "Leaf", "Leaf", "Candle"],
 			["Leaf", "Leaf", "Leaf", "Candle"],
 			].pick_random(),
+		constraints=[HAS_LEAF],
 		})
 
 static func cooking_room():
 	return RoomInputs.new({
 		entities=[
 			["Blob", "CookingPot", "Void"],
-			["Blog", "Blob", "CookingPot", "Void"],
+			["Blob", "Blob", "CookingPot", "Void"],
 			].pick_random(),
+		constraints=[HAS_COOKING_POT, HAS_BLOB, HAS_VOID],
 		}).merge(large_room())
 
 static func player_room():
@@ -214,4 +249,5 @@ static func player_room():
 			["Player"],
 			["Player", "Candle"],
 			].pick_random(),
+		constraints=[HAS_PLAYER],
 		}).merge(small_room())
