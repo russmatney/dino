@@ -16,6 +16,7 @@ func test_room_inputs_empty_inputs_behavior():
 	assert_array(def.tilemap_scenes).is_not_empty()
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.entities).is_empty()
+	assert_array(def.constraints).is_empty()
 
 ## entities ######################################################
 
@@ -149,9 +150,8 @@ func test_room_inputs_room_shape_always_overwrites_room_shapes():
 
 func test_room_def_inputs_spaceship_sets_tilemap():
 	# spaceship sets a tileset as expected
-	var inp = RoomInputs.spaceship()
 	var def = VaniaRoomDef.new()
-	inp.update_def(def)
+	var inp = RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP], def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
@@ -159,11 +159,16 @@ func test_room_def_inputs_spaceship_sets_tilemap():
 	assert_array(def.tilemap_scenes).contains(inp.tilemap_scenes)
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.entities).is_empty()
+	assert_array(def.constraints).is_not_empty()
+	assert_array(def.constraints).contains([RoomInputs.IN_SPACESHIP])
 
 func test_room_def_inputs_player_room_sets_entities_and_shape():
-	var inp = RoomInputs.player_room().merge(RoomInputs.spaceship())
 	var def = VaniaRoomDef.new()
-	inp.update_def(def)
+	var inp = RoomInputs.apply_constraints([
+		RoomInputs.HAS_PLAYER,
+		RoomInputs.IN_SPACESHIP,
+		RoomInputs.IN_SMALL_ROOM,
+		], def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
@@ -179,9 +184,11 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 	assert_array(def.entities).contains(["Player"])
 
 func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
-	var inp = RoomInputs.leaf_room().merge(RoomInputs.kingdom())
 	var def = VaniaRoomDef.new()
-	inp.update_def(def)
+	var inp = RoomInputs.apply_constraints([
+		RoomInputs.HAS_LEAF,
+		RoomInputs.IN_KINGDOM,
+		], def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
@@ -195,3 +202,19 @@ func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 	assert_array(def.local_cells).is_not_empty()
 	# local_cells is set by all_room_shapes static var
 	assert_array(inp.all_room_shapes.values()).contains([def.local_cells])
+
+## constraints ######################################################
+
+func test_apply_constraints_keeps_local_cells():
+	var def = VaniaRoomDef.new()
+	var _inp = RoomInputs.apply_constraints([
+		RoomInputs.IN_SMALL_ROOM,
+		], def)
+
+	assert_array(def.local_cells).is_equal(RoomInputs.all_room_shapes.small)
+
+	var my_local_cells = [Vector3i(9, 9, 0)]
+	def = VaniaRoomDef.new({local_cells=my_local_cells})
+	_inp = RoomInputs.apply_constraints([RoomInputs.IN_SMALL_ROOM,], def)
+
+	assert_array(def.local_cells).is_equal(my_local_cells)

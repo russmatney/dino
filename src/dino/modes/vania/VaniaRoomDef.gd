@@ -163,9 +163,8 @@ func get_neighbor_room_paths() -> Array[String]:
 ## constraints #####################################################3
 
 func reapply_constraints():
-	var ri = RoomInputs.apply_constraints(constraints)
-	Log.pr("Reapplying constraints to room def", ri)
-	ri.update_def(self)
+	# TODO prevent changing room shape via this func
+	RoomInputs.apply_constraints(constraints, self)
 
 ## static #####################################################3
 
@@ -178,23 +177,51 @@ static func generate_defs(opts={}):
 	var defs: Array[VaniaRoomDef] = []
 
 	var room_inputs = [
-		RoomInputs.player_room().merge(RoomInputs.spaceship()),
-		RoomInputs.leaf_room().merge(RoomInputs.kingdom()),
-		RoomInputs.target_room().merge(RoomInputs.volcano()),
-		RoomInputs.enemy_room().merge(RoomInputs.grassy_cave()),
-		RoomInputs.merge_many([
-			RoomInputs.target_room(), RoomInputs.leaf_room(),
-			RoomInputs.wooden_boxes()
-			]),
-		RoomInputs.boss_room().merge(RoomInputs.spaceship()),
-		RoomInputs.random_room(),
-		RoomInputs.enemy_room().merge(RoomInputs.random_tilemaps()),
-		RoomInputs.cooking_room().merge(RoomInputs.random_tilemaps()),
-		RoomInputs.merge_many([
-			RoomInputs.target_room(), RoomInputs.target_room(),
-			RoomInputs.target_room(), RoomInputs.enemy_room(),
-			]).overwrite_room(RoomInputs.large_room()).merge(RoomInputs.random_tilemaps()),
-		RoomInputs.boss_room().merge(RoomInputs.volcano()),
+		[
+			RoomInputs.HAS_PLAYER,
+			RoomInputs.HAS_CANDLE,
+			RoomInputs.IN_SPACESHIP,
+			RoomInputs.IN_SMALL_ROOM,
+		], [
+			RoomInputs.HAS_LEAF,
+			RoomInputs.HAS_LEAF,
+			RoomInputs.IN_GRASSY_CAVE,
+			RoomInputs.IN_WIDE_ROOM,
+		], [
+			RoomInputs.HAS_TARGET,
+			RoomInputs.HAS_TARGET,
+			RoomInputs.IN_VOLCANO,
+		], [
+			RoomInputs.HAS_ENEMY,
+			RoomInputs.HAS_ENEMY,
+			RoomInputs.HAS_ENEMY,
+			RoomInputs.IN_LARGE_ROOM,
+		], [
+			RoomInputs.HAS_TARGET,
+			RoomInputs.HAS_LEAF,
+			RoomInputs.IN_WOODEN_BOXES,
+		], [
+			RoomInputs.HAS_BOSS,
+			RoomInputs.IN_LARGE_ROOM,
+			RoomInputs.IN_SPACESHIP,
+		],
+			RoomInputs.random_room(),
+		[
+			RoomInputs.HAS_ENEMY,
+		], [
+			RoomInputs.IS_COOKING_ROOM,
+		], [
+			RoomInputs.HAS_TARGET,
+			RoomInputs.HAS_TARGET,
+			RoomInputs.HAS_ENEMY,
+			RoomInputs.HAS_ENEMY,
+			RoomInputs.IN_LARGE_ROOM,
+		], [
+			RoomInputs.HAS_BOSS,
+			RoomInputs.HAS_BOSS,
+			RoomInputs.IN_LARGE_ROOM,
+			RoomInputs.IN_SPACESHIP,
+		]
 		]
 
 	for inputs in room_inputs:
@@ -202,7 +229,12 @@ static func generate_defs(opts={}):
 			entity_defs=e_defs, tile_defs=t_defs,
 			tile_size=opts.get("tile_size")
 			})
-		inputs.update_def(def)
+		if inputs is RoomInputs:
+			inputs.update_def(def)
+		elif inputs is Array:
+			RoomInputs.apply_constraints(inputs, def)
+		elif inputs is Dictionary:
+			RoomInputs.apply_constraints(inputs, def)
 		defs.append(def)
 
 	return defs
