@@ -54,7 +54,7 @@ func _init(opts={}):
 func merge(b: RoomInputs):
 	return RoomInputs.new({
 		entities=U.append_array(entities, b.entities),
-		room_shape=U._or(room_shape, b.room_shape),
+		room_shape=U._or(b.room_shape, room_shape),
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
 		})
