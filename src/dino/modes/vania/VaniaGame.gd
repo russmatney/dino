@@ -10,6 +10,8 @@ var generator = VaniaGenerator.new()
 var VaniaRoomTransitions = "res://src/dino/modes/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
+@onready var pcam: PhantomCamera2D = $%PCam
+
 var room_defs: Array[VaniaRoomDef] = []
 
 # capture in RoomInputs
@@ -31,25 +33,39 @@ func _ready():
 
 	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
+	Dino.player_ready.connect(on_player_ready)
+
 	init_rooms()
 
+## on load/ready #######################################################
+
+func on_room_loaded():
+	Log.pr("room entered", MetSys.get_current_room_instance())
+	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
+
+	if pcam != null and map.tilemap != null:
+		Log.pr("setting limit node!")
+		pcam.set_limit_node(map.tilemap)
+
+func on_player_ready(p):
+	pcam.set_follow_target_node(p)
+	pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
+
+## init rooms #######################################################
+
 func init_rooms(opts={}):
-	generator.remove_generated_cells()
+	VaniaGenerator.remove_generated_cells()
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
+	var room_inputs = [
+		[RoomInputs.IN_SMALL_ROOM, RoomInputs.HAS_PLAYER],
+		]
+	room_inputs.append_array(U.repeat_fn(RoomInputs.random_room, 5))
+
 	room_defs = VaniaRoomDef.generate_defs(U.merge({
 		tile_size=tile_size,
-		room_inputs=[
-			[RoomInputs.IN_T_ROOM],
-			[RoomInputs.IN_L_ROOM],
-			[RoomInputs.IN_T_ROOM],
-			[RoomInputs.IN_L_ROOM],
-			[RoomInputs.IN_T_ROOM],
-			[RoomInputs.IN_L_ROOM],
-			[RoomInputs.IN_T_ROOM],
-			[RoomInputs.IN_L_ROOM],
-			]
+		room_inputs=room_inputs
 		}, opts))
 	room_defs = generator.add_rooms(room_defs)
 
@@ -59,6 +75,8 @@ func init_rooms(opts={}):
 
 	load_initial_room()
 	setup_player()
+
+## public regen funcs #######################################################
 
 # regenerate rooms besides the current one
 func regenerate_other_rooms():
@@ -118,16 +136,6 @@ func remove_room(count=1):
 	# redo the current room's doors
 	if map.is_node_ready():
 		map.setup_walls_and_doors()
-
-func on_room_loaded():
-	Log.pr("room entered", MetSys.get_current_room_instance())
-	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
-
-	# var p = Dino.current_player_node()
-	# if p != null:
-	# 	var cam = p.get_node("Cam2D")
-	# 	if cam != null:
-	# 		MetSys.get_current_room_instance().adjust_camera_limits(cam)
 
 ## load room #######################################################
 

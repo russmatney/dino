@@ -73,7 +73,7 @@ func update_room_def():
 	seed_label.text = "seed: %s" % Dino.egg
 	room_count_label.text = "rooms: %s" % len(game.room_defs)
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
-	neighbors_label.text = "ngbrs: %s" % Log.to_printable([MetSys.get_current_room_instance().get_neighbor_rooms(false).map(func(n): return n.get_file())])
+	neighbors_label.text = "ngbrs: %s" % Log.to_printable([current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file())])
 
 	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
 	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().get_file()

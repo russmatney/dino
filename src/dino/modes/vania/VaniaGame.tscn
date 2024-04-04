@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=13 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaGame.gd" id="1_38knr"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_3mcvu"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_8rx10"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_b3w6g"]
 [ext_resource type="Script" path="res://src/dino/modes/vania/VaniaEditor.gd" id="3_7omv4"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_ie4l0"]
 [ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="4_f2s0g"]
 [ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="4_k2nl2"]
 [ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="5_5mv8r"]
@@ -16,6 +18,39 @@ content_margin_right = 16.0
 
 [node name="VaniaGame" type="Node2D"]
 script = ExtResource("1_38knr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.6, 3.6)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("2_b3w6g")
+
+[node name="PCam" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_ie4l0")
+priority_override = false
+priority = 0
+zoom = Vector2(3.6, 3.6)
+follow_mode = 5
+follow_target = NodePath("")
+follow_parameters/target_offset = Vector2(0, 0)
+follow_parameters/damping = true
+follow_parameters/damping_value = 10.0
+follow_parameters/dead_zone_horizontal = 0.4
+follow_parameters/dead_zone_vertical = 0.3
+follow_parameters/viewfinder_in_play = false
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = false
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = true
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
 
 [node name="DinoHUD" parent="." instance=ExtResource("2_3mcvu")]
 

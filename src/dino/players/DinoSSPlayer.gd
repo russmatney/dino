@@ -5,12 +5,12 @@ extends SSPlayer
 
 func _ready():
 	if not Engine.is_editor_hint():
-		Cam.request_camera({
-			player=self,
-			zoom_rect_min=400,
-			proximity_min=100,
-			proximity_max=450,
-			})
+		# Cam.request_camera({
+		# 	player=self,
+		# 	zoom_rect_min=400,
+		# 	proximity_min=100,
+		# 	proximity_max=450,
+		# 	})
 
 		died.connect(_on_player_death)
 
