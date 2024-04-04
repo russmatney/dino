@@ -197,7 +197,7 @@ func add_background_tiles(opts={}):
 	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
 
 	var tile_coords = []
-	for i in range(opts.get("count", 5)):
+	for i in range(opts.get("count", 100)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
@@ -229,7 +229,7 @@ func add_tile_chunks(opts={}):
 	var tmap_data = build_tilemap_data()
 
 	var tile_coords = []
-	for i in range(opts.get("count", 0)):
+	for i in range(opts.get("count", 10)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))

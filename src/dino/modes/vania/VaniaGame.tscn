@@ -60,7 +60,7 @@ inactive_update_mode = 0
 offset_top = 174.0
 offset_right = 240.0
 offset_bottom = 334.0
-area = Vector2i(13, 13)
+area = Vector2i(7, 7)
 
 [node name="VaniaEditor" type="CanvasLayer" parent="."]
 script = ExtResource("3_7omv4")

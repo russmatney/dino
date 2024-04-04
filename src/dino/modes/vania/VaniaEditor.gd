@@ -44,6 +44,9 @@ func _ready():
 		return
 	Log.pr("Vania Editor ready", game.room_defs)
 
+	Debug.debug_toggled.connect(on_debug_toggled)
+	set_visible(Debug.debugging)
+
 	game.room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 	update_room_def()
 
@@ -55,6 +58,9 @@ func _ready():
 	inc_room_count_button.pressed.connect(on_inc_room_count_pressed)
 	dec_room_count_button.pressed.connect(on_dec_room_count_pressed)
 	rerender_background_button.pressed.connect(on_rerender_background_pressed)
+
+func on_debug_toggled(debugging):
+	set_visible(debugging)
 
 func on_room_loaded():
 	current_room_def = game.current_room_def()
@@ -77,7 +83,7 @@ func update_room_def():
 
 	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
 	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().get_file()
-	room_constraints_label.text = "constraints: %s" % Log.to_printable([current_room_def.constraints])
+	room_constraints_label.text = "constraints: %s" % Log.to_printable([len(current_room_def.constraints)])
 
 func update_edit_entities():
 	if not current_room_def:

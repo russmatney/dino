@@ -44,12 +44,11 @@ func on_room_loaded():
 	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
 
 	if pcam != null and map.tilemap != null:
-		Log.pr("setting limit node!")
 		pcam.set_limit_node(map.tilemap)
 
 func on_player_ready(p):
 	pcam.set_follow_target_node(p)
-	pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
+	# pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
 
 ## init rooms #######################################################
 
