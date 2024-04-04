@@ -217,7 +217,7 @@ static func cells_in_local_rect(tilemap: TileMap, rect: Rect2):
 	var t_rect = rect_to_local_rect(tilemap, rect)
 	return cells_in_rect(t_rect)
 
-static func rect_to_local_rect(tilemap: TileMap, rect: Rect2):
+static func rect_to_local_rect(tilemap: TileMap, rect: Rect2) -> Rect2i:
 	var t_rect = Rect2i()
 	t_rect.position = tilemap.local_to_map(rect.position)
 	t_rect.end = tilemap.local_to_map(rect.end)

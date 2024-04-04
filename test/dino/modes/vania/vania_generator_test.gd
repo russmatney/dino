@@ -31,18 +31,82 @@ func test_add_rooms_first_room_large():
 		Vector3i(1, 0, 0), Vector3i(1, 1, 0),
 		])
 
-func test_add_rooms_two_small():
+func test_add_rooms_two_small_rooms_create_doors():
 	var defs = VaniaRoomDef.generate_defs({room_inputs=[
 		[RoomInputs.IN_SMALL_ROOM,], [RoomInputs.IN_SMALL_ROOM,],]})
 	var gen = VaniaGenerator.new()
 	var gened_defs = gen.add_rooms(defs)
-	var first_room = gened_defs[0]
-	var second_room = gened_defs[1]
+	var first_def = gened_defs[0]
+	var second_def = gened_defs[1]
 
-	assert_str(first_room.room_path).is_not_null()
-	assert_array(first_room.map_cells).is_not_empty()
-	assert_array(first_room.map_cells).contains([Vector3i()])
+	assert_str(first_def.room_path).is_not_null()
+	assert_array(first_def.map_cells).is_not_empty()
+	assert_array(first_def.map_cells).contains([Vector3i()])
 
-	assert_str(second_room.room_path).is_not_null()
-	assert_array(second_room.map_cells).is_not_empty()
-	assert_array(second_room.map_cells)
+	assert_str(second_def.room_path).is_not_null()
+	assert_array(second_def.map_cells).is_not_empty()
+	assert_array(second_def.map_cells)
+
+	# test built tilemaps for doors
+
+	for def in [first_def, second_def]:
+		var room = load(def.room_path).instantiate()
+		room.set_room_def(def)
+		var map_cell_rect = def.get_map_cell_rect(def.map_cells[0])
+		var tmap = room.get_node("TileMap")
+		var cells_rect = Reptile.rect_to_local_rect(tmap, map_cell_rect)
+		var tmap_cells = tmap.get_used_cells(0)
+
+		# expected corners are filled
+		assert_array(tmap_cells).contains([cells_rect.position,
+			cells_rect.end - Vector2i.ONE,
+			cells_rect.position + cells_rect.size * Vector2i.RIGHT + Vector2i.LEFT,
+			cells_rect.position + cells_rect.size * Vector2i.DOWN + Vector2i.UP,
+			])
+
+		var top_border = range(cells_rect.position.x, cells_rect.end.x).map(func(x): return Vector2i(x, cells_rect.position.y))
+		var bottom_border = range(cells_rect.position.x, cells_rect.end.x).map(func(x): return Vector2i(x, cells_rect.end.y - 1))
+		var left_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.position.x, y))
+		var right_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.end.x - 1, y))
+
+		assert_array(def.get_doors()).is_not_empty()
+
+		var door = def.get_doors()[0]
+		var wall = door[1] - door[0]
+
+		var door_wall = []
+		var other_wall = []
+		match Vector2i(wall.x, wall.y):
+			Vector2i.LEFT:
+				door_wall = left_border
+				other_wall = right_border
+				assert_array(tmap_cells).contains(top_border)
+				assert_array(tmap_cells).contains(right_border)
+				assert_array(tmap_cells).contains(bottom_border)
+			Vector2i.UP:
+				door_wall = top_border
+				other_wall = bottom_border
+				assert_array(tmap_cells).contains(left_border)
+				assert_array(tmap_cells).contains(right_border)
+				assert_array(tmap_cells).contains(bottom_border)
+			Vector2i.RIGHT:
+				door_wall = right_border
+				other_wall = left_border
+				assert_array(tmap_cells).contains(left_border)
+				assert_array(tmap_cells).contains(top_border)
+				assert_array(tmap_cells).contains(bottom_border)
+			Vector2i.DOWN:
+				door_wall = bottom_border
+				other_wall = top_border
+				assert_array(tmap_cells).contains(left_border)
+				assert_array(tmap_cells).contains(top_border)
+				assert_array(tmap_cells).contains(right_border)
+			_:
+				assert_that(true).is_equal(false)
+
+		door_wall = door_wall.filter(func(cell): return cell in tmap_cells)
+		other_wall = other_wall.filter(func(cell): return cell in tmap_cells)
+		assert_array(door_wall).is_not_empty()
+		assert_int(len(other_wall)).is_greater(len(door_wall))
+
+# TODO test updating doors when adding/removing neighbors

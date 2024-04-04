@@ -157,6 +157,13 @@ func get_local_height() -> Vector2i:
 
 ## neighbors ######################################################
 
+func get_doors(opts={}):
+	var neighbors = get_neighbor_data(opts)
+	var doors = []
+	for n in neighbors:
+		doors.append_array(n.possible_doors)
+	return doors
+
 func get_neighbor_data(opts={}):
 	var neighbors = opts.get("neighbor_data", [])
 	if neighbors.is_empty():

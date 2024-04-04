@@ -34,11 +34,11 @@ func _ready():
 
 ## build room ##############################################################
 
-func build_room(def: VaniaRoomDef):
+func build_room(def: VaniaRoomDef, opts={}):
 	room_def = def
 	clear_all_tiles()
 	setup_tileset()
-	setup_walls_and_doors()
+	setup_walls_and_doors(opts)
 	add_background_tiles()
 	add_tile_chunks()
 	add_entities()
@@ -86,7 +86,7 @@ func clear_background_tiles():
 # Draws a border around the room
 # cuts away space for 'doors' between neighboring rooms
 func setup_walls_and_doors(opts={}):
-	var door_tile_coords = get_neighbor_door_tile_coords(opts)
+	var door_tile_coords = get_door_tile_coords(opts)
 
 	# TODO include neighbor data when building rooms
 	# but also, support updating doors when new neighbors are created
@@ -95,15 +95,11 @@ func setup_walls_and_doors(opts={}):
 
 	tilemap.force_update()
 
-func get_neighbor_door_tile_coords(opts={}):
-	var neighbors = room_def.get_neighbor_data(opts)
+func get_door_tile_coords(opts={}):
 	var coords = []
-	for n in neighbors:
-		for door in n.possible_doors:
-			var tile_coords = get_tile_coords_for_doorway(door)
-			coords.append_array(tile_coords)
-	Log.pr("neighbor door coords", coords)
-
+	for door in room_def.get_doors(opts):
+		var tile_coords = get_tile_coords_for_doorway(door)
+		coords.append_array(tile_coords)
 	return coords
 
 func is_border_coord(rect, coord, offset=0):
@@ -113,7 +109,6 @@ func is_border_coord(rect, coord, offset=0):
 		or (abs(rect.end.y - coord.y) <= tile_border_width - offset)
 
 func fill_tilemap_borders(opts={}):
-	Log.pr("filling tilemap borders", opts)
 	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
 	var t_cells = Reptile.cells_in_rect(rect).filter(func(coord):
 		if opts.get("skip_cells"):

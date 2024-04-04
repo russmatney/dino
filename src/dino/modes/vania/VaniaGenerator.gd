@@ -12,6 +12,7 @@ func add_rooms(room_defs: Array[VaniaRoomDef]):
 	var builder := MetSys.get_map_builder()
 
 	place_rooms(room_defs)
+	var neighbor_data = room_defs.map(func(def): return {map_cells=def.map_cells})
 
 	var defs = []
 
@@ -31,7 +32,7 @@ func add_rooms(room_defs: Array[VaniaRoomDef]):
 				cell.border_colors[i] = room_def.border_color
 			cell.set_assigned_scene(room_def.room_path)
 
-		build_and_prep_scene(room_def)
+		build_and_prep_scene(room_def, {neighbor_data=neighbor_data})
 		defs.append(room_def)
 
 	builder.update_map()
@@ -89,10 +90,10 @@ func set_room_scene_path(room_def):
 
 ## prepare scene ##############################################################
 
-func build_and_prep_scene(room_def):
+func build_and_prep_scene(room_def, opts={}):
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
-	room.build_room(room_def)
+	room.build_room(room_def, opts)
 
 	# pack and write to room_def.room_path
 	var ps := PackedScene.new()
