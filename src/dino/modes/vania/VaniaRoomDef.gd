@@ -87,7 +87,7 @@ func _init(opts={}):
 	tile_defs = opts.get("tile_defs")
 	entity_defs = opts.get("entity_defs")
 
-	tile_size = opts.get("tile_size", tile_size)
+	tile_size = U.get_(opts, "tile_size", tile_size)
 
 	constraints = opts.get("constraints", [])
 
@@ -257,7 +257,7 @@ static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
 	for inputs in room_inputs:
 		var def = VaniaRoomDef.new({
 			entity_defs=e_defs, tile_defs=t_defs,
-			tile_size=opts.get("tile_size", 16),
+			tile_size=opts.get("tile_size"),
 			constraints=inputs,
 			})
 		defs.append(def)
