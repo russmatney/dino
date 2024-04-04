@@ -97,6 +97,8 @@ func _init(opts={}):
 		constraints = opts.get("constraints")
 
 	if constraints != null:
+		if constraints is Array and constraints.is_empty():
+			return
 		RoomInputs.apply_constraints(constraints, self)
 
 func set_local_cells(cells):

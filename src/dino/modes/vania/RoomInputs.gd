@@ -293,7 +293,7 @@ static func custom_room_shape(opts={}):
 		room_shape=opts.get("shape")
 		})
 
-static func L_room_shape(opts={}):
+static func L_room_shape(_opts={}):
 	return RoomInputs.new({
 		room_shape=[
 			all_room_shapes.L_shape,
@@ -303,7 +303,7 @@ static func L_room_shape(opts={}):
 			].pick_random()
 		})
 
-static func T_room_shape(opts={}):
+static func T_room_shape(_opts={}):
 	return RoomInputs.new({
 		room_shape=[
 			all_room_shapes.T_shape,

@@ -10,8 +10,10 @@ func test_get_size():
 		Vector3i(1, 0, 0),
 		]
 	var s = rd.get_size()
-	assert_float(s.x).is_equal(512)
-	assert_float(s.y).is_equal(144)
+
+
+	assert_float(s.x).is_equal(MetSys.settings.in_game_cell_size.x*2)
+	assert_float(s.y).is_equal(MetSys.settings.in_game_cell_size.y*1)
 
 	rd.map_cells = [
 		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
@@ -19,8 +21,8 @@ func test_get_size():
 		]
 	rd.calc_cell_meta()
 	s = rd.get_size()
-	assert_float(s.x).is_equal(512)
-	assert_float(s.y).is_equal(288)
+	assert_float(s.x).is_equal(MetSys.settings.in_game_cell_size.x*2)
+	assert_float(s.y).is_equal(MetSys.settings.in_game_cell_size.y*2)
 
 
 ## init ###################################################################
