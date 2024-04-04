@@ -23,26 +23,26 @@ func _enter_tree() -> void:
 	else:
 		if not owner:
 			return
-
+		
 		if owner.get_meta(&"fake_map", false):
 			queue_free()
 			return
-
+		
 		if initialized:
 			_update_neighbor_previews.call_deferred()
-
+	
 	if initialized:
 		return
 	initialized = true
-
+	
 	if Engine.is_editor_hint():
 		MetSys.room_assign_updated.connect(_update_assigned_scene)
 		var theme: Theme = load("res://addons/MetroidvaniaSystem/Database/DatabaseTheme.tres")
 		GRID_COLOR = theme.get_color(&"scene_cell_border", &"MetSys")
 		GRID_PASSAGE_COLOR = theme.get_color(&"scene_room_exit", &"MetSys")
-
+	
 	_update_assigned_scene()
-
+	
 	if Engine.is_editor_hint():
 		_update_neighbor_previews()
 
@@ -52,15 +52,14 @@ func _exit_tree() -> void:
 
 func _update_assigned_scene():
 	queue_redraw()
-
+	
 	var owner_node := owner if owner != null else self
-	# example of where we are limited to one room per scene_file_path
 	cells = MetSys.map_data.get_cells_assigned_to_path(owner_node.scene_file_path)
 	if cells.is_empty():
 		return
-
+	
 	room_name = MetSys.map_data.get_room_from_scene_path(owner_node.scene_file_path, false)
-
+	
 	layer = cells[0].z
 	for p in cells:
 		min_cell.x = mini(min_cell.x, p.x)
@@ -70,27 +69,27 @@ func _update_assigned_scene():
 
 func _update_neighbor_previews():
 	get_tree().call_group(&"_MetSys_RoomPreview_", &"queue_free")
-
+	
 	for coords in cells:
 		var cell_data: MetroidvaniaSystem.MapData.CellData = MetSys.map_data.get_cell_at(coords)
 		assert(cell_data)
 		for i in 4:
 			var fwd: Vector2i = MetroidvaniaSystem.MapData.FWD[i]
-
+			
 			if cell_data.borders[i] > 0:
 				var next_coords := coords + Vector3i(fwd.x, fwd.y, 0)
 				var scene: String = MetSys.map_data.get_assigned_scene_at(next_coords)
-
+				
 				if scene.is_empty() or scene == room_name:
 					continue
-
+				
 				var next_cells: Array[Vector3i] = MetSys.map_data.get_whole_room(next_coords)
 				var next_min_cell := Vector2i.MAX
-
+				
 				for p in next_cells:
 					next_min_cell.x = mini(next_min_cell.x, p.x)
 					next_min_cell.y = mini(next_min_cell.y, p.y)
-
+				
 				var preview: Control = load("res://addons/MetroidvaniaSystem/Nodes/RoomPreview.tscn").instantiate()
 				preview.position = Vector2i(next_coords.x, next_coords.y) - min_cell
 				preview.position *= MetSys.settings.in_game_cell_size
@@ -98,13 +97,13 @@ func _update_neighbor_previews():
 				preview.offset = Vector2(next_coords.x, next_coords.y) - Vector2(min_cell)
 				preview.offset -= Vector2(next_coords.x, next_coords.y) - Vector2(next_min_cell)
 				add_child(preview)
-
+				
 				var temp_map: Node2D = load(MetSys.get_full_room_path(scene)).instantiate()
 				temp_map.modulate.a = 0.5
 				temp_map.set_meta(&"fake_map", true)
-
+				
 				preview.add_room(temp_map, i, next_min_cell - Vector2i(next_coords.x, next_coords.y))
-
+	
 	previews_updated.emit()
 
 ## Adjusts the limits of the given [param camera] to be within this room's rectangular bounds.
@@ -142,26 +141,26 @@ func get_room_position_offset(other: Node2D) -> Vector2:
 	return Vector2(get_base_coords() - other.get_base_coords()) * MetSys.settings.in_game_cell_size
 
 ## Returns the names of rooms connected to the current room instance. The rooms are determined based on border passages and adjacent cells. Useful for preloading adjacent rooms.
-func get_neighbor_rooms(check_borders=true) -> Array[String]:
+func get_neighbor_rooms() -> Array[String]:
 	var ret: Array[String]
-
+	
 	for coords in cells:
 		var cell_data: MetroidvaniaSystem.MapData.CellData = MetSys.map_data.get_cell_at(coords)
 		assert(cell_data)
 		for i in 4:
 			var fwd: Vector2i = MetroidvaniaSystem.MapData.FWD[i]
-
-			if (check_borders and cell_data.borders[i] > 0) or !check_borders:
+			
+			if cell_data.borders[i] > 0:
 				var scene: String = MetSys.map_data.get_assigned_scene_at(coords + Vector3i(fwd.x, fwd.y, 0))
 				if not scene.is_empty() and scene != room_name and not scene in ret:
 					ret.append(scene)
-
+	
 	return ret
 
 func _draw() -> void:
 	if not Engine.is_editor_hint() or cells.is_empty():
 		return
-
+	
 	for p in cells:
 		var coords := Vector2(p.x - min_cell.x, p.y - min_cell.y)
 		for i in 4:
@@ -170,7 +169,7 @@ func _draw() -> void:
 			if MetSys.map_data.cells[p].get_border(i) > 0:
 				width = 2
 				color = GRID_PASSAGE_COLOR
-
+			
 			match i:
 				MetroidvaniaSystem.R:
 					draw_rect(Rect2((coords + Vector2.RIGHT) * MetSys.settings.in_game_cell_size + Vector2(-width, 0), Vector2(width, MetSys.settings.in_game_cell_size.y)), color)
