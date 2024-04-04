@@ -10,8 +10,6 @@ var all_room_defs: Array[VaniaRoomDef] = []
 ## add_rooms ##########################################################
 
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
-	Log.pr("adding ", len(room_defs), "to the map")
-
 	var builder := MetSys.get_map_builder()
 
 	place_rooms(room_defs)
@@ -175,36 +173,41 @@ func place_rooms(defs: Array[VaniaRoomDef]):
 		def.calc_cell_meta()
 
 func attach_room(existing_map_cells, def):
-	var def_rect = Reptile.get_recti(def.local_cells)
-	var map_rect = Reptile.get_recti(existing_map_cells.keys())
-	var possible_rect = map_rect
-	possible_rect.position -= def_rect.position
-	possible_rect.size += def_rect.size
-
-	var possible_start_coords = []
-	if (existing_map_cells.is_empty()):
-		Log.pr("first room! fixing start coords")
-		possible_start_coords = [Vector3i()]
-	else:
-		for start_coord in Reptile.cells_in_rect(possible_rect):
-			start_coord = Vector3i(start_coord.x, start_coord.y, 0)
-			if no_conflicting_cells(start_coord, existing_map_cells, def.get_local_cells_dict()) and \
-				has_neighbor(start_coord, existing_map_cells, def.get_local_cells_dict()):
-				possible_start_coords.append(start_coord)
+	var possible_start_coords = get_possible_start_coords(existing_map_cells, def.local_cells)
 
 	if possible_start_coords.is_empty():
 		Log.warn("Could not find a possible start coord for room def", def)
 		return
 
-	Log.pr("placing room possible coords", possible_start_coords)
 	var start_coord = possible_start_coords.pick_random()
-	Log.pr("placing room at start coord", start_coord)
 
 	for cell in def.local_cells:
 		# set room's map_cells for drawing
 		def.map_cells.append(start_coord + cell)
 		# update map_cells (in-place!) for the next room
 		existing_map_cells[start_coord + cell] = true
+
+func get_possible_start_coords(existing_map_cells, local_cells):
+	var def_rect = Reptile.get_recti(local_cells)
+	var local_cells_dict = {}
+	for cell in local_cells:
+		local_cells_dict[cell] = true
+	var map_rect = Reptile.get_recti(existing_map_cells.keys())
+	var possible_rect = map_rect
+	possible_rect.position -= def_rect.position + def_rect.size
+	possible_rect.size += def_rect.size + Vector2i.ONE
+
+	var possible = []
+	if (existing_map_cells.is_empty()):
+		possible = [Vector3i()]
+	else:
+		for start_coord in Reptile.cells_in_rect(possible_rect):
+			start_coord = Vector3i(start_coord.x, start_coord.y, 0)
+			if no_conflicting_cells(start_coord, existing_map_cells, local_cells_dict) and \
+				has_neighbor(start_coord, existing_map_cells, local_cells_dict):
+				possible.append(start_coord)
+
+	return possible
 
 func no_conflicting_cells(start_coord, existing_map_cells, local_cells):
 	for coord in local_cells:

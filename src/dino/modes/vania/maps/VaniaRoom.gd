@@ -186,7 +186,6 @@ func add_background_tiles(opts={}):
 ## add_tile_chunks ##############################################################
 
 func add_tile_chunks(opts={}):
-	Log.pr("Adding tile chunks")
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
@@ -216,8 +215,6 @@ func add_tile_chunks(opts={}):
 ## add_entities ##############################################################
 
 func add_entities():
-	Log.pr("Adding entities", room_def.entities)
-
 	var tmap_data = build_tilemap_data()
 
 	for ent in room_def.entities:

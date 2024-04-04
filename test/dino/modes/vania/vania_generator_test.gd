@@ -6,7 +6,7 @@ func before_test():
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-## add room ################################################
+## add/remove rooms ################################################
 
 func test_add_rooms_first_room_small():
 	var defs = VaniaRoomDef.generate_defs({room_inputs=[[RoomInputs.IN_SMALL_ROOM,]]})
@@ -230,3 +230,40 @@ func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 	assert_array(tmap_cells).contains(top_border)
 	assert_array(tmap_cells).contains(right_border)
 	assert_array(tmap_cells).contains(bottom_border)
+
+
+## placing rooms ################################################
+
+func test_possible_start_coords_simple():
+	var defs = VaniaRoomDef.generate_defs({room_inputs=[[RoomInputs.IN_SMALL_ROOM,],]})
+	var gen = VaniaGenerator.new()
+	var gened_defs = gen.add_rooms(defs)
+
+	var shape = [Vector3i(0, 0, 0)]
+	var map_cells = VaniaGenerator.get_existing_map_cells()
+	var possible = gen.get_possible_start_coords(map_cells, shape)
+
+	assert_array(possible).is_not_empty()
+	assert_array(possible).contains([
+		Vector3i(0, 1, 0),
+		Vector3i(1, 0, 0),
+		Vector3i(0, -1, 0),
+		Vector3i(-1, 0, 0),
+		])
+
+func test_possible_start_coords_concave():
+	var defs = VaniaRoomDef.generate_defs({room_inputs=[[RoomInputs.IN_SMALL_ROOM,],]})
+	var gen = VaniaGenerator.new()
+	var gened_defs = gen.add_rooms(defs)
+
+	var shape = [
+		Vector3i(0, 0, 0), Vector3i(0, 1, 0),
+		Vector3i(1, 0, 0),
+		]
+	var map_cells = VaniaGenerator.get_existing_map_cells()
+	var possible = gen.get_possible_start_coords(map_cells, shape)
+
+	assert_array(possible).is_not_empty()
+	assert_array(possible).contains([
+		Vector3i(-2, 0, 0), Vector3i(-1, -1, 0), Vector3i(-1, 1, 0), Vector3i(0, -2, 0), Vector3i(0, 1, 0), Vector3i(1, -1, 0), Vector3i(1, 0, 0)
+		])
