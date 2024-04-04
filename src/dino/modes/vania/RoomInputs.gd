@@ -44,6 +44,7 @@ static var all_constraints = [
 	# IN_SMALL_ROOM,
 	# IN_TALL_ROOM,
 	# IN_WIDE_ROOM,
+	# CUSTOM_ROOM,
 	IN_WOODEN_BOXES,
 	IN_SPACESHIP,
 	IN_KINGDOM,
@@ -181,10 +182,12 @@ static func apply_constraint(inp: RoomInputs, cons_dict):
 
 static func get_constraint_data(cons_key, opts={}):
 	match cons_key:
-		IN_LARGE_ROOM: return large_room(opts)
-		IN_SMALL_ROOM: return small_room(opts)
-		IN_TALL_ROOM: return tall_room(opts)
-		IN_WIDE_ROOM: return wide_room(opts)
+		IN_LARGE_ROOM: return large_room_shape(opts)
+		IN_SMALL_ROOM: return small_room_shape(opts)
+		IN_TALL_ROOM: return tall_room_shape(opts)
+		IN_WIDE_ROOM: return wide_room_shape(opts)
+		CUSTOM_ROOM: return custom_room_shape(opts)
+
 		IN_WOODEN_BOXES: return wooden_boxes(opts)
 		IN_SPACESHIP: return spaceship(opts)
 		IN_KINGDOM: return kingdom(opts)
@@ -235,29 +238,37 @@ const IN_LARGE_ROOM = "in_large_room"
 const IN_SMALL_ROOM = "in_small_room"
 const IN_TALL_ROOM = "in_tall_room"
 const IN_WIDE_ROOM = "in_wide_room"
+const CUSTOM_ROOM = "in_custom_room"
 
-static func large_room(_opts={}):
+static func large_room_shape(_opts={}):
 	return RoomInputs.new({
 		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
 		})
 
-static func small_room(_opts={}):
+static func small_room_shape(_opts={}):
 	return RoomInputs.new({
 		room_shape=all_room_shapes.small,
 		})
 
-static func tall_room(_opts={}):
+static func tall_room_shape(_opts={}):
 	return RoomInputs.new({
 		room_shape=[all_room_shapes.tall, all_room_shapes.tall_3].pick_random(),
 		})
 
-static func wide_room(_opts={}):
+static func wide_room_shape(_opts={}):
 	return RoomInputs.new({
 		room_shape=[
 			all_room_shapes.wide,
 			all_room_shapes.wide_3,
 			all_room_shapes.wide_4,
 			].pick_random(),
+		})
+
+static func custom_room_shape(opts={}):
+	if opts.get("shape") == null:
+		Log.warn("Custom Room shape missing 'shape'!")
+	return RoomInputs.new({
+		room_shape=opts.get("shape")
 		})
 
 ## tilemaps ######################################################33
