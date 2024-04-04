@@ -158,13 +158,13 @@ func get_local_height() -> Vector2i:
 ## neighbors ######################################################
 
 func get_doors(opts={}):
-	var neighbors = get_neighbor_data(opts)
+	var neighbors = build_neighbor_data(opts)
 	var doors = []
 	for n in neighbors:
 		doors.append_array(n.possible_doors)
 	return doors
 
-func get_neighbor_data(opts={}):
+func build_neighbor_data(opts={}):
 	var neighbors = opts.get("neighbor_data", [])
 	if neighbors.is_empty():
 		var neighbor_paths = get_neighbor_room_paths()
@@ -172,6 +172,8 @@ func get_neighbor_data(opts={}):
 			neighbors.append({room_path=p, map_cells=MetSys.map_data.get_cells_assigned_to(p)})
 
 	for ngbr in neighbors:
+		if ngbr.get("possible_doors"): # maybe already calced?
+			continue
 		ngbr.possible_doors = []
 		for n_cell in ngbr.map_cells:
 			for r_cell in map_cells:

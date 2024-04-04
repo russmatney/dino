@@ -64,10 +64,7 @@ func regenerate_other_rooms():
 		tile_size=tile_size, count=desired_room_count - 1,
 		})
 	generator.remove_rooms(other_room_defs)
-	new_room_defs = generator.add_rooms(new_room_defs)
-	new_room_defs.append(current_room_def())
-
-	room_defs = new_room_defs
+	room_defs = generator.add_rooms(new_room_defs)
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -78,8 +75,7 @@ func regenerate_other_rooms():
 
 func add_new_room(count=1):
 	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=count})
-	new_room_defs = generator.add_rooms(new_room_defs)
-	room_defs.append_array(new_room_defs)
+	room_defs = generator.add_rooms(new_room_defs)
 	Log.pr(len(new_room_defs), " rooms added")
 
 	for rd in room_defs:
@@ -103,15 +99,10 @@ func remove_room(count=1):
 		if len(room_defs_to_remove) >= count:
 			break
 		room_defs_to_remove.append(rd)
-		room_defs.erase(rd)
 
-	generator.remove_rooms(room_defs_to_remove)
+	room_defs = generator.remove_rooms(room_defs_to_remove)
 
 	Log.pr(len(room_defs_to_remove), " rooms removed")
-
-	for rd in room_defs:
-		for coord in rd.map_cells:
-			MetSys.discover_cell(coord)
 
 	# redo the current room's doors
 	map.setup_walls_and_doors()

@@ -170,7 +170,7 @@ func add_background_tiles(opts={}):
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for background tile!", tile_chunk)
+			Log.warn("No position found for background tile!")
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()
@@ -203,7 +203,7 @@ func add_tile_chunks(opts={}):
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for tile chunk!", tile_chunk)
+			Log.warn("No position found for tile chunk!")
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()

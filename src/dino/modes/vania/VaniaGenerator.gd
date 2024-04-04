@@ -4,6 +4,9 @@ class_name VaniaGenerator
 const GEN_MAP_DIR = "user://vania_maps"
 var global_room_num = 0
 
+var neighbor_data = {}
+var all_room_defs = []
+
 ## add_rooms ##########################################################
 
 func add_rooms(room_defs: Array[VaniaRoomDef]):
@@ -12,7 +15,6 @@ func add_rooms(room_defs: Array[VaniaRoomDef]):
 	var builder := MetSys.get_map_builder()
 
 	place_rooms(room_defs)
-	var neighbor_data = room_defs.map(func(def): return {map_cells=def.map_cells})
 
 	var defs = []
 
@@ -32,11 +34,51 @@ func add_rooms(room_defs: Array[VaniaRoomDef]):
 				cell.border_colors[i] = room_def.border_color
 			cell.set_assigned_scene(room_def.room_path)
 
-		build_and_prep_scene(room_def, {neighbor_data=neighbor_data})
 		defs.append(room_def)
-
 	builder.update_map()
 
+	# update all_room_defs
+	all_room_defs.append_array(defs)
+
+	# build room and rebuild neighbors
+
+	update_neighbor_data()
+
+	var neighbor_defs = []
+	for rd in room_defs:
+		# build and pack the scene!
+		build_and_prep_scene(rd)
+		neighbor_defs.append_array(get_neighbor_defs(rd))
+
+	for n_def in neighbor_defs:
+		# rebuild and pack neighbor scenes!
+		build_and_prep_scene(n_def)
+
+	return all_room_defs
+
+func update_neighbor_data():
+	# clear and rebuild? maybe that's fine?
+	neighbor_data = {}
+
+	for rd in all_room_defs:
+		neighbor_data[rd.room_path] = rd.build_neighbor_data()
+
+func get_neighbor_defs(room_def: VaniaRoomDef):
+	var nbr = neighbor_data.get(room_def.room_path)
+	if nbr == null:
+		Log.warn("Could not find neighbor for room_def", room_def.room_path.get_file())
+		return []
+	var paths = nbr.map(func(data): return data.room_path)
+	var defs = []
+	for path in paths:
+		var rds = all_room_defs.filter(func(rd): return rd.room_path == path)
+		if rds.is_empty():
+			Log.warn("Could not find room_def for neighbor_path:", path.get_file())
+			continue
+		if len(rds) > 1:
+			Log.warn("Found multiple room_defs for neighbor_path! eeeek!", path.get_file())
+			continue
+		defs.append(rds[0])
 	return defs
 
 ## remove rooms ##########################################################
@@ -45,12 +87,11 @@ func remove_rooms(room_defs: Array[VaniaRoomDef]):
 	var coords = []
 
 	if not room_defs.is_empty():
-		Log.pr("clearing ", len(room_defs), "from the map")
 		room_defs.map(func(rd):
 			coords.append_array(rd.map_cells))
 
-	# TODO also clear visited cells? they seem to stick around
 	for coord in coords:
+		# also clear visited cells? they seem to stick around
 		VaniaGenerator.remove_cell_override_from_builder(coord)
 
 	# ensure directory exists
@@ -61,6 +102,24 @@ func remove_rooms(room_defs: Array[VaniaRoomDef]):
 	for file in DirAccess.get_files_at(GEN_MAP_DIR):
 		if file in cleared_room_paths:
 			DirAccess.remove_absolute(GEN_MAP_DIR.path_join(file))
+
+	# collect neighbor defs first
+	var neighbor_defs = []
+	for rd in room_defs:
+		neighbor_defs.append_array(get_neighbor_defs(rd))
+
+	# remove from all_room_defs
+	for def in room_defs:
+		all_room_defs.erase(def)
+
+	# update neighbor data
+	update_neighbor_data()
+
+	for n_def in neighbor_defs:
+		# rebuild and pack neighbor scenes!
+		build_and_prep_scene(n_def)
+
+	return all_room_defs
 
 ## static helpers ##########################################################
 
@@ -80,6 +139,8 @@ static func get_existing_map_cells():
 		cells[coord] = true
 	return cells
 
+
+
 ## set_room_scene_path ##############################################################
 
 func set_room_scene_path(room_def):
@@ -90,10 +151,11 @@ func set_room_scene_path(room_def):
 
 ## prepare scene ##############################################################
 
-func build_and_prep_scene(room_def, opts={}):
+func build_and_prep_scene(room_def, _opts={}):
+	Log.pr("building and packing room_def", room_def.room_path.get_file())
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
-	room.build_room(room_def, opts)
+	room.build_room(room_def, {neighbor_data=neighbor_data.get(room_def.room_path)})
 
 	# pack and write to room_def.room_path
 	var ps := PackedScene.new()
