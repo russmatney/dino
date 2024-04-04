@@ -71,6 +71,7 @@ func to_printable():
 		entities=entities,
 		room_path=room_path.get_file(),
 		local_cells=local_cells,
+		map_cells=map_cells,
 		}
 
 ## init #####################################################3
@@ -79,7 +80,8 @@ func _init(opts={}):
 	all_entities = label_to_entity.keys()
 
 	room_type = opts.get("room_type", room_type)
-	local_cells = opts.get("local_cells", [])
+	if opts.get("local_cells"):
+		set_local_cells(opts.get("local_cells"))
 
 	bg_color = opts.get("bg_color", bg_color)
 	border_color = opts.get("border_color", border_color)
@@ -96,6 +98,16 @@ func _init(opts={}):
 
 	if constraints != null:
 		RoomInputs.apply_constraints(constraints, self)
+
+func set_local_cells(cells):
+	var min_cell := Vector3i(Vector2i.MAX.x, Vector2i.MAX.y, 0)
+	for c in cells:
+		min_cell.x = mini(min_cell.x, c.x)
+		min_cell.y = mini(min_cell.y, c.y)
+
+	local_cells = []
+	for c in cells:
+		local_cells.append(c - min_cell)
 
 ## tilemap helpers #####################################################
 

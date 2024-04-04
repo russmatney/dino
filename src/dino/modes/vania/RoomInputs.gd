@@ -27,15 +27,31 @@ static var all_room_shapes = {
 	_4x_wide=[Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0),
 			Vector3i(0, 1, 0), Vector3i(1, 1, 0), Vector3i(2, 1, 0),
 		],
-	# [
-	# 	Vector3i(0, 0, 0),
-	# 	Vector3i(0, 1, 0), Vector3i(1, 1, 0),], # L shape
-	# [
-	# 	Vector3i(-1, 0, 0), Vector3i(0, 0, 0),
-	# 						Vector3i(0, 1, 0),], # 7 shape
-	# [
-	# 	Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-	# 						Vector3i(0, 1, 0),], # T shape
+	L_shape=[
+		Vector3i(0, 0, 0),
+		Vector3i(0, 1, 0), Vector3i(1, 1, 0),],
+	L_backwards_shape=[
+							Vector3i(0, 0, 0),
+		Vector3i(-1, 1, 0), Vector3i(0, 1, 0),],
+	r_shape=[
+		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
+		Vector3i(0, 1, 0),],
+	r_backwards_shape=[
+		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
+							Vector3i(1, 1, 0),],
+	T_shape=[
+		Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),
+							Vector3i(0, 1, 0),],
+	T_inverted_shape=[
+							Vector3i(0, -1, 0),
+		Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),],
+	half_H_shape=[
+		Vector3i(0, -1, 0),
+		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
+		Vector3i(0, 1, 0),],
+	half_H_backwards_shape=[Vector3i(0, -1, 0),
+		Vector3i(-1, 0, 0), Vector3i(0, 0, 0),
+							Vector3i(0, 1, 0),],
 	}
 
 static var all_constraints = [
@@ -95,11 +111,11 @@ func merge(b: RoomInputs):
 
 func update_def(def: VaniaRoomDef):
 	if room_shape:
-		def.local_cells = room_shape
+		def.set_local_cells(room_shape)
 	elif not room_shapes.is_empty():
-		def.local_cells = room_shapes.pick_random()
+		def.set_local_cells(room_shapes.pick_random())
 	else:
-		def.local_cells = all_room_shapes.values().pick_random()
+		def.set_local_cells(all_room_shapes.values().pick_random())
 
 	if not entities.is_empty():
 		def.entities = entities
@@ -139,7 +155,7 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 		conses.update_def(def)
 		if existing_shape != null and not existing_shape.is_empty():
 			# maintain current local_cells
-			def.local_cells = existing_shape
+			def.set_local_cells(existing_shape)
 		return conses
 
 	if conses is Dictionary:
@@ -171,7 +187,7 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 
 	if existing_shape != null and not existing_shape.is_empty():
 		# maintain pre-existing local_cells
-		def.local_cells = existing_shape
+		def.set_local_cells(existing_shape)
 	return ri
 
 static func apply_constraint(inp: RoomInputs, cons_dict):
