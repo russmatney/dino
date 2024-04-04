@@ -22,7 +22,7 @@ var entity_defs: GridDefs
 var entities: Array #[String]
 
 var tilemap_scenes
-var tile_size
+var tile_size = 16
 
 var constraints = []
 
@@ -88,6 +88,11 @@ func _init(opts={}):
 	entity_defs = opts.get("entity_defs")
 
 	tile_size = opts.get("tile_size", tile_size)
+
+	constraints = opts.get("constraints", [])
+
+	if not constraints.is_empty():
+		RoomInputs.apply_constraints(constraints, self)
 
 ## tilemap helpers #####################################################
 
@@ -196,7 +201,7 @@ func reapply_constraints():
 
 ## static #####################################################3
 
-static func generate_defs(opts={}):
+static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
 	var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
 	var e_defs = GridParser.parse({defs_path=entity_defs_path})
 	var tile_defs_path = "res://src/dino/modes/vania/tiles.txt"
@@ -204,55 +209,57 @@ static func generate_defs(opts={}):
 
 	var defs: Array[VaniaRoomDef] = []
 
-	var room_inputs = [
-		[
-			RoomInputs.HAS_PLAYER,
-			RoomInputs.HAS_CANDLE,
-			RoomInputs.IN_SPACESHIP,
-			RoomInputs.IN_SMALL_ROOM,
-		], [
-			{RoomInputs.HAS_LEAF: {count=2}},
-			RoomInputs.IN_GRASSY_CAVE,
-			RoomInputs.IN_WIDE_ROOM,
-		], {
-			RoomInputs.HAS_TARGET: {count=3},
-			RoomInputs.IN_VOLCANO: {}
-		},
-		# [
-		# 	{RoomInputs.HAS_ENEMY: {count=3}},
-		# 	RoomInputs.IN_LARGE_ROOM,
-		# ], [
-		# 	RoomInputs.HAS_TARGET,
-		# 	RoomInputs.HAS_LEAF,
-		# 	RoomInputs.IN_WOODEN_BOXES,
-		# ], [
-		# 	RoomInputs.HAS_BOSS,
-		# 	RoomInputs.IN_LARGE_ROOM,
-		# 	RoomInputs.IN_SPACESHIP,
-		# ],
-		# 	RoomInputs.random_room(),
-		# {
-		# 	RoomInputs.HAS_ENEMY: {count=3},
-		# }, [
-		# 	RoomInputs.IS_COOKING_ROOM,
-		# ], {
-		# 	RoomInputs.HAS_TARGET: {count=5},
-		# 	RoomInputs.HAS_ENEMY: {count=2},
-		# 	RoomInputs.IN_LARGE_ROOM: {},
-		# }, [
-		# 	{RoomInputs.HAS_BOSS: {count=2}},
-		# 	RoomInputs.IN_LARGE_ROOM,
-		# 	RoomInputs.IN_SPACESHIP,
-		# ]
-		]
+	var room_inputs = opts.get("room_inputs", [])
+
+	if room_inputs.is_empty():
+		room_inputs = [
+			[
+				RoomInputs.HAS_PLAYER,
+				RoomInputs.HAS_CANDLE,
+				RoomInputs.IN_SPACESHIP,
+				RoomInputs.IN_SMALL_ROOM,
+			], [
+				{RoomInputs.HAS_LEAF: {count=2}},
+				RoomInputs.IN_GRASSY_CAVE,
+				RoomInputs.IN_WIDE_ROOM,
+			], {
+				RoomInputs.HAS_TARGET: {count=3},
+				RoomInputs.IN_VOLCANO: {}
+			},
+			# [
+			# 	{RoomInputs.HAS_ENEMY: {count=3}},
+			# 	RoomInputs.IN_LARGE_ROOM,
+			# ], [
+			# 	RoomInputs.HAS_TARGET,
+			# 	RoomInputs.HAS_LEAF,
+			# 	RoomInputs.IN_WOODEN_BOXES,
+			# ], [
+			# 	RoomInputs.HAS_BOSS,
+			# 	RoomInputs.IN_LARGE_ROOM,
+			# 	RoomInputs.IN_SPACESHIP,
+			# ],
+			# 	RoomInputs.random_room(),
+			# {
+			# 	RoomInputs.HAS_ENEMY: {count=3},
+			# }, [
+			# 	RoomInputs.IS_COOKING_ROOM,
+			# ], {
+			# 	RoomInputs.HAS_TARGET: {count=5},
+			# 	RoomInputs.HAS_ENEMY: {count=2},
+			# 	RoomInputs.IN_LARGE_ROOM: {},
+			# }, [
+			# 	{RoomInputs.HAS_BOSS: {count=2}},
+			# 	RoomInputs.IN_LARGE_ROOM,
+			# 	RoomInputs.IN_SPACESHIP,
+			# ]
+			]
 
 	for inputs in room_inputs:
 		var def = VaniaRoomDef.new({
 			entity_defs=e_defs, tile_defs=t_defs,
-			tile_size=opts.get("tile_size")
+			tile_size=opts.get("tile_size", 16),
+			constraints=inputs,
 			})
-		RoomInputs.apply_constraints(inputs, def)
 		defs.append(def)
 
 	return defs
-

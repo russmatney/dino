@@ -4,35 +4,9 @@ class_name VaniaGenerator
 const GEN_MAP_DIR = "user://vania_maps"
 var global_room_num = 0
 
-## reset data ##########################################################
+## add_rooms ##########################################################
 
-func remove_rooms_from_map(room_defs):
-	var coords = []
-
-	if not room_defs.is_empty():
-		Log.pr("clearing ", len(room_defs), "from the map")
-		room_defs.map(func(rd):
-			coords.append_array(rd.map_cells))
-
-	# TODO also clear visited cells? they seem to stick around
-	for coord in coords:
-		var override = MetSys.get_cell_override(coord, false)
-		if override != null:
-			override.destroy()
-			MetSys.save_data.discovered_cells.erase(coord)
-
-	# ensure directory exists
-	DirAccess.make_dir_absolute(GEN_MAP_DIR)
-
-	# delete contents in directory
-	var cleared_room_paths = room_defs.map(func(rd): return rd.room_path)
-	for file in DirAccess.get_files_at(GEN_MAP_DIR):
-		if file in cleared_room_paths:
-			DirAccess.remove_absolute(GEN_MAP_DIR.path_join(file))
-
-## add_rooms_to_map ##########################################################
-
-func add_rooms_to_map(room_defs):
+func add_rooms(room_defs: Array[VaniaRoomDef]):
 	Log.pr("adding ", len(room_defs), "to the map")
 
 	var builder := MetSys.get_map_builder()
@@ -64,6 +38,47 @@ func add_rooms_to_map(room_defs):
 
 	return defs
 
+## remove rooms ##########################################################
+
+func remove_rooms(room_defs: Array[VaniaRoomDef]):
+	var coords = []
+
+	if not room_defs.is_empty():
+		Log.pr("clearing ", len(room_defs), "from the map")
+		room_defs.map(func(rd):
+			coords.append_array(rd.map_cells))
+
+	# TODO also clear visited cells? they seem to stick around
+	for coord in coords:
+		VaniaGenerator.remove_cell_override_from_builder(coord)
+
+	# ensure directory exists
+	DirAccess.make_dir_absolute(GEN_MAP_DIR)
+
+	# delete contents in directory
+	var cleared_room_paths = room_defs.map(func(rd): return rd.room_path)
+	for file in DirAccess.get_files_at(GEN_MAP_DIR):
+		if file in cleared_room_paths:
+			DirAccess.remove_absolute(GEN_MAP_DIR.path_join(file))
+
+## static helpers ##########################################################
+
+static func remove_generated_cells():
+	for coord in MetSys.map_data.cells.keys():
+		remove_cell_override_from_builder(coord)
+
+static func remove_cell_override_from_builder(coord: Vector3i):
+	var override = MetSys.get_cell_override(coord, false)
+	if override != null:
+		override.destroy()
+		MetSys.save_data.discovered_cells.erase(coord)
+
+static func get_existing_map_cells():
+	var cells = {}
+	for coord in MetSys.map_data.cells.keys():
+		cells[coord] = true
+	return cells
+
 ## set_room_scene_path ##############################################################
 
 func set_room_scene_path(room_def):
@@ -89,47 +104,47 @@ func build_and_prep_scene(room_def):
 # Finds valid cells to place rooms on the map
 # sets `map_cells` on each room_def
 func place_rooms(defs: Array[VaniaRoomDef]):
-	var map_cells = {}
-	for coord in MetSys.map_data.cells.keys():
-		if coord.x < 0 and coord.y < 0:
-			# HEADS UP! skipping 'test' rooms in the negative quadrant
-			# TODO use layers instead
-			continue
-		map_cells[coord] = true
+	var existing_map_cells = VaniaGenerator.get_existing_map_cells()
 
 	for def in defs:
-		attach_room(map_cells, def)
+		attach_room(existing_map_cells, def)
 		def.calc_cell_meta()
 
-func attach_room(map_cells, def):
+func attach_room(existing_map_cells, def):
 	var def_rect = Reptile.get_recti(def.local_cells)
-	var map_rect = Reptile.get_recti(map_cells.keys())
+	var map_rect = Reptile.get_recti(existing_map_cells.keys())
 	var possible_rect = map_rect
 	possible_rect.position -= def_rect.position
 	possible_rect.size += def_rect.size
 
 	var possible_start_coords = []
-	for start_coord in Reptile.cells_in_rect(possible_rect):
-		start_coord = Vector3i(start_coord.x, start_coord.y, 0)
-		if no_conflicting_cells(start_coord, map_cells, def.get_local_cells_dict()) and \
-			(map_cells.is_empty() or has_neighbor(start_coord, map_cells, def.get_local_cells_dict())):
-			possible_start_coords.append(start_coord)
+	if (existing_map_cells.is_empty()):
+		Log.pr("first room! fixing start coords")
+		possible_start_coords = [Vector3i()]
+	else:
+		for start_coord in Reptile.cells_in_rect(possible_rect):
+			start_coord = Vector3i(start_coord.x, start_coord.y, 0)
+			if no_conflicting_cells(start_coord, existing_map_cells, def.get_local_cells_dict()) and \
+				has_neighbor(start_coord, existing_map_cells, def.get_local_cells_dict()):
+				possible_start_coords.append(start_coord)
 
 	if possible_start_coords.is_empty():
 		Log.warn("Could not find a possible start coord for room def", def)
 		return
 
+	Log.pr("placing room possible coords", possible_start_coords)
 	var start_coord = possible_start_coords.pick_random()
+	Log.pr("placing room at start coord", start_coord)
 
 	for cell in def.local_cells:
 		# set room's map_cells for drawing
 		def.map_cells.append(start_coord + cell)
 		# update map_cells (in-place!) for the next room
-		map_cells[start_coord + cell] = true
+		existing_map_cells[start_coord + cell] = true
 
-func no_conflicting_cells(start_coord, map_cells, local_cells):
+func no_conflicting_cells(start_coord, existing_map_cells, local_cells):
 	for coord in local_cells:
-		var map_val = map_cells.get(coord + start_coord)
+		var map_val = existing_map_cells.get(coord + start_coord)
 		if map_val == true: # already cell here!
 			return false
 	return true
@@ -142,11 +157,11 @@ func neighbor_coords(coord):
 		coord + Vector3i(0, -1, 0),
 		]
 
-func has_neighbor(start_coord, map_cells, local_cells):
+func has_neighbor(start_coord, existing_map_cells, local_cells):
 	for coord in local_cells:
 		var map_coord = coord + start_coord
 		var nbr_coords = neighbor_coords(map_coord)
-		var has_nbr = nbr_coords.any(func(nc): return map_cells.get(nc))
+		var has_nbr = nbr_coords.any(func(nc): return existing_map_cells.get(nc))
 		if has_nbr:
 			return true
 	return false

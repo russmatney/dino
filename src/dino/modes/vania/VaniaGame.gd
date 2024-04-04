@@ -43,7 +43,7 @@ func _ready():
 func init_rooms():
 	room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=desired_room_count})
 
-	room_defs = generator.add_rooms_to_map(room_defs)
+	room_defs = generator.add_rooms(room_defs)
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -63,8 +63,8 @@ func regenerate_other_rooms():
 	var new_room_defs = VaniaRoomDef.generate_defs({
 		tile_size=tile_size, count=desired_room_count - 1,
 		})
-	generator.remove_rooms_from_map(other_room_defs)
-	new_room_defs = generator.add_rooms_to_map(new_room_defs)
+	generator.remove_rooms(other_room_defs)
+	new_room_defs = generator.add_rooms(new_room_defs)
 	new_room_defs.append(current_room_def())
 
 	room_defs = new_room_defs
@@ -78,7 +78,7 @@ func regenerate_other_rooms():
 
 func add_new_room(count=1):
 	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=count})
-	new_room_defs = generator.add_rooms_to_map(new_room_defs)
+	new_room_defs = generator.add_rooms(new_room_defs)
 	room_defs.append_array(new_room_defs)
 	Log.pr(len(new_room_defs), " rooms added")
 
@@ -105,7 +105,7 @@ func remove_room(count=1):
 		room_defs_to_remove.append(rd)
 		room_defs.erase(rd)
 
-	generator.remove_rooms_from_map(room_defs_to_remove)
+	generator.remove_rooms(room_defs_to_remove)
 
 	Log.pr(len(room_defs_to_remove), " rooms removed")
 
