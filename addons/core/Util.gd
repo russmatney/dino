@@ -280,6 +280,9 @@ static func setup_popup_items(popup: PopupMenu, items: Array, on_select: Callabl
 static func repeat(s, n):
 	return range(n).map(func(_x): return s)
 
+static func repeat_fn(callable, n):
+	return range(n).map(func(_x): return callable.call())
+
 static func rand_of(arr, n=1):
 	if len(arr) == 0:
 	# 	push_warning("U.rand_of passed empty array")

@@ -42,5 +42,9 @@ func load_room(path: String, opts={}):
 		opts.get("setup").call(map)
 	add_child(map)
 
-	MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
+	if MetSys.get_current_room_instance() != null:
+		MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
+	else:
+		Log.pr("No current room_instance, defaulting to layer 0")
+		MetSys.current_layer = 0
 	room_loaded.emit()

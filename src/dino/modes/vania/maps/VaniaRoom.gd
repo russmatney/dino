@@ -29,9 +29,6 @@ func _ready():
 			Log.warn("No room_def on vania room!")
 			return
 
-	# useful fallback for when neighbors are added/removed
-	setup_walls_and_doors() # be nice to easily persist a change like this to the packed scene
-
 ## build room ##############################################################
 
 func build_room(def: VaniaRoomDef, opts={}):

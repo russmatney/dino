@@ -89,9 +89,9 @@ func _init(opts={}):
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
-	constraints = opts.get("constraints", [])
+	constraints = U.get_(opts, "constraints", [])
 
-	if not constraints.is_empty():
+	if constraints != null and (constraints is RoomInputs or not constraints.is_empty()):
 		RoomInputs.apply_constraints(constraints, self)
 
 ## tilemap helpers #####################################################

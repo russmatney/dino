@@ -10,27 +10,20 @@ var generator = VaniaGenerator.new()
 var VaniaRoomTransitions = "res://src/dino/modes/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
-var room_defs = []
+var room_defs: Array[VaniaRoomDef] = []
 
-# capture as RoomGenInputs
+# capture in RoomInputs
 var tile_size = 16
-var desired_room_count = 7
 
 func increment_room_count():
-	desired_room_count += 1
 	add_new_room(1)
 
 func decrement_room_count():
-	desired_room_count -= 1
-	desired_room_count = maxi(1, desired_room_count)
 	remove_room(1)
 
 ## ready #######################################################
 
 func _ready():
-	MetSys.reset_state()
-	MetSys.set_save_data()
-
 	add_custom_module.call_deferred(VaniaRoomTransitions)
 	add_custom_module.call_deferred(PassageAutomapper)
 
@@ -40,9 +33,12 @@ func _ready():
 
 	init_rooms()
 
-func init_rooms():
-	room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=desired_room_count})
+func init_rooms(opts={}):
+	generator.remove_generated_cells()
+	MetSys.reset_state()
+	MetSys.set_save_data()
 
+	room_defs = VaniaRoomDef.generate_defs(U.merge({tile_size=tile_size,}, opts))
 	room_defs = generator.add_rooms(room_defs)
 
 	for rd in room_defs:
@@ -61,7 +57,7 @@ func regenerate_other_rooms():
 		other_room_defs.append(rd)
 
 	var new_room_defs = VaniaRoomDef.generate_defs({
-		tile_size=tile_size, count=desired_room_count - 1,
+		tile_size=tile_size,
 		})
 	generator.remove_rooms(other_room_defs)
 	room_defs = generator.add_rooms(new_room_defs)
@@ -71,10 +67,12 @@ func regenerate_other_rooms():
 			MetSys.discover_cell(coord)
 
 	# redo the current room's doors
-	map.setup_walls_and_doors()
+	if map.is_node_ready():
+		map.setup_walls_and_doors()
 
 func add_new_room(count=1):
-	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size, count=count})
+	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size,
+		room_inputs=U.repeat_fn(RoomInputs.random_room, count)})
 	room_defs = generator.add_rooms(new_room_defs)
 	Log.pr(len(new_room_defs), " rooms added")
 
@@ -83,17 +81,18 @@ func add_new_room(count=1):
 			MetSys.discover_cell(coord)
 
 	# redo the current room's doors
-	map.setup_walls_and_doors()
+	if map.is_node_ready():
+		map.setup_walls_and_doors()
 
 func remove_room(count=1):
-	var other_room_defs = []
+	var other_room_defs: Array[VaniaRoomDef] = []
 	for rd in room_defs:
 		if MetSys.get_current_room_name() == rd.room_path:
 			continue
 		other_room_defs.append(rd)
 
 	# TODO when removing, don't leave orphans.... unless they're fun to work with?
-	var room_defs_to_remove = []
+	var room_defs_to_remove: Array[VaniaRoomDef] = []
 	other_room_defs.reverse() # prefer to remove the latest room for now
 	for rd in other_room_defs:
 		if len(room_defs_to_remove) >= count:
@@ -105,7 +104,8 @@ func remove_room(count=1):
 	Log.pr(len(room_defs_to_remove), " rooms removed")
 
 	# redo the current room's doors
-	map.setup_walls_and_doors()
+	if map.is_node_ready():
+		map.setup_walls_and_doors()
 
 func on_room_loaded():
 	Log.pr("room entered", MetSys.get_current_room_instance())

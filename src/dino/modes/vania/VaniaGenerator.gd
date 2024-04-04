@@ -5,11 +5,11 @@ const GEN_MAP_DIR = "user://vania_maps"
 var global_room_num = 0
 
 var neighbor_data = {}
-var all_room_defs = []
+var all_room_defs: Array[VaniaRoomDef] = []
 
 ## add_rooms ##########################################################
 
-func add_rooms(room_defs: Array[VaniaRoomDef]):
+func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 	Log.pr("adding ", len(room_defs), "to the map")
 
 	var builder := MetSys.get_map_builder()
@@ -46,44 +46,20 @@ func add_rooms(room_defs: Array[VaniaRoomDef]):
 
 	var neighbor_defs = []
 	for rd in room_defs:
-		# build and pack the scene!
-		build_and_prep_scene(rd)
 		neighbor_defs.append_array(get_neighbor_defs(rd))
 
-	for n_def in neighbor_defs:
-		# rebuild and pack neighbor scenes!
+	var to_build = []
+	to_build.append_array(room_defs)
+	to_build.append_array(neighbor_defs)
+	for n_def in U.distinct(to_build):
+		# rebuild and pack scenes + neighbor scenes!
 		build_and_prep_scene(n_def)
 
 	return all_room_defs
 
-func update_neighbor_data():
-	# clear and rebuild? maybe that's fine?
-	neighbor_data = {}
-
-	for rd in all_room_defs:
-		neighbor_data[rd.room_path] = rd.build_neighbor_data()
-
-func get_neighbor_defs(room_def: VaniaRoomDef):
-	var nbr = neighbor_data.get(room_def.room_path)
-	if nbr == null:
-		Log.warn("Could not find neighbor for room_def", room_def.room_path.get_file())
-		return []
-	var paths = nbr.map(func(data): return data.room_path)
-	var defs = []
-	for path in paths:
-		var rds = all_room_defs.filter(func(rd): return rd.room_path == path)
-		if rds.is_empty():
-			Log.warn("Could not find room_def for neighbor_path:", path.get_file())
-			continue
-		if len(rds) > 1:
-			Log.warn("Found multiple room_defs for neighbor_path! eeeek!", path.get_file())
-			continue
-		defs.append(rds[0])
-	return defs
-
 ## remove rooms ##########################################################
 
-func remove_rooms(room_defs: Array[VaniaRoomDef]):
+func remove_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 	var coords = []
 
 	if not room_defs.is_empty():
@@ -115,7 +91,7 @@ func remove_rooms(room_defs: Array[VaniaRoomDef]):
 	# update neighbor data
 	update_neighbor_data()
 
-	for n_def in neighbor_defs:
+	for n_def in U.distinct(neighbor_defs):
 		# rebuild and pack neighbor scenes!
 		build_and_prep_scene(n_def)
 
@@ -139,7 +115,32 @@ static func get_existing_map_cells():
 		cells[coord] = true
 	return cells
 
+## neighbor data ##########################################################
 
+func update_neighbor_data():
+	# clear and rebuild? maybe that's fine?
+	neighbor_data = {}
+
+	for rd in all_room_defs:
+		neighbor_data[rd.room_path] = rd.build_neighbor_data()
+
+func get_neighbor_defs(room_def: VaniaRoomDef):
+	var nbr = neighbor_data.get(room_def.room_path)
+	if nbr == null:
+		Log.warn("Could not find neighbor for room_def", room_def.room_path.get_file())
+		return []
+	var paths = nbr.map(func(data): return data.room_path)
+	var defs = []
+	for path in paths:
+		var rds = all_room_defs.filter(func(rd): return rd.room_path == path)
+		if rds.is_empty():
+			Log.warn("Could not find room_def for neighbor_path:", path.get_file())
+			continue
+		if len(rds) > 1:
+			Log.warn("Found multiple room_defs for neighbor_path! eeeek!", path.get_file())
+			continue
+		defs.append(rds[0])
+	return defs
 
 ## set_room_scene_path ##############################################################
 
