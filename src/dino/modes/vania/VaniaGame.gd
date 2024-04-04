@@ -38,7 +38,18 @@ func init_rooms(opts={}):
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-	room_defs = VaniaRoomDef.generate_defs(U.merge({tile_size=tile_size,}, opts))
+	room_defs = VaniaRoomDef.generate_defs(U.merge({
+		tile_size=tile_size,
+		room_inputs=[
+			{
+				RoomInputs.CUSTOM_ROOM: {
+					shape=[Vector3i(0, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 0, 0),]
+				},
+				RoomInputs.HAS_PLAYER: {}
+			},
+			[RoomInputs.IN_SMALL_ROOM],
+			]
+		}, opts))
 	room_defs = generator.add_rooms(room_defs)
 
 	for rd in room_defs:

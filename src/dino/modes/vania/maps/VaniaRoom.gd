@@ -99,19 +99,54 @@ func get_door_tile_coords(opts={}):
 		coords.append_array(tile_coords)
 	return coords
 
-func is_border_coord(rect, coord, offset=0):
-	return (abs(rect.position.x - coord.x) < tile_border_width - offset) \
-		or (abs(rect.end.x - coord.x) <= tile_border_width - offset) \
-		or (abs(rect.position.y - coord.y) < tile_border_width - offset) \
-		or (abs(rect.end.y - coord.y) <= tile_border_width - offset)
+func is_border_coord(cell_rect: Rect2i, coord: Vector2i, opts={}):
+	var offset = opts.get("offset", 0)
+	var skip_borders = opts.get("skip_borders", [
+		Vector2i.LEFT,
+		Vector2i.RIGHT,
+		Vector2i.UP,
+		Vector2i.DOWN,
+		])
+	# corners are always filled, borders are opt-out via skip_borders
+	return (abs(cell_rect.position.x - coord.x) < tile_border_width - offset and
+			abs(cell_rect.position.y - coord.y) < tile_border_width - offset) \
+		or (abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and
+			abs(cell_rect.position.y - coord.y) < tile_border_width - offset) \
+		or (abs(cell_rect.position.x - coord.x) < tile_border_width - offset and
+			abs(cell_rect.end.y - coord.y) <= tile_border_width - offset) \
+		or (abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and
+			abs(cell_rect.end.y - coord.y) <= tile_border_width - offset) \
+		or (abs(cell_rect.position.x - coord.x) < tile_border_width - offset and not Vector2i.LEFT in skip_borders) \
+		or (abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and not Vector2i.RIGHT in skip_borders) \
+		or (abs(cell_rect.position.y - coord.y) < tile_border_width - offset and not Vector2i.UP in skip_borders) \
+		or (abs(cell_rect.end.y - coord.y) <= tile_border_width - offset and not Vector2i.DOWN in skip_borders)
+
+func internal_borders(cell, cells):
+	var borders = []
+	for c in cells:
+		if c == cell:
+			continue
+		if room_def.is_neighboring_cell(c, cell):
+			var diff = c - cell
+			borders.append(Vector2i(diff.x, diff.y))
+	return borders
 
 func fill_tilemap_borders(opts={}):
-	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
-	var t_cells = Reptile.cells_in_rect(rect).filter(func(coord):
-		if opts.get("skip_cells"):
-			if opts.get("skip_cells").has(coord):
-				return false
-		return is_border_coord(rect, coord))
+	var t_cells = []
+	# do we need to normalize 'local_cells'?
+	for cell in room_def.local_cells:
+		var rect = Rect2(Vector2(cell.x, cell.y) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
+		var recti = Reptile.rect_to_local_rect(tilemap, rect)
+
+		var skip_borders = internal_borders(cell, room_def.local_cells)
+
+		var border_cells = Reptile.cells_in_rect(recti).filter(func(coord):
+			if opts.get("skip_cells"):
+				if opts.get("skip_cells").has(coord):
+					return false
+			return is_border_coord(recti, coord, {skip_borders=skip_borders}))
+
+		t_cells.append_array(border_cells)
 
 	tilemap.set_cells_terrain_connect(0, t_cells, 0, 0)
 
@@ -263,7 +298,7 @@ func possible_positions(tmap_data, entity_shape):
 	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
 	for coord in tmap_data.keys():
 		# skip all but innermost border
-		if is_border_coord(rect, coord, 1):
+		if is_border_coord(rect, coord, {offset=1}):
 			continue
 		if is_fit(coord, tmap_data, entity_shape):
 			positions.append(coord)

@@ -89,9 +89,12 @@ func _init(opts={}):
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
-	constraints = U.get_(opts, "constraints", [])
+	if opts.get("room_inputs"):
+		constraints = opts.get("room_inputs")
+	elif opts.get("constraints"):
+		constraints = opts.get("constraints")
 
-	if constraints != null and (constraints is RoomInputs or not constraints.is_empty()):
+	if constraints != null:
 		RoomInputs.apply_constraints(constraints, self)
 
 ## tilemap helpers #####################################################
@@ -267,7 +270,7 @@ static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
 		var def = VaniaRoomDef.new({
 			entity_defs=e_defs, tile_defs=t_defs,
 			tile_size=opts.get("tile_size"),
-			constraints=inputs,
+			room_inputs=inputs,
 			})
 		defs.append(def)
 

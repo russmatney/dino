@@ -5,8 +5,7 @@ class_name VaniaRoomTest
 
 func test_build_room_sets_tilemap_borders():
 	var room = VaniaRoom.new()
-	var def = VaniaRoomDef.new()
-	RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,], def)
+	var def = VaniaRoomDef.new({room_inputs=[RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,]})
 
 	def.map_cells = [Vector3i(0, 0, 0)]
 
@@ -31,6 +30,52 @@ func test_build_room_sets_tilemap_borders():
 		])
 	assert_array(tmap_cells).contains([Vector2i(tiles_start.x, tiles_end.y),])
 	assert_array(tmap_cells).contains([Vector2i(tiles_end.x, tiles_start.y),])
+
+func test_build_room_walls_concave_shape():
+	var shape = [Vector3i(0, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 0, 0)]
+
+	var room = VaniaRoom.new()
+	var def = VaniaRoomDef.new({room_inputs=[
+		RoomInputs.IN_SPACESHIP,
+		{RoomInputs.CUSTOM_ROOM: {shape=shape}},
+		]})
+
+	def.map_cells = shape
+
+	room.set_room_def(def)
+	room.setup_tileset()
+	room.fill_tilemap_borders()
+	room.tilemap.force_update()
+
+	var tmap_cells = room.tilemap.get_used_cells(0)
+
+	var expected_full_borders = {
+		Vector3i(0, 0, 0): [Vector2i.UP, Vector2i.LEFT],
+		Vector3i(1, 0, 0): [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN],
+		Vector3i(0, 1, 0): [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.DOWN],
+		}
+
+	for cell in shape:
+		var map_cell_rect = def.get_map_cell_rect(cell)
+		var cells_rect = Reptile.rect_to_local_rect(room.tilemap, map_cell_rect)
+
+		var left_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.position.x, y))
+		var top_border = range(cells_rect.position.x, cells_rect.end.x).map(func(x): return Vector2i(x, cells_rect.position.y))
+		var bottom_border = range(cells_rect.position.x, cells_rect.end.x).map(func(x): return Vector2i(x, cells_rect.end.y - 1))
+		var right_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.end.x - 1, y))
+
+		assert_array(expected_full_borders[cell]).is_not_empty()
+
+		for dir in expected_full_borders[cell]:
+			match dir:
+				Vector2i.UP:
+					assert_array(tmap_cells).contains(top_border)
+				Vector2i.DOWN:
+					assert_array(tmap_cells).contains(bottom_border)
+				Vector2i.LEFT:
+					assert_array(tmap_cells).contains(left_border)
+				Vector2i.RIGHT:
+					assert_array(tmap_cells).contains(right_border)
 
 ## tilemap doors ################################################
 
