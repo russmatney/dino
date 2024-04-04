@@ -561,6 +561,7 @@ func _initialize():
 		prints("GdUnit4 requires a minimum of Godot 4.1.x Version!")
 		quit(CLIRunner.RETURN_ERROR_GODOT_VERSION_NOT_SUPPORTED)
 		return
+	DisplayServer.window_set_title("GDUnit CLI")
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	_cli_runner = CLIRunner.new()
 	root.add_child(_cli_runner)
