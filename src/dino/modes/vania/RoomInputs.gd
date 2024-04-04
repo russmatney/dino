@@ -60,6 +60,8 @@ static var all_constraints = [
 	# IN_SMALL_ROOM,
 	# IN_TALL_ROOM,
 	# IN_WIDE_ROOM,
+	# IN_T_ROOM,
+	# IN_L_ROOM,
 	# CUSTOM_ROOM,
 	IN_WOODEN_BOXES,
 	IN_SPACESHIP,
@@ -202,6 +204,8 @@ static func get_constraint_data(cons_key, opts={}):
 		IN_SMALL_ROOM: return small_room_shape(opts)
 		IN_TALL_ROOM: return tall_room_shape(opts)
 		IN_WIDE_ROOM: return wide_room_shape(opts)
+		IN_T_ROOM: return T_room_shape(opts)
+		IN_L_ROOM: return L_room_shape(opts)
 		CUSTOM_ROOM: return custom_room_shape(opts)
 
 		IN_WOODEN_BOXES: return wooden_boxes(opts)
@@ -254,6 +258,8 @@ const IN_LARGE_ROOM = "in_large_room"
 const IN_SMALL_ROOM = "in_small_room"
 const IN_TALL_ROOM = "in_tall_room"
 const IN_WIDE_ROOM = "in_wide_room"
+const IN_T_ROOM = "in_T_room"
+const IN_L_ROOM = "in_L_room"
 const CUSTOM_ROOM = "in_custom_room"
 
 static func large_room_shape(_opts={}):
@@ -285,6 +291,26 @@ static func custom_room_shape(opts={}):
 		Log.warn("Custom Room shape missing 'shape'!")
 	return RoomInputs.new({
 		room_shape=opts.get("shape")
+		})
+
+static func L_room_shape(opts={}):
+	return RoomInputs.new({
+		room_shape=[
+			all_room_shapes.L_shape,
+			all_room_shapes.L_backwards_shape,
+			all_room_shapes.r_shape,
+			all_room_shapes.r_backwards_shape,
+			].pick_random()
+		})
+
+static func T_room_shape(opts={}):
+	return RoomInputs.new({
+		room_shape=[
+			all_room_shapes.T_shape,
+			all_room_shapes.T_inverted_shape,
+			all_room_shapes.half_H_shape,
+			all_room_shapes.half_H_backwards_shape,
+			].pick_random()
 		})
 
 ## tilemaps ######################################################33

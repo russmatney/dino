@@ -41,14 +41,14 @@ func init_rooms(opts={}):
 	room_defs = VaniaRoomDef.generate_defs(U.merge({
 		tile_size=tile_size,
 		room_inputs=[
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.L_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.L_backwards_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.r_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.r_backwards_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.T_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.T_inverted_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.half_H_shape,},},
-			{RoomInputs.CUSTOM_ROOM: {shape=RoomInputs.all_room_shapes.half_H_backwards_shape,},},
+			[RoomInputs.IN_T_ROOM],
+			[RoomInputs.IN_L_ROOM],
+			[RoomInputs.IN_T_ROOM],
+			[RoomInputs.IN_L_ROOM],
+			[RoomInputs.IN_T_ROOM],
+			[RoomInputs.IN_L_ROOM],
+			[RoomInputs.IN_T_ROOM],
+			[RoomInputs.IN_L_ROOM],
 			]
 		}, opts))
 	room_defs = generator.add_rooms(room_defs)
