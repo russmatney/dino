@@ -60,9 +60,9 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 
 [gdunit4]
 
-report/godot/push_error=true
 report/assert/strict_number_type_compare=false
-report/verbose_orphans=false
+ui/toolbar/run_overall=true
+report/godot/push_error=true
 
 [global]
 
