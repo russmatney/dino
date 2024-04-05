@@ -109,8 +109,8 @@ func set_data(opts):
 #####################################################################
 ## fallback group data
 
-var cf_dark_tile = preload("res://addons/reptile/tilemaps/coldfire/ColdFireDark.tscn")
-var cf_blue_tile = preload("res://addons/reptile/tilemaps/coldfire/ColdFireBlue.tscn")
+var cf_dark_tile = preload("res://addons/core/reptile/tilemaps/coldfire/ColdFireDark.tscn")
+var cf_blue_tile = preload("res://addons/core/reptile/tilemaps/coldfire/ColdFireBlue.tscn")
 
 var cf_dark = Color8(91, 118, 141)
 var cf_blue = Color8(70, 66, 94)

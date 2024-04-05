@@ -4,15 +4,15 @@ class_name RoomInputs
 static var all_entities = ["Blob", "Enemy", "Leaf", "Target", "Candle", "OneWayPlatform"]
 
 static var all_tilemap_scenes = [
-		# "res://addons/reptile/tilemaps/GrassTiles16.tscn",
-		# "res://addons/reptile/tilemaps/SnowTiles16.tscn",
-		# "res://addons/reptile/tilemaps/CaveTiles16.tscn",
-		# "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
-		"res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",
-		"res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",
-		"res://addons/reptile/tilemaps/VolcanoTiles8.tscn",
-		"res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",
-		"res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",
+		# "res://addons/core/reptile/tilemaps/GrassTiles16.tscn",
+		# "res://addons/core/reptile/tilemaps/SnowTiles16.tscn",
+		# "res://addons/core/reptile/tilemaps/CaveTiles16.tscn",
+		# "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn",
+		"res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn",
+		"res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn",
+		"res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn",
+		"res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn",
+		"res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn",
 	]
 
 static var all_room_shapes = {
@@ -323,27 +323,27 @@ const IN_GRASSY_CAVE = "in_grassy_cave"
 
 static func wooden_boxes(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn",],
+		tilemap_scenes=["res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn",],
 		})
 
 static func spaceship(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/SpaceshipTiles8.tscn",],
+		tilemap_scenes=["res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn",],
 		})
 
 static func kingdom(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn",],
+		tilemap_scenes=["res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn",],
 		})
 
 static func volcano(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/VolcanoTiles8.tscn",],
+		tilemap_scenes=["res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn",],
 		})
 
 static func grassy_cave(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn",],
+		tilemap_scenes=["res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn",],
 		})
 
 ## entities ######################################################33

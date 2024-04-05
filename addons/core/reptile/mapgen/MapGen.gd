@@ -174,7 +174,7 @@ func do_persist_tilemap(_val = null):
 
 @export var persist_node_path: NodePath = "Map"
 @export var persist_name: String = str(persist_node_path)
-@export var persist_dir: String = "res://addons/reptile/maps/"
+@export var persist_dir: String = "res://addons/core/reptile/maps/"
 @export var version_number: bool = true
 @export var hardcoded_version_number: String
 
