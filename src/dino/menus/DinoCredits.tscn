@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/menus/DinoCredits.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://v81r0hbty1bb" path="res://addons/core/thanks/Credits.tscn" id="2"]
 [ext_resource type="Script" path="res://src/dino/menus/Credits.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://b3ivyg8cxtuof" path="res://addons/navi/ui/MenuButton.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b3ivyg8cxtuof" path="res://addons/core/navi/ui/MenuButton.tscn" id="4"]
 
 [node name="Credits" type="CanvasLayer"]
 script = ExtResource("3")

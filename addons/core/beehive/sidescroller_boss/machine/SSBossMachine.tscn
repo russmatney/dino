@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://pot2dpd6w67m"]
+
+[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="1_0q0ok"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Idle.gd" id="2_fjqr0"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Firing.gd" id="3_i30ht"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/KnockedBack.gd" id="4_myrkt"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Dead.gd" id="5_kc6bl"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Stunned.gd" id="6_s8n51"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Warping.gd" id="7_wdwpn"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Laughing.gd" id="8_ddh5a"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_boss/machine/Swoop.gd" id="9_8mqxy"]
+
+[node name="SSBossMachine" type="Node"]
+script = ExtResource("1_0q0ok")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_fjqr0")
+
+[node name="Firing" type="Node" parent="."]
+script = ExtResource("3_i30ht")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("4_myrkt")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("5_kc6bl")
+
+[node name="Stunned" type="Node" parent="."]
+script = ExtResource("6_s8n51")
+
+[node name="Warping" type="Node" parent="."]
+script = ExtResource("7_wdwpn")
+
+[node name="Laughing" type="Node" parent="."]
+script = ExtResource("8_ddh5a")
+
+[node name="Swoop" type="Node" parent="."]
+script = ExtResource("9_8mqxy")

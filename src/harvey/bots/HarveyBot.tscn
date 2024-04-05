@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/harvey/bots/HarveyBot.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/harvey/player/PlayerItem.tscn" id="3"]
-[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/beehive/assets/arrow.tres" id="4"]
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/core/beehive/assets/arrow.tres" id="4"]
 [ext_resource type="PackedScene" path="res://src/harvey/player/Machine.tscn" id="5"]
 [ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/harvey/player/harvey_spriteframes.tres" id="6"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_havi5"]

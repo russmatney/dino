@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://j0sk3m2xccgv"]
+
+[ext_resource type="Script" path="res://addons/core/navi/NaviWinMenu.gd" id="1_oa1u5"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2"]
+[ext_resource type="Script" path="res://addons/core/navi/NaviWinButtonList.gd" id="3"]
+
+[node name="NaviWinMenu" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_oa1u5")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="HeroLabel" parent="PanelContainer/CenterContainer/VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
+text = "[center]WIN!"
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WinButtonList" type="VBoxContainer" parent="PanelContainer/CenterContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3")

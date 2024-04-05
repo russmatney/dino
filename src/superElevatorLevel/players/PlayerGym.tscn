@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://uiydpq8sku37"]
 
-[ext_resource type="Script" path="res://addons/beehive/beatemup/BEUGym.gd" id="1_1lf74"]
+[ext_resource type="Script" path="res://addons/core/beehive/beatemup/BEUGym.gd" id="1_1lf74"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="2_344qf"]
 
 [node name="PlayerGym" type="Node"]

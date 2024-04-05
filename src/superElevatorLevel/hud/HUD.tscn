@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://uo8mry7bee25"]
 
-[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="1_2oxxu"]
-[ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="1_h2hgf"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="1_2oxxu"]
+[ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="1_h2hgf"]
 [ext_resource type="Script" path="res://src/superElevatorLevel/hud/HUD.gd" id="1_rsxy5"]
-[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="3_ewkev"]
+[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/core/hood/EntityStatusList.tscn" id="3_ewkev"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rsxy5")

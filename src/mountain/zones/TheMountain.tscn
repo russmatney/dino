@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/core/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
 [ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/core/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
 [ext_resource type="PackedScene" uid="uid://bax62g5wrhfl7" path="res://src/mountain/checkpoints/LogCheckpoint.tscn" id="9_j1p4u"]
-[ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="9_jg13a"]
+[ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/core/beehive/sidescroller/SSEnemy.tscn" id="9_jg13a"]
 [ext_resource type="PackedScene" uid="uid://dkyb7ritrpatt" path="res://src/mountain/checkpoints/CaveCheckpoint.tscn" id="10_riig2"]
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/mountain/checkpoints/SnowCheckpoint.tscn" id="11_l3xsv"]
 [ext_resource type="PackedScene" uid="uid://c8bdi1yxvp67w" path="res://src/mountain/SnowFallParticles.tscn" id="12_xcbii"]

@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="11_7pvm7"]
 [ext_resource type="PackedScene" path="res://src/shirt/entities/Coin.tscn" id="12_xkhi8"]
 [ext_resource type="PackedScene" path="res://src/hatbot/CoinDoorQuest.tscn" id="13_0bnqt"]
-[ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://addons/beehive/sidescroller_boss/WarpSpot.tscn" id="16_qc2ns"]
+[ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://addons/core/beehive/sidescroller_boss/WarpSpot.tscn" id="16_qc2ns"]
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/hatbot/bosses/Beefstronaut.tscn" id="17_d3lge"]
 [ext_resource type="PackedScene" path="res://src/hatbot/BossDefeatQuest.tscn" id="17_yxlqf"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/hatbot/bosses/Monstroar.tscn" id="18_tygdy"]

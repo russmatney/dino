@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c6kwt11ox07s1"]
 
 [ext_resource type="Script" path="res://src/herd/menus/NextLevelMenu.gd" id="1_xnq8o"]
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2_veluj"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2_veluj"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="3_om0ln"]
 [ext_resource type="Script" path="res://src/herd/menus/LevelButtonList.gd" id="4_rbhdf"]
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="4_rckor"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/players/DinoTDPlayer.gd" id="1_uvkii"]
 [ext_resource type="Texture2D" uid="uid://dcng2g4a1g4wn" path="res://src/dino/players/hairo/assets/topdown_player_64.png" id="2_0x6m6"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_sbhyh"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://addons/beehive/topdown/machine/TDMachine.tscn" id="4_g1vt3"]
+[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://addons/core/beehive/topdown/machine/TDMachine.tscn" id="4_g1vt3"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_nbfup"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_hx7xl"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_a60dj"]

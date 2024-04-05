@@ -1,0 +1,29 @@
+[gd_scene load_steps=13 format=3 uid="uid://cteyd3m5jameg"]
+
+[ext_resource type="Theme" uid="uid://cjekweol2gxri" path="res://addons/core/hood/HudLabelTheme.tres" id="1"]
+[ext_resource type="RichTextEffect" uid="uid://cxd4xajdoafoh" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="2_awdiv"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="3_i415w"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Heart.tres" id="4_i5rj6"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="5_o4kx3"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="6_yvjws"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="7_7i6yt"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Number.tres" id="8_yeaom"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="9_mcpl6"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="10_od418"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="11_5l3dc"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="12_03mad"]
+
+[node name="HudLabel" type="RichTextLabel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1")
+bbcode_enabled = true
+text = "Lives: 10"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("2_awdiv"), ExtResource("3_i415w"), ExtResource("4_i5rj6"), ExtResource("5_o4kx3"), ExtResource("6_yvjws"), ExtResource("7_7i6yt"), ExtResource("8_yeaom"), ExtResource("9_mcpl6"), ExtResource("10_od418"), ExtResource("11_5l3dc"), ExtResource("12_03mad")]

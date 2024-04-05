@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/harvey/player/Run.gd" id="1"]
 [ext_resource type="Script" path="res://src/harvey/player/Idle.gd" id="2"]
-[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3"]
+[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="3"]
 
 [node name="Machine" type="Node"]
 script = ExtResource( 3 )

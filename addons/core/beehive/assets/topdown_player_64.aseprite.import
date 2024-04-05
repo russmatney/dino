@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://buyw146x0e4l0"
+path="res://.godot/imported/topdown_player_64.aseprite-b5e1dac1e62345166f3ea66e867bedf5.res"
+
+[deps]
+
+source_file="res://addons/core/beehive/assets/topdown_player_64.aseprite"
+dest_files=["res://.godot/imported/topdown_player_64.aseprite-b5e1dac1e62345166f3ea66e867bedf5.res"]
+
+[params]
+

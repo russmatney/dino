@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3f73ngblhhpf"]
+
+[ext_resource type="Script" path="res://addons/core/hood/EntityStatusList.gd" id="1_anrky"]
+
+[node name="EntityStatusList" type="VBoxContainer"]
+script = ExtResource("1_anrky")
+max_children = null

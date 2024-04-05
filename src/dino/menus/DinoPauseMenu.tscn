@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenu.gd" id="1_7pfpx"]
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="3_gr3ki"]
-[ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/brick/BrickRegenMenu.tscn" id="3_oarvi"]
+[ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/core/brick/BrickRegenMenu.tscn" id="3_oarvi"]
 [ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenuButtonList.gd" id="4_wcgkx"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/dj/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/metro/MetroMap.tscn" id="7_bx1bw"]

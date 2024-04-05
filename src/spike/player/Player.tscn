@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dj787pa7wju5f" path="res://src/spike/player/soft-soft-hoodie.png" id="3_l0au3"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="4_aqtv8"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="5_66onq"]
-[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="6_xes5p"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller/machine/SSMachine.tscn" id="6_xes5p"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_q0s7p"]
 [ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://addons/core/assets/lights/light64px4.png" id="8_yatdx"]
 

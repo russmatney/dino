@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="8_atx5s"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="9_u5coh"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="10_egux8"]
-[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="11_oh4d4"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller/machine/SSMachine.tscn" id="11_oh4d4"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fow7p"]
 cull_mode = 2

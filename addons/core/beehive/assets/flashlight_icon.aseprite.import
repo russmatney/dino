@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://1js7tgiosss3"
+path="res://.godot/imported/flashlight_icon.aseprite-fb2ea91eb0135652c6bcc4f09f067a50.res"
+
+[deps]
+
+source_file="res://addons/core/beehive/assets/flashlight_icon.aseprite"
+dest_files=["res://.godot/imported/flashlight_icon.aseprite-fb2ea91eb0135652c6bcc4f09f067a50.res"]
+
+[params]
+

@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://bxn3n14d7padl"]
 
 [ext_resource type="Script" path="res://src/gunner/hud/HUD.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/hood/HeartsContainer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/core/hood/HeartsContainer.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://src/gunner/menus/GunnerControls.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/gunner/hud/Pickups.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="5_5n3hv"]
-[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="6_3erpx"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="6_3erpx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dpss"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.360784)

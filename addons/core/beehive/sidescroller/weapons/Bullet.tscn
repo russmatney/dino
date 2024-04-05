@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba5vqqpmrn21c"]
+
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/core/beehive/assets/arrow.tres" id="1"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller/weapons/Arrow.gd" id="2"]
+[ext_resource type="SpriteFrames" uid="uid://dr2mp11jcusmn" path="res://addons/core/beehive/assets/pop_sprite_frames.tres" id="3"]
+
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 4.00001
+height = 12.0
+
+[node name="Bullet" type="RigidBody2D" groups=["bullet"]]
+collision_layer = 4
+collision_mask = 11
+gravity_scale = 0.4
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.57079
+shape = SubResource("1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 1)
+rotation = 1.57079
+scale = Vector2(2, 1)
+sprite_frames = ExtResource("1")
+
+[node name="Pop" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.886275)
+sprite_frames = ExtResource("3")
+animation = &"pop"
+frame = 3
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://byfux6jsj1da5"]
 
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/gunner/menus/GunnerControls.tscn" id="5"]
 [ext_resource type="Script" path="res://src/gunner/menus/GunnerPauseButtonList.gd" id="5_bnsl3"]
 

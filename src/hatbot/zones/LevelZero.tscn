@@ -15,7 +15,7 @@
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="12_cjkwf"]
 [ext_resource type="PackedScene" path="res://src/shirt/entities/Coin.tscn" id="12_ma4mf"]
 [ext_resource type="FontFile" uid="uid://c6j24vm8je66p" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="13_f5ilp"]
-[ext_resource type="PackedScene" uid="uid://bv8w3f0w1s18a" path="res://addons/hood/InGameText.tscn" id="13_q2rk4"]
+[ext_resource type="PackedScene" uid="uid://bv8w3f0w1s18a" path="res://addons/core/hood/InGameText.tscn" id="13_q2rk4"]
 [ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="13_t8su5"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="15_fr2us"]
 [ext_resource type="PackedScene" uid="uid://65i2r7duvw0r" path="res://src/hatbot/RevealOnContact.tscn" id="16_41guf"]

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://cwbvodfvafihs"]
 
-[ext_resource type="Texture2D" uid="uid://dy6deo8whknbk" path="res://addons/beehive/assets/32x32autumnglow_tiles_sheet.png" id="1_fx1cq"]
+[ext_resource type="Texture2D" uid="uid://dy6deo8whknbk" path="res://addons/core/beehive/assets/32x32autumnglow_tiles_sheet.png" id="1_fx1cq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_57x4l"]
 atlas = ExtResource("1_fx1cq")

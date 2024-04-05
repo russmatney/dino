@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dfskliofg7y20"
+path="res://.godot/imported/BEU_character_shadow.aseprite-5297afe887c4bd474d3c0b7ca8a26f4d.res"
+
+[deps]
+
+source_file="res://addons/core/beehive/assets/BEU_character_shadow.aseprite"
+dest_files=["res://.godot/imported/BEU_character_shadow.aseprite-5297afe887c4bd474d3c0b7ca8a26f4d.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d1ib3cgd5t2qm"
+path="res://.godot/imported/topdown_enemy_64.aseprite-68db3acf1ac881cbb9ecd4f9c0fdf0c9.res"
+
+[deps]
+
+source_file="res://addons/core/beehive/assets/topdown_enemy_64.aseprite"
+dest_files=["res://.godot/imported/topdown_enemy_64.aseprite-68db3acf1ac881cbb9ecd4f9c0fdf0c9.res"]
+
+[params]
+

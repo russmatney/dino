@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cypd20i7s01tn"
+path="res://.godot/imported/BEU_goon.aseprite-e35f78404be47f99eb70a2818f5231ba.res"
+
+[deps]
+
+source_file="res://addons/core/beehive/assets/BEU_goon.aseprite"
+dest_files=["res://.godot/imported/BEU_goon.aseprite-e35f78404be47f99eb70a2818f5231ba.res"]
+
+[params]
+

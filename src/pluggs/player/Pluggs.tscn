@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/pluggs/player/Pluggs.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://epufx5aihbhp" path="res://src/pluggs/player/pluggs32.png" id="2_lye74"]
-[ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="4"]
+[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="4"]
 [ext_resource type="Script" path="res://src/pluggs/player/machine/Stand.gd" id="4_i3vuh"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5"]
 [ext_resource type="Script" path="res://src/pluggs/player/machine/Run.gd" id="5_sihy0"]

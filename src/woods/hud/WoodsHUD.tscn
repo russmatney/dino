@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://uup3qahbxmw3"]
 
 [ext_resource type="Script" path="res://src/woods/hud/WoodsHUD.gd" id="1_577cd"]
-[ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="2_cgi0b"]
-[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="3_ta4sb"]
+[ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="2_cgi0b"]
+[ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/core/hood/EntityStatusList.tscn" id="3_ta4sb"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="4_i52so"]
-[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="5_clmgc"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="5_clmgc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2pgx"]
 content_margin_left = 8.0
