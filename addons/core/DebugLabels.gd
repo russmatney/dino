@@ -153,14 +153,3 @@ func _on_toggle_metro_map_pressed():
 		metro_map = metro_map_scene.instantiate()
 		$%ToggleMetroMap.add_sibling(metro_map)
 
-# Trolley Debug
-
-const trolley_debug_scene = preload("res://addons/trolley/TrolleyDebugPanel.tscn")
-var trolley_debug
-
-func _on_toggle_trolley_debug_pressed():
-	if trolley_debug and is_instance_valid(trolley_debug):
-		trolley_debug.queue_free()
-	else:
-		trolley_debug = trolley_debug_scene.instantiate()
-		$%ToggleTrolleyDebug.add_sibling(trolley_debug)

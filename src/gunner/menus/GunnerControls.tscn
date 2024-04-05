@@ -8,18 +8,18 @@ anchor_bottom = 1.0
 offset_right = -412.0
 offset_bottom = -200.0
 
-[node name="TrolleyActionLabel" parent="." instance=ExtResource( 1 )]
+[node name="ActionLabel" parent="." instance=ExtResource( 1 )]
 offset_bottom = 23.0
 action = "Jump"
 key = "m/space"
 
-[node name="TrolleyActionLabel2" parent="." instance=ExtResource( 1 )]
+[node name="ActionLabel2" parent="." instance=ExtResource( 1 )]
 offset_top = 27.0
 offset_bottom = 50.0
 action = "Fire"
 key = "n"
 
-[node name="TrolleyActionLabel3" parent="." instance=ExtResource( 1 )]
+[node name="ActionLabel3" parent="." instance=ExtResource( 1 )]
 offset_top = 54.0
 offset_bottom = 77.0
 action = "Run"

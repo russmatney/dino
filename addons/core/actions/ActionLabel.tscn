@@ -49,7 +49,7 @@ cache/0/64/0/kerning_overrides/64/0 = Vector2(0, 0)
 Label/colors/font_color = Color(0.964706, 0.776471, 0.658824, 1)
 Label/fonts/font = SubResource("1")
 
-[node name="TrolleyActionLabel" type="HBoxContainer"]
+[node name="ActionLabel" type="HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 offset_right = 100.0
 offset_bottom = 40.0

@@ -10,7 +10,7 @@ func set_label(action):
 	get_node("%Label").text = action
 
 
-var key_icon = preload("res://addons/trolley/TrolleyKeyIcon.tscn")
+var key_icon = preload("res://addons/core/actions/KeyIcon.tscn")
 
 
 func add_key(k):
