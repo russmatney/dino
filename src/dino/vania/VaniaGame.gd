@@ -38,10 +38,12 @@ func _ready():
 
 	# spawn player in the load playground
 	setup_player()
+	playground.ready.connect(func():
+		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
 
 	set_process(false)
 
-	thread_room_gen({room_inputs=U.repeat_fn(RoomInputs.random_room, 2)})
+	thread_room_gen({room_inputs=U.repeat_fn(RoomInputs.random_room, 5)})
 
 func on_finished_initial_room_gen():
 	clear_load_playground()
