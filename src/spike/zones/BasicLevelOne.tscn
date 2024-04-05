@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c4rvg7x32y0h"]
 
 [ext_resource type="Script" path="res://src/spike/zones/SpikeZone.gd" id="1_l5ds8"]
-[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_ouxbs"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_ouxbs"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="3_uly7r"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="4_cu5va"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="5_jxm16"]

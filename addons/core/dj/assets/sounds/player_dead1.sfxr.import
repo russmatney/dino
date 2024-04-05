@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://wy0j3y28hgf8"
+path="res://.godot/imported/player_dead1.sfxr-26dae7328c254e2dfaab74a03a5d233c.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/player_dead1.sfxr"
+dest_files=["res://.godot/imported/player_dead1.sfxr-26dae7328c254e2dfaab74a03a5d233c.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

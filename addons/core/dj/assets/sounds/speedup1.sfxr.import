@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://u4x6ooy780lg"
+path="res://.godot/imported/speedup1.sfxr-09bdc1fffbd103e8e1434ee66ba73e76.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/speedup1.sfxr"
+dest_files=["res://.godot/imported/speedup1.sfxr-09bdc1fffbd103e8e1434ee66ba73e76.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

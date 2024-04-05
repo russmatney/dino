@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cf47ejo0mrks7"
+path="res://.godot/imported/showjumbotron2.sfxr-8efc00c53062af772024a7e6bca78b18.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/showjumbotron2.sfxr"
+dest_files=["res://.godot/imported/showjumbotron2.sfxr-8efc00c53062af772024a7e6bca78b18.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

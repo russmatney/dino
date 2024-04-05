@@ -119,7 +119,7 @@ func _on_rearrange_labels_pressed():
 
 # Hotel UI
 
-const hotel_ui_scene = preload("res://addons/hotel/ui/HotelUI.tscn")
+const hotel_ui_scene = preload("res://addons/core/hotel/ui/HotelUI.tscn")
 var hotel_ui
 
 func _on_toggle_hotel_db_pressed():
@@ -131,7 +131,7 @@ func _on_toggle_hotel_db_pressed():
 
 # DJ TurnTable
 
-const dj_turntable_scene = preload("res://addons/dj/TurnTable.tscn")
+const dj_turntable_scene = preload("res://addons/core/dj/TurnTable.tscn")
 var dj_turntable
 
 func _on_toggle_dj_turn_table_pressed():
@@ -143,7 +143,7 @@ func _on_toggle_dj_turn_table_pressed():
 
 # Metro Map
 
-const metro_map_scene = preload("res://addons/metro/MetroMap.tscn")
+const metro_map_scene = preload("res://addons/core/metro/MetroMap.tscn")
 var metro_map
 
 func _on_toggle_metro_map_pressed():

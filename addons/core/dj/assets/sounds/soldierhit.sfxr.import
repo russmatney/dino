@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://caf31ycwhliln"
+path="res://.godot/imported/soldierhit.sfxr-0f7397b4b080619a401784347d2a1c74.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/soldierhit.sfxr"
+dest_files=["res://.godot/imported/soldierhit.sfxr-0f7397b4b080619a401784347d2a1c74.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

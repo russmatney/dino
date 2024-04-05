@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://dq1r6uigf7x8w"
+path="res://.godot/imported/tap.sfxr-93e33c4f951a3a7f279081cad5d8e707.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/tap.sfxr"
+dest_files=["res://.godot/imported/tap.sfxr-93e33c4f951a3a7f279081cad5d8e707.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

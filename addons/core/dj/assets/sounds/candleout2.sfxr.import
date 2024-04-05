@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://caqw53umv8xmm"
+path="res://.godot/imported/candleout2.sfxr-2bce7d769073131441641d106bfe057d.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/candleout2.sfxr"
+dest_files=["res://.godot/imported/candleout2.sfxr-2bce7d769073131441641d106bfe057d.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

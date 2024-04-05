@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://74mvee47v6rn"
+path="res://.godot/imported/Retro Game Weapons Sound Effects - complete.ogg-02f11e14de396af7186cbc843446a757.oggvorbisstr"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/Retro Game Weapons Sound Effects - complete.ogg"
+dest_files=["res://.godot/imported/Retro Game Weapons Sound Effects - complete.ogg-02f11e14de396af7186cbc843446a757.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

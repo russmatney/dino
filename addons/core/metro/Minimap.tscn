@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjehx2kuswamk"]
+
+[ext_resource type="Script" path="res://addons/core/metro/Minimap.gd" id="1_4rvae"]
+[ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/core/metro/MetroMap.tscn" id="2_a3v6e"]
+
+[node name="Minimap" type="Node2D"]
+script = ExtResource("1_4rvae")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -15
+limit_top = -15
+limit_right = 512
+limit_bottom = 512
+position_smoothing_enabled = true
+
+[node name="MetroMap" parent="." instance=ExtResource("2_a3v6e")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(512, 512)
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 1
+grow_vertical = 1

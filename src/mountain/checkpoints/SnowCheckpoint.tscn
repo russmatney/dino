@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvjtmnprpxqem"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroCheckpoint.gd" id="1_2uhlj"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroCheckpoint.gd" id="1_2uhlj"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="2_76pnm"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="3_jvpw1"]
 [ext_resource type="Texture2D" uid="uid://bexm0gw7341ir" path="res://src/mountain/checkpoints/MNT_snow_bench_checkpoint.png" id="4_uds3o"]

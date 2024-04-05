@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="1_i2ua0"]
 [ext_resource type="Script" path="res://src/shirt/hud/HUD.gd" id="1_m3maa"]
-[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/metro/MinimapContainer.tscn" id="2_ioejp"]
+[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/core/metro/MinimapContainer.tscn" id="2_ioejp"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="3_vl0v5"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/core/hood/EntityStatusList.tscn" id="4_yyh2s"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_tt27g"]

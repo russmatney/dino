@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://ceupmxhlfty2x"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_y18jx"]
-[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_uyouh"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroZone.gd" id="1_y18jx"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_uyouh"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_gehn7"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_bcg0d"]
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="5_anma2"]

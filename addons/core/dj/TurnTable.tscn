@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://idppjgt76c6l"]
+
+[ext_resource type="Script" path="res://addons/core/dj/TurnTable.gd" id="1_7jl3k"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_ihsvu"]
+[ext_resource type="PackedScene" uid="uid://b4qyb66xixys8" path="res://addons/core/dj/DJZSoundBoard.tscn" id="2_u6pk3"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_o7tfw"]
+
+[node name="TurnTable" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7jl3k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_ihsvu")
+bbcode_enabled = true
+text = "[center]DJ TurnTable[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ReloadPluginButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o7tfw")
+text = "Reload"
+
+[node name="MuteAll" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o7tfw")
+text = "Mute All"
+
+[node name="ToggleMuteMusic" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o7tfw")
+text = "Mute music"
+
+[node name="ToggleMuteSound" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_o7tfw")
+text = "Mute sound"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DJZSoundBoard" parent="VBoxContainer/ScrollContainer" instance=ExtResource("2_u6pk3")]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ReloadPluginButton" to="." method="_on_reload_plugin_button_pressed"]

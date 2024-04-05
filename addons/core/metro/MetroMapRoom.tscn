@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d08gsfs35aiod"]
+
+[ext_resource type="Script" path="res://addons/core/metro/MetroMapRoom.gd" id="1_mkj77"]
+
+[node name="MetroMapRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_mkj77")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

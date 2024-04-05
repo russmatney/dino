@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bm78wtxulxse5"
+path="res://.godot/imported/new_room_blip1.sfxr-25626bf16328e4cf78be5d194c4594f8.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/new_room_blip1.sfxr"
+dest_files=["res://.godot/imported/new_room_blip1.sfxr-25626bf16328e4cf78be5d194c4594f8.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

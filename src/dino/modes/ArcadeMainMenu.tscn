@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/modes/ArcadeMainMenu.gd" id="1_3jdvk"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="1_lxp1a"]
 [ext_resource type="Script" path="res://addons/core/navi/NaviButtonList.gd" id="3_3lvko"]
-[ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/dj/MuteButtonList.tscn" id="4_pfum3"]
+[ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/core/dj/MuteButtonList.tscn" id="4_pfum3"]
 
 [node name="ArcadeMainMenu" type="CanvasLayer" groups=["menus"]]
 script = ExtResource("1_3jdvk")

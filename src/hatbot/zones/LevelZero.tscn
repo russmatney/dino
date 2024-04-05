@@ -1,10 +1,10 @@
 [gd_scene load_steps=25 format=3 uid="uid://cp6u64j76x4l8"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_qaiq7"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroZone.gd" id="1_qaiq7"]
 [ext_resource type="Shader" path="res://src/hatbot/BgBlur.gdshader" id="2_nb6de"]
 [ext_resource type="Texture2D" uid="uid://q2pnjmesx2xc" path="res://src/hatbot/assets/background_city_sheet.png" id="3_1bv3v"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_hrl45"]
-[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="4_al0vp"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="4_al0vp"]
 [ext_resource type="PackedScene" uid="uid://btl4j2xap85np" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireDark.tscn" id="4_paos8"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="5_f2j1h"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="5_ml4hm"]

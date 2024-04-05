@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnqeglracii41"]
+
+[ext_resource type="Script" path="res://addons/core/dj/TurnTableSound.gd" id="1_d18qe"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="1_jf6l1"]
+
+[node name="TurnTableSound" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+offset_right = 37.0
+offset_bottom = 24.0
+size_flags_horizontal = 3
+script = ExtResource("1_d18qe")
+
+[node name="PlayButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jf6l1")
+text = "play"
+
+[node name="StopButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_jf6l1")
+text = "stop"
+
+[node name="SoundName" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("1_jf6l1")
+bbcode_enabled = true
+text = "Some Sound"
+fit_content = true
+scroll_active = false

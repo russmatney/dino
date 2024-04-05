@@ -18,7 +18,7 @@
 				"_ids_generation_class": "MetroTravelPointIds",
 				"_index": 0,
 				"_name": "MetroTravelPoint",
-				"_script_path": "res://addons/metro/MetroTravelPointEntity.gd"
+				"_script_path": "res://addons/core/metro/MetroTravelPointEntity.gd"
 			},
 			{
 				"_category_id": "45",

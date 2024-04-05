@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://3fvawfe4o4js"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_n8dgq"]
-[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_73k7n"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroZone.gd" id="1_n8dgq"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_73k7n"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_745pf"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="4_pu2un"]
 [ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn" id="5_7ddxx"]

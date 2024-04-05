@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://cltgg83qrw6ts"
+path="res://.godot/imported/laser4.sfxr-ed06b166bc289119a14fad5091df79bf.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/laser4.sfxr"
+dest_files=["res://.godot/imported/laser4.sfxr-ed06b166bc289119a14fad5091df79bf.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

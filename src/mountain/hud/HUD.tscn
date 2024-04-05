@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/mountain/hud/HUD.gd" id="1_7gvph"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/core/hood/EntityStatusList.tscn" id="2_vxouh"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="3_dsv46"]
-[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/metro/MinimapContainer.tscn" id="4_vp25v"]
+[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/core/metro/MinimapContainer.tscn" id="4_vp25v"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_7gvph")

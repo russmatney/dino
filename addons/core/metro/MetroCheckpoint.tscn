@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dok3gb7l2lgv5"]
+
+[ext_resource type="Script" path="res://addons/core/metro/MetroCheckpoint.gd" id="1_vdljf"]
+
+[node name="MetroCheckpoint" type="Node2D"]
+script = ExtResource("1_vdljf")

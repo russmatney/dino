@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://vbx7dlmmvoeo"
+path="res://.godot/imported/coin2.sfxr-dd6a96e6726d57c85fbadc3fccaf9511.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/coin2.sfxr"
+dest_files=["res://.godot/imported/coin2.sfxr-dd6a96e6726d57c85fbadc3fccaf9511.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

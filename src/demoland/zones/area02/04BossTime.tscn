@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3csx7rui8awy"]
 
-[ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_q1syu"]
+[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="1_q1syu"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="2_ob33d"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="3_1bnkq"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="4_01ufe"]

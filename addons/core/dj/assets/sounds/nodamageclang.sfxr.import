@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://c03hwohp5h1df"
+path="res://.godot/imported/nodamageclang.sfxr-f40450c9507c0c201f3af3c8ba6e8f64.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/nodamageclang.sfxr"
+dest_files=["res://.godot/imported/nodamageclang.sfxr-f40450c9507c0c201f3af3c8ba6e8f64.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

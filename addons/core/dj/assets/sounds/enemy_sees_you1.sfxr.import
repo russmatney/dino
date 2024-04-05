@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://xsv3dog02wn8"
+path="res://.godot/imported/enemy_sees_you1.sfxr-0e300b1006396e5d7b2820b9e5c618ea.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/enemy_sees_you1.sfxr"
+dest_files=["res://.godot/imported/enemy_sees_you1.sfxr-0e300b1006396e5d7b2820b9e5c618ea.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

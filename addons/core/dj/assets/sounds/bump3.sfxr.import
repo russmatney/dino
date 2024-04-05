@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://dr1qeuk7w65py"
+path="res://.godot/imported/bump3.sfxr-6a1694adc73c929fefe61e2786f54129.sample"
+
+[deps]
+
+source_file="res://addons/core/dj/assets/sounds/bump3.sfxr"
+dest_files=["res://.godot/imported/bump3.sfxr-6a1694adc73c929fefe61e2786f54129.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

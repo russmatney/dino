@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bnty146n7pawp"]
 
 [ext_resource type="Script" path="res://src/hatbot/hud/HUD.gd" id="1_swmch"]
-[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/metro/MinimapContainer.tscn" id="2_2vxbw"]
+[ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/core/metro/MinimapContainer.tscn" id="2_2vxbw"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/core/hood/HeartsContainer.tscn" id="4_0rxhj"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/core/hood/EntityStatusList.tscn" id="4_ue220"]
 [ext_resource type="Texture2D" uid="uid://rh82prsmaqs" path="res://src/hatbot/hud/ClimbingGlovesAtlasTexture.tres" id="5_lrx0n"]

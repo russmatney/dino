@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bvio25qrf11u4"]
 
-[ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/metro/MetroMap.tscn" id="1_yw4ed"]
+[ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/core/metro/MetroMap.tscn" id="1_yw4ed"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="2_tf8nt"]
 [ext_resource type="Script" path="res://src/shirt/menus/ShirtPauseButtonList.gd" id="3_pqmw6"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="5_lhotf"]
