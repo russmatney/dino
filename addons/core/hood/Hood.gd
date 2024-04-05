@@ -18,7 +18,7 @@ func notif(text, opts = {}):
 	opts["text"] = text
 	if not "ttl" in opts:
 		opts["ttl"] = 3.0
-	notification.emit(opts)
+	(func(): notification.emit(opts)).call_deferred()
 
 var queued_notifs_dev = []
 
