@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/beehive/sidescroller_boss/SSBoss.gd" id="1_3346k"]
 [ext_resource type="SpriteFrames" uid="uid://cvrl5hva6wlar" path="res://src/hatbot/bosses/monstroar_sprite_frames.tres" id="2_55uo8"]
 [ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://addons/beehive/sidescroller_boss/machine/SSBossMachine.tscn" id="8_kgjjp"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="11_d6bbg"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="11_d6bbg"]
 [ext_resource type="PackedScene" uid="uid://8mo6p0ai7cj7" path="res://addons/beehive/sidescroller_boss/PositionHint.tscn" id="13_qubff"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="14_y6g7e"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="15_w3c60"]

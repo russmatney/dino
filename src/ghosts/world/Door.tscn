@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/ghosts/world/Door.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="4_7ef0q"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="5_w0bxf"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="5_w0bxf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ywj5"]
 atlas = ExtResource("1")

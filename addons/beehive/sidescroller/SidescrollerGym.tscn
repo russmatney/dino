@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_gkkpd"]
 [ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/beehive/sidescroller/SSEnemy.tscn" id="4_4vdb5"]
 [ext_resource type="PackedScene" uid="uid://dyut5y6235tk2" path="res://addons/beehive/sidescroller/SSNPC.tscn" id="5_shk5o"]
-[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_nh527"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_nh527"]
 [ext_resource type="PackedScene" uid="uid://boxsq76goq8ev" path="res://addons/beehive/sidescroller/PatrolPoint.tscn" id="6_ogwas"]
 [ext_resource type="PackedScene" uid="uid://bbrc6143m3bdx" path="res://addons/beehive/sidescroller/SSBody.tscn" id="7_i72gu"]
-[ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/reptile/tilemaps/SpikeTiles16.tscn" id="9_ydfat"]
-[ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/reptile/tilemaps/SpikeTiles8.tscn" id="10_ljnth"]
+[ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="9_ydfat"]
+[ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/core/reptile/tilemaps/SpikeTiles8.tscn" id="10_ljnth"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j0grn"]
 vertices = PackedVector2Array(71, 71, -143, 79, -44, 59, -17, 57, 34, 57, 107, 68, 9, -79, 120, -26, 63, -25, -203, -37, -70, -71, -17, -79, -6, -8, 63, -15, 121, -15, 144, 14, 109, 35, 34, 39, -16, 37, 194, -98, 191, 14, -83, 60, -252, 60, -170, 79, 9, -88, -97, -71, -204, -51, -170, -10, -170, 28, -246, 3, -246, -11, -252, 28, -288, 4, -70, -81, -17, -90, -16, 39, -44, 37, -33, -7, -7, -19, -33, -16, -94, 37, -94, -10, -116, 94, -118, 118, -212, 118, -212, 110, -145, 96, -285, 29, -309, 29, -309, -100, -290, -10, 5, 108, -53, 108, -54, 95, -266, 108, -268, 71, -285, 69, 140, 36, -260, -36, -97, -81, -259, -51, -169, 80, -170, 96, -16, -90)

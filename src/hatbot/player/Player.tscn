@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://06gj68sxo86" path="res://src/hatbot/player/lilbighat.png" id="3_5r7sl"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="5_ddh8j"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_2ghil"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_xveuf"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_xveuf"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="8_atx5s"]
 [ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="9_u5coh"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="10_egux8"]

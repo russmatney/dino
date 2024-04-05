@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cpabhdkofqic3"
+path="res://.godot/imported/3x3_minimal_autotiles.aseprite-335f806d85372fcfc830442c2b4742c6.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/templates/3x3_minimal_autotiles.aseprite"
+dest_files=["res://.godot/imported/3x3_minimal_autotiles.aseprite-335f806d85372fcfc830442c2b4742c6.res"]
+
+[params]
+

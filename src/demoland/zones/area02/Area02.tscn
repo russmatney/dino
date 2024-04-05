@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_u3uiw"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_fhgi7"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="3_dq8nu"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="3_dq8nu"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="4_e7ttu"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="5_re77u"]
 [ext_resource type="Script" path="res://addons/metro/MetroTravelPointEntity.gd" id="5_xu4kg"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="6_tmpjk"]
-[ext_resource type="PackedScene" path="res://src/demoland/zones/area02/04BossTime.tscn" id="7_l0w3e"]
+[ext_resource type="PackedScene" uid="uid://d3csx7rui8awy" path="res://src/demoland/zones/area02/04BossTime.tscn" id="7_l0w3e"]
 
 [sub_resource type="Resource" id="Resource_p4o6o"]
 script = ExtResource("5_xu4kg")

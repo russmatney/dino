@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://wkwt20kwv7ka"]
-
-[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="1_dbyv5"]
-
-[node name="CamPOF" type="Marker2D" groups=["pofs"]]
-script = ExtResource("1_dbyv5")

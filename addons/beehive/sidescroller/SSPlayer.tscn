@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_r4nvx"]
 [ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="5_3unf7"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_f0aop"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="7_5ew82"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_5ew82"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odek5"]
 

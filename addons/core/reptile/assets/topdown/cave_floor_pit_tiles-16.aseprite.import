@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dkbifyp07kjp8"
+path="res://.godot/imported/cave_floor_pit_tiles-16.aseprite-f4c6ea93bfb2ab2aa40e6959131511a3.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/topdown/cave_floor_pit_tiles-16.aseprite"
+dest_files=["res://.godot/imported/cave_floor_pit_tiles-16.aseprite-f4c6ea93bfb2ab2aa40e6959131511a3.res"]
+
+[params]
+

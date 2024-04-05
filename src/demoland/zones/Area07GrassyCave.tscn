@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_g6jko"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_m2p2p"]
-[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_8ionw"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_8ionw"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="4_qcjf2"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="5_7ifjf"]
 

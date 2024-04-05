@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt8jdg76u0jh6"]
+
+[ext_resource type="TileSet" uid="uid://daa3dtllkaqv3" path="res://addons/core/reptile/tilesets/SpaceshipTiles8.tres" id="1_sf6qo"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_xerev"]
+
+[node name="SpaceshipTiles8" type="TileMap"]
+tile_set = ExtResource("1_sf6qo")
+format = 2
+script = ExtResource("2_xerev")

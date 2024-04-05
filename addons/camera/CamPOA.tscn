@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgqugpcbqak27"]
-
-[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="1_cgrcw"]
-
-[node name="CamPOA" type="Marker2D" groups=["poas"]]
-script = ExtResource("1_cgrcw")

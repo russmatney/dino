@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cx1ykp5wso44h"]
 
-[ext_resource type="Texture2D" uid="uid://j8c5vxs4qh8s" path="res://addons/reptile/assets/pirate_ship_auto_tiles_sheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://j8c5vxs4qh8s" path="res://addons/core/reptile/assets/pirate_ship_auto_tiles_sheet.png" id="2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t2rl4"]
 texture = ExtResource("2")

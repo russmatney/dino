@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/players/DinoSSPlayer.gd" id="1_prfmg"]
 [ext_resource type="Texture2D" uid="uid://cc2a6508uv48d" path="res://src/dino/players/romeo/assets/romeo.png" id="2_24lmf"]
 [ext_resource type="Theme" path="res://src/gunner/StateLabelTheme.tres" id="3_ug8cy"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_3cive"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_3cive"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/tower/assets/greyhat_jetflame_sheet.png" id="5_f26gs"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="6_kfrv1"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="7_03vc6"]

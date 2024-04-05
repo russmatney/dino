@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://wubd1inoc2ld"]
 
-[ext_resource type="TileSet" uid="uid://5avd3m2aroxa" path="res://addons/reptile/tilesets/coldfire/ColdFireYellow.tres" id="1"]
+[ext_resource type="TileSet" uid="uid://5avd3m2aroxa" path="res://addons/core/reptile/tilesets/coldfire/ColdFireYellow.tres" id="1"]
 
 [node name="YellowTile" type="TileMap" groups=["yellowtile"]]
 tile_set = ExtResource("1")

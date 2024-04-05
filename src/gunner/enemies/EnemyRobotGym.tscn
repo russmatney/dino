@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bg1p3g34ld000"]
 
-[ext_resource type="PackedScene" uid="uid://kaba3l5rrf7x" path="res://src/gunner/player/Player.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://bbavlei44aw0o" path="res://src/gunner/enemies/EnemyRobot.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="3_opxep"]
+[ext_resource type="PackedScene" path="res://src/gunner/player/Player.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/gunner/enemies/EnemyRobot.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="3_opxep"]
 
 [node name="EnemyRobotGym" type="Node2D"]
 

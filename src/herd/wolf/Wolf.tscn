@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_3vgs8"]
 [ext_resource type="Script" path="res://src/herd/wolf/machine/Idle.gd" id="4_ttisi"]
 [ext_resource type="Script" path="res://src/herd/wolf/machine/Firing.gd" id="5_rtr3t"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="10_tlokw"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="10_tlokw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ml7v5"]
 radius = 8.0

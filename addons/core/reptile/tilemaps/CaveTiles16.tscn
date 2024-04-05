@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8yo06n5gm2ax"]
+
+[ext_resource type="TileSet" uid="uid://b0rg8dver31j6" path="res://addons/core/reptile/tilesets/CaveTiles16.tres" id="1_iokac"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_sn6ml"]
+
+[node name="CaveTiles16" type="TileMap"]
+tile_set = ExtResource("1_iokac")
+format = 2
+script = ExtResource("2_sn6ml")

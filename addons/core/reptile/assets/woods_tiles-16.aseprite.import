@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dxew0b1nkbles"
+path="res://.godot/imported/woods_tiles-16.aseprite-3696983f622a4c996bbed6c450417185.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/woods_tiles-16.aseprite"
+dest_files=["res://.godot/imported/woods_tiles-16.aseprite-3696983f622a4c996bbed6c450417185.res"]
+
+[params]
+

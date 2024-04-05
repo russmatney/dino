@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqlvqjsr8s2at"]
+
+[ext_resource type="TileSet" uid="uid://bwwxt4q7tnsix" path="res://addons/core/reptile/tilesets/VolcanoTiles8.tres" id="1_hp2ym"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_icw2o"]
+
+[node name="VolcanoTiles8" type="TileMap"]
+tile_set = ExtResource("1_hp2ym")
+format = 2
+script = ExtResource("2_icw2o")

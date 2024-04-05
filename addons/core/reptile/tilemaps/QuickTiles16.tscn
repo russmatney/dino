@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc5kci7uil630"]
+
+[ext_resource type="TileSet" uid="uid://dyx4m4w3183li" path="res://addons/core/reptile/tilesets/QuickTiles16.tres" id="1_7sl20"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_08mn5"]
+
+[node name="QuickTiles" type="TileMap"]
+tile_set = ExtResource("1_7sl20")
+format = 2
+script = ExtResource("2_08mn5")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnoqoloeex0er"]
+
+[ext_resource type="TileSet" uid="uid://dn26xh12hupr1" path="res://addons/core/reptile/tilesets/WoodenBoxesTiles8.tres" id="1_sr283"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_gubcp"]
+
+[node name="WoodenBoxesTiles8" type="TileMap"]
+tile_set = ExtResource("1_sr283")
+format = 2
+script = ExtResource("2_gubcp")

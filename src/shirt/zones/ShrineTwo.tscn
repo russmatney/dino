@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_y18jx"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_uyouh"]
-[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_gehn7"]
-[ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_bcg0d"]
-[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="5_anma2"]
+[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_gehn7"]
+[ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_bcg0d"]
+[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="5_anma2"]
 [ext_resource type="PackedScene" uid="uid://b0gmt6jeniemi" path="res://src/shirt/entities/Portal.tscn" id="5_itieu"]
 [ext_resource type="PackedScene" uid="uid://w6sbcbxo5mnt" path="res://src/shirt/entities/ShrineGem.tscn" id="7_dtucs"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="8_26aur"]

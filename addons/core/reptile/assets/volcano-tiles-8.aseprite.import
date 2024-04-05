@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dip2xfwcpdn12"
+path="res://.godot/imported/volcano-tiles-8.aseprite-3513054e69eeeb67b63f9651a71e25dd.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/volcano-tiles-8.aseprite"
+dest_files=["res://.godot/imported/volcano-tiles-8.aseprite-3513054e69eeeb67b63f9651a71e25dd.res"]
+
+[params]
+

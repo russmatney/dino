@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://8dqe0wx5n3x8"]
 
-[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="1_meg84"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="1_meg84"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/core/assets/fonts/Born2bSportyV2.ttf" id="2_fjdiu"]
 [ext_resource type="Script" path="res://src/spike/menus/SpikePauseButtonList.gd" id="3_xol0r"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="4_6gt0p"]

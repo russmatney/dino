@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/tower/hud/HUD.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://b08yhx4eeirf7" path="res://src/tower/menus/TowerControls.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="6_q4161"]
-[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="7_r473j"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="7_r473j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usu7u"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.360784)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b21ekhevx55qr"]
+
+[ext_resource type="Texture2D" uid="uid://bxx0qf76r3x6n" path="res://addons/core/reptile/assets/16x16coldfire_sheet.png" id="1_6kp46"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0pig1"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kyrvt"]
+texture = ExtResource("1_6kp46")
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_0pig1")
+
+[sub_resource type="TileSet" id="TileSet_uxr5x"]
+occlusion_layer_0/light_mask = 1
+sources/0 = SubResource("TileSetAtlasSource_kyrvt")
+
+[node name="OccluderTiles16" type="TileMap"]
+tile_set = SubResource("TileSet_uxr5x")
+cell_quadrant_size = 8
+format = 2

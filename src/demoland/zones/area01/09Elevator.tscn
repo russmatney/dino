@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://dcu418utbav6s"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_2onbw"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_0xsm0"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_0mkwh"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_0mkwh"]
 [ext_resource type="Script" path="res://addons/metro/MetroTravelPointEntity.gd" id="4_mlbpj"]
-[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="5_0dxrk"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="5_61naw"]
+[ext_resource type="Script" path="res://addons/core/camera/CamPOF.gd" id="5_0dxrk"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="5_61naw"]
 
 [sub_resource type="Resource" id="Resource_ji4th"]
 script = ExtResource("4_mlbpj")

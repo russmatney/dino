@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://src/herd/player/machine/Jump.gd" id="7_mohdy"]
 [ext_resource type="Script" path="res://src/herd/player/machine/Dead.gd" id="7_n32gv"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="7_v86gy"]
-[ext_resource type="Texture2D" uid="uid://b70wb57nscbng" path="res://addons/camera/assets/offscreen-indicator_sheet.png" id="10_gkve5"]
+[ext_resource type="Texture2D" uid="uid://b70wb57nscbng" path="res://addons/core/camera/assets/offscreen-indicator_sheet.png" id="10_gkve5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwxwm"]
 

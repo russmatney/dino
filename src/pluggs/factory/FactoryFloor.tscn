@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu8giakfx18sh"]
 
 [ext_resource type="PackedScene" uid="uid://ciqiqgf3wxq7n" path="res://src/pluggs/player/Pluggs.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_wcacb"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_wcacb"]
 
 [node name="FactoryFloor" type="Node2D"]
 

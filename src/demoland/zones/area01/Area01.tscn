@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bid7viktw0ai" path="res://src/demoland/zones/area01/02MainTower.tscn" id="2_kip2h"]
 [ext_resource type="PackedScene" uid="uid://bg842d70k1wpd" path="res://src/demoland/zones/area01/03FirstSnowMan.tscn" id="3_lq2ff"]
 [ext_resource type="PackedScene" uid="uid://b83j30dx35vlh" path="res://src/demoland/zones/area01/04SecondSnowman.tscn" id="4_kj05g"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="5_q3c5s"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="5_q3c5s"]
 [ext_resource type="PackedScene" uid="uid://dhstps731almj" path="res://src/demoland/zones/area01/05Crossroads.tscn" id="5_qqhvm"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="6_81hsi"]
 [ext_resource type="PackedScene" uid="uid://ep3d44f7wi8f" path="res://src/demoland/zones/area01/06BossChamber.tscn" id="6_xa5kp"]
@@ -17,10 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="14_l82es"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="15_r03j1"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="17_aao4x"]
-[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
-[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
-[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
+[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/core/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
 [node name="Area01" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_71epl")

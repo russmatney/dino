@@ -3,7 +3,7 @@
 [ext_resource type="SpriteFrames" uid="uid://buwix7wp71vf1" path="res://src/hatbot/entities/DoorSpriteFrames.tres" id="1_5m0uh"]
 [ext_resource type="Script" path="res://src/hatbot/entities/Door.gd" id="1_arj2e"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_ox5jh"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_oifqr"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_oifqr"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="5_f3480"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1rxf"]

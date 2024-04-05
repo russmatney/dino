@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwcbt71l7xwb5"]
+
+[ext_resource type="TileSet" uid="uid://cayxj8tn1jg8f" path="res://addons/core/reptile/tilesets/SpikeTileSet8.tres" id="1_wa0wk"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_n017m"]
+
+[node name="SpikeTiles8" type="TileMap" groups=["spikes"]]
+tile_set = ExtResource("1_wa0wk")
+format = 2
+script = ExtResource("2_n017m")

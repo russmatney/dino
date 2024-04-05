@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://c828yakuhqqw1"]
 
-[ext_resource type="PackedScene" path="res://src/tower/tiles/YellowTile.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://wubd1inoc2ld" path="res://src/tower/tiles/YellowTile.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://wuy3v03n8t7x" path="res://src/tower/tiles/RedTile.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://doufo75jmm0ga" path="res://src/tower/tiles/DarkTile.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/tower/tiles/BlueTile.tscn" id="4"]
-[ext_resource type="TileSet" uid="uid://bgimrbn8yk76e" path="res://addons/reptile/tilesets/coldfire/ColdFireRed.tres" id="4_5ii6j"]
-[ext_resource type="PackedScene" uid="uid://kaba3l5rrf7x" path="res://src/gunner/player/Player.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b3l3mw6opqvpk" path="res://src/tower/tiles/BlueTile.tscn" id="4"]
+[ext_resource type="TileSet" uid="uid://bgimrbn8yk76e" path="res://addons/core/reptile/tilesets/coldfire/ColdFireRed.tres" id="4_5ii6j"]
+[ext_resource type="PackedScene" path="res://src/gunner/player/Player.tscn" id="5"]
 
 [node name="TileGym" type="Node2D"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcbqs3wqdagpm"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_fkg2u"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="2_cvsqa"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="2_cvsqa"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/hatbot/enemies/ShootyCrawly.tscn" id="3_5ofkw"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="4_lo5kx"]
 [ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/hatbot/enemies/Goomba.tscn" id="5_5rrjq"]

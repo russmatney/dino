@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="2_ko51v"]
 [ext_resource type="SpriteFrames" uid="uid://b73k32om0cbr3" path="res://addons/beehive/sidescroller/SSBasicSpriteFrames.tres" id="3_dehgq"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="4_7iqfw"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="5_qdy2f"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_qdy2f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sgl7j"]
 radius = 9.0

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b1212uc2o88x7"
+path="res://.godot/imported/cave_wall_tiles-16.aseprite-41a6de2b598f72edc866c0cf9ea8446a.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/topdown/cave_wall_tiles-16.aseprite"
+dest_files=["res://.godot/imported/cave_wall_tiles-16.aseprite-41a6de2b598f72edc866c0cf9ea8446a.res"]
+
+[params]
+

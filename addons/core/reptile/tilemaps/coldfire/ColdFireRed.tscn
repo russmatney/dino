@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3n182gj1w8q7"]
+
+[ext_resource type="TileSet" uid="uid://bgimrbn8yk76e" path="res://addons/core/reptile/tilesets/coldfire/ColdFireRed.tres" id="1_e3k33"]
+
+[node name="ColdFireRed" type="TileMap"]
+tile_set = ExtResource("1_e3k33")
+cell_quadrant_size = 8
+format = 2

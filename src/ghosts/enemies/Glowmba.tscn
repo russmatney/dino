@@ -3,7 +3,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dssioecwcl0c5" path="res://src/ghosts/enemies/glowmba_animated_sprites.tres" id="1"]
 [ext_resource type="Script" path="res://src/ghosts/enemies/Glowmba.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="3"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="4_c2qve"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="4_c2qve"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 15.0

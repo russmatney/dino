@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/ghosts/world/lights/HangingLight.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://j2xi1vfacy0p" path="res://src/gunner/pickups/Pickup.tscn" id="8"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_7p5yo"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_7p5yo"]
 
 [node name="PickupGym" type="Node2D"]
 

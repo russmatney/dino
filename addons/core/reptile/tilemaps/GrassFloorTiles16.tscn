@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddn740g8ads31"]
+
+[ext_resource type="TileSet" uid="uid://c3mxbwmxwyyb5" path="res://addons/core/reptile/tilesets/GrassyFloorTiles16.tres" id="1_y53av"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_72atq"]
+
+[node name="GrassFloorTiles16" type="TileMap"]
+tile_set = ExtResource("1_y53av")
+format = 2
+script = ExtResource("2_72atq")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_w64b8"]
 [ext_resource type="PackedScene" uid="uid://cjjjiscdb0ruh" path="res://addons/beehive/sidescroller/SSPlayer.tscn" id="2_78mk0"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="2_otnmn"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="2_otnmn"]
 [ext_resource type="PackedScene" uid="uid://blq7fe0pn0ugk" path="res://addons/beehive/sidescroller_boss/SSBoss.tscn" id="3_iabbp"]
 
 [node name="SSBossGym" type="Node"]

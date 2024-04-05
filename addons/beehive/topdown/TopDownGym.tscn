@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://d0nbgfv56fvm1" path="res://addons/beehive/topdown/TDPlayer.tscn" id="2_al8qk"]
 [ext_resource type="PackedScene" uid="uid://bacb43b2t62dq" path="res://addons/beehive/topdown/TDBody.tscn" id="3_rvpkg"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/herd/tiles/FenceTiles.tscn" id="4_qj8ol"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="5_5hibx"]
-[ext_resource type="TileSet" uid="uid://dnol75l2djm3n" path="res://addons/reptile/tilesets/topdown/TDCaveWallTileSet16.tres" id="6_ljnau"]
-[ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="6_r6avj"]
-[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="7_p2n07"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="5_5hibx"]
+[ext_resource type="TileSet" uid="uid://dnol75l2djm3n" path="res://addons/core/reptile/tilesets/topdown/TDCaveWallTileSet16.tres" id="6_ljnau"]
+[ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="6_r6avj"]
+[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="7_p2n07"]
 
 [node name="TopDownGym" type="Node"]
 script = ExtResource("1_8tyfg")

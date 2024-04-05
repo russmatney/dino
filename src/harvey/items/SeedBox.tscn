@@ -6,7 +6,7 @@
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="5"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="6_2okg2"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="7_oli3n"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="7_oli3n"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)

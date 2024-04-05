@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/spike/zones/SpikeZone.gd" id="1_3dkj7"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_y4wvx"]
-[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/reptile/tilemaps/CaveTiles16.tscn" id="3_6kvcl"]
+[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/core/reptile/tilemaps/CaveTiles16.tscn" id="3_6kvcl"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="4_in8fg"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="5_0xgs0"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="6_jda8y"]

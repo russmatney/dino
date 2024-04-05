@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://x42087k08dnv"]
 
 [ext_resource type="Script" path="res://src/spike/hud/HUD.gd" id="1_ob4lg"]
-[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="2_urr3o"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="2_urr3o"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="3_xhxmt"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="4_fg3o0"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/hood/Notifications.tscn" id="5_qvung"]

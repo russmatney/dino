@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_kftt6"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Idle.gd" id="4_ttqdq"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Follow.gd" id="5_x6igx"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="6_6810x"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="6_6810x"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Grabbed.gd" id="6_qiif0"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Thrown.gd" id="7_scirs"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="7_sxgat"]

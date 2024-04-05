@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/hood/EntityStatus.tscn" id="3_vl0v5"]
 [ext_resource type="PackedScene" uid="uid://b3f73ngblhhpf" path="res://addons/hood/EntityStatusList.tscn" id="4_yyh2s"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_tt27g"]
-[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="6_woicm"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="6_woicm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jotap"]
 bg_color = Color(0.223529, 0.223529, 0.223529, 0.360784)

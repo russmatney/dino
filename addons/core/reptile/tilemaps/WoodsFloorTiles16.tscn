@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://y36u368o2aip"]
+
+[ext_resource type="TileSet" uid="uid://bemhu6sx6pnw1" path="res://addons/core/reptile/tilesets/WoodsFloorTileSet16.tres" id="1_xu27u"]
+
+[node name="WoodsFloorTiles16" type="TileMap"]
+tile_set = ExtResource("1_xu27u")
+format = 2

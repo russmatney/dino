@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://yevsjyxplr20"
+path="res://.godot/imported/32x32-dungeon-walls.aseprite-579720c595fb6cec1b5d5ecde87a5b0b.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/32x32-dungeon-walls.aseprite"
+dest_files=["res://.godot/imported/32x32-dungeon-walls.aseprite-579720c595fb6cec1b5d5ecde87a5b0b.res"]
+
+[params]
+

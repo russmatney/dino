@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://din4301g124vn"
+path="res://.godot/imported/16x16-dungeon.aseprite-db182331f500fb4050120b11508e4c35.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/16x16-dungeon.aseprite"
+dest_files=["res://.godot/imported/16x16-dungeon.aseprite-db182331f500fb4050120b11508e4c35.res"]
+
+[params]
+

@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" path="res://src/harvey/menus/HarveyControls.tscn" id="1"]
 [ext_resource type="Theme" uid="uid://bmvv7vyaun6y8" path="res://src/harvey/HUDTheme.tres" id="2"]
 [ext_resource type="Script" path="res://src/harvey/HUD/HUD.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/quest/QuestStatus.tscn" id="4_u66gg"]
+[ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="4_u66gg"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("3")

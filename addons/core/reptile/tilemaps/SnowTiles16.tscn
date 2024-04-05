@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcidi6i4xi1xa"]
+
+[ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="1_jbxsv"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_75px0"]
+
+[node name="SnowTiles16" type="TileMap"]
+tile_set = ExtResource("1_jbxsv")
+format = 2
+script = ExtResource("2_75px0")

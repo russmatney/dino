@@ -1,0 +1,95 @@
+[gd_scene load_steps=18 format=3 uid="uid://dve6wwmspbde0"]
+
+[ext_resource type="Script" path="res://addons/core/quest/Jumbotron.gd" id="1_6gaau"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_uspvf"]
+[ext_resource type="RichTextEffect" uid="uid://cxd4xajdoafoh" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="3_gpygh"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="4_yg1fy"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Heart.tres" id="5_iymk4"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="6_aqysw"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="7_2sds5"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="8_ofidw"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Number.tres" id="9_i2ueu"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="10_y44ju"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="11_211di"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="12_ed630"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_8l30f"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="14_1525f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vafy"]
+bg_color = Color(0.0156863, 0.0470588, 0.00392157, 0.470588)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rp857"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrs0h"]
+
+[node name="Jumbotron" type="CanvasLayer"]
+process_mode = 3
+layer = 5
+script = ExtResource("1_6gaau")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_7vafy")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Header" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(720, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_uspvf")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][jump]Double Jump[/jump] Discovered[/center]"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("3_gpygh"), ExtResource("4_yg1fy"), ExtResource("5_iymk4"), ExtResource("6_aqysw"), ExtResource("7_2sds5"), ExtResource("8_ofidw"), ExtResource("9_i2ueu"), ExtResource("10_y44ju"), ExtResource("11_211di"), ExtResource("12_ed630"), ExtResource("13_8l30f")]
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxFlat_rp857")
+
+[node name="ActionHint" parent="PanelContainer/CenterContainer/VBoxContainer/VSeparator" instance=ExtResource("14_1525f")]
+unique_name_in_owner = true
+position = Vector2(640, 76)
+scale = Vector2(2, 2)
+label_text = "Swing"
+key_or_action = "attack"
+
+[node name="Body" type="RichTextLabel" parent="PanelContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(1280, 2.08165e-12)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_uspvf")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Try it on wooden blocks![/center]"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("3_gpygh"), ExtResource("4_yg1fy"), ExtResource("5_iymk4"), ExtResource("6_aqysw"), ExtResource("7_2sds5"), ExtResource("8_ofidw"), ExtResource("9_i2ueu"), ExtResource("10_y44ju"), ExtResource("11_211di"), ExtResource("12_ed630"), ExtResource("13_8l30f")]
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxFlat_yrs0h")
+
+[node name="CloseActionHint" parent="PanelContainer/CenterContainer/VBoxContainer/VSeparator2" instance=ExtResource("14_1525f")]
+position = Vector2(640, 144)
+scale = Vector2(1.5, 1.5)
+label_text = "Close"
+key_or_action = "close"

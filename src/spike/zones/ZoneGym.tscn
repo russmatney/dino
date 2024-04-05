@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bc7ewpiuhg1xn"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroZone.gd" id="1_l6mcq"]
-[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/reptile/tilemaps/SnowTiles16.tscn" id="2_mggic"]
+[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/core/reptile/tilemaps/SnowTiles16.tscn" id="2_mggic"]
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="2_tigbi"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_0c0n8"]
-[ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/reptile/tilemaps/SpikeTiles16.tscn" id="5_43vjs"]
+[ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="5_43vjs"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="6_7wtaw"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="7_wvoro"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="8_sbyfb"]

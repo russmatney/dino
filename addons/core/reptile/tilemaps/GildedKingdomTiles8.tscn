@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://jegvid2kg2u5"]
+
+[ext_resource type="TileSet" uid="uid://dh4wv4l8frtl7" path="res://addons/core/reptile/tilesets/GildedKingdomTiles8.tres" id="1_2dvbj"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_e6g0h"]
+
+[node name="GildedKingdomTiles8" type="TileMap"]
+tile_set = ExtResource("1_2dvbj")
+format = 2
+script = ExtResource("2_e6g0h")

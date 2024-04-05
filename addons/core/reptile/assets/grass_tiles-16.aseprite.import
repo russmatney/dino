@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cqv2hg3u7rocs"
+path="res://.godot/imported/grass_tiles-16.aseprite-52b13c77e6a90ab1e6f3b0bb592966b6.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/grass_tiles-16.aseprite"
+dest_files=["res://.godot/imported/grass_tiles-16.aseprite-52b13c77e6a90ab1e6f3b0bb592966b6.res"]
+
+[params]
+

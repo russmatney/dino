@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://doufo75jmm0ga"]
 
-[ext_resource type="TileSet" uid="uid://bat0oor02xfha" path="res://addons/reptile/tilesets/coldfire/ColdFireDark.tres" id="1"]
+[ext_resource type="TileSet" uid="uid://bat0oor02xfha" path="res://addons/core/reptile/tilesets/coldfire/ColdFireDark.tres" id="1"]
 [ext_resource type="Script" path="res://src/tower/tiles/DarkTile.gd" id="2"]
 
 [node name="DarkTile" type="TileMap" groups=["darktile"]]

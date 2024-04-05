@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bg842d70k1wpd"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_ktq0m"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_yptok"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_yptok"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="2_orywx"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/camera/CamPOF.tscn" id="4_0y4vr"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="5_r30nw"]
-[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="5_u4k1p"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_0y4vr"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="5_r30nw"]
+[ext_resource type="Script" path="res://addons/core/camera/CamPOF.gd" id="5_u4k1p"]
 
 [node name="03FirstSnowMan" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_ktq0m")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cm222nj8qjh1m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_finpt"]
-[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="2_ipv74"]
-[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="3_2jibu"]
+[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="2_ipv74"]
+[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="3_2jibu"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/shirt/enemies/BlobWalker.tscn" id="4_0uflp"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/shirt/enemies/BlobChaser.tscn" id="5_8abxs"]
 

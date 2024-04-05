@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://ep3d44f7wi8f"]
 
 [ext_resource type="Script" path="res://addons/metro/MetroRoom.gd" id="1_7pucc"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_33sd2"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="3_4d6ds"]
-[ext_resource type="Script" path="res://addons/camera/CamPOF.gd" id="4_xd6e3"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_33sd2"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="3_4d6ds"]
+[ext_resource type="Script" path="res://addons/core/camera/CamPOF.gd" id="4_xd6e3"]
 
 [node name="06BossChamber" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_7pucc")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b4rrdpuohswyw"
+path="res://.godot/imported/16x16-dice-nine-tiles.aseprite-1236b202bdf47657fb14d37343df8c4d.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/16x16-dice-nine-tiles.aseprite"
+dest_files=["res://.godot/imported/16x16-dice-nine-tiles.aseprite-1236b202bdf47657fb14d37343df8c4d.res"]
+
+[params]
+

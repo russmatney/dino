@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwckwjae2vryw"]
+
+[ext_resource type="TileSet" uid="uid://db48qit5jufd1" path="res://addons/core/reptile/tilesets/coldfire/ColdFireTiles.tres" id="1_3u42s"]
+
+[node name="ColdFireTiles" type="TileMap"]
+tile_set = ExtResource("1_3u42s")
+format = 2
+layer_0/name = "dark"

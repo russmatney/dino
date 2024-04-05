@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmaxg11lghsbw"]
+
+[ext_resource type="TileSet" uid="uid://g54lenijf4n6" path="res://addons/core/reptile/tilesets/3x3TileSet.tres" id="1_7f5yt"]
+[ext_resource type="Script" path="res://addons/core/reptile/RepTileMap.gd" id="2_ed8j6"]
+
+[node name="3x3TileMap" type="TileMap"]
+tile_set = ExtResource("1_7f5yt")
+cell_quadrant_size = 8
+format = 2
+script = ExtResource("2_ed8j6")
