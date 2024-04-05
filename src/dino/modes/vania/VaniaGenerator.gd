@@ -7,6 +7,10 @@ var global_room_num = 0
 var neighbor_data = {}
 var all_room_defs: Array[VaniaRoomDef] = []
 
+func _init():
+	# ensure directory exists
+	DirAccess.make_dir_absolute(GEN_MAP_DIR)
+
 ## add_rooms ##########################################################
 
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
@@ -67,9 +71,6 @@ func remove_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 	for coord in coords:
 		# also clear visited cells? they seem to stick around
 		VaniaGenerator.remove_cell_override_from_builder(coord)
-
-	# ensure directory exists
-	DirAccess.make_dir_absolute(GEN_MAP_DIR)
 
 	# delete contents in directory
 	var cleared_room_paths = room_defs.map(func(rd): return rd.room_path)
