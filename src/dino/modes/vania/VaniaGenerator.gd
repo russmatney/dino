@@ -162,7 +162,7 @@ func build_and_prep_scene(room_def, _opts={}):
 	ps.pack(room)
 	var error = ResourceSaver.save(ps, room_def.room_path)
 	if error != Error.OK:
-		Log.pr("Error saving room scene", error)
+		Log.error("Error saving room scene! Error code:", error)
 
 ## place_rooms ##########################################################
 
