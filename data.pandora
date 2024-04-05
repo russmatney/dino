@@ -881,15 +881,15 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/assets/boomerang_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/sidescroller/weapons/Boomerang.tscn"
 					},
 					"topdown_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/topdown/weapons/Boomerang.tscn"
 					}
 				}
 			},
