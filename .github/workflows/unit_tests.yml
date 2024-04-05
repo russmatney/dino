@@ -32,6 +32,8 @@ jobs:
     steps:
       # checkout your repository
       - uses: actions/checkout@v4
+        with:
+          lfs: true
       # run unit tests
       - uses: MikeSchulze/gdUnit4-action@v1.0.5
         with:
