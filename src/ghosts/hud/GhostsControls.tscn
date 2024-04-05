@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dwqrfiyhdjoeu"]
 
-[ext_resource type="PackedScene" path="res://addons/trolley/TrolleyActionLabel.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bk4bvkw3p7xfc" path="res://addons/core/actions/ActionLabel.tscn" id="1"]
 
 [node name="GhostsControls" type="VBoxContainer"]
 offset_right = 100.0

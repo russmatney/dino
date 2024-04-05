@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://addons/beehive/Machine.gd" id="3_5nu6m"]
 [ext_resource type="Script" path="res://src/herd/player/machine/Idle.gd" id="4_hour5"]
 [ext_resource type="Script" path="res://src/herd/player/machine/Run.gd" id="5_lhfun"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="6_0d5mj"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_0d5mj"]
 [ext_resource type="Script" path="res://src/herd/player/machine/Jump.gd" id="7_mohdy"]
 [ext_resource type="Script" path="res://src/herd/player/machine/Dead.gd" id="7_n32gv"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="7_v86gy"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="7_v86gy"]
 [ext_resource type="Texture2D" uid="uid://b70wb57nscbng" path="res://addons/camera/assets/offscreen-indicator_sheet.png" id="10_gkve5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwxwm"]

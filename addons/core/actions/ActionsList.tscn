@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource path="res://addons/trolley/TrolleyActionsList.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://addons/core/actions/ActionsList.gd" id="1"]
 
 [node name="ActionsList" type="VBoxContainer"]
 offset_right = 238.0

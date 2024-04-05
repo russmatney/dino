@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxy65wjusiq7j" path="res://src/harvey/assets/seed-box_sheet.png" id="3_loqwr"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="4"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="5_2gqyg"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_2gqyg"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="6_lnbds"]
 
 [sub_resource type="RectangleShape2D" id="1"]

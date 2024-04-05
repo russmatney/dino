@@ -21,7 +21,7 @@ func update_text():
 	if key:
 		# attempts to find a matching input action with keys for the passed "input_action"
 		# otherwise, the "keys" are used as the key_or_action directly
-		var keys = Trolley.keys_for_input_action(key_or_action)
+		var keys = Trolls.keys_for_input_action(key_or_action)
 		var k_text
 		if keys != null and len(keys) > 0:
 			k_text = "".join(keys)

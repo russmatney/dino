@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0r7m71tr77vo"]
+[gd_scene load_steps=11 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenu.gd" id="1_7pfpx"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/dj/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/metro/MetroMap.tscn" id="7_bx1bw"]
 [ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/PauseTabPlayer.tscn" id="7_ipd6p"]
-[ext_resource type="PackedScene" uid="uid://qm52orrv1o6a" path="res://addons/trolley/TrolleyDebugPanel.tscn" id="8_0a5jm"]
 [ext_resource type="PackedScene" uid="uid://duncni63m4vm0" path="res://src/dino/ui/PlayedGameRecords.tscn" id="9_k7cqm"]
 [ext_resource type="PackedScene" uid="uid://idppjgt76c6l" path="res://addons/dj/TurnTable.tscn" id="9_oe4cd"]
 
@@ -104,11 +103,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tab_alignment = 1
 
-[node name="Controls" parent="PanelContainer/VBoxContainer/TabContainer/Debug/TabContainer" instance=ExtResource("8_0a5jm")]
-layout_mode = 2
-
 [node name="All Sounds" parent="PanelContainer/VBoxContainer/TabContainer/Debug/TabContainer" instance=ExtResource("9_oe4cd")]
-visible = false
 layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]

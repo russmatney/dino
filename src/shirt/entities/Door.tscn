@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dcm1c4m2c61w6" path="res://src/shirt/entities/wide_door.png" id="1_6haot"]
 [ext_resource type="Script" path="res://src/shirt/entities/Door.gd" id="1_i85hp"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="3_moscc"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_moscc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnpie"]
 atlas = ExtResource("1_6haot")

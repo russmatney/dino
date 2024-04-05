@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="6_6810x"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Grabbed.gd" id="6_qiif0"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Thrown.gd" id="7_scirs"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="7_sxgat"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="8_540xg"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="7_sxgat"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_540xg"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Dead.gd" id="8_xianj"]
 [ext_resource type="Script" path="res://src/herd/sheep/machine/Hop.gd" id="9_p4cjf"]
 

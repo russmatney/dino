@@ -5,7 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/beehive/assets/arrow.tres" id="4"]
 [ext_resource type="PackedScene" path="res://src/harvey/player/Machine.tscn" id="5"]
 [ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/harvey/player/harvey_spriteframes.tres" id="6"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="6_havi5"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_havi5"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/camera/CamPOI.tscn" id="7_pr8qp"]
 
 [sub_resource type="CapsuleShape2D" id="3"]

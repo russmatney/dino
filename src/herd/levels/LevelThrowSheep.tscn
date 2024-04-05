@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/herd/tiles/FenceTiles.tscn" id="5_n58ao"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/reptile/tilemaps/MetalTiles8.tscn" id="6_lojaq"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/herd/sheep/Sheep.tscn" id="7_ue040"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="8_mvb0w"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_mvb0w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sedup"]
 size = Vector2(56, 48)

@@ -11,7 +11,7 @@
 [ext_resource type="Shader" path="res://src/harvey/SquashStretchShader.gdshader" id="10"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="10_cm7gh"]
 [ext_resource type="Theme" path="res://src/harvey/ActionLabelTheme.tres" id="11"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionArea.tscn" id="11_5d4ib"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="11_5d4ib"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/camera/CamPOA.tscn" id="12_1v7m4"]
 
 [sub_resource type="ShaderMaterial" id="8"]

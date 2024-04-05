@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/tower/assets/greyhat_jetflame_sheet.png" id="5_cfy4m"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="6_6resu"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/beehive/sidescroller/machine/SSMachine.tscn" id="7_7wg00"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/trolley/ActionHint.tscn" id="8_k6joc"]
-[ext_resource type="PackedScene" path="res://addons/trolley/actions/ActionDetector.tscn" id="9_qybgy"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_k6joc"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="9_qybgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k30yq"]
 atlas = ExtResource("2_mxd7a")
