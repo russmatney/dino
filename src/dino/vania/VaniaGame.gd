@@ -131,7 +131,7 @@ func regenerate_other_rooms():
 			MetSys.discover_cell(coord)
 
 	# redo the current room's doors
-	if map.is_node_ready():
+	if map and map.is_node_ready():
 		map.setup_walls_and_doors()
 
 func add_new_room(count=1):
@@ -145,7 +145,7 @@ func add_new_room(count=1):
 			MetSys.discover_cell(coord)
 
 	# redo the current room's doors
-	if map.is_node_ready():
+	if map and map.is_node_ready():
 		map.setup_walls_and_doors()
 
 func remove_room(count=1):
@@ -168,7 +168,7 @@ func remove_room(count=1):
 	Log.pr(len(room_defs_to_remove), " rooms removed")
 
 	# redo the current room's doors
-	if map.is_node_ready():
+	if map and map.is_node_ready():
 		map.setup_walls_and_doors()
 
 ## load room #######################################################

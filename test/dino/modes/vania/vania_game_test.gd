@@ -4,8 +4,8 @@ class_name VaniaGameTest
 ## basic startup ################################################
 
 func test_game_start():
-	var game = VaniaGame.new()
-	game.init_rooms({room_inputs=[
+	var game = auto_free(VaniaGame.new())
+	game.generate_rooms({room_inputs=[
 		[RoomInputs.IN_SMALL_ROOM,],
 		[RoomInputs.IN_SMALL_ROOM,],
 		[RoomInputs.IN_SMALL_ROOM,],
@@ -22,8 +22,8 @@ func test_game_start():
 ## add rooms ################################################
 
 func test_game_add_rooms():
-	var game = VaniaGame.new()
-	game.init_rooms({room_inputs=[
+	var game = auto_free(VaniaGame.new())
+	game.generate_rooms({room_inputs=[
 		[RoomInputs.IN_SMALL_ROOM,],
 		[RoomInputs.IN_SMALL_ROOM,],
 		[RoomInputs.IN_SMALL_ROOM,],
@@ -46,8 +46,8 @@ func test_game_add_rooms():
 ## remove rooms ################################################
 
 func test_game_add_room():
-	var game = VaniaGame.new()
-	game.init_rooms({room_inputs=[
+	var game = auto_free(VaniaGame.new())
+	game.generate_rooms({room_inputs=[
 		[RoomInputs.IN_SMALL_ROOM,],
 		[RoomInputs.IN_SMALL_ROOM,],
 		[RoomInputs.IN_SMALL_ROOM,],

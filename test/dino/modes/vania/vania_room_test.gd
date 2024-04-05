@@ -4,7 +4,7 @@ class_name VaniaRoomTest
 ## tilemap walls ################################################
 
 func test_build_room_sets_tilemap_borders():
-	var room = VaniaRoom.new()
+	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({room_inputs=[RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,]})
 
 	def.map_cells = [Vector3i(0, 0, 0)]
@@ -34,7 +34,7 @@ func test_build_room_sets_tilemap_borders():
 func test_build_room_walls_concave_shape():
 	var shape = [Vector3i(0, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 0, 0)]
 
-	var room = VaniaRoom.new()
+	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({room_inputs=[
 		RoomInputs.IN_SPACESHIP,
 		{RoomInputs.CUSTOM_ROOM: {shape=shape}},
@@ -80,7 +80,7 @@ func test_build_room_walls_concave_shape():
 ## tilemap doors ################################################
 
 func test_build_room_sets_tilemap_doors():
-	var room = VaniaRoom.new()
+	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new()
 	RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,], def)
 
@@ -145,7 +145,7 @@ xn.
 x..
 	"""})
 
-	var room = VaniaRoom.new()
+	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
 	RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,], def)
 
@@ -191,7 +191,7 @@ xn.
 x..
 	"""})
 
-	var room = VaniaRoom.new()
+	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
 	RoomInputs.apply_constraints([
 		RoomInputs.IN_SPACESHIP,
@@ -234,7 +234,7 @@ name Player Start
 xxx
 	"""})
 
-	var room = VaniaRoom.new()
+	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({entity_defs=ent_defs})
 	RoomInputs.apply_constraints([
 		RoomInputs.IN_SPACESHIP,

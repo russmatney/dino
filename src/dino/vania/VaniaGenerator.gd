@@ -153,7 +153,7 @@ func set_room_scene_path(room_def):
 
 func build_and_prep_scene(room_def, _opts={}):
 	Debug.notif({msg="[GENNING... [color=crimson]%s[/color]]" % room_def.room_path.get_file(), rich=true})
-	# Log.pr("building and packing room_def", room_def.room_path.get_file())
+	Log.pr("generating and packing room", room_def.room_path.get_file())
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
 	room.build_room(room_def, {neighbor_data=neighbor_data.get(room_def.room_path)})
