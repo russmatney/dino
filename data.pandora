@@ -839,11 +839,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/assets/sword_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/sidescroller/weapons/Sword.tscn"
 					}
 				}
 			},
@@ -860,11 +860,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/assets/bow_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/sidescroller/weapons/Bow.tscn"
 					}
 				}
 			},
@@ -906,11 +906,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/assets/gun_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/sidescroller/weapons/Gun.tscn"
 					}
 				}
 			},
@@ -927,11 +927,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/assets/flashlight_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/sidescroller/weapons/Flashlight.tscn"
 					}
 				}
 			},
@@ -948,7 +948,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/beehive/assets/orb_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
@@ -1045,7 +1045,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn"
 					}
 				}
 			},
@@ -1078,7 +1078,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/reptile/tilemaps/GrassFloorTiles16.tscn"
 					}
 				}
 			},
@@ -1107,7 +1107,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/core/reptile/tilemaps/GrassTiles16.tscn"
 					}
 				}
 			},
@@ -1129,6 +1129,10 @@
 					"level_gen_script": {
 						"type": "resource",
 						"value": "res://src/dino/levels/boss_battle/BossBattleLevelGen.gd"
+					},
+					"tiles_scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn"
 					}
 				}
 			},
@@ -1181,14 +1185,14 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "<Object#null>",
+				"_default_value": "res://addons/core/navi/NaviWinMenu.tscn",
 				"_id": "26",
 				"_name": "win_menu",
 				"_type": "resource"
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "<Object#null>",
+				"_default_value": "res://addons/core/navi/NaviDeathMenu.tscn",
 				"_id": "27",
 				"_name": "death_menu",
 				"_type": "resource"
@@ -1393,7 +1397,7 @@
 			},
 			{
 				"_category_id": "103",
-				"_default_value": "<Object#null>",
+				"_default_value": "res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn",
 				"_id": "111",
 				"_name": "tiles_scene",
 				"_type": "resource"

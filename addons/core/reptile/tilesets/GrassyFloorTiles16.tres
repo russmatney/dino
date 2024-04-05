@@ -1,7 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c3mxbwmxwyyb5"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qinv3"]
-load_path = "res://.godot/imported/grass_tiles-16_sheet.png-67de3b864de0541e9d5155e10720ad94.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xie1i"]
 texture = SubResource("CompressedTexture2D_qinv3")
