@@ -159,7 +159,9 @@ func build_and_prep_scene(room_def, _opts={}):
 	# pack and write to room_def.room_path
 	var ps := PackedScene.new()
 	ps.pack(room)
-	ResourceSaver.save(ps, room_def.room_path)
+	var error = ResourceSaver.save(ps, room_def.room_path)
+	if error != Error.OK:
+		Log.pr("Error saving room scene", error)
 
 ## place_rooms ##########################################################
 

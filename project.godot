@@ -16,7 +16,6 @@ metroidvania_system/settings_file="res://MetSysSettings.tres"
 
 config/name="Dino"
 run/main_scene="res://src/dino/menus/DinoMenu.tscn"
-config/use_custom_user_dir=true
 config/features=PackedStringArray("4.2")
 boot_splash/bg_color=Color(0.819608, 0.509804, 0.576471, 1)
 boot_splash/image="res://assets/gameicons/dino_splash_sheet.png"
