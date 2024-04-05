@@ -1,44 +1,44 @@
 name: Unit Tests
+run-name: ${{ github.head_ref || github.ref_name }}-dino-unit-tests
 
-on: [ push ]
+on:
+  # pull_request:
+  workflow_dispatch:
+  push:
+
+concurrency:
+  group: dino-unit-tests-${{ github.event.number }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    environment: Godot Dev Env
+  unit-test:
+    name: "GDUnit Tests"
+    runs-on: 'ubuntu-22.04'
+    timeout-minutes: 10 # The overall timeout
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      pull-requests: write
+      statuses: write
+
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        godot-version: ['4.2.1']
+        godot-status: ['stable']
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Cache Godot files
-      id: cache-godot
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.local/share/godot/**
-          /usr/local/bin/godot
-          ~/.config/godot/**
-        key: ${{ runner.os }}-godot-${{ vars.GODOT_VERSION }}
-
-    - name: Download and config Godot Engine headless linux server
-      if: steps.cache-godot.outputs.cache-hit != 'true'
-      shell: bash
-      run: |
-        wget -q https://downloads.tuxfamily.org/godotengine/${{ vars.GODOT_VERSION }}/Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64.zip
-        mkdir ~/.cache
-        mkdir -p ~/.config/godot
-        unzip Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64.zip
-        mv Godot_v${{ vars.GODOT_VERSION }}-stable_linux.x86_64 /usr/local/bin/godot
-
-    # https://github.com/MikeSchulze/gdUnit4/blob/master/.github/workflows/ci-pr-example.yml
-    - name: "Update Project"
-      shell: bash
-      run: |
-        godot -e --path . -s res://addons/gdUnit4/bin/ProjectScanner.gd --headless --audio-driver Dummy || exit 0
-
-    - name: "Run Unit Tests"
-      timeout-minutes: 10
-      shell: bash
-      run: |
-        chmod +x ./addons/gdUnit4/runtest.sh
-        xvfb-run --auto-servernum ./addons/gdUnit4/runtest.sh --add "res://test" --audio-driver Dummy --display-driver x11 --rendering-driver opengl3 --screen 0 --continue
+      # checkout your repository
+      - uses: actions/checkout@v4
+      # run unit tests
+      - uses: MikeSchulze/gdUnit4-action@v1.0.5
+        with:
+          godot-version: ${{ matrix.godot-version }}
+          godot-status: ${{ matrix.godot-status }}
+          paths: |
+            res://test/
+          timeout: 5
+          report-name:
+            report_${{ matrix.version }}_Godot${{ matrix.godot-version }}-${{ matrix.godot-status }}.xml
