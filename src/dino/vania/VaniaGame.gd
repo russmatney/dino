@@ -11,17 +11,16 @@ var VaniaRoomTransitions = "res://src/dino/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
 @onready var pcam: PhantomCamera2D = $%PCam
+@onready var playground: Node2D = $%LoadPlayground
 
 var room_defs: Array[VaniaRoomDef] = []
+
+var generating: Thread
 
 # capture in RoomInputs
 var tile_size = 16
 
-func increment_room_count():
-	add_new_room(1)
-
-func decrement_room_count():
-	remove_room(1)
+signal finished_initial_room_gen
 
 ## ready #######################################################
 
@@ -35,7 +34,33 @@ func _ready():
 
 	Dino.player_ready.connect(on_player_ready)
 
-	init_rooms()
+	finished_initial_room_gen.connect(on_finished_initial_room_gen, CONNECT_ONE_SHOT)
+
+	# spawn player in the load playground
+	setup_player()
+
+	set_process(false)
+
+	thread_room_gen({room_inputs=U.repeat_fn(RoomInputs.random_room, 2)})
+
+func on_finished_initial_room_gen():
+	clear_load_playground()
+	load_initial_room()
+	setup_player()
+
+func clear_load_playground():
+	playground.queue_free()
+
+## process #######################################################
+
+func _process(_delta: float) -> void:
+	# Join thread when it has finished.
+	if not generating.is_alive():
+		generating.wait_to_finish()
+		generating = null
+		set_process(false)
+
+		finished_initial_room_gen.emit()
 
 ## on load/ready #######################################################
 
@@ -50,19 +75,25 @@ func on_player_ready(p):
 	pcam.set_follow_target_node(p)
 	# pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
 
-## init rooms #######################################################
+## room gen #######################################################
 
-func init_rooms(opts={}):
+func thread_room_gen(opts):
+	if generating:
+		return
+
+	# The thread that does map generation.
+	generating = Thread.new()
+	generating.start(func(): generate_rooms(opts))
+	set_process(true)
+
+func generate_rooms(opts={}):
 	VaniaGenerator.remove_generated_cells()
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
 	var room_inputs = opts.get("room_inputs", [])
 	if room_inputs.is_empty():
-		room_inputs = [
-			[RoomInputs.IN_SMALL_ROOM, RoomInputs.HAS_PLAYER],
-			]
-		room_inputs.append_array(U.repeat_fn(RoomInputs.random_room, 5))
+		room_inputs = [[RoomInputs.IN_SMALL_ROOM, RoomInputs.HAS_PLAYER]]
 
 	room_defs = VaniaRoomDef.generate_defs(U.merge({
 		tile_size=tile_size,
@@ -73,10 +104,13 @@ func init_rooms(opts={}):
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
 
-	load_initial_room()
-	setup_player()
-
 ## public regen funcs #######################################################
+
+func increment_room_count():
+	add_new_room(1)
+
+func decrement_room_count():
+	remove_room(1)
 
 # regenerate rooms besides the current one
 func regenerate_other_rooms():
