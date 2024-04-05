@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://v81r0hbty1bb"]
 
-[ext_resource type="Script" path="res://addons/thanks/Credits.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://bo44ga11t2q8p" path="res://addons/thanks/CreditLine.tscn" id="2"]
+[ext_resource type="Script" path="res://addons/core/thanks/Credits.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bo44ga11t2q8p" path="res://addons/core/thanks/CreditLine.tscn" id="2"]
 
 [node name="Credits" type="MarginContainer"]
 anchors_preset = 15
