@@ -258,17 +258,17 @@ func remove_from_poas(node):
 # input
 
 
-func _input(event):
-	if Trolls.is_event(event, "zoom_in"):
-		if cam and is_instance_valid(cam):
-			cam.zoom_dir("in")
-	elif Trolls.is_event(event, "zoom_out"):
-		if cam and is_instance_valid(cam):
-			cam.zoom_dir("out")
-	if Trolls.is_action(event):
-		if cam and is_instance_valid(cam):
-			# freezeframe("shake-watch", 0.2, 1.5)
-			cam.inc_trauma(0.1)
+# func _input(event):
+# 	if Trolls.is_event(event, "zoom_in"):
+# 		if cam and is_instance_valid(cam):
+# 			cam.zoom_dir("in")
+# 	elif Trolls.is_event(event, "zoom_out"):
+# 		if cam and is_instance_valid(cam):
+# 			cam.zoom_dir("out")
+# 	if Trolls.is_action(event):
+# 		if cam and is_instance_valid(cam):
+# 			# freezeframe("shake-watch", 0.2, 1.5)
+# 			cam.inc_trauma(0.1)
 
 
 ###########################################################################
