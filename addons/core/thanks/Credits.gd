@@ -2,7 +2,7 @@
 extends Control
 class_name Credits
 
-@export var credit_line_scene: PackedScene = preload("res://addons/thanks/CreditLine.tscn")
+@export var credit_line_scene: PackedScene = preload("res://addons/core/thanks/CreditLine.tscn")
 var credits_lines_container: VBoxContainer
 
 var credits_scroll_container: ScrollContainer
