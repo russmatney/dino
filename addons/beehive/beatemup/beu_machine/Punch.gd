@@ -84,7 +84,7 @@ func finish_punch():
 ## unhandled_input ###########################################################
 
 func unhandled_input(event):
-	if Trolley.is_attack(event) and not punched_again_pressed:
+	if Trolls.is_attack(event) and not punched_again_pressed:
 		punched_again_pressed = true
 		return
 

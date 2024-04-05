@@ -96,11 +96,11 @@ Input handling in godot is really simple, but it generally uses strings as
 inputs, so this is a thing layer to use static function calls instead.
 
 #+begin_src gdscript
-var move_dir = Trolley.move_vector() # a normalized input direction
+var move_dir = Trolls.move_vector() # a normalized input direction
 
 func _unhandled_input(event):
 	# Because i can never remember the input event api
-    if (Trolley.is_punch(event)):
+    if (Trolls.is_punch(event)):
         punch()
 #+end_src
 

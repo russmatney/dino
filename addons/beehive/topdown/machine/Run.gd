@@ -16,7 +16,7 @@ func exit():
 
 func unhandled_input(event):
 	if actor.is_player:
-		if Trolley.is_jump(event):
+		if Trolls.is_jump(event):
 			machine.transit("Jump")
 			return
 

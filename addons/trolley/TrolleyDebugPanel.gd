@@ -59,7 +59,7 @@ func _process(_delta):
 	var label = "[center]Active Controls:[/center]"
 
 	var move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var trolley_move_vector = Trolley.move_vector()
+	var trolley_move_vector = Trolls.move_vector()
 
 	label += "\nmove vector: %s, \ntrolley move vector: %s" % [
 		Log._to_pretty(move_vector), Log._to_pretty(trolley_move_vector)

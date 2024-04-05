@@ -29,7 +29,7 @@ func exit():
 ## input ###########################################################
 
 func unhandled_input(event):
-	if Trolley.is_attack(event):
+	if Trolls.is_attack(event):
 		if grabbed and is_instance_valid(grabbed):
 			grabbed.machine.transit("Thrown", {thrown_by=actor, direction=throw_direction})
 			transit("Throw", {body=grabbed})

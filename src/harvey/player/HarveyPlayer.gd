@@ -36,7 +36,7 @@ func point_arrow():
 
 # overwritten in subclass
 func _unhandled_input(event):
-	if Trolley.is_action(event):
+	if Trolls.is_action(event):
 		action_detector.execute_current_action()
 
 ## machine ###########################################################
@@ -59,7 +59,7 @@ var speed := 100
 
 # overwritten in subclass
 func get_move_dir():
-	return Trolley.move_vector()
+	return Trolls.move_vector()
 
 ############################################################
 # facing

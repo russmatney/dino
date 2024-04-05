@@ -28,11 +28,11 @@ func _ready():
 ## input ###########################################################
 
 func _unhandled_input(event):
-	if Trolley.is_jump(event) and machine.state.name in ["Idle", "Walk"]:
+	if Trolls.is_jump(event) and machine.state.name in ["Idle", "Walk"]:
 		machine.transit("Jump")
 		return
 
-	if Trolley.is_attack(event) and machine.state.name in ["Idle", "Walk"]:
+	if Trolls.is_attack(event) and machine.state.name in ["Idle", "Walk"]:
 		machine.transit("Punch")
 		return
 
@@ -42,7 +42,7 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	super._physics_process(delta)
 
-	move_vector = Trolley.move_vector()
+	move_vector = Trolls.move_vector()
 
 	if move_vector.abs().length() > 0 and "state" in machine and machine.state.name in ["Walk", "Jump"]:
 		if move_vector.x > 0:

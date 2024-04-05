@@ -28,7 +28,7 @@ func _ready():
 ## input ###################################################################
 
 func _unhandled_input(event):
-	if not Engine.is_editor_hint() and Trolley.is_pause(event):
+	if not Engine.is_editor_hint() and Trolls.is_pause(event):
 		Navi.toggle_pause()
 
 ## process ###################################################################

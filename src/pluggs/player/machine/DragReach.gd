@@ -8,7 +8,7 @@ func enter(_msg = {}):
 	actor.anim.play("drag-reach")
 	tt_drag = drag_in_t
 
-	var move_dir = Trolley.move_vector()
+	var move_dir = Trolls.move_vector()
 	if move_dir.x > 0:
 		actor.face_right()
 	elif move_dir.x < 0:
@@ -19,7 +19,7 @@ func process(delta: float):
 		and not Input.is_action_pressed("move_right"):
 		machine.transit("Bucket", {"animate": false})
 
-	var move_dir = Trolley.move_vector()
+	var move_dir = Trolls.move_vector()
 	if move_dir.x > 0:
 		actor.face_right()
 	elif move_dir.x < 0:

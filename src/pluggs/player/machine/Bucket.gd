@@ -9,7 +9,7 @@ func enter(msg = {}):
 		actor.anim.play("idle-bucket")
 
 func unhandled_input(event):
-	if Trolley.is_jump(event):
+	if Trolls.is_jump(event):
 		machine.transit("Stand", {animate=true})
 
 func process(_delta: float):

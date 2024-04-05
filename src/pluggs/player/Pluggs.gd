@@ -59,7 +59,7 @@ func _unhandled_input(event):
 		return
 
 	# exec action
-	if Trolley.is_action(event):
+	if Trolls.is_action(event):
 		# stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		# action_detector.execute_current_action()
 		# action_detector.current_action()
@@ -67,10 +67,10 @@ func _unhandled_input(event):
 		toss_plug()
 
 	# action cycling
-	if Trolley.is_cycle_prev_action(event):
+	if Trolls.is_cycle_prev_action(event):
 		DJZ.play(DJZ.S.walk)
 		# action_detector.cycle_prev_action()
-	elif Trolley.is_cycle_next_action(event):
+	elif Trolls.is_cycle_next_action(event):
 		DJZ.play(DJZ.S.walk)
 		# action_detector.cycle_next_action()
 
@@ -128,7 +128,7 @@ func get_move_vector():
 			return Vector2.ZERO
 		# NOTE no movement can occur until forced_movement_target is unset
 	else:
-		return Trolley.move_vector()
+		return Trolls.move_vector()
 
 func force_move_to_target(target_position):
 	block_control = true

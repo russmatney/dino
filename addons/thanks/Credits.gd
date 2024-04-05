@@ -52,11 +52,11 @@ func _ready():
 var scroll_held = Vector2.ZERO
 
 func _unhandled_input(event):
-	if Trolley.is_move_up(event):
+	if Trolls.is_move_up(event):
 		scroll_held = Vector2.UP
-	elif Trolley.is_move_down(event):
+	elif Trolls.is_move_down(event):
 		scroll_held = Vector2.DOWN
-	if Trolley.is_move_released(event):
+	if Trolls.is_move_released(event):
 		scroll_held = Vector2.ZERO
 
 ## process ############################################################

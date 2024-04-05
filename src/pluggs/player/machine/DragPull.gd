@@ -18,7 +18,7 @@ func process(delta: float):
 		and not Input.is_action_pressed("move_right"):
 		machine.transit("Bucket", {"animate": false})
 
-	var move_dir = Trolley.move_vector()
+	var move_dir = Trolls.move_vector()
 	if move_dir.x > 0:
 		actor.face_right()
 	elif move_dir.x < 0:
@@ -30,7 +30,7 @@ func process(delta: float):
 
 
 func physics_process(delta):
-	var move_dir = Trolley.move_vector()
+	var move_dir = Trolls.move_vector()
 	actor.velocity.x = actor.drag_speed * move_dir.x
 	actor.velocity.y += actor.gravity * delta
 	actor.move_and_slide()

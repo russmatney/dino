@@ -33,7 +33,7 @@ func exit():
 ## input ###########################################################
 
 func unhandled_input(event):
-	if Trolley.is_attack(event) and not kick_pressed:
+	if Trolls.is_attack(event) and not kick_pressed:
 		kick_pressed = true
 		actor.anim.play("jump_kick")
 		return

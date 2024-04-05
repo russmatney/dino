@@ -71,28 +71,28 @@ func _unhandled_input(event):
 		return
 
 	# generic weapon
-	if has_weapon() and Trolley.is_attack(event):
+	if has_weapon() and Trolls.is_attack(event):
 		use_weapon()
 		# should strafe?
-	elif has_weapon() and Trolley.is_attack_released(event):
+	elif has_weapon() and Trolls.is_attack_released(event):
 		stop_using_weapon()
 		# should stop strafe?
 
-	if Trolley.is_event(event, "cycle_weapon"):
+	if Trolls.is_event(event, "cycle_weapon"):
 		cycle_weapon()
 
 	# generic action
-	if Trolley.is_action(event):
+	if Trolls.is_action(event):
 		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		action_detector.execute_current_action()
 		action_detector.current_action()
 		Cam.hitstop("player_hitstop", 0.5, 0.2)
 
 	# action cycling
-	if Trolley.is_cycle_prev_action(event):
+	if Trolls.is_cycle_prev_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_prev_action()
-	elif Trolley.is_cycle_next_action(event):
+	elif Trolls.is_cycle_next_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 
@@ -102,7 +102,7 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	super._physics_process(delta)
 
-	# checks forced_movement_target, then uses Trolley.move_vector
+	# checks forced_movement_target, then uses Trolls.move_vector
 	var mv = get_move_vector()
 	if mv != null:
 		move_vector = mv
@@ -138,7 +138,7 @@ func get_move_vector():
 			return Vector2.ZERO
 		# note, no movement can occur until forced_movement_target is unset
 	else:
-		return Trolley.move_vector()
+		return Trolls.move_vector()
 
 func force_move_to_target(target_position):
 	block_control = true

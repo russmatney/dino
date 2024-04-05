@@ -68,7 +68,7 @@ signal jumbo_closed
 				body.text = "[center]%s[/center]" % v
 
 func _unhandled_input(event):
-	if Trolley.is_close(event):
+	if Trolls.is_close(event):
 		fade_out()
 		DJZ.play(DJZ.S.showjumbotron)
 

@@ -39,6 +39,8 @@ func _enter_tree():
 ## ready ######################################################
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	if not game:
 		Log.warn("VaniaEditor could not find game")
 		return

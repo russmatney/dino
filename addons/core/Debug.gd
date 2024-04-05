@@ -5,14 +5,23 @@ var debugging = false
 
 signal debug_toggled(debugging)
 
-################################################
-# ready
+## ready ###############################################
 
 func _ready():
 	toggle_debug(debugging)
 
-################################################
-# toggle debug
+## input ###############################################
+
+func _unhandled_input(event):
+	if not Engine.is_editor_hint():
+		if Trolls.is_debug_toggle(event):
+			Debug.toggle_debug()
+		elif Trolls.is_event(event, "slowmo"):
+			Juice.slowmo_start()
+		elif Trolls.is_released(event, "slowmo"):
+			Juice.slowmo_stop()
+
+# toggle debug ################################################
 
 func toggle_debug(d=null):
 	if d != null:
@@ -67,3 +76,44 @@ func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg
 
 	debug_label_update.emit(label_id, msg_array, call_site)
 
+
+## focus ##########################################################################
+
+## is the window focused?
+# https://docs.godotengine.org/en/stable/tutorials/inputs/controllers_gamepads_joysticks.html#window-focus
+var focused := true
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
+			focused = false
+		NOTIFICATION_APPLICATION_FOCUS_IN:
+			focused = true
+
+## notifications ##########################################################################
+
+# TODO dedupe against hood
+signal notification(notif)
+
+var queued_notifs = []
+
+func notif(text, opts = {}):
+	# Log.pr("notif: ", text)
+	if text is Dictionary:
+		opts.merge(text)
+		text = opts.get("text", opts.get("msg"))
+	if typeof(opts) == TYPE_STRING or not opts is Dictionary:
+		text += str(opts)
+		opts = {}
+	opts["text"] = text
+	if not "ttl" in opts:
+		opts["ttl"] = 3.0
+	notification.emit(opts)
+
+var queued_notifs_dev = []
+
+func dev_notif(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
+	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
+	msgs = msgs.filter(func(m): return m)
+	msg = Log.to_printable(msgs)
+	notification.emit({msg=msg, rich=true, ttl=5.0})

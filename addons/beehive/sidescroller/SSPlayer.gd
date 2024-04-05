@@ -114,46 +114,46 @@ func _unhandled_input(event):
 		return
 
 	# jetpack
-	if has_jetpack and Trolley.is_jetpack(event):
+	if has_jetpack and Trolls.is_jetpack(event):
 		machine.transit("Jetpack")
 
 	# dash
-	if has_dash and Trolley.is_dash(event) and not machine.state.name in ["Dash"]:
+	if has_dash and Trolls.is_dash(event) and not machine.state.name in ["Dash"]:
 		machine.transit("Dash")
 
 	# generic weapon
-	if has_weapon() and Trolley.is_attack(event):
+	if has_weapon() and Trolls.is_attack(event):
 		use_weapon()
 		# should strafe?
-	elif has_weapon() and Trolley.is_attack_released(event):
+	elif has_weapon() and Trolls.is_attack_released(event):
 		stop_using_weapon()
 		# should stop strafe?
 
-	if Trolley.is_event(event, "cycle_weapon"):
+	if Trolls.is_event(event, "cycle_weapon"):
 		cycle_weapon()
 		if weapon_set.list().size() > 0:
 			Hood.notif(str("Changed weapon: ", weapon_set.active_weapon().display_name))
 			notif(active_weapon().display_name)
 
 	# generic action
-	if Trolley.is_action(event):
+	if Trolls.is_action(event):
 		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		action_detector.execute_current_action()
 		action_detector.current_action()
 		Cam.hitstop("player_hitstop", 0.5, 0.2)
 
 	# action cycling
-	if Trolley.is_cycle_prev_action(event):
+	if Trolls.is_cycle_prev_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_prev_action()
-	elif Trolley.is_cycle_next_action(event):
+	elif Trolls.is_cycle_next_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
 
 ## physics_process ###########################################################
 
 func _physics_process(_delta):
-	# checks forced_movement_target, then uses Trolley.move_vector
+	# checks forced_movement_target, then uses Trolls.move_vector
 	move_vector = get_move_vector()
 
 	if not Engine.is_editor_hint():
@@ -194,7 +194,7 @@ func get_move_vector():
 			return Vector2.ZERO
 		# note, no movement can occur until forced_movement_target is unset
 	else:
-		return Trolley.move_vector()
+		return Trolls.move_vector()
 
 func force_move_to_target(target_position):
 	block_control = true

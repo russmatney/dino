@@ -46,7 +46,7 @@ var input_move_dir = Vector2.ZERO
 var facing_dir
 
 func _physics_process(_delta):
-	input_move_dir = Trolley.move_vector()
+	input_move_dir = Trolls.move_vector()
 	if input_move_dir.abs().length() > 0:
 		# could snap/round to discrete angles
 		facing_dir = input_move_dir
@@ -56,15 +56,15 @@ func _physics_process(_delta):
 
 
 func _unhandled_input(event):
-	if Trolley.is_action(event):
+	if Trolls.is_action(event):
 		action_detector.execute_current_action()
-	if Trolley.is_cycle_prev_action(event):
+	if Trolls.is_cycle_prev_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_prev_action()
-	elif Trolley.is_cycle_next_action(event):
+	elif Trolls.is_cycle_next_action(event):
 		DJZ.play(DJZ.S.walk)
 		action_detector.cycle_next_action()
-	if Trolley.is_jump(event):
+	if Trolls.is_jump(event):
 		machine.transit("Jump")
 
 ######################################################
