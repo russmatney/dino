@@ -4,9 +4,14 @@ extends EditorPlugin
 var reload_scene_btn = Button.new()
 var editor_interface
 
+func _enable_plugin() -> void:
+	Log.pr("<dino/core> enabled")
+
+func _disable_plugin() -> void:
+	Log.pr("<dino/core> disabled")
 
 func _enter_tree():
-	Log.pr("<DinoCore>")
+	Log.pr("<dino/core> entered tree")
 	add_autoload_singleton("Debug", "res://addons/core/Debug.gd")
 	add_autoload_singleton("Navi", "res://addons/core/navi/Navi.gd")
 
