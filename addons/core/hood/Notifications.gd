@@ -31,8 +31,8 @@ func _ready():
 
 #############################################################
 
-var notif_label = preload("res://addons/hood/NotifLabel.tscn")
-var notif_rich_label = preload("res://addons/hood/NotifRichLabel.tscn")
+var notif_label = preload("res://addons/core/hood/NotifLabel.tscn")
+var notif_rich_label = preload("res://addons/core/hood/NotifRichLabel.tscn")
 
 var id_notifs = {}
 

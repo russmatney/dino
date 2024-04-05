@@ -271,7 +271,7 @@ func remove_from_poas(node):
 ###########################################################################
 # offscreen indicators
 
-var fallback_indicator_scene = "res://addons/camera/OffscreenIndicator.tscn"
+var fallback_indicator_scene = "res://addons/core/camera/OffscreenIndicator.tscn"
 
 func maybe_activate_indicator(indicator, node, opts={}):
 	var is_active = opts.get("is_active", func(): return true)

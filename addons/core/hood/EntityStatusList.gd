@@ -3,7 +3,7 @@ extends VBoxContainer
 
 @export var max_children: int = 3
 
-var status_scene = preload("res://addons/hood/EntityStatus.tscn")
+var status_scene = preload("res://addons/core/hood/EntityStatus.tscn")
 
 func find_existing_status(entry):
 	for ch in get_children():

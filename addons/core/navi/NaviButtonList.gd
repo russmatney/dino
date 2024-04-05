@@ -2,7 +2,7 @@
 extends VBoxContainer
 class_name NaviButtonList
 
-@export var default_button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")
+@export var default_button_scene: PackedScene = preload("res://addons/core/navi/ui/MenuButton.tscn")
 
 # set a local member for the Navi autoload, to ease testing
 var _navi = Navi

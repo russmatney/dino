@@ -35,7 +35,7 @@ func _on_frame_changed():
 
 var firing = false
 
-var bullet_scene = preload("res://addons/beehive/sidescroller/weapons/Bullet.tscn")
+var bullet_scene = preload("res://addons/core/beehive/sidescroller/weapons/Bullet.tscn")
 var bullet_impulse = 800
 var fire_rate = 0.2
 var bullet_knockback = 3

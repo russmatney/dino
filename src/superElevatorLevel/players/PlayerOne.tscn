@@ -493,5 +493,5 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": true,
 "op_exp": false,
-"source": "res://addons/beehive/assets/BEU_player_one.aseprite"
+"source": "res://addons/core/beehive/assets/BEU_player_one.aseprite"
 }

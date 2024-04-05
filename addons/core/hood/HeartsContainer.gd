@@ -21,7 +21,7 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-var heart_icon_scene = preload("res://addons/hood/HeartIcon.tscn")
+var heart_icon_scene = preload("res://addons/core/hood/HeartIcon.tscn")
 
 ## Converts a passed int into a number of hearts to display.
 ## As implemented, 1 heart is 2 HP.

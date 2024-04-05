@@ -58,7 +58,7 @@ func _on_bullet_dying(bullet):
 
 var bullets = []
 
-var bullet_scene = preload("res://addons/beehive/sidescroller_boss/Bullet.tscn")
+var bullet_scene = preload("res://addons/core/beehive/sidescroller_boss/Bullet.tscn")
 var bullet_impulse = 100
 var bullet_knockback = 1
 

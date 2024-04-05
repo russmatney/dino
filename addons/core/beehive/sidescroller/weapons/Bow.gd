@@ -34,7 +34,7 @@ func _on_frame_changed():
 
 var firing = false
 
-var arrow_scene = preload("res://addons/beehive/sidescroller/weapons/Arrow.tscn")
+var arrow_scene = preload("res://addons/core/beehive/sidescroller/weapons/Arrow.tscn")
 var arrow_impulse = 400
 var fire_rate = 0.4
 var arrow_knockback = 1

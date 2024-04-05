@@ -54,7 +54,7 @@ var buttons = [
 ]
 
 # default button scene
-@export var button_scene: PackedScene = preload("res://addons/navi/ui/MenuButton.tscn")
+@export var button_scene: PackedScene = preload("res://addons/core/navi/ui/MenuButton.tscn")
 
 func _ready():
 	rebuild()

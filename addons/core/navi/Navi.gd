@@ -238,7 +238,7 @@ func set_pause_menu(path_or_scene):
 
 ## death ###########################################
 
-@export var death_menu_scene: PackedScene = preload("res://addons/navi/NaviDeathMenu.tscn")
+@export var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
 var death_menu
 
 func set_death_menu(path_or_scene):
@@ -267,7 +267,7 @@ func hide_death_menu():
 
 ## win ###########################################
 
-@export var win_menu_scene: PackedScene = preload("res://addons/navi/NaviWinMenu.tscn")
+@export var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")
 var win_menu
 
 func set_win_menu(path_or_scene):

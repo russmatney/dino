@@ -50,7 +50,7 @@ func _on_bullet_dying(_bullet):
 
 ## fire ####################################################
 
-var bullet_scene = preload("res://addons/beehive/sidescroller_enemy/Spell.tscn")
+var bullet_scene = preload("res://addons/core/beehive/sidescroller_enemy/Spell.tscn")
 var bullet_impulse = 100
 var bullet_knockback = 0
 

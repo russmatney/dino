@@ -4,7 +4,7 @@ class_name Jumbotron
 
 ## static ##########################################################################
 
-static var jumbotron_scene = preload("res://addons/quest/Jumbotron.tscn")
+static var jumbotron_scene = preload("res://addons/core/quest/Jumbotron.tscn")
 
 static func jumbo_notif(opts):
 	var jumbotron = jumbotron_scene.instantiate()

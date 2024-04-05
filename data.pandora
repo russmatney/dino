@@ -839,11 +839,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/beehive/assets/sword_icon.png"
+						"value": "<Object#null>"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/beehive/sidescroller/weapons/Sword.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -860,11 +860,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/beehive/assets/bow_icon.png"
+						"value": "<Object#null>"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/beehive/sidescroller/weapons/Bow.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -881,15 +881,15 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/beehive/assets/boomerang_icon.png"
+						"value": "<Object#null>"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/beehive/sidescroller/weapons/Boomerang.tscn"
+						"value": "<Object#null>"
 					},
 					"topdown_scene": {
 						"type": "resource",
-						"value": "res://addons/beehive/topdown/weapons/Boomerang.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -906,11 +906,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/beehive/assets/gun_icon.png"
+						"value": "<Object#null>"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/beehive/sidescroller/weapons/Gun.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -927,11 +927,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/beehive/assets/flashlight_icon.png"
+						"value": "<Object#null>"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/beehive/sidescroller/weapons/Flashlight.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -948,7 +948,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/beehive/assets/orb_icon.png"
+						"value": "<Object#null>"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
@@ -1045,7 +1045,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/reptile/tilemaps/GildedKingdomTiles8.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1078,7 +1078,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/reptile/tilemaps/SpaceshipTiles8.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1107,7 +1107,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/reptile/tilemaps/GrassFloorTiles16.tscn"
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1181,14 +1181,14 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "res://addons/navi/NaviWinMenu.tscn",
+				"_default_value": "<Object#null>",
 				"_id": "26",
 				"_name": "win_menu",
 				"_type": "resource"
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "res://addons/navi/NaviDeathMenu.tscn",
+				"_default_value": "<Object#null>",
 				"_id": "27",
 				"_name": "death_menu",
 				"_type": "resource"
@@ -1393,7 +1393,7 @@
 			},
 			{
 				"_category_id": "103",
-				"_default_value": "res://addons/reptile/tilemaps/PurpleStoneTiles16.tscn",
+				"_default_value": "<Object#null>",
 				"_id": "111",
 				"_name": "tiles_scene",
 				"_type": "resource"

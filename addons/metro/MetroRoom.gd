@@ -259,11 +259,11 @@ func to_normal():
 
 ## cam points ##########################################
 
-var pof_scene = preload("res://addons/camera/CamPOF.tscn")
+var pof_scene = preload("res://addons/core/camera/CamPOF.tscn")
 var auto_pof_group = "auto_pofs"
-var poa_scene = preload("res://addons/camera/CamPOA.tscn")
+var poa_scene = preload("res://addons/core/camera/CamPOA.tscn")
 var auto_poa_group = "auto_poas"
-var poi_scene = preload("res://addons/camera/CamPOI.tscn")
+var poi_scene = preload("res://addons/core/camera/CamPOI.tscn")
 var auto_poi_group = "auto_pois"
 
 func create_point(scene, auto_group, pos):
