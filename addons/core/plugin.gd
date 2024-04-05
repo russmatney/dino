@@ -19,8 +19,8 @@ func _enter_tree():
 
 
 func _exit_tree():
-	remove_autoload_singleton("Navi")
-	remove_autoload_singleton("Debug")
+	# remove_autoload_singleton("Navi")
+	# remove_autoload_singleton("Debug")
 	remove_control_from_container(CONTAINER_TOOLBAR, reload_scene_btn)
 	Log.pr("</DinoCore>")
 
