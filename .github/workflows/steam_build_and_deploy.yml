@@ -12,7 +12,7 @@ jobs:
     name: Linux Build and Deploy
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.1.2
+      image: barichello/godot-ci:4.2.1
     environment: Godot Dev Env
     steps:
       - name: Checkout
