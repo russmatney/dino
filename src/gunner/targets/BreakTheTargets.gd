@@ -14,7 +14,7 @@ func on_quest_update(opts):
 	var destroyed = total - remaining
 
 	if destroyed > 0:
-		Hood.notif({
+		Debug.notif({
 			icon_texture="target",
 			text="Target Destroyed (%d/%d)" % [destroyed, total],
 			id="quest-btt",

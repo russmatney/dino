@@ -29,7 +29,6 @@ TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettin
 Pandora="*res://addons/pandora/api.gd"
 Debug="*res://addons/core/Debug.gd"
 Navi="*res://addons/core/navi/Navi.gd"
-Hood="*res://addons/core/hood/Hood.gd"
 Hotel="*res://addons/core/hotel/Hotel.gd"
 DJ="*res://addons/core/dj/DJ.gd"
 DJZ="*res://addons/core/dj/DJZ.gd"

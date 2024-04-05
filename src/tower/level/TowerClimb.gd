@@ -18,7 +18,7 @@ func _ready():
 	scene_ready = true
 	calc_rect()
 
-	Hood.notif(str("Begin Level ", level_num))
+	Debug.notif(str("Begin Level ", level_num))
 	break_the_targets.targets_cleared.connect(_on_targets_cleared)
 
 ## enemies ####################################################################
@@ -31,7 +31,7 @@ func enemies_alive():
 	return es
 
 func _on_robot_destroyed():
-	Hood.notif("Robot Destroyed!")
+	Debug.notif("Robot Destroyed!")
 	for e in enemies:
 		if not e.is_dead:
 			robots_destroyed = false
@@ -43,7 +43,7 @@ func _on_robot_destroyed():
 ## targets ####################################################################
 
 func _on_targets_cleared():
-	Hood.notif("Targets Destroyed!")
+	Debug.notif("Targets Destroyed!")
 	player.notif("All targets destroyed!")
 	targets_destroyed = true
 	check_win()
@@ -90,7 +90,7 @@ func do_regen_all_rooms(_v):
 
 func regen_all_rooms():
 	if not Engine.is_editor_hint():
-		Hood.notif("generating new rooms")
+		Debug.notif("generating new rooms")
 	for t in get_tree().get_nodes_in_group("targets"):
 		t.queue_free()
 
@@ -205,5 +205,5 @@ var robots_destroyed
 
 func check_win():
 	if targets_destroyed and robots_destroyed:
-		Hood.notif(str("Level ", level_num, " Complete!"))
+		Debug.notif(str("Level ", level_num, " Complete!"))
 		player.notif("Level Clear!")

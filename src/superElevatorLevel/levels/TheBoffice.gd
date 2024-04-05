@@ -2,7 +2,7 @@ extends SELLevel
 
 func _ready():
 	super._ready()
-	Hood.notif("The Boss's Office")
+	Debug.notif("The Boss's Office")
 
 
 var waves = [
@@ -14,7 +14,7 @@ var waves = [
 
 func spawn_next_wave(wave):
 	if wave.get("final"):
-		Hood.notif("Final Wave!")
+		Debug.notif("Final Wave!")
 
 	var tween = create_tween()
 	tween.set_loops(wave.get("animation_loops", 1))

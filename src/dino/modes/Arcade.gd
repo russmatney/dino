@@ -95,5 +95,5 @@ func _on_game_ready():
 func _on_level_complete():
 	_seed = randi()
 	await get_tree().create_timer(1.0).timeout
-	Hood.notif("Loading next level....")
+	Debug.notif("Loading next level....")
 	launch_game()

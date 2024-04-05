@@ -132,7 +132,7 @@ func _unhandled_input(event):
 	if Trolls.is_event(event, "cycle_weapon"):
 		cycle_weapon()
 		if weapon_set.list().size() > 0:
-			Hood.notif(str("Changed weapon: ", weapon_set.active_weapon().display_name))
+			Debug.notif(str("Changed weapon: ", weapon_set.active_weapon().display_name))
 			notif(active_weapon().display_name)
 
 	# generic action

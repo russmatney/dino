@@ -96,7 +96,7 @@ func select_player(player_ent):
 	# P.set_player_entity(player_ent)
 	# P.clear_player_scene()
 
-	Hood.notif({text="Switched to %s" % player_ent.get_display_name(), id="player-switch"})
+	Debug.notif({text="Switched to %s" % player_ent.get_display_name(), id="player-switch"})
 
 	# respawn at current position? regen level?
 	# P.respawn_player()
@@ -112,5 +112,5 @@ func select_weapon(weapon_ent):
 	# var p = P.player
 	# p.activate_weapon(weapon_ent)
 
-	Hood.notif({text="Switched to %s" % weapon_ent.get_display_name(), id="weapon-switch"})
+	Debug.notif({text="Switched to %s" % weapon_ent.get_display_name(), id="weapon-switch"})
 	render.call_deferred()

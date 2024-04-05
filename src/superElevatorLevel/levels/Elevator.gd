@@ -9,13 +9,13 @@ var waves = [
 func _ready():
 	super._ready()
 
-	Hood.notif("The Elevator")
+	Debug.notif("The Elevator")
 
 var floor_num = 1
 
 func spawn_next_wave(wave):
 	floor_num += wave.get("floor_count", 1)
-	Hood.notif(str("Floor ", floor_num))
+	Debug.notif(str("Floor ", floor_num))
 
 	var tween = create_tween()
 	tween.set_loops(wave.get("animation_loops", 3))

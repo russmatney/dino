@@ -295,7 +295,7 @@ func notif(text, opts = {}):
 func level_up():
 	shine(2.0)
 	notif("LEVEL UP", {"dupe": true})
-	Hood.notif("Level Up")
+	Debug.notif("Level Up")
 
 ## shine #####################################################################
 

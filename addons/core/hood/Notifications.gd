@@ -25,8 +25,8 @@ var scene_ready
 #############################################################
 
 func _ready():
-	Hood.notification.connect(_on_notification)
-	Hood.notif("[HOOD] Notifications online.", {id="initial"})
+	Debug.notification.connect(_on_notification)
+	Debug.notif("[HOOD] Notifications online.", {id="initial"})
 	scene_ready = true
 
 #############################################################

@@ -219,7 +219,7 @@ func get_exit_jumbo_opts():
 ## quest reactions ###################################################3
 
 func on_quests_complete():
-	Hood.notif("DinoLevel Level Complete", self.name)
+	Debug.notif("DinoLevel Level Complete", self.name)
 
 	if not skip_splash_outro:
 		await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
@@ -228,7 +228,7 @@ func on_quests_complete():
 	level_complete.emit()
 
 func on_quest_failed():
-	Hood.notif("DinoLevel Restarting", self.name)
+	Debug.notif("DinoLevel Restarting", self.name)
 	Q.drop_quests()
 	regenerate()
 

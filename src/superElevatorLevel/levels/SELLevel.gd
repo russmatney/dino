@@ -59,7 +59,7 @@ func wave_complete():
 	if len(_waves) == 0:
 		all_waves_complete()
 	else:
-		Hood.notif("Wave complete")
+		Debug.notif("Wave complete")
 		spawn_next_wave(_waves.pop_front())
 
 func spawn_enemies(enemy_scene, count):

@@ -52,7 +52,7 @@ func _on_Hurtbox_body_entered(body: Node):
 	if body.is_in_group("enemies"):
 		if body.can_hit_player():
 			take_hit({body=body, damage=1})
-			Hood.notif("Youch!")
+			Debug.notif("Youch!")
 		elif body.player_can_hit():
 			if body.has_method("take_hit"):
 				body.take_hit({body=self, damage=1})
@@ -66,7 +66,7 @@ var gloomba_kos = 0
 
 
 func gloomba_ko():
-	Hood.notif("Gloomba K.O.!")
+	Debug.notif("Gloomba K.O.!")
 	gloomba_kos += 1
 	Hotel.check_in(self)
 	gloomba_koed.emit(gloomba_kos)

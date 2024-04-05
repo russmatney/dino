@@ -27,15 +27,15 @@ func _on_body_entered(body: Node):
 			if delivery_count >= expected_delivery_count:
 				complete = true
 				void_satisfied.emit()
-				Hood.notif("VOID SATISFIED!")
+				Debug.notif("VOID SATISFIED!")
 				label.text = "[center]VOID SATISFIED[/center]"
 
 			# consume the orb
 			body.queue_free()
 		else:
 			if complete:
-				Hood.notif("VOID FULL!")
+				Debug.notif("VOID FULL!")
 			else:
-				Hood.notif("THIS IS NOT MY ORDER!")
+				Debug.notif("THIS IS NOT MY ORDER!")
 			# double reversed linear_velocity
 			body.apply_impulse(body.linear_velocity.normalized() * Vector2(-1, 1.1) * spike_impulse * 2, Vector2.ZERO)

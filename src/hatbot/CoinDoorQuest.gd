@@ -28,7 +28,6 @@ func _ready():
 
 func _on_collected(coin):
 	Log.pr("coin collected", coin.hotel_data())
-	# Hood.dev_notif("coin collected", coin.hotel_data())
 
 
 #########################################################
@@ -46,7 +45,7 @@ func _process(_delta):
 	if not complete:
 		if len(remaining_coins()) <= 0 and seen_coins:
 			complete = true
-			Hood.notif("All coins found!")
+			Debug.notif("All coins found!")
 			Log.pr("All coins found!")
 			door.open()
 			Jumbotron.jumbo_notif({
