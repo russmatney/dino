@@ -51,10 +51,9 @@ func start_game():
 	add_child.call_deferred(game_node)
 
 
-## setup_player_entity #################################333
+## set_player_entity #################################333
 
-# presumably from a menu somewhere
-func setup_player_entity(ent: DinoPlayerEntity):
+func set_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
 
 ## game level signals ##################################################3

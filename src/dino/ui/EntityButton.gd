@@ -6,6 +6,15 @@ var mode_entity: DinoModeEntity
 var player_entity: DinoPlayerEntity
 var weapon_entity: DinoWeaponEntity
 
+func to_printable():
+	return {
+		_self=str(self),
+		game_entity=game_entity,
+		mode_entity=mode_entity,
+		player_entity=player_entity,
+		weapon_entity=weapon_entity,
+	}
+
 @export var is_selected: bool :
 	set(v):
 		if v in [true, false]:
@@ -58,7 +67,7 @@ func setup():
 	if get_entity():
 		label.text = "[center]%s[/center]" % str(get_entity().get_display_name())
 		icon.texture_normal = get_entity().get_icon_texture()
-	else:
+	elif Debug.debugging:
 		Log.warn("no entity, cannot setup", self)
 
 ## focus #######################################
