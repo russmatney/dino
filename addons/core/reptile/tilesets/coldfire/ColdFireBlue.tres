@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dljr6o7d1o1oi"]
 
-[ext_resource type="Texture2D" uid="uid://b61wws46p8qqo" path="res://addons/core/reptile/assets/64x64coldfire_sheet.png" id="1_qqwg6"]
+[ext_resource type="Texture2D" uid="uid://b61wws46p8qqo" path="res://addons/core/reptile/assets/64x64coldfire_sheet.png" id="1_hn10g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n0ghi"]
-texture = ExtResource("1_qqwg6")
+texture = ExtResource("1_hn10g")
 texture_region_size = Vector2i(8, 8)
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
