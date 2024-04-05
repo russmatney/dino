@@ -1,18 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cdjhp8ggjgrlu"]
 
-[ext_resource path="res://src/ghosts/player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/ghosts/world/platforms/IndoorTiles.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/ghosts/world/platforms/GhostBlock.tscn" type="PackedScene" id=4]
+[ext_resource type="PackedScene" uid="uid://c84hv83g7pen0" path="res://src/ghosts/player/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/ghosts/world/platforms/IndoorTiles.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/ghosts/world/platforms/GhostBlock.tscn" id="4"]
 
 [node name="PlatformGym" type="Node2D"]
 
-[node name="IndoorTiles" parent="." instance=ExtResource( 3 )]
-tile_data = PackedInt32Array( 1048556, 0, 8, 1048557, 0, 10, 1048558, 0, 10, 1048559, 0, 10, 1048560, 0, 10, 1048561, 0, 10, 1048562, 0, 10, 1048563, 0, 10, 1048564, 0, 10, 1048565, 0, 10, 1048566, 0, 10, 1048567, 0, 11, 1114092, 0, 65544, 1114093, 0, 131081, 1114094, 0, 131081, 1114095, 0, 131081, 1114096, 0, 131081, 1114097, 0, 131081, 1114098, 0, 131081, 1114099, 0, 131081, 1114100, 0, 131081, 1114101, 0, 131081, 1114102, 0, 131081, 1114103, 0, 131083, 1179628, 0, 196616, 1179629, 0, 196617, 1179630, 0, 196617, 1179631, 0, 196617, 1179632, 0, 196617, 1179633, 0, 196617, 1179634, 0, 196617, 1179635, 0, 196617, 1179636, 0, 196617, 1179637, 0, 196618, 1179638, 0, 196617, 1179639, 0, 196619, 1245173, 0, 131072 )
+[node name="IndoorTiles" parent="." instance=ExtResource("3")]
+layer_0/tile_data = PackedInt32Array(1048556, 0, 8, 1048557, 0, 10, 1048558, 0, 10, 1048559, 0, 10, 1048560, 0, 10, 1048561, 0, 10, 1048562, 0, 10, 1048563, 0, 10, 1048564, 0, 10, 1048565, 0, 10, 1048566, 0, 10, 1048567, 0, 11, 1114092, 0, 65544, 1114093, 0, 131081, 1114094, 0, 131081, 1114095, 0, 131081, 1114096, 0, 131081, 1114097, 0, 131081, 1114098, 0, 131081, 1114099, 0, 131081, 1114100, 0, 131081, 1114101, 0, 131081, 1114102, 0, 131081, 1114103, 0, 131083, 1179628, 0, 196616, 1179629, 0, 196617, 1179630, 0, 196617, 1179631, 0, 196617, 1179632, 0, 196617, 1179633, 0, 196617, 1179634, 0, 196617, 1179635, 0, 196617, 1179636, 0, 196617, 1179637, 0, 196618, 1179638, 0, 196617, 1179639, 0, 196619, 1245173, 0, 131072, -65539, 0, 0, -3, 0, 1, 65532, 65536, 0, 131068, 0, 1, 196604, 0, 1, 262140, 0, 2, 327677, 0, 3, 393214, 65536, 3, 393215, 131072, 3, 327680, 131072, 3, 393218, 65536, 3, 327681, 196608, 3, 393219, 131072, 3, 393221, 196608, 3, 393220, 131072, 3, 327686, 65536, 3, 327688, 196608, 3, 327687, 131072, 3, 262153, 0, 3, 196618, 0, 3, 131083, 0, 2, 65547, 0, 0, 12, 0, 2, -65524, 196608, 0, -65525, 65536, 2, -131061, 196608, 0, -131062, 65536, 3, -196599, 196608, 3, -196601, 65536, 3, -196600, 131072, 3, -262138, 196608, 3, -262140, 131072, 3, -262139, 131072, 3, -262142, 131072, 3, -262141, 131072, 3, -262143, 131072, 3, -262144, 131072, 3, -196609, 65536, 0, -131073, 196608, 2, -131074, 65536, 3, 65533, 196608, 2)
 
-[node name="GhostBlock" parent="." instance=ExtResource( 4 )]
-position = Vector2( -1064, 792 )
+[node name="GhostBlock" parent="." instance=ExtResource("4")]
+position = Vector2(-1064, 792)
 
-[node name="Camera2D" parent="." instance=ExtResource( 2 )]
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -768, 584 )
+[node name="Player" parent="." instance=ExtResource("1")]
+position = Vector2(-768, 584)
+collision_mask = 3129

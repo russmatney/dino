@@ -7,7 +7,7 @@ class_name VaniaGame
 ## vars #######################################################
 
 var generator = VaniaGenerator.new()
-var VaniaRoomTransitions = "res://src/dino/modes/vania/VaniaRoomTransitions.gd"
+var VaniaRoomTransitions = "res://src/dino/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
 @onready var pcam: PhantomCamera2D = $%PCam

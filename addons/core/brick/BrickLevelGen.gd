@@ -260,7 +260,7 @@ func generate(opts={}):
 		seed=_seed,
 		tile_size=tile_size,
 		room_count=room_count,
-		room_defs_path=room_defs_path,
+		defs_path=room_defs_path,
 		show_color_rect=show_color_rect,
 		})
 

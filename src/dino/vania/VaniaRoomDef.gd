@@ -2,7 +2,7 @@
 extends RefCounted
 class_name VaniaRoomDef
 
-var base_scene_path = "res://src/dino/modes/vania/maps/VaniaRoom.tscn"
+var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
 
 # TODO rename to genre type or machine type?
 var room_type: DinoData.RoomType = DinoData.RoomType.SideScroller
@@ -228,9 +228,9 @@ func reapply_constraints():
 ## static #####################################################3
 
 static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
-	var entity_defs_path = "res://src/dino/modes/vania/entities.txt"
+	var entity_defs_path = "res://src/dino/vania/entities.txt"
 	var e_defs = GridParser.parse({defs_path=entity_defs_path})
-	var tile_defs_path = "res://src/dino/modes/vania/tiles.txt"
+	var tile_defs_path = "res://src/dino/vania/tiles.txt"
 	var t_defs = GridParser.parse({defs_path=tile_defs_path})
 
 	var defs: Array[VaniaRoomDef] = []

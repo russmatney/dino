@@ -1078,7 +1078,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/GrassFloorTiles16.tscn"
+						"value": "res://addons/core/reptile/tilemaps/SnowTiles16.tscn"
 					}
 				}
 			},
@@ -1149,7 +1149,7 @@
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/vania/Vania.tscn"
+						"value": "res://src/dino/modes/Vania.tscn"
 					}
 				}
 			}

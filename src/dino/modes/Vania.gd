@@ -2,7 +2,7 @@ extends Node2D
 
 ## vars ##################################################3
 
-var vania_game_scene = preload("res://src/dino/modes/vania/VaniaGame.tscn")
+var vania_game_scene = preload("res://src/dino/vania/VaniaGame.tscn")
 
 @export var player_entity: DinoPlayerEntity
 var game_node: Node2D

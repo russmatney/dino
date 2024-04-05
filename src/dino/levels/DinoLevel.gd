@@ -167,7 +167,7 @@ func regenerate(opts=null):
 		opts.merge({
 			tile_size=level_def.get_base_square_size(),
 			# could instead read in LevelDef/as resource, and pass as 'contents'
-			room_defs_path = level_def.get_def_path(),
+			defs_path = level_def.get_def_path(),
 			# .... maybe.
 			label_to_tilemap = {"Tile": {scene=level_def.get_tiles_scene()}},
 			})

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_aefuf")
 theme = ExtResource("2_iln4u")
-map_root_folder = "res://src/dino/modes/vania/maps/"
+map_root_folder = "res://src/dino/vania/maps/"
 in_game_cell_size = Vector2(320, 180)
 collectible_list = Array[Dictionary]([])
 assign_uid_to_rooms = false
