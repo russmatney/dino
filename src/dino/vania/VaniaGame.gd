@@ -29,6 +29,7 @@ func _ready():
 	add_custom_module.call_deferred(PassageAutomapper)
 
 	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
+	MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
 
 	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
@@ -43,7 +44,9 @@ func _ready():
 
 	set_process(false)
 
-	thread_room_gen({room_inputs=U.repeat_fn(RoomInputs.random_room, 5)})
+	thread_room_generation({
+		room_inputs=U.repeat_fn(RoomInputs.random_room, 2)
+		})
 
 func on_finished_initial_room_gen():
 	clear_load_playground()
@@ -73,16 +76,37 @@ var cam_follow_groups = [
 
 func on_room_loaded():
 	Log.pr("room entered", MetSys.get_current_room_instance())
+	set_cam_limits()
 	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
 
 	# if pcam != null and map.tilemap != null:
 	# 	pcam.set_limit_node(coll)
 
-	if pcam != null and map != null:
-		for ch in map.get_children():
-			if cam_follow_groups.any(func(grp): return ch.is_in_group(grp)):
-				pcam.append_follow_group_node(ch)
-				ch.tree_exiting.connect(func(): pcam.erase_follow_group_node(ch))
+	# if pcam != null and map != null:
+	# 	for ch in map.get_children():
+	# 		if cam_follow_groups.any(func(grp): return ch.is_in_group(grp)):
+	# 			pcam.append_follow_group_node(ch)
+	# 			ch.tree_exiting.connect(func(): pcam.erase_follow_group_node(ch))
+
+func on_cell_changed(cell: Vector3i):
+	Log.pr("cell changed!", cell)
+	set_cam_limits()
+
+func set_cam_limits():
+	var rd = current_room_def()
+	if not rd:
+		return
+
+	var cell = MetSys.get_current_coords()
+	var rect = rd.get_map_cell_rect(cell)
+
+	Log.pr("setting limits with cell:", cell, "rect", rect)
+
+	pcam.set_limit(SIDE_LEFT, rect.position.x)
+	pcam.set_limit(SIDE_TOP, rect.position.y)
+	pcam.set_limit(SIDE_RIGHT, rect.end.x)
+	pcam.set_limit(SIDE_BOTTOM, rect.end.y)
+
 
 func on_player_ready(p):
 	pcam.append_follow_group_node(p)
@@ -91,7 +115,7 @@ func on_player_ready(p):
 
 ## room gen #######################################################
 
-func thread_room_gen(opts):
+func thread_room_generation(opts):
 	if generating:
 		return
 
@@ -169,7 +193,6 @@ func remove_room(count=1):
 			continue
 		other_room_defs.append(rd)
 
-	# TODO when removing, don't leave orphans.... unless they're fun to work with?
 	var room_defs_to_remove: Array[VaniaRoomDef] = []
 	other_room_defs.reverse() # prefer to remove the latest room for now
 	for rd in other_room_defs:
