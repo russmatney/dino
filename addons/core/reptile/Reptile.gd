@@ -233,6 +233,15 @@ static func to_rect2i(opts):
 
 ## tilemap borders #####################################################################
 
+static func rect_to_collision_shape(rect: ):
+	var shape = RectangleShape2D.new()
+	shape.size = rect.size
+	var coll = CollisionShape2D.new()
+	coll.name = "CollisionShape2D"
+	coll.set_shape(shape)
+	coll.position = rect.position + (rect.size / 2.0)
+	return coll
+
 static func to_area2D(tilemap=null, rect=null):
 	# naive! TODO impl to match the tiles, not just the rect
 	if rect == null:
@@ -246,14 +255,7 @@ static func to_area2D(tilemap=null, rect=null):
 		rect.position = (tilemap.map_to_local(rect.position) - half_a_tile) * tilemap.scale
 		rect.size = (tilemap.map_to_local(rect.size) - half_a_tile) * tilemap.scale
 
-	# shape
-	var shape = RectangleShape2D.new()
-	shape.size = rect.size
-
-	# collision shape
-	var coll = CollisionShape2D.new()
-	coll.set_shape(shape)
-	coll.position = rect.position + (rect.size / 2.0)
+	var coll = rect_to_collision_shape(rect)
 
 	# area2D
 	var area = Area2D.new()

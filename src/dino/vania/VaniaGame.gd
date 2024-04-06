@@ -66,15 +66,27 @@ func _process(_delta: float) -> void:
 
 ## on load/ready #######################################################
 
+var cam_follow_groups = [
+	"enemies",
+	"bosses",
+	]
+
 func on_room_loaded():
 	Log.pr("room entered", MetSys.get_current_room_instance())
 	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
 
-	if pcam != null and map.tilemap != null:
-		pcam.set_limit_node(map.tilemap)
+	# if pcam != null and map.tilemap != null:
+	# 	pcam.set_limit_node(coll)
+
+	if pcam != null and map != null:
+		for ch in map.get_children():
+			if cam_follow_groups.any(func(grp): return ch.is_in_group(grp)):
+				pcam.append_follow_group_node(ch)
+				ch.tree_exiting.connect(func(): pcam.erase_follow_group_node(ch))
 
 func on_player_ready(p):
-	pcam.set_follow_target_node(p)
+	pcam.append_follow_group_node(p)
+	p.tree_exiting.connect(func(): pcam.erase_follow_group_node(p))
 	# pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
 
 ## room gen #######################################################
