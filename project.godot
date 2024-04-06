@@ -62,6 +62,7 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 report/assert/strict_number_type_compare=false
 ui/toolbar/run_overall=true
 report/godot/push_error=true
+report/verbose_orphans=false
 
 [global]
 
