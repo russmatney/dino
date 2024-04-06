@@ -94,7 +94,7 @@ var spike_impulse = 1000
 
 func start_spike(ingredient_type):
 	spiking_ingredient_type = ingredient_type
-	Cam.start_slowmo("spike_slowmo", 0.1)
+	Juice.start_slowmo("spike_slowmo", 0.1)
 	Log.pr("start spike ingredient_type:", ingredient_type)
 	spiking = true
 
@@ -116,7 +116,7 @@ func do_spike(ingredient_type):
 		item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
 		DJZ.play(DJZ.S.fire)
 
-	Cam.stop_slowmo("spike_slowmo")
+	Juice.stop_slowmo("spike_slowmo")
 
 	await get_tree().create_timer(cooldown).timeout
 	# be sure to remove the collision exception (if it exists), or we can't pick it up again

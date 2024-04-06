@@ -24,11 +24,11 @@ signal player_ready(player)
 
 ## seeding ##########################################################
 
-var egg: int
+var _seed: int
 
 func reseed():
-	egg = randi()
-	seed(egg)
+	_seed = randi()
+	seed(_seed)
 
 ## ready ##########################################################
 

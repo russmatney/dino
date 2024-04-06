@@ -15,9 +15,9 @@ var game_node: Node2D
 func to_printable():
 	if player_entity != null:
 		return {
-			egg=Dino.egg,
+			_seed=Dino._seed,
 			player=player_entity.get_display_name(),}
-	return {egg=Dino.egg}
+	return {_seed=Dino._seed}
 
 ## ready ##################################################3
 

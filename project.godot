@@ -40,6 +40,7 @@ Dino="*res://src/dino/Dino.gd"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 InputHelper="*res://addons/input_helper/input_helper.gd"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
+Juice="*res://addons/core/Juice.gd"
 
 [display]
 

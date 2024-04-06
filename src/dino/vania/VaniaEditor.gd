@@ -78,7 +78,7 @@ func update_room_def():
 	if not current_room_def:
 		return
 	Log.pr("current rd", current_room_def)
-	seed_label.text = "seed: %s" % Dino.egg
+	seed_label.text = "seed: %s" % Dino._seed
 	room_count_label.text = "rooms: %s" % len(game.room_defs)
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
 	neighbors_label.text = "ngbrs: %s" % Log.to_printable([current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file())])
