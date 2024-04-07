@@ -287,15 +287,19 @@ func add_entities():
 
 func build_tilemap_data():
 	var tmap_data = {}
-	for cell in Reptile.cells_in_rect(tilemap.get_used_rect()):
-		tmap_data[cell] = null
-	for cell in tilemap.get_used_cells(0):
-		tmap_data[cell] = ["Tile"]
+
+	for cell in room_def.local_cells:
+		var rect = Reptile.rect_to_local_rect(tilemap, room_def.get_local_rect(Vector2i(cell.x, cell.y)))
+
+		for t_cell in Reptile.cells_in_rect(rect):
+			tmap_data[t_cell] = null
+		for t_cell in tilemap.get_used_cells(0):
+			tmap_data[t_cell] = ["Tile"]
 	return tmap_data
 
 func possible_positions(tmap_data, entity_shape):
 	var positions = []
-	var rect = Reptile.rect_to_local_rect(tilemap, Rect2(Vector2(), room_def.get_size()))
+	var rect = Reptile.rect_to_local_rect(tilemap, room_def.get_rect())
 	for coord in tmap_data.keys():
 		# skip all but innermost border
 		if is_border_coord(rect, coord, {offset=1}):
@@ -305,6 +309,7 @@ func possible_positions(tmap_data, entity_shape):
 	return positions
 
 func is_fit(coord: Vector2i, tmap_data, entity_shape):
+	# TODO handle required empty vs wildcard spaces
 	for e_coord in entity_shape.keys():
 		var e_val = entity_shape.get(e_coord)
 		var t_val = tmap_data.get(coord + e_coord)
