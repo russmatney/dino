@@ -31,8 +31,6 @@ func _ready():
 	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 	MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
 
-	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
-
 	Dino.player_ready.connect(on_player_ready)
 
 	finished_initial_room_gen.connect(on_finished_initial_room_gen, CONNECT_ONE_SHOT)
@@ -44,14 +42,32 @@ func _ready():
 
 	set_process(false)
 
-	thread_room_generation({
-		room_inputs=U.repeat_fn(RoomInputs.random_room, 2)
-		})
+	var inputs = [
+		{
+			RoomInputs.HAS_PLAYER: {},
+			RoomInputs.HAS_CANDLE: {},
+			RoomInputs.IN_SMALL_ROOM: {},
+			}
+		]
+	inputs.append_array(U.repeat_fn(RoomInputs.random_room, 7))
+
+	thread_room_generation({room_inputs=inputs})
 
 func on_finished_initial_room_gen():
-	clear_load_playground()
-	load_initial_room()
-	setup_player()
+	var p = Dino.current_player_node()
+	if p != null and is_instance_valid(p):
+		pcam.erase_follow_target_node()
+		p.queue_free()
+		clear_load_playground()
+		await get_tree().create_timer(0.4).timeout
+		# TODO fun transition
+	(func():
+		# we don't care for this until we load the first proper level
+		get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
+
+		load_initial_room()
+		setup_player()
+		).call_deferred()
 
 func clear_load_playground():
 	playground.queue_free()
@@ -100,17 +116,18 @@ func set_cam_limits():
 	var cell = MetSys.get_current_coords()
 	var rect = rd.get_map_cell_rect(cell)
 
-	Log.pr("setting limits with cell:", cell, "rect", rect)
+	# Log.pr("setting limits with cell:", cell, "rect", rect)
 
-	pcam.set_limit(SIDE_LEFT, rect.position.x)
-	pcam.set_limit(SIDE_TOP, rect.position.y)
-	pcam.set_limit(SIDE_RIGHT, rect.end.x)
-	pcam.set_limit(SIDE_BOTTOM, rect.end.y)
+	# pcam.set_limit(SIDE_LEFT, rect.position.x)
+	# pcam.set_limit(SIDE_TOP, rect.position.y)
+	# pcam.set_limit(SIDE_RIGHT, rect.end.x)
+	# pcam.set_limit(SIDE_BOTTOM, rect.end.y)
 
 
 func on_player_ready(p):
-	pcam.append_follow_group_node(p)
-	p.tree_exiting.connect(func(): pcam.erase_follow_group_node(p))
+	pcam.set_follow_target_node(p)
+	# pcam.append_follow_group_node(p)
+	# p.tree_exiting.connect(func(): pcam.erase_follow_group_node(p))
 	# pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
 
 ## room gen #######################################################
@@ -219,9 +236,9 @@ func load_initial_room():
 		if rooms.is_empty():
 			Log.warn("No room with player entity! Picking random start room")
 			rooms = room_defs
-		var p = rooms.pick_random().room_path
-		load_room(p, {setup=func(room):
-			room.set_room_def(get_room_def(p))})
+		var rpath = rooms.pick_random().room_path
+		load_room(rpath, {setup=func(room):
+			room.set_room_def(get_room_def(rpath))})
 
 func reload_current_room():
 	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)
@@ -241,7 +258,7 @@ func setup_player():
 
 func _set_player_position():
 	var p = Dino.current_player_node()
-	if p:
+	if p and is_instance_valid(p):
 		MetSys.set_player_position(p.position)
 
 ## room defs #######################################################

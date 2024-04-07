@@ -37,7 +37,7 @@ func build_room(def: VaniaRoomDef, opts={}):
 	setup_tileset()
 	setup_walls_and_doors(opts)
 	add_background_tiles()
-	add_tile_chunks()
+	# add_tile_chunks()
 	add_entities()
 
 ## setup tilemaps ##############################################################

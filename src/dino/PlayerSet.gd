@@ -129,6 +129,7 @@ func get_spawn_point_and_coords(opts):
 func get_spawn_point(opts={}):
 	var level_node = opts.get("level_node", Navi)
 	var psp = U.first_node_in_group(level_node, "player_spawn_points")
+	Log.pr("spawning player, found spawn point", psp)
 	if psp:
 		return psp
 	var elevator = U.first_node_in_group(level_node, "elevator")
