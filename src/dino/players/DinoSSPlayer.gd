@@ -24,6 +24,7 @@ func _ready():
 		add_weapon(DinoWeaponEntityIds.GUN)
 		add_weapon(DinoWeaponEntityIds.BOOMERANG)
 		has_double_jump = true
+		has_jetpack = true
 
 	super._ready()
 
