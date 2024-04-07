@@ -313,6 +313,8 @@ func is_fit(coord: Vector2i, tmap_data, entity_shape):
 	for e_coord in entity_shape.keys():
 		var e_val = entity_shape.get(e_coord)
 		var t_val = tmap_data.get(coord + e_coord)
+		if not tmap_data.has(coord + e_coord): # tile does not exist (bottom of map)
+			return false
 		if e_val != t_val:
 			return false
 	return true
