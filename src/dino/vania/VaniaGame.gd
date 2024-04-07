@@ -113,10 +113,11 @@ func set_cam_limits():
 	if not rd:
 		return
 
-	var cell = MetSys.get_current_coords()
-	var rect = rd.get_map_cell_rect(cell)
+	# var cell = MetSys.get_current_coords()
+	# var rect = rd.get_map_cell_rect(cell)
+	# var rect = rd.get_rect()
 
-	# Log.pr("setting limits with cell:", cell, "rect", rect)
+	# Log.pr("setting limits with rect:", rect)
 
 	# pcam.set_limit(SIDE_LEFT, rect.position.x)
 	# pcam.set_limit(SIDE_TOP, rect.position.y)

@@ -7,6 +7,14 @@
 [node name="VaniaRoom" type="Node2D"]
 script = ExtResource("1_x4efj")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -765.0
+offset_top = -601.0
+offset_right = 2746.0
+offset_bottom = 1402.0
+color = Color(0.521569, 0.305882, 0.596078, 1)
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_r8bn3")
 format = 2
@@ -21,3 +29,6 @@ format = 2
 layer_0/name = "base"
 
 [node name="RoomInstance" parent="." instance=ExtResource("2_1wsgr")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.533333, 0.533333, 0.533333, 1)

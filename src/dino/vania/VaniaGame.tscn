@@ -18,7 +18,7 @@
 
 [sub_resource type="Resource" id="Resource_u6trr"]
 script = ExtResource("4_166p3")
-duration = 0.4
+duration = 0.7
 transition = 4
 ease = 3
 
@@ -30,8 +30,8 @@ content_margin_right = 16.0
 script = ExtResource("1_38knr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
-limit_smoothed = true
+zoom = Vector2(3.2, 3.2)
+editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("2_b3w6g")
@@ -41,20 +41,20 @@ unique_name_in_owner = true
 script = ExtResource("3_ie4l0")
 priority_override = false
 priority = 0
-zoom = Vector2(3, 3)
-follow_mode = 2
+zoom = Vector2(3.2, 3.2)
+follow_mode = 1
 follow_target = NodePath("")
-follow_parameters/target_offset = Vector2(0, 0)
-follow_parameters/damping = false
+follow_parameters/damping = true
+follow_parameters/damping_value = 6.61
 frame_preview = true
 pixel_perfect = true
-limit/draw_limits = false
+limit/draw_limits = true
 limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
 limit/bottom = 10000000
 limit/limit_node_target = NodePath("")
-limit/smoothed = false
+limit/smoothed = true
 tween_parameters = SubResource("Resource_u6trr")
 tween_on_load = true
 inactive_update_mode = 0

@@ -145,6 +145,9 @@ func get_size() -> Vector2:
 		calc_cell_meta()
 	return Vector2(max_map_cell - min_map_cell + Vector2i.ONE) * MetSys.settings.in_game_cell_size
 
+func get_rect() -> Rect2:
+	return Rect2(Vector2(), get_size())
+
 func map_cell_to_local_cell(cell: Vector3i) -> Vector2i:
 	if (min_map_cell == Vector2i.MAX or max_map_cell == Vector2i.MIN):
 		calc_cell_meta()

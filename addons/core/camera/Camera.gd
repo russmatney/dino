@@ -43,6 +43,9 @@ func cam_window_rect():
 
 	return viewportRectGlobal
 
+    # does this work?
+	# https://www.reddit.com/r/godot/comments/rzmfh3/is_there_a_way_to_get_the_rect2_of_the_camera/
+	# return get_canvas_transform().affine_inverse().basis_xform(get_viewport_rect().size)
 
 ## request camera #############################################################
 
