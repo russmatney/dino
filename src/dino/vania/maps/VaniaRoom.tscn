@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhjv3h6oxgj4"]
+[gd_scene load_steps=5 format=3 uid="uid://bhjv3h6oxgj4"]
 
 [ext_resource type="TileSet" uid="uid://dh4wv4l8frtl7" path="res://addons/core/reptile/tilesets/GildedKingdomTiles8.tres" id="1_r8bn3"]
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_1wsgr"]
+[ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/ui/spaceship_background.png" id="2_dw7vg"]
 
 [node name="VaniaRoom" type="Node2D"]
 script = ExtResource("1_x4efj")
@@ -14,6 +15,13 @@ offset_top = -601.0
 offset_right = 2746.0
 offset_bottom = 1402.0
 color = Color(0.521569, 0.305882, 0.596078, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 511.0
+offset_bottom = 288.0
+texture = ExtResource("2_dw7vg")
+stretch_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("1_r8bn3")
