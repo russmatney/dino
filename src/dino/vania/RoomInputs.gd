@@ -1,7 +1,10 @@
 extends RefCounted
 class_name RoomInputs
 
-static var all_entities = ["Blob", "Enemy", "Leaf", "Target", "Candle", "OneWayPlatform"]
+static var all_entities = [
+	"Blob", "Enemy", "Leaf", "Target", "Candle", "OneWayPlatform",
+	"Void", "CookingPot", "Monstroar", "Beefstronaut"
+	]
 
 static var all_tilemap_scenes = [
 		# "res://addons/core/reptile/tilemaps/GrassTiles16.tscn",
