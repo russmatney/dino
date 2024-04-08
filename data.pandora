@@ -1009,6 +1009,10 @@
 						"type": "string",
 						"value": "Classic"
 					},
+					"menu": {
+						"type": "resource",
+						"value": "res://src/dino/modes/ClassicMainMenu.tscn"
+					},
 					"root_scene": {
 						"type": "resource",
 						"value": "res://src/dino/modes/Classic.tscn"
@@ -1146,6 +1150,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Vania"
+					},
+					"menu": {
+						"type": "resource",
+						"value": "res://src/dino/modes/VaniaMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",

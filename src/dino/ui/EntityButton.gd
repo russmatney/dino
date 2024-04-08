@@ -19,6 +19,8 @@ func to_printable():
 	set(v):
 		if v in [true, false]:
 			is_selected = v
+			if not is_node_ready() and not Engine.is_editor_hint():
+				return
 			update_selected()
 
 @onready var label = $%Label
@@ -34,10 +36,31 @@ func _ready():
 			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 
 	icon.pressed.connect(func(): icon_pressed.emit())
-	icon.focus_entered.connect(on_focused)
-	icon.focus_exited.connect(on_unfocused)
+
+	icon.focus_entered.connect(_on_focus_entered)
+	icon.focus_exited.connect(_on_focus_exited)
+	icon.mouse_entered.connect(_on_mouse_entered)
+	icon.mouse_exited.connect(_on_mouse_exited)
 
 	setup()
+
+func _on_focus_entered():
+	Log.pr("_on_focus_entered")
+	U.update_stylebox(self, "panel", func(box): box.border_color = Color.AQUAMARINE)
+
+func _on_focus_exited():
+	Log.pr("_on_focus_exited")
+	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
+
+func _on_mouse_entered():
+	Log.pr("_on_mouse_entered")
+	U.update_stylebox(self, "panel", func(box): box.border_color = Color.PERU)
+
+func _on_mouse_exited():
+	Log.pr("_on_mouse_exited")
+	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
+
+## get/set_entity #######################################
 
 func get_entity():
 	if mode_entity:
@@ -74,12 +97,6 @@ func setup():
 
 func set_focus():
 	icon.grab_focus()
-
-func on_focused():
-	U.update_stylebox(self, "panel", func(box): box.border_color = Color.AQUAMARINE)
-
-func on_unfocused():
-	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
 
 ## selected #######################################
 
