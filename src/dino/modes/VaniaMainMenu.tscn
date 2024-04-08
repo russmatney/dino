@@ -65,17 +65,15 @@ columns = 5
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="ButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="ButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_c03oy")
 
-[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2" instance=ExtResource("4_ckk60")]
+[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ckk60")]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ButtonList")
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

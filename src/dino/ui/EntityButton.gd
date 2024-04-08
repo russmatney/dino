@@ -45,19 +45,15 @@ func _ready():
 	setup()
 
 func _on_focus_entered():
-	Log.pr("_on_focus_entered")
 	U.update_stylebox(self, "panel", func(box): box.border_color = Color.AQUAMARINE)
 
 func _on_focus_exited():
-	Log.pr("_on_focus_exited")
 	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
 
 func _on_mouse_entered():
-	Log.pr("_on_mouse_entered")
 	U.update_stylebox(self, "panel", func(box): box.border_color = Color.PERU)
 
 func _on_mouse_exited():
-	Log.pr("_on_mouse_exited")
 	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
 
 ## get/set_entity #######################################
