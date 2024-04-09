@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://br44ctbmsst5r"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bxr173oof70cm"]
 
 [ext_resource type="Shader" path="res://src/shaders/ColorSwapShader.gdshader" id="1_bsre7"]
 

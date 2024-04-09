@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/entities/blobs/Blob.tscn" id="4_o7sig"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="5_ox6xd"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="6_fpyyg"]
-[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="7_332f5"]
+[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/dino/platforms/OneWayPlatform.tscn" id="7_332f5"]
 
 [node name="PlayerGym" type="Node"]
 script = ExtResource("1_jdnrv")

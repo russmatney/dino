@@ -7,7 +7,7 @@ path="res://.godot/imported/runner_leaf_friend.aseprite-fe013adcfee067d27d2de6b3
 
 [deps]
 
-source_file="res://src/dino/entities/leaves/runner_leaf_friend.aseprite"
+source_file="res://src/woods/runner_leaf_friend.aseprite"
 dest_files=["res://.godot/imported/runner_leaf_friend.aseprite-fe013adcfee067d27d2de6b30c794e72.res"]
 
 [params]

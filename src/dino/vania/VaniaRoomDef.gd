@@ -60,7 +60,7 @@ var label_to_entity = {
 	"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
 
 	# platforms/walls
-	"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
+	"OneWayPlatform": {scene=load("res://src/dino/platforms/OneWayPlatform.tscn"),
 		# resize to match tile_size
 		setup=func(p, opts):
 		p.max_width = opts.tile_size * 6

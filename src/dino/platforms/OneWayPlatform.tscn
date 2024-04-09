@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dspqmcg2iysem"]
 
-[ext_resource type="Script" path="res://src/spike/zones/OneWayPlatform.gd" id="1_8tqpp"]
+[ext_resource type="Script" path="res://src/dino/platforms/OneWayPlatform.gd" id="1_8tqpp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_metpu"]
 resource_local_to_scene = true

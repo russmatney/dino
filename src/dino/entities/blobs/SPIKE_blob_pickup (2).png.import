@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dh3tktny27ro0"
-path="res://.godot/imported/SPIKE_blob_pickup.png-6c6cbd4c693494c23e86f35d1a82921a.ctex"
+path="res://.godot/imported/SPIKE_blob_pickup (2).png-10c9db681ff5b19b81a602390d9ba702.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/spike/player/SPIKE_blob_pickup.png"
-dest_files=["res://.godot/imported/SPIKE_blob_pickup.png-6c6cbd4c693494c23e86f35d1a82921a.ctex"]
+source_file="res://src/dino/entities/blobs/SPIKE_blob_pickup (2).png"
+dest_files=["res://.godot/imported/SPIKE_blob_pickup (2).png-10c9db681ff5b19b81a602390d9ba702.ctex"]
 
 [params]
 

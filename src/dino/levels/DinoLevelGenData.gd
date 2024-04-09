@@ -10,19 +10,19 @@ static func label_to_entity(opts):
 		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 
 		# bosses
-		"Boss": {scene=load("res://src/hatbot/bosses/Monstroar.tscn")},
-		"Monstroar": {scene=load("res://src/hatbot/bosses/Monstroar.tscn")},
-		"Beefstronaut": {scene=load("res://src/hatbot/bosses/Beefstronaut.tscn")},
+		"Boss": {scene=load("res://src/dino/entities/bosses/Monstroar.tscn")},
+		"Monstroar": {scene=load("res://src/dino/entities/bosses/Monstroar.tscn")},
+		"Beefstronaut": {scene=load("res://src/dino/entities/bosses/Beefstronaut.tscn")},
 
 		# enemies
-		"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
+		"Blob": {scene=load("res://src/dino/entities/blobs/Blob.tscn")},
 		"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
 
 		# pickups
-		"Leaf": {scene=load("res://src/dino/entities/leaves/entities/Leaf.tscn")},
+		"Leaf": {scene=load("res://src/dino/entities/leaves/Leaf.tscn")},
 
 		# entities
-		"Candle": {scene=load("res://src/hatbot/entities/Candle.tscn")},
+		"Candle": {scene=load("res://src/dino/entities/checkpoints/Candle.tscn")},
 		"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 			setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 			},
@@ -34,7 +34,7 @@ static func label_to_entity(opts):
 			},
 
 		# platforms/walls
-		"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
+		"OneWayPlatform": {scene=load("res://src/dino/platforms/OneWayPlatform.tscn"),
 			# resize to match tile_size
 			setup=func(p):
 			p.max_width = opts.tile_size

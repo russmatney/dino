@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfj7rwatv14ft"]
+
+[sub_resource type="GDScript" id="GDScript_a03j3"]
+script/source = "@tool
+extends HBoxContainer
+
+var pickups
+var hat_scene = preload(\"res://src/gunner/hud/PickupHat.tscn\")
+var body_scene = preload(\"res://src/gunner/hud/PickupBody.tscn\")
+
+
+func _ready():
+	if Engine.is_editor_hint():
+		update_pickups([\"hat\", \"body\", \"hat\"])
+
+
+func x_pos(i):
+	return 11 + i * 25
+
+
+func update_pickups(ps = pickups):
+	pickups = ps
+	if not ps == null:
+		for c in get_children():
+			c.queue_free()
+
+		for i in range(ps.size()):
+			var p = ps[i]
+			var inst
+			match p:
+				\"hat\":
+					inst = hat_scene.instantiate()
+					inst.position.y = 19
+				\"body\":
+					inst = body_scene.instantiate()
+					inst.position.y = -2
+				_:
+					Log.pr(\"unknown pickup, falling back checked hat scene\")
+					inst = hat_scene.instantiate()
+					inst.position.y = 19
+			inst.position.x = x_pos(i)
+
+			add_child(inst)
+"
+
+[node name="Pickups" type="HBoxContainer"]
+custom_minimum_size = Vector2(50, 30)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -452.0
+offset_bottom = -270.0
+script = SubResource("GDScript_a03j3")

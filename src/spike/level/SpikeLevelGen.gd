@@ -1,7 +1,7 @@
 @tool
 extends BrickLevelGen
 
-var portal_edges_scene = preload("res://src/spike/zones/PortalEdges.tscn")
+var portal_edges_scene = preload("res://src/dino/platforms/PortalEdges.tscn")
 
 ## get room opts #########################################
 
@@ -50,9 +50,9 @@ func get_room_opts(opts):
 			"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 				setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 				},
-			"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
+			"Blob": {scene=load("res://src/dino/entities/blobs/Blob.tscn")},
 			"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
-			"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
+			"OneWayPlatform": {scene=load("res://src/dino/platforms/OneWayPlatform.tscn"),
 				# resize to match tile_size
 				setup=func(p):
 				p.max_width = opts.tile_size

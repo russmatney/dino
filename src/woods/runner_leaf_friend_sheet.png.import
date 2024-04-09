@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://src/dino/entities/leaves/runner_leaf_friend_sheet.png"
+source_file="res://src/woods/runner_leaf_friend_sheet.png"
 dest_files=["res://.godot/imported/runner_leaf_friend_sheet.png-195d51ee3c72e4d682856c6f74948cea.ctex"]
 
 [params]

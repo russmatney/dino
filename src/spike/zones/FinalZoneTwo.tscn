@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="5_0xgs0"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/entities/blobs/Blob.tscn" id="6_jda8y"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="7_nryjq"]
-[ext_resource type="PackedScene" uid="uid://xjxn23dvi1b6" path="res://src/spike/zones/PortalEdges.tscn" id="8_gjo7p"]
-[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/spike/zones/OneWayPlatform.tscn" id="9_ow4ms"]
+[ext_resource type="PackedScene" uid="uid://xjxn23dvi1b6" path="res://src/dino/platforms/PortalEdges.tscn" id="8_gjo7p"]
+[ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/dino/platforms/OneWayPlatform.tscn" id="9_ow4ms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwtup"]
 size = Vector2(1016, 64)

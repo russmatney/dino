@@ -1,40 +1,40 @@
 [gd_scene load_steps=14 format=3 uid="uid://cneo2kpbyfao5"]
 
-[ext_resource type="Script" path="res://src/pluggs/entities/ArcadeMachine.gd" id="1_a0slm"]
-[ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/pluggs/plug/Socket.tscn" id="2_57gb2"]
-[ext_resource type="Texture2D" uid="uid://bq21u7y3lvxrl" path="res://src/pluggs/entities/arcade_machine_01.png" id="2_nl2ir"]
-[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="4_ls151"]
+[ext_resource type="Script" path="res://src/dino/entities/arcadeMachine/ArcadeMachine.gd" id="1_bie8v"]
+[ext_resource type="Texture2D" uid="uid://bq21u7y3lvxrl" path="res://src/dino/entities/arcadeMachine/arcade_machine_01.png" id="2_csdr2"]
+[ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/pluggs/plug/Socket.tscn" id="3_0nyao"]
+[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="4_xluan"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qbtk"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(96, 192, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yts4k"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bg6f3"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svwp3"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dt43l"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(0, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hpw8q"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(96, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_svadm"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(192, 96, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0wxb"]
-atlas = ExtResource("2_nl2ir")
+atlas = ExtResource("2_csdr2")
 region = Rect2(0, 192, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d4odx"]
@@ -75,7 +75,7 @@ animations = [{
 }]
 
 [node name="ArcadeMachine" type="Node2D" groups=["arcade_machine"]]
-script = ExtResource("1_a0slm")
+script = ExtResource("1_bie8v")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -100,10 +100,10 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://src/pluggs/assets/arcade_machine_01.aseprite"
 }
 
-[node name="Socket" parent="." instance=ExtResource("2_57gb2")]
+[node name="Socket" parent="." instance=ExtResource("3_0nyao")]
 position = Vector2(0, -11)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -32)
 shadow_enabled = true
-texture = ExtResource("4_ls151")
+texture = ExtResource("4_xluan")
