@@ -37,7 +37,7 @@ var label_to_entity = {
 
 	# enemies
 	"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
-	"Enemy": {scene=load("res://src/gunner/enemies/EnemyRobot.tscn")},
+	"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
 
 	# pickups
 	"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},

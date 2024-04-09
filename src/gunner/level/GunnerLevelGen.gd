@@ -24,7 +24,7 @@ func get_room_opts(opts):
 					t.position += Vector2.RIGHT * opts.tile_size / 2.0
 					t.position += Vector2.DOWN * opts.tile_size / 2.0
 					},
-				"Enemy": {scene=load("res://src/gunner/enemies/EnemyRobot.tscn")},
+				"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
 			}})
 
 	return agg.room_opts

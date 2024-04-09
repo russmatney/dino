@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://b462pe2po5a1c"]
 
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/tower/assets/greyhat_frames.tres" id="1"]
-[ext_resource type="Script" path="res://src/gunner/enemies/EnemyRobot.gd" id="4"]
-[ext_resource type="Script" path="res://src/gunner/enemies/Idle.gd" id="5"]
+[ext_resource type="Script" path="res://src/dino/entities/enemyRobots/EnemyRobot.gd" id="4"]
+[ext_resource type="Script" path="res://src/dino/entities/enemyRobots/Idle.gd" id="5"]
 [ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="6"]
-[ext_resource type="Script" path="res://src/gunner/enemies/Dead.gd" id="7"]
-[ext_resource type="Script" path="res://src/gunner/enemies/Walk.gd" id="8"]
-[ext_resource type="Script" path="res://src/gunner/enemies/Knockback.gd" id="9"]
-[ext_resource type="Script" path="res://src/gunner/enemies/Attack.gd" id="10"]
+[ext_resource type="Script" path="res://src/dino/entities/enemyRobots/Dead.gd" id="7"]
+[ext_resource type="Script" path="res://src/dino/entities/enemyRobots/Walk.gd" id="8"]
+[ext_resource type="Script" path="res://src/dino/entities/enemyRobots/Knockback.gd" id="9"]
+[ext_resource type="Script" path="res://src/dino/entities/enemyRobots/Attack.gd" id="10"]
 
 [sub_resource type="CapsuleShape2D" id="4"]
 radius = 15.5
