@@ -46,10 +46,11 @@ func _ready():
 		{
 			RoomInputs.HAS_PLAYER: {},
 			RoomInputs.HAS_CANDLE: {},
+			RoomInputs.HAS_CHECKPOINT: {},
 			RoomInputs.IN_SMALL_ROOM: {},
 			}
 		]
-	inputs.append_array(U.repeat_fn(RoomInputs.random_room, 7))
+	inputs.append_array(U.repeat_fn(RoomInputs.random_room, 2))
 
 	thread_room_generation({room_inputs=inputs})
 

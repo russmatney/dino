@@ -9,6 +9,7 @@ B = Beefstronaut
 b = Blob
 c = Candle
 C = CookingPot
+h = Checkpoint
 e = Enemy
 l = Leaf
 M = Monstroar
@@ -43,6 +44,13 @@ name Beefstronaut room
 .B.
 ...
 xxx
+
+name Checkpoint
+
+....
+....
+.h..
+xxxx
 
 name Candle
 

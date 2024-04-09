@@ -81,6 +81,7 @@ static var all_constraints = [
 	HAS_VOID,
 	HAS_PLAYER,
 	HAS_CANDLE,
+	HAS_CHECKPOINT,
 	]
 
 var entities
@@ -225,6 +226,7 @@ static func get_constraint_data(cons_key, opts={}):
 		HAS_TARGET: return has_entity("Target", opts)
 		HAS_LEAF: return has_entity("Leaf", opts)
 		HAS_CANDLE: return has_entity("Candle", opts)
+		HAS_CHECKPOINT: return has_entity("Checkpoint", opts)
 		HAS_PLAYER: return has_entity("Player", opts)
 		HAS_COOKING_POT: return has_entity("CookingPot", opts)
 		HAS_BLOB: return has_entity("Blob", opts)
@@ -360,6 +362,7 @@ const HAS_BLOB = "has_blob"
 const HAS_VOID = "has_void"
 const HAS_PLAYER = "has_player"
 const HAS_CANDLE = "has_candle"
+const HAS_CHECKPOINT = "has_checkpoint"
 
 static func has_entity(ent, opts={}):
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})

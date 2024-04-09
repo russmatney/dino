@@ -43,6 +43,7 @@ var label_to_entity = {
 	"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
 
 	# entities
+	"Checkpoint": {scene=load("res://src/mountain/checkpoints/LogCheckpoint.tscn")},
 	"Candle": {scene=load("res://src/hatbot/entities/Candle.tscn")},
 	"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
 		setup=func(p, opts): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
