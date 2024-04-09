@@ -1,6 +1,6 @@
 # Hotel is primarily a database.
 # It wants to be a light-weight manager and api for live-updating game state.
-# It supports HUD and minimap use-cases
+# It supports HUD and minimap use-cases, and entity data lifecycles.
 #
 @tool
 extends Node

@@ -223,6 +223,11 @@ func die(opts={}):
 	death_count += 1
 	Hotel.check_in(self)
 
+func resurrect():
+	is_dead = false
+	health = initial_health
+	Hotel.check_in(self)
+
 ## damage ###########################################################
 
 func take_hit(opts):
