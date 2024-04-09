@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bg2euexdogdt5"
-path="res://.godot/imported/redhat_sheet.png-2952e041a50cbf00631942b79d24219a.ctex"
+path="res://.godot/imported/redhat_sheet.png-f4455f31c5f9ae3f61d64a83e037a5b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/gunner/assets/redhat_sheet.png"
-dest_files=["res://.godot/imported/redhat_sheet.png-2952e041a50cbf00631942b79d24219a.ctex"]
+source_file="res://src/harvey/assets/redhat_sheet.png"
+dest_files=["res://.godot/imported/redhat_sheet.png-f4455f31c5f9ae3f61d64a83e037a5b4.ctex"]
 
 [params]
 
