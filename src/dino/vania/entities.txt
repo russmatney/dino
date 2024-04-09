@@ -18,6 +18,14 @@ o = Target
 p = Player
 v = Void
 x = Tile
+w = Crawly
+s = Soldier
+a = ArcadeMachine
+O = Box
+t = TreasureBox
+L = LogCheckpoint
+S = SnowCheckpoint
+V = CaveCheckpoint
 
 ==============
 ENTITIES
@@ -31,6 +39,40 @@ name OneWayPlatform
 ...
 ...
 ...
+
+name Box
+
+...
+.O.
+xxx
+
+name TreasureBox
+
+...
+.t.
+xxx
+
+name ArcadeMachine
+
+.a.
+...
+xxx
+
+name Soldier
+
+...
+.s.
+xxx
+
+name Crawly
+
+.w.
+xxx
+
+name Crawly2
+
+xxx
+.w.
 
 name Blob
 
@@ -51,6 +93,27 @@ name Checkpoint
 ....
 ....
 .h..
+xxxx
+
+name LogCheckpoint
+
+....
+....
+.L..
+xxxx
+
+name SnowCheckpoint
+
+....
+....
+.S..
+xxxx
+
+name CaveCheckpoint
+
+....
+....
+.V..
 xxxx
 
 name Candle

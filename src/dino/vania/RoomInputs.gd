@@ -2,8 +2,31 @@ extends RefCounted
 class_name RoomInputs
 
 static var all_entities = [
-	"Blob", "EnemyRobot", "Leaf", "Target", "Candle", "OneWayPlatform",
-	"Void", "CookingPot", "Monstroar", "Beefstronaut"
+	"Monstroar",
+	"Beefstronaut",
+
+	"Blob",
+	"EnemyRobot",
+	"Glowmba",
+	"Crawly",
+	"Soldier",
+
+	"Leaf",
+
+	"ArcadeMachine",
+	"Box",
+	"TreasureBox",
+
+	"Candle",
+	"Checkpoint",
+	"LogCheckpoint",
+	"SnowCheckpoint",
+	"CaveCheckpoint",
+	"CookingPot",
+	"Target",
+	"Void",
+
+	"OneWayPlatform",
 	]
 
 static var all_tilemap_scenes = [
@@ -71,18 +94,35 @@ static var all_constraints = [
 	IN_KINGDOM,
 	IN_VOLCANO,
 	IN_GRASSY_CAVE,
+
 	HAS_BOSS,
-	HAS_GLOWMBA,
-	HAS_ENEMY_ROBOT,
-	HAS_TARGET,
-	HAS_LEAF,
-	IS_COOKING_ROOM,
-	HAS_COOKING_POT,
+	HAS_MONSTROAR,
+	HAS_BEEFSTRONAUT,
+
 	HAS_BLOB,
-	HAS_VOID,
-	HAS_PLAYER,
+	HAS_ENEMY_ROBOT,
+	HAS_GLOWMBA,
+	HAS_CRAWLY,
+	HAS_SOLDIER,
+
+	HAS_LEAF,
+
+	HAS_ARCADE_MACHINE,
+	HAS_BOX,
+	HAS_TREASURE_BOX,
 	HAS_CANDLE,
+
 	HAS_CHECKPOINT,
+	HAS_LOG_CHECKPOINT,
+	HAS_SNOW_CHECKPOINT,
+	HAS_CAVE_CHECKPOINT,
+	HAS_COOKING_POT,
+	HAS_TARGET,
+	HAS_VOID,
+
+	HAS_PLAYER,
+
+	IS_COOKING_ROOM,
 	]
 
 var entities
@@ -222,17 +262,32 @@ static func get_constraint_data(cons_key, opts={}):
 		IS_COOKING_ROOM: return cooking_room(opts)
 
 		HAS_BOSS: return has_boss(opts)
+		HAS_MONSTROAR: return has_entity("Monstroat", opts)
+		HAS_BEEFSTRONAUT: return has_entity("Beefstronaut", opts)
 
-		HAS_GLOWMBA: return has_entity("Glowmba", opts)
-		HAS_ENEMY_ROBOT: return has_entity("EnemyRobot", opts)
-		HAS_TARGET: return has_entity("Target", opts)
-		HAS_LEAF: return has_entity("Leaf", opts)
-		HAS_CANDLE: return has_entity("Candle", opts)
-		HAS_CHECKPOINT: return has_entity("Checkpoint", opts)
-		HAS_PLAYER: return has_entity("Player", opts)
-		HAS_COOKING_POT: return has_entity("CookingPot", opts)
 		HAS_BLOB: return has_entity("Blob", opts)
+		HAS_ENEMY_ROBOT: return has_entity("EnemyRobot", opts)
+		HAS_GLOWMBA: return has_entity("Glowmba", opts)
+		HAS_CRAWLY: return has_entity("Crawly", opts)
+		HAS_SOLDIER: return has_entity("Soldier", opts)
+
+		HAS_LEAF: return has_entity("Leaf", opts)
+
+		HAS_ARCADE_MACHINE: return has_entity("ArcadeMachine", opts)
+		HAS_BOX: return has_entity("Box", opts)
+		HAS_TREASURE_BOX: return has_entity("TreasureBox", opts)
+		HAS_CANDLE: return has_entity("Candle", opts)
+
+		HAS_CHECKPOINT: return has_entity("Checkpoint", opts)
+		HAS_LOG_CHECKPOINT: return has_entity("LogCheckpoint", opts)
+		HAS_SNOW_CHECKPOINT: return has_entity("SnowCheckpoint", opts)
+		HAS_CAVE_CHECKPOINT: return has_entity("CaveCheckpoint", opts)
+
+		HAS_COOKING_POT: return has_entity("CookingPot", opts)
+		HAS_TARGET: return has_entity("Target", opts)
 		HAS_VOID: return has_entity("Void", opts)
+
+		HAS_PLAYER: return has_entity("Player", opts)
 
 		_: return RoomInputs.new()
 
@@ -356,16 +411,32 @@ static func grassy_cave(_opts={}):
 ## entities ######################################################33
 
 const HAS_BOSS = "has_boss"
-const HAS_GLOWMBA = "has_glowmba"
-const HAS_ENEMY_ROBOT = "has_enemy_robot"
-const HAS_TARGET = "has_target"
-const HAS_LEAF = "has_leaf"
-const HAS_COOKING_POT = "has_cooking_pot"
+const HAS_MONSTROAR = "has_monstroar"
+const HAS_BEEFSTRONAUT = "has_beefstronaut"
+
 const HAS_BLOB = "has_blob"
-const HAS_VOID = "has_void"
-const HAS_PLAYER = "has_player"
-const HAS_CANDLE = "has_candle"
+const HAS_ENEMY_ROBOT = "has_enemy_robot"
+const HAS_GLOWMBA = "has_glowmba"
+const HAS_CRAWLY = "has_crawly"
+const HAS_SOLDIER = "has_solider"
+
+const HAS_LEAF = "has_leaf"
+
+const HAS_ARCADE_MACHINE = "has_arcade_machine"
+const HAS_BOX = "has_box"
+const HAS_TREASURE_BOX = "has_treasure_box"
+
 const HAS_CHECKPOINT = "has_checkpoint"
+const HAS_LOG_CHECKPOINT = "has_log_checkpoint"
+const HAS_SNOW_CHECKPOINT = "has_snow_checkpoint"
+const HAS_CAVE_CHECKPOINT = "has_cave_checkpoint"
+const HAS_CANDLE = "has_candle"
+
+const HAS_COOKING_POT = "has_cooking_pot"
+const HAS_TARGET = "has_target"
+const HAS_VOID = "has_void"
+
+const HAS_PLAYER = "has_player"
 
 static func has_entity(ent, opts={}):
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
