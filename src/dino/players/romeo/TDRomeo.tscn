@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_q444v"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_coyae"]
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_maj6o"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="9_iqhl2"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="10_7uu0n"]
-[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/shirt/PitDetector.tscn" id="11_m0mi0"]
+[ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_iqhl2"]
+[ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_7uu0n"]
+[ext_resource type="PackedScene" path="res://src/shirt/PitDetector.tscn" id="11_m0mi0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s4kb2"]
 atlas = ExtResource("2_5ymh8")

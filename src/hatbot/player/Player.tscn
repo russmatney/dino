@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="5_ddh8j"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_2ghil"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_xveuf"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="8_atx5s"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="9_u5coh"]
+[ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="8_atx5s"]
+[ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_u5coh"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="10_egux8"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller/machine/SSMachine.tscn" id="11_oh4d4"]
 
@@ -302,9 +302,8 @@ size = Vector2(96, 96)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 49
+collision_mask = 3129
 script = ExtResource("1_20cuc")
-has_flashlight = null
 display_name = "HatBot"
 jump_max_height = 50.0
 jump_min_height = 30.0
@@ -376,6 +375,7 @@ target_position = Vector2(0, 40)
 [node name="SkullParticles" parent="." instance=ExtResource("9_u5coh")]
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
 clip_contents = false
 offset_left = -24.0
 offset_top = 15.0

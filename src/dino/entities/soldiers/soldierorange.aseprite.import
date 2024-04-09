@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://wdep83hjrf3"
+path="res://.godot/imported/soldierorange.aseprite-c19b13a1bbead9d747df73f67d503b50.res"
+
+[deps]
+
+source_file="res://src/dino/entities/soldiers/soldierorange.aseprite"
+dest_files=["res://.godot/imported/soldierorange.aseprite-c19b13a1bbead9d747df73f67d503b50.res"]
+
+[params]
+

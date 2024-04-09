@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cwmlq0qc307ej" path="res://src/effects/particles_sheet.png" id="1_6i7hr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njuh8"]
+atlas = ExtResource("1_6i7hr")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Curve" id="Curve_i4b1e"]
+_data = [Vector2(0, 0.0122699), 0.0, 0.0, 0, 0, Vector2(0.522523, 1), 0.0, 0.0, 0, 0, Vector2(0.642643, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.177914), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="HeartParticles" type="CPUParticles2D"]
+emitting = false
+amount = 2
+one_shot = true
+texture = SubResource("AtlasTexture_njuh8")
+gravity = Vector2(0, -150)
+scale_amount_curve = SubResource("Curve_i4b1e")

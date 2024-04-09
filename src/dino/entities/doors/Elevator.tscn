@@ -1,0 +1,155 @@
+[gd_scene load_steps=21 format=3 uid="uid://dx2sj4ijj8tlh"]
+
+[ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://src/dino/entities/doors/door_sheet.png" id="1_6v2w8"]
+[ext_resource type="Script" path="res://src/dino/entities/doors/Elevator.gd" id="1_87cqc"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_nrb31"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="4_e46yd"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="5_0buld"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtm3d"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4tih"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7glg"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5npt"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lfcg"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brlye"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7fm6"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4777b"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bifxr"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73wuk"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pg240"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5quh2"]
+atlas = ExtResource("1_6v2w8")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wbl66"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtm3d")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4tih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7glg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5npt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lfcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brlye")
+}],
+"loop": false,
+"name": &"closing",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7fm6")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4777b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bifxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_73wuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pg240")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5quh2")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuhdv"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ad253"]
+closed = false
+polygon = PackedVector2Array(-13, 15, -13, 3, -12, -1, -11, -4, -10, -6, -9, -8, -8, -10, -7, -12, -6, -13, -4, -14, 4, -14, 6, -12, 7, -10, 8, -8, 9, -6, 10, -4, 11, -2, 12, 2, 12, 12, 12, 15, 12, 15)
+
+[node name="Elevator" type="Node2D" groups=["travel_points"]]
+script = ExtResource("1_87cqc")
+destination_zone_name = ""
+destination_travel_point_path = ""
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -40.0
+offset_top = -39.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.243137, 0.458824, 0.752941, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wbl66")
+animation = &"opening"
+frame = 4
+frame_progress = 1.0
+
+[node name="ActionArea" parent="." instance=ExtResource("3_nrb31")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_xuhdv")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("4_e46yd")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ad253")
+
+[node name="ActionHint" parent="." instance=ExtResource("5_0buld")]
+position = Vector2(0, -32)

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cwmlq0qc307ej" path="res://src/effects/particles_sheet.png" id="1_5hl8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae7vx"]
+atlas = ExtResource("1_5hl8o")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="Curve" id="Curve_ebkp3"]
+_data = [Vector2(0.03003, 0.202454), 0.0, 0.0, 0, 0, Vector2(0.324324, 1), 0.0, 0.0, 0, 0, Vector2(0.576577, 0.895705), 0.0, 0.0, 0, 0, Vector2(0.873874, 0.331288), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="SkullParticles" type="CPUParticles2D"]
+emitting = false
+amount = 3
+one_shot = true
+texture = SubResource("AtlasTexture_ae7vx")
+gravity = Vector2(0, -100)
+scale_amount_curve = SubResource("Curve_ebkp3")

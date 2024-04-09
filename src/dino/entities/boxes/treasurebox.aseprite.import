@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b5ywe0ua2c17m"
+path="res://.godot/imported/treasurebox.aseprite-9b508ee2d7b5e2c6c1c776041e0ae92f.res"
+
+[deps]
+
+source_file="res://src/dino/entities/boxes/treasurebox.aseprite"
+dest_files=["res://.godot/imported/treasurebox.aseprite-9b508ee2d7b5e2c6c1c776041e0ae92f.res"]
+
+[params]
+

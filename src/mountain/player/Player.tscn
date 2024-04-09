@@ -416,8 +416,8 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
+collision_mask = 3129
 script = ExtResource("1_g0biv")
-has_gun = true
 has_sword = true
 display_name = "HatBot"
 has_double_jump = true

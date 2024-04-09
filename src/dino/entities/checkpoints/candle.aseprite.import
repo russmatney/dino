@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://3ctebtkb7chf"
+path="res://.godot/imported/candle.aseprite-d34047f9e4aeb3c5161e5305cc55804c.res"
+
+[deps]
+
+source_file="res://src/dino/entities/checkpoints/candle.aseprite"
+dest_files=["res://.godot/imported/candle.aseprite-d34047f9e4aeb3c5161e5305cc55804c.res"]
+
+[params]
+

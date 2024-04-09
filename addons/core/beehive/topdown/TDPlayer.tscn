@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_e5yp5"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="7_vgh44"]
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_6knpo"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/SkullParticles.tscn" id="9_qe2sw"]
-[ext_resource type="PackedScene" path="res://src/hatbot/player/HeartParticles.tscn" id="10_hjude"]
+[ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_qe2sw"]
+[ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_hjude"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ah5wp"]
 radius = 8.0

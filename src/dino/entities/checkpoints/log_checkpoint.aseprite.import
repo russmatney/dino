@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dh62wo63s7m67"
+path="res://.godot/imported/log_checkpoint.aseprite-4190a97d02eeda53dd05f3aa1dc8c5ab.res"
+
+[deps]
+
+source_file="res://src/dino/entities/checkpoints/log_checkpoint.aseprite"
+dest_files=["res://.godot/imported/log_checkpoint.aseprite-4190a97d02eeda53dd05f3aa1dc8c5ab.res"]
+
+[params]
+

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://63sc3onlnswo"]
 
-[ext_resource type="Texture2D" uid="uid://dnp56m8kln68v" path="res://src/hatbot/assets/candle_sheet.png" id="1_e7fx5"]
+[ext_resource type="Texture2D" uid="uid://dnp56m8kln68v" path="res://src/dino/entities/checkpoints/candle_sheet.png" id="1_e7fx5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2g85l"]
 atlas = ExtResource("1_e7fx5")

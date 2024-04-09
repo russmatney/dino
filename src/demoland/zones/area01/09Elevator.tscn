@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="1_2onbw"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
-[ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_0xsm0"]
+[ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_0xsm0"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_0mkwh"]
 [ext_resource type="Script" path="res://addons/core/metro/MetroTravelPointEntity.gd" id="4_mlbpj"]
 [ext_resource type="Script" path="res://addons/core/camera/CamPOF.gd" id="5_0dxrk"]

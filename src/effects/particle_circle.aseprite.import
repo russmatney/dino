@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bo0ym335q10w4"
+path="res://.godot/imported/particle_circle.aseprite-14b888108f1f0839bdf864028eef5ab5.res"
+
+[deps]
+
+source_file="res://src/effects/particle_circle.aseprite"
+dest_files=["res://.godot/imported/particle_circle.aseprite-14b888108f1f0839bdf864028eef5ab5.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://gyfd8m8nogjk"
+path="res://.godot/imported/background_snow_sky.aseprite-2086d984cfce23abab7aa8209ff4cf5b.res"
+
+[deps]
+
+source_file="res://src/backgrounds/background_snow_sky.aseprite"
+dest_files=["res://.godot/imported/background_snow_sky.aseprite-2086d984cfce23abab7aa8209ff4cf5b.res"]
+
+[params]
+

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_fkg2u"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="2_cvsqa"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/entities/shootyCrawly/ShootyCrawly.tscn" id="3_5ofkw"]
-[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/entities/soldier/Soldier.tscn" id="4_lo5kx"]
+[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/entities/soldiers/Soldier.tscn" id="4_lo5kx"]
 [ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/dino/entities/goomba/Goomba.tscn" id="5_5rrjq"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="6_4c0v0"]
 
