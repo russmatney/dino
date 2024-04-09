@@ -1,11 +1,11 @@
 [gd_scene load_steps=29 format=3 uid="uid://dhma0vanfafyo"]
 
-[ext_resource type="Script" path="res://src/woods/entities/LeafEntity.gd" id="1_1akrk"]
-[ext_resource type="Texture2D" uid="uid://twjcqls3w7j0" path="res://src/woods/entities/leaf_green.png" id="2_1b5ov"]
-[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/woods/entities/leaf_greenred.png" id="3_32ltg"]
-[ext_resource type="Texture2D" uid="uid://blxnv51h4ng52" path="res://src/woods/entities/leaf_purple.png" id="4_1kosg"]
-[ext_resource type="Texture2D" uid="uid://bgdgddeojp2g6" path="res://src/woods/entities/leaf_redorange.png" id="5_t2nsq"]
-[ext_resource type="Texture2D" uid="uid://pi1jxrc3ggju" path="res://src/woods/entities/leaf_yellow.png" id="6_xd72u"]
+[ext_resource type="Script" path="res://src/dino/entities/leaves/LeafEntity.gd" id="1_1akrk"]
+[ext_resource type="Texture2D" uid="uid://twjcqls3w7j0" path="res://src/dino/entities/leaves/leaf_green.png" id="2_1b5ov"]
+[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/dino/entities/leaves/leaf_greenred.png" id="3_32ltg"]
+[ext_resource type="Texture2D" uid="uid://blxnv51h4ng52" path="res://src/dino/entities/leaves/leaf_purple.png" id="4_1kosg"]
+[ext_resource type="Texture2D" uid="uid://bgdgddeojp2g6" path="res://src/dino/entities/leaves/leaf_redorange.png" id="5_t2nsq"]
+[ext_resource type="Texture2D" uid="uid://pi1jxrc3ggju" path="res://src/dino/entities/leaves/leaf_yellow.png" id="6_xd72u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wmnml"]
 atlas = ExtResource("2_1b5ov")

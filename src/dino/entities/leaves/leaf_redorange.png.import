@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgdgddeojp2g6"
-path="res://.godot/imported/leaf_redorange.png-3d7d4cf1ad8fd5a2211d732632a00a80.ctex"
+path="res://.godot/imported/leaf_redorange.png-6444641d2c028894986d2bc0b9175043.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/woods/entities/leaf_redorange.png"
-dest_files=["res://.godot/imported/leaf_redorange.png-3d7d4cf1ad8fd5a2211d732632a00a80.ctex"]
+source_file="res://src/dino/entities/leaves/leaf_redorange.png"
+dest_files=["res://.godot/imported/leaf_redorange.png-6444641d2c028894986d2bc0b9175043.ctex"]
 
 [params]
 

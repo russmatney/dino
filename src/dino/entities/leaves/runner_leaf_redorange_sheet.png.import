@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rb2p6m72dteh"
-path="res://.godot/imported/runner_leaf_greenred_sheet.png-af54cdf466230e4990a4166f8f7a2f57.ctex"
+uid="uid://t4kmfg36p642"
+path="res://.godot/imported/runner_leaf_redorange_sheet.png-015c3b2d02b6147a555f1d9d289343c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/woods/assets/runner_leaf_greenred_sheet.png"
-dest_files=["res://.godot/imported/runner_leaf_greenred_sheet.png-af54cdf466230e4990a4166f8f7a2f57.ctex"]
+source_file="res://src/dino/entities/leaves/runner_leaf_redorange_sheet.png"
+dest_files=["res://.godot/imported/runner_leaf_redorange_sheet.png-015c3b2d02b6147a555f1d9d289343c0.ctex"]
 
 [params]
 
