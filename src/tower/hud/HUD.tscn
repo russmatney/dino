@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bly75mfi7kcvd"]
+[gd_scene load_steps=7 format=3 uid="uid://bly75mfi7kcvd"]
 
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://addons/core/hood/HeartsContainer.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/gunner/hud/Pickups.tscn" id="3"]
 [ext_resource type="Script" path="res://src/tower/hud/HUD.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://b08yhx4eeirf7" path="res://src/tower/menus/TowerControls.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="6_q4161"]
@@ -44,10 +43,6 @@ offset_bottom = 534.0
 unique_name_in_owner = true
 layout_mode = 2
 h = 5
-
-[node name="PickupsContainer" parent="VBoxContainer/HBoxContainer/MarginContainer/Panel/VBoxContainer" instance=ExtResource("3")]
-unique_name_in_owner = true
-layout_mode = 2
 
 [node name="TowerControls" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5")]
 layout_mode = 2

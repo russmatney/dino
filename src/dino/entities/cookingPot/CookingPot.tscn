@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=3 uid="uid://blr57x3unids8"]
+
+[ext_resource type="Texture2D" uid="uid://dxugvmk4fmygo" path="res://src/dino/entities/cookingPot/SPIKE_Cooking_pot.png" id="1_i1ti2"]
+[ext_resource type="Script" path="res://src/dino/entities/cookingPot/CookingPot.gd" id="1_jn4f3"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_m2042"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_1xdos"]
+[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://addons/core/assets/lights/light64px3.png" id="5_nrjap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bohb"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awyrc"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0swwj"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uktn"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_234xo"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3nmp"]
+atlas = ExtResource("1_i1ti2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pkof4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bohb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awyrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0swwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uktn")
+}],
+"loop": true,
+"name": &"cooking",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_234xo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3nmp")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjwu1"]
+size = Vector2(48, 40)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acrwt"]
+bg_color = Color(0.239216, 0.239216, 0.239216, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahjc6"]
+bg_color = Color(0.372549, 0.72549, 0.235294, 0.878431)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[node name="CookingPot" type="Node2D" groups=["cooking_pots"]]
+script = ExtResource("1_jn4f3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -60)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_pkof4")
+animation = &"empty"
+autoplay = "empty"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://src/spike/assets/SPIKE_Cooking_pot.aseprite"
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_rjwu1")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -88.0
+offset_top = -72.0
+offset_right = 88.0
+offset_bottom = -56.0
+theme_override_fonts/normal_font = ExtResource("3_m2042")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]3 more[/center]"
+scroll_active = false
+autowrap_mode = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -56.0
+offset_right = 24.0
+offset_bottom = -48.0
+theme_override_styles/background = SubResource("StyleBoxFlat_acrwt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ahjc6")
+max_value = 3.0
+step = 0.3
+rounded = true
+show_percentage = false
+
+[node name="CamPOF" parent="." instance=ExtResource("4_1xdos")]
+active = false
+
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(1.13687e-13, -40)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_nrjap")

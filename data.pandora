@@ -952,7 +952,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/spike/entities/OrbitItemWeapon.tscn"
+						"value": "res://src/dino/weapons/orb/OrbitItemWeapon.tscn"
 					}
 				}
 			},

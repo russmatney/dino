@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx3r0dg2i01gv"]
+
+[ext_resource type="Shader" path="res://src/ColorSwapShader.gdshader" id="1_306o4"]
+[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/dino/entities/blobs/SPIKE_blob_pickup.png" id="1_xeyhx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5u07"]
+resource_local_to_scene = true
+shader = ExtResource("1_306o4")
+shader_parameter/original_0 = Color(0.348791, 0.337072, 0.321431, 1)
+shader_parameter/original_1 = Color(0.41181, 0.415717, 0.415717, 1)
+shader_parameter/original_2 = Color(0.4, 0.223529, 0.192157, 1)
+shader_parameter/original_3 = Color(0.560815, 0.337072, 0.231067, 1)
+shader_parameter/original_4 = Color(0.195895, 0.234974, 0.223239, 1)
+shader_parameter/replace_0 = Color(0.12549, 0.156863, 0.239216, 1)
+shader_parameter/replace_1 = Color(0.384314, 0.509804, 0.65098, 1)
+shader_parameter/replace_2 = Color(0.266667, 0.662745, 0.337255, 1)
+shader_parameter/replace_3 = Color(0.83, 0.7055, 0, 1)
+shader_parameter/replace_4 = Color(0.819608, 0.854902, 0.219608, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrjyf"]
+atlas = ExtResource("1_xeyhx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cndh1"]
+atlas = ExtResource("1_xeyhx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq4l6"]
+atlas = ExtResource("1_xeyhx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wexns"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrjyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cndh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq4l6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cndh1")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 10.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_w5u07")
+sprite_frames = SubResource("SpriteFrames_wexns")
+animation = &"spin"
+autoplay = "spin"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://src/spike/assets/SPIKE_blob_pickup.aseprite"
+}

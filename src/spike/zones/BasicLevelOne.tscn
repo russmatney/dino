@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/spike/zones/SpikeZone.gd" id="1_l5ds8"]
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_ouxbs"]
-[ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/spike/entities/CookingPot.tscn" id="3_uly7r"]
-[ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/spike/entities/DeliveryZone.tscn" id="4_cu5va"]
-[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/spike/enemies/Blob.tscn" id="5_jxm16"]
+[ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="3_uly7r"]
+[ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="4_cu5va"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/entities/blobs/Blob.tscn" id="5_jxm16"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="6_1pmen"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/core/reptile/tilemaps/CaveTiles16.tscn" id="7_0dv7i"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_qouax"]

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cjofte48xf7go"
+path="res://.godot/imported/SPIKE_Cooking_pot.aseprite-1eb6dbea13f8712b2cb7f25e23f79366.res"
+
+[deps]
+
+source_file="res://src/dino/entities/cookingPot/SPIKE_Cooking_pot.aseprite"
+dest_files=["res://.godot/imported/SPIKE_Cooking_pot.aseprite-1eb6dbea13f8712b2cb7f25e23f79366.res"]
+
+[params]
+

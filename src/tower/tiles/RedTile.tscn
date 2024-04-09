@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://wuy3v03n8t7x"]
-
-[ext_resource type="TileSet" uid="uid://bgimrbn8yk76e" path="res://addons/core/reptile/tilesets/coldfire/ColdFireRed.tres" id="1_qkk07"]
-
-[node name="RedTile" type="TileMap" groups=["redtile"]]
-tile_set = ExtResource("1_qkk07")
-format = 2

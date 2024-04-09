@@ -17,8 +17,6 @@ func _on_entry_updated(entry={}):
 	if "player" in entry.get("groups"):
 		if entry.get("health") != null:
 			set_health(entry["health"])
-		if entry.get("pickups") != null:
-			set_pickups(entry["pickups"])
 
 
 ###################################################################
@@ -28,13 +26,3 @@ func _on_entry_updated(entry={}):
 func set_health(health):
 	var hearts = get_node("%HeartsContainer")
 	hearts.set_health(health)
-
-
-###################################################################
-# update pickups
-
-
-func set_pickups(pickups):
-	var p = get_node("%PickupsContainer")
-	p.update_pickups(pickups)
-

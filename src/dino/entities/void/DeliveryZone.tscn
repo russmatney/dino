@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0bnnom822e3w"]
+
+[ext_resource type="Script" path="res://src/dino/entities/void/DeliveryZone.gd" id="1_qvwfl"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="2_u2j28"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_230n5"]
+[ext_resource type="Texture2D" uid="uid://bh0nru4oqd2x2" path="res://addons/core/assets/lights/light64px7.png" id="4_5nwep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42g1q"]
+size = Vector2(64, 64)
+
+[node name="DeliveryZone" type="Node2D" groups=["voids"]]
+script = ExtResource("1_qvwfl")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_42g1q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.580392)
+
+[node name="CamPOF" parent="." instance=ExtResource("2_u2j28")]
+active = false
+
+[node name="Label" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 24.0
+theme_override_fonts/normal_font = ExtResource("3_230n5")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]VOID WANT ORB"
+fit_content = true
+scroll_active = false
+
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("4_5nwep")

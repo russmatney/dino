@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c3yxv4bfm87j2"
+path="res://.godot/imported/spike_tiles_16.aseprite-d9443b3eb989f6e3db3023a4893132d4.res"
+
+[deps]
+
+source_file="res://src/dino/entities/spikes/spike_tiles_16.aseprite"
+dest_files=["res://.godot/imported/spike_tiles_16.aseprite-d9443b3eb989f6e3db3023a4893132d4.res"]
+
+[params]
+

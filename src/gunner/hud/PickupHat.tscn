@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0sjxyrv8b68"]
-
-[ext_resource type="SpriteFrames" uid="uid://c8h6jkmy43gsi" path="res://src/gunner/pickups/hat_spriteframes.tres" id="2"]
-
-[node name="Hat" type="AnimatedSprite2D"]
-position = Vector2(11, 19)
-scale = Vector2(3, 3)
-sprite_frames = ExtResource("2")

@@ -2,7 +2,7 @@ extends RefCounted
 class_name RoomInputs
 
 static var all_entities = [
-	"Blob", "Enemy", "Leaf", "Target", "Candle", "OneWayPlatform",
+	"Blob", "EnemyRobot", "Leaf", "Target", "Candle", "OneWayPlatform",
 	"Void", "CookingPot", "Monstroar", "Beefstronaut"
 	]
 

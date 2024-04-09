@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://7djqc4pkru4b"]
-
-[ext_resource type="SpriteFrames" uid="uid://b8rermnydtd16" path="res://src/gunner/pickups/body_spriteframes.tres" id="2"]
-
-[node name="Body" type="AnimatedSprite2D"]
-position = Vector2(36, -2)
-scale = Vector2(3, 3)
-sprite_frames = ExtResource("2")

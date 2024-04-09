@@ -32,8 +32,8 @@ var label_to_entity = {
 	"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 
 	# bosses
-	"Monstroar": {scene=load("res://src/hatbot/bosses/Monstroar.tscn")},
-	"Beefstronaut": {scene=load("res://src/hatbot/bosses/Beefstronaut.tscn")},
+	"Monstroar": {scene=load("res://src/dino/entities/bosses/Monstroar.tscn")},
+	"Beefstronaut": {scene=load("res://src/dino/entities/bosses/Beefstronaut.tscn")},
 
 	# enemies
 	"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
