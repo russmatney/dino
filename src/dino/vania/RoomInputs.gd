@@ -72,7 +72,8 @@ static var all_constraints = [
 	IN_VOLCANO,
 	IN_GRASSY_CAVE,
 	HAS_BOSS,
-	HAS_ENEMY,
+	HAS_GLOWMBA,
+	HAS_ENEMY_ROBOT,
 	HAS_TARGET,
 	HAS_LEAF,
 	IS_COOKING_ROOM,
@@ -222,7 +223,8 @@ static func get_constraint_data(cons_key, opts={}):
 
 		HAS_BOSS: return has_boss(opts)
 
-		HAS_ENEMY: return has_entity("Enemy", opts)
+		HAS_GLOWMBA: return has_entity("Glowmba", opts)
+		HAS_ENEMY_ROBOT: return has_entity("EnemyRobot", opts)
 		HAS_TARGET: return has_entity("Target", opts)
 		HAS_LEAF: return has_entity("Leaf", opts)
 		HAS_CANDLE: return has_entity("Candle", opts)
@@ -354,7 +356,8 @@ static func grassy_cave(_opts={}):
 ## entities ######################################################33
 
 const HAS_BOSS = "has_boss"
-const HAS_ENEMY = "has_enemy"
+const HAS_GLOWMBA = "has_glowmba"
+const HAS_ENEMY_ROBOT = "has_enemy_robot"
 const HAS_TARGET = "has_target"
 const HAS_LEAF = "has_leaf"
 const HAS_COOKING_POT = "has_cooking_pot"

@@ -37,7 +37,8 @@ var label_to_entity = {
 
 	# enemies
 	"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
-	"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
+	"EnemyRobot": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
+	"Glowmba": {scene=load("res://src/dino/entities/glowmba/Glowmba.tscn")},
 
 	# pickups
 	"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
@@ -260,7 +261,7 @@ static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
 				RoomInputs.IN_VOLCANO: {}
 			},
 			# [
-			# 	{RoomInputs.HAS_ENEMY: {count=3}},
+			# 	{RoomInputs.HAS_ENEMY_ROBOT: {count=3}},
 			# 	RoomInputs.IN_LARGE_ROOM,
 			# ], [
 			# 	RoomInputs.HAS_TARGET,
@@ -273,12 +274,12 @@ static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
 			# ],
 			# 	RoomInputs.random_room(),
 			# {
-			# 	RoomInputs.HAS_ENEMY: {count=3},
+			# 	RoomInputs.HAS_ENEMY_ROBOT: {count=3},
 			# }, [
 			# 	RoomInputs.IS_COOKING_ROOM,
 			# ], {
 			# 	RoomInputs.HAS_TARGET: {count=5},
-			# 	RoomInputs.HAS_ENEMY: {count=2},
+			# 	RoomInputs.HAS_ENEMY_ROBOT: {count=2},
 			# 	RoomInputs.IN_LARGE_ROOM: {},
 			# }, [
 			# 	{RoomInputs.HAS_BOSS: {count=2}},

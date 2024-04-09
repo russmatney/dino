@@ -10,7 +10,8 @@ b = Blob
 c = Candle
 C = CookingPot
 h = Checkpoint
-e = Enemy
+g = Glowmba
+r = EnemyRobot
 l = Leaf
 M = Monstroar
 o = Target
@@ -66,11 +67,18 @@ name CookingPot
 ...
 xxx
 
-name Enemy
+name EnemyRobot
 
 ...
-.e.
+.r.
 ...
+xxx
+
+name Glowmba
+
+...
+...
+.g.
 xxx
 
 name Leaf

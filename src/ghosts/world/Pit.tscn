@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://drqyknqja7bhd"]
 
 [ext_resource type="PackedScene" path="res://src/ghosts/world/Door.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/ghosts/enemies/Glowmba.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/dino/entities/glowmba/Glowmba.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/ghosts/world/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/ghosts/world/platforms/IndoorTiles.tscn" id="7"]

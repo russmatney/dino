@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://dssioecwcl0c5"]
 
 [ext_resource type="Texture2D" uid="uid://bn21mhqpf8pu4" path="res://assets/icon.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://dcb8ffwd15pgn" path="res://src/ghosts/assets/gloomba_sheet.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dcb8ffwd15pgn" path="res://src/dino/entities/glowmba/gloomba_sheet.png" id="2"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("2")

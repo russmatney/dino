@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/ghosts/world/platforms/IndoorTiles.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/ghosts/enemies/Glowmba.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/dino/entities/glowmba/Glowmba.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://src/ghosts/world/Door.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/ghosts/world/lights/HangingLight.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_c3tda"]
