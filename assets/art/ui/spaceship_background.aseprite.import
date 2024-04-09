@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://hcypnrhdds5n"
+path="res://.godot/imported/spaceship_background.aseprite-14bf9a7017f9f57ccba8d73cb1ccff53.res"
+
+[deps]
+
+source_file="res://assets/art/ui/spaceship_background.aseprite"
+dest_files=["res://.godot/imported/spaceship_background.aseprite-14bf9a7017f9f57ccba8d73cb1ccff53.res"]
+
+[params]
+

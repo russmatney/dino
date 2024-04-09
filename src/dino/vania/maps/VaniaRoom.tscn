@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://dh4wv4l8frtl7" path="res://addons/core/reptile/tilesets/GildedKingdomTiles8.tres" id="1_r8bn3"]
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_1wsgr"]
-[ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/ui/spaceship_background.png" id="2_dw7vg"]
+[ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/art/ui/spaceship_background.png" id="2_dw7vg"]
 
 [node name="VaniaRoom" type="Node2D"]
 script = ExtResource("1_x4efj")

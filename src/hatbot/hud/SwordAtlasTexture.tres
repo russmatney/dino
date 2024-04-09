@@ -1,6 +1,6 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bkxkvpi6wdoh2"]
 
-[ext_resource type="Texture2D" uid="uid://dohv3iwpfsnbx" path="res://src/hatbot/assets/powerupicons_sheet.png" id="1_lufsn"]
+[ext_resource type="Texture2D" uid="uid://dohv3iwpfsnbx" path="res://src/dino/weapons/powerupicons_sheet.png" id="1_lufsn"]
 
 [resource]
 atlas = ExtResource("1_lufsn")
