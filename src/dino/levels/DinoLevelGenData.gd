@@ -19,14 +19,14 @@ static func label_to_entity(opts):
 		"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
 
 		# pickups
-		"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
+		"Leaf": {scene=load("res://src/dino/entities/leaves/entities/Leaf.tscn")},
 
 		# entities
 		"Candle": {scene=load("res://src/hatbot/entities/Candle.tscn")},
-		"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
+		"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 			setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 			},
-		"Void": {scene=load("res://src/spike/entities/DeliveryZone.tscn")},
+		"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
 		"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
 			setup=func(t):
 			t.position += Vector2.RIGHT * opts.tile_size / 2.0

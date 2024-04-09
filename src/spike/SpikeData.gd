@@ -47,24 +47,24 @@ static var all_ingredients = {
 	Ingredient.GreyBlob: IngredientData.mk({
 		name="grey blob",
 		display_type="GREY",
-		anim_scene=preload("res://src/spike/ingredients/GreyBlobAnim.tscn"),
+		anim_scene=preload("res://src/dino/entities/GreyBlobAnim.tscn"),
 		can_cook=true,
 		}),
 	Ingredient.BlueBlob: IngredientData.mk({
 		name="blue blob",
 		display_type="BLUE",
-		anim_scene=preload("res://src/spike/ingredients/BlueBlobAnim.tscn"),
+		anim_scene=preload("res://src/dino/entities/BlueBlobAnim.tscn"),
 		can_cook=true,
 		}),
 	Ingredient.GreenBlob: IngredientData.mk({
 		name="green blob",
 		display_type="GREEN",
-		anim_scene=preload("res://src/spike/ingredients/GreenBlobAnim.tscn"),
+		anim_scene=preload("res://src/dino/entities/GreenBlobAnim.tscn"),
 		can_cook=true,
 		}),
 	Ingredient.RedBlob: IngredientData.mk({
 		name="red blob",
 		display_type="RED",
-		anim_scene=preload("res://src/spike/ingredients/RedBlobAnim.tscn"),
+		anim_scene=preload("res://src/dino/entities/RedBlobAnim.tscn"),
 		}),
 	}

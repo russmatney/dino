@@ -61,7 +61,7 @@ func collect_pickup(ingredient_type):
 	# overriding ssplayer pickup logic
 	add_orbit_item(ingredient_type)
 
-@onready var orbit_item_scene = preload("res://src/spike/entities/OrbitItem.tscn")
+@onready var orbit_item_scene = preload("res://src/dino/weapons/orb/OrbitItem.tscn")
 
 var orbit_items = []
 
@@ -81,7 +81,7 @@ func remove_orbit_item(item):
 			orbit_items.erase(ch)
 			ch.queue_free()
 
-@onready var orbit_item_weapon_scene = preload("res://src/spike/entities/OrbitItemWeapon.tscn")
+@onready var orbit_item_weapon_scene = preload("res://src/dino/weapons/orb/OrbitItemWeapon.tscn")
 var orbit_item_weapon
 
 func add_orbit_item_weapon():

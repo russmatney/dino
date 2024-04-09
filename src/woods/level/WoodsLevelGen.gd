@@ -32,7 +32,7 @@ func get_room_opts(_opts):
 				}},
 			label_to_entity={
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
-				"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
+				"Leaf": {scene=load("res://src/dino/entities/leaves/Leaf.tscn")},
 				}})
 
 	return room_opts

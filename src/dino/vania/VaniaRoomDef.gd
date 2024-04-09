@@ -36,20 +36,20 @@ var label_to_entity = {
 	"Beefstronaut": {scene=load("res://src/dino/entities/bosses/Beefstronaut.tscn")},
 
 	# enemies
-	"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
+	"Blob": {scene=load("res://src/dino/entities/blobs/Blob.tscn")},
 	"EnemyRobot": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
 	"Glowmba": {scene=load("res://src/dino/entities/glowmba/Glowmba.tscn")},
 
 	# pickups
-	"Leaf": {scene=load("res://src/woods/entities/Leaf.tscn")},
+	"Leaf": {scene=load("res://src/dino/entities/leaves/Leaf.tscn")},
 
 	# entities
 	"Checkpoint": {scene=load("res://src/dino/entities/checkpoints/SnowCheckpoint.tscn")},
-	# "LogCheckpoint": {scene=load("res://src/dino/entities/checkpoints/LogCheckpoint.tscn")},
-	# "SnowCheckpoint": {scene=load("res://src/dino/entities/checkpoints/SnowCheckpoint.tscn")},
-	# "CaveCheckpoint": {scene=load("res://src/dino/entities/checkpoints/CaveCheckpoint.tscn")},
+	"LogCheckpoint": {scene=load("res://src/dino/entities/checkpoints/LogCheckpoint.tscn")},
+	"SnowCheckpoint": {scene=load("res://src/dino/entities/checkpoints/SnowCheckpoint.tscn")},
+	"CaveCheckpoint": {scene=load("res://src/dino/entities/checkpoints/CaveCheckpoint.tscn")},
 	"Candle": {scene=load("res://src/dino/entities/checkpoints/Candle.tscn")},
-	"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
+	"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 		setup=func(p, opts): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 		},
 	"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
@@ -57,7 +57,7 @@ var label_to_entity = {
 		t.position += Vector2.RIGHT * opts.tile_size / 2.0
 		t.position += Vector2.DOWN * opts.tile_size / 2.0
 		},
-	"Void": {scene=load("res://src/spike/entities/DeliveryZone.tscn")},
+	"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
 
 	# platforms/walls
 	"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),

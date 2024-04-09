@@ -47,11 +47,11 @@ func get_room_opts(opts):
 		},
 		label_to_entity={
 			"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
-			"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
+			"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 				setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 				},
 			"Blob": {scene=load("res://src/spike/enemies/Blob.tscn")},
-			"Void": {scene=load("res://src/spike/entities/DeliveryZone.tscn")},
+			"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
 			"OneWayPlatform": {scene=load("res://src/spike/zones/OneWayPlatform.tscn"),
 				# resize to match tile_size
 				setup=func(p):
