@@ -1,4 +1,4 @@
-(ns bb-godot.logger)
+(ns logger)
 
 ;; https://gist.github.com/borkdude/c97da85da67c7bcc5671765aef5a89ad
 

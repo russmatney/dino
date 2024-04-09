@@ -1,7 +1,7 @@
-{:paths ["src"]
+{:paths ["bb"]
  :tasks
- {:requires ([bb-godot.tasks :as tasks]
-             [bb-godot.logger :refer [log]]
+ {:requires ([tasks :as tasks]
+             [logger :refer [log]]
              [babashka.fs :as fs]
              [clojure.string :as string])
 
