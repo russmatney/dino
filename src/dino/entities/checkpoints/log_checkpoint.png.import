@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bexm0gw7341ir"
-path="res://.godot/imported/MNT_snow_bench_checkpoint.png-1f9ccf463e6e65757f6d098d2ec8fe13.ctex"
+uid="uid://b50xhswqrkwx7"
+path="res://.godot/imported/log_checkpoint.png-8168d7b08c053f114a185f44464e4e37.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/mountain/checkpoints/MNT_snow_bench_checkpoint.png"
-dest_files=["res://.godot/imported/MNT_snow_bench_checkpoint.png-1f9ccf463e6e65757f6d098d2ec8fe13.ctex"]
+source_file="res://src/dino/entities/checkpoints/log_checkpoint.png"
+dest_files=["res://.godot/imported/log_checkpoint.png-8168d7b08c053f114a185f44464e4e37.ctex"]
 
 [params]
 

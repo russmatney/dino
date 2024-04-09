@@ -1,5 +1,5 @@
 @tool
-extends MetroCheckpoint
+extends Checkpoint
 
 @onready var light = $PointLight2D
 @onready var anim = $AnimatedSprite2D
@@ -74,21 +74,15 @@ var sitting
 func sit(player):
 	sitting = true
 
-	# zoom in on player. perhaps this is a camera mode switch instead
-	if room:
-		room.deactivate_cam_points()
+	# TODO zoom in on player. probably a pcam priority flip
 
 	var exit_cb = func():
 		put_out()
 		sitting = false
-		if room:
-			room.activate_cam_points()
 
 	visit(player, {exit_cb=exit_cb})
 
-
-#################################################################
-# light tween
+## light tween ################################################################
 
 var t
 var new_scale

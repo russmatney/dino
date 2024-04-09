@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bid88q8ils016"]
 
-[ext_resource type="Script" path="res://src/hatbot/entities/Candle.gd" id="1_7eirx"]
-[ext_resource type="SpriteFrames" uid="uid://63sc3onlnswo" path="res://src/hatbot/entities/CandleSpriteFrames.tres" id="1_ywigl"]
+[ext_resource type="Script" path="res://src/dino/entities/checkpoints/Candle.gd" id="1_7eirx"]
+[ext_resource type="SpriteFrames" uid="uid://63sc3onlnswo" path="res://src/dino/entities/checkpoints/CandleSpriteFrames.tres" id="1_ywigl"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="4_asdr1"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_jrqog"]
 [ext_resource type="Texture2D" uid="uid://b7k56d46x3akl" path="res://addons/core/assets/lights/light64px4.png" id="6_nahms"]

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_m2p2p"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="3_8ionw"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="4_qcjf2"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="5_7ifjf"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="5_7ifjf"]
 
 [node name="Area07GrassyCave" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_g6jko")

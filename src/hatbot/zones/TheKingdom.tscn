@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn" id="5_fdigg"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="5_q6axq"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_cqiek"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="7_2jren"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="7_2jren"]
 [ext_resource type="PackedScene" path="res://src/shirt/entities/Coin.tscn" id="7_6utu0"]
 [ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://addons/core/beehive/sidescroller/powerups/SSPowerup.tscn" id="7_x20i6"]
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="8_1itx7"]

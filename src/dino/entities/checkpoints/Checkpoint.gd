@@ -1,12 +1,11 @@
 @tool
 extends Node2D
-class_name MetroCheckpoint
+class_name Checkpoint
 
 @onready var action_area = $ActionArea
 @onready var action_hint = $ActionHint
 
 var visit_count = 0
-var room
 
 ## config warnings ###########################################################
 
@@ -24,10 +23,6 @@ func _ready():
 	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 
 	Hotel.register(self)
-
-	var p = get_parent()
-	if p is MetroRoom:
-		room = p
 
 ## hotel ###########################################################
 

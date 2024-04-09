@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_nt0co"]
 [ext_resource type="PackedScene" uid="uid://cdtqoa3gaqsdh" path="res://src/hatbot/player/Player.tscn" id="2_uwo77"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="3_epy4s"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="3_epy4s"]
 
 [node name="ActionGym" type="Node2D"]
 

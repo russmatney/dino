@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyft4sctcy2qv"
-path="res://.godot/imported/MNT_cave_bench_checkpoint.png-2b5c5bf79b70fdae07061cd6a7dc32e9.ctex"
+uid="uid://bmxoilheb3u70"
+path="res://.godot/imported/MNT_log_bench_checkpoint.png-71be508bc32e076c44ffd9a8a087f07e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/mountain/checkpoints/MNT_cave_bench_checkpoint.png"
-dest_files=["res://.godot/imported/MNT_cave_bench_checkpoint.png-2b5c5bf79b70fdae07061cd6a7dc32e9.ctex"]
+source_file="res://src/dino/entities/checkpoints/MNT_log_bench_checkpoint.png"
+dest_files=["res://.godot/imported/MNT_log_bench_checkpoint.png-71be508bc32e076c44ffd9a8a087f07e.ctex"]
 
 [params]
 

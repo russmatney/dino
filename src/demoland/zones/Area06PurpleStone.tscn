@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://addons/core/metro/MetroZone.gd" id="1_tmvuu"]
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_7tnei"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="3_wwjab"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="4_6jxld"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="4_6jxld"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
 
 [node name="Area06PurpleStone" type="Node2D" groups=["metro_zones"]]

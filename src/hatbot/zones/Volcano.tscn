@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" path="res://src/hatbot/BossDefeatQuest.tscn" id="17_yxlqf"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/hatbot/bosses/Monstroar.tscn" id="18_tygdy"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="18_ye46h"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="19_pnysb"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="19_pnysb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scfj8"]
 shader = ExtResource("2_20wgn")

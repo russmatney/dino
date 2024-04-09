@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://src/hatbot/entities/Door.tscn" id="5_apdpi"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="6_3txdl"]
 [ext_resource type="PackedScene" uid="uid://cdtqoa3gaqsdh" path="res://src/hatbot/player/Player.tscn" id="7_bu207"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="7_cksc3"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="7_cksc3"]
 
 [node name="DemoMap" type="Node2D"]
 

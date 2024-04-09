@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dkyb7ritrpatt"]
 
-[ext_resource type="Script" path="res://addons/core/metro/MetroCheckpoint.gd" id="1_3514d"]
+[ext_resource type="Script" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_tng3f"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="2_xsmew"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="3_3c6sm"]
-[ext_resource type="Texture2D" uid="uid://dyft4sctcy2qv" path="res://src/mountain/checkpoints/MNT_cave_bench_checkpoint.png" id="4_cjefc"]
+[ext_resource type="Texture2D" uid="uid://dyft4sctcy2qv" path="res://src/dino/entities/checkpoints/MNT_cave_bench_checkpoint.png" id="4_cjefc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrrr1"]
 size = Vector2(16, 32)
@@ -24,7 +24,7 @@ animations = [{
 }]
 
 [node name="CaveCheckpoint" type="Node2D" groups=["metro_checkpoints"]]
-script = ExtResource("1_3514d")
+script = ExtResource("1_tng3f")
 
 [node name="ActionArea" parent="." instance=ExtResource("2_xsmew")]
 

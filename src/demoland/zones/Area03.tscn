@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_6kmgr"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="3_6vpfe"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="4_d4u5t"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="5_gq06a"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="5_gq06a"]
 
 [node name="Area03" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_ig4y2")

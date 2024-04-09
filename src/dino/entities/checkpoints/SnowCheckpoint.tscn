@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvjtmnprpxqem"]
 
-[ext_resource type="Script" path="res://addons/core/metro/MetroCheckpoint.gd" id="1_2uhlj"]
+[ext_resource type="Script" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_wq6lf"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="2_76pnm"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="3_jvpw1"]
-[ext_resource type="Texture2D" uid="uid://bexm0gw7341ir" path="res://src/mountain/checkpoints/MNT_snow_bench_checkpoint.png" id="4_uds3o"]
+[ext_resource type="Texture2D" uid="uid://bexm0gw7341ir" path="res://src/dino/entities/checkpoints/MNT_snow_bench_checkpoint.png" id="4_uds3o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyfto"]
 size = Vector2(16, 32)
@@ -24,7 +24,7 @@ animations = [{
 }]
 
 [node name="SnowCheckpoint" type="Node2D" groups=["metro_checkpoints"]]
-script = ExtResource("1_2uhlj")
+script = ExtResource("1_wq6lf")
 
 [node name="ActionArea" parent="." instance=ExtResource("2_76pnm")]
 

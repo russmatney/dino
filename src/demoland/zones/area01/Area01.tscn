@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="11_oke76"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="12_7ylae"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/hatbot/enemies/Soldier.tscn" id="14_l82es"]
-[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/hatbot/entities/Candle.tscn" id="15_r03j1"]
+[ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="15_r03j1"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/hatbot/entities/Elevator.tscn" id="17_aao4x"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://addons/core/reptile/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
