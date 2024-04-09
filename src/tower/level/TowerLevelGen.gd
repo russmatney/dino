@@ -25,7 +25,7 @@ func get_room_opts(opts):
 			},
 			label_to_entity={
 				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
-				"Target": {scene=load("res://src/gunner/targets/Target.tscn"),
+				"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
 					setup=func(t):
 					t.position += Vector2.RIGHT * opts.tile_size / 2.0
 					t.position += Vector2.DOWN * opts.tile_size / 2.0

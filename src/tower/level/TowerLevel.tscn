@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_3dwmr"]
 [ext_resource type="Script" path="res://src/tower/level/TowerLevelGen.gd" id="2_qx8d7"]
-[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="8_8icay"]
+[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/dino/quests/BreakTheTargets.tscn" id="8_8icay"]
 
 [node name="TowerLevel" type="Node2D"]
 script = ExtResource("1_3dwmr")

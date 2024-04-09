@@ -97,7 +97,7 @@ func floor_tile_below(cell):
 ########################################################################
 # spawn targets
 
-var target_scene = preload("res://src/gunner/targets/Target.tscn")
+var target_scene = preload("res://src/dino/entities/targets/Target.tscn")
 
 
 func spawn_targets():

@@ -4,7 +4,7 @@
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="2"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="3"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="4"]
-[ext_resource type="Script" path="res://src/gunner/targets/DestroyedLabel.gd" id="5"]
+[ext_resource type="Script" path="res://src/dino/ui/DestroyedLabel.gd" id="5"]
 
 [node name="DestroyedLabel" type="RichTextLabel"]
 modulate = Color(0.819608, 0.486275, 0.486275, 1)

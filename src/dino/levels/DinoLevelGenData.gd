@@ -27,7 +27,7 @@ static func label_to_entity(opts):
 			setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 			},
 		"Void": {scene=load("res://src/spike/entities/DeliveryZone.tscn")},
-		"Target": {scene=load("res://src/gunner/targets/Target.tscn"),
+		"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
 			setup=func(t):
 			t.position += Vector2.RIGHT * opts.tile_size / 2.0
 			t.position += Vector2.DOWN * opts.tile_size / 2.0

@@ -51,7 +51,7 @@ var label_to_entity = {
 	"CookingPot": {scene=load("res://src/spike/entities/CookingPot.tscn"),
 		setup=func(p, opts): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 		},
-	"Target": {scene=load("res://src/gunner/targets/Target.tscn"),
+	"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
 		setup=func(t, opts):
 		t.position += Vector2.RIGHT * opts.tile_size / 2.0
 		t.position += Vector2.DOWN * opts.tile_size / 2.0

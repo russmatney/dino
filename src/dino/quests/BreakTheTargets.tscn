@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3hrw8ghc7f5w"]
 
-[ext_resource type="Script" path="res://src/gunner/targets/BreakTheTargets.gd" id="1"]
+[ext_resource type="Script" path="res://src/dino/quests/BreakTheTargets.gd" id="1"]
 
 [node name="BreakTheTargets" type="Node" groups=["quests"]]
 script = ExtResource("1")

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://src/tower/rooms/TowerStartRoom.tscn" id="7"]
 [ext_resource type="Script" path="res://src/tower/level/TowerClimb.gd" id="8"]
 [ext_resource type="Script" path="res://addons/core/reptile/ReptileGroup.gd" id="9"]
-[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/dino/quests/BreakTheTargets.tscn" id="11"]
 
 [node name="TowerClimb" type="Node2D"]
 script = ExtResource("8")

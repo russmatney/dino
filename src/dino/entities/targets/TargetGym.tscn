@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://r8rg2oxha6on"]
 
 [ext_resource type="PackedScene" path="res://src/gunner/player/Player.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/gunner/targets/Target.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/gunner/targets/BreakTheTargets.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/dino/entities/targets/Target.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://c3hrw8ghc7f5w" path="res://src/dino/quests/BreakTheTargets.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_r0vsp"]
 
 [node name="TargetGym" type="Node2D"]
