@@ -49,5 +49,5 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/mountain/assets/MNT_cave_bench_checkpoint.aseprite"
+"source": "res://src/dino/entities/checkpoints/MNT_cave_bench_checkpoint.aseprite"
 }

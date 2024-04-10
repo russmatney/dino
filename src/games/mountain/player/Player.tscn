@@ -455,7 +455,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/mountain/assets/mountain_player.aseprite"
+"source": "res://src/games/mountain/assets/mountain_player.aseprite"
 }
 
 [node name="ActionDetector" parent="." instance=ExtResource("5_tj1yg")]

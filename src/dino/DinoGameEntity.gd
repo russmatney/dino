@@ -13,8 +13,8 @@ func get_icon_texture() -> Texture:
 func is_enabled() -> bool:
 	return get_bool("enabled")
 
-func get_first_level_scene() -> PackedScene:
-	return get_resource("first_level")
+func get_level_scene() -> PackedScene:
+	return get_resource("level_scene")
 
 func get_player_type() -> String:
 	return get_string("player_type")
@@ -25,7 +25,7 @@ func data():
 	return {
 		display_name=get_display_name(),
 		icon_texture=get_icon_texture(),
-		first_level_scene=get_first_level_scene(),
+		level_scene=get_level_scene(),
 		}
 
 ## static helpers ##########################################################

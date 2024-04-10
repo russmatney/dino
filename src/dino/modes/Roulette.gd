@@ -111,7 +111,7 @@ func launch_game(game_entity):
 			entity=player_entity,
 			})
 
-	var scene = game_entity.get_first_level_scene()
+	var scene = game_entity.get_level_scene()
 	game_node = scene.instantiate()
 	setup_game(game_node)
 

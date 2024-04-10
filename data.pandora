@@ -86,6 +86,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Super_Elevator_Level_icon_sheet.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/superElevatorLevel/levels/SELLevel.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "beatemup"
@@ -106,6 +110,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Spike_icon_sheet.png"
+					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/spike/level/SpikeLevel.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -128,6 +136,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Shirt_icon_sheet.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/shirt/level/ShirtLevel.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
@@ -148,6 +160,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/hatbot_icon_sheet.png"
+					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/LevelZero.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -170,6 +186,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/The_Mountain_icon_sheet.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/mountain/zones/TheMountain.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -190,6 +210,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Ghost_House_icon_sheet.png"
+					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/ghosts/world/House.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -212,6 +236,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/tower_icon_sheet.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/tower/level/TowerLevel.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -232,6 +260,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/gunner_icon_sheet.png"
+					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/gunner/level/GunnerLevel.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -254,6 +286,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Harvey_icon_sheet.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/harvey/level/HarveyLevel.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
@@ -275,6 +311,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Herd_icon_sheet.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/herd/levels/HerdLevel.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
@@ -291,6 +331,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Demo Land"
+					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/demoland/zones/area01/Area01.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -313,6 +357,10 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/pluggs_icon_4x.png"
 					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/pluggs/level/PluggsLevel.tscn"
+					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -333,6 +381,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/woods_icon_sheet.png"
+					},
+					"level_scene": {
+						"type": "resource",
+						"value": "res://src/games/woods/level/WoodsLevel.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -1085,12 +1137,19 @@
 				"_id": "112",
 				"_name": "base_square_size",
 				"_type": "int"
+			},
+			{
+				"_category_id": "17",
+				"_default_value": null,
+				"_id": "116",
+				"_name": "level_scene",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 115
+			"default": 116
 		}
 	}
 }

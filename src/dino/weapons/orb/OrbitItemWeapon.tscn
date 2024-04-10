@@ -32,5 +32,5 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/spike/assets/SPIKE_aim_line.aseprite"
+"source": "res://src/games/spike/assets/SPIKE_aim_line.aseprite"
 }
