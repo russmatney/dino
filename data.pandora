@@ -103,10 +103,6 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Super_Elevator_Level_icon_sheet.png"
 					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/superElevatorLevel/menus/MainMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "beatemup"
@@ -136,10 +132,6 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Spike_icon.png"
 					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/spike/menus/MainMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -168,10 +160,6 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Shirt_icon_sheet.png"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/shirt/menus/MainMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -206,10 +194,6 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/hatbot_icon_sheet.png"
 					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/hatbot/menus/MainMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -242,10 +226,6 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/The_Mountain_icon_sheet.png"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/mountain/menus/MainMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -280,10 +260,6 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Ghost_House_icon_sheet.png"
 					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/ghosts/GhostsMenu.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
@@ -312,10 +288,6 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/tower_icon_sheet.png"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/tower/menus/TowerMainMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -375,10 +347,6 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/Harvey_icon_sheet.png"
 					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/harvey/menus/HarveyMenu.tscn"
-					},
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/harvey/player/HarveyPlayer.tscn"
@@ -411,10 +379,6 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Herd_icon_sheet.png"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/herd/menus/MainMenu.tscn"
 					},
 					"player_scene": {
 						"type": "resource",
@@ -482,10 +446,6 @@
 						"type": "resource",
 						"value": "res://assets/gameicons/pluggs_icon_4x.png"
 					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/pluggs/menus/MainMenu.tscn"
-					},
 					"player_scene": {
 						"type": "resource",
 						"value": "res://src/pluggs/player/Pluggs.tscn"
@@ -518,10 +478,6 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/woods_icon_sheet.png"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/woods/menus/MainMenu.tscn"
 					},
 					"player_type": {
 						"type": "string",
@@ -1179,7 +1135,7 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": null,
+				"_default_value": "res://src/dino/menus/DinoMenu.tscn",
 				"_id": "24",
 				"_name": "main_menu",
 				"_type": "resource"

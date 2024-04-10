@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bluw785nqbvw4"
-path="res://.godot/imported/lilbighat_sheet.png-663bbad0c89378a003297edb9ac229bc.ctex"
+uid="uid://06gj68sxo86"
+path="res://.godot/imported/lilbighat.png-8642b79d24bf6ae6fa8b48268a92ebf4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/hatbot/player/lilbighat_sheet.png"
-dest_files=["res://.godot/imported/lilbighat_sheet.png-663bbad0c89378a003297edb9ac229bc.ctex"]
+source_file="res://src/dino/players/lilbighat/lilbighat.png"
+dest_files=["res://.godot/imported/lilbighat.png-8642b79d24bf6ae6fa8b48268a92ebf4.ctex"]
 
 [params]
 

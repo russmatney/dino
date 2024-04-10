@@ -10,9 +10,6 @@ var last_scene_stack = []
 ## ready ###################################################################
 
 func _ready():
-	if not ResourceLoader.exists(main_menu_path):
-		Log.prn("No scene at path: ", main_menu_path, ", nav_to_main_menu will no-op.")
-
 	process_mode = PROCESS_MODE_ALWAYS
 
 	var root = get_tree().get_root()
@@ -20,10 +17,6 @@ func _ready():
 	var main_scene_path = ProjectSettings.get_setting("application/run/main_scene")
 	if first.scene_file_path == main_scene_path:
 		first_scene = first
-
-	pause_menu = add_menu(load(pause_menu_path))
-	death_menu = add_menu(death_menu_scene)
-	win_menu = add_menu(win_menu_scene)
 
 ## input ###################################################################
 
@@ -200,25 +193,25 @@ func clear_menus():
 
 ## main menu ###################################################################
 
-var main_menu_path = "res://src/dino/menus/DinoMenu.tscn"
+var main_menu_path
 
-func set_main_menu(path):
+func set_main_menu(path_or_scene):
+	var path = U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
-		Log.prn("Updating main_menu_path: ", path)
+		Log.pr("Updating main_menu_path: ", path)
 		main_menu_path = path
 	else:
-		Log.prn("No scene at path: ", main_menu_path, ", can't set main menu.")
+		Log.pr("No scene at path: ", path, ", can't set main menu.")
 
 func nav_to_main_menu():
 	if ResourceLoader.exists(main_menu_path):
 		hide_menus()
 		nav_to(main_menu_path)
 	else:
-		Log.prn("No scene at path: ", main_menu_path, ", can't navigate.")
+		Log.pr("No scene at path: ", main_menu_path, ", can't navigate.")
 
 ## pause menu ###################################################################
 
-var pause_menu_path = "res://src/dino/menus/DinoPauseMenu.tscn"
 var pause_menu
 
 func set_pause_menu(path_or_scene):
@@ -234,16 +227,15 @@ func set_pause_menu(path_or_scene):
 			pause_menu.queue_free()
 		pause_menu = add_menu(load(path))
 	else:
-		Log.prn("No scene at path: ", path, ", can't set pause menu.")
+		Log.pr("No scene at path: ", path, ", can't set pause menu.")
 
 ## death ###########################################
 
-@export var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
 var death_menu
 
 func set_death_menu(path_or_scene):
 	if path_or_scene == null:
-		Log.warn("Null passed to set_pause_menu, returning")
+		Log.warn("Null passed to set_death_menu, returning")
 		return
 	var path = U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
@@ -267,12 +259,11 @@ func hide_death_menu():
 
 ## win ###########################################
 
-@export var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")
 var win_menu
 
 func set_win_menu(path_or_scene):
 	if path_or_scene == null:
-		Log.warn("Null passed to set_pause_menu, returning")
+		Log.warn("Null passed to set_win_menu, returning")
 		return
 	var path = U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):

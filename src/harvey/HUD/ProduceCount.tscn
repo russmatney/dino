@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://src/harvey/ProduceIcon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/harvey/HUD/ProduceCount.gd" type="Script" id=2]
-[ext_resource path="res://src/harvey/HUDTheme.tres" type="Theme" id=3]
+[ext_resource type="PackedScene" uid="uid://6p8s43n5euf5" path="res://src/harvey/ProduceIcon.tscn" id="1"]
+[ext_resource type="Script" path="res://src/harvey/HUD/ProduceCount.gd" id="2"]
+[ext_resource type="Theme" uid="uid://bmvv7vyaun6y8" path="res://src/harvey/HUD/HUDTheme.tres" id="3"]
 
 [node name="ProduceCount" type="HBoxContainer"]
 offset_right = 512.0

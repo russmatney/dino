@@ -32,10 +32,20 @@ func reseed():
 
 ## ready ##########################################################
 
+var main_menu_scene = preload("res://src/dino/menus/DinoMenu.tscn")
+var pause_menu_scene = preload("res://src/dino/menus/pause/DinoPauseMenu.tscn")
+var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
+var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")
+
 func _ready():
 	reseed()
 	player_set.new_player_ready.connect(func(p):
 		player_ready.emit(p))
+
+	Navi.set_main_menu(main_menu_scene)
+	Navi.set_pause_menu(pause_menu_scene)
+	Navi.set_death_menu(death_menu_scene)
+	Navi.set_win_menu(win_menu_scene)
 
 ## current game ##########################################################
 

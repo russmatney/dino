@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://uh4ii83qdjkj"
+path="res://.godot/imported/lilbighat.aseprite-e1f9fcf85c5f2e633d918a96e63a4c12.res"
+
+[deps]
+
+source_file="res://src/dino/players/lilbighat/lilbighat.aseprite"
+dest_files=["res://.godot/imported/lilbighat.aseprite-e1f9fcf85c5f2e633d918a96e63a4c12.res"]
+
+[params]
+

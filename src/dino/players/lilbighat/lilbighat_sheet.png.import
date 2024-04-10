@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj787pa7wju5f"
-path="res://.godot/imported/soft-soft-hoodie.png-ff5355db119e2cf7044749bd967e9393.ctex"
+uid="uid://bluw785nqbvw4"
+path="res://.godot/imported/lilbighat_sheet.png-62feb91d67046967894e86e636d1348b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/spike/player/soft-soft-hoodie.png"
-dest_files=["res://.godot/imported/soft-soft-hoodie.png-ff5355db119e2cf7044749bd967e9393.ctex"]
+source_file="res://src/dino/players/lilbighat/lilbighat_sheet.png"
+dest_files=["res://.godot/imported/lilbighat_sheet.png-62feb91d67046967894e86e636d1348b.ctex"]
 
 [params]
 

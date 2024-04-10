@@ -1,3 +1,0 @@
-[gd_scene format=2]
-
-[node name="EnemySpawner" type="Marker2D" groups=["enemy_spawner"]]

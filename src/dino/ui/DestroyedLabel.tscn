@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://65w5a8rqpoiu"]
 
-[ext_resource type="Theme" uid="uid://bk2l0olwstp57" path="res://src/gunner/InGameTextTheme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://bk2l0olwstp57" path="res://src/dino/ui/InGameTextTheme.tres" id="1"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="2"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="3"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="4"]

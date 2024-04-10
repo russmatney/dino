@@ -1,14 +1,7 @@
 @tool
 extends Node
 
-###########################################################
-# enter tree
-
-func _enter_tree():
-	add_to_group(GhostsData.rooms_group, true)
-
-###########################################################
-# ready
+## ready ##########################################################
 
 func _ready():
 	Hotel.register(self)
@@ -16,8 +9,7 @@ func _ready():
 	if not Engine.is_editor_hint():
 		Hotel.check_in(self, {ready_at=Time.get_unix_time_from_system()})
 
-###########################################################
-# hotel
+## hotel ##########################################################
 
 func hotel_data():
 	return {
