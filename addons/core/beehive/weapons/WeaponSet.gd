@@ -30,6 +30,9 @@ func weapon_for_id(id):
 func list():
 	return stack
 
+func list_entities():
+	return stack.map(func(w): return w.entity)
+
 func add_weapon(ent_id):
 	var existing = weapon_for_id(ent_id)
 	if existing:
@@ -98,6 +101,10 @@ func activate_weapon_with_entity(entity):
 
 # move the passed weapon to index 0, and call w.activate()
 func activate_weapon(weapon=null):
+	var current = active_weapon()
+	if current:
+		deactivate_weapon(current)
+
 	if not weapon:
 		weapon = active_weapon()
 	else:

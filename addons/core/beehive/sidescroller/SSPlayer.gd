@@ -25,6 +25,9 @@ var aim_vector = Vector2.ZERO
 @export var has_flashlight: bool
 @export var has_boomerang: bool
 
+var quick_select_scene = preload("res://src/dino/menus/quickSelect/QuickSelect.tscn")
+var quick_select_menu
+
 ## config warning ###########################################################
 
 func _get_configuration_warnings():
@@ -39,6 +42,9 @@ func _get_configuration_warnings():
 
 func _enter_tree():
 	add_to_group("player", true)
+
+	quick_select_menu = quick_select_scene.instantiate()
+	add_child(quick_select_menu)
 
 ## actions ###########################################################
 
@@ -135,6 +141,16 @@ func _unhandled_input(event):
 		if weapon_set.list().size() > 0:
 			Debug.notif(str("Changed weapon: ", weapon_set.active_weapon().display_name))
 			notif(active_weapon().display_name)
+
+	if Trolls.is_pressed(event, "weapon_swap_menu"):
+		quick_select_menu.show_menu({
+			entities=weapon_set.list_entities(),
+			on_select=func(weapon):
+			Log.pr("should select weapon", weapon)
+			activate_weapon(weapon),
+			})
+	elif Trolls.is_released(event, "weapon_swap_menu"):
+		quick_select_menu.hide_menu()
 
 	# generic action
 	if Trolls.is_action(event):

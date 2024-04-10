@@ -574,6 +574,15 @@ static func find_level_root(node):
 
 ## focus ######################################################
 
+static func has_focus(node: Node) -> bool:
+	if node.has_focus():
+		return true
+	else:
+		for ch in node.get_children():
+			if U.has_focus(ch):
+				return true
+	return false
+
 static func get_focusable_children(container: Node) -> Array[Node]:
 	var chs: Array[Node] = []
 	for ch in container.get_children():

@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://bnfe8r27glpje" path="res://src/themes/QuickSelectPanel.tres" id="2_eihlf"]
 
 [node name="QuickSelect" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +16,8 @@ script = ExtResource("1_itny8")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,29 +27,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_eihlf")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 200)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="EntityList" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="EntityList" type="HBoxContainer" parent="CanvasLayer/Panel/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
