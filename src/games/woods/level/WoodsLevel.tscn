@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1k06267gxk5t"]
+
+[ext_resource type="Script" path="res://src/games/woods/level/WoodsLevelGen.gd" id="1_ayd6d"]
+[ext_resource type="Script" path="res://src/games/woods/level/WoodsLevel.gd" id="1_lfrcs"]
+
+[node name="WoodsLevel" type="Node2D"]
+script = ExtResource("1_lfrcs")
+
+[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
+script = ExtResource("1_ayd6d")
+_seed = 372301141
+room_count = 6
+room_defs_path = "res://src/woods/level/rooms.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1270.0
+offset_top = -1085.0
+offset_right = 4073.0
+offset_bottom = 2041.0
+color = Color(0.0156252, 0.046891, 0.035172, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.266667, 0.662745, 0.337255, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = -0.418879
+color = Color(0.819608, 0.854902, 0.219608, 1)
+energy = 4.63
+shadow_enabled = true
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="Entities" type="Node2D" parent="."]

@@ -10,10 +10,6 @@ const DINOMODE = "92"
 const LEVELDEF = "103"
 
 
-class DinoGameCategories:
-	const GAMEMODE = "65"
-
-
 class MetroTravelPointCategories:
 	const DEMOLANDTRAVELPOINT = "46"
 

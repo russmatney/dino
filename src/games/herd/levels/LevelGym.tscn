@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://brur5iei0ugcc"]
+
+[ext_resource type="Script" path="res://src/games/herd/levels/HerdLevel.gd" id="1_skvb0"]
+[ext_resource type="PackedScene" uid="uid://b254u72nu1oj3" path="res://src/games/herd/quests/FetchSheepQuest.tscn" id="2_1vdu8"]
+[ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/games/herd/tiles/FenceTiles.tscn" id="3_hvnmb"]
+[ext_resource type="PackedScene" uid="uid://dyjqpthy70n1i" path="res://src/games/herd/quests/SheepPen.tscn" id="3_y0vms"]
+[ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/games/herd/sheep/Sheep.tscn" id="4_verlv"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="5_abkn8"]
+[ext_resource type="PackedScene" uid="uid://bstod1n1dqbyt" path="res://src/games/herd/wolf/Wolf.tscn" id="6_yp0tt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5hpu"]
+size = Vector2(114, 74)
+
+[node name="LevelGym" type="Node2D"]
+script = ExtResource("1_skvb0")
+
+[node name="FetchSheepQuest" parent="." instance=ExtResource("2_1vdu8")]
+
+[node name="SheepPen" parent="FetchSheepQuest" instance=ExtResource("3_y0vms")]
+position = Vector2(466, 248)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FetchSheepQuest/SheepPen"]
+position = Vector2(-32, 44)
+shape = SubResource("RectangleShape2D_c5hpu")
+
+[node name="FenceTiles" parent="." instance=ExtResource("3_hvnmb")]
+position = Vector2(466, 248)
+layer_0/tile_data = PackedInt32Array(655363, 524289, 5, 589827, 262145, 3, 524291, 262145, 3, 458755, 262145, 3, 393219, 262145, 3, 327683, 262145, 3, 262147, 262145, 3, 196611, 262145, 3, 131075, 262145, 3, 65539, 262145, 3, 3, 524289, 2, 655362, 131073, 5, 2, 131073, 5, 655361, 131073, 5, 1, 131073, 5, 655360, 131073, 5, 0, 131073, 5, 720895, 131073, 5, 65535, 65537, 5, 720894, 131073, 5, 720893, 131073, 5, 720892, 131073, 5, 720891, 131073, 5, 720890, 131073, 5, 720889, 131073, 5, 720888, 131073, 5, 65528, 196609, 5, 720887, 131073, 5, 65527, 131073, 5, 720886, 131073, 5, 65526, 131073, 5, 720885, 131073, 5, 65525, 131073, 5, 720884, 327681, 5, 655348, 262145, 3, 589812, 262145, 3, 524276, 262145, 3, 458740, 262145, 3, 393204, 262145, 3, 327668, 262145, 3, 262132, 262145, 3, 196596, 262145, 3, 131060, 262145, 3, 65524, 327681, 2)
+
+[node name="Sheep" parent="." instance=ExtResource("4_verlv")]
+position = Vector2(538, 182)
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("5_abkn8")]
+position = Vector2(405, 196)
+
+[node name="Wolf" parent="." instance=ExtResource("6_yp0tt")]
+position = Vector2(236, 203)

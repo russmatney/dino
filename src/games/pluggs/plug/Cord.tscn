@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://j5uppxhyiwpq"]
+
+[ext_resource type="Script" path="res://src/games/pluggs/plug/Cord.gd" id="1_37gt5"]
+
+[node name="Cord" type="Line2D"]
+width = 3.0
+default_color = Color(0.0687983, 0.0687983, 0.0687982, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_37gt5")

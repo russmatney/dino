@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_t4ctl"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_4ljf6"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_cpplh"]
-[ext_resource type="PackedScene" path="res://src/shirt/PitDetector.tscn" id="11_xg3ti"]
+[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/games/shirt/PitDetector.tscn" id="11_xg3ti"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmvsu"]
 radius = 5.0

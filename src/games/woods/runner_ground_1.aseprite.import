@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://jvshfakif62x"
+path="res://.godot/imported/runner_ground_1.aseprite-5fdaa439a5c6a6c78c0b092b4b5ef384.res"
+
+[deps]
+
+source_file="res://src/games/woods/runner_ground_1.aseprite"
+dest_files=["res://.godot/imported/runner_ground_1.aseprite-5fdaa439a5c6a6c78c0b092b4b5ef384.res"]
+
+[params]
+

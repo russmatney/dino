@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://jg7xpetmlc7w"]
+
+[ext_resource type="SpriteFrames" path="res://src/games/harvey/ToolIcon.tres" id="1"]
+
+[node name="ToolIcon" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1")
+animation = &"shovel"

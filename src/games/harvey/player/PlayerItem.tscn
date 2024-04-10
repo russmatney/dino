@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cadjlq5gl6srf"]
+
+[ext_resource type="PackedScene" uid="uid://jg7xpetmlc7w" path="res://src/games/harvey/ToolIcon.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://6p8s43n5euf5" path="res://src/games/harvey/ProduceIcon.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dm7exgj6qui2q" path="res://src/games/harvey/assets/seed-icon_sheet.png" id="4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bp7o"]
+atlas = ExtResource("4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1jah1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bp7o")
+}],
+"loop": true,
+"name": &"seed",
+"speed": 5.0
+}]
+
+[node name="Item" type="Node2D"]
+position = Vector2(-13, -29)
+
+[node name="ProduceIcon" parent="." instance=ExtResource("3")]
+visible = false
+animation = &"tomato"
+
+[node name="SeedIcon" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_1jah1")
+animation = &"seed"
+
+[node name="SeedTypeIcon" parent="SeedIcon" instance=ExtResource("3")]
+position = Vector2(-4, 4)
+scale = Vector2(0.5, 0.5)
+animation = &"onion"
+
+[node name="ToolIcon" parent="." instance=ExtResource("1")]
+visible = false
+animation = &"shovel"

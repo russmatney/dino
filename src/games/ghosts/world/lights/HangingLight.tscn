@@ -1,0 +1,169 @@
+[gd_scene load_steps=4 format=3 uid="uid://c25comrsm8rkt"]
+
+[ext_resource type="PackedScene" uid="uid://ddklv6bc7o134" path="res://src/games/ghosts/world/lights/SmallLight.tscn" id="1"]
+
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 1.0
+height = 16.0
+
+[node name="ChainContainer" type="Node2D"]
+
+[node name="ChainBase" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="ColorRect" type="ColorRect" parent="ChainBase"]
+offset_left = -7.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChainBase"]
+shape = SubResource("1")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 8)
+node_a = NodePath("../ChainBase")
+node_b = NodePath("../Chain")
+softness = 2.0
+
+[node name="Chain" type="RigidBody2D" parent="."]
+position = Vector2(0, 18)
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="Chain"]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain"]
+position = Vector2(0, -1)
+shape = SubResource("2")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(0, 26)
+node_a = NodePath("../Chain")
+node_b = NodePath("../Chain2")
+softness = 10.0
+
+[node name="Chain2" type="RigidBody2D" parent="."]
+position = Vector2(0, 36)
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="Chain2"]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain2"]
+position = Vector2(0, -1)
+shape = SubResource("2")
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+position = Vector2(0, 44)
+node_a = NodePath("../Chain2")
+node_b = NodePath("../Chain3")
+softness = 10.0
+
+[node name="Chain3" type="RigidBody2D" parent="."]
+position = Vector2(0, 54)
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="Chain3"]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain3"]
+position = Vector2(0, -1)
+shape = SubResource("2")
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2(0, 62)
+node_a = NodePath("../Chain3")
+node_b = NodePath("../Chain4")
+softness = 10.0
+
+[node name="Chain4" type="RigidBody2D" parent="."]
+position = Vector2(0, 72)
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="Chain4"]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain4"]
+position = Vector2(0, -1)
+shape = SubResource("2")
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="."]
+position = Vector2(0, 80)
+node_a = NodePath("../Chain4")
+node_b = NodePath("../Chain5")
+softness = 10.0
+
+[node name="Chain5" type="RigidBody2D" parent="."]
+position = Vector2(0, 90)
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="Chain5"]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain5"]
+position = Vector2(0, -1)
+shape = SubResource("2")
+
+[node name="PinJoint2D6" type="PinJoint2D" parent="."]
+position = Vector2(0, 98)
+node_a = NodePath("../Chain5")
+node_b = NodePath("../Chain6")
+softness = 10.0
+
+[node name="Chain6" type="RigidBody2D" parent="."]
+position = Vector2(0, 108)
+collision_layer = 0
+collision_mask = 0
+mass = 0.01
+
+[node name="ColorRect" type="ColorRect" parent="Chain6"]
+offset_left = -1.0
+offset_top = -10.0
+offset_right = 1.0
+offset_bottom = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chain6"]
+position = Vector2(0, -1)
+shape = SubResource("2")
+
+[node name="PinJoint2D7" type="PinJoint2D" parent="."]
+position = Vector2(0, 116)
+node_a = NodePath("../Chain6")
+node_b = NodePath("../SmallLight")
+softness = 10.0
+
+[node name="SmallLight" parent="." instance=ExtResource("1")]
+position = Vector2(0, 118)
+mass = 0.01
+freeze_mode = 1

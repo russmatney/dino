@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://boy4o678awcnt"
+path="res://.godot/imported/barney64.aseprite-65423312276d627e21afbad3edc322da.res"
+
+[deps]
+
+source_file="res://src/games/shirt/assets/barney64.aseprite"
+dest_files=["res://.godot/imported/barney64.aseprite-65423312276d627e21afbad3edc322da.res"]
+
+[params]
+

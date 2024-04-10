@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c4g438k5wbldh"
+path="res://.godot/imported/SEL_GroundFloor_background.aseprite-fe67d6b27e61330a4434dff046f3756a.res"
+
+[deps]
+
+source_file="res://src/games/superElevatorLevel/assets/SEL_GroundFloor_background.aseprite"
+dest_files=["res://.godot/imported/SEL_GroundFloor_background.aseprite-fe67d6b27e61330a4434dff046f3756a.res"]
+
+[params]
+

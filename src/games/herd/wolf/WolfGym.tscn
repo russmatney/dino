@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxb2duly062bx"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_jnt7i"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="2_ptwph"]
+[ext_resource type="PackedScene" uid="uid://bstod1n1dqbyt" path="res://src/games/herd/wolf/Wolf.tscn" id="3_fktqk"]
+[ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/games/herd/sheep/Sheep.tscn" id="4_l7qfl"]
+[ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/games/herd/tiles/FenceTiles.tscn" id="5_a5ktk"]
+
+[node name="WolfGym" type="Node"]
+script = ExtResource("1_jnt7i")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 24.0
+offset_top = 27.0
+offset_right = 399.0
+offset_bottom = 396.0
+color = Color(0.174225, 0.420002, 0.570602, 1)
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("2_ptwph")]
+position = Vector2(4, 45)
+
+[node name="Sheep" parent="." instance=ExtResource("4_l7qfl")]
+position = Vector2(507, 139)
+
+[node name="Sheep2" parent="." instance=ExtResource("4_l7qfl")]
+position = Vector2(83, 248)
+
+[node name="Sheep3" parent="." instance=ExtResource("4_l7qfl")]
+position = Vector2(379, 257)
+
+[node name="Sheep4" parent="." instance=ExtResource("4_l7qfl")]
+position = Vector2(211, 176)
+
+[node name="Wolf" parent="." instance=ExtResource("3_fktqk")]
+position = Vector2(92, 60)
+
+[node name="Wolf2" parent="." instance=ExtResource("3_fktqk")]
+position = Vector2(824, 111)
+
+[node name="Wolf3" parent="." instance=ExtResource("3_fktqk")]
+position = Vector2(738, 396)
+
+[node name="Wolf4" parent="." instance=ExtResource("3_fktqk")]
+position = Vector2(703, 236)
+
+[node name="FenceTiles" parent="." instance=ExtResource("5_a5ktk")]
+layer_0/tile_data = PackedInt32Array(983059, 262145, 4, 917523, 262145, 3, 851987, 262145, 3, 786451, 262145, 3, 720915, 262145, 3, 655379, 262145, 3, 589843, 262145, 3, 524307, 262145, 3, 458771, 262145, 3, 393235, 262145, 3, 327699, 262145, 3, 262163, 262145, 3, 196627, 262145, 3, 131091, 262145, 3, 65555, 262145, 2)

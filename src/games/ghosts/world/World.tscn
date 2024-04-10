@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1gojspnw405"]
+
+[ext_resource type="PackedScene" uid="uid://i8hqcggguxgj" path="res://src/games/ghosts/world/House.tscn" id="1"]
+
+[node name="World" type="Node2D"]
+
+[node name="House" parent="." instance=ExtResource("1")]

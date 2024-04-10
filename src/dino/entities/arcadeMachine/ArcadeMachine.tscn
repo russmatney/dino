@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/entities/arcadeMachine/ArcadeMachine.gd" id="1_bie8v"]
 [ext_resource type="Texture2D" uid="uid://bq21u7y3lvxrl" path="res://src/dino/entities/arcadeMachine/arcade_machine_01.png" id="2_csdr2"]
-[ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/pluggs/plug/Socket.tscn" id="3_0nyao"]
+[ext_resource type="PackedScene" uid="uid://bkb8rsjn2m7xs" path="res://src/games/pluggs/plug/Socket.tscn" id="3_0nyao"]
 [ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="4_xluan"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qbtk"]
@@ -97,7 +97,7 @@ metadata/_aseprite_wizard_config_ = {
 "o_name": "",
 "only_visible": false,
 "op_exp": false,
-"source": "res://src/pluggs/assets/arcade_machine_01.aseprite"
+"source": "res://src/games/pluggs/assets/arcade_machine_01.aseprite"
 }
 
 [node name="Socket" parent="." instance=ExtResource("3_0nyao")]

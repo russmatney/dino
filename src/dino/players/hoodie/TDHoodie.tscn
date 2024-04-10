@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_fx67k"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_wega1"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_wscti"]
-[ext_resource type="PackedScene" path="res://src/shirt/PitDetector.tscn" id="11_t1ve4"]
+[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/games/shirt/PitDetector.tscn" id="11_t1ve4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mx852"]
 height = 20.0

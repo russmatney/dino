@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://2qu4dn68cdyl"
+path="res://.godot/imported/seed-icon.aseprite-0e964a5abc4d9d6f10dbbb2448be7ce3.res"
+
+[deps]
+
+source_file="res://src/games/harvey/assets/seed-icon.aseprite"
+dest_files=["res://.godot/imported/seed-icon.aseprite-0e964a5abc4d9d6f10dbbb2448be7ce3.res"]
+
+[params]
+

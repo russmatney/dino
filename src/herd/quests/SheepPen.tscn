@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyjqpthy70n1i"]
-
-[ext_resource type="Script" path="res://src/herd/quests/SheepPen.gd" id="1_antyq"]
-
-[node name="SheepPen" type="Area2D"]
-collision_layer = 0
-collision_mask = 512
-script = ExtResource("1_antyq")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmhbe371r873d"]
+
+[ext_resource type="Script" path="res://src/games/herd/levels/HerdLevel.gd" id="1_kextw"]
+[ext_resource type="Script" path="res://src/games/herd/levels/HerdLevelGen.gd" id="2_xhnl6"]
+
+[node name="HerdLevel" type="Node2D"]
+script = ExtResource("1_kextw")
+
+[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
+script = ExtResource("2_xhnl6")
+_seed = 1413193361
+tile_size = 32
+room_count = 1
+room_defs_path = "res://src/herd/levels/rooms.txt"
+entities_node = NodePath("../Entities")
+tilemaps_node = NodePath("../Tilemaps")
+rooms_node = NodePath("../Rooms")
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Tilemaps" type="Node" parent="."]
+
+[node name="Entities" type="Node" parent="."]

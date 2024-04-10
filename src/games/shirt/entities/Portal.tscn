@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://b0gmt6jeniemi"]
+
+[ext_resource type="Script" path="res://addons/core/metro/MetroTravelPoint.gd" id="1_5lv5j"]
+[ext_resource type="Texture2D" uid="uid://dcyhacm2p2xax" path="res://src/games/shirt/entities/portal.png" id="2_d8pbh"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="2_x4qlq"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="4_hd7a5"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="5_vihct"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwdef"]
+atlas = ExtResource("2_d8pbh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhyci"]
+atlas = ExtResource("2_d8pbh")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lx0e8"]
+atlas = ExtResource("2_d8pbh")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogggw"]
+atlas = ExtResource("2_d8pbh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i21e"]
+atlas = ExtResource("2_d8pbh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkyyo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwdef")
+}],
+"loop": false,
+"name": &"closed",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhyci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lx0e8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogggw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i21e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwdef")
+}],
+"loop": false,
+"name": &"closing",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhyci")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwdef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2i21e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogggw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lx0e8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhyci")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vf8nx"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7wijp"]
+closed = false
+polygon = PackedVector2Array(-13, 15, -13, 3, -12, -1, -11, -4, -10, -6, -9, -8, -8, -10, -7, -12, -6, -13, -4, -14, 4, -14, 6, -12, 7, -10, 8, -8, 9, -6, 10, -4, 11, -2, 12, 2, 12, 12, 12, 15, 12, 15)
+
+[node name="Portal" type="Node2D" groups=["travel_points"]]
+script = ExtResource("1_5lv5j")
+destination_zone_name = ""
+destination_travel_point_path = ""
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_xkyyo")
+animation = &"opening"
+frame = 4
+frame_progress = 1.0
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://src/games/shirt/assets/portal.aseprite"
+}
+
+[node name="ActionArea" parent="." instance=ExtResource("2_x4qlq")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_vf8nx")
+
+[node name="ActionHint" parent="." instance=ExtResource("4_hd7a5")]
+visible = false
+position = Vector2(0, -32)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("5_vihct")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_7wijp")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://drqo7426buo62"
+path="res://.godot/imported/greyhat_punklook.aseprite-4cb4bfa7b75ec714b7550c3e87a838f5.res"
+
+[deps]
+
+source_file="res://src/games/tower/assets/greyhat_punklook.aseprite"
+dest_files=["res://.godot/imported/greyhat_punklook.aseprite-4cb4bfa7b75ec714b7550c3e87a838f5.res"]
+
+[params]
+

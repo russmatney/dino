@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://d1ntbjt8i83ot"]
+
+[ext_resource type="Script" path="res://src/games/harvey/items/DeliveryBox.gd" id="2"]
+[ext_resource type="Shader" path="res://src/games/harvey/SquashStretchShader.gdshader" id="3"]
+[ext_resource type="Texture2D" uid="uid://dxy65wjusiq7j" path="res://src/games/harvey/assets/seed-box_sheet.png" id="3_loqwr"]
+[ext_resource type="Theme" path="res://src/games/harvey/ActionLabelTheme.tres" id="4"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_2gqyg"]
+[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="6_lnbds"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 32)
+
+[sub_resource type="ShaderMaterial" id="5"]
+resource_local_to_scene = true
+shader = ExtResource("3")
+shader_parameter/deformation = Vector2(0, 0)
+shader_parameter/sideWaysDeformationFactor = 5.0
+shader_parameter/knockbackFactor = 0.4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65yai"]
+atlas = ExtResource("3_loqwr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ojcq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65yai")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(48, 24)
+
+[node name="DeliveryBox" type="StaticBody2D" groups=["pois"]]
+collision_mask = 2
+script = ExtResource("2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+shape = SubResource("1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("5")
+position = Vector2(16, 16)
+sprite_frames = SubResource("SpriteFrames_7ojcq")
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 48.0
+theme = ExtResource("4")
+bbcode_enabled = true
+text = "[center]action"
+scroll_active = false
+
+[node name="ActionArea" parent="." instance=ExtResource("5_2gqyg")]
+position = Vector2(16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+position = Vector2(0, 4)
+shape = SubResource("4")
+
+[node name="CamPOA" parent="." instance=ExtResource("6_lnbds")]
+position = Vector2(16, 16)

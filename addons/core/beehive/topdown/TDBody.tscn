@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://addons/core/beehive/topdown/topdown_player_64.png" id="2_djwnc"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_6j5cs"]
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://addons/core/beehive/topdown/machine/TDMachine.tscn" id="4_3sx8f"]
-[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/shirt/PitDetector.tscn" id="5_0kdiu"]
+[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/games/shirt/PitDetector.tscn" id="5_0kdiu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wu65o"]
 radius = 9.0

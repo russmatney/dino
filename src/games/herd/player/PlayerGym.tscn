@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6vlvlwgsjv3y"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_4up0m"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="1_w00sm"]
+[ext_resource type="PackedScene" uid="uid://ifa4epqvkp5i" path="res://src/games/herd/player/Player.tscn" id="3_llsrj"]
+[ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/games/herd/sheep/Sheep.tscn" id="4_2ylfd"]
+[ext_resource type="PackedScene" uid="uid://bstod1n1dqbyt" path="res://src/games/herd/wolf/Wolf.tscn" id="5_j0ati"]
+
+[node name="PlayerGym" type="Node"]
+script = ExtResource("1_4up0m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -72.0
+offset_top = -66.0
+offset_right = 91.0
+offset_bottom = 52.0
+color = Color(0.172549, 0.419608, 0.572549, 1)
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("1_w00sm")]
+position = Vector2(5, -3)
+
+[node name="Player" parent="." instance=ExtResource("3_llsrj")]
+position = Vector2(-31, -10)
+
+[node name="Sheep" parent="." instance=ExtResource("4_2ylfd")]
+position = Vector2(-88, 39)
+
+[node name="Wolf" parent="." instance=ExtResource("5_j0ati")]
+position = Vector2(201, 143)

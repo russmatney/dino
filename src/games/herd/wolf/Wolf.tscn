@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://bstod1n1dqbyt"]
+
+[ext_resource type="Script" path="res://src/games/herd/wolf/Wolf.gd" id="1_1d058"]
+[ext_resource type="SpriteFrames" uid="uid://djaootvlyfr6n" path="res://src/games/herd/wolf/WolfSpriteFrames.tres" id="1_3bwit"]
+[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="3_3vgs8"]
+[ext_resource type="Script" path="res://src/games/herd/wolf/machine/Idle.gd" id="4_ttisi"]
+[ext_resource type="Script" path="res://src/games/herd/wolf/machine/Firing.gd" id="5_rtr3t"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="10_tlokw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ml7v5"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fg8q3"]
+radius = 195.003
+
+[node name="Wolf" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 1551
+script = ExtResource("1_1d058")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ml7v5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 0.785398
+scale = Vector2(2.011, 2)
+sprite_frames = ExtResource("1_3bwit")
+animation = &"firing"
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("3_3vgs8")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("4_ttisi")
+
+[node name="Firing" type="Node" parent="Machine"]
+script = ExtResource("5_rtr3t")
+
+[node name="LineOfSight" type="RayCast2D" parent="."]
+collision_mask = 515
+
+[node name="DetectBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 514
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectBox"]
+shape = SubResource("CircleShape2D_fg8q3")
+
+[node name="CamPOI" parent="." instance=ExtResource("10_tlokw")]
+importance = 0.5

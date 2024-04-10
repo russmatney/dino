@@ -30,19 +30,6 @@
 				"_name": "DemoLandTravelPoint"
 			},
 			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
-				"_id": "65",
-				"_index": 0,
-				"_name": "GameMode",
-				"_property_overrides": {
-					"enabled": {
-						"type": "bool",
-						"value": false
-					}
-				}
-			},
-			{
 				"_category_id": "",
 				"_generate_ids": true,
 				"_icon_color": "00a4ffff",
@@ -95,10 +82,6 @@
 						"type": "string",
 						"value": "Super Elevator Level"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/superElevatorLevel/levels/SELLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Super_Elevator_Level_icon_sheet.png"
@@ -106,10 +89,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "beatemup"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/superElevatorLevel"
 					}
 				}
 			},
@@ -124,21 +103,13 @@
 						"type": "string",
 						"value": "Void Spike"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/spike/level/SpikeLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://assets/gameicons/Spike_icon.png"
+						"value": "res://assets/gameicons/Spike_icon_sheet.png"
 					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/spike"
 					}
 				}
 			},
@@ -153,10 +124,6 @@
 						"type": "string",
 						"value": "Shirt"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/shirt/level/ShirtLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Shirt_icon_sheet.png"
@@ -164,10 +131,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/shirt"
 					}
 				}
 			},
@@ -180,15 +143,7 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "HatBot"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/hatbot/zones/LevelZero.tscn"
+						"value": "Hat Bot"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -197,10 +152,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/hatbot"
 					}
 				}
 			},
@@ -215,14 +166,6 @@
 						"type": "string",
 						"value": "The Mountain"
 					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/mountain/zones/TheMountain.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/The_Mountain_icon_sheet.png"
@@ -230,10 +173,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/mountain"
 					}
 				}
 			},
@@ -248,14 +187,6 @@
 						"type": "string",
 						"value": "Ghost House"
 					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/ghosts/world/House.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Ghost_House_icon_sheet.png"
@@ -263,10 +194,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/ghosts"
 					}
 				}
 			},
@@ -281,10 +208,6 @@
 						"type": "string",
 						"value": "Tower Jet"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/tower/level/TowerLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/tower_icon_sheet.png"
@@ -292,10 +215,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/tower"
 					}
 				}
 			},
@@ -310,10 +229,6 @@
 						"type": "string",
 						"value": "Gunner"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/gunner/level/GunnerLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/gunner_icon_sheet.png"
@@ -321,10 +236,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/gunner"
 					}
 				}
 			},
@@ -339,25 +250,13 @@
 						"type": "string",
 						"value": "Harvey"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/harvey/level/HarveyLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Harvey_icon_sheet.png"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/harvey/player/HarveyPlayer.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/harvey"
 					}
 				}
 			},
@@ -372,25 +271,13 @@
 						"type": "string",
 						"value": "Herd"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/herd/levels/HerdLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/Herd_icon_sheet.png"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/herd/player/Player.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "topdown"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/herd"
 					}
 				}
 			},
@@ -405,21 +292,9 @@
 						"type": "string",
 						"value": "Demo Land"
 					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/demoland/zones/area01/Area01.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/demoland"
 					}
 				}
 			},
@@ -432,31 +307,15 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Pluggs"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": false
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/pluggs/level/PluggsLevel.tscn"
+						"value": "Pluggs McGee"
 					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/pluggs_icon_4x.png"
 					},
-					"player_scene": {
-						"type": "resource",
-						"value": "res://src/pluggs/player/Pluggs.tscn"
-					},
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/pluggs"
 					}
 				}
 			},
@@ -471,10 +330,6 @@
 						"type": "string",
 						"value": "The Woods"
 					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/woods/level/WoodsLevel.tscn"
-					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://assets/gameicons/woods_icon_sheet.png"
@@ -482,10 +337,6 @@
 					"player_type": {
 						"type": "string",
 						"value": "sidescroller"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/woods"
 					}
 				}
 			},
@@ -498,7 +349,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/area01/Area01.tscn"
+						"value": "res://src/games/demoland/zones/area01/Area01.tscn"
 					}
 				}
 			},
@@ -511,7 +362,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/area02/Area02.tscn"
+						"value": "res://src/games/demoland/zones/area02/Area02.tscn"
 					}
 				}
 			},
@@ -524,7 +375,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/Area03.tscn"
+						"value": "res://src/games/demoland/zones/Area03.tscn"
 					}
 				}
 			},
@@ -537,7 +388,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/Area04.tscn"
+						"value": "res://src/games/demoland/zones/Area04.tscn"
 					}
 				}
 			},
@@ -550,7 +401,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/Area05.tscn"
+						"value": "res://src/games/demoland/zones/Area05.tscn"
 					}
 				}
 			},
@@ -563,7 +414,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/Area06PurpleStone.tscn"
+						"value": "res://src/games/demoland/zones/Area06PurpleStone.tscn"
 					}
 				}
 			},
@@ -576,7 +427,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/Area07GrassyCave.tscn"
+						"value": "res://src/games/demoland/zones/Area07GrassyCave.tscn"
 					}
 				}
 			},
@@ -589,80 +440,7 @@
 				"_property_overrides": {
 					"destination_zone": {
 						"type": "resource",
-						"value": "res://src/demoland/zones/Area08AllTheThings.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "65",
-				"_icon_color": "ffffff00",
-				"_icon_path": "res://addons/pandora/icons/Object.svg",
-				"_id": "64",
-				"_index": 1,
-				"_name": "Roulette",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Roulette"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": true
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/dino/modes/Roulette.tscn"
-					},
-					"games": {
-						"type": "array",
-						"value": {
-
-						}
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/dino/modes/RouletteMainMenu.tscn"
-					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/dino/menus/pause/DinoPauseMenu.tscn"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/dino/modes"
-					}
-				}
-			},
-			{
-				"_category_id": "65",
-				"_icon_color": "ffffff00",
-				"_id": "68",
-				"_index": 0,
-				"_name": "Arcade",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Arcade"
-					},
-					"enabled": {
-						"type": "bool",
-						"value": true
-					},
-					"first_level": {
-						"type": "resource",
-						"value": "res://src/dino/modes/Arcade.tscn"
-					},
-					"main_menu": {
-						"type": "resource",
-						"value": "res://src/dino/modes/ArcadeMainMenu.tscn"
-					},
-					"pause_menu": {
-						"type": "resource",
-						"value": "res://src/dino/menus/pause/DinoPauseMenu.tscn"
-					},
-					"scene_path_prefix": {
-						"type": "string",
-						"value": "res://src/dino/arcade"
+						"value": "res://src/games/demoland/zones/Area08AllTheThings.tscn"
 					}
 				}
 			},
@@ -720,7 +498,7 @@
 					},
 					"topdown_scene": {
 						"type": "resource",
-						"value": "res://src/dino/players/romeo/TDRomeo.tscn"
+						"value": "res://src/dino/players/hatbot/TDHatBot.tscn"
 					}
 				}
 			},
@@ -749,7 +527,7 @@
 					},
 					"topdown_scene": {
 						"type": "resource",
-						"value": "res://src/dino/players/hoodie/TDHoodie.tscn"
+						"value": "res://src/dino/players/hatbot/TDHatBot.tscn"
 					}
 				}
 			},
@@ -778,7 +556,7 @@
 					},
 					"topdown_scene": {
 						"type": "resource",
-						"value": "res://src/dino/players/hairo/TDHairo.tscn"
+						"value": "res://src/dino/players/hatbot/TDHatBot.tscn"
 					}
 				}
 			},
@@ -1134,48 +912,6 @@
 				"_type": "resource"
 			},
 			{
-				"_category_id": "17",
-				"_default_value": "res://src/dino/menus/DinoMenu.tscn",
-				"_id": "24",
-				"_name": "main_menu",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "17",
-				"_default_value": "res://src/dino/menus/pause/DinoPauseMenu.tscn",
-				"_id": "25",
-				"_name": "pause_menu",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "17",
-				"_default_value": "res://addons/core/navi/NaviWinMenu.tscn",
-				"_id": "26",
-				"_name": "win_menu",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "17",
-				"_default_value": "res://addons/core/navi/NaviDeathMenu.tscn",
-				"_id": "27",
-				"_name": "death_menu",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "17",
-				"_default_value": "",
-				"_id": "42",
-				"_name": "scene_path_prefix",
-				"_type": "string"
-			},
-			{
-				"_category_id": "17",
-				"_default_value": null,
-				"_id": "44",
-				"_name": "player_scene",
-				"_type": "resource"
-			},
-			{
 				"_category_id": "45",
 				"_default_value": "",
 				"_id": "50",
@@ -1194,29 +930,6 @@
 				"_default_value": true,
 				"_id": "61",
 				"_name": "enabled",
-				"_type": "bool"
-			},
-			{
-				"_category_id": "17",
-				"_default_value": null,
-				"_id": "63",
-				"_name": "first_level",
-				"_type": "resource"
-			},
-			{
-				"_category_id": "65",
-				"_default_value": {
-
-				},
-				"_id": "66",
-				"_name": "games",
-				"_type": "array"
-			},
-			{
-				"_category_id": "65",
-				"_default_value": true,
-				"_id": "67",
-				"_name": "is_game_mode",
 				"_type": "bool"
 			},
 			{

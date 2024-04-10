@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bx6nww5svohkj"
+path="res://.godot/imported/SEL_Boss.aseprite-23fd19c908ca7bba7e990dbad11274c3.res"
+
+[deps]
+
+source_file="res://src/games/superElevatorLevel/assets/SEL_Boss.aseprite"
+dest_files=["res://.godot/imported/SEL_Boss.aseprite-23fd19c908ca7bba7e990dbad11274c3.res"]
+
+[params]
+

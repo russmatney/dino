@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca8yu63e25pwb"]
+
+[ext_resource type="Script" path="res://src/games/spike/level/SpikeLevel.gd" id="1_fnfm7"]
+[ext_resource type="Script" path="res://src/games/spike/level/SpikeLevelGen.gd" id="2_1wddm"]
+
+[node name="SpikeLevel" type="Node2D"]
+script = ExtResource("1_fnfm7")
+
+[node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
+script = ExtResource("2_1wddm")
+_seed = 271772692
+tile_size = 32
+room_count = 1
+room_defs_path = "res://src/spike/level/rooms.txt"
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="Entities" type="Node2D" parent="."]
