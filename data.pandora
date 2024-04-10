@@ -669,7 +669,7 @@
 					},
 					"pause_menu": {
 						"type": "resource",
-						"value": "res://src/dino/menus/DinoPauseMenu.tscn"
+						"value": "res://src/dino/menus/pause/DinoPauseMenu.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -702,7 +702,7 @@
 					},
 					"pause_menu": {
 						"type": "resource",
-						"value": "res://src/dino/menus/DinoPauseMenu.tscn"
+						"value": "res://src/dino/menus/pause/DinoPauseMenu.tscn"
 					},
 					"scene_path_prefix": {
 						"type": "string",
@@ -1186,7 +1186,7 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "res://src/dino/menus/DinoPauseMenu.tscn",
+				"_default_value": "res://src/dino/menus/pause/DinoPauseMenu.tscn",
 				"_id": "25",
 				"_name": "pause_menu",
 				"_type": "resource"

@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://d0r7m71tr77vo"]
 
-[ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenu.gd" id="1_7pfpx"]
+[ext_resource type="Script" path="res://src/dino/menus/pause/DinoPauseMenu.gd" id="1_7pfpx"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="3_gr3ki"]
 [ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/core/brick/BrickRegenMenu.tscn" id="3_oarvi"]
-[ext_resource type="Script" path="res://src/dino/menus/DinoPauseMenuButtonList.gd" id="4_wcgkx"]
+[ext_resource type="Script" path="res://src/dino/menus/pause/DinoPauseMenuButtonList.gd" id="4_wcgkx"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/core/dj/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/core/metro/MetroMap.tscn" id="7_bx1bw"]
-[ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/PauseTabPlayer.tscn" id="7_ipd6p"]
-[ext_resource type="PackedScene" uid="uid://duncni63m4vm0" path="res://src/dino/ui/PlayedGameRecords.tscn" id="9_k7cqm"]
+[ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/pause/PauseTabPlayer.tscn" id="7_ipd6p"]
+[ext_resource type="PackedScene" path="res://src/dino/ui/PlayedGameRecords.tscn" id="9_k7cqm"]
 [ext_resource type="PackedScene" uid="uid://idppjgt76c6l" path="res://addons/core/dj/TurnTable.tscn" id="9_oe4cd"]
 
 [node name="DinoPauseMenu" type="CanvasLayer"]
