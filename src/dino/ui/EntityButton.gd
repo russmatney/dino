@@ -1,5 +1,13 @@
 @tool
 extends PanelContainer
+class_name EntityButton
+
+static var button_scene = "res://src/dino/ui/EntityButton.tscn"
+
+static func newButton(entity):
+	var butt = load(button_scene).instantiate()
+	butt.set_entity(entity)
+	return butt
 
 var game_entity: DinoGameEntity
 var mode_entity: DinoModeEntity
@@ -79,6 +87,16 @@ func set_player_entity(g: DinoPlayerEntity):
 
 func set_weapon_entity(g: DinoWeaponEntity):
 	weapon_entity = g
+
+func set_entity(ent):
+	if ent is DinoModeEntity:
+		mode_entity = ent
+	elif ent is DinoGameEntity:
+		game_entity = ent
+	elif ent is DinoPlayerEntity:
+		player_entity = ent
+	elif ent is DinoWeaponEntity:
+		weapon_entity = ent
 
 ## setup #######################################
 

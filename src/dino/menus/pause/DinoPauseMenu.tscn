@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/core/dj/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://addons/core/metro/MetroMap.tscn" id="7_bx1bw"]
 [ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/pause/PauseTabPlayer.tscn" id="7_ipd6p"]
-[ext_resource type="PackedScene" path="res://src/dino/ui/PlayedGameRecords.tscn" id="9_k7cqm"]
+[ext_resource type="PackedScene" uid="uid://duncni63m4vm0" path="res://src/dino/ui/PlayedGameRecords.tscn" id="9_k7cqm"]
 [ext_resource type="PackedScene" uid="uid://idppjgt76c6l" path="res://addons/core/dj/TurnTable.tscn" id="9_oe4cd"]
 
 [node name="DinoPauseMenu" type="CanvasLayer"]

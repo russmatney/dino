@@ -1,23 +1,23 @@
 [gd_scene load_steps=18 format=3 uid="uid://jsan51qxpc3w"]
 
-[ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_38knr"]
-[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_3mcvu"]
-[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="2_8rx10"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_b3w6g"]
-[ext_resource type="Script" path="res://src/dino/vania/VaniaEditor.gd" id="3_7omv4"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_ie4l0"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_166p3"]
-[ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="4_f2s0g"]
-[ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="4_k2nl2"]
-[ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="5_5mv8r"]
-[ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="6_1pq7u"]
-[ext_resource type="Theme" uid="uid://dx8buylqr7olg" path="res://src/themes/EditorPopupMenus.tres" id="7_5blm1"]
-[ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="12_5xgp7"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="13_ufr4h"]
-[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/entities/enemyRobots/EnemyRobot.tscn" id="15_vf4uc"]
+[ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_p5wep"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_3dwm3"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
+[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
+[ext_resource type="Script" path="res://src/dino/vania/VaniaEditor.gd" id="7_5vken"]
+[ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="8_7xeo0"]
+[ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="9_0j2lb"]
+[ext_resource type="Theme" uid="uid://dx8buylqr7olg" path="res://src/themes/EditorPopupMenus.tres" id="10_6pplq"]
+[ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="11_gsjqq"]
+[ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="12_iqnk7"]
+[ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="14_cu0vg"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/entities/enemyRobots/EnemyRobot.tscn" id="15_imu7u"]
 
 [sub_resource type="Resource" id="Resource_u6trr"]
-script = ExtResource("4_166p3")
+script = ExtResource("4_3dwm3")
 duration = 0.7
 transition = 4
 ease = 3
@@ -27,18 +27,18 @@ content_margin_left = 16.0
 content_margin_right = 16.0
 
 [node name="VaniaGame" type="Node2D"]
-script = ExtResource("1_38knr")
+script = ExtResource("1_rrc8s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3.2, 3.2)
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-script = ExtResource("2_b3w6g")
+script = ExtResource("2_ae8tp")
 
 [node name="PCam" type="Node2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_ie4l0")
+script = ExtResource("3_p5wep")
 priority_override = false
 priority = 0
 zoom = Vector2(3.2, 3.2)
@@ -59,18 +59,18 @@ tween_parameters = SubResource("Resource_u6trr")
 tween_on_load = true
 inactive_update_mode = 0
 
-[node name="DinoHUD" parent="." instance=ExtResource("2_3mcvu")]
+[node name="DinoHUD" parent="." instance=ExtResource("5_r75pq")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Minimap" parent="CanvasLayer" instance=ExtResource("2_8rx10")]
+[node name="Minimap" parent="CanvasLayer" instance=ExtResource("6_jluxu")]
 offset_top = 174.0
 offset_right = 240.0
 offset_bottom = 334.0
 area = Vector2i(7, 7)
 
 [node name="VaniaEditor" type="CanvasLayer" parent="."]
-script = ExtResource("3_7omv4")
+script = ExtResource("7_5vken")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor"]
 anchors_preset = 15
@@ -86,14 +86,14 @@ size_flags_horizontal = 3
 [node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer"]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-theme = ExtResource("4_f2s0g")
+theme = ExtResource("8_7xeo0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer"]
 layout_mode = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 bbcode_enabled = true
 text = "[center]Editor[/center]"
 fit_content = true
@@ -109,7 +109,7 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
 clip_contents = false
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[center]Regeneration[/center]"
@@ -129,7 +129,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "seed: x"
@@ -144,7 +144,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "rooms: 3"
@@ -159,7 +159,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "room: Blah.tscn"
@@ -174,7 +174,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "neighbors: []"
@@ -193,7 +193,7 @@ unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "entities: []"
@@ -203,7 +203,7 @@ scroll_active = false
 [node name="EditEntitiesMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("7_5blm1")
+theme = ExtResource("10_6pplq")
 text = "Edit Entities"
 
 [node name="PanelContainer6" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
@@ -218,7 +218,7 @@ unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "tiles: []"
@@ -228,7 +228,7 @@ scroll_active = false
 [node name="EditTilesetMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("7_5blm1")
+theme = ExtResource("10_6pplq")
 text = "Edit Tileset"
 
 [node name="PanelContainer8" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
@@ -243,7 +243,7 @@ unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_k2nl2")
+theme = ExtResource("9_0j2lb")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "constraints: []"
@@ -253,7 +253,7 @@ scroll_active = false
 [node name="EditConstraintsMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("7_5blm1")
+theme = ExtResource("10_6pplq")
 text = "Edit Constraints"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
@@ -266,7 +266,7 @@ size_flags_vertical = 3
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("6_1pq7u")
+theme = ExtResource("11_gsjqq")
 
 [node name="RegenButtonList" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer"]
 unique_name_in_owner = true
@@ -276,13 +276,13 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "Edit Room Def"
 
 [node name="RerenderBackgroundButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "Rerender Background"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
@@ -292,44 +292,44 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "++rooms"
 
 [node name="DecRoomCountButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "--rooms"
 
 [node name="RegenOtherRoomsButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "Regen Other Rooms"
 
 [node name="ReloadThisRoomButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "Reload room"
 
 [node name="RespawnPlayerButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("5_5mv8r")
+theme = ExtResource("12_iqnk7")
 text = "Respawn player"
 
 [node name="LoadPlayground" type="Node2D" parent="."]
 unique_name_in_owner = true
 
 [node name="TileMap" type="TileMap" parent="LoadPlayground"]
-tile_set = ExtResource("12_5xgp7")
+tile_set = ExtResource("13_k6w4a")
 format = 2
 layer_0/tile_data = PackedInt32Array(786457, 131072, 9, 720921, 131072, 13, 196633, 131072, 9, 131097, 131072, 2, 65561, 131072, 2, 25, 131072, 8, -65511, 131072, 8, -131047, 393216, 15, -196583, 196608, 13, 786456, 131072, 15, 720920, 131072, 7, 196632, 131072, 3, 131096, 131072, 8, 65560, 131072, 2, 24, 131072, 14, -65512, 131072, 14, -131048, 131072, 14, -196584, 131072, 7, 786455, 458752, 10, 720919, 65536, 7, 196631, 131072, 9, 131095, 131072, 14, 65559, 131072, 2, 23, 131072, 2, -65513, 131072, 8, -131049, 131072, 14, -196585, 131072, 1, 196630, 65536, 3, 131094, 65536, 2, 65558, 65536, 8, 22, 65536, 14, -65514, 458752, 8, -131050, 131072, 2, -196586, 131072, 1, -65515, 131072, 9, -131051, 131072, 14, -196587, 131072, 7, -65516, 131072, 3, -131052, 131072, 2, -196588, 131072, 7, -65517, 131072, 3, -131053, 131072, 2, -196589, 131072, 1, -65518, 131072, 9, -131054, 131072, 2, -196590, 131072, 13, -65519, 131072, 3, -131055, 131072, 14, -196591, 131072, 13, -65520, 131072, 3, -131056, 131072, 2, -196592, 131072, 1, -65521, 131072, 3, -131057, 131072, 8, -196593, 131072, 13, -65522, 131072, 9, -131058, 131072, 8, -196594, 131072, 1, -65523, 131072, 15, -131059, 131072, 8, -196595, 131072, 13, -65524, 131072, 15, -131060, 131072, 14, -196596, 131072, 13, 786443, 196608, 15, 720907, 196608, 8, 655371, 196608, 1, -65525, 131072, 15, -131061, 131072, 8, -196597, 131072, 13, 786442, 131072, 3, 720906, 131072, 14, 655370, 131072, 13, -65526, 131072, 9, -131062, 131072, 14, -196598, 131072, 7, 786441, 131072, 15, 720905, 131072, 2, 655369, 131072, 7, -65527, 131072, 9, -131063, 131072, 14, -196599, 131072, 1, 786440, 131072, 15, 720904, 131072, 8, 655368, 131072, 13, -65528, 131072, 3, -131064, 131072, 14, -196600, 131072, 7, 786439, 131072, 15, 720903, 131072, 2, 655367, 131072, 1, -65529, 131072, 3, -131065, 131072, 8, -196601, 131072, 13, 786438, 131072, 3, 720902, 131072, 2, 655366, 131072, 13, -65530, 131072, 9, -131066, 131072, 14, -196602, 131072, 7, 786437, 131072, 15, 720901, 131072, 8, 655365, 131072, 13, -65531, 131072, 9, -131067, 131072, 8, -196603, 131072, 1, 786436, 65536, 9, 720900, 65536, 14, 655364, 65536, 13, -65532, 131072, 3, -131068, 131072, 8, -196604, 131072, 7, -65533, 131072, 15, -131069, 131072, 14, -196605, 131072, 13, -65534, 131072, 3, -131070, 131072, 8, -196606, 131072, 1, -65535, 131072, 9, -131071, 131072, 14, -196607, 131072, 1, -65536, 131072, 9, -131072, 131072, 14, -196608, 131072, 13, 851967, 196608, 3, 786431, 196608, 2, 720895, 196608, 7, -1, 131072, 15, -65537, 131072, 14, -131073, 131072, 1, 851966, 131072, 3, 786430, 131072, 8, 720894, 393216, 9, 655358, 196608, 2, 589822, 196608, 2, 524286, 196608, 14, 458750, 196608, 8, 393214, 196608, 8, 327678, 196608, 14, 262142, 196608, 2, 196606, 196608, 14, 131070, 196608, 2, 65534, 196608, 14, -2, 393216, 14, -65538, 131072, 2, -131074, 131072, 13, 851965, 393216, 8, 786429, 131072, 2, 720893, 131072, 8, 655357, 131072, 14, 589821, 131072, 8, 524285, 131072, 2, 458749, 131072, 2, 393213, 131072, 2, 327677, 131072, 8, 262141, 131072, 14, 196605, 131072, 2, 131069, 131072, 2, 65533, 131072, 8, -3, 131072, 8, -65539, 131072, 14, -131075, 131072, 13, 851964, 131072, 14, 786428, 131072, 2, 720892, 131072, 2, 655356, 131072, 2, 589820, 131072, 8, 524284, 131072, 8, 458748, 131072, 14, 393212, 131072, 2, 327676, 131072, 2, 262140, 131072, 14, 196604, 131072, 8, 131068, 131072, 14, 65532, 131072, 14, -4, 131072, 8, -65540, 131072, 8, -131076, 131072, 1, 851963, 65536, 8, 786427, 65536, 8, 720891, 65536, 8, 655355, 65536, 8, 589819, 65536, 14, 524283, 65536, 2, 458747, 65536, 8, 393211, 65536, 2, 327675, 65536, 8, 262139, 65536, 2, 196603, 65536, 8, 131067, 65536, 8, 65531, 65536, 2, -5, 65536, 2, -65541, 65536, 2, -131077, 65536, 7, 1441825, 196608, 3, 1376289, 196608, 2, 1310753, 393216, 8, 1245217, 131072, 8, 1179681, 131072, 7, 1441824, 131072, 3, 1376288, 131072, 14, 1310752, 131072, 2, 1245216, 131072, 2, 1179680, 131072, 7, 1441823, 131072, 3, 1376287, 131072, 14, 1310751, 131072, 14, 1245215, 131072, 2, 1179679, 131072, 7, 1441822, 131072, 15, 1376286, 131072, 8, 1310750, 131072, 2, 1245214, 131072, 2, 1179678, 131072, 7, 1441821, 131072, 15, 1376285, 131072, 14, 1310749, 131072, 14, 1245213, 131072, 2, 1179677, 131072, 7, 1441820, 131072, 15, 1376284, 131072, 2, 1310748, 131072, 2, 1245212, 131072, 8, 1179676, 131072, 7, 1441819, 131072, 3, 1376283, 131072, 8, 1310747, 131072, 8, 1245211, 131072, 8, 1179675, 131072, 13, 1441818, 131072, 9, 1376282, 131072, 14, 1310746, 131072, 14, 1245210, 131072, 2, 1179674, 131072, 13, 1441817, 131072, 3, 1376281, 131072, 14, 1310745, 131072, 14, 1245209, 131072, 14, 1179673, 131072, 7, 1441816, 131072, 15, 1376280, 131072, 14, 1310744, 458752, 9, 1245208, 65536, 8, 1179672, 65536, 13, 1441815, 131072, 3, 1376279, 131072, 2, 1310743, 131072, 7, 1441814, 131072, 9, 1376278, 131072, 8, 1310742, 131072, 1, 1441813, 131072, 3, 1376277, 131072, 2, 1310741, 131072, 13, 1441812, 131072, 15, 1376276, 131072, 2, 1310740, 131072, 7, 1441811, 131072, 9, 1376275, 131072, 8, 1310739, 131072, 13, 1441810, 131072, 3, 1376274, 131072, 8, 1310738, 131072, 7, 1441809, 131072, 9, 1376273, 131072, 14, 1310737, 131072, 1, 1441808, 131072, 9, 1376272, 131072, 14, 1310736, 131072, 13, 1441807, 131072, 3, 1376271, 131072, 14, 1310735, 131072, 1, 1441806, 131072, 3, 1376270, 131072, 8, 1310734, 131072, 7, 1441805, 131072, 3, 1376269, 131072, 2, 1310733, 131072, 1, 1441804, 131072, 9, 1376268, 131072, 14, 1310732, 131072, 7, 1441803, 131072, 15, 1376267, 131072, 8, 1310731, 131072, 7, 1441802, 131072, 3, 1376266, 131072, 8, 1310730, 131072, 1, 1441801, 131072, 15, 1376265, 131072, 14, 1310729, 131072, 1, 1441800, 131072, 15, 1376264, 131072, 8, 1310728, 131072, 1, 1441799, 131072, 15, 1376263, 131072, 14, 1310727, 131072, 1, 1441798, 131072, 9, 1376262, 131072, 8, 1310726, 131072, 7, 1441797, 131072, 9, 1376261, 131072, 2, 1310725, 131072, 7, 1441796, 131072, 9, 1376260, 131072, 14, 1310724, 131072, 1, 1441795, 131072, 9, 1376259, 131072, 8, 1310723, 131072, 13, 1441794, 131072, 3, 1376258, 131072, 8, 1310722, 131072, 13, 1441793, 131072, 3, 1376257, 131072, 2, 1310721, 131072, 13, 1441792, 131072, 3, 1376256, 131072, 14, 1310720, 131072, 7, 1507327, 131072, 15, 1441791, 131072, 2, 1376255, 131072, 7, 1507326, 131072, 15, 1441790, 131072, 2, 1376254, 131072, 13, 1507325, 131072, 3, 1441789, 131072, 2, 1376253, 393216, 15, 1310717, 196608, 14, 1245181, 196608, 2, 1179645, 196608, 2, 1114109, 196608, 8, 1048573, 196608, 8, 983037, 196608, 14, 917501, 196608, 8, 1507324, 131072, 9, 1441788, 131072, 8, 1376252, 131072, 8, 1310716, 131072, 8, 1245180, 131072, 14, 1179644, 131072, 14, 1114108, 131072, 14, 1048572, 131072, 8, 983036, 131072, 2, 917500, 131072, 2, 1507323, 65536, 15, 1441787, 65536, 2, 1376251, 65536, 8, 1310715, 65536, 2, 1245179, 65536, 14, 1179643, 65536, 2, 1114107, 65536, 8, 1048571, 65536, 2, 983035, 65536, 8, 917499, 65536, 14, 1310769, 196608, 15, 1245233, 196608, 14, 1179697, 196608, 14, 1114161, 196608, 14, 1048625, 196608, 8, 983089, 196608, 2, 917553, 196608, 8, 852017, 196608, 14, 786481, 196608, 14, 720945, 196608, 8, 655409, 196608, 8, 589873, 196608, 2, 524337, 196608, 14, 458801, 196608, 14, 393265, 196608, 14, 327729, 196608, 8, 262193, 196608, 14, 196657, 196608, 8, 131121, 196608, 14, 65585, 196608, 8, 49, 196608, 8, -65487, 196608, 2, -131023, 196608, 1, 1310768, 131072, 9, 1245232, 131072, 14, 1179696, 131072, 14, 1114160, 131072, 14, 1048624, 131072, 8, 983088, 131072, 2, 917552, 131072, 14, 852016, 131072, 14, 786480, 131072, 14, 720944, 131072, 14, 655408, 131072, 2, 589872, 131072, 8, 524336, 131072, 2, 458800, 131072, 14, 393264, 131072, 14, 327728, 131072, 8, 262192, 131072, 8, 196656, 131072, 2, 131120, 131072, 8, 65584, 131072, 2, 48, 131072, 8, -65488, 131072, 8, -131024, 131072, 1, 1310767, 131072, 3, 1245231, 131072, 2, 1179695, 131072, 2, 1114159, 131072, 14, 1048623, 131072, 8, 983087, 131072, 8, 917551, 131072, 14, 852015, 131072, 14, 786479, 131072, 2, 720943, 131072, 2, 655407, 131072, 2, 589871, 131072, 14, 524335, 131072, 8, 458799, 131072, 14, 393263, 131072, 2, 327727, 131072, 8, 262191, 131072, 8, 196655, 131072, 14, 131119, 131072, 2, 65583, 131072, 14, 47, 131072, 2, -65489, 131072, 2, -131025, 131072, 7, 1310766, 131072, 9, 1245230, 131072, 2, 1179694, 131072, 8, 1114158, 131072, 14, 1048622, 131072, 2, 983086, 131072, 2, 917550, 131072, 14, 852014, 131072, 14, 786478, 131072, 2, 720942, 131072, 8, 655406, 131072, 14, 589870, 131072, 2, 524334, 131072, 14, 458798, 131072, 14, 393262, 131072, 8, 327726, 131072, 14, 262190, 131072, 14, 196654, 131072, 2, 131118, 131072, 8, 65582, 131072, 14, 46, 131072, 14, -65490, 131072, 14, -131026, 131072, 7, 1310765, 131072, 9, 1245229, 131072, 2, 1179693, 131072, 2, 1114157, 131072, 8, 1048621, 131072, 8, 983085, 131072, 14, 917549, 131072, 14, 852013, 131072, 2, 786477, 131072, 2, 720941, 131072, 8, 655405, 131072, 8, 589869, 131072, 8, 524333, 131072, 8, 458797, 131072, 14, 393261, 131072, 2, 327725, 131072, 14, 262189, 131072, 2, 196653, 131072, 8, 131117, 131072, 2, 65581, 131072, 2, 45, 131072, 8, -65491, 131072, 8, -131027, 131072, 1, 1310764, 131072, 15, 1245228, 131072, 2, 1179692, 131072, 14, 1114156, 131072, 2, 1048620, 131072, 8, 983084, 131072, 8, 917548, 131072, 2, 852012, 131072, 8, 786476, 131072, 2, 720940, 131072, 8, 655404, 131072, 2, 589868, 131072, 14, 524332, 131072, 8, 458796, 131072, 2, 393260, 131072, 14, 327724, 131072, 2, 262188, 131072, 8, 196652, 131072, 14, 131116, 131072, 14, 65580, 131072, 2, 44, 131072, 8, -65492, 131072, 14, -131028, 131072, 1, 1310763, 131072, 15, 1245227, 131072, 8, 1179691, 131072, 8, 1114155, 131072, 2, 1048619, 131072, 8, 983083, 131072, 2, 917547, 131072, 8, 852011, 131072, 2, 786475, 131072, 8, 720939, 131072, 14, 655403, 131072, 2, 589867, 458752, 3, 524331, 65536, 14, 458795, 65536, 8, 393259, 65536, 14, 327723, 65536, 14, 262187, 65536, 8, 196651, 65536, 2, 131115, 458752, 8, 65579, 131072, 2, 43, 131072, 8, -65493, 131072, 14, -131029, 131072, 13, 1310762, 131072, 15, 1245226, 131072, 8, 1179690, 131072, 2, 1114154, 131072, 14, 1048618, 131072, 2, 983082, 131072, 8, 917546, 131072, 14, 852010, 131072, 14, 786474, 131072, 14, 720938, 131072, 14, 655402, 131072, 14, 589866, 131072, 13, 131114, 131072, 15, 65578, 131072, 8, 42, 131072, 14, -65494, 131072, 8, -131030, 131072, 7, 1310761, 131072, 3, 1245225, 131072, 8, 1179689, 131072, 14, 1114153, 131072, 8, 1048617, 131072, 14, 983081, 131072, 2, 917545, 458752, 15, 852009, 65536, 14, 786473, 65536, 14, 720937, 65536, 8, 655401, 65536, 8, 589865, 65536, 7, 131113, 131072, 15, 65577, 131072, 8, 41, 131072, 2, -65495, 131072, 8, -131031, 131072, 1, 1310760, 131072, 9, 1245224, 131072, 8, 1179688, 131072, 2, 1114152, 131072, 2, 1048616, 131072, 8, 983080, 131072, 14, 917544, 131072, 7, 131112, 131072, 3, 65576, 131072, 8, 40, 131072, 14, -65496, 131072, 8, -131032, 131072, 7, 1310759, 131072, 3, 1245223, 131072, 2, 1179687, 131072, 8, 1114151, 131072, 14, 1048615, 131072, 2, 983079, 131072, 14, 917543, 131072, 1, 131111, 131072, 15, 65575, 131072, 8, 39, 131072, 8, -65497, 131072, 2, -131033, 131072, 13, 1310758, 131072, 9, 1245222, 131072, 2, 1179686, 131072, 2, 1114150, 131072, 14, 1048614, 131072, 2, 983078, 131072, 2, 917542, 131072, 1, 131110, 131072, 15, 65574, 131072, 14, 38, 131072, 14, -65498, 131072, 14, -131034, 131072, 13, 1310757, 131072, 15, 1245221, 131072, 8, 1179685, 131072, 2, 1114149, 131072, 8, 1048613, 131072, 8, 983077, 131072, 14, 917541, 131072, 1, 131109, 131072, 15, 65573, 131072, 2, 37, 131072, 8, -65499, 131072, 2, -131035, 131072, 13, 1310756, 131072, 3, 1245220, 131072, 8, 1179684, 131072, 2, 1114148, 131072, 14, 1048612, 131072, 14, 983076, 131072, 2, 917540, 131072, 7, 131108, 131072, 3, 65572, 131072, 2, 36, 131072, 14, -65500, 131072, 2, -131036, 131072, 7, 1310755, 131072, 15, 1245219, 131072, 8, 1179683, 131072, 8, 1114147, 131072, 8, 1048611, 131072, 14, 983075, 131072, 14, 917539, 131072, 13, 131107, 131072, 3, 65571, 131072, 14, 35, 131072, 2, -65501, 131072, 8, -131037, 131072, 1, 1310754, 131072, 3, 1245218, 131072, 14, 1179682, 458752, 3, 1114146, 65536, 2, 1048610, 65536, 8, 983074, 65536, 14, 917538, 65536, 13, 131106, 131072, 15, 65570, 131072, 14, 34, 131072, 2, -65502, 131072, 2, -131038, 131072, 1, 131105, 131072, 9, 65569, 131072, 2, 33, 131072, 8, -65503, 131072, 8, -131039, 131072, 13, 131104, 131072, 3, 65568, 131072, 14, 32, 131072, 14, -65504, 131072, 2, -131040, 131072, 1, 131103, 131072, 15, 65567, 131072, 8, 31, 131072, 8, -65505, 131072, 2, -131041, 131072, 7, 131102, 131072, 9, 65566, 131072, 8, 30, 131072, 14, -65506, 131072, 8, -131042, 131072, 13, 196637, 196608, 15, 131101, 393216, 2, 65565, 131072, 8, 29, 131072, 14, -65507, 131072, 14, -131043, 131072, 1, 196636, 131072, 3, 131100, 131072, 8, 65564, 131072, 14, 28, 131072, 14, -65508, 131072, 14, -131044, 131072, 1, 196635, 131072, 9, 131099, 131072, 14, 65563, 131072, 2, 27, 131072, 14, -65509, 131072, 2, -131045, 131072, 7, 786458, 196608, 15, 720922, 196608, 7, 196634, 131072, 3, 131098, 131072, 8, 65562, 131072, 14, 26, 131072, 14, -65510, 131072, 8, -131046, 131072, 7, 786454, 131072, 10, 786453, 131072, 16, 786452, 131072, 10, 786451, 131072, 10, 851986, 196608, 15, 786450, 393216, 7, 851985, 65536, 15, 786449, 65536, 13)
 
-[node name="PlayerSpawnPoint" parent="LoadPlayground" instance=ExtResource("13_ufr4h")]
+[node name="PlayerSpawnPoint" parent="LoadPlayground" instance=ExtResource("14_cu0vg")]
 position = Vector2(406, 119)
 
-[node name="EnemyRobot" parent="LoadPlayground" instance=ExtResource("15_vf4uc")]
+[node name="EnemyRobot" parent="LoadPlayground" instance=ExtResource("15_imu7u")]
 position = Vector2(345, 252)
