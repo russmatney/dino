@@ -71,10 +71,13 @@
 			},
 			{
 				"_category_id": "",
+				"_generate_ids": true,
 				"_icon_color": "f96b3dff",
 				"_id": "117",
+				"_ids_generation_class": "EnemyIds",
 				"_index": 0,
-				"_name": "DinoEnemy"
+				"_name": "DinoEnemy",
+				"_script_path": "res://src/dino/enemies/DinoEnemy.gd"
 			}
 		],
 		"_entities": [
@@ -969,6 +972,10 @@
 						"type": "resource",
 						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
 					},
+					"label": {
+						"type": "string",
+						"value": "Blob"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/blobs/Blob.tscn"
@@ -985,6 +992,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Enemy Robot"
+					},
+					"label": {
+						"type": "string",
+						"value": "EnemyRobot"
 					},
 					"scene": {
 						"type": "resource",
@@ -1007,6 +1018,10 @@
 						"type": "resource",
 						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
 					},
+					"label": {
+						"type": "string",
+						"value": "Glowmba"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/glowmba/Glowmba.tscn"
@@ -1027,6 +1042,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
+					},
+					"label": {
+						"type": "string",
+						"value": "Goomba"
 					},
 					"scene": {
 						"type": "resource",
@@ -1049,6 +1068,10 @@
 						"type": "resource",
 						"value": "res://src/dino/enemies/shootyCrawly/portraits5.png"
 					},
+					"label": {
+						"type": "string",
+						"value": "Crawly"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn"
@@ -1069,6 +1092,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/soldiers/portraits4.png"
+					},
+					"label": {
+						"type": "string",
+						"value": "Soldier"
 					},
 					"scene": {
 						"type": "resource",
@@ -1091,6 +1118,10 @@
 						"type": "resource",
 						"value": "res://src/dino/enemies/bosses/portraits1.png"
 					},
+					"label": {
+						"type": "string",
+						"value": "Beefstronaut"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/bosses/Beefstronaut.tscn"
@@ -1111,6 +1142,10 @@
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/bosses/portraits2.png"
+					},
+					"label": {
+						"type": "string",
+						"value": "Monstroar"
 					},
 					"scene": {
 						"type": "resource",
@@ -1343,12 +1378,19 @@
 				"_id": "127",
 				"_name": "is_boss",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "117",
+				"_default_value": "",
+				"_id": "130",
+				"_name": "label",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 129
+			"default": 130
 		}
 	}
 }

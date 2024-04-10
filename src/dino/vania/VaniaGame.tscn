@@ -14,7 +14,7 @@
 [ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="12_iqnk7"]
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="14_cu0vg"]
-[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/enemyRobots/EnemyRobot.tscn" id="15_imu7u"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/enemyRobots/EnemyRobot.tscn" id="15_7bsuh"]
 
 [sub_resource type="Resource" id="Resource_u6trr"]
 script = ExtResource("4_3dwm3")
@@ -331,5 +331,5 @@ layer_0/tile_data = PackedInt32Array(786457, 131072, 9, 720921, 131072, 13, 1966
 [node name="PlayerSpawnPoint" parent="LoadPlayground" instance=ExtResource("14_cu0vg")]
 position = Vector2(406, 119)
 
-[node name="EnemyRobot" parent="LoadPlayground" instance=ExtResource("15_imu7u")]
+[node name="EnemyRobot" parent="LoadPlayground" instance=ExtResource("15_7bsuh")]
 position = Vector2(345, 252)

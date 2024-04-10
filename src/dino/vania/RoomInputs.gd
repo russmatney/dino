@@ -2,15 +2,6 @@ extends RefCounted
 class_name RoomInputs
 
 static var all_entities = [
-	"Monstroar",
-	"Beefstronaut",
-
-	"Blob",
-	"EnemyRobot",
-	"Glowmba",
-	"Crawly",
-	"Soldier",
-
 	"Leaf",
 
 	"ArcadeMachine",
@@ -126,12 +117,14 @@ static var all_constraints = [
 	]
 
 var entities
+var enemies
 var room_shape
 var room_shapes
 var tilemap_scenes
 
 func _init(opts={}):
 	entities = opts.get("entities", [])
+	enemies = opts.get("enemies", [])
 	room_shape = opts.get("room_shape")
 	room_shapes = opts.get("room_shapes", [])
 	tilemap_scenes = opts.get("tilemap_scenes", [])
@@ -139,6 +132,7 @@ func _init(opts={}):
 func to_printable():
 	return {
 		entities=entities,
+		enemies=enemies,
 		tilemap_scenes=tilemap_scenes,
 		room_shape=room_shape,
 		room_shapes=room_shapes,
@@ -149,6 +143,7 @@ func to_printable():
 func merge(b: RoomInputs):
 	return RoomInputs.new({
 		entities=U.append_array(entities, b.entities),
+		enemies=U.append_array(enemies, b.enemies),
 		room_shape=U._or(b.room_shape, room_shape),
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
@@ -166,6 +161,9 @@ func update_def(def: VaniaRoomDef):
 
 	if not entities.is_empty():
 		def.entities = entities
+
+	if not enemies.is_empty():
+		def.enemies = enemies
 
 	if not tilemap_scenes.is_empty():
 		def.tilemap_scenes = tilemap_scenes
@@ -253,39 +251,43 @@ static func get_constraint_data(cons_key, opts={}):
 		IN_L_ROOM: return L_room_shape(opts)
 		CUSTOM_ROOM: return custom_room_shape(opts)
 
+		# tiles
 		IN_WOODEN_BOXES: return wooden_boxes(opts)
 		IN_SPACESHIP: return spaceship(opts)
 		IN_KINGDOM: return kingdom(opts)
 		IN_VOLCANO: return volcano(opts)
 		IN_GRASSY_CAVE: return grassy_cave(opts)
 
+		# enemies
+		HAS_BOSS: return has_boss(opts)
+		HAS_MONSTROAR: return has_enemy(EnemyIds.MONSTROAR, opts)
+		HAS_BEEFSTRONAUT: return has_enemy(EnemyIds.BEEFSTRONAUT, opts)
+		HAS_BLOB: return has_enemy(EnemyIds.BLOB, opts)
+		HAS_ENEMY_ROBOT: return has_enemy(EnemyIds.ENEMYROBOT, opts)
+		HAS_GLOWMBA: return has_enemy(EnemyIds.GLOWMBA, opts)
+		HAS_CRAWLY: return has_enemy(EnemyIds.SHOOTYCRAWLY, opts)
+		HAS_SOLDIER: return has_enemy(EnemyIds.SOLDIER, opts)
+
+		# combinations
 		IS_COOKING_ROOM: return cooking_room(opts)
 
-		HAS_BOSS: return has_boss(opts)
-		HAS_MONSTROAR: return has_entity("Monstroat", opts)
-		HAS_BEEFSTRONAUT: return has_entity("Beefstronaut", opts)
-
-		HAS_BLOB: return has_entity("Blob", opts)
-		HAS_ENEMY_ROBOT: return has_entity("EnemyRobot", opts)
-		HAS_GLOWMBA: return has_entity("Glowmba", opts)
-		HAS_CRAWLY: return has_entity("Crawly", opts)
-		HAS_SOLDIER: return has_entity("Soldier", opts)
-
+		# pickups/drops
 		HAS_LEAF: return has_entity("Leaf", opts)
 
 		HAS_ARCADE_MACHINE: return has_entity("ArcadeMachine", opts)
 		HAS_BOX: return has_entity("Box", opts)
 		HAS_TREASURE_BOX: return has_entity("TreasureBox", opts)
-		HAS_CANDLE: return has_entity("Candle", opts)
+		HAS_COOKING_POT: return has_entity("CookingPot", opts)
+		HAS_TARGET: return has_entity("Target", opts)
+		HAS_VOID: return has_entity("Void", opts)
 
+		# checkpoints
+		HAS_CANDLE: return has_entity("Candle", opts)
 		HAS_CHECKPOINT: return has_entity("Checkpoint", opts)
 		HAS_LOG_CHECKPOINT: return has_entity("LogCheckpoint", opts)
 		HAS_SNOW_CHECKPOINT: return has_entity("SnowCheckpoint", opts)
 		HAS_CAVE_CHECKPOINT: return has_entity("CaveCheckpoint", opts)
 
-		HAS_COOKING_POT: return has_entity("CookingPot", opts)
-		HAS_TARGET: return has_entity("Target", opts)
-		HAS_VOID: return has_entity("Void", opts)
 
 		HAS_PLAYER: return has_entity("Player", opts)
 
@@ -293,6 +295,11 @@ static func get_constraint_data(cons_key, opts={}):
 
 
 ## room components ######################################################33
+
+static func random_enemies():
+	return RoomInputs.new({
+		enemies=U.rand_of(DinoEnemy.all_enemies(), U.rand_of([0,1,2,3]), true)
+		})
 
 static func random_entities():
 	return RoomInputs.new({
@@ -312,7 +319,7 @@ static func random_tilemaps():
 			]})
 
 static func random_room():
-	return merge_many([random_entities(), random_room_shapes(), random_tilemaps()])
+	return merge_many([random_enemies(), random_entities(), random_room_shapes(), random_tilemaps()])
 
 ## room size ######################################################33
 
@@ -408,7 +415,7 @@ static func grassy_cave(_opts={}):
 		tilemap_scenes=["res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn",],
 		})
 
-## entities ######################################################33
+## enemies ######################################################33
 
 const HAS_BOSS = "has_boss"
 const HAS_MONSTROAR = "has_monstroar"
@@ -419,6 +426,32 @@ const HAS_ENEMY_ROBOT = "has_enemy_robot"
 const HAS_GLOWMBA = "has_glowmba"
 const HAS_CRAWLY = "has_crawly"
 const HAS_SOLDIER = "has_solider"
+
+static func has_enemy(ent_id, opts={}):
+	var ent = Pandora.get_entity(ent_id)
+	if ent == null:
+		Log.warn("No entity for id", ent_id)
+		return
+	var inp = RoomInputs.new({enemies=U.repeat(ent, opts.get("count", 1))})
+	return inp
+
+static func has_boss(opts={}):
+	if opts.get("count", 1):
+		return RoomInputs.new({
+			enemies=[
+				[Pandora.get_entity(EnemyIds.MONSTROAR)],
+				[Pandora.get_entity(EnemyIds.BEEFSTRONAUT)]
+				].pick_random(),
+			})
+	else:
+		return RoomInputs.new({
+			enemies=[
+				Pandora.get_entity(EnemyIds.MONSTROAR),
+				Pandora.get_entity(EnemyIds.BEEFSTRONAUT),
+				],
+			})
+
+## entities ######################################################33
 
 const HAS_LEAF = "has_leaf"
 
@@ -438,19 +471,10 @@ const HAS_VOID = "has_void"
 
 const HAS_PLAYER = "has_player"
 
+
 static func has_entity(ent, opts={}):
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
-
-static func has_boss(opts={}):
-	if opts.get("count", 1):
-		return RoomInputs.new({
-			entities=[["Monstroar"], ["Beefstronaut"]].pick_random(),
-			})
-	else:
-		return RoomInputs.new({
-			entities=["Monstroar", "Beefstronaut"],
-			})
 
 ## encounters ######################################################33
 
@@ -458,5 +482,6 @@ const IS_COOKING_ROOM = "is_cooking_room"
 
 static func cooking_room(_opts={}):
 	return RoomInputs.new({
-		entities=["Blob", "CookingPot", "Void"],
+		entities=["CookingPot", "Void"],
+		enemies=[Pandora.get_entity(EnemyIds.BLOB)],
 		})

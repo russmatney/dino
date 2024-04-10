@@ -21,6 +21,8 @@ var tile_defs: GridDefs
 var entity_defs: GridDefs
 var entities: Array #[String]
 
+var enemies = []
+
 var tilemap_scenes
 var tile_size = 16
 
@@ -30,17 +32,6 @@ var constraints = []
 var label_to_entity = {
 	# player
 	"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
-
-	# bosses
-	"Monstroar": {scene=load("res://src/dino/enemies/bosses/Monstroar.tscn")},
-	"Beefstronaut": {scene=load("res://src/dino/enemies/bosses/Beefstronaut.tscn")},
-
-	# enemies
-	"Blob": {scene=load("res://src/dino/enemies/blobs/Blob.tscn")},
-	"EnemyRobot": {scene=load("res://src/dino/enemies/enemyRobots/EnemyRobot.tscn")},
-	"Glowmba": {scene=load("res://src/dino/enemies/glowmba/Glowmba.tscn")},
-	"Crawly": {scene=load("res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn")},
-	"Soldier": {scene=load("res://src/dino/enemies/soldiers/Soldier.tscn")},
 
 	# traps
 	# "Spike": {scene=load("res://src/dino/entities/spikes/Spikes.tscn")},

@@ -39,6 +39,7 @@ func build_room(def: VaniaRoomDef, opts={}):
 	add_background_tiles()
 	# add_tile_chunks()
 	add_entities()
+	add_enemies()
 
 ## setup tilemaps ##############################################################
 
@@ -245,6 +246,40 @@ func add_tile_chunks(opts={}):
 	if not tile_coords.is_empty():
 		tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
 		tilemap.force_update()
+
+## add_enemies ##############################################################
+
+func add_enemies():
+	var tmap_data = build_tilemap_data()
+
+	for enemy in room_def.enemies:
+		var enemy_label = enemy.get_label()
+		var grids = room_def.entity_defs.grids_with_entity(enemy_label)
+		if grids.is_empty():
+			# TODO fallback to puttin it in the center?
+			Log.warn("No grids for enemy, skipping: ", enemy)
+			continue
+		var grid = grids.pick_random()
+
+		# find place to put entity
+		var shape_dict = grid.get_shape_dict({drop_entity=enemy_label})
+
+		# TODO exclude doorways
+		var start_coords = possible_positions(tmap_data, shape_dict)
+
+		for e_coord in grid.get_coords_for_entity(enemy_label):
+			if start_coords.is_empty():
+				Log.warn("No position found for entity!", enemy)
+				continue
+			var start_coord = start_coords.pick_random()
+			start_coords.erase(start_coord)
+
+			# place entity at random start cord
+			var pos = tilemap.map_to_local(e_coord + start_coord)
+			var enemy_node = enemy.get_scene().instantiate()
+			enemy_node.position = pos
+			add_child(enemy_node)
+			enemy_node.set_owner(self)
 
 
 ## add_entities ##############################################################
