@@ -2,12 +2,16 @@
 extends PanelContainer
 class_name EntityButton
 
+## static #####################################################
+
 static var button_scene = "res://src/dino/ui/EntityButton.tscn"
 
 static func newButton(entity):
 	var butt = load(button_scene).instantiate()
 	butt.set_entity(entity)
 	return butt
+
+## vars #####################################################
 
 var game_entity: DinoGameEntity
 var mode_entity: DinoModeEntity
@@ -42,6 +46,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		if not get_entity():
 			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
+
+	focus_entered.connect(func(): icon.grab_focus())
 
 	icon.pressed.connect(func(): icon_pressed.emit())
 
@@ -97,18 +103,27 @@ func set_entity(ent):
 		player_entity = ent
 	elif ent is DinoWeaponEntity:
 		weapon_entity = ent
+	setup()
 
 ## setup #######################################
 
 func setup():
 	if get_entity():
-		label.text = "[center]%s[/center]" % str(get_entity().get_display_name())
-		icon.texture_normal = get_entity().get_icon_texture()
+		if label == null:
+			label = get_node("%Label")
+		if label != null:
+			label.text = "[center]%s[/center]" % str(get_entity().get_display_name())
+
+		if icon == null:
+			icon = get_node_or_null("%Icon")
+		if icon != null:
+			icon.texture_normal = get_entity().get_icon_texture()
 	elif Debug.debugging:
 		Log.warn("no entity, cannot setup", self)
 
 ## focus #######################################
 
+# maybe delete?
 func set_focus():
 	icon.grab_focus()
 

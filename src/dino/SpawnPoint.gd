@@ -11,6 +11,10 @@ var visit_count = 0
 @export var spawn_scene: PackedScene
 var spawns = []
 
+func _enter_tree():
+	# TODO only if for player!!
+	add_to_group("player_spawn_points", true)
+
 func _ready():
 	Hotel.register(self)
 

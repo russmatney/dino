@@ -22,8 +22,17 @@ static func ss_weapons_menu():
 func _ready():
 	Log.pr("entity list ready")
 
-	if Engine.is_editor_hint():
-		set_entities(DinoWeaponsData.sidescroller_weapon_entities())
+	# if Engine.is_editor_hint():
+	set_entities(DinoWeaponsData.sidescroller_weapon_entities())
+
+	set_focus()
+
+## set focus #####################################################
+
+func set_focus():
+	var chs = entityList.get_children()
+	if len(chs) > 0:
+		chs[0].grab_focus()
 
 ## set entities #####################################################
 
