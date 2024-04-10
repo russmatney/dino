@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b3cek61te6ula"]
 
 [ext_resource type="Shader" path="res://src/shaders/ColorSwapShader.gdshader" id="1_ygkpj"]
-[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/dino/entities/blobs/SPIKE_blob_pickup.png" id="2_ty0bj"]
+[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/dino/enemies/blobs/SPIKE_blob_pickup.png" id="2_ty0bj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w5u07"]
 resource_local_to_scene = true

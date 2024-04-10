@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://7svah6kabcqn"]
+
+[ext_resource type="SpriteFrames" uid="uid://dssioecwcl0c5" path="res://src/dino/enemies/glowmba/glowmba_animated_sprites.tres" id="1"]
+[ext_resource type="Script" path="res://src/dino/enemies/glowmba/Glowmba.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="4_c2qve"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 154.081
+
+[node name="Glowmba" type="CharacterBody2D" groups=["enemies", "gloomba"]]
+collision_layer = 8
+velocity = Vector2(-100, 0)
+script = ExtResource("2")
+gravity = 4000
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1")
+animation = &"walk"
+autoplay = "idle"
+speed_scale = 2.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("3")
+
+[node name="StunnedLight" type="PointLight2D" parent="."]
+position = Vector2(6.67572e-06, 0)
+scale = Vector2(0.148438, 0.136719)
+enabled = false
+texture = ExtResource("3")
+
+[node name="DeadLight" type="PointLight2D" parent="."]
+position = Vector2(-9.53674e-07, -4.76837e-07)
+scale = Vector2(0.0898438, 0.0859375)
+enabled = false
+texture = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="Detectbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectbox"]
+shape = SubResource("2")
+
+[node name="CamPOI" parent="." instance=ExtResource("4_c2qve")]
+importance = 0.6
+
+[connection signal="body_entered" from="Detectbox" to="." method="_on_Detectbox_body_entered"]
+[connection signal="body_exited" from="Detectbox" to="." method="_on_Detectbox_body_exited"]

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cnt2xk2exnshc"
+path="res://.godot/imported/SPIKE_blob.aseprite-668f6d79b8bab98594f197dad006f497.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/blobs/SPIKE_blob.aseprite"
+dest_files=["res://.godot/imported/SPIKE_blob.aseprite-668f6d79b8bab98594f197dad006f497.res"]
+
+[params]
+

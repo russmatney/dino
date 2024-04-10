@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cp4tyfmxcpuci"
+path="res://.godot/imported/soldierpurple.aseprite-25197506b995e794055d9c22ee7a096b.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/soldiers/soldierpurple.aseprite"
+dest_files=["res://.godot/imported/soldierpurple.aseprite-25197506b995e794055d9c22ee7a096b.res"]
+
+[params]
+

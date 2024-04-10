@@ -43,7 +43,6 @@ func set_focus():
 func set_entities(ents, on_select=null):
 	U.remove_children(entityList)
 
-	# TODO MRU sorting
 	for ent in ents:
 		var butt = EntityButton.newButton(ent)
 		entityList.add_child(butt)

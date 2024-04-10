@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://caxw371767hie"]
 
-[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/dino/entities/blobs/SPIKE_blob_pickup.png" id="1_mivg7"]
+[ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/dino/enemies/blobs/SPIKE_blob_pickup.png" id="1_mivg7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jrjyf"]
 atlas = ExtResource("1_mivg7")

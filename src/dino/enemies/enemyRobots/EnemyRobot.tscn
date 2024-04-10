@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://b462pe2po5a1c"]
+
+[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/games/tower/assets/greyhat_frames.tres" id="1"]
+[ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/EnemyRobot.gd" id="4"]
+[ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Idle.gd" id="5"]
+[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="6"]
+[ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Dead.gd" id="7"]
+[ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Walk.gd" id="8"]
+[ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Knockback.gd" id="9"]
+[ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Attack.gd" id="10"]
+
+[sub_resource type="CapsuleShape2D" id="4"]
+radius = 15.5
+height = 31.0
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(1200, 800)
+
+[node name="EnemyRobot" type="CharacterBody2D" groups=["enemies", "enemy_robots"]]
+collision_layer = 8
+script = ExtResource("4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 5.5)
+shape = SubResource("4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(5, 5)
+sprite_frames = ExtResource("1")
+animation = &"idle"
+frame = 3
+
+[node name="Machine" type="Node" parent="."]
+script = ExtResource("6")
+
+[node name="Idle" type="Node" parent="Machine"]
+script = ExtResource("5")
+
+[node name="Walk" type="Node" parent="Machine"]
+script = ExtResource("8")
+
+[node name="Dead" type="Node" parent="Machine"]
+script = ExtResource("7")
+
+[node name="Knockback" type="Node" parent="Machine"]
+script = ExtResource("9")
+
+[node name="Attack" type="Node" parent="Machine"]
+script = ExtResource("10")
+
+[node name="ArrowPosition" type="Marker2D" parent="."]
+position = Vector2(-21, 0)
+
+[node name="FrontRay" type="RayCast2D" parent="."]
+position = Vector2(-16, 0)
+
+[node name="VisionBox" type="Area2D" parent="."]
+visible = false
+position = Vector2(-180, -69)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionBox"]
+shape = SubResource("3")
+
+[node name="VisionRay" type="RayCast2D" parent="."]
+collision_mask = 3
+
+[connection signal="body_entered" from="VisionBox" to="." method="_on_VisionBox_body_entered"]
+[connection signal="body_exited" from="VisionBox" to="." method="_on_VisionBox_body_exited"]

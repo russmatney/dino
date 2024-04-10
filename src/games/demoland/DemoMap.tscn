@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://da2wa1ua1rdwh" path="res://src/dino/entities/boxes/Box.tscn" id="3_s7p3q"]
 [ext_resource type="PackedScene" uid="uid://ddjj5kujrnpg5" path="res://src/dino/entities/boxes/TreasureBox.tscn" id="4_vlxbf"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="5_apdpi"]
-[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/entities/soldiers/Soldier.tscn" id="6_3txdl"]
+[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="6_3txdl"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="7_cksc3"]
 
 [node name="DemoMap" type="Node2D"]

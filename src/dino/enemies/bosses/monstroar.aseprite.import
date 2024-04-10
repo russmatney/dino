@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://deq3qedpj7klf"
+path="res://.godot/imported/monstroar.aseprite-963eaa3528e445e96741251c9eda89e2.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/bosses/monstroar.aseprite"
+dest_files=["res://.godot/imported/monstroar.aseprite-963eaa3528e445e96741251c9eda89e2.res"]
+
+[params]
+

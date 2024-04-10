@@ -10,13 +10,13 @@ static func label_to_entity(opts):
 		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
 
 		# bosses
-		"Boss": {scene=load("res://src/dino/entities/bosses/Monstroar.tscn")},
-		"Monstroar": {scene=load("res://src/dino/entities/bosses/Monstroar.tscn")},
-		"Beefstronaut": {scene=load("res://src/dino/entities/bosses/Beefstronaut.tscn")},
+		"Boss": {scene=load("res://src/dino/enemies/bosses/Monstroar.tscn")},
+		"Monstroar": {scene=load("res://src/dino/enemies/bosses/Monstroar.tscn")},
+		"Beefstronaut": {scene=load("res://src/dino/enemies/bosses/Beefstronaut.tscn")},
 
 		# enemies
-		"Blob": {scene=load("res://src/dino/entities/blobs/Blob.tscn")},
-		"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
+		"Blob": {scene=load("res://src/dino/enemies/blobs/Blob.tscn")},
+		"Enemy": {scene=load("res://src/dino/enemies/enemyRobots/EnemyRobot.tscn")},
 
 		# pickups
 		"Leaf": {scene=load("res://src/dino/entities/leaves/Leaf.tscn")},

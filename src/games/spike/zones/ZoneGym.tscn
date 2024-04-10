@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_tigbi"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_0c0n8"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="5_43vjs"]
-[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/entities/blobs/Blob.tscn" id="6_7wtaw"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="6_7wtaw"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="7_wvoro"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="8_sbyfb"]
 

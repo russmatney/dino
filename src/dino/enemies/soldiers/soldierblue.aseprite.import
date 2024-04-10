@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dp2h3yd8ke5lv"
+path="res://.godot/imported/soldierblue.aseprite-f4b95d2ce2524beb7afef2db03dd6c4b.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/soldiers/soldierblue.aseprite"
+dest_files=["res://.godot/imported/soldierblue.aseprite-f4b95d2ce2524beb7afef2db03dd6c4b.res"]
+
+[params]
+

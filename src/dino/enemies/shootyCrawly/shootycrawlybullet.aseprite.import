@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://yqfupcfayc4o"
+path="res://.godot/imported/shootycrawlybullet.aseprite-d6f094bc85d61e850e61506beebd86b9.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/shootyCrawly/shootycrawlybullet.aseprite"
+dest_files=["res://.godot/imported/shootycrawlybullet.aseprite-d6f094bc85d61e850e61506beebd86b9.res"]
+
+[params]
+

@@ -68,6 +68,13 @@
 				"_index": 0,
 				"_name": "LevelDef",
 				"_script_path": "res://src/dino/levels/LevelDef.gd"
+			},
+			{
+				"_category_id": "",
+				"_icon_color": "f96b3dff",
+				"_id": "117",
+				"_index": 0,
+				"_name": "DinoEnemy"
 			}
 		],
 		"_entities": [
@@ -946,6 +953,170 @@
 						"value": "res://src/dino/modes/Vania.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "121",
+				"_index": 0,
+				"_name": "Blob",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Blob"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/blobs/Blob.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "122",
+				"_index": 0,
+				"_name": "EnemyRobot",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Enemy Robot"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/enemyRobots/EnemyRobot.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "123",
+				"_index": 0,
+				"_name": "Glowmba",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Glowmba"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/glowmba/Glowmba.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "124",
+				"_index": 0,
+				"_name": "Goomba",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Goomba"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/goomba/Goomba.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "125",
+				"_index": 0,
+				"_name": "ShootyCrawly",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Shooty Crawly"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/shootyCrawly/portraits5.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "126",
+				"_index": 0,
+				"_name": "Soldier",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Soldier"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/soldiers/portraits4.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/soldiers/Soldier.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "128",
+				"_index": 0,
+				"_name": "Beefstronaut",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Beefstronaut"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/bosses/portraits1.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/bosses/Beefstronaut.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "129",
+				"_index": 0,
+				"_name": "Monstroar",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Monstroar"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/bosses/portraits2.png"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/bosses/Monstroar.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1144,12 +1315,40 @@
 				"_id": "116",
 				"_name": "level_scene",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "117",
+				"_default_value": "",
+				"_id": "118",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "117",
+				"_default_value": null,
+				"_id": "119",
+				"_name": "icon_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "117",
+				"_default_value": null,
+				"_id": "120",
+				"_name": "scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "117",
+				"_default_value": false,
+				"_id": "127",
+				"_name": "is_boss",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 116
+			"default": 129
 		}
 	}
 }

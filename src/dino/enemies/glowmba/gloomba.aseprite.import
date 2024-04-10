@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ckrrajwjlvd0b"
+path="res://.godot/imported/gloomba.aseprite-86f6e5b8133f688922d934e12511e268.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/glowmba/gloomba.aseprite"
+dest_files=["res://.godot/imported/gloomba.aseprite-86f6e5b8133f688922d934e12511e268.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://io5v6c1rli2d"
+path="res://.godot/imported/soldieryellow.aseprite-8d6146b3742c9650fd318fb3363d1af7.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/soldiers/soldieryellow.aseprite"
+dest_files=["res://.godot/imported/soldieryellow.aseprite-8d6146b3742c9650fd318fb3363d1af7.res"]
+
+[params]
+

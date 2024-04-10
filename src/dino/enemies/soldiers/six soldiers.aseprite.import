@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://y8ob1opeqb5s"
+path="res://.godot/imported/six soldiers.aseprite-d49fc1695e37a9523b69bc248f1af845.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/soldiers/six soldiers.aseprite"
+dest_files=["res://.godot/imported/six soldiers.aseprite-d49fc1695e37a9523b69bc248f1af845.res"]
+
+[params]
+

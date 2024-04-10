@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="1_ktq0m"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_yptok"]
-[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/entities/soldiers/Soldier.tscn" id="2_orywx"]
+[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="2_orywx"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_0y4vr"]
 [ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="5_r30nw"]
 [ext_resource type="Script" path="res://addons/core/camera/CamPOF.gd" id="5_u4k1p"]

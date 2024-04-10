@@ -50,7 +50,7 @@ func get_room_opts(opts):
 			"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 				setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 				},
-			"Blob": {scene=load("res://src/dino/entities/blobs/Blob.tscn")},
+			"Blob": {scene=load("res://src/dino/enemies/blobs/Blob.tscn")},
 			"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
 			"OneWayPlatform": {scene=load("res://src/dino/platforms/OneWayPlatform.tscn"),
 				# resize to match tile_size
