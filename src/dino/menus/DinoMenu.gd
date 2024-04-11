@@ -32,7 +32,5 @@ func build_games_grid():
 	U.free_children(games_grid_container)
 
 	for m in modes:
-		var button = game_mode_button.instantiate()
-		button.set_mode_entity(m)
-		button.icon_pressed.connect(func(): start_mode(m))
+		var button = EntityButton.newButton(m, start_mode)
 		games_grid_container.add_child(button)

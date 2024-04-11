@@ -20,7 +20,7 @@ func _ready():
 		records = Records.current_records
 
 	if Engine.is_editor_hint() and len(records) == 0:
-		Log.pr("building fake game records for ui debugging")
+		# Log.pr("building fake game records for ui debugging")
 		records = DinoRecords.mk_records([{
 				game_entity=Pandora.get_entity(DinoGameEntityIds.GUNNER),
 				completed_at=Time.get_datetime_dict_from_system(),
@@ -58,9 +58,7 @@ func render():
 
 	U.free_children(game_icons)
 	for rec in records:
-		var button = entity_button.instantiate()
-		button.set_game_entity(rec.game_entity)
-		button.icon_pressed.connect(func(): show_record(rec))
+		var button = EntityButton.newButton(rec.game_entity, func(_ent): show_record(rec))
 		game_icons.add_child(button)
 
 func show_record(record):
@@ -69,7 +67,5 @@ func show_record(record):
 
 	U.free_children(player_icons)
 	for p in record.player_entities:
-		var button = entity_button.instantiate()
-		button.set_player_entity(p)
-		# button.icon_pressed.connect(func(): show_record(rec))
+		var button = EntityButton.newButton(p)
 		player_icons.add_child(button)

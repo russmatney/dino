@@ -4,7 +4,6 @@ class_name QuickSelectMenu
 
 ## static #####################################################
 
-# TODO per genre weapon fetching
 static func ss_weapons_menu():
 	var weaps = DinoWeaponsData.sidescroller_weapon_entities()
 	var menu = QuickSelectMenu.new()
@@ -44,22 +43,18 @@ func set_entities(ents, on_select=null):
 	U.remove_children(entityList)
 
 	for ent in ents:
-		var butt = EntityButton.newButton(ent)
+		var butt = EntityButton.newButton(ent, on_select)
 		entityList.add_child(butt)
-		if on_select:
-			butt.icon_pressed.connect(func():
-				on_select.call(ent))
 
 func select_current():
 	for ch in entityList.get_children():
 		if U.has_focus(ch):
-			ch.icon_pressed.emit()
+			ch.selected.emit()
 
 ## show #####################################################
 
 func show_menu(opts):
-	Log.pr("show menu")
-
+	# naive, but maybe this is fine?
 	get_tree().paused = true
 
 	set_entities(opts.get("entities"), opts.get("on_select"))
@@ -69,7 +64,6 @@ func show_menu(opts):
 ## hide #####################################################
 
 func hide_menu():
-	Log.pr("hide menu")
 	select_current()
 	panel.set_visible(false)
 

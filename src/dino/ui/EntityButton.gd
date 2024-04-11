@@ -6,9 +6,11 @@ class_name EntityButton
 
 static var button_scene = "res://src/dino/ui/EntityButton.tscn"
 
-static func newButton(ent):
+static func newButton(ent, on_select=null):
 	var butt = load(button_scene).instantiate()
 	butt.set_entity(ent)
+	if on_select:
+		butt.selected.connect(func(): on_select.call(ent))
 	return butt
 
 ## vars #####################################################
@@ -32,7 +34,7 @@ func to_printable():
 @onready var label = $%Label
 @onready var icon = $%Icon
 
-signal icon_pressed
+signal selected
 
 ## ready #######################################
 
@@ -43,7 +45,7 @@ func _ready():
 
 	focus_entered.connect(func(): icon.grab_focus())
 
-	icon.pressed.connect(func(): icon_pressed.emit())
+	icon.pressed.connect(func(): selected.emit())
 
 	icon.focus_entered.connect(_on_focus_entered)
 	icon.focus_exited.connect(_on_focus_exited)

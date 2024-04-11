@@ -38,10 +38,10 @@ func reset_ui():
 	reset_menu_buttons()
 
 	for ch in games_grid_container.get_children():
-		ch.is_selected = ch.game_entity in selected_game_entities
+		ch.is_selected = ch.entity in selected_game_entities
 
 	for pl in players_grid_container.get_children():
-		pl.is_selected = pl.player_entity == selected_player_entity
+		pl.is_selected = pl.entity == selected_player_entity
 
 ## games grid ##################################################
 
@@ -59,9 +59,7 @@ func build_games_grid():
 	U.free_children(games_grid_container)
 
 	for gm in game_entities:
-		var button = entity_button.instantiate()
-		button.set_game_entity(gm)
-		button.icon_pressed.connect(func(): select_game(gm))
+		var button = EntityButton.newButton(gm, select_game)
 		games_grid_container.add_child(button)
 
 ## players grid ##################################################
@@ -76,9 +74,7 @@ func build_players_grid():
 	U.free_children(players_grid_container)
 
 	for pl in player_entities:
-		var button = entity_button.instantiate()
-		button.set_player_entity(pl)
-		button.icon_pressed.connect(func(): select_player(pl))
+		var button = EntityButton.newButton(pl, select_player)
 		players_grid_container.add_child(button)
 
 ## start game ##################################################

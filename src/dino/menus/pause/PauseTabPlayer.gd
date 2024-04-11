@@ -62,9 +62,7 @@ func update_players_grid(player_ent):
 	var player_ents = DinoPlayerEntity.all_entities().filter(func(e): return not e == player_ent)
 	U.free_children(players_grid)
 	for p in player_ents:
-		var button = entity_button.instantiate()
-		button.set_player_entity(p)
-		button.icon_pressed.connect(func(): select_player(p))
+		var button = EntityButton.newButton(p, select_player)
 		players_grid.add_child(button)
 
 func update_weapon_data(weapon_entity):
@@ -82,9 +80,7 @@ func update_weapons_grid(player):
 	var active_weapon_ent = player.active_weapon().entity
 	U.remove_children(weapons_grid, {defer=true})
 	for w in player.weapon_set.list().filter(func(w): return w.entity != active_weapon_ent):
-		var button = entity_button.instantiate()
-		button.set_weapon_entity(w.entity)
-		button.icon_pressed.connect(func(): if w: select_weapon(w.entity))
+		var button = EntityButton.newButton(w.entity, select_weapon)
 		weapons_grid.add_child(button)
 
 ## select interactions ##################################

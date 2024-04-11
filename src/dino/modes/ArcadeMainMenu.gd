@@ -4,7 +4,6 @@ extends CanvasLayer
 @onready var games_grid_container = $%GamesGridContainer
 @onready var button_list = $%ButtonList
 
-var game_button = preload("res://src/dino/ui/EntityButton.tscn")
 var game_entities = []
 var selected_game_entity
 
@@ -34,16 +33,14 @@ func select_game(game_entity):
 	reset_menu_buttons()
 
 	for ch in games_grid_container.get_children():
-		ch.is_selected = ch.game_entity == selected_game_entity
+		ch.is_selected = ch.entity == selected_game_entity
 
 func build_games_grid():
 	game_entities = DinoGameEntity.basic_game_entities()
 	U.free_children(games_grid_container)
 
 	for gm in game_entities:
-		var button = game_button.instantiate()
-		button.set_game_entity(gm)
-		button.icon_pressed.connect(func(): select_game(gm))
+		var button = EntityButton.newButton(gm, select_game)
 		games_grid_container.add_child(button)
 
 ## start game ##################################################
