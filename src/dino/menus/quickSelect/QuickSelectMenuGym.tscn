@@ -1,12 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://byy14wk6qu2p7"]
+[gd_scene load_steps=6 format=3 uid="uid://byy14wk6qu2p7"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_2fyv4"]
+[ext_resource type="Texture2D" uid="uid://q2pnjmesx2xc" path="res://src/backgrounds/background_city_sheet.png" id="2_h7va8"]
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="2_vsd1u"]
 [ext_resource type="Script" path="res://src/dino/SpawnPoint.gd" id="3_sjujl"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="4_sbp5h"]
 
 [node name="QuickSelectMenuGym" type="Node"]
 script = ExtResource("1_2fyv4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -217.0
+offset_top = -291.0
+offset_right = 892.0
+offset_bottom = 336.0
+texture = ExtResource("2_h7va8")
+stretch_mode = 4
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("2_vsd1u")

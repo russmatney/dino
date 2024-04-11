@@ -14,6 +14,7 @@ static func ss_weapons_menu():
 
 @onready var entityList = $%EntityList
 @onready var panel = $%Panel
+@onready var screenBlur = $%ScreenBlur
 
 @onready var entityButton = preload("res://src/dino/ui/EntityButton.tscn")
 
@@ -56,6 +57,7 @@ func select_current():
 func show_menu(opts):
 	# naive, but maybe this is fine?
 	get_tree().paused = true
+	screenBlur.show()
 
 	set_entities(opts.get("entities"), opts.get("on_select"))
 	set_focus()
@@ -66,5 +68,6 @@ func show_menu(opts):
 func hide_menu():
 	select_current()
 	panel.set_visible(false)
+	screenBlur.hide()
 
 	get_tree().paused = false

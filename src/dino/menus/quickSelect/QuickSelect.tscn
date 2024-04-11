@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://cp33t2x7q044h"]
+[gd_scene load_steps=6 format=3 uid="uid://cp33t2x7q044h"]
 
 [ext_resource type="Script" path="res://src/dino/menus/quickSelect/QuickSelectMenu.gd" id="1_itny8"]
+[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_sfims"]
 [ext_resource type="Theme" uid="uid://bnfe8r27glpje" path="res://src/themes/QuickSelectPanel.tres" id="2_eihlf"]
+[ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlurRect.tscn" id="3_8lib6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gk3cd"]
+shader = ExtResource("1_sfims")
+shader_parameter/lod = 0.5
 
 [node name="QuickSelect" type="Control"]
 process_mode = 3
+material = SubResource("ShaderMaterial_gk3cd")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +22,9 @@ script = ExtResource("1_itny8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
+
+[node name="ScreenBlur" parent="CanvasLayer" instance=ExtResource("3_8lib6")]
+unique_name_in_owner = true
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
