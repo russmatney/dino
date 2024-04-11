@@ -4,7 +4,9 @@ extends Node2D
 
 var vania_game_scene = preload("res://src/dino/vania/VaniaGame.tscn")
 
-@export var player_entity: DinoPlayerEntity
+var player_entity: DinoPlayerEntity
+var enemy_entities
+var room_count = 3
 var game_node: Node2D
 
 @export var set_random_seed: bool:
@@ -48,21 +50,39 @@ func start_game():
 
 	game_node = vania_game_scene.instantiate()
 
+	game_node.room_inputs = initial_room_inputs()
+
 	add_child.call_deferred(game_node)
 
+## room_inputs #################################333
+
+func initial_room_inputs():
+	var inputs = [{
+			RoomInputs.HAS_PLAYER: {},
+			RoomInputs.HAS_CANDLE: {},
+			RoomInputs.HAS_CHECKPOINT: {},
+			RoomInputs.IN_SMALL_ROOM: {},
+		}]
+
+	inputs.append_array(U.repeat_fn(func():
+		var opts = {}
+		if enemy_entities != null:
+			opts["enemy_entities"] = enemy_entities
+		return RoomInputs.random_room(opts)
+		, room_count - 1))
+	return inputs
 
 ## set_player_entity #################################333
 
 func set_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
 
-## game level signals ##################################################3
+## set_enemies #################################333
 
-func _on_level_complete():
-	Log.pr("Level Complete!")
-	await Jumbotron.jumbo_notif({
-		header="Level complete!",
-		body="Wowie zowie!",
-		})
+func set_enemy_entities(ents):
+	enemy_entities = ents
 
-	Navi.nav_to_main_menu()
+## set_room_count #################################333
+
+func set_room_count(count: int):
+	room_count = count

@@ -1,16 +1,35 @@
 @tool
 extends CanvasLayer
 
-@onready var games_grid_container = $%GamesGridContainer
 @onready var players_grid_container = $%PlayersGridContainer
+@onready var enemies_grid_container = $%EnemiesGridContainer
+
+@onready var room_count_label = $%RoomCount
+@onready var dec_room_count_button = $%DecRoomCountButton
+@onready var inc_room_count_button = $%IncRoomCountButton
+
 @onready var button_list = $%ButtonList
 
 var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
 
 var game_entities = []
 var selected_game_entities = []
+var enemy_entities = []
+var selected_enemy_entities = []
 var player_entities = []
 var selected_player_entity
+
+const max_room_count = 10
+var room_count = 4
+func inc_room_count():
+	room_count += 1
+	room_count = mini(room_count, max_room_count)
+	reset_ui()
+
+func dec_room_count():
+	room_count -= 1
+	room_count = maxi(room_count, 1)
+	reset_ui()
 
 ## ready ##################################################
 
@@ -18,8 +37,11 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	build_games_grid()
+	dec_room_count_button.pressed.connect(func(): dec_room_count())
+	inc_room_count_button.pressed.connect(func(): inc_room_count())
+
 	build_players_grid()
+	build_enemies_grid()
 	reset_ui()
 
 	DJ.resume_menu_song()
@@ -28,7 +50,7 @@ func _ready():
 ## focus ##################################################
 
 func set_focus():
-	var chs = games_grid_container.get_children()
+	var chs = players_grid_container.get_children()
 	if len(chs) > 0:
 		chs[0].set_focus()
 
@@ -37,30 +59,13 @@ func set_focus():
 func reset_ui():
 	reset_menu_buttons()
 
-	for ch in games_grid_container.get_children():
-		ch.is_selected = ch.entity in selected_game_entities
+	room_count_label.text = "[center]rooms: %s" % room_count
 
-	for pl in players_grid_container.get_children():
-		pl.is_selected = pl.entity == selected_player_entity
+	for butt in players_grid_container.get_children():
+		butt.is_selected = butt.entity == selected_player_entity
 
-## games grid ##################################################
-
-func select_game(game_entity):
-	if game_entity in selected_game_entities:
-		selected_game_entities.erase(game_entity)
-	else:
-		selected_game_entities.append(game_entity)
-
-	reset_ui()
-
-func build_games_grid():
-	game_entities = DinoGameEntity.basic_game_entities()
-	selected_game_entities = game_entities
-	U.free_children(games_grid_container)
-
-	for gm in game_entities:
-		var button = EntityButton.newButton(gm, select_game)
-		games_grid_container.add_child(button)
+	for butt in enemies_grid_container.get_children():
+		butt.is_selected = butt.entity in selected_enemy_entities
 
 ## players grid ##################################################
 
@@ -77,13 +82,33 @@ func build_players_grid():
 		var button = EntityButton.newButton(pl, select_player)
 		players_grid_container.add_child(button)
 
+## enemies grid ##################################################
+
+func toggle_enemy(enemy_entity):
+	if enemy_entity in selected_enemy_entities:
+		selected_enemy_entities.erase(enemy_entity)
+	else:
+		selected_enemy_entities.append(enemy_entity)
+
+	reset_ui()
+
+func build_enemies_grid():
+	enemy_entities = DinoEnemy.all_enemies()
+	selected_enemy_entities = enemy_entities
+	U.free_children(enemies_grid_container)
+
+	for en in enemy_entities:
+		var button = EntityButton.newButton(en, toggle_enemy)
+		enemies_grid_container.add_child(button)
+
 ## start game ##################################################
 
 var vania_scene = preload("res://src/dino/modes/Vania.tscn")
 func start():
 	Navi.nav_to(vania_scene, {setup=func(scene):
-		# scene.update_game_ids(selected_game_entities)
 		scene.set_player_entity(selected_player_entity)
+		scene.set_enemy_entities(selected_enemy_entities)
+		scene.set_room_count(room_count)
 		})
 
 ## menu buttons ##################################################

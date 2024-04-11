@@ -40,7 +40,7 @@ signal selected
 
 func _ready():
 	if Engine.is_editor_hint():
-		if not get_entity():
+		if not entity:
 			entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 
 	focus_entered.connect(func(): icon.grab_focus())
@@ -66,22 +66,7 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	U.update_stylebox(self, "panel", func(box): box.border_color = Color.TRANSPARENT)
 
-## get/set_entity #######################################
-
-func get_entity():
-	return entity
-
-func set_mode_entity(g):
-	entity = g
-
-func set_game_entity(g):
-	entity = g
-
-func set_player_entity(g):
-	entity = g
-
-func set_weapon_entity(g):
-	entity = g
+## set_entity #######################################
 
 func set_entity(ent):
 	entity = ent
@@ -90,17 +75,16 @@ func set_entity(ent):
 ## setup #######################################
 
 func setup():
-	Log.pr(entity)
-	if get_entity():
+	if entity:
 		if label == null:
 			label = get_node("%Label")
 		if label != null:
-			label.text = "[center]%s[/center]" % str(get_entity().get_display_name())
+			label.text = "[center]%s[/center]" % str(entity.get_display_name())
 
 		if icon == null:
 			icon = get_node_or_null("%Icon")
 		if icon != null:
-			icon.texture_normal = get_entity().get_icon_texture()
+			icon.texture_normal = entity.get_icon_texture()
 	elif Debug.debugging:
 		Log.warn("no entity, cannot setup", self)
 

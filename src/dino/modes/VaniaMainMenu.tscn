@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cby5w4n7cavv7"]
+[gd_scene load_steps=6 format=3 uid="uid://cby5w4n7cavv7"]
 
 [ext_resource type="Script" path="res://src/dino/modes/VaniaMainMenu.gd" id="1_sbwsg"]
+[ext_resource type="Theme" uid="uid://cltnpaiuof1wc" path="res://src/themes/VaniaMenu.tres" id="2_gkueb"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2_pf170"]
 [ext_resource type="Script" path="res://addons/core/navi/NaviButtonList.gd" id="3_c03oy"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/core/dj/MuteButtonList.tscn" id="4_ckk60"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_gkueb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -43,23 +45,54 @@ layout_mode = 2
 [node name="ScrollContainer2" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 182)
 layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
 
 [node name="PlayersGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 282)
+[node name="ScrollContainer3" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="EnemiesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="DecRoomCountButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "-"
+
+[node name="RoomCount" type="RichTextLabel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]rooms: 4[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="IncRoomCountButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "+"
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(24, 0)

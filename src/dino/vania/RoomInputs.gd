@@ -296,30 +296,30 @@ static func get_constraint_data(cons_key, opts={}):
 
 ## room components ######################################################33
 
-static func random_enemies():
+static func random_enemies(opts={}):
 	return RoomInputs.new({
-		enemies=U.rand_of(DinoEnemy.all_enemies(), U.rand_of([0,1,2,3]), true)
+		enemies=U.rand_of(opts.get("enemy_entities", DinoEnemy.all_enemies()), U.rand_of([0,1,2,3]), true)
 		})
 
-static func random_entities():
+static func random_entities(opts={}):
 	return RoomInputs.new({
-		entities=U.rand_of(all_entities, U.rand_of([2,3,4]))
+		entities=U.rand_of(opts.get("entities", all_entities), U.rand_of([2,3,4]))
 		})
 
-static func random_room_shapes():
+static func random_room_shapes(opts={}):
 	return RoomInputs.new({
-		room_shapes=all_room_shapes.values(),
+		room_shapes=opts.get("room_shapes", all_room_shapes.values()),
 		})
 
-static func random_tilemaps():
+static func random_tilemaps(opts={}):
 	return RoomInputs.new({
 		tilemap_scenes=[
-			all_tilemap_scenes.pick_random(),
-			all_tilemap_scenes.pick_random(),
+			opts.get("tilemaps", all_tilemap_scenes).pick_random(),
+			opts.get("tilemaps", all_tilemap_scenes).pick_random(),
 			]})
 
-static func random_room():
-	return merge_many([random_enemies(), random_entities(), random_room_shapes(), random_tilemaps()])
+static func random_room(opts={}):
+	return merge_many([random_enemies(opts), random_entities(opts), random_room_shapes(opts), random_tilemaps(opts)])
 
 ## room size ######################################################33
 

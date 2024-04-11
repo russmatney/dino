@@ -14,6 +14,7 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 @onready var playground: Node2D = $%LoadPlayground
 
 var room_defs: Array[VaniaRoomDef] = []
+var room_inputs = []
 
 var generating: Thread
 
@@ -42,17 +43,17 @@ func _ready():
 
 	set_process(false)
 
-	var inputs = [
-		{
-			RoomInputs.HAS_PLAYER: {},
-			RoomInputs.HAS_CANDLE: {},
-			RoomInputs.HAS_CHECKPOINT: {},
-			RoomInputs.IN_SMALL_ROOM: {},
-			}
-		]
-	inputs.append_array(U.repeat_fn(RoomInputs.random_room, 2))
+	if room_inputs.is_empty():
+		room_inputs = fallback_room_inputs()
 
-	thread_room_generation({room_inputs=inputs})
+	thread_room_generation({room_inputs=room_inputs})
+
+func fallback_room_inputs():
+	var inputs = [{
+			RoomInputs.HAS_PLAYER: {}, RoomInputs.HAS_CANDLE: {},
+			RoomInputs.HAS_CHECKPOINT: {}, RoomInputs.IN_SMALL_ROOM: {}}]
+	inputs.append_array(U.repeat_fn(RoomInputs.random_room, 2))
+	return inputs
 
 func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
@@ -148,13 +149,12 @@ func generate_rooms(opts={}):
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-	var room_inputs = opts.get("room_inputs", [])
-	if room_inputs.is_empty():
-		room_inputs = [[RoomInputs.IN_SMALL_ROOM, RoomInputs.HAS_PLAYER]]
+	var inputs = opts.get("room_inputs", [])
+	if inputs.is_empty():
+		inputs = fallback_room_inputs()
 
 	room_defs = VaniaRoomDef.generate_defs(U.merge({
-		tile_size=tile_size,
-		room_inputs=room_inputs}, opts))
+		tile_size=tile_size, room_inputs=inputs}, opts))
 	room_defs = generator.add_rooms(room_defs)
 
 	for rd in room_defs:
@@ -177,6 +177,7 @@ func regenerate_other_rooms():
 			continue
 		other_room_defs.append(rd)
 
+	# TODO room_inputs reading from vania-menu configged constraints
 	var new_room_defs = VaniaRoomDef.generate_defs({
 		tile_size=tile_size,
 		})
@@ -192,6 +193,7 @@ func regenerate_other_rooms():
 		map.setup_walls_and_doors()
 
 func add_new_room(count=1):
+	# TODO room_inputs reading from vania-menu configged constraints
 	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size,
 		room_inputs=U.repeat_fn(RoomInputs.random_room, count)})
 	room_defs = generator.add_rooms(new_room_defs)
