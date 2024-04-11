@@ -6,25 +6,19 @@ class_name EntityButton
 
 static var button_scene = "res://src/dino/ui/EntityButton.tscn"
 
-static func newButton(entity):
+static func newButton(ent):
 	var butt = load(button_scene).instantiate()
-	butt.set_entity(entity)
+	butt.set_entity(ent)
 	return butt
 
 ## vars #####################################################
 
-var game_entity: DinoGameEntity
-var mode_entity: DinoModeEntity
-var player_entity: DinoPlayerEntity
-var weapon_entity: DinoWeaponEntity
+var entity
 
 func to_printable():
 	return {
 		_self=str(self),
-		game_entity=game_entity,
-		mode_entity=mode_entity,
-		player_entity=player_entity,
-		weapon_entity=weapon_entity,
+		entity=entity,
 	}
 
 @export var is_selected: bool :
@@ -45,7 +39,7 @@ signal icon_pressed
 func _ready():
 	if Engine.is_editor_hint():
 		if not get_entity():
-			game_entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
+			entity = Pandora.get_entity(DinoGameEntityIds.SHIRT)
 
 	focus_entered.connect(func(): icon.grab_focus())
 
@@ -73,41 +67,28 @@ func _on_mouse_exited():
 ## get/set_entity #######################################
 
 func get_entity():
-	if mode_entity:
-		return mode_entity
-	if game_entity:
-		return game_entity
-	if player_entity:
-		return player_entity
-	if weapon_entity:
-		return weapon_entity
+	return entity
 
-func set_mode_entity(g: DinoModeEntity):
-	mode_entity = g
+func set_mode_entity(g):
+	entity = g
 
-func set_game_entity(g: DinoGameEntity):
-	game_entity = g
+func set_game_entity(g):
+	entity = g
 
-func set_player_entity(g: DinoPlayerEntity):
-	player_entity = g
+func set_player_entity(g):
+	entity = g
 
-func set_weapon_entity(g: DinoWeaponEntity):
-	weapon_entity = g
+func set_weapon_entity(g):
+	entity = g
 
 func set_entity(ent):
-	if ent is DinoModeEntity:
-		mode_entity = ent
-	elif ent is DinoGameEntity:
-		game_entity = ent
-	elif ent is DinoPlayerEntity:
-		player_entity = ent
-	elif ent is DinoWeaponEntity:
-		weapon_entity = ent
+	entity = ent
 	setup()
 
 ## setup #######################################
 
 func setup():
+	Log.pr(entity)
 	if get_entity():
 		if label == null:
 			label = get_node("%Label")

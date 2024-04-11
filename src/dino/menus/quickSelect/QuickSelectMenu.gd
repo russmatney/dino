@@ -25,7 +25,7 @@ func _ready():
 		hide_menu()
 
 	if Engine.is_editor_hint():
-		set_entities(DinoWeaponsData.sidescroller_weapon_entities())
+		set_entities(DinoEnemy.all_enemies())
 
 func _unhandled_input(event):
 	if Trolls.is_released(event, "weapon_swap_menu"):
