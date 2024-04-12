@@ -252,7 +252,7 @@ func reload_current_room():
 func setup_player():
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
-			room_type=DinoData.RoomType.SideScroller,
+			genre_type=DinoData.GenreType.SideScroller,
 			entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
 			})
 	if Dino.current_player_node():

@@ -13,7 +13,7 @@ class PData:
 	var node: Node2D
 	var entity_id
 	var entity: DinoPlayerEntity
-	var room_type: DinoData.RoomType
+	var genre_type: DinoData.GenreType
 	# var state: State
 
 	func _init(opts):
@@ -26,7 +26,7 @@ class PData:
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
 
-		room_type = opts.get("room_type")
+		genre_type = opts.get("genre_type")
 
 
 ## vars #################################################
@@ -56,7 +56,7 @@ func spawn_new(opts={}):
 	if not p:
 		Log.err("No active player, cannot spawn", stack)
 		return
-	p.node = p.entity.get_player_scene(p.room_type).instantiate()
+	p.node = p.entity.get_player_scene(p.genre_type).instantiate()
 
 	var sp = get_spawn_point_and_coords(opts)
 	var spawn_point = sp[0]
@@ -102,8 +102,8 @@ func respawn_active_player(opts):
 	if p:
 		_remove_player(p, opts)
 
-	if opts.get("new_room_type") != null:
-		p.room_type = opts.get("new_room_type")
+	if opts.get("new_genre_type") != null:
+		p.genre_type = opts.get("new_genre_type")
 
 	if opts.get("deferred", true):
 		spawn_new.call_deferred(opts)

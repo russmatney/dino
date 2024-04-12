@@ -5,7 +5,7 @@ class_name VaniaRoomDef
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
 
 # TODO rename to genre type or machine type?
-var room_type: DinoData.RoomType = DinoData.RoomType.SideScroller
+var genre_type: DinoData.GenreType = DinoData.GenreType.SideScroller
 var room_path: String
 
 var local_cells: Array #[Vector3i]
@@ -86,7 +86,7 @@ func to_printable():
 func _init(opts={}):
 	all_entities = label_to_entity.keys()
 
-	room_type = opts.get("room_type", room_type)
+	genre_type = opts.get("genre_type", genre_type)
 	if opts.get("local_cells"):
 		set_local_cells(opts.get("local_cells"))
 

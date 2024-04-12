@@ -39,7 +39,7 @@ func start_game():
 	# establish current player stack
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
-			room_type=DinoData.RoomType.SideScroller,
+			genre_type=DinoData.GenreType.SideScroller,
 			entity=player_entity,
 			})
 

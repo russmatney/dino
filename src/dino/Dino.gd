@@ -4,16 +4,16 @@ class_name DinoData
 
 ## static data/helpers ########################################################
 
-enum RoomType {SideScroller, TopDown, BeatEmUp}
+enum GenreType {SideScroller, TopDown, BeatEmUp}
 
-static func to_room_type(s: String) -> RoomType:
+static func to_genre_type(s: String) -> GenreType:
 	match s.to_lower():
-		"sidescroller", "ss": return RoomType.SideScroller
-		"topdown", "td": return RoomType.TopDown
-		"beatemup", "beu": return RoomType.BeatEmUp
+		"sidescroller", "ss": return GenreType.SideScroller
+		"topdown", "td": return GenreType.TopDown
+		"beatemup", "beu": return GenreType.BeatEmUp
 		_:
-			Log.warn("no match in to_room_type, returning fallback", s)
-			return RoomType.SideScroller
+			Log.warn("no match in to_genre_type, returning fallback", s)
+			return GenreType.SideScroller
 
 ## vars ##########################################################
 

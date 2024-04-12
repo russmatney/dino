@@ -50,7 +50,7 @@ static func create_level(def: LevelDef, opts={}):
 
 ## exports/triggers ######################################################
 
-@export var room_type: DinoData.RoomType
+@export var genre_type: DinoData.GenreType
 @export var level_def: LevelDef
 
 @export var _regen_with_level_def: bool = false :
@@ -98,8 +98,8 @@ var time_int = 0
 
 func to_printable():
 	if level_def != null:
-		return {room_type=room_type, level_def=level_def.get_display_name()}
-	return {room_type=room_type}
+		return {genre_type=genre_type, level_def=level_def.get_display_name()}
+	return {genre_type=genre_type}
 
 ## enter_tree ###############################################
 
@@ -137,9 +137,9 @@ func _ready():
 
 	if Dino.is_debug_mode():
 		Log.pr("debug mode: regenerating")
-		if room_type == null:
-			room_type = DinoData.RoomType.SideScroller
-		Dino.ensure_player_setup({room_type=room_type,
+		if genre_type == null:
+			genre_type = DinoData.GenreType.SideScroller
+		Dino.ensure_player_setup({genre_type=genre_type,
 			entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})
 		regenerate()
