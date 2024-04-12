@@ -31,6 +31,5 @@ func data():
 ## static helpers ##########################################################
 
 static func basic_game_entities():
-	var ent = Pandora.get_entity(DinoGameEntityIds.SHIRT)
-	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))\
+	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOGAME))\
 		.filter(func(e): return e.is_enabled())

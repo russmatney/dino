@@ -33,8 +33,7 @@ func data():
 ## static #################################################
 
 static func all_entities():
-	var ent = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
-	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOPLAYER))
 
 ## instance #################################################
 

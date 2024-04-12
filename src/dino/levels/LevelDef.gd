@@ -35,5 +35,4 @@ func data():
 ## static helpers #######################################
 
 static func all_defs():
-	var ent = Pandora.get_entity(LevelDefIds.WILDCARD)
-	return Pandora.get_all_entities(Pandora.get_category(ent._category_id))
+	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.LEVELDEF))
