@@ -62,7 +62,8 @@ func on_finished_initial_room_gen():
 		p.queue_free()
 		clear_load_playground()
 		await get_tree().create_timer(0.4).timeout
-		# TODO fun transition
+		# TODO fun transition!
+		# new room/game banner/notif, camera transition, etc
 	(func():
 		# we don't care for this until we load the first proper level
 		get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
@@ -230,6 +231,30 @@ func remove_room(count=1):
 		map.setup_walls_and_doors()
 
 ## load room #######################################################
+
+# overwriting metsys's Game.load_room to support 'setup' and setting a default layer
+func load_room(path: String, opts={}):
+	if not path.is_absolute_path():
+		path = MetSys.get_full_room_path(path)
+
+	if map:
+		map.queue_free()
+		await map.tree_exited
+		map = null
+
+	map = load(path).instantiate()
+	if opts.get("setup"):
+		opts.get("setup").call(map)
+	add_child(map)
+
+	if MetSys.get_current_room_instance() != null:
+		MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
+	else:
+		Log.warn("No current room_instance, defaulting to layer 0")
+		MetSys.current_layer = 0
+
+	room_loaded.emit()
+
 
 func load_initial_room():
 	if room_defs.is_empty():
