@@ -1,28 +1,29 @@
-[gd_resource type="AnimatedTexture" load_steps=9 format=3 uid="uid://mett0fa3e1qe"]
+[gd_resource type="AnimatedTexture" load_steps=9 format=2]
 
-[ext_resource type="Texture2D" uid="uid://cgts01urkfo46" path="res://addons/gd-plug-ui/assets/icons/progress/progress1.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://cgpnu44qyu6k3" path="res://addons/gd-plug-ui/assets/icons/progress/progress6.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://sred54ktpynr" path="res://addons/gd-plug-ui/assets/icons/progress/progress7.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://kqh2l4lmud66" path="res://addons/gd-plug-ui/assets/icons/progress/progress5.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://cj7jy1jh5cutb" path="res://addons/gd-plug-ui/assets/icons/progress/progress2.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://wosx7pjrwtiw" path="res://addons/gd-plug-ui/assets/icons/progress/progress4.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://dymxcsmwminoi" path="res://addons/gd-plug-ui/assets/icons/progress/progress3.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://dvgd0gmpoo216" path="res://addons/gd-plug-ui/assets/icons/progress/progress8.png" id="8"]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress1.png" type="Texture" id=1]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress6.png" type="Texture" id=2]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress7.png" type="Texture" id=3]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress5.png" type="Texture" id=4]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress2.png" type="Texture" id=5]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress4.png" type="Texture" id=6]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress3.png" type="Texture" id=7]
+[ext_resource path="res://addons/gd-plug-ui/assets/icons/progress/progress8.png" type="Texture" id=8]
 
 [resource]
+flags = 4
 frames = 8
-frame_0/texture = ExtResource("1")
-frame_1/texture = ExtResource("5")
-frame_1/duration = 1.0
-frame_2/texture = ExtResource("7")
-frame_2/duration = 1.0
-frame_3/texture = ExtResource("6")
-frame_3/duration = 1.0
-frame_4/texture = ExtResource("4")
-frame_4/duration = 1.0
-frame_5/texture = ExtResource("2")
-frame_5/duration = 1.0
-frame_6/texture = ExtResource("3")
-frame_6/duration = 1.0
-frame_7/texture = ExtResource("8")
-frame_7/duration = 1.0
+frame_0/texture = ExtResource( 1 )
+frame_1/texture = ExtResource( 5 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 7 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 6 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 4 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 2 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 3 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 8 )
+frame_7/delay_sec = 0.0
