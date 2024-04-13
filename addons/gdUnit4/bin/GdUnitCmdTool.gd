@@ -108,7 +108,7 @@ class CLIRunner:
 		# stop checked first test failure to fail fast
 		_executor.fail_fast(true)
 		if GdUnit4CSharpApiLoader.is_mono_supported():
-			prints("GdUnit4Mono Version %s loaded." % GdUnit4CSharpApiLoader.version())
+			prints("GdUnit4Net version '%s' loaded." % GdUnit4CSharpApiLoader.version())
 			_cs_executor = GdUnit4CSharpApiLoader.create_executor(self)
 		var err := GdUnitSignals.instance().gdunit_event.connect(_on_gdunit_event)
 		if err != OK:
@@ -587,7 +587,6 @@ func _initialize():
 		prints("GdUnit4 requires a minimum of Godot 4.1.x Version!")
 		quit(CLIRunner.RETURN_ERROR_GODOT_VERSION_NOT_SUPPORTED)
 		return
-	DisplayServer.window_set_title("GDUnit CLI")
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
 	_cli_runner = CLIRunner.new()
 	root.add_child(_cli_runner)
