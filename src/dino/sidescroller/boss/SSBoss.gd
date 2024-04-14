@@ -35,7 +35,6 @@ var can_see_player
 signal died(boss)
 signal stunned(boss)
 
-
 ## nodes ###########################################################
 
 @onready var machine = $SSBossMachine
@@ -120,7 +119,6 @@ func check_out(data):
 func hotel_data():
 	return {health=health, position=global_position}
 
-
 ## facing ####################################################
 
 func face_right():
@@ -131,13 +129,11 @@ func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
 
-
 ## physics process ####################################################
 
 func _physics_process(_delta):
-	# TODO restore!
-	var player
-	# player = P.get_player()
+	var player = Dino.current_player_node()
+
 	if player and is_instance_valid(player):
 		var player_pos = player.global_position
 		los.target_position = to_local(player_pos)
@@ -150,7 +146,6 @@ func _physics_process(_delta):
 					face_right()
 				else:
 					face_left()
-
 
 ## take_hit ####################################################
 
@@ -178,7 +173,6 @@ func take_hit(opts={}):
 			damage=damage,
 			direction=direction,
 			})
-
 
 ## player touch damage ####################################################
 

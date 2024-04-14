@@ -141,7 +141,6 @@ func die():
 	if skull_particles:
 		skull_particles.set_emitting(true)
 
-
 ## on knockback ####################################################
 
 func _on_knocked_back(_goomba):
@@ -177,7 +176,6 @@ func hotel_data():
 		crawl_on_side=crawl_on_side,
 		}
 
-
 ## facing ####################################################
 
 func face(face_dir):
@@ -207,8 +205,8 @@ func face_left():
 func update_facing():
 	U.update_h_flip(facing_vector, hitbox)
 	U.update_h_flip(facing_vector, front_ray)
-	for los in line_of_sights:
-		U.update_los_facing(facing_vector, los)
+	for _los in line_of_sights:
+		U.update_los_facing(facing_vector, _los)
 
 ## wall crawlers #######################################################
 
@@ -268,7 +266,7 @@ func _on_body_exited(body):
 ########################################################
 # kick
 
-# should move this to the machine's idle and kick states
+# TODO move kick to a machine state
 
 func _on_animation_finished():
 	if anim.animation == "kick":
@@ -277,11 +275,11 @@ func _on_animation_finished():
 func _on_frame_changed():
 	if anim.animation == "idle":
 		if anim.frame in [3, 4, 5, 6]:
-			for los in line_of_sights:
-				U.update_los_facing(-1*facing_vector, los)
+			for _los in line_of_sights:
+				U.update_los_facing(-1*facing_vector, _los)
 		else:
-			for los in line_of_sights:
-				U.update_los_facing(facing_vector, los)
+			for _los in line_of_sights:
+				U.update_los_facing(facing_vector, _los)
 
 	elif anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
 		for b in bodies:
