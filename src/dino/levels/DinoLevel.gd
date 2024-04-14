@@ -53,7 +53,7 @@ static func create_level(def: LevelDef, opts={}):
 @export var genre_type: DinoData.GenreType
 @export var level_def: LevelDef
 
-@export var _regen_with_level_def: bool = false :
+@export var regen_with_level_def: bool = false :
 	set(v):
 		if not Engine.is_editor_hint():
 			return

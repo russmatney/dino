@@ -237,7 +237,7 @@ func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 func test_possible_start_coords_simple():
 	var defs = VaniaRoomDef.generate_defs({room_inputs=[[RoomInputs.IN_SMALL_ROOM,],]})
 	var gen = VaniaGenerator.new()
-	var gened_defs = gen.add_rooms(defs)
+	var _gened_defs = gen.add_rooms(defs)
 
 	var shape = [Vector3i(0, 0, 0)]
 	var map_cells = VaniaGenerator.get_existing_map_cells()
@@ -254,7 +254,7 @@ func test_possible_start_coords_simple():
 func test_possible_start_coords_concave():
 	var defs = VaniaRoomDef.generate_defs({room_inputs=[[RoomInputs.IN_SMALL_ROOM,],]})
 	var gen = VaniaGenerator.new()
-	var gened_defs = gen.add_rooms(defs)
+	var _gened_defs = gen.add_rooms(defs)
 
 	var shape = [
 		Vector3i(0, 0, 0), Vector3i(0, 1, 0),
