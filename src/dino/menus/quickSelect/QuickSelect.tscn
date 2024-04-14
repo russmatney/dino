@@ -21,6 +21,7 @@ grow_vertical = 2
 script = ExtResource("1_itny8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = 3
 
 [node name="ScreenBlur" parent="CanvasLayer" instance=ExtResource("3_8lib6")]

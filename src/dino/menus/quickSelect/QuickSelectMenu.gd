@@ -12,6 +12,7 @@ static func ss_weapons_menu():
 
 ## vars #####################################################
 
+@onready var canvasLayer = $%CanvasLayer
 @onready var entityList = $%EntityList
 @onready var panel = $%Panel
 @onready var screenBlur = $%ScreenBlur
@@ -57,6 +58,8 @@ func select_current():
 func show_menu(opts):
 	# naive, but maybe this is fine?
 	get_tree().paused = true
+	canvasLayer.set_visible(true)
+	# TODO tween the blur on/off
 	screenBlur.show()
 
 	set_entities(opts.get("entities"), opts.get("on_select"))
@@ -69,5 +72,6 @@ func hide_menu():
 	select_current()
 	panel.set_visible(false)
 	screenBlur.hide()
+	canvasLayer.set_visible(false)
 
 	get_tree().paused = false

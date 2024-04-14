@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://djculbglj2yia"]
+[gd_scene load_steps=34 format=3 uid="uid://djculbglj2yia"]
 
 [ext_resource type="Script" path="res://src/dino/players/DinoSSPlayer.gd" id="1_xvlky"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_lxjfb"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller/machine/SSMachine.tscn" id="8_5ekym"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="9_dlhwa"]
+[ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/dino/menus/quickSelect/QuickSelect.tscn" id="10_e40tc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="10_lf38g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtbi"]
@@ -300,3 +301,5 @@ scale = Vector2(0.4, 0.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 shape = SubResource("RectangleShape2D_48he4")
+
+[node name="QuickSelect" parent="." instance=ExtResource("10_e40tc")]
