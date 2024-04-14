@@ -12,6 +12,21 @@ func _get_configuration_warnings():
 			"idle", "run", "jump", "air", "fall",
 			"knocked_back", "dying", "dead",]}})
 
+## data ##########################################################
+
+enum Powerup { Read, Sword, Flashlight, DoubleJump, Climb, Gun, Jetpack, Ascend, Descend,
+	Bow, Boomerang,
+	}
+static var all_powerups = [
+	Powerup.DoubleJump,
+	Powerup.Climb,
+	Powerup.Jetpack,
+	Powerup.Flashlight,
+	Powerup.Sword, Powerup.Gun,
+	Powerup.Ascend, Powerup.Descend,
+	Powerup.Bow, Powerup.Boomerang,
+	]
+
 ## vars ###########################################################
 
 # input vars
@@ -80,6 +95,8 @@ var health
 var is_dead
 var is_player
 var death_count = 0
+var is_spiking = false
+
 # nodes
 
 @onready var coll = $CollisionShape2D
@@ -174,6 +191,21 @@ func _ready():
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
 			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
 
+		died.connect(_on_player_death)
+
+		var level = U.find_level_root(self)
+		if level.has_method("_on_player_death"):
+			died.connect(level._on_player_death.bind(self))
+
+		# could be instances with randomized stats, etc
+		add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
+		add_weapon(DinoWeaponEntityIds.SWORD)
+		add_weapon(DinoWeaponEntityIds.GUN)
+		add_weapon(DinoWeaponEntityIds.BOOMERANG)
+		has_double_jump = true
+		has_jetpack = true
+
+
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
 	set_collision_mask_value(1, true) # sense walls/doors/tiles
@@ -265,6 +297,17 @@ func _physics_process(_delta):
 			# maybe this just works?
 			aim_vector = move_vector
 			aim_weapon(aim_vector)
+
+## process ###########################################################
+
+func _process(_delta):
+	# TODO don't fire these every process loop!
+	if has_weapon_id(DinoWeaponEntityIds.ORBS):
+		if orbit_items.size() == 0 and is_spiking == false:
+			remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
+	if not has_weapon_id(DinoWeaponEntityIds.ORBS):
+		if orbit_items.size() > 0:
+			add_weapon(DinoWeaponEntityIds.ORBS)
 
 ## actions ###########################################################
 
@@ -382,7 +425,7 @@ func face_body(body):
 
 signal died()
 
-func die(opts={}):
+func die(_opts={}):
 	is_dead = true
 	death_count += 1
 	Hotel.check_in(self)
@@ -391,6 +434,14 @@ func resurrect():
 	is_dead = false
 	health = initial_health
 	Hotel.check_in(self)
+
+func _on_player_death():
+	stamp({ttl=0}) # perma stamp
+
+	var t = create_tween()
+	t.tween_property(self, "modulate:a", 0.3, 1).set_trans(Tween.TRANS_CUBIC)
+	if light:
+		t.parallel().tween_property(light, "scale", Vector2.ZERO, 1).set_trans(Tween.TRANS_CUBIC)
 
 ## damage ###########################################################
 
@@ -414,7 +465,6 @@ func take_damage(opts):
 	var damage = opts.get("damage")
 
 	if damage == null:
-		var attack_damage
 		match hit_type:
 			"bump":
 				damage = body.bump_damage
@@ -558,6 +608,17 @@ func collect_pickup(pickup_type):
 
 	Hotel.check_in(self, {pickups=pickups})
 
+func collect(_entity, _opts={}):
+	pass
+	# match entity.type:
+	# 	WoodsEntity.t.Leaf: Log.pr("player collected leaf")
+
+## orb items ##################################################################
+
+func collect_orb(ingredient_type):
+	# overriding ssplayer pickup logic
+	add_orbit_item(ingredient_type)
+
 ## coins #######################################################
 
 func add_coin():
@@ -567,21 +628,21 @@ func add_coin():
 #################################################################################
 ## Powerups #####################################################################
 
-func update_with_powerup(powerup: SSData.Powerup):
+func update_with_powerup(powerup: Powerup):
 	match (powerup):
-		SSData.Powerup.Sword: add_weapon(DinoWeaponEntityIds.SWORD)
-		SSData.Powerup.Flashlight: add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
-		SSData.Powerup.Gun: add_weapon(DinoWeaponEntityIds.GUN)
-		SSData.Powerup.Bow: add_weapon(DinoWeaponEntityIds.BOW)
-		SSData.Powerup.Boomerang: add_weapon(DinoWeaponEntityIds.BOOMERANG)
+		Powerup.Sword: add_weapon(DinoWeaponEntityIds.SWORD)
+		Powerup.Flashlight: add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
+		Powerup.Gun: add_weapon(DinoWeaponEntityIds.GUN)
+		Powerup.Bow: add_weapon(DinoWeaponEntityIds.BOW)
+		Powerup.Boomerang: add_weapon(DinoWeaponEntityIds.BOOMERANG)
 
-		SSData.Powerup.Ascend: add_ascend()
-		SSData.Powerup.Descend: add_descend()
-		SSData.Powerup.DoubleJump: add_double_jump()
-		SSData.Powerup.Climb: add_climb()
-		SSData.Powerup.Jetpack: add_jetpack()
+		Powerup.Ascend: add_ascend()
+		Powerup.Descend: add_descend()
+		Powerup.DoubleJump: add_double_jump()
+		Powerup.Climb: add_climb()
+		Powerup.Jetpack: add_jetpack()
 
-func add_powerup(powerup: SSData.Powerup):
+func add_powerup(powerup: Powerup):
 	powerups.append(powerup)
 	update_with_powerup(powerup)
 	Hotel.check_in(self)
@@ -603,8 +664,8 @@ func should_start_climb():
 		return false
 	if has_climb and is_on_wall_only()\
 		and not near_ground_check.is_colliding():
-		var coll = get_slide_collision(0)
-		var x_diff = coll.get_position().x - global_position.x
+		var coll_obj = get_slide_collision(0)
+		var x_diff = coll_obj.get_position().x - global_position.x
 
 		if move_vector.x > 0 and x_diff > 0:
 			return true
@@ -660,8 +721,8 @@ func has_weapon_id(ent_id):
 func active_weapon():
 	return weapon_set.active_weapon()
 
-func aim_weapon(aim_vector):
-	return weapon_set.aim_weapon(aim_vector)
+func aim_weapon(aim_vec):
+	return weapon_set.aim_weapon(aim_vec)
 
 func cycle_weapon():
 	return weapon_set.cycle_weapon()
@@ -676,3 +737,29 @@ func use_weapon(weapon=null):
 # i.e. button released, stop firing or whatever continuous action
 func stop_using_weapon(weapon=null):
 	return weapon_set.stop_using_weapon(weapon)
+
+
+@onready var orbit_item_scene = preload("res://src/dino/weapons/orb/OrbitItem.tscn")
+
+var orbit_items = []
+
+func add_orbit_item(ingredient_type):
+	Log.pr("adding orbit item", ingredient_type)
+
+	var item = orbit_item_scene.instantiate()
+	item.show_behind_parent = true
+	# pass ingredient data along
+	item.ingredient_type = ingredient_type
+	add_child.call_deferred(item)
+	orbit_items.append(item)
+
+func remove_orbit_item(item):
+	for ch in get_children():
+		if ch == item:
+			orbit_items.erase(ch)
+			ch.queue_free()
+
+## spiking ##################################################################
+
+func in_spike_zone():
+	return true

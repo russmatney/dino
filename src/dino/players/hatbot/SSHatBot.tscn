@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://djculbglj2yia"]
 
-[ext_resource type="Script" path="res://src/dino/sidescroller/player/DinoSSPlayer.gd" id="1_oco1l"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/SSPlayer.gd" id="1_01eu8"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
 [ext_resource type="Theme" path="res://src/dino/ui/StateLabelTheme.tres" id="3_gwyf6"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_h4hiv"]
@@ -232,8 +232,7 @@ size = Vector2(96, 96)
 [node name="SSHatBot" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3129
-script = ExtResource("1_oco1l")
-has_double_jump = true
+script = ExtResource("1_01eu8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)

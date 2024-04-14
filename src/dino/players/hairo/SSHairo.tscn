@@ -1,6 +1,6 @@
 [gd_scene load_steps=45 format=3 uid="uid://dkc8o1scg5uwy"]
 
-[ext_resource type="Script" path="res://src/dino/sidescroller/player/DinoSSPlayer.gd" id="1_prel2"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/SSPlayer.gd" id="1_7h5p5"]
 [ext_resource type="Texture2D" uid="uid://dcng2g4a1g4wn" path="res://src/dino/players/hairo/assets/topdown_player_64.png" id="2_mxd7a"]
 [ext_resource type="Theme" path="res://src/dino/ui/StateLabelTheme.tres" id="3_rj8dc"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_gdioc"]
@@ -492,8 +492,7 @@ size = Vector2(96, 96)
 [node name="SSHairo" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3129
-script = ExtResource("1_prel2")
-has_boomerang = true
+script = ExtResource("1_7h5p5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

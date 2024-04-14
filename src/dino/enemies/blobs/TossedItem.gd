@@ -19,8 +19,8 @@ func _on_body_entered(body: Node):
 	Log.pr("Tossed item body entered: ", body)
 
 	if body.is_in_group("player"):
-		if body.has_method("collect_pickup"):
-			body.collect_pickup(ingredient_type)
+		if body.has_method("collect_orb"):
+			body.collect_orb(ingredient_type)
 			kill()
 	elif body.has_method("take_hit") and not body.is_dead:
 		body.take_hit({body=self, damage=1})

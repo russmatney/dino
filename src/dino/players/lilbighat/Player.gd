@@ -6,7 +6,7 @@ extends SSPlayer
 func _ready():
 	if not Engine.is_editor_hint():
 		Cam.request_camera({player=self})
-		# powerups = SSData.all_powerups
+		# powerups = SSPlayer.all_powerups
 
 		died.connect(_on_player_death)
 
