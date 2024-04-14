@@ -233,7 +233,7 @@ func remove_room(count=1):
 ## load room #######################################################
 
 # overwriting metsys's Game.load_room to support 'setup' and setting a default layer
-func load_room(path: String, opts={}):
+func _load_room(path: String, opts={}):
 	if not path.is_absolute_path():
 		path = MetSys.get_full_room_path(path)
 
@@ -266,7 +266,7 @@ func load_initial_room():
 			Log.warn("No room with player entity! Picking random start room")
 			rooms = room_defs
 		var rpath = rooms.pick_random().room_path
-		load_room(rpath, {setup=func(room):
+		_load_room(rpath, {setup=func(room):
 			room.set_room_def(get_room_def(rpath))})
 
 func reload_current_room():

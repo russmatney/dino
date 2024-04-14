@@ -22,7 +22,7 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 	if prev_room_instance:
 		prev_room_instance.get_parent().remove_child(prev_room_instance)
 
-	await game.load_room(target_room, {setup=func(room):
+	await game._load_room(target_room, {setup=func(room):
 		room.set_room_def(game.get_room_def(target_room))})
 
 	var og_player = Dino.current_player_node()
