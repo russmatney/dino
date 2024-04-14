@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/ui/WeaponIcon.gd" id="1_m1rqk"]
 [ext_resource type="Script" path="res://src/dino/weapons/DinoWeaponEntity.gd" id="2_yi53c"]
-[ext_resource type="Texture2D" uid="uid://b3muncfegx7hb" path="res://addons/core/beehive/assets/boomerang_icon.png" id="3_y8ei5"]
+[ext_resource type="Texture2D" uid="uid://b3muncfegx7hb" path="res://src/dino/weapons/boomerang_icon.png" id="3_y8ei5"]
 
 [sub_resource type="Resource" id="Resource_368pm"]
 script = ExtResource("2_yi53c")

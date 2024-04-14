@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqlsxw8cv8mjw"]
+
+[ext_resource type="SpriteFrames" uid="uid://d16nn6a1ni5p2" path="res://src/dino/weapons/SwordSpriteFrames.tres" id="1_pttpo"]
+[ext_resource type="Script" path="res://src/dino/weapons/Sword.gd" id="2_220bt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvao8"]
+size = Vector2(40, 24)
+
+[node name="Sword" type="Node2D"]
+script = ExtResource("2_220bt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_pttpo")
+animation = &"swing"
+autoplay = "idle"
+frame = 4
+frame_progress = 1.0
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 152
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_nvao8")

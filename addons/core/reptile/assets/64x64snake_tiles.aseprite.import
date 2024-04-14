@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ccrpx3ykjahyb"
+path="res://.godot/imported/64x64snake_tiles.aseprite-40f169ea098a9637dde7b0a16ddd1a81.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/64x64snake_tiles.aseprite"
+dest_files=["res://.godot/imported/64x64snake_tiles.aseprite-40f169ea098a9637dde7b0a16ddd1a81.res"]
+
+[params]
+

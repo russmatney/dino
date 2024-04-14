@@ -159,7 +159,7 @@ func _on_VisionBox_body_exited(body: Node):
 ########################################################
 # fire
 
-@onready var arrow_scene = preload("res://addons/core/beehive/sidescroller_player/weapons/Arrow.tscn")
+@onready var arrow_scene = preload("res://src/dino/weapons/Arrow.tscn")
 var arrow_impulse = 800
 var fire_rate = 0.2
 var arrow_knockback = 2

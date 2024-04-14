@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/debug-info-text.tres" id="4_b5bxh"]
 [ext_resource type="Script" path="res://src/games/harvey/player/HarveyPlayer.gd" id="5"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_1tlex"]
-[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/core/beehive/assets/arrow.tres" id="10"]
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://src/dino/weapons/arrow.tres" id="10"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(15, 26)

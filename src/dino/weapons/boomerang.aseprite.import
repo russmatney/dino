@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bov27exlrjown"
+path="res://.godot/imported/boomerang.aseprite-06aedacbfdefdfe2e5e51d91185b03a2.res"
+
+[deps]
+
+source_file="res://src/dino/weapons/boomerang.aseprite"
+dest_files=["res://.godot/imported/boomerang.aseprite-06aedacbfdefdfe2e5e51d91185b03a2.res"]
+
+[params]
+

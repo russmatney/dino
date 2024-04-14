@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://d1uqrh57tjmm6"]
 
-[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://addons/core/beehive/assets/pop_sheet.png" id="1_2sj28"]
+[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://src/dino/weapons/pop_sheet.png" id="1_2sj28"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("1_2sj28")

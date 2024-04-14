@@ -1,0 +1,70 @@
+[gd_scene load_steps=18 format=3 uid="uid://dgan7tpytfkfo"]
+
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_x6uir"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Idle.gd" id="2_63kjp"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Respawn.gd" id="3_dns53"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Run.gd" id="4_2ffxk"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Jump.gd" id="5_x6xf7"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Fall.gd" id="6_yp7uk"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/KnockedBack.gd" id="7_riq71"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Dying.gd" id="8_rgmh6"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Dead.gd" id="9_7npqa"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Wander.gd" id="10_sknyq"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Patrol.gd" id="11_12amn"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Ascend.gd" id="12_v5nhl"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Descend.gd" id="13_mequ8"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Rest.gd" id="14_a68jl"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Climb.gd" id="15_cb6qd"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Jetpack.gd" id="16_o3l8p"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Dash.gd" id="17_60gk0"]
+
+[node name="SSMachine" type="Node"]
+script = ExtResource("1_x6uir")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_63kjp")
+
+[node name="Respawn" type="Node" parent="."]
+script = ExtResource("3_dns53")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("4_2ffxk")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("5_x6xf7")
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("6_yp7uk")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("7_riq71")
+
+[node name="Dying" type="Node" parent="."]
+script = ExtResource("8_rgmh6")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("9_7npqa")
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("10_sknyq")
+
+[node name="Patrol" type="Node" parent="."]
+script = ExtResource("11_12amn")
+
+[node name="Ascend" type="Node" parent="."]
+script = ExtResource("12_v5nhl")
+
+[node name="Descend" type="Node" parent="."]
+script = ExtResource("13_mequ8")
+
+[node name="Rest" type="Node" parent="."]
+script = ExtResource("14_a68jl")
+
+[node name="Climb" type="Node" parent="."]
+script = ExtResource("15_cb6qd")
+
+[node name="Jetpack" type="Node" parent="."]
+script = ExtResource("16_o3l8p")
+
+[node name="Dash" type="Node" parent="."]
+script = ExtResource("17_60gk0")

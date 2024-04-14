@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://8mo6p0ai7cj7"]
-
-[ext_resource type="Material" uid="uid://0cshqvi4easm" path="res://addons/core/beehive/sidescroller_boss/swoop_hint_particle_process_material.tres" id="1_14n1c"]
-
-[node name="SwoopHint1" type="GPUParticles2D"]
-amount = 15
-process_material = ExtResource("1_14n1c")

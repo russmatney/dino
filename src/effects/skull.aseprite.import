@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bleknglw1p6hd"
+path="res://.godot/imported/skull.aseprite-ef01d7bf96b5db868c8c4692f7823cb1.res"
+
+[deps]
+
+source_file="res://src/effects/skull.aseprite"
+dest_files=["res://.godot/imported/skull.aseprite-ef01d7bf96b5db868c8c4692f7823cb1.res"]
+
+[params]
+

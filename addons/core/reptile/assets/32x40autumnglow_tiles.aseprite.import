@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dmmhmj76eigbd"
+path="res://.godot/imported/32x40autumnglow_tiles.aseprite-966257f31ee013b369f4925b161f705b.res"
+
+[deps]
+
+source_file="res://addons/core/reptile/assets/32x40autumnglow_tiles.aseprite"
+dest_files=["res://.godot/imported/32x40autumnglow_tiles.aseprite-966257f31ee013b369f4925b161f705b.res"]
+
+[params]
+

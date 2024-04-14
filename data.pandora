@@ -635,11 +635,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/assets/sword_icon.png"
+						"value": "res://src/dino/weapons/sword_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller_player/weapons/Sword.tscn"
+						"value": "res://src/dino/weapons/Sword.tscn"
 					}
 				}
 			},
@@ -656,11 +656,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/assets/bow_icon.png"
+						"value": "res://src/dino/weapons/bow_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller_player/weapons/Bow.tscn"
+						"value": "res://src/dino/weapons/Bow.tscn"
 					}
 				}
 			},
@@ -677,11 +677,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/assets/boomerang_icon.png"
+						"value": "res://src/dino/weapons/boomerang_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller_player/weapons/Boomerang.tscn"
+						"value": "res://src/dino/weapons/Boomerang.tscn"
 					},
 					"topdown_scene": {
 						"type": "resource",
@@ -702,11 +702,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/assets/gun_icon.png"
+						"value": "res://src/dino/weapons/gun_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller_player/weapons/Gun.tscn"
+						"value": "res://src/dino/weapons/Gun.tscn"
 					}
 				}
 			},
@@ -723,11 +723,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/assets/flashlight_icon.png"
+						"value": "res://src/dino/weapons/flashlight_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller_player/weapons/Flashlight.tscn"
+						"value": "res://src/dino/weapons/Flashlight.tscn"
 					}
 				}
 			},
@@ -744,7 +744,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/assets/orb_icon.png"
+						"value": "res://src/dino/weapons/orb_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",

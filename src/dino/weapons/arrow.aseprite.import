@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dctum3s3mtm7k"
+path="res://.godot/imported/arrow.aseprite-0fcbb5de655a3d7dcb95bf64784c0d8d.res"
+
+[deps]
+
+source_file="res://src/dino/weapons/arrow.aseprite"
+dest_files=["res://.godot/imported/arrow.aseprite-0fcbb5de655a3d7dcb95bf64784c0d8d.res"]
+
+[params]
+
