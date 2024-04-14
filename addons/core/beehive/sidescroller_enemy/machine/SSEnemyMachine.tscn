@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://43qn8g87wt2p"]
 
 [ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_avc5j"]
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller_enemy/machine/Idle.gd" id="2_08acf"]
@@ -10,8 +10,10 @@
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller_enemy/machine/Jump.gd" id="8_vriro"]
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller_enemy/machine/Fire.gd" id="9_hgagb"]
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller_enemy/machine/Laugh.gd" id="10_gqe3v"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_enemy/machine/Patrol.gd" id="11_tf851"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_enemy/machine/Wander.gd" id="12_mpk65"]
 
-[node name="Machine" type="Node"]
+[node name="SSEnemyMachine" type="Node"]
 script = ExtResource("1_avc5j")
 
 [node name="Idle" type="Node" parent="."]
@@ -40,3 +42,9 @@ script = ExtResource("9_hgagb")
 
 [node name="Laugh" type="Node" parent="."]
 script = ExtResource("10_gqe3v")
+
+[node name="Patrol" type="Node" parent="."]
+script = ExtResource("11_tf851")
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("12_mpk65")

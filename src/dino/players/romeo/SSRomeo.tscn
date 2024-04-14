@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_3cive"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/games/tower/assets/greyhat_jetflame_sheet.png" id="5_f26gs"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="6_kfrv1"]
-[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller/machine/SSMachine.tscn" id="7_03vc6"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller_player/machine/SSMachine.tscn" id="7_03vc6"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_7j6tu"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="9_wiusc"]
 

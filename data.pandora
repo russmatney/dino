@@ -639,7 +639,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller/weapons/Sword.tscn"
+						"value": "res://addons/core/beehive/sidescroller_player/weapons/Sword.tscn"
 					}
 				}
 			},
@@ -660,7 +660,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller/weapons/Bow.tscn"
+						"value": "res://addons/core/beehive/sidescroller_player/weapons/Bow.tscn"
 					}
 				}
 			},
@@ -681,7 +681,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller/weapons/Boomerang.tscn"
+						"value": "res://addons/core/beehive/sidescroller_player/weapons/Boomerang.tscn"
 					},
 					"topdown_scene": {
 						"type": "resource",
@@ -706,7 +706,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller/weapons/Gun.tscn"
+						"value": "res://addons/core/beehive/sidescroller_player/weapons/Gun.tscn"
 					}
 				}
 			},
@@ -727,7 +727,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/sidescroller/weapons/Flashlight.tscn"
+						"value": "res://addons/core/beehive/sidescroller_player/weapons/Flashlight.tscn"
 					}
 				}
 			},

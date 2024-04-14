@@ -1,16 +1,15 @@
-@tool
 extends SSWeapon
 
 var aim_vector
-var bullet_offset = Vector2.ONE * -12
+var arrow_offset = Vector2.ONE * -12
 
 func aim(aim: Vector2):
 	aim_vector = aim
 
 func activate():
+	DJZ.play(DJZ.S.laser)
 	if actor:
 		actor.notif(self.name)
-	DJZ.play(DJZ.S.laser)
 
 func deactivate():
 	pass
@@ -35,10 +34,10 @@ func _on_frame_changed():
 
 var firing = false
 
-var bullet_scene = preload("res://addons/core/beehive/sidescroller/weapons/Bullet.tscn")
-var bullet_impulse = 800
-var fire_rate = 0.2
-var bullet_knockback = 3
+var arrow_scene = preload("res://addons/core/beehive/sidescroller_player/weapons/Arrow.tscn")
+var arrow_impulse = 400
+var fire_rate = 0.4
+var arrow_knockback = 1
 
 var fire_tween
 
@@ -49,29 +48,29 @@ func fire():
 		return
 
 	fire_tween = create_tween()
-	fire_bullet()
+	fire_arrow()
 	fire_tween.set_loops(0)
-	fire_tween.tween_callback(fire_bullet).set_delay(fire_rate)
+	fire_tween.tween_callback(fire_arrow).set_delay(fire_rate)
 
 func stop_firing():
 	firing = false
 
-	# kill tween after last bullet
+	# kill tween after last arrow
 	if fire_tween and fire_tween.is_running():
 		fire_tween.kill()
 
-func fire_bullet():
+func fire_arrow():
 	if aim_vector == null:
 		aim_vector = Vector2.RIGHT
 
-	var bullet = bullet_scene.instantiate()
-	bullet.position = global_position + bullet_offset
-	bullet.add_collision_exception_with(actor)
+	var arrow = arrow_scene.instantiate()
+	arrow.position = global_position + arrow_offset
+	arrow.add_collision_exception_with(actor)
 
-	U.add_child_to_level(self, bullet)
-	bullet.rotation = aim_vector.angle()
-	bullet.apply_impulse(aim_vector * bullet_impulse, Vector2.ZERO)
+	U.add_child_to_level(self, arrow)
+	arrow.rotation = aim_vector.angle()
+	arrow.apply_impulse(aim_vector * arrow_impulse, Vector2.ZERO)
 	DJZ.play(DJZ.S.fire)
 
 	# player push back when firing
-	actor.global_position.x += -1 * aim_vector.x * bullet_knockback
+	actor.global_position.x += -1 * aim_vector.x * arrow_knockback

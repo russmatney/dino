@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://eg3mtddsun80"]
+[gd_scene load_steps=19 format=3 uid="uid://eg3mtddsun80"]
 
 [ext_resource type="Script" path="res://addons/core/metro/MetroZone.gd" id="1_n6i7w"]
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_6e41n"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://addons/core/reptile/tilemaps/GrassTiles16.tscn" id="5_p3d4k"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/core/reptile/tilemaps/CaveTiles16.tscn" id="6_g6xxn"]
 [ext_resource type="PackedScene" uid="uid://b21ekhevx55qr" path="res://addons/core/reptile/tilemaps/OccluderTiles16.tscn" id="6_m0duu"]
-[ext_resource type="PackedScene" uid="uid://cyitqa5t3pxgt" path="res://addons/core/beehive/sidescroller/SSEnemy.tscn" id="9_jg13a"]
 [ext_resource type="PackedScene" uid="uid://bax62g5wrhfl7" path="res://src/dino/entities/checkpoints/LogCheckpoint.tscn" id="9_lgxod"]
 [ext_resource type="PackedScene" uid="uid://dkyb7ritrpatt" path="res://src/dino/entities/checkpoints/CaveCheckpoint.tscn" id="10_wd4ay"]
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/dino/entities/checkpoints/SnowCheckpoint.tscn" id="11_ooovp"]
@@ -90,11 +89,6 @@ layer_0/tile_data = PackedInt32Array(-655375, 65536, 7, -589839, 65536, 14, -589
 rotation = -0.513127
 color = Color(0.335116, 0.335116, 0.335116, 0.188235)
 shadow_enabled = true
-
-[node name="SSEnemy" parent="Peak" instance=ExtResource("9_jg13a")]
-position = Vector2(768, 32)
-has_ascend = null
-has_descend = null
 
 [node name="LogCheckpoint" parent="Peak" instance=ExtResource("9_lgxod")]
 position = Vector2(180, 145)

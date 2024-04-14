@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_cqiek"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="7_2jren"]
 [ext_resource type="PackedScene" path="res://src/games/shirt/entities/Coin.tscn" id="7_6utu0"]
-[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://addons/core/beehive/sidescroller/powerups/SSPowerup.tscn" id="7_x20i6"]
+[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://addons/core/beehive/sidescroller_player/powerups/SSPowerup.tscn" id="7_x20i6"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="8_1itx7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_typcp"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/dino/enemies/bosses/Monstroar.tscn" id="9_ggu7q"]

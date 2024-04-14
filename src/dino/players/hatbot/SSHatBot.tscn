@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_h4hiv"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/games/tower/assets/greyhat_jetflame_sheet.png" id="6_7oqkp"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_lxjfb"]
-[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller/machine/SSMachine.tscn" id="8_5ekym"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://addons/core/beehive/sidescroller_player/machine/SSMachine.tscn" id="7_s5pb6"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="9_dlhwa"]
 [ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/dino/menus/quickSelect/QuickSelect.tscn" id="10_e40tc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="10_lf38g"]
@@ -291,7 +291,7 @@ theme_override_fonts/normal_font = ExtResource("7_lxjfb")
 bbcode_enabled = true
 text = "some sparkle"
 
-[node name="SSMachine" parent="." instance=ExtResource("8_5ekym")]
+[node name="SSMachine" parent="." instance=ExtResource("7_s5pb6")]
 
 [node name="ActionHint" parent="." instance=ExtResource("9_dlhwa")]
 position = Vector2(0, -40)

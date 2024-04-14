@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://brj16s7c2hytn"]
 
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://addons/core/beehive/assets/arrow.tres" id="1"]
-[ext_resource type="Script" path="res://addons/core/beehive/sidescroller/weapons/Arrow.gd" id="2"]
+[ext_resource type="Script" path="res://addons/core/beehive/sidescroller_player/weapons/Arrow.gd" id="2"]
 [ext_resource type="SpriteFrames" uid="uid://dr2mp11jcusmn" path="res://addons/core/beehive/assets/pop_sprite_frames.tres" id="3"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
