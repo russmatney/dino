@@ -37,6 +37,9 @@ var pause_menu_scene = preload("res://src/dino/menus/pause/DinoPauseMenu.tscn")
 var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
 var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")
 
+func _enter_tree():
+	Log.set_colors_pretty()
+
 func _ready():
 	reseed()
 	player_set.new_player_ready.connect(func(p):
