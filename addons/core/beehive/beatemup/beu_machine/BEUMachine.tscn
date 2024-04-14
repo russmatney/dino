@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://mbx5r7m4xa41"]
 
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="1_12xf3"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_12xf3"]
 [ext_resource type="Script" path="res://addons/core/beehive/beatemup/beu_machine/Respawn.gd" id="2_jidqd"]
 [ext_resource type="Script" path="res://addons/core/beehive/beatemup/beu_machine/Idle.gd" id="3_wt7x6"]
 [ext_resource type="Script" path="res://addons/core/beehive/beatemup/beu_machine/Walk.gd" id="4_fs7y3"]

@@ -3,7 +3,7 @@
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/games/tower/assets/greyhat_frames.tres" id="1"]
 [ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/EnemyRobot.gd" id="4"]
 [ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Idle.gd" id="5"]
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="6"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="6"]
 [ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Dead.gd" id="7"]
 [ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Walk.gd" id="8"]
 [ext_resource type="Script" path="res://src/dino/enemies/enemyRobots/Knockback.gd" id="9"]

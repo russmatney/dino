@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/games/herd/sheep/Sheep.gd" id="1_fs8bu"]
 [ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/games/herd/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="3_kftt6"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="3_kftt6"]
 [ext_resource type="Script" path="res://src/games/herd/sheep/machine/Idle.gd" id="4_ttqdq"]
 [ext_resource type="Script" path="res://src/games/herd/sheep/machine/Follow.gd" id="5_x6igx"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="6_6810x"]

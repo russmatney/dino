@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://dgan7tpytfkfo"]
 
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="1_3d800"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_3d800"]
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller/machine/Idle.gd" id="2_pwwxs"]
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller/machine/Respawn.gd" id="3_15sib"]
 [ext_resource type="Script" path="res://addons/core/beehive/sidescroller/machine/Run.gd" id="4_16lar"]

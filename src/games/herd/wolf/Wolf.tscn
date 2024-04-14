@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/games/herd/wolf/Wolf.gd" id="1_1d058"]
 [ext_resource type="SpriteFrames" uid="uid://djaootvlyfr6n" path="res://src/games/herd/wolf/WolfSpriteFrames.tres" id="1_3bwit"]
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="3_3vgs8"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="3_3vgs8"]
 [ext_resource type="Script" path="res://src/games/herd/wolf/machine/Idle.gd" id="4_ttisi"]
 [ext_resource type="Script" path="res://src/games/herd/wolf/machine/Firing.gd" id="5_rtr3t"]
 [ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="10_tlokw"]

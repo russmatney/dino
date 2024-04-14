@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/games/herd/player/Player.gd" id="1_0n50h"]
 [ext_resource type="SpriteFrames" uid="uid://cwbvodfvafihs" path="res://src/games/herd/player/PlayerSpriteFrames.tres" id="2_1bdvx"]
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="3_5nu6m"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="3_5nu6m"]
 [ext_resource type="Script" path="res://src/games/herd/player/machine/Idle.gd" id="4_hour5"]
 [ext_resource type="Script" path="res://src/games/herd/player/machine/Run.gd" id="5_lhfun"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_0d5mj"]

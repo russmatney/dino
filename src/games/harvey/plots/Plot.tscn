@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dmgywspm7rtsd" path="res://src/games/harvey/assets/plot_sheet.png" id="3_rrxc6"]
 [ext_resource type="Script" path="res://src/games/harvey/plots/Watered.gd" id="4"]
 [ext_resource type="Script" path="res://src/games/harvey/plots/ReadyForHarvest.gd" id="5"]
-[ext_resource type="Script" path="res://addons/core/beehive/Machine.gd" id="6"]
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="6"]
 [ext_resource type="Script" path="res://src/games/harvey/plots/ReadyForSeed.gd" id="7"]
 [ext_resource type="Script" path="res://src/games/harvey/plots/NeedsWater.gd" id="8"]
 [ext_resource type="Shader" path="res://src/games/harvey/SquashStretchShader.gdshader" id="10"]
