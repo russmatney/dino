@@ -85,7 +85,6 @@ func _ready():
 			line_of_sights = [low_los, high_los]
 
 		machine.transitioned.connect(_on_transit)
-		machine.start()
 
 	Hotel.register(self)
 

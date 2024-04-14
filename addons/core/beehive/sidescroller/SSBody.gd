@@ -127,7 +127,6 @@ func _ready():
 			skull_particles.set_emitting(false)
 
 		machine.transitioned.connect(_on_transit)
-		machine.start()
 
 		weapon_set.changed_weapon.connect(func(w):
 			changed_weapon.emit(w))

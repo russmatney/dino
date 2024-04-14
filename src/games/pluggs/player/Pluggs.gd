@@ -28,7 +28,6 @@ var is_dead: bool
 
 func _ready():
 	machine.transitioned.connect(on_transit)
-	machine.start()
 
 	Cam.request_camera({
 		player=self,

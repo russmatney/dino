@@ -12,6 +12,7 @@ func enter(opts = {}):
 	hop_in = U.rand_of(hop_every)
 
 	home_position = opts.get("home_position", home_position)
+	home_position = U._or(home_position, actor.global_position)
 
 
 ## physics ###########################################################

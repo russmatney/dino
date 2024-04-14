@@ -19,7 +19,6 @@ func _ready():
 		zoom_margin_min=100,
 		zoom_rect_min=150,
 		})
-	machine.start()
 	action_detector.setup(self)
 
 ######################################################

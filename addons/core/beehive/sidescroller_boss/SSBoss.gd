@@ -87,7 +87,6 @@ func _ready():
 			sh.reparent.call_deferred(get_parent())
 
 		machine.transitioned.connect(_on_transit)
-		machine.start()
 
 	# look for sibling warp_spots
 	warp_spots = U.get_children_in_group(get_parent(), warp_group, false)

@@ -8,7 +8,6 @@ extends CharacterBody2D
 
 func _ready():
 	machine.transitioned.connect(on_transit)
-	machine.start()
 
 	action_detector.setup(self)
 

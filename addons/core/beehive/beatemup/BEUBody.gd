@@ -77,7 +77,6 @@ func _ready():
 		U.set_optional_nodes(self, {cam_pof="CamPOF"})
 
 		machine.transitioned.connect(_on_transit)
-		machine.start()
 
 		punch_box = $PunchBox
 		punch_box.body_entered.connect(on_punchbox_body_entered)
