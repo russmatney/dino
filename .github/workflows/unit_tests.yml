@@ -27,12 +27,13 @@ jobs:
       matrix:
         godot-version: ['4.2.1']
         godot-status: ['stable']
+        include:
+          - godot-version: '4.2.2'
+            godot-status: 'rc3'
 
     steps:
       # checkout your repository
       - uses: actions/checkout@v4
-        with:
-          lfs: true
       # run unit tests
       - uses: MikeSchulze/gdUnit4-action@v1.0.5
         with:
