@@ -3,8 +3,8 @@ extends SSWeapon
 var aim_vector
 var arrow_offset = Vector2.ONE * -12
 
-func aim(aim: Vector2):
-	aim_vector = aim
+func aim(aim_vec: Vector2):
+	aim_vector = aim_vec
 
 func activate():
 	DJZ.play(DJZ.S.laser)

@@ -51,7 +51,7 @@ func _ready():
 
 ## public api #####################################################
 
-func aim(aim_vector: Vector2):
+func aim(_aim_vec: Vector2):
 	Log.pr("impl aim!", self)
 
 func activate():

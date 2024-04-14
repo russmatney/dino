@@ -21,17 +21,17 @@ func exit():
 var last_collision_point
 var last_coll
 
-func warp_position_in_dir(actor, direction, opts={}):
-	actor.warp_cast.target_position = direction.normalized() * max_reach
-	actor.warp_cast.force_raycast_update()
+func warp_position_in_dir(_actor, direction, opts={}):
+	_actor.warp_cast.target_position = direction.normalized() * max_reach
+	_actor.warp_cast.force_raycast_update()
 
-	var coll = actor.warp_cast.get_collider()
+	var coll = _actor.warp_cast.get_collider()
 	var seen_tilemap = opts.get("seen_tilemap")
 
 	if seen_tilemap:
 		if coll != null and coll is TileMap and coll != last_coll:
 			# Log.pr("found next tilemap coll, returning collision_point")
-			return actor.warp_cast.get_collision_point()
+			return _actor.warp_cast.get_collision_point()
 		last_coll = coll
 
 		if coll == null:
@@ -47,12 +47,12 @@ func warp_position_in_dir(actor, direction, opts={}):
 		# else:
 		# 	Log.pr("warp found something else! adding exception for it", coll)
 
-		var coll_rid = actor.warp_cast.get_collider_rid()
-		actor.warp_cast.add_exception_rid(coll_rid)
-		return warp_position_in_dir(actor, direction, opts)
+		var coll_rid = _actor.warp_cast.get_collider_rid()
+		_actor.warp_cast.add_exception_rid(coll_rid)
+		return warp_position_in_dir(_actor, direction, opts)
 
-func warp(actor, position):
-	actor.global_position = position + Vector2.DOWN * 50
+func warp(_actor, position):
+	_actor.global_position = position + Vector2.DOWN * 50
 
 ## physics ###########################################################
 
