@@ -36,6 +36,7 @@ func build_room(def: VaniaRoomDef, opts={}):
 	clear_all_tiles()
 	setup_tileset()
 	setup_walls_and_doors(opts)
+	add_background_images()
 	add_background_tiles()
 	# add_tile_chunks()
 	add_entities()
@@ -138,6 +139,7 @@ func fill_tilemap_borders(opts={}):
 	for cell in room_def.local_cells:
 		var rect = Rect2(Vector2(cell.x, cell.y) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
 		var recti = Reptile.rect_to_local_rect(tilemap, rect)
+		recti.size += Vector2i.DOWN # weird!
 
 		var skip_borders = internal_borders(cell, room_def.local_cells)
 
@@ -185,6 +187,17 @@ func get_tile_coords_for_doorway(map_cell_pair):
 			door_rect.size = Vector2(door_width, border_width + room_def.tile_size)
 
 	return Reptile.cells_in_local_rect(tilemap, door_rect)
+
+## background images ##############################################################
+
+var bg_color = Color(0.5, 0.3, 0.6, 1.0)
+
+func add_background_images(_opts={}):
+	for map_cell in room_def.map_cells:
+		var rect = room_def.get_map_cell_rect(map_cell)
+		var crect = U.add_color_rect(self, {rect=rect, color=bg_color, name=str(map_cell, "BGRect")})
+		crect.set_owner(self)
+		crect.set_z_index(-10)
 
 ## background tiles ##############################################################
 
