@@ -68,6 +68,8 @@ signal changed_weapon(weapon)
 var weapon_set: WeaponSet = WeaponSet.new("ss")
 var aim_vector = Vector2.ZERO
 
+var orbit_items = []
+
 # pickups
 signal pickups_changed(pickups)
 var pickups = []
@@ -78,17 +80,22 @@ var coins = 0
 
 var move_vector: Vector2
 var facing_vector: Vector2
-var health
-var is_dead
-var death_count = 0
-var is_spiking = false
+
+var is_spiking: bool = false
+var block_controls = false
+var forced_movement_target
+var forced_movement_target_threshold = 10
+
+var health: int
+var is_dead: bool
+var death_count: int = 0
 
 # nodes
 
 @onready var coll = $CollisionShape2D
 @onready var anim = $AnimatedSprite2D
-@onready var machine = $SSMachine
-@onready var state_label = $StateLabel
+@onready var machine: Machine = $SSMachine
+@onready var state_label: RichTextLabel = $StateLabel
 @onready var action_detector = $ActionDetector
 @onready var action_hint = $ActionHint
 
@@ -118,6 +125,8 @@ var quick_select_menu
 
 var player_camera_scene = preload("res://src/dino/players/PlayerCamera.tscn")
 var pcam: PhantomCamera2D
+
+var orbit_item_scene = preload("res://src/dino/weapons/orb/OrbitItem.tscn")
 
 ## enter tree ###########################################################
 
@@ -187,9 +196,8 @@ func _ready():
 		add_weapon(DinoWeaponEntityIds.SWORD)
 		add_weapon(DinoWeaponEntityIds.GUN)
 		add_weapon(DinoWeaponEntityIds.BOOMERANG)
-		has_double_jump = true
-		has_jetpack = true
-
+		add_powerup(Powerup.DoubleJump)
+		add_powerup(Powerup.Jetpack)
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -211,7 +219,7 @@ func _ready():
 
 func _unhandled_input(event):
 	# prevent input
-	if block_control or is_dead or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+	if block_controls or is_dead or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		Log.pr("blocking ss player control")
 		return
 
@@ -231,17 +239,10 @@ func _unhandled_input(event):
 		stop_using_weapon()
 		# should stop strafe?
 
-	if Trolls.is_event(event, "cycle_weapon"):
-		cycle_weapon()
-		if weapon_set.list().size() > 0:
-			Debug.notif(str("Changed weapon: ", weapon_set.active_weapon().display_name))
-			notif(active_weapon().display_name)
-
 	if Trolls.is_pressed(event, "weapon_swap_menu"):
 		quick_select_menu.show_menu({
 			entities=weapon_set.list_entities(),
 			on_select=func(weapon):
-			Log.pr("should select weapon", weapon)
 			activate_weapon(weapon),
 			})
 	elif Trolls.is_released(event, "weapon_swap_menu"):
@@ -279,20 +280,8 @@ func _physics_process(_delta):
 			update_facing()
 
 		if move_vector.abs().length() > 0 and has_weapon():
-			# maybe this just works?
 			aim_vector = move_vector
 			aim_weapon(aim_vector)
-
-## process ###########################################################
-
-func _process(_delta):
-	# TODO don't fire these every process loop!
-	if has_weapon_id(DinoWeaponEntityIds.ORBS):
-		if orbit_items.size() == 0 and is_spiking == false:
-			remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
-	if not has_weapon_id(DinoWeaponEntityIds.ORBS):
-		if orbit_items.size() > 0:
-			add_weapon(DinoWeaponEntityIds.ORBS)
 
 ## actions ###########################################################
 
@@ -339,11 +328,11 @@ func hotel_data():
 		health=health,
 		name=name,
 		is_dead=is_dead,
-		death_count=death_count
+		death_count=death_count,
+		powerups=powerups,
+		coins=coins,
+		pickups=pickups,
 		}
-	d["powerups"] = powerups
-	d["coins"] = coins
-	d["pickups"] = pickups
 	if not display_name in ["", null]: # yay types! woo!
 		d["display_name"] = display_name
 	return d
@@ -353,10 +342,9 @@ func check_out(data):
 	is_dead = U.get_(data, "is_dead", is_dead)
 	display_name = U.get_(data, "display_name", display_name)
 	death_count = U.get_(data, "death_count", death_count)
-
-	coins = data.get("coins", coins)
-	pickups = data.get("pickups", pickups)
-	var stored_powerups = data.get("powerups", powerups)
+	coins = U.get_(data, "coins", coins)
+	pickups = U.get_(data, "pickups", pickups)
+	var stored_powerups = U.get_(data, "powerups", powerups)
 	if len(stored_powerups) > 0:
 		powerups = stored_powerups
 
@@ -449,6 +437,7 @@ func take_damage(opts):
 	var body = opts.get("body")
 	var damage = opts.get("damage")
 
+	# TODO factor in 'defense'
 	if damage == null:
 		match hit_type:
 			"bump":
@@ -476,8 +465,8 @@ func recover_health(h=null):
 
 var hurt_box_bodies = []
 
+# player hurting another body by touching...
 func on_hurt_box_entered(body):
-	# if body is SSBody: # can't write this in same-name class script
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
@@ -488,10 +477,6 @@ func on_hurt_box_exited(body):
 
 #################################################################################
 ## forced movement/blocking controls ############################################
-
-var block_control = false
-var forced_movement_target
-var forced_movement_target_threshold = 10
 
 func get_move_vector():
 	if forced_movement_target != null:
@@ -506,11 +491,11 @@ func get_move_vector():
 		return Trolls.move_vector()
 
 func force_move_to_target(target_position):
-	block_control = true
+	block_controls = true
 	forced_movement_target = target_position
 
 func clear_forced_movement_target():
-	block_control = false
+	block_controls = false
 	forced_movement_target = null
 
 #################################################################################
@@ -589,9 +574,9 @@ func stamp(opts={}):
 func collect_pickup(pickup_type):
 	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
 	pickups.append(pickup_type)
-	pickups_changed.emit(pickups)
 
 	Hotel.check_in(self, {pickups=pickups})
+	pickups_changed.emit(pickups)
 
 func collect(_entity, _opts={}):
 	pass
@@ -601,7 +586,6 @@ func collect(_entity, _opts={}):
 ## orb items ##################################################################
 
 func collect_orb(ingredient_type):
-	# overriding ssplayer pickup logic
 	add_orbit_item(ingredient_type)
 
 ## coins #######################################################
@@ -615,12 +599,14 @@ func add_coin():
 
 func update_with_powerup(powerup: Powerup):
 	match (powerup):
+		# weapons
 		Powerup.Sword: add_weapon(DinoWeaponEntityIds.SWORD)
 		Powerup.Flashlight: add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
 		Powerup.Gun: add_weapon(DinoWeaponEntityIds.GUN)
 		Powerup.Bow: add_weapon(DinoWeaponEntityIds.BOW)
 		Powerup.Boomerang: add_weapon(DinoWeaponEntityIds.BOOMERANG)
 
+		# powerups
 		Powerup.Ascend: add_ascend()
 		Powerup.Descend: add_descend()
 		Powerup.DoubleJump: add_double_jump()
@@ -723,11 +709,6 @@ func use_weapon(weapon=null):
 func stop_using_weapon(weapon=null):
 	return weapon_set.stop_using_weapon(weapon)
 
-
-@onready var orbit_item_scene = preload("res://src/dino/weapons/orb/OrbitItem.tscn")
-
-var orbit_items = []
-
 func add_orbit_item(ingredient_type):
 	Log.pr("adding orbit item", ingredient_type)
 
@@ -738,11 +719,18 @@ func add_orbit_item(ingredient_type):
 	add_child.call_deferred(item)
 	orbit_items.append(item)
 
-func remove_orbit_item(item):
+	if not has_weapon_id(DinoWeaponEntityIds.ORBS):
+		add_weapon(DinoWeaponEntityIds.ORBS)
+
+func remove_tossed_orbit_item(item):
 	for ch in get_children():
 		if ch == item:
 			orbit_items.erase(ch)
 			ch.queue_free()
+
+			# dowe care if spiking?
+			if orbit_items.size() == 0:
+				remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
 
 ## spiking ##################################################################
 

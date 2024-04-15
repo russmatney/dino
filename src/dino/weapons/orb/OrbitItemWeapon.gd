@@ -29,7 +29,7 @@ func use():
 				start_spike(item.ingredient_type)
 			else:
 				toss(item.ingredient_type)
-			actor.remove_orbit_item(item)
+			actor.remove_tossed_orbit_item(item)
 	elif spiking:
 		if spiking_ingredient_type != null:
 			stop_using()
