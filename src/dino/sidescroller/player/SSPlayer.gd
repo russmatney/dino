@@ -66,17 +66,6 @@ var gravity = 1000 # for use in non-jump states
 var powerups = []
 
 # weapons
-@export var has_bow: bool
-@export var has_sword: bool
-@export var has_flashlight: bool
-@export var has_boomerang: bool
-
-var sword
-var gun
-var bow
-var flashlight
-var boomerang
-
 signal changed_weapon(weapon)
 var weapon_set: WeaponSet = WeaponSet.new("ss")
 var aim_vector = Vector2.ZERO
@@ -125,15 +114,26 @@ var near_ground_check
 var heart_particles
 var skull_particles
 
-# menus
+# child scenes
 
 var quick_select_scene = preload("res://src/dino/menus/quickSelect/QuickSelect.tscn")
 var quick_select_menu
+
+var player_camera_scene = preload("res://src/dino/players/PlayerCamera.tscn")
+var pcam: PhantomCamera2D
 
 ## enter tree ###########################################################
 
 func _enter_tree():
 	add_to_group("player", true)
+	ensure_pcam()
+
+func ensure_pcam():
+	pcam = get_node_or_null("PlayerCamera")
+	if pcam == null:
+		pcam = player_camera_scene.instantiate()
+		add_child(pcam)
+		pcam.set_owner(self)
 
 ## ready ###########################################################
 
@@ -157,6 +157,7 @@ func _ready():
 		U.set_optional_nodes(self, {
 			jet_anim="Jet",
 			notif_label="NotifLabel",
+			pcam="PlayerCamera",
 			cam_pof="CamPOF",
 			nav_agent="NavigationAgent2D",
 			hurt_box="HurtBox",

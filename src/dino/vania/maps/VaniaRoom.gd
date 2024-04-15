@@ -11,11 +11,13 @@ func set_room_def(def: VaniaRoomDef):
 	room_def = def
 var tilemap: TileMap
 var bg_tilemap: TileMap
+var bg_color_rect: ColorRect
 
 ## enter_tree #####################################################
 
 func _enter_tree():
 	ensure_tilemaps()
+	U.ensure_owned_child(self, "bg_color_rect", "BGColorRect", ColorRect)
 
 ## ready ##############################################################
 
@@ -36,7 +38,7 @@ func build_room(def: VaniaRoomDef, opts={}):
 	clear_all_tiles()
 	setup_tileset()
 	setup_walls_and_doors(opts)
-	add_background_images()
+	fill_background_images()
 	add_background_tiles()
 	# add_tile_chunks()
 	add_entities()
@@ -192,7 +194,7 @@ func get_tile_coords_for_doorway(map_cell_pair):
 
 var bg_color = Color(0.5, 0.3, 0.6, 1.0)
 
-func add_background_images(_opts={}):
+func fill_background_images(_opts={}):
 	for map_cell in room_def.map_cells:
 		var rect = room_def.get_map_cell_rect(map_cell)
 		var crect = U.add_color_rect(self, {rect=rect, color=bg_color, name=str(map_cell, "BGRect")})

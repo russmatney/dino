@@ -1,12 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbgwlri2j185m"]
+[gd_scene load_steps=11 format=3 uid="uid://cbgwlri2j185m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_doqh3"]
-[ext_resource type="PackedScene" uid="uid://cjjjiscdb0ruh" path="res://src/dino/sidescroller/player/SSPlayer.tscn" id="2_nm067"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_x0q1t"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="3_gkkpd"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="6_nh527"]
 [ext_resource type="PackedScene" uid="uid://boxsq76goq8ev" path="res://src/dino/sidescroller/enemy/PatrolPoint.tscn" id="6_ogwas"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_rckwa"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="9_ydfat"]
 [ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/core/reptile/tilemaps/SpikeTiles8.tscn" id="10_ljnth"]
+
+[sub_resource type="Resource" id="Resource_aicpn"]
+script = ExtResource("2_x0q1t")
+_id = "71"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j0grn"]
 vertices = PackedVector2Array(71, 71, -143, 79, -44, 59, -17, 57, 34, 57, 107, 68, 9, -79, 120, -26, 63, -25, -203, -37, -70, -71, -17, -79, -6, -8, 63, -15, 121, -15, 144, 14, 109, 35, 34, 39, -16, 37, 194, -98, 191, 14, -83, 60, -252, 60, -170, 79, 9, -88, -97, -71, -204, -51, -170, -10, -170, 28, -246, 3, -246, -11, -252, 28, -288, 4, -70, -81, -17, -90, -16, 39, -44, 37, -33, -7, -7, -19, -33, -16, -94, 37, -94, -10, -116, 94, -118, 118, -212, 118, -212, 110, -145, 96, -285, 29, -309, 29, -309, -100, -290, -10, 5, 108, -53, 108, -54, 95, -266, 108, -268, 71, -285, 69, 140, 36, -260, -36, -97, -81, -259, -51, -169, 80, -170, 96, -16, -90)
@@ -16,7 +21,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="SidescrollerGym" type="Node"]
 script = ExtResource("1_doqh3")
-player_scene = ExtResource("2_nm067")
+player_entity = SubResource("Resource_aicpn")
 metadata/_edit_vertical_guides_ = []
 
 [node name="WoodenBoxesTiles8" parent="." instance=ExtResource("6_nh527")]
@@ -63,3 +68,8 @@ layer_0/tile_data = PackedInt32Array(589840, 0, 0, 589841, 0, 0, 655398, 0, 0, 6
 
 [node name="SpikeTiles8" parent="." instance=ExtResource("10_ljnth")]
 layer_0/tile_data = PackedInt32Array(1638443, 0, 0, 1572910, 0, 0, 1572911, 0, 0, 1572912, 0, 0, 1572913, 0, 0, 1572914, 0, 0, 1638454, 0, 0, 1572928, 0, 0, 1572929, 0, 0, 1572930, 0, 0, 1572931, 0, 0, 1572932, 0, 0, 1572933, 0, 0, 1572934, 0, 0, 1572935, 0, 0, 1572936, 0, 0, 1048628, 0, 0, 1048629, 0, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("7_rckwa")

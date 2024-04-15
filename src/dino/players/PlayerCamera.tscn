@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://nhgggwr4im2y"]
+
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="1_ssbjx"]
+
+[node name="PlayerCamera" type="Node2D"]
+script = ExtResource("1_ssbjx")
+priority_override = false
+priority = 1
+zoom = Vector2(3.2, 3.2)
+follow_mode = 1
+follow_target = NodePath("")
+follow_parameters/damping = true
+follow_parameters/damping_value = 10.0
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0

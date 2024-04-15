@@ -29,10 +29,9 @@ func _ready():
 	add_custom_module.call_deferred(VaniaRoomTransitions)
 	add_custom_module.call_deferred(PassageAutomapper)
 
-	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
-	MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
-
-	Dino.player_ready.connect(on_player_ready)
+	# room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
+	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
+	# Dino.player_ready.connect(on_player_ready)
 
 	finished_initial_room_gen.connect(on_finished_initial_room_gen, CONNECT_ONE_SHOT)
 
@@ -58,7 +57,8 @@ func fallback_room_inputs():
 func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
 	if p != null and is_instance_valid(p):
-		pcam.erase_follow_target_node()
+		# if p.pcam != null:
+		# 	p.pcam.erase_follow_target_node()
 		p.queue_free()
 		clear_load_playground()
 		await get_tree().create_timer(0.4).timeout
@@ -85,54 +85,6 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 		finished_initial_room_gen.emit()
-
-## on load/ready #######################################################
-
-var cam_follow_groups = [
-	"enemies",
-	"bosses",
-	]
-
-func on_room_loaded():
-	Log.pr("room entered", MetSys.get_current_room_instance())
-	set_cam_limits()
-	# Log.pr("this room's neighbors", MetSys.get_current_room_instance().get_neighbor_rooms(false))
-
-	# if pcam != null and map.tilemap != null:
-	# 	pcam.set_limit_node(coll)
-
-	# if pcam != null and map != null:
-	# 	for ch in map.get_children():
-	# 		if cam_follow_groups.any(func(grp): return ch.is_in_group(grp)):
-	# 			pcam.append_follow_group_node(ch)
-	# 			ch.tree_exiting.connect(func(): pcam.erase_follow_group_node(ch))
-
-func on_cell_changed(cell: Vector3i):
-	Log.pr("cell changed!", cell)
-	set_cam_limits()
-
-func set_cam_limits():
-	var rd = current_room_def()
-	if not rd:
-		return
-
-	# var cell = MetSys.get_current_coords()
-	# var rect = rd.get_map_cell_rect(cell)
-	# var rect = rd.get_rect()
-
-	# Log.pr("setting limits with rect:", rect)
-
-	# pcam.set_limit(SIDE_LEFT, rect.position.x)
-	# pcam.set_limit(SIDE_TOP, rect.position.y)
-	# pcam.set_limit(SIDE_RIGHT, rect.end.x)
-	# pcam.set_limit(SIDE_BOTTOM, rect.end.y)
-
-
-func on_player_ready(p):
-	pcam.set_follow_target_node(p)
-	# pcam.append_follow_group_node(p)
-	# p.tree_exiting.connect(func(): pcam.erase_follow_group_node(p))
-	# pcam.set_limit_margin(Vector4i(0, -50, 50, 0))
 
 ## room gen #######################################################
 
