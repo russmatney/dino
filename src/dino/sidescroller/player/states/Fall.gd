@@ -33,7 +33,7 @@ func physics_process(delta):
 	if coyote_ttl != null:
 		coyote_ttl -= delta
 		if coyote_ttl > 0:
-			if actor.is_player and Input.is_action_just_pressed("jump"):
+			if Input.is_action_just_pressed("jump"):
 				Log.pr("Coyote jump!")
 				machine.transit("Jump")
 				return

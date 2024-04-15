@@ -35,8 +35,6 @@ static var all_powerups = [
 @export var initial_health: int = 6
 @export var bump_damage: int = 2
 @export var defense: int = 1
-@export var should_wander: bool
-@export var should_patrol: bool
 
 @export var run_speed: float = 10000
 @export var air_speed: float = 9000 # horizontal movement in the air
@@ -82,7 +80,6 @@ var move_vector: Vector2
 var facing_vector: Vector2
 var health
 var is_dead
-var is_player
 var death_count = 0
 var is_spiking = false
 
@@ -139,19 +136,6 @@ func ensure_pcam():
 
 func _ready():
 	Hotel.register(self)
-
-	if is_in_group("player"):
-		is_player = true
-		should_wander = false
-		should_patrol = false
-	elif is_in_group("enemies"):
-		is_player = false
-		should_wander = true
-		should_patrol = true
-	else:
-		is_player = false
-		should_wander = true
-		should_patrol = false
 
 	if not Engine.is_editor_hint():
 		U.set_optional_nodes(self, {

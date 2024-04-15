@@ -53,7 +53,7 @@ func physics_process(delta):
 		machine.transit("Jump", {"double_jumping": true})
 		return
 
-	if not jump_released and actor.is_player and Input.is_action_just_released("jump"):
+	if not jump_released and Input.is_action_just_released("jump"):
 		jump_released = true
 
 	if jump_released:

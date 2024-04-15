@@ -8,7 +8,7 @@ func enter(_ctx={}):
 
 
 func physics_process(_delta):
-	if actor.is_player and Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		actor.flip_facing()
 		machine.transit("Jump")
 		return

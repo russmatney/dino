@@ -15,7 +15,7 @@ func exit():
 ## physics ###########################################################
 
 func physics_process(delta):
-	if actor.is_player and Input.is_action_just_pressed("jump") and actor.is_on_floor():
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
 		machine.transit("Jump")
 		return
 

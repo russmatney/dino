@@ -8,35 +8,16 @@ var idle_ttl
 func enter(_opts = {}):
 	actor.anim.play("idle")
 
-	if actor.should_wander:
-		idle_ttl = U.rand_of(idle_times)
-
-
-## exit ###########################################################
-
-func exit():
-	pass
-
-
 ## physics ###########################################################
 
 func physics_process(delta):
-	if actor.is_player and Input.is_action_just_pressed("jump") and actor.is_on_floor():
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
 		machine.transit("Jump")
 		return
 
 	if actor.move_vector.x != 0:
 		machine.transit("Run")
 		return
-
-	if actor.should_wander or actor.should_patrol:
-		idle_ttl -= delta
-		if idle_ttl <= 0:
-			if actor.should_patrol:
-				transit("Patrol")
-			elif actor.should_wander:
-				transit("Wander")
-			return
 
 	# slow down
 	actor.velocity.x = lerp(actor.velocity.x, 0.0, 0.5)
