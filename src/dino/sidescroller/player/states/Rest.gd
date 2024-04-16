@@ -2,6 +2,14 @@ extends State
 
 var exit_cb
 
+## properties ###########################################################
+
+func can_bump():
+	return false
+
+func can_act():
+	return false
+
 ## enter ###########################################################
 
 func enter(opts = {}):

@@ -5,7 +5,6 @@ extends Node
 
 var machine: Machine
 var actor: Node2D
-var can_be_initial_state = false
 
 ## transitions ###################################################################
 
@@ -36,8 +35,24 @@ func physics_process(_delta: float):
 
 ## properties ################################################################
 
-func ignore_inputs():
-	pass
+func can_be_initial_state():
+	return false
+
+# should ignore inputs while in this state
+func ignore_input() -> bool:
+	return false
+
+# should update the facing direction to match the movement direction
+func face_movement_direction() -> bool:
+	return false
+
+# can bump enemies in the actor's hurtbox
+func can_bump() -> bool:
+	return true
+
+# can perform an action-detector action
+func can_act() -> bool:
+	return true
 
 ## common callbacks ################################################################
 

@@ -4,6 +4,11 @@ var ttr
 var wait_to_run = 2
 var stop
 
+## properties ###########################################################
+
+func can_be_initial_state():
+	return false
+
 ## enter #####################################################################
 
 func enter(ctx={}):
@@ -45,7 +50,8 @@ func physics_process(delta):
 
 func on_frame_changed():
 	if actor.anim.animation == "idle":
-		# TODO this behavior needs to be custom!! :/
+		# TODO this behavior needs to be custom/opt-in!! :/
+		# via some reverse-los-frames or something
 		if actor.anim.frame in [3, 4, 5, 6]:
 			for _los in actor.line_of_sights:
 				U.update_los_facing(-1*actor.facing_vector, _los)

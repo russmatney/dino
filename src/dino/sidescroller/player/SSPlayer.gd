@@ -101,7 +101,7 @@ var death_count: int = 0
 
 var jet_anim
 var cam_pof
-var hurt_box
+var bumpbox
 var nav_agent
 var notif_label
 var warp_cast
@@ -153,7 +153,7 @@ func _ready():
 			pcam="PlayerCamera",
 			cam_pof="CamPOF",
 			nav_agent="NavigationAgent2D",
-			hurt_box="HurtBox",
+			bumpbox="BumpBox",
 			high_wall_check="HighWallCheck",
 			low_wall_check="LowWallCheck",
 			near_ground_check="NearGroundCheck",
@@ -166,9 +166,9 @@ func _ready():
 			quick_select_menu="QuickSelect"
 			})
 
-		if hurt_box:
-			hurt_box.body_entered.connect(on_hurt_box_entered)
-			hurt_box.body_exited.connect(on_hurt_box_exited)
+		if bumpbox:
+			bumpbox.body_entered.connect(on_bumpbox_entered)
+			bumpbox.body_exited.connect(on_bumpbox_exited)
 		if high_wall_check or low_wall_check:
 			wall_checks = [high_wall_check, low_wall_check]
 		if heart_particles:
@@ -183,7 +183,7 @@ func _ready():
 
 		# call this from the action detector itself?
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
-			can_execute_any=func(): return machine and machine.state and not machine.state.name in ["Rest"]})
+			can_execute_any=func(): return machine and machine.state.can_act()})
 
 		died.connect(_on_player_death)
 
@@ -219,7 +219,7 @@ func _ready():
 
 func _unhandled_input(event):
 	# prevent input
-	if block_controls or is_dead or machine.state.name in ["KnockedBack", "Dying", "Dead"]:
+	if block_controls or is_dead or machine.state.ignore_input():
 		Log.pr("blocking ss player control")
 		return
 
@@ -270,7 +270,7 @@ func _physics_process(_delta):
 	move_vector = get_move_vector()
 
 	if not Engine.is_editor_hint():
-		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
+		if move_vector.abs().length() > 0 and machine.state.face_movement_direction():
 			# restore strafing - check if using a weapon that supports strafing?
 			# if not firing: # supports strafing (moving while firing without turning)
 			if move_vector.x > 0:
@@ -461,19 +461,19 @@ func recover_health(h=null):
 
 	Hotel.check_in(self)
 
-## hurt_box ###########################################################
+## hurtbox ###########################################################
 
-var hurt_box_bodies = []
+var bumpbox_bodies = []
 
 # player hurting another body by touching...
-func on_hurt_box_entered(body):
-	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
-		if not body in hurt_box_bodies:
-			hurt_box_bodies.append(body)
+func on_bumpbox_entered(body):
+	if not body.is_dead and body.machine.state.can_bump():
+		if not body in bumpbox_bodies:
+			bumpbox_bodies.append(body)
 			body.take_hit({type="bump", body=self})
 
-func on_hurt_box_exited(body):
-	hurt_box_bodies.erase(body)
+func on_bumpbox_exited(body):
+	bumpbox_bodies.erase(body)
 
 #################################################################################
 ## forced movement/blocking controls ############################################

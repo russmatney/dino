@@ -7,6 +7,11 @@ var double_jumping
 var double_jump_wait = 0.1
 var double_jump_ttl
 
+## properties ###########################################################
+
+func face_movement_direction():
+	return true
+
 ## enter ###########################################################
 
 func enter(opts = {}):

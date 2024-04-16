@@ -14,7 +14,13 @@ var should_log = false
 var is_transitioning = false
 var is_started = false
 
-### to pretty #####################################################################
+signal transitioning(from_state, to_state)
+signal transitioned(state_name)
+
+# only set during transition
+var next_state
+
+## to pretty #####################################################################
 
 func to_pretty():
 	return [actor, state, {
@@ -23,7 +29,7 @@ func to_pretty():
 			is_started=is_started,
 		}]
 
-### ready #####################################################################
+## ready #####################################################################
 
 func _ready():
 	if not len(get_children()) > 0:
@@ -36,6 +42,8 @@ func _ready():
 		p.ready.connect(func():
 			Log.pr("starting machine with parent", p)
 			start({actor=p}))
+
+## start #####################################################################
 
 # should only be called when the owner is ready
 # b/c the initial state's enter() is called, which expects
@@ -56,12 +64,12 @@ func start(opts={}):
 		child.actor = actor
 
 		# states opt-in to being 'default'
-		if not state and child.can_be_initial_state:
+		if not state and child.can_be_initial_state():
 			state = child
 
 		if actor.get("anim") and actor.anim != null:
-			actor.anim.animation_finished.connect(child.on_animation_finished)
-			actor.anim.frame_changed.connect(child.on_frame_changed)
+			actor.anim.animation_finished.connect(on_animation_finished)
+			actor.anim.frame_changed.connect(on_frame_changed)
 
 	# still no state? just set the first child
 	if not state:
@@ -76,13 +84,13 @@ func start(opts={}):
 	is_transitioning = false
 	is_started = true
 
-### input #####################################################################
+## input #####################################################################
 
 func _unhandled_input(ev):
 	if state and not is_transitioning:
 		state.unhandled_input(ev)
 
-### process #####################################################################
+## process #####################################################################
 
 func _process(delta):
 	if state and not is_transitioning:
@@ -92,22 +100,32 @@ func _physics_process(delta):
 	if state and not is_transitioning:
 		state.physics_process(delta)
 
+## animation #####################################################################
+
+func on_animation_finished():
+	if state and not is_transitioning:
+		state.on_animation_finished()
+
+func on_frame_changed():
+	if state and not is_transitioning:
+		state.on_frame_changed()
+
 ## transitions ###################################################################
 
-signal transitioning(from_state, to_state)
-signal transitioned(state_name)
-
 func transit(target_state_name: String, ctx: Dictionary = {}):
+	# TODO expected behavior for transitioning to the current state?
 	is_transitioning = true
-	var next_state
 	for child in get_children():
 		if child.name == target_state_name:
 			next_state = child
 
 	if next_state:
+		ctx["previous_state"] = state.name
+
 		transitioning.emit(state.name, next_state.name)
 		if should_log:
 			Log.pr(owner, "Transition. Exiting '%s', Entering '%s'" % [state.name, next_state.name])
+		# note, machine.next_state is bound during .exit() call
 		state.exit()
 		state = next_state
 		next_state.enter(ctx)
@@ -116,4 +134,5 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 		transitioning.emit(state.name, null)
 		Log.err("Error! no next state! derp!", target_state_name, ctx)
 		transitioned.emit(null)
+	next_state = null
 	is_transitioning = false

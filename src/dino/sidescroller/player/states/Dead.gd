@@ -1,5 +1,16 @@
 extends State
 
+## properties ###########################################################
+
+func ignore_input():
+	return true
+
+func can_bump():
+	return false
+
+func can_act():
+	return false
+
 ## enter ###########################################################
 
 func enter(_opts = {}):

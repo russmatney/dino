@@ -11,6 +11,11 @@ var coyote_ttl
 
 var double_jumping
 
+## properties ###########################################################
+
+func face_movement_direction():
+	return true
+
 ## enter ###########################################################
 
 func enter(opts = {}):

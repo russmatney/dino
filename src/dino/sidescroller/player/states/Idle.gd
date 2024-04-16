@@ -3,6 +3,11 @@ extends State
 var idle_times = [0.7, 1.3, 2.0]
 var idle_ttl
 
+## properties ###########################################################
+
+func can_be_initial_state():
+	return false
+
 ## enter ###########################################################
 
 func enter(_opts = {}):
