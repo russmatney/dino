@@ -94,9 +94,6 @@ func _ready():
 	hitbox.body_entered.connect(_on_body_entered)
 	hitbox.body_exited.connect(_on_body_exited)
 
-	anim.animation_finished.connect(_on_animation_finished)
-	anim.frame_changed.connect(_on_frame_changed)
-
 	knocked_back.connect(_on_knocked_back)
 
 	state_label.set_visible(false)
@@ -261,39 +258,8 @@ func _on_body_entered(body):
 
 		# should probably do this from each state's physics_process()
 		if can_kick and machine.state.name in ["Idle", "Run"]:
-			kick(body)
+			# this body isn't used at the moment
+			machine.transit("Kick", {body=body})
 
 func _on_body_exited(body):
 	hitbox_bodies.erase(body)
-
-########################################################
-# kick
-
-# TODO move kick to a machine state
-
-func _on_animation_finished():
-	if anim.animation == "kick":
-		machine.transit("Idle")
-
-func _on_frame_changed():
-	if anim.animation == "idle":
-		if anim.frame in [3, 4, 5, 6]:
-			for _los in line_of_sights:
-				U.update_los_facing(-1*facing_vector, _los)
-		else:
-			for _los in line_of_sights:
-				U.update_los_facing(facing_vector, _los)
-
-	elif anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
-		for b in hitbox_bodies:
-			if b.has_method("take_hit"):
-				if not b in bodies_this_kick:
-					Cam.hitstop("kickhit", 0.3, 0.1)
-					bodies_this_kick.append(b)
-					b.take_hit({body=self})
-
-var bodies_this_kick = []
-
-func kick(body):
-	bodies_this_kick = []
-	machine.transit("Kick", {body=body})

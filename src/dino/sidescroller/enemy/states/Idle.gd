@@ -1,9 +1,10 @@
 extends State
 
-
 var ttr
 var wait_to_run = 2
 var stop
+
+## enter #####################################################################
 
 func enter(ctx={}):
 	stop = ctx.get("stop")
@@ -11,6 +12,7 @@ func enter(ctx={}):
 
 	ttr = wait_to_run
 
+## process #####################################################################
 
 func physics_process(delta):
 	if not actor.is_on_floor():
@@ -38,3 +40,15 @@ func physics_process(delta):
 		ttr -= delta
 		if ttr <= 0:
 			machine.transit("Run")
+
+## animations #####################################################################
+
+func on_frame_changed():
+	if actor.anim.animation == "idle":
+		# TODO this behavior needs to be custom!! :/
+		if actor.anim.frame in [3, 4, 5, 6]:
+			for _los in actor.line_of_sights:
+				U.update_los_facing(-1*actor.facing_vector, _los)
+		else:
+			for _los in actor.line_of_sights:
+				U.update_los_facing(actor.facing_vector, _los)

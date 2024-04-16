@@ -10,7 +10,7 @@ var generator = VaniaGenerator.new()
 var VaniaRoomTransitions = "res://src/dino/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
-@onready var pcam: PhantomCamera2D = $%PCam
+@onready var pcam: PhantomCamera2D = $PhantomCamera2D
 @onready var playground: Node2D = $%LoadPlayground
 
 var room_defs: Array[VaniaRoomDef] = []
@@ -57,8 +57,6 @@ func fallback_room_inputs():
 func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
 	if p != null and is_instance_valid(p):
-		# if p.pcam != null:
-		# 	p.pcam.erase_follow_target_node()
 		p.queue_free()
 		clear_load_playground()
 		await get_tree().create_timer(0.4).timeout

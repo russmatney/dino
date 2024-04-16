@@ -34,3 +34,17 @@ func process(_delta: float):
 func physics_process(_delta: float):
 	pass
 
+## properties ################################################################
+
+func ignore_inputs():
+	pass
+
+## common callbacks ################################################################
+
+# fired from actor.anim
+func on_animation_finished():
+	pass
+
+# fired from actor.anim
+func on_frame_changed():
+	pass

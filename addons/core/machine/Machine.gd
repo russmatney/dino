@@ -59,6 +59,10 @@ func start(opts={}):
 		if not state and child.can_be_initial_state:
 			state = child
 
+		if actor.get("anim") and actor.anim != null:
+			actor.anim.animation_finished.connect(child.on_animation_finished)
+			actor.anim.frame_changed.connect(child.on_frame_changed)
+
 	# still no state? just set the first child
 	if not state:
 		for child in get_children():

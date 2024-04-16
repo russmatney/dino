@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbgwlri2j185m"]
+[gd_scene load_steps=12 format=3 uid="uid://cbgwlri2j185m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_dx70q"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_s4f24"]
@@ -8,10 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="6_eb7u0"]
 [ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/core/reptile/tilemaps/SpikeTiles8.tscn" id="7_im70c"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_j1nmu"]
+[ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="9_w7l3g"]
 
-[sub_resource type="Resource" id="Resource_aicpn"]
+[sub_resource type="Resource" id="Resource_0jk55"]
 script = ExtResource("2_s4f24")
-_id = "71"
+_id = "70"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_j0grn"]
 vertices = PackedVector2Array(71, 71, -143, 79, -44, 59, -17, 57, 34, 57, 107, 68, 9, -79, 120, -26, 63, -25, -203, -37, -70, -71, -17, -79, -6, -8, 63, -15, 121, -15, 144, 14, 109, 35, 34, 39, -16, 37, 194, -98, 191, 14, -83, 60, -252, 60, -170, 79, 9, -88, -97, -71, -204, -51, -170, -10, -170, 28, -246, 3, -246, -11, -252, 28, -288, 4, -70, -81, -17, -90, -16, 39, -44, 37, -33, -7, -7, -19, -33, -16, -94, 37, -94, -10, -116, 94, -118, 118, -212, 118, -212, 110, -145, 96, -285, 29, -309, 29, -309, -100, -290, -10, 5, 108, -53, 108, -54, 95, -266, 108, -268, 71, -285, 69, 140, 36, -260, -36, -97, -81, -259, -51, -169, 80, -170, 96, -16, -90)
@@ -21,7 +22,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="SidescrollerGym" type="Node"]
 script = ExtResource("1_dx70q")
-player_entity = SubResource("Resource_aicpn")
+player_entity = SubResource("Resource_0jk55")
 metadata/_edit_vertical_guides_ = []
 
 [node name="WoodenBoxesTiles8" parent="." instance=ExtResource("3_vb0p5")]
@@ -73,3 +74,6 @@ layer_0/tile_data = PackedInt32Array(1638443, 0, 0, 1572910, 0, 0, 1572911, 0, 0
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("8_j1nmu")
+
+[node name="Soldier" parent="." instance=ExtResource("9_w7l3g")]
+position = Vector2(-129, -23)
