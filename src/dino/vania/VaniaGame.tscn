@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=16 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="11_gsjqq"]
 [ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="12_iqnk7"]
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="14_b4ya7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="14_cu0vg"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/enemyRobots/EnemyRobot.tscn" id="15_7bsuh"]
 
@@ -22,7 +23,7 @@ content_margin_right = 16.0
 script = ExtResource("1_rrc8s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3.2, 3.2)
+zoom = Vector2(3, 3)
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
@@ -302,3 +303,22 @@ position = Vector2(406, 119)
 
 [node name="EnemyRobot" parent="LoadPlayground" instance=ExtResource("15_7bsuh")]
 position = Vector2(345, 252)
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+script = ExtResource("14_b4ya7")
+priority_override = false
+priority = 0
+zoom = Vector2(3, 3)
+follow_mode = 0
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
