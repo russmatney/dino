@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="6_jvgol"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="7_31llo"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn" id="8_a4rxl"]
-[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/sidescroller/player/powerups/SSPowerup.tscn" id="9_aod2w"]
+[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/sidescroller/powerups/SSPowerup.tscn" id="9_aod2w"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn" id="10_8x20u"]
 [ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/dino/enemies/goomba/Goomba.tscn" id="11_ko2d6"]
 [ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn" id="12_elrvm"]

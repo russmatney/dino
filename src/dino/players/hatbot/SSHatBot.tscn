@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://djculbglj2yia"]
+[gd_scene load_steps=36 format=3 uid="uid://djculbglj2yia"]
 
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/SSPlayer.gd" id="1_01eu8"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="9_dlhwa"]
 [ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/dino/menus/quickSelect/QuickSelect.tscn" id="10_e40tc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="10_lf38g"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_xlgae"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="12_c4qns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtbi"]
 size = Vector2(14, 24)
@@ -302,3 +304,25 @@ scale = Vector2(0.4, 0.4)
 shape = SubResource("RectangleShape2D_48he4")
 
 [node name="QuickSelect" parent="." instance=ExtResource("10_e40tc")]
+
+[node name="PlayerCamera" type="Node2D" parent="." instance=ExtResource("11_xlgae")]
+script = ExtResource("12_c4qns")
+priority_override = false
+priority = 1
+zoom = Vector2(3.2, 3.2)
+follow_mode = 1
+follow_target = NodePath("")
+follow_parameters/damping = true
+follow_parameters/damping_value = 10.0
+frame_preview = true
+pixel_perfect = true
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0

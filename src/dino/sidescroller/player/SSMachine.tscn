@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgan7tpytfkfo"]
+[gd_scene load_steps=17 format=3 uid="uid://dgan7tpytfkfo"]
 
 [ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_x6uir"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Idle.gd" id="2_63kjp"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Dying.gd" id="8_rgmh6"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Dead.gd" id="9_7npqa"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Wander.gd" id="10_sknyq"]
-[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Patrol.gd" id="11_12amn"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Ascend.gd" id="12_v5nhl"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Descend.gd" id="13_mequ8"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/states/Rest.gd" id="14_a68jl"]
@@ -47,9 +46,6 @@ script = ExtResource("9_7npqa")
 
 [node name="Wander" type="Node" parent="."]
 script = ExtResource("10_sknyq")
-
-[node name="Patrol" type="Node" parent="."]
-script = ExtResource("11_12amn")
 
 [node name="Ascend" type="Node" parent="."]
 script = ExtResource("12_v5nhl")

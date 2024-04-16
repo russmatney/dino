@@ -5,12 +5,15 @@ class_name SSEnemy
 ## config warnings ###########################################################
 
 func _get_configuration_warnings():
-	return U._config_warning(self, {expected_nodes=[
+	var warns = U._config_warning(self, {expected_nodes=[
 		"SSEnemyMachine", "StateLabel", "AnimatedSprite2D", "Hitbox"
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "run", "knocked_back", "dying", "dead",
 			# "laughing", "kick"
 			]}})
+	if can_kick:
+		warns.append_array(U._config_warning(self, {expected_animations={"AnimatedSprite2D": ["kick"]}}))
+	return warns
 
 ## vars ###########################################################
 
@@ -244,13 +247,13 @@ func take_hit(opts={}):
 
 ## hitbox entered #######################################################
 
-var bodies = []
+var hitbox_bodies = []
 
 func _on_body_entered(body):
 	Log.prn("body entered", body)
 
 	if machine.state.name in ["Idle", "Run"] and body.is_in_group("player"):
-		bodies.append(body)
+		hitbox_bodies.append(body)
 
 		# hurt_on_touch?
 		if should_hurt_to_touch:
@@ -261,7 +264,7 @@ func _on_body_entered(body):
 			kick(body)
 
 func _on_body_exited(body):
-	bodies.erase(body)
+	hitbox_bodies.erase(body)
 
 ########################################################
 # kick
@@ -282,7 +285,7 @@ func _on_frame_changed():
 				U.update_los_facing(facing_vector, _los)
 
 	elif anim.animation == "kick" and anim.frame in [3, 4, 5, 6]:
-		for b in bodies:
+		for b in hitbox_bodies:
 			if b.has_method("take_hit"):
 				if not b in bodies_this_kick:
 					Cam.hitstop("kickhit", 0.3, 0.1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjjjiscdb0ruh"]
+[gd_scene load_steps=11 format=3 uid="uid://cjjjiscdb0ruh"]
 
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/SSPlayer.gd" id="1_tdgh3"]
 [ext_resource type="SpriteFrames" uid="uid://b73k32om0cbr3" path="res://src/dino/sidescroller/player/SSBasicSpriteFrames.tres" id="2_y5x1n"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="5_3unf7"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_f0aop"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_5ew82"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="8_3w1a4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odek5"]
 
@@ -67,3 +68,5 @@ shape = SubResource("RectangleShape2D_pc7iw")
 
 [node name="LookPOF" parent="." instance=ExtResource("7_5ew82")]
 position = Vector2(64, 0)
+
+[node name="PlayerCamera" parent="." instance=ExtResource("8_3w1a4")]

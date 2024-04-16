@@ -134,14 +134,14 @@ func _enter_tree():
 	add_to_group("player", true)
 	ensure_pcam()
 
+## ready ###########################################################
+
 func ensure_pcam():
 	pcam = get_node_or_null("PlayerCamera")
 	if pcam == null:
 		pcam = player_camera_scene.instantiate()
 		add_child(pcam)
 		pcam.set_owner(self)
-
-## ready ###########################################################
 
 func _ready():
 	Hotel.register(self)
