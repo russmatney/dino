@@ -1,5 +1,14 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return false
+
+func can_attack():
+	return false
+
+## enter ###################################
 
 func enter(ctx={}):
 	actor.anim.play("dead")
@@ -7,6 +16,7 @@ func enter(ctx={}):
 	if not ctx.get("ignore_side_effects", false):
 		actor.die()
 
+## process ###################################
 
 func physics_process(delta):
 	if not actor.is_on_floor():

@@ -1,5 +1,13 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return true
+
+func can_attack():
+	return false
+
 ## enter ####################################################
 
 func enter(_ctx={}):

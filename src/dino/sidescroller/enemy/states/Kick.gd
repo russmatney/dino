@@ -1,5 +1,15 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return true # ?
+
+func can_attack():
+	return false
+
+## vars ###################################
+
 var kicked_bodies = []
 
 ## enter #####################################################################

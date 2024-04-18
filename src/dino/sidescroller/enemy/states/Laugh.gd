@@ -1,8 +1,20 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return false
+
+func can_attack():
+	return false
+
+## vars ###################################
+
 var laugh_at_least = 1
 var laugh_ttl
 var next_state
+
+## enter ###################################
 
 func enter(ctx={}):
 	# actor.anim.play("laughing")
@@ -12,8 +24,12 @@ func enter(ctx={}):
 
 	next_state = ctx.get("next_state")
 
+## exit ###################################
+
 func exit():
 	laugh_ttl = laugh_at_least
+
+## process ###################################
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta

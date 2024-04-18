@@ -1,5 +1,14 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return false
+
+func can_attack():
+	return false
+
+## enter ###################################
 
 func enter(ctx={}):
 	actor.knocked_back.emit(actor)
@@ -21,6 +30,7 @@ func enter(ctx={}):
 
 	actor.velocity += Vector2(0, kb_vel) + dir * actor.knockback_velocity_horizontal
 
+## process ###################################
 
 func physics_process(delta):
 	actor.velocity.y += actor.gravity * delta

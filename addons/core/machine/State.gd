@@ -35,30 +35,37 @@ func physics_process(_delta: float):
 
 ## properties ################################################################
 
+## state meta
+
+# can be the machine's initial state
 func can_be_initial_state():
 	return false
+
+## player props
 
 # should ignore inputs while in this state
 func ignore_input() -> bool:
 	return false
 
-# should update the facing direction to match the movement direction
-func face_movement_direction() -> bool:
-	return false
-
-# can bump enemies in the actor's hurtbox
-func can_bump() -> bool:
-	return true
-
 # can perform an action-detector action
 func can_act() -> bool:
 	return true
 
-# can enemy attack a player in its own hitbox
+## shared props
+
+# should update the facing direction to match the movement direction
+func face_movement_direction() -> bool:
+	return false
+
+# can bump an entity in its hurtbox
+func can_bump() -> bool:
+	return true
+
+# can attack an entity in its hitbox
 func can_attack() -> bool:
 	return false
 
-# can boss ignore a player attack
+# can ignore an attack (in take_hit)
 func should_ignore_hit() -> bool:
 	return false
 

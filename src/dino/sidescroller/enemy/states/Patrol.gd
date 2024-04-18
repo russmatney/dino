@@ -1,5 +1,15 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return false
+
+func can_attack():
+	return false
+
+## vars ###################################
+
 var patrol_points = []
 var target
 var threshold_distance = 100.0
@@ -29,7 +39,7 @@ func exit():
 	actor.move_vector = Vector2.ZERO
 
 
-## physics ###########################################################
+## process ###########################################################
 
 var last_diff
 

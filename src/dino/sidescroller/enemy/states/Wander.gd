@@ -1,5 +1,15 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return true
+
+func can_attack():
+	return true
+
+## vars ###################################
+
 var directions = [Vector2.LEFT, Vector2.RIGHT]
 var wander_times = [0.4, 0.9, 1.4]
 var wander_ttl
@@ -11,13 +21,11 @@ func enter(_opts = {}):
 	wander_ttl = U.rand_of(wander_times)
 	actor.move_vector = U.rand_of(directions)
 
-
 ## exit ###########################################################
 
 func exit():
 	wander_ttl = null
 	actor.move_vector = Vector2.ZERO
-
 
 ## physics ###########################################################
 
