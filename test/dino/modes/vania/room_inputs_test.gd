@@ -1,6 +1,9 @@
 extends GdUnitTestSuite
 class_name VaniaRoomInputsTest
 
+func before():
+	Log.set_colors_termsafe()
+
 ## empty state ###########################################################
 
 func test_room_inputs_empty_inputs_behavior():
@@ -21,7 +24,10 @@ func test_room_inputs_empty_inputs_behavior():
 ## entities ######################################################
 
 func test_room_inputs_set_entities():
-	var some_ents = ["Player", "Candle"]
+	var some_ents = [
+		Pandora.get_entity(DinoEntityIds.PLAYERSPAWNPOINT),
+		Pandora.get_entity(DinoEntityIds.CANDLE),
+		]
 	var inp = RoomInputs.new({entities=some_ents})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
@@ -33,9 +39,15 @@ func test_room_inputs_set_entities():
 func test_room_inputs_combine_entities():
 	# entities should combine and keep dupes
 
-	var some_ents = ["Player", "Candle"]
+	var some_ents = [
+		Pandora.get_entity(DinoEntityIds.PLAYERSPAWNPOINT),
+		Pandora.get_entity(DinoEntityIds.CANDLE),
+		]
 	var inp_1 = RoomInputs.new({entities=some_ents})
-	var some_more_ents = ["Enemy", "Candle"]
+	var some_more_ents = [
+		Pandora.get_entity(DinoEntityIds.BOX),
+		Pandora.get_entity(DinoEntityIds.CANDLE),
+		]
 	var inp_2 = RoomInputs.new({entities=some_more_ents})
 
 	var inp = inp_1.merge(inp_2)
@@ -179,9 +191,10 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.local_cells).is_equal(inp.room_shape)
 
-	assert_array(inp.entities).contains(["Player"])
+	assert_array(inp.entities).is_not_empty()
 	assert_array(def.entities).is_not_empty()
-	assert_array(def.entities).contains(["Player"])
+	assert_that(inp.entities[0].get_entity_id()).is_equal(DinoEntityIds.PLAYERSPAWNPOINT)
+	assert_that(def.entities[0].get_entity_id()).is_equal(DinoEntityIds.PLAYERSPAWNPOINT)
 
 func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 	var def = VaniaRoomDef.new()
@@ -194,8 +207,10 @@ func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 	assert_array(inp.tilemap_scenes).is_not_empty()
 	assert_array(def.tilemap_scenes).contains(inp.tilemap_scenes)
 
-	assert_array(inp.entities).contains(["Leaf"])
-	assert_array(def.entities).contains(["Leaf"])
+	assert_array(inp.entities).is_not_empty()
+	assert_array(def.entities).is_not_empty()
+	assert_that(inp.entities[0].get_entity_id()).is_equal(DinoEntityIds.LEAF)
+	assert_that(def.entities[0].get_entity_id()).is_equal(DinoEntityIds.LEAF)
 
 	# room shapes input is empty, but the def's local_cells is not!
 	assert_array(inp.room_shapes).is_empty()
@@ -228,10 +243,12 @@ func test_apply_constraints_appends_multiple_entities():
 			RoomInputs.HAS_PLAYER,
 			], def)
 
-	assert_array(inp.entities).contains(["Target", "Player"])
 	assert_int(len(inp.entities)).is_equal(3)
-	assert_array(def.entities).contains(["Target", "Player"])
 	assert_int(len(def.entities)).is_equal(3)
+	assert_array(inp.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
+	assert_array(def.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
 
 func test_apply_constraints_supports_dicts_and_opts():
 	var def = VaniaRoomDef.new()
@@ -241,10 +258,12 @@ func test_apply_constraints_supports_dicts_and_opts():
 			RoomInputs.HAS_PLAYER: {}
 			}, def)
 
-	assert_array(inp.entities).contains(["Target", "Player"])
 	assert_int(len(inp.entities)).is_equal(5)
-	assert_array(def.entities).contains(["Target", "Player"])
 	assert_int(len(def.entities)).is_equal(5)
+	assert_array(inp.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
+	assert_array(def.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
 
 	def = VaniaRoomDef.new()
 	# pass just an array of dict
@@ -253,10 +272,12 @@ func test_apply_constraints_supports_dicts_and_opts():
 			RoomInputs.HAS_PLAYER: {}
 			}], def)
 
-	assert_array(inp.entities).contains(["Target", "Player"])
 	assert_int(len(inp.entities)).is_equal(5)
-	assert_array(def.entities).contains(["Target", "Player"])
 	assert_int(len(def.entities)).is_equal(5)
+	assert_array(inp.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
+	assert_array(def.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
 
 	def = VaniaRoomDef.new()
 	# pass just an array of dicts
@@ -266,7 +287,9 @@ func test_apply_constraints_supports_dicts_and_opts():
 			RoomInputs.HAS_PLAYER: {}
 		}], def)
 
-	assert_array(inp.entities).contains(["Target", "Player"])
 	assert_int(len(inp.entities)).is_equal(5)
-	assert_array(def.entities).contains(["Target", "Player"])
 	assert_int(len(def.entities)).is_equal(5)
+	assert_array(inp.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
+	assert_array(def.entities.map(func(ent): return ent.get_entity_id())).contains(
+		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
