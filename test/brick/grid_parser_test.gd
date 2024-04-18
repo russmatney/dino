@@ -1,5 +1,8 @@
 extends GdUnitTestSuite
 
+func before():
+	Log.set_colors_termsafe()
+
 ## GridParser.parse() #####################################################
 
 func test_parse_returns_room_defs():
@@ -244,3 +247,65 @@ x..
 		["x", ".", "."],
 		["x", ".", "."]
 		])
+
+
+func test_sanity_grid_parsing():
+	var parsed = GridParser.parse({
+		contents="name PuzzRooms
+
+=======
+LEGEND
+=======
+
+x = Tile
+
+=======
+ROOMS
+=======
+
+room_name A
+
+.x.
+	"})
+
+	assert_that(len(parsed.grids)).is_equal(1)
+	assert_that(parsed.grids[0].shape).is_equal([
+		[null, ["Tile"], null],
+		])
+	var shape_dict = parsed.grids[0].get_shape_dict()
+	assert_that(shape_dict).is_equal({
+		Vector2i(0, 0): null,
+		Vector2i(1, 0): ["Tile"],
+		Vector2i(2, 0): null,
+		})
+
+func test_label_missing_from_legend():
+	var parsed = GridParser.parse({
+		contents="name PuzzRooms
+
+=======
+LEGEND
+=======
+
+z = Zile
+
+=======
+ROOMS
+=======
+
+room_name A
+
+.x.
+	"})
+
+	assert_that(len(parsed.grids)).is_equal(1)
+	assert_that(parsed.grids[0].shape).is_equal([
+		[null, ["x"], null],
+		])
+
+	var shape_dict = parsed.grids[0].get_shape_dict()
+	assert_that(shape_dict).is_equal({
+		Vector2i(0, 0): null,
+		Vector2i(1, 0): ["x"],
+		Vector2i(2, 0): null,
+		})

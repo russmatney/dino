@@ -84,11 +84,12 @@ static func parse(opts: Dictionary={}) -> GridDefs:
 		var shape = []
 		for row in r.get("shape"):
 			var new_row = []
-			for col in row:
-				var val = parsed.legend.get(col)
+			for cell in row:
+				var val = parsed.legend.get(cell)
 				if val == null:
-					if col != ".":
-						val = col
+					if cell != ".":
+						Log.warn("Grid parser found val without matching legend entry", cell)
+						val = [cell]
 				new_row.append(val)
 			shape.append(new_row)
 		def.shape = shape

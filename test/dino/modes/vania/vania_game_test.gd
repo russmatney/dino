@@ -1,6 +1,9 @@
 extends GdUnitTestSuite
 class_name VaniaGameTest
 
+func before():
+	Log.set_colors_termsafe()
+
 ## basic startup ################################################
 
 func test_game_start():
