@@ -1448,23 +1448,6 @@
 			{
 				"_category_id": "131",
 				"_icon_color": "ffffff00",
-				"_id": "152",
-				"_index": 0,
-				"_name": "Spikes",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Spikes"
-					},
-					"label": {
-						"type": "string",
-						"value": "Spikes"
-					}
-				}
-			},
-			{
-				"_category_id": "131",
-				"_icon_color": "ffffff00",
 				"_id": "158",
 				"_index": 0,
 				"_name": "PlayerSpawnPoint",

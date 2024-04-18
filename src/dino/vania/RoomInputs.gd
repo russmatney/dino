@@ -1,9 +1,10 @@
 extends RefCounted
 class_name RoomInputs
 
-# TODO support one way platforms again
+# TODO support one way platforms, spikes via grid/tiles
 # static var all_entities = [
 # 	"OneWayPlatform",
+# 	"Spikes",
 # 	]
 
 static var all_tilemap_scenes = [
