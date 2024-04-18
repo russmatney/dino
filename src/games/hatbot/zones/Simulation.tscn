@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" path="res://src/games/shirt/entities/Coin.tscn" id="13_ogxn3"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="14_8cf58"]
 [ext_resource type="PackedScene" path="res://src/games/hatbot/CoinDoorQuest.tscn" id="14_kdew4"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="18_weixt"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="18_weixt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_il8gr"]
 shader = ExtResource("2_48np1")

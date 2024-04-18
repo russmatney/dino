@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbgwlri2j185m"]
+[gd_scene load_steps=13 format=3 uid="uid://cbgwlri2j185m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_dx70q"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_s4f24"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="3_vb0p5"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="4_pqk5m"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_pqk5m"]
 [ext_resource type="PackedScene" uid="uid://boxsq76goq8ev" path="res://src/dino/sidescroller/enemy/PatrolPoint.tscn" id="5_4by8w"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="6_eb7u0"]
 [ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/core/reptile/tilemaps/SpikeTiles8.tscn" id="7_im70c"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_j1nmu"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="9_w7l3g"]
+[ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/dino/enemies/goomba/Goomba.tscn" id="10_08ats"]
 
 [sub_resource type="Resource" id="Resource_0jk55"]
 script = ExtResource("2_s4f24")
@@ -34,33 +35,6 @@ position = Vector2(-72, 28)
 [node name="PatrolPoint" parent="." instance=ExtResource("5_4by8w")]
 position = Vector2(-254, 94)
 
-[node name="PatrolPoint2" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(-228, -61)
-
-[node name="PatrolPoint3" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(-85, -85)
-
-[node name="PatrolPoint4" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(91, -37)
-
-[node name="PatrolPoint5" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(174, 0)
-
-[node name="PatrolPoint6" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(91, 61)
-
-[node name="PatrolPoint7" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(-17, 102)
-
-[node name="PatrolPoint8" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(-72, 24)
-
-[node name="PatrolPoint9" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(-152, -17)
-
-[node name="PatrolPoint10" parent="." instance=ExtResource("5_4by8w")]
-position = Vector2(-200, 107)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_j0grn")
 
@@ -77,3 +51,7 @@ script = ExtResource("8_j1nmu")
 
 [node name="Soldier" parent="." instance=ExtResource("9_w7l3g")]
 position = Vector2(-129, -23)
+bump_damage = null
+
+[node name="Goomba" parent="." instance=ExtResource("10_08ats")]
+position = Vector2(85, -52)

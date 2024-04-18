@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://43qn8g87wt2p"]
+[gd_scene load_steps=14 format=3 uid="uid://43qn8g87wt2p"]
 
 [ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_avc5j"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Idle.gd" id="2_08acf"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Spawning.gd" id="2_jc773"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Dead.gd" id="3_d45r6"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/KnockedBack.gd" id="4_nhn0v"]
 [ext_resource type="Script" path="res://src/dino/sidescroller/enemy/states/Run.gd" id="5_nuew0"]
@@ -15,6 +16,9 @@
 
 [node name="SSEnemyMachine" type="Node"]
 script = ExtResource("1_avc5j")
+
+[node name="Spawning" type="Node" parent="."]
+script = ExtResource("2_jc773")
 
 [node name="Idle" type="Node" parent="."]
 script = ExtResource("2_08acf")

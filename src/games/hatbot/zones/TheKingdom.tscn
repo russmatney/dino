@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" path="res://src/games/shirt/entities/Coin.tscn" id="7_6utu0"]
 [ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/sidescroller/powerups/SSPowerup.tscn" id="7_x20i6"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="8_1itx7"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_typcp"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_typcp"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/dino/enemies/bosses/Monstroar.tscn" id="9_ggu7q"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/dino/sidescroller/boss/WarpSpot.tscn" id="10_8esf0"]
 [ext_resource type="PackedScene" path="res://src/games/hatbot/CoinDoorQuest.tscn" id="11_4yi87"]

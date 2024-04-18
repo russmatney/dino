@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/dino/enemies/bosses/Beefstronaut.tscn" id="17_d3lge"]
 [ext_resource type="PackedScene" path="res://src/games/hatbot/BossDefeatQuest.tscn" id="17_yxlqf"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/dino/enemies/bosses/Monstroar.tscn" id="18_tygdy"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="18_ye46h"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="18_ye46h"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="19_pnysb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_scfj8"]

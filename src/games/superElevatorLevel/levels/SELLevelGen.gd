@@ -25,8 +25,8 @@ func get_room_opts(_opts):
 					},
 				},
 			label_to_entity={
-				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
-				"Enemy": {scene=load("res://src/dino/SpawnPoint.tscn")},
+				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
+				"Enemy": {scene=load("res://src/dino/entities/SpawnPoint.tscn")},
 				}})
 
 	return agg.room_opts

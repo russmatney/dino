@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxb2duly062bx"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_jnt7i"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="2_ptwph"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="2_ptwph"]
 [ext_resource type="PackedScene" uid="uid://bstod1n1dqbyt" path="res://src/games/herd/wolf/Wolf.tscn" id="3_fktqk"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/games/herd/sheep/Sheep.tscn" id="4_l7qfl"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/games/herd/tiles/FenceTiles.tscn" id="5_a5ktk"]

@@ -23,6 +23,7 @@ func _get_configuration_warnings():
 @export var knockback_velocity = -100.0
 @export var knockback_velocity_horizontal = 10.0
 @export var dying_velocity = -200.0
+@export var bump_damage = 1
 
 @export var initial_health = 1
 
@@ -254,7 +255,6 @@ func _on_hitbox_body_entered(body):
 
 		# hurt_on_touch?
 		if should_hurt_to_touch and machine.can_bump():
-			# TODO double check 'type'
 			body.take_hit({body=self, type="bump"})
 
 		# TODO kick is specific, do we want a generic attack?

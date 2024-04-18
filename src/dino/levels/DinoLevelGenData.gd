@@ -7,7 +7,7 @@ static func label_to_entity(opts):
 	# and use scene as a fallback
 	return {
 		# player
-		"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+		"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
 
 		# bosses
 		"Boss": {scene=load("res://src/dino/enemies/bosses/Monstroar.tscn")},

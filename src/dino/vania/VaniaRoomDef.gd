@@ -18,8 +18,8 @@ var border_color: Color = Color.WHITE
 
 var tile_defs: GridDefs
 var entity_defs: GridDefs
-var entities: Array #[String]
 
+var entities = []
 var enemies = []
 
 var tilemap_scenes
@@ -30,6 +30,7 @@ var constraints = []
 func to_printable():
 	return {
 		entities=entities,
+		enemies=enemies,
 		room_path=room_path.get_file(),
 		local_cells=local_cells,
 		map_cells=map_cells,
@@ -59,6 +60,8 @@ func _init(opts={}):
 		if constraints is Array and constraints.is_empty():
 			return
 		RoomInputs.apply_constraints(constraints, self)
+
+	Log.pr("room def created", self)
 
 func set_local_cells(cells):
 	var min_cell := Vector3i(Vector2i.MAX.x, Vector2i.MAX.y, 0)

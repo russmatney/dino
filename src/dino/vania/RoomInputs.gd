@@ -57,6 +57,7 @@ static var all_room_shapes = {
 							Vector3i(0, 1, 0),],
 	}
 
+# TODO more like toggle-able constraints?
 static var all_constraints = [
 	# room shapes are not editable
 	# IN_LARGE_ROOM,
@@ -66,6 +67,12 @@ static var all_constraints = [
 	# IN_T_ROOM,
 	# IN_L_ROOM,
 	# CUSTOM_ROOM,
+
+	HAS_ENEMY,
+	HAS_ENTITY,
+	HAS_TILES,
+	HAS_ROOM,
+
 	IN_WOODEN_BOXES,
 	IN_SPACESHIP,
 	IN_KINGDOM,
@@ -237,6 +244,12 @@ static func get_constraint_data(cons_key, opts={}):
 		IN_L_ROOM: return L_room_shape(opts)
 		CUSTOM_ROOM: return custom_room_shape(opts)
 
+		# generic
+		HAS_ENTITY: return has_entity(null, opts)
+		HAS_ENEMY: return has_enemy(null, opts)
+		HAS_TILES: return has_tiles(opts)
+		HAS_ROOM: return custom_room_shape(opts)
+
 		# tiles
 		IN_WOODEN_BOXES: return wooden_boxes(opts)
 		IN_SPACESHIP: return spaceship(opts)
@@ -274,8 +287,7 @@ static func get_constraint_data(cons_key, opts={}):
 		HAS_SNOW_CHECKPOINT: return has_entity(DinoEntityIds.SNOWBENCH, opts)
 		HAS_CAVE_CHECKPOINT: return has_entity(DinoEntityIds.CAVEBENCH, opts)
 
-
-		HAS_PLAYER: return has_entity("Player", opts)
+		HAS_PLAYER: return has_entity(DinoEntityIds.PLAYERSPAWNPOINT, opts)
 
 		_: return RoomInputs.new()
 
@@ -316,6 +328,7 @@ const IN_WIDE_ROOM = "in_wide_room"
 const IN_T_ROOM = "in_T_room"
 const IN_L_ROOM = "in_L_room"
 const CUSTOM_ROOM = "in_custom_room"
+const HAS_ROOM = "in_custom_room"
 
 static func large_room_shape(_opts={}):
 	return RoomInputs.new({
@@ -370,6 +383,14 @@ static func T_room_shape(_opts={}):
 
 ## tilemaps ######################################################33
 
+const HAS_TILES = "has_tiles"
+
+static func has_tiles(opts):
+	var tmap_scenes = opts.get("tilemap_scenes")
+	if tmap_scenes == null:
+		Log.warn("No tilemaps_scenes passed to tile constraint", opts)
+	return RoomInputs.new({tilemap_scenes=tmap_scenes})
+
 const IN_WOODEN_BOXES = "on_wooden_boxes"
 const IN_SPACESHIP = "in_spaceship"
 const IN_KINGDOM = "in_kingdom"
@@ -403,6 +424,8 @@ static func grassy_cave(_opts={}):
 
 ## enemies ######################################################33
 
+const HAS_ENEMY = "has_enemy"
+
 const HAS_BOSS = "has_boss"
 const HAS_MONSTROAR = "has_monstroar"
 const HAS_BEEFSTRONAUT = "has_beefstronaut"
@@ -413,7 +436,15 @@ const HAS_GLOWMBA = "has_glowmba"
 const HAS_CRAWLY = "has_crawly"
 const HAS_SOLDIER = "has_solider"
 
+# TODO support more options, e.g. a passed entity (vs ent_id)
 static func has_enemy(ent_id, opts={}):
+	if ent_id == null:
+		ent_id = opts.get("entity_id")
+	if ent_id == null:
+		Log.warn("No entity_id specified by constraint!", ent_id, opts)
+		# TODO select random ent?
+		return
+
 	var ent = Pandora.get_entity(ent_id)
 	if ent == null:
 		Log.warn("No entity for id", ent_id)
@@ -439,6 +470,8 @@ static func has_boss(opts={}):
 
 ## entities ######################################################33
 
+const HAS_ENTITY = "has_entity"
+
 const HAS_LEAF = "has_leaf"
 
 const HAS_ARCADE_MACHINE = "has_arcade_machine"
@@ -457,8 +490,18 @@ const HAS_VOID = "has_void"
 
 const HAS_PLAYER = "has_player"
 
+# TODO support more options, e.g. a passed entity (vs ent_id)
+static func has_entity(ent_id, opts={}):
+	if ent_id == null:
+		ent_id = opts.get("entity_id")
+	if ent_id == null:
+		Log.warn("No entity_id specified by constraint!", ent_id, opts)
+		return
 
-static func has_entity(ent, opts={}):
+	var ent = Pandora.get_entity(ent_id)
+	if ent == null:
+		Log.warn("No entity for id", ent_id)
+		return
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
 

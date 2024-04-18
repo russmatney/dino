@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="4_n547b"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="5_tn7vn"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="6_gqkt1"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="7_lapss"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="7_lapss"]
 [ext_resource type="PackedScene" uid="uid://xjxn23dvi1b6" path="res://src/dino/platforms/PortalEdges.tscn" id="8_ftk8t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwtup"]

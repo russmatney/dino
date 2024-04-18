@@ -41,7 +41,7 @@ func get_room_opts(_opts):
 					}
 				},
 			label_to_entity={
-				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
 				"Chaser": {scene=load("res://src/games/shirt/enemies/BlobChaser.tscn")},
 				"Walker": {scene=load("res://src/games/shirt/enemies/BlobWalker.tscn")},
 				"Gem": {scene=load("res://src/games/shirt/entities/ShrineGem.tscn")},

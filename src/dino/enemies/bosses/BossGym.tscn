@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="2_5o6eg"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/dino/enemies/bosses/Monstroar.tscn" id="3_r2tqp"]
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/dino/enemies/bosses/Beefstronaut.tscn" id="4_cgsg1"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="5_yb4vk"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="5_yb4vk"]
 
 [node name="BossGym" type="Node"]
 script = ExtResource("1_t0fk6")

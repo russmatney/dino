@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/games/ghosts/world/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/games/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/games/ghosts/world/platforms/IndoorTiles.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://addons/core/PlayerSpawnPoint.tscn" id="8_i4ttr"]
+[ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_i4ttr"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/games/ghosts/world/platforms/GhostBlock.tscn" id="9"]
 [ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="10"]
 

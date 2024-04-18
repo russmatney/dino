@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bs0c5xn0vglfn"]
 
-[ext_resource type="Script" path="res://addons/core/PlayerSpawnPoint.gd" id="1_wof1d"]
+[ext_resource type="Script" path="res://src/dino/entities/PlayerSpawnPoint.gd" id="1_dqoo8"]
 
 [node name="PlayerSpawnPoint" type="Marker2D" groups=["player_spawn_points"]]
-script = ExtResource("1_wof1d")
+script = ExtResource("1_dqoo8")
 dev_only = false

@@ -9,7 +9,7 @@ B = Beefstronaut
 b = Blob
 c = Candle
 C = CookingPot
-h = Checkpoint
+G = Goomba
 g = Glowmba
 r = EnemyRobot
 l = Leaf
@@ -23,9 +23,9 @@ s = Soldier
 a = ArcadeMachine
 O = Box
 t = TreasureBox
-L = LogCheckpoint
-S = SnowCheckpoint
-V = CaveCheckpoint
+L = LogBench
+S = SnowBench
+V = CaveBench
 
 ==============
 ENTITIES
@@ -88,13 +88,6 @@ name Beefstronaut room
 ...
 xxx
 
-name Checkpoint
-
-....
-....
-.h..
-xxxx
-
 name LogCheckpoint
 
 ....
@@ -135,6 +128,13 @@ name EnemyRobot
 ...
 .r.
 ...
+xxx
+
+name Goomba
+
+...
+...
+.G.
 xxx
 
 name Glowmba

@@ -22,7 +22,7 @@ func get_room_opts(opts):
 				},
 			},
 			label_to_entity={
-				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
 				"Plot": {
 					scene=load("res://src/games/harvey/plots/Plot.tscn")
 					},

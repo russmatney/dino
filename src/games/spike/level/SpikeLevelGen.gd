@@ -46,7 +46,7 @@ func get_room_opts(opts):
 				}
 		},
 		label_to_entity={
-			"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+			"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
 			"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
 				setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 				},

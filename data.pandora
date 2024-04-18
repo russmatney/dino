@@ -1461,6 +1461,27 @@
 						"value": "Spikes"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "158",
+				"_index": 0,
+				"_name": "PlayerSpawnPoint",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Player Spawn Point"
+					},
+					"label": {
+						"type": "string",
+						"value": "Player"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/PlayerSpawnPoint.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1727,7 +1748,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 157
+			"default": 158
 		}
 	}
 }

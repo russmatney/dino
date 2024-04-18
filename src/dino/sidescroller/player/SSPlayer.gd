@@ -441,7 +441,10 @@ func take_damage(opts):
 	if damage == null:
 		match hit_type:
 			"bump":
-				damage = body.bump_damage
+				if "bump_damage" in body and body.bump_damage != null:
+					damage = body.bump_damage
+				else:
+					damage = 1
 			_:
 				damage = 1
 	health -= damage

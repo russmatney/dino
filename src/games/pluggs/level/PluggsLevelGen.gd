@@ -22,7 +22,7 @@ func get_room_opts(_opts):
 				scene=load("res://addons/core/reptile/tilemaps/MetalTiles8.tscn"),
 				}},
 			label_to_entity={
-				"Player": {scene=load("res://addons/core/PlayerSpawnPoint.tscn")},
+				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
 				"Machine": {scene=load("res://src/games/pluggs/entities/ArcadeMachine.tscn")},
 				"Light": {scene=load("res://src/games/pluggs/entities/Light.tscn")},
 				}})

@@ -123,14 +123,16 @@ func get_spawn_point_and_coords(opts):
 		spawn_point = get_spawn_point(opts)
 		if spawn_point:
 			spawn_coords = spawn_point.global_position
+		else:
+			Log.warn("spawning player, no spawn point found", opts)
 
 	return [spawn_point, spawn_coords]
 
 func get_spawn_point(opts={}):
 	var level_node = opts.get("level_node", Navi)
 	var psp = U.first_node_in_group(level_node, "player_spawn_points")
-	Log.pr("spawning player, found spawn point", psp)
 	if psp:
+		Log.pr("spawning player, found spawn point", psp)
 		return psp
 	var elevator = U.first_node_in_group(level_node, "elevator")
 	if elevator:
