@@ -78,6 +78,16 @@
 				"_index": 0,
 				"_name": "DinoEnemy",
 				"_script_path": "res://src/dino/enemies/DinoEnemy.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "628be7ff",
+				"_id": "131",
+				"_ids_generation_class": "DinoEntityIds",
+				"_index": 0,
+				"_name": "DinoEntity",
+				"_script_path": "res://src/dino/entities/DinoEntity.gd"
 			}
 		],
 		"_entities": [
@@ -1152,6 +1162,305 @@
 						"value": "res://src/dino/enemies/bosses/Monstroar.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "136",
+				"_index": 0,
+				"_name": "Leaf",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Leaf"
+					},
+					"label": {
+						"type": "string",
+						"value": "Leaf"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/leaves/Leaf.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "137",
+				"_index": 0,
+				"_name": "Coin",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Coin"
+					},
+					"label": {
+						"type": "string",
+						"value": "Coin"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "138",
+				"_index": 0,
+				"_name": "Gem",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Gem"
+					},
+					"label": {
+						"type": "string",
+						"value": "Gem"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "139",
+				"_index": 0,
+				"_name": "Target",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Target"
+					},
+					"label": {
+						"type": "string",
+						"value": "Target"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/targets/Target.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "140",
+				"_index": 0,
+				"_name": "Box",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Box"
+					},
+					"label": {
+						"type": "string",
+						"value": "Box"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/boxes/Box.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "141",
+				"_index": 0,
+				"_name": "Barrel",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Barrel"
+					},
+					"label": {
+						"type": "string",
+						"value": "Barrel"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "142",
+				"_index": 0,
+				"_name": "TreasureChest",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Treasure Chest"
+					},
+					"label": {
+						"type": "string",
+						"value": "TreasureChest"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/boxes/TreasureBox.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "143",
+				"_index": 0,
+				"_name": "CookingPot",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Cooking Pot"
+					},
+					"label": {
+						"type": "string",
+						"value": "CookingPot"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/cookingPot/CookingPot.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "146",
+				"_index": 0,
+				"_name": "ArcadeMachine",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Arcade Machine"
+					},
+					"label": {
+						"type": "string",
+						"value": "ArcadeMachine"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/arcadeMachine/ArcadeMachine.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "147",
+				"_index": 0,
+				"_name": "Candle",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Candle"
+					},
+					"label": {
+						"type": "string",
+						"value": "Candle"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/Candle.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "148",
+				"_index": 0,
+				"_name": "LogBench",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Log Bench"
+					},
+					"label": {
+						"type": "string",
+						"value": "LogBench"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/LogCheckpoint.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "149",
+				"_index": 0,
+				"_name": "SnowBench",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Snow Bench"
+					},
+					"label": {
+						"type": "string",
+						"value": "SnowBench"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/SnowCheckpoint.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "150",
+				"_index": 0,
+				"_name": "CaveBench",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Cave Bench"
+					},
+					"label": {
+						"type": "string",
+						"value": "CaveBench"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/CaveCheckpoint.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "151",
+				"_index": 0,
+				"_name": "Void",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Void"
+					},
+					"label": {
+						"type": "string",
+						"value": "Void"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/void/DeliveryZone.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "152",
+				"_index": 0,
+				"_name": "Spikes",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Spikes"
+					},
+					"label": {
+						"type": "string",
+						"value": "Spikes"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1385,12 +1694,40 @@
 				"_id": "130",
 				"_name": "label",
 				"_type": "string"
+			},
+			{
+				"_category_id": "131",
+				"_default_value": "",
+				"_id": "153",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "131",
+				"_default_value": "",
+				"_id": "154",
+				"_name": "label",
+				"_type": "string"
+			},
+			{
+				"_category_id": "131",
+				"_default_value": null,
+				"_id": "156",
+				"_name": "icon_texture",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "131",
+				"_default_value": null,
+				"_id": "157",
+				"_name": "scene",
+				"_type": "resource"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 130
+			"default": 157
 		}
 	}
 }

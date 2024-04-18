@@ -1,24 +1,10 @@
 extends RefCounted
 class_name RoomInputs
 
-static var all_entities = [
-	"Leaf",
-
-	"ArcadeMachine",
-	"Box",
-	"TreasureBox",
-
-	"Candle",
-	"Checkpoint",
-	"LogCheckpoint",
-	"SnowCheckpoint",
-	"CaveCheckpoint",
-	"CookingPot",
-	"Target",
-	"Void",
-
-	"OneWayPlatform",
-	]
+# TODO support one way platforms again
+# static var all_entities = [
+# 	"OneWayPlatform",
+# 	]
 
 static var all_tilemap_scenes = [
 		# "res://addons/core/reptile/tilemaps/GrassTiles16.tscn",
@@ -272,21 +258,21 @@ static func get_constraint_data(cons_key, opts={}):
 		IS_COOKING_ROOM: return cooking_room(opts)
 
 		# pickups/drops
-		HAS_LEAF: return has_entity("Leaf", opts)
+		HAS_LEAF: return has_entity(DinoEntityIds.LEAF, opts)
 
-		HAS_ARCADE_MACHINE: return has_entity("ArcadeMachine", opts)
-		HAS_BOX: return has_entity("Box", opts)
-		HAS_TREASURE_BOX: return has_entity("TreasureBox", opts)
-		HAS_COOKING_POT: return has_entity("CookingPot", opts)
-		HAS_TARGET: return has_entity("Target", opts)
-		HAS_VOID: return has_entity("Void", opts)
+		HAS_ARCADE_MACHINE: return has_entity(DinoEntityIds.ARCADEMACHINE, opts)
+		HAS_BOX: return has_entity(DinoEntityIds.BOX, opts)
+		HAS_TREASURE_BOX: return has_entity(DinoEntityIds.TREASURECHEST, opts)
+		HAS_COOKING_POT: return has_entity(DinoEntityIds.COOKINGPOT, opts)
+		HAS_TARGET: return has_entity(DinoEntityIds.TARGET, opts)
+		HAS_VOID: return has_entity(DinoEntityIds.VOID, opts)
 
 		# checkpoints
-		HAS_CANDLE: return has_entity("Candle", opts)
-		HAS_CHECKPOINT: return has_entity("Checkpoint", opts)
-		HAS_LOG_CHECKPOINT: return has_entity("LogCheckpoint", opts)
-		HAS_SNOW_CHECKPOINT: return has_entity("SnowCheckpoint", opts)
-		HAS_CAVE_CHECKPOINT: return has_entity("CaveCheckpoint", opts)
+		HAS_CANDLE: return has_entity(DinoEntityIds.CANDLE, opts)
+		HAS_CHECKPOINT: return has_entity(DinoEntityIds.CANDLE, opts)
+		HAS_LOG_CHECKPOINT: return has_entity(DinoEntityIds.LOGBENCH, opts)
+		HAS_SNOW_CHECKPOINT: return has_entity(DinoEntityIds.SNOWBENCH, opts)
+		HAS_CAVE_CHECKPOINT: return has_entity(DinoEntityIds.CAVEBENCH, opts)
 
 
 		HAS_PLAYER: return has_entity("Player", opts)
@@ -303,7 +289,7 @@ static func random_enemies(opts={}):
 
 static func random_entities(opts={}):
 	return RoomInputs.new({
-		entities=U.rand_of(opts.get("entities", all_entities), U.rand_of([2,3,4]))
+		entities=U.rand_of(opts.get("entities", DinoEntity.all_entities()), U.rand_of([2,3,4]))
 		})
 
 static func random_room_shapes(opts={}):

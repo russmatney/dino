@@ -9,6 +9,7 @@ const DINOWEAPON = "80"
 const DINOMODE = "92"
 const LEVELDEF = "103"
 const DINOENEMY = "117"
+const DINOENTITY = "131"
 
 
 class MetroTravelPointCategories:

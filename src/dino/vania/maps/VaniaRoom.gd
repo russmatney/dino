@@ -262,76 +262,47 @@ func add_tile_chunks(opts={}):
 		tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
 		tilemap.force_update()
 
-## add_enemies ##############################################################
+## add_enemies/entities ##############################################################
+
+func add_entity(ent):
+	var tmap_data = build_tilemap_data()
+
+	var label = ent.get_label()
+	# TODO look for grid_defs on ent first
+	var grids = room_def.entity_defs.grids_with_entity(label)
+	if grids.is_empty():
+		# TODO fallback to putting it in the center?
+		Log.warn("No grids for ent or enemy, skipping: ", ent)
+		return
+	var grid = grids.pick_random()
+
+	# find place to put entity
+	var shape_dict = grid.get_shape_dict({drop_entity=label})
+
+	# TODO exclude doorways
+	var start_coords = possible_positions(tmap_data, shape_dict)
+
+	for e_coord in grid.get_coords_for_entity(label):
+		if start_coords.is_empty():
+			Log.warn("No position found for entity!", ent)
+			continue
+		var start_coord = start_coords.pick_random()
+		start_coords.erase(start_coord)
+
+		# place entity at random start cord
+		var pos = tilemap.map_to_local(e_coord + start_coord)
+		var enemy_node = ent.get_scene().instantiate()
+		enemy_node.position = pos
+		add_child(enemy_node)
+		enemy_node.set_owner(self)
 
 func add_enemies():
-	var tmap_data = build_tilemap_data()
-
 	for enemy in room_def.enemies:
-		var enemy_label = enemy.get_label()
-		var grids = room_def.entity_defs.grids_with_entity(enemy_label)
-		if grids.is_empty():
-			# TODO fallback to puttin it in the center?
-			Log.warn("No grids for enemy, skipping: ", enemy)
-			continue
-		var grid = grids.pick_random()
-
-		# find place to put entity
-		var shape_dict = grid.get_shape_dict({drop_entity=enemy_label})
-
-		# TODO exclude doorways
-		var start_coords = possible_positions(tmap_data, shape_dict)
-
-		for e_coord in grid.get_coords_for_entity(enemy_label):
-			if start_coords.is_empty():
-				Log.warn("No position found for entity!", enemy)
-				continue
-			var start_coord = start_coords.pick_random()
-			start_coords.erase(start_coord)
-
-			# place entity at random start cord
-			var pos = tilemap.map_to_local(e_coord + start_coord)
-			var enemy_node = enemy.get_scene().instantiate()
-			enemy_node.position = pos
-			add_child(enemy_node)
-			enemy_node.set_owner(self)
-
-
-## add_entities ##############################################################
+		add_entity(enemy)
 
 func add_entities():
-	var tmap_data = build_tilemap_data()
-
 	for ent in room_def.entities:
-		var entity_opts = room_def.label_to_entity.get(ent)
-		var grids = room_def.entity_defs.grids_with_entity(ent)
-		if grids.is_empty():
-			# TODO fallback to puttin it in the center?
-			Log.warn("No grids for entity, skipping: ", ent)
-			continue
-		var grid = grids.pick_random()
-
-		# find place to put entity
-		var shape_dict = grid.get_shape_dict({drop_entity=ent})
-
-		# TODO exclude doorways
-		var start_coords = possible_positions(tmap_data, shape_dict)
-
-		for e_coord in grid.get_coords_for_entity(ent):
-			if start_coords.is_empty():
-				Log.warn("No position found for entity!", ent)
-				continue
-			var start_coord = start_coords.pick_random()
-			start_coords.erase(start_coord)
-
-			# place entity at random start cord
-			var pos = tilemap.map_to_local(e_coord + start_coord)
-			var entity = entity_opts.scene.instantiate()
-			entity.position = pos
-			if entity_opts.get("setup"):
-				entity_opts.setup.call(entity, {tile_size=room_def.tile_size})
-			add_child(entity)
-			entity.set_owner(self)
+		add_entity(ent)
 
 ## fit helpers ##############################################################
 

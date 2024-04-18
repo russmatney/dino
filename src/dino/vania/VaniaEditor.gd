@@ -81,11 +81,11 @@ func update_room_def():
 	seed_label.text = "seed: %s" % Dino._seed
 	room_count_label.text = "rooms: %s" % len(game.room_defs)
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
-	neighbors_label.text = "ngbrs: %s" % Log.to_printable([current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file())])
+	neighbors_label.text = "ngbrs: %s" % Log.to_pretty(current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file()))
 
-	room_entities_label.text = "ents: %s" % Log.to_printable([current_room_def.entities])
+	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities)
 	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().get_file()
-	room_constraints_label.text = "constraints: %s" % Log.to_printable([len(current_room_def.constraints)])
+	room_constraints_label.text = "constraints: %s" % Log.to_pretty(len(current_room_def.constraints))
 
 func update_edit_entities():
 	if not current_room_def:
@@ -93,9 +93,9 @@ func update_edit_entities():
 
 	var items = []
 	items.append_array(current_room_def.entities.map(func(ent):
-		return {label="Remove '%s'" % ent, on_select=func(): current_room_def.entities.erase(ent)}))
-	items.append_array(current_room_def.all_entities.map(func(ent):
-		return {label="Add '%s'" % ent, on_select=func(): current_room_def.entities.append(ent)}))
+		return {label="Remove '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.erase(ent)}))
+	items.append_array(DinoEntity.all_entities().map(func(ent):
+		return {label="Add '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.append(ent)}))
 
 	var popup = edit_entities_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
@@ -123,9 +123,9 @@ func update_edit_constraints():
 
 	var items = []
 	items.append_array(current_room_def.constraints.map(func(cons):
-		return {label="Remove '%s'" % Log.to_printable([cons]), on_select=func(): current_room_def.constraints.erase(cons)}))
+		return {label="Remove '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.erase(cons)}))
 	items.append_array(RoomInputs.all_constraints.map(func(cons):
-		return {label="Add '%s'" % Log.to_printable([cons]), on_select=func(): current_room_def.constraints.append(cons)}))
+		return {label="Add '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.append(cons)}))
 
 	var popup = edit_constraints_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
