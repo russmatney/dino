@@ -84,32 +84,6 @@ func start(opts={}):
 	is_transitioning = false
 	is_started = true
 
-## input #####################################################################
-
-func _unhandled_input(ev):
-	if state and not is_transitioning:
-		state.unhandled_input(ev)
-
-## process #####################################################################
-
-func _process(delta):
-	if state and not is_transitioning:
-		state.process(delta)
-
-func _physics_process(delta):
-	if state and not is_transitioning:
-		state.physics_process(delta)
-
-## animation #####################################################################
-
-func on_animation_finished():
-	if state and not is_transitioning:
-		state.on_animation_finished()
-
-func on_frame_changed():
-	if state and not is_transitioning:
-		state.on_frame_changed()
-
 ## transitions ###################################################################
 
 func transit(target_state_name: String, ctx: Dictionary = {}):
@@ -136,3 +110,67 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 		transitioned.emit(null)
 	next_state = null
 	is_transitioning = false
+
+## input #####################################################################
+
+func _unhandled_input(ev):
+	if state and not is_transitioning:
+		state.unhandled_input(ev)
+
+## process #####################################################################
+
+func _process(delta):
+	if state and not is_transitioning:
+		state.process(delta)
+
+func _physics_process(delta):
+	if state and not is_transitioning:
+		state.physics_process(delta)
+
+## animation #####################################################################
+
+func on_animation_finished():
+	if state and not is_transitioning:
+		state.on_animation_finished()
+
+func on_frame_changed():
+	if state and not is_transitioning:
+		state.on_frame_changed()
+
+## property checks #####################################################################
+
+# should ignore inputs while in this state
+func ignore_input() -> bool:
+	if state and not is_transitioning:
+		return state.ignore_input()
+	return true
+
+# should update the facing direction to match the movement direction
+func face_movement_direction() -> bool:
+	if state and not is_transitioning:
+		return state.face_movement_direction()
+	return false
+
+# can bump enemies in the actor's hurtbox
+func can_bump() -> bool:
+	if state and not is_transitioning:
+		return state.can_bump()
+	return false
+
+# can perform an action-detector action
+func can_act() -> bool:
+	if state and not is_transitioning:
+		return state.can_act()
+	return false
+
+# can enemy attack a player in its own hitbox
+func can_attack() -> bool:
+	if state and not is_transitioning:
+		return state.can_attack()
+	return false
+
+# can boss ignore a player attack
+func should_ignore_hit() -> bool:
+	if state and not is_transitioning:
+		return state.should_ignore_hit()
+	return true

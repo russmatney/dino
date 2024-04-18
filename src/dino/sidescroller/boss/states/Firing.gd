@@ -1,19 +1,27 @@
 extends State
 
-#####################################################
-# enter
+## properties #####################################################
+
+func should_ignore_hit():
+	return false
+
+func can_bump():
+	return false
+
+## vars ####################################################
+
+var break_every = 3
+var bullets_til_break
+var last_bullet
+
+## enter ####################################################
 
 func enter(_ctx={}):
 	actor.anim.play("idle")
 
 	bullets_til_break = break_every
 
-#####################################################
-# physics
-
-var break_every = 3
-var bullets_til_break
-var last_bullet
+## process ####################################################
 
 func physics_process(delta):
 	if actor.can_see_player and can_fire():
@@ -30,8 +38,7 @@ func physics_process(delta):
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)
 	actor.move_and_slide()
 
-#####################################################
-# fire control
+## fire control ####################################################
 
 func fire_burst_rate():
 	return randf_range(0.5, 0.9)
@@ -53,8 +60,7 @@ func _on_bullet_dying(bullet):
 	if bullets_til_break <= 0 and bullet == last_bullet:
 		machine.transit("Idle", {wait_for=fire_cooldown, next_state="Warping"})
 
-#####################################################
-# fire logic
+## fire logic ####################################################
 
 var bullets = []
 

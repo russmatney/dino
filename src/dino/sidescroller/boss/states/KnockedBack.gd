@@ -1,11 +1,22 @@
 extends State
 
+## properties #####################################################
+
+func should_ignore_hit():
+	return true
+
+func can_bump():
+	return false
+
+## vars #####################################################
+
 var KNOCKBACK_X = 20
 var KNOCKBACK_Y = -300
 var KNOCKBACK_DYING_Y = -700
 var min_kb_time = 0.3
 var kb_ttl = 2
 
+## enter #####################################################
 
 func enter(opts={}):
 	kb_ttl = min_kb_time
@@ -27,6 +38,8 @@ func enter(opts={}):
 		actor.face_left()
 
 	actor.velocity += Vector2(0, kb_y) + dir * KNOCKBACK_X
+
+## process #####################################################
 
 func physics_process(delta):
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)

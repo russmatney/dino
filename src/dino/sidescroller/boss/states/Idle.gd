@@ -1,8 +1,20 @@
 extends State
 
+## properties #####################################################
+
+func should_ignore_hit():
+	return false
+
+func can_bump():
+	return true
+
+## vars #####################################################
+
 var wait_at_least = 1
 var wait_ttl
 var next_state
+
+## enter #####################################################
 
 func enter(ctx={}):
 	actor.anim.play("idle")
@@ -11,8 +23,12 @@ func enter(ctx={}):
 
 	next_state = ctx.get("next_state")
 
+## exit #####################################################
+
 func exit():
 	wait_ttl = wait_at_least
+
+## process #####################################################
 
 func physics_process(delta):
 	if not actor.can_float:

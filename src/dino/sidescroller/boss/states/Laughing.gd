@@ -1,8 +1,20 @@
 extends State
 
+## properties #####################################################
+
+func should_ignore_hit():
+	return false
+
+func can_bump():
+	return false
+
+## vars #####################################################
+
 var laugh_at_least = 1
 var laugh_ttl
 var next_state
+
+## enter #####################################################
 
 func enter(ctx={}):
 	actor.anim.play("laughing")
@@ -11,8 +23,12 @@ func enter(ctx={}):
 
 	next_state = ctx.get("next_state")
 
+## exit #####################################################
+
 func exit():
 	laugh_ttl = laugh_at_least
+
+## process #####################################################
 
 func physics_process(delta):
 	if not actor.can_float:

@@ -1,5 +1,15 @@
 extends State
 
+## properties #####################################################
+
+func should_ignore_hit():
+	return false
+
+func can_bump():
+	return true
+
+## vars #####################################################
+
 var swoop_in = 0.3
 var swoop_ttl
 
@@ -10,8 +20,7 @@ var finished_chasing_player
 
 var player
 
-#####################################################
-# enter
+## enter ####################################################
 
 func enter(_ctx={}):
 	actor.anim.play("preswoop")
@@ -49,11 +58,12 @@ func enter(_ctx={}):
 	for spot in swoop_spots:
 		show_swoop_hint(spot[1], spot[0])
 
+## exit ####################################################
+
 func exit():
 	hide_swoop_hints()
 
-#####################################################
-# physics
+## process ####################################################
 
 func physics_process(delta):
 	if swoop_ttl == null:
@@ -73,8 +83,7 @@ func physics_process(delta):
 
 			swoop(spot)
 
-#####################################################
-# swoop
+## swoop ####################################################
 
 var swooping
 func swoop(spot):

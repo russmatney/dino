@@ -150,7 +150,7 @@ func _physics_process(_delta):
 ## take_hit ####################################################
 
 func take_hit(opts={}):
-	if not machine.state.name in ["Stunned", "Swoop", "Firing", "Idle", "Laughing"]:
+	if machine.should_ignore_hit():
 		DJZ.play(DJZ.S.nodamageclang)
 		return
 
@@ -177,6 +177,6 @@ func take_hit(opts={}):
 ## player touch damage ####################################################
 
 func _on_attack_box_entered(body: Node):
-	if machine.state.name in ["Swoop", "Idle"]:
+	if machine.can_bump():
 		if body.is_in_group("player") and body.has_method("take_hit"):
 			body.take_hit({body=self})

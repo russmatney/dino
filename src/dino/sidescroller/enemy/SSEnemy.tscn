@@ -39,6 +39,7 @@ shape = SubResource("CircleShape2D_lrapw")
 texture = ExtResource("4_cuf3p")
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = 16.0
 offset_right = 40.0

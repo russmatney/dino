@@ -1,13 +1,21 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return true
+
+func can_attack():
+	return true
+
+func can_be_initial_state():
+	return true
+
+## vars ###################################
+
 var ttr
 var wait_to_run = 2
 var stop
-
-## properties ###########################################################
-
-func can_be_initial_state():
-	return false
 
 ## enter #####################################################################
 

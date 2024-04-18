@@ -1,7 +1,19 @@
 extends State
 
+## properties #####################################################
+
+func should_ignore_hit():
+	return false
+
+func can_bump():
+	return false
+
+## vars #####################################################
+
 var stunned_for = 3
 var stunned_ttl
+
+## enter #####################################################
 
 func enter(ctx={}):
 	stunned_ttl = ctx.get("stunned_for", stunned_for)
@@ -11,6 +23,7 @@ func enter(ctx={}):
 	DJZ.play(DJZ.S.soldierdead)
 	actor.stunned.emit(actor)
 
+## process #####################################################
 
 func physics_process(delta):
 	if not actor.is_on_floor():

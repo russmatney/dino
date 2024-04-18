@@ -54,6 +54,14 @@ func can_bump() -> bool:
 func can_act() -> bool:
 	return true
 
+# can enemy attack a player in its own hitbox
+func can_attack() -> bool:
+	return false
+
+# can boss ignore a player attack
+func should_ignore_hit() -> bool:
+	return false
+
 ## common callbacks ################################################################
 
 # fired from actor.anim

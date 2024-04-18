@@ -6,7 +6,7 @@ var idle_ttl
 ## properties ###########################################################
 
 func can_be_initial_state():
-	return false
+	return true
 
 ## enter ###########################################################
 

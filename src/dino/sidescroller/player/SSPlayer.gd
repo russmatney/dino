@@ -183,7 +183,7 @@ func _ready():
 
 		# call this from the action detector itself?
 		action_detector.setup(self, {actions=actions, action_hint=action_hint,
-			can_execute_any=func(): return machine and machine.state.can_act()})
+			can_execute_any=func(): return machine.can_act()})
 
 		died.connect(_on_player_death)
 
@@ -219,7 +219,7 @@ func _ready():
 
 func _unhandled_input(event):
 	# prevent input
-	if block_controls or is_dead or machine.state.ignore_input():
+	if block_controls or is_dead or machine.ignore_input():
 		Log.pr("blocking ss player control")
 		return
 
@@ -270,7 +270,7 @@ func _physics_process(_delta):
 	move_vector = get_move_vector()
 
 	if not Engine.is_editor_hint():
-		if move_vector.abs().length() > 0 and machine.state.face_movement_direction():
+		if move_vector.abs().length() > 0 and machine.face_movement_direction():
 			# restore strafing - check if using a weapon that supports strafing?
 			# if not firing: # supports strafing (moving while firing without turning)
 			if move_vector.x > 0:
@@ -467,7 +467,7 @@ var bumpbox_bodies = []
 
 # player hurting another body by touching...
 func on_bumpbox_entered(body):
-	if not body.is_dead and body.machine.state.can_bump():
+	if not body.is_dead and body.machine.can_bump():
 		if not body in bumpbox_bodies:
 			bumpbox_bodies.append(body)
 			body.take_hit({type="bump", body=self})

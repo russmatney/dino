@@ -1,11 +1,21 @@
 extends State
 
+## properties ###################################
+
+func can_bump():
+	return true
+
+func can_attack():
+	return true
+
+## enter ###################################
 
 func enter(ctx={}):
 	var dir = ctx.get("dir", actor.facing_vector)
 	actor.move_vector = dir
 	actor.anim.play("run")
 
+## process ###################################
 
 func physics_process(delta):
 	if actor.can_see_player:

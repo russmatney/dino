@@ -91,8 +91,8 @@ func _ready():
 
 	Hotel.register(self)
 
-	hitbox.body_entered.connect(_on_body_entered)
-	hitbox.body_exited.connect(_on_body_exited)
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
+	hitbox.body_exited.connect(_on_hitbox_body_exited)
 
 	knocked_back.connect(_on_knocked_back)
 
@@ -246,20 +246,22 @@ func take_hit(opts={}):
 
 var hitbox_bodies = []
 
-func _on_body_entered(body):
+func _on_hitbox_body_entered(body):
 	Log.prn("body entered", body)
 
-	if machine.state.name in ["Idle", "Run"] and body.is_in_group("player"):
+	if body.is_in_group("player"):
 		hitbox_bodies.append(body)
 
 		# hurt_on_touch?
-		if should_hurt_to_touch:
-			body.take_hit({body=self})
+		if should_hurt_to_touch and machine.can_bump():
+			# TODO double check 'type'
+			body.take_hit({body=self, type="bump"})
 
+		# TODO kick is specific, do we want a generic attack?
 		# should probably do this from each state's physics_process()
-		if can_kick and machine.state.name in ["Idle", "Run"]:
+		if can_kick and machine.can_attack():
 			# this body isn't used at the moment
 			machine.transit("Kick", {body=body})
 
-func _on_body_exited(body):
+func _on_hitbox_body_exited(body):
 	hitbox_bodies.erase(body)

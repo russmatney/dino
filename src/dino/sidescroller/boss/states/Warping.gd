@@ -1,13 +1,22 @@
 extends State
 
+## properties #####################################################
+
+func should_ignore_hit():
+	return true
+
+func can_bump():
+	return false
+
+## vars #####################################################
+
 var last_ws
 var next_warp_spot
 
 var warp_in = 1
 var warp_ttl = 1
 
-#####################################################
-# enter
+## enter ####################################################
 
 func enter(_ctx={}):
 	actor.anim.play("warp_leave")
@@ -23,8 +32,7 @@ func enter(_ctx={}):
 func exit():
 	last_ws = next_warp_spot
 
-#####################################################
-# physics
+## process ####################################################
 
 func physics_process(delta):
 	warp_ttl -= delta
