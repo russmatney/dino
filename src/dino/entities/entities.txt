@@ -5,21 +5,13 @@ LEGEND
 ==============
 
 - = OneWayPlatform
-B = Beefstronaut
-b = Blob
 c = Candle
 C = CookingPot
-G = Goomba
-g = Glowmba
-r = EnemyRobot
 l = Leaf
-M = Monstroar
 o = Target
 p = Player
 v = Void
 x = Tile
-w = Crawly
-s = Soldier
 a = ArcadeMachine
 O = Box
 t = TreasureBox
@@ -58,36 +50,6 @@ name ArcadeMachine
 ...
 xxx
 
-name Soldier
-
-...
-.s.
-xxx
-
-name Crawly
-
-.w.
-xxx
-
-name Crawly2
-
-xxx
-.w.
-
-name Blob
-
-...
-.b.
-...
-xxx
-
-name Beefstronaut room
-
-...
-.B.
-...
-xxx
-
 name LogCheckpoint
 
 ....
@@ -123,27 +85,6 @@ name CookingPot
 ...
 xxx
 
-name EnemyRobot
-
-...
-.r.
-...
-xxx
-
-name Goomba
-
-...
-...
-.G.
-xxx
-
-name Glowmba
-
-...
-...
-.g.
-xxx
-
 name Leaf
 
 ...
@@ -159,13 +100,6 @@ xxx
 name Leaf on floor
 
 .l.
-...
-xxx
-
-name Monstroar room
-
-...
-.M.
 ...
 xxx
 

@@ -268,8 +268,7 @@ func add_entity(ent):
 	var tmap_data = build_tilemap_data()
 
 	var label = ent.get_label()
-	# TODO look for grid_defs on ent first
-	var grids = room_def.entity_defs.grids_with_entity(label)
+	var grids = ent.get_grid_defs()
 	if grids.is_empty():
 		# TODO fallback to putting it in the center?
 		Log.warn("No grids for ent or enemy, skipping: ", ent)

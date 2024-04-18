@@ -1764,12 +1764,26 @@
 				"_id": "157",
 				"_name": "scene",
 				"_type": "resource"
+			},
+			{
+				"_category_id": "131",
+				"_default_value": "res://src/dino/entities/entities.txt",
+				"_id": "160",
+				"_name": "grid_defs_path",
+				"_type": "string"
+			},
+			{
+				"_category_id": "117",
+				"_default_value": "res://src/dino/enemies/enemies.txt",
+				"_id": "161",
+				"_name": "grid_defs_path",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 159
+			"default": 161
 		}
 	}
 }

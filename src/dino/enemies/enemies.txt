@@ -1,0 +1,77 @@
+name Entities List
+
+==============
+LEGEND
+==============
+
+B = Beefstronaut
+b = Blob
+G = Goomba
+g = Glowmba
+r = EnemyRobot
+M = Monstroar
+w = Crawly
+s = Soldier
+
+==============
+ENTITIES
+==============
+
+name Soldier
+
+...
+.s.
+xxx
+
+name Crawly
+
+.w.
+xxx
+
+name Crawly2
+
+xxx
+.w.
+
+name Blob
+
+...
+.b.
+...
+xxx
+
+name Beefstronaut
+
+...
+.B.
+...
+xxx
+
+name EnemyRobot
+
+...
+.r.
+...
+xxx
+
+name Goomba
+
+...
+...
+.G.
+xxx
+
+name Glowmba
+
+...
+...
+.g.
+xxx
+
+name Monstroar
+
+...
+.M.
+...
+xxx
+

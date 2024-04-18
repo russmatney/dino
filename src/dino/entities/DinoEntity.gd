@@ -19,6 +19,10 @@ func has_scene() -> bool:
 func get_scene() -> PackedScene:
 	return get_resource("scene")
 
+func get_grid_defs():
+	# TODO cache/don't reparse for the same defs_path
+	return GridParser.parse({defs_path=get_string("grid_defs_path")}).grids_with_entity(get_label())
+
 func data():
 	return {
 		display_name=get_display_name(),

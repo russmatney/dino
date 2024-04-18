@@ -17,7 +17,6 @@ var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
 var tile_defs: GridDefs
-var entity_defs: GridDefs
 
 var entities = []
 var enemies = []
@@ -47,7 +46,6 @@ func _init(opts={}):
 	border_color = opts.get("border_color", border_color)
 
 	tile_defs = opts.get("tile_defs")
-	entity_defs = opts.get("entity_defs")
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
@@ -193,8 +191,6 @@ func reapply_constraints():
 ## static #####################################################3
 
 static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
-	var entity_defs_path = "res://src/dino/vania/entities.txt"
-	var e_defs = GridParser.parse({defs_path=entity_defs_path})
 	var tile_defs_path = "res://src/dino/vania/tiles.txt"
 	var t_defs = GridParser.parse({defs_path=tile_defs_path})
 
@@ -247,7 +243,7 @@ static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
 
 	for inputs in room_inputs:
 		var def = VaniaRoomDef.new({
-			entity_defs=e_defs, tile_defs=t_defs,
+			tile_defs=t_defs,
 			tile_size=opts.get("tile_size"),
 			room_inputs=inputs,
 			})
