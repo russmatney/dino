@@ -255,4 +255,3 @@ xxx
 
 	var new_count = room.get_child_count()
 	assert_that(new_count - og_count).is_equal(1) # new entity added as child
-	# TODO assert that label_to_entity setup is called

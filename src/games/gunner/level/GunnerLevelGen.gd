@@ -18,13 +18,13 @@ func get_room_opts(opts):
 				},
 			},
 			label_to_entity={
-				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
-				"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
+				"Player": {scene=DinoEntity.get_entity_scene(DinoEntityIds.PLAYERSPAWNPOINT)},
+				"Enemy": {scene=DinoEnemy.get_enemy_scene(EnemyIds.ENEMYROBOT)},
+				"Target": {scene=DinoEntity.get_entity_scene(DinoEntityIds.TARGET),
 					setup=func(t):
 					t.position += Vector2.RIGHT * opts.tile_size / 2.0
 					t.position += Vector2.DOWN * opts.tile_size / 2.0
 					},
-				"Enemy": {scene=load("res://src/dino/entities/enemyRobots/EnemyRobot.tscn")},
 			}})
 
 	return agg.room_opts

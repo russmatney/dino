@@ -32,3 +32,6 @@ func data():
 static func all_entities():
 	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOENTITY))\
 		.filter(func(ent): return ent.has_scene())
+
+static func get_entity_scene(ent_id):
+	return Pandora.get_entity(ent_id).get_scene()

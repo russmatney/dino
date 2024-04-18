@@ -46,12 +46,12 @@ func get_room_opts(opts):
 				}
 		},
 		label_to_entity={
-			"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
-			"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
+			"Player": {scene=DinoEntity.get_entity_scene(DinoEntityIds.PLAYERSPAWNPOINT)},
+			"CookingPot": {scene=DinoEntity.get_entity_scene(DinoEntityIds.COOKINGPOT),
 				setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 				},
-			"Blob": {scene=load("res://src/dino/enemies/blobs/Blob.tscn")},
-			"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
+			"Blob": {scene=DinoEnemy.get_enemy_scene(EnemyIds.BLOB)},
+			"Void": {scene=DinoEntity.get_entity_scene(DinoEntityIds.VOID),},
 			"OneWayPlatform": {scene=load("res://src/dino/platforms/OneWayPlatform.tscn"),
 				# resize to match tile_size
 				setup=func(p):

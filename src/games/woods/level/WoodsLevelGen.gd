@@ -31,8 +31,8 @@ func get_room_opts(_opts):
 				# border_depth=30,
 				}},
 			label_to_entity={
-				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
-				"Leaf": {scene=load("res://src/dino/entities/leaves/Leaf.tscn")},
+				"Player": {scene=DinoEntity.get_entity_scene(DinoEntityIds.PLAYERSPAWNPOINT)},
+				"Leaf": {scene=DinoEntity.get_entity_scene(DinoEntityIds.LEAF)},
 				}})
 
 	return room_opts

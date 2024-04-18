@@ -7,27 +7,27 @@ static func label_to_entity(opts):
 	# and use scene as a fallback
 	return {
 		# player
-		"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
+		"Player": {scene=DinoEntity.get_entity_scene(DinoEntityIds.PLAYERSPAWNPOINT)},
 
 		# bosses
-		"Boss": {scene=load("res://src/dino/enemies/bosses/Monstroar.tscn")},
-		"Monstroar": {scene=load("res://src/dino/enemies/bosses/Monstroar.tscn")},
-		"Beefstronaut": {scene=load("res://src/dino/enemies/bosses/Beefstronaut.tscn")},
+		"Boss": {scene=DinoEnemy.get_enemy_scene(EnemyIds.BEEFSTRONAUT)},
+		"Monstroar": {scene=DinoEnemy.get_enemy_scene(EnemyIds.MONSTROAR)},
+		"Beefstronaut": {scene=DinoEnemy.get_enemy_scene(EnemyIds.BEEFSTRONAUT)},
 
 		# enemies
-		"Blob": {scene=load("res://src/dino/enemies/blobs/Blob.tscn")},
-		"Enemy": {scene=load("res://src/dino/enemies/enemyRobots/EnemyRobot.tscn")},
+		"Blob": {scene=DinoEnemy.get_enemy_scene(EnemyIds.BLOB)},
+		"Enemy": {scene=DinoEnemy.get_enemy_scene(EnemyIds.ENEMYROBOT)},
 
 		# pickups
-		"Leaf": {scene=load("res://src/dino/entities/leaves/Leaf.tscn")},
+		"Leaf": {scene=DinoEntity.get_entity_scene(DinoEntityIds.LEAF)},
 
 		# entities
-		"Candle": {scene=load("res://src/dino/entities/checkpoints/Candle.tscn")},
-		"CookingPot": {scene=load("res://src/dino/entities/cookingPot/CookingPot.tscn"),
+		"Candle": {scene=DinoEntity.get_entity_scene(DinoEntityIds.CANDLE)},
+		"CookingPot": {scene=DinoEntity.get_entity_scene(DinoEntityIds.COOKINGPOT),
 			setup=func(p): p.position += Vector2(opts.tile_size/2.0, opts.tile_size)
 			},
-		"Void": {scene=load("res://src/dino/entities/void/DeliveryZone.tscn")},
-		"Target": {scene=load("res://src/dino/entities/targets/Target.tscn"),
+		"Void": {scene=DinoEntity.get_entity_scene(DinoEntityIds.VOID),},
+		"Target": {scene=DinoEntity.get_entity_scene(DinoEntityIds.TARGET),
 			setup=func(t):
 			t.position += Vector2.RIGHT * opts.tile_size / 2.0
 			t.position += Vector2.DOWN * opts.tile_size / 2.0

@@ -1482,6 +1482,27 @@
 						"value": "res://src/dino/entities/PlayerSpawnPoint.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "159",
+				"_index": 0,
+				"_name": "SpawnPoint",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Spawn Point"
+					},
+					"label": {
+						"type": "string",
+						"value": "SpawnPoint"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/SpawnPoint.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1748,7 +1769,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 158
+			"default": 159
 		}
 	}
 }

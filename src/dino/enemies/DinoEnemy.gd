@@ -32,3 +32,6 @@ func data():
 
 static func all_enemies():
 	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOENEMY))
+
+static func get_enemy_scene(ent_id):
+	return Pandora.get_entity(ent_id).get_scene()
