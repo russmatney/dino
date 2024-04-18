@@ -588,6 +588,7 @@ func _initialize():
 		quit(CLIRunner.RETURN_ERROR_GODOT_VERSION_NOT_SUPPORTED)
 		return
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MINIMIZED)
+	DisplayServer.window_set_title("GDUnit")
 	_cli_runner = CLIRunner.new()
 	root.add_child(_cli_runner)
 
