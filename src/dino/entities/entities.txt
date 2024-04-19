@@ -18,6 +18,7 @@ t = TreasureBox
 L = LogBench
 S = SnowBench
 V = CaveBench
+x = Tile
 
 ==============
 ENTITIES

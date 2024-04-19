@@ -10,6 +10,7 @@ r = Robot
 M = Monstroar
 w = Crawly
 s = Soldier
+x = Tile
 
 ==============
 ENTITIES
