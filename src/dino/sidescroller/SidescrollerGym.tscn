@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbgwlri2j185m"]
+[gd_scene load_steps=14 format=3 uid="uid://cbgwlri2j185m"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_dx70q"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_s4f24"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/core/reptile/tilemaps/SpikeTiles8.tscn" id="7_im70c"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_j1nmu"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="9_w7l3g"]
-[ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/dino/enemies/goomba/Goomba.tscn" id="10_08ats"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="11_begqr"]
+[ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn" id="12_dy7el"]
 
 [sub_resource type="Resource" id="Resource_0jk55"]
 script = ExtResource("2_s4f24")
@@ -53,5 +54,15 @@ script = ExtResource("8_j1nmu")
 position = Vector2(-129, -23)
 bump_damage = null
 
-[node name="Goomba" parent="." instance=ExtResource("10_08ats")]
-position = Vector2(85, -52)
+[node name="Blob" parent="." instance=ExtResource("11_begqr")]
+position = Vector2(-302, -79)
+
+[node name="ShootyCrawly" parent="." instance=ExtResource("12_dy7el")]
+position = Vector2(-173, -4)
+
+[node name="ShootyCrawly2" parent="." instance=ExtResource("12_dy7el")]
+position = Vector2(-305, -103)
+
+[node name="ShootyCrawly3" parent="." instance=ExtResource("12_dy7el")]
+position = Vector2(-203, 52)
+rotation = -3.13131

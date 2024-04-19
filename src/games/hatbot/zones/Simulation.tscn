@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="7_fdlq5"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="8_u6t8r"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn" id="9_wn65p"]
-[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/sidescroller/powerups/SSPowerup.tscn" id="11_4s4lm"]
+[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/pickups/SSPowerup.tscn" id="11_4s4lm"]
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/dino/enemies/bosses/Beefstronaut.tscn" id="11_v6sjm"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="12_ecmpw"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/dino/sidescroller/boss/WarpSpot.tscn" id="12_m4nn0"]

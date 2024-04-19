@@ -46,6 +46,7 @@ position = Vector2(-5, 2)
 target_position = Vector2(0, 12)
 
 [node name="SSEnemyMachine" parent="." instance=ExtResource("4_ft7tc")]
+initial_state = NodePath("Idle")
 
 [node name="LineOfSight" type="RayCast2D" parent="." groups=["enemies"]]
 target_position = Vector2(0, -100)
@@ -57,6 +58,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_lfa7i")
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = 16.0
 offset_right = 40.0

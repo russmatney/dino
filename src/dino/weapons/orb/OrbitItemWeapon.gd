@@ -62,7 +62,7 @@ var tossing = false
 var spiking = false
 var cooldown = 0.2
 
-@onready var tossed_item_scene = preload("res://src/dino/enemies/blobs/TossedItem.tscn")
+@onready var tossed_item_scene = preload("res://src/dino/pickups/TossedItem.tscn")
 var toss_impulse = 300
 var knockback = 1
 

@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="7_yfbgo"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="8_j17mi"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn" id="9_8m6c5"]
-[ext_resource type="PackedScene" uid="uid://buqtf45kl281u" path="res://src/dino/enemies/goomba/Goomba.tscn" id="10_sdrhs"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="11_7pvm7"]
 [ext_resource type="PackedScene" path="res://src/games/shirt/entities/Coin.tscn" id="12_xkhi8"]
 [ext_resource type="PackedScene" path="res://src/games/hatbot/CoinDoorQuest.tscn" id="13_0bnqt"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="13_x6pc7"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/dino/sidescroller/boss/WarpSpot.tscn" id="16_qc2ns"]
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/dino/enemies/bosses/Beefstronaut.tscn" id="17_d3lge"]
 [ext_resource type="PackedScene" path="res://src/games/hatbot/BossDefeatQuest.tscn" id="17_yxlqf"]
@@ -61,8 +61,6 @@ layer_0/tile_data = PackedInt32Array(458759, 196609, 4, 393223, 196609, 3, 32768
 layer_0/tile_data = PackedInt32Array(327682, 131073, 4, 262146, 131073, 3, 196610, 393217, 4, 131074, 196609, 2, 327681, 131073, 4, 262145, 131073, 3, 196609, 131073, 3, 131073, 131073, 2, 327680, 131073, 4, 262144, 131073, 3, 196608, 131073, 3, 131072, 131073, 2, 393215, 131073, 4, 327679, 131073, 3, 262143, 131073, 3, 196607, 131073, 2, 393214, 131073, 4, 327678, 131073, 3, 262142, 131073, 3, 196606, 131073, 2, 393213, 131073, 4, 327677, 131073, 3, 262141, 458753, 4, 196605, 65537, 2, 196612, 196609, 2, 196611, 131073, 2, 262140, 131073, 2, 262139, 65537, 2, 327685, 196609, 4, 262149, 196609, 2, 327684, 131073, 4, 262148, 393217, 4, 327683, 131073, 4, 262147, 131073, 3, 393212, 131073, 4, 327676, 131073, 3, 393211, 131073, 4, 327675, 458753, 4, 393210, 65537, 4, 327674, 65537, 2, -262144, 196609, 4, -196609, 65537, 4, -327679, 196609, 4, -327680, 393217, 3, -262145, 458753, 3, -262146, 65537, 4, -393213, 196609, 5, -393214, 131073, 5, -393215, 393217, 2, -393216, 131073, 2, -327681, 131073, 2, -327682, 458753, 2, -327683, 131073, 5, -327684, 65537, 5)
 
 [node name="ToLandingSite" parent="ToLandingSite" instance=ExtResource("7_yfbgo")]
-destination_zone_name = "TheLandingSite"
-destination_travel_point_path = "./ToVolcano/ToVolcano"
 
 [node name="DoubleJumpCoinRoom" type="Node2D" parent="." groups=["metro_rooms"]]
 position = Vector2(384, -192)
@@ -85,12 +83,6 @@ position = Vector2(176, 16)
 
 [node name="ShootyCrawly4" parent="DoubleJumpCoinRoom" instance=ExtResource("9_8m6c5")]
 position = Vector2(0, 24)
-
-[node name="Goomba" parent="DoubleJumpCoinRoom" instance=ExtResource("10_sdrhs")]
-position = Vector2(146, -59)
-
-[node name="Goomba2" parent="DoubleJumpCoinRoom" instance=ExtResource("10_sdrhs")]
-position = Vector2(26, -43)
 
 [node name="Door" parent="DoubleJumpCoinRoom" instance=ExtResource("11_7pvm7")]
 position = Vector2(240, 0)
@@ -142,6 +134,9 @@ position = Vector2(84, 12)
 
 [node name="CoinDoorQuest" parent="DoubleJumpCoinRoom" instance=ExtResource("13_0bnqt")]
 
+[node name="Blob" parent="DoubleJumpCoinRoom" instance=ExtResource("13_x6pc7")]
+position = Vector2(28, -45)
+
 [node name="VolcanoClimb" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("4_8m6jk")
 
@@ -157,8 +152,8 @@ position = Vector2(232, -104)
 [node name="ShootyCrawly3" parent="VolcanoClimb" instance=ExtResource("9_8m6c5")]
 position = Vector2(152, -130)
 
-[node name="Goomba" parent="VolcanoClimb" instance=ExtResource("10_sdrhs")]
-position = Vector2(160, -176)
+[node name="Blob" parent="VolcanoClimb" instance=ExtResource("13_x6pc7")]
+position = Vector2(145, -173)
 
 [node name="VolcanoEpicClimb" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("4_8m6jk")

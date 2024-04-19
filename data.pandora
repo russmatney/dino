@@ -1041,31 +1041,6 @@
 			{
 				"_category_id": "117",
 				"_icon_color": "ffffff00",
-				"_id": "124",
-				"_index": 0,
-				"_name": "Goomba",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Goomba"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
-					},
-					"label": {
-						"type": "string",
-						"value": "Goomba"
-					},
-					"scene": {
-						"type": "resource",
-						"value": "res://src/dino/enemies/goomba/Goomba.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "117",
-				"_icon_color": "ffffff00",
 				"_id": "125",
 				"_index": 0,
 				"_name": "ShootyCrawly",
