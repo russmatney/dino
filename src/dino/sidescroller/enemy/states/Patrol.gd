@@ -3,10 +3,13 @@ extends State
 ## properties ###################################
 
 func can_bump():
-	return false
+	return true
 
 func can_attack():
-	return false
+	return true
+
+func can_hop():
+	return true
 
 ## vars ###################################
 

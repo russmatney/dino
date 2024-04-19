@@ -85,8 +85,7 @@ static var all_constraints = [
 	HAS_BEEFSTRONAUT,
 
 	HAS_BLOB,
-	HAS_ENEMY_ROBOT,
-	HAS_GLOWMBA,
+	HAS_ROBOT,
 	HAS_CRAWLY,
 	HAS_SOLDIER,
 
@@ -263,8 +262,7 @@ static func get_constraint_data(cons_key, opts={}):
 		HAS_MONSTROAR: return has_enemy(EnemyIds.MONSTROAR, opts)
 		HAS_BEEFSTRONAUT: return has_enemy(EnemyIds.BEEFSTRONAUT, opts)
 		HAS_BLOB: return has_enemy(EnemyIds.BLOB, opts)
-		HAS_ENEMY_ROBOT: return has_enemy(EnemyIds.ENEMYROBOT, opts)
-		HAS_GLOWMBA: return has_enemy(EnemyIds.GLOWMBA, opts)
+		HAS_ROBOT: return has_enemy(EnemyIds.ROBOT, opts)
 		HAS_CRAWLY: return has_enemy(EnemyIds.SHOOTYCRAWLY, opts)
 		HAS_SOLDIER: return has_enemy(EnemyIds.SOLDIER, opts)
 
@@ -432,8 +430,7 @@ const HAS_MONSTROAR = "has_monstroar"
 const HAS_BEEFSTRONAUT = "has_beefstronaut"
 
 const HAS_BLOB = "has_blob"
-const HAS_ENEMY_ROBOT = "has_enemy_robot"
-const HAS_GLOWMBA = "has_glowmba"
+const HAS_ROBOT = "has_robot"
 const HAS_CRAWLY = "has_crawly"
 const HAS_SOLDIER = "has_solider"
 

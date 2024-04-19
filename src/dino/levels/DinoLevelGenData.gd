@@ -16,7 +16,7 @@ static func label_to_entity(opts):
 
 		# enemies
 		"Blob": {scene=DinoEnemy.get_enemy_scene(EnemyIds.BLOB)},
-		"Enemy": {scene=DinoEnemy.get_enemy_scene(EnemyIds.ENEMYROBOT)},
+		"Enemy": {scene=DinoEnemy.get_enemy_scene(EnemyIds.ROBOT)},
 
 		# pickups
 		"Leaf": {scene=DinoEntity.get_entity_scene(DinoEntityIds.LEAF)},

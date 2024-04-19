@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/games/ghosts/world/platforms/IndoorTiles.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/games/ghosts/world/Door.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/games/ghosts/world/lights/HangingLight.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/dino/enemies/glowmba/Glowmba.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_4fta3"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="8_jyhcc"]
 [ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/games/ghosts/world/platforms/GhostBlock.tscn" id="10"]
 
@@ -51,27 +51,6 @@ position = Vector2(2016, 312)
 
 [node name="HangingLight6" parent="." instance=ExtResource("6")]
 position = Vector2(464, 896)
-
-[node name="Glowmba" parent="." instance=ExtResource("7")]
-position = Vector2(1113, 539)
-
-[node name="Glowmba2" parent="." instance=ExtResource("7")]
-position = Vector2(1738, 893)
-
-[node name="Glowmba3" parent="." instance=ExtResource("7")]
-position = Vector2(1092, 1333)
-
-[node name="Glowmba4" parent="." instance=ExtResource("7")]
-position = Vector2(3071, 1454)
-
-[node name="Glowmba5" parent="." instance=ExtResource("7")]
-position = Vector2(2978, 1440)
-
-[node name="Glowmba6" parent="." instance=ExtResource("7")]
-position = Vector2(3265, 1463)
-
-[node name="Glowmba7" parent="." instance=ExtResource("7")]
-position = Vector2(1439, 1823)
 
 [node name="GhostBlock" parent="." instance=ExtResource("10")]
 position = Vector2(544, 352)
@@ -141,3 +120,30 @@ position = Vector2(544, 1632)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("8_4fta3")]
 position = Vector2(2336, 1311)
+
+[node name="Blob" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(1475, 855)
+
+[node name="Blob2" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(2192, 1896)
+
+[node name="Blob6" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(2789, 1420)
+
+[node name="Blob7" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(1969, 1293)
+
+[node name="Blob8" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(1151, 442)
+
+[node name="Blob9" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(1821, 503)
+
+[node name="Blob3" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(1045, 1867)
+
+[node name="Blob4" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(1241, 1302)
+
+[node name="Blob5" parent="." instance=ExtResource("8_jyhcc")]
+position = Vector2(3108, 1496)

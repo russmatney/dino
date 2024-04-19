@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://djculbglj2yia"]
+[gd_scene load_steps=36 format=3 uid="uid://djculbglj2yia"]
 
 [ext_resource type="Script" path="res://src/dino/sidescroller/player/SSPlayer.gd" id="1_01eu8"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
@@ -230,6 +230,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48he4"]
 size = Vector2(96, 96)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3mi8x"]
+radius = 8.0
+height = 28.0
+
 [node name="SSHatBot" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3129
@@ -245,6 +249,7 @@ position = Vector2(0, -16)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ejngb")
 animation = &"idle"
+flip_h = true
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -305,3 +310,11 @@ shape = SubResource("RectangleShape2D_48he4")
 [node name="QuickSelect" parent="." instance=ExtResource("10_e40tc")]
 
 [node name="PlayerCamera" parent="." instance=ExtResource("11_xlgae")]
+
+[node name="Bumpbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bumpbox"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_3mi8x")

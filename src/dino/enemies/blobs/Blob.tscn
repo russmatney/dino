@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dah35ils4effb"]
+[gd_scene load_steps=25 format=3 uid="uid://dah35ils4effb"]
 
 [ext_resource type="Script" path="res://src/dino/enemies/blobs/Blob.gd" id="1_iayeh"]
 [ext_resource type="Texture2D" uid="uid://d04wj7j68qxuq" path="res://src/dino/enemies/blobs/SPIKE_blob.png" id="2_1fu8s"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_b6fg4"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_udret"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="6_fsp6w"]
+[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="7_3c06x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mmx1"]
 size = Vector2(24, 26)
@@ -170,12 +171,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_436mn"]
 radius = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jiqhh"]
+radius = 74.2428
+
 [node name="Blob" type="CharacterBody2D" groups=["enemies", "orb_sources"]]
 collision_layer = 8
 collision_mask = 2049
 script = ExtResource("1_iayeh")
 should_crawl_on_walls = true
+should_see_player = true
+should_kick_player = null
 should_hurt_to_touch = true
+should_hop = null
+show_debug = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -219,3 +227,25 @@ text = "state"
 horizontal_alignment = 1
 
 [node name="SkullParticles" parent="." instance=ExtResource("6_fsp6w")]
+
+[node name="GlowLight" type="PointLight2D" parent="."]
+texture = ExtResource("7_3c06x")
+
+[node name="StunnedLight" type="PointLight2D" parent="."]
+position = Vector2(6.67572e-06, 0)
+scale = Vector2(0.148438, 0.136719)
+enabled = false
+texture = ExtResource("7_3c06x")
+
+[node name="DeadLight" type="PointLight2D" parent="."]
+position = Vector2(-9.53674e-07, -4.76837e-07)
+scale = Vector2(0.0898438, 0.0859375)
+enabled = false
+texture = ExtResource("7_3c06x")
+
+[node name="Hopbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hopbox"]
+shape = SubResource("CircleShape2D_jiqhh")

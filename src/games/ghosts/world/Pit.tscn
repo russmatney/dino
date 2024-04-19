@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://drqyknqja7bhd"]
 
 [ext_resource type="PackedScene" path="res://src/games/ghosts/world/Door.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/dino/enemies/glowmba/Glowmba.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/games/ghosts/world/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/games/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/games/ghosts/world/platforms/IndoorTiles.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_i4ttr"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/games/ghosts/world/platforms/GhostBlock.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="9_qfk3c"]
 [ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="10"]
 
 [node name="Pit" type="Node2D" groups=["ghost_rooms"]]
@@ -73,21 +73,6 @@ position = Vector2(-624, 592)
 [node name="HangingLight11" parent="." instance=ExtResource("4")]
 position = Vector2(-336, 720)
 
-[node name="Glowmba" parent="." instance=ExtResource("2")]
-position = Vector2(153, 724)
-
-[node name="Glowmba4" parent="." instance=ExtResource("2")]
-position = Vector2(-900, 728)
-
-[node name="Glowmba5" parent="." instance=ExtResource("2")]
-position = Vector2(-31, 986)
-
-[node name="Glowmba2" parent="." instance=ExtResource("2")]
-position = Vector2(-841, 428)
-
-[node name="Glowmba3" parent="." instance=ExtResource("2")]
-position = Vector2(39, 475)
-
 [node name="GhostBlock" parent="." instance=ExtResource("9")]
 position = Vector2(-544, 800)
 alpha_threshold = 0.3
@@ -120,3 +105,18 @@ offset = 1.0
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("8_i4ttr")]
 position = Vector2(-672, 856)
+
+[node name="Blob" parent="." instance=ExtResource("9_qfk3c")]
+position = Vector2(230, 727)
+
+[node name="Blob2" parent="." instance=ExtResource("9_qfk3c")]
+position = Vector2(-200, 996)
+
+[node name="Blob3" parent="." instance=ExtResource("9_qfk3c")]
+position = Vector2(-789, 421)
+
+[node name="Blob4" parent="." instance=ExtResource("9_qfk3c")]
+position = Vector2(-21, 440)
+
+[node name="Blob5" parent="." instance=ExtResource("9_qfk3c")]
+position = Vector2(-866, 745)

@@ -8,6 +8,9 @@ func can_bump():
 func can_attack():
 	return true
 
+func can_hop():
+	return true
+
 ## vars ###################################
 
 var directions = [Vector2.LEFT, Vector2.RIGHT]

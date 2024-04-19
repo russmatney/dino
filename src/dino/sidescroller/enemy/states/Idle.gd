@@ -8,6 +8,9 @@ func can_bump():
 func can_attack():
 	return true
 
+func can_hop():
+	return true
+
 func can_be_initial_state():
 	return true
 

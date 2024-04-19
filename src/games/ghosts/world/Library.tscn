@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/games/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/games/ghosts/world/platforms/GhostBlock.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/games/ghosts/world/lights/HangingLight.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://7svah6kabcqn" path="res://src/dino/enemies/glowmba/Glowmba.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_l7y51"]
 [ext_resource type="PackedScene" path="res://src/games/ghosts/world/Door.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="9_k8xne"]
 [ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="10"]
 
 [node name="Library" type="Node2D" groups=["ghost_rooms"]]
@@ -80,51 +80,6 @@ position = Vector2(164, 125)
 [node name="Godost3" parent="." instance=ExtResource("3")]
 position = Vector2(-69, 275)
 
-[node name="Glowmba" parent="." instance=ExtResource("5")]
-position = Vector2(-331, 33)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba3" parent="." instance=ExtResource("5")]
-position = Vector2(-637, 290)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba4" parent="." instance=ExtResource("5")]
-position = Vector2(-390, 977)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba5" parent="." instance=ExtResource("5")]
-position = Vector2(420, 891)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba6" parent="." instance=ExtResource("5")]
-position = Vector2(1122, 780)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba7" parent="." instance=ExtResource("5")]
-position = Vector2(631, -370)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba8" parent="." instance=ExtResource("5")]
-position = Vector2(-799, -657)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba9" parent="." instance=ExtResource("5")]
-position = Vector2(-384, -637)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
-[node name="Glowmba10" parent="." instance=ExtResource("5")]
-position = Vector2(1206, -438)
-velocity = Vector2(100, 0)
-initial_dir = 1
-
 [node name="GhostBlock12" parent="." instance=ExtResource("3")]
 position = Vector2(-287, -91)
 
@@ -154,3 +109,21 @@ position = Vector2(-666, -781)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("8_l7y51")]
 position = Vector2(320, 232)
+
+[node name="Blob" parent="." instance=ExtResource("9_k8xne")]
+position = Vector2(1095, 629)
+
+[node name="Blob2" parent="." instance=ExtResource("9_k8xne")]
+position = Vector2(943, 56)
+
+[node name="Blob5" parent="." instance=ExtResource("9_k8xne")]
+position = Vector2(1212, -529)
+
+[node name="Blob6" parent="." instance=ExtResource("9_k8xne")]
+position = Vector2(-151, -772)
+
+[node name="Blob3" parent="." instance=ExtResource("9_k8xne")]
+position = Vector2(-323, 30)
+
+[node name="Blob4" parent="." instance=ExtResource("9_k8xne")]
+position = Vector2(242, 885)

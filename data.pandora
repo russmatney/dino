@@ -997,44 +997,19 @@
 				"_icon_color": "ffffff00",
 				"_id": "122",
 				"_index": 0,
-				"_name": "EnemyRobot",
+				"_name": "Robot",
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Enemy Robot"
+						"value": "Robot"
 					},
 					"label": {
 						"type": "string",
-						"value": "EnemyRobot"
+						"value": "Robot"
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://src/dino/enemies/enemyRobots/EnemyRobot.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "117",
-				"_icon_color": "ffffff00",
-				"_id": "123",
-				"_index": 0,
-				"_name": "Glowmba",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Glowmba"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
-					},
-					"label": {
-						"type": "string",
-						"value": "Glowmba"
-					},
-					"scene": {
-						"type": "resource",
-						"value": "res://src/dino/enemies/glowmba/Glowmba.tscn"
+						"value": "res://src/dino/enemies/robots/Robot.tscn"
 					}
 				}
 			},

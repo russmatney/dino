@@ -31,6 +31,7 @@ func _get_configuration_warnings():
 @export var should_see_player = false
 @export var should_kick_player = false
 @export var should_hurt_to_touch = false
+@export var should_hop = false
 
 @export var show_debug = false
 
@@ -56,6 +57,8 @@ signal knocked_back(enemy)
 @onready var coll = $CollisionShape2D
 @onready var state_label = $StateLabel
 @onready var hitbox = $Hitbox
+
+var hopbox
 
 var notif_label
 var cam_pof
@@ -85,7 +88,12 @@ func _ready():
 			front_ray="FrontRay",
 			low_los="LowLineOfSight",
 			high_los="HighLineOfSight",
+			hopbox="Hopbox",
 			})
+
+		if hopbox:
+			hopbox.body_entered.connect(on_hopbox_entered)
+			hopbox.body_exited.connect(on_hopbox_exited)
 
 		if skull_particles:
 			skull_particles.set_emitting(false)
@@ -104,12 +112,11 @@ func _ready():
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	hitbox.body_exited.connect(_on_hitbox_body_exited)
 
-	knocked_back.connect(_on_knocked_back)
-
-	if show_debug:
-		state_label.set_visible(true)
-	else:
-		state_label.set_visible(false)
+	if state_label:
+		if show_debug:
+			state_label.set_visible(true)
+		else:
+			state_label.set_visible(false)
 
 ## physics process ####################################################
 
@@ -150,18 +157,8 @@ func _process(_delta):
 ## on transit ####################################################
 
 func _on_transit(label):
-	if state_label.visible:
+	if state_label and state_label.visible:
 		state_label.text = label
-
-## on knockback ####################################################
-
-func _on_knocked_back(_goomba):
-	if health <= 0:
-		anim.play("dead")
-		DJZ.play(DJZ.S.soldierdead)
-	else:
-		anim.play("dead")
-		DJZ.play(DJZ.S.soldierhit)
 
 ## hotel ####################################################
 
@@ -233,43 +230,7 @@ func orient_to_wall(side):
 		Vector2.RIGHT:
 			rotation_degrees = 90.0
 
-## health/hit #######################################################
-
-func take_hit(opts={}):
-	if is_dead:
-		return
-	var damage = opts.get("damage", 1)
-	var body = opts.get("body")
-	var direction = opts.get("direction")
-	if not direction and body:
-		if body.global_position.x < global_position.x:
-			direction = Vector2.LEFT
-		else:
-			direction = Vector2.RIGHT
-	else:
-		direction = Vector2.RIGHT
-
-	health -= damage
-	health = clamp(health, 0, health)
-	DJZ.play(DJZ.S.enemy_hit)
-	Hotel.check_in(self)
-	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
-
-## die ####################################################
-
-func die():
-	is_dead = true
-	died.emit(self)
-	Hotel.check_in(self)
-	Cam.screenshake(0.1)
-	DJZ.play(DJZ.S.soldierdead)
-	# DJZ.play(DJZ.S.enemy_dead)
-	if skull_particles:
-		skull_particles.set_emitting(true)
-
-	# TODO any drops?
-
-## hitbox entered #######################################################
+## hitbox #######################################################
 
 var hitbox_bodies = []
 
@@ -291,3 +252,58 @@ func _on_hitbox_body_entered(body):
 
 func _on_hitbox_body_exited(body):
 	hitbox_bodies.erase(body)
+
+## hopbox #######################################################
+
+var hopbox_bodies = []
+
+# player hurting another body by touching...
+func on_hopbox_entered(body):
+	if should_hop and not body.is_dead and machine.can_hop():
+		if not body in hopbox_bodies:
+			hopbox_bodies.append(body)
+			machine.transit("Jump")
+
+func on_hopbox_exited(body):
+	hopbox_bodies.erase(body)
+
+## health/hit #######################################################
+
+func take_hit(opts={}):
+	if is_dead:
+		return
+	var damage = opts.get("damage", 1)
+	var body = opts.get("body")
+	var direction = opts.get("direction")
+	if not direction and body:
+		if body.global_position.x < global_position.x:
+			direction = Vector2.LEFT
+		else:
+			direction = Vector2.RIGHT
+	else:
+		direction = Vector2.RIGHT
+
+	health -= damage
+	health = clamp(health, 0, health)
+	DJZ.play(DJZ.S.enemy_hit)
+	Hotel.check_in(self)
+
+	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
+
+## die ####################################################
+
+func die():
+	is_dead = true
+	died.emit(self)
+	Hotel.check_in(self)
+	Cam.screenshake(0.1)
+	DJZ.play(DJZ.S.soldierdead)
+	# DJZ.play(DJZ.S.enemy_dead)
+	if skull_particles:
+		skull_particles.set_emitting(true)
+
+	# TODO any drops?
+
+func stun():
+	machine.transit("Stunned")
+

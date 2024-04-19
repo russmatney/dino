@@ -6,9 +6,7 @@ LEGEND
 
 B = Beefstronaut
 b = Blob
-G = Goomba
-g = Glowmba
-r = EnemyRobot
+r = Robot
 M = Monstroar
 w = Crawly
 s = Soldier
@@ -47,25 +45,11 @@ name Beefstronaut
 ...
 xxx
 
-name EnemyRobot
+name Robot
 
 ...
 .r.
 ...
-xxx
-
-name Goomba
-
-...
-...
-.G.
-xxx
-
-name Glowmba
-
-...
-...
-.g.
 xxx
 
 name Monstroar

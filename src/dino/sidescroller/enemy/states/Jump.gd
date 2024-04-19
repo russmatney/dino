@@ -6,6 +6,9 @@ func can_bump():
 	return true
 
 func can_attack():
+	return true
+
+func can_hop():
 	return false
 
 ## enter ###################################

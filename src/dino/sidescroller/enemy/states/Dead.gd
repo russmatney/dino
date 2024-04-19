@@ -8,6 +8,9 @@ func can_bump():
 func can_attack():
 	return false
 
+func can_hop():
+	return false
+
 ## enter ###################################
 
 func enter(ctx={}):

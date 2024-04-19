@@ -11,6 +11,9 @@ func can_attack():
 func can_be_initial_state():
 	return true
 
+func can_hop():
+	return false
+
 ## vars ###################################
 
 var ttl

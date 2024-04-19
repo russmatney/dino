@@ -23,6 +23,7 @@ knockback_velocity_horizontal = 20.0
 dying_velocity = -400.0
 initial_health = 3
 should_see_player = true
+should_hop = null
 show_debug = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

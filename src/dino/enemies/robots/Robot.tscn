@@ -17,6 +17,7 @@ collision_layer = 8
 script = ExtResource("1_24k64")
 initial_health = 3
 should_see_player = true
+should_hop = null
 
 [node name="SSEnemyMachine" parent="." instance=ExtResource("2_h6m3o")]
 

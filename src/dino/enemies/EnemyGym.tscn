@@ -18,16 +18,19 @@ layer_0/tile_data = PackedInt32Array(786450, 131073, 4, 720914, 131073, 3, 65537
 position = Vector2(-46, -9)
 rotation = 3.14159
 should_kick_player = null
+should_hop = null
 show_debug = null
 
 [node name="ShootyCrawly2" parent="." instance=ExtResource("3_5ofkw")]
 position = Vector2(20, -1)
 should_kick_player = null
+should_hop = null
 show_debug = null
 
 [node name="Soldier" parent="." instance=ExtResource("4_lo5kx")]
 position = Vector2(125, 31)
 should_kick_player = null
+should_hop = null
 show_debug = null
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("6_4c0v0")]
@@ -36,6 +39,7 @@ position = Vector2(46, 43)
 [node name="Blob" parent="." instance=ExtResource("6_6xfql")]
 position = Vector2(-69, 58)
 should_kick_player = null
+should_hop = null
 show_debug = null
 
 [node name="Camera2D" type="Camera2D" parent="."]

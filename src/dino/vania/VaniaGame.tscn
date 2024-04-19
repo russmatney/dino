@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="14_b4ya7"]
-[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/enemyRobots/EnemyRobot.tscn" id="15_7bsuh"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="15_7bsuh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li3ee"]
 content_margin_left = 16.0

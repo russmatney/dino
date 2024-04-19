@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dcb8ffwd15pgn"
-path="res://.godot/imported/gloomba_sheet.png-7de486883c4960d233c1680c6f48dd6e.ctex"
+path="res://.godot/imported/gloomba_sheet.png-31ecb60bbe6f4bc2043eded415f45ca6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dino/enemies/glowmba/gloomba_sheet.png"
-dest_files=["res://.godot/imported/gloomba_sheet.png-7de486883c4960d233c1680c6f48dd6e.ctex"]
+source_file="res://src/dino/enemies/blobs/gloomba_sheet.png"
+dest_files=["res://.godot/imported/gloomba_sheet.png-31ecb60bbe6f4bc2043eded415f45ca6.ctex"]
 
 [params]
 

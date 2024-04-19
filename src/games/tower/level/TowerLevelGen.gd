@@ -25,7 +25,7 @@ func get_room_opts(opts):
 			},
 			label_to_entity={
 				"Player": {scene=DinoEntity.get_entity_scene(DinoEntityIds.PLAYERSPAWNPOINT)},
-				"Enemy": {scene=DinoEnemy.get_enemy_scene(EnemyIds.ENEMYROBOT)},
+				"Enemy": {scene=DinoEnemy.get_enemy_scene(EnemyIds.ROBOT)},
 				"Target": {scene=DinoEntity.get_entity_scene(DinoEntityIds.TARGET),
 					setup=func(t):
 					t.position += Vector2.RIGHT * opts.tile_size / 2.0

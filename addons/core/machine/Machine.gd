@@ -176,3 +176,9 @@ func should_ignore_hit() -> bool:
 	if state and not is_transitioning:
 		return state.should_ignore_hit()
 	return true
+
+# can hop
+func can_hop() -> bool:
+	if state and not is_transitioning:
+		return state.can_hop()
+	return false

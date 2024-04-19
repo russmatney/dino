@@ -8,6 +8,9 @@ func can_bump():
 func can_attack():
 	return false
 
+func can_hop():
+	return false
+
 ## enter ###################################
 
 func enter(ctx={}):
@@ -38,6 +41,7 @@ func physics_process(delta):
 	actor.move_and_slide()
 
 	if actor.is_on_floor() or "crawl_on_side" in actor:
+		# once we hit the floor, assess the damage
 		if actor.health <= 0:
 			transit("Dead")
 		else:

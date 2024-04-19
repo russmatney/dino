@@ -69,6 +69,10 @@ func can_attack() -> bool:
 func should_ignore_hit() -> bool:
 	return false
 
+# can hop based on various triggers
+func can_hop() -> bool:
+	return false
+
 ## common callbacks ################################################################
 
 # fired from actor.anim
