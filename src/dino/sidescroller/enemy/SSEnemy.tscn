@@ -175,6 +175,7 @@ collision_mask = 9
 script = ExtResource("1_rmcpi")
 bump_damage = null
 should_hurt_to_touch = true
+show_debug = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

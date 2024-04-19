@@ -11,7 +11,7 @@ func _get_configuration_warnings():
 			"idle", "run", "knocked_back", "dying", "dead",
 			# "laughing", "kick"
 			]}})
-	if can_kick:
+	if should_kick_player:
 		warns.append_array(U._config_warning(self, {expected_animations={"AnimatedSprite2D": ["kick"]}}))
 	return warns
 
@@ -29,8 +29,10 @@ func _get_configuration_warnings():
 
 @export var should_crawl_on_walls = false
 @export var should_see_player = false
-@export var can_kick = false
+@export var should_kick_player = false
 @export var should_hurt_to_touch = false
+
+@export var show_debug = false
 
 
 var health
@@ -67,6 +69,9 @@ var high_los
 
 var line_of_sights = []
 
+var max_y: float = 5000.0
+
+
 ## ready ###########################################################
 
 func _ready():
@@ -90,6 +95,10 @@ func _ready():
 
 		machine.transitioned.connect(_on_transit)
 
+		Cam.add_offscreen_indicator(self, {
+			# could instead depend on a fn like this directly on the passed node
+			is_active=func(): return not is_dead})
+
 	Hotel.register(self)
 
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
@@ -97,7 +106,10 @@ func _ready():
 
 	knocked_back.connect(_on_knocked_back)
 
-	state_label.set_visible(false)
+	if show_debug:
+		state_label.set_visible(true)
+	else:
+		state_label.set_visible(false)
 
 ## physics process ####################################################
 
@@ -112,35 +124,34 @@ func _physics_process(_delta):
 		if crawl_on_side != null:
 			orient_to_wall(crawl_on_side)
 
-	# TODO restore!
-	# var player = P.get_player()
-	# if player and is_instance_valid(player) and should_see_player and los:
-	# 	# var player_pos = player.global_position
-	# 	# los.target_position = to_local(player_pos)
+## process ####################################################
 
-	# 	if los.is_colliding():
-	# 		var body = los.get_collider()
-	# 		if body.is_in_group("player"):
-	# 			can_see_player = true
-	# 		else:
-	# 			can_see_player = false
+func _process(_delta):
+	if get_global_position().y >= max_y and not is_dead:
+		die()
+
+	# is this expensive? (could limit with some min player/enemy distance)
+	var player = Dino.current_player_node()
+	if player and is_instance_valid(player) and should_see_player and los:
+		var player_pos = player.global_position
+		los.target_position = to_local(player_pos)
+
+		if los.is_colliding():
+			var body = los.get_collider()
+			if body.is_in_group("player"):
+				can_see_player = true
+
+				# TODO should fire at player?
+
+			else:
+				can_see_player = false
+
 
 ## on transit ####################################################
 
 func _on_transit(label):
 	if state_label.visible:
 		state_label.text = label
-
-## on death ####################################################
-
-func die():
-	is_dead = true
-	died.emit(self)
-	Hotel.check_in(self)
-	Cam.screenshake(0.1)
-	DJZ.play(DJZ.S.soldierdead)
-	if skull_particles:
-		skull_particles.set_emitting(true)
 
 ## on knockback ####################################################
 
@@ -240,8 +251,23 @@ func take_hit(opts={}):
 
 	health -= damage
 	health = clamp(health, 0, health)
+	DJZ.play(DJZ.S.enemy_hit)
 	Hotel.check_in(self)
 	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
+
+## die ####################################################
+
+func die():
+	is_dead = true
+	died.emit(self)
+	Hotel.check_in(self)
+	Cam.screenshake(0.1)
+	DJZ.play(DJZ.S.soldierdead)
+	# DJZ.play(DJZ.S.enemy_dead)
+	if skull_particles:
+		skull_particles.set_emitting(true)
+
+	# TODO any drops?
 
 ## hitbox entered #######################################################
 
@@ -259,7 +285,7 @@ func _on_hitbox_body_entered(body):
 
 		# TODO kick is specific, do we want a generic attack?
 		# should probably do this from each state's physics_process()
-		if can_kick and machine.can_attack():
+		if should_kick_player and machine.can_attack():
 			# this body isn't used at the moment
 			machine.transit("Kick", {body=body})
 

@@ -58,7 +58,7 @@ func _on_bullet_dying(_bullet):
 
 ## fire ####################################################
 
-var bullet_scene = preload("res://src/dino/sidescroller/enemy/Spell.tscn")
+var bullet_scene = preload("res://src/dino/weapons/Spell.tscn")
 var bullet_impulse = 100
 var bullet_knockback = 0
 
@@ -78,15 +78,34 @@ func fire():
 	U.add_child_to_level(self, bullet)
 
 	# rotate and impulse
-	var to_player = actor.to_global(actor.los.target_position) - actor.global_position
-	to_player = to_player.normalized()
-	var impulse = to_player * bullet_impulse
-	var rot = to_player.angle()
+	var to_target = actor.to_global(actor.los.target_position) - actor.global_position
+	to_target = to_target.normalized()
+	var impulse = to_target * bullet_impulse
+	var rot = to_target.angle()
 	bullet.fire(impulse, rot)
 
 	# push back when firing
 	var pos = actor.get_global_position()
-	pos += -1 * to_player * bullet_knockback
+	pos += -1 * to_target * bullet_knockback
 	actor.set_global_position(pos)
 
 	return bullet
+
+
+# @onready var arrow_scene = preload("res://src/dino/weapons/Arrow.tscn")
+# var arrow_impulse = 800
+# var fire_rate = 0.2
+# var arrow_knockback = 2
+# func fire_at_player():
+# 	if player and not player.is_dead and is_instance_valid(player):
+# 		var arrow = arrow_scene.instantiate()
+# 		arrow.position = arrow_position.get_global_position()
+# 		arrow.add_collision_exception_with(self)
+# 		U.add_child_to_level(self, arrow)
+
+# 		var angle_to_player = arrow.position.direction_to(player.global_position + Vector2(0, -15))
+
+# 		arrow.rotation = angle_to_player.angle()
+# 		arrow.apply_impulse(angle_to_player * arrow_impulse, Vector2.ZERO)
+
+# 		DJZ.play(DJZ.S.fire)

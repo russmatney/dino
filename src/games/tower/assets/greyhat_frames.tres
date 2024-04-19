@@ -161,7 +161,7 @@ animations = [{
 "texture": SubResource("17")
 }],
 "loop": false,
-"name": &"knockback",
+"name": &"knocked_back",
 "speed": 5.0
 }, {
 "frames": [{
