@@ -35,6 +35,7 @@ func _get_configuration_warnings():
 
 @export var show_debug = false
 
+@export var drops: Array[DropData]
 
 var health
 var is_dead
@@ -43,6 +44,8 @@ var facing_vector = Vector2.RIGHT
 var move_vector
 
 var crawl_on_side
+
+var did_drop_drops = false
 
 ## signals ###########################################################
 
@@ -302,8 +305,14 @@ func die():
 	if skull_particles:
 		skull_particles.set_emitting(true)
 
-	# TODO any drops?
+	if not did_drop_drops:
+		did_drop_drops = true
+
+		await get_tree().create_timer(0.3).timeout
+		if not drops.is_empty():
+			for drop in drops:
+				DropData.add_drop(self, drop)
+
 
 func stun():
 	machine.transit("Stunned")
-

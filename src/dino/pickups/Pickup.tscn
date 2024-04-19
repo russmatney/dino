@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dby2hvvl027v3"]
 
-[ext_resource type="Script" path="res://src/dino/pickups/BlobPickup.gd" id="1_ny3tf"]
-[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://addons/core/assets/lights/light64px3.png" id="2_jvhy6"]
+[ext_resource type="Script" path="res://src/dino/pickups/Pickup.gd" id="1_j5cio"]
+[ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://addons/core/assets/lights/light64px3.png" id="2_3sqbg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecqju"]
 
-[node name="BlobPickup" type="Node2D"]
-position = Vector2(0, -31.8989)
-script = ExtResource("1_ny3tf")
+[node name="Pickup" type="Node2D"]
+position = Vector2(0, -36.4721)
+script = ExtResource("1_j5cio")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -19,4 +19,4 @@ shape = SubResource("RectangleShape2D_ecqju")
 [node name="Light" type="PointLight2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("2_jvhy6")
+texture = ExtResource("2_3sqbg")

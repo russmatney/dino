@@ -1,10 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://b462pe2po5a1c"]
+[gd_scene load_steps=11 format=3 uid="uid://b462pe2po5a1c"]
 
-[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/games/tower/assets/greyhat_frames.tres" id="1"]
-[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/SSEnemy.gd" id="1_24k64"]
-[ext_resource type="PackedScene" uid="uid://43qn8g87wt2p" path="res://src/dino/sidescroller/enemy/SSEnemyMachine.tscn" id="2_h6m3o"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_iisck"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_khgdc"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/SSEnemy.gd" id="1_4rapa"]
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_gx730"]
+[ext_resource type="PackedScene" uid="uid://43qn8g87wt2p" path="res://src/dino/sidescroller/enemy/SSEnemyMachine.tscn" id="2_wws8b"]
+[ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/games/tower/assets/greyhat_frames.tres" id="3_03knw"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_lr35c"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_g14kl"]
+
+[sub_resource type="Resource" id="Resource_1j1va"]
+script = ExtResource("2_gx730")
+type = 0
+
+[sub_resource type="Resource" id="Resource_euj2p"]
+script = ExtResource("2_gx730")
+type = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2y1f"]
 size = Vector2(16, 30)
@@ -14,12 +23,13 @@ size = Vector2(20, 37)
 
 [node name="EnemyRobot" type="CharacterBody2D" groups=["enemies", "enemy_robots"]]
 collision_layer = 8
-script = ExtResource("1_24k64")
+script = ExtResource("1_4rapa")
 initial_health = 3
 should_see_player = true
 should_hop = null
+drops = Array[ExtResource("2_gx730")]([SubResource("Resource_1j1va"), SubResource("Resource_euj2p")])
 
-[node name="SSEnemyMachine" parent="." instance=ExtResource("2_h6m3o")]
+[node name="SSEnemyMachine" parent="." instance=ExtResource("2_wws8b")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -27,7 +37,7 @@ shape = SubResource("RectangleShape2D_j2y1f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
-sprite_frames = ExtResource("1")
+sprite_frames = ExtResource("3_03knw")
 animation = &"idle"
 autoplay = "idle"
 
@@ -56,7 +66,7 @@ position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_wqtyu")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-texture = ExtResource("4_iisck")
+texture = ExtResource("4_lr35c")
 
 [node name="StateLabel" type="Label" parent="."]
 visible = false
@@ -64,6 +74,6 @@ offset_left = -40.0
 offset_top = 21.0
 offset_right = 40.0
 offset_bottom = 42.0
-theme_override_fonts/font = ExtResource("5_khgdc")
+theme_override_fonts/font = ExtResource("5_g14kl")
 text = "state"
 horizontal_alignment = 1

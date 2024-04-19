@@ -62,9 +62,10 @@ func start_cooking(ingredient_data):
 	cooking_time -= 1
 	cooking_time = clamp(cooking_time, min_cooking_time, cook_duration)
 
-var drop_pickup_scene = preload("res://src/dino/pickups/BlobPickup.tscn")
+var drop_pickup_scene = preload("res://src/dino/pickups/Pickup.tscn")
 var drop_ingredient_type = SpikeData.Ingredient.RedBlob
 
+# TODO update!
 func finish_cooking():
 	anim.play("empty")
 	Log.pr("finished cooking", ingredients)

@@ -1,12 +1,19 @@
-[gd_scene load_steps=25 format=3 uid="uid://dah35ils4effb"]
+[gd_scene load_steps=28 format=3 uid="uid://dah35ils4effb"]
 
-[ext_resource type="Script" path="res://src/dino/enemies/blobs/Blob.gd" id="1_iayeh"]
+[ext_resource type="Script" path="res://src/dino/sidescroller/enemy/SSEnemy.gd" id="1_nugmv"]
 [ext_resource type="Texture2D" uid="uid://d04wj7j68qxuq" path="res://src/dino/enemies/blobs/SPIKE_blob.png" id="2_1fu8s"]
+[ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/entities/GreenBlobAnim.tscn" id="2_y4vpq"]
 [ext_resource type="PackedScene" uid="uid://43qn8g87wt2p" path="res://src/dino/sidescroller/enemy/SSEnemyMachine.tscn" id="3_g3gm0"]
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="3_r483q"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_b6fg4"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_udret"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="6_fsp6w"]
 [ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="7_3c06x"]
+
+[sub_resource type="Resource" id="Resource_eumek"]
+script = ExtResource("3_r483q")
+type = 1
+anim_scene = ExtResource("2_y4vpq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5mmx1"]
 size = Vector2(24, 26)
@@ -177,13 +184,8 @@ radius = 74.2428
 [node name="Blob" type="CharacterBody2D" groups=["enemies", "orb_sources"]]
 collision_layer = 8
 collision_mask = 2049
-script = ExtResource("1_iayeh")
-should_crawl_on_walls = true
-should_see_player = true
-should_kick_player = null
-should_hurt_to_touch = true
-should_hop = null
-show_debug = null
+script = ExtResource("1_nugmv")
+drops = Array[ExtResource("3_r483q")]([SubResource("Resource_eumek")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcbqs3wqdagpm"]
+[gd_scene load_steps=9 format=3 uid="uid://bcbqs3wqdagpm"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_fkg2u"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="2_cvsqa"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="6_4c0v0"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="6_6xfql"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_pxn0u"]
+[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="8_4i68s"]
 
 [node name="EnemyGym" type="Node"]
 script = ExtResource("1_fkg2u")
@@ -30,19 +31,17 @@ show_debug = null
 [node name="Soldier" parent="." instance=ExtResource("4_lo5kx")]
 position = Vector2(125, 31)
 should_kick_player = null
-should_hop = null
-show_debug = null
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("6_4c0v0")]
 position = Vector2(46, 43)
 
 [node name="Blob" parent="." instance=ExtResource("6_6xfql")]
 position = Vector2(-69, 58)
-should_kick_player = null
-should_hop = null
-show_debug = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("7_pxn0u")
+
+[node name="EnemyRobot" parent="." instance=ExtResource("8_4i68s")]
+position = Vector2(79, -33)
