@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6iju55wx20ro"
-path="res://.godot/imported/SPIKE_blob.png-72139cd2029b13291214e128d050c15b.ctex"
+uid="uid://dqa0cghbdjoxj"
+path="res://.godot/imported/monstroar_sheet.png-c58933c40e571e404b3364a3d0302035.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dino/sidescroller/enemy/SPIKE_blob.png"
-dest_files=["res://.godot/imported/SPIKE_blob.png-72139cd2029b13291214e128d050c15b.ctex"]
+source_file="res://src/dino/bosses/monstroar/monstroar_sheet.png"
+dest_files=["res://.godot/imported/monstroar_sheet.png-c58933c40e571e404b3364a3d0302035.ctex"]
 
 [params]
 

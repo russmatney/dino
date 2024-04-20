@@ -1,14 +1,15 @@
-[gd_scene load_steps=45 format=3 uid="uid://dkc8o1scg5uwy"]
+[gd_scene load_steps=46 format=3 uid="uid://dkc8o1scg5uwy"]
 
-[ext_resource type="Script" path="res://src/dino/sidescroller/player/SSPlayer.gd" id="1_7h5p5"]
+[ext_resource type="Script" path="res://src/dino/players/SSPlayer.gd" id="1_ki4j6"]
 [ext_resource type="Texture2D" uid="uid://dcng2g4a1g4wn" path="res://src/dino/players/hairo/assets/topdown_player_64.png" id="2_mxd7a"]
 [ext_resource type="Theme" path="res://src/dino/ui/StateLabelTheme.tres" id="3_rj8dc"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_gdioc"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/games/tower/assets/greyhat_jetflame_sheet.png" id="5_cfy4m"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="6_6resu"]
-[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/sidescroller/player/SSMachine.tscn" id="7_7wg00"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/SSMachine.tscn" id="7_levtf"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_k6joc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="9_qybgy"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="10_erdnb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k30yq"]
 atlas = ExtResource("2_mxd7a")
@@ -492,7 +493,7 @@ size = Vector2(96, 96)
 [node name="SSHairo" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3129
-script = ExtResource("1_7h5p5")
+script = ExtResource("1_ki4j6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -550,7 +551,7 @@ theme_override_fonts/normal_font = ExtResource("6_6resu")
 bbcode_enabled = true
 text = "some sparkle"
 
-[node name="SSMachine" parent="." instance=ExtResource("7_7wg00")]
+[node name="SSMachine" parent="." instance=ExtResource("7_levtf")]
 
 [node name="ActionHint" parent="." instance=ExtResource("8_k6joc")]
 position = Vector2(0, -40)
@@ -561,3 +562,5 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 shape = SubResource("RectangleShape2D_8j50g")
+
+[node name="PlayerCamera" parent="." instance=ExtResource("10_erdnb")]

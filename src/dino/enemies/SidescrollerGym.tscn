@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_s4f24"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="3_vb0p5"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_pqk5m"]
-[ext_resource type="PackedScene" uid="uid://boxsq76goq8ev" path="res://src/dino/sidescroller/enemy/PatrolPoint.tscn" id="5_4by8w"]
+[ext_resource type="PackedScene" uid="uid://boxsq76goq8ev" path="res://src/dino/enemies/PatrolPoint.tscn" id="5_4by8w"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://addons/core/reptile/tilemaps/SpikeTiles16.tscn" id="6_eb7u0"]
 [ext_resource type="PackedScene" uid="uid://bwcbt71l7xwb5" path="res://addons/core/reptile/tilemaps/SpikeTiles8.tscn" id="7_im70c"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_j1nmu"]

@@ -1076,7 +1076,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/enemies/bosses/portraits1.png"
+						"value": "res://src/dino/bosses/beefstronaut/portraits1.png"
 					},
 					"label": {
 						"type": "string",
@@ -1084,7 +1084,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://src/dino/enemies/bosses/Beefstronaut.tscn"
+						"value": "res://src/dino/bosses/beefstronaut/Beefstronaut.tscn"
 					}
 				}
 			},
@@ -1101,7 +1101,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/enemies/bosses/portraits2.png"
+						"value": "res://src/dino/bosses/monstroar/portraits2.png"
 					},
 					"label": {
 						"type": "string",
@@ -1109,7 +1109,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://src/dino/enemies/bosses/Monstroar.tscn"
+						"value": "res://src/dino/bosses/monstroar/Monstroar.tscn"
 					}
 				}
 			},

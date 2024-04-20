@@ -1,0 +1,58 @@
+[gd_scene load_steps=15 format=3 uid="uid://43qn8g87wt2p"]
+
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_avc5j"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Idle.gd" id="2_08acf"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Spawning.gd" id="2_jc773"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Dead.gd" id="3_d45r6"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/KnockedBack.gd" id="4_nhn0v"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Run.gd" id="5_nuew0"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Kick.gd" id="6_7xk8n"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Fall.gd" id="7_cdopo"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Jump.gd" id="8_vriro"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Fire.gd" id="9_hgagb"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Laugh.gd" id="10_gqe3v"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Patrol.gd" id="11_tf851"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Wander.gd" id="12_mpk65"]
+[ext_resource type="Script" path="res://src/dino/enemies/states/Stunned.gd" id="14_oxku6"]
+
+[node name="SSEnemyMachine" type="Node"]
+script = ExtResource("1_avc5j")
+
+[node name="Spawning" type="Node" parent="."]
+script = ExtResource("2_jc773")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_08acf")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("3_d45r6")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("4_nhn0v")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("5_nuew0")
+
+[node name="Kick" type="Node" parent="."]
+script = ExtResource("6_7xk8n")
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("7_cdopo")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("8_vriro")
+
+[node name="Fire" type="Node" parent="."]
+script = ExtResource("9_hgagb")
+
+[node name="Laugh" type="Node" parent="."]
+script = ExtResource("10_gqe3v")
+
+[node name="Patrol" type="Node" parent="."]
+script = ExtResource("11_tf851")
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("12_mpk65")
+
+[node name="Stunned" type="Node" parent="."]
+script = ExtResource("14_oxku6")

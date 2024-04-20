@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=37 format=3 uid="uid://cvrl5hva6wlar"]
 
-[ext_resource type="Texture2D" uid="uid://dqa0cghbdjoxj" path="res://src/dino/enemies/bosses/monstroar_sheet.png" id="1_oqnmq"]
+[ext_resource type="Texture2D" uid="uid://dqa0cghbdjoxj" path="res://src/dino/bosses/monstroar/monstroar_sheet.png" id="1_oqnmq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8jm7l"]
 atlas = ExtResource("1_oqnmq")

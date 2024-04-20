@@ -64,7 +64,7 @@ func _on_bullet_dying(bullet):
 
 var bullets = []
 
-var bullet_scene = preload("res://src/dino/sidescroller/boss/Bullet.tscn")
+var bullet_scene = preload("res://src/dino/bosses/Bullet.tscn")
 var bullet_impulse = 100
 var bullet_knockback = 1
 

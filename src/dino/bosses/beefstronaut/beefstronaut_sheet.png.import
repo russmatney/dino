@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0owkg1rfws5g"
-path="res://.godot/imported/status_portraits1.png-213ff465292bb63df1431166e1a78f62.ctex"
+uid="uid://dkjln787efagn"
+path="res://.godot/imported/beefstronaut_sheet.png-91fc0a094bbcd31c5fe359d39160efd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dino/enemies/bosses/status_portraits1.png"
-dest_files=["res://.godot/imported/status_portraits1.png-213ff465292bb63df1431166e1a78f62.ctex"]
+source_file="res://src/dino/bosses/beefstronaut/beefstronaut_sheet.png"
+dest_files=["res://.godot/imported/beefstronaut_sheet.png-91fc0a094bbcd31c5fe359d39160efd4.ctex"]
 
 [params]
 

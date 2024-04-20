@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3]
 
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://src/dino/weapons/arrow.tres" id="1_fvfvs"]
-[ext_resource type="Script" path="res://src/dino/sidescroller/boss/Bullet.gd" id="1_s23kw"]
+[ext_resource type="Script" path="res://src/dino/bosses/Bullet.gd" id="1_s23kw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iexjs"]
 radius = 3.0

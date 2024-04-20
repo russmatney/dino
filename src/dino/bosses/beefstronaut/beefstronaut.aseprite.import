@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://tct7wtu5e58j"
+path="res://.godot/imported/beefstronaut.aseprite-4ac5ef99c83e5257e60eb9647ea536af.res"
+
+[deps]
+
+source_file="res://src/dino/bosses/beefstronaut/beefstronaut.aseprite"
+dest_files=["res://.godot/imported/beefstronaut.aseprite-4ac5ef99c83e5257e60eb9647ea536af.res"]
+
+[params]
+

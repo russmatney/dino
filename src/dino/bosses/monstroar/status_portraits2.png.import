@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8cjofa13ma13"
-path="res://.godot/imported/portraits2.png-133360d3eaed523acc9637ef98d7effe.ctex"
+uid="uid://7n1srb1blqi1"
+path="res://.godot/imported/status_portraits2.png-7567570f7e466b86f5f56c358167ca0f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dino/enemies/bosses/portraits2.png"
-dest_files=["res://.godot/imported/portraits2.png-133360d3eaed523acc9637ef98d7effe.ctex"]
+source_file="res://src/dino/bosses/monstroar/status_portraits2.png"
+dest_files=["res://.godot/imported/status_portraits2.png-7567570f7e466b86f5f56c358167ca0f.ctex"]
 
 [params]
 

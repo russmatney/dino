@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cansttxpsx8ys"
-path="res://.godot/imported/portraits1.png-bb9057d7ff6716525b58dda777e869c1.ctex"
+uid="uid://b6iju55wx20ro"
+path="res://.godot/imported/SPIKE_blob.png-66f130e0c3bcddb0b4005a93f0f62794.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dino/enemies/bosses/portraits1.png"
-dest_files=["res://.godot/imported/portraits1.png-bb9057d7ff6716525b58dda777e869c1.ctex"]
+source_file="res://src/dino/enemies/SPIKE_blob.png"
+dest_files=["res://.godot/imported/SPIKE_blob.png-66f130e0c3bcddb0b4005a93f0f62794.ctex"]
 
 [params]
 

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://iek1yvone6at"]
 
-[ext_resource type="Script" path="res://src/dino/sidescroller/boss/SSBoss.gd" id="1_5hjiw"]
-[ext_resource type="SpriteFrames" uid="uid://basjfrbrmdubh" path="res://src/dino/enemies/bosses/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
+[ext_resource type="Script" path="res://src/dino/bosses/SSBoss.gd" id="1_5hjiw"]
+[ext_resource type="SpriteFrames" uid="uid://basjfrbrmdubh" path="res://src/dino/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_15lvx"]
-[ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://src/dino/sidescroller/boss/SSBossMachine.tscn" id="7_7v6vr"]
+[ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://src/dino/bosses/SSBossMachine.tscn" id="7_7v6vr"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="12_7xc6l"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="13_qnfjf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="14_s0hdd"]

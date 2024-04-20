@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqa0cghbdjoxj"
-path="res://.godot/imported/monstroar_sheet.png-f25badb67a2b4b11d843e34efc3f694e.ctex"
+uid="uid://d0owkg1rfws5g"
+path="res://.godot/imported/status_portraits1.png-84d3c6cf1d9628b65af043fd9133d4be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/dino/enemies/bosses/monstroar_sheet.png"
-dest_files=["res://.godot/imported/monstroar_sheet.png-f25badb67a2b4b11d843e34efc3f694e.ctex"]
+source_file="res://src/dino/bosses/beefstronaut/status_portraits1.png"
+dest_files=["res://.godot/imported/status_portraits1.png-84d3c6cf1d9628b65af043fd9133d4be.ctex"]
 
 [params]
 
