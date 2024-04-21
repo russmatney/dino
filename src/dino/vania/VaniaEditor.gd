@@ -84,7 +84,7 @@ func update_room_def():
 	neighbors_label.text = "ngbrs: %s" % Log.to_pretty(current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file()))
 
 	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities)
-	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().get_file()
+	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().resource_path.get_file()
 	room_constraints_label.text = "constraints: %s" % Log.to_pretty(len(current_room_def.constraints))
 
 func update_edit_entities():
@@ -109,7 +109,7 @@ func update_edit_tilesets():
 
 	var items = []
 	items.append_array(RoomInputs.all_tilemap_scenes.map(func(tm):
-		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = tm}))
+		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = load(tm)}))
 
 	var popup = edit_tileset_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):

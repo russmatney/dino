@@ -57,12 +57,12 @@ func setup_tileset():
 	ensure_tilemaps()
 	var primary_tilemap = room_def.get_primary_tilemap()
 	if primary_tilemap:
-		var primary = load(primary_tilemap).instantiate()
+		var primary = primary_tilemap.instantiate()
 		tilemap.set_tileset(primary.get_tileset().duplicate(true))
 
 	var secondary_tilemap = room_def.get_secondary_tilemap()
 	if secondary_tilemap:
-		var secondary = load(secondary_tilemap).instantiate()
+		var secondary = secondary_tilemap.instantiate()
 		bg_tilemap.set_tileset(secondary.get_tileset().duplicate(true))
 		Reptile.disable_collisions(bg_tilemap)
 

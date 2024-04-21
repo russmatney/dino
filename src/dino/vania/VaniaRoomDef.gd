@@ -22,7 +22,7 @@ var entities = []
 var enemies = []
 var effects = []
 
-var tilemap_scenes
+var tilemap_scenes: Array[PackedScene]
 var tile_size = 16
 
 var constraints = []

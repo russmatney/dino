@@ -67,20 +67,23 @@ func test_room_inputs_combine_entities():
 ## tilemaps ######################################################
 
 func test_room_inputs_set_tilemaps():
-	var some_scene_path = "res://some-test-tilemap.tscn"
-	var inp = RoomInputs.new({tilemap_scenes=[some_scene_path]})
+	var some_scene = load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")
+	var inp = RoomInputs.new({tilemap_scenes=[some_scene]})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes).contains([some_scene_path])
+	assert_array(def.tilemap_scenes).contains([some_scene])
 
 func test_room_inputs_combine_tilemaps():
 	# tilemaps should combine but remain distinct (no dupes!)
 
-	var some_tilemaps = ["res://some-test-tilemap.tscn", "res://another-tilemap.tscn"]
-	var some_overlapping_tilemaps = ["res://some-test-tilemap.tscn", "res://some-other-tilemap.tscn"]
+	var vol_tile = load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")
+	var grass_tile = load("res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn")
+	var gold_tile = load("res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn")
+	var some_tilemaps = [vol_tile, grass_tile]
+	var some_overlapping_tilemaps = [vol_tile, gold_tile]
 	var inp_1 = RoomInputs.new({tilemap_scenes=some_tilemaps})
 	var inp_2 = RoomInputs.new({tilemap_scenes=some_overlapping_tilemaps})
 	var inp = RoomInputs.merge_many([inp_1, inp_2])

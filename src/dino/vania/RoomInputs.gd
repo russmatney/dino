@@ -115,7 +115,7 @@ static var all_constraints = [
 @export var room_shape: Array[Vector3i]
 @export var room_shapes = []
 @export var room_effects: Array[RoomEffect]
-@export var tilemap_scenes: Array[String] # TODO move to PackedScene
+@export var tilemap_scenes: Array[PackedScene]
 
 # TODO support props, backgrounds
 
@@ -179,7 +179,7 @@ func update_def(def: VaniaRoomDef):
 	if not tilemap_scenes.is_empty():
 		def.tilemap_scenes = tilemap_scenes
 	else:
-		def.tilemap_scenes = [all_tilemap_scenes.pick_random()]
+		def.tilemap_scenes = [load(all_tilemap_scenes.pick_random())]
 
 ## chainable api ######################################################
 
@@ -329,11 +329,11 @@ static func random_room_shapes(opts={}):
 		room_shapes=opts.get("room_shapes", all_room_shapes.values()),
 		})
 
-static func random_tilemaps(opts={}):
+static func random_tilemaps(_opts={}):
 	return RoomInputs.new({
 		tilemap_scenes=[
-			opts.get("tilemaps", all_tilemap_scenes).pick_random(),
-			opts.get("tilemaps", all_tilemap_scenes).pick_random(),
+			load(all_tilemap_scenes.pick_random()),
+			load(all_tilemap_scenes.pick_random()),
 			]})
 
 static func random_room(opts={}):
@@ -428,27 +428,33 @@ const IN_GRASSY_CAVE = "in_grassy_cave"
 
 static func wooden_boxes(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn",],
+		tilemap_scenes=[
+			load("res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn")
+			],
 		})
 
 static func spaceship(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn",],
+		tilemap_scenes=[
+			load("res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn")
+			],
 		})
 
 static func kingdom(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn",],
+		tilemap_scenes=[load("res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn")],
 		})
 
 static func volcano(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn",],
+		tilemap_scenes=[
+			load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")],
 		})
 
 static func grassy_cave(_opts={}):
 	return RoomInputs.new({
-		tilemap_scenes=["res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn",],
+		tilemap_scenes=[
+			load("res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn")],
 		})
 
 ## enemies ######################################################33
