@@ -56,13 +56,26 @@ func start_game():
 
 ## room_inputs #################################333
 
+@onready var rain_eff = preload("res://src/effects/RainFallParticles.tscn")
+@onready var snow_eff = preload("res://src/effects/SnowFallParticles.tscn")
+
 func initial_room_inputs():
 	var inputs = [{
 			RoomInputs.HAS_PLAYER: {},
 			RoomInputs.HAS_CANDLE: {},
 			RoomInputs.HAS_CHECKPOINT: {},
 			RoomInputs.IN_SMALL_ROOM: {},
-		}]
+			RoomInputs.HAS_EFFECTS: {effects=[
+				# snow_eff,
+				rain_eff,
+				]},
+		},
+		# RoomInputs.random_room().merge(
+		# 	RoomInputs.HAS_EFFECTS: {effects=[
+		# 		rain_eff,
+		# 		]}
+		# 	)
+		]
 
 	inputs.append_array(U.repeat_fn(func():
 		var opts = {}

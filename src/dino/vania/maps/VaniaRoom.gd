@@ -34,6 +34,7 @@ func _ready():
 ## build room ##############################################################
 
 func build_room(def: VaniaRoomDef, opts={}):
+	Log.pr("building room:", def)
 	room_def = def
 	clear_all_tiles()
 	setup_tileset()
@@ -43,6 +44,7 @@ func build_room(def: VaniaRoomDef, opts={}):
 	# add_tile_chunks()
 	add_entities()
 	add_enemies()
+	add_effects()
 
 ## setup tilemaps ##############################################################
 
@@ -302,6 +304,22 @@ func add_enemies():
 func add_entities():
 	for ent in room_def.entities:
 		add_entity(ent)
+
+## add_effects ##############################################################
+
+func add_effects():
+	for cell in room_def.local_cells:
+		var rect = room_def.get_local_rect(Vector2i(cell.x, cell.y))
+		var rect_top_center = rect.position
+		var half_x_size = rect.size.x / 2
+		rect_top_center += Vector2.RIGHT * half_x_size
+
+		for eff in room_def.effects:
+			var effect = eff.instantiate()
+			effect.position = rect_top_center
+			effect.process_material.emission_box_extents.x = half_x_size
+			add_child(effect)
+			effect.set_owner(self)
 
 ## fit helpers ##############################################################
 

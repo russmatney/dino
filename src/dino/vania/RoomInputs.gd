@@ -73,6 +73,7 @@ static var all_constraints = [
 	HAS_ENTITY,
 	HAS_TILES,
 	HAS_ROOM,
+	HAS_EFFECTS,
 
 	IN_WOODEN_BOXES,
 	IN_SPACESHIP,
@@ -113,13 +114,17 @@ var entities
 var enemies
 var room_shape
 var room_shapes
+var room_effects
 var tilemap_scenes
+
+# TODO support props, backgrounds
 
 func _init(opts={}):
 	entities = opts.get("entities", [])
 	enemies = opts.get("enemies", [])
 	room_shape = opts.get("room_shape")
 	room_shapes = opts.get("room_shapes", [])
+	room_effects = opts.get("room_effects", [])
 	tilemap_scenes = opts.get("tilemap_scenes", [])
 
 func to_printable():
@@ -129,6 +134,7 @@ func to_printable():
 		tilemap_scenes=tilemap_scenes,
 		room_shape=room_shape,
 		room_shapes=room_shapes,
+		room_effects=room_effects,
 		}
 
 ## merge ######################################################
@@ -139,6 +145,7 @@ func merge(b: RoomInputs):
 		enemies=U.append_array(enemies, b.enemies),
 		room_shape=U._or(b.room_shape, room_shape),
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
+		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
 		})
 
@@ -151,6 +158,9 @@ func update_def(def: VaniaRoomDef):
 		def.set_local_cells(room_shapes.pick_random())
 	else:
 		def.set_local_cells(all_room_shapes.values().pick_random())
+
+	if not room_effects.is_empty():
+		def.effects = room_effects
 
 	if not entities.is_empty():
 		def.entities = entities
@@ -249,6 +259,7 @@ static func get_constraint_data(cons_key, opts={}):
 		HAS_ENEMY: return has_enemy(null, opts)
 		HAS_TILES: return has_tiles(opts)
 		HAS_ROOM: return custom_room_shape(opts)
+		HAS_EFFECTS: return has_effects(opts)
 
 		# tiles
 		IN_WOODEN_BOXES: return wooden_boxes(opts)
@@ -288,7 +299,9 @@ static func get_constraint_data(cons_key, opts={}):
 
 		HAS_PLAYER: return has_entity(DinoEntityIds.PLAYERSPAWNPOINT, opts)
 
-		_: return RoomInputs.new()
+		_:
+			Log.warn("No constraint found for cons", cons_key)
+			return RoomInputs.new()
 
 
 ## room components ######################################################33
@@ -317,6 +330,15 @@ static func random_tilemaps(opts={}):
 
 static func random_room(opts={}):
 	return merge_many([random_enemies(opts), random_entities(opts), random_room_shapes(opts), random_tilemaps(opts)])
+
+## room effects ######################################################33
+
+const HAS_EFFECTS = "has_effects"
+
+static func has_effects(opts):
+	return RoomInputs.new({
+		room_effects=opts.get("effects")
+		})
 
 ## room size ######################################################33
 

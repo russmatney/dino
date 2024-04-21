@@ -20,6 +20,7 @@ var tile_defs: GridDefs
 
 var entities = []
 var enemies = []
+var effects = []
 
 var tilemap_scenes
 var tile_size = 16
@@ -30,6 +31,7 @@ func to_printable():
 	return {
 		entities=entities,
 		enemies=enemies,
+		effects=effects,
 		room_path=room_path.get_file(),
 		local_cells=local_cells,
 		map_cells=map_cells,
