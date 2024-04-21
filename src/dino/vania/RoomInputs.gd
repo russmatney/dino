@@ -149,6 +149,9 @@ func merge(b: RoomInputs):
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
 		})
 
+func merge_constraint(b):
+	return RoomInputs.apply_constraint(self, b)
+
 ## update room def ######################################################
 
 func update_def(def: VaniaRoomDef):
