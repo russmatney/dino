@@ -205,6 +205,8 @@ func fill_background_images(_opts={}):
 
 ## background tiles ##############################################################
 
+var logged_bg_tile_pos = false
+
 # this depends on build_tilemap_data, which expects the base tilemap to have borders already
 func add_background_tiles(opts={}):
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
@@ -220,7 +222,9 @@ func add_background_tiles(opts={}):
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for background tile!")
+			if not logged_bg_tile_pos:
+				logged_bg_tile_pos = true
+				Log.warn("No position found for background tile!")
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()
@@ -238,6 +242,8 @@ func add_background_tiles(opts={}):
 
 ## add_tile_chunks ##############################################################
 
+var logged_tile_pos = false
+
 func add_tile_chunks(opts={}):
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
@@ -252,7 +258,9 @@ func add_tile_chunks(opts={}):
 		var start_coords = possible_positions(tmap_data,
 			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
 		if start_coords.is_empty():
-			Log.warn("No position found for tile chunk!")
+			if not logged_tile_pos:
+				logged_tile_pos = true
+				Log.warn("No position found for tile chunk!")
 			# TODO try a different chunk, maybe flip/rotate it
 			continue
 		var start_coord = start_coords.pick_random()
