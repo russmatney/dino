@@ -10,7 +10,7 @@ func test_room_inputs_empty_inputs_behavior():
 	var inp = RoomInputs.new()
 	assert_array(inp.tilemap_scenes).is_empty()
 	assert_array(inp.entities).is_empty()
-	assert_array(inp.room_shape).is_null()
+	assert_array(inp.room_shape).is_empty()
 	assert_array(inp.room_shapes).is_empty()
 
 	var def = VaniaRoomDef.new()
@@ -151,7 +151,7 @@ func test_room_inputs_room_shape_always_overwrites_room_shapes():
 
 	# now merging with a set 'room_shape' - the passed input overwrites 'room_shape'
 	var some_third_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0)]
-	inp1.room_shape = some_third_shape
+	inp1.room_shape.assign(some_third_shape)
 	inp = inp2.merge(inp1)
 	def = VaniaRoomDef.new()
 	inp.update_def(def)

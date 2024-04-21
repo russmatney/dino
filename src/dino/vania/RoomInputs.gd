@@ -1,4 +1,4 @@
-extends RefCounted
+extends Resource
 class_name RoomInputs
 
 # TODO support one way platforms, spikes via grid/tiles
@@ -110,22 +110,27 @@ static var all_constraints = [
 	IS_COOKING_ROOM,
 	]
 
-var entities
-var enemies
-var room_shape
-var room_shapes
-var room_effects
-var tilemap_scenes
+@export var entities: Array[DinoEntity]
+@export var enemies: Array[DinoEnemy]
+@export var room_shape: Array[Vector3i]
+@export var room_shapes = []
+@export var room_effects: Array[RoomEffect]
+@export var tilemap_scenes: Array[String] # TODO move to PackedScene
 
 # TODO support props, backgrounds
 
 func _init(opts={}):
-	entities = opts.get("entities", [])
-	enemies = opts.get("enemies", [])
-	room_shape = opts.get("room_shape")
-	room_shapes = opts.get("room_shapes", [])
-	room_effects = opts.get("room_effects", [])
-	tilemap_scenes = opts.get("tilemap_scenes", [])
+	if opts.get("entities"):
+		entities.assign(opts.get("entities"))
+	if opts.get("enemies"):
+		enemies.assign(opts.get("enemies"))
+	if opts.get("room_shape"):
+		room_shape.assign(opts.get("room_shape"))
+	room_shapes.assign(opts.get("room_shapes", []))
+	if opts.get("room_effects"):
+		room_effects.assign(opts.get("room_effects"))
+	if opts.get("tilemap_scenes"):
+		tilemap_scenes.assign(opts.get("tilemap_scenes"))
 
 func to_printable():
 	return {
@@ -155,7 +160,7 @@ func merge_constraint(b):
 ## update room def ######################################################
 
 func update_def(def: VaniaRoomDef):
-	if room_shape:
+	if not room_shape.is_empty():
 		def.set_local_cells(room_shape)
 	elif not room_shapes.is_empty():
 		def.set_local_cells(room_shapes.pick_random())
