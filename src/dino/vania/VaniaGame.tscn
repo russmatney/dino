@@ -1,7 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=25 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
+[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_2irfc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomInputs.gd" id="2_q2qy3"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="4_24ivj"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
 [ext_resource type="Script" path="res://src/dino/vania/VaniaEditor.gd" id="7_5vken"]
@@ -15,12 +18,47 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="14_b4ya7"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="15_7bsuh"]
 
+[sub_resource type="Resource" id="Resource_lm332"]
+script = ExtResource("2_2irfc")
+_id = "147"
+
+[sub_resource type="Resource" id="Resource_l8cv3"]
+script = ExtResource("2_2irfc")
+_id = "158"
+
+[sub_resource type="Resource" id="Resource_6er6k"]
+script = ExtResource("2_q2qy3")
+entities = Array[ExtResource("2_2irfc")]([SubResource("Resource_lm332"), SubResource("Resource_l8cv3")])
+enemies = Array[ExtResource("4_24ivj")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tilemap_scenes = Array[PackedScene]([])
+
+[sub_resource type="Resource" id="Resource_5rl60"]
+script = ExtResource("4_24ivj")
+_id = "122"
+
+[sub_resource type="Resource" id="Resource_0fe0h"]
+script = ExtResource("2_2irfc")
+_id = "148"
+
+[sub_resource type="Resource" id="Resource_agoko"]
+script = ExtResource("2_q2qy3")
+entities = Array[ExtResource("2_2irfc")]([SubResource("Resource_0fe0h")])
+enemies = Array[ExtResource("4_24ivj")]([SubResource("Resource_5rl60")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tilemap_scenes = Array[PackedScene]([])
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li3ee"]
 content_margin_left = 16.0
 content_margin_right = 16.0
 
 [node name="VaniaGame" type="Node2D"]
 script = ExtResource("1_rrc8s")
+room_inputs = Array[ExtResource("2_q2qy3")]([SubResource("Resource_6er6k"), SubResource("Resource_agoko")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
