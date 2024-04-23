@@ -4,6 +4,8 @@ class_name VaniaRoom
 
 @onready var room_instance = $RoomInstance
 
+const NAV_SOURCE_GROUP = "navigation_sources"
+
 var tile_border_width = 4
 var tile_door_width = 4
 var room_def: VaniaRoomDef
@@ -12,6 +14,10 @@ func set_room_def(def: VaniaRoomDef):
 var tilemap: TileMap
 var bg_tilemap: TileMap
 var bg_color_rect: ColorRect
+var nav_region: NavigationRegion2D
+
+@export var is_debug = false
+@export var debug_room_def: VaniaRoomDef
 
 ## enter_tree #####################################################
 
@@ -26,19 +32,32 @@ func _ready():
 		request_ready()
 		if not room_def:
 			room_def = VaniaRoomDef.new()
-	else:
+
+	if not Engine.is_editor_hint():
+		if is_debug:
+			Log.prn("debug_room_def", debug_room_def)
+			debug_room_def.reapply_constraints()
+			build_room(debug_room_def)
+			Log.prn("post build room_def", debug_room_def)
+			Dino.create_new_player({
+				genre_type=DinoData.GenreType.SideScroller,
+				entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
+				})
+			Dino.spawn_player({level_node=self})
+
+
 		if not room_def:
 			Log.warn("No room_def on vania room!")
-			return
 
 ## build room ##############################################################
 
 func build_room(def: VaniaRoomDef, opts={}):
-	Log.pr("building room:", def)
+	Log.prn("building room:", def)
 	room_def = def
 	clear_all_tiles()
 	setup_tileset()
 	setup_walls_and_doors(opts)
+	setup_nav_region()
 	fill_background_images()
 	add_background_tiles()
 	# add_tile_chunks()
@@ -51,6 +70,8 @@ func build_room(def: VaniaRoomDef, opts={}):
 func ensure_tilemaps():
 	U.ensure_owned_child(self, "tilemap", "TileMap", TileMap)
 	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", TileMap)
+	tilemap.add_to_group(NAV_SOURCE_GROUP, true)
+	U.ensure_owned_child(self, "nav_region", "NavigationRegion2D", NavigationRegion2D)
 
 # TODO use neighbor tileset as background near the door
 func setup_tileset():
@@ -209,6 +230,8 @@ var logged_bg_tile_pos = false
 
 # this depends on build_tilemap_data, which expects the base tilemap to have borders already
 func add_background_tiles(opts={}):
+	if not room_def.tile_defs:
+		return
 	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
@@ -238,6 +261,28 @@ func add_background_tiles(opts={}):
 	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
 
 	bg_tilemap.force_update()
+
+## setup nav region ##############################################################
+
+func setup_nav_region():
+	Log.pr("setting up nav region", nav_region)
+
+	var rect = room_def.get_rect()
+
+	var nav_mesh = NavigationPolygon.new()
+	var bounding_outline = PackedVector2Array([
+		rect.position,
+		Vector2(rect.position.x, rect.end.y),
+		rect.end,
+		Vector2(rect.end.x, rect.position.y),
+		# Vector2(0, 0), Vector2(0, 50), Vector2(50, 50), Vector2(50, 0)
+		])
+	nav_mesh.add_outline(bounding_outline)
+	nav_mesh.set_source_geometry_mode(NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN)
+	nav_mesh.set_source_geometry_group_name(NAV_SOURCE_GROUP)
+	NavigationServer2D.bake_from_source_geometry_data(nav_mesh, NavigationMeshSourceGeometryData2D.new())
+
+	nav_region.navigation_polygon = nav_mesh
 
 
 ## add_tile_chunks ##############################################################

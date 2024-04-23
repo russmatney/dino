@@ -1,5 +1,5 @@
 @tool
-extends RefCounted
+extends Resource
 class_name VaniaRoomDef
 
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
@@ -16,25 +16,28 @@ var max_map_cell := Vector2i.MIN
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
+var tile_defs_path = "res://src/dino/vania/tiles.txt"
 var tile_defs: GridDefs
 
-var entities = []
-var enemies = []
-var effects = []
+var entities: Array[DinoEntity] = []
+var enemies: Array[DinoEnemy] = []
+var effects: Array[RoomEffect] = []
 
 var tilemap_scenes: Array[PackedScene]
 var tile_size = 16
 
-var constraints = []
+@export var constraints: Array[RoomInputs] = []
 
 func to_printable():
 	return {
 		entities=entities,
 		enemies=enemies,
 		effects=effects,
+		constraints=constraints,
 		room_path=room_path.get_file(),
 		local_cells=local_cells,
 		map_cells=map_cells,
+		tilemap_scenes=tilemap_scenes,
 		}
 
 ## init #####################################################3
@@ -48,6 +51,8 @@ func _init(opts={}):
 	border_color = opts.get("border_color", border_color)
 
 	tile_defs = opts.get("tile_defs")
+	if not tile_defs:
+		tile_defs = GridParser.parse({defs_path=tile_defs_path})
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
@@ -58,8 +63,9 @@ func _init(opts={}):
 
 	if constraints != null:
 		if constraints is Array and constraints.is_empty():
-			return
-		RoomInputs.apply_constraints(constraints, self)
+			pass
+		else:
+			RoomInputs.apply_constraints(constraints, self)
 
 	Log.pr("room def created", self)
 
@@ -193,7 +199,6 @@ func reapply_constraints():
 ## static #####################################################3
 
 static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
-	var tile_defs_path = "res://src/dino/vania/tiles.txt"
 	var t_defs = GridParser.parse({defs_path=tile_defs_path})
 
 	var defs: Array[VaniaRoomDef] = []

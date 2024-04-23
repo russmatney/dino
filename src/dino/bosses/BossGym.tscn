@@ -13,9 +13,9 @@ script = ExtResource("2_yr61h")
 _id = "70"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ix4gd"]
-vertices = PackedVector2Array(135, 63, -134, 63, -134, -70, 135, -71)
+vertices = PackedVector2Array(135, 63, -134, 63, -133, -69, 135, -71)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-134, -70, 135, -71, 135, 63, -134, 63)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-133, -69, 135, -71, 135, 63, -134, 63)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
 

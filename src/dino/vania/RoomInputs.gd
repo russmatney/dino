@@ -116,6 +116,7 @@ static var all_constraints = [
 @export var room_shapes = []
 @export var room_effects: Array[RoomEffect]
 @export var tilemap_scenes: Array[PackedScene]
+@export var constraints: Array[String] = []
 
 # TODO support props, backgrounds
 
@@ -131,6 +132,10 @@ func _init(opts={}):
 		room_effects.assign(opts.get("room_effects"))
 	if opts.get("tilemap_scenes"):
 		tilemap_scenes.assign(opts.get("tilemap_scenes"))
+	if opts.get("constraints"):
+		constraints.assign(opts.get("constraints"))
+
+	Log.pr("new room input", self)
 
 func to_printable():
 	return {
@@ -140,6 +145,7 @@ func to_printable():
 		room_shape=room_shape,
 		room_shapes=room_shapes,
 		room_effects=room_effects,
+		constraints=constraints
 		}
 
 ## merge ######################################################
@@ -152,6 +158,7 @@ func merge(b: RoomInputs):
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
+		constraints=U.distinct(U.append_array(constraints, b.constraints)),
 		})
 
 func merge_constraint(b):
@@ -160,6 +167,10 @@ func merge_constraint(b):
 ## update room def ######################################################
 
 func update_def(def: VaniaRoomDef):
+	if len(constraints) > 0:
+		for cons in constraints:
+			merge_constraint(cons)
+
 	if not room_shape.is_empty():
 		def.set_local_cells(room_shape)
 	elif not room_shapes.is_empty():
@@ -181,21 +192,6 @@ func update_def(def: VaniaRoomDef):
 	else:
 		def.tilemap_scenes = [load(all_tilemap_scenes.pick_random())]
 
-## chainable api ######################################################
-
-func overwrite_entities(inp: RoomInputs):
-	entities = inp.entities
-	return self
-
-func overwrite_room(inp: RoomInputs):
-	room_shape = inp.room_shape
-	room_shapes = inp.room_shapes
-	return self
-
-func overwrite_tilemap(inp: RoomInputs):
-	tilemap_scenes = inp.tilemap_scenes
-	return self
-
 ################################################################
 ## static ######################################################
 
@@ -203,16 +199,11 @@ static func merge_many(inputs):
 	return inputs.reduce(func(a, b): return a.merge(b))
 
 static func apply_constraints(conses, def: VaniaRoomDef):
+	Log.pr("applying constraints to def", conses)
 	var existing_shape = def.local_cells
 
 	if conses is RoomInputs:
-		def.constraints = [conses]
-
-		conses.update_def(def)
-		if existing_shape != null and not existing_shape.is_empty():
-			# maintain current local_cells
-			def.set_local_cells(existing_shape)
-		return conses
+		conses = [conses]
 
 	if conses is Dictionary:
 		conses = [conses]
@@ -224,7 +215,9 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 	def.constraints = conses
 	var ri = conses.map(func(cons):
 		# map constants to dicts with default opts
-		if cons is String:
+		if cons is RoomInputs:
+			return cons
+		elif cons is String:
 			return {cons: {}}
 		elif cons is Dictionary:
 			return cons
@@ -235,6 +228,8 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 			func(agg_inp, cons_dict):
 				if cons_dict == null:
 					return agg_inp
+				elif cons_dict is RoomInputs:
+					return agg_inp.merge(cons_dict)
 				# apply each constraint_dict in succession
 				return RoomInputs.apply_constraint(agg_inp, cons_dict),
 			RoomInputs.new())
@@ -247,6 +242,8 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 	return ri
 
 static func apply_constraint(inp: RoomInputs, cons_dict):
+	if cons_dict is String:
+		cons_dict = {cons_dict: {}}
 	for k in cons_dict.keys():
 		var cons_inp = RoomInputs.get_constraint_data(k, cons_dict.get(k))
 		inp = inp.merge(cons_inp)
