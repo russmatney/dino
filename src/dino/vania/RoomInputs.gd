@@ -135,8 +135,6 @@ func _init(opts={}):
 	if opts.get("constraints"):
 		constraints.assign(opts.get("constraints"))
 
-	Log.pr("new room input", self)
-
 func to_printable():
 	return {
 		entities=entities,
@@ -199,7 +197,6 @@ static func merge_many(inputs):
 	return inputs.reduce(func(a, b): return a.merge(b))
 
 static func apply_constraints(conses, def: VaniaRoomDef):
-	Log.pr("applying constraints to def", conses)
 	var existing_shape = def.local_cells
 
 	if conses is RoomInputs:
@@ -212,7 +209,6 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 		Log.warn("Unhandled constraint collection passed to apply_constraints, aborting", conses)
 		return
 
-	def.constraints = conses
 	var ri = conses.map(func(cons):
 		# map constants to dicts with default opts
 		if cons is RoomInputs:
@@ -233,6 +229,7 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 				# apply each constraint_dict in succession
 				return RoomInputs.apply_constraint(agg_inp, cons_dict),
 			RoomInputs.new())
+	def.constraints.assign([ri])
 
 	ri.update_def(def)
 

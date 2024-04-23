@@ -35,10 +35,8 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		if is_debug:
-			Log.prn("debug_room_def", debug_room_def)
 			debug_room_def.reapply_constraints()
 			build_room(debug_room_def)
-			Log.prn("post build room_def", debug_room_def)
 			Dino.create_new_player({
 				genre_type=DinoData.GenreType.SideScroller,
 				entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
@@ -49,6 +47,8 @@ func _ready():
 		if not room_def:
 			Log.warn("No room_def on vania room!")
 
+		setup_nav_region() # requires main thread
+
 ## build room ##############################################################
 
 func build_room(def: VaniaRoomDef, opts={}):
@@ -57,7 +57,6 @@ func build_room(def: VaniaRoomDef, opts={}):
 	clear_all_tiles()
 	setup_tileset()
 	setup_walls_and_doors(opts)
-	setup_nav_region()
 	fill_background_images()
 	add_background_tiles()
 	# add_tile_chunks()
@@ -265,8 +264,6 @@ func add_background_tiles(opts={}):
 ## setup nav region ##############################################################
 
 func setup_nav_region():
-	Log.pr("setting up nav region", nav_region)
-
 	var rect = room_def.get_rect()
 
 	var nav_mesh = NavigationPolygon.new()
@@ -278,11 +275,11 @@ func setup_nav_region():
 		# Vector2(0, 0), Vector2(0, 50), Vector2(50, 50), Vector2(50, 0)
 		])
 	nav_mesh.add_outline(bounding_outline)
+	# TODO avoid collisions in tilemaps
 	nav_mesh.set_source_geometry_mode(NavigationPolygon.SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN)
 	nav_mesh.set_source_geometry_group_name(NAV_SOURCE_GROUP)
-	NavigationServer2D.bake_from_source_geometry_data(nav_mesh, NavigationMeshSourceGeometryData2D.new())
-
-	nav_region.navigation_polygon = nav_mesh
+	nav_region.set_navigation_polygon(nav_mesh)
+	nav_region.bake_navigation_polygon()
 
 
 ## add_tile_chunks ##############################################################

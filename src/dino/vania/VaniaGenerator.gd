@@ -157,6 +157,7 @@ func build_and_prep_scene(room_def, _opts={}):
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
 	room.build_room(room_def, {neighbor_data=neighbor_data.get(room_def.room_path)})
+	room.is_debug = false
 
 	# pack and write to room_def.room_path
 	var ps := PackedScene.new()

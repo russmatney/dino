@@ -16,7 +16,7 @@ var max_map_cell := Vector2i.MIN
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
-var tile_defs_path = "res://src/dino/vania/tiles.txt"
+static var tile_defs_path = "res://src/dino/vania/tiles.txt"
 var tile_defs: GridDefs
 
 var entities: Array[DinoEntity] = []
@@ -52,22 +52,21 @@ func _init(opts={}):
 
 	tile_defs = opts.get("tile_defs")
 	if not tile_defs:
-		tile_defs = GridParser.parse({defs_path=tile_defs_path})
+		tile_defs = GridParser.parse({defs_path=VaniaRoomDef.tile_defs_path})
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
+	var conses
 	if opts.get("room_inputs"):
-		constraints = opts.get("room_inputs")
+		conses = opts.get("room_inputs")
 	elif opts.get("constraints"):
-		constraints = opts.get("constraints")
+		conses = opts.get("constraints")
 
-	if constraints != null:
-		if constraints is Array and constraints.is_empty():
+	if conses != null:
+		if conses is Array and conses.is_empty():
 			pass
 		else:
-			RoomInputs.apply_constraints(constraints, self)
-
-	Log.pr("room def created", self)
+			RoomInputs.apply_constraints(conses, self)
 
 func set_local_cells(cells):
 	var min_cell := Vector3i(Vector2i.MAX.x, Vector2i.MAX.y, 0)

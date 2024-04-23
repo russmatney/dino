@@ -14,7 +14,7 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 @onready var playground: Node2D = $%LoadPlayground
 
 var room_defs: Array[VaniaRoomDef] = []
-@export var room_inputs: Array[RoomInputs] = []
+var room_inputs = []
 
 var generating: Thread
 

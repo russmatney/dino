@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhjv3h6oxgj4"]
+[gd_scene load_steps=15 format=3 uid="uid://bhjv3h6oxgj4"]
 
 [ext_resource type="TileSet" uid="uid://dh4wv4l8frtl7" path="res://addons/core/reptile/tilesets/GildedKingdomTiles8.tres" id="1_r8bn3"]
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
@@ -34,6 +34,13 @@ constraints = Array[String](["in_kingdom"])
 [sub_resource type="Resource" id="Resource_q4s3t"]
 script = ExtResource("2_sq332")
 constraints = Array[ExtResource("3_1w2s4")]([SubResource("Resource_0bvom")])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_61itp"]
+vertices = PackedVector2Array(522, -10, 246, -10, 523, -19, -19, 307, -10, 128, -10, 298, 532, 302, 522, 298, 470, 246, 42, 246, 42, 42, 470, 42)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5), PackedInt32Array(0, 2, 6, 7), PackedInt32Array(7, 6, 3, 5), PackedInt32Array(8, 9, 10, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-12, -11, 533, -30, 543, 312, -30, 318)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation_sources"
 
 [node name="VaniaRoom" type="Node2D"]
 script = ExtResource("1_x4efj")
@@ -76,3 +83,4 @@ layer_0/name = "base"
 color = Color(0.533333, 0.533333, 0.533333, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_61itp")
