@@ -64,14 +64,12 @@ var gravity = 1000 # for use in non-jump states
 var powerups = []
 
 # weapons
-signal changed_weapon(weapon)
 var weapon_set: WeaponSet = WeaponSet.new("ss")
 var aim_vector = Vector2.ZERO
 
 var orbit_items = []
 
 # pickups
-signal pickups_changed(pickups)
 var pickups = []
 
 var coins = 0
@@ -127,6 +125,12 @@ var player_camera_scene = preload("res://src/dino/players/PlayerCamera.tscn")
 var pcam: PhantomCamera2D
 
 var orbit_item_scene = preload("res://src/dino/weapons/orb/OrbitItem.tscn")
+
+## signals ###########################################################
+
+signal died()
+signal changed_weapon(weapon)
+signal pickups_changed(pickups)
 
 ## enter tree ###########################################################
 
@@ -395,8 +399,6 @@ func face_body(body):
 	update_facing()
 
 ## death ###########################################################
-
-signal died()
 
 func die(_opts={}):
 	is_dead = true

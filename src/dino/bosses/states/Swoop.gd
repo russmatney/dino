@@ -28,7 +28,7 @@ func enter(_ctx={}):
 	player_pos_set = false
 	finished_chasing_player = false
 
-	var warp_spots = actor.warp_spots
+	var warp_spots = actor.calculate_warp_spots()
 
 	if len(warp_spots) == 0:
 		warp_spots = [

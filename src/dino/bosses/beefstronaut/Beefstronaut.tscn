@@ -42,6 +42,7 @@ texture = ExtResource("12_7xc6l")
 [node name="SkullParticles" parent="." instance=ExtResource("13_qnfjf")]
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = 20.0
 offset_right = 40.0
@@ -60,3 +61,5 @@ position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_onh6t")
 
 [node name="SSBossMachine" parent="." instance=ExtResource("7_7v6vr")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

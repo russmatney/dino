@@ -44,11 +44,10 @@ func physics_process(delta):
 	if wait_ttl <= 0:
 		if next_state:
 			machine.transit(next_state)
-		elif actor.can_swoop and actor.can_fire:
-			machine.transit(U.rand_of(["Swoop", "Firing"]))
-		elif actor.can_swoop:
-			machine.transit("Swoop")
-		elif actor.can_fire:
-			machine.transit("Firing")
 		else:
-			machine.transit("Warping")
+			var next_states = ["Warping"]
+			if actor.can_swoop:
+				next_states.append("Swoop")
+			if actor.can_fire:
+				next_states.append("Firing")
+			machine.transit(U.rand_of(next_states))

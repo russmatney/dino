@@ -64,6 +64,7 @@ report/assert/strict_number_type_compare=false
 ui/toolbar/run_overall=true
 report/godot/push_error=true
 report/verbose_orphans=false
+settings/common/update_notification_enabled=false
 
 [global]
 

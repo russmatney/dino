@@ -70,3 +70,5 @@ text = "state"
 horizontal_alignment = 1
 
 [node name="SSBossMachine" parent="." instance=ExtResource("8_kgjjp")]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

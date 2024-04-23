@@ -17,14 +17,17 @@ func _get_configuration_warnings():
 
 ## vars ###########################################################
 
+# stats
 @export var speed = 200
 @export var gravity = 1000
 @export var initial_health = 5
 
-@export var can_float = false
+# capabilities
+@export var can_float = false # apply gravity?
 @export var can_swoop = false
 @export var can_fire = false
 
+# properties
 var health
 var is_dead
 var facing
@@ -44,7 +47,7 @@ signal stunned(boss)
 
 var notif_label
 var cam_pof
-var nav_agent
+var nav_agent: NavigationAgent2D
 var skull_particles
 var attack_box
 var los
@@ -53,9 +56,6 @@ var swoop_hint1
 var swoop_hint2
 var swoop_hint_player
 var swoop_hints = []
-
-const warp_group = "warp_spots"
-var warp_spots = []
 
 ## ready ###########################################################
 
@@ -87,12 +87,41 @@ func _ready():
 
 		machine.transitioned.connect(_on_transit)
 
-	# look for sibling warp_spots
-	warp_spots = U.get_children_in_group(get_parent(), warp_group, false)
-
 	died.connect(_on_death)
 
 	state_label.set_visible(false)
+
+func calculate_warp_spots():
+	var dist_away = 200
+	var maybe_targets = [
+		position,
+		position + Vector2.LEFT * dist_away,
+		position + Vector2.RIGHT * dist_away,
+		position + Vector2.UP * dist_away,
+		position + Vector2.DOWN * dist_away,
+		position + Vector2.LEFT * dist_away + Vector2.UP * dist_away,
+		position + Vector2.LEFT * dist_away + Vector2.DOWN * dist_away,
+		position + Vector2.RIGHT * dist_away + Vector2.UP * dist_away,
+		position + Vector2.RIGHT * dist_away + Vector2.DOWN * dist_away,
+		]
+
+	var spots = []
+	if nav_agent:
+		var map_rid = nav_agent.get_navigation_map()
+		var region_rids = NavigationServer2D.map_get_regions(map_rid)
+		if len(region_rids) > 0: # waiting until an active region
+
+			for pos in maybe_targets:
+				nav_agent.set_target_position(pos)
+				var final_pos = nav_agent.get_final_position()
+				spots.append(final_pos)
+
+	# TODO remove spots that are too close together
+
+	if len(spots) > 0:
+		return spots.map(func(pos): return {global_position=pos})
+
+	return []
 
 ## on transit ####################################################
 

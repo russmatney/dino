@@ -42,4 +42,7 @@ func physics_process(delta):
 
 	laugh_ttl -= delta
 	if laugh_ttl <= 0:
-		machine.transit("Idle")
+		if next_state:
+			machine.transit(next_state)
+		else:
+			machine.transit("Idle")
