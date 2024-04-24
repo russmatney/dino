@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8m2lhbv2cerv"]
+[gd_scene load_steps=6 format=3 uid="uid://b8m2lhbv2cerv"]
 
 [ext_resource type="Script" path="res://src/dino/modes/Arcade.gd" id="1_tnk8n"]
 [ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="2_ox3dc"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="3_bsv3q"]
 
-[sub_resource type="Resource" id="Resource_5p26p"]
+[sub_resource type="Resource" id="Resource_qchg8"]
 script = ExtResource("2_ox3dc")
-_id = "39"
+_id = "41"
+
+[sub_resource type="Resource" id="Resource_haq0s"]
+script = ExtResource("3_bsv3q")
+_id = "70"
 
 [node name="Arcade" type="Node2D"]
 script = ExtResource("1_tnk8n")
-current_game_entity = SubResource("Resource_5p26p")
+current_game_entity = SubResource("Resource_qchg8")
+player_entity = SubResource("Resource_haq0s")

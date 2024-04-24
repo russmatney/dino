@@ -14,8 +14,8 @@ var _waves = [{goon_count=2}, {boss_count=1}]
 
 ### setup_level ####################################################
 
-func setup_level():
-	Log.pr("setup_level()")
+func _ready():
+	Log.pr("_ready")
 	enemies = get_tree().get_nodes_in_group("enemies")
 	enemy_spawn_positions = get_tree().get_nodes_in_group("spawn_points")
 	enemies.map(setup_enemy)
@@ -32,7 +32,7 @@ func setup_level():
 		else:
 			Log.warn("no wave found in SELLevel _waves, cannot spawn")
 
-	super.setup_level()
+	super._ready()
 
 
 ### enemies ####################################################

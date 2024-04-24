@@ -7,9 +7,6 @@ func _ready():
 	var quest = FetchSheepQuest.new()
 	add_child(quest)
 
-	super._ready()
-
-func setup_level():
 	# TODO move conversion to HerdLevelGen
 	var tilemaps = get_node_or_null("Tilemaps")
 	if tilemaps:
@@ -17,7 +14,7 @@ func setup_level():
 			if ch.is_in_group("pen"):
 				create_pen(ch)
 
-	super.setup_level()
+	super._ready()
 
 func create_pen(tilemap):
 	var area = Reptile.to_area2D(tilemap)

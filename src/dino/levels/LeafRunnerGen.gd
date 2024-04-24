@@ -2,7 +2,9 @@
 extends BrickLevelGen
 
 func get_room_opts(opts):
-	var room_opts = [{}, {}, {}, {}, {}]
+	var room_opts = [{
+		flags=["has_player"],
+		}, {}, {}, {}, {}]
 
 	room_opts.shuffle()
 

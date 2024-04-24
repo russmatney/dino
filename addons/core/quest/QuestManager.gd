@@ -1,5 +1,5 @@
 extends Node
-# TODO move to Quest Manager that creates a node, rather than a global quest singleton
+# TODO move to Quest Manager as a node, rather than a global quest singleton
 
 ## vars #####################################################
 

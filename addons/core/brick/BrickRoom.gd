@@ -263,6 +263,9 @@ static func create_room(opts):
 	var brick_opts = BrickRoomOpts.new(opts)
 
 	room.def = gen_room_def(brick_opts)
+	if not room.def:
+		Log.warn("No def gend for brick_opts", brick_opts)
+		return
 	if room.def.name != null and room.def.name != "":
 		room.name = room.def.name
 
@@ -282,6 +285,8 @@ static func create_rooms(room_opts):
 		if last_room != null:
 			opts.last_room = last_room
 		last_room = BrickRoom.create_room(room_opts[i])
+		if not last_room:
+			continue
 		rooms.append(last_room)
 	return rooms
 

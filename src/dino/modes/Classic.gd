@@ -88,16 +88,13 @@ func update_player_entity(ent: DinoPlayerEntity):
 
 ## launch_game ##################################################3
 
-func setup_game(node: DinoLevel):
-	node.ready.connect(_on_game_ready)
-	node.level_complete.connect(_on_level_complete)
-
 func launch_level(level_def):
 	current_level_def = level_def
 
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
+		await game_node.tree_exited
 
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
@@ -106,22 +103,17 @@ func launch_level(level_def):
 			entity=player_entity,
 			})
 
-	game_node = DinoLevel.create_level(level_def)
-	setup_game(game_node)
+	game_node = DinoLevel.create_level(level_def, {seed=_seed, })
+	add_child(game_node)
+	# note right now quests are found via group-lookup in the tree, so we need to add_child first
+	# TODO refactor questManager into a node added to game scenes instead of an autoload
+	game_node.setup_quests()
 
-	add_child.call_deferred(game_node)
+	Dino.spawn_player({level=game_node, deferred=false})
+
+	game_node.level_complete.connect(_on_level_complete)
 
 ## game level signals ##################################################3
-
-func _on_game_ready():
-	# increase difficulty with `round_num`
-	var level_opts = {seed=_seed, }
-
-	if game_node.has_method("regenerate"):
-		# this seems weird - why not generate in DinoLevel.create_level ?
-		game_node.regenerate(level_opts)
-	else:
-		Log.warn("Game/Level missing expected regenerate function!", game_node)
 
 func _on_level_complete():
 	Log.pr("Level Complete!")

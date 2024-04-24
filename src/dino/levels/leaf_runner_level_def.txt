@@ -15,6 +15,7 @@ ROOMS
 
 room_type START
 is_start
+has_player
 
 x.......
 x.......

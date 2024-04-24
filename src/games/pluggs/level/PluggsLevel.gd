@@ -2,12 +2,10 @@ extends DinoLevel
 
 ## setup ###################################################
 
-func setup_level():
+func _ready():
 	connect_to_rooms()
 
-	# P.remove_player()
-	await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
-	# P.respawn_player()
+	super._ready()
 
 func connect_to_rooms():
 	if Engine.is_editor_hint():

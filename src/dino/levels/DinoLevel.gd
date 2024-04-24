@@ -84,7 +84,6 @@ func regen_with_def(def):
 @onready var rooms_node = $Rooms
 var level_opts: Dictionary = {}
 signal level_complete
-signal level_setup
 
 var skip_splash_intro = false
 var skip_splash_outro = false
@@ -131,9 +130,9 @@ func _ready():
 	hud = hud_scene.instantiate()
 	add_child.call_deferred(hud)
 
-	# call setup_level every time we get new nodes
+	# call setup_quests every time we get new nodes
 	# could use a better name for :gen/finished-hook
-	level_gen.nodes_transferred.connect(setup_level)
+	level_gen.nodes_transferred.connect(setup_quests)
 
 	if Dino.is_debug_mode():
 		Log.pr("debug mode: regenerating")
@@ -143,6 +142,12 @@ func _ready():
 			entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})
 		regenerate()
+
+		if not Dino.current_player_node():
+			Dino.spawn_player()
+
+	if not skip_splash_intro:
+		await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
 
 ## process ######################################################
 
@@ -178,7 +183,7 @@ func regenerate(opts=null):
 	if hud and not Engine.is_editor_hint():
 		hud.set_level_opts(opts)
 
-## add_quests ###################################################3
+## setup_quests ###################################################3
 
 func add_quests():
 	var ents = entities_node.get_children()
@@ -186,21 +191,13 @@ func add_quests():
 	for q in qs:
 		add_child(q)
 
-## setup_level ###################################################3
-
-# setup any signals and initial data
-func setup_level():
+# signals and initial data
+func setup_quests():
 	add_quests()
 
 	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 	Q.setup_quests()
-	if not Dino.current_player_node():
-		Dino.spawn_player()
-	level_setup.emit()
-
-	if not skip_splash_intro:
-		await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
 
 ## ui opts ###################################################3
 

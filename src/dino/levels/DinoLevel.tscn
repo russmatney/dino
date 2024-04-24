@@ -1,22 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://7rx6q0i5fbdo"]
+[gd_scene load_steps=6 format=3 uid="uid://7rx6q0i5fbdo"]
 
 [ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_thmin"]
 [ext_resource type="Script" path="res://src/dino/levels/LevelDef.gd" id="2_ne1dg"]
-[ext_resource type="Script" path="res://src/dino/levels/boss_battle/BossBattleLevelGen.gd" id="3_qwcul"]
+[ext_resource type="Script" path="res://src/dino/levels/LeafRunnerGen.gd" id="3_qy07o"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_um1rd"]
 
-[sub_resource type="Resource" id="Resource_buo6s"]
+[sub_resource type="Resource" id="Resource_tgl24"]
 script = ExtResource("2_ne1dg")
-_id = "114"
+_id = "113"
 
 [node name="DinoLevel" type="Node2D"]
 script = ExtResource("1_thmin")
-level_def = SubResource("Resource_buo6s")
+level_def = SubResource("Resource_tgl24")
 
 [node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
-script = ExtResource("3_qwcul")
+script = ExtResource("3_qy07o")
 
 [node name="Rooms" type="Node" parent="."]
 
 [node name="Tilemaps" type="Node" parent="."]
 
 [node name="Entities" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("4_um1rd")
