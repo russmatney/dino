@@ -43,31 +43,3 @@ static func label_to_entity(opts):
 			},
 		}
 
-static var quests = {
-	QuestFeedTheVoid: {},
-	QuestBreakTheTargets: {},
-	QuestCatchLeaves: {},
-	QuestCollectGems: {},
-	QuestKillAllEnemies: {},
-	FetchSheepQuest: {},
-	# TODO harvey quests
-	"QuestDeliverProduceCarrot": {new=func(): return QuestDeliverProduce.new({type="carrot"})},
-	"QuestDeliverProduceOnion": {new=func(): return QuestDeliverProduce.new({type="tomato"})},
-	"QuestDeliverProduceTomato": {new=func(): return QuestDeliverProduce.new({type="onion"})},
-	}
-
-static func quests_for_entities(entities):
-	var qs = []
-	for q_class in quests:
-		var opts = quests.get(q_class, {})
-		var q
-		if opts.get("new"):
-			q = opts.get("new").call()
-		else:
-			q = q_class.new()
-
-		if q.has_required_entities(entities):
-			qs.append(q)
-		else:
-			q.queue_free()
-	return qs

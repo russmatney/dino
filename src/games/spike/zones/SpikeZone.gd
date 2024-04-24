@@ -5,8 +5,8 @@ class_name SpikeZone
 ## ready #####################################################
 
 func _ready():
+	# TODO restore via QuestManager
 	# if not Engine.is_editor_hint():
-		# TODO restore quests or drop spike zones completely
 		# Q.all_quests_complete.connect(on_quests_complete)
 
 		# var quest = QuestFeedTheVoid.new()

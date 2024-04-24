@@ -1,7 +1,7 @@
 extends Node
 class_name Quest
 
-## static
+## has_required ###########################################
 
 func has_required_entities(entities: Array[Node]):
 	if xs_group == "":
@@ -42,12 +42,14 @@ func _enter_tree():
 	if not has_method("update_quest"):
 		Log.warn("Quest missing expected update_quest() method", self)
 
-## exit tree ##########################################################
-
-func _exit_tree():
-	if Engine.is_editor_hint():
-		return
-	Q.unregister(self)
+# impl idea: quests watching for added nodes
+# not sure if this will catch nodes with run-time added groups
+	# if not Engine.is_editor_hint():
+	# 	get_tree().node_added.connect(on_node_added)
+# func on_node_added(node: Node):
+# 	if node is Button:
+# 		node.focus_entered.connect(on_button_focused.bind(node))
+# 		node.pressed.connect(on_button_pressed.bind(node))
 
 ## setup ##############################################################################
 
@@ -59,6 +61,8 @@ func setup():
 
 	update_quest()
 
+func add_entity(node):
+	Log.pr("TODO use node to update quest", node, self)
 
 ## update ##############################################################################
 

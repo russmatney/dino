@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://7rx6q0i5fbdo"]
+[gd_scene load_steps=7 format=3 uid="uid://7rx6q0i5fbdo"]
 
 [ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_thmin"]
 [ext_resource type="Script" path="res://src/dino/levels/LevelDef.gd" id="2_ne1dg"]
 [ext_resource type="Script" path="res://src/dino/levels/LeafRunnerGen.gd" id="3_qy07o"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_um1rd"]
+[ext_resource type="Script" path="res://addons/core/quest/QuestManager.gd" id="5_kkaoh"]
 
 [sub_resource type="Resource" id="Resource_tgl24"]
 script = ExtResource("2_ne1dg")
@@ -26,3 +27,6 @@ script = ExtResource("3_qy07o")
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("4_um1rd")
+
+[node name="QuestManager" type="Node" parent="."]
+script = ExtResource("5_kkaoh")

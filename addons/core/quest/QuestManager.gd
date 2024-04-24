@@ -1,5 +1,39 @@
 extends Node
-# TODO move to Quest Manager as a node, rather than a global quest singleton
+class_name QuestManager
+
+## static #####################################################
+
+static var quests = {
+	QuestFeedTheVoid: {},
+	QuestBreakTheTargets: {},
+	QuestCatchLeaves: {},
+	QuestCollectGems: {},
+	QuestKillAllEnemies: {},
+	FetchSheepQuest: {},
+	# TODO harvey quests
+	"QuestDeliverProduceCarrot": {new=func(): return QuestDeliverProduce.new({type="carrot"})},
+	"QuestDeliverProduceOnion": {new=func(): return QuestDeliverProduce.new({type="tomato"})},
+	"QuestDeliverProduceTomato": {new=func(): return QuestDeliverProduce.new({type="onion"})},
+	}
+
+# TODO this is messy, plz refactor
+# maybe quest_manager has an exported lists of quests to check?
+# defaulting to _all_
+static func quests_for_entities(entities: Array[Node]):
+	var qs = []
+	for q_class in quests:
+		var opts = quests.get(q_class, {})
+		var q
+		if opts.get("new"):
+			q = opts.get("new").call()
+		else:
+			q = q_class.new()
+
+		if q.has_required_entities(entities):
+			qs.append(q)
+		else:
+			q.queue_free()
+	return qs
 
 ## vars #####################################################
 
@@ -9,11 +43,54 @@ signal quest_update
 
 var active_quests = {}
 
-var current_level_label = "Quest Status"
+## enter tree #####################################################
+
+func _enter_tree():
+	get_tree().node_added.connect(on_node_added)
+	get_tree().node_removed.connect(on_node_removed)
+
+func check_quests_for_node(node: Node):
+	var qs = QuestManager.quests_for_entities([node])
+	for q in qs:
+		var existing = get_quest(q)
+		if not existing:
+			add_child(q)
+		var q_data = get_quest(q)
+		if not q_data:
+			Log.warn("Expected quest to be added for node", q, node)
+			continue
+		# hmmm - here have data.node instead of node.data
+		q_data.node.add_entity(node)
+
+func on_node_added(node: Node):
+	if node is Quest:
+		# is node ready here?
+		# TODO sometimes quests register w/ opts?
+		register_quest(node)
+		# TODO prefer this call in Quest.ready?
+		node.setup()
+	else:
+		# impl rn now i stupidly expensive
+		check_quests_for_node(node)
+
+func on_node_removed(node: Node):
+	if node is Quest:
+		# is node ready here?
+		# TODO sometimes quests unregister w/ opts?
+		unregister(node)
+
+## ready #####################################################
+
+func _ready():
+	Log.pr("quest manager _ready()")
+
+	setup_quests()
+
 
 ## label #####################################################
 
 func q_label(node, opts):
+	# TODO node still valid?
 	var label = node.get("label")
 	if label in [null, ""]:
 		label = opts.get("label", "Fallback Label")
@@ -25,10 +102,6 @@ func get_quest(node, opts={}):
 ## register quest and updates #####################################################
 
 func setup_quests():
-	for q in active_quests.values():
-		q.queue_free()
-
-	active_quests = {}
 	for q in get_tree().get_nodes_in_group("quests"):
 		register_quest(q)
 	for q in active_quests.values():
@@ -36,6 +109,7 @@ func setup_quests():
 
 func drop_quests():
 	for q in active_quests.values():
+		remove_child(q)
 		q.queue_free()
 	active_quests = {}
 

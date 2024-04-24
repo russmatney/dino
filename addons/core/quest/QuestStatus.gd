@@ -21,15 +21,15 @@ func render():
 
 	if header_text != null and len(header_text) > 0:
 		header.text = "[center]%s[/center]" % header_text
-	else:
-		header.text = "[center]%s[/center]" % Q.current_level_label
 
 
 func _ready():
-	Q.quest_update.connect(_on_quest_update)
+	# TODO seek out and connect to quest_managers in the tree
+	# Q.quest_update.connect(_on_quest_update)
 	_on_quest_update()
 
 func _on_quest_update():
-	quests = Q.active_quests.values()
+	quests = []
+	# quests = Q.active_quests.values()
 
 	render()

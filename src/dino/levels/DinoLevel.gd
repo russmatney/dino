@@ -141,12 +141,13 @@ func _ready():
 	hud = hud_scene.instantiate()
 	add_child.call_deferred(hud)
 
-	# call setup_quests every time we get new nodes
-	# could use a better name for :gen/finished-hook
-	level_gen.nodes_transferred.connect(setup_quests)
+	var q_manager = get_node_or_null("QuestManager")
+	if q_manager:
+		U._connect(q_manager.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
+		U._connect(q_manager.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 
 	if Dino.is_debug_mode():
-		Log.pr("debug mode: regenerating")
+		Log.pr("no game_mode set; regenerating dino level")
 		if genre_type == null:
 			genre_type = DinoData.GenreType.SideScroller
 		Dino.ensure_player_setup({genre_type=genre_type,
@@ -196,22 +197,6 @@ func regenerate(opts=null):
 	if hud and not Engine.is_editor_hint():
 		hud.set_level_opts(opts)
 
-## setup_quests ###################################################3
-
-func add_quests():
-	var ents = entities_node.get_children()
-	var qs = DinoLevelGenData.quests_for_entities(ents)
-	for q in qs:
-		add_child(q)
-
-# signals and initial data
-func setup_quests():
-	add_quests()
-
-	U._connect(Q.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
-	U._connect(Q.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
-	Q.setup_quests()
-
 ## ui opts ###################################################3
 
 func get_splash_jumbo_opts():
@@ -234,12 +219,12 @@ func on_quests_complete():
 	if not skip_splash_outro:
 		await Jumbotron.jumbo_notif(get_exit_jumbo_opts())
 
-	Q.drop_quests()
+	# Q.drop_quests()
 	level_complete.emit()
 
 func on_quest_failed():
 	Debug.notif("DinoLevel Restarting", self.name)
-	Q.drop_quests()
+	# Q.drop_quests()
 	regenerate()
 
 ## add_child_to_level ###################################################3
