@@ -76,7 +76,6 @@ func launch_game(game_entity=null):
 	game_node = DinoLevel.create_level_from_game(game_entity, level_opts)
 
 	add_child(game_node)
-	game_node.setup_quests()
 
 	Dino.spawn_player({level=game_node, deferred=false})
 

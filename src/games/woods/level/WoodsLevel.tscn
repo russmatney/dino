@@ -1,19 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1k06267gxk5t"]
 
 [ext_resource type="Script" path="res://src/games/woods/level/WoodsLevelGen.gd" id="1_ayd6d"]
-[ext_resource type="Script" path="res://src/games/woods/level/WoodsLevel.gd" id="1_lfrcs"]
+[ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_lbl6n"]
 
 [node name="WoodsLevel" type="Node2D"]
-script = ExtResource("1_lfrcs")
+script = ExtResource("1_lbl6n")
 
-[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
+[node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
 script = ExtResource("1_ayd6d")
 _seed = 372301141
 room_count = 6
-room_defs_path = "res://src/woods/level/rooms.txt"
-entities_node = NodePath("../Entities")
-tilemaps_node = NodePath("../Tilemaps")
-rooms_node = NodePath("../Rooms")
+room_defs_path = "res://src/games/woods/level/rooms.txt"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -1270.0

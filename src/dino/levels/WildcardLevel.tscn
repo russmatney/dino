@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://src/dino/levels/WildcardLevelGen.gd" id="2_h4345"]
 [ext_resource type="Script" path="res://src/dino/levels/LevelDef.gd" id="2_wdpbq"]
 
-[sub_resource type="Resource" id="Resource_bhoie"]
+[sub_resource type="Resource" id="Resource_ieo0l"]
 script = ExtResource("2_wdpbq")
 _id = "106"
 
 [node name="WildcardLevel" type="Node2D"]
 script = ExtResource("1_chctc")
-level_def = SubResource("Resource_bhoie")
+level_def = SubResource("Resource_ieo0l")
 
 [node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
 script = ExtResource("2_h4345")

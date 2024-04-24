@@ -105,9 +105,6 @@ func launch_level(level_def):
 
 	game_node = DinoLevel.create_level(level_def, {seed=_seed, })
 	add_child(game_node)
-	# note right now quests are found via group-lookup in the tree, so we need to add_child first
-	# TODO refactor questManager into a node added to game scenes instead of an autoload
-	game_node.setup_quests()
 
 	Dino.spawn_player({level=game_node, deferred=false})
 

@@ -53,7 +53,9 @@ func _enter_tree():
 
 ## setup ##############################################################################
 
+# rename 'reset data?'
 func setup():
+	Log.pr("Quest data resetting", self)
 	var xs = get_xs.call()
 	total = len(xs)
 	for x in xs:
@@ -61,13 +63,11 @@ func setup():
 
 	update_quest()
 
-func add_entity(node):
-	Log.pr("TODO use node to update quest", node, self)
-
 ## update ##############################################################################
 
 # support an optional arg so various update signal impls can land here
 func update_quest(_x=null):
+	Log.pr("quest updated!", _x, self)
 	count_total_update.emit(total)
 
 	var remaining = len(get_xs.call().filter(is_remaining))

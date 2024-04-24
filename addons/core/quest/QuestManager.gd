@@ -49,18 +49,18 @@ func _enter_tree():
 	get_tree().node_added.connect(on_node_added)
 	get_tree().node_removed.connect(on_node_removed)
 
-func check_quests_for_node(node: Node):
-	var qs = QuestManager.quests_for_entities([node])
+func check_quests_for_nodes(nodes: Array[Node]):
+	var qs = QuestManager.quests_for_entities(nodes)
 	for q in qs:
 		var existing = get_quest(q)
 		if not existing:
 			add_child(q)
 		var q_data = get_quest(q)
 		if not q_data:
-			Log.warn("Expected quest to be added for node", q, node)
+			Log.warn("Expected quest to be added for nodes", q, nodes)
 			continue
 		# hmmm - here have data.node instead of node.data
-		q_data.node.add_entity(node)
+		q_data.node.setup()
 
 func on_node_added(node: Node):
 	if node is Quest:
@@ -69,9 +69,9 @@ func on_node_added(node: Node):
 		register_quest(node)
 		# TODO prefer this call in Quest.ready?
 		node.setup()
-	else:
-		# impl rn now i stupidly expensive
-		check_quests_for_node(node)
+	elif len(node.get_groups()) > 0:
+		# impl rn now is stupidly expensive
+		check_quests_for_nodes([node])
 
 func on_node_removed(node: Node):
 	if node is Quest:
@@ -82,30 +82,26 @@ func on_node_removed(node: Node):
 ## ready #####################################################
 
 func _ready():
-	Log.pr("quest manager _ready()")
-
-	setup_quests()
-
+	# check for quests based on existing entities (added before the manager)
+	var ents = U.get_all_children(get_parent()).filter(func(ent): return len(ent.get_groups()) > 0)
+	var _ents: Array[Node] = []
+	_ents.assign(ents)
+	check_quests_for_nodes(_ents)
 
 ## label #####################################################
 
 func q_label(node, opts):
-	# TODO node still valid?
+	# TODO node still valid at exit time?
 	var label = node.get("label")
 	if label in [null, ""]:
 		label = opts.get("label", "Fallback Label")
-	return str("%s-%s" % [label, node.name])
+	# return "%s-%s" % [label, node.name]
+	return "%s" % label
 
 func get_quest(node, opts={}):
 	return active_quests.get(q_label(node, opts))
 
 ## register quest and updates #####################################################
-
-func setup_quests():
-	for q in get_tree().get_nodes_in_group("quests"):
-		register_quest(q)
-	for q in active_quests.values():
-		q.node.setup()
 
 func drop_quests():
 	for q in active_quests.values():

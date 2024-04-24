@@ -44,6 +44,10 @@ static func create_level(def: LevelDef, opts={}):
 	l.level_gen.name = "LevelGen"
 	l.add_child(l.level_gen)
 
+	l.quest_manager = QuestManager.new()
+	l.quest_manager.name = "QuestManager"
+	l.add_child(l.quest_manager)
+
 	if def.get_level_gen_script():
 		l.level_gen.set_script(def.get_level_gen_script())
 
@@ -54,6 +58,12 @@ static func create_level(def: LevelDef, opts={}):
 static func create_level_from_game(ent: DinoGameEntity, opts={}):
 	var scene = ent.get_level_scene()
 	var level = scene.instantiate()
+
+	if not level.get_node_or_null("QuestManager"):
+		level.quest_manager = QuestManager.new()
+		level.quest_manager.name = "QuestManager"
+		level.add_child(level.quest_manager)
+
 	# TODO clear existing nodes/ents/quests on these scenes?
 	# TODO or, refactor game ents into level defs?
 	level.regenerate(opts)
@@ -90,6 +100,7 @@ func regen_with_def(def):
 ## vars ######################################################
 
 @onready var level_gen: BrickLevelGen = $LevelGen
+@onready var quest_manager: QuestManager = $QuestManager
 @onready var entities_node = $Entities
 @onready var tilemaps_node = $Tilemaps
 @onready var rooms_node = $Rooms
@@ -136,15 +147,15 @@ func _ready():
 
 	if level_gen == null:
 		Log.error("DinoLevel missing expected 'LevelGen' node")
+	if quest_manager == null:
+		Log.error("DinoLevel missing expected 'QuestManager' node")
 
 	Log.pr("DinoLevel ready: ", self)
 	hud = hud_scene.instantiate()
 	add_child.call_deferred(hud)
 
-	var q_manager = get_node_or_null("QuestManager")
-	if q_manager:
-		U._connect(q_manager.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
-		U._connect(q_manager.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
+	U._connect(quest_manager.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
+	U._connect(quest_manager.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 
 	if Dino.is_debug_mode():
 		Log.pr("no game_mode set; regenerating dino level")
