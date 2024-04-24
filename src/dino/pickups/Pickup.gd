@@ -35,8 +35,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body: Node):
 	if body.is_in_group("player"):
-		Log.pr("TODO player should collect drop data", drop_data)
-		# 	body.collect_orb(ingredient_type)
+		if body.has_method("collect"):
+			body.collect({body=self, data=drop_data})
 
 		kill()
 

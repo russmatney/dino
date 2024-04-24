@@ -60,5 +60,6 @@ func animate_collected():
 func on_collect_box_entered(body):
 	if body.is_in_group("player"):
 		if body.has_method("collect"):
-			body.collect(self)
+			# TODO create drop_data? or make player collect more flexible?
+			body.collect({body=self, type="leaf"})
 			kill()

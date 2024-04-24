@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmjk2del2veo3"]
+[gd_scene load_steps=11 format=3 uid="uid://bmjk2del2veo3"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_8e7yn"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_51fer"]
@@ -7,11 +7,17 @@
 [ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/dino/entities/leaves/Leaf.tscn" id="5_efu5k"]
 [ext_resource type="PackedScene" uid="uid://ddjj5kujrnpg5" path="res://src/dino/entities/boxes/TreasureBox.tscn" id="5_lw0tn"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="6_4jcwt"]
+[ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/entities/GreenBlobAnim.tscn" id="7_dfe48"]
 
 [sub_resource type="Resource" id="Resource_rpa23"]
 script = ExtResource("6_4jcwt")
 type = 3
 anim_scene = ExtResource("5_efu5k")
+
+[sub_resource type="Resource" id="Resource_c5h45"]
+script = ExtResource("6_4jcwt")
+type = 1
+anim_scene = ExtResource("7_dfe48")
 
 [node name="BoxesGym" type="Node"]
 script = ExtResource("1_8e7yn")
@@ -26,7 +32,7 @@ layer_0/tile_data = PackedInt32Array(4456571, 196609, 4, 4391035, 196609, 3, 432
 
 [node name="Box" parent="." instance=ExtResource("4_1cnsg")]
 position = Vector2(83, 84)
-drops = Array[ExtResource("6_4jcwt")]([SubResource("Resource_rpa23")])
+drops = Array[ExtResource("6_4jcwt")]([SubResource("Resource_rpa23"), SubResource("Resource_c5h45")])
 
 [node name="TreasureBox" parent="." instance=ExtResource("5_lw0tn")]
 position = Vector2(-153, 83)

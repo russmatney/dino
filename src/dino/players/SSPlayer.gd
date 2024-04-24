@@ -73,6 +73,7 @@ var orbit_items = []
 var pickups = []
 
 var coins = 0
+var leaves = 0
 
 # actor vars
 
@@ -335,6 +336,7 @@ func hotel_data():
 		death_count=death_count,
 		powerups=powerups,
 		coins=coins,
+		leaves=leaves,
 		pickups=pickups,
 		}
 	if not display_name in ["", null]: # yay types! woo!
@@ -347,6 +349,7 @@ func check_out(data):
 	display_name = U.get_(data, "display_name", display_name)
 	death_count = U.get_(data, "death_count", death_count)
 	coins = U.get_(data, "coins", coins)
+	leaves = U.get_(data, "leaves", leaves)
 	pickups = U.get_(data, "pickups", pickups)
 	var stored_powerups = U.get_(data, "powerups", powerups)
 	if len(stored_powerups) > 0:
@@ -576,28 +579,55 @@ func stamp(opts={}):
 #################################################################################
 ## pickups #####################################################################
 
-func collect_pickup(pickup_type):
-	notif(pickup_type.capitalize() + " PICKED UP", {"dupe": true})
-	pickups.append(pickup_type)
+func collect(opts={}):
+	var data = opts.get("data")
+
+	if not data:
+		Log.pr("Unhandled pickup", opts)
+		return
+
+	match data.type:
+		DropData.T.RANDOM:
+			Log.pr("Unhandled pickup", opts)
+		DropData.T.ORB:
+			add_orb(SpikeData.Ingredient.RedBlob)
+			return
+		DropData.T.COIN:
+			add_coin()
+			return
+		DropData.T.LEAF:
+			add_leaf()
+			return
+		DropData.T.POWERUP:
+			Log.pr("Unhandled pickup", opts)
+		_:
+			Log.pr("Unhandled pickup", opts)
+
+	Log.pr("unhandled pickup", opts)
+
+## counts
+
+func add_coin():
+	notif("COIN PICKED UP", {"dupe": true})
+	coins += 1
+	Hotel.check_in(self)
+
+func add_leaf():
+	notif("LEAF PICKED UP", {"dupe": true})
+	leaves += 1
+	Hotel.check_in(self)
+
+func add_orb(ingredient_type):
+	add_orbit_item(ingredient_type)
+
+## items
+
+func add_pickup(data):
+	pickups.append(data)
 
 	Hotel.check_in(self, {pickups=pickups})
 	pickups_changed.emit(pickups)
 
-func collect(_entity, _opts={}):
-	pass
-	# match entity.type:
-	# 	WoodsEntity.t.Leaf: Log.pr("player collected leaf")
-
-## orb items ##################################################################
-
-func collect_orb(ingredient_type):
-	add_orbit_item(ingredient_type)
-
-## coins #######################################################
-
-func add_coin():
-	coins += 1
-	Hotel.check_in(self)
 
 #################################################################################
 ## Powerups #####################################################################

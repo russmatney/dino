@@ -41,7 +41,7 @@ static func add_drop(node, dd: DropData = null):
 var data: Dictionary
 
 func to_pretty():
-	return ["Drop", type_to_str()]
+	return ["Drop", type_to_str(), data]
 
 func type_to_str():
 	var t = "no-type"
@@ -66,7 +66,6 @@ func _init(t: T = T.RANDOM, d: Dictionary = {}):
 
 	if type == T.RANDOM:
 		type = U.rand_of(DropData.all_primitive_types())
-
 
 func set_type_defaults(typ: T):
 	if type != typ:
