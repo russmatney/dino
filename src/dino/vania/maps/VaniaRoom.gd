@@ -37,6 +37,17 @@ func _ready():
 		if is_debug:
 			debug_room_def.reapply_constraints()
 			build_room(debug_room_def)
+
+			if get_node_or_null("Camera2D") == null:
+				var cam = Camera2D.new()
+				cam.name = "Camera2D"
+				var host = PhantomCameraHost.new()
+				host.name = "PhantomCameraHost"
+				cam.add_child(host)
+				add_child(cam)
+				cam.set_owner(self)
+				host.set_owner(self)
+
 			Dino.create_new_player({
 				genre_type=DinoData.GenreType.SideScroller,
 				entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),

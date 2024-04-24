@@ -4,16 +4,16 @@
 [ext_resource type="SpriteFrames" uid="uid://vfgj4qh623p0" path="res://src/dino/entities/boxes/TreasureBoxSpriteFrames.tres" id="1_jde4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wmgj"]
-size = Vector2(20, 13)
+size = Vector2(28, 25)
 
 [node name="TreasureBox" type="Area2D"]
 script = ExtResource("1_btsm0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1.5)
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_5wmgj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("1_jde4r")
 animation = &"idle"
-frame_progress = 0.450889

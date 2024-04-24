@@ -1,6 +1,8 @@
 @tool
 extends Area2D
 
+## vars ###############################################
+
 @onready var anim = $AnimatedSprite2D
 
 @export var initial_anim = "idle":
@@ -8,6 +10,39 @@ extends Area2D
 		initial_anim = val
 		$AnimatedSprite2D.play(val)
 
-# Called when the node enters the scene tree for the first time.
+@export var drops: Array[DropData]
+
+var is_dead = false
+
+## ready ###############################################
+
 func _ready():
 	anim.play(initial_anim)
+
+## process ###############################################
+
+func _physics_process(_delta):
+	# TODO gravity (switch to rigid body base)
+	pass
+
+## take_hit ###############################################
+
+var hits = 0
+
+func take_hit(opts):
+	if is_dead:
+		return
+	Log.pr("box taking hit", opts)
+	hits += 1
+
+	# TODO sound effect
+	match hits:
+		1: anim.play("damage1")
+		2: anim.play("damage2")
+		_:
+			anim.play("damagefinal")
+			is_dead = true
+			Log.pr("box should drop drops")
+			if not drops.is_empty():
+				for drop in drops:
+					DropData.add_drop(self, drop)

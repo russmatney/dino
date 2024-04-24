@@ -4,16 +4,20 @@
 [ext_resource type="Script" path="res://src/dino/entities/boxes/Box.gd" id="1_cxgkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vs53a"]
-size = Vector2(16, 16)
+size = Vector2(32, 32)
 
 [node name="Box" type="Area2D" groups=["boxes"]]
+collision_layer = 128
+collision_mask = 0
 script = ExtResource("1_cxgkm")
+drops = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vs53a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("1_bh73g")
-animation = &"idle"
+animation = &"damage1"
 autoplay = "idle"
-frame_progress = 0.818465
+frame_progress = 0.520647

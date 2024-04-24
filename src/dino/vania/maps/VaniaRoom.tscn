@@ -1,35 +1,30 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhjv3h6oxgj4"]
+[gd_scene load_steps=13 format=3 uid="uid://bhjv3h6oxgj4"]
 
 [ext_resource type="TileSet" uid="uid://dh4wv4l8frtl7" path="res://addons/core/reptile/tilesets/GildedKingdomTiles8.tres" id="1_r8bn3"]
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_1wsgr"]
 [ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/art/ui/spaceship_background.png" id="2_dw7vg"]
-[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_frpje"]
 [ext_resource type="Script" path="res://src/dino/vania/VaniaRoomDef.gd" id="2_sq332"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomInputs.gd" id="3_1w2s4"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="3_tseep"]
-
-[sub_resource type="Resource" id="Resource_ayxfw"]
-script = ExtResource("2_frpje")
-_id = "128"
 
 [sub_resource type="Resource" id="Resource_cw6q6"]
 script = ExtResource("3_tseep")
 _id = "158"
 
-[sub_resource type="Resource" id="Resource_1d164"]
+[sub_resource type="Resource" id="Resource_mh1h0"]
 script = ExtResource("3_tseep")
-_id = "147"
+_id = "140"
 
 [sub_resource type="Resource" id="Resource_0bvom"]
 script = ExtResource("3_1w2s4")
-entities = Array[ExtResource("3_tseep")]([SubResource("Resource_cw6q6"), SubResource("Resource_1d164")])
-enemies = Array[ExtResource("2_frpje")]([SubResource("Resource_ayxfw")])
+entities = Array[ExtResource("3_tseep")]([SubResource("Resource_cw6q6"), SubResource("Resource_mh1h0")])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tilemap_scenes = Array[PackedScene]([])
-constraints = Array[String](["in_kingdom"])
+constraints = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_q4s3t"]
 script = ExtResource("2_sq332")
