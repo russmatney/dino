@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bhjv3h6oxgj4"]
+[gd_scene load_steps=16 format=3 uid="uid://bhjv3h6oxgj4"]
 
 [ext_resource type="TileSet" uid="uid://dh4wv4l8frtl7" path="res://addons/core/reptile/tilesets/GildedKingdomTiles8.tres" id="1_r8bn3"]
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/dino/vania/VaniaRoomDef.gd" id="2_sq332"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomInputs.gd" id="3_1w2s4"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="3_tseep"]
+[ext_resource type="Script" path="res://addons/core/quest/QuestManager.gd" id="8_ademk"]
 
 [sub_resource type="Resource" id="Resource_cw6q6"]
 script = ExtResource("3_tseep")
@@ -16,9 +17,17 @@ _id = "158"
 script = ExtResource("3_tseep")
 _id = "140"
 
+[sub_resource type="Resource" id="Resource_cy3m0"]
+script = ExtResource("3_tseep")
+_id = "139"
+
+[sub_resource type="Resource" id="Resource_m27qf"]
+script = ExtResource("3_tseep")
+_id = "136"
+
 [sub_resource type="Resource" id="Resource_0bvom"]
 script = ExtResource("3_1w2s4")
-entities = Array[ExtResource("3_tseep")]([SubResource("Resource_cw6q6"), SubResource("Resource_mh1h0")])
+entities = Array[ExtResource("3_tseep")]([SubResource("Resource_cw6q6"), SubResource("Resource_mh1h0"), SubResource("Resource_cy3m0"), SubResource("Resource_m27qf")])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
@@ -79,3 +88,6 @@ color = Color(0.533333, 0.533333, 0.533333, 1)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_61itp")
+
+[node name="QuestManager" type="Node" parent="."]
+script = ExtResource("8_ademk")

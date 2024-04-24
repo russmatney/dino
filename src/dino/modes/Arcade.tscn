@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="3_bsv3q"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_ea0cu"]
 
-[sub_resource type="Resource" id="Resource_vjlwv"]
+[sub_resource type="Resource" id="Resource_55lf1"]
 script = ExtResource("2_ox3dc")
-_id = "41"
+_id = "35"
 
 [sub_resource type="Resource" id="Resource_haq0s"]
 script = ExtResource("3_bsv3q")
@@ -15,9 +15,9 @@ _id = "70"
 
 [node name="Arcade" type="Node2D"]
 script = ExtResource("1_tnk8n")
-current_game_entity = SubResource("Resource_vjlwv")
+current_game_entity = SubResource("Resource_55lf1")
 player_entity = SubResource("Resource_haq0s")
-room_count = 4
+room_count = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

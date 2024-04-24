@@ -49,29 +49,18 @@ func _enter_tree():
 	get_tree().node_added.connect(on_node_added)
 	get_tree().node_removed.connect(on_node_removed)
 
-func check_quests_for_nodes(nodes: Array[Node]):
+func add_quests_for_nodes(nodes: Array[Node]):
 	var qs = QuestManager.quests_for_entities(nodes)
 	for q in qs:
 		var existing = get_quest(q)
 		if not existing:
 			add_child(q)
-		var q_data = get_quest(q)
-		if not q_data:
-			Log.warn("Expected quest to be added for nodes", q, nodes)
-			continue
-		# hmmm - here have data.node instead of node.data
-		q_data.node.setup()
+			register_quest(q)
 
 func on_node_added(node: Node):
-	if node is Quest:
-		# is node ready here?
-		# TODO sometimes quests register w/ opts?
-		register_quest(node)
-		# TODO prefer this call in Quest.ready?
-		node.setup()
-	elif len(node.get_groups()) > 0:
+	if len(node.get_groups()) > 0:
 		# impl rn now is stupidly expensive
-		check_quests_for_nodes([node])
+		add_quests_for_nodes([node])
 
 func on_node_removed(node: Node):
 	if node is Quest:
@@ -86,7 +75,7 @@ func _ready():
 	var ents = U.get_all_children(get_parent()).filter(func(ent): return len(ent.get_groups()) > 0)
 	var _ents: Array[Node] = []
 	_ents.assign(ents)
-	check_quests_for_nodes(_ents)
+	add_quests_for_nodes(_ents)
 
 ## label #####################################################
 

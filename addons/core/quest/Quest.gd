@@ -42,23 +42,27 @@ func _enter_tree():
 	if not has_method("update_quest"):
 		Log.warn("Quest missing expected update_quest() method", self)
 
-# impl idea: quests watching for added nodes
-# not sure if this will catch nodes with run-time added groups
-	# if not Engine.is_editor_hint():
-	# 	get_tree().node_added.connect(on_node_added)
-# func on_node_added(node: Node):
-# 	if node is Button:
-# 		node.focus_entered.connect(on_button_focused.bind(node))
-# 		node.pressed.connect(on_button_pressed.bind(node))
+	if not Engine.is_editor_hint():
+		get_tree().node_added.connect(on_node_added)
+
+func on_node_added(node: Node):
+	if node.is_in_group(xs_group):
+		# too big a hammer?
+		setup()
+
+## ready ##############################################################################
+
+func _ready():
+	setup()
 
 ## setup ##############################################################################
 
 # rename 'reset data?'
 func setup():
-	Log.pr("Quest data resetting", self)
 	var xs = get_xs.call()
 	total = len(xs)
 	for x in xs:
+		# does this get called/fired multiple times?
 		U._connect(x_update_signal.call(x), update_quest)
 
 	update_quest()
