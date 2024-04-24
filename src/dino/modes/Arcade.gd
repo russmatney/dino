@@ -27,6 +27,8 @@ var game_node: Node2D
 ## ready ##################################################3
 
 func _ready():
+	Dino.set_game_mode(Pandora.get_entity(ModeIds.ARCADE))
+
 	_seed = randi()
 	Log.pr("Arcade ready with seed!", _seed)
 	seed(_seed)
@@ -53,14 +55,6 @@ func random_game():
 
 ## launch game ##################################################3
 
-func setup_game(node):
-	node.ready.connect(_on_game_ready)
-
-	if node.has_signal("level_complete"):
-		node.level_complete.connect(_on_level_complete)
-	else:
-		Log.warn("game node has no 'level_complete' signal!", node)
-
 func launch_game(game_entity=null):
 	if game_entity == null:
 		game_entity = current_game_entity
@@ -69,6 +63,7 @@ func launch_game(game_entity=null):
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
+		await game_node.tree_exited
 
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
@@ -76,21 +71,21 @@ func launch_game(game_entity=null):
 			entity=player_entity,
 			})
 
-	var scene = game_entity.get_level_scene()
-	game_node = scene.instantiate()
-	setup_game(game_node)
-
-	add_child.call_deferred(game_node)
-
-## game level signals ##################################################3
-
-func _on_game_ready():
 	var level_opts = {seed=_seed, room_count=room_count,}
 
-	if game_node.has_method("regenerate"):
-		game_node.regenerate(level_opts)
+	game_node = DinoLevel.create_level_from_game(game_entity, level_opts)
+
+	add_child(game_node)
+	game_node.setup_quests()
+
+	Dino.spawn_player({level=game_node, deferred=false})
+
+	if game_node.has_signal("level_complete"):
+		game_node.level_complete.connect(_on_level_complete)
 	else:
-		Log.warn("Game/Level missing expected regenerate function!", game_node)
+		Log.warn("game node has no 'level_complete' signal!", game_node)
+
+## game level signals ##################################################3
 
 func _on_level_complete():
 	_seed = randi()

@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8m2lhbv2cerv"]
+[gd_scene load_steps=7 format=3 uid="uid://b8m2lhbv2cerv"]
 
 [ext_resource type="Script" path="res://src/dino/modes/Arcade.gd" id="1_tnk8n"]
 [ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="2_ox3dc"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="3_bsv3q"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_ea0cu"]
 
-[sub_resource type="Resource" id="Resource_qchg8"]
+[sub_resource type="Resource" id="Resource_uiq3u"]
 script = ExtResource("2_ox3dc")
-_id = "41"
+_id = "35"
 
 [sub_resource type="Resource" id="Resource_haq0s"]
 script = ExtResource("3_bsv3q")
@@ -14,5 +15,10 @@ _id = "70"
 
 [node name="Arcade" type="Node2D"]
 script = ExtResource("1_tnk8n")
-current_game_entity = SubResource("Resource_qchg8")
+current_game_entity = SubResource("Resource_uiq3u")
 player_entity = SubResource("Resource_haq0s")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("4_ea0cu")

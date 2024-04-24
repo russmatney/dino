@@ -7,6 +7,7 @@ class_name DinoLevel
 static func ensure_empty_containers(l: DinoLevel):
 	if l.entities_node:
 		l.entities_node.name = "EntitiesOLD"
+		l.remove_child(l.entities_node)
 		l.entities_node.queue_free()
 	l.entities_node = Node2D.new()
 	l.entities_node.ready.connect(func(): l.entities_node.set_owner(l))
@@ -15,6 +16,7 @@ static func ensure_empty_containers(l: DinoLevel):
 
 	if l.tilemaps_node:
 		l.tilemaps_node.name = "TilemapsOLD"
+		l.remove_child(l.tilemaps_node)
 		l.tilemaps_node.queue_free()
 	l.tilemaps_node = Node2D.new()
 	l.tilemaps_node.ready.connect(func(): l.tilemaps_node.set_owner(l))
@@ -23,6 +25,7 @@ static func ensure_empty_containers(l: DinoLevel):
 
 	if l.rooms_node:
 		l.rooms_node.name = "RoomsOLD"
+		l.remove_child(l.rooms_node)
 		l.rooms_node.queue_free()
 	l.rooms_node = Node2D.new()
 	l.rooms_node.ready.connect(func(): l.rooms_node.set_owner(l))
@@ -47,6 +50,14 @@ static func create_level(def: LevelDef, opts={}):
 	l.regenerate()
 
 	return l
+
+static func create_level_from_game(ent: DinoGameEntity, opts={}):
+	var scene = ent.get_level_scene()
+	var level = scene.instantiate()
+	# TODO clear existing nodes/ents/quests on these scenes?
+	# TODO or, refactor game ents into level defs?
+	level.regenerate(opts)
+	return level
 
 ## exports/triggers ######################################################
 
@@ -178,6 +189,8 @@ func regenerate(opts=null):
 			})
 
 	DinoLevel.ensure_empty_containers(self)
+	if not level_gen:
+		level_gen = get_node_or_null("LevelGen")
 	level_gen.generate(opts)
 
 	if hud and not Engine.is_editor_hint():

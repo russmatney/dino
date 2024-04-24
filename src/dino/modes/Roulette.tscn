@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckyjgpyqno21y"]
+[gd_scene load_steps=7 format=3 uid="uid://ckyjgpyqno21y"]
 
 [ext_resource type="Script" path="res://src/dino/modes/Roulette.gd" id="1_coksv"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_bsg7k"]
 [ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="3_bv8hs"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_e47pv"]
 
 [sub_resource type="Resource" id="Resource_svj3p"]
 script = ExtResource("2_bsg7k")
@@ -17,3 +18,8 @@ script = ExtResource("1_coksv")
 player_entity = SubResource("Resource_svj3p")
 current_game_entity = SubResource("Resource_vuyj7")
 set_random_seed = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("4_e47pv")

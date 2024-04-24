@@ -165,6 +165,9 @@ static func gen_room_def(opts: BrickRoomOpts, d_opts: Dictionary={}):
 	if opts == null:
 		opts = BrickRoomOpts.new(d_opts)
 	var room_defs = GridParser.parse(opts.data())
+	if not room_defs:
+		Log.warn("No room_defs parsed from opts.data()!", opts.data())
+		return
 	var filtered_rooms = room_defs.filter(opts.data())
 	if filtered_rooms != null:
 		return U.rand_of(filtered_rooms)

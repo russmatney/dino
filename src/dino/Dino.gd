@@ -58,6 +58,7 @@ func set_game_mode(mode: DinoModeEntity):
 func get_game_mode():
 	if game_mode:
 		return game_mode
+	Log.warn("no game mode set, returning debug!")
 	return Pandora.get_entity(ModeIds.DEBUG)
 
 func is_debug_mode():
