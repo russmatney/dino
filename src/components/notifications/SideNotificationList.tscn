@@ -4,18 +4,10 @@
 [ext_resource type="Script" path="res://src/components/notifications/SideNotificationList.gd" id="1_rnlk1"]
 [ext_resource type="PackedScene" uid="uid://dhc5onor7fgd2" path="res://src/components/notifications/SideNotification.tscn" id="2_ftj2j"]
 
-[node name="SideNotificationList" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="SideNotificationList" type="CanvasLayer"]
 script = ExtResource("1_rnlk1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,45 +15,45 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_38nqe")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(1500, 2.08165e-12)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(2.08165e-12, 200)
 layout_mode = 2
 
-[node name="SideNotification1" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
+[node name="SideNotification1" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SideNotification2" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
+[node name="SideNotification2" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SideNotification3" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
+[node name="SideNotification3" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SideNotification4" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
+[node name="SideNotification4" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SideNotification5" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
+[node name="SideNotification5" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="SideNotification6" parent="CanvasLayer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
+[node name="SideNotification6" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("2_ftj2j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/PanelContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 2.08165e-12)
 layout_mode = 2

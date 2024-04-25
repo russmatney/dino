@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://sisqkgg1lwpf"]
+[gd_scene load_steps=8 format=3 uid="uid://sisqkgg1lwpf"]
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="2_7c6hy"]
@@ -6,43 +6,52 @@
 [ext_resource type="FontFile" uid="uid://bt168sg1llw7h" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet_Monospace.ttf" id="3_wovs3"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://src/components/notifications/DebugNotificationList.tscn" id="4_4ubwc"]
 [ext_resource type="PackedScene" uid="uid://byj0we053kbu4" path="res://src/dino/hud/WeaponList.tscn" id="6_rcsf7"]
+[ext_resource type="PackedScene" uid="uid://bgoata4oy4d4g" path="res://src/components/notifications/SideNotificationList.tscn" id="7_y1kpf"]
 
-[node name="DinoHUD" type="CanvasLayer"]
+[node name="DinoHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_cqjfn")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="Top" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Top" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/Top"]
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="PlayerStatus" parent="VBoxContainer/Top" instance=ExtResource("2_7c6hy")]
+[node name="PlayerStatus" parent="CanvasLayer/VBoxContainer/Top" instance=ExtResource("2_7c6hy")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
 
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/Top"]
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Top"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Top"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
-[node name="TimeLabel" type="RichTextLabel" parent="VBoxContainer/Top/VBoxContainer"]
+[node name="TimeLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/Top/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("3_wovs3")
@@ -52,47 +61,49 @@ text = "[center]00[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer7" type="MarginContainer" parent="VBoxContainer/Top"]
+[node name="MarginContainer7" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LevelOpts" parent="VBoxContainer/Top" instance=ExtResource("3_40syy")]
+[node name="LevelOpts" parent="CanvasLayer/VBoxContainer/Top" instance=ExtResource("3_40syy")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer/Top"]
+[node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 
-[node name="Bottom" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Bottom" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Bottom"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Bottom"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Notifications" parent="VBoxContainer/Bottom" instance=ExtResource("4_4ubwc")]
+[node name="Notifications" parent="CanvasLayer/VBoxContainer/Bottom" instance=ExtResource("4_4ubwc")]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Bottom"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Bottom"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WeaponList" parent="VBoxContainer/Bottom" instance=ExtResource("6_rcsf7")]
+[node name="WeaponList" parent="CanvasLayer/VBoxContainer/Bottom" instance=ExtResource("6_rcsf7")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/Bottom"]
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Bottom"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+
+[node name="SideNotificationList" parent="." instance=ExtResource("7_y1kpf")]

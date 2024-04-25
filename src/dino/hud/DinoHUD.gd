@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 ## vars ############################################################33
 
@@ -50,7 +50,7 @@ func update_weapon_stack():
 
 	# TODO rewrite as well-typed weapon_set func
 	var ws: Array[DinoWeaponEntity] = []
-	ws.assign(p.weapon_set.list().map(func(w): return w.entity))
+	ws.assign(p.weapon_set.list_entities())
 	weapon_list.entities = ws
 	weapon_list.active_entity = p.active_weapon().entity
 	weapon_list.render()

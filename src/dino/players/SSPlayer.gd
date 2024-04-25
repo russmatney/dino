@@ -586,6 +586,8 @@ func collect(opts={}):
 		Log.pr("Unhandled pickup", opts)
 		return
 
+	Dino.notif({type="side", text="New pickup"})
+
 	match data.type:
 		DropData.T.RANDOM:
 			Log.pr("Unhandled pickup", opts)
