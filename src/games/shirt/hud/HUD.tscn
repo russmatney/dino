@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d1fe2xly3pfd4"]
 
-[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="1_i2ua0"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://src/components/notifications/DebugNotificationList.tscn" id="1_i2ua0"]
 [ext_resource type="Script" path="res://src/games/shirt/hud/HUD.gd" id="1_m3maa"]
 [ext_resource type="PackedScene" uid="uid://dc1ni26t3l2n4" path="res://addons/core/metro/MinimapContainer.tscn" id="2_ioejp"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="3_vl0v5"]

@@ -7,16 +7,17 @@ var scene_ready
 	set(txt):
 		add_notif = txt
 		if txt and scene_ready:
-			_on_notification({"msg": txt})
+			on_debug_notification({"msg": txt})
 
 @export var add_rich_notif = "" :
 	set(txt):
 		add_rich_notif = txt
 		if txt and scene_ready:
-			_on_notification({"msg": txt, "rich": true})
+			on_debug_notification({"msg": txt, "rich": true})
 
 @export var _clear : bool :
 	set(v):
+		_clear = v
 		for ch in get_children():
 			ch.queue_free()
 
@@ -25,19 +26,19 @@ var scene_ready
 #############################################################
 
 func _ready():
-	Debug.notification.connect(_on_notification)
-	Debug.notif("[HOOD] Notifications online.", {id="initial"})
+	Debug.debug_notification.connect(on_debug_notification)
+	Debug.notif("[DEBUG] Notifications online.", {id="initial"})
 	scene_ready = true
 
 #############################################################
 
-var notif_label = preload("res://addons/core/hood/NotifLabel.tscn")
-var notif_rich_label = preload("res://addons/core/hood/NotifRichLabel.tscn")
+var notif_label = preload("res://src/components/notifications/NotifLabel.tscn")
+var notif_rich_label = preload("res://src/components/notifications/NotifRichLabel.tscn")
 
 var id_notifs = {}
 
 # TODO support passed icon to decorate the notif/toast
-func _on_notification(notif: Dictionary):
+func on_debug_notification(notif: Dictionary):
 	var lbl
 
 	var text = notif.get("text", notif.get("msg"))

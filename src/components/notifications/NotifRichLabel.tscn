@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://c223urhhg7xv3"]
 
-[ext_resource type="Theme" uid="uid://bkvfrd7dyu3lp" path="res://addons/core/hood/NotificationLabelTheme.tres" id="1"]
-[ext_resource type="Script" path="res://addons/core/hood/NotifRichLabel.gd" id="2"]
+[ext_resource type="Theme" uid="uid://bkvfrd7dyu3lp" path="res://src/components/notifications/NotificationLabelTheme.tres" id="1"]
+[ext_resource type="Script" path="res://src/components/notifications/NotifRichLabel.gd" id="2"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="3"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Number.tres" id="4"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="5"]

@@ -92,9 +92,7 @@ func _notification(what: int) -> void:
 
 ## notifications ##########################################################################
 
-signal notification(notif)
-
-var queued_notifs = []
+signal debug_notification(notif)
 
 func notif(text, opts = {}):
 	# Log.pr("notif: ", text)
@@ -107,12 +105,4 @@ func notif(text, opts = {}):
 	opts["text"] = text
 	if not "ttl" in opts:
 		opts["ttl"] = 3.0
-	(func(): notification.emit(opts)).call_deferred()
-
-var queued_notifs_dev = []
-
-func dev_notif(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg7=null):
-	var msgs = [msg, msg2, msg3, msg4, msg5, msg6, msg7]
-	msgs = msgs.filter(func(m): return m)
-	msg = Log.to_printable(msgs)
-	notification.emit({msg=msg, rich=true, ttl=5.0})
+	(func(): debug_notification.emit(opts)).call_deferred()

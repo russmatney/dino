@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://jxsq8yyoh7jt"]
 
 [ext_resource type="Script" path="res://addons/core/hood/HUD.gd" id="1_ubn4a"]
-[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://addons/core/hood/Notifications.tscn" id="2_r0vxh"]
+[ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://src/components/notifications/DebugNotificationList.tscn" id="2_r0vxh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgyuc"]
 bg_color = Color(0.6, 0.6, 0.6, 0.0431373)

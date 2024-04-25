@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1vqfi3lpr4kv"]
+
+[ext_resource type="Theme" uid="uid://bkvfrd7dyu3lp" path="res://src/components/notifications/NotificationLabelTheme.tres" id="1"]
+[ext_resource type="Script" path="res://src/components/notifications/NotifLabel.gd" id="2"]
+
+[node name="NotifLabel" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("1")
+script = ExtResource("2")
