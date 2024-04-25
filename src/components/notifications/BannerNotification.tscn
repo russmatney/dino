@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk61vpl3r0gse"]
+
+[ext_resource type="Script" path="res://src/components/notifications/BannerNotification.gd" id="1_0gm27"]
+[ext_resource type="Theme" uid="uid://co0lie1f8a4j0" path="res://src/themes/Clear.tres" id="1_7ka1h"]
+[ext_resource type="Theme" uid="uid://bg3jgqdp2kpu1" path="res://src/themes/BannerNotificationTheme.tres" id="2_y2jck"]
+
+[node name="BannerNotification" type="CanvasLayer"]
+script = ExtResource("1_0gm27")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7ka1h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BannerLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_y2jck")
+bbcode_enabled = true
+text = "[center]Chamber of Spirits[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 700)
+layout_mode = 2

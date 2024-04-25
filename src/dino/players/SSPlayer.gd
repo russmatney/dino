@@ -586,6 +586,7 @@ func collect(opts={}):
 		Log.pr("Unhandled pickup", opts)
 		return
 
+	# TODO text and icon per pickup type
 	Dino.notif({type="side", text="New pickup"})
 
 	match data.type:

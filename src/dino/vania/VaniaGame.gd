@@ -29,7 +29,7 @@ func _ready():
 	add_custom_module.call_deferred(VaniaRoomTransitions)
 	add_custom_module.call_deferred(PassageAutomapper)
 
-	# room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
+	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
 	# Dino.player_ready.connect(on_player_ready)
 
@@ -46,6 +46,13 @@ func _ready():
 		room_inputs = fallback_room_inputs()
 
 	thread_room_generation({room_inputs=room_inputs})
+
+func on_room_loaded():
+	# TODO only if first visit
+	Dino.notif({type="banner",
+		text="%s" % map.name,
+		id="room-name"
+		})
 
 func fallback_room_inputs():
 	var inputs = [{

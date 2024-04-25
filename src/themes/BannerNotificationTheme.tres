@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bg3jgqdp2kpu1"]
+
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="1_lmdmo"]
+
+[resource]
+RichTextLabel/font_sizes/normal_font_size = 64
+RichTextLabel/fonts/normal_font = ExtResource("1_lmdmo")
