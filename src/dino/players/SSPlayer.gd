@@ -586,23 +586,40 @@ func collect(opts={}):
 		Log.pr("Unhandled pickup", opts)
 		return
 
-	# TODO text and icon per pickup type
-	Dino.notif({type="side", text="New pickup"})
-
 	match data.type:
 		DropData.T.RANDOM:
 			Log.pr("Unhandled pickup", opts)
 		DropData.T.ORB:
 			add_orb(SpikeData.Ingredient.RedBlob)
+			Dino.notif({
+				type="popup",
+				header_text="Orb Acquired",
+				body_text="This looks like a mighty fine ingredient",
+				})
 			return
 		DropData.T.COIN:
+			Dino.notif({
+				type="side",
+				text="+1 coin",
+				id="add-coin"
+				})
 			add_coin()
 			return
 		DropData.T.LEAF:
+			Dino.notif({
+				type="side",
+				text="+1 leaf",
+				id="add-leaf"
+				})
 			add_leaf()
 			return
 		DropData.T.POWERUP:
 			Log.pr("Unhandled pickup", opts)
+			Dino.notif({
+				type="popup",
+				header_text="Powerup Acquired",
+				body_text="A very good description of a powerup",
+				})
 		_:
 			Log.pr("Unhandled pickup", opts)
 

@@ -89,6 +89,10 @@ func start(opts={}):
 ## transitions ###################################################################
 
 func transit(target_state_name: String, ctx: Dictionary = {}):
+	if not is_started:
+		Log.warn("machine transit attempted before machine started")
+		return
+
 	# TODO expected behavior for transitioning to the current state?
 	is_transitioning = true
 	for child in get_children():

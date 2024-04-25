@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://sisqkgg1lwpf"]
+[gd_scene load_steps=10 format=3 uid="uid://sisqkgg1lwpf"]
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="2_7c6hy"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://byj0we053kbu4" path="res://src/dino/hud/WeaponList.tscn" id="6_rcsf7"]
 [ext_resource type="PackedScene" uid="uid://bgoata4oy4d4g" path="res://src/components/notifications/SideNotificationList.tscn" id="7_y1kpf"]
 [ext_resource type="PackedScene" uid="uid://bk61vpl3r0gse" path="res://src/components/notifications/BannerNotification.tscn" id="8_wfidm"]
+[ext_resource type="PackedScene" uid="uid://0u5w258etlac" path="res://src/components/notifications/PopupNotification.tscn" id="9_lrwc3"]
 
 [node name="DinoHUD" type="Control"]
 layout_mode = 3
@@ -110,3 +111,6 @@ layout_mode = 2
 [node name="SideNotificationList" parent="." instance=ExtResource("7_y1kpf")]
 
 [node name="BannerNotification" parent="." instance=ExtResource("8_wfidm")]
+
+[node name="PopupNotification" parent="." instance=ExtResource("9_lrwc3")]
+visible = false

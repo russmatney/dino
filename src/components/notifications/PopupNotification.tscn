@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://0u5w258etlac"]
+[gd_scene load_steps=6 format=3 uid="uid://0u5w258etlac"]
 
 [ext_resource type="Script" path="res://src/components/notifications/PopupNotification.gd" id="1_nq0mh"]
 [ext_resource type="Theme" uid="uid://co0lie1f8a4j0" path="res://src/themes/Clear.tres" id="1_oohft"]
 [ext_resource type="Theme" uid="uid://c0s5t4a1qpvnu" path="res://src/themes/PopupPanelTheme.tres" id="2_5no74"]
+[ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="2_lpejl"]
 [ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://addons/core/assets/icons/dino_sheet.png" id="2_x1vvm"]
 
 [node name="PopupNotification" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_nq0mh")
+
+[node name="ScreenBlur" parent="." instance=ExtResource("2_lpejl")]
+unique_name_in_owner = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15

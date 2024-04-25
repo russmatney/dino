@@ -17,6 +17,8 @@ static func ss_weapons_menu():
 @onready var panel = $%Panel
 @onready var screenBlur = $%ScreenBlur
 
+var anim_duration = 0.4
+
 ## ready #####################################################
 
 func _ready():
@@ -58,7 +60,7 @@ func show_menu(opts):
 	get_tree().paused = true
 	canvasLayer.set_visible(true)
 	# TODO tween the blur on/off
-	screenBlur.show()
+	screenBlur.fade_in({duration=anim_duration})
 
 	set_entities(opts.get("entities"), opts.get("on_select"))
 	set_focus()
@@ -68,8 +70,8 @@ func show_menu(opts):
 
 func hide_menu():
 	select_current()
+	screenBlur.fade_out({duration=anim_duration})
 	panel.set_visible(false)
-	screenBlur.hide()
 	canvasLayer.set_visible(false)
 
 	get_tree().paused = false

@@ -55,6 +55,11 @@ func on_node_added(node: Node):
 func _ready():
 	setup()
 
+	Dino.notif({
+		type="side",
+		text="New Quest: %s" % label,
+		})
+
 ## setup ##############################################################################
 
 # rename 'reset data?'
@@ -82,3 +87,7 @@ func update_quest(_x=null):
 
 	if remaining == 0 and total > 0:
 		quest_complete.emit()
+		Dino.notif({
+			type="side",
+			text="%s complete!" % label,
+			})

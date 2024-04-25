@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/components/quick_select/QuickSelectMenu.gd" id="1_itny8"]
 [ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_sfims"]
 [ext_resource type="Theme" uid="uid://bnfe8r27glpje" path="res://src/themes/QuickSelectPanel.tres" id="2_eihlf"]
-[ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlurRect.tscn" id="3_8lib6"]
+[ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="3_ewwyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gk3cd"]
 shader = ExtResource("1_sfims")
@@ -24,7 +24,7 @@ script = ExtResource("1_itny8")
 unique_name_in_owner = true
 layer = 3
 
-[node name="ScreenBlur" parent="CanvasLayer" instance=ExtResource("3_8lib6")]
+[node name="ScreenBlur" parent="CanvasLayer" instance=ExtResource("3_ewwyd")]
 unique_name_in_owner = true
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer"]

@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var header_label: RichTextLabel = $%HeaderLabel
 @onready var body_label: RichTextLabel = $%BodyLabel
 @onready var header_icon: TextureRect = $%HeaderIcon
+@onready var screenBlur = $%ScreenBlur
 
 var clear_tween
 var entry_tween
@@ -19,6 +20,7 @@ var default_ttl = 2.0
 ## ready #############################################################
 
 func _ready():
+	set_visible(false)
 	popup.modulate.a = 0.0
 	popup.minimum_size_changed.connect(func():
 		popup.set_pivot_offset(popup.size / 2))
@@ -30,19 +32,19 @@ func _ready():
 ## input ########################################
 
 # useful for local testing
-func _unhandled_input(event):
-	if Trolls.is_action(event):
-		Dino.notif({
-			type="popup",
-			header_text="ACTION Powerup Acquired",
-			body_text="Act around???",
-			})
-	if Trolls.is_jump(event):
-		Dino.notif({
-			type="popup",
-			header_text="JUMP Powerup Acquired",
-			body_text="Time to JUMP around",
-			})
+# func _unhandled_input(event):
+# 	if Trolls.is_action(event):
+# 		Dino.notif({
+# 			type="popup",
+# 			header_text="ACTION Powerup Acquired",
+# 			body_text="Act around???",
+# 			})
+# 	if Trolls.is_jump(event):
+# 		Dino.notif({
+# 			type="popup",
+# 			header_text="JUMP Powerup Acquired",
+# 			body_text="Time to JUMP around",
+# 			})
 
 ## render #############################################################
 
@@ -65,6 +67,8 @@ func render(opts):
 	if icon:
 		header_icon.set_texture(icon)
 
+	set_visible(true)
+
 	get_tree().paused = true
 
 	animate_entry(opts)
@@ -72,6 +76,8 @@ func render(opts):
 ## entry #############################################################
 
 func animate_entry(opts):
+	screenBlur.fade_in({duration=anim_duration})
+
 	popup.scale = Vector2.ONE*0.8
 	popup.modulate.a = 0.0
 	entry_tween = create_tween()
@@ -86,6 +92,8 @@ func animate_entry(opts):
 ## exit #############################################################
 
 func animate_exit():
+	screenBlur.fade_out({duration=anim_duration})
+
 	exit_tween = create_tween()
 	exit_tween.tween_property(popup, "modulate:a", 0.0, anim_duration)
 	exit_tween.parallel().tween_property(popup, "scale", Vector2.ONE*0.8, anim_duration)
@@ -101,4 +109,5 @@ func clear():
 		queued.erase(next)
 		render(next)
 	else:
+		set_visible(false)
 		get_tree().paused = false
