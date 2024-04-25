@@ -5,10 +5,10 @@ extends Control
 @onready var slots = [
 	$%SideNotification1,
 	$%SideNotification2,
-	# $%SideNotification3,
-	# $%SideNotification4,
-	# $%SideNotification5,
-	# $%SideNotification6,
+	$%SideNotification3,
+	$%SideNotification4,
+	$%SideNotification5,
+	$%SideNotification6,
 	]
 
 ## _ready ########################################
@@ -23,22 +23,21 @@ func _ready():
 		if notif.get("type") == "side":
 			render_notif(notif))
 
-## _input ########################################
+## input ########################################
+# useful for local testing
+# func _unhandled_input(event):
+# 	if Trolls.is_action(event):
+# 		Dino.notif({
+# 			type="side",
+# 			text="New misc Notif!!",
+# 			})
 
-func _unhandled_input(event):
-	if Trolls.is_action(event):
-		Dino.notif({
-			type="side",
-			text="New misc Notif!!",
-			})
-
-	if Trolls.is_jump(event):
-		Dino.notif({
-			type="side",
-			text="New jump Notif!!",
-			id="jump-notif"
-			})
-
+# 	if Trolls.is_jump(event):
+# 		Dino.notif({
+# 			type="side",
+# 			text="New jump Notif!!",
+# 			id="jump-notif"
+# 			})
 
 ## queue ########################################
 

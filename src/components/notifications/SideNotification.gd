@@ -8,6 +8,10 @@ var opts
 @onready var texture: TextureRect = $%SideNotifTexture
 
 var clear_tween: Tween
+var tween: Tween
+
+var og_pos: Vector2
+var x_offset = 300
 
 ## signals ###########################################
 
@@ -16,11 +20,17 @@ signal cleared
 ## _ready ########################################
 
 func _ready():
-	pass
+	modulate.a = 0.0
+
+	minimum_size_changed.connect(func():
+		Log.pr("side notif min size changed", position)
+		og_pos = position
+		)
 
 ## render ########################################
 
 func render(options: Dictionary):
+	var is_re_emph = opts != null
 	opts = options
 	Log.pr("rendering notif", opts)
 
@@ -41,20 +51,52 @@ func render(options: Dictionary):
 	clear_tween = create_tween()
 	clear_tween.tween_callback(clear).set_delay(ttl)
 
-	# TODO emphasize if already exists
-	# TODO animate entry
+	if is_re_emph:
+		reemphasize()
+	else:
+		animate_entry()
+
+## entry ########################################
+
+func animate_entry():
+	position = og_pos + Vector2.RIGHT * x_offset
+	modulate.a = 0.4
+
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(self, "position", og_pos, 0.4)
+	tween.parallel().tween_property(self, "modulate:a", 1.0, 0.4)
+
+## exit ########################################
+
+func animate_exit():
+	var target_position = og_pos + Vector2.RIGHT * x_offset
+	position = og_pos
+	if tween:
+		tween.kill()
+	tween = create_tween()
+	tween.tween_property(self, "position", target_position, 0.4)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, 0.4)
+
+## re-emph #############################################################
+
+func reemphasize():
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
+
+	modulate.a = 1.0
+	var t = create_tween()
+	t.tween_property(self, "scale", Vector2.ONE*1.2, 0.1)
+	t.tween_property(self, "scale", Vector2.ONE, 0.1)
 
 ## clear ########################################
 
 func clear():
 	opts = null
 	clear_tween = null # necessary?
-
-	# TODO animate exit
-	label.set_text("")
-
+	animate_exit()
 	cleared.emit()
-
 
 ## get_id ########################################
 
