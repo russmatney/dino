@@ -77,7 +77,6 @@ func on_room_loaded():
 func update_room_def():
 	if not current_room_def:
 		return
-	Log.pr("current rd", current_room_def)
 	seed_label.text = "seed: %s" % Dino._seed
 	room_count_label.text = "rooms: %s" % len(game.room_defs)
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()

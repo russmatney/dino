@@ -63,7 +63,7 @@ func _ready():
 ## build room ##############################################################
 
 func build_room(def: VaniaRoomDef, opts={}):
-	Log.prn("building room:", def)
+	# Log.prn("building room:", def)
 	room_def = def
 	clear_all_tiles()
 	setup_tileset()
