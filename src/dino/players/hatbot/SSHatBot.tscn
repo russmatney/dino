@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://src/dino/players/SSPlayer.gd" id="1_blpj0"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
-[ext_resource type="Theme" path="res://src/dino/ui/StateLabelTheme.tres" id="3_gwyf6"]
+[ext_resource type="Theme" path="res://src/themes/StateLabelTheme.tres" id="3_gwyf6"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_h4hiv"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/games/tower/assets/greyhat_jetflame_sheet.png" id="6_7oqkp"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_lxjfb"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/SSMachine.tscn" id="7_rj434"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="9_dlhwa"]
-[ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/dino/menus/quickSelect/QuickSelect.tscn" id="10_e40tc"]
+[ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/components/quick_select/QuickSelect.tscn" id="10_e40tc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="10_lf38g"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_xlgae"]
 

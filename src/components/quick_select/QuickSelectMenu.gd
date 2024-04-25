@@ -17,8 +17,6 @@ static func ss_weapons_menu():
 @onready var panel = $%Panel
 @onready var screenBlur = $%ScreenBlur
 
-@onready var entityButton = preload("res://src/dino/ui/EntityButton.tscn")
-
 ## ready #####################################################
 
 func _ready():

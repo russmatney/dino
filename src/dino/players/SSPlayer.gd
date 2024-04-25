@@ -119,7 +119,7 @@ var skull_particles
 
 # child scenes
 
-var quick_select_scene = preload("res://src/dino/menus/quickSelect/QuickSelect.tscn")
+var quick_select_scene = preload("res://src/components/quick_select/QuickSelect.tscn")
 var quick_select_menu
 
 var player_camera_scene = preload("res://src/dino/players/PlayerCamera.tscn")

@@ -9,7 +9,7 @@ extends VBoxContainer
 @export var entities: Array[DinoWeaponEntity] = []
 @export var active_entity: DinoWeaponEntity
 
-var weapon_icon_scene = preload("res://src/dino/ui/WeaponIcon.tscn")
+var weapon_icon_scene = preload("res://src/components/WeaponIcon.tscn")
 
 ## ready ######################################
 

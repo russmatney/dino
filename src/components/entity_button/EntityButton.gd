@@ -4,7 +4,7 @@ class_name EntityButton
 
 ## static #####################################################
 
-static var button_scene = "res://src/dino/ui/EntityButton.tscn"
+static var button_scene = "res://src/components/entity_button/EntityButton.tscn"
 
 static func newButton(ent, on_select=null):
 	var butt = load(button_scene).instantiate()

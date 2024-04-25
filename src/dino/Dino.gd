@@ -32,7 +32,7 @@ func reseed():
 
 ## ready ##########################################################
 
-var main_menu_scene = preload("res://src/dino/menus/DinoMenu.tscn")
+var main_menu_scene = preload("res://src/dino/menus/main/DinoMenu.tscn")
 var pause_menu_scene = preload("res://src/dino/menus/pause/DinoPauseMenu.tscn")
 var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
 var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")

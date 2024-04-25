@@ -10,8 +10,6 @@ extends CanvasLayer
 
 @onready var button_list = $%ButtonList
 
-var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
-
 var game_entities = []
 var selected_game_entities = []
 var enemy_entities = []

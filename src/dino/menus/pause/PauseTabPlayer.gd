@@ -3,9 +3,6 @@ extends HBoxContainer
 
 ## vars ###################################333
 
-var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
-var weapon_icon_scene = preload("res://src/dino/ui/WeaponIcon.tscn")
-
 @onready var player_icon = $%PlayerIcon
 @onready var player_name = $%PlayerName
 @onready var player_description = $%PlayerDescription

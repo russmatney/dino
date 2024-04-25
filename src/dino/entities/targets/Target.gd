@@ -3,7 +3,7 @@ extends Area2D
 ## vars
 
 @onready var anim = $AnimatedSprite2D
-@onready var destroyed_label_scene = preload("res://src/dino/ui/DestroyedLabel.tscn")
+@onready var destroyed_label_scene = preload("res://src/components/DestroyedLabel.tscn")
 
 signal destroyed
 var is_dead = false

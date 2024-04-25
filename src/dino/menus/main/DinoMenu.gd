@@ -3,8 +3,6 @@ extends CanvasLayer
 
 @onready var games_grid_container = $%GamesGridContainer
 
-var game_mode_button = preload("res://src/dino/ui/GameModeButton.tscn")
-
 func _ready():
 	if Engine.is_editor_hint():
 		request_ready()

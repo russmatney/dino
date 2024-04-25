@@ -10,8 +10,6 @@ var records = []
 @onready var game_record_text = $%GameRecordText
 @onready var player_icons = $%PlayerIcons
 
-var entity_button = preload("res://src/dino/ui/EntityButton.tscn")
-
 ## ready #########################################
 
 func _ready():

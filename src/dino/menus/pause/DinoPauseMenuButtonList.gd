@@ -3,10 +3,6 @@ extends NaviButtonList
 
 var menu_scenes = [
 	{
-		label="Roulette Main Menu",
-		fn=func(): Navi.nav_to("res://src/dino/menus/RouletteMainMenu.tscn"),
-	},
-	{
 		label="Back to Dino Menu",
 		fn=Navi.nav_to_main_menu,
 		hide_fn=func(): return not (OS.has_feature("dino") or OS.has_feature("editor")),
@@ -17,6 +13,7 @@ var menu_scenes = [
 @export var button_scene: PackedScene = preload("res://addons/core/navi/ui/MenuButton.tscn")
 
 func _ready():
+	# TODO collect menu_scenes from game mode entities
 	for ms in menu_scenes:
 		ms.merge({button_scene=button_scene}, true)
 		add_menu_item(ms)

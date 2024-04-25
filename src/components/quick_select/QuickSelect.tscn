@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cp33t2x7q044h"]
 
-[ext_resource type="Script" path="res://src/dino/menus/quickSelect/QuickSelectMenu.gd" id="1_itny8"]
+[ext_resource type="Script" path="res://src/components/quick_select/QuickSelectMenu.gd" id="1_itny8"]
 [ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_sfims"]
 [ext_resource type="Theme" uid="uid://bnfe8r27glpje" path="res://src/themes/QuickSelectPanel.tres" id="2_eihlf"]
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlurRect.tscn" id="3_8lib6"]

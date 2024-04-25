@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://d2ipf7t7godiy"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="1"]
-[ext_resource type="Script" path="res://src/dino/menus/DinoMenu.gd" id="2"]
-[ext_resource type="Script" path="res://src/dino/menus/OtherList.gd" id="3_odklj"]
+[ext_resource type="Script" path="res://src/dino/menus/main/DinoMenu.gd" id="2"]
+[ext_resource type="Script" path="res://src/dino/menus/main/OtherList.gd" id="3_odklj"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://addons/core/dj/MuteButtonList.tscn" id="4_iavjf"]
 
 [node name="DinoMenu" type="CanvasLayer" groups=["menus"]]
