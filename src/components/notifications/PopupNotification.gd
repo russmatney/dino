@@ -53,7 +53,6 @@ func render(opts):
 		queued.append(opts)
 		return
 
-	Log.pr("rendering popup notif", opts)
 	current = opts
 
 	var header_text = opts.get("header_text")
@@ -81,12 +80,16 @@ func animate_entry(opts):
 	popup.scale = Vector2.ONE*0.8
 	popup.modulate.a = 0.0
 	entry_tween = create_tween()
+	if not entry_tween:
+		return
 	entry_tween.tween_property(popup, "modulate:a", 1.0, anim_duration)
 	entry_tween.parallel().tween_property(popup, "scale", Vector2.ONE*1.0, anim_duration)
 
 	entry_tween.tween_callback(func():
 		var ttl = opts.get("ttl", default_ttl)
 		clear_tween = create_tween()
+		if not clear_tween:
+			return
 		clear_tween.tween_callback(animate_exit).set_delay(ttl))
 
 ## exit #############################################################
@@ -95,6 +98,8 @@ func animate_exit():
 	screenBlur.fade_out({duration=anim_duration})
 
 	exit_tween = create_tween()
+	if not exit_tween:
+		return
 	exit_tween.tween_property(popup, "modulate:a", 0.0, anim_duration)
 	exit_tween.parallel().tween_property(popup, "scale", Vector2.ONE*0.8, anim_duration)
 	exit_tween.tween_callback(clear)

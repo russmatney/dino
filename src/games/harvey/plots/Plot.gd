@@ -37,7 +37,7 @@ func on_transit(new_state):
 		"ReadyForHarvest":
 			DJZ.play(DJZ.S.cure)
 		_:
-			Log.prn("no sound")
+			Log.warn("no sound")
 
 
 func set_state_label(label: String):

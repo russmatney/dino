@@ -68,7 +68,6 @@ var drop_ingredient_type = SpikeData.Ingredient.RedBlob
 # TODO update!
 func finish_cooking():
 	anim.play("empty")
-	Log.pr("finished cooking", ingredients)
 
 	var drop = drop_pickup_scene.instantiate()
 	drop.ingredient_type = drop_ingredient_type

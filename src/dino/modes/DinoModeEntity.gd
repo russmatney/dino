@@ -42,8 +42,6 @@ func nav_to_menu(opts={}):
 	Navi.nav_to(get_menu(), opts)
 
 func start(opts={}):
-	Log.pr("Starting game", get_display_name())
-
 	var	scene = get_root_scene()
 	if scene:
 		Navi.nav_to(scene, opts)

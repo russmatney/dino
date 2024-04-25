@@ -9,7 +9,6 @@ extends CanvasLayer
 ## ready ##########################################
 
 func _ready():
-	Log.pr("pause menu ready")
 	refresh()
 
 	visibility_changed.connect(func():
@@ -23,7 +22,6 @@ func _ready():
 ## focus ##########################################
 
 func set_focus():
-	Log.pr("Focusing tab bar")
 	var tabbar = tabs.get_tab_bar()
 	tabbar.grab_focus()
 	# var active_tab = tabs.get_current_tab_control()

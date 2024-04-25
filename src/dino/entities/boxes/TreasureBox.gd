@@ -23,7 +23,6 @@ var actions = [
 ## open ###############################################
 
 func open(_actor=null):
-	Log.pr("opening treasure chest")
 	if not drops.is_empty():
 		for drop in drops:
 			DropData.add_drop(self, drop)

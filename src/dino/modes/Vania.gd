@@ -25,6 +25,7 @@ func to_printable():
 
 func _ready():
 	Dino.set_game_mode(Pandora.get_entity(ModeIds.VANIA))
+	Dino.notif({type="banner", text="Vania",})
 
 	if player_entity == null:
 		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
@@ -34,8 +35,6 @@ func _ready():
 ## start_game ##################################################3
 
 func start_game():
-	Log.pr("Vania game starting:", self)
-
 	# establish current player stack
 	if not Dino.current_player_entity():
 		Dino.create_new_player({

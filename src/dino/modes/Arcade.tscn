@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8m2lhbv2cerv"]
+[gd_scene load_steps=8 format=3 uid="uid://b8m2lhbv2cerv"]
 
 [ext_resource type="Script" path="res://src/dino/modes/Arcade.gd" id="1_tnk8n"]
 [ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="2_ox3dc"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="3_bsv3q"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_ea0cu"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_6cvnj"]
 
 [sub_resource type="Resource" id="Resource_55lf1"]
 script = ExtResource("2_ox3dc")
@@ -23,3 +24,5 @@ room_count = 2
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("4_ea0cu")
+
+[node name="DinoHUD" parent="." instance=ExtResource("5_6cvnj")]

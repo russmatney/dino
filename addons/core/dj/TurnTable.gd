@@ -6,13 +6,13 @@ extends Control
 var editor_interface
 func _on_reload_plugin_button_pressed():
 	if Engine.is_editor_hint():
-		Log.pr(&"Reloading dj plugin ----------------------------------")
+		print("Reloading dj plugin ----------------------------------")
 		editor_interface.set_plugin_enabled("dj", false)
 		editor_interface.set_plugin_enabled("dj", true)
 		editor_interface.set_main_screen_editor("DJTurnTable")
-		Log.pr(&"Reloaded dj plugin -----------------------------------")
+		print("Reloaded dj plugin -----------------------------------")
 	else:
-		Log.pr("DJ UI Reload Not impled outside of editor")
+		print("DJ UI Reload Not impled outside of editor")
 
 ## ready ######################################################################
 

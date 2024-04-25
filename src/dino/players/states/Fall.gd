@@ -39,7 +39,6 @@ func physics_process(delta):
 		coyote_ttl -= delta
 		if coyote_ttl > 0:
 			if Input.is_action_just_pressed("jump"):
-				Log.pr("Coyote jump!")
 				machine.transit("Jump")
 				return
 		else:

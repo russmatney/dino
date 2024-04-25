@@ -28,7 +28,6 @@ func setup(a, opts={}):
 	actor_actions = opts.get("actions", [])
 
 	update_actions()
-	# Log.pr("actor configured: ", a)
 
 ####################################################################
 # process

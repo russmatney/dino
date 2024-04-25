@@ -4,7 +4,7 @@ class_name OffscreenIndicator
 
 ## static ########################################################
 
-static var fallback_indicator_scene = "res://src/components/OffscreenIndicator.tscn"
+static var fallback_indicator_scene = "res://src/components/offscreen_indicator/OffscreenIndicator.tscn"
 
 static func maybe_activate(indicator, node, opts={}):
 	var is_active = opts.get("is_active", func(): return true)
@@ -84,7 +84,7 @@ func point_at(pos):
 # 	if event is InputEventMouseButton:
 # 		point_at(get_global_mouse_position())
 # if event is InputEventMouseMotion:
-# 	Log.pr("mouse: ", get_global_mouse_position())
+# 	Log.info("mouse: ", get_global_mouse_position())
 
 ## process ########################################################
 

@@ -48,8 +48,6 @@ var actions = [
 	]
 
 func get_dest_label():
-	Log.pr("dest label?", destination_travel_point)
-
 	if destination_travel_point:
 		return "To %s" % destination_travel_point.get_destination_name().capitalize()
 	else:

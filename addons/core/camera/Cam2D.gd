@@ -62,8 +62,6 @@ func _ready():
 	Debug.debug_toggled.connect(_on_debug_toggled)
 
 func _on_debug_toggled(debugging):
-	if debugging:
-		Log.pr("debugging cam2d!")
 	queue_redraw()
 
 ###########################################################################
@@ -153,7 +151,7 @@ func zoom_dir(dir, n_levels = null):
 			zoom_offset = calc_zoom_offset_increment() * n_levels
 
 	if zoom_level >= max_zoom_level or zoom_level <= min_zoom_level:
-		Log.pr("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
+		Log.info("Zoom min/max hit. level: ", zoom_level, " offset: ", zoom_offset)
 
 	match mode:
 		Cam.mode.FOLLOW:

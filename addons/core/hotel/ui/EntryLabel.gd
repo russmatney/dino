@@ -51,7 +51,7 @@ func set_selected(selected):
 			var entries = Hotel.query()
 			if len(entries) > 0:
 				var e = entries[3]
-				Log.prn("testing with entry: ", e)
+				Log.info("testing with entry: ", e)
 				entry = e
 		else:
 			entry = null

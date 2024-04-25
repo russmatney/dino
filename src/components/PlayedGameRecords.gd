@@ -18,7 +18,6 @@ func _ready():
 		records = Records.current_records
 
 	if Engine.is_editor_hint() and len(records) == 0:
-		# Log.pr("building fake game records for ui debugging")
 		records = DinoRecords.mk_records([{
 				game_entity=Pandora.get_entity(DinoGameEntityIds.GUNNER),
 				completed_at=Time.get_datetime_dict_from_system(),

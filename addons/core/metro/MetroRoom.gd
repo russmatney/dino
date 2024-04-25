@@ -144,7 +144,6 @@ func ensure_room_box():
 			existing.append(c)
 
 	if len(existing) > 0:
-		Log.pr("renaming and freeing room box", existing)
 		existing.map(func(c):
 			c.name = "RoomBox_ToDelete"
 			c.free())
@@ -194,7 +193,6 @@ func pause(opts={}):
 		var chs = get_children()
 		ents_to_pause = ents_to_pause.filter(func(ent): return not ent in chs)
 		if len(ents_to_pause) > 0:
-			Log.pr("paused room contains ents to pause", ents_to_pause)
 			for ent in ents_to_pause:
 				ent.set_process_mode.call_deferred(PROCESS_MODE_DISABLED)
 				paused_ents.append(ent)

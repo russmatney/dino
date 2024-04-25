@@ -28,9 +28,12 @@ var game_node: Node2D
 
 func _ready():
 	Dino.set_game_mode(Pandora.get_entity(ModeIds.ARCADE))
+	Dino.notif({
+		type="banner",
+		text="Arcade",
+		})
 
 	_seed = randi()
-	Log.pr("Arcade ready with seed!", _seed)
 	seed(_seed)
 
 	var game_entity = current_game_entity
@@ -43,7 +46,6 @@ func _ready():
 	if not game_entity:
 		Log.warn("Could not find game_entity!")
 	else:
-		Log.pr("Launching", game_entity.get_display_name())
 		launch_game(game_entity)
 
 ## select a game ##################################################3

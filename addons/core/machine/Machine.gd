@@ -39,9 +39,7 @@ func _ready():
 	if not actor:
 		# set the parent as the 'actor' in the states
 		var p = get_parent()
-		p.ready.connect(func():
-			Log.pr("starting machine with parent", p)
-			start({actor=p}))
+		p.ready.connect(func(): start({actor=p}))
 
 ## start #####################################################################
 
@@ -104,7 +102,7 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 
 		transitioning.emit(state.name, next_state.name)
 		if should_log:
-			Log.pr(owner, "Transition. Exiting '%s', Entering '%s'" % [state.name, next_state.name])
+			Log.info(owner, "Transition. Exiting '%s', Entering '%s'" % [state.name, next_state.name])
 		# note, machine.next_state is bound during .exit() call
 		state.exit()
 		state = next_state

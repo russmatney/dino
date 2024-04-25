@@ -4,8 +4,6 @@ extends HarveyPlayer
 ## ready #########################################################
 
 func _ready():
-	Log.prn("HarveyBot online: ", self.name)
-
 	speed = 70
 
 	super._ready()

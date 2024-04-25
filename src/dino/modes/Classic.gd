@@ -34,6 +34,7 @@ var round_defs = [[
 
 func _ready():
 	Dino.set_game_mode(Pandora.get_entity(ModeIds.CLASSIC))
+	Dino.notif({type="banner", text="Classic",})
 
 	round_complete.connect(_on_round_complete)
 	game_complete.connect(_on_game_complete)
@@ -48,7 +49,6 @@ func _ready():
 func start_game():
 	_seed = randi()
 	seed(_seed)
-	Log.pr("Classic game starting with seed:", _seed)
 	reset_data()
 
 	var level_def = next_level_def()
@@ -57,7 +57,7 @@ func start_game():
 		launch_level(level_def)
 		return
 
-	Log.pr("No level_def to launch in start_game")
+	Log.warn("No level_def to launch in start_game")
 
 func next_level_def():
 	var level_id
@@ -80,10 +80,10 @@ func reset_data():
 	stage_num = 0
 	round_num = 0
 
-## update_player_entity #################################333
+## set_player_entity #################################333
 
 # presumably from a menu somewhere
-func update_player_entity(ent: DinoPlayerEntity):
+func set_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
 
 ## launch_game ##################################################3
@@ -113,7 +113,7 @@ func launch_level(level_def):
 ## game level signals ##################################################3
 
 func _on_level_complete():
-	Log.pr("Level Complete!")
+	Dino.notif({type="banner", text="Level Complete",})
 	stage_num += 1
 
 	var def = next_level_def()
@@ -123,22 +123,14 @@ func _on_level_complete():
 		game_complete.emit()
 
 func _on_round_complete():
-	Log.pr("Round Complete!")
+	Dino.notif({type="banner", text="Round Complete",})
 	await Jumbotron.jumbo_notif({
 		header="Round complete!",
 		body="Wowie zowie!",
 		})
 
 func _on_game_complete():
-	Log.pr("Game Complete!")
-	await Jumbotron.jumbo_notif({
-		header="Did you know?",
-		body=U.rand_of([
-			"You can change the number of rooms in the Pause menu!",
-			"You can change the tileset in the Pause menu! (TODO lol)",
-			"You can change the tile_size in the Pause menu! I like 16x16!",
-			])
-		})
+	Dino.notif({type="banner", text="Game Complete",})
 
 	# TODO nav to high scores / credits
 	Navi.nav_to_main_menu()

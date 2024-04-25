@@ -26,7 +26,7 @@ func _ready():
 
 func do_image_regen(_val = null):
 	if scene_ready or ready_override:
-		Log.pr("-------------------")
+		print("-------------------")
 		regenerate_image()
 
 
@@ -60,7 +60,6 @@ func regenerate_image():
 
 func do_clear(_v):
 	if scene_ready:
-		Log.prn("Clear")
 		var node = get_node_or_null(room_node_path)
 		if node:
 			node.queue_free()
@@ -138,7 +137,6 @@ func ensure_image_node(name, i=0, img=null):
 	texture_rect.expand = true
 
 	if img:
-		Log.pr("setting texture with img: ", img)
 		var img_texture = ImageTexture.create_from_image(img)
 		# img_texture.set_size_override(Vector2(w/2, h/2))
 		texture_rect.texture = img_texture
@@ -148,11 +146,9 @@ func colorize_coord(ctx):
 		if not ctx.img:
 			Log.warn("colorize_coord ctx without img")
 			return
-		# Log.pr("setting coord to color: ", ctx.coord, " ", ctx.group.color)
 		ctx.img.set_pixel(ctx.coord.x, ctx.coord.y, ctx.group.color)
 
 func colorize_image(img):
-	Log.pr("colorizing img: ", img)
 	# copy this image b/c we're about to mutate it
 	var n = Image.new()
 	n.copy_from(img)
@@ -168,7 +164,7 @@ func colorize_image(img):
 
 func do_persist_tilemap(_val = null):
 	if scene_ready:
-		Log.prn("persisting tilemap: ", Time.get_time_string_from_system())
+		Log.info("persisting tilemap: ", Time.get_time_string_from_system())
 		persist_tilemap_to_disk()
 
 
@@ -188,7 +184,7 @@ func persist_tilemap_to_disk():
 		push_error(str("No node found for node_path: ", persist_node_path))
 
 	if not node.get_children().size():
-		Log.prn(persist_node_path, " has no children, skipping persist")
+		Log.warn(persist_node_path, " has no children, skipping persist")
 		return
 
 	for c in node.get_children():
@@ -205,7 +201,6 @@ func persist_tilemap_to_disk():
 		path = path + ".tscn"
 		var error = ResourceSaver.save(scene, path)
 		if error != OK:
-			push_error("Error while saving Map")
-			Log.prn("E: ", error)
+			Log.error(error)
 		else:
-			Log.prn("Successfully saved new map: ", path)
+			Log.info("Successfully saved new map: ", path)

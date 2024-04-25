@@ -29,10 +29,9 @@ func _physics_process(_delta):
 
 var hits = 0
 
-func take_hit(opts):
+func take_hit(_opts):
 	if is_dead:
 		return
-	Log.pr("box taking hit", opts)
 	hits += 1
 
 	# TODO sound effect
@@ -42,7 +41,6 @@ func take_hit(opts):
 		_:
 			anim.play("damagefinal")
 			is_dead = true
-			Log.pr("box should drop drops")
 			if not drops.is_empty():
 				for drop in drops:
 					DropData.add_drop(self, drop)

@@ -6,7 +6,6 @@ var max_reach = 500
 
 func enter(_opts = {}):
 	pass
-	# Log.pr("DESCENDING")
 
 
 ## exit ###########################################################
@@ -30,7 +29,6 @@ func warp_position_in_dir(_actor, direction, opts={}):
 
 	if seen_tilemap:
 		if coll != null and coll is TileMap and coll != last_coll:
-			# Log.pr("found next tilemap coll, returning collision_point")
 			return _actor.warp_cast.get_collision_point()
 		last_coll = coll
 
@@ -39,13 +37,9 @@ func warp_position_in_dir(_actor, direction, opts={}):
 			return
 
 	if coll != null:
-		# Log.pr("warp pos in dir hit:", coll)
 
 		if coll is TileMap:
-			# Log.pr("descend saw tilemap", coll)
 			opts["seen_tilemap"] = true
-		# else:
-		# 	Log.pr("warp found something else! adding exception for it", coll)
 
 		var coll_rid = _actor.warp_cast.get_collider_rid()
 		_actor.warp_cast.add_exception_rid(coll_rid)

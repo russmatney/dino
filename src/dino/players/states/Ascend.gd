@@ -27,19 +27,13 @@ func warp_position_in_dir(_actor, direction, opts={}):
 
 	if seen_tilemap:
 		if coll == null:
-			# Log.pr("no more coll, return last_collision_point")
 			return last_collision_point
 		else:
 			last_collision_point = _actor.warp_cast.get_collision_point()
 
 	if coll != null:
-		# Log.pr("warp pos in dir hit:", coll)
-
 		if coll is TileMap:
-			# Log.pr("ascend saw tilemap", coll)
 			opts["seen_tilemap"] = true
-		# else:
-		# 	Log.pr("warp found something else! adding exception for it", coll)
 
 		var coll_rid = _actor.warp_cast.get_collider_rid()
 		_actor.warp_cast.add_exception_rid(coll_rid)

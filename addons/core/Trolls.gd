@@ -192,7 +192,6 @@ static func _axs_for_input(input):
 
 
 static func actions_for_input(event):
-	# Log.prn(action_labels_by_input)
 	var axs = []
 	if event is InputEventKey:
 		var key_str = OS.get_keycode_string(event.keycode)

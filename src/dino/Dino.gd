@@ -82,7 +82,7 @@ func launch(mode: DinoModeEntity, opts={}):
 
 func restart_game(opts=null):
 	var mode = get_game_mode()
-	Log.pr("Starting game mode", mode.get_display_name())
+	Log.info("Starting game mode", mode.get_display_name())
 	mode.start(opts)
 
 ## player(s) ########################################################

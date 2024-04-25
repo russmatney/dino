@@ -14,8 +14,6 @@ extends CanvasLayer
 ## _ready ########################################
 
 func _ready():
-	Log.pr("side notif list ready with slots", slots)
-
 	for slot in slots:
 		slot.cleared.connect(on_slot_cleared)
 
@@ -44,16 +42,12 @@ func _ready():
 var queued = []
 
 func render_notif(notif: Dictionary):
-	Log.pr("render notif", notif)
-
 	var slot
 
-	var id = notif.get("id")
-
 	# pick slot for 'id'
-	if id:
+	if notif.get("id"):
 		for s in slots:
-			if s.get_id() == id:
+			if s.get_id() == notif.get("id"):
 				slot = s
 
 	# pick first available slot
@@ -66,7 +60,6 @@ func render_notif(notif: Dictionary):
 	if not slot:
 		# no slot available, queue for later
 		queued.append(notif)
-		Log.pr("all slots taken, queuing notif")
 		return
 
 	# go for it

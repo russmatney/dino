@@ -81,7 +81,7 @@ var roulette_scene = preload("res://src/dino/modes/Roulette.tscn")
 func start():
 	Navi.nav_to(roulette_scene, {setup=func(scene):
 		scene.update_game_ids(selected_game_entities)
-		scene.update_player_entity(selected_player_entity)
+		scene.set_player_entity(selected_player_entity)
 		})
 
 ## menu buttons ##################################################

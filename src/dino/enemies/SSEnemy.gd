@@ -238,8 +238,6 @@ func orient_to_wall(side):
 var hitbox_bodies = []
 
 func _on_hitbox_body_entered(body):
-	Log.prn("body entered", body)
-
 	if body.is_in_group("player"):
 		hitbox_bodies.append(body)
 

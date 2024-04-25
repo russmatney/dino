@@ -7,15 +7,6 @@ enum mode { FOLLOW, ANCHOR, FOLLOW_AND_POIS }
 var cam_scene = preload("res://addons/core/camera/Cam2D.tscn")
 var cam
 
-## ready #############################################################
-
-func _ready():
-	Debug.debug_toggled.connect(_on_debug_toggled)
-
-func _on_debug_toggled(debugging):
-	if debugging:
-		Log.pr("debugging camera!")
-
 ## cam_window_rect #############################################################
 
 ## helpful for placing 'offscreen' indicators at the edges
@@ -66,22 +57,17 @@ func request_camera(opts = {}):
 
 	# existing cam, lets make reparent to the passed player
 	if cam and is_instance_valid(cam):
-		# Log.pr("freeing existing camera, creating a new one")
-		# cam.free()
 		# make sure existing cam matches the requested cam
 
 		# require player group to avoid reparenting cameras on bots
 		if player and player.is_in_group("player"):
 			if cam.get_parent() == player:
-				# Log.pr("player already has cam parent")
 				return cam
 
 			var cam_parent = cam.get_parent()
 			if cam_parent != null and is_instance_valid(cam_parent) and cam.get_parent() != player:
-				Log.pr("reparenting cam to player:", cam)
 				cam.reparent(player)
 			else:
-				Log.pr("Setting cam parent to player:", cam)
 				player.add_child(cam)
 
 		if cam_mode == mode.ANCHOR and anchor:
@@ -93,7 +79,6 @@ func request_camera(opts = {}):
 
 	var cams = get_tree().get_nodes_in_group("camera")
 	if cams and cams.size() > 0:
-		Log.pr("Found unmanaged cams in 'camera' group, aborting 'request_camera'.", cams)
 		return cam
 
 	cam = cam_scene.instantiate()

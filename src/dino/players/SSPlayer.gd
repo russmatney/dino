@@ -225,7 +225,7 @@ func _ready():
 func _unhandled_input(event):
 	# prevent input
 	if block_controls or is_dead or machine.ignore_input():
-		Log.pr("blocking ss player control")
+		Log.info("blocking ss player control")
 		return
 
 	# jetpack
@@ -583,12 +583,12 @@ func collect(opts={}):
 	var data = opts.get("data")
 
 	if not data:
-		Log.pr("Unhandled pickup", opts)
+		Log.warn("Unhandled pickup", opts)
 		return
 
 	match data.type:
 		DropData.T.RANDOM:
-			Log.pr("Unhandled pickup", opts)
+			Log.warn("Unhandled pickup", opts)
 		DropData.T.ORB:
 			add_orb(SpikeData.Ingredient.RedBlob)
 			Dino.notif({
@@ -614,16 +614,16 @@ func collect(opts={}):
 			add_leaf()
 			return
 		DropData.T.POWERUP:
-			Log.pr("Unhandled pickup", opts)
+			Log.warn("Unhandled pickup", opts)
 			Dino.notif({
 				type="popup",
 				header_text="Powerup Acquired",
 				body_text="A very good description of a powerup",
 				})
 		_:
-			Log.pr("Unhandled pickup", opts)
+			pass
 
-	Log.pr("unhandled pickup", opts)
+	Log.warn("unhandled pickup", opts)
 
 ## counts
 
@@ -765,8 +765,6 @@ func stop_using_weapon(weapon=null):
 	return weapon_set.stop_using_weapon(weapon)
 
 func add_orbit_item(ingredient_type):
-	Log.pr("adding orbit item", ingredient_type)
-
 	var item = orbit_item_scene.instantiate()
 	item.show_behind_parent = true
 	# pass ingredient data along

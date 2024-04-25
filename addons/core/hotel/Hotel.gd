@@ -12,7 +12,7 @@ extends Node
 var scene_db = {}
 
 func recreate_db():
-	Log.pr("not impled")
+	Log.warn("not impled")
 
 ## keys #####################################################################
 

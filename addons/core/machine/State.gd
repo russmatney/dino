@@ -9,7 +9,7 @@ var actor: Node2D
 ## transitions ###################################################################
 
 func enter(_ctx := {}):
-	Log.pr("WARN: enter func expected to be overwritten")
+	Log.warn("WARN: enter func expected to be overwritten")
 
 func exit():
 	pass

@@ -46,19 +46,19 @@ func _ready():
 ## public api #####################################################
 
 func aim(aim_vector: Vector2):
-	Log.pr("impl aim!", self)
+	Log.warn("impl aim!", self)
 
 func activate():
-	Log.pr("impl activate!", self)
+	Log.warn("impl activate!", self)
 
 func deactivate():
-	Log.pr("impl deactivate!", self)
+	Log.warn("impl deactivate!", self)
 
 func use():
-	Log.pr("impl use!", self)
+	Log.warn("impl use!", self)
 
 func stop_using():
-	Log.pr("impl stop using!", self)
+	Log.warn("impl stop using!", self)
 
 ## helpers #####################################################
 

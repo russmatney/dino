@@ -61,7 +61,7 @@ func debug_label(msg, msg2=null, msg3=null, msg4=null, msg5=null, msg6=null, msg
 	msg_array = msg_array.filter(func(m): return m)
 
 	if Engine.is_editor_hint():
-		Log.prn("DEBUG_LABEL: ", msg_array)
+		Log.info("DEBUG_LABEL: ", msg_array)
 		return
 
 	ensure_debug_overlay()
@@ -95,7 +95,6 @@ func _notification(what: int) -> void:
 signal debug_notification(notif)
 
 func notif(text, opts = {}):
-	# Log.pr("notif: ", text)
 	if text is Dictionary:
 		opts.merge(text)
 		text = opts.get("text", opts.get("msg"))

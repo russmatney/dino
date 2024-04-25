@@ -44,7 +44,6 @@ func _ready():
 	if not game:
 		Log.warn("VaniaEditor could not find game")
 		return
-	Log.pr("Vania Editor ready", game.room_defs)
 
 	Debug.debug_toggled.connect(on_debug_toggled)
 	set_visible(Debug.debugging)

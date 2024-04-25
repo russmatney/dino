@@ -29,7 +29,7 @@ func set_focus():
 	if len(chs) > 0:
 		chs[0].grab_focus()
 	else:
-		Log.pr(self, "no children, can't grab focus")
+		Log.warn(self, "no children, can't grab focus")
 
 	var btns = get_buttons()
 	if len(btns) > 0:
@@ -58,7 +58,7 @@ func add_menu_item(item):
 
 	var label = item.get("label", "Fallback Label")
 	if label in texts:
-		Log.pr("Found existing button with label, skpping add_menu_item", item)
+		Log.warn("Found existing button with label, skipping add_menu_item", item)
 		return
 	var button_scene = item.get("button_scene", default_button_scene)
 	var button = button_scene.instantiate()
@@ -73,7 +73,7 @@ func set_menu_items(items):
 		add_menu_item(it)
 
 func no_op():
-	Log.pr("button created with no method")
+	Log.warn("button created with no method")
 
 
 func connect_pressed_to_action(button, item):
@@ -92,17 +92,17 @@ func connect_pressed_to_action(button, item):
 
 	if nav_to == null and fn == null:
 		button.set_disabled(true)
-		Log.pr("Menu item missing handler", item)
+		Log.warn("Menu item missing handler", item)
 		return
 	elif nav_to:
 		if not ResourceLoader.exists(nav_to):
 			button.set_disabled(true)
-			Log.pr("Menu item with non-existent nav-to", item)
+			Log.warn("Menu item with non-existent nav-to", item)
 			return
 
 	if fn == null:
 		button.set_disabled(true)
-		Log.pr("Menu item handler invalid", item)
+		Log.warn("Menu item handler invalid", item)
 		return
 
 	if item.get("is_disabled"):

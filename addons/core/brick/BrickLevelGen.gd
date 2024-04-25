@@ -280,7 +280,7 @@ func generate(opts={}):
 	rooms_node = get_node("../Rooms")
 
 	transfer_nodes(data)
-	Log.pr("GENERATE: new data generated with seed", [data.seed], data.keys())
+	Log.info("[GENERATED] new data", [data.seed], data.keys())
 
 func transfer_nodes(data):
 	for node in data.entities:

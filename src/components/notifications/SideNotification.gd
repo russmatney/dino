@@ -23,16 +23,13 @@ func _ready():
 	modulate.a = 0.0
 
 	minimum_size_changed.connect(func():
-		Log.pr("side notif min size changed", position)
-		og_pos = position
-		)
+		og_pos = position)
 
 ## render ########################################
 
 func render(options: Dictionary):
 	var is_re_emph = opts != null
 	opts = options
-	Log.pr("rendering notif", opts)
 
 	# set label
 	var text = opts.get("text")
@@ -49,6 +46,8 @@ func render(options: Dictionary):
 		clear_tween.kill()
 	var ttl = opts.get("ttl", 3.0)
 	clear_tween = create_tween()
+	if not clear_tween:
+		return
 	clear_tween.tween_callback(clear).set_delay(ttl)
 
 	if is_re_emph:
@@ -65,6 +64,8 @@ func animate_entry():
 	if tween:
 		tween.kill()
 	tween = create_tween()
+	if not tween:
+		return
 	tween.tween_property(self, "position", og_pos, 0.4)
 	tween.parallel().tween_property(self, "modulate:a", 1.0, 0.4)
 
@@ -76,6 +77,8 @@ func animate_exit():
 	if tween:
 		tween.kill()
 	tween = create_tween()
+	if not tween:
+		return
 	tween.tween_property(self, "position", target_position, 0.4)
 	tween.parallel().tween_property(self, "modulate:a", 0.0, 0.4)
 
@@ -87,6 +90,8 @@ func reemphasize():
 
 	modulate.a = 1.0
 	var t = create_tween()
+	if not t:
+		return
 	t.tween_property(self, "scale", Vector2.ONE*1.2, 0.1)
 	t.tween_property(self, "scale", Vector2.ONE, 0.1)
 

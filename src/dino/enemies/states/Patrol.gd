@@ -66,10 +66,8 @@ func physics_process(delta):
 		# Jump!
 		jumping = true
 		actor.velocity.y = actor.jump_velocity * -1
-		# Log.pr("jumping in patrol!", actor.velocity.y)
 	else:
 		pass
-		# Log.pr("no need to jump, next pos diff:", diff)
 
 	if last_diff and last_diff == diff:
 		# rebuild the path

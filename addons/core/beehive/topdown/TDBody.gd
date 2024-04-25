@@ -122,13 +122,11 @@ func check_out(data):
 # Should be called immediately after move_and_slide in physics_process
 # if it returns true, the calling physics_process should return to avoid moving to another state
 # func collision_check():
-# 	Log.pr("checking collision")
 # 	for i in get_slide_collision_count():
-# 		Log.pr("checking collision", i)
 # 		var collision = get_slide_collision(i)
 # 		var collider = collision.get_collider()
 # 		if collider.is_in_group("pits"):
-# 			Log.pr("pit hit", collider)
+# 			Log.info("pit hit", collider)
 
 ## facing ###########################################################
 
@@ -177,7 +175,6 @@ func die(opts={}):
 ## damage ###########################################################
 
 func take_hit(opts):
-	Log.pr("tdbody taking hit", self, opts)
 	take_damage(opts)
 	var hit_type = opts.get("type")
 	var body = opts.get("body")
@@ -228,13 +225,11 @@ func on_hurt_box_entered(body):
 	# if is_invincible:
 	# 	return
 	if not "is_td_body" in body:
-		Log.pr("hurt box entered by non td_body", body)
 		return
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
 			self.take_hit({type="bump", body=body})
-			Log.pr("bumpin' body", body, "ready", body.is_node_ready())
 
 			# is_invincible = true
 			# await get_tree().create_timer(1.0).timeout
@@ -250,7 +245,6 @@ var notice_box_bodies = []
 
 func on_notice_box_entered(body):
 	if not "is_td_body" in body:
-		Log.pr("notice box entered by non td_body", body)
 		return
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in notice_box_bodies:

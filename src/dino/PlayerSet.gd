@@ -96,7 +96,7 @@ func spawn_new(opts={}):
 ## respawn #################################################
 
 func respawn_active_player(opts):
-	Log.pr("respawning active player node", opts)
+	Log.info("respawning active player node", opts)
 
 	var p = active_player()
 	if p:
@@ -132,7 +132,6 @@ func get_spawn_point(opts={}):
 	var level_node = opts.get("level_node", Navi)
 	var psp = U.first_node_in_group(level_node, "player_spawn_points")
 	if psp:
-		Log.pr("spawning player, found spawn point", psp)
 		return psp
 	var elevator = U.first_node_in_group(level_node, "elevator")
 	if elevator:

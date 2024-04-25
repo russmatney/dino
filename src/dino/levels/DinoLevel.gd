@@ -73,6 +73,7 @@ static func create_level_from_game(ent: DinoGameEntity, opts={}):
 
 @export var genre_type: DinoData.GenreType
 @export var level_def: LevelDef
+@export var game_entity: DinoGameEntity
 
 @export var regen_with_level_def: bool = false :
 	set(v):
@@ -150,7 +151,11 @@ func _ready():
 	if quest_manager == null:
 		Log.error("DinoLevel missing expected 'QuestManager' node")
 
-	Log.pr("DinoLevel ready: ", self)
+	Log.info("DinoLevel ready: ", self)
+	Dino.notif({
+		type="banner",
+		text=level_name(),
+		})
 	hud = hud_scene.instantiate()
 	add_child.call_deferred(hud)
 
@@ -158,7 +163,7 @@ func _ready():
 	U._connect(quest_manager.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 
 	if Dino.is_debug_mode():
-		Log.pr("no game_mode set; regenerating dino level")
+		Log.warn("no game_mode set; regenerating dino level")
 		if genre_type == null:
 			genre_type = DinoData.GenreType.SideScroller
 		Dino.ensure_player_setup({genre_type=genre_type,
@@ -171,6 +176,14 @@ func _ready():
 
 	if not skip_splash_intro:
 		await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
+
+func level_name():
+	if level_def:
+		return level_def.get_display_name()
+	if game_entity:
+		return game_entity.get_display_name()
+	return name
+
 
 ## process ######################################################
 

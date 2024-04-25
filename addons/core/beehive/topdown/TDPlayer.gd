@@ -151,5 +151,4 @@ func clear_forced_movement_target():
 ## pits ###################################################################
 
 func on_pit_entered():
-	Log.pr("pit entered")
 	machine.transit("Fall")

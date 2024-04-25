@@ -39,14 +39,14 @@ func travel_to(dest_zone, elevator_path=null):
 	# could restore same-zone travel
 	# var player = P.get_player()
 	# if player and is_instance_valid(player) and current_zone.name == dest_zone_name:
-	# 	Log.pr("Traveling in same zone", dest_zone_name, elevator_path)
+	# 	Log.info("Traveling in same zone", dest_zone_name, elevator_path)
 	# 	if elevator_path:
 	# 		current_zone.set_spawn_node(elevator_path)
 	# 	player.clear_forced_movement_target()
 	# 	player.position = current_zone.player_spawn_coords()
 	# 	return
 
-	Log.pr("Traveling to zone", dest_zone, elevator_path)
+	Log.info("Traveling to zone", dest_zone, elevator_path)
 
 	load_zone(dest_zone, elevator_path)
 

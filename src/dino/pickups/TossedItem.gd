@@ -16,8 +16,7 @@ func _ready():
 		add_child(anim)
 
 func _on_body_entered(body: Node):
-	Log.pr("Tossed item body entered: ", body)
-
+	# TODO fix orb toss behavior
 	if body.is_in_group("player"):
 		if body.has_method("collect_orb"):
 			body.collect_orb(ingredient_type)

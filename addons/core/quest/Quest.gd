@@ -76,7 +76,8 @@ func setup():
 
 # support an optional arg so various update signal impls can land here
 func update_quest(_x=null):
-	Log.pr("quest updated!", _x, self)
+	# side-notif?
+	Log.info("quest updated!", _x, self)
 	count_total_update.emit(total)
 
 	var remaining = len(get_xs.call().filter(is_remaining))

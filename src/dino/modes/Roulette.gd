@@ -37,10 +37,10 @@ signal round_complete
 
 func _ready():
 	Dino.set_game_mode(Pandora.get_entity(ModeIds.ROULETTE))
+	Dino.notif({type="banner", text="Roulette",})
 	round_complete.connect(_on_round_complete)
 
 	_seed = randi()
-	Log.pr("Roulette ready with seed!", _seed)
 	seed(_seed)
 
 	if player_entity == null:
@@ -60,9 +60,9 @@ func next_random_game():
 		return entity
 
 func start_round(entity=null):
+	Dino.notif({type="banner", text="Begin Round %s" % round_num,})
 	_seed = randi()
 	seed(_seed)
-	Log.pr("Roulette starting round with seed:", _seed)
 	reset_game_ids()
 
 	if not entity:
@@ -72,7 +72,7 @@ func start_round(entity=null):
 		launch_game(entity)
 		return
 
-	Log.pr("No entity to launch in start_round")
+	Log.warn("No entity to launch in start_round")
 
 func reset_game_ids():
 	if game_ids.filter(func(x): return x).is_empty():
@@ -83,7 +83,7 @@ func update_game_ids(games):
 	current_game_entity = null
 	game_ids = games.map(func(e): return e.get_entity_id())
 
-func update_player_entity(ent: DinoPlayerEntity):
+func set_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
 
 ## launch_game ##################################################3
@@ -111,7 +111,6 @@ func launch_game(game_entity):
 
 	add_child(game_node)
 
-	Log.pr("roulette spawning player")
 	Dino.spawn_player({level=game_node, deferred=false})
 
 	if game_node.has_signal("level_complete"):
@@ -123,7 +122,7 @@ func launch_game(game_entity):
 ## game level signals ##################################################3
 
 func _on_level_complete():
-	Log.pr("Roulette Level Complete!")
+	Dino.notif({type="side", text="Roulette Level Complete!"})
 
 	Records.complete_game({})
 
@@ -135,21 +134,8 @@ func _on_level_complete():
 	round_complete.emit()
 
 func _on_round_complete():
+	Dino.notif({type="banner", text="Round %s Complete!" % round_num})
+
 	round_num += 1
-	Log.pr("Roulette Round Complete!")
-
-	await Jumbotron.jumbo_notif({
-		header="Round complete!",
-		body="Try a different seed!",
-		})
-
-	await Jumbotron.jumbo_notif({
-		header="Did you know?",
-		body=U.rand_of([
-			"You can change the number of rooms in the Pause menu!",
-			"You can change the tileset in the Pause menu! (TODO lol)",
-			"You can change the tile_size in the Pause menu! I like 16x16!",
-			])
-		})
 
 	start_round()

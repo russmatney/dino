@@ -155,7 +155,7 @@ func add_new_room(count=1):
 	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size,
 		room_inputs=U.repeat_fn(RoomInputs.random_room, count)})
 	room_defs = generator.add_rooms(new_room_defs)
-	Log.pr(len(new_room_defs), " rooms added")
+	Log.info(len(new_room_defs), " rooms added")
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -181,7 +181,7 @@ func remove_room(count=1):
 
 	room_defs = generator.remove_rooms(room_defs_to_remove)
 
-	Log.pr(len(room_defs_to_remove), " rooms removed")
+	Log.info(len(room_defs_to_remove), " rooms removed")
 
 	# redo the current room's doors
 	if map and map.is_node_ready():

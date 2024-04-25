@@ -7,11 +7,11 @@ extends Control
 var editor_interface
 func _on_reload_plugin_button_pressed():
 	if Engine.is_editor_hint():
-		Log.prn(&"Reloading hotel plugin ----------------------------------")
+		print(&"Reloading hotel plugin ----------------------------------")
 		editor_interface.set_plugin_enabled("hotel", false)
 		editor_interface.set_plugin_enabled("hotel", true)
 		editor_interface.set_main_screen_editor("HotelDB")
-		Log.prn(&"Reloaded hotel plugin -----------------------------------")
+		print(&"Reloaded hotel plugin -----------------------------------")
 	else:
 		list_entries()
 
@@ -19,10 +19,10 @@ func _on_reload_plugin_button_pressed():
 # rebuild button
 
 func _on_rebuild_db_button_pressed():
-	Log.prn(&"Rebuilding hotel db -----------------------------------")
+	print(&"Rebuilding hotel db -----------------------------------")
 	Hotel.recreate_db()
 	list_entries()
-	Log.prn(&"Rebuilt hotel db --------------------------------------")
+	print(&"Rebuilt hotel db --------------------------------------")
 
 
 #######################################################################

@@ -17,6 +17,4 @@ func connect_to_rooms():
 ## on plugged ###################################################
 
 func on_arcade_machine_plugged():
-	Log.pr("arcade machine plugged!")
-
 	level_complete.emit()

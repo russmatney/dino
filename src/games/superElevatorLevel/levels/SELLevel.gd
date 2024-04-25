@@ -15,17 +15,14 @@ var _waves = [{goon_count=2}, {boss_count=1}]
 ### setup_level ####################################################
 
 func _ready():
-	Log.pr("_ready")
 	enemies = get_tree().get_nodes_in_group("enemies")
 	enemy_spawn_positions = get_tree().get_nodes_in_group("spawn_points")
 	enemies.map(setup_enemy)
 
 	if "waves" in self:
-		Log.pr("Setting waves", self["waves"])
 		_waves = self["waves"].duplicate()
 
 	if len(enemies) == 0:
-		Log.pr("No initial enemies, starting first wave")
 		var wave = _waves.pop_front()
 		if wave:
 			spawn_next_wave(wave)

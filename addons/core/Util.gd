@@ -9,10 +9,11 @@ static func node_name_from_path(path):
 	var parts = path.split("/")
 	return parts[-1]
 
+# TODO move to Log.gd ?
 static func p_script_vars(node):
 	for prop in node.get_property_list():
 		if "usage" in prop and prop.get("usage") & PROPERTY_USAGE_SCRIPT_VARIABLE != 0:
-			Log.pr("\t", prop.get("name"), ": ", node.get(prop["name"]))
+			Log.info("\t", prop.get("name"), ": ", node.get(prop["name"]))
 
 ############################################################
 # ready helpers
@@ -247,7 +248,7 @@ static func _connect(sig, callable, flags=null):
 	else:
 		err = sig.connect(callable)
 	if err:
-		Log.pr("[Error]: ", err, sig, callable)  # useless enum digit
+		Log.error("error in _connect()", err, sig, callable)  # useless enum digit
 
 static func call_in(node, callable, s):
 	await node.get_tree().create_timer(1.0).timeout
@@ -602,5 +603,4 @@ static func get_focusable_children(container: Node) -> Array[Node]:
 
 static func focus_first_control(container: Node) -> void:
 	for child in get_focusable_children(container):
-		Log.pr("grabbing focus", child)
 		child.grab_focus()

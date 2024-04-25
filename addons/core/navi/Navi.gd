@@ -62,7 +62,7 @@ func find_focus(scene=null):
 
 # Supports a path, packed_scene, or instance of a scene
 func nav_to(scene, opts={}):
-	Log.prn("nav_to: ", scene, opts)
+	Log.info("nav_to: ", scene, opts)
 	# NOTE this scene stack grows forever!
 	last_scene_stack.push_back(scene)
 	hide_menus()
@@ -198,17 +198,17 @@ var main_menu_path
 func set_main_menu(path_or_scene):
 	var path = U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
-		Log.pr("Updating main_menu_path: ", path)
+		Log.info("Updating main_menu_path: ", path)
 		main_menu_path = path
 	else:
-		Log.pr("No scene at path: ", path, ", can't set main menu.")
+		Log.warn("No scene at path: ", path, ", can't set main menu.")
 
 func nav_to_main_menu():
 	if ResourceLoader.exists(main_menu_path):
 		hide_menus()
 		nav_to(main_menu_path)
 	else:
-		Log.pr("No scene at path: ", main_menu_path, ", can't navigate.")
+		Log.warn("No scene at path: ", main_menu_path, ", can't navigate.")
 
 ## pause menu ###################################################################
 
@@ -227,7 +227,7 @@ func set_pause_menu(path_or_scene):
 			pause_menu.queue_free()
 		pause_menu = add_menu(load(path))
 	else:
-		Log.pr("No scene at path: ", path, ", can't set pause menu.")
+		Log.warn("No scene at path: ", path, ", can't set pause menu.")
 
 ## death ###########################################
 
@@ -245,16 +245,14 @@ func set_death_menu(path_or_scene):
 			death_menu.queue_free()
 		death_menu = add_menu(load(path))
 	else:
-		Log.prn("No scene at path: ", path, ", can't set death menu.")
+		Log.warn("No scene at path: ", path, ", can't set death menu.")
 
 func show_death_menu():
-	Log.prn("Show death screen")
 	DJ.pause_game_song()
 	death_menu.show()
 	find_focus(death_menu)
 
 func hide_death_menu():
-	Log.prn("Hide death screen")
 	death_menu.hide()
 
 ## win ###########################################
@@ -273,14 +271,12 @@ func set_win_menu(path_or_scene):
 			win_menu.queue_free()
 		win_menu = add_menu(load(path))
 	else:
-		Log.prn("No scene at path: ", path, ", can't set win menu.")
+		Log.warn("No scene at path: ", path, ", can't set win menu.")
 
 func show_win_menu():
-	Log.prn("Show win screen")
 	DJ.pause_game_song()
 	win_menu.show()
 	find_focus(win_menu)
 
 func hide_win_menu():
-	Log.prn("Hide win screen")
 	win_menu.hide()

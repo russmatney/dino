@@ -25,5 +25,4 @@ func set_label(text):
 #############################################################
 
 func open_door(_actor=null):
-	Log.pr("open_door called, with dest: ", destination)
 	Navi.nav_to(destination)
