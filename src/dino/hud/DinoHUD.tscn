@@ -42,8 +42,8 @@ layout_mode = 2
 
 [node name="PlayerStatus" parent="CanvasLayer/VBoxContainer/Top" instance=ExtResource("2_7c6hy")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
-size_flags_horizontal = 1
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 layout_mode = 2
