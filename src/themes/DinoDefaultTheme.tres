@@ -1,0 +1,15 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dhx0mlsbfwdu7"]
+
+[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="1_1embd"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_4q8xb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ik83"]
+bg_color = Color(0.392157, 0.113725, 0.396078, 0.596078)
+
+[resource]
+default_font = ExtResource("1_4q8xb")
+default_font_size = 32
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2ik83")
+RichHeaderLabel/base_type = &"RichTextLabel"
+RichHeaderLabel/font_sizes/normal_font_size = 32
+RichHeaderLabel/fonts/normal_font = ExtResource("1_1embd")

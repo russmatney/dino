@@ -69,6 +69,10 @@ settings/common/update_notification_enabled=false
 
 layer=false
 
+[gui]
+
+theme/custom="res://src/themes/DinoDefaultTheme.tres"
+
 [input]
 
 ui_accept={
