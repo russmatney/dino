@@ -106,7 +106,7 @@ func _ready():
 
 		machine.transitioned.connect(_on_transit)
 
-		Cam.add_offscreen_indicator(self, {
+		OffscreenIndicator.add(self, {
 			# could instead depend on a fn like this directly on the passed node
 			is_active=func(): return not is_dead})
 

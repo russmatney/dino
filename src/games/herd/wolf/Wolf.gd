@@ -11,7 +11,7 @@ extends CharacterBody2D
 
 func _ready():
 	Hotel.register(self)
-	Cam.add_offscreen_indicator(self, {label="Wolf"})
+	OffscreenIndicator.add(self, {label="Wolf"})
 	detect_box.body_entered.connect(_on_body_entered)
 	detect_box.body_exited.connect(_on_body_exited)
 

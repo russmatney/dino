@@ -11,7 +11,7 @@ var is_dead = false
 
 
 func _ready():
-	Cam.add_offscreen_indicator(self, {
+	OffscreenIndicator.add(self, {
 		# could instead depend on a fn like this directly on the passed node
 		is_active=should_show_offscreen_indicator})
 

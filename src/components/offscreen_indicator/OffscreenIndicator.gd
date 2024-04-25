@@ -1,5 +1,37 @@
 @tool
 extends AnimatedSprite2D
+class_name OffscreenIndicator
+
+## static ########################################################
+
+static var fallback_indicator_scene = "res://src/components/OffscreenIndicator.tscn"
+
+static func maybe_activate(indicator, node, opts={}):
+	var is_active = opts.get("is_active", func(): return true)
+	if is_active.call():
+		indicator.activate(node)
+
+static func add(node, opts={}):
+	var indicator_scene = opts.get("indicator_scene", fallback_indicator_scene)
+	if indicator_scene is String:
+		indicator_scene = load(indicator_scene)
+
+	if not indicator_scene:
+		Log.err("Failed to load indicator scene", indicator_scene, "on node", node)
+		return
+
+	var indicator = indicator_scene.instantiate()
+	indicator.ready.connect(indicator.set_label_text.bind(opts.get("label")))
+
+	var vis = VisibleOnScreenNotifier2D.new()
+	vis.screen_exited.connect(OffscreenIndicator.maybe_activate.bind(indicator, node, opts))
+	vis.screen_entered.connect(indicator.deactivate)
+
+	node.add_child(indicator)
+	node.add_child(vis)
+
+
+## vars ########################################################
 
 @onready var label = $%Label
 var label_x_offset = 8
@@ -10,9 +42,12 @@ var target
 var showing = false
 var player
 
+## ready ########################################################
 
 func _ready():
 	player = U.first_node_in_group(self, "player")
+
+## label ########################################################
 
 var label_side
 func set_label_side(side):
@@ -30,6 +65,8 @@ func set_label_side(side):
 
 func set_label_text(text):
 	label.set_text("[center]%s" % text)
+
+## point at ########################################################
 
 func point_at(pos):
 	look_at(pos)
@@ -49,17 +86,20 @@ func point_at(pos):
 # if event is InputEventMouseMotion:
 # 	Log.pr("mouse: ", get_global_mouse_position())
 
+## process ########################################################
 
 func _physics_process(_delta):
 	if target and is_instance_valid(target) and showing:
 		point_at(target.get_global_position())
 		position_onscreen()
 
+## find_player ########################################################
 
 func find_player():
 	if not Engine.is_editor_hint():
 		player = U.first_node_in_group(self, "player")
 
+## position on screen ########################################################
 
 func position_onscreen():
 	if not player:
@@ -105,6 +145,7 @@ func position_onscreen():
 
 		global_position = new_pos
 
+## act/deactivate ########################################################
 
 func activate(node):
 	target = node
