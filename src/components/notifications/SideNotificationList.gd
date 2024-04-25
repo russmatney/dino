@@ -5,10 +5,10 @@ extends Control
 @onready var slots = [
 	$%SideNotification1,
 	$%SideNotification2,
-	$%SideNotification3,
-	$%SideNotification4,
-	$%SideNotification5,
-	$%SideNotification6,
+	# $%SideNotification3,
+	# $%SideNotification4,
+	# $%SideNotification5,
+	# $%SideNotification6,
 	]
 
 ## _ready ########################################

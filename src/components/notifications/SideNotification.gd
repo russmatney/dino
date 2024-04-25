@@ -7,6 +7,8 @@ var opts
 @onready var label: RichTextLabel = $%SideNotifLabel
 @onready var texture: TextureRect = $%SideNotifTexture
 
+var clear_tween: Tween
+
 ## signals ###########################################
 
 signal cleared
@@ -32,10 +34,27 @@ func render(options: Dictionary):
 	if icon:
 		texture.set_texture(icon)
 
+	# set clear ttl
+	if clear_tween:
+		clear_tween.kill()
+	var ttl = opts.get("ttl", 3.0)
+	clear_tween = create_tween()
+	clear_tween.tween_callback(clear).set_delay(ttl)
+
+	# TODO emphasize if already exists
 	# TODO animate entry
-	# TODO set ttl or reset + emphasize
+
+## clear ########################################
+
+func clear():
+	opts = null
+	clear_tween = null # necessary?
+
 	# TODO animate exit
-	# TODO emit cleared
+	label.set_text("")
+
+	cleared.emit()
+
 
 ## get_id ########################################
 
