@@ -20,7 +20,15 @@ static func to_genre_type(s: String) -> GenreType:
 var player_set = PlayerSet.new()
 var game_mode: DinoModeEntity
 
+var main_menu_scene = preload("res://src/dino/menus/main/DinoMenu.tscn")
+var pause_menu_scene = preload("res://src/dino/menus/pause/DinoPauseMenu.tscn")
+var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
+var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")
+
+## signals ##########################################################
+
 signal player_ready(player)
+signal notification(opts)
 
 ## seeding ##########################################################
 
@@ -30,15 +38,12 @@ func reseed():
 	_seed = randi()
 	seed(_seed)
 
-## ready ##########################################################
-
-var main_menu_scene = preload("res://src/dino/menus/main/DinoMenu.tscn")
-var pause_menu_scene = preload("res://src/dino/menus/pause/DinoPauseMenu.tscn")
-var death_menu_scene: PackedScene = preload("res://addons/core/navi/NaviDeathMenu.tscn")
-var win_menu_scene: PackedScene = preload("res://addons/core/navi/NaviWinMenu.tscn")
+## enter tree ##########################################################
 
 func _enter_tree():
 	Log.set_colors_pretty()
+
+## ready ##########################################################
 
 func _ready():
 	reseed()
@@ -107,3 +112,8 @@ func current_player_entity():
 	var p = player_set.active_player()
 	if p:
 		return p.entity
+
+## notifications ##########################################################
+
+func notif(opts):
+	(func(): notification.emit(opts)).call_deferred()

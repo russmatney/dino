@@ -37,7 +37,6 @@ var notif_rich_label = preload("res://src/components/notifications/NotifRichLabe
 
 var id_notifs = {}
 
-# TODO support passed icon to decorate the notif/toast
 func on_debug_notification(notif: Dictionary):
 	var lbl
 
@@ -54,17 +53,17 @@ func on_debug_notification(notif: Dictionary):
 			else:
 				id_notifs.erase(id)
 
-	if not found_existing and notif.get("rich"):
-		lbl = notif_rich_label.instantiate()
-		lbl.text = "[%s]%s[/%s]" % [side, text, side]
-	elif not found_existing:
-		lbl = notif_label.instantiate()
-		lbl.text = text
+	if not found_existing:
+		if notif.get("rich"):
+			lbl = notif_rich_label.instantiate()
+		else:
+			lbl = notif_label.instantiate()
 
 	if notif.get("rich"):
 		lbl.text = "[%s]%s[/%s]" % [side, text, side]
 	else:
 		lbl.text = text
+
 	lbl.ttl = notif.get("ttl", 3.0)
 
 	if found_existing:
@@ -76,5 +75,3 @@ func on_debug_notification(notif: Dictionary):
 
 	if not found_existing:
 		add_child(lbl)
-	# if Engine.is_editor_hint():
-	# 	lbl.set_owner(owner)

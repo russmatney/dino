@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhc5onor7fgd2"]
+
+[ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://addons/core/assets/icons/dino_sheet.png" id="1_atxwn"]
+[ext_resource type="Script" path="res://src/components/notifications/SideNotification.gd" id="1_qou6e"]
+
+[node name="SideNotification" type="PanelContainer"]
+script = ExtResource("1_qou6e")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+
+[node name="SideNotifTexture" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_atxwn")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SideNotifLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+bbcode_enabled = true
+text = "+1 Coin"
+fit_content = true
+scroll_active = false
