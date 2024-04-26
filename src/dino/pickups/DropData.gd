@@ -4,19 +4,21 @@ class_name DropData
 
 ## data ##############################################
 
+# TODO move away from unscalable enum (adding new values breaks existing data b/c the val is an int)
 enum T {
 	RANDOM,
 	ORB,
 	COIN,
+	GEM,
 	LEAF,
 	POWERUP,
 	}
 
 static func all_types():
-	return [T.RANDOM, T.ORB, T.COIN, T.LEAF, T.POWERUP]
+	return [T.RANDOM, T.ORB, T.COIN, T.GEM, T.LEAF, T.POWERUP]
 
 static func all_primitive_types():
-	return [T.ORB, T.COIN, T.LEAF, T.POWERUP]
+	return [T.ORB, T.COIN, T.GEM, T.LEAF, T.POWERUP]
 
 static func add_drop(node, dd: DropData = null):
 	if not dd:
@@ -52,6 +54,8 @@ func type_to_str():
 			t = "orb"
 		T.COIN:
 			t = "coin"
+		T.GEM:
+			t = "gem"
 		T.LEAF:
 			t = "leaf"
 		T.POWERUP:
@@ -70,11 +74,14 @@ func _init(t: T = T.RANDOM, d: Dictionary = {}):
 func set_type_defaults(typ: T):
 	if type != typ:
 		type = typ
+	# these aren't exactly anim scenes....
 	match type:
 		T.ORB:
 			anim_scene = load("res://src/dino/entities/GreenBlobAnim.tscn")
 		T.COIN:
-			anim_scene = load("res://src/dino/entities/BlueBlobAnim.tscn")
+			anim_scene = load("res://src/dino/entities/coins/Coin.tscn")
+		T.GEM:
+			anim_scene = load("res://src/dino/entities/coins/ShrineGem.tscn")
 		T.LEAF:
 			anim_scene = load("res://src/dino/entities/leaves/Leaf.tscn")
 		T.POWERUP:

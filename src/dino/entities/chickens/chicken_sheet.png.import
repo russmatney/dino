@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://80xi3fqvabr5"
-path="res://.godot/imported/gem_sheet.png-e1e0dc58b9f918ab07eb59bf4b6da5bd.ctex"
+uid="uid://dyo0o7lff5bf6"
+path="res://.godot/imported/chicken_sheet.png-9610f3a1614d591ff3b88b4f4128da69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/games/shirt/assets/gem_sheet.png"
-dest_files=["res://.godot/imported/gem_sheet.png-e1e0dc58b9f918ab07eb59bf4b6da5bd.ctex"]
+source_file="res://src/dino/entities/chickens/chicken_sheet.png"
+dest_files=["res://.godot/imported/chicken_sheet.png-9610f3a1614d591ff3b88b4f4128da69.ctex"]
 
 [params]
 

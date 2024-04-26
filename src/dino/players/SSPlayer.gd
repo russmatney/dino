@@ -72,6 +72,7 @@ var orbit_items = []
 var pickups = []
 
 var coins = 0
+var gems = 0
 var leaves = 0
 
 # actor vars
@@ -333,6 +334,7 @@ func hotel_data():
 		death_count=death_count,
 		powerups=powerups,
 		coins=coins,
+		gems=gems,
 		leaves=leaves,
 		pickups=pickups,
 		}
@@ -347,6 +349,7 @@ func check_out(data):
 	display_name = U.get_(data, "display_name", display_name)
 	death_count = U.get_(data, "death_count", death_count)
 	coins = U.get_(data, "coins", coins)
+	gems = U.get_(data, "gems", gems)
 	leaves = U.get_(data, "leaves", leaves)
 	pickups = U.get_(data, "pickups", pickups)
 	var stored_powerups = U.get_(data, "powerups", powerups)
@@ -611,6 +614,14 @@ func collect(opts={}):
 				body_text="This looks like a mighty fine ingredient",
 				})
 			return
+		DropData.T.GEM:
+			Dino.notif({
+				type="side",
+				text="+1 gem",
+				id="add-gem"
+				})
+			add_gem()
+			return
 		DropData.T.COIN:
 			Dino.notif({
 				type="side",
@@ -648,6 +659,15 @@ func add_coin():
 
 func spend_coins(n: int):
 	coins -= n
+	Hotel.check_in(self)
+
+func add_gem():
+	notif("GEM PICKED UP", {"dupe": true})
+	gems += 1
+	Hotel.check_in(self)
+
+func spend_gems(n: int):
+	gems -= n
 	Hotel.check_in(self)
 
 func add_leaf():

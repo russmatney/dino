@@ -1,0 +1,35 @@
+name Coins and Gems
+
+==============
+LEGEND
+==============
+
+c = Coin
+g = Gem
+x = Tile
+
+==============
+ENTITIES
+==============
+
+name Coin
+
+...
+.c.
+...
+
+name Coin
+
+c.
+.c
+
+name Coin
+
+c
+
+name Gem
+
+.....
+..g..
+.....
+xxxxx

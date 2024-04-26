@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqf2dwsjplyp4"
-path="res://.godot/imported/key_sheet.png-209d45fae7e6f851d028571aa938596e.ctex"
+path="res://.godot/imported/key_sheet.png-1dea92e20b5411e5bc478878cc8b1a4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/games/shirt/assets/key_sheet.png"
-dest_files=["res://.godot/imported/key_sheet.png-209d45fae7e6f851d028571aa938596e.ctex"]
+source_file="res://src/dino/entities/keys/key_sheet.png"
+dest_files=["res://.godot/imported/key_sheet.png-1dea92e20b5411e5bc478878cc8b1a4f.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtjn8kunpqgtx"
-path="res://.godot/imported/gem.png-e68f4702d16c8fcf0afeecca897927da.ctex"
+uid="uid://cwvacjcwo3na6"
+path="res://.godot/imported/coin.png-4bca771af86089a17d510aa1e0d07b12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/games/shirt/entities/gem.png"
-dest_files=["res://.godot/imported/gem.png-e68f4702d16c8fcf0afeecca897927da.ctex"]
+source_file="res://src/dino/entities/coins/coin.png"
+dest_files=["res://.godot/imported/coin.png-4bca771af86089a17d510aa1e0d07b12.ctex"]
 
 [params]
 

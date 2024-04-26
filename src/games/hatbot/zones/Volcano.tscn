@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="8_j17mi"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn" id="9_8m6c5"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="11_7pvm7"]
-[ext_resource type="PackedScene" path="res://src/games/shirt/entities/Coin.tscn" id="12_xkhi8"]
+[ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/entities/coins/Coin.tscn" id="12_xkhi8"]
 [ext_resource type="PackedScene" path="res://src/games/hatbot/CoinDoorQuest.tscn" id="13_0bnqt"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="13_x6pc7"]
 [ext_resource type="PackedScene" uid="uid://dba5urikk70ib" path="res://src/dino/bosses/WarpSpot.tscn" id="16_qc2ns"]

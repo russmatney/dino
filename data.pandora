@@ -1145,9 +1145,21 @@
 						"type": "string",
 						"value": "Coin"
 					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/coins/coins.txt"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/coins/coin.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Coin"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/coins/Coin.tscn"
 					}
 				}
 			},
@@ -1162,9 +1174,21 @@
 						"type": "string",
 						"value": "Gem"
 					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/coins/coins.txt"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/coins/gem.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Gem"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/coins/ShrineGem.tscn"
 					}
 				}
 			},
