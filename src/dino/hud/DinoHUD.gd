@@ -26,13 +26,20 @@ func _ready():
 	update_level_opts()
 	update_weapon_stack()
 
+	Hotel.entry_updated.connect(func(entry):
+		# TODO maybe a bit noisy
+		if "player" in entry.groups:
+			update_player_status()
+		, CONNECT_DEFERRED)
+
 ## updates ############################################################33
 
 func update_player_status():
 	var p_ent = Dino.current_player_entity()
+	var p_node = Dino.current_player_node()
 
 	if p_ent != null:
-		player_status.set_status({"entity": p_ent})
+		player_status.set_status({"entity": p_ent, "health": p_node.health})
 
 func update_level_opts():
 	if level_opts == null:
