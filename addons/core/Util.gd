@@ -20,7 +20,16 @@ static func p_script_vars(node):
 
 static func set_optional_nodes(node, node_map):
 	for k in node_map:
-		node[k] = node.get_node_or_null(node_map[k])
+		var val = node_map[k]
+		if val is String:
+			node[k] = node.get_node_or_null(node_map[k])
+		# else:
+		# 	# TODO this does not work (custom `class_name`s aren't exposed, and string vs static class)
+		# 	# https://github.com/godotengine/godot/issues/21789
+		# 	for ch in node.get_children():
+		# 		if ch.get_class() == str(val):
+		# 			node[k] = ch
+		# 			break
 
 ############################################################
 # nearby

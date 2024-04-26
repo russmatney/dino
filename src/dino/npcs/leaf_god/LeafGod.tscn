@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ci7wujr225x8y"]
+[gd_scene load_steps=12 format=3 uid="uid://ci7wujr225x8y"]
 
 [ext_resource type="Script" path="res://src/dino/npcs/leaf_god/LeafGod.gd" id="1_7hv1x"]
 [ext_resource type="Texture2D" uid="uid://cpbqogu2llb23" path="res://src/dino/npcs/leaf_god/runner_leaf_friend.png" id="2_gitl0"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_ovlwu"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_12qb4"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_ag2du"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="7_i2d0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icmag"]
 size = Vector2(50, 50)
@@ -79,3 +80,74 @@ shape = SubResource("RectangleShape2D_p3uh7")
 
 [node name="ActionHint" parent="." instance=ExtResource("6_ag2du")]
 position = Vector2(0, -43)
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(-135, -59)
+script = ExtResource("7_i2d0n")
+priority_override = false
+priority = 0
+zoom = Vector2(5, 5)
+follow_mode = 0
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = false
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+
+[node name="ShopUI" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+offset_left = -296.0
+offset_top = -151.0
+offset_right = -38.0
+offset_bottom = 30.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopUI"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ShopUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ShopUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ShopUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]Leaf God[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="ShopUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ShopUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShopUI/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="ExchangeButton" type="Button" parent="ShopUI/VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3 Leaves > Heart Container "
+
+[node name="ExitButton" type="Button" parent="ShopUI/VBoxContainer/HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"
+
+[node name="MarginContainer4" type="MarginContainer" parent="ShopUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2

@@ -1,9 +1,24 @@
 extends NPC
 
-## config warnings ###########################################################
+## vars ###########################################################
 
-func _get_configuration_warnings():
-	return super._get_configuration_warnings()
+@onready var shop_ui = $%ShopUI
+@onready var exit_button = $%ExitButton
+@onready var exchange_button = $%ExchangeButton
+
+## ready ###########################################################
+
+func _ready():
+	super._ready()
+
+	shop_ui.set_visible(false)
+
+	exit_button.pressed.connect(func():
+		fade_out_shop()
+		machine.transit("Idle"))
+	exchange_button.pressed.connect(func():
+		Log.pr("leaf god exchange not implemented!")
+		Dino.notif({type="side", text="Not yet implemented!!"}))
 
 ## actions ###########################################################
 
@@ -17,8 +32,14 @@ var actions = [
 ## leaf trade ###########################################################
 
 func start_leaf_trade(_actor):
-	# TODO transit to some reusable 'shop/interact' state
-	machine.transit("Idle")
+	machine.transit("Shop")
+	fade_in_shop()
+	exchange_button.grab_focus()
 
-	# TODO zoom into shop cam
-	# TODO show relevant control/ui nodes
+func fade_in_shop():
+	# TODO animate in
+	shop_ui.set_visible(true)
+
+func fade_out_shop():
+	# TODO animate out
+	shop_ui.set_visible(false)

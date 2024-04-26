@@ -15,7 +15,7 @@ static func newButton(ent, on_select=null):
 
 ## vars #####################################################
 
-var entity
+@export var entity: PandoraEntity
 
 func to_printable():
 	return {
@@ -97,6 +97,8 @@ func set_focus():
 ## selected #######################################
 
 func update_selected():
+	if not is_inside_tree():
+		return
 	if is_selected in [true, false]:
 		if is_selected:
 			fade_full()

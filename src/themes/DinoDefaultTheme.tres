@@ -9,6 +9,7 @@ bg_color = Color(0.392157, 0.113725, 0.396078, 0.596078)
 [resource]
 default_font = ExtResource("1_4q8xb")
 default_font_size = 32
+Button/font_sizes/font_size = 16
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2ik83")
 RichHeaderLabel/base_type = &"RichTextLabel"
 RichHeaderLabel/font_sizes/normal_font_size = 32

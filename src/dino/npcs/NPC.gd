@@ -23,7 +23,9 @@ var move_vector
 @onready var machine = $SSNPCMachine
 @onready var state_label = $StateLabel
 
-var nav_agent
+var nav_agent: NavigationAgent2D
+var pcam: PhantomCamera2D
+
 var front_ray
 var low_los
 var high_los
@@ -32,11 +34,13 @@ var line_of_sights = []
 ## ready ###########################################################
 
 func _ready():
+	# instead of node-names, could seek for child-of-type
 	U.set_optional_nodes(self, {
 		nav_agent="NavigationAgent2D",
 		front_ray="FrontRay",
 		low_los="LowLineOfSight",
 		high_los="HighLineOfSight",
+		pcam="PhantomCamera2D",
 		})
 
 	if low_los and high_los:

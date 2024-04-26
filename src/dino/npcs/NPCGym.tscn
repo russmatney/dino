@@ -15,6 +15,8 @@ script = ExtResource("1_h3spx")
 player_entity = SubResource("Resource_uwxjw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-49, -71)
+zoom = Vector2(5, 5)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("2_h7s8h")
