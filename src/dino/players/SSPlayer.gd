@@ -186,10 +186,6 @@ func _ready():
 		weapon_set.changed_weapon.connect(func(w):
 			changed_weapon.emit(w))
 
-		# call this from the action detector itself?
-		action_detector.setup(self, {actions=actions, action_hint=action_hint,
-			can_execute_any=func(): return machine.can_act()})
-
 		died.connect(_on_player_death)
 
 		var level = U.find_level_root(self)
@@ -300,6 +296,9 @@ var actions = [
 		actor_can_execute=func(p): return not p.is_dead and p.has_descend,
 		})
 	]
+
+func can_execute_any():
+	return machine.can_act()
 
 ## collision check ###########################################################
 

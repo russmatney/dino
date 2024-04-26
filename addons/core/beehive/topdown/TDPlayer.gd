@@ -37,7 +37,6 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		Cam.request_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
-		action_detector.setup(self, {actions=[], action_hint=action_hint})
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player

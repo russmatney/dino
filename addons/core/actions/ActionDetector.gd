@@ -2,14 +2,7 @@
 class_name ActionDetector
 extends Area2D
 
-####################################################################
-# ready
-
-func _ready():
-	area_entered.connect(_on_area_entered)
-	area_exited.connect(_on_area_exited)
-
-	current_action_changed.connect(update_displayed_action)
+## vars ###################################################################
 
 var actor
 var action_hint
@@ -18,14 +11,44 @@ var actor_actions
 # used to prevent player actions, e.g. while sitting
 var can_execute_any_actions = func(): return true
 
+## ready ###################################################################
+
+func _ready():
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
+
+	current_action_changed.connect(update_displayed_action)
+
+	if not actor:
+		var p = get_parent()
+		p.ready.connect(func(): setup(p))
+
+## setup ###################################################################
+
 func setup(a, opts={}):
 	actor = a
 	# required to be added to ActionAreas
 	actor.add_to_group("actors", true)
 
-	can_execute_any_actions = opts.get("can_execute_any", func(): return true)
-	action_hint = opts.get("action_hint")
-	actor_actions = opts.get("actions", [])
+	var ac_hint = opts.get("action_hint")
+	if not ac_hint:
+		for ch in actor.get_children():
+			if ch is ActionHint:
+				ac_hint = ch
+				break
+	action_hint = ac_hint
+
+	var acts = opts.get("actions", [])
+	if actor.get("actions"): # maybe better to call a method
+		acts = actor.actions
+	actor_actions = acts
+
+	var can_exec = opts.get("can_execute_any")
+	if not can_exec:
+		can_exec = actor.can_execute_any
+	if not can_exec:
+		can_exec = func(): return true
+	can_execute_any_actions = can_exec
 
 	update_actions()
 

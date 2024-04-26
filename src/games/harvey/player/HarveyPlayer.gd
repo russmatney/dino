@@ -9,8 +9,6 @@ extends CharacterBody2D
 func _ready():
 	machine.transitioned.connect(on_transit)
 
-	action_detector.setup(self)
-
 	Cam.request_camera({player=self})
 
 ############################################################
