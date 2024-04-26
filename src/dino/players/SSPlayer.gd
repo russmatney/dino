@@ -1,4 +1,3 @@
-@tool
 extends CharacterBody2D
 class_name SSPlayer
 
@@ -151,54 +150,53 @@ func ensure_pcam():
 func _ready():
 	Hotel.register(self)
 
-	if not Engine.is_editor_hint():
-		U.set_optional_nodes(self, {
-			jet_anim="Jet",
-			notif_label="NotifLabel",
-			pcam="PlayerCamera",
-			cam_pof="CamPOF",
-			nav_agent="NavigationAgent2D",
-			bumpbox="BumpBox",
-			high_wall_check="HighWallCheck",
-			low_wall_check="LowWallCheck",
-			near_ground_check="NearGroundCheck",
-			heart_particles="HeartParticles",
-			skull_particles="SkullParticles",
-			warp_cast="WarpCast",
-			look_pof="LookPOF",
-			light_occluder="LightOccluder2D",
-			light="PointLight2D",
-			quick_select_menu="QuickSelect"
-			})
+	U.set_optional_nodes(self, {
+		jet_anim="Jet",
+		notif_label="NotifLabel",
+		pcam="PlayerCamera",
+		cam_pof="CamPOF",
+		nav_agent="NavigationAgent2D",
+		bumpbox="BumpBox",
+		high_wall_check="HighWallCheck",
+		low_wall_check="LowWallCheck",
+		near_ground_check="NearGroundCheck",
+		heart_particles="HeartParticles",
+		skull_particles="SkullParticles",
+		warp_cast="WarpCast",
+		look_pof="LookPOF",
+		light_occluder="LightOccluder2D",
+		light="PointLight2D",
+		quick_select_menu="QuickSelect"
+		})
 
-		if bumpbox:
-			bumpbox.body_entered.connect(on_bumpbox_entered)
-			bumpbox.body_exited.connect(on_bumpbox_exited)
-		if high_wall_check or low_wall_check:
-			wall_checks = [high_wall_check, low_wall_check]
-		if heart_particles:
-			heart_particles.set_emitting(false)
-		if skull_particles:
-			skull_particles.set_emitting(false)
+	if bumpbox:
+		bumpbox.body_entered.connect(on_bumpbox_entered)
+		bumpbox.body_exited.connect(on_bumpbox_exited)
+	if high_wall_check or low_wall_check:
+		wall_checks = [high_wall_check, low_wall_check]
+	if heart_particles:
+		heart_particles.set_emitting(false)
+	if skull_particles:
+		skull_particles.set_emitting(false)
 
-		machine.transitioned.connect(_on_transit)
+	machine.transitioned.connect(_on_transit)
 
-		weapon_set.changed_weapon.connect(func(w):
-			changed_weapon.emit(w))
+	weapon_set.changed_weapon.connect(func(w):
+		changed_weapon.emit(w))
 
-		died.connect(_on_player_death)
+	died.connect(_on_player_death)
 
-		var level = U.find_level_root(self)
-		if level.has_method("_on_player_death"):
-			died.connect(level._on_player_death.bind(self))
+	var level = U.find_level_root(self)
+	if level.has_method("_on_player_death"):
+		died.connect(level._on_player_death.bind(self))
 
-		# could be instances with randomized stats, etc
-		add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
-		add_weapon(DinoWeaponEntityIds.SWORD)
-		add_weapon(DinoWeaponEntityIds.GUN)
-		add_weapon(DinoWeaponEntityIds.BOOMERANG)
-		add_powerup(Powerup.DoubleJump)
-		add_powerup(Powerup.Jetpack)
+	# could be instances with randomized stats, etc
+	add_weapon(DinoWeaponEntityIds.FLASHLIGHT)
+	add_weapon(DinoWeaponEntityIds.SWORD)
+	add_weapon(DinoWeaponEntityIds.GUN)
+	add_weapon(DinoWeaponEntityIds.BOOMERANG)
+	add_powerup(Powerup.DoubleJump)
+	add_powerup(Powerup.Jetpack)
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -270,19 +268,18 @@ func _physics_process(_delta):
 	# checks forced_movement_target, then uses Trolls.move_vector
 	move_vector = get_move_vector()
 
-	if not Engine.is_editor_hint():
-		if move_vector.abs().length() > 0 and machine.face_movement_direction():
-			# restore strafing - check if using a weapon that supports strafing?
-			# if not firing: # supports strafing (moving while firing without turning)
-			if move_vector.x > 0:
-				facing_vector = Vector2.RIGHT
-			elif move_vector.x < 0:
-				facing_vector = Vector2.LEFT
-			update_facing()
+	if move_vector.abs().length() > 0 and machine.face_movement_direction():
+		# restore strafing - check if using a weapon that supports strafing?
+		# if not firing: # supports strafing (moving while firing without turning)
+		if move_vector.x > 0:
+			facing_vector = Vector2.RIGHT
+		elif move_vector.x < 0:
+			facing_vector = Vector2.LEFT
+		update_facing()
 
-		if move_vector.abs().length() > 0 and has_weapon():
-			aim_vector = move_vector
-			aim_weapon(aim_vector)
+	if move_vector.abs().length() > 0 and has_weapon():
+		aim_vector = move_vector
+		aim_weapon(aim_vector)
 
 ## actions ###########################################################
 
@@ -298,7 +295,7 @@ var actions = [
 	]
 
 func can_execute_any():
-	return machine.can_act()
+	return machine and machine.can_act()
 
 ## collision check ###########################################################
 
@@ -554,26 +551,25 @@ func shine(_time = 1.0):
 
 # Supports 'perma-stamp' with ttl=0
 func stamp(opts={}):
-	if not Engine.is_editor_hint():
-		var new_scale = opts.get("scale", 0.3)
-		var new_anim = AnimatedSprite2D.new()
-		new_anim.sprite_frames = anim.sprite_frames
-		new_anim.animation = anim.animation
-		new_anim.frame = anim.frame
+	var new_scale = opts.get("scale", 0.3)
+	var new_anim = AnimatedSprite2D.new()
+	new_anim.sprite_frames = anim.sprite_frames
+	new_anim.animation = anim.animation
+	new_anim.frame = anim.frame
 
-		if opts.get("include_action_hint", false) and self.get("action_hint"):
-			var ax_hint = self["action_hint"].duplicate()
-			new_anim.add_child(ax_hint)
+	if opts.get("include_action_hint", false) and self.get("action_hint"):
+		var ax_hint = self["action_hint"].duplicate()
+		new_anim.add_child(ax_hint)
 
-		new_anim.global_position = global_position + anim.position
-		U.add_child_to_level(self, new_anim)
+	new_anim.global_position = global_position + anim.position
+	U.add_child_to_level(self, new_anim)
 
-		var ttl = opts.get("ttl", 0.5)
-		if ttl > 0:
-			var t = create_tween()
-			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
-			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
-			t.tween_callback(new_anim.queue_free)
+	var ttl = opts.get("ttl", 0.5)
+	if ttl > 0:
+		var t = create_tween()
+		t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
+		t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
+		t.tween_callback(new_anim.queue_free)
 
 #################################################################################
 ## pickups #####################################################################

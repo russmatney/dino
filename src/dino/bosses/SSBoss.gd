@@ -1,4 +1,3 @@
-@tool
 extends CharacterBody2D
 class_name SSBoss
 
@@ -62,30 +61,29 @@ var swoop_hints = []
 func _ready():
 	Hotel.register(self)
 
-	if not Engine.is_editor_hint():
-		U.set_optional_nodes(self, {
-			notif_label="NotifLabel",
-			cam_pof="CamPOF",
-			nav_agent="NavigationAgent2D",
-			skull_particles="SkullParticles",
-			attack_box="AttackBox",
-			los="LineOfSight",
-			swoop_hint1="SwoopHint1",
-			swoop_hint2="SwoopHint2",
-			swoop_hint_player="SwoopHintPlayer",
-			})
+	U.set_optional_nodes(self, {
+		notif_label="NotifLabel",
+		cam_pof="CamPOF",
+		nav_agent="NavigationAgent2D",
+		skull_particles="SkullParticles",
+		attack_box="AttackBox",
+		los="LineOfSight",
+		swoop_hint1="SwoopHint1",
+		swoop_hint2="SwoopHint2",
+		swoop_hint_player="SwoopHintPlayer",
+		})
 
-		if skull_particles:
-			skull_particles.set_emitting(false)
+	if skull_particles:
+		skull_particles.set_emitting(false)
 
-		attack_box.body_entered.connect(_on_attack_box_entered)
+	attack_box.body_entered.connect(_on_attack_box_entered)
 
-		swoop_hints = [swoop_hint1, swoop_hint2, swoop_hint_player]\
-			.filter(func(x): return x != null)
-		for sh in swoop_hints:
-			sh.reparent.call_deferred(get_parent())
+	swoop_hints = [swoop_hint1, swoop_hint2, swoop_hint_player]\
+		.filter(func(x): return x != null)
+	for sh in swoop_hints:
+		sh.reparent.call_deferred(get_parent())
 
-		machine.transitioned.connect(_on_transit)
+	machine.transitioned.connect(_on_transit)
 
 	died.connect(_on_death)
 

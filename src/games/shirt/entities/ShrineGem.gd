@@ -10,8 +10,6 @@ func _ready():
 			})
 		]
 
-	super._ready()
-
 	anim.animation_finished.connect(func():
 		if anim.animation == "shine":
 			anim.play("gem"))

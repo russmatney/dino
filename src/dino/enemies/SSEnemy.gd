@@ -1,4 +1,3 @@
-@tool
 extends CharacterBody2D
 class_name SSEnemy
 
@@ -80,34 +79,33 @@ var max_y: float = 5000.0
 ## ready ###########################################################
 
 func _ready():
-	if not Engine.is_editor_hint():
-		U.set_optional_nodes(self, {
-			notif_label="NotifLabel",
-			cam_pof="CamPOF",
-			nav_agent="NavigationAgent2D",
-			skull_particles="SkullParticles",
-			los="LineOfSight",
-			front_ray="FrontRay",
-			low_los="LowLineOfSight",
-			high_los="HighLineOfSight",
-			hopbox="Hopbox",
-			})
+	U.set_optional_nodes(self, {
+		notif_label="NotifLabel",
+		cam_pof="CamPOF",
+		nav_agent="NavigationAgent2D",
+		skull_particles="SkullParticles",
+		los="LineOfSight",
+		front_ray="FrontRay",
+		low_los="LowLineOfSight",
+		high_los="HighLineOfSight",
+		hopbox="Hopbox",
+		})
 
-		if hopbox:
-			hopbox.body_entered.connect(on_hopbox_entered)
-			hopbox.body_exited.connect(on_hopbox_exited)
+	if hopbox:
+		hopbox.body_entered.connect(on_hopbox_entered)
+		hopbox.body_exited.connect(on_hopbox_exited)
 
-		if skull_particles:
-			skull_particles.set_emitting(false)
+	if skull_particles:
+		skull_particles.set_emitting(false)
 
-		if low_los and high_los:
-			line_of_sights = [low_los, high_los]
+	if low_los and high_los:
+		line_of_sights = [low_los, high_los]
 
-		machine.transitioned.connect(_on_transit)
+	machine.transitioned.connect(_on_transit)
 
-		OffscreenIndicator.add(self, {
-			# could instead depend on a fn like this directly on the passed node
-			is_active=func(): return not is_dead})
+	OffscreenIndicator.add(self, {
+		# could instead depend on a fn like this directly on the passed node
+		is_active=func(): return not is_dead})
 
 	Hotel.register(self)
 

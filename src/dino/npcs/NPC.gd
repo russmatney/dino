@@ -32,18 +32,17 @@ var line_of_sights = []
 ## ready ###########################################################
 
 func _ready():
-	if not Engine.is_editor_hint():
-		U.set_optional_nodes(self, {
-			nav_agent="NavigationAgent2D",
-			front_ray="FrontRay",
-			low_los="LowLineOfSight",
-			high_los="HighLineOfSight",
-			})
+	U.set_optional_nodes(self, {
+		nav_agent="NavigationAgent2D",
+		front_ray="FrontRay",
+		low_los="LowLineOfSight",
+		high_los="HighLineOfSight",
+		})
 
-		if low_los and high_los:
-			line_of_sights = [low_los, high_los]
+	if low_los and high_los:
+		line_of_sights = [low_los, high_los]
 
-		machine.transitioned.connect(_on_transit)
+	machine.transitioned.connect(_on_transit)
 
 	if state_label:
 		if show_debug:
