@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://fdvu7a71attn"]
+
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_c2fck"]
+[ext_resource type="Script" path="res://src/dino/npcs/states/Idle.gd" id="2_ed1a8"]
+[ext_resource type="Script" path="res://src/dino/npcs/states/Walk.gd" id="3_3g2du"]
+
+[node name="SSNPCMachine" type="Node"]
+script = ExtResource("1_c2fck")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_ed1a8")
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource("3_3g2du")

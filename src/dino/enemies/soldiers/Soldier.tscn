@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwhejqu03vl0b"]
+[gd_scene load_steps=11 format=3 uid="uid://dwhejqu03vl0b"]
 
 [ext_resource type="SpriteFrames" uid="uid://tehrf3qb1t4c" path="res://src/dino/enemies/soldiers/SoldierSpriteFrames.tres" id="1_cvejl"]
 [ext_resource type="Script" path="res://src/dino/enemies/SSEnemy.gd" id="1_kjpbg"]
+[ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/entities/GreenBlobAnim.tscn" id="2_dyhjt"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_ncdcj"]
 [ext_resource type="PackedScene" uid="uid://43qn8g87wt2p" path="res://src/dino/enemies/SSEnemyMachine.tscn" id="3_22wf2"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_f6c4x"]
@@ -10,6 +11,7 @@
 [sub_resource type="Resource" id="Resource_shufi"]
 script = ExtResource("2_ncdcj")
 type = 0
+anim_scene = ExtResource("2_dyhjt")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5cd88"]
 size = Vector2(12, 18)

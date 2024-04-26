@@ -57,7 +57,6 @@ signal knocked_back(enemy)
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $SSEnemyMachine
-@onready var coll = $CollisionShape2D
 @onready var state_label = $StateLabel
 @onready var hitbox = $Hitbox
 
