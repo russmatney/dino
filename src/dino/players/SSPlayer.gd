@@ -326,6 +326,7 @@ func _on_transit(label):
 
 func hotel_data():
 	var d = {
+		initial_health=initial_health,
 		health=health,
 		name=name,
 		is_dead=is_dead,
@@ -340,6 +341,7 @@ func hotel_data():
 	return d
 
 func check_out(data):
+	initial_health = U.get_(data, "initial_health", initial_health)
 	health = U.get_(data, "health", initial_health)
 	is_dead = U.get_(data, "is_dead", is_dead)
 	display_name = U.get_(data, "display_name", display_name)
@@ -465,6 +467,10 @@ func recover_health(h=null):
 
 	Hotel.check_in(self)
 
+func increase_base_health(n: int):
+	initial_health += n
+	Hotel.check_in(self)
+
 ## hurtbox ###########################################################
 
 var bumpbox_bodies = []
@@ -504,6 +510,19 @@ func clear_forced_movement_target():
 
 #################################################################################
 ## Effects #####################################################################
+
+func emit_heart_particle():
+	DJZ.play(DJZ.S.playerheal)
+	if heart_particles != null:
+		# force one-shot emission
+		heart_particles.set_emitting(true)
+		heart_particles.restart()
+
+func emit_skull_particle():
+	if skull_particles != null:
+		# force one-shot emission
+		skull_particles.set_emitting(true)
+		skull_particles.restart()
 
 ## notif #####################################################################
 
@@ -627,9 +646,17 @@ func add_coin():
 	coins += 1
 	Hotel.check_in(self)
 
+func spend_coins(n: int):
+	coins -= n
+	Hotel.check_in(self)
+
 func add_leaf():
 	notif("LEAF PICKED UP", {"dupe": true})
 	leaves += 1
+	Hotel.check_in(self)
+
+func spend_leaves(n: int):
+	leaves -= n
 	Hotel.check_in(self)
 
 func add_orb(ingredient_type):

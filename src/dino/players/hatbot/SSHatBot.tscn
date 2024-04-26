@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://djculbglj2yia"]
+[gd_scene load_steps=38 format=3 uid="uid://djculbglj2yia"]
 
 [ext_resource type="Script" path="res://src/dino/players/SSPlayer.gd" id="1_blpj0"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/components/quick_select/QuickSelect.tscn" id="10_e40tc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="10_lf38g"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_xlgae"]
+[ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="12_1yter"]
+[ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="13_1yrmg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtbi"]
 size = Vector2(14, 24)
@@ -234,7 +236,7 @@ size = Vector2(96, 96)
 radius = 8.0
 height = 28.0
 
-[node name="SSHatBot" type="CharacterBody2D" groups=["player"]]
+[node name="SSHatBot" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
 collision_mask = 3129
 script = ExtResource("1_blpj0")
@@ -287,14 +289,16 @@ sprite_frames = SubResource("SpriteFrames_nppfr")
 animation = &"init"
 
 [node name="NotifLabel" type="RichTextLabel" parent="."]
-visible = false
 offset_left = -40.0
 offset_top = -64.0
 offset_right = 40.0
 offset_bottom = -32.0
 theme_override_fonts/normal_font = ExtResource("7_lxjfb")
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "some sparkle"
+fit_content = true
+scroll_active = false
 
 [node name="SSMachine" parent="." instance=ExtResource("7_rj434")]
 
@@ -318,3 +322,7 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bumpbox"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_3mi8x")
+
+[node name="HeartParticles" parent="." instance=ExtResource("12_1yter")]
+
+[node name="SkullParticles" parent="." instance=ExtResource("13_1yrmg")]

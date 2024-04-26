@@ -1,4 +1,3 @@
-@tool
 class_name ActionDetector
 extends Area2D
 

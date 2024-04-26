@@ -21,11 +21,7 @@ func enter(opts = {}):
 	heal_t.set_loops(3)
 	heal_t.tween_callback(func():
 		actor.recover_health(1)
-		DJZ.play(DJZ.S.playerheal)
-		if actor.heart_particles != null:
-			# force one-shot emission
-			actor.heart_particles.set_emitting(true)
-			actor.heart_particles.restart()
+		actor.emit_heart_particle()
 		).set_delay(1)
 	heal_t.finished.connect(transit.bind("Idle"))
 

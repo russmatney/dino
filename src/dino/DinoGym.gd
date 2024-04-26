@@ -20,6 +20,10 @@ func _enter_tree():
 		add_child(cam)
 		cam.set_owner(self)
 		host.set_owner(self)
+	if get_node_or_null("DinoHUD") == null:
+		var hud = load("res://src/dino/hud/DinoHUD.tscn").instantiate()
+		add_child(hud)
+		hud.set_owner(self)
 
 ## ready #####################################################
 

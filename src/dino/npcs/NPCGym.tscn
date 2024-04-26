@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtcde7dgrpvq2"]
+[gd_scene load_steps=9 format=3 uid="uid://dtcde7dgrpvq2"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_h3spx"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_h7s8h"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_tl3aj"]
 [ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn" id="3_q5a7n"]
 [ext_resource type="PackedScene" uid="uid://ci7wujr225x8y" path="res://src/dino/npcs/leaf_god/LeafGod.tscn" id="4_xx4j4"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="6_jd0db"]
+[ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/dino/entities/leaves/Leaf.tscn" id="8_gesa6"]
 
 [sub_resource type="Resource" id="Resource_uwxjw"]
 script = ExtResource("2_tl3aj")
@@ -26,3 +28,17 @@ layer_0/tile_data = PackedInt32Array(458769, 196609, 4, 393233, 196609, 3, 32769
 
 [node name="LeafGod" parent="." instance=ExtResource("4_xx4j4")]
 position = Vector2(86, -12)
+
+[node name="DinoHUD" parent="." instance=ExtResource("6_jd0db")]
+
+[node name="Leaf" parent="." instance=ExtResource("8_gesa6")]
+position = Vector2(-50, 2)
+
+[node name="Leaf2" parent="." instance=ExtResource("8_gesa6")]
+position = Vector2(-86, 7)
+
+[node name="Leaf3" parent="." instance=ExtResource("8_gesa6")]
+position = Vector2(-26, 10)
+
+[node name="Leaf4" parent="." instance=ExtResource("8_gesa6")]
+position = Vector2(0, 17)
