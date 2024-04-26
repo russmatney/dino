@@ -1436,6 +1436,35 @@
 						"value": "res://src/dino/entities/SpawnPoint.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "162",
+				"_index": 0,
+				"_name": "LeafGod",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Leaf God"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/leaf_god/leaf_god.txt"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/leaf_god/runner_leaf_friend.png"
+					},
+					"label": {
+						"type": "string",
+						"value": "LeafGod"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/leaf_god/LeafGod.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1716,7 +1745,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 161
+			"default": 162
 		}
 	}
 }

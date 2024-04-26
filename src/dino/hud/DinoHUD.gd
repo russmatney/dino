@@ -39,7 +39,7 @@ func update_player_status():
 	var p_node = Dino.current_player_node()
 
 	if p_ent != null:
-		player_status.set_status({"entity": p_ent, "health": p_node.health})
+		player_status.set_status({"entity": p_ent, "health": p_node.health if p_node else 0})
 
 func update_level_opts():
 	if level_opts == null:
