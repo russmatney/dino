@@ -15,9 +15,7 @@ func _ready():
 
 	shop_ui.set_visible(false)
 
-	exit_button.pressed.connect(func():
-		fade_out_shop()
-		machine.transit("Idle"))
+	exit_button.pressed.connect(stop_shopping)
 	exchange_button.pressed.connect(exchange)
 
 ## actions ###########################################################
@@ -34,19 +32,22 @@ var actions = [
 
 func start_leaf_trade(actor):
 	shopper = actor
-	machine.transit("Shop")
-	fade_in_shop()
-	exchange_button.grab_focus()
+	start_shopping()
 
-func fade_in_shop():
+func start_shopping():
+	# TODO pause other parts of the game (to prevent the player moving and/or being attacked)
 	# TODO animate in
+	machine.transit("Shop")
 	shop_ui.set_visible(true)
 	check_afford_exchange()
+	exchange_button.grab_focus()
 
-func fade_out_shop():
+func stop_shopping():
+	# TODO unpause
 	# TODO animate out
 	shop_ui.set_visible(false)
 	shopper = null
+	machine.transit("Idle")
 
 ## exchange ###########################################################
 
