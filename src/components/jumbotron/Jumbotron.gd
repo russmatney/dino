@@ -4,14 +4,14 @@ class_name Jumbotron
 
 ## static ##########################################################################
 
-static var jumbotron_scene = preload("res://addons/core/quest/Jumbotron.tscn")
+static var jumbotron_scene = preload("res://src/components/jumbotron/Jumbotron.tscn")
 
 static func jumbo_notif(opts):
 	var jumbotron = jumbotron_scene.instantiate()
 	Navi.add_child(jumbotron)
 
-	var header = opts.get("header")
-	var body = opts.get("body", "")
+	var _header = opts.get("header")
+	var _body = opts.get("body", "")
 	var key_or_action = opts.get("key")
 	key_or_action = opts.get("action", key_or_action)
 	var action_label_text = opts.get("action_label_text")
@@ -19,8 +19,8 @@ static func jumbo_notif(opts):
 	var pause = opts.get("pause", true)
 
 	# reset data
-	jumbotron.header_text = header
-	jumbotron.body_text = body
+	jumbotron.header_text = _header
+	jumbotron.body_text = _body
 	jumbotron.action_hint.hide()
 
 	if key_or_action or action_label_text:
