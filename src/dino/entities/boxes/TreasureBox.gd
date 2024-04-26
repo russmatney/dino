@@ -5,13 +5,11 @@ extends Area2D
 @export var drops: Array[DropData]
 
 @onready var anim = $AnimatedSprite2D
-@onready var action_area = $ActionArea
 
 ## ready ###############################################
 
 func _ready():
 	anim.play("idle")
-	action_area.register_actions(actions, {source=self})
 
 ## actions ###############################################
 

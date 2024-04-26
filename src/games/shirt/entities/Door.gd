@@ -4,7 +4,6 @@ class_name Door
 
 @onready var anim = $AnimatedSprite2D
 @onready var body = $StaticBody2D
-@onready var action_area = $ActionArea
 
 enum door_state {CLOSED, OPEN}
 
@@ -18,8 +17,6 @@ var actions = [
 func _ready():
 	anim.animation_finished.connect(on_anim_finished)
 	update_door()
-
-	action_area.register_actions(actions, {source=self})
 
 
 func on_anim_finished():

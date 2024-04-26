@@ -2,9 +2,6 @@
 extends Node2D
 class_name Checkpoint
 
-@onready var action_area = $ActionArea
-@onready var action_hint = $ActionHint
-
 var visit_count = 0
 
 ## config warnings ###########################################################
@@ -20,8 +17,6 @@ func _enter_tree():
 ## ready ###########################################################
 
 func _ready():
-	action_area.register_actions(actions, {source=self, action_hint=action_hint})
-
 	Hotel.register(self)
 
 ## hotel ###########################################################

@@ -6,13 +6,9 @@ extends Node2D
 
 #############################################################
 
-@onready var action_area = $ActionArea
-
 var actions = [Action.mk({label_fn=func(): return label, fn=open_door})]
 
 func _ready():
-	action_area.register_actions(actions, {source=self})
-
 	if label:
 		set_label(label)
 

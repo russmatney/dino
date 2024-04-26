@@ -15,7 +15,6 @@ var actions = [
 	]
 
 func _ready():
-	action_area.register_actions(actions, {source=self})
 	action_area.action_display_updated.connect(set_action_label)
 
 ##########################################################

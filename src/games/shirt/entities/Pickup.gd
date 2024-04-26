@@ -2,17 +2,12 @@ extends Node2D
 class_name Pickup
 
 @onready var anim = $AnimatedSprite2D
-@onready var action_area = $ActionArea
 
 var picked_up = false
 
 var actions = [
 	Action.mk({label="Pickup", fn=func(_actor): fade_out(), source_can_execute=func(): return picked_up == false})
 	]
-
-func _ready():
-	action_area.register_actions(actions, {source=self})
-
 
 func fade_out():
 	picked_up = true

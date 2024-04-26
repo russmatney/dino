@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var anim = $AnimatedSprite2D
 @onready var machine = $Machine
-@onready var action_area = $ActionArea
 @onready var action_hint = $ActionHint
 
 var max_health = 3
@@ -13,9 +12,8 @@ var health = 3
 
 func _ready():
 	Hotel.register(self)
+	# TODO offInd could be self-sufficient as well
 	OffscreenIndicator.add(self, {label="Sheep"})
-
-	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 
 ######################################################
 # hotel

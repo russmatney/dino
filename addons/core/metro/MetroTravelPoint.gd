@@ -14,9 +14,7 @@ func _get_configuration_warnings():
 
 @export var destination_travel_point: MetroTravelPointEntity
 
-@onready var action_area = $ActionArea
 @onready var anim = $AnimatedSprite2D
-@onready var action_hint = $ActionHint
 
 var room
 var travel_dest
@@ -31,7 +29,6 @@ func _on_enter_tree():
 ## ready ##################################################################
 
 func _ready():
-	action_area.register_actions(actions, {source=self, action_hint=action_hint})
 	anim.animation_finished.connect(_on_anim_finished)
 
 	z_index = 10

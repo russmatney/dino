@@ -11,6 +11,15 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
+	if not source:
+		var p = get_parent()
+		p.ready.connect(func():
+			var axs = []
+			if p.get("actions"): # maybe better to call a method
+				axs = p.actions
+			if not axs.is_empty():
+				register_actions(axs, {source=p}))
+
 ####################################################################
 # actions registry
 
@@ -21,14 +30,20 @@ var source
 ## register actions to be detected from this area
 func register_actions(axs, opts={}):
 	source = opts.get("source")
-	action_hint = opts.get("action_hint")
+
+	if not action_hint:
+		for ch in source.get_children():
+			if ch is ActionHint:
+				action_hint = ch
+				break
 	if action_hint:
 		action_hint.hide()
-	for ax in axs:
+
+	actions = axs
+	for ax in actions:
 		if source and not ax.source:
 			ax.source = source
 		ax.area = self
-	actions = axs
 
 ####################################################################
 # bodies
