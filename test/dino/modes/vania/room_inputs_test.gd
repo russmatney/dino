@@ -175,7 +175,8 @@ func test_room_def_inputs_spaceship_sets_tilemap():
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.entities).is_empty()
 	assert_array(def.constraints).is_not_empty()
-	assert_array(def.constraints).contains([RoomInputs.IN_SPACESHIP])
+	var cons = def.constraints[0]
+	assert_array(cons.tilemap_scenes).contains(inp.tilemap_scenes)
 
 func test_room_def_inputs_player_room_sets_entities_and_shape():
 	var def = VaniaRoomDef.new()
