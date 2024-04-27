@@ -2,6 +2,14 @@
 extends Resource
 class_name RoomEffect
 
+## static ##################################
+
+static func rain_fall():
+	return RoomEffect.new({scene=load("res://src/effects/particle_area/RainFallParticles.tscn")})
+
+static func snow_fall():
+	return RoomEffect.new({scene=load("res://src/effects/particle_area/SnowFallParticles.tscn")})
+
 ## vars ##################################
 
 @export var scene: PackedScene
@@ -14,14 +22,17 @@ func _init(opts={}):
 
 ## add at cell ##################################
 
-func add_at_cell(node, rect: Rect2):
-	var effect = scene.instantiate()
+func add_to_room(room_node: VaniaRoom):
+	var room_def = room_node.room_def
 
-	var half_x_size = rect.size.x / 2
-	var rect_top_center = rect.position + Vector2.RIGHT * half_x_size
+	# add per cell, or per room?
 
-	effect.position = rect_top_center
-	effect.process_material.emission_box_extents.x = half_x_size
+	for cell in room_def.local_cells:
+		var effect = scene.instantiate()
 
-	node.add_child(effect)
-	effect.set_owner(node)
+		if effect.has_method("adjust_for_rect"):
+			var rect = room_def.get_local_rect(Vector2i(cell.x, cell.y))
+			effect.adjust_for_rect(rect)
+
+		room_node.add_child(effect)
+		effect.set_owner(room_node)

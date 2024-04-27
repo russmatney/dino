@@ -55,9 +55,6 @@ func start_game():
 
 ## room_inputs #################################333
 
-@onready var rain_eff = RoomEffect.new({scene=load("res://src/effects/RainFallParticles.tscn")})
-@onready var snow_eff = RoomEffect.new({scene=load("res://src/effects/SnowFallParticles.tscn")})
-
 func initial_room_inputs():
 	var inputs = [{
 			RoomInputs.HAS_PLAYER: {},
@@ -65,18 +62,18 @@ func initial_room_inputs():
 			RoomInputs.HAS_CHECKPOINT: {},
 			RoomInputs.IN_SMALL_ROOM: {},
 			RoomInputs.HAS_EFFECTS: {effects=[
-				snow_eff,
-				rain_eff,
+				RoomEffect.snow_fall(),
+				RoomEffect.rain_fall(),
 				]},
 		},
 		RoomInputs.random_room().merge_constraint({
 			RoomInputs.HAS_EFFECTS: {effects=[
-				snow_eff,
+				RoomEffect.snow_fall(),
 				]}
 			}),
 		RoomInputs.random_room().merge_constraint({
 			RoomInputs.HAS_EFFECTS: {effects=[
-				rain_eff,
+				RoomEffect.rain_fall(),
 				]}
 			})
 		]

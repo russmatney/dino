@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8bdi1yxvp67w"]
+[gd_scene load_steps=3 format=3 uid="uid://c8bdi1yxvp67w"]
+
+[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_bdb51"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1vqvx"]
 lifetime_randomness = 0.6
@@ -22,3 +24,4 @@ lifetime = 10.0
 preprocess = 0.13
 visibility_rect = Rect2(-250, 0, 500, 300)
 draw_order = 2
+script = ExtResource("1_bdb51")

@@ -371,20 +371,7 @@ func add_entities():
 
 func add_effects():
 	for eff in room_def.effects:
-		# TODO all roomeffects have this method, need a flag
-		if eff.has_method("add_at_cell"):
-			for cell in room_def.local_cells:
-				var rect = room_def.get_local_rect(Vector2i(cell.x, cell.y))
-				eff.add_at_cell(self, rect)
-
-				# var rect_top_center = rect.position
-				# var half_x_size = rect.size.x / 2
-				# rect_top_center += Vector2.RIGHT * half_x_size
-				# var effect = eff.instantiate()
-				# effect.position = rect_top_center
-				# effect.process_material.emission_box_extents.x = half_x_size
-				# add_child(effect)
-				# effect.set_owner(self)
+		eff.add_to_room(self)
 
 ## fit helpers ##############################################################
 

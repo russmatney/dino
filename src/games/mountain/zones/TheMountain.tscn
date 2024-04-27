@@ -12,10 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://bax62g5wrhfl7" path="res://src/dino/entities/checkpoints/LogCheckpoint.tscn" id="9_lgxod"]
 [ext_resource type="PackedScene" uid="uid://dkyb7ritrpatt" path="res://src/dino/entities/checkpoints/CaveCheckpoint.tscn" id="10_wd4ay"]
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/dino/entities/checkpoints/SnowCheckpoint.tscn" id="11_ooovp"]
-[ext_resource type="PackedScene" uid="uid://c8bdi1yxvp67w" path="res://src/effects/SnowFallParticles.tscn" id="12_xcbii"]
+[ext_resource type="PackedScene" uid="uid://c8bdi1yxvp67w" path="res://src/effects/particle_area/SnowFallParticles.tscn" id="12_xcbii"]
 [ext_resource type="PackedScene" uid="uid://c0pkrdt2pgivv" path="res://src/effects/BlurryCircleParticles.tscn" id="13_oonb0"]
 [ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="14_j24i6"]
-[ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/RainFallParticles.tscn" id="16_bwnd5"]
+[ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/particle_area/RainFallParticles.tscn" id="16_bwnd5"]
 
 [sub_resource type="Environment" id="Environment_gekih"]
 background_mode = 3

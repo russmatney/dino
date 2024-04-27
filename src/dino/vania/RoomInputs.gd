@@ -342,6 +342,16 @@ static func has_effects(opts):
 		room_effects=opts.get("effects")
 		})
 
+static func has_rain_fall(_opts):
+	return RoomInputs.new({
+		room_effects=[RoomEffect.rain_fall()]
+		})
+
+static func has_snow_fall(_opts):
+	return RoomInputs.new({
+		room_effects=[RoomEffect.snow_fall()]
+		})
+
 ## room size ######################################################33
 
 const IN_LARGE_ROOM = "in_large_room"
