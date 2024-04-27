@@ -1,19 +1,19 @@
 [gd_scene load_steps=8 format=3 uid="uid://c3qbusaj72tpy"]
 
 [ext_resource type="Script" path="res://src/dino/weapons/orb/OrbitItem.gd" id="1_5ttjx"]
-[ext_resource type="Texture2D" uid="uid://dh3tktny27ro0" path="res://src/dino/pickups/SPIKE_blob_pickup (2).png" id="2_n5odu"]
+[ext_resource type="Texture2D" uid="uid://dh3tktny27ro0" path="res://src/dino/pickups/orb/SPIKE_blob_pickup (2).png" id="2_avo4j"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="3_53h10"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8j38q"]
-atlas = ExtResource("2_n5odu")
+atlas = ExtResource("2_avo4j")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7g4i0"]
-atlas = ExtResource("2_n5odu")
+atlas = ExtResource("2_avo4j")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t34sj"]
-atlas = ExtResource("2_n5odu")
+atlas = ExtResource("2_avo4j")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o7j3o"]

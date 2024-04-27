@@ -1,0 +1,261 @@
+[gd_scene load_steps=29 format=3 uid="uid://dhma0vanfafyo"]
+
+[ext_resource type="Script" path="res://src/dino/pickups/leaves/LeafEntity.gd" id="1_1akrk"]
+[ext_resource type="Texture2D" uid="uid://twjcqls3w7j0" path="res://src/dino/pickups/leaves/leaf_green.png" id="2_1b5ov"]
+[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/dino/pickups/leaves/leaf_greenred.png" id="3_32ltg"]
+[ext_resource type="Texture2D" uid="uid://blxnv51h4ng52" path="res://src/dino/pickups/leaves/leaf_purple.png" id="4_1kosg"]
+[ext_resource type="Texture2D" uid="uid://bgdgddeojp2g6" path="res://src/dino/pickups/leaves/leaf_redorange.png" id="5_t2nsq"]
+[ext_resource type="Texture2D" uid="uid://pi1jxrc3ggju" path="res://src/dino/pickups/leaves/leaf_yellow.png" id="6_xd72u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmnml"]
+atlas = ExtResource("2_1b5ov")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0t43"]
+atlas = ExtResource("2_1b5ov")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvo1q"]
+atlas = ExtResource("2_1b5ov")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dipl8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmnml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0t43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmnml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvo1q")
+}],
+"loop": true,
+"name": &"twist",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6md4b"]
+atlas = ExtResource("3_32ltg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0e0a"]
+atlas = ExtResource("3_32ltg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_370tf"]
+atlas = ExtResource("3_32ltg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8m26"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6md4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0e0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6md4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_370tf")
+}],
+"loop": true,
+"name": &"twist",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilpl8"]
+atlas = ExtResource("4_1kosg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06805"]
+atlas = ExtResource("4_1kosg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwqjm"]
+atlas = ExtResource("4_1kosg")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yovo4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilpl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06805")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilpl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwqjm")
+}],
+"loop": true,
+"name": &"twist",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esgbv"]
+atlas = ExtResource("5_t2nsq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq3r0"]
+atlas = ExtResource("5_t2nsq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mca1o"]
+atlas = ExtResource("5_t2nsq")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3e0n"]
+atlas = ExtResource("5_t2nsq")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6gqun"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esgbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq3r0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mca1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3e0n")
+}],
+"loop": true,
+"name": &"twist",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drxba"]
+atlas = ExtResource("6_xd72u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4d7o"]
+atlas = ExtResource("6_xd72u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg805"]
+atlas = ExtResource("6_xd72u")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4eq1c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drxba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4d7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drxba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg805")
+}],
+"loop": true,
+"name": &"twist",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgtjr"]
+size = Vector2(32, 32)
+
+[node name="Leaf" type="Node2D" groups=["leaves"]]
+script = ExtResource("1_1akrk")
+
+[node name="Green" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_dipl8")
+animation = &"twist"
+frame_progress = 0.922239
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/art/fall/leaf_green.aseprite"
+}
+
+[node name="GreenRed" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_o8m26")
+animation = &"twist"
+autoplay = "twist"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/art/fall/leaf_greenred.aseprite"
+}
+
+[node name="Purple" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_yovo4")
+animation = &"twist"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/art/fall/leaf_purple.aseprite"
+}
+
+[node name="RedOrange" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_6gqun")
+animation = &"twist"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/art/fall/leaf_redorange.aseprite"
+}
+
+[node name="Yellow" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4eq1c")
+animation = &"twist"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://assets/art/fall/leaf_yellow.aseprite"
+}
+
+[node name="CollectBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectBox"]
+shape = SubResource("RectangleShape2D_qgtjr")

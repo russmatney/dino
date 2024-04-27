@@ -1,29 +1,29 @@
 [gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://d1uqrh57tjmm6"]
 
-[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://src/dino/weapons/pop_sheet.png" id="1_2sj28"]
+[ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://src/dino/weapons/bullet/pop_sheet.png" id="1_vrgm1"]
 
 [sub_resource type="AtlasTexture" id="1"]
-atlas = ExtResource("1_2sj28")
+atlas = ExtResource("1_vrgm1")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="2"]
-atlas = ExtResource("1_2sj28")
+atlas = ExtResource("1_vrgm1")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="3"]
-atlas = ExtResource("1_2sj28")
+atlas = ExtResource("1_vrgm1")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="4"]
-atlas = ExtResource("1_2sj28")
+atlas = ExtResource("1_vrgm1")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="5"]
-atlas = ExtResource("1_2sj28")
+atlas = ExtResource("1_vrgm1")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="6"]
-atlas = ExtResource("1_2sj28")
+atlas = ExtResource("1_vrgm1")
 region = Rect2(0, 0, 32, 32)
 
 [resource]

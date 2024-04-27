@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dey4j84srijsb"
+path="res://.godot/imported/sword_icon.aseprite-9c5750f09476f8daa7e2a9debdaaf3c1.res"
+
+[deps]
+
+source_file="res://src/dino/weapons/sword/sword_icon.aseprite"
+dest_files=["res://.godot/imported/sword_icon.aseprite-9c5750f09476f8daa7e2a9debdaaf3c1.res"]
+
+[params]
+

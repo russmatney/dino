@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cdguplx04mn1p"
+path="res://.godot/imported/orb_icon.aseprite-d284c16b0fa6c68bebd3d425dab99c22.res"
+
+[deps]
+
+source_file="res://src/dino/weapons/orb/orb_icon.aseprite"
+dest_files=["res://.godot/imported/orb_icon.aseprite-d284c16b0fa6c68bebd3d425dab99c22.res"]
+
+[params]
+

@@ -809,8 +809,10 @@ func stop_using_weapon(weapon=null):
 func add_orbit_item(ingredient_type):
 	var item = orbit_item_scene.instantiate()
 	item.show_behind_parent = true
-	# pass ingredient data along
+
+	# TODO pass item data along (drop/pickup/crafting data)
 	item.ingredient_type = ingredient_type
+
 	add_child.call_deferred(item)
 	orbit_items.append(item)
 
@@ -823,7 +825,7 @@ func remove_tossed_orbit_item(item):
 			orbit_items.erase(ch)
 			ch.queue_free()
 
-			# dowe care if spiking?
+			# do we care if spiking?
 			if orbit_items.size() == 0:
 				remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
 

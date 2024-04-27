@@ -17,7 +17,8 @@ func _ready():
 	else:
 		Log.warn("loading pickup without drop data!", self)
 
-	floaty_tween()
+	if not Engine.is_editor_hint():
+		floaty_tween()
 
 ## process #######################################################################
 

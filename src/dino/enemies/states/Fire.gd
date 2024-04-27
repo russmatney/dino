@@ -61,7 +61,7 @@ func _on_bullet_dying(_bullet):
 
 ## fire ####################################################
 
-var bullet_scene = preload("res://src/dino/weapons/Spell.tscn")
+var bullet_scene = preload("res://src/dino/weapons/spell/Spell.tscn")
 var bullet_impulse = 100
 var bullet_knockback = 0
 

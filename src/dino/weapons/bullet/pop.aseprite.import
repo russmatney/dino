@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ckcr51bkpewoj"
+path="res://.godot/imported/pop.aseprite-89c2acdca94f0131a8ff8b377f6bf2a9.res"
+
+[deps]
+
+source_file="res://src/dino/weapons/bullet/pop.aseprite"
+dest_files=["res://.godot/imported/pop.aseprite-89c2acdca94f0131a8ff8b377f6bf2a9.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dlpfue6vdqc80"
+path="res://.godot/imported/key.aseprite-048d42a5805b2c29936891e5ceae0567.res"
+
+[deps]
+
+source_file="res://src/dino/pickups/keys/key.aseprite"
+dest_files=["res://.godot/imported/key.aseprite-048d42a5805b2c29936891e5ceae0567.res"]
+
+[params]
+

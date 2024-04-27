@@ -5,6 +5,7 @@ class_name DropData
 ## data ##############################################
 
 # TODO move away from unscalable enum (adding new values breaks existing data b/c the val is an int)
+# maybe RoomEffects is a better impl of this pattern
 enum T {
 	RANDOM,
 	ORB,
@@ -77,15 +78,15 @@ func set_type_defaults(typ: T):
 	# these aren't exactly anim scenes....
 	match type:
 		T.ORB:
-			anim_scene = load("res://src/dino/entities/GreenBlobAnim.tscn")
+			anim_scene = load("res://src/dino/pickups/orb/GreenBlobAnim.tscn")
 		T.COIN:
-			anim_scene = load("res://src/dino/entities/coins/Coin.tscn")
+			anim_scene = load("res://src/dino/pickups/coins/Coin.tscn")
 		T.GEM:
-			anim_scene = load("res://src/dino/entities/coins/ShrineGem.tscn")
+			anim_scene = load("res://src/dino/pickups/coins/ShrineGem.tscn")
 		T.LEAF:
-			anim_scene = load("res://src/dino/entities/leaves/Leaf.tscn")
+			anim_scene = load("res://src/dino/pickups/leaves/Leaf.tscn")
 		T.POWERUP:
-			anim_scene = load("res://src/dino/entities/RedBlobAnim.tscn")
+			anim_scene = load("res://src/dino/pickups/powerups/SSPowerup.tscn")
 
 ################################################
 

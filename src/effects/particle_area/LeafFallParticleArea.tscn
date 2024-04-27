@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdboo1fafktp7"]
 
 [ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_mn5d4"]
-[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/dino/entities/leaves/leaf_greenred.png" id="1_opnc7"]
+[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/dino/pickups/leaves/leaf_greenred.png" id="1_opnc7"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1vqvx"]
 lifetime_randomness = 0.6

@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dny2ujqiu6v62"]
+
+[ext_resource type="Texture2D" uid="uid://dohv3iwpfsnbx" path="res://src/dino/pickups/powerups/powerupicons_sheet.png" id="1_rd8gp"]
+
+[resource]
+atlas = ExtResource("1_rd8gp")
+region = Rect2(16, 0, 16, 16)

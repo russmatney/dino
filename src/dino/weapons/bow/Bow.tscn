@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://douv3olgh8td0"]
+
+[ext_resource type="Script" path="res://src/dino/weapons/bow/Bow.gd" id="1_x2o1w"]
+
+[node name="Bow" type="Node2D"]
+script = ExtResource("1_x2o1w")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://drxg0wu7qxcg8"]
+
+[ext_resource type="Script" path="res://src/dino/pickups/powerups/SSPowerup.gd" id="1_rpp4o"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="2_l11ey"]
+[ext_resource type="SpriteFrames" uid="uid://caidohvlccmku" path="res://src/dino/pickups/powerups/SSPowerupSpriteFrames.tres" id="3_fhaun"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlg50"]
+size = Vector2(16, 16)
+
+[node name="Powerup" type="Node2D" groups=["pickups", "powerups"]]
+script = ExtResource("1_rpp4o")
+
+[node name="ActionArea" parent="." instance=ExtResource("2_l11ey")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_rlg50")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_fhaun")
+animation = &"doublejump"

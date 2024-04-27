@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="10_urcpa"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="11_arac5"]
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="12_cjkwf"]
-[ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/entities/coins/Coin.tscn" id="12_ma4mf"]
+[ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="12_ma4mf"]
 [ext_resource type="FontFile" uid="uid://c6j24vm8je66p" path="res://addons/core/assets/fonts/vexed/Enter_Input.ttf" id="13_f5ilp"]
 [ext_resource type="PackedScene" uid="uid://bv8w3f0w1s18a" path="res://addons/core/hood/InGameText.tscn" id="13_q2rk4"]
 [ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="13_t8su5"]

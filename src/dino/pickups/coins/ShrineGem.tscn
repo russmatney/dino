@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://w6sbcbxo5mnt"]
+
+[ext_resource type="Script" path="res://src/dino/pickups/coins/ShrineGem.gd" id="1_12h8n"]
+[ext_resource type="Texture2D" uid="uid://dtjn8kunpqgtx" path="res://src/dino/pickups/coins/gem.png" id="2_7enea"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_m00wy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rb6g"]
+atlas = ExtResource("2_7enea")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rffqr"]
+atlas = ExtResource("2_7enea")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lugra"]
+atlas = ExtResource("2_7enea")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhu35"]
+atlas = ExtResource("2_7enea")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d17lr"]
+atlas = ExtResource("2_7enea")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x75ch"]
+atlas = ExtResource("2_7enea")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p2y2"]
+atlas = ExtResource("2_7enea")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2vp0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rb6g")
+}],
+"loop": false,
+"name": &"gem",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rb6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rffqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lugra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhu35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d17lr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x75ch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p2y2")
+}],
+"loop": true,
+"name": &"shine",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vilv7"]
+size = Vector2(32, 32)
+
+[node name="ShrineGem" type="Node2D" groups=["gems"]]
+script = ExtResource("1_12h8n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_2vp0r")
+animation = &"gem"
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"op_exp": false,
+"source": "res://src/games/shirt/assets/gem.aseprite"
+}
+
+[node name="ActionArea" parent="." instance=ExtResource("3_m00wy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("RectangleShape2D_vilv7")

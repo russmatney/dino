@@ -21,24 +21,19 @@ func deactivate():
 	pass
 
 func use():
-	if not tossing and not spiking:
+	if not spiking:
 		if actor.orbit_items.size() > 0:
 			var item = actor.orbit_items[0]
-			if actor.in_spike_zone():
-				actor.is_spiking = true
-				start_spike(item.ingredient_type)
-			else:
-				toss(item.ingredient_type)
+			actor.is_spiking = true
+			Log.pr("spiking", item)
+			start_spike()
 			actor.remove_tossed_orbit_item(item)
 	elif spiking:
-		if spiking_ingredient_type != null:
-			stop_using()
-		else:
-			do_spike(null)
+		toss_item()
 
 func stop_using():
-	if spiking and spiking_ingredient_type != null:
-		do_spike(spiking_ingredient_type)
+	if spiking:
+		toss_item()
 		actor.is_spiking = false
 
 ######################################################
@@ -57,59 +52,36 @@ func _on_frame_changed():
 ######################################################
 # actions
 
-var tossing = false
 var spiking = false
 var cooldown = 0.2
 
 @onready var tossed_item_scene = preload("res://src/dino/pickups/TossedItem.tscn")
-var toss_impulse = 300
-var knockback = 1
-
-func toss(ingredient_type):
-	tossing = true
-
-	if aim_vector == null:
-		aim_vector = actor.move_vector
-
-	var item = tossed_item_scene.instantiate()
-	item.ingredient_type = ingredient_type
-	item.position = global_position + toss_offset
-	item.add_collision_exception_with(actor)
-
-	U.add_child_to_level(self, item)
-	# item.rotation = aim_vector.angle()
-	item.apply_impulse(aim_vector * toss_impulse, Vector2.ZERO)
-	DJZ.play(DJZ.S.fire)
-
-	await get_tree().create_timer(cooldown).timeout
-	# be sure to remove the collision exception, or we can't pick it up again
-	if is_instance_valid(item):
-		item.remove_collision_exception_with(actor)
-	tossing = false
 
 var spiking_ingredient_type
 var spike_impulse = 1000
 
-func start_spike(ingredient_type):
-	spiking_ingredient_type = ingredient_type
+func start_spike():
 	Juice.start_slowmo("spike_slowmo", 0.1)
 	spiking = true
 
-func do_spike(ingredient_type):
+func toss_item():
 	if aim_vector == null:
 		aim_vector = actor.move_vector
 
-	var item
-	if ingredient_type != null:
-		item = tossed_item_scene.instantiate()
-		item.ingredient_type = ingredient_type
-		item.position = global_position + toss_offset
-		item.add_collision_exception_with(actor)
+	var item = tossed_item_scene.instantiate()
 
-		U.add_child_to_level(self, item)
-		# item.rotation = aim_vector.angle()
-		item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
-		DJZ.play(DJZ.S.fire)
+	# TODO attach crafting data to tossed item
+	# item.ingredient_type = ingredient_type
+
+	item.position = global_position + toss_offset
+	item.add_collision_exception_with(actor)
+
+	# TODO emit child for parent/level to add
+	U.add_child_to_level(self, item)
+
+	# item.rotation = aim_vector.angle()
+	item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
+	DJZ.play(DJZ.S.fire)
 
 	Juice.stop_slowmo("spike_slowmo")
 
@@ -118,5 +90,5 @@ func do_spike(ingredient_type):
 	if item != null:
 		if is_instance_valid(item):
 			item.remove_collision_exception_with(actor)
+
 	spiking = false
-	spiking_ingredient_type = null

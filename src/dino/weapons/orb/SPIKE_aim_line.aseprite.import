@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dgrae0rvwlj72"
+path="res://.godot/imported/SPIKE_aim_line.aseprite-01b310e67984f5cda1ee7cc4219bfabf.res"
+
+[deps]
+
+source_file="res://src/dino/weapons/orb/SPIKE_aim_line.aseprite"
+dest_files=["res://.godot/imported/SPIKE_aim_line.aseprite-01b310e67984f5cda1ee7cc4219bfabf.res"]
+
+[params]
+

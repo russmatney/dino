@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cfnlv0wnmpk2t"
+path="res://.godot/imported/runner_leaf_greenred.aseprite-2abc77ea6d61903369167a051b7fa0e4.res"
+
+[deps]
+
+source_file="res://src/dino/pickups/leaves/runner_leaf_greenred.aseprite"
+dest_files=["res://.godot/imported/runner_leaf_greenred.aseprite-2abc77ea6d61903369167a051b7fa0e4.res"]
+
+[params]
+

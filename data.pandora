@@ -645,11 +645,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/sword_icon.png"
+						"value": "res://src/dino/weapons/sword/sword_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/Sword.tscn"
+						"value": "res://src/dino/weapons/sword/Sword.tscn"
 					}
 				}
 			},
@@ -666,11 +666,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/bow_icon.png"
+						"value": "res://src/dino/weapons/bow/bow_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/Bow.tscn"
+						"value": "res://src/dino/weapons/bow/Bow.tscn"
 					}
 				}
 			},
@@ -687,11 +687,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/boomerang_icon.png"
+						"value": "res://src/dino/weapons/boomerang/boomerang_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/Boomerang.tscn"
+						"value": "res://src/dino/weapons/boomerang/Boomerang.tscn"
 					},
 					"topdown_scene": {
 						"type": "resource",
@@ -712,11 +712,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/gun_icon.png"
+						"value": "res://src/dino/weapons/gun/gun_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/Gun.tscn"
+						"value": "res://src/dino/weapons/gun/Gun.tscn"
 					}
 				}
 			},
@@ -733,11 +733,11 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/flashlight_icon.png"
+						"value": "res://src/dino/weapons/flashlight/flashlight_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/Flashlight.tscn"
+						"value": "res://src/dino/weapons/flashlight/Flashlight.tscn"
 					}
 				}
 			},
@@ -754,7 +754,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/weapons/orb_icon.png"
+						"value": "res://src/dino/weapons/orb/orb_icon.png"
 					},
 					"sidescroller_scene": {
 						"type": "resource",
@@ -1130,7 +1130,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://src/dino/entities/leaves/Leaf.tscn"
+						"value": "res://src/dino/pickups/leaves/Leaf.tscn"
 					}
 				}
 			},
@@ -1151,7 +1151,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/entities/coins/coin.png"
+						"value": "res://src/dino/pickups/coins/coin.png"
 					},
 					"label": {
 						"type": "string",
@@ -1159,7 +1159,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://src/dino/entities/coins/Coin.tscn"
+						"value": "res://src/dino/pickups/coins/Coin.tscn"
 					}
 				}
 			},
@@ -1180,7 +1180,7 @@
 					},
 					"icon_texture": {
 						"type": "resource",
-						"value": "res://src/dino/entities/coins/gem.png"
+						"value": "res://src/dino/pickups/coins/gem.png"
 					},
 					"label": {
 						"type": "string",
@@ -1188,7 +1188,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://src/dino/entities/coins/ShrineGem.tscn"
+						"value": "res://src/dino/pickups/coins/ShrineGem.tscn"
 					}
 				}
 			},
