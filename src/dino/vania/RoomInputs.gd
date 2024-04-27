@@ -563,6 +563,8 @@ static func has_entity(ent_id, opts={}):
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
+# TODO has_entities({entitity_ids=[], entities=[]})
+
 ## encounters ######################################################33
 
 const IS_COOKING_ROOM = "is_cooking_room"

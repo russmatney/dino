@@ -1,0 +1,24 @@
+name Lights
+
+==============
+LEGEND
+==============
+
+- = OneWayPlatform
+h = HangingLight
+x = Tile
+
+==============
+ENTITIES
+==============
+
+name HangingLight
+
+.h.
+...
+...
+...
+...
+...
+...
+...

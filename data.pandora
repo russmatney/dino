@@ -1489,6 +1489,31 @@
 						"value": "res://src/dino/npcs/leaf_god/LeafGod.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "163",
+				"_index": 0,
+				"_name": "HangingLight",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Hanging Light"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/lights/lights.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "HangingLight"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/lights/HangingLight.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1769,7 +1794,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 162
+			"default": 163
 		}
 	}
 }

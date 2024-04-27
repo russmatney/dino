@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://u0bf34u8833v"]
 
 [ext_resource type="PackedScene" path="res://src/games/ghosts/world/Door.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/games/ghosts/world/lights/HangingLight.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/games/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/games/ghosts/world/platforms/IndoorTiles.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_ntm7a"]

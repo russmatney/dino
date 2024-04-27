@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cye1kopuq3gm7"]
+
+[ext_resource type="Texture2D" uid="uid://couria2tu4h2f" path="res://addons/core/assets/lights/downward_light_sheet.png" id="1"]
+
+[sub_resource type="CircleShape2D" id="1"]
+
+[node name="DownwardLight" type="RigidBody2D"]
+collision_layer = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("1")
