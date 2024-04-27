@@ -1147,7 +1147,7 @@
 					},
 					"grid_defs_path": {
 						"type": "string",
-						"value": "res://src/dino/entities/coins/coins.txt"
+						"value": "res://src/dino/pickups/coins/coins.txt"
 					},
 					"icon_texture": {
 						"type": "resource",
@@ -1176,7 +1176,7 @@
 					},
 					"grid_defs_path": {
 						"type": "string",
-						"value": "res://src/dino/entities/coins/coins.txt"
+						"value": "res://src/dino/pickups/coins/coins.txt"
 					},
 					"icon_texture": {
 						"type": "resource",
