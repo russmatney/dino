@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://qbxos7wimc52"
+path="res://.godot/imported/bush1.aseprite-84cbf10eaae03b5de46dc5952ecb5d99.res"
+
+[deps]
+
+source_file="res://src/dino/entities/bushes/bush1.aseprite"
+dest_files=["res://.godot/imported/bush1.aseprite-84cbf10eaae03b5de46dc5952ecb5d99.res"]
+
+[params]
+

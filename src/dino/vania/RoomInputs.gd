@@ -71,6 +71,7 @@ static var all_constraints = [
 
 	HAS_ENEMY,
 	HAS_ENTITY,
+	HAS_ENTITIES,
 	HAS_TILES,
 	HAS_ROOM,
 	HAS_EFFECTS,
@@ -257,6 +258,7 @@ static func get_constraint_data(cons_key, opts={}):
 		CUSTOM_ROOM: return custom_room_shape(opts)
 
 		# generic
+		HAS_ENTITIES: return has_entities(opts)
 		HAS_ENTITY: return has_entity(null, opts)
 		HAS_ENEMY: return has_enemy(null, opts)
 		HAS_TILES: return has_tiles(opts)
@@ -529,6 +531,7 @@ static func has_boss(opts={}):
 ## entities ######################################################33
 
 const HAS_ENTITY = "has_entity"
+const HAS_ENTITIES = "has_entities"
 
 const HAS_LEAF = "has_leaf"
 
@@ -563,7 +566,12 @@ static func has_entity(ent_id, opts={}):
 	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
-# TODO has_entities({entitity_ids=[], entities=[]})
+static func has_entities(opts={}):
+	var ents = []
+	for ent_id in opts.get("entity_ids"):
+		ents.append(Pandora.get_entity(ent_id))
+	ents.append_array(opts.get("entities", []))
+	return RoomInputs.new({entities=ents})
 
 ## encounters ######################################################33
 

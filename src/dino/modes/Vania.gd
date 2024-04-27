@@ -61,7 +61,11 @@ func initial_room_inputs():
 			RoomInputs.HAS_CANDLE: {},
 			RoomInputs.HAS_CHECKPOINT: {},
 			RoomInputs.IN_SMALL_ROOM: {},
-			RoomInputs.HAS_ENTITY: {entity_id=DinoEntityIds.HANGINGLIGHT},
+			RoomInputs.HAS_ENTITIES: {entity_ids=[
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH2,
+				]},
 			RoomInputs.HAS_EFFECTS: {effects=[
 				RoomEffect.snow_fall(),
 				RoomEffect.rain_fall(),
@@ -71,13 +75,21 @@ func initial_room_inputs():
 			RoomInputs.HAS_EFFECTS: {effects=[
 				RoomEffect.snow_fall(),
 				]},
-			RoomInputs.HAS_ENTITY: {entity_id=DinoEntityIds.HANGINGLIGHT},
+			RoomInputs.HAS_ENTITIES: {entity_ids=[
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH2,
+				]},
 			}),
 		RoomInputs.random_room().merge_constraint({
 			RoomInputs.HAS_EFFECTS: {effects=[
 				RoomEffect.rain_fall(),
 				]},
-			RoomInputs.HAS_ENTITY: {entity_id=DinoEntityIds.HANGINGLIGHT},
+			RoomInputs.HAS_ENTITIES: {entity_ids=[
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH2,
+				]},
 			})
 		]
 
