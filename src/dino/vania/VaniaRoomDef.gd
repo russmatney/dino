@@ -2,6 +2,30 @@
 extends Resource
 class_name VaniaRoomDef
 
+## static #####################################################3
+
+static var tile_defs_path = "res://src/dino/vania/tiles.txt"
+
+static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
+	var t_defs = GridParser.parse({defs_path=tile_defs_path})
+	var defs: Array[VaniaRoomDef] = []
+
+	var room_inputs = opts.get("room_inputs", [])
+	if room_inputs.is_empty():
+		Log.warn("No room inputs passed, no defs to generate")
+
+	for inputs in room_inputs:
+		var def = VaniaRoomDef.new({
+			tile_defs=t_defs,
+			tile_size=opts.get("tile_size"),
+			room_inputs=inputs,
+			})
+		defs.append(def)
+
+	return defs
+
+## vars #####################################################3
+
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
 
 var genre_type: DinoData.GenreType = DinoData.GenreType.SideScroller
@@ -16,7 +40,6 @@ var max_map_cell := Vector2i.MIN
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
-static var tile_defs_path = "res://src/dino/vania/tiles.txt"
 var tile_defs: GridDefs
 
 var entities: Array[DinoEntity] = []
@@ -196,65 +219,3 @@ func is_neighboring_cell(a: Vector3i, b: Vector3i) -> bool:
 
 func reapply_constraints():
 	RoomInputs.apply_constraints(constraints, self)
-
-## static #####################################################3
-
-static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
-	var t_defs = GridParser.parse({defs_path=tile_defs_path})
-
-	var defs: Array[VaniaRoomDef] = []
-
-	var room_inputs = opts.get("room_inputs", [])
-
-	if room_inputs.is_empty():
-		room_inputs = [
-			[
-				RoomInputs.HAS_PLAYER,
-				RoomInputs.HAS_CANDLE,
-				RoomInputs.IN_SPACESHIP,
-				RoomInputs.IN_SMALL_ROOM,
-			], [
-				{RoomInputs.HAS_LEAF: {count=2}},
-				RoomInputs.IN_GRASSY_CAVE,
-				RoomInputs.IN_WIDE_ROOM,
-			], {
-				RoomInputs.HAS_TARGET: {count=3},
-				RoomInputs.IN_VOLCANO: {}
-			},
-			# [
-			# 	{RoomInputs.HAS_ENEMY_ROBOT: {count=3}},
-			# 	RoomInputs.IN_LARGE_ROOM,
-			# ], [
-			# 	RoomInputs.HAS_TARGET,
-			# 	RoomInputs.HAS_LEAF,
-			# 	RoomInputs.IN_WOODEN_BOXES,
-			# ], [
-			# 	RoomInputs.HAS_BOSS,
-			# 	RoomInputs.IN_LARGE_ROOM,
-			# 	RoomInputs.IN_SPACESHIP,
-			# ],
-			# 	RoomInputs.random_room(),
-			# {
-			# 	RoomInputs.HAS_ENEMY_ROBOT: {count=3},
-			# }, [
-			# 	RoomInputs.IS_COOKING_ROOM,
-			# ], {
-			# 	RoomInputs.HAS_TARGET: {count=5},
-			# 	RoomInputs.HAS_ENEMY_ROBOT: {count=2},
-			# 	RoomInputs.IN_LARGE_ROOM: {},
-			# }, [
-			# 	{RoomInputs.HAS_BOSS: {count=2}},
-			# 	RoomInputs.IN_LARGE_ROOM,
-			# 	RoomInputs.IN_SPACESHIP,
-			# ]
-			]
-
-	for inputs in room_inputs:
-		var def = VaniaRoomDef.new({
-			tile_defs=t_defs,
-			tile_size=opts.get("tile_size"),
-			room_inputs=inputs,
-			})
-		defs.append(def)
-
-	return defs

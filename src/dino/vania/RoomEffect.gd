@@ -4,11 +4,21 @@ class_name RoomEffect
 
 ## static ##################################
 
+static func random_effect():
+	return U.rand_of([
+		RoomEffect.rain_fall(),
+		RoomEffect.snow_fall(),
+		RoomEffect.dust(),
+		])
+
 static func rain_fall():
 	return RoomEffect.new({scene=load("res://src/effects/particle_area/RainFallParticles.tscn")})
 
 static func snow_fall():
 	return RoomEffect.new({scene=load("res://src/effects/particle_area/SnowFallParticles.tscn")})
+
+static func dust():
+	return RoomEffect.new({scene=load("res://src/effects/particle_area/DustParticles.tscn")})
 
 ## vars ##################################
 

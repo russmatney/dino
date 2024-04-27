@@ -330,17 +330,32 @@ static func random_tilemaps(_opts={}):
 			load(all_tilemap_scenes.pick_random()),
 			]})
 
+static func random_effects(_opts={}):
+	return RoomInputs.new({
+		room_effects=U.rand_of([
+			RoomEffect.random_effect(),
+			RoomEffect.random_effect(),
+			RoomEffect.random_effect(),
+			], U.rand_of([1, 2]))})
+
 static func random_room(opts={}):
-	return merge_many([random_enemies(opts), random_entities(opts), random_room_shapes(opts), random_tilemaps(opts)])
+	return merge_many([
+		random_enemies(opts), random_entities(opts),
+		random_room_shapes(opts),
+		random_tilemaps(opts), random_effects(opts),
+		])
 
 ## room effects ######################################################33
 
 const HAS_EFFECTS = "has_effects"
 
 static func has_effects(opts):
-	return RoomInputs.new({
-		room_effects=opts.get("effects")
-		})
+	if opts.get("effects"):
+		return RoomInputs.new({
+			room_effects=opts.get("effects")
+			})
+	return RoomInputs.random_effects()
+
 
 static func has_rain_fall(_opts):
 	return RoomInputs.new({
@@ -350,6 +365,11 @@ static func has_rain_fall(_opts):
 static func has_snow_fall(_opts):
 	return RoomInputs.new({
 		room_effects=[RoomEffect.snow_fall()]
+		})
+
+static func has_dust(_opts):
+	return RoomInputs.new({
+		room_effects=[RoomEffect.dust()]
 		})
 
 ## room size ######################################################33
