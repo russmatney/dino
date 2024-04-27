@@ -354,10 +354,16 @@ func add_entity(ent):
 
 		# place entity at random start cord
 		var pos = tilemap.map_to_local(e_coord + start_coord)
-		var enemy_node = ent.get_scene().instantiate()
-		enemy_node.position = pos
-		add_child(enemy_node)
-		enemy_node.set_owner(self)
+		var node = ent.get_scene().instantiate()
+
+		# ensure a drop
+		if "drops" in node.get_property_list().map(func(p): return p.name):
+			if node.drops.is_empty():
+				node.drops.assign([DropData.new()])
+
+		node.position = pos
+		add_child(node)
+		node.set_owner(self)
 
 func add_enemies():
 	for enemy in room_def.enemies:

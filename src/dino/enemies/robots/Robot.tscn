@@ -1,19 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b462pe2po5a1c"]
+[gd_scene load_steps=8 format=3 uid="uid://b462pe2po5a1c"]
 
 [ext_resource type="Script" path="res://src/dino/enemies/SSEnemy.gd" id="1_4rapa"]
-[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_gx730"]
 [ext_resource type="PackedScene" uid="uid://43qn8g87wt2p" path="res://src/dino/enemies/SSEnemyMachine.tscn" id="2_wws8b"]
 [ext_resource type="SpriteFrames" uid="uid://def3o3xnbpwg4" path="res://src/games/tower/assets/greyhat_frames.tres" id="3_03knw"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_lr35c"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_g14kl"]
-
-[sub_resource type="Resource" id="Resource_1j1va"]
-script = ExtResource("2_gx730")
-type = 0
-
-[sub_resource type="Resource" id="Resource_euj2p"]
-script = ExtResource("2_gx730")
-type = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2y1f"]
 size = Vector2(16, 30)
@@ -27,7 +18,6 @@ script = ExtResource("1_4rapa")
 initial_health = 3
 should_see_player = true
 should_hop = null
-drops = Array[ExtResource("2_gx730")]([SubResource("Resource_1j1va"), SubResource("Resource_euj2p")])
 
 [node name="SSEnemyMachine" parent="." instance=ExtResource("2_wws8b")]
 

@@ -332,6 +332,7 @@ position = Vector2(406, 119)
 
 [node name="EnemyRobot" parent="LoadPlayground" instance=ExtResource("15_7bsuh")]
 position = Vector2(345, 252)
+should_hop = false
 
 [node name="CanvasModulate" type="CanvasModulate" parent="LoadPlayground"]
 color = Color(0.356064, 0.356064, 0.356064, 1)
