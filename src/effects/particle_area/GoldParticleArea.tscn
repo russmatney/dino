@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdd1i4ajemyn0"]
+[gd_scene load_steps=5 format=3 uid="uid://i2y038vii5jb"]
 
-[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_6535r"]
+[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_pxkuc"]
 
 [sub_resource type="Gradient" id="Gradient_rn5sk"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.12691, 0.561692, 0.848414)
-colors = PackedColorArray(0.137551, 0.137551, 0.137551, 1, 1, 1, 1, 1, 0.632123, 0.632123, 0.632123, 1, 0.380189, 0.380189, 0.380189, 1)
+offsets = PackedFloat32Array(0, 0.092832, 0.643948, 0.800235)
+colors = PackedColorArray(0.425956, 0.425956, 0.425955, 1, 1, 1, 1, 1, 0.632123, 0.632123, 0.632123, 1, 0.985869, 0.985869, 0.985869, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dcdih"]
 gradient = SubResource("Gradient_rn5sk")
@@ -18,11 +18,10 @@ emission_box_extents = Vector3(100, 100, 1)
 gravity = Vector3(0, -3, 0)
 linear_accel_min = -1.0
 linear_accel_max = 1.0
-radial_accel_min = -10.0
-radial_accel_max = 10.0
+radial_accel_max = 51.3
 damping_max = 5.0
 scale_max = 5.0
-color = Color(0.756863, 0.721569, 0.694118, 1)
+color = Color(0.862745, 0.819608, 0.211765, 1)
 color_ramp = SubResource("GradientTexture1D_dcdih")
 hue_variation_min = -0.05
 hue_variation_max = 0.05
@@ -32,11 +31,11 @@ turbulence_noise_scale = 1.93
 turbulence_influence_min = 0.03
 collision_mode = 2
 
-[node name="DustParticles" type="GPUParticles2D"]
-amount = 64
+[node name="GoldParticleArea" type="GPUParticles2D"]
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_1vqvx")
-lifetime = 20.0
+lifetime = 10.0
 preprocess = 0.13
 visibility_rect = Rect2(-250, 0, 500, 300)
 draw_order = 2
-script = ExtResource("1_6535r")
+script = ExtResource("1_pxkuc")

@@ -293,13 +293,16 @@ static func repeat(s, n):
 static func repeat_fn(callable, n):
 	return range(n).map(func(_x): return callable.call())
 
-static func rand_of(arr, n=1, force_list=false):
+static func rand_of(arr, n=null, force_list=false):
 	if len(arr) == 0:
 	# 	push_warning("U.rand_of passed empty array")
 		return
 	arr.shuffle()
-	if n == 1 and not force_list:
+	if n == null and not force_list:
 		return arr[0]
+	if n == null:
+		# forcing a list and no n specified?
+		n = 1
 	return arr.slice(0, n)
 
 static func set_random_frame(anim):

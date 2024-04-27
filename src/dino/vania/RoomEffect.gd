@@ -8,7 +8,10 @@ static func random_effect():
 	return U.rand_of([
 		RoomEffect.rain_fall(),
 		RoomEffect.snow_fall(),
+		RoomEffect.leaf_fall(),
 		RoomEffect.dust(),
+		RoomEffect.fire_particles(),
+		RoomEffect.gold_particles(),
 		])
 
 static func rain_fall():
@@ -17,8 +20,17 @@ static func rain_fall():
 static func snow_fall():
 	return RoomEffect.new({scene=load("res://src/effects/particle_area/SnowFallParticles.tscn")})
 
+static func leaf_fall():
+	return RoomEffect.new({scene=load("res://src/effects/particle_area/LeafFallParticleArea.tscn")})
+
 static func dust():
 	return RoomEffect.new({scene=load("res://src/effects/particle_area/DustParticles.tscn")})
+
+static func fire_particles():
+	return RoomEffect.new({scene=load("res://src/effects/particle_area/FireParticleArea.tscn")})
+
+static func gold_particles():
+	return RoomEffect.new({scene=load("res://src/effects/particle_area/GoldParticleArea.tscn")})
 
 ## vars ##################################
 

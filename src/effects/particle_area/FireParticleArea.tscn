@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsfyl0exk4ggv"]
+
+[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_wk4hf"]
+
+[sub_resource type="Gradient" id="Gradient_rn5sk"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.092832, 0.643948, 0.800235)
+colors = PackedColorArray(0.425956, 0.425956, 0.425955, 1, 1, 1, 1, 1, 0.632123, 0.632123, 0.632123, 1, 0.985869, 0.985869, 0.985869, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dcdih"]
+gradient = SubResource("Gradient_rn5sk")
+
+[sub_resource type="Curve" id="Curve_8sp31"]
+max_value = 3.0
+_data = [Vector2(0.642776, 0.963904), 0.0, 0.0, 0, 0, Vector2(1, 0.359721), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mcyqy"]
+curve = SubResource("Curve_8sp31")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1vqvx"]
+lifetime_randomness = 0.6
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+linear_accel_min = -1.0
+linear_accel_max = 1.0
+radial_accel_min = -14.1
+radial_accel_max = 12.41
+damping_max = 5.0
+scale_max = 5.0
+scale_over_velocity_curve = SubResource("CurveTexture_mcyqy")
+color = Color(0.862745, 0.45098, 0.211765, 1)
+color_ramp = SubResource("GradientTexture1D_dcdih")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+turbulence_enabled = true
+turbulence_noise_strength = 0.66
+turbulence_noise_scale = 1.93
+turbulence_influence_min = 0.03
+collision_mode = 2
+
+[node name="FireParticleArea" type="GPUParticles2D"]
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_1vqvx")
+lifetime = 8.0
+preprocess = 0.13
+visibility_rect = Rect2(-250, 0, 500, 300)
+draw_order = 2
+script = ExtResource("1_wk4hf")

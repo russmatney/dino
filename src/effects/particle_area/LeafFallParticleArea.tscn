@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdboo1fafktp7"]
+
+[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_mn5d4"]
+[ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/dino/entities/leaves/leaf_greenred.png" id="1_opnc7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1vqvx"]
+lifetime_randomness = 0.6
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 100, 1)
+angle_min = 140.1
+angle_max = 208.5
+gravity = Vector3(0, 98, 0)
+damping_max = 4.299
+attractor_interaction_enabled = false
+scale_min = 0.1
+color = Color(0.984314, 0.968627, 0.952941, 1)
+hue_variation_min = -0.02
+hue_variation_max = 0.03
+turbulence_enabled = true
+turbulence_noise_strength = 0.66
+turbulence_noise_scale = 1.93
+turbulence_influence_min = 0.03
+turbulence_initial_displacement_min = -14.7
+turbulence_initial_displacement_max = 16.9
+collision_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r3sp"]
+atlas = ExtResource("1_opnc7")
+region = Rect2(0, 0, 32, 32)
+
+[node name="LeafFallParticleArea" type="GPUParticles2D"]
+process_material = SubResource("ParticleProcessMaterial_1vqvx")
+texture = SubResource("AtlasTexture_1r3sp")
+lifetime = 10.0
+preprocess = 0.13
+visibility_rect = Rect2(-250, 0, 500, 300)
+draw_order = 2
+script = ExtResource("1_mn5d4")
