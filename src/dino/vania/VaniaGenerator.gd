@@ -146,6 +146,7 @@ func get_neighbor_defs(room_def: VaniaRoomDef):
 func set_room_scene_path(room_def):
 	var basename = room_def.base_scene_path.get_file().get_basename()
 	var new_map = "%s%d.tscn" % [basename, global_room_num]
+	room_def.index = global_room_num
 	global_room_num += 1
 	room_def.room_path = GEN_MAP_DIR.path_join(new_map)
 
@@ -156,6 +157,8 @@ func build_and_prep_scene(room_def, _opts={}):
 	Log.info("generating and packing room", room_def.room_path.get_file())
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
+	# unique name for unique hotel entries?
+	room.name = "%s%s" % [room.name, room_def.index]
 	room.build_room(room_def, {neighbor_data=neighbor_data.get(room_def.room_path)})
 	room.is_debug = false
 

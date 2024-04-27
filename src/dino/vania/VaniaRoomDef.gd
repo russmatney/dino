@@ -26,6 +26,8 @@ var effects: Array[RoomEffect] = []
 var tilemap_scenes: Array[PackedScene]
 var tile_size = 16
 
+var index: int = 0
+
 @export var constraints: Array[RoomInputs] = []
 
 func to_printable():
