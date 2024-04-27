@@ -96,6 +96,7 @@ func setup_tileset():
 		var secondary = secondary_tilemap.instantiate()
 		bg_tilemap.set_tileset(secondary.get_tileset().duplicate(true))
 		Reptile.disable_collisions(bg_tilemap)
+		Reptile.disable_occlusion(bg_tilemap)
 
 		# TODO support multiple bg_tilemap layers
 		# TODO darken instead of alpha

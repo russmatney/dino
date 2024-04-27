@@ -291,3 +291,8 @@ static func disable_collisions(tilemap):
 	for i in range(tileset.get_physics_layers_count()):
 		tileset.set_physics_layer_collision_layer(i, 0)
 		tileset.set_physics_layer_collision_mask(i, 0)
+
+static func disable_occlusion(tilemap):
+	var tileset = tilemap.get_tileset()
+	for i in range(tileset.get_occlusion_layers_count()):
+		tileset.set_occlusion_layer_light_mask(i, 0)
