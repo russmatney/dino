@@ -1,17 +1,12 @@
 extends Node2D
 
-var ingredient_type
-var ingredient_data
-
-@onready var anim = $AnimatedSprite2D
+var drop_data
 
 func _ready():
-	ingredient_data = SpikeData.all_ingredients.get(ingredient_type)
-	if ingredient_data.anim_scene:
-		remove_child(anim)
-		anim.queue_free()
-		anim = ingredient_data.anim_scene.instantiate()
-		add_child(anim)
+	if drop_data:
+		drop_data.add_anim_scene(self)
+	else:
+		Log.warn("loading orbit item without drop data!", self)
 
 	floaty_tween()
 

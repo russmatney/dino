@@ -22,13 +22,13 @@ func _ready():
 	set_label("ready to cook")
 
 func _on_body_entered(body: Node):
-	if body.has_method("can_be_cooked") and body.has_method("get_ingredient_data"):
+	if body.has_method("can_be_cooked"):
 		if missing_ingredient_count() == 0:
 			# ignore new ingredients if we're full
 			return
 		if body.can_be_cooked():
-			var ingredient_data = body.get_ingredient_data()
-			start_cooking(ingredient_data)
+			var data = body.get_data()
+			start_cooking(data)
 			body.queue_free()
 
 func missing_ingredient_count():
@@ -48,8 +48,8 @@ func _process(delta):
 			else:
 				set_label("%s more" % rem_ing_count)
 
-func start_cooking(ingredient_data):
-	ingredients.append(ingredient_data)
+func start_cooking(data):
+	ingredients.append(data)
 
 	anim.play("cooking")
 
@@ -62,18 +62,12 @@ func start_cooking(ingredient_data):
 	cooking_time -= 1
 	cooking_time = clamp(cooking_time, min_cooking_time, cook_duration)
 
-var drop_pickup_scene = preload("res://src/dino/pickups/Pickup.tscn")
-var drop_ingredient_type = SpikeData.Ingredient.RedBlob
-
-# TODO update!
 func finish_cooking():
 	anim.play("empty")
 
-	var drop = drop_pickup_scene.instantiate()
-	drop.ingredient_type = drop_ingredient_type
-
-	drop.global_position = global_position
-	U.add_child_to_level(self, drop)
+	# TODO crafting result?!?
+	var result = DropData.new(DropData.T.POWERUP)
+	DropData.add_drop(self, result)
 
 	cooking = false
 	cooking_time = 0

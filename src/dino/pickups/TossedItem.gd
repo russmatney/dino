@@ -1,25 +1,19 @@
 extends RigidBody2D
 
-@onready var anim = $AnimatedSprite2D
-
-var ingredient_type
-var ingredient_data
+var drop_data: DropData
 
 func _ready():
 	body_entered.connect(_on_body_entered)
 
-	ingredient_data = SpikeData.all_ingredients.get(ingredient_type)
-	if ingredient_data.anim_scene:
-		remove_child(anim)
-		anim.queue_free()
-		anim = ingredient_data.anim_scene.instantiate()
-		add_child(anim)
+	if drop_data:
+		drop_data.add_anim_scene(self)
+	else:
+		Log.warn("tossed item has no drop data!")
 
 func _on_body_entered(body: Node):
-	# TODO fix orb toss behavior
 	if body.is_in_group("player"):
-		if body.has_method("collect_orb"):
-			body.collect_orb(ingredient_type)
+		if body.has_method("collect"):
+			body.collect({body=self, data=drop_data})
 			kill()
 	elif body.has_method("take_hit") and not body.is_dead:
 		body.take_hit({body=self, damage=1})
@@ -49,17 +43,14 @@ func _physics_process(delta):
 			global_position = global_position.lerp(following.global_position, 0.5)
 
 #############################################################
-# cooking pot integration
+# crafting/data integration
+# TODO express via drop/crafting/item data?
 
 func can_be_cooked():
-	return ingredient_data.can_cook()
+	return true
 
-func get_ingredient_data():
-	return ingredient_data
-
-
-#############################################################
-# delivery integration
+func get_data():
+	return drop_data
 
 func is_delivery():
-	return ingredient_data.can_be_delivered()
+	return true

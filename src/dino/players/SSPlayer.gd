@@ -80,7 +80,6 @@ var leaves = 0
 var move_vector: Vector2
 var facing_vector: Vector2
 
-var is_spiking: bool = false
 var block_controls = false
 var forced_movement_target
 var forced_movement_target_threshold = 10
@@ -607,7 +606,7 @@ func collect(opts={}):
 		DropData.T.RANDOM:
 			Log.warn("Unhandled pickup", opts)
 		DropData.T.ORB:
-			add_orb(SpikeData.Ingredient.RedBlob)
+			add_orb(data)
 			Dino.notif({
 				type="popup",
 				header_text="Orb Acquired",
@@ -679,8 +678,8 @@ func spend_leaves(n: int):
 	leaves -= n
 	Hotel.check_in(self)
 
-func add_orb(ingredient_type):
-	add_orbit_item(ingredient_type)
+func add_orb(data):
+	add_orbit_item(data)
 
 ## items
 
@@ -806,16 +805,17 @@ func use_weapon(weapon=null):
 func stop_using_weapon(weapon=null):
 	return weapon_set.stop_using_weapon(weapon)
 
-func add_orbit_item(ingredient_type):
+func add_orbit_item(data):
 	var item = orbit_item_scene.instantiate()
 	item.show_behind_parent = true
 
-	# TODO pass item data along (drop/pickup/crafting data)
-	item.ingredient_type = ingredient_type
+	# pass item data along
+	item.drop_data = data
 
 	add_child.call_deferred(item)
 	orbit_items.append(item)
 
+	# untangle orbit-items from orbs
 	if not has_weapon_id(DinoWeaponEntityIds.ORBS):
 		add_weapon(DinoWeaponEntityIds.ORBS)
 
@@ -828,8 +828,3 @@ func remove_tossed_orbit_item(item):
 			# do we care if spiking?
 			if orbit_items.size() == 0:
 				remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
-
-## spiking ##################################################################
-
-func in_spike_zone():
-	return true

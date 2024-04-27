@@ -4,6 +4,8 @@ var aim_vector
 # TODO look for aim-point on actor
 var toss_offset = Vector2.ONE * -12
 
+var spiked_item
+
 func aim(aim_v: Vector2):
 	aim_vector = aim_v
 	if actor.facing_vector.x < 0:
@@ -21,20 +23,19 @@ func deactivate():
 	pass
 
 func use():
-	if not spiking:
+	Log.pr("orbit item use")
+	if spiked_item == null:
 		if actor.orbit_items.size() > 0:
-			var item = actor.orbit_items[0]
-			actor.is_spiking = true
-			Log.pr("spiking", item)
-			start_spike()
-			actor.remove_tossed_orbit_item(item)
-	elif spiking:
+			Log.pr("spiking", spiked_item)
+			start_spike_slowmo(actor.orbit_items[0])
+	else:
 		toss_item()
 
 func stop_using():
-	if spiking:
+	Log.pr("orbit item stop using")
+	if spiked_item:
+		actor.remove_tossed_orbit_item(spiked_item)
 		toss_item()
-		actor.is_spiking = false
 
 ######################################################
 # ready
@@ -52,17 +53,15 @@ func _on_frame_changed():
 ######################################################
 # actions
 
-var spiking = false
 var cooldown = 0.2
 
 @onready var tossed_item_scene = preload("res://src/dino/pickups/TossedItem.tscn")
 
-var spiking_ingredient_type
 var spike_impulse = 1000
 
-func start_spike():
+func start_spike_slowmo(item):
 	Juice.start_slowmo("spike_slowmo", 0.1)
-	spiking = true
+	spiked_item = item
 
 func toss_item():
 	if aim_vector == null:
@@ -70,13 +69,13 @@ func toss_item():
 
 	var item = tossed_item_scene.instantiate()
 
-	# TODO attach crafting data to tossed item
-	# item.ingredient_type = ingredient_type
+	# attach data to tossed item
+	item.drop_data = spiked_item.drop_data
 
 	item.position = global_position + toss_offset
 	item.add_collision_exception_with(actor)
 
-	# TODO emit child for parent/level to add
+	# TODO emit for parent/level to add?
 	U.add_child_to_level(self, item)
 
 	# item.rotation = aim_vector.angle()
@@ -86,9 +85,10 @@ func toss_item():
 	Juice.stop_slowmo("spike_slowmo")
 
 	await get_tree().create_timer(cooldown).timeout
+
 	# be sure to remove the collision exception (if it exists), or we can't pick it up again
 	if item != null:
 		if is_instance_valid(item):
 			item.remove_collision_exception_with(actor)
 
-	spiking = false
+	spiked_item = null

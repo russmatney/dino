@@ -3,7 +3,6 @@ extends Node2D
 @onready var area = $Area2D
 @onready var label = $Label
 
-@export var expected_delivery_type: SpikeData.Ingredient = SpikeData.Ingredient.RedBlob
 @export var expected_delivery_count = 1
 var delivery_count = 0
 
@@ -13,14 +12,13 @@ signal void_satisfied
 
 func _ready():
 	area.body_entered.connect(_on_body_entered)
-	var ing_data = SpikeData.all_ingredients[expected_delivery_type]
-	label.text = "[center]VOID WANT %s ORB[/center]" % ing_data.display_type
+	label.text = "[center]VOID WANT ORB[/center]"
 
 var spike_impulse = 1000
 
 func _on_body_entered(body: Node):
 	if body.has_method("is_delivery") and body.is_delivery():
-		if not complete and body.ingredient_type == expected_delivery_type:
+		if not complete:
 			delivery_count += 1
 
 			if delivery_count >= expected_delivery_count:
