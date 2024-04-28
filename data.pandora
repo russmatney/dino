@@ -1564,6 +1564,23 @@
 						"value": "res://src/dino/entities/bushes/Bush2.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "69",
+				"_icon_color": "ffffff00",
+				"_id": "166",
+				"_index": 0,
+				"_name": "LilBigHat",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Lil Big Hat"
+					},
+					"sidescroller_scene": {
+						"type": "resource",
+						"value": "res://src/dino/players/lilbighat/Player.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1844,7 +1861,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 165
+			"default": 166
 		}
 	}
 }

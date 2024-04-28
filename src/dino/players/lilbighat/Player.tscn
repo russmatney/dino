@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cdtqoa3gaqsdh"]
+[gd_scene load_steps=44 format=3 uid="uid://cdtqoa3gaqsdh"]
 
 [ext_resource type="Script" path="res://src/dino/players/lilbighat/Player.gd" id="1_20cuc"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="2_ba86m"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_u5coh"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="10_egux8"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/SSMachine.tscn" id="11_oh4d4"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_q24qw"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fow7p"]
 cull_mode = 2
@@ -300,7 +301,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3p131"]
 size = Vector2(96, 96)
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["actors", "player"]]
 collision_layer = 2
 collision_mask = 3129
 script = ExtResource("1_20cuc")
@@ -308,6 +309,8 @@ display_name = "HatBot"
 jump_max_height = 50.0
 jump_min_height = 30.0
 fall_time = 0.2
+
+[node name="SSMachine" parent="." instance=ExtResource("11_oh4d4")]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_fow7p")
@@ -341,6 +344,7 @@ position = Vector2(0, -15)
 scale = Vector2(0.4, 0.4)
 
 [node name="ActionDetector" parent="." instance=ExtResource("6_2ghil")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 shape = SubResource("RectangleShape2D_3p131")
@@ -388,4 +392,4 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="SSMachine" parent="." instance=ExtResource("11_oh4d4")]
+[node name="PlayerCamera" parent="." instance=ExtResource("11_q24qw")]

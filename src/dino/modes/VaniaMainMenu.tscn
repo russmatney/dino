@@ -52,7 +52,7 @@ vertical_scroll_mode = 3
 [node name="PlayersGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 4
+columns = 5
 
 [node name="ScrollContainer3" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 400)
@@ -84,7 +84,7 @@ clip_contents = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 bbcode_enabled = true
-text = "[center]rooms: 4[/center]"
+text = "[center]rooms: 4"
 fit_content = true
 scroll_active = false
 
