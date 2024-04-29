@@ -1,9 +1,9 @@
 [gd_scene load_steps=31 format=3 uid="uid://b0iynefs467at"]
 
-[ext_resource type="Script" path="res://src/dino/players/DinoTDPlayer.gd" id="1_6ohrc"]
+[ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_afubb"]
 [ext_resource type="Texture2D" uid="uid://cejwgbx007lhb" path="res://src/dino/players/hatbot/greyhat.png" id="2_oakt2"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_biea4"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_maiir"]
+[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_o7bf1"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_6sutv"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_pseo0"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_inorp"]
@@ -371,7 +371,7 @@ radius = 80.399
 [node name="TDHatBot" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3129
-script = ExtResource("1_6ohrc")
+script = ExtResource("1_afubb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -405,7 +405,7 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="TDMachine" parent="." instance=ExtResource("4_maiir")]
+[node name="TDMachine" parent="." instance=ExtResource("4_o7bf1")]
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0

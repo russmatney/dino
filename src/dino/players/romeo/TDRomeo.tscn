@@ -1,6 +1,6 @@
 [gd_scene load_steps=53 format=3 uid="uid://tu7efl6xp1d2"]
 
-[ext_resource type="Script" path="res://src/dino/players/DinoTDPlayer.gd" id="1_2sx3t"]
+[ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_ite5n"]
 [ext_resource type="Texture2D" uid="uid://cc2a6508uv48d" path="res://src/dino/players/romeo/assets/romeo.png" id="2_5ymh8"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_ucswh"]
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_82nku"]
@@ -488,8 +488,7 @@ radius = 80.399
 [node name="TDRomeo" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3129
-script = ExtResource("1_2sx3t")
-has_boomerang = true
+script = ExtResource("1_ite5n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

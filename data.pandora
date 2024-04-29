@@ -695,7 +695,7 @@
 					},
 					"topdown_scene": {
 						"type": "resource",
-						"value": "res://addons/core/beehive/topdown/weapons/Boomerang.tscn"
+						"value": "res://src/dino/weapons/boomerang/TDBoomerang.tscn"
 					}
 				}
 			},

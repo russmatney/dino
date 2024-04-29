@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://bnt8u6y3jqv02"]
 
-[ext_resource type="Script" path="res://src/dino/players/DinoTDPlayer.gd" id="1_agew2"]
+[ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_rtnq5"]
 [ext_resource type="Texture2D" uid="uid://dp75inigix2ir" path="res://src/dino/players/hoodie/assets/soft-soft-hoodie.png" id="2_lk0m8"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_kyfqk"]
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_w1btx"]
@@ -386,7 +386,7 @@ radius = 80.399
 [node name="TDHoodie" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 57
-script = ExtResource("1_agew2")
+script = ExtResource("1_rtnq5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)

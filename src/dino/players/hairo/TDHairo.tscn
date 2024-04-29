@@ -1,9 +1,9 @@
 [gd_scene load_steps=43 format=3 uid="uid://hcgi0vnjas58"]
 
-[ext_resource type="Script" path="res://src/dino/players/DinoTDPlayer.gd" id="1_uvkii"]
+[ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_2l0ji"]
 [ext_resource type="Texture2D" uid="uid://dcng2g4a1g4wn" path="res://src/dino/players/hairo/assets/topdown_player_64.png" id="2_0x6m6"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_sbhyh"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_g1vt3"]
+[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_6b4lb"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_nbfup"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_hx7xl"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_a60dj"]
@@ -290,7 +290,9 @@ height = 20.0
 radius = 80.399
 
 [node name="TDHairo" type="CharacterBody2D" groups=["player"]]
-script = ExtResource("1_uvkii")
+collision_layer = 2
+collision_mask = 3129
+script = ExtResource("1_2l0ji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -325,7 +327,7 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="TDMachine" parent="." instance=ExtResource("4_g1vt3")]
+[node name="TDMachine" parent="." instance=ExtResource("4_6b4lb")]
 
 [node name="HurtBox" type="Area2D" parent="."]
 visible = false

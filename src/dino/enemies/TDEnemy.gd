@@ -1,7 +1,5 @@
 extends CharacterBody2D
-class_name TDBody
-
-var is_td_body = true
+class_name TDEnemy
 
 ## config warnings ###########################################################
 
@@ -32,10 +30,6 @@ var move_vector: Vector2
 var facing_vector: Vector2
 var health
 var is_dead
-var is_player
-
-signal changed_weapon(weapon)
-var weapon_set: WeaponSet = WeaponSet.new("td")
 
 # nodes
 
@@ -44,7 +38,6 @@ var weapon_set: WeaponSet = WeaponSet.new("td")
 @onready var machine = $TDMachine
 @onready var state_label = $StateLabel
 
-var notif_label
 var hurt_box
 var notice_box
 var pit_detector
@@ -57,12 +50,8 @@ var skull_particles
 func _ready():
 	Hotel.register(self)
 
-	if is_in_group("player"):
-		is_player = true
-
 	if not Engine.is_editor_hint():
 		U.set_optional_nodes(self, {
-			notif_label="NotifLabel",
 			hurt_box="HurtBox",
 			notice_box="NoticeBox",
 			heart_particles="HeartParticles",
@@ -84,9 +73,6 @@ func _ready():
 			skull_particles.set_emitting(false)
 
 		machine.transitioned.connect(_on_transit)
-
-		weapon_set.changed_weapon.connect(func(w):
-			changed_weapon.emit(w))
 
 
 ## physics_process ###########################################################
@@ -167,7 +153,7 @@ func update_jump_anim():
 
 signal died()
 
-func die(opts={}):
+func die(_opts={}):
 	is_dead = true
 	Hotel.check_in(self)
 
@@ -190,11 +176,9 @@ func take_hit(opts):
 
 func take_damage(opts):
 	var hit_type = opts.get("type")
-	var body = opts.get("body")
 	var damage = opts.get("damage")
 
 	if damage == null:
-		var attack_damage
 		match hit_type:
 			_:
 				damage = 1
@@ -218,22 +202,14 @@ func recover_health(h=null):
 ## hurt_box ###########################################################
 
 var hurt_box_bodies = []
-# var is_invincible = false
 
 func on_hurt_box_entered(body):
-	# if is_invincible:
-	# 	return
-	if not "is_td_body" in body:
+	if not body is TDPlayer:
 		return
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in hurt_box_bodies:
 			hurt_box_bodies.append(body)
 			self.take_hit({type="bump", body=body})
-
-			# is_invincible = true
-			# await get_tree().create_timer(1.0).timeout
-			# is_invincible = false
-			# hurt_box_bodies = []
 
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
@@ -243,7 +219,7 @@ func on_hurt_box_exited(body):
 var notice_box_bodies = []
 
 func on_notice_box_entered(body):
-	if not "is_td_body" in body:
+	if not body is TDPlayer:
 		return
 	if not body.is_dead and not body.machine.state.name in ["KnockedBack", "Dying", "Dead"]:
 		if not body in notice_box_bodies:
@@ -252,54 +228,10 @@ func on_notice_box_entered(body):
 func on_notice_box_exited(body):
 	notice_box_bodies.erase(body)
 
-#################################################################################
-## Effects #####################################################################
-
-## notif #####################################################################
-
-var notif_tween
-
-func notif(text, opts = {}):
-	if not notif_label:
-		return
-	var ttl = opts.get("ttl", 1.5)
-	var dupe = opts.get("dupe", false)
-	var label
-	if dupe:
-		label = notif_label.duplicate()
-	else:
-		label = notif_label
-
-	label.text = "[center]" + text
-	label.set_visible(true)
-	if notif_tween:
-		notif_tween.kill()
-	notif_tween = create_tween()
-	if dupe:
-		label.set_global_position(notif_label.get_global_position())
-		U.add_child_to_level(self, label)
-		notif_tween.tween_callback(label.queue_free).set_delay(ttl)
-	else:
-		notif_tween.tween_callback(label.set_visible.bind(false)).set_delay(ttl)
-
-## level up #####################################################################
-
-func level_up():
-	shine(2.0)
-	notif("LEVEL UP", {"dupe": true})
-	Debug.notif("Level Up")
-
-## shine #####################################################################
-
-func shine(_time = 1.0):
-	pass
-	# var tween = create_tween()
-	# anim.material.set("shader_parameter/speed", 1.0)
-	# tween.tween_callback(anim.material.set.bind("shader_parameter/speed", 0.0)).set_delay(time)
-
 ## stamp ##########################################################################
 
 # Supports 'perma-stamp' with ttl=0
+# TODO refactor into shared anim/util lib (juice?)
 func stamp(opts={}):
 	if not Engine.is_editor_hint():
 		var new_scale = opts.get("scale", 0.3)
@@ -323,43 +255,3 @@ func stamp(opts={}):
 			t.tween_callback(new_anim.queue_free)
 
 
-#################################################################################
-## weapons #######################################################
-
-func add_weapon(ent_id):
-	var w = weapon_set.add_weapon(ent_id)
-	if w:
-		# no new child returned if weapon_ent already exists on a weapon
-		add_child(w)
-
-func remove_weapon_by_id(ent_id):
-	var w = weapon_set.remove_weapon_by_id(ent_id)
-	if w:
-		remove_child(w)
-		w.queue_free()
-
-func has_weapon():
-	return weapon_set.has_weapon()
-
-func has_weapon_id(ent_id):
-	return weapon_set.has_weapon_id(ent_id)
-
-func active_weapon():
-	return weapon_set.active_weapon()
-
-func aim_weapon(aim_vector):
-	return weapon_set.aim_weapon(aim_vector)
-
-func cycle_weapon():
-	return weapon_set.cycle_weapon()
-
-func activate_weapon(entity):
-	return weapon_set.activate_weapon_with_entity(entity)
-
-# Uses the first weapon if none is passed
-func use_weapon(weapon=null):
-	return weapon_set.use_weapon(weapon)
-
-# i.e. button released, stop firing or whatever continuous action
-func stop_using_weapon(weapon=null):
-	return weapon_set.stop_using_weapon(weapon)
