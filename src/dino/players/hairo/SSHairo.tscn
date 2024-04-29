@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_gdioc"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/games/tower/assets/greyhat_jetflame_sheet.png" id="5_cfy4m"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="6_6resu"]
-[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/SSMachine.tscn" id="7_levtf"]
+[ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/sidescroller_machine/SSMachine.tscn" id="7_levtf"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_k6joc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="9_qybgy"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="10_erdnb"]

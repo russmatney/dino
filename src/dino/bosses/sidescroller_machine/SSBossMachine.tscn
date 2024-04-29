@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://pot2dpd6w67m"]
 
 [ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_0q0ok"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Idle.gd" id="2_fjqr0"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Firing.gd" id="3_i30ht"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/KnockedBack.gd" id="4_myrkt"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Dead.gd" id="5_kc6bl"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Stunned.gd" id="6_s8n51"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Warping.gd" id="7_wdwpn"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Laughing.gd" id="8_ddh5a"]
-[ext_resource type="Script" path="res://src/dino/bosses/states/Swoop.gd" id="9_8mqxy"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Idle.gd" id="2_fjqr0"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Firing.gd" id="3_i30ht"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/KnockedBack.gd" id="4_myrkt"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Dead.gd" id="5_kc6bl"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Stunned.gd" id="6_s8n51"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Warping.gd" id="7_wdwpn"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Laughing.gd" id="8_ddh5a"]
+[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Swoop.gd" id="9_8mqxy"]
 
 [node name="SSBossMachine" type="Node"]
 script = ExtResource("1_0q0ok")

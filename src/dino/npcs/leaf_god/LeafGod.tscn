@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/npcs/leaf_god/LeafGod.gd" id="1_7hv1x"]
 [ext_resource type="Texture2D" uid="uid://cpbqogu2llb23" path="res://src/dino/npcs/leaf_god/runner_leaf_friend.png" id="2_gitl0"]
-[ext_resource type="PackedScene" uid="uid://fdvu7a71attn" path="res://src/dino/npcs/SSNPCMachine.tscn" id="3_eggvl"]
+[ext_resource type="PackedScene" uid="uid://fdvu7a71attn" path="res://src/dino/npcs/sidescroller_machine/SSNPCMachine.tscn" id="3_fhdj4"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_ovlwu"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_12qb4"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_ag2du"]
@@ -53,7 +53,7 @@ metadata/_aseprite_wizard_config_ = {
 }
 metadata/_aseprite_wizard_source_file_hash_ = "18dfafe3fb51c502b6a4f0f7e6d2356e"
 
-[node name="SSNPCMachine" parent="." instance=ExtResource("3_eggvl")]
+[node name="SSNPCMachine" parent="." instance=ExtResource("3_fhdj4")]
 
 [node name="StateLabel" type="RichTextLabel" parent="."]
 visible = false
