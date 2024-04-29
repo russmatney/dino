@@ -21,6 +21,27 @@ func get_global_mouse_position() -> Vector2:
 	return Vector2.ZERO
 
 
+## Simulates that an action has been pressed.[br]
+## [member action] : the action e.g. [code]"ui_up"[/code][br]
+@warning_ignore("unused_parameter")
+func simulate_action_pressed(action :String) -> GdUnitSceneRunner:
+	return self
+
+
+## Simulates that an action is pressed.[br]
+## [member action] : the action e.g. [code]"ui_up"[/code][br]
+@warning_ignore("unused_parameter")
+func simulate_action_press(action :String) -> GdUnitSceneRunner:
+	return self
+
+
+## Simulates that an action has been released.[br]
+## [member action] : the action e.g. [code]"ui_up"[/code][br]
+@warning_ignore("unused_parameter")
+func simulate_action_release(action :String) -> GdUnitSceneRunner:
+	return self
+
+
 ## Simulates that a key has been pressed.[br]
 ## [member key_code] : the key code e.g. [constant KEY_ENTER][br]
 ## [member shift_pressed] : false by default set to true if simmulate shift is press[br]
@@ -144,6 +165,12 @@ func simulate_until_signal(signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=N
 func simulate_until_object_signal(source :Object, signal_name :String, arg0=NO_ARG, arg1=NO_ARG, arg2=NO_ARG, arg3=NO_ARG, arg4=NO_ARG, arg5=NO_ARG, arg6=NO_ARG, arg7=NO_ARG, arg8=NO_ARG, arg9=NO_ARG) -> GdUnitSceneRunner:
 	await Engine.get_main_loop().process_frame
 	return self
+
+
+### Waits for all input events are processed
+func await_input_processed() -> void:
+	await Engine.get_main_loop().process_frame
+	await Engine.get_main_loop().physics_frame
 
 
 ## Waits for the function return value until specified timeout or fails.[br]
