@@ -18,14 +18,6 @@ func exit():
 	pass
 
 
-## input ###########################################################
-
-func unhandled_input(event):
-	if actor.is_player:
-		if Trolls.is_jump(event):
-			machine.transit("Jump")
-			return
-
 ## physics ###########################################################
 
 func physics_process(delta):

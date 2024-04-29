@@ -15,10 +15,9 @@ func exit():
 ## input ###########################################################
 
 func unhandled_input(event):
-	if actor.is_player:
-		if Trolls.is_jump(event):
-			machine.transit("Jump")
-			return
+	if Trolls.is_jump(event):
+		machine.transit("Jump")
+		return
 
 
 ## process ###########################################################

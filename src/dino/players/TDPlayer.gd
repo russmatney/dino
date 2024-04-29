@@ -22,9 +22,6 @@ func _get_configuration_warnings():
 @export var wander_speed: float = 6000
 @export var jump_speed: float = 10000
 
-@export var should_wander: bool = false
-@export var should_notice: bool = false
-
 # runtime vars
 
 var move_vector: Vector2
