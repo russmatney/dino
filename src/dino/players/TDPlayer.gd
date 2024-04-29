@@ -57,12 +57,26 @@ var look_pof
 var heart_particles
 var skull_particles
 
+var quick_select_scene = preload("res://src/components/quick_select/QuickSelect.tscn")
+var quick_select_menu
+
+var player_camera_scene = preload("res://src/dino/players/PlayerCamera.tscn")
+var pcam: PhantomCamera2D
+
 ## enter tree ###########################################################
 
 func _enter_tree():
 	add_to_group("player", true)
+	ensure_pcam()
 
 ## ready ###########################################################
+
+func ensure_pcam():
+	pcam = get_node_or_null("PlayerCamera")
+	if pcam == null:
+		pcam = player_camera_scene.instantiate()
+		add_child(pcam)
+		pcam.set_owner(self)
 
 func _ready():
 	Hotel.register(self)
@@ -75,6 +89,7 @@ func _ready():
 			skull_particles="SkullParticles",
 			pit_detector="PitDetector",
 			look_pof="LookPOF",
+			quick_select_menu="QuickSelect"
 			})
 
 		if hurt_box:
@@ -100,7 +115,21 @@ func _ready():
 	set_collision_mask_value(11, true) # fences, low-walls
 	set_collision_mask_value(12, true) # spikes
 
+	if quick_select_menu == null:
+		quick_select_menu = quick_select_scene.instantiate()
+		add_child(quick_select_menu)
+	quick_select_menu.hide_menu()
+
 	add_weapon(DinoWeaponEntityIds.BOOMERANG)
+
+	state_label.set_visible(false)
+
+## actions ###########################################################
+
+var actions = []
+
+func can_execute_any():
+	return machine and machine.can_act()
 
 ## hotel data ##########################################################################
 
@@ -216,8 +245,8 @@ func on_pit_entered():
 	# TODO damage?
 	machine.transit("Fall")
 
-	await get_tree().create_timer(1.0).timeout
-	Dino.respawn_player({player=self})
+	# await get_tree().create_timer(1.0).timeout
+	# Dino.respawn_player({player=self})
 
 ## collision ###########################################################
 
