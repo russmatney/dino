@@ -5,7 +5,7 @@ class_name TDEnemy
 
 func _get_configuration_warnings():
 	return U._config_warning(self, {expected_nodes=[
-		"TDMachine", "StateLabel", "AnimatedSprite2D",
+		"TDEnemyMachine", "StateLabel", "AnimatedSprite2D",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle_down", "idle_up", "idle_right",
 			"run_down", "run_up", "run_right",]}})
@@ -35,7 +35,7 @@ var is_dead
 
 @onready var coll = $CollisionShape2D
 @onready var anim = $AnimatedSprite2D
-@onready var machine = $TDMachine
+@onready var machine = $TDEnemyMachine
 @onready var state_label = $StateLabel
 
 var hurt_box

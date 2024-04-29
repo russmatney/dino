@@ -5,13 +5,15 @@ class_name TDPlayer
 
 func _get_configuration_warnings():
 	return U._config_warning(self, {expected_nodes=[
-		"TDMachine", "StateLabel", "AnimatedSprite2D",
+		"TDPlayerMachine", "StateLabel", "AnimatedSprite2D",
 		"ActionDetector", "ActionHint", "LookPOF",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle_down", "idle_up", "idle_right",
 			"run_down", "run_up", "run_right",]}})
 
 ## vars ###########################################################
+
+# player config
 
 @export var display_name: String
 @export var initial_health: int = 6
@@ -23,7 +25,7 @@ func _get_configuration_warnings():
 @export var should_wander: bool = false
 @export var should_notice: bool = false
 
-# vars
+# runtime vars
 
 var move_vector: Vector2
 var facing_vector: Vector2
@@ -31,10 +33,12 @@ var health
 var aim_vector = Vector2.ZERO
 var is_dead
 
+# pickups
+
 var coins = 0
 var shrine_gems = 0
 
-var boomerang
+# weapons
 
 signal changed_weapon(weapon)
 var weapon_set: WeaponSet = WeaponSet.new("td")
@@ -43,7 +47,7 @@ var weapon_set: WeaponSet = WeaponSet.new("td")
 
 @onready var coll = $CollisionShape2D
 @onready var anim = $AnimatedSprite2D
-@onready var machine = $TDMachine
+@onready var machine = $TDPlayerMachine
 @onready var state_label = $StateLabel
 
 @onready var action_detector = $ActionDetector

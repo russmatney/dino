@@ -1,8 +1,8 @@
 [gd_scene load_steps=24 format=3 uid="uid://caq6muu5og6oo"]
 
-[ext_resource type="Script" path="res://addons/core/beehive/topdown/TDEnemy.gd" id="1_vl047"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="2_spfi7"]
-[ext_resource type="Texture2D" uid="uid://cy8nlxxkwln5h" path="res://src/games/shirt/enemies/shirt_blob_64.png" id="3_otsjm"]
+[ext_resource type="Script" path="res://src/dino/enemies/TDEnemy.gd" id="1_vl047"]
+[ext_resource type="Texture2D" uid="uid://cy8nlxxkwln5h" path="res://src/dino/enemies/blobs/shirt_blob_64.png" id="3_otsjm"]
+[ext_resource type="PackedScene" uid="uid://cam7j4kwh0thl" path="res://src/dino/enemies/topdown_machine/TDEnemyMachine.tscn" id="4_p707p"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_x1ie1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ulnms"]
@@ -181,8 +181,6 @@ display_name = "Blob Walker"
 initial_health = 2
 should_wander = true
 
-[node name="TDMachine" parent="." instance=ExtResource("2_spfi7")]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ulnms")
 
@@ -213,3 +211,5 @@ text = "[center]State"
 fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
+
+[node name="TDEnemyMachine" parent="." instance=ExtResource("4_p707p")]

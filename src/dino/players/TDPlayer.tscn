@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_hodoi"]
 [ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://src/dino/players/topdown_player_64.png" id="2_q4ht8"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_tx638"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_l52h7"]
+[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDPlayerMachine.tscn" id="4_l52h7"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_a0utl"]
 [ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_e5yp5"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="7_vgh44"]
@@ -240,7 +240,7 @@ fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="TDMachine" parent="." instance=ExtResource("4_l52h7")]
+[node name="TDPlayerMachine" parent="." instance=ExtResource("4_l52h7")]
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
