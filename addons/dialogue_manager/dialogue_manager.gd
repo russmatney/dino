@@ -361,6 +361,10 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 
 	var data: Dictionary = resource.lines.get(key)
 
+	# This title key points to another title key so we should jump there instead
+	if data.type == DialogueConstants.TYPE_TITLE and data.next_id in resource.titles.values():
+		return await get_line(resource, data.next_id + id_trail, extra_game_states)
+
 	# Check for weighted random lines
 	if data.has(&"siblings"):
 		var target_weight: float = randf_range(0, data.siblings.reduce(func(total, sibling): return total + sibling.weight, 0))
@@ -746,6 +750,16 @@ func resolve(tokens: Array, extra_game_states: Array):
 					&"Quaternion":
 						token["type"] = "value"
 						token["value"] = Quaternion(args[0], args[1], args[2], args[3])
+						found = true
+					&"Callable":
+						token["type"] = "value"
+						match args.size():
+							0:
+								token["value"] = Callable()
+							1:
+								token["value"] = Callable(args[0])
+							2:
+								token["value"] = Callable(args[0], args[1])
 						found = true
 					&"Color":
 						token["type"] = "value"
