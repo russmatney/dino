@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://buyw146x0e4l0"
+path="res://.godot/imported/topdown_player_64.aseprite-748812282d364877b71f811bfbdfe535.res"
+
+[deps]
+
+source_file="res://src/dino/players/topdown_player_64.aseprite"
+dest_files=["res://.godot/imported/topdown_player_64.aseprite-748812282d364877b71f811bfbdfe535.res"]
+
+[params]
+

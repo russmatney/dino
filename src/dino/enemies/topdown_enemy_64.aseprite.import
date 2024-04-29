@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://d1ib3cgd5t2qm"
+path="res://.godot/imported/topdown_enemy_64.aseprite-dfa2bca51174f0eb4982b784021a3409.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/topdown_enemy_64.aseprite"
+dest_files=["res://.godot/imported/topdown_enemy_64.aseprite-dfa2bca51174f0eb4982b784021a3409.res"]
+
+[params]
+

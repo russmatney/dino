@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://brn00fgoknly6"]
 
 [ext_resource type="Script" path="res://src/dino/weapons/boomerang/Boomerang.gd" id="1_gamy2"]
-[ext_resource type="Texture2D" uid="uid://cydc8lch1oinl" path="res://addons/core/beehive/topdown/weapons/boomerang.png" id="2_owred"]
+[ext_resource type="Texture2D" uid="uid://cydc8lch1oinl" path="res://src/dino/weapons/boomerang/boomerang.png" id="2_owred"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h372t"]
 atlas = ExtResource("2_owred")

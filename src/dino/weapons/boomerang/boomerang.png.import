@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp67j6fal2a4c"
-path="res://.godot/imported/topdown_player_64.png-e1ac01ccab992451aef098c87cede2c3.ctex"
+uid="uid://cydc8lch1oinl"
+path="res://.godot/imported/boomerang.png-6af98446ca4e73ee3dd9a9aceaea7b33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/core/beehive/topdown/topdown_player_64.png"
-dest_files=["res://.godot/imported/topdown_player_64.png-e1ac01ccab992451aef098c87cede2c3.ctex"]
+source_file="res://src/dino/weapons/boomerang/boomerang.png"
+dest_files=["res://.godot/imported/boomerang.png-6af98446ca4e73ee3dd9a9aceaea7b33.ctex"]
 
 [params]
 

@@ -1,96 +1,101 @@
-[gd_scene load_steps=28 format=3 uid="uid://bacb43b2t62dq"]
+[gd_scene load_steps=35 format=3 uid="uid://d0nbgfv56fvm1"]
 
-[ext_resource type="Script" path="res://addons/core/beehive/topdown/TDBody.gd" id="1_hnl6t"]
-[ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://addons/core/beehive/topdown/topdown_player_64.png" id="2_djwnc"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_6j5cs"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://addons/core/beehive/topdown/machine/TDMachine.tscn" id="4_3sx8f"]
-[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/games/shirt/PitDetector.tscn" id="5_0kdiu"]
+[ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_hodoi"]
+[ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://src/dino/players/topdown_player_64.png" id="2_q4ht8"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_tx638"]
+[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="4_l52h7"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_a0utl"]
+[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_e5yp5"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="7_vgh44"]
+[ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_6knpo"]
+[ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_qe2sw"]
+[ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_hjude"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wu65o"]
-radius = 9.0
-height = 18.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ah5wp"]
+radius = 8.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lmscq"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(0, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bp7yn"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(256, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sj8li"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(192, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ybkl3"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(256, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wuycj"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(192, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xf6gd"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(128, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3nqwm"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(128, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g68v3"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(64, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4qt2i"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(0, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xyirg"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(64, 128, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8s8x"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vck2x"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(256, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h8u0f"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gtweh"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_47hud"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4l1gt"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bavhg"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ek56w"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3q3cw"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(64, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fs3wx"]
-atlas = ExtResource("2_djwnc")
+atlas = ExtResource("2_q4ht8")
 region = Rect2(0, 64, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_12ejv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_1kkyo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -186,21 +191,32 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="TDBody" type="CharacterBody2D"]
-script = ExtResource("1_hnl6t")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6v20"]
+radius = 8.0
+height = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7isbx"]
+radius = 80.399
+
+[node name="TDPlayer" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 3609
+script = ExtResource("1_hodoi")
+display_name = "P. Layer"
 wander_speed = null
 should_wander = null
 should_notice = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_wu65o")
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_ah5wp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_12ejv")
+sprite_frames = SubResource("SpriteFrames_1kkyo")
 animation = &"idle_down"
+autoplay = "idle_down"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -217,13 +233,38 @@ offset_left = -24.0
 offset_top = 10.0
 offset_right = 24.0
 offset_bottom = 26.0
-theme_override_fonts/normal_font = ExtResource("3_6j5cs")
+theme_override_fonts/normal_font = ExtResource("3_tx638")
 bbcode_enabled = true
 text = "[center]State"
 fit_content = true
 scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="TDMachine" parent="." instance=ExtResource("4_3sx8f")]
+[node name="TDMachine" parent="." instance=ExtResource("4_l52h7")]
 
-[node name="PitDetector" parent="." instance=ExtResource("5_0kdiu")]
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2072
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_n6v20")
+
+[node name="LookPOF" parent="." instance=ExtResource("7_e5yp5")]
+
+[node name="ActionHint" parent="." instance=ExtResource("7_vgh44")]
+position = Vector2(0, -32)
+
+[node name="ActionDetector" parent="." instance=ExtResource("7_a0utl")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
+shape = SubResource("CircleShape2D_7isbx")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+shadow_enabled = true
+texture = ExtResource("8_6knpo")
+texture_scale = 4.0
+
+[node name="SkullParticles" parent="." instance=ExtResource("9_qe2sw")]
+
+[node name="HeartParticles" parent="." instance=ExtResource("10_hjude")]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=12 format=3 uid="uid://cam7j4kwh0thl"]
+
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_u0rj3"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Idle.gd" id="2_8fwe6"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Run.gd" id="3_o744u"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Jump.gd" id="4_3dkx3"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Fall.gd" id="5_d7bep"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Wander.gd" id="6_f0omk"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Notice.gd" id="7_6odm4"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Chase.gd" id="8_8rven"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/KnockedBack.gd" id="9_dbsq4"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Dying.gd" id="10_3mljh"]
+[ext_resource type="Script" path="res://src/dino/enemies/topdown_machine/Dead.gd" id="11_lx08j"]
+
+[node name="TDEnemyMachine" type="Node"]
+script = ExtResource("1_u0rj3")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_8fwe6")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("3_o744u")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("4_3dkx3")
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("5_d7bep")
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("6_f0omk")
+
+[node name="Notice" type="Node" parent="."]
+script = ExtResource("7_6odm4")
+
+[node name="Chase" type="Node" parent="."]
+script = ExtResource("8_8rven")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("9_dbsq4")
+
+[node name="Dying" type="Node" parent="."]
+script = ExtResource("10_3mljh")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("11_lx08j")

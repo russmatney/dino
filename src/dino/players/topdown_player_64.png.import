@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x72mdv2n5x8f"
-path="res://.godot/imported/topdown_player_64_sheet.png-8f896c9e6792a5e616e8e164912dffc8.ctex"
+uid="uid://bp67j6fal2a4c"
+path="res://.godot/imported/topdown_player_64.png-42fda87addd49f2d621f0d5b5801e2ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/core/beehive/topdown/topdown_player_64_sheet.png"
-dest_files=["res://.godot/imported/topdown_player_64_sheet.png-8f896c9e6792a5e616e8e164912dffc8.ctex"]
+source_file="res://src/dino/players/topdown_player_64.png"
+dest_files=["res://.godot/imported/topdown_player_64.png-42fda87addd49f2d621f0d5b5801e2ce.ctex"]
 
 [params]
 

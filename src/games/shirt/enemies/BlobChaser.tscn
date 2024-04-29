@@ -1,7 +1,7 @@
 [gd_scene load_steps=27 format=3 uid="uid://c46ye03ypx1v0"]
 
-[ext_resource type="Script" path="res://addons/core/beehive/topdown/TDBody.gd" id="1_ck4vf"]
-[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://addons/core/beehive/topdown/machine/TDMachine.tscn" id="2_afxgh"]
+[ext_resource type="Script" path="res://addons/core/beehive/topdown/TDEnemy.gd" id="1_ck4vf"]
+[ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDMachine.tscn" id="2_afxgh"]
 [ext_resource type="Texture2D" uid="uid://cy8nlxxkwln5h" path="res://src/games/shirt/enemies/shirt_blob_64.png" id="3_4q0g8"]
 [ext_resource type="Shader" path="res://src/shaders/ColorSwapShader.gdshader" id="3_v0dmn"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_bo1lq"]
