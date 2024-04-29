@@ -5,6 +5,6 @@
 
 [node name="FenceTiles" type="TileMap"]
 tile_set = ExtResource("1_bylna")
-cell_quadrant_size = 8
+rendering_quadrant_size = 8
 format = 2
 script = ExtResource("2_7fhm6")
