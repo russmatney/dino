@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ci7wujr225x8y"]
+[gd_scene load_steps=14 format=3 uid="uid://ci7wujr225x8y"]
 
 [ext_resource type="Script" path="res://src/dino/npcs/leaf_god/LeafGod.gd" id="1_7hv1x"]
 [ext_resource type="Texture2D" uid="uid://cpbqogu2llb23" path="res://src/dino/npcs/leaf_god/runner_leaf_friend.png" id="2_gitl0"]
@@ -6,7 +6,8 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_ovlwu"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_12qb4"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_ag2du"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="7_i2d0n"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_45l4l"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_i1ifi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icmag"]
 size = Vector2(50, 50)
@@ -28,6 +29,12 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3uh7"]
 size = Vector2(58, 58)
+
+[sub_resource type="Resource" id="Resource_rwd8m"]
+script = ExtResource("8_i1ifi")
+duration = 1.0
+transition = 0
+ease = 2
 
 [node name="LeafGod" type="CharacterBody2D"]
 collision_layer = 512
@@ -82,24 +89,11 @@ shape = SubResource("RectangleShape2D_p3uh7")
 position = Vector2(0, -43)
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
-position = Vector2(-135, -59)
-script = ExtResource("7_i2d0n")
-priority_override = false
-priority = 0
+position = Vector2(-136, -61)
+script = ExtResource("7_45l4l")
 zoom = Vector2(5, 5)
-follow_mode = 0
-frame_preview = true
-pixel_perfect = false
-limit/draw_limits = true
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-limit/limit_node_target = NodePath("")
-limit/smoothed = false
-tween_parameters = null
-tween_on_load = true
-inactive_update_mode = 0
+snap_to_pixel = true
+tween_resource = SubResource("Resource_rwd8m")
 
 [node name="ShopUI" type="PanelContainer" parent="."]
 unique_name_in_owner = true

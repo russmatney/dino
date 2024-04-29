@@ -24,13 +24,13 @@ func enter(_ctx={}):
 
 	# TODO gather priorities into constants?
 	if actor.pcam:
-		actor.pcam.set_priority(10)
+		actor.pcam.priority = 5
 
 ## exit #####################################################################
 
 func exit():
 	if actor.pcam:
-		actor.pcam.set_priority(0)
+		actor.pcam.priority = 0
 
 ## process #####################################################################
 
