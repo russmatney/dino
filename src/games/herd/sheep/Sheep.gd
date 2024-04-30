@@ -43,7 +43,7 @@ var actions = [
 		actor_can_execute=func(player):
 		return \
 		# player not moving
-		player.input_move_dir.length() <= 0.1 \
+		player.move_vector.length() <= 0.1 \
 		and following == player and player.can_grab() and not is_dead,
 		}),
 	Action.mk({
@@ -62,12 +62,12 @@ func follow_player(player):
 	# check_in here also adds to HUD
 	# not a great pattern, if HUD grabs/inits automatically this is not necessary
 	Hotel.check_in(self)
-	U._connect(player.dying, on_player_dying)
+	U._connect(player.died, on_player_died)
 	following = player
 	machine.transit("Follow")
 
 func grabbed_by_player(player):
-	U._connect(player.dying, on_player_dying)
+	U._connect(player.died, on_player_died)
 	player.grab(self)
 	grabbed_by = player
 	machine.transit("Grabbed")
@@ -80,7 +80,7 @@ func thrown_by_player(player):
 			throw_speed=opts.get("throw_speed")
 			})
 
-func on_player_dying(_player):
+func on_player_died(_player):
 	following = null
 	grabbed_by = null
 

@@ -45,7 +45,7 @@ func _ready():
 
 ## public api #####################################################
 
-func aim(aim_vector: Vector2):
+func aim(_aim_vector: Vector2):
 	Log.warn("impl aim!", self)
 
 func activate():

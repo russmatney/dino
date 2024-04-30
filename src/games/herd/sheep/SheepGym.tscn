@@ -1,15 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://klp1ph3xr7x1"]
+[gd_scene load_steps=9 format=3 uid="uid://klp1ph3xr7x1"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_n5axb"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_c6gx3"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="2_mbd5v"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/games/herd/sheep/Sheep.tscn" id="3_72myu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_1c63n"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/games/herd/tiles/FenceTiles.tscn" id="5_ma4vh"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="6_75im7"]
-[ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="7_j7nj7"]
+
+[sub_resource type="Resource" id="Resource_n2a47"]
+script = ExtResource("2_c6gx3")
+_id = "73"
 
 [node name="SheepGym" type="Node"]
 script = ExtResource("1_n5axb")
+player_entity = SubResource("Resource_n2a47")
+genre_type = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -194.0
@@ -41,11 +47,4 @@ layer_0/tile_data = PackedInt32Array(-196611, 524289, 5, -262147, 262145, 3, -32
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("5_1c63n")
 
-[node name="DinoHUD" type="Control" parent="." instance=ExtResource("6_75im7")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("7_j7nj7")
+[node name="DinoHUD" parent="." instance=ExtResource("6_75im7")]

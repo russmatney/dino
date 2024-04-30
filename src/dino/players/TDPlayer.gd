@@ -81,30 +81,29 @@ func ensure_pcam():
 func _ready():
 	Hotel.register(self)
 
-	if not Engine.is_editor_hint():
-		U.set_optional_nodes(self, {
-			notif_label="NotifLabel",
-			hurt_box="HurtBox",
-			heart_particles="HeartParticles",
-			skull_particles="SkullParticles",
-			pit_detector="PitDetector",
-			look_pof="LookPOF",
-			quick_select_menu="QuickSelect"
-			})
+	U.set_optional_nodes(self, {
+		notif_label="NotifLabel",
+		hurt_box="HurtBox",
+		heart_particles="HeartParticles",
+		skull_particles="SkullParticles",
+		pit_detector="PitDetector",
+		look_pof="LookPOF",
+		quick_select_menu="QuickSelect"
+		})
 
-		if hurt_box:
-			hurt_box.body_entered.connect(on_hurt_box_entered)
-			hurt_box.body_exited.connect(on_hurt_box_exited)
+	if hurt_box:
+		hurt_box.body_entered.connect(on_hurt_box_entered)
+		hurt_box.body_exited.connect(on_hurt_box_exited)
 
-		if heart_particles:
-			heart_particles.set_emitting(false)
-		if skull_particles:
-			skull_particles.set_emitting(false)
+	if heart_particles:
+		heart_particles.set_emitting(false)
+	if skull_particles:
+		skull_particles.set_emitting(false)
 
-		machine.transitioned.connect(_on_transit)
+	machine.transitioned.connect(_on_transit)
 
-		weapon_set.changed_weapon.connect(func(w):
-			changed_weapon.emit(w))
+	weapon_set.changed_weapon.connect(func(w):
+		changed_weapon.emit(w))
 
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -204,14 +203,16 @@ func _physics_process(_delta):
 	if mv != null:
 		move_vector = mv
 
-	if not Engine.is_editor_hint():
-		if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
-			update_facing()
+	if move_vector.abs().length() > 0 and machine.state.name in ["Run", "Jump", "Fall"]:
+		update_facing()
 
-		if move_vector.abs().length() > 0 and has_weapon():
-			# maybe this just works?
-			aim_vector = move_vector
-			aim_weapon(aim_vector)
+	if move_vector.abs().length() > 0 and has_weapon():
+		# maybe this just works?
+		aim_vector = move_vector
+		aim_weapon(aim_vector)
+
+	# herd player had this, maybe to keep the current action updating?
+	# action_detector.current_action()
 
 ## forced target ##########################################################################
 
@@ -376,6 +377,29 @@ func on_hurt_box_entered(body):
 func on_hurt_box_exited(body):
 	hurt_box_bodies.erase(body)
 
+######################################################
+# grab/throw
+
+var grabbing
+
+func can_grab():
+	return grabbing == null
+
+func grab(node):
+	DJZ.play(DJZ.S.candleout)
+	grabbing = node
+	U._connect(node.dying, on_grabbing_dying)
+
+func on_grabbing_dying(_node):
+	grabbing = null
+
+func throw(_node):
+	DJZ.play(DJZ.S.laser)
+	grabbing.dying.disconnect(on_grabbing_dying)
+	grabbing = null
+	# could pass throw_speed/weight
+	return {direction=facing_vector}
+
 #################################################################################
 ## Effects #####################################################################
 
@@ -425,26 +449,25 @@ func shine(_time = 1.0):
 
 # Supports 'perma-stamp' with ttl=0
 func stamp(opts={}):
-	if not Engine.is_editor_hint():
-		var new_scale = opts.get("scale", 0.3)
-		var new_anim = AnimatedSprite2D.new()
-		new_anim.sprite_frames = anim.sprite_frames
-		new_anim.animation = anim.animation
-		new_anim.frame = anim.frame
+	var new_scale = opts.get("scale", 0.3)
+	var new_anim = AnimatedSprite2D.new()
+	new_anim.sprite_frames = anim.sprite_frames
+	new_anim.animation = anim.animation
+	new_anim.frame = anim.frame
 
-		if opts.get("include_action_hint", false) and self.get("action_hint"):
-			var ax_hint = self["action_hint"].duplicate()
-			new_anim.add_child(ax_hint)
+	if opts.get("include_action_hint", false) and self.get("action_hint"):
+		var ax_hint = self["action_hint"].duplicate()
+		new_anim.add_child(ax_hint)
 
-		new_anim.global_position = global_position + anim.position
-		U.add_child_to_level(self, new_anim)
+	new_anim.global_position = global_position + anim.position
+	U.add_child_to_level(self, new_anim)
 
-		var ttl = opts.get("ttl", 0.5)
-		if ttl > 0:
-			var t = create_tween()
-			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
-			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
-			t.tween_callback(new_anim.queue_free)
+	var ttl = opts.get("ttl", 0.5)
+	if ttl > 0:
+		var t = create_tween()
+		t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
+		t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
+		t.tween_callback(new_anim.queue_free)
 
 ## weapons #######################################################
 
