@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c1gvdhw8ep2b2"
+path="res://.godot/imported/redhat.aseprite-9f445195147f0394960b0bece94eba8d.res"
+
+[deps]
+
+source_file="res://src/dino/npcs/action_bot/redhat.aseprite"
+dest_files=["res://.godot/imported/redhat.aseprite-9f445195147f0394960b0bece94eba8d.res"]
+
+[params]
+

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cadjlq5gl6srf"]
 
-[ext_resource type="PackedScene" uid="uid://jg7xpetmlc7w" path="res://src/games/harvey/ToolIcon.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://6p8s43n5euf5" path="res://src/games/harvey/ProduceIcon.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://dm7exgj6qui2q" path="res://src/games/harvey/assets/seed-icon_sheet.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://jg7xpetmlc7w" path="res://src/dino/entities/harvey_entities/ToolIcon.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://6p8s43n5euf5" path="res://src/dino/entities/harvey_entities/ProduceIcon.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dm7exgj6qui2q" path="res://src/dino/entities/harvey_entities/assets/seed-icon_sheet.png" id="4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bp7o"]
 atlas = ExtResource("4")

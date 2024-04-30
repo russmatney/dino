@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://6p8s43n5euf5"]
+
+[ext_resource type="SpriteFrames" uid="uid://6ecpxk6e8xva" path="res://src/dino/entities/harvey_entities/ProduceIcon.tres" id="1_4cb0r"]
+
+[node name="ProduceIcon" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_4cb0r")
+animation = &"tomato"

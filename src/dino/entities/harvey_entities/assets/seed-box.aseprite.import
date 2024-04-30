@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bg2644iqp5wq"
+path="res://.godot/imported/seed-box.aseprite-34cd39cffdf0980cbf4bb6548f3427e2.res"
+
+[deps]
+
+source_file="res://src/dino/entities/harvey_entities/assets/seed-box.aseprite"
+dest_files=["res://.godot/imported/seed-box.aseprite-34cd39cffdf0980cbf4bb6548f3427e2.res"]
+
+[params]
+

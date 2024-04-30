@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://drb20h1rgkhwn"
+path="res://.godot/imported/grid-selector.aseprite-f0553cfa7b8db45072ff981d5a3498e3.res"
+
+[deps]
+
+source_file="res://src/dino/entities/harvey_entities/assets/grid-selector.aseprite"
+dest_files=["res://.godot/imported/grid-selector.aseprite-f0553cfa7b8db45072ff981d5a3498e3.res"]
+
+[params]
+

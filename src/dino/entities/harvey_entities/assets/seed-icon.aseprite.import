@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://2qu4dn68cdyl"
+path="res://.godot/imported/seed-icon.aseprite-6eb0f710be8dac87ea93bb3a974439e2.res"
+
+[deps]
+
+source_file="res://src/dino/entities/harvey_entities/assets/seed-icon.aseprite"
+dest_files=["res://.godot/imported/seed-icon.aseprite-6eb0f710be8dac87ea93bb3a974439e2.res"]
+
+[params]
+

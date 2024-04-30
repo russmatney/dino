@@ -1,26 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://crfd7jx8d7vbx"]
+[gd_scene load_steps=3 format=3 uid="uid://crfd7jx8d7vbx"]
 
 [ext_resource type="Script" path="res://src/games/harvey/level/HarveyLevel.gd" id="1_a4iwi"]
 [ext_resource type="Script" path="res://src/games/harvey/level/HarveyLevelGen.gd" id="2_pxq3d"]
-[ext_resource type="PackedScene" uid="uid://hcuonrdt3k48" path="res://src/games/harvey/HUD/HUD.tscn" id="21_mc26d"]
 
 [node name="HarveyLevel" type="Node2D"]
 script = ExtResource("1_a4iwi")
+genre_type = 1
 
-[node name="LevelGen" type="Node2D" parent="." node_paths=PackedStringArray("entities_node", "tilemaps_node", "rooms_node") groups=["brick_generators"]]
+[node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
 script = ExtResource("2_pxq3d")
 _seed = 46731113
 tile_size = 32
 room_count = 1
 room_defs_path = "res://src/games/harvey/level/rooms.txt"
-entities_node = NodePath("../Entities")
-tilemaps_node = NodePath("../Tilemaps")
-rooms_node = NodePath("../Rooms")
 
 [node name="Rooms" type="Node" parent="."]
 
 [node name="Tilemaps" type="Node" parent="."]
 
 [node name="Entities" type="Node" parent="."]
-
-[node name="HUD" parent="." instance=ExtResource("21_mc26d")]

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dgt71x4jj5012"
+path="res://.godot/imported/tomato-icon.aseprite-416c65e9d3ef1e2372b3c7f9d86f7ef1.res"
+
+[deps]
+
+source_file="res://src/dino/entities/harvey_entities/assets/tomato-icon.aseprite"
+dest_files=["res://.godot/imported/tomato-icon.aseprite-416c65e9d3ef1e2372b3c7f9d86f7ef1.res"]
+
+[params]
+

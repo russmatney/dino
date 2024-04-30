@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://14etywx4oycn"
+path="res://.godot/imported/plot.aseprite-32a18b4a65f0286f563442017196b735.res"
+
+[deps]
+
+source_file="res://src/dino/entities/harvey_entities/assets/plot.aseprite"
+dest_files=["res://.godot/imported/plot.aseprite-32a18b4a65f0286f563442017196b735.res"]
+
+[params]
+

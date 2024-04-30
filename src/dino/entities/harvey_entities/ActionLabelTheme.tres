@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bx2wou2suu4mp"]
+
+[ext_resource type="FontFile" path="res://addons/core/resources/fonts/debug-info-text.tres" id="1"]
+
+[resource]
+RichTextLabel/font_sizes/normal_font_size = 16
+RichTextLabel/fonts/normal_font = ExtResource("1")
