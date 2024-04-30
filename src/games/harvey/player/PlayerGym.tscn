@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ceixwvgfmkhf"]
 
-[ext_resource type="PackedScene" uid="uid://c4wk4oavufugc" path="res://src/games/harvey/player/HarveyPlayer.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://ct71m7st0mcr4" path="res://src/games/harvey/items/SeedBox.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/games/harvey/player/HarveyPlayer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c50rr61e7pe3y" path="res://src/games/harvey/items/SeedBox.tscn" id="3"]
 
 [node name="PlayerGym" type="Node2D"]
 

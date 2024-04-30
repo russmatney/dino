@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6540fa51kh2a"
-path="res://.godot/imported/mountain_player.png-7af107cd8ed15cd59b3818b154431041.ctex"
+path="res://.godot/imported/mountain_player.png-20125f4786f84fb47d9ff981f22cf53b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/games/mountain/player/mountain_player.png"
-dest_files=["res://.godot/imported/mountain_player.png-7af107cd8ed15cd59b3818b154431041.ctex"]
+source_file="res://src/dino/players/mountain_player/mountain_player.png"
+dest_files=["res://.godot/imported/mountain_player.png-20125f4786f84fb47d9ff981f22cf53b.ctex"]
 
 [params]
 

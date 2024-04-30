@@ -43,7 +43,7 @@ func setup(a, opts={}):
 	actor_actions = acts
 
 	var can_exec = opts.get("can_execute_any")
-	if not can_exec:
+	if not can_exec and actor.has_method("can_execute_any"):
 		can_exec = actor.can_execute_any
 	if not can_exec:
 		can_exec = func(): return true

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4a5enkqonft8"
-path="res://.godot/imported/mountain_player_sheet.png-75ea9dc7a8a684339d4bebe39125b1d4.ctex"
+path="res://.godot/imported/mountain_player_sheet.png-343574a79a068214d83d4b835f26f0bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/games/mountain/player/mountain_player_sheet.png"
-dest_files=["res://.godot/imported/mountain_player_sheet.png-75ea9dc7a8a684339d4bebe39125b1d4.ctex"]
+source_file="res://src/dino/players/mountain_player/mountain_player_sheet.png"
+dest_files=["res://.godot/imported/mountain_player_sheet.png-343574a79a068214d83d4b835f26f0bf.ctex"]
 
 [params]
 

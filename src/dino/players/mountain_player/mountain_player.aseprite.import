@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://wu6rrgme0i4q"
+path="res://.godot/imported/mountain_player.aseprite-d802cc67bf05f51ac0412df3c591d661.res"
+
+[deps]
+
+source_file="res://src/dino/players/mountain_player/mountain_player.aseprite"
+dest_files=["res://.godot/imported/mountain_player.aseprite-d802cc67bf05f51ac0412df3c591d661.res"]
+
+[params]
+

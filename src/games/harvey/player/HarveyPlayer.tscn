@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://bxqf1afefg4tj"]
 
 [ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/games/harvey/player/harvey_spriteframes.tres" id="1"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/games/harvey/player/PlayerItem.tscn" id="2"]

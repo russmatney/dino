@@ -208,7 +208,7 @@
 					},
 					"level_scene": {
 						"type": "resource",
-						"value": "res://src/games/mountain/zones/TheMountain.tscn"
+						"value": "res://src/games/mountain/TheMountain.tscn"
 					},
 					"player_type": {
 						"type": "string",
