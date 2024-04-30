@@ -195,8 +195,14 @@ func _unhandled_input(event):
 		stop_using_weapon()
 		# should stop strafe?
 
-	if Trolls.is_event(event, "cycle_weapon"):
-		cycle_weapon()
+	if Trolls.is_pressed(event, "weapon_swap_menu"):
+		quick_select_menu.show_menu({
+			entities=weapon_set.list_entities(),
+			on_select=func(weapon):
+			activate_weapon(weapon),
+			})
+	elif Trolls.is_released(event, "weapon_swap_menu"):
+		quick_select_menu.hide_menu()
 
 	# generic action
 	if Trolls.is_action(event):
