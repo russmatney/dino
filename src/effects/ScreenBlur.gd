@@ -6,6 +6,8 @@ var lod_max = 2.6
 var default_duration = 0.6
 
 func fade_in(opts={}):
+	if not is_node_ready():
+		return
 	if tween:
 		tween.kill()
 
@@ -15,6 +17,8 @@ func fade_in(opts={}):
 	tween.tween_property(material, "shader_parameter/LOD", lod_max, duration)
 
 func fade_out(opts={}):
+	if not is_node_ready():
+		return
 	if tween:
 		tween.kill()
 

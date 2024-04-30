@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://6sj01yybi4qt"]
+
+[ext_resource type="Script" path="res://src/dino/npcs/TopDownNPC.gd" id="1_jfadk"]
+[ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_8vlgc"]
+[ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/dino/npcs/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
+[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="6_6810x"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="7_sxgat"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_vet6k"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="8_540xg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfhc5"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jate3"]
+radius = 64.0703
+
+[node name="Sheep" type="CharacterBody2D" groups=["enemy_bullet_attractors", "npcs", "sheep"]]
+collision_layer = 512
+collision_mask = 1557
+script = ExtResource("1_jfadk")
+should_hop = true
+can_be_called = true
+can_be_grabbed_thrown = true
+
+[node name="TDNPCMachine" parent="." instance=ExtResource("2_8vlgc")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_lfhc5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(2.25, 2.25)
+sprite_frames = ExtResource("2_a12nd")
+animation = &"hit"
+
+[node name="CamPOI" parent="." instance=ExtResource("6_6810x")]
+importance = 0.5
+
+[node name="ActionArea" parent="." instance=ExtResource("7_sxgat")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("CircleShape2D_jate3")
+
+[node name="ActionHint" parent="." instance=ExtResource("8_540xg")]
+position = Vector2(0, -21)
+
+[node name="StateLabel" type="RichTextLabel" parent="."]
+visible = false
+clip_contents = false
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 50.0
+theme_override_fonts/normal_font = ExtResource("7_vet6k")
+bbcode_enabled = true
+text = "[center]State"
+fit_content = true
+scroll_active = false
+metadata/_edit_use_anchors_ = true

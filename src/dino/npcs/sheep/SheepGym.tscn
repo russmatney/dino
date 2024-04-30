@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_n5axb"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_c6gx3"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="2_mbd5v"]
-[ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/games/herd/sheep/Sheep.tscn" id="3_72myu"]
+[ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/dino/npcs/sheep/Sheep.tscn" id="3_72myu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_1c63n"]
-[ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/games/herd/tiles/FenceTiles.tscn" id="5_ma4vh"]
+[ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/dino/entities/fences/FenceTiles.tscn" id="5_ma4vh"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="6_75im7"]
 
 [sub_resource type="Resource" id="Resource_n2a47"]

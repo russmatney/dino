@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name NPC
+class_name SideScrollerNPC
 
 ## config warnings ###########################################################
 

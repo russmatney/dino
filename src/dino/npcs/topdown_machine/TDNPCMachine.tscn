@@ -1,0 +1,62 @@
+[gd_scene load_steps=16 format=3 uid="uid://bu8b820xl050l"]
+
+[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_dqnw3"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Idle.gd" id="2_ww6s3"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Run.gd" id="3_u6ytj"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Jump.gd" id="4_qed8c"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Fall.gd" id="5_44pac"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Chase.gd" id="6_0vfch"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Notice.gd" id="7_whd37"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Wander.gd" id="8_01fka"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/KnockedBack.gd" id="9_msvjk"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Dying.gd" id="10_wryan"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Dead.gd" id="11_xeuq1"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Follow.gd" id="12_dwqw2"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Grabbed.gd" id="13_55apt"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Thrown.gd" id="14_d2b16"]
+[ext_resource type="Script" path="res://src/dino/npcs/topdown_machine/Hop.gd" id="15_kwnm5"]
+
+[node name="TDNPCMachine" type="Node"]
+script = ExtResource("1_dqnw3")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_ww6s3")
+
+[node name="Run" type="Node" parent="."]
+script = ExtResource("3_u6ytj")
+
+[node name="Jump" type="Node" parent="."]
+script = ExtResource("4_qed8c")
+
+[node name="Fall" type="Node" parent="."]
+script = ExtResource("5_44pac")
+
+[node name="Chase" type="Node" parent="."]
+script = ExtResource("6_0vfch")
+
+[node name="Notice" type="Node" parent="."]
+script = ExtResource("7_whd37")
+
+[node name="Wander" type="Node" parent="."]
+script = ExtResource("8_01fka")
+
+[node name="KnockedBack" type="Node" parent="."]
+script = ExtResource("9_msvjk")
+
+[node name="Dying" type="Node" parent="."]
+script = ExtResource("10_wryan")
+
+[node name="Dead" type="Node" parent="."]
+script = ExtResource("11_xeuq1")
+
+[node name="Follow" type="Node" parent="."]
+script = ExtResource("12_dwqw2")
+
+[node name="Grabbed" type="Node" parent="."]
+script = ExtResource("13_55apt")
+
+[node name="Thrown" type="Node" parent="."]
+script = ExtResource("14_d2b16")
+
+[node name="Hop" type="Node" parent="."]
+script = ExtResource("15_kwnm5")

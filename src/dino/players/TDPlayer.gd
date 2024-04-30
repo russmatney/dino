@@ -29,6 +29,7 @@ var facing_vector: Vector2
 var health
 var aim_vector = Vector2.ZERO
 var is_dead
+var grabbing
 
 # pickups
 
@@ -380,25 +381,24 @@ func on_hurt_box_exited(body):
 ######################################################
 # grab/throw
 
-var grabbing
-
 func can_grab():
 	return grabbing == null
 
 func grab(node):
 	DJZ.play(DJZ.S.candleout)
 	grabbing = node
-	U._connect(node.dying, on_grabbing_dying)
-
-func on_grabbing_dying(_node):
-	grabbing = null
+	U._connect(node.died, on_grabbing_died)
 
 func throw(_node):
 	DJZ.play(DJZ.S.laser)
-	grabbing.dying.disconnect(on_grabbing_dying)
+	grabbing.died.disconnect(on_grabbing_died)
 	grabbing = null
 	# could pass throw_speed/weight
 	return {direction=facing_vector}
+
+func on_grabbing_died(_node):
+	grabbing = null
+
 
 #################################################################################
 ## Effects #####################################################################
