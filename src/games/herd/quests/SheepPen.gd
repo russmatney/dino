@@ -3,6 +3,9 @@ extends Area2D
 
 @onready var coll: CollisionShape2D = $CollisionShape2D
 
+func _enter_tree():
+	add_to_group("pen", true)
+
 func _ready():
 	add_color_rect(coll)
 

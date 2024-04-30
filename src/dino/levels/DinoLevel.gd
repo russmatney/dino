@@ -140,6 +140,11 @@ func _enter_tree():
 		if level_gen.get_script() != level_def.get_level_gen_script():
 			level_gen.set_script(level_def.get_level_gen_script())
 
+	if not get_node_or_null("QuestManager"):
+		quest_manager = QuestManager.new()
+		quest_manager.name = "QuestManager"
+		add_child(quest_manager)
+
 ## ready ######################################################
 
 func _ready():
