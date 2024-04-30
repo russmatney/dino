@@ -33,10 +33,14 @@ func _init():
 func setup():
 	var level_root = U.find_level_root(self)
 
+	var found_pen
 	for p in U.get_children_in_group(level_root, "pen"):
 		if p is Area2D:
 			p.body_entered.connect(on_body_entered)
 			p.body_exited.connect(on_body_exited)
+			found_pen = true
+	if not found_pen:
+		Log.warn("Could not find pen for fetch sheep quest")
 
 	super.setup()
 

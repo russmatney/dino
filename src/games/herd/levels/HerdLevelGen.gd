@@ -23,18 +23,28 @@ func get_room_opts(_opts):
 				},
 				"Pen":{
 					scene=load("res://addons/core/reptile/tilemaps/GrassFloorTiles16.tscn"),
-					setup=func(t):
-					# TODO convert to entity
-					t.add_to_group("pen", true)
+					to_entities=func(t):
+					var rect = t.get_used_rect()
+					if rect.size.x == 0:
+						# opt-out when there are no tiles
+						# TODO do this before to_entities call
+						return []
+
+					var pen = load("res://src/dino/entities/pen/SheepPen.tscn").instantiate()
+					var coll = Reptile.tmap_to_collision_shape(t)
+					pen.add_child(coll)
+
+					# TODO leave the grass tiles in place!
+
+					return [pen]
 					},
 				"Fence":{
-					scene=load("res://src/herd/tiles/FenceTiles.tscn")
+					scene=load("res://src/dino/entities/fences/FenceTiles.tscn")
 				},
 			},
 			label_to_entity={
-				"Player": {scene=load("res://src/dino/entities/PlayerSpawnPoint.tscn")},
-				"Sheep": {scene=load("res://src/herd/sheep/Sheep.tscn")},
-				"Wolf": {scene=load("res://src/herd/wolf/Wolf.tscn")},
+				"Player": {scene=DinoEntity.get_entity_scene(DinoEntityIds.PLAYERSPAWNPOINT)},
+				"Sheep": {scene=load("res://src/dino/npcs/sheep/Sheep.tscn")},
 			}})
 
 	return agg.room_opts

@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://csqgaau5qxpb2"]
 
 [ext_resource type="Script" path="res://src/games/herd/levels/HerdLevel.gd" id="1_ynwce"]
-[ext_resource type="PackedScene" uid="uid://b254u72nu1oj3" path="res://src/games/herd/quests/FetchSheepQuest.tscn" id="2_5nryq"]
-[ext_resource type="PackedScene" uid="uid://dyjqpthy70n1i" path="res://src/games/herd/quests/SheepPen.tscn" id="3_lrek5"]
+[ext_resource type="PackedScene" uid="uid://b254u72nu1oj3" path="res://src/dino/quests/FetchSheepQuest.tscn" id="2_5nryq"]
+[ext_resource type="PackedScene" uid="uid://dyjqpthy70n1i" path="res://src/dino/entities/pen/SheepPen.tscn" id="3_lrek5"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_ecyyx"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/dino/entities/fences/FenceTiles.tscn" id="5_hnrky"]
 [ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="5_tue4v"]

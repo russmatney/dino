@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dyjqpthy70n1i"]
 
-[ext_resource type="Script" path="res://src/games/herd/quests/SheepPen.gd" id="1_antyq"]
+[ext_resource type="Script" path="res://src/dino/entities/pen/SheepPen.gd" id="1_antyq"]
 
 [node name="SheepPen" type="Area2D"]
 collision_layer = 0

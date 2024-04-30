@@ -31,8 +31,6 @@ static func quests_for_entities(entities: Array[Node]):
 
 		if q.has_required_entities(entities):
 			# TODO search/dedupe existing quests?
-			# they get deduped in the active quests map, but
-			# still seem to fire dupe notifs
 			qs.append(q)
 		else:
 			q.queue_free()
