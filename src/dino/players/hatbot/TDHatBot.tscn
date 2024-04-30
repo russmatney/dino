@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b0iynefs467at"]
+[gd_scene load_steps=34 format=3 uid="uid://b0iynefs467at"]
 
 [ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_afubb"]
 [ext_resource type="Texture2D" uid="uid://cejwgbx007lhb" path="res://src/dino/players/hatbot/greyhat.png" id="2_oakt2"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_4ljf6"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_cpplh"]
 [ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/games/shirt/PitDetector.tscn" id="11_xg3ti"]
+[ext_resource type="FontFile" path="res://addons/core/resources/fonts/debug-info-text.tres" id="12_vale1"]
+[ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="13_g22r1"]
+[ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://src/dino/weapons/arrow/arrow.tres" id="14_i0xc1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmvsu"]
 radius = 5.0
@@ -438,3 +441,24 @@ texture_scale = 4.0
 
 [node name="PitDetector" parent="." instance=ExtResource("11_xg3ti")]
 position = Vector2(0, 8)
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -26.0
+theme_override_fonts/normal_font = ExtResource("12_vale1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Item" parent="." instance=ExtResource("13_g22r1")]
+
+[node name="ActionArrow" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = ExtResource("14_i0xc1")

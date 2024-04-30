@@ -1578,7 +1578,7 @@
 					},
 					"sidescroller_scene": {
 						"type": "resource",
-						"value": "res://src/dino/players/lilbighat/Player.tscn"
+						"value": "res://src/dino/players/lilbighat/SSLilBigHat.tscn"
 					}
 				}
 			}

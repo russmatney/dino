@@ -1,12 +1,4 @@
-class_name HarveyBot
-extends HarveyPlayer
-
-## ready #########################################################
-
-func _ready():
-	speed = 70
-
-	super._ready()
+extends TopDownNPC
 
 ## process ########################################################
 
@@ -19,7 +11,8 @@ func _process(_delta):
 
 ## move_dir ########################################################
 
-func get_move_dir():
+func get_move_vector():
+	# TODO check the machine state here (knocked_back? talking?)
 	var ax = action_detector.nearest_action()
 
 	if ax and ax.source:

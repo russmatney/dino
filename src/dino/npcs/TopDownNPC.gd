@@ -43,9 +43,22 @@ var grabbed_by
 @onready var machine = $TDNPCMachine
 @onready var state_label = $StateLabel
 
+var action_detector
+var action_hint
+var action_label
+var action_arrow
+
+var produce_icon
+var seed_icon
+var seed_type_icon
+var tool_icon
+
+var item_seed
+var item_tool
+var item_produce
+
 var notice_box
 var pit_detector
-var action_hint
 
 var heart_particles
 var skull_particles
@@ -56,11 +69,19 @@ func _ready():
 	Hotel.register(self)
 
 	U.set_optional_nodes(self, {
-		action_hint="ActionHint",
 		notice_box="NoticeBox",
 		heart_particles="HeartParticles",
 		skull_particles="SkullParticles",
 		pit_detector="PitDetector",
+
+		action_detector="ActionDetector",
+		action_hint="ActionHint",
+		action_label="ActionLabel",
+		action_arrow="ActionArrow",
+		produce_icon="Item/ProduceIcon",
+		seed_icon="Item/SeedIcon",
+		seed_type_icon="Item/SeedIcon/SeedTypeIcon",
+		tool_icon="Item/ToolIcon",
 		})
 
 	if notice_box:
@@ -80,6 +101,20 @@ func _physics_process(_delta):
 	if notice_box:
 		notice_box_bodies = notice_box_bodies.filter(func(b):
 			return is_instance_valid(b) and not b.is_dead)
+
+	var mv = get_move_vector()
+	if mv != null:
+		move_vector = mv
+
+# overwritten in subclass
+func get_move_vector():
+	return null
+
+## process ###########################################################
+
+func _process(_delta):
+	update_action_label()
+	point_arrow()
 
 ## on_transit ###########################################################
 
@@ -243,26 +278,25 @@ func on_notice_box_exited(body):
 # Supports 'perma-stamp' with ttl=0
 # TODO refactor into shared anim/util lib (juice?)
 func stamp(opts={}):
-	if not Engine.is_editor_hint():
-		var new_scale = opts.get("scale", 0.3)
-		var new_anim = AnimatedSprite2D.new()
-		new_anim.sprite_frames = anim.sprite_frames
-		new_anim.animation = anim.animation
-		new_anim.frame = anim.frame
+	var new_scale = opts.get("scale", 0.3)
+	var new_anim = AnimatedSprite2D.new()
+	new_anim.sprite_frames = anim.sprite_frames
+	new_anim.animation = anim.animation
+	new_anim.frame = anim.frame
 
-		if opts.get("include_action_hint", false) and self.get("action_hint"):
-			var ax_hint = self["action_hint"].duplicate()
-			new_anim.add_child(ax_hint)
+	if opts.get("include_action_hint", false) and self.get("action_hint"):
+		var ax_hint = self["action_hint"].duplicate()
+		new_anim.add_child(ax_hint)
 
-		new_anim.global_position = global_position + anim.position
-		U.add_child_to_level(self, new_anim)
+	new_anim.global_position = global_position + anim.position
+	U.add_child_to_level(self, new_anim)
 
-		var ttl = opts.get("ttl", 0.5)
-		if ttl > 0:
-			var t = create_tween()
-			t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
-			t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
-			t.tween_callback(new_anim.queue_free)
+	var ttl = opts.get("ttl", 0.5)
+	if ttl > 0:
+		var t = create_tween()
+		t.tween_property(new_anim, "scale", Vector2(new_scale, new_scale), ttl)
+		t.parallel().tween_property(new_anim, "modulate:a", 0.3, ttl)
+		t.tween_callback(new_anim.queue_free)
 
 ## follow #########################################################
 
@@ -291,3 +325,126 @@ func thrown_by_player(player):
 func on_player_died(_player):
 	following = null
 	grabbed_by = null
+
+## point_arrow ###########################################################
+
+func point_arrow():
+	if not action_detector:
+		return
+
+	if action_detector.actions.size() == 0:
+		action_arrow.set_visible(false)
+		return
+	action_arrow.set_visible(true)
+
+	var ax = action_detector.nearest_action()
+	if ax and ax.source:
+		var rot = get_angle_to(ax.source.get_global_position()) + (PI / 2)
+		action_arrow.set_rotation(rot)
+
+## action detection ###########################################################
+
+func update_action_label():
+	if not action_label:
+		return
+
+	var ax = action_detector.nearest_action()
+
+	if ax == null:
+		action_label.text = ""
+		return
+
+	action_label.text = "[center]" + ax.label.capitalize() + "[/center]"
+
+	# fade label if action is not current (i.e. not possible?) bit of naming could help here
+	if action_detector.current_action():
+		action_label.modulate.a = 1
+	elif action_detector.find_nearest(action_detector.potential_actions()):
+		action_label.modulate.a = 0.7
+	else:
+		action_label.modulate.a = 0.4
+
+## items ###########################################################
+
+func drop_held_item():
+	produce_icon.set_visible(false)
+	seed_icon.set_visible(false)
+	tool_icon.set_visible(false)
+
+	item_seed = null
+	item_tool = null
+	item_produce = null
+
+func pickup_seed(produce_type):
+	drop_held_item()
+	seed_icon.set_visible(true)
+	seed_type_icon.animation = produce_type
+	item_seed = produce_type
+
+func pickup_produce(produce_type):
+	drop_held_item()
+	produce_icon.set_visible(true)
+	produce_icon.animation = produce_type
+	item_produce = produce_type
+
+func pickup_tool(tool_type):
+	drop_held_item()
+	tool_icon.set_visible(true)
+	tool_icon.animation = tool_type
+	item_tool = tool_type
+
+## seeds ###########################################################
+
+func has_seed():
+	if item_seed:
+		return true
+	else:
+		return false
+
+func plant_seed():
+	var type = item_seed
+
+	item_seed = null
+	drop_held_item()
+
+	return type
+
+## tools, water ###########################################################
+
+func has_tool():
+	if item_tool:
+		return true
+	else:
+		return false
+
+func has_water():
+	if item_tool == "watering-pail":
+		return true
+	else:
+		return false
+
+func water_plant():
+	pass
+
+func action_source_needs_water():
+	for src in action_detector.actions.map(func(ax): return ax.source).filter(func(src): return src):
+		if src.has_method("needs_water"):
+			if src.needs_water():
+				return true
+
+## produce ############################################################
+
+func harvest_produce(produce_type):
+	pickup_produce(produce_type)
+
+func has_produce():
+	if item_produce:
+		return true
+	else:
+		return false
+
+signal produce_delivered(item_produce)
+
+func deliver_produce():
+	produce_delivered.emit(item_produce)
+	drop_held_item()
