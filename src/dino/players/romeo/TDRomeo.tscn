@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_maj6o"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_iqhl2"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_7uu0n"]
-[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/games/shirt/PitDetector.tscn" id="11_m0mi0"]
+[ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/dino/entities/pit/PitDetector.tscn" id="11_m0mi0"]
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/debug-info-text.tres" id="12_kin54"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="13_6ljws"]
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://src/dino/weapons/arrow/arrow.tres" id="14_dylil"]

@@ -2,6 +2,19 @@
 extends MetroZone
 class_name SpikeZone
 
+## zones ##########################################################
+
+const zone_scenes = [
+	# "res://src/games/spike/zones/ZoneGym.tscn",
+	"res://src/games/spike/zones/BasicLevelOne.tscn",
+	"res://src/games/spike/zones/PantryOne.tscn",
+	"res://src/games/spike/zones/PantryTwo.tscn",
+	"res://src/games/spike/zones/FlatLandOne.tscn",
+	# "res://src/games/spike/zones/FlatLandTwo.tscn",
+	"res://src/games/spike/zones/FinalZoneOne.tscn",
+	"res://src/games/spike/zones/FinalZoneTwo.tscn",
+	]
+
 ## ready #####################################################
 
 func _ready():
@@ -28,10 +41,10 @@ func on_quests_complete():
 ## level_complete ######################################################
 
 func handle_level_complete():
-	var curr_level_idx = SpikeData.zone_scenes.find(Navi.current_scene_path())
+	var curr_level_idx = zone_scenes.find(Navi.current_scene_path())
 	var next_level_idx = curr_level_idx + 1
-	if next_level_idx < SpikeData.zone_scenes.size():
-		var next_level = SpikeData.zone_scenes[next_level_idx]
+	if next_level_idx < zone_scenes.size():
+		var next_level = zone_scenes[next_level_idx]
 		Metro.load_zone(next_level)
 	else:
 		Navi.show_win_menu()

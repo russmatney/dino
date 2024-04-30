@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3]
 
-[ext_resource type="Texture2D" uid="uid://ba1yri2mynwtc" path="res://src/games/shirt/assets/dungeon_door_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://ba1yri2mynwtc" path="res://src/dino/entities/doors/dungeon_door_sheet.png" id="1"]
 [ext_resource type="Script" path="res://src/games/ghosts/world/Door.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="4_7ef0q"]

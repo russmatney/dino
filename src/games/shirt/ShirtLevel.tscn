@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0s0hdbrpek1p"]
+
+[ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_ydeh0"]
+[ext_resource type="Script" path="res://src/games/shirt/ShirtLevelGen.gd" id="2_5ovga"]
+[ext_resource type="Script" path="res://src/dino/quests/QuestKillEnemies.gd" id="3_5b44y"]
+[ext_resource type="Script" path="res://src/dino/quests/QuestCollectGems.gd" id="4_e82el"]
+
+[node name="ShirtLevel" type="Node2D"]
+script = ExtResource("1_ydeh0")
+
+[node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
+script = ExtResource("2_5ovga")
+_seed = 3797858323
+tile_size = 24
+room_count = 3
+room_defs_path = "res://src/games/shirt/room_defs.txt"
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="Tilemaps" type="Node2D" parent="."]
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="QuestKillEnemies" type="Node" parent="."]
+script = ExtResource("3_5b44y")
+
+[node name="QuestCollectGems" type="Node" parent="."]
+script = ExtResource("4_e82el")

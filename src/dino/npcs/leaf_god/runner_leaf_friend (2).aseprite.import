@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dv03lhhm6irg5"
+path="res://.godot/imported/runner_leaf_friend (2).aseprite-370efe0a076fab6a03869fe781c99d3b.res"
+
+[deps]
+
+source_file="res://src/dino/npcs/leaf_god/runner_leaf_friend (2).aseprite"
+dest_files=["res://.godot/imported/runner_leaf_friend (2).aseprite-370efe0a076fab6a03869fe781c99d3b.res"]
+
+[params]
+

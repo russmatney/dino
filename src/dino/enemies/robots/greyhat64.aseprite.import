@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ccdgvix8bcl0r"
+path="res://.godot/imported/greyhat64.aseprite-366513aa7886a6854d6771b60a302a68.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/robots/greyhat64.aseprite"
+dest_files=["res://.godot/imported/greyhat64.aseprite-366513aa7886a6854d6771b60a302a68.res"]
+
+[params]
+
