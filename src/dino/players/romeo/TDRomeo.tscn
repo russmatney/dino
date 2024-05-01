@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cc2a6508uv48d" path="res://src/dino/players/romeo/assets/romeo.png" id="2_5ymh8"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_ucswh"]
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDPlayerMachine.tscn" id="4_82nku"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_uqxx0"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_q444v"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="7_coyae"]
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://addons/core/assets/lights/small_light1_nobg_sheet.png" id="8_maj6o"]
@@ -536,8 +535,6 @@ collision_mask = 2072
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_y3cyc")
-
-[node name="LookPOF" parent="." instance=ExtResource("5_uqxx0")]
 
 [node name="ActionHint" parent="." instance=ExtResource("6_q444v")]
 position = Vector2(0, -32)

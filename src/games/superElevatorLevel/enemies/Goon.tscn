@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://addons/core/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ox2po"]
 [ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://addons/core/beehive/beatemup/BEU_character_shadow_sheet.png" id="2_xyux5"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_k27u2"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_5hwwr"]
 [ext_resource type="Texture2D" uid="uid://by8kuopodsemm" path="res://src/games/superElevatorLevel/enemies/BEU_goon.png" id="5_wxukf"]
 [ext_resource type="Material" uid="uid://bxr173oof70cm" path="res://src/games/superElevatorLevel/enemies/GoonAlt2.tres" id="6_wwcw8"]
 
@@ -448,8 +447,6 @@ bbcode_enabled = true
 text = "[center]State"
 fit_content = true
 scroll_active = false
-
-[node name="CamPOF" parent="." instance=ExtResource("5_5hwwr")]
 
 [node name="NoticeBox" type="Area2D" parent="."]
 visible = false

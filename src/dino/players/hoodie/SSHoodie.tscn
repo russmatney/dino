@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_70y86"]
 [ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="5_dn731"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_nylqu"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_xc6oa"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/dino/players/greyhat_jetflame_sheet.png" id="8_b7l5m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2nas5"]
@@ -322,12 +321,6 @@ script = ExtResource("5_dn731")
 shape = SubResource("RectangleShape2D_u3mle")
 
 [node name="ActionHint" parent="." instance=ExtResource("6_nylqu")]
-
-[node name="LookPOF" parent="." instance=ExtResource("7_xc6oa")]
-position = Vector2(64, 0)
-
-[node name="LookPOF2" parent="." instance=ExtResource("7_xc6oa")]
-position = Vector2(-1, -180)
 
 [node name="BulletPosition" type="Marker2D" parent="."]
 position = Vector2(-12, -12)

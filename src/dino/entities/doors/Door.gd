@@ -5,7 +5,6 @@ extends Node2D
 @onready var anim = $AnimatedSprite2D
 @onready var front_action_area = $FrontActionArea
 @onready var back_action_area = $BackActionArea
-@onready var cam_pof = $CamPOF
 
 ##################################################################
 # actions
@@ -57,18 +56,16 @@ func _on_animation_finished():
 		anim.play("open")
 		if collision_shape:
 			collision_shape.set_disabled.call_deferred(true)
-		cam_pof.deactivate()
 
 	elif anim.animation == "closing":
 		anim.play("closed")
 		collision_shape.set_disabled.call_deferred(false)
-		cam_pof.deactivate()
 
 ##################################################################
 # on_room_entered
 
 func on_room_entered():
-	# replay anims to get anim-finished side effects (cam-pof deactivate)
+	# replay anims to get anim-finished side effects (cam deactivate)
 	update_state()
 
 ##################################################################
@@ -78,14 +75,12 @@ func open(_actor=null):
 	state = "open"
 	if anim:
 		anim.play("opening")
-		cam_pof.activate()
 
 
 func close(_actor=null):
 	state = "closed"
 	if anim:
 		anim.play("closing")
-		cam_pof.activate()
 
 ##################################################################
 # is

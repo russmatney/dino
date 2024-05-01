@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://src/dino/bosses/SSBoss.gd" id="1_5hjiw"]
 [ext_resource type="SpriteFrames" uid="uid://basjfrbrmdubh" path="res://src/dino/bosses/beefstronaut/beefstronaut_sprite_frames.tres" id="2_o0rv1"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="5_15lvx"]
 [ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://src/dino/bosses/sidescroller_machine/SSBossMachine.tscn" id="7_7v6vr"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="12_7xc6l"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="13_qnfjf"]
@@ -33,8 +32,6 @@ animation = &"warp_leave"
 [node name="LineOfSight" type="RayCast2D" parent="."]
 target_position = Vector2(0, 150)
 collision_mask = 2
-
-[node name="CamPOF" parent="." instance=ExtResource("5_15lvx")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("12_7xc6l")

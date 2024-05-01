@@ -6,7 +6,7 @@ class_name SSPlayer
 func _get_configuration_warnings():
 	return U._config_warning(self, {expected_nodes=[
 		"SSMachine", "StateLabel", "AnimatedSprite2D",
-		"ActionDetector", "ActionHint", "LookPOF",
+		"ActionDetector", "ActionHint",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle", "run", "jump", "air", "fall",
 			"knocked_back", "dying", "dead",]}})
@@ -98,13 +98,11 @@ var death_count: int = 0
 @onready var action_hint = $ActionHint
 
 var jet_anim
-var cam_pof
 var bumpbox
 var nav_agent
 var notif_label
 var warp_cast
 
-var look_pof
 var light
 var light_occluder
 
@@ -154,7 +152,6 @@ func _ready():
 		jet_anim="Jet",
 		notif_label="NotifLabel",
 		pcam="PlayerCamera",
-		cam_pof="CamPOF",
 		nav_agent="NavigationAgent2D",
 		bumpbox="BumpBox",
 		high_wall_check="HighWallCheck",
@@ -163,7 +160,6 @@ func _ready():
 		heart_particles="HeartParticles",
 		skull_particles="SkullParticles",
 		warp_cast="WarpCast",
-		look_pof="LookPOF",
 		light_occluder="LightOccluder2D",
 		light="PointLight2D",
 		quick_select_menu="QuickSelect"
@@ -382,7 +378,6 @@ func update_facing():
 	for w in weapon_set.list().filter(func(w): return w.should_flip):
 		U.update_h_flip(facing_vector, w)
 
-	U.update_h_flip(facing_vector, look_pof)
 	U.update_h_flip(facing_vector, light_occluder)
 
 func flip_facing():

@@ -3,7 +3,6 @@
 [ext_resource type="SpriteFrames" uid="uid://buwix7wp71vf1" path="res://src/dino/entities/doors/DoorSpriteFrames.tres" id="1_5m0uh"]
 [ext_resource type="Script" path="res://src/dino/entities/doors/Door.gd" id="1_arj2e"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_ox5jh"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_oifqr"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="5_f3480"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1rxf"]
@@ -52,7 +51,6 @@ position = Vector2(36, 0)
 shape = SubResource("RectangleShape2D_o5q0k")
 debug_color = Color(0.733094, 0.288028, 0.92338, 0.42)
 
-[node name="CamPOF" parent="." instance=ExtResource("4_oifqr")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(4, 4)

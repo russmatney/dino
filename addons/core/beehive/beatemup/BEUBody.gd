@@ -57,7 +57,6 @@ var dying_knockback_speed: int = 11000
 var punch_box
 var grab_box
 var notice_box
-var cam_pof
 
 var move_vector: Vector2
 var facing_vector: Vector2
@@ -74,7 +73,7 @@ var weapon_set: WeaponSet = WeaponSet.new("beu")
 func _ready():
 	Hotel.register(self)
 	if not Engine.is_editor_hint():
-		U.set_optional_nodes(self, {cam_pof="CamPOF"})
+		U.set_optional_nodes(self, {})
 
 		machine.transitioned.connect(_on_transit)
 

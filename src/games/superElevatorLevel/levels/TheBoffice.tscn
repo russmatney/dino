@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bn6lhbid1dt8i" path="res://src/dino/entities/SpawnPoint.tscn" id="3_exyrv"]
 [ext_resource type="Texture2D" uid="uid://cubr06q28sppp" path="res://src/games/superElevatorLevel/assets/SEL_Boffice_background_sheet.png" id="3_mppqa"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_kx8kb"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="6_eonxw"]
 [ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="7_fh3ik"]
 [ext_resource type="PackedScene" uid="uid://rm4sl5w7gwyy" path="res://src/games/superElevatorLevel/enemies/Boss.tscn" id="8_kyull"]
 
@@ -34,18 +33,6 @@ position = Vector2(128, 64)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_kx8kb")]
 position = Vector2(160, 136)
-
-[node name="CamPOA" parent="." instance=ExtResource("6_eonxw")]
-position = Vector2(80, 48)
-
-[node name="CamPOA2" parent="." instance=ExtResource("6_eonxw")]
-position = Vector2(240, 48)
-
-[node name="CamPOA3" parent="." instance=ExtResource("6_eonxw")]
-position = Vector2(240, 160)
-
-[node name="CamPOA4" parent="." instance=ExtResource("6_eonxw")]
-position = Vector2(80, 160)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(160, 104)

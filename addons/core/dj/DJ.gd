@@ -81,9 +81,8 @@ func interrupt_sound(sound_map, name):
 	if name in sound_map:
 		for s in sound_map[name]:
 			# stop any of these that are playing
-			if s.is_playing():
-				s.stop()
-				return s
+			SoundManager.stop_sound(s)
+			return s
 	else:
 		Log.warn("no sound for name", name)
 

@@ -45,7 +45,6 @@ signal stunned(boss)
 @onready var state_label = $StateLabel
 
 var notif_label
-var cam_pof
 var nav_agent: NavigationAgent2D
 var skull_particles
 var attack_box
@@ -63,7 +62,6 @@ func _ready():
 
 	U.set_optional_nodes(self, {
 		notif_label="NotifLabel",
-		cam_pof="CamPOF",
 		nav_agent="NavigationAgent2D",
 		skull_particles="SkullParticles",
 		attack_box="AttackBox",

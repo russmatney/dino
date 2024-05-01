@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://src/games/superElevatorLevel/levels/Elevator.gd" id="1_b31x7"]
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="2_tb4r3"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="3_8sm5g"]
 [ext_resource type="Texture2D" uid="uid://c7q3vnjij1gau" path="res://src/games/superElevatorLevel/assets/SEL_Elevator_background_sheet.png" id="3_jpu11"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_hddpq"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/games/superElevatorLevel/enemies/Goon.tscn" id="5_glxo7"]
@@ -19,18 +18,6 @@ layer_0/tile_data = PackedInt32Array(1835045, 131073, 3, 1769509, 131073, 2, 720
 offset_right = 448.0
 offset_bottom = 320.0
 texture = ExtResource("3_jpu11")
-
-[node name="CamPOF" parent="." instance=ExtResource("3_8sm5g")]
-position = Vector2(128, 96)
-
-[node name="CamPOF2" parent="." instance=ExtResource("3_8sm5g")]
-position = Vector2(320, 216)
-
-[node name="CamPOF3" parent="." instance=ExtResource("3_8sm5g")]
-position = Vector2(128, 216)
-
-[node name="CamPOF4" parent="." instance=ExtResource("3_8sm5g")]
-position = Vector2(320, 96)
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_hddpq")]
 position = Vector2(224, 192)

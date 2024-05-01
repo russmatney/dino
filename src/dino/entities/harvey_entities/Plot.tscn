@@ -12,7 +12,6 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="10_cm7gh"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="11_5d4ib"]
 [ext_resource type="Theme" uid="uid://bx2wou2suu4mp" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="11_r1ole"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="12_1v7m4"]
 
 [sub_resource type="ShaderMaterial" id="8"]
 resource_local_to_scene = true
@@ -169,4 +168,3 @@ position = Vector2(16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 shape = SubResource("7")
 
-[node name="CamPOA" parent="." instance=ExtResource("12_1v7m4")]

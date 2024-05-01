@@ -62,7 +62,6 @@ signal knocked_back(enemy)
 var hopbox
 
 var notif_label
-var cam_pof
 var nav_agent
 var skull_particles
 var attack_box
@@ -81,7 +80,6 @@ var max_y: float = 5000.0
 func _ready():
 	U.set_optional_nodes(self, {
 		notif_label="NotifLabel",
-		cam_pof="CamPOF",
 		nav_agent="NavigationAgent2D",
 		skull_particles="SkullParticles",
 		los="LineOfSight",

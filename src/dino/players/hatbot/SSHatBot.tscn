@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://src/dino/players/SSPlayer.gd" id="1_blpj0"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
 [ext_resource type="Theme" path="res://src/themes/StateLabelTheme.tres" id="3_gwyf6"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="4_h4hiv"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/dino/players/greyhat_jetflame_sheet.png" id="6_7oqkp"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_lxjfb"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/sidescroller_machine/SSMachine.tscn" id="7_rj434"]
@@ -274,12 +273,6 @@ scroll_active = false
 
 [node name="BulletPosition" type="Marker2D" parent="."]
 position = Vector2(-12, -12)
-
-[node name="LookPOF" parent="." instance=ExtResource("4_h4hiv")]
-position = Vector2(-182, -14)
-
-[node name="LookPOF2" parent="." instance=ExtResource("4_h4hiv")]
-position = Vector2(-1, -180)
 
 [node name="Jet" type="AnimatedSprite2D" parent="."]
 visible = false

@@ -2,8 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_moefn"]
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="1_ypp1l"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="3_26a7u"]
-[ext_resource type="Script" path="res://addons/core/camera/CamPOF.gd" id="4_5glld"]
 
 [node name="05Crossroads" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_ypp1l")
@@ -17,31 +15,3 @@ layer_0/tile_data = PackedInt32Array(-393224, 1, 0, -327688, 131073, 0, -262152,
 visible = false
 collision_layer = 0
 collision_mask = 2
-
-[node name="CamPOA" parent="." groups=["auto_poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(-72, -56)
-
-[node name="@CamPOA@53719" parent="." groups=["auto_poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(72, 56)
-
-[node name="@CamPOA@53720" parent="." groups=["auto_poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(72, -56)
-
-[node name="@CamPOA@53721" parent="." groups=["auto_poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(-72, 56)
-
-[node name="@Marker2D@22071" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(-72, -56)
-script = ExtResource("4_5glld")
-
-[node name="@Marker2D@22072" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(72, 56)
-script = ExtResource("4_5glld")
-
-[node name="@Marker2D@22073" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(72, -56)
-script = ExtResource("4_5glld")
-
-[node name="@Marker2D@22074" type="Marker2D" parent="." groups=["auto_poas", "poas"] instance=ExtResource("3_26a7u")]
-position = Vector2(-72, 56)
-script = ExtResource("4_5glld")

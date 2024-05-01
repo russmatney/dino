@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_r4nvx"]
 [ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="5_3unf7"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_f0aop"]
-[ext_resource type="PackedScene" uid="uid://wkwt20kwv7ka" path="res://addons/core/camera/CamPOF.tscn" id="7_5ew82"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="8_3w1a4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_odek5"]
@@ -65,8 +64,5 @@ script = ExtResource("5_3unf7")
 shape = SubResource("RectangleShape2D_pc7iw")
 
 [node name="ActionHint" parent="." instance=ExtResource("6_f0aop")]
-
-[node name="LookPOF" parent="." instance=ExtResource("7_5ew82")]
-position = Vector2(64, 0)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("8_3w1a4")]

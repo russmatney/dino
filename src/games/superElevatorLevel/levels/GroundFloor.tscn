@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/games/superElevatorLevel/enemies/Goon.tscn" id="2_jnvos"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="3_17tte"]
 [ext_resource type="Texture2D" uid="uid://cx4vaf38c4f4v" path="res://src/games/superElevatorLevel/assets/SEL_GroundFloor_background_sheet.png" id="3_prgxi"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="5_s74g6"]
 [ext_resource type="PackedScene" uid="uid://bn6lhbid1dt8i" path="res://src/dino/entities/SpawnPoint.tscn" id="6_1ohb7"]
 [ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="8_o0jmn"]
 
@@ -30,18 +29,6 @@ display_name = "Tom"
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_17tte")]
 position = Vector2(230, 249)
-
-[node name="CamPOA" parent="." instance=ExtResource("5_s74g6")]
-position = Vector2(96, 80)
-
-[node name="CamPOA2" parent="." instance=ExtResource("5_s74g6")]
-position = Vector2(96, 240)
-
-[node name="CamPOA3" parent="." instance=ExtResource("5_s74g6")]
-position = Vector2(353, 80)
-
-[node name="CamPOA4" parent="." instance=ExtResource("5_s74g6")]
-position = Vector2(353, 240)
 
 [node name="SpawnPoint" parent="." instance=ExtResource("6_1ohb7")]
 position = Vector2(122, 122)

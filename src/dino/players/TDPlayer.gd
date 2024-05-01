@@ -6,7 +6,7 @@ class_name TDPlayer
 func _get_configuration_warnings():
 	return U._config_warning(self, {expected_nodes=[
 		"TDPlayerMachine", "StateLabel", "AnimatedSprite2D",
-		"ActionDetector", "ActionHint", "LookPOF",
+		"ActionDetector", "ActionHint",
 		], expected_animations={"AnimatedSprite2D": [
 			"idle_down", "idle_up", "idle_right",
 			"run_down", "run_up", "run_right",]}})
@@ -65,7 +65,6 @@ var item_produce
 var notif_label
 var hurt_box
 var pit_detector
-var look_pof
 var heart_particles
 var skull_particles
 
@@ -99,7 +98,6 @@ func _ready():
 		heart_particles="HeartParticles",
 		skull_particles="SkullParticles",
 		pit_detector="PitDetector",
-		look_pof="LookPOF",
 		quick_select_menu="QuickSelect",
 		action_label="ActionLabel",
 		action_arrow="ActionArrow",
@@ -297,7 +295,6 @@ func update_facing():
 		facing_vector = move_vector
 	# all art should face RIGHT by default
 	anim.flip_h = facing_vector.x < 0
-	U.update_h_flip(facing_vector, look_pof)
 
 func face_body(body):
 	if not body:

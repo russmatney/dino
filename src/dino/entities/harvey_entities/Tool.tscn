@@ -5,7 +5,6 @@
 [ext_resource type="Theme" uid="uid://bx2wou2suu4mp" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="3"]
 [ext_resource type="Shader" path="res://src/dino/entities/harvey_entities/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_grsnf"]
-[ext_resource type="PackedScene" uid="uid://bgqugpcbqak27" path="res://addons/core/camera/CamPOA.tscn" id="6_8thnk"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 7.0
@@ -50,5 +49,3 @@ position = Vector2(8, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 shape = SubResource("2")
 
-[node name="CamPOA" parent="." instance=ExtResource("6_8thnk")]
-position = Vector2(8, 8)

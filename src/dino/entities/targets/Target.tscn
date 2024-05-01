@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://src/dino/entities/targets/Target.gd" id="1_7124b"]
 [ext_resource type="SpriteFrames" uid="uid://d1uqrh57tjmm6" path="res://src/dino/entities/targets/target_sprite_frames.tres" id="2_c7m12"]
-[ext_resource type="PackedScene" uid="uid://c3xlrhgvm4nmf" path="res://addons/core/camera/CamPOI.tscn" id="3_r343g"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 16.1245
@@ -20,6 +19,3 @@ shape = SubResource("1")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_c7m12")
 animation = &"target"
-
-[node name="CamPOI" parent="." instance=ExtResource("3_r343g")]
-importance = 0.36
