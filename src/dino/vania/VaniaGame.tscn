@@ -23,6 +23,7 @@ ease = 2
 script = ExtResource("1_rrc8s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]

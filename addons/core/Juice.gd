@@ -12,6 +12,12 @@ static func slowmo_stop():
 	Debug.notif("Back to full speed")
 	Juice.stop_slowmo("basic_slowmo")
 
+
+## process ####################################################
+
+func _process(delta):
+	process_shake(delta)
+
 ## slowmo #############################################################
 
 signal slowmo_stopped(label)
@@ -63,7 +69,7 @@ func freezeframe(opts={}):
 	var time_scale = opts.get("time_scale", 0.5)
 	var duration = opts.get("duration", 0.2)
 	var trauma = opts.get("trauma", 0.1)
-	# inc_trauma(trauma)
+	inc_trauma(trauma)
 	Juice.start_slowmo(nm, time_scale)
 	await get_tree().create_timer(duration, true, false, true).timeout
 	Juice.stop_slowmo(nm)
@@ -78,8 +84,16 @@ func hitstop(opts={}):
 
 ## screenshake #############################################################
 
-func inc_trauma(inc = 0.1):
-	Log.warn("screenshake not impled")
+# https://youtu.be/tu-Qe66AvtY?t=260
+var trauma = 0.0
+var trauma_decrement_factor = 0.7
+
+func inc_trauma(inc=0.1):
+	trauma += inc
+	trauma = clamp(trauma, 0.0, 1.0)
+
+func set_trauma(val):
+	trauma = clamp(val, 0.0, 1.0)
 
 func screenshake(trauma = 0.3):
 	inc_trauma(trauma)
@@ -88,41 +102,51 @@ func screenshake_cancel():
 	Log.warn("screenshake cancel not impled")
 
 
-
-## old screenshake impl
-
-func _physics_process(delta):
-	process_shake(delta)
-
-
-# https://youtu.be/tu-Qe66AvtY?t=260
-var trauma = 0.0
-var trauma_decrement_factor = 0.7
-
-# func inc_trauma(inc):
-# 	trauma += inc
-# 	trauma = clamp(trauma, 0.0, 1.0)
-func set_trauma(val):
-	trauma = clamp(val, 0.0, 1.0)
-
 var shake_offset
 var shake_rotation
 var trans_noise_ctx
 var rot_noise_ctx
+
+var original_offset = Vector2()
+var original_rotation = 0
+
+# func _ready():
+# 	var cam = current_camera()
+# 	if cam:
+# 		# TODO update to hook into camera creation/is_current
+# 		original_offset = cam.offset
+# 		original_rotation = cam.rotation
+
+func current_camera():
+	return get_viewport().get_camera_2d()
+
+func current_pcam_host():
+	var cam = current_camera()
+	if cam:
+		for ch in cam.get_children():
+			if ch is PhantomCameraHost:
+				return ch
+
+func current_pcam():
+	var host = current_pcam_host()
+	if host:
+		return host.get_active_pcam()
 
 func screenshake_reset():
 	shake_offset = null
 	shake_rotation = null
 	trans_noise_ctx = null
 	rot_noise_ctx = null
-	# These 'originals' could use a better name
-	# and may need to be updated by hand if an external something or other wants camera control
-	# self.offset = original_offset
-	# self.rotation = original_rotation
+
+	var cam = current_camera()
+	var pcam = current_pcam()
+	if cam:
+		cam.offset = original_offset
+	if pcam:
+		pcam.rotation = original_rotation
 
 func process_shake(delta):
 	if trauma > 0:
-		# Debug.debug_label("[CAM] Trauma: ", trauma)
 		trauma -= trauma_decrement_factor * delta
 		trauma = clamp(trauma, 0.0, 1.0)
 		if trauma == 0.0:
@@ -135,10 +159,13 @@ func process_shake(delta):
 				rot_noise_ctx = {"noise": new_noise(noise_inputs), "t": 0}
 			screenshake_translational(trans_noise_ctx, delta)
 			screenshake_rotational(rot_noise_ctx, delta)
-	# if shake_offset:
-	# 	self.offset = original_offset + shake_offset
-	# if shake_rotation:
-	# 	self.rotation = original_rotation + shake_rotation
+
+	var cam = current_camera()
+	var pcam = current_pcam()
+	if cam and shake_offset:
+		cam.offset = original_offset + shake_offset
+	if pcam and shake_rotation:
+		pcam.set_rotation(original_rotation + shake_rotation)
 
 var noise_inputs = {
 	"seed": 4,
