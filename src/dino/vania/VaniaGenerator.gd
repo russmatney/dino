@@ -14,7 +14,7 @@ func _init():
 ## add_rooms ##########################################################
 
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
-	var builder := MetSys.get_map_builder()
+	var builder = MetSys.get_map_builder()
 
 	place_rooms(room_defs)
 
@@ -29,7 +29,7 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 			set_room_scene_path(room_def)
 
 		for coord in room_def.map_cells:
-			var cell := builder.create_cell(coord)
+			var cell = builder.create_cell(coord)
 			cell.color = room_def.bg_color
 			for i in 4:
 				cell.borders[i] = 0
@@ -163,7 +163,7 @@ func build_and_prep_scene(room_def, _opts={}):
 	room.is_debug = false
 
 	# pack and write to room_def.room_path
-	var ps := PackedScene.new()
+	var ps = PackedScene.new()
 	ps.pack(room)
 	var error = ResourceSaver.save(ps, room_def.room_path)
 	if error != Error.OK:

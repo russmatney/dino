@@ -1,17 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=14 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
-[ext_resource type="Script" path="res://src/dino/vania/VaniaEditor.gd" id="7_5vken"]
-[ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="8_7xeo0"]
-[ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="9_0j2lb"]
-[ext_resource type="Theme" uid="uid://dx8buylqr7olg" path="res://src/themes/EditorPopupMenus.tres" id="10_6pplq"]
-[ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="11_gsjqq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_n8r60"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_d1x2y"]
-[ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="12_iqnk7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
 [ext_resource type="PackedScene" uid="uid://cg0nqfx0pc4r6" path="res://src/dino/entities/bushes/Bush1.tscn" id="15_1p30g"]
@@ -19,17 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://cvbbaml4gfs0v" path="res://src/dino/entities/bushes/Bush2.tscn" id="16_igr1p"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li3ee"]
-content_margin_left = 16.0
-content_margin_right = 16.0
-
 [sub_resource type="Resource" id="Resource_fx1bk"]
 script = ExtResource("12_d1x2y")
 duration = 1.0
 transition = 0
 ease = 2
 
-[node name="VaniaGame" type="Node2D"]
+[node name="VaniaGame" type="Node2D" groups=["vania_game"]]
 script = ExtResource("1_rrc8s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -47,257 +37,6 @@ offset_top = 174.0
 offset_right = 240.0
 offset_bottom = 334.0
 area = Vector2i(7, 7)
-
-[node name="VaniaEditor" type="CanvasLayer" parent="."]
-script = ExtResource("7_5vken")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VaniaEditor/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer"]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-theme = ExtResource("8_7xeo0")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("9_0j2lb")
-bbcode_enabled = true
-text = "[center]Editor[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="TabContainer" type="TabContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Regeneration" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 24
-bbcode_enabled = true
-text = "[center]Regeneration[/center]"
-fit_content = true
-scroll_active = false
-
-[node name="MarginContainer" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer2" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="SeedLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer2"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "seed: x"
-fit_content = true
-scroll_active = false
-
-[node name="PanelContainer7" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="RoomCountLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer7"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "rooms: 3"
-fit_content = true
-scroll_active = false
-
-[node name="PanelContainer3" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="CurrentRoomLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer3"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "room: Blah.tscn"
-fit_content = true
-scroll_active = false
-
-[node name="PanelContainer5" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="NeighborsLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer5"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "neighbors: []"
-fit_content = true
-scroll_active = false
-
-[node name="PanelContainer4" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4"]
-layout_mode = 2
-
-[node name="RoomEntitiesLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "entities: []"
-fit_content = true
-scroll_active = false
-
-[node name="EditEntitiesMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("10_6pplq")
-text = "Edit Entities"
-
-[node name="PanelContainer6" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6"]
-layout_mode = 2
-
-[node name="RoomTilesLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "tiles: []"
-fit_content = true
-scroll_active = false
-
-[node name="EditTilesetMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("10_6pplq")
-text = "Edit Tileset"
-
-[node name="PanelContainer8" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8"]
-layout_mode = 2
-
-[node name="RoomConstraintsLabel" type="RichTextLabel" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("9_0j2lb")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "constraints: []"
-fit_content = true
-scroll_active = false
-
-[node name="EditConstraintsMenuButton" type="MenuButton" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("10_6pplq")
-text = "Edit Constraints"
-
-[node name="MarginContainer2" type="MarginContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration"]
-custom_minimum_size = Vector2(450, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("11_gsjqq")
-
-[node name="RegenButtonList" type="VBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="EditRoomDefButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-theme = ExtResource("12_iqnk7")
-text = "Edit Room Def"
-
-[node name="RerenderBackgroundButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("12_iqnk7")
-text = "Rerender Background"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
-layout_mode = 2
-
-[node name="IncRoomCountButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_iqnk7")
-text = "++rooms"
-
-[node name="DecRoomCountButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("12_iqnk7")
-text = "--rooms"
-
-[node name="RegenOtherRoomsButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("12_iqnk7")
-text = "Regen Other Rooms"
-
-[node name="ReloadThisRoomButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("12_iqnk7")
-text = "Reload room"
-
-[node name="RespawnPlayerButton" type="Button" parent="VaniaEditor/HBoxContainer/PanelContainer/VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("12_iqnk7")
-text = "Respawn player"
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
 script = ExtResource("11_n8r60")

@@ -1,5 +1,4 @@
-@tool
-extends CanvasLayer
+extends PanelContainer
 
 ## vars ######################################################
 
@@ -29,24 +28,16 @@ var current_room_def: VaniaRoomDef
 @onready var dec_room_count_button = $%DecRoomCountButton
 @onready var rerender_background_button = $%RerenderBackgroundButton
 
-## enter tree ######################################################
-
-func _enter_tree():
-	var p = get_parent()
-	if p is VaniaGame:
-		game = p
-
 ## ready ######################################################
 
 func _ready():
 	if Engine.is_editor_hint():
 		return
 	if not game:
-		Log.warn("VaniaEditor could not find game")
+		game = get_tree().get_first_node_in_group("vania_game")
+	if not game:
+		Log.warn("VaniaEditor could not find 'vania_game' node")
 		return
-
-	Debug.debug_toggled.connect(on_debug_toggled)
-	set_visible(Debug.debugging)
 
 	game.room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 	update_room_def()
@@ -59,9 +50,6 @@ func _ready():
 	inc_room_count_button.pressed.connect(on_inc_room_count_pressed)
 	dec_room_count_button.pressed.connect(on_dec_room_count_pressed)
 	rerender_background_button.pressed.connect(on_rerender_background_pressed)
-
-func on_debug_toggled(debugging):
-	set_visible(debugging)
 
 func on_room_loaded():
 	current_room_def = game.current_room_def()

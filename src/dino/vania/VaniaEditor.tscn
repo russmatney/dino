@@ -1,0 +1,264 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjw3ncbv86qnb"]
+
+[ext_resource type="Script" path="res://src/dino/vania/VaniaEditor.gd" id="1_hnpwd"]
+[ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="2_ne4tv"]
+[ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="3_oi0lk"]
+[ext_resource type="Theme" uid="uid://dx8buylqr7olg" path="res://src/themes/EditorPopupMenus.tres" id="4_jv3lv"]
+[ext_resource type="Theme" uid="uid://kkhtvo7doye6" path="res://src/themes/EditorButtonList.tres" id="5_7d4ij"]
+[ext_resource type="Theme" uid="uid://bvd007nsath2b" path="res://src/themes/EditorButtonTheme.tres" id="6_piky4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_li3ee"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+
+[node name="VaniaEditor" type="PanelContainer"]
+custom_minimum_size = Vector2(600, 0)
+offset_left = 4.0
+offset_right = 604.0
+offset_bottom = 1080.0
+theme = ExtResource("2_ne4tv")
+script = ExtResource("1_hnpwd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_oi0lk")
+bbcode_enabled = true
+text = "[center]Editor[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Regeneration" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration"]
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Regeneration[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="SeedLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "seed: x"
+fit_content = true
+scroll_active = false
+
+[node name="PanelContainer7" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="RoomCountLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer7"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "rooms: 3"
+fit_content = true
+scroll_active = false
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="CurrentRoomLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer3"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "room: Blah.tscn"
+fit_content = true
+scroll_active = false
+
+[node name="PanelContainer5" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="NeighborsLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer5"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "neighbors: []"
+fit_content = true
+scroll_active = false
+
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer4"]
+layout_mode = 2
+
+[node name="RoomEntitiesLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "entities: []"
+fit_content = true
+scroll_active = false
+
+[node name="EditEntitiesMenuButton" type="MenuButton" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer4/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_jv3lv")
+text = "Edit Entities"
+
+[node name="PanelContainer6" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer6"]
+layout_mode = 2
+
+[node name="RoomTilesLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "tiles: []"
+fit_content = true
+scroll_active = false
+
+[node name="EditTilesetMenuButton" type="MenuButton" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer6/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_jv3lv")
+text = "Edit Tileset"
+
+[node name="PanelContainer8" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8"]
+layout_mode = 2
+
+[node name="RoomConstraintsLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "constraints: []"
+fit_content = true
+scroll_active = false
+
+[node name="EditConstraintsMenuButton" type="MenuButton" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_jv3lv")
+text = "Edit Constraints"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_7d4ij")
+
+[node name="RegenButtonList" type="VBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EditRoomDefButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("6_piky4")
+text = "Edit Room Def"
+
+[node name="RerenderBackgroundButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_piky4")
+text = "Rerender Background"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+layout_mode = 2
+
+[node name="IncRoomCountButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_piky4")
+text = "++rooms"
+
+[node name="DecRoomCountButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("6_piky4")
+text = "--rooms"
+
+[node name="RegenOtherRoomsButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_piky4")
+text = "Regen Other Rooms"
+
+[node name="ReloadThisRoomButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_piky4")
+text = "Reload room"
+
+[node name="RespawnPlayerButton" type="Button" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer/RegenButtonList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_piky4")
+text = "Respawn player"
+
+[node name="VaniaEditor" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VaniaEditor/HBoxContainer"]
+layout_mode = 2

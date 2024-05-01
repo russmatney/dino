@@ -49,8 +49,10 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
+current_tab = 5
 
 [node name="Player" parent="PanelContainer/VBoxContainer/TabContainer" instance=ExtResource("7_ipd6p")]
+visible = false
 layout_mode = 2
 
 [node name="Options" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
@@ -109,10 +111,10 @@ tab_alignment = 1
 layout_mode = 2
 
 [node name="Editor" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="VaniaEditor" parent="PanelContainer/VBoxContainer/TabContainer/Editor" instance=ExtResource("11_sjvky")]
+layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
