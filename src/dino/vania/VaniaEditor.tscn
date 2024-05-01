@@ -13,8 +13,7 @@ content_margin_right = 16.0
 
 [node name="VaniaEditor" type="PanelContainer"]
 custom_minimum_size = Vector2(600, 0)
-offset_left = 4.0
-offset_right = 604.0
+offset_right = 600.0
 offset_bottom = 1080.0
 theme = ExtResource("2_ne4tv")
 script = ExtResource("1_hnpwd")
@@ -250,15 +249,3 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("6_piky4")
 text = "Respawn player"
-
-[node name="VaniaEditor" type="CanvasLayer" parent="."]
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VaniaEditor"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VaniaEditor/HBoxContainer"]
-layout_mode = 2

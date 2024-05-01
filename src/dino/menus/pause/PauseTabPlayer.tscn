@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c7jw4eir0vw0f" path="res://src/dino/players/hatbot/assets/greyhat_portrait1.png" id="1_qwsl8"]
 [ext_resource type="PackedScene" uid="uid://pb7ag8sxpept" path="res://src/components/entity_button/EntityButton.tscn" id="5_jgt1l"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="6_b5o0c"]
-[ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="6_i2ugf"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="6_i2ugf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_la6u1"]
 [ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/components/WeaponIcon.tscn" id="8_kmyt0"]
 [ext_resource type="Script" path="res://src/dino/weapons/DinoWeaponEntity.gd" id="9_bfb4x"]
@@ -60,7 +60,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 80)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
@@ -110,7 +110,7 @@ fit_content = true
 scroll_active = false
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(2.08165e-12, 300)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
@@ -146,7 +146,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
-custom_minimum_size = Vector2(2.08165e-12, 80)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2"]
@@ -200,7 +200,7 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2"]
-custom_minimum_size = Vector2(2.08165e-12, 300)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer2"]
