@@ -62,7 +62,7 @@ func _unhandled_input(event):
 		# stamp({scale=2.0, ttl=1.0, include_action_hint=true})
 		# action_detector.execute_current_action()
 		# action_detector.current_action()
-		Cam.hitstop("player_hitstop", 0.5, 0.2)
+		Juice.hitstop({name="player_hitstop", time_scale=0.5, duration=0.2})
 		toss_plug()
 
 	# action cycling

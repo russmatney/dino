@@ -33,7 +33,7 @@ func kill():
 	# Debug.notif("Target Destroyed")
 	Sounds.play(Sounds.S.target_kill)
 	anim.play("pop")
-	Cam.freezeframe("target-destroyed", 0.05, 0.4)
+	Juice.freezeframe({name="target-destroyed", time_scale=0.05, duration=0.4})
 	destroyed.emit()
 
 	var lbl = destroyed_label_scene.instantiate()

@@ -7,8 +7,6 @@ func _enter_tree():
 
 ## ready ###########################################################
 
-var skip_cam_setup = false
-
 func _ready():
 	set_collision_layer_value(1, false) # walls,doors,env
 	set_collision_layer_value(2, true) # player
@@ -18,9 +16,6 @@ func _ready():
 	set_collision_mask_value(6, true) # items
 	set_collision_mask_value(11, true) # fences, low-walls
 	set_collision_mask_value(12, true) # spikes
-
-	if not Engine.is_editor_hint() and not skip_cam_setup:
-		Cam.request_camera({player=self, zoom_rect_min=50, zoom_margin_min=120})
 
 	super._ready()
 

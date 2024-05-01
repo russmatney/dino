@@ -121,23 +121,6 @@ func screenshake_cancel():
 		cam.set_trauma(0.0)
 
 
-##############################################################
-# freezeframe
-
-# could refactor into opts based map apis
-
-# freezeframes called in parallel may compete/reset eachother
-# maybe register_slowmo is a viable workaround?
-func freezeframe(name, time_scale, duration, trauma = 0.1):
-	inc_trauma(trauma)
-	Juice.start_slowmo(name, time_scale)
-	await get_tree().create_timer(duration, true, false, true).timeout
-	Juice.stop_slowmo(name)
-
-func hitstop(name="hitstop", time_scale=0.5, duration=0.2, trauma=0.1):
-	freezeframe(name, time_scale, duration, trauma)
-
-
 ####################################################################
 # zoom
 

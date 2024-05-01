@@ -83,12 +83,12 @@ func _on_frame_changed():
 		for b in bodies:
 			if b.has_method("take_hit"):
 				if not b in bodies_this_swing:
-					Cam.hitstop("swordhit", 0.3, 0.1)
+					Juice.hitstop({name="swordhit", time_scale=0.3, duration=0.1})
 					bodies_this_swing.append(b)
 					b.take_hit({damage=1, direction=facing_dir()})
 			if b.has_method("fire_back"):
 				if not b in bodies_this_swing:
-					Cam.hitstop("swordhit", 0.3, 0.2)
+					Juice.hitstop({name="swordhit", time_scale=0.3, duration=0.2})
 					bodies_this_swing.append(b)
 					b.fire_back()
 

@@ -43,7 +43,7 @@ func on_frame_changed():
 		for b in actor.hitbox_bodies:
 			if b.has_method("take_hit"):
 				if not b in kicked_bodies:
-					# Cam.hitstop("kickhit", 0.3, 0.1)
+					Juice.hitstop({name="kickhit", time_scale=0.3, duration=0.1})
 					kicked_bodies.append(b)
 					b.take_hit({body=actor})
 

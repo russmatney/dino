@@ -19,7 +19,7 @@ func enter(ctx={}):
 	stunned_ttl = ctx.get("stunned_for", stunned_for)
 
 	actor.anim.play("stunned")
-	Cam.hitstop("boss_stunned", 0.5, 0.3, 0.3)
+	Juice.hitstop({name="boss_stunned", time_scale=0.5, duration=0.3, trauma=0.3})
 	Sounds.play(Sounds.S.soldierdead)
 	actor.stunned.emit(actor)
 

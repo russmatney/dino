@@ -33,7 +33,7 @@ func kick():
 		if is_instance_valid(body) and not body in kicked_bodies:
 			if "is_dead" in body and not body.is_dead and "machine" in body:
 				body.machine.transit("Kicked", {kicked_by=actor, direction=actor.facing_vector})
-				Cam.hitstop("kick", 0.05, 0.1, 0.3)
+				Juice.hitstop({name="kick", time_scale=0.05, duration=0.1, trauma=0.3})
 				kicked_bodies.append(body)
 			elif body.is_in_group("destructibles"):
 				body.take_hit({hit_type="kick", body=actor})
