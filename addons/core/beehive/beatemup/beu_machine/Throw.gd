@@ -12,7 +12,7 @@ func enter(opts = {}):
 	thrown = opts.get("body")
 	throw_ttl = throw_time
 
-	DJZ.play(DJZ.S.land)
+	Sounds.play(Sounds.S.land)
 
 
 ## exit ###########################################################

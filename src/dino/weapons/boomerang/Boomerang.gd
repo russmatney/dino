@@ -7,7 +7,7 @@ func aim(aim_v: Vector2):
 	aim_vector = aim_v.normalized()
 
 func activate():
-	DJZ.play(DJZ.S.laser)
+	Sounds.play(Sounds.S.laser)
 	if actor:
 		actor.notif(self.display_name)
 		aim(actor.facing_vector)
@@ -79,7 +79,7 @@ func throw():
 	throw_tween.tween_property(self, "global_position", new_pos, throw_time)
 	throw_tween.tween_callback(start_return)
 
-	DJZ.play(DJZ.S.fire)
+	Sounds.play(Sounds.S.fire)
 
 func start_return():
 	returning = true

@@ -18,7 +18,7 @@ var next_state
 
 func enter(ctx={}):
 	actor.anim.play("laughing")
-	DJZ.play(DJZ.S.bosslaugh)
+	Sounds.play(Sounds.S.bosslaugh)
 	laugh_ttl = ctx.get("wait_for", laugh_at_least)
 
 	next_state = ctx.get("next_state")

@@ -67,10 +67,10 @@ func _unhandled_input(event):
 
 	# action cycling
 	if Trolls.is_cycle_prev_action(event):
-		DJZ.play(DJZ.S.walk)
+		Sounds.play(Sounds.S.walk)
 		# action_detector.cycle_prev_action()
 	elif Trolls.is_cycle_next_action(event):
-		DJZ.play(DJZ.S.walk)
+		Sounds.play(Sounds.S.walk)
 		# action_detector.cycle_next_action()
 
 ## transitions ######################################################

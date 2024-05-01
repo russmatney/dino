@@ -19,7 +19,7 @@ func _on_body_entered(body: Node):
 		body.take_hit({body=self, damage=1})
 
 func kill():
-	DJZ.play(DJZ.S.pickup)
+	Sounds.play(Sounds.S.pickup)
 	queue_free()
 
 #############################################################

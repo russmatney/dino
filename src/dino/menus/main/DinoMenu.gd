@@ -9,7 +9,7 @@ func _ready():
 
 	build_games_grid()
 
-	DJ.resume_menu_song()
+	Music.resume_menu_song()
 	set_focus()
 
 func set_focus():

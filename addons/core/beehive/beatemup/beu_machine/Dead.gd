@@ -9,7 +9,7 @@ func enter(_opts = {}):
 	ttl = dying_time
 
 	actor.anim.play("dead")
-	DJZ.play(DJZ.S.enemy_dead)
+	Sounds.play(Sounds.S.enemy_dead)
 
 	var tween = create_tween()
 	tween.tween_property(actor, "modulate:a", 0.4, dying_time)

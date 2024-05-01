@@ -20,7 +20,7 @@ func enter(ctx={}):
 
 	actor.anim.play("stunned")
 	Cam.hitstop("boss_stunned", 0.5, 0.3, 0.3)
-	DJZ.play(DJZ.S.soldierdead)
+	Sounds.play(Sounds.S.soldierdead)
 	actor.stunned.emit(actor)
 
 ## process #####################################################

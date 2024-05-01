@@ -17,7 +17,7 @@ func activate():
 	if actor:
 		actor.notif(str("activated ", self.display_name))
 		aim(actor.facing_vector)
-	DJZ.play(DJZ.S.laser)
+	Sounds.play(Sounds.S.laser)
 
 func deactivate():
 	pass
@@ -80,7 +80,7 @@ func toss_item():
 
 	# item.rotation = aim_vector.angle()
 	item.apply_impulse(aim_vector * spike_impulse, Vector2.ZERO)
-	DJZ.play(DJZ.S.fire)
+	Sounds.play(Sounds.S.fire)
 
 	Juice.stop_slowmo("spike_slowmo")
 

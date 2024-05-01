@@ -283,7 +283,7 @@ func take_hit(opts={}):
 
 	health -= damage
 	health = clamp(health, 0, health)
-	DJZ.play(DJZ.S.enemy_hit)
+	Sounds.play(Sounds.S.enemy_hit)
 	Hotel.check_in(self)
 
 	machine.transit("KnockedBack", {direction=direction, dying=health <= 0})
@@ -295,8 +295,8 @@ func die():
 	died.emit(self)
 	Hotel.check_in(self)
 	Cam.screenshake(0.1)
-	DJZ.play(DJZ.S.soldierdead)
-	# DJZ.play(DJZ.S.enemy_dead)
+	Sounds.play(Sounds.S.soldierdead)
+	# Sounds.play(Sounds.S.enemy_dead)
 	if skull_particles:
 		skull_particles.set_emitting(true)
 

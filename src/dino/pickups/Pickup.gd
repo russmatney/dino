@@ -56,7 +56,7 @@ func floaty_tween():
 ## kill #######################################################################
 
 func kill():
-	DJZ.play(DJZ.S.pickup)
+	Sounds.play(Sounds.S.pickup)
 	queue_free()
 
 ## following #######################################################################

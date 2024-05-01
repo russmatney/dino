@@ -42,7 +42,7 @@ func _ready():
 	build_enemies_grid()
 	reset_ui()
 
-	DJ.resume_menu_song()
+	Music.resume_menu_song()
 	set_focus()
 
 ## focus ##################################################

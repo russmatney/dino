@@ -11,7 +11,7 @@ var hit_by
 func enter(opts = {}):
 	actor.anim.play("kicked")
 
-	DJZ.play(DJZ.S.kick)
+	Sounds.play(Sounds.S.kick)
 	Cam.screenshake(0.2)
 	direction = opts.get("direction", direction)
 

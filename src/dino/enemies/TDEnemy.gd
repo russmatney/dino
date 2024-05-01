@@ -166,7 +166,7 @@ func take_hit(opts):
 	# probably worth supporting direction as well
 	var _dir = opts.get("direction")
 
-	DJZ.play(DJZ.S.playerhurt)
+	Sounds.play(Sounds.S.playerhurt)
 
 	if health <= 0:
 		die()

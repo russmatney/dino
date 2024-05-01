@@ -45,7 +45,7 @@ func _ready():
 		added_lines.append(new_line)
 		credits_lines_container.add_child(new_line)
 
-	DJ.resume_menu_song()
+	Music.resume_menu_song()
 
 ## input ############################################################
 

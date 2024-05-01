@@ -34,7 +34,7 @@ func _on_Area2D_body_entered(body: Node):
 			# TODO improve this drop/pickup api
 			body.collect({body=self, data=DropData.new(DropData.T.COIN)})
 
-			DJZ.play(DJZ.S.coin)
+			Sounds.play(Sounds.S.coin)
 			collected = true
 			on_collected.emit(self)
 			disable()

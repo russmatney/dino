@@ -23,7 +23,7 @@ func enter(opts = {}):
 
 	jump_released = false
 
-	DJZ.play(DJZ.S.jump)
+	Sounds.play(Sounds.S.jump)
 	actor.anim.play("jump")
 	actor.anim.animation_finished.connect(_on_anim_finished)
 

@@ -57,7 +57,7 @@ func kill():
 	if not dying:
 		dying = true
 		Cam.screenshake(0.1)
-		DJZ.play(DJZ.S.fall)
+		Sounds.play(Sounds.S.fall)
 		bullet_dying.emit(self)
 		anim.play("pop")
 

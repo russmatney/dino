@@ -1,10 +1,18 @@
 @tool
 extends Node
 
+## vars ######################################################################
+
+var muted_sound = false
+var muted_music = false
+signal mute_toggle
+
 ## ready ######################################################################
 
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
+
+## play sound ######################################################################
 
 func play_sound_opts(sounds, opts = {}):
 	var vary = opts.get("vary", 0.0)
@@ -29,7 +37,7 @@ func play_sound_opts(sounds, opts = {}):
 		if not Engine.is_editor_hint():
 			SoundManager.play_sound_with_pitch(s, pitch)
 
-## sound map api ####################################################
+## sound map setup ####################################################
 
 func setup_sound(sound, opts = {}):
 	var s_str
@@ -81,21 +89,32 @@ func interrupt_sound(sound_map, name):
 
 ## mute ######################################################################
 
-var muted_sound = false
-var muted_music = false
-
 func mute_all(should_mute=true):
 	toggle_mute_music(should_mute)
 	toggle_mute_sound(should_mute)
 
+var music_volume
 func toggle_mute_music(should_mute=null):
 	if should_mute == null:
 		muted_music = not muted_music
 	else:
 		muted_music = should_mute
 
+	if muted_music:
+		if music_volume != 0:
+			music_volume = SoundManager.get_music_volume()
+		SoundManager.set_music_volume(0.0)
+	else:
+		if music_volume != 0:
+			SoundManager.set_music_volume(music_volume)
+		else:
+			SoundManager.set_music_volume(0.5)
+
+	mute_toggle.emit()
+
 func toggle_mute_sound(should_mute=null):
 	if should_mute == null:
 		muted_sound = not muted_sound
 	else:
 		muted_sound = should_mute
+	mute_toggle.emit()

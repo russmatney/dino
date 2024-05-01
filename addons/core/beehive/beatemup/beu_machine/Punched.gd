@@ -8,7 +8,7 @@ var punched_by
 
 func enter(opts = {}):
 	actor.anim.play("punched")
-	DJZ.play(DJZ.S.punch)
+	Sounds.play(Sounds.S.punch)
 	punched_by = opts.get("punched_by")
 	actor.take_hit({hit_type="punch", body=punched_by})
 

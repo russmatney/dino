@@ -178,13 +178,13 @@ func _physics_process(_delta):
 
 func take_hit(opts={}):
 	if machine.should_ignore_hit():
-		DJZ.play(DJZ.S.nodamageclang)
+		Sounds.play(Sounds.S.nodamageclang)
 		return
 
 	var damage = opts.get("damage", 1)
 	var direction = opts.get("direction", Vector2.UP)
 
-	DJZ.play(DJZ.S.playerhurt)
+	Sounds.play(Sounds.S.playerhurt)
 
 	health -= damage
 	health = clamp(health, 0, initial_health)

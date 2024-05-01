@@ -1,9 +1,9 @@
 extends State
 
 var fall_shake_thresholds = [
-	{"threshold": 750, "shake": 0.3, "damage": 0, "sound": DJZ.S.fall},
-	{"threshold": 1100, "shake": 0.6, "damage": 1, "sound": DJZ.S.heavy_fall},
-	{"threshold": 1500, "shake": 1.0, "damage": 2, "sound": DJZ.S.heavy_fall},
+	{"threshold": 750, "shake": 0.3, "damage": 0, "sound": Sounds.S.fall},
+	{"threshold": 1100, "shake": 0.6, "damage": 1, "sound": Sounds.S.heavy_fall},
+	{"threshold": 1500, "shake": 1.0, "damage": 2, "sound": Sounds.S.heavy_fall},
 	]
 
 var coyote_time = 0.4
@@ -85,7 +85,7 @@ func physics_process(delta):
 			# var damage = thresh["damage"]
 			# var shake_factor = actor.get("shake_factor", 0.3)
 			Cam.screenshake(shake*0.3)
-			DJZ.play(thresh["sound"])
+			Sounds.play(thresh["sound"])
 
 		machine.transit("Idle")
 		return

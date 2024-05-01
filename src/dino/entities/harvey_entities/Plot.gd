@@ -28,13 +28,13 @@ func on_transit(new_state):
 
 	match state:
 		"SeedPlanted":
-			DJZ.play(DJZ.S.maximize)
+			Sounds.play(Sounds.S.maximize)
 		"NeedsWater":
-			DJZ.play(DJZ.S.minimize)
+			Sounds.play(Sounds.S.minimize)
 		"Watered":
-			DJZ.play(DJZ.S.slime)
+			Sounds.play(Sounds.S.slime)
 		"ReadyForHarvest":
-			DJZ.play(DJZ.S.cure)
+			Sounds.play(Sounds.S.cure)
 		_:
 			Log.warn("no sound")
 

@@ -37,7 +37,7 @@ func aim(aim_vector: Vector2):
 func activate():
 	if actor and actor.has_method("notif"):
 		actor.notif(self.name)
-	DJZ.play(DJZ.S.swordswing)
+	Sounds.play(Sounds.S.swordswing)
 
 func deactivate():
 	pass
@@ -75,7 +75,7 @@ func swing():
 	swinging = true
 	bodies_this_swing = []
 	anim.play("swing")
-	DJZ.play(DJZ.S.swordswing)
+	Sounds.play(Sounds.S.swordswing)
 	Cam.screenshake(0.18)
 
 func _on_frame_changed():
@@ -98,7 +98,7 @@ func _on_frame_changed():
 			if b.has_method("destroy_tile_with_rid"):
 				var destroyed = b.destroy_tile_with_rid(bs[0])
 				if destroyed:
-					DJZ.play(DJZ.S.destroyed_block)
+					Sounds.play(Sounds.S.destroyed_block)
 					if not b in needs_redraw:
 						needs_redraw.append(b)
 

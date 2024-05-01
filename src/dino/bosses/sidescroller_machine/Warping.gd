@@ -46,7 +46,7 @@ func physics_process(delta):
 		# animate
 		actor.global_position = next_warp_spot.global_position
 
-		DJZ.play(DJZ.S.bosswarp)
+		Sounds.play(Sounds.S.bosswarp)
 		actor.anim.play("warp_arrive")
 
 		machine.transit("Idle")

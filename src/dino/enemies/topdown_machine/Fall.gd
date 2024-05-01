@@ -9,7 +9,7 @@ var fall_scale_factor = 0.2
 
 func enter(opts = {}):
 	actor.anim.play("fall")
-	DJZ.play(DJZ.S.fall)
+	Sounds.play(Sounds.S.fall)
 	fall_ttl = U.get_(opts, "fall_time", fall_time)
 	actor.velocity = Vector2.ZERO
 

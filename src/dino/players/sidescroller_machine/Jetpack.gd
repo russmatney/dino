@@ -50,7 +50,7 @@ func enter(_ctx = {}):
 	actor.anim.play("jetpack")
 	is_jetting = true
 	jet_boost_ramp = 0
-	DJZ.play(DJZ.S.jet_boost)
+	Sounds.play(Sounds.S.jet_boost)
 	Cam.screenshake(0.2)
 
 	jet_sound_in = jet_sound_every
@@ -59,21 +59,21 @@ func enter(_ctx = {}):
 func physics_process(delta):
 	jet_sound_in -= delta
 	if jet_sound_in <= 0:
-		DJZ.play(DJZ.S.jet_boost)
+		Sounds.play(Sounds.S.jet_boost)
 		jet_sound_in = jet_sound_every
 		Cam.screenshake(0.2)
 
 	# get_action_strength for shoulder buttons
 	if Input.is_action_pressed("jetpack"):
 		if not is_jetting:
-			DJZ.interrupt(DJZ.S.jet_echo)
-			DJZ.play(DJZ.S.jet_boost)
+			Sounds.interrupt(Sounds.S.jet_echo)
+			Sounds.play(Sounds.S.jet_boost)
 			jet_sound_in = jet_sound_every
 			is_jetting = true
 	else:
-		DJZ.interrupt(DJZ.S.jet_boost)
+		Sounds.interrupt(Sounds.S.jet_boost)
 		if is_jetting:
-			DJZ.play(DJZ.S.jet_echo)
+			Sounds.play(Sounds.S.jet_echo)
 		jet_boost_ramp = 0
 		is_jetting = false
 

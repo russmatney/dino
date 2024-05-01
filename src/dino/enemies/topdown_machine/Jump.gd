@@ -10,7 +10,7 @@ var direction: Vector2
 ## enter ###########################################################
 
 func enter(opts = {}):
-	DJZ.play(DJZ.S.jump)
+	Sounds.play(Sounds.S.jump)
 	jump_ttl = U.get_(opts, "jump_time", jump_time)
 	direction = U.get_(opts, "direction", actor.move_vector)
 

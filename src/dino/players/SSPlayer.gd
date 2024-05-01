@@ -256,10 +256,10 @@ func _unhandled_input(event):
 
 	# action cycling
 	if Trolls.is_cycle_prev_action(event):
-		DJZ.play(DJZ.S.walk)
+		Sounds.play(Sounds.S.walk)
 		action_detector.cycle_prev_action()
 	elif Trolls.is_cycle_next_action(event):
-		DJZ.play(DJZ.S.walk)
+		Sounds.play(Sounds.S.walk)
 		action_detector.cycle_next_action()
 
 ## physics_process ###########################################################
@@ -429,7 +429,7 @@ func take_hit(opts):
 	var body = opts.get("body")
 	var _dir = opts.get("direction")
 
-	DJZ.play(DJZ.S.playerhurt)
+	Sounds.play(Sounds.S.playerhurt)
 
 	if health <= 0:
 		die()
@@ -514,7 +514,7 @@ func clear_forced_movement_target():
 ## Effects #####################################################################
 
 func emit_heart_particle():
-	DJZ.play(DJZ.S.playerheal)
+	Sounds.play(Sounds.S.playerheal)
 	if heart_particles != null:
 		# force one-shot emission
 		heart_particles.set_emitting(true)

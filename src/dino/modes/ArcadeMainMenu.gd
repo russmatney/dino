@@ -16,7 +16,7 @@ func _ready():
 	build_games_grid()
 	reset_menu_buttons()
 
-	DJ.resume_menu_song()
+	Music.resume_menu_song()
 	set_focus()
 
 ## focus ##################################################

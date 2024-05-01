@@ -70,7 +70,7 @@ signal jumbo_closed
 func _unhandled_input(event):
 	if Trolls.is_close(event):
 		fade_out()
-		DJZ.play(DJZ.S.showjumbotron)
+		Sounds.play(Sounds.S.showjumbotron)
 
 func fade_in():
 	$PanelContainer.modulate.a = 0

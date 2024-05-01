@@ -37,7 +37,7 @@ func enter(opts = {}):
 	actor.punch_box.set_collision_mask_value(10, true)
 
 func on_first_bounce():
-	DJZ.play(DJZ.S.heavy_fall)
+	Sounds.play(Sounds.S.heavy_fall)
 	Cam.screenshake(0.4)
 	hit_ground = true
 	actor.punch_box.collision_mask = og_collision_mask

@@ -16,7 +16,7 @@ func can_hop():
 func enter(ctx={}):
 	actor.knocked_back.emit(actor)
 
-	DJZ.play(DJZ.S.enemyhurt)
+	Sounds.play(Sounds.S.enemyhurt)
 
 	var dir = U.get_(ctx, "direction", Vector2.LEFT)
 	var dying = ctx.get("dying", false)

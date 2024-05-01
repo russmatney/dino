@@ -7,7 +7,7 @@ func aim(aim_vec: Vector2):
 	aim_vector = aim_vec
 
 func activate():
-	DJZ.play(DJZ.S.laser)
+	Sounds.play(Sounds.S.laser)
 	if actor:
 		actor.notif(self.name)
 
@@ -70,7 +70,7 @@ func fire_arrow():
 	U.add_child_to_level(self, arrow)
 	arrow.rotation = aim_vector.angle()
 	arrow.apply_impulse(aim_vector * arrow_impulse, Vector2.ZERO)
-	DJZ.play(DJZ.S.fire)
+	Sounds.play(Sounds.S.fire)
 
 	# player push back when firing
 	actor.global_position.x += -1 * aim_vector.x * arrow_knockback

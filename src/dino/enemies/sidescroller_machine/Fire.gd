@@ -66,7 +66,7 @@ var bullet_impulse = 100
 var bullet_knockback = 0
 
 func fire():
-	DJZ.play(DJZ.S.boss_shoot)
+	Sounds.play(Sounds.S.boss_shoot)
 
 	var bullet = bullet_scene.instantiate()
 
@@ -111,4 +111,4 @@ func fire():
 # 		arrow.rotation = angle_to_player.angle()
 # 		arrow.apply_impulse(angle_to_player * arrow_impulse, Vector2.ZERO)
 
-# 		DJZ.play(DJZ.S.fire)
+# 		Sounds.play(Sounds.S.fire)

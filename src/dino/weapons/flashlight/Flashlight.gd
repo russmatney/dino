@@ -6,7 +6,7 @@ func aim(_aim_vector: Vector2):
 func activate():
 	if actor:
 		actor.notif(self.name)
-	DJZ.play(DJZ.S.bump)
+	Sounds.play(Sounds.S.bump)
 
 func deactivate():
 	pass
@@ -40,7 +40,7 @@ func burst():
 
 	anim.visible = true
 	anim.play("burst")
-	DJZ.play(DJZ.S.swordswing)
+	Sounds.play(Sounds.S.swordswing)
 
 func _on_frame_changed():
 	if anim.animation == "burst" and anim.frame in [1, 2, 3]:

@@ -57,7 +57,7 @@ func inc_produce_count(type):
 ## new produce #######################################################################
 
 func _on_produce_delivered(type):
-	DJZ.play(DJZ.S.complete)
+	Sounds.play(Sounds.S.complete)
 	inc_produce_count(type)
 
 ## reset ########################################################################
@@ -87,6 +87,5 @@ func tick_timer():
 func time_up():
 	var t = get_tree()
 	t.paused = true
-	DJ.resume_menu_song()
 	# Navi.show_menu(time_up_menu)
 	# time_up_menu.set_score(produce_counts)

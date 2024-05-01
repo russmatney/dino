@@ -226,7 +226,7 @@ func take_hit(opts):
 	# probably worth supporting direction as well
 	var _dir = opts.get("direction")
 
-	DJZ.play(DJZ.S.playerhurt)
+	Sounds.play(Sounds.S.playerhurt)
 
 	if health <= 0:
 		die()
@@ -301,7 +301,7 @@ func stamp(opts={}):
 ## follow #########################################################
 
 func follow_player(player):
-	DJZ.play(DJZ.S.coin)
+	Sounds.play(Sounds.S.coin)
 	U._connect(player.died, on_player_died)
 	following = player
 	machine.transit("Follow")

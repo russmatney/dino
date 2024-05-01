@@ -32,7 +32,7 @@ func _ready():
 ## quest updates ######################################################
 
 func on_quests_complete():
-	DJZ.play(DJZ.S.fire)
+	Sounds.play(Sounds.S.fire)
 
 	Jumbotron.jumbo_notif({header="Congrats on feeding the void.", body="woo-hoo.",
 		action="close", action_label_text="Next Level",

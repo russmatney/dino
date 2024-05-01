@@ -213,10 +213,10 @@ func _unhandled_input(event):
 
 	# action cycling
 	if Trolls.is_cycle_prev_action(event):
-		DJZ.play(DJZ.S.walk)
+		Sounds.play(Sounds.S.walk)
 		action_detector.cycle_prev_action()
 	elif Trolls.is_cycle_next_action(event):
-		DJZ.play(DJZ.S.walk)
+		Sounds.play(Sounds.S.walk)
 		action_detector.cycle_next_action()
 
 ## physics_process ###########################################################
@@ -351,7 +351,7 @@ func take_hit(opts):
 	# probably worth supporting direction as well
 	var _dir = opts.get("direction")
 
-	DJZ.play(DJZ.S.playerhurt)
+	Sounds.play(Sounds.S.playerhurt)
 
 	if health <= 0:
 		die()
@@ -414,12 +414,12 @@ func can_grab():
 	return grabbing == null
 
 func grab(node):
-	DJZ.play(DJZ.S.candleout)
+	Sounds.play(Sounds.S.candleout)
 	grabbing = node
 	U._connect(node.died, on_grabbing_died)
 
 func throw(_node):
-	DJZ.play(DJZ.S.laser)
+	Sounds.play(Sounds.S.laser)
 	grabbing.died.disconnect(on_grabbing_died)
 	grabbing = null
 	# could pass throw_speed/weight

@@ -14,7 +14,7 @@ var kicked_bodies = []
 
 func enter(opts = {}):
 	actor.anim.play("jump")
-	DJZ.play(DJZ.S.jump)
+	Sounds.play(Sounds.S.jump)
 	kick_pressed = false
 	jump_ttl = U.get_(opts, "jump_time", jump_time)
 	direction = U.get_(opts, "direction", actor.move_vector)

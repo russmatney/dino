@@ -20,7 +20,7 @@ func _ready():
 	build_players_grid()
 	reset_ui()
 
-	DJ.resume_menu_song()
+	Music.resume_menu_song()
 	set_focus()
 
 ## focus ##################################################

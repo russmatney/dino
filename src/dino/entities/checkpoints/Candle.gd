@@ -58,7 +58,7 @@ func is_lit():
 func light_up(_actor=null):
 	lit = true
 	anim.play("flicker")
-	DJZ.play(DJZ.S.candlelit)
+	Sounds.play(Sounds.S.candlelit)
 	light.set_enabled(true)
 	light_tween()
 	Hotel.check_in(self)
@@ -66,7 +66,7 @@ func light_up(_actor=null):
 func put_out(_actor=null):
 	lit = false
 	anim.play("off")
-	DJZ.play(DJZ.S.candleout)
+	Sounds.play(Sounds.S.candleout)
 	light.set_enabled(false)
 	Hotel.check_in(self)
 
