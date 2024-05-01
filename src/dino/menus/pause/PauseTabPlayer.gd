@@ -32,7 +32,10 @@ func _ready():
 func render():
 	var p_ent = Dino.current_player_entity()
 	if not p_ent:
-		# TODO support select player if none
+		# quick select if no player ent
+		# p_ent = await QuickSelectMenu.quick_show({
+		# 	entities=DinoPlayerEntity.all_entities(),
+		# 	})
 		return
 
 	update_player_data(p_ent)
@@ -86,24 +89,19 @@ func update_weapons_grid(player):
 func select_player(player_ent):
 	selected_player = player_ent
 
-	# P.set_player_entity(player_ent)
-	# P.clear_player_scene()
+	Dino.respawn_active_player({new_entity=player_ent})
 
 	Debug.notif({text="Switched to %s" % player_ent.get_display_name(), id="player-switch"})
 
-	# respawn at current position? regen level?
-	# P.respawn_player()
-
-	# clearing b/c these buttons are invalid until the player is setup (after unpausing)
-	U.remove_children(weapons_grid, {defer=true})
 	render.call_deferred()
 
 func select_weapon(weapon_ent):
 	selected_weapon = weapon_ent
 
 	# move behind some confirmation?
-	# var p = P.player
-	# p.activate_weapon(weapon_ent)
+	var p = Dino.current_player_node()
+	if p:
+		p.activate_weapon(weapon_ent)
 
 	Debug.notif({text="Switched to %s" % weapon_ent.get_display_name(), id="weapon-switch"})
 	render.call_deferred()

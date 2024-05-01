@@ -1,12 +1,39 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxe4y5m8yhs4m"]
+[gd_scene load_steps=16 format=3 uid="uid://bxe4y5m8yhs4m"]
 
 [ext_resource type="Script" path="res://src/dino/menus/pause/PauseTabPlayer.gd" id="1_ibsoa"]
 [ext_resource type="Texture2D" uid="uid://c7jw4eir0vw0f" path="res://src/dino/players/hatbot/assets/greyhat_portrait1.png" id="1_qwsl8"]
 [ext_resource type="PackedScene" uid="uid://pb7ag8sxpept" path="res://src/components/entity_button/EntityButton.tscn" id="5_jgt1l"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="6_b5o0c"]
 [ext_resource type="FontFile" uid="uid://dbnll7gncm35o" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="6_i2ugf"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_la6u1"]
 [ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/components/WeaponIcon.tscn" id="8_kmyt0"]
 [ext_resource type="Script" path="res://src/dino/weapons/DinoWeaponEntity.gd" id="9_bfb4x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olvfy"]
+content_margin_left = 96.0
+content_margin_top = 96.0
+content_margin_right = 96.0
+content_margin_bottom = 96.0
+bg_color = Color(0.519548, 0.0260235, 0.344477, 0.611765)
+
+[sub_resource type="Resource" id="Resource_c5eaa"]
+script = ExtResource("6_b5o0c")
+_id = "166"
+
+[sub_resource type="Resource" id="Resource_m4act"]
+script = ExtResource("6_b5o0c")
+_id = "72"
+
+[sub_resource type="Resource" id="Resource_d6q4u"]
+script = ExtResource("6_b5o0c")
+_id = "70"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgwa7"]
+content_margin_left = 96.0
+content_margin_top = 96.0
+content_margin_right = 96.0
+content_margin_bottom = 96.0
+bg_color = Color(0.223529, 0.27451, 0.792157, 0.635294)
 
 [sub_resource type="Resource" id="Resource_gvmx5"]
 script = ExtResource("9_bfb4x")
@@ -33,55 +60,58 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(2.08165e-12, 80)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_olvfy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(500, 300)
 layout_mode = 2
 alignment = 1
 
-[node name="PlayerIcon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="PlayerIcon" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 texture = ExtResource("1_qwsl8")
 stretch_mode = 4
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="PlayerName" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerName" type="RichTextLabel" parent="VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("6_i2ugf")
-theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "Hatbot"
 fit_content = true
 scroll_active = false
 
-[node name="PlayerDescription" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PlayerDescription" type="RichTextLabel" parent="VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/normal_font = ExtResource("7_la6u1")
-theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/normal_font_size = 48
 bbcode_enabled = true
 text = "A very good description of the selected player."
 fit_content = true
 scroll_active = false
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -90,46 +120,60 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
-columns = 3
+columns = 4
 
 [node name="EntityButton" parent="VBoxContainer/CenterContainer/OtherPlayersGrid" instance=ExtResource("5_jgt1l")]
 layout_mode = 2
+entity = SubResource("Resource_c5eaa")
+
+[node name="EntityButton2" parent="VBoxContainer/CenterContainer/OtherPlayersGrid" instance=ExtResource("5_jgt1l")]
+layout_mode = 2
+entity = SubResource("Resource_m4act")
+
+[node name="EntityButton3" parent="VBoxContainer/CenterContainer/OtherPlayersGrid" instance=ExtResource("5_jgt1l")]
+layout_mode = 2
+entity = SubResource("Resource_d6q4u")
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(2.08165e-12, 80)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
-custom_minimum_size = Vector2(500, 0)
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lgwa7")
 
-[node name="SelectedWeaponIcon" parent="VBoxContainer2/HBoxContainer2" instance=ExtResource("8_kmyt0")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/PanelContainer"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
+alignment = 1
+
+[node name="SelectedWeaponIcon" parent="VBoxContainer2/PanelContainer/HBoxContainer2" instance=ExtResource("8_kmyt0")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
+size_flags_vertical = 4
 
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer2/HBoxContainer2"]
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="SelectedWeaponName" type="RichTextLabel" parent="VBoxContainer2/HBoxContainer2/VBoxContainer"]
+[node name="SelectedWeaponName" type="RichTextLabel" parent="VBoxContainer2/PanelContainer/HBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -140,7 +184,7 @@ text = "Weapon Of Champions"
 fit_content = true
 scroll_active = false
 
-[node name="SelectedWeaponDescription" type="RichTextLabel" parent="VBoxContainer2/HBoxContainer2/VBoxContainer"]
+[node name="SelectedWeaponDescription" type="RichTextLabel" parent="VBoxContainer2/PanelContainer/HBoxContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -151,13 +195,13 @@ text = "A very good description of the selected weapon."
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer2/HBoxContainer2"]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer2/PanelContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer2"]
 layout_mode = 2

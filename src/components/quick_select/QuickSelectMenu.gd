@@ -10,6 +10,33 @@ static func ss_weapons_menu():
 	menu.set_entities(weaps)
 	return menu
 
+static func player_entities_menu():
+	var menu = QuickSelectMenu.new()
+	menu.set_entities(DinoPlayerEntity.all_entities())
+	return menu
+
+static func all_entities_menu():
+	var menu = QuickSelectMenu.new()
+	menu.set_entities(DinoEntity.all_entities())
+	return menu
+
+static var scene = preload("res://src/components/quick_select/QuickSelect.tscn")
+static var _menu
+
+# TODO make this work? similar to the jumbotron?
+static func quick_show(opts):
+	if not _menu:
+		_menu = scene.instantiate()
+		Navi.add_child(_menu)
+
+	var ents = opts.get("entities")
+	_menu.set_entities(ents)
+
+	_menu.show_menu(opts) # pass an on-selected
+
+	return _menu.selected
+
+
 ## vars #####################################################
 
 @onready var canvasLayer = $%CanvasLayer
@@ -18,6 +45,9 @@ static func ss_weapons_menu():
 @onready var screenBlur = $%ScreenBlur
 
 var anim_duration = 0.4
+var entities
+
+signal selected(entity)
 
 ## ready #####################################################
 
@@ -42,6 +72,7 @@ func set_focus():
 ## set entities #####################################################
 
 func set_entities(ents, on_select=null):
+	entities = ents
 	U.remove_children(entityList)
 
 	for ent in ents:
@@ -52,6 +83,8 @@ func select_current():
 	for ch in entityList.get_children():
 		if U.has_focus(ch):
 			ch.selected.emit()
+			selected.emit(ch.entity)
+			break
 
 ## show #####################################################
 
@@ -59,10 +92,9 @@ func show_menu(opts):
 	# naive, but maybe this is fine?
 	get_tree().paused = true
 	canvasLayer.set_visible(true)
-	# TODO tween the blur on/off
 	screenBlur.fade_in({duration=anim_duration})
 
-	set_entities(opts.get("entities"), opts.get("on_select"))
+	set_entities(opts.get("entities", entities), opts.get("on_select"))
 	set_focus()
 	panel.set_visible(true)
 

@@ -105,6 +105,12 @@ func respawn_active_player(opts):
 	if opts.get("new_genre_type") != null:
 		p.genre_type = opts.get("new_genre_type")
 
+	if opts.get("new_entity") != null:
+		create_new({
+			entity=opts.get("new_entity"),
+			genre_type=p.genre_type,
+			})
+
 	if opts.get("deferred", true):
 		spawn_new.call_deferred(opts)
 	else:

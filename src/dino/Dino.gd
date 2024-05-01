@@ -89,6 +89,7 @@ func restart_game(opts=null):
 
 func create_new_player(opts):
 	# maybe create a unique player instance here?
+	# i.e. with name and traits and history
 	player_set.create_new(opts)
 
 # only creates a player if none exists
