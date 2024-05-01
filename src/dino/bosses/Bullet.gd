@@ -56,7 +56,7 @@ signal bullet_dying(bullet)
 func kill():
 	if not dying:
 		dying = true
-		Cam.screenshake(0.1)
+		Juice.screenshake(0.1)
 		Sounds.play(Sounds.S.fall)
 		bullet_dying.emit(self)
 		anim.play("pop")

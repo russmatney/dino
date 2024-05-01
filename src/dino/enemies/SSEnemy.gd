@@ -294,7 +294,7 @@ func die():
 	is_dead = true
 	died.emit(self)
 	Hotel.check_in(self)
-	Cam.screenshake(0.1)
+	Juice.screenshake(0.1)
 	Sounds.play(Sounds.S.soldierdead)
 	# Sounds.play(Sounds.S.enemy_dead)
 	if skull_particles:

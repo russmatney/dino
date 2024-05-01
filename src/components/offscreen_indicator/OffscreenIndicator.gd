@@ -40,12 +40,6 @@ var offset_rads = PI / 4
 
 var target
 var showing = false
-var player
-
-## ready ########################################################
-
-func _ready():
-	player = U.first_node_in_group(self, "player")
 
 ## label ########################################################
 
@@ -93,27 +87,41 @@ func _physics_process(_delta):
 		point_at(target.get_global_position())
 		position_onscreen()
 
-## find_player ########################################################
-
-func find_player():
-	if not Engine.is_editor_hint():
-		player = U.first_node_in_group(self, "player")
-
 ## position on screen ########################################################
 
+func cam_window_rect():
+	var v = get_viewport()
+	var viewportRect: Rect2 = v.get_visible_rect()
+
+	# https://github.com/godotengine/godot/issues/34805
+	# restore this size correction
+	# var viewport_base_size = (
+	# 	v.get_size_2d_override()
+	# 	if v.get_size_2d_override()
+	# 	else v.size
+	# )
+	var viewport_base_size = v.size
+
+	var scale_factor = DisplayServer.window_get_size() / viewport_base_size
+	viewportRect.size = (viewport_base_size * scale_factor) as Vector2
+
+	# https://www.reddit.com/r/godot/comments/m8ltmd/get_screen_in_global_coords_get_visible_rect_not/
+	var globalToViewportTransform: Transform2D = v.get_final_transform() * v.canvas_transform
+	var viewportToGlobalTransform: Transform2D = globalToViewportTransform.affine_inverse()
+	var viewportRectGlobal: Rect2 = viewportToGlobalTransform * viewportRect
+
+	return viewportRectGlobal
+
 func position_onscreen():
-	if not player:
-		find_player()
+	var player = Dino.current_player_node()
 
-	if not Cam.cam:
-		return
-
-	if player and Cam.cam:
+	if player:
+		# TODO why use the player here? why not just the center of the screen?
 		var player_pos = player.get_global_position() + Vector2(0, -16)
 		var target_pos = target.get_global_position()
 		var direction = (target_pos - player_pos).normalized()
 
-		var window_rect = Cam.cam_window_rect()
+		var window_rect = cam_window_rect()
 
 		var is_x_off_screen = not window_rect.has_point(Vector2(target_pos.x, player_pos.y))
 		var is_y_off_screen = not window_rect.has_point(Vector2(player_pos.x, target_pos.y))

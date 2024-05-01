@@ -18,7 +18,6 @@ func _ready():
 	Hotel.register(self)
 
 	get_parent().ready.connect(ensure_room_box)
-	ensure_cam_points()
 
 	var p = get_parent()
 	if p is MetroZone:
@@ -221,7 +220,6 @@ func unpause(opts={}):
 
 
 func _on_paused():
-	deactivate_cam_points()
 	if visited:
 		set_visible(true)
 		to_faded()
@@ -229,7 +227,6 @@ func _on_paused():
 		set_visible(false)
 
 func _on_unpaused():
-	activate_cam_points.call_deferred()
 	set_visible(true)
 	to_normal()
 
@@ -255,67 +252,3 @@ func to_normal():
 		normal_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		normal_tween.tween_property(self, "modulate:a", 1, 0.2)
 
-## cam points ##########################################
-
-var pof_scene = preload("res://addons/core/camera/CamPOF.tscn")
-var auto_pof_group = "auto_pofs"
-var poa_scene = preload("res://addons/core/camera/CamPOA.tscn")
-var auto_poa_group = "auto_poas"
-var poi_scene = preload("res://addons/core/camera/CamPOI.tscn")
-var auto_poi_group = "auto_pois"
-
-func create_point(scene, auto_group, pos):
-	var auto_point = scene.instantiate()
-	auto_point.add_to_group(auto_group, true)
-	auto_point.position = pos
-
-	# only relevant for POIs
-	# auto_point.importance = 0.4
-
-	add_child(auto_point)
-	auto_point.set_owner(self)
-
-func ensure_cam_points():
-	for c in get_children():
-		if c.is_in_group(auto_poi_group):
-			c.free()
-
-	var rect = used_rect()
-	var points = [rect.position, rect.end,
-		rect.position + Vector2(rect.size.x, 0),
-		rect.position + Vector2(0, rect.size.y)]
-
-	for p in points:
-		create_point(poa_scene, auto_poa_group, p)
-
-func deactivate_cam_points():
-	var poas = U.get_children_in_group(self, Cam.poa_group)
-	for p in poas:
-		if p.has_method("deactivate"):
-			p.deactivate()
-
-	var pofs = U.get_children_in_group(self, Cam.pof_group)
-	for p in pofs:
-		if p.has_method("deactivate"):
-			p.deactivate()
-
-	var pois = U.get_children_in_group(self, Cam.poi_group)
-	for p in pois:
-		if p.has_method("deactivate"):
-			p.deactivate()
-
-func activate_cam_points():
-	var poas = U.get_children_in_group(self, Cam.poa_group)
-	for p in poas:
-		if p.has_method("activate"):
-			p.activate()
-
-	var pofs = U.get_children_in_group(self, Cam.pof_group)
-	for p in pofs:
-		if p.has_method("activate"):
-			p.activate()
-
-	var pois = U.get_children_in_group(self, Cam.poi_group)
-	for p in pois:
-		if p.has_method("activate"):
-			p.activate()

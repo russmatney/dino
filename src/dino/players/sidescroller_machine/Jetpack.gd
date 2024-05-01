@@ -51,7 +51,7 @@ func enter(_ctx = {}):
 	is_jetting = true
 	jet_boost_ramp = 0
 	Sounds.play(Sounds.S.jet_boost)
-	Cam.screenshake(0.2)
+	Juice.screenshake(0.2)
 
 	jet_sound_in = jet_sound_every
 
@@ -61,7 +61,7 @@ func physics_process(delta):
 	if jet_sound_in <= 0:
 		Sounds.play(Sounds.S.jet_boost)
 		jet_sound_in = jet_sound_every
-		Cam.screenshake(0.2)
+		Juice.screenshake(0.2)
 
 	# get_action_strength for shoulder buttons
 	if Input.is_action_pressed("jetpack"):

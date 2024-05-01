@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b70wb57nscbng"
-path="res://.godot/imported/offscreen-indicator_sheet.png-6ba7c730c5e6ea2dc7a259e519425a0d.ctex"
+path="res://.godot/imported/offscreen-indicator_sheet.png-aa29e481a1f170276507ba54ec2d050b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/core/camera/assets/offscreen-indicator_sheet.png"
-dest_files=["res://.godot/imported/offscreen-indicator_sheet.png-6ba7c730c5e6ea2dc7a259e519425a0d.ctex"]
+source_file="res://src/components/offscreen_indicator/offscreen-indicator_sheet.png"
+dest_files=["res://.godot/imported/offscreen-indicator_sheet.png-aa29e481a1f170276507ba54ec2d050b.ctex"]
 
 [params]
 

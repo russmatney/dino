@@ -76,7 +76,7 @@ func swing():
 	bodies_this_swing = []
 	anim.play("swing")
 	Sounds.play(Sounds.S.swordswing)
-	Cam.screenshake(0.18)
+	Juice.screenshake(0.18)
 
 func _on_frame_changed():
 	if anim.animation == "swing" and anim.frame in [1, 2, 3]:

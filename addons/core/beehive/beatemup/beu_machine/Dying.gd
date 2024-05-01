@@ -38,7 +38,7 @@ func enter(opts = {}):
 
 func on_first_bounce():
 	Sounds.play(Sounds.S.heavy_fall)
-	Cam.screenshake(0.4)
+	Juice.screenshake(0.4)
 	hit_ground = true
 	actor.punch_box.collision_mask = og_collision_mask
 

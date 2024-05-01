@@ -29,13 +29,6 @@ var is_dead: bool
 func _ready():
 	machine.transitioned.connect(on_transit)
 
-	Cam.request_camera({
-		player=self,
-		zoom_rect_min=250,
-		proximity_min=50,
-		proximity_max=250,
-		})
-
 ## physics process ##########################################################
 
 func _physics_process(_delta):

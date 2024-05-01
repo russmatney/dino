@@ -84,7 +84,7 @@ func physics_process(delta):
 			var shake = thresh["shake"]
 			# var damage = thresh["damage"]
 			# var shake_factor = actor.get("shake_factor", 0.3)
-			Cam.screenshake(shake*0.3)
+			Juice.screenshake(shake*0.3)
 			Sounds.play(thresh["sound"])
 
 		machine.transit("Idle")

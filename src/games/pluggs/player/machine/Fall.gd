@@ -63,7 +63,7 @@ func physics_process(delta):
 			var thresh = filtered[0]
 			var shake = thresh.shake
 			# var damage = thresh.damage
-			Cam.screenshake(shake*0.3)
+			Juice.screenshake(shake*0.3)
 			Sounds.play(thresh.sound)
 
 		machine.transit("Stand")

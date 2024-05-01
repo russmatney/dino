@@ -29,7 +29,7 @@ func enter(_opts = {}):
 	var tween = create_tween()
 	tween.tween_property(actor, "global_position", og_pos, respawn_ttl)
 	tween.tween_callback(func():
-		Cam.screenshake.bind(0.2)
+		Juice.screenshake.bind(0.2)
 		Sounds.play(Sounds.S.heavy_fall)
 		actor.is_dead = false
 		Hotel.check_in(actor)

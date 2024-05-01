@@ -21,7 +21,7 @@ func spawn_next_wave(wave):
 	tween.set_loops(wave.get("animation_loops", 3))
 	tween.tween_callback(Sounds.play.bind(Sounds.S.fall))
 	tween.tween_callback(Sounds.play.bind(Sounds.S.jet_init))
-	tween.tween_callback(Cam.screenshake.bind(wave.get("screenshake", 0.4))).set_delay(0.5)
+	tween.tween_callback(Juice.screenshake.bind(wave.get("screenshake", 0.4))).set_delay(0.5)
 
 	await get_tree().create_timer(wave.get("animation_time", 2.0)).timeout
 

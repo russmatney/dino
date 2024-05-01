@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://hpucvc64ie6"]
 
-[ext_resource type="Texture2D" uid="uid://b70wb57nscbng" path="res://addons/core/camera/assets/offscreen-indicator_sheet.png" id="1_2f815"]
+[ext_resource type="Texture2D" uid="uid://b70wb57nscbng" path="res://src/components/offscreen_indicator/offscreen-indicator_sheet.png" id="1_2f815"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cfcq3"]
 atlas = ExtResource("1_2f815")
