@@ -12,7 +12,7 @@ script = ExtResource("2_eytb5")
 _seed = 3355223840
 tile_size = 32
 room_count = 2
-room_defs_path = "res://src/tower/rooms.txt"
+defs_path = "res://src/tower/rooms.txt"
 
 [node name="Rooms" type="Node2D" parent="."]
 

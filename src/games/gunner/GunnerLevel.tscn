@@ -14,5 +14,5 @@ level_def = SubResource("Resource_ypsic")
 
 [node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
 script = ExtResource("3_yk5g5")
-room_defs_path = "res://src/games/gunner/rooms.txt"
+defs_path = "res://src/games/gunner/rooms.txt"
 metadata/_edit_lock_ = true

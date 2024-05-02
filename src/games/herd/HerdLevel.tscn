@@ -13,7 +13,7 @@ script = ExtResource("2_gflsp")
 _seed = 1413193361
 tile_size = 32
 room_count = 1
-room_defs_path = "res://src/games/herd/rooms.txt"
+defs_path = "res://src/games/herd/rooms.txt"
 
 [node name="Rooms" type="Node" parent="."]
 

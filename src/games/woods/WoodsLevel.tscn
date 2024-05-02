@@ -10,7 +10,7 @@ script = ExtResource("1_ayh66")
 script = ExtResource("2_qj741")
 _seed = 372301141
 room_count = 6
-room_defs_path = "res://src/games/woods/rooms.txt"
+defs_path = "res://src/games/woods/rooms.txt"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -1270.0

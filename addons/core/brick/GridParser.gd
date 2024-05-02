@@ -1,12 +1,9 @@
 @tool
 extends Object
 class_name GridParser
-# TODO rename to GridParser? ShapeParser?
 
 ## public types #####################################################
 
-# NOTE this is not used! just a thought.
-# consider validating dictionary/converting to this obj
 class GridParserOpts:
 	extends Object
 
@@ -20,8 +17,6 @@ class GridParserOpts:
 
 		if opts.get("defs_path"):
 			defs_path = opts.get("defs_path")
-		elif opts.get("room_defs_path"):
-			defs_path = opts.get("room_defs_path")
 		if opts.get("contents"):
 			contents = opts.get("contents")
 

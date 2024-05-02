@@ -39,3 +39,11 @@ static func all_enemies():
 
 static func get_enemy_scene(ent_id):
 	return Pandora.get_entity(ent_id).get_scene()
+
+static func enemy_for_label(label: String):
+	var matches = all_enemies().filter(func(en):
+		return en.get_label() == label)
+	if len(matches) > 1:
+		Log.warn("Found multiple matches for label", label, matches)
+	if len(matches) > 0:
+		return matches[0]

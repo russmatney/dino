@@ -39,3 +39,11 @@ static func all_entities():
 
 static func get_entity_scene(ent_id):
 	return Pandora.get_entity(ent_id).get_scene()
+
+static func entity_for_label(label: String):
+	var matches = all_entities().filter(func(ent):
+		return ent.get_label() == label)
+	if len(matches) > 1:
+		Log.warn("Found multiple matches for label", label, matches)
+	if len(matches) > 0:
+		return matches[0]

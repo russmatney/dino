@@ -15,7 +15,7 @@ level_def = SubResource("Resource_ieo0l")
 [node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
 script = ExtResource("2_h4345")
 _seed = 2022233511
-room_defs_path = "res://src/dino/levels/levels.txt"
+defs_path = "res://src/dino/levels/levels.txt"
 
 [node name="Rooms" type="Node" parent="."]
 

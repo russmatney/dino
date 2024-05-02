@@ -12,7 +12,7 @@ script = ExtResource("2_6o868")
 _seed = 46731113
 tile_size = 32
 room_count = 1
-room_defs_path = "res://src/games/harvey/rooms.txt"
+defs_path = "res://src/games/harvey/rooms.txt"
 
 [node name="Rooms" type="Node" parent="."]
 

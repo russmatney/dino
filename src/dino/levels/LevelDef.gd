@@ -22,6 +22,9 @@ func get_tiles_scene() -> PackedScene:
 func get_base_square_size() -> int:
 	return get_integer("base_square_size")
 
+func get_genre_type() -> DinoData.GenreType:
+	return DinoData.to_genre_type(get_string("genre_type"))
+
 func data():
 	return {
 		display_name=get_display_name(),

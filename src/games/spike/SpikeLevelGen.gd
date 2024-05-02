@@ -59,26 +59,6 @@ func get_room_opts(opts):
 				p.position.x += opts.tile_size/2.0
 				p.position.y += opts.tile_size/4.0
 				},
-			# NOTE using the roombox for this portal/warping/wraping might be alot easier
-			"PortalTop": {
-				new_node=func():
-					var top = Marker2D.new()
-					top.name = "Top"
-					return top,
-				find_entity=func(entities):
-					for ent in entities:
-						# TODO this breaks b/c names are weak! (if there are multiple 'Top')
-						if ent.name == "Top":
-							return ent,
-				setup_with_entities=func(top, entities):
-					# find portal_edges, add yourself to it?
-					for ent in entities:
-						if ent.name == "PortalEdges":
-							top.reparent(ent)
-							break
-					# return updated entities
-					return entities.filter(func(ent): return ent.name != "Top")
-					},
 			}})
 
 	return agg.room_opts

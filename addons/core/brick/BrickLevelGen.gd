@@ -48,14 +48,6 @@ static func generate_level(opts: Dictionary) -> Dictionary:
 		for ent in room.entities:
 			entities.append(ent)
 
-	if "label_to_entity" in opts:
-		for label in opts.label_to_entity:
-			var ent_opts = opts.label_to_entity[label]
-			if "find_entity" in ent_opts and "setup_with_entities" in ent_opts:
-				var ent = ent_opts.find_entity.call(entities)
-				if ent != null:
-					entities = ent_opts.setup_with_entities.call(ent, entities)
-
 	# build update dict
 	var data = {
 		seed=opts.seed,
@@ -240,13 +232,18 @@ signal nodes_transferred()
 
 @export var tile_size = 16
 @export var room_count = 5
-@export_file var room_defs_path
+@export_file var defs_path
+func get_defs_path():
+	return defs_path
 
 var entities_node: Node2D
 var tilemaps_node: Node2D
 var rooms_node: Node2D
 
 @export var show_color_rect: bool
+
+func to_pretty():
+	return [_seed, tile_size, room_count, defs_path]
 
 ## enter_tree ######################################################################
 
@@ -260,7 +257,7 @@ func generate(opts={}):
 		seed=_seed,
 		tile_size=tile_size,
 		room_count=room_count,
-		defs_path=room_defs_path,
+		defs_path=defs_path,
 		show_color_rect=show_color_rect,
 		})
 

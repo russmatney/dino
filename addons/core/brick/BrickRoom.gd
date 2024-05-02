@@ -6,7 +6,7 @@ class BrickRoomOpts:
 	extends Object
 
 	var parsed_room_defs: GridDefs
-	var room_defs_path: String
+	var defs_path: String
 	var contents: String
 
 	var tile_size: int
@@ -38,7 +38,7 @@ class BrickRoomOpts:
 		_opts = opts
 
 		parsed_room_defs = opts.get("parsed_room_defs")
-		room_defs_path = opts.get("room_defs_path", "")
+		defs_path = opts.get("defs_path", "")
 		contents = opts.get("contents", "")
 
 		tile_size = opts.tile_size
@@ -110,24 +110,32 @@ static func add_tilemaps(room: BrickRoom, opts: BrickRoomOpts):
 
 ## entities ##################################################################
 
-static func add_entity(crd, room: BrickRoom, ent_opts, opts: BrickRoomOpts):
-	var ent
-	if "new_node" in ent_opts:
-		ent = ent_opts.new_node.call()
-	elif "scene" in ent_opts:
-		ent = ent_opts.scene.instantiate()
-	ent.position = crd_to_position(crd, opts)
-	if ent_opts.get("setup"):
-		ent_opts.setup.call(ent)
-	room.add_child(ent)
-	room.entities.append(ent)
+static func add_entity(crd, room: BrickRoom, ent, opts: BrickRoomOpts):
+	var node
+	if ent is PandoraEntity:
+		node = ent.get_scene().instantiate()
+	elif ent is Dictionary:
+		if "scene" in ent:
+			node = ent.scene.instantiate()
+	if not node:
+		Log.warn("Could not create node for entity", ent)
+	node.position = crd_to_position(crd, opts)
+	room.add_child(node)
+	room.entities.append(node)
 	return ent
 
 static func add_entities(room, opts):
 	var crds = room.def.coords()
 	for label in opts.label_to_entity:
+		# TODO may want to pull/check some runtime instances
+		var ent = DinoEntity.entity_for_label(label)
+		if not ent:
+			ent = DinoEnemy.enemy_for_label(label)
+		if not ent:
+			Log.warn("No dino entity/enemy for label", label)
+			ent = opts.label_to_entity.get(label)
 		crds.filter(func(c): return label in c.cell).map(func(crd):
-			add_entity(crd, room, opts.label_to_entity.get(label), opts))
+			add_entity(crd, room, ent, opts))
 
 ## color rect ##################################################################
 

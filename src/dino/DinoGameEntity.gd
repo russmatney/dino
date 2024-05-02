@@ -16,8 +16,8 @@ func is_enabled() -> bool:
 func get_level_scene() -> PackedScene:
 	return get_resource("level_scene")
 
-func get_player_type() -> String:
-	return get_string("player_type")
+func get_genre_type() -> DinoData.GenreType:
+	return DinoData.to_genre_type(get_string("genre_type"))
 
 ## data ##########################################################
 

@@ -13,7 +13,7 @@ script = ExtResource("2_5ovga")
 _seed = 3797858323
 tile_size = 24
 room_count = 3
-room_defs_path = "res://src/games/shirt/room_defs.txt"
+defs_path = "res://src/games/shirt/room_defs.txt"
 
 [node name="Rooms" type="Node2D" parent="."]
 

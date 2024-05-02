@@ -44,10 +44,6 @@ static func create_level(def: LevelDef, opts={}):
 	l.level_gen.name = "LevelGen"
 	l.add_child(l.level_gen)
 
-	l.quest_manager = QuestManager.new()
-	l.quest_manager.name = "QuestManager"
-	l.add_child(l.quest_manager)
-
 	if def.get_level_gen_script():
 		l.level_gen.set_script(def.get_level_gen_script())
 
@@ -59,11 +55,6 @@ static func create_level_from_game(ent: DinoGameEntity, opts={}):
 	var scene = ent.get_level_scene()
 	var level = scene.instantiate()
 
-	if not level.get_node_or_null("QuestManager"):
-		level.quest_manager = QuestManager.new()
-		level.quest_manager.name = "QuestManager"
-		level.add_child(level.quest_manager)
-
 	# TODO clear existing nodes/ents/quests on these scenes?
 	# TODO or, refactor game ents into level defs?
 	level.regenerate(opts)
@@ -73,7 +64,6 @@ static func create_level_from_game(ent: DinoGameEntity, opts={}):
 
 @export var genre_type: DinoData.GenreType
 @export var level_def: LevelDef
-@export var game_entity: DinoGameEntity
 
 @export var regen_with_level_def: bool = false :
 	set(v):
@@ -86,15 +76,44 @@ func regen_with_def(def):
 	if not def:
 		return
 
+	genre_type = def.get_genre_type()
+
 	# ensure level gen node
 	level_gen.set_script(def.get_level_gen_script())
 
 	# set level_opts
 	level_opts.tile_size = def.get_base_square_size()
 	# could instead read and pass as 'contents'
-	level_opts.room_defs_path = def.get_def_path()
+	level_opts.defs_path = def.get_def_path()
 	# .... maybe.
 	level_opts.label_to_tilemap = {"Tile": {scene=def.get_tiles_scene()}}
+
+	regenerate()
+
+@export var game_entity: DinoGameEntity
+
+@export var regen_with_game_ent: bool = false :
+	set(v):
+		if not Engine.is_editor_hint():
+			return
+		if game_entity:
+			regen_with_ent(game_entity)
+
+func regen_with_ent(ent: DinoGameEntity):
+	if not ent:
+		return
+
+	var scene = ent.get_level_scene()
+	var level = scene.instantiate()
+
+	genre_type = ent.get_genre_type()
+
+	# ensure level gen node
+	for ch in level.get_children():
+		if ch is BrickLevelGen:
+			level_gen.set_script(ch.get_script())
+			level_opts.defs_path = ch.get_defs_path()
+			break
 
 	regenerate()
 
