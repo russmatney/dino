@@ -318,6 +318,11 @@ weapon_swap_menu={
 2d_physics/layer_13="pits"
 2d_physics/layer_14="pit_fallers"
 
+[phantom_camera]
+
+updater/enable_updater=false
+updater/show_new_release_info_on_editor_launch_in_output=false
+
 [physics]
 
 common/enable_pause_aware_picking=true
