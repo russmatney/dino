@@ -51,7 +51,7 @@ var tile_size = 16
 
 var index: int = 0
 
-@export var constraints: Array[RoomInputs] = []
+@export var constraints: Array[RoomInput] = []
 
 func to_printable():
 	return {
@@ -91,7 +91,7 @@ func _init(opts={}):
 		if conses is Array and conses.is_empty():
 			pass
 		else:
-			RoomInputs.apply_constraints(conses, self)
+			RoomInput.apply_constraints(conses, self)
 
 func set_local_cells(cells):
 	var min_cell := Vector3i(Vector2i.MAX.x, Vector2i.MAX.y, 0)
@@ -218,4 +218,4 @@ func is_neighboring_cell(a: Vector3i, b: Vector3i) -> bool:
 ## constraints #####################################################3
 
 func reapply_constraints():
-	RoomInputs.apply_constraints(constraints, self)
+	RoomInput.apply_constraints(constraints, self)

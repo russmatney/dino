@@ -94,7 +94,7 @@ func update_edit_tilesets():
 		return
 
 	var items = []
-	items.append_array(RoomInputs.all_tilemap_scenes.map(func(tm):
+	items.append_array(RoomInput.all_tilemap_scenes.map(func(tm):
 		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = load(tm)}))
 
 	var popup = edit_tileset_menu_button.get_popup()
@@ -110,7 +110,7 @@ func update_edit_constraints():
 	var items = []
 	items.append_array(current_room_def.constraints.map(func(cons):
 		return {label="Remove '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.erase(cons)}))
-	items.append_array(RoomInputs.all_constraints.map(func(cons):
+	items.append_array(RoomInput.all_constraints.map(func(cons):
 		return {label="Add '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.append(cons)}))
 
 	var popup = edit_constraints_menu_button.get_popup()

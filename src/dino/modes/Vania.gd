@@ -1,5 +1,9 @@
 extends Node2D
 
+## data ##################################################3
+
+var tower_game = []
+
 ## vars ##################################################3
 
 var vania_game_scene = preload("res://src/dino/vania/VaniaGame.tscn")
@@ -57,35 +61,35 @@ func start_game():
 
 func initial_room_inputs():
 	var inputs = [{
-			RoomInputs.HAS_PLAYER: {},
-			RoomInputs.HAS_CANDLE: {},
-			RoomInputs.HAS_CHECKPOINT: {},
-			RoomInputs.IN_SMALL_ROOM: {},
-			RoomInputs.HAS_ENTITIES: {entity_ids=[
+			RoomInput.HAS_PLAYER: {},
+			RoomInput.HAS_CANDLE: {},
+			RoomInput.HAS_CHECKPOINT: {},
+			RoomInput.IN_SMALL_ROOM: {},
+			RoomInput.HAS_ENTITIES: {entity_ids=[
 				DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH1,
 				DinoEntityIds.BUSH2,
 				]},
-			RoomInputs.HAS_EFFECTS: {effects=[
+			RoomInput.HAS_EFFECTS: {effects=[
 				RoomEffect.snow_fall(),
 				RoomEffect.rain_fall(),
 				]},
 		},
-		RoomInputs.random_room().merge_constraint({
-			RoomInputs.HAS_EFFECTS: {effects=[
+		RoomInput.random_room().merge_constraint({
+			RoomInput.HAS_EFFECTS: {effects=[
 				RoomEffect.snow_fall(),
 				]},
-			RoomInputs.HAS_ENTITIES: {entity_ids=[
+			RoomInput.HAS_ENTITIES: {entity_ids=[
 				DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH1,
 				DinoEntityIds.BUSH2,
 				]},
 			}),
-		RoomInputs.random_room().merge_constraint({
-			RoomInputs.HAS_EFFECTS: {effects=[
+		RoomInput.random_room().merge_constraint({
+			RoomInput.HAS_EFFECTS: {effects=[
 				RoomEffect.rain_fall(),
 				]},
-			RoomInputs.HAS_ENTITIES: {entity_ids=[
+			RoomInput.HAS_ENTITIES: {entity_ids=[
 				DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH1,
 				DinoEntityIds.BUSH2,
@@ -97,7 +101,7 @@ func initial_room_inputs():
 		var opts = {}
 		if enemy_entities != null:
 			opts["enemy_entities"] = enemy_entities
-		return RoomInputs.random_room(opts)
+		return RoomInput.random_room(opts)
 		, room_count - 1))
 	return inputs
 

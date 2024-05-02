@@ -5,7 +5,7 @@ class_name VaniaRoomTest
 
 func test_build_room_sets_tilemap_borders():
 	var room = auto_free(VaniaRoom.new())
-	var def = VaniaRoomDef.new({room_inputs=[RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,]})
+	var def = VaniaRoomDef.new({room_inputs=[RoomInput.IN_SPACESHIP, RoomInput.IN_SMALL_ROOM,]})
 
 	def.map_cells = [Vector3i(0, 0, 0)]
 
@@ -36,8 +36,8 @@ func test_build_room_walls_concave_shape():
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({room_inputs=[
-		RoomInputs.IN_SPACESHIP,
-		{RoomInputs.CUSTOM_ROOM: {shape=shape}},
+		RoomInput.IN_SPACESHIP,
+		{RoomInput.CUSTOM_ROOM: {shape=shape}},
 		]})
 
 	def.map_cells = shape
@@ -82,7 +82,7 @@ func test_build_room_walls_concave_shape():
 func test_build_room_sets_tilemap_doors():
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new()
-	RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,], def)
+	RoomInput.apply_constraints([RoomInput.IN_SPACESHIP, RoomInput.IN_SMALL_ROOM,], def)
 
 	def.map_cells = [Vector3i(0, 0, 0)]
 
@@ -147,7 +147,7 @@ x..
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP, RoomInputs.IN_SMALL_ROOM,], def)
+	RoomInput.apply_constraints([RoomInput.IN_SPACESHIP, RoomInput.IN_SMALL_ROOM,], def)
 
 	room.set_room_def(def)
 	room.setup_tileset()
@@ -193,9 +193,9 @@ x..
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInputs.apply_constraints([
-		RoomInputs.IN_SPACESHIP,
-		RoomInputs.IN_SMALL_ROOM,
+	RoomInput.apply_constraints([
+		RoomInput.IN_SPACESHIP,
+		RoomInput.IN_SMALL_ROOM,
 	], def)
 
 	room.set_room_def(def)
@@ -236,10 +236,10 @@ xxx
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({entity_defs=ent_defs})
-	RoomInputs.apply_constraints([
-		RoomInputs.IN_SPACESHIP,
-		RoomInputs.HAS_PLAYER,
-		RoomInputs.IN_SMALL_ROOM,
+	RoomInput.apply_constraints([
+		RoomInput.IN_SPACESHIP,
+		RoomInput.HAS_PLAYER,
+		RoomInput.IN_SMALL_ROOM,
 	], def)
 
 	room.set_room_def(def)

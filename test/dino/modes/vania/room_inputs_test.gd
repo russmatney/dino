@@ -1,5 +1,5 @@
 extends GdUnitTestSuite
-class_name VaniaRoomInputsTest
+class_name VaniaRoomInputTest
 
 func before():
 	Log.set_colors_termsafe()
@@ -7,7 +7,7 @@ func before():
 ## empty state ###########################################################
 
 func test_room_inputs_empty_inputs_behavior():
-	var inp = RoomInputs.new()
+	var inp = RoomInput.new()
 	assert_array(inp.tilemap_scenes).is_empty()
 	assert_array(inp.entities).is_empty()
 	assert_array(inp.room_shape).is_empty()
@@ -28,7 +28,7 @@ func test_room_inputs_set_entities():
 		Pandora.get_entity(DinoEntityIds.PLAYERSPAWNPOINT),
 		Pandora.get_entity(DinoEntityIds.CANDLE),
 		]
-	var inp = RoomInputs.new({entities=some_ents})
+	var inp = RoomInput.new({entities=some_ents})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
@@ -43,12 +43,12 @@ func test_room_inputs_combine_entities():
 		Pandora.get_entity(DinoEntityIds.PLAYERSPAWNPOINT),
 		Pandora.get_entity(DinoEntityIds.CANDLE),
 		]
-	var inp_1 = RoomInputs.new({entities=some_ents})
+	var inp_1 = RoomInput.new({entities=some_ents})
 	var some_more_ents = [
 		Pandora.get_entity(DinoEntityIds.BOX),
 		Pandora.get_entity(DinoEntityIds.CANDLE),
 		]
-	var inp_2 = RoomInputs.new({entities=some_more_ents})
+	var inp_2 = RoomInput.new({entities=some_more_ents})
 
 	var inp = inp_1.merge(inp_2)
 
@@ -68,7 +68,7 @@ func test_room_inputs_combine_entities():
 
 func test_room_inputs_set_tilemaps():
 	var some_scene = load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")
-	var inp = RoomInputs.new({tilemap_scenes=[some_scene]})
+	var inp = RoomInput.new({tilemap_scenes=[some_scene]})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
@@ -84,9 +84,9 @@ func test_room_inputs_combine_tilemaps():
 	var gold_tile = load("res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn")
 	var some_tilemaps = [vol_tile, grass_tile]
 	var some_overlapping_tilemaps = [vol_tile, gold_tile]
-	var inp_1 = RoomInputs.new({tilemap_scenes=some_tilemaps})
-	var inp_2 = RoomInputs.new({tilemap_scenes=some_overlapping_tilemaps})
-	var inp = RoomInputs.merge_many([inp_1, inp_2])
+	var inp_1 = RoomInput.new({tilemap_scenes=some_tilemaps})
+	var inp_2 = RoomInput.new({tilemap_scenes=some_overlapping_tilemaps})
+	var inp = RoomInput.merge_many([inp_1, inp_2])
 
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
@@ -104,7 +104,7 @@ func test_room_inputs_combine_tilemaps():
 
 func test_room_inputs_room_shapes_set_local_cells():
 	var some_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0)]
-	var inp = RoomInputs.new({room_shapes=[some_shape]})
+	var inp = RoomInput.new({room_shapes=[some_shape]})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
@@ -117,8 +117,8 @@ func test_room_inputs_room_shapes_combine_before_selection():
 
 	var some_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0)]
 	var some_other_shape = [Vector3i(0, 0, 0)]
-	var inp1 = RoomInputs.new({room_shapes=[some_shape]})
-	var inp2 = RoomInputs.new({room_shapes=[some_other_shape, some_shape]})
+	var inp1 = RoomInput.new({room_shapes=[some_shape]})
+	var inp2 = RoomInput.new({room_shapes=[some_other_shape, some_shape]})
 	var inp = inp1.merge(inp2)
 
 	assert_array(inp.room_shapes).is_not_empty()
@@ -133,8 +133,8 @@ func test_room_inputs_room_shape_always_overwrites_room_shapes():
 	# if `room_shape` is set, it is used instead of random from 'room_shapes'
 	var some_shapes = [[Vector3i(0, 0, 0), Vector3i(1, 0, 0)], [Vector3i(0, 0, 0), Vector3i(0, 1, 0)],]
 	var some_other_shape = [Vector3i(0, 0, 0)]
-	var inp1 = RoomInputs.new({room_shapes=some_shapes})
-	var inp2 = RoomInputs.new({room_shape=some_other_shape})
+	var inp1 = RoomInput.new({room_shapes=some_shapes})
+	var inp2 = RoomInput.new({room_shape=some_other_shape})
 	var inp = inp1.merge(inp2)
 
 	assert_array(inp.room_shapes).is_not_empty()
@@ -166,7 +166,7 @@ func test_room_inputs_room_shape_always_overwrites_room_shapes():
 func test_room_def_inputs_spaceship_sets_tilemap():
 	# spaceship sets a tileset as expected
 	var def = VaniaRoomDef.new()
-	var inp = RoomInputs.apply_constraints([RoomInputs.IN_SPACESHIP], def)
+	var inp = RoomInput.apply_constraints([RoomInput.IN_SPACESHIP], def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
@@ -180,10 +180,10 @@ func test_room_def_inputs_spaceship_sets_tilemap():
 
 func test_room_def_inputs_player_room_sets_entities_and_shape():
 	var def = VaniaRoomDef.new()
-	var inp = RoomInputs.apply_constraints([
-		RoomInputs.HAS_PLAYER,
-		RoomInputs.IN_SPACESHIP,
-		RoomInputs.IN_SMALL_ROOM,
+	var inp = RoomInput.apply_constraints([
+		RoomInput.HAS_PLAYER,
+		RoomInput.IN_SPACESHIP,
+		RoomInput.IN_SMALL_ROOM,
 		], def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
@@ -202,9 +202,9 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 
 func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 	var def = VaniaRoomDef.new()
-	var inp = RoomInputs.apply_constraints([
-		RoomInputs.HAS_LEAF,
-		RoomInputs.IN_KINGDOM,
+	var inp = RoomInput.apply_constraints([
+		RoomInput.HAS_LEAF,
+		RoomInput.IN_KINGDOM,
 		], def)
 
 	assert_array(inp.tilemap_scenes).is_not_null()
@@ -227,24 +227,24 @@ func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 
 func test_apply_constraints_keeps_local_cells():
 	var def = VaniaRoomDef.new()
-	var _inp = RoomInputs.apply_constraints([
-		RoomInputs.IN_SMALL_ROOM,
+	var _inp = RoomInput.apply_constraints([
+		RoomInput.IN_SMALL_ROOM,
 		], def)
 
-	assert_array(def.local_cells).is_equal(RoomInputs.all_room_shapes.small)
+	assert_array(def.local_cells).is_equal(RoomInput.all_room_shapes.small)
 
 	var my_local_cells = [Vector3i(0, 0, 0)]
 	def = VaniaRoomDef.new({local_cells=my_local_cells})
-	_inp = RoomInputs.apply_constraints([RoomInputs.IN_LARGE_ROOM,], def)
+	_inp = RoomInput.apply_constraints([RoomInput.IN_LARGE_ROOM,], def)
 
 	assert_array(def.local_cells).is_equal(my_local_cells)
 
 func test_apply_constraints_appends_multiple_entities():
 	var def = VaniaRoomDef.new()
-	var inp = RoomInputs.apply_constraints([
-			RoomInputs.HAS_TARGET,
-			RoomInputs.HAS_TARGET,
-			RoomInputs.HAS_PLAYER,
+	var inp = RoomInput.apply_constraints([
+			RoomInput.HAS_TARGET,
+			RoomInput.HAS_TARGET,
+			RoomInput.HAS_PLAYER,
 			], def)
 
 	assert_int(len(inp.entities)).is_equal(3)
@@ -257,9 +257,9 @@ func test_apply_constraints_appends_multiple_entities():
 func test_apply_constraints_supports_dicts_and_opts():
 	var def = VaniaRoomDef.new()
 	# pass just a dict
-	var inp = RoomInputs.apply_constraints({
-			RoomInputs.HAS_TARGET: {count=4},
-			RoomInputs.HAS_PLAYER: {}
+	var inp = RoomInput.apply_constraints({
+			RoomInput.HAS_TARGET: {count=4},
+			RoomInput.HAS_PLAYER: {}
 			}, def)
 
 	assert_int(len(inp.entities)).is_equal(5)
@@ -271,9 +271,9 @@ func test_apply_constraints_supports_dicts_and_opts():
 
 	def = VaniaRoomDef.new()
 	# pass just an array of dict
-	inp = RoomInputs.apply_constraints([{
-			RoomInputs.HAS_TARGET: {count=4},
-			RoomInputs.HAS_PLAYER: {}
+	inp = RoomInput.apply_constraints([{
+			RoomInput.HAS_TARGET: {count=4},
+			RoomInput.HAS_PLAYER: {}
 			}], def)
 
 	assert_int(len(inp.entities)).is_equal(5)
@@ -285,10 +285,10 @@ func test_apply_constraints_supports_dicts_and_opts():
 
 	def = VaniaRoomDef.new()
 	# pass just an array of dicts
-	inp = RoomInputs.apply_constraints([{
-			RoomInputs.HAS_TARGET: {count=4},
+	inp = RoomInput.apply_constraints([{
+			RoomInput.HAS_TARGET: {count=4},
 		}, {
-			RoomInputs.HAS_PLAYER: {}
+			RoomInput.HAS_PLAYER: {}
 		}], def)
 
 	assert_int(len(inp.entities)).is_equal(5)

@@ -1,5 +1,5 @@
 extends Resource
-class_name RoomInputs
+class_name RoomInput
 
 # TODO support one way platforms, spikes via grid/tiles
 # static var all_entities = [
@@ -149,8 +149,8 @@ func to_printable():
 
 ## merge ######################################################
 
-func merge(b: RoomInputs):
-	return RoomInputs.new({
+func merge(b: RoomInput):
+	return RoomInput.new({
 		entities=U.append_array(entities, b.entities),
 		enemies=U.append_array(enemies, b.enemies),
 		room_shape=U._or(b.room_shape, room_shape),
@@ -161,7 +161,7 @@ func merge(b: RoomInputs):
 		})
 
 func merge_constraint(b):
-	return RoomInputs.apply_constraint(self, b)
+	return RoomInput.apply_constraint(self, b)
 
 ## update room def ######################################################
 
@@ -200,7 +200,7 @@ static func merge_many(inputs):
 static func apply_constraints(conses, def: VaniaRoomDef):
 	var existing_shape = def.local_cells
 
-	if conses is RoomInputs:
+	if conses is RoomInput:
 		conses = [conses]
 
 	if conses is Dictionary:
@@ -212,7 +212,7 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 
 	var ri = conses.map(func(cons):
 		# map constants to dicts with default opts
-		if cons is RoomInputs:
+		if cons is RoomInput:
 			return cons
 		elif cons is String:
 			return {cons: {}}
@@ -225,11 +225,11 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 			func(agg_inp, cons_dict):
 				if cons_dict == null:
 					return agg_inp
-				elif cons_dict is RoomInputs:
+				elif cons_dict is RoomInput:
 					return agg_inp.merge(cons_dict)
 				# apply each constraint_dict in succession
-				return RoomInputs.apply_constraint(agg_inp, cons_dict),
-			RoomInputs.new())
+				return RoomInput.apply_constraint(agg_inp, cons_dict),
+			RoomInput.new())
 	def.constraints.assign([ri])
 
 	ri.update_def(def)
@@ -239,11 +239,11 @@ static func apply_constraints(conses, def: VaniaRoomDef):
 		def.set_local_cells(existing_shape)
 	return ri
 
-static func apply_constraint(inp: RoomInputs, cons_dict):
+static func apply_constraint(inp: RoomInput, cons_dict):
 	if cons_dict is String:
 		cons_dict = {cons_dict: {}}
 	for k in cons_dict.keys():
-		var cons_inp = RoomInputs.get_constraint_data(k, cons_dict.get(k))
+		var cons_inp = RoomInput.get_constraint_data(k, cons_dict.get(k))
 		inp = inp.merge(cons_inp)
 	return inp
 
@@ -305,35 +305,35 @@ static func get_constraint_data(cons_key, opts={}):
 
 		_:
 			Log.warn("No constraint found for cons", cons_key)
-			return RoomInputs.new()
+			return RoomInput.new()
 
 
 ## room components ######################################################33
 
 static func random_enemies(opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		enemies=U.rand_of(opts.get("enemy_entities", DinoEnemy.all_enemies()), U.rand_of([0,1,2,3]), true)
 		})
 
 static func random_entities(opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		entities=U.rand_of(opts.get("entities", DinoEntity.all_entities()), U.rand_of([2,3,4]))
 		})
 
 static func random_room_shapes(opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shapes=opts.get("room_shapes", all_room_shapes.values()),
 		})
 
 static func random_tilemaps(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		tilemap_scenes=[
 			load(all_tilemap_scenes.pick_random()),
 			load(all_tilemap_scenes.pick_random()),
 			]})
 
 static func random_effects(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_effects=U.rand_of([
 			RoomEffect.random_effect(),
 			RoomEffect.random_effect(),
@@ -353,24 +353,24 @@ const HAS_EFFECTS = "has_effects"
 
 static func has_effects(opts):
 	if opts.get("effects"):
-		return RoomInputs.new({
+		return RoomInput.new({
 			room_effects=opts.get("effects")
 			})
-	return RoomInputs.random_effects()
+	return RoomInput.random_effects()
 
 
 static func has_rain_fall(_opts):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_effects=[RoomEffect.rain_fall()]
 		})
 
 static func has_snow_fall(_opts):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_effects=[RoomEffect.snow_fall()]
 		})
 
 static func has_dust(_opts):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_effects=[RoomEffect.dust()]
 		})
 
@@ -386,22 +386,22 @@ const CUSTOM_ROOM = "in_custom_room"
 const HAS_ROOM = "in_custom_room"
 
 static func large_room_shape(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
 		})
 
 static func small_room_shape(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=all_room_shapes.small,
 		})
 
 static func tall_room_shape(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=[all_room_shapes.tall, all_room_shapes.tall_3].pick_random(),
 		})
 
 static func wide_room_shape(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=[
 			all_room_shapes.wide,
 			all_room_shapes.wide_3,
@@ -412,12 +412,12 @@ static func wide_room_shape(_opts={}):
 static func custom_room_shape(opts={}):
 	if opts.get("shape") == null:
 		Log.warn("Custom Room shape missing 'shape'!")
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=opts.get("shape")
 		})
 
 static func L_room_shape(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=[
 			all_room_shapes.L_shape,
 			all_room_shapes.L_backwards_shape,
@@ -427,7 +427,7 @@ static func L_room_shape(_opts={}):
 		})
 
 static func T_room_shape(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		room_shape=[
 			all_room_shapes.T_shape,
 			all_room_shapes.T_inverted_shape,
@@ -444,7 +444,7 @@ static func has_tiles(opts):
 	var tmap_scenes = opts.get("tilemap_scenes")
 	if tmap_scenes == null:
 		Log.warn("No tilemaps_scenes passed to tile constraint", opts)
-	return RoomInputs.new({tilemap_scenes=tmap_scenes})
+	return RoomInput.new({tilemap_scenes=tmap_scenes})
 
 const IN_WOODEN_BOXES = "on_wooden_boxes"
 const IN_SPACESHIP = "in_spaceship"
@@ -453,32 +453,32 @@ const IN_VOLCANO = "in_volcano"
 const IN_GRASSY_CAVE = "in_grassy_cave"
 
 static func wooden_boxes(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		tilemap_scenes=[
 			load("res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn")
 			],
 		})
 
 static func spaceship(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		tilemap_scenes=[
 			load("res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn")
 			],
 		})
 
 static func kingdom(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		tilemap_scenes=[load("res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn")],
 		})
 
 static func volcano(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		tilemap_scenes=[
 			load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")],
 		})
 
 static func grassy_cave(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		tilemap_scenes=[
 			load("res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn")],
 		})
@@ -509,19 +509,19 @@ static func has_enemy(ent_id, opts={}):
 	if ent == null:
 		Log.warn("No entity for id", ent_id)
 		return
-	var inp = RoomInputs.new({enemies=U.repeat(ent, opts.get("count", 1))})
+	var inp = RoomInput.new({enemies=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
 static func has_boss(opts={}):
 	if opts.get("count", 1):
-		return RoomInputs.new({
+		return RoomInput.new({
 			enemies=[
 				[Pandora.get_entity(EnemyIds.MONSTROAR)],
 				[Pandora.get_entity(EnemyIds.BEEFSTRONAUT)]
 				].pick_random(),
 			})
 	else:
-		return RoomInputs.new({
+		return RoomInput.new({
 			enemies=[
 				Pandora.get_entity(EnemyIds.MONSTROAR),
 				Pandora.get_entity(EnemyIds.BEEFSTRONAUT),
@@ -563,7 +563,7 @@ static func has_entity(ent_id, opts={}):
 	if ent == null:
 		Log.warn("No entity for id", ent_id)
 		return
-	var inp = RoomInputs.new({entities=U.repeat(ent, opts.get("count", 1))})
+	var inp = RoomInput.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
 static func has_entities(opts={}):
@@ -571,14 +571,14 @@ static func has_entities(opts={}):
 	for ent_id in opts.get("entity_ids"):
 		ents.append(Pandora.get_entity(ent_id))
 	ents.append_array(opts.get("entities", []))
-	return RoomInputs.new({entities=ents})
+	return RoomInput.new({entities=ents})
 
 ## encounters ######################################################33
 
 const IS_COOKING_ROOM = "is_cooking_room"
 
 static func cooking_room(_opts={}):
-	return RoomInputs.new({
+	return RoomInput.new({
 		entities=["CookingPot", "Void"],
 		enemies=[Pandora.get_entity(EnemyIds.BLOB)],
 		})

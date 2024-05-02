@@ -18,7 +18,7 @@ var room_inputs = []
 
 var generating: Thread
 
-# capture in RoomInputs
+# capture in RoomInput
 var tile_size = 16
 
 signal finished_initial_room_gen
@@ -56,9 +56,9 @@ func on_room_loaded():
 
 func fallback_room_inputs():
 	var inputs = [{
-			RoomInputs.HAS_PLAYER: {}, RoomInputs.HAS_CANDLE: {},
-			RoomInputs.HAS_CHECKPOINT: {}, RoomInputs.IN_SMALL_ROOM: {}}]
-	inputs.append_array(U.repeat_fn(RoomInputs.random_room, 2))
+			RoomInput.HAS_PLAYER: {}, RoomInput.HAS_CANDLE: {},
+			RoomInput.HAS_CHECKPOINT: {}, RoomInput.IN_SMALL_ROOM: {}}]
+	inputs.append_array(U.repeat_fn(RoomInput.random_room, 2))
 	return inputs
 
 func on_finished_initial_room_gen():
@@ -153,7 +153,7 @@ func regenerate_other_rooms():
 func add_new_room(count=1):
 	# TODO room_inputs reading from vania-menu configged constraints
 	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size,
-		room_inputs=U.repeat_fn(RoomInputs.random_room, count)})
+		room_inputs=U.repeat_fn(RoomInput.random_room, count)})
 	room_defs = generator.add_rooms(new_room_defs)
 	Log.info(len(new_room_defs), " rooms added")
 
