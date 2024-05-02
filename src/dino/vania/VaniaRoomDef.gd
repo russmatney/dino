@@ -6,18 +6,20 @@ class_name VaniaRoomDef
 
 static var tile_defs_path = "res://src/dino/vania/tiles.txt"
 
-static func generate_defs(opts={}) -> Array[VaniaRoomDef]:
+static func to_defs(opts={}) -> Array[VaniaRoomDef]:
 	var t_defs = GridParser.parse({defs_path=tile_defs_path})
 	var defs: Array[VaniaRoomDef] = []
 
 	var room_inputs = opts.get("room_inputs", [])
+	var map_def = opts.get("map_def")
+	if map_def and room_inputs.is_empty():
+		room_inputs = map_def.room_inputs
 	if room_inputs.is_empty():
 		Log.warn("No room inputs passed, no defs to generate")
 
 	for inputs in room_inputs:
 		var def = VaniaRoomDef.new({
 			tile_defs=t_defs,
-			tile_size=opts.get("tile_size"),
 			room_inputs=inputs,
 			})
 		defs.append(def)

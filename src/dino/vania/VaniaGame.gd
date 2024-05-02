@@ -18,9 +18,6 @@ var map_def: MapDef
 
 var generating: Thread
 
-# capture in RoomInput
-var tile_size = 16
-
 signal finished_initial_room_gen
 
 ## ready #######################################################
@@ -51,12 +48,22 @@ func on_room_loaded():
 		id="room-name"
 		})
 
-func fallback_room_inputs():
-	var inputs = [{
-			RoomInput.HAS_PLAYER: {}, RoomInput.HAS_CANDLE: {},
-			RoomInput.HAS_CHECKPOINT: {}, RoomInput.IN_SMALL_ROOM: {}}]
-	inputs.append_array(U.repeat_fn(RoomInput.random_room, 2))
-	return inputs
+func fallback_map_def() -> MapDef:
+	return MapDef.new({
+		name="Fallback Map Def",
+		inputs=(func():
+		var inputs = [
+			RoomInput.merge_many([
+				RoomInput.has_entities({entity_ids=[
+					DinoEntityIds.PLAYERSPAWNPOINT,
+					DinoEntityIds.CANDLE,
+				]}),
+				RoomInput.small_room_shape(),
+				RoomInput.has_effects({effects=[RoomEffect.snow_fall()]})
+			])]
+		inputs.append_array(U.repeat_fn(RoomInput.random_room, 2))
+		return inputs
+		).call()})
 
 func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
@@ -104,17 +111,11 @@ func generate_rooms(opts={}):
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-	var inputs = []
 	var m_def = opts.get("map_def")
-	if m_def:
-		inputs = m_def.room_inputs
+	if not m_def:
+		m_def = fallback_map_def()
 
-	if inputs.is_empty():
-		inputs = fallback_room_inputs()
-
-	room_defs = VaniaRoomDef.generate_defs(U.merge({
-		tile_size=tile_size, room_inputs=inputs}, opts))
-	room_defs = generator.add_rooms(room_defs)
+	room_defs = generator.generate_map(map_def)
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -136,10 +137,7 @@ func regenerate_other_rooms():
 			continue
 		other_room_defs.append(rd)
 
-	# TODO room_inputs reading from vania-menu configged constraints
-	var new_room_defs = VaniaRoomDef.generate_defs({
-		tile_size=tile_size,
-		})
+	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_room()})
 	generator.remove_rooms(other_room_defs)
 	room_defs = generator.add_rooms(new_room_defs)
 
@@ -153,8 +151,7 @@ func regenerate_other_rooms():
 
 func add_new_room(count=1):
 	# TODO room_inputs reading from vania-menu configged constraints
-	var new_room_defs = VaniaRoomDef.generate_defs({tile_size=tile_size,
-		room_inputs=U.repeat_fn(RoomInput.random_room, count)})
+	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_rooms()})
 	room_defs = generator.add_rooms(new_room_defs)
 	Log.info(len(new_room_defs), " rooms added")
 

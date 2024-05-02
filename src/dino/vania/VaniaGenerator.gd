@@ -11,6 +11,12 @@ func _init():
 	# ensure directory exists
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
 
+## generate_map ##########################################################
+
+func generate_map(map_def: MapDef) -> Array[VaniaRoomDef]:
+	var defs = VaniaRoomDef.to_defs({map_def=map_def})
+	return add_rooms(defs)
+
 ## add_rooms ##########################################################
 
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
