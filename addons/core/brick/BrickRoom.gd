@@ -126,6 +126,7 @@ static func add_entity(crd, room: BrickRoom, ent, opts: BrickRoomOpts):
 
 static func add_entities(room, opts):
 	var crds = room.def.coords()
+	# TODO work around label to entity
 	for label in opts.label_to_entity:
 		# TODO may want to pull/check some runtime instances
 		var ent = DinoEntity.entity_for_label(label)
