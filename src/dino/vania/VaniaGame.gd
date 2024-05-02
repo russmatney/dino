@@ -14,7 +14,7 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 @onready var playground: Node2D = $%LoadPlayground
 
 var room_defs: Array[VaniaRoomDef] = []
-var room_inputs = []
+var map_def: MapDef
 
 var generating: Thread
 
@@ -42,10 +42,7 @@ func _ready():
 
 	set_process(false)
 
-	if room_inputs.is_empty():
-		room_inputs = fallback_room_inputs()
-
-	thread_room_generation({room_inputs=room_inputs})
+	thread_room_generation({map_def=map_def})
 
 func on_room_loaded():
 	# TODO only if first visit
@@ -107,7 +104,11 @@ func generate_rooms(opts={}):
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-	var inputs = opts.get("room_inputs", [])
+	var inputs = []
+	var m_def = opts.get("map_def")
+	if m_def:
+		inputs = m_def.room_inputs
+
 	if inputs.is_empty():
 		inputs = fallback_room_inputs()
 

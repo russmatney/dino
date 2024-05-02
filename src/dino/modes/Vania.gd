@@ -2,16 +2,157 @@ extends Node2D
 
 ## data ##################################################3
 
-var tower_game = []
+@onready var default_game = MapDef.new({
+	name="Vania",
+	room_inputs=(func():
+	var inputs = [
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+				DinoEntityIds.CANDLE,
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH2,
+			]}),
+			RoomInput.small_room_shape(),
+			RoomInput.has_effects({effects=[
+				RoomEffect.snow_fall(),
+				RoomEffect.rain_fall(),
+			]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.random_room(),
+			RoomInput.has_effects({effects=[
+				RoomEffect.snow_fall(),
+			]}),
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH1,
+			]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.random_room(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH2,
+			]}),
+		]),
+	]
+	inputs.append_array(U.repeat_fn(RoomInput.random_room, 3))
+	return inputs
+	).call()})
+
+@onready var tower_game = MapDef.new({
+	name="Tower",
+	room_inputs=[
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+				DinoEntityIds.TARGET,
+				DinoEntityIds.TARGET,
+				DinoEntityIds.TARGET,
+			]}),
+			RoomInput.wide_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.TARGET,
+				DinoEntityIds.TARGET,
+				DinoEntityIds.TARGET,
+			]}),
+			RoomInput.large_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.TARGET,
+				DinoEntityIds.TARGET,
+				DinoEntityIds.TARGET,
+			]}),
+			RoomInput.tall_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+	]})
+
+@onready var woods_game = MapDef.new({
+	name="Woods",
+	room_inputs=[
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAF,
+			]}),
+			RoomInput.wide_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAF,
+			]}),
+			RoomInput.large_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAF,
+				DinoEntityIds.LEAFGOD,
+			]}),
+			RoomInput.tall_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+	]})
+
+@onready var arcade_game = MapDef.new({
+	name="Arcade",
+	room_inputs=[
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.ARCADEMACHINE,
+			]}),
+			RoomInput.wide_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.ARCADEMACHINE,
+			]}),
+			RoomInput.large_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.ARCADEMACHINE,
+			]}),
+			RoomInput.tall_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+	]})
 
 ## vars ##################################################3
 
 var vania_game_scene = preload("res://src/dino/vania/VaniaGame.tscn")
 
 var player_entity: DinoPlayerEntity
-var enemy_entities
-var room_count = 3
 var game_node: Node2D
+var selected_map_def: MapDef
 
 @export var set_random_seed: bool:
 	set(v):
@@ -53,69 +194,14 @@ func start_game():
 
 	game_node = vania_game_scene.instantiate()
 
-	game_node.room_inputs = initial_room_inputs()
+	if not selected_map_def:
+		selected_map_def = arcade_game
+
+	game_node.map_def = selected_map_def
 
 	add_child.call_deferred(game_node)
-
-## room_inputs #################################333
-
-func initial_room_inputs():
-	var inputs = [{
-			RoomInput.HAS_PLAYER: {},
-			RoomInput.HAS_CANDLE: {},
-			RoomInput.HAS_CHECKPOINT: {},
-			RoomInput.IN_SMALL_ROOM: {},
-			RoomInput.HAS_ENTITIES: {entity_ids=[
-				DinoEntityIds.HANGINGLIGHT,
-				DinoEntityIds.BUSH1,
-				DinoEntityIds.BUSH2,
-				]},
-			RoomInput.HAS_EFFECTS: {effects=[
-				RoomEffect.snow_fall(),
-				RoomEffect.rain_fall(),
-				]},
-		},
-		RoomInput.random_room().merge_constraint({
-			RoomInput.HAS_EFFECTS: {effects=[
-				RoomEffect.snow_fall(),
-				]},
-			RoomInput.HAS_ENTITIES: {entity_ids=[
-				DinoEntityIds.HANGINGLIGHT,
-				DinoEntityIds.BUSH1,
-				DinoEntityIds.BUSH2,
-				]},
-			}),
-		RoomInput.random_room().merge_constraint({
-			RoomInput.HAS_EFFECTS: {effects=[
-				RoomEffect.rain_fall(),
-				]},
-			RoomInput.HAS_ENTITIES: {entity_ids=[
-				DinoEntityIds.HANGINGLIGHT,
-				DinoEntityIds.BUSH1,
-				DinoEntityIds.BUSH2,
-				]},
-			})
-		]
-
-	inputs.append_array(U.repeat_fn(func():
-		var opts = {}
-		if enemy_entities != null:
-			opts["enemy_entities"] = enemy_entities
-		return RoomInput.random_room(opts)
-		, room_count - 1))
-	return inputs
 
 ## set_player_entity #################################333
 
 func set_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
-
-## set_enemies #################################333
-
-func set_enemy_entities(ents):
-	enemy_entities = ents
-
-## set_room_count #################################333
-
-func set_room_count(count: int):
-	room_count = count

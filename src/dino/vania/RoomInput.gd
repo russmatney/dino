@@ -195,6 +195,7 @@ func update_def(def: VaniaRoomDef):
 ## static ######################################################
 
 static func merge_many(inputs):
+	# TODO support constraints (dict/consts) in the list too?
 	return inputs.reduce(func(a, b): return a.merge(b))
 
 static func apply_constraints(conses, def: VaniaRoomDef):
