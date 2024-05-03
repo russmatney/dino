@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg1p3g34ld000"]
+[gd_scene load_steps=9 format=3 uid="uid://bg1p3g34ld000"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_32aqh"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_wuxpl"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="3_r66ko"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_lkjus"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_oejwc"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="6_trxxs"]
+[ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="7_qd6ye"]
 
 [sub_resource type="Resource" id="Resource_qtoub"]
 script = ExtResource("2_wuxpl")
@@ -24,3 +26,12 @@ layer_0/tile_data = PackedInt32Array(-65566, 262144, 2, -30, 262144, 4, 65507, 6
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("5_oejwc")
+
+[node name="DinoHUD" type="Control" parent="." instance=ExtResource("6_trxxs")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_qd6ye")

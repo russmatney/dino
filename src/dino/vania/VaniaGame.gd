@@ -149,7 +149,7 @@ func regenerate_other_rooms():
 	if map and map.is_node_ready():
 		map.setup_walls_and_doors()
 
-func add_new_room(count=1):
+func add_new_room(_count=1):
 	# TODO room_inputs reading from vania-menu configged constraints
 	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_rooms()})
 	room_defs = generator.add_rooms(new_room_defs)
