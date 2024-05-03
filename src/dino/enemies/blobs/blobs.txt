@@ -1,0 +1,33 @@
+name Blobs
+
+==============
+LEGEND
+==============
+
+b = Blob
+c = Chaser
+w = Walker
+x = Tile
+
+==============
+ENTITIES
+==============
+
+name Blob
+
+...
+.b.
+...
+xxx
+
+name Chaser
+
+...
+.c.
+...
+
+name Walker
+
+...
+.w.
+...

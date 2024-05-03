@@ -994,6 +994,10 @@
 						"type": "string",
 						"value": "Blob"
 					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/enemies/blobs/blobs.txt"
+					},
 					"icon_texture": {
 						"type": "resource",
 						"value": "res://src/dino/enemies/blobs/status_portraits3.png"
@@ -1597,6 +1601,56 @@
 						"value": "res://src/dino/players/lilbighat/SSLilBigHat.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "168",
+				"_index": 0,
+				"_name": "BlobWalker",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Blob Walker"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/enemies/blobs/blobs.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Walker"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/blobs/BlobWalker.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "117",
+				"_icon_color": "ffffff00",
+				"_id": "169",
+				"_index": 0,
+				"_name": "BlobChaser",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Blob Chaser"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/enemies/blobs/blobs.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Chaser"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/blobs/BlobChaser.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1884,7 +1938,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 167
+			"default": 169
 		}
 	}
 }
