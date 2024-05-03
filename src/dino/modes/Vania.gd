@@ -16,14 +16,7 @@ extends Node2D
 				RoomEffect.dust(),
 			]}),
 		]),
-		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.random_room(),
-		]),
-		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.random_room(),
-		]),
+		RoomInput.harvey_room(),
 	]
 	inputs.append_array(U.repeat_fn(func():
 		return RoomInput.random_room().merge(RoomInput.topdown()),

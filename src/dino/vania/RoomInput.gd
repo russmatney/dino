@@ -601,7 +601,19 @@ static func has_entities(opts={}):
 const IS_COOKING_ROOM = "is_cooking_room"
 
 static func cooking_room(_opts={}):
-	return RoomInput.new({
-		entities=["CookingPot", "Void"],
-		enemies=[Pandora.get_entity(EnemyIds.BLOB)],
+	return has_entities({
+		entity_ids=[DinoEntityIds.COOKINGPOT, DinoEntityIds.VOID],
+		enemy_ids=[EnemyIds.BLOB],
 		})
+
+static func harvey_room(_opts={}):
+	return has_entities({
+		entity_ids=[
+			DinoEntityIds.TOOL,
+			DinoEntityIds.SUPPLYBOX,
+			DinoEntityIds.SUPPLYBOX,
+			DinoEntityIds.PLOT,
+			DinoEntityIds.PLOT,
+			DinoEntityIds.DELIVERYBOX,
+			],
+		}).merge(topdown())
