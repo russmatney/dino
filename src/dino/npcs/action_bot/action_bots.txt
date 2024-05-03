@@ -1,0 +1,17 @@
+name Action Bots
+
+==============
+LEGEND
+==============
+
+b = ActionBot
+
+==============
+CHUNKS
+==============
+
+name Bot
+
+...
+.b.
+...

@@ -1776,6 +1776,31 @@
 						"value": "res://src/dino/entities/harvey_entities/Plot.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "175",
+				"_index": 0,
+				"_name": "ActionBot",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Action Bot"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/action_bot/action_bots.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "ActionBot"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/action_bot/HarveyBot.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -2063,7 +2088,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 174
+			"default": 175
 		}
 	}
 }

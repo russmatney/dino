@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=34 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_2o41c"]
@@ -64,10 +64,14 @@ _id = "172"
 script = ExtResource("3_833wa")
 _id = "171"
 
+[sub_resource type="Resource" id="Resource_8ahpo"]
+script = ExtResource("3_833wa")
+_id = "175"
+
 [sub_resource type="Resource" id="Resource_vciv0"]
 script = ExtResource("4_cbj23")
 genre_type = 1
-entities = Array[ExtResource("3_833wa")]([SubResource("Resource_tv0tq"), SubResource("Resource_dmahs"), SubResource("Resource_etvvd"), SubResource("Resource_pigja")])
+entities = Array[ExtResource("3_833wa")]([SubResource("Resource_tv0tq"), SubResource("Resource_dmahs"), SubResource("Resource_etvvd"), SubResource("Resource_pigja"), SubResource("Resource_8ahpo")])
 enemies = Array[ExtResource("2_2o41c")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []

@@ -615,5 +615,7 @@ static func harvey_room(_opts={}):
 			DinoEntityIds.PLOT,
 			DinoEntityIds.PLOT,
 			DinoEntityIds.DELIVERYBOX,
+			DinoEntityIds.ACTIONBOT,
+			DinoEntityIds.ACTIONBOT,
 			],
 		}).merge(topdown())
