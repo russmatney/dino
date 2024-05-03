@@ -1,0 +1,41 @@
+name Harvey Entities
+
+==============
+LEGEND
+==============
+
+x = Tile
+
+d = DeliveryBox
+t = Tool
+s = SupplyBox
+p = Plot
+
+==============
+CHUNKS
+==============
+
+name Delivery Box
+
+xxx
+.d.
+...
+
+name Supply Box
+
+xxx
+.s.
+...
+
+name Tool
+
+...
+.t.
+...
+
+name Plot
+
+...
+.p.
+...
+

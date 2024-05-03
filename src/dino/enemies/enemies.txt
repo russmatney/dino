@@ -5,7 +5,6 @@ LEGEND
 ==============
 
 B = Beefstronaut
-b = Blob
 r = Robot
 M = Monstroar
 w = Crawly
@@ -31,13 +30,6 @@ name Crawly2
 
 xxx
 .w.
-
-name Blob
-
-...
-.b.
-...
-xxx
 
 name Beefstronaut
 

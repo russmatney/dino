@@ -1651,6 +1651,131 @@
 						"value": "res://src/dino/enemies/blobs/BlobChaser.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "170",
+				"_index": 0,
+				"_name": "Sheep",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Sheep"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/sheep/sheep.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Sheep"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/sheep/Sheep.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "171",
+				"_index": 0,
+				"_name": "SupplyBox",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Supply Box"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/harvey_entities/harvey.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "SupplyBox"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/harvey_entities/SeedBox.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "172",
+				"_index": 0,
+				"_name": "DeliveryBox",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Delivery Box"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/harvey_entities/harvey.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "DeliveryBox"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/harvey_entities/DeliveryBox.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "173",
+				"_index": 0,
+				"_name": "Tool",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Tool"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/harvey_entities/harvey.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Tool"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/harvey_entities/Tool.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "ffffff00",
+				"_id": "174",
+				"_index": 0,
+				"_name": "Plot",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Plot"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/entities/harvey_entities/harvey.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Plot"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/entities/harvey_entities/Plot.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -1938,7 +2063,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 169
+			"default": 174
 		}
 	}
 }
