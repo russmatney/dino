@@ -45,3 +45,18 @@ func get_player_scene(genre_type: DinoData.GenreType) -> PackedScene:
 		_:
 			Log.warn("no match in get_player_scene, returning fallback", self)
 			return get_sidescroller_scene()
+
+func get_genre_type_for_scene(path: String) -> DinoData.GenreType:
+	var ss = get_sidescroller_scene().resource_path
+	var td = get_topdown_scene().resource_path
+	var beu = get_beatemup_scene().resource_path
+	var matches = {
+		ss: DinoData.GenreType.SideScroller,
+		td: DinoData.GenreType.TopDown,
+		beu: DinoData.GenreType.BeatEmUp,
+		}
+	if path in matches:
+		return matches[path]
+	else:
+		Log.warn("no match in get_genre_type_for_scene, returning fallback", self)
+		return DinoData.GenreType.SideScroller

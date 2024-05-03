@@ -111,6 +111,7 @@ static var all_constraints = [
 	IS_COOKING_ROOM,
 	]
 
+@export var genre_type: DinoData.GenreType
 @export var entities: Array[DinoEntity]
 @export var enemies: Array[DinoEnemy]
 @export var room_shape: Array[Vector3i]
@@ -122,6 +123,8 @@ static var all_constraints = [
 # TODO support props, backgrounds
 
 func _init(opts={}):
+	if opts.get("genre_type"):
+		genre_type = opts.get("genre_type")
 	if opts.get("entities"):
 		entities.assign(opts.get("entities"))
 	if opts.get("enemies"):
@@ -151,6 +154,7 @@ func to_printable():
 
 func merge(b: RoomInput):
 	return RoomInput.new({
+		genre_type=U._or(b.genre_type, genre_type),
 		entities=U.append_array(entities, b.entities),
 		enemies=U.append_array(enemies, b.enemies),
 		room_shape=U._or(b.room_shape, room_shape),
@@ -169,6 +173,9 @@ func update_def(def: VaniaRoomDef):
 	if len(constraints) > 0:
 		for cons in constraints:
 			merge_constraint(cons)
+
+	if genre_type != null:
+		def.genre_type = genre_type
 
 	if not room_shape.is_empty():
 		def.set_local_cells(room_shape)
@@ -348,6 +355,21 @@ static func random_room(opts={}):
 		random_tilemaps(opts), random_effects(opts),
 		])
 
+## genre type ######################################################33
+
+static func has_genre(opts):
+	if opts.get("genre_type"):
+		return RoomInput.new({genre_type=opts.get("genre_type"),})
+
+static func sidescroller():
+	return RoomInput.new({genre_type=DinoData.GenreType.SideScroller})
+
+static func topdown():
+	return RoomInput.new({genre_type=DinoData.GenreType.TopDown})
+
+static func beatemup():
+	return RoomInput.new({genre_type=DinoData.GenreType.BeatEmUp})
+
 ## room effects ######################################################33
 
 const HAS_EFFECTS = "has_effects"
@@ -393,7 +415,7 @@ static func large_room_shape(_opts={}):
 
 static func small_room_shape(_opts={}):
 	return RoomInput.new({
-		room_shape=all_room_shapes.small,
+		room_shape=[all_room_shapes.small, all_room_shapes.wide].pick_random(),
 		})
 
 static func tall_room_shape(_opts={}):

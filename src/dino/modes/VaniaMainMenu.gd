@@ -105,8 +105,8 @@ var vania_scene = preload("res://src/dino/modes/Vania.tscn")
 func start():
 	Navi.nav_to(vania_scene, {setup=func(scene):
 		scene.set_player_entity(selected_player_entity)
-		scene.set_enemy_entities(selected_enemy_entities)
-		scene.set_room_count(room_count)
+		# scene.set_enemy_entities(selected_enemy_entities)
+		# scene.set_room_count(room_count)
 		})
 
 ## menu buttons ##################################################

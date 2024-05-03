@@ -30,7 +30,7 @@ static func to_defs(opts={}) -> Array[VaniaRoomDef]:
 
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
 
-var genre_type: DinoData.GenreType = DinoData.GenreType.SideScroller
+var genre_type: DinoData.GenreType
 var room_path: String
 
 var local_cells: Array #[Vector3i]
@@ -70,7 +70,8 @@ func to_printable():
 ## init #####################################################3
 
 func _init(opts={}):
-	genre_type = opts.get("genre_type", genre_type)
+	if opts.get("genre_type") != null:
+		genre_type = opts.get("genre_type")
 	if opts.get("local_cells"):
 		set_local_cells(opts.get("local_cells"))
 

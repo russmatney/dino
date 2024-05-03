@@ -1,19 +1,19 @@
 extends Object
 class_name PlayerSet
+# a set of players - could support toggling between players in a party
 
 # enum State { TEMPLATE, SPAWNING, ALIVE, DEAD }
 
 ## PData #################################################
 
-# PData bundles enough data to spawn a DinoPlayer
-# (player entity + game/player type)
+# PData bundles the player entity and current node, if there is one
 class PData:
 	extends Object
 
 	var node: Node2D
 	var entity_id
 	var entity: DinoPlayerEntity
-	var genre_type: DinoData.GenreType
+	# instance, not just entity (template)
 	# var state: State
 
 	func _init(opts):
@@ -25,9 +25,6 @@ class PData:
 			entity = Pandora.get_entity(entity_id)
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
-
-		genre_type = opts.get("genre_type")
-
 
 ## vars #################################################
 
@@ -56,7 +53,11 @@ func spawn_new(opts={}):
 	if not p:
 		Log.err("No active player, cannot spawn", stack)
 		return
-	p.node = p.entity.get_player_scene(p.genre_type).instantiate()
+	var genre = opts.get("genre_type")
+	if genre == null:
+		Log.warn("genre_type not passed, defaulting", opts)
+		genre = DinoData.GenreType.SideScroller
+	p.node = p.entity.get_player_scene(genre).instantiate()
 
 	var sp = get_spawn_point_and_coords(opts)
 	var spawn_point = sp[0]
@@ -95,21 +96,31 @@ func spawn_new(opts={}):
 
 ## respawn #################################################
 
+func current_player_genre():
+	var p = active_player()
+	if not p or not p.node:
+		Log.warn("No current player, couldn't pull genre_type")
+		return DinoData.GenreType.SideScroller
+
+	if not is_instance_valid(p.node):
+		Log.warn("Invalid player, couldn't pull genre_type", p)
+		return DinoData.GenreType.SideScroller
+
+	return p.entity.get_genre_type_for_scene(p.node.scene_file_path)
+
 func respawn_active_player(opts):
 	Log.info("respawning active player node", opts)
+	var genre_type = current_player_genre()
 
 	var p = active_player()
 	if p:
 		_remove_player(p, opts)
 
-	if opts.get("new_genre_type") != null:
-		p.genre_type = opts.get("new_genre_type")
-
 	if opts.get("new_entity") != null:
-		create_new({
-			entity=opts.get("new_entity"),
-			genre_type=p.genre_type,
-			})
+		create_new({entity=opts.get("new_entity")})
+
+	if opts.get("genre_type") == null:
+		opts["genre_type"] = genre_type
 
 	if opts.get("deferred", true):
 		spawn_new.call_deferred(opts)

@@ -30,9 +30,10 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 		var player_parent = og_player.get_parent()
 		# TODO carry over velocity/momentum, plus probably other stats (health,items,etc)
 		Dino.respawn_active_player({
-			new_genre_type=new_room_def.genre_type, deferred=false, level_node=player_parent,
-			setup=func(p):
-			p.position = og_player.position
+			genre_type=new_room_def.genre_type,
+			deferred=false,
+			level_node=player_parent,
+			setup=func(p): p.position = og_player.position
 			})
 
 	if prev_room_instance:

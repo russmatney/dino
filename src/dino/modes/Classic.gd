@@ -97,16 +97,14 @@ func launch_level(level_def):
 		await game_node.tree_exited
 
 	if not Dino.current_player_entity():
-		Dino.create_new_player({
-			# HARDCODED!
-			genre_type=DinoData.GenreType.SideScroller,
-			entity=player_entity,
-			})
+		Dino.create_new_player({entity=player_entity})
 
 	game_node = DinoLevel.create_level(level_def, {seed=_seed, })
 	add_child(game_node)
 
-	Dino.spawn_player({level=game_node, deferred=false})
+	Dino.spawn_player({level=game_node, deferred=false,
+		genre_type=level_def.get_genre_type(),
+		})
 
 	game_node.level_complete.connect(_on_level_complete)
 

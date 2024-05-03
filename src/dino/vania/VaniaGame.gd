@@ -210,7 +210,6 @@ func _load_room(path: String, opts={}):
 
 	room_loaded.emit()
 
-
 func load_initial_room():
 	if room_defs.is_empty():
 		Log.warn("No room_defs returned, did the generator fail?")
@@ -232,13 +231,18 @@ func reload_current_room():
 func setup_player():
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
-			genre_type=DinoData.GenreType.SideScroller,
 			entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
 			})
+
+	var def = current_room_def()
 	if Dino.current_player_node():
-		Dino.respawn_active_player({level_node=self, deferred=false})
+		Dino.respawn_active_player({level_node=self, deferred=false,
+			genre_type=def.genre_type if def else null
+			})
 	else:
-		Dino.spawn_player({level_node=self, deferred=false})
+		Dino.spawn_player({level_node=self, deferred=false,
+			genre_type=def.genre_type if def else null
+			})
 
 func _set_player_position():
 	var p = Dino.current_player_node()
@@ -255,6 +259,11 @@ func get_room_def(path):
 func current_room_def():
 	var path = MetSys.get_current_room_name()
 	return get_room_def(path)
+
+# i wonder if these ever get out sync
+func current_room_def_alt():
+	if map:
+		return map.room_def
 
 ## metsys misc #######################################################
 

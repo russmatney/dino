@@ -2,6 +2,35 @@ extends Node2D
 
 ## data ##################################################3
 
+@onready var topdown_game = MapDef.new({
+	name="TopDown Game",
+	room_inputs=(func():
+	var inputs = [
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+			]}),
+			RoomInput.small_room_shape(),
+			RoomInput.has_effects({effects=[
+				RoomEffect.dust(),
+			]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.random_room(),
+		]),
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.random_room(),
+		]),
+	]
+	inputs.append_array(U.repeat_fn(func():
+		return RoomInput.random_room().merge(RoomInput.topdown()),
+		3))
+	return inputs
+	).call()})
+
 @onready var default_game = MapDef.new({
 	name="Vania",
 	room_inputs=(func():
@@ -182,10 +211,7 @@ func _ready():
 func start_game():
 	# establish current player stack
 	if not Dino.current_player_entity():
-		Dino.create_new_player({
-			genre_type=DinoData.GenreType.SideScroller,
-			entity=player_entity,
-			})
+		Dino.create_new_player({entity=player_entity})
 
 	# clear current game if there is one
 	if game_node:
@@ -195,7 +221,8 @@ func start_game():
 	game_node = vania_game_scene.instantiate()
 
 	if not selected_map_def:
-		selected_map_def = arcade_game
+		# selected_map_def = arcade_game
+		selected_map_def = topdown_game
 
 	game_node.map_def = selected_map_def
 

@@ -49,10 +49,11 @@ func _ready():
 				host.set_owner(self)
 
 			Dino.create_new_player({
-				genre_type=DinoData.GenreType.SideScroller,
 				entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
 				})
-			Dino.spawn_player({level_node=self})
+			Dino.spawn_player({level_node=self,
+				genre_type=DinoData.GenreType.SideScroller,
+				})
 
 
 		if not room_def:

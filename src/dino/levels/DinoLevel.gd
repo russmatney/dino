@@ -139,8 +139,11 @@ var time_int = 0
 
 func to_printable():
 	if level_def != null:
-		return {genre_type=genre_type, level_def=level_def.get_display_name()}
-	return {genre_type=genre_type}
+		return {
+			genre_type=DinoData.GenreType.keys()[genre_type],
+			level_def=level_def.get_display_name()
+			}
+	return {genre_type=DinoData.GenreType.keys()[genre_type]}
 
 ## enter_tree ###############################################
 
