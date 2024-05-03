@@ -16,6 +16,9 @@ class PData:
 	# instance, not just entity (template)
 	# var state: State
 
+	func to_pretty():
+		return {node=node, entity=entity}
+
 	func _init(opts):
 		if opts.get("entity"):
 			entity = opts.get("entity")
@@ -38,6 +41,7 @@ func create_new(opts):
 	var pdata = PData.new(opts)
 	# TODO ensure vs always append? should be unique? could be instances, not ents coming in
 	stack.push_front(pdata)
+	Log.pr("created new player!", stack)
 
 func _remove_player(p: PData, _opts={}):
 	if p.node and is_instance_valid(p.node):
@@ -78,11 +82,13 @@ func spawn_new(opts={}):
 	var level_node = opts.get("level_node")
 	var deferred = opts.get("deferred", true)
 	if level_node:
+		Log.pr("adding player to level node", level_node)
 		if deferred:
 			level_node.add_child.call_deferred(p.node)
 		else:
 			level_node.add_child(p.node)
 	elif spawn_point:
+		Log.pr("adding player with spawn_point", spawn_point)
 		if deferred:
 			U.add_child_to_level(spawn_point, p.node)
 		else:
