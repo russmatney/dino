@@ -11,8 +11,8 @@ var tile_door_width = 4
 var room_def: VaniaRoomDef
 func set_room_def(def: VaniaRoomDef):
 	room_def = def
-var tilemap: TileMap
-var bg_tilemap: TileMap
+var tilemap: DinoTileMap
+var bg_tilemap: DinoTileMap
 var bg_color_rect: ColorRect
 var nav_region: NavigationRegion2D
 
@@ -79,8 +79,8 @@ func build_room(def: VaniaRoomDef, opts={}):
 ## setup tilemaps ##############################################################
 
 func ensure_tilemaps():
-	U.ensure_owned_child(self, "tilemap", "TileMap", TileMap)
-	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", TileMap)
+	U.ensure_owned_child(self, "tilemap", "TileMap", DinoTileMap)
+	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", DinoTileMap)
 	tilemap.add_to_group(NAV_SOURCE_GROUP, true)
 	U.ensure_owned_child(self, "nav_region", "NavigationRegion2D", NavigationRegion2D)
 
@@ -129,6 +129,7 @@ func setup_walls_and_doors(opts={}):
 	clear_tilemap_tiles()
 	fill_tilemap_borders({skip_cells=door_tile_coords})
 
+	tilemap.mix_terrains()
 	tilemap.force_update()
 
 func get_door_tile_coords(opts={}):
@@ -171,7 +172,7 @@ func internal_borders(cell, cells):
 	return borders
 
 func fill_tilemap_borders(opts={}):
-	var t_cells = []
+	var t_cells: Array[Vector2i] = []
 	# do we need to normalize 'local_cells'?
 	for cell in room_def.local_cells:
 		var rect = Rect2(Vector2(cell.x, cell.y) * MetSys.settings.in_game_cell_size, MetSys.settings.in_game_cell_size)
@@ -188,7 +189,7 @@ func fill_tilemap_borders(opts={}):
 
 		t_cells.append_array(border_cells)
 
-	tilemap.set_cells_terrain_connect(0, t_cells, 0, 0)
+	tilemap.fill_coords(t_cells)
 
 func get_tile_coords_for_doorway(map_cell_pair):
 	var wall = map_cell_pair[1] - map_cell_pair[0]
@@ -242,16 +243,14 @@ var logged_bg_tile_pos = false
 
 # this depends on build_tilemap_data, which expects the base tilemap to have borders already
 func add_background_tiles(opts={}):
-	if not room_def.tile_defs:
-		return
-	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
+	var grids = bg_tilemap.chunk_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
 		return
 
 	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
 
-	var tile_coords = []
+	var tile_coords: Array[Vector2i] = []
 	for i in range(opts.get("count", 100)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
@@ -270,7 +269,8 @@ func add_background_tiles(opts={}):
 		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
 			tile_coords.append(e_coord + start_coord)
 
-	bg_tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+	bg_tilemap.fill_coords(tile_coords)
+	bg_tilemap.mix_terrains()
 
 	bg_tilemap.force_update()
 
@@ -300,14 +300,14 @@ func setup_nav_region():
 var logged_tile_pos = false
 
 func add_tile_chunks(opts={}):
-	var grids = room_def.tile_defs.grids_with_flag("tile_chunk")
+	var grids = tilemap.chunk_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
 		return
 
 	var tmap_data = build_tilemap_data()
 
-	var tile_coords = []
+	var tile_coords: Array[Vector2i] = []
 	for i in range(opts.get("count", 10)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
@@ -324,7 +324,8 @@ func add_tile_chunks(opts={}):
 			tile_coords.append(e_coord + start_coord)
 
 	if not tile_coords.is_empty():
-		tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
+		tilemap.fill_coords(tile_coords)
+		tilemap.mix_terrains()
 		tilemap.force_update()
 
 ## add_enemies/entities ##############################################################

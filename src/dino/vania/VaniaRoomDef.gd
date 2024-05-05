@@ -4,10 +4,7 @@ class_name VaniaRoomDef
 
 ## static #####################################################3
 
-static var tile_defs_path = "res://src/dino/vania/tiles.txt"
-
 static func to_defs(opts={}) -> Array[VaniaRoomDef]:
-	var t_defs = GridParser.parse({defs_path=tile_defs_path})
 	var defs: Array[VaniaRoomDef] = []
 
 	var inputs = opts.get("inputs", [])
@@ -19,7 +16,7 @@ static func to_defs(opts={}) -> Array[VaniaRoomDef]:
 		Log.warn("No room inputs passed, no defs to generate")
 
 	for inp in inputs:
-		var def = VaniaRoomDef.new({tile_defs=t_defs, input=inp})
+		var def = VaniaRoomDef.new({input=inp})
 		defs.append(def)
 
 	return defs
@@ -38,7 +35,6 @@ var max_map_cell := Vector2i.MIN
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
-var tile_defs: GridDefs
 var tile_size = 16
 
 var index: int = 0
@@ -56,21 +52,29 @@ func to_printable():
 ## data #####################################################3
 
 func genre_type() -> DinoData.GenreType:
+	# if not input:
+	# 	return DinoData.GenreType.SideScroller
 	return input.genre_type
 
 func entities() -> Array[DinoEntity]:
+	if not input:
+		return []
 	return input.entities
 
 func enemies() -> Array[DinoEnemy]:
+	if not input:
+		return []
 	return input.enemies
 
 func effects() -> Array[RoomEffect]:
+	if not input:
+		return []
 	return input.room_effects
 
 func tilemap_scenes() -> Array[PackedScene]:
-	if input:
-		return input.tilemap_scenes
-	return []
+	if not input:
+		return []
+	return input.tilemap_scenes
 
 ## input #####################################################3
 
@@ -85,10 +89,6 @@ func _init(opts={}):
 
 	bg_color = opts.get("bg_color", bg_color)
 	border_color = opts.get("border_color", border_color)
-
-	tile_defs = opts.get("tile_defs")
-	if not tile_defs:
-		tile_defs = GridParser.parse({defs_path=VaniaRoomDef.tile_defs_path})
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 

@@ -215,7 +215,7 @@ func load_initial_room():
 		Log.warn("No room_defs returned, did the generator fail?")
 		return
 	else:
-		var rooms = room_defs.filter(func(rd): return rd.entities.any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
+		var rooms = room_defs.filter(func(rd): return rd.entities().any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
 		if rooms.is_empty():
 			Log.warn("No room with player spawn point! Picking random start room")
 			rooms = room_defs
