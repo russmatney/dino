@@ -223,31 +223,37 @@ static func has_effects(opts):
 			})
 	return RoomInput.random_effects()
 
-
-static func has_rain_fall(_opts):
+static func has_rain_fall(_opts={}):
 	return RoomInput.new({
 		room_effects=[RoomEffect.rain_fall()]
 		})
 
-static func has_snow_fall(_opts):
+static func has_snow_fall(_opts={}):
 	return RoomInput.new({
 		room_effects=[RoomEffect.snow_fall()]
 		})
 
-static func has_dust(_opts):
+static func has_dust(_opts={}):
 	return RoomInput.new({
 		room_effects=[RoomEffect.dust()]
 		})
 
 ## room size ######################################################33
 
-static func large_room_shape(_opts={}):
+static func has_room(opts={}):
+	if opts.get("shape") == null:
+		Log.warn("has_room missing 'shape'!")
 	return RoomInput.new({
-		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
+		room_shape=opts.get("shape")
 		})
 
 static func small_room_shape(_opts={}):
 	return RoomInput.new({room_shape=all_room_shapes.small})
+
+static func large_room_shape(_opts={}):
+	return RoomInput.new({
+		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
+		})
 
 static func tall_room_shape(_opts={}):
 	return RoomInput.new({
@@ -261,13 +267,6 @@ static func wide_room_shape(_opts={}):
 			all_room_shapes.wide_3,
 			all_room_shapes.wide_4,
 			].pick_random(),
-		})
-
-static func has_room(opts={}):
-	if opts.get("shape") == null:
-		Log.warn("has_room missing 'shape'!")
-	return RoomInput.new({
-		room_shape=opts.get("shape")
 		})
 
 static func L_room_shape(_opts={}):

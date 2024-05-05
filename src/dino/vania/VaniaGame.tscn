@@ -16,8 +16,8 @@
 
 [sub_resource type="Resource" id="Resource_f6k3q"]
 script = ExtResource("7_djxep")
-name = ""
-inputs = Array[Resource("res://src/dino/vania/RoomInput.gd")]([])
+name = null
+inputs = null
 
 [sub_resource type="Resource" id="Resource_fx1bk"]
 script = ExtResource("12_d1x2y")

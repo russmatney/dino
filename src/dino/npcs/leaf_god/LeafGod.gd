@@ -24,6 +24,7 @@ var actions = [
 	Action.mk({
 		label="Trade", fn=start_leaf_trade,
 		source_can_exec=func(): return shopper == null,
+		actor_can_exec=func(actor): return actor.is_in_group("player"),
 		show_on_source=true, show_on_actor=false,
 		}),
 	]

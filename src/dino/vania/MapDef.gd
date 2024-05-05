@@ -34,13 +34,13 @@ static func random_rooms(opts={}) -> MapDef:
 
 ## encounters ######################################################33
 
-static func cooking_room(_opts={}):
+static func cooking_room(_opts={}) -> RoomInput:
 	return RoomInput.with({
 		entity_ids=[DinoEntityIds.COOKINGPOT, DinoEntityIds.VOID],
 		enemy_ids=[EnemyIds.BLOB],
 		})
 
-static func harvey_room(_opts={}):
+static func harvey_room(_opts={}) -> RoomInput:
 	return RoomInput.with({
 		entity_ids=[
 			DinoEntityIds.TOOL,
@@ -53,3 +53,49 @@ static func harvey_room(_opts={}):
 			DinoEntityIds.ACTIONBOT,
 			],
 		}).merge(RoomInput.topdown())
+
+static func village(_opts={}) -> MapDef:
+	return MapDef.new({
+		inputs=[RoomInput.with({
+			entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+				DinoEntityIds.SHEEP,
+				DinoEntityIds.SHEEP,
+				DinoEntityIds.SHEEP,
+				DinoEntityIds.SHEEP,
+				DinoEntityIds.SHEEP,
+				DinoEntityIds.LEAFGOD,
+				# DinoEntityIds.TOOL,
+				# DinoEntityIds.SUPPLYBOX,
+				# DinoEntityIds.PLOT,
+				# DinoEntityIds.DELIVERYBOX,
+				# DinoEntityIds.ACTIONBOT,
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.COIN,
+				DinoEntityIds.GEM,
+				DinoEntityIds.GEM,
+				DinoEntityIds.BOX,
+				DinoEntityIds.BOX,
+				DinoEntityIds.BOX,
+				DinoEntityIds.BOX,
+				DinoEntityIds.COOKINGPOT,
+				DinoEntityIds.ARCADEMACHINE,
+				DinoEntityIds.CANDLE,
+				DinoEntityIds.CANDLE,
+				DinoEntityIds.CANDLE,
+				DinoEntityIds.CANDLE,
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.HANGINGLIGHT,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH1,
+				DinoEntityIds.BUSH2,
+				DinoEntityIds.BUSH2,
+				DinoEntityIds.BUSH2,
+				],
+			}).merge(RoomInput.large_room_shape()
+				).merge(RoomInput.has_snow_fall())
+			]})

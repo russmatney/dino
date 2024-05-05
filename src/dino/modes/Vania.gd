@@ -251,7 +251,8 @@ func start_game():
 		# selected_map_def = arcade_game
 		# selected_map_def = topdown_game
 		# selected_map_def = default_game
-		selected_map_def = mixed_genre_game
+		# selected_map_def = mixed_genre_game
+		selected_map_def = MapDef.village()
 
 	game_node.map_def = selected_map_def
 
