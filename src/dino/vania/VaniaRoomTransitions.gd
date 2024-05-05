@@ -3,7 +3,7 @@ extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysModule.gd"
 func _initialize():
 	MetSys.room_changed.connect(_on_room_changed, CONNECT_DEFERRED)
 
-var PLAYER_POS_OFFSET = 30
+var PLAYER_POS_OFFSET = 40
 
 func _on_room_changed(target_room: String, ignore_same_room=true):
 	if ignore_same_room and target_room == MetSys.get_current_room_name():
@@ -51,7 +51,7 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 		# playerData or playerDef class with data? (like room vs roomDef?)
 		Dino.respawn_active_player({
 			genre_type=new_room_def.genre_type,
-			deferred=false,
+			# deferred=false,
 			level_node=player_parent,
 			setup=func(p): p.position = og_p_position - offset
 			})

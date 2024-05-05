@@ -29,18 +29,29 @@ extends Node2D
 	inputs=(func():
 	var inputs = [
 		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.has_entities({entity_ids=[
-				DinoEntityIds.PLAYERSPAWNPOINT,
-			]}),
+			RoomInput.sidescroller(),
+			RoomInput.has_entities({entity_ids=[DinoEntityIds.PLAYERSPAWNPOINT]}),
 			RoomInput.small_room_shape(),
-			RoomInput.has_effects({effects=[
-				RoomEffect.dust(),
-			]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.small_room_shape(),
+			RoomInput.has_effects({effects=[RoomEffect.dust()]}),
 		]),
 		RoomInput.merge_many([
 			RoomInput.sidescroller(),
-			RoomInput.small_room_shape(),
+		]),
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.has_effects({effects=[RoomEffect.dust()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.sidescroller(),
+			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.has_effects({effects=[RoomEffect.dust()]}),
 		]),
 	]
 	return inputs

@@ -82,7 +82,7 @@ func spawn_new(opts={}):
 	var level_node = opts.get("level_node")
 	var deferred = opts.get("deferred", true)
 	if level_node:
-		Log.pr("adding player to level node", level_node)
+		Log.prn("adding player to level node", level_node, p)
 		if deferred:
 			level_node.add_child.call_deferred(p.node)
 		else:
