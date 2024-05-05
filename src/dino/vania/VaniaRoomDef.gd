@@ -129,8 +129,8 @@ func get_secondary_tiles() -> DinoTiles:
 
 ## map_cells #####################################################
 
-func calc_cell_meta():
-	for p in map_cells:
+func calc_cell_meta(opts={}):
+	for p in opts.get("cells", map_cells):
 		min_map_cell.x = mini(min_map_cell.x, p.x)
 		min_map_cell.y = mini(min_map_cell.y, p.y)
 		max_map_cell.x = maxi(max_map_cell.x, p.x)

@@ -236,7 +236,14 @@ func get_tile_coords_for_doorway(map_cell_pair):
 var bg_color = Color(0.5, 0.3, 0.6, 1.0)
 
 func fill_background_images(_opts={}):
-	for map_cell in room_def.map_cells:
+	var cells = room_def.map_cells
+	if cells.is_empty():
+		Log.warn("falling back to local_cells, better be in debug mode!")
+		cells = room_def.local_cells
+		room_def.calc_cell_meta({cells=cells})
+	if cells.is_empty():
+		Log.warn("could not create background rect, no cells!")
+	for map_cell in cells:
 		var rect = room_def.get_map_cell_rect(map_cell)
 		var crect = U.add_color_rect(self, {rect=rect, color=bg_color, name=str(map_cell, "BGRect")})
 		crect.set_owner(self)
