@@ -71,7 +71,7 @@ func update_room_def():
 
 	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities)
 	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().resource_path.get_file()
-	room_constraints_label.text = "constraints: %s" % Log.to_pretty(len(current_room_def.constraints))
+	# room_constraints_label.text = "constraints: %s" % Log.to_pretty(len(current_room_def.constraints))
 
 func update_edit_entities():
 	if not current_room_def:
@@ -108,16 +108,16 @@ func update_edit_constraints():
 		return
 
 	var items = []
-	items.append_array(current_room_def.constraints.map(func(cons):
-		return {label="Remove '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.erase(cons)}))
-	items.append_array(RoomInput.all_constraints.map(func(cons):
-		return {label="Add '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.append(cons)}))
+	# items.append_array(current_room_def.constraints.map(func(cons):
+	# 	return {label="Remove '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.erase(cons)}))
+	# items.append_array(RoomInput.all_constraints.map(func(cons):
+	# 	return {label="Add '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.append(cons)}))
 
 	var popup = edit_constraints_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
 		item.on_select.call()
 
-		current_room_def.reapply_constraints()
+		current_room_def.rebuild()
 
 		game.generator.build_and_prep_scene(current_room_def)
 		game.reload_current_room())

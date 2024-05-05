@@ -111,11 +111,11 @@ func generate_rooms(opts={}):
 	MetSys.reset_state()
 	MetSys.set_save_data()
 
-	var m_def = opts.get("map_def")
+	var m_def = opts.get("map_def", map_def)
 	if not m_def:
 		m_def = fallback_map_def()
 
-	room_defs = generator.generate_map(map_def)
+	room_defs = generator.generate_map(m_def)
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -149,9 +149,9 @@ func regenerate_other_rooms():
 	if map and map.is_node_ready():
 		map.setup_walls_and_doors()
 
-func add_new_room(_count=1):
-	# TODO room_inputs reading from vania-menu configged constraints
-	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_rooms()})
+func add_new_room(count=1):
+	# TODO these inputs reading from vania-menu configged constraints
+	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_rooms({count=count})})
 	room_defs = generator.add_rooms(new_room_defs)
 	Log.info(len(new_room_defs), " rooms added")
 

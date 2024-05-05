@@ -5,7 +5,7 @@ class_name VaniaRoomTest
 
 func test_build_room_sets_tilemap_borders():
 	var room = auto_free(VaniaRoom.new())
-	var def = VaniaRoomDef.new({room_inputs=[RoomInput.IN_SPACESHIP, RoomInput.IN_SMALL_ROOM,]})
+	var def = VaniaRoomDef.new({input=RoomInput.spaceship().merge(RoomInput.small_room_shape())})
 
 	def.map_cells = [Vector3i(0, 0, 0)]
 
@@ -35,10 +35,7 @@ func test_build_room_walls_concave_shape():
 	var shape = [Vector3i(0, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 0, 0)]
 
 	var room = auto_free(VaniaRoom.new())
-	var def = VaniaRoomDef.new({room_inputs=[
-		RoomInput.IN_SPACESHIP,
-		{RoomInput.CUSTOM_ROOM: {shape=shape}},
-		]})
+	var def = VaniaRoomDef.new({input=RoomInput.spaceship().merge(RoomInput.has_room({shape=shape}))})
 
 	def.map_cells = shape
 
@@ -82,7 +79,7 @@ func test_build_room_walls_concave_shape():
 func test_build_room_sets_tilemap_doors():
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new()
-	RoomInput.apply_constraints([RoomInput.IN_SPACESHIP, RoomInput.IN_SMALL_ROOM,], def)
+	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
 
 	def.map_cells = [Vector3i(0, 0, 0)]
 
@@ -147,7 +144,7 @@ x..
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInput.apply_constraints([RoomInput.IN_SPACESHIP, RoomInput.IN_SMALL_ROOM,], def)
+	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
 
 	room.set_room_def(def)
 	room.setup_tileset()
@@ -193,10 +190,7 @@ x..
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInput.apply_constraints([
-		RoomInput.IN_SPACESHIP,
-		RoomInput.IN_SMALL_ROOM,
-	], def)
+	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
 
 	room.set_room_def(def)
 	room.setup_tileset()
@@ -236,11 +230,9 @@ xxx
 
 	var room = auto_free(VaniaRoom.new())
 	var def = VaniaRoomDef.new({entity_defs=ent_defs})
-	RoomInput.apply_constraints([
-		RoomInput.IN_SPACESHIP,
-		RoomInput.HAS_PLAYER,
-		RoomInput.IN_SMALL_ROOM,
-	], def)
+	RoomInput.apply(RoomInput.spaceship()\
+		.merge(RoomInput.has_player())\
+		.merge(RoomInput.small_room_shape()), def)
 
 	room.set_room_def(def)
 	room.setup_tileset()

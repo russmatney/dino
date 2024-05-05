@@ -10,18 +10,16 @@ static func to_defs(opts={}) -> Array[VaniaRoomDef]:
 	var t_defs = GridParser.parse({defs_path=tile_defs_path})
 	var defs: Array[VaniaRoomDef] = []
 
-	var room_inputs = opts.get("room_inputs", [])
+	var inputs = opts.get("inputs", [])
 	var map_def = opts.get("map_def")
-	if map_def and room_inputs.is_empty():
-		room_inputs = map_def.room_inputs
-	if room_inputs.is_empty():
+	if map_def and inputs.is_empty():
+		inputs = map_def.inputs
+
+	if inputs.is_empty():
 		Log.warn("No room inputs passed, no defs to generate")
 
-	for inputs in room_inputs:
-		var def = VaniaRoomDef.new({
-			tile_defs=t_defs,
-			room_inputs=inputs,
-			})
+	for inp in inputs:
+		var def = VaniaRoomDef.new({tile_defs=t_defs, input=inp})
 		defs.append(def)
 
 	return defs
@@ -53,19 +51,24 @@ var tile_size = 16
 
 var index: int = 0
 
-@export var constraints: Array[RoomInput] = []
+@export var input: RoomInput
 
 func to_printable():
 	return {
 		entities=entities,
 		enemies=enemies,
 		effects=effects,
-		constraints=constraints,
+		input=input,
 		room_path=room_path.get_file(),
 		local_cells=local_cells,
 		map_cells=map_cells,
 		tilemap_scenes=tilemap_scenes,
 		}
+
+## input #####################################################3
+
+func rebuild():
+	RoomInput.apply(input, self)
 
 ## init #####################################################3
 
@@ -84,17 +87,11 @@ func _init(opts={}):
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
-	var conses
-	if opts.get("room_inputs"):
-		conses = opts.get("room_inputs")
-	elif opts.get("constraints"):
-		conses = opts.get("constraints")
+	if opts.get("input"):
+		input = opts.get("input")
+		RoomInput.apply(input, self)
 
-	if conses != null:
-		if conses is Array and conses.is_empty():
-			pass
-		else:
-			RoomInput.apply_constraints(conses, self)
+## local cells #####################################################3
 
 func set_local_cells(cells):
 	var min_cell := Vector3i(Vector2i.MAX.x, Vector2i.MAX.y, 0)
@@ -218,7 +215,3 @@ func is_neighboring_cell(a: Vector3i, b: Vector3i) -> bool:
 		return abs(a.x - b.x) == 1
 	return false
 
-## constraints #####################################################3
-
-func reapply_constraints():
-	RoomInput.apply_constraints(constraints, self)

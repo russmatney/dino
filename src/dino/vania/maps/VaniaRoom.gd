@@ -35,7 +35,7 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		if is_debug:
-			debug_room_def.reapply_constraints()
+			debug_room_def.rebuild()
 			build_room(debug_room_def)
 
 			if get_node_or_null("Camera2D") == null:

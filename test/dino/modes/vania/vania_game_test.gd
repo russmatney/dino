@@ -8,7 +8,7 @@ func before():
 
 func test_game_start():
 	var game = auto_free(VaniaGame.new())
-	game.generate_rooms({map_def=MapDef.new({room_inputs=[
+	game.generate_rooms({map_def=MapDef.new({inputs=[
 		RoomInput.small_room_shape(),
 		RoomInput.small_room_shape(),
 		RoomInput.small_room_shape(),
@@ -26,7 +26,7 @@ func test_game_start():
 
 func test_game_add_rooms():
 	var game = auto_free(VaniaGame.new())
-	game.generate_rooms({map_def=MapDef.new({room_inputs=[
+	game.generate_rooms({map_def=MapDef.new({inputs=[
 		RoomInput.small_room_shape(),
 		RoomInput.small_room_shape(),
 		RoomInput.small_room_shape(),
@@ -49,7 +49,7 @@ func test_game_add_rooms():
 
 func test_game_add_room():
 	var game = auto_free(VaniaGame.new())
-	game.generate_rooms({map_def=MapDef.new({room_inputs=[
+	game.generate_rooms({map_def=MapDef.new({inputs=[
 		RoomInput.small_room_shape(),
 		RoomInput.small_room_shape(),
 		RoomInput.small_room_shape(),

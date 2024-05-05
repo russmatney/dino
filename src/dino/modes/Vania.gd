@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var topdown_game = MapDef.new({
 	name="TopDown Game",
-	room_inputs=(func():
+	inputs=(func():
 	var inputs = [
 		RoomInput.merge_many([
 			RoomInput.topdown(),
@@ -16,7 +16,7 @@ extends Node2D
 				RoomEffect.dust(),
 			]}),
 		]),
-		RoomInput.harvey_room(),
+		MapDef.harvey_room(),
 	]
 	inputs.append_array(U.repeat_fn(func():
 		return RoomInput.random_room().merge(RoomInput.topdown()),
@@ -26,7 +26,7 @@ extends Node2D
 
 @onready var default_game = MapDef.new({
 	name="Vania",
-	room_inputs=(func():
+	inputs=(func():
 	var inputs = [
 		RoomInput.merge_many([
 			RoomInput.has_entities({entity_ids=[
@@ -60,6 +60,7 @@ extends Node2D
 				DinoEntityIds.BUSH2,
 			]}),
 		]),
+		MapDef.cooking_room(),
 	]
 	inputs.append_array(U.repeat_fn(RoomInput.random_room, 3))
 	return inputs
@@ -67,7 +68,7 @@ extends Node2D
 
 @onready var tower_game = MapDef.new({
 	name="Tower",
-	room_inputs=[
+	inputs=[
 		RoomInput.merge_many([
 			RoomInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
@@ -100,7 +101,7 @@ extends Node2D
 
 @onready var woods_game = MapDef.new({
 	name="Woods",
-	room_inputs=[
+	inputs=[
 		RoomInput.merge_many([
 			RoomInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
@@ -134,7 +135,7 @@ extends Node2D
 
 @onready var arcade_game = MapDef.new({
 	name="Arcade",
-	room_inputs=[
+	inputs=[
 		RoomInput.merge_many([
 			RoomInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,

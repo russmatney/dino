@@ -6,6 +6,9 @@ class_name RoomInput
 # 	"OneWayPlatform",
 # 	"Spikes",
 # 	]
+static var all_constraints = []
+
+# TODO support props, backgrounds
 
 static var all_tilemap_scenes = [
 		# "res://addons/core/reptile/tilemaps/GrassTiles16.tscn",
@@ -58,58 +61,6 @@ static var all_room_shapes = {
 							Vector3i(0, 1, 0),],
 	}
 
-# TODO more like toggle-able constraints?
-static var all_constraints = [
-	# room shapes are not editable
-	# IN_LARGE_ROOM,
-	# IN_SMALL_ROOM,
-	# IN_TALL_ROOM,
-	# IN_WIDE_ROOM,
-	# IN_T_ROOM,
-	# IN_L_ROOM,
-	# CUSTOM_ROOM,
-
-	HAS_ENEMY,
-	HAS_ENTITY,
-	HAS_ENTITIES,
-	HAS_TILES,
-	HAS_ROOM,
-	HAS_EFFECTS,
-
-	IN_WOODEN_BOXES,
-	IN_SPACESHIP,
-	IN_KINGDOM,
-	IN_VOLCANO,
-	IN_GRASSY_CAVE,
-
-	HAS_BOSS,
-	HAS_MONSTROAR,
-	HAS_BEEFSTRONAUT,
-
-	HAS_BLOB,
-	HAS_ROBOT,
-	HAS_CRAWLY,
-	HAS_SOLDIER,
-
-	HAS_LEAF,
-
-	HAS_ARCADE_MACHINE,
-	HAS_BOX,
-	HAS_TREASURE_BOX,
-	HAS_CANDLE,
-
-	HAS_CHECKPOINT,
-	HAS_LOG_CHECKPOINT,
-	HAS_SNOW_CHECKPOINT,
-	HAS_CAVE_CHECKPOINT,
-	HAS_COOKING_POT,
-	HAS_TARGET,
-	HAS_VOID,
-
-	HAS_PLAYER,
-
-	IS_COOKING_ROOM,
-	]
 
 @export var genre_type: DinoData.GenreType
 @export var entities: Array[DinoEntity]
@@ -118,9 +69,6 @@ static var all_constraints = [
 @export var room_shapes = []
 @export var room_effects: Array[RoomEffect]
 @export var tilemap_scenes: Array[PackedScene]
-@export var constraints: Array[String] = []
-
-# TODO support props, backgrounds
 
 func _init(opts={}):
 	if opts.get("genre_type"):
@@ -136,8 +84,6 @@ func _init(opts={}):
 		room_effects.assign(opts.get("room_effects"))
 	if opts.get("tilemap_scenes"):
 		tilemap_scenes.assign(opts.get("tilemap_scenes"))
-	if opts.get("constraints"):
-		constraints.assign(opts.get("constraints"))
 
 func to_printable():
 	return {
@@ -147,7 +93,6 @@ func to_printable():
 		room_shape=room_shape,
 		room_shapes=room_shapes,
 		room_effects=room_effects,
-		constraints=constraints
 		}
 
 ## merge ######################################################
@@ -161,19 +106,11 @@ func merge(b: RoomInput):
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
-		constraints=U.distinct(U.append_array(constraints, b.constraints)),
 		})
-
-func merge_constraint(b):
-	return RoomInput.apply_constraint(self, b)
 
 ## update room def ######################################################
 
 func update_def(def: VaniaRoomDef):
-	if len(constraints) > 0:
-		for cons in constraints:
-			merge_constraint(cons)
-
 	if genre_type != null:
 		def.genre_type = genre_type
 
@@ -202,119 +139,26 @@ func update_def(def: VaniaRoomDef):
 ## static ######################################################
 
 static func merge_many(inputs):
-	# TODO support constraints (dict/consts) in the list too?
 	return inputs.reduce(func(a, b): return a.merge(b))
 
-static func apply_constraints(conses, def: VaniaRoomDef):
+# updates the passed room def with the passed room input
+# maintains the existing def's local_cells
+static func apply(input: RoomInput, def: VaniaRoomDef):
 	var existing_shape = def.local_cells
 
-	if conses is RoomInput:
-		conses = [conses]
-
-	if conses is Dictionary:
-		conses = [conses]
-
-	if not conses is Array:
-		Log.warn("Unhandled constraint collection passed to apply_constraints, aborting", conses)
+	if not input is RoomInput:
+		Log.warn("Unhandled input passed to apply, aborting", input)
 		return
 
-	var ri = conses.map(func(cons):
-		# map constants to dicts with default opts
-		if cons is RoomInput:
-			return cons
-		elif cons is String:
-			return {cons: {}}
-		elif cons is Dictionary:
-			return cons
-		else:
-			Log.warn("Unhandled constraint passed to apply_constraints, ignoring", cons)
-			return null
-		).reduce(
-			func(agg_inp, cons_dict):
-				if cons_dict == null:
-					return agg_inp
-				elif cons_dict is RoomInput:
-					return agg_inp.merge(cons_dict)
-				# apply each constraint_dict in succession
-				return RoomInput.apply_constraint(agg_inp, cons_dict),
-			RoomInput.new())
-	def.constraints.assign([ri])
+	def.input = input
 
-	ri.update_def(def)
+	input.update_def(def)
 
 	if existing_shape != null and not existing_shape.is_empty():
 		# maintain pre-existing local_cells
 		def.set_local_cells(existing_shape)
-	return ri
 
-static func apply_constraint(inp: RoomInput, cons_dict):
-	if cons_dict is String:
-		cons_dict = {cons_dict: {}}
-	for k in cons_dict.keys():
-		var cons_inp = RoomInput.get_constraint_data(k, cons_dict.get(k))
-		inp = inp.merge(cons_inp)
-	return inp
-
-static func get_constraint_data(cons_key, opts={}):
-	match cons_key:
-		IN_LARGE_ROOM: return large_room_shape(opts)
-		IN_SMALL_ROOM: return small_room_shape(opts)
-		IN_TALL_ROOM: return tall_room_shape(opts)
-		IN_WIDE_ROOM: return wide_room_shape(opts)
-		IN_T_ROOM: return T_room_shape(opts)
-		IN_L_ROOM: return L_room_shape(opts)
-		CUSTOM_ROOM: return custom_room_shape(opts)
-
-		# generic
-		HAS_ENTITIES: return has_entities(opts)
-		HAS_ENTITY: return has_entity(null, opts)
-		HAS_ENEMY: return has_enemy(null, opts)
-		HAS_TILES: return has_tiles(opts)
-		HAS_ROOM: return custom_room_shape(opts)
-		HAS_EFFECTS: return has_effects(opts)
-
-		# tiles
-		IN_WOODEN_BOXES: return wooden_boxes(opts)
-		IN_SPACESHIP: return spaceship(opts)
-		IN_KINGDOM: return kingdom(opts)
-		IN_VOLCANO: return volcano(opts)
-		IN_GRASSY_CAVE: return grassy_cave(opts)
-
-		# enemies
-		HAS_BOSS: return has_boss(opts)
-		HAS_MONSTROAR: return has_enemy(EnemyIds.MONSTROAR, opts)
-		HAS_BEEFSTRONAUT: return has_enemy(EnemyIds.BEEFSTRONAUT, opts)
-		HAS_BLOB: return has_enemy(EnemyIds.BLOB, opts)
-		HAS_ROBOT: return has_enemy(EnemyIds.ROBOT, opts)
-		HAS_CRAWLY: return has_enemy(EnemyIds.SHOOTYCRAWLY, opts)
-		HAS_SOLDIER: return has_enemy(EnemyIds.SOLDIER, opts)
-
-		# combinations
-		IS_COOKING_ROOM: return cooking_room(opts)
-
-		# pickups/drops
-		HAS_LEAF: return has_entity(DinoEntityIds.LEAF, opts)
-
-		HAS_ARCADE_MACHINE: return has_entity(DinoEntityIds.ARCADEMACHINE, opts)
-		HAS_BOX: return has_entity(DinoEntityIds.BOX, opts)
-		HAS_TREASURE_BOX: return has_entity(DinoEntityIds.TREASURECHEST, opts)
-		HAS_COOKING_POT: return has_entity(DinoEntityIds.COOKINGPOT, opts)
-		HAS_TARGET: return has_entity(DinoEntityIds.TARGET, opts)
-		HAS_VOID: return has_entity(DinoEntityIds.VOID, opts)
-
-		# checkpoints
-		HAS_CANDLE: return has_entity(DinoEntityIds.CANDLE, opts)
-		HAS_CHECKPOINT: return has_entity(DinoEntityIds.CANDLE, opts)
-		HAS_LOG_CHECKPOINT: return has_entity(DinoEntityIds.LOGBENCH, opts)
-		HAS_SNOW_CHECKPOINT: return has_entity(DinoEntityIds.SNOWBENCH, opts)
-		HAS_CAVE_CHECKPOINT: return has_entity(DinoEntityIds.CAVEBENCH, opts)
-
-		HAS_PLAYER: return has_entity(DinoEntityIds.PLAYERSPAWNPOINT, opts)
-
-		_:
-			Log.warn("No constraint found for cons", cons_key)
-			return RoomInput.new()
-
+	return input
 
 ## room components ######################################################33
 
@@ -372,8 +216,6 @@ static func beatemup():
 
 ## room effects ######################################################33
 
-const HAS_EFFECTS = "has_effects"
-
 static func has_effects(opts):
 	if opts.get("effects"):
 		return RoomInput.new({
@@ -399,24 +241,13 @@ static func has_dust(_opts):
 
 ## room size ######################################################33
 
-const IN_LARGE_ROOM = "in_large_room"
-const IN_SMALL_ROOM = "in_small_room"
-const IN_TALL_ROOM = "in_tall_room"
-const IN_WIDE_ROOM = "in_wide_room"
-const IN_T_ROOM = "in_T_room"
-const IN_L_ROOM = "in_L_room"
-const CUSTOM_ROOM = "in_custom_room"
-const HAS_ROOM = "in_custom_room"
-
 static func large_room_shape(_opts={}):
 	return RoomInput.new({
 		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
 		})
 
 static func small_room_shape(_opts={}):
-	return RoomInput.new({
-		room_shape=[all_room_shapes.small, all_room_shapes.wide].pick_random(),
-		})
+	return RoomInput.new({room_shape=all_room_shapes.small})
 
 static func tall_room_shape(_opts={}):
 	return RoomInput.new({
@@ -432,9 +263,9 @@ static func wide_room_shape(_opts={}):
 			].pick_random(),
 		})
 
-static func custom_room_shape(opts={}):
+static func has_room(opts={}):
 	if opts.get("shape") == null:
-		Log.warn("Custom Room shape missing 'shape'!")
+		Log.warn("has_room missing 'shape'!")
 	return RoomInput.new({
 		room_shape=opts.get("shape")
 		})
@@ -461,19 +292,11 @@ static func T_room_shape(_opts={}):
 
 ## tilemaps ######################################################33
 
-const HAS_TILES = "has_tiles"
-
 static func has_tiles(opts):
 	var tmap_scenes = opts.get("tilemap_scenes")
 	if tmap_scenes == null:
 		Log.warn("No tilemaps_scenes passed to tile constraint", opts)
 	return RoomInput.new({tilemap_scenes=tmap_scenes})
-
-const IN_WOODEN_BOXES = "on_wooden_boxes"
-const IN_SPACESHIP = "in_spaceship"
-const IN_KINGDOM = "in_kingdom"
-const IN_VOLCANO = "in_volcano"
-const IN_GRASSY_CAVE = "in_grassy_cave"
 
 static func wooden_boxes(_opts={}):
 	return RoomInput.new({
@@ -506,18 +329,24 @@ static func grassy_cave(_opts={}):
 			load("res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn")],
 		})
 
+## with ######################################################33
+
+static func with(opts={}):
+	var ents = []
+	for ent_id in opts.get("entity_ids", []):
+		ents.append(Pandora.get_entity(ent_id))
+	ents.append_array(opts.get("entities", []))
+
+	var ens = []
+	for ent_id in opts.get("enemy_ids", []):
+		ens.append(Pandora.get_entity(ent_id))
+	ens.append_array(opts.get("enemies", []))
+
+	var effs = opts.get("effects", [])
+
+	return RoomInput.new({entities=ents, enemies=ens, effects=effs})
+
 ## enemies ######################################################33
-
-const HAS_ENEMY = "has_enemy"
-
-const HAS_BOSS = "has_boss"
-const HAS_MONSTROAR = "has_monstroar"
-const HAS_BEEFSTRONAUT = "has_beefstronaut"
-
-const HAS_BLOB = "has_blob"
-const HAS_ROBOT = "has_robot"
-const HAS_CRAWLY = "has_crawly"
-const HAS_SOLDIER = "has_solider"
 
 # TODO support more options, e.g. a passed entity (vs ent_id)
 static func has_enemy(ent_id, opts={}):
@@ -553,28 +382,6 @@ static func has_boss(opts={}):
 
 ## entities ######################################################33
 
-const HAS_ENTITY = "has_entity"
-const HAS_ENTITIES = "has_entities"
-
-const HAS_LEAF = "has_leaf"
-
-const HAS_ARCADE_MACHINE = "has_arcade_machine"
-const HAS_BOX = "has_box"
-const HAS_TREASURE_BOX = "has_treasure_box"
-
-const HAS_CHECKPOINT = "has_checkpoint"
-const HAS_LOG_CHECKPOINT = "has_log_checkpoint"
-const HAS_SNOW_CHECKPOINT = "has_snow_checkpoint"
-const HAS_CAVE_CHECKPOINT = "has_cave_checkpoint"
-const HAS_CANDLE = "has_candle"
-
-const HAS_COOKING_POT = "has_cooking_pot"
-const HAS_TARGET = "has_target"
-const HAS_VOID = "has_void"
-
-const HAS_PLAYER = "has_player"
-
-# TODO support more options, e.g. a passed entity (vs ent_id)
 static func has_entity(ent_id, opts={}):
 	if ent_id == null:
 		ent_id = opts.get("entity_id")
@@ -596,26 +403,5 @@ static func has_entities(opts={}):
 	ents.append_array(opts.get("entities", []))
 	return RoomInput.new({entities=ents})
 
-## encounters ######################################################33
-
-const IS_COOKING_ROOM = "is_cooking_room"
-
-static func cooking_room(_opts={}):
-	return has_entities({
-		entity_ids=[DinoEntityIds.COOKINGPOT, DinoEntityIds.VOID],
-		enemy_ids=[EnemyIds.BLOB],
-		})
-
-static func harvey_room(_opts={}):
-	return has_entities({
-		entity_ids=[
-			DinoEntityIds.TOOL,
-			DinoEntityIds.SUPPLYBOX,
-			DinoEntityIds.SUPPLYBOX,
-			DinoEntityIds.PLOT,
-			DinoEntityIds.PLOT,
-			DinoEntityIds.DELIVERYBOX,
-			DinoEntityIds.ACTIONBOT,
-			DinoEntityIds.ACTIONBOT,
-			],
-		}).merge(topdown())
+static func has_player(opts={}):
+	return has_entity(DinoEntityIds.PLAYERSPAWNPOINT, opts)
