@@ -27,8 +27,6 @@ static func to_defs(opts={}) -> Array[VaniaRoomDef]:
 ## vars #####################################################3
 
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
-
-var genre_type: DinoData.GenreType
 var room_path: String
 
 var local_cells: Array #[Vector3i]
@@ -41,12 +39,6 @@ var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
 var tile_defs: GridDefs
-
-var entities: Array[DinoEntity] = []
-var enemies: Array[DinoEnemy] = []
-var effects: Array[RoomEffect] = []
-
-var tilemap_scenes: Array[PackedScene]
 var tile_size = 16
 
 var index: int = 0
@@ -55,15 +47,30 @@ var index: int = 0
 
 func to_printable():
 	return {
-		entities=entities,
-		enemies=enemies,
-		effects=effects,
 		input=input,
 		room_path=room_path.get_file(),
 		local_cells=local_cells,
 		map_cells=map_cells,
-		tilemap_scenes=tilemap_scenes,
 		}
+
+## data #####################################################3
+
+func genre_type() -> DinoData.GenreType:
+	return input.genre_type
+
+func entities() -> Array[DinoEntity]:
+	return input.entities
+
+func enemies() -> Array[DinoEnemy]:
+	return input.enemies
+
+func effects() -> Array[RoomEffect]:
+	return input.room_effects
+
+func tilemap_scenes() -> Array[PackedScene]:
+	if input:
+		return input.tilemap_scenes
+	return []
 
 ## input #####################################################3
 
@@ -73,8 +80,6 @@ func rebuild():
 ## init #####################################################3
 
 func _init(opts={}):
-	if opts.get("genre_type") != null:
-		genre_type = opts.get("genre_type")
 	if opts.get("local_cells"):
 		set_local_cells(opts.get("local_cells"))
 
@@ -106,21 +111,21 @@ func set_local_cells(cells):
 ## tilemap helpers #####################################################
 
 func get_primary_tilemap():
-	if tilemap_scenes.is_empty():
+	if tilemap_scenes().is_empty():
 		Log.warn("No tilemap_scenes on room_def, cannot return primary tilemap")
 		return
 	else:
-		return tilemap_scenes[0]
+		return tilemap_scenes()[0]
 
 func get_secondary_tilemap():
-	if tilemap_scenes.is_empty():
+	if tilemap_scenes().is_empty():
 		Log.warn("No tilemap_scenes on room_def, cannot return secondary tilemap")
 		return
 	else:
-		if len(tilemap_scenes) > 1:
-			return tilemap_scenes[1]
+		if len(tilemap_scenes()) > 1:
+			return tilemap_scenes()[1]
 		else:
-			return tilemap_scenes[0]
+			return tilemap_scenes()[0]
 
 ## map_cells #####################################################
 

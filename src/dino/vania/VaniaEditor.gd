@@ -69,7 +69,7 @@ func update_room_def():
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
 	neighbors_label.text = "ngbrs: %s" % Log.to_pretty(current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file()))
 
-	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities)
+	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities())
 	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().resource_path.get_file()
 	# room_constraints_label.text = "constraints: %s" % Log.to_pretty(len(current_room_def.constraints))
 
@@ -78,10 +78,10 @@ func update_edit_entities():
 		return
 
 	var items = []
-	items.append_array(current_room_def.entities.map(func(ent):
-		return {label="Remove '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.erase(ent)}))
-	items.append_array(DinoEntity.all_entities().map(func(ent):
-		return {label="Add '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.append(ent)}))
+	# items.append_array(current_room_def.entities().map(func(ent):
+	# 	return {label="Remove '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.erase(ent)}))
+	# items.append_array(DinoEntity.all_entities().map(func(ent):
+	# 	return {label="Add '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.append(ent)}))
 
 	var popup = edit_entities_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
@@ -94,8 +94,8 @@ func update_edit_tilesets():
 		return
 
 	var items = []
-	items.append_array(RoomInput.all_tilemap_scenes.map(func(tm):
-		return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = load(tm)}))
+	# items.append_array(RoomInput.all_tilemap_scenes.map(func(tm):
+	# 	return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = load(tm)}))
 
 	var popup = edit_tileset_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):

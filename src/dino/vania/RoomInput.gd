@@ -111,8 +111,7 @@ func merge(b: RoomInput):
 ## update room def ######################################################
 
 func update_def(def: VaniaRoomDef):
-	if genre_type != null:
-		def.genre_type = genre_type
+	def.input = self
 
 	if not room_shape.is_empty():
 		def.set_local_cells(room_shape)
@@ -121,19 +120,8 @@ func update_def(def: VaniaRoomDef):
 	else:
 		def.set_local_cells(all_room_shapes.values().pick_random())
 
-	if not room_effects.is_empty():
-		def.effects = room_effects
-
-	if not entities.is_empty():
-		def.entities = entities
-
-	if not enemies.is_empty():
-		def.enemies = enemies
-
-	if not tilemap_scenes.is_empty():
-		def.tilemap_scenes = tilemap_scenes
-	else:
-		def.tilemap_scenes = [load(all_tilemap_scenes.pick_random())]
+	if tilemap_scenes.is_empty():
+		tilemap_scenes = [load(all_tilemap_scenes.pick_random())]
 
 ################################################################
 ## static ######################################################
@@ -141,6 +129,7 @@ func update_def(def: VaniaRoomDef):
 static func merge_many(inputs):
 	return inputs.reduce(func(a, b): return a.merge(b))
 
+# not too sure how necessary apply and update_def are anymore
 # updates the passed room def with the passed room input
 # maintains the existing def's local_cells
 static func apply(input: RoomInput, def: VaniaRoomDef):

@@ -104,7 +104,7 @@ func setup_tileset():
 		bg_tilemap.modulate.a = 0.3
 		bg_tilemap.set_z_index(-5)
 	else:
-		Log.warn("cannot setup tileset without room_def.tilemap_scenes")
+		Log.warn("cannot setup tileset for room_def", room_def)
 
 func clear_all_tiles():
 	ensure_tilemaps()
@@ -367,17 +367,17 @@ func add_entity(ent):
 		node.set_owner(self)
 
 func add_enemies():
-	for enemy in room_def.enemies:
+	for enemy in room_def.enemies():
 		add_entity(enemy)
 
 func add_entities():
-	for ent in room_def.entities:
+	for ent in room_def.entities():
 		add_entity(ent)
 
 ## add_effects ##############################################################
 
 func add_effects():
-	for eff in room_def.effects:
+	for eff in room_def.effects():
 		eff.add_to_room(self)
 
 ## fit helpers ##############################################################

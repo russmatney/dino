@@ -237,11 +237,11 @@ func setup_player():
 	var def = current_room_def()
 	if Dino.current_player_node():
 		Dino.respawn_active_player({level_node=self, deferred=false,
-			genre_type=def.genre_type if def else null
+			genre_type=def.genre_type() if def else null
 			})
 	else:
 		Dino.spawn_player({level_node=self, deferred=false,
-			genre_type=def.genre_type if def else null
+			genre_type=def.genre_type() if def else null
 			})
 
 func _set_player_position():

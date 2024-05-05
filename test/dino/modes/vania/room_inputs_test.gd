@@ -16,10 +16,11 @@ func test_inputs_empty_inputs_behavior():
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
-	assert_array(def.tilemap_scenes).is_not_empty()
+	assert_array(def.tilemap_scenes()).is_not_empty()
 	assert_array(def.local_cells).is_not_empty()
-	assert_array(def.entities).is_empty()
-	assert_array(def.input).is_null()
+	assert_array(def.entities()).is_empty()
+	assert_array(def.enemies()).is_empty()
+	assert_array(def.effects()).is_empty()
 
 ## entities ######################################################
 
@@ -33,8 +34,8 @@ func test_inputs_set_entities():
 	inp.update_def(def)
 
 	assert_array(inp.entities).is_not_empty()
-	assert_array(def.entities).is_not_empty()
-	assert_array(def.entities).contains(some_ents)
+	assert_array(def.entities()).is_not_empty()
+	assert_array(def.entities()).contains(some_ents)
 
 func test_inputs_combine_entities():
 	# entities should combine and keep dupes
@@ -59,10 +60,10 @@ func test_inputs_combine_entities():
 
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
-	assert_array(def.entities).is_not_empty()
-	assert_array(def.entities).contains(some_ents)
-	assert_array(def.entities).contains(some_more_ents)
-	assert_int(len(def.entities)).is_equal(4)
+	assert_array(def.entities()).is_not_empty()
+	assert_array(def.entities()).contains(some_ents)
+	assert_array(def.entities()).contains(some_more_ents)
+	assert_int(len(def.entities())).is_equal(4)
 
 ## tilemaps ######################################################
 
@@ -74,7 +75,7 @@ func test_inputs_set_tilemaps():
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes).contains([some_scene])
+	assert_array(def.tilemap_scenes()).contains([some_scene])
 
 func test_inputs_combine_tilemaps():
 	# tilemaps should combine but remain distinct (no dupes!)
@@ -95,9 +96,9 @@ func test_inputs_combine_tilemaps():
 	assert_array(inp.tilemap_scenes).contains(some_tilemaps)
 	assert_array(inp.tilemap_scenes).contains(some_overlapping_tilemaps)
 	assert_int(len(inp.tilemap_scenes)).is_equal(3)
-	assert_array(def.tilemap_scenes).contains(some_tilemaps)
-	assert_array(def.tilemap_scenes).contains(some_overlapping_tilemaps)
-	assert_int(len(def.tilemap_scenes)).is_equal(3)
+	assert_array(def.tilemap_scenes()).contains(some_tilemaps)
+	assert_array(def.tilemap_scenes()).contains(some_overlapping_tilemaps)
+	assert_int(len(def.tilemap_scenes())).is_equal(3)
 
 
 ## room_shapes ######################################################
@@ -170,10 +171,10 @@ func test_room_def_inputs_spaceship_sets_tilemap():
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes).contains(inp.tilemap_scenes)
+	assert_array(def.tilemap_scenes()).is_not_empty()
+	assert_array(def.tilemap_scenes()).contains(inp.tilemap_scenes)
 	assert_array(def.local_cells).is_not_empty()
-	assert_array(def.entities).is_empty()
+	assert_array(def.entities()).is_empty()
 	assert_that(def.input).is_not_null()
 	assert_array(def.input.tilemap_scenes).contains(inp.tilemap_scenes)
 
@@ -188,17 +189,17 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes).contains(inp.tilemap_scenes)
-	assert_array(def.tilemap_scenes).is_not_empty()
+	assert_array(def.tilemap_scenes()).contains(inp.tilemap_scenes)
+	assert_array(def.tilemap_scenes()).is_not_empty()
 
 	assert_that(inp.room_shape).is_not_null()
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.local_cells).is_equal(inp.room_shape)
 
 	assert_array(inp.entities).is_not_empty()
-	assert_array(def.entities).is_not_empty()
+	assert_array(def.entities()).is_not_empty()
 	assert_that(inp.entities[0].get_entity_id()).is_equal(DinoEntityIds.PLAYERSPAWNPOINT)
-	assert_that(def.entities[0].get_entity_id()).is_equal(DinoEntityIds.PLAYERSPAWNPOINT)
+	assert_that(def.entities()[0].get_entity_id()).is_equal(DinoEntityIds.PLAYERSPAWNPOINT)
 
 func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 	var def = VaniaRoomDef.new()
@@ -210,12 +211,12 @@ func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 
 	assert_array(inp.tilemap_scenes).is_not_null()
 	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes).contains(inp.tilemap_scenes)
+	assert_array(def.tilemap_scenes()).contains(inp.tilemap_scenes)
 
 	assert_array(inp.entities).is_not_empty()
-	assert_array(def.entities).is_not_empty()
+	assert_array(def.entities()).is_not_empty()
 	assert_that(inp.entities[0].get_entity_id()).is_equal(DinoEntityIds.LEAF)
-	assert_that(def.entities[0].get_entity_id()).is_equal(DinoEntityIds.LEAF)
+	assert_that(def.entities()[0].get_entity_id()).is_equal(DinoEntityIds.LEAF)
 
 	# room shapes input is empty, but the def's local_cells is not!
 	assert_array(inp.room_shapes).is_empty()
@@ -248,10 +249,10 @@ func test_apply_appends_multiple_entities():
 				]}), def)
 
 	assert_int(len(inp.entities)).is_equal(3)
-	assert_int(len(def.entities)).is_equal(3)
+	assert_int(len(def.entities())).is_equal(3)
 	assert_array(inp.entities.map(func(ent): return ent.get_entity_id())).contains(
 		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
-	assert_array(def.entities.map(func(ent): return ent.get_entity_id())).contains(
+	assert_array(def.entities().map(func(ent): return ent.get_entity_id())).contains(
 		[DinoEntityIds.TARGET, DinoEntityIds.PLAYERSPAWNPOINT,])
 
 # an idea, but better when we have type unions
