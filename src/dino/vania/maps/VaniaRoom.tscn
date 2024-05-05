@@ -79,3 +79,11 @@ script = ExtResource("6_q8wsp")
 [node name="@TileMap@62430" type="TileMap" parent="."]
 format = 2
 script = ExtResource("6_q8wsp")
+
+[node name="TileMap" type="TileMap" parent="." groups=["navigation_sources"]]
+format = 2
+script = ExtResource("6_q8wsp")
+
+[node name="BackgroundTileMap" type="TileMap" parent="."]
+format = 2
+script = ExtResource("6_q8wsp")
