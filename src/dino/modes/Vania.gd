@@ -24,6 +24,28 @@ extends Node2D
 	return inputs
 	).call()})
 
+@onready var mixed_genre_game = MapDef.new({
+	name="Mixed Genre Game",
+	inputs=(func():
+	var inputs = [
+		RoomInput.merge_many([
+			RoomInput.topdown(),
+			RoomInput.has_entities({entity_ids=[
+				DinoEntityIds.PLAYERSPAWNPOINT,
+			]}),
+			RoomInput.small_room_shape(),
+			RoomInput.has_effects({effects=[
+				RoomEffect.dust(),
+			]}),
+		]),
+		RoomInput.merge_many([
+			RoomInput.sidescroller(),
+			RoomInput.small_room_shape(),
+		]),
+	]
+	return inputs
+	).call()})
+
 @onready var default_game = MapDef.new({
 	name="Vania",
 	inputs=(func():
@@ -216,7 +238,9 @@ func start_game():
 
 	if not selected_map_def:
 		# selected_map_def = arcade_game
-		selected_map_def = topdown_game
+		# selected_map_def = topdown_game
+		# selected_map_def = default_game
+		selected_map_def = mixed_genre_game
 
 	game_node.map_def = selected_map_def
 

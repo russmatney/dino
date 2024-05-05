@@ -28,37 +28,34 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 	var og_player = Dino.current_player_node()
 	var og_p_position = og_player.position
 	var og_p_velocity = og_player.velocity
+
+	var offset = Vector2()
+	if prev_room_instance:
+		offset = MetSys.get_current_room_instance().get_room_position_offset(prev_room_instance)
+
+		# maybe some nice way to handle this
+		if abs(og_p_velocity.x) > abs(og_p_velocity.y):
+			if offset.x < 0:
+				offset.x += PLAYER_POS_OFFSET
+			if offset.x > 0:
+				offset.x -= PLAYER_POS_OFFSET
+		else:
+			if offset.y < 0:
+				offset.y += PLAYER_POS_OFFSET
+			if offset.y > 0:
+				offset.y -= PLAYER_POS_OFFSET
+
 	if (new_room_def.genre_type != prev_room_def.genre_type):
 		var player_parent = og_player.get_parent()
 		# TODO carry over velocity/momentum, other stats? (health,items,etc)
 		# playerData or playerDef class with data? (like room vs roomDef?)
 		Dino.respawn_active_player({
 			genre_type=new_room_def.genre_type,
-			# deferred=false,
+			deferred=false,
 			level_node=player_parent,
-			setup=func(p): p.position = og_p_position
+			setup=func(p): p.position = og_p_position - offset
 			})
+	else:
+		og_player.position -= offset
 
-	if prev_room_instance:
-		var player = Dino.current_player_node()
-		if not player:
-			Log.warn("Room transition found no player node!")
-		elif not is_instance_valid(player):
-			Log.warn("Room transition found invalid player node!", player)
-		else:
-			var offset = MetSys.get_current_room_instance().get_room_position_offset(prev_room_instance)
-
-			# maybe some nice way to handle this
-			if abs(og_p_velocity.x) > abs(og_p_velocity.y):
-				if offset.x < 0:
-					offset.x += PLAYER_POS_OFFSET
-				if offset.x > 0:
-					offset.x -= PLAYER_POS_OFFSET
-			else:
-				if offset.y < 0:
-					offset.y += PLAYER_POS_OFFSET
-				if offset.y > 0:
-					offset.y -= PLAYER_POS_OFFSET
-
-			player.position -= offset
-		prev_room_instance.queue_free()
+	prev_room_instance.queue_free()
