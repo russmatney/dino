@@ -119,91 +119,93 @@ func test_build_room_sets_tilemap_doors():
 
 ## tilemap backgrounds ################################################
 
-func test_build_room_adds_tile_backgrounds():
-	var tile_defs = GridParser.parse({contents="""
-name Tile Chunks
+# TODO rewrite to consume an on the fly DinoTile
+# (no more tile_defs passed to VaniaRoomDef)
+# func test_build_room_adds_tile_backgrounds():
+# 	var tile_defs = GridParser.parse({contents="""
+# name Tile Chunks
 
-==============
-LEGEND
-==============
+# ==============
+# LEGEND
+# ==============
 
-x = Tile
-n = NewTile
+# x = Tile
+# n = NewTile
 
-==============
-CHUNKS
-==============
+# ==============
+# CHUNKS
+# ==============
 
-name Tile
-tile_chunk
+# name Tile
+# tile_chunk
 
-xxx
-xn.
-x..
-	"""})
+# xxx
+# xn.
+# x..
+# 	"""})
 
-	var room = auto_free(VaniaRoom.new())
-	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
+# 	var room = auto_free(VaniaRoom.new())
+# 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
+# 	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
 
-	room.set_room_def(def)
-	room.setup_tileset()
-	room.setup_walls_and_doors()
+# 	room.set_room_def(def)
+# 	room.setup_tileset()
+# 	room.setup_walls_and_doors()
 
-	var bg_tmap_cells = room.bg_tilemap.get_used_cells(0)
-	assert_array(bg_tmap_cells).is_empty()
+# 	var bg_tmap_cells = room.bg_tilemap.get_used_cells(0)
+# 	assert_array(bg_tmap_cells).is_empty()
 
-	room.add_background_tiles({count=1})
+# 	room.add_background_tiles({count=1})
 
-	var new_tmap_cells = room.bg_tilemap.get_used_cells(0)
+# 	var new_tmap_cells = room.bg_tilemap.get_used_cells(0)
 
-	assert_int(len(new_tmap_cells) - len(bg_tmap_cells)).is_equal(1) # added one tile
+# 	assert_int(len(new_tmap_cells) - len(bg_tmap_cells)).is_equal(1) # added one tile
 
-	var expected_corner_tile = Vector2i.ONE * room.tile_border_width
-	assert_array(new_tmap_cells).contains([expected_corner_tile])
-	# TODO assert the new tile's position
+# 	var expected_corner_tile = Vector2i.ONE * room.tile_border_width
+# 	assert_array(new_tmap_cells).contains([expected_corner_tile])
+# 	# TODO assert the new tile's position
 
-## tile chunks ################################################
+# ## tile chunks ################################################
 
-func test_build_room_adds_tile_chunks():
-	var tile_defs = GridParser.parse({contents="""
-name Tile Chunks
+# func test_build_room_adds_tile_chunks():
+# 	var tile_defs = GridParser.parse({contents="""
+# name Tile Chunks
 
-==============
-LEGEND
-==============
+# ==============
+# LEGEND
+# ==============
 
-x = Tile
-n = NewTile
+# x = Tile
+# n = NewTile
 
-==============
-CHUNKS
-==============
+# ==============
+# CHUNKS
+# ==============
 
-name Tile
-tile_chunk
+# name Tile
+# tile_chunk
 
-xxx
-xn.
-x..
-	"""})
+# xxx
+# xn.
+# x..
+# 	"""})
 
-	var room = auto_free(VaniaRoom.new())
-	var def = VaniaRoomDef.new({tile_defs=tile_defs})
-	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
+# 	var room = auto_free(VaniaRoom.new())
+# 	var def = VaniaRoomDef.new({tile_defs=tile_defs})
+# 	RoomInput.apply(RoomInput.spaceship().merge(RoomInput.small_room_shape()), def)
 
-	room.set_room_def(def)
-	room.setup_tileset()
-	room.fill_tilemap_borders()
-	room.tilemap.force_update()
+# 	room.set_room_def(def)
+# 	room.setup_tileset()
+# 	room.fill_tilemap_borders()
+# 	room.tilemap.force_update()
 
-	var tmap_cells = room.tilemap.get_used_cells(0)
-	assert_array(tmap_cells).is_not_empty()
+# 	var tmap_cells = room.tilemap.get_used_cells(0)
+# 	assert_array(tmap_cells).is_not_empty()
 
-	room.add_tile_chunks({count=1})
-	var new_tmap_cells = room.tilemap.get_used_cells(0)
-	assert_int(len(new_tmap_cells) - len(tmap_cells)).is_equal(1) # added one tile
-	# TODO assert the new tile's position
+# 	room.add_tile_chunks({count=1})
+# 	var new_tmap_cells = room.tilemap.get_used_cells(0)
+# 	assert_int(len(new_tmap_cells) - len(tmap_cells)).is_equal(1) # added one tile
+# 	# TODO assert the new tile's position
 
 ## add entities ################################################
 

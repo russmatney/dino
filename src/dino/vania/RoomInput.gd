@@ -6,21 +6,8 @@ class_name RoomInput
 # 	"OneWayPlatform",
 # 	"Spikes",
 # 	]
-static var all_constraints = []
 
 # TODO support props, backgrounds
-
-static var all_tilemap_scenes = [
-		# "res://addons/core/reptile/tilemaps/GrassTiles16.tscn",
-		# "res://addons/core/reptile/tilemaps/SnowTiles16.tscn",
-		# "res://addons/core/reptile/tilemaps/CaveTiles16.tscn",
-		# "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn",
-		"res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn",
-		"res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn",
-		"res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn",
-		"res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn",
-		"res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn",
-	]
 
 static var all_room_shapes = {
 	small=[Vector3i()],
@@ -68,7 +55,7 @@ static var all_room_shapes = {
 @export var room_shape: Array[Vector3i]
 @export var room_shapes = []
 @export var room_effects: Array[RoomEffect]
-@export var tilemap_scenes: Array[PackedScene]
+@export var tiles: Array[DinoTiles]
 
 func _init(opts={}):
 	if opts.get("genre_type"):
@@ -82,14 +69,14 @@ func _init(opts={}):
 	room_shapes.assign(opts.get("room_shapes", []))
 	if opts.get("room_effects"):
 		room_effects.assign(opts.get("room_effects"))
-	if opts.get("tilemap_scenes"):
-		tilemap_scenes.assign(opts.get("tilemap_scenes"))
+	if opts.get("tiles"):
+		tiles.assign(opts.get("tiles"))
 
 func to_printable():
 	return {
 		entities=entities,
 		enemies=enemies,
-		tilemap_scenes=tilemap_scenes,
+		tiles=tiles,
 		room_shape=room_shape,
 		room_shapes=room_shapes,
 		room_effects=room_effects,
@@ -105,7 +92,7 @@ func merge(b: RoomInput):
 		room_shape=U._or(b.room_shape, room_shape),
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
-		tilemap_scenes=U.distinct(U.append_array(tilemap_scenes, b.tilemap_scenes)),
+		tiles=U.distinct(U.append_array(tiles, b.tiles)),
 		})
 
 ## update room def ######################################################
@@ -120,8 +107,8 @@ func update_def(def: VaniaRoomDef):
 	else:
 		def.set_local_cells(all_room_shapes.values().pick_random())
 
-	if tilemap_scenes.is_empty():
-		tilemap_scenes = [load(all_tilemap_scenes.pick_random())]
+	if tiles.is_empty():
+		tiles.assign([DinoTiles.all_tiles().pick_random()])
 
 ################################################################
 ## static ######################################################
@@ -166,12 +153,9 @@ static func random_room_shapes(opts={}):
 		room_shapes=opts.get("room_shapes", all_room_shapes.values()),
 		})
 
-static func random_tilemaps(_opts={}):
+static func random_tiles(_opts={}):
 	return RoomInput.new({
-		tilemap_scenes=[
-			load(all_tilemap_scenes.pick_random()),
-			load(all_tilemap_scenes.pick_random()),
-			]})
+		tiles=[DinoTiles.all_tiles().pick_random()]})
 
 static func random_effects(_opts={}):
 	return RoomInput.new({
@@ -185,7 +169,7 @@ static func random_room(opts={}):
 	return merge_many([
 		random_enemies(opts), random_entities(opts),
 		random_room_shapes(opts),
-		random_tilemaps(opts), random_effects(opts),
+		random_tiles(opts), random_effects(opts),
 		])
 
 ## genre type ######################################################33
@@ -281,58 +265,55 @@ static func T_room_shape(_opts={}):
 ## tilemaps ######################################################33
 
 static func has_tiles(opts):
-	var tmap_scenes = opts.get("tilemap_scenes")
-	if tmap_scenes == null:
-		Log.warn("No tilemaps_scenes passed to tile constraint", opts)
-	return RoomInput.new({tilemap_scenes=tmap_scenes})
+	var ts = []
+	for id in opts.get("tile_ids", []):
+		ts.append(Pandora.get_entity(id))
+	ts.append_array(opts.get("tiles", []))
+
+	return RoomInput.new({tiles=ts})
 
 static func wooden_boxes(_opts={}):
-	return RoomInput.new({
-		tilemap_scenes=[
-			load("res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn")
-			],
-		})
+	return RoomInput.new({tiles=[
+		Pandora.get_entity(DinoTileIds.WOODENBOXTILES)]})
 
 static func spaceship(_opts={}):
-	return RoomInput.new({
-		tilemap_scenes=[
-			load("res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn")
-			],
-		})
+	return RoomInput.new({tiles=[
+		Pandora.get_entity(DinoTileIds.SPACESHIPTILES)]})
 
 static func kingdom(_opts={}):
-	return RoomInput.new({
-		tilemap_scenes=[load("res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn")],
-		})
+	return RoomInput.new({tiles=[
+		Pandora.get_entity(DinoTileIds.KINGDOMTILES)]})
 
 static func volcano(_opts={}):
-	return RoomInput.new({
-		tilemap_scenes=[
-			load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")],
-		})
+	return RoomInput.new({tiles=[
+		Pandora.get_entity(DinoTileIds.VOLCANOTILES)]})
 
 static func grassy_cave(_opts={}):
-	return RoomInput.new({
-		tilemap_scenes=[
-			load("res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn")],
-		})
+	return RoomInput.new({tiles=[
+		Pandora.get_entity(DinoTileIds.GRASSYCAVETILES)]})
 
 ## with ######################################################33
 
 static func with(opts={}):
 	var ents = []
-	for ent_id in opts.get("entity_ids", []):
-		ents.append(Pandora.get_entity(ent_id))
+	for id in opts.get("entity_ids", []):
+		ents.append(Pandora.get_entity(id))
 	ents.append_array(opts.get("entities", []))
 
 	var ens = []
-	for ent_id in opts.get("enemy_ids", []):
-		ens.append(Pandora.get_entity(ent_id))
+	for id in opts.get("enemy_ids", []):
+		ens.append(Pandora.get_entity(id))
 	ens.append_array(opts.get("enemies", []))
 
 	var effs = opts.get("effects", [])
 
-	return RoomInput.new({entities=ents, enemies=ens, effects=effs})
+	var ts = []
+	for id in opts.get("tile_ids", []):
+		ts.append(Pandora.get_entity(id))
+	ts.append_array(opts.get("tiles", []))
+
+	return RoomInput.new({entities=ents, enemies=ens, effects=effs,
+		tiles=ts})
 
 ## enemies ######################################################33
 

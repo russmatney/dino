@@ -85,23 +85,28 @@ func ensure_tilemaps():
 	U.ensure_owned_child(self, "nav_region", "NavigationRegion2D", NavigationRegion2D)
 
 # TODO use neighbor tileset as background near the door
+# TODO pull all this into DinoTileMap
 func setup_tileset():
 	ensure_tilemaps()
-	var primary_tilemap = room_def.get_primary_tilemap()
-	if primary_tilemap:
-		var primary = primary_tilemap.instantiate()
-		tilemap.set_tileset(primary.get_tileset().duplicate(true))
 
-	var secondary_tilemap = room_def.get_secondary_tilemap()
-	if secondary_tilemap:
-		var secondary = secondary_tilemap.instantiate()
-		bg_tilemap.set_tileset(secondary.get_tileset().duplicate(true))
+	var primary = room_def.get_primary_tiles()
+	if primary:
+		var tmap = primary.get_scene().instantiate()
+		tilemap.set_tileset(tmap.get_tileset().duplicate(true))
+		tilemap.chunk_defs = primary.get_grid_defs()
+
+	var secondary = room_def.get_secondary_tiles()
+	if secondary:
+		var tmap = secondary.get_scene().instantiate()
+		bg_tilemap.set_tileset(tmap.get_tileset().duplicate(true))
+		bg_tilemap.chunk_defs = secondary.get_grid_defs()
+
 		Reptile.disable_collisions(bg_tilemap)
 		Reptile.disable_occlusion(bg_tilemap)
 
 		# TODO support multiple bg_tilemap layers
 		# TODO darken instead of alpha
-		bg_tilemap.modulate.a = 0.3
+		bg_tilemap.modulate.a = 0.4
 		bg_tilemap.set_z_index(-5)
 	else:
 		Log.warn("cannot setup tileset for room_def", room_def)

@@ -13,7 +13,8 @@ var chunk_defs: GridDefs
 ## init ########################################################
 
 func _init():
-	chunk_defs = GridParser.parse({defs_path=chunks_path})
+	if not chunk_defs:
+		chunk_defs = GridParser.parse({defs_path=chunks_path})
 
 ## fill ########################################################
 
@@ -49,6 +50,4 @@ func mix_terrains(opts={}):
 			if coord in tile_coords:
 				to_update.append(coord)
 
-		Log.pr("mixing in some matching tile chunks", to_update)
-		# re set_cells
 		set_cells_terrain_connect(0, to_update, 0, terrain)

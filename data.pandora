@@ -88,6 +88,16 @@
 				"_index": 0,
 				"_name": "DinoEntity",
 				"_script_path": "res://src/dino/entities/DinoEntity.gd"
+			},
+			{
+				"_category_id": "",
+				"_generate_ids": true,
+				"_icon_color": "ffffff00",
+				"_id": "179",
+				"_ids_generation_class": "DinoTileIds",
+				"_index": 0,
+				"_name": "DinoTiles",
+				"_script_path": "res://src/dino/tiles/DinoTiles.gd"
 			}
 		],
 		"_entities": [
@@ -1801,6 +1811,85 @@
 						"value": "res://src/dino/npcs/action_bot/HarveyBot.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "183",
+				"_index": 0,
+				"_name": "ColdFireTiles"
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "184",
+				"_index": 0,
+				"_name": "KingdomTiles",
+				"_property_overrides": {
+					"scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "185",
+				"_index": 0,
+				"_name": "VolcanoTiles",
+				"_property_overrides": {
+					"scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "186",
+				"_index": 0,
+				"_name": "GrassyCaveTiles",
+				"_property_overrides": {
+					"scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "187",
+				"_index": 0,
+				"_name": "SpaceShipTiles",
+				"_property_overrides": {
+					"scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "188",
+				"_index": 0,
+				"_name": "WoodenBoxTiles",
+				"_property_overrides": {
+					"scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "179",
+				"_icon_color": "ffffff00",
+				"_id": "189",
+				"_index": 0,
+				"_name": "PurpleStoneTiles"
 			}
 		],
 		"_properties": [
@@ -2083,12 +2172,33 @@
 				"_id": "167",
 				"_name": "genre_type",
 				"_type": "string"
+			},
+			{
+				"_category_id": "179",
+				"_default_value": "",
+				"_id": "180",
+				"_name": "display_name",
+				"_type": "string"
+			},
+			{
+				"_category_id": "179",
+				"_default_value": "res://src/dino/tiles/ColdFireCombo.tscn",
+				"_id": "181",
+				"_name": "scene",
+				"_type": "resource"
+			},
+			{
+				"_category_id": "179",
+				"_default_value": "res://src/dino/tiles/tile_chunks.txt",
+				"_id": "182",
+				"_name": "grid_defs_path",
+				"_type": "string"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 175
+			"default": 189
 		}
 	}
 }

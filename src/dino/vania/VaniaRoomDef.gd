@@ -71,10 +71,10 @@ func effects() -> Array[RoomEffect]:
 		return []
 	return input.room_effects
 
-func tilemap_scenes() -> Array[PackedScene]:
+func tiles() -> Array[DinoTiles]:
 	if not input:
 		return []
-	return input.tilemap_scenes
+	return input.tiles
 
 ## input #####################################################3
 
@@ -110,22 +110,22 @@ func set_local_cells(cells):
 
 ## tilemap helpers #####################################################
 
-func get_primary_tilemap():
-	if tilemap_scenes().is_empty():
-		Log.warn("No tilemap_scenes on room_def, cannot return primary tilemap")
+func get_primary_tiles() -> DinoTiles:
+	if tiles().is_empty():
+		Log.warn("No tiles on room_def, cannot return primary tilemap")
 		return
 	else:
-		return tilemap_scenes()[0]
+		return tiles()[0]
 
-func get_secondary_tilemap():
-	if tilemap_scenes().is_empty():
-		Log.warn("No tilemap_scenes on room_def, cannot return secondary tilemap")
+func get_secondary_tiles() -> DinoTiles:
+	if tiles().is_empty():
+		Log.warn("No tiles on room_def, cannot return secondary tilemap")
 		return
 	else:
-		if len(tilemap_scenes()) > 1:
-			return tilemap_scenes()[1]
+		if len(tiles()) > 1:
+			return tiles()[1]
 		else:
-			return tilemap_scenes()[0]
+			return tiles()[0]
 
 ## map_cells #####################################################
 

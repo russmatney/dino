@@ -8,7 +8,7 @@ func before():
 
 func test_inputs_empty_inputs_behavior():
 	var inp = RoomInput.new()
-	assert_array(inp.tilemap_scenes).is_empty()
+	assert_array(inp.tiles).is_empty()
 	assert_array(inp.entities).is_empty()
 	assert_array(inp.room_shape).is_empty()
 	assert_array(inp.room_shapes).is_empty()
@@ -16,7 +16,7 @@ func test_inputs_empty_inputs_behavior():
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
-	assert_array(def.tilemap_scenes()).is_not_empty()
+	assert_array(def.tiles()).is_not_empty()
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.entities()).is_empty()
 	assert_array(def.enemies()).is_empty()
@@ -68,37 +68,37 @@ func test_inputs_combine_entities():
 ## tilemaps ######################################################
 
 func test_inputs_set_tilemaps():
-	var some_scene = load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")
-	var inp = RoomInput.new({tilemap_scenes=[some_scene]})
+	var some_tiles = DinoTiles.all_tiles().pick_random()
+	var inp = RoomInput.new({tiles=[some_tiles]})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
-	assert_array(inp.tilemap_scenes).is_not_null()
-	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes()).contains([some_scene])
+	assert_array(inp.tiles).is_not_null()
+	assert_array(inp.tiles).is_not_empty()
+	assert_array(def.tiles()).contains([some_tiles])
 
 func test_inputs_combine_tilemaps():
 	# tilemaps should combine but remain distinct (no dupes!)
 
-	var vol_tile = load("res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn")
-	var grass_tile = load("res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn")
-	var gold_tile = load("res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn")
+	var vol_tile = Pandora.get_entity(DinoTileIds.VOLCANOTILES)
+	var grass_tile = Pandora.get_entity(DinoTileIds.GRASSYCAVETILES)
+	var gold_tile = Pandora.get_entity(DinoTileIds.KINGDOMTILES)
 	var some_tilemaps = [vol_tile, grass_tile]
 	var some_overlapping_tilemaps = [vol_tile, gold_tile]
-	var inp_1 = RoomInput.new({tilemap_scenes=some_tilemaps})
-	var inp_2 = RoomInput.new({tilemap_scenes=some_overlapping_tilemaps})
+	var inp_1 = RoomInput.new({tiles=some_tilemaps})
+	var inp_2 = RoomInput.new({tiles=some_overlapping_tilemaps})
 	var inp = RoomInput.merge_many([inp_1, inp_2])
 
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
-	assert_array(inp.tilemap_scenes).is_not_null()
-	assert_array(inp.tilemap_scenes).contains(some_tilemaps)
-	assert_array(inp.tilemap_scenes).contains(some_overlapping_tilemaps)
-	assert_int(len(inp.tilemap_scenes)).is_equal(3)
-	assert_array(def.tilemap_scenes()).contains(some_tilemaps)
-	assert_array(def.tilemap_scenes()).contains(some_overlapping_tilemaps)
-	assert_int(len(def.tilemap_scenes())).is_equal(3)
+	assert_array(inp.tiles).is_not_null()
+	assert_array(inp.tiles).contains(some_tilemaps)
+	assert_array(inp.tiles).contains(some_overlapping_tilemaps)
+	assert_int(len(inp.tiles)).is_equal(3)
+	assert_array(def.tiles()).contains(some_tilemaps)
+	assert_array(def.tiles()).contains(some_overlapping_tilemaps)
+	assert_int(len(def.tiles())).is_equal(3)
 
 
 ## room_shapes ######################################################
@@ -169,14 +169,14 @@ func test_room_def_inputs_spaceship_sets_tilemap():
 	var def = VaniaRoomDef.new()
 	var inp = RoomInput.apply(RoomInput.spaceship(), def)
 
-	assert_array(inp.tilemap_scenes).is_not_null()
-	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes()).is_not_empty()
-	assert_array(def.tilemap_scenes()).contains(inp.tilemap_scenes)
+	assert_array(inp.tiles).is_not_null()
+	assert_array(inp.tiles).is_not_empty()
+	assert_array(def.tiles()).is_not_empty()
+	assert_array(def.tiles()).contains(inp.tiles)
 	assert_array(def.local_cells).is_not_empty()
 	assert_array(def.entities()).is_empty()
 	assert_that(def.input).is_not_null()
-	assert_array(def.input.tilemap_scenes).contains(inp.tilemap_scenes)
+	assert_array(def.input.tiles).contains(inp.tiles)
 
 func test_room_def_inputs_player_room_sets_entities_and_shape():
 	var def = VaniaRoomDef.new()
@@ -187,10 +187,10 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 			RoomInput.small_room_shape()
 		]), def)
 
-	assert_array(inp.tilemap_scenes).is_not_null()
-	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes()).contains(inp.tilemap_scenes)
-	assert_array(def.tilemap_scenes()).is_not_empty()
+	assert_array(inp.tiles).is_not_null()
+	assert_array(inp.tiles).is_not_empty()
+	assert_array(def.tiles()).contains(inp.tiles)
+	assert_array(def.tiles()).is_not_empty()
 
 	assert_that(inp.room_shape).is_not_null()
 	assert_array(def.local_cells).is_not_empty()
@@ -209,9 +209,9 @@ func test_room_def_inputs_leaf_and_kingdom_have_fallback_room_shape():
 			RoomInput.kingdom(),
 		]), def)
 
-	assert_array(inp.tilemap_scenes).is_not_null()
-	assert_array(inp.tilemap_scenes).is_not_empty()
-	assert_array(def.tilemap_scenes()).contains(inp.tilemap_scenes)
+	assert_array(inp.tiles).is_not_null()
+	assert_array(inp.tiles).is_not_empty()
+	assert_array(def.tiles()).contains(inp.tiles)
 
 	assert_array(inp.entities).is_not_empty()
 	assert_array(def.entities()).is_not_empty()
