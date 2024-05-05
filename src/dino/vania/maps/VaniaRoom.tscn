@@ -18,9 +18,9 @@ _id = "158"
 script = ExtResource("3_tseep")
 _id = "147"
 
-[sub_resource type="Resource" id="Resource_o7npa"]
+[sub_resource type="Resource" id="Resource_yskg4"]
 script = ExtResource("4_2y0uv")
-_id = "183"
+_id = "185"
 
 [sub_resource type="Resource" id="Resource_ngq3l"]
 script = ExtResource("3_1w2s4")
@@ -30,7 +30,7 @@ enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[ExtResource("4_2y0uv")]([SubResource("Resource_o7npa")])
+tiles = Array[ExtResource("4_2y0uv")]([SubResource("Resource_yskg4")])
 
 [sub_resource type="Resource" id="Resource_q4s3t"]
 script = ExtResource("2_sq332")
