@@ -10,7 +10,7 @@ func aim(aim_vec: Vector2):
 func activate():
 	if actor:
 		actor.notif(self.name)
-	Sounds.play(Sounds.S.laser)
+	# Sounds.play(Sounds.S.laser)
 
 func deactivate():
 	pass

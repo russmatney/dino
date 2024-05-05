@@ -45,12 +45,12 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 			if offset.y > 0:
 				offset.y -= PLAYER_POS_OFFSET
 
-	if (new_room_def.genre_type != prev_room_def.genre_type):
+	if (new_room_def.genre_type() != prev_room_def.genre_type()):
 		var player_parent = og_player.get_parent()
 		# TODO carry over velocity/momentum, other stats? (health,items,etc)
 		# playerData or playerDef class with data? (like room vs roomDef?)
 		Dino.respawn_active_player({
-			genre_type=new_room_def.genre_type,
+			genre_type=new_room_def.genre_type(),
 			# deferred=false,
 			level_node=player_parent,
 			setup=func(p): p.position = og_p_position - offset

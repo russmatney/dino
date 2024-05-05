@@ -6,7 +6,7 @@ func aim(_aim_vector: Vector2):
 func activate():
 	if actor:
 		actor.notif(self.name)
-	Sounds.play(Sounds.S.bump)
+	# Sounds.play(Sounds.S.bump)
 
 func deactivate():
 	pass

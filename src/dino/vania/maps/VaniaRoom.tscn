@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhjv3h6oxgj4"]
+[gd_scene load_steps=16 format=3 uid="uid://bhjv3h6oxgj4"]
 
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_1wsgr"]
 [ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/art/ui/spaceship_background.png" id="2_dw7vg"]
 [ext_resource type="Script" path="res://src/dino/vania/VaniaRoomDef.gd" id="2_sq332"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="3_1w2s4"]
-[ext_resource type="PackedScene" uid="uid://cw5hkko0eu7ed" path="res://src/dino/tiles/ColdFireCombo.tscn" id="3_cf7dl"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="3_tseep"]
+[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="4_2y0uv"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTileMap.gd" id="6_q8wsp"]
 [ext_resource type="Script" path="res://addons/core/quest/QuestManager.gd" id="8_ademk"]
 
@@ -18,15 +18,19 @@ _id = "158"
 script = ExtResource("3_tseep")
 _id = "147"
 
+[sub_resource type="Resource" id="Resource_o7npa"]
+script = ExtResource("4_2y0uv")
+_id = "183"
+
 [sub_resource type="Resource" id="Resource_ngq3l"]
 script = ExtResource("3_1w2s4")
-genre_type = 0
+genre_type = 1
 entities = Array[ExtResource("3_tseep")]([SubResource("Resource_u5y3n"), SubResource("Resource_paglq")])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tilemap_scenes = Array[PackedScene]([ExtResource("3_cf7dl")])
+tiles = Array[ExtResource("4_2y0uv")]([SubResource("Resource_o7npa")])
 
 [sub_resource type="Resource" id="Resource_q4s3t"]
 script = ExtResource("2_sq332")
