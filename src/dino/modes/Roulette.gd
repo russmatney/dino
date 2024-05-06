@@ -14,7 +14,6 @@ var fb_game_ids = [
 	DinoGameEntityIds.TOWERJET,
 	# DinoGameEntityIds.SUPERELEVATORLEVEL,
 	DinoGameEntityIds.THEWOODS,
-	DinoGameEntityIds.PLUGGS,
 	]
 
 @export var player_entity: DinoPlayerEntity

@@ -375,31 +375,6 @@
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
-				"_id": "39",
-				"_index": 0,
-				"_name": "Pluggs",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Pluggs McGee"
-					},
-					"genre_type": {
-						"type": "string",
-						"value": "sidescroller"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://assets/gameicons/pluggs_icon_4x.png"
-					},
-					"level_scene": {
-						"type": "resource",
-						"value": "res://src/games/pluggs/level/PluggsLevel.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
 				"_id": "41",
 				"_index": 0,
 				"_name": "TheWoods",

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://xjwxr5iptr36"
+path="res://.godot/imported/arcade_machine_01.aseprite-30dc73526b157ca3cd208169ec3ae522.res"
+
+[deps]
+
+source_file="res://src/dino/entities/arcadeMachine/arcade_machine_01.aseprite"
+dest_files=["res://.godot/imported/arcade_machine_01.aseprite-30dc73526b157ca3cd208169ec3ae522.res"]
+
+[params]
+

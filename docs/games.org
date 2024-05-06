@@ -53,10 +53,6 @@ Play the deployed version here: [[https://russmatney.itch.io/gunner][russmatney.
 An overcooked-like farming game. Submission for the Ludum Dare 52 (Theme: Harvest).
 
 Play the deployed version here: [[https://russmatney.itch.io/harvey][russmatney.itch.io/harvey]]
-* Pluggs
-A fun character - just a bucket of plugs.
-
-Play the deployed version here: [[https://russmatney.itch.io/pluggs][russmatney.itch.io/pluggs]]
 * Ghost House
 Play the deployed version here: [[https://russmatney.itch.io/ghosts][russmatney.itch.io/ghosts]]
 

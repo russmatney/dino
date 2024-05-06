@@ -9,7 +9,6 @@ var game_ids = [
 	DinoGameEntityIds.GUNNER,
 	DinoGameEntityIds.TOWERJET,
 	DinoGameEntityIds.THEWOODS,
-	DinoGameEntityIds.PLUGGS,
 	]
 
 @export var current_game_entity: DinoGameEntity
