@@ -13,11 +13,11 @@ var current_room_def: VaniaRoomDef
 @onready var room_entities_label = $%RoomEntitiesLabel
 @onready var edit_entities_menu_button = $%EditEntitiesMenuButton
 
+@onready var room_enemies_label = $%RoomEnemiesLabel
+@onready var edit_enemies_menu_button = $%EditEnemiesMenuButton
+
 @onready var room_tiles_label = $%RoomTilesLabel
 @onready var edit_tileset_menu_button = $%EditTilesetMenuButton
-
-@onready var room_constraints_label = $%RoomConstraintsLabel
-@onready var edit_constraints_menu_button = $%EditConstraintsMenuButton
 
 @onready var edit_room_def_button = $%EditRoomDefButton
 @onready var respawn_player_button = $%RespawnPlayerButton
@@ -55,8 +55,8 @@ func on_room_loaded():
 	current_room_def = game.current_room_def()
 	update_room_def()
 	update_edit_entities()
+	update_edit_enemies()
 	update_edit_tilesets()
-	update_edit_constraints()
 
 
 ## rerender ######################################################
@@ -69,21 +69,37 @@ func update_room_def():
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
 	neighbors_label.text = "ngbrs: %s" % Log.to_pretty(current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file()))
 
-	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities())
-	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tilemap().resource_path.get_file()
-	# room_constraints_label.text = "constraints: %s" % Log.to_pretty(len(current_room_def.constraints))
+	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities().map(func(x): return x.get_display_name()))
+	room_enemies_label.text = "ents: %s" % Log.to_pretty(current_room_def.enemies().map(func(x): return x.get_display_name()))
+	room_tiles_label.text = "tileset: %s" % current_room_def.get_primary_tiles().get_display_name()
 
 func update_edit_entities():
 	if not current_room_def:
 		return
 
 	var items = []
-	# items.append_array(current_room_def.entities().map(func(ent):
-	# 	return {label="Remove '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.erase(ent)}))
-	# items.append_array(DinoEntity.all_entities().map(func(ent):
-	# 	return {label="Add '%s'" % ent.get_display_name(), on_select=func(): current_room_def.entities.append(ent)}))
+	items.append_array(current_room_def.entities().map(func(ent):
+		return {label="Remove '%s'" % ent.get_display_name(), on_select=func(): current_room_def.input.entities.erase(ent)}))
+	items.append_array(DinoEntity.all_entities().map(func(ent):
+		return {label="Add '%s'" % ent.get_display_name(), on_select=func(): current_room_def.input.entities.append(ent)}))
 
 	var popup = edit_entities_menu_button.get_popup()
+	U.setup_popup_items(popup, items, func(item):
+		item.on_select.call()
+		game.generator.build_and_prep_scene(current_room_def)
+		game.reload_current_room())
+
+func update_edit_enemies():
+	if not current_room_def:
+		return
+
+	var items = []
+	items.append_array(current_room_def.enemies().map(func(en):
+		return {label="Remove '%s'" % en.get_display_name(), on_select=func(): current_room_def.input.enemies.erase(en)}))
+	items.append_array(DinoEnemy.all_enemies().map(func(en):
+		return {label="Add '%s'" % en.get_display_name(), on_select=func(): current_room_def.input.enemies.append(en)}))
+
+	var popup = edit_enemies_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
 		item.on_select.call()
 		game.generator.build_and_prep_scene(current_room_def)
@@ -94,31 +110,12 @@ func update_edit_tilesets():
 		return
 
 	var items = []
-	# items.append_array(RoomInput.all_tilemap_scenes.map(func(tm):
-	# 	return {label=tm.get_file(), on_select=func(): current_room_def.tilemap_scenes[0] = load(tm)}))
+	items.append_array(DinoTiles.all_tiles().map(func(tile):
+		return {label=tile.get_display_name(), on_select=func(): current_room_def.input.tiles[0] = tile}))
 
 	var popup = edit_tileset_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
 		item.on_select.call()
-		game.generator.build_and_prep_scene(current_room_def)
-		game.reload_current_room())
-
-func update_edit_constraints():
-	if not current_room_def:
-		return
-
-	var items = []
-	# items.append_array(current_room_def.constraints.map(func(cons):
-	# 	return {label="Remove '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.erase(cons)}))
-	# items.append_array(RoomInput.all_constraints.map(func(cons):
-	# 	return {label="Add '%s'" % Log.to_pretty(cons), on_select=func(): current_room_def.constraints.append(cons)}))
-
-	var popup = edit_constraints_menu_button.get_popup()
-	U.setup_popup_items(popup, items, func(item):
-		item.on_select.call()
-
-		current_room_def.rebuild()
-
 		game.generator.build_and_prep_scene(current_room_def)
 		game.reload_current_room())
 

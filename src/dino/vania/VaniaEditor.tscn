@@ -136,6 +136,31 @@ layout_mode = 2
 theme = ExtResource("4_jv3lv")
 text = "Edit Entities"
 
+[node name="PanelContainer8" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8"]
+layout_mode = 2
+
+[node name="RoomEnemiesLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_oi0lk")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "enemies: []"
+fit_content = true
+scroll_active = false
+
+[node name="EditEnemiesMenuButton" type="MenuButton" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_jv3lv")
+text = "Edit Enemies"
+
 [node name="PanelContainer6" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
@@ -159,32 +184,7 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_jv3lv")
-text = "Edit Tileset"
-
-[node name="PanelContainer8" type="PanelContainer" parent="VBoxContainer/TabContainer/Regeneration"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_li3ee")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8"]
-layout_mode = 2
-
-[node name="RoomConstraintsLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_oi0lk")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "constraints: []"
-fit_content = true
-scroll_active = false
-
-[node name="EditConstraintsMenuButton" type="MenuButton" parent="VBoxContainer/TabContainer/Regeneration/PanelContainer8/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("4_jv3lv")
-text = "Edit Constraints"
+text = "Edit Tiles"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Regeneration"]
 custom_minimum_size = Vector2(0, 30)

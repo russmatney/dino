@@ -1817,7 +1817,13 @@
 				"_icon_color": "ffffff00",
 				"_id": "183",
 				"_index": 0,
-				"_name": "ColdFireTiles"
+				"_name": "ColdFireTiles",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "ColdFire"
+					}
+				}
 			},
 			{
 				"_category_id": "179",
@@ -1826,6 +1832,10 @@
 				"_index": 0,
 				"_name": "KingdomTiles",
 				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Kingdom"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn"
@@ -1839,6 +1849,10 @@
 				"_index": 0,
 				"_name": "VolcanoTiles",
 				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Volcano"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn"
@@ -1852,6 +1866,10 @@
 				"_index": 0,
 				"_name": "GrassyCaveTiles",
 				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Grassy Cave"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn"
@@ -1865,6 +1883,10 @@
 				"_index": 0,
 				"_name": "SpaceShipTiles",
 				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Spaceship"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn"
@@ -1878,6 +1900,10 @@
 				"_index": 0,
 				"_name": "WoodenBoxTiles",
 				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Wooden Boxes"
+					},
 					"scene": {
 						"type": "resource",
 						"value": "res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn"
@@ -1889,7 +1915,17 @@
 				"_icon_color": "ffffff00",
 				"_id": "189",
 				"_index": 0,
-				"_name": "PurpleStoneTiles"
+				"_name": "PurpleStoneTiles",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Purple Stone"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
