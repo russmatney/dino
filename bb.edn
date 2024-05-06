@@ -24,7 +24,7 @@
   changelog (let [tag-overwrite (some-> *command-line-args* first)]
               (changelog/rewrite-changelog {:latest-tag-label tag-overwrite})
               (changelog/rewrite-changelog {:latest-tag-label tag-overwrite
-                                            :path "docs/CHANGELOG.md"})
+                                            :path             "docs/CHANGELOG.md"})
               ;; TODO commit optional
               ;; (shell-and-log "git add CHANGELOG.md")
               ;; (shell-and-log "git commit -m 'docs: update changelog'")
@@ -57,10 +57,7 @@
                                           [(-> arg (string/replace "-macos" "")) "osx-universal"])
                                         (re-seq (re-pattern "-windows") arg)
                                         [(-> arg (string/replace "-windows" "")) "windows"]
-                                        :else [(cond
-                                                 (= arg "mvania19") "mvania19-web"
-                                                 :else              arg)
-                                               "html5"])
+                                        :else [arg "html5"])
                     itch-project      (str "russmatney/" itch-project-name ":" type)
                     command           (str "butler push --if-changed " dir " " itch-project)]
 

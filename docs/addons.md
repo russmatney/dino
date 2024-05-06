@@ -1,12 +1,13 @@
-#+title: Addons
+Addons
+======
 
 These addons are begging to be consolidated - there are a couple
 inter-dependencies, which is a big no-no for anything sharable.
 
 I did a quick once-over of combining a few when I ripped Dot Hop out of here -
-check out [[https://github.com/russmatney/dothop/tree/e9ac0ecac614c8f4a14686a656857caade752343/addons/core][~russmatney/dothop/addons/core/*~]] for where that landed.
+check out [`russmatney/dothop/addons/core/*`](https://github.com/russmatney/dothop/tree/e9ac0ecac614c8f4a14686a656857caade752343/addons/core) for where that landed.
 
-* Core
+# Core
 - Util - a bunch of static functions I can't live without
 - Log - a pretty printer with a minimal API (~Log.pr(...args)~)
 - Assets I'd use anywhere
@@ -15,7 +16,7 @@ check out [[https://github.com/russmatney/dothop/tree/e9ac0ecac614c8f4a14686a656
 
 I'd love to group some other things in here, as long as they are basic and
 unopinonated. (Eg. Navi, Trolley, Hood, Quest, maybe Reptile)
-* Beehive
+# Beehive
 For working with state machines, behavior trees, GOAP.
 
 Base controllers for players, enemies, and bosses:
@@ -25,36 +26,36 @@ Base controllers for players, enemies, and bosses:
 - BeatEmUp
 
 Includes integrating weapons systems, tho maybe those should be broken out.
-* Camera
+# Camera
 I was quite proud of this when I first implemented it, but lately it feels like
-a mess, and I'm probably going to drop all this and move to [[https://github.com/ramokz/phantom-camera][ramokz/phantom-camera]].
+a mess, and I'm probably going to drop all this and move to [ramokz/phantom-camera](https://github.com/ramokz/phantom-camera).
 
 --
 
 2D Camera with modes for following the player, anchors, or centering based on
 points of focus/interest.
 
-Pulls heavily from Squirrel Eiserloh's [[https://www.youtube.com/watch?v=tu-Qe66AvtY][Juicing Your Cameras with Math]] video.
+Pulls heavily from Squirrel Eiserloh's [Juicing Your Cameras with Math](https://www.youtube.com/watch?v=tu-Qe66AvtY) video.
 
 Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
-** slow-mo
-** hit-stop
-** screenshake
-* DJ
+## slow-mo
+## hit-stop
+## screenshake
+# DJ
 For sounds and music management, such as background music that is maintained
 across scene transitions.
-* Hood
+# Hood
 HUD UI components.
-* Hotel
-Deprecated in favor of [[https://github.com/bitbrain/pandora][bitbrain/pandora]].
+# Hotel
+Deprecated in favor of [bitbrain/pandora](https://github.com/bitbrain/pandora).
 
 --
 
 An in-memory game state db.
 
-Discussed in more detail: [[https://russmatney.com/note/hotel_dino_plugin.html][russmatney.com/note/hotel_dino_plugin.html]]
-* Metro
-Deprecated in favor of [[https://github.com/KoBeWi/Metroidvania-System][KoBeWi/MetSys]].
+Discussed in more detail: [russmatney.com/note/hotel_dino_plugin.html](https://russmatney.com/note/hotel_dino_plugin.html)
+# Metro
+Deprecated in favor of [KoBeWi/MetSys](https://github.com/KoBeWi/Metroidvania-System).
 
 --
 
@@ -64,44 +65,44 @@ crawlers, etc.)
 
 Originally built along side HatBot, it has since been refactored out
 into a reusable addon, and applied so far to ~src/dungeonCrawler~.
-* Navi
+# Navi
 Basic menus, pausing, and credits, plus a scene loader for navigating between
 them all.
 
-** NaviMenu
+## NaviMenu
 supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
-** Basic popovers
-*** Pause Screen
-*** Win Screen
-*** Death Screen
-* Quest
+## Basic popovers
+### Pause Screen
+### Win Screen
+### Death Screen
+# Quest
 Basic signals and checks for completing one or more tasks in a scene.
-* Reptile
+# Reptile
 Tools, scripts and ui as a layer into working with Tilesets.
 
 Includes some basic auto-tiles as assets to speed up prototyping.
 
 Includes Reptile autoload and ReptileRoom, which are a base for some proc gen with tilemaps.
-* Thanks
+# Thanks
 A simple Credits scene and/or script that scrolls credits from a .txt file.
 
 I debated naming this T. Hanks and using the Simpson's Tom Hanks character as a
 logo, but it seemed like a long way to go for ~ 50 lines of gdscript. Still,
 might be a fun project to build up - maybe even make the credits a game, like
 after super-smash's classic mode.
-* Trolley
+# Trolley
 For handling controls inputs and remapping.
 
 Input handling in godot is really simple, but it generally uses strings as
 inputs, so this is a thing layer to use static function calls instead.
 
-#+begin_src gdscript
+``` gdscript
 var move_dir = Trolls.move_vector() # a normalized input direction
 
 func _unhandled_input(event):
 	# Because i can never remember the input event api
     if (Trolls.is_punch(event)):
         punch()
-#+end_src
+```
 
-Trolley was simplified and renamed to [[https://github.com/russmatney/dothop/blob/e9ac0ecac614c8f4a14686a656857caade752343/addons/core/Trolls.gd][Trolls.gd]] in Dot Hop.
+Trolley was simplified and renamed to [Trolls.gd](https://github.com/russmatney/dothop/blob/e9ac0ecac614c8f4a14686a656857caade752343/addons/core/Trolls.gd) in Dot Hop.

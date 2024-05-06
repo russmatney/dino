@@ -1,30 +1,31 @@
-#+title: Credits
+Credits
+=======
 
-Hopefully this stays more or less up to date, and in sync with ~src/dino/DinoCredits.gd~.
+Hopefully this stays more or less up to date, and in sync with `src/dino/DinoCredits.gd`.
 
-** Music
-*** Late Night Radio
+## Music
+### Late Night Radio
 by Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 4.0 License
 http://creativecommons.org/licenses/by/4.0
 MIT License
 
-*** field-stars-ambient-loop
+### field-stars-ambient-loop
 by SuloSounds
 https://sulosounds.itch.io/100-songs
 CC0 - Public Domain
 https://creativecommons.org/share-your-work/public-domain/cc0/
-** Sounds
-*** Most sounds generated via gdfxr (a godot sfxr addon)
+## Sounds
+### Most sounds generated via gdfxr (a godot sfxr addon)
 https://github.com/timothyqiu/gdfxr
 
-*** retro game weapon sound effects
+### retro game weapon sound effects
 happysoulmusic.com
 https://happysoulmusic.com/retro-game-weapons-sound-effects/
 cc0
 https://creativecommons.org/publicdomain/zero/1.0/
 
-*** kenney assets sound packs
+### kenney assets sound packs
 https://kenney.nl/assets/category:Audio
 all cc0 - public domain
 
@@ -46,88 +47,88 @@ https://www.kenney.nl/assets/digital-audio
 kenney rpg audio
 https://www.kenney.nl/assets/rpg-audio
 
-** Fonts
-*** V3X3D
+## Fonts
+### V3X3D
 The vexed fonts are not available for distribution until they are purchased!
 They can be purchased individually or as part of various bundles from V3X3D's
 itch page: https://v3x3d.itch.io
 
 Please also consider supporting V3X3D on patreon: https://www.patreon.com/V3X3D
 
-**** Arcade Cabinet
+#### Arcade Cabinet
 by V3X3D
 https://v3x3d.itch.io/arcade-cabinet
 https://creativecommons.org/licenses/by/4.0/legalcode
 
-**** Enter Input
+#### Enter Input
 by V3X3D
 https://v3x3d.itch.io/enter-input
 https://creativecommons.org/licenses/by/4.0/legalcode
 
-*** born2bsportyv2
+### born2bsportyv2
 by japanyoshi
 http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=383
 Public Domain
 https://creativecommons.org/publicdomain/zero/1.0/
 
-*** at10
+### at10
 by grafxkid
 https://grafxkid.itch.io/at01
 Public Domain
 https://creativecommons.org/publicdomain/zero/1.0/
 
-*** Adventurer
+### Adventurer
 by Brain J Smith
 http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=195
 Creative Commons Attribution
-** Color Palettes
-*** lospec 500
+## Color Palettes
+### lospec 500
 A collaboration, including Foxbutt, Rhoq, Dimi, Skeddles, MiggityMoogity, PureAsbestos, Polyducks, SybilQ, Unsettled, DaaWeed, Moertel, KingW, Glacier, WildLeoKnight and GooGroker
 https://lospec.com/palette-list/lospec500
 
-*** COLDFIRE GB
+### COLDFIRE GB
 By Kerrielake
 https://lospec.com/palette-list/coldfire-gb
 
-*** autumn glow
+### autumn glow
 by sonnenstein
 https://lospec.com/palette-list/autumn-glow
 
-*** funkyfuture 8
+### funkyfuture 8
 by shamaboy11
 https://lospec.com/palette-list/funkyfuture-8
 
-*** twilight-5
+### twilight-5
 by star
 https://lospec.com/palette-list/twilight-5
 
-*** wildflowers
+### wildflowers
 by Sprog
 https://lospec.com/palette-list/wildflowers
 
-** Art
-*** Pirate Bomb Tile Set
+## Art
+### Pirate Bomb Tile Set
 By Pixel Frog
 https://pixelfrog-assets.itch.io/pirate-bomb
 Public Domain
 https://creativecommons.org/publicdomain/zero/1.0/
 
-** Godot Addons
-*** gdfxr
+## Godot Addons
+### gdfxr
 https://github.com/timothyqiu/gdfxr
 MIT License
-*** teeb.text-effects teeb.text_transitions
+### teeb.text-effects teeb.text_transitions
 https://github.com/teebarjunk/godot-text_effects
 MIT License
-*** GDUnit4
+### GDUnit4
 https://github.com/MikeSchulze/gdUnit4
-*** AsepriteWizard
+### AsepriteWizard
 https://github.com/viniciusgerevini/godot-aseprite-wizard
-*** Pandora
+### Pandora
 https://github.com/bitbrain/pandora
-** Code Contributors
+## Code Contributors
 - Joshua Skrzypek
-** Patrons
+## Patrons
 Many thanks to all my sponsors and patrons!
 
 - Cameron Kingsbury
