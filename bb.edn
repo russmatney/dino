@@ -6,11 +6,17 @@
              [clojure.string :as string])
 
   :init
-  (do (log "bb.edn running task"))
+  (do
+    (def godot-bin "/bin/godot422")
+    (log "bb.edn running task"))
 
-  test       (tasks/shell-and-log (str "./addons/gdUnit4/runtest.sh -c -a test"))
+  test       (tasks/shell-and-log
+               {:extra-env {"GODOT_BIN" godot-bin}}
+               (str "./addons/gdUnit4/runtest.sh -c -a test"))
   test-match (let [arg (some-> *command-line-args* first)]
-               (tasks/shell-and-log (str "./addons/gdUnit4/runtest.sh -c -a " arg)))
+               (tasks/shell-and-log
+                 {:extra-env {"GODOT_BIN" godot-bin}}
+                 (str "./addons/gdUnit4/runtest.sh -c -a " arg)))
 
   watch tasks/watch
 
