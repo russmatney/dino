@@ -3,7 +3,8 @@
  {:requires ([tasks :as tasks]
              [logger :refer [log]]
              [babashka.fs :as fs]
-             [clojure.string :as string])
+             [clojure.string :as string]
+             [changelog])
 
   :init
   (do
@@ -19,6 +20,15 @@
                  (str "./addons/gdUnit4/runtest.sh -c -a " arg)))
 
   watch tasks/watch
+
+  changelog (let [tag-overwrite (some-> *command-line-args* first)]
+              (changelog/rewrite-changelog {:latest-tag-label tag-overwrite})
+              (changelog/rewrite-changelog {:latest-tag-label tag-overwrite
+                                            :path "docs/CHANGELOG.md"})
+              ;; TODO commit optional
+              ;; (shell-and-log "git add CHANGELOG.md")
+              ;; (shell-and-log "git commit -m 'docs: update changelog'")
+              )
 
   export       (tasks/export (some-> *command-line-args* first))
   export-debug (tasks/export (some-> *command-line-args* first) {:debug? true})
