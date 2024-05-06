@@ -42,6 +42,23 @@ alignment = 1
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 
+[node name="ScrollContainer4" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 182)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="MapDefGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 5
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer4/MapDefGridContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "some text"
+
 [node name="ScrollContainer2" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 182)
 layout_mode = 2
@@ -50,18 +67,6 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
 [node name="PlayersGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 5
-
-[node name="ScrollContainer3" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 400)
-layout_mode = 2
-follow_focus = true
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="EnemiesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 columns = 5

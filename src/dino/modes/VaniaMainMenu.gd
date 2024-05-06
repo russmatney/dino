@@ -1,33 +1,15 @@
 @tool
 extends CanvasLayer
 
+@onready var map_defs_container = $%MapDefGridContainer
 @onready var players_grid_container = $%PlayersGridContainer
-@onready var enemies_grid_container = $%EnemiesGridContainer
-
-@onready var room_count_label = $%RoomCount
-@onready var dec_room_count_button = $%DecRoomCountButton
-@onready var inc_room_count_button = $%IncRoomCountButton
 
 @onready var button_list = $%ButtonList
 
-var game_entities = []
-var selected_game_entities = []
-var enemy_entities = []
-var selected_enemy_entities = []
+var map_defs = []
+var selected_map_def
 var player_entities = []
 var selected_player_entity
-
-const max_room_count = 10
-var room_count = 4
-func inc_room_count():
-	room_count += 1
-	room_count = mini(room_count, max_room_count)
-	reset_ui()
-
-func dec_room_count():
-	room_count -= 1
-	room_count = maxi(room_count, 1)
-	reset_ui()
 
 ## ready ##################################################
 
@@ -35,11 +17,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	dec_room_count_button.pressed.connect(func(): dec_room_count())
-	inc_room_count_button.pressed.connect(func(): inc_room_count())
-
 	build_players_grid()
-	build_enemies_grid()
+	build_map_def_grid()
 	reset_ui()
 
 	Music.resume_menu_song()
@@ -57,13 +36,11 @@ func set_focus():
 func reset_ui():
 	reset_menu_buttons()
 
-	room_count_label.text = "[center]rooms: %s" % room_count
-
 	for butt in players_grid_container.get_children():
 		butt.is_selected = butt.entity == selected_player_entity
 
-	for butt in enemies_grid_container.get_children():
-		butt.is_selected = butt.entity in selected_enemy_entities
+	for butt in map_defs_container.get_children():
+		butt.button_pressed = butt.text == selected_map_def.name
 
 ## players grid ##################################################
 
@@ -80,24 +57,23 @@ func build_players_grid():
 		var button = EntityButton.newButton(pl, select_player)
 		players_grid_container.add_child(button)
 
-## enemies grid ##################################################
+## map_def grid ##################################################
 
-func toggle_enemy(enemy_entity):
-	if enemy_entity in selected_enemy_entities:
-		selected_enemy_entities.erase(enemy_entity)
-	else:
-		selected_enemy_entities.append(enemy_entity)
-
+func select_map_def(map_def):
+	selected_map_def = map_def
 	reset_ui()
 
-func build_enemies_grid():
-	enemy_entities = DinoEnemy.all_enemies()
-	selected_enemy_entities = enemy_entities
-	U.free_children(enemies_grid_container)
+func build_map_def_grid():
+	map_defs = MapDef.all_map_defs()
+	selected_map_def = map_defs[0]
+	U.free_children(map_defs_container)
 
-	for en in enemy_entities:
-		var button = EntityButton.newButton(en, toggle_enemy)
-		enemies_grid_container.add_child(button)
+	for def in map_defs:
+		var button = Button.new()
+		button.toggle_mode = true
+		button.text = def.name
+		button.pressed.connect(func(): select_map_def(def))
+		map_defs_container.add_child(button)
 
 ## start game ##################################################
 
@@ -105,8 +81,8 @@ var vania_scene = preload("res://src/dino/modes/Vania.tscn")
 func start():
 	Navi.nav_to(vania_scene, {setup=func(scene):
 		scene.set_player_entity(selected_player_entity)
-		# scene.set_enemy_entities(selected_enemy_entities)
-		# scene.set_room_count(room_count)
+		if selected_map_def:
+			scene.set_map_def(selected_map_def)
 		})
 
 ## menu buttons ##################################################
@@ -115,15 +91,7 @@ func get_menu_buttons():
 	return [
 		{
 			label="Start DinoVania!",
-			# is_disabled=func(): return len(selected_game_entities) < 1,
 			fn=start,
-		},
-		{
-			label="Deselect all",
-			fn=func():
-			selected_game_entities = []
-			reset_ui.call_deferred(),
-			is_disabled=func(): return len(selected_game_entities) == 0,
 		},
 		{
 			label="Back to Dino Menu",

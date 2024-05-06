@@ -107,10 +107,11 @@ static func default_game(_opts={}) -> MapDef:
 	]
 	inpts.append_array(U.repeat_fn(RoomInput.random_room, 3))
 
-	return MapDef.new({name="Vania", inputs=inpts})
+	return MapDef.new({name="Default Vania", inputs=inpts})
 
 static func village(_opts={}) -> MapDef:
 	return MapDef.new({
+		name="Village",
 		inputs=[RoomInput.with({
 			entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,

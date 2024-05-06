@@ -59,7 +59,10 @@ func start_game():
 
 	add_child.call_deferred(game_node)
 
-## set_player_entity #################################333
+## set #################################333
 
 func set_player_entity(ent: DinoPlayerEntity):
 	player_entity = ent
+
+func set_map_def(def: MapDef):
+	map_def = def
