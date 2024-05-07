@@ -25,7 +25,6 @@ boot_splash/minimum_display_time=300
 
 [autoload]
 
-TextTransitionSettings="*res://addons/teeb.text_transitions/TextTransitionSettings.gd"
 Pandora="*res://addons/pandora/api.gd"
 Debug="*res://addons/core/Debug.gd"
 Navi="*res://addons/core/navi/Navi.gd"
