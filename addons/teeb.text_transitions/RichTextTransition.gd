@@ -2,22 +2,22 @@
 extends RichTextLabel
 
 
-@export var id: String = "main"
-@export var time:float = 0.0 # (float, 0.0, 1.0)
-@export var length:float = 8.0 # (float, 1.0, 32.0)
-@export var reverse: bool = false
-@export var all_at_once: bool = false
-@export var animation_time: float = 1.0  # (float, 0.1, 2.0)
+@export var id:String = "main"
+@export_range(0.0, 1.0) var time:float = 0.0
+@export_range(1.0, 32.0) var length:float = 8.0
+@export var reverse:bool = false
+@export var all_at_once:bool = false
+@export_range(0.1, 2.0) var animation_time:float = 1.0 
 
 
 func _enter_tree():
 	TextTransitionSettings.register(self)
-	$AnimationPlayer.animation_finished.connect(on_animation_finish)
+	$AnimationPlayer.connect("animation_finished", on_animation_finish)
 
 
 func _exit_tree():
 	TextTransitionSettings.unregister(self)
-	$AnimationPlayer.animation_finished.disconnect(on_animation_finish)
+	$AnimationPlayer.disconnect("animation_finished", on_animation_finish)
 
 
 # Mostly needed for editor testing.

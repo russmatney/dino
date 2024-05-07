@@ -7,12 +7,12 @@ var _reverse:bool = false
 var _all_at_once:bool = false
 
 
-@export var info:String = """Press 1 to 'fade in' all effects. # (String, MULTILINE)
+@export_multiline var info:String = """Press 1 to 'fade in' all effects.
 Press 2 to 'fade out' all effects.
 Or, simply mess with the following slider and toggles."""
-@export var time:float = 0.0 : get = _get_time, set = _set_time # (float, 0.0, 1.0)
-@export var reverse: bool = false : get = _get_reverse, set = _set_reverse
-@export var all_at_once: bool = false : get = _get_all_at_once, set = _set_all_at_once
+@export_range(0.0, 1.0) var time = 0.0 : set = _set_time, get = _get_time
+@export var reverse = false : set = _set_reverse, get = _get_reverse
+@export var all_at_once = false : set = _set_all_at_once, get = _get_all_at_once
 
 
 func _process(delta):

@@ -6,24 +6,24 @@ var bbcode = "l33t"
 
 
 var leet = {
-	"L".unicode_at(0): "1".unicode_at(0),
-	"l".unicode_at(0): "1".unicode_at(0),
-	"I".unicode_at(0): "1".unicode_at(0),
-	"i".unicode_at(0): "1".unicode_at(0),
-	"E".unicode_at(0): "3".unicode_at(0),
-	"e".unicode_at(0): "3".unicode_at(0),
-	"T".unicode_at(0): "7".unicode_at(0),
-	"t".unicode_at(0): "7".unicode_at(0),
-	"S".unicode_at(0): "5".unicode_at(0),
-	"s".unicode_at(0): "5".unicode_at(0),
-	"A".unicode_at(0): "4".unicode_at(0),
-	"a".unicode_at(0): "4".unicode_at(0),
-	"O".unicode_at(0): "0".unicode_at(0),
-	"o".unicode_at(0): "0".unicode_at(0),
+	GlyphConverter.ord("L"): GlyphConverter.ord("1"),
+	GlyphConverter.ord("l"): GlyphConverter.ord("1"),
+	GlyphConverter.ord("I"): GlyphConverter.ord("1"),
+	GlyphConverter.ord("i"): GlyphConverter.ord("1"),
+	GlyphConverter.ord("E"): GlyphConverter.ord("3"),
+	GlyphConverter.ord("e"): GlyphConverter.ord("3"),
+	GlyphConverter.ord("T"): GlyphConverter.ord("7"),
+	GlyphConverter.ord("t"): GlyphConverter.ord("7"),
+	GlyphConverter.ord("S"): GlyphConverter.ord("5"),
+	GlyphConverter.ord("s"): GlyphConverter.ord("5"),
+	GlyphConverter.ord("A"): GlyphConverter.ord("4"),
+	GlyphConverter.ord("a"): GlyphConverter.ord("4"),
+	GlyphConverter.ord("O"): GlyphConverter.ord("0"),
+	GlyphConverter.ord("o"): GlyphConverter.ord("0"),
 }
 
-
 func _process_custom_fx(char_fx):
-	if char_fx.glyph_index in leet:
-		char_fx.glyph_index = leet[char_fx.glyph_index]
+	var glyph_index_as_char = GlyphConverter.glyph_index_to_char(char_fx)
+	if glyph_index_as_char in leet:
+		char_fx.glyph_index = GlyphConverter.char_to_glyph_index(char_fx.font, leet[glyph_index_as_char])
 	return true

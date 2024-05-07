@@ -5,18 +5,17 @@ extends RichTextEffect
 # Syntax: [uwu][/uwu]
 var bbcode = "uwu"
 
+var r = GlyphConverter.ord("r")
+var R = GlyphConverter.ord("R")
+var l = GlyphConverter.ord("l")
+var L = GlyphConverter.ord("L")
 
-var r = "r".unicode_at(0)
-var R = "R".unicode_at(0)
-var l = "l".unicode_at(0)
-var L = "L".unicode_at(0)
-
-var w = "w".unicode_at(0)
-var W = "W".unicode_at(0)
-
+var w = GlyphConverter.ord("w")
+var W = GlyphConverter.ord("W")
 
 func _process_custom_fx(char_fx):
-	match char_fx.glyph_index:
-		r, l: char_fx.glyph_index = w
-		R, L: char_fx.glyph_index = W
+	var this_char = GlyphConverter.glyph_index_to_char(char_fx)
+	match this_char:
+		r, l: char_fx.glyph_index = GlyphConverter.char_to_glyph_index(char_fx.font, w)
+		R, L: char_fx.glyph_index = GlyphConverter.char_to_glyph_index(char_fx.font, W)
 	return true

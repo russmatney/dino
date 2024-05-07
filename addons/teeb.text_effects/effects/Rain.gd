@@ -11,7 +11,7 @@ func get_rand(char_fx):
 
 
 func get_rand_unclamped(char_fx):
-	return char_fx.glyph_index * 33.33 + char_fx.glyph_index * 4545.5454
+	return char_fx.glyph_index * 33.33 + char_fx.range.x * 4545.5454
 
 
 func _process_custom_fx(char_fx):

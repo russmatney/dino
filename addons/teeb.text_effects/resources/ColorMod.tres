@@ -1,4 +1,4 @@
-[gd_resource type="RichTextEffect" load_steps=2 format=3 uid="uid://cxd4xajdoafoh"]
+[gd_resource type="RichTextEffect" load_steps=2 format=3 uid="uid://cpgmlv5404n2f"]
 
 [ext_resource type="Script" path="res://addons/teeb.text_effects/effects/ColorMod.gd" id="1"]
 
