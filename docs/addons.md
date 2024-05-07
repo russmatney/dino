@@ -44,7 +44,7 @@ code, which is a layer on top of MetSys: [`KoBeWi/Metroidvania-System`](https://
 
 Related, I ought to look into consuming [`BenjaTK/Gaea`](https://github.com/BenjaTK/Gaea)
 # Camera
-I was quite proud of this when I first implemented it! But it feel into
+I was quite proud of this when I first implemented it! But it fell into
 disrepair. At this point I've moved to just consuming
 [`ramokz/phantom-camera`](https://github.com/ramokz/phantom-camera),
 and implementing the camera 'juice' via `addons/core/Juice.gd`.

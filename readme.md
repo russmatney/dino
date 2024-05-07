@@ -40,19 +40,20 @@ I'm currently pushing for a late May/early June 2024 release [on steam](https://
 If you're interested in beta testing, I have steam codes available and would love any
 ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfAvF).
 
-
 ### DevLogs
 
 - [Dino Year One DevLog](https://www.youtube.com/watch?v=9cyAnNLGrZI) (Jan 2024)
 
 ### Docs
 
-In progress docs: https://russmatney.github.io/dino/#/
+Via Docsify! You can read the markdown in `docs/*`, or follow the links below.
 
-- [docs/games.org](file:docs/games.org)
-- [docs/addons.org](file:docs/addons.org)
-- [docs/bb_godot.org](file:docs/bb_godot.org)
-- [docs/credits.org](file:docs/credits.org)
+- [Docs home](https://russmatney.github.io/dino/#/)
+    - [Changelog](https://russmatney.github.io/dino/#/changelog)
+    - [Games](https://russmatney.github.io/dino/#/games)
+    - [Addons](https://russmatney.github.io/dino/#/addons)
+    - [BB Godot](https://russmatney.github.io/dino/#/bb_godot)
+    - [Credits](https://russmatney.github.io/dino/#/credits)
 
 ### Patrons
 

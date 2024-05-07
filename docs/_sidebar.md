@@ -1,0 +1,5 @@
+* [Home](/)
+* [Changelog](/changelog)
+* [(Old) Games](/games)
+* [(Old) Addons](/addons)
+* [(Old) BB Godot](/bb_godot)
