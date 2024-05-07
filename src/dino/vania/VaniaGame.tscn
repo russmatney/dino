@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=25 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_atmrs"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="2_bkt6h"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_lpe04"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="4_8b2sd"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
@@ -17,6 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://cvbbaml4gfs0v" path="res://src/dino/entities/bushes/Bush2.tscn" id="16_igr1p"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
 
+[sub_resource type="Resource" id="Resource_w3xcc"]
+script = ExtResource("2_lpe04")
+_id = "125"
+
 [sub_resource type="Resource" id="Resource_i10lw"]
 script = ExtResource("2_atmrs")
 _id = "158"
@@ -25,15 +30,19 @@ _id = "158"
 script = ExtResource("4_8b2sd")
 _id = "183"
 
+[sub_resource type="Resource" id="Resource_rdypf"]
+script = ExtResource("4_8b2sd")
+_id = "184"
+
 [sub_resource type="Resource" id="Resource_breu1"]
 script = ExtResource("2_bkt6h")
 genre_type = 0
 entities = Array[ExtResource("2_atmrs")]([SubResource("Resource_i10lw")])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+enemies = Array[ExtResource("2_lpe04")]([SubResource("Resource_w3xcc")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[ExtResource("4_8b2sd")]([SubResource("Resource_uisrp")])
+tiles = Array[ExtResource("4_8b2sd")]([SubResource("Resource_uisrp"), SubResource("Resource_rdypf")])
 
 [sub_resource type="Resource" id="Resource_f6k3q"]
 script = ExtResource("7_djxep")

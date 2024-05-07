@@ -45,6 +45,7 @@ static func all_map_defs():
 		default_game(),
 		topdown_game(),
 		mixed_genre_game(),
+
 		village(),
 		arcade_game(),
 		woods_game(),
@@ -109,24 +110,37 @@ static func default_game(_opts={}) -> MapDef:
 
 	return MapDef.new({name="Default Vania", inputs=inpts})
 
+# village def
+#
+
 static func village(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Village",
 		inputs=[RoomInput.with({
 			entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
+				# herd
 				DinoEntityIds.SHEEP,
 				DinoEntityIds.SHEEP,
 				DinoEntityIds.SHEEP,
+
+				# leaves
 				DinoEntityIds.LEAFGOD,
+
+				# harvey
 				# DinoEntityIds.TOOL,
 				# DinoEntityIds.SUPPLYBOX,
 				# DinoEntityIds.PLOT,
 				# DinoEntityIds.DELIVERYBOX,
 				# DinoEntityIds.ACTIONBOT,
+
+				# arcade
 				DinoEntityIds.COIN,
 				DinoEntityIds.COIN,
 				DinoEntityIds.COIN,
+				DinoEntityIds.ARCADEMACHINE,
+
+				# gems
 				DinoEntityIds.GEM,
 				DinoEntityIds.GEM,
 				DinoEntityIds.BOX,
@@ -134,7 +148,6 @@ static func village(_opts={}) -> MapDef:
 				DinoEntityIds.BOX,
 				DinoEntityIds.BOX,
 				DinoEntityIds.COOKINGPOT,
-				DinoEntityIds.ARCADEMACHINE,
 				DinoEntityIds.CANDLE,
 				DinoEntityIds.CANDLE,
 				DinoEntityIds.CANDLE,

@@ -207,8 +207,10 @@
                       (str
                         (->> (gather-commits)
                              (mapcat (partial tag-section {:latest-tag-label latest-tag-label}))
-                             (string/join "\n"))))]
-     (spit (or path changelog-path) content))))
+                             (string/join "\n"))))
+         p       (or path changelog-path)]
+     (println "Writing content to" p)
+     (spit p content))))
 
 (comment
   (->>

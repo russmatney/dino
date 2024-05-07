@@ -4,7 +4,30 @@
 ## Untagged
 
 
+### 7 May 2024
+
+- ([`8739e515`](https://github.com/russmatney/dino/commit/8739e515)) docs: wip architecture/systems outline
+- ([`dc2adaea`](https://github.com/russmatney/dino/commit/dc2adaea)) docs: doc readme copy-pasta
+
+  > Copies most of the dino readme into the docsify site's home page.
+
+- ([`e128be2c`](https://github.com/russmatney/dino/commit/e128be2c)) docs: sidebar, navbar, readme doc links
+- ([`202d4176`](https://github.com/russmatney/dino/commit/202d4176)) docs: misc updates
+
+  > Brings the dino games/addons/bb tool docs up to date.
+
+
 ### 6 May 2024
+
+- ([`8233a5c1`](https://github.com/russmatney/dino/commit/8233a5c1)) docs: move .org docs to .md
+
+  > Very rough. rewrite incoming!
+
+- ([`b9d9e0fe`](https://github.com/russmatney/dino/commit/b9d9e0fe)) chore: initial changelog
+
+  > Pulls over changelog.clj from log.gd, fixes a sort order issue, then
+  > builds two changelogs - one for github, one for the docs site. hopefully
+  > these can be just be merged, but w/e.
 
 - ([`6764faf9`](https://github.com/russmatney/dino/commit/6764faf9)) license: source code now MIT licensed
 - ([`5478107f`](https://github.com/russmatney/dino/commit/5478107f)) chore: drop pluggs-related stuff
@@ -1837,20 +1860,6 @@
 
 - ([`4d5386e3`](https://github.com/russmatney/dino/commit/4d5386e3)) chore: drop Respawner concept and autoload
 - ([`d898d6f2`](https://github.com/russmatney/dino/commit/d898d6f2)) chore: drop unused Clawe.gd
-- ([`67354b3e`](https://github.com/russmatney/dino/commit/67354b3e)) fix: restore proper pretty printing
-
-  > Really ought to have unit tests on this, especially now that it's solidifying.
-
-- ([`cf59c8b1`](https://github.com/russmatney/dino/commit/cf59c8b1)) refactor: Util -> U static funcs, drop util autoload
-
-  > Also fixes the Log impl to reference it's own static funcs.
-
-- ([`fb059c79`](https://github.com/russmatney/dino/commit/fb059c79)) refactor: move Debug pretty-printer to static Log class
-
-  > static funcs are much nicer than state- and load-order dependent autoloads.
-  > 
-  > Plus Log is a much better name for this.
-
 
 ## posterity.year-one
 
