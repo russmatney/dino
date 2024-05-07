@@ -50,6 +50,7 @@ ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfA
 Via Docsify! You can read the markdown in `docs/*`, or follow the links below.
 
 - [Docs home](https://russmatney.github.io/dino/#/)
+    - [Architecture/Systems overview](https://russmatney.github.io/dino/#/docs)
     - [Changelog](https://russmatney.github.io/dino/#/changelog)
     - [Games](https://russmatney.github.io/dino/#/games)
     - [Addons](https://russmatney.github.io/dino/#/addons)
@@ -83,7 +84,7 @@ https://github.com/SirLich/asset-explorer
 
 ### Patrons
 
-Many thanks to my patrons!
+Many thanks to my patrons! You can support my work here: https://www.patreon.com/russmatney
 
 - Cameron Kingsbury
 - Duaa Osman

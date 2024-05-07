@@ -1,8 +1,4 @@
-# Dino Docs
-
-Welcome to the Dino docs site! This, as well as Dino itself, is a work in progress!
-
-Stay tuned for more!
+# Dino
 
 <p align="center">
   <a href="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml"><img alt="Unit Tests" src="https://github.com/russmatney/dino/actions/workflows/unit_tests.yml/badge.svg" /></a>
@@ -51,6 +47,15 @@ ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfA
 - [Dino Year One DevLog](https://www.youtube.com/watch?v=9cyAnNLGrZI) (Jan 2024)
   - A summary of Dino's first year of development (up to Summer 2023).
 
+### Docs
+
+* [Changelog](/changelog)
+* [Architecture/Systems](/docs)
+* [Credits](/credits)
+* [(Old) Addons](/addons)
+* [(Old) BB Godot](/bb_godot)
+* [(Old) BB Godot](/bb_godot)
+
 ### Godot Addons
 
 There are some stellar Godot addons out there! Here is a list of those used in Dino:
@@ -78,7 +83,7 @@ https://github.com/SirLich/asset-explorer
 
 ### Patrons
 
-Many thanks to my patrons!
+Many thanks to my patrons! You can support my work here: https://www.patreon.com/russmatney
 
 - Cameron Kingsbury
 - Duaa Osman

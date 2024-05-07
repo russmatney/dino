@@ -1,5 +1,6 @@
 * [Home](/)
 * [Changelog](/changelog)
+* [Architecture/Systems](/docs)
 * [Credits](/credits)
 * [(Old) Addons](/addons)
 * [(Old) BB Godot](/bb_godot)
