@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b0iynefs467at"]
+[gd_scene load_steps=33 format=3 uid="uid://b0iynefs467at"]
 
 [ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_afubb"]
 [ext_resource type="Texture2D" uid="uid://cejwgbx007lhb" path="res://src/dino/players/hatbot/greyhat.png" id="2_oakt2"]

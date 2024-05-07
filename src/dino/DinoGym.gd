@@ -35,7 +35,6 @@ func _ready():
 		if not player_entity:
 			player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 		Dino.create_new_player({
-			genre_type=genre_type,
 			entity=player_entity,
 			})
-	Dino.spawn_player({level_node=self})
+	Dino.spawn_player({level_node=self, genre_type=genre_type})

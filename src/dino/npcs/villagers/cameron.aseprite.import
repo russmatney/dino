@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://gobtqsqstpkg"
+path="res://.godot/imported/cameron.aseprite-ebc97d738d059d1acc299d5a4d885b44.res"
+
+[deps]
+
+source_file="res://src/dino/npcs/villagers/cameron.aseprite"
+dest_files=["res://.godot/imported/cameron.aseprite-ebc97d738d059d1acc299d5a4d885b44.res"]
+
+[params]
+

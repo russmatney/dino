@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbkmdov158pc8"]
+[gd_scene load_steps=21 format=3 uid="uid://cbkmdov158pc8"]
 
 [ext_resource type="Script" path="res://src/dino/entities/harvey_entities/Plot.gd" id="2"]
 [ext_resource type="Shader" path="res://src/dino/entities/harvey_entities/SquashStretchShader.gdshader" id="2_ikc0p"]
@@ -167,4 +167,3 @@ position = Vector2(16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 shape = SubResource("7")
-

@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=3 uid="uid://bhxr5bwh2xafe"]
+
+[ext_resource type="Script" path="res://src/dino/npcs/TopDownNPC.gd" id="1_48ewx"]
+[ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_eycov"]
+[ext_resource type="Shader" path="res://src/shaders/ColorSwapShader.gdshader" id="3_j1plc"]
+[ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="4_5e1lk"]
+[ext_resource type="Texture2D" uid="uid://43a5h625x7wd" path="res://src/dino/npcs/villagers/grey.png" id="4_mellb"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="6_bd1r8"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="7_603fe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdn42"]
+shader = ExtResource("3_j1plc")
+shader_parameter/original_0 = Color(0.925734, 0.925734, 0.925734, 1)
+shader_parameter/original_1 = Color(0.337072, 0.337072, 0.337072, 1)
+shader_parameter/original_2 = Color(0.466529, 0.305806, 0.305806, 1)
+shader_parameter/original_3 = Color(0.568627, 0.568627, 0.568627, 1)
+shader_parameter/original_4 = Color(0.804089, 0.804089, 0.804089, 1)
+shader_parameter/replace_0 = Color(0.983353, 0, 0.919416, 1)
+shader_parameter/replace_1 = Color(0.294813, 0.481576, 1, 1)
+shader_parameter/replace_2 = Color(0.215742, 0.577089, 0.390113, 1)
+shader_parameter/replace_3 = Color(0.847579, 0.683259, 0.530813, 1)
+shader_parameter/replace_4 = Color(0.467414, 0.307482, 0.307482, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbq1c"]
+atlas = ExtResource("4_mellb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8hfvn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbq1c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c7jis"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mv0ol"]
+radius = 64.0703
+
+[node name="TDVillager" type="CharacterBody2D"]
+script = ExtResource("1_48ewx")
+should_wander = true
+should_notice = true
+should_hop = true
+can_be_called = true
+can_be_grabbed_thrown = true
+
+[node name="TDNPCMachine" parent="." instance=ExtResource("2_eycov")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_vdn42")
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_8hfvn")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://src/dino/npcs/villagers/grey.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "b821b0ba191b69e9feb74642d99e0b81"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_c7jis")
+
+[node name="StateLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "state"
+scroll_active = false
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -37.0
+offset_right = 32.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Item" parent="." instance=ExtResource("4_5e1lk")]
+
+[node name="ActionArea" parent="." instance=ExtResource("6_bd1r8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("CircleShape2D_mv0ol")
+
+[node name="ActionHint" parent="." instance=ExtResource("7_603fe")]
+position = Vector2(0, -21)

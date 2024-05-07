@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://eaw5fytwbsva"]
+[gd_scene load_steps=9 format=3 uid="uid://eaw5fytwbsva"]
 
 [ext_resource type="Script" path="res://src/dino/npcs/action_bot/ActionBot.gd" id="1_koq3i"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="3"]
@@ -75,4 +75,3 @@ sprite_frames = ExtResource("4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionDetector"]
 visible = false
 shape = SubResource("2")
-

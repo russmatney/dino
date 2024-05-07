@@ -127,12 +127,14 @@ var actions = [
 	Action.mk({
 		label="Call",
 		fn=follow_player,
+		show_on_source=true, show_on_actor=false,
 		source_can_execute=func():
 		return can_be_called and following == null and grabbed_by == null and not machine.state.name in ["Thrown"] and not is_dead,
 		}),
 	Action.mk({
 		label="Grab",
 		fn=grabbed_by_player,
+		show_on_source=true, show_on_actor=false,
 		maximum_distance=50.0,
 		source_can_execute=func(): return can_be_grabbed_thrown and following != null,
 		actor_can_execute=func(player):
@@ -143,6 +145,7 @@ var actions = [
 		}),
 	Action.mk({
 		label="Throw",
+		show_on_source=true, show_on_actor=false,
 		fn=thrown_by_player,
 		source_can_execute=func(): return can_be_grabbed_thrown and grabbed_by != null,
 		actor_can_execute=func(player): return player.grabbing == self and not is_dead,
@@ -345,7 +348,7 @@ func point_arrow():
 ## action detection ###########################################################
 
 func update_action_label():
-	if not action_label:
+	if not action_label or not action_detector:
 		return
 
 	var ax = action_detector.nearest_action()

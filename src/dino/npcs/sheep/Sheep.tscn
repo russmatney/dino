@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://6sj01yybi4qt"]
+[gd_scene load_steps=9 format=3 uid="uid://6sj01yybi4qt"]
 
 [ext_resource type="Script" path="res://src/dino/npcs/TopDownNPC.gd" id="1_jfadk"]
 [ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_8vlgc"]

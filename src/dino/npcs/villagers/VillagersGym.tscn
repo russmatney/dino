@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://b6o14wyr3dlgf"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_d4h2b"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_2i1c1"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_s4cd8"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_ux4f2"]
+[ext_resource type="PackedScene" uid="uid://bhxr5bwh2xafe" path="res://src/dino/npcs/villagers/TDVillager.tscn" id="5_63ifu"]
+[ext_resource type="PackedScene" uid="uid://dwtjckwhtmmht" path="res://src/dino/npcs/villagers/TDDuaa.tscn" id="6_nq6w0"]
+[ext_resource type="PackedScene" uid="uid://di8fxhhf04mpu" path="res://src/dino/npcs/villagers/TDGreg.tscn" id="7_l3dek"]
+[ext_resource type="PackedScene" uid="uid://c805020xvs8jg" path="res://src/dino/npcs/villagers/TDRuss.tscn" id="8_mhphg"]
+[ext_resource type="PackedScene" uid="uid://djioyv43e3v0v" path="res://src/dino/npcs/villagers/TDCameron.tscn" id="9_cp31t"]
+
+[sub_resource type="Resource" id="Resource_je1w6"]
+script = ExtResource("2_2i1c1")
+_id = "70"
+
+[node name="VillagersGym" type="Node"]
+script = ExtResource("1_d4h2b")
+player_entity = SubResource("Resource_je1w6")
+genre_type = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("2_s4cd8")
+
+[node name="DinoHUD" parent="." instance=ExtResource("3_ux4f2")]
+
+[node name="TDVillager" parent="." instance=ExtResource("5_63ifu")]
+position = Vector2(106, -53)
+
+[node name="TDVillager2" parent="." instance=ExtResource("6_nq6w0")]
+position = Vector2(-28, -28)
+
+[node name="TDVillager3" parent="." instance=ExtResource("7_l3dek")]
+position = Vector2(12, -32)
+
+[node name="TDVillager4" parent="." instance=ExtResource("8_mhphg")]
+position = Vector2(40, -14)
+
+[node name="TDVillager5" parent="." instance=ExtResource("9_cp31t")]
+position = Vector2(-32, 14)
+
+[node name="TDVillager6" parent="." instance=ExtResource("5_63ifu")]
+position = Vector2(-86, -68)
+
+[node name="TDVillager7" parent="." instance=ExtResource("5_63ifu")]
+position = Vector2(-2, -68)
+
+[node name="TDVillager8" parent="." instance=ExtResource("5_63ifu")]
+position = Vector2(56, -67)

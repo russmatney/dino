@@ -119,13 +119,25 @@ static func village(_opts={}) -> MapDef:
 		inputs=[RoomInput.with({
 			entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
+
+				# villager
+				DinoEntityIds.VILLAGERDUAA,
+				DinoEntityIds.VILLAGERGREG,
+				DinoEntityIds.VILLAGERCAMERON,
+				DinoEntityIds.VILLAGERRUSS,
+				DinoEntityIds.VILLAGER,
+				DinoEntityIds.VILLAGER,
+				DinoEntityIds.VILLAGER,
+				DinoEntityIds.VILLAGER,
+				DinoEntityIds.VILLAGER,
+
 				# herd
-				DinoEntityIds.SHEEP,
-				DinoEntityIds.SHEEP,
-				DinoEntityIds.SHEEP,
+				# DinoEntityIds.SHEEP,
+				# DinoEntityIds.SHEEP,
+				# DinoEntityIds.SHEEP,
 
 				# leaves
-				DinoEntityIds.LEAFGOD,
+				# DinoEntityIds.LEAFGOD,
 
 				# harvey
 				# DinoEntityIds.TOOL,
@@ -135,27 +147,28 @@ static func village(_opts={}) -> MapDef:
 				# DinoEntityIds.ACTIONBOT,
 
 				# arcade
-				DinoEntityIds.COIN,
-				DinoEntityIds.COIN,
-				DinoEntityIds.COIN,
-				DinoEntityIds.ARCADEMACHINE,
+				# DinoEntityIds.COIN,
+				# DinoEntityIds.COIN,
+				# DinoEntityIds.COIN,
+				# DinoEntityIds.ARCADEMACHINE,
 
 				# gems
-				DinoEntityIds.GEM,
-				DinoEntityIds.GEM,
+				# DinoEntityIds.GEM,
+				# DinoEntityIds.GEM,
 				DinoEntityIds.BOX,
 				DinoEntityIds.BOX,
 				DinoEntityIds.BOX,
 				DinoEntityIds.BOX,
+
 				DinoEntityIds.COOKINGPOT,
 				DinoEntityIds.CANDLE,
 				DinoEntityIds.CANDLE,
 				DinoEntityIds.CANDLE,
 				DinoEntityIds.CANDLE,
-				DinoEntityIds.HANGINGLIGHT,
-				DinoEntityIds.HANGINGLIGHT,
-				DinoEntityIds.HANGINGLIGHT,
-				DinoEntityIds.HANGINGLIGHT,
+				# DinoEntityIds.HANGINGLIGHT,
+				# DinoEntityIds.HANGINGLIGHT,
+				# DinoEntityIds.HANGINGLIGHT,
+				# DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH1,
 				DinoEntityIds.BUSH1,
 				DinoEntityIds.BUSH1,
@@ -163,8 +176,9 @@ static func village(_opts={}) -> MapDef:
 				DinoEntityIds.BUSH2,
 				DinoEntityIds.BUSH2,
 				],
-			}).merge(RoomInput.large_room_shape()
-				).merge(RoomInput.has_snow_fall())
+			}).merge(RoomInput.large_room_shape())\
+			.merge(RoomInput.has_snow_fall())\
+			.merge(RoomInput.topdown())
 			]})
 
 static func topdown_game(_opts={}) -> MapDef:

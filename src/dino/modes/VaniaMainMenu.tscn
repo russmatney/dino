@@ -54,11 +54,6 @@ unique_name_in_owner = true
 layout_mode = 2
 columns = 5
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer4/MapDefGridContainer"]
-layout_mode = 2
-toggle_mode = true
-text = "some text"
-
 [node name="ScrollContainer2" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 182)
 layout_mode = 2

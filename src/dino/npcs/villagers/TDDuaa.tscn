@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwtjckwhtmmht"]
+
+[ext_resource type="Script" path="res://src/dino/npcs/TopDownNPC.gd" id="1_t0hrs"]
+[ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_3xkbl"]
+[ext_resource type="Texture2D" uid="uid://dk16cdh5d354f" path="res://src/dino/npcs/villagers/duaa.png" id="3_jg00b"]
+[ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="4_6da2o"]
+[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_aybl5"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_td85c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7ua7"]
+atlas = ExtResource("3_jg00b")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ru1v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d7ua7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c7jis"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08m20"]
+radius = 64.0703
+
+[node name="TDDuaa" type="CharacterBody2D"]
+collision_layer = 512
+collision_mask = 1813
+script = ExtResource("1_t0hrs")
+should_wander = true
+should_notice = true
+should_hop = true
+can_be_called = true
+can_be_grabbed_thrown = true
+
+[node name="TDNPCMachine" parent="." instance=ExtResource("2_3xkbl")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_0ru1v")
+metadata/_aseprite_wizard_config_ = {
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"slice": "",
+"source": "res://src/dino/npcs/villagers/duaa.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "04408c6e4e567fa719408a00fd6b31ff"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_c7jis")
+
+[node name="StateLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "state"
+scroll_active = false
+
+[node name="ActionLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -37.0
+offset_right = 32.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+
+[node name="Item" parent="." instance=ExtResource("4_6da2o")]
+
+[node name="ActionArea" parent="." instance=ExtResource("5_aybl5")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
+shape = SubResource("CircleShape2D_08m20")
+
+[node name="ActionHint" parent="." instance=ExtResource("6_td85c")]
+position = Vector2(0, -21)

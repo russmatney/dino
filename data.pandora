@@ -1901,6 +1901,131 @@
 						"value": "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "a762e7ff",
+				"_id": "190",
+				"_index": 0,
+				"_name": "VillagerDuaa",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Duaa"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/villagers/villagers.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Villager"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/villagers/TDDuaa.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "a762e7ff",
+				"_id": "191",
+				"_index": 0,
+				"_name": "VillagerGreg",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Greg"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/villagers/villagers.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Villager"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/villagers/TDGreg.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "a762e7ff",
+				"_id": "192",
+				"_index": 0,
+				"_name": "VillagerCameron",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Cameron"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/villagers/villagers.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Villager"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/villagers/TDCameron.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "a762e7ff",
+				"_id": "193",
+				"_index": 0,
+				"_name": "VillagerRuss",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Russ"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/villagers/villagers.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Villager"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/villagers/TDRuss.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "131",
+				"_icon_color": "a762e7ff",
+				"_id": "194",
+				"_index": 0,
+				"_name": "Villager",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Villager"
+					},
+					"grid_defs_path": {
+						"type": "string",
+						"value": "res://src/dino/npcs/villagers/villagers.txt"
+					},
+					"label": {
+						"type": "string",
+						"value": "Villager"
+					},
+					"scene": {
+						"type": "resource",
+						"value": "res://src/dino/npcs/villagers/TDVillager.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -2209,7 +2334,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 189
+			"default": 194
 		}
 	}
 }

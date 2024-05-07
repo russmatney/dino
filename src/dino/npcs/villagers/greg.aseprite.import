@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ckij6bqw44rex"
+path="res://.godot/imported/greg.aseprite-2f4ce97c9051754d16345abc05ab34d5.res"
+
+[deps]
+
+source_file="res://src/dino/npcs/villagers/greg.aseprite"
+dest_files=["res://.godot/imported/greg.aseprite-2f4ce97c9051754d16345abc05ab34d5.res"]
+
+[params]
+
