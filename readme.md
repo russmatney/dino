@@ -28,7 +28,7 @@
 </a>
 </p>
 
-<img src="images/all_icons_bg_8x.png" alt="Dino Games and Addons"/>
+<img src="docs/images/all_icons_bg_8x.png" alt="Dino Games and Addons"/>
 
 Dino _was_ a monorepo I started in late 2022 for learning Godot, doing game
 jams, and starting some addons/libraries. Since late 2023, I've been reimagining
@@ -43,6 +43,7 @@ ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfA
 ### DevLogs
 
 - [Dino Year One DevLog](https://www.youtube.com/watch?v=9cyAnNLGrZI) (Jan 2024)
+  - A summary of Dino's first year of development (up to Summer 2023).
 
 ### Docs
 
@@ -54,6 +55,31 @@ Via Docsify! You can read the markdown in `docs/*`, or follow the links below.
     - [Addons](https://russmatney.github.io/dino/#/addons)
     - [BB Godot](https://russmatney.github.io/dino/#/bb_godot)
     - [Credits](https://russmatney.github.io/dino/#/credits)
+
+### Godot Addons
+
+There are some stellar Godot addons out there! Here is a list of those used in Dino:
+
+- GDUnit4
+https://github.com/MikeSchulze/gdUnit4
+- Pandora
+https://github.com/bitbrain/pandora
+- Godot Input Helper
+https://github.com/nathanhoad/godot_input_helper
+- Godot Sound Manager
+https://github.com/nathanhoad/godot_sound_manager
+- gdfxr
+https://github.com/timothyqiu/gdfxr
+- teeb.text-effects
+https://github.com/teebarjunk/godot-text_effects
+- AsepriteWizard
+https://github.com/viniciusgerevini/godot-aseprite-wizard
+- Metroidvania System
+https://github.com/KoBeWi/Metroidvania-System
+- Phantom Camera
+https://github.com/ramokz/phantom-camera
+- Asset Explorer
+https://github.com/SirLich/asset-explorer
 
 ### Patrons
 
