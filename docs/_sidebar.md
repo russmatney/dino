@@ -3,5 +3,5 @@
 * [Architecture/Systems](/docs)
 * [Credits](/credits)
 * [(Old) Addons](/addons)
-* [(Old) BB Godot](/bb_godot)
+* [(Old) Games](/games)
 * [(Old) BB Godot](/bb_godot)
