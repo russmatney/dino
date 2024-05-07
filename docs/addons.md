@@ -1,34 +1,53 @@
-Addons
-======
+(Dino) Addons
+=============
 
-These addons are begging to be consolidated - there are a couple
-inter-dependencies, which is a big no-no for anything sharable.
+I created a number of experimental addons in Dino - at this point they've all
+been pulled into 'addons/core', and they are being wittled down.
 
-I did a quick once-over of combining a few when I ripped Dot Hop out of here -
-check out [`russmatney/dothop/addons/core/*`](https://github.com/russmatney/dothop/tree/e9ac0ecac614c8f4a14686a656857caade752343/addons/core) for where that landed.
+Below is documentation for them, even if some don't really exist any more - I'm
+hopeful the ideas and related replacement libraries are useful.
+
+For a quick look at what external addons Dino uses, check out the [`plug.gd` file](https://github.com/russmatney/dino/blob/main/plug.gd).
 
 # Core
-- Util - a bunch of static functions I can't live without
-- Log - a pretty printer with a minimal API (~Log.pr(...args)~)
-- Assets I'd use anywhere
-  - Fonts
-- Anything too small to go in an existing addon.
 
-I'd love to group some other things in here, as long as they are basic and
-unopinonated. (Eg. Navi, Trolley, Hood, Quest, maybe Reptile)
+Core was originally a place for library code without a home, but now it contains
+whatever remains of the rest of the addons documentted here.
+
+- Util.gd
+  - a bunch of static functions I can't live without
+  - a GDScript-Standard-Lib-Extras of sorts
+- Log.gd (now a separate plugin)
+  - a pretty printer with a minimal API (`Log.pr(...args)`)
+    - Pulled into a separate repo and proper godot addon in March 2024: [`russmatney/log.gd`](https://github.com/russmatney/log.gd)
+- Assets
+  - e.g. Fonts
+
 # Beehive
-For working with state machines, behavior trees, GOAP.
+Intended for working with state machines, behavior trees, GOAP, but only ever
+included a small state machine.
 
-Base controllers for players, enemies, and bosses:
+The naming ended
+up very close to [`bitbrain/beehave`](https://github.com/bitbrain/beehave),
+which I'd recommend if you're looking for a behavior tree implementation.
 
-- SideScroller
-- TopDown
-- BeatEmUp
+At one point this included base controllers for players, enemies, and bosses
+across three genres: `SideScroller`, `TopDown`, and `BeatEmUp`.
+It also included integrations like powerups and weapons systems.
 
-Includes integrating weapons systems, tho maybe those should be broken out.
+I eventually deconstructed beehive - I pulled most of the impls into `dino/src` proper, and moved the
+Machine.gd and State.gd impls into `addons/core/machine`.
+# Brick
+A more recent proc-generation attempt. Pretty rough at the moment, but
+somewhat generic. I'm hopeful to merge this implementation into Dino's Vania
+code, which is a layer on top of MetSys: [`KoBeWi/Metroidvania-System`](https://github.com/KoBeWi/Metroidvania-System).
+
+Related, I ought to look into consuming [`BenjaTK/Gaea`](https://github.com/BenjaTK/Gaea)
 # Camera
-I was quite proud of this when I first implemented it, but lately it feels like
-a mess, and I'm probably going to drop all this and move to [ramokz/phantom-camera](https://github.com/ramokz/phantom-camera).
+I was quite proud of this when I first implemented it! But it feel into
+disrepair. At this point I've moved to just consuming
+[`ramokz/phantom-camera`](https://github.com/ramokz/phantom-camera),
+and implementing the camera 'juice' via `addons/core/Juice.gd`.
 
 --
 
@@ -38,16 +57,19 @@ points of focus/interest.
 Pulls heavily from Squirrel Eiserloh's [Juicing Your Cameras with Math](https://www.youtube.com/watch?v=tu-Qe66AvtY) video.
 
 Includes functions for slowmo, freezeframe (hit-stop), and screenshake.
-## slow-mo
-## hit-stop
-## screenshake
 # DJ
 For sounds and music management, such as background music that is maintained
 across scene transitions.
+
+This was nice, but by now it's just a thin layer on top of [`nathanhoad/godot_sound_manager`](https://github.com/nathanhoad/godot_sound_manager).
+
 # Hood
-HUD UI components.
+Reusable HUD UI components, including an onscreen notification helper.
+
 # Hotel
-Deprecated in favor of [bitbrain/pandora](https://github.com/bitbrain/pandora).
+Most of my Hotel ideas are now deprecated in favor of
+[bitbrain/pandora](https://github.com/bitbrain/pandora), which helped shrink
+it's scope down to a couple data functions around node lifecycle.
 
 --
 
@@ -57,32 +79,29 @@ Discussed in more detail: [russmatney.com/note/hotel_dino_plugin.html](https://r
 # Metro
 Deprecated in favor of [KoBeWi/MetSys](https://github.com/KoBeWi/Metroidvania-System).
 
---
-
-~Metro.gd~, ~MetroZone.gd~, and ~MetroRoom.gd~ provide helpers for managing
+`Metro.gd`, `MetroZone.gd`, and `MetroRoom.gd` provide helpers for managing
 zones (areas) and rooms in map-based games. (Metroidvanias, roguelikes, dungeon
 crawlers, etc.)
 
-Originally built along side HatBot, it has since been refactored out
-into a reusable addon, and applied so far to ~src/dungeonCrawler~.
+Originally built along side HatBot, then refactored out
+into it's own addon, and now waiting to be completely dropped in favor of Dino's
+game modes and various consumers.
 # Navi
-Basic menus, pausing, and credits, plus a scene loader for navigating between
-them all.
+Basic menus and pausing, some related components, and general scene loading/navigation.
 
-## NaviMenu
-supporting ~add_menu_item({label: "Blah", fn: self.some_func})~
-## Basic popovers
-### Pause Screen
-### Win Screen
-### Death Screen
+NaviMenu - supporting `add_menu_item({label: "Blah", fn: self.some_func})`.
 # Quest
 Basic signals and checks for completing one or more tasks in a scene.
+
+Recently Quests were refactored to support a QuestManager node - this will
+attempt to find relevant quests for whatever nodes enter the scene, and surfaces
+signals when those quests are updated or completed.
 # Reptile
 Tools, scripts and ui as a layer into working with Tilesets.
 
 Includes some basic auto-tiles as assets to speed up prototyping.
 
-Includes Reptile autoload and ReptileRoom, which are a base for some proc gen with tilemaps.
+The Reptile static class provides some tile-related helper functions.
 # Thanks
 A simple Credits scene and/or script that scrolls credits from a .txt file.
 
@@ -90,11 +109,11 @@ I debated naming this T. Hanks and using the Simpson's Tom Hanks character as a
 logo, but it seemed like a long way to go for ~ 50 lines of gdscript. Still,
 might be a fun project to build up - maybe even make the credits a game, like
 after super-smash's classic mode.
-# Trolley
+# Trolley (renamed to Trolls.gd)
 For handling controls inputs and remapping.
 
 Input handling in godot is really simple, but it generally uses strings as
-inputs, so this is a thing layer to use static function calls instead.
+inputs, so this is a thin layer to use static function calls instead.
 
 ``` gdscript
 var move_dir = Trolls.move_vector() # a normalized input direction
@@ -105,4 +124,6 @@ func _unhandled_input(event):
         punch()
 ```
 
-Trolley was simplified and renamed to [Trolls.gd](https://github.com/russmatney/dothop/blob/e9ac0ecac614c8f4a14686a656857caade752343/addons/core/Trolls.gd) in Dot Hop.
+Trolley has been simplified and renamed to Trolls.
+
+Related: [nathanhoad/godot_input_helper](https://github.com/nathanhoad/godot_input_helper)

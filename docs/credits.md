@@ -114,18 +114,36 @@ Public Domain
 https://creativecommons.org/publicdomain/zero/1.0/
 
 ## Godot Addons
+### GDUnit4
+https://github.com/MikeSchulze/gdUnit4
+MIT License
+### Pandora
+https://github.com/bitbrain/pandora
+MIT License
+### Godot Input Helper
+https://github.com/nathanhoad/godot_input_helper
+MIT License
+### Godot Sound Manager
+https://github.com/nathanhoad/godot_sound_manager
+MIT License
 ### gdfxr
 https://github.com/timothyqiu/gdfxr
 MIT License
 ### teeb.text-effects teeb.text_transitions
 https://github.com/teebarjunk/godot-text_effects
 MIT License
-### GDUnit4
-https://github.com/MikeSchulze/gdUnit4
 ### AsepriteWizard
 https://github.com/viniciusgerevini/godot-aseprite-wizard
-### Pandora
-https://github.com/bitbrain/pandora
+MIT License
+### Metroidvania System
+https://github.com/KoBeWi/Metroidvania-System
+MIT License
+### Phantom Camera
+https://github.com/ramokz/phantom-camera
+MIT License
+### Asset Explorer
+https://github.com/SirLich/asset-explorer
+MIT License
 ## Code Contributors
 - Joshua Skrzypek
 ## Patrons
