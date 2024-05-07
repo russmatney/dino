@@ -1,6 +1,8 @@
 class_name GdUnitTestSuiteDto
 extends GdUnitResourceDto
 
+
+# Dictionary[String, GdUnitTestCaseDto]
 var _test_cases_by_name := Dictionary()
 
 
@@ -16,7 +18,7 @@ func serialize(test_suite :Node) -> Dictionary:
 func deserialize(data :Dictionary) -> GdUnitResourceDto:
 	super.deserialize(data)
 	var test_cases_ :Array = data.get("test_cases", [])
-	for test_case in test_cases_:
+	for test_case :Dictionary in test_cases_:
 		add_test_case(GdUnitTestCaseDto.new().deserialize(test_case))
 	return self
 
@@ -29,5 +31,7 @@ func test_case_count() -> int:
 	return _test_cases_by_name.size()
 
 
-func test_cases() -> Array:
-	return _test_cases_by_name.values()
+func test_cases() -> Array[GdUnitTestCaseDto]:
+	var test_cases_ :Array[GdUnitTestCaseDto] = []
+	test_cases_.append_array(_test_cases_by_name.values())
+	return test_cases_
