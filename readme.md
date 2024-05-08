@@ -30,15 +30,22 @@
 
 <img src="docs/images/all_icons_bg_8x.png" alt="Dino Games and Addons"/>
 
-Dino _was_ a monorepo I started in late 2022 for learning Godot, doing game
-jams, and starting some addons/libraries. Since late 2023, I've been reimagining
-and refactoring - the games mechanics are being deconstructed, DRYed up into
-reusable code, and remixed into something cohesive.
+Dino _was_ a monorepo started in late 2022 to learning Godot, do game
+jams, and start some addons/libraries. Since late 2023, I've been reimagining
+and refactoring - the games have being deconstructed and DRYed up into
+shared systems.
 
-I'm currently pushing for a late May/early June 2024 release [on steam](https://store.steampowered.com/app/2589550/Dino/)! Stay tuned to see where this goes!
+Dino now presents a suite of short games - these are largely platformer and
+top-down games with dungeon crawler and metroidvania-style maps. The
+maps are procedurally generated with basic algorithms and some parsed
+plaintext - I hope to put together some video devlogs covering the code soon.
 
-If you're interested in beta testing, I have steam codes available and would love any
-ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfAvF).
+I'm currently pushing for a June 1st release [on
+steam](https://store.steampowered.com/app/2589550/Dino/)! Wishlist it today, or
+just get the [latest on itch.io](https://russmatney.itch.io/dino).
+
+Feel free to ping me [on Discord](https://discord.gg/xZHWtGfAvF) with any
+questions or feedback!
 
 ### DevLogs
 
@@ -63,26 +70,16 @@ Docsify-built static site.
 
 There are some stellar Godot addons out there! Here is a list of those used in Dino:
 
-- GDUnit4
-https://github.com/MikeSchulze/gdUnit4
-- Pandora
-https://github.com/bitbrain/pandora
-- Godot Input Helper
-https://github.com/nathanhoad/godot_input_helper
-- Godot Sound Manager
-https://github.com/nathanhoad/godot_sound_manager
-- gdfxr
-https://github.com/timothyqiu/gdfxr
-- teeb.text-effects
-https://github.com/teebarjunk/godot-text_effects
-- AsepriteWizard
-https://github.com/viniciusgerevini/godot-aseprite-wizard
-- Metroidvania System
-https://github.com/KoBeWi/Metroidvania-System
-- Phantom Camera
-https://github.com/ramokz/phantom-camera
-- Asset Explorer
-https://github.com/SirLich/asset-explorer
+- [gdUnit4 by MikeSchulze](https://github.com/MikeSchulze/gdUnit4)
+- [pandora by bitbrain](https://github.com/bitbrain/pandora)
+- [godot_input_helper by nathanhoad](https://github.com/nathanhoad/godot_input_helper)
+- [godot_sound_manager by nathanhoad](https://github.com/nathanhoad/godot_sound_manager)
+- [gdfxr by timothyqiu](https://github.com/timothyqiu/gdfxr)
+- [godot-text_effects by teebarjunk](https://github.com/teebarjunk/godot-text_effects)
+- [godot-aseprite-wizard by viniciusgerevini](https://github.com/viniciusgerevini/godot-aseprite-wizard)
+- [Metroidvania-System by KoBeWi](https://github.com/KoBeWi/Metroidvania-System)
+- [phantom-camera by ramokz](https://github.com/ramokz/phantom-camera)
+- [asset-explorer by SirLich](https://github.com/SirLich/asset-explorer)
 
 ### Patrons
 
