@@ -1,4 +1,4 @@
-# Dino Docs
+# Dino Systems
 
 An outline of Dino's architecture and systems - I hope to fill these sections in
 as time goes on.
@@ -36,7 +36,7 @@ as time goes on.
 
 - QuestManager
 
-# Game Modes and Scene structure
+# Game Modes and Singletons
 
 - arcade, roulette
 - classic

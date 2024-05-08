@@ -45,17 +45,19 @@ ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfA
 - [Dino Year One DevLog](https://www.youtube.com/watch?v=9cyAnNLGrZI) (Jan 2024)
   - A summary of Dino's first year of development (up to Summer 2023).
 
-### Docs
+### Docs/Web
 
-Via Docsify! You can read the markdown in `docs/*`, or follow the links below.
+You can read the markdown directly in `docs/*`, or follow the links below to a
+Docsify-built static site.
 
-- [Docs home](https://russmatney.github.io/dino/#/)
-    - [Architecture/Systems overview](https://russmatney.github.io/dino/#/docs)
-    - [Changelog](https://russmatney.github.io/dino/#/changelog)
+- [Dino Website](https://russmatney.github.io/dino/#/)
     - [Games](https://russmatney.github.io/dino/#/games)
-    - [Addons](https://russmatney.github.io/dino/#/addons)
-    - [BB Godot](https://russmatney.github.io/dino/#/bb_godot)
+    - [Systems](https://russmatney.github.io/dino/#/systems)
+    - [Changelog](https://russmatney.github.io/dino/#/changelog)
     - [Credits](https://russmatney.github.io/dino/#/credits)
+    - [(Old) Games](https://russmatney.github.io/dino/#/old/games)
+    - [(Old) Addons](https://russmatney.github.io/dino/#/old/addons)
+    - [(Old) BB Godot](https://russmatney.github.io/dino/#/old/bb_godot)
 
 ### Godot Addons
 

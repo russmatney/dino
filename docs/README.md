@@ -50,11 +50,12 @@ ideas or feedback! Feel free to ping me [on Discord](https://discord.gg/xZHWtGfA
 ### Docs
 
 * [Changelog](/changelog)
-* [Architecture/Systems](/docs)
+* [Games](/games)
+* [Systems](/systems)
 * [Credits](/credits)
-* [(Old) Addons](/addons)
-* [(Old) Games](/games)
-* [(Old) BB Godot](/bb_godot)
+* [(Old) Addons](/old/addons)
+* [(Old) Games](/old/games)
+* [(Old) BB Godot](/old/bb_godot)
 
 ### Godot Addons
 
