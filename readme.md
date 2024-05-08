@@ -59,7 +59,7 @@ Docsify-built static site.
     - [(Old) Addons](https://russmatney.github.io/dino/#/old/addons)
     - [(Old) BB Godot](https://russmatney.github.io/dino/#/old/bb_godot)
 
-### Godot Addons
+### External Godot Addons
 
 There are some stellar Godot addons out there! Here is a list of those used in Dino:
 

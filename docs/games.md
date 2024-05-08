@@ -1,17 +1,44 @@
 # Games and Game Modes
 
-## Arcade and Roulette
+## Classic/Arcade/Roulette
 
-## Classic
+One level at a time, featuring a random or configurable progression of Dino Levels.
 
-## Vania 'story'
+These include mini-games, such as Break the Targets and Collect the Leaves.
 
-## The Woods
+## Vania (to be renamed)
 
-## Tower
+Here we bring all of Dino's features together into a single adventure - collect
+every power up, win every mini-game, and
+
+Bringing it all together!
 
 ## Boss Rush
 
-## Quest Crawler
+Fight all the Dino the bosses in sequence
 
-Clear each room's quests to move to the next.
+## Tower
+
+A platformer about reaching the top.
+
+## Shirt
+
+A Tunic-inspired dungeon crawler
+
+## Hat Bot / Ghost House / Demo Land
+
+Short metroidvanias
+
+## The Woods
+
+A runner about catching leaves and getting lost.
+
+## Void Spike/Harvey
+
+Top-Down and Platformer collecting, crafting, and feeding.
+
+## Herd, Village
+
+## Super Elevator Level
+
+A short Beat Em Up.
