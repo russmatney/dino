@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://5b1dvypniafc"]
+
+[node name="DinoThemePreview" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_type_variation = &"ButtonListPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="BlueButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+text = "Sup"
+
+[node name="BlueButton2" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+toggle_mode = true
+button_pressed = true
+text = "pressed"
+
+[node name="BlueButton3" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+disabled = true
+text = "disabled"

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dfihyxj212wxv"
+path="res://.godot/imported/button_list_bg.aseprite-ea3e327fe4a120e8026ed250c76d7f24.res"
+
+[deps]
+
+source_file="res://src/components/assets/button_list_bg.aseprite"
+dest_files=["res://.godot/imported/button_list_bg.aseprite-ea3e327fe4a120e8026ed250c76d7f24.res"]
+
+[params]
+

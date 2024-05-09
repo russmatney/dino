@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cla1anrvnn834"
+path="res://.godot/imported/red_button.aseprite-6678c5fa0745c535308d2609bc1b8f7f.res"
+
+[deps]
+
+source_file="res://src/components/assets/red_button.aseprite"
+dest_files=["res://.godot/imported/red_button.aseprite-6678c5fa0745c535308d2609bc1b8f7f.res"]
+
+[params]
+

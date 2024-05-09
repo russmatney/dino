@@ -9,8 +9,9 @@ func _ready():
 
 	build_games_grid()
 
-	Music.resume_menu_song()
-	set_focus()
+	if not Engine.is_editor_hint():
+		Music.resume_menu_song()
+		set_focus()
 
 func set_focus():
 	var chs = games_grid_container.get_children()
