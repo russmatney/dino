@@ -19,6 +19,9 @@ func get_root_scene() -> PackedScene:
 func is_debug() -> bool:
 	return get_bool("is_debug")
 
+func is_disabled() -> bool:
+	return get_bool("is_disabled")
+
 func data():
 	return {
 		display_name=get_display_name(),
@@ -26,12 +29,16 @@ func data():
 		menu=get_menu(),
 		root_scene=get_root_scene(),
 		is_debug=is_debug(),
+		is_disabled=is_disabled(),
 		}
 
 ## static helpers #######################################
 
 static func all_modes():
 	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOMODE))
+
+static func all_enabled_modes():
+	return all_modes().filter(func(mode): return not mode.is_disabled())
 
 static func get_fallback_mode():
 	return all_modes().filter(func(m): return m.is_debug())[0]

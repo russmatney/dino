@@ -3,8 +3,6 @@ extends CanvasLayer
 
 ## vars ##################################################################3
 
-@onready var games_grid_container = $%GamesGridContainer
-
 @onready var games_list = $%GamesList
 
 @onready var start_button = $%StartButton
@@ -19,8 +17,6 @@ extends CanvasLayer
 func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
-
-	build_games_grid()
 
 	build_games_list()
 
@@ -48,42 +44,15 @@ func set_focus():
 		else:
 			Log.warn("Couldn't set focus!")
 
-## game_modes grid ##################################################################3
-
-func start_mode(mode):
-	if mode:
-		Dino.launch(mode)
-	else:
-		Log.err("Cannot start game, no game_entity passed!")
-
-func build_games_grid():
-	U.free_children(games_grid_container)
-
-	for m in DinoModeEntity.all_modes():
-		var button = EntityButton.newButton(m, start_mode)
-		games_grid_container.add_child(button)
-
 ## games list ##################################################################3
-
-var games = [
-	"Classic Mode (Side-Scroller)",
-	"Classic Mode (Top Down)",
-	"Vania (Hat Bot/Ghost House/Demo Land)",
-	"Dungeon Crawler (Shirt)",
-	"Tower",
-	"Woods",
-	"Mountain",
-	"Super Elevator Level",
-	"Boss Rush",
-	"Harvey/Spike",
-	"Arcade",
-	]
 
 func build_games_list():
 	U.free_children(games_list)
 
-	for g in games:
+	for m in DinoModeEntity.all_enabled_modes():
 		var button = Button.new()
-		button.text = g
+		button.text = m.get_display_name()
 		button.set_theme_type_variation("BlueButton")
 		games_list.add_child(button)
+
+		button.pressed.connect(Dino.launch.bind(m))

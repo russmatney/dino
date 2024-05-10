@@ -6,11 +6,21 @@ class_name MapDef
 @export var name: String
 @export var inputs: Array[RoomInput]
 
+var room_defs: GridDefs
+@export var room_defs_path: String :
+	set(path):
+		room_defs_path = path
+		room_defs = GridParser.parse({defs_path=path})
+
 ## init #######################################################
 
 func _init(opts={}):
 	name = opts.get("name", "New Map Def")
 	inputs.assign(opts.get("inputs", []))
+
+	if opts.get("room_defs_path"):
+		room_defs_path = opts.get("room_defs_path")
+		# sets room_defs via setter ... ?
 
 
 ############################################################

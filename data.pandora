@@ -758,6 +758,10 @@
 						"type": "string",
 						"value": "Arcade"
 					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
+					},
 					"menu": {
 						"type": "resource",
 						"value": "res://src/dino/modes/ArcadeMainMenu.tscn"
@@ -822,6 +826,10 @@
 						"value": "Debug"
 					},
 					"is_debug": {
+						"type": "bool",
+						"value": true
+					},
+					"is_disabled": {
 						"type": "bool",
 						"value": true
 					}
@@ -2026,6 +2034,130 @@
 						"value": "res://src/dino/npcs/villagers/TDVillager.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "196",
+				"_index": 0,
+				"_name": "ClassicSS",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Classic Mode (SideScroller)"
+					},
+					"menu": {
+						"type": "resource",
+						"value": "res://src/dino/modes/ClassicMainMenu.tscn"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/Classic.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "197",
+				"_index": 0,
+				"_name": "ClassicTD",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Classic Mode (TopDown)"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
+					},
+					"menu": {
+						"type": "resource",
+						"value": "res://src/dino/modes/ClassicMainMenu.tscn"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/Classic.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "198",
+				"_index": 0,
+				"_name": "DungeonCrawler",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Dungeon Crawler"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "199",
+				"_index": 0,
+				"_name": "Tower",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Tower"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "200",
+				"_index": 0,
+				"_name": "Woods",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Woods"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "201",
+				"_index": 0,
+				"_name": "Mountain",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Mountain"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "202",
+				"_index": 0,
+				"_name": "SuperElevatorLevel",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Super Elevator Level"
+					}
+				}
+			},
+			{
+				"_category_id": "92",
+				"_icon_color": "ffffff00",
+				"_id": "203",
+				"_index": 0,
+				"_name": "BossRush",
+				"_property_overrides": {
+					"display_name": {
+						"type": "string",
+						"value": "Boss Rush"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -2329,12 +2461,19 @@
 				"_id": "182",
 				"_name": "grid_defs_path",
 				"_type": "string"
+			},
+			{
+				"_category_id": "92",
+				"_default_value": false,
+				"_id": "195",
+				"_name": "is_disabled",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 194
+			"default": 203
 		}
 	}
 }
