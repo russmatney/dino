@@ -102,6 +102,8 @@ Dino's source code is available via the MIT license - go for it!
 etc) are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 That's ~Attribution Required~, ~Non-Commerical~, ~Share-alike (sticky license)~!
 
+Note that the external Godot Addons (listed above) also have their own licenses as well.
+
 #### Note: Third-party assets in this repo must be purchased to use
 
 Dino uses third-party assets from talented creators that must be purchased before use.
