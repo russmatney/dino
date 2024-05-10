@@ -19,7 +19,7 @@ layout_mode = 2
 
 [node name="BlueButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"BlueButton"
+theme_type_variation = &"YellowButton"
 text = "Sup"
 
 [node name="BlueButton2" type="Button" parent="PanelContainer/VBoxContainer"]
@@ -34,3 +34,92 @@ layout_mode = 2
 theme_type_variation = &"BlueButton"
 disabled = true
 text = "disabled"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 16.0
+offset_right = 668.0
+offset_bottom = 302.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonListPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="BlueButton" type="Button" parent="HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+text = "Quit Game"
+
+[node name="BlueButton2" type="Button" parent="HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+toggle_mode = true
+text = "Credits"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 738.0
+offset_top = 41.0
+offset_right = 1066.0
+offset_bottom = 327.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"ButtonListPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/PanelContainer2"]
+layout_mode = 2
+
+[node name="BlueButton" type="Button" parent="HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"RedButton"
+text = "Quit Game"
+
+[node name="BlueButton2" type="Button" parent="HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"RedButton"
+toggle_mode = true
+text = "Credits"
+
+[node name="BlueButton3" type="Button" parent="HBoxContainer2/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"RedButton"
+disabled = true
+toggle_mode = true
+text = "???"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1129.0
+offset_top = 20.0
+offset_right = 1457.0
+offset_bottom = 409.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer3"]
+layout_mode = 2
+theme_type_variation = &"ButtonListPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer3/PanelContainer2"]
+layout_mode = 2
+
+[node name="BlueButton" type="Button" parent="HBoxContainer3/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"YellowButton"
+text = "Quit Game"
+
+[node name="BlueButton2" type="Button" parent="HBoxContainer3/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"YellowButton"
+toggle_mode = true
+text = "Credits"
+
+[node name="BlueButton3" type="Button" parent="HBoxContainer3/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"YellowButton"
+disabled = true
+toggle_mode = true
+text = "???"

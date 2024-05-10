@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2ipf7t7godiy"]
+[gd_scene load_steps=5 format=3 uid="uid://d2ipf7t7godiy"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/dino/menus/main/DinoMenu.gd" id="2"]
 [ext_resource type="Script" path="res://src/components/AnimatedVBoxContainer.gd" id="3_viiye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bl2un"]
+bg_color = Color(0.27454, 0.258915, 0.368338, 1)
 
 [node name="DinoMenu" type="CanvasLayer" groups=["menus"]]
 script = ExtResource("2")
@@ -13,80 +16,100 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bl2un")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
 layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="HeroLabel" parent="PanelContainer/VBoxContainer" instance=ExtResource("1")]
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 128
-text = "[center]Dino"
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HeroLabel" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1")]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/normal_font_size = 256
+text = "[center]Dino"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 432)
 layout_mode = 2
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="GamesGridContainer" type="GridContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 6
 
-[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_type_variation = &"ButtonListPanel"
+
+[node name="GamesList" type="GridContainer" parent="PanelContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_type_variation = &"ButtonListPanel"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer/PanelContainer"]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("3_viiye")
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="StartButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"FlatButton"
-text = "Quit Game"
+theme_type_variation = &"YellowButton"
+text = "Start"
 
-[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"FlatButton"
+theme_type_variation = &"BlueButton"
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueButton"
 text = "Credits"
 
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="QuitButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RedButton"
+text = "Quit Game"
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
