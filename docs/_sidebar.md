@@ -2,6 +2,7 @@
 * [Changelog](/changelog)
 * [Games](/games)
 * [Systems](/systems)
+* [History](/history)
 * [Credits](/credits)
 * [(Old) Addons](/old/addons)
 * [(Old) Games](/old/games)

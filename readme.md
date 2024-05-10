@@ -60,6 +60,7 @@ Docsify-built static site.
 - [Dino Website](https://russmatney.github.io/dino/#/)
     - [Games](https://russmatney.github.io/dino/#/games)
     - [Systems](https://russmatney.github.io/dino/#/systems)
+    - [History](https://russmatney.github.io/dino/#/history)
     - [Changelog](https://russmatney.github.io/dino/#/changelog)
     - [Credits](https://russmatney.github.io/dino/#/credits)
     - [(Old) Games](https://russmatney.github.io/dino/#/old/games)
