@@ -4,8 +4,42 @@
 ## Untagged
 
 
+### 9 May 2024
+
+- ([`47eed652`](https://github.com/russmatney/dino/commit/47eed652)) wip: main menu relayout, list of launch games
+
+  > These buttons don't nav to anything yet - Just whipping the main menu
+  > into shape for now.
+
+- ([`76e19d36`](https://github.com/russmatney/dino/commit/76e19d36)) ui: animatedVBox script, button and button list aseprite files
+
+### 8 May 2024
+
+- ([`851711df`](https://github.com/russmatney/dino/commit/851711df)) docs: readme rewrite/clean up
+- ([`249d7328`](https://github.com/russmatney/dino/commit/249d7328)) docs: update games list
+
+  > Probably too ambitious for this month, but today, we're going for it!
+
+- ([`74c1a44d`](https://github.com/russmatney/dino/commit/74c1a44d)) docs: move old to docs/old, add new games.md outline
+
 ### 7 May 2024
 
+- ([`08ad819e`](https://github.com/russmatney/dino/commit/08ad819e)) feat: add first villager npcs
+
+  > Nice that these get the npc state machines out of the gate -
+  > wander/hop/notice/follow/grab/throw all working.
+  > 
+  > Need animations and some randomization around colors and sizes.
+
+- ([`e5740405`](https://github.com/russmatney/dino/commit/e5740405)) fix: misc dep update errors
+- ([`a48a978f`](https://github.com/russmatney/dino/commit/a48a978f)) deps: move to simonGigant text_effects
+- ([`6179aa6a`](https://github.com/russmatney/dino/commit/6179aa6a)) deps: update phantom camera
+- ([`643e9791`](https://github.com/russmatney/dino/commit/643e9791)) deps: update gdunit
+- ([`76a2a3f7`](https://github.com/russmatney/dino/commit/76a2a3f7)) deps: update input helper/dialogue manager
+- ([`130830e1`](https://github.com/russmatney/dino/commit/130830e1)) deps: update metsys
+- ([`2879e586`](https://github.com/russmatney/dino/commit/2879e586)) docs: fix sidebar old games link
+- ([`5a8fc493`](https://github.com/russmatney/dino/commit/5a8fc493)) docs: old-games link on homepage
+- ([`3990de78`](https://github.com/russmatney/dino/commit/3990de78)) docs: update and rename changelog
 - ([`8739e515`](https://github.com/russmatney/dino/commit/8739e515)) docs: wip architecture/systems outline
 - ([`dc2adaea`](https://github.com/russmatney/dino/commit/dc2adaea)) docs: doc readme copy-pasta
 
@@ -1831,35 +1865,6 @@
   > Much simpler to use groups than to register and track all the menus individually!
 
 - ([`c6e33ccb`](https://github.com/russmatney/dino/commit/c6e33ccb)) refactor: move dino menus to dino/menus, wip game-mode button
-- ([`1f97a777`](https://github.com/russmatney/dino/commit/1f97a777)) chore: add dialogue_, sound_manager, input_helper
-
-  > Going to intergrate these helpers by nathanhoad.
-
-- ([`f6ee24dd`](https://github.com/russmatney/dino/commit/f6ee24dd)) chore: update aseprite wizard
-- ([`6defdfa6`](https://github.com/russmatney/dino/commit/6defdfa6)) chore: update pandora
-- ([`bae1aea8`](https://github.com/russmatney/dino/commit/bae1aea8)) chore: bump to 4.2.beta6, fix new lsp warnings
-
-### 11 Nov 2023
-
-- ([`c56bc6f6`](https://github.com/russmatney/dino/commit/c56bc6f6)) feat: pluggs dinolevel setup
-- ([`11a71ad5`](https://github.com/russmatney/dino/commit/11a71ad5)) misc: tweak some woods levels
-- ([`e7620bce`](https://github.com/russmatney/dino/commit/e7620bce)) feat: refactor woods into a Quest-based Dino level
-- ([`d7aacd08`](https://github.com/russmatney/dino/commit/d7aacd08)) feat: pin current scene by clicking 'pin' twice
-
-  > Extending to a next/prev with the scene nav history wouldn't be too big
-  > a leap here.
-
-- ([`0a57ae6c`](https://github.com/russmatney/dino/commit/0a57ae6c)) refactor: drop SS autoload in favor of SSData static class
-- ([`81269a2a`](https://github.com/russmatney/dino/commit/81269a2a)) refactor: move puzz from autoload to static class
-- ([`d85b8c1e`](https://github.com/russmatney/dino/commit/d85b8c1e)) refactor: drop snake game
-- ([`4e617ce1`](https://github.com/russmatney/dino/commit/4e617ce1)) refactor: drop runner, move assets to woods
-- ([`8cab5fff`](https://github.com/russmatney/dino/commit/8cab5fff)) refactor: delete DungeonCrawler
-
-  > Moves the assets into Shirt, and one basic coin implementation that
-  > apparently HatBot uses.
-
-- ([`4d5386e3`](https://github.com/russmatney/dino/commit/4d5386e3)) chore: drop Respawner concept and autoload
-- ([`d898d6f2`](https://github.com/russmatney/dino/commit/d898d6f2)) chore: drop unused Clawe.gd
 
 ## posterity.year-one
 
