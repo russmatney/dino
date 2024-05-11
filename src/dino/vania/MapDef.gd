@@ -11,8 +11,9 @@ class_name MapDef
 var room_defs: GridDefs
 @export var room_defs_path: String :
 	set(path):
-		room_defs_path = path
-		room_defs = GridParser.parse({defs_path=path})
+		if path:
+			room_defs_path = path
+			room_defs = GridParser.parse({defs_path=path})
 
 ## init #######################################################
 
