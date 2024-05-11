@@ -1,6 +1,14 @@
 extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
 class_name VaniaGame
 
+## static #######################################################
+
+static func create_game_node(def: MapDef, _opts={}):
+	var vania_game_scene = load("res://src/dino/vania/VaniaGame.tscn")
+	var game_node = vania_game_scene.instantiate()
+	game_node.map_def = def
+	return game_node
+
 # func to_printable():
 # 	return {level_def=level_def.get_display_name()}
 
@@ -19,6 +27,9 @@ var room_defs: Array[VaniaRoomDef] = []
 var generating: Thread
 
 signal finished_initial_room_gen
+
+# TODO connect and fire this if all quests (in all rooms) are complete!
+signal level_complete
 
 ## ready #######################################################
 

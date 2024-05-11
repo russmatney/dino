@@ -79,7 +79,7 @@ func build_players_grid():
 
 func start():
 	if selected_player_entity:
-		# TODO maybe clear/reset existing player ents?
+		# TODO probably clear/reset existing player ents
 		Dino.create_new_player({entity=selected_player_entity})
 		# maybe overlaps with select player/player setup stuff?
 

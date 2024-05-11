@@ -45,7 +45,7 @@ func build_games_grid():
 
 ## start game ##################################################
 
-var arcade_scene = preload("res://src/dino/modes/Arcade.tscn")
+var arcade_scene = preload("res://src/dino/modes/arcade/Arcade.tscn")
 func start_arcade_with_game(ent):
 	Navi.nav_to(arcade_scene, {setup=func(scene):
 		scene.current_game_entity = ent})

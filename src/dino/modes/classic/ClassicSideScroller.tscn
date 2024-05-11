@@ -1,32 +1,75 @@
-[gd_scene load_steps=10 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=19 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1saow"]
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_n52a3"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_tku0d"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
 [ext_resource type="Script" path="res://src/dino/levels/LevelDef.gd" id="3_w3grl"]
+[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="4_m4x81"]
+[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="5_84ljv"]
 
-[sub_resource type="Resource" id="Resource_s182i"]
-script = ExtResource("2_n52a3")
-_id = "166"
-
-[sub_resource type="Resource" id="Resource_jndqb"]
-script = ExtResource("3_w3grl")
-_id = "114"
-
-[sub_resource type="Resource" id="Resource_bnx2k"]
+[sub_resource type="Resource" id="Resource_xcmst"]
 script = ExtResource("3_w3grl")
 _id = "110"
 
-[sub_resource type="Resource" id="Resource_keskk"]
+[sub_resource type="Resource" id="Resource_xauy6"]
+script = ExtResource("4_m2oft")
+name = ""
+inputs = Array[ExtResource("4_m4x81")]([])
+level_def = SubResource("Resource_xcmst")
+room_defs_path = ""
+
+[sub_resource type="Resource" id="Resource_52bjh"]
+script = ExtResource("3_lr33u")
+_id = "122"
+
+[sub_resource type="Resource" id="Resource_tgfg0"]
+script = ExtResource("5_84ljv")
+_id = "183"
+
+[sub_resource type="Resource" id="Resource_s3fm1"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_52bjh")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[ExtResource("5_84ljv")]([SubResource("Resource_tgfg0")])
+
+[sub_resource type="Resource" id="Resource_02d4e"]
+script = ExtResource("4_m2oft")
+name = "Defeat!"
+inputs = Array[ExtResource("4_m4x81")]([SubResource("Resource_s3fm1")])
+room_defs_path = ""
+
+[sub_resource type="Resource" id="Resource_g8bv5"]
 script = ExtResource("3_w3grl")
 _id = "113"
 
+[sub_resource type="Resource" id="Resource_x0fpg"]
+script = ExtResource("4_m2oft")
+name = ""
+inputs = Array[ExtResource("4_m4x81")]([])
+level_def = SubResource("Resource_g8bv5")
+room_defs_path = ""
+
+[sub_resource type="Resource" id="Resource_of4dd"]
+script = ExtResource("3_w3grl")
+_id = "114"
+
+[sub_resource type="Resource" id="Resource_h5a41"]
+script = ExtResource("4_m2oft")
+name = ""
+inputs = Array[ExtResource("4_m4x81")]([])
+level_def = SubResource("Resource_of4dd")
+room_defs_path = ""
+
 [node name="ClassicSideScroller" type="Node2D"]
 script = ExtResource("1_5gcr3")
-player_entity = SubResource("Resource_s182i")
 _seed = 4244388041
-level_defs = Array[ExtResource("3_w3grl")]([SubResource("Resource_jndqb"), SubResource("Resource_bnx2k"), SubResource("Resource_keskk")])
+map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_xauy6"), SubResource("Resource_02d4e"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

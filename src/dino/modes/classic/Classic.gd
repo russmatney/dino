@@ -12,16 +12,16 @@ var game_node: Node2D
 		if v and Engine.is_editor_hint():
 			_seed = randi()
 
-var current_level_def: LevelDef
+var current_map_def: MapDef
 
 signal game_complete
 
-@export var level_defs: Array[LevelDef]
+@export var map_defs: Array[MapDef]
 
 ## to_pretty #################################################
 
 func to_pretty():
-	return [_seed, current_level_def, level_defs]
+	return [_seed, current_map_def, map_defs]
 
 ## ready ##################################################3
 
@@ -49,42 +49,47 @@ func _ready():
 func start_game():
 	reset_data()
 
-	var level_def = next_level_def()
+	var map_def = next_map_def()
 
-	if level_def:
-		launch_level(level_def)
+	if map_def:
+		launch_level(map_def)
 		return
 
-	Log.warn("No level_def to launch in start_game")
+	Log.warn("No map_def to launch in start_game")
 
-# return null if there are no more level defs
-func next_level_def():
-	var idx = level_defs.find(current_level_def)
+# return null if there are no more map defs
+func next_map_def():
+	var idx = map_defs.find(current_map_def)
 	idx += 1
-	if idx < len(level_defs):
-		return level_defs[idx]
+	if idx < len(map_defs):
+		return map_defs[idx]
 
 # supports restarting from the beginning
 func reset_data():
-	current_level_def = null
+	current_map_def = null
 
 ## launch_game ##################################################3
 
-func launch_level(level_def):
-	current_level_def = level_def
+func launch_level(map_def):
+	current_map_def = map_def
 
 	if game_node:
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 		await game_node.tree_exited
 
-	game_node = DinoLevel.create_level(level_def, {seed=_seed, })
+	game_node = current_map_def.new_game_node({seed=_seed, })
 	add_child(game_node)
 
-	Dino.spawn_player({level=game_node,
-		deferred=false,
-		genre_type=level_def.get_genre_type(),
-		})
+	# TODO spawn player in Dino Level (again? after all that?)
+	var genre_type
+	if map_def.level_def:
+		genre_type = map_def.level_def.get_genre_type()
+		Dino.spawn_player({
+			level=game_node,
+			deferred=false,
+			genre_type=genre_type,
+			})
 
 	game_node.level_complete.connect(_on_level_complete)
 
@@ -96,7 +101,7 @@ func _on_level_complete():
 	# TODO slow-mo, score screen with awards/progress/stats
 	# (quest data, misc fun ideas ('fighter stance': 500 pts))
 
-	var def = next_level_def()
+	var def = next_map_def()
 	if def:
 		launch_level(def)
 	else:

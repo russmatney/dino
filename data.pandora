@@ -764,11 +764,11 @@
 					},
 					"menu": {
 						"type": "resource",
-						"value": "res://src/dino/modes/ArcadeMainMenu.tscn"
+						"value": "res://src/dino/modes/arcade/ArcadeMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/Arcade.tscn"
+						"value": "res://src/dino/modes/arcade/Arcade.tscn"
 					}
 				}
 			},
@@ -785,11 +785,11 @@
 					},
 					"menu": {
 						"type": "resource",
-						"value": "res://src/dino/modes/RouletteMainMenu.tscn"
+						"value": "res://src/dino/modes/arcade/RouletteMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/Roulette.tscn"
+						"value": "res://src/dino/modes/arcade/Roulette.tscn"
 					}
 				}
 			},
@@ -968,11 +968,11 @@
 					},
 					"menu": {
 						"type": "resource",
-						"value": "res://src/dino/modes/VaniaMainMenu.tscn"
+						"value": "res://src/dino/modes/vania/VaniaMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/Vania.tscn"
+						"value": "res://src/dino/modes/vania/Vania.tscn"
 					}
 				}
 			},

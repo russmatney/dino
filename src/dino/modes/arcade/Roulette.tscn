@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ckyjgpyqno21y"]
 
-[ext_resource type="Script" path="res://src/dino/modes/Roulette.gd" id="1_coksv"]
+[ext_resource type="Script" path="res://src/dino/modes/arcade/Roulette.gd" id="1_coksv"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_bsg7k"]
 [ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="3_bv8hs"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_e47pv"]

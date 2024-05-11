@@ -1,12 +1,13 @@
 @tool
 extends CanvasLayer
 
-@onready var games_grid_container = $%GamesGridContainer
+@onready var map_defs_container = $%MapDefGridContainer
 @onready var players_grid_container = $%PlayersGridContainer
+
 @onready var button_list = $%ButtonList
 
-var game_entities = []
-var selected_game_entities = []
+var map_defs = []
+var selected_map_def
 var player_entities = []
 var selected_player_entity
 
@@ -16,8 +17,8 @@ func _ready():
 	if Engine.is_editor_hint():
 		request_ready()
 
-	build_games_grid()
 	build_players_grid()
+	build_map_def_grid()
 	reset_ui()
 
 	Music.resume_menu_song()
@@ -26,7 +27,7 @@ func _ready():
 ## focus ##################################################
 
 func set_focus():
-	var chs = games_grid_container.get_children()
+	var chs = players_grid_container.get_children()
 	if len(chs) > 0:
 		chs[0].set_focus()
 
@@ -35,30 +36,11 @@ func set_focus():
 func reset_ui():
 	reset_menu_buttons()
 
-	for ch in games_grid_container.get_children():
-		ch.is_selected = ch.entity in selected_game_entities
+	for butt in players_grid_container.get_children():
+		butt.is_selected = butt.entity == selected_player_entity
 
-	for pl in players_grid_container.get_children():
-		pl.is_selected = pl.entity == selected_player_entity
-
-## games grid ##################################################
-
-func select_game(game_entity):
-	if game_entity in selected_game_entities:
-		selected_game_entities.erase(game_entity)
-	else:
-		selected_game_entities.append(game_entity)
-
-	reset_ui()
-
-func build_games_grid():
-	game_entities = DinoGameEntity.basic_game_entities()
-	selected_game_entities = game_entities
-	U.free_children(games_grid_container)
-
-	for gm in game_entities:
-		var button = EntityButton.newButton(gm, select_game)
-		games_grid_container.add_child(button)
+	for butt in map_defs_container.get_children():
+		butt.button_pressed = butt.text == selected_map_def.name
 
 ## players grid ##################################################
 
@@ -75,13 +57,42 @@ func build_players_grid():
 		var button = EntityButton.newButton(pl, select_player)
 		players_grid_container.add_child(button)
 
+## map_def grid ##################################################
+
+func select_map_def(map_def):
+	selected_map_def = map_def
+	reset_ui()
+
+func build_map_def_grid():
+	map_defs = MapDef.all_map_defs()
+	selected_map_def = map_defs[0]
+	U.free_children(map_defs_container)
+
+	for def in map_defs:
+		var button = Button.new()
+		button.toggle_mode = true
+		button.text = def.name
+		button.pressed.connect(func(): select_map_def(def))
+		map_defs_container.add_child(button)
+
 ## start game ##################################################
 
-var roulette_scene = preload("res://src/dino/modes/Roulette.tscn")
 func start():
-	Navi.nav_to(roulette_scene, {setup=func(scene):
-		scene.update_game_ids(selected_game_entities)
-		scene.set_player_entity(selected_player_entity)
+	if selected_player_entity:
+		# TODO probably clear/reset existing player ents
+		Dino.create_new_player({entity=selected_player_entity})
+		# maybe overlaps with select player/player setup stuff?
+
+	var mode = Dino.get_game_mode()
+	var scene
+	if mode:
+		scene = mode.get_root_scene()
+	if not scene:
+		Log.warn("Classic menu start found no game mode/scene, using fall back")
+		scene = load("res://src/dino/modes/vania/Vania.tscn")
+	Navi.nav_to(scene, {setup=func(sc):
+		if selected_map_def:
+			sc.set_map_def(selected_map_def)
 		})
 
 ## menu buttons ##################################################
@@ -89,16 +100,8 @@ func start():
 func get_menu_buttons():
 	return [
 		{
-			label="Start with %d games!" % len(selected_game_entities),
-			is_disabled=func(): return len(selected_game_entities) < 1,
+			label="Start DinoVania!",
 			fn=start,
-		},
-		{
-			label="Deselect all",
-			fn=func():
-			selected_game_entities = []
-			reset_ui.call_deferred(),
-			is_disabled=func(): return len(selected_game_entities) == 0,
 		},
 		{
 			label="Back to Dino Menu",

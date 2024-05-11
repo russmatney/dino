@@ -5,7 +5,9 @@ class_name MapDef
 
 @export var name: String
 @export var inputs: Array[RoomInput]
+@export var level_def: LevelDef
 
+# idea towards flattening level_def details into map_def
 var room_defs: GridDefs
 @export var room_defs_path: String :
 	set(path):
@@ -22,6 +24,11 @@ func _init(opts={}):
 		room_defs_path = opts.get("room_defs_path")
 		# sets room_defs via setter ... ?
 
+func new_game_node(opts={}):
+	if level_def:
+		return DinoLevel.create_level(level_def, opts)
+	else:
+		return VaniaGame.create_game_node(self, opts)
 
 ############################################################
 ## static #######################################################

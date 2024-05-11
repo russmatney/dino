@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://tfkeuag6o577"]
 
-[ext_resource type="Script" path="res://src/dino/modes/Vania.gd" id="1_w5rvh"]
+[ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_w5rvh"]
 
 [node name="Vania" type="Node2D"]
 script = ExtResource("1_w5rvh")
