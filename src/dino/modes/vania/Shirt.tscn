@@ -1,0 +1,75 @@
+[gd_scene load_steps=16 format=3 uid="uid://dvs5rm3o3jf28"]
+
+[ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_tu78o"]
+[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_l7gpm"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="3_p14wy"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="4_nolob"]
+[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="5_5h2xo"]
+
+[sub_resource type="Resource" id="Resource_pldw8"]
+script = ExtResource("2_l7gpm")
+_id = "138"
+
+[sub_resource type="Resource" id="Resource_771yd"]
+script = ExtResource("2_l7gpm")
+_id = "137"
+
+[sub_resource type="Resource" id="Resource_4wrvh"]
+script = ExtResource("2_l7gpm")
+_id = "142"
+
+[sub_resource type="Resource" id="Resource_5wvgl"]
+script = ExtResource("2_l7gpm")
+_id = "163"
+
+[sub_resource type="Resource" id="Resource_1cyxs"]
+resource_name = "Treasures"
+script = ExtResource("3_p14wy")
+genre_type = 1
+entities = Array[ExtResource("2_l7gpm")]([SubResource("Resource_pldw8"), SubResource("Resource_771yd"), SubResource("Resource_4wrvh"), SubResource("Resource_5wvgl")])
+enemies = Array[ExtResource("4_nolob")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+
+[sub_resource type="Resource" id="Resource_j0ni8"]
+script = ExtResource("4_nolob")
+_id = "168"
+
+[sub_resource type="Resource" id="Resource_yi7xt"]
+resource_name = "BlobWalkers"
+script = ExtResource("3_p14wy")
+genre_type = 1
+entities = Array[ExtResource("2_l7gpm")]([])
+enemies = Array[ExtResource("4_nolob")]([SubResource("Resource_j0ni8"), SubResource("Resource_j0ni8")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+
+[sub_resource type="Resource" id="Resource_r16k6"]
+script = ExtResource("4_nolob")
+_id = "169"
+
+[sub_resource type="Resource" id="Resource_i2p2u"]
+resource_name = "BlobChasers"
+script = ExtResource("3_p14wy")
+genre_type = 1
+entities = Array[ExtResource("2_l7gpm")]([])
+enemies = Array[ExtResource("4_nolob")]([SubResource("Resource_r16k6"), SubResource("Resource_r16k6"), SubResource("Resource_r16k6")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+
+[sub_resource type="Resource" id="Resource_sfqyh"]
+resource_name = "Shirt Map Def"
+script = ExtResource("5_5h2xo")
+name = ""
+inputs = Array[ExtResource("3_p14wy")]([SubResource("Resource_1cyxs"), SubResource("Resource_yi7xt"), SubResource("Resource_i2p2u")])
+room_defs_path = ""
+
+[node name="Shirt" type="Node2D"]
+script = ExtResource("1_tu78o")
+map_def = SubResource("Resource_sfqyh")

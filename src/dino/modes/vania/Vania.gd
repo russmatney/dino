@@ -12,6 +12,10 @@ var game_node: Node2D
 		if v and Engine.is_editor_hint():
 			Dino.reseed()
 
+signal game_complete
+
+## to_pretty ##################################################3
+
 func to_pretty():
 	return [player_entity, map_def]
 
@@ -21,6 +25,13 @@ func _ready():
 	Dino.set_game_mode(Pandora.get_entity(ModeIds.VANIA))
 	Dino.notif({type="banner", text="Vania",})
 
+	game_complete.connect(_on_game_complete)
+
+	# TODO the menus should create the player entity themselves
+	# instead of relying on some api to pass it in
+
+	# this supports running classic directly (not from the setup menu)
+	# TODO pop up the select-character menu directly
 	if not Engine.is_editor_hint():
 		if not Dino.current_player_entity():
 			if player_entity == null:
@@ -69,4 +80,12 @@ func _on_level_complete():
 	# if def:
 	# 	launch_level(def)
 	# else:
-	# 	game_complete.emit()
+
+	game_complete.emit()
+
+func _on_game_complete():
+	Dino.notif({type="banner", text="Game Complete",})
+
+	# TODO win menu instead of forced nav
+	# show high scores, stats, button for credits, main-menu, replay new seed
+	Navi.nav_to_main_menu()

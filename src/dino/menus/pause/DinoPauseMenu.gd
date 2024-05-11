@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+# TODO create per-game-mode tab
+
 ## vars ##########################################
 
 @onready var hero_label = $%HeroLabel

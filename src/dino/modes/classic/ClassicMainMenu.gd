@@ -5,6 +5,9 @@ extends CanvasLayer
 @onready var players_grid_container = $%PlayersGridContainer
 @onready var button_list = $%ButtonList
 
+# TODO convert games grid to list of map_defs
+# TODO built menus into pause menu?
+
 var game_entities = []
 var selected_game_entities = []
 var player_entities = []

@@ -2046,10 +2046,6 @@
 						"type": "string",
 						"value": "Classic Mode (SideScroller)"
 					},
-					"menu": {
-						"type": "resource",
-						"value": "res://src/dino/modes/classic/ClassicMainMenu.tscn"
-					},
 					"root_scene": {
 						"type": "resource",
 						"value": "res://src/dino/modes/classic/ClassicSideScroller.tscn"
@@ -2071,10 +2067,6 @@
 						"type": "bool",
 						"value": true
 					},
-					"menu": {
-						"type": "resource",
-						"value": "res://src/dino/modes/classic/ClassicMainMenu.tscn"
-					},
 					"root_scene": {
 						"type": "resource",
 						"value": "res://src/dino/modes/classic/ClassicTopDown.tscn"
@@ -2091,6 +2083,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Dungeon Crawler"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/vania/Shirt.tscn"
 					}
 				}
 			},
@@ -2104,6 +2100,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Tower"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/runner/Tower.tscn"
 					}
 				}
 			},
@@ -2117,6 +2117,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Woods"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/runner/Woods.tscn"
 					}
 				}
 			},
@@ -2130,6 +2134,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Mountain"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/runner/Mountain.tscn"
 					}
 				}
 			},
@@ -2156,6 +2164,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Boss Rush"
+					},
+					"root_scene": {
+						"type": "resource",
+						"value": "res://src/dino/modes/runner/BossRush.tscn"
 					}
 				}
 			}
