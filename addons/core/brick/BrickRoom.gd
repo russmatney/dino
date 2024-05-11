@@ -125,18 +125,19 @@ static func add_entity(crd, room: BrickRoom, ent, opts: BrickRoomOpts):
 	return ent
 
 static func add_entities(room, opts):
-	var crds = room.def.coords()
-	# TODO work around label to entity
-	for label in opts.label_to_entity:
-		# TODO may want to pull/check some runtime instances
-		var ent = DinoEntity.entity_for_label(label)
-		if not ent:
-			ent = DinoEnemy.enemy_for_label(label)
-		if not ent:
-			Log.warn("No dino entity/enemy for label", label)
-			ent = opts.label_to_entity.get(label)
-		crds.filter(func(c): return label in c.cell).map(func(crd):
-			add_entity(crd, room, ent, opts))
+	for crd in room.def.coords():
+		for label in crd.cell:
+			if label in ["Tile"]:
+				continue
+			var ent = DinoEntity.entity_for_label(label)
+			if not ent:
+				ent = DinoEnemy.enemy_for_label(label)
+			if not ent:
+				ent = opts.label_to_entity.get(label)
+			if not ent:
+				Log.warn("No dino entity/enemy for label, skipping", label)
+				continue
+			add_entity(crd, room, ent, opts)
 
 ## color rect ##################################################################
 
