@@ -7,7 +7,7 @@ LEGEND
 b = Blob
 c = CookingPot
 d = Void
-e = Enemy
+e = Robot
 l = Leaf
 o = Target
 p = Player
@@ -90,7 +90,7 @@ xxxxxxxxxxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxxxxxxxxxx
 
 
-name Enemy tower
+name Robot tower
 has_enemies
 
 ...........

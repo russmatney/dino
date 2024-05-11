@@ -7,7 +7,7 @@ LEGEND
 . = Floor
 p = Player and Floor
 w = Wall
-e = Enemy and Floor
+e = Goon and Floor
 
 ======================
 ROOMS

@@ -127,7 +127,7 @@ static func add_entity(crd, room: BrickRoom, ent, opts: BrickRoomOpts):
 static func add_entities(room, opts):
 	for crd in room.def.coords():
 		for label in crd.cell:
-			if label in ["Tile"]:
+			if label in ["Tile", "Empty"]:
 				continue
 			var ent = DinoEntity.entity_for_label(label)
 			if not ent:

@@ -7,7 +7,7 @@ LEGEND
 p = Player
 x = Tile
 o = Target
-e = Enemy
+e = Robot
 
 ============
 ROOMS
