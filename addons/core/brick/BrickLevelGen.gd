@@ -264,6 +264,7 @@ func generate(opts={}):
 	# overwrite so that get_room_opts can read from the updated node props
 	room_count = opts.get("room_count", room_count)
 	tile_size = opts.get("tile_size", tile_size)
+	# TODO track down _seed usage, pull from global like Dino ?
 	_seed = opts.get("seed", _seed)
 
 	if self.has_method("get_room_opts"):

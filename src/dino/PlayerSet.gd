@@ -94,10 +94,11 @@ func spawn_new(opts={}):
 		else:
 			U.add_child_to_level(spawn_point, p.node, false)
 	else:
-		Log.warn("No spawn_point found, adding player to current_scene")
 		if deferred:
+			Log.warn("No spawn_point found, adding player to current_scene (deferred)")
 			Navi.get_tree().current_scene.add_child.call_deferred(p.node)
 		else:
+			Log.warn("No spawn_point found, adding player to current_scene")
 			Navi.get_tree().current_scene.add_child(p.node)
 
 ## respawn #################################################

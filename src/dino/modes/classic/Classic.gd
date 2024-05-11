@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 ## vars ##################################################3
@@ -11,44 +12,41 @@ var game_node: Node2D
 		if v and Engine.is_editor_hint():
 			_seed = randi()
 
-@export var round_num: int = 0
-@export var stage_num: int = 0
 var current_level_def: LevelDef
 
-signal round_complete
 signal game_complete
 
-var round_defs = [[
-		LevelDefIds.LEAFRUNNER,
-		LevelDefIds.WILDCARD,
-	], [
-		LevelDefIds.BREAKTHETARGETS,
-	# ], [
-	# TODO polygon team! beat up a car! giant hario!
-	], [
-		LevelDefIds.BOSSBATTLE
-	],
-	]
+@export var level_defs: Array[LevelDef]
+
+## to_pretty #################################################
+
+func to_pretty():
+	return [_seed, current_level_def, level_defs]
 
 ## ready ##################################################3
 
 func _ready():
-	Dino.set_game_mode(Pandora.get_entity(ModeIds.CLASSIC))
-	Dino.notif({type="banner", text="Classic",})
+	Dino.set_game_mode(Pandora.get_entity(ModeIds.CLASSICSS))
+	Dino.notif({type="banner", text="Classic Mode",})
 
-	round_complete.connect(_on_round_complete)
 	game_complete.connect(_on_game_complete)
 
-	if player_entity == null:
-		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+	# TODO the menus should create the player entity themselves
+	# instead of relying on some api to pass it in
 
-	start_game()
+	# this supports running classic directly (not from the setup menu)
+	# TODO pop up the select-character menu directly
+	if not Engine.is_editor_hint():
+		if not Dino.current_player_entity():
+			if player_entity == null:
+				player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+			Dino.create_new_player({entity=player_entity})
+
+		start_game()
 
 ## start_game ##################################################3
 
 func start_game():
-	_seed = randi()
-	seed(_seed)
 	reset_data()
 
 	var level_def = next_level_def()
@@ -59,32 +57,16 @@ func start_game():
 
 	Log.warn("No level_def to launch in start_game")
 
+# return null if there are no more level defs
 func next_level_def():
-	var level_id
-	if round_num <= len(round_defs) - 1:
-		var stages = round_defs[round_num]
-		if stage_num <= len(stages) - 1:
-			level_id = stages[stage_num]
-		else:
-			# right place?
-			round_complete.emit()
+	var idx = level_defs.find(current_level_def)
+	idx += 1
+	if idx < len(level_defs):
+		return level_defs[idx]
 
-			round_num += 1
-			stage_num = 0
-			return next_level_def()
-
-	if level_id:
-		return Pandora.get_entity(level_id)
-
+# supports restarting from the beginning
 func reset_data():
-	stage_num = 0
-	round_num = 0
-
-## set_player_entity #################################333
-
-# presumably from a menu somewhere
-func set_player_entity(ent: DinoPlayerEntity):
-	player_entity = ent
+	current_level_def = null
 
 ## launch_game ##################################################3
 
@@ -96,13 +78,11 @@ func launch_level(level_def):
 		game_node.queue_free()
 		await game_node.tree_exited
 
-	if not Dino.current_player_entity():
-		Dino.create_new_player({entity=player_entity})
-
 	game_node = DinoLevel.create_level(level_def, {seed=_seed, })
 	add_child(game_node)
 
-	Dino.spawn_player({level=game_node, deferred=false,
+	Dino.spawn_player({level=game_node,
+		deferred=false,
 		genre_type=level_def.get_genre_type(),
 		})
 
@@ -112,7 +92,9 @@ func launch_level(level_def):
 
 func _on_level_complete():
 	Dino.notif({type="banner", text="Level Complete",})
-	stage_num += 1
+
+	# TODO slow-mo, score screen with awards/progress/stats
+	# (quest data, misc fun ideas ('fighter stance': 500 pts))
 
 	var def = next_level_def()
 	if def:
@@ -120,15 +102,9 @@ func _on_level_complete():
 	else:
 		game_complete.emit()
 
-func _on_round_complete():
-	Dino.notif({type="banner", text="Round Complete",})
-	await Jumbotron.jumbo_notif({
-		header="Round complete!",
-		body="Wowie zowie!",
-		})
-
 func _on_game_complete():
 	Dino.notif({type="banner", text="Game Complete",})
 
-	# TODO nav to high scores / credits
+	# TODO win menu instead of forced nav
+	# show high scores, stats, button for credits, main-menu, replay new seed
 	Navi.nav_to_main_menu()

@@ -77,13 +77,20 @@ func build_players_grid():
 
 ## start game ##################################################
 
-var classic_scene = preload("res://src/dino/modes/Classic.tscn")
 func start():
-	# TODO get this scene from the entity's root_scene?
-	Navi.nav_to(classic_scene, {setup=func(scene):
-		# scene.update_game_ids(selected_game_entities)
-		scene.set_player_entity(selected_player_entity)
-		})
+	if selected_player_entity:
+		# TODO maybe clear/reset existing player ents?
+		Dino.create_new_player({entity=selected_player_entity})
+		# maybe overlaps with select player/player setup stuff?
+
+	var mode = Dino.get_game_mode()
+	var scene
+	if mode:
+		scene = mode.get_root_scene()
+	if not scene:
+		Log.warn("Classic menu start found no game mode/scene, using fall back")
+		scene = load("res://src/dino/modes/classic/Classic.tscn")
+	Navi.nav_to(scene)
 
 ## menu buttons ##################################################
 

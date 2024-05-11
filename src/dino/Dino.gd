@@ -72,6 +72,7 @@ func is_debug_mode():
 ## launch/start game ##########################################################
 
 func launch(mode: DinoModeEntity, opts={}):
+	Log.pr("launching game mode", mode)
 	game_mode = mode
 	# TODO menu should support a mode with or without a menu
 	if mode.get_menu() != null:

@@ -806,11 +806,11 @@
 					},
 					"menu": {
 						"type": "resource",
-						"value": "res://src/dino/modes/ClassicMainMenu.tscn"
+						"value": "res://src/dino/modes/classic/ClassicMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/Classic.tscn"
+						"value": "res://src/dino/modes/classic/Classic.tscn"
 					}
 				}
 			},
@@ -2048,11 +2048,11 @@
 					},
 					"menu": {
 						"type": "resource",
-						"value": "res://src/dino/modes/ClassicMainMenu.tscn"
+						"value": "res://src/dino/modes/classic/ClassicMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/Classic.tscn"
+						"value": "res://src/dino/modes/classic/ClassicSideScroller.tscn"
 					}
 				}
 			},
@@ -2073,11 +2073,11 @@
 					},
 					"menu": {
 						"type": "resource",
-						"value": "res://src/dino/modes/ClassicMainMenu.tscn"
+						"value": "res://src/dino/modes/classic/ClassicMainMenu.tscn"
 					},
 					"root_scene": {
 						"type": "resource",
-						"value": "res://src/dino/modes/Classic.tscn"
+						"value": "res://src/dino/modes/classic/ClassicTopDown.tscn"
 					}
 				}
 			},

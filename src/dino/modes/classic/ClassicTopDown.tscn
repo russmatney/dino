@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsd08snpn2aoj"]
+
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ep4vf"]
+[ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_golj5"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_kllka"]
+
+[node name="ClassicTopDown" type="Node2D"]
+script = ExtResource("1_golj5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("1_ep4vf")
+
+[node name="DinoHUD" parent="." instance=ExtResource("2_kllka")]
