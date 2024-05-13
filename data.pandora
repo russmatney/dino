@@ -783,6 +783,10 @@
 						"type": "string",
 						"value": "Roulette"
 					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
+					},
 					"menu": {
 						"type": "resource",
 						"value": "res://src/dino/modes/arcade/RouletteMainMenu.tscn"
@@ -803,6 +807,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Classic"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
 					},
 					"menu": {
 						"type": "resource",
@@ -965,6 +973,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Vania"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
 					},
 					"menu": {
 						"type": "resource",
@@ -2065,7 +2077,7 @@
 					},
 					"is_disabled": {
 						"type": "bool",
-						"value": true
+						"value": false
 					},
 					"root_scene": {
 						"type": "resource",

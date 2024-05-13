@@ -1,14 +1,54 @@
-[gd_scene load_steps=4 format=3 uid="uid://bl0gvfqtp6t4w"]
+[gd_scene load_steps=15 format=3 uid="uid://bl0gvfqtp6t4w"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_s1obe"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_6u5aj"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="2_sfvd1"]
+[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="3_qq26v"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_sg7uu"]
+[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="5_8fw4a"]
+
+[sub_resource type="Resource" id="Resource_dstqj"]
+script = ExtResource("2_6u5aj")
+_id = "125"
+
+[sub_resource type="Resource" id="Resource_v00y0"]
+script = ExtResource("2_6u5aj")
+_id = "122"
+
+[sub_resource type="Resource" id="Resource_seprs"]
+script = ExtResource("3_qq26v")
+_id = "147"
+
+[sub_resource type="Resource" id="Resource_nivhk"]
+script = ExtResource("3_qq26v")
+_id = "149"
+
+[sub_resource type="Resource" id="Resource_n686k"]
+script = ExtResource("3_qq26v")
+_id = "139"
+
+[sub_resource type="Resource" id="Resource_gkukq"]
+script = ExtResource("5_8fw4a")
+_id = "183"
+
+[sub_resource type="Resource" id="Resource_ca6cn"]
+script = ExtResource("4_sg7uu")
+genre_type = 0
+entities = Array[ExtResource("3_qq26v")]([SubResource("Resource_seprs"), SubResource("Resource_nivhk"), SubResource("Resource_n686k")])
+enemies = Array[ExtResource("2_6u5aj")]([SubResource("Resource_dstqj"), SubResource("Resource_v00y0")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[ExtResource("5_8fw4a")]([SubResource("Resource_gkukq")])
 
 [sub_resource type="Resource" id="Resource_4fbi3"]
 resource_name = "Tower Map Def"
 script = ExtResource("2_sfvd1")
 name = "Climb the Tower!"
-inputs = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
-room_defs_path = ""
+input = SubResource("Resource_ca6cn")
+rooms = Array[ExtResource("4_sg7uu")]([])
+sub_map_defs = Array[ExtResource("2_sfvd1")]([])
+grid_defs_path = ""
 
 [node name="Tower" type="Node2D"]
 script = ExtResource("1_s1obe")

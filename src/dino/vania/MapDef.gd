@@ -6,9 +6,6 @@ class_name MapDef
 # name of the mapDef
 @export var name: String
 
-# deprecated
-@export var inputs: Array[MapInput]
-
 # inputs to pull from in any room
 @export var input: MapInput
 
@@ -33,11 +30,6 @@ var grid_defs: GridDefs
 
 func _init(opts={}):
 	name = opts.get("name", "New Map Def")
-	inputs.assign(opts.get("inputs", []))
-
-	if opts.get("grid_defs_path"):
-		grid_defs_path = opts.get("grid_defs_path")
-		# sets grid_defs via setter ... ?
 
 func new_game_node(opts={}):
 	if level_def:
@@ -85,7 +77,7 @@ static func all_map_defs():
 	]
 
 static func spawn_room(_opts={}) -> MapDef:
-	return MapDef.new({inputs=[
+	return MapDef.new({rooms=[
 		MapInput.merge_many([
 			MapInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
@@ -96,11 +88,11 @@ static func spawn_room(_opts={}) -> MapDef:
 	]})
 
 static func random_room(_opts={}) -> MapDef:
-	return MapDef.new({inputs=[MapInput.random_room()]})
+	return MapDef.new({rooms=[MapInput.random_room()]})
 
 static func random_rooms(opts={}) -> MapDef:
-	var rooms = U.repeat_fn(MapInput.random_room, opts.get("count", U.rand_of([2, 3, 4])))
-	return MapDef.new({inputs=rooms})
+	var inpts = U.repeat_fn(MapInput.random_room, opts.get("count", U.rand_of([2, 3, 4])))
+	return MapDef.new({rooms=inpts})
 
 static func default_game(_opts={}) -> MapDef:
 	var inpts = [
@@ -140,7 +132,7 @@ static func default_game(_opts={}) -> MapDef:
 	]
 	inpts.append_array(U.repeat_fn(MapInput.random_room, 3))
 
-	return MapDef.new({name="Default Vania", inputs=inpts})
+	return MapDef.new({name="Default Vania", rooms=inpts})
 
 # village def
 #
@@ -148,7 +140,7 @@ static func default_game(_opts={}) -> MapDef:
 static func village(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Village",
-		inputs=[MapInput.with({
+		rooms=[MapInput.with({
 			entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
 
@@ -230,7 +222,7 @@ static func topdown_game(_opts={}) -> MapDef:
 	inpts.append_array(U.repeat_fn(func():
 		return MapInput.random_room().merge(MapInput.topdown()),
 		3))
-	return MapDef.new({name="TopDown Game", inputs=inpts})
+	return MapDef.new({name="TopDown Game", rooms=inpts})
 
 static func mixed_genre_game(_opts={}) -> MapDef:
 	var inpts = [
@@ -260,12 +252,12 @@ static func mixed_genre_game(_opts={}) -> MapDef:
 			MapInput.has_effects({effects=[RoomEffect.dust()]}),
 		]),
 	]
-	return MapDef.new({name="Mixed Genre Game", inputs=inpts})
+	return MapDef.new({name="Mixed Genre Game", rooms=inpts})
 
 static func tower_game(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Tower",
-		inputs=[
+		rooms=[
 			MapInput.merge_many([
 				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
@@ -299,7 +291,7 @@ static func tower_game(_opts={}) -> MapDef:
 static func woods_game(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Woods",
-		inputs=[
+		rooms=[
 			MapInput.merge_many([
 				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
@@ -334,7 +326,7 @@ static func woods_game(_opts={}) -> MapDef:
 static func arcade_game(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Arcade",
-		inputs=[
+		rooms=[
 			MapInput.merge_many([
 				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
