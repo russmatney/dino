@@ -2129,7 +2129,7 @@
 					},
 					"level_gen_script": {
 						"type": "resource",
-						"value": "res://src/dino/levels/DinoLevel.tscn::GDScript_jxoqe"
+						"value": "res://src/dino/levels/shirt/ShirtLevelGen.gd"
 					}
 				}
 			},

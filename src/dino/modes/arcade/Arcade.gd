@@ -4,13 +4,13 @@ extends Node2D
 
 # TODO more games, and pull these from pandora
 var game_ids = [
-	DinoGameEntityIds.SUPERELEVATORLEVEL,
-	DinoGameEntityIds.SHIRT,
-	DinoGameEntityIds.TOWERJET,
-	DinoGameEntityIds.THEWOODS,
+	LevelDefIds.SUPERELEVATORLEVEL,
+	LevelDefIds.SHIRT,
+	LevelDefIds.TOWER,
+	LevelDefIds.WOODS,
 	]
 
-@export var current_game_entity: DinoGameEntity
+@export var current_def: LevelDef
 @export var player_entity: DinoPlayerEntity
 var game_node: Node2D
 
@@ -34,31 +34,31 @@ func _ready():
 	_seed = randi()
 	seed(_seed)
 
-	var game_entity = current_game_entity
-	if not game_entity:
-		game_entity = random_game()
+	var def = current_def
+	if not def:
+		def = random_game()
 
 	if player_entity == null:
 		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 
-	if not game_entity:
-		Log.warn("Could not find game_entity!")
+	if not def:
+		Log.warn("Could not find def!")
 	else:
-		launch_game(game_entity)
+		launch_game(def)
 
 ## select a game ##################################################3
 
 func random_game():
 	var eid = U.rand_of(game_ids)
-	var game_entity = Pandora.get_entity(eid)
-	return game_entity
+	var level_def = Pandora.get_entity(eid)
+	return level_def
 
 ## launch game ##################################################3
 
-func launch_game(game_entity=null):
-	if game_entity == null:
-		game_entity = current_game_entity
-	current_game_entity = game_entity
+func launch_game(def=null):
+	if def == null:
+		def = current_def
+	current_def = def
 
 	if game_node:
 		remove_child.call_deferred(game_node)
@@ -66,18 +66,13 @@ func launch_game(game_entity=null):
 		await game_node.tree_exited
 
 	if not Dino.current_player_entity():
-		Dino.create_new_player({
-			genre_type=game_entity.get_genre_type(),
-			entity=player_entity,
-			})
+		Dino.create_new_player({entity=player_entity})
 
 	var level_opts = {seed=_seed, room_count=room_count,}
 
-	game_node = DinoLevel.create_level_from_game(game_entity, level_opts)
+	game_node = DinoLevel.create_level(def, level_opts)
 
 	add_child(game_node)
-
-	Dino.spawn_player({level=game_node, deferred=false})
 
 	if game_node.has_signal("level_complete"):
 		game_node.level_complete.connect(_on_level_complete)

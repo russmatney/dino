@@ -9,14 +9,14 @@ extends Node2D
 # @export var game_ids: Array[DinoGameEntity] = []
 @export var game_ids: Array = []
 var fb_game_ids = [
-	DinoGameEntityIds.SHIRT,
-	DinoGameEntityIds.TOWERJET,
-	# DinoGameEntityIds.SUPERELEVATORLEVEL,
-	DinoGameEntityIds.THEWOODS,
+	LevelDefIds.SHIRT,
+	LevelDefIds.TOWER,
+	# LevelDefIds.SUPERELEVATORLEVEL,
+	LevelDefIds.WOODS,
 	]
 
 @export var player_entity: DinoPlayerEntity
-@export var current_game_entity: DinoGameEntity
+@export var current_def: LevelDef
 var played_game_records = []
 var game_node: Node2D
 
@@ -44,33 +44,33 @@ func _ready():
 	if player_entity == null:
 		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
 
-	start_round(current_game_entity)
+	start_round(current_def)
 
 ## start_round ##################################################3
 
 func next_random_game():
 	# PlayedGameRecords maybe a collection that manages this index+filter (and game selection?)
-	var played_ids = played_game_records.map(func(x): return x.game_entity.get_entity_id())
+	# var played_ids = played_game_records.map(func(x): return x.game_entity.get_entity_id())
+	var played_ids = []
 	var gs = game_ids.filter(func(g_id): return not g_id in played_ids)
 	var eid = U.rand_of(gs)
 	if eid:
-		var entity = Pandora.get_entity(eid)
-		return entity
+		return Pandora.get_entity(eid)
 
-func start_round(entity=null):
+func start_round(def=null):
 	Dino.notif({type="banner", text="Begin Round %s" % round_num,})
 	_seed = randi()
 	seed(_seed)
 	reset_game_ids()
 
-	if not entity:
-		entity = next_random_game()
+	if not def:
+		def = next_random_game()
 
-	if entity:
-		launch_game(entity)
+	if def:
+		launch_game(def)
 		return
 
-	Log.warn("No entity to launch in start_round")
+	Log.warn("No def to launch in start_round")
 
 func reset_game_ids():
 	if game_ids.filter(func(x): return x).is_empty():
@@ -78,7 +78,7 @@ func reset_game_ids():
 	played_game_records = []
 
 func update_game_ids(games):
-	current_game_entity = null
+	current_def = null
 	game_ids = games.map(func(e): return e.get_entity_id())
 
 func set_player_entity(ent: DinoPlayerEntity):
@@ -87,7 +87,7 @@ func set_player_entity(ent: DinoPlayerEntity):
 ## launch_game ##################################################3
 
 func launch_game(game_entity):
-	current_game_entity = game_entity
+	current_def = game_entity
 	played_game_records.append({game_entity=game_entity})
 
 	Records.start_game({game_entity=game_entity})
@@ -124,9 +124,9 @@ func _on_level_complete():
 
 	Records.complete_game({})
 
-	var entity = next_random_game()
-	if entity:
-		launch_game(entity)
+	var def = next_random_game()
+	if def:
+		launch_game(def)
 		return # don't emit if we launched a new game
 
 	round_complete.emit()
