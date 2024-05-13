@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_1wsgr"]
 [ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/art/ui/spaceship_background.png" id="2_dw7vg"]
 [ext_resource type="Script" path="res://src/dino/vania/VaniaRoomDef.gd" id="2_sq332"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="3_1w2s4"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="3_1w2s4"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="3_tseep"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="4_2y0uv"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTileMap.gd" id="6_q8wsp"]

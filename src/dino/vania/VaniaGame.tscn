@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_atmrs"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="2_bkt6h"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_bkt6h"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_lpe04"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="4_8b2sd"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]

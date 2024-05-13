@@ -7,7 +7,7 @@
 resource_name = "Tower Map Def"
 script = ExtResource("2_sfvd1")
 name = "Climb the Tower!"
-inputs = Array[Resource("res://src/dino/vania/RoomInput.gd")]([])
+inputs = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
 room_defs_path = ""
 
 [node name="Tower" type="Node2D"]

@@ -64,15 +64,15 @@ func fallback_map_def() -> MapDef:
 		name="Fallback Map Def",
 		inputs=(func():
 		var inputs = [
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
 					DinoEntityIds.CANDLE,
 				]}),
-				RoomInput.small_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.snow_fall()]})
+				MapInput.small_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.snow_fall()]})
 			])]
-		inputs.append_array(U.repeat_fn(RoomInput.random_room, 2))
+		inputs.append_array(U.repeat_fn(MapInput.random_room, 2))
 		return inputs
 		).call()})
 

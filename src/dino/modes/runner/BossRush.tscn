@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://d0tp33mwvlvsa"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_rr2qx"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="2_1dfhy"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_1dfhy"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="2_kols8"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_rn2ry"]
 

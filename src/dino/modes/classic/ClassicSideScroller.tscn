@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
 [ext_resource type="Script" path="res://src/dino/levels/LevelDef.gd" id="3_w3grl"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="4_m4x81"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="5_84ljv"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="7_bmte7"]
 

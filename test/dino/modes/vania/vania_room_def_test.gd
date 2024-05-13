@@ -28,11 +28,11 @@ func test_get_size():
 ## init ###################################################################
 
 func test_creating_with_room_inputs():
-	var rd = VaniaRoomDef.new({input=RoomInput.small_room_shape()})
+	var rd = VaniaRoomDef.new({input=MapInput.small_room_shape()})
 	assert_array(rd.local_cells).is_equal([Vector3i(0, 0, 0)])
 
 	# should normalize room shapes
-	rd = VaniaRoomDef.new({input=RoomInput.has_room({
+	rd = VaniaRoomDef.new({input=MapInput.has_room({
 		shape=[Vector3i(-4, 8, 0)]
 		})})
 	assert_array(rd.local_cells).is_equal([Vector3i(0, 0, 0)])

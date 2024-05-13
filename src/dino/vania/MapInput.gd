@@ -1,5 +1,5 @@
 extends Resource
-class_name RoomInput
+class_name MapInput
 
 # TODO support one way platforms, spikes via grid/tiles
 # static var all_entities = [
@@ -84,8 +84,8 @@ func to_printable():
 
 ## merge ######################################################
 
-func merge(b: RoomInput):
-	return RoomInput.new({
+func merge(b: MapInput):
+	return MapInput.new({
 		genre_type=U._or(b.genre_type, genre_type),
 		entities=U.append_array(entities, b.entities),
 		enemies=U.append_array(enemies, b.enemies),
@@ -119,10 +119,10 @@ static func merge_many(inputs):
 # not too sure how necessary apply and update_def are anymore
 # updates the passed room def with the passed room input
 # maintains the existing def's local_cells
-static func apply(input: RoomInput, def: VaniaRoomDef):
+static func apply(input: MapInput, def: VaniaRoomDef):
 	var existing_shape = def.local_cells
 
-	if not input is RoomInput:
+	if not input is MapInput:
 		Log.warn("Unhandled input passed to apply, aborting", input)
 		return
 
@@ -139,26 +139,26 @@ static func apply(input: RoomInput, def: VaniaRoomDef):
 ## room components ######################################################33
 
 static func random_enemies(opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		enemies=U.rand_of(opts.get("enemy_entities", DinoEnemy.all_enemies()), U.rand_of([0,1,2,3]), true)
 		})
 
 static func random_entities(opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		entities=U.rand_of(opts.get("entities", DinoEntity.all_entities()), U.rand_of([2,3,4]))
 		})
 
 static func random_room_shapes(opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_shapes=opts.get("room_shapes", all_room_shapes.values()),
 		})
 
 static func random_tiles(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		tiles=[DinoTiles.all_tiles().pick_random()]})
 
 static func random_effects(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_effects=U.rand_of([
 			RoomEffect.random_effect(),
 			RoomEffect.random_effect(),
@@ -176,38 +176,38 @@ static func random_room(opts={}):
 
 static func has_genre(opts):
 	if opts.get("genre_type"):
-		return RoomInput.new({genre_type=opts.get("genre_type"),})
+		return MapInput.new({genre_type=opts.get("genre_type"),})
 
 static func sidescroller():
-	return RoomInput.new({genre_type=DinoData.GenreType.SideScroller})
+	return MapInput.new({genre_type=DinoData.GenreType.SideScroller})
 
 static func topdown():
-	return RoomInput.new({genre_type=DinoData.GenreType.TopDown})
+	return MapInput.new({genre_type=DinoData.GenreType.TopDown})
 
 static func beatemup():
-	return RoomInput.new({genre_type=DinoData.GenreType.BeatEmUp})
+	return MapInput.new({genre_type=DinoData.GenreType.BeatEmUp})
 
 ## room effects ######################################################33
 
 static func has_effects(opts):
 	if opts.get("effects"):
-		return RoomInput.new({
+		return MapInput.new({
 			room_effects=opts.get("effects")
 			})
-	return RoomInput.random_effects()
+	return MapInput.random_effects()
 
 static func has_rain_fall(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_effects=[RoomEffect.rain_fall()]
 		})
 
 static func has_snow_fall(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_effects=[RoomEffect.snow_fall()]
 		})
 
 static func has_dust(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_effects=[RoomEffect.dust()]
 		})
 
@@ -216,25 +216,25 @@ static func has_dust(_opts={}):
 static func has_room(opts={}):
 	if opts.get("shape") == null:
 		Log.warn("has_room missing 'shape'!")
-	return RoomInput.new({
+	return MapInput.new({
 		room_shape=opts.get("shape")
 		})
 
 static func small_room_shape(_opts={}):
-	return RoomInput.new({room_shape=all_room_shapes.small})
+	return MapInput.new({room_shape=all_room_shapes.small})
 
 static func large_room_shape(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
 		})
 
 static func tall_room_shape(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_shape=[all_room_shapes.tall, all_room_shapes.tall_3].pick_random(),
 		})
 
 static func wide_room_shape(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_shape=[
 			all_room_shapes.wide,
 			all_room_shapes.wide_3,
@@ -243,7 +243,7 @@ static func wide_room_shape(_opts={}):
 		})
 
 static func L_room_shape(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_shape=[
 			all_room_shapes.L_shape,
 			all_room_shapes.L_backwards_shape,
@@ -253,7 +253,7 @@ static func L_room_shape(_opts={}):
 		})
 
 static func T_room_shape(_opts={}):
-	return RoomInput.new({
+	return MapInput.new({
 		room_shape=[
 			all_room_shapes.T_shape,
 			all_room_shapes.T_inverted_shape,
@@ -270,26 +270,26 @@ static func has_tiles(opts):
 		ts.append(Pandora.get_entity(id))
 	ts.append_array(opts.get("tiles", []))
 
-	return RoomInput.new({tiles=ts})
+	return MapInput.new({tiles=ts})
 
 static func wooden_boxes(_opts={}):
-	return RoomInput.new({tiles=[
+	return MapInput.new({tiles=[
 		Pandora.get_entity(DinoTileIds.WOODENBOXTILES)]})
 
 static func spaceship(_opts={}):
-	return RoomInput.new({tiles=[
+	return MapInput.new({tiles=[
 		Pandora.get_entity(DinoTileIds.SPACESHIPTILES)]})
 
 static func kingdom(_opts={}):
-	return RoomInput.new({tiles=[
+	return MapInput.new({tiles=[
 		Pandora.get_entity(DinoTileIds.KINGDOMTILES)]})
 
 static func volcano(_opts={}):
-	return RoomInput.new({tiles=[
+	return MapInput.new({tiles=[
 		Pandora.get_entity(DinoTileIds.VOLCANOTILES)]})
 
 static func grassy_cave(_opts={}):
-	return RoomInput.new({tiles=[
+	return MapInput.new({tiles=[
 		Pandora.get_entity(DinoTileIds.GRASSYCAVETILES)]})
 
 ## with ######################################################33
@@ -312,7 +312,7 @@ static func with(opts={}):
 		ts.append(Pandora.get_entity(id))
 	ts.append_array(opts.get("tiles", []))
 
-	return RoomInput.new({entities=ents, enemies=ens, effects=effs,
+	return MapInput.new({entities=ents, enemies=ens, effects=effs,
 		tiles=ts})
 
 ## enemies ######################################################33
@@ -330,19 +330,19 @@ static func has_enemy(ent_id, opts={}):
 	if ent == null:
 		Log.warn("No entity for id", ent_id)
 		return
-	var inp = RoomInput.new({enemies=U.repeat(ent, opts.get("count", 1))})
+	var inp = MapInput.new({enemies=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
 static func has_boss(opts={}):
 	if opts.get("count", 1):
-		return RoomInput.new({
+		return MapInput.new({
 			enemies=[
 				[Pandora.get_entity(EnemyIds.MONSTROAR)],
 				[Pandora.get_entity(EnemyIds.BEEFSTRONAUT)]
 				].pick_random(),
 			})
 	else:
-		return RoomInput.new({
+		return MapInput.new({
 			enemies=[
 				Pandora.get_entity(EnemyIds.MONSTROAR),
 				Pandora.get_entity(EnemyIds.BEEFSTRONAUT),
@@ -362,7 +362,7 @@ static func has_entity(ent_id, opts={}):
 	if ent == null:
 		Log.warn("No entity for id", ent_id)
 		return
-	var inp = RoomInput.new({entities=U.repeat(ent, opts.get("count", 1))})
+	var inp = MapInput.new({entities=U.repeat(ent, opts.get("count", 1))})
 	return inp
 
 static func has_entities(opts={}):
@@ -370,7 +370,7 @@ static func has_entities(opts={}):
 	for ent_id in opts.get("entity_ids"):
 		ents.append(Pandora.get_entity(ent_id))
 	ents.append_array(opts.get("entities", []))
-	return RoomInput.new({entities=ents})
+	return MapInput.new({entities=ents})
 
 static func has_player(opts={}):
 	return has_entity(DinoEntityIds.PLAYERSPAWNPOINT, opts)

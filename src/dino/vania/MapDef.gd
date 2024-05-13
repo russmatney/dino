@@ -3,17 +3,31 @@ class_name MapDef
 
 ## vars #######################################################
 
+# name of the mapDef
 @export var name: String
-@export var inputs: Array[RoomInput]
+
+# deprecated
+@export var inputs: Array[MapInput]
+
+# inputs to pull from in any room
+@export var input: MapInput
+
+# inputs to pull from per-room
+@export var rooms: Array[MapInput]
+
+# a level def for generating a DinoLevel via Brick
 @export var level_def: LevelDef
 
-# idea towards flattening level_def details into map_def
-var room_defs: GridDefs
-@export var room_defs_path: String :
+# sub map_defs for complex map generation
+@export var sub_map_defs: Array[MapDef]
+
+# extra grid defs to inform/support map gen
+var grid_defs: GridDefs
+@export var grid_defs_path: String :
 	set(path):
 		if path:
-			room_defs_path = path
-			room_defs = GridParser.parse({defs_path=path})
+			grid_defs_path = path
+			grid_defs = GridParser.parse({defs_path=path})
 
 ## init #######################################################
 
@@ -21,9 +35,9 @@ func _init(opts={}):
 	name = opts.get("name", "New Map Def")
 	inputs.assign(opts.get("inputs", []))
 
-	if opts.get("room_defs_path"):
-		room_defs_path = opts.get("room_defs_path")
-		# sets room_defs via setter ... ?
+	if opts.get("grid_defs_path"):
+		grid_defs_path = opts.get("grid_defs_path")
+		# sets grid_defs via setter ... ?
 
 func new_game_node(opts={}):
 	if level_def:
@@ -36,14 +50,14 @@ func new_game_node(opts={}):
 
 ## encounters ######################################################33
 
-static func cooking_room(_opts={}) -> RoomInput:
-	return RoomInput.with({
+static func cooking_room(_opts={}) -> MapInput:
+	return MapInput.with({
 		entity_ids=[DinoEntityIds.COOKINGPOT, DinoEntityIds.VOID],
 		enemy_ids=[EnemyIds.BLOB],
 		})
 
-static func harvey_room(_opts={}) -> RoomInput:
-	return RoomInput.with({
+static func harvey_room(_opts={}) -> MapInput:
+	return MapInput.with({
 		entity_ids=[
 			DinoEntityIds.TOOL,
 			DinoEntityIds.SUPPLYBOX,
@@ -54,7 +68,7 @@ static func harvey_room(_opts={}) -> RoomInput:
 			DinoEntityIds.ACTIONBOT,
 			DinoEntityIds.ACTIONBOT,
 			],
-		}).merge(RoomInput.topdown())
+		}).merge(MapInput.topdown())
 
 ## static map defs ######################################################33
 
@@ -72,51 +86,51 @@ static func all_map_defs():
 
 static func spawn_room(_opts={}) -> MapDef:
 	return MapDef.new({inputs=[
-		RoomInput.merge_many([
-			RoomInput.has_entities({entity_ids=[
+		MapInput.merge_many([
+			MapInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
 				DinoEntityIds.CANDLE,
 			]}),
-			RoomInput.small_room_shape(),
+			MapInput.small_room_shape(),
 		]),
 	]})
 
 static func random_room(_opts={}) -> MapDef:
-	return MapDef.new({inputs=[RoomInput.random_room()]})
+	return MapDef.new({inputs=[MapInput.random_room()]})
 
 static func random_rooms(opts={}) -> MapDef:
-	var rooms = U.repeat_fn(RoomInput.random_room, opts.get("count", U.rand_of([2, 3, 4])))
+	var rooms = U.repeat_fn(MapInput.random_room, opts.get("count", U.rand_of([2, 3, 4])))
 	return MapDef.new({inputs=rooms})
 
 static func default_game(_opts={}) -> MapDef:
 	var inpts = [
-		RoomInput.merge_many([
-			RoomInput.has_entities({entity_ids=[
+		MapInput.merge_many([
+			MapInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
 				DinoEntityIds.CANDLE,
 				DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH2,
 			]}),
-			RoomInput.small_room_shape(),
-			RoomInput.has_effects({effects=[
+			MapInput.small_room_shape(),
+			MapInput.has_effects({effects=[
 				RoomEffect.snow_fall(),
 				RoomEffect.rain_fall(),
 			]}),
 		]),
-		RoomInput.merge_many([
-			RoomInput.random_room(),
-			RoomInput.has_effects({effects=[
+		MapInput.merge_many([
+			MapInput.random_room(),
+			MapInput.has_effects({effects=[
 				RoomEffect.snow_fall(),
 			]}),
-			RoomInput.has_entities({entity_ids=[
+			MapInput.has_entities({entity_ids=[
 				DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH1,
 			]}),
 		]),
-		RoomInput.merge_many([
-			RoomInput.random_room(),
-			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
-			RoomInput.has_entities({entity_ids=[
+		MapInput.merge_many([
+			MapInput.random_room(),
+			MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+			MapInput.has_entities({entity_ids=[
 				DinoEntityIds.HANGINGLIGHT,
 				DinoEntityIds.BUSH1,
 				DinoEntityIds.BUSH2,
@@ -124,7 +138,7 @@ static func default_game(_opts={}) -> MapDef:
 		]),
 		MapDef.cooking_room(),
 	]
-	inpts.append_array(U.repeat_fn(RoomInput.random_room, 3))
+	inpts.append_array(U.repeat_fn(MapInput.random_room, 3))
 
 	return MapDef.new({name="Default Vania", inputs=inpts})
 
@@ -134,7 +148,7 @@ static func default_game(_opts={}) -> MapDef:
 static func village(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Village",
-		inputs=[RoomInput.with({
+		inputs=[MapInput.with({
 			entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
 
@@ -194,56 +208,56 @@ static func village(_opts={}) -> MapDef:
 				DinoEntityIds.BUSH2,
 				DinoEntityIds.BUSH2,
 				],
-			}).merge(RoomInput.large_room_shape())\
-			.merge(RoomInput.has_snow_fall())\
-			.merge(RoomInput.topdown())
+			}).merge(MapInput.large_room_shape())\
+			.merge(MapInput.has_snow_fall())\
+			.merge(MapInput.topdown())
 			]})
 
 static func topdown_game(_opts={}) -> MapDef:
 	var inpts = [
-		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.has_entities({entity_ids=[
+		MapInput.merge_many([
+			MapInput.topdown(),
+			MapInput.has_entities({entity_ids=[
 				DinoEntityIds.PLAYERSPAWNPOINT,
 			]}),
-			RoomInput.small_room_shape(),
-			RoomInput.has_effects({effects=[
+			MapInput.small_room_shape(),
+			MapInput.has_effects({effects=[
 				RoomEffect.dust(),
 			]}),
 		]),
 		MapDef.harvey_room(),
 	]
 	inpts.append_array(U.repeat_fn(func():
-		return RoomInput.random_room().merge(RoomInput.topdown()),
+		return MapInput.random_room().merge(MapInput.topdown()),
 		3))
 	return MapDef.new({name="TopDown Game", inputs=inpts})
 
 static func mixed_genre_game(_opts={}) -> MapDef:
 	var inpts = [
-		RoomInput.merge_many([
-			RoomInput.sidescroller(),
-			RoomInput.has_entities({entity_ids=[DinoEntityIds.PLAYERSPAWNPOINT]}),
-			RoomInput.small_room_shape(),
+		MapInput.merge_many([
+			MapInput.sidescroller(),
+			MapInput.has_entities({entity_ids=[DinoEntityIds.PLAYERSPAWNPOINT]}),
+			MapInput.small_room_shape(),
 		]),
-		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.small_room_shape(),
-			RoomInput.has_effects({effects=[RoomEffect.dust()]}),
+		MapInput.merge_many([
+			MapInput.topdown(),
+			MapInput.small_room_shape(),
+			MapInput.has_effects({effects=[RoomEffect.dust()]}),
 		]),
-		RoomInput.merge_many([
-			RoomInput.sidescroller(),
+		MapInput.merge_many([
+			MapInput.sidescroller(),
 		]),
-		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.has_effects({effects=[RoomEffect.dust()]}),
+		MapInput.merge_many([
+			MapInput.topdown(),
+			MapInput.has_effects({effects=[RoomEffect.dust()]}),
 		]),
-		RoomInput.merge_many([
-			RoomInput.sidescroller(),
-			RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+		MapInput.merge_many([
+			MapInput.sidescroller(),
+			MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 		]),
-		RoomInput.merge_many([
-			RoomInput.topdown(),
-			RoomInput.has_effects({effects=[RoomEffect.dust()]}),
+		MapInput.merge_many([
+			MapInput.topdown(),
+			MapInput.has_effects({effects=[RoomEffect.dust()]}),
 		]),
 	]
 	return MapDef.new({name="Mixed Genre Game", inputs=inpts})
@@ -252,33 +266,33 @@ static func tower_game(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Tower",
 		inputs=[
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
 					DinoEntityIds.TARGET,
 					DinoEntityIds.TARGET,
 					DinoEntityIds.TARGET,
 				]}),
-				RoomInput.wide_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.wide_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.TARGET,
 					DinoEntityIds.TARGET,
 					DinoEntityIds.TARGET,
 				]}),
-				RoomInput.large_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.large_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.TARGET,
 					DinoEntityIds.TARGET,
 					DinoEntityIds.TARGET,
 				]}),
-				RoomInput.tall_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.tall_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
 		]})
 
@@ -286,34 +300,34 @@ static func woods_game(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Woods",
 		inputs=[
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAF,
 				]}),
-				RoomInput.wide_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.wide_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAF,
 				]}),
-				RoomInput.large_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.large_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAF,
 					DinoEntityIds.LEAFGOD,
 				]}),
-				RoomInput.tall_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.tall_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
 		]})
 
@@ -321,35 +335,35 @@ static func arcade_game(_opts={}) -> MapDef:
 	return MapDef.new({
 		name="Arcade",
 		inputs=[
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.PLAYERSPAWNPOINT,
 					DinoEntityIds.COIN,
 					DinoEntityIds.COIN,
 					DinoEntityIds.COIN,
 					DinoEntityIds.ARCADEMACHINE,
 				]}),
-				RoomInput.wide_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.wide_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.COIN,
 					DinoEntityIds.COIN,
 					DinoEntityIds.COIN,
 					DinoEntityIds.ARCADEMACHINE,
 				]}),
-				RoomInput.large_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.large_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
-			RoomInput.merge_many([
-				RoomInput.has_entities({entity_ids=[
+			MapInput.merge_many([
+				MapInput.has_entities({entity_ids=[
 					DinoEntityIds.COIN,
 					DinoEntityIds.COIN,
 					DinoEntityIds.COIN,
 					DinoEntityIds.ARCADEMACHINE,
 				]}),
-				RoomInput.tall_room_shape(),
-				RoomInput.has_effects({effects=[RoomEffect.rain_fall()]}),
+				MapInput.tall_room_shape(),
+				MapInput.has_effects({effects=[RoomEffect.rain_fall()]}),
 			]),
 		]})

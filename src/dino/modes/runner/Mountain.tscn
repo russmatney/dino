@@ -7,7 +7,7 @@
 resource_name = "The Mountain Map Def"
 script = ExtResource("2_xorhb")
 name = "Welcome to The Mountain"
-inputs = Array[Resource("res://src/dino/vania/RoomInput.gd")]([])
+inputs = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
 room_defs_path = ""
 
 [node name="Mountain" type="Node2D"]

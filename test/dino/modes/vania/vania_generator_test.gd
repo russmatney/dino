@@ -9,7 +9,7 @@ func before_test():
 ## add/remove rooms ################################################
 
 func test_add_rooms_first_room_small():
-	var defs = VaniaRoomDef.to_defs({inputs=[RoomInput.small_room_shape()]})
+	var defs = VaniaRoomDef.to_defs({inputs=[MapInput.small_room_shape()]})
 	var gen = VaniaGenerator.new()
 	var gened_defs = gen.add_rooms(defs)
 	var added_def = gened_defs[0]
@@ -19,7 +19,7 @@ func test_add_rooms_first_room_small():
 	assert_array(added_def.map_cells).contains([Vector3i()])
 
 func test_add_rooms_first_room_large():
-	var defs = VaniaRoomDef.to_defs({inputs=[RoomInput.large_room_shape()]})
+	var defs = VaniaRoomDef.to_defs({inputs=[MapInput.large_room_shape()]})
 	var gen = VaniaGenerator.new()
 	var gened_defs = gen.add_rooms(defs)
 	var added_def = gened_defs[0]
@@ -34,7 +34,7 @@ func test_add_rooms_first_room_large():
 func test_add_rooms_two_small_rooms_create_doors():
 	# test creating two rooms at once adds doors between them
 	var defs = VaniaRoomDef.to_defs({inputs=[
-		RoomInput.small_room_shape(), RoomInput.small_room_shape()]})
+		MapInput.small_room_shape(), MapInput.small_room_shape()]})
 	var gen = VaniaGenerator.new()
 	var gened_defs = gen.add_rooms(defs)
 	var first_def = gened_defs[0]
@@ -112,12 +112,12 @@ func test_add_rooms_two_small_rooms_create_doors():
 
 func test_add_rooms_one_small_room_then_another_updates_doors():
 	# test creating two rooms in separate gen.add_rooms() calls updates the first room's doors
-	var defs = VaniaRoomDef.to_defs({inputs=[RoomInput.small_room_shape()]})
+	var defs = VaniaRoomDef.to_defs({inputs=[MapInput.small_room_shape()]})
 	var gen = VaniaGenerator.new()
 	var gened_defs = gen.add_rooms(defs)
 	var first_def = gened_defs[0]
 
-	defs = VaniaRoomDef.to_defs({inputs=[RoomInput.small_room_shape()]})
+	defs = VaniaRoomDef.to_defs({inputs=[MapInput.small_room_shape()]})
 	gened_defs = gen.add_rooms(defs)
 	var second_def = gened_defs[1]
 
@@ -195,7 +195,7 @@ func test_add_rooms_one_small_room_then_another_updates_doors():
 func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 	# test that removing a room updates the left-behind room's doors
 	var defs = VaniaRoomDef.to_defs({inputs=[
-		RoomInput.small_room_shape(), RoomInput.small_room_shape()
+		MapInput.small_room_shape(), MapInput.small_room_shape()
 		]})
 	var gen = VaniaGenerator.new()
 	var gened_defs = gen.add_rooms(defs)
@@ -236,7 +236,7 @@ func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 ## placing rooms ################################################
 
 func test_possible_start_coords_simple():
-	var defs = VaniaRoomDef.to_defs({inputs=[RoomInput.small_room_shape()]})
+	var defs = VaniaRoomDef.to_defs({inputs=[MapInput.small_room_shape()]})
 	var gen = VaniaGenerator.new()
 	var _gened_defs = gen.add_rooms(defs)
 
@@ -253,7 +253,7 @@ func test_possible_start_coords_simple():
 		])
 
 func test_possible_start_coords_concave():
-	var defs = VaniaRoomDef.to_defs({inputs=[RoomInput.small_room_shape()]})
+	var defs = VaniaRoomDef.to_defs({inputs=[MapInput.small_room_shape()]})
 	var gen = VaniaGenerator.new()
 	var _gened_defs = gen.add_rooms(defs)
 

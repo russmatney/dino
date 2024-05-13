@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_tu78o"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_l7gpm"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomInput.gd" id="3_p14wy"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="3_p14wy"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="4_nolob"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="5_5h2xo"]
 

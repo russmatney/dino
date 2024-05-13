@@ -39,7 +39,7 @@ var tile_size = 16
 
 var index: int = 0
 
-@export var input: RoomInput
+@export var input: MapInput
 
 func to_printable():
 	return {
@@ -79,7 +79,7 @@ func tiles() -> Array[DinoTiles]:
 ## input #####################################################3
 
 func rebuild():
-	RoomInput.apply(input, self)
+	MapInput.apply(input, self)
 
 ## init #####################################################3
 
@@ -94,7 +94,7 @@ func _init(opts={}):
 
 	if opts.get("input"):
 		input = opts.get("input")
-		RoomInput.apply(input, self)
+		MapInput.apply(input, self)
 
 ## local cells #####################################################3
 
