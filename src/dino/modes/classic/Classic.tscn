@@ -12,7 +12,6 @@ _id = "70"
 [node name="Classic" type="Node2D"]
 script = ExtResource("1_4v6tl")
 player_entity = SubResource("Resource_haq0s")
-map_defs = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

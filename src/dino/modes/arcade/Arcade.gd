@@ -6,7 +6,6 @@ extends Node2D
 var game_ids = [
 	DinoGameEntityIds.SUPERELEVATORLEVEL,
 	DinoGameEntityIds.SHIRT,
-	DinoGameEntityIds.GUNNER,
 	DinoGameEntityIds.TOWERJET,
 	DinoGameEntityIds.THEWOODS,
 	]

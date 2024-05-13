@@ -2,16 +2,9 @@
 extends BrickLevelGen
 
 func get_room_opts(opts):
-	var default_room_opt = {}
+	var room_opts = [{}]
 
-	var initial_rooms = []
-
-	var agg = range(room_count - len(initial_rooms)).reduce(func(acc, _i):
-		var next_room_opt = default_room_opt.duplicate(true)
-		acc.room_opts.append(next_room_opt)
-		return acc, {room_opts=initial_rooms})
-
-	for opt in agg.room_opts:
+	for opt in room_opts:
 		opt.merge({
 			label_to_tilemap={
 				"Wall": {
@@ -70,4 +63,4 @@ func get_room_opts(opts):
 				"Bot": {scene=load("res://src/dino/npcs/action_bot/HarveyBot.tscn")},
 			}})
 
-	return agg.room_opts
+	return room_opts

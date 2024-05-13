@@ -10,7 +10,6 @@ extends Node2D
 @export var game_ids: Array = []
 var fb_game_ids = [
 	DinoGameEntityIds.SHIRT,
-	DinoGameEntityIds.GUNNER,
 	DinoGameEntityIds.TOWERJET,
 	# DinoGameEntityIds.SUPERELEVATORLEVEL,
 	DinoGameEntityIds.THEWOODS,

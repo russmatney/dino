@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://pt4xm7llb4ao"]
 
-[ext_resource type="Script" path="res://src/games/spike/zones/SpikeZone.gd" id="1_q7jpk"]
+[ext_resource type="Script" path="res://src/games/spike/SpikeZone.gd" id="1_q7jpk"]
 [ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_sy5x7"]
 [ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/core/reptile/tilemaps/CaveTiles16.tscn" id="3_nbgj7"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="4_n547b"]

@@ -18,13 +18,8 @@ func _ready():
 		records = Records.current_records
 
 	if Engine.is_editor_hint() and len(records) == 0:
-		records = DinoRecords.mk_records([{
-				game_entity=Pandora.get_entity(DinoGameEntityIds.GUNNER),
-				completed_at=Time.get_datetime_dict_from_system(),
-				player_entities=[
-					Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
-					]
-			}, {
+		records = DinoRecords.mk_records([
+			{
 				game_entity=Pandora.get_entity(DinoGameEntityIds.TOWERJET),
 				completed_at=Time.get_datetime_dict_from_system(),
 				player_entities=[Pandora.get_entity(DinoPlayerEntityIds.HARIOPLAYER),]

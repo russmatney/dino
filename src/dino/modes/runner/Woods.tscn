@@ -7,8 +7,9 @@
 resource_name = "The Woods Map Def"
 script = ExtResource("2_r7fk4")
 name = "Run!"
-inputs = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
-room_defs_path = ""
+rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
+sub_map_defs = Array[ExtResource("2_r7fk4")]([])
+grid_defs_path = ""
 
 [node name="Woods" type="Node2D"]
 script = ExtResource("1_kt2ox")

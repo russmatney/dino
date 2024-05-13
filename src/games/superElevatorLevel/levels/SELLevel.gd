@@ -1,6 +1,10 @@
 extends DinoLevel
 class_name SELLevel
 
+# TODO move this wave logic into an EnemySpawnManager of sorts
+# probably similar logic to the QuestManager (tracking spawnPoints)
+# and maybe pull in wave data (goons/bosses/etc) from the active mapDef
+
 ### vars ####################################################
 
 var enemies = []

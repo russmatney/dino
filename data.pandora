@@ -147,7 +147,7 @@
 					},
 					"level_scene": {
 						"type": "resource",
-						"value": "res://src/games/spike/SpikeLevel.tscn"
+						"value": "res://src/games/spike/BasicLevelOne.tscn"
 					}
 				}
 			},
@@ -172,7 +172,7 @@
 					},
 					"level_scene": {
 						"type": "resource",
-						"value": "res://src/games/shirt/ShirtLevel.tscn"
+						"value": "res://src/games/shirt/CaveOne.tscn"
 					}
 				}
 			},
@@ -254,106 +254,6 @@
 			{
 				"_category_id": "17",
 				"_icon_color": "ffffff00",
-				"_id": "34",
-				"_index": 0,
-				"_name": "TowerJet",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Tower Jet"
-					},
-					"genre_type": {
-						"type": "string",
-						"value": "sidescroller"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://assets/gameicons/tower_icon_sheet.png"
-					},
-					"level_scene": {
-						"type": "resource",
-						"value": "res://src/games/tower/TowerLevel.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
-				"_id": "35",
-				"_index": 0,
-				"_name": "Gunner",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Gunner"
-					},
-					"genre_type": {
-						"type": "string",
-						"value": "sidescroller"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://assets/gameicons/gunner_icon_sheet.png"
-					},
-					"level_scene": {
-						"type": "resource",
-						"value": "res://src/games/gunner/GunnerLevel.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
-				"_id": "36",
-				"_index": 0,
-				"_name": "Harvey",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Harvey"
-					},
-					"genre_type": {
-						"type": "string",
-						"value": "topdown"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://assets/gameicons/Harvey_icon_sheet.png"
-					},
-					"level_scene": {
-						"type": "resource",
-						"value": "res://src/games/harvey/HarveyLevel.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
-				"_id": "37",
-				"_index": 0,
-				"_name": "Herd",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Herd"
-					},
-					"genre_type": {
-						"type": "string",
-						"value": "topdown"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://assets/gameicons/Herd_icon_sheet.png"
-					},
-					"level_scene": {
-						"type": "resource",
-						"value": "res://src/games/herd/HerdLevel.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
 				"_id": "38",
 				"_index": 0,
 				"_name": "DemoLand",
@@ -369,31 +269,6 @@
 					"level_scene": {
 						"type": "resource",
 						"value": "res://src/games/demoland/zones/area01/Area01.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "17",
-				"_icon_color": "ffffff00",
-				"_id": "41",
-				"_index": 0,
-				"_name": "TheWoods",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "The Woods"
-					},
-					"genre_type": {
-						"type": "string",
-						"value": "sidescroller"
-					},
-					"icon_texture": {
-						"type": "resource",
-						"value": "res://assets/gameicons/woods_icon_sheet.png"
-					},
-					"level_scene": {
-						"type": "resource",
-						"value": "res://src/games/woods/WoodsLevel.tscn"
 					}
 				}
 			},
@@ -877,7 +752,7 @@
 					},
 					"def_path": {
 						"type": "string",
-						"value": "res://src/dino/levels/break_the_targets_level_def.txt"
+						"value": "res://src/dino/levels/breakTheTargets/break_the_targets_level_def.txt"
 					},
 					"display_name": {
 						"type": "string",
@@ -893,7 +768,7 @@
 					},
 					"level_gen_script": {
 						"type": "resource",
-						"value": "res://src/dino/levels/BreakTheTargetsGen.gd"
+						"value": "res://src/dino/levels/breakTheTargets/BreakTheTargetsGen.gd"
 					},
 					"tiles_scene": {
 						"type": "resource",
@@ -906,15 +781,15 @@
 				"_icon_color": "ffffff00",
 				"_id": "113",
 				"_index": 0,
-				"_name": "LeafRunner",
+				"_name": "Woods",
 				"_property_overrides": {
 					"def_path": {
 						"type": "string",
-						"value": "res://src/dino/levels/leaf_runner_level_def.txt"
+						"value": "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 					},
 					"display_name": {
 						"type": "string",
-						"value": "Leaf Runner"
+						"value": "Woods"
 					},
 					"genre_type": {
 						"type": "string",
@@ -926,7 +801,7 @@
 					},
 					"level_gen_script": {
 						"type": "resource",
-						"value": "res://src/dino/levels/LeafRunnerGen.gd"
+						"value": "res://src/dino/levels/woods/LeafRunnerGen.gd"
 					},
 					"tiles_scene": {
 						"type": "resource",
@@ -2182,6 +2057,152 @@
 						"value": "res://src/dino/modes/runner/BossRush.tscn"
 					}
 				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "204",
+				"_index": 0,
+				"_name": "Harvey",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/harvey/harvey_rooms.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Harvey"
+					},
+					"genre_type": {
+						"type": "string",
+						"value": "topdown"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/harvey/HarveyLevelGen.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "205",
+				"_index": 0,
+				"_name": "Herd",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/herd/herd_rooms.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Herd"
+					},
+					"genre_type": {
+						"type": "string",
+						"value": "topdown"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/herd/HerdLevelGen.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "206",
+				"_index": 0,
+				"_name": "Shirt",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/shirt/shirt_rooms.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Shirt"
+					},
+					"genre_type": {
+						"type": "string",
+						"value": "topdown"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/DinoLevel.tscn::GDScript_jxoqe"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "207",
+				"_index": 0,
+				"_name": "Spike",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/spike/spike_rooms.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Void Spike"
+					},
+					"genre_type": {
+						"type": "string",
+						"value": "sidescroller"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/spike/SpikeLevelGen.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "208",
+				"_index": 0,
+				"_name": "SuperElevatorLevel",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/superElevatorLevel/sel_rooms.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Super Elevator Level"
+					},
+					"genre_type": {
+						"type": "string",
+						"value": "beatemup"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/superElevatorLevel/SELLevelGen.gd"
+					}
+				}
+			},
+			{
+				"_category_id": "103",
+				"_icon_color": "ffffff00",
+				"_id": "209",
+				"_index": 0,
+				"_name": "Tower",
+				"_property_overrides": {
+					"def_path": {
+						"type": "string",
+						"value": "res://src/dino/levels/tower/tower_rooms.txt"
+					},
+					"display_name": {
+						"type": "string",
+						"value": "Tower"
+					},
+					"level_gen_script": {
+						"type": "resource",
+						"value": "res://src/dino/levels/tower/TowerLevelGen.gd"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -2497,7 +2518,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 203
+			"default": 209
 		}
 	}
 }

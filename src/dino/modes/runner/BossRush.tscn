@@ -1,57 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0tp33mwvlvsa"]
+[gd_scene load_steps=4 format=3 uid="uid://d0tp33mwvlvsa"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_rr2qx"]
-[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_1dfhy"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="2_kols8"]
-[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_rn2ry"]
-
-[sub_resource type="Resource" id="Resource_2w1iv"]
-script = ExtResource("2_rn2ry")
-_id = "128"
-
-[sub_resource type="Resource" id="Resource_ipyuq"]
-resource_name = "Beefstronaut Room"
-script = ExtResource("2_1dfhy")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[ExtResource("2_rn2ry")]([SubResource("Resource_2w1iv"), null])
-room_shape = Array[Vector3i]([])
-room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-
-[sub_resource type="Resource" id="Resource_u133b"]
-script = ExtResource("2_rn2ry")
-_id = "129"
-
-[sub_resource type="Resource" id="Resource_bcase"]
-resource_name = "Monstroar Room"
-script = ExtResource("2_1dfhy")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[ExtResource("2_rn2ry")]([SubResource("Resource_u133b")])
-room_shape = Array[Vector3i]([])
-room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-
-[sub_resource type="Resource" id="Resource_5t5xc"]
-resource_name = "Beef + Monst Room"
-script = ExtResource("2_1dfhy")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[ExtResource("2_rn2ry")]([SubResource("Resource_2w1iv"), SubResource("Resource_u133b")])
-room_shape = Array[Vector3i]([])
-room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 
 [sub_resource type="Resource" id="Resource_g1lun"]
 resource_name = "Boss Rush Map Def"
 script = ExtResource("2_kols8")
 name = ""
-inputs = Array[ExtResource("2_1dfhy")]([SubResource("Resource_ipyuq"), SubResource("Resource_bcase"), SubResource("Resource_5t5xc")])
-room_defs_path = ""
+rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
+sub_map_defs = Array[ExtResource("2_kols8")]([])
+grid_defs_path = ""
 
 [node name="BossRush" type="Node2D"]
 script = ExtResource("1_rr2qx")
