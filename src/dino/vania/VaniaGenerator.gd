@@ -175,6 +175,7 @@ func build_and_prep_scene(room_def, _opts={}):
 	if error != Error.OK:
 		Log.error("Error saving room scene! Error code:", error)
 	Debug.notif({msg="[GENNED! [color=purple]%s[/color]]!" % room_def.room_path.get_file(), rich=true})
+	Dino.notif({type="side", text="Generated [color=purple]%s[/color]" % room_def.room_path.get_file()})
 
 ## place_rooms ##########################################################
 

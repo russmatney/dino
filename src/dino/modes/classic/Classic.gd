@@ -81,16 +81,6 @@ func launch_level(map_def):
 	game_node = current_map_def.new_game_node({seed=_seed, })
 	add_child(game_node)
 
-	# TODO spawn player in Dino Level (again? after all that?)
-	var genre_type
-	if map_def.level_def:
-		genre_type = map_def.level_def.get_genre_type()
-		Dino.spawn_player({
-			level=game_node,
-			deferred=false,
-			genre_type=genre_type,
-			})
-
 	game_node.level_complete.connect(_on_level_complete)
 
 ## game level signals ##################################################3

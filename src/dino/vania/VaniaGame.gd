@@ -46,6 +46,7 @@ func _ready():
 	# spawn player in the load playground
 	setup_player()
 	playground.ready.connect(func():
+		Dino.notif({type="banner", text="Loading...."})
 		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
 
 	set_process(false)

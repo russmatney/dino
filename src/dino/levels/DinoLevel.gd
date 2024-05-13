@@ -182,10 +182,8 @@ func _ready():
 		Log.error("DinoLevel missing expected 'QuestManager' node")
 
 	Log.info("DinoLevel ready: ", self)
-	Dino.notif({
-		type="banner",
-		text=level_name(),
-		})
+	Dino.notif({type="banner", text=level_name()})
+
 	hud = find_hud()
 	if not hud:
 		hud = hud_scene.instantiate()
@@ -203,8 +201,13 @@ func _ready():
 		})
 		regenerate()
 
+	if Dino.current_player_entity():
 		if not Dino.current_player_node():
-			Dino.spawn_player()
+			Dino.spawn_player({level=self, genre_type=genre_type})
+		else:
+			Log.warn("Found player node, skipping spawn player")
+	else:
+		Log.warn("No player entity, cannot spawn player")
 
 	if not skip_splash_intro:
 		await Jumbotron.jumbo_notif(get_splash_jumbo_opts())
