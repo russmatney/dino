@@ -21,6 +21,9 @@ signal game_complete
 ## to_pretty #################################################
 
 func to_pretty():
+	if Engine.is_editor_hint():
+		# TODO log.gd ignoring to_pretty nulls
+		return null
 	return [_seed, current_map_def, map_defs]
 
 ## ready ##################################################3

@@ -41,7 +41,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[ExtResource("5_8fw4a")]([SubResource("Resource_gkukq")])
 door_mode = 4
-only_advance = true
+neighbor_direction = Vector2i(0, -1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_sgckp"]
@@ -54,7 +54,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[ExtResource("5_8fw4a")]([])
 door_mode = 0
-only_advance = false
+neighbor_direction = Vector2i(0, 0)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_sokyy"]
@@ -67,7 +67,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[ExtResource("5_8fw4a")]([])
 door_mode = 0
-only_advance = false
+neighbor_direction = Vector2i(0, 0)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_blxq2"]
@@ -80,7 +80,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[ExtResource("5_8fw4a")]([])
 door_mode = 0
-only_advance = false
+neighbor_direction = Vector2i(0, 0)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_4fbi3"]

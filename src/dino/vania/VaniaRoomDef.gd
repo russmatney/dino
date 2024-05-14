@@ -13,8 +13,8 @@ static func to_defs(m_def: MapDef) -> Array[VaniaRoomDef]:
 	var defs: Array[VaniaRoomDef] = []
 
 	if m_def.rooms.is_empty():
-		# TODO modes/params for creating on-the-fly rooms
-		Log.warn("No room inputs passed, no defs to generate")
+		Log.info("No room inputs passed, ensuring at least one")
+		m_def.rooms.append(MapInput.new())
 
 	# ensure base input
 	if not m_def.input:
@@ -107,11 +107,10 @@ func door_mode() -> DOOR_MODE:
 		return DOOR_MODE.ALL_DOORS
 	return input.door_mode
 
-func only_advance() -> bool:
+func neighbor_direction() -> Vector2i:
 	if not input:
-		return false
-	return input.only_advance
-
+		return Vector2i.ZERO
+	return input.neighbor_direction
 
 
 ## input #####################################################3

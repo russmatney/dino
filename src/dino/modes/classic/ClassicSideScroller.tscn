@@ -1,11 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=34 format=3 uid="uid://dasm8htdfmonq"]
 
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_1saow"]
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
-[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="2_tku0d"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
+[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="5_urg5i"]
 
 [sub_resource type="Resource" id="Resource_v00y0"]
 script = ExtResource("3_lr33u")
@@ -14,14 +13,14 @@ _id = "122"
 [sub_resource type="Resource" id="Resource_vuiid"]
 script = ExtResource("4_m4x81")
 genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_v00y0")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
-only_advance = false
+neighbor_direction = Vector2i(0, 0)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_02d4e"]
@@ -32,59 +31,207 @@ input = SubResource("Resource_vuiid")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
 
+[sub_resource type="Resource" id="Resource_5l33f"]
+script = ExtResource("3_lr33u")
+_id = "121"
+
+[sub_resource type="Resource" id="Resource_mewd3"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_5l33f"), SubResource("Resource_5l33f"), SubResource("Resource_5l33f")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
+
 [sub_resource type="Resource" id="Resource_evsm0"]
 resource_name = "Blob Team"
 script = ExtResource("4_m2oft")
 name = "Blob Team!"
+input = SubResource("Resource_mewd3")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_4kag2"]
+script = ExtResource("5_urg5i")
+_id = "139"
+
+[sub_resource type="Resource" id="Resource_62w6x"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_4kag2"), SubResource("Resource_4kag2"), SubResource("Resource_4kag2")])
+enemies = Array[ExtResource("3_lr33u")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_xauy6"]
 resource_name = "Target Test"
 script = ExtResource("4_m2oft")
 name = "Target Test"
+input = SubResource("Resource_62w6x")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_6bvdb"]
+script = ExtResource("5_urg5i")
+_id = "151"
+
+[sub_resource type="Resource" id="Resource_gkjen"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_6bvdb")])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_5l33f")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_h0sn2"]
 resource_name = "FEED THE VOID"
 script = ExtResource("4_m2oft")
-name = ""
+name = "FEEEED the VOID"
+input = SubResource("Resource_gkjen")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_kmsyt"]
+script = ExtResource("3_lr33u")
+_id = "129"
+
+[sub_resource type="Resource" id="Resource_5y52h"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_kmsyt")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_0w1s1"]
 resource_name = "GIANT HARIO"
 script = ExtResource("4_m2oft")
 name = "GIANT HARIO"
+input = SubResource("Resource_5y52h")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_ks6si"]
+script = ExtResource("5_urg5i")
+_id = "140"
+
+[sub_resource type="Resource" id="Resource_o6kti"]
+script = ExtResource("5_urg5i")
+_id = "141"
+
+[sub_resource type="Resource" id="Resource_ys5sm"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_ks6si"), SubResource("Resource_o6kti"), SubResource("Resource_ks6si")])
+enemies = Array[ExtResource("3_lr33u")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_gyjvd"]
 resource_name = "Destroy!"
 script = ExtResource("4_m2oft")
 name = "Destroy!"
+input = SubResource("Resource_ys5sm")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_l4jh0"]
+script = ExtResource("5_urg5i")
+_id = "194"
+
+[sub_resource type="Resource" id="Resource_2668u"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_l4jh0"), SubResource("Resource_l4jh0"), SubResource("Resource_l4jh0")])
+enemies = Array[ExtResource("3_lr33u")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_645dy"]
 resource_name = "Villager Defender"
 script = ExtResource("4_m2oft")
 name = "Villager Defender"
+input = SubResource("Resource_2668u")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_egvpy"]
+script = ExtResource("5_urg5i")
+_id = "136"
+
+[sub_resource type="Resource" id="Resource_35tik"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_egvpy"), SubResource("Resource_egvpy"), SubResource("Resource_egvpy")])
+enemies = Array[ExtResource("3_lr33u")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_x0fpg"]
 resource_name = "Leaf Challenge"
 script = ExtResource("4_m2oft")
 name = "Leaf Challenge"
+input = SubResource("Resource_35tik")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
+
+[sub_resource type="Resource" id="Resource_v8pov"]
+script = ExtResource("3_lr33u")
+_id = "128"
+
+[sub_resource type="Resource" id="Resource_k377a"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_v8pov"), SubResource("Resource_kmsyt")])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_h5a41"]
 resource_name = "Boss Battle"
 script = ExtResource("4_m2oft")
 name = "Boss Battle!"
+input = SubResource("Resource_k377a")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
 
@@ -92,10 +239,3 @@ sub_map_defs = Array[ExtResource("4_m2oft")]([])
 script = ExtResource("1_5gcr3")
 _seed = 4244388041
 map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_02d4e"), SubResource("Resource_evsm0"), SubResource("Resource_xauy6"), SubResource("Resource_h0sn2"), SubResource("Resource_0w1s1"), SubResource("Resource_gyjvd"), SubResource("Resource_645dy"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-script = ExtResource("1_1saow")
-
-[node name="DinoHUD" parent="." instance=ExtResource("2_tku0d")]

@@ -57,7 +57,7 @@ static var all_room_shapes = {
 @export var tiles: Array[DinoTiles]
 
 @export var door_mode: VaniaRoomDef.DOOR_MODE
-@export var only_advance: bool
+@export var neighbor_direction: Vector2i
 
 var grid: GridDef
 var grids: Array[GridDef]
@@ -84,7 +84,7 @@ func _init(opts={}):
 		room_effects.assign(opts.get("room_effects"))
 	tiles.assign(opts.get("tiles", []))
 	door_mode = opts.get("door_mode", 0)
-	only_advance = opts.get("only_advance", false)
+	neighbor_direction = opts.get("neighbor_direction", Vector2i.ZERO)
 
 func to_pretty():
 	return {
@@ -96,7 +96,7 @@ func to_pretty():
 		room_shapes=room_shapes,
 		room_effects=room_effects,
 		door_mode=door_mode,
-		only_advance=only_advance,
+		neighbor_direction=neighbor_direction,
 		}
 
 ## merge ######################################################
@@ -108,6 +108,10 @@ func merge(b: MapInput):
 	if b.door_mode > 0:
 		dm = b.door_mode
 
+	var nbr_dir = neighbor_direction
+	if b.neighbor_direction != Vector2i.ZERO:
+		nbr_dir = b.neighbor_direction
+
 	return MapInput.new({
 		genre_type=U._or(b.genre_type, genre_type),
 		entities=U.append_array(entities, b.entities),
@@ -117,7 +121,7 @@ func merge(b: MapInput):
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tiles=U.distinct(U.append_array(tiles, b.tiles)),
 		door_mode=dm,
-		only_advance=U._or(b.only_advance, only_advance),
+		neighbor_direction=nbr_dir,
 		})
 
 ## update room def ######################################################

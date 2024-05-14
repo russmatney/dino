@@ -60,22 +60,14 @@ func on_room_loaded():
 		id="room-name"
 		})
 
-func fallback_map_def() -> MapDef:
-	return MapDef.new({
-		name="Fallback Map Def",
-		inputs=(func():
-		var inputs = [
-			MapInput.merge_many([
-				MapInput.has_entities({entity_ids=[
-					DinoEntityIds.PLAYERSPAWNPOINT,
-					DinoEntityIds.CANDLE,
-				]}),
-				MapInput.small_room_shape(),
-				MapInput.has_effects({effects=[RoomEffect.snow_fall()]})
-			])]
-		inputs.append_array(U.repeat_fn(MapInput.random_room, 2))
-		return inputs
-		).call()})
+	# TODO track quests completed for multiple rooms!
+	var qm = map.quest_manager
+	qm.all_quests_complete.connect(func():
+		# TODO this will fire in the FIRST room - instead track per room_def/map
+		level_complete.emit()
+		# TODO door open/close logic
+		)
+
 
 func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
@@ -126,7 +118,7 @@ func generate_rooms(opts={}):
 	var m_def = opts.get("map_def", map_def)
 	if not m_def:
 		Log.warn("Using fallback map_def in VaniaGame")
-		m_def = fallback_map_def()
+		m_def = MapDef.default_game()
 
 	room_defs = generator.generate_map(m_def)
 

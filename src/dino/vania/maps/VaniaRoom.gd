@@ -15,6 +15,7 @@ var tilemap: DinoTileMap
 var bg_tilemap: DinoTileMap
 var bg_color_rect: ColorRect
 var nav_region: NavigationRegion2D
+var quest_manager: QuestManager
 
 @export var is_debug = false
 @export var debug_room_def: VaniaRoomDef
@@ -82,6 +83,7 @@ func ensure_tilemaps():
 	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", DinoTileMap)
 	tilemap.add_to_group(NAV_SOURCE_GROUP, true)
 	U.ensure_owned_child(self, "nav_region", "NavigationRegion2D", NavigationRegion2D)
+	U.ensure_owned_child(self, "quest_manager", "QuestManager", QuestManager)
 
 # TODO use neighbor tileset as background near the door
 # TODO pull all this into DinoTileMap

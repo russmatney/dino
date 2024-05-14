@@ -253,19 +253,23 @@ func relative_neighbor_coords(def: VaniaRoomDef = null):
 			Vector3i(0, 1, 0),
 			Vector3i(0, -1, 0),
 			]
-	Log.pr("getting rel neighbor coords", def.door_mode(), def.only_advance())
+	Log.pr("getting rel neighbor coords", def.door_mode(), def.neighbor_direction())
+	match def.neighbor_direction():
+		Vector2i.LEFT:
+			return [Vector3i(1, 0, 0)]
+		Vector2i.RIGHT:
+			return [Vector3i(-1, 0, 0)]
+		Vector2i.UP:
+			return [Vector3i(0, 1, 0)]
+		Vector2i.DOWN:
+			return [Vector3i(0, -1, 0)]
+
 	match def.door_mode():
 		VaniaRoomDef.DOOR_MODE.MINIMAL_VERTICAL:
-			if def.only_advance():
-				return [Vector3i(0, -1, 0)]
 			return [Vector3i(0, 1, 0), Vector3i(0, -1, 0)]
 		VaniaRoomDef.DOOR_MODE.MINIMAL_HORIZONTAL:
-			if def.only_advance():
-				return [Vector3i(-1, 0, 0)]
 			return [Vector3i(1, 0, 0), Vector3i(-1, 0, 0)]
 		_:
-			if def.only_advance():
-				return [Vector3i(-1, 0, 0), Vector3i(0, -1, 0)]
 			return [
 				Vector3i(1, 0, 0),
 				Vector3i(-1, 0, 0),
