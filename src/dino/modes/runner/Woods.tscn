@@ -18,6 +18,7 @@ room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 3
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_n1wd3"]
@@ -29,6 +30,7 @@ room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_gnrho"]
@@ -40,6 +42,7 @@ room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_de14r"]
@@ -51,6 +54,7 @@ room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_o72ks"]
@@ -60,7 +64,6 @@ name = "The Woods!"
 input = SubResource("Resource_05v5c")
 rooms = Array[ExtResource("3_11sqm")]([SubResource("Resource_n1wd3"), SubResource("Resource_gnrho"), SubResource("Resource_de14r")])
 sub_map_defs = Array[ExtResource("2_r7fk4")]([])
-grid_defs_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [node name="Woods" type="Node2D"]
 script = ExtResource("1_kt2ox")

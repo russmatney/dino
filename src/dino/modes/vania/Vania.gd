@@ -53,6 +53,7 @@ func start_game():
 		game_node.queue_free()
 
 	if not map_def:
+		Log.warn("No vania map_def set, picking a fallback")
 		map_def = MapDef.mixed_genre_game()
 		# map_def = MapDef.arcade_game()
 		# map_def = MapDef.topdown_game()

@@ -48,7 +48,6 @@ static var all_room_shapes = {
 							Vector3i(0, 1, 0),],
 	}
 
-
 @export var genre_type: DinoData.GenreType
 @export var entities: Array[DinoEntity]
 @export var enemies: Array[DinoEnemy]
@@ -56,6 +55,8 @@ static var all_room_shapes = {
 @export var room_shapes = []
 @export var room_effects: Array[RoomEffect]
 @export var tiles: Array[DinoTiles]
+
+@export var door_mode: VaniaRoomDef.DOOR_MODE
 
 var grid: GridDef
 var grids: Array[GridDef]
@@ -73,31 +74,37 @@ var grids: Array[GridDef]
 func _init(opts={}):
 	if opts.get("genre_type"):
 		genre_type = opts.get("genre_type")
-	if opts.get("entities"):
-		entities.assign(opts.get("entities"))
-	if opts.get("enemies"):
-		enemies.assign(opts.get("enemies"))
+	entities.assign(opts.get("entities", []))
+	enemies.assign(opts.get("enemies", []))
 	if opts.get("room_shape"):
 		room_shape.assign(opts.get("room_shape"))
 	room_shapes.assign(opts.get("room_shapes", []))
 	if opts.get("room_effects"):
 		room_effects.assign(opts.get("room_effects"))
-	if opts.get("tiles"):
-		tiles.assign(opts.get("tiles"))
+	tiles.assign(opts.get("tiles", []))
+	door_mode = opts.get("door_mode", 0)
 
-func to_printable():
+func to_pretty():
 	return {
+		genre_type=genre_type,
 		entities=entities,
 		enemies=enemies,
 		tiles=tiles,
 		room_shape=room_shape,
 		room_shapes=room_shapes,
 		room_effects=room_effects,
+		door_mode=door_mode,
 		}
 
 ## merge ######################################################
 
 func merge(b: MapInput):
+
+	# enums as ints are such a PITA
+	var dm = door_mode
+	if b.door_mode > 0:
+		dm = b.door_mode
+
 	return MapInput.new({
 		genre_type=U._or(b.genre_type, genre_type),
 		entities=U.append_array(entities, b.entities),
@@ -106,6 +113,8 @@ func merge(b: MapInput):
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tiles=U.distinct(U.append_array(tiles, b.tiles)),
+
+		door_mode=dm,
 		})
 
 ## update room def ######################################################
@@ -129,7 +138,7 @@ func set_room_def_shape(def):
 
 	if not room_shape.is_empty():
 		def.set_local_cells(room_shape)
-	elif not room_shapes.is_empty():
+	elif room_shapes and not room_shapes.is_empty():
 		def.set_local_cells(room_shapes.pick_random())
 	else:
 		def.set_local_cells(all_room_shapes.values().pick_random())

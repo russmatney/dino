@@ -4,13 +4,31 @@ class_name VaniaRoomDef
 
 ## static #####################################################3
 
+static func default_input() -> MapInput:
+	return MapInput.with({
+		entity_ids=[DinoEntityIds.PLAYERSPAWNPOINT],
+		})
+
 static func to_defs(m_def: MapDef) -> Array[VaniaRoomDef]:
 	var defs: Array[VaniaRoomDef] = []
 
 	if m_def.rooms.is_empty():
+		# TODO modes/params for creating on-the-fly rooms
 		Log.warn("No room inputs passed, no defs to generate")
 
+	# ensure base input
+	if not m_def.input:
+		Log.warn("no default map_def input, creating empty")
+		m_def.input = MapInput.new()
+
+	# merge default input opts
+	m_def.input = VaniaRoomDef.default_input().merge(m_def.input)
+
 	for inp in m_def.rooms:
+		# TODO conditional/flag to skip/randomize this merging
+		# per-room overwrites map_def.input (b overwites a)
+		inp = m_def.input.merge(inp)
+
 		var def = VaniaRoomDef.new({input=inp})
 		def.map_def = m_def
 		defs.append(def)
@@ -37,6 +55,14 @@ var index: int = 0
 
 @export var input: MapInput
 var map_def: MapDef
+
+enum DOOR_MODE {
+	UNSET,
+	ALL_DOORS,
+	MINIMAL,
+	MINIMAL_HORIZONTAL,
+	MINIMAL_VERTICAL,
+	}
 
 func to_printable():
 	return {
@@ -75,6 +101,13 @@ func tiles() -> Array[DinoTiles]:
 	if not input:
 		return []
 	return input.tiles
+
+func door_mode() -> DOOR_MODE:
+	if not input:
+		return DOOR_MODE.ALL_DOORS
+	return input.door_mode
+
+
 
 ## input #####################################################3
 
@@ -177,8 +210,45 @@ func get_local_height() -> Vector2i:
 func get_doors(opts={}):
 	var neighbors = build_neighbor_data(opts)
 	var doors = []
-	for n in neighbors:
-		doors.append_array(n.possible_doors)
+	match door_mode():
+		DOOR_MODE.UNSET, DOOR_MODE.ALL_DOORS: # open up all doorways
+			Log.pr("all doors", door_mode())
+			for n in neighbors:
+				doors.append_array(n.possible_doors)
+		DOOR_MODE.MINIMAL: # open one random door per neighbor
+			Log.pr("minimal doors", door_mode())
+			for n in neighbors:
+				doors.append(n.possible_doors.pick_random())
+		DOOR_MODE.MINIMAL_HORIZONTAL: # open one horizontal door per neighbor
+			Log.pr("minimal horizontal doors", door_mode())
+			for n in neighbors:
+				var added = false
+				for d in n.possible_doors:
+					# same x-coord
+					if d[0][0] == d[1][0]:
+						doors.append(d)
+						added = true
+						break
+				if not added:
+					Log.warn("No horizontal door for neighbor", n)
+					doors.append(n.possible_doors.pick_random())
+				else:
+					Log.pr("added horizontal doors", doors, n.possible_doors)
+		DOOR_MODE.MINIMAL_VERTICAL: # open one vertical door per neighbor
+			Log.pr("minimal vertical doors", door_mode())
+			for n in neighbors:
+				var added = false
+				for d in n.possible_doors:
+					# same y-coord
+					if d[0][1] == d[1][1]:
+						doors.append(d)
+						added = true
+						break
+				if not added:
+					Log.warn("No vertical door for neighbor", n)
+					doors.append(n.possible_doors.pick_random())
+		_:
+			Log.pr("no door_mode match", door_mode)
 	return doors
 
 func build_neighbor_data(opts={}):

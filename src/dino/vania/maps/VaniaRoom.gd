@@ -128,8 +128,6 @@ func clear_background_tiles():
 func setup_walls_and_doors(opts={}):
 	var door_tile_coords = get_door_tile_coords(opts)
 
-	# TODO include neighbor data when building rooms
-	# but also, support updating doors when new neighbors are created
 	clear_tilemap_tiles()
 	fill_tilemap_borders({skip_cells=door_tile_coords})
 

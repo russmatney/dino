@@ -125,6 +125,7 @@ func generate_rooms(opts={}):
 
 	var m_def = opts.get("map_def", map_def)
 	if not m_def:
+		Log.warn("Using fallback map_def in VaniaGame")
 		m_def = fallback_map_def()
 
 	room_defs = generator.generate_map(m_def)

@@ -311,21 +311,21 @@ static func set_random_frame(anim):
 ## misc functional ###########################################################
 
 static func _or(a, b = null, c = null, d = null, e = null):
-	if a:
+	if a != null:
 		return a
-	if b:
+	if b != null:
 		return b
-	if c:
+	if c != null:
 		return c
-	if d:
+	if d != null:
 		return d
-	if e:
+	if e != null:
 		return e
 
 static func _and(a, b = null, c = null, d = null, e = null):
 	# expand impl to support 5 inputs
 	# support vars as callables, call if previous were non-nil
-	if a and b:
+	if a != null and b != null:
 		return b
 
 # could be more efficient
@@ -473,7 +473,8 @@ static func append(arr, x):
 	return arr
 
 static func append_array(arr, arr_b):
-	arr.append_array(arr_b)
+	if arr_b:
+		arr.append_array(arr_b)
 	return arr
 
 static func distinct(arr):

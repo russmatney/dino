@@ -6,25 +6,15 @@ class_name MapDef
 # name of the mapDef
 @export var name: String
 
-# inputs to pull from in any room
+# inputs to be used in any room
 @export var input: MapInput
 
-# inputs to pull from per-room
+# inputs for specific rooms and specific items in them
+# TODO do we want metadata on these? or is that just more MapInput fields?
 @export var rooms: Array[MapInput]
-
-# a level def for generating a DinoLevel via Brick
-@export var level_def: LevelDef
 
 # sub map_defs for complex map generation
 @export var sub_map_defs: Array[MapDef]
-
-# extra grid defs to inform/support map gen
-var grid_defs: GridDefs
-@export_file var grid_defs_path: String :
-	set(path):
-		if path:
-			grid_defs_path = path
-			grid_defs = GridParser.parse({defs_path=path})
 
 ## init #######################################################
 
@@ -32,11 +22,10 @@ func _init(opts={}):
 	name = opts.get("name", "New Map Def")
 
 func new_game_node(opts={}):
-	# TODO move branching to grid_defs? or an explicit classic/vania flag?
-	# if level_def:
-	# 	return DinoLevel.create_level(self, opts)
-	# else:
 	return VaniaGame.create_game_node(self, opts)
+
+func to_pretty():
+	return [name, {input=input, rooms=rooms}]
 
 ############################################################
 ## static #######################################################
