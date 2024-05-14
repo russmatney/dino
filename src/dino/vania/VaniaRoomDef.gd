@@ -207,48 +207,40 @@ func get_local_height() -> Vector2i:
 
 ## neighbors ######################################################
 
+func is_door_for_mode(mode, door) -> bool:
+	match mode:
+		DOOR_MODE.MINIMAL_HORIZONTAL:
+			return door[0][0] == door[1][0]
+		DOOR_MODE.MINIMAL_VERTICAL:
+			return door[0][1] == door[1][1]
+		_:
+			return true
+
 func get_doors(opts={}):
+	# TODO how to ensure the neighbor uses the same door?
+	# need to surface and store which doors are being used
 	var neighbors = build_neighbor_data(opts)
 	var doors = []
 	match door_mode():
-		DOOR_MODE.UNSET, DOOR_MODE.ALL_DOORS: # open up all doorways
-			Log.pr("all doors", door_mode())
-			for n in neighbors:
-				doors.append_array(n.possible_doors)
-		DOOR_MODE.MINIMAL: # open one random door per neighbor
-			Log.pr("minimal doors", door_mode())
+		DOOR_MODE.MINIMAL:
+			# one random door per neighbor
 			for n in neighbors:
 				doors.append(n.possible_doors.pick_random())
-		DOOR_MODE.MINIMAL_HORIZONTAL: # open one horizontal door per neighbor
-			Log.pr("minimal horizontal doors", door_mode())
+		DOOR_MODE.MINIMAL_VERTICAL, DOOR_MODE.MINIMAL_HORIZONTAL:
+			# one vert/horiz door per neighbor
 			for n in neighbors:
-				var added = false
-				for d in n.possible_doors:
-					# same x-coord
-					if d[0][0] == d[1][0]:
-						doors.append(d)
-						added = true
-						break
-				if not added:
-					Log.warn("No horizontal door for neighbor", n)
+				var ds = n.possible_doors.filter(func(door):
+					return is_door_for_mode(door_mode(), door))
+				if ds.is_empty():
+					Log.warn("No horiz/vert door for neighbor", door_mode(), n)
 					doors.append(n.possible_doors.pick_random())
 				else:
-					Log.pr("added horizontal doors", doors, n.possible_doors)
-		DOOR_MODE.MINIMAL_VERTICAL: # open one vertical door per neighbor
-			Log.pr("minimal vertical doors", door_mode())
+					var d = ds.pick_random()
+					doors.append(d)
+		_, DOOR_MODE.UNSET, DOOR_MODE.ALL_DOORS:
+			# add all doors
 			for n in neighbors:
-				var added = false
-				for d in n.possible_doors:
-					# same y-coord
-					if d[0][1] == d[1][1]:
-						doors.append(d)
-						added = true
-						break
-				if not added:
-					Log.warn("No vertical door for neighbor", n)
-					doors.append(n.possible_doors.pick_random())
-		_:
-			Log.pr("no door_mode match", door_mode)
+				doors.append_array(n.possible_doors)
 	return doors
 
 func build_neighbor_data(opts={}):

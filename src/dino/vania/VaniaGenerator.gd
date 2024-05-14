@@ -195,6 +195,7 @@ func attach_room(existing_map_cells, def):
 		Log.warn("Could not find a possible start coord for room def", def)
 		return
 
+	# TODO use door_mode to filter on possible coords
 	var start_coord = possible_start_coords.pick_random()
 
 	for cell in def.local_cells:
@@ -214,7 +215,7 @@ func get_possible_start_coords(existing_map_cells, local_cells):
 	possible_rect.size += def_rect.size + Vector2i.ONE
 
 	var possible = []
-	if (existing_map_cells.is_empty()):
+	if existing_map_cells.is_empty():
 		possible = [Vector3i()]
 	else:
 		for start_coord in Reptile.cells_in_rect(possible_rect):
