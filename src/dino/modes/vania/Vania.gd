@@ -87,6 +87,12 @@ func _on_level_complete():
 func _on_game_complete():
 	Dino.notif({type="banner", text="Game Complete",})
 
+	# toss the game node!
+	# TODO clear metsys maps?
+	if game_node:
+		remove_child.call_deferred(game_node)
+		game_node.queue_free()
+
 	# TODO win menu instead of forced nav
 	# show high scores, stats, button for credits, main-menu, replay new seed
 	Navi.nav_to_main_menu()

@@ -42,7 +42,7 @@ room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[ExtResource("5_8fw4a")]([SubResource("Resource_gkukq")])
 door_mode = 4
 neighbor_direction = Vector2i(0, -1)
-skip_borders = Array[Vector2i]([])
+skip_borders = Array[Vector2i]([Vector2i(0, -1)])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_sgckp"]
