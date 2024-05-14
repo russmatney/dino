@@ -40,10 +40,11 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 			for i in 4:
 				cell.borders[i] = 0
 				cell.border_colors[i] = room_def.border_color
-			cell.set_assigned_scene(room_def.room_path)
+
+			cell.set_assigned_scene.call_deferred(room_def.room_path)
 
 		defs.append(room_def)
-	builder.update_map()
+	builder.update_map.call_deferred()
 
 	# update all_room_defs
 	all_room_defs.append_array(defs)

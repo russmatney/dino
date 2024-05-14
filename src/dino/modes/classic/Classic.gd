@@ -91,7 +91,8 @@ func launch_level(map_def):
 func _on_level_complete():
 	Dino.notif({type="banner", text="Level Complete",})
 
-	# TODO slow-mo, score screen with awards/progress/stats
+	# TODO slow-mo, zoom in on player
+	# popup score screen with awards/progress/stats
 	# (quest data, misc fun ideas ('fighter stance': 500 pts))
 
 	var def = next_map_def()

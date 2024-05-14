@@ -105,13 +105,14 @@ func thread_room_generation(opts):
 	if generating:
 		return
 
+	VaniaGenerator.remove_generated_cells()
+
 	# The thread that does map generation.
 	generating = Thread.new()
 	generating.start(func(): generate_rooms(opts))
 	set_process(true)
 
 func generate_rooms(opts={}):
-	VaniaGenerator.remove_generated_cells()
 	MetSys.reset_state()
 	MetSys.set_save_data()
 

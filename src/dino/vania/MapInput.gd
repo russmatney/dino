@@ -58,6 +58,7 @@ static var all_room_shapes = {
 
 @export var door_mode: VaniaRoomDef.DOOR_MODE
 @export var neighbor_direction: Vector2i
+@export var skip_borders: Array[Vector2i]
 
 var grid: GridDef
 var grids: Array[GridDef]
@@ -85,6 +86,7 @@ func _init(opts={}):
 	tiles.assign(opts.get("tiles", []))
 	door_mode = opts.get("door_mode", 0)
 	neighbor_direction = opts.get("neighbor_direction", Vector2i.ZERO)
+	skip_borders.assign(opts.get("skip_borders", []))
 
 func to_pretty():
 	return {
@@ -97,6 +99,7 @@ func to_pretty():
 		room_effects=room_effects,
 		door_mode=door_mode,
 		neighbor_direction=neighbor_direction,
+		skip_borders=skip_borders,
 		}
 
 ## merge ######################################################
@@ -122,6 +125,7 @@ func merge(b: MapInput):
 		tiles=U.distinct(U.append_array(tiles, b.tiles)),
 		door_mode=dm,
 		neighbor_direction=nbr_dir,
+		skip_borders=U.distinct(U.append_array(skip_borders, b.skip_borders)),
 		})
 
 ## update room def ######################################################

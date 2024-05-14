@@ -20,6 +20,7 @@ room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 3
 neighbor_direction = Vector2i(1, 0)
+skip_borders = Array[Vector2i]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_n1wd3"]
@@ -33,6 +34,7 @@ room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_gnrho"]
@@ -46,6 +48,7 @@ room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_de14r"]
@@ -59,6 +62,7 @@ room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_o72ks"]

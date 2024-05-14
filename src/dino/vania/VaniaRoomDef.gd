@@ -112,6 +112,10 @@ func neighbor_direction() -> Vector2i:
 		return Vector2i.ZERO
 	return input.neighbor_direction
 
+func skip_borders() -> Array[Vector2i]:
+	if not input:
+		return []
+	return input.skip_borders
 
 ## input #####################################################3
 

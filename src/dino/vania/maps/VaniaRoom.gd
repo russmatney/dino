@@ -131,6 +131,7 @@ func setup_walls_and_doors(opts={}):
 	var door_tile_coords = get_door_tile_coords(opts)
 
 	clear_tilemap_tiles()
+
 	fill_tilemap_borders({skip_cells=door_tile_coords})
 
 	tilemap.mix_terrains()
@@ -152,18 +153,33 @@ func is_border_coord(cell_rect: Rect2i, coord: Vector2i, opts={}):
 		Vector2i.DOWN,
 		])
 	# corners are always filled, borders are opt-out via skip_borders
-	return (abs(cell_rect.position.x - coord.x) < tile_border_width - offset and
-			abs(cell_rect.position.y - coord.y) < tile_border_width - offset) \
-		or (abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and
-			abs(cell_rect.position.y - coord.y) < tile_border_width - offset) \
-		or (abs(cell_rect.position.x - coord.x) < tile_border_width - offset and
-			abs(cell_rect.end.y - coord.y) <= tile_border_width - offset) \
-		or (abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and
-			abs(cell_rect.end.y - coord.y) <= tile_border_width - offset) \
-		or (abs(cell_rect.position.x - coord.x) < tile_border_width - offset and not Vector2i.LEFT in skip_borders) \
-		or (abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and not Vector2i.RIGHT in skip_borders) \
-		or (abs(cell_rect.position.y - coord.y) < tile_border_width - offset and not Vector2i.UP in skip_borders) \
-		or (abs(cell_rect.end.y - coord.y) <= tile_border_width - offset and not Vector2i.DOWN in skip_borders)
+
+	var is_left_border = abs(cell_rect.position.x - coord.x) < tile_border_width - offset
+	var is_right_border = abs(cell_rect.end.x - coord.x) <= tile_border_width - offset
+	var is_top_border = abs(cell_rect.position.y - coord.y) < tile_border_width - offset
+	var is_bottom_border = abs(cell_rect.end.y - coord.y) <= tile_border_width - offset
+
+	var is_top_left_corner = (
+		abs(cell_rect.position.x - coord.x) < tile_border_width - offset and
+		abs(cell_rect.position.y - coord.y) < tile_border_width - offset)
+	var is_top_right_corner = (
+		abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and
+		abs(cell_rect.position.y - coord.y) < tile_border_width - offset)
+	var is_bottom_left_corner = (
+		abs(cell_rect.position.x - coord.x) < tile_border_width - offset and
+		abs(cell_rect.end.y - coord.y) <= tile_border_width - offset)
+	var is_bottom_right_corner = (
+		abs(cell_rect.end.x - coord.x) <= tile_border_width - offset and
+		abs(cell_rect.end.y - coord.y) <= tile_border_width - offset)
+
+	return (is_top_left_corner and not (Vector2i.LEFT + Vector2i.UP) in skip_borders) \
+		or (is_top_right_corner and not (Vector2i.RIGHT + Vector2i.UP) in skip_borders) \
+		or (is_bottom_left_corner and not (Vector2i.LEFT + Vector2i.DOWN) in skip_borders) \
+		or (is_bottom_right_corner and not (Vector2i.RIGHT + Vector2i.DOWN) in skip_borders) \
+		or (is_left_border and not Vector2i.LEFT in skip_borders) \
+		or (is_right_border and not Vector2i.RIGHT in skip_borders) \
+		or (is_top_border and not Vector2i.UP in skip_borders) \
+		or (is_bottom_border and not Vector2i.DOWN in skip_borders)
 
 func internal_borders(cell, cells):
 	var borders = []
@@ -184,6 +200,8 @@ func fill_tilemap_borders(opts={}):
 		recti.size += Vector2i.DOWN # weird!
 
 		var skip_borders = internal_borders(cell, room_def.local_cells)
+		# TODO does this also skip corners?
+		skip_borders.append_array(room_def.skip_borders())
 
 		var border_cells = Reptile.cells_in_rect(recti).filter(func(coord):
 			if opts.get("skip_cells"):
