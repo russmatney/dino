@@ -209,10 +209,10 @@ func get_local_height() -> Vector2i:
 
 func is_door_for_mode(mode, door) -> bool:
 	match mode:
-		DOOR_MODE.MINIMAL_HORIZONTAL:
-			return door[0][0] == door[1][0]
-		DOOR_MODE.MINIMAL_VERTICAL:
+		DOOR_MODE.MINIMAL_HORIZONTAL: # horizontal - same y
 			return door[0][1] == door[1][1]
+		DOOR_MODE.MINIMAL_VERTICAL: # vertical - same x
+			return door[0][0] == door[1][0]
 		_:
 			return true
 
