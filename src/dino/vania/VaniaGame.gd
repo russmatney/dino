@@ -9,7 +9,7 @@ static func create_game_node(def: MapDef, _opts={}):
 	game_node.map_def = def
 	return game_node
 
-# func to_printable():
+# func to_pretty():
 # 	return {level_def=level_def.get_display_name()}
 
 ## vars #######################################################

@@ -2,7 +2,7 @@ extends RefCounted
 class_name VaniaGenerator
 
 const GEN_MAP_DIR = "user://vania_maps"
-var global_room_num = 0
+static var global_room_num = 0
 
 var neighbor_data = {}
 var all_room_defs: Array[VaniaRoomDef] = []
@@ -151,9 +151,9 @@ func get_neighbor_defs(room_def: VaniaRoomDef):
 
 func set_room_scene_path(room_def):
 	var basename = room_def.base_scene_path.get_file().get_basename()
-	var new_map = "%s%d.tscn" % [basename, global_room_num]
+	var new_map = "%s%d.tscn" % [basename, VaniaGenerator.global_room_num]
 	room_def.index = global_room_num
-	global_room_num += 1
+	VaniaGenerator.global_room_num += 1
 	room_def.room_path = GEN_MAP_DIR.path_join(new_map)
 
 ## prepare scene ##############################################################
@@ -253,7 +253,6 @@ func relative_neighbor_coords(def: VaniaRoomDef = null):
 			Vector3i(0, 1, 0),
 			Vector3i(0, -1, 0),
 			]
-	Log.pr("getting rel neighbor coords", def.door_mode(), def.neighbor_direction())
 	match def.neighbor_direction():
 		Vector2i.LEFT:
 			return [Vector3i(1, 0, 0)]
