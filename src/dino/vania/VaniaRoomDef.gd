@@ -107,6 +107,11 @@ func door_mode() -> DOOR_MODE:
 		return DOOR_MODE.ALL_DOORS
 	return input.door_mode
 
+func only_advance() -> bool:
+	if not input:
+		return false
+	return input.only_advance
+
 
 
 ## input #####################################################3

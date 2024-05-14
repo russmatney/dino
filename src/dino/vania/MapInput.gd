@@ -57,6 +57,7 @@ static var all_room_shapes = {
 @export var tiles: Array[DinoTiles]
 
 @export var door_mode: VaniaRoomDef.DOOR_MODE
+@export var only_advance: bool
 
 var grid: GridDef
 var grids: Array[GridDef]
@@ -83,6 +84,7 @@ func _init(opts={}):
 		room_effects.assign(opts.get("room_effects"))
 	tiles.assign(opts.get("tiles", []))
 	door_mode = opts.get("door_mode", 0)
+	only_advance = opts.get("only_advance", false)
 
 func to_pretty():
 	return {
@@ -94,6 +96,7 @@ func to_pretty():
 		room_shapes=room_shapes,
 		room_effects=room_effects,
 		door_mode=door_mode,
+		only_advance=only_advance,
 		}
 
 ## merge ######################################################
@@ -113,8 +116,8 @@ func merge(b: MapInput):
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tiles=U.distinct(U.append_array(tiles, b.tiles)),
-
 		door_mode=dm,
+		only_advance=U._or(b.only_advance, only_advance),
 		})
 
 ## update room def ######################################################

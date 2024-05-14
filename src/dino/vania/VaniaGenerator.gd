@@ -217,7 +217,7 @@ func get_possible_start_coords(existing_map_cells, def):
 	if existing_map_cells.is_empty():
 		possible = [Vector3i()]
 	else:
-		var rel_neighbor_coords = relative_neighbor_coords(def.door_mode())
+		var rel_neighbor_coords = relative_neighbor_coords(def)
 
 		var found = false
 		for start_coord in Reptile.cells_in_rect(possible_rect):
@@ -245,19 +245,27 @@ func no_conflicting_cells(start_coord, existing_map_cells, local_cells_dict):
 			return false
 	return true
 
-func relative_neighbor_coords(door_mode=null):
-	match door_mode:
+func relative_neighbor_coords(def: VaniaRoomDef = null):
+	if not def:
+		return [
+			Vector3i(1, 0, 0),
+			Vector3i(-1, 0, 0),
+			Vector3i(0, 1, 0),
+			Vector3i(0, -1, 0),
+			]
+	Log.pr("getting rel neighbor coords", def.door_mode(), def.only_advance())
+	match def.door_mode():
 		VaniaRoomDef.DOOR_MODE.MINIMAL_VERTICAL:
-			return [
-				Vector3i(0, 1, 0),
-				Vector3i(0, -1, 0),
-				]
+			if def.only_advance():
+				return [Vector3i(0, -1, 0)]
+			return [Vector3i(0, 1, 0), Vector3i(0, -1, 0)]
 		VaniaRoomDef.DOOR_MODE.MINIMAL_HORIZONTAL:
-			return [
-				Vector3i(1, 0, 0),
-				Vector3i(-1, 0, 0),
-				]
+			if def.only_advance():
+				return [Vector3i(-1, 0, 0)]
+			return [Vector3i(1, 0, 0), Vector3i(-1, 0, 0)]
 		_:
+			if def.only_advance():
+				return [Vector3i(-1, 0, 0), Vector3i(0, -1, 0)]
 			return [
 				Vector3i(1, 0, 0),
 				Vector3i(-1, 0, 0),
@@ -270,8 +278,8 @@ func has_neighbor(start_coord, existing_map_cells, local_cells_dict, neighbor_co
 		neighbor_coords = relative_neighbor_coords()
 	for coord in local_cells_dict:
 		var map_coord = coord + start_coord
-		var nbr_coords = neighbor_coords.map(func(crd): return crd + map_coord)
-		var has_nbr = nbr_coords.any(func(nc): return existing_map_cells.get(nc))
+		var nbr_coords = neighbor_coords.map(func(n_crd): return map_coord + n_crd)
+		var has_nbr = nbr_coords.any(func(n_crd): return existing_map_cells.get(n_crd))
 		if has_nbr:
 			return true
 	return false

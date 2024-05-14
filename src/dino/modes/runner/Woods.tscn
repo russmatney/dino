@@ -19,6 +19,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 3
+only_advance = true
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_n1wd3"]
@@ -31,6 +32,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
+only_advance = false
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_gnrho"]
@@ -43,6 +45,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
+only_advance = false
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_de14r"]
@@ -55,6 +58,7 @@ room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
+only_advance = false
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_o72ks"]

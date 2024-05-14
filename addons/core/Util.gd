@@ -311,15 +311,15 @@ static func set_random_frame(anim):
 ## misc functional ###########################################################
 
 static func _or(a, b = null, c = null, d = null, e = null):
-	if a != null:
+	if a:
 		return a
-	if b != null:
+	if b:
 		return b
-	if c != null:
+	if c:
 		return c
-	if d != null:
+	if d:
 		return d
-	if e != null:
+	if e:
 		return e
 
 static func _and(a, b = null, c = null, d = null, e = null):
