@@ -51,15 +51,6 @@ static func create_level(def: LevelDef, opts={}):
 
 	return l
 
-static func create_level_from_game(ent: DinoGameEntity, opts={}):
-	var scene = ent.get_level_scene()
-	var level = scene.instantiate()
-
-	# TODO clear existing nodes/ents/quests on these scenes?
-	# TODO or, refactor game ents into level defs?
-	level.regenerate(opts)
-	return level
-
 ## exports/triggers ######################################################
 
 @export var genre_type: DinoData.GenreType
@@ -87,33 +78,6 @@ func regen_with_def(def):
 	level_opts.defs_path = def.get_def_path()
 	# .... maybe.
 	level_opts.label_to_tilemap = {"Tile": {scene=def.get_tiles_scene()}}
-
-	regenerate()
-
-@export var game_entity: DinoGameEntity
-
-@export var regen_with_game_ent: bool = false :
-	set(v):
-		if not Engine.is_editor_hint():
-			return
-		if game_entity:
-			regen_with_ent(game_entity)
-
-func regen_with_ent(ent: DinoGameEntity):
-	if not ent:
-		return
-
-	var scene = ent.get_level_scene()
-	var level = scene.instantiate()
-
-	genre_type = ent.get_genre_type()
-
-	# ensure level gen node
-	for ch in level.get_children():
-		if ch is BrickLevelGen:
-			level_gen.set_script(ch.get_script())
-			level_opts.defs_path = ch.get_defs_path()
-			break
 
 	regenerate()
 
@@ -215,8 +179,6 @@ func _ready():
 func level_name():
 	if level_def:
 		return level_def.get_display_name()
-	if game_entity:
-		return game_entity.get_display_name()
 	return name
 
 
@@ -236,6 +198,10 @@ func _process(delta):
 # regenerate the level with whatever passed opts
 # presumably invokes the nodes_transferred signal when it's done
 func regenerate(opts=null):
+
+	# TODO create vania_room_def with level_def grids?
+	# or just create/pass the map_def ?
+
 	if opts == null and level_opts != null:
 		opts = level_opts
 
@@ -251,6 +217,7 @@ func regenerate(opts=null):
 	DinoLevel.ensure_empty_containers(self)
 	if not level_gen:
 		level_gen = get_node_or_null("LevelGen")
+
 	level_gen.generate(opts)
 
 	if hud and not Engine.is_editor_hint():

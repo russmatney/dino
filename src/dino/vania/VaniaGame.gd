@@ -149,7 +149,7 @@ func regenerate_other_rooms():
 			continue
 		other_room_defs.append(rd)
 
-	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_room()})
+	var new_room_defs = VaniaRoomDef.to_defs(MapDef.random_room())
 	generator.remove_rooms(other_room_defs)
 	room_defs = generator.add_rooms(new_room_defs)
 
@@ -163,7 +163,7 @@ func regenerate_other_rooms():
 
 func add_new_room(count=1):
 	# TODO these inputs reading from vania-menu configged constraints
-	var new_room_defs = VaniaRoomDef.to_defs({map_def=MapDef.random_rooms({count=count})})
+	var new_room_defs = VaniaRoomDef.to_defs(MapDef.random_rooms({count=count}))
 	room_defs = generator.add_rooms(new_room_defs)
 	Log.info(len(new_room_defs), " rooms added")
 

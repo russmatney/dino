@@ -55,7 +55,6 @@ func _ready():
 				genre_type=DinoData.GenreType.SideScroller,
 				})
 
-
 		if not room_def:
 			Log.warn("No room_def on vania room!")
 

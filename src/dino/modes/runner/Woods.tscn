@@ -1,15 +1,66 @@
-[gd_scene load_steps=4 format=3 uid="uid://6ubke3rqjtny"]
+[gd_scene load_steps=11 format=3 uid="uid://6ubke3rqjtny"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_kt2ox"]
+[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_8n0s3"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="2_r7fk4"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="3_11sqm"]
+
+[sub_resource type="Resource" id="Resource_tqtmy"]
+script = ExtResource("2_8n0s3")
+_id = "136"
+
+[sub_resource type="Resource" id="Resource_05v5c"]
+script = ExtResource("3_11sqm")
+genre_type = 0
+entities = Array[ExtResource("2_8n0s3")]([SubResource("Resource_tqtmy"), SubResource("Resource_tqtmy"), SubResource("Resource_tqtmy")])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_n1wd3"]
+script = ExtResource("3_11sqm")
+genre_type = 0
+entities = Array[ExtResource("2_8n0s3")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
+
+[sub_resource type="Resource" id="Resource_gnrho"]
+script = ExtResource("3_11sqm")
+genre_type = 0
+entities = Array[ExtResource("2_8n0s3")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
+
+[sub_resource type="Resource" id="Resource_de14r"]
+script = ExtResource("3_11sqm")
+genre_type = 0
+entities = Array[ExtResource("2_8n0s3")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_o72ks"]
 resource_name = "The Woods Map Def"
 script = ExtResource("2_r7fk4")
-name = "Run!"
-rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
+name = "The Woods!"
+input = SubResource("Resource_05v5c")
+rooms = Array[ExtResource("3_11sqm")]([SubResource("Resource_n1wd3"), SubResource("Resource_gnrho"), SubResource("Resource_de14r")])
 sub_map_defs = Array[ExtResource("2_r7fk4")]([])
-grid_defs_path = ""
+grid_defs_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [node name="Woods" type="Node2D"]
 script = ExtResource("1_kt2ox")

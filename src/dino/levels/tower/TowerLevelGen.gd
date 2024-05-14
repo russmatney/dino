@@ -1,6 +1,16 @@
 @tool
 extends BrickLevelGen
 
+# var def = MapDef.new({
+# 	rooms=[
+# 		MapInput.with({entity_ids=[DinoEntityIds.PLAYERSPAWNPOINT,]}),
+# 		# ... some in-betweeners
+# 		MapInput.with({entity_ids=[DinoEntityIds.CANDLE,]}),
+# 		# ... some in-betweeners
+# 		# MapInput.with({entity_ids=[DinoEntityIds.GOAL,]}),
+# 		]
+# 	})
+
 func get_room_opts(opts):
 	var default_room_opt = {flags=["middle"], side=Vector2.UP}
 

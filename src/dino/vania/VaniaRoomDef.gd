@@ -4,19 +4,15 @@ class_name VaniaRoomDef
 
 ## static #####################################################3
 
-static func to_defs(opts={}) -> Array[VaniaRoomDef]:
+static func to_defs(m_def: MapDef) -> Array[VaniaRoomDef]:
 	var defs: Array[VaniaRoomDef] = []
 
-	var inputs = opts.get("inputs", [])
-	var map_def = opts.get("map_def")
-	if map_def and inputs.is_empty():
-		inputs = map_def.inputs
-
-	if inputs.is_empty():
+	if m_def.rooms.is_empty():
 		Log.warn("No room inputs passed, no defs to generate")
 
-	for inp in inputs:
+	for inp in m_def.rooms:
 		var def = VaniaRoomDef.new({input=inp})
+		def.map_def = m_def
 		defs.append(def)
 
 	return defs
@@ -26,20 +22,21 @@ static func to_defs(opts={}) -> Array[VaniaRoomDef]:
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
 var room_path: String
 
+# met sys stuff
 var local_cells: Array #[Vector3i]
 var map_cells: Array #[Vector3i]
-
 var min_map_cell := Vector2i.MAX
 var max_map_cell := Vector2i.MIN
-
 var bg_color: Color = Color.BLACK
 var border_color: Color = Color.WHITE
 
 var tile_size = 16
 
+# useful for incrementing filenames per room - should be unique per map-gen
 var index: int = 0
 
 @export var input: MapInput
+var map_def: MapDef
 
 func to_printable():
 	return {
@@ -57,16 +54,19 @@ func genre_type() -> DinoData.GenreType:
 	return input.genre_type
 
 func entities() -> Array[DinoEntity]:
+	# TODO read entities from the input.grid/grids?
 	if not input:
 		return []
 	return input.entities
 
 func enemies() -> Array[DinoEnemy]:
+	# TODO read entities from the input.grid/grids?
 	if not input:
 		return []
 	return input.enemies
 
 func effects() -> Array[RoomEffect]:
+	# TODO read effects from the input.grid/grids?
 	if not input:
 		return []
 	return input.room_effects

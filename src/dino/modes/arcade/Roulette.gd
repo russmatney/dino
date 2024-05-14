@@ -86,11 +86,11 @@ func set_player_entity(ent: DinoPlayerEntity):
 
 ## launch_game ##################################################3
 
-func launch_game(game_entity):
-	current_def = game_entity
-	played_game_records.append({game_entity=game_entity})
+func launch_game(level_def):
+	current_def = level_def
+	# played_game_records.append({level_def=level_def})
 
-	Records.start_game({game_entity=game_entity})
+	# Records.start_game({level_def=level_def})
 
 	if game_node:
 		remove_child.call_deferred(game_node)
@@ -99,13 +99,13 @@ func launch_game(game_entity):
 
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
-			genre_type=game_entity.get_genre_type(),
+			genre_type=level_def.get_genre_type(),
 			entity=player_entity,
 			})
 
 	var level_opts = {seed=_seed, room_count=room_count,}
 
-	game_node = DinoLevel.create_level_from_game(game_entity, level_opts)
+	game_node = DinoLevel.create_level(level_def, level_opts)
 
 	add_child(game_node)
 

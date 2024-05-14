@@ -14,7 +14,7 @@ func _init():
 ## generate_map ##########################################################
 
 func generate_map(map_def: MapDef) -> Array[VaniaRoomDef]:
-	var defs = VaniaRoomDef.to_defs({map_def=map_def})
+	var defs = VaniaRoomDef.to_defs(map_def)
 	return add_rooms(defs)
 
 ## add_rooms ##########################################################

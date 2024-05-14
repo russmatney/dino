@@ -20,7 +20,7 @@ class_name MapDef
 
 # extra grid defs to inform/support map gen
 var grid_defs: GridDefs
-@export var grid_defs_path: String :
+@export_file var grid_defs_path: String :
 	set(path):
 		if path:
 			grid_defs_path = path
@@ -32,10 +32,11 @@ func _init(opts={}):
 	name = opts.get("name", "New Map Def")
 
 func new_game_node(opts={}):
-	if level_def:
-		return DinoLevel.create_level(level_def, opts)
-	else:
-		return VaniaGame.create_game_node(self, opts)
+	# TODO move branching to grid_defs? or an explicit classic/vania flag?
+	# if level_def:
+	# 	return DinoLevel.create_level(self, opts)
+	# else:
+	return VaniaGame.create_game_node(self, opts)
 
 ############################################################
 ## static #######################################################
@@ -63,6 +64,11 @@ static func harvey_room(_opts={}) -> MapInput:
 		}).merge(MapInput.topdown())
 
 ## static map defs ######################################################33
+
+static func with_inputs(rms: Array[MapInput]):
+	var def = MapDef.new()
+	def.rooms = rms
+	return def
 
 static func all_map_defs():
 	return [

@@ -57,6 +57,19 @@ static var all_room_shapes = {
 @export var room_effects: Array[RoomEffect]
 @export var tiles: Array[DinoTiles]
 
+var grid: GridDef
+var grids: Array[GridDef]
+
+@export_file var grids_path: String :
+	set(p):
+		grids_path = p
+		if p:
+			var parsed = GridParser.parse({defs_path=p})
+			if parsed:
+				grids = parsed.grids
+			else:
+				Log.warn("failed to parse grids_path", p)
+
 func _init(opts={}):
 	if opts.get("genre_type"):
 		genre_type = opts.get("genre_type")
@@ -100,6 +113,20 @@ func merge(b: MapInput):
 func update_def(def: VaniaRoomDef):
 	def.input = self
 
+	set_room_def_shape(def)
+
+	if tiles.is_empty():
+		tiles.assign([DinoTiles.all_tiles().pick_random()])
+
+# should room_def shape or grids overwrite?
+func set_room_def_shape(def):
+	# TODO figure out local_cells to cover the grid-defs
+	# TODO flags on grid for borders, fill-space, centering, doors, etc
+	if grid:
+		pass
+	elif not grids.is_empty():
+		pass
+
 	if not room_shape.is_empty():
 		def.set_local_cells(room_shape)
 	elif not room_shapes.is_empty():
@@ -107,18 +134,18 @@ func update_def(def: VaniaRoomDef):
 	else:
 		def.set_local_cells(all_room_shapes.values().pick_random())
 
-	if tiles.is_empty():
-		tiles.assign([DinoTiles.all_tiles().pick_random()])
-
 ################################################################
 ## static ######################################################
 
 static func merge_many(inputs):
 	return inputs.reduce(func(a, b): return a.merge(b))
 
-# not too sure how necessary apply and update_def are anymore
+## apply ######################################################33
+# not too sure how necessary apply + update_def are anymore
+
 # updates the passed room def with the passed room input
-# maintains the existing def's local_cells
+# maintains the existing def's local_cells (useful for keeping
+# the current room shape when regening others)
 static func apply(input: MapInput, def: VaniaRoomDef):
 	var existing_shape = def.local_cells
 

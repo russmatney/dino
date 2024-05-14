@@ -1781,23 +1781,6 @@
 				}
 			},
 			{
-				"_category_id": "179",
-				"_icon_color": "ffffff00",
-				"_id": "189",
-				"_index": 0,
-				"_name": "PurpleStoneTiles",
-				"_property_overrides": {
-					"display_name": {
-						"type": "string",
-						"value": "Purple Stone"
-					},
-					"scene": {
-						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn"
-					}
-				}
-			},
-			{
 				"_category_id": "131",
 				"_icon_color": "a762e7ff",
 				"_id": "190",
