@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=36 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
@@ -131,6 +131,10 @@ input = SubResource("Resource_5y52h")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
 
+[sub_resource type="Resource" id="Resource_bmcom"]
+script = ExtResource("3_lr33u")
+_id = "126"
+
 [sub_resource type="Resource" id="Resource_ks6si"]
 script = ExtResource("5_urg5i")
 _id = "140"
@@ -143,7 +147,7 @@ _id = "141"
 script = ExtResource("4_m4x81")
 genre_type = 0
 entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_ks6si"), SubResource("Resource_o6kti"), SubResource("Resource_ks6si")])
-enemies = Array[ExtResource("3_lr33u")]([])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_bmcom")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
@@ -160,6 +164,10 @@ input = SubResource("Resource_ys5sm")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
 
+[sub_resource type="Resource" id="Resource_pdbla"]
+script = ExtResource("3_lr33u")
+_id = "122"
+
 [sub_resource type="Resource" id="Resource_l4jh0"]
 script = ExtResource("5_urg5i")
 _id = "194"
@@ -168,7 +176,7 @@ _id = "194"
 script = ExtResource("4_m4x81")
 genre_type = 0
 entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_l4jh0"), SubResource("Resource_l4jh0"), SubResource("Resource_l4jh0")])
-enemies = Array[ExtResource("3_lr33u")]([])
+enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_pdbla")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])

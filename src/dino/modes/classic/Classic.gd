@@ -82,9 +82,9 @@ func launch_level(map_def):
 		await game_node.tree_exited
 
 	game_node = current_map_def.new_game_node({seed=_seed, })
-	add_child(game_node)
+	add_child.call_deferred(game_node)
 
-	game_node.level_complete.connect(_on_level_complete)
+	game_node.level_complete.connect(_on_level_complete, CONNECT_DEFERRED)
 
 ## game level signals ##################################################3
 
