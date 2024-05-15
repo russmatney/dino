@@ -8,7 +8,7 @@ func before():
 
 func test_game_start():
 	var game = auto_free(VaniaGame.new())
-	game.generate_rooms({map_def=MapDef.new({inputs=[
+	await game.generate_rooms({map_def=MapDef.new({rooms=[
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
@@ -26,7 +26,7 @@ func test_game_start():
 
 func test_game_add_rooms():
 	var game = auto_free(VaniaGame.new())
-	game.generate_rooms({map_def=MapDef.new({inputs=[
+	await game.generate_rooms({map_def=MapDef.new({rooms=[
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
@@ -35,7 +35,7 @@ func test_game_add_rooms():
 	assert_array(game.room_defs).is_not_empty()
 	assert_int(len(game.room_defs)).is_equal(3)
 
-	game.add_new_room(2)
+	await game.add_new_room(2)
 
 	assert_array(game.room_defs).is_not_empty()
 	assert_int(len(game.room_defs)).is_equal(5)
@@ -47,9 +47,9 @@ func test_game_add_rooms():
 
 ## remove rooms ################################################
 
-func test_game_add_room():
+func test_game_remove_room():
 	var game = auto_free(VaniaGame.new())
-	game.generate_rooms({map_def=MapDef.new({inputs=[
+	await game.generate_rooms({map_def=MapDef.new({rooms=[
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),

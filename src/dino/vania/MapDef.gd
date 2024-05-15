@@ -20,6 +20,7 @@ class_name MapDef
 
 func _init(opts={}):
 	name = opts.get("name", "New Map Def")
+	rooms.assign(opts.get("rooms", []))
 
 func new_game_node(opts={}):
 	return VaniaGame.create_game_node(self, opts)

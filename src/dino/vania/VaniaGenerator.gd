@@ -15,7 +15,7 @@ func _init():
 
 func generate_map(map_def: MapDef) -> Array[VaniaRoomDef]:
 	var defs = VaniaRoomDef.to_defs(map_def)
-	return add_rooms(defs)
+	return await add_rooms(defs)
 
 ## add_rooms ##########################################################
 
@@ -45,6 +45,8 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 
 		defs.append(room_def)
 	builder.update_map.call_deferred()
+
+	await Engine.get_main_loop().process_frame
 
 	# update all_room_defs
 	all_room_defs.append_array(defs)
