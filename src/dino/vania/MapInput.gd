@@ -1,58 +1,20 @@
 extends Resource
 class_name MapInput
 
+# TODO support props, backgrounds
 # TODO support one way platforms, spikes via grid/tiles
 # static var all_entities = [
 # 	"OneWayPlatform",
 # 	"Spikes",
 # 	]
 
-# TODO support props, backgrounds
-
-static var all_room_shapes = {
-	small=[Vector3i()],
-	wide=[Vector3i(), Vector3i(1, 0, 0),],
-	wide_3=[Vector3i(), Vector3i(1, 0, 0), Vector3i(2, 0, 0)],
-	wide_4=[Vector3i(), Vector3i(1, 0, 0), Vector3i(2, 0, 0), Vector3i(3, 0, 0)],
-	tall=[Vector3i(), Vector3i(0, 1, 0),],
-	tall_3=[Vector3i(), Vector3i(0, 1, 0), Vector3i(0, 2, 0)],
-	_4x=[Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-		Vector3i(0, 1, 0), Vector3i(1, 1, 0),],
-	_4x_wide=[Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0),
-			Vector3i(0, 1, 0), Vector3i(1, 1, 0), Vector3i(2, 1, 0),
-		],
-	L_shape=[
-		Vector3i(0, 0, 0),
-		Vector3i(0, 1, 0), Vector3i(1, 1, 0),],
-	L_backwards_shape=[
-							Vector3i(0, 0, 0),
-		Vector3i(-1, 1, 0), Vector3i(0, 1, 0),],
-	r_shape=[
-		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-		Vector3i(0, 1, 0),],
-	r_backwards_shape=[
-		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-							Vector3i(1, 1, 0),],
-	T_shape=[
-		Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-							Vector3i(0, 1, 0),],
-	T_inverted_shape=[
-							Vector3i(0, -1, 0),
-		Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0),],
-	half_H_shape=[
-		Vector3i(0, -1, 0),
-		Vector3i(0, 0, 0), Vector3i(1, 0, 0),
-		Vector3i(0, 1, 0),],
-	half_H_backwards_shape=[Vector3i(0, -1, 0),
-		Vector3i(-1, 0, 0), Vector3i(0, 0, 0),
-							Vector3i(0, 1, 0),],
-	}
-
 @export var genre_type: DinoData.GenreType
 @export var entities: Array[DinoEntity]
 @export var enemies: Array[DinoEnemy]
-@export var room_shape: Array[Vector3i]
-@export var room_shapes = []
+
+@export var room_shape: RoomShape
+@export var room_shapes: Array[RoomShape]
+
 @export var room_effects: Array[RoomEffect]
 @export var tiles: Array[DinoTiles]
 
@@ -80,7 +42,7 @@ func _init(opts={}):
 	entities.assign(opts.get("entities", []))
 	enemies.assign(opts.get("enemies", []))
 	if opts.get("room_shape"):
-		room_shape.assign(opts.get("room_shape"))
+		room_shape = opts.get("room_shape")
 	room_shapes.assign(opts.get("room_shapes", []))
 	if opts.get("room_effects"):
 		room_effects.assign(opts.get("room_effects"))
@@ -144,19 +106,20 @@ func update_def(def: VaniaRoomDef):
 
 # should room_def shape or grids overwrite?
 func set_room_def_shape(def):
-	# TODO figure out local_cells to cover the grid-defs
+	# TODO figure out local_cells to cover a room from grid-defs
 	# TODO flags on grid for borders, fill-space, centering, doors, etc
+	# maybe all handled via the new RoomShape class?
 	if grid:
 		pass
 	elif not grids.is_empty():
 		pass
 
-	if not room_shape.is_empty():
-		def.set_local_cells(room_shape)
+	if room_shape:
+		def.set_local_cells(room_shape.cells)
 	elif room_shapes and not room_shapes.is_empty():
-		def.set_local_cells(room_shapes.pick_random())
+		def.set_local_cells(room_shapes.pick_random().cells)
 	else:
-		def.set_local_cells(all_room_shapes.values().pick_random())
+		def.set_local_cells(RoomShape.random_shape().cells)
 
 ################################################################
 ## static ######################################################
@@ -199,11 +162,6 @@ static func random_entities(opts={}):
 		entities=U.rand_of(opts.get("entities", DinoEntity.all_entities()), U.rand_of([2,3,4]))
 		})
 
-static func random_room_shapes(opts={}):
-	return MapInput.new({
-		room_shapes=opts.get("room_shapes", all_room_shapes.values()),
-		})
-
 static func random_tiles(_opts={}):
 	return MapInput.new({
 		tiles=[DinoTiles.all_tiles().pick_random()]})
@@ -219,7 +177,6 @@ static func random_effects(_opts={}):
 static func random_room(opts={}):
 	return merge_many([
 		random_enemies(opts), random_entities(opts),
-		random_room_shapes(opts),
 		random_tiles(opts), random_effects(opts),
 		])
 
@@ -242,76 +199,42 @@ static func beatemup():
 
 static func has_effects(opts):
 	if opts.get("effects"):
-		return MapInput.new({
-			room_effects=opts.get("effects")
-			})
+		return MapInput.new({room_effects=opts.get("effects")})
 	return MapInput.random_effects()
 
 static func has_rain_fall(_opts={}):
-	return MapInput.new({
-		room_effects=[RoomEffect.rain_fall()]
-		})
+	return MapInput.new({room_effects=[RoomEffect.rain_fall()]})
 
 static func has_snow_fall(_opts={}):
-	return MapInput.new({
-		room_effects=[RoomEffect.snow_fall()]
-		})
+	return MapInput.new({room_effects=[RoomEffect.snow_fall()]})
 
 static func has_dust(_opts={}):
-	return MapInput.new({
-		room_effects=[RoomEffect.dust()]
-		})
+	return MapInput.new({room_effects=[RoomEffect.dust()]})
 
 ## room size ######################################################33
 
 static func has_room(opts={}):
 	if opts.get("shape") == null:
 		Log.warn("has_room missing 'shape'!")
-	return MapInput.new({
-		room_shape=opts.get("shape")
-		})
+	return MapInput.new({room_shape=opts.get("shape")})
 
 static func small_room_shape(_opts={}):
-	return MapInput.new({room_shape=all_room_shapes.small})
+	return MapInput.new({room_shape=RoomShape.small_room()})
 
 static func large_room_shape(_opts={}):
-	return MapInput.new({
-		room_shape=[all_room_shapes._4x, all_room_shapes._4x_wide].pick_random(),
-		})
+	return MapInput.new({room_shape=RoomShape.large_rooms().pick_random()})
 
 static func tall_room_shape(_opts={}):
-	return MapInput.new({
-		room_shape=[all_room_shapes.tall, all_room_shapes.tall_3].pick_random(),
-		})
+	return MapInput.new({room_shape=RoomShape.tall_rooms().pick_random()})
 
 static func wide_room_shape(_opts={}):
-	return MapInput.new({
-		room_shape=[
-			all_room_shapes.wide,
-			all_room_shapes.wide_3,
-			all_room_shapes.wide_4,
-			].pick_random(),
-		})
+	return MapInput.new({room_shape=RoomShape.wide_rooms().pick_random()})
 
 static func L_room_shape(_opts={}):
-	return MapInput.new({
-		room_shape=[
-			all_room_shapes.L_shape,
-			all_room_shapes.L_backwards_shape,
-			all_room_shapes.r_shape,
-			all_room_shapes.r_backwards_shape,
-			].pick_random()
-		})
+	return MapInput.new({room_shape=RoomShape.L_rooms().pick_random()})
 
 static func T_room_shape(_opts={}):
-	return MapInput.new({
-		room_shape=[
-			all_room_shapes.T_shape,
-			all_room_shapes.T_inverted_shape,
-			all_room_shapes.half_H_shape,
-			all_room_shapes.half_H_backwards_shape,
-			].pick_random()
-		})
+	return MapInput.new({room_shape=RoomShape.T_rooms().pick_random()})
 
 ## tilemaps ######################################################33
 
