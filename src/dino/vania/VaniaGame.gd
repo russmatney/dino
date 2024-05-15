@@ -63,12 +63,14 @@ func on_room_loaded():
 	# TODO track quests completed for multiple rooms!
 	var qm = map.quest_manager
 	qm.all_quests_complete.connect(func():
-		# TODO this will fire in the FIRST room - instead track per room_def/map
+		# TODO confetti particles?
+		# TODO update room on mini-map
+
+		# TODO this will fire in the FIRST room
+		# - instead need to track per room_def/map
 		level_complete.emit()
 		# TODO door open/close logic
-		, CONNECT_ONE_SHOT
-		)
-
+		, CONNECT_ONE_SHOT)
 
 func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
