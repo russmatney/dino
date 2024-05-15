@@ -19,7 +19,7 @@ var VaniaRoomTransitions = "res://src/dino/vania/VaniaRoomTransitions.gd"
 var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
 @onready var pcam: PhantomCamera2D = $PhantomCamera2D
-@onready var playground: Node2D = $%LoadPlayground
+@onready var playground: Node2D = $%LoadingPlayground
 
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
@@ -66,6 +66,7 @@ func on_room_loaded():
 		# TODO this will fire in the FIRST room - instead track per room_def/map
 		level_complete.emit()
 		# TODO door open/close logic
+		, CONNECT_ONE_SHOT
 		)
 
 
@@ -73,7 +74,7 @@ func on_finished_initial_room_gen():
 	var p = Dino.current_player_node()
 	if p != null and is_instance_valid(p):
 		p.queue_free()
-		clear_load_playground()
+		clear_playground()
 		await get_tree().create_timer(0.4).timeout
 		# TODO fun transition!
 		# new room/game banner/notif, camera transition, etc
@@ -85,7 +86,7 @@ func on_finished_initial_room_gen():
 		setup_player()
 		).call_deferred()
 
-func clear_load_playground():
+func clear_playground():
 	playground.queue_free()
 
 ## process #######################################################

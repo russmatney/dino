@@ -1,10 +1,24 @@
-[gd_scene load_steps=36 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=38 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="5_urg5i"]
+
+[sub_resource type="Resource" id="Resource_yuw5o"]
+script = ExtResource("4_m4x81")
+genre_type = 0
+entities = Array[ExtResource("5_urg5i")]([])
+enemies = Array[ExtResource("3_lr33u")]([])
+room_shape = Array[Vector3i]([])
+room_shapes = []
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(1, -1)])
+grids_path = ""
 
 [sub_resource type="Resource" id="Resource_v00y0"]
 script = ExtResource("3_lr33u")
@@ -21,7 +35,7 @@ room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(1, -1)])
+skip_borders = Array[Vector2i]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_02d4e"]
@@ -252,7 +266,14 @@ input = SubResource("Resource_k377a")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
 
+[sub_resource type="Resource" id="Resource_ub0wu"]
+script = ExtResource("4_m2oft")
+name = "Classic Mode!"
+input = SubResource("Resource_yuw5o")
+rooms = Array[ExtResource("4_m4x81")]([])
+sub_map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_02d4e"), SubResource("Resource_evsm0"), SubResource("Resource_xauy6"), SubResource("Resource_h0sn2"), SubResource("Resource_0w1s1"), SubResource("Resource_gyjvd"), SubResource("Resource_645dy"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
+
 [node name="ClassicSideScroller" type="Node2D"]
 script = ExtResource("1_5gcr3")
 _seed = 4244388041
-map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_02d4e"), SubResource("Resource_evsm0"), SubResource("Resource_xauy6"), SubResource("Resource_h0sn2"), SubResource("Resource_0w1s1"), SubResource("Resource_gyjvd"), SubResource("Resource_645dy"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
+map_def = SubResource("Resource_ub0wu")

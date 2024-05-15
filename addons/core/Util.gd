@@ -472,9 +472,12 @@ static func append(arr, x):
 	arr.append(x)
 	return arr
 
-static func append_array(arr, arr_b):
-	if arr_b:
-		arr.append_array(arr_b)
+static func append_array(a, b):
+	var arr = []
+	if a:
+		arr.append_array(a)
+	if b:
+		arr.append_array(b)
 	return arr
 
 static func distinct(arr):

@@ -1935,7 +1935,7 @@
 					},
 					"is_disabled": {
 						"type": "bool",
-						"value": false
+						"value": true
 					},
 					"root_scene": {
 						"type": "resource",
@@ -1948,11 +1948,15 @@
 				"_icon_color": "ffffff00",
 				"_id": "198",
 				"_index": 0,
-				"_name": "DungeonCrawler",
+				"_name": "Shirt",
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Dungeon Crawler"
+						"value": "Shirt"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
 					},
 					"root_scene": {
 						"type": "resource",
@@ -2005,6 +2009,10 @@
 						"type": "string",
 						"value": "Mountain"
 					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
+					},
 					"root_scene": {
 						"type": "resource",
 						"value": "res://src/dino/modes/runner/Mountain.tscn"
@@ -2021,6 +2029,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Super Elevator Level"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
 					}
 				}
 			},

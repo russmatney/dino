@@ -16,7 +16,7 @@ var current_map_def: MapDef
 
 signal game_complete
 
-@export var map_defs: Array[MapDef]
+@export var map_def: MapDef
 
 ## to_pretty #################################################
 
@@ -24,7 +24,7 @@ func to_pretty():
 	if Engine.is_editor_hint():
 		# TODO log.gd ignoring to_pretty nulls
 		return null
-	return [_seed, current_map_def, map_defs]
+	return [_seed, current_map_def, map_def]
 
 ## ready ##################################################3
 
@@ -52,20 +52,23 @@ func _ready():
 func start_game():
 	reset_data()
 
-	var map_def = next_map_def()
+	var def = next_map_def()
 
-	if map_def:
-		launch_level(map_def)
+	if def:
+		launch_level(def)
 		return
 
 	Log.warn("No map_def to launch in start_game")
 
 # return null if there are no more map defs
 func next_map_def():
-	var idx = map_defs.find(current_map_def)
+	var idx = map_def.sub_map_defs.find(current_map_def)
 	idx += 1
-	if idx < len(map_defs):
-		return map_defs[idx]
+	if idx < len(map_def.sub_map_defs):
+		var def = map_def.sub_map_defs[idx]
+		# the root mapdef's input is the base for all sub_map_def inputs
+		def.input = map_def.input.merge(def.input)
+		return def
 
 # supports restarting from the beginning
 func reset_data():
@@ -73,8 +76,8 @@ func reset_data():
 
 ## launch_game ##################################################3
 
-func launch_level(map_def):
-	current_map_def = map_def
+func launch_level(def):
+	current_map_def = def
 
 	if game_node:
 		remove_child.call_deferred(game_node)
