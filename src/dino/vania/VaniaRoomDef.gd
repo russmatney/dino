@@ -227,7 +227,7 @@ func is_door_for_mode(mode, door) -> bool:
 func get_doors(opts={}):
 	# TODO how to ensure the neighbor uses the same door?
 	# need to surface and store which doors are being used
-	var neighbors = build_neighbor_data(opts)
+	var neighbors = build_neighbor_door_data(opts)
 	var doors = []
 	match door_mode():
 		DOOR_MODE.MINIMAL:
@@ -251,9 +251,11 @@ func get_doors(opts={}):
 				doors.append_array(n.possible_doors)
 	return doors
 
-func build_neighbor_data(opts={}):
-	var neighbors = opts.get("neighbor_data", [])
+func build_neighbor_door_data(opts={}):
+	var neighbors = opts.get("neighbor_data", []).duplicate(true)
+
 	if neighbors.is_empty():
+		# NOTE this requires builder.update_map and cell.set_assigned_scene to have run
 		var neighbor_paths = get_neighbor_room_paths()
 		for p in neighbor_paths:
 			neighbors.append({room_path=p, map_cells=MetSys.map_data.get_cells_assigned_to(p)})
@@ -266,6 +268,7 @@ func build_neighbor_data(opts={}):
 			for r_cell in map_cells:
 				if is_neighboring_cell(n_cell, r_cell):
 					ngbr.possible_doors.append([r_cell, n_cell])
+	neighbors = neighbors.filter(func(n): return len(n.possible_doors) > 0)
 
 	return neighbors
 
@@ -273,8 +276,8 @@ func get_neighbor_room_paths() -> Array[String]:
 	var ret: Array[String] = []
 
 	for cell in map_cells:
-		var cell_data: MetroidvaniaSystem.MapData.CellData = MetSys.map_data.get_cell_at(cell)
-		assert(cell_data)
+		# var cell_data: MetroidvaniaSystem.MapData.CellData = MetSys.map_data.get_cell_at(cell)
+		# assert(cell_data)
 		for i in 4:
 			var fwd: Vector2i = MetroidvaniaSystem.MapData.FWD[i]
 			var nbr_room_path: String = MetSys.map_data.get_assigned_scene_at(cell + Vector3i(fwd.x, fwd.y, 0))

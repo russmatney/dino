@@ -67,7 +67,7 @@ func update_room_def():
 	seed_label.text = "seed: %s" % Dino._seed
 	room_count_label.text = "rooms: %s" % len(game.room_defs)
 	current_room_label.text = "room: %s" % current_room_def.room_path.get_file()
-	neighbors_label.text = "ngbrs: %s" % Log.to_pretty(current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file()))
+	# neighbors_label.text = "ngbrs: %s" % Log.to_pretty(current_room_def.build_neighbor_data().map(func(n): return n.room_path.get_file()))
 
 	room_entities_label.text = "ents: %s" % Log.to_pretty(current_room_def.entities().map(func(x): return x.get_display_name()))
 	room_enemies_label.text = "ents: %s" % Log.to_pretty(current_room_def.enemies().map(func(x): return x.get_display_name()))

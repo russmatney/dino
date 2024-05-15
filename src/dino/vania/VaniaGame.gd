@@ -93,9 +93,11 @@ func clear_load_playground():
 func _process(_delta: float) -> void:
 	# Join thread when it has finished.
 	if not generating.is_alive():
+		Log.pr("thread not alive, waiting....")
 		generating.wait_to_finish()
 		generating = null
 		set_process(false)
+		Log.pr("thread finished")
 
 		finished_initial_room_gen.emit()
 
@@ -103,13 +105,16 @@ func _process(_delta: float) -> void:
 
 func thread_room_generation(opts):
 	if generating:
+		# thread already running
 		return
 
 	VaniaGenerator.remove_generated_cells()
 
 	# The thread that does map generation.
 	generating = Thread.new()
-	generating.start(func(): generate_rooms(opts))
+	var res = generating.start(generate_rooms.bind(opts))
+	if res != OK:
+		Log.error("Error starting generation thread", res)
 	set_process(true)
 
 func generate_rooms(opts={}):
@@ -121,7 +126,7 @@ func generate_rooms(opts={}):
 		Log.warn("Using fallback map_def in VaniaGame")
 		m_def = MapDef.default_game()
 
-	room_defs = await generator.generate_map(m_def)
+	room_defs = generator.generate_map(m_def)
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -145,7 +150,7 @@ func regenerate_other_rooms():
 
 	var new_room_defs = VaniaRoomDef.to_defs(MapDef.random_room())
 	generator.remove_rooms(other_room_defs)
-	room_defs = await generator.add_rooms(new_room_defs)
+	room_defs = generator.add_rooms(new_room_defs)
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
@@ -158,7 +163,7 @@ func regenerate_other_rooms():
 func add_new_room(count=1):
 	# TODO these inputs reading from vania-menu configged constraints
 	var new_room_defs = VaniaRoomDef.to_defs(MapDef.random_rooms({count=count}))
-	room_defs = await generator.add_rooms(new_room_defs)
+	room_defs = generator.add_rooms(new_room_defs)
 	Log.info(len(new_room_defs), " rooms added")
 
 	for rd in room_defs:

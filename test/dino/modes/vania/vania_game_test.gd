@@ -8,7 +8,7 @@ func before():
 
 func test_game_start():
 	var game = auto_free(VaniaGame.new())
-	await game.generate_rooms({map_def=MapDef.new({rooms=[
+	game.generate_rooms({map_def=MapDef.new({rooms=[
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
@@ -17,6 +17,7 @@ func test_game_start():
 	assert_array(game.room_defs).is_not_empty()
 	assert_int(len(game.room_defs)).is_equal(3)
 
+	await Engine.get_main_loop().process_frame
 	for def in game.room_defs:
 		var cells = MetSys.map_data.get_cells_assigned_to(def.room_path)
 		assert_array(cells).is_not_empty()
@@ -26,7 +27,7 @@ func test_game_start():
 
 func test_game_add_rooms():
 	var game = auto_free(VaniaGame.new())
-	await game.generate_rooms({map_def=MapDef.new({rooms=[
+	game.generate_rooms({map_def=MapDef.new({rooms=[
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
@@ -35,11 +36,12 @@ func test_game_add_rooms():
 	assert_array(game.room_defs).is_not_empty()
 	assert_int(len(game.room_defs)).is_equal(3)
 
-	await game.add_new_room(2)
+	game.add_new_room(2)
 
 	assert_array(game.room_defs).is_not_empty()
 	assert_int(len(game.room_defs)).is_equal(5)
 
+	await Engine.get_main_loop().process_frame
 	for def in game.room_defs:
 		var cells = MetSys.map_data.get_cells_assigned_to(def.room_path)
 		assert_array(cells).is_not_empty()
@@ -49,7 +51,7 @@ func test_game_add_rooms():
 
 func test_game_remove_room():
 	var game = auto_free(VaniaGame.new())
-	await game.generate_rooms({map_def=MapDef.new({rooms=[
+	game.generate_rooms({map_def=MapDef.new({rooms=[
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
 		MapInput.small_room_shape(),
@@ -63,6 +65,7 @@ func test_game_remove_room():
 	assert_array(game.room_defs).is_not_empty()
 	assert_int(len(game.room_defs)).is_equal(2)
 
+	await Engine.get_main_loop().process_frame
 	for def in game.room_defs:
 		var cells = MetSys.map_data.get_cells_assigned_to(def.room_path)
 		assert_array(cells).is_not_empty()

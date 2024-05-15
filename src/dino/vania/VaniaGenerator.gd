@@ -15,7 +15,7 @@ func _init():
 
 func generate_map(map_def: MapDef) -> Array[VaniaRoomDef]:
 	var defs = VaniaRoomDef.to_defs(map_def)
-	return await add_rooms(defs)
+	return add_rooms(defs)
 
 ## add_rooms ##########################################################
 
@@ -46,13 +46,10 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 		defs.append(room_def)
 	builder.update_map.call_deferred()
 
-	await Engine.get_main_loop().process_frame
-
 	# update all_room_defs
 	all_room_defs.append_array(defs)
 
-	# build room and rebuild neighbors
-
+	# rebuild neighbors/doors, pack/save rooms
 	update_neighbor_data()
 
 	var neighbor_defs = []
@@ -129,8 +126,15 @@ func update_neighbor_data():
 	# clear and rebuild? maybe that's fine?
 	neighbor_data = {}
 
+	var all_map_cells_by_rd = all_room_defs.map(func(rd): return {
+		room_path=rd.room_path,
+		map_cells=rd.map_cells,
+		})
+
 	for rd in all_room_defs:
-		neighbor_data[rd.room_path] = rd.build_neighbor_data()
+		neighbor_data[rd.room_path] = rd.build_neighbor_door_data({
+			neighbor_data=all_map_cells_by_rd,
+			})
 
 func get_neighbor_defs(room_def: VaniaRoomDef):
 	var nbr = neighbor_data.get(room_def.room_path)
