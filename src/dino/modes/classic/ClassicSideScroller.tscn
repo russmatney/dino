@@ -1,10 +1,17 @@
-[gd_scene load_steps=40 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=43 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
+[ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="2_r6yek"]
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="3_lkkeo"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="5_urg5i"]
+
+[sub_resource type="Resource" id="Resource_x03cn"]
+script = ExtResource("3_lkkeo")
+type = 2
+anim_scene = ExtResource("2_r6yek")
 
 [sub_resource type="Resource" id="Resource_yuw5o"]
 script = ExtResource("4_m4x81")
@@ -18,6 +25,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(1, -1)])
+drops = Array[ExtResource("3_lkkeo")]([SubResource("Resource_x03cn")])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_v00y0"]
@@ -36,6 +44,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_02d4e"]
@@ -62,6 +71,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_ct5kn"]
@@ -76,6 +86,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_fdni3"]
@@ -90,6 +101,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_evsm0"]
@@ -116,6 +128,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_xauy6"]
@@ -142,6 +155,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_h0sn2"]
@@ -168,6 +182,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_0w1s1"]
@@ -202,6 +217,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_gyjvd"]
@@ -232,6 +248,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_645dy"]
@@ -258,6 +275,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_x0fpg"]
@@ -284,6 +302,7 @@ tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[ExtResource("3_lkkeo")]([])
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_h5a41"]

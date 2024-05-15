@@ -390,7 +390,10 @@ func add_entity(ent):
 		# ensure a drop
 		if "drops" in node.get_property_list().map(func(p): return p.name):
 			if node.drops.is_empty():
-				node.drops.assign([DropData.new()])
+				var drops = room_def.get_drops()
+				if drops.is_empty():
+					drops = [DropData.new()]
+				node.drops.assign([drops.pick_random()])
 
 		node.position = pos
 		add_child(node)

@@ -117,6 +117,11 @@ func skip_borders() -> Array[Vector2i]:
 		return []
 	return input.skip_borders
 
+func get_drops() -> Array[DropData]:
+	if not input:
+		return []
+	return input.drops
+
 ## input #####################################################3
 
 func rebuild():

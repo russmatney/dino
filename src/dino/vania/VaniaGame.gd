@@ -27,8 +27,6 @@ var room_defs: Array[VaniaRoomDef] = []
 var generating: Thread
 
 signal finished_initial_room_gen
-
-# TODO connect and fire this if all quests (in all rooms) are complete!
 signal level_complete
 
 ## room_states #################################################
