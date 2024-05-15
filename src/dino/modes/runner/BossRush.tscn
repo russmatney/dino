@@ -9,7 +9,6 @@ script = ExtResource("2_kols8")
 name = ""
 rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
 sub_map_defs = Array[ExtResource("2_kols8")]([])
-grid_defs_path = ""
 
 [node name="BossRush" type="Node2D"]
 script = ExtResource("1_rr2qx")

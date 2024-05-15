@@ -41,6 +41,7 @@ static func quests_for_entities(entities: Array[Node]):
 signal all_quests_complete
 signal quest_failed
 signal quest_update
+signal quest_complete(quest)
 
 var active_quests = {}
 
@@ -162,6 +163,7 @@ func _on_complete(node, opts):
 		q.complete = true
 
 	quest_update.emit()
+	quest_complete.emit(q)
 	check_all_complete()
 
 func _on_fail(node, opts):

@@ -31,6 +31,46 @@ signal finished_initial_room_gen
 # TODO connect and fire this if all quests (in all rooms) are complete!
 signal level_complete
 
+## room_states #################################################
+
+var room_states = {}
+var initial_room_state = {visited=false, quests_complete=false}
+
+func clear_room_states(opts={}):
+	if opts.get("keep_current", false):
+		room_states = {MetSys.get_current_room_name(): room_states[MetSys.get_current_room_name()]}
+	else:
+		room_states = {}
+
+func init_room_state(room_path):
+	room_states[room_path] = initial_room_state.duplicate()
+
+func existing_room_state(room_path):
+	return room_path in room_states
+
+func is_room_visited(room_path=null):
+	if room_path == null:
+		room_path = MetSys.get_current_room_name()
+	return room_states[room_path].visited
+
+func mark_room_visited(room_path=null):
+	if room_path == null:
+		room_path = MetSys.get_current_room_name()
+	room_states[room_path].visited = true
+
+func are_room_quests_complete(room_path=null):
+	if room_path == null:
+		room_path = MetSys.get_current_room_name()
+	return room_states[room_path].quests_complete
+
+func all_room_quests_complete():
+	return room_states.values().all(func(st): return st.quests_complete)
+
+func mark_room_quests_complete(room_path=null):
+	if room_path == null:
+		room_path = MetSys.get_current_room_name()
+	room_states[room_path].quests_complete = true
+
 ## ready #######################################################
 
 func _ready():
@@ -54,22 +94,29 @@ func _ready():
 	thread_room_generation({map_def=map_def})
 
 func on_room_loaded():
-	# TODO only if first visit
-	Dino.notif({type="banner",
-		text="%s" % map.name,
-		id="room-name"
-		})
+	if not is_room_visited():
+		Dino.notif({type="banner",
+			text="%s" % map.name,
+			id="room-name"
+			})
+	mark_room_visited()
 
-	# TODO track quests completed for multiple rooms!
 	var qm = map.quest_manager
+
+	qm.quest_complete.connect(func(quest):
+		Log.pr("quest complete", quest))
+
 	qm.all_quests_complete.connect(func():
+		mark_room_quests_complete()
+
 		# TODO confetti particles?
 		# TODO update room on mini-map
-
-		# TODO this will fire in the FIRST room
-		# - instead need to track per room_def/map
-		level_complete.emit()
 		# TODO door open/close logic
+
+		# all quests in all rooms complete?
+		if all_room_quests_complete():
+			level_complete.emit()
+
 		, CONNECT_ONE_SHOT)
 
 func on_finished_initial_room_gen():
@@ -111,6 +158,7 @@ func thread_room_generation(opts):
 		# thread already running
 		return
 
+	clear_room_states()
 	VaniaGenerator.remove_generated_cells()
 
 	# The thread that does map generation.
@@ -134,6 +182,7 @@ func generate_rooms(opts={}):
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
+		init_room_state(rd.room_path)
 
 ## public regen funcs #######################################################
 
@@ -155,9 +204,13 @@ func regenerate_other_rooms():
 	generator.remove_rooms(other_room_defs)
 	room_defs = generator.add_rooms(new_room_defs)
 
+	# maintain room state across other room regen
+	clear_room_states({keep_current=true})
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
+		if MetSys.get_current_room_name() != rd.room_path:
+			init_room_state(rd.room_path)
 
 	# redo the current room's doors
 	if map and map.is_node_ready():
@@ -172,6 +225,8 @@ func add_new_room(count=1):
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
+		if not existing_room_state(rd.room_path):
+			init_room_state(rd.room_path)
 
 	# redo the current room's doors
 	if map and map.is_node_ready():
