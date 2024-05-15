@@ -34,6 +34,28 @@ static func gold_particles():
 
 ## vars ##################################
 
+enum T {
+	UNSET,
+	RAIN,
+	SNOW,
+	LEAVES,
+	DUST,
+	FIRE,
+	GOLD,
+	}
+
+@export var type: T :
+	set(v):
+		type = v
+		match v:
+			T.UNSET: scene = null
+			T.RAIN: scene = RoomEffect.rain_fall().scene
+			T.SNOW: scene = RoomEffect.snow_fall().scene
+			T.LEAVES: scene = RoomEffect.leaf_fall().scene
+			T.DUST: scene = RoomEffect.dust().scene
+			T.FIRE: scene = RoomEffect.fire_particles().scene
+			T.GOLD: scene = RoomEffect.gold_particles().scene
+
 @export var scene: PackedScene
 
 ## init ##################################
@@ -41,6 +63,9 @@ static func gold_particles():
 func _init(opts={}):
 	if opts.get("scene"):
 		scene = opts.get("scene")
+
+	if not scene and opts.get("type"):
+		type = opts.get("type")
 
 ## add at cell ##################################
 

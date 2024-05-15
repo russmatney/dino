@@ -1,17 +1,26 @@
-[gd_scene load_steps=43 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=50 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
 [ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="2_r6yek"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="3_lkkeo"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
+[ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/particle_area/RainFallParticles.tscn" id="4_hgctr"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="5_urg5i"]
+[ext_resource type="PackedScene" uid="uid://i2y038vii5jb" path="res://src/effects/particle_area/GoldParticleArea.tscn" id="7_jmjlt"]
+[ext_resource type="PackedScene" uid="uid://cdd1i4ajemyn0" path="res://src/effects/particle_area/DustParticles.tscn" id="7_uibed"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="8_huwy0"]
 
 [sub_resource type="Resource" id="Resource_x03cn"]
 script = ExtResource("3_lkkeo")
 type = 2
 anim_scene = ExtResource("2_r6yek")
+
+[sub_resource type="Resource" id="Resource_bne7i"]
+script = ExtResource("8_huwy0")
+type = 1
+scene = ExtResource("4_hgctr")
 
 [sub_resource type="Resource" id="Resource_yuw5o"]
 script = ExtResource("4_m4x81")
@@ -20,7 +29,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_bne7i")])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -32,6 +41,11 @@ grids_path = ""
 script = ExtResource("3_lr33u")
 _id = "122"
 
+[sub_resource type="Resource" id="Resource_msll8"]
+script = ExtResource("8_huwy0")
+type = 6
+scene = ExtResource("7_jmjlt")
+
 [sub_resource type="Resource" id="Resource_vuiid"]
 script = ExtResource("4_m4x81")
 genre_type = 0
@@ -39,7 +53,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_v00y0")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_msll8")])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -59,6 +73,11 @@ sub_map_defs = Array[ExtResource("4_m2oft")]([])
 script = ExtResource("3_lr33u")
 _id = "121"
 
+[sub_resource type="Resource" id="Resource_svjii"]
+script = ExtResource("8_huwy0")
+type = 4
+scene = ExtResource("7_uibed")
+
 [sub_resource type="Resource" id="Resource_mewd3"]
 script = ExtResource("4_m4x81")
 genre_type = 0
@@ -66,7 +85,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_5l33f"), SubResource("Resource_5l33f"), SubResource("Resource_5l33f")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_svjii")])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -81,7 +100,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -96,7 +115,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -123,7 +142,7 @@ entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_4kag2"), SubReso
 enemies = Array[ExtResource("3_lr33u")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -150,7 +169,7 @@ entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_6bvdb")])
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_5l33f")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -177,7 +196,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_kmsyt")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -212,7 +231,7 @@ entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_ks6si"), SubReso
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_bmcom")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -243,7 +262,7 @@ entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_l4jh0"), SubReso
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_pdbla")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -270,7 +289,7 @@ entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_egvpy"), SubReso
 enemies = Array[ExtResource("3_lr33u")]([])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
@@ -297,7 +316,7 @@ entities = Array[ExtResource("5_urg5i")]([])
 enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_v8pov"), SubResource("Resource_kmsyt")])
 room_shape = Array[Vector3i]([])
 room_shapes = []
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_effects = Array[ExtResource("8_huwy0")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
