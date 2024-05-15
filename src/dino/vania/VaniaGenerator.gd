@@ -192,6 +192,10 @@ func place_rooms(defs: Array[VaniaRoomDef]):
 	var existing_map_cells = VaniaGenerator.get_existing_map_cells()
 
 	for def in defs:
+		if def.local_cells.is_empty():
+			Log.warn("Cannot place room without local_cells!!", def)
+			continue
+
 		attach_room(existing_map_cells, def)
 		def.calc_cell_meta()
 

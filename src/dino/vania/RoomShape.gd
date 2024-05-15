@@ -5,6 +5,7 @@ class_name RoomShape
 ## static ############################################################################
 
 enum T {
+	NONE,
 	SMALL,
 	WIDE,
 	WIDE_3,
@@ -24,6 +25,7 @@ enum T {
 	}
 
 static var all_room_shapes = {
+	T.NONE: [],
 	T.SMALL: [Vector3i()],
 	T.WIDE: [Vector3i(), Vector3i(1, 0, 0),],
 	T.WIDE_3: [Vector3i(), Vector3i(1, 0, 0), Vector3i(2, 0, 0)],
@@ -110,6 +112,8 @@ static func T_rooms() -> Array[RoomShape]:
 		RoomShape.new({type=T.T_RIGHT}),
 		]
 
+## init ############################################################################
+
 func _init(opts={}):
 	if opts.get("cells"):
 		cells.assign(opts.get("cells", []))
@@ -125,6 +129,6 @@ func _init(opts={}):
 	set(v):
 		type = v
 		if v in all_room_shapes:
-			cells.assign(all_room_shapes[v])
+			cells.assign(all_room_shapes.get(v))
 		else:
 			Log.warn("No room shape found for type", type)

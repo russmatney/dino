@@ -231,7 +231,7 @@ func test_apply_keeps_local_cells():
 	var def = VaniaRoomDef.new()
 	var _inp = MapInput.apply(MapInput.small_room_shape(), def)
 
-	assert_array(def.local_cells).is_equal(MapInput.all_room_shapes.small)
+	assert_array(def.local_cells).is_equal(RoomShape.all_room_shapes[RoomShape.T.SMALL])
 
 	var my_local_cells = [Vector3i(0, 0, 0)]
 	def = VaniaRoomDef.new({local_cells=my_local_cells})

@@ -257,7 +257,11 @@ func get_doors(opts={}):
 	return doors
 
 func build_neighbor_door_data(opts={}):
-	var neighbors = opts.get("neighbor_data", []).duplicate(true)
+	var neighbors = opts.get("neighbor_data", [])
+	if neighbors:
+		neighbors = neighbors.duplicate(true)
+	else:
+		neighbors = []
 
 	if neighbors.is_empty():
 		# NOTE this requires builder.update_map and cell.set_assigned_scene to have run
