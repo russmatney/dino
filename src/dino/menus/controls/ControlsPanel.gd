@@ -3,7 +3,7 @@ extends PanelContainer
 
 ## vars ###############################################3
 
-@onready var edit_action_scene = preload("res://src/menus/controls/EditActionRow.tscn")
+@onready var edit_action_scene = preload("res://src/dino/menus/controls/EditActionRow.tscn")
 @onready var action_rows = $%EditActionRows
 @onready var reset_controls_button = $%ResetControlsButton
 
