@@ -10,7 +10,7 @@ func test_inputs_empty_inputs_behavior():
 	var inp = MapInput.new()
 	assert_array(inp.tiles).is_empty()
 	assert_array(inp.entities).is_empty()
-	assert_array(inp.room_shape).is_empty()
+	assert_array(inp.room_shape).is_null()
 	assert_array(inp.room_shapes).is_empty()
 
 	var def = VaniaRoomDef.new()
@@ -105,7 +105,7 @@ func test_inputs_combine_tilemaps():
 
 func test_inputs_room_shapes_set_local_cells():
 	var some_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0)]
-	var inp = MapInput.new({room_shapes=[some_shape]})
+	var inp = MapInput.new({room_shapes=[RoomShape.new({cells=some_shape})]})
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
 
@@ -118,30 +118,30 @@ func test_inputs_room_shapes_combine_before_selection():
 
 	var some_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0)]
 	var some_other_shape = [Vector3i(0, 0, 0)]
-	var inp1 = MapInput.new({room_shapes=[some_shape]})
-	var inp2 = MapInput.new({room_shapes=[some_other_shape, some_shape]})
+	var inp1 = MapInput.new({room_shapes=[RoomShape.new({cells=some_shape})]})
+	var inp2 = MapInput.new({room_shapes=[some_other_shape, some_shape].map(func(cells): return RoomShape.new({cells=cells}))})
 	var inp = inp1.merge(inp2)
 
 	assert_array(inp.room_shapes).is_not_empty()
-	assert_array(inp.room_shapes).contains([some_shape, some_other_shape])
-	assert_int(len(inp.room_shapes)).is_equal(2)
+	assert_array(inp.room_shapes.map(func(s): return s.cells)).contains([some_shape, some_other_shape])
+	assert_int(len(inp.room_shapes)).is_equal(3) # room_shapes are now unique, they don't dedupe on shape (yet?)
 
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
-	assert_array(inp.room_shapes).contains([def.local_cells])
+	assert_array(inp.room_shapes.map(func(s): return s.cells)).contains([def.local_cells])
 
 func test_inputs_room_shape_always_overwrites_room_shapes():
 	# if `room_shape` is set, it is used instead of random from 'room_shapes'
 	var some_shapes = [[Vector3i(0, 0, 0), Vector3i(1, 0, 0)], [Vector3i(0, 0, 0), Vector3i(0, 1, 0)],]
 	var some_other_shape = [Vector3i(0, 0, 0)]
-	var inp1 = MapInput.new({room_shapes=some_shapes})
-	var inp2 = MapInput.new({room_shape=some_other_shape})
+	var inp1 = MapInput.new({room_shapes=some_shapes.map(func(cells): return RoomShape.new({cells=cells}))})
+	var inp2 = MapInput.new({room_shape=RoomShape.new({cells=some_other_shape})})
 	var inp = inp1.merge(inp2)
 
 	assert_array(inp.room_shapes).is_not_empty()
-	assert_array(inp.room_shapes).contains(some_shapes)
+	assert_array(inp.room_shapes.map(func(s): return s.cells)).contains(some_shapes)
 	assert_int(len(inp.room_shapes)).is_equal(2)
-	assert_array(inp.room_shape).is_equal(some_other_shape)
+	assert_array(inp.room_shape.cells).is_equal(some_other_shape)
 
 	var def = VaniaRoomDef.new()
 	inp.update_def(def)
@@ -155,7 +155,7 @@ func test_inputs_room_shape_always_overwrites_room_shapes():
 
 	# now merging with a set 'room_shape' - the passed input overwrites 'room_shape'
 	var some_third_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0)]
-	inp1.room_shape.assign(some_third_shape)
+	inp1.room_shape = RoomShape.new({cells=some_third_shape})
 	inp = inp2.merge(inp1)
 	def = VaniaRoomDef.new()
 	inp.update_def(def)
@@ -194,7 +194,7 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 
 	assert_that(inp.room_shape).is_not_null()
 	assert_array(def.local_cells).is_not_empty()
-	assert_array(def.local_cells).is_equal(inp.room_shape)
+	assert_array(def.local_cells).is_equal(inp.room_shape.cells)
 
 	assert_array(inp.entities).is_not_empty()
 	assert_array(def.entities()).is_not_empty()

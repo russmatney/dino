@@ -4,6 +4,16 @@ class_name VaniaGameTest
 func before():
 	Log.set_colors_termsafe()
 
+func before_test():
+	VaniaGenerator.remove_generated_cells()
+	MetSys.reset_state()
+	MetSys.set_save_data()
+
+func after():
+	VaniaGenerator.remove_generated_cells()
+	MetSys.reset_state()
+	MetSys.set_save_data()
+
 ## basic startup ################################################
 
 func test_game_start():

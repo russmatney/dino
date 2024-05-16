@@ -216,7 +216,7 @@ static func has_dust(_opts={}):
 static func has_room(opts={}):
 	if opts.get("shape") == null:
 		Log.warn("has_room missing 'shape'!")
-	return MapInput.new({room_shape=opts.get("shape")})
+	return MapInput.new({room_shape=RoomShape.new({cells=opts.get("shape")})})
 
 static func small_room_shape(_opts={}):
 	return MapInput.new({room_shape=RoomShape.small_room()})

@@ -69,7 +69,7 @@ static var all_room_shapes = {
 
 static func random_shape() -> RoomShape:
 	var rs = RoomShape.new()
-	rs.cells.assign(RoomShape.all_room_shapes.values().pick_random())
+	rs.cells.assign(RoomShape.all_room_shapes.values().filter(func(cs): return not cs.is_empty()).pick_random())
 	return rs
 
 static func small_room() -> RoomShape:

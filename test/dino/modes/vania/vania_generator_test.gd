@@ -1,8 +1,10 @@
 extends GdUnitTestSuite
 class_name VaniaGeneratorTest
 
-func before_test():
+func before():
 	Log.set_colors_termsafe()
+
+func before_test():
 	VaniaGenerator.remove_generated_cells()
 	MetSys.reset_state()
 	MetSys.set_save_data()
@@ -71,11 +73,12 @@ func test_add_rooms_two_small_rooms_create_doors():
 		var left_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.position.x, y))
 		var right_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.end.x - 1, y))
 
-		assert_array(def.get_doors()).is_not_empty()
-		if def.get_doors().is_empty():
+		var doors = def.get_doors({neighbor_data=gen.neighbor_data[def.room_path]})
+		assert_array(doors).is_not_empty()
+		if doors.is_empty():
 			return
 
-		var door = def.get_doors()[0]
+		var door = doors[0]
 		var wall = door[1] - door[0]
 
 		var door_wall = []
@@ -154,11 +157,12 @@ func test_add_rooms_one_small_room_then_another_updates_doors():
 		var left_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.position.x, y))
 		var right_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.end.x - 1, y))
 
-		assert_array(def.get_doors()).is_not_empty()
-		if def.get_doors().is_empty():
+		var doors = def.get_doors({neighbor_data=gen.neighbor_data[def.room_path]})
+		assert_array(doors).is_not_empty()
+		if doors.is_empty():
 			return
 
-		var door = def.get_doors()[0]
+		var door = doors[0]
 		var wall = door[1] - door[0]
 
 		var door_wall = []
