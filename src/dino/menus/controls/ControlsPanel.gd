@@ -8,8 +8,15 @@ extends PanelContainer
 @onready var reset_controls_button = $%ResetControlsButton
 
 var displayed_actions = [
-	"ui_accept", "ui_undo", "pause", "close", "restart",
-	# "ui_up", "ui_down", "ui_left", "ui_right",
+	"ui_accept", "ui_undo", "pause", "close",
+	# "move_up", "move_down", "move_left", "move_right",
+	# TODO remove one of these
+	"attack", "fire",
+	"action",
+	"jump",
+	"weapon_swap_menu",
+	"jetpack",
+	"slowmo",
 	]
 
 ## ready ###############################################3
