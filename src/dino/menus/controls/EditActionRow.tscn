@@ -1,10 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://vy2sl481qu00"]
+[gd_scene load_steps=3 format=3 uid="uid://vy2sl481qu00"]
 
 [ext_resource type="Script" path="res://src/dino/menus/controls/EditActionRow.gd" id="1_gx07x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yue1b"]
+bg_color = Color(0.321569, 0.321569, 0.321569, 0.501961)
 
 [node name="EditActionRow" type="PanelContainer"]
 offset_right = 518.0
 offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_yue1b")
 script = ExtResource("1_gx07x")
 
 [node name="HBox" type="HBoxContainer" parent="."]
@@ -25,6 +29,7 @@ clip_contents = false
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center]Accept[/center]"
 fit_content = true
@@ -34,6 +39,8 @@ scroll_active = false
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
+theme_type_variation = &"BlueButton"
+theme_override_font_sizes/font_size = 64
 text = "Edit
 "
 

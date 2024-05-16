@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=3 uid="uid://dhx0mlsbfwdu7"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://dhx0mlsbfwdu7"]
 
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="1_1embd"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="1_4q8xb"]
@@ -67,6 +67,8 @@ axis_stretch_vertical = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ik83"]
 bg_color = Color(0.392157, 0.113725, 0.396078, 0.596078)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nsob6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4slb"]
 texture = ExtResource("4_vt7sl")
@@ -188,6 +190,8 @@ Button/font_sizes/font_size = 32
 ButtonListPanel/base_type = &"PanelContainer"
 ButtonListPanel/styles/panel = SubResource("StyleBoxTexture_vyi8u")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2ik83")
+PanelNoBackground/base_type = &"PanelContainer"
+PanelNoBackground/styles/panel = SubResource("StyleBoxEmpty_nsob6")
 RedButton/base_type = &"Button"
 RedButton/colors/font_color = Color(0.850051, 0.850051, 0.850051, 1)
 RedButton/colors/font_disabled_color = Color(0.535421, 0.535421, 0.535421, 1)
@@ -206,6 +210,10 @@ RedButton/styles/pressed = SubResource("StyleBoxTexture_58oj7")
 RichHeaderLabel/base_type = &"RichTextLabel"
 RichHeaderLabel/font_sizes/normal_font_size = 32
 RichHeaderLabel/fonts/normal_font = ExtResource("1_1embd")
+TabBar/font_sizes/font_size = 64
+TabBar/fonts/font = ExtResource("1_4q8xb")
+TabContainer/font_sizes/font_size = 64
+TabContainer/fonts/font = ExtResource("1_4q8xb")
 YellowButton/base_type = &"Button"
 YellowButton/colors/font_color = Color(0, 0, 0, 1)
 YellowButton/colors/font_disabled_color = Color(0, 0, 0, 1)

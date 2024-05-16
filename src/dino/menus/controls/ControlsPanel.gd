@@ -32,7 +32,7 @@ func render_action_rows():
 		row.set_focus()
 		break
 
-## on edit
+## on edit ######################################################
 
 func on_edit_pressed(row):
 	for r in action_rows.get_children():

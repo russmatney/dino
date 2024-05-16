@@ -5,6 +5,7 @@
 [node name="ControlsPanel" type="PanelContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_type_variation = &"ButtonListPanel"
 script = ExtResource("1_56xgh")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -16,6 +17,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"RedButton"
 text = "Reset Controls"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
@@ -23,7 +25,7 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
+custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3

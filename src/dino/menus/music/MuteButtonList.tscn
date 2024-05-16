@@ -11,15 +11,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hivsh")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer3"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer3/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer3/VBoxContainer2/HBoxContainer/CenterContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
@@ -30,15 +38,15 @@ text = "[center]Music Volume"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 
-[node name="MusicVolumeSlider" type="HSlider" parent="HBoxContainer/CenterContainer2"]
+[node name="MusicVolumeSlider" type="HSlider" parent="HBoxContainer3/VBoxContainer2/HBoxContainer/CenterContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -46,20 +54,20 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.05
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer3/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer2"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer2/CenterContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer3/VBoxContainer2/HBoxContainer2/CenterContainer"]
 clip_contents = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
@@ -70,15 +78,10 @@ text = "[center]Sound Volume"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer2"]
-visible = false
-custom_minimum_size = Vector2(20, 0)
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer2"]
 layout_mode = 2
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer2"]
-layout_mode = 2
-
-[node name="SoundVolumeSlider" type="HSlider" parent="HBoxContainer2/CenterContainer2"]
+[node name="SoundVolumeSlider" type="HSlider" parent="HBoxContainer3/VBoxContainer2/HBoxContainer2/CenterContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
@@ -86,30 +89,37 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.05
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer3/VBoxContainer2/HBoxContainer2"]
 visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="MuteMusicButton" type="Button" parent="."]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer3"]
+layout_mode = 2
+
+[node name="MuteMusicButton" type="Button" parent="HBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"BlueButton"
 text = "Mute Music"
 
-[node name="MuteSoundButton" type="Button" parent="."]
+[node name="MuteSoundButton" type="Button" parent="HBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"BlueButton"
 text = "Mute Sound"
 
-[node name="MuteAllButton" type="Button" parent="."]
+[node name="MuteAllButton" type="Button" parent="HBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"BlueButton"
 text = "Mute All"
 
-[node name="UnmuteAllButton" type="Button" parent="."]
+[node name="UnmuteAllButton" type="Button" parent="HBoxContainer3/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2

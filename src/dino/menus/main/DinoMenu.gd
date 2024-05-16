@@ -5,12 +5,12 @@ extends CanvasLayer
 
 @onready var games_list = $%GamesList
 
-@onready var start_button = $%StartButton
 @onready var options_button = $%OptionsButton
 @onready var credits_button = $%CreditsButton
 @onready var quit_button = $%QuitButton
 
 @onready var credits_scene = preload("res://src/dino/menus/DinoCredits.tscn")
+@onready var options_scene = preload("res://src/dino/menus/options/OptionsMenu.tscn")
 
 ## ready ##################################################################3
 
@@ -26,11 +26,7 @@ func _ready():
 
 		quit_button.pressed.connect(get_tree().quit)
 		credits_button.pressed.connect(func(): Navi.nav_to(credits_scene))
-
-		start_button.pressed.connect(func():
-			Log.pr("nothing doing, start button not impled"))
-		options_button.pressed.connect(func():
-			Log.pr("nothing doing, opts button not impled"))
+		options_button.pressed.connect(func(): Navi.nav_to(options_scene))
 
 ## set_focus ##################################################################3
 

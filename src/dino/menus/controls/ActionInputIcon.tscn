@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dq1rff2gu3q68"]
+[gd_scene load_steps=2 format=3 uid="uid://dq1rff2gu3q68"]
 
 [ext_resource type="Script" path="res://src/dino/menus/controls/ActionInputIcon.gd" id="1_ui3le"]
-
-[sub_resource type="Theme" id="Theme_kyaf1"]
 
 [node name="ActionInputIcon" type="TextureRect"]
 visible = false
 custom_minimum_size = Vector2(30, 0)
 offset_right = 30.0
 offset_bottom = 48.0
-theme = SubResource("Theme_kyaf1")
 script = ExtResource("1_ui3le")
