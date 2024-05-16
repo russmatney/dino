@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsft6f7x2lk4v"]
+
+[ext_resource type="Theme" uid="uid://tmcplph82m7i" path="res://src/ui/GreenWoodPanelTheme.tres" id="1_2drhy"]
+[ext_resource type="Theme" uid="uid://d36tu8qosbiom" path="res://src/ui/RedButtonTheme.tres" id="2_hs67r"]
+[ext_resource type="Script" path="res://src/menus/controls/ControlsPanel.gd" id="2_sopwa"]
+[ext_resource type="Script" path="res://src/ui/AnimatedVBoxContainer.gd" id="3_4od0b"]
+
+[node name="ControlsPanel" type="PanelContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_2drhy")
+script = ExtResource("2_sopwa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(438, 192)
+layout_mode = 2
+script = ExtResource("3_4od0b")
+child_size = Vector2(400, 64)
+anim_duration = 0.5
+
+[node name="ResetControlsButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_hs67r")
+text = "Reset Controls"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("1_2drhy")
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="EditActionRows" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
