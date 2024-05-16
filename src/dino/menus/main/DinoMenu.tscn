@@ -1,11 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2ipf7t7godiy"]
+[gd_scene load_steps=12 format=3 uid="uid://d2ipf7t7godiy"]
 
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/dino/menus/main/DinoMenu.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://1kmwy7tm07mg" path="res://src/dino/menus/main/dino_library_logo.png" id="2_yo4or"]
 [ext_resource type="Script" path="res://src/components/AnimatedVBoxContainer.gd" id="3_viiye"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bl2un"]
-bg_color = Color(0.27454, 0.258915, 0.368338, 1)
+bg_color = Color(0.18279, 0.1674, 0.27, 1)
+
+[sub_resource type="Gradient" id="Gradient_gjpdh"]
+offsets = PackedFloat32Array(0.0242915, 0.529015, 1)
+colors = PackedColorArray(0.46, 0.536667, 0.92, 1, 0.3427, 0.322, 0.46, 1, 0.760773, 0.7332, 0.94, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l2478"]
+gradient = SubResource("Gradient_gjpdh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6k285"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1920, 1080, 1)
+angular_velocity_min = -7.11
+angular_velocity_max = 7.11
+radial_velocity_min = -14.81
+radial_velocity_max = 34.57
+gravity = Vector3(0, 98, 0)
+scale_min = 3.47
+scale_max = 10.88
+color = Color(0.540055, 0.520632, 0.67019, 1)
+color_ramp = SubResource("GradientTexture1D_l2478")
+hue_variation_min = -0.08
+hue_variation_max = 0.07
+turbulence_enabled = true
+
+[sub_resource type="Animation" id="Animation_5ivk8"]
+resource_name = "fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y5did"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbedv"]
+_data = {
+"RESET": SubResource("Animation_y5did"),
+"fade_in": SubResource("Animation_5ivk8")
+}
 
 [node name="DinoMenu" type="CanvasLayer" groups=["menus"]]
 script = ExtResource("2")
@@ -30,7 +92,24 @@ size_flags_horizontal = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
 
+[node name="MarginContainer6" type="MarginContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/VBoxContainer/CenterContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_yo4or")
+expand_mode = 1
+stretch_mode = 4
+
 [node name="HeroLabel" parent="PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_font_sizes/normal_font_size = 256
@@ -113,3 +192,15 @@ text = "Quit Game"
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="PanelContainer"]
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_6k285")
+visibility_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PanelContainer/HBoxContainer/VBoxContainer/CenterContainer/TextureRect")
+libraries = {
+"": SubResource("AnimationLibrary_cbedv")
+}
+autoplay = "fade_in"
