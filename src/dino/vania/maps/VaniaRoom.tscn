@@ -101,4 +101,8 @@ script = ExtResource("6_q8wsp")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 rotation = -0.116937
+energy = 0.3
 shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 0.4
+height = 0.15
