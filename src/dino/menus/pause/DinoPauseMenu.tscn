@@ -1,15 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0r7m71tr77vo"]
+[gd_scene load_steps=10 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/pause/DinoPauseMenu.gd" id="1_7pfpx"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://addons/core/quest/QuestStatus.tscn" id="3_gr3ki"]
-[ext_resource type="PackedScene" uid="uid://legijjgf488f" path="res://addons/core/brick/BrickRegenMenu.tscn" id="3_oarvi"]
-[ext_resource type="Script" path="res://src/dino/menus/pause/DinoPauseMenuButtonList.gd" id="4_wcgkx"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://src/dino/menus/music/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/pause/PauseTabPlayer.tscn" id="7_ipd6p"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="8_5ctsr"]
 [ext_resource type="PackedScene" uid="uid://duncni63m4vm0" path="res://src/components/PlayedGameRecords.tscn" id="9_k7cqm"]
-[ext_resource type="PackedScene" uid="uid://idppjgt76c6l" path="res://addons/core/dj/TurnTable.tscn" id="9_oe4cd"]
+[ext_resource type="PackedScene" uid="uid://dsft6f7x2lk4v" path="res://src/dino/menus/controls/ControlsPanel.tscn" id="10_xqrls"]
 [ext_resource type="PackedScene" uid="uid://bjw3ncbv86qnb" path="res://src/dino/vania/VaniaEditor.tscn" id="11_w0f0w"]
 
 [node name="DinoPauseMenu" type="CanvasLayer"]
@@ -58,27 +56,6 @@ layout_mode = 2
 [node name="Player" parent="PanelContainer/VBoxContainer/TabContainer/Player" instance=ExtResource("7_ipd6p")]
 layout_mode = 2
 
-[node name="Options" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Options"]
-layout_mode = 2
-
-[node name="DinoPauseMenuButtonList" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Options/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-script = ExtResource("4_wcgkx")
-
-[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/TabContainer/Options/VBoxContainer" instance=ExtResource("5_ai6py")]
-layout_mode = 2
-
-[node name="BrickRegenMenu" parent="PanelContainer/VBoxContainer/TabContainer/Options" instance=ExtResource("3_oarvi")]
-unique_name_in_owner = true
-layout_mode = 2
-
 [node name="Level" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 custom_minimum_size = Vector2(400, 2.08165e-12)
@@ -101,23 +78,71 @@ alignment = 1
 [node name="PlayedGameRecords" parent="PanelContainer/VBoxContainer/TabContainer/Progress" instance=ExtResource("9_k7cqm")]
 layout_mode = 2
 
-[node name="Debug" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-layout_mode = 2
-
-[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer/TabContainer/Debug"]
-layout_mode = 2
-size_flags_horizontal = 3
-tab_alignment = 1
-
-[node name="All Sounds" parent="PanelContainer/VBoxContainer/TabContainer/Debug/TabContainer" instance=ExtResource("9_oe4cd")]
-layout_mode = 2
-
 [node name="Editor" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 
 [node name="VaniaEditor" parent="PanelContainer/VBoxContainer/TabContainer/Editor" instance=ExtResource("11_w0f0w")]
 layout_mode = 2
+
+[node name="Options" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer/Options"]
+layout_mode = 2
+alignment = 1
+
+[node name="ReturnToMainMenu" type="Button" parent="PanelContainer/VBoxContainer/TabContainer/Options/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+text = "Return To Main Menu"
+
+[node name="Sound" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer/TabContainer/Sound"]
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]Music / Sound[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/Sound"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="MuteButtonList" parent="PanelContainer/VBoxContainer/TabContainer/Sound" instance=ExtResource("5_ai6py")]
+layout_mode = 2
+
+[node name="Controls" type="VBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="PanelContainer/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[center]Controls[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/VBoxContainer/TabContainer/Controls"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ControlsPanel" parent="PanelContainer/VBoxContainer/TabContainer/Controls" instance=ExtResource("10_xqrls")]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)

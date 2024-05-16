@@ -10,6 +10,7 @@ offset_right = 518.0
 offset_bottom = 48.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_yue1b")
 script = ExtResource("1_gx07x")
+action_name = "attack"
 
 [node name="HBox" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -31,7 +32,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[center]Accept[/center]"
+text = "[center]Attack[/center]"
 fit_content = true
 scroll_active = false
 

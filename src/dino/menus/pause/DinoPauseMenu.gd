@@ -5,17 +5,17 @@ extends CanvasLayer
 ## vars ##########################################
 
 @onready var hero_label = $%HeroLabel
-@onready var regen_menu = $%BrickRegenMenu
 @onready var tabs: TabContainer = $%TabContainer
+
+@onready var returnToMain = $%ReturnToMainMenu
 
 ## ready ##########################################
 
 func _ready():
-	refresh()
+	returnToMain.pressed.connect(Navi.nav_to_main_menu)
 
 	visibility_changed.connect(func():
 		if visible:
-			refresh()
 			update_hero()
 			set_focus())
 	if visible:
@@ -31,10 +31,6 @@ func set_focus():
 	# 	active_tab.render()
 
 ## update ##########################################
-
-func refresh():
-	if regen_menu:
-		regen_menu.refresh()
 
 func update_hero():
 	var m = Dino.get_game_mode()
