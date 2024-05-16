@@ -10,6 +10,7 @@ func test_build_room_sets_tilemap_borders():
 	def.map_cells = [Vector3i(0, 0, 0)]
 
 	room.set_room_def(def)
+	room.ensure_children()
 	room.setup_tileset()
 	room.fill_tilemap_borders()
 	room.tilemap.force_update()
@@ -40,6 +41,7 @@ func test_build_room_walls_concave_shape():
 	def.map_cells = shape
 
 	room.set_room_def(def)
+	room.ensure_children()
 	room.setup_tileset()
 	room.fill_tilemap_borders()
 	room.tilemap.force_update()
@@ -84,6 +86,7 @@ func test_build_room_sets_tilemap_doors():
 	def.map_cells = [Vector3i(0, 0, 0)]
 
 	room.set_room_def(def)
+	room.ensure_children()
 	room.setup_tileset()
 
 	var neighbor_data = [
@@ -237,6 +240,7 @@ xxx
 		.merge(MapInput.small_room_shape()), def)
 
 	room.set_room_def(def)
+	room.ensure_children()
 	room.setup_tileset()
 	room.fill_tilemap_borders()
 	room.tilemap.force_update()
