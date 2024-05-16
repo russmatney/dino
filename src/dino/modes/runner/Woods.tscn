@@ -14,13 +14,14 @@ script = ExtResource("3_11sqm")
 genre_type = 0
 entities = Array[ExtResource("2_8n0s3")]([SubResource("Resource_tqtmy"), SubResource("Resource_tqtmy"), SubResource("Resource_tqtmy")])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shape = Array[Vector3i]([])
-room_shapes = []
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 3
 neighbor_direction = Vector2i(1, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_n1wd3"]
@@ -28,13 +29,14 @@ script = ExtResource("3_11sqm")
 genre_type = 0
 entities = Array[ExtResource("2_8n0s3")]([])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shape = Array[Vector3i]([])
-room_shapes = []
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_gnrho"]
@@ -42,13 +44,14 @@ script = ExtResource("3_11sqm")
 genre_type = 0
 entities = Array[ExtResource("2_8n0s3")]([])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shape = Array[Vector3i]([])
-room_shapes = []
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_de14r"]
@@ -56,13 +59,14 @@ script = ExtResource("3_11sqm")
 genre_type = 0
 entities = Array[ExtResource("2_8n0s3")]([])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shape = Array[Vector3i]([])
-room_shapes = []
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = "res://src/dino/levels/woods/leaf_runner_level_def.txt"
 
 [sub_resource type="Resource" id="Resource_o72ks"]

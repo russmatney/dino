@@ -23,8 +23,7 @@ var quest_manager: QuestManager
 ## enter_tree #####################################################
 
 func _enter_tree():
-	ensure_tilemaps()
-	U.ensure_owned_child(self, "bg_color_rect", "BGColorRect", ColorRect)
+	ensure_children()
 
 ## ready ##############################################################
 
@@ -66,6 +65,7 @@ func _ready():
 func build_room(def: VaniaRoomDef, opts={}):
 	# Log.info("building room:", def)
 	room_def = def
+	ensure_children()
 	clear_all_tiles()
 	setup_tileset()
 	setup_walls_and_doors(opts)
@@ -76,20 +76,21 @@ func build_room(def: VaniaRoomDef, opts={}):
 	add_enemies()
 	add_effects()
 
-## setup tilemaps ##############################################################
+	# TODO draw roomboxes/color-rects for neighboring map cells
 
-func ensure_tilemaps():
+func ensure_children():
 	U.ensure_owned_child(self, "tilemap", "TileMap", DinoTileMap)
 	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", DinoTileMap)
 	tilemap.add_to_group(NAV_SOURCE_GROUP, true)
 	U.ensure_owned_child(self, "nav_region", "NavigationRegion2D", NavigationRegion2D)
 	U.ensure_owned_child(self, "quest_manager", "QuestManager", QuestManager)
+	U.ensure_owned_child(self, "bg_color_rect", "BGColorRect", ColorRect)
+
+## setup tilemaps ##############################################################
 
 # TODO use neighbor tileset as background near the door
 # TODO pull all this into DinoTileMap
 func setup_tileset():
-	ensure_tilemaps()
-
 	var primary = room_def.get_primary_tiles()
 	if primary:
 		var tmap = primary.get_scene().instantiate()
@@ -113,7 +114,6 @@ func setup_tileset():
 		Log.warn("cannot setup tileset for room_def", room_def)
 
 func clear_all_tiles():
-	ensure_tilemaps()
 	tilemap.clear()
 	bg_tilemap.clear()
 
@@ -250,8 +250,6 @@ func get_tile_coords_for_doorway(map_cell_pair):
 
 ## background images ##############################################################
 
-var bg_color = Color(0.5, 0.3, 0.6, 1.0)
-
 func fill_background_images(_opts={}):
 	var cells = room_def.map_cells
 	if cells.is_empty():
@@ -260,6 +258,13 @@ func fill_background_images(_opts={}):
 		room_def.calc_cell_meta({cells=cells})
 	if cells.is_empty():
 		Log.warn("could not create background rect, no cells!")
+
+	var bg_color = room_def.get_bg_color()
+
+	# color bg outside of local cells
+	bg_color_rect.color = bg_color
+
+	# color rects inside local cells
 	for map_cell in cells:
 		var rect = room_def.get_map_cell_rect(map_cell)
 		var crect = U.add_color_rect(self, {rect=rect, color=bg_color, name=str(map_cell, "BGRect")})

@@ -64,7 +64,6 @@ func start_game():
 func next_map_def():
 	var idx = map_def.sub_map_defs.find(current_map_def)
 	idx += 1
-	Log.pr("loading sub map def idx", idx)
 	if idx < len(map_def.sub_map_defs):
 		var def = map_def.sub_map_defs[idx]
 		if map_def.input and def.input:

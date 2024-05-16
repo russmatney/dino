@@ -122,6 +122,11 @@ func get_drops() -> Array[DropData]:
 		return []
 	return input.drops
 
+func get_bg_color() -> Color:
+	if not input:
+		return Color(0, 0, 0, 0.5)
+	return input.bg_color
+
 ## input #####################################################3
 
 func rebuild():

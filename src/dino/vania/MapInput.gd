@@ -22,6 +22,7 @@ class_name MapInput
 @export var neighbor_direction: Vector2i
 @export var skip_borders: Array[Vector2i]
 @export var drops: Array[DropData]
+@export var bg_color: Color
 
 var grid: GridDef
 var grids: Array[GridDef]
@@ -51,6 +52,8 @@ func _init(opts={}):
 	neighbor_direction = opts.get("neighbor_direction", Vector2i.ZERO)
 	skip_borders.assign(opts.get("skip_borders", []))
 	drops.assign(opts.get("drops", []))
+	if opts.get("bg_color"):
+		bg_color = opts.get("bg_color")
 
 func to_pretty():
 	return {
@@ -92,6 +95,7 @@ func merge(b: MapInput):
 		neighbor_direction=nbr_dir,
 		skip_borders=U.distinct(U.append_array(skip_borders, b.skip_borders)),
 		drops=U.distinct(U.append_array(drops, b.drops)),
+		bg_color=U._or(b.bg_color, bg_color),
 		})
 
 ## update room def ######################################################

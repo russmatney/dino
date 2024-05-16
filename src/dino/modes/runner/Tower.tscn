@@ -30,22 +30,22 @@ _id = "139"
 
 [sub_resource type="Resource" id="Resource_dg3ao"]
 script = ExtResource("4_fq4km")
-cells = Array[Vector3i]([])
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(0, 1, 0)])
 type = 5
 
 [sub_resource type="Resource" id="Resource_15qex"]
 script = ExtResource("4_fq4km")
-cells = Array[Vector3i]([])
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0), Vector3i(3, 0, 0)])
 type = 4
 
 [sub_resource type="Resource" id="Resource_56iaw"]
 script = ExtResource("4_fq4km")
-cells = Array[Vector3i]([])
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(1, 1, 0)])
 type = 12
 
 [sub_resource type="Resource" id="Resource_q42si"]
 script = ExtResource("4_fq4km")
-cells = Array[Vector3i]([])
+cells = Array[Vector3i]([Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(0, 1, 0)])
 type = 13
 
 [sub_resource type="Resource" id="Resource_gkukq"]
@@ -64,6 +64,7 @@ door_mode = 4
 neighbor_direction = Vector2i(0, -1)
 skip_borders = Array[Vector2i]([Vector2i(0, -1)])
 drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_sgckp"]
@@ -78,6 +79,7 @@ door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
 drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_sokyy"]
@@ -92,6 +94,7 @@ door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
 drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_blxq2"]
@@ -106,6 +109,7 @@ door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
 drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_dcxne"]
@@ -120,6 +124,7 @@ door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
 drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_dcopn"]
@@ -134,6 +139,7 @@ door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
 drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_4fbi3"]
