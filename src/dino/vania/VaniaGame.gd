@@ -140,7 +140,7 @@ func show_ready_overlay():
 	# TODO tween/fade-in
 	ready_overlay.show()
 
-	screen_blur.fade_in({duration=2.0})
+	screen_blur.anim_blur({duration=1.0, target=0.6})
 
 	# maybe wait a second before flipping this?
 	ready_to_play = true
@@ -164,7 +164,7 @@ func load_initial_room():
 	_load_room(rpath, {setup=func(room):
 		room.set_room_def(get_room_def(rpath))})
 
-	screen_blur.fade_out({duration=2.0, target=0.0})
+	screen_blur.anim_blur({duration=1.0, target=0.0})
 
 func show_playground():
 	var anim_nodes = []
@@ -178,7 +178,7 @@ func show_playground():
 
 	var time = 0.6
 
-	screen_blur.fade_out({duration=2.0, target=0.0})
+	screen_blur.anim_blur({duration=1.0, target=0.0})
 
 	await Anim.animate_intro_from_point({
 		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
@@ -196,7 +196,7 @@ func clear_playground():
 
 	var time = 0.6
 
-	screen_blur.fade_in({duration=time,})
+	screen_blur.fade_in({duration=time})
 
 	await Anim.animate_outro_to_point({
 		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
