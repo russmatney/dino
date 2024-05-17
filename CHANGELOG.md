@@ -4,8 +4,252 @@
 ## Untagged
 
 
+### 17 May 2024
+
+- ([`f29e04df`](https://github.com/russmatney/dino/commit/f29e04df)) feat: blur transitions pretty much working, toying with grey scale
+- ([`e471dfcd`](https://github.com/russmatney/dino/commit/e471dfcd)) wip: toying with screenblur in vania game transitions
+- ([`837a6ac6`](https://github.com/russmatney/dino/commit/837a6ac6)) feat: playground anim in/out
+
+  > Not too bad! Something active for the loading playground's nodes.
+
+- ([`ed955992`](https://github.com/russmatney/dino/commit/ed955992)) feat: pull in dothop's Anim class, genericize
+- ([`a6c16ecf`](https://github.com/russmatney/dino/commit/a6c16ecf)) feat: basic ready-to-play overlay
+
+  > Now requiring player input in the load playground before starting the loaded
+  > vania game - helps slow down the jarring transitions.
+
+- ([`effb4e11`](https://github.com/russmatney/dino/commit/effb4e11)) feat: enable player position on minimap
+
+### 16 May 2024
+
+- ([`4f181e36`](https://github.com/russmatney/dino/commit/4f181e36)) feat: use vania room bg_color for minimap color
+
+  > Be nice to get the doors working too.
+
+- ([`a509b701`](https://github.com/russmatney/dino/commit/a509b701)) fix: ensure_children manually in vania room tests
+
+  > VaniaRoom's ensure_children got cleaned up last night - the tests never
+  > add the node to the scene_tree, so ensure_children needs to be called
+  > manually.
+
+- ([`84b6c06b`](https://github.com/russmatney/dino/commit/84b6c06b)) feat: sound, controls panels added to pause menu tabs
+- ([`80a3f616`](https://github.com/russmatney/dino/commit/80a3f616)) feat: show more action in controls panel
+- ([`ad2d8dcb`](https://github.com/russmatney/dino/commit/ad2d8dcb)) feat: tabbed options menu with sound/control opts
+- ([`0eb5b1fe`](https://github.com/russmatney/dino/commit/0eb5b1fe)) deps: add kenney input prompt icons
+- ([`e1e14559`](https://github.com/russmatney/dino/commit/e1e14559)) wip: rough options panel init
+
+  > pulls in dothop's muteButtonList and controls panel
+
+- ([`5e8c9d3d`](https://github.com/russmatney/dino/commit/5e8c9d3d)) feat: add dino logo basic fade in, particles to main menu
+- ([`9edd269f`](https://github.com/russmatney/dino/commit/9edd269f)) light: misc 2d directional light tweaks
+- ([`de386a86`](https://github.com/russmatney/dino/commit/de386a86)) tiles: cleaner volcano tile occlusion
+
+### 15 May 2024
+
+- ([`4ee4ea66`](https://github.com/russmatney/dino/commit/4ee4ea66)) feat: custom bg_color per room/map_def
+
+  > Also adds an occlusion layer to the volcano tiles.
+
+- ([`47faac2a`](https://github.com/russmatney/dino/commit/47faac2a)) fix: update test roomShape api, add vania gen test clean up
+
+  > Adds metSys cleanup funcs to the vania generator + vania game unit tests
+  > - these were starting to leave metsys data around between tests,
+  > hopefully this is the last we see of it.
+
+- ([`808d0f6d`](https://github.com/russmatney/dino/commit/808d0f6d)) fix: restore tests, add 'none' as first room shape type
+
+  > Falsy enum values strike again! What a PITA. This also breaks the room
+  > shapes i've already assigned b/c they're all ints that are now off by
+  > one. great.
+
+- ([`0955bdcf`](https://github.com/russmatney/dino/commit/0955bdcf)) wip: specify some rooms shapes for Tower
+- ([`47f420f2`](https://github.com/russmatney/dino/commit/47f420f2)) feat: introduce RoomShape resource with type enum
+
+  > RoomShapes are now selectable via the ui by label (enum value).
+
+- ([`b53d12d8`](https://github.com/russmatney/dino/commit/b53d12d8)) feat: specify roomEffects via enum type drop down
+- ([`74f849e2`](https://github.com/russmatney/dino/commit/74f849e2)) feat: specify drops via MapInput
+- ([`b8a0575d`](https://github.com/russmatney/dino/commit/b8a0575d)) feat: vania level_complete tracks quests in all rooms
+
+  > We now support quests across multi-room vania games. When all rooms have
+  > quests_complete marked true, the vania game is considered complete.
+  > 
+  > Note that rooms can still technically be created without quests, which
+  > means the level cannot be completed :/
+
+- ([`8290b569`](https://github.com/russmatney/dino/commit/8290b569)) wip: quick classic test sub-map-defs
+
+  > I saw a thread-related crash between loading vania games, I'm not sure
+  > how/why - it looked like the thread/scene was exiting before the thread
+  > could be waited/cleared.... hopefully adding some interstitials/slowing
+  > down the loading will make those crashes impossible.
+
+- ([`d2e0d397`](https://github.com/russmatney/dino/commit/d2e0d397)) fix: classic using sub_map_defs, stateless U.append_array
+
+  > Also disables some game modes.
+  > 
+  > Curious to see if we run into anything that was depending on
+  > U.append_array's side effect. In this case it was unexpectedly
+  > accumulating mapInput content when merging with subdef inputs.
+
+- ([`9834ec2e`](https://github.com/russmatney/dino/commit/9834ec2e)) fix: restore thread-based level gen
+
+  > Pre-calcs some neighbor data that was pulled from Metsys - the metsys
+  > data uses signals to updates its state, which unfortunately complicates
+  > doing that work on a thread (b/c signals/deferreds are awaited on the
+  > main thread). There might be some clever locking/semaphore workarounds,
+  > but instead we precalc the neighbor data that we were building from
+  > metsys - ideally we'd be able to run without it.
+  > 
+  > Adds some awaits to tests that use MetSys's state to sanity check the
+  > data.
+
+- ([`889106ca`](https://github.com/russmatney/dino/commit/889106ca)) wip/fix: wait a frame in vania gen, restore tests
+
+  > the recent 'deferred' fixes in vania gen broke the doors/neighbor code,
+  > which depends on metsys being update before the doors are setup. This
+  > restores the tests, but unfortunately breaks the 'loading' screen -
+  > threads that await are resumed by the main thread :/
+  > 
+  > Looking into a potential way to keep the work on the same thread, but it
+  > might be complex/not-worth it:
+  > https://github.com/godotengine/godot/issues/79637#issuecomment-1727999031
+
+
+### 14 May 2024
+
+- ([`61ffa8c3`](https://github.com/russmatney/dino/commit/61ffa8c3)) fix: toss the game_mode after completing
+
+  > probably better to do this in exit_tree or something - tho, why doesn't
+  > this happen automatically? either way we need also do this in other
+  > paths (player death, exiting via pause menu).
+
+- ([`7e9a8cb8`](https://github.com/russmatney/dino/commit/7e9a8cb8)) feat: skip borders and corners via MapInput
+
+  > Also defers a few generation calls to avoid thread errors - not sure how
+  > critical they are, but things to be fairly stable (in classic mode,
+  > anyway).
+
+- ([`8a251304`](https://github.com/russmatney/dino/commit/8a251304)) fix: playable classic mode via vania game
+
+  > Defers adding the new vania game node to the scene - hopefully fixes a
+  > sometimes crash occuring in the level transitions.
+
+- ([`529403bd`](https://github.com/russmatney/dino/commit/529403bd)) fix: static vania generator room number
+
+  > ensuring unique packed scene names across multiple vania games.
+
+- ([`41644f63`](https://github.com/russmatney/dino/commit/41644f63)) wip: neighbor_direction, one-room vania quest level_complete signal
+
+  > Neighbor direction can now be specified per room, and vania quests now
+  > fire level_complete the first time a room's quests are complete.
+  > 
+  > Fills out more of the classic Sidescroller map defs, first playthrough
+  > had a nasty stack-dump crash :/
+
+- ([`62850a93`](https://github.com/russmatney/dino/commit/62850a93)) wip: 'only_advance' flag on room_input
+
+  > 'only_advance' tells the room placement to filter for neighbors in the
+  > positive x or y direction (i.e. run-right or fall down). Feels like
+  > we'll want more control tho (e.g. climbing vs falling), so probably
+  > going to go with something more expressive, like a preferred neighbor
+  > direction.
+
+- ([`975cc696`](https://github.com/russmatney/dino/commit/975cc696)) feat: vania room placement using door_mode
+
+  > room placement can now prefer neighbors with a vertical or horizontal
+  > door.
+
+- ([`3bb30f03`](https://github.com/russmatney/dino/commit/3bb30f03)) refactor: slightly cleaner/more reusable door filter
+- ([`16f333ea`](https://github.com/russmatney/dino/commit/16f333ea)) feat: basic 'door_mode' as a PITA enum
+
+  > Got burned on this enum in several ways all morning. enums backed by
+  > ints are terrible!
+
+- ([`76bf07d9`](https://github.com/russmatney/dino/commit/76bf07d9)) refactor: moving all game modes to vaniaGame
+
+  > mapDef.create_node() now uses vaniaGame regardless of level_script. Adds
+  > grid_defs to mapInput, mapDef, and preps mapInput to determine
+  > local_cells based on the parsed grid defs.
+  > 
+  > Maybe we can drop dinoLevel and Brick completely? need to get further
+  > along first.
+
+
+### 13 May 2024
+
+- ([`3d0ada74`](https://github.com/russmatney/dino/commit/3d0ada74)) refactor: move arcade/roulette impls from dinoGames to levelDefs
+- ([`12b12176`](https://github.com/russmatney/dino/commit/12b12176)) refactor: pull dino level gen games into levelDefs
+
+  > No more generating DinoLevels from dinoGame entities. The game entities
+  > are pretty much deprecated - they're all hard-coded maps. maybe they
+  > still work?
+
+- ([`43c76f0a`](https://github.com/russmatney/dino/commit/43c76f0a)) wip: misc mapDef cleanups
+- ([`a0fb3fb3`](https://github.com/russmatney/dino/commit/a0fb3fb3)) refactor: more notifs, dinoLevel spawns player
+
+  > The DinoLevel and VaniaGame are now both responsible for spawning the
+  > player, so the gameMode doesn't need to care about it.
+
+- ([`98e64dea`](https://github.com/russmatney/dino/commit/98e64dea)) refactor: rename RoomInput -> MapInput
+
+  > This 'input' concept is very useful, but no reason to couple it with
+  > rooms - that is done already based on context (i.e. is it an input or
+  > room_input). In this case, MapDefs will have a shared Input obj to pull
+  > entities from.
+
+- ([`dd5e9473`](https://github.com/russmatney/dino/commit/dd5e9473)) deps: delete + update aseprite wizard
+
+  > my current dep update flow doesn't remove deleted files! yikes! This
+  > clears a bunch of dead asepritewizard code
+
+- ([`49b5ffc7`](https://github.com/russmatney/dino/commit/49b5ffc7)) deps: all deps up to date
+
+  > With a few tweaks in places.
+
+
+### 11 May 2024
+
+- ([`d1b85609`](https://github.com/russmatney/dino/commit/d1b85609)) feat: initial game mode scenes for rest of launch games
+
+  > plus very rough map_def details
+
+- ([`4ab2f9d9`](https://github.com/russmatney/dino/commit/4ab2f9d9)) fix: ignore nil room_defs_path
+- ([`47a1664e`](https://github.com/russmatney/dino/commit/47a1664e)) feat: classic mode running on mapDefs
+
+  > Extends MapDef to support an attached levelDef, and adds a single func
+  > for creating a game_node with a mapDef (be it a DinoLevel or VaniaGame)
+  > - this will allow mapDef details (parameters like room_inputs, enemy
+  > count, seed, difficulty, etc) to be incorporated into brick's level gen.
+  > 
+  > vania maps don't fire level_complete yet - will need some improved quest
+  > feats to check quests across unloaded vania rooms (likely via
+  > room_defs).
+
+- ([`a25f7e71`](https://github.com/russmatney/dino/commit/a25f7e71)) fix: update some entity labels
+
+  > These are a bit fragile at the moment - plus it'd be really nice to
+  > support and + or in these labels (eg. b = Beefstronaut or Monstroar).
+
+- ([`01455558`](https://github.com/russmatney/dino/commit/01455558)) feat: basic level-def based ClassicSideScroller impl
+- ([`fc814eef`](https://github.com/russmatney/dino/commit/fc814eef)) fix: pull entities based on grid, not label_to_ent
+
+### 10 May 2024
+
+- ([`09b8d31c`](https://github.com/russmatney/dino/commit/09b8d31c)) feat: add all launch games as DinoGameModes
+
+  > Pandora quirk: setting a resource via text-path currently does nothing -
+  > a bug i might have introduced with the drag-n-drop feat.
+
+- ([`c86207a0`](https://github.com/russmatney/dino/commit/c86207a0)) docs: add line about addon licenses
+- ([`6b52946e`](https://github.com/russmatney/dino/commit/6b52946e)) docs: add dino history blurb
+
+  > Mostly pulled from the dino garden note.
+
+
 ### 9 May 2024
 
+- ([`323c3dec`](https://github.com/russmatney/dino/commit/323c3dec)) docs: update changelog
 - ([`47eed652`](https://github.com/russmatney/dino/commit/47eed652)) wip: main menu relayout, list of launch games
 
   > These buttons don't nav to anything yet - Just whipping the main menu
@@ -1605,266 +1849,6 @@
 
   > No need for this to be the main message in the readme.
 
-
-### 30 Nov 2023
-
-- ([`7ba75c1e`](https://github.com/russmatney/dino/commit/7ba75c1e)) misc: some clean up, drop gunner test for now
-
-  > For some reason Input.get_vector() isn't recognizing that move_right is
-  > pressed in this test, so the aim_vector never gets set and the weapon
-  > never hits the target :/
-  > 
-  > Disabling assertion for now.
-
-- ([`1409546f`](https://github.com/russmatney/dino/commit/1409546f)) fix: SpikeData running at editor time
-
-  > Supports BlobPickup running in the editor
-
-
-### 29 Nov 2023
-
-- ([`fed4fbf1`](https://github.com/russmatney/dino/commit/fed4fbf1)) chore: drop some dead player dirs
-
-  > The games are shrinking nicely.
-
-- ([`321a6e03`](https://github.com/russmatney/dino/commit/321a6e03)) fix: only need 1 gray orb to create a pink one
-
-  > There's a disappearing orb problem that makes spike unwinnable right now
-  > - for now, only need 1 (instead of 3) to create pink ones, which fixes
-  > playthroughs.
-
-- ([`2bb98598`](https://github.com/russmatney/dino/commit/2bb98598)) fix: ensure fences/low-walls, spikes on player collision masks
-- ([`bccb5eab`](https://github.com/russmatney/dino/commit/bccb5eab)) fix: ensure td player has boomerang
-- ([`d476eed0`](https://github.com/russmatney/dino/commit/d476eed0)) fix: boomerangs hit targets and gunner-enemies now
-- ([`541b131f`](https://github.com/russmatney/dino/commit/541b131f)) feat: connect players, level to died() signals
-- ([`3c237789`](https://github.com/russmatney/dino/commit/3c237789)) feat: ensure 'weapons' group on weapons, targets break when weapons enter
-
-  > should support boomerangs, swords, etc.
-
-- ([`3424100d`](https://github.com/russmatney/dino/commit/3424100d)) feat: prefer DinoGameEntity player_scene if one is set
-
-  > Not quite sure the right thing to express here. 'player_type' isn't
-  > really the right name, it's more of a game/level detail than a player
-  > one.
-
-- ([`e14ee7f4`](https://github.com/russmatney/dino/commit/e14ee7f4)) fix: don't free the last scene until opts.setup(new_scene) is called
-
-  > It'd be great to write a test for this, wouldn't it.
-
-
-### 28 Nov 2023
-
-- ([`5d46faf4`](https://github.com/russmatney/dino/commit/5d46faf4)) fix: ensure double jump on dino ss player
-- ([`addae954`](https://github.com/russmatney/dino/commit/addae954)) feat: ss/td/beu for hairo/hatbot/hoodie/romeo
-
-  > Adds player scenes for each type to each hero.
-  > 
-  > Quick copy-pasta job that also sets basic art animations, tho most of
-  > these are just a single-frame idle animation for now.
-
-- ([`caa5fcb6`](https://github.com/russmatney/dino/commit/caa5fcb6)) feat: aseprite script for adding missing tags
-
-  > Also colorizes the tags with a quick color wheel, which helps see
-  > through a mess of them. It's the little things!
-
-- ([`c25574cf`](https://github.com/russmatney/dino/commit/c25574cf)) pixels: icons/portraits for hairo, hatbot, hoodie, and romeo
-
-  > Now working in PlayerButtons, soon to support the unified HUD.
-
-- ([`6620195e`](https://github.com/russmatney/dino/commit/6620195e)) feat: choose-your-character in roulette mode
-- ([`da9e9b80`](https://github.com/russmatney/dino/commit/da9e9b80)) chore: more moved file updates
-
-  > Apparently these scenes get 'updated' in the engine's memory but not
-  > written to disk without a manual save. tho maybe running the game would
-  > trigger a save as well?
-
-- ([`9213acaf`](https://github.com/russmatney/dino/commit/9213acaf)) wip/refactor: create dino/modes, move menus to dino/menus
-
-  > Begins to introduce PlayerButton.
-
-- ([`b2bd747e`](https://github.com/russmatney/dino/commit/b2bd747e)) feat: playing as playerEntity in roulette games
-
-  > Also configs collision layers/masks in td/ss/beu player ready funcs.
-
-- ([`0b16417c`](https://github.com/russmatney/dino/commit/0b16417c)) feat: player autoload supporting set_player_entity()
-
-  > Not called anywhere yet, but should work?
-
-- ([`0a64220c`](https://github.com/russmatney/dino/commit/0a64220c)) wip/feat: DinoPlayerEntity and src/dino/players
-
-  > Pulls players from several games into new scenes in
-  > src/dino/players/{hario,hatbot,hoodie,romeo} - these all use shared
-  > scripts that inherit from topdown/beatemup/sidescroller beehive players.
-  > 
-  > Creates a new pandora entity called DinoPlayerEntity, in support of a
-  > coming choose-your-character screen, which will select a player used
-  > across dino levels.
-
-
-### 22 Nov 2023
-
-- ([`a4fa2b08`](https://github.com/russmatney/dino/commit/a4fa2b08)) chore: set movie_writer file, bump godot verison
-- ([`f09236b6`](https://github.com/russmatney/dino/commit/f09236b6)) test: basic gunner level complete working
-
-  > An integration test that generates a single gunner room and target, and
-  > ensures level_complete is emitted when the target is hit.
-
-
-### 21 Nov 2023
-
-- ([`63fbb834`](https://github.com/russmatney/dino/commit/63fbb834)) wip: not-yet-working gunner level-complete test
-
-  > Attempts an integration test that expects the gunner level to be
-  > complete, including a basic rooms overwrite and simulated player inputs.
-  > 
-  > Possibly breaks other things b/c dino level has been modified in a few
-  > ways (eg creating the player before the jumbotron)
-
-- ([`f94e92f0`](https://github.com/russmatney/dino/commit/f94e92f0)) fix: pass opts through Game.launch/restart to Navi.nav_to
-- ([`e813e4bc`](https://github.com/russmatney/dino/commit/e813e4bc)) fix: filter out 1-3 tabs from room parser chunks
-
-  > Should really do something more resilient here, like a whitespace regex.
-  > Curse my own laziness!
-
-- ([`f8fbf96c`](https://github.com/russmatney/dino/commit/f8fbf96c)) chore: drop dinoGameEntity singleton property
-
-### 15 Nov 2023
-
-- ([`3712da07`](https://github.com/russmatney/dino/commit/3712da07)) fix: update to deploy debug build
-
-  > The release build is ham-strung by pandora release exports not including
-  > any data - still need to fix that. Deploying debug builds works for now
-  > b/c the issue is related to reading a compressed data file (which is
-  > never created).
-
-- ([`3444cca4`](https://github.com/russmatney/dino/commit/3444cca4)) feat: game icon update!
-- ([`89bc78f8`](https://github.com/russmatney/dino/commit/89bc78f8)) wip: drop/fix some global QuestManager usage
-
-  > Towards dropping the QuestManager autoload, but punting for now.
-
-- ([`9fde1be1`](https://github.com/russmatney/dino/commit/9fde1be1)) feat: basic SuperElevatorLevel DinoGame impl
-
-  > Does not add a Quest setup to SEL, only refactors enough to use
-  > DinoLevel's interstitials and level_complete signal. Can now play
-  > through roulette with all the (enabled) games!
-
-- ([`38c0ea89`](https://github.com/russmatney/dino/commit/38c0ea89)) wip: disable dothop
-
-  > Slightly heart-breaking, but dothop is not going to work with
-  > arcade/roulette yet - will restore it or rip it into a different game at
-  > some point.
-
-- ([`2a7a85eb`](https://github.com/russmatney/dino/commit/2a7a85eb)) feat: herd as DinoLevel, cleaner FetchSheepQuest impl
-
-  > Some other fixes/details here: split out a Util.find_level_root() for
-  > searching for quest nodes, and updating arcade to toss and recreate the
-  > level_node rather than just regenerate it. This is cleaner and helps
-  > keep things encapsulated in their branch of the scene_tree.
-
-- ([`3ad35bb6`](https://github.com/russmatney/dino/commit/3ad35bb6)) feat: harveyLevel extending DinoLevel, using quests
-
-  > Now ready to be used in roulette and arcade!
-
-
-### 14 Nov 2023
-
-- ([`171c4abd`](https://github.com/russmatney/dino/commit/171c4abd)) feat: Quest impl DRY up
-
-  > Moves repeated logic from several recent Quest impls into the Quest base
-  > class. We'll see if we need to deviate from this at all...
-
-- ([`c2193469`](https://github.com/russmatney/dino/commit/c2193469)) fix: better Quest naming
-
-  > ActiveQuest -> QuestData
-  > Quest -> QuestManager
-  > QuestNode -> Quest
-  > 
-  > Towards dropping the quest autoload in favor of a QuestManager static
-  > class that provides a node to a level via QuestManager.setup_quests()
-
-- ([`6ccfa04f`](https://github.com/russmatney/dino/commit/6ccfa04f)) fix: use player as leaf node for adding cord
-
-  > If the tossedPlug hasn't been added to the tree yet, this crashes.
-
-- ([`013bb39b`](https://github.com/russmatney/dino/commit/013bb39b)) feat: deselect all button on roulette menu
-- ([`bc97a687`](https://github.com/russmatney/dino/commit/bc97a687)) fix: Game.get_player -> P.get_player
-
-  > Plus removes the @tool from the DinoGym, where it's quite unnecessary.
-
-- ([`11352f47`](https://github.com/russmatney/dino/commit/11352f47)) fix: add children to level, not current_scene
-
-  > Impls a util for walking parents until one impls add_child_to_level.
-  > After much rumination about call-down/signal-up, this is where i
-  > landed.... calling-up with duck typing. I don't want to force any
-  > would-be parent node to connect up signals across arbitrary children,
-  > or require any node that wants to add_child to be part of some
-  > child-adders group.... this feels fine for now, and gets away without
-  > tracking the current-level, which is nice if we ever want to run
-  > more than one level at a time.
-
-- ([`75d83f99`](https://github.com/russmatney/dino/commit/75d83f99)) refactor: move container nodes from Node2D to just Node
-- ([`aa9f932d`](https://github.com/russmatney/dino/commit/aa9f932d)) misc: game/navi cleanup
-- ([`346aa90b`](https://github.com/russmatney/dino/commit/346aa90b)) fix: set spawn_coords when spawning_player
-- ([`f982a34a`](https://github.com/russmatney/dino/commit/f982a34a)) fix: overwrite roulette current_game when launching
-
-  > Otherwise the 'debug' set game ent will be launched first.
-
-- ([`6bb0ef66`](https://github.com/russmatney/dino/commit/6bb0ef66)) wip: minimizing Game.gd, break out player bits into Player.gd
-
-  > Trying to see if the Game autoload can be dropped - feeling like
-  > is_managed could maybe go away, and not sure if there's a better way to
-  > handle player_scene crashing for simple Player.respawn_player() calls...
-
-
-### 13 Nov 2023
-
-- ([`061de3e1`](https://github.com/russmatney/dino/commit/061de3e1)) feat: spike as DinoLevel
-
-  > Can now play spike in Arcade and Roulette mode.
-  > 
-  > Pulls an isolated Quest out of Spike's DeliveryZone, adds it to
-  > SpikeZone _ready() and SpikeLevel _init() (which is now a DinoLevel)
-
-- ([`4dbc616a`](https://github.com/russmatney/dino/commit/4dbc616a)) refactor: drop DinoGame class, rewrite away from game.current_game
-
-  > Refactors Game.gd to impl most of the DinoGame functions.
-  > 
-  > Drops the current_game var, opting to instead determine the current_game
-  > whenever needed. this was mostly just supporting figuring out the
-  > player_scene, which now has a caching mechanism instead.
-
-- ([`1de14945`](https://github.com/russmatney/dino/commit/1de14945)) fix: restore playable dothop game
-
-  > Now without a game_singleton!
-
-- ([`c16a95a7`](https://github.com/russmatney/dino/commit/c16a95a7)) fix: free jumbotron after it is closed
-
-  > I wonder how this hasn't been causing some other problems.
-
-- ([`7858b7ee`](https://github.com/russmatney/dino/commit/7858b7ee)) refactor: dropping more game singletons: hatbot, mountain, demoland, ghosts, dothop
-
-  > Also some work toward fixing some dothop bugs.
-
-- ([`80cffc97`](https://github.com/russmatney/dino/commit/80cffc97)) chore: drop ghost camera, remove unused util fn
-
-  > godot 4 introduced `reparent`, so we don't need this helper anymore.
-
-- ([`8981d815`](https://github.com/russmatney/dino/commit/8981d815)) feat: game button fade to half when not selected
-
-  > It'd be cool to animate/stop-animating, and move to gray scale when not
-  > selected. Quick and working for now, like everything else.
-
-- ([`c7c3a821`](https://github.com/russmatney/dino/commit/c7c3a821)) feat: arcade, roulette menus support selecting games
-
-  > Refactors the arcade and roulette menus to display games as buttons,
-  > allowing the player to select a game to take to the arcade, and toggle
-  > games on/off for roulette. Needs some ui work, which is coming next.
-
-- ([`63459ca3`](https://github.com/russmatney/dino/commit/63459ca3)) feat: Navi passing opts along with nav_to, hiding menus via groups
-
-  > Much simpler to use groups than to register and track all the menus individually!
-
-- ([`c6e33ccb`](https://github.com/russmatney/dino/commit/c6e33ccb)) refactor: move dino menus to dino/menus, wip game-mode button
 
 ## posterity.year-one
 
