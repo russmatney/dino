@@ -45,8 +45,6 @@ var local_cells: Array #[Vector3i]
 var map_cells: Array #[Vector3i]
 var min_map_cell := Vector2i.MAX
 var max_map_cell := Vector2i.MIN
-var bg_color: Color = Color.BLACK
-var border_color: Color = Color.WHITE
 
 var tile_size = 16
 
@@ -125,7 +123,12 @@ func get_drops() -> Array[DropData]:
 func get_bg_color() -> Color:
 	if not input:
 		return Color(0, 0, 0, 0.5)
-	return input.bg_color
+	if input.bg_color:
+		return input.bg_color
+	return U.rand_of([Color.PERU, Color.AQUAMARINE, Color.CORAL])
+
+func get_border_color() -> Color:
+	return Color.WHITE
 
 ## input #####################################################3
 
@@ -137,9 +140,6 @@ func rebuild():
 func _init(opts={}):
 	if opts.get("local_cells"):
 		set_local_cells(opts.get("local_cells"))
-
-	bg_color = opts.get("bg_color", bg_color)
-	border_color = opts.get("border_color", border_color)
 
 	tile_size = U.get_(opts, "tile_size", tile_size)
 
