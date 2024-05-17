@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=21 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
@@ -47,25 +47,10 @@ drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
 bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
-[sub_resource type="Resource" id="Resource_uwljf"]
-script = ExtResource("2_352ld")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
 [sub_resource type="Resource" id="Resource_f6k3q"]
 script = ExtResource("7_djxep")
 name = "something"
-rooms = Array[ExtResource("2_352ld")]([SubResource("Resource_ip086"), SubResource("Resource_5bdms"), SubResource("Resource_uwljf")])
+rooms = Array[ExtResource("2_352ld")]([SubResource("Resource_ip086"), SubResource("Resource_5bdms")])
 sub_map_defs = Array[ExtResource("7_djxep")]([])
 
 [sub_resource type="Resource" id="Resource_fx1bk"]

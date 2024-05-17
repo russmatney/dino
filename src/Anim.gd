@@ -121,7 +121,7 @@ static func fade_out(node, t=0.5):
 static func animate_intro_from_point(opts: Dictionary):
 	var node = opts.get("node")
 	var nodes = opts.get("nodes")
-	var from_pos = opts.get("from")
+	var from_pos = opts.get("position", Vector2())
 	var t = opts.get("t", 0.6)
 
 	for n in nodes:
@@ -138,7 +138,7 @@ static func animate_intro_from_point(opts: Dictionary):
 static func animate_outro_to_point(opts: Dictionary):
 	var node = opts.get("node")
 	var nodes = opts.get("nodes")
-	var to_pos = opts.get("to")
+	var to_pos = opts.get("position", Vector2())
 	var t = opts.get("t", 0.6)
 
 	for n in nodes:

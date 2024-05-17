@@ -90,6 +90,8 @@ func _ready():
 		Dino.notif({type="banner", text="Loading...."})
 		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
 
+	show_playground()
+
 	hide_ready_overlay()
 	start_game_action_icon.set_icon_for_action("ui_accept")
 
@@ -158,18 +160,51 @@ func load_initial_room():
 		_load_room(rpath, {setup=func(room):
 			room.set_room_def(get_room_def(rpath))})
 
-func clear_playground():
+func show_playground():
+	var anim_nodes = []
+
 	var p = Dino.current_player_node()
+	if p != null and is_instance_valid(p):
+		anim_nodes.append(p)
+
+	for ch in playground.get_children():
+		anim_nodes.append(ch)
+
+	var time = 0.6
+
+	await Anim.animate_intro_from_point({
+		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
+		})
+
+func clear_playground():
+	var anim_nodes = []
+
+	var p = Dino.current_player_node()
+	if p != null and is_instance_valid(p):
+		anim_nodes.append(p)
+
+	for ch in playground.get_children():
+		anim_nodes.append(ch)
+
+	var time = 0.6
+
+	await Anim.animate_outro_to_point({
+		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
+		})
+
 	if p != null and is_instance_valid(p):
 		p.queue_free()
 
 	playground.queue_free()
 
+	# give the player time to free
+	await get_tree().create_timer(0.1).timeout
+
+
 # clears the playground, hides the ready-overlay, loads the initial room, and sets up the player
 # can be fired if ready_to_play is true
 func start_vania_game():
-	clear_playground()
-	await get_tree().create_timer(0.4).timeout
+	await clear_playground()
 
 	hide_ready_overlay()
 
