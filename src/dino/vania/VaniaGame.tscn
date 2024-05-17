@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="7_djxep"]
 [ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://src/dino/menus/controls/ActionInputIcon.tscn" id="8_g3klb"]
 [ext_resource type="Texture2D" uid="uid://db11pg0l5l562" path="res://assets/art/ui/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_x.png" id="10_8vghj"]
+[ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="11_jq6qc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_n8r60"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_d1x2y"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
@@ -151,6 +152,9 @@ bbcode_enabled = true
 text = "[center]to start![/center]"
 fit_content = true
 scroll_active = false
+
+[node name="ScreenBlur" parent="CanvasLayer2" instance=ExtResource("11_jq6qc")]
+unique_name_in_owner = true
 
 [node name="LoadingPlayground" type="Node2D" parent="."]
 unique_name_in_owner = true
