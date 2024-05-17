@@ -45,6 +45,7 @@ script = ExtResource("2_ae8tp")
 offset_top = 174.0
 offset_right = 240.0
 offset_bottom = 334.0
+display_player_location = true
 area = Vector2i(7, 7)
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]

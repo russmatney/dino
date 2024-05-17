@@ -37,8 +37,10 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 		for coord in room_def.map_cells:
 			var cell = builder.create_cell(coord)
 			cell.color = room_def.get_bg_color()
+
+			# TODO use local cells/placed rooms to figure out borders?
+			# TODO set minimap theme more consciously
 			for i in 4:
-				# TODO i don't think we have doors yet
 				cell.borders[i] = 0
 				cell.border_colors[i] = room_def.get_border_color()
 

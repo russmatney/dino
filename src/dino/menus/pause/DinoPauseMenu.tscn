@@ -64,7 +64,8 @@ alignment = 1
 
 [node name="Minimap" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("8_5ctsr")]
 layout_mode = 2
-area = Vector2i(11, 11)
+display_player_location = true
+area = Vector2i(15, 15)
 
 [node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("3_gr3ki")]
 layout_mode = 2
