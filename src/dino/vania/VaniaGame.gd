@@ -20,6 +20,9 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 
 @onready var pcam: PhantomCamera2D = $PhantomCamera2D
 @onready var playground: Node2D = $%LoadingPlayground
+@onready var ready_overlay: Control = $%ReadyToPlay
+var ready_to_play: bool = false
+@onready var start_game_action_icon: ActionInputIcon = $%StartGameAction
 
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
@@ -79,7 +82,7 @@ func _ready():
 	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
 	# Dino.player_ready.connect(on_player_ready)
 
-	finished_initial_room_gen.connect(on_finished_initial_room_gen, CONNECT_ONE_SHOT)
+	finished_initial_room_gen.connect(show_ready_overlay, CONNECT_ONE_SHOT)
 
 	# spawn player in the load playground
 	setup_player()
@@ -87,9 +90,14 @@ func _ready():
 		Dino.notif({type="banner", text="Loading...."})
 		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
 
+	hide_ready_overlay()
+	start_game_action_icon.set_icon_for_action("ui_accept")
+
 	set_process(false)
 
 	thread_room_generation({map_def=map_def})
+
+## room loaded #######################################################
 
 func on_room_loaded():
 	if not is_room_visited():
@@ -117,24 +125,58 @@ func on_room_loaded():
 
 		, CONNECT_ONE_SHOT)
 
-func on_finished_initial_room_gen():
+## input #######################################################
+
+func _unhandled_input(event):
+	if ready_to_play and Trolls.is_accept(event):
+		start_vania_game()
+
+## transition #######################################################
+
+func show_ready_overlay():
+	# TODO tween/fade-in
+	ready_overlay.show()
+	# maybe wait a second before flipping this?
+	ready_to_play = true
+
+func hide_ready_overlay():
+	# TODO tween/fade-out
+	ready_overlay.hide()
+	ready_to_play = false
+
+func load_initial_room():
+	if room_defs.is_empty():
+		Log.warn("No room_defs returned, did the generator fail?")
+		return
+	else:
+		var rooms = room_defs.filter(func(rd): return rd.entities().any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
+		if rooms.is_empty():
+			Log.warn("No room with player spawn point! Isn't this 'guaranteed' elsewhere?")
+			rooms = room_defs
+		# prefer first room def, but consider opts/mode from mapDef
+		var rpath = rooms[0].room_path
+		_load_room(rpath, {setup=func(room):
+			room.set_room_def(get_room_def(rpath))})
+
+func clear_playground():
 	var p = Dino.current_player_node()
 	if p != null and is_instance_valid(p):
 		p.queue_free()
-		clear_playground()
-		await get_tree().create_timer(0.4).timeout
-		# TODO fun transition!
-		# new room/game banner/notif, camera transition, etc
-	(func():
-		# we don't care for this until we load the first proper level
-		get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
 
-		load_initial_room()
-		setup_player()
-		).call_deferred()
-
-func clear_playground():
 	playground.queue_free()
+
+# clears the playground, hides the ready-overlay, loads the initial room, and sets up the player
+# can be fired if ready_to_play is true
+func start_vania_game():
+	clear_playground()
+	await get_tree().create_timer(0.4).timeout
+
+	hide_ready_overlay()
+
+	get_tree().physics_frame.connect(_set_player_position, CONNECT_DEFERRED)
+
+	load_initial_room()
+	setup_player()
 
 ## process #######################################################
 
@@ -145,7 +187,7 @@ func _process(_delta: float) -> void:
 		generating.wait_to_finish()
 		generating = null
 		set_process(false)
-		Log.pr("thread finished")
+		Log.pr("thread finished and joined")
 
 		finished_initial_room_gen.emit()
 
@@ -276,19 +318,6 @@ func _load_room(path: String, opts={}):
 		MetSys.current_layer = 0
 
 	room_loaded.emit()
-
-func load_initial_room():
-	if room_defs.is_empty():
-		Log.warn("No room_defs returned, did the generator fail?")
-		return
-	else:
-		var rooms = room_defs.filter(func(rd): return rd.entities().any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
-		if rooms.is_empty():
-			Log.warn("No room with player spawn point! Picking random start room")
-			rooms = room_defs
-		var rpath = rooms.pick_random().room_path
-		_load_room(rpath, {setup=func(room):
-			room.set_room_def(get_room_def(rpath))})
 
 func reload_current_room():
 	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)

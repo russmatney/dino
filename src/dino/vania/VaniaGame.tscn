@@ -1,10 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="7_djxep"]
+[ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://src/dino/menus/controls/ActionInputIcon.tscn" id="8_g3klb"]
+[ext_resource type="Texture2D" uid="uid://db11pg0l5l562" path="res://assets/art/ui/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_x.png" id="10_8vghj"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_n8r60"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_d1x2y"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
@@ -14,10 +17,55 @@
 [ext_resource type="PackedScene" uid="uid://cvbbaml4gfs0v" path="res://src/dino/entities/bushes/Bush2.tscn" id="16_igr1p"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
 
+[sub_resource type="Resource" id="Resource_ip086"]
+script = ExtResource("2_352ld")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_5bdms"]
+script = ExtResource("2_352ld")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_uwljf"]
+script = ExtResource("2_352ld")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
 [sub_resource type="Resource" id="Resource_f6k3q"]
 script = ExtResource("7_djxep")
 name = "something"
-rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
+rooms = Array[ExtResource("2_352ld")]([SubResource("Resource_ip086"), SubResource("Resource_5bdms"), SubResource("Resource_uwljf")])
 sub_map_defs = Array[ExtResource("7_djxep")]([])
 
 [sub_resource type="Resource" id="Resource_fx1bk"]
@@ -46,11 +94,78 @@ offset_top = 174.0
 offset_right = 240.0
 offset_bottom = 334.0
 display_player_location = true
-area = Vector2i(7, 7)
+area = Vector2i(5, 5)
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
 script = ExtResource("11_n8r60")
 tween_resource = SubResource("Resource_fx1bk")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ReadyToPlay" type="Control" parent="CanvasLayer2"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/ReadyToPlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelNoBackground"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+bbcode_enabled = true
+text = "[center]Level Gen Complete![/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(180, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+bbcode_enabled = true
+text = "[center]Press[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="StartGameAction" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_g3klb")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_8vghj")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(240, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+bbcode_enabled = true
+text = "[center]to start![/center]"
+fit_content = true
+scroll_active = false
 
 [node name="LoadingPlayground" type="Node2D" parent="."]
 unique_name_in_owner = true

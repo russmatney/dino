@@ -1,10 +1,16 @@
 @tool
 extends TextureRect
+class_name ActionInputIcon
 
 @export var input_text = "" :
 	set(v):
 		input_text = v
 		render_icon()
+
+# @export var action_name_ = "" :
+# 	set(v):
+# 		action_name_ = v
+# 		set_icon_for_action(v)
 
 @export var joy_button = [] :
 	set(v):

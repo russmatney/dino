@@ -65,6 +65,9 @@ static func is_restart_released(event):
 static func is_undo(event):
 	return is_event(event, "undo")
 
+static func is_accept(event):
+	return is_event(event, "ui_accept")
+
 static func is_fire(event):
 	return is_event(event, "fire")
 
