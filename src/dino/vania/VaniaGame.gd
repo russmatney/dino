@@ -20,10 +20,15 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 
 @onready var pcam: PhantomCamera2D = $PhantomCamera2D
 @onready var playground: Node2D = $%LoadingPlayground
+
+@onready var screen_blur: Control = $%ScreenBlur
+
 @onready var ready_overlay: Control = $%ReadyToPlay
 var ready_to_play: bool = false
 @onready var start_game_action_icon: ActionInputIcon = $%StartGameAction
-@onready var screen_blur: Control = $%ScreenBlur
+
+@onready var level_start_overlay: Control = $%LevelStart
+
 
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
@@ -94,6 +99,8 @@ func _ready():
 	show_playground()
 	ready_overlay.modulate.a = 0.0
 
+	level_start_overlay.modulate.a = 0.0
+
 	start_game_action_icon.set_icon_for_action("ui_accept")
 
 	set_process(false)
@@ -146,7 +153,7 @@ func show_ready_overlay():
 	ready_to_play = true
 
 func hide_ready_overlay():
-	Anim.fade_out(ready_overlay, 1.0)
+	Anim.fade_out(ready_overlay, 0.7)
 	ready_to_play = false
 
 func load_initial_room():
@@ -162,9 +169,6 @@ func load_initial_room():
 	var rpath = rooms[0].room_path
 	_load_room(rpath, {setup=func(room):
 		room.set_room_def(get_room_def(rpath))})
-
-	screen_blur.anim_blur({duration=1.0, target=0.0})
-	screen_blur.anim_gray({duration=1.0, target=0.0})
 
 func show_playground():
 	var anim_nodes = []
@@ -212,6 +216,13 @@ func clear_playground():
 	# give the player time to free
 	await get_tree().create_timer(0.1).timeout
 
+func toggle_pause_game_nodes(should_pause=null):
+	var nodes = [map]
+	var p = Dino.current_player_node()
+	if p != null and is_instance_valid(p):
+		nodes.append(p)
+
+	U.toggle_pause_nodes(should_pause, nodes)
 
 # clears the playground, hides the ready-overlay, loads the initial room, and sets up the player
 # can be fired if ready_to_play is true
@@ -224,6 +235,22 @@ func start_vania_game():
 
 	load_initial_room()
 	setup_player()
+	toggle_pause_game_nodes(true)
+
+	var t1 = 0.7
+	screen_blur.anim_blur({duration=t1, target=1.0})
+	screen_blur.anim_gray({duration=t1, target=1.0})
+	Anim.fade_in(level_start_overlay, t1)
+	await get_tree().create_timer(2.0).timeout
+
+	var t2 = 0.7
+	screen_blur.anim_blur({duration=t2, target=0.0})
+	screen_blur.anim_gray({duration=t2, target=0.0})
+	Anim.fade_out(level_start_overlay, t2)
+	await get_tree().create_timer(t2).timeout
+
+	toggle_pause_game_nodes(false)
+
 
 ## process #######################################################
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=23 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="11_jq6qc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_n8r60"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_d1x2y"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="12_lin80"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
 [ext_resource type="PackedScene" uid="uid://cg0nqfx0pc4r6" path="res://src/dino/entities/bushes/Bush1.tscn" id="15_1p30g"]
@@ -157,6 +158,70 @@ bbcode_enabled = true
 text = "[center]to start![/center]"
 fit_content = true
 scroll_active = false
+
+[node name="LevelStart" type="Control" parent="CanvasLayer2"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/LevelStart"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelNoBackground"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/LevelStart/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelStartHeader" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Enemy Robot 1:1[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="LevelStartSubhead" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Watch out for those arrows![/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="LevelStartCountdown" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][jump]Ready...[/jump][/center]"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("12_lin80")]
 
 [node name="LoadingPlayground" type="Node2D" parent="."]
 unique_name_in_owner = true
