@@ -510,6 +510,28 @@ static func _config_warning(node, opts={}):
 	return warns
 
 #################################################################
+## process mode/pausing
+
+static func toggle_pause_nodes(should_pause=null, nodes=[]):
+	if nodes.is_empty():
+		return
+	var first_node = nodes[0]
+	var proc_mode = null
+	if should_pause == null:
+		if first_node.process_mode == Node.PROCESS_MODE_DISABLED:
+			proc_mode = Node.PROCESS_MODE_INHERIT
+		else:
+			proc_mode = Node.PROCESS_MODE_DISABLED
+	elif should_pause:
+		proc_mode = Node.PROCESS_MODE_DISABLED
+	else:
+		proc_mode = Node.PROCESS_MODE_INHERIT
+
+	for node in nodes:
+		if is_instance_valid(node):
+			node.set_process_mode(proc_mode)
+
+#################################################################
 ## func
 
 static func first(list):
