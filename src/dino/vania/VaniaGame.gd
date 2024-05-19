@@ -92,8 +92,8 @@ func _ready():
 		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
 
 	show_playground()
+	ready_overlay.modulate.a = 0.0
 
-	hide_ready_overlay()
 	start_game_action_icon.set_icon_for_action("ui_accept")
 
 	set_process(false)
@@ -137,8 +137,7 @@ func _unhandled_input(event):
 ## transition #######################################################
 
 func show_ready_overlay():
-	# TODO tween/fade-in
-	ready_overlay.show()
+	Anim.fade_in(ready_overlay, 1.0)
 
 	screen_blur.anim_blur({duration=1.0, target=0.6})
 	screen_blur.anim_gray({duration=1.0, target=1.0})
@@ -147,8 +146,7 @@ func show_ready_overlay():
 	ready_to_play = true
 
 func hide_ready_overlay():
-	# TODO tween/fade-out
-	ready_overlay.hide()
+	Anim.fade_out(ready_overlay, 1.0)
 	ready_to_play = false
 
 func load_initial_room():

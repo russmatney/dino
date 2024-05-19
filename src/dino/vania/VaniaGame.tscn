@@ -88,6 +88,9 @@ tween_resource = SubResource("Resource_fx1bk")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
+[node name="ScreenBlur" parent="CanvasLayer2" instance=ExtResource("11_jq6qc")]
+unique_name_in_owner = true
+
 [node name="ReadyToPlay" type="Control" parent="CanvasLayer2"]
 unique_name_in_owner = true
 layout_mode = 3
@@ -114,6 +117,7 @@ alignment = 1
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
 theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
 text = "[center]Level Gen Complete![/center]"
 fit_content = true
@@ -132,6 +136,7 @@ clip_contents = false
 custom_minimum_size = Vector2(180, 2.08165e-12)
 layout_mode = 2
 theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 0
 bbcode_enabled = true
 text = "[center]Press[/center]"
 fit_content = true
@@ -152,9 +157,6 @@ bbcode_enabled = true
 text = "[center]to start![/center]"
 fit_content = true
 scroll_active = false
-
-[node name="ScreenBlur" parent="CanvasLayer2" instance=ExtResource("11_jq6qc")]
-unique_name_in_owner = true
 
 [node name="LoadingPlayground" type="Node2D" parent="."]
 unique_name_in_owner = true

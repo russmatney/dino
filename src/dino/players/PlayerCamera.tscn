@@ -5,9 +5,9 @@
 
 [sub_resource type="Resource" id="Resource_fhpg4"]
 script = ExtResource("2_mn30v")
-duration = 1.0
-transition = 0
-ease = 2
+duration = 0.6
+transition = 4
+ease = 1
 
 [node name="PlayerCamera" type="Node2D"]
 script = ExtResource("1_n32v8")
