@@ -23,8 +23,8 @@ var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Module
 
 @onready var screen_blur: Control = $%ScreenBlur
 
-@onready var ready_overlay: Control = $%ReadyToPlay
 var ready_to_play: bool = false
+@onready var ready_overlay: Control = $%ReadyToPlay
 @onready var start_game_action_icon: ActionInputIcon = $%StartGameAction
 
 @onready var level_start_overlay: Control = $%LevelStart
@@ -32,6 +32,12 @@ var ready_to_play: bool = false
 @onready var level_start_subhead: RichTextLabel = $%LevelStartSubhead
 @onready var level_start_countdown: RichTextLabel = $%LevelStartCountdown
 
+var ready_for_next: bool = false
+@onready var level_complete_overlay: Control = $%LevelComplete
+@onready var level_complete_header: RichTextLabel = $%LevelCompleteHeader
+@onready var level_complete_subhead: RichTextLabel = $%LevelCompleteSubhead
+@onready var level_complete_action: Control = $%LevelCompleteAction
+@onready var level_complete_action_icon: ActionInputIcon = $%LevelCompleteActionIcon
 
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
@@ -112,11 +118,13 @@ func _ready():
 		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
 
 	show_playground()
-	ready_overlay.modulate.a = 0.0
 
+	ready_overlay.modulate.a = 0.0
 	level_start_overlay.modulate.a = 0.0
+	level_complete_overlay.modulate.a = 0.0
 
 	start_game_action_icon.set_icon_for_action("ui_accept")
+	level_complete_action_icon.set_icon_for_action("ui_accept")
 
 	set_process(false)
 
@@ -130,30 +138,41 @@ func on_room_loaded():
 	mark_room_visited()
 
 	var qm = map.quest_manager
+	qm.quest_complete.connect(on_room_quest_complete)
+	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
 
-	qm.quest_complete.connect(func(quest):
-		Log.pr("quest complete", quest))
+func on_room_quest_complete(quest):
+	Log.pr("quest complete", quest)
 
-	qm.all_quests_complete.connect(func():
-		mark_room_quests_complete()
+func on_room_quests_complete():
+	mark_room_quests_complete()
 
-		# TODO confetti particles?
-		# TODO update room on mini-map
-		# TODO door open/close logic
+	# TODO confetti particles?
+	# TODO update room on mini-map
+	# TODO door open/close logic
 
-		# all quests in all rooms complete?
-		if all_room_quests_complete():
-			level_complete.emit()
-
-		, CONNECT_ONE_SHOT)
+	if all_room_quests_complete():
+		vania_game_complete()
 
 ## input #######################################################
 
 func _unhandled_input(event):
 	if ready_to_play and Trolls.is_accept(event):
 		start_vania_game()
+	if ready_for_next and Trolls.is_accept(event):
+		level_complete.emit()
 
-## transition #######################################################
+## transitions #######################################################
+
+func toggle_pause_game_nodes(should_pause=null):
+	var nodes = [map]
+	var p = Dino.current_player_node()
+	if p != null and is_instance_valid(p):
+		nodes.append(p)
+
+	U.toggle_pause_nodes(should_pause, nodes)
+
+## ready overlay
 
 func show_ready_overlay():
 	Anim.fade_in(ready_overlay, 1.0)
@@ -168,19 +187,7 @@ func hide_ready_overlay():
 	Anim.fade_out(ready_overlay, 0.7)
 	ready_to_play = false
 
-func load_initial_room():
-	if room_defs.is_empty():
-		Log.warn("No room_defs returned, did the generator fail?")
-		return
-
-	var rooms = room_defs.filter(func(rd): return rd.entities().any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
-	if rooms.is_empty():
-		Log.warn("No room with player spawn point! Isn't this 'guaranteed' elsewhere?")
-		rooms = room_defs
-	# prefer first room def, but consider opts/mode from mapDef
-	var rpath = rooms[0].room_path
-	_load_room(rpath, {setup=func(room):
-		room.set_room_def(get_room_def(rpath))})
+## playground
 
 func show_playground():
 	var anim_nodes = []
@@ -228,13 +235,7 @@ func clear_playground():
 	# give the player time to free
 	await get_tree().create_timer(0.1).timeout
 
-func toggle_pause_game_nodes(should_pause=null):
-	var nodes = [map]
-	var p = Dino.current_player_node()
-	if p != null and is_instance_valid(p):
-		nodes.append(p)
-
-	U.toggle_pause_nodes(should_pause, nodes)
+## level_start overlay
 
 func setup_level_start_overlay():
 	if not map:
@@ -244,6 +245,35 @@ func setup_level_start_overlay():
 		n = map.name
 	level_start_header.text = "[center]%s[/center]" % n
 	level_start_subhead.text = "[center]%s[/center]" % ""
+
+## level_complete overlay
+
+func setup_level_complete_overlay():
+	if not map:
+		return
+	var n = map.room_def.map_def.name
+	if not n:
+		n = map.name
+	level_complete_header.text = "[center]%s[/center]" % n
+	level_complete_subhead.text = "[center]%s[/center]" % "COMPLETE!"
+
+## initial room
+
+func load_initial_room():
+	if room_defs.is_empty():
+		Log.warn("No room_defs returned, did the generator fail?")
+		return
+
+	var rooms = room_defs.filter(func(rd): return rd.entities().any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
+	if rooms.is_empty():
+		Log.warn("No room with player spawn point! Isn't this 'guaranteed' elsewhere?")
+		rooms = room_defs
+	# prefer first room def, but consider opts/mode from mapDef
+	var rpath = rooms[0].room_path
+	_load_room(rpath, {setup=func(room):
+		room.set_room_def(get_room_def(rpath))})
+
+## start_vania_game
 
 # clears the playground, hides the ready-overlay, loads the initial room, and sets up the player
 # can be fired if ready_to_play is true
@@ -274,6 +304,22 @@ func start_vania_game():
 
 	toggle_pause_game_nodes(false)
 
+## vania_game_complete
+
+func vania_game_complete():
+	setup_level_complete_overlay()
+	level_complete_action.modulate.a = 0.0
+
+	var t = 2.3
+	Anim.fade_in(level_complete_overlay, t/2.0)
+	screen_blur.anim_blur({duration=t, target=1.0})
+	screen_blur.anim_gray({duration=t, target=1.0})
+	await get_tree().create_timer(t).timeout
+
+	Anim.fade_in(level_complete_action, 0.4)
+
+	# allow input to move to next
+	ready_for_next = true
 
 ## process #######################################################
 

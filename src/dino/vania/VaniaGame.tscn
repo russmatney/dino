@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=24 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_b4kss"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="7_djxep"]
@@ -19,26 +20,15 @@
 [ext_resource type="PackedScene" uid="uid://cvbbaml4gfs0v" path="res://src/dino/entities/bushes/Bush2.tscn" id="16_igr1p"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
 
+[sub_resource type="Resource" id="Resource_jbopx"]
+script = ExtResource("2_b4kss")
+_id = "121"
+
 [sub_resource type="Resource" id="Resource_ip086"]
 script = ExtResource("2_352ld")
 genre_type = 0
 entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_5bdms"]
-script = ExtResource("2_352ld")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+enemies = Array[ExtResource("2_b4kss")]([SubResource("Resource_jbopx")])
 room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
@@ -52,7 +42,7 @@ grids_path = ""
 [sub_resource type="Resource" id="Resource_f6k3q"]
 script = ExtResource("7_djxep")
 name = "something"
-rooms = Array[ExtResource("2_352ld")]([SubResource("Resource_ip086"), SubResource("Resource_5bdms")])
+rooms = Array[ExtResource("2_352ld")]([SubResource("Resource_ip086")])
 sub_map_defs = Array[ExtResource("7_djxep")]([])
 
 [sub_resource type="Resource" id="Resource_fx1bk"]
@@ -222,6 +212,90 @@ text = "[center][jump]Ready...[/jump][/center]"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("12_lin80")]
+
+[node name="LevelComplete" type="Control" parent="CanvasLayer2"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/LevelComplete"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PanelNoBackground"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LevelCompleteHeader" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Enemy Robot 1:1[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="LevelCompleteSubhead" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Watch out for those arrows![/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="LevelCompleteAction" type="HBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction"]
+clip_contents = false
+custom_minimum_size = Vector2(180, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 0
+bbcode_enabled = true
+text = "[center]Press[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="LevelCompleteActionIcon" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction" instance=ExtResource("8_g3klb")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_8vghj")
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+bbcode_enabled = true
+text = "[center]to continue![/center]"
+fit_content = true
+scroll_active = false
 
 [node name="LoadingPlayground" type="Node2D" parent="."]
 unique_name_in_owner = true
