@@ -1,6 +1,7 @@
 extends ColorRect
 
-var tween
+var blur_tween
+var gray_tween
 var lod_min = 0.6
 var lod_max = 2.6
 var default_duration = 0.6
@@ -14,18 +15,32 @@ func set_min(lmin):
 func anim_blur(opts={}):
 	if not is_node_ready():
 		return
-	if tween:
-		tween.kill()
+	if blur_tween:
+		blur_tween.kill()
 
 	var duration = opts.get("duration", default_duration)
 	var target = opts.get("target")
 	if target == null:
-		Log.warn("No target blur passed to screen blur animation")
+		Log.warn("No target blur passed to screen animation")
 		return
 
-	tween = create_tween()
-	tween.tween_property(material, "shader_parameter/lod", target, duration)
-	tween.tween_property(material, "shader_parameter/grayscale", target, duration)
+	blur_tween = create_tween()
+	blur_tween.tween_property(material, "shader_parameter/lod", target, duration)
+
+func anim_gray(opts={}):
+	if not is_node_ready():
+		return
+	if gray_tween:
+		gray_tween.kill()
+
+	var duration = opts.get("duration", default_duration)
+	var target = opts.get("target")
+	if target == null:
+		Log.warn("No target grayscale passed to screen animation")
+		return
+
+	gray_tween = create_tween()
+	gray_tween.tween_property(material, "shader_parameter/grayscale", target, duration)
 
 # TODO 'fade' is not the right word
 func fade_in(opts={}):

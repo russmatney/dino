@@ -5,8 +5,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fha0o"]
 shader = ExtResource("1_gxevl")
-shader_parameter/lod = 2.663
-shader_parameter/grayscale = 1.0
+shader_parameter/lod = 2.6
+shader_parameter/grayscale = 0.0
 
 [node name="ScreenBlur" type="ColorRect"]
 material = SubResource("ShaderMaterial_fha0o")
