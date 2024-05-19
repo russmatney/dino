@@ -22,7 +22,7 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		Music.resume_menu_song()
-		set_focus()
+		set_focus.call_deferred()
 
 		quit_button.pressed.connect(get_tree().quit)
 		credits_button.pressed.connect(func(): Navi.nav_to(credits_scene))
