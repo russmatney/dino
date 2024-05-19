@@ -28,6 +28,9 @@ var ready_to_play: bool = false
 @onready var start_game_action_icon: ActionInputIcon = $%StartGameAction
 
 @onready var level_start_overlay: Control = $%LevelStart
+@onready var level_start_header: RichTextLabel = $%LevelStartHeader
+@onready var level_start_subhead: RichTextLabel = $%LevelStartSubhead
+@onready var level_start_countdown: RichTextLabel = $%LevelStartCountdown
 
 
 var room_defs: Array[VaniaRoomDef] = []
@@ -58,16 +61,25 @@ func existing_room_state(room_path):
 func is_room_visited(room_path=null):
 	if room_path == null:
 		room_path = MetSys.get_current_room_name()
+	if room_path not in room_states:
+		Log.warn("Current room_path not in room_states?!?")
+		return
 	return room_states[room_path].visited
 
 func mark_room_visited(room_path=null):
 	if room_path == null:
 		room_path = MetSys.get_current_room_name()
+	if room_path not in room_states:
+		Log.warn("Current room_path not in room_states?!?")
+		return
 	room_states[room_path].visited = true
 
 func are_room_quests_complete(room_path=null):
 	if room_path == null:
 		room_path = MetSys.get_current_room_name()
+	if room_path not in room_states:
+		Log.warn("Current room_path not in room_states?!?")
+		return
 	return room_states[room_path].quests_complete
 
 func all_room_quests_complete():
@@ -76,6 +88,9 @@ func all_room_quests_complete():
 func mark_room_quests_complete(room_path=null):
 	if room_path == null:
 		room_path = MetSys.get_current_room_name()
+	if room_path not in room_states:
+		Log.warn("Current room_path not in room_states?!?")
+		return
 	room_states[room_path].quests_complete = true
 
 ## ready #######################################################
@@ -110,11 +125,8 @@ func _ready():
 ## room loaded #######################################################
 
 func on_room_loaded():
-	if not is_room_visited():
-		Dino.notif({type="banner",
-			text="%s" % map.name,
-			id="room-name"
-			})
+	# if not is_room_visited():
+	# 	Dino.notif({type="banner", text="%s" % map.name, id="room-name"})
 	mark_room_visited()
 
 	var qm = map.quest_manager
@@ -224,6 +236,15 @@ func toggle_pause_game_nodes(should_pause=null):
 
 	U.toggle_pause_nodes(should_pause, nodes)
 
+func setup_level_start_overlay():
+	if not map:
+		return
+	var n = map.room_def.map_def.name
+	if not n:
+		n = map.name
+	level_start_header.text = "[center]%s[/center]" % n
+	level_start_subhead.text = "[center]%s[/center]" % ""
+
 # clears the playground, hides the ready-overlay, loads the initial room, and sets up the player
 # can be fired if ready_to_play is true
 func start_vania_game():
@@ -236,6 +257,8 @@ func start_vania_game():
 	load_initial_room()
 	setup_player()
 	toggle_pause_game_nodes(true)
+
+	setup_level_start_overlay()
 
 	var t1 = 0.7
 	screen_blur.anim_blur({duration=t1, target=1.0})
