@@ -6,11 +6,9 @@ var lod_min = 0.6
 var lod_max = 2.6
 var default_duration = 0.6
 
-func set_max(lmax):
-	material.set_shader_parameter("lod", lmax)
-
-func set_min(lmin):
-	material.set_shader_parameter("lod", lmin)
+func reset():
+	material.set_shader_parameter("lod", 0.0)
+	material.set_shader_parameter("grayscale", 0.0)
 
 func anim_blur(opts={}):
 	if not is_node_ready():

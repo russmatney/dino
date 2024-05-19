@@ -18,6 +18,8 @@ signal game_complete
 
 @export var map_def: MapDef
 
+@onready var game_complete_scene = preload("res://src/dino/menus/GameModeCompleteOverlay.tscn")
+
 ## to_pretty #################################################
 
 func to_pretty():
@@ -95,7 +97,8 @@ func launch_level(def):
 func _on_level_complete():
 	Dino.notif({type="banner", text="Level Complete",})
 
-	# TODO slow-mo, zoom in on player
+	# Should the vania level complete transitions live here? (instead of in vaniaGame.gd)
+	# slow-mo, zoom in on player
 	# popup score screen with awards/progress/stats
 	# (quest data, misc fun ideas ('fighter stance': 500 pts))
 
@@ -105,15 +108,29 @@ func _on_level_complete():
 	else:
 		game_complete.emit()
 
+var complete_overlay
+
+func toggle_pause_game_nodes(should_pause=null):
+	var nodes = []
+	var p = Dino.current_player_node()
+	if p != null and is_instance_valid(p):
+		nodes.append(p)
+
+	U.toggle_pause_nodes(should_pause, nodes)
+
 func _on_game_complete():
-	Dino.notif({type="banner", text="Game Complete",})
+	# Dino.notif({type="banner", text="Game Complete",})
+	toggle_pause_game_nodes(true)
 
-	# toss the game node!
-	# TODO clear metsys maps?
-	if game_node:
-		remove_child.call_deferred(game_node)
-		game_node.queue_free()
+	game_node.hide_overlays()
 
-	# TODO win menu instead of forced nav
-	# show high scores, stats, button for credits, main-menu, replay new seed
-	Navi.nav_to_main_menu()
+	# show score/high scores, stats, button for credits, main-menu, replay new seed
+	if complete_overlay == null:
+		complete_overlay = game_complete_scene.instantiate()
+
+		complete_overlay.ready.connect(func():
+			complete_overlay.anim_show({
+				header="Classic game complete!!",
+				subhead="Way to go!",
+				}))
+		add_child(complete_overlay)

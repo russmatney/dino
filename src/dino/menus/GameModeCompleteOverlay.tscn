@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjovc1c7sotsw"]
+
+[ext_resource type="Script" path="res://src/dino/modes/classic/GameModeCompleteOverlay.gd" id="1_bn4gw"]
+[ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="2_86850"]
+[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="3_5o0dh"]
+[ext_resource type="Script" path="res://src/components/AnimatedVBoxContainer.gd" id="3_pjur5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5y2xm"]
+resource_local_to_scene = true
+shader = ExtResource("3_5o0dh")
+shader_parameter/lod = 2.6
+shader_parameter/grayscale = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv7pc"]
+bg_color = Color(0.0823529, 0.0823529, 0.0823529, 0.2)
+
+[node name="GameModeCompleteOverlay" type="CanvasLayer"]
+script = ExtResource("1_bn4gw")
+
+[node name="ScreenBlur" parent="." instance=ExtResource("2_86850")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_5y2xm")
+
+[node name="GameComplete" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="GameComplete"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qv7pc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameComplete/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameCompleteHeader" type="RichTextLabel" parent="GameComplete/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Classic Mode Complete[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="GameComplete/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="GameCompleteSubhead" type="RichTextLabel" parent="GameComplete/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]Way to go![/center]"
+fit_content = true
+scroll_active = false
+
+[node name="MarginContainer2" type="MarginContainer" parent="GameComplete/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameComplete/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="GameComplete/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"ButtonListPanel"
+
+[node name="AnimatedVBoxContainer" type="VBoxContainer" parent="GameComplete/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+script = ExtResource("3_pjur5")
+
+[node name="MainMenu" type="Button" parent="GameComplete/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/AnimatedVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+text = "Main Menu"
+
+[node name="Credits" type="Button" parent="GameComplete/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/AnimatedVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueButton"
+text = "Credits"

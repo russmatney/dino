@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://clsqvnr0sebqn"]
+[gd_scene load_steps=12 format=3 uid="uid://clsqvnr0sebqn"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_4v6tl"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_7ep44"]
@@ -43,18 +43,11 @@ input = SubResource("Resource_k6xa1")
 rooms = Array[ExtResource("5_sgu0e")]([])
 sub_map_defs = Array[ExtResource("3_anqjk")]([])
 
-[sub_resource type="Resource" id="Resource_bnwwn"]
-script = ExtResource("3_anqjk")
-name = ""
-input = SubResource("Resource_k6xa1")
-rooms = Array[ExtResource("5_sgu0e")]([])
-sub_map_defs = Array[ExtResource("3_anqjk")]([])
-
 [sub_resource type="Resource" id="Resource_iugi6"]
 script = ExtResource("3_anqjk")
 name = ""
 rooms = Array[ExtResource("5_sgu0e")]([])
-sub_map_defs = Array[ExtResource("3_anqjk")]([SubResource("Resource_y88tt"), SubResource("Resource_bacns"), SubResource("Resource_bnwwn")])
+sub_map_defs = Array[ExtResource("3_anqjk")]([SubResource("Resource_y88tt"), SubResource("Resource_bacns")])
 
 [node name="Classic" type="Node2D"]
 script = ExtResource("1_4v6tl")

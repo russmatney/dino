@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=48 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
 [ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="2_r6yek"]
@@ -253,37 +253,6 @@ input = SubResource("Resource_ys5sm")
 rooms = Array[ExtResource("4_m4x81")]([])
 sub_map_defs = Array[ExtResource("4_m2oft")]([])
 
-[sub_resource type="Resource" id="Resource_pdbla"]
-script = ExtResource("3_lr33u")
-_id = "122"
-
-[sub_resource type="Resource" id="Resource_l4jh0"]
-script = ExtResource("5_urg5i")
-_id = "194"
-
-[sub_resource type="Resource" id="Resource_2668u"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_l4jh0"), SubResource("Resource_l4jh0"), SubResource("Resource_l4jh0")])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_pdbla")])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_645dy"]
-resource_name = "Villager Defender"
-script = ExtResource("4_m2oft")
-name = "Villager Defender"
-input = SubResource("Resource_2668u")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
 [sub_resource type="Resource" id="Resource_egvpy"]
 script = ExtResource("5_urg5i")
 _id = "136"
@@ -343,7 +312,7 @@ script = ExtResource("4_m2oft")
 name = "Classic Mode!"
 input = SubResource("Resource_yuw5o")
 rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_02d4e"), SubResource("Resource_evsm0"), SubResource("Resource_xauy6"), SubResource("Resource_h0sn2"), SubResource("Resource_0w1s1"), SubResource("Resource_gyjvd"), SubResource("Resource_645dy"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
+sub_map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_02d4e"), SubResource("Resource_evsm0"), SubResource("Resource_xauy6"), SubResource("Resource_h0sn2"), SubResource("Resource_0w1s1"), SubResource("Resource_gyjvd"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
 
 [node name="ClassicSideScroller" type="Node2D"]
 script = ExtResource("1_5gcr3")

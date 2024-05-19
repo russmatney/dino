@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=26 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="7_djxep"]
 [ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://src/dino/menus/controls/ActionInputIcon.tscn" id="8_g3klb"]
 [ext_resource type="Texture2D" uid="uid://db11pg0l5l562" path="res://assets/art/ui/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_x.png" id="10_8vghj"]
+[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="11_1hsjh"]
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="11_jq6qc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_n8r60"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_d1x2y"]
@@ -51,6 +52,12 @@ duration = 1.0
 transition = 0
 ease = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7p884"]
+resource_local_to_scene = true
+shader = ExtResource("11_1hsjh")
+shader_parameter/lod = 2.6
+shader_parameter/grayscale = 0.0
+
 [node name="VaniaGame" type="Node2D" groups=["vania_game"]]
 script = ExtResource("1_rrc8s")
 map_def = SubResource("Resource_f6k3q")
@@ -81,6 +88,7 @@ tween_resource = SubResource("Resource_fx1bk")
 
 [node name="ScreenBlur" parent="CanvasLayer2" instance=ExtResource("11_jq6qc")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_7p884")
 
 [node name="ReadyToPlay" type="Control" parent="CanvasLayer2"]
 unique_name_in_owner = true

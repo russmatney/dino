@@ -119,9 +119,7 @@ func _ready():
 
 	show_playground()
 
-	ready_overlay.modulate.a = 0.0
-	level_start_overlay.modulate.a = 0.0
-	level_complete_overlay.modulate.a = 0.0
+	hide_overlays()
 
 	start_game_action_icon.set_icon_for_action("ui_accept")
 	level_complete_action_icon.set_icon_for_action("ui_accept")
@@ -164,6 +162,12 @@ func _unhandled_input(event):
 
 ## transitions #######################################################
 
+func hide_overlays():
+	ready_overlay.modulate.a = 0.0
+	level_start_overlay.modulate.a = 0.0
+	level_complete_overlay.modulate.a = 0.0
+	screen_blur.reset()
+
 func toggle_pause_game_nodes(should_pause=null):
 	var nodes = [map]
 	var p = Dino.current_player_node()
@@ -178,7 +182,7 @@ func show_ready_overlay():
 	Anim.fade_in(ready_overlay, 1.0)
 
 	screen_blur.anim_blur({duration=1.0, target=0.6})
-	screen_blur.anim_gray({duration=1.0, target=1.0})
+	screen_blur.anim_gray({duration=1.0, target=0.8})
 
 	# maybe wait a second before flipping this?
 	ready_to_play = true
@@ -221,7 +225,7 @@ func clear_playground():
 	var time = 0.6
 
 	screen_blur.fade_in({duration=time})
-	screen_blur.anim_gray({duration=time, target=1.0})
+	screen_blur.anim_gray({duration=time, target=0.8})
 
 	await Anim.animate_outro_to_point({
 		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
@@ -292,7 +296,7 @@ func start_vania_game():
 
 	var t1 = 0.7
 	screen_blur.anim_blur({duration=t1, target=1.0})
-	screen_blur.anim_gray({duration=t1, target=1.0})
+	screen_blur.anim_gray({duration=t1, target=0.8})
 	Anim.fade_in(level_start_overlay, t1)
 	await get_tree().create_timer(2.0).timeout
 
@@ -313,7 +317,7 @@ func vania_game_complete():
 	var t = 2.3
 	Anim.fade_in(level_complete_overlay, t/2.0)
 	screen_blur.anim_blur({duration=t, target=1.0})
-	screen_blur.anim_gray({duration=t, target=1.0})
+	screen_blur.anim_gray({duration=t, target=0.8})
 	await get_tree().create_timer(t).timeout
 
 	Anim.fade_in(level_complete_action, 0.4)

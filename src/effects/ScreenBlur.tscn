@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://src/effects/ScreenBlur.gd" id="2_66sw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fha0o"]
+resource_local_to_scene = true
 shader = ExtResource("1_gxevl")
 shader_parameter/lod = 2.6
 shader_parameter/grayscale = 0.0
