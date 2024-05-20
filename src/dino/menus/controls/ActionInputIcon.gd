@@ -63,8 +63,12 @@ func axis_to_input_text(axis):
 				txt = "Joystick down"
 			else:
 				txt = "Joystick up"
-		[JOY_AXIS_INVALID, JOY_AXIS_TRIGGER_LEFT, JOY_AXIS_TRIGGER_RIGHT, JOY_AXIS_SDL_MAX, JOY_AXIS_MAX]:
-			Log.pr("Unsupported joystick axis")
+		JOY_AXIS_TRIGGER_LEFT:
+			txt = "Left Trigger"
+		JOY_AXIS_TRIGGER_RIGHT:
+			txt = "Right Trigger"
+		JOY_AXIS_INVALID, JOY_AXIS_SDL_MAX, JOY_AXIS_MAX:
+			Log.warn("Unsupported joystick axis", axis)
 			return
 	return txt
 
@@ -79,9 +83,13 @@ func set_icon_for_action(action_name, device=null):
 	var input = InputHelper.get_keyboard_or_joypad_input_for_action(action_name)
 	if device == InputHelper.DEVICE_KEYBOARD:
 		input_text = OS.get_keycode_string(input.get_keycode_with_modifiers())
-	else:
+	elif "button_index" in input:
 		# TODO support axes as well
 		joy_button = [device, input.button_index]
+	elif "axis" in input:
+		joy_axis = [input.axis, input.axis_value]
+	else:
+		Log.warn("Unexpected input:", action_name, input)
 
 ## ready
 

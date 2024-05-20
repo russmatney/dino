@@ -78,7 +78,7 @@ func clear_editing_unless(source_button):
 
 ## listening for new key ###############################################3
 
-# NOTE not 'unhandled' here, we need to grab everything
+# NOTE not using '_unhandled_input' here b/c we need to grab everything
 func _input(event) -> void:
 	if not waiting_for_new_input: return
 
@@ -89,6 +89,13 @@ func _input(event) -> void:
 		accepted = true
 
 	if event is InputEventJoypadButton and event.is_pressed():
+		accept_event()
+		InputHelper.replace_joypad_input_for_action(action_name, current_joy_input, event, true)
+		accepted = true
+
+	if event is InputEventJoypadMotion and event.axis_value > 0.99:
+		if not event.axis in [JOY_AXIS_TRIGGER_LEFT, JOY_AXIS_TRIGGER_RIGHT]:
+			return
 		accept_event()
 		InputHelper.replace_joypad_input_for_action(action_name, current_joy_input, event, true)
 		accepted = true

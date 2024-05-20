@@ -16,9 +16,9 @@ func _unhandled_input(event):
 	if not Engine.is_editor_hint():
 		if Trolls.is_debug_toggle(event):
 			Debug.toggle_debug()
-		elif Trolls.is_event(event, "slowmo"):
+		elif Trolls.is_slowmo(event):
 			Juice.slowmo_start()
-		elif Trolls.is_released(event, "slowmo"):
+		elif Trolls.is_slowmo_released(event):
 			Juice.slowmo_stop()
 
 # toggle debug ################################################

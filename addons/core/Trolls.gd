@@ -68,12 +68,6 @@ static func is_undo(event):
 static func is_accept(event):
 	return is_event(event, "ui_accept")
 
-static func is_fire(event):
-	return is_event(event, "fire")
-
-static func is_fire_released(event):
-	return is_released(event, "fire")
-
 static func is_jump(event):
 	return is_event(event, "jump")
 
@@ -106,6 +100,12 @@ static func is_close(event):
 
 static func is_debug_toggle(event):
 	return is_event(event, "debug_toggle")
+
+static func is_slowmo(event):
+	return is_event(event, "slowmo")
+
+static func is_slowmo_released(event):
+	return is_released(event, "slowmo")
 
 ## input/keys helpers ################################################################3
 

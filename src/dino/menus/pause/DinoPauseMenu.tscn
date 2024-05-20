@@ -47,10 +47,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 tab_alignment = 1
-current_tab = 4
 
 [node name="Player" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="Player" parent="PanelContainer/VBoxContainer/TabContainer/Player" instance=ExtResource("7_ipd6p")]
@@ -87,6 +85,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Options" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 alignment = 1
 

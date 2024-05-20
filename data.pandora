@@ -1914,7 +1914,7 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Classic Mode (SideScroller)"
+						"value": "Classic"
 					},
 					"root_scene": {
 						"type": "resource",
@@ -2046,6 +2046,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Boss Rush"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
 					},
 					"root_scene": {
 						"type": "resource",
