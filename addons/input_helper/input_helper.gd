@@ -329,7 +329,7 @@ func set_joypad_input_for_action(action: String, input: InputEvent, swap_if_take
 
 
 ## Replace a specific button for an action
-func replace_joypad_input_for_action(action: String, current_input: InputEvent, input: InputEventJoypadButton, swap_if_taken: bool = true) -> Error:
+func replace_joypad_input_for_action(action: String, current_input: InputEvent, input: Variant, swap_if_taken: bool = true) -> Error:
 	return _update_joypad_input_for_action(action, input, swap_if_taken, current_input)
 
 
