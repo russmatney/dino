@@ -60,16 +60,16 @@ jobs:
           ls -alh dist/dino-windows
           stat dist/dino-windows/dino.exe
 
-      - name: MacOS Build
-        run: |
-          mkdir -v -p dist/dino-macos
-          godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg
+      # - name: MacOS Build
+      #   run: |
+      #     mkdir -v -p dist/dino-macos
+      #     godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg
 
-      - name: Sanity check
-        run: |
-          ls -alh dist/
-          ls -alh dist/dino-macos
-          stat dist/dino-macos/dino.dmg
+      # - name: Sanity check
+      #   run: |
+      #     ls -alh dist/
+      #     ls -alh dist/dino-macos
+      #     stat dist/dino-macos/dino.dmg
 
       - uses: CyberAndrii/steam-totp@v1
         name: Generate TOTP
@@ -94,10 +94,10 @@ jobs:
           steam_totp: ${{ steps.steam-totp.outputs.code }}
           build: "windows"
 
-      - name: Deploy MacOS Build to Steam
-        uses: ./.github/actions/steam_deploy
-        env:
-          steam_username: ${{ secrets.STEAM_USERNAME }}
-          steam_password: ${{ secrets.STEAM_PASSWORD }}
-          steam_totp: ${{ steps.steam-totp.outputs.code }}
-          build: "macos"
+      # - name: Deploy MacOS Build to Steam
+      #   uses: ./.github/actions/steam_deploy
+      #   env:
+      #     steam_username: ${{ secrets.STEAM_USERNAME }}
+      #     steam_password: ${{ secrets.STEAM_PASSWORD }}
+      #     steam_totp: ${{ steps.steam-totp.outputs.code }}
+      #     build: "macos"

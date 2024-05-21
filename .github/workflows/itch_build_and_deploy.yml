@@ -24,9 +24,7 @@ jobs:
           mkdir -p /github/home/.config/godot
           cp /root/.config/godot/editor_settings-4.tres /github/home/.config/godot/
       - name: Sanity check
-        run: |
-          ls /root/.local/share/godot/export_templates
-          ls /root/.local/share/godot/templates
+        run: ls /root/.local/share/godot/export_templates
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
@@ -129,41 +127,41 @@ jobs:
       - name: Deploy web build to itch.io (dino-web)
         run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-web russmatney/dino-web:html5
 
-  export-mac:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    name: Mac Export
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.2.2
-    environment: Godot Dev Env
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Issue 120
-        run: |
-          mkdir -p /github/home/.config/godot
-          cp /root/.config/godot/editor_settings-4.tres /github/home/.config/godot/
-      - name: Sanity check
-        run: ls /root/.local/share/godot/export_templates
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable ~/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable
-      - name: Initial Godot import
-        shell: bash
-        run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
-          godot --editor --headless --quit || exit 0
-      - name: Mac Build
-        run: |
-          mkdir -v -p dist/dino-macos
-          godot --headless -v --export-debug dino-macos dist/dino-macos/dino.dmg || exit 0
-      - name: Sanity check
-        run: |
-          ls -alh dist/
-          ls -alh dist/dino-macos
-          stat dist/dino-macos/dino.dmg
-      - name: Deploy mac build to itch.io
-        run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-macos russmatney/dino:macos
+  # export-mac:
+  #   if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  #   name: Mac Export
+  #   runs-on: ubuntu-20.04
+  #   container:
+  #     image: barichello/godot-ci:4.2.2
+  #   environment: Godot Dev Env
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         lfs: true
+  #     - name: Issue 120
+  #       run: |
+  #         mkdir -p /github/home/.config/godot
+  #         cp /root/.config/godot/editor_settings-4.tres /github/home/.config/godot/
+  #     - name: Sanity check
+  #       run: ls /root/.local/share/godot/export_templates
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/export_templates
+  #         mv /root/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable ~/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable
+  #     - name: Initial Godot import
+  #       shell: bash
+  #       run: |
+  #         godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
+  #         godot --editor --headless --quit || exit 0
+  #     - name: Mac Build
+  #       run: |
+  #         mkdir -v -p dist/dino-macos
+  #         godot --headless -v --export-debug dino-macos dist/dino-macos/dino.dmg || exit 0
+  #     - name: Sanity check
+  #       run: |
+  #         ls -alh dist/
+  #         ls -alh dist/dino-macos
+  #         stat dist/dino-macos/dino.dmg
+  #     - name: Deploy mac build to itch.io
+  #       run: BUTLER_API_KEY=${{secrets.BUTLER_API_KEY}} butler push dist/dino-macos russmatney/dino:macos
