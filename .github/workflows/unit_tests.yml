@@ -25,11 +25,8 @@ jobs:
       fail-fast: false
       max-parallel: 10
       matrix:
-        godot-version: ['4.2.1']
+        godot-version: ['4.2.2']
         godot-status: ['stable']
-        include:
-          - godot-version: '4.2.2'
-            godot-status: 'rc3'
 
     steps:
       # checkout your repository
