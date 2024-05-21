@@ -41,7 +41,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p dist/dino-linux
-          godot --headless -v --export dino-linux dist/dino-linux/dino.x86_64
+          godot --headless -v --export-release dino-linux dist/dino-linux/dino.x86_64
 
       - name: Sanity check
         run: |
@@ -52,7 +52,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p dist/dino-windows
-          godot --headless -v --export dino-windows dist/dino-windows/dino.exe
+          godot --headless -v --export-release dino-windows dist/dino-windows/dino.exe
 
       - name: Sanity check
         run: |
@@ -63,7 +63,7 @@ jobs:
       - name: MacOS Build
         run: |
           mkdir -v -p dist/dino-macos
-          godot --headless -v --export dino-macos dist/dino-macos/dino.dmg
+          godot --headless -v --export-release dino-macos dist/dino-macos/dino.dmg
 
       - name: Sanity check
         run: |
