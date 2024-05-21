@@ -4,10 +4,12 @@ set -euo pipefail
 # based on https://raw.githubusercontent.com/game-ci/steam-deploy/main/steam_deploy.sh
 
 steamdir=${STEAM_HOME:-$HOME/Steam}
-manifest_path=$(pwd)/build/steam_dino_${build}_build.vdf
+linux_manifest_path=$(pwd)/build/steam_dino_linux_build.vdf
+windows_manifest_path=$(pwd)/build/steam_dino_windows_build.vdf
 
 echo "steamdir: $steamdir"
-echo "manifest_path: $manifest_path"
+echo "linux_manifest_path: $linux_manifest_path"
+echo "windows_manifest_path: $windows_manifest_path"
 
 if [ -n "$steam_totp" ]; then
   echo ""
@@ -39,7 +41,7 @@ echo ""
 echo "######## Uploading build ########"
 echo ""
 
-steamcmd +login "$steam_username" +run_app_build "$manifest_path" +quit || (
+steamcmd +login "$steam_username" +run_app_build "$linux_manifest_path" +quit || (
     echo ""
     echo "#################################"
     echo "#             Errors            #"
@@ -84,4 +86,52 @@ steamcmd +login "$steam_username" +run_app_build "$manifest_path" +quit || (
     exit 1
   )
 
-echo "manifest=${manifest_path}" >> $GITHUB_OUTPUT
+echo "linux_manifest=${linux_manifest_path}" >> $GITHUB_OUTPUT
+
+
+steamcmd +login "$steam_username" +run_app_build "$windows_manifest_path" +quit || (
+    echo ""
+    echo "#################################"
+    echo "#             Errors            #"
+    # echo "#################################"
+    # echo ""
+    # echo "Listing current folder"
+    # echo ""
+    # ls -alh
+    # echo ""
+    # echo "Listing logs folder:"
+    # echo ""
+    # ls -Ralph "$steamdir/logs/"
+
+    # for f in "$steamdir"/logs/*; do
+    #   if [ -e "$f" ]; then
+    #     echo "######## $f"
+    #     cat "$f"
+    #     echo
+    #   fi
+    # done
+
+    # echo ""
+    # echo "Displaying error log"
+    # echo ""
+    # cat "$steamdir/logs/stderr.txt"
+    # echo ""
+    # echo "Displaying bootstrapper log"
+    # echo ""
+    # cat "$steamdir/logs/bootstrap_log.txt"
+    # echo ""
+    # echo "#################################"
+    # echo "#             Output            #"
+    # echo ""
+    # ls -Ralph BuildOutput
+
+    # for f in BuildOutput/*.log; do
+    #   echo "######## $f"
+    #   cat "$f"
+    #   echo
+    # done
+
+    exit 1
+  )
+
+echo "windows_manifest=${windows_manifest_path}" >> $GITHUB_OUTPUT

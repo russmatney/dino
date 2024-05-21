@@ -7,9 +7,9 @@ on:
     branches: [edge, prod]
 
 jobs:
-  export-and-deploy-linux:
+  export-and-deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    name: Linux Build and Deploy
+    name: Linux/Windows Build and Deploy
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.2.2
@@ -78,26 +78,9 @@ jobs:
           shared_secret: ${{ secrets.STEAM_SHARED_SECRET }}
           time_offset: 20
 
-      - name: Deploy Linux Build to Steam
+      - name: Deploy linux and windows Build to Steam
         uses: ./.github/actions/steam_deploy
         env:
           steam_username: ${{ secrets.STEAM_USERNAME }}
           steam_password: ${{ secrets.STEAM_PASSWORD }}
           steam_totp: ${{ steps.steam-totp.outputs.code }}
-          build: "linux"
-
-      - name: Deploy Windows Build to Steam
-        uses: ./.github/actions/steam_deploy
-        env:
-          steam_username: ${{ secrets.STEAM_USERNAME }}
-          steam_password: ${{ secrets.STEAM_PASSWORD }}
-          steam_totp: ${{ steps.steam-totp.outputs.code }}
-          build: "windows"
-
-      # - name: Deploy MacOS Build to Steam
-      #   uses: ./.github/actions/steam_deploy
-      #   env:
-      #     steam_username: ${{ secrets.STEAM_USERNAME }}
-      #     steam_password: ${{ secrets.STEAM_PASSWORD }}
-      #     steam_totp: ${{ steps.steam-totp.outputs.code }}
-      #     build: "macos"
