@@ -1,7 +1,7 @@
 Credits
 =======
 
-Hopefully this stays more or less up to date, and in sync with `src/dino/DinoCredits.gd`.
+Hopefully this stays more or less up to date, and in sync with `src/dino/menus/credits/DinoCredits.gd`.
 
 ## Music
 ### Late Night Radio

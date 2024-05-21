@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var main_menu_button = $%MainMenu
 @onready var credits_button = $%Credits
 
-@onready var credits_scene = preload("res://src/dino/menus/DinoCredits.tscn")
+@onready var credits_scene = preload("res://src/dino/menus/credits/Credits.tscn")
 
 @onready var game_complete_header = $%GameCompleteHeader
 @onready var game_complete_subhead = $%GameCompleteSubhead

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://vt27n17u2ly7"]
+
+[node name="CreditHeader" type="RichTextLabel"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_type_variation = &"RichHeaderLabel"
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "Credit"
+fit_content = true
+scroll_active = false

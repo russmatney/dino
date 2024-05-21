@@ -9,7 +9,7 @@ extends CanvasLayer
 @onready var credits_button = $%CreditsButton
 @onready var quit_button = $%QuitButton
 
-@onready var credits_scene = preload("res://src/dino/menus/DinoCredits.tscn")
+@onready var credits_scene = preload("res://src/dino/menus/credits/Credits.tscn")
 @onready var options_scene = preload("res://src/dino/menus/options/OptionsMenu.tscn")
 
 ## ready ##################################################################3

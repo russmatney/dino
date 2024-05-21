@@ -53,15 +53,6 @@ static func is_move_up(event):
 static func is_move_down(event):
 	return is_event(event, "move_down")
 
-static func is_restart(event):
-	return is_event(event, "restart")
-
-static func is_restart_held(event):
-	return is_held(event, "restart")
-
-static func is_restart_released(event):
-	return is_released(event, "restart")
-
 static func is_undo(event):
 	return is_event(event, "undo")
 
@@ -97,6 +88,9 @@ static func is_pause(event):
 
 static func is_close(event):
 	return is_event(event, "close")
+
+static func is_close_released(event):
+	return is_released(event, "close")
 
 static func is_debug_toggle(event):
 	return is_event(event, "debug_toggle")

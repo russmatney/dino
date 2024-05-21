@@ -1,7 +1,8 @@
 @tool
-extends Credits
+extends Object
+class_name DinoCredits
 
-var dino_credits = [
+static var dino_credits = [
 	[
 		"",
 		"",
@@ -165,15 +166,9 @@ var dino_credits = [
 	"https://github.com/nathanhoad/godot_input_helper",
 	"MIT License",
 	"",
-	"MetroidvaniaSystem (MetSys)",
-	"https://github.com/KoBeWi/Metroidvania-System",
-	"",
 	"Pandora",
 	"https://github.com/bitbrain/pandora",
 	"MIT License",
-	"",
-	"Phantom Camera",
-	"https://github.com/ramokz/phantom-camera",
 	"",
 	"Sound Manager",
 	"https://github.com/nathanhoad/godot_sound_manager",
@@ -230,8 +225,5 @@ var dino_credits = [
 ]
 
 
-func get_credit_lines():
-	return dino_credits
-
-func _on_Button_pressed():
-	Navi.nav_to_main_menu()
+static func get_credits():
+	return DinoCredits.dino_credits

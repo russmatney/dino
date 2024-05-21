@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bo44ga11t2q8p"]
 
-[ext_resource type="Theme" uid="uid://ce80gjswvmncn" path="res://addons/core/thanks/CreditsTheme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://ce80gjswvmncn" path="res://src/dino/menus/credits/CreditsTheme.tres" id="1"]
 
 [node name="CreditsLine" type="RichTextLabel"]
 anchors_preset = 15
