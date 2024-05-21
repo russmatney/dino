@@ -74,10 +74,10 @@ class PandoraExportPlugin extends EditorExportPlugin:
 	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int):
 		var pandora_path = "res://data.pandora"
 		var file: FileAccess
-		if is_debug:
-			file = FileAccess.open(pandora_path, FileAccess.READ)
-		else:
-			file = FileAccess.open_compressed(pandora_path, FileAccess.READ)
+		file = FileAccess.open(pandora_path, FileAccess.READ)
+		# if is_debug:
+		# else:
+		# 	file = FileAccess.open_compressed(pandora_path, FileAccess.READ)
 
 		if file:
 			add_file(pandora_path, file.get_buffer(file.get_length()), false)
