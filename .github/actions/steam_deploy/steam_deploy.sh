@@ -4,7 +4,7 @@ set -euo pipefail
 # based on https://raw.githubusercontent.com/game-ci/steam-deploy/main/steam_deploy.sh
 
 steamdir=${STEAM_HOME:-$HOME/Steam}
-manifest_path=$(pwd)/build/steam_dino_linux_build.vdf
+manifest_path=$(pwd)/build/steam_dino_${build}_build.vdf
 
 echo "steamdir: $steamdir"
 echo "manifest_path: $manifest_path"

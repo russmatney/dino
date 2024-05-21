@@ -12,37 +12,64 @@ jobs:
     name: Linux Build and Deploy
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.2.1
+      image: barichello/godot-ci:4.2.2
     environment: Godot Dev Env
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
+
       - name: Issue 120
         run: |
           mkdir -p /github/home/.config/godot
           cp /root/.config/godot/editor_settings-4.tres /github/home/.config/godot/
       - name: Sanity check
         run: ls /root/.local/share/godot/export_templates
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates
           mv /root/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable ~/.local/share/godot/export_templates/${{ vars.GODOT_VERSION }}.stable
+
       - name: Initial Godot import
         shell: bash
         run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
+          godot --quiet --editor --headless -s addons/core/initial_import.gd
           godot --editor --headless --quit || exit 0
+
       - name: Linux Build
         run: |
           mkdir -v -p dist/dino-linux
-          godot --headless -v --export-debug dino-linux dist/dino-linux/dino.x86_64 || exit 0
+          godot --headless -v --export dino-linux dist/dino-linux/dino.x86_64
+
       - name: Sanity check
         run: |
           ls -alh dist/
           ls -alh dist/dino-linux
           stat dist/dino-linux/dino.x86_64
+
+      - name: Windows Build
+        run: |
+          mkdir -v -p dist/dino-windows
+          godot --headless -v --export dino-windows dist/dino-windows/dino.exe
+
+      - name: Sanity check
+        run: |
+          ls -alh dist/
+          ls -alh dist/dino-windows
+          stat dist/dino-windows/dino.exe
+
+      - name: MacOS Build
+        run: |
+          mkdir -v -p dist/dino-macos
+          godot --headless -v --export dino-macos dist/dino-macos/dino.dmg
+
+      - name: Sanity check
+        run: |
+          ls -alh dist/
+          ls -alh dist/dino-macos
+          stat dist/dino-macos/dino.dmg
 
       - uses: CyberAndrii/steam-totp@v1
         name: Generate TOTP
@@ -51,9 +78,26 @@ jobs:
           shared_secret: ${{ secrets.STEAM_SHARED_SECRET }}
           time_offset: 20
 
-      - name: Deploy to Steam
+      - name: Deploy Linux Build to Steam
         uses: ./.github/actions/steam_deploy
         env:
           steam_username: ${{ secrets.STEAM_USERNAME }}
           steam_password: ${{ secrets.STEAM_PASSWORD }}
           steam_totp: ${{ steps.steam-totp.outputs.code }}
+          build: "linux"
+
+      - name: Deploy Windows Build to Steam
+        uses: ./.github/actions/steam_deploy
+        env:
+          steam_username: ${{ secrets.STEAM_USERNAME }}
+          steam_password: ${{ secrets.STEAM_PASSWORD }}
+          steam_totp: ${{ steps.steam-totp.outputs.code }}
+          build: "windows"
+
+      - name: Deploy MacOS Build to Steam
+        uses: ./.github/actions/steam_deploy
+        env:
+          steam_username: ${{ secrets.STEAM_USERNAME }}
+          steam_password: ${{ secrets.STEAM_PASSWORD }}
+          steam_totp: ${{ steps.steam-totp.outputs.code }}
+          build: "macos"
