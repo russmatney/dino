@@ -605,9 +605,9 @@ func collect(opts={}):
 		DropData.T.ORB:
 			add_orb(data)
 			Dino.notif({
-				type="popup",
-				header_text="Orb Acquired",
-				body_text="This looks like a mighty fine ingredient",
+				type="side",
+				text="Orb Acquired",
+				# body_text="This looks like a mighty fine ingredient",
 				})
 			return
 		DropData.T.GEM:
@@ -637,9 +637,9 @@ func collect(opts={}):
 		DropData.T.POWERUP:
 			Log.warn("Unhandled pickup", opts)
 			Dino.notif({
-				type="popup",
-				header_text="Powerup Acquired",
-				body_text="A very good description of a powerup",
+				type="side",
+				text="Powerup Acquired",
+				# body_text="A very good description of a powerup",
 				})
 		_:
 			pass
