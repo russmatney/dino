@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="5_dn731"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_nylqu"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/dino/players/greyhat_jetflame_sheet.png" id="8_b7l5m"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="8_rnuea"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2nas5"]
 height = 44.0
@@ -331,3 +332,5 @@ position = Vector2(0, 5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_itqjd")
 animation = &"init"
+
+[node name="PlayerCamera" parent="." instance=ExtResource("8_rnuea")]

@@ -113,7 +113,7 @@ var complete_overlay
 func toggle_pause_game_nodes(should_pause=null):
 	var nodes = []
 	var p = Dino.current_player_node()
-	if p != null and is_instance_valid(p):
+	if p:
 		nodes.append(p)
 
 	U.toggle_pause_nodes(should_pause, nodes)

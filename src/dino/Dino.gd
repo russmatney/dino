@@ -72,7 +72,6 @@ func is_debug_mode():
 ## launch/start game ##########################################################
 
 func launch(mode: DinoModeEntity, opts={}):
-	Log.pr("launching game mode", mode)
 	game_mode = mode
 	# TODO menu should support a mode with or without a menu
 	if mode.get_menu() != null:
@@ -107,7 +106,7 @@ func respawn_active_player(opts={}):
 
 func current_player_node():
 	var p = player_set.active_player()
-	if p:
+	if p and p.node and is_instance_valid(p.node):
 		return p.node
 
 func current_player_entity():

@@ -159,7 +159,7 @@ func face_left():
 func _physics_process(_delta):
 	var player = Dino.current_player_node()
 
-	if player and is_instance_valid(player):
+	if player:
 		var player_pos = player.global_position
 		los.target_position = to_local(player_pos)
 

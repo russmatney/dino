@@ -52,7 +52,7 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 		Dino.respawn_active_player({
 			genre_type=new_room_def.genre_type(),
 			# deferred=false,
-			level_node=player_parent,
+			level_node=player_parent, # this is the default behavior
 			setup=func(p): p.position = og_p_position - offset
 			})
 	else:

@@ -9,6 +9,10 @@ static func slide_in(node, dist=10, t=0.6):
 	# jump + shrink to starting position :/
 	node.position = node.position - Vector2.ONE * dist
 	node.scale = Vector2.ONE * 0.5
+
+	if not node.is_inside_tree() or not is_instance_valid(node):
+		return
+
 	var tween = node.create_tween()
 	tween.tween_property(node, "scale", Vector2.ONE, t)\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -18,6 +22,10 @@ static func slide_in(node, dist=10, t=0.6):
 static func slide_out(node, t=0.6):
 	var og_position = node.current_position() if node.has_method("current_position") else node.position
 	var target_position = og_position - Vector2.ONE * 10
+
+	if not node.is_inside_tree() or not is_instance_valid(node):
+		return
+
 	var tween = node.create_tween()
 	tween.tween_property(node, "scale", Vector2.ONE * 0.5, t)\
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
@@ -34,6 +42,9 @@ static func slide_from_point(node, pos=Vector2.ZERO, t=0.6, delay_ts=[]):
 	node.scale = Vector2.ONE * 0.5
 	node.modulate.a = 0.5
 
+	if not node.is_inside_tree() or not is_instance_valid(node):
+		return
+
 	var tween = node.create_tween()
 	if delay_t:
 		tween.tween_interval(delay_t)
@@ -46,6 +57,10 @@ static func slide_from_point(node, pos=Vector2.ZERO, t=0.6, delay_ts=[]):
 
 static func slide_to_point(node, target_position=Vector2.ZERO, t=0.6, delay_ts=[]):
 	var delay_t = U.rand_of(delay_ts)
+
+	if not node.is_inside_tree() or not is_instance_valid(node):
+		return
+
 	var tween = node.create_tween()
 	if delay_t:
 		tween.tween_interval(delay_t)

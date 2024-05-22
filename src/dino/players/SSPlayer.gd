@@ -140,7 +140,7 @@ func _enter_tree():
 
 func ensure_pcam():
 	pcam = get_node_or_null("PlayerCamera")
-	if pcam == null:
+	if pcam == null or not is_instance_valid(pcam):
 		pcam = player_camera_scene.instantiate()
 		add_child(pcam)
 		pcam.set_owner(self)

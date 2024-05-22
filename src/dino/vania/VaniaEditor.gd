@@ -144,7 +144,7 @@ func on_rerender_background_pressed():
 
 func on_respawn_player_pressed():
 	var player = Dino.current_player_node()
-	if player != null:
+	if player:
 		if player.has_method("resurrect"):
 			player.resurrect()
 	Dino.respawn_active_player()

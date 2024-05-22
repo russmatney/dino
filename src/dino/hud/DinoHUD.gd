@@ -40,7 +40,7 @@ func update_player_status():
 
 	if p_ent != null:
 		var health = 0
-		if p_node and is_instance_valid(p_node):
+		if p_node:
 			health = p_node.health
 		player_status.set_status({"entity": p_ent, "health": health})
 

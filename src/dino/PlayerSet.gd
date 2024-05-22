@@ -41,7 +41,7 @@ func create_new(opts):
 	var pdata = PData.new(opts)
 	# TODO ensure vs always append? should be unique? could be instances, not ents coming in
 	stack.push_front(pdata)
-	Log.pr("created new player!", stack)
+	Log.info("created new player!", pdata.entity.get_display_name())
 
 func _remove_player(p: PData, _opts={}):
 	if p.node and is_instance_valid(p.node):
@@ -82,13 +82,13 @@ func spawn_new(opts={}):
 	var level_node = opts.get("level_node")
 	var deferred = opts.get("deferred", true)
 	if level_node:
-		Log.prn("adding player to level node", level_node, p)
+		Log.info("adding player to level node", level_node, p.entity.get_display_name())
 		if deferred:
 			level_node.add_child.call_deferred(p.node)
 		else:
 			level_node.add_child(p.node)
 	elif spawn_point:
-		Log.pr("adding player with spawn_point", spawn_point)
+		Log.info("adding player at spawn_point", spawn_point)
 		if deferred:
 			U.add_child_to_level(spawn_point, p.node)
 		else:
@@ -116,18 +116,24 @@ func current_player_genre():
 	return p.entity.get_genre_type_for_scene(p.node.scene_file_path)
 
 func respawn_active_player(opts):
-	Log.info("respawning active player node", opts)
 	var genre_type = current_player_genre()
 
+	var active_player_parent
 	var p = active_player()
 	if p:
+		if p.node and is_instance_valid(p.node):
+			active_player_parent = p.node.get_parent()
 		_remove_player(p, opts)
 
 	if opts.get("new_entity") != null:
+		# TODO remove existing entity from stack?
 		create_new({entity=opts.get("new_entity")})
 
 	if opts.get("genre_type") == null:
 		opts["genre_type"] = genre_type
+
+	if active_player_parent and not opts.get("level_node"):
+		opts["level_node"] = active_player_parent
 
 	if opts.get("deferred", true):
 		spawn_new.call_deferred(opts)

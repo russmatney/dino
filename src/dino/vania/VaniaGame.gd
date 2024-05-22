@@ -111,11 +111,10 @@ func _ready():
 
 	finished_initial_room_gen.connect(show_ready_overlay, CONNECT_ONE_SHOT)
 
-	# spawn player in the load playground
+	# playground setup and notifs
 	setup_player()
-	playground.ready.connect(func():
-		Dino.notif({type="banner", text="Loading...."})
-		Debug.notif({msg="[Generating vania rooms!]", rich=true}))
+	Dino.notif({type="banner", text="Loading...."})
+	Debug.notif({msg="[Generating vania rooms!]", rich=true})
 
 	show_playground()
 
@@ -139,8 +138,9 @@ func on_room_loaded():
 	qm.quest_complete.connect(on_room_quest_complete)
 	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
 
-func on_room_quest_complete(quest):
-	Log.pr("quest complete", quest)
+func on_room_quest_complete(_quest):
+	pass
+	# Log.pr("quest complete", quest)
 
 func on_room_quests_complete():
 	mark_room_quests_complete()
@@ -171,7 +171,7 @@ func hide_overlays():
 func toggle_pause_game_nodes(should_pause=null):
 	var nodes = [map]
 	var p = Dino.current_player_node()
-	if p != null and is_instance_valid(p):
+	if p:
 		nodes.append(p)
 
 	U.toggle_pause_nodes(should_pause, nodes)
@@ -197,11 +197,12 @@ func show_playground():
 	var anim_nodes = []
 
 	var p = Dino.current_player_node()
-	if p != null and is_instance_valid(p):
+	if p:
 		anim_nodes.append(p)
 
 	for ch in playground.get_children():
-		anim_nodes.append(ch)
+		if ch and is_instance_valid(ch):
+			anim_nodes.append(ch)
 
 	var time = 0.6
 
@@ -216,7 +217,7 @@ func clear_playground():
 	var anim_nodes = []
 
 	var p = Dino.current_player_node()
-	if p != null and is_instance_valid(p):
+	if p:
 		anim_nodes.append(p)
 
 	for ch in playground.get_children():
@@ -478,18 +479,15 @@ func setup_player():
 			})
 
 	var def = current_room_def()
+	var opts = {level_node=self, deferred=false, genre_type=def.genre_type() if def else null}
 	if Dino.current_player_node():
-		Dino.respawn_active_player({level_node=self, deferred=false,
-			genre_type=def.genre_type() if def else null
-			})
+		Dino.respawn_active_player(opts)
 	else:
-		Dino.spawn_player({level_node=self, deferred=false,
-			genre_type=def.genre_type() if def else null
-			})
+		Dino.spawn_player(opts)
 
 func _set_player_position():
 	var p = Dino.current_player_node()
-	if p and is_instance_valid(p):
+	if p:
 		MetSys.set_player_position(p.position)
 
 ## room defs #######################################################

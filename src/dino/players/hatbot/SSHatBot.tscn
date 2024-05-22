@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://djculbglj2yia"]
+[gd_scene load_steps=37 format=3 uid="uid://djculbglj2yia"]
 
 [ext_resource type="Script" path="res://src/dino/players/SSPlayer.gd" id="1_blpj0"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="2_x1b5l"]
@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="9_dlhwa"]
 [ext_resource type="PackedScene" uid="uid://cp33t2x7q044h" path="res://src/components/quick_select/QuickSelect.tscn" id="10_e40tc"]
 [ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="10_lf38g"]
-[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_xlgae"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="12_1yter"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="12_od118"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="13_1yrmg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umtbi"]
@@ -307,8 +307,6 @@ shape = SubResource("RectangleShape2D_48he4")
 
 [node name="QuickSelect" parent="." instance=ExtResource("10_e40tc")]
 
-[node name="PlayerCamera" parent="." instance=ExtResource("11_xlgae")]
-
 [node name="Bumpbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 8
@@ -320,3 +318,5 @@ shape = SubResource("CapsuleShape2D_3mi8x")
 [node name="HeartParticles" parent="." instance=ExtResource("12_1yter")]
 
 [node name="SkullParticles" parent="." instance=ExtResource("13_1yrmg")]
+
+[node name="PlayerCamera" parent="." instance=ExtResource("12_od118")]

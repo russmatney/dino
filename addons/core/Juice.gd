@@ -118,7 +118,9 @@ var original_rotation = 0
 # 		original_rotation = cam.rotation
 
 func current_camera():
-	return get_viewport().get_camera_2d()
+	var cam = get_viewport().get_camera_2d()
+	if cam and is_instance_valid(cam):
+		return cam
 
 func current_pcam_host():
 	var cam = current_camera()
@@ -128,9 +130,13 @@ func current_pcam_host():
 				return ch
 
 func current_pcam():
+	var pcam
 	var host = current_pcam_host()
 	if host:
-		return host.get_active_pcam()
+		pcam = host.get_active_pcam()
+
+	if pcam and is_instance_valid(pcam):
+		return pcam
 
 func screenshake_reset():
 	shake_offset = null

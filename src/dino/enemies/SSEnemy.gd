@@ -137,7 +137,7 @@ func _process(_delta):
 
 	# is this expensive? (could limit with some min player/enemy distance)
 	var player = Dino.current_player_node()
-	if player and is_instance_valid(player) and should_see_player and los:
+	if player and should_see_player and los:
 		var player_pos = player.global_position
 		los.target_position = to_local(player_pos)
 
