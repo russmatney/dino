@@ -520,3 +520,23 @@ func current_room_def_alt():
 
 func add_custom_module(module_path: String):
 	modules.append(load(module_path).new(self))
+
+## player reactions ##################################################3
+
+# connected via player ready and `add_child_to_level` / Util level_root api :/
+func _on_player_death(_p):
+	# TODO show player lifespan/stats/progress? (hopefully not per player-type! should be in game-mode/dino-level)
+	# inspiration: Spelunky, Ape Out
+	# ideas: framing the dead player, splashy letters in sync with drums
+
+	# possibly we could share/re-use this, but meh, it'll probably need specific text
+	Jumbotron.jumbo_notif({header="You died", body="Sorry about that!",
+		action="close", action_label_text="Respawn",
+		on_close=func():
+		# resurrect player, respawn in room?
+		var p = Dino.current_player_node()
+		if p:
+			if p.has_method("resurrect"):
+				p.resurrect()
+		Dino.respawn_active_player()
+		})
