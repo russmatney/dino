@@ -20,6 +20,9 @@ signal game_complete
 
 @onready var game_complete_scene = preload("res://src/dino/menus/GameModeCompleteOverlay.tscn")
 
+var quick_select_scene = preload("res://src/components/quick_select/QuickSelect.tscn")
+var quick_select_menu
+
 ## to_pretty #################################################
 
 func to_pretty():
@@ -36,16 +39,21 @@ func _ready():
 
 	game_complete.connect(_on_game_complete)
 
-	# TODO the menus should create the player entity themselves
-	# instead of relying on some api to pass it in
-
-	# this supports running classic directly (not from the setup menu)
-	# TODO pop up the select-character menu directly
 	if not Engine.is_editor_hint():
+		if quick_select_menu == null:
+			quick_select_menu = quick_select_scene.instantiate()
+			add_child(quick_select_menu)
+		quick_select_menu.hide_menu()
+
 		if not Dino.current_player_entity():
 			if player_entity == null:
-				player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
-			Dino.create_new_player({entity=player_entity})
+				await quick_select_menu.show_menu({
+					# TODO only-unlocked/random-subset selection
+					entities=DinoPlayerEntity.all_entities(),
+					on_select=func(ent): player_entity = ent,
+					})
+
+				Dino.create_new_player({entity=player_entity})
 
 		start_game()
 

@@ -242,6 +242,7 @@ func _unhandled_input(event):
 			activate_weapon(weapon),
 			})
 	elif Trolls.is_released(event, "weapon_swap_menu"):
+		# TODO called here AND in quick_select_menu ?!
 		quick_select_menu.hide_menu()
 
 	# generic action

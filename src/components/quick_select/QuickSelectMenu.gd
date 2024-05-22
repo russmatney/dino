@@ -62,6 +62,9 @@ func _unhandled_input(event):
 	if Trolls.is_released(event, "weapon_swap_menu"):
 		hide_menu()
 
+	if Trolls.is_accept(event):
+		hide_menu()
+
 ## set focus #####################################################
 
 func set_focus():
@@ -97,6 +100,8 @@ func show_menu(opts):
 	set_entities(opts.get("entities", entities), opts.get("on_select"))
 	set_focus()
 	panel.set_visible(true)
+
+	return selected
 
 ## hide #####################################################
 

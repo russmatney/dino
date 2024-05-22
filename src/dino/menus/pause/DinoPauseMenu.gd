@@ -12,7 +12,7 @@ extends CanvasLayer
 ## ready ##########################################
 
 func _ready():
-	returnToMain.pressed.connect(Navi.nav_to_main_menu)
+	returnToMain.pressed.connect(on_return_to_main)
 
 	visibility_changed.connect(func():
 		if visible:
@@ -20,6 +20,13 @@ func _ready():
 			set_focus())
 	if visible:
 		set_focus()
+
+func on_return_to_main():
+	# TODO maybe this work happens in game-mode exit_tree?
+	# TODO clear MetSys stuff
+	# TODO safely kill threads
+	# TODO clear player entity
+	Navi.nav_to_main_menu()
 
 ## focus ##########################################
 
