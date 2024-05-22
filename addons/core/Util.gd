@@ -588,7 +588,7 @@ static func ensure_node(_self, nm):
 		_self.add_child(node)
 	return node
 
-# walks the node's owners until it finds one that implements `add_child_to_level`.
+# walks the node's parents until it finds one that implements `add_child_to_level`.
 # if none is found, adds the child to the 'current_scene'
 static func add_child_to_level(node, child, deferred=true):
 	var level = find_level_root(node)

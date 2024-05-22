@@ -127,6 +127,14 @@ func _ready():
 
 	thread_room_generation({map_def=map_def})
 
+## add_child_to_level ###################################################3
+
+func add_child_to_level(_node, child):
+	if map and is_instance_valid(map):
+		map.add_child(child)
+	else:
+		add_child(child)
+
 ## room loaded #######################################################
 
 func on_room_loaded():
