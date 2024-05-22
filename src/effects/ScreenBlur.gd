@@ -11,7 +11,7 @@ func reset():
 	material.set_shader_parameter("grayscale", 0.0)
 
 func anim_blur(opts={}):
-	if not is_node_ready():
+	if not is_node_ready() or not is_inside_tree():
 		return
 	if blur_tween:
 		blur_tween.kill()
@@ -26,7 +26,7 @@ func anim_blur(opts={}):
 	blur_tween.tween_property(material, "shader_parameter/lod", target, duration)
 
 func anim_gray(opts={}):
-	if not is_node_ready():
+	if not is_node_ready() or not is_inside_tree():
 		return
 	if gray_tween:
 		gray_tween.kill()

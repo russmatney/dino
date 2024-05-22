@@ -250,6 +250,10 @@ static func has_tiles(opts):
 
 	return MapInput.new({tiles=ts})
 
+static func coldfire_tiles(_opts={}):
+	return MapInput.new({tiles=[
+		Pandora.get_entity(DinoTileIds.COLDFIRETILES)]})
+
 static func wooden_boxes(_opts={}):
 	return MapInput.new({tiles=[
 		Pandora.get_entity(DinoTileIds.WOODENBOXTILES)]})

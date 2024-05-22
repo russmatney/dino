@@ -387,6 +387,8 @@ static func update_los_facing(facing, node):
 ## Animations
 
 static func animate_rotate(node):
+	if not node.is_inside_tree():
+		return
 	var tween = node.create_tween()
 	tween.set_loops(0)
 	tween.tween_property(node.anim, "rotation", node.rotation + PI / 8, 0.3).set_ease(Tween.EASE_IN_OUT).set_trans(
@@ -399,6 +401,8 @@ static func animate_rotate(node):
 
 
 static func animate(node):
+	if not node.is_inside_tree():
+		return
 	var n = 10
 	var og_pos = node.position
 	var rand_offset = Vector2(randi() % n - n / 2.0, randi() % n - n / 2.0)

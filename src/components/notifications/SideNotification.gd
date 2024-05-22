@@ -28,6 +28,9 @@ func _ready():
 ## render ########################################
 
 func render(options: Dictionary):
+	if not is_inside_tree():
+		return
+
 	var is_re_emph = opts != null
 	opts = options
 
@@ -58,6 +61,9 @@ func render(options: Dictionary):
 ## entry ########################################
 
 func animate_entry():
+	if not is_inside_tree():
+		return
+
 	position = og_pos + Vector2.RIGHT * x_offset
 	modulate.a = 0.4
 
@@ -72,6 +78,8 @@ func animate_entry():
 ## exit ########################################
 
 func animate_exit():
+	if not is_inside_tree():
+		return
 	var target_position = og_pos + Vector2.RIGHT * x_offset
 	position = og_pos
 	if tween:

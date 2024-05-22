@@ -75,6 +75,8 @@ func render(opts):
 ## entry #############################################################
 
 func animate_entry(opts):
+	if not is_inside_tree():
+		return
 	screenBlur.fade_in({duration=anim_duration})
 
 	popup.scale = Vector2.ONE*0.8
@@ -87,6 +89,8 @@ func animate_entry(opts):
 
 	entry_tween.tween_callback(func():
 		var ttl = opts.get("ttl", default_ttl)
+		if not is_inside_tree():
+			return
 		clear_tween = create_tween()
 		if not clear_tween:
 			return
@@ -95,6 +99,8 @@ func animate_entry(opts):
 ## exit #############################################################
 
 func animate_exit():
+	if not is_inside_tree():
+		return
 	screenBlur.fade_out({duration=anim_duration})
 
 	exit_tween = create_tween()

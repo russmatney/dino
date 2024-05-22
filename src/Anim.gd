@@ -74,6 +74,8 @@ static func slide_to_point(node, target_position=Vector2.ZERO, t=0.6, delay_ts=[
 # helper
 
 static func tween_on_node(node, tween_name):
+	if not node.is_inside_tree():
+		return
 	if tween_name in node:
 		node[tween_name] = node.create_tween()
 		return node[tween_name]
@@ -85,15 +87,21 @@ static func tween_on_node(node, tween_name):
 static func move_to_coord(node, coord, t, trans=Tween.TRANS_CUBIC, _ease=Tween.EASE_OUT):
 	var target_pos = coord * node.square_size
 	var tween = tween_on_node(node, "move_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "position", target_pos, t).set_trans(trans).set_ease(_ease)
 
 static func move_attempt_pull_back(node, og_position, target_position, t):
 	var tween = tween_on_node(node, "move_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "position", target_position, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "position", og_position, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 static func float_a_bit(node, og_position, t=0.8, trans=Tween.TRANS_CUBIC, _ease=Tween.EASE_OUT):
 	var tween = tween_on_node(node, "float_tween")
+	if not tween:
+		return
 	var dist = 3
 	var dir = Vector2(randfn(0.0, 1.0), randfn(0.0, 1.0)).normalized()
 	var offset = dir * dist
@@ -107,17 +115,23 @@ static func float_a_bit(node, og_position, t=0.8, trans=Tween.TRANS_CUBIC, _ease
 
 static func scale_up_down_up(node, t):
 	var tween = tween_on_node(node, "scale_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "scale", 1.3*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 0.8*Vector2.ONE, t/4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 1.0*Vector2.ONE, t/4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 static func scale_down_up(node, t):
 	var tween = tween_on_node(node, "scale_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "scale", 0.8*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 1.0*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 static func scale_up_down(node, t):
 	var tween = tween_on_node(node, "scale_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "scale", 1.3*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	tween.tween_property(node, "scale", 1.0*Vector2.ONE, t/2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
@@ -125,10 +139,14 @@ static func scale_up_down(node, t):
 
 static func fade_in(node, t=0.5):
 	var tween = tween_on_node(node, "fade_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "modulate:a", 1.0, t).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 static func fade_out(node, t=0.5):
 	var tween = tween_on_node(node, "fade_tween")
+	if not tween:
+		return
 	tween.tween_property(node, "modulate:a", 0.0, t).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 ## whole scene transitions ###########################################################

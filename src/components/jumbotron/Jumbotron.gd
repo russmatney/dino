@@ -73,12 +73,16 @@ func _unhandled_input(event):
 		Sounds.play(Sounds.S.showjumbotron)
 
 func fade_in():
+	if not is_inside_tree():
+		return
 	$PanelContainer.modulate.a = 0
 	set_visible(true)
 	var t = create_tween()
 	t.tween_property($PanelContainer, "modulate:a", 1, 0.4)
 
 func fade_out():
+	if not is_inside_tree():
+		return
 	var t = create_tween()
 	t.tween_property($PanelContainer, "modulate:a", 0, 0.4)
 	t.tween_callback(set_visible.bind(false))

@@ -70,6 +70,8 @@ func render(opts):
 ## entry #############################################################
 
 func animate_entry(opts):
+	if not is_inside_tree():
+		return
 	label.scale = Vector2.ONE*0.8
 	label.modulate.a = 0.0
 	entry_tween = create_tween()
@@ -80,6 +82,8 @@ func animate_entry(opts):
 
 	entry_tween.tween_callback(func():
 		var ttl = opts.get("ttl", default_ttl)
+		if not is_inside_tree():
+			return
 		clear_tween = create_tween()
 		if not clear_tween:
 			return
@@ -88,6 +92,8 @@ func animate_entry(opts):
 ## exit #############################################################
 
 func animate_exit():
+	if not is_inside_tree():
+		return
 	exit_tween = create_tween()
 	if not exit_tween:
 		return

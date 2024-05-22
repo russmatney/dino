@@ -334,9 +334,15 @@ func vania_game_complete():
 	# allow input to move to next
 	ready_for_next = true
 
+## exit_tree #######################################################
+
+func _exit_tree():
+	if generating:
+		generating.wait_to_finish()
+
 ## process #######################################################
 
-func _process(_delta: float) -> void:
+func _process(_delta: float):
 	# Join thread when it has finished.
 	if not generating.is_alive():
 		Log.pr("thread not alive, waiting....")
@@ -377,8 +383,17 @@ func generate_rooms(opts={}):
 
 	for rd in room_defs:
 		for coord in rd.map_cells:
-			MetSys.discover_cell(coord)
+			safe_discover_cell(coord)
 		init_room_state(rd.room_path)
+
+var abort_presumed = false
+func safe_discover_cell(coord: Vector3i):
+	if coord in MetSys.map_data.cells:
+		MetSys.discover_cell(coord)
+	else:
+		if not abort_presumed:
+			Log.warn("skipping discover cell, presuming game was aborted")
+			abort_presumed = true
 
 ## public regen funcs #######################################################
 
