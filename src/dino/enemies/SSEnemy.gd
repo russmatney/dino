@@ -143,7 +143,7 @@ func _process(_delta):
 
 		if los.is_colliding():
 			var body = los.get_collider()
-			if body.is_in_group("player"):
+			if is_instance_valid(body) and body.is_in_group("player"):
 				can_see_player = true
 
 				# TODO should fire at player?

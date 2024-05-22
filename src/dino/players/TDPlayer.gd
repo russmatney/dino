@@ -285,7 +285,7 @@ func on_pit_entered():
 # 	for i in get_slide_collision_count():
 # 		var collision = get_slide_collision(i)
 # 		var collider = collision.get_collider()
-# 		if collider.is_in_group("pits"):
+# 		if is_instance_valid(collider) and collider.is_in_group("pits"):
 # 			Log.info("pit hit", collider)
 
 ## facing ###########################################################

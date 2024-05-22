@@ -33,7 +33,7 @@ func _process(_delta):
 		vision_ray.set_target_position(to_local(player.get_global_position()))
 		if vision_ray.is_colliding():
 			var coll = vision_ray.get_collider()
-			if coll.is_in_group("player"):
+			if is_instance_valid(coll) and coll.is_in_group("player"):
 				machine.transit("Attack")
 
 

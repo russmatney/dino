@@ -303,7 +303,7 @@ func collision_check():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		if collider.is_in_group("spikes"):
+		if is_instance_valid(collider) and collider.is_in_group("spikes"):
 			take_hit({body=collider, damage=1, type="spikes"})
 			return true
 
