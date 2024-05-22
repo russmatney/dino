@@ -48,6 +48,7 @@ func _ready():
 				cam.set_owner(self)
 				host.set_owner(self)
 
+			Log.warn("Fallback player entity hard-coding, better be debugging!")
 			Dino.create_new_player({
 				entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
 				})

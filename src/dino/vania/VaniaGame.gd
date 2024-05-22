@@ -482,6 +482,8 @@ func reload_current_room():
 
 func setup_player():
 	if not Dino.current_player_entity():
+		# should have been set by the game mode, this is for debug help
+		Log.warn("Fallback player entity hard-coding, better be debugging!")
 		Dino.create_new_player({
 			entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
 			})
