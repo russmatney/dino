@@ -134,4 +134,5 @@ func use_weapon(weapon=null):
 func stop_using_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
-	weapon.stop_using()
+	if weapon:
+		weapon.stop_using()

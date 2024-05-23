@@ -221,6 +221,9 @@ func _unhandled_input(event):
 		if not logged_blocking_controls:
 			Log.info("blocking ss player control")
 			logged_blocking_controls = true
+
+		# fire 'release' actions when controls are blocked
+		stop_using_weapon()
 		return
 	logged_blocking_controls = false
 
@@ -246,9 +249,6 @@ func _unhandled_input(event):
 			on_select=func(weapon):
 			activate_weapon(weapon),
 			})
-	elif Trolls.is_released(event, "weapon_swap_menu"):
-		# TODO called here AND in quick_select_menu ?!
-		quick_select_menu.hide_menu()
 
 	# generic action
 	if Trolls.is_action(event):
