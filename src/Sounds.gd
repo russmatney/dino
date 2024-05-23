@@ -316,6 +316,19 @@ enum S {
 	],
 }
 
+## enter tree ##################################################################
+
+func _enter_tree() -> void:
+	if not Engine.is_editor_hint():
+		get_tree().node_added.connect(on_node_added)
+
+func on_node_added(node: Node):
+	if node is Button:
+		node.focus_entered.connect(on_button_focused.bind(node))
+		node.pressed.connect(on_button_pressed.bind(node))
+
+## ready ##################################################################
+
 func _ready():
 	if not Engine.is_editor_hint():
 		SoundManager.set_default_sound_bus("Sound")
@@ -329,16 +342,7 @@ func _ready():
 
 	super._ready()
 
-####################################################################
-
-func _enter_tree() -> void:
-	if not Engine.is_editor_hint():
-		get_tree().node_added.connect(on_node_added)
-
-func on_node_added(node: Node):
-	if node is Button:
-		node.focus_entered.connect(on_button_focused.bind(node))
-		node.pressed.connect(on_button_pressed.bind(node))
+## button sounds ##################################################################
 
 func on_button_focused(button: Button) -> void:
 	if button.is_visible_in_tree():
