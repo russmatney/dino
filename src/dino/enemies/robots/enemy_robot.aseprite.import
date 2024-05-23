@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://8w2gr2vffidv"
+path="res://.godot/imported/enemy_robot.aseprite-d5d76f509ffada7e0402a592f75e5877.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/robots/enemy_robot.aseprite"
+dest_files=["res://.godot/imported/enemy_robot.aseprite-d5d76f509ffada7e0402a592f75e5877.res"]
+
+[params]
+

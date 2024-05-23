@@ -15,6 +15,7 @@ local tags = {
   "air",
   "_knocked_back", "_dying",
   "jetpack", "shoot",
+  "rest",
 
   -- TD tags
   "idle_down", "idle_up", "idle_right",
@@ -23,7 +24,7 @@ local tags = {
   -- BEU tags
   "_landed", "walk",
   "_punch", "_punch_2",
-  "_kick",  "_jump", "_jump_kick",
+  "_kick",  "_jump_kick",
   "_punched", "_kicked",
   "_grab", "_grabbed",
   "_throw", "thrown",

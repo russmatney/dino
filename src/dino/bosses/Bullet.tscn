@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://rlaug4gyu3r8"]
 
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://src/dino/weapons/arrow/arrow.tres" id="1_fvfvs"]
 [ext_resource type="Script" path="res://src/dino/bosses/Bullet.gd" id="1_s23kw"]
@@ -22,7 +22,6 @@ script = ExtResource("1_s23kw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 1.57079
 sprite_frames = ExtResource("1_fvfvs")
-animation = &"pop"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

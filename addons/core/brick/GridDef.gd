@@ -1,4 +1,3 @@
-@tool
 class_name GridDef
 extends Object
 
@@ -91,27 +90,28 @@ func get_coords_for_entity(ent: String):
 
 ## rotations ##########################################
 
+# could include mirrors of these
 func get_rotations():
 	return [self, self.rotate(1), self.rotate(2), self.rotate(3),]
 
 # TODO worth a simple test or two
 # return a new grid def with the shape rotated i times
 func rotate(i=1):
-	var new = GridDef.new()
-	new.name = name
+	var n = GridDef.new()
+	n.name = name
 	if i == 1:
-		new.shape = rotated_shape(shape)
+		n.shape = rotated_shape(shape)
 	elif i == 2:
 		var sh = rotated_shape(shape)
-		new.shape = rotated_shape(sh)
+		n.shape = rotated_shape(sh)
 	elif i == 3:
 		var sh = rotated_shape(shape)
 		sh = rotated_shape(sh)
-		new.shape = rotated_shape(sh)
+		n.shape = rotated_shape(sh)
 	else:
 		Log.warn("Unexpected grid def rotate i", i)
-	new.meta = meta
-	return new
+	n.meta = meta
+	return n
 
 func rotated_shape(sh):
 	var new_shape = []

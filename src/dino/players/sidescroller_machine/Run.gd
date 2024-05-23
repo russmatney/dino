@@ -8,7 +8,7 @@ func face_movement_direction():
 ## enter ###########################################################
 
 func enter(_opts = {}):
-	actor.anim.play("run")
+	actor.anim.play("running")
 
 ## physics ###########################################################
 

@@ -20,7 +20,7 @@ func face_movement_direction():
 
 func enter(opts = {}):
 	double_jumping = opts.get("double_jumping")
-	actor.anim.play("fall")
+	actor.anim.play("falling")
 
 	if opts.get("coyote_time"):
 		coyote_ttl = coyote_time
