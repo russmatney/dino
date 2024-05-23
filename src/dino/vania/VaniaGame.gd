@@ -343,13 +343,11 @@ func _exit_tree():
 ## process #######################################################
 
 func _process(_delta: float):
-	# Join thread when it has finished.
 	if not generating.is_alive():
-		Log.pr("thread not alive, waiting....")
 		generating.wait_to_finish()
 		generating = null
 		set_process(false)
-		Log.pr("thread finished and joined")
+		Log.info("level gen thread finished and joined!")
 
 		finished_initial_room_gen.emit()
 
@@ -504,7 +502,11 @@ func setup_player():
 			})
 
 	var def = current_room_def()
-	var opts = {level_node=self, deferred=false, genre_type=def.genre_type() if def else null}
+	var opts = {
+		level_node=self, deferred=false,
+		# sidescroller default set for playground (no `room_def`)
+		genre_type=def.genre_type() if def else Dino.GenreType.SideScroller,
+		}
 	if Dino.current_player_node():
 		Dino.respawn_active_player(opts)
 	else:

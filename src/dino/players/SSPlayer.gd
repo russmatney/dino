@@ -213,11 +213,16 @@ func _ready():
 
 ## input ###########################################################
 
+var logged_blocking_controls = false
+
 func _unhandled_input(event):
 	# prevent input
 	if block_controls or is_dead or machine.ignore_input():
-		Log.info("blocking ss player control")
+		if not logged_blocking_controls:
+			Log.info("blocking ss player control")
+			logged_blocking_controls = true
 		return
+	logged_blocking_controls = false
 
 	# jetpack
 	if has_jetpack and Trolls.is_jetpack(event):
