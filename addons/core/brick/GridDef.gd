@@ -91,6 +91,9 @@ func get_coords_for_entity(ent: String):
 
 ## rotations ##########################################
 
+func get_rotations():
+	return [self, self.rotate(1), self.rotate(2), self.rotate(3),]
+
 # TODO worth a simple test or two
 # return a new grid def with the shape rotated i times
 func rotate(i=1):

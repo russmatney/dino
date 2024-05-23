@@ -201,7 +201,6 @@ func fill_tilemap_borders(opts={}):
 		recti.size += Vector2i.DOWN # weird!
 
 		var skip_borders = internal_borders(cell, room_def.local_cells)
-		# TODO does this also skip corners?
 		skip_borders.append_array(room_def.skip_borders())
 
 		var border_cells = Reptile.cells_in_rect(recti).filter(func(coord):
@@ -272,13 +271,6 @@ func fill_background_images(_opts={}):
 		crect.set_owner(self)
 		crect.set_z_index(-10)
 
-## background tiles ##############################################################
-
-func add_background_tiles(opts={}):
-	U.ensure_default(opts, "count", 10)
-	U.ensure_default(opts, "re_add_existing_tiles", true)
-	add_tile_chunks(bg_tilemap, opts)
-
 ## setup nav region ##############################################################
 
 func setup_nav_region():
@@ -299,7 +291,6 @@ func setup_nav_region():
 	nav_region.set_navigation_polygon(nav_mesh)
 	nav_region.bake_navigation_polygon()
 
-
 ## add_tile_chunks ##############################################################
 
 var logged_tile_pos = false
@@ -319,16 +310,15 @@ func add_tile_chunks(tmap=null, opts={}):
 
 	var tile_coords: Array[Vector2i] = []
 
-	var chunks_added = 0
-	var chunks_attempted = 0
-	var chunk_count = opts.get("count", 2)
-	var attempt_max = chunk_count * 4
-	while (chunks_added < chunk_count
-		# safety hatch, probably plenty of cases where nothing fits
-		and chunks_attempted < attempt_max):
+	var count_chunks_added = 0
+	var count_chunks_attempted = 0
+	var count_chunks_requested = opts.get("count", 2)
+	var attempt_max = count_chunks_requested * 4
+	while (count_chunks_added < count_chunks_requested
+		# safety hatch, probably cases where nothing fits
+		and count_chunks_attempted < attempt_max):
 		var tile_chunk = grids.pick_random()
-		var chunk_rotations = [tile_chunk, tile_chunk.rotate(1),
-			tile_chunk.rotate(2), tile_chunk.rotate(3),]
+		var chunk_rotations = tile_chunk.get_rotations()
 		var found_match = false
 		for chunk in chunk_rotations:
 			if found_match:
@@ -338,9 +328,11 @@ func add_tile_chunks(tmap=null, opts={}):
 				chunk.get_shape_dict({drop_entity="NewTile"}))
 			if start_coords.is_empty():
 				continue
+
+			found_match = true
 			var start_coord = start_coords.pick_random()
 
-			if opts.get("re_add_existing_tiles", false):
+			if opts.get("include_existing_tiles", false):
 				for e_coord in chunk.get_coords_for_entity("Tile"):
 					tile_coords.append(e_coord + start_coord)
 
@@ -348,16 +340,23 @@ func add_tile_chunks(tmap=null, opts={}):
 				tile_coords.append(e_coord + start_coord)
 
 		if found_match:
-			chunks_added += 1
-		chunks_attempted += 1
+			count_chunks_added += 1
+		count_chunks_attempted += 1
 
-	if chunks_added < chunk_count:
-		Log.warn("Couldn't match requested chunks in attempts:", chunks_attempted)
+	if count_chunks_added < count_chunks_requested:
+		Log.warn("Couldn't match requested chunks in attempts:", count_chunks_attempted)
 
 	if not tile_coords.is_empty():
 		tmap.fill_coords(tile_coords)
 		tmap.mix_terrains()
 		tmap.force_update()
+
+## background tiles ##############################################################
+
+func add_background_tiles(opts={}):
+	U.ensure_default(opts, "count", 10)
+	U.ensure_default(opts, "include_existing_tiles", true)
+	add_tile_chunks(bg_tilemap, opts)
 
 ## add_enemies/entities ##############################################################
 
