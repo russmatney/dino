@@ -2,12 +2,18 @@
 class_name GridDef
 extends Object
 
+## vars ##########################################
+
 var name: String
 var shape: Array
 var meta: Dictionary
 
-func to_printable():
+## printable ##########################################
+
+func to_pretty():
 	return {name=name, meta=meta}
+
+## properties ##########################################
 
 func has_flag(f):
 	if f in meta:
@@ -18,6 +24,8 @@ func has_label(label) -> bool:
 		if label in coord.cell:
 			return true
 	return false
+
+## row/col getters ##########################################
 
 func column(idx: int):
 	var col = []
@@ -33,11 +41,15 @@ func row(idx: int):
 		return shape[idx]
 	Log.error("idx outside of width, cannot return row")
 
+## size/rect ##########################################
+
 func size() -> Vector2i:
 	return Vector2i(len(shape[0]), len(shape))
 
 func rect() -> Rect2i:
 	return Rect2i(Vector2i(), size())
+
+## shape ##########################################
 
 func get_shape_dict(opts={}):
 	var shape_dict = {}
@@ -50,6 +62,8 @@ func get_shape_dict(opts={}):
 				shape_dict[k] = null
 
 	return shape_dict
+
+## coords ##########################################
 
 # Returns an array of dicts like [{"coord": Vector2, "cell": Array[String]}]
 func coords(skip_nulls=true) -> Array:
@@ -66,9 +80,41 @@ func coords(skip_nulls=true) -> Array:
 				crds.append({coord=coord, cell=cell})
 	return crds
 
+## coords for ent ##########################################
+
 func get_coords_for_entity(ent: String):
 	var entity_coords = []
 	for coord in coords():
 		if ent in coord.cell:
 			entity_coords.append(Vector2i(coord.coord))
 	return entity_coords
+
+## rotations ##########################################
+
+# TODO worth a simple test or two
+# return a new grid def with the shape rotated i times
+func rotate(i=1):
+	var new = GridDef.new()
+	new.name = name
+	if i == 1:
+		new.shape = rotated_shape(shape)
+	elif i == 2:
+		var sh = rotated_shape(shape)
+		new.shape = rotated_shape(sh)
+	elif i == 3:
+		var sh = rotated_shape(shape)
+		sh = rotated_shape(sh)
+		new.shape = rotated_shape(sh)
+	else:
+		Log.warn("Unexpected grid def rotate i", i)
+	new.meta = meta
+	return new
+
+func rotated_shape(sh):
+	var new_shape = []
+	for row in sh:
+		for i in len(row):
+			if i > len(new_shape) - 1:
+				new_shape.append([])
+			new_shape[i].append(row[i])
+	return new_shape

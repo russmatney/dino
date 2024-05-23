@@ -275,7 +275,7 @@ func fill_background_images(_opts={}):
 ## background tiles ##############################################################
 
 func add_background_tiles(opts={}):
-	U.ensure_default(opts, "count", 100)
+	U.ensure_default(opts, "count", 40)
 	U.ensure_default(opts, "re_add_existing_tiles", true)
 	add_tile_chunks(bg_tilemap, opts)
 
@@ -319,24 +319,33 @@ func add_tile_chunks(tmap=null, opts={}):
 
 	var tile_coords: Array[Vector2i] = []
 
-	for i in range(opts.get("count", 10)):
+	for i in range(opts.get("count", 4)):
 		var tile_chunk = grids.pick_random()
-		var start_coords = possible_positions(tmap_data,
-			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
-		if start_coords.is_empty():
+		var chunk_rotations = [tile_chunk, tile_chunk.rotate(1),
+			tile_chunk.rotate(2), tile_chunk.rotate(3),]
+		var found_match = false
+		for chunk in chunk_rotations:
+			if found_match:
+				break
+
+			var start_coords = possible_positions(tmap_data,
+				chunk.get_shape_dict({drop_entity="NewTile"}))
+			if start_coords.is_empty():
+				continue
+			var start_coord = start_coords.pick_random()
+
+			if opts.get("re_add_existing_tiles", false):
+				for e_coord in chunk.get_coords_for_entity("Tile"):
+					tile_coords.append(e_coord + start_coord)
+
+			for e_coord in chunk.get_coords_for_entity("NewTile"):
+				tile_coords.append(e_coord + start_coord)
+
+		if not found_match:
 			if not logged_tile_pos:
 				logged_tile_pos = true
 				Log.warn("No position found for tile chunk!")
-			# TODO try a different chunk, maybe flip/rotate it
-			continue
-		var start_coord = start_coords.pick_random()
-
-		if opts.get("re_add_existing_tiles", false):
-			for e_coord in tile_chunk.get_coords_for_entity("Tile"):
-				tile_coords.append(e_coord + start_coord)
-
-		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
-			tile_coords.append(e_coord + start_coord)
+			# TODO try a different chunk
 
 	if not tile_coords.is_empty():
 		tmap.fill_coords(tile_coords)
