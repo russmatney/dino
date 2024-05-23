@@ -14,6 +14,7 @@ local tags = {
   "running", -- TODO move SS from 'run' to 'running'
   "air",
   "_knocked_back", "_dying",
+  "jetpack", "shoot",
 
   -- TD tags
   "idle_down", "idle_up", "idle_right",
