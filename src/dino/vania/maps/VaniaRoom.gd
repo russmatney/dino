@@ -108,7 +108,11 @@ func setup_tileset():
 		Reptile.disable_occlusion(bg_tilemap)
 
 		# TODO support multiple bg_tilemap layers
-		# TODO darken instead of alpha
+
+		# darken, fade
+		bg_tilemap.modulate.r -= 0.4
+		bg_tilemap.modulate.g -= 0.4
+		bg_tilemap.modulate.b -= 0.4
 		bg_tilemap.modulate.a = 0.4
 		bg_tilemap.set_z_index(-5)
 	else:
