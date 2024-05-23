@@ -60,10 +60,10 @@ func _ready():
 
 func _unhandled_input(event):
 	if Trolls.is_released(event, "weapon_swap_menu"):
-		hide_menu()
+		select_and_hide_menu()
 
 	if Trolls.is_accept(event):
-		hide_menu()
+		select_and_hide_menu()
 
 ## set focus #####################################################
 
@@ -81,6 +81,7 @@ func set_entities(ents, on_select=null):
 	for ent in ents:
 		var butt = EntityButton.newButton(ent, on_select)
 		entityList.add_child(butt)
+		butt.selected.connect(select_and_hide_menu, CONNECT_DEFERRED)
 
 func select_current():
 	for ch in entityList.get_children():
@@ -105,8 +106,11 @@ func show_menu(opts):
 
 ## hide #####################################################
 
-func hide_menu():
+func select_and_hide_menu():
 	select_current()
+	hide_menu()
+
+func hide_menu():
 	screenBlur.fade_out({duration=anim_duration})
 	panel.set_visible(false)
 	canvasLayer.set_visible(false)

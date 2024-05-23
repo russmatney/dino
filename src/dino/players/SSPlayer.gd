@@ -612,12 +612,12 @@ func collect(opts={}):
 	var data = opts.get("data")
 
 	if not data:
-		Log.warn("Unhandled pickup", opts)
+		Log.warn("No data on collected pickup, returning", opts)
 		return
 
 	match data.type:
 		DropData.T.RANDOM:
-			Log.warn("Unhandled pickup", opts)
+			Log.warn("Unhandled random pickup", opts)
 		DropData.T.ORB:
 			add_orb(data)
 			Dino.notif({
@@ -651,16 +651,14 @@ func collect(opts={}):
 			add_leaf()
 			return
 		DropData.T.POWERUP:
-			Log.warn("Unhandled pickup", opts)
+			Log.warn("Unhandled powerup picked up", opts)
 			Dino.notif({
 				type="side",
 				text="Powerup Acquired",
 				# body_text="A very good description of a powerup",
 				})
 		_:
-			pass
-
-	Log.warn("unhandled pickup", opts)
+			Log.warn("no match on pickup data.type", data)
 
 ## counts
 
