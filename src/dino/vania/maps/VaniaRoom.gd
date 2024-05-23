@@ -72,7 +72,7 @@ func build_room(def: VaniaRoomDef, opts={}):
 	setup_walls_and_doors(opts)
 	fill_background_images()
 	add_background_tiles()
-	# add_tile_chunks()
+	add_tile_chunks()
 	add_entities()
 	add_enemies()
 	add_effects()
@@ -274,40 +274,10 @@ func fill_background_images(_opts={}):
 
 ## background tiles ##############################################################
 
-var logged_bg_tile_pos = false
-
-# this depends on build_tilemap_data, which expects the base tilemap to have borders already
 func add_background_tiles(opts={}):
-	var grids = bg_tilemap.chunk_defs.grids_with_flag("tile_chunk")
-	if grids.is_empty():
-		Log.warn("No tile chunks!")
-		return
-
-	var tmap_data = build_tilemap_data() # this inits based on the base tilemap (walls/doors)
-
-	var tile_coords: Array[Vector2i] = []
-	for i in range(opts.get("count", 100)):
-		var tile_chunk = grids.pick_random()
-		var start_coords = possible_positions(tmap_data,
-			tile_chunk.get_shape_dict({drop_entity="NewTile"}))
-		if start_coords.is_empty():
-			if not logged_bg_tile_pos:
-				logged_bg_tile_pos = true
-				Log.warn("No position found for background tile!")
-			# TODO try a different chunk, maybe flip/rotate it
-			continue
-		var start_coord = start_coords.pick_random()
-
-		if opts.get("re_add_existing_tiles", false):
-			for e_coord in tile_chunk.get_coords_for_entity("Tile"):
-				tile_coords.append(e_coord + start_coord)
-		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
-			tile_coords.append(e_coord + start_coord)
-
-	bg_tilemap.fill_coords(tile_coords)
-	bg_tilemap.mix_terrains()
-
-	bg_tilemap.force_update()
+	U.ensure_default(opts, "count", 100)
+	U.ensure_default(opts, "re_add_existing_tiles", true)
+	add_tile_chunks(bg_tilemap, opts)
 
 ## setup nav region ##############################################################
 
@@ -334,15 +304,21 @@ func setup_nav_region():
 
 var logged_tile_pos = false
 
-func add_tile_chunks(opts={}):
-	var grids = tilemap.chunk_defs.grids_with_flag("tile_chunk")
+func add_tile_chunks(tmap=null, opts={}):
+	if tmap == null:
+		tmap = tilemap
+
+	var grids = tmap.chunk_defs.grids_with_flag("tile_chunk")
 	if grids.is_empty():
 		Log.warn("No tile chunks!")
 		return
+	logged_tile_pos = false
 
+	# get existing tiles based on the main tilemap
 	var tmap_data = build_tilemap_data()
 
 	var tile_coords: Array[Vector2i] = []
+
 	for i in range(opts.get("count", 10)):
 		var tile_chunk = grids.pick_random()
 		var start_coords = possible_positions(tmap_data,
@@ -355,13 +331,17 @@ func add_tile_chunks(opts={}):
 			continue
 		var start_coord = start_coords.pick_random()
 
+		if opts.get("re_add_existing_tiles", false):
+			for e_coord in tile_chunk.get_coords_for_entity("Tile"):
+				tile_coords.append(e_coord + start_coord)
+
 		for e_coord in tile_chunk.get_coords_for_entity("NewTile"):
 			tile_coords.append(e_coord + start_coord)
 
 	if not tile_coords.is_empty():
-		tilemap.fill_coords(tile_coords)
-		tilemap.mix_terrains()
-		tilemap.force_update()
+		tmap.fill_coords(tile_coords)
+		tmap.mix_terrains()
+		tmap.force_update()
 
 ## add_enemies/entities ##############################################################
 
