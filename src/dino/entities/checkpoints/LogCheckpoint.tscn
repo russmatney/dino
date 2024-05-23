@@ -36,7 +36,6 @@ shape = SubResource("RectangleShape2D_dtt71")
 visible = false
 position = Vector2(0, -56)
 label_text = "Rest"
-key_or_action = "action"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

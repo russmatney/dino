@@ -12,8 +12,8 @@ static func jumbo_notif(opts):
 
 	var _header = opts.get("header")
 	var _body = opts.get("body", "")
-	var key_or_action = opts.get("key")
-	key_or_action = opts.get("action", key_or_action)
+	var action_name = opts.get("key")
+	action_name = opts.get("action", action_name)
 	var action_label_text = opts.get("action_label_text")
 	var on_close = opts.get("on_close")
 	var pause = opts.get("pause", true)
@@ -23,8 +23,8 @@ static func jumbo_notif(opts):
 	jumbotron.body_text = _body
 	jumbotron.action_hint.hide()
 
-	if key_or_action or action_label_text:
-		jumbotron.action_hint.display(key_or_action, action_label_text)
+	if action_name or action_label_text:
+		jumbotron.action_hint.display(action_name, action_label_text)
 
 	jumbotron.jumbo_closed.connect(func():
 		if on_close:

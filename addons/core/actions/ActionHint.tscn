@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfatjgmhlkjne"]
+[gd_scene load_steps=16 format=3 uid="uid://bfatjgmhlkjne"]
 
 [ext_resource type="Script" path="res://addons/core/actions/ActionHint.gd" id="1_k2w1x"]
 [ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_dkr3d"]
@@ -14,12 +14,15 @@
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="11_ywtte"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="12_wub3w"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_rvdlc"]
+[ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://src/dino/menus/controls/ActionInputIcon.tscn" id="15_r6s8h"]
 
 [node name="ActionHint" type="Node2D"]
 z_index = 5
 script = ExtResource("1_k2w1x")
+action_name = null
 
 [node name="Key" type="RichTextLabel" parent="."]
+visible = false
 clip_contents = false
 offset_left = -64.0
 offset_top = -24.0
@@ -46,3 +49,10 @@ text = "[center][jump]"
 fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("3_uu0q6"), ExtResource("4_ynxsy"), ExtResource("5_qh4rj"), ExtResource("3_q3lvy"), ExtResource("7_ro6ke"), ExtResource("8_nnbou"), ExtResource("9_x3ynq"), ExtResource("10_np4w0"), ExtResource("11_ywtte"), ExtResource("12_wub3w"), ExtResource("13_rvdlc")]
+
+[node name="ActionInputIcon" parent="." instance=ExtResource("15_r6s8h")]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 48.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)

@@ -49,19 +49,19 @@ layer_0/tile_data = PackedInt32Array(1376281, 196608, 9, 1310745, 196608, 8, 124
 [node name="MoveHint" parent="FlatLandOne" instance=ExtResource("8_qouax")]
 position = Vector2(-48, 296)
 label_text = "move"
-key_or_action = "wasd"
+action_name = "wasd"
 
 [node name="WeaponHint" parent="FlatLandOne" instance=ExtResource("8_qouax")]
 position = Vector2(-48, 160)
 label_text = "use weapon"
-key_or_action = "fire"
+action_name = "fire"
 
 [node name="CycleHint" parent="FlatLandOne" instance=ExtResource("8_qouax")]
 position = Vector2(152, 160)
 label_text = "change weapon"
-key_or_action = "h"
+action_name = "h"
 
 [node name="JumpHint" parent="FlatLandOne" instance=ExtResource("8_qouax")]
 position = Vector2(152, 296)
 label_text = "jump"
-key_or_action = "jump"
+action_name = "jump"

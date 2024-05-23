@@ -38,4 +38,4 @@ texture_scale = 0.800037
 visible = false
 position = Vector2(0, -26)
 label_text = "Rest"
-key_or_action = "action"
+action_name = "action"
