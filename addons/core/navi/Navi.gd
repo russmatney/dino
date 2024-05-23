@@ -196,10 +196,10 @@ var main_menu_path
 func set_main_menu(path_or_scene):
 	var path = U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
-		Log.info("Setting main_menu_path: ", path)
+		Log.info("Setting main_menu", path.get_file())
 		main_menu_path = path
 	else:
-		Log.warn("No scene at path: ", path, ", can't set main menu.")
+		Log.warn("No scene at path", path, ", can't set main menu.")
 
 func nav_to_main_menu():
 	if ResourceLoader.exists(main_menu_path):
@@ -223,10 +223,10 @@ func set_pause_menu(path_or_scene):
 				return
 			# is there a race-case here?
 			pause_menu.queue_free()
-		Log.info("Setting pause_menu: ", path)
+		Log.info("Setting pause_menu", path.get_file())
 		pause_menu = add_menu(load(path))
 	else:
-		Log.warn("No scene at path: ", path, ", can't set pause menu.")
+		Log.warn("No scene at path", path, ", can't set pause menu.")
 
 ## death ###########################################
 
