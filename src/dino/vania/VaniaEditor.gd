@@ -28,6 +28,15 @@ var current_room_def: VaniaRoomDef
 @onready var dec_room_count_button = $%DecRoomCountButton
 @onready var rerender_background_button = $%RerenderBackgroundButton
 
+## enter tree ######################################################
+
+func _enter_tree():
+	get_tree().node_added.connect(on_node_added)
+
+func on_node_added(node: Node):
+	if node.is_in_group("vania_game"):
+		setup(node)
+
 ## ready ######################################################
 
 func _ready():
@@ -35,12 +44,8 @@ func _ready():
 		return
 	if not game:
 		game = get_tree().get_first_node_in_group("vania_game")
-	if not game:
-		Log.warn("VaniaEditor could not find 'vania_game' node")
-		return
-
-	game.room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
-	update_room_def()
+	if game:
+		setup(game)
 
 	edit_room_def_button.pressed.connect(on_edit_room_def_pressed)
 	respawn_player_button.pressed.connect(on_respawn_player_pressed)
@@ -50,6 +55,10 @@ func _ready():
 	inc_room_count_button.pressed.connect(on_inc_room_count_pressed)
 	dec_room_count_button.pressed.connect(on_dec_room_count_pressed)
 	rerender_background_button.pressed.connect(on_rerender_background_pressed)
+
+func setup(node: VaniaGame):
+	game = node
+	game.room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 
 func on_room_loaded():
 	current_room_def = game.current_room_def()
@@ -79,9 +88,15 @@ func update_edit_entities():
 
 	var items = []
 	items.append_array(current_room_def.entities().map(func(ent):
-		return {label="Remove '%s'" % ent.get_display_name(), on_select=func(): current_room_def.input.entities.erase(ent)}))
+		return {
+			label="Remove '%s'" % ent.get_display_name(),
+			on_select=func(): current_room_def.input.entities.erase(ent)
+			}))
 	items.append_array(DinoEntity.all_entities().map(func(ent):
-		return {label="Add '%s'" % ent.get_display_name(), on_select=func(): current_room_def.input.entities.append(ent)}))
+		return {
+			label="Add '%s'" % ent.get_display_name(),
+			on_select=func(): current_room_def.input.entities.append(ent)
+			}))
 
 	var popup = edit_entities_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
@@ -95,9 +110,14 @@ func update_edit_enemies():
 
 	var items = []
 	items.append_array(current_room_def.enemies().map(func(en):
-		return {label="Remove '%s'" % en.get_display_name(), on_select=func(): current_room_def.input.enemies.erase(en)}))
+		return {
+			label="Remove '%s'" % en.get_display_name(),
+			on_select=func(): current_room_def.input.enemies.erase(en)
+			}))
 	items.append_array(DinoEnemy.all_enemies().map(func(en):
-		return {label="Add '%s'" % en.get_display_name(), on_select=func(): current_room_def.input.enemies.append(en)}))
+		return {
+			label="Add '%s'" % en.get_display_name(),
+			on_select=func(): current_room_def.input.enemies.append(en)}))
 
 	var popup = edit_enemies_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):
@@ -111,7 +131,10 @@ func update_edit_tilesets():
 
 	var items = []
 	items.append_array(DinoTiles.all_tiles().map(func(tile):
-		return {label=tile.get_display_name(), on_select=func(): current_room_def.input.tiles[0] = tile}))
+		return {
+			label=tile.get_display_name(),
+			on_select=func(): current_room_def.input.tiles[0] = tile
+			}))
 
 	var popup = edit_tileset_menu_button.get_popup()
 	U.setup_popup_items(popup, items, func(item):

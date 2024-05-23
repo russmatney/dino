@@ -175,7 +175,8 @@ func build_and_prep_scene(room_def, _opts={}):
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
 	# unique name for unique hotel entries?
 	room.name = "%s%s" % [room.name, room_def.index]
-	room.build_room(room_def, {neighbor_data=neighbor_data.get(room_def.room_path)})
+	room.build_room(room_def, {
+		neighbor_data=neighbor_data.get(room_def.room_path)})
 	room.is_debug = false
 
 	# pack and write to room_def.room_path
