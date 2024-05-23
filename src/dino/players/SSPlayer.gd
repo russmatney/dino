@@ -260,12 +260,21 @@ func _unhandled_input(event):
 			})
 
 	# action cycling
+	# TODO could move to a hold-action to popup opts/menu style
 	if Trolls.is_cycle_prev_action(event):
 		Sounds.play(Sounds.S.walk)
 		action_detector.cycle_prev_action()
 	elif Trolls.is_cycle_next_action(event):
 		Sounds.play(Sounds.S.walk)
 		action_detector.cycle_next_action()
+
+## process ###########################################################
+
+var max_y = 10000 # should be fine?
+func _process(_delta):
+	if not is_dead and position.y > max_y:
+		die()
+		machine.transit("Dying")
 
 ## physics_process ###########################################################
 
