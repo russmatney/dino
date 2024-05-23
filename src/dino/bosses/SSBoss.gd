@@ -154,6 +154,14 @@ func face_left():
 	facing = Vector2.LEFT
 	anim.flip_h = false
 
+## process ###########################################################
+
+var max_y = 10000 # should be fine?
+func _process(_delta):
+	if not is_dead and position.y > max_y:
+		die()
+		machine.transit("Dead")
+
 ## physics process ####################################################
 
 func _physics_process(_delta):
@@ -172,6 +180,11 @@ func _physics_process(_delta):
 				else:
 					face_left()
 
+## die ####################################################
+
+func die():
+	is_dead = true
+
 ## take_hit ####################################################
 
 func take_hit(opts={}):
@@ -189,7 +202,7 @@ func take_hit(opts={}):
 	Hotel.check_in(self)
 
 	if health <= 0:
-		is_dead = true
+		die()
 
 	if not is_dead and machine.state.name in ["Stunned"]:
 		machine.transit("Warping")

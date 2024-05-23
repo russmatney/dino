@@ -274,7 +274,7 @@ var max_y = 10000 # should be fine?
 func _process(_delta):
 	if not is_dead and position.y > max_y:
 		die()
-		machine.transit("Dying")
+		machine.transit("Dead")
 
 ## physics_process ###########################################################
 
