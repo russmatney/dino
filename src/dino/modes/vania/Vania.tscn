@@ -1,6 +1,82 @@
-[gd_scene load_steps=2 format=3 uid="uid://tfkeuag6o577"]
+[gd_scene load_steps=11 format=3 uid="uid://tfkeuag6o577"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_w5rvh"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="2_ysnxy"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="3_tsuii"]
+[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_dus2l"]
+
+[sub_resource type="Resource" id="Resource_4hsaf"]
+script = ExtResource("2_ysnxy")
+cells = Array[Vector3i]([Vector3i(0, 0, 0)])
+type = 1
+
+[sub_resource type="Resource" id="Resource_10v7o"]
+script = ExtResource("3_tsuii")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[ExtResource("2_ysnxy")]([SubResource("Resource_4hsaf")])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 3
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_msijw"]
+script = ExtResource("3_tsuii")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[ExtResource("2_ysnxy")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_3she3"]
+script = ExtResource("3_tsuii")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[ExtResource("2_ysnxy")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_y4ahk"]
+script = ExtResource("3_tsuii")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[ExtResource("2_ysnxy")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[sub_resource type="Resource" id="Resource_0ffnm"]
+script = ExtResource("4_dus2l")
+name = ""
+input = SubResource("Resource_10v7o")
+rooms = Array[ExtResource("3_tsuii")]([SubResource("Resource_msijw"), SubResource("Resource_3she3"), SubResource("Resource_y4ahk")])
+sub_map_defs = Array[ExtResource("4_dus2l")]([])
 
 [node name="Vania" type="Node2D"]
 script = ExtResource("1_w5rvh")
+map_def = SubResource("Resource_0ffnm")

@@ -12,7 +12,6 @@ class_name MapInput
 @export var entities: Array[DinoEntity]
 @export var enemies: Array[DinoEnemy]
 
-@export var room_shape: RoomShape
 @export var room_shapes: Array[RoomShape]
 
 @export var room_effects: Array[RoomEffect]
@@ -42,8 +41,6 @@ func _init(opts={}):
 		genre_type = opts.get("genre_type")
 	entities.assign(opts.get("entities", []))
 	enemies.assign(opts.get("enemies", []))
-	if opts.get("room_shape"):
-		room_shape = opts.get("room_shape")
 	room_shapes.assign(opts.get("room_shapes", []))
 	if opts.get("room_effects"):
 		room_effects.assign(opts.get("room_effects"))
@@ -61,7 +58,6 @@ func to_pretty():
 		entities=entities,
 		enemies=enemies,
 		tiles=tiles,
-		room_shape=room_shape,
 		room_shapes=room_shapes,
 		room_effects=room_effects,
 		door_mode=door_mode,
@@ -73,6 +69,8 @@ func to_pretty():
 ## merge ######################################################
 
 func merge(b: MapInput):
+	if not b:
+		return self
 
 	# enums as ints are such a PITA
 	var dm = door_mode
@@ -87,7 +85,6 @@ func merge(b: MapInput):
 		genre_type=U._or(b.genre_type, genre_type),
 		entities=U.append_array(entities, b.entities),
 		enemies=U.append_array(enemies, b.enemies),
-		room_shape=U._or(b.room_shape, room_shape),
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tiles=U.distinct(U.append_array(tiles, b.tiles)),
@@ -118,9 +115,7 @@ func set_room_def_shape(def):
 	elif not grids.is_empty():
 		pass
 
-	if room_shape:
-		def.set_local_cells(room_shape.cells)
-	elif room_shapes and not room_shapes.is_empty():
+	if room_shapes and not room_shapes.is_empty():
 		def.set_local_cells(room_shapes.pick_random().cells)
 	else:
 		def.set_local_cells(RoomShape.random_shape().cells)
@@ -220,25 +215,25 @@ static func has_dust(_opts={}):
 static func has_room(opts={}):
 	if opts.get("shape") == null:
 		Log.warn("has_room missing 'shape'!")
-	return MapInput.new({room_shape=RoomShape.new({cells=opts.get("shape")})})
+	return MapInput.new({room_shapes=[RoomShape.new({cells=opts.get("shape")})]})
 
 static func small_room_shape(_opts={}):
-	return MapInput.new({room_shape=RoomShape.small_room()})
+	return MapInput.new({room_shapes=[RoomShape.small_room()]})
 
 static func large_room_shape(_opts={}):
-	return MapInput.new({room_shape=RoomShape.large_rooms().pick_random()})
+	return MapInput.new({room_shapes=[RoomShape.large_rooms().pick_random()]})
 
 static func tall_room_shape(_opts={}):
-	return MapInput.new({room_shape=RoomShape.tall_rooms().pick_random()})
+	return MapInput.new({room_shapes=[RoomShape.tall_rooms().pick_random()]})
 
 static func wide_room_shape(_opts={}):
-	return MapInput.new({room_shape=RoomShape.wide_rooms().pick_random()})
+	return MapInput.new({room_shapes=[RoomShape.wide_rooms().pick_random()]})
 
 static func L_room_shape(_opts={}):
-	return MapInput.new({room_shape=RoomShape.L_rooms().pick_random()})
+	return MapInput.new({room_shapes=[RoomShape.L_rooms().pick_random()]})
 
 static func T_room_shape(_opts={}):
-	return MapInput.new({room_shape=RoomShape.T_rooms().pick_random()})
+	return MapInput.new({room_shapes=[RoomShape.T_rooms().pick_random()]})
 
 ## tilemaps ######################################################33
 

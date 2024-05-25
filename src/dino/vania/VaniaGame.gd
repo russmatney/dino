@@ -18,7 +18,6 @@ var player: Node2D
 var current_room: Node2D
 
 var modules: Array
-
 signal room_loaded
 
 var generator = VaniaGenerator.new()
@@ -109,7 +108,6 @@ func mark_room_quests_complete(room_path=null):
 func _ready():
 	modules.append(VaniaRoomTransitions.new(self))
 
-	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
 	# Dino.player_ready.connect(on_player_ready)
 
@@ -135,22 +133,10 @@ func _ready():
 
 func add_child_to_level(_node, child):
 	if current_room and is_instance_valid(current_room):
+		Log.pr("adding child to current room", child, "current room position: ", current_room.position)
 		current_room.add_child(child)
 	else:
 		add_child(child)
-
-## room loaded #######################################################
-
-func on_room_loaded():
-	# if not is_room_visited():
-	# 	Dino.notif({type="banner", text="%s" % current_room.name, id="room-name"})
-	mark_room_visited()
-
-	# TODO should/could be on vaniaGame directly
-	# would make sense for the multi-room quest refactor
-	var qm = current_room.quest_manager
-	qm.quest_complete.connect(on_room_quest_complete)
-	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
 
 func on_room_quest_complete(_quest):
 	pass
@@ -283,14 +269,18 @@ func load_initial_room():
 		Log.warn("No room_defs returned, did the generator fail?")
 		return
 
-	var rooms = room_defs.filter(func(rd): return rd.entities().any(func(ent): return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
+	# TODO filter/sort by is_start or some such metadata
+	var rooms = room_defs.filter(func(rd):
+		return rd.entities().any(func(ent):
+			return ent.get_entity_id() == DinoEntityIds.PLAYERSPAWNPOINT))
+
 	if rooms.is_empty():
 		Log.warn("No room with player spawn point! Isn't this 'guaranteed' elsewhere?")
 		rooms = room_defs
-	# prefer first room def, but consider opts/mode from mapDef
-	var rpath = rooms[0].room_path
-	_load_room(rpath, {setup=func(room):
-		room.set_room_def(get_room_def(rpath))})
+
+	var def = rooms[0]
+
+	_load_room(def)
 
 ## start_vania_game
 
@@ -472,27 +462,32 @@ func remove_room(count=1):
 ## load room #######################################################
 
 # overwriting metsys's Game.load_room to support 'setup' and setting a default layer
-func _load_room(path: String, opts={}):
-	if not path.is_absolute_path():
-		path = MetSys.get_full_room_path(path)
+func _load_room(def: VaniaRoomDef, opts={}):
+	var next_room = get_vania_room(def)
 
-	if current_room:
-		current_room.queue_free()
-		await current_room.tree_exited
-		current_room = null
+	if not next_room:
+		next_room = load(def.room_path).instantiate()
+		next_room.set_room_def(def)
+		add_child(next_room)
 
-	current_room = load(path).instantiate()
-	if opts.get("setup"):
-		opts.get("setup").call(current_room)
-	add_child(current_room)
+		if MetSys.get_current_room_instance() != null:
+			MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
+		else:
+			Log.warn("No current room_instance, defaulting to layer 0")
+			MetSys.current_layer = 0
 
-	if MetSys.get_current_room_instance() != null:
-		MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
-	else:
-		Log.warn("No current room_instance, defaulting to layer 0")
-		MetSys.current_layer = 0
+		# not quite right, maybe gets eaten by run/quest manager?
+		mark_room_visited(def.room_path)
 
-	room_loaded.emit()
+		# make sure metsys knows this is the 'current' room
+		MetSys.current_room = next_room.room_instance
+		add_vania_room(next_room)
+		room_loaded.emit()
+
+	if not next_room:
+		Log.warn("no next_room? wut?", next_room)
+
+	current_room = next_room
 
 func reload_current_room():
 	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)
@@ -523,7 +518,33 @@ func _set_player_position():
 	if p:
 		MetSys.set_player_position(p.position)
 
-## room defs #######################################################
+## rooms #######################################################
+
+var loaded_rooms: Dictionary = {}
+
+func get_vania_rooms():
+	return loaded_rooms.values()
+
+func get_vania_room(def_or_path) -> VaniaRoom:
+	var path: String
+	if def_or_path is String:
+		path = def_or_path
+	elif def_or_path is VaniaRoomDef:
+		path = def_or_path.room_path
+	else:
+		Log.warn("Unexpected get_vania_room input", def_or_path)
+
+	return loaded_rooms.get(path)
+
+func add_vania_room(room):
+	var path = room.room_def.room_path
+	loaded_rooms[path] = room
+
+func erase_vania_room(room):
+	var path = room.room_def.room_path
+	loaded_rooms.erase(path)
+
+## room_defs #######################################################
 
 func get_room_def(path):
 	for rd in room_defs:
@@ -533,11 +554,6 @@ func get_room_def(path):
 func current_room_def():
 	var path = MetSys.get_current_room_name()
 	return get_room_def(path)
-
-# i wonder if these ever get out sync
-func current_room_def_alt():
-	if current_room:
-		return current_room.room_def
 
 ## player reactions ##################################################3
 

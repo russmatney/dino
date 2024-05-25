@@ -33,6 +33,8 @@ func mix_terrains(opts={}):
 
 	var chunk_count = U.rand_of([5,6,7,8]) * cell_count
 	var tile_coords = get_used_cells(0)
+	if tile_coords.is_empty():
+		return
 
 	var grids = chunk_defs.grids_with_flag("tile_chunk")
 
