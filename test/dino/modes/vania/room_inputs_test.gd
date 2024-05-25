@@ -10,7 +10,6 @@ func test_inputs_empty_inputs_behavior():
 	var inp = MapInput.new()
 	assert_array(inp.tiles).is_empty()
 	assert_array(inp.entities).is_empty()
-	assert_array(inp.room_shape).is_null()
 	assert_array(inp.room_shapes).is_empty()
 
 	var def = VaniaRoomDef.new()
@@ -130,38 +129,6 @@ func test_inputs_room_shapes_combine_before_selection():
 	inp.update_def(def)
 	assert_array(inp.room_shapes.map(func(s): return s.cells)).contains([def.local_cells])
 
-func test_inputs_room_shape_always_overwrites_room_shapes():
-	# if `room_shape` is set, it is used instead of random from 'room_shapes'
-	var some_shapes = [[Vector3i(0, 0, 0), Vector3i(1, 0, 0)], [Vector3i(0, 0, 0), Vector3i(0, 1, 0)],]
-	var some_other_shape = [Vector3i(0, 0, 0)]
-	var inp1 = MapInput.new({room_shapes=some_shapes.map(func(cells): return RoomShape.new({cells=cells}))})
-	var inp2 = MapInput.new({room_shape=RoomShape.new({cells=some_other_shape})})
-	var inp = inp1.merge(inp2)
-
-	assert_array(inp.room_shapes).is_not_empty()
-	assert_array(inp.room_shapes.map(func(s): return s.cells)).contains(some_shapes)
-	assert_int(len(inp.room_shapes)).is_equal(2)
-	assert_array(inp.room_shape.cells).is_equal(some_other_shape)
-
-	var def = VaniaRoomDef.new()
-	inp.update_def(def)
-	assert_array(def.local_cells).is_equal(some_other_shape)
-
-	# merging in the other direction - the existing 'room_shape' is still used even tho 'room_shapes' are added
-	inp = inp2.merge(inp1)
-	def = VaniaRoomDef.new()
-	inp.update_def(def)
-	assert_array(def.local_cells).is_equal(some_other_shape)
-
-	# now merging with a set 'room_shape' - the passed input overwrites 'room_shape'
-	var some_third_shape = [Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0)]
-	inp1.room_shape = RoomShape.new({cells=some_third_shape})
-	inp = inp2.merge(inp1)
-	def = VaniaRoomDef.new()
-	inp.update_def(def)
-	assert_array(def.local_cells).is_equal(some_third_shape)
-
-
 ## higher level api ######################################################
 
 func test_room_def_inputs_spaceship_sets_tilemap():
@@ -192,9 +159,8 @@ func test_room_def_inputs_player_room_sets_entities_and_shape():
 	assert_array(def.tiles()).contains(inp.tiles)
 	assert_array(def.tiles()).is_not_empty()
 
-	assert_that(inp.room_shape).is_not_null()
 	assert_array(def.local_cells).is_not_empty()
-	assert_array(def.local_cells).is_equal(inp.room_shape.cells)
+	assert_array(def.local_cells).is_equal(inp.room_shapes[0].cells)
 
 	assert_array(inp.entities).is_not_empty()
 	assert_array(def.entities()).is_not_empty()
