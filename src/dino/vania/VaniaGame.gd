@@ -1,4 +1,4 @@
-extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
+extends Node
 class_name VaniaGame
 
 ## static #######################################################
@@ -14,9 +14,14 @@ static func create_game_node(def: MapDef, _opts={}):
 
 ## vars #######################################################
 
+var player: Node2D
+var map: Node2D
+
+var modules: Array
+
+signal room_loaded
+
 var generator = VaniaGenerator.new()
-var VaniaRoomTransitions = "res://src/dino/vania/VaniaRoomTransitions.gd"
-var PassageAutomapper = "res://addons/MetroidvaniaSystem/Template/Scripts/Modules/PassageAutomapper.gd"
 
 @onready var pcam: PhantomCamera2D = $PhantomCamera2D
 @onready var playground: Node2D = $%LoadingPlayground
@@ -102,8 +107,7 @@ func mark_room_quests_complete(room_path=null):
 ## ready #######################################################
 
 func _ready():
-	add_custom_module.call_deferred(VaniaRoomTransitions)
-	add_custom_module.call_deferred(PassageAutomapper)
+	modules.append(VaniaRoomTransitions.new(self))
 
 	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
@@ -142,6 +146,8 @@ func on_room_loaded():
 	# 	Dino.notif({type="banner", text="%s" % map.name, id="room-name"})
 	mark_room_visited()
 
+	# TODO should/could be on vaniaGame directly
+	# would make sense for the multi-room quest refactor
 	var qm = map.quest_manager
 	qm.quest_complete.connect(on_room_quest_complete)
 	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
@@ -532,11 +538,6 @@ func current_room_def():
 func current_room_def_alt():
 	if map:
 		return map.room_def
-
-## metsys misc #######################################################
-
-func add_custom_module(module_path: String):
-	modules.append(load(module_path).new(self))
 
 ## player reactions ##################################################3
 

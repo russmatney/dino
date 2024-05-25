@@ -1,9 +1,19 @@
-extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysModule.gd"
+extends RefCounted
+class_name VaniaRoomTransitions
 
-func _initialize():
-	MetSys.room_changed.connect(_on_room_changed, CONNECT_DEFERRED)
+## vars ##################################
 
 var PLAYER_POS_OFFSET = 40
+var game: VaniaGame
+
+## init ##################################
+
+func _init(p_game: VaniaGame) -> void:
+	game = p_game
+
+	MetSys.room_changed.connect(_on_room_changed, CONNECT_DEFERRED)
+
+## on_room_changed ##################################
 
 func _on_room_changed(target_room: String, ignore_same_room=true):
 	if ignore_same_room and target_room == MetSys.get_current_room_name():
@@ -18,7 +28,7 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 	if prev_room_def == null:
 		Log.warn("No prev room def in room transition, aborting", MetSys.get_current_room_name())
 
-	var prev_room_instance := MetSys.get_current_room_instance()
+	var prev_room_instance = MetSys.get_current_room_instance()
 	if prev_room_instance:
 		prev_room_instance.get_parent().remove_child(prev_room_instance)
 
@@ -58,4 +68,5 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 	else:
 		og_player.position -= offset
 
+	# doesn't this happen automatically? (b/c it's removed from the tree)
 	prev_room_instance.queue_free()
