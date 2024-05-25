@@ -67,6 +67,3 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 			})
 	else:
 		og_player.position -= offset
-
-	# doesn't this happen automatically? (b/c it's removed from the tree)
-	prev_room_instance.queue_free()

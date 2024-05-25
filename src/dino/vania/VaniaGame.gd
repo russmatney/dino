@@ -15,7 +15,7 @@ static func create_game_node(def: MapDef, _opts={}):
 ## vars #######################################################
 
 var player: Node2D
-var map: Node2D
+var current_room: Node2D
 
 var modules: Array
 
@@ -134,8 +134,8 @@ func _ready():
 ## add_child_to_level ###################################################3
 
 func add_child_to_level(_node, child):
-	if map and is_instance_valid(map):
-		map.add_child(child)
+	if current_room and is_instance_valid(current_room):
+		current_room.add_child(child)
 	else:
 		add_child(child)
 
@@ -143,12 +143,12 @@ func add_child_to_level(_node, child):
 
 func on_room_loaded():
 	# if not is_room_visited():
-	# 	Dino.notif({type="banner", text="%s" % map.name, id="room-name"})
+	# 	Dino.notif({type="banner", text="%s" % current_room.name, id="room-name"})
 	mark_room_visited()
 
 	# TODO should/could be on vaniaGame directly
 	# would make sense for the multi-room quest refactor
-	var qm = map.quest_manager
+	var qm = current_room.quest_manager
 	qm.quest_complete.connect(on_room_quest_complete)
 	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
 
@@ -183,7 +183,7 @@ func hide_overlays():
 	screen_blur.reset()
 
 func toggle_pause_game_nodes(should_pause=null):
-	var nodes = [map]
+	var nodes = [current_room]
 	var p = Dino.current_player_node()
 	if p:
 		nodes.append(p)
@@ -257,22 +257,22 @@ func clear_playground():
 ## level_start overlay
 
 func setup_level_start_overlay():
-	if not map:
+	if not current_room:
 		return
-	var n = map.room_def.map_def.name
+	var n = current_room.room_def.map_def.name
 	if not n:
-		n = map.name
+		n = current_room.name
 	level_start_header.text = "[center]%s[/center]" % n
 	level_start_subhead.text = "[center]%s[/center]" % ""
 
 ## level_complete overlay
 
 func setup_level_complete_overlay():
-	if not map:
+	if not current_room:
 		return
-	var n = map.room_def.map_def.name
+	var n = current_room.room_def.map_def.name
 	if not n:
-		n = map.name
+		n = current_room.name
 	level_complete_header.text = "[center]%s[/center]" % n
 	level_complete_subhead.text = "[center]%s[/center]" % "COMPLETE!"
 
@@ -428,8 +428,8 @@ func regenerate_other_rooms():
 			init_room_state(rd.room_path)
 
 	# redo the current room's doors
-	if map and map.is_node_ready():
-		map.setup_walls_and_doors()
+	if current_room and current_room.is_node_ready():
+		current_room.setup_walls_and_doors()
 
 func add_new_room(count=1):
 	# TODO these inputs reading from vania-menu configged constraints
@@ -444,8 +444,8 @@ func add_new_room(count=1):
 			init_room_state(rd.room_path)
 
 	# redo the current room's doors
-	if map and map.is_node_ready():
-		map.setup_walls_and_doors()
+	if current_room and current_room.is_node_ready():
+		current_room.setup_walls_and_doors()
 
 func remove_room(count=1):
 	var other_room_defs: Array[VaniaRoomDef] = []
@@ -466,8 +466,8 @@ func remove_room(count=1):
 	Log.info(len(room_defs_to_remove), " rooms removed")
 
 	# redo the current room's doors
-	if map and map.is_node_ready():
-		map.setup_walls_and_doors()
+	if current_room and current_room.is_node_ready():
+		current_room.setup_walls_and_doors()
 
 ## load room #######################################################
 
@@ -476,15 +476,15 @@ func _load_room(path: String, opts={}):
 	if not path.is_absolute_path():
 		path = MetSys.get_full_room_path(path)
 
-	if map:
-		map.queue_free()
-		await map.tree_exited
-		map = null
+	if current_room:
+		current_room.queue_free()
+		await current_room.tree_exited
+		current_room = null
 
-	map = load(path).instantiate()
+	current_room = load(path).instantiate()
 	if opts.get("setup"):
-		opts.get("setup").call(map)
-	add_child(map)
+		opts.get("setup").call(current_room)
+	add_child(current_room)
 
 	if MetSys.get_current_room_instance() != null:
 		MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
@@ -536,8 +536,8 @@ func current_room_def():
 
 # i wonder if these ever get out sync
 func current_room_def_alt():
-	if map:
-		return map.room_def
+	if current_room:
+		return current_room.room_def
 
 ## player reactions ##################################################3
 
