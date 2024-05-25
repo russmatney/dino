@@ -99,8 +99,8 @@ func show_menu(opts):
 	screenBlur.fade_in({duration=anim_duration})
 
 	set_entities(opts.get("entities", entities), opts.get("on_select"))
-	set_focus()
 	panel.set_visible(true)
+	set_focus.call_deferred()
 
 	return selected
 

@@ -133,14 +133,9 @@ func _ready():
 
 func add_child_to_level(_node, child):
 	if current_room and is_instance_valid(current_room):
-		Log.pr("adding child to current room", child, "current room position: ", current_room.position)
 		current_room.add_child(child)
 	else:
 		add_child(child)
-
-func on_room_quest_complete(_quest):
-	pass
-	# Log.pr("quest complete", quest)
 
 func on_room_quests_complete():
 	mark_room_quests_complete()
@@ -280,7 +275,7 @@ func load_initial_room():
 
 	var def = rooms[0]
 
-	_load_room(def)
+	load_room(def)
 
 ## start_vania_game
 
@@ -461,11 +456,12 @@ func remove_room(count=1):
 
 ## load room #######################################################
 
-# overwriting metsys's Game.load_room to support 'setup' and setting a default layer
-func _load_room(def: VaniaRoomDef, opts={}):
+func load_room(def: VaniaRoomDef):
+	# look for an existing room
 	var next_room = get_vania_room(def)
 
 	if not next_room:
+		# load a new room
 		next_room = load(def.room_path).instantiate()
 		next_room.set_room_def(def)
 		add_child(next_room)
@@ -476,18 +472,20 @@ func _load_room(def: VaniaRoomDef, opts={}):
 			Log.warn("No current room_instance, defaulting to layer 0")
 			MetSys.current_layer = 0
 
-		# not quite right, maybe gets eaten by run/quest manager?
-		mark_room_visited(def.room_path)
+		# store node for re-use if we re-enter
+		store_vania_room(next_room)
 
-		# make sure metsys knows this is the 'current' room
-		MetSys.current_room = next_room.room_instance
-		add_vania_room(next_room)
 		room_loaded.emit()
 
-	if not next_room:
-		Log.warn("no next_room? wut?", next_room)
+	# make sure metsys knows this is the 'current' room!!
+	MetSys.current_room = next_room.room_instance
 
+	mark_room_visited(def.room_path)
 	current_room = next_room
+
+	# TODO refactor into a single manager pre vania-game
+	var qm = current_room.quest_manager
+	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
 
 func reload_current_room():
 	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)
@@ -536,7 +534,7 @@ func get_vania_room(def_or_path) -> VaniaRoom:
 
 	return loaded_rooms.get(path)
 
-func add_vania_room(room):
+func store_vania_room(room):
 	var path = room.room_def.room_path
 	loaded_rooms[path] = room
 

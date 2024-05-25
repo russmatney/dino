@@ -3,7 +3,7 @@ class_name VaniaRoomTransitions
 
 ## vars ##################################
 
-var PLAYER_POS_OFFSET = 40
+var PLAYER_POS_OFFSET = 0
 var game: VaniaGame
 
 ## init ##################################
@@ -32,11 +32,11 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 
 	var prev_room_instance = MetSys.get_current_room_instance()
 
-	game._load_room(new_room_def)
+	game.load_room(new_room_def)
 
-	Log.info("%s rooms now loaded", len(game.get_vania_rooms()))
 	# TODO at some n rooms, drop far-away rooms
 	# maybe check for rooms that are n-cells away?
+	Log.info("%s rooms now loaded", len(game.get_vania_rooms()))
 
 	var og_player = Dino.current_player_node()
 	var og_p_position = og_player.position
@@ -45,15 +45,14 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 	var offset = Vector2()
 	if prev_room_instance:
 		offset = MetSys.get_current_room_instance().get_room_position_offset(prev_room_instance)
-		Log.pr("offset from prev!", offset)
 
-		# reposition all rooms according to the offset
 		for room in game.get_vania_rooms():
 			if room.room_def.room_path == target_room:
-				continue
-			Log.pr("repositioning room", room.name, room.position)
-			room.position -= offset
-			Log.pr("repositioned room", room.name, room.position)
+				# the returned-to room needs a position reset
+				room.position = Vector2()
+			else:
+				# reposition other rooms according to the offset
+				room.position -= offset
 
 		# maybe some nice way to handle this
 		if abs(og_p_velocity.x) > abs(og_p_velocity.y):
