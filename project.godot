@@ -59,7 +59,17 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 [file_customization]
 
 folder_colors={
-"res://src/dino/modes/classic/mapdefs/": "red"
+"res://addons/core/": "purple",
+"res://src/dino/": "purple",
+"res://src/dino/bosses/": "pink",
+"res://src/dino/enemies/": "pink",
+"res://src/dino/entities/": "pink",
+"res://src/dino/modes/": "orange",
+"res://src/dino/modes/classic/mapdefs/": "red",
+"res://src/dino/npcs/": "pink",
+"res://src/dino/pickups/": "pink",
+"res://src/dino/players/": "pink",
+"res://src/dino/weapons/": "pink"
 }
 
 [gdunit4]
