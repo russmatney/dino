@@ -357,6 +357,14 @@ static func max_of(arr, to_val, default=null):
 		return default
 	return m
 
+static func flatten(arr):
+	return arr.reduce(func(acc, xs):
+		acc.append_array(xs)
+		return acc)
+
+static func flat_map(arr, to_xs):
+	return U.flatten(arr.map(to_xs))
+
 ############################################################
 # Facing
 
