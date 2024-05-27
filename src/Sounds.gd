@@ -336,9 +336,9 @@ func _ready():
 		SoundManager.set_default_ambient_sound_bus("Ambient Sound")
 		# deferring to give Music._ready a chance to set its buses
 		# dodging a SoundManager warning about using the Master bus
-		SoundManager.set_sound_volume.call_deferred(0.5)
-		SoundManager.set_ui_sound_volume.call_deferred(0.5)
-		SoundManager.set_ambient_sound_volume.call_deferred(0.5)
+		SoundManager.set_sound_volume.call_deferred(0.3)
+		SoundManager.set_ui_sound_volume.call_deferred(0.3)
+		SoundManager.set_ambient_sound_volume.call_deferred(0.3)
 
 	super._ready()
 
