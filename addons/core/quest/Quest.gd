@@ -1,16 +1,35 @@
 extends Node
 class_name Quest
 
-## has_required ###########################################
+## ents and setup ###########################################
 
-func has_required_entities(entities: Array[Node]):
+# for more involved quests, these need to be overwritten
+
+func has_required_nodes(nodes: Array[Node]):
 	if xs_group == "":
-		Log.warn("No xs_group, fallback has_required_entities pred returning false")
+		Log.warn("No xs_group, fallback has_required_nodes pred returning false")
 		return false
-	for e in entities:
-		if e.is_in_group(xs_group):
+	for n in nodes:
+		if n.is_in_group(xs_group):
 			return true
 	return false
+
+func has_required_entities(ents):
+	for e in ents:
+		var e_id = e.get_entity_id()
+		if e_id in entity_ids:
+			# any ents vs all ents required?
+			return true
+	return false
+
+func setup_with_entities(ents):
+	var relevant_ents = []
+	for e in ents:
+		var e_id = e.get_entity_id()
+		if e_id in entity_ids:
+			relevant_ents.append(e)
+
+	manual_total = len(relevant_ents)
 
 ## vars ##########################################################
 
@@ -18,6 +37,7 @@ signal quest_complete
 signal quest_failed
 signal count_remaining_update
 signal count_total_update
+
 
 var total = 0
 var label
@@ -29,18 +49,20 @@ var get_xs = func():
 var x_update_signal = func(x): return null
 var is_remaining = func(x): return true
 
-func to_printable():
+var entity_ids = []
+
+# override the observed/auto-calced 'total'
+var manual_total
+func set_manual_total(n):
+	manual_total = n
+
+func to_pretty():
 	return {label=label, total=total, xs_group=xs_group}
 
 ## enter tree ##########################################################
 
 func _enter_tree():
 	add_to_group("quests", true)
-
-	if not has_method("setup"):
-		Log.warn("Quest missing expected setup() method", self)
-	if not has_method("update_quest"):
-		Log.warn("Quest missing expected update_quest() method", self)
 
 	if not Engine.is_editor_hint():
 		get_tree().node_added.connect(on_node_added)
@@ -65,7 +87,11 @@ func _ready():
 # rename 'reset data?'
 func setup():
 	var xs = get_xs.call()
-	total = len(xs)
+	if manual_total != null:
+		total = manual_total
+	else:
+		total = len(xs)
+
 	for x in xs:
 		# does this get called/fired multiple times?
 		U._connect(x_update_signal.call(x), update_quest)
@@ -75,7 +101,8 @@ func setup():
 ## update ##############################################################################
 
 # support an optional arg so various update signal impls can land here
-func update_quest(_x=null):
+var xs_updated = []
+func update_quest(x=null):
 	# side-notif?
 	# Log.info("quest updated!", _x, self)
 	count_total_update.emit(total)
@@ -83,10 +110,14 @@ func update_quest(_x=null):
 	var remaining = len(get_xs.call().filter(is_remaining))
 	count_remaining_update.emit(remaining)
 
-	if has_method("on_quest_update"):
-		self["on_quest_update"].call({total=total, remaining=remaining})
-
-	if remaining == 0 and total > 0:
+	if manual_total != null:
+		# perhaps this is a better quest update method
+		# i think we can count on uniqueness here, tho these xs might be dropped/freed :/
+		if x and not x in xs_updated:
+			xs_updated.append(x)
+		if len(xs_updated) == manual_total:
+			quest_complete.emit()
+	elif remaining == 0 and total > 0:
 		quest_complete.emit()
 		Dino.notif({
 			type="side",

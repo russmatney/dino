@@ -25,7 +25,9 @@ static func to_defs(m_def: MapDef) -> Array[VaniaRoomDef]:
 	m_def.input = VaniaRoomDef.default_input().merge(m_def.input)
 
 	for inp in m_def.rooms:
-		# TODO conditional/flag to skip/randomize this merging
+		if inp == null:
+			inp = MapInput.new()
+		# TODO conditional/flag to skip this merging
 		# per-room overwrites map_def.input (b overwites a)
 		inp = m_def.input.merge(inp)
 
@@ -37,22 +39,17 @@ static func to_defs(m_def: MapDef) -> Array[VaniaRoomDef]:
 
 ## vars #####################################################3
 
+# level gen stuff
 var base_scene_path = "res://src/dino/vania/maps/VaniaRoom.tscn"
 var room_path: String
+var tile_size = 16
 
-# met sys stuff
 var local_cells: Array #[Vector3i]
 var map_cells: Array #[Vector3i]
 var min_map_cell := Vector2i.MAX
 var max_map_cell := Vector2i.MIN
-
-var tile_size = 16
-
-# useful for incrementing filenames per room - should be unique per map-gen
+# used to incrementing filenames per room - should be unique per map-gen
 var index: int = 0
-
-@export var input: MapInput
-var map_def: MapDef
 
 enum DOOR_MODE {
 	UNSET,
@@ -62,15 +59,18 @@ enum DOOR_MODE {
 	MINIMAL_VERTICAL,
 	}
 
-func to_printable():
-	return {
-		input=input,
-		room_path=room_path.get_file(),
-		local_cells=local_cells,
-		map_cells=map_cells,
-		}
+# data
+@export var input: MapInput
+var map_def: MapDef
 
-## data #####################################################3
+# game state
+var visited = false
+func reset_visited():
+	visited = false
+func set_visited():
+	visited = true
+
+## data getters #####################################################3
 
 func genre_type() -> DinoData.GenreType:
 	# if not input:
@@ -130,8 +130,20 @@ func get_bg_color() -> Color:
 func get_border_color() -> Color:
 	return Color.WHITE
 
-## input #####################################################3
+## log.gd #####################################################3
 
+func to_pretty():
+	return {
+		input=input,
+		room_path=room_path.get_file(),
+		local_cells=local_cells,
+		map_cells=map_cells,
+		}
+
+
+## rebuild #####################################################3
+
+# rebuild the state from the input
 func rebuild():
 	MapInput.apply(input, self)
 

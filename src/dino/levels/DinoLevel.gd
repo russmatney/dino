@@ -153,7 +153,7 @@ func _ready():
 		hud = hud_scene.instantiate()
 		add_child.call_deferred(hud)
 
-	U._connect(quest_manager.all_quests_complete, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
+	U._connect(quest_manager.all_quests_completed, on_quests_complete, ConnectFlags.CONNECT_ONE_SHOT)
 	U._connect(quest_manager.quest_failed, on_quest_failed, ConnectFlags.CONNECT_ONE_SHOT)
 
 	if Dino.is_debug_mode():

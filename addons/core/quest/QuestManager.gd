@@ -16,10 +16,7 @@ static var quests = {
 	"QuestDeliverProduceTomato": {new=func(): return QuestDeliverProduce.new({type="onion"})},
 	}
 
-# TODO this is messy, plz refactor
-# maybe quest_manager has an exported lists of quests to check?
-# defaulting to _all_
-static func quests_for_entities(entities: Array[Node]):
+static func quest_insts():
 	var qs = []
 	for q_class in quests:
 		var opts = quests.get(q_class, {})
@@ -28,20 +25,37 @@ static func quests_for_entities(entities: Array[Node]):
 			q = opts.get("new").call()
 		else:
 			q = q_class.new()
+		qs.append(q)
+	return qs
 
-		if q.has_required_entities(entities):
+# TODO this is messy, plz refactor
+# maybe quest_manager has an exported lists of quests to check?
+# defaulting to _all_
+static func quests_for_nodes(nodes: Array[Node]):
+	var qs = []
+	for q in quest_insts():
+		if q.has_required_nodes(nodes):
 			# TODO search/dedupe existing quests?
 			qs.append(q)
 		else:
 			q.queue_free()
 	return qs
 
+static func quests_for_entities(entities):
+	var qs = []
+	for q in quest_insts():
+		if q.has_required_entities(entities):
+			qs.append(q)
+	return qs
+
 ## vars #####################################################
 
-signal all_quests_complete
+signal all_quests_completed
 signal quest_failed
 signal quest_update
 signal quest_complete(quest)
+
+@export var manual_mode = false
 
 var active_quests = {}
 
@@ -51,29 +65,44 @@ func _enter_tree():
 	get_tree().node_added.connect(on_node_added)
 	get_tree().node_removed.connect(on_node_removed)
 
+func on_node_added(node: Node):
+	if manual_mode:
+		return
+	if len(node.get_groups()) > 0:
+		# impl rn now is stupidly expensive
+		add_quests_for_nodes([node])
+
+func on_node_removed(node: Node):
+	if manual_mode:
+		return
+	if node is Quest:
+		# is node ready here?
+		# TODO sometimes quests unregister w/ opts?
+		unregister(node)
+
 func add_quests_for_nodes(nodes: Array[Node]):
-	var qs = QuestManager.quests_for_entities(nodes)
+	var qs = QuestManager.quests_for_nodes(nodes)
 	for q in qs:
 		var existing = get_quest(q)
 		if not existing:
 			add_child(q)
 			register_quest(q)
 
-func on_node_added(node: Node):
-	if len(node.get_groups()) > 0:
-		# impl rn now is stupidly expensive
-		add_quests_for_nodes([node])
-
-func on_node_removed(node: Node):
-	if node is Quest:
-		# is node ready here?
-		# TODO sometimes quests unregister w/ opts?
-		unregister(node)
+func add_quests_for_entities(ents):
+	var qs = QuestManager.quests_for_entities(ents)
+	for q in qs:
+		q.setup_with_entities(ents)
+		var existing = get_quest(q)
+		if not existing:
+			add_child(q)
+			register_quest(q)
 
 ## ready #####################################################
 
 func _ready():
-	# check for quests based on existing entities (added before the manager)
+	if manual_mode:
+		return
+	# check for quests based on existing nodes (added before the manager)
 	var ents = U.get_all_children(get_parent()).filter(func(ent): return len(ent.get_groups()) > 0)
 	var _ents: Array[Node] = []
 	_ents.assign(ents)
@@ -117,7 +146,6 @@ func register_quest(node, opts={}):
 	var quest = QuestData.new()
 	quest.label = node.label
 	quest.node = node
-	quest.optional = opts.get("optional", false)
 	quest.check_not_failed = opts.get("check_not_failed", false)
 	active_quests[label] = quest
 
@@ -131,7 +159,7 @@ func unregister(node, opts={}):
 
 ## all complete? #####################################################
 
-func check_all_complete():
+func all_quests_complete() -> bool:
 	var incomplete = []
 	var check_not_failed = []
 	for q in active_quests.values():
@@ -141,17 +169,22 @@ func check_all_complete():
 			else:
 				incomplete.append(q)
 				break
-	if incomplete:
-		return
+
+	if not incomplete.is_empty():
+		return false
 
 	if check_not_failed:
 		for q in check_not_failed:
 			if q.failed:
-				return
+				return false
 
-	# all complete or not failed!
-	Log.info("All quests complete!")
-	all_quests_complete.emit()
+	return true
+
+func check_all_complete():
+	if all_quests_complete():
+		# all complete and/or not-failed!
+		Log.info("All quests complete!")
+		all_quests_completed.emit()
 
 ## signal updates #####################################################
 

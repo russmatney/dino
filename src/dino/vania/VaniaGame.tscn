@@ -1,12 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
-[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_352ld"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
-[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_b4kss"]
+[ext_resource type="Resource" uid="uid://dsjsh2x8rma6q" path="res://src/dino/modes/classic/mapdefs/BlobTeam.tres" id="2_vu4sj"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
-[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="7_djxep"]
 [ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://src/dino/menus/controls/ActionInputIcon.tscn" id="8_g3klb"]
 [ext_resource type="Texture2D" uid="uid://db11pg0l5l562" path="res://assets/art/ui/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_x.png" id="10_8vghj"]
 [ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="11_1hsjh"]
@@ -18,33 +16,9 @@
 [ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://addons/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
 [ext_resource type="PackedScene" uid="uid://cg0nqfx0pc4r6" path="res://src/dino/entities/bushes/Bush1.tscn" id="15_1p30g"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="15_7bsuh"]
+[ext_resource type="Script" path="res://addons/core/quest/QuestManager.gd" id="15_g6u8y"]
 [ext_resource type="PackedScene" uid="uid://cvbbaml4gfs0v" path="res://src/dino/entities/bushes/Bush2.tscn" id="16_igr1p"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
-
-[sub_resource type="Resource" id="Resource_jbopx"]
-script = ExtResource("2_b4kss")
-_id = "121"
-
-[sub_resource type="Resource" id="Resource_ip086"]
-script = ExtResource("2_352ld")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[ExtResource("2_b4kss")]([SubResource("Resource_jbopx")])
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_f6k3q"]
-script = ExtResource("7_djxep")
-name = "something"
-rooms = Array[ExtResource("2_352ld")]([SubResource("Resource_ip086")])
-sub_map_defs = Array[ExtResource("7_djxep")]([])
 
 [sub_resource type="Resource" id="Resource_fx1bk"]
 script = ExtResource("12_d1x2y")
@@ -60,7 +34,7 @@ shader_parameter/grayscale = 0.0
 
 [node name="VaniaGame" type="Node2D" groups=["vania_game"]]
 script = ExtResource("1_rrc8s")
-map_def = SubResource("Resource_f6k3q")
+map_def = ExtResource("2_vu4sj")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
@@ -70,6 +44,11 @@ editor_draw_limits = true
 script = ExtResource("2_ae8tp")
 
 [node name="DinoHUD" parent="." instance=ExtResource("5_r75pq")]
+
+[node name="QuestManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("15_g6u8y")
+manual_mode = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

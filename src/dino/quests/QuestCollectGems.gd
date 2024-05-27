@@ -6,3 +6,4 @@ func _init():
 	xs_group = "gems"
 	x_update_signal = func(x): return x.tree_exited
 	is_remaining = func(_x): return true
+	entity_ids = [DinoEntityIds.GEM]

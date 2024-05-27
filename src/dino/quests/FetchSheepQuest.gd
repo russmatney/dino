@@ -1,17 +1,17 @@
 extends Quest
 class_name FetchSheepQuest
 
-func has_required_entities(entities: Array[Node]):
-	var has_sheep
-	var has_pen
-	for e in entities:
-		if e.is_in_group("sheep"):
+var has_sheep = false
+var has_pen = false
+
+func has_required_nodes(nodes: Array[Node]):
+	for n in nodes:
+		if n.is_in_group("sheep"):
 			has_sheep = true
 			break
-		if e.is_in_group("pen"):
+		if n.is_in_group("pen"):
 			has_pen = true
 			break
-	# NOTE or here b/c rn we don't get all the ents at once
 	return has_sheep or has_pen
 
 ## vars ##########################################################

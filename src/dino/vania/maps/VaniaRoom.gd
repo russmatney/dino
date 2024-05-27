@@ -15,7 +15,6 @@ var tilemap: DinoTileMap
 var bg_tilemap: DinoTileMap
 var bg_color_rect: ColorRect
 var nav_region: NavigationRegion2D
-var quest_manager: QuestManager
 
 @export var is_debug = false
 @export var debug_room_def: VaniaRoomDef
@@ -84,7 +83,6 @@ func ensure_children():
 	U.ensure_owned_child(self, "bg_tilemap", "BackgroundTileMap", DinoTileMap)
 	tilemap.add_to_group(NAV_SOURCE_GROUP, true)
 	U.ensure_owned_child(self, "nav_region", "NavigationRegion2D", NavigationRegion2D)
-	U.ensure_owned_child(self, "quest_manager", "QuestManager", QuestManager)
 	U.ensure_owned_child(self, "bg_color_rect", "BGColorRect", ColorRect)
 
 ## setup tilemaps ##############################################################
@@ -391,6 +389,7 @@ func add_entity(ent):
 		# place entity at random start cord
 		var pos = tilemap.map_to_local(e_coord + start_coord)
 		var node = ent.get_scene().instantiate()
+		# TODO this is more likely a spawn point referencing an entity
 
 		# ensure a drop
 		if "drops" in node.get_property_list().map(func(p): return p.name):

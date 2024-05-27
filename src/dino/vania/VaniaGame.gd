@@ -43,65 +43,30 @@ var ready_for_next: bool = false
 @onready var level_complete_action: Control = $%LevelCompleteAction
 @onready var level_complete_action_icon: ActionInputIcon = $%LevelCompleteActionIcon
 
+@onready var quest_manager: QuestManager = $%QuestManager
+
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
 
 var generating: Thread
 
-signal finished_initial_room_gen
+signal room_gen_complete
 signal level_complete
 
 ## room_states #################################################
 
-var room_states = {}
-var initial_room_state = {visited=false, quests_complete=false}
+func reset_room_states(opts={}):
+	for rd in room_defs:
+		if (opts.get("keep_current", false) and
+			rd.room_path == MetSys.get_current_room_name()):
+				continue
+		rd.reset_visited()
 
-func clear_room_states(opts={}):
-	if opts.get("keep_current", false):
-		room_states = {MetSys.get_current_room_name(): room_states[MetSys.get_current_room_name()]}
-	else:
-		room_states = {}
+func mark_room_visited(rd: VaniaRoomDef):
+	rd.set_visited()
 
-func init_room_state(room_path):
-	room_states[room_path] = initial_room_state.duplicate()
-
-func existing_room_state(room_path):
-	return room_path in room_states
-
-func is_room_visited(room_path=null):
-	if room_path == null:
-		room_path = MetSys.get_current_room_name()
-	if room_path not in room_states:
-		Log.warn("Current room_path not in room_states?!?")
-		return
-	return room_states[room_path].visited
-
-func mark_room_visited(room_path=null):
-	if room_path == null:
-		room_path = MetSys.get_current_room_name()
-	if room_path not in room_states:
-		Log.warn("Current room_path not in room_states?!?")
-		return
-	room_states[room_path].visited = true
-
-func are_room_quests_complete(room_path=null):
-	if room_path == null:
-		room_path = MetSys.get_current_room_name()
-	if room_path not in room_states:
-		Log.warn("Current room_path not in room_states?!?")
-		return
-	return room_states[room_path].quests_complete
-
-func all_room_quests_complete():
-	return room_states.values().all(func(st): return st.quests_complete)
-
-func mark_room_quests_complete(room_path=null):
-	if room_path == null:
-		room_path = MetSys.get_current_room_name()
-	if room_path not in room_states:
-		Log.warn("Current room_path not in room_states?!?")
-		return
-	room_states[room_path].quests_complete = true
+func all_rooms_visited():
+	return room_defs.all(func(rd): return rd.visited)
 
 ## ready #######################################################
 
@@ -111,7 +76,10 @@ func _ready():
 	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
 	# Dino.player_ready.connect(on_player_ready)
 
-	finished_initial_room_gen.connect(show_ready_overlay, CONNECT_ONE_SHOT)
+	room_gen_complete.connect(on_room_gen_complete, CONNECT_ONE_SHOT)
+
+	quest_manager.quest_complete.connect(on_quest_complete)
+	quest_manager.all_quests_completed.connect(check_game_complete)
 
 	# playground setup and notifs
 	setup_player()
@@ -129,6 +97,10 @@ func _ready():
 
 	thread_room_generation({map_def=map_def})
 
+func on_room_gen_complete():
+	setup_quests()
+	show_ready_overlay()
+
 ## add_child_to_level ###################################################3
 
 func add_child_to_level(_node, child):
@@ -137,20 +109,43 @@ func add_child_to_level(_node, child):
 	else:
 		add_child(child)
 
-func on_room_quests_complete():
-	mark_room_quests_complete()
+## quests ###################################################3
 
+func setup_quests():
+	Log.pr("setting up quests")
+	var ents = []
+	var d_ents = U.flat_map(room_defs, func(def): return def.entities())
+	var d_enms = U.flat_map(room_defs, func(def): return def.enemies())
+	ents.append_array(d_ents)
+	ents.append_array(d_enms)
+
+	Log.prn("all ents", ents)
+	quest_manager.add_quests_for_entities(ents)
+
+func on_quest_complete(quest):
+	Log.pr("completed", quest.label)
+	# TODO required vs optional quests (in the mapDef)
+
+# TODO trigger after entering room if all quests are complete
+var complete = false
+func check_game_complete():
 	# TODO confetti particles?
 	# TODO update room on mini-map
 	# TODO door open/close logic
 
-	if all_room_quests_complete():
+	# TODO required vs optional room visits?
+	if (all_rooms_visited() and
+		quest_manager.all_quests_complete() and
+		not complete):
+		complete = true
 		vania_game_complete()
 
 ## input #######################################################
 
+var started_game = false
 func _unhandled_input(event):
-	if ready_to_play and Trolls.is_accept(event):
+	if ready_to_play and Trolls.is_accept(event) and not started_game:
+		started_game = true
 		start_vania_game()
 	if ready_for_next and Trolls.is_accept(event):
 		level_complete.emit()
@@ -340,7 +335,7 @@ func _process(_delta: float):
 		set_process(false)
 		Log.info("level gen thread finished and joined!")
 
-		finished_initial_room_gen.emit()
+		room_gen_complete.emit()
 
 ## room gen #######################################################
 
@@ -349,7 +344,7 @@ func thread_room_generation(opts):
 		# thread already running
 		return
 
-	clear_room_states()
+	reset_room_states()
 	VaniaGenerator.remove_generated_cells()
 
 	# The thread that does map generation.
@@ -373,7 +368,6 @@ func generate_rooms(opts={}):
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			safe_discover_cell(coord)
-		init_room_state(rd.room_path)
 
 var abort_presumed = false
 func safe_discover_cell(coord: Vector3i):
@@ -405,19 +399,17 @@ func regenerate_other_rooms():
 	room_defs = generator.add_rooms(new_room_defs)
 
 	# maintain room state across other room regen
-	clear_room_states({keep_current=true})
+	reset_room_states({keep_current=true})
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
-		if MetSys.get_current_room_name() != rd.room_path:
-			init_room_state(rd.room_path)
 
 	# redo the current room's doors
 	if current_room and current_room.is_node_ready():
 		current_room.setup_walls_and_doors()
 
 func add_new_room(count=1):
-	# TODO these inputs reading from vania-menu configged constraints
+	# TODO these inputs reading from map_def
 	var new_room_defs = VaniaRoomDef.to_defs(MapDef.random_rooms({count=count}))
 	room_defs = generator.add_rooms(new_room_defs)
 	Log.info(len(new_room_defs), " rooms added")
@@ -425,8 +417,6 @@ func add_new_room(count=1):
 	for rd in room_defs:
 		for coord in rd.map_cells:
 			MetSys.discover_cell(coord)
-		if not existing_room_state(rd.room_path):
-			init_room_state(rd.room_path)
 
 	# redo the current room's doors
 	if current_room and current_room.is_node_ready():
@@ -480,12 +470,11 @@ func load_room(def: VaniaRoomDef):
 	# make sure metsys knows this is the 'current' room!!
 	MetSys.current_room = next_room.room_instance
 
-	mark_room_visited(def.room_path)
+	mark_room_visited(def)
 	current_room = next_room
 
-	# TODO refactor into a single manager pre vania-game
-	var qm = current_room.quest_manager
-	qm.all_quests_complete.connect(on_room_quests_complete, CONNECT_ONE_SHOT)
+	# if we're requiring all rooms to be visited....
+	check_game_complete()
 
 func reload_current_room():
 	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)
