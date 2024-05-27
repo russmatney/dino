@@ -56,6 +56,12 @@ export/convert_text_resources_to_binary=false
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg", "res://addons/core/plugin.cfg", "res://addons/custom-scene-launcher/plugin.cfg", "res://addons/gd-plug-ui/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/log/plugin.cfg", "res://addons/pandora/plugin.cfg", "res://addons/phantom_camera/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://src/dino/modes/classic/mapdefs/": "red"
+}
+
 [gdunit4]
 
 report/assert/strict_number_type_compare=false

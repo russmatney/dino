@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=7 format=3 uid="uid://d0d3irg2c1qlf"]
+
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="1_bo8r7"]
+[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_3x6dm"]
+[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="3_wn6lk"]
+
+[sub_resource type="Resource" id="Resource_v8pov"]
+script = ExtResource("1_bo8r7")
+_id = "128"
+
+[sub_resource type="Resource" id="Resource_kmsyt"]
+script = ExtResource("1_bo8r7")
+_id = "129"
+
+[sub_resource type="Resource" id="Resource_k377a"]
+script = ExtResource("2_3x6dm")
+genre_type = 0
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[ExtResource("1_bo8r7")]([SubResource("Resource_v8pov"), SubResource("Resource_kmsyt")])
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
+room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+door_mode = 0
+neighbor_direction = Vector2i(0, 0)
+skip_borders = Array[Vector2i]([])
+drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+bg_color = Color(0, 0, 0, 1)
+grids_path = ""
+
+[resource]
+resource_name = "Boss Battle"
+script = ExtResource("3_wn6lk")
+name = "Boss Battle!"
+input = SubResource("Resource_k377a")
+rooms = Array[ExtResource("2_3x6dm")]([])
+sub_map_defs = Array[ExtResource("3_wn6lk")]([])

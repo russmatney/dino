@@ -1,17 +1,20 @@
-[gd_scene load_steps=48 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=20 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
 [ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="2_r6yek"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="3_lkkeo"]
-[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_lr33u"]
 [ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/particle_area/RainFallParticles.tscn" id="4_hgctr"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
-[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="5_urg5i"]
-[ext_resource type="PackedScene" uid="uid://i2y038vii5jb" path="res://src/effects/particle_area/GoldParticleArea.tscn" id="7_jmjlt"]
-[ext_resource type="PackedScene" uid="uid://cdd1i4ajemyn0" path="res://src/effects/particle_area/DustParticles.tscn" id="7_uibed"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="8_huwy0"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="10_ircs8"]
+[ext_resource type="Resource" uid="uid://wo676lm3hqav" path="res://src/dino/modes/classic/mapdefs/EnemyRobot.tres" id="8_ih3dk"]
+[ext_resource type="Resource" uid="uid://dsjsh2x8rma6q" path="res://src/dino/modes/classic/mapdefs/BlobTeam.tres" id="9_pn3mg"]
+[ext_resource type="Resource" uid="uid://dmshcti41mjc6" path="res://src/dino/modes/classic/mapdefs/TargetTest.tres" id="10_cumfb"]
+[ext_resource type="Resource" uid="uid://b2xht8rpxnoyr" path="res://src/dino/modes/classic/mapdefs/FeedTheVoid.tres" id="11_lim57"]
+[ext_resource type="Resource" uid="uid://dalcnxh8i1eyn" path="res://src/dino/modes/classic/mapdefs/GiantHario.tres" id="12_5dcf5"]
+[ext_resource type="Resource" uid="uid://dtgki8fw57njc" path="res://src/dino/modes/classic/mapdefs/DestroyTheThings.tres" id="13_5lhmn"]
+[ext_resource type="Resource" uid="uid://ccmqnk240p1tj" path="res://src/dino/modes/classic/mapdefs/LeafChallenge.tres" id="14_fpq6l"]
+[ext_resource type="Resource" uid="uid://d0d3irg2c1qlf" path="res://src/dino/modes/classic/mapdefs/BossBattle.tres" id="15_ekp3g"]
 
 [sub_resource type="Resource" id="Resource_x03cn"]
 script = ExtResource("3_lkkeo")
@@ -26,9 +29,9 @@ scene = ExtResource("4_hgctr")
 [sub_resource type="Resource" id="Resource_yuw5o"]
 script = ExtResource("4_m4x81")
 genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([])
-room_shapes = Array[ExtResource("10_ircs8")]([])
+entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_bne7i")])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
@@ -38,281 +41,12 @@ drops = Array[ExtResource("3_lkkeo")]([SubResource("Resource_x03cn")])
 bg_color = Color(0, 0, 0, 1)
 grids_path = ""
 
-[sub_resource type="Resource" id="Resource_v00y0"]
-script = ExtResource("3_lr33u")
-_id = "122"
-
-[sub_resource type="Resource" id="Resource_msll8"]
-script = ExtResource("8_huwy0")
-type = 6
-scene = ExtResource("7_jmjlt")
-
-[sub_resource type="Resource" id="Resource_cx14i"]
-script = ExtResource("10_ircs8")
-cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 1, 0)])
-type = 7
-
-[sub_resource type="Resource" id="Resource_vuiid"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_v00y0")])
-room_shapes = Array[ExtResource("10_ircs8")]([SubResource("Resource_cx14i")])
-room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_msll8")])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0.437632, 0.63663, 0.917503, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_02d4e"]
-resource_name = "Enemy Robot"
-script = ExtResource("4_m2oft")
-name = "Robot 1 on 1!"
-input = SubResource("Resource_vuiid")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_5l33f"]
-script = ExtResource("3_lr33u")
-_id = "121"
-
-[sub_resource type="Resource" id="Resource_svjii"]
-script = ExtResource("8_huwy0")
-type = 4
-scene = ExtResource("7_uibed")
-
-[sub_resource type="Resource" id="Resource_mewd3"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_5l33f"), SubResource("Resource_5l33f"), SubResource("Resource_5l33f")])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_svjii")])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0.774941, 0.436213, 0.239675, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_ct5kn"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_fdni3"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_evsm0"]
-resource_name = "Blob Team"
-script = ExtResource("4_m2oft")
-name = "Blob Team!"
-input = SubResource("Resource_mewd3")
-rooms = Array[ExtResource("4_m4x81")]([SubResource("Resource_ct5kn"), SubResource("Resource_fdni3")])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_4kag2"]
-script = ExtResource("5_urg5i")
-_id = "139"
-
-[sub_resource type="Resource" id="Resource_62w6x"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_4kag2"), SubResource("Resource_4kag2"), SubResource("Resource_4kag2")])
-enemies = Array[ExtResource("3_lr33u")]([])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0.437632, 0.63663, 0.917503, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_xauy6"]
-resource_name = "Target Test"
-script = ExtResource("4_m2oft")
-name = "Target Test"
-input = SubResource("Resource_62w6x")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_6bvdb"]
-script = ExtResource("5_urg5i")
-_id = "151"
-
-[sub_resource type="Resource" id="Resource_gkjen"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_6bvdb")])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_5l33f")])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0.774941, 0.436213, 0.239675, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_h0sn2"]
-resource_name = "FEED THE VOID"
-script = ExtResource("4_m2oft")
-name = "FEEEED the VOID"
-input = SubResource("Resource_gkjen")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_kmsyt"]
-script = ExtResource("3_lr33u")
-_id = "129"
-
-[sub_resource type="Resource" id="Resource_5y52h"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_kmsyt")])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_0w1s1"]
-resource_name = "GIANT HARIO"
-script = ExtResource("4_m2oft")
-name = "GIANT HARIO"
-input = SubResource("Resource_5y52h")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_bmcom"]
-script = ExtResource("3_lr33u")
-_id = "126"
-
-[sub_resource type="Resource" id="Resource_ks6si"]
-script = ExtResource("5_urg5i")
-_id = "140"
-
-[sub_resource type="Resource" id="Resource_o6kti"]
-script = ExtResource("5_urg5i")
-_id = "141"
-
-[sub_resource type="Resource" id="Resource_ys5sm"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_ks6si"), SubResource("Resource_o6kti"), SubResource("Resource_ks6si")])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_bmcom")])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_gyjvd"]
-resource_name = "Destroy!"
-script = ExtResource("4_m2oft")
-name = "Destroy!"
-input = SubResource("Resource_ys5sm")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_egvpy"]
-script = ExtResource("5_urg5i")
-_id = "136"
-
-[sub_resource type="Resource" id="Resource_35tik"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([SubResource("Resource_egvpy"), SubResource("Resource_egvpy"), SubResource("Resource_egvpy")])
-enemies = Array[ExtResource("3_lr33u")]([])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_x0fpg"]
-resource_name = "Leaf Challenge"
-script = ExtResource("4_m2oft")
-name = "Leaf Challenge"
-input = SubResource("Resource_35tik")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
-[sub_resource type="Resource" id="Resource_v8pov"]
-script = ExtResource("3_lr33u")
-_id = "128"
-
-[sub_resource type="Resource" id="Resource_k377a"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[ExtResource("5_urg5i")]([])
-enemies = Array[ExtResource("3_lr33u")]([SubResource("Resource_v8pov"), SubResource("Resource_kmsyt")])
-room_shapes = Array[ExtResource("10_ircs8")]([])
-room_effects = Array[ExtResource("8_huwy0")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("3_lkkeo")]([])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_h5a41"]
-resource_name = "Boss Battle"
-script = ExtResource("4_m2oft")
-name = "Boss Battle!"
-input = SubResource("Resource_k377a")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([])
-
 [sub_resource type="Resource" id="Resource_ub0wu"]
 script = ExtResource("4_m2oft")
 name = "Classic Mode!"
 input = SubResource("Resource_yuw5o")
 rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([SubResource("Resource_02d4e"), SubResource("Resource_evsm0"), SubResource("Resource_xauy6"), SubResource("Resource_h0sn2"), SubResource("Resource_0w1s1"), SubResource("Resource_gyjvd"), SubResource("Resource_x0fpg"), SubResource("Resource_h5a41")])
+sub_map_defs = Array[ExtResource("4_m2oft")]([ExtResource("8_ih3dk"), ExtResource("9_pn3mg"), ExtResource("10_cumfb"), ExtResource("11_lim57"), ExtResource("12_5dcf5"), ExtResource("13_5lhmn"), ExtResource("14_fpq6l"), ExtResource("15_ekp3g")])
 
 [node name="ClassicSideScroller" type="Node2D"]
 script = ExtResource("1_5gcr3")
