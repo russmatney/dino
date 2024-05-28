@@ -453,6 +453,10 @@
 						"type": "resource",
 						"value": "res://src/dino/players/hoodie/assets/soft-soft-hoodie_portrait1.png"
 					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
+					},
 					"sidescroller_scene": {
 						"type": "resource",
 						"value": "res://src/dino/players/hoodie/SSHoodie.tscn"
@@ -2512,12 +2516,19 @@
 				"_id": "195",
 				"_name": "is_disabled",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "69",
+				"_default_value": false,
+				"_id": "210",
+				"_name": "is_disabled",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 209
+			"default": 210
 		}
 	}
 }

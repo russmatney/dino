@@ -19,11 +19,15 @@ func get_topdown_scene() -> PackedScene:
 func get_beatemup_scene() -> PackedScene:
 	return get_resource("beatemup_scene")
 
+func is_disabled() -> bool:
+	return get_bool("is_disabled")
+
 ## data ##########################################################
 
 func data():
 	return {
 		display_name=get_display_name(),
+		is_disabled=is_disabled(),
 		icon_texture=get_icon_texture(),
 		sidescroller_scene=get_sidescroller_scene(),
 		topdown_scene=get_topdown_scene(),
@@ -33,7 +37,8 @@ func data():
 ## static #################################################
 
 static func all_entities():
-	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOPLAYER))
+	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOPLAYER)).\
+		filter(func(ent): return not ent.is_disabled())
 
 ## instance #################################################
 
