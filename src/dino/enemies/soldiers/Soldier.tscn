@@ -23,8 +23,8 @@ knockback_velocity_horizontal = 20.0
 dying_velocity = -400.0
 initial_health = 3
 should_see_player = true
-should_hop = null
-show_debug = null
+should_kick_player = true
+should_hurt_to_touch = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5cd88")

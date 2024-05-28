@@ -8,8 +8,7 @@
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="6_fsp6w"]
 [ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="7_3c06x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mmx1"]
-size = Vector2(24, 26)
+[sub_resource type="CircleShape2D" id="CircleShape2D_7q5cw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uftm3"]
 atlas = ExtResource("2_1fu8s")
@@ -169,7 +168,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_436mn"]
-radius = 14.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jiqhh"]
 radius = 74.2428
@@ -182,7 +181,7 @@ should_hurt_to_touch = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_5mmx1")
+shape = SubResource("CircleShape2D_7q5cw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

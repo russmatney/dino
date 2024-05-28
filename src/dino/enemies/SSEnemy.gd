@@ -125,6 +125,8 @@ func _ready():
 
 func _physics_process(_delta):
 	if crawl_on_side == null and should_crawl_on_walls:
+		# calling move_and_slide to detect a side a frame earlier
+		move_and_slide()
 		if is_on_wall_only():
 			crawl_on_side = get_wall_normal()
 		elif is_on_floor_only():
@@ -235,7 +237,7 @@ func orient_to_wall(side):
 var hitbox_bodies = []
 
 func _on_hitbox_body_entered(body):
-	if is_dead:
+	if is_dead or ("is_dead" in body and body.is_dead):
 		return
 	if body.is_in_group("player"):
 		hitbox_bodies.append(body)
@@ -244,8 +246,6 @@ func _on_hitbox_body_entered(body):
 		if should_hurt_to_touch and machine.can_bump():
 			body.take_hit({body=self, type="bump"})
 
-		# TODO kick is specific, do we want a generic attack?
-		# should probably do this from each state's physics_process()
 		if should_kick_player and machine.can_attack():
 			# this body isn't used at the moment
 			machine.transit("Kick", {body=body})

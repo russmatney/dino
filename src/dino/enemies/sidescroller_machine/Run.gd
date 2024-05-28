@@ -25,7 +25,10 @@ func physics_process(delta):
 		machine.transit("Fire")
 		return
 
-	if not actor.is_on_floor():
+	if actor.should_crawl_on_walls:
+		# wall-crawlers shouldn't fall (stay on the wall)
+		pass
+	elif not actor.is_on_floor():
 		actor.velocity.y += actor.gravity * delta
 
 	if actor.move_vector.x > 0:
