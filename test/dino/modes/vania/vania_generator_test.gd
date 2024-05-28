@@ -241,6 +241,37 @@ func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 	assert_array(tmap_cells).contains(right_border)
 	assert_array(tmap_cells).contains(bottom_border)
 
+## consistent minimal doors
+
+func test_add_rooms_consistent_doors():
+	# creating two tall rooms with minimal-horizontal doors
+	var map_def = MapDef.with_inputs([
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_3})}),
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_3})}),
+		])
+	map_def.input.door_mode = VaniaRoomDef.DOOR_MODE.MINIMAL_HORIZONTAL
+
+	var gen = VaniaGenerator.new()
+	var defs = gen.generate_map(map_def)
+	var first_def = defs[0]
+	var second_def = defs[1]
+
+	Log.prn("map-cells - first", first_def.map_cells, "second", second_def.map_cells)
+
+	await Engine.get_main_loop().process_frame
+
+	assert_str(first_def.room_path).is_not_null()
+	assert_array(first_def.map_cells).is_not_empty()
+
+	assert_str(second_def.room_path).is_not_null()
+	assert_array(second_def.map_cells).is_not_empty()
+
+	var first_doors = first_def.get_doors()
+	var second_doors = second_def.get_doors()
+	Log.prn("doors - first", first_doors, "second", second_doors)
+
+	assert_array(first_doors).contains_exactly_in_any_order(second_doors)
+
 
 ## placing rooms ################################################
 

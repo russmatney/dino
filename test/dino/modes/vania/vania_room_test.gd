@@ -33,12 +33,12 @@ func test_build_room_sets_tilemap_borders():
 	assert_array(tmap_cells).contains([Vector2i(tiles_end.x, tiles_start.y),])
 
 func test_build_room_walls_concave_shape():
-	var shape = [Vector3i(0, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 0, 0)]
+	var cells = [Vector3i(0, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 0, 0)]
 
 	var room = auto_free(VaniaRoom.new())
-	var def = VaniaRoomDef.new({input=MapInput.spaceship().merge(MapInput.has_room({shape=shape}))})
+	var def = VaniaRoomDef.new({input=MapInput.spaceship().merge(MapInput.has_room({cells=cells}))})
 
-	def.map_cells = shape
+	def.map_cells = cells
 
 	room.set_room_def(def)
 	room.ensure_children()
@@ -54,7 +54,7 @@ func test_build_room_walls_concave_shape():
 		Vector3i(0, 1, 0): [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.DOWN],
 		}
 
-	for cell in shape:
+	for cell in cells:
 		var map_cell_rect = def.get_map_cell_rect(cell)
 		var cells_rect = Reptile.rect_to_local_rect(room.tilemap, map_cell_rect)
 

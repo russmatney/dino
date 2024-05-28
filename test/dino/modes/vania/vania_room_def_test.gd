@@ -33,6 +33,6 @@ func test_creating_with_room_inputs():
 
 	# should normalize room shapes
 	rd = VaniaRoomDef.new({input=MapInput.has_room({
-		shape=[Vector3i(-4, 8, 0)]
+		cells=[Vector3i(-4, 8, 0)]
 		})})
 	assert_array(rd.local_cells).is_equal([Vector3i(0, 0, 0)])

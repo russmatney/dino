@@ -232,11 +232,21 @@ func fill_tilemap_borders(opts={}):
 	tilemap.fill_coords(t_cells)
 
 func get_tile_coords_for_doorway(map_cell_pair):
-	var wall = map_cell_pair[1] - map_cell_pair[0]
+	var this_cell
+	var neighbor_cell
+	for cell in map_cell_pair:
+		if cell in room_def.map_cells:
+			this_cell = cell
+		else:
+			neighbor_cell = cell
+	if this_cell == null or neighbor_cell == null:
+		Log.error("unexpected door pair", map_cell_pair, "cannot create doorway")
+		return []
+	var wall = neighbor_cell - this_cell
 	wall = Vector2(wall.x, wall.y)
 
 	# local rect (position, size) of the cell for the doorway
-	var cell_rect = room_def.get_map_cell_rect(map_cell_pair[0])
+	var cell_rect = room_def.get_map_cell_rect(this_cell)
 
 	var cell_width = MetSys.settings.in_game_cell_size.x
 	var cell_height = MetSys.settings.in_game_cell_size.y
