@@ -73,12 +73,11 @@ func test_add_rooms_two_small_rooms_create_doors():
 		var left_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.position.x, y))
 		var right_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.end.x - 1, y))
 
-		var doors = def.get_doors({neighbor_data=gen.neighbor_data[def.room_path]})
-		assert_array(doors).is_not_empty()
-		if doors.is_empty():
+		assert_array(def.doors).is_not_empty()
+		if def.doors.is_empty():
 			return
 
-		var door = doors[0]
+		var door = def.doors[0]
 		var wall = door[1] - door[0]
 
 		var door_wall = []
@@ -157,12 +156,11 @@ func test_add_rooms_one_small_room_then_another_updates_doors():
 		var left_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.position.x, y))
 		var right_border = range(cells_rect.position.y, cells_rect.end.y).map(func(y): return Vector2i(cells_rect.end.x - 1, y))
 
-		var doors = def.get_doors({neighbor_data=gen.neighbor_data[def.room_path]})
-		assert_array(doors).is_not_empty()
-		if doors.is_empty():
+		assert_array(def.doors).is_not_empty()
+		if def.doors.is_empty():
 			return
 
-		var door = doors[0]
+		var door = def.doors[0]
 		var wall = door[1] - door[0]
 
 		var door_wall = []
@@ -246,8 +244,8 @@ func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 func test_add_rooms_consistent_doors():
 	# creating two tall rooms with minimal-horizontal doors
 	var map_def = MapDef.with_inputs([
-		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_3})}),
-		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_3})}),
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_5})}),
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_5})}),
 		])
 	map_def.input.door_mode = VaniaRoomDef.DOOR_MODE.MINIMAL_HORIZONTAL
 
@@ -266,11 +264,18 @@ func test_add_rooms_consistent_doors():
 	assert_str(second_def.room_path).is_not_null()
 	assert_array(second_def.map_cells).is_not_empty()
 
-	var first_doors = first_def.get_doors()
-	var second_doors = second_def.get_doors()
-	Log.prn("doors - first", first_doors, "second", second_doors)
+	var first_doors = first_def.doors
+	var second_doors = second_def.doors
+	assert_array(first_doors).is_not_empty()
+	assert_array(second_doors).is_not_empty()
+	assert_int(len(first_doors)).is_equal(1)
+	assert_int(len(second_doors)).is_equal(1)
 
-	assert_array(first_doors).contains_exactly_in_any_order(second_doors)
+	Log.prn("doors - first", first_doors, "second", second_doors)
+	var first_door = first_doors[0]
+	var second_door = second_doors[0]
+
+	assert_array(first_door).contains_exactly_in_any_order(second_door)
 
 
 ## placing rooms ################################################

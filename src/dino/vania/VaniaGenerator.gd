@@ -52,13 +52,15 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 	# update all_room_defs
 	all_room_defs.append_array(defs)
 
-	# rebuild neighbors/doors, pack/save rooms
-	update_neighbor_data()
+	# rebuild neighbors/doors on all room_defs
+	rebuild_doors()
 
+	# gather neighboring rooms to repack
 	var neighbor_defs = []
 	for rd in room_defs:
 		neighbor_defs.append_array(get_neighbor_defs(rd))
 
+	# build/pack all affected rooms
 	var to_build = []
 	to_build.append_array(room_defs)
 	to_build.append_array(neighbor_defs)
@@ -96,8 +98,8 @@ func remove_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 	for def in room_defs:
 		all_room_defs.erase(def)
 
-	# update neighbor data
-	update_neighbor_data()
+	# rebuild neighbors/doors on all room_defs
+	rebuild_doors()
 
 	for n_def in U.distinct(neighbor_defs):
 		# rebuild and pack neighbor scenes!
@@ -125,19 +127,27 @@ static func get_existing_map_cells():
 
 ## neighbor data ##########################################################
 
-func update_neighbor_data():
+func rebuild_doors():
+	# calc and set 'doors' on all room_defs, making sure neighboring doors are consistent
+
 	# clear and rebuild? maybe that's fine?
 	neighbor_data = {}
 
-	var all_map_cells_by_rd = all_room_defs.map(func(rd): return {
-		room_path=rd.room_path,
-		map_cells=rd.map_cells,
-		})
+	# i think i speak for everyone when I say: fuck doors.
+	for room_def in all_room_defs:
+		var nbr_room_data = []
+		for nbr_def in all_room_defs:
+			var nbr_data = {room_path=nbr_def.room_path, map_cells=nbr_def.map_cells}
+			var nbrs = neighbor_data.get(nbr_def.room_path, [])
+			for nbr in nbrs:
+				if nbr.room_path == room_def.room_path:
+					if not nbr.get("doors").is_empty():
+						nbr_data.doors = nbr.get("doors")
+			nbr_room_data.append(nbr_data)
 
-	for rd in all_room_defs:
-		neighbor_data[rd.room_path] = rd.build_neighbor_door_data({
-			neighbor_data=all_map_cells_by_rd,
-			})
+		var new_nbr_data = room_def.calc_doors({neighbor_data=nbr_room_data})
+		neighbor_data[room_def.room_path] = new_nbr_data
+
 
 func get_neighbor_defs(room_def: VaniaRoomDef):
 	var nbr = neighbor_data.get(room_def.room_path)

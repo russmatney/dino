@@ -78,13 +78,13 @@ func deactivate_room():
 
 ## build room ##############################################################
 
-func build_room(def: VaniaRoomDef, opts={}):
+func build_room(def: VaniaRoomDef, _opts={}):
 	# Log.info("building room:", def)
 	room_def = def
 	ensure_children()
 	clear_all_tiles()
 	setup_tileset()
-	setup_walls_and_doors(opts)
+	setup_walls_and_doors()
 	fill_background_images()
 	add_background_tiles()
 	add_tile_chunks()
@@ -146,8 +146,8 @@ func clear_background_tiles():
 
 # Draws a border around the room
 # cuts away space for 'doors' between neighboring rooms
-func setup_walls_and_doors(opts={}):
-	var door_tile_coords = get_door_tile_coords(opts)
+func setup_walls_and_doors():
+	var door_tile_coords = get_door_tile_coords()
 
 	clear_tilemap_tiles()
 
@@ -156,9 +156,9 @@ func setup_walls_and_doors(opts={}):
 	tilemap.mix_terrains()
 	tilemap.force_update()
 
-func get_door_tile_coords(opts={}):
+func get_door_tile_coords():
 	var coords = []
-	for door in room_def.get_doors(opts):
+	for door in room_def.doors:
 		var tile_coords = get_tile_coords_for_doorway(door)
 		coords.append_array(tile_coords)
 	return coords
@@ -231,17 +231,9 @@ func fill_tilemap_borders(opts={}):
 
 	tilemap.fill_coords(t_cells)
 
-func get_tile_coords_for_doorway(map_cell_pair):
-	var this_cell
-	var neighbor_cell
-	for cell in map_cell_pair:
-		if cell in room_def.map_cells:
-			this_cell = cell
-		else:
-			neighbor_cell = cell
-	if this_cell == null or neighbor_cell == null:
-		Log.error("unexpected door pair", map_cell_pair, "cannot create doorway")
-		return []
+func get_tile_coords_for_doorway(door):
+	var this_cell = door[0]
+	var neighbor_cell = door[1]
 	var wall = neighbor_cell - this_cell
 	wall = Vector2(wall.x, wall.y)
 

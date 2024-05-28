@@ -4,6 +4,7 @@ class_name RoomShape
 
 ## static ############################################################################
 
+# TODO abandon this b.s. int backed enum
 enum T {
 	NONE,
 	SMALL,
@@ -12,6 +13,8 @@ enum T {
 	WIDE_4,
 	TALL,
 	TALL_3,
+	TALL_4,
+	TALL_5,
 	SQUARE,
 	SQUARE_WIDE,
 	L,
@@ -32,6 +35,8 @@ static var all_room_shapes = {
 	T.WIDE_4: [Vector3i(), Vector3i(1, 0, 0), Vector3i(2, 0, 0), Vector3i(3, 0, 0)],
 	T.TALL: [Vector3i(), Vector3i(0, 1, 0),],
 	T.TALL_3: [Vector3i(), Vector3i(0, 1, 0), Vector3i(0, 2, 0)],
+	T.TALL_4: [Vector3i(), Vector3i(0, 1, 0), Vector3i(0, 2, 0), Vector3i(0, 3, 0)],
+	T.TALL_5: [Vector3i(), Vector3i(0, 1, 0), Vector3i(0, 2, 0), Vector3i(0, 3, 0), Vector3i(0, 4, 0)],
 	T.SQUARE: [Vector3i(0, 0, 0), Vector3i(1, 0, 0),
 		Vector3i(0, 1, 0), Vector3i(1, 1, 0),],
 	T.SQUARE_WIDE: [Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0),

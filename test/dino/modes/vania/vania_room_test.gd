@@ -89,11 +89,9 @@ func test_build_room_sets_tilemap_doors():
 	room.ensure_children()
 	room.setup_tileset()
 
-	var neighbor_data = [
-		{map_cells=[Vector3i(1, 0, 0)]}, # on the right
-		]
+	room.doors = [[Vector3i(0, 0, 0), Vector3i(1, 0, 0)]]
 
-	room.setup_walls_and_doors({neighbor_data=neighbor_data})
+	room.setup_walls_and_doors()
 
 	var map_cell_rect = def.get_map_cell_rect(def.map_cells[0])
 	var tiles_start = room.tilemap.local_to_map(map_cell_rect.position)
