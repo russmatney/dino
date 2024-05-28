@@ -36,11 +36,16 @@ func enter(ctx={}):
 ## process ###################################
 
 func physics_process(delta):
-	actor.velocity.y += actor.gravity * delta
+	if actor.should_crawl_on_walls:
+		# wall-crawlers shouldn't fall in idle (stay on the wall)
+		pass
+	else:
+		actor.velocity.y += actor.gravity * delta
+
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed)
 	actor.move_and_slide()
 
-	if actor.is_on_floor() or "crawl_on_side" in actor:
+	if actor.is_on_floor() or actor.crawl_on_side:
 		# once we hit the floor, assess the damage
 		if actor.health <= 0:
 			transit("Dead")

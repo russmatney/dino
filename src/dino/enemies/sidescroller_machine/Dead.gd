@@ -22,7 +22,10 @@ func enter(ctx={}):
 ## process ###################################
 
 func physics_process(delta):
-	if not actor.is_on_floor():
+	if actor.should_crawl_on_walls:
+		# wall-crawlers shouldn't fall in idle (stay on the wall)
+		pass
+	else:
 		actor.velocity.y += actor.gravity * delta
 
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed)

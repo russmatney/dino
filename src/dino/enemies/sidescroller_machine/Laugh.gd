@@ -35,7 +35,11 @@ func exit():
 ## process ###################################
 
 func physics_process(delta):
-	actor.velocity.y += actor.gravity * delta
+	if actor.should_crawl_on_walls:
+		# wall-crawlers shouldn't fall (stay on the wall)
+		pass
+	else:
+		actor.velocity.y += actor.gravity * delta
 	actor.velocity.x = move_toward(actor.velocity.x, 0, actor.speed/5.0)
 	actor.move_and_slide()
 
