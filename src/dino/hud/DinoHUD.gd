@@ -3,7 +3,6 @@ extends Control
 ## vars ############################################################33
 
 @onready var player_status = $%PlayerStatus
-@onready var level_opts_comp = $%LevelOpts
 @onready var time_label = $%TimeLabel
 @onready var weapon_list = $%WeaponList
 var level_opts
@@ -23,7 +22,7 @@ func _ready():
 			player.changed_weapon.connect(func(_w):
 				update_weapon_stack()))
 	update_player_status()
-	update_level_opts()
+	update_level_detail()
 	update_weapon_stack()
 
 	Hotel.entry_updated.connect(func(entry):
@@ -44,14 +43,11 @@ func update_player_status():
 			health = p_node.health
 		player_status.set_status({"entity": p_ent, "health": health})
 
-func update_level_opts():
-	if level_opts == null:
-		return
-	var s = level_opts.get("seed", 0)
-	var ct = level_opts.get("room_count", 0)
+func update_level_detail():
+	set_seed(Dino.get_seed())
 
-	level_opts_comp.set_seed(s)
-	level_opts_comp.set_room_count(ct)
+func set_seed(x):
+	$%SeedLabel.text = "[right]Seed: %d[/right]" % x
 
 func update_weapon_stack():
 	var p = Dino.current_player_node()

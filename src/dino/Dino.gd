@@ -38,6 +38,9 @@ func reseed():
 	_seed = randi()
 	seed(_seed)
 
+func get_seed():
+	return _seed
+
 ## enter tree ##########################################################
 
 func _enter_tree():

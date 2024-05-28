@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://sisqkgg1lwpf"]
+[gd_scene load_steps=9 format=3 uid="uid://sisqkgg1lwpf"]
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://addons/core/hood/EntityStatus.tscn" id="2_7c6hy"]
-[ext_resource type="PackedScene" uid="uid://rthdsotd137p" path="res://src/dino/hud/LevelOpts.tscn" id="3_40syy"]
 [ext_resource type="FontFile" uid="uid://cknft5w5ywf7n" path="res://addons/core/assets/fonts/vexed/Arcade_Cabinet_Monospace.ttf" id="3_wovs3"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://src/components/notifications/DebugNotificationList.tscn" id="4_4ubwc"]
 [ext_resource type="PackedScene" uid="uid://byj0we053kbu4" path="res://src/dino/hud/WeaponList.tscn" id="6_rcsf7"]
@@ -67,9 +66,21 @@ scroll_active = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LevelOpts" parent="CanvasLayer/VBoxContainer/Top" instance=ExtResource("3_40syy")]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer/Top"]
+custom_minimum_size = Vector2(150, 80)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Top/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SeedLabel" type="RichTextLabel" parent="CanvasLayer/VBoxContainer/Top/PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+bbcode_enabled = true
+text = "[right]Seed: N[/right]"
+fit_content = true
+scroll_active = false
 
 [node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 custom_minimum_size = Vector2(10, 0)
