@@ -28,7 +28,7 @@ func test_threaded_game_gen():
 	add_child(game)
 
 	# wait for generation to finish
-	await game.finished_initial_room_gen
+	await game.room_gen_complete
 
 	# basic room_def assertions
 	assert_array(game.room_defs).is_not_empty()

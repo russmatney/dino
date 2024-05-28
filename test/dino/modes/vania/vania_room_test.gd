@@ -84,12 +84,12 @@ func test_build_room_sets_tilemap_doors():
 	MapInput.apply(MapInput.spaceship().merge(MapInput.small_room_shape()), def)
 
 	def.map_cells = [Vector3i(0, 0, 0)]
+	def.doors = [[Vector3i(0, 0, 0), Vector3i(1, 0, 0)]]
 
 	room.set_room_def(def)
 	room.ensure_children()
 	room.setup_tileset()
 
-	room.doors = [[Vector3i(0, 0, 0), Vector3i(1, 0, 0)]]
 
 	room.setup_walls_and_doors()
 
