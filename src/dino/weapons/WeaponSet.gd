@@ -120,6 +120,7 @@ func deactivate_weapon(weapon=null):
 	if not weapon:
 		weapon = active_weapon()
 	weapon.visible = false
+	weapon.stop_using() # difference between these two?
 	weapon.deactivate()
 
 # Uses the first weapon if none is passed

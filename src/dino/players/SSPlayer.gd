@@ -778,6 +778,7 @@ func add_descend():
 #################################################################################
 ## weapons #######################################################
 
+# add_weapon also activates the new weapon
 func add_weapon(ent_id):
 	var w = weapon_set.add_weapon(ent_id)
 	if w:
