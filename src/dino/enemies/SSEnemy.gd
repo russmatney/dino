@@ -143,11 +143,8 @@ func _process(_delta):
 
 		if los.is_colliding():
 			var body = los.get_collider()
-			if is_instance_valid(body) and body.is_in_group("player"):
+			if is_instance_valid(body) and body.is_in_group("player") and not body.is_dead:
 				can_see_player = true
-
-				# TODO should fire at player?
-
 			else:
 				can_see_player = false
 
@@ -233,6 +230,8 @@ func orient_to_wall(side):
 var hitbox_bodies = []
 
 func _on_hitbox_body_entered(body):
+	if is_dead:
+		return
 	if body.is_in_group("player"):
 		hitbox_bodies.append(body)
 

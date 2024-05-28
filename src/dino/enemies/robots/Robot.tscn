@@ -364,12 +364,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqtyu"]
 size = Vector2(20, 37)
 
-[node name="EnemyRobot" type="CharacterBody2D" groups=["enemies", "enemy_robots"]]
+[node name="Robot" type="CharacterBody2D" groups=["enemies", "enemy_robots"]]
 collision_layer = 8
 script = ExtResource("1_4rapa")
 initial_health = 3
 should_see_player = true
-should_hop = null
+should_hurt_to_touch = true
 
 [node name="SSEnemyMachine" parent="." instance=ExtResource("2_wws8b")]
 
@@ -413,6 +413,8 @@ target_position = Vector2(0, 40)
 collision_mask = 2
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 5.5)

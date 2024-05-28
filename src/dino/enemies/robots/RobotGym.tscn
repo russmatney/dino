@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bg1p3g34ld000"]
+[gd_scene load_steps=8 format=3 uid="uid://bg1p3g34ld000"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_32aqh"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_wuxpl"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="4_lkjus"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_oejwc"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="6_trxxs"]
-[ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="7_qd6ye"]
 
 [sub_resource type="Resource" id="Resource_qtoub"]
 script = ExtResource("2_wuxpl")
@@ -18,6 +17,7 @@ player_entity = SubResource("Resource_qtoub")
 
 [node name="EnemyRobot" parent="." instance=ExtResource("3_r66ko")]
 position = Vector2(70, -62)
+should_hop = false
 
 [node name="PurpleStoneTiles" parent="." instance=ExtResource("4_lkjus")]
 layer_0/tile_data = PackedInt32Array(-65566, 262144, 2, -30, 262144, 4, 65507, 65536, 5, 65508, 589824, 2, 131044, 262144, 4, 65509, 131072, 5, 65510, 131072, 5, 65511, 524288, 2, 131047, 327680, 5, 131048, 131072, 5, 131049, 131072, 5, 131050, 131072, 5, 131051, 589824, 5, 65515, 262144, 2, 131052, 458752, 2, 131053, 196608, 2, 196589, 720896, 5, 196588, 65536, 4, 196590, 458752, 2, 196591, 196608, 2, 262126, 65536, 4, 262127, 720896, 5, 262128, 131072, 5, 196593, 65536, 2, 196594, 393216, 2, 262130, 196608, 4, 262129, 655360, 5, 196595, 131072, 5, 196596, 131072, 5, 196597, 131072, 5, 196598, 131072, 5, 196600, 458752, 2, 196599, 131072, 5, 262136, 65536, 4, 196601, 131072, 2, 196602, 196608, 2, 262138, 393216, 5, 262137, 131072, 4, 262139, 131072, 5, 262140, 131072, 5, 262142, 131072, 5, 262141, 131072, 5, 262143, 131072, 5, 196609, 196608, 5, 196608, 131072, 5, 131074, 65536, 5, 131075, 131072, 5, 131076, 524288, 2, 196612, 327680, 5, 196613, 196608, 5, 131078, 65536, 5, 131079, 524288, 2, 196615, 327680, 5, 196617, 131072, 5, 196616, 131072, 5, 196619, 131072, 5, 196618, 131072, 5, 131085, 65536, 5, 196620, 196608, 5, 131086, 196608, 5, 196623, 327680, 2, 262159, 262144, 4, 196624, 131072, 5, 131090, 65536, 5, 196625, 196608, 5, 131091, 131072, 5, 65556, 262144, 2, 131092, 589824, 5, 131093, 131072, 5, 131094, 524288, 5, 65558, 327680, 2, 65559, 131072, 5, 65560, 589824, 2, 65561, 196608, 5, 131096, 262144, 4)
@@ -27,11 +27,4 @@ layer_0/tile_data = PackedInt32Array(-65566, 262144, 2, -30, 262144, 4, 65507, 6
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("5_oejwc")
 
-[node name="DinoHUD" type="Control" parent="." instance=ExtResource("6_trxxs")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("7_qd6ye")
+[node name="DinoHUD" parent="." instance=ExtResource("6_trxxs")]
