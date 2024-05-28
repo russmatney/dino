@@ -276,7 +276,7 @@ func get_doors(opts={}):
 func build_neighbor_door_data(opts={}):
 	var neighbors = opts.get("neighbor_data", [])
 	if neighbors:
-		neighbors = neighbors.duplicate(true)
+		neighbors = neighbors.duplicate(true).filter(func(nbr): return nbr.room_path != room_path)
 	else:
 		neighbors = []
 
@@ -293,7 +293,9 @@ func build_neighbor_door_data(opts={}):
 		for n_cell in ngbr.map_cells:
 			for r_cell in map_cells:
 				if is_neighboring_cell(n_cell, r_cell):
-					ngbr.possible_doors.append([r_cell, n_cell])
+					if (not [r_cell, n_cell] in ngbr.possible_doors and
+						not [n_cell, r_cell] in ngbr.possible_doors):
+						ngbr.possible_doors.append([r_cell, n_cell])
 	neighbors = neighbors.filter(func(n): return len(n.possible_doors) > 0)
 
 	return neighbors
@@ -313,9 +315,9 @@ func get_neighbor_room_paths() -> Array[String]:
 	return ret
 
 func is_neighboring_cell(a: Vector3i, b: Vector3i) -> bool:
-	if a.x - b.x == 0:
+	if abs(a.x - b.x) == 0:
 		return abs(a.y - b.y) == 1
-	if a.y - b.y == 0:
+	if abs(a.y - b.y) == 0:
 		return abs(a.x - b.x) == 1
 	return false
 
