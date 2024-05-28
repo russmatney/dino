@@ -2,6 +2,8 @@ extends State
 
 var knocked_by
 var has_left_floor
+var max_ttl = 1.4
+var ttl
 
 ## properties ###########################################################
 
@@ -26,11 +28,13 @@ func enter(opts = {}):
 	actor.velocity.x = actor.knockback_speed_x * actor.facing_vector.x * -1
 
 	has_left_floor = false
+	ttl = max_ttl
 
 ## exit ###########################################################
 
 func exit():
 	knocked_by = null
+	ttl = null
 
 ## physics ###########################################################
 
@@ -43,3 +47,12 @@ func physics_process(delta):
 
 	if has_left_floor and actor.is_on_floor():
 		transit("Idle")
+		return
+
+	# ideally this would check if our y is still changing
+	# fallback incase we never hit the ground
+	if ttl:
+		if ttl < 0:
+			transit("Dying")
+		else:
+			ttl -= delta
