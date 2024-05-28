@@ -5,7 +5,7 @@ extends Area2D
 @onready var anim = $AnimatedSprite2D
 @onready var destroyed_label_scene = preload("res://src/components/DestroyedLabel.tscn")
 
-signal destroyed
+signal destroyed(target)
 var is_dead = false
 
 ## ready
@@ -34,7 +34,7 @@ func kill():
 	Sounds.play(Sounds.S.target_kill)
 	anim.play("pop")
 	Juice.freezeframe({name="target-destroyed", time_scale=0.05, duration=0.4})
-	destroyed.emit()
+	destroyed.emit(self)
 
 	var lbl = destroyed_label_scene.instantiate()
 	lbl.set_position(get_global_position())

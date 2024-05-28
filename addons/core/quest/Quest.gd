@@ -111,9 +111,12 @@ func update_quest(x=null):
 	count_remaining_update.emit(remaining)
 
 	if manual_total != null:
+		if x == null:
+			Log.warn("quest updated with null x", self)
+			return
 		# perhaps this is a better quest update method
 		# i think we can count on uniqueness here, tho these xs might be dropped/freed :/
-		if x and not x in xs_updated:
+		if not x in xs_updated:
 			xs_updated.append(x)
 		if len(xs_updated) == manual_total:
 			quest_complete.emit()
