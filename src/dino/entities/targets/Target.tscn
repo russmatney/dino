@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4inidtgbuwlg"]
+[gd_scene load_steps=4 format=3 uid="uid://c4inidtgbuwlg"]
 
 [ext_resource type="Script" path="res://src/dino/entities/targets/Target.gd" id="1_7124b"]
 [ext_resource type="SpriteFrames" uid="uid://d1uqrh57tjmm6" path="res://src/dino/entities/targets/target_sprite_frames.tres" id="2_c7m12"]

@@ -21,7 +21,7 @@ static func add(node, opts={}):
 		return
 
 	var indicator = indicator_scene.instantiate()
-	indicator.ready.connect(indicator.set_label_text.bind(opts.get("label")))
+	indicator.ready.connect(indicator.set_label_text.bind(opts.get("label", node.name)))
 
 	var vis = VisibleOnScreenNotifier2D.new()
 	vis.screen_exited.connect(OffscreenIndicator.maybe_activate.bind(indicator, node, opts))

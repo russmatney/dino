@@ -87,6 +87,10 @@ func _ready():
 
 	state_label.set_visible(false)
 
+	OffscreenIndicator.add(self, {
+		# could instead depend on a fn like this directly on the passed node
+		is_active=func(): return not is_dead})
+
 func calculate_warp_spots():
 	var dist_away = 200
 	var maybe_targets = [

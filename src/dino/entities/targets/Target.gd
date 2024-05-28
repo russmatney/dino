@@ -12,10 +12,7 @@ var is_dead = false
 
 func _ready():
 	anim.animation_finished.connect(_animation_finished)
-	OffscreenIndicator.add(self)
-	# TODO how to work with animations and positions after regen bug
-	# U.animate(self)
-	# U.animate_rotate(self)
+	OffscreenIndicator.add(self, {label="Target"})
 	area_entered.connect(_on_body_entered)
 	body_entered.connect(_on_body_entered)
 

@@ -13,7 +13,7 @@ extends WoodsEntity
 func all_anims() -> Array:
 	return [anim_green, anim_greenred, anim_purple, anim_redorange, anim_yellow]
 
-signal caught
+signal caught(leaf)
 var is_caught = false
 
 var anim
@@ -23,6 +23,7 @@ func _ready():
 	anim = U.rand_of(all_anims())
 	super._ready()
 	render()
+	OffscreenIndicator.add(self, {label="Leaf"})
 
 func hide_anims():
 	all_anims().map(func(a):
@@ -40,7 +41,7 @@ func render():
 
 func kill():
 	is_caught = true
-	caught.emit()
+	caught.emit(self)
 	animate_collected()
 
 func animate_collected():
