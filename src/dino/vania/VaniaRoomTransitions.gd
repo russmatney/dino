@@ -36,7 +36,7 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 
 	# TODO at some n rooms, drop far-away rooms
 	# maybe check for rooms that are n-cells away?
-	Log.info("%s rooms now loaded", len(game.get_vania_rooms()))
+	# Log.info("%s rooms now loaded" % len(game.get_vania_rooms()))
 
 	var og_player = Dino.current_player_node()
 	var og_p_position = og_player.position
@@ -50,9 +50,11 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 			if room.room_def.room_path == target_room:
 				# the returned-to room needs a position reset
 				room.position = Vector2()
+				room.activate_room()
 			else:
 				# reposition other rooms according to the offset
 				room.position -= offset
+				room.deactivate_room()
 
 		# maybe some nice way to handle this
 		if abs(og_p_velocity.x) > abs(og_p_velocity.y):

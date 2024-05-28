@@ -1,16 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1lb8q1rsj1sn"]
+[gd_scene load_steps=3 format=3 uid="uid://c1lb8q1rsj1sn"]
 
 [ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_xmy53"]
-[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="2_xorhb"]
-
-[sub_resource type="Resource" id="Resource_cxudq"]
-resource_name = "The Mountain Map Def"
-script = ExtResource("2_xorhb")
-name = "Welcome to The Mountain"
-rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
-sub_map_defs = Array[ExtResource("2_xorhb")]([])
-grid_defs_path = ""
+[ext_resource type="Resource" uid="uid://chs57h2n1xcmw" path="res://src/dino/modes/runner/mapdefs/Mountain.tres" id="2_uibkr"]
 
 [node name="Mountain" type="Node2D"]
 script = ExtResource("1_xmy53")
-map_def = SubResource("Resource_cxudq")
+map_def = ExtResource("2_uibkr")

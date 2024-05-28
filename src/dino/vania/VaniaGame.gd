@@ -112,18 +112,16 @@ func add_child_to_level(_node, child):
 ## quests ###################################################3
 
 func setup_quests():
-	Log.pr("setting up quests")
 	var ents = []
 	var d_ents = U.flat_map(room_defs, func(def): return def.entities())
 	var d_enms = U.flat_map(room_defs, func(def): return def.enemies())
 	ents.append_array(d_ents)
 	ents.append_array(d_enms)
 
-	Log.prn("all ents", ents)
 	quest_manager.add_quests_for_entities(ents)
 
 func on_quest_complete(quest):
-	Log.pr("completed", quest.label)
+	Log.info("quest completed", quest.label)
 	# TODO required vs optional quests (in the mapDef)
 
 # TODO trigger after entering room if all quests are complete

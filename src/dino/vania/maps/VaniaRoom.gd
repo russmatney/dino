@@ -15,6 +15,8 @@ var tilemap: DinoTileMap
 var bg_tilemap: DinoTileMap
 var bg_color_rect: ColorRect
 var nav_region: NavigationRegion2D
+@onready var directional_light: DirectionalLight2D = $DirectionalLight2D
+@onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
 @export var is_debug = false
 @export var debug_room_def: VaniaRoomDef
@@ -59,6 +61,20 @@ func _ready():
 			Log.warn("No room_def on vania room!")
 
 		setup_nav_region() # requires main thread
+
+## activate_room ##############################################################
+
+func activate_room():
+	bg_color_rect.set_visible(true)
+	directional_light.set_visible(true)
+	canvas_modulate.set_visible(true)
+
+## deactivate_room ##############################################################
+
+func deactivate_room():
+	bg_color_rect.set_visible(false)
+	directional_light.set_visible(false)
+	canvas_modulate.set_visible(false)
 
 ## build room ##############################################################
 

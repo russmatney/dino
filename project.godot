@@ -66,6 +66,7 @@ folder_colors={
 "res://src/dino/entities/": "pink",
 "res://src/dino/modes/": "orange",
 "res://src/dino/modes/classic/mapdefs/": "red",
+"res://src/dino/modes/runner/mapdefs/": "red",
 "res://src/dino/npcs/": "pink",
 "res://src/dino/pickups/": "pink",
 "res://src/dino/players/": "pink",

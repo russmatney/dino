@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=2 format=3 uid="uid://chs57h2n1xcmw"]
+
+[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="1_qdvp2"]
+
+[resource]
+resource_name = "The Mountain Map Def"
+script = ExtResource("1_qdvp2")
+name = "Welcome to The Mountain"
+rooms = Array[Resource("res://src/dino/vania/MapInput.gd")]([])
+sub_map_defs = Array[ExtResource("1_qdvp2")]([])

@@ -70,10 +70,18 @@ offset_bottom = 288.0
 texture = ExtResource("2_dw7vg")
 stretch_mode = 1
 
-[node name="RoomInstance" parent="." instance=ExtResource("2_1wsgr")]
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.533333, 0.533333, 0.533333, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = -0.116937
+energy = 0.3
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 0.4
+height = 0.15
+
+[node name="RoomInstance" parent="." instance=ExtResource("2_1wsgr")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_61itp")
@@ -87,11 +95,3 @@ script = ExtResource("6_q8wsp")
 [node name="BackgroundTileMap" type="TileMap" parent="."]
 format = 2
 script = ExtResource("6_q8wsp")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-rotation = -0.116937
-energy = 0.3
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 0.4
-height = 0.15
