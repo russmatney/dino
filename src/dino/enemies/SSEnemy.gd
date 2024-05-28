@@ -110,6 +110,11 @@ func _ready():
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	hitbox.body_exited.connect(_on_hitbox_body_exited)
 
+	set_collision_layer_value(1, false) # walls,doors,env
+	set_collision_layer_value(4, true) # enemies
+	set_collision_mask_value(1, true) # sense walls/doors/tiles
+	set_collision_mask_value(12, true) # spikes
+
 	if state_label:
 		if show_debug:
 			state_label.set_visible(true)
@@ -296,6 +301,9 @@ func die():
 	# Sounds.play(Sounds.S.enemy_dead)
 	if skull_particles:
 		skull_particles.set_emitting(true)
+
+	# remove from collision layer
+	set_collision_layer_value(4, false)
 
 	if not did_drop_drops:
 		did_drop_drops = true

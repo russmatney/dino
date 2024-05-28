@@ -178,6 +178,7 @@ radius = 74.2428
 collision_layer = 8
 collision_mask = 2049
 script = ExtResource("1_nugmv")
+should_hurt_to_touch = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -223,6 +224,7 @@ horizontal_alignment = 1
 [node name="SkullParticles" parent="." instance=ExtResource("6_fsp6w")]
 
 [node name="GlowLight" type="PointLight2D" parent="."]
+visible = false
 texture = ExtResource("7_3c06x")
 
 [node name="StunnedLight" type="PointLight2D" parent="."]
@@ -238,8 +240,12 @@ enabled = false
 texture = ExtResource("7_3c06x")
 
 [node name="Hopbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hopbox"]
 shape = SubResource("CircleShape2D_jiqhh")
+
+[node name="FrontRay" type="RayCast2D" parent="."]
+position = Vector2(8, 2.08165e-12)

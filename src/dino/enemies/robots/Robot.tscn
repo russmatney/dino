@@ -381,7 +381,7 @@ shape = SubResource("RectangleShape2D_j2y1f")
 texture_filter = 1
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_jcl5k")
-animation = &"idle"
+animation = &"run_right"
 autoplay = "idle"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
@@ -395,20 +395,20 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "5fae7e5f235db706a3047515520fb7dc"
 
 [node name="FrontRay" type="RayCast2D" parent="."]
-position = Vector2(-8, 0)
+position = Vector2(8, 2.08165e-12)
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
 collision_mask = 3
 
 [node name="LowLineOfSight" type="RayCast2D" parent="."]
 position = Vector2(0, 20)
-rotation = 1.57079
+rotation = -1.5708
 target_position = Vector2(0, 40)
 collision_mask = 2
 
 [node name="HighLineOfSight" type="RayCast2D" parent="."]
 position = Vector2(0, -10)
-rotation = 1.57079
+rotation = -1.5708
 target_position = Vector2(0, 40)
 collision_mask = 2
 
