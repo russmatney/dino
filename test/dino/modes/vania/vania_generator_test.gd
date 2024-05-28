@@ -254,8 +254,6 @@ func test_add_rooms_consistent_doors():
 	var first_def = defs[0]
 	var second_def = defs[1]
 
-	Log.prn("map-cells - first", first_def.map_cells, "second", second_def.map_cells)
-
 	await Engine.get_main_loop().process_frame
 
 	assert_str(first_def.room_path).is_not_null()
@@ -271,11 +269,54 @@ func test_add_rooms_consistent_doors():
 	assert_int(len(first_doors)).is_equal(1)
 	assert_int(len(second_doors)).is_equal(1)
 
-	Log.prn("doors - first", first_doors, "second", second_doors)
 	var first_door = first_doors[0]
 	var second_door = second_doors[0]
 
 	assert_array(first_door).contains_exactly_in_any_order(second_door)
+
+func test_add_rooms_consistent_doors_three_rooms():
+	# creating two tall rooms with minimal-horizontal doors
+	var map_def = MapDef.with_inputs([
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_5})}),
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_5})}),
+		MapInput.has_room({shape=RoomShape.new({type=RoomShape.T.TALL_5})}),
+		])
+	map_def.input.door_mode = VaniaRoomDef.DOOR_MODE.MINIMAL_HORIZONTAL
+	map_def.input.neighbor_direction = Vector2i.RIGHT
+
+	var gen = VaniaGenerator.new()
+	var defs = gen.generate_map(map_def)
+	var first_def = defs[0]
+	var second_def = defs[1]
+	var third_def = defs[2]
+
+	await Engine.get_main_loop().process_frame
+
+	assert_str(first_def.room_path).is_not_null()
+	assert_array(first_def.map_cells).is_not_empty()
+	assert_str(second_def.room_path).is_not_null()
+	assert_array(second_def.map_cells).is_not_empty()
+	assert_str(third_def.room_path).is_not_null()
+	assert_array(third_def.map_cells).is_not_empty()
+
+	var first_doors = first_def.doors
+	var second_doors = second_def.doors
+	var third_doors = third_def.doors
+
+	assert_array(first_doors).is_not_empty()
+	assert_array(second_doors).is_not_empty()
+	assert_array(third_doors).is_not_empty()
+	assert_int(len(first_doors)).is_equal(1)
+	assert_int(len(second_doors)).is_equal(2)
+	assert_int(len(third_doors)).is_equal(1)
+
+	var first_door = first_doors[0]
+	first_door.reverse()
+	var third_door = third_doors[0]
+	third_door.reverse()
+
+	assert_array(second_doors).contains([first_door])
+	assert_array(second_doors).contains([third_door])
 
 
 ## placing rooms ################################################

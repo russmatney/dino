@@ -127,8 +127,8 @@ static func get_existing_map_cells():
 
 ## neighbor data ##########################################################
 
+# calc and set 'doors' on all room_defs, making sure neighboring doors are consistent
 func rebuild_doors():
-	# calc and set 'doors' on all room_defs, making sure neighboring doors are consistent
 
 	# clear and rebuild? maybe that's fine?
 	neighbor_data = {}
@@ -148,8 +148,8 @@ func rebuild_doors():
 		var new_nbr_data = room_def.calc_doors({neighbor_data=nbr_room_data})
 		neighbor_data[room_def.room_path] = new_nbr_data
 
-
 func get_neighbor_defs(room_def: VaniaRoomDef):
+	# TODO ugh, get rid of this neighbor_data / rebuild_doors dep
 	var nbr = neighbor_data.get(room_def.room_path)
 	if nbr == null:
 		Log.warn("Could not find neighbor for room_def", room_def.room_path.get_file())
@@ -185,7 +185,7 @@ func build_and_prep_scene(room_def, _opts={}):
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
 	# unique name for unique hotel entries?
 	room.name = "%s%s" % [room.name, room_def.index]
-	room.build_room(room_def, {neighbor_data=neighbor_data.get(room_def.room_path)})
+	room.build_room(room_def)
 	room.is_debug = false
 
 	# pack and write to room_def.room_path
