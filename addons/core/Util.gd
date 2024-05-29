@@ -365,6 +365,11 @@ static func flatten(arr):
 static func flat_map(arr, to_xs):
 	return U.flatten(arr.map(to_xs))
 
+# a reverse that returns the updated array
+static func reverse(arr):
+	arr.reverse()
+	return arr
+
 ############################################################
 # Facing
 

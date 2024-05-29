@@ -239,7 +239,7 @@ func get_possible_start_coords(existing_map_cells, def):
 
 	var possible = []
 	if existing_map_cells.is_empty():
-		possible = [Vector3i()]
+		possible = [Vector3i()] # first room starts at 0,0
 	else:
 		var rel_neighbor_coords = relative_neighbor_coords(def)
 

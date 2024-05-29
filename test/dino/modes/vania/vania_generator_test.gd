@@ -306,17 +306,30 @@ func test_add_rooms_consistent_doors_three_rooms():
 	assert_array(first_doors).is_not_empty()
 	assert_array(second_doors).is_not_empty()
 	assert_array(third_doors).is_not_empty()
-	assert_int(len(first_doors)).is_equal(1)
-	assert_int(len(second_doors)).is_equal(2)
-	assert_int(len(third_doors)).is_equal(1)
 
-	var first_door = first_doors[0]
-	first_door.reverse()
-	var third_door = third_doors[0]
-	third_door.reverse()
+	var more
+	var other_a
+	var other_b
 
-	assert_array(second_doors).contains([first_door])
-	assert_array(second_doors).contains([third_door])
+	if len(first_doors) == 2:
+		more = first_doors
+		other_a = second_doors
+		other_b = third_doors
+	elif len(second_doors) == 2:
+		more = second_doors
+		other_a = first_doors
+		other_b = third_doors
+	elif len(third_doors) == 2:
+		more = third_doors
+		other_a = second_doors
+		other_b = first_doors
+
+	assert_int(len(more)).is_equal(2)
+	assert_int(len(other_a)).is_equal(1)
+	assert_int(len(other_b)).is_equal(1)
+
+	assert_array(more).contains([U.reverse(other_a[0])])
+	assert_array(more).contains([U.reverse(other_b[0])])
 
 
 ## placing rooms ################################################
