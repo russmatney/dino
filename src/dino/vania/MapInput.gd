@@ -12,6 +12,11 @@ class_name MapInput
 @export var entities: Array[DinoEntity]
 @export var enemies: Array[DinoEnemy]
 
+# if specified, spawn points are added to the scene,
+# and the specified enemies are spawned n times
+# TODO ignore/include bosses? targets/leaves?
+@export var enemy_waves: int = 0
+
 @export var room_shapes: Array[RoomShape]
 
 @export var room_effects: Array[RoomEffect]
@@ -23,10 +28,12 @@ class_name MapInput
 @export var drops: Array[DropData]
 @export var bg_color: Color
 
+
 # VaniaRoomDef.to_defs() helpers
 # used for creating more rooms with the same MapInput data
 @export var dupe_room_count: int = 0
 # skip merging the parent mapDef's MapInput into this one
+# maybe rename to 'skip_base_merge'?
 @export var skip_merge: bool = false
 
 var grid: GridDef
@@ -47,6 +54,8 @@ func _init(opts={}):
 		genre_type = opts.get("genre_type")
 	entities.assign(opts.get("entities", []))
 	enemies.assign(opts.get("enemies", []))
+	enemy_waves = opts.get("enemy_waves", 0)
+
 	room_shapes.assign(opts.get("room_shapes", []))
 	if opts.get("room_effects"):
 		room_effects.assign(opts.get("room_effects"))
@@ -57,6 +66,9 @@ func _init(opts={}):
 	drops.assign(opts.get("drops", []))
 	if opts.get("bg_color"):
 		bg_color = opts.get("bg_color")
+
+	dupe_room_count = opts.get("dupe_room_count", 0)
+	skip_merge = opts.get("skip_merge", false)
 
 func to_pretty():
 	return {
@@ -87,10 +99,15 @@ func merge(b: MapInput):
 	if b.neighbor_direction != Vector2i.ZERO:
 		nbr_dir = b.neighbor_direction
 
+	var en_waves = enemy_waves
+	if b.enemy_waves > 0:
+		en_waves = b.enemy_waves
+
 	return MapInput.new({
 		genre_type=U._or(b.genre_type, genre_type),
 		entities=U.append_array(entities, b.entities),
 		enemies=U.append_array(enemies, b.enemies),
+		enemy_waves=en_waves,
 		room_shapes=U.distinct(U.append_array(room_shapes, b.room_shapes)),
 		room_effects=U.distinct(U.append_array(room_effects, b.room_effects)),
 		tiles=U.distinct(U.append_array(tiles, b.tiles)),

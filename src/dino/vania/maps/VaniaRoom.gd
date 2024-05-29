@@ -18,6 +18,9 @@ var nav_region: NavigationRegion2D
 @onready var directional_light: DirectionalLight2D = $DirectionalLight2D
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
+var enemy_spawn_points = []
+var is_active = false
+
 @export var is_debug = false
 @export var debug_room_def: VaniaRoomDef
 
@@ -61,6 +64,7 @@ func _ready():
 			Log.warn("No room_def on vania room!")
 
 		setup_nav_region() # requires main thread
+		setup_waves()
 
 ## activate_room ##############################################################
 
@@ -69,12 +73,59 @@ func activate_room():
 	directional_light.set_visible(true)
 	canvas_modulate.set_visible(true)
 
+	is_active = true
+	spawn_enemy_wave()
+
 ## deactivate_room ##############################################################
 
 func deactivate_room():
 	bg_color_rect.set_visible(false)
 	directional_light.set_visible(false)
 	canvas_modulate.set_visible(false)
+
+	is_active = false
+
+## waves ##############################################################
+
+func setup_waves():
+	enemy_spawn_points = []
+	for ch in get_children():
+		if ch is DinoSpawnPoint:
+			enemy_spawn_points.append(ch)
+
+var wave = 0
+var this_wave = []
+func spawn_enemy_wave():
+	Log.pr("attempting to spawn enemy wave")
+	if enemy_spawn_points.is_empty():
+		Log.warn("no enemy spawn points, cannot start wave")
+		return
+
+	enemy_spawn_points.shuffle()
+
+	if not this_wave.is_empty():
+		Log.info("Current wave not complete, cannot spawn next")
+		return
+
+	if wave == room_def.enemy_waves():
+		Log.info("all waves complete")
+		# open doors? banner notif?
+		return
+
+	if wave < room_def.enemy_waves():
+		this_wave = []
+		wave += 1
+		Log.info("starting wave", wave)
+		# TODO spawn from random point for each room_def.enemies()
+		for sp in enemy_spawn_points:
+			var en = sp.spawn_entity()
+			this_wave.append(en)
+			en.died.connect(func(e):
+				this_wave.erase(e)
+				if this_wave.is_empty() and is_active:
+					spawn_enemy_wave())
+			# TODO ensure desired drops
+			add_child(en)
 
 ## build room ##############################################################
 
@@ -380,7 +431,21 @@ func add_background_tiles(opts={}):
 
 ## add_enemies/entities ##############################################################
 
+var spawn_point_scene = preload("res://src/dino/entities/SpawnPoint.tscn")
+
+# adds an entity for the passed DinoEntity or DinoEnemy
+# if waves are specified, adds a spawn_point instead.
 func add_entity(ent):
+	var use_spawn_point = false
+	if (ent is DinoEnemy and
+		not ent.is_boss() and
+		room_def.enemy_waves() > 0):
+		use_spawn_point = true
+	Log.pr("adding ent", ent, "using spawn point", use_spawn_point)
+	Log.pr("ent is dinoEnemy", ent is DinoEnemy)
+	Log.pr("ent is boss", ent is DinoEnemy and ent.is_boss())
+	Log.pr("waves", room_def.enemy_waves())
+
 	var tmap_data = build_tilemap_data()
 
 	var label = ent.get_label()
@@ -401,15 +466,22 @@ func add_entity(ent):
 		if start_coords.is_empty():
 			Log.warn("No position found for entity!", ent)
 			continue
+		# TODO create multiple spawn points
 		var start_coord = start_coords.pick_random()
 		start_coords.erase(start_coord)
 
 		# place entity at random start cord
 		var pos = tilemap.map_to_local(e_coord + start_coord)
-		var node = ent.get_scene().instantiate()
-		# TODO this is more likely a spawn point referencing an entity
+		var node
+		if use_spawn_point:
+			node = spawn_point_scene.instantiate()
+			# could instead pass at spawn-wave time
+			node.spawn_scene = ent.get_scene()
+		else:
+			node = ent.get_scene().instantiate()
 
 		# ensure a drop
+		# TODO ensure drops on wave-spawned ents
 		if "drops" in node.get_property_list().map(func(p): return p.name):
 			if node.drops.is_empty():
 				var drops = room_def.get_drops()

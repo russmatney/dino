@@ -118,6 +118,7 @@ func setup_quests():
 	ents.append_array(d_ents)
 	ents.append_array(d_enms)
 
+	# TODO multiply quest manual total (enemies) by wave count
 	quest_manager.add_quests_for_entities(ents)
 
 func on_quest_complete(quest):
@@ -473,6 +474,9 @@ func load_room(def: VaniaRoomDef):
 
 	# if we're requiring all rooms to be visited....
 	check_game_complete()
+
+	# activate the room, spawn next wave
+	next_room.activate_room()
 
 func reload_current_room():
 	MetSys.room_changed.emit(MetSys.get_current_room_name(), false)

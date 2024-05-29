@@ -94,6 +94,11 @@ func enemies() -> Array[DinoEnemy]:
 		return []
 	return input.enemies
 
+func enemy_waves() -> int:
+	if not input:
+		return 0
+	return input.enemy_waves
+
 func effects() -> Array[RoomEffect]:
 	# TODO read effects from the input.grid/grids?
 	if not input:

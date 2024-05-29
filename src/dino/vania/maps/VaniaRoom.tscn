@@ -27,6 +27,7 @@ script = ExtResource("3_1w2s4")
 genre_type = 0
 entities = Array[ExtResource("3_tseep")]([SubResource("Resource_u5y3n"), SubResource("Resource_paglq")])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+enemy_waves = 0
 room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[ExtResource("4_2y0uv")]([SubResource("Resource_yskg4")])

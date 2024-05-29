@@ -50,7 +50,7 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 			if room.room_def.room_path == target_room:
 				# the returned-to room needs a position reset
 				room.position = Vector2()
-				room.activate_room()
+				# activate_room() is called in vaniaGame
 			else:
 				# reposition other rooms according to the offset
 				room.position -= offset

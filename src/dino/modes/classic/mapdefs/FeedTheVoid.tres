@@ -25,6 +25,7 @@ script = ExtResource("5_cv7fm")
 genre_type = 0
 entities = Array[ExtResource("4_wpq4m")]([SubResource("Resource_6bvdb")])
 enemies = Array[ExtResource("3_c4s3a")]([SubResource("Resource_5l33f")])
+enemy_waves = 0
 room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
 room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
@@ -33,6 +34,8 @@ neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
 drops = Array[ExtResource("2_bjcdh")]([SubResource("Resource_6imcj")])
 bg_color = Color(0.774941, 0.436213, 0.239675, 1)
+dupe_room_count = 0
+skip_merge = false
 grids_path = ""
 
 [resource]
