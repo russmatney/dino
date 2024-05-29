@@ -32,7 +32,7 @@ func has_required_entities(ents):
 	# at least one void
 	return len(relevant_ents) > 0
 
-func setup_with_entites(ents):
+func setup_with_entities(ents):
 	var relevant_ents = []
 	for e in ents:
 		var e_id = e.get_entity_id()

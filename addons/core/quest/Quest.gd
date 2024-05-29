@@ -53,11 +53,9 @@ var entity_ids = []
 
 # override the observed/auto-calced 'total'
 var manual_total
-func set_manual_total(n):
-	manual_total = n
 
 func to_pretty():
-	return {label=label, total=total, xs_group=xs_group, xs_updated=len(xs_updated)}
+	return {label=label, total=total, manual_total=manual_total, xs_group=xs_group, xs_updated=len(xs_updated)}
 
 ## enter tree ##########################################################
 
@@ -112,7 +110,7 @@ func update_quest(x=null):
 
 	if manual_total != null:
 		if x == null:
-			# Log.warn("quest updated with null x", self)
+			Log.warn("quest updated with null x", self)
 			return
 		# perhaps this is a better quest update method
 		# i think we can count on uniqueness here, tho these xs might be dropped/freed :/

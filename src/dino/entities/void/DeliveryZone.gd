@@ -8,7 +8,7 @@ var delivery_count = 0
 
 var complete = false
 
-signal void_satisfied
+signal void_satisfied(x)
 
 func _ready():
 	area.body_entered.connect(_on_body_entered)
@@ -23,7 +23,7 @@ func _on_body_entered(body: Node):
 
 			if delivery_count >= expected_delivery_count:
 				complete = true
-				void_satisfied.emit()
+				void_satisfied.emit(self)
 				Debug.notif("VOID SATISFIED!")
 				label.text = "[center]VOID SATISFIED[/center]"
 

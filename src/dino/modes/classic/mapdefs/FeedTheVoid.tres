@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=11 format=3 uid="uid://b2xht8rpxnoyr"]
+[gd_resource type="Resource" script_class="MapDef" load_steps=12 format=3 uid="uid://b2xht8rpxnoyr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/pickups/orb/GreenBlobAnim.tscn" id="1_ejkkc"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_bjcdh"]
@@ -20,10 +20,14 @@ _id = "121"
 script = ExtResource("4_wpq4m")
 _id = "151"
 
+[sub_resource type="Resource" id="Resource_5s072"]
+script = ExtResource("4_wpq4m")
+_id = "140"
+
 [sub_resource type="Resource" id="Resource_gkjen"]
 script = ExtResource("5_cv7fm")
 genre_type = 0
-entities = Array[ExtResource("4_wpq4m")]([SubResource("Resource_6bvdb")])
+entities = Array[ExtResource("4_wpq4m")]([SubResource("Resource_6bvdb"), SubResource("Resource_5s072"), SubResource("Resource_5s072")])
 enemies = Array[ExtResource("3_c4s3a")]([SubResource("Resource_5l33f")])
 enemy_waves = 0
 room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
