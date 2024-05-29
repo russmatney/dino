@@ -23,6 +23,12 @@ class_name MapInput
 @export var drops: Array[DropData]
 @export var bg_color: Color
 
+# VaniaRoomDef.to_defs() helpers
+# used for creating more rooms with the same MapInput data
+@export var dupe_room_count: int = 0
+# skip merging the parent mapDef's MapInput into this one
+@export var skip_merge: bool = false
+
 var grid: GridDef
 var grids: Array[GridDef]
 

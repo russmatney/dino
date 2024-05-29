@@ -1,54 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://dasm8htdfmonq"]
+[gd_scene load_steps=3 format=3 uid="uid://dasm8htdfmonq"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
-[ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="2_r6yek"]
-[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="3_lkkeo"]
-[ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/particle_area/RainFallParticles.tscn" id="4_hgctr"]
-[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="4_m2oft"]
-[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="4_m4x81"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="8_huwy0"]
-[ext_resource type="Resource" uid="uid://wo676lm3hqav" path="res://src/dino/modes/classic/mapdefs/EnemyRobot.tres" id="8_ih3dk"]
-[ext_resource type="Resource" uid="uid://dsjsh2x8rma6q" path="res://src/dino/modes/classic/mapdefs/BlobTeam.tres" id="9_pn3mg"]
-[ext_resource type="Resource" uid="uid://dmshcti41mjc6" path="res://src/dino/modes/classic/mapdefs/TargetTest.tres" id="10_cumfb"]
-[ext_resource type="Resource" uid="uid://b2xht8rpxnoyr" path="res://src/dino/modes/classic/mapdefs/FeedTheVoid.tres" id="11_lim57"]
-[ext_resource type="Resource" uid="uid://dalcnxh8i1eyn" path="res://src/dino/modes/classic/mapdefs/GiantHario.tres" id="12_5dcf5"]
-[ext_resource type="Resource" uid="uid://dtgki8fw57njc" path="res://src/dino/modes/classic/mapdefs/DestroyTheThings.tres" id="13_5lhmn"]
-[ext_resource type="Resource" uid="uid://ccmqnk240p1tj" path="res://src/dino/modes/classic/mapdefs/LeafChallenge.tres" id="14_fpq6l"]
-[ext_resource type="Resource" uid="uid://d0d3irg2c1qlf" path="res://src/dino/modes/classic/mapdefs/BossBattle.tres" id="15_ekp3g"]
-
-[sub_resource type="Resource" id="Resource_x03cn"]
-script = ExtResource("3_lkkeo")
-type = 2
-anim_scene = ExtResource("2_r6yek")
-
-[sub_resource type="Resource" id="Resource_bne7i"]
-script = ExtResource("8_huwy0")
-type = 1
-scene = ExtResource("4_hgctr")
-
-[sub_resource type="Resource" id="Resource_yuw5o"]
-script = ExtResource("4_m4x81")
-genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[ExtResource("8_huwy0")]([SubResource("Resource_bne7i")])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(1, -1)])
-drops = Array[ExtResource("3_lkkeo")]([SubResource("Resource_x03cn")])
-bg_color = Color(0, 0, 0, 1)
-grids_path = ""
-
-[sub_resource type="Resource" id="Resource_ub0wu"]
-script = ExtResource("4_m2oft")
-name = "Classic Mode!"
-input = SubResource("Resource_yuw5o")
-rooms = Array[ExtResource("4_m4x81")]([])
-sub_map_defs = Array[ExtResource("4_m2oft")]([ExtResource("8_ih3dk"), ExtResource("9_pn3mg"), ExtResource("10_cumfb"), ExtResource("11_lim57"), ExtResource("12_5dcf5"), ExtResource("13_5lhmn"), ExtResource("14_fpq6l"), ExtResource("15_ekp3g")])
+[ext_resource type="Resource" uid="uid://1kqvgyd2awj0" path="res://src/dino/modes/classic/mapdefs/ClassicSideScroller.tres" id="2_b7cpr"]
 
 [node name="ClassicSideScroller" type="Node2D"]
 script = ExtResource("1_5gcr3")
 _seed = 4244388041
-map_def = SubResource("Resource_ub0wu")
+map_def = ExtResource("2_b7cpr")

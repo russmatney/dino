@@ -24,12 +24,17 @@ static func to_defs(m_def: MapDef) -> Array[VaniaRoomDef]:
 	# merge default input opts
 	m_def.input = VaniaRoomDef.default_input().merge(m_def.input)
 
+	var room_inputs = []
 	for inp in m_def.rooms:
 		if inp == null:
 			inp = MapInput.new()
-		# TODO conditional/flag to skip this merging
-		# per-room overwrites map_def.input (b overwites a)
-		inp = m_def.input.merge(inp)
+		room_inputs.append(inp)
+		for _i in range(inp.dupe_room_count):
+			room_inputs.append(inp)
+
+	for inp in room_inputs:
+		if not inp.skip_merge:
+			inp = m_def.input.merge(inp)
 
 		var def = VaniaRoomDef.new({input=inp})
 		def.map_def = m_def

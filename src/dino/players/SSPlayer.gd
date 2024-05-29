@@ -663,7 +663,6 @@ func collect(opts={}):
 ## counts
 
 func add_coin():
-	notif("COIN PICKED UP", {"dupe": true})
 	coins += 1
 	Hotel.check_in(self)
 
@@ -672,7 +671,6 @@ func spend_coins(n: int):
 	Hotel.check_in(self)
 
 func add_gem():
-	notif("GEM PICKED UP", {"dupe": true})
 	gems += 1
 	Hotel.check_in(self)
 
@@ -681,7 +679,6 @@ func spend_gems(n: int):
 	Hotel.check_in(self)
 
 func add_leaf():
-	notif("LEAF PICKED UP", {"dupe": true})
 	leaves += 1
 	Hotel.check_in(self)
 

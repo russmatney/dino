@@ -10,7 +10,7 @@ class_name MapDef
 @export var input: MapInput
 
 # inputs for specific rooms and specific items in them
-# TODO do we want metadata on these? or is that just more MapInput fields?
+# do we want metadata to wrap these MapInputs?
 @export var rooms: Array[MapInput]
 
 # sub map_defs for complex map generation
