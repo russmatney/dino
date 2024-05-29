@@ -98,7 +98,6 @@ var wave = 0
 var this_wave = []
 func spawn_enemy_wave():
 	if enemy_spawn_points.is_empty():
-		Log.warn("no enemy spawn points, cannot start wave")
 		return
 
 	enemy_spawn_points.shuffle()

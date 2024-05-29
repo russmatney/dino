@@ -74,9 +74,10 @@ func is_debug_mode():
 
 ## launch/start game ##########################################################
 
-func launch(mode: DinoModeEntity, opts={}):
+func start_game_mode(mode: DinoModeEntity, opts={}):
+	reset_player_data()
 	game_mode = mode
-	# TODO menu should support a mode with or without a menu
+
 	if mode.get_menu() != null:
 		mode.nav_to_menu()
 		return
@@ -116,6 +117,9 @@ func current_player_entity():
 	var p = player_set.active_player()
 	if p:
 		return p.entity
+
+func reset_player_data():
+	player_set.reset_player_data()
 
 ## notifications ##########################################################
 

@@ -43,7 +43,12 @@ func create_new(opts):
 	stack.push_front(pdata)
 	Log.info("created new player!", pdata.entity.get_display_name())
 
-func _remove_player(p: PData, _opts={}):
+# reset data. supports starting a new game mode
+func reset_player_data():
+	# drop everything? should we manually free anything?
+	stack = []
+
+func _remove_player_node(p: PData, _opts={}):
 	if p.node and is_instance_valid(p.node):
 		p.node.get_parent().remove_child(p.node)
 	if p.node and is_instance_valid(p.node):
@@ -123,7 +128,7 @@ func respawn_active_player(opts):
 	if p:
 		if p.node and is_instance_valid(p.node):
 			active_player_parent = p.node.get_parent()
-		_remove_player(p, opts)
+		_remove_player_node(p, opts)
 
 	if opts.get("new_entity") != null:
 		# TODO remove existing entity from stack?

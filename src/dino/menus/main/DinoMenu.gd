@@ -51,4 +51,4 @@ func build_games_list():
 		button.set_theme_type_variation("BlueButton")
 		games_list.add_child(button)
 
-		button.pressed.connect(Dino.launch.bind(m))
+		button.pressed.connect(Dino.start_game_mode.bind(m))
