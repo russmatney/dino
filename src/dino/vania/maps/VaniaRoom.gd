@@ -18,6 +18,7 @@ var nav_region: NavigationRegion2D
 @onready var directional_light: DirectionalLight2D = $DirectionalLight2D
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
 
+var spawn_point_scene = preload("res://src/dino/entities/SpawnPoint.tscn")
 var enemy_spawn_points = []
 var is_active = false
 
@@ -96,7 +97,6 @@ func setup_waves():
 var wave = 0
 var this_wave = []
 func spawn_enemy_wave():
-	Log.pr("attempting to spawn enemy wave")
 	if enemy_spawn_points.is_empty():
 		Log.warn("no enemy spawn points, cannot start wave")
 		return
@@ -116,16 +116,19 @@ func spawn_enemy_wave():
 		this_wave = []
 		wave += 1
 		Log.info("starting wave", wave)
-		# TODO spawn from random point for each room_def.enemies()
-		for sp in enemy_spawn_points:
-			var en = sp.spawn_entity()
-			this_wave.append(en)
-			en.died.connect(func(e):
+		for ent in room_def.enemies().filter(func(ent): return not ent.is_boss()):
+			var sp = enemy_spawn_points.filter(func(s):
+				return s.spawn_scene == ent.get_scene()
+				).pick_random()
+			var node = sp.spawn_entity()
+			this_wave.append(node)
+			node.died.connect(func(e):
 				this_wave.erase(e)
 				if this_wave.is_empty() and is_active:
+					await get_tree().create_timer(1.4).timeout
 					spawn_enemy_wave())
-			# TODO ensure desired drops
-			add_child(en)
+			ensure_expected_drops(node)
+			add_child(node)
 
 ## build room ##############################################################
 
@@ -431,20 +434,13 @@ func add_background_tiles(opts={}):
 
 ## add_enemies/entities ##############################################################
 
-var spawn_point_scene = preload("res://src/dino/entities/SpawnPoint.tscn")
-
 # adds an entity for the passed DinoEntity or DinoEnemy
 # if waves are specified, adds a spawn_point instead.
 func add_entity(ent):
 	var use_spawn_point = false
-	if (ent is DinoEnemy and
-		not ent.is_boss() and
+	if (ent is DinoEnemy and not ent.is_boss() and
 		room_def.enemy_waves() > 0):
 		use_spawn_point = true
-	Log.pr("adding ent", ent, "using spawn point", use_spawn_point)
-	Log.pr("ent is dinoEnemy", ent is DinoEnemy)
-	Log.pr("ent is boss", ent is DinoEnemy and ent.is_boss())
-	Log.pr("waves", room_def.enemy_waves())
 
 	var tmap_data = build_tilemap_data()
 
@@ -466,32 +462,31 @@ func add_entity(ent):
 		if start_coords.is_empty():
 			Log.warn("No position found for entity!", ent)
 			continue
-		# TODO create multiple spawn points
-		var start_coord = start_coords.pick_random()
-		start_coords.erase(start_coord)
 
-		# place entity at random start cord
-		var pos = tilemap.map_to_local(e_coord + start_coord)
-		var node
+		var spawn_count = 1
 		if use_spawn_point:
-			node = spawn_point_scene.instantiate()
-			# could instead pass at spawn-wave time
-			node.spawn_scene = ent.get_scene()
-		else:
-			node = ent.get_scene().instantiate()
+			spawn_count = 4
 
-		# ensure a drop
-		# TODO ensure drops on wave-spawned ents
-		if "drops" in node.get_property_list().map(func(p): return p.name):
-			if node.drops.is_empty():
-				var drops = room_def.get_drops()
-				if drops.is_empty():
-					drops = [DropData.new()]
-				node.drops.assign([drops.pick_random()])
+		start_coords.shuffle()
+		for i in range(spawn_count):
+			if i >= len(start_coords):
+				Log.warn("not enough start_coords for spawn_count, breaking")
+				break
+			var start_coord = start_coords[i]
 
-		node.position = pos
-		add_child(node)
-		node.set_owner(self)
+			var node
+			if use_spawn_point:
+				node = spawn_point_scene.instantiate()
+				node.spawn_scene = ent.get_scene()
+			else:
+				node = ent.get_scene().instantiate()
+				ensure_expected_drops(node)
+
+			var pos = tilemap.map_to_local(e_coord + start_coord)
+			node.position = pos
+
+			add_child(node)
+			node.set_owner(self)
 
 func add_enemies():
 	for enemy in room_def.enemies():
@@ -500,6 +495,14 @@ func add_enemies():
 func add_entities():
 	for ent in room_def.entities():
 		add_entity(ent)
+
+func ensure_expected_drops(node):
+	if "drops" in node.get_property_list().map(func(p): return p.name):
+		if node.drops.is_empty():
+			var drops = room_def.get_drops()
+			if drops.is_empty():
+				drops = [DropData.new()]
+			node.drops.assign([drops.pick_random()])
 
 ## add_effects ##############################################################
 

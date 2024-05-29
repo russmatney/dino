@@ -114,7 +114,15 @@ func add_child_to_level(_node, child):
 func setup_quests():
 	var ents = []
 	var d_ents = U.flat_map(room_defs, func(def): return def.entities())
-	var d_enms = U.flat_map(room_defs, func(def): return def.enemies())
+	var d_enms = U.flat_map(room_defs, func(def):
+		if def.enemy_waves() > 0:
+			var room_enemies = def.enemies()
+			var ens = room_enemies.filter(func(en): return en.is_boss())
+			for i in def.enemy_waves():
+				ens.append_array(room_enemies.filter(func(en): return not en.is_boss()))
+			return ens
+		else:
+			return def.enemies())
 	ents.append_array(d_ents)
 	ents.append_array(d_enms)
 
