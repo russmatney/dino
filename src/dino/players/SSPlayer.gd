@@ -97,6 +97,7 @@ var death_count: int = 0
 @onready var action_detector = $ActionDetector
 @onready var action_hint = $ActionHint
 
+var bullet_position
 var jet_anim
 var bumpbox
 var nav_agent
@@ -162,7 +163,8 @@ func _ready():
 		warp_cast="WarpCast",
 		light_occluder="LightOccluder2D",
 		light="PointLight2D",
-		quick_select_menu="QuickSelect"
+		quick_select_menu="QuickSelect",
+		bullet_position="BulletPosition",
 		})
 
 	if bumpbox:
@@ -397,6 +399,8 @@ func update_facing():
 		U.update_h_flip(facing_vector, w)
 
 	U.update_h_flip(facing_vector, light_occluder)
+	if bullet_position:
+		U.update_h_flip(facing_vector, bullet_position)
 
 func flip_facing():
 	# assumes facing vector is always vec.left or vec.right

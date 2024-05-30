@@ -2,7 +2,6 @@
 extends SSWeapon
 
 var aim_vector
-var bullet_offset = Vector2.ONE * -12
 
 func aim(aim_vec: Vector2):
 	aim_vector = aim_vec
@@ -65,7 +64,7 @@ func fire_bullet():
 		aim_vector = Vector2.RIGHT
 
 	var bullet = bullet_scene.instantiate()
-	bullet.position = global_position + bullet_offset
+	bullet.position = global_position
 	bullet.add_collision_exception_with(actor)
 
 	U.add_child_to_level(self, bullet)
