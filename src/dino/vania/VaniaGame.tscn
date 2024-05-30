@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
-[ext_resource type="Resource" uid="uid://b2xht8rpxnoyr" path="res://src/dino/modes/classic/mapdefs/FeedTheVoid.tres" id="2_elg0q"]
+[ext_resource type="Resource" uid="uid://x22mhotva8q3" path="res://src/dino/modes/runner/mapdefs/Tower.tres" id="2_i2h0n"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="5_r75pq"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="6_jluxu"]
 [ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://src/dino/menus/controls/ActionInputIcon.tscn" id="8_g3klb"]
@@ -36,7 +36,7 @@ shader_parameter/grayscale = 0.0
 
 [node name="VaniaGame" type="Node2D" groups=["vania_game"]]
 script = ExtResource("1_rrc8s")
-map_def = ExtResource("2_elg0q")
+map_def = ExtResource("2_i2h0n")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false

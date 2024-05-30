@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=18 format=3 uid="uid://1kqvgyd2awj0"]
+[gd_resource type="Resource" script_class="MapDef" load_steps=24 format=3 uid="uid://1kqvgyd2awj0"]
 
 [ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="1_w3xff"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_0q0of"]
 [ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/particle_area/RainFallParticles.tscn" id="3_1wme6"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="4_8ixd6"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="5_0i88o"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="5_hcrmw"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="6_ows82"]
 [ext_resource type="Resource" uid="uid://wo676lm3hqav" path="res://src/dino/modes/classic/mapdefs/EnemyRobot.tres" id="7_peqd3"]
@@ -25,13 +26,38 @@ script = ExtResource("4_8ixd6")
 type = 1
 scene = ExtResource("3_1wme6")
 
+[sub_resource type="Resource" id="Resource_xut72"]
+script = ExtResource("5_0i88o")
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0)])
+type = 2
+
+[sub_resource type="Resource" id="Resource_ty3bt"]
+script = ExtResource("5_0i88o")
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0)])
+type = 3
+
+[sub_resource type="Resource" id="Resource_rhwdr"]
+script = ExtResource("5_0i88o")
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 1, 0)])
+type = 9
+
+[sub_resource type="Resource" id="Resource_p8igi"]
+script = ExtResource("5_0i88o")
+cells = Array[Vector3i]([Vector3i(0, 0, 0), Vector3i(1, 0, 0), Vector3i(2, 0, 0), Vector3i(0, 1, 0), Vector3i(1, 1, 0), Vector3i(2, 1, 0)])
+type = 10
+
+[sub_resource type="Resource" id="Resource_mh1eu"]
+script = ExtResource("5_0i88o")
+cells = Array[Vector3i]([Vector3i(0, -1, 0), Vector3i(-1, 0, 0), Vector3i(0, 0, 0), Vector3i(1, 0, 0)])
+type = 16
+
 [sub_resource type="Resource" id="Resource_yuw5o"]
 script = ExtResource("5_hcrmw")
 genre_type = 0
 entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
 enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
 enemy_waves = 0
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
+room_shapes = Array[ExtResource("5_0i88o")]([SubResource("Resource_xut72"), SubResource("Resource_ty3bt"), SubResource("Resource_rhwdr"), SubResource("Resource_p8igi"), SubResource("Resource_mh1eu")])
 room_effects = Array[ExtResource("4_8ixd6")]([SubResource("Resource_bne7i")])
 tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
 door_mode = 0
