@@ -260,8 +260,13 @@ static func _connect(sig, callable, flags=null):
 		Log.error("error in _connect()", err, sig, callable)  # useless enum digit
 
 static func call_in(node, callable, s):
-	await node.get_tree().create_timer(1.0).timeout
-	callable.call()
+	if not callable.is_valid():
+		Log.warn("callable is not valid!!")
+		return
+	await node.get_tree().create_timer(s).timeout
+	var obj = callable.get_object()
+	if obj and is_instance_valid(obj) and not callable.is_null():
+		callable.call()
 
 ############################################################
 # menus/buttons/popup
