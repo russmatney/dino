@@ -61,6 +61,7 @@ bbcode_enabled = true
 text = "[center]00[/center]"
 fit_content = true
 scroll_active = false
+autowrap_mode = 0
 
 [node name="MarginContainer7" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Top"]
 layout_mode = 2

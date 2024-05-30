@@ -563,7 +563,7 @@ text = "[center]state"
 scroll_active = false
 
 [node name="BulletPosition" type="Marker2D" parent="."]
-position = Vector2(6, -3)
+position = Vector2(6, -7)
 
 [node name="Jet" type="AnimatedSprite2D" parent="."]
 visible = false
