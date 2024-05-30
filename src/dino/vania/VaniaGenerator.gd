@@ -21,6 +21,11 @@ func generate_map(map_def: MapDef) -> Array[VaniaRoomDef]:
 
 ## add_rooms ##########################################################
 
+var neighbor_dirs = [
+	Vector3i(1, 0, 0), Vector3i(-1, 0, 0),
+	Vector3i(0, 1, 0), Vector3i(0, -1, 0),
+	]
+
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 	var builder = MetSys.get_map_builder()
 
@@ -55,34 +60,23 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 					var dir = door[1] - door[0]
 					door_dirs.append(Vector2i(dir.x, dir.y))
 
-			# TODO set -1 for walls between same-room cells
+			var same_room_dirs = []
+			for neighbor_dir in neighbor_dirs:
+				var nbr_cell = coord + neighbor_dir
+				if nbr_cell in room_def.map_cells:
+					same_room_dirs.append(Vector2i(neighbor_dir.x, neighbor_dir.y))
 
 			for i in 4:
+				var border_dir = MetroidvaniaSystem.MapData.FWD[i]
 				cell.border_colors[i] = room_def.get_border_color()
-				# 0 - wall, 1 - passage, 2+ - per theme, -1 - no border
-				match i:
-					# right - 0, down - 1, left - 2, up - 3
-					MetSys.R:
-						if Vector2i.RIGHT in door_dirs:
-							cell.borders[i] = 1
-						else:
-							cell.borders[i] = 0
-					MetSys.D:
-						if Vector2i.DOWN in door_dirs:
-							cell.borders[i] = 1
-						else:
-							cell.borders[i] = 0
-					MetSys.L:
-						if Vector2i.LEFT in door_dirs:
-							cell.borders[i] = 1
-						else:
-							cell.borders[i] = 0
-					MetSys.U:
-						if Vector2i.UP in door_dirs:
-							cell.borders[i] = 1
-						else:
-							cell.borders[i] = 0
 
+				# 0 - wall, 1 - passage, 2+ - per theme, -1 - no border
+				if border_dir in door_dirs:
+					cell.borders[i] = 1 # passage
+				elif border_dir in same_room_dirs:
+					cell.borders[i] = -1 # no wall (same room)
+				else:
+					cell.borders[i] = 0 # wall
 
 			cell.set_assigned_scene.call_deferred(room_def.room_path)
 	builder.update_map.call_deferred()
