@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://jsan51qxpc3w"]
+[gd_scene load_steps=23 format=3 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://addons/core/quest/QuestManager.gd" id="15_g6u8y"]
 [ext_resource type="PackedScene" uid="uid://cvbbaml4gfs0v" path="res://src/dino/entities/bushes/Bush2.tscn" id="16_igr1p"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
+[ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/dino/entities/checkpoints/SnowCheckpoint.tscn" id="20_6xuw3"]
 
 [sub_resource type="Resource" id="Resource_fx1bk"]
 script = ExtResource("12_d1x2y")
@@ -319,3 +320,6 @@ position = Vector2(234, -6)
 
 [node name="HangingLight2" parent="LoadingPlayground" instance=ExtResource("17_jvpqf")]
 position = Vector2(522, 42)
+
+[node name="SnowCheckpoint" parent="LoadingPlayground" instance=ExtResource("20_6xuw3")]
+position = Vector2(616, 224)
