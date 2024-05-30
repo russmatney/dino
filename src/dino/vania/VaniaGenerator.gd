@@ -7,6 +7,8 @@ static var global_room_num = 0
 var neighbor_data = {}
 var all_room_defs: Array[VaniaRoomDef] = []
 
+# TODO set minimap theme more consciously
+
 func _init():
 	# ensure directory exists
 	DirAccess.make_dir_absolute(GEN_MAP_DIR)
@@ -34,26 +36,56 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 		if not room_def.room_path:
 			set_room_scene_path(room_def)
 
-		for coord in room_def.map_cells:
-			var cell = builder.create_cell(coord)
-			cell.color = room_def.get_bg_color()
-
-			# TODO use local cells/placed rooms to figure out borders?
-			# TODO set minimap theme more consciously
-			for i in 4:
-				cell.borders[i] = 0
-				cell.border_colors[i] = room_def.get_border_color()
-
-			cell.set_assigned_scene.call_deferred(room_def.room_path)
-
 		defs.append(room_def)
-	builder.update_map.call_deferred()
 
 	# update all_room_defs
 	all_room_defs.append_array(defs)
 
 	# rebuild neighbors/doors on all room_defs
 	rebuild_doors()
+
+	for room_def in room_defs:
+		for coord in room_def.map_cells:
+			var cell = builder.create_cell(coord)
+			cell.color = room_def.get_bg_color()
+
+			var door_dirs = []
+			for door in room_def.doors:
+				if coord in door:
+					var dir = door[1] - door[0]
+					door_dirs.append(Vector2i(dir.x, dir.y))
+
+			# TODO set -1 for walls between same-room cells
+
+			for i in 4:
+				cell.border_colors[i] = room_def.get_border_color()
+				# 0 - wall, 1 - passage, 2+ - per theme, -1 - no border
+				match i:
+					# right - 0, down - 1, left - 2, up - 3
+					MetSys.R:
+						if Vector2i.RIGHT in door_dirs:
+							cell.borders[i] = 1
+						else:
+							cell.borders[i] = 0
+					MetSys.D:
+						if Vector2i.DOWN in door_dirs:
+							cell.borders[i] = 1
+						else:
+							cell.borders[i] = 0
+					MetSys.L:
+						if Vector2i.LEFT in door_dirs:
+							cell.borders[i] = 1
+						else:
+							cell.borders[i] = 0
+					MetSys.U:
+						if Vector2i.UP in door_dirs:
+							cell.borders[i] = 1
+						else:
+							cell.borders[i] = 0
+
+
+			cell.set_assigned_scene.call_deferred(room_def.room_path)
+	builder.update_map.call_deferred()
 
 	# gather neighboring rooms to repack
 	var neighbor_defs = []
