@@ -64,7 +64,10 @@ func fire_bullet():
 		aim_vector = Vector2.RIGHT
 
 	var bullet = bullet_scene.instantiate()
-	bullet.position = global_position
+	var pos = global_position
+	if actor and actor.bullet_position:
+		pos = actor.bullet_position.global_position
+	bullet.position = pos
 	bullet.add_collision_exception_with(actor)
 
 	U.add_child_to_level(self, bullet)
