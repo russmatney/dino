@@ -39,17 +39,9 @@ func kill():
 
 ## body entered
 
+# anything allowed via the collision mask can destroy this
 func _on_body_entered(body: Node2D):
 	if body.is_in_group("bullet"):
 		if body.has_method("kill"):
 			body.kill()
-		kill()
-		return
-
-	if body.is_in_group("weapons"):
-		kill()
-		return
-
-	if body.get_parent().is_in_group("weapons"):
-		kill()
-		return
+	kill()
