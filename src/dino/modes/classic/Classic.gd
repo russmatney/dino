@@ -76,7 +76,7 @@ func next_map_def():
 	idx += 1
 	if idx < len(map_def.sub_map_defs):
 		var def = map_def.sub_map_defs[idx]
-		if map_def.input and def.input:
+		if map_def.input and def.input and not def.input.skip_merge:
 			# the root mapdef's input is the base for all sub_map_def inputs
 			def.input = map_def.input.merge(def.input)
 		return def
