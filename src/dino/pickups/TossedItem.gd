@@ -1,14 +1,21 @@
 extends RigidBody2D
 
 var drop_data: DropData
+@onready var area = $Area2D
 
 func _ready():
 	body_entered.connect(_on_body_entered)
+	area.body_entered.connect(_on_body_entered)
+
+	area.monitoring = false
 
 	if drop_data:
 		drop_data.add_anim_scene(self)
 	else:
 		Log.warn("tossed item has no drop data!")
+
+func enable_monitoring():
+	area.monitoring = true
 
 func _on_body_entered(body: Node):
 	if body.is_in_group("player"):

@@ -23,18 +23,15 @@ func deactivate():
 	pass
 
 func use():
-	Log.pr("orbit item use")
 	if spiked_item == null:
 		if actor.orbit_items.size() > 0:
-			Log.pr("spiking", spiked_item)
 			start_spike_slowmo(actor.orbit_items[0])
 	else:
 		toss_item()
 
 func stop_using():
-	Log.pr("orbit item stop using")
 	if spiked_item:
-		actor.remove_tossed_orbit_item(spiked_item)
+		actor.remove_tossed_orbit_item.call_deferred(spiked_item)
 		toss_item()
 
 ######################################################
@@ -75,7 +72,6 @@ func toss_item():
 	item.position = global_position + toss_offset
 	item.add_collision_exception_with(actor)
 
-	# TODO emit for parent/level to add?
 	U.add_child_to_level(self, item)
 
 	# item.rotation = aim_vector.angle()
@@ -84,11 +80,8 @@ func toss_item():
 
 	Juice.stop_slowmo("spike_slowmo")
 
-	await get_tree().create_timer(cooldown).timeout
+	U.call_in(actor, item.enable_monitoring, cooldown)
 
-	# be sure to remove the collision exception (if it exists), or we can't pick it up again
-	if item != null:
-		if is_instance_valid(item):
-			item.remove_collision_exception_with(actor)
+	await get_tree().create_timer(cooldown).timeout
 
 	spiked_item = null

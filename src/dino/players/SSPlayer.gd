@@ -834,6 +834,6 @@ func remove_tossed_orbit_item(item):
 			orbit_items.erase(ch)
 			ch.queue_free()
 
-			# do we care if spiking?
-			if orbit_items.size() == 0:
-				remove_weapon_by_id(DinoWeaponEntityIds.ORBS)
+	# do we care if spiking?
+	if orbit_items.size() == 0:
+		remove_weapon_by_id(DinoWeaponEntityIds.ORBS)

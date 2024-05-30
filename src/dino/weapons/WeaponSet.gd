@@ -54,6 +54,7 @@ func remove_weapon_by_id(ent_id):
 	var weapon = weapon_for_id(ent_id)
 	if weapon:
 		drop_weapon(weapon)
+		return weapon
 
 func add_weapon_to_stack(weapon: Variant):
 	if weapon in stack:
