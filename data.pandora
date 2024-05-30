@@ -2414,7 +2414,7 @@
 			},
 			{
 				"_category_id": "117",
-				"_default_value": null,
+				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
 				"_id": "119",
 				"_name": "icon_texture",
 				"_type": "resource"
@@ -2456,7 +2456,7 @@
 			},
 			{
 				"_category_id": "131",
-				"_default_value": null,
+				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
 				"_id": "156",
 				"_name": "icon_texture",
 				"_type": "resource"

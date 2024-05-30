@@ -1,15 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://pb7ag8sxpept"]
+[gd_scene load_steps=7 format=3 uid="uid://pb7ag8sxpept"]
 
 [ext_resource type="Theme" uid="uid://dkieg7l5vmxx4" path="res://src/themes/MenuEntityButton.tres" id="1_8ghxf"]
 [ext_resource type="Script" path="res://src/components/entity_button/EntityButton.gd" id="1_nffd6"]
 [ext_resource type="Texture2D" uid="uid://ba2udap4d027f" path="res://assets/gameicons/Shirt_icon_sheet.png" id="2_l73we"]
+[ext_resource type="Script" path="res://src/dino/DinoGameEntity.gd" id="3_3o2pn"]
 [ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="3_jvriv"]
+
+[sub_resource type="Resource" id="Resource_3bt7p"]
+script = ExtResource("3_3o2pn")
+_id = "21"
 
 [node name="EntityButton" type="PanelContainer"]
 custom_minimum_size = Vector2(64, 64)
 focus_mode = 2
 theme = ExtResource("1_8ghxf")
 script = ExtResource("1_nffd6")
+entity = SubResource("Resource_3bt7p")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

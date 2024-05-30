@@ -30,11 +30,13 @@ var generator = VaniaGenerator.new()
 var ready_to_play: bool = false
 @onready var ready_overlay: Control = $%ReadyToPlay
 @onready var start_game_action_icon: ActionInputIcon = $%StartGameAction
+@onready var ready_map_def_icons = $%ReadyMapDefIcons
 
 @onready var level_start_overlay: Control = $%LevelStart
 @onready var level_start_header: RichTextLabel = $%LevelStartHeader
 @onready var level_start_subhead: RichTextLabel = $%LevelStartSubhead
 @onready var level_start_countdown: RichTextLabel = $%LevelStartCountdown
+@onready var level_start_map_def_icons = $%LevelStartMapDefIcons
 
 var ready_for_next: bool = false
 @onready var level_complete_overlay: Control = $%LevelComplete
@@ -42,6 +44,7 @@ var ready_for_next: bool = false
 @onready var level_complete_subhead: RichTextLabel = $%LevelCompleteSubhead
 @onready var level_complete_action: Control = $%LevelCompleteAction
 @onready var level_complete_action_icon: ActionInputIcon = $%LevelCompleteActionIcon
+@onready var level_complete_map_def_icons = $%LevelCompleteMapDefIcons
 
 @onready var quest_manager: QuestManager = $%QuestManager
 
@@ -92,6 +95,10 @@ func _ready():
 
 	start_game_action_icon.set_icon_for_action("ui_accept")
 	level_complete_action_icon.set_icon_for_action("ui_accept")
+
+	ready_map_def_icons.map_def = map_def
+	level_start_map_def_icons.map_def = map_def
+	level_complete_map_def_icons.map_def = map_def
 
 	set_process(false)
 

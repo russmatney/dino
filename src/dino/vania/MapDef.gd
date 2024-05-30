@@ -26,6 +26,28 @@ func _init(opts={}):
 func new_game_node(opts={}):
 	return VaniaGame.create_game_node(self, opts)
 
+func all_entities(opts={}):
+	var ents = []
+	ents.append_array(input.entities)
+	for r in rooms:
+		ents.append_array(r.entities)
+	for def in sub_map_defs:
+		ents.append_array(def.all_entities())
+	if opts.get("distinct", false):
+		ents = U.distinct(ents)
+	return ents
+
+func all_enemies(opts={}):
+	var ens = []
+	ens.append_array(input.enemies)
+	for r in rooms:
+		ens.append_array(r.enemies)
+	for def in sub_map_defs:
+		ens.append_array(def.all_enemies())
+	if opts.get("distinct", false):
+		ens = U.distinct(ens)
+	return ens
+
 func to_pretty():
 	return [name, {input=input, rooms=rooms}]
 
