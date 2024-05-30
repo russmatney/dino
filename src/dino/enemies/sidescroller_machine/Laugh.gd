@@ -15,7 +15,6 @@ func can_hop():
 
 var laugh_at_least = 1
 var laugh_ttl
-var next_state
 
 ## enter ###################################
 
@@ -24,8 +23,6 @@ func enter(ctx={}):
 	Sounds.play(Sounds.S.enemylaugh)
 
 	laugh_ttl = ctx.get("wait_for", laugh_at_least)
-
-	next_state = ctx.get("next_state")
 
 ## exit ###################################
 

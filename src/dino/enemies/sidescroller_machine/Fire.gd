@@ -28,6 +28,10 @@ var last_bullet
 var cool_down = 0
 
 func physics_process(delta):
+	if actor.is_dead:
+		machine.transit("Dead")
+		return
+
 	if actor.can_see_player and can_fire():
 		fire()
 		cool_down = fire_cooldown
@@ -53,7 +57,7 @@ func _on_hit(bullet):
 	# if bullet back_fired, we handle state change from actor.take_hit()
 	if not bullet.firing_back:
 		# hit player, take a break
-		machine.transit("Laugh", {laugh_for=fire_cooldown, next_state="Fire"})
+		machine.transit("Laugh")
 
 func _on_bullet_dying(_bullet):
 	if not actor.can_see_player:

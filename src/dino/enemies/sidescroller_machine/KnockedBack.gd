@@ -24,7 +24,7 @@ func enter(ctx={}):
 	if kb_vel == null:
 		kb_vel = 5
 
-	if not "crawl_on_side" in actor:
+	if not actor.should_crawl_on_walls:
 		# look into the punch
 		if dir == Vector2.LEFT:
 			actor.face_right()
