@@ -43,6 +43,7 @@ func kill():
 	is_caught = true
 	caught.emit(self)
 	animate_collected()
+	Sounds.play(Sounds.S.playerheal)
 
 func animate_collected():
 	var time = 0.4
