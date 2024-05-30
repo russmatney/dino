@@ -49,18 +49,12 @@ func to_pretty():
 func type_to_str():
 	var t = "no-type"
 	match type:
-		T.RANDOM:
-			t = "random"
-		T.ORB:
-			t = "orb"
-		T.COIN:
-			t = "coin"
-		T.GEM:
-			t = "gem"
-		T.LEAF:
-			t = "leaf"
-		T.POWERUP:
-			t = "powerup"
+		T.RANDOM: t = "random"
+		T.ORB: t = "orb"
+		T.COIN: t = "coin"
+		T.GEM: t = "gem"
+		T.LEAF: t = "leaf"
+		T.POWERUP: t = "powerup"
 	return t
 
 ## init ##############################################

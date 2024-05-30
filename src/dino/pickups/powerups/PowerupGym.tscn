@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://cr1nvclof668n"]
+
+[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_j5plg"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_2y3wo"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_ebopo"]
+[ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="4_8vkdu"]
+[ext_resource type="PackedScene" uid="uid://cw5hkko0eu7ed" path="res://src/dino/tiles/ColdFireCombo.tscn" id="5_a3f7e"]
+[ext_resource type="PackedScene" uid="uid://dby2hvvl027v3" path="res://src/dino/pickups/Pickup.tscn" id="6_mny86"]
+[ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/pickups/powerups/SSPowerup.tscn" id="7_dmbje"]
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="8_ivqmw"]
+
+[sub_resource type="Resource" id="Resource_llm3m"]
+script = ExtResource("8_ivqmw")
+type = 5
+anim_scene = ExtResource("7_dmbje")
+
+[node name="PowerupGym" type="Node"]
+script = ExtResource("1_j5plg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("2_2y3wo")
+
+[node name="DinoHUD" type="Control" parent="." groups=["dino_hud"] instance=ExtResource("3_ebopo")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_8vkdu")
+
+[node name="ColdFireCombo" parent="." instance=ExtResource("5_a3f7e")]
+layer_0/tile_data = PackedInt32Array(393242, 131072, 0, 327706, 131072, 0, 262170, 0, 0, 196634, 0, 2, 393241, 0, 2, 327705, 131072, 0, 262169, 131072, 0, 196633, 0, 2, 393240, 131072, 2, 327704, 0, 2, 262168, 131072, 2, 196632, 131072, 0, 393239, 0, 2, 327703, 0, 0, 262167, 0, 0, 196631, 0, 0, 393238, 131072, 2, 327702, 0, 0, 262166, 0, 0, 196630, 0, 2, 393237, 0, 0, 327701, 131072, 2, 262165, 0, 2, 196629, 131072, 0, 393236, 131072, 0, 327700, 131072, 0, 262164, 131072, 2, 196628, 0, 0, 393235, 131072, 2, 327699, 0, 0, 262163, 131072, 2, 196627, 0, 2, 393234, 131072, 2, 327698, 131072, 0, 262162, 131072, 0, 196626, 131072, 0, 393233, 131072, 0, 327697, 131072, 0, 262161, 131072, 2, 196625, 131072, 2, 393232, 0, 0, 327696, 131072, 0, 262160, 131072, 2, 196624, 0, 2, 393231, 0, 2, 327695, 0, 2, 262159, 0, 2, 196623, 131072, 2, 393230, 0, 0, 327694, 131072, 0, 262158, 0, 2, 196622, 131072, 2, 393229, 0, 2, 327693, 0, 0, 262157, 131072, 0, 196621, 131072, 0, 393228, 0, 0, 327692, 131072, 0, 262156, 131072, 2, 196620, 0, 2, 393227, 131072, 2, 327691, 0, 0, 262155, 131072, 2, 196619, 131072, 2, 393226, 0, 2, 327690, 131072, 2, 262154, 131072, 2, 196618, 0, 2, 393225, 0, 0, 327689, 131072, 0, 262153, 131072, 2, 196617, 131072, 0, 393224, 131072, 2, 327688, 131072, 2, 262152, 131072, 0, 196616, 131072, 0, 393223, 131072, 2, 327687, 0, 0, 262151, 0, 0, 196615, 0, 0, 393222, 0, 2, 327686, 131072, 0, 262150, 131072, 0, 196614, 131072, 2, 393221, 131072, 2, 327685, 0, 2, 262149, 0, 2, 196613, 131072, 0, 393220, 131072, 0, 327684, 131072, 0, 262148, 131072, 2, 196612, 0, 2, 393219, 131072, 2, 327683, 131072, 0, 262147, 131072, 2, 196611, 0, 2, 393218, 0, 0, 327682, 131072, 2, 262146, 0, 2, 196610, 0, 0, 393217, 131072, 2, 327681, 131072, 0, 262145, 0, 2, 196609, 0, 0, 393216, 0, 0, 327680, 131072, 0, 262144, 131072, 2, 196608, 131072, 0, 458751, 0, 0, 393215, 131072, 2, 327679, 131072, 0, 262143, 131072, 2, 458750, 131072, 2, 393214, 0, 0, 327678, 0, 0, 262142, 131072, 2, 458749, 131072, 2, 393213, 131072, 2, 327677, 0, 2, 262141, 131072, 2, 458748, 0, 0, 393212, 131072, 0, 327676, 0, 0, 262140, 131072, 2, 458747, 0, 2, 393211, 0, 2, 327675, 131072, 0, 262139, 131072, 0, 458746, 0, 0, 393210, 131072, 0, 327674, 131072, 2, 262138, 131072, 0, 458745, 131072, 2, 393209, 131072, 0, 327673, 0, 2, 262137, 0, 0, 458744, 131072, 0, 393208, 0, 0, 327672, 0, 0, 262136, 0, 2, 458743, 0, 0, 393207, 0, 0, 327671, 131072, 2, 262135, 0, 0, 458742, 0, 0, 393206, 131072, 2, 327670, 0, 0, 262134, 0, 0, 458741, 0, 0, 393205, 0, 2, 327669, 0, 2, 262133, 0, 2, 458740, 131072, 2, 393204, 131072, 0, 327668, 131072, 0, 262132, 0, 2, 458739, 131072, 2, 393203, 131072, 2, 327667, 131072, 0, 262131, 0, 2, 458738, 0, 0, 393202, 0, 0, 327666, 131072, 2, 262130, 131072, 0, 458737, 131072, 2, 393201, 131072, 2, 327665, 0, 2, 262129, 0, 0, 458736, 131072, 0, 393200, 0, 2, 327664, 131072, 2, 262128, 0, 0, 458735, 131072, 2, 393199, 0, 0, 327663, 131072, 0, 262127, 131072, 2, 458734, 0, 2, 393198, 0, 0, 327662, 131072, 2, 262126, 0, 2, 458733, 0, 2, 393197, 131072, 2, 327661, 0, 2, 262125, 0, 2)
+
+[node name="Pickup" parent="." instance=ExtResource("6_mny86")]
+position = Vector2(-82, -70.4721)
+drop_data = SubResource("Resource_llm3m")
+
+[node name="Pickup2" parent="." instance=ExtResource("6_mny86")]
+position = Vector2(125, -22)
+drop_data = SubResource("Resource_llm3m")
+
+[node name="Pickup3" parent="." instance=ExtResource("6_mny86")]
+position = Vector2(-135, -20)
+drop_data = SubResource("Resource_llm3m")

@@ -655,12 +655,20 @@ func collect(opts={}):
 			add_leaf()
 			return
 		DropData.T.POWERUP:
-			Log.warn("Unhandled powerup picked up", opts)
-			Dino.notif({
-				type="side",
-				text="Powerup Acquired",
-				# body_text="A very good description of a powerup",
-				})
+			Log.info("Selecting new weapon", opts)
+			var missing_weapons = DinoWeaponsData.sidescroller_weapon_entities()\
+				.filter(func(ent): return not has_weapon_id(ent.get_entity_id()))
+			if missing_weapons.is_empty():
+				Log.warn("Already have all weapons, extra powerup?")
+			else:
+				quick_select_menu.show_menu({
+					label="Select a new weapon",
+					entities=missing_weapons,
+					on_select=func(weapon):
+					add_weapon(weapon.get_entity_id()),
+					})
+
+			Dino.notif({type="side", text="Powerup Acquired",})
 		_:
 			Log.warn("no match on pickup data.type", data)
 
