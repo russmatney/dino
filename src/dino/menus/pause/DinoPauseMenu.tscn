@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0r7m71tr77vo"]
+[gd_scene load_steps=9 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/pause/DinoPauseMenu.gd" id="1_7pfpx"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://src/dino/menus/music/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/pause/PauseTabPlayer.tscn" id="7_ipd6p"]
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="8_5ctsr"]
-[ext_resource type="PackedScene" uid="uid://duncni63m4vm0" path="res://src/components/PlayedGameRecords.tscn" id="9_k7cqm"]
 [ext_resource type="PackedScene" uid="uid://dsft6f7x2lk4v" path="res://src/dino/menus/controls/ControlsPanel.tscn" id="10_xqrls"]
 [ext_resource type="PackedScene" uid="uid://bjw3ncbv86qnb" path="res://src/dino/vania/VaniaEditor.tscn" id="11_w0f0w"]
 
@@ -68,14 +67,6 @@ area = Vector2i(15, 15)
 [node name="QuestStatus" parent="PanelContainer/VBoxContainer/TabContainer/Level" instance=ExtResource("3_gr3ki")]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Progress" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-alignment = 1
-
-[node name="PlayedGameRecords" parent="PanelContainer/VBoxContainer/TabContainer/Progress" instance=ExtResource("9_k7cqm")]
-layout_mode = 2
 
 [node name="Editor" type="HBoxContainer" parent="PanelContainer/VBoxContainer/TabContainer"]
 visible = false
