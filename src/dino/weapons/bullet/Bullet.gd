@@ -34,7 +34,16 @@ func kill():
 func _on_Bullet_body_entered(body: Node):
 	if body.is_in_group("darktile"):
 		body.hit(global_position)
-	elif body.has_method("take_hit") and not body.is_dead:
+	if body.has_method("take_hit") and not body.is_dead:
 		body.take_hit({body=self, damage=1})
+
+	if body.has_method("gather_pickup"):
+		var player = Dino.current_player_node()
+		if player:
+			body.gather_pickup(player)
+	if body.get_parent().has_method("gather_pickup"):
+		var player = Dino.current_player_node()
+		if player:
+			body.get_parent().gather_pickup(player)
 
 	kill()

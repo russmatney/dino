@@ -8,9 +8,8 @@ size = Vector2(32, 32)
 
 [node name="Box" type="Area2D" groups=["boxes"]]
 collision_layer = 128
-collision_mask = 0
+collision_mask = 4
 script = ExtResource("1_cxgkm")
-drops = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vs53a")
@@ -18,6 +17,6 @@ shape = SubResource("RectangleShape2D_vs53a")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("1_bh73g")
-animation = &"damage1"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.520647
+frame_progress = 0.621292

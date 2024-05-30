@@ -19,6 +19,11 @@ var is_dead = false
 func _ready():
 	anim.play(initial_anim)
 
+	body_entered.connect(on_body_entered)
+
+func on_body_entered(body):
+	take_hit({body=body})
+
 ## process ###############################################
 
 func _physics_process(_delta):
