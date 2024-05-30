@@ -31,7 +31,6 @@ func render():
 		var icon = en.get_icon_texture()
 		if not icon:
 			continue
-		Log.pr("adding map def icon for ent", en)
 		var texture_rect = TextureRect.new()
 		texture_rect.set_texture(icon)
 		texture_rect.set_stretch_mode(TextureRect.STRETCH_KEEP_ASPECT_CENTERED)

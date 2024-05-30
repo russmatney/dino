@@ -51,6 +51,11 @@ var ready_for_next: bool = false
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
 
+@onready var hud = $%DinoHUD
+var time: float = 0
+var time_int = 0
+var game_timer_running = false
+
 var generating: Thread
 
 signal room_gen_complete
@@ -152,6 +157,7 @@ func check_game_complete():
 		quest_manager.all_quests_complete() and
 		not complete):
 		complete = true
+		stop_game_timer()
 		vania_game_complete()
 
 ## input #######################################################
@@ -208,13 +214,13 @@ func show_playground():
 		if ch and is_instance_valid(ch):
 			anim_nodes.append(ch)
 
-	var time = 0.6
+	var t = 0.6
 
 	screen_blur.anim_blur({duration=1.0, target=0.0})
 	screen_blur.anim_gray({duration=1.0, target=0.0})
 
 	await Anim.animate_intro_from_point({
-		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
+		node=playground, nodes=anim_nodes, position=Vector2(), t=t,
 		})
 
 func clear_playground():
@@ -227,13 +233,13 @@ func clear_playground():
 	for ch in playground.get_children():
 		anim_nodes.append(ch)
 
-	var time = 0.6
+	var t = 0.6
 
-	screen_blur.fade_in({duration=time})
-	screen_blur.anim_gray({duration=time, target=0.8})
+	screen_blur.fade_in({duration=t})
+	screen_blur.anim_gray({duration=t, target=0.8})
 
 	await Anim.animate_outro_to_point({
-		node=playground, nodes=anim_nodes, position=Vector2(), t=time,
+		node=playground, nodes=anim_nodes, position=Vector2(), t=t,
 		})
 
 	if p != null and is_instance_valid(p):
@@ -264,7 +270,7 @@ func setup_level_complete_overlay():
 	if not n:
 		n = current_room.name
 	level_complete_header.text = "[center]%s[/center]" % n
-	level_complete_subhead.text = "[center]%s[/center]" % "COMPLETE!"
+	level_complete_subhead.text = "[center]COMPLETE in %d seconds[/center]" % time_int
 
 ## initial room
 
@@ -315,7 +321,19 @@ func start_vania_game():
 	Anim.fade_out(level_start_overlay, t2)
 	await get_tree().create_timer(t2).timeout
 
+	reset_game_timer()
 	toggle_pause_game_nodes(false)
+	start_game_timer()
+
+func reset_game_timer():
+	time = 0
+	time_int = 0
+
+func start_game_timer():
+	game_timer_running = true
+
+func stop_game_timer():
+	game_timer_running = false
 
 ## vania_game_complete
 
@@ -350,6 +368,15 @@ func _process(_delta: float):
 		Log.info("level gen thread finished and joined!")
 
 		room_gen_complete.emit()
+
+func _physics_process(delta: float):
+	if game_timer_running:
+		# slow mo probably affects this
+		# could be better to do in _process, but the threading and set_process(false) makes it weird
+		time += delta
+		if time > time_int:
+			time_int = int(time) + 1
+			hud.update_time(time_int)
 
 ## room gen #######################################################
 

@@ -46,6 +46,7 @@ editor_draw_limits = true
 script = ExtResource("2_ae8tp")
 
 [node name="DinoHUD" parent="." instance=ExtResource("5_r75pq")]
+unique_name_in_owner = true
 
 [node name="QuestManager" type="Node" parent="."]
 unique_name_in_owner = true
