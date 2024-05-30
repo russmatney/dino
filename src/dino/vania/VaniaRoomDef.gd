@@ -130,12 +130,15 @@ func get_drops() -> Array[DropData]:
 		return []
 	return input.drops
 
+var bg_color
 func get_bg_color() -> Color:
 	if not input:
 		return Color(0, 0, 0, 0.5)
 	if input.bg_color:
 		return input.bg_color
-	return U.rand_of([Color.PERU, Color.AQUAMARINE, Color.CORAL])
+	if not bg_color:
+		bg_color = U.rand_of([Color.PERU, Color.AQUAMARINE, Color.CORAL])
+	return bg_color
 
 func get_border_color() -> Color:
 	return Color.WHITE
