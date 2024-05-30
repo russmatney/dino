@@ -5,6 +5,7 @@ var dying = false
 
 @onready var anim = $AnimatedSprite2D
 @onready var fb_hit_box = $FireBackHitBox
+var area
 
 ## ready ####################################################
 
@@ -13,6 +14,10 @@ func _ready():
 	fb_hit_box.body_entered.connect(_on_fb_hitbox_body_entered)
 
 	fb_hit_box.monitoring = false
+
+	area = get_node_or_null("Area2D")
+	if area:
+		area.body_entered.connect(_on_body_entered)
 
 ## process ####################################################
 

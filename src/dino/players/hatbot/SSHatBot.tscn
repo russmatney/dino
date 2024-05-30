@@ -469,7 +469,7 @@ position = Vector2(12, -7)
 
 [node name="Jet" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, 5)
+position = Vector2(0, 24)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_nppfr")
 animation = &"init"

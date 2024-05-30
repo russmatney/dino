@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_g14kl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j2y1f"]
-size = Vector2(16, 30)
+size = Vector2(16, 35)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5f86v"]
 atlas = ExtResource("3_qfxj8")
@@ -374,7 +374,7 @@ should_hurt_to_touch = true
 [node name="SSEnemyMachine" parent="." instance=ExtResource("2_wws8b")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_j2y1f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
