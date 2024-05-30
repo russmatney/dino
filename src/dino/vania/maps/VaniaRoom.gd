@@ -114,6 +114,14 @@ func spawn_enemy_wave():
 	if wave < room_def.enemy_waves():
 		this_wave = []
 		wave += 1
+		var wave_label
+		if wave == 1:
+			wave_label = "First"
+		elif wave == room_def.enemy_waves():
+			wave_label = "Final"
+		else:
+			wave_label = "Next"
+		Dino.notif({type="banner", text="%s Wave" % wave_label,})
 		Log.info("starting wave", wave)
 		for ent in room_def.enemies().filter(func(ent): return not ent.is_boss()):
 			var sp = enemy_spawn_points.filter(func(s):
