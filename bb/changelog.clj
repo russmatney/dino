@@ -95,9 +95,11 @@
 (defn commits
   "Retuns metadata for `n` commits at the specified `dir`."
   [{:keys [dir n after-tag before-tag] :as opts}]
-  (let [n (or n 500)
+  (let [
+        ;; n (or n 500)
         cmd
-        (str "git log" (str " -n " n)
+        (str "git log"
+             (when n (str " -n " n))
              (when (or after-tag before-tag)
                (str " " (or after-tag (first-commit-hash opts)) ".." (or before-tag "HEAD")))
              " --pretty=format:'" (log-format-str) "'")]
@@ -106,6 +108,8 @@
         (process/process cmd {:out :string :dir (str dir)})
         process/check :out
         ((fn [s] (str "[" s "]")))
+        ;; remove unsupported escape characters?
+        (string/replace "\\~" "")
         ;; pre-precess double quotes (maybe just move to single?)
         (string/replace "\"" "'")
         (string/replace delimiter "\"")
