@@ -15,6 +15,11 @@ func _ready():
 
 ## render #########################################
 
+var skip_ent_ids = [
+	DinoEntityIds.PLAYERSPAWNPOINT,
+	DinoEntityIds.SPAWNPOINT,
+	]
+
 func render():
 	if not is_node_ready() or not map_def:
 		return
@@ -30,6 +35,8 @@ func render():
 	for en in ents:
 		var icon = en.get_icon_texture()
 		if not icon:
+			continue
+		if en.get_entity_id() in skip_ent_ids:
 			continue
 		var texture_rect = TextureRect.new()
 		texture_rect.set_texture(icon)
