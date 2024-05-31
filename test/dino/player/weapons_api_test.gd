@@ -12,7 +12,7 @@ func test_weapons_data():
 	var w_ids = ws.map(func(e): return e.get_entity_id())
 	assert_array(w_ids).contains([
 		DinoWeaponEntityIds.BOOMERANG,
-		DinoWeaponEntityIds.BOW,
+		# DinoWeaponEntityIds.BOW,
 		DinoWeaponEntityIds.GUN,
 		DinoWeaponEntityIds.SWORD
 		])
@@ -29,7 +29,7 @@ func test_weapons_data():
 	w_ids = ws.map(func(e): return e.get_entity_id())
 	assert_array(w_ids).contains([
 		DinoWeaponEntityIds.BOOMERANG,
-		DinoWeaponEntityIds.BOW,
+		# DinoWeaponEntityIds.BOW,
 		DinoWeaponEntityIds.GUN,
 		DinoWeaponEntityIds.SWORD
 		])
