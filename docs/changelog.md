@@ -4,6 +4,17 @@
 ## Untagged
 
 
+## v1.0.0
+
+
+### 31 May 2024
+
+- ([`56cb30c0`](https://github.com/russmatney/dino/commit/56cb30c0)) fix: full changelog now generating
+
+  > Drops a fallback commit-count value (was set at 500), so we now print
+  > the entire commit history in the changelog files
+
+
 ### 30 May 2024
 
 - ([`2ae920fd`](https://github.com/russmatney/dino/commit/2ae920fd)) fix: update test now that the bow is disabled
@@ -2674,6 +2685,889 @@
   > static funcs are much nicer than state- and load-order dependent autoloads.
   > 
   > Plus Log is a much better name for this.
+
+
+### 10 Nov 2023
+
+- ([`3221029e`](https://github.com/russmatney/dino/commit/3221029e)) fix: don't await a jumbotron in tree_exiting
+
+  > Finally can play through rounds of roulette without crashes! Woo!
+
+- ([`aa5aa785`](https://github.com/russmatney/dino/commit/aa5aa785)) refactor: fix breakTheTargets, nearly working roulette rounds
+- ([`8b233c13`](https://github.com/russmatney/dino/commit/8b233c13)) fix: drop DRYed up XLevel scripts, reseed after round complete
+
+  > Still marking gunner complete immediately on the second round,
+  > i think b/c the tower targets are being captured and exiting immediately
+  > by gunner's target test.
+
+- ([`43997394`](https://github.com/russmatney/dino/commit/43997394)) refactor: jumbo_notif via Jumbotron static
+
+  > Pulls jumbotron out of Quest autoload, removes state.
+  > 
+  > The big shift is the return signal - we make sure to wait until the
+  > previous jumbotron has exited (not just kicking off an async fade out
+  > process).
+
+
+### 9 Nov 2023
+
+- ([`67e97bff`](https://github.com/russmatney/dino/commit/67e97bff)) feat: more jumbotrons, quicker tower levels, DinoLevel DRY up
+- ([`d2ceabc3`](https://github.com/russmatney/dino/commit/d2ceabc3)) fix: free old game nodes, one-shot connect to quests-complete
+
+  > Making some good cases for some new classes here, but I just hate to be
+  > stuck in one, you know?
+  > 
+  > But yeah, should probably write a script exposing opts for
+  > Arcade/Roulette and dry up the shared quest-regen-level bits. If only
+  > these could be composed... i guess that's what a class is? ugh.
+
+- ([`6af77b50`](https://github.com/russmatney/dino/commit/6af77b50)) feat: Roulette working with questy gunner/shirt
+
+  > Short one gem-counting bug in shirt.
+
+- ([`578e609b`](https://github.com/russmatney/dino/commit/578e609b)) feat: support pause in Jumbotron
+
+  > defaults to true, but is opt-out if you'd like.
+
+- ([`1e2990f0`](https://github.com/russmatney/dino/commit/1e2990f0)) feat: jumbotron as a basic level-intro
+
+  > Should probably optionally pause execution while this is up.
+
+- ([`c3aa7124`](https://github.com/russmatney/dino/commit/c3aa7124)) fix: dodge some annoying errors
+- ([`283a79ca`](https://github.com/russmatney/dino/commit/283a79ca)) refactor: Gunner BreakTheTargets refactored into QuestNode
+
+  > Game.gd caching a player_scene so we don't need to care so much
+  > about the 'current_game' - tho we could also check the
+  > current-game-entity for much cheaper.
+
+- ([`e6e5697c`](https://github.com/russmatney/dino/commit/e6e5697c)) fix: no more SSPlayer default hud
+
+  > This was overwriting Gunner's hud.
+
+- ([`11db1470`](https://github.com/russmatney/dino/commit/11db1470)) wip: really not sure if levels or game-modes should connect to Quests
+- ([`b73d9b4c`](https://github.com/russmatney/dino/commit/b73d9b4c)) fix: drop some bad ideas from Game.gd
+
+  > If anything relies on this, it shouldn't.
+
+- ([`b4457b16`](https://github.com/russmatney/dino/commit/b4457b16)) refactor: BrickLevelGen nodes ensure containers on ready
+
+  > Moving some logic around, towards a better ready vs regeneration cycle.
+  > 
+  > - BrickLevelGen ensure_containers() in _ready
+  > - BrickLevelGen only set owners in editor
+  > - BrickLevelGen call 'regenerate' if no rooms (and after a delay)
+  > 
+  > This probably isn't right, but unfortunately achieves the right behavior
+  > so far.
+
+- ([`52053d3c`](https://github.com/russmatney/dino/commit/52053d3c)) chore: small clean ups
+
+  > warning message too big, queue_free is probably better, no need for this
+  > ready fn (especially now that brickLevelGen will use it's ready to clear
+  > containers).
+
+- ([`f69174f8`](https://github.com/russmatney/dino/commit/f69174f8)) wip: silence a bunch of already-connected errors
+
+  > Maybe these should be one-offs, or maybe we shouldn't try to reconnect
+  > them so much... not really sure.
+
+- ([`597f4529`](https://github.com/russmatney/dino/commit/597f4529)) refactor: Quest -> Q, QuestNode as class Quest
+
+  > Writes two simple quests for Shirt: CollectGems and KillEnemies.
+  > Refactors ShirtLevel to signal completion in terms of Quest nodes.
+  > 
+  > Not sure the best way to encode these, and lots of ux fixes needed.
+
+- ([`c843b439`](https://github.com/russmatney/dino/commit/c843b439)) feat: minor Quest jumbotron impl cleanup
+- ([`dbb81dbd`](https://github.com/russmatney/dino/commit/dbb81dbd)) fix: better image alt text
+- ([`2b17a513`](https://github.com/russmatney/dino/commit/2b17a513)) fix: discord badge style, itch/steam badge colors
+- ([`1a599ab8`](https://github.com/russmatney/dino/commit/1a599ab8)) doc: add flat shields.io links to readme
+- ([`f7ff884d`](https://github.com/russmatney/dino/commit/f7ff884d)) doc: testing multi-line org html inling
+- ([`3e110088`](https://github.com/russmatney/dino/commit/3e110088)) test: drop game singleton assertion
+
+  > Dino games no longer guarantee singletons!
+
+- ([`04335d4e`](https://github.com/russmatney/dino/commit/04335d4e)) doc: attempt to fix readme action links
+
+### 8 Nov 2023
+
+- ([`9620388d`](https://github.com/russmatney/dino/commit/9620388d)) fix: prevent crash when launching roulette
+- ([`1855b2cc`](https://github.com/russmatney/dino/commit/1855b2cc)) wip: basic arcade mode, noisey log and camera fixes
+- ([`f3a28ad1`](https://github.com/russmatney/dino/commit/f3a28ad1)) fix: pause menus on layer 10, process_mode 'always'
+
+  > Figured out a long-time issue where clickign on the pause menu wasn't
+  > doing anything. Finally diagnosed that it was the player HUD blocking
+  > it... but that's not right, is it? It's the canvas_layer! We don't need
+  > to re-order the scene_tree, we need to bump up the layer of the pause
+  > menus so they get that always-in-front treatment.
+
+- ([`e51856c2`](https://github.com/russmatney/dino/commit/e51856c2)) fix: free dead huds
+
+  > Frees HUDs before creating new ones. woops!
+
+- ([`64f40ad4`](https://github.com/russmatney/dino/commit/64f40ad4)) feat: change seed, room_count, regenerating level via brickRegenMenu
+
+  > Regenerating while paused working! Just have to manually disable the
+  > HUDs that are blocking the input while paused, those wiley bastards.
+
+- ([`d9ef9681`](https://github.com/russmatney/dino/commit/d9ef9681)) wip: towards a brickRegenMenu on the roulette pause screen
+- ([`9f6ecac3`](https://github.com/russmatney/dino/commit/9f6ecac3)) addon: adds custom-scene-launcher and ports it to godot 4
+
+  > Imports: https://gitlab.com/godot-addons/custom-scene-launcher and
+  > manually updates most of it for godot 4. It sort of works - not sure
+  > what the pin button is supposed to be doing. Will probably strip it down
+  > at some point - not sure why it's reading/writing from a config at all,
+  > for example.
+  > 
+  > Either way, a bit of a boon for now, as we can manually select a scene
+  > and play it regardless of which scene is focused.
+
+
+### 7 Nov 2023
+
+- ([`29c6c79d`](https://github.com/russmatney/dino/commit/29c6c79d)) wip: level complete for shirt, tower, woods
+- ([`fcd99066`](https://github.com/russmatney/dino/commit/fcd99066)) feat: quick level_complete signal work for pluggs
+- ([`acc26cc8`](https://github.com/russmatney/dino/commit/acc26cc8)) feat: roulette passing from gunner to pluggs!
+
+  > First case of roulette passing from one game to the next! Bunch of
+  > cleanup and solidifying to happen, but great to see it working.
+
+- ([`2aeaf95e`](https://github.com/russmatney/dino/commit/2aeaf95e)) fix: can't use `is` if it's invalid, it turns out
+- ([`f7c86165`](https://github.com/russmatney/dino/commit/f7c86165)) feat: Roulette launching the first game
+
+  > Writing right around the game.current_game state here - I wonder how this
+  > is going to go!
+
+- ([`e53d393f`](https://github.com/russmatney/dino/commit/e53d393f)) feat: boilerplate for a new game-mode: Arcade
+
+  > Could probably dry this up more, but it's also nice to have fresh
+  > workspaces for improving some custom menus'n'such.
+  > 
+  > I'm hopeful that having two game-modes to hack on will help me
+  > think through a somewhat generic structure for managing these games.
+
+- ([`791df5b8`](https://github.com/russmatney/dino/commit/791df5b8)) feat: make use of is_game_mode() flag
+
+  > Adds the game_ent func, an sorts by it in dino menu.
+
+- ([`8c18272e`](https://github.com/russmatney/dino/commit/8c18272e)) feat: first game_mode, drop a bunch of game singletons
+
+  > Introduces a new concept, dino game modes. This is a sub-category of
+  > DinoGameEntities right now.
+  > 
+  > Drops a bunch of unused game_singletons, and refactors Game.gd to create
+  > a DinoGame on the fly when a singleton isn't specified. DinoGames still
+  > use 'singleton'-like behavior via the Game.gd autoload.
+  > 
+  > Perhaps the Game.gd autoload should also go away or otherwise lose it's
+  > state? Right now it'd be problemmatic to run two games at once. So far
+  > it seems like the encounter/level refactor we're in will change the way
+  > this works.
+
+- ([`a0f49050`](https://github.com/russmatney/dino/commit/a0f49050)) misc: noisey logs, woods regen
+- ([`75b5e7c0`](https://github.com/russmatney/dino/commit/75b5e7c0)) feat: drop super elevator level singleton and usage
+- ([`b4f5ddfa`](https://github.com/russmatney/dino/commit/b4f5ddfa)) fix: calc room rect properly
+
+  > Resolves a bug when adding border tiles - room rects were being calced
+  > with tmap.get_used_rect(), which doesn't always cover the whole room.
+  > Instead we build a rect for the room ourselves - note these are coord
+  > Rect2i in tilemap space, not local Vector2 floats.
+
+- ([`2e7fbe26`](https://github.com/russmatney/dino/commit/2e7fbe26)) fix: better behaving border_depth applied to TheWoods
+
+  > Corrects some errors - this is actually simpler than I thought.
+
+- ([`497774f3`](https://github.com/russmatney/dino/commit/497774f3)) feat: cleaner border extension impl, includes corners
+
+  > Rather than calc these in a loop, we establish the level corners and
+  > border corners, then fill in 4 rects based on those.
+  > 
+  > Still leaves gaps between the used_rect() rect and inner tile rooms. I
+  > wonder if there's a clean way to fill those...
+
+- ([`b3cf73da`](https://github.com/russmatney/dino/commit/b3cf73da)) feat: brick supporting basic extended borders
+
+  > Still need to fill in internal gaps and corners, but this works for
+  > one-room levels.
+
+- ([`d3c011f2`](https://github.com/russmatney/dino/commit/d3c011f2)) chore: misc level default regens.
+- ([`865a7d25`](https://github.com/russmatney/dino/commit/865a7d25)) feat: basic super elevator level gen via brick
+
+  > Working pretty well, tho the tilesets are the cave theme for now. will
+  > need to improve the art to be more elevator-y.
+
+
+### 3 Nov 2023
+
+- ([`ed2c3dc4`](https://github.com/russmatney/dino/commit/ed2c3dc4)) chore: disable a few games
+
+  > disables mountain, ghost house, and dungeon crawler.
+  > 
+  > Not much to do with these at the moment - will return when things are
+  > more clear/farther along, maybe to create some villages/npcs.
+
+- ([`a8b4f5c9`](https://github.com/russmatney/dino/commit/a8b4f5c9)) feat: load level-gen games via first-level entity param
+
+  > Adds a new property to the DinoGameEntity: 'first_level'. If set, the
+  > default DinoGame.start() impl will load it via Nav.nav_to(). start() can
+  > be overwritten, but the trend right now is towards completely dropping
+  > the game singletons, and putting game specific logic into these
+  > first_level scenes.
+  > 
+  > This updates dino to make all the existing level-gen implementations
+  > playable! Check out VoidSpike, Shirt, TowerJet, Gunner, Harvey, Herd,
+  > Pluggs, and TheWoods for new Brick/levelscript generated levels.
+  > Hopefully soon these will have a 'treadmill' (for basic regenerating
+  > when the win condition is reached) and options configurable via the
+  > pause menu.
+
+- ([`1a11de83`](https://github.com/russmatney/dino/commit/1a11de83)) test: disable too-broad tests and orphan reporting
+
+  > Dropping these for the moment to get another build deployed.
+
+- ([`a61278ed`](https://github.com/russmatney/dino/commit/a61278ed)) feat: get most tests passing again
+- ([`8d77ad19`](https://github.com/russmatney/dino/commit/8d77ad19)) feat: spike levelgen impl working, including top/bottom portal
+
+  > Kind of a hack, but these are the escape hatches i want to support.
+  > 
+  > Could refactor towards a simpler api, something that automagically
+  > reparents/rearranges cross-dep entities like this. But, realizing that
+  > this feature could be impled via the roombox makes me wonder if it's
+  > better to keep things simple - i.e. find some other way to express it.
+  > we'll see how it goes as we add more use-cases - a simple 'setup' called
+  > on the final generated output might be a better/simpler place to do some
+  > of this work, tho right now we're benefiting from letting the rooms do
+  > the positioning work.
+
+- ([`6ea28d5a`](https://github.com/russmatney/dino/commit/6ea28d5a)) wip: tilemap -> entity and a more complex case in spike
+
+  > A wip towards supporting a few more options, in this case getting an
+  > area2d from a tilemap and an entity, then moving them both under an
+  > arbitrary instance.
+
+- ([`f61f9f1d`](https://github.com/russmatney/dino/commit/f61f9f1d)) feat: generating a basic void spike level via BrickLevelGen
+
+  > Extends the one-way platform to be resizable (and preserve that width
+  > via an @export).
+  > 
+  > Some other adjustments to make this work, including dropping the
+  > Metro-spike impl. Maybe Metro could be stripped down to support
+  > fast-travel (nav/menus) and mini-maps? That'd fit it's name better.
+
+
+### 2 Nov 2023
+
+- ([`0764257e`](https://github.com/russmatney/dino/commit/0764257e)) fix: drop this tool script debugging code
+- ([`a1617cdf`](https://github.com/russmatney/dino/commit/a1617cdf)) misc: some latest level gens for gunner, harvey, tower
+- ([`ffcb5c62`](https://github.com/russmatney/dino/commit/ffcb5c62)) feat: herd generating levels via BrickLevelGen
+
+  > A bit more involved - had to develop a quick method for generating the
+  > FetchSheepQuest and it's required area2d on the fly - this does so by
+  > setting a group on the generated 'Pen' tilemap and using that to derive
+  > an area2d, and adding the quest after the fact in HerdLevel.gd
+
+- ([`92eea209`](https://github.com/russmatney/dino/commit/92eea209)) feat: support similar 'setup' style on brickLevel tilemaps
+
+  > In this case, adding a tilemap to a group.
+
+- ([`84913710`](https://github.com/russmatney/dino/commit/84913710)) feat: naive tilemap -> area2d helper
+
+  > This will need to get much more nuanced, but it covers a useful enough
+  > case (basic rectangles) to be impled for now.
+
+- ([`ccf8564b`](https://github.com/russmatney/dino/commit/ccf8564b)) fix: enemy robots taking hits again
+
+  > No longer invincible!
+
+- ([`13d960d2`](https://github.com/russmatney/dino/commit/13d960d2)) feat: levelGen generating tower jet levels
+
+  > Pretty cool! This is finally becoming what i wanted this game to be,
+  > short of a heck-ton of polish.
+
+- ([`a3108fd6`](https://github.com/russmatney/dino/commit/a3108fd6)) feat: support show-color-rect
+
+  > This is quite useful for debugging - being able to see the rect each
+  > room is responsible for.
+
+- ([`5aaa5a68`](https://github.com/russmatney/dino/commit/5aaa5a68)) wip: cam_window_rect() not crashing
+
+  > The offscreen-indicators use this, and it doesn't appear to be working
+  > anymore. No longer crashing the game tho, so that's good.
+
+- ([`df10edfd`](https://github.com/russmatney/dino/commit/df10edfd)) feat: basic gunner level gen and rooms
+
+  > Gunner still crashing, but it's fun to be doodling more levels this way.
+
+- ([`d6911b9d`](https://github.com/russmatney/dino/commit/d6911b9d)) feat: add some harvey levels, adjust box layouts
+
+  > For these grid-based levels, rather than push every entity down to the
+  > bottom of it's coord, we expect to align 0,0 on an entity with the
+  > grid's coord (top-left). Further adjustments can happy per entity in a
+  > passed setup(ent) helper. The baked-in helper made sense in a platformer
+  > context, but not a top-down one.
+  > 
+  > Another adjustment is making seedboxes accessible from all sides, which
+  > makes more top-down sense, and avoids the rotation complexity that the
+  > delivery boxes took on.
+
+- ([`9969420d`](https://github.com/russmatney/dino/commit/9969420d)) fix: resize seed/delivery boxes, set harvey player scene
+
+  > Very pleased to find that entity 'setup' was already implemented! I
+  > threw it in when writing that function out (but then forgot), and then
+  > opted into the same api when drafting harvey's levelgen this morning.
+  > Worked perfectly!
+
+- ([`c6d531a0`](https://github.com/russmatney/dino/commit/c6d531a0)) feat: basic harvey level gen
+
+  > Pretty quick to get this started! Bunch of clean up/sizing/etc to work out.
+
+
+### 1 Nov 2023
+
+- ([`80d47d85`](https://github.com/russmatney/dino/commit/80d47d85)) feat: support gems in shirtlevelgen
+
+  > Also removes shirt's 'metro' treatment, b/c it was breaking the plain
+  > shirt level. Ought to reformulate the metro approach - what are we
+  > getting for it? (minimap/pause-map, pausing/hiding levels, room-corner
+  > cameras... anything else?)
+
+- ([`93557ba5`](https://github.com/russmatney/dino/commit/93557ba5)) feat: shirt consuming slimmer BrickLevelGen style
+
+  > Removes the bit of shirtLevel that was transferring nodes to the scene -
+  > BrickLevelGen handles this for us now, creating parent nodes if none
+  > exist.
+  > 
+  > I hit a bad-address issue when coming back around to make this change,
+  > but it was resolved after an editor restart.
+
+- ([`9d3f993a`](https://github.com/russmatney/dino/commit/9d3f993a)) feat: pluggs consuming BrickLevelGen
+
+  > BrickLevelGen now creates missing nodes for the parent, which is even
+  > nicer. Drops pluggs's initial levelGen impl, expresses pluggs-y things
+  > in PluggsLevelGen and PluggsLevel, which are happily separated.
+
+- ([`5b18073a`](https://github.com/russmatney/dino/commit/5b18073a)) feat: drop woods WorldGen - now supported by BrickLevelGen
+
+  > This earlier implementation is now expressed via BrickLevelGen,
+  > WoodsLevelGen, and WoodsLevel.
+  > 
+  > Updates some tests per the BrickRoom multi-tilemap extension.
+
+- ([`a9d867d8`](https://github.com/russmatney/dino/commit/a9d867d8)) feat: woods levels generating via BrickLevelGen
+
+  > Not 100% about subclassing BrickLevelGen every time, but maybe it makes
+  > alot of sense?
+  > 
+  > Starting to implement level logic, in this case just finding the last
+  > room and connecting to it's signal.
+  > 
+  > Introduces roomboxes on Rooms, which requires even more assignment of
+  > node children owners to keep (for the required collisionShape2Ds).
+  > 
+  > Extends BrickLevelGen to accept nodes for entities/rooms/tilemaps, to
+  > DRY up the node handoff from gen to level. Could even create and add
+  > these on the fly to the gen's parent or owner.
+
+- ([`a1eb9ffc`](https://github.com/russmatney/dino/commit/a1eb9ffc)) feat: basic entities coverage for BrickLevelGen
+- ([`77c69f5c`](https://github.com/russmatney/dino/commit/77c69f5c)) feat: basic tilemap test coverage for BrickLevelGen
+
+  > adds the metal16 tiles as a fallback for unspecified label_to_tilemaps.
+  > 
+  > Merges the opts passed to BrickLevelGen.generate_level into each
+  > room_opt, to support things like label_to_entity/label_to_tilemap being
+  > passed one time.
+
+- ([`36e01f9a`](https://github.com/russmatney/dino/commit/36e01f9a)) refactor: move much of BrickLevelGen to static funcs
+
+  > Reaching for tests pushed me to want to just test the generate_level
+  > func, rather than creating a node to test this on.
+
+- ([`92474139`](https://github.com/russmatney/dino/commit/92474139)) feat: generating floor tiles under pits, entities
+
+  > Coming together pretty well here!
+
+- ([`7275258a`](https://github.com/russmatney/dino/commit/7275258a)) refactor: BrickRoom + LevelGen supporting multiple tilemaps
+
+  > Moves from a passed tilemap_scene to a label_to_tilemap dict - this is a
+  > map from the legend/label of the room_defs to an options dict for each
+  > tilemap, supporting just `scene` and `add_borders` for now. To come:
+  > extend-edges or some better named feat.
+
+- ([`e1b115dd`](https://github.com/russmatney/dino/commit/e1b115dd)) refactor: move border tilemaps helpers to Reptile
+- ([`7b40f039`](https://github.com/russmatney/dino/commit/7b40f039)) refactor: move Reptile from autoload to static class
+
+  > Reptile was already stateless, no need for the autoload now that we have
+  > static class funcs.
+
+- ([`782e4048`](https://github.com/russmatney/dino/commit/782e4048)) chore: drop shirt/gen/LevelGen, emit seed, misc clean up
+
+### 31 Oct 2023
+
+- ([`38a10e17`](https://github.com/russmatney/dino/commit/38a10e17)) wip: debugging entity positioning issue
+
+  > Entities are ending up at 0,0. not sure why yet, but i suspect it's
+  > because the rooms and entities aren't added to the gen scene anymore, so
+  > somehow the positions are being set and later propagated.
+
+- ([`61c889ad`](https://github.com/russmatney/dino/commit/61c889ad)) refactor: break shirt-details into shirtlevelgen
+
+  > BrickLevelGen more or less generic now! Could use a testing setup.
+
+- ([`879494df`](https://github.com/russmatney/dino/commit/879494df)) refactor: cleaning up BrickLevelGen impl
+
+  > Cutting out intermediary nodes, removing run-timey features that will
+  > now live in the parent node.
+
+- ([`24732259`](https://github.com/russmatney/dino/commit/24732259)) wip: ShirtLevelGen as ShirtLevel child, promoting nodes
+
+  > Rough working impl of a level generator as a child node to a
+  > level-script/encounter parent node.
+
+- ([`9e67648e`](https://github.com/russmatney/dino/commit/9e67648e)) wip: towards a DRY BrickLevelGen impl
+
+  > Not sure yet if this should be inherited or just static funcs, like
+  > BrickRoom.
+
+- ([`8b1fd4c4`](https://github.com/russmatney/dino/commit/8b1fd4c4)) refactor: move BrickRoom impl back to static funcs
+
+  > The create_room shift to room.gen() was to allow modifications via
+  > inheritance and subclass function overwrites - instead BrickRooms should
+  > be pretty much throw-away/transient - pass in opts and generate the
+  > tilemaps and entities, then promote them to the level nodes and maybe
+  > finally drop some area2ds for convenience.
+
+- ([`c55ebe10`](https://github.com/russmatney/dino/commit/c55ebe10)) feat: much cleaner border add
+
+  > Uncomplicates the matching-wall-deletion approach, instead opting only
+  > include border tiles that don't overlap an room's rect. A bit tricky
+  > working with tilemap scaling here, but it works now... ought to get this
+  > covered by tests.
+
+
+### 30 Oct 2023
+
+- ([`99056af6`](https://github.com/russmatney/dino/commit/99056af6)) fix: correct filter_rooms opts pass in woods test
+- ([`9fac480d`](https://github.com/russmatney/dino/commit/9fac480d)) refactor: drop PluggsRoom completely
+
+  > No need to inherit BrickRoom, instead we'll call out to it statically
+  > and promote it's parts as needed.
+
+- ([`737d9e43`](https://github.com/russmatney/dino/commit/737d9e43)) refactor: drop WoodsRoom completely
+
+  > Moving away from inheriting BrickRoom, and using it as a completely
+  > static class - modifications to it's internals should be passed in as
+  > functions via BrickRoomOpts
+
+- ([`604d947a`](https://github.com/russmatney/dino/commit/604d947a)) misc: run some level gen, add a big open room
+- ([`6a18249b`](https://github.com/russmatney/dino/commit/6a18249b)) fix: insidious alignment bug after . = Empty change
+
+  > Glad to find a test to reproduce this, it was very confusing.
+  > 
+  > Moving from '.' always setting null in the shape to setting whatever the
+  > legend says it is (Floor, in this case) probably created a few other
+  > bugs as well.
+
+- ([`4f36ec3f`](https://github.com/russmatney/dino/commit/4f36ec3f)) fix: pretty printer cut-off b/c arrays/etc are not 'valid'
+
+  > Had to get more specific with this safety check.
+
+- ([`a9f80a9f`](https://github.com/russmatney/dino/commit/a9f80a9f)) chore: test and misc fixes
+
+  > Chasing a bug - unfortunately this test repro passed. along the way i
+  > realized my pretty printer's colors aren't working, wonder when that
+  > broke.
+
+- ([`56260f39`](https://github.com/russmatney/dino/commit/56260f39)) feat: add borders per-room, drop conflicting borders
+
+  > An attempt at bordering on a per-room level. Not perfect, but working
+  > pretty well. Could use some clean up - about to pull these levelGen bits
+  > into some DRY and tested brick abstraction.
+
+- ([`da1f6d08`](https://github.com/russmatney/dino/commit/da1f6d08)) refactor: remove hard-coded '.' -> null in parser
+
+  > Instead, we support returning '.' as whatever the legend says it is, or
+  > null if there is nothing matching in the legend. Note that other
+  > characters without match in the legend will be passed through, so still
+  > a bit of hard-coding for '.' in that case.
+
+- ([`bb2f75e7`](https://github.com/russmatney/dino/commit/bb2f75e7)) wip: wrap_tilemap impl adds a tiled border
+
+  > A simple used_rect() -> border tile implementation. Leaves gaps where
+  > there are no rooms, but maybe we can just fill those in?
+
+- ([`76eb5c31`](https://github.com/russmatney/dino/commit/76eb5c31)) fix: shirt gen - skip 'first' room after first
+- ([`55ffde2c`](https://github.com/russmatney/dino/commit/55ffde2c)) feat: promoting entities to the rooms node
+
+  > Getting ever closer to the scene tree structure we should have -
+  > should probably be putting these on an entities node rather than the
+  > rooms one, but i'm not sure of the implications yet.
+
+- ([`2d8d2322`](https://github.com/russmatney/dino/commit/2d8d2322)) fix: drop room_base_dim variable
+
+  > This was dropped from the algorithm in favor of tile_size.
+
+- ([`65e6283e`](https://github.com/russmatney/dino/commit/65e6283e)) fix: don't set tree root as current_scene
+
+  > Finally learned how to read this error - I was setting the root as the
+  > current_scene, which is a no-no. For now returns to the previous
+  > algorithm, setting the root's last child as the current_scene, which
+  > should generally be right? Hopefully this removes another error failing
+  > the start-every-game test.
+
+- ([`663d48b7`](https://github.com/russmatney/dino/commit/663d48b7)) misc: flip the default on playerspawnpoints
+
+  > Plus a generated shirt level in our newest LevelGen
+
+- ([`446059bb`](https://github.com/russmatney/dino/commit/446059bb)) feat: now adding player + enemies
+
+  > Not too bad! Didn't even need to subclass BrickRoom here, which I'm
+  > thinking is a bad pattern. Not sure if BrickRoom should even have an
+  > instance... vs just creating and passing along node2ds or some
+  > non-specific thing. It's really about the tiles and entities - the tiles
+  > are being promoted to the level, and the entities probably should be as
+  > well.
+
+- ([`0844f37b`](https://github.com/russmatney/dino/commit/0844f37b)) wip: doodling some connected top-down rooms
+
+  > Boilerplate for a new LevelGen - slated next for the Bricks testing and
+  > DRY up, but towards generating some shirt-levels first.
+
+
+### 29 Oct 2023
+
+- ([`e37d6210`](https://github.com/russmatney/dino/commit/e37d6210)) feat: test coverage for adding an aligned room in any direction
+
+  > Quick impl - not too dry, but decently tested.
+
+- ([`5c5d4e53`](https://github.com/russmatney/dino/commit/5c5d4e53)) feat: create BrickRoomOpts, swaps in for opts Dictionary
+
+  > Perhaps this is more maintainable. I'm reluctant but i'll try it.
+
+- ([`b4257956`](https://github.com/russmatney/dino/commit/b4257956)) chore: misc woods/pluggs room regens
+- ([`a576d324`](https://github.com/russmatney/dino/commit/a576d324)) feat: adding room above last room
+
+  > Basic version of adding a room above the last one. Probably not quite
+  > the right api yet - this supports passing a side to add the next room
+  > too, but we might want to search the room options for one that fit the
+  > last room's open sides, and start getting into rotating the rooms.
+
+- ([`7dbe5d78`](https://github.com/russmatney/dino/commit/7dbe5d78)) fix: restore woods_room tests
+
+  > Updates some positions/sizes in test assertions after
+  > woods<>pluggs<>brick refactor.
+  > 
+  > The woods implementation changed from using base_dim_size and room-type
+  > based positioning to matching last/next floor tiles up (and using
+  > opts.tile_size, which defaults to 16).
+
+- ([`f4761c93`](https://github.com/russmatney/dino/commit/f4761c93)) feat: restore tiles on wall woods rooms
+
+  > The next-room algo now supports aligning last/next room floor tiles, so
+  > we can have ceilings again.
+
+- ([`dc6e5e12`](https://github.com/russmatney/dino/commit/dc6e5e12)) feat: next_room_position smarter offset handling
+
+  > Now aligning rooms with closed tops as well.
+  > 
+  > This concept should be applicable to topdown rooms as well, once we get
+  > to placing rooms against more than just one wall.
+
+- ([`b5c016d5`](https://github.com/russmatney/dino/commit/b5c016d5)) fix: apparently fix camera issue?
+
+  > I don't think I actually fixed this, but the tests are passing now.
+
+- ([`918d8e26`](https://github.com/russmatney/dino/commit/918d8e26)) chore: noisey invalid uid nonsense
+
+  > These seem to happen as i move between machines, but i might just be
+  > suspicious of that.
+
+- ([`3bf79e1d`](https://github.com/russmatney/dino/commit/3bf79e1d)) wip: rename ensure_camera -> request_camera, testing boilerplate
+
+### 28 Oct 2023
+
+- ([`b73a3612`](https://github.com/russmatney/dino/commit/b73a3612)) wip: adjust fall rooms to fix woods worldgen
+
+  > Instead we should improve the algorithm to find the 'middle' of the wall
+  > - in this case it's getting stuck at the top of the room, which should
+  > never happen.
+
+- ([`4df82ae6`](https://github.com/russmatney/dino/commit/4df82ae6)) fix: tidys some pretty printer/misc details
+- ([`660f3333`](https://github.com/russmatney/dino/commit/660f3333)) fix: select a random room for the middle-ones
+
+  > This got dropped when moving WoodsRoom to inherit BrickRoom.
+
+- ([`75a442ee`](https://github.com/russmatney/dino/commit/75a442ee)) fix: correct inverted flags/skip_flags
+
+  > ... should probably have a test that catches this?
+
+- ([`83f9ef3a`](https://github.com/russmatney/dino/commit/83f9ef3a)) wip: porting woods level gen to use BrickRoom
+
+  > Tests nearly back, but for the dimensional changes.
+
+- ([`fd0b0ac7`](https://github.com/russmatney/dino/commit/fd0b0ac7)) feat: debug.to_pretty duck-typing
+
+  > Extends new types to use the pretty printer.
+
+- ([`43344cb8`](https://github.com/russmatney/dino/commit/43344cb8)) feat: introduce BrickRoom, which takes on generic PluggsRoom code
+
+  > Extracts the per-game/encounter stuff, like label->entity and tilemap
+  > scene. Some trouble with static vs dynamic constructors - should
+  > probably figure out what's going on with that.
+
+- ([`87c0b78a`](https://github.com/russmatney/dino/commit/87c0b78a)) refactor: move some PluggsRoom helpers to RoomDef
+- ([`d5b0cb88`](https://github.com/russmatney/dino/commit/d5b0cb88)) fix: fix flaky test
+
+  > Hopefully this actually fixed and not just random now
+
+- ([`1760c32d`](https://github.com/russmatney/dino/commit/1760c32d)) refactor: pluggs,woodsRoom building via RoomDefs and RoomDef
+
+  > Refactors and restores pluggs_room_ and woods_room_tests, now in terms
+  > of two classes.
+  > 
+  > Still lots of `.shape` being exposed, but this will be easier to
+  > abstract into one of these classes now.
+
+- ([`78f5436b`](https://github.com/russmatney/dino/commit/78f5436b)) feat: RoomParser.parse() returning RoomDefs
+
+  > Moving to some classes and more structure for this data. Expecting a
+  > bunch of helpers to become RoomDefs/RoomDef methods, and probably to add
+  > some structure to the 'opts' - i'd love a reasonable constructor syntax
+  > for these objects... will probably write a from_opts(Dictionary) api for
+  > things.
+
+- ([`f2517a48`](https://github.com/russmatney/dino/commit/f2517a48)) wip: starting in on BrickRoom, RoomDef impl + tests
+- ([`50f47c68`](https://github.com/russmatney/dino/commit/50f47c68)) assets: adds some doodles to the splash image
+- ([`312f0bb5`](https://github.com/russmatney/dino/commit/312f0bb5)) addon: brick -> provider of level-based proc-gen
+
+  > Introduces a new addon called 'brick'. Really just looking for a place
+  > to put this RoomDef and RoomParser, as well as trying to get a stronger
+  > metaphor under the Encounter and LevelGen concepts. Maybe this could end
+  > up eating Metro, or providing MetroRoom-like features.
+
+
+### 27 Oct 2023
+
+- ([`4695f847`](https://github.com/russmatney/dino/commit/4695f847)) refactor: rewrite gut tests as gdunit tests
+- ([`35948bd1`](https://github.com/russmatney/dino/commit/35948bd1)) fix: restore woods room tests, port pluggs room tests
+- ([`20124ede`](https://github.com/russmatney/dino/commit/20124ede)) chore: drop more gut stuff
+- ([`a235811f`](https://github.com/russmatney/dino/commit/a235811f)) ci: tests officially failing (successfully!)
+- ([`b0b141e5`](https://github.com/russmatney/dino/commit/b0b141e5)) fix: force 0 exit code on project load/scan
+- ([`297edaf8`](https://github.com/russmatney/dino/commit/297edaf8)) refactor: move to running gdunit tests in CI
+- ([`b39df1ba`](https://github.com/russmatney/dino/commit/b39df1ba)) feat: rewrite bb test, remove old commands
+- ([`e6745fda`](https://github.com/russmatney/dino/commit/e6745fda)) chore: drop addons/gut
+
+  > Also drops some gut config files, and some old inkgd stuff
+
+- ([`2b26063c`](https://github.com/russmatney/dino/commit/2b26063c)) chore: simplify test structure
+
+  > moves the tests from unit/integration and addon/src dirs into just test/.
+
+
+### 26 Oct 2023
+
+- ([`df70a0fe`](https://github.com/russmatney/dino/commit/df70a0fe)) feat: finish rewrite woods_room_test in gdunit
+
+  > Happily, these fail when the code running in the test has a runtime
+  > error. yay test suite! Now to rewrite the rest and drop gut.
+
+- ([`d578e6a1`](https://github.com/russmatney/dino/commit/d578e6a1)) dep: add gdunit4, wip port of woods_room_test
+
+  > Confirms that tests fail when a script error occurs. woo!
+
+- ([`6175261d`](https://github.com/russmatney/dino/commit/6175261d)) fix: some tests fixed, about to move to gdunit
+
+  > Just found gut doesn't fail tests when gdscript throws errors, which is
+  > too dang bad. More digging reveals it's a hot topic, an gdscript doesn't
+  > really have exceptions. So that's interesting.
+
+- ([`cbdd9e4e`](https://github.com/russmatney/dino/commit/cbdd9e4e)) feat: explicit seed handling in pluggs level gen
+- ([`19288929`](https://github.com/russmatney/dino/commit/19288929)) refactor: use navi wrapper instead of accessing navi.current_scene
+
+  > The navi.current_scene usage is a bit fragile, so we prefer to call
+  > funcs instead of depend on this var (which may not be set.)
+
+- ([`dbe4a965`](https://github.com/russmatney/dino/commit/dbe4a965)) feat: plug into arcade machine to reboot the world
+
+  > A level-gen treadmill - can now connect to arcade machines to re-run the
+  > level gen (or bubble up other events).
+  > 
+  > Not too sure on this double signal emit (machine to room, room to level
+  > gen). Maybe this should be the message bus pattern?
+  > 
+  > Also fixes a bug in navi when no current_scene is set. Should be fine?
+  > Required for deving, ever since the current_scene doesn't get auto-set
+  > anymore.
+  > 
+  > Adds a basic HUD to pluggs.
+
+- ([`5c805d3f`](https://github.com/russmatney/dino/commit/5c805d3f)) feat: level gen using flags/skip_flags to pick rooms
+
+  > Seems simple, maybe it'll scale?
+  > 
+  > Also adds player spawn points to 'p' tiles.
+
+- ([`08ef8d72`](https://github.com/russmatney/dino/commit/08ef8d72)) feat: add dino boot splash
+- ([`e21780e1`](https://github.com/russmatney/dino/commit/e21780e1)) fix: remove overlapping joypad action
+
+  > Removes 'restart' on Y, which was overlapping with 'action', making
+  > pluggs unplayable via controller in the regen room.
+
+
+### 25 Oct 2023
+
+- ([`9d23b6cb`](https://github.com/russmatney/dino/commit/9d23b6cb)) feat: add light occluders to metal tiles
+- ([`eca0743a`](https://github.com/russmatney/dino/commit/eca0743a)) feat: point to levelGen for playable pluggs scene
+- ([`1773d0df`](https://github.com/russmatney/dino/commit/1773d0df)) feat: larger and smoother lights
+
+  > Adds a big dithered light to the arcade machine, and a larger and
+  > smoother light to the usuals.
+
+- ([`d369e48f`](https://github.com/russmatney/dino/commit/d369e48f)) feat: level gen adding arcade machines
+- ([`aaca2c45`](https://github.com/russmatney/dino/commit/aaca2c45)) feat: basic ArcadeMachine turning on/off via socket
+
+  > Pretty simple!
+
+- ([`f8ddb5e9`](https://github.com/russmatney/dino/commit/f8ddb5e9)) feat: arcade machine art
+- ([`33f6910a`](https://github.com/russmatney/dino/commit/33f6910a)) fix: update godot version number in itch deploys
+- ([`d4f94e6c`](https://github.com/russmatney/dino/commit/d4f94e6c)) ci: deploy to steam/itch from 'edge' and 'prod' branches
+
+  > Will come back to deploying only some tags at some point - hoping this
+  > lets me keep working on main with some more git-based deploy control.
+
+- ([`b66488b4`](https://github.com/russmatney/dino/commit/b66488b4)) chore: delete rest of the TODOs
+
+  > Drops the rest of the codebase's TODOs. Here's to making them more useful!
+
+- ([`4bcb0dee`](https://github.com/russmatney/dino/commit/4bcb0dee)) chore: deleting TODOs
+
+  > A clean up task - calling TODO bankruptcy, removing most/all. They are
+  > generally quite old and asking for things that could be added, but we
+  > can make TODOs useful as well and have feature-wishlists elsewhere.
+
+- ([`ab633e0e`](https://github.com/russmatney/dino/commit/ab633e0e)) feat: expand watch command to whole directory
+
+  > After much wrestling with watching all the asset/ dirs, watching just
+  > the root and filtering on extension ends up being much simpler and
+  > actually working. Plus it's probably more flexible for some other watch
+  > tasks, (maybe generating ids/entities on levelscript file changes?)
+
+- ([`58106ed1`](https://github.com/russmatney/dino/commit/58106ed1)) feat: add quit-game button to pause menus
+
+  > I suppose we could dry up these options, especially since they're mostly
+  > point-free at this point.
+  > 
+  > We may want to hide this button on some platforms, maybe web? Not sure
+  > what'll happen. Letting it go for now.
+
+- ([`b31d9c65`](https://github.com/russmatney/dino/commit/b31d9c65)) fix: correct readme badge urls
+
+### 24 Oct 2023
+
+- ([`a91d88f3`](https://github.com/russmatney/dino/commit/a91d88f3)) feat: adding Lights to pluggs room gen
+
+  > Impls add_entity for PluggsRoom.
+  > 
+  > Also introduces a RoomDef class, which should be incorporated into the
+  > inevitable refactor.
+
+- ([`a73f955c`](https://github.com/russmatney/dino/commit/a73f955c)) feat: alignment between rooms working
+
+  > Plus a bunch more room defs.
+
+- ([`0aa63a7c`](https://github.com/russmatney/dino/commit/0aa63a7c)) wip: towards aligning on last y pos
+- ([`b685663f`](https://github.com/russmatney/dino/commit/b685663f)) fix: don't crash if room_defs ends with empty lines
+
+  > Updates the puzz parser to drop blank lines before passing chunks to the
+  > section parser.
+
+
+### 23 Oct 2023
+
+- ([`4a941629`](https://github.com/russmatney/dino/commit/4a941629)) feat: add credits and quit buttons to main menu
+- ([`73473d65`](https://github.com/russmatney/dino/commit/73473d65)) feat: scroll controls during credits
+
+  > Much nicer to wiz around these credits - could use some sticky headers
+  > and things too.
+
+- ([`d663604d`](https://github.com/russmatney/dino/commit/d663604d)) wip: some pandora tweaks to fix a release build
+
+  > Not at all final changes to pandora, just something to get things
+  > working. The compressed pandora export is failing with an unrecognized
+  > ERR_FILE_UNRECOGNIZED (15), so this moves pandora to reading/writing the
+  > non-compressed in debug and release, rather than just debug.
+
+- ([`ce50cf81`](https://github.com/russmatney/dino/commit/ce50cf81)) tool: bb export command
+
+### 18 Oct 2023
+
+- ([`eba8601b`](https://github.com/russmatney/dino/commit/eba8601b)) wip: blerg ci still not configured correctly
+
+### 16 Oct 2023
+
+- ([`fbaedb85`](https://github.com/russmatney/dino/commit/fbaedb85)) feat: readme linking to steam page
+
+## v0.0.0-3
+
+
+### 18 Oct 2023
+
+- ([`8b17adb2`](https://github.com/russmatney/dino/commit/8b17adb2)) feat: update pluggs 'main' scene
+
+  > Should probably incorporate this kind of data into the pandora entity as
+  > well.
+
+- ([`2193a92d`](https://github.com/russmatney/dino/commit/2193a92d)) feat: plugs 'unplugging' at a max length
+
+  > it's kind of doing it!
+
+- ([`7d514726`](https://github.com/russmatney/dino/commit/7d514726)) feat: drawing cord between socket and pluggs
+
+  > And updating while pluggs moves around.
+
+- ([`6517c296`](https://github.com/russmatney/dino/commit/6517c296)) feat: cord color changes based on length thresholds
+- ([`f45b1b0e`](https://github.com/russmatney/dino/commit/f45b1b0e)) feat: lights lit by plugged sockets
+
+  > Something starting to happen here.
+
+- ([`12f0636a`](https://github.com/russmatney/dino/commit/12f0636a)) fix: woods room crash, disable some main-scene editor plugins
+
+## v0.0.0-2
+
+
+### 18 Oct 2023
+
+- ([`528fa97a`](https://github.com/russmatney/dino/commit/528fa97a)) feat: test for something-focused in main menu
+
+  > Also drops the process/lazy game entries add, b/c it should not be
+  > needed.
+
+- ([`af5e931c`](https://github.com/russmatney/dino/commit/af5e931c)) fix: only run if the branch is tagged?
+- ([`89e5b1c9`](https://github.com/russmatney/dino/commit/89e5b1c9)) fix: specify bash in run command
+
+  > Apparently a shell syntax error returns a success message.
+
+- ([`889580c3`](https://github.com/russmatney/dino/commit/889580c3)) ci: reuse GODOT_VERSION variable
+
+  > Still hardcoded on a few image versions...
+
+- ([`fe69b246`](https://github.com/russmatney/dino/commit/fe69b246)) ci: unfortunately this manual check seems necessary
+
+  > I'm a bit annoyed I can't break up my test and deploy pipeline without
+  > workarounds - feels like github actions should support connecting
+  > workflows without needing to create a github app or adding a personal
+  > token and using the github ci (and coupling the workflows).
+  > 
+  > Eh, i guess CI is always just workarounds.
+
+
+## v0.0.0-1
+
+
+### 18 Oct 2023
+
+- ([`6e7a8e21`](https://github.com/russmatney/dino/commit/6e7a8e21)) ci: another deploy attempt
+
+## v0.0.0-0
 
 
 ## posterity.year-one
