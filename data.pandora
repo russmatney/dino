@@ -532,6 +532,10 @@
 						"type": "resource",
 						"value": "res://src/dino/weapons/bow/bow_icon.png"
 					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
+					},
 					"sidescroller_scene": {
 						"type": "resource",
 						"value": "res://src/dino/weapons/bow/Bow.tscn"
@@ -907,6 +911,10 @@
 						"type": "string",
 						"value": "Robot"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/enemies/robots/robot-icon.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Robot"
@@ -1028,6 +1036,10 @@
 						"type": "string",
 						"value": "Leaf"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/pickups/leaves/runner_leaf_greenred_sheet.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Leaf"
@@ -1107,6 +1119,10 @@
 						"type": "string",
 						"value": "Target"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/weapons/bullet/target.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Target"
@@ -1127,6 +1143,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Box"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/boxes/box.png"
 					},
 					"label": {
 						"type": "string",
@@ -1187,6 +1207,10 @@
 						"type": "string",
 						"value": "Cooking Pot"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/cookingPot/cooking-pot-icon.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "CookingPot"
@@ -1229,6 +1253,10 @@
 						"type": "string",
 						"value": "Candle"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/candle.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Candle"
@@ -1249,6 +1277,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Log Bench"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/log-checkpoint-icon.png"
 					},
 					"label": {
 						"type": "string",
@@ -1271,6 +1303,10 @@
 						"type": "string",
 						"value": "Snow Bench"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/snow-bench-icon.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "SnowBench"
@@ -1291,6 +1327,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Cave Bench"
+					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/checkpoints/cave-bench-icon.png"
 					},
 					"label": {
 						"type": "string",
@@ -1434,6 +1474,10 @@
 						"type": "string",
 						"value": "res://src/dino/entities/bushes/bushes.txt"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/bushes/bush1.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Bush1"
@@ -1459,6 +1503,10 @@
 						"type": "string",
 						"value": "res://src/dino/entities/bushes/bushes.txt"
 					},
+					"icon_texture": {
+						"type": "resource",
+						"value": "res://src/dino/entities/bushes/bush2.png"
+					},
 					"label": {
 						"type": "string",
 						"value": "Bush2"
@@ -1479,6 +1527,10 @@
 					"display_name": {
 						"type": "string",
 						"value": "Lil Big Hat"
+					},
+					"is_disabled": {
+						"type": "bool",
+						"value": true
 					},
 					"sidescroller_scene": {
 						"type": "resource",
@@ -2523,12 +2575,19 @@
 				"_id": "210",
 				"_name": "is_disabled",
 				"_type": "bool"
+			},
+			{
+				"_category_id": "80",
+				"_default_value": false,
+				"_id": "211",
+				"_name": "is_disabled",
+				"_type": "bool"
 			}
 		]
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 210
+			"default": 211
 		}
 	}
 }

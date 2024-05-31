@@ -2,7 +2,8 @@ extends Object
 class_name DinoWeaponsData
 
 static func all_weapon_entities():
-	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOWEAPON))
+	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOWEAPON))\
+		.filter(func(ent): return not ent.is_disabled())
 
 static func sidescroller_weapon_entities():
 	return all_weapon_entities().filter(func(ent):

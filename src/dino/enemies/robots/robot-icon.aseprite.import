@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://xafr75bh77rx"
+path="res://.godot/imported/robot-icon.aseprite-ea5fc4a999d1218af6d8e528d1d4e907.res"
+
+[deps]
+
+source_file="res://src/dino/enemies/robots/robot-icon.aseprite"
+dest_files=["res://.godot/imported/robot-icon.aseprite-ea5fc4a999d1218af6d8e528d1d4e907.res"]
+
+[params]
+

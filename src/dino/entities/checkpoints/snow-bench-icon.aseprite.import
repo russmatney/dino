@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b6auqyfwqwn6"
+path="res://.godot/imported/snow-bench-icon.aseprite-f074f5327e9baf8774b8c1b570d64885.res"
+
+[deps]
+
+source_file="res://src/dino/entities/checkpoints/snow-bench-icon.aseprite"
+dest_files=["res://.godot/imported/snow-bench-icon.aseprite-f074f5327e9baf8774b8c1b570d64885.res"]
+
+[params]
+

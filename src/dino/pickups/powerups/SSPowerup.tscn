@@ -17,4 +17,4 @@ shape = SubResource("RectangleShape2D_rlg50")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_fhaun")
-animation = &"doublejump"
+animation = &"read"

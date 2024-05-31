@@ -612,6 +612,8 @@ func stamp(opts={}):
 #################################################################################
 ## pickups #####################################################################
 
+var powerup_icon = preload("res://src/dino/pickups/powerups/powerupicon.png")
+
 func collect(opts={}):
 	var data = opts.get("data")
 
@@ -627,14 +629,15 @@ func collect(opts={}):
 			Dino.notif({
 				type="side",
 				text="Orb Acquired",
-				# body_text="This looks like a mighty fine ingredient",
+				icon_entity=Pandora.get_entity(DinoWeaponEntityIds.ORBS),
 				})
 			return
 		DropData.T.GEM:
 			Dino.notif({
 				type="side",
 				text="+1 gem",
-				id="add-gem"
+				id="add-gem",
+				icon_entity=Pandora.get_entity(DinoEntityIds.GEM),
 				})
 			add_gem()
 			return
@@ -642,7 +645,8 @@ func collect(opts={}):
 			Dino.notif({
 				type="side",
 				text="+1 coin",
-				id="add-coin"
+				id="add-coin",
+				icon_entity=Pandora.get_entity(DinoEntityIds.COIN),
 				})
 			add_coin()
 			return
@@ -650,7 +654,8 @@ func collect(opts={}):
 			Dino.notif({
 				type="side",
 				text="+1 leaf",
-				id="add-leaf"
+				id="add-leaf",
+				icon_entity=Pandora.get_entity(DinoEntityIds.LEAF),
 				})
 			add_leaf()
 			return
@@ -667,8 +672,10 @@ func collect(opts={}):
 					on_select=func(weapon):
 					add_weapon(weapon.get_entity_id()),
 					})
-
-			Dino.notif({type="side", text="Powerup Acquired",})
+			Dino.notif({
+				type="side", text="Powerup Acquired",
+				icon=powerup_icon,
+				})
 		_:
 			Log.warn("no match on pickup data.type", data)
 

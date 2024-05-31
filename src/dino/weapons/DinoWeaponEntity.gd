@@ -19,6 +19,9 @@ func get_topdown_scene() -> PackedScene:
 func get_beatemup_scene() -> PackedScene:
 	return get_resource("beatemup_scene")
 
+func is_disabled() -> bool:
+	return get_bool("is_disabled")
+
 ## data ##########################################################
 
 func data():

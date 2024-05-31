@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://b0jjxy0eq25f"
+path="res://.godot/imported/cave-bench-icon.aseprite-c3779c47ef490c7034c27faeeb803670.res"
+
+[deps]
+
+source_file="res://src/dino/entities/checkpoints/cave-bench-icon.aseprite"
+dest_files=["res://.godot/imported/cave-bench-icon.aseprite-c3779c47ef490c7034c27faeeb803670.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bmwtcwq7maptu"
+path="res://.godot/imported/log-checkpoint-icon.aseprite-ba3a5c2844908322a138e18c4076f0fe.res"
+
+[deps]
+
+source_file="res://src/dino/entities/checkpoints/log-checkpoint-icon.aseprite"
+dest_files=["res://.godot/imported/log-checkpoint-icon.aseprite-ba3a5c2844908322a138e18c4076f0fe.res"]
+
+[params]
+

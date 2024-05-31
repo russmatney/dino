@@ -44,6 +44,11 @@ func render(options: Dictionary):
 	if icon:
 		texture.set_texture(icon)
 
+	if not icon:
+		var ent = opts.get("icon_entity")
+		if ent:
+			texture.set_texture(ent.get_icon_texture())
+
 	# set clear ttl
 	if clear_tween:
 		clear_tween.kill()
