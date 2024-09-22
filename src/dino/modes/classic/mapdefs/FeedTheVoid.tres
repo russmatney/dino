@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=15 format=3 uid="uid://b2xht8rpxnoyr"]
+[gd_resource type="Resource" script_class="MapDef" load_steps=17 format=3 uid="uid://b2xht8rpxnoyr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/pickups/orb/GreenBlobAnim.tscn" id="1_ejkkc"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_bjcdh"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="4_wpq4m"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="5_cv7fm"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="5_h7twa"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="5_wol82"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="6_cnrlv"]
+[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="8_4mtqd"]
 
 [sub_resource type="Resource" id="Resource_6imcj"]
 script = ExtResource("2_bjcdh")
@@ -42,8 +44,8 @@ entities = Array[ExtResource("4_wpq4m")]([SubResource("Resource_6bvdb"), SubReso
 enemies = Array[ExtResource("3_c4s3a")]([SubResource("Resource_5l33f")])
 enemy_waves = 0
 room_shapes = Array[ExtResource("5_h7twa")]([SubResource("Resource_210cc"), SubResource("Resource_lcy1d")])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+room_effects = Array[ExtResource("5_wol82")]([])
+tiles = Array[ExtResource("8_4mtqd")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])

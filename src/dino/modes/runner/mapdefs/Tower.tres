@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=32 format=3 uid="uid://x22mhotva8q3"]
+[gd_resource type="Resource" script_class="MapDef" load_steps=33 format=3 uid="uid://x22mhotva8q3"]
 
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="1_6rt6c"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="1_m2e53"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="2_r3h32"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="3_7e1dv"]
@@ -101,7 +102,7 @@ tiles = Array[ExtResource("5_g4qoi")]([SubResource("Resource_gkukq")])
 door_mode = 4
 neighbor_direction = Vector2i(0, -1)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("1_6rt6c")]([])
 bg_color = Color(0, 0, 0, 1)
 dupe_room_count = 0
 skip_merge = false
@@ -127,7 +128,7 @@ tiles = Array[ExtResource("5_g4qoi")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("1_6rt6c")]([])
 bg_color = Color(0, 0, 0, 1)
 dupe_room_count = 0
 skip_merge = true
@@ -145,7 +146,7 @@ tiles = Array[ExtResource("5_g4qoi")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("1_6rt6c")]([])
 bg_color = Color(0, 0, 0, 1)
 dupe_room_count = 9
 skip_merge = false
@@ -163,7 +164,7 @@ tiles = Array[ExtResource("5_g4qoi")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("1_6rt6c")]([])
 bg_color = Color(0, 0, 0, 1)
 dupe_room_count = 0
 skip_merge = true

@@ -1,8 +1,13 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=6 format=3 uid="uid://ccmqnk240p1tj"]
+[gd_resource type="Resource" script_class="MapDef" load_steps=11 format=3 uid="uid://ccmqnk240p1tj"]
 
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="1_5c501"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="1_qslyt"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_0bphv"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_m6035"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="3_by4j3"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="4_hrm02"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="5_yu4rh"]
+[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="7_xlcog"]
 
 [sub_resource type="Resource" id="Resource_egvpy"]
 script = ExtResource("1_qslyt")
@@ -12,15 +17,15 @@ _id = "136"
 script = ExtResource("2_0bphv")
 genre_type = 0
 entities = Array[ExtResource("1_qslyt")]([SubResource("Resource_egvpy"), SubResource("Resource_egvpy"), SubResource("Resource_egvpy")])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+enemies = Array[ExtResource("2_m6035")]([])
 enemy_waves = 0
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+room_shapes = Array[ExtResource("5_yu4rh")]([])
+room_effects = Array[ExtResource("4_hrm02")]([])
+tiles = Array[ExtResource("7_xlcog")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("1_5c501")]([])
 bg_color = Color(0, 0, 0, 1)
 dupe_room_count = 0
 skip_merge = false
