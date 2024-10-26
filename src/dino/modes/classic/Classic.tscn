@@ -1,10 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://clsqvnr0sebqn"]
+[gd_scene load_steps=17 format=3 uid="uid://clsqvnr0sebqn"]
 
 [ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_4v6tl"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_7ep44"]
 [ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="3_anqjk"]
 [ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="4_tl3kg"]
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="5_cwo8l"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="5_sgu0e"]
+[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="7_1oxoy"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="8_16ok1"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="9_43yn7"]
+[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="10_rlg7b"]
 
 [sub_resource type="Resource" id="Resource_haq0s"]
 script = ExtResource("2_7ep44")
@@ -17,16 +22,19 @@ _id = "121"
 [sub_resource type="Resource" id="Resource_k6xa1"]
 script = ExtResource("5_sgu0e")
 genre_type = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
+entities = Array[ExtResource("7_1oxoy")]([])
 enemies = Array[ExtResource("4_tl3kg")]([SubResource("Resource_gki6u")])
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+enemy_waves = 0
+room_shapes = Array[ExtResource("9_43yn7")]([])
+room_effects = Array[ExtResource("8_16ok1")]([])
+tiles = Array[ExtResource("10_rlg7b")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("5_cwo8l")]([])
 bg_color = Color(0, 0, 0, 1)
+dupe_room_count = 0
+skip_merge = false
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_y88tt"]
