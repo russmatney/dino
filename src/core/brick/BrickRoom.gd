@@ -34,6 +34,8 @@ class BrickRoomOpts:
 		U.ensure_default(opts, "label_to_entity", {})
 		U.ensure_default(opts, "color", Color.PERU)
 		U.ensure_default(opts, "show_color_rect", false)
+		U.ensure_default(opts, "defs_path", "")
+		U.ensure_default(opts, "contents", "")
 
 		_opts = opts
 
