@@ -11,7 +11,10 @@ var _aseprite_file_exporter = preload("../aseprite/file_exporter.gd").new()
 
 var config = preload("../config/config.gd").new()
 var file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
+var file_system_helper
 
+func _init(fs_helper) -> void:
+	file_system_helper = fs_helper
 
 func _get_importer_name():
 	return "aseprite_wizard.plugin.tileset-texture"
@@ -53,8 +56,17 @@ func _get_import_options(_path, _i):
 	return [
 		{"name": "exclude_layers_pattern", "default_value": config.get_default_exclusion_pattern()},
 		{"name": "only_visible_layers",    "default_value": false},
+		{
+			"name": "sheet/sheet_type",
+			"default_value": "columns",
+			"property_hint": PROPERTY_HINT_ENUM,
+			"hint_string": "columns,horizontal,vertical,packed",
+		},
+		{
+			"name": "sheet/sheet_columns",
+			"default_value": 12,
+		},
 	]
-
 
 func _get_option_visibility(path, option, options):
 	return true
@@ -63,7 +75,7 @@ func _get_option_visibility(path, option, options):
 func _import(source_file, save_path, options, platform_variants, gen_files):
 	var absolute_source_file = ProjectSettings.globalize_path(source_file)
 	var absolute_save_path = ProjectSettings.globalize_path(save_path)
-	var source_path = source_file.substr(0, source_file.rfind('/'))
+	var source_path = source_file.get_base_dir()
 	var source_basename = source_file.substr(source_path.length()+1, -1)
 	source_basename = source_basename.substr(0, source_basename.rfind('.'))
 
@@ -72,6 +84,8 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		"only_visible_layers": options['only_visible_layers'],
 		"output_filename": '',
 		"output_folder": source_path,
+		"sheet_type": options["sheet/sheet_type"],
+		"sheet_columns": options["sheet/sheet_columns"],
 	}
 
 	var result = _generate_texture(absolute_source_file, aseprite_opts)
@@ -84,12 +98,13 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	var data = result.content.data
 
 	if ResourceLoader.exists(sprite_sheet):
-		file_system.scan()
+		file_system_helper.schedule_file_system_scan()
 	else:
 		file_system.update_file(sprite_sheet)
 		append_import_external_resource(sprite_sheet)
 
-	var texture: CompressedTexture2D = ResourceLoader.load(sprite_sheet, "CompressedTexture2D", ResourceLoader.CACHE_MODE_REPLACE)
+	ResourceLoader.load_threaded_request(sprite_sheet, "CompressedTexture2D", false, ResourceLoader.CACHE_MODE_REPLACE)
+	var texture: CompressedTexture2D = ResourceLoader.load_threaded_get(sprite_sheet)
 
 	return _save_resource(texture, save_path, result.content.data_file, data.meta.size)
 
@@ -127,7 +142,7 @@ func _save_resource(texture: CompressedTexture2D, save_path: String, data_file_p
 
 	if config.should_remove_source_files():
 		DirAccess.remove_absolute(data_file_path)
-		file_system.call_deferred("scan")
+		file_system_helper.schedule_file_system_scan()
 
 	if exit_code != OK:
 		printerr("ERROR - Could not persist aseprite file: %s" % result_codes.get_error_message(exit_code))
