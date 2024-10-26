@@ -47,9 +47,9 @@ var InputMovementDic: Dictionary = {
 
 
 func _ready() -> void:
-	_player_area2d.connect("body_shape_entered", _show_prompt)
-	_player_area2d.connect("body_shape_exited", _hide_prompt)
-	
+	_player_area2d.body_shape_entered.connect(_show_prompt)
+	_player_area2d.body_shape_exited.connect(_hide_prompt)
+
 	_ui_sign = owner.get_node("%UISign")
 
 	for input in InputMovementDic:
@@ -60,6 +60,12 @@ func _ready() -> void:
 		movement_input.physical_keycode = key_val
 		InputMap.add_action(action_val)
 		InputMap.action_add_event(action_val, movement_input)
+
+	_player_visuals.top_level = true
+
+	if Engine.get_version_info().major == 4 and \
+		Engine.get_version_info().minor >= 3:
+		printerr("Please run the other 2D example scenes, in the 2D-4.3 directory, for more up-to-date example setups.")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -109,7 +115,6 @@ func _interactive_node_logic() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
 	_physics_body_trans_last = _physics_body_trans_current
 	_physics_body_trans_current = global_transform
 
@@ -143,7 +148,7 @@ func _process(delta) -> void:
 		_physics_body_trans_current,
 		Engine.get_physics_interpolation_fraction()
 	).origin
-	
+
 
 func _show_prompt(body_rid: RID, body: Node2D, body_shape_index: int, local_shape: int) -> void:
 	if body is TileMap:
@@ -182,4 +187,3 @@ func _hide_prompt(body_rid: RID, body: Node2D, body_shape_index: int, local_shap
 			_interactive_UI = null
 			_interactive_object = InteractiveType.NONE
 			_active_pcam = null
-

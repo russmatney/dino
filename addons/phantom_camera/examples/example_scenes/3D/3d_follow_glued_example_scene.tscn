@@ -19,7 +19,12 @@ script = ExtResource("4_evdoo")
 cull_mask = 1048575
 h_offset = 0.0
 v_offset = 0.0
+projection = 0
 fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2h36r"]
 
@@ -38,7 +43,7 @@ uv1_world_triplanar = true
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.999954, 0, 0, 0, 0.638683, 0.769345, 0, -0.769298, 0.638723, -5.60519e-45, 6.39, 7)
+transform = Transform3D(1, 0, 0, 0, 0.638767, 0.7694, 0, -0.7694, 0.638768, 0, 6.39, 7)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera3D"]
 script = ExtResource("1_pmeux")
@@ -51,7 +56,7 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerPhantomCamera3D" type="Node3D" parent="Player" node_paths=PackedStringArray("follow_target")]
 unique_name_in_owner = true
-transform = Transform3D(0.999954, 0, 0, 0, 0.638683, 0.769345, 0, -0.769298, 0.638723, -5.60519e-45, 6.39, 7)
+transform = Transform3D(0.999954, 0, 0, 0, 0.638683, 0.769345, 0, -0.769298, 0.638723, 0, 6.39, 7)
 script = ExtResource("2_q1ygp")
 priority = 5
 follow_mode = 1

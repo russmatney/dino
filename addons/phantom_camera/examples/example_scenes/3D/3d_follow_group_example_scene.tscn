@@ -13,7 +13,12 @@ script = ExtResource("5_70gws")
 cull_mask = 1048575
 h_offset = 0.0
 v_offset = 0.0
+projection = 0
 fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2h36r"]
 
@@ -32,7 +37,7 @@ uv1_world_triplanar = true
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.999954, 0, 0, 0, 0.906188, 0.422588, 0, -0.422562, 0.906243, -7.26116, 5.72974, 12.279)
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, -7.26116, 5.72974, 12.279)
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera3D"]
 script = ExtResource("3_wr1tj")

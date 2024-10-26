@@ -6,19 +6,25 @@ extends EditorPlugin
 const PCAM_HOST: String = "PhantomCameraHost"
 const PCAM_2D: String = "PhantomCamera2D"
 const PCAM_3D: String = "PhantomCamera3D"
+const PCAM_NOISE_EMITTER_2D: String = "PhantomCameraNoiseEmitter2D"
+const PCAM_NOISE_EMITTER_3D: String = "PhantomCameraNoiseEmitter3D"
 
-const Pcam3DPlugin = preload("res://addons/phantom_camera/gizmos/phantom_camera_gizmo_plugin_3d.gd")
+const PCam3DPlugin = preload("res://addons/phantom_camera/gizmos/phantom_camera_gizmo_plugin_3d.gd")
+const PCam3DNoiseEmitterPlugin = preload("res://addons/phantom_camera/gizmos/phantom_camera_noise_emitter_gizmo_plugin_3d.gd")
 
 const EditorPanel = preload("res://addons/phantom_camera/panel/editor.tscn")
 
 const updater_constants := preload("res://addons/phantom_camera/scripts/panel/updater/updater_constants.gd")
+
+const PHANTOM_CAMERA_MANAGER: StringName = "PhantomCameraManager"
 
 #endregion
 
 
 #region Variables
 
-var pcam_3D_gizmo_plugin = Pcam3DPlugin.new()
+var pcam_3d_gizmo_plugin = PCam3DPlugin.new()
+var pcam_3d_noise_emitter_gizmo_plugin = PCam3DNoiseEmitterPlugin.new()
 
 var editor_panel_instance: Control
 var panel_button: Button
@@ -30,13 +36,21 @@ var panel_button: Button
 #region Private Functions
 
 func _enter_tree() -> void:
+	add_autoload_singleton(PHANTOM_CAMERA_MANAGER, "res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd")
+
 	# Phantom Camera Nodes
 	add_custom_type(PCAM_2D, "Node2D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_2d.svg"))
 	add_custom_type(PCAM_3D, "Node3D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_2d.svg"))
 	add_custom_type(PCAM_HOST, "Node", preload("res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd"), preload("res://addons/phantom_camera/icons/phantom_camera_2d.svg"))
+	add_custom_type(PCAM_NOISE_EMITTER_2D, "Node2D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_2d.gd"),  preload("res://addons/phantom_camera/icons/phantom_camera_noise_emitter_2d.svg"))
+	add_custom_type(PCAM_NOISE_EMITTER_3D, "Node3D", preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_noise_emitter_3d.gd"),  preload("res://addons/phantom_camera/icons/phantom_camera_noise_emitter_3d.svg"))
+
+	add_autoload_singleton(PHANTOM_CAMERA_MANAGER, "res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd")
+
 
 	# Phantom Camera 3D Gizmo
-	add_node_3d_gizmo_plugin(pcam_3D_gizmo_plugin)
+	add_node_3d_gizmo_plugin(pcam_3d_gizmo_plugin)
+	add_node_3d_gizmo_plugin(pcam_3d_noise_emitter_gizmo_plugin)
 
 	# TODO - Should be disabled unless in editor
 	# Viewfinder
@@ -45,7 +59,7 @@ func _enter_tree() -> void:
 	panel_button = add_control_to_bottom_panel(editor_panel_instance, "Phantom Camera")
 
 	# Trigger events in the viewfinder whenever
-	panel_button.toggled.connect(btn_toggled)
+	panel_button.toggled.connect(_btn_toggled)
 
 	scene_changed.connect(editor_panel_instance.viewfinder.scene_changed)
 
@@ -62,7 +76,13 @@ func _enter_tree() -> void:
 		ProjectSettings.set_setting(updater_constants.setting_updater_notify_release, true)
 	ProjectSettings.set_initial_value(updater_constants.setting_updater_notify_release, true)
 
-func btn_toggled(toggled_on: bool):
+	## Enables or disable
+	if not ProjectSettings.has_setting("phantom_camera/tips/show_jitter_tips"):
+		ProjectSettings.set_setting("phantom_camera/tips/show_jitter_tips", true)
+	ProjectSettings.set_initial_value("phantom_camera/tips/show_jitter_tips", true)
+
+
+func _btn_toggled(toggled_on: bool):
 	if toggled_on:
 		editor_panel_instance.viewfinder.viewfinder_visible = true
 		editor_panel_instance.viewfinder.visibility_check()
@@ -71,20 +91,23 @@ func btn_toggled(toggled_on: bool):
 
 
 func _exit_tree() -> void:
-	remove_custom_type(PCAM_2D)
-	remove_custom_type(PCAM_3D)
-	remove_custom_type(PCAM_HOST)
-
-	remove_node_3d_gizmo_plugin(pcam_3D_gizmo_plugin)
+	panel_button.toggled.disconnect(_btn_toggled)
+	scene_changed.disconnect(editor_panel_instance.viewfinder.scene_changed)
+	scene_changed.disconnect(_scene_changed)
 
 	remove_control_from_bottom_panel(editor_panel_instance)
 	editor_panel_instance.queue_free()
-#	if framed_viewfinder_panel_instance:
-	scene_changed.disconnect(_scene_changed)
 
+	remove_node_3d_gizmo_plugin(pcam_3d_gizmo_plugin)
+	remove_node_3d_gizmo_plugin(pcam_3d_noise_emitter_gizmo_plugin)
 
-#func _has_main_screen():
-#	return true;
+	remove_custom_type(PCAM_2D)
+	remove_custom_type(PCAM_3D)
+	remove_custom_type(PCAM_HOST)
+	remove_custom_type(PCAM_NOISE_EMITTER_2D)
+	remove_custom_type(PCAM_NOISE_EMITTER_3D)
+
+	remove_autoload_singleton(PHANTOM_CAMERA_MANAGER)
 
 
 func _make_visible(visible):

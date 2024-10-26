@@ -102,7 +102,9 @@ func _request_request_completed(result: int, response_code: int, headers: Packed
 			current_version.split(".")
 		)
 		_set_scale()
-		download_dialog.show()
+		editor_plugin.panel_button.add_theme_color_override("font_color", Color("#3AB99A"))
+		editor_plugin.panel_button.icon = load("res://addons/phantom_camera/icons/phantom_camera_updater_panel_icon.svg")
+		editor_plugin.panel_button.add_theme_color_override("icon_normal_color", Color("#3AB99A"))
 		show()
 
 
@@ -158,6 +160,10 @@ func _on_timer_timeout() -> void:
 
 # Convert a version number to an actually comparable number
 func version_to_number(version: String) -> int:
+	var regex = RegEx.new()
+	regex.compile("[a-zA-Z]+")
+	if regex.search(str(version)): return 0
+
 	var bits = version.split(".")
 	var version_bit: int
 	var multiplier: int = 10000

@@ -3,7 +3,7 @@ extends Control
 
 #region Constants
 
-const Constants = preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_constants.gd")
+const _constants = preload("res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_constants.gd")
 
 # TODO - Should be in a central location
 const _camera_2d_icon: CompressedTexture2D = preload("res://addons/phantom_camera/icons/viewfinder/Camera2DIcon.svg")
@@ -58,7 +58,7 @@ var root_node: Node
 
 #region Public variables
 
-var pcam_host_group: Array[Node]
+var pcam_host_group: Array[PhantomCameraHost]
 
 var is_scene: bool
 
@@ -81,11 +81,10 @@ func _ready() -> void:
 		set_process(true)
 		camera_viewport_panel.self_modulate.a = 0
 
-#	TODO - Don't think this is needed / does anything?
-	root_node = get_tree().get_root().get_child(0)
-	if root_node is Node3D || root_node is Node2D:
-		%SubViewportContainer.set_visible(false)
+	root_node = get_tree().current_scene
 
+	if root_node is Node2D || root_node is Node3D:
+		%SubViewportContainer.set_visible(false)
 		if root_node is Node2D:
 			_is_2d = true
 		else:
@@ -102,7 +101,7 @@ func _ready() -> void:
 		_empty_state_control.set_visible(false)
 
 	_priority_override_button.set_visible(false)
-	
+
 	# Triggered when viewport size is changed in Project Settings
 	ProjectSettings.settings_changed.connect(_settings_changed)
 
@@ -138,14 +137,14 @@ func _process(_delta: float) -> void:
 
 	if not Engine.is_editor_hint():
 		target_point.position = camera_viewport_panel.size * unprojected_position_clamped - target_point.size / 2
-	
+
 	if _is_2d:
 		if not is_instance_valid(pcam_host): return
 		if not is_instance_valid(pcam_host.camera_2d): return
-		
+
 		var window_size_height: float = ProjectSettings.get_setting("display/window/size/viewport_height")
 		sub_viewport.size_2d_override = sub_viewport.size * (window_size_height / sub_viewport.size.y)
-		
+
 		_camera_2d.global_transform = pcam_host.camera_2d.global_transform
 		_camera_2d.offset = pcam_host.camera_2d.offset
 		_camera_2d.zoom = pcam_host.camera_2d.zoom
@@ -165,24 +164,46 @@ func _settings_changed() -> void:
 	camera_viewport_panel.size.x = viewport_width / (viewport_height / sub_viewport.size.y)
 	# TODO - Add resizer for Framed Viewfinder
 
+
 func _node_added_or_removed(_node: Node) -> void:
 	visibility_check()
 
+
 func visibility_check() -> void:
 	if not viewfinder_visible: return
-	
+
+	var phantom_camera_host: PhantomCameraHost
+	var has_camera: bool = false
+	if not get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME).get_phantom_camera_hosts().is_empty():
+		has_camera = true
+		phantom_camera_host = get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME).get_phantom_camera_hosts()[0]
+
 	var root: Node = EditorInterface.get_edited_scene_root()
 
 	if root is Node2D:
+		var camera_2d: Camera2D
+
+		if has_camera:
+			camera_2d = phantom_camera_host.camera_2d
+		else:
+			camera_2d = _get_camera_2d()
+
 		_is_2d = true
 		is_scene = true
 		_add_node_button.set_visible(true)
-		_check_camera(root, _get_camera_2d(), true)
+		_check_camera(root, camera_2d, true)
 	elif root is Node3D:
+		var camera_3d: Camera3D
+		if has_camera:
+			camera_3d = phantom_camera_host.camera_3d
+		elif root.get_viewport() != null:
+			if root.get_viewport().get_camera_3d() != null:
+				camera_3d = root.get_viewport().get_camera_3d()
+
 		_is_2d = false
 		is_scene = true
 		_add_node_button.set_visible(true)
-		_check_camera(root, root.get_viewport().get_camera_3d(), false)
+		_check_camera(root, camera_3d, false)
 	else:
 		is_scene = false
 #		Is not a 2D or 3D scene
@@ -194,12 +215,23 @@ func visibility_check() -> void:
 
 
 func _get_camera_2d() -> Camera2D:
-	var camerasGroupName = "__cameras_%d" % EditorInterface.get_edited_scene_root().get_viewport().get_viewport_rid().get_id()
+	var edited_scene_root = EditorInterface.get_edited_scene_root()
+
+	if edited_scene_root == null: return null
+
+	var viewport = edited_scene_root.get_viewport()
+	if viewport == null: return null
+
+	var viewport_rid = viewport.get_viewport_rid()
+	if viewport_rid == null: return null
+
+	var camerasGroupName = "__cameras_%d" % viewport_rid.get_id()
 	var cameras = get_tree().get_nodes_in_group(camerasGroupName)
 
 	for camera in cameras:
 		if camera is Camera2D and camera.is_current:
 			return camera
+
 	return null
 
 
@@ -212,15 +244,15 @@ func _check_camera(root: Node, camera: Node, is_2D: bool) -> void:
 	var pcam_icon: CompressedTexture2D
 
 	if is_2D:
-		camera_string = Constants.CAMERA_2D_NODE_NAME
-		pcam_string = Constants.PCAM_2D_NODE_NAME
-		color = Constants.COLOR_2D
+		camera_string = _constants.CAMERA_2D_NODE_NAME
+		pcam_string = _constants.PCAM_2D_NODE_NAME
+		color = _constants.COLOR_2D
 		camera_icon = _camera_2d_icon
 		pcam_icon = _pcam_2D_icon
 	else:
-		camera_string = Constants.CAMERA_3D_NODE_NAME
-		pcam_string = Constants.PCAM_3D_NODE_NAME
-		color = Constants.COLOR_3D
+		camera_string = _constants.CAMERA_3D_NODE_NAME
+		pcam_string = _constants.PCAM_3D_NODE_NAME
+		color = _constants.COLOR_3D
 		camera_icon = _camera_3d_icon
 		pcam_icon = _pcam_3D_icon
 
@@ -232,7 +264,8 @@ func _check_camera(root: Node, camera: Node, is_2D: bool) -> void:
 					pcam_host = cam_child
 
 				if pcam_host:
-					if get_tree().get_nodes_in_group(Constants.PCAM_GROUP_NAME):
+					if get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME).get_phantom_camera_2ds() or \
+					get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME).get_phantom_camera_3ds():
 						# Pcam exists in tree
 						_set_viewfinder(root, true)
 #							if pcam_host.get_active_pcam().get_get_follow_mode():
@@ -248,12 +281,12 @@ func _check_camera(root: Node, camera: Node, is_2D: bool) -> void:
 						_set_empty_viewfinder_state(pcam_string, pcam_icon)
 				else:
 #					No PCamHost in scene
-					_update_button(Constants.PCAM_HOST_NODE_NAME, _pcam_host_icon, Constants.PCAM_HOST_COLOR)
-					_set_empty_viewfinder_state(Constants.PCAM_HOST_NODE_NAME, _pcam_host_icon)
+					_update_button(_constants.PCAM_HOST_NODE_NAME, _pcam_host_icon, _constants.PCAM_HOST_COLOR)
+					_set_empty_viewfinder_state(_constants.PCAM_HOST_NODE_NAME, _pcam_host_icon)
 		else:
 #			No PCamHost in scene
-			_update_button(Constants.PCAM_HOST_NODE_NAME, _pcam_host_icon, Constants.PCAM_HOST_COLOR)
-			_set_empty_viewfinder_state(Constants.PCAM_HOST_NODE_NAME, _pcam_host_icon)
+			_update_button(_constants.PCAM_HOST_NODE_NAME, _pcam_host_icon, _constants.PCAM_HOST_COLOR)
+			_set_empty_viewfinder_state(_constants.PCAM_HOST_NODE_NAME, _pcam_host_icon)
 	else:
 #		No Camera
 		_update_button(camera_string, camera_icon, color)
@@ -304,15 +337,15 @@ func _add_node(node_type: String) -> void:
 	match node_type:
 		_no_open_scene_string:
 			pass
-		Constants.CAMERA_2D_NODE_NAME:
+		_constants.CAMERA_2D_NODE_NAME:
 			var camera: Camera2D = Camera2D.new()
-			_instantiate_node(root, camera, Constants.CAMERA_2D_NODE_NAME)
-		Constants.CAMERA_3D_NODE_NAME:
+			_instantiate_node(root, camera, _constants.CAMERA_2D_NODE_NAME)
+		_constants.CAMERA_3D_NODE_NAME:
 			var camera: Camera3D = Camera3D.new()
-			_instantiate_node(root, camera, Constants.CAMERA_3D_NODE_NAME)
-		Constants.PCAM_HOST_NODE_NAME:
+			_instantiate_node(root, camera, _constants.CAMERA_3D_NODE_NAME)
+		_constants.PCAM_HOST_NODE_NAME:
 			var pcam_host: PhantomCameraHost = PhantomCameraHost.new()
-			pcam_host.set_name(Constants.PCAM_HOST_NODE_NAME)
+			pcam_host.set_name(_constants.PCAM_HOST_NODE_NAME)
 			if _is_2d:
 #				get_tree().get_edited_scene_root().get_viewport().get_camera_2d().add_child(pcam_host)
 				_get_camera_2d().add_child(pcam_host)
@@ -321,12 +354,12 @@ func _add_node(node_type: String) -> void:
 #				var pcam_3D := get_tree().get_edited_scene_root().get_viewport().get_camera_3d()
 				get_tree().get_edited_scene_root().get_viewport().get_camera_3d().add_child(pcam_host)
 				pcam_host.set_owner(get_tree().get_edited_scene_root())
-		Constants.PCAM_2D_NODE_NAME:
+		_constants.PCAM_2D_NODE_NAME:
 			var pcam_2D: PhantomCamera2D = PhantomCamera2D.new()
-			_instantiate_node(root, pcam_2D, Constants.PCAM_2D_NODE_NAME)
-		Constants.PCAM_3D_NODE_NAME:
+			_instantiate_node(root, pcam_2D, _constants.PCAM_2D_NODE_NAME)
+		_constants.PCAM_3D_NODE_NAME:
 			var pcam_3D: PhantomCamera3D = PhantomCamera3D.new()
-			_instantiate_node(root, pcam_3D, Constants.PCAM_3D_NODE_NAME)
+			_instantiate_node(root, pcam_3D, _constants.PCAM_3D_NODE_NAME)
 
 
 func _instantiate_node(root: Node, node: Node, name: String) -> void:
@@ -336,7 +369,7 @@ func _instantiate_node(root: Node, node: Node, name: String) -> void:
 
 
 func _set_viewfinder(root: Node, editor: bool) -> void:
-	pcam_host_group = root.get_tree().get_nodes_in_group(Constants.PCAM_HOST_GROUP_NAME)
+	pcam_host_group = get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME).get_phantom_camera_hosts()
 	if pcam_host_group.size() != 0:
 		if pcam_host_group.size() == 1:
 			var pcam_host: PhantomCameraHost = pcam_host_group[0]
@@ -349,8 +382,7 @@ func _set_viewfinder(root: Node, editor: bool) -> void:
 					_camera_2d.zoom = pcam_host.camera_2d.zoom
 					_camera_2d.offset = pcam_host.camera_2d.offset
 					_camera_2d.ignore_rotation = pcam_host.camera_2d.ignore_rotation
-					
-					
+
 					sub_viewport.world_2d = pcam_host.camera_2d.get_world_2d()
 					sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 					sub_viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
@@ -380,9 +412,6 @@ func _set_viewfinder(root: Node, editor: bool) -> void:
 
 			if not _active_pcam.dead_zone_changed.is_connected(_on_dead_zone_changed):
 				_active_pcam.dead_zone_changed.connect(_on_dead_zone_changed)
-		else:
-			for pcam_host in pcam_host_group:
-				print(pcam_host, " is in a scene")
 
 
 func _resized() -> void:
@@ -396,7 +425,7 @@ func _on_dead_zone_changed() -> void:
 	# Waits until the camera_viewport_panel has been resized when launching the game
 	if camera_viewport_panel.size.x == 0:
 		await camera_viewport_panel.resized
-	
+
 	#print(_active_pcam.get_pcam_host_owner())
 	if is_instance_valid(_active_pcam.get_pcam_host_owner()):
 		pcam_host = _active_pcam.get_pcam_host_owner()

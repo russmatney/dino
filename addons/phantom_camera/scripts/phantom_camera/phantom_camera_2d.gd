@@ -16,7 +16,6 @@ const _constants := preload("res://addons/phantom_camera/scripts/phantom_camera/
 
 #endregion
 
-
 #region Signals
 
 ## Emitted when the [param PhantomCamera2D] becomes active.
@@ -31,23 +30,32 @@ signal follow_target_changed
 ## [b]Note:[/b] Only applicable in [param Framed] [enum FollowMode].
 signal dead_zone_changed
 
+## Emitted when a target touches the edge of the dead zone in [param Framed] [enum FollowMode].
+signal dead_zone_reached(side: Vector2)
+
 ## Emitted when the [param Camera2D] starts to tween to another [param PhantomCamera2D].
 signal tween_started
+
 ## Emitted when the [param Camera2D] is to tweening towards another [param PhantomCamera2D].
 signal is_tweening
+
 ## Emitted when the tween is interrupted due to another [param PhantomCamera2D]
 ## becoming active. The argument is the [param PhantomCamera2D] that interrupted
 ## the tween.
 signal tween_interrupted(pcam_2d: PhantomCamera2D)
+
 ## Emitted when the [param Camera2D] completes its tween to the
 ## [param PhantomCamera2D].
 signal tween_completed
+
+## Emitted when Noise should be applied to the Camera2D.
+signal noise_emitted(noise_output: Transform2D)
 
 #endregion
 
 #region Enums
 
-## Determines the positional logic for a given [param PCamPhantomCamera2D]
+## Determines the positional logic for a given [param PhantomCamera2D]
 ## [br][br]
 ## The different modes have different functionalities and purposes, so choosing
 ## the correct one depends on what each [param PhantomCamera2D] is meant to do.
@@ -72,14 +80,7 @@ enum InactiveUpdateMode {
 
 #endregion
 
-#region Variables
-
-var _is_active: bool = false
-
-## The [PhantomCameraHost] that owns this [param PhantomCamera2D].
-var pcam_host_owner: PhantomCameraHost = null:
-	set = set_pcam_host_owner,
-	get = get_pcam_host_owner
+#region Exported Properties
 
 ## To quickly preview a [param PhantomCamera2D] without adjusting its
 ## [member priority], this property allows the selected PCam to ignore the
@@ -120,17 +121,31 @@ var pcam_host_owner: PhantomCameraHost = null:
 	set(value):
 		follow_mode = value
 
-		if value == FollowMode.FRAMED:
+		if follow_mode == FollowMode.NONE:
+			_should_follow = false
+			notify_property_list_changed()
+			return
+
+		match follow_mode:
+			FollowMode.PATH:
+				if is_instance_valid(follow_path):
+					_should_follow_checker()
+			FollowMode.GROUP:
+				_follow_targets_size_check()
+			_:
+				_should_follow_checker()
+
+		if follow_mode == FollowMode.FRAMED:
 			if _follow_framed_initial_set and follow_target:
 				_follow_framed_initial_set = false
 				dead_zone_changed.connect(_on_dead_zone_changed)
 		else:
 			if dead_zone_changed.is_connected(_on_dead_zone_changed):
 				dead_zone_changed.disconnect(_on_dead_zone_changed)
+
 		notify_property_list_changed()
 	get:
 		return follow_mode
-
 
 ## Determines which target should be followed.
 ## The [param Camera2D] will follow the position of the Follow Target
@@ -138,16 +153,11 @@ var pcam_host_owner: PhantomCameraHost = null:
 @export var follow_target: Node2D = null:
 	set = set_follow_target,
 	get = get_follow_target
-var _should_follow: bool = false
-var _follow_framed_offset: Vector2 = Vector2.ZERO
-var _is_physics_node: bool = false
 
 ### Defines the targets that the [param PhantomCamera2D] should be following.
 @export var follow_targets: Array[Node2D] = []:
 	set = set_follow_targets,
 	get = get_follow_targets
-var _has_multiple_follow_targets: bool = false
-
 
 ## Determines the [Path2D] the [param PhantomCamera2D]
 ## should be bound to.
@@ -156,7 +166,6 @@ var _has_multiple_follow_targets: bool = false
 @export var follow_path: Path2D = null:
 	set = set_follow_path,
 	get = get_follow_path
-var _has_follow_path: bool = false
 
 ## Applies a zoom level to the [param PhantomCamera2D], which effectively
 ## overrides the [param zoom] property of the [param Camera2D] node.
@@ -195,11 +204,10 @@ var _has_follow_path: bool = false
 @export var tween_resource: PhantomCameraTween = PhantomCameraTween.new():
 	set = set_tween_resource,
 	get = get_tween_resource
-var _has_tweened: bool = false
 
-## If enabled, the moment a [param PhantomCamera3D] is instantiated into
+## If enabled, the moment a [param PhantomCamera2D] is instantiated into
 ## a scene, and has the highest priority, it will perform its tween transition.
-## This is most obvious if a [param PhantomCamera3D] has a long duration and
+## This is most obvious if a [param PhantomCamera2D] has a long duration and
 ## is attached to a playable character that can be moved the moment a scene
 ## is loaded. Disabling the [param tween_on_load] property will
 ## disable this behaviour and skip the tweening entirely when instantiated.
@@ -233,7 +241,6 @@ var _has_tweened: bool = false
 @export var follow_damping_value: Vector2 = Vector2(0.1, 0.1):
 	set = set_follow_damping_value,
 	get = get_follow_damping_value
-var _velocity_ref: Vector2 = Vector2.ZERO # Stores and applies the velocity of the movement
 
 @export_subgroup("Follow Group")
 ## Enables the [param PhantomCamera2D] to dynamically zoom in and out based on
@@ -299,11 +306,6 @@ var _velocity_ref: Vector2 = Vector2.ZERO # Stores and applies the velocity of t
 ## [param dead zones] will never be visible in build exports.
 @export var show_viewfinder_in_play: bool = false
 
-## Defines the position of the [member follow_target] within the viewport.[br]
-## This is only used for when [member follow_mode] is set to [param Framed].
-var viewport_position: Vector2
-var _follow_framed_initial_set: bool = false
-
 @export_group("Limit")
 
 ## Shows the [param Camera2D]'s built-in limit border.[br]
@@ -316,10 +318,6 @@ var _follow_framed_initial_set: bool = false
 	get:
 		return _draw_limits
 
-static var _draw_limits: bool
-
-var _limit_sides: Vector4i
-var _limit_sides_default: Vector4i = Vector4i(-10000000, -10000000, 10000000, 10000000)
 ## Defines the left side of the [param Camera2D] limit.
 ## The camera will not be able to move past this point.
 @export var limit_left: int = -10000000:
@@ -341,22 +339,22 @@ var _limit_sides_default: Vector4i = Vector4i(-10000000, -10000000, 10000000, 10
 	set = set_limit_bottom,
 	get = get_limit_bottom
 
-## Allows for setting either a [TileMap] or [CollisionShape2D] node to
+## Allows for setting either a [TileMap], [TileMapLayer] or [CollisionShape2D] node to
 ## automatically apply a limit size instead of manually adjusting the Left,
 ## Top, Right and Left properties.[br][br]
-## [b]TileMap[/b][br]
-## The Limit will update after the [TileSet] of the [TileMap] has changed.[br]
+## [b]TileMap / TileMapLayer[/b][br]
+## The Limit will update after the [TileSet] of the [TileMap] / [TileMapLayer] has changed.[br]
 ## [b]Note:[/b] The limit size will only update after closing the TileMap editor
 ## bottom panel.
 ## [br][br]
 ## [b]CollisionShape2D[/b][br]
 ## The limit will update in realtime as the Shape2D changes its size.
 ## Note: For performance reasons, resizing the [Shape2D] during runtime will not change the Limits sides.
-@export_node_path("TileMap", "CollisionShape2D") var limit_target = NodePath(""):
+@export_node_path("TileMap", "Node2D", "CollisionShape2D") var limit_target: NodePath = NodePath(""):
 	set = set_limit_target,
 	get = get_limit_target
-var _limit_node: Node2D
-## Applies an offset to the [TileMap] Limit or [Shape2D] Limit.
+
+## Applies an offset to the [TileMap]/[TileMapLayer] Limit or [Shape2D] Limit.
 ## The values goes from [param Left], [param Top], [param Right]
 ## and [param Bottom].
 @export var limit_margin: Vector4i:
@@ -365,10 +363,94 @@ var _limit_node: Node2D
 #@export var limit_smoothed: bool = false: # TODO - Needs proper support
 	#set = set_limit_smoothing,
 	#get = get_limit_smoothing
+
+@export_group("Noise")
+## Applies a noise, or shake, to a [Camera2D].[br]
+## Once set, the noise will run continuously after the tween to the [PhantomCamera2D] is complete.
+@export var noise: PhantomCameraNoise2D:
+	set = set_noise,
+	get = get_noise
+
+## If true, will trigger the noise while in the editor.[br]
+## Useful in cases where you want to temporarily disable the noise in the editor without removing
+## the resource.[br][br]
+## [b]Note:[/b] This property has no effect on runtime behaviour.
+@export var _preview_noise: bool = true:
+	set(value):
+		_preview_noise = value
+		if not value:
+			_transform_noise = Transform2D()
+
+## Enable a corresponding layer for a [member PhantomCameraNoiseEmitter2D.noise_emitter_layer]
+## to make this [PhantomCamera2D] be affect by it.
+@export_flags_2d_render var noise_emitter_layer: int:
+	set = set_noise_emitter_layer,
+	get = get_noise_emitter_layer
+
+#region Private Variables
+
+var _is_active: bool = false
+
+## The [PhantomCameraHost] that owns this [param PhantomCamera2D].
+var pcam_host_owner: PhantomCameraHost = null:
+	set = set_pcam_host_owner,
+	get = get_pcam_host_owner
+
+var _should_follow: bool = false
+var _follow_framed_offset: Vector2 = Vector2.ZERO
+var _follow_target_physics_based: bool = false
+var _physics_interpolation_enabled: bool = false # NOTE - Enable for Godot 4.3 and when PhysicsInterpolationMode bug is resolved
+
+var _has_multiple_follow_targets: bool = false
+var _follow_targets_single_target_index: int = 0
+var _follow_targets: Array[Node2D]
+
+var _follow_velocity_ref: Vector2 = Vector2.ZERO # Stores and applies the velocity of the movement
+
+var _has_follow_path: bool = false
+
+var _tween_skip: bool = false
+
+## Defines the position of the [member follow_target] within the viewport.[br]
+## This is only used for when [member follow_mode] is set to [param Framed].
+var _follow_framed_initial_set: bool = false
+
+static var _draw_limits: bool
+
+var _limit_sides: Vector4i
+var _limit_sides_default: Vector4i = Vector4i(-10000000, -10000000, 10000000, 10000000)
+
+var _limit_node: Node2D
+
 var _limit_inactive_pcam: bool
+
+var _transform_output: Transform2D
+var _transform_noise: Transform2D
+
+var _has_noise_resource: bool = false
+
+# NOTE - Temp solution until Godot has better plugin autoload recognition out-of-the-box.
+var _phantom_camera_manager: Node
 
 #endregion
 
+#region Public Variables
+
+var tween_duration: float:
+	set = set_tween_duration,
+	get = get_tween_duration
+var tween_transition: PhantomCameraTween.TransitionType:
+	set = set_tween_transition,
+	get = get_tween_transition
+var tween_ease: PhantomCameraTween.EaseType:
+	set = set_tween_ease,
+	get = get_tween_ease
+
+var viewport_position: Vector2
+
+#endregion
+
+#region Private Functions
 
 func _validate_property(property: Dictionary) -> void:
 	################
@@ -387,14 +469,17 @@ func _validate_property(property: Dictionary) -> void:
 	####################
 	## Follow Parameters
 	####################
-	elif property.name == "follow_offset":
-		if follow_mode == FollowMode.GLUED or \
-		follow_mode == FollowMode.NONE:
-			property.usage = PROPERTY_USAGE_NO_EDITOR
+	if follow_mode == FollowMode.NONE:
+		match property.name:
+			"follow_offset", \
+			"follow_damping", \
+			"follow_damping_value":
+				property.usage = PROPERTY_USAGE_NO_EDITOR
 
-	elif property.name == "follow_damping" and \
-	follow_mode == FollowMode.NONE:
-		property.usage = PROPERTY_USAGE_NO_EDITOR
+	if property.name == "follow_offset":
+		if follow_mode == FollowMode.PATH or \
+		follow_mode == FollowMode.GLUED:
+			property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	if property.name == "follow_damping_value" and not follow_damping:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -408,12 +493,12 @@ func _validate_property(property: Dictionary) -> void:
 			"auto_zoom":
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 
-		if not auto_zoom:
-			match property.name:
-				"auto_zoom_min", \
-				"auto_zoom_max", \
-				"auto_zoom_margin":
-					property.usage = PROPERTY_USAGE_NO_EDITOR
+	if not auto_zoom or follow_mode != FollowMode.GROUP:
+		match property.name:
+			"auto_zoom_min", \
+			"auto_zoom_max", \
+			"auto_zoom_margin":
+				property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	################
 	## Follow Framed
@@ -428,7 +513,7 @@ func _validate_property(property: Dictionary) -> void:
 	#######
 	## Zoom
 	#######
-	if property.name == "zoom" and auto_zoom:
+	if property.name == "zoom" and follow_mode == FollowMode.GROUP and auto_zoom:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	########
@@ -453,134 +538,198 @@ func _validate_property(property: Dictionary) -> void:
 
 	notify_property_list_changed()
 
-#region Private Functions
 
 func _enter_tree() -> void:
-	add_to_group(_constants.PCAM_GROUP_NAME)
+	_phantom_camera_manager = get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME)
+	_phantom_camera_manager.pcam_added(self)
 	update_limit_all_sides()
 
-	var pcam_host: Array[Node] = get_tree().get_nodes_in_group("phantom_camera_host_group")
-	if pcam_host.size() > 0:
-		set_pcam_host_owner(pcam_host[0])
+	if not _phantom_camera_manager.get_phantom_camera_hosts().is_empty():
+		set_pcam_host_owner(_phantom_camera_manager.get_phantom_camera_hosts()[0])
+
+	_should_follow_checker()
+	if follow_mode == FollowMode.GROUP:
+		_follow_targets_size_check()
+
+	if not visibility_changed.is_connected(_check_visibility):
+		visibility_changed.connect(_check_visibility)
 
 
 func _exit_tree() -> void:
+	_phantom_camera_manager.pcam_removed(self)
+
 	if _has_valid_pcam_owner():
 		get_pcam_host_owner().pcam_removed_from_scene(self)
 
-	remove_from_group(_constants.PCAM_GROUP_NAME)
+	if not follow_mode == FollowMode.GROUP:
+		follow_targets = []
+
+
+func _ready() -> void:
+	_transform_output = global_transform
+	_phantom_camera_manager.noise_2d_emitted.connect(_noise_emitted)
+
+	if not Engine.is_editor_hint():
+		_preview_noise = true
+
+	if follow_mode == FollowMode.GROUP:
+		_follow_targets_size_check()
 
 
 func _process(delta: float) -> void:
-	if not _is_active:
+	if _follow_target_physics_based or _is_active: return
+	process_logic(delta)
+
+
+func _physics_process(delta: float) -> void:
+	if not _follow_target_physics_based or _is_active: return
+	process_logic(delta)
+
+
+func process_logic(delta: float) -> void:
+	if _is_active:
+		if _has_noise_resource and _preview_noise:
+			_transform_noise = noise.get_noise_transform(delta)
+			if _transform_noise.get_rotation() != 0:
+				push_warning(pcam_host_owner.camera_2d.name, " has ignore_rotation enabled.")
+	else:
 		match inactive_update_mode:
-			InactiveUpdateMode.NEVER:
-				return
+			InactiveUpdateMode.NEVER: return
 			InactiveUpdateMode.ALWAYS:
 				# Only triggers if limit isn't default
 				if _limit_inactive_pcam:
-					set_global_position(
-						_set_limit_clamp_position(global_position)
-					)
-#			InactiveUpdateMode.EXPONENTIALLY:
-#				TODO - Trigger positional updates less frequently as more Pcams gets added
+					global_position = _set_limit_clamp_position(global_position)
+			# InactiveUpdateMode.EXPONENTIALLY:
+			# TODO - Trigger positional updates less frequently as more PCams gets added
 
+	_limit_checker()
+#	if not Engine.is_editor_hint(): print(_should_follow)
+	if _should_follow:
+		_follow(delta)
+	else:
+		_transform_output = global_transform
+
+
+func _limit_checker() -> void:
 	## TODO - Needs to see if this can be triggerd only from CollisionShape2D Transform changes
-	if Engine.is_editor_hint():
-		if draw_limits:
-			update_limit_all_sides()
+	if not Engine.is_editor_hint(): return
+	if draw_limits:
+		update_limit_all_sides()
 
-	if not _should_follow: return
 
+func _follow(delta: float) -> void:
+	var follow_position: Vector2
 	match follow_mode:
 		FollowMode.GLUED:
-			if follow_target:
-				_interpolate_position(follow_target.global_position)
+			follow_position = follow_target.global_position
+
 		FollowMode.SIMPLE:
-			if follow_target:
-				_interpolate_position(_target_position_with_offset())
+			follow_position = _target_position_with_offset()
+
 		FollowMode.GROUP:
-			if follow_targets.size() == 1:
-				_interpolate_position(follow_targets[0].global_position)
-			elif _has_multiple_follow_targets and follow_targets.size() > 1:
-				var rect: Rect2 = Rect2(follow_targets[0].global_position, Vector2.ZERO)
-				for node in follow_targets:
-					rect = rect.expand(node.global_position)
-					if auto_zoom:
-						rect = rect.grow_individual(
-							auto_zoom_margin.x,
-							auto_zoom_margin.y,
-							auto_zoom_margin.z,
-							auto_zoom_margin.w)
-#						else:
-#							rect = rect.grow_individual(-80, 0, 0, 0)
+			if _has_multiple_follow_targets:
+				var rect: Rect2 = Rect2(_follow_targets[0].global_position, Vector2.ZERO)
+				for target in _follow_targets:
+					rect = rect.expand(target.global_position)
 				if auto_zoom:
+					rect = rect.grow_individual(
+						auto_zoom_margin.x,
+						auto_zoom_margin.y,
+						auto_zoom_margin.z,
+						auto_zoom_margin.w
+					)
+
 					var screen_size: Vector2 = get_viewport_rect().size
 					if rect.size.x > rect.size.y * screen_size.aspect():
 						zoom = clamp(screen_size.x / rect.size.x, auto_zoom_min, auto_zoom_max) * Vector2.ONE
 					else:
 						zoom = clamp(screen_size.y / rect.size.y, auto_zoom_min, auto_zoom_max) * Vector2.ONE
-				_interpolate_position(rect.get_center())
+				follow_position = rect.get_center()
+			else:
+				follow_position = follow_targets[_follow_targets_single_target_index].global_position
+
 		FollowMode.PATH:
-				if follow_target and follow_path:
-					var path_position: Vector2 = follow_path.global_position
-					_interpolate_position(
-						follow_path.curve.get_closest_point(
-							_target_position_with_offset() - path_position
-						) + path_position
-					)
+			var path_position: Vector2 = follow_path.global_position
+
+			follow_position = \
+				follow_path.curve.get_closest_point(
+					_target_position_with_offset() - path_position
+				) + path_position
+
 		FollowMode.FRAMED:
-			if follow_target:
-				if not Engine.is_editor_hint():
-					viewport_position = (get_follow_target().get_global_transform_with_canvas().get_origin() + follow_offset) / get_viewport_rect().size
+			if not Engine.is_editor_hint():
+				viewport_position = (get_follow_target().get_global_transform_with_canvas().get_origin() + follow_offset) / get_viewport_rect().size
+				var framed_side_offset: Vector2 = _get_framed_side_offset()
 
-					if _get_framed_side_offset() != Vector2.ZERO:
-						var glo_pos: Vector2
-						var target_position: Vector2 = _target_position_with_offset() + _follow_framed_offset
+				if framed_side_offset != Vector2.ZERO:
+					var glo_pos: Vector2
+					var target_position: Vector2 = _target_position_with_offset() + _follow_framed_offset
 
-						if dead_zone_width == 0 || dead_zone_height == 0:
-							if dead_zone_width == 0 && dead_zone_height != 0:
-								_interpolate_position(_target_position_with_offset())
-							elif dead_zone_width != 0 && dead_zone_height == 0:
-								glo_pos = _target_position_with_offset()
-								glo_pos.x += target_position.x - global_position.x
-								_interpolate_position(glo_pos)
-							else:
-								_interpolate_position(_target_position_with_offset())
+					if dead_zone_width == 0 || dead_zone_height == 0:
+						if dead_zone_width == 0 && dead_zone_height != 0:
+							follow_position = _target_position_with_offset()
+						elif dead_zone_width != 0 && dead_zone_height == 0:
+							glo_pos = _target_position_with_offset()
+							glo_pos.x += target_position.x - global_position.x
+							follow_position = glo_pos
 						else:
-							_interpolate_position(target_position)
+							follow_position = _target_position_with_offset()
+
+					# If a horizontal dead zone is reached
+					if framed_side_offset.x != 0 and framed_side_offset.y == 0:
+						follow_position.y = _transform_output.origin.y
+						follow_position.x = target_position.x
+						_follow_framed_offset.y = global_position.y - _target_position_with_offset().y
+						dead_zone_reached.emit(Vector2(framed_side_offset.x, 0))
+					# If a vertical dead zone is reached
+					elif framed_side_offset.x == 0 and framed_side_offset.y != 0:
+						follow_position.x = _transform_output.origin.x
+						follow_position.y = target_position.y
+						_follow_framed_offset.x = global_position.x - _target_position_with_offset().x
+						dead_zone_reached.emit(Vector2(0, framed_side_offset.y))
+					# If a deadzone corner is reached
 					else:
-						_follow_framed_offset = global_position - _target_position_with_offset()
+						follow_position = target_position
+						dead_zone_reached.emit(Vector2(framed_side_offset.x, framed_side_offset.y))
 				else:
-					_interpolate_position(_target_position_with_offset())
+					_follow_framed_offset = _transform_output.origin - _target_position_with_offset()
+					return
+			else:
+				follow_position = _target_position_with_offset()
+
+	_interpolate_position(follow_position, delta)
 
 
-func _set_velocity(index: int, value: float):
-	_velocity_ref[index] = value
+func _set_follow_velocity(index: int, value: float):
+	_follow_velocity_ref[index] = value
 
-func _interpolate_position(target_position: Vector2) -> void:
-	if _limit_inactive_pcam and not _has_tweened:
+
+func _interpolate_position(target_position: Vector2, delta: float) -> void:
+	if _limit_inactive_pcam and not _tween_skip:
 		target_position = _set_limit_clamp_position(target_position)
 
+	global_position = target_position
 	if follow_damping:
-		for index in 2:
-			global_position[index] = \
-				_smooth_damp(
-					target_position[index],
-					global_position[index],
-					index,
-					_velocity_ref[index],
-					_set_velocity,
-					follow_damping_value[index]
-				)
+		var output_position: Vector2
+		for i in 2:
+			output_position[i] = _smooth_damp(
+				global_position[i],
+				_transform_output.origin[i],
+				i,
+				_follow_velocity_ref[i],
+				_set_follow_velocity,
+				follow_damping_value[i],
+				delta
+			)
+		_transform_output = Transform2D(global_rotation, output_position)
 	else:
-		global_position = target_position
+		_transform_output = Transform2D(global_rotation, target_position)
 
 
-func _smooth_damp(target_axis: float, self_axis: float, index: int, current_velocity: float, set_velocity: Callable, damping_time: float) -> float:
+func _smooth_damp(target_axis: float, self_axis: float, index: int, current_velocity: float, set_velocity: Callable, damping_time: float, delta: float) -> float:
 		damping_time = maxf(0.0001, damping_time)
 		var omega: float = 2 / damping_time
-		var x: float = omega * get_process_delta_time()
+		var x: float = omega * delta
 		var exponential: float = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x)
 		var diff: float = self_axis - target_axis
 		var _target_axis: float = target_axis
@@ -589,14 +738,14 @@ func _smooth_damp(target_axis: float, self_axis: float, index: int, current_velo
 		diff = clampf(diff, -max_change, max_change)
 		target_axis = self_axis - diff
 
-		var temp: float = (current_velocity + omega * diff) * get_process_delta_time()
+		var temp: float = (current_velocity + omega * diff) * delta
 		set_velocity.call(index, (current_velocity - omega * temp) * exponential)
 		var output: float = target_axis + (diff + temp) * exponential
 
 		## To prevent overshooting
 		if (_target_axis - self_axis > 0.0) == (output > _target_axis):
 			output = _target_axis
-			set_velocity.call(index, (output - _target_axis) / get_process_delta_time())
+			set_velocity.call(index, (output - _target_axis) / delta)
 
 		return output
 
@@ -608,7 +757,7 @@ func _set_limit_clamp_position(value: Vector2) -> Vector2:
 	return value
 
 
-func _draw():
+func _draw() -> void:
 	if not Engine.is_editor_hint(): return
 
 	if frame_preview and not _is_active:
@@ -683,6 +832,80 @@ func _set_camera_2d_limit(side: int, limit: int) -> void:
 	if not _is_active: return
 	get_pcam_host_owner().camera_2d.set_limit(side, limit)
 
+
+func _check_visibility() -> void:
+	if not is_instance_valid(pcam_host_owner): return
+	pcam_host_owner.refresh_pcam_list_priorty()
+
+
+func _follow_target_tree_exiting(target: Node) -> void:
+	if target == follow_target:
+		_should_follow = false
+	if _follow_targets.has(target):
+		_follow_targets.erase(target)
+
+
+func _should_follow_checker() -> void:
+	if follow_mode == FollowMode.NONE:
+		_should_follow = false
+		return
+
+	if not follow_mode == FollowMode.GROUP: 
+		if is_instance_valid(follow_target):
+			_should_follow = true
+		else:
+			_should_follow = false
+
+
+func _follow_targets_size_check() -> void:
+	var targets_size: int = 0
+	_follow_target_physics_based = false
+	_follow_targets = []
+	for i in follow_targets.size():
+		if follow_targets[i] == null: continue
+		if follow_targets[i].is_inside_tree():
+			_follow_targets.append(follow_targets[i])
+			targets_size += 1
+			_follow_targets_single_target_index = i
+			_check_physics_body(follow_targets[i])
+			if not follow_targets[i].tree_exiting.is_connected(_follow_target_tree_exiting):
+				follow_targets[i].tree_exiting.connect(_follow_target_tree_exiting.bind(follow_targets[i]))
+
+	match targets_size:
+		0:
+			_should_follow = false
+			_has_multiple_follow_targets = false
+		1:
+			_should_follow = true
+			_has_multiple_follow_targets = false
+		_:
+			_should_follow = true
+			_has_multiple_follow_targets = true
+
+
+func _noise_emitted(emitter_noise_output: Transform2D, emitter_layer: int) -> void:
+	if noise_emitter_layer & emitter_layer != 0:
+		noise_emitted.emit(emitter_noise_output)
+		
+		if not pcam_host_owner.camera_2d.ignore_rotation: return
+		if emitter_noise_output.get_rotation() != 0:
+			push_warning(pcam_host_owner.camera_2d.name, " has ignore_rotation enabled.")
+
+
+func _set_layer(current_layers: int, layer_number: int, value: bool) -> int:
+	var mask: int = current_layers
+
+	# From https://github.com/godotengine/godot/blob/51991e20143a39e9ef0107163eaf283ca0a761ea/scene/3d/camera_3d.cpp#L638
+	if layer_number < 1 or layer_number > 20:
+		printerr("Render layer must be between 1 and 20.")
+	else:
+		if value:
+			mask |= 1 << (layer_number - 1)
+		else:
+			mask &= ~(1 << (layer_number - 1))
+
+	return mask
+
 #endregion
 
 
@@ -698,8 +921,11 @@ func update_limit_all_sides() -> void:
 		_limit_sides.y = limit_top
 		_limit_sides.z = limit_right
 		_limit_sides.w = limit_bottom
-	elif _limit_node is TileMap:
-		var tile_map: TileMap = _limit_node as TileMap
+	elif _limit_node is TileMap or _limit_node.is_class("TileMapLayer"):
+		var tile_map := _limit_node
+
+		if not tile_map.tile_set: return # TODO: This should be removed once https://github.com/godotengine/godot/issues/96898 is resolved
+
 		var tile_map_size: Vector2 = Vector2(tile_map.get_used_rect().size) * Vector2(tile_map.tile_set.tile_size) * tile_map.get_scale()
 		var tile_map_position: Vector2 = tile_map.global_position + Vector2(tile_map.get_used_rect().position) * Vector2(tile_map.tile_set.tile_size) * tile_map.get_scale()
 
@@ -718,7 +944,7 @@ func update_limit_all_sides() -> void:
 		# Bottom
 		_limit_sides.w = roundi(limit_rect.position.y + limit_rect.size.y)
 	elif _limit_node is CollisionShape2D:
-		var collision_shape_2d = _limit_node as CollisionShape2D
+		var collision_shape_2d: CollisionShape2D = _limit_node as CollisionShape2D
 
 		if not collision_shape_2d.get_shape(): return
 
@@ -765,14 +991,30 @@ func reset_limit() -> void:
 ## Assigns the value of the [param has_tweened] property.
 ## [b][color=yellow]Important:[/color][/b] This value can only be changed
 ## from the [PhantomCameraHost] script.
-func set_has_tweened(caller: Node, value: bool) -> void:
+func set_tween_skip(caller: Node, value: bool) -> void:
 	if is_instance_of(caller, PhantomCameraHost):
-		_has_tweened = value
+		_tween_skip = value
 	else:
 		printerr("Can only be called PhantomCameraHost class")
 ## Returns the current [param has_tweened] value.
-func get_has_tweened() -> bool:
-	return _has_tweened
+func get_tween_skip() -> bool:
+	return _tween_skip
+
+## Returns the [Transform3D] value based on the [member follow_mode] / [member look_at_mode] target value.
+func get_transform_output() -> Transform2D:
+	return _transform_output
+
+
+## Returns the noise [Transform3D] value.
+func get_noise_transform() -> Transform2D:
+	return _transform_noise
+
+
+## Emits a noise based on a custom [Transform2D] value.[br]
+## Use this function if you wish to make use of external noise patterns from, for example, other addons.
+func emit_noise(value: Transform2D) -> void:
+	noise_emitted.emit(value)
+
 
 #endregion
 
@@ -799,10 +1041,12 @@ func set_pcam_host_owner(value: PhantomCameraHost) -> void:
 func get_pcam_host_owner() -> PhantomCameraHost:
 	return pcam_host_owner
 
+
 ## Assigns new Zoom value.
 func set_zoom(value: Vector2) -> void:
 	zoom = value
 	queue_redraw()
+
 ## Gets current Zoom value.
 func get_zoom() -> Vector2:
 	return zoom
@@ -811,9 +1055,9 @@ func get_zoom() -> Vector2:
 ## Assigns new Priority value.
 func set_priority(value: int) -> void:
 	priority = abs(value)
-
 	if _has_valid_pcam_owner():
 		get_pcam_host_owner().pcam_priority_updated(self)
+
 ## Gets current Priority value.
 func get_priority() -> int:
 	return priority
@@ -822,36 +1066,44 @@ func get_priority() -> int:
 ## Assigns a new PhantomCameraTween resource to the PhantomCamera2D
 func set_tween_resource(value: PhantomCameraTween) -> void:
 	tween_resource = value
+
 ## Gets the PhantomCameraTween resource assigned to the PhantomCamera2D
 ## Returns null if there's nothing assigned to it.
 func get_tween_resource() -> PhantomCameraTween:
 	return tween_resource
 
+
 ## Assigns a new [param Tween Duration] to the [member tween_resource] value.[br]
 ## The duration value is in seconds.
 func set_tween_duration(value: float) -> void:
 	tween_resource.duration = value
+
 ## Gets the current [param Tween Duration] value inside the
 ## [member tween_resource].[br]
 ## The duration value is in seconds.
 func get_tween_duration() -> float:
 	return tween_resource.duration
 
+
 ## Assigns a new [param Tween Transition] value inside the
 ## [member tween_resource].
 func set_tween_transition(value: int) -> void:
 	tween_resource.transition = value
+
 ## Gets the current [param Tween Transition] value  inside the
 ## [member tween_resource].
 func get_tween_transition() -> int:
 	return tween_resource.transition
 
+
 ## Assigns a new [param Tween Ease] value inside the [member tween_resource].
 func set_tween_ease(value: int) -> void:
 	tween_resource.ease = value
+
 ## Gets the current [param Tween Ease] value inside the [member tween_resource].
 func get_tween_ease() -> int:
 	return tween_resource.ease
+
 
 ## Sets the [param PhantomCamera2D] active state.[br]
 ## [b][color=yellow]Important:[/color][/b] This value can only be changed
@@ -861,6 +1113,7 @@ func set_is_active(node, value) -> void:
 		_is_active = value
 	else:
 		printerr("PCams can only be set from the PhantomCameraHost")
+
 ## Gets current active state of the [param PhantomCamera2D].
 ## If it returns true, it means the [param PhantomCamera2D] is what the
 ## [param Camera2D] is currently following.
@@ -871,6 +1124,7 @@ func is_active() -> bool:
 ## Enables or disables the [member tween_on_load].
 func set_tween_on_load(value: bool) -> void:
 	tween_on_load = value
+
 ## Gets the current [member tween_on_load] value.
 func get_tween_on_load() -> bool:
 	return tween_on_load
@@ -885,19 +1139,34 @@ func get_follow_mode() -> int:
 
 ## Assigns a new [Node2D] as the [member follow_target].
 func set_follow_target(value: Node2D) -> void:
+	if follow_mode == FollowMode.NONE or follow_mode == FollowMode.GROUP: return
 	if follow_target == value: return
 	follow_target = value
+	_follow_target_physics_based = false
 	if is_instance_valid(value):
-		_should_follow = true
+		if follow_mode == FollowMode.PATH:
+			if is_instance_valid(follow_path):
+				_should_follow = true
+			else:
+				_should_follow = false
+		else:
+			_should_follow = true
+		_check_physics_body(value)
+		if not follow_target.tree_exiting.is_connected(_follow_target_tree_exiting):
+			follow_target.tree_exiting.connect(_follow_target_tree_exiting.bind(follow_target))
 	else:
 		_should_follow = false
 	follow_target_changed.emit()
+	notify_property_list_changed()
+
 ## Erases the current [member follow_target].
 func erase_follow_target() -> void:
 	if follow_target == null: return
 	_should_follow = false
 	follow_target = null
+	_follow_target_physics_based = false
 	follow_target_changed.emit()
+
 ## Gets the current [member follow_target].
 func get_follow_target() -> Node2D:
 	return follow_target
@@ -906,17 +1175,81 @@ func get_follow_target() -> Node2D:
 ## Assigns a new [Path2D] to the [member follow_path].
 func set_follow_path(value: Path2D) -> void:
 	follow_path = value
+	if is_instance_valid(follow_path):
+		_should_follow_checker()
+	else:
+		_should_follow = false
+
 ## Erases the current [Path2D] from the [member follow_path] property.
 func erase_follow_path() -> void:
 	follow_path = null
+
 ## Gets the current [Path2D] from the [member follow_path].
 func get_follow_path() -> Path2D:
 	return follow_path
 
 
+## Assigns a new [param follow_targets] array value.
+func set_follow_targets(value: Array[Node2D]) -> void:
+	if follow_mode != FollowMode.GROUP: return
+	if follow_targets == value: return
+	follow_targets = value
+	_follow_targets_size_check()
+
+## Appends a single [Node2D] to [member follow_targets].
+func append_follow_targets(value: Node2D) -> void:
+	if not is_instance_valid(value):
+		printerr(value, " is not a valid Node2D instance")
+		return
+
+	if not follow_targets.has(value):
+		follow_targets.append(value)
+		_follow_targets_size_check()
+	else:
+		printerr(value, " is already part of Follow Group")
+
+## Adds an Array of type [Node2D] to [member follow_targets].
+func append_follow_targets_array(value: Array[Node2D]) -> void:
+	for target in value:
+		if not is_instance_valid(target): continue
+		if not follow_targets.has(target):
+			follow_targets.append(target)
+			_follow_targets_size_check()
+		else:
+			printerr(value, " is already part of Follow Group")
+
+## Removes a [Node2D] from [member follow_targets] array.
+func erase_follow_targets(value: Node2D) -> void:
+	follow_targets.erase(value)
+	_follow_targets_size_check()
+
+## Gets all [Node2D] from [member follow_targets] array.
+func get_follow_targets() -> Array[Node2D]:
+	return follow_targets
+
+
+func _check_physics_body(target: Node2D) -> void:
+	if target is PhysicsBody2D:
+		## NOTE - Feature Toggle
+		if Engine.get_version_info().major == 4 and \
+		Engine.get_version_info().minor < 3:
+			if ProjectSettings.get_setting("phantom_camera/tips/show_jitter_tips"):
+				print_rich("Following a [b]PhysicsBody2D[/b] node will likely result in jitter - on lower physics ticks in particular.")
+				print_rich("If possible, will recommend upgrading to Godot 4.3, as it has built-in support for 2D Physics Interpolation, which will mitigate this issue.")
+				print_rich("Otherwise, try following the guide on the [url=https://phantom-camera.dev/support/faq#i-m-seeing-jitter-what-can-i-do]documentation site[/url] for better results.")
+				print_rich("This tip can be disabled from within [code]Project Settings / Phantom Camera / Tips / Show Jitter Tips[/code]")
+			return
+		## NOTE - Only supported in Godot 4.3 or above
+		elif not ProjectSettings.get_setting("physics/common/physics_interpolation") and ProjectSettings.get_setting("phantom_camera/tips/show_jitter_tips"):
+				printerr("Physics Interpolation is disabled in the Project Settings, recommend enabling it to smooth out physics-based camera movement")
+				print_rich("This tip can be disabled from within [code]Project Settings / Phantom Camera / Tips / Show Jitter Tips[/code]")
+		_follow_target_physics_based = true
+
+
 ## Assigns a new Vector2 for the Follow Target Offset property.
 func set_follow_offset(value: Vector2) -> void:
 	follow_offset = value
+
 ## Gets the current Vector2 for the Follow Target Offset property.
 func get_follow_offset() -> Vector2:
 	return follow_offset
@@ -926,9 +1259,11 @@ func get_follow_offset() -> Vector2:
 func set_follow_damping(value: bool) -> void:
 	follow_damping = value
 	notify_property_list_changed()
+
 ## Gets the current Follow Damping property.
 func get_follow_damping() -> bool:
 	return follow_damping
+
 
 ## Assigns new Damping value.
 func set_follow_damping_value(value: Vector2) -> void:
@@ -936,101 +1271,57 @@ func set_follow_damping_value(value: Vector2) -> void:
 	if value.x < 0: value.x = 0
 	elif value.y < 0: value.y = 0
 	follow_damping_value = value
+
 ## Gets the current Follow Damping value.
 func get_follow_damping_value() -> Vector2:
 	return follow_damping_value
 
+
 ## Enables or disables [member snap_to_pixel].
 func set_snap_to_pixel(value: bool) -> void:
 	snap_to_pixel = value
+
 ## Gets the current [member snap_to_pixel] value.
 func get_snap_to_pixel() -> bool:
 	return snap_to_pixel
 
-## Assigns a new [param follow_targets] array value.
-func set_follow_targets(value: Array[Node2D]) -> void:
-	if follow_targets == value: return
-
-	follow_targets = value
-
-	if follow_targets.is_empty():
-		_should_follow = false
-		_has_multiple_follow_targets = false
-		return
-
-	var valid_instances: int = 0
-	for target in follow_targets:
-		if is_instance_valid(target):
-			_should_follow = true
-			valid_instances += 1
-
-			if valid_instances > 1:
-				_has_multiple_follow_targets = true
-## Appends a single [Node2D] to [member follow_targets].
-func append_follow_targets(value: Node2D) -> void:
-	if not is_instance_valid(value):
-		printerr(value, " is not a valid instance")
-		return
-	if not follow_targets.has(value):
-		follow_targets.append(value)
-		_should_follow = true
-		_has_multiple_follow_targets = true
-	else:
-		printerr(value, " is already part of Follow Group")
-## Adds an Array of type [Node2D] to [member follow_targets].
-func append_follow_targets_array(value: Array[Node2D]) -> void:
-	for val in value:
-		if not is_instance_valid(val): continue
-		if not follow_targets.has(val):
-			follow_targets.append(val)
-			_should_follow = true
-			if follow_targets.size() > 1:
-				_has_multiple_follow_targets = true
-		else:
-			printerr(value, " is already part of Follow Group")
-## Removes a [Node2D] from [member follow_targets] array.
-func erase_follow_targets(value: Node2D) -> void:
-	follow_targets.erase(value)
-	if follow_targets.size() < 1:
-		_should_follow = false
-		_has_multiple_follow_targets = false
-## Gets all Node2D from Follow Group array.
-func get_follow_targets() -> Array[Node2D]:
-	return follow_targets
-
-## Returns true if the [param PhantomCamera2D] has more than one member in the
-## [follow_targets] array.
-func get_has_multiple_follow_targets() -> bool:
-	return _has_multiple_follow_targets
 
 ## Enables or disables Auto zoom when using Group Follow.
 func set_auto_zoom(value: bool) -> void:
 	auto_zoom = value
 	notify_property_list_changed()
+
 ## Gets Auto Zoom state.
 func get_auto_zoom() -> bool:
 	return auto_zoom
 
+
 ## Assigns new Min Auto Zoom value.
 func set_auto_zoom_min(value: float) -> void:
 	auto_zoom_min = value
+
 ## Gets Min Auto Zoom value.
 func get_auto_zoom_min() -> float:
 	return auto_zoom_min
 
+
 ## Assigns new Max Auto Zoom value.
 func set_auto_zoom_max(value: float) -> void:
 	auto_zoom_max = value
+
 ## Gets Max Auto Zoom value.
 func get_auto_zoom_max() -> float:
 	return auto_zoom_max
 
+
 ## Assigns new Zoom Auto Margin value.
 func set_auto_zoom_margin(value: Vector4) -> void:
 	auto_zoom_margin = value
+
 ## Gets Zoom Auto Margin value.
 func get_auto_zoom_margin() -> Vector4:
 	return auto_zoom_margin
+
 
 ## Sets a limit side based on the side parameter.[br]
 ## It's recommended to pass the [enum Side] enum as the sid parameter.
@@ -1041,7 +1332,8 @@ func set_limit(side: int, value: int) -> void:
 		SIDE_RIGHT: 	limit_right = value
 		SIDE_BOTTOM: 	limit_bottom = value
 		_:				printerr("Not a valid Side.")
-## Gets the limit side 
+
+## Gets the limit side
 func get_limit(value: int) -> int:
 	match value:
 		SIDE_LEFT: 		return limit_left
@@ -1052,47 +1344,57 @@ func get_limit(value: int) -> int:
 						printerr("Not a valid Side.")
 						return -1
 
+
 ## Assign a the Camera2D Left Limit Side value.
 func set_limit_left(value: int) -> void:
 	_limit_target_exist_error()
 	limit_left = value
 	update_limit_all_sides()
+
 ## Gets the Camera2D Left Limit value.
 func get_limit_left() -> int:
 	return limit_left
+
 
 ## Assign a the Camera2D Top Limit Side value.
 func set_limit_top(value: int) -> void:
 	_limit_target_exist_error()
 	limit_top = value
 	update_limit_all_sides()
+
 ## Gets the Camera2D Top Limit value.
 func get_limit_top() -> int:
 	return limit_top
+
 
 ## Assign a the Camera2D Right Limit Side value.
 func set_limit_right(value: int) -> void:
 	_limit_target_exist_error()
 	limit_right = value
 	update_limit_all_sides()
+
 ## Gets the Camera2D Right Limit value.
 func get_limit_right() -> int:
 	return limit_right
+
 
 ## Assign a the Camera2D Bottom Limit Side value.
 func set_limit_bottom(value: int) -> void:
 	_limit_target_exist_error()
 	limit_bottom = value
 	update_limit_all_sides()
+
 ## Gets the Camera2D Bottom Limit value.
 func get_limit_bottom() -> int:
 	return limit_bottom
+
 
 func _limit_target_exist_error() -> void:
 	if not limit_target.is_empty():
 		printerr("Unable to set Limit Side due to Limit Target ", _limit_node.name,  " being assigned")
 
-# Set Limit Target.
+
+# Sets a [memeber limit_target] node.
 func set_limit_target(value: NodePath) -> void:
 	limit_target = value
 
@@ -1104,11 +1406,12 @@ func set_limit_target(value: NodePath) -> void:
 		var prev_limit_node: Node2D = _limit_node
 		var new_limit_node: Node2D = get_node(value)
 
-		if prev_limit_node is TileMap:
-			if prev_limit_node.changed.is_connected(_on_tile_map_changed):
-				prev_limit_node.changed.disconnect(_on_tile_map_changed)
+		if prev_limit_node:
+			if prev_limit_node is TileMap or prev_limit_node.is_class("TileMapLayer"):
+				if prev_limit_node.changed.is_connected(_on_tile_map_changed):
+					prev_limit_node.changed.disconnect(_on_tile_map_changed)
 
-		if new_limit_node is TileMap:
+		if new_limit_node is TileMap or new_limit_node.is_class("TileMapLayer"):
 			if not new_limit_node.changed.is_connected(_on_tile_map_changed):
 				new_limit_node.changed.connect(_on_tile_map_changed)
 		elif new_limit_node is CollisionShape2D:
@@ -1117,22 +1420,31 @@ func set_limit_target(value: NodePath) -> void:
 			if col_shape.shape == null:
 				printerr("No Shape2D in: ", col_shape.name)
 				reset_limit()
-				limit_target = null
+				limit_target = ""
 				return
-	else:
+		else:
+			printerr("Limit Target is not a TileMap, TileMapLayer or CollisionShape2D node")
+			return
+
+	elif value == NodePath(""):
 		reset_limit()
-		limit_target = null
+		limit_target = ""
+	else:
+		printerr("Limit Target cannot be found")
+		return
 
 	_limit_node = get_node_or_null(value)
 
 	notify_property_list_changed()
 	update_limit_all_sides()
-## Get Limit Target
+
+## Get [member limit_target] node.
 func get_limit_target() -> NodePath:
 	if not limit_target: # TODO - Fixes an spam error if if limit_taret is empty
 		return NodePath("")
 	else:
 		return limit_target
+
 
 ## Set Tile Map Limit Margin.
 func set_limit_margin(value: Vector4i) -> void:
@@ -1141,6 +1453,7 @@ func set_limit_margin(value: Vector4i) -> void:
 ## Get Tile Map Limit Margin.
 func get_limit_margin() -> Vector4i:
 	return limit_margin
+
 
 ### Enables or disables the Limit Smoothing beaviour.
 #func set_limit_smoothing(value: bool) -> void:
@@ -1151,11 +1464,58 @@ func get_limit_margin() -> Vector4i:
 #func get_limit_smoothing() -> bool:
 	#return limit_smoothed
 
+
+## Sets a [PhantomCameraNoise2D] resource.
+func set_noise(value: PhantomCameraNoise2D) -> void:
+	noise = value
+	if value != null:
+		_has_noise_resource = true
+		noise.set_trauma(1)
+	else:
+		_has_noise_resource = false
+		_transform_noise = Transform2D()
+
+## Returns the [PhantomCameraNoise2D] resource.
+func get_noise() -> PhantomCameraNoise2D:
+	return noise
+
+
+## Sets the [member noise_emitter_layer] value.
+func set_noise_emitter_layer(value: int) -> void:
+	noise_emitter_layer = value
+
+## Enables or disables a given layer of the [member noise_emitter_layer] value.
+func set_noise_emitter_layer_value(value: int, enabled: bool) -> void:
+	noise_emitter_layer = _set_layer(noise_emitter_layer, value, enabled)
+
+## Returns the [member noise_emitter_layer]
+func get_noise_emitter_layer() -> int:
+	return noise_emitter_layer
+
+
 ## Sets [member inactive_update_mode] property.
 func set_inactive_update_mode(value: int) -> void:
 	inactive_update_mode = value
+
 ## Gets [enum InactiveUpdateMode] value.
 func get_inactive_update_mode() -> int:
 	return inactive_update_mode
+
+
+func set_follow_target_physics_based(value: bool, caller: Node) -> void:
+	if is_instance_of(caller, PhantomCameraHost):
+		_follow_target_physics_based = value
+	else:
+		printerr("set_follow_target_physics_based() is for internal use only.")
+func get_follow_target_physics_based() -> bool:
+	return _follow_target_physics_based
+
+
+func get_class() -> String:
+	return "PhantomCamera2D"
+
+
+func is_class(value) -> bool:
+	return value == "PhantomCamera2D"
 
 #endregion
