@@ -291,7 +291,7 @@ static func create_room(opts):
 	return room
 
 static func create_rooms(room_opts):
-	var last_room
+	var last_room = null
 	var rooms = []
 	for i in len(room_opts):
 		var opts = room_opts[i]

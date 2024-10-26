@@ -189,7 +189,7 @@ func check_all_complete():
 ## signal updates #####################################################
 
 func _on_complete(node, opts):
-	var label = q_label(node, opts)
+	var _label = q_label(node, opts)
 	# Log.info("Quest complete!", node)
 	var q = get_quest(node, opts)
 	if q:

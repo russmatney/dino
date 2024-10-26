@@ -32,17 +32,17 @@ func _node_to_entry_key(node):
 		parents.reverse()
 
 		# remove nonsensy intermediary parents
-		parents = parents.filter(func(node):
-			return not node.name.begins_with("@@") and not node.name == "MainScreen")
+		parents = parents.filter(func(n):
+			return not n.name.begins_with("@@") and not n.name == "MainScreen")
 
-	var name = node.name
+	var nm = node.name
 	if node.has_method("hotel_key_suffix"):
-		name = "%s%s" % [name, node.hotel_key_suffix()]
+		nm = "%s%s" % [nm, node.hotel_key_suffix()]
 
-	return _to_entry_key(name, parents)
+	return _to_entry_key(nm, parents)
 
-func _to_entry_key(name, parents=[]):
-	var key = name
+func _to_entry_key(_name, parents=[]):
+	var key = _name
 
 	var prefix = ""
 	for p in parents:
@@ -79,7 +79,7 @@ func _book(node: Node):
 
 ## register #####################################################################
 
-func register(node, opts={}):
+func register(node, _opts={}):
 	if not node.has_method("hotel_data"):
 		Log.warn("skipping hotel register.", node, "missing expected hotel_data() method")
 		return

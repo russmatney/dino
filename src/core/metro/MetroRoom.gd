@@ -50,7 +50,10 @@ var room_data : Dictionary :
 		if "visited" in room_data:
 			if room_data["visited"]:
 				visited = room_data["visited"]
-				_on_paused() if paused else _on_unpaused()
+				if paused:
+					_on_paused()
+				else:
+					_on_unpaused()
 
 # roombox signals ###########################################
 

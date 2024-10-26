@@ -46,8 +46,8 @@ var get_xs = func():
 	if is_inside_tree():
 		return get_tree().get_nodes_in_group(xs_group)
 	return []
-var x_update_signal = func(x): return null
-var is_remaining = func(x): return true
+var x_update_signal = func(_x): return null
+var is_remaining = func(_x): return true
 
 var entity_ids = []
 

@@ -105,7 +105,7 @@ func update_zone():
 		# Log.warn("Cannot update zero rooms.")
 		return
 
-	var current_containing_room
+	var current_containing_room = null
 	var rooms_to_pause = []
 	# var player = P.get_player()
 	for room in current_zone.rooms:

@@ -28,11 +28,11 @@ func has_label(label) -> bool:
 
 func column(idx: int):
 	var col = []
-	for row in shape:
-		if idx >= len(row):
+	for _row in shape:
+		if idx >= len(_row):
 			Log.error("idx outside of row width, cannot build column")
 			return []
-		col.append(row[idx])
+		col.append(_row[idx])
 	return col
 
 func row(idx: int):
@@ -68,8 +68,8 @@ func get_shape_dict(opts={}):
 func coords(skip_nulls=true) -> Array:
 	var crds = []
 	for y in len(shape):
-		var row = shape[y]
-		for x in len(row):
+		var _row = shape[y]
+		for x in len(_row):
 			var coord = Vector2(x, y)
 			var cell = shape[y][x]
 			if skip_nulls:
@@ -115,9 +115,9 @@ func rotate(i=1):
 
 func rotated_shape(sh):
 	var new_shape = []
-	for row in sh:
-		for i in len(row):
+	for _row in sh:
+		for i in len(_row):
 			if i > len(new_shape) - 1:
 				new_shape.append([])
-			new_shape[i].append(row[i])
+			new_shape[i].append(_row[i])
 	return new_shape
