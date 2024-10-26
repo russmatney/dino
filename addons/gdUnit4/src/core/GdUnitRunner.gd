@@ -1,8 +1,5 @@
 extends Node
 
-signal sync_rpc_id_result_received
-
-
 @onready var _client :GdUnitTcpClient = $GdUnitTcpClient
 @onready var _executor :GdUnitTestSuiteExecutor = GdUnitTestSuiteExecutor.new()
 
@@ -39,7 +36,9 @@ func _ready() -> void:
 		push_error(config_result.error_message())
 		_state = EXIT
 		return
+	@warning_ignore("return_value_discarded")
 	_client.connect("connection_failed", _on_connection_failed)
+	@warning_ignore("return_value_discarded")
 	GdUnitSignals.instance().gdunit_event.connect(_on_gdunit_event)
 	var result := _client.start("127.0.0.1", _config.server_port())
 	if result.is_error():
@@ -78,11 +77,14 @@ func _process(_delta :float) -> void:
 				# process next test suite
 				set_process(false)
 				var test_suite :Node = _test_suites_to_process.pop_front()
+				@warning_ignore("unsafe_method_access")
 				if _cs_executor != null and _cs_executor.IsExecutable(test_suite):
+					@warning_ignore("unsafe_method_access")
 					_cs_executor.Execute(test_suite)
+					@warning_ignore("unsafe_property_access")
 					await _cs_executor.ExecutionCompleted
 				else:
-					await _executor.execute(test_suite)
+					await _executor.execute(test_suite as GdUnitTestSuite)
 				set_process(true)
 		STOP:
 			_state = EXIT
@@ -115,8 +117,9 @@ func gdUnitInit() -> void:
 	send_message("Scaned %d test suites" % _test_suites_to_process.size())
 	var total_count := _collect_test_case_count(_test_suites_to_process)
 	_on_gdunit_event(GdUnitInit.new(_test_suites_to_process.size(), total_count))
-	for test_suite in _test_suites_to_process:
-		send_test_suite(test_suite)
+	if not GdUnitSettings.is_test_discover_enabled():
+		for test_suite in _test_suites_to_process:
+			send_test_suite(test_suite)
 
 
 func _filter_test_case(test_suites :Array[Node], included_tests :PackedStringArray) -> void:
@@ -135,6 +138,7 @@ func _do_filter_test_case(test_suite :Node, test_case :Node, included_tests :Pac
 			# we have a paremeterized test selection
 			if test_meta.size() > 1:
 				var test_param_index := test_meta[1]
+				@warning_ignore("unsafe_method_access")
 				test_case.set_test_parameter_index(test_param_index.to_int())
 			return
 	# the test is filtered out
