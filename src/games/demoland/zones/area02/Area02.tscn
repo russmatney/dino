@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_u3uiw"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_fhgi7"]
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="3_dq8nu"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="3_dq8nu"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="4_e7ttu"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="5_re77u"]
 [ext_resource type="Script" path="res://src/core/metro/MetroTravelPointEntity.gd" id="5_xu4kg"]

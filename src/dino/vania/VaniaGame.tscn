@@ -14,7 +14,7 @@
 [ext_resource type="RichTextEffect" uid="uid://0cxvi5j20hdy" path="res://addons/teeb.text_effects/resources/Jump.tres" id="12_lin80"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
 [ext_resource type="PackedScene" uid="uid://buluwrwsan2bp" path="res://src/components/mapdef_preview/MapDefIconGrid.tscn" id="13_73vrb"]
-[ext_resource type="TileSet" path="res://src/core/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
+[ext_resource type="TileSet" path="res://addons/bones/reptile/tilesets/SnowTiles16.tres" id="13_k6w4a"]
 [ext_resource type="PackedScene" uid="uid://cg0nqfx0pc4r6" path="res://src/dino/entities/bushes/Bush1.tscn" id="15_1p30g"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="15_7bsuh"]
 [ext_resource type="Script" path="res://src/core/quest/QuestManager.gd" id="15_g6u8y"]

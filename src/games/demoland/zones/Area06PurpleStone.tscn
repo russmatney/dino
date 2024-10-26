@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_7tnei"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_wwjab"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="4_6jxld"]
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/PurpleStoneTiles16.tscn" id="5_q8ouj"]
 
 [node name="Area06PurpleStone" type="Node2D" groups=["metro_zones"]]
 position = Vector2(1, 0)

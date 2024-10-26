@@ -47,6 +47,12 @@ static func is_move_released(event):
 	return is_released(event, "ui_left") or is_released(event, "ui_right") or \
 		is_released(event, "ui_up") or is_released(event, "ui_down")
 
+static func is_move_up(event):
+	return is_event(event, "move_up")
+
+static func is_move_down(event):
+	return is_event(event, "move_down")
+
 static func is_undo(event):
 	return is_event(event, "undo")
 

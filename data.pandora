@@ -743,7 +743,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/GildedKingdomTiles8.tscn"
 					}
 				}
 			},
@@ -780,7 +780,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/SnowTiles16.tscn"
 					}
 				}
 			},
@@ -813,7 +813,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/GrassTiles16.tscn"
 					}
 				}
 			},
@@ -842,7 +842,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/PurpleStoneTiles16.tscn"
 					}
 				}
 			},
@@ -1764,7 +1764,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/GildedKingdomTiles8.tscn"
 					}
 				}
 			},
@@ -1781,7 +1781,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/VolcanoTiles8.tscn"
 					}
 				}
 			},
@@ -1798,7 +1798,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/GrassyCaveTileMap8.tscn"
 					}
 				}
 			},
@@ -1815,7 +1815,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/SpaceshipTiles8.tscn"
 					}
 				}
 			},
@@ -1832,7 +1832,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "<Object#null>"
+						"value": "res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn"
 					}
 				}
 			},
@@ -2438,7 +2438,7 @@
 			},
 			{
 				"_category_id": "103",
-				"_default_value": "<Object#null>",
+				"_default_value": "res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn",
 				"_id": "111",
 				"_name": "tiles_scene",
 				"_type": "resource"

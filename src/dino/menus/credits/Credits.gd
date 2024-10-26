@@ -89,4 +89,3 @@ func _process(delta):
 
 func get_credit_lines():
 	return DinoCredits.get_credits()
-

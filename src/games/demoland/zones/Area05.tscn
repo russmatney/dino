@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_bnpde"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="3_fx5qs"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="4_fmddr"]
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/SnowTiles16.tscn" id="5_do5d3"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/SnowTiles16.tscn" id="5_do5d3"]
 
 [node name="Area05Snow" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_6d4h8")

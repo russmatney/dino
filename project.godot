@@ -26,7 +26,9 @@ boot_splash/minimum_display_time=300
 [autoload]
 
 Pandora="*res://addons/pandora/api.gd"
-Debug="*res://src/core/Debug.gd"
+InputHelper="*res://addons/input_helper/input_helper.gd"
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
+Debug="*res://addons/bones/Debug.gd"
 Navi="*res://addons/bones/navi/Navi.gd"
 Hotel="*res://src/core/hotel/Hotel.gd"
 DJ="*res://addons/bones/dj/DJ.gd"
@@ -34,12 +36,10 @@ Metro="*res://src/core/metro/Metro.gd"
 Records="*res://src/dino/Records.gd"
 Dino="*res://src/dino/Dino.gd"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
-InputHelper="*res://addons/input_helper/input_helper.gd"
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
-Juice="*res://src/core/Juice.gd"
 Music="*res://src/Music.gd"
 Sounds="*res://src/Sounds.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+Juice="*res://addons/bones/Juice.gd"
 
 [display]
 

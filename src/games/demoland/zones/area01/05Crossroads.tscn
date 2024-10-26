@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dhstps731almj"]
 
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_moefn"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_moefn"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_ypp1l"]
 
 [node name="05Crossroads" type="Node2D" groups=["metro_rooms"]]

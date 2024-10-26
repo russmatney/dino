@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_7wryv"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_au423"]
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_mbvq6"]
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_fih5m"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_mbvq6"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_fih5m"]
 [ext_resource type="PackedScene" uid="uid://b0gmt6jeniemi" path="res://src/dino/entities/doors/Portal.tscn" id="5_u6f8x"]
-[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="5_vmtuh"]
+[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="5_vmtuh"]
 [ext_resource type="PackedScene" uid="uid://w6sbcbxo5mnt" path="res://src/dino/pickups/coins/ShrineGem.tscn" id="7_b3gyp"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/dino/enemies/blobs/BlobChaser.tscn" id="8_80ao1"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/dino/enemies/blobs/BlobWalker.tscn" id="9_sfm30"]
