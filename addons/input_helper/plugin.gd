@@ -22,7 +22,7 @@ func _enter_tree():
 
 
 func _exit_tree():
-	# remove_autoload_singleton("InputHelper")
+	remove_autoload_singleton("InputHelper")
 
 	if next_version != "":
 		remove_tool_menu_item("Update Input Helper to v%s" % next_version)

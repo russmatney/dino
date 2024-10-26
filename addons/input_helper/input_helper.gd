@@ -24,6 +24,7 @@ const PLAYSTATION_BUTTON_LABELS = ["Cross", "Circle", "Square", "Triangle", "Sel
 @onready var device_index: int = 0 if has_joypad() else -1
 
 var deadzone: float = 0.5
+var mouse_motion_threshold: int = 100
 var device_last_changed_at: int = 0
 
 
@@ -36,8 +37,10 @@ func _input(event: InputEvent) -> void:
 	var next_device: String = device
 	var next_device_index: int = device_index
 
-	# Did we just press a key on the keyboard?
-	if event is InputEventKey or event is InputEventMouseButton:
+	# Did we just press a key on the keyboard or move the mouse?
+	if event is InputEventKey \
+		or event is InputEventMouseButton \
+		or (event is InputEventMouseMotion and (event as InputEventMouseMotion).relative.length_squared() > mouse_motion_threshold):
 		next_device = DEVICE_KEYBOARD
 		next_device_index = -1
 
@@ -152,7 +155,7 @@ func get_label_for_input(input: InputEvent) -> String:
 				return "Mouse Middle Button"
 			MOUSE_BUTTON_RIGHT:
 				return "Mouse Right Button"
-		return "Mouse Button %d" % input
+		return "Mouse Button %d" % input.button_index
 
 	elif input is InputEventJoypadButton:
 		match device:
@@ -162,6 +165,7 @@ func get_label_for_input(input: InputEvent) -> String:
 				return "%s Button" % SWITCH_BUTTON_LABELS[input.button_index]
 			DEVICE_PLAYSTATION_CONTROLLER:
 				return "%s Button" % PLAYSTATION_BUTTON_LABELS[input.button_index]
+
 	elif input is InputEventJoypadMotion:
 		var motion: InputEventJoypadMotion = input as InputEventJoypadMotion
 		match motion.axis:
@@ -215,7 +219,7 @@ func serialize_inputs_for_actions(actions: PackedStringArray = []) -> String:
 			elif input is InputEventJoypadButton:
 				action_map["joypad"].append(input.button_index)
 			elif input is InputEventJoypadMotion:
-				action_map["joypad"].append("%d|%d" % [input.axis, input.axis_value])
+				action_map["joypad"].append("%d|%f" % [input.axis, input.axis_value])
 
 		map[action] = action_map
 
@@ -329,7 +333,7 @@ func set_joypad_input_for_action(action: String, input: InputEvent, swap_if_take
 
 
 ## Replace a specific button for an action
-func replace_joypad_input_for_action(action: String, current_input: InputEvent, input: Variant, swap_if_taken: bool = true) -> Error:
+func replace_joypad_input_for_action(action: String, current_input: InputEvent, input: InputEventJoypadButton, swap_if_taken: bool = true) -> Error:
 	return _update_joypad_input_for_action(action, input, swap_if_taken, current_input)
 
 
