@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://src/games/shirt/NeedsTwoShrinesDoor.gd" id="8_ohdbg"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/dino/enemies/blobs/BlobWalker.tscn" id="9_86bm1"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/dino/enemies/blobs/BlobChaser.tscn" id="11_64kgb"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="12_cpd8x"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="12_cpd8x"]
 
 [node name="CaveOne" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_7w22y")

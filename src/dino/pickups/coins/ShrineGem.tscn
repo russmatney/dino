@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/pickups/coins/ShrineGem.gd" id="1_12h8n"]
 [ext_resource type="Texture2D" uid="uid://dtjn8kunpqgtx" path="res://src/dino/pickups/coins/gem.png" id="2_7enea"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_m00wy"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="3_m00wy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rb6g"]
 atlas = ExtResource("2_7enea")

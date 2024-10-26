@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bax62g5wrhfl7"]
 
 [ext_resource type="Script" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_jcrd3"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="2_8na1q"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="3_hlyuy"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="2_8na1q"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="3_hlyuy"]
 [ext_resource type="Texture2D" uid="uid://bmxoilheb3u70" path="res://src/dino/entities/checkpoints/MNT_log_bench_checkpoint.png" id="4_g6aua"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtt71"]

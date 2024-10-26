@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://jg7xpetmlc7w" path="res://src/dino/entities/harvey_entities/ToolIcon.tscn" id="2"]
 [ext_resource type="Theme" uid="uid://bx2wou2suu4mp" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="3"]
 [ext_resource type="Shader" path="res://src/dino/entities/harvey_entities/SquashStretchShader.gdshader" id="4"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_grsnf"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="5_grsnf"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 7.0

@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_3xkbl"]
 [ext_resource type="Texture2D" uid="uid://dk16cdh5d354f" path="res://src/dino/npcs/villagers/duaa.png" id="3_jg00b"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="4_6da2o"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="5_aybl5"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_td85c"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="5_aybl5"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="6_td85c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d7ua7"]
 atlas = ExtResource("3_jg00b")

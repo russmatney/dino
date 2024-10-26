@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="1_g82lj"]
-
-[node name="ActionDetector" type="Area2D"]
-collision_layer = 0
-collision_mask = 256
-script = ExtResource("1_g82lj")

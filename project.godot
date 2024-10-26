@@ -39,6 +39,7 @@ SoundManager="*res://addons/sound_manager/sound_manager.gd"
 Juice="*res://addons/core/Juice.gd"
 Music="*res://src/Music.gd"
 Sounds="*res://src/Sounds.gd"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
@@ -59,6 +60,7 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 [file_customization]
 
 folder_colors={
+"res://addons/bones/": "gray",
 "res://addons/core/": "purple",
 "res://src/dino/": "purple",
 "res://src/dino/bosses/": "pink",

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="3"]
 [ext_resource type="SpriteFrames" uid="uid://c3bahe6lnnse8" path="res://src/dino/npcs/action_bot/harvey_spriteframes.tres" id="3_jk3kg"]
 [ext_resource type="SpriteFrames" uid="uid://y6eqsli8lr2t" path="res://src/dino/weapons/arrow/arrow.tres" id="4"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionDetector.tscn" id="6_havi5"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionDetector.tscn" id="6_havi5"]
 [ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="7_ha6t4"]
 
 [sub_resource type="CapsuleShape2D" id="3"]

@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/sidescroller_machine/SSMachine.tscn" id="2_78tkn"]
 [ext_resource type="Texture2D" uid="uid://cvo03xsch0d7n" path="res://src/dino/players/hoodie/soft-soft-hoodie.png" id="3_lby6s"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_70y86"]
-[ext_resource type="Script" path="res://addons/core/actions/ActionDetector.gd" id="5_dn731"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/core/actions/ActionHint.tscn" id="6_nylqu"]
+[ext_resource type="Script" path="res://addons/bones/actions/ActionDetector.gd" id="5_dn731"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="6_nylqu"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/dino/players/greyhat_jetflame_sheet.png" id="8_b7l5m"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="8_rnuea"]
 

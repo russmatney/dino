@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dxy65wjusiq7j" path="res://src/dino/entities/harvey_entities/assets/seed-box_sheet.png" id="3_ce6ye"]
 [ext_resource type="Shader" path="res://src/dino/entities/harvey_entities/SquashStretchShader.gdshader" id="4"]
 [ext_resource type="Theme" uid="uid://bx2wou2suu4mp" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="5"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="6_2okg2"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="6_2okg2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)

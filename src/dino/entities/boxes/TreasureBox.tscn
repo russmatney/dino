@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://vfgj4qh623p0" path="res://src/dino/entities/boxes/TreasureBoxSpriteFrames.tres" id="1_jde4r"]
 [ext_resource type="PackedScene" uid="uid://b3cek61te6ula" path="res://src/dino/pickups/orb/RedBlobAnim.tscn" id="2_u47qh"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="3_d0j4w"]
-[ext_resource type="PackedScene" path="res://addons/core/actions/ActionArea.tscn" id="3_xgcb5"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="3_xgcb5"]
 
 [sub_resource type="Resource" id="Resource_l03h8"]
 script = ExtResource("3_d0j4w")
