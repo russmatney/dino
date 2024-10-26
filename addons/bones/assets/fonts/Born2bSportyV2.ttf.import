@@ -3,18 +3,19 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b0w8s6hidvrrr"
-path="res://.godot/imported/Born2bSportyV2.ttf-fa48b0d4747f564b7c17221c8f7e0511.fontdata"
+path="res://.godot/imported/Born2bSportyV2.ttf-64854645b097a57c4ab3f166a852a332.fontdata"
 
 [deps]
 
 source_file="res://addons/bones/assets/fonts/Born2bSportyV2.ttf"
-dest_files=["res://.godot/imported/Born2bSportyV2.ttf-fa48b0d4747f564b7c17221c8f7e0511.fontdata"]
+dest_files=["res://.godot/imported/Born2bSportyV2.ttf-64854645b097a57c4ab3f166a852a332.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

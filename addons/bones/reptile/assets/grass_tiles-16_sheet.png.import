@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://smm3nt07rqfl"
-path="res://.godot/imported/grass_tiles-16_sheet.png-7f5f1c10e1f6c9191041c5b95738b390.ctex"
+path="res://.godot/imported/grass_tiles-16_sheet.png-7d0e0a1ea73ce9acf5a7af6e84684215.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/grass_tiles-16_sheet.png"
-dest_files=["res://.godot/imported/grass_tiles-16_sheet.png-7f5f1c10e1f6c9191041c5b95738b390.ctex"]
+dest_files=["res://.godot/imported/grass_tiles-16_sheet.png-7d0e0a1ea73ce9acf5a7af6e84684215.ctex"]
 
 [params]
 

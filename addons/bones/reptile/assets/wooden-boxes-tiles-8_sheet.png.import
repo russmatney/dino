@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0qblnip8w0c6"
-path="res://.godot/imported/wooden-boxes-tiles-8_sheet.png-f3c4667ba5e11cb7be143739395e1437.ctex"
+path="res://.godot/imported/wooden-boxes-tiles-8_sheet.png-7729f684a6213a7149dcef659b8eb029.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/wooden-boxes-tiles-8_sheet.png"
-dest_files=["res://.godot/imported/wooden-boxes-tiles-8_sheet.png-f3c4667ba5e11cb7be143739395e1437.ctex"]
+dest_files=["res://.godot/imported/wooden-boxes-tiles-8_sheet.png-7729f684a6213a7149dcef659b8eb029.ctex"]
 
 [params]
 

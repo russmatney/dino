@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi88ebib1ajm8"
-path="res://.godot/imported/ship_background_autotiles_sheet.png-017a796b4ae4b704b7ef7b858eb94e52.ctex"
+path="res://.godot/imported/ship_background_autotiles_sheet.png-8562f7a03f63c7418353e087c39e85f0.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/ship_background_autotiles_sheet.png"
-dest_files=["res://.godot/imported/ship_background_autotiles_sheet.png-017a796b4ae4b704b7ef7b858eb94e52.ctex"]
+dest_files=["res://.godot/imported/ship_background_autotiles_sheet.png-8562f7a03f63c7418353e087c39e85f0.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2grmvm168855"
-path="res://.godot/imported/snow_tiles_sheet.png-538fef553f5b2cbe6823e7db2475d3c6.ctex"
+path="res://.godot/imported/snow_tiles_sheet.png-0d6289d9c8166d600ad423ceecc99b81.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/snow_tiles_sheet.png"
-dest_files=["res://.godot/imported/snow_tiles_sheet.png-538fef553f5b2cbe6823e7db2475d3c6.ctex"]
+dest_files=["res://.godot/imported/snow_tiles_sheet.png-0d6289d9c8166d600ad423ceecc99b81.ctex"]
 
 [params]
 

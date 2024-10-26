@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxx0qf76r3x6n"
-path="res://.godot/imported/16x16coldfire_sheet.png-f8253952d9deec26a0fb4f293b394540.ctex"
+path="res://.godot/imported/16x16coldfire_sheet.png-5ff785052a8cb473abca3a621dbcc259.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/16x16coldfire_sheet.png"
-dest_files=["res://.godot/imported/16x16coldfire_sheet.png-f8253952d9deec26a0fb4f293b394540.ctex"]
+dest_files=["res://.godot/imported/16x16coldfire_sheet.png-5ff785052a8cb473abca3a621dbcc259.ctex"]
 
 [params]
 

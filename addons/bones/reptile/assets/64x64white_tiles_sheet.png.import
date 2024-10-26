@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnftipxroyuws"
-path="res://.godot/imported/64x64white_tiles_sheet.png-846ef28fab85ca502bdf9f3e43a9dc0a.ctex"
+path="res://.godot/imported/64x64white_tiles_sheet.png-0708291668ad848113deba67d8237000.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/64x64white_tiles_sheet.png"
-dest_files=["res://.godot/imported/64x64white_tiles_sheet.png-846ef28fab85ca502bdf9f3e43a9dc0a.ctex"]
+dest_files=["res://.godot/imported/64x64white_tiles_sheet.png-0708291668ad848113deba67d8237000.ctex"]
 
 [params]
 

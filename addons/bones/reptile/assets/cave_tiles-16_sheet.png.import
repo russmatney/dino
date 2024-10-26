@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ciy5438ao6h67"
-path="res://.godot/imported/cave_tiles-16_sheet.png-5740c894d9161885cfda842d70c374e7.ctex"
+path="res://.godot/imported/cave_tiles-16_sheet.png-7052af73ffffa2c7a3e0ec76566d1c14.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/cave_tiles-16_sheet.png"
-dest_files=["res://.godot/imported/cave_tiles-16_sheet.png-5740c894d9161885cfda842d70c374e7.ctex"]
+dest_files=["res://.godot/imported/cave_tiles-16_sheet.png-7052af73ffffa2c7a3e0ec76566d1c14.ctex"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="aseprite_wizard.plugin.noop"
 type="PackedDataContainer"
 uid="uid://0l1q0cnq5158"
-path="res://.godot/imported/cave_floor_tiles-16.aseprite-b06cb31fdea3602f0e9359e6d36472b0.res"
+path="res://.godot/imported/cave_floor_tiles-16.aseprite-17509eab3d6f83ca7fe49df6801d204c.res"
 
 [deps]
 
 source_file="res://addons/bones/reptile/assets/topdown/cave_floor_tiles-16.aseprite"
-dest_files=["res://.godot/imported/cave_floor_tiles-16.aseprite-b06cb31fdea3602f0e9359e6d36472b0.res"]
+dest_files=["res://.godot/imported/cave_floor_tiles-16.aseprite-17509eab3d6f83ca7fe49df6801d204c.res"]
 
 [params]
 

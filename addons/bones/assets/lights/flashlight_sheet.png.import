@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0mf16ugl1an6"
-path="res://.godot/imported/flashlight_sheet.png-a0f8d6f6bdcadc828b8b284a224a5167.ctex"
+path="res://.godot/imported/flashlight_sheet.png-be9b884a795200abc0332c5cc426eb4a.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/assets/lights/flashlight_sheet.png"
-dest_files=["res://.godot/imported/flashlight_sheet.png-a0f8d6f6bdcadc828b8b284a224a5167.ctex"]
+dest_files=["res://.godot/imported/flashlight_sheet.png-be9b884a795200abc0332c5cc426eb4a.ctex"]
 
 [params]
 

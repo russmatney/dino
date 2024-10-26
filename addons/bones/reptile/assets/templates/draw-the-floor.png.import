@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://calfh57j8oyng"
-path="res://.godot/imported/draw-the-floor.png-9945333493693ab6560aa2cc2223f41b.ctex"
+path="res://.godot/imported/draw-the-floor.png-58aaa969a77b7acb69e579fbcc17abce.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/templates/draw-the-floor.png"
-dest_files=["res://.godot/imported/draw-the-floor.png-9945333493693ab6560aa2cc2223f41b.ctex"]
+dest_files=["res://.godot/imported/draw-the-floor.png-58aaa969a77b7acb69e579fbcc17abce.ctex"]
 
 [params]
 

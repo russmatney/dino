@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://xlyeypnrqvb"
-path="res://.godot/imported/light2_nobg_sheet.png-7df2c6653ea6b95aa6ef02270a31846b.ctex"
+path="res://.godot/imported/light2_nobg_sheet.png-f08d323512e4a4049dafcc11435fa351.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/assets/lights/light2_nobg_sheet.png"
-dest_files=["res://.godot/imported/light2_nobg_sheet.png-7df2c6653ea6b95aa6ef02270a31846b.ctex"]
+dest_files=["res://.godot/imported/light2_nobg_sheet.png-f08d323512e4a4049dafcc11435fa351.ctex"]
 
 [params]
 

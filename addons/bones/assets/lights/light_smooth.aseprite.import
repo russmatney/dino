@@ -3,12 +3,12 @@
 importer="aseprite_wizard.plugin.noop"
 type="PackedDataContainer"
 uid="uid://dducrh0ey77cf"
-path="res://.godot/imported/light_smooth.aseprite-3494950d7b5775bd55d33b957803177d.res"
+path="res://.godot/imported/light_smooth.aseprite-2f6f84dde5e37c76177b952b6cb8ba01.res"
 
 [deps]
 
 source_file="res://addons/bones/assets/lights/light_smooth.aseprite"
-dest_files=["res://.godot/imported/light_smooth.aseprite-3494950d7b5775bd55d33b957803177d.res"]
+dest_files=["res://.godot/imported/light_smooth.aseprite-2f6f84dde5e37c76177b952b6cb8ba01.res"]
 
 [params]
 

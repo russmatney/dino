@@ -3,12 +3,12 @@
 importer="aseprite_wizard.plugin.noop"
 type="PackedDataContainer"
 uid="uid://bj28jvdq38nrx"
-path="res://.godot/imported/snow_tile_template.aseprite-41d68d4f5f3bce5cfc7a3f157505901a.res"
+path="res://.godot/imported/snow_tile_template.aseprite-24983fde814c5beaad50bdd8f1a50b0e.res"
 
 [deps]
 
 source_file="res://addons/bones/reptile/assets/snow_tile_template.aseprite"
-dest_files=["res://.godot/imported/snow_tile_template.aseprite-41d68d4f5f3bce5cfc7a3f157505901a.res"]
+dest_files=["res://.godot/imported/snow_tile_template.aseprite-24983fde814c5beaad50bdd8f1a50b0e.res"]
 
 [params]
 

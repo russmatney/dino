@@ -3,12 +3,12 @@
 importer="aseprite_wizard.plugin.noop"
 type="PackedDataContainer"
 uid="uid://cpabhdkofqic3"
-path="res://.godot/imported/3x3_minimal_autotiles.aseprite-335f806d85372fcfc830442c2b4742c6.res"
+path="res://.godot/imported/3x3_minimal_autotiles.aseprite-5c8cadab8f7ec86976462bb710cebae4.res"
 
 [deps]
 
 source_file="res://addons/bones/reptile/assets/templates/3x3_minimal_autotiles.aseprite"
-dest_files=["res://.godot/imported/3x3_minimal_autotiles.aseprite-335f806d85372fcfc830442c2b4742c6.res"]
+dest_files=["res://.godot/imported/3x3_minimal_autotiles.aseprite-5c8cadab8f7ec86976462bb710cebae4.res"]
 
 [params]
 

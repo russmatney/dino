@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://jw0033x5oytk"
-path="res://.godot/imported/quick-tiles_sheet1.png-8183ce99ab83bf3da64ce40ad2af3009.ctex"
+path="res://.godot/imported/quick-tiles_sheet1.png-a497f9232399bd32d7f1404b3758b2f2.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/quick-tiles_sheet1.png"
-dest_files=["res://.godot/imported/quick-tiles_sheet1.png-8183ce99ab83bf3da64ce40ad2af3009.ctex"]
+dest_files=["res://.godot/imported/quick-tiles_sheet1.png-a497f9232399bd32d7f1404b3758b2f2.ctex"]
 
 [params]
 

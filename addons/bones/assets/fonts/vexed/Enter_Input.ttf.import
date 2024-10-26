@@ -3,18 +3,19 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c6j24vm8je66p"
-path="res://.godot/imported/Enter_Input.ttf-00ae2e2a70788a847a706713c64e6374.fontdata"
+path="res://.godot/imported/Enter_Input.ttf-8e30c9db845523893fa8607435ea1d6c.fontdata"
 
 [deps]
 
 source_file="res://addons/bones/assets/fonts/vexed/Enter_Input.ttf"
-dest_files=["res://.godot/imported/Enter_Input.ttf-00ae2e2a70788a847a706713c64e6374.fontdata"]
+dest_files=["res://.godot/imported/Enter_Input.ttf-8e30c9db845523893fa8607435ea1d6c.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

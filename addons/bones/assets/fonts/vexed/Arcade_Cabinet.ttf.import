@@ -3,18 +3,19 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://d06oxhmw5eq58"
-path="res://.godot/imported/Arcade_Cabinet.ttf-74a33f0a32c12bd1090a037ffbaf291d.fontdata"
+path="res://.godot/imported/Arcade_Cabinet.ttf-e07a372ae5077e05b1582862ab0946bd.fontdata"
 
 [deps]
 
 source_file="res://addons/bones/assets/fonts/vexed/Arcade_Cabinet.ttf"
-dest_files=["res://.godot/imported/Arcade_Cabinet.ttf-74a33f0a32c12bd1090a037ffbaf291d.fontdata"]
+dest_files=["res://.godot/imported/Arcade_Cabinet.ttf-e07a372ae5077e05b1582862ab0946bd.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

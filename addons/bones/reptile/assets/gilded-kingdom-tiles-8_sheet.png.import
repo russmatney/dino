@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://wyjkgyqj0076"
-path="res://.godot/imported/gilded-kingdom-tiles-8_sheet.png-f90c94c2d6d26c6f67dbbbf991a676be.ctex"
+path="res://.godot/imported/gilded-kingdom-tiles-8_sheet.png-4e858b9a408eb6ae84885f7ed33b10de.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/gilded-kingdom-tiles-8_sheet.png"
-dest_files=["res://.godot/imported/gilded-kingdom-tiles-8_sheet.png-f90c94c2d6d26c6f67dbbbf991a676be.ctex"]
+dest_files=["res://.godot/imported/gilded-kingdom-tiles-8_sheet.png-4e858b9a408eb6ae84885f7ed33b10de.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://t2ovyliqxow1"
-path="res://.godot/imported/16x16-dungeon_sheet.png-06951196ca384e3506ee48a981850ea4.ctex"
+path="res://.godot/imported/16x16-dungeon_sheet.png-09aadd3c94131fa6433d398d672c0c57.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/reptile/assets/16x16-dungeon_sheet.png"
-dest_files=["res://.godot/imported/16x16-dungeon_sheet.png-06951196ca384e3506ee48a981850ea4.ctex"]
+dest_files=["res://.godot/imported/16x16-dungeon_sheet.png-09aadd3c94131fa6433d398d672c0c57.ctex"]
 
 [params]
 

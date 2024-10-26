@@ -3,12 +3,12 @@
 importer="aseprite_wizard.plugin.noop"
 type="PackedDataContainer"
 uid="uid://de4i3g6qie606"
-path="res://.godot/imported/stone_tiles.aseprite-f061ba932456a63360359a0abe9048bb.res"
+path="res://.godot/imported/stone_tiles.aseprite-7f2844fcdf442f3d06a65c6fc77598e4.res"
 
 [deps]
 
 source_file="res://addons/bones/reptile/assets/stone_tiles.aseprite"
-dest_files=["res://.godot/imported/stone_tiles.aseprite-f061ba932456a63360359a0abe9048bb.res"]
+dest_files=["res://.godot/imported/stone_tiles.aseprite-7f2844fcdf442f3d06a65c6fc77598e4.res"]
 
 [params]
 

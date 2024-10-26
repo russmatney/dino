@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sv1c5wmqglyu"
-path="res://.godot/imported/light64px6.png-6053704faa7a72f23a9a3e166aa50e5b.ctex"
+path="res://.godot/imported/light64px6.png-ad4665b0494ce40d99bfb6080ba7bd97.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://addons/bones/assets/lights/light64px6.png"
-dest_files=["res://.godot/imported/light64px6.png-6053704faa7a72f23a9a3e166aa50e5b.ctex"]
+dest_files=["res://.godot/imported/light64px6.png-ad4665b0494ce40d99bfb6080ba7bd97.ctex"]
 
 [params]
 
