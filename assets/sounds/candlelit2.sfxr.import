@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bfj8uhs0vjry5"
+path="res://.godot/imported/candlelit2.sfxr-0ea1ce6e914d0e07898dd42cdc8c0b86.sample"
+
+[deps]
+
+source_file="res://assets/sounds/candlelit2.sfxr"
+dest_files=["res://.godot/imported/candlelit2.sfxr-0ea1ce6e914d0e07898dd42cdc8c0b86.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

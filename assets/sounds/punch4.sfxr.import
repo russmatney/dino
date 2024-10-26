@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bhx0pd83n14f5"
+path="res://.godot/imported/punch4.sfxr-17cd41f68cfe1ca258b0f27a8ed7adae.sample"
+
+[deps]
+
+source_file="res://assets/sounds/punch4.sfxr"
+dest_files=["res://.godot/imported/punch4.sfxr-17cd41f68cfe1ca258b0f27a8ed7adae.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

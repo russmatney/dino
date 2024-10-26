@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bi5aeoeob0jbk"
+path="res://.godot/imported/bosswarp1.sfxr-6818359acdc754216c95f50ad5713768.sample"
+
+[deps]
+
+source_file="res://assets/sounds/bosswarp1.sfxr"
+dest_files=["res://.godot/imported/bosswarp1.sfxr-6818359acdc754216c95f50ad5713768.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://bv8nnloy26ohk"
+path="res://.godot/imported/player_hurt1.sfxr-c12ca50d2452f5e8289d03c0c90734ad.sample"
+
+[deps]
+
+source_file="res://assets/sounds/player_hurt1.sfxr"
+dest_files=["res://.godot/imported/player_hurt1.sfxr-c12ca50d2452f5e8289d03c0c90734ad.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

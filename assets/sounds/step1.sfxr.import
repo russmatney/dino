@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://3j6welvxs3ge"
+path="res://.godot/imported/step1.sfxr-f67c72ad8923f6b00bf7a33c14ed2253.sample"
+
+[deps]
+
+source_file="res://assets/sounds/step1.sfxr"
+dest_files=["res://.godot/imported/step1.sfxr-f67c72ad8923f6b00bf7a33c14ed2253.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

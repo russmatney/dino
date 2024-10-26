@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://dhw5gbg18gm6a"
+path="res://.godot/imported/climbstart2.sfxr-4671c9ad27099f3a8894b9a488c56b27.sample"
+
+[deps]
+
+source_file="res://assets/sounds/climbstart2.sfxr"
+dest_files=["res://.godot/imported/climbstart2.sfxr-4671c9ad27099f3a8894b9a488c56b27.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

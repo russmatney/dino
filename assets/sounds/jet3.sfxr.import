@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://citbruudu8f0s"
+path="res://.godot/imported/jet3.sfxr-43227f3ee6d7650f80bb1e041fa13c81.sample"
+
+[deps]
+
+source_file="res://assets/sounds/jet3.sfxr"
+dest_files=["res://.godot/imported/jet3.sfxr-43227f3ee6d7650f80bb1e041fa13c81.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

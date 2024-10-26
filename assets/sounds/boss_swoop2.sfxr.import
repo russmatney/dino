@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://5la4i7sfrgg4"
+path="res://.godot/imported/boss_swoop2.sfxr-d4ad0393cdc448412a97d80b150191d2.sample"
+
+[deps]
+
+source_file="res://assets/sounds/boss_swoop2.sfxr"
+dest_files=["res://.godot/imported/boss_swoop2.sfxr-d4ad0393cdc448412a97d80b150191d2.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

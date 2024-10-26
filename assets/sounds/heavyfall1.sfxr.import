@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://dcdv0ao0cl4my"
+path="res://.godot/imported/heavyfall1.sfxr-0ba8ea96983e1d0a0391ce1975850bb1.sample"
+
+[deps]
+
+source_file="res://assets/sounds/heavyfall1.sfxr"
+dest_files=["res://.godot/imported/heavyfall1.sfxr-0ba8ea96983e1d0a0391ce1975850bb1.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
