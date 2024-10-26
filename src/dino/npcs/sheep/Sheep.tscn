@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_8vlgc"]
 [ext_resource type="SpriteFrames" uid="uid://d2p03bosdesai" path="res://src/dino/npcs/sheep/SheepSpriteFrames.tres" id="2_a12nd"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="7_sxgat"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="7_vet6k"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://src/core/assets/fonts/at01.ttf" id="7_vet6k"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="8_540xg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lfhc5"]

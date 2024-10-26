@@ -15,14 +15,14 @@ func get_room_opts(_opts):
 		opt.merge({
 			label_to_tilemap={
 				"Wall": {
-					scene=load("res://addons/core/reptile/tilemaps/CaveTiles16.tscn"),
+					scene=load("res://addons/bones/reptile/tilemaps/CaveTiles16.tscn"),
 					add_borders=true,
 				},
 				"Floor":{
-					scene=load("res://addons/core/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn")
+					scene=load("res://addons/bones/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn")
 				},
 				"Pen":{
-					scene=load("res://addons/core/reptile/tilemaps/GrassFloorTiles16.tscn"),
+					scene=load("res://addons/bones/reptile/tilemaps/GrassFloorTiles16.tscn"),
 					to_entities=func(t):
 					var rect = t.get_used_rect()
 					if rect.size.x == 0:

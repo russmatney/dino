@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://fdvu7a71attn"]
 
-[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_c2fck"]
+[ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="1_c2fck"]
 [ext_resource type="Script" path="res://src/dino/npcs/sidescroller_machine/Idle.gd" id="2_ed1a8"]
 [ext_resource type="Script" path="res://src/dino/npcs/sidescroller_machine/Walk.gd" id="3_3g2du"]
 [ext_resource type="Script" path="res://src/dino/npcs/sidescroller_machine/Shop.gd" id="4_e4yi8"]

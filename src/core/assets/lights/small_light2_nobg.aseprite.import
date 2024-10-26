@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ckcw1c8p5tlaw"
+path="res://.godot/imported/small_light2_nobg.aseprite-c2f532e545ef1f08e6e9fef25e98774b.res"
+
+[deps]
+
+source_file="res://src/core/assets/lights/small_light2_nobg.aseprite"
+dest_files=["res://.godot/imported/small_light2_nobg.aseprite-c2f532e545ef1f08e6e9fef25e98774b.res"]
+
+[params]
+

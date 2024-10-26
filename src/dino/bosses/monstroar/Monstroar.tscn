@@ -4,9 +4,9 @@
 [ext_resource type="SpriteFrames" uid="uid://cvrl5hva6wlar" path="res://src/dino/bosses/monstroar/monstroar_sprite_frames.tres" id="2_55uo8"]
 [ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://src/dino/bosses/sidescroller_machine/SSBossMachine.tscn" id="8_kgjjp"]
 [ext_resource type="PackedScene" uid="uid://8mo6p0ai7cj7" path="res://src/dino/bosses/PositionHint.tscn" id="13_qubff"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="14_y6g7e"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://src/core/assets/lights/light64px1.png" id="14_y6g7e"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="15_w3c60"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="16_k3jf2"]
+[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="16_k3jf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tidp"]
 size = Vector2(16, 24)

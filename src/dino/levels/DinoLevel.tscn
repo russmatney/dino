@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://src/dino/levels/DinoLevel.gd" id="1_thmin"]
 [ext_resource type="Script" path="res://src/dino/levels/tower/TowerLevelGen.gd" id="3_up4cq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_um1rd"]
-[ext_resource type="Script" path="res://addons/core/quest/QuestManager.gd" id="5_kkaoh"]
+[ext_resource type="Script" path="res://src/core/quest/QuestManager.gd" id="5_kkaoh"]
 [ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/dino/entities/targets/Target.tscn" id="6_x0vmf"]
-[ext_resource type="Script" path="res://addons/core/brick/BrickRoom.gd" id="9_mbvbi"]
+[ext_resource type="Script" path="res://src/core/brick/BrickRoom.gd" id="9_mbvbi"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="10_tiykt"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_3kpot"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://addons/core/reptile/tilemaps/MetalTiles8.tscn" id="12_r53ry"]
+[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/MetalTiles8.tscn" id="12_r53ry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ippqw"]
 size = Vector2(368, 112)

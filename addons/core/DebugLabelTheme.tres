@@ -1,6 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dp5lmxj28h382"]
-
-[ext_resource type="FontFile" path="res://addons/core/resources/fonts/debug-info-text.tres" id="1_lgqfi"]
-
-[resource]
-RichTextLabel/fonts/normal_font = ExtResource("1_lgqfi")

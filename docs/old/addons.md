@@ -2,7 +2,7 @@
 =============
 
 I created a number of experimental addons in Dino - at this point they've all
-been pulled into 'addons/core', and they are being wittled down.
+been pulled into 'src/core', and they are being wittled down.
 
 Below is documentation for them, even if some don't really exist any more - I'm
 hopeful the ideas and related replacement libraries are useful.
@@ -36,7 +36,7 @@ across three genres: `SideScroller`, `TopDown`, and `BeatEmUp`.
 It also included integrations like powerups and weapons systems.
 
 I eventually deconstructed beehive - I pulled most of the impls into `dino/src` proper, and moved the
-Machine.gd and State.gd impls into `addons/core/machine`.
+Machine.gd and State.gd impls into `src/core/machine`.
 # Brick
 A more recent proc-generation attempt. Pretty rough at the moment, but
 somewhat generic. I'm hopeful to merge this implementation into Dino's Vania
@@ -47,7 +47,7 @@ Related, I ought to look into consuming [`BenjaTK/Gaea`](https://github.com/Benj
 I was quite proud of this when I first implemented it! But it fell into
 disrepair. At this point I've moved to just consuming
 [`ramokz/phantom-camera`](https://github.com/ramokz/phantom-camera),
-and implementing the camera 'juice' via `addons/core/Juice.gd`.
+and implementing the camera 'juice' via `src/core/Juice.gd`.
 
 --
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/enemies/TDEnemy.gd" id="1_vl047"]
 [ext_resource type="Texture2D" uid="uid://cy8nlxxkwln5h" path="res://src/dino/enemies/blobs/shirt_blob_64.png" id="3_otsjm"]
 [ext_resource type="PackedScene" uid="uid://cam7j4kwh0thl" path="res://src/dino/enemies/topdown_machine/TDEnemyMachine.tscn" id="4_p707p"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_x1ie1"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://src/core/assets/fonts/at01.ttf" id="4_x1ie1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ulnms"]
 radius = 8.0

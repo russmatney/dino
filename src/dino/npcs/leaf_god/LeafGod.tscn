@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/npcs/leaf_god/LeafGod.gd" id="1_7hv1x"]
 [ext_resource type="Texture2D" uid="uid://cpbqogu2llb23" path="res://src/dino/npcs/leaf_god/runner_leaf_friend.png" id="2_gitl0"]
 [ext_resource type="PackedScene" uid="uid://fdvu7a71attn" path="res://src/dino/npcs/sidescroller_machine/SSNPCMachine.tscn" id="3_fhdj4"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="4_ovlwu"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://src/core/assets/fonts/at01.ttf" id="4_ovlwu"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="5_12qb4"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="6_ag2du"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_45l4l"]

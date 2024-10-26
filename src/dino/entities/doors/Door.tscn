@@ -3,7 +3,7 @@
 [ext_resource type="SpriteFrames" uid="uid://buwix7wp71vf1" path="res://src/dino/entities/doors/DoorSpriteFrames.tres" id="1_5m0uh"]
 [ext_resource type="Script" path="res://src/dino/entities/doors/Door.gd" id="1_arj2e"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="3_ox5jh"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="5_f3480"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://src/core/assets/lights/light64px1.png" id="5_f3480"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y1rxf"]
 size = Vector2(30, 64)

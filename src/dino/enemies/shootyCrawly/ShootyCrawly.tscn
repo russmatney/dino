@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://src/dino/enemies/SSEnemy.gd" id="1_gwuuk"]
 [ext_resource type="SpriteFrames" uid="uid://c4211wtij742s" path="res://src/dino/enemies/shootyCrawly/shootycrawly_sprite_frames.tres" id="1_vkef8"]
 [ext_resource type="PackedScene" uid="uid://43qn8g87wt2p" path="res://src/dino/enemies/sidescroller_machine/SSEnemyMachine.tscn" id="4_ft7tc"]
-[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://addons/core/assets/lights/light64px1.png" id="4_lfa7i"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="5_qld6a"]
+[ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://src/core/assets/lights/light64px1.png" id="4_lfa7i"]
+[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="5_qld6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njcjt"]
 size = Vector2(10, 12)

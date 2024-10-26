@@ -32,7 +32,7 @@ jobs:
       - name: Initial Godot import
         shell: bash
         run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
+          godot --quiet --editor --headless -s src/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Windows Build
         run: |
@@ -72,7 +72,7 @@ jobs:
       - name: Initial Godot import
         shell: bash
         run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
+          godot --quiet --editor --headless -s src/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Linux Build
         run: |
@@ -111,7 +111,7 @@ jobs:
       - name: Initial Godot import
         shell: bash
         run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
+          godot --quiet --editor --headless -s src/core/initial_import.gd || exit 0
           godot --editor --headless --quit || exit 0
       - name: Web Build
         run: |
@@ -152,7 +152,7 @@ jobs:
   #     - name: Initial Godot import
   #       shell: bash
   #       run: |
-  #         godot --quiet --editor --headless -s addons/core/initial_import.gd || exit 0
+  #         godot --quiet --editor --headless -s src/core/initial_import.gd || exit 0
   #         godot --editor --headless --quit || exit 0
   #     - name: Mac Build
   #       run: |

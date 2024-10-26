@@ -1,0 +1,8 @@
+[gd_resource type="FontFile" load_steps=2 format=2]
+
+[ext_resource path="res://src/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=1]
+
+[resource]
+resource_local_to_scene = true
+outline_color = Color( 0.356863, 0.462745, 0.552941, 1 )
+font_data = ExtResource( 1 )

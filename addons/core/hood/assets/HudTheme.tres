@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3]
-
-[ext_resource type="FontFile" path="res://addons/core/hood/assets/HudLabelFont.tres" id="1"]
-
-[resource]
-Label/fonts/font = ExtResource( 1 )
-RichTextLabel/fonts/normal_font = ExtResource( 1 )

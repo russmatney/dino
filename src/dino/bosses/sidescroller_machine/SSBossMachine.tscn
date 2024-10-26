@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://pot2dpd6w67m"]
 
-[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_0q0ok"]
+[ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="1_0q0ok"]
 [ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Idle.gd" id="2_fjqr0"]
 [ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Firing.gd" id="3_i30ht"]
 [ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/KnockedBack.gd" id="4_myrkt"]

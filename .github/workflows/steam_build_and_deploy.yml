@@ -35,7 +35,7 @@ jobs:
       - name: Initial Godot import
         shell: bash
         run: |
-          godot --quiet --editor --headless -s addons/core/initial_import.gd
+          godot --quiet --editor --headless -s src/core/initial_import.gd
           godot --editor --headless --quit || exit 0
 
       - name: Linux Build

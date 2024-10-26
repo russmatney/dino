@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://b0gmt6jeniemi"]
 
-[ext_resource type="Script" path="res://addons/core/metro/MetroTravelPoint.gd" id="1_5lv5j"]
+[ext_resource type="Script" path="res://src/core/metro/MetroTravelPoint.gd" id="1_5lv5j"]
 [ext_resource type="Texture2D" uid="uid://dcyhacm2p2xax" path="res://src/dino/entities/doors/portal.png" id="2_d8pbh"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="2_x4qlq"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="4_hd7a5"]
-[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="5_vihct"]
+[ext_resource type="PackedScene" path="res://src/core/actions/ActionHint.tscn" id="4_hd7a5"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://src/core/assets/lights/light64px8.png" id="5_vihct"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwdef"]
 atlas = ExtResource("2_d8pbh")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnjna48m0w7ce"]
 
-[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="1_7pbyl"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_l8b8n"]
+[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_7pbyl"]
+[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_l8b8n"]
 
 [node name="08DownTower" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_7pbyl")

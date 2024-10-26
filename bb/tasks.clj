@@ -276,8 +276,8 @@
           (fs/create-sym-link project-addon-path symlink-target))))))
 
 (comment
-  (fs/exists? (str (fs/home) "/russmatney/beatemup-city/addons/core/navi"))
-  (fs/sym-link? (str (fs/home) "/russmatney/beatemup-city/addons/core/navi"))
+  (fs/exists? (str (fs/home) "/russmatney/beatemup-city/addons/bones/navi"))
+  (fs/sym-link? (str (fs/home) "/russmatney/beatemup-city/addons/bones/navi"))
   (->>
     {:navi :russmatney/dino}
     (map input->godot-dep)

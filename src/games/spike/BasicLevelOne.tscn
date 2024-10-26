@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://c4rvg7x32y0h"]
 
 [ext_resource type="Script" path="res://src/games/spike/SpikeZone.gd" id="1_l5ds8"]
-[ext_resource type="Script" path="res://addons/core/metro/MetroRoom.gd" id="2_ouxbs"]
+[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_ouxbs"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="3_uly7r"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="4_cu5va"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="5_jxm16"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="6_1pmen"]
-[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://addons/core/reptile/tilemaps/CaveTiles16.tscn" id="7_0dv7i"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="8_qouax"]
+[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/CaveTiles16.tscn" id="7_0dv7i"]
+[ext_resource type="PackedScene" path="res://src/core/actions/ActionHint.tscn" id="8_qouax"]
 
 [node name="BasicLevelOne" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_l5ds8")

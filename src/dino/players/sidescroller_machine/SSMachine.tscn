@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://dgan7tpytfkfo"]
 
-[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_x6uir"]
+[ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="1_x6uir"]
 [ext_resource type="Script" path="res://src/dino/players/sidescroller_machine/Idle.gd" id="2_63kjp"]
 [ext_resource type="Script" path="res://src/dino/players/sidescroller_machine/Respawn.gd" id="3_dns53"]
 [ext_resource type="Script" path="res://src/dino/players/sidescroller_machine/Run.gd" id="4_2ffxk"]

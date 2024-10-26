@@ -9,7 +9,7 @@ var menu_scenes = [
 ]
 
 # default button scene
-@export var button_scene: PackedScene = preload("res://addons/core/navi/ui/MenuButton.tscn")
+@export var button_scene: PackedScene = preload("res://addons/bones/navi/ui/MenuButton.tscn")
 
 func _ready():
 	for ms in menu_scenes:

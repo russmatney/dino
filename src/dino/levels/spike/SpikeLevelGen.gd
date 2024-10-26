@@ -16,10 +16,10 @@ func get_room_opts(opts):
 
 	opts.merge({
 		label_to_tilemap={
-			"Tile": {scene=load("res://addons/core/reptile/tilemaps/GrassTiles16.tscn")},
+			"Tile": {scene=load("res://addons/bones/reptile/tilemaps/GrassTiles16.tscn")},
 			"PortalBottom": {
 				# some scene that gets replaced anyway
-				scene=load("res://addons/core/reptile/tilemaps/MetalTiles8.tscn"),
+				scene=load("res://addons/bones/reptile/tilemaps/MetalTiles8.tscn"),
 				to_entities=func(t):
 				var rect = t.get_used_rect()
 				if rect.size.x == 0:

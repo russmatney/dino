@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ulow1uu5rdd"]
 
-[ext_resource type="Texture2D" uid="uid://b0qblnip8w0c6" path="res://addons/core/reptile/assets/wooden-boxes-tiles-8_sheet.png" id="1_g6gl0"]
+[ext_resource type="Texture2D" uid="uid://b0qblnip8w0c6" path="res://addons/bones/reptile/assets/wooden-boxes-tiles-8_sheet.png" id="1_g6gl0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pgby8"]
 texture = ExtResource("1_g6gl0")

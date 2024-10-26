@@ -2,9 +2,9 @@ extends Node
 
 ## vars ##########################################################
 
-@onready var late_night_radio = preload("res://addons/core/dj/assets/songs/Late Night Radio.mp3")
+@onready var late_night_radio = preload("res://addons/bones/dj/assets/songs/Late Night Radio.mp3")
 
-@onready var field_stars = preload("res://addons/core/dj/assets/songs/sulosounds/field-stars-ambient-loop.wav")
+@onready var field_stars = preload("res://addons/bones/dj/assets/songs/sulosounds/field-stars-ambient-loop.wav")
 
 ## ready ##########################################################
 

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://do32dfw5evfvs"
+path="res://.godot/imported/BEU_template.aseprite-5f143a4706ddedd1371a17fd1ad6d8c3.res"
+
+[deps]
+
+source_file="res://src/core/beehive/beatemup/BEU_template.aseprite"
+dest_files=["res://.godot/imported/BEU_template.aseprite-5f143a4706ddedd1371a17fd1ad6d8c3.res"]
+
+[params]
+

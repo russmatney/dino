@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cha4dw2nob7ns"
+path="res://.godot/imported/twilight-5-pallete.aseprite-9f60157f197f72522ce940078f427f2d.res"
+
+[deps]
+
+source_file="res://src/core/assets/palletes/twilight-5-pallete.aseprite"
+dest_files=["res://.godot/imported/twilight-5-pallete.aseprite-9f60157f197f72522ce940078f427f2d.res"]
+
+[params]
+

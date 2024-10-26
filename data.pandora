@@ -18,7 +18,7 @@
 				"_ids_generation_class": "MetroTravelPointIds",
 				"_index": 0,
 				"_name": "MetroTravelPoint",
-				"_script_path": "res://addons/core/metro/MetroTravelPointEntity.gd"
+				"_script_path": "res://src/core/metro/MetroTravelPointEntity.gd"
 			},
 			{
 				"_category_id": "45",
@@ -743,7 +743,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -780,7 +780,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/SnowTiles16.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -813,7 +813,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/GrassTiles16.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -842,7 +842,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/PurpleStoneTiles16.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -1764,7 +1764,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/GildedKingdomTiles8.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -1781,7 +1781,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/VolcanoTiles8.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -1798,7 +1798,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/GrassyCaveTileMap8.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -1815,7 +1815,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/SpaceshipTiles8.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -1832,7 +1832,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": "res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn"
+						"value": ""
 					}
 				}
 			},
@@ -2270,7 +2270,7 @@
 			},
 			{
 				"_category_id": "17",
-				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
+				"_default_value": "res://src/core/assets/icons/dino_sheet.png",
 				"_id": "23",
 				"_name": "icon_texture",
 				"_type": "resource"
@@ -2326,7 +2326,7 @@
 			},
 			{
 				"_category_id": "69",
-				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
+				"_default_value": "res://src/core/assets/icons/dino_sheet.png",
 				"_id": "78",
 				"_name": "icon_texture",
 				"_type": "resource"
@@ -2438,7 +2438,7 @@
 			},
 			{
 				"_category_id": "103",
-				"_default_value": "res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn",
+				"_default_value": "",
 				"_id": "111",
 				"_name": "tiles_scene",
 				"_type": "resource"
@@ -2466,7 +2466,7 @@
 			},
 			{
 				"_category_id": "117",
-				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
+				"_default_value": "res://src/core/assets/icons/dino_sheet.png",
 				"_id": "119",
 				"_name": "icon_texture",
 				"_type": "resource"
@@ -2508,7 +2508,7 @@
 			},
 			{
 				"_category_id": "131",
-				"_default_value": "res://addons/core/assets/icons/dino_sheet.png",
+				"_default_value": "res://src/core/assets/icons/dino_sheet.png",
 				"_id": "156",
 				"_name": "icon_texture",
 				"_type": "resource"

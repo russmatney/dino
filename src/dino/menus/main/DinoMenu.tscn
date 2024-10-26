@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://d2ipf7t7godiy"]
 
-[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/core/navi/ui/HeroLabel.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/bones/navi/ui/HeroLabel.tscn" id="1"]
 [ext_resource type="Script" path="res://src/dino/menus/main/DinoMenu.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://1kmwy7tm07mg" path="res://src/dino/menus/main/dino_library_logo.png" id="2_yo4or"]
 [ext_resource type="Script" path="res://src/components/AnimatedVBoxContainer.gd" id="3_viiye"]

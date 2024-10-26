@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://dkieg7l5vmxx4" path="res://src/themes/MenuEntityButton.tres" id="1_oe5os"]
 [ext_resource type="Script" path="res://src/components/entity_button/EntityButton.gd" id="1_wq6tl"]
 [ext_resource type="Texture2D" uid="uid://ba2udap4d027f" path="res://assets/gameicons/Shirt_icon_sheet.png" id="2_rtaak"]
-[ext_resource type="FontFile" path="res://addons/core/resources/fonts/hero-label.tres" id="3_b55y8"]
+[ext_resource type="FontFile" path="res://src/core/resources/fonts/hero-label.tres" id="3_b55y8"]
 
 [node name="GameModeButton" type="PanelContainer"]
 anchors_preset = 15

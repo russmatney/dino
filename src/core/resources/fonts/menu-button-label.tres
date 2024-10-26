@@ -1,0 +1,6 @@
+[gd_resource type="FontFile" load_steps=2 format=2]
+
+[ext_resource path="res://src/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=1]
+
+[resource]
+font_data = ExtResource( 1 )

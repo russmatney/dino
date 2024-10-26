@@ -1,0 +1,139 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwms8iyspi7la"]
+
+[ext_resource type="Script" path="res://src/core/hotel/ui/HotelUI.gd" id="1_5mpd8"]
+[ext_resource type="FontFile" path="res://src/core/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_t7d3y"]
+[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="3_kmkd5"]
+
+[node name="HotelUI" type="Control" groups=["hotel_singletons"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5mpd8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/normal_font = ExtResource("2_t7d3y")
+bbcode_enabled = true
+text = "[center]Hotel DB[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="ReloadPluginButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kmkd5")
+text = "Reload"
+
+[node name="RebuildDBButton" type="Button" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kmkd5")
+text = "Rebuild"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ZoneOptionButton" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+alignment = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "Clear"
+popup/item_0/id = 0
+
+[node name="RoomOptionButton" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+alignment = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "Clear"
+popup/item_0/id = 0
+
+[node name="GroupOptionButton" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+flat = true
+alignment = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "hotel_singletons"
+popup/item_0/id = 0
+popup/item_1/text = "player"
+popup/item_1/id = 1
+popup/item_2/text = "pofs"
+popup/item_2/id = 2
+popup/item_3/text = "Clear"
+popup/item_3/id = 3
+
+[node name="HasGroupToggle" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "has_group"
+flat = true
+alignment = 2
+
+[node name="IsRootToggle" type="CheckBox" parent="VBoxContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "is_root"
+flat = true
+alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="DBEntries" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2"]
+layout_mode = 2
+
+[node name="DBEntryDetails" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2/PanelContainer2/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/ReloadPluginButton" to="." method="_on_reload_plugin_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/HBoxContainer/RebuildDBButton" to="." method="_on_rebuild_db_button_pressed"]

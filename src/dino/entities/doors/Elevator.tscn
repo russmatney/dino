@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bq53o4dcjbnpr" path="res://src/dino/entities/doors/door_sheet.png" id="1_6v2w8"]
 [ext_resource type="Script" path="res://src/dino/entities/doors/Elevator.gd" id="1_87cqc"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="3_nrb31"]
-[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="4_e46yd"]
-[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="5_0buld"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://src/core/assets/lights/light64px8.png" id="4_e46yd"]
+[ext_resource type="PackedScene" path="res://src/core/actions/ActionHint.tscn" id="5_0buld"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtm3d"]
 atlas = ExtResource("1_6v2w8")

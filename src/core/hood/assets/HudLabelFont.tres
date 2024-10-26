@@ -1,0 +1,6 @@
+[gd_resource type="FontFile" load_steps=2 format=2]
+
+[ext_resource type="FontFile" uid="uid://dqm832vljkrio" path="res://src/core/assets/fonts/Roboto/Roboto-Thin.ttf" id="1"]
+
+[resource]
+font_data = ExtResource( 1 )

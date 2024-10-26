@@ -1,0 +1,28 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Theme" uid="uid://dp5lmxj28h382" path="res://src/core/DebugLabelTheme.tres" id="1_l1u50"]
+[ext_resource type="RichTextEffect" uid="uid://0cxvi5j20hdy" path="res://addons/teeb.text_effects/resources/Jump.tres" id="2_7ic56"]
+[ext_resource type="RichTextEffect" uid="uid://beh3j51gse6s2" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="3_cnlh2"]
+[ext_resource type="RichTextEffect" uid="uid://utwc80d1kmo" path="res://addons/teeb.text_effects/resources/L33T.tres" id="4_ekc5j"]
+[ext_resource type="RichTextEffect" uid="uid://bmb4cb6ocmn0" path="res://addons/teeb.text_effects/resources/Rain.tres" id="5_hbeb2"]
+[ext_resource type="RichTextEffect" uid="uid://dslw20go5mg58" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="6_tife5"]
+[ext_resource type="RichTextEffect" uid="uid://c0ubeb8sjlbk6" path="res://addons/teeb.text_effects/resources/Heart.tres" id="7_sn0lf"]
+[ext_resource type="RichTextEffect" uid="uid://cpgmlv5404n2f" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="8_tlg4w"]
+[ext_resource type="RichTextEffect" uid="uid://dj2mfkubode41" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="9_leu52"]
+[ext_resource type="RichTextEffect" uid="uid://bcyc47bqu6nr5" path="res://addons/teeb.text_effects/resources/UwU.tres" id="10_esowr"]
+[ext_resource type="RichTextEffect" uid="uid://d3fhjebwdsvju" path="res://addons/teeb.text_effects/resources/Woo.tres" id="11_8urnh"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+clip_contents = false
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l1u50")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("2_7ic56"), ExtResource("3_cnlh2"), ExtResource("4_ekc5j"), ExtResource("5_hbeb2"), ExtResource("6_tife5"), ExtResource("7_sn0lf"), ExtResource("8_tlg4w"), ExtResource("9_leu52"), ExtResource("10_esowr"), ExtResource("11_8urnh")]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dur6t7wxntgbj"]
 
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/core/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_8u5qq"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_8u5qq"]
 [ext_resource type="PackedScene" uid="uid://da2wa1ua1rdwh" path="res://src/dino/entities/boxes/Box.tscn" id="3_s7p3q"]
 [ext_resource type="PackedScene" uid="uid://ddjj5kujrnpg5" path="res://src/dino/entities/boxes/TreasureBox.tscn" id="4_vlxbf"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="5_apdpi"]

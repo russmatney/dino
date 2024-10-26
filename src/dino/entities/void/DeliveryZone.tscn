@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0bnnom822e3w"]
 
 [ext_resource type="Script" path="res://src/dino/entities/void/DeliveryZone.gd" id="1_qvwfl"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/core/assets/fonts/at01.ttf" id="3_230n5"]
-[ext_resource type="Texture2D" uid="uid://bh0nru4oqd2x2" path="res://addons/core/assets/lights/light64px7.png" id="4_5nwep"]
+[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="3_230n5"]
+[ext_resource type="Texture2D" uid="uid://bh0nru4oqd2x2" path="res://src/core/assets/lights/light64px7.png" id="4_5nwep"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42g1q"]
 size = Vector2(64, 64)

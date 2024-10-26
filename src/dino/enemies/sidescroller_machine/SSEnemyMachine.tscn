@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://43qn8g87wt2p"]
 
-[ext_resource type="Script" path="res://addons/core/machine/Machine.gd" id="1_avc5j"]
+[ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="1_avc5j"]
 [ext_resource type="Script" path="res://src/dino/enemies/sidescroller_machine/Idle.gd" id="2_08acf"]
 [ext_resource type="Script" path="res://src/dino/enemies/sidescroller_machine/Spawning.gd" id="2_jc773"]
 [ext_resource type="Script" path="res://src/dino/enemies/sidescroller_machine/Dead.gd" id="3_d45r6"]

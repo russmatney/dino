@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://brgh77xahcugw"]
 
-[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="1_38glr"]
+[ext_resource type="PackedScene" path="res://src/core/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="1_38glr"]
 [ext_resource type="Script" path="res://src/games/superElevatorLevel/levels/GroundFloor.gd" id="1_ajnk1"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/games/superElevatorLevel/enemies/Goon.tscn" id="2_jnvos"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="3_17tte"]
 [ext_resource type="Texture2D" uid="uid://cx4vaf38c4f4v" path="res://src/games/superElevatorLevel/assets/SEL_GroundFloor_background_sheet.png" id="3_prgxi"]
 [ext_resource type="PackedScene" uid="uid://bn6lhbid1dt8i" path="res://src/dino/entities/SpawnPoint.tscn" id="6_1ohb7"]
-[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://addons/core/assets/lights/light64px8.png" id="8_o0jmn"]
+[ext_resource type="Texture2D" uid="uid://dnm5e8ic33scj" path="res://src/core/assets/lights/light64px8.png" id="8_o0jmn"]
 
 [node name="GroundFloor" type="Node2D"]
 script = ExtResource("1_ajnk1")

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_xvvj7"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_8wjab"]
-[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/core/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_nn6o5"]
-[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/core/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="4_1illh"]
+[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://addons/bones/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_nn6o5"]
+[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://addons/bones/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="4_1illh"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/dino/enemies/blobs/BlobWalker.tscn" id="5_nibe2"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/dino/enemies/blobs/BlobChaser.tscn" id="6_hiy3b"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="7_4qf30"]

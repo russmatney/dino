@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddklv6bc7o134"]
 
-[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://addons/core/assets/lights/light1_nobg_sheet.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bpauup22464bb" path="res://src/core/assets/lights/light1_nobg_sheet.png" id="1"]
 
 [sub_resource type="CircleShape2D" id="1"]
 

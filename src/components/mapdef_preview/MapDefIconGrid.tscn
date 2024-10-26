@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/components/mapdef_preview/MapDefIconGrid.gd" id="1_gcobw"]
 [ext_resource type="Resource" uid="uid://1kqvgyd2awj0" path="res://src/dino/modes/classic/mapdefs/ClassicSideScroller.tres" id="2_a8xbu"]
-[ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://addons/core/assets/icons/dino_sheet.png" id="3_25mbg"]
+[ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://src/core/assets/icons/dino_sheet.png" id="3_25mbg"]
 
 [node name="MapDefIconGrid" type="GridContainer"]
 anchors_preset = 15

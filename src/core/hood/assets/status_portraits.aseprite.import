@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bmvaeixvewosv"
+path="res://.godot/imported/status_portraits.aseprite-e16d70146ac447978b83936686c0b5e8.res"
+
+[deps]
+
+source_file="res://src/core/hood/assets/status_portraits.aseprite"
+dest_files=["res://.godot/imported/status_portraits.aseprite-e16d70146ac447978b83936686c0b5e8.res"]
+
+[params]
+
