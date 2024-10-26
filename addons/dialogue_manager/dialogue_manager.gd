@@ -60,16 +60,16 @@ var translation_source: TranslationSource = TranslationSource.Guess
 
 ## Used to resolve the current scene. Override if your game manages the current scene itself.
 var get_current_scene: Callable = func():
-	var current_scene: Node = get_tree().current_scene
+	var current_scene: Node = Engine.get_main_loop().current_scene
 	if current_scene == null:
-		current_scene = get_tree().root.get_child(get_tree().root.get_child_count() - 1)
+		current_scene = Engine.get_main_loop().root.get_child(Engine.get_main_loop().root.get_child_count() - 1)
 	return current_scene
 
 var _has_loaded_autoloads: bool = false
 var _autoloads: Dictionary = {}
 
-
 var _node_properties: Array = []
+var _method_info_cache: Dictionary = {}
 
 
 func _ready() -> void:
@@ -86,7 +86,7 @@ func _ready() -> void:
 	Engine.register_singleton("DialogueManager", self)
 
 	# Connect up the C# signals if need be
-	if DialogueSettings.has_dotnet_solution():
+	if DialogueSettings.check_for_dotnet_solution():
 		_get_dotnet_dialogue_manager().Prepare()
 
 
@@ -100,7 +100,7 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 
 	# Inject any "using" states into the game_states
 	for state_name in resource.using_states:
-		var autoload = get_tree().root.get_node_or_null(state_name)
+		var autoload = Engine.get_main_loop().root.get_node_or_null(state_name)
 		if autoload == null:
 			printerr(DialogueConstants.translate(&"runtime.unknown_autoload").format({ autoload = state_name }))
 		else:
@@ -309,9 +309,13 @@ func _get_dotnet_dialogue_manager() -> Node:
 	return load(get_script().resource_path.get_base_dir() + "/DialogueManager.cs").new()
 
 
+func _bridge_get_new_instance() -> Node:
+	return new()
+
+
 func _bridge_get_next_dialogue_line(resource: DialogueResource, key: String, extra_game_states: Array = []) -> void:
 	# dotnet needs at least one await tick of the signal gets called too quickly
-	await get_tree().process_frame
+	await Engine.get_main_loop().process_frame
 
 	var line = await get_next_dialogue_line(resource, key, extra_game_states)
 	bridge_get_next_dialogue_line_completed.emit(line)
@@ -367,9 +371,11 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 
 	# Check for weighted random lines
 	if data.has(&"siblings"):
-		var target_weight: float = randf_range(0, data.siblings.reduce(func(total, sibling): return total + sibling.weight, 0))
+		# Only count siblings that pass their condition (if they have one)
+		var successful_siblings: Array = data.siblings.filter(func(sibling): return not sibling.has("condition") or await check_condition(sibling, extra_game_states))
+		var target_weight: float = randf_range(0, successful_siblings.reduce(func(total, sibling): return total + sibling.weight, 0))
 		var cummulative_weight: float = 0
-		for sibling in data.siblings:
+		for sibling in successful_siblings:
 			if target_weight < cummulative_weight + sibling.weight:
 				data = resource.lines.get(sibling.id)
 				break
@@ -386,7 +392,7 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 
 	# Evaluate jumps
 	elif data.type == DialogueConstants.TYPE_GOTO:
-		if data.is_snippet:
+		if data.is_snippet and not id_trail.begins_with("|" + data.next_id_after):
 			id_trail = "|" + data.next_id_after + id_trail
 		return await get_line(resource, data.next_id + id_trail, extra_game_states)
 
@@ -414,6 +420,10 @@ func get_line(resource: DialogueResource, key: String, extra_game_states: Array)
 		# If the response line is marked as a title then make sure to emit the passed_title signal.
 		if line.next_id in resource.titles.values():
 			passed_title.emit(resource.titles.find_key(line.next_id))
+
+		# If the responses come from a snippet then we need to come back here afterwards
+		if next_line.type == DialogueConstants.TYPE_GOTO and next_line.is_snippet and not id_trail.begins_with("|" + next_line.next_id_after):
+			id_trail = "|" + next_line.next_id_after + id_trail
 
 		# If the next line is a title then check where it points to see if that is a set of responses.
 		if next_line.type == DialogueConstants.TYPE_GOTO and resource.lines.has(next_line.next_id):
@@ -535,17 +545,17 @@ func get_game_states(extra_game_states: Array) -> Array:
 	if not _has_loaded_autoloads:
 		_has_loaded_autoloads = true
 		# Add any autoloads to a generic state so we can refer to them by name
-		for child in get_tree().root.get_children():
+		for child in Engine.get_main_loop().root.get_children():
 			# Ignore the dialogue manager
 			if child.name == &"DialogueManager": continue
 			# Ignore the current main scene
-			if get_tree().current_scene and child.name == get_tree().current_scene.name: continue
+			if Engine.get_main_loop().current_scene and child.name == Engine.get_main_loop().current_scene.name: continue
 			# Add the node to our known autoloads
 			_autoloads[child.name] = child
 		game_states = [_autoloads]
 		# Add any other state shortcuts from settings
 		for node_name in DialogueSettings.get_setting(&"states", []):
-			var state: Node = get_node_or_null("/root/" + node_name)
+			var state: Node = Engine.get_main_loop().root.get_node_or_null(node_name)
 			if state:
 				game_states.append(state)
 
@@ -560,7 +570,7 @@ func get_game_states(extra_game_states: Array) -> Array:
 # Check if a condition is met
 func check_condition(data: Dictionary, extra_game_states: Array) -> bool:
 	if data.get(&"condition", null) == null: return true
-	if data.condition.size() == 0: return true
+	if data.condition.is_empty(): return true
 
 	return await resolve(data.condition.expression.duplicate(true), extra_game_states)
 
@@ -575,12 +585,12 @@ func mutate(mutation: Dictionary, extra_game_states: Array, is_inline_mutation: 
 		match expression[0].function:
 			&"wait":
 				mutated.emit(mutation)
-				await get_tree().create_timer(float(args[0])).timeout
+				await Engine.get_main_loop().create_timer(float(args[0])).timeout
 				return
 
 			&"debug":
 				prints("Debug:", args)
-				await get_tree().process_frame
+				await Engine.get_main_loop().process_frame
 
 	# Or pass through to the resolver
 	else:
@@ -594,7 +604,7 @@ func mutate(mutation: Dictionary, extra_game_states: Array, is_inline_mutation: 
 			resolve(mutation.expression.duplicate(true), extra_game_states)
 
 	# Wait one frame to give the dialogue handler a chance to yield
-	await get_tree().process_frame
+	await Engine.get_main_loop().process_frame
 
 
 func mutation_contains_assignment(mutation: Array) -> bool:
@@ -660,7 +670,7 @@ func get_state_value(property: String, extra_game_states: Array):
 			if class_data.get(&"class") == property:
 				return load(class_data.path).new()
 
-	show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.property_not_found").format({ property = property, states = str(get_game_states(extra_game_states)) }))
+	show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.property_not_found").format({ property = property, states = _get_state_shortcut_names(extra_game_states) }))
 
 
 # Set a value on the current scene or game state
@@ -675,9 +685,16 @@ func set_state_value(property: String, value, extra_game_states: Array) -> void:
 			return
 
 	if property.to_snake_case() != property:
-		show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.property_not_found_missing_export").format({ property = property, states = str(get_game_states(extra_game_states)) }))
+		show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.property_not_found_missing_export").format({ property = property, states = _get_state_shortcut_names(extra_game_states) }))
 	else:
-		show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.property_not_found").format({ property = property, states = str(get_game_states(extra_game_states)) }))
+		show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.property_not_found").format({ property = property, states = _get_state_shortcut_names(extra_game_states) }))
+
+
+# Get the list of state shortcut names
+func _get_state_shortcut_names(extra_game_states: Array) -> String:
+	var states = get_game_states(extra_game_states)
+	states.erase(_autoloads)
+	return ", ".join(states.map(func(s): return "\"%s\"" % (s.name if "name" in s else s)))
 
 
 # Collapse any expressions
@@ -793,7 +810,7 @@ func resolve(tokens: Array, extra_game_states: Array):
 
 				show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.method_not_found").format({
 					method = args[0] if function_name in ["call", "call_deferred"] else function_name,
-					states = str(get_game_states(extra_game_states))
+					states = _get_state_shortcut_names(extra_game_states)
 				}), not found)
 
 		elif token.type == DialogueConstants.TOKEN_DICTIONARY_REFERENCE:
@@ -1157,7 +1174,7 @@ func thing_has_method(thing, method: String, args: Array) -> bool:
 	if thing.has_method(method):
 		return true
 
-	if method.to_snake_case() != method and DialogueSettings.has_dotnet_solution():
+	if method.to_snake_case() != method and DialogueSettings.check_for_dotnet_solution():
 		# If we get this far then the method might be a C# method with a Task return type
 		return _get_dotnet_dialogue_manager().ThingHasMethod(thing, method)
 
@@ -1207,7 +1224,19 @@ func resolve_signal(args: Array, extra_game_states: Array):
 			return
 
 	# The signal hasn't been found anywhere
-	show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.signal_not_found").format({ signal_name = args[0], states = str(get_game_states(extra_game_states)) }))
+	show_error_for_missing_state_value(DialogueConstants.translate(&"runtime.signal_not_found").format({ signal_name = args[0], states = _get_state_shortcut_names(extra_game_states) }))
+
+
+func get_method_info_for(thing, method: String) -> Dictionary:
+	# Use the thing instance id as a key for the caching dictionary.
+	var thing_instance_id: int = thing.get_instance_id()
+	if not _method_info_cache.has(thing_instance_id):
+		var methods: Dictionary = {}
+		for m in thing.get_method_list():
+			methods[m.name] = m
+		_method_info_cache[thing_instance_id] = methods
+
+	return _method_info_cache.get(thing_instance_id, {}).get(method)
 
 
 func resolve_thing_method(thing, method: String, args: Array):
@@ -1218,11 +1247,11 @@ func resolve_thing_method(thing, method: String, args: Array):
 
 	if thing.has_method(method):
 		# Try to convert any literals to the right type
-		var method_info: Dictionary = thing.get_method_list().filter(func(m): return method == m.name)[0]
+		var method_info: Dictionary = get_method_info_for(thing, method)
 		var method_args: Array = method_info.args
 		if method_info.flags & METHOD_FLAG_VARARG == 0 and method_args.size() < args.size():
 			assert(false, DialogueConstants.translate(&"runtime.expected_n_got_n_args").format({ expected = method_args.size(), method = method, received = args.size()}))
-		for i in range(0, args.size()):
+		for i in range(0, min(method_args.size(), args.size())):
 			var m: Dictionary = method_args[i]
 			var to_type:int = typeof(args[i])
 			if m.type == TYPE_ARRAY:

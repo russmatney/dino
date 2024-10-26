@@ -78,12 +78,17 @@ namespace DialogueManagerRuntime
         }
 
 
+        public static void Prepare(GodotObject instance)
+        {
+            instance.Connect("passed_title", Callable.From((string title) => PassedTitle?.Invoke(title)));
+            instance.Connect("got_dialogue", Callable.From((RefCounted line) => GotDialogue?.Invoke(new DialogueLine(line))));
+            instance.Connect("mutated", Callable.From((Dictionary mutation) => Mutated?.Invoke(mutation)));
+            instance.Connect("dialogue_ended", Callable.From((Resource dialogueResource) => DialogueEnded?.Invoke(dialogueResource)));
+        }
+
         public void Prepare()
         {
-            Instance.Connect("passed_title", Callable.From((string title) => PassedTitle?.Invoke(title)));
-            Instance.Connect("got_dialogue", Callable.From((RefCounted line) => GotDialogue?.Invoke(new DialogueLine(line))));
-            Instance.Connect("mutated", Callable.From((Dictionary mutation) => Mutated?.Invoke(mutation)));
-            Instance.Connect("dialogue_ended", Callable.From((Resource dialogueResource) => DialogueEnded?.Invoke(dialogueResource)));
+            Prepare(Instance);
         }
 
 
@@ -113,8 +118,11 @@ namespace DialogueManagerRuntime
 
         public static async Task<DialogueLine?> GetNextDialogueLine(Resource dialogueResource, string key = "", Array<Variant>? extraGameStates = null)
         {
-            Instance.Call("_bridge_get_next_dialogue_line", dialogueResource, key, extraGameStates ?? new Array<Variant>());
-            var result = await Instance.ToSignal(Instance, "bridge_get_next_dialogue_line_completed");
+            var instance = (Node)Instance.Call("_bridge_get_new_instance");
+            Prepare(instance);
+            instance.Call("_bridge_get_next_dialogue_line", dialogueResource, key, extraGameStates ?? new Array<Variant>());
+            var result = await instance.ToSignal(instance, "bridge_get_next_dialogue_line_completed");
+            instance.QueueFree();
 
             if ((RefCounted)result[0] == null) return null;
 
@@ -176,9 +184,18 @@ namespace DialogueManagerRuntime
             object[] _args = new object[argTypes.Length];
             for (int i = 0; i < argTypes.Length; i++)
             {
+                // check if args is assignable from derived type
                 if (i < args.Count && args[i].Obj != null)
                 {
-                    _args[i] = Convert.ChangeType(args[i].Obj, argTypes[i].ParameterType);
+                    if (argTypes[i].ParameterType.IsAssignableFrom(args[i].Obj.GetType()))
+                    {
+                        _args[i] = args[i].Obj;
+                    }
+                    // fallback to assigning primitive types
+                    else
+                    {
+                        _args[i] = Convert.ChangeType(args[i].Obj, argTypes[i].ParameterType);
+                    }
                 }
                 else if (argTypes[i].DefaultValue != null)
                 {
@@ -189,15 +206,28 @@ namespace DialogueManagerRuntime
             // Add a single frame wait in case the method returns before signals can listen
             await ToSignal(Engine.GetMainLoop(), SceneTree.SignalName.ProcessFrame);
 
-            if (info.ReturnType == typeof(Task))
+            // invoke method and handle the result based on return type
+            object result = info.Invoke(thing, _args);
+
+            if (result is Task taskResult)
             {
-                await (Task)info.Invoke(thing, _args);
-                EmitSignal(SignalName.Resolved, null);
+                // await Tasks and handle result if it is a Task<T>
+                await taskResult;
+                var taskType = taskResult.GetType();
+                if (taskType.IsGenericType && taskType.GetGenericTypeDefinition() == typeof(Task<>))
+                {
+                    var resultProperty = taskType.GetProperty("Result");
+                    var taskResultValue = resultProperty.GetValue(taskResult);
+                    EmitSignal(SignalName.Resolved, (Variant)taskResultValue);
+                }
+                else
+                {
+                    EmitSignal(SignalName.Resolved, null);
+                }
             }
             else
             {
-                var value = (Variant)info.Invoke(thing, _args);
-                EmitSignal(SignalName.Resolved, value);
+                EmitSignal(SignalName.Resolved, (Variant)result);
             }
         }
 #nullable enable
@@ -206,6 +236,13 @@ namespace DialogueManagerRuntime
 
     public partial class DialogueLine : RefCounted
     {
+        private string id = "";
+        public string Id
+        {
+            get => id;
+            set => id = value;
+        }
+
         private string type = "dialogue";
         public string Type
         {
@@ -272,6 +309,10 @@ namespace DialogueManagerRuntime
         }
 
         private Array<Variant> extra_game_states = new Array<Variant>();
+        public Array<Variant> ExtraGameStates
+        {
+            get => extra_game_states;
+        }
 
         private Array<string> tags = new Array<string>();
         public Array<string> Tags
