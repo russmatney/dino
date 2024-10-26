@@ -646,14 +646,13 @@ static func find_level_root(node):
 
 ## focus ######################################################
 
-static func has_focus(node: Node) -> bool:
+static func has_focus(node: Node, include_children=false) -> bool:
 	if node.has_focus():
 		return true
-	# else:
-		# for ch in node.get_children():
-			# TODO is this static-self-reference allowed?
-			# if U.has_focus(ch):
-			# 	return true
+	elif include_children:
+		for ch in node.get_children():
+			if U.has_focus(ch, include_children):
+				return true
 	return false
 
 static func get_focusable_children(container: Node) -> Array[Node]:

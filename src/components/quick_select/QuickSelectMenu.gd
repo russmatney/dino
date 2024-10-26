@@ -85,7 +85,7 @@ func set_entities(ents, on_select=null):
 
 func select_current():
 	for ch in entityList.get_children():
-		if U.has_focus(ch):
+		if U.has_focus(ch, true):
 			ch.selected.emit()
 			selected.emit(ch.entity)
 			break
