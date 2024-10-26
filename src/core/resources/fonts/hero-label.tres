@@ -1,8 +1,12 @@
-[gd_resource type="FontFile" load_steps=2 format=2]
+[gd_resource type="FontFile" load_steps=2 format=3 uid="uid://cpxf4da75p5rw"]
 
-[ext_resource path="res://src/core/assets/fonts/Born2bSportyV2.ttf" type="FontFile" id=1]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/assets/fonts/Born2bSportyV2.ttf" id="1"]
 
 [resource]
 resource_local_to_scene = true
-outline_color = Color( 0.356863, 0.462745, 0.552941, 1 )
-font_data = ExtResource( 1 )
+fallbacks = Array[Font]([ExtResource("1")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0

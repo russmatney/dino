@@ -10,7 +10,7 @@ extends PanelContainer
 
 @onready var edit_button = $%EditButton
 
-var input_icon_scene = preload("res://src/dino/menus/controls/ActionInputIcon.tscn")
+var input_icon_scene = preload("res://addons/bones/actions/ActionInputIcon.tscn")
 
 var waiting_for_new_input = false
 var current_key_input

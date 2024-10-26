@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_rtnq5"]
 [ext_resource type="Texture2D" uid="uid://dp75inigix2ir" path="res://src/dino/players/hoodie/assets/soft-soft-hoodie.png" id="2_lk0m8"]
-[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="3_kyfqk"]
+[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="3_kyfqk"]
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDPlayerMachine.tscn" id="4_w1btx"]
 [ext_resource type="PackedScene" path="res://src/core/actions/ActionHint.tscn" id="6_osgfx"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionDetector.tscn" id="7_635ul"]

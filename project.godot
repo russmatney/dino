@@ -61,6 +61,7 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 
 folder_colors={
 "res://addons/bones/": "gray",
+"res://assets/": "yellow",
 "res://src/core/": "purple",
 "res://src/dino/": "purple",
 "res://src/dino/bosses/": "pink",

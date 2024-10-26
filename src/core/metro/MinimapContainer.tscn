@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bjehx2kuswamk" path="res://src/core/metro/Minimap.tscn" id="1_2064o"]
 [ext_resource type="Script" path="res://src/core/metro/MinimapContainer.gd" id="1_m8wbs"]
-[ext_resource type="FontFile" path="res://src/core/assets/fonts/Born2bSportyV2.ttf" id="3_b0m45"]
+[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/Born2bSportyV2.ttf" id="3_b0m45"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]
 content_margin_left = 8.0

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://cltnpaiuof1wc"]
 
-[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://src/core/assets/fonts/Born2bSportyV2.ttf" id="1_jw0uw"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/assets/fonts/Born2bSportyV2.ttf" id="1_jw0uw"]
 
 [resource]
 Button/font_sizes/font_size = 32

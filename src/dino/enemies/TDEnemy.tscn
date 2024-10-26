@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/enemies/TDEnemy.gd" id="1_fnrrd"]
 [ext_resource type="Texture2D" uid="uid://bp67j6fal2a4c" path="res://src/dino/players/topdown_player_64.png" id="2_j6yyi"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://src/core/assets/fonts/at01.ttf" id="3_lhred"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/assets/fonts/at01.ttf" id="3_lhred"]
 [ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/dino/entities/pit/PitDetector.tscn" id="5_20sy6"]
 [ext_resource type="PackedScene" uid="uid://cam7j4kwh0thl" path="res://src/dino/enemies/topdown_machine/TDEnemyMachine.tscn" id="5_g15i3"]
 

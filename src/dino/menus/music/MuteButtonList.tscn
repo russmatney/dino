@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpxj4aeuv006l"]
 
 [ext_resource type="Script" path="res://src/dino/menus/music/MuteButtonList.gd" id="1_hivsh"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://src/core/assets/fonts/at01.ttf" id="3_xcll7"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/assets/fonts/at01.ttf" id="3_xcll7"]
 
 [node name="MuteButtonList" type="VBoxContainer"]
 anchors_preset = 15

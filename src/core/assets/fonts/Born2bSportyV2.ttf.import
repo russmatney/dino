@@ -7,7 +7,7 @@ path="res://.godot/imported/Born2bSportyV2.ttf-fa48b0d4747f564b7c17221c8f7e0511.
 
 [deps]
 
-source_file="res://src/core/assets/fonts/Born2bSportyV2.ttf"
+source_file="res://addons/bones/assets/fonts/Born2bSportyV2.ttf"
 dest_files=["res://.godot/imported/Born2bSportyV2.ttf-fa48b0d4747f564b7c17221c8f7e0511.fontdata"]
 
 [params]

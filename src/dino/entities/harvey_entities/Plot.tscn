@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="6"]
 [ext_resource type="Script" path="res://src/dino/entities/harvey_entities/ReadyForSeed.gd" id="7"]
 [ext_resource type="Script" path="res://src/dino/entities/harvey_entities/NeedsWater.gd" id="8"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://src/core/assets/fonts/at01.ttf" id="10_cm7gh"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/assets/fonts/at01.ttf" id="10_cm7gh"]
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="11_5d4ib"]
 [ext_resource type="Theme" uid="uid://bx2wou2suu4mp" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="11_r1ole"]
 

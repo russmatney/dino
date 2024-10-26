@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0r7m71tr77vo"]
 
 [ext_resource type="Script" path="res://src/dino/menus/pause/DinoPauseMenu.gd" id="1_7pfpx"]
-[ext_resource type="PackedScene" path="res://src/core/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
+[ext_resource type="PackedScene" path="res://addons/bones/navi/ui/HeroLabel.tscn" id="2_v0p6k"]
 [ext_resource type="PackedScene" uid="uid://b2alqa0tl31fo" path="res://src/core/quest/QuestStatus.tscn" id="3_gr3ki"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://src/dino/menus/music/MuteButtonList.tscn" id="5_ai6py"]
 [ext_resource type="PackedScene" uid="uid://bxe4y5m8yhs4m" path="res://src/dino/menus/pause/PauseTabPlayer.tscn" id="7_ipd6p"]

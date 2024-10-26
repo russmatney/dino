@@ -743,7 +743,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -780,7 +780,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -813,7 +813,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -842,7 +842,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1764,7 +1764,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1781,7 +1781,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1798,7 +1798,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1815,7 +1815,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -1832,7 +1832,7 @@
 					},
 					"scene": {
 						"type": "resource",
-						"value": ""
+						"value": "<Object#null>"
 					}
 				}
 			},
@@ -2438,7 +2438,7 @@
 			},
 			{
 				"_category_id": "103",
-				"_default_value": "",
+				"_default_value": "<Object#null>",
 				"_id": "111",
 				"_name": "tiles_scene",
 				"_type": "resource"

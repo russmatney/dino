@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" path="res://addons/bones/actions/ActionDetector.tscn" id="6_3xopt"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="8_bniul"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_1u187"]
-[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="10_km5b0"]
+[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="10_km5b0"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_nwiqx"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fow7p"]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/players/DinoBEUPlayer.gd" id="1_0dve2"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://src/core/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ft16v"]
 [ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://src/core/beehive/beatemup/BEU_character_shadow_sheet.png" id="3_7xqxs"]
-[ext_resource type="FontFile" path="res://src/core/assets/fonts/at01.ttf" id="4_h6hag"]
+[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="4_h6hag"]
 [ext_resource type="Texture2D" uid="uid://c6bty12dyxoky" path="res://src/dino/players/hatbot/assets/greyhat.png" id="5_t3s23"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w7hw3"]

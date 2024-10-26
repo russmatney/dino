@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbyoe1xrjh0pf"]
 
 [ext_resource type="Script" path="res://src/core/hotel/ui/EntryDetail.gd" id="1_debfm"]
-[ext_resource type="FontFile" path="res://src/core/assets/fonts/Born2bSportyV2.ttf" id="2_fomfn"]
+[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/Born2bSportyV2.ttf" id="2_fomfn"]
 
 [node name="EntryDetail" type="VBoxContainer"]
 anchors_preset = 15
