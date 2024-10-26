@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfbykrvyqnqr5"]
+[gd_scene load_steps=14 format=3 uid="uid://dfbykrvyqnqr5"]
 
 [ext_resource type="Script" path="res://addons/MetroidvaniaSystem/Database/MapEditor.gd" id="1_i7yda"]
+[ext_resource type="PackedScene" uid="uid://w34y4dyx84y8" path="res://addons/MetroidvaniaSystem/Nodes/LayerSelector.tscn" id="2_rinoa"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_pv7fp"]
 
@@ -13,6 +14,13 @@ var erase_mode: bool
 
 var dragging_room_from: Vector2i
 var dragging_room: Array[Vector3i]
+var dragging_drawer: Node2D
+
+func _ready() -> void:
+	super()
+	
+	dragging_drawer = Node2D.new()
+	editor.add_child.call_deferred(dragging_drawer)
 
 func _editor_init() -> void:
 	room_only_cursor = false
@@ -43,8 +51,7 @@ func _editor_input(event: InputEvent):
 					if under:
 						dragging_room = MetSys.map_data.get_whole_room(get_coords(get_cursor_pos()))
 						dragging_room_from = get_cursor_pos()
-						editor.skip_cells = dragging_room
-						redraw_map()
+						set_dragging_room_visible(false)
 						redraw_overlay()
 				else:
 					drag_from = get_cursor_pos()
@@ -54,23 +61,28 @@ func _editor_input(event: InputEvent):
 					update_rooms(rect)
 					drag_from = Vector2i.MAX
 				elif not dragging_room.is_empty():
-					var drop_valid := true
-					for coords in dragging_room:
-						var offset := get_cell_dragging_offset(coords)
-						var offset3 := get_coords(offset)
-						
-						if not offset3 in dragging_room and MetSys.map_data.get_cell_at(offset3):
-							drop_valid = false
+					var drop_valid := get_cursor_pos() != dragging_room_from
+					if drop_valid:
+						for coords in dragging_room:
+							var offset := get_cell_dragging_offset(coords)
+							var offset3 := get_coords(offset)
+							
+							if not offset3 in dragging_room and MetSys.map_data.get_cell_at(offset3):
+								drop_valid = false
 					
 					if drop_valid:
 						for old_coords in dragging_room:
 							var new_coords := get_coords(get_cell_dragging_offset(old_coords))
 							MetSys.map_data.transfer_cell(old_coords, new_coords)
+							editor.current_map_view.update_cell(new_coords)
 							undo_handle_transfer(old_coords, new_coords)
 					
+					for coords in dragging_room:
+						editor.current_map_view.update_cell(coords)
+					
+					set_dragging_room_visible(true)
 					dragging_room.clear()
 					undo_end_with_redraw()
-					redraw_map()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				drag_from = get_cursor_pos()
@@ -103,8 +115,8 @@ func _editor_draw(map_overlay: CanvasItem):
 func update_rooms(rect: Rect2i):
 	var map_data: MetroidvaniaSystem.MapData = MetSys.map_data
 	
-	for x in range(rect.position.x, rect.end.x):
-		for y in range(rect.position.y, rect.end.y):
+	for y in range(rect.position.y, rect.end.y):
+		for x in range(rect.position.x, rect.end.x):
 			var coords := Vector3i(x, y, editor.current_layer)
 			
 			var cell = map_data.get_cell_at(coords)
@@ -138,14 +150,15 @@ func update_rooms(rect: Rect2i):
 				
 				undo_handle_cell_spawn(coords, cell)
 	
-	undo_end_with_redraw()
-	redraw_map()
+	editor.current_map_view.update_rect(rect)
+	undo_handle_rect_redraw(rect)
+	undo_end()
 
 func erase_rooms(rect: Rect2i):
 	var map_data: MetroidvaniaSystem.MapData = MetSys.map_data
 	
-	for x in range(rect.position.x, rect.end.x):
-		for y in range(rect.position.y, rect.end.y):
+	for y in range(rect.position.y, rect.end.y):
+		for x in range(rect.position.x, rect.end.x):
 			var coords := Vector3i(x, y, editor.current_layer)
 			var cell_data := map_data.get_cell_at(coords)
 			
@@ -165,8 +178,10 @@ func erase_rooms(rect: Rect2i):
 			
 			map_data.erase_cell(coords)
 	
-	undo_end_with_redraw()
-	redraw_map()
+	rect = rect.grow(1)
+	editor.current_map_view.update_rect(rect)
+	undo_handle_rect_redraw(rect)
+	undo_end()
 
 func remove_assign(coords: Vector3i) -> Array[Vector3i]:
 	var ret: Array[Vector3i]
@@ -199,6 +214,11 @@ func close_border(pos: Vector2i, border: int):
 
 func get_cell_dragging_offset(coords: Vector3i) -> Vector2i:
 	return get_cursor_pos() + Vector2i(coords.x, coords.y) - dragging_room_from
+
+func set_dragging_room_visible(vis: bool):
+	for coords in dragging_room:
+		var cell: MetroidvaniaSystem.CellView = editor.current_map_view._cache[coords]
+		cell.visible = vis
 "
 
 [sub_resource type="GDScript" id="GDScript_tlx5u"]
@@ -601,8 +621,7 @@ func validate_scene():
 		set_error(\"Root node invalid.\")
 		return
 	
-	var path := file_dialog.current_dir.path_join(scene_name_text)
-	if FileAccess.file_exists(path):
+	if FileAccess.file_exists(get_scene_path()):
 		set_error(\"File already exists.\")
 		return
 	
@@ -612,7 +631,7 @@ func set_error(error: String):
 	error_label.text = error
 	ok_button.disabled = not error.is_empty()
 
-func create_scene_confirm() -> void:
+func create_default_scene() -> Node:
 	var root := Node2D.new()
 	if root_name.text.is_empty():
 		root.name = &\"Map\"
@@ -624,23 +643,45 @@ func create_scene_confirm() -> void:
 	
 	add_child(root)
 	instance.owner = root
+	return root
+
+func create_scene_confirm() -> void:
+	var root: Node
+	if not MetSys.settings.scene_template.is_empty():
+		var scene: PackedScene = load(MetSys.settings.scene_template)
+		if scene:
+			root = scene.instantiate()
+			if root:
+				root.scene_file_path = \"\"
+				if not root_name.text.is_empty():
+					root.name = root_name.text
+			else:
+				push_error(\"Failed to instantiate template scene.\")
+		else:
+			push_error(\"Failed to load template scene.\")
+	
+	if not root:
+		root = create_default_scene()
 	
 	var scene := PackedScene.new()
 	scene.pack(root)
 	
-	var scene_nejm := scene_name.text
-	if not scene_nejm.ends_with(\".\"):
-		scene_nejm += \".\"
-	scene_nejm += scene_extension.get_item_text(scene_extension.selected)
-	
-	var scene_path := file_dialog.root_subfolder.path_join(file_dialog.current_dir).path_join(scene_nejm)
+	var scene_path := get_scene_path()
 	ResourceSaver.save(scene, scene_path)
-	
 	root.queue_free()
 	
 	EditorInterface.get_resource_filesystem().scan()
 	EditorInterface.open_scene_from_path(scene_path)
 	on_map_selected(scene_path)
+
+func get_scene_name() -> String:
+	var neym := scene_name.text
+	if not neym.ends_with(\".\"):
+		neym += \".\"
+	return neym + scene_extension.get_item_text(scene_extension.selected)
+
+func get_scene_path() -> String:
+	return file_dialog.root_subfolder.path_join(file_dialog.current_dir).path_join(get_scene_name())
 
 func can_drop_data(at_position: Vector2, data) -> bool:
 	if highlighted_room.is_empty():
@@ -773,7 +814,7 @@ func _editor_input(event: InputEvent):
 					undo_handle_element_remove(coords, MetSys.map_data.custom_elements[coords])
 					MetSys.map_data.custom_elements.erase(coords)
 					undo_end_with_redraw()
-					redraw_map()
+					#redraw_map()
 
 func add_element(rect: Rect2i):
 	var element: Dictionary
@@ -783,7 +824,7 @@ func add_element(rect: Rect2i):
 	
 	var coords := Vector3i(rect.position.x, rect.position.y, editor.current_layer)
 	MetSys.map_data.custom_elements[coords] = element
-	redraw_map()
+	#redraw_map()
 	
 	undo_handle_element_add(coords, element)
 "
@@ -809,7 +850,6 @@ layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Sidebar"]
 layout_mode = 2
-scroll_vertical = 64
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/ScrollContainer"]
@@ -827,21 +867,19 @@ layout_mode = 2
 text = "Current Layer"
 horizontal_alignment = 1
 
-[node name="CurrentLayer" type="SpinBox" parent="Sidebar/ScrollContainer/VBoxContainer/Layer"]
+[node name="CurrentLayer" parent="Sidebar/ScrollContainer/VBoxContainer/Layer" instance=ExtResource("2_rinoa")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="Label2" type="Label" parent="Sidebar/ScrollContainer/VBoxContainer/Layer"]
 layout_mode = 2
 text = "Preview Layer"
 horizontal_alignment = 1
 
-[node name="SpinBox2" type="SpinBox" parent="Sidebar/ScrollContainer/VBoxContainer/Layer"]
+[node name="PreviewLayer" parent="Sidebar/ScrollContainer/VBoxContainer/Layer" instance=ExtResource("2_rinoa")]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-min_value = -1.0
-value = -1.0
+allow_none = true
 
 [node name="RecenterButton" type="Button" parent="Sidebar/ScrollContainer/VBoxContainer/Layer"]
 unique_name_in_owner = true
@@ -1153,16 +1191,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
-[node name="Map" type="Control" parent="MapView"]
+[node name="Map" type="Node2D" parent="MapView"]
 unique_name_in_owner = true
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
 
 [node name="GhostMap" type="Control" parent="MapView"]
 unique_name_in_owner = true
@@ -1196,7 +1226,7 @@ mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxFlat_xiyo8")
 vertical_alignment = 1
 
-[connection signal="value_changed" from="Sidebar/ScrollContainer/VBoxContainer/Layer/SpinBox2" to="." method="preview_layer_changed"]
+[connection signal="value_changed" from="Sidebar/ScrollContainer/VBoxContainer/Layer/PreviewLayer" to="." method="preview_layer_changed"]
 [connection signal="file_selected" from="Sidebar/ScrollContainer/VBoxContainer/Modes/SceneAssign/FileDialog" to="Sidebar/ScrollContainer/VBoxContainer/Modes/SceneAssign" method="on_map_selected"]
 [connection signal="pressed" from="Sidebar/ScrollContainer/VBoxContainer/Modes/SceneAssign/FileDialog/Button" to="Sidebar/ScrollContainer/VBoxContainer/Modes/SceneAssign" method="create_new_scene"]
 [connection signal="confirmed" from="Sidebar/ScrollContainer/VBoxContainer/Modes/SceneAssign/CreateDialog" to="Sidebar/ScrollContainer/VBoxContainer/Modes/SceneAssign" method="create_scene_confirm"]

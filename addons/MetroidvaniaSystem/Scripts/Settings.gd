@@ -18,6 +18,12 @@ extends Resource
 		else:
 			map_root_folder = mrf + "/"
 
+## Size of the map drawn in the editor. Cells beyond this value on any side will not be drawn. Adjust this to your needs, but keep in mind that big values will cause editor slowdowns.
+@export_range(50, 1000) var map_extents: int = 100
+
+## Scene template file used when creating new scenes from editor's Assign Scene mode. If empty, a default scene with RoomInstance will be created.
+@export_file("*.tscn", "*.scn") var scene_template: String
+
 ## The size of a map cell within an in-game room, i.e. this is the real game size of your map cells. Usually equal to the screen size.
 @export var in_game_cell_size := Vector2(1152, 648)
 

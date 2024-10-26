@@ -10,7 +10,7 @@ class CellData:
 	var assigned_scene: String
 	var override_map: String
 	
-	var loading
+	var loading: Variant
 	
 	func _init(line: String) -> void:
 		if line.is_empty():
@@ -279,13 +279,15 @@ var assigned_scenes: Dictionary#[String, Array[Vector3i]]
 var cell_groups: Dictionary#[int, Array[Vector3i]]
 var custom_elements: Dictionary#[Vector3i, Struct]
 
+var layer_names: PackedStringArray
 var cell_overrides: Dictionary#[Vector3i, CellOverride]
 var scene_overrides: Dictionary#[String, String]
 
 var exporting_mode: bool
+signal saved
 
 func load_data():
-	var file := FileAccess.open(MetSys.settings.map_root_folder.path_join("MapData.txt"), FileAccess.READ)
+	var file := FileAccess.open(get_map_data_path(), FileAccess.READ)
 	if not file:
 		push_warning("Map data file does not exist.")
 		return
@@ -296,7 +298,9 @@ func load_data():
 	var current_section := 0 # groups, custom_elements, cells
 	while i < data.size():
 		var line := data[i].strip_edges()
-		if line.begins_with("["):
+		if line.begins_with("$ln"):
+			layer_names = line.split(";").slice(1)
+		elif line.begins_with("["):
 			current_section = 2
 			line = line.trim_prefix("[").trim_suffix("]")
 			
@@ -349,11 +353,30 @@ func load_data():
 		assigned_cells.assign(assigned_scenes[map])
 		assigned_scenes[map] = get_whole_room(assigned_cells[0])
 
-func save_data():
-	var file := FileAccess.open(MetSys.settings.map_root_folder.path_join("MapData.txt"), FileAccess.WRITE)
+func save_data(backup := false):
+	var file_path: String
+	if backup:
+		file_path = MetSys.settings.map_root_folder.path_join("MapData(Copy).txt")
+	else:
+		file_path = get_map_data_path()
+	
+	var file := FileAccess.open(file_path, FileAccess.WRITE)
 	if not file:
-		push_error("Could not open file '%s' for writing." % MetSys.settings.map_root_folder.path_join("MapData.txt"))
+		push_error("Could not open file '%s' for writing." % file_path)
 		return
+	
+	if not layer_names.is_empty():
+		var i := layer_names.size() - 1
+		while i > -1:
+			if not layer_names[i].is_empty():
+				break
+			i -= 1
+		
+		if i > -1:
+			layer_names = layer_names.slice(0, i + 1)
+	
+	if not layer_names.is_empty():
+		file.store_line("$ln;" + ";".join(layer_names))
 	
 	for group in cell_groups:
 		if cell_groups[group].is_empty():
@@ -383,6 +406,9 @@ func save_data():
 		
 		var cell_data := get_cell_at(coords)
 		file.store_line(cell_data.get_string())
+	
+	file.close()
+	saved.emit()
 
 func get_cell_at(coords: Vector3i) -> CellData:
 	return cells.get(coords)
@@ -487,3 +513,6 @@ func get_room_from_scene_path(path: String, safe := true) -> String:
 	if safe:
 		assert(room_name in assigned_scenes)
 	return room_name
+
+func get_map_data_path() -> String:
+	return MetSys.settings.map_root_folder.path_join("MapData.txt")

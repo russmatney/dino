@@ -80,7 +80,7 @@ func _get_minimum_size() -> Vector2:
 	return Vector2(area) * MetSys.CELL_SIZE
 
 func update_drawer_position():
-	var new_position = -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
+	var new_position := -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
 	if new_position != drawer.position:
 		drawer.position = new_position
 
@@ -95,7 +95,9 @@ func _draw_map() -> void:
 	
 	var offset := -draw_area / 2
 	if player_location:
-		player_location.offset = (-Vector2(draw_center + offset) + draw_offset) * MetSys.CELL_SIZE
+		player_location.visible = layer == MetSys.current_layer
+		if player_location.visible:
+			player_location.offset = (-Vector2(draw_center + offset) + draw_offset) * MetSys.CELL_SIZE
 	
 	for y in draw_area.y:
 		for x in draw_area.x:

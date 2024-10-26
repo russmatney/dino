@@ -10,10 +10,13 @@ enum { DISPLAY_CENTER = 1, DISPLAY_OUTLINE = 2, DISPLAY_BORDERS = 4, DISPLAY_SYM
 const MetSysSettings = preload("res://addons/MetroidvaniaSystem/Scripts/Settings.gd")
 const MetSysSaveData = preload("res://addons/MetroidvaniaSystem/Scripts/SaveData.gd")
 const MapData = preload("res://addons/MetroidvaniaSystem/Scripts/MapData.gd")
+const CellView = preload("res://addons/MetroidvaniaSystem/Scripts/CellView.gd")
+const MapView = preload("res://addons/MetroidvaniaSystem/Scripts/MapView.gd")
 const MapBuilder = preload("res://addons/MetroidvaniaSystem/Scripts/MapBuilder.gd")
 const RoomInstance = preload("res://addons/MetroidvaniaSystem/Scripts/RoomInstance.gd")
-const RoomDrawer = preload("res://addons/MetroidvaniaSystem/Scripts/RoomDrawer.gd")
 const CustomElementManager = preload("res://addons/MetroidvaniaSystem/Scripts/CustomElementManager.gd")
+
+const RoomDrawer = preload("res://addons/MetroidvaniaSystem/Scripts/Legacy/RoomDrawer.gd")
 
 enum { R, ## Right border.
 		D, ## Bottom border.
@@ -88,8 +91,12 @@ func _update_theme():
 	CELL_SIZE = settings.theme.center_texture.get_size()
 	map_updated.emit()
 
-func _ready() -> void:
-	set_physics_process(false)
+## Loads map data from the provided map root directory. Can be used to support multiple separate world maps (for custom campaigns etc.). 
+func load_map_data(folder: String):
+	settings.map_root_folder = folder
+	map_data = MapData.new()
+	map_data.load_data()
+	map_updated.emit()
 
 ## Resets the state of MetSys singleton to initial one. This means clearing save data, player position, current room and layer.
 ## [br][br]You should call it every time you start a new game session. This does [i]not[/i] initialize the save data. In fact, it sets it to [code]null[/code], which means that you need to call [method set_save_data] to initialize save data.
@@ -99,6 +106,13 @@ func reset_state():
 	exact_player_position = Vector2()
 	current_room = null
 	current_layer = 0
+
+## Returns index of a layer with the given name. Returns [code]-1[/code] and error if layer name does not exist.
+func get_layer_by_name(layer: String) -> int:
+	var index := map_data.layer_names.find(layer)
+	if index == -1:
+		push_error("Layer \"%s\" does not exist." % layer)
+	return index
 
 ## Returns a [Dictionary] containing the MetSys' runtime data, like discovered cells or stored objects. You need to serialize it yourself, e.g. using [method FileAccess.store_var].
 func get_save_data() -> Dictionary:
@@ -175,7 +189,7 @@ func discover_cell_group(group_id: int):
 
 ## Assigns a custom symbol to the given cell that will override the symbol set in the editor. You can assign any number of symbols and the one with the highest ID will be displayed. [param symbol_id] must be within the symbols defined in [member MapTheme.symbols].
 func add_custom_marker(coords: Vector3i, symbol_id: int):
-	assert(symbol_id >= 0 and symbol_id < mini(MetSys.settings.theme.symbols.size(), 63))
+	assert(symbol_id >= 0 and symbol_id < mini(settings.theme.symbols.size(), 63))
 	save_data.add_custom_marker(coords, symbol_id)
 
 ## Removes a custom symbol assigned in [method add_custom_marker]. Does nothing if the given [param symbol_id] was not assigned to the cell.
@@ -270,7 +284,7 @@ func get_object_coords(object: Object) -> Vector3i:
 ## Translates map coordinates to 2D pixel coordinates. Can be used for custom drawing on the map.
 ## [br][br][param relative] allows to specify precise position inside the cell, with [code](0.5, 0.5)[/code] being the cell's center. [param base_offset] is an additional offset in pixels.
 func get_cell_position(coords: Vector2i, relative := Vector2(0.5, 0.5), base_offset := Vector2()) -> Vector2:
-	return base_offset + (Vector2(coords) + relative) * MetSys.CELL_SIZE
+	return base_offset + (Vector2(coords) + relative) * CELL_SIZE
 
 ## Returns a cell override at position [param coords]. If it doesn't exist, it will be created (unless [param auto_create] is [code]false[/code]). A cell must exist at the given [param coords].
 ## [br][br]Cell overrides allow to modify any cell's data at runtime. They are included with the data returned in [method get_save_data]. Creating an override and doing any modifications with emit [signal map_updated]. The signal emitted with modifications is deferred, i.e. multiple modifications will do only a single emission, at the end of the current frame.
@@ -297,7 +311,7 @@ func get_cell_override_from_group(group_id: int, auto_create := true) -> MapData
 ## Removes an override created with [method get_cell_override], reverting the cell to its original appearance, and emits [signal map_updated] signal. Does nothing if the override didn't exist.
 ## [br][br][b]Note:[/b] If the override was created with MapBuilder, use the [code]destroy()[/code] method instead.
 func remove_cell_override(coords: Vector3i):
-	var cell = MetSys.map_data.get_cell_at(coords)
+	var cell = map_data.get_cell_at(coords)
 	assert(cell, "Can't remove override of non-existent cell")
 	if save_data.remove_cell_override(cell):
 		map_updated.emit()
@@ -306,6 +320,21 @@ func remove_cell_override(coords: Vector3i):
 ## [br][br]Click this method's return value for more info.
 func get_map_builder() -> MapBuilder:
 	return MapBuilder.new()
+
+## TODO doc
+func make_cell_view(parent_item: CanvasItem, coords: Vector3i, offset: Vector2) -> CellView:
+	var cv := CellView.new(parent_item.get_canvas_item())
+	cv._coords = coords
+	cv.offset = offset
+	cv.update()
+	return cv
+
+func make_map_view(parent_item: CanvasItem, begin: Vector2i, size: Vector2i, layer: int) -> MapView:
+	var mv := MapView.new(parent_item.get_canvas_item())
+	mv.begin = begin
+	mv.size = size
+	mv.layer = layer
+	return mv
 
 ## Draws a single map cell. [param canvas_item] is the [CanvasItem] responsible for drawing, [param offset] is the drawing offset in map coordinates. [param coords] is the coordinate of the map cell that's going to be drawn (does not need to exist). If [param skip_empty] is [code]false[/code], [member MapTheme.empty_space_texture] will be drawn in place of empty cells, if available. If [param use_save_data] is [code]true[/code], the discovered rooms data will be used for drawing the map.
 ## [br][br]Example of drawing a 3x3 minimap where center is at [code]current_cell[/code]:
