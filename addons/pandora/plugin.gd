@@ -4,6 +4,7 @@ extends EditorPlugin
 const PandoraEditor := preload("res://addons/pandora/ui/editor/pandora_editor.tscn")
 const PandoraIcon := preload("res://addons/pandora/icons/pandora-icon.svg")
 const PandoraEntityInspector = preload("res://addons/pandora/ui/editor/inspector/entity_instance_inspector.gd")
+const Compression = preload("res://addons/pandora/util/compression.gd")
 
 var editor_view
 var entity_inspector
@@ -49,8 +50,10 @@ func _exit_tree() -> void:
 		editor_view.queue_free()
 		remove_inspector_plugin(entity_inspector)
 
+	Engine.remove_meta("PandoraEditorPlugin")
+
 	remove_export_plugin(_exporter)
-	# remove_autoload_singleton("Pandora")
+	remove_autoload_singleton("Pandora")
 
 
 func _make_visible(visible:bool) -> void:
@@ -73,14 +76,15 @@ class PandoraExportPlugin extends EditorExportPlugin:
 	# Override the _export_begin method to add the data.pandora file during export
 	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int):
 		var pandora_path = "res://data.pandora"
-		var file: FileAccess
-		file = FileAccess.open(pandora_path, FileAccess.READ)
-		# if is_debug:
-		# else:
-		# 	file = FileAccess.open_compressed(pandora_path, FileAccess.READ)
-
-		if file:
-			add_file(pandora_path, file.get_buffer(file.get_length()), false)
+		var file = FileAccess.open(pandora_path, FileAccess.READ)
+		if not file:
+			printerr("Unable to export Pandora data: ",  FileAccess.get_open_error())
+			return
+		var data:PackedByteArray = file.get_buffer(file.get_length())
+		if not is_debug:
+			var text = file.get_as_text()
+			data = Compression.compress(text)
+		add_file(pandora_path, data, false)
 
 	func _get_name() -> String:
 		return "PandoraExporter"
