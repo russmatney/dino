@@ -1,0 +1,58 @@
+[gd_scene load_steps=16 format=3 uid="uid://bfatjgmhlkjne"]
+
+[ext_resource type="Script" path="res://addons/bones/actions/ActionHint.gd" id="1_k2w1x"]
+[ext_resource type="FontFile" uid="uid://d06oxhmw5eq58" path="res://addons/bones/assets/fonts/vexed/Arcade_Cabinet.ttf" id="2_dkr3d"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="3_q3lvy"]
+[ext_resource type="RichTextEffect" uid="uid://cpgmlv5404n2f" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="3_uu0q6"]
+[ext_resource type="FontFile" uid="uid://c6j24vm8je66p" path="res://addons/bones/assets/fonts/vexed/Enter_Input.ttf" id="4_wg2uw"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="4_ynxsy"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Heart.tres" id="5_qh4rj"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/L33T.tres" id="7_ro6ke"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Nervous.tres" id="8_nnbou"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Number.tres" id="9_x3ynq"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="10_np4w0"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="11_ywtte"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="12_wub3w"]
+[ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_rvdlc"]
+[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionInputIcon.tscn" id="15_r6s8h"]
+
+[node name="ActionHint" type="Node2D"]
+z_index = 5
+script = ExtResource("1_k2w1x")
+action_name = null
+
+[node name="Key" type="RichTextLabel" parent="."]
+visible = false
+clip_contents = false
+offset_left = -64.0
+offset_top = -24.0
+offset_right = 64.0
+offset_bottom = -8.0
+theme_override_fonts/normal_font = ExtResource("4_wg2uw")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][jump]"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("3_uu0q6"), ExtResource("4_ynxsy"), ExtResource("5_qh4rj"), ExtResource("3_q3lvy"), ExtResource("7_ro6ke"), ExtResource("8_nnbou"), ExtResource("9_x3ynq"), ExtResource("10_np4w0"), ExtResource("11_ywtte"), ExtResource("12_wub3w"), ExtResource("13_rvdlc")]
+
+[node name="Label" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = -128.0
+offset_top = -16.0
+offset_right = 128.0
+offset_bottom = 12.0
+theme_override_fonts/normal_font = ExtResource("2_dkr3d")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][jump]"
+fit_content = true
+scroll_active = false
+custom_effects = [ExtResource("3_uu0q6"), ExtResource("4_ynxsy"), ExtResource("5_qh4rj"), ExtResource("3_q3lvy"), ExtResource("7_ro6ke"), ExtResource("8_nnbou"), ExtResource("9_x3ynq"), ExtResource("10_np4w0"), ExtResource("11_ywtte"), ExtResource("12_wub3w"), ExtResource("13_rvdlc")]
+
+[node name="ActionInputIcon" parent="." instance=ExtResource("15_r6s8h")]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 48.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)

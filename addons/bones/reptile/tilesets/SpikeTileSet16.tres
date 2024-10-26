@@ -1,0 +1,27 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b26hle7mfcqta"]
+
+[ext_resource type="Texture2D" uid="uid://dqetpk7xjplag" path="res://src/dino/entities/spikes/spike_tiles_16_sheet.png" id="1_2e52e"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iu8ne"]
+texture = ExtResource("1_2e52e")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0.5, 5.5, 4.5, -5, 8, 4.5, 8, 8, -8, 8, -8, 6.5, -3.5, -5)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 4.65495, 5.81311, 0.378632, -6.30311, -3.63041, 5.54584)
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, 8, 5.14494, 3.58587, -5.99129, -1.04681, 5.67948, -4.6104)
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -5.14494, 3.58587, 5.99129, -1.04681, -5.67948, -4.6104)
+
+[resource]
+physics_layer_0/collision_layer = 2049
+physics_layer_0/collision_mask = 542
+sources/0 = SubResource("TileSetAtlasSource_iu8ne")
