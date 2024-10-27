@@ -5,7 +5,6 @@ extends Node
 
 var first_scene
 var current_scene
-var last_scene_stack = []
 
 ## ready ###################################################################
 
@@ -69,9 +68,6 @@ func find_focus(scene=null):
 # Supports a path, packed_scene, or instance of a scene
 func nav_to(scene, opts={}):
 	Log.info("nav_to: ", scene, opts)
-	# NOTE this scene stack grows forever!
-	# ...........is this a problem?
-	last_scene_stack.push_back(scene)
 	hide_menus()
 	_deferred_goto_scene.call_deferred(scene, opts)
 	# ensure unpaused
@@ -103,7 +99,8 @@ func _deferred_goto_scene(scene, opts={}):
 		next_scene.ready.connect(func():
 			opts.on_ready.call(next_scene))
 
-	if opts.get("await_clear"):
+	# default to waiting for the current_scene to be freed
+	if not opts.get("skip_await"):
 		if get_tree().current_scene:
 			await get_tree().current_scene.tree_exited
 

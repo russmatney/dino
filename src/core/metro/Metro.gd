@@ -24,7 +24,6 @@ func load_zone(zone_scene_or_path, spawn_node_path=null):
 
 	Log.pr("loading zone", current_zone)
 	Navi.nav_to(current_zone, {
-		await_clear=true,
 		on_ready=func(n): Dino.spawn_player({level_node=n})
 		})
 
