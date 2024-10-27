@@ -16,6 +16,9 @@ func get_def_path() -> String:
 func get_level_gen_script() -> Script:
 	return get_resource("level_gen_script")
 
+func should_regen_level() -> bool:
+	return get_level_gen_script() != null
+
 func get_tiles_scene() -> PackedScene:
 	return get_resource("tiles_scene")
 
@@ -39,3 +42,6 @@ func data():
 
 static func all_defs():
 	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.LEVELDEF))
+
+static func random_def():
+	return U.rand_of(LevelDef.all_defs())

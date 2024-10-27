@@ -19,6 +19,17 @@ func get_topdown_scene() -> PackedScene:
 func get_beatemup_scene() -> PackedScene:
 	return get_resource("beatemup_scene")
 
+func supports_genre(genre: DinoData.GenreType) -> bool:
+	match genre:
+		DinoData.GenreType.SideScroller:
+			return get_sidescroller_scene() != null
+		DinoData.GenreType.TopDown:
+			return get_topdown_scene() != null
+		DinoData.GenreType.BeatEmUp:
+			return get_beatemup_scene() != null
+	return false
+
+
 func is_disabled() -> bool:
 	return get_bool("is_disabled")
 
@@ -39,6 +50,15 @@ func data():
 static func all_entities():
 	return Pandora.get_all_entities(Pandora.get_category(PandoraCategories.DINOPLAYER)).\
 		filter(func(ent): return not ent.is_disabled())
+
+static func get_random(opts: Dictionary={}):
+	var entities = DinoPlayerEntity.all_entities()
+
+	if opts.get("genre"):
+		entities.filter(func(ent):
+			return ent.supports_genre(opts.get("genre")))
+
+	return U.rand_of(entities)
 
 ## instance #################################################
 
