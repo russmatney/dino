@@ -1,26 +1,58 @@
-[gd_scene load_steps=16 format=3 uid="uid://badft3bar0jhr"]
+[gd_scene load_steps=24 format=3 uid="uid://badft3bar0jhr"]
 
 [ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_lh6bi"]
+[ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="2_0rd3d"]
 [ext_resource type="Shader" path="res://src/shaders/BgBlur.gdshader" id="2_swsow"]
 [ext_resource type="Texture2D" uid="uid://q2pnjmesx2xc" path="res://src/backgrounds/background_city_sheet.png" id="3_n5fna"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_yg8vm"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="4_78afd"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="4_h5aoq"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="5_70q41"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/bones/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="5_70q41"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="6_jvgol"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="7_31llo"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="7_31llo"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn" id="8_a4rxl"]
 [ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/pickups/powerups/SSPowerup.tscn" id="9_aod2w"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/GildedKingdomTiles8.tscn" id="10_8x20u"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://addons/bones/reptile/tilemaps/GildedKingdomTiles8.tscn" id="10_8x20u"]
+[ext_resource type="Script" path="res://src/core/metro/MetroTravelPointEntity.gd" id="10_phqqv"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="11_bcrjp"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/SpaceshipTiles8.tscn" id="12_elrvm"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/VolcanoTiles8.tscn" id="13_cfneh"]
+[ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://addons/bones/reptile/tilemaps/SpaceshipTiles8.tscn" id="12_elrvm"]
+[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/bones/reptile/tilemaps/VolcanoTiles8.tscn" id="13_cfneh"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="14_o6185"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bonx2"]
 shader = ExtResource("2_swsow")
 shader_parameter/radius = 64.0
 
+[sub_resource type="Resource" id="Resource_7leli"]
+script = ExtResource("10_phqqv")
+_id = "213"
+
+[sub_resource type="Resource" id="Resource_dmsi6"]
+script = ExtResource("10_phqqv")
+_id = "222"
+
+[sub_resource type="Resource" id="Resource_jlivu"]
+script = ExtResource("10_phqqv")
+_id = "220"
+
+[sub_resource type="Resource" id="Resource_uxinh"]
+script = ExtResource("10_phqqv")
+_id = "224"
+
 [node name="TheLandingSite" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_lh6bi")
+
+[node name="PlayerSpawner" type="Node" parent="."]
+script = ExtResource("2_0rd3d")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_yg8vm")
+
+[node name="DinoHUD" parent="." instance=ExtResource("4_78afd")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_limit_begin = Vector2(-768, -600)
@@ -55,6 +87,7 @@ layer_0/tile_data = PackedInt32Array(983047, 196609, 4, 917511, 196609, 3, 85197
 
 [node name="ToZero" parent="FromZero" instance=ExtResource("6_jvgol")]
 position = Vector2(0, 16)
+destination_travel_point = SubResource("Resource_7leli")
 
 [node name="Arrival" type="Node2D" parent="." groups=["metro_rooms"]]
 script = ExtResource("4_h5aoq")
@@ -117,6 +150,7 @@ layer_0/tile_data = PackedInt32Array(196623, 196609, 3, 131087, 196609, 3, 65551
 
 [node name="ToKingdomBack" parent="SubLandingElevator" instance=ExtResource("6_jvgol")]
 position = Vector2(-16, 0)
+destination_travel_point = SubResource("Resource_dmsi6")
 
 [node name="GildedKingdomTiles8" parent="SubLandingElevator" instance=ExtResource("10_8x20u")]
 layer_0/tile_data = PackedInt32Array(196609, 196609, 4, 131073, 196609, 2, 196608, 131073, 4, 131072, 131073, 2, 262143, 131073, 4, 196607, 131073, 2, 262142, 131073, 4, 196606, 131073, 2, 262141, 131073, 4, 196605, 131073, 2, 262140, 131073, 4, 196604, 131073, 2, 262139, 131073, 4, 196603, 131073, 2, 262138, 131073, 4, 196602, 393217, 4, 131066, 196609, 3, 65530, 196609, 3, -6, 196609, 3, -65542, 196609, 3, -131078, 393217, 3, 262137, 65537, 4, 196601, 65537, 3, 131065, 65537, 3, 65529, 65537, 3, -7, 65537, 3, -65543, 65537, 3, -131079, 65537, 3, -196607, 196609, 4, -262143, 196609, 2, -196608, 131073, 4, -262144, 131073, 2, -131073, 131073, 4, -196609, 131073, 2, -131074, 131073, 4, -196610, 131073, 2, -131075, 131073, 4, -196611, 131073, 2, -131076, 131073, 4, -196612, 131073, 2, -131077, 131073, 4, -196613, 131073, 2, -196614, 131073, 2, -196615, 65537, 2)
@@ -152,6 +186,7 @@ layer_0/tile_data = PackedInt32Array(458759, 196609, 4, 393223, 196609, 3, 32768
 
 [node name="ToSimulation" parent="ToSimulation" instance=ExtResource("6_jvgol")]
 position = Vector2(8, 24)
+destination_travel_point = SubResource("Resource_jlivu")
 
 [node name="SpaceshipTiles8" parent="ToSimulation" instance=ExtResource("12_elrvm")]
 layer_0/tile_data = PackedInt32Array(327683, 393217, 2, 327682, 458753, 2, 327681, 131073, 5, 327680, 131073, 5, 393215, 393217, 2, 393214, 458753, 2, 393213, 131073, 5, 327684, 524289, 5, 262148, 327681, 3, 196612, 65537, 2, 196613, 524289, 4, 131077, 262145, 3, 65541, 262145, 3, 5, 262145, 3, -65531, 262145, 3, -131067, 262145, 3, -196603, 524289, 3, -196604, 65537, 4, -262140, 327681, 4, -327676, 524289, 2, -327677, 131073, 5, -327678, 131073, 5, -327679, 131073, 5, -327680, 327681, 2, -262144, 524289, 5, -196609, 131073, 5, -131074, 196609, 4, -196610, 393217, 2, -65539, 524289, 5, -131075, 327681, 3, 393212, 327681, 5, 327676, 262145, 3, 262140, 262145, 2, -65540, 65537, 5, 327686, 262145, 4, 262150, 524289, 2, 262149, 393217, 5, -262138, 524289, 5, -327674, 262145, 2, -262139, 393217, 2, -262147, 524289, 2, -262148, 65537, 5, -196611, 327681, 4, 393218, 65537, 4, 393219, 196609, 4, 458750, 65537, 4, 458751, 196609, 4)
@@ -165,6 +200,7 @@ layer_0/tile_data = PackedInt32Array(458759, 196609, 4, 393223, 196609, 3, 32768
 
 [node name="ToVolcano" parent="ToVolcano" instance=ExtResource("6_jvgol")]
 position = Vector2(-16, 16)
+destination_travel_point = SubResource("Resource_uxinh")
 
 [node name="VolcanoTiles8" parent="ToVolcano" instance=ExtResource("13_cfneh")]
 layer_0/tile_data = PackedInt32Array(262149, 196609, 4, 196613, 196609, 2, -65531, 196609, 4, -131067, 196609, 3, -196603, 196609, 3, -262139, 196609, 3, -327675, 196609, 2, 262148, 65537, 4, 196612, 65537, 2, -65532, 65537, 4, -131068, 65537, 3, -196604, 65537, 3, -262140, 65537, 3, -327676, 458753, 2, 262147, 131073, 5, -327677, 131073, 5, 262146, 131073, 5, -327678, 131073, 5, 262145, 131073, 5, -327679, 131073, 5, 262144, 131073, 5, -327680, 131073, 5, 327679, 131073, 5, -262145, 131073, 5, 327678, 131073, 5, -262146, 131073, 5, 327677, 131073, 5, -262147, 131073, 5, 327676, 131073, 5, -262148, 131073, 5, 327675, 131073, 5, -262149, 131073, 5, 327674, 327681, 5, 262138, 262145, 3, 196602, 262145, 3, 131066, 262145, 3, 65530, 262145, 3, -6, 262145, 3, -65542, 262145, 3, -131078, 262145, 3, -196614, 262145, 3, -262150, 327681, 2)

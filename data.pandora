@@ -13,21 +13,13 @@
 			},
 			{
 				"_category_id": "",
+				"_generate_ids": true,
 				"_icon_color": "eb4f4fff",
 				"_id": "45",
 				"_ids_generation_class": "MetroTravelPointIds",
 				"_index": 0,
 				"_name": "MetroTravelPoint",
 				"_script_path": "res://src/core/metro/MetroTravelPointEntity.gd"
-			},
-			{
-				"_category_id": "45",
-				"_generate_ids": true,
-				"_icon_color": "ffffff00",
-				"_id": "46",
-				"_ids_generation_class": "DemoLandTravelPointIds",
-				"_index": 0,
-				"_name": "DemoLandTravelPoint"
 			},
 			{
 				"_category_id": "",
@@ -269,110 +261,6 @@
 					"level_scene": {
 						"type": "resource",
 						"value": "res://src/games/demoland/zones/area01/Area01.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "47",
-				"_index": 0,
-				"_name": "Area01Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/area01/Area01.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "54",
-				"_index": 0,
-				"_name": "Area02Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/area02/Area02.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "55",
-				"_index": 0,
-				"_name": "Area03Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/Area03.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "56",
-				"_index": 0,
-				"_name": "Area04Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/Area04.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "57",
-				"_index": 0,
-				"_name": "Area05Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/Area05.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "58",
-				"_index": 0,
-				"_name": "Area06Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/Area06PurpleStone.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "59",
-				"_index": 0,
-				"_name": "Area07Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/Area07GrassyCave.tscn"
-					}
-				}
-			},
-			{
-				"_category_id": "46",
-				"_icon_color": "ffffff00",
-				"_id": "60",
-				"_index": 0,
-				"_name": "Area08Door01",
-				"_property_overrides": {
-					"destination_zone": {
-						"type": "resource",
-						"value": "res://src/games/demoland/zones/Area08AllTheThings.tscn"
 					}
 				}
 			},
@@ -2258,6 +2146,210 @@
 						"value": "res://src/dino/levels/tower/TowerLevelGen.gd"
 					}
 				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "213",
+				"_index": 0,
+				"_name": "HatBotLevelZeroToLandingSite",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "Reception/ToLandingSite"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/LevelZero.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "214",
+				"_index": 0,
+				"_name": "HatBotLevelZeroToTheKingdom",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "SecretEntrance/ToTheKingdom"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/LevelZero.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "215",
+				"_index": 0,
+				"_name": "HatBotLandingSiteToZero",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "FromZero/ToZero"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheLandingSite.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "216",
+				"_index": 0,
+				"_name": "HatBotLandingSiteToKingdomBack",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "SubLandingElevator/ToKingdomBack"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheLandingSite.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "217",
+				"_index": 0,
+				"_name": "HatBotLandingSiteToSimulation",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToSimulation/ToSimulation"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheLandingSite.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "218",
+				"_index": 0,
+				"_name": "HatBotLandingSiteToVolcano",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToVolcano/ToVolcano"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheLandingSite.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "219",
+				"_index": 0,
+				"_name": "HatBotSimulationToLandingSite",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToLandingSite/ToLandingSite"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/Simulation.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "220",
+				"_index": 0,
+				"_name": "HatBotSimulationToKingdom",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToKingdom/ToKingdom"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/Simulation.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "221",
+				"_index": 0,
+				"_name": "HatBotKingdomToSimulation",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToSimulation/ToSimulation"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheKingdom.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "222",
+				"_index": 0,
+				"_name": "HatBotKingdomToLandingSite",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToLandingSite/ToLandingSite"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheKingdom.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "223",
+				"_index": 0,
+				"_name": "HatBotKingdomToLevelZero",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "SecretEndgameRoomToLevelZero/ToLevelZero"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/TheKingdom.tscn"
+					}
+				}
+			},
+			{
+				"_category_id": "45",
+				"_icon_color": "ffffff00",
+				"_id": "224",
+				"_index": 0,
+				"_name": "HatBotVolcanoToLandingSite",
+				"_property_overrides": {
+					"destination_node_path": {
+						"type": "string",
+						"value": "ToLandingSite/ToLandingSite"
+					},
+					"destination_zone": {
+						"type": "resource",
+						"value": "res://src/games/hatbot/zones/Volcano.tscn"
+					}
+				}
 			}
 		],
 		"_properties": [
@@ -2587,7 +2679,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 211
+			"default": 224
 		}
 	}
 }

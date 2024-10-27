@@ -13,7 +13,3 @@ const DINOENTITY = "131"
 const DINOTILES = "179"
 
 
-class MetroTravelPointCategories:
-	const DEMOLANDTRAVELPOINT = "46"
-
-

@@ -16,6 +16,9 @@ func load_zone(zone_scene_or_path, spawn_node_path=null):
 		zone_scene = load(zone_scene_or_path)
 	else:
 		zone_scene = zone_scene_or_path
+	if not zone_scene:
+		Log.warn("no zone_scene to load!", zone_scene_or_path)
+		return
 	var zone_scene_inst = zone_scene.instantiate()
 	current_zone = zone_scene_inst
 

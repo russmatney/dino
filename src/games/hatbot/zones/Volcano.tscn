@@ -1,13 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://5vwwc56o0obb"]
+[gd_scene load_steps=26 format=3 uid="uid://5vwwc56o0obb"]
 
 [ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_5sa6m"]
 [ext_resource type="Shader" path="res://src/shaders/BgBlur.gdshader" id="2_20wgn"]
+[ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="2_gnqsl"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_ihma0"]
 [ext_resource type="Texture2D" uid="uid://ca1qei0yboss5" path="res://src/backgrounds/background_mountains_sheet.png" id="3_u3cpt"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="4_8m6jk"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/VolcanoTiles8.tscn" id="5_hnnq2"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="6_vteb1"]
+[ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="4_856sa"]
+[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://addons/bones/reptile/tilemaps/VolcanoTiles8.tscn" id="5_hnnq2"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://addons/bones/reptile/tilemaps/GrassyCaveTileMap8.tscn" id="6_vteb1"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="7_yfbgo"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="8_j17mi"]
+[ext_resource type="Script" path="res://src/core/metro/MetroTravelPointEntity.gd" id="8_dm3kc"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="8_j17mi"]
 [ext_resource type="PackedScene" uid="uid://dn6uahtfgkb4u" path="res://src/dino/enemies/shootyCrawly/ShootyCrawly.tscn" id="9_8m6c5"]
 [ext_resource type="PackedScene" path="res://src/dino/entities/doors/Door.tscn" id="11_7pvm7"]
 [ext_resource type="PackedScene" uid="uid://7y0pacsggdqf" path="res://src/dino/pickups/coins/Coin.tscn" id="12_xkhi8"]
@@ -24,8 +28,24 @@
 shader = ExtResource("2_20wgn")
 shader_parameter/radius = 64.0
 
+[sub_resource type="Resource" id="Resource_dbsd3"]
+script = ExtResource("8_dm3kc")
+_id = "218"
+
 [node name="Volcano" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_5sa6m")
+
+[node name="PlayerSpawner" type="Node" parent="."]
+script = ExtResource("2_gnqsl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_ihma0")
+
+[node name="DinoHUD" parent="." instance=ExtResource("4_856sa")]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_limit_begin = Vector2(-200, -1280)
@@ -61,6 +81,7 @@ layer_0/tile_data = PackedInt32Array(458759, 196609, 4, 393223, 196609, 3, 32768
 layer_0/tile_data = PackedInt32Array(327682, 131073, 4, 262146, 131073, 3, 196610, 393217, 4, 131074, 196609, 2, 327681, 131073, 4, 262145, 131073, 3, 196609, 131073, 3, 131073, 131073, 2, 327680, 131073, 4, 262144, 131073, 3, 196608, 131073, 3, 131072, 131073, 2, 393215, 131073, 4, 327679, 131073, 3, 262143, 131073, 3, 196607, 131073, 2, 393214, 131073, 4, 327678, 131073, 3, 262142, 131073, 3, 196606, 131073, 2, 393213, 131073, 4, 327677, 131073, 3, 262141, 458753, 4, 196605, 65537, 2, 196612, 196609, 2, 196611, 131073, 2, 262140, 131073, 2, 262139, 65537, 2, 327685, 196609, 4, 262149, 196609, 2, 327684, 131073, 4, 262148, 393217, 4, 327683, 131073, 4, 262147, 131073, 3, 393212, 131073, 4, 327676, 131073, 3, 393211, 131073, 4, 327675, 458753, 4, 393210, 65537, 4, 327674, 65537, 2, -262144, 196609, 4, -196609, 65537, 4, -327679, 196609, 4, -327680, 393217, 3, -262145, 458753, 3, -262146, 65537, 4, -393213, 196609, 5, -393214, 131073, 5, -393215, 393217, 2, -393216, 131073, 2, -327681, 131073, 2, -327682, 458753, 2, -327683, 131073, 5, -327684, 65537, 5)
 
 [node name="ToLandingSite" parent="ToLandingSite" instance=ExtResource("7_yfbgo")]
+destination_travel_point = SubResource("Resource_dbsd3")
 
 [node name="DoubleJumpCoinRoom" type="Node2D" parent="." groups=["metro_rooms"]]
 position = Vector2(384, -192)
