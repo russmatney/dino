@@ -69,7 +69,7 @@ func travel(player):
 	if is_traveling:
 		return
 
-	if room:
+	if room and room.has_method("deactivate_cam_points"):
 		room.deactivate_cam_points()
 
 	player.force_move_to_target(global_position)
