@@ -10,7 +10,7 @@ func _enter_tree():
 ## ready ##########################################################
 
 func _ready():
-	pause_rooms()
+	# pause_rooms()
 	Hotel.register(self)
 
 ## Hotel data ##########################################################

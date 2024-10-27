@@ -49,12 +49,25 @@ func build_games_grid():
 var arcade_scene = preload("res://src/dino/modes/arcade/Arcade.tscn")
 func start_arcade_with_game(ent):
 	Log.pr("Starting arcade w/ game", ent)
-	Navi.nav_to(arcade_scene, {setup=func(scene):
-		if "current_game_entity" in scene:
-			scene.current_game_entity = ent
-		else:
-			Log.warn("skipping current_game_entity assignment", ent)
-		})
+
+	Dino.set_game_mode(Pandora.get_entity(ModeIds.ARCADE))
+	Dino.ensure_player_setup({genre=ent.get_genre_type()})
+
+	if ent is DinoGameEntity:
+		Navi.nav_to(ent.get_level_scene(), {
+			on_ready=func(node):
+			# TODO bake-in this level_node knowledge to Dino somehow? track a current_root_node?
+			Dino.spawn_player({level_node=node})
+			})
+	elif ent is LevelDef:
+		Navi.nav_to(arcade_scene, {setup=func(scene):
+			if "current_game_entity" in scene:
+				scene.current_game_entity = ent
+			else:
+				Log.warn("skipping current_game_entity assignment", ent)
+			})
+	else:
+		Log.warn("unhandled game entity", ent)
 
 ## menu buttons ##################################################
 

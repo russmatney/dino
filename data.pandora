@@ -689,7 +689,7 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Classic"
+						"value": "Classic (old)"
 					},
 					"is_disabled": {
 						"type": "bool",
@@ -1970,7 +1970,7 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Classic"
+						"value": "Classic (SS)"
 					},
 					"root_scene": {
 						"type": "resource",
@@ -1987,7 +1987,7 @@
 				"_property_overrides": {
 					"display_name": {
 						"type": "string",
-						"value": "Classic Mode (TopDown)"
+						"value": "Classic (TopDown)"
 					},
 					"is_disabled": {
 						"type": "bool",
@@ -2088,7 +2088,7 @@
 					},
 					"is_disabled": {
 						"type": "bool",
-						"value": true
+						"value": false
 					}
 				}
 			},

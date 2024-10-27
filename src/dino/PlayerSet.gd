@@ -73,8 +73,12 @@ func spawn_new(opts={}):
 		return
 	var genre = opts.get("genre_type")
 	if genre == null:
+		genre = p.genre_type
+
+	if genre == null:
 		Log.warn("genre_type not passed, defaulting", opts)
 		genre = DinoData.GenreType.SideScroller
+
 	p.node = p.entity.get_player_scene(genre).instantiate()
 
 	var sp = get_spawn_point_and_coords(opts)
@@ -90,9 +94,12 @@ func spawn_new(opts={}):
 		opts.get("setup").call(p.node)
 
 	# connect player_ready signals
-	p.node.ready.connect(func(): new_player_ready.emit(p.node))
+	p.node.ready.connect(func():
+		Log.pr("player node ready!")
+		new_player_ready.emit(p.node))
 
 	# add child
+	# adds to a passed level_node, using a spawn_point, or to the current_scene
 	var level_node = opts.get("level_node")
 	var deferred = opts.get("deferred", true)
 	if level_node:

@@ -100,9 +100,17 @@ func create_new_player(opts):
 
 # only creates a player if none exists
 # intended for debug/dev mode
-func ensure_player_setup(opts):
+# ....dear past-me: wtf?
+func ensure_player_setup(opts={}):
 	if not current_player_entity():
-		create_new_player(opts)
+		if opts == null or opts.get("entity") == null:
+			var genre = opts.get("genre")
+			var ent = DinoPlayerEntity.get_random({genre=genre})
+			Log.warn("no player_entity, creating random", ent)
+			create_new_player({entity=ent, genre=opts.get("genre")})
+		else:
+			Log.pr("creating player with opts", opts)
+			create_new_player(opts)
 
 func spawn_player(opts={}):
 	player_set.spawn_new(opts)

@@ -3,7 +3,7 @@ extends Node2D
 ## vars ##################################################3
 
 @export var current_def: LevelDef
-@export var player_entity: DinoPlayerEntity
+
 var game_node: Node2D
 
 @export var _seed: int
@@ -47,15 +47,6 @@ func launch_game(def=null):
 		remove_child.call_deferred(game_node)
 		game_node.queue_free()
 		await game_node.tree_exited
-
-	if not Dino.current_player_entity():
-		if player_entity == null:
-			player_entity = DinoPlayerEntity.get_random({genre=def.get_genre_type()})
-			Log.pr("no player_entity, getting random", player_entity)
-
-		# if this is set of run-time players, why are we creating a new one upon launch?
-		# it should already be created!
-		Dino.create_new_player({entity=player_entity, genre=def.get_genre_type()})
 
 	var level_opts = {seed=_seed, room_count=room_count,}
 

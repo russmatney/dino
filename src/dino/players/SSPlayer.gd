@@ -213,6 +213,8 @@ func _ready():
 
 	state_label.set_visible(false)
 
+	Log.pr("player ready!!!", self)
+
 ## input ###########################################################
 
 var logged_blocking_controls = false
