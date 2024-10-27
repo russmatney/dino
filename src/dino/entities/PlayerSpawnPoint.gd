@@ -6,6 +6,9 @@ extends Marker2D
 
 var last_visited = 0
 
+func to_pretty():
+	return {node=str(self), position=position, global_position=global_position}
+
 func _ready():
 	Hotel.register(self)
 

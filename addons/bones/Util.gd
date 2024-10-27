@@ -61,6 +61,8 @@ static func are_nodes_close(a, b, diff=5):
 ############################################################
 # groups
 
+# TODO differentiate this from get_first_child_in_group more
+# (looking from root vs recursing the child itself)
 static func first_node_in_group(node, group_name: String) -> Node:
 	if not node.is_inside_tree():
 		var chs = get_children_in_group(node, group_name, true)
@@ -73,11 +75,16 @@ static func first_node_in_group(node, group_name: String) -> Node:
 	return null
 
 
-static func get_first_child_in_group(node: Node, group_name: String) -> Node:
+static func get_first_child_in_group(node: Node, group_name: String, include_nested=false) -> Node:
 	# only checks first children
 	for c in node.get_children():
 		if c.is_in_group(group_name):
 			return c
+
+		if include_nested:
+			var cc = get_first_child_in_group(c, group_name, include_nested)
+			if cc:
+				return cc
 	return null
 
 

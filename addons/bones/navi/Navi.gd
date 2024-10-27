@@ -12,6 +12,7 @@ var last_scene_stack = []
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 
+	# i just don't know what this is for anymore.... maybe keeping a root menu around?
 	var root = get_tree().get_root()
 	var first = root.get_child(root.get_child_count() - 1)
 	var main_scene_path = ProjectSettings.get_setting("application/run/main_scene")
@@ -77,10 +78,16 @@ func nav_to(scene, opts={}):
 	resume()
 
 func _deferred_goto_scene(scene, opts={}):
-	if first_scene != null and is_instance_valid(first_scene):
-		first_scene.queue_free()
-	if current_scene != null and is_instance_valid(current_scene):
-		current_scene.queue_free()
+	Log.pr("deferred goto scene")
+
+	get_tree().current_scene.queue_free()
+
+	# if first_scene != null and is_instance_valid(first_scene):
+	# 	Log.pr("freed first_scene")
+	# 	first_scene.queue_free()
+	# if current_scene != null and is_instance_valid(current_scene):
+	# 	Log.pr("freed current_scene")
+	# 	current_scene.queue_free()
 
 	var next_scene
 	if scene is String:
@@ -109,8 +116,6 @@ func _deferred_goto_scene(scene, opts={}):
 	get_tree().get_root().add_child(current_scene)
 	# compatibility with SceneTree.change_scene_to_file()
 	get_tree().set_current_scene(current_scene)
-
-
 
 	# set the focus for the current scene
 	find_focus()

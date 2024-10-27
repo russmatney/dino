@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcu418utbav6s"]
+[gd_scene load_steps=6 format=3 uid="uid://dcu418utbav6s"]
 
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_2onbw"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_0xsm0"]
 [ext_resource type="Script" path="res://src/core/metro/MetroTravelPointEntity.gd" id="4_mlbpj"]
 
@@ -18,7 +18,6 @@ layer_0/tile_data = PackedInt32Array(-327687, 1, 0, -262151, 131073, 2, -196615,
 [node name="ToArea02" parent="." instance=ExtResource("3_0xsm0")]
 position = Vector2(0, 24)
 destination_travel_point = SubResource("Resource_ji4th")
-destination_travel_point_path = "./01Elevator/ToArea01"
 
 [node name="RoomBox" type="Area2D" parent="."]
 visible = false

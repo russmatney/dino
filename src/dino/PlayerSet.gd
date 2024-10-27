@@ -103,7 +103,7 @@ func spawn_new(opts={}):
 	var level_node = opts.get("level_node")
 	var deferred = opts.get("deferred", true)
 	if level_node:
-		Log.info("adding player to level node", level_node, p.entity.get_display_name())
+		Log.info("adding player to level node", p.entity.get_display_name(), level_node, sp)
 		if deferred:
 			level_node.add_child.call_deferred(p.node)
 		else:
@@ -172,6 +172,7 @@ func get_spawn_point_and_coords(opts):
 	var spawn_point
 	if spawn_coords == null:
 		spawn_point = get_spawn_point(opts)
+		Log.pr("spawn_point found", spawn_point)
 		if spawn_point:
 			spawn_coords = spawn_point.global_position
 		else:
@@ -181,9 +182,22 @@ func get_spawn_point_and_coords(opts):
 
 func get_spawn_point(opts={}):
 	var level_node = opts.get("level_node", Navi)
-	var psp = U.first_node_in_group(level_node, "player_spawn_points")
+	# TODO dry this up (look in level_node, fallback to global group search)
+
+	var psp = U.get_first_child_in_group(level_node, "player_spawn_points", true)
 	if psp:
+		Log.pr("found psp child")
 		return psp
-	var elevator = U.first_node_in_group(level_node, "elevator")
+	var elevator = U.get_first_child_in_group(level_node, "elevator", true)
 	if elevator:
+		Log.pr("found elevator child")
+		return elevator
+
+	psp = U.first_node_in_group(level_node, "player_spawn_points")
+	if psp:
+		Log.pr("found psp globally")
+		return psp
+	elevator = U.first_node_in_group(level_node, "elevator")
+	if elevator:
+		Log.pr("found elevator globally")
 		return elevator
