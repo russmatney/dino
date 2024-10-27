@@ -81,6 +81,9 @@ func set_icon_for_action(action_name, device=null):
 	if not device:
 		device = InputHelper.device
 	var input = InputHelper.get_keyboard_or_joypad_input_for_action(action_name)
+	if input == null:
+		Log.warn("no input for action name", action_name)
+		return
 	if device == InputHelper.DEVICE_KEYBOARD:
 		input_text = OS.get_keycode_string(input.get_keycode_with_modifiers())
 	elif "button_index" in input:
