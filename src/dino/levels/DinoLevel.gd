@@ -39,15 +39,15 @@ static func create_level(def: LevelDef, opts={}):
 	l.level_opts = opts
 	l.skip_splash_intro = opts.get("skip_splash_intro")
 
-	l.level_gen = BrickLevelGen.new()
-	l.level_gen.ready.connect(func(): l.level_gen.set_owner(l))
-	l.level_gen.name = "LevelGen"
-	l.add_child(l.level_gen)
+	if def.should_regen_level():
+		l.level_gen = BrickLevelGen.new()
+		l.level_gen.ready.connect(func(): l.level_gen.set_owner(l))
+		l.level_gen.name = "LevelGen"
+		l.add_child(l.level_gen)
 
-	if def.get_level_gen_script():
 		l.level_gen.set_script(def.get_level_gen_script())
 
-	l.regenerate()
+		l.regenerate()
 
 	return l
 
@@ -69,8 +69,8 @@ func regen_with_def(def):
 
 	genre_type = def.get_genre_type()
 
-	# ensure level gen node
-	level_gen.set_script(def.get_level_gen_script())
+	if def.should_regen_level():
+		level_gen.set_script(def.get_level_gen_script())
 
 	# set level_opts
 	level_opts.tile_size = def.get_base_square_size()
@@ -214,11 +214,12 @@ func regenerate(opts=null):
 			label_to_tilemap = {"Tile": {scene=level_def.get_tiles_scene()}},
 			})
 
-	DinoLevel.ensure_empty_containers(self)
-	if not level_gen:
-		level_gen = get_node_or_null("LevelGen")
+	if level_def.should_regen_level():
+		DinoLevel.ensure_empty_containers(self)
+		if not level_gen:
+			level_gen = get_node_or_null("LevelGen")
 
-	level_gen.generate(opts)
+		level_gen.generate(opts)
 
 	if hud and not Engine.is_editor_hint():
 		hud.set_level_opts(opts)

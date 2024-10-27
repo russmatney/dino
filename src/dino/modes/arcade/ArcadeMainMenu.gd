@@ -29,6 +29,7 @@ func set_focus():
 ## games grid ##################################################
 
 func select_game(game_entity):
+	Log.pr("selecting game", game_entity)
 	selected_game_entity = game_entity
 	reset_menu_buttons()
 
@@ -47,8 +48,13 @@ func build_games_grid():
 
 var arcade_scene = preload("res://src/dino/modes/arcade/Arcade.tscn")
 func start_arcade_with_game(ent):
+	Log.pr("Starting arcade w/ game", ent)
 	Navi.nav_to(arcade_scene, {setup=func(scene):
-		scene.current_game_entity = ent})
+		if "current_game_entity" in scene:
+			scene.current_game_entity = ent
+		else:
+			Log.warn("skipping current_game_entity assignment", ent)
+		})
 
 ## menu buttons ##################################################
 

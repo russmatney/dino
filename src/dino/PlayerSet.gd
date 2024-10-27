@@ -6,7 +6,11 @@ class_name PlayerSet
 
 ## PData #################################################
 
-# PData bundles the player entity and current node, if there is one
+# PData bundles the player entity and current node, if there is one,
+# plus any input data describing the player
+# it is a template for serializing or respawning a party member
+#
+# idea: it could support quick-swapping between same-genre party members
 class PData:
 	extends Object
 
@@ -15,9 +19,11 @@ class PData:
 	var entity: DinoPlayerEntity
 	# instance, not just entity (template)
 	# var state: State
+	var genre_type: DinoData.GenreType
+	var input_opts: Dictionary
 
 	func to_pretty():
-		return {node=node, entity=entity}
+		return {node=node, input_opts=input_opts}
 
 	func _init(opts):
 		if opts.get("entity"):
@@ -26,6 +32,9 @@ class PData:
 		elif opts.get("entity_id"):
 			entity_id = opts.get("entity_id")
 			entity = Pandora.get_entity(entity_id)
+		if opts.get("genre_type"):
+			genre_type = genre_type
+		input_opts = opts
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
 

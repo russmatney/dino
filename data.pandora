@@ -643,7 +643,7 @@
 					},
 					"is_disabled": {
 						"type": "bool",
-						"value": true
+						"value": false
 					},
 					"menu": {
 						"type": "resource",

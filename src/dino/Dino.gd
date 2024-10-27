@@ -17,6 +17,8 @@ static func to_genre_type(s: String) -> GenreType:
 
 ## vars ##########################################################
 
+# TODO these global Dino.gd player_set and game_mode interactions need a clearer API
+# maybe could be grouped more like save/session game-state
 var player_set = PlayerSet.new()
 var game_mode: DinoModeEntity
 

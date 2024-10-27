@@ -2,14 +2,6 @@ extends Node2D
 
 ## vars ##################################################3
 
-# TODO more games, and pull these from pandora
-var game_ids = [
-	LevelDefIds.SUPERELEVATORLEVEL,
-	LevelDefIds.SHIRT,
-	LevelDefIds.TOWER,
-	LevelDefIds.WOODS,
-	]
-
 @export var current_def: LevelDef
 @export var player_entity: DinoPlayerEntity
 var game_node: Node2D
@@ -36,22 +28,13 @@ func _ready():
 
 	var def = current_def
 	if not def:
-		def = random_game()
-
-	if player_entity == null:
-		player_entity = Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER)
+		def = LevelDef.random_def()
+		Log.pr("no current LevelDef, getting random game", def)
 
 	if not def:
 		Log.warn("Could not find def!")
 	else:
 		launch_game(def)
-
-## select a game ##################################################3
-
-func random_game():
-	var eid = U.rand_of(game_ids)
-	var level_def = Pandora.get_entity(eid)
-	return level_def
 
 ## launch game ##################################################3
 
@@ -66,7 +49,13 @@ func launch_game(def=null):
 		await game_node.tree_exited
 
 	if not Dino.current_player_entity():
-		Dino.create_new_player({entity=player_entity})
+		if player_entity == null:
+			player_entity = DinoPlayerEntity.get_random({genre=def.get_genre_type()})
+			Log.pr("no player_entity, getting random", player_entity)
+
+		# if this is set of run-time players, why are we creating a new one upon launch?
+		# it should already be created!
+		Dino.create_new_player({entity=player_entity, genre=def.get_genre_type()})
 
 	var level_opts = {seed=_seed, room_count=room_count,}
 

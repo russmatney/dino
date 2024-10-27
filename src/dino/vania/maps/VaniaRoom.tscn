@@ -1,12 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhjv3h6oxgj4"]
+[gd_scene load_steps=20 format=3 uid="uid://bhjv3h6oxgj4"]
 
 [ext_resource type="Script" path="res://src/dino/vania/maps/VaniaRoom.gd" id="1_x4efj"]
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="2_1wsgr"]
+[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="2_c5djv"]
 [ext_resource type="Texture2D" uid="uid://bv6gfgk3kvhbq" path="res://assets/art/ui/spaceship_background.png" id="2_dw7vg"]
 [ext_resource type="Script" path="res://src/dino/vania/VaniaRoomDef.gd" id="2_sq332"]
 [ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="3_1w2s4"]
 [ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="3_tseep"]
+[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="3_ybglw"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="4_2y0uv"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="5_86tbv"]
+[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="6_kudew"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTileMap.gd" id="6_q8wsp"]
 [ext_resource type="TileSet" uid="uid://dgkfewk2df8x7" path="res://addons/bones/reptile/tilesets/MetalTiles8.tres" id="10_pkkaw"]
 
@@ -26,15 +30,15 @@ _id = "185"
 script = ExtResource("3_1w2s4")
 genre_type = 0
 entities = Array[ExtResource("3_tseep")]([SubResource("Resource_u5y3n"), SubResource("Resource_paglq")])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
+enemies = Array[ExtResource("3_ybglw")]([])
 enemy_waves = 0
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
+room_shapes = Array[ExtResource("6_kudew")]([])
+room_effects = Array[ExtResource("5_86tbv")]([])
 tiles = Array[ExtResource("4_2y0uv")]([SubResource("Resource_yskg4")])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([Vector2i(0, -1), Vector2i(-1, 0)])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("2_c5djv")]([])
 bg_color = Color(0.774941, 0.436213, 0.239675, 1)
 dupe_room_count = 0
 skip_merge = false
