@@ -82,13 +82,6 @@ func _deferred_goto_scene(scene, opts={}):
 
 	get_tree().current_scene.queue_free()
 
-	# if first_scene != null and is_instance_valid(first_scene):
-	# 	Log.pr("freed first_scene")
-	# 	first_scene.queue_free()
-	# if current_scene != null and is_instance_valid(current_scene):
-	# 	Log.pr("freed current_scene")
-	# 	current_scene.queue_free()
-
 	var next_scene
 	if scene is String:
 		var s = ResourceLoader.load(scene)
@@ -110,8 +103,12 @@ func _deferred_goto_scene(scene, opts={}):
 		next_scene.ready.connect(func():
 			opts.on_ready.call(next_scene))
 
-	current_scene = next_scene
+	if opts.get("await_clear"):
+		if get_tree().current_scene:
+			await get_tree().current_scene.tree_exited
 
+	# for navi's tracking
+	current_scene = next_scene
 	# Add it as a child of root
 	get_tree().get_root().add_child(current_scene)
 	# compatibility with SceneTree.change_scene_to_file()

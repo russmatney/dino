@@ -24,17 +24,8 @@ func load_zone(zone_scene_or_path, spawn_node_path=null):
 
 	Log.pr("loading zone", current_zone)
 	Navi.nav_to(current_zone, {
-			# TODO bake-in this level_node knowledge to Dino somehow? track a current_root_node?
-			setup=func(n):
-		Log.pr("setup zone", n)
-		# waiting to let the old scene die first?
-		await get_tree().create_timer(2.0).timeout,
-			on_ready=func(n):
-
-		Log.pr("on_ready zone", n)
-		# ugh.....
-		await get_tree().create_timer(1.0).timeout
-		Dino.spawn_player({level_node=n})
+		await_clear=true,
+		on_ready=func(n): Dino.spawn_player({level_node=n})
 		})
 
 func reload_current_zone():

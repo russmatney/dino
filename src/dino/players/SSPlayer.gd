@@ -185,7 +185,7 @@ func _ready():
 	died.connect(_on_player_death)
 
 	var level = U.find_level_root(self)
-	if level.has_method("_on_player_death"):
+	if level and level.has_method("_on_player_death"):
 		died.connect(level._on_player_death.bind(self))
 
 	# could be instances with randomized stats, etc
