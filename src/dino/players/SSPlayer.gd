@@ -257,11 +257,13 @@ func _unhandled_input(event):
 	# generic action
 	if Trolls.is_action(event):
 		stamp({scale=2.0, ttl=1.0, include_action_hint=true})
-		action_detector.execute_current_action()
-		action_detector.current_action()
-		Juice.hitstop({name="player_hitstop", time_scale=0.5, duration=0.2,
-			trauma=0.4,
-			})
+		Juice.hitstop({name="player_hitstop", time_scale=0.5, duration=0.2, trauma=0.4})
+		var did_exec = action_detector.execute_current_action()
+		if did_exec:
+			action_detector.current_action()
+		else:
+			Log.pr("no action done, dwim/toggle/cycle something?")
+			self.scale = Vector2.ONE * U.rand_of([0.25, 0.5, 1, 1.5])
 
 	# action cycling
 	# TODO could move to a hold-action to popup opts/menu style
