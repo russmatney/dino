@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://kuw2gx5p8ifo"
+path="res://.godot/imported/2x2_autotiles.aseprite-3e87abc50be97f01255c44becbf8e8d6.res"
+
+[deps]
+
+source_file="res://src/reptile/assets/templates/2x2_autotiles.aseprite"
+dest_files=["res://.godot/imported/2x2_autotiles.aseprite-3e87abc50be97f01255c44becbf8e8d6.res"]
+
+[params]
+

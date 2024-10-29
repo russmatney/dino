@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk4bvkw3p7xfc"]
 
 [ext_resource type="Script" path="res://addons/bones/actions/ActionLabel.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/assets/fonts/at01.ttf" id="3"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="3"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3")])

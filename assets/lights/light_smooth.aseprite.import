@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dducrh0ey77cf"
+path="res://.godot/imported/light_smooth.aseprite-ef8bb23af0b7a803762036511cde644d.res"
+
+[deps]
+
+source_file="res://assets/lights/light_smooth.aseprite"
+dest_files=["res://.godot/imported/light_smooth.aseprite-ef8bb23af0b7a803762036511cde644d.res"]
+
+[params]
+

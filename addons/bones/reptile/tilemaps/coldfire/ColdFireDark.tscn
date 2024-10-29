@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://btl4j2xap85np"]
-
-[ext_resource type="TileSet" uid="uid://bat0oor02xfha" path="res://addons/bones/reptile/tilesets/coldfire/ColdFireDark.tres" id="1_vmsqn"]
-
-[node name="ColdFireDark" type="TileMap"]
-tile_set = ExtResource("1_vmsqn")
-rendering_quadrant_size = 8
-format = 2

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c5pp6jdft7478"
+path="res://.godot/imported/64x64white_tiles.aseprite-37c7d6619f79e3b671df1c4414274d5d.res"
+
+[deps]
+
+source_file="res://src/reptile/assets/64x64white_tiles.aseprite"
+dest_files=["res://.godot/imported/64x64white_tiles.aseprite-37c7d6619f79e3b671df1c4414274d5d.res"]
+
+[params]
+

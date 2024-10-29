@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://2xsvaemjsebn"
+path="res://.godot/imported/light1.aseprite-04455fdb84c2d85c7e358e9fa6b29bb8.res"
+
+[deps]
+
+source_file="res://assets/lights/light1.aseprite"
+dest_files=["res://.godot/imported/light1.aseprite-04455fdb84c2d85c7e358e9fa6b29bb8.res"]
+
+[params]
+

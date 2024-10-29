@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://gpoo30tx3itk"
+path="res://.godot/imported/ship_background_autotiles.aseprite-6da3847e4f3cb0eac89b1cb513962227.res"
+
+[deps]
+
+source_file="res://src/reptile/assets/ship_background_autotiles.aseprite"
+dest_files=["res://.godot/imported/ship_background_autotiles.aseprite-6da3847e4f3cb0eac89b1cb513962227.res"]
+
+[params]
+

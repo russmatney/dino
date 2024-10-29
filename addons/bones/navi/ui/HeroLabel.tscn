@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cny4ykpodxqv6"]
 
-[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/assets/fonts/Born2bSportyV2.ttf" id="1_7r08m"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/fonts/Born2bSportyV2.ttf" id="1_7r08m"]
 
 [node name="HeroLabel" type="RichTextLabel"]
 anchors_preset = 15

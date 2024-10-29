@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnpy703vgjqek"]
-
-[ext_resource type="TileSet" uid="uid://dljr6o7d1o1oi" path="res://addons/bones/reptile/tilesets/coldfire/ColdFireBlue.tres" id="1_ynfi4"]
-
-[node name="ColdFireBlue" type="TileMap"]
-tile_set = ExtResource("1_ynfi4")
-rendering_quadrant_size = 8
-format = 2
