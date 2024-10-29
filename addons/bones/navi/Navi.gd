@@ -11,7 +11,6 @@ var current_scene
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 
-	# i just don't know what this is for anymore.... maybe keeping a root menu around?
 	var root = get_tree().get_root()
 	var first = root.get_child(root.get_child_count() - 1)
 	var main_scene_path = ProjectSettings.get_setting("application/run/main_scene")
@@ -74,8 +73,6 @@ func nav_to(scene, opts={}):
 	resume()
 
 func _deferred_goto_scene(scene, opts={}):
-	Log.pr("deferred goto scene")
-
 	get_tree().current_scene.queue_free()
 
 	var next_scene

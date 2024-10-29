@@ -8,7 +8,7 @@ func _enter_tree():
 	add_autoload_singleton("Debug", "res://addons/bones/Debug.gd")
 	add_autoload_singleton("Navi", "res://addons/bones/navi/Navi.gd")
 	add_autoload_singleton("Juice", "res://addons/bones/Juice.gd")
-	add_autoload_singleton("DJ", "res://addons/bones/dj/DJ.gd")
+	add_autoload_singleton("DJ", "res://addons/bones/DJ.gd")
 
 	editor_interface = get_editor_interface()
 
