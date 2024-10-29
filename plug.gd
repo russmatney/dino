@@ -10,7 +10,10 @@ func _plugging():
 	plug("viniciusgerevini/godot-aseprite-wizard", {include=["addons/AsepriteWizard"]})
 	plug("russmatney/bones", {include=["addons/bones"]})
 	plug("russmatney/log.gd", {include=["addons/log"]})
-	plug("KoBeWi/Metroidvania-System", {include=["addons/MetroidvaniaSystem"]})
+	plug("KoBeWi/Metroidvania-System", {
+		include=["addons/MetroidvaniaSystem"],
+		exclude=["Extensions"],
+		})
 	plug("KoBeWi/Godot-Custom-Runner", {include=["addons/CustomRunner"], exclude=["ExampleProject"]})
 	plug("SirLich/asset-explorer", {include=["addons/gd_explorer"]})
 	plug("ramokz/phantom-camera", {include=["addons/phantom_camera"]})
