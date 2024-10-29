@@ -12,7 +12,7 @@
 [ext_resource type="RichTextEffect" uid="uid://dslw20go5mg58" path="res://addons/teeb.text_effects/resources/Sparkle.tres" id="11_ywtte"]
 [ext_resource type="RichTextEffect" uid="uid://bcyc47bqu6nr5" path="res://addons/teeb.text_effects/resources/UwU.tres" id="12_wub3w"]
 [ext_resource type="RichTextEffect" uid="uid://d3fhjebwdsvju" path="res://addons/teeb.text_effects/resources/Woo.tres" id="13_rvdlc"]
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://assets/fonts/at01.ttf" id="14_g5lob"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="14_g5lob"]
 [ext_resource type="PackedScene" uid="uid://dq1rff2gu3q68" path="res://addons/bones/actions/ActionInputIcon.tscn" id="15_r6s8h"]
 
 [node name="ActionHint" type="Node2D"]

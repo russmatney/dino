@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_w0seu"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_slkgo"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_5wuw7"]
-[ext_resource type="TileSet" uid="uid://bwwxt4q7tnsix" path="res://addons/bones/reptile/tilesets/VolcanoTiles8.tres" id="4_l6jgh"]
+[ext_resource type="TileSet" uid="uid://bwwxt4q7tnsix" path="res://src/tilemaps/VolcanoTiles8.tres" id="4_l6jgh"]
 [ext_resource type="PackedScene" uid="uid://dby2hvvl027v3" path="res://src/dino/pickups/Pickup.tscn" id="5_fc26q"]
 [ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/pickups/orb/GreenBlobAnim.tscn" id="6_leds5"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="7_chb2i"]

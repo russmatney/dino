@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_7w22y"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_1tmjl"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_1uhli"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_us3te"]
+[ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://src/tilemaps/topdown/TDCaveWallTiles16.tscn" id="3_1uhli"]
+[ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://src/tilemaps/topdown/TDCaveFloorTiles16.tscn" id="4_us3te"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="5_tasgl"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/topdown/TDCavePitTiles16.tscn" id="6_g0unp"]
+[ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://src/tilemaps/topdown/TDCavePitTiles16.tscn" id="6_g0unp"]
 [ext_resource type="PackedScene" uid="uid://b0gmt6jeniemi" path="res://src/dino/entities/doors/Portal.tscn" id="7_5exth"]
 [ext_resource type="PackedScene" uid="uid://dol20hvibj80p" path="res://src/dino/entities/doors/Door (2).tscn" id="8_dxfek"]
 [ext_resource type="Script" path="res://src/games/shirt/NeedsTwoShrinesDoor.gd" id="8_ohdbg"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/dino/enemies/blobs/BlobWalker.tscn" id="9_86bm1"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/dino/enemies/blobs/BlobChaser.tscn" id="11_64kgb"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionHint.tscn" id="12_cpd8x"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="12_cpd8x"]
 
 [node name="CaveOne" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_7w22y")

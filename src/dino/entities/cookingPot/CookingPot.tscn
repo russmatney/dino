@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dxugvmk4fmygo" path="res://src/dino/entities/cookingPot/SPIKE_Cooking_pot.png" id="1_i1ti2"]
 [ext_resource type="Script" path="res://src/dino/entities/cookingPot/CookingPot.gd" id="1_jn4f3"]
-[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="3_m2042"]
+[ext_resource type="FontFile" path="res://addons/bones/fonts/at01.ttf" id="3_m2042"]
 [ext_resource type="Texture2D" uid="uid://s63bc5kjyoyr" path="res://src/core/assets/lights/light64px3.png" id="5_nrjap"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4bohb"]

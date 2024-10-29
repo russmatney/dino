@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cfv7xxpirnhv4"
+path="res://.godot/imported/gilded-kingdom-tiles-8.aseprite-67281398a27b839b1f1ea9205bb5b8e4.res"
+
+[deps]
+
+source_file="res://src/tilemaps/gilded-kingdom-tiles-8.aseprite"
+dest_files=["res://.godot/imported/gilded-kingdom-tiles-8.aseprite-67281398a27b839b1f1ea9205bb5b8e4.res"]
+
+[params]
+

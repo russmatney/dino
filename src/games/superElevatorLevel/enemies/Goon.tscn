@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/games/superElevatorLevel/enemies/Goon.gd" id="1_teuic"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://src/core/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ox2po"]
 [ext_resource type="Texture2D" uid="uid://c7bud7yy4w4yh" path="res://src/core/beehive/beatemup/BEU_character_shadow_sheet.png" id="2_xyux5"]
-[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="4_k27u2"]
+[ext_resource type="FontFile" path="res://addons/bones/fonts/at01.ttf" id="4_k27u2"]
 [ext_resource type="Texture2D" uid="uid://by8kuopodsemm" path="res://src/games/superElevatorLevel/enemies/BEU_goon.png" id="5_wxukf"]
 [ext_resource type="Material" uid="uid://bxr173oof70cm" path="res://src/games/superElevatorLevel/enemies/GoonAlt2.tres" id="6_wwcw8"]
 

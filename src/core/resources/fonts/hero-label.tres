@@ -1,6 +1,6 @@
 [gd_resource type="FontFile" load_steps=2 format=3 uid="uid://cpxf4da75p5rw"]
 
-[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/assets/fonts/Born2bSportyV2.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/fonts/Born2bSportyV2.ttf" id="1"]
 
 [resource]
 resource_local_to_scene = true

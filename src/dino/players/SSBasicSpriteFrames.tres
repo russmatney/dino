@@ -1,26 +1,28 @@
 [gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://b73k32om0cbr3"]
 
-[ext_resource type="Texture2D" uid="uid://dml6j6ab6fs85" path="res://addons/bones/reptile/assets/64x64snake_tiles_sheet.png" id="1_fn13l"]
-[ext_resource type="Texture2D" uid="uid://0sbm1c6kmk2w" path="res://addons/bones/reptile/assets/32x40autumnglow_tiles_sheet.png" id="1_ucp5r"]
+[ext_resource type="Texture2D" uid="uid://0sbm1c6kmk2w" path="res://src/tilemaps/coldfire/32x40autumnglow_tiles_sheet.png" id="1_ucp5r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sb4ra"]
+load_path = "res://.godot/imported/64x64snake_tiles_sheet.png-d83f0f01fa1ec1fddb7697b41fd6a037.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryuii"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(16, 32, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_48hjd"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(8, 32, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3kk3"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(24, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h2gvo"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(8, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w641y"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(16, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4lhm"]
@@ -52,11 +54,11 @@ atlas = ExtResource("1_ucp5r")
 region = Rect2(8, 32, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2x2p4"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(16, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ir4bi"]
-atlas = ExtResource("1_fn13l")
+atlas = SubResource("CompressedTexture2D_sb4ra")
 region = Rect2(24, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75072"]

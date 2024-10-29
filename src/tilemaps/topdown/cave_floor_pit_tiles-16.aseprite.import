@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dkbifyp07kjp8"
+path="res://.godot/imported/cave_floor_pit_tiles-16.aseprite-1cc8a916bef402446c93004b69a6abe5.res"
+
+[deps]
+
+source_file="res://src/tilemaps/topdown/cave_floor_pit_tiles-16.aseprite"
+dest_files=["res://.godot/imported/cave_floor_pit_tiles-16.aseprite-1cc8a916bef402446c93004b69a6abe5.res"]
+
+[params]
+

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/games/spike/SpikeZone.gd" id="1_q7jpk"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_sy5x7"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/CaveTiles16.tscn" id="3_nbgj7"]
+[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://src/tilemaps/CaveTiles16.tscn" id="3_nbgj7"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="4_n547b"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="5_tn7vn"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="6_gqkt1"]

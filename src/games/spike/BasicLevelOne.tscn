@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="4_cu5va"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="5_jxm16"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="6_1pmen"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/CaveTiles16.tscn" id="7_0dv7i"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionHint.tscn" id="8_qouax"]
+[ext_resource type="PackedScene" uid="uid://c8yo06n5gm2ax" path="res://src/tilemaps/CaveTiles16.tscn" id="7_0dv7i"]
+[ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="8_qouax"]
 
 [node name="BasicLevelOne" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_l5ds8")

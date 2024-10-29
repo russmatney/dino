@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://d3csx7rui8awy"]
 
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_q1syu"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="2_ob33d"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="2_ob33d"]
 
 [node name="04BossTime" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_q1syu")

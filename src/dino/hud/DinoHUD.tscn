@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="1_cqjfn"]
 [ext_resource type="PackedScene" uid="uid://gfe5kefkjfle" path="res://src/core/hood/EntityStatus.tscn" id="2_7c6hy"]
-[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/vexed/Arcade_Cabinet_Monospace.ttf" id="3_wovs3"]
+[ext_resource type="FontFile" path="res://addons/bones/fonts/vexed/Arcade_Cabinet_Monospace.ttf" id="3_wovs3"]
 [ext_resource type="PackedScene" uid="uid://drbmqe5fgckq2" path="res://src/components/notifications/DebugNotificationList.tscn" id="4_4ubwc"]
 [ext_resource type="PackedScene" uid="uid://byj0we053kbu4" path="res://src/dino/hud/WeaponList.tscn" id="6_rcsf7"]
 [ext_resource type="PackedScene" uid="uid://bgoata4oy4d4g" path="res://src/components/notifications/SideNotificationList.tscn" id="7_y1kpf"]

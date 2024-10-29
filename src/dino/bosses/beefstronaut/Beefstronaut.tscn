@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://pot2dpd6w67m" path="res://src/dino/bosses/sidescroller_machine/SSBossMachine.tscn" id="7_7v6vr"]
 [ext_resource type="Texture2D" uid="uid://dmx8juk2455h4" path="res://src/core/assets/lights/light64px1.png" id="12_7xc6l"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="13_qnfjf"]
-[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="14_s0hdd"]
+[ext_resource type="FontFile" path="res://addons/bones/fonts/at01.ttf" id="14_s0hdd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvons"]
 size = Vector2(24, 31)

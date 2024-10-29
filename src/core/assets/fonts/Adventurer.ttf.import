@@ -7,7 +7,7 @@ path="res://.godot/imported/Adventurer.ttf-59bb3414786bb7e2d1f14057fb5fc9ff.font
 
 [deps]
 
-source_file="res://addons/bones/assets/fonts/Adventurer.ttf"
+source_file="res://addons/bones/fonts/Adventurer.ttf"
 dest_files=["res://.godot/imported/Adventurer.ttf-59bb3414786bb7e2d1f14057fb5fc9ff.fontdata"]
 
 [params]

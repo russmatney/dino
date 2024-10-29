@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://bkvfrd7dyu3lp"]
 
-[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/assets/fonts/at01.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="1"]
 
 [resource]
 default_font_size = 48

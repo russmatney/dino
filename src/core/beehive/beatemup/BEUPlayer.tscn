@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/core/beehive/beatemup/BEUPlayer.gd" id="1_10ddc"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://src/core/beehive/beatemup/beu_machine/BEUMachine.tscn" id="1_uku6g"]
 [ext_resource type="SpriteFrames" uid="uid://c5tw5326wr6ra" path="res://src/core/beehive/beatemup/BasicSpriteFrames.tres" id="3_u2xpi"]
-[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/at01.ttf" id="4_1h66e"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="4_1h66e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivhib"]
 radius = 16.0

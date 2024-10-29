@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://5ejo8p8nextp"
+path="res://.godot/imported/spr_template_tile47_16x16_by_lotovik.aseprite-10273244c7ac047f6e8fce4560777082.res"
+
+[deps]
+
+source_file="res://src/tilemaps/templates/spr_template_tile47_16x16_by_lotovik.aseprite"
+dest_files=["res://.godot/imported/spr_template_tile47_16x16_by_lotovik.aseprite-10273244c7ac047f6e8fce4560777082.res"]
+
+[params]
+

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dy883fgdawvt" path="res://src/dino/players/romeo/status_portraits6.png" id="2_bjmqc"]
 [ext_resource type="Theme" uid="uid://co0lie1f8a4j0" path="res://src/themes/Clear.tres" id="2_x8c03"]
 [ext_resource type="PackedScene" uid="uid://cfjqjsw0ekld7" path="res://src/core/hood/HeartsContainer.tscn" id="3_s3umv"]
-[ext_resource type="FontFile" path="res://addons/bones/assets/fonts/vexed/Arcade_Cabinet.ttf" id="4_ow70v"]
+[ext_resource type="FontFile" path="res://addons/bones/fonts/vexed/Arcade_Cabinet.ttf" id="4_ow70v"]
 [ext_resource type="RichTextEffect" uid="uid://cpgmlv5404n2f" path="res://addons/teeb.text_effects/resources/ColorMod.tres" id="5_r3dw3"]
 [ext_resource type="RichTextEffect" uid="uid://beh3j51gse6s2" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="6_bgim4"]
 [ext_resource type="RichTextEffect" uid="uid://c0ubeb8sjlbk6" path="res://addons/teeb.text_effects/resources/Heart.tres" id="7_xdjud"]

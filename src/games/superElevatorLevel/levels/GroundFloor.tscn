@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://brgh77xahcugw"]
 
-[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://addons/bones/reptile/tilemaps/WoodenBoxesTiles8.tscn" id="1_38glr"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://src/tilemaps/WoodenBoxesTiles8.tscn" id="1_38glr"]
 [ext_resource type="Script" path="res://src/games/superElevatorLevel/levels/GroundFloor.gd" id="1_ajnk1"]
 [ext_resource type="PackedScene" uid="uid://dfusbqodk1yxw" path="res://src/games/superElevatorLevel/enemies/Goon.tscn" id="2_jnvos"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="3_17tte"]

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cpabhdkofqic3"
+path="res://.godot/imported/3x3_minimal_autotiles.aseprite-10e760de973d8115b5533690117971b8.res"
+
+[deps]
+
+source_file="res://src/tilemaps/templates/3x3_minimal_autotiles.aseprite"
+dest_files=["res://.godot/imported/3x3_minimal_autotiles.aseprite-10e760de973d8115b5533690117971b8.res"]
+
+[params]
+

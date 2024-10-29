@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b83j30dx35vlh"]
 
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_gwarb"]
-[ext_resource type="PackedScene" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_jelo7"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_jelo7"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="2_vqs0p"]
 
 [node name="04SecondSnowman" type="Node2D" groups=["metro_rooms"]]

@@ -7,7 +7,7 @@ path="res://.godot/imported/at01.ttf-047b99f880b21a307d01a75977a00568.fontdata"
 
 [deps]
 
-source_file="res://addons/bones/assets/fonts/at01.ttf"
+source_file="res://addons/bones/fonts/at01.ttf"
 dest_files=["res://.godot/imported/at01.ttf-047b99f880b21a307d01a75977a00568.fontdata"]
 
 [params]

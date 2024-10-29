@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="5_86tbv"]
 [ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="6_kudew"]
 [ext_resource type="Script" path="res://src/dino/tiles/DinoTileMap.gd" id="6_q8wsp"]
-[ext_resource type="TileSet" uid="uid://dgkfewk2df8x7" path="res://addons/bones/reptile/tilesets/MetalTiles8.tres" id="10_pkkaw"]
+[ext_resource type="TileSet" uid="uid://dgkfewk2df8x7" path="res://src/tilemaps/MetalTiles8.tres" id="10_pkkaw"]
 
 [sub_resource type="Resource" id="Resource_u5y3n"]
 script = ExtResource("3_tseep")

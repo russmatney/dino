@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcu418utbav6s"]
 
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_2onbw"]
-[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://addons/bones/reptile/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
+[ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_78oqi"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_0xsm0"]
 [ext_resource type="Script" path="res://src/core/metro/MetroTravelPointEntity.gd" id="4_mlbpj"]
 
