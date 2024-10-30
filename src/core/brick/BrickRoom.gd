@@ -100,8 +100,8 @@ static func add_tilemap(room: BrickRoom, opts: BrickRoomOpts, label: String, tma
 		# no tiles for label in this room
 		return
 
-	tilemap.set_cells_terrain_connect(0, tile_coords, 0, 0)
-	tilemap.force_update()
+	tilemap.set_cells_terrain_connect(tile_coords, 0, 0)
+	tilemap.update_internals()
 
 	room.tilemaps[label] = tilemap
 	room.add_child(tilemap)

@@ -1,5 +1,5 @@
 @tool
-extends TileMap
+extends TileMapLayer
 class_name DinoTileMap
 
 # NOTE this impl assumes one "layer" and one "terrain_set"
@@ -19,7 +19,7 @@ func _init():
 ## fill ########################################################
 
 func fill_coords(coords: Array[Vector2i]):
-	set_cells_terrain_connect(0, coords, 0, 0)
+	set_cells_terrain_connect(coords, 0, 0)
 
 ## mix ########################################################
 
@@ -32,7 +32,7 @@ func mix_terrains(opts={}):
 		return
 
 	var chunk_count = U.rand_of([5,6,7,8]) * cell_count
-	var tile_coords = get_used_cells(0)
+	var tile_coords = get_used_cells()
 	if tile_coords.is_empty():
 		return
 
@@ -52,4 +52,4 @@ func mix_terrains(opts={}):
 			if coord in tile_coords:
 				to_update.append(coord)
 
-		set_cells_terrain_connect(0, to_update, 0, terrain)
+		set_cells_terrain_connect(to_update, 0, terrain)

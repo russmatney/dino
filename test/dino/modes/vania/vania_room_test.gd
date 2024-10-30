@@ -13,14 +13,14 @@ func test_build_room_sets_tilemap_borders():
 	room.ensure_children()
 	room.setup_tileset()
 	room.fill_tilemap_borders()
-	room.tilemap.force_update()
+	room.tilemap.update_internals()
 
 	var map_cell_rect = def.get_map_cell_rect(def.map_cells[0])
 	var tiles_start = room.tilemap.local_to_map(map_cell_rect.position)
 	var tiles_end = room.tilemap.local_to_map(map_cell_rect.end)
 	tiles_end -= Vector2i.ONE
 
-	var tmap_cells = room.tilemap.get_used_cells(0)
+	var tmap_cells = room.tilemap.get_used_cells()
 	assert_array(tmap_cells).is_not_empty()
 
 	assert_array(tmap_cells).contains([Vector2i(), Vector2i(0, 1), Vector2i(1,0)])
@@ -44,9 +44,9 @@ func test_build_room_walls_concave_shape():
 	room.ensure_children()
 	room.setup_tileset()
 	room.fill_tilemap_borders()
-	room.tilemap.force_update()
+	room.tilemap.update_internals()
 
-	var tmap_cells = room.tilemap.get_used_cells(0)
+	var tmap_cells = room.tilemap.get_used_cells()
 
 	var expected_full_borders = {
 		Vector3i(0, 0, 0): [Vector2i.UP, Vector2i.LEFT],
@@ -98,7 +98,7 @@ func test_build_room_sets_tilemap_doors():
 	var tiles_end = room.tilemap.local_to_map(map_cell_rect.end)
 	tiles_end -= Vector2i.ONE
 
-	var tmap_cells = room.tilemap.get_used_cells(0)
+	var tmap_cells = room.tilemap.get_used_cells()
 	assert_array(tmap_cells).is_not_empty()
 
 	# right bottom corner
@@ -153,12 +153,12 @@ func test_build_room_sets_tilemap_doors():
 # 	room.setup_tileset()
 # 	room.setup_walls_and_doors()
 
-# 	var bg_tmap_cells = room.bg_tilemap.get_used_cells(0)
+# 	var bg_tmap_cells = room.bg_tilemap.get_used_cells()
 # 	assert_array(bg_tmap_cells).is_empty()
 
 # 	room.add_background_tiles({count=1})
 
-# 	var new_tmap_cells = room.bg_tilemap.get_used_cells(0)
+# 	var new_tmap_cells = room.bg_tilemap.get_used_cells()
 
 # 	assert_int(len(new_tmap_cells) - len(bg_tmap_cells)).is_equal(1) # added one tile
 
@@ -198,13 +198,13 @@ func test_build_room_sets_tilemap_doors():
 # 	room.set_room_def(def)
 # 	room.setup_tileset()
 # 	room.fill_tilemap_borders()
-# 	room.tilemap.force_update()
+# 	room.tilemap.update_internals()
 
-# 	var tmap_cells = room.tilemap.get_used_cells(0)
+# 	var tmap_cells = room.tilemap.get_used_cells()
 # 	assert_array(tmap_cells).is_not_empty()
 
 # 	room.add_tile_chunks({count=1})
-# 	var new_tmap_cells = room.tilemap.get_used_cells(0)
+# 	var new_tmap_cells = room.tilemap.get_used_cells()
 # 	assert_int(len(new_tmap_cells) - len(tmap_cells)).is_equal(1) # added one tile
 # 	# TODO assert the new tile's position
 
@@ -241,8 +241,8 @@ xxx
 	room.ensure_children()
 	room.setup_tileset()
 	room.fill_tilemap_borders()
-	room.tilemap.force_update()
-	var tmap_cells = room.tilemap.get_used_cells(0)
+	room.tilemap.update_internals()
+	var tmap_cells = room.tilemap.get_used_cells()
 	assert_array(tmap_cells).is_not_empty()
 
 	var og_count = room.get_child_count()

@@ -59,7 +59,7 @@ func test_add_rooms_two_small_rooms_create_doors():
 		var map_cell_rect = def.get_map_cell_rect(def.map_cells[0])
 		var tmap = room.get_node("TileMap")
 		var cells_rect = Reptile.rect_to_local_rect(tmap, map_cell_rect)
-		var tmap_cells = tmap.get_used_cells(0)
+		var tmap_cells = tmap.get_used_cells()
 
 		# expected corners are filled
 		assert_array(tmap_cells).contains([cells_rect.position,
@@ -142,7 +142,7 @@ func test_add_rooms_one_small_room_then_another_updates_doors():
 		var map_cell_rect = def.get_map_cell_rect(def.map_cells[0])
 		var tmap = room.get_node("TileMap")
 		var cells_rect = Reptile.rect_to_local_rect(tmap, map_cell_rect)
-		var tmap_cells = tmap.get_used_cells(0)
+		var tmap_cells = tmap.get_used_cells()
 
 		# expected corners are filled
 		assert_array(tmap_cells).contains([cells_rect.position,
@@ -220,7 +220,7 @@ func test_add_rooms_two_small_rooms_remove_one_removes_doors():
 	var map_cell_rect = def.get_map_cell_rect(def.map_cells[0])
 	var tmap = room.get_node("TileMap")
 	var cells_rect = Reptile.rect_to_local_rect(tmap, map_cell_rect)
-	var tmap_cells = tmap.get_used_cells(0)
+	var tmap_cells = tmap.get_used_cells()
 
 	# expected corners are filled
 	assert_array(tmap_cells).contains([cells_rect.position,

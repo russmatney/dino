@@ -128,7 +128,7 @@ static func combine_tilemap(rooms, label, opts):
 		if tmap == null:
 			continue
 
-		new_cell_coords.append_array(tmap.get_used_cells(0).map(func(coord):
+		new_cell_coords.append_array(tmap.get_used_cells().map(func(coord):
 			return BrickLevelGen.room_tilemap_coord_to_new_tilemap_coord(r, tmap, coord, tilemap)))
 
 		if add_borders:
@@ -153,8 +153,8 @@ static func combine_tilemap(rooms, label, opts):
 	if add_borders:
 		new_cell_coords.append_array(border_cells)
 
-	tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
-	tilemap.force_update()
+	tilemap.set_cells_terrain_connect(new_cell_coords, 0, 0)
+	tilemap.update_internals()
 
 	if len(border_depth) > 0:
 		var depth_cells = []
@@ -197,8 +197,8 @@ static func combine_tilemap(rooms, label, opts):
 
 		new_cell_coords.append_array(inner_gap_coords)
 
-		tilemap.set_cells_terrain_connect(0, new_cell_coords, 0, 0)
-		tilemap.force_update()
+		tilemap.set_cells_terrain_connect(new_cell_coords, 0, 0)
+		tilemap.update_internals()
 
 	if "setup" in opts:
 		opts.setup.call(tilemap)

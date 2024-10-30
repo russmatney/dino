@@ -103,5 +103,5 @@ func _on_frame_changed():
 						needs_redraw.append(b)
 
 		for b in needs_redraw:
-			var cells = b.get_used_cells(0)
-			b.set_cells_terrain_connect(0, cells, 0, 0, false)
+			var cells = b.get_used_cells()
+			b.set_cells_terrain_connect(cells, 0, 0, false)

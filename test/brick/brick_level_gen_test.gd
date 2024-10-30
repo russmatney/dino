@@ -30,7 +30,7 @@ room one
 xpx", room_count=3, seed=1,})
 	assert_that(len(data.tilemaps)).is_equal(1)
 	var combined_tilemap = data.tilemaps[0]
-	assert_that(combined_tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(combined_tilemap.get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(0,0),
 		Vector2i(2,0),
 		Vector2i(3,0),
@@ -60,7 +60,7 @@ room one
 xpx", room_count=2, seed=1, label_to_tilemap={"Tile": {add_borders=true}}})
 	assert_that(len(data.tilemaps)).is_equal(1)
 	var combined_tilemap = data.tilemaps[0]
-	assert_that(combined_tilemap.get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(combined_tilemap.get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(-1,0), Vector2i(-1,1), Vector2i(-1,-1),
 		Vector2i(0,0), Vector2i(0,1), Vector2i(0,-1),
 		Vector2i(1,1), Vector2i(1,-1),
@@ -92,14 +92,14 @@ name one
 xtx", seed=1, room_count=2, label_to_tilemap={"Tile": {}, "Pit": {}}})
 	assert_that(len(data.tilemaps)).is_equal(2)
 	var tile = data.tilemaps[0]
-	assert_that(tile.get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(tile.get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(0,0),
 		Vector2i(2,0),
 		Vector2i(3,0),
 		Vector2i(5,0),
 		])
 	var pit = data.tilemaps[1]
-	assert_that(pit.get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(pit.get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(1,0),
 		Vector2i(4,0),
 		])

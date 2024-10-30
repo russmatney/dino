@@ -170,13 +170,13 @@ func setup_tileset():
 	var primary = room_def.get_primary_tiles()
 	if primary:
 		var tmap = primary.get_scene().instantiate()
-		tilemap.set_tileset(tmap.get_tileset().duplicate(true))
+		tilemap.set_tile_set(tmap.get_tile_set().duplicate(true))
 		tilemap.chunk_defs = primary.get_grid_defs()
 
 	var secondary = room_def.get_secondary_tiles()
 	if secondary:
 		var tmap = secondary.get_scene().instantiate()
-		bg_tilemap.set_tileset(tmap.get_tileset().duplicate(true))
+		bg_tilemap.set_tile_set(tmap.get_tile_set().duplicate(true))
 		bg_tilemap.chunk_defs = secondary.get_grid_defs()
 
 		Reptile.disable_collisions(bg_tilemap)
@@ -215,7 +215,7 @@ func setup_walls_and_doors():
 	fill_tilemap_borders({skip_cells=door_tile_coords})
 
 	tilemap.mix_terrains()
-	tilemap.force_update()
+	tilemap.update_internals()
 
 func get_door_tile_coords():
 	var coords = []
@@ -430,7 +430,7 @@ func add_tile_chunks(tmap=null, opts={}):
 	if not tile_coords.is_empty():
 		tmap.fill_coords(tile_coords)
 		tmap.mix_terrains()
-		tmap.force_update()
+		tmap.update_internals()
 
 ## background tiles ##############################################################
 
@@ -527,7 +527,7 @@ func build_tilemap_data():
 
 		for t_cell in Reptile.cells_in_rect(rect):
 			tmap_data[t_cell] = null
-		for t_cell in tilemap.get_used_cells(0):
+		for t_cell in tilemap.get_used_cells():
 			tmap_data[t_cell] = ["Tile"]
 	return tmap_data
 

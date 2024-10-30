@@ -75,7 +75,7 @@ func test_create_room_start():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.def.meta.room_type).is_equal("START")
-	assert_that(room.tilemaps.values()[0].get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(room.tilemaps.values()[0].get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(0, 1),
 		Vector2i(0, 0),
@@ -94,7 +94,7 @@ func test_create_room_end():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.def.meta.room_type).is_equal("END")
-	assert_that(room.tilemaps.values()[0].get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(room.tilemaps.values()[0].get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(0, 0),
 		Vector2i(1, 0),
@@ -113,7 +113,7 @@ func test_create_room_square():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.def.meta.room_type).is_equal("SQUARE")
-	assert_that(room.tilemaps.values()[0].get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(room.tilemaps.values()[0].get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(0, 2),
 		Vector2i(1, 2),
 		Vector2i(2, 2),
@@ -131,7 +131,7 @@ func test_create_room_long():
 
 	assert_that(room.position).is_equal(Vector2.ZERO)
 	assert_that(room.def.meta.room_type).is_equal("LONG")
-	assert_that(room.tilemaps.values()[0].get_used_cells(0)).contains_exactly_in_any_order([
+	assert_that(room.tilemaps.values()[0].get_used_cells()).contains_exactly_in_any_order([
 		Vector2i(0, 0),
 		Vector2i(1, 0),
 		Vector2i(2, 0),
