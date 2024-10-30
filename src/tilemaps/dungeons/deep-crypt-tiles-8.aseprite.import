@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dq6oqco6yqvxe"
+path="res://.godot/imported/deep-crypt-tiles-8.aseprite-8d5a407f7f52b8e9db7f00d9067e29fa.res"
+
+[deps]
+
+source_file="res://src/tilemaps/dungeons/deep-crypt-tiles-8.aseprite"
+dest_files=["res://.godot/imported/deep-crypt-tiles-8.aseprite-8d5a407f7f52b8e9db7f00d9067e29fa.res"]
+
+[params]
+

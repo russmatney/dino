@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnoqoloeex0er"]
+
+[ext_resource type="TileSet" uid="uid://dn26xh12hupr1" path="res://src/tilemaps/wooden/WoodenBoxesTiles8.tres" id="1_sr283"]
+
+[node name="WoodenBoxesTiles8" type="TileMapLayer"]
+use_parent_material = true
+tile_set = ExtResource("1_sr283")

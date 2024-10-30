@@ -20,10 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="14_l82es"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="15_r03j1"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="17_aao4x"]
-[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://src/tilemaps/SnowTiles16.tscn" id="18_34m1s"]
-[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://src/tilemaps/GrassyCaveTileMap8.tscn" id="19_na50t"]
-[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/GildedKingdomTiles8.tscn" id="20_1t25n"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/PurpleStoneTiles16.tscn" id="21_xbmuk"]
+[ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://src/tilemaps/snow/SnowTiles16.tscn" id="18_34m1s"]
+[ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://src/tilemaps/grass/GrassyCaveTileMap8.tscn" id="19_na50t"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/kingdom/GildedKingdomTiles8.tscn" id="20_1t25n"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/kingdom/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
 [node name="Area01" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_71epl")

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cye1kopuq3gm7" path="res://src/dino/entities/lights/DownwardLight.tscn" id="5_7o4rk"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="6_1whs1"]
 [ext_resource type="PackedScene" uid="uid://ddklv6bc7o134" path="res://src/dino/entities/lights/SmallLight.tscn" id="7_nshr3"]
-[ext_resource type="TileSet" uid="uid://bwwxt4q7tnsix" path="res://src/tilemaps/VolcanoTiles8.tres" id="8_60rh1"]
+[ext_resource type="TileSet" uid="uid://bwwxt4q7tnsix" path="res://src/tilemaps/volcano/VolcanoTiles8.tres" id="8_60rh1"]
 
 [sub_resource type="Resource" id="Resource_chcx2"]
 script = ExtResource("2_vbfg0")

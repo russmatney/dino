@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c01frc8v35maw"
+path="res://.godot/imported/snow_tiles.aseprite-ebc9d2694d2f513531d62a8ce8cfb486.res"
+
+[deps]
+
+source_file="res://src/tilemaps/snow/snow_tiles.aseprite"
+dest_files=["res://.godot/imported/snow_tiles.aseprite-ebc9d2694d2f513531d62a8ce8cfb486.res"]
+
+[params]
+

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://o7oul34t6jgp"]
 
 [ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_t0fk6"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/MetalTiles8.tscn" id="2_5o6eg"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/metal/MetalTiles8.tscn" id="2_5o6eg"]
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_yr61h"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/dino/bosses/monstroar/Monstroar.tscn" id="3_r2tqp"]
 [ext_resource type="PackedScene" uid="uid://iek1yvone6at" path="res://src/dino/bosses/beefstronaut/Beefstronaut.tscn" id="4_cgsg1"]

@@ -14,7 +14,7 @@ texture = ExtResource("1_6kp46")
 occlusion_layer_0/light_mask = 1
 sources/0 = SubResource("TileSetAtlasSource_kyrvt")
 
-[node name="OccluderTiles16" type="TileMap"]
+[node name="OccluderTiles16" type="TileMapLayer"]
+use_parent_material = true
 tile_set = SubResource("TileSet_uxr5x")
-cell_quadrant_size = 8
-format = 2
+rendering_quadrant_size = 8

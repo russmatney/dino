@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddn740g8ads31"]
+
+[ext_resource type="TileSet" uid="uid://c3mxbwmxwyyb5" path="res://src/tilemaps/grass/GrassyFloorTiles16.tres" id="1_y53av"]
+
+[node name="GrassFloorTiles16" type="TileMapLayer"]
+use_parent_material = true
+tile_set = ExtResource("1_y53av")

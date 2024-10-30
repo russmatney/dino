@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmaxg11lghsbw"]
+
+[ext_resource type="TileSet" uid="uid://g54lenijf4n6" path="res://src/tilemaps/dicenine/DiceNineTileSet.tres" id="1_2awxp"]
+
+[node name="DiceNineTileMap" type="TileMapLayer"]
+use_parent_material = true
+tile_set = ExtResource("1_2awxp")
+rendering_quadrant_size = 8

@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_73k7n"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_745pf"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="4_pu2un"]
-[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://src/tilemaps/VolcanoTiles8.tscn" id="5_7ddxx"]
-[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/GildedKingdomTiles8.tscn" id="6_ud18o"]
-[ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://src/tilemaps/SpaceshipTiles8.tscn" id="7_uuthp"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/MetalTiles8.tscn" id="8_alh1l"]
-[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://src/tilemaps/WoodenBoxesTiles8.tscn" id="9_riceh"]
+[ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://src/tilemaps/volcano/VolcanoTiles8.tscn" id="5_7ddxx"]
+[ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/kingdom/GildedKingdomTiles8.tscn" id="6_ud18o"]
+[ext_resource type="PackedScene" uid="uid://bt8jdg76u0jh6" path="res://src/tilemaps/spaceship/SpaceshipTiles8.tscn" id="7_uuthp"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/metal/MetalTiles8.tscn" id="8_alh1l"]
+[ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://src/tilemaps/wooden/WoodenBoxesTiles8.tscn" id="9_riceh"]
 
 [node name="Area08AllTheThings" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n8dgq")

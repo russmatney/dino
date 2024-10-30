@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcidi6i4xi1xa"]
+
+[ext_resource type="TileSet" uid="uid://4dyw7g538e23" path="res://src/tilemaps/snow/SnowTiles16.tres" id="1_jbxsv"]
+
+[node name="SnowTiles16" type="TileMapLayer"]
+use_parent_material = true
+tile_set = ExtResource("1_jbxsv")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://de4i3g6qie606"
+path="res://.godot/imported/stone_tiles.aseprite-1093a6ff827e05572278fce474fbd695.res"
+
+[deps]
+
+source_file="res://src/tilemaps/kingdom/stone_tiles.aseprite"
+dest_files=["res://.godot/imported/stone_tiles.aseprite-1093a6ff827e05572278fce474fbd695.res"]
+
+[params]
+

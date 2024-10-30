@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf2h0k17vuvga"]
+
+[ext_resource type="TileSet" uid="uid://dgkfewk2df8x7" path="res://src/tilemaps/metal/MetalTiles8.tres" id="1_ixg6n"]
+
+[node name="MetalTiles8" type="TileMapLayer"]
+use_parent_material = true
+tile_set = ExtResource("1_ixg6n")

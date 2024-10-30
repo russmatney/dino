@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dt8fmfu7hnyt7"
+path="res://.godot/imported/metal-tiles-8.aseprite-89f7c0760e52d6b22f896a3345a8e0ab.res"
+
+[deps]
+
+source_file="res://src/tilemaps/metal/metal-tiles-8.aseprite"
+dest_files=["res://.godot/imported/metal-tiles-8.aseprite-89f7c0760e52d6b22f896a3345a8e0ab.res"]
+
+[params]
+

@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://src/core/brick/BrickRoom.gd" id="9_mbvbi"]
 [ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="10_tiykt"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_3kpot"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/MetalTiles8.tscn" id="12_r53ry"]
+[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/metal/MetalTiles8.tscn" id="12_r53ry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ippqw"]
 size = Vector2(368, 112)

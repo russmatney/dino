@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt8jdg76u0jh6"]
+
+[ext_resource type="TileSet" uid="uid://daa3dtllkaqv3" path="res://src/tilemaps/spaceship/SpaceshipTiles8.tres" id="1_sf6qo"]
+
+[node name="SpaceshipTiles8" type="TileMapLayer"]
+use_parent_material = true
+tile_set = ExtResource("1_sf6qo")

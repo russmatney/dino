@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/games/spike/SpikeZone.gd" id="1_ohnu3"]
 [ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_m1lks"]
-[ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://src/tilemaps/GrassTiles16.tscn" id="3_wessm"]
+[ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://src/tilemaps/grass/GrassTiles16.tscn" id="3_wessm"]
 [ext_resource type="PackedScene" uid="uid://dspqmcg2iysem" path="res://src/dino/platforms/OneWayPlatform.tscn" id="4_1nvdq"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="5_10une"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="6_x81mv"]

@@ -30,8 +30,8 @@ InputHelper="*res://addons/input_helper/input_helper.gd"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 Debug="*res://addons/bones/Debug.gd"
 Navi="*res://addons/bones/navi/Navi.gd"
+DJ="*res://addons/bones/DJ.gd"
 Hotel="*res://src/core/hotel/Hotel.gd"
-DJ="*res://addons/bones/dj/DJ.gd"
 Metro="*res://src/core/metro/Metro.gd"
 Records="*res://src/dino/Records.gd"
 Dino="*res://src/dino/Dino.gd"
@@ -60,8 +60,10 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 [file_customization]
 
 folder_colors={
+"res://addons/": "red",
 "res://addons/bones/": "gray",
 "res://assets/": "yellow",
+"res://src/": "teal",
 "res://src/core/": "purple",
 "res://src/dino/": "purple",
 "res://src/dino/bosses/": "pink",

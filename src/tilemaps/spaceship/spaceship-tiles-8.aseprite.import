@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://vv72b1r2w5fy"
+path="res://.godot/imported/spaceship-tiles-8.aseprite-51d968df5a1517390316c78537f91af0.res"
+
+[deps]
+
+source_file="res://src/tilemaps/spaceship/spaceship-tiles-8.aseprite"
+dest_files=["res://.godot/imported/spaceship-tiles-8.aseprite-51d968df5a1517390316c78537f91af0.res"]
+
+[params]
+
