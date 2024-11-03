@@ -16,12 +16,6 @@ func _ready():
 	var main_scene_path = ProjectSettings.get_setting("application/run/main_scene")
 	if first.scene_file_path == main_scene_path:
 		first_scene = first
-
-	set_main_menu("res://src/menus/MainMenu.tscn")
-	set_pause_menu("res://addons/bones/navi/NaviPauseMenu.tscn")
-	set_win_menu("res://addons/bones/navi/NaviWinMenu.tscn")
-	set_death_menu("res://addons/bones/navi/NaviDeathMenu.tscn")
-
 ## input ###################################################################
 
 func _unhandled_input(event):
@@ -159,6 +153,10 @@ func resume():
 	# Music.switch_to_game_music()
 	pause_toggled.emit(false)
 
+func is_paused() -> bool:
+	return get_tree().paused
+
+
 ## menus ###################################################################
 
 var menus = []
@@ -210,11 +208,14 @@ func set_main_menu(path_or_scene):
 		Log.warn("No scene at path", path, ", can't set main menu.")
 
 func nav_to_main_menu():
-	if ResourceLoader.exists(main_menu_path):
+	if main_menu_path and ResourceLoader.exists(main_menu_path):
 		hide_menus()
 		nav_to(main_menu_path)
 	else:
 		Log.warn("No scene at path: ", main_menu_path, ", can't navigate.")
+
+func quit_game():
+	get_tree().quit()
 
 ## pause menu ###################################################################
 

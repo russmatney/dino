@@ -79,11 +79,15 @@ func start(opts={}):
 			break
 
 	if state:
+		initial_state = NodePath(state.name)
 		state.enter(opts)
 		transitioned.emit(state.name)
 
 	is_transitioning = false
 	is_started = true
+
+func restart():
+	transit(initial_state)
 
 ## transitions ###################################################################
 

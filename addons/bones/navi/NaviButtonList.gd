@@ -57,6 +57,8 @@ func add_menu_item(item):
 		return
 
 	var label = item.get("label", "Fallback Label")
+	if label is Callable:
+		label = label.call()
 	if label in texts:
 		Log.warn("Found existing button with label, skipping add_menu_item", item)
 		return
