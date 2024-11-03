@@ -82,8 +82,8 @@ func all_rooms_visited():
 ## enter_tree
 
 func _enter_tree():
-	if Engine.is_editor_hint():
-		return
+	# if Engine.is_editor_hint():
+	# 	return
 	Log.warn("adjusting MetSys settings for Vania Game")
 	# set expected metsys settings
 	MetSys.settings = MetSysSettings

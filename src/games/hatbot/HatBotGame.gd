@@ -9,8 +9,8 @@ class_name HatBotGame
 @export var player_entity: DinoPlayerEntity
 
 func _enter_tree():
-	if Engine.is_editor_hint():
-		return
+	# if Engine.is_editor_hint():
+	# 	return
 	Log.warn("adjusting MetSys settings for HatBot Game")
 	MetSys.settings = MetSysSettings
 

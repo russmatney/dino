@@ -164,7 +164,7 @@
 					},
 					"level_scene": {
 						"type": "resource",
-						"value": "res://src/games/shirt/CaveOne.tscn"
+						"value": "res://src/games/shirt/ShirtGame.tscn"
 					}
 				}
 			},
