@@ -131,15 +131,15 @@ func _on_toggle_hotel_db_pressed():
 
 # DJ TurnTable
 
-const dj_turntable_scene = preload("res://addons/bones/dj/TurnTable.tscn")
-var dj_turntable
+# const dj_turntable_scene = preload("res://addons/bones/dj/TurnTable.tscn")
+# var dj_turntable
 
-func _on_toggle_dj_turn_table_pressed():
-	if dj_turntable and is_instance_valid(dj_turntable):
-		dj_turntable.queue_free()
-	else:
-		dj_turntable = dj_turntable_scene.instantiate()
-		$%ToggleDJTurnTable.add_sibling(dj_turntable)
+# func _on_toggle_dj_turn_table_pressed():
+# 	if dj_turntable and is_instance_valid(dj_turntable):
+# 		dj_turntable.queue_free()
+# 	else:
+# 		dj_turntable = dj_turntable_scene.instantiate()
+# 		$%ToggleDJTurnTable.add_sibling(dj_turntable)
 
 # Metro Map
 
