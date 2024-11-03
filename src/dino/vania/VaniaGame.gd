@@ -1,3 +1,4 @@
+@tool
 extends Node
 class_name VaniaGame
 
@@ -51,6 +52,8 @@ var ready_for_next: bool = false
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
 
+@export var MetSysSettings = preload("res://src/dino/vania/VaniaMetSysSettings.tres")
+
 @onready var hud = $%DinoHUD
 var time: float = 0
 var time_int = 0
@@ -76,9 +79,26 @@ func mark_room_visited(rd: VaniaRoomDef):
 func all_rooms_visited():
 	return room_defs.all(func(rd): return rd.visited)
 
+## enter_tree
+
+func _enter_tree():
+	if Engine.is_editor_hint():
+		return
+	Log.warn("adjusting MetSys settings for Vania Game")
+	# set expected metsys settings
+	MetSys.settings = MetSysSettings
+
+	# TODO ignore if already connected
+	MetSys.settings.theme_changed.connect(MetSys._update_theme)
+	MetSys._update_theme()
+	# MetSys.map_data = MapData.new()
+	MetSys.map_data.load_data()
+
 ## ready #######################################################
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
 	modules.append(VaniaRoomTransitions.new(self))
 
 	# MetSys.cell_changed.connect(on_cell_changed, CONNECT_DEFERRED)
@@ -361,6 +381,9 @@ func _exit_tree():
 ## process #######################################################
 
 func _process(_delta: float):
+	if Engine.is_editor_hint():
+		return
+
 	if not generating.is_alive():
 		generating.wait_to_finish()
 		generating = null
@@ -370,6 +393,9 @@ func _process(_delta: float):
 		room_gen_complete.emit()
 
 func _physics_process(delta: float):
+	if Engine.is_editor_hint():
+		return
+
 	if game_timer_running:
 		# slow mo probably affects this
 		# could be better to do in _process, but the threading and set_process(false) makes it weird

@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://eti55dwfxq0b"]
+
+[ext_resource type="Script" path="res://src/games/hatbot/HatBotGame.gd" id="1_xd8wj"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_4n3jf"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_mh42o"]
+
+[sub_resource type="Resource" id="Resource_psfxv"]
+script = ExtResource("2_mh42o")
+_id = "166"
+
+[node name="HatBotGame" type="Node"]
+script = ExtResource("1_xd8wj")
+player_entity = SubResource("Resource_psfxv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.2, 3.2)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_4n3jf")

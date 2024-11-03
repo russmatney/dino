@@ -189,7 +189,7 @@
 					},
 					"level_scene": {
 						"type": "resource",
-						"value": "res://src/games/hatbot/zones/LevelZero.tscn"
+						"value": "res://src/games/hatbot/HatBotGame.tscn"
 					}
 				}
 			},
