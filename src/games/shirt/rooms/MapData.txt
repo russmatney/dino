@@ -1,2 +1,6 @@
 [-4,-4,0]
-0,0,0,0|||RoomZero.tscn
+1,0,0,0|||RoomZero.tscn
+[-3,-4,0]
+0,0,1,1|||RoomOne.tscn
+[-3,-5,0]
+0,1,0,0|||RoomTwo.tscn
