@@ -43,8 +43,8 @@ func recreate_cache():
 	
 	var rect := Rect2i(begin, size)
 	var element_manager: MetroidvaniaSystem.CustomElementManager = MetSys.settings.custom_elements
-	var element_list := MetSys.map_data.custom_elements
-	
+	var element_list = MetSys.map_data.custom_elements
+
 	for coords in MetSys.map_data.custom_elements:
 		if coords.z != layer:
 			continue
@@ -66,7 +66,7 @@ func _make_custom_element_instance(coords: Vector3i, data: Dictionary):
 	_custom_elements_cache[coords] = element_instance
 
 func update_custom_element_at(coords: Vector3i):
-	var element_list := MetSys.map_data.custom_elements
+	var element_list = MetSys.map_data.custom_elements
 	var element: Dictionary = element_list.get(coords, {})
 	
 	if element.is_empty():
