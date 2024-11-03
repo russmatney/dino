@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dn4rvsruwki57"]
+
+[ext_resource type="Script" path="res://addons/MetroidvaniaSystem/Scripts/Settings.gd" id="1_oms8t"]
+[ext_resource type="Resource" uid="uid://bt6s3nd8xo6b" path="res://addons/MetroidvaniaSystem/Themes/Exquisite/Theme.tres" id="2_1xl8c"]
+
+[resource]
+script = ExtResource("1_oms8t")
+theme = ExtResource("2_1xl8c")
+map_root_folder = "res://src/games/shirt/rooms/"
+map_extents = 100
+scene_template = ""
+in_game_cell_size = Vector2(480, 270)
+discover_whole_rooms = false
+collectible_list = Array[Dictionary]([])
+assign_uid_to_rooms = false

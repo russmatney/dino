@@ -1,17 +1,18 @@
 @tool
 extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
-class_name HatBotGame
+class_name ShirtGame
 
 # this script based initially on MetSys/SampleProject/Scripts/Game.gd
 
 @export var first_room: String = "RoomZero.tscn"
-@export var MetSysSettings = preload("res://src/games/hatbot/HatBotMetSysSettings.tres")
+@export var MetSysSettings = preload("res://src/games/shirt/ShirtMetSysSettings.tres")
 @export var player_entity: DinoPlayerEntity
 
 func _enter_tree():
-	if Engine.is_editor_hint():
-		return
-	Log.warn("adjusting MetSys settings for HatBot Game")
+	# if Engine.is_editor_hint():
+	# 	return
+
+	Log.warn("adjusting MetSys settings for Shirt Game")
 	MetSys.settings = MetSysSettings
 
 	# TODO ignore if already connected
@@ -34,7 +35,7 @@ func _ready():
 		if p:
 			set_player(p), CONNECT_DEFERRED)
 
-	Dino.create_new_player({entity=player_entity, genre=DinoData.GenreType.SideScroller})
+	Dino.create_new_player({entity=player_entity, genre=DinoData.GenreType.TopDown})
 
 	# if OS.get_environment("__metsys_first_room__"):
 	# 	var first_room_overwrite = OS.get_environment("__metsys_first_room__")
@@ -49,9 +50,7 @@ func _ready():
 	add_modules()
 
 func add_modules():
-	var paths = [
-		"res://src/games/hatbot/HatBotRoomTransitions.gd"
-		]
+	var paths = ["res://src/games/shirt/ShirtRoomTransitions.gd"]
 	for p in paths:
 		var module: MetSysModule = load(p).new(self)
 		modules.append(module)

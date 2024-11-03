@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://kvcwm66wewb5"]
+
+[ext_resource type="Script" path="res://src/games/shirt/ShirtGame.gd" id="1_5hu6e"]
+[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_lnkh6"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_42jrc"]
+
+[sub_resource type="Resource" id="Resource_0yc5b"]
+script = ExtResource("2_lnkh6")
+_id = "73"
+
+[node name="ShirtGame" type="Node"]
+script = ExtResource("1_5hu6e")
+player_entity = SubResource("Resource_0yc5b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_42jrc")
