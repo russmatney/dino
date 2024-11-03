@@ -33,7 +33,9 @@ class PData:
 			entity_id = opts.get("entity_id")
 			entity = Pandora.get_entity(entity_id)
 		if opts.get("genre_type"):
-			genre_type = genre_type
+			genre_type = opts.genre_type
+		if opts.get("genre"):
+			genre_type = opts.genre
 		input_opts = opts
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
