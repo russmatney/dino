@@ -1,7 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cx1ykp5wso44h"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hu4sj"]
-load_path = "res://.godot/imported/pirate_ship_auto_tiles_sheet.png-8a83e7794303305dd7f1d5b16aa6854e.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t2rl4"]
 texture = SubResource("CompressedTexture2D_hu4sj")

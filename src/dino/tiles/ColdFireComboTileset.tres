@@ -1,7 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cdox7d6lyf06q"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sqicw"]
-load_path = "res://.godot/imported/64x64coldfire_sheet.png-bb5d40c364137f3a02c3f42d1cc8e1dc.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5rgot"]
 texture = SubResource("CompressedTexture2D_sqicw")

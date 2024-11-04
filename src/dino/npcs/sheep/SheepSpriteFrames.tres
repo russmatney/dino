@@ -1,7 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://d2p03bosdesai"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vi2am"]
-load_path = "res://.godot/imported/32x32autumnglow_tiles_sheet.png-eccc12d8e5be261b89ce7b6bed1d3ff8.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qvw6w"]
 atlas = SubResource("CompressedTexture2D_vi2am")
