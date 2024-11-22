@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_2ers6"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_5n31l"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_26i2a"]
-[ext_resource type="TileSet" uid="uid://cdox7d6lyf06q" path="res://src/dino/tiles/ColdFireComboTileset.tres" id="5_jykwt"]
+[ext_resource type="TileSet" uid="uid://cdox7d6lyf06q" path="res://src/tilemaps/coldfire/ColdFireComboTileset.tres" id="5_jykwt"]
 
 [sub_resource type="Resource" id="Resource_0nclu"]
 script = ExtResource("2_2ers6")

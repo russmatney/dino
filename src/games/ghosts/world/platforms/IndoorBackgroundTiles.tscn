@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://diyagfcf418hq"]
-
-[ext_resource type="TileSet" uid="uid://blvew4kmdi1j" path="res://src/games/ghosts/world/platforms/IndoorBackgroundTiles.tres" id="1"]
-
-[node name="IndoorBackgroundTiles" type="TileMap"]
-modulate = Color(0.443137, 0.435294, 0.678431, 0.505882)
-tile_set = ExtResource("1")
-format = 2

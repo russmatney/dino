@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cw5hkko0eu7ed"]
-
-[ext_resource type="TileSet" uid="uid://cdox7d6lyf06q" path="res://src/dino/tiles/ColdFireComboTileset.tres" id="1_cihjg"]
-
-[node name="ColdFireCombo" type="TileMapLayer"]
-use_parent_material = true
-tile_set = ExtResource("1_cihjg")
-rendering_quadrant_size = 8

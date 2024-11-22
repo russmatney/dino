@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" path="res://src/games/ghosts/world/Door.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/games/ghosts/world/platforms/IndoorBackgroundTiles.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/games/ghosts/world/platforms/IndoorTiles.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/tilemaps/boat/IndoorBackgroundTiles.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/tilemaps/boat/IndoorTiles.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_ntm7a"]
 [ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="9_pu6ds"]

@@ -2642,7 +2642,7 @@
 			},
 			{
 				"_category_id": "179",
-				"_default_value": "res://src/dino/tiles/ColdFireCombo.tscn",
+				"_default_value": "res://src/tilemaps/coldfire/ColdFireCombo.tscn",
 				"_id": "181",
 				"_name": "scene",
 				"_type": "resource"

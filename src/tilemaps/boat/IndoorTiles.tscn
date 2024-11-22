@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtx8n1ldkhdjg"]
+
+[ext_resource type="TileSet" uid="uid://cx1ykp5wso44h" path="res://src/tilemaps/boat/IndoorTiles.tres" id="1"]
+
+[node name="IndoorTiles" type="TileMap"]
+tile_set = ExtResource("1")
+format = 2

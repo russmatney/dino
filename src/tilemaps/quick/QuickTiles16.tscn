@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bc5kci7uil630"]
-
-[ext_resource type="TileSet" uid="uid://dyx4m4w3183li" path="res://src/tilemaps/quick/QuickTiles16.tres" id="1_7sl20"]
-
-[node name="QuickTiles" type="TileMapLayer"]
-use_parent_material = true
-tile_set = ExtResource("1_7sl20")
