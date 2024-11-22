@@ -64,6 +64,9 @@ func _enter_tree() -> void:
 	
 	get_singleton().settings.theme_changed.connect(func(): prev_theme_state.clear())
 
+	# DINO addition - support calling plugin.main functions in @tool scripts!
+	get_singleton().plugin = self
+
 func _exit_tree() -> void:
 	main.queue_free()
 

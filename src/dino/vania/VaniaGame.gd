@@ -82,10 +82,7 @@ func all_rooms_visited():
 ## enter_tree #######################################################
 
 func _enter_tree():
-	# if Engine.is_editor_hint():
-	# 	return
-
-	Vania.reset_metsys_context(vania_metsys_settings)
+	Vania.reset_metsys_context(self, vania_metsys_settings)
 
 ## exit_tree #######################################################
 

@@ -3,18 +3,39 @@ class_name Vania
 
 ## static #############################################
 
-## NOTE this doesn't completely work yet!
-static func reset_metsys_context(metsys_settings):
-	Log.info("resetting MetSys context")
+static func reset_metsys_context(game, metsys_settings):
+	# only run if the settings actually change
+	if MetSys.settings == metsys_settings:
+		Log.info("skipping MetSys reset, in same context", game)
+		return
+	Log.info("resetting MetSys context", game)
 	MetSys.settings = metsys_settings
 
 	# this is typically already connected
 	U._connect(MetSys.settings.theme_changed, MetSys._update_theme)
 	MetSys._update_theme()
 
-	var MapData = load("res://addons/MetroidvaniaSystem/Scripts/MapData.gd")
-	MetSys.map_data = MapData.new()
-	MetSys.map_data.load_data()
+	if Engine.is_editor_hint() and MetSys.plugin != null:
+		var db_main = MetSys.plugin.main
+		if db_main:
+			# calls Database/Main.tscn.reload_map()
+			db_main.reload_map()
+		else:
+			Log.warn("Metsys/Database/Main node not found, could not reset metsys context", db_main)
+	else:
+		# non-editor map data reload
+		# TODO be sure the minimap updates as expected
+
+		# this bit from Database/Manage.tscn.force_reload()
+		MetSys.map_data = MetSys.MapData.new()
+		MetSys.map_data.load_data()
+		for group in MetSys.map_data.cell_groups.values():
+			var i: int = 0
+			while i < group.size():
+				if MetSys.map_data.get_cell_at(group[i]):
+					i += 1
+				else:
+					group.remove_at(i)
 
 ## vars ##################################################3
 

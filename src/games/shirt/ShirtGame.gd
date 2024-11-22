@@ -9,10 +9,7 @@ class_name ShirtGame
 @export var player_entity: DinoPlayerEntity
 
 func _enter_tree():
-	# if Engine.is_editor_hint():
-	# 	return
-
-	Vania.reset_metsys_context(shirt_metsys_settings)
+	Vania.reset_metsys_context(self, shirt_metsys_settings)
 
 func _exit_tree():
 	for m in modules:
