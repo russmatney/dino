@@ -52,7 +52,7 @@ var ready_for_next: bool = false
 var room_defs: Array[VaniaRoomDef] = []
 @export var map_def: MapDef
 
-@export var MetSysSettings = preload("res://src/dino/vania/VaniaMetSysSettings.tres")
+@export var vania_metsys_settings = preload("res://src/dino/vania/VaniaMetSysSettings.tres")
 
 @onready var hud = $%DinoHUD
 var time: float = 0
@@ -84,15 +84,8 @@ func all_rooms_visited():
 func _enter_tree():
 	# if Engine.is_editor_hint():
 	# 	return
-	Log.warn("adjusting MetSys settings for Vania Game")
-	# set expected metsys settings
-	MetSys.settings = MetSysSettings
 
-	# TODO ignore if already connected
-	MetSys.settings.theme_changed.connect(MetSys._update_theme)
-	MetSys._update_theme()
-	# MetSys.map_data = MapData.new()
-	MetSys.map_data.load_data()
+	Vania.reset_metsys_context(vania_metsys_settings)
 
 ## ready #######################################################
 

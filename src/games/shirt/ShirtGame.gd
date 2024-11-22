@@ -5,21 +5,14 @@ class_name ShirtGame
 # this script based initially on MetSys/SampleProject/Scripts/Game.gd
 
 @export var first_room: String = "RoomZero.tscn"
-@export var MetSysSettings = preload("res://src/games/shirt/ShirtMetSysSettings.tres")
+@export var shirt_metsys_settings = preload("res://src/games/shirt/ShirtMetSysSettings.tres")
 @export var player_entity: DinoPlayerEntity
 
 func _enter_tree():
 	# if Engine.is_editor_hint():
 	# 	return
 
-	Log.warn("adjusting MetSys settings for Shirt Game")
-	MetSys.settings = MetSysSettings
-
-	# TODO ignore if already connected
-	MetSys.settings.theme_changed.connect(MetSys._update_theme)
-	MetSys._update_theme()
-	# MetSys.map_data = MapData.new()
-	MetSys.map_data.load_data()
+	Vania.reset_metsys_context(shirt_metsys_settings)
 
 func _ready():
 	if Engine.is_editor_hint():

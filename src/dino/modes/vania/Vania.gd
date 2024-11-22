@@ -1,4 +1,18 @@
 extends Node2D
+class_name Vania
+
+## static #############################################
+
+## NOTE this doesn't completely work yet!
+static func reset_metsys_context(metsys_settings):
+	Log.info("resetting MetSys context")
+	MetSys.settings = metsys_settings
+
+	# this is typically already connected
+	U._connect(MetSys.settings.theme_changed, MetSys._update_theme)
+	MetSys._update_theme()
+	# MetSys.map_data = MapData.new()
+	MetSys.map_data.load_data()
 
 ## vars ##################################################3
 
