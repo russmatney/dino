@@ -13,6 +13,9 @@ func _init(p_game: VaniaGame) -> void:
 
 	MetSys.room_changed.connect(_on_room_changed, CONNECT_DEFERRED)
 
+func _deinit():
+	MetSys.room_changed.disconnect(_on_room_changed)
+
 ## on_room_changed ##################################
 
 func _on_room_changed(target_room: String, ignore_same_room=true):

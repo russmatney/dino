@@ -79,13 +79,22 @@ func mark_room_visited(rd: VaniaRoomDef):
 func all_rooms_visited():
 	return room_defs.all(func(rd): return rd.visited)
 
-## enter_tree
+## enter_tree #######################################################
 
 func _enter_tree():
 	# if Engine.is_editor_hint():
 	# 	return
 
 	Vania.reset_metsys_context(vania_metsys_settings)
+
+## exit_tree #######################################################
+
+func _exit_tree():
+	if generating:
+		generating.wait_to_finish()
+
+	for m in modules:
+		m._deinit()
 
 ## ready #######################################################
 
@@ -364,12 +373,6 @@ func vania_game_complete():
 
 	# allow input to move to next
 	ready_for_next = true
-
-## exit_tree #######################################################
-
-func _exit_tree():
-	if generating:
-		generating.wait_to_finish()
 
 ## process #######################################################
 

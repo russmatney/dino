@@ -14,6 +14,10 @@ func _enter_tree():
 
 	Vania.reset_metsys_context(hatbot_metsys_settings)
 
+func _exit_tree():
+	for m in modules:
+		m._deinit()
+
 func _ready():
 	if Engine.is_editor_hint():
 		return

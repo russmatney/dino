@@ -11,7 +11,9 @@ static func reset_metsys_context(metsys_settings):
 	# this is typically already connected
 	U._connect(MetSys.settings.theme_changed, MetSys._update_theme)
 	MetSys._update_theme()
-	# MetSys.map_data = MapData.new()
+
+	var MapData = load("res://addons/MetroidvaniaSystem/Scripts/MapData.gd")
+	MetSys.map_data = MapData.new()
 	MetSys.map_data.load_data()
 
 ## vars ##################################################3

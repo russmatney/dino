@@ -5,9 +5,17 @@ extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysModule.gd"
 
 var player: Node2D
 
+func set_player(p):
+	player = p
+
 func _initialize():
-	Dino.player_ready.connect(func(p): player = p)
+	Dino.player_ready.connect(set_player)
 	MetSys.room_changed.connect(_on_room_changed, CONNECT_DEFERRED)
+
+func _deinit():
+	Log.pr("shirt metsys module deinit")
+	Dino.player_ready.disconnect(set_player)
+	MetSys.room_changed.disconnect(_on_room_changed)
 
 func _on_room_changed(target_room: String):
 	if target_room == MetSys.get_current_room_name():
