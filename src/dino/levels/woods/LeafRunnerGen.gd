@@ -11,7 +11,7 @@ func get_room_opts(opts):
 	opts.merge({
 		label_to_tilemap={
 			"Tile": {
-				scene=load("res://addons/bones/reptile/tilemaps/GrassTiles16.tscn"),
+				scene=load("res://src/tilemaps/grass/GrassTiles16.tscn"),
 				# border_depth={down=30, left=20, right=20},
 				}
 			},
