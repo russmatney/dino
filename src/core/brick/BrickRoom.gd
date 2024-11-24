@@ -30,7 +30,7 @@ class BrickRoomOpts:
 		U.ensure_default(opts, "tile_size", 16)
 		U.ensure_default(opts, "flags", [])
 		U.ensure_default(opts, "skip_flags", [])
-		U.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://addons/bones/reptile/tilemaps/MetalTiles8.tscn")}})
+		U.ensure_default(opts, "label_to_tilemap", {"Tile": {scene=load("res://src/tilemaps/metal/MetalTiles8.tscn")}})
 		U.ensure_default(opts, "label_to_entity", {})
 		U.ensure_default(opts, "color", Color.PERU)
 		U.ensure_default(opts, "show_color_rect", false)
@@ -87,7 +87,7 @@ static func crd_to_position(crd: Dictionary, opts: BrickRoomOpts):
 ## tilemap ##################################################################
 
 static func add_tilemap(room: BrickRoom, opts: BrickRoomOpts, label: String, tmap_opts: Dictionary):
-	var scene = tmap_opts.get("scene", load("res://addons/bones/reptile/tilemaps/MetalTiles8.tscn"))
+	var scene = tmap_opts.get("scene", load("res://src/tilemaps/metal/MetalTiles8.tscn"))
 	var tilemap = scene.instantiate()
 
 	var tilemap_tile_size = tilemap.tile_set.tile_size

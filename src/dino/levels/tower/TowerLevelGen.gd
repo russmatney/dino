@@ -30,7 +30,7 @@ func get_room_opts(opts):
 		opt.merge({
 			label_to_tilemap={
 				"Tile": {
-					scene=load("res://addons/bones/reptile/tilemaps/MetalTiles8.tscn"),
+					scene=load("res://src/tilemaps/metal/MetalTiles8.tscn"),
 				},
 			},
 			label_to_entity={

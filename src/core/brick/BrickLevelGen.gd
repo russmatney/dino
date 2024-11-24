@@ -90,7 +90,7 @@ static func combine_tilemap(rooms, label, opts):
 	var border_depth = opts.get("border_depth", {})
 	if border_depth is int and border_depth > 0:
 		border_depth = {up=border_depth, down=border_depth, left=border_depth, right=border_depth}
-	var scene = opts.get("scene", load("res://addons/bones/reptile/tilemaps/MetalTiles8.tscn"))
+	var scene = opts.get("scene", load("res://src/tilemaps/metal/MetalTiles8.tscn"))
 	var tilemap = scene.instantiate()
 
 	var entities = []
