@@ -39,7 +39,13 @@ func _ready():
 	# 	Log.info("Running first room", first_room)
 	# 	load_room(first_room)
 
-	load_room(first_room)
+	if OS.get_environment("__metsys_first_room__"):
+		var first_room_overwrite = OS.get_environment("__metsys_first_room__")
+		Log.warn("[DEV] Running custom room", first_room_overwrite)
+		load_room(first_room_overwrite)
+	else:
+		Log.info("Running first room", first_room)
+		load_room(first_room)
 
 	add_modules()
 
