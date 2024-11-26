@@ -10,7 +10,7 @@ _id = "166"
 
 [node name="HatBotGame" type="Node"]
 script = ExtResource("1_xd8wj")
-first_room = "ZeroFallAndMove.tscn"
+first_room = "res://src/games/hatbot/rooms/ZeroFallAndMove.tscn"
 player_entity = SubResource("Resource_psfxv")
 
 [node name="Camera2D" type="Camera2D" parent="."]

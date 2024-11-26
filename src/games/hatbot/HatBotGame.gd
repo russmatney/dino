@@ -4,7 +4,7 @@ class_name HatBotGame
 
 # this script based initially on MetSys/SampleProject/Scripts/Game.gd
 
-@export var first_room: String = "RoomZero.tscn"
+@export_file("res://src/games/hatbot/rooms/*.tscn") var first_room: String
 @export var hatbot_metsys_settings = preload("res://src/games/hatbot/HatBotMetSysSettings.tres")
 @export var player_entity: DinoPlayerEntity
 
@@ -14,6 +14,9 @@ func _enter_tree():
 func _exit_tree():
 	for m in modules:
 		m._deinit()
+	Metro.travel_requested.disconnect(load_travel_room)
+
+## ready ##################################################################
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -21,6 +24,8 @@ func _ready():
 
 	MetSys.reset_state()
 	MetSys.set_save_data()
+
+	Metro.travel_requested.connect(load_travel_room)
 
 	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 
@@ -30,14 +35,6 @@ func _ready():
 			set_player(p), CONNECT_DEFERRED)
 
 	Dino.create_new_player({entity=player_entity, genre=DinoData.GenreType.SideScroller})
-
-	# if OS.get_environment("__metsys_first_room__"):
-	# 	var first_room_overwrite = OS.get_environment("__metsys_first_room__")
-	# 	Log.warn("[DEV] Running custom room", first_room_overwrite)
-	# 	load_room(first_room_overwrite)
-	# else:
-	# 	Log.info("Running first room", first_room)
-	# 	load_room(first_room)
 
 	if OS.get_environment("__metsys_first_room__"):
 		var first_room_overwrite = OS.get_environment("__metsys_first_room__")
@@ -67,3 +64,13 @@ func _physics_tick():
 	if can_process():
 		if is_instance_valid(player):
 			MetSys.set_player_position(player.position)
+
+var move_to_travel_point: bool = false
+
+func load_travel_room(opts: Dictionary):
+	Log.pr("hatbot loading travel-requested room", opts)
+	move_to_travel_point = true
+	await load_room(opts.get("destination"))
+
+	var tp = U.first_node_in_group(map, "travel_points")
+	player.position = tp.position

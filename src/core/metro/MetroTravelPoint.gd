@@ -13,11 +13,13 @@ func _get_configuration_warnings():
 ## vars ###########################################################
 
 @export var destination_travel_point: MetroTravelPointEntity
+@export_file("*.tscn") var destination_metsys_room: String
+@export var destination_name: String
 
 @onready var anim = $AnimatedSprite2D
 
 var room
-var travel_dest
+var do_travel: Callable
 var is_traveling
 var group_name = "travel_points"
 
@@ -41,12 +43,16 @@ func _ready():
 ## actions ##################################################################
 
 var actions = [
-	Action.mk({label_fn=get_dest_label, fn=travel, show_on_source=true, show_on_actor=false,})
+	Action.mk({label_fn=get_dest_label, fn=enter_travel_point, show_on_source=true, show_on_actor=false,})
 	]
 
-func get_dest_label():
-	if destination_travel_point:
+func get_dest_label() -> String:
+	if destination_name:
+		return destination_name
+	elif destination_travel_point:
 		return "To %s" % destination_travel_point.get_destination_name().capitalize()
+	elif destination_metsys_room:
+		return Log.to_pretty(destination_metsys_room)
 	else:
 		return "Travel"
 
@@ -56,16 +62,14 @@ func _on_anim_finished():
 	if anim.animation == "opening":
 		z_index = 0
 	if anim.animation == "closing":
-		if travel_dest != null:
-			Metro.travel_to(travel_dest[0], travel_dest[1])
-			is_traveling = false
-			travel_dest = null
+		if do_travel != null and is_traveling:
+			do_travel.call()
 		else:
 			z_index = 0
 
 ## travel to destination ##################################################################
 
-func travel(player):
+func enter_travel_point(player):
 	if is_traveling:
 		return
 
@@ -74,8 +78,17 @@ func travel(player):
 
 	player.force_move_to_target(global_position)
 	is_traveling = true
+
+	# looks a bit like the player is inside it
 	z_index = 10
-	# get and pass the node_path
-	# pass a callable instead of this arg hand-off non-sense
-	travel_dest = [destination_travel_point.get_destination_zone(), null]
+
+	# this is invoked once the closing animation finishes
+	do_travel = func():
+		if destination_travel_point:
+			Metro.travel_to(destination_travel_point.get_destination_zone())
+		elif destination_metsys_room:
+			Metro.travel_to(destination_metsys_room)
+		# maybe await tick?
+		is_traveling = false
+		player.clear_forced_movement_target()
 	anim.play("closing")

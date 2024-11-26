@@ -87,4 +87,4 @@ func show_jumbotron(player):
 		player.force_move_to_target(global_position)
 		Jumbotron.jumbo_notif({
 			header=header, body=body, action=action, action_label_text=label,
-			on_close=player.clear_forced_move_target})
+			on_close=player.clear_forced_movement_target})

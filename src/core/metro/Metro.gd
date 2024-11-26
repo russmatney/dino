@@ -5,6 +5,8 @@ const zones_group = "metro_zones"
 const rooms_group = "metro_rooms"
 const checkpoints_group = "metro_checkpoints"
 
+signal travel_requested(opts: Dictionary)
+
 ###########################################################
 # start game
 
@@ -41,20 +43,13 @@ func reload_current_zone():
 ###########################################################
 # Zone travel
 
-func travel_to(dest_zone, elevator_path=null):
-	# could restore same-zone travel
-	# var player = P.get_player()
-	# if player and is_instance_valid(player) and current_zone.name == dest_zone_name:
-	# 	Log.info("Traveling in same zone", dest_zone_name, elevator_path)
-	# 	if elevator_path:
-	# 		current_zone.set_spawn_node(elevator_path)
-	# 	player.clear_forced_movement_target()
-	# 	player.position = current_zone.player_spawn_coords()
-	# 	return
+func travel_to(dest_zone, spawn_path=null):
+	Log.info("Traveling to zone", dest_zone, spawn_path)
+	travel_requested.emit({destination=dest_zone, spawn_path=spawn_path})
 
-	Log.info("Traveling to zone", dest_zone, elevator_path)
-
-	load_zone(dest_zone, elevator_path)
+	# TODO old metro games need to connect to this signal
+	# (if there are any?)
+	# load_zone(dest_zone, elevator_path)
 
 ###########################################################
 # world update
