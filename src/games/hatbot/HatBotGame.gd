@@ -14,7 +14,7 @@ func _enter_tree():
 func _exit_tree():
 	for m in modules:
 		m._deinit()
-	Metro.travel_requested.disconnect(load_travel_room)
+	U._disconnect(Metro.travel_requested, load_travel_room)
 
 ## ready ##################################################################
 

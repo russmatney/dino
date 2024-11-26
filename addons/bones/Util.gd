@@ -266,6 +266,13 @@ static func _connect(sig, callable, flags=null):
 	if err:
 		Log.error("error in _connect()", err, sig, callable)  # useless enum digit
 
+static func _disconnect(sig, callable):
+	if sig == null:
+		Log.warn("Could not disconnect null signal")
+		return
+	if sig.is_connected(callable):
+		sig.disconnect(callable)
+
 static func call_in(node, callable, s):
 	if not callable.is_valid():
 		Log.warn("callable is not valid!!")
