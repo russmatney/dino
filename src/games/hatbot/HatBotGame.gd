@@ -55,9 +55,20 @@ func add_modules():
 		modules.append(module)
 
 func on_room_loaded():
-	MetSys.get_current_room_instance().adjust_camera_limits($Camera2D)
+	adjust_camera_limits()
 	if not Dino.current_player_node():
 		Dino.spawn_player()
+
+func adjust_camera_limits():
+	var room = MetSys.get_current_room_instance()
+	var size = room.get_size()
+	Log.pr("adjusting camera limits", room, size)
+
+	if player and player.pcam:
+		player.pcam.set_limit_left(0)
+		player.pcam.set_limit_top(0)
+		player.pcam.set_limit_right(size.x)
+		player.pcam.set_limit_bottom(size.y)
 
 # overwriting the parent b/c the player doesn't always exist
 func _physics_tick():

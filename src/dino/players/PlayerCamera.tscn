@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://nhgggwr4im2y"]
+[gd_scene load_steps=6 format=3 uid="uid://nhgggwr4im2y"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="1_n32v8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_mn30v"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="3_wu2yh"]
 
 [sub_resource type="Resource" id="Resource_fhpg4"]
 script = ExtResource("2_mn30v")
@@ -9,11 +10,26 @@ duration = 0.6
 transition = 4
 ease = 1
 
+[sub_resource type="Resource" id="Resource_bnrqh"]
+script = ExtResource("3_wu2yh")
+amplitude = 10.0
+frequency = 0.5
+randomize_noise_seed = 1
+noise_seed = 0
+positional_noise = true
+rotational_noise = true
+positional_multiplier_x = 1.0
+positional_multiplier_y = 1.0
+rotational_multiplier = 1.0
+
 [node name="PlayerCamera" type="Node2D"]
 script = ExtResource("1_n32v8")
 priority = 1
 follow_mode = 1
-zoom = Vector2(3.2, 3.2)
+zoom = Vector2(8, 8)
 snap_to_pixel = true
 tween_resource = SubResource("Resource_fhpg4")
 follow_damping = true
+dead_zone_width = 0.311
+dead_zone_height = 0.474
+noise = SubResource("Resource_bnrqh")
