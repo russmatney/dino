@@ -130,6 +130,9 @@ func _ready():
 	set_collision_mask_value(11, true) # fences, low-walls
 	set_collision_mask_value(12, true) # spikes
 
+	# we put all players on 1 by default
+	set_z_index(1)
+
 	if quick_select_menu == null:
 		quick_select_menu = quick_select_scene.instantiate()
 		add_child(quick_select_menu)
