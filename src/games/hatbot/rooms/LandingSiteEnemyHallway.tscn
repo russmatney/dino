@@ -13,7 +13,7 @@
 script = ExtResource("3_tie2w")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 240.0
+offset_right = 480.0
 offset_bottom = 136.0
 color = Color(0.238246, 0.415378, 0.23408, 1)
 
