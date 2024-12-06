@@ -4,6 +4,273 @@
 ## Untagged
 
 
+### 6 Dec 2024
+
+- ([`68e143c0`](https://github.com/russmatney/dino/commit/68e143c0)) feat: rough shirt level recreation
+
+  > Adds a reasonable _CaveTemplate and 3 new maps to shirt
+
+
+### 26 Nov 2024
+
+- ([`57217389`](https://github.com/russmatney/dino/commit/57217389)) chore: bunch of export preset updates
+- ([`b9539b0e`](https://github.com/russmatney/dino/commit/b9539b0e)) hatbot: create spaceship, kingdom, volcano maps and rooms
+- ([`4f97d5c7`](https://github.com/russmatney/dino/commit/4f97d5c7)) feat: dino players always init z-index 1
+
+  > In the metsys context, our player node is outside of the room, so
+  > sometimes ends up above the room in the scene tree - which can get very
+  > confusing when the background is in front of the player.
+  > 
+  > Probably will work with these as layers - foreground gets.... 2? 5?
+
+- ([`737efe59`](https://github.com/russmatney/dino/commit/737efe59)) bones: add U._disconnect(sig, fn)
+
+  > Nice to have one that doesn't care if the signal is connected.
+  > Just: make it so!
+
+
+### 25 Nov 2024
+
+- ([`01b0cad1`](https://github.com/russmatney/dino/commit/01b0cad1)) wip: zoom in more (hatbot), tryna adjust camera limits on load
+
+  > Unsuccessfully.
+
+- ([`61312714`](https://github.com/russmatney/dino/commit/61312714)) feat: support metro/travel-points in hatbot-metsys rewrite
+
+  > Refactors MetroTravelPoints (Elevators) to emit a travel_requested
+  > signal - subscribes to this signal in HatBotGame.
+  > 
+  > Seems simple enough? And it's workin :dance:
+
+
+### 23 Nov 2024
+
+- ([`c7878eac`](https://github.com/russmatney/dino/commit/c7878eac)) fix: update itch/steam workflows
+- ([`4b4db31d`](https://github.com/russmatney/dino/commit/4b4db31d)) fix: update other addons/bones/reptile paths
+- ([`565bc742`](https://github.com/russmatney/dino/commit/565bc742)) fix: update Metal tilemap path
+- ([`e77d2dc9`](https://github.com/russmatney/dino/commit/e77d2dc9)) feat: play-scene from metsys room helper
+
+  > Pulling this impl in from Glossolalia.
+
+- ([`e1faebb4`](https://github.com/russmatney/dino/commit/e1faebb4)) feat: tiles, bg, lighting wips for hatbot Zero rooms
+
+  > Roughs out a few rooms via metsys. Really hard to see! has some
+  > z-ordering issues and needs better color/tile work.
+
+
+### 22 Nov 2024
+
+- ([`181c293f`](https://github.com/russmatney/dino/commit/181c293f)) fix: some theme update noisey cruft
+- ([`742f33bb`](https://github.com/russmatney/dino/commit/742f33bb)) feat: reload metsys editor maps by selecting game scene
+
+  > Attaches MetSys' main database node to the MetSysPlugin, and references
+  > the plugin from the autoload. This lets us call
+  > MetSys.plugin.main.force_reload() when switching metsys game contexts.
+  > 
+  > Now reloading the metsys view just by selecting the main game scene!
+
+- ([`d63647ab`](https://github.com/russmatney/dino/commit/d63647ab)) fix: MetSys reload_map() reloading Map Viewer
+
+  > Small fix to get the Map Viewer to reload (along with the Map Editor)
+  > after reloading from disk.
+
+- ([`abfa4257`](https://github.com/russmatney/dino/commit/abfa4257)) chore: drop gd_explorer
+
+  > Love this idea, but i'll have to return to it later
+
+- ([`67241695`](https://github.com/russmatney/dino/commit/67241695)) feat: reset map, disconnect room_changed signals
+
+  > More MetSys context-switching cleanup - we're now able to play
+  > vania/hatbot/shirt interchangably!
+  > 
+  > However, the in-editor map isn't updating yet.
+
+- ([`6d285e0e`](https://github.com/russmatney/dino/commit/6d285e0e)) fix: fix up tilesets to get rid of tileset atlas warnings
+
+  > This was a huge pain - the error is nice but gives not clue as to which
+  > tile map/set causes the issue, which sucks when we have, like, 30.
+
+- ([`334972ec`](https://github.com/russmatney/dino/commit/334972ec)) feat: pull metsys context reset into Vania static func
+
+  > This helper isn't perfect yet (not yet working when switching games),
+  > but it somewhat resets the editor context, so it's a start.
+
+
+### 3 Nov 2024
+
+- ([`ec05daff`](https://github.com/russmatney/dino/commit/ec05daff)) chore: more tilemap cruft?!
+
+  > Not sure why things move around so much just b/c i'm moving between
+  > machines. Feels like the git story isn't super tight.
+
+- ([`507f195a`](https://github.com/russmatney/dino/commit/507f195a)) fix: set Shirt game_scene to metsys version
+- ([`bd8040df`](https://github.com/russmatney/dino/commit/bd8040df)) fix: genre_type was being ignored
+
+  > Adds support for 'genre' as well, b/c why not
+
+- ([`bbaedc08`](https://github.com/russmatney/dino/commit/bbaedc08)) feat: shirt metsys game working (tho not topdown yet)
+- ([`343984cd`](https://github.com/russmatney/dino/commit/343984cd)) wip: shirt MetSys impl started, nearly working
+- ([`32ab895d`](https://github.com/russmatney/dino/commit/32ab895d)) fix: kill dead dj_turntable reference
+
+  > this now lives in bones/src - maybe it's better off in here? could those
+  > be the same thing?
+
+- ([`4b273801`](https://github.com/russmatney/dino/commit/4b273801)) wip: attempt to support MetSys for HatBot AND Vania
+
+  > Not quite working, unless you restart the game completely. Some internal
+  > state or other needs clearing/cleanup.
+
+- ([`d889b36a`](https://github.com/russmatney/dino/commit/d889b36a)) fix: don't infer types in metsys
+
+  > I expect metsys is built against a different version of godot?
+
+- ([`0af3121e`](https://github.com/russmatney/dino/commit/0af3121e)) deps: update bones
+- ([`f599925d`](https://github.com/russmatney/dino/commit/f599925d)) deps: update dialogue manager
+- ([`b2998db1`](https://github.com/russmatney/dino/commit/b2998db1)) deps: update pandora
+- ([`4bb2d13c`](https://github.com/russmatney/dino/commit/4bb2d13c)) deps: update metsys
+
+### 29 Oct 2024
+
+- ([`4943c32a`](https://github.com/russmatney/dino/commit/4943c32a)) fix: move everything to tileMapLayers
+- ([`68dfe4a3`](https://github.com/russmatney/dino/commit/68dfe4a3)) fix: update vexed fonts reference
+- ([`dbfa7b62`](https://github.com/russmatney/dino/commit/dbfa7b62)) refactor: reorg tilemaps and move to tilemap layers
+
+  > Here or otherwise during tonights build, i totally lost the hatbot +
+  > spike + demoland tilemaps. I could recreate or fetch them from history
+  > at some point, but maybe remaking them is a better exercise?
+
+- ([`16b38ea3`](https://github.com/russmatney/dino/commit/16b38ea3)) deps: bones update (DJ path, navi root scene)
+- ([`0a964c7f`](https://github.com/russmatney/dino/commit/0a964c7f)) chore: point at bones fonts
+- ([`75d87626`](https://github.com/russmatney/dino/commit/75d87626)) deps: misc dep update cruft
+- ([`de0b576a`](https://github.com/russmatney/dino/commit/de0b576a)) wip: messy bones update
+
+  > Bones is dropping it's tilemaps, lights, fonts, and other assets.
+
+
+### 27 Oct 2024
+
+- ([`162d7160`](https://github.com/russmatney/dino/commit/162d7160)) feat: hatbot navigation restored!
+
+  > via metroTravelPoints implementation, which is a bit clunky.
+  > 
+  > Also we're spawning on playerSpawnPoints instead of node-pathed
+  > elevators.
+
+- ([`80fb5c89`](https://github.com/russmatney/dino/commit/80fb5c89)) feat: bones/Navi default to waiting for currentScene clear
+- ([`d1893474`](https://github.com/russmatney/dino/commit/d1893474)) feat: music as tool script to fix in-editor compiler errors
+- ([`69fc231e`](https://github.com/russmatney/dino/commit/69fc231e)) feat: support awaiting scene exit before adding new one
+
+  > The phantom camera was compaining about too many hosts, b/c we were
+  > adding the new root scene before the previous one was removed. This
+  > should prevent other issues, like spawn_player finding and using the
+  > previous scene's spawn_point.
+  > 
+  > We might want this as the default, and to opt-in to skipping this await instead.
+
+- ([`2b9da0d3`](https://github.com/russmatney/dino/commit/2b9da0d3)) wip: some nearly restored metroTravelPoint usage
+
+  > Down to just camera problems, hopefully.
+  > 
+  > And really i'd like to choose the next travelPoint, not have to assign
+  > them manually. maybe via the quick-select menu, which actually takes
+  > entities already.
+
+- ([`17276c3e`](https://github.com/russmatney/dino/commit/17276c3e)) fix: 'rooms' don't have this method anymore?
+- ([`2472b25e`](https://github.com/russmatney/dino/commit/2472b25e)) fix: no need to crash when there's no action
+- ([`36d974b2`](https://github.com/russmatney/dino/commit/36d974b2)) cruft: more resource cruft!
+- ([`7e364e93`](https://github.com/russmatney/dino/commit/7e364e93)) feat: set a random scale if there's no action
+
+  > gives this button more power, and lets us explore hatbot a bit.
+
+- ([`c185a889`](https://github.com/russmatney/dino/commit/c185a889)) feat: bones/Navi(nav_to, {on_ready=func(node)})
+- ([`5b625d29`](https://github.com/russmatney/dino/commit/5b625d29)) feat: restore hatbot (launch) via arcade mode menu
+
+  > Note that most of the other DinoGames in the arcade seem to crash...
+  > 
+  > And the player can't squeeze into hatbot's scale
+
+- ([`d4a51056`](https://github.com/russmatney/dino/commit/d4a51056)) chore: quick playerSpawner node
+
+  > i'm learning how to compose a bit better here.
+  > definitely some unity influence!
+
+
+### 26 Oct 2024
+
+- ([`390a863f`](https://github.com/russmatney/dino/commit/390a863f)) wip: restoring and debugging the old arcade
+- ([`79d0f33f`](https://github.com/russmatney/dino/commit/79d0f33f)) chore: some nice helper functions
+
+  > Maybe ought to pull these data helpers together
+
+- ([`ee3d44cf`](https://github.com/russmatney/dino/commit/ee3d44cf)) chore: bump godot version in actions
+- ([`c0b953fe`](https://github.com/russmatney/dino/commit/c0b953fe)) fix: brickRoom string/nil-pun crash
+- ([`78d002ca`](https://github.com/russmatney/dino/commit/78d002ca)) cruft: Shirt scene opened/updated
+- ([`82ad1c3c`](https://github.com/russmatney/dino/commit/82ad1c3c)) cruft: misc open/closed scene updates
+- ([`9116ba1c`](https://github.com/russmatney/dino/commit/9116ba1c)) fix: resolve quick-select never dismissing
+
+  > check nested children in entityList.
+
+- ([`20e12180`](https://github.com/russmatney/dino/commit/20e12180)) misc: some gym tweaks
+
+  > games broken, but gyms still working!
+
+- ([`430e82b8`](https://github.com/russmatney/dino/commit/430e82b8)) chore: resolve a bunch of warnings
+
+### 25 Oct 2024
+
+- ([`9cf40d22`](https://github.com/russmatney/dino/commit/9cf40d22)) chore: even more core/bones tweaks (reptile, juice/debug)
+- ([`222dbc14`](https://github.com/russmatney/dino/commit/222dbc14)) deps: add IconGodotNode
+- ([`e8b2252a`](https://github.com/russmatney/dino/commit/e8b2252a)) chore: restore dj/assets/sounds+songs
+- ([`d1b9970e`](https://github.com/russmatney/dino/commit/d1b9970e)) chore: more src/core vs addons/bones migration
+- ([`48980d9d`](https://github.com/russmatney/dino/commit/48980d9d)) chore: drop addons/core|bones overlap, move remaining addons/core to src/
+
+  > Pulling the non-bonesed part of addons/core into src/core to give dino
+  > more power and separate out a cleaner bones usage.
+
+- ([`44a475bd`](https://github.com/russmatney/dino/commit/44a475bd)) deps: drop core/actions
+
+  > In favor of bones/actions.
+
+- ([`a117a28c`](https://github.com/russmatney/dino/commit/a117a28c)) chore: more teeb import cruft
+- ([`37a49bcc`](https://github.com/russmatney/dino/commit/37a49bcc)) chore: bones import update
+- ([`05c5f52a`](https://github.com/russmatney/dino/commit/05c5f52a)) deps: add bones
+- ([`ac7164c6`](https://github.com/russmatney/dino/commit/ac7164c6)) deps: update log.gd
+- ([`85ac4597`](https://github.com/russmatney/dino/commit/85ac4597)) deps: update input_helper
+- ([`6b78a03d`](https://github.com/russmatney/dino/commit/6b78a03d)) deps: update gdfxr
+- ([`2cac6504`](https://github.com/russmatney/dino/commit/2cac6504)) deps: update pandora
+- ([`15ee0b6b`](https://github.com/russmatney/dino/commit/15ee0b6b)) deps: update phantom_camera
+- ([`21f2e604`](https://github.com/russmatney/dino/commit/21f2e604)) deps: update gdunit
+- ([`588a773c`](https://github.com/russmatney/dino/commit/588a773c)) deps: update metSys
+- ([`3ea092c2`](https://github.com/russmatney/dino/commit/3ea092c2)) deps: update dialogue_manager
+- ([`a420f9f4`](https://github.com/russmatney/dino/commit/a420f9f4)) deps: reimport text effects
+- ([`c16f1e22`](https://github.com/russmatney/dino/commit/c16f1e22)) deps: update aseprite wizard
+
+### 12 Oct 2024
+
+- ([`89ba06b9`](https://github.com/russmatney/dino/commit/89ba06b9)) chore: bunch of godot 4.3 import cruft
+
+### 22 Sep 2024
+
+- ([`ee522863`](https://github.com/russmatney/dino/commit/ee522863)) chore: godot 4.3 update
+
+### 20 Jun 2024
+
+- ([`96f826b3`](https://github.com/russmatney/dino/commit/96f826b3)) fix: readme discord link
+
+### 4 Jun 2024
+
+- ([`be932f64`](https://github.com/russmatney/dino/commit/be932f64)) chore: add ko-fi link
+
+### 31 May 2024
+
+- ([`c1096043`](https://github.com/russmatney/dino/commit/c1096043)) changelog: include all tags
+
+  > Moves to including all tags in the changelog.
+  > 
+  > This duplicates some commits, which is slightly annoying, but it also
+  > includes the tags, so seems more correct at least (unknown vs v1.0.0).
+
+
 ## v1.0.0
 
 
