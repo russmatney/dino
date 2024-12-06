@@ -4,9 +4,10 @@ class_name ShirtGame
 
 # this script based initially on MetSys/SampleProject/Scripts/Game.gd
 
-@export var first_room: String = "RoomZero.tscn"
+@export_file("*.tscn") var first_room: String
 @export var shirt_metsys_settings = preload("res://src/games/shirt/ShirtMetSysSettings.tres")
 @export var player_entity: DinoPlayerEntity
+
 
 func _enter_tree():
 	Vania.reset_metsys_context(self, shirt_metsys_settings)
@@ -14,6 +15,7 @@ func _enter_tree():
 func _exit_tree():
 	for m in modules:
 		m._deinit()
+	# U._disconnect(Metro.travel_requested, load_travel_room)
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -21,6 +23,8 @@ func _ready():
 
 	MetSys.reset_state()
 	MetSys.set_save_data()
+
+	# Metro.travel_requested.connect(load_travel_room)
 
 	room_loaded.connect(on_room_loaded, CONNECT_DEFERRED)
 
@@ -31,15 +35,13 @@ func _ready():
 
 	Dino.create_new_player({entity=player_entity, genre=DinoData.GenreType.TopDown})
 
-	# if OS.get_environment("__metsys_first_room__"):
-	# 	var first_room_overwrite = OS.get_environment("__metsys_first_room__")
-	# 	Log.warn("[DEV] Running custom room", first_room_overwrite)
-	# 	load_room(first_room_overwrite)
-	# else:
-	# 	Log.info("Running first room", first_room)
-	# 	load_room(first_room)
-
-	load_room(first_room)
+	if OS.get_environment("__metsys_first_room__"):
+		var first_room_overwrite = OS.get_environment("__metsys_first_room__")
+		Log.warn("[DEV] Running custom room", first_room_overwrite)
+		load_room(first_room_overwrite)
+	else:
+		Log.info("Running first room", first_room)
+		load_room(first_room)
 
 	add_modules()
 

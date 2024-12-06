@@ -1,6 +1,8 @@
-[-4,-4,0]
-1,0,0,0|||RoomZero.tscn
 [-3,-4,0]
-0,0,1,1|||RoomOne.tscn
+0,-1,0,1|||CaveEnemyHallway.tscn
 [-3,-5,0]
-0,1,0,0|||RoomTwo.tscn
+0,1,0,0|||CaveEntrance.tscn
+[-3,-3,0]
+1,0,0,-1|||CaveEnemyHallway.tscn
+[-2,-3,0]
+0,0,1,0|||CaveTreasure.tscn

@@ -13,7 +13,7 @@ func _initialize():
 	MetSys.room_changed.connect(_on_room_changed, CONNECT_DEFERRED)
 
 func _deinit():
-	Log.pr("shirt metsys module deinit")
+	Log.pr("hatbot metsys module deinit")
 	Dino.player_ready.disconnect(set_player)
 	MetSys.room_changed.disconnect(_on_room_changed)
 

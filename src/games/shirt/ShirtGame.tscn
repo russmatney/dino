@@ -10,6 +10,7 @@ _id = "73"
 
 [node name="ShirtGame" type="Node"]
 script = ExtResource("1_5hu6e")
+first_room = "res://src/games/shirt/rooms/CaveEntrance.tscn"
 player_entity = SubResource("Resource_0yc5b")
 
 [node name="Camera2D" type="Camera2D" parent="."]
