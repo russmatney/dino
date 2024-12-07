@@ -31,7 +31,14 @@ func _ready():
 	Dino.player_ready.connect(func(p):
 		Log.pr("player ready", p)
 		if p:
-			set_player(p), CONNECT_DEFERRED)
+			set_player(p)
+
+		# quick respawn after falling, useful for debugging/testing
+		U._connect(p.fell_in_pit, func():
+			Log.pr("fell in pit, respawning in 1s")
+			await get_tree().create_timer(1.0).timeout
+			Dino.respawn_active_player())
+		, CONNECT_DEFERRED)
 
 	Dino.create_new_player({entity=player_entity, genre=DinoData.Genre.TopDown})
 

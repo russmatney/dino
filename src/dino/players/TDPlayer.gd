@@ -273,12 +273,11 @@ func clear_forced_movement_target():
 
 ## pits ###################################################################
 
+signal fell_in_pit
 func on_pit_entered():
-	# TODO damage?
+	fell_in_pit.emit()
+	# TODO damage? death?
 	machine.transit("Fall")
-
-	# await get_tree().create_timer(1.0).timeout
-	# Dino.respawn_player({player=self})
 
 ## collision ###########################################################
 

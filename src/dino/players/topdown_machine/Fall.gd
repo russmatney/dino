@@ -5,14 +5,20 @@ var fall_time = 0.6
 var fall_ttl
 var fall_scale_factor = 0.2
 
+var og_scale
+var og_modulate
+
 ## enter ###########################################################
 
 func enter(opts = {}):
-	actor.anim.play("fall")
+	if actor.anim.sprite_frames.has_animation("fall"):
+		actor.anim.play("fall")
 	Sounds.play(Sounds.S.fall)
 	fall_ttl = U.get_(opts, "fall_time", fall_time)
 	actor.velocity = Vector2.ZERO
 
+	og_scale = actor.scale
+	og_modulate = actor.modulate.a
 	var tween = create_tween()
 	tween.tween_property(actor, "scale", Vector2.ONE*fall_scale_factor, fall_ttl)
 	tween.tween_property(actor, "modulate:a", 0.0, fall_ttl)
@@ -29,7 +35,8 @@ func enter(opts = {}):
 ## exit ###########################################################
 
 func exit():
-	pass
+	actor.scale = og_scale
+	actor.modulate.a = og_modulate
 
 
 ## input ###########################################################

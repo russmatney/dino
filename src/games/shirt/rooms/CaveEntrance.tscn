@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://bedv8kv4u2p14"]
+[gd_scene load_steps=8 format=4 uid="uid://bedv8kv4u2p14"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_tponc"]
 [ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="3_c4ibp"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_8mr57"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="6_frx7o"]
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://src/tilemaps/cave_topdown/TDCaveFloorTiles16.tscn" id="6_x3g40"]
+[ext_resource type="PackedScene" uid="uid://ddklv6bc7o134" path="res://src/dino/entities/lights/SmallLight.tscn" id="7_pr6hy"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://src/tilemaps/cave_topdown/TDCaveWallTiles16.tscn" id="8_j4mmv"]
 
 [node name="Map" type="Node2D"]
@@ -47,3 +48,7 @@ position = Vector2(104, 144)
 
 [node name="Candle7" parent="." groups=["metro_checkpoints"] instance=ExtResource("6_frx7o")]
 position = Vector2(248, 128)
+
+[node name="SmallLight" parent="." instance=ExtResource("7_pr6hy")]
+position = Vector2(240, 376)
+freeze = true
