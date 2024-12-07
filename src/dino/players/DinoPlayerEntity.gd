@@ -19,13 +19,13 @@ func get_topdown_scene() -> PackedScene:
 func get_beatemup_scene() -> PackedScene:
 	return get_resource("beatemup_scene")
 
-func supports_genre(genre: DinoData.GenreType) -> bool:
+func supports_genre(genre: DinoData.Genre) -> bool:
 	match genre:
-		DinoData.GenreType.SideScroller:
+		DinoData.Genre.SideScroller:
 			return get_sidescroller_scene() != null
-		DinoData.GenreType.TopDown:
+		DinoData.Genre.TopDown:
 			return get_topdown_scene() != null
-		DinoData.GenreType.BeatEmUp:
+		DinoData.Genre.BeatEmUp:
 			return get_beatemup_scene() != null
 	return false
 
@@ -62,26 +62,26 @@ static func get_random(opts: Dictionary={}):
 
 ## instance #################################################
 
-func get_player_scene(genre_type: DinoData.GenreType) -> PackedScene:
-	match genre_type:
-		DinoData.GenreType.SideScroller: return get_sidescroller_scene()
-		DinoData.GenreType.TopDown: return get_topdown_scene()
-		DinoData.GenreType.BeatEmUp: return get_beatemup_scene()
+func get_player_scene(genre: DinoData.Genre) -> PackedScene:
+	match genre:
+		DinoData.Genre.SideScroller: return get_sidescroller_scene()
+		DinoData.Genre.TopDown: return get_topdown_scene()
+		DinoData.Genre.BeatEmUp: return get_beatemup_scene()
 		_:
 			Log.warn("no match in get_player_scene, returning fallback", self)
 			return get_sidescroller_scene()
 
-func get_genre_type_for_scene(path: String) -> DinoData.GenreType:
+func get_genre_for_scene(path: String) -> DinoData.Genre:
 	var ss = get_sidescroller_scene().resource_path
 	var td = get_topdown_scene().resource_path
 	var beu = get_beatemup_scene().resource_path
 	var matches = {
-		ss: DinoData.GenreType.SideScroller,
-		td: DinoData.GenreType.TopDown,
-		beu: DinoData.GenreType.BeatEmUp,
+		ss: DinoData.Genre.SideScroller,
+		td: DinoData.Genre.TopDown,
+		beu: DinoData.Genre.BeatEmUp,
 		}
 	if path in matches:
 		return matches[path]
 	else:
-		Log.warn("no match in get_genre_type_for_scene, returning fallback", self)
-		return DinoData.GenreType.SideScroller
+		Log.warn("no match in get_genre_for_scene, returning fallback", self)
+		return DinoData.Genre.SideScroller

@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_nhx56"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_ats0u"]
 [ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/dino/entities/pit/PitDetector.tscn" id="11_d25tv"]
+[ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_maqon"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_781im"]
 radius = 8.0
@@ -356,3 +357,6 @@ texture_scale = 4.0
 
 [node name="PitDetector" parent="." instance=ExtResource("11_d25tv")]
 position = Vector2(0, 8)
+
+[node name="PlayerCamera" parent="." instance=ExtResource("11_maqon")]
+zoom = Vector2(5, 5)

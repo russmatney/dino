@@ -6,7 +6,7 @@ class_name DinoGym
 
 @export var player_entity: DinoPlayerEntity
 
-@export var genre_type: DinoData.GenreType = DinoData.GenreType.SideScroller
+@export var genre: DinoData.Genre = DinoData.Genre.SideScroller
 
 ## enter tree #####################################################
 
@@ -37,4 +37,4 @@ func _ready():
 		Dino.create_new_player({
 			entity=player_entity,
 			})
-	Dino.spawn_player({level_node=self, genre_type=genre_type})
+	Dino.spawn_player({level_node=self, genre=genre})

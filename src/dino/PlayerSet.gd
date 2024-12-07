@@ -19,7 +19,7 @@ class PData:
 	var entity: DinoPlayerEntity
 	# instance, not just entity (template)
 	# var state: State
-	var genre_type: DinoData.GenreType
+	var genre: DinoData.Genre
 	var input_opts: Dictionary
 
 	func to_pretty():
@@ -32,10 +32,8 @@ class PData:
 		elif opts.get("entity_id"):
 			entity_id = opts.get("entity_id")
 			entity = Pandora.get_entity(entity_id)
-		if opts.get("genre_type"):
-			genre_type = opts.genre_type
 		if opts.get("genre"):
-			genre_type = opts.genre
+			genre = opts.genre
 		input_opts = opts
 		if entity == null:
 			Log.err("PData created without player entity info", opts)
@@ -73,13 +71,13 @@ func spawn_new(opts={}):
 	if not p:
 		Log.err("No active player, cannot spawn", stack)
 		return
-	var genre = opts.get("genre_type")
+	var genre = opts.get("genre")
 	if genre == null:
-		genre = p.genre_type
+		genre = p.genre
 
 	if genre == null:
-		Log.warn("genre_type not passed, defaulting", opts)
-		genre = DinoData.GenreType.SideScroller
+		Log.warn("genre not passed, defaulting", opts)
+		genre = DinoData.Genre.SideScroller
 
 	p.node = p.entity.get_player_scene(genre).instantiate()
 
@@ -97,7 +95,6 @@ func spawn_new(opts={}):
 
 	# connect player_ready signals
 	p.node.ready.connect(func():
-		Log.pr("player node ready!")
 		new_player_ready.emit(p.node))
 
 	# add child
@@ -129,17 +126,17 @@ func spawn_new(opts={}):
 func current_player_genre():
 	var p = active_player()
 	if not p or not p.node:
-		Log.warn("No current player, couldn't pull genre_type")
-		return DinoData.GenreType.SideScroller
+		Log.warn("No current player, couldn't pull genre")
+		return DinoData.Genre.SideScroller
 
 	if not is_instance_valid(p.node):
-		Log.warn("Invalid player, couldn't pull genre_type", p)
-		return DinoData.GenreType.SideScroller
+		Log.warn("Invalid player, couldn't pull genre", p)
+		return DinoData.Genre.SideScroller
 
-	return p.entity.get_genre_type_for_scene(p.node.scene_file_path)
+	return p.entity.get_genre_for_scene(p.node.scene_file_path)
 
 func respawn_active_player(opts):
-	var genre_type = current_player_genre()
+	var genre = current_player_genre()
 
 	var active_player_parent
 	var p = active_player()
@@ -152,8 +149,8 @@ func respawn_active_player(opts):
 		# TODO remove existing entity from stack?
 		create_new({entity=opts.get("new_entity")})
 
-	if opts.get("genre_type") == null:
-		opts["genre_type"] = genre_type
+	if opts.get("genre") == null:
+		opts["genre"] = genre
 
 	if active_player_parent and not opts.get("level_node"):
 		opts["level_node"] = active_player_parent
@@ -174,7 +171,6 @@ func get_spawn_point_and_coords(opts):
 	var spawn_point
 	if spawn_coords == null:
 		spawn_point = get_spawn_point(opts)
-		Log.pr("spawn_point found", spawn_point)
 		if spawn_point:
 			spawn_coords = spawn_point.global_position
 		else:
@@ -188,18 +184,14 @@ func get_spawn_point(opts={}):
 
 	var psp = U.get_first_child_in_group(level_node, "player_spawn_points", true)
 	if psp:
-		Log.pr("found psp child")
 		return psp
 	var elevator = U.get_first_child_in_group(level_node, "elevator", true)
 	if elevator:
-		Log.pr("found elevator child")
 		return elevator
 
 	psp = U.first_node_in_group(level_node, "player_spawn_points")
 	if psp:
-		Log.pr("found psp globally")
 		return psp
 	elevator = U.first_node_in_group(level_node, "elevator")
 	if elevator:
-		Log.pr("found elevator globally")
 		return elevator

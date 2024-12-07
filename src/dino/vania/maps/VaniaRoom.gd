@@ -58,7 +58,7 @@ func _ready():
 				entity=Pandora.get_entity(DinoPlayerEntityIds.HATBOTPLAYER),
 				})
 			Dino.spawn_player({level_node=self,
-				genre_type=DinoData.GenreType.SideScroller,
+				genre=DinoData.Genre.SideScroller,
 				})
 
 		if not room_def:

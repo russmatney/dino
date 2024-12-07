@@ -12,7 +12,7 @@
 
 [sub_resource type="Resource" id="Resource_mrrjp"]
 script = ExtResource("2_c34cd")
-genre_type = 1
+genre = 1
 entities = Array[ExtResource("4_8y0y2")]([])
 enemies = Array[ExtResource("3_2p11e")]([])
 enemy_waves = 0

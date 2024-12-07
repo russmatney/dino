@@ -556,7 +556,7 @@ func setup_player():
 	var opts = {
 		level_node=self, deferred=false,
 		# sidescroller default set for playground (no `room_def`)
-		genre_type=def.genre_type() if def else Dino.GenreType.SideScroller,
+		genre=def.genre() if def else Dino.Genre.SideScroller,
 		}
 	if Dino.current_player_node():
 		Dino.respawn_active_player(opts)

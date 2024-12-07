@@ -53,7 +53,7 @@ static func create_level(def: LevelDef, opts={}):
 
 ## exports/triggers ######################################################
 
-@export var genre_type: DinoData.GenreType
+@export var genre: DinoData.Genre
 @export var level_def: LevelDef
 
 @export var regen_with_level_def: bool = false :
@@ -67,7 +67,7 @@ func regen_with_def(def):
 	if not def:
 		return
 
-	genre_type = def.get_genre_type()
+	genre = def.get_genre()
 
 	if def.should_regen_level():
 		level_gen.set_script(def.get_level_gen_script())
@@ -107,10 +107,10 @@ func find_hud():
 func to_printable():
 	if level_def != null:
 		return {
-			genre_type=DinoData.GenreType.keys()[genre_type],
+			genre=DinoData.Genre.keys()[genre],
 			level_def=level_def.get_display_name()
 			}
-	return {genre_type=DinoData.GenreType.keys()[genre_type]}
+	return {genre=DinoData.Genre.keys()[genre]}
 
 ## enter_tree ###############################################
 
@@ -158,16 +158,16 @@ func _ready():
 
 	if Dino.is_debug_mode():
 		Log.warn("no game_mode set; regenerating dino level")
-		if genre_type == null:
-			genre_type = DinoData.GenreType.SideScroller
-		Dino.ensure_player_setup({genre_type=genre_type,
+		if genre == null:
+			genre = DinoData.Genre.SideScroller
+		Dino.ensure_player_setup({genre=genre,
 			entity_id=DinoPlayerEntityIds.HATBOTPLAYER,
 		})
 		regenerate()
 
 	if Dino.current_player_entity():
 		if not Dino.current_player_node():
-			Dino.spawn_player({level=self, genre_type=genre_type})
+			Dino.spawn_player({level=self, genre=genre})
 		else:
 			Log.warn("Found player node, skipping spawn player")
 	else:

@@ -99,7 +99,7 @@ func launch_game(level_def):
 
 	if not Dino.current_player_entity():
 		Dino.create_new_player({
-			genre_type=level_def.get_genre_type(),
+			genre=level_def.get_genre(),
 			entity=player_entity,
 			})
 

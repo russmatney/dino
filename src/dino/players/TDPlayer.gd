@@ -541,6 +541,8 @@ func stop_using_weapon(weapon=null):
 ## point_arrow ###########################################################
 
 func point_arrow():
+	if action_arrow == null:
+		return
 	if action_detector.actions.size() == 0:
 		action_arrow.set_visible(false)
 		return

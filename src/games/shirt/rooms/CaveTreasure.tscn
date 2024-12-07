@@ -11,7 +11,6 @@
 [node name="RoomInstance" parent="." instance=ExtResource("1_apmu4")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.267304, 0.267304, 0.267304, 1)
 
 [node name="PlayerSpawner" type="Node" parent="."]

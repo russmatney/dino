@@ -8,7 +8,7 @@ class_name MapInput
 # 	"Spikes",
 # 	]
 
-@export var genre_type: DinoData.GenreType
+@export var genre: DinoData.Genre
 @export var entities: Array[DinoEntity]
 @export var enemies: Array[DinoEnemy]
 
@@ -50,8 +50,8 @@ var grids: Array[GridDef]
 				Log.warn("failed to parse grids_path", p)
 
 func _init(opts={}):
-	if opts.get("genre_type"):
-		genre_type = opts.get("genre_type")
+	if opts.get("genre"):
+		genre = opts.get("genre")
 	entities.assign(opts.get("entities", []))
 	enemies.assign(opts.get("enemies", []))
 	enemy_waves = opts.get("enemy_waves", 0)
@@ -72,7 +72,7 @@ func _init(opts={}):
 
 func to_pretty():
 	return {
-		genre_type=genre_type,
+		genre=genre,
 		entities=entities,
 		enemies=enemies,
 		tiles=tiles,
@@ -104,7 +104,7 @@ func merge(b: MapInput):
 		en_waves = b.enemy_waves
 
 	return MapInput.new({
-		genre_type=U._or(b.genre_type, genre_type),
+		genre=U._or(b.genre, genre),
 		entities=U.append_array(entities, b.entities),
 		enemies=U.append_array(enemies, b.enemies),
 		enemy_waves=en_waves,
@@ -205,17 +205,17 @@ static func random_room(opts={}):
 ## genre type ######################################################33
 
 static func has_genre(opts):
-	if opts.get("genre_type"):
-		return MapInput.new({genre_type=opts.get("genre_type"),})
+	if opts.get("genre"):
+		return MapInput.new({genre=opts.get("genre"),})
 
 static func sidescroller():
-	return MapInput.new({genre_type=DinoData.GenreType.SideScroller})
+	return MapInput.new({genre=DinoData.Genre.SideScroller})
 
 static func topdown():
-	return MapInput.new({genre_type=DinoData.GenreType.TopDown})
+	return MapInput.new({genre=DinoData.Genre.TopDown})
 
 static func beatemup():
-	return MapInput.new({genre_type=DinoData.GenreType.BeatEmUp})
+	return MapInput.new({genre=DinoData.Genre.BeatEmUp})
 
 ## room effects ######################################################33
 

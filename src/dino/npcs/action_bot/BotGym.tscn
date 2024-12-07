@@ -17,7 +17,7 @@ _id = "70"
 [node name="BotGym" type="Node"]
 script = ExtResource("1_cl8op")
 player_entity = SubResource("Resource_ekjqa")
-genre_type = 1
+genre = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 

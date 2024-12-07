@@ -15,7 +15,7 @@ _id = "73"
 [node name="SheepGym" type="Node"]
 script = ExtResource("1_n5axb")
 player_entity = SubResource("Resource_n2a47")
-genre_type = 1
+genre = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -194.0

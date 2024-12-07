@@ -77,10 +77,10 @@ func set_visited():
 
 ## data getters #####################################################3
 
-func genre_type() -> DinoData.GenreType:
+func genre() -> DinoData.Genre:
 	# if not input:
-	# 	return DinoData.GenreType.SideScroller
-	return input.genre_type
+	# 	return DinoData.Genre.SideScroller
+	return input.genre
 
 func entities() -> Array[DinoEntity]:
 	# TODO read entities from the input.grid/grids?

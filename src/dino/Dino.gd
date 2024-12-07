@@ -4,16 +4,16 @@ class_name DinoData
 
 ## static data/helpers ########################################################
 
-enum GenreType {SideScroller, TopDown, BeatEmUp}
+enum Genre {SideScroller, TopDown, BeatEmUp}
 
-static func to_genre_type(s: String) -> GenreType:
+static func to_genre(s: String) -> Genre:
 	match s.to_lower():
-		"sidescroller", "ss": return GenreType.SideScroller
-		"topdown", "td": return GenreType.TopDown
-		"beatemup", "beu": return GenreType.BeatEmUp
+		"sidescroller", "ss": return Genre.SideScroller
+		"topdown", "td": return Genre.TopDown
+		"beatemup", "beu": return Genre.BeatEmUp
 		_:
-			Log.warn("no match in to_genre_type, returning fallback", s)
-			return GenreType.SideScroller
+			Log.warn("no match in to_genre, returning fallback", s)
+			return Genre.SideScroller
 
 ## vars ##########################################################
 
@@ -106,7 +106,7 @@ func ensure_player_setup(opts={}):
 		if opts == null or opts.get("entity") == null:
 			var genre = opts.get("genre")
 			var ent = DinoPlayerEntity.get_random({genre=genre})
-			Log.warn("no player_entity, creating random", ent)
+			Log.warn("no player_entity, creating random", ent, opts)
 			create_new_player({entity=ent, genre=opts.get("genre")})
 		else:
 			Log.pr("creating player with opts", opts)

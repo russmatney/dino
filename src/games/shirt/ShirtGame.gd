@@ -33,7 +33,7 @@ func _ready():
 		if p:
 			set_player(p), CONNECT_DEFERRED)
 
-	Dino.create_new_player({entity=player_entity, genre=DinoData.GenreType.TopDown})
+	Dino.create_new_player({entity=player_entity, genre=DinoData.Genre.TopDown})
 
 	if OS.get_environment("__metsys_first_room__"):
 		var first_room_overwrite = OS.get_environment("__metsys_first_room__")

@@ -17,7 +17,7 @@ _id = "70"
 [node name="VillagersGym" type="Node"]
 script = ExtResource("1_d4h2b")
 player_entity = SubResource("Resource_je1w6")
-genre_type = 1
+genre = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
