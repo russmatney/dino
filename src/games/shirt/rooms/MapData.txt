@@ -5,4 +5,6 @@
 [-3,-3,0]
 1,0,0,-1|||CaveEnemyHallway.tscn
 [-2,-3,0]
-0,0,1,0|||CaveTreasure.tscn
+1,0,1,0|||CaveTreasure.tscn
+[-1,-3,0]
+0,0,1,0|||CaveSecret.tscn

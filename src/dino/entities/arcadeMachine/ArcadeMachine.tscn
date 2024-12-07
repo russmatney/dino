@@ -78,6 +78,7 @@ texture_filter = 1
 position = Vector2(1, -32)
 sprite_frames = SubResource("SpriteFrames_i07bd")
 animation = &"idle-on"
+autoplay = "idle-on"
 metadata/_aseprite_wizard_config_ = {
 "layer": "",
 "o_ex_p": "",
@@ -88,6 +89,7 @@ metadata/_aseprite_wizard_config_ = {
 "source": "res://src/dino/entities/arcadeMachine/arcade_machine_01.aseprite"
 }
 metadata/_aseprite_wizard_interface_config_ = {
-"layer_section": true
+"layer_section": true,
+"pending_changes": {}
 }
 metadata/_aseprite_wizard_source_file_hash_ = "6c0e4311ccc4a0db694ee96fdd4dcddc"
