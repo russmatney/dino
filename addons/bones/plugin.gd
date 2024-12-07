@@ -50,7 +50,13 @@ func play_metsys_room():
 
 	# instead of playing this scene, play MetSysGame with this scene as the firstRoom
 	# TODO get from MetSys settings!
-	var metsys_game_path = "res://src/games/hatbot/HatBotGame.tscn"
+	var metsys_game_path = ""
+	if MetSys.settings.map_root_folder.contains("hatbot"):
+		metsys_game_path = "res://src/games/hatbot/HatBotGame.tscn"
+	elif MetSys.settings.map_root_folder.contains("shirt"):
+		metsys_game_path = "res://src/games/shirt/ShirtGame.tscn"
+	else:
+		Log.warn("Unknown metsys game path!", MetSys.settings.map_root_folder)
 	editor_interface.play_custom_scene(metsys_game_path)
 	OS.set_environment("__metsys_first_room__", "")
 	print("-------------------------------------------------")
