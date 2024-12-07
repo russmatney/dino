@@ -116,12 +116,11 @@ static func build_connected_groups(cells, groups=[]):
 	return groups
 
 # Returns coords grouped by adjacency - connected cells will be in the same group.
-static func cell_clusters(tilemap):
+static func cell_clusters(tmap_layer: TileMapLayer):
 	var clusters = []
-	for l in Reptile.get_layers(tilemap):
-		var used_cells = tilemap.get_used_cells(l.i)
-		var connected_groups = Reptile.build_connected_groups(used_cells)
-		clusters.append_array(connected_groups)
+	var used_cells = tmap_layer.get_used_cells()
+	var connected_groups = Reptile.build_connected_groups(used_cells)
+	clusters.append_array(connected_groups)
 	return clusters
 
 static func cells_to_polygon(tilemap, cells, opts={}):
