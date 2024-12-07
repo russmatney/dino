@@ -15,6 +15,7 @@ color = Color(0.267304, 0.267304, 0.267304, 1)
 
 [node name="PlayerSpawner" type="Node" parent="."]
 script = ExtResource("2_aoc0t")
+genre = 1
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("3_t5kfx")]
 position = Vector2(224, 128)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://c8y6p7a43omgr"]
+[gd_scene load_steps=9 format=4 uid="uid://c8y6p7a43omgr"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_lvjh1"]
 [ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="3_8pgxc"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cosk30larse70" path="res://src/tilemaps/cave_topdown/TDCaveFloorTiles16.tscn" id="6_jisic"]
 [ext_resource type="PackedScene" uid="uid://caq6muu5og6oo" path="res://src/dino/enemies/blobs/BlobWalker.tscn" id="7_y5qen"]
 [ext_resource type="PackedScene" uid="uid://drpxr83sltsot" path="res://src/tilemaps/cave_topdown/TDCaveWallTiles16.tscn" id="8_7s3le"]
+[ext_resource type="PackedScene" uid="uid://ddklv6bc7o134" path="res://src/dino/entities/lights/SmallLight.tscn" id="8_x5vqr"]
 
 [node name="Map" type="Node2D"]
 
@@ -17,6 +18,7 @@ color = Color(0.267304, 0.267304, 0.267304, 1)
 
 [node name="PlayerSpawner" type="Node" parent="."]
 script = ExtResource("3_8pgxc")
+genre = 1
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_p305t")]
 position = Vector2(224, 128)
@@ -35,3 +37,11 @@ position = Vector2(160, 136)
 
 [node name="BlobWalker" parent="." instance=ExtResource("7_y5qen")]
 position = Vector2(400, 128)
+
+[node name="SmallLight" parent="." instance=ExtResource("8_x5vqr")]
+position = Vector2(128, 280)
+freeze = true
+
+[node name="SmallLight2" parent="." instance=ExtResource("8_x5vqr")]
+position = Vector2(512, 352)
+freeze = true
