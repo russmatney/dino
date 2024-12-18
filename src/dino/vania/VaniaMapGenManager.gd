@@ -12,11 +12,10 @@ var generator: VaniaGenerator
 	set(v):
 		Log.info("toggled run_generate", map_def, map_dir, generation_label)
 		if v and Engine.is_editor_hint():
-			if map_dir != null and map_dir != "":
-				generator = VaniaGenerator.new(map_dir, generation_label)
-				Log.info("generator created!", generator)
-			if map_def != null:
+			if map_dir != null and map_dir != "" and map_def != null:
 				Log.info("Running generator", map_def)
+				# TODO run on a thread
+				generator = VaniaGenerator.new(map_dir, generation_label)
 				generator.generate_map(map_def)
 
 func _ready():
