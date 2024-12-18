@@ -1,7 +1,9 @@
+@tool
 extends RefCounted
 class_name VaniaGenerator
 
-const GEN_MAP_DIR = "user://vania_maps"
+const FALLBACK_GEN_MAP_DIR = "user://vania_maps"
+var gen_map_dir
 static var global_room_num = 0
 
 var neighbor_data = {}
@@ -9,13 +11,22 @@ var all_room_defs: Array[VaniaRoomDef] = []
 
 # TODO set minimap theme more consciously
 
-func _init():
+func _init(map_dir = null, generation_label = null):
 	# ensure directory exists
-	DirAccess.make_dir_absolute(GEN_MAP_DIR)
+	if map_dir != null:
+		# TODO some label for _this_ unique build
+		gen_map_dir = "%s%s" % [map_dir, generation_label]
+	if gen_map_dir == null:
+		gen_map_dir = FALLBACK_GEN_MAP_DIR
+	DirAccess.make_dir_absolute(gen_map_dir)
 
 ## generate_map ##########################################################
 
 func generate_map(map_def: MapDef) -> Array[VaniaRoomDef]:
+	# question these resets/inits, maybe want them optional?
+	MetSys.reset_state()
+	MetSys.set_save_data()
+
 	var defs = VaniaRoomDef.to_defs(map_def)
 	return add_rooms(defs)
 
@@ -111,9 +122,9 @@ func remove_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 
 	# delete contents in directory
 	var cleared_room_paths = room_defs.map(func(rd): return rd.room_path)
-	for file in DirAccess.get_files_at(GEN_MAP_DIR):
+	for file in DirAccess.get_files_at(gen_map_dir):
 		if file in cleared_room_paths:
-			DirAccess.remove_absolute(GEN_MAP_DIR.path_join(file))
+			DirAccess.remove_absolute(gen_map_dir.path_join(file))
 
 	# collect neighbor defs first
 	var neighbor_defs = []
@@ -200,7 +211,7 @@ func set_room_scene_path(room_def):
 	var new_map = "%s%d.tscn" % [basename, VaniaGenerator.global_room_num]
 	room_def.index = global_room_num
 	VaniaGenerator.global_room_num += 1
-	room_def.room_path = GEN_MAP_DIR.path_join(new_map)
+	room_def.room_path = gen_map_dir.path_join(new_map)
 
 ## prepare scene ##############################################################
 
