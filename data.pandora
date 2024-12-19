@@ -730,7 +730,7 @@
 					},
 					"tiles_scene": {
 						"type": "resource",
-						"value": "res://src/tilemaps/kingdom/PurpleStoneTiles16.tscn"
+						"value": "res://src/tilemaps/purple_stone/PurpleStoneTiles16.tscn"
 					}
 				}
 			},

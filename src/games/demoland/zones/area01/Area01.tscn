@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://src/tilemaps/snow/SnowTiles16.tscn" id="18_34m1s"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://src/tilemaps/grass/GrassyCaveTileMap8.tscn" id="19_na50t"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/kingdom/GildedKingdomTiles8.tscn" id="20_1t25n"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/kingdom/PurpleStoneTiles16.tscn" id="21_xbmuk"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/purple_stone/PurpleStoneTiles16.tscn" id="21_xbmuk"]
 
 [node name="Area01" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_71epl")

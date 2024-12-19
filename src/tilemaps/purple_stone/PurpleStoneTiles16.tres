@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://uuhwfbymqdt8"]
 
-[ext_resource type="Texture2D" uid="uid://rk61rhjkabem" path="res://src/tilemaps/kingdom/stone_tiles_sheet.png" id="1_0vn51"]
+[ext_resource type="Texture2D" uid="uid://rk61rhjkabem" path="res://src/tilemaps/purple_stone/stone_tiles_sheet.png" id="1_oci0t"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0qxno"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -9,7 +9,7 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0aguj"]
-texture = ExtResource("1_0vn51")
+texture = ExtResource("1_oci0t")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0

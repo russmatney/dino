@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djq8imlbn8tut"]
 
-[ext_resource type="TileSet" uid="uid://uuhwfbymqdt8" path="res://src/tilemaps/kingdom/PurpleStoneTiles16.tres" id="1_itul5"]
+[ext_resource type="TileSet" uid="uid://uuhwfbymqdt8" path="res://src/tilemaps/purple_stone/PurpleStoneTiles16.tres" id="1_itul5"]
 
 [node name="PurpleStoneTiles" type="TileMapLayer"]
 use_parent_material = true

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_sw7hh"]
 [ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/dino/entities/targets/Target.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_6v0h7"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/kingdom/PurpleStoneTiles16.tscn" id="4_r0vsp"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/purple_stone/PurpleStoneTiles16.tscn" id="4_r0vsp"]
 [ext_resource type="PackedScene" uid="uid://da2wa1ua1rdwh" path="res://src/dino/entities/boxes/Box.tscn" id="6_d8lfw"]
 [ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/pickups/orb/GreenBlobAnim.tscn" id="7_37wsx"]
 [ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="8_ejaqt"]

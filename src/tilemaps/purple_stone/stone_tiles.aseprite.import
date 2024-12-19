@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://de4i3g6qie606"
+path="res://.godot/imported/stone_tiles.aseprite-c947193b6cee27376e31ca9d22963a41.res"
+
+[deps]
+
+source_file="res://src/tilemaps/purple_stone/stone_tiles.aseprite"
+dest_files=["res://.godot/imported/stone_tiles.aseprite-c947193b6cee27376e31ca9d22963a41.res"]
+
+[params]
+

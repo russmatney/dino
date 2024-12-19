@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dnoqoloeex0er" path="res://src/tilemaps/wooden/WoodenBoxesTiles8.tscn" id="5_tky8d"]
 [ext_resource type="PackedScene" uid="uid://qlyyoed7ln8c" path="res://src/tilemaps/grass/GrassyCaveTileMap8.tscn" id="6_1c5dl"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="7_fdlq5"]
-[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/kingdom/PurpleStoneTiles16.tscn" id="8_u6t8r"]
+[ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/purple_stone/PurpleStoneTiles16.tscn" id="8_u6t8r"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/kingdom/GildedKingdomTiles8.tscn" id="9_wn65p"]
 [ext_resource type="Script" path="res://src/core/metro/MetroTravelPointEntity.gd" id="10_e87nn"]
 [ext_resource type="PackedScene" uid="uid://drxg0wu7qxcg8" path="res://src/dino/pickups/powerups/SSPowerup.tscn" id="11_4s4lm"]
