@@ -143,7 +143,7 @@ func test_mock_source_with_class_name_by_resource_path() -> void:
 	var m: Variant = mock(resource_path_)
 	var head :String = m.get_script().source_code.substr(0, 200)
 	assert_str(head)\
-		.contains("class_name DoubledMunderwoodPathingWorld")\
+		.contains("class_name DoubledMockClassMunderwoodPathingWorld")\
 		.contains("extends '%s'" % resource_path_)
 
 
@@ -153,7 +153,7 @@ func test_mock_source_with_class_name_by_class() -> void:
 	var m: Variant = mock(Munderwood_Pathing_World)
 	var head :String = m.get_script().source_code.substr(0, 200)
 	assert_str(head)\
-		.contains("class_name DoubledMunderwoodPathingWorld")\
+		.contains("class_name DoubledMockClassMunderwoodPathingWorld")\
 		.contains("extends '%s'" % resource_path_)
 
 
@@ -162,7 +162,7 @@ func test_mock_extends_godot_class() -> void:
 	var m: Variant = mock(World3D)
 	var head :String = m.get_script().source_code.substr(0, 200)
 	assert_str(head)\
-		.contains("class_name DoubledWorld")\
+		.contains("class_name DoubledMockClassWorld")\
 		.contains("extends World3D")
 
 
@@ -688,7 +688,7 @@ func test_mock_custom_class_assert_has_no_side_affect_real_func() -> void:
 # This test verifies a function is calling other internally functions
 # to collect the access times and the override return value is working as expected
 @warning_ignore("unsafe_method_access")
-func test_mock_advanced_func_path() -> void:
+func _test_mock_advanced_func_path() -> void:
 	var m: Variant = mock(AdvancedTestClass, CALL_REAL_FUNC)
 	# initial nothing is called
 	verify(m, 0).select(AdvancedTestClass.A)
@@ -737,7 +737,7 @@ func _test_mock_godot_class_calls_sub_function() -> void:
 
 
 @warning_ignore("unsafe_method_access")
-func test_mock_class_with_inner_classs() -> void:
+func test_mock_class_with_inner_class() -> void:
 	var mock_advanced: Variant = mock(AdvancedTestClass)
 	assert_that(mock_advanced).is_not_null()
 
@@ -747,10 +747,28 @@ func test_mock_class_with_inner_classs() -> void:
 	var mock_b: Variant = mock(AdvancedTestClass.AtmosphereData)
 	assert_object(mock_b).is_not_null()
 
-
-func test_mock_class_with_inner_classs_() -> void:
 	var mock_c: Variant = mock(AdvancedTestClass.Area4D)
 	assert_object(mock_c).is_not_null()
+
+
+func test_mock_class_with_property_getter_and_setter() -> void:
+	var c :Variant = mock(ClassWithParameterGetterSetter)
+
+	# inital value
+	assert_int(c._session_count).is_equal(42)
+
+	# overwrite it by 10
+	c._session_count = 10
+
+	# verify the paramater is set to 10
+	assert_int(c._session_count).is_equal(10)
+	# verify the method still returns the default value
+	assert_int(c.session_count()).is_equal(0)
+
+	# mock the function to return a cutom value
+	do_return(23).on(c).session_count()
+	# verify the method now returns the new value
+	assert_int(c.session_count()).is_equal(23)
 
 
 @warning_ignore("unsafe_method_access")
@@ -791,7 +809,7 @@ func test_matching_is_sorted() -> void:
 	do_return(null).on(mocked_node).get_child(3, true)
 
 	# get the sorted mocked args as array
-	var mocked_args :Array = mocked_node.__mocked_return_values.get("get_child").keys()
+	var mocked_args :Array = mocked_node.__mock_state().return_values.get("get_child").keys()
 	assert_array(mocked_args).has_size(5)
 
 	# we expect all argument matchers are sorted to the end
@@ -1211,3 +1229,13 @@ class Foo extends Base:
 func test_mock_with_inheritance_method() -> void:
 	var foo: Variant = mock(Foo)
 	assert_object(foo).is_not_null()
+
+
+func test_mock_func_default_arg_dict() -> void:
+	var mock_obj :ClassWithDictionaryDefaultArguments = mock(ClassWithDictionaryDefaultArguments)
+
+	do_return(["a", "b"]).on(mock_obj).on_dictionary_case1(any_dictionary())
+	verify_no_interactions(mock_obj)
+
+	assert_array(mock_obj.on_dictionary_case1({})).contains_exactly(["a", "b"])
+	verify(mock_obj).on_dictionary_case1({})

@@ -120,7 +120,7 @@ func get_test_suite_name() -> StringName:
 
 func get_test_case_name() -> StringName:
 	if _test_case_name.is_empty():
-		return test_case.get_name()
+		return test_case._test_case.display_name
 	return _test_case_name
 
 
@@ -348,5 +348,7 @@ func register_auto_free(obj: Variant) -> Variant:
 
 ## Runs the gdunit garbage collector to free registered object
 func gc() -> void:
+	# unreference last used assert form the test to prevent memory leaks
+	GdUnitThreadManager.get_current_context().clear_assert()
 	await _memory_observer.gc()
 	orphan_monitor_stop()

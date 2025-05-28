@@ -7,6 +7,9 @@ const __source = 'res://addons/gdUnit4/src/GdUnitTestSuite.gd'
 
 var _events :Array[GdUnitEvent] = []
 var _retry_count := 0
+var _flaky_settings: bool
+var _test_unknown_argument_in_test_case_is_called := false
+
 
 
 func collect_report(event :GdUnitEvent) -> void:
@@ -16,15 +19,18 @@ func collect_report(event :GdUnitEvent) -> void:
 func before() -> void:
 	# register to receive test reports
 	GdUnitSignals.instance().gdunit_event.connect(collect_report)
+	_flaky_settings = ProjectSettings.get_setting(GdUnitSettings.TEST_FLAKY_CHECK, false)
 	ProjectSettings.set_setting(GdUnitSettings.TEST_FLAKY_CHECK, true)
 
 
 func after() -> void:
 	# verify the test case `test_unknown_argument_in_test_case` was skipped
-	assert_array(_events).extractv(extr("type"), extr("is_skipped"), extr("test_name"))\
-		.contains([tuple(GdUnitEvent.TESTCASE_AFTER, true, "test_unknown_argument_in_test_case")])
+	assert_bool(_test_unknown_argument_in_test_case_is_called)\
+		.override_failure_message("Expecting 'test_unknown_argument_in_test_case' is skipped!")\
+		.is_false()
 	GdUnitSignals.instance().gdunit_event.disconnect(collect_report)
-	ProjectSettings.set_setting(GdUnitSettings.TEST_FLAKY_CHECK, false)
+	# Restore original project settings
+	ProjectSettings.set_setting(GdUnitSettings.TEST_FLAKY_CHECK, _flaky_settings)
 
 
 func test_assert_that_types() -> void:
@@ -47,6 +53,7 @@ func test_assert_that_types() -> void:
 
 
 func test_unknown_argument_in_test_case(_invalid_arg :int) -> void:
+	_test_unknown_argument_in_test_case_is_called = true
 	fail("This test case should be not executed, it must be skipped.")
 
 

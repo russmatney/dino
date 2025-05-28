@@ -27,13 +27,12 @@ func do_a_fail() -> void:
 			USER SCRIPT ERROR: Assertion failed: test
 			   at: do_a_fail (res://addons/gdUnit4/test/asserts/GdUnitErrorAssertTest.gd:20)""".dedent())
 	else:
+		@warning_ignore("assert_always_false")
 		assert(3 == 1, 'test')
 
 
 func catch_test_events(event :GdUnitEvent) -> void:
-	# we not catch the statistics
-	if event.type() != GdUnitEvent.TESTCASE_STATISTICS:
-		_catched_events.append(event)
+	_catched_events.append(event)
 
 
 func before() -> void:

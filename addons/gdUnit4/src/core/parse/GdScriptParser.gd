@@ -24,10 +24,14 @@ var TOKEN_ARGUMENT_TYPE_ASIGNMENT := Token.new(":=")
 var TOKEN_ARGUMENT_FUZZER := FuzzerToken.new(GdUnitTools.to_regex("((?!(fuzzer_(seed|iterations)))fuzzer?\\w+)( ?+= ?+| ?+:= ?+| ?+:Fuzzer ?+= ?+|)"))
 var TOKEN_ARGUMENT_TYPE := Token.new(":")
 var TOKEN_ARGUMENT_SEPARATOR := Token.new(",")
-var TOKEN_BRACKET_OPEN := Token.new("(")
-var TOKEN_BRACKET_CLOSE := Token.new(")")
-var TOKEN_ARRAY_OPEN := Token.new("[")
-var TOKEN_ARRAY_CLOSE := Token.new("]")
+var TOKEN_BRACKET_ROUND_OPEN := Token.new("(")
+var TOKEN_BRACKET_ROUND_CLOSE := Token.new(")")
+var TOKEN_BRACKET_SQUARE_OPEN := Token.new("[")
+var TOKEN_BRACKET_SQUARE_CLOSE := Token.new("]")
+var TOKEN_BRACKET_CURLY_OPEN := Token.new("{")
+var TOKEN_BRACKET_CURLY_CLOSE := Token.new("}")
+
+
 
 var OPERATOR_ADD := Operator.new("+")
 var OPERATOR_SUB := Operator.new("-")
@@ -40,10 +44,12 @@ var TOKENS :Array[Token] = [
 	TOKEN_TABULATOR,
 	TOKEN_NEW_LINE,
 	TOKEN_COMMENT,
-	TOKEN_BRACKET_OPEN,
-	TOKEN_BRACKET_CLOSE,
-	TOKEN_ARRAY_OPEN,
-	TOKEN_ARRAY_CLOSE,
+	TOKEN_BRACKET_ROUND_OPEN,
+	TOKEN_BRACKET_ROUND_CLOSE,
+	TOKEN_BRACKET_SQUARE_OPEN,
+	TOKEN_BRACKET_SQUARE_CLOSE,
+	TOKEN_BRACKET_CURLY_OPEN,
+	TOKEN_BRACKET_CURLY_CLOSE,
 	TOKEN_CLASS_NAME,
 	TOKEN_INNER_CLASS,
 	TOKEN_EXTENDS,
@@ -367,7 +373,7 @@ func get_function_descriptors(script: GDScript, included_functions: PackedString
 		var func_name: String = method_descriptor["name"]
 		if included_functions.is_empty() or func_name in included_functions:
 			# exclude type set/geters
-			if func_name in ["@type_setter", "@type_getter"]:
+			if is_getter_or_setter(func_name):
 				continue
 			if not fds.any(func(fd: GdFunctionDescriptor) -> bool: return fd.name() == func_name):
 				fds.append(GdFunctionDescriptor.extract_from(method_descriptor, false))
@@ -377,6 +383,10 @@ func get_function_descriptors(script: GDScript, included_functions: PackedString
 	_prescan_script(script)
 	_enrich_function_descriptor(script, fds)
 	return fds
+
+
+func is_getter_or_setter(func_name: String) -> bool:
+	return func_name.begins_with("@") and (func_name.ends_with("getter") or func_name.ends_with("setter"))
 
 
 func _parse_function_arguments(input: String) -> Dictionary:
@@ -403,11 +413,11 @@ func _parse_function_arguments(input: String) -> Dictionary:
 		current_index += token._consumed
 		if token.is_skippable():
 			continue
-		if token == TOKEN_BRACKET_OPEN:
+		if token == TOKEN_BRACKET_ROUND_OPEN :
 			in_function = true
 			bracket += 1
 			continue
-		if token == TOKEN_BRACKET_CLOSE:
+		if token == TOKEN_BRACKET_ROUND_CLOSE:
 			bracket -= 1
 		# if function end?
 		if in_function and bracket == 0:
@@ -434,6 +444,7 @@ func _parse_function_arguments(input: String) -> Dictionary:
 				current_index += token._consumed
 				if token.is_skippable():
 					continue
+
 				match token:
 					TOKEN_ARGUMENT_TYPE:
 						token = next_token(input, current_index)
@@ -447,17 +458,25 @@ func _parse_function_arguments(input: String) -> Dictionary:
 						token = next_token(input, current_index)
 						arg_value = _parse_end_function(input.substr(current_index), true)
 						current_index += arg_value.length()
-					TOKEN_BRACKET_OPEN:
+					TOKEN_BRACKET_SQUARE_OPEN:
+						bracket += 1
+					TOKEN_BRACKET_CURLY_OPEN:
+						bracket += 1
+					TOKEN_BRACKET_ROUND_OPEN :
 						bracket += 1
 						# if value a function?
 						if bracket > 1:
 							# complete the argument value
-							var func_begin := input.substr(current_index-TOKEN_BRACKET_OPEN._consumed)
+							var func_begin := input.substr(current_index-TOKEN_BRACKET_ROUND_OPEN ._consumed)
 							var func_body := _parse_end_function(func_begin)
 							arg_value += func_body
 							# fix parse index to end of value
-							current_index += func_body.length() - TOKEN_BRACKET_OPEN._consumed - TOKEN_BRACKET_CLOSE._consumed
-					TOKEN_BRACKET_CLOSE:
+							current_index += func_body.length() - TOKEN_BRACKET_ROUND_OPEN ._consumed - TOKEN_BRACKET_ROUND_CLOSE._consumed
+					TOKEN_BRACKET_SQUARE_CLOSE:
+						bracket -= 1
+					TOKEN_BRACKET_CURLY_CLOSE:
+						bracket -= 1
+					TOKEN_BRACKET_ROUND_CLOSE:
 						bracket -= 1
 						# end of function
 						if bracket == 0:
@@ -474,6 +493,7 @@ func _parse_end_function(input: String, remove_trailing_char := false) -> String
 	var current_index := 0
 	var bracket_count := 0
 	var in_array := 0
+	var in_dict := 0
 	var end_of_func := false
 
 	while current_index < len(input) and not end_of_func:
@@ -500,14 +520,17 @@ func _parse_end_function(input: String, remove_trailing_char := false) -> String
 			# count if inside an array
 			"[": in_array += 1
 			"]": in_array -= 1
+			# count if inside an dictionary
+			"{": in_dict += 1
+			"}": in_dict -= 1
 			# count if inside a function
 			"(": bracket_count += 1
 			")":
 				bracket_count -= 1
-				if bracket_count < 0 and in_array <= 0:
+				if bracket_count < 0 and in_array <= 0 and in_dict <= 0:
 					end_of_func = true
 			",":
-				if bracket_count == 0 and in_array == 0:
+				if bracket_count == 0 and in_array == 0 and in_dict <= 0:
 					end_of_func = true
 		current_index += 1
 	if remove_trailing_char:
@@ -519,14 +542,16 @@ func _parse_end_function(input: String, remove_trailing_char := false) -> String
 	return input.substr(0, current_index)
 
 
-@warning_ignore("unsafe_method_access")
 func extract_inner_class(source_rows: PackedStringArray, clazz_name :String) -> PackedStringArray:
 	for row_index in source_rows.size():
 		var input := source_rows[row_index]
 		var token := next_token(input, 0)
 		if token.is_inner_class():
+			@warning_ignore("unsafe_method_access")
 			if token.is_class_name(clazz_name):
+				@warning_ignore("unsafe_method_access")
 				token.parse(source_rows, row_index)
+				@warning_ignore("unsafe_method_access")
 				return token.content()
 	return PackedStringArray()
 

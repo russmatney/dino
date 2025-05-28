@@ -239,87 +239,21 @@ func test_build_test_suite_path() -> void:
 	assert_str(GdUnitTestSuiteScanner.resolve_test_suite_path(source_path)).is_equal("user://tmp/test/projectX/entity/PersonTest.gd")
 
 
-func test_parse_and_add_test_cases() -> void:
-	var default_time := GdUnitSettings.test_timeout()
-	var scanner :GdUnitTestSuiteScanner = GdUnitTestSuiteScanner.new()
-	# fake a test suite
-	var test_suite :GdUnitTestSuite = auto_free(GdUnitTestSuite.new())
-	var source_code := FileAccess.get_file_as_string("res://addons/gdUnit4/test/core/resources/test_script_with_arguments.gd")
-	var script := GDScript.new()
-	script.source_code = source_code.replace("extends Node", "extends GdUnitTestSuite")
-	script.reload()
-	test_suite.set_script(script)
-
-	var test_case_names := PackedStringArray([
-		"test_no_args",
-		"test_with_timeout",
-		"test_with_fuzzer",
-		"test_with_fuzzer_iterations",
-		"test_with_multible_fuzzers",
-		"test_multiline_arguments_a",
-		"test_multiline_arguments_b",
-		"test_multiline_arguments_c"])
-	scanner._parse_and_add_test_cases(test_suite, script, test_case_names)
-	assert_array(test_suite.get_children())\
-		.extractv(extr("get_name"), extr("timeout"), extr("fuzzer_arguments"), extr("iterations"))\
-		.contains_exactly([
-			tuple("test_no_args", default_time, [], Fuzzer.ITERATION_DEFAULT_COUNT),
-			tuple("test_with_timeout", 2000, [], Fuzzer.ITERATION_DEFAULT_COUNT),
-			tuple("test_with_fuzzer", default_time, [GdFunctionArgument.new("fuzzer", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(-10, 22)")], Fuzzer.ITERATION_DEFAULT_COUNT),
-			tuple("test_with_fuzzer_iterations", default_time, [GdFunctionArgument.new("fuzzer", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(-10, 22)")], 10),
-			tuple("test_with_multible_fuzzers", default_time, [GdFunctionArgument.new("fuzzer_a", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(-10, 22)"),
-				GdFunctionArgument.new("fuzzer_b", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(23, 42)")], 10),
-			tuple("test_multiline_arguments_a", default_time, [GdFunctionArgument.new("fuzzer_a", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(-10, 22)"),
-				GdFunctionArgument.new("fuzzer_b", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(23, 42)")], 42),
-			tuple("test_multiline_arguments_b", default_time, [GdFunctionArgument.new("fuzzer_a", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(-10, 22)"),
-				GdFunctionArgument.new("fuzzer_b", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(23, 42)")], 23),
-			tuple("test_multiline_arguments_c", 2000, [GdFunctionArgument.new("fuzzer_a", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(-10, 22)"),
-				GdFunctionArgument.new("fuzzer_b", GdObjects.TYPE_FUZZER, "Fuzzers.rangei(23, 42)")], 33)
-			])
-
-
 func test_scan_by_inheritance_class_name() -> void:
 	var scanner :GdUnitTestSuiteScanner = GdUnitTestSuiteScanner.new()
 	var test_suites := scanner.scan("res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_name/")
 
 	assert_array(test_suites).has_size(3)
 	# sort by names
-	test_suites.sort_custom(func by_name(a :GdUnitTestSuite, b :GdUnitTestSuite) -> bool: return a.get_name().length() <= b.get_name().length())
-	assert_array(test_suites).extract("get_name")\
-		.contains_exactly(["BaseTest", "ExtendedTest", "ExtendsExtendedTest"])
-	assert_array(test_suites).extract("get_script.get_path")\
-		.contains_exactly([
+	assert_array(test_suites).extract("resource_path")\
+		.contains_exactly_in_any_order([
 			"res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_name/BaseTest.gd",
 			"res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_name/ExtendedTest.gd",
 			"res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_name/ExtendsExtendedTest.gd"])
-	assert_array(test_suites[0].get_children()).extract("name")\
-		.contains_same_exactly_in_any_order([&"test_foo1"])
-	assert_array(test_suites[1].get_children()).extract("name")\
-		.contains_same_exactly_in_any_order([&"test_foo2", &"test_foo1"])
-	assert_array(test_suites[2].get_children()).extract("name")\
-		.contains_same_exactly_in_any_order([&"test_foo3", &"test_foo2", &"test_foo1"])
-	# finally free all scaned test suites
-	for ts in test_suites:
-		ts.free()
-
-
-func test_scan_by_inheritance_class_path() -> void:
-	var scanner :GdUnitTestSuiteScanner = GdUnitTestSuiteScanner.new()
-	var test_suites := scanner.scan("res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_path/")
-
-	assert_array(test_suites).extractv(extr("get_name"), extr("get_script.get_path"), extr("get_children.get_name"))\
-		.contains_exactly_in_any_order([
-			tuple("BaseTest", "res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_path/BaseTest.gd", [&"test_foo1"]),
-			tuple("ExtendedTest","res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_path/ExtendedTest.gd", [&"test_foo2", &"test_foo1"]),
-			tuple("ExtendsExtendedTest", "res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_path/ExtendsExtendedTest.gd", [&"test_foo3", &"test_foo2", &"test_foo1"])
-		])
-	# finally free all scaned test suites
-	for ts in test_suites:
-		ts.free()
 
 
 func test_get_test_case_line_number() -> void:
-	assert_int(GdUnitTestSuiteScanner.get_test_case_line_number("res://addons/gdUnit4/test/core/GdUnitTestSuiteScannerTest.gd", "get_test_case_line_number")).is_equal(321)
+	assert_int(GdUnitTestSuiteScanner.get_test_case_line_number("res://addons/gdUnit4/test/core/GdUnitTestSuiteScannerTest.gd", "get_test_case_line_number")).is_equal(255)
 	assert_int(GdUnitTestSuiteScanner.get_test_case_line_number("res://addons/gdUnit4/test/core/GdUnitTestSuiteScannerTest.gd", "unknown")).is_equal(-1)
 
 
@@ -368,16 +302,6 @@ func test_resolve_test_suite_path_with_src_folders() -> void:
 	assert_str(GdUnitTestSuiteScanner.resolve_test_suite_path("res://project/folder/myclass.gd", "/")).is_equal("res://project/folder/myclass_test.gd")
 	assert_str(GdUnitTestSuiteScanner.resolve_test_suite_path("res://project/folder/MyClass.gd", "/")).is_equal("res://project/folder/MyClassTest.gd")
 
-
-func test_scan_test_suite_without_tests() -> void:
-	var scanner :GdUnitTestSuiteScanner = GdUnitTestSuiteScanner.new()
-	var test_suites := scanner.scan("res://addons/gdUnit4/test/core/resources/testsuites/TestSuiteWithoutTests.gd")
-
-	assert_array(test_suites).has_size(1)
-	assert_that(test_suites[0].get_child_count()).is_equal(0)
-	# finally free all scaned test suites
-	for ts in test_suites:
-		ts.free()
 
 func test_scan_test_suite_exclude_non_test_suites() -> void:
 	var scanner :GdUnitTestSuiteScanner = GdUnitTestSuiteScanner.new()

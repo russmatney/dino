@@ -17,8 +17,7 @@ func _execute(context: GdUnitExecutionContext) -> void:
 	if _call_stage:
 		@warning_ignore("redundant_await")
 		await test_suite.after_test()
-	# unreference last used assert form the test to prevent memory leaks
-	GdUnitThreadManager.get_current_context().set_assert(null)
+
 	await context.gc()
 	await context.error_monitor_stop()
 
@@ -27,12 +26,7 @@ func _execute(context: GdUnitExecutionContext) -> void:
 	if context.is_skipped():
 		fire_test_skipped(context)
 	else:
-		fire_event(GdUnitEvent.new() \
-			.test_after(context.get_test_suite_path(),
-				context.get_test_suite_name(),
-				context.get_test_case_name(),
-				context.get_execution_statistics(),
-				reports))
+		fire_event(GdUnitEvent.new().test_after(context.test_case.id(), context.get_execution_statistics(), reports))
 
 
 func fire_test_skipped(context: GdUnitExecutionContext) -> void:
@@ -50,9 +44,4 @@ func fire_test_skipped(context: GdUnitExecutionContext) -> void:
 	}
 	var report := GdUnitReport.new() \
 		.create(GdUnitReport.SKIPPED, test_case.line_number(), GdAssertMessages.test_skipped(test_case.skip_info()))
-	fire_event(GdUnitEvent.new() \
-		.test_after(context.get_test_suite_path(),
-			context.get_test_suite_name(),
-			context.get_test_case_name(),
-			statistics,
-			[report]))
+	fire_event(GdUnitEvent.new().test_after(test_case.id(), statistics, [report]))
