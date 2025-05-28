@@ -16,7 +16,7 @@ func create_animations(animated_sprite: Node, aseprite_files: Dictionary, option
 		printerr(result_code.get_error_message(sprite_frames_result.code))
 		return
 
-	animated_sprite.frames = sprite_frames_result.content
+	animated_sprite.frames = sprite_frames_result.content.resource
 
 	if animated_sprite is CanvasItem:
 		animated_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -31,45 +31,67 @@ func create_resources(source_files: Array, options: Dictionary = {}) -> Dictiona
 		if o.is_empty():
 			return result_code.error(result_code.ERR_ASEPRITE_EXPORT_FAILED)
 
-		var resource = _create_sprite_frames(o, options)
+		var result = _create_sprite_frames(o, options)
 
-		if not resource.is_ok:
-			return resource
+		if not result.is_ok:
+			return result
 
 		resources.push_back({
 			"data_file": o.data_file,
-			"resource": resource.content,
+			"resource": result.content.resource,
+			"extra_gen_files": result.content.extra_gen_files
 		})
 
 	return result_code.result(resources)
 
 
 func _create_sprite_frames(data: Dictionary, options: Dictionary) -> Dictionary:
-	var aseprite_resources = _load_aseprite_resources(data)
+	var aseprite_resources = _load_aseprite_resources(data, options)
 	if not aseprite_resources.is_ok:
 		return aseprite_resources
 
-	return result_code.result(
-		_create_sprite_frames_with_animations(
-			aseprite_resources.content.metadata,
-			aseprite_resources.content.texture,
-			options,
-		)
+	var resource = _create_sprite_frames_with_animations(
+		aseprite_resources.content.metadata,
+		aseprite_resources.content.texture,
+		options,
 	)
 
+	return result_code.result({
+		"resource": resource,
+		"extra_gen_files": aseprite_resources.content.extra_gen_files
+	})
 
-func _load_aseprite_resources(aseprite_data: Dictionary):
+func _load_aseprite_resources(aseprite_data: Dictionary, options: Dictionary) -> Dictionary:
 	var content_result = _aseprite_file_exporter.load_json_content(aseprite_data.data_file)
 
 	if not content_result.is_ok:
 		return content_result
 
-	var texture = _load_texture(aseprite_data.sprite_sheet)
+	var result = _load_or_create_texture_resource(aseprite_data.sprite_sheet, options)
 
 	return result_code.result({
 		"metadata": content_result.content,
-		"texture": texture
+		"texture": result.texture,
+		"extra_gen_files": result.extra_gen_files
 	})
+
+
+func _load_or_create_texture_resource(sprite_sheet: String, options: Dictionary) -> Dictionary:
+	if not options.get("should_create_portable_texture", false):
+		return { "texture": _load_texture(sprite_sheet), "extra_gen_files": [] }
+
+	if options.get("sheet_base_path", "") == "":
+		return {
+			"texture": create_packed_texture(sprite_sheet),
+			"extra_gen_files": []
+		}
+
+	var texture_path = "%s.%s.texture.res" % [options.sheet_base_path, sprite_sheet.get_file().get_basename() ]
+
+	return {
+		"texture": create_packed_texture(sprite_sheet, texture_path),
+		"extra_gen_files": [texture_path]
+	}
 
 
 func save_resources(resources: Array) -> int:
@@ -103,9 +125,19 @@ func _create_sprite_frames_with_animations(content: Dictionary, texture, options
 	if content.meta.has("frameTags") and content.meta.frameTags.size() > 0:
 		for tag in content.meta.frameTags:
 			var selected_frames = frames.slice(tag.from, tag.to + 1)
-			_add_animation_frames(sprite_frames, tag.name, selected_frames, texture, frame_rect, tag.direction, int(tag.get("repeat", -1)), frame_cache)
+			_add_animation_frames(
+				sprite_frames,
+				tag.name,
+				selected_frames,
+				texture,
+				frame_rect,
+				{ "should_round_fps": options.get("should_round_fps", true) },
+				tag.direction,
+				int(tag.get("repeat", -1)),
+				frame_cache
+			)
 	else:
-		_add_animation_frames(sprite_frames, "default", frames, texture, frame_rect)
+		_add_animation_frames(sprite_frames, "default", frames, texture, frame_rect, { "should_round_fps": options.get("should_round_fps", true) })
 
 	return sprite_frames
 
@@ -116,6 +148,7 @@ func _add_animation_frames(
 	frames: Array,
 	texture,
 	frame_rect: Variant,
+	options: Dictionary,
 	direction = 'forward',
 	repeat = -1,
 	frame_cache = {}
@@ -131,7 +164,7 @@ func _add_animation_frames(
 	sprite_frames.add_animation(animation_name)
 
 	var min_duration = _get_min_duration(frames)
-	var fps = _calculate_fps(min_duration)
+	var fps = _calculate_fps(min_duration, options.should_round_fps)
 
 	if direction == "reverse" or direction == "pingpong_reverse":
 		frames.reverse()
@@ -160,8 +193,10 @@ func _add_animation_frames(
 	sprite_frames.set_animation_speed(animation_name, fps)
 
 
-func _calculate_fps(min_duration: int) -> float:
-	return ceil(1000.0 / min_duration)
+func _calculate_fps(min_duration: int, should_round: bool) -> float:
+	if should_round:
+		return ceil(1000.0 / min_duration)
+	return 1000.0 / min_duration
 
 
 func _get_min_duration(frames) -> int:
@@ -175,6 +210,20 @@ func _get_min_duration(frames) -> int:
 func _load_texture(path) -> CompressedTexture2D:
 	ResourceLoader.load_threaded_request(path, "CompressedTexture2D", false, ResourceLoader.CACHE_MODE_REPLACE)
 	return ResourceLoader.load_threaded_get(path)
+
+
+func create_packed_texture(sprite_sheet: String, save_path: String = "") -> PortableCompressedTexture2D:
+	var tex := _load_compressed_texture(sprite_sheet)
+	# if no path was provided, we just want the texture in memory
+	if save_path == "":
+		return tex
+
+	var exit_code = ResourceSaver.save(tex, save_path)
+	if exit_code != OK:
+		printerr(result_code.get_error_message(result_code.ERR_ASEPRITE_EXPORT_FAILED))
+		return null
+
+	return ResourceLoader.load(save_path)
 
 
 func _add_to_sprite_frames(

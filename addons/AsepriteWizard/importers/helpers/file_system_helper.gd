@@ -1,7 +1,6 @@
 @tool
 extends Node
 
-
 const WAIT_TIME_IN_SECONDS := 0.8
 var _time_left := 0.0
 var _scheduled := false
@@ -19,4 +18,5 @@ func _process(delta: float) -> void:
 			_time_left -= delta
 		else:
 			_scheduled = false
-			EditorInterface.get_resource_filesystem().scan.call_deferred()
+			if not EditorInterface.get_resource_filesystem().is_scanning():
+				EditorInterface.get_resource_filesystem().scan.call_deferred()

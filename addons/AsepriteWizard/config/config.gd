@@ -23,9 +23,11 @@ const _IMPORTER_ENABLE_KEY = 'aseprite/import/import_plugin/enable_automatic_imp
 const _DEFAULT_IMPORTER_KEY = 'aseprite/import/import_plugin/default_automatic_importer'
 
 const IMPORTER_SPRITEFRAMES_NAME = "SpriteFrames"
+const IMPORTER_SPRITEFRAMES_SPLIT_NAME = "SpriteFrames (Split By Layer)"
 const IMPORTER_NOOP_NAME = "No Import"
 const IMPORTER_TILESET_TEXTURE_NAME = "Tileset Texture"
 const IMPORTER_STATIC_TEXTURE_NAME = "Static Texture"
+const IMPORTER_STATIC_TEXTURE_SPLIT_NAME = "Static Texture (Split By Layer)"
 
 # wizard history
 const _WIZARD_HISTORY = "wizard_history"
@@ -34,9 +36,6 @@ const _HISTORY_DEFAULT_MAX_ENTRIES = 100
 
 # SpriteFrames import last config
 const _STANDALONE_SPRITEFRAMES_LAST_IMPORT_CFG = "standalone_sf_last_import_cfg"
-
-# export
-const _EXPORTER_ENABLE_KEY = 'aseprite/animation/storage/enable_metadata_removal_on_export'
 
 var _editor_settings: EditorSettings = EditorInterface.get_editor_settings()
 
@@ -70,10 +69,6 @@ func is_importer_enabled() -> bool:
 
 func get_default_importer() -> String:
 	return _get_project_setting(_DEFAULT_IMPORTER_KEY, IMPORTER_SPRITEFRAMES_NAME if is_importer_enabled() else IMPORTER_NOOP_NAME)
-
-
-func is_exporter_enabled() -> bool:
-	return _get_project_setting(_EXPORTER_ENABLE_KEY, true)
 
 
 func should_remove_source_files() -> bool:
@@ -151,10 +146,15 @@ func initialize_project_settings():
 		IMPORTER_SPRITEFRAMES_NAME if is_importer_enabled() else IMPORTER_NOOP_NAME,
 		TYPE_STRING,
 		PROPERTY_HINT_ENUM,
-		"%s,%s,%s,%s" % [IMPORTER_NOOP_NAME, IMPORTER_SPRITEFRAMES_NAME, IMPORTER_TILESET_TEXTURE_NAME, IMPORTER_STATIC_TEXTURE_NAME]
+		",".join([
+			IMPORTER_NOOP_NAME,
+			IMPORTER_SPRITEFRAMES_NAME,
+			IMPORTER_SPRITEFRAMES_SPLIT_NAME,
+			IMPORTER_TILESET_TEXTURE_NAME,
+			IMPORTER_STATIC_TEXTURE_NAME,
+			IMPORTER_STATIC_TEXTURE_SPLIT_NAME
+		])
 	)
-
-	_initialize_project_cfg(_EXPORTER_ENABLE_KEY, true, TYPE_BOOL)
 
 	_initialize_project_cfg(_HISTORY_MAX_ENTRIES, _HISTORY_DEFAULT_MAX_ENTRIES, TYPE_INT)
 
@@ -172,7 +172,6 @@ func clear_project_settings():
 		_LOOP_EXCEPTION_PREFIX,
 		_REMOVE_SOURCE_FILES_KEY,
 		_DEFAULT_IMPORTER_KEY,
-		_EXPORTER_ENABLE_KEY,
 		_HISTORY_MAX_ENTRIES,
 		_SET_VISIBLE_TRACK_AUTOMATICALLY,
 		_DEFAULT_ONLY_VISIBLE_LAYERS,

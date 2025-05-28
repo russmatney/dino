@@ -58,6 +58,7 @@ func _load_config(cfg):
 
 func _load_default_config():
 	_cleanup_hide_unused_nodes.button_pressed = config.is_set_visible_track_automatically_enabled()
+	_set_import_mode(0)
 
 
 func _set_animation_player(player):
@@ -170,13 +171,14 @@ func _import_for_animation_player():
 		"keep_anim_length": _keep_length.button_pressed,
 		"cleanup_hide_unused_nodes": _cleanup_hide_unused_nodes.button_pressed,
 		"slice": _slice,
+		"should_create_portable_texture": _embed_field.button_pressed,
 	}
 
 	animation_creator.create_animations(target_node, root.get_node(_animation_player_path), aseprite_output.content, anim_options)
 	_importing = false
 
 	wizard_config.set_source_hash(target_node, FileAccess.get_md5(source_path))
-	_handle_cleanup(aseprite_output.content)
+	_handle_cleanup(aseprite_output.content, _embed_field.button_pressed)
 
 ##
 ## Import first frame from aseprite file as node texture
@@ -199,11 +201,14 @@ func _import_static():
 	file_system.scan()
 	await file_system.filesystem_changed
 
-	static_texture_creator.load_texture(target_node, aseprite_output.content, { "slice": _slice })
+	static_texture_creator.load_texture(target_node, aseprite_output.content, {
+		"slice": _slice,
+		"should_create_portable_texture": _embed_field.button_pressed,
+	})
 
 	_importing = false
 	wizard_config.set_source_hash(target_node, FileAccess.get_md5(source_path))
-	_handle_cleanup(aseprite_output.content)
+	_handle_cleanup(aseprite_output.content, _embed_field.button_pressed)
 
 
 func _get_current_field_values() -> Dictionary:

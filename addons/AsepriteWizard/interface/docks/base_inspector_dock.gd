@@ -10,8 +10,8 @@ var scene: Node
 var target_node: Node
 var file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 
-var _layer: String = ""
 var _slice: String = ""
+var _source_uid: int = -1
 var _source: String = ""
 var _file_dialog_aseprite: EditorFileDialog
 var _output_folder_dialog: EditorFileDialog
@@ -32,7 +32,7 @@ var _interface_section_state
 # layers
 @onready var _layer_section_header := $dock_fields/VBoxContainer/extra/sections/layers/section_header as Button
 @onready var _layer_section_container := $dock_fields/VBoxContainer/extra/sections/layers/section_content as MarginContainer
-@onready var _layer_field := $dock_fields/VBoxContainer/extra/sections/layers/section_content/content/layer/options as OptionButton
+@onready var _layer_field := $dock_fields/VBoxContainer/extra/sections/layers/section_content/content/layer/options as VBoxContainer
 @onready var _visible_layers_field :=  $dock_fields/VBoxContainer/extra/sections/layers/section_content/content/visible_layers/CheckBox as CheckBox
 @onready var _ex_pattern_field := $dock_fields/VBoxContainer/extra/sections/layers/section_content/content/ex_pattern/LineEdit as LineEdit
 # slice
@@ -43,8 +43,14 @@ var _interface_section_state
 @onready var _output_section_header := $dock_fields/VBoxContainer/extra/sections/output/section_header as Button
 @onready var _output_section_container := $dock_fields/VBoxContainer/extra/sections/output/section_content as MarginContainer
 @onready var _out_folder_field := $dock_fields/VBoxContainer/extra/sections/output/section_content/content/out_folder/button as Button
+@onready var _out_folder_container := $dock_fields/VBoxContainer/extra/sections/output/section_content/content/out_folder as HBoxContainer
+
 @onready var _out_filename_field := $dock_fields/VBoxContainer/extra/sections/output/section_content/content/out_filename/LineEdit as LineEdit
 @onready var _out_filename_label := $dock_fields/VBoxContainer/extra/sections/output/section_content/content/out_filename/Label as Label
+@onready var _out_filename_container := $dock_fields/VBoxContainer/extra/sections/output/section_content/content/out_filename as HBoxContainer
+
+@onready var _embed_label := $dock_fields/VBoxContainer/extra/sections/output/section_content/content/embed/Label as Label
+@onready var _embed_field :=  $dock_fields/VBoxContainer/extra/sections/output/section_content/content/embed/CheckBox as CheckBox
 
 @onready var _import_button := $dock_fields/VBoxContainer/import as Button
 
@@ -111,7 +117,7 @@ func _get_changed_config(saved_config):
 
 	if saved_config == null:
 		return current if current != null else {}
-	
+
 	if current == null:
 		return {}
 
@@ -163,16 +169,20 @@ func _setup_config():
 
 func _load_common_config(cfg):
 	if cfg.has("source"):
-		_set_source(cfg.source)
+		_set_source(cfg.source, cfg.get("source_uid", -1))
 
+	# keeping this to be backwards compatible
 	if cfg.get("layer", "") != "":
-		_layer_field.clear()
-		_set_layer(cfg.layer)
+		_layer_field.set_selected_layers([cfg.layer])
+		_update_pending_fields()
 		_out_filename_label.text = _output_filename_prefix_text
 	else:
-		_layer = ""
-		_layer_field.select(0)
-
+		var layers = cfg.get("layers", [])
+		_layer_field.set_selected_layers(layers)
+		if layers.size() > 0:
+			_update_pending_fields()
+		if layers.size() == 1:
+			_out_filename_label.text = _output_filename_prefix_text
 
 	if cfg.get("slice", "") != "":
 		_slice_field.clear()
@@ -186,7 +196,10 @@ func _load_common_config(cfg):
 	_visible_layers_field.button_pressed = cfg.get("only_visible", false)
 	_ex_pattern_field.text = cfg.get("o_ex_p", "")
 
+	_embed_field.button_pressed = cfg.get("embed_tex", false)
+
 	_load_config(cfg)
+	_handle_embed_visibility()
 
 
 func _load_common_default_config():
@@ -196,16 +209,23 @@ func _load_common_default_config():
 	_load_default_config()
 
 
-func _set_source(source):
+func _set_source(source, uid: int = -1):
+	if uid == -1 or not ResourceUID.has_id(uid):
+		if ResourceLoader.exists(source):
+			_source_uid = ResourceLoader.get_resource_uid(source)
+	else:
+		_source_uid = uid
+		var source_path = ResourceUID.get_id_path(uid)
+		_set_source_fields(source_path)
+		return
+
+	_set_source_fields(source)
+
+
+func _set_source_fields(source):
 	_source = source
 	_source_field.text = _source
 	_source_field.tooltip_text = _source
-	_update_pending_fields()
-
-
-func _set_layer(layer):
-	_layer = layer
-	_layer_field.add_item(_layer)
 	_update_pending_fields()
 
 
@@ -248,8 +268,8 @@ func _setup_field_listeners():
 	_source_field.pressed.connect(_on_source_pressed)
 	_source_field.aseprite_file_dropped.connect(_on_source_aseprite_file_dropped)
 
-	_layer_field.button_down.connect(_on_layer_button_down)
-	_layer_field.item_selected.connect(_on_layer_item_selected)
+	_layer_field.data_fetcher = _fetch_layers
+	_layer_field.value_changed.connect(_on_layer_value_changed)
 
 	_slice_field.button_down.connect(_on_slice_button_down)
 	_slice_field.item_selected.connect(_on_slice_item_selected)
@@ -258,6 +278,8 @@ func _setup_field_listeners():
 	_out_folder_field.pressed.connect(_on_out_folder_pressed)
 
 	_import_button.pressed.connect(_on_import_pressed)
+
+	_embed_field.pressed.connect(_on_embed_button_pressed)
 
 
 func _on_layer_header_button_down():
@@ -272,26 +294,24 @@ func _on_output_header_button_down():
 	_toggle_section_visibility(INTERFACE_SECTION_KEY_OUTPUT)
 
 
-func _on_layer_button_down():
+func _fetch_layers():
 	if _source == "":
 		_show_message("Please. Select source file first.")
 		return
 
-	var layers = _get_available_layers(ProjectSettings.globalize_path(_source))
-	_populate_options_field(_layer_field, layers, _layer)
+	return _get_available_layers(ProjectSettings.globalize_path(_source))
 
 
-func _on_layer_item_selected(index):
-	if index == 0:
-		_layer = ""
-		_out_filename_label.text = _output_filename_text
+func _on_layer_value_changed():
+	var layers: Array = _layer_field.get_selected_layers()
+
+	if layers.size() == 1:
+		_out_filename_label.text = _output_filename_prefix_text
 		_update_pending_fields()
 		return
-	_layer = _layer_field.get_item_text(index)
-	_out_filename_label.text = _output_filename_prefix_text
+
+	_out_filename_label.text = _output_filename_text
 	_update_pending_fields()
-	#_save_config()
-	#_update_pending_fields()
 
 
 func _on_slice_item_selected(index):
@@ -300,7 +320,6 @@ func _on_slice_item_selected(index):
 		return
 	_slice = _slice_field.get_item_text(index)
 	_update_pending_fields()
-	#_save_config()
 
 
 func _on_slice_button_down():
@@ -332,12 +351,14 @@ func _get_current_config():
 
 	var cfg := {
 		"source": _source,
-		"layer": _layer,
+		"source_uid": _source_uid,
+		"layers": _layer_field.get_selected_layers(),
 		"slice": _slice,
 		"o_folder": _output_folder,
 		"o_name": _out_filename_field.text,
 		"only_visible": _visible_layers_field.button_pressed,
 		"o_ex_p": _ex_pattern_field.text,
+		"embed_tex": _embed_field.button_pressed,
 	}
 
 	for c in child_config:
@@ -361,7 +382,8 @@ func _get_import_options(default_folder: String):
 		"exception_pattern": _ex_pattern_field.text,
 		"only_visible_layers": _visible_layers_field.button_pressed,
 		"output_filename": _out_filename_field.text,
-		"layer": _layer
+		"layers": _layer_field.get_selected_layers(),
+		"embed_tex": _embed_field.button_pressed,
 	}
 
 
@@ -384,14 +406,12 @@ func _create_aseprite_file_selection():
 
 func _on_aseprite_file_selected(path):
 	_set_source(ProjectSettings.localize_path(path))
-	#_save_config()
 	_update_pending_fields()
 	_file_dialog_aseprite.queue_free()
 
 
 func _on_source_aseprite_file_dropped(path):
 	_set_source(path)
-	#_save_config()
 	_update_pending_fields()
 
 
@@ -438,12 +458,26 @@ func _on_out_dir_dropped(path):
 	_update_pending_fields()
 
 
+func _on_embed_button_pressed():
+	_handle_embed_visibility()
+
+
+func _handle_embed_visibility():
+	if _embed_field.button_pressed:
+		_out_folder_container.hide()
+		_out_filename_container.hide()
+	else:
+		_out_folder_container.show()
+		_out_filename_container.show()
+
+
 func _show_message(message: String):
 	var _warning_dialog = AcceptDialog.new()
 	get_parent().add_child(_warning_dialog)
 	_warning_dialog.dialog_text = message
 	_warning_dialog.popup_centered()
-	_warning_dialog.connect("popup_hide",Callable(_warning_dialog,"queue_free"))
+	_warning_dialog.canceled.connect(_warning_dialog.queue_free)
+	_warning_dialog.confirmed.connect(_warning_dialog.queue_free)
 
 
 func _notify_aseprite_error(aseprite_error_code):
@@ -452,9 +486,15 @@ func _notify_aseprite_error(aseprite_error_code):
 	_show_message(error)
 
 
-func _handle_cleanup(aseprite_content):
+func _handle_cleanup(aseprite_content, should_remove_spritesheet = false):
 	if config.should_remove_source_files():
 		DirAccess.remove_absolute(aseprite_content.data_file)
+		if should_remove_spritesheet:
+			DirAccess.remove_absolute(aseprite_content.sprite_sheet)
+			var import_file = "%s.import" % aseprite_content.sprite_sheet
+			if FileAccess.file_exists(import_file):
+				DirAccess.remove_absolute(import_file)
+
 		file_system.call_deferred("scan")
 
 
@@ -468,11 +508,16 @@ func _on_import_pressed():
 		_importing = false
 		return
 
+	if get_tree().get_edited_scene_root().scene_file_path == "":
+		_show_message("Scene needs to be saved at least once before importing animations")
+		_importing = false
+		return
+
 	await _do_import()
 	_importing = false
 	$dock_fields.hide_source_change_warning()
 	EditorInterface.save_scene()
-	
+
 
 
 # This is a little bit leaky as this base scene contains fields only relevant to animation players.
@@ -481,6 +526,7 @@ func _hide_fields():
 	$dock_fields/VBoxContainer/modes.hide()
 	$dock_fields/VBoxContainer/animation_player.hide()
 	$dock_fields/VBoxContainer/extra/sections/animation.hide()
+	$dock_fields/VBoxContainer/extra/sections/animation_sf.hide()
 
 
 func _on_dock_fields_revert_changes_requested() -> void:

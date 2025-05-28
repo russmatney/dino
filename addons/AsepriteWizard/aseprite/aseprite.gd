@@ -59,21 +59,28 @@ func export_layers(file_name: String, output_folder: String, options: Dictionary
 
 	for layer in layers:
 		if layer != "" and (not exception_regex or exception_regex.search(layer) == null):
-			output.push_back(export_layer(file_name, layer, output_folder, options))
+			output.push_back(export_file_with_layers(file_name, [layer], output_folder, options))
 
 	return output
 
 
-func export_layer(file_name: String, layer_name: String, output_folder: String, options: Dictionary) -> Dictionary:
+func export_file_with_layers(file_name: String, layer_names: Array, output_folder: String, options: Dictionary) -> Dictionary:
 	var output_prefix = options.get('output_filename', "").strip_edges()
 	var output_dir = output_folder.replace("res://", "./").strip_edges()
-	var data_file = "%s/%s%s.json" % [output_dir, output_prefix, layer_name]
-	var sprite_sheet = "%s/%s%s.png" % [output_dir, output_prefix, layer_name]
+	var base_output_path = "%s/%s%s" % [output_dir, output_prefix, layer_names[0] if layer_names.size() == 1 else ""]
+	var data_file = "%s.json" % base_output_path
+	var sprite_sheet = "%s.png" % base_output_path
+	var trim_cels = options.get("trim_cels", false)
 	var first_frame_only = options.get("first_frame_only", false)
 	var output = []
 	var arguments = _export_command_common_arguments(file_name, data_file, sprite_sheet)
-	arguments.push_front(layer_name)
-	arguments.push_front("--layer")
+
+	for layer_name in layer_names:
+		arguments.push_front(layer_name)
+		arguments.push_front("--layer")
+
+	if trim_cels:
+		arguments.push_front("--trim")
 
 	if first_frame_only:
 		arguments.push_front("'[0, 0]'")
@@ -106,10 +113,6 @@ func _add_ignore_layer_arguments(file_name: String, arguments: Array, exception_
 
 
 func _add_sheet_type_arguments(arguments: Array, options : Dictionary):
-	if options.has("column_count"):
-		_old_sheet_type_config(arguments, options)
-		return
-
 	var sheet_type = options.get("sheet_type", "packed")
 	var item_count = options.get("sheet_columns", 0)
 
@@ -125,15 +128,9 @@ func _add_sheet_type_arguments(arguments: Array, options : Dictionary):
 		arguments.push_back("--sheet-type")
 		arguments.push_back(sheet_type)
 
-
-func _old_sheet_type_config(arguments: Array, options : Dictionary):
-	var column_count : int = options.get("column_count", 0)
-	if column_count > 0:
-		arguments.push_back("--merge-duplicates") # Yes, this is undocumented
-		arguments.push_back("--sheet-columns")
-		arguments.push_back(column_count)
-	else:
-		arguments.push_back("--sheet-pack")
+	var frame_padding = options.get("frame_padding", 0)
+	arguments.push_back("--shape-padding")
+	arguments.push_back(frame_padding)
 
 
 func _get_exception_layers(file_name: String, exception_pattern: String) -> Array:
@@ -150,9 +147,28 @@ func _get_exception_layers(file_name: String, exception_pattern: String) -> Arra
 	return exception_layers
 
 
-func list_layers(file_name: String, only_visible = false) -> Array:
+func list_valid_layers(file_path: String, exception_pattern: String = "", show_only_visible: bool = false, should_merge_duplicates: bool = false) -> Array:
+	var layers = []
+
+	if should_merge_duplicates:
+		layers = list_layers_without_duplicates(file_path, show_only_visible)
+	else:
+		layers = list_layers(file_path, show_only_visible)
+
+	var exception_regex = _compile_regex(exception_pattern)
+
 	var output = []
-	var arguments = ["-b", "--list-layers", file_name]
+
+	for layer in layers:
+		if layer != "" and (not exception_regex or exception_regex.search(layer) == null):
+			output.push_back(layer)
+
+	return output
+
+
+func list_layers(file_path: String, only_visible = false) -> Array:
+	var output = []
+	var arguments = ["-b", "--list-layers", file_path]
 
 	if not only_visible:
 		arguments.push_front("--all-layers")
@@ -172,6 +188,52 @@ func list_layers(file_name: String, only_visible = false) -> Array:
 	for s in raw:
 		sanitized.append(s.strip_edges())
 	return sanitized
+
+
+func list_layers_without_duplicates(file_path: String, only_visible = false) -> Array:
+	var output_dir = OS.get_cache_dir()
+	var file_name = file_path.get_file()
+	var data_path = "%s/%s.json" % [output_dir, file_name];
+
+	var arguments = [
+		"-b",
+		"--split-layers",
+		"--trim",
+		"--merge-duplicates",
+		"--format", "json-array",
+		"--data", data_path,
+		file_path
+	]
+
+	if not only_visible:
+		arguments.push_front("--all-layers")
+
+	var output = []
+	var exit_code = _execute(arguments, output)
+
+	if exit_code != 0:
+		printerr('aseprite: failed listing layers')
+		printerr(output)
+		return []
+
+	var file = FileAccess.open(data_path, FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+
+	if data.is_empty():
+		return output
+
+	var regex = RegEx.new()
+	regex.compile("(?<=\\().*(?=\\))")
+
+	var frames = []
+	frames = data.frames;
+	var sanitizedFrames = {}
+	for frame in frames:
+		if(sanitizedFrames.find_key(frame.frame) == null):
+			var result = regex.search(frame.filename)
+			sanitizedFrames[frame.frame] = result.get_string()
+
+	return sanitizedFrames.values()
 
 
 func list_slices(file_name: String) -> Array:
@@ -239,7 +301,7 @@ func test_command():
 
 
 func is_valid_spritesheet(content):
-	return content.has("frames") and content.has("meta") and content.meta.has('image')
+	return content is Dictionary and content.has("frames") and content.has("meta") and content.meta.has('image')
 
 
 func get_content_frames(content):

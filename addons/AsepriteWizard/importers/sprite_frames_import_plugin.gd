@@ -8,16 +8,9 @@ var _aseprite_file_exporter = preload("../aseprite/file_exporter.gd").new()
 var _sf_creator = preload("../creators/sprite_frames/sprite_frames_creator.gd").new()
 var file_system: EditorFileSystem = EditorInterface.get_resource_filesystem()
 
-var file_system_helper
-
-func _init(fs_helper) -> void:
-	file_system_helper = fs_helper
-
 
 func _get_importer_name():
-	# ideally this should be called aseprite_wizard.plugin.spriteframes
-	# but I'm keeping it like this to avoid unnecessary breaking changes
-	return "aseprite_wizard.plugin"
+	return "aseprite_wizard.plugin.spriteframes"
 
 
 func _get_visible_name():
@@ -54,28 +47,28 @@ func _get_import_order():
 
 func _get_import_options(_path, _i):
 	return [
-		{"name": "split_layers",           "default_value": false},
-		{"name": "exclude_layers_pattern", "default_value": config.get_default_exclusion_pattern()},
-		{"name": "only_visible_layers",    "default_value": false},
+		{"name": "layer/exclude_layers_pattern", "default_value": config.get_default_exclusion_pattern()},
+		{"name": "layer/only_visible_layers",    "default_value": false},
 		{
-			"name": "sheet_type",
-			"default_value": "Packed",
+			"name": "sheet/sheet_type",
+			"default_value": "packed",
 			"property_hint": PROPERTY_HINT_ENUM,
-			"hint_string": get_sheet_type_hint_string()
+			"hint_string": "columns,horizontal,vertical,packed",
 		},
+		{
+			"name": "sheet/sheet_columns",
+			"default_value": 12,
+		},
+		{
+			"name": "sheet/frame_padding",
+			"default_value": 0,
+		},
+		{"name": "animation/round_fps", "default_value": true},
 	]
 
 
 func _get_option_visibility(path, option, options):
 	return true
-
-
-static func get_sheet_type_hint_string() -> String:
-	var hint_string := "Packed"
-	for number in [2, 4, 8, 16, 32]:
-		hint_string += ",%s columns" % number
-	hint_string += ",Strip"
-	return hint_string
 
 
 func _import(source_file, save_path, options, platform_variants, gen_files):
@@ -86,15 +79,15 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	var source_basename = source_file.substr(source_path.length()+1, -1)
 	source_basename = source_basename.substr(0, source_basename.rfind('.'))
 
-	var export_mode = _sf_creator.LAYERS_EXPORT_MODE if options['split_layers'] else _sf_creator.FILE_EXPORT_MODE
-
 	var aseprite_opts = {
-		"export_mode": export_mode,
-		"exception_pattern": options['exclude_layers_pattern'],
-		"only_visible_layers": options['only_visible_layers'],
-		"output_filename": '' if export_mode == _sf_creator.FILE_EXPORT_MODE else '%s_' % source_basename,
-		"column_count" : int(options['sheet_type']) if options['sheet_type'] != "Strip" else 128,
+		"export_mode": _sf_creator.FILE_EXPORT_MODE,
+		"exception_pattern": options['layer/exclude_layers_pattern'],
+		"only_visible_layers": options['layer/only_visible_layers'],
+		"output_filename": '',
 		"output_folder": source_path,
+		"sheet_type": options["sheet/sheet_type"],
+		"frame_padding": options["sheet/frame_padding"],
+		"sheet_columns": options["sheet/sheet_columns"],
 	}
 
 	var source_files = _aseprite_file_exporter.generate_aseprite_files(absolute_source_file, aseprite_opts)
@@ -102,37 +95,24 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		printerr("ERROR - Could not import aseprite file: %s" % result_codes.get_error_message(source_files.code))
 		return FAILED
 
-
-	for sf in source_files.content:
-		if sf.is_first_import:
-			file_system.update_file(sf.sprite_sheet)
-			append_import_external_resource(sf.sprite_sheet)
-		else:
-			file_system_helper.schedule_file_system_scan()
-
-	var resources = _sf_creator.create_resources(source_files.content)
+	var resources = _sf_creator.create_resources(source_files.content, {
+		"should_round_fps": options["animation/round_fps"],
+		"should_create_portable_texture": true,
+		"sheet_base_path": save_path,
+	})
 
 	if not resources.is_ok:
 		printerr("ERROR - Could not import aseprite file: %s" % result_codes.get_error_message(resources.code))
 		return FAILED
 
-	if export_mode == _sf_creator.LAYERS_EXPORT_MODE:
-		# each layer is saved as one resource using base file name to prevent collisions
-		# the first layer will be saved in the default resource path to prevent
-		# godot from keeping re-importing it
-		for resource in resources.content:
-			var resource_path = "%s.res" % resource.data_file.get_basename();
-			var exit_code = ResourceSaver.save(resource.resource, resource_path)
-			resource.resource.take_over_path(resource_path)
-
-			if exit_code != OK:
-				printerr("ERROR - Could not persist aseprite file: %s" % result_codes.get_error_message(exit_code))
-				return FAILED
-
-	var resource = resources.content[0]
+	var resource: Dictionary = resources.content[0]
+	resource.resource.set_meta("imported_via_aw", true)
 	var resource_path = "%s.res" % save_path
 	var exit_code = ResourceSaver.save(resource.resource, resource_path)
 	resource.resource.take_over_path(resource_path)
+
+	#for extra_file in resource.extra_gen_files:
+		#gen_files.push_back(extra_file)
 
 	if config.should_remove_source_files():
 		_remove_source_files(source_files.content)
@@ -147,5 +127,4 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 func _remove_source_files(source_files: Array):
 	for s in source_files:
 		DirAccess.remove_absolute(s.data_file)
-		file_system_helper.schedule_file_system_scan()
-
+		DirAccess.remove_absolute(s.sprite_sheet)
