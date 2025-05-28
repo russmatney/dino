@@ -1,9 +1,4 @@
-extends Node
-
-
-const DialogueConstants = preload("../constants.gd")
-const DialogueSettings = preload("../settings.gd")
-const DialogueManagerParseResult = preload("./parse_result.gd")
+class_name DMCache extends Node
 
 
 signal file_content_changed(path: String, new_content: String)
@@ -22,6 +17,8 @@ var _cache: Dictionary = {}
 var _update_dependency_timer: Timer = Timer.new()
 var _update_dependency_paths: PackedStringArray = []
 
+var _files_marked_for_reimport: PackedStringArray = []
+
 
 func _ready() -> void:
 	add_child(_update_dependency_timer)
@@ -30,34 +27,37 @@ func _ready() -> void:
 	_build_cache()
 
 
-func reimport_files(files: PackedStringArray = []) -> void:
-	if files.is_empty(): files = get_files()
-
-	var file_system: EditorFileSystem = Engine.get_meta("DialogueManagerPlugin") \
-		.get_editor_interface() \
-		.get_resource_filesystem()
-
-	# NOTE: Godot 4.2rc1 has an issue with reimporting more than one
-	# file at a time so we do them one by one
+func mark_files_for_reimport(files: PackedStringArray) -> void:
 	for file in files:
-		file_system.reimport_files([file])
-		await get_tree().create_timer(0.2)
+		if not _files_marked_for_reimport.has(file):
+			_files_marked_for_reimport.append(file)
+
+
+func reimport_files(and_files: PackedStringArray = []) -> void:
+	for file in and_files:
+		if not _files_marked_for_reimport.has(file):
+			_files_marked_for_reimport.append(file)
+
+	if _files_marked_for_reimport.is_empty(): return
+
+	EditorInterface.get_resource_filesystem().reimport_files(_files_marked_for_reimport)
+	_files_marked_for_reimport.clear()
 
 
 ## Add a dialogue file to the cache.
-func add_file(path: String, parse_results: DialogueManagerParseResult = null) -> void:
+func add_file(path: String, compile_result: DMCompilerResult = null) -> void:
 	_cache[path] = {
 		path = path,
 		dependencies = [],
 		errors = []
 	}
 
-	if parse_results != null:
-		_cache[path].dependencies = Array(parse_results.imported_paths).filter(func(d): return d != path)
-		_cache[path].parsed_at = Time.get_ticks_msec()
+	if compile_result != null:
+		_cache[path].dependencies = Array(compile_result.imported_paths).filter(func(d): return d != path)
+		_cache[path].compiled_at = Time.get_ticks_msec()
 
 	# If this is a fresh cache entry, check for dependencies
-	if parse_results == null and not _update_dependency_paths.has(path):
+	if compile_result == null and not _update_dependency_paths.has(path):
 		queue_updating_dependencies(path)
 
 
@@ -118,7 +118,7 @@ func get_files_with_dependency(imported_path: String) -> Array:
 ## Get any paths that are dependent on a given path
 func get_dependent_paths_for_reimport(on_path: String) -> PackedStringArray:
 	return get_files_with_dependency(on_path) \
-		.filter(func(d): return Time.get_ticks_msec() - d.get("parsed_at", 0) > 3000) \
+		.filter(func(d): return Time.get_ticks_msec() - d.get("compiled_at", 0) > 3000) \
 		.map(func(d): return d.path)
 
 
@@ -149,7 +149,7 @@ func _get_dialogue_files_in_filesystem(path: String = "res://") -> PackedStringA
 	return files
 
 
-### Signals
+#region Signals
 
 
 func _on_update_dependency_timeout() -> void:
@@ -166,3 +166,6 @@ func _on_update_dependency_timeout() -> void:
 			dependencies.append(found.strings[found.names.path])
 		_cache[path].dependencies = dependencies
 	_update_dependency_paths.clear()
+
+
+#endregion

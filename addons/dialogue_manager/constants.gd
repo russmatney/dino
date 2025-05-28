@@ -1,8 +1,22 @@
-extends Node
+class_name DMConstants extends RefCounted
 
 
 const USER_CONFIG_PATH = "user://dialogue_manager_user_config.json"
 const CACHE_PATH = "user://dialogue_manager_cache.json"
+
+
+enum MutationBehaviour {
+	Wait,
+	DoNotWait,
+	Skip
+}
+
+enum TranslationSource {
+	None,
+	Guess,
+	CSV,
+	PO
+}
 
 # Token types
 
@@ -23,6 +37,7 @@ const TOKEN_COMPARISON = &"comparison"
 const TOKEN_ASSIGNMENT = &"assignment"
 const TOKEN_OPERATOR = &"operator"
 const TOKEN_COMMA = &"comma"
+const TOKEN_NULL_COALESCE = &"null_coalesce"
 const TOKEN_DOT = &"dot"
 const TOKEN_CONDITION = &"condition"
 const TOKEN_BOOL = &"bool"
@@ -33,20 +48,26 @@ const TOKEN_NUMBER = &"number"
 const TOKEN_VARIABLE = &"variable"
 const TOKEN_COMMENT = &"comment"
 
+const TOKEN_VALUE = &"value"
 const TOKEN_ERROR = &"error"
 
 # Line types
 
-const TYPE_UNKNOWN = &"unknown"
+const TYPE_UNKNOWN = &""
+const TYPE_IMPORT = &"import"
+const TYPE_USING = &"using"
+const TYPE_COMMENT = &"comment"
 const TYPE_RESPONSE = &"response"
 const TYPE_TITLE = &"title"
 const TYPE_CONDITION = &"condition"
+const TYPE_WHILE = &"while"
+const TYPE_MATCH = &"match"
+const TYPE_WHEN = &"when"
 const TYPE_MUTATION = &"mutation"
 const TYPE_GOTO = &"goto"
 const TYPE_DIALOGUE = &"dialogue"
+const TYPE_RANDOM = &"random"
 const TYPE_ERROR = &"error"
-
-const TYPE_ELSE = &"else"
 
 # Line IDs
 
@@ -94,6 +115,17 @@ const ERR_UNEXPECTED_VARIABLE = 132
 const ERR_INVALID_INDEX = 133
 const ERR_UNEXPECTED_ASSIGNMENT = 134
 const ERR_UNKNOWN_USING = 135
+const ERR_EXPECTED_WHEN_OR_ELSE = 136
+const ERR_ONLY_ONE_ELSE_ALLOWED = 137
+const ERR_WHEN_MUST_BELONG_TO_MATCH = 138
+const ERR_CONCURRENT_LINE_WITHOUT_ORIGIN = 139
+const ERR_GOTO_NOT_ALLOWED_ON_CONCURRECT_LINES = 140
+const ERR_UNEXPECTED_SYNTAX_ON_NESTED_DIALOGUE_LINE = 141
+const ERR_NESTED_DIALOGUE_INVALID_JUMP = 142
+
+
+static var _current_locale: String = ""
+static var _current_translation: Translation
 
 
 ## Get the error message
@@ -169,18 +201,31 @@ static func get_error_message(error: int) -> String:
 			return translate(&"errors.unexpected_assignment")
 		ERR_UNKNOWN_USING:
 			return translate(&"errors.unknown_using")
+		ERR_EXPECTED_WHEN_OR_ELSE:
+			return translate(&"errors.expected_when_or_else")
+		ERR_ONLY_ONE_ELSE_ALLOWED:
+			return translate(&"errors.only_one_else_allowed")
+		ERR_WHEN_MUST_BELONG_TO_MATCH:
+			return translate(&"errors.when_must_belong_to_match")
+		ERR_CONCURRENT_LINE_WITHOUT_ORIGIN:
+			return translate(&"errors.concurrent_line_without_origin")
+		ERR_GOTO_NOT_ALLOWED_ON_CONCURRECT_LINES:
+			return translate(&"errors.goto_not_allowed_on_concurrect_lines")
+		ERR_UNEXPECTED_SYNTAX_ON_NESTED_DIALOGUE_LINE:
+			return translate(&"errors.unexpected_syntax_on_nested_dialogue_line")
+		ERR_NESTED_DIALOGUE_INVALID_JUMP:
+			return translate(&"errors.err_nested_dialogue_invalid_jump")
 
 	return translate(&"errors.unknown")
 
 
 static func translate(string: String) -> String:
-	var temp_node = new()
-	var base_path = temp_node.get_script().resource_path.get_base_dir()
-	temp_node.free()
-
-	var language: String = TranslationServer.get_tool_locale()
-	var translations_path: String = "%s/l10n/%s.po" % [base_path, language]
-	var fallback_translations_path: String = "%s/l10n/%s.po" % [base_path, TranslationServer.get_tool_locale().substr(0, 2)]
-	var en_translations_path: String = "%s/l10n/en.po" % base_path
-	var translations: Translation = load(translations_path if FileAccess.file_exists(translations_path) else (fallback_translations_path if FileAccess.file_exists(fallback_translations_path) else en_translations_path))
-	return translations.get_message(string)
+	var locale: String = TranslationServer.get_tool_locale()
+	if _current_translation == null or _current_locale != locale:
+		var base_path: String = new().get_script().resource_path.get_base_dir()
+		var translation_path: String = "%s/l10n/%s.po" % [base_path, locale]
+		var fallback_translation_path: String = "%s/l10n/%s.po" % [base_path, locale.substr(0, 2)]
+		var en_translation_path: String = "%s/l10n/en.po" % base_path
+		_current_translation = load(translation_path if FileAccess.file_exists(translation_path) else (fallback_translation_path if FileAccess.file_exists(fallback_translation_path) else en_translation_path))
+		_current_locale = locale
+	return _current_translation.get_message(string)

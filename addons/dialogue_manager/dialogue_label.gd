@@ -47,6 +47,7 @@ var dialogue_line:
 	set(next_dialogue_line):
 		dialogue_line = next_dialogue_line
 		custom_minimum_size = Vector2.ZERO
+		text = ""
 		text = dialogue_line.text
 	get:
 		return dialogue_line
@@ -186,11 +187,12 @@ func _mutate_inline_mutations(index: int) -> void:
 		if inline_mutation[0] > index:
 			return
 		if inline_mutation[0] == index and not _already_mutated_indices.has(index):
-			_already_mutated_indices.append(index)
 			_is_awaiting_mutation = true
 			# The DialogueManager can't be referenced directly here so we need to get it by its path
-			await Engine.get_singleton("DialogueManager").mutate(inline_mutation[1], dialogue_line.extra_game_states, true)
+			await Engine.get_singleton("DialogueManager")._mutate(inline_mutation[1], dialogue_line.extra_game_states, true)
 			_is_awaiting_mutation = false
+
+	_already_mutated_indices.append(index)
 
 
 # Determine if the current autopause character at the cursor should qualify to pause typing.
