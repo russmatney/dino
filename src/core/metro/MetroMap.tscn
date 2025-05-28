@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d1v3sf4u84dp3"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroMap.gd" id="1_ybr1s"]
+[ext_resource type="Script" uid="uid://c3ye5x0y1f8ho" path="res://src/core/metro/MetroMap.gd" id="1_ybr1s"]
 [ext_resource type="PackedScene" uid="uid://d08gsfs35aiod" path="res://src/core/metro/MetroMapRoom.tscn" id="2_fa4kq"]
 
 [node name="MetroMap" type="Control"]

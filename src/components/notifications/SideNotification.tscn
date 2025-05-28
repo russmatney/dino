@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://81wpywexarbn" path="res://src/core/assets/icons/dino_sheet.png" id="1_atxwn"]
 [ext_resource type="Theme" uid="uid://dsig5so5v4kge" path="res://SideNotificationTheme.tres" id="1_hxx5b"]
-[ext_resource type="Script" path="res://src/components/notifications/SideNotification.gd" id="1_qou6e"]
+[ext_resource type="Script" uid="uid://bdcck56vqopch" path="res://src/components/notifications/SideNotification.gd" id="1_qou6e"]
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="3_il1uv"]
-[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="4_sjixl"]
+[ext_resource type="Shader" uid="uid://u0vw1l8e4t2t" path="res://src/shaders/SimpleBlurScreen.gdshader" id="4_sjixl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_23drc"]
 resource_local_to_scene = true

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=4 uid="uid://bterlu2skukpa"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_vs8tm"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_2ers6"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_5n31l"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_vs8tm"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_2ers6"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_5n31l"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_26i2a"]
 [ext_resource type="TileSet" uid="uid://cdox7d6lyf06q" path="res://src/tilemaps/coldfire/ColdFireComboTileset.tres" id="5_jykwt"]
 

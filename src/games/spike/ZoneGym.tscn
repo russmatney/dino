@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bc7ewpiuhg1xn"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_l6mcq"]
+[ext_resource type="Script" uid="uid://dx3r2ijfmbgqi" path="res://src/core/metro/MetroZone.gd" id="1_l6mcq"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://src/tilemaps/snow/SnowTiles16.tscn" id="2_mggic"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_tigbi"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="2_tigbi"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="3_0c0n8"]
 [ext_resource type="PackedScene" uid="uid://6pasv5y65qk" path="res://src/tilemaps/spikes/SpikeTiles16.tscn" id="5_43vjs"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="6_7wtaw"]

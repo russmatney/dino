@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dk40afousn3m3"]
 
-[ext_resource type="Script" path="res://src/core/beehive/beatemup/BEUBody.gd" id="1_xw877"]
+[ext_resource type="Script" uid="uid://d4g8p03lg7pwx" path="res://src/core/beehive/beatemup/BEUBody.gd" id="1_xw877"]
 [ext_resource type="PackedScene" uid="uid://mbx5r7m4xa41" path="res://src/core/beehive/beatemup/beu_machine/BEUMachine.tscn" id="2_ev1i6"]
 
 [node name="BEUBody" type="CharacterBody2D"]

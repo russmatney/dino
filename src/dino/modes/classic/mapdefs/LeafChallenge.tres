@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="MapDef" load_steps=11 format=3 uid="uid://ccmqnk240p1tj"]
 
-[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="1_5c501"]
-[ext_resource type="Script" path="res://src/dino/entities/DinoEntity.gd" id="1_qslyt"]
-[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_0bphv"]
-[ext_resource type="Script" path="res://src/dino/enemies/DinoEnemy.gd" id="2_m6035"]
-[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="3_by4j3"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomEffect.gd" id="4_hrm02"]
-[ext_resource type="Script" path="res://src/dino/vania/RoomShape.gd" id="5_yu4rh"]
-[ext_resource type="Script" path="res://src/dino/tiles/DinoTiles.gd" id="7_xlcog"]
+[ext_resource type="Script" uid="uid://b7pv3c2a3ryd0" path="res://src/dino/pickups/DropData.gd" id="1_5c501"]
+[ext_resource type="Script" uid="uid://cquwjbsn86j01" path="res://src/dino/entities/DinoEntity.gd" id="1_qslyt"]
+[ext_resource type="Script" uid="uid://dysexmhlgdsfc" path="res://src/dino/vania/MapInput.gd" id="2_0bphv"]
+[ext_resource type="Script" uid="uid://bq5yaw6bjckmh" path="res://src/dino/enemies/DinoEnemy.gd" id="2_m6035"]
+[ext_resource type="Script" uid="uid://cc0gt8wiswfd0" path="res://src/dino/vania/MapDef.gd" id="3_by4j3"]
+[ext_resource type="Script" uid="uid://bvg8smcilg3cp" path="res://src/dino/vania/RoomEffect.gd" id="4_hrm02"]
+[ext_resource type="Script" uid="uid://y1x7ua8kadfy" path="res://src/dino/vania/RoomShape.gd" id="5_yu4rh"]
+[ext_resource type="Script" uid="uid://b15t1qi4pwthj" path="res://src/dino/tiles/DinoTiles.gd" id="7_xlcog"]
 
 [sub_resource type="Resource" id="Resource_egvpy"]
 script = ExtResource("1_qslyt")

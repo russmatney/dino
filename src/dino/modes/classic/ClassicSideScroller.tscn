@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dasm8htdfmonq"]
 
-[ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
+[ext_resource type="Script" uid="uid://cj4lvk38jer7r" path="res://src/dino/modes/classic/Classic.gd" id="1_5gcr3"]
 [ext_resource type="Resource" uid="uid://1kqvgyd2awj0" path="res://src/dino/modes/classic/mapdefs/ClassicSideScroller.tres" id="2_b7cpr"]
 
 [node name="ClassicSideScroller" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duncni63m4vm0"]
 
-[ext_resource type="Script" path="res://src/components/PlayedGameRecords.gd" id="1_etqxx"]
+[ext_resource type="Script" uid="uid://pf6gs4yooltx" path="res://src/components/PlayedGameRecords.gd" id="1_etqxx"]
 
 [node name="PlayedGameRecords" type="HBoxContainer"]
 anchors_preset = 15

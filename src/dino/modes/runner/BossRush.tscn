@@ -1,22 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0tp33mwvlvsa"]
+[gd_scene load_steps=12 format=3 uid="uid://d0tp33mwvlvsa"]
 
-[ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_rr2qx"]
-[ext_resource type="Script" path="res://src/dino/vania/MapInput.gd" id="2_5t7oj"]
-[ext_resource type="Script" path="res://src/dino/vania/MapDef.gd" id="2_kols8"]
+[ext_resource type="Script" uid="uid://d1cauhilukrfn" path="res://src/dino/modes/vania/Vania.gd" id="1_rr2qx"]
+[ext_resource type="Script" uid="uid://dysexmhlgdsfc" path="res://src/dino/vania/MapInput.gd" id="2_5t7oj"]
+[ext_resource type="Script" uid="uid://cc0gt8wiswfd0" path="res://src/dino/vania/MapDef.gd" id="2_kols8"]
+[ext_resource type="Script" uid="uid://b7pv3c2a3ryd0" path="res://src/dino/pickups/DropData.gd" id="2_vwshx"]
+[ext_resource type="Script" uid="uid://bq5yaw6bjckmh" path="res://src/dino/enemies/DinoEnemy.gd" id="3_f0fxm"]
+[ext_resource type="Script" uid="uid://cquwjbsn86j01" path="res://src/dino/entities/DinoEntity.gd" id="4_5hful"]
+[ext_resource type="Script" uid="uid://bvg8smcilg3cp" path="res://src/dino/vania/RoomEffect.gd" id="5_n50dm"]
+[ext_resource type="Script" uid="uid://y1x7ua8kadfy" path="res://src/dino/vania/RoomShape.gd" id="6_hooc3"]
+[ext_resource type="Script" uid="uid://b15t1qi4pwthj" path="res://src/dino/tiles/DinoTiles.gd" id="8_hty4n"]
 
 [sub_resource type="Resource" id="Resource_o3xes"]
 script = ExtResource("2_5t7oj")
 genre = 0
-entities = Array[Resource("res://src/dino/entities/DinoEntity.gd")]([])
-enemies = Array[Resource("res://src/dino/enemies/DinoEnemy.gd")]([])
-room_shapes = Array[Resource("res://src/dino/vania/RoomShape.gd")]([])
-room_effects = Array[Resource("res://src/dino/vania/RoomEffect.gd")]([])
-tiles = Array[Resource("res://src/dino/tiles/DinoTiles.gd")]([])
+entities = Array[ExtResource("4_5hful")]([])
+enemies = Array[ExtResource("3_f0fxm")]([])
+enemy_waves = 0
+room_shapes = Array[ExtResource("6_hooc3")]([])
+room_effects = Array[ExtResource("5_n50dm")]([])
+tiles = Array[ExtResource("8_hty4n")]([])
 door_mode = 0
 neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([])
-drops = Array[Resource("res://src/dino/pickups/DropData.gd")]([])
+drops = Array[ExtResource("2_vwshx")]([])
 bg_color = Color(0, 0, 0, 1)
+dupe_room_count = 0
+skip_merge = false
 grids_path = ""
 
 [sub_resource type="Resource" id="Resource_g1lun"]

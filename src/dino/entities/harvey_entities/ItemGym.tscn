@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://ylhatm4wr6lg"]
 
 [ext_resource type="PackedScene" uid="uid://c50rr61e7pe3y" path="res://src/dino/entities/harvey_entities/SeedBox.tscn" id="1"]
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_ns7gy"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fkuk4"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_ns7gy"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_fkuk4"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_lrclq"]
 [ext_resource type="PackedScene" uid="uid://kdjxtd0s6qfx" path="res://src/dino/entities/harvey_entities/Tool.tscn" id="4"]
-[ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="4_boomi"]
+[ext_resource type="Script" uid="uid://d0lain5kjm3o6" path="res://src/dino/hud/DinoHUD.gd" id="4_boomi"]
 
 [node name="ItemGym" type="Node"]
 script = ExtResource("1_ns7gy")

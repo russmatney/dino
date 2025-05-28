@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://b6o14wyr3dlgf"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_d4h2b"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_2i1c1"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_s4cd8"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_d4h2b"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_2i1c1"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_s4cd8"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_ux4f2"]
 [ext_resource type="PackedScene" uid="uid://bhxr5bwh2xafe" path="res://src/dino/npcs/villagers/TDVillager.tscn" id="5_63ifu"]
 [ext_resource type="PackedScene" uid="uid://dwtjckwhtmmht" path="res://src/dino/npcs/villagers/TDDuaa.tscn" id="6_nq6w0"]

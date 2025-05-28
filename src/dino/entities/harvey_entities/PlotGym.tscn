@@ -1,10 +1,19 @@
 [gd_scene load_steps=6 format=3 uid="uid://cb7fbj7258mh4"]
 
-[ext_resource type="PackedScene" uid="uid://fo52ujd4jco3" path="res://src/games/harvey/plots/Plot.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://ct71m7st0mcr4" path="res://src/games/harvey/items/SeedBox.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://c4wk4oavufugc" path="res://src/games/harvey/player/HarveyPlayer.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://wq32yioprbpx" path="res://src/games/harvey/items/Tool.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://dr8e3mcxgjxah" path="res://src/games/harvey/items/DeliveryBox.tscn" id="6"]
+[sub_resource type="Resource" id="Resource_536ot"]
+metadata/__load_path__ = "res://src/games/harvey/plots/Plot.tscn"
+
+[sub_resource type="Resource" id="Resource_gh3ma"]
+metadata/__load_path__ = "res://src/games/harvey/items/Tool.tscn"
+
+[sub_resource type="Resource" id="Resource_3jflu"]
+metadata/__load_path__ = "res://src/games/harvey/items/SeedBox.tscn"
+
+[sub_resource type="Resource" id="Resource_5eqhm"]
+metadata/__load_path__ = "res://src/games/harvey/player/HarveyPlayer.tscn"
+
+[sub_resource type="Resource" id="Resource_ttnj0"]
+metadata/__load_path__ = "res://src/games/harvey/items/DeliveryBox.tscn"
 
 [node name="PlotGym" type="Node2D"]
 
@@ -16,17 +25,17 @@ offset_bottom = 160.0
 mouse_filter = 2
 color = Color(0.298039, 0.270588, 0.270588, 1)
 
-[node name="Plot" parent="." instance=ExtResource("1")]
+[node name="Plot" parent="."]
 position = Vector2(-106, 58)
 
-[node name="Tool" parent="." instance=ExtResource("5")]
+[node name="Tool" parent="."]
 position = Vector2(-76, -77)
 
-[node name="SeedBox" parent="." instance=ExtResource("2")]
+[node name="SeedBox" parent="."]
 position = Vector2(94, -60)
 
-[node name="Player" parent="." instance=ExtResource("3")]
+[node name="Player" parent="."]
 
-[node name="DeliveryBox" parent="." instance=ExtResource("6")]
+[node name="DeliveryBox" parent="."]
 position = Vector2(168, 80)
 rotation = 1.57079

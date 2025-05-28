@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bsd08snpn2aoj"]
 
-[ext_resource type="Script" path="res://src/dino/modes/classic/Classic.gd" id="1_golj5"]
+[ext_resource type="Script" uid="uid://cj4lvk38jer7r" path="res://src/dino/modes/classic/Classic.gd" id="1_golj5"]
 
 [node name="ClassicTopDown" type="Node2D"]
 script = ExtResource("1_golj5")

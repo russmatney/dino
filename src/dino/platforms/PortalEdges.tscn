@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://xjxn23dvi1b6"]
 
-[ext_resource type="Script" path="res://src/dino/platforms/PortalEdges.gd" id="1_oi8pt"]
+[ext_resource type="Script" uid="uid://473ika6mfcae" path="res://src/dino/platforms/PortalEdges.gd" id="1_oi8pt"]
 
 [node name="PortalEdges" type="Node2D"]
 script = ExtResource("1_oi8pt")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://2kvksp1283d3"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_kqnnl"]
-[ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="3_oit3p"]
+[ext_resource type="Script" uid="uid://wxbei2lytjh4" path="res://src/dino/PlayerSpawner.gd" id="3_oit3p"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_0qfrn"]
 [ext_resource type="PackedScene" uid="uid://behm7cukujwxa" path="res://src/dino/bosses/monstroar/Monstroar.tscn" id="5_m5oma"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/kingdom/GildedKingdomTiles8.tscn" id="6_q587n"]

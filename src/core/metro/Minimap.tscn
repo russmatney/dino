@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjehx2kuswamk"]
 
-[ext_resource type="Script" path="res://src/core/metro/Minimap.gd" id="1_4rvae"]
+[ext_resource type="Script" uid="uid://d0ul42xru4myt" path="res://src/core/metro/Minimap.gd" id="1_4rvae"]
 [ext_resource type="PackedScene" uid="uid://d1v3sf4u84dp3" path="res://src/core/metro/MetroMap.tscn" id="2_a3v6e"]
 
 [node name="Minimap" type="Node2D"]

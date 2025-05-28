@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://kvcwm66wewb5"]
 
-[ext_resource type="Script" path="res://src/games/shirt/ShirtGame.gd" id="1_5hu6e"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_lnkh6"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_42jrc"]
+[ext_resource type="Script" uid="uid://icv607x3dgvn" path="res://src/games/shirt/ShirtGame.gd" id="1_5hu6e"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_lnkh6"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_42jrc"]
 
 [sub_resource type="Resource" id="Resource_0yc5b"]
 script = ExtResource("2_lnkh6")

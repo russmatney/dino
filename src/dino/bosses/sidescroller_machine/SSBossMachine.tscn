@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://pot2dpd6w67m"]
 
-[ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="1_0q0ok"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Idle.gd" id="2_fjqr0"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Firing.gd" id="3_i30ht"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/KnockedBack.gd" id="4_myrkt"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Dead.gd" id="5_kc6bl"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Stunned.gd" id="6_s8n51"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Warping.gd" id="7_wdwpn"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Laughing.gd" id="8_ddh5a"]
-[ext_resource type="Script" path="res://src/dino/bosses/sidescroller_machine/Swoop.gd" id="9_8mqxy"]
+[ext_resource type="Script" uid="uid://j8qml3gi0fe5" path="res://addons/bones/machine/Machine.gd" id="1_0q0ok"]
+[ext_resource type="Script" uid="uid://oew631p3ax1s" path="res://src/dino/bosses/sidescroller_machine/Idle.gd" id="2_fjqr0"]
+[ext_resource type="Script" uid="uid://bwjo8k1bnfjgg" path="res://src/dino/bosses/sidescroller_machine/Firing.gd" id="3_i30ht"]
+[ext_resource type="Script" uid="uid://byarm3f1uj262" path="res://src/dino/bosses/sidescroller_machine/KnockedBack.gd" id="4_myrkt"]
+[ext_resource type="Script" uid="uid://ihq4hgp04l42" path="res://src/dino/bosses/sidescroller_machine/Dead.gd" id="5_kc6bl"]
+[ext_resource type="Script" uid="uid://cnt671xghaxqg" path="res://src/dino/bosses/sidescroller_machine/Stunned.gd" id="6_s8n51"]
+[ext_resource type="Script" uid="uid://bx7uvpt0l3t4m" path="res://src/dino/bosses/sidescroller_machine/Warping.gd" id="7_wdwpn"]
+[ext_resource type="Script" uid="uid://bgspph886vety" path="res://src/dino/bosses/sidescroller_machine/Laughing.gd" id="8_ddh5a"]
+[ext_resource type="Script" uid="uid://deqq1w0rwttw6" path="res://src/dino/bosses/sidescroller_machine/Swoop.gd" id="9_8mqxy"]
 
 [node name="SSBossMachine" type="Node"]
 script = ExtResource("1_0q0ok")

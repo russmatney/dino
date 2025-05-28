@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=4 uid="uid://c8y6p7a43omgr"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_lvjh1"]
-[ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="3_8pgxc"]
+[ext_resource type="Script" uid="uid://wxbei2lytjh4" path="res://src/dino/PlayerSpawner.gd" id="3_8pgxc"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="4_p305t"]
 [ext_resource type="PackedScene" uid="uid://g1xpunfo7e1u" path="res://src/tilemaps/cave_topdown/TDCavePitTiles16.tscn" id="5_iouf6"]
 [ext_resource type="PackedScene" uid="uid://c46ye03ypx1v0" path="res://src/dino/enemies/blobs/BlobChaser.tscn" id="6_aitt4"]

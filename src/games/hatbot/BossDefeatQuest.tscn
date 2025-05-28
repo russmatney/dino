@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://m5e7suaqgh4f"]
 
-[ext_resource type="Script" path="res://src/games/hatbot/BossDefeatQuest.gd" id="1_a5upr"]
+[ext_resource type="Script" uid="uid://k2gjo75lh38u" path="res://src/games/hatbot/BossDefeatQuest.gd" id="1_a5upr"]
 
 [node name="BossDefeatQuest" type="Control"]
 layout_mode = 3

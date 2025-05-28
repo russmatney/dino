@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://ca2tg6n83248w"]
 
-[ext_resource type="Script" path="res://addons/MetroidvaniaSystem/Scripts/Settings.gd" id="1_3qp1r"]
+[ext_resource type="Script" uid="uid://orxlanqpgccv" path="res://addons/MetroidvaniaSystem/Scripts/Settings.gd" id="1_3qp1r"]
 [ext_resource type="Resource" uid="uid://bt6s3nd8xo6b" path="res://addons/MetroidvaniaSystem/Themes/Exquisite/Theme.tres" id="2_g47mh"]
 
 [resource]
@@ -11,5 +11,6 @@ map_extents = 100
 scene_template = "res://src/games/hatbot/rooms/_VolcanoTemplate.tscn"
 in_game_cell_size = Vector2(240, 135)
 discover_whole_rooms = false
-collectible_list = Array[Dictionary]([])
-assign_uid_to_rooms = false
+cache_group_reverse_lookup = true
+_collectible_list = Array[Dictionary]([])
+_assign_uid_to_rooms = false

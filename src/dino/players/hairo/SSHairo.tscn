@@ -1,13 +1,13 @@
 [gd_scene load_steps=45 format=3 uid="uid://dkc8o1scg5uwy"]
 
-[ext_resource type="Script" path="res://src/dino/players/SSPlayer.gd" id="1_ki4j6"]
+[ext_resource type="Script" uid="uid://b378iwwjim4x4" path="res://src/dino/players/SSPlayer.gd" id="1_ki4j6"]
 [ext_resource type="Texture2D" uid="uid://b33fj5a24c820" path="res://src/dino/players/hairo/topdown_player_64.png" id="2_81c8c"]
 [ext_resource type="Theme" path="res://src/themes/StateLabelTheme.tres" id="3_rj8dc"]
 [ext_resource type="Texture2D" uid="uid://d1bamxxlm862r" path="res://src/dino/players/greyhat_jetflame_sheet.png" id="5_cfy4m"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="6_6resu"]
 [ext_resource type="PackedScene" uid="uid://dgan7tpytfkfo" path="res://src/dino/players/sidescroller_machine/SSMachine.tscn" id="7_levtf"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="8_k6joc"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionDetector.tscn" id="9_qybgy"]
+[ext_resource type="PackedScene" uid="uid://bbijdyrpiupa3" path="res://addons/bones/actions/ActionDetector.tscn" id="9_qybgy"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="10_erdnb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_leckn"]

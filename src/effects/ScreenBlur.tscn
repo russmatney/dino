@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjbx05x3en3pk"]
 
-[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_gxevl"]
-[ext_resource type="Script" path="res://src/effects/ScreenBlur.gd" id="2_66sw3"]
+[ext_resource type="Shader" uid="uid://u0vw1l8e4t2t" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_gxevl"]
+[ext_resource type="Script" uid="uid://86xji6fn5s0w" path="res://src/effects/ScreenBlur.gd" id="2_66sw3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fha0o"]
 resource_local_to_scene = true

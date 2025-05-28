@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cdd1i4ajemyn0"]
 
-[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_6535r"]
+[ext_resource type="Script" uid="uid://badplxete6t8o" path="res://src/effects/particle_area/ParticleArea.gd" id="1_6535r"]
 
 [sub_resource type="Gradient" id="Gradient_rn5sk"]
 interpolation_mode = 1

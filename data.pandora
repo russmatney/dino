@@ -2679,7 +2679,7 @@
 	},
 	"_id_generator": {
 		"_ids_by_context": {
-			"default": 224
+			"default": 224.0
 		}
 	}
 }

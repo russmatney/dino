@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0lbt0omub0br"]
 
 [ext_resource type="SpriteFrames" path="res://src/games/ghosts/world/platforms/godot-logo.tres" id="2"]
-[ext_resource type="Shader" path="res://src/games/ghosts/world/platforms/InvisibleSprite.gdshader" id="2_m02b6"]
-[ext_resource type="Script" path="res://src/games/ghosts/world/platforms/GhostBlock.gd" id="3"]
+[ext_resource type="Shader" uid="uid://cpkupque41whv" path="res://src/games/ghosts/world/platforms/InvisibleSprite.gdshader" id="2_m02b6"]
+[ext_resource type="Script" uid="uid://cpqxh6yihfxpx" path="res://src/games/ghosts/world/platforms/GhostBlock.gd" id="3"]
 
 [sub_resource type="ShaderMaterial" id="2"]
 shader = ExtResource("2_m02b6")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=11 format=3 uid="uid://bjyamftn5hple"]
 
 [ext_resource type="Texture2D" uid="uid://ba1yri2mynwtc" path="res://src/dino/entities/doors/dungeon_door_sheet.png" id="1"]
-[ext_resource type="Script" path="res://src/games/ghosts/world/Door.gd" id="2"]
+[ext_resource type="Script" uid="uid://bd211g801wohq" path="res://src/games/ghosts/world/Door.gd" id="2"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="3"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="4_7ef0q"]
+[ext_resource type="PackedScene" uid="uid://bh4ws4oedqs1v" path="res://addons/bones/actions/ActionArea.tscn" id="4_7ef0q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ywj5"]
 atlas = ExtResource("1")
@@ -33,13 +33,10 @@ animations = [{
 }]
 
 [sub_resource type="FontFile" id="5"]
+fallbacks = Array[Font]([ExtResource("3")])
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
-fallbacks = Array[Font]([ExtResource("3")])
-face_index = null
-embolden = null
-transform = null
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0

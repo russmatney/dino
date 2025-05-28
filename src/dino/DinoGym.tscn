@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxj6n5lw1cfr2"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_chhvb"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_4ktkv"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_chhvb"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_4ktkv"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_axplm"]
-[ext_resource type="Script" path="res://src/dino/hud/DinoHUD.gd" id="4_gdayk"]
+[ext_resource type="Script" uid="uid://d0lain5kjm3o6" path="res://src/dino/hud/DinoHUD.gd" id="4_gdayk"]
 
 [node name="DinoGym" type="Node"]
 script = ExtResource("1_chhvb")

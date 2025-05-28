@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://drbmqe5fgckq2"]
 
-[ext_resource type="Script" path="res://src/components/notifications/DebugNotificationList.gd" id="1_bakqe"]
+[ext_resource type="Script" uid="uid://c65v476qq8a7q" path="res://src/components/notifications/DebugNotificationList.gd" id="1_bakqe"]
 
 [node name="DebugNotificationsList" type="VBoxContainer"]
 anchors_preset = 15

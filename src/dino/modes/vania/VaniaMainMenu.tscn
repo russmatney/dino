@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://cby5w4n7cavv7"]
 
-[ext_resource type="Script" path="res://src/dino/modes/vania/VaniaMainMenu.gd" id="1_sbwsg"]
+[ext_resource type="Script" uid="uid://cjvib7ovjetqu" path="res://src/dino/modes/vania/VaniaMainMenu.gd" id="1_sbwsg"]
 [ext_resource type="Theme" uid="uid://cltnpaiuof1wc" path="res://src/themes/VaniaMenu.tres" id="2_gkueb"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/bones/navi/ui/HeroLabel.tscn" id="2_pf170"]
-[ext_resource type="Script" path="res://addons/bones/navi/NaviButtonList.gd" id="3_c03oy"]
+[ext_resource type="Script" uid="uid://cd4eauaundj4x" path="res://addons/bones/navi/NaviButtonList.gd" id="3_c03oy"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://src/dino/menus/music/MuteButtonList.tscn" id="4_ckk60"]
 
 [node name="VaniaMainMenu" type="CanvasLayer" groups=["menus"]]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://pdjiplt3tacx"]
 
-[ext_resource type="Script" path="res://src/core/quest/QuestStatusCheck.gd" id="1"]
-[ext_resource type="FontFile" path="res://addons/bones/fonts/at01.ttf" id="2_wwou6"]
+[ext_resource type="Script" uid="uid://c3sccif22bq0h" path="res://src/core/quest/QuestStatusCheck.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="2_wwou6"]
 
 [node name="QuestStatusCheck" type="HBoxContainer"]
 offset_right = 175.0

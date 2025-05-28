@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bjw3ncbv86qnb"]
 
-[ext_resource type="Script" path="res://src/dino/vania/VaniaEditor.gd" id="1_hnpwd"]
+[ext_resource type="Script" uid="uid://crtgk6qjhlwsv" path="res://src/dino/vania/VaniaEditor.gd" id="1_hnpwd"]
 [ext_resource type="Theme" uid="uid://blaoe3stnneof" path="res://src/themes/EditorPanel.tres" id="2_ne4tv"]
 [ext_resource type="Theme" uid="uid://b8wgf0eb4hoxg" path="res://src/themes/EditorHeaderTheme.tres" id="3_oi0lk"]
 [ext_resource type="Theme" uid="uid://dx8buylqr7olg" path="res://src/themes/EditorPopupMenus.tres" id="4_jv3lv"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bnj82g0f5doyw"]
 
-[ext_resource type="Script" path="res://src/games/superElevatorLevel/levels/SELLevel.gd" id="1_7i3oh"]
-[ext_resource type="Script" path="res://src/dino/levels/superElevatorLevel/SELLevelGen.gd" id="2_y52kn"]
+[ext_resource type="Script" uid="uid://dnyqpunfchevy" path="res://src/games/superElevatorLevel/levels/SELLevel.gd" id="1_7i3oh"]
+[ext_resource type="Script" uid="uid://dkync3qo0vna1" path="res://src/dino/levels/superElevatorLevel/SELLevelGen.gd" id="2_y52kn"]
 
 [node name="SELLevel" type="Node2D"]
 script = ExtResource("1_7i3oh")

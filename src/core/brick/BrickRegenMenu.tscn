@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://legijjgf488f"]
 
-[ext_resource type="Script" path="res://src/core/brick/BrickRegenMenu.gd" id="1_u6amj"]
+[ext_resource type="Script" uid="uid://cym1i4tdnelq0" path="res://src/core/brick/BrickRegenMenu.gd" id="1_u6amj"]
 
 [node name="BrickRegenMenu" type="MarginContainer"]
 anchors_preset = 15

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6ubke3rqjtny"]
 
-[ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_kt2ox"]
+[ext_resource type="Script" uid="uid://d1cauhilukrfn" path="res://src/dino/modes/vania/Vania.gd" id="1_kt2ox"]
 [ext_resource type="Resource" uid="uid://4ee51xr80oda" path="res://src/dino/modes/runner/mapdefs/Woods.tres" id="2_avkab"]
 
 [node name="Woods" type="Node2D"]

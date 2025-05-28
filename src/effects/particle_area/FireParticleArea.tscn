@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bsfyl0exk4ggv"]
 
-[ext_resource type="Script" path="res://src/effects/particle_area/ParticleArea.gd" id="1_wk4hf"]
+[ext_resource type="Script" uid="uid://badplxete6t8o" path="res://src/effects/particle_area/ParticleArea.gd" id="1_wk4hf"]
 
 [sub_resource type="Gradient" id="Gradient_rn5sk"]
 interpolation_mode = 1
@@ -11,7 +11,7 @@ colors = PackedColorArray(0.425956, 0.425956, 0.425955, 1, 1, 1, 1, 1, 0.632123,
 gradient = SubResource("Gradient_rn5sk")
 
 [sub_resource type="Curve" id="Curve_8sp31"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0.642776, 0.963904), 0.0, 0.0, 0, 0, Vector2(1, 0.359721), 0.0, 0.0, 0, 0]
 point_count = 2
 

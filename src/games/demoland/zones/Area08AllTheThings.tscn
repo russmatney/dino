@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://3fvawfe4o4js"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_n8dgq"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_73k7n"]
+[ext_resource type="Script" uid="uid://dx3r2ijfmbgqi" path="res://src/core/metro/MetroZone.gd" id="1_n8dgq"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="2_73k7n"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_745pf"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="4_pu2un"]
 [ext_resource type="PackedScene" uid="uid://dqlvqjsr8s2at" path="res://src/tilemaps/volcano/VolcanoTiles8.tscn" id="5_7ddxx"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://g1xpunfo7e1u"]
 
 [ext_resource type="TileSet" uid="uid://co3os0t7u2nbl" path="res://src/tilemaps/cave_topdown/TDCavePitTileSet16.tres" id="1_k6ecc"]
-[ext_resource type="Script" path="res://src/tilemaps/cave_topdown/PitTiles.gd" id="2_jcd44"]
+[ext_resource type="Script" uid="uid://dsatiq8pl0kaw" path="res://src/tilemaps/cave_topdown/PitTiles.gd" id="2_jcd44"]
 
 [node name="TDCavePitTiles16" type="TileMapLayer" groups=["pits"]]
 use_parent_material = true

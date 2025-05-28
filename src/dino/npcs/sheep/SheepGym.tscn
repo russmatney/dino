@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://klp1ph3xr7x1"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_n5axb"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_c6gx3"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_n5axb"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_c6gx3"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="2_mbd5v"]
 [ext_resource type="PackedScene" uid="uid://6sj01yybi4qt" path="res://src/dino/npcs/sheep/Sheep.tscn" id="3_72myu"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_1c63n"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_1c63n"]
 [ext_resource type="PackedScene" uid="uid://bnhchumgoi6s7" path="res://src/dino/entities/fences/FenceTiles.tscn" id="5_ma4vh"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="6_75im7"]
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnjna48m0w7ce"]
+[gd_scene load_steps=3 format=3 uid="uid://dnjna48m0w7ce"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_7pbyl"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="1_7pbyl"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_l8b8n"]
 
 [node name="08DownTower" type="Node2D" groups=["metro_rooms"]]

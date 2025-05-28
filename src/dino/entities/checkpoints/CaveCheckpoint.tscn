@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dkyb7ritrpatt"]
 
-[ext_resource type="Script" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_tng3f"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="2_xsmew"]
+[ext_resource type="Script" uid="uid://c47claecu48if" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_tng3f"]
+[ext_resource type="PackedScene" uid="uid://bh4ws4oedqs1v" path="res://addons/bones/actions/ActionArea.tscn" id="2_xsmew"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="3_3c6sm"]
 [ext_resource type="Texture2D" uid="uid://dyft4sctcy2qv" path="res://src/dino/entities/checkpoints/MNT_cave_bench_checkpoint.png" id="4_cjefc"]
 

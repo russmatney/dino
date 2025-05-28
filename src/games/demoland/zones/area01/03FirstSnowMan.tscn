@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg842d70k1wpd"]
+[gd_scene load_steps=4 format=3 uid="uid://bg842d70k1wpd"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_ktq0m"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="1_ktq0m"]
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_yptok"]
 [ext_resource type="PackedScene" uid="uid://dwhejqu03vl0b" path="res://src/dino/enemies/soldiers/Soldier.tscn" id="2_orywx"]
 

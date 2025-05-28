@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b254u72nu1oj3"]
 
-[ext_resource type="Script" path="res://src/dino/quests/FetchSheepQuest.gd" id="1_kt1mm"]
+[ext_resource type="Script" uid="uid://3n3c0mu2gp7p" path="res://src/dino/quests/FetchSheepQuest.gd" id="1_kt1mm"]
 
 [node name="FetchSheepQuest" type="Node"]
 script = ExtResource("1_kt1mm")

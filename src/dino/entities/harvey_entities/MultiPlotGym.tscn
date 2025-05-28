@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://c882tim62062c"]
 
 [ext_resource type="PackedScene" uid="uid://c50rr61e7pe3y" path="res://src/dino/entities/harvey_entities/SeedBox.tscn" id="1"]
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_hmva5"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_kj7u2"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ue50a"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_hmva5"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_kj7u2"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ue50a"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_d8mm3"]
 [ext_resource type="PackedScene" uid="uid://cbkmdov158pc8" path="res://src/dino/entities/harvey_entities/Plot.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://kdjxtd0s6qfx" path="res://src/dino/entities/harvey_entities/Tool.tscn" id="5"]

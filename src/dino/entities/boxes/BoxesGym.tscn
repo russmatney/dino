@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://bmjk2del2veo3"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_8e7yn"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_51fer"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_8e7yn"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_51fer"]
 [ext_resource type="PackedScene" uid="uid://jegvid2kg2u5" path="res://src/tilemaps/kingdom/GildedKingdomTiles8.tscn" id="3_almpp"]
 [ext_resource type="PackedScene" uid="uid://da2wa1ua1rdwh" path="res://src/dino/entities/boxes/Box.tscn" id="4_1cnsg"]
 [ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/dino/pickups/leaves/Leaf.tscn" id="5_efu5k"]
 [ext_resource type="PackedScene" uid="uid://ddjj5kujrnpg5" path="res://src/dino/entities/boxes/TreasureBox.tscn" id="5_lw0tn"]
-[ext_resource type="Script" path="res://src/dino/pickups/DropData.gd" id="6_4jcwt"]
+[ext_resource type="Script" uid="uid://b7pv3c2a3ryd0" path="res://src/dino/pickups/DropData.gd" id="6_4jcwt"]
 [ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/pickups/orb/GreenBlobAnim.tscn" id="7_dfe48"]
 
 [sub_resource type="Resource" id="Resource_rpa23"]

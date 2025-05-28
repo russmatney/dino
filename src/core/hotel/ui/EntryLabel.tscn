@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cvbpa2a36e5vn"]
 
-[ext_resource type="Script" path="res://src/core/hotel/ui/EntryLabel.gd" id="1_cj45d"]
-[ext_resource type="FontFile" path="res://addons/bones/fonts/Born2bSportyV2.ttf" id="2_fp36n"]
+[ext_resource type="Script" uid="uid://10g1mf4l54t7" path="res://src/core/hotel/ui/EntryLabel.gd" id="1_cj45d"]
+[ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/fonts/Born2bSportyV2.ttf" id="2_fp36n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plwqb"]
 bg_color = Color(0.207843, 0.772549, 0.803922, 0.596078)

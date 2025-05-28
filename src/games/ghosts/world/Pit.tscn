@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://drqyknqja7bhd"]
 
-[ext_resource type="PackedScene" path="res://src/games/ghosts/world/Door.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bjyamftn5hple" path="res://src/games/ghosts/world/Door.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://diyagfcf418hq" path="res://src/tilemaps/boat/IndoorBackgroundTiles.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://dtx8n1ldkhdjg" path="res://src/tilemaps/boat/IndoorTiles.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_i4ttr"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/games/ghosts/world/platforms/GhostBlock.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="9_qfk3c"]
-[ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="10"]
+[ext_resource type="Script" uid="uid://3yh65t2gdk4w" path="res://src/games/ghosts/world/GhostsRoom.gd" id="10"]
 
 [node name="Pit" type="Node2D" groups=["ghost_rooms"]]
 script = ExtResource("10")

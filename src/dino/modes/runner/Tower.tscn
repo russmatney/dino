@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bl0gvfqtp6t4w"]
 
-[ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_s1obe"]
+[ext_resource type="Script" uid="uid://d1cauhilukrfn" path="res://src/dino/modes/vania/Vania.gd" id="1_s1obe"]
 [ext_resource type="Resource" uid="uid://x22mhotva8q3" path="res://src/dino/modes/runner/mapdefs/Tower.tres" id="2_yexpo"]
 
 [node name="Tower" type="Node2D"]

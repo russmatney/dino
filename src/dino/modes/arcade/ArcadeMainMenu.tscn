@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://diksn25hdkgwq"]
 
-[ext_resource type="Script" path="res://src/dino/modes/arcade/ArcadeMainMenu.gd" id="1_3jdvk"]
+[ext_resource type="Script" uid="uid://chug4i5gxe11h" path="res://src/dino/modes/arcade/ArcadeMainMenu.gd" id="1_3jdvk"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/bones/navi/ui/HeroLabel.tscn" id="1_lxp1a"]
-[ext_resource type="Script" path="res://addons/bones/navi/NaviButtonList.gd" id="3_3lvko"]
+[ext_resource type="Script" uid="uid://cd4eauaundj4x" path="res://addons/bones/navi/NaviButtonList.gd" id="3_3lvko"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://src/dino/menus/music/MuteButtonList.tscn" id="4_pfum3"]
 
 [node name="ArcadeMainMenu" type="CanvasLayer" groups=["menus"]]

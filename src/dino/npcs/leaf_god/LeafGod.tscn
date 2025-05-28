@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://ci7wujr225x8y"]
 
-[ext_resource type="Script" path="res://src/dino/npcs/leaf_god/LeafGod.gd" id="1_7hv1x"]
+[ext_resource type="Script" uid="uid://e64yaw1jpji7" path="res://src/dino/npcs/leaf_god/LeafGod.gd" id="1_7hv1x"]
 [ext_resource type="Texture2D" uid="uid://cpbqogu2llb23" path="res://src/dino/npcs/leaf_god/runner_leaf_friend.png" id="2_gitl0"]
 [ext_resource type="PackedScene" uid="uid://fdvu7a71attn" path="res://src/dino/npcs/sidescroller_machine/SSNPCMachine.tscn" id="3_fhdj4"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="4_ovlwu"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="5_12qb4"]
+[ext_resource type="PackedScene" uid="uid://bh4ws4oedqs1v" path="res://addons/bones/actions/ActionArea.tscn" id="5_12qb4"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="6_ag2du"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_45l4l"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_i1ifi"]
+[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_45l4l"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_i1ifi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icmag"]
 size = Vector2(50, 50)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://dhma0vanfafyo"]
 
-[ext_resource type="Script" path="res://src/dino/pickups/leaves/LeafEntity.gd" id="1_1akrk"]
+[ext_resource type="Script" uid="uid://cf01kx814af42" path="res://src/dino/pickups/leaves/LeafEntity.gd" id="1_1akrk"]
 [ext_resource type="Texture2D" uid="uid://twjcqls3w7j0" path="res://src/dino/pickups/leaves/leaf_green.png" id="2_1b5ov"]
 [ext_resource type="Texture2D" uid="uid://dg8jbdqwkwk44" path="res://src/dino/pickups/leaves/leaf_greenred.png" id="3_32ltg"]
 [ext_resource type="Texture2D" uid="uid://blxnv51h4ng52" path="res://src/dino/pickups/leaves/leaf_purple.png" id="4_1kosg"]

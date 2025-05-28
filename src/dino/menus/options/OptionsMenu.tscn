@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7isgyskqnds1"]
 
-[ext_resource type="Script" path="res://src/dino/menus/options/OptionsMenu.gd" id="1_qx57j"]
+[ext_resource type="Script" uid="uid://cbmspqkx6j4h7" path="res://src/dino/menus/options/OptionsMenu.gd" id="1_qx57j"]
 [ext_resource type="PackedScene" uid="uid://cpxj4aeuv006l" path="res://src/dino/menus/music/MuteButtonList.tscn" id="1_vq714"]
 [ext_resource type="PackedScene" uid="uid://dsft6f7x2lk4v" path="res://src/dino/menus/controls/ControlsPanel.tscn" id="2_ttb84"]
 

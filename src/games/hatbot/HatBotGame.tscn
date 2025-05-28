@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://eti55dwfxq0b"]
 
-[ext_resource type="Script" path="res://src/games/hatbot/HatBotGame.gd" id="1_xd8wj"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_4n3jf"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_mh42o"]
+[ext_resource type="Script" uid="uid://pi0wlcr472h" path="res://src/games/hatbot/HatBotGame.gd" id="1_xd8wj"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_4n3jf"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_mh42o"]
 
 [sub_resource type="Resource" id="Resource_psfxv"]
 script = ExtResource("2_mh42o")

@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://bhxr5bwh2xafe"]
 
-[ext_resource type="Script" path="res://src/dino/npcs/TopDownNPC.gd" id="1_48ewx"]
+[ext_resource type="Script" uid="uid://day1hyeyvcfhe" path="res://src/dino/npcs/TopDownNPC.gd" id="1_48ewx"]
 [ext_resource type="PackedScene" uid="uid://bu8b820xl050l" path="res://src/dino/npcs/topdown_machine/TDNPCMachine.tscn" id="2_eycov"]
-[ext_resource type="Shader" path="res://src/shaders/ColorSwapShader.gdshader" id="3_j1plc"]
+[ext_resource type="Shader" uid="uid://b30r1dutwfcke" path="res://src/shaders/ColorSwapShader.gdshader" id="3_j1plc"]
 [ext_resource type="PackedScene" uid="uid://cadjlq5gl6srf" path="res://src/dino/players/HarveyPlayerItem.tscn" id="4_5e1lk"]
 [ext_resource type="Texture2D" uid="uid://43a5h625x7wd" path="res://src/dino/npcs/villagers/grey.png" id="4_mellb"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="6_bd1r8"]
+[ext_resource type="PackedScene" uid="uid://bh4ws4oedqs1v" path="res://addons/bones/actions/ActionArea.tscn" id="6_bd1r8"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="7_603fe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vdn42"]

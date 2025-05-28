@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsft6f7x2lk4v"]
 
-[ext_resource type="Script" path="res://src/dino/menus/controls/ControlsPanel.gd" id="1_56xgh"]
+[ext_resource type="Script" uid="uid://cg3tkw5jhxgiy" path="res://src/dino/menus/controls/ControlsPanel.gd" id="1_56xgh"]
 
 [node name="ControlsPanel" type="PanelContainer"]
 size_flags_horizontal = 3

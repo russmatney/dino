@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://hl4i5ghqi6fx"]
 
-[ext_resource type="Script" path="res://src/core/DebugOverlay.gd" id="1_6tk21"]
+[ext_resource type="Script" uid="uid://ce4y2n3luo8f5" path="res://src/core/DebugOverlay.gd" id="1_6tk21"]
 [ext_resource type="PackedScene" uid="uid://c6sko43u8q8db" path="res://src/core/DebugLabels.tscn" id="2_gbbub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_43ms4"]

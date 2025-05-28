@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://da2wa1ua1rdwh"]
 
 [ext_resource type="SpriteFrames" uid="uid://r3lxa4h7qi4n" path="res://src/dino/entities/boxes/BoxSpriteFrames.tres" id="1_bh73g"]
-[ext_resource type="Script" path="res://src/dino/entities/boxes/Box.gd" id="1_cxgkm"]
+[ext_resource type="Script" uid="uid://b77hh71sq0gyb" path="res://src/dino/entities/boxes/Box.gd" id="1_cxgkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vs53a"]
 size = Vector2(32, 32)

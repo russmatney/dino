@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bpunlarwlfelv"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_tmvuu"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_7tnei"]
+[ext_resource type="Script" uid="uid://dx3r2ijfmbgqi" path="res://src/core/metro/MetroZone.gd" id="1_tmvuu"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="2_7tnei"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="3_wwjab"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="4_6jxld"]
 [ext_resource type="PackedScene" uid="uid://djq8imlbn8tut" path="res://src/tilemaps/purple_stone/PurpleStoneTiles16.tscn" id="5_q8ouj"]

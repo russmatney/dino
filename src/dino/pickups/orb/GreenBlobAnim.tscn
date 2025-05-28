@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1vdnd50c6c05"]
 
-[ext_resource type="Shader" path="res://src/shaders/ColorSwapShader.gdshader" id="1_biaon"]
+[ext_resource type="Shader" uid="uid://b30r1dutwfcke" path="res://src/shaders/ColorSwapShader.gdshader" id="1_biaon"]
 [ext_resource type="Texture2D" uid="uid://b00gv8vhtya2t" path="res://src/dino/pickups/orb/SPIKE_blob_pickup.png" id="2_271k6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w5u07"]

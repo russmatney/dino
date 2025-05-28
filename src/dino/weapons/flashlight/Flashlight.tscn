@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bwaumvx2geh3k"]
 
 [ext_resource type="Texture2D" uid="uid://0mf16ugl1an6" path="res://src/core/assets/lights/flashlight_sheet.png" id="1"]
-[ext_resource type="Script" path="res://src/dino/weapons/flashlight/Flashlight.gd" id="1_lfbsw"]
+[ext_resource type="Script" uid="uid://dey6r0e0qu605" path="res://src/dino/weapons/flashlight/Flashlight.gd" id="1_lfbsw"]
 [ext_resource type="Texture2D" uid="uid://bqef1c4gr30po" path="res://src/core/assets/lights/flashlight_anim_sheet.png" id="2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4poe"]

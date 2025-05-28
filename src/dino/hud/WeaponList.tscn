@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://byj0we053kbu4"]
 
-[ext_resource type="Script" path="res://src/dino/hud/WeaponList.gd" id="1_adwn5"]
-[ext_resource type="Script" path="res://src/dino/weapons/DinoWeaponEntity.gd" id="2_i7ph3"]
+[ext_resource type="Script" uid="uid://pc8chevqu4v4" path="res://src/dino/hud/WeaponList.gd" id="1_adwn5"]
+[ext_resource type="Script" uid="uid://4n0qs2cqiree" path="res://src/dino/weapons/DinoWeaponEntity.gd" id="2_i7ph3"]
 [ext_resource type="PackedScene" uid="uid://bcqi8ogxvdge" path="res://src/components/WeaponIcon.tscn" id="2_s8pfp"]
 
 [sub_resource type="Resource" id="Resource_0v4wk"]

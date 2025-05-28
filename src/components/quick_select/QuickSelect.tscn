@@ -1,13 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cp33t2x7q044h"]
 
-[ext_resource type="Script" path="res://src/components/quick_select/QuickSelectMenu.gd" id="1_itny8"]
-[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_sfims"]
+[ext_resource type="Script" uid="uid://dmrkrxfowqs87" path="res://src/components/quick_select/QuickSelectMenu.gd" id="1_itny8"]
+[ext_resource type="Shader" uid="uid://u0vw1l8e4t2t" path="res://src/shaders/SimpleBlurScreen.gdshader" id="1_sfims"]
 [ext_resource type="Theme" uid="uid://bnfe8r27glpje" path="res://src/themes/QuickSelectPanel.tres" id="2_eihlf"]
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="3_ewwyd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gk3cd"]
 shader = ExtResource("1_sfims")
 shader_parameter/lod = 0.5
+shader_parameter/grayscale = 0.0
 
 [node name="QuickSelect" type="Control"]
 process_mode = 3

@@ -15,6 +15,6 @@ func _plugging():
 		exclude=["Extensions"],
 		})
 	plug("KoBeWi/Godot-Custom-Runner", {include=["addons/CustomRunner"], exclude=["ExampleProject"]})
-	plug("SirLich/asset-explorer", {include=["addons/gd_explorer"]})
+	# plug("SirLich/asset-explorer", {include=["addons/gd_explorer"]})
 	plug("ramokz/phantom-camera", {include=["addons/phantom_camera"]})
 	plug("SimonGigant/godot-text_effects_4.0")

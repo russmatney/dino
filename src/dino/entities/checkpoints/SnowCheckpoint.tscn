@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvjtmnprpxqem"]
 
-[ext_resource type="Script" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_wq6lf"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="2_76pnm"]
+[ext_resource type="Script" uid="uid://c47claecu48if" path="res://src/dino/entities/checkpoints/Checkpoint.gd" id="1_wq6lf"]
+[ext_resource type="PackedScene" uid="uid://bh4ws4oedqs1v" path="res://addons/bones/actions/ActionArea.tscn" id="2_76pnm"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="3_jvpw1"]
 [ext_resource type="Texture2D" uid="uid://bexm0gw7341ir" path="res://src/dino/entities/checkpoints/MNT_snow_bench_checkpoint.png" id="4_uds3o"]
 

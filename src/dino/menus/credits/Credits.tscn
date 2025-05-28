@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://v81r0hbty1bb"]
 
-[ext_resource type="Script" path="res://src/dino/menus/credits/Credits.gd" id="1"]
+[ext_resource type="Script" uid="uid://dcfavpwm0w2lw" path="res://src/dino/menus/credits/Credits.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bo44ga11t2q8p" path="res://src/dino/menus/credits/CreditLine.tscn" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u37kj"]

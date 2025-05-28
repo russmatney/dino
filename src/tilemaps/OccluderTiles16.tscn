@@ -8,7 +8,7 @@ polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kyrvt"]
 texture = ExtResource("1_6kp46")
 0:0/0 = 0
-0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_0pig1")
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_0pig1")
 
 [sub_resource type="TileSet" id="TileSet_uxr5x"]
 occlusion_layer_0/light_mask = 1

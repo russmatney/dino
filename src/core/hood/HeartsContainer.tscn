@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfjqjsw0ekld7"]
 
 [ext_resource type="PackedScene" uid="uid://c0ih7p2jp44x2" path="res://src/core/hood/HeartIcon.tscn" id="1"]
-[ext_resource type="Script" path="res://src/core/hood/HeartsContainer.gd" id="3"]
+[ext_resource type="Script" uid="uid://cyqnmcgkt5b3j" path="res://src/core/hood/HeartsContainer.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://c0krk73ogmw2j" path="res://src/core/hood/assets/hearts_sheet.png" id="3_jsqon"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss0vn"]

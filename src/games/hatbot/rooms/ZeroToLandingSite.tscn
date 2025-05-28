@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://c55fnshvhq1va"]
 
 [ext_resource type="PackedScene" uid="uid://bsg0351mx3b4u" path="res://addons/MetroidvaniaSystem/Nodes/RoomInstance.tscn" id="1_c6i4i"]
-[ext_resource type="Script" path="res://src/dino/PlayerSpawner.gd" id="2_3421i"]
+[ext_resource type="Script" uid="uid://wxbei2lytjh4" path="res://src/dino/PlayerSpawner.gd" id="2_3421i"]
 [ext_resource type="PackedScene" uid="uid://blcbo66bjys25" path="res://src/tilemaps/coldfire/ColdFireTileMapLayer.tscn" id="3_ep6sj"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="5_61acb"]
 [ext_resource type="PackedScene" uid="uid://dx2sj4ijj8tlh" path="res://src/dino/entities/doors/Elevator.tscn" id="5_lge6l"]

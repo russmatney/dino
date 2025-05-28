@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://vy2sl481qu00"]
 
-[ext_resource type="Script" path="res://src/dino/menus/controls/EditActionRow.gd" id="1_gx07x"]
+[ext_resource type="Script" uid="uid://drdsrewxcvby3" path="res://src/dino/menus/controls/EditActionRow.gd" id="1_gx07x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yue1b"]
 bg_color = Color(0.321569, 0.321569, 0.321569, 0.501961)

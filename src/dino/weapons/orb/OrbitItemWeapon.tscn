@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ylme3uv1h2xm"]
 
-[ext_resource type="Script" path="res://src/dino/weapons/orb/OrbitItemWeapon.gd" id="1_622rn"]
+[ext_resource type="Script" uid="uid://dit1o0ab5icwb" path="res://src/dino/weapons/orb/OrbitItemWeapon.gd" id="1_622rn"]
 [ext_resource type="Texture2D" uid="uid://bn0qtgn2f348d" path="res://src/dino/weapons/orb/SPIKE_aim_line.png" id="2_2roow"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1mh7h"]

@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1ntbjt8i83ot"]
+[gd_scene load_steps=11 format=3 uid="uid://d1ntbjt8i83ot"]
 
-[ext_resource type="Script" path="res://src/dino/entities/harvey_entities/DeliveryBox.gd" id="2"]
-[ext_resource type="Shader" path="res://src/dino/entities/harvey_entities/SquashStretchShader.gdshader" id="3"]
+[ext_resource type="Script" uid="uid://di188tk8yag0e" path="res://src/dino/entities/harvey_entities/DeliveryBox.gd" id="2"]
+[ext_resource type="Shader" uid="uid://dfm07hupqibxa" path="res://src/dino/entities/harvey_entities/SquashStretchShader.gdshader" id="3"]
 [ext_resource type="Texture2D" uid="uid://dxy65wjusiq7j" path="res://src/dino/entities/harvey_entities/assets/seed-box_sheet.png" id="3_loqwr"]
-[ext_resource type="Theme" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="4"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionArea.tscn" id="5_2gqyg"]
+[ext_resource type="Theme" uid="uid://bx2wou2suu4mp" path="res://src/dino/entities/harvey_entities/ActionLabelTheme.tres" id="4"]
+[ext_resource type="PackedScene" uid="uid://bh4ws4oedqs1v" path="res://addons/bones/actions/ActionArea.tscn" id="5_2gqyg"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)
@@ -63,4 +63,3 @@ position = Vector2(16, 32)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ActionArea"]
 position = Vector2(0, 4)
 shape = SubResource("4")
-

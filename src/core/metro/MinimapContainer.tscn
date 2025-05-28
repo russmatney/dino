@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dc1ni26t3l2n4"]
 
 [ext_resource type="PackedScene" uid="uid://bjehx2kuswamk" path="res://src/core/metro/Minimap.tscn" id="1_2064o"]
-[ext_resource type="Script" path="res://src/core/metro/MinimapContainer.gd" id="1_m8wbs"]
+[ext_resource type="Script" uid="uid://oq4ig61pql0y" path="res://src/core/metro/MinimapContainer.gd" id="1_m8wbs"]
 [ext_resource type="FontFile" uid="uid://b0w8s6hidvrrr" path="res://addons/bones/fonts/Born2bSportyV2.ttf" id="3_b0m45"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv61c"]

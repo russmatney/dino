@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cqlsxw8cv8mjw"]
 
-[ext_resource type="Script" path="res://src/dino/weapons/sword/Sword.gd" id="2_220bt"]
+[ext_resource type="Script" uid="uid://1hhkf44vip3h" path="res://src/dino/weapons/sword/Sword.gd" id="2_220bt"]
 [ext_resource type="Texture2D" uid="uid://b3n2ygnub4mp0" path="res://src/dino/weapons/sword/sword.png" id="2_a5tig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26cvd"]

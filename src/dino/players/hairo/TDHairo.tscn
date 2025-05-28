@@ -1,11 +1,11 @@
 [gd_scene load_steps=43 format=3 uid="uid://hcgi0vnjas58"]
 
-[ext_resource type="Script" path="res://src/dino/players/TDPlayer.gd" id="1_2l0ji"]
+[ext_resource type="Script" uid="uid://cimnhp0vqm7rq" path="res://src/dino/players/TDPlayer.gd" id="1_2l0ji"]
 [ext_resource type="Texture2D" uid="uid://dcng2g4a1g4wn" path="res://src/dino/players/hairo/assets/topdown_player_64.png" id="2_0x6m6"]
 [ext_resource type="FontFile" uid="uid://b1c3fty8httvk" path="res://addons/bones/fonts/at01.ttf" id="3_sbhyh"]
 [ext_resource type="PackedScene" uid="uid://ch8rasfmsvl5s" path="res://src/dino/players/topdown_machine/TDPlayerMachine.tscn" id="4_6b4lb"]
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="6_hx7xl"]
-[ext_resource type="PackedScene" path="res://addons/bones/actions/ActionDetector.tscn" id="7_a60dj"]
+[ext_resource type="PackedScene" uid="uid://bbijdyrpiupa3" path="res://addons/bones/actions/ActionDetector.tscn" id="7_a60dj"]
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://src/core/assets/lights/small_light1_nobg_sheet.png" id="8_myq8t"]
 [ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_nhx56"]
 [ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_ats0u"]

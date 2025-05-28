@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgoata4oy4d4g"]
 
 [ext_resource type="Theme" uid="uid://co0lie1f8a4j0" path="res://src/themes/Clear.tres" id="1_38nqe"]
-[ext_resource type="Script" path="res://src/components/notifications/SideNotificationList.gd" id="1_rnlk1"]
+[ext_resource type="Script" uid="uid://bk8kf6kgasnmc" path="res://src/components/notifications/SideNotificationList.gd" id="1_rnlk1"]
 [ext_resource type="PackedScene" uid="uid://dhc5onor7fgd2" path="res://src/components/notifications/SideNotification.tscn" id="2_ftj2j"]
 
 [node name="SideNotificationList" type="CanvasLayer"]

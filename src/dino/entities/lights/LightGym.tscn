@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b08c2s7blssf1"]
 
-[ext_resource type="Script" path="res://src/dino/DinoGym.gd" id="1_p36vt"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_tsxs0"]
-[ext_resource type="Script" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_vbfg0"]
+[ext_resource type="Script" uid="uid://c22bsmc8d6frs" path="res://src/dino/DinoGym.gd" id="1_p36vt"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_tsxs0"]
+[ext_resource type="Script" uid="uid://6jy24p1yij7o" path="res://src/dino/players/DinoPlayerEntity.gd" id="2_vbfg0"]
 [ext_resource type="PackedScene" uid="uid://sisqkgg1lwpf" path="res://src/dino/hud/DinoHUD.tscn" id="3_7csq2"]
 [ext_resource type="PackedScene" uid="uid://cye1kopuq3gm7" path="res://src/dino/entities/lights/DownwardLight.tscn" id="5_7o4rk"]
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="6_1whs1"]

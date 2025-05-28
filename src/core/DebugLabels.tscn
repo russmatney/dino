@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6sko43u8q8db"]
 
-[ext_resource type="Script" path="res://src/core/DebugLabels.gd" id="1_wcy6p"]
+[ext_resource type="Script" uid="uid://bbnit7rngdgqv" path="res://src/core/DebugLabels.gd" id="1_wcy6p"]
 
 [node name="DebugLabels" type="PanelContainer"]
 anchors_preset = 15

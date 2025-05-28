@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cac8ltdlk40xr"]
 
-[ext_resource type="Script" path="res://src/games/spike/SpikeZone.gd" id="1_3u8mj"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_vx6qq"]
+[ext_resource type="Script" uid="uid://cu8y5qwgas6rv" path="res://src/games/spike/SpikeZone.gd" id="1_3u8mj"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="2_vx6qq"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://src/tilemaps/snow/SnowTiles16.tscn" id="3_y84br"]
 [ext_resource type="PackedScene" uid="uid://blr57x3unids8" path="res://src/dino/entities/cookingPot/CookingPot.tscn" id="4_jclog"]
 [ext_resource type="PackedScene" uid="uid://b0bnnom822e3w" path="res://src/dino/entities/void/DeliveryZone.tscn" id="5_gnfvs"]

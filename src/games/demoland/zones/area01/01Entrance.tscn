@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8yfr5kxhhdth"]
 
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_1lxex"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_ydl57"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="1_ydl57"]
 
 [node name="01Entrance" type="Node2D" groups=["metro_rooms"]]
 position = Vector2(248, 144)

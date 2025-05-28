@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bjovc1c7sotsw"]
 
-[ext_resource type="Script" path="res://src/dino/modes/classic/GameModeCompleteOverlay.gd" id="1_bn4gw"]
+[ext_resource type="Script" uid="uid://3thmqeba33y7" path="res://src/dino/modes/classic/GameModeCompleteOverlay.gd" id="1_bn4gw"]
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="2_86850"]
-[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="3_5o0dh"]
-[ext_resource type="Script" path="res://src/components/AnimatedVBoxContainer.gd" id="3_pjur5"]
+[ext_resource type="Shader" uid="uid://u0vw1l8e4t2t" path="res://src/shaders/SimpleBlurScreen.gdshader" id="3_5o0dh"]
+[ext_resource type="Script" uid="uid://nwxwdmn0kgut" path="res://src/components/AnimatedVBoxContainer.gd" id="3_pjur5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5y2xm"]
 resource_local_to_scene = true

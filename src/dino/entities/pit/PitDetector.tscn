@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://3xncvrhaa7im"]
 
-[ext_resource type="Script" path="res://src/dino/entities/pit/PitDetector.gd" id="1_6eygo"]
+[ext_resource type="Script" uid="uid://br2a8ppdklbfv" path="res://src/dino/entities/pit/PitDetector.gd" id="1_6eygo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t5m0m"]
 radius = 1.0

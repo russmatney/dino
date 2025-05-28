@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhstps731almj"]
+[gd_scene load_steps=3 format=3 uid="uid://dhstps731almj"]
 
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_moefn"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="1_ypp1l"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="1_ypp1l"]
 
 [node name="05Crossroads" type="Node2D" groups=["metro_rooms"]]
 script = ExtResource("1_ypp1l")

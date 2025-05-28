@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="8_4fta3"]
 [ext_resource type="PackedScene" uid="uid://dah35ils4effb" path="res://src/dino/enemies/blobs/Blob.tscn" id="8_jyhcc"]
-[ext_resource type="Script" path="res://src/games/ghosts/world/GhostsRoom.gd" id="9"]
+[ext_resource type="Script" uid="uid://3yh65t2gdk4w" path="res://src/games/ghosts/world/GhostsRoom.gd" id="9"]
 [ext_resource type="PackedScene" uid="uid://b0lbt0omub0br" path="res://src/games/ghosts/world/platforms/GhostBlock.tscn" id="10"]
 
 [node name="Cells" type="Node2D" groups=["ghost_rooms"]]

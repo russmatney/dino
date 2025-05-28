@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://eg3mtddsun80"]
 
-[ext_resource type="Script" path="res://src/core/metro/MetroZone.gd" id="1_n6i7w"]
-[ext_resource type="Script" path="res://src/core/metro/MetroRoom.gd" id="2_6e41n"]
+[ext_resource type="Script" uid="uid://dx3r2ijfmbgqi" path="res://src/core/metro/MetroZone.gd" id="1_n6i7w"]
+[ext_resource type="Script" uid="uid://c4vk4sxqdjtsv" path="res://src/core/metro/MetroRoom.gd" id="2_6e41n"]
 [ext_resource type="Texture2D" uid="uid://p6pkgkw3n3db" path="res://src/backgrounds/background_snow_sky_sheet.png" id="2_fj248"]
 [ext_resource type="Texture2D" uid="uid://clmjyi22fmy1n" path="res://src/backgrounds/background_clouds_nobg_sheet.png" id="3_ixit7"]
 [ext_resource type="PackedScene" uid="uid://dcidi6i4xi1xa" path="res://src/tilemaps/snow/SnowTiles16.tscn" id="4_1xi51"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/dino/entities/checkpoints/SnowCheckpoint.tscn" id="11_ooovp"]
 [ext_resource type="PackedScene" uid="uid://c8bdi1yxvp67w" path="res://src/effects/particle_area/SnowFallParticles.tscn" id="12_xcbii"]
 [ext_resource type="PackedScene" uid="uid://c0pkrdt2pgivv" path="res://src/effects/BlurryCircleParticles.tscn" id="13_oonb0"]
-[ext_resource type="Shader" path="res://src/shaders/SimpleBlurScreen.gdshader" id="14_j24i6"]
+[ext_resource type="Shader" uid="uid://u0vw1l8e4t2t" path="res://src/shaders/SimpleBlurScreen.gdshader" id="14_j24i6"]
 [ext_resource type="PackedScene" uid="uid://1unm07kbfu8h" path="res://src/effects/particle_area/RainFallParticles.tscn" id="16_bwnd5"]
 
 [sub_resource type="Environment" id="Environment_gekih"]
@@ -34,6 +34,7 @@ adjustment_saturation = 1.26
 resource_local_to_scene = true
 shader = ExtResource("14_j24i6")
 shader_parameter/lod = 2.221
+shader_parameter/grayscale = 0.0
 
 [node name="TheMountain" type="Node2D" groups=["metro_zones"]]
 script = ExtResource("1_n6i7w")

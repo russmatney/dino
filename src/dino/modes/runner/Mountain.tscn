@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c1lb8q1rsj1sn"]
 
-[ext_resource type="Script" path="res://src/dino/modes/vania/Vania.gd" id="1_xmy53"]
+[ext_resource type="Script" uid="uid://d1cauhilukrfn" path="res://src/dino/modes/vania/Vania.gd" id="1_xmy53"]
 [ext_resource type="Resource" uid="uid://chs57h2n1xcmw" path="res://src/dino/modes/runner/mapdefs/Mountain.tres" id="2_uibkr"]
 
 [node name="Mountain" type="Node2D"]

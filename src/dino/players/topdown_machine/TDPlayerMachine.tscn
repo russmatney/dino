@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://ch8rasfmsvl5s"]
 
-[ext_resource type="Script" path="res://addons/bones/machine/Machine.gd" id="1_2hs06"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Idle.gd" id="2_whcxl"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Run.gd" id="3_rqwk7"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Jump.gd" id="4_oh6u8"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Fall.gd" id="5_jrhe7"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Notice.gd" id="7_ocgg4"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/KnockedBack.gd" id="9_2rpqg"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Dying.gd" id="10_ki01m"]
-[ext_resource type="Script" path="res://src/dino/players/topdown_machine/Dead.gd" id="11_27vl2"]
+[ext_resource type="Script" uid="uid://j8qml3gi0fe5" path="res://addons/bones/machine/Machine.gd" id="1_2hs06"]
+[ext_resource type="Script" uid="uid://1xxrm6kef2a2" path="res://src/dino/players/topdown_machine/Idle.gd" id="2_whcxl"]
+[ext_resource type="Script" uid="uid://cvyvs4i5h7yvn" path="res://src/dino/players/topdown_machine/Run.gd" id="3_rqwk7"]
+[ext_resource type="Script" uid="uid://cmm12tnoxeo2n" path="res://src/dino/players/topdown_machine/Jump.gd" id="4_oh6u8"]
+[ext_resource type="Script" uid="uid://b2wtfo0ipotii" path="res://src/dino/players/topdown_machine/Fall.gd" id="5_jrhe7"]
+[ext_resource type="Script" uid="uid://b62ii4egnarhw" path="res://src/dino/players/topdown_machine/Notice.gd" id="7_ocgg4"]
+[ext_resource type="Script" uid="uid://dt2an46x74ani" path="res://src/dino/players/topdown_machine/KnockedBack.gd" id="9_2rpqg"]
+[ext_resource type="Script" uid="uid://b0k8irjopj6f8" path="res://src/dino/players/topdown_machine/Dying.gd" id="10_ki01m"]
+[ext_resource type="Script" uid="uid://b8hbk1e72xy4s" path="res://src/dino/players/topdown_machine/Dead.gd" id="11_27vl2"]
 
 [node name="TDPlayerMachine" type="Node"]
 script = ExtResource("1_2hs06")

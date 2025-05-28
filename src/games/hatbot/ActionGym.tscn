@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://gxk11uefcmpx"]
 
 [ext_resource type="PackedScene" uid="uid://cwckwjae2vryw" path="res://src/tilemaps/coldfire/ColdFireTiles.tscn" id="1_nt0co"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_818kr"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_818kr"]
 [ext_resource type="PackedScene" uid="uid://djculbglj2yia" path="res://src/dino/players/hatbot/SSHatBot.tscn" id="3_dvxuu"]
 [ext_resource type="PackedScene" uid="uid://bid88q8ils016" path="res://src/dino/entities/checkpoints/Candle.tscn" id="3_epy4s"]
 

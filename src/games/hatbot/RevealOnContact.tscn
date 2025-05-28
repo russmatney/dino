@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://65i2r7duvw0r"]
 
-[ext_resource type="Script" path="res://src/games/hatbot/RevealOnContact.gd" id="1_dbwk2"]
+[ext_resource type="Script" uid="uid://c2wiwqwx3g81t" path="res://src/games/hatbot/RevealOnContact.gd" id="1_dbwk2"]
 
 [node name="RevealOnContact" type="Area2D"]
 collision_layer = 0
