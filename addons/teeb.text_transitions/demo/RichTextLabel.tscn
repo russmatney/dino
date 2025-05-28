@@ -8,7 +8,7 @@
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_transitions/resources/Word.tres" id="6"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_transitions/resources/Bounce.tres" id="7"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_transitions/resources/Embers.tres" id="8"]
-[ext_resource type="Script" path="res://addons/teeb.text_transitions/RichTextTransition.gd" id="10"]
+[ext_resource type="Script" uid="uid://drmgh3du4x7kp" path="res://addons/teeb.text_transitions/RichTextTransition.gd" id="10"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "fade_in"
@@ -66,8 +66,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_687cb"]
 _data = {
-"fade_in": SubResource("1"),
-"fade_out": SubResource("2")
+&"fade_in": SubResource("1"),
+&"fade_out": SubResource("2")
 }
 
 [node name="RichTextLabel" type="RichTextLabel"]

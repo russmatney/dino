@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://3emytyxxnw1j"]
 
-[ext_resource type="FontFile" path="res://addons/teeb.text_effects/demo/demo_font.tres" id="1"]
+[ext_resource type="FontFile" uid="uid://chvp5fvx8xj82" path="res://addons/teeb.text_effects/demo/demo_font.tres" id="1"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Cuss.tres" id="2"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/UwU.tres" id="3"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Rain.tres" id="4"]

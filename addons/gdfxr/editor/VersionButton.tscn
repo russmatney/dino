@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bqevji34bms7j"]
 
-[ext_resource path="res://addons/gdfxr/editor/VersionButton.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://c5d2sim4r2xtn" path="res://addons/gdfxr/editor/VersionButton.gd" id="1"]
 
 [node name="VersionButton" type="LinkButton"]
-self_modulate = Color( 1, 1, 1, 0.65 )
+self_modulate = Color(1, 1, 1, 0.65)
 offset_left = 1024.0
 offset_top = 5.0
 offset_right = 1024.0
@@ -11,7 +11,7 @@ offset_bottom = 19.0
 focus_mode = 2
 size_flags_vertical = 4
 underline = 1
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }
