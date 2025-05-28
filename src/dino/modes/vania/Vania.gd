@@ -15,7 +15,7 @@ static func reset_metsys_context(game, metsys_settings):
 	U._connect(MetSys.settings.theme_changed, MetSys._update_theme)
 	MetSys._update_theme()
 
-	if Engine.is_editor_hint() and MetSys.plugin != null:
+	if Engine.is_editor_hint() and "plugin" in MetSys and MetSys.plugin != null:
 		var db_main = MetSys.plugin.main
 		if db_main:
 			# calls Database/Main.tscn.reload_map()

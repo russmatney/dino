@@ -156,7 +156,7 @@ static func add_color_rect(room: BrickRoom, opts: BrickRoomOpts):
 ## area2d ######################################################################
 
 static func add_roombox(room: BrickRoom, _opts: BrickRoomOpts):
-	var coll = Reptile.rect_to_collision_shape(room.rect)
+	var coll = Reptile.rect_to_collision_shape(Rect2(room.rect.position, room.rect.size))
 
 	var box = Area2D.new()
 	box.add_child(coll)

@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bfatjgmhlkjne" path="res://addons/bones/actions/ActionHint.tscn" id="6_hx7xl"]
 [ext_resource type="PackedScene" uid="uid://bbijdyrpiupa3" path="res://addons/bones/actions/ActionDetector.tscn" id="7_a60dj"]
 [ext_resource type="Texture2D" uid="uid://o5drn1ewgbul" path="res://src/core/assets/lights/small_light1_nobg_sheet.png" id="8_myq8t"]
-[ext_resource type="PackedScene" path="res://src/effects/SkullParticles.tscn" id="9_nhx56"]
-[ext_resource type="PackedScene" path="res://src/effects/HeartParticles.tscn" id="10_ats0u"]
+[ext_resource type="PackedScene" uid="uid://d02gonmeynvxk" path="res://src/effects/SkullParticles.tscn" id="9_nhx56"]
+[ext_resource type="PackedScene" uid="uid://447iso788sbv" path="res://src/effects/HeartParticles.tscn" id="10_ats0u"]
 [ext_resource type="PackedScene" uid="uid://3xncvrhaa7im" path="res://src/dino/entities/pit/PitDetector.tscn" id="11_d25tv"]
 [ext_resource type="PackedScene" uid="uid://nhgggwr4im2y" path="res://src/dino/players/PlayerCamera.tscn" id="11_maqon"]
 
@@ -358,5 +358,7 @@ texture_scale = 4.0
 [node name="PitDetector" parent="." instance=ExtResource("11_d25tv")]
 position = Vector2(0, 8)
 
-[node name="PlayerCamera" parent="." instance=ExtResource("11_maqon")]
+[node name="PlayerCamera" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("11_maqon")]
+top_level = true
+follow_target = NodePath("..")
 zoom = Vector2(5, 5)

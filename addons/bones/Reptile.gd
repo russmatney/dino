@@ -62,12 +62,6 @@ static func normalized_val(stats: Dictionary, val: float) -> float:
 
 ## tilemap/cell helpers #####################################################################
 
-static func get_layers(tilemap: TileMap) -> Array:
-	var layers := []
-	for i in range(tilemap.get_layers_count()):
-		layers.append({i=i, name=tilemap.get_layer_name(i)})
-	return layers
-
 static func valid_neighbors(tilemap: TileMap, cell: Vector2i, layer: int = 0) -> Array:
 	var nbr_coords := tilemap.get_surrounding_cells(cell)
 	return nbr_coords.filter(func(coord: Vector2i) -> bool:
@@ -120,16 +114,12 @@ static func build_connected_groups(cells: Array, groups: Array = []) -> Array:
 	return groups
 
 # Returns coords grouped by adjacency - connected cells will be in the same group.
-static func cell_clusters(tilemap: TileMap) -> Array:
+static func cell_clusters(tilemap: TileMapLayer) -> Array:
 	var clusters := []
-	for l: Dictionary in Reptile.get_layers(tilemap):
-		var layer_i: int = l.ih
-		var used_cells: Array = tilemap.get_used_cells(layer_i)
-		var connected_groups := Reptile.build_connected_groups(used_cells)
-		clusters.append_array(connected_groups)
-	return clusters
+	var used_cells: Array = tilemap.get_used_cells()
+	return Reptile.build_connected_groups(used_cells)
 
-static func cells_to_polygon(tilemap: TileMap, cells: Array, opts: Dictionary = {}) -> Array:
+static func cells_to_polygon(tilemap: TileMapLayer, cells: Array, opts: Dictionary = {}) -> Array:
 	# get points from cell coordinates
 	var points: Array = cells.map(func(c: Vector2i) -> Array:
 		# assumes square tiles
@@ -302,11 +292,21 @@ static func get_height(coords: Array) -> int:
 	return maxy - miny + 1
 
 static func get_recti(coords: Array) -> Rect2i:
-	var minx: int = U.min_of(coords, func(coord: Vector2i) -> int: return coord.x, 0)
-	var maxx: int = U.max_of(coords, func(coord: Vector2i) -> int: return coord.x, 0) + 1
-	var miny: int = U.min_of(coords, func(coord: Vector2i) -> int: return coord.y, 0)
-	var maxy: int = U.max_of(coords, func(coord: Vector2i) -> int: return coord.y, 0) + 1
-	return Rect2i(Vector2i(minx, miny), Vector2i(maxx, maxy))
+	if len(coords) > 0:
+		if coords[0] is Vector2i:
+			var minx: int = U.min_of(coords, func(coord: Vector2i) -> int: return coord.x, 0)
+			var maxx: int = U.max_of(coords, func(coord: Vector2i) -> int: return coord.x, 0) + 1
+			var miny: int = U.min_of(coords, func(coord: Vector2i) -> int: return coord.y, 0)
+			var maxy: int = U.max_of(coords, func(coord: Vector2i) -> int: return coord.y, 0) + 1
+			return Rect2i(Vector2i(minx, miny), Vector2i(maxx, maxy))
+		if coords[0] is Vector3i:
+			var minx: int = U.min_of(coords, func(coord: Vector3i) -> int: return coord.x, 0)
+			var maxx: int = U.max_of(coords, func(coord: Vector3i) -> int: return coord.x, 0) + 1
+			var miny: int = U.min_of(coords, func(coord: Vector3i) -> int: return coord.y, 0)
+			var maxy: int = U.max_of(coords, func(coord: Vector3i) -> int: return coord.y, 0) + 1
+			return Rect2i(Vector2i(minx, miny), Vector2i(maxx, maxy))
+	Log.warn("no coords passed to get_recti")
+	return Rect2i()
 
 ### Tilesets
 

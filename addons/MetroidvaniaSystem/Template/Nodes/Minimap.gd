@@ -100,13 +100,13 @@ func _on_cell_changed(new_cell: Vector3i):
 
 func _update_drawer_position():
 	if smooth_scroll:
-		var new_position := -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
+		var new_position: Vector2 = -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
 		if new_position != _drawer.position:
 			if smooth_scroll:
 				_drawer.position = new_position - MetSys.CELL_SIZE
 			else:
 				_drawer.position = new_position
-	
+
 	if _player_location:
 		if layer == MetSys.current_layer:
 			_player_location.show()

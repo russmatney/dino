@@ -240,10 +240,10 @@ func get_local_cells_dict():
 		local[coord] = true
 	return local
 
-func get_local_width() -> Vector2i:
+func get_local_width() -> int:
 	return Reptile.get_width(local_cells)
 
-func get_local_height() -> Vector2i:
+func get_local_height() -> int:
 	return Reptile.get_height(local_cells)
 
 ## doors/neighbors ######################################################
