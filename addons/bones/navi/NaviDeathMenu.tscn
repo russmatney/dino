@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxhvx1wj86fq"]
 
-[ext_resource type="Script" path="res://addons/bones/navi/NaviDeathMenu.gd" id="1_vbsm2"]
+[ext_resource type="Script" uid="uid://c6i2o88ccg6we" path="res://addons/bones/navi/NaviDeathMenu.gd" id="1_vbsm2"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/bones/navi/ui/HeroLabel.tscn" id="3"]
-[ext_resource type="Script" path="res://addons/bones/navi/NaviDeathButtonList.gd" id="4_kb7uw"]
+[ext_resource type="Script" uid="uid://to45p0b4h46t" path="res://addons/bones/navi/NaviDeathButtonList.gd" id="4_kb7uw"]
 
 [node name="DeathMenu" type="CanvasLayer"]
 layer = 2

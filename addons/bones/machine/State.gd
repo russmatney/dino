@@ -9,18 +9,18 @@ var actor: Node2D
 
 ## transitions ###################################################################
 
-func enter(_ctx := {}):
+func enter(_ctx := {}) -> void:
 	Log.warn("WARN: enter func expected to be overwritten")
 
-func exit():
+func exit() -> void:
 	pass
 
-func transit(next_state, arg = {}):
+func transit(next_state: String, arg := {}) -> void:
 	machine.transit(next_state, arg)
 
 ## input #####################################################################
 
-func unhandled_input(event: InputEvent):
+func unhandled_input(_event: InputEvent) -> void:
 	pass
 
 ## process ################################################################
@@ -28,10 +28,10 @@ func unhandled_input(event: InputEvent):
 # if these names matched the usual _process,
 # they'd actually be called by the engine,
 # not our state machine
-func process(_delta: float):
+func process(_delta: float) -> void:
 	pass
 
-func physics_process(_delta: float):
+func physics_process(_delta: float) -> void:
 	pass
 
 ## properties ################################################################
@@ -39,7 +39,7 @@ func physics_process(_delta: float):
 ## state meta
 
 # can be the machine's initial state
-func can_be_initial_state():
+func can_be_initial_state() -> bool:
 	return false
 
 ## player props
@@ -77,9 +77,9 @@ func can_hop() -> bool:
 ## common callbacks ################################################################
 
 # fired from actor.anim
-func on_animation_finished():
+func on_animation_finished() -> void:
 	pass
 
 # fired from actor.anim
-func on_frame_changed():
+func on_frame_changed() -> void:
 	pass

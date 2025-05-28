@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq1rff2gu3q68"]
 
 [ext_resource type="Texture2D" uid="uid://d24eulxt2lphj" path="res://assets/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_u.png" id="1_el2wi"]
-[ext_resource type="Script" path="res://addons/bones/actions/ActionInputIcon.gd" id="1_ui3le"]
+[ext_resource type="Script" uid="uid://c3b44xcj522hr" path="res://addons/bones/actions/ActionInputIcon.gd" id="1_ui3le"]
 
 [node name="ActionInputIcon" type="TextureRect"]
 visible = false

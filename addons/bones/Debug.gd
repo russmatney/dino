@@ -1,13 +1,13 @@
 @tool
 extends Node
 
-var debugging = false
+var debugging := false
 
-signal debug_toggled(debugging)
+signal debug_toggled(debugging: bool)
 
 ## ready ###############################################
 
-func _ready():
+func _ready() -> void:
 	toggle_debug(debugging)
 
 ## input ###############################################
@@ -23,7 +23,7 @@ func _ready():
 
 # toggle debug ################################################
 
-func toggle_debug(d=null):
+func toggle_debug(d: Variant = null) -> void:
 	if d != null:
 		debugging = d
 	else:
@@ -46,11 +46,12 @@ func _notification(what: int) -> void:
 
 ## notifications ##########################################################################
 
-signal debug_notification(notif)
+signal debug_notification(notif: Dictionary)
 
-func notif(text, opts = {}):
+func notif(text: Variant, opts := {}) -> void:
 	if text is Dictionary:
-		opts.merge(text)
+		var t_dict: Dictionary = text
+		opts.merge(t_dict)
 		text = opts.get("text", opts.get("msg"))
 	if typeof(opts) == TYPE_STRING or not opts is Dictionary:
 		text += str(opts)
@@ -58,4 +59,4 @@ func notif(text, opts = {}):
 	opts["text"] = text
 	if not "ttl" in opts:
 		opts["ttl"] = 3.0
-	(func(): debug_notification.emit(opts)).call_deferred()
+	(func() -> void: debug_notification.emit(opts)).call_deferred()

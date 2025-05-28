@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://j0sk3m2xccgv"]
 
-[ext_resource type="Script" path="res://addons/bones/navi/NaviWinMenu.gd" id="1_oa1u5"]
+[ext_resource type="Script" uid="uid://cor5j70dxbag7" path="res://addons/bones/navi/NaviWinMenu.gd" id="1_oa1u5"]
 [ext_resource type="PackedScene" uid="uid://cny4ykpodxqv6" path="res://addons/bones/navi/ui/HeroLabel.tscn" id="2"]
-[ext_resource type="Script" path="res://addons/bones/navi/NaviWinButtonList.gd" id="3"]
+[ext_resource type="Script" uid="uid://hke2a3qdgy8i" path="res://addons/bones/navi/NaviWinButtonList.gd" id="3"]
 
 [node name="NaviWinMenu" type="CanvasLayer"]
 layer = 2

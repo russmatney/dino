@@ -2,6 +2,8 @@
 class_name Machine
 extends Node
 
+# TODO document/warn about actor `.anim` -> AnimatedSprite2D expectations!
+
 ### vars #####################################################################
 
 @export var initial_state := NodePath()
@@ -11,19 +13,19 @@ var state: State
 var actor: Node2D
 
 # opts
-var should_log = false
-var is_transitioning = false
-var is_started = false
+var should_log := false
+var is_transitioning := false
+var is_started := false
 
-signal transitioning(from_state, to_state)
-signal transitioned(state_name)
+signal transitioning(from_state: String, to_state: String)
+signal transitioned(state_name: String)
 
 # only set during transition
-var next_state
+var next_state: State
 
 ## to pretty #####################################################################
 
-func to_pretty():
+func to_pretty() -> Variant:
 	return [actor, state, {
 			should_log=should_log,
 			is_transitioning=is_transitioning,
@@ -32,22 +34,22 @@ func to_pretty():
 
 ## ready #####################################################################
 
-func _ready():
+func _ready() -> void:
 	if not len(get_children()) > 0:
 		Log.warn("Machine with no states (children), cannot setup")
 		return
 
 	if not actor:
 		# set the parent as the 'actor' in the states
-		var p = get_parent()
-		p.ready.connect(func(): start({actor=p}))
+		var p := get_parent()
+		p.ready.connect(func() -> void: start({actor=p}))
 
 ## start #####################################################################
 
 # should only be called when the owner is ready
 # b/c the initial state's enter() is called, which expects
 # things like actor.anim to exist.
-func start(opts={}):
+func start(opts := {}) -> void:
 	actor = opts.get("actor", get_owner())
 
 	is_transitioning = true
@@ -66,11 +68,15 @@ func start(opts={}):
 		if not state and child.can_be_initial_state():
 			state = child
 
+		var anim: AnimatedSprite2D
+		@warning_ignore("unsafe_property_access")
 		if actor.get("anim") and actor.anim != null:
-			if not actor.anim.animation_finished.is_connected(on_animation_finished):
-				actor.anim.animation_finished.connect(on_animation_finished)
-			if not actor.anim.frame_changed.is_connected(on_frame_changed):
-				actor.anim.frame_changed.connect(on_frame_changed)
+			@warning_ignore("unsafe_property_access")
+			anim = actor.anim
+			if not anim.animation_finished.is_connected(on_animation_finished):
+				anim.animation_finished.connect(on_animation_finished)
+			if not anim.frame_changed.is_connected(on_frame_changed):
+				anim.frame_changed.connect(on_frame_changed)
 
 	# still no state? just set the first child
 	if not state:
@@ -86,12 +92,12 @@ func start(opts={}):
 	is_transitioning = false
 	is_started = true
 
-func restart():
+func restart() -> void:
 	transit(initial_state)
 
 ## transitions ###################################################################
 
-func transit(target_state_name: String, ctx: Dictionary = {}):
+func transit(target_state_name: String, ctx: Dictionary = {}) -> void:
 	if not is_started:
 		Log.warn("machine transit attempted before machine started")
 		return
@@ -123,29 +129,39 @@ func transit(target_state_name: String, ctx: Dictionary = {}):
 	next_state = null
 	is_transitioning = false
 
+# does nothing if the passed state name is already the state
+# (should this be the default behavior?)
+func transit_if_new(target_state_name: String, ctx: Dictionary = {}) -> void:
+	if state.name == target_state_name:
+		return
+	transit(target_state_name, ctx)
+
+func is_in_state(state_name: String) -> bool:
+	return state.name == state_name
+
 ## input #####################################################################
 
-func _unhandled_input(ev):
+func _unhandled_input(ev: InputEvent) -> void:
 	if state and not is_transitioning:
 		state.unhandled_input(ev)
 
 ## process #####################################################################
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if state and not is_transitioning:
 		state.process(delta)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if state and not is_transitioning:
 		state.physics_process(delta)
 
 ## animation #####################################################################
 
-func on_animation_finished():
+func on_animation_finished() -> void:
 	if state and not is_transitioning:
 		state.on_animation_finished()
 
-func on_frame_changed():
+func on_frame_changed() -> void:
 	if state and not is_transitioning:
 		state.on_frame_changed()
 

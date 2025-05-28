@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://pxedm83fp7qa"]
 
-[ext_resource type="Script" path="res://addons/bones/actions/ActionsList.gd" id="1"]
+[ext_resource type="Script" uid="uid://croep5toonk7w" path="res://addons/bones/actions/ActionsList.gd" id="1"]
 
 [node name="ActionsList" type="VBoxContainer"]
 offset_right = 238.0
 offset_bottom = 318.0
-script = ExtResource( 1 )
+script = ExtResource("1")

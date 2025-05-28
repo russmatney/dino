@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bh4ws4oedqs1v"]
 
-[ext_resource type="Script" path="res://addons/bones/actions/ActionArea.gd" id="1_jtcdv"]
+[ext_resource type="Script" uid="uid://bujlimlfu5twc" path="res://addons/bones/actions/ActionArea.gd" id="1_jtcdv"]
 
 [node name="ActionArea" type="Area2D" groups=["action_areas"]]
 collision_layer = 256

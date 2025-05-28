@@ -1,8 +1,11 @@
 extends CanvasLayer
 
-@onready var button_list = $%NaviPauseButtonList
+@onready var button_list := $%NaviPauseButtonList
 
-func set_focus():
-	var chs = button_list.get_children()
+func set_focus() -> void:
+	var chs := button_list.get_children()
 	if len(chs) > 0:
-		chs[0].grab_focus()
+		for ch: Node in chs:
+			if ch is Control:
+				(ch as Control).grab_focus()
+				break

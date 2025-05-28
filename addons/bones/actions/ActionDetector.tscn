@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bbijdyrpiupa3"]
 
-[ext_resource type="Script" path="res://addons/bones/actions/ActionDetector.gd" id="1_g82lj"]
+[ext_resource type="Script" uid="uid://du6rub0786axf" path="res://addons/bones/actions/ActionDetector.gd" id="1_g82lj"]
 
 [node name="ActionDetector" type="Area2D"]
 collision_layer = 0

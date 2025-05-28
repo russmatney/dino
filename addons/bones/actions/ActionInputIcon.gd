@@ -2,7 +2,7 @@
 extends TextureRect
 class_name ActionInputIcon
 
-@export var input_text = "" :
+@export var input_text := "" :
 	set(v):
 		input_text = v
 		render_icon()
@@ -12,36 +12,38 @@ class_name ActionInputIcon
 # 		action_name_ = v
 # 		set_icon_for_action(v)
 
-@export var joy_button = [] :
+@export var joy_button := [] :
 	set(v):
 		if v and len(v) == 2:
 			input_text = button_to_input_text(v)
 
-func button_to_input_text(button):
-	var device_type = button[0]
-	var idx = button[1]
+func button_to_input_text(button: Array) -> String:
+	var device_type: String = button[0]
+	var idx: int = button[1]
 	if device_type == "keyboard":
 		# not sure i love this
 		device_type = "generic"
 
-	var dev_map = device_button_idx_input_text.get(device_type, {})
-	var txt
+	var dev_map: Dictionary = device_button_idx_input_text.get(device_type, {})
+	var txt: String
 	if idx in dev_map:
 		txt = dev_map.get(idx, "")
 
 	return txt
 
 
-@export var joy_axis = [] :
+@export var joy_axis := [] :
 	set(v):
 		if input_text == "" and v and len(v) == 2:
-			input_text = axis_to_input_text(v)
+			var it := axis_to_input_text(v)
+			if it != "":
+				input_text = it
 
-func axis_to_input_text(axis):
-	var idx = axis[0]
-	var val = axis[1]
+func axis_to_input_text(axis: Array) -> String:
+	var idx: int = axis[0]
+	var val: Variant = axis[1]
 
-	var txt = ""
+	var txt := ""
 	match idx:
 		JOY_AXIS_LEFT_X:
 			if val > 0:
@@ -69,38 +71,41 @@ func axis_to_input_text(axis):
 			txt = "Right Trigger"
 		JOY_AXIS_INVALID, JOY_AXIS_SDL_MAX, JOY_AXIS_MAX:
 			Log.warn("Unsupported joystick axis", axis)
-			return
+			return ""
 	return txt
 
 ## public
 
-func set_icon_for_action(action_name, device=null):
+func set_icon_for_action(action_name: String, device: String = "") -> void:
 	if Engine.is_editor_hint():
 		input_text = U.rand_of(["A Button", "Enter", "X", "Ctrl+Z"])
 		return
-	if not device:
+	if device == "":
 		device = InputHelper.device
-	var input = InputHelper.get_keyboard_or_joypad_input_for_action(action_name)
+	var input := InputHelper.get_keyboard_or_joypad_input_for_action(action_name)
 	if input == null:
 		Log.warn("no input for action name", action_name)
 		return
 	if device == InputHelper.DEVICE_KEYBOARD:
-		input_text = OS.get_keycode_string(input.get_keycode_with_modifiers())
+		var inp: InputEventKey = input
+		input_text = OS.get_keycode_string(inp.get_keycode_with_modifiers())
 	elif "button_index" in input:
+		var inp: InputEventJoypadButton = input
 		# TODO support axes as well
-		joy_button = [device, input.button_index]
+		joy_button = [device, inp.button_index]
 	elif "axis" in input:
-		joy_axis = [input.axis, input.axis_value]
+		var inp: InputEventJoypadMotion = input
+		joy_axis = [inp.axis, inp.axis_value]
 	else:
 		Log.warn("Unexpected input:", action_name, input)
 
 ## ready
 
-func _ready():
+func _ready() -> void:
 	render_icon()
 
-func get_input_texture(input_key):
-	var inp_texture = keymap.get(input_key)
+func get_input_texture(input_key: String) -> Variant:
+	var inp_texture: Variant = keymap.get(input_key)
 
 	if inp_texture:
 		return inp_texture
@@ -108,15 +113,15 @@ func get_input_texture(input_key):
 		Log.warn("No texture found for input", input_key)
 		return
 
-func render_icon():
+func render_icon() -> void:
 	if input_text == null or input_text in ignores:
 		set_visible(false)
 		return
 	set_visible(true)
 
-	var input_key = ""
-	var mods = []
-	var parts = input_text.split("+")
+	var input_key := ""
+	var mods := []
+	var parts := input_text.split("+")
 	if len(parts) == 0:
 		set_visible(false)
 		return
@@ -125,14 +130,14 @@ func render_icon():
 	if len(parts) > 1:
 		mods = parts.slice(1)
 
-	var inp_texture = get_input_texture(input_key)
+	var inp_texture: Variant = get_input_texture(input_key)
 	if inp_texture == null:
 		return
 	# var mod_width = 0
 
-	var mod_textures = []
-	for m in mods:
-		var mod_texture = get_input_texture(m)
+	var mod_textures := []
+	for m: String in mods:
+		var mod_texture: Variant = get_input_texture(m)
 		mod_textures.append(mod_texture)
 		# if m in ["Shift"]:
 		# 	mod_width += 90
@@ -145,7 +150,8 @@ func render_icon():
 		Log.pr("I have mod_textures to render!")
 
 	# update text
-	set_texture(inp_texture)
+	var _texture: Texture2D = inp_texture
+	set_texture(_texture)
 
 	# update size
 	# if input_text in ["Space"]:
@@ -157,9 +163,9 @@ func render_icon():
 	# else:
 	# 	set_custom_minimum_size(Vector2(50 + mod_width, 0))
 
-var ignores = ["", "Kp Enter"]
+var ignores := ["", "Kp Enter"]
 
-var keymap = {
+var keymap := {
 	# keyboard
 	"A"=preload("res://assets/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_a.png"),
 	"B"=preload("res://assets/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_b.png"),
@@ -328,7 +334,7 @@ var keymap = {
 	"Joystick 'R'"=preload("res://assets/kenney-input-prompts/Nintendo Switch/Default/switch_stick_side_r.png"),
 	}
 
-var device_button_idx_input_text = {
+var device_button_idx_input_text := {
 		"xbox"={
 			0: "A Button",
 			1: "B Button",

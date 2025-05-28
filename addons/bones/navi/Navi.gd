@@ -3,37 +3,37 @@ extends Node
 
 ## vars ###################################################################
 
-var first_scene
-var current_scene
+var first_scene: Node
+var current_scene: Node
 
 ## ready ###################################################################
 
-func _ready():
+func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
 
-	var root = get_tree().get_root()
-	var first = root.get_child(root.get_child_count() - 1)
-	var main_scene_path = ProjectSettings.get_setting("application/run/main_scene")
+	var root := get_tree().get_root()
+	var first := root.get_child(root.get_child_count() - 1)
+	var main_scene_path: String = ProjectSettings.get_setting("application/run/main_scene")
 	if first.scene_file_path == main_scene_path:
 		first_scene = first
 ## input ###################################################################
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if not Engine.is_editor_hint() and Trolls.is_pause(event):
 		Navi.toggle_pause()
 
 ## process ###################################################################
 
-var focused_node
-var attempted_focus_for_scene
-func _process(_delta):
+var focused_node: Node
+var attempted_focus_for_scene: Node
+func _process(_delta: float) -> void:
 	# PERF could only run this when in a menu/control/ui screen
-	var new_focused_node = get_viewport().gui_get_focus_owner()
+	var new_focused_node := get_viewport().gui_get_focus_owner()
 	if new_focused_node == null and attempted_focus_for_scene != current_scene:
 		find_focus()
 	elif new_focused_node != focused_node:
 		focused_node = new_focused_node
-		_on_focus_changed(focused_node)
+		_on_focus_changed(focused_node as Control)
 
 ## focus changes ###################################################################
 
@@ -42,52 +42,61 @@ func _on_focus_changed(control: Control) -> void:
 		find_focus()
 
 # this might compete with grab_focus, should only be called if there is nothing in focus
-func find_focus(scene=null):
+func find_focus(scene: Node = null) -> void:
 	if scene == null:
 		scene = current_scene
 	if scene == null:
 		return
 	attempted_focus_for_scene = scene
 	if scene.has_method("set_focus"):
+		@warning_ignore("unsafe_method_access")
 		scene.set_focus()
 	else:
 		# there are things besides buttons to focus on...
-		var btns = scene.find_children("*", "BaseButton", true, false)
+		var btns := scene.find_children("*", "BaseButton", true, false)
+		btns = btns.filter(func(b): return not b.is_disabled())
 		if len(btns) > 0:
-			btns[0].grab_focus()
+			for btn: Node in btns:
+				if btn is Control:
+					(btn as Control).grab_focus()
+					break
 
 ## nav_to ###################################################################
 
 # Supports a path, packed_scene, or instance of a scene
-func nav_to(scene, opts={}):
+func nav_to(scene: Variant, opts:={}) -> void:
 	Log.info("nav_to: ", scene, opts)
 	hide_menus()
 	_deferred_goto_scene.call_deferred(scene, opts)
 	# ensure unpaused
 	resume()
 
-func _deferred_goto_scene(scene, opts={}):
+func _deferred_goto_scene(scene: Variant, opts:={}) -> void:
 	get_tree().current_scene.queue_free()
 
-	var next_scene
+	var next_scene: Node
 	if scene is String:
-		var s = ResourceLoader.load(scene)
+		var scene_str: String = scene
+		var s: PackedScene = ResourceLoader.load(scene_str)
 		if s == null:
 			Log.warn("Cannot instantiate passed scene, failed to load", scene)
 			return
 		next_scene = s.instantiate()
 	elif scene is PackedScene:
-		next_scene = scene.instantiate()
+		var sc_packed: PackedScene = scene
+		next_scene = sc_packed.instantiate()
 	else:
 		# assuming it is already instantiated
 		next_scene = scene
 
 	if "setup" in opts:
 		if opts.setup != null:
+			@warning_ignore("unsafe_method_access")
 			opts.setup.call(next_scene)
 
 	if "on_ready" in opts:
-		next_scene.ready.connect(func():
+		next_scene.ready.connect(func() -> void:
+			@warning_ignore("unsafe_method_access")
 			opts.on_ready.call(next_scene))
 
 	# default to waiting for the current_scene to be freed
@@ -107,9 +116,9 @@ func _deferred_goto_scene(scene, opts={}):
 
 ## current_scene_path ###################################################################
 
-func current_scene_path():
+func current_scene_path() -> String:
 	if current_scene == null:
-		var root = get_tree().get_root()
+		var root := get_tree().get_root()
 		current_scene = root.get_children()[-1]
 		get_tree().set_current_scene(current_scene)
 	return current_scene.scene_file_path
@@ -117,10 +126,10 @@ func current_scene_path():
 ## add child ###################################################################
 
 # helper for adding a child to the current scene
-func add_child_to_current(child, deferred=true):
+func add_child_to_current(child: Node, deferred := true) -> void:
 	# could use the scene_tree's current_scene directly
 	if current_scene == null:
-		var root = get_tree().get_root()
+		var root := get_tree().get_root()
 		current_scene = root.get_children()[-1]
 		get_tree().set_current_scene(current_scene)
 
@@ -131,15 +140,15 @@ func add_child_to_current(child, deferred=true):
 
 ## pause ###################################################################
 
-signal pause_toggled(paused)
+signal pause_toggled(paused: bool)
 
-func toggle_pause():
+func toggle_pause() -> void:
 	if get_tree().paused:
 		resume()
 	else:
 		pause()
 
-func pause():
+func pause() -> void:
 	get_tree().paused = true
 	if pause_menu and is_instance_valid(pause_menu):
 		pause_menu.show()
@@ -147,7 +156,7 @@ func pause():
 	# Music.switch_to_pause_music()
 	pause_toggled.emit(true)
 
-func resume():
+func resume() -> void:
 	get_tree().paused = false
 	hide_menus()
 	# Music.switch_to_game_music()
@@ -159,73 +168,80 @@ func is_paused() -> bool:
 
 ## menus ###################################################################
 
-var menus = []
+var menus := []
 
-func add_menu(scene):
-	for c in get_children():
-		var sfp = scene.resource_path
-		if c.scene_file_path == sfp:
-			c.hide()
-			return c
+func add_menu(scene: Variant) -> CanvasLayer:
+	if not scene is PackedScene:
+		for c in get_children():
+			var sfp: String = scene.resource_path
+			if c.scene_file_path == sfp:
+				@warning_ignore("unsafe_method_access")
+				c.hide()
+				return c
+	else:
+		var sc_packed: PackedScene = scene
+		var menu: CanvasLayer = sc_packed.instantiate()
+		menu.hide()
+		menus.append(menu)
+		add_child.call_deferred(menu)
+		return menu
+	return
 
-	var menu = scene.instantiate()
-	menu.hide()
-	menus.append(menu)
-	add_child.call_deferred(menu)
-	return menu
+func hide_menus() -> void:
+	menus = menus.filter(func(m: Node) -> bool: return is_instance_valid(m))
+	menus.map(func(m: CanvasLayer) -> void: m.hide())
 
-func hide_menus():
-	menus = menus.filter(func(m): return is_instance_valid(m))
-	menus.map(func(m): m.hide())
-
-	var other_menus = get_tree().get_nodes_in_group("menus")
-	other_menus.map(func(m): m.hide())
+	var other_menus := get_tree().get_nodes_in_group("menus")
+	other_menus.map(func(m: CanvasLayer) -> void: m.hide())
 
 	find_focus()
 
-func show_menu(menu):
-	menus = menus.filter(func(m): return is_instance_valid(m))
+func show_menu(menu: Variant) -> void:
+	menus = menus.filter(func(m: Node) -> bool: return is_instance_valid(m))
 	if not menu in menus:
-		add_menu(menu)
-	menu.show()
-	find_focus(menu)
+		menu = add_menu(menu)
 
-func clear_menus():
-	menus = menus.filter(func(m): return is_instance_valid(m))
-	for m in menus:
+	if menu != null and menu is CanvasLayer:
+		var m: CanvasLayer = menu
+		m.show()
+		find_focus(m)
+
+func clear_menus() -> void:
+	menus = menus.filter(func(m: Node) -> bool: return is_instance_valid(m))
+	for m: Node in menus:
 		m.queue_free()
 
 ## main menu ###################################################################
 
-var main_menu_path
+var main_menu_path: String
 
-func set_main_menu(path_or_scene):
-	var path = U.to_scene_path(path_or_scene)
+func set_main_menu(path_or_scene: Variant) -> void:
+	var path := U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		Log.info("Setting main_menu", path.get_file())
 		main_menu_path = path
 	else:
 		Log.warn("No scene at path", path, ", can't set main menu.")
 
-func nav_to_main_menu():
+func nav_to_main_menu() -> void:
 	if main_menu_path and ResourceLoader.exists(main_menu_path):
 		hide_menus()
 		nav_to(main_menu_path)
 	else:
 		Log.warn("No scene at path: ", main_menu_path, ", can't navigate.")
 
-func quit_game():
+func quit_game() -> void:
 	get_tree().quit()
 
 ## pause menu ###################################################################
 
-var pause_menu
+var pause_menu: CanvasLayer
 
-func set_pause_menu(path_or_scene):
+func set_pause_menu(path_or_scene: Variant) -> void:
 	if path_or_scene == null:
 		Log.warn("Null passed to set_pause_menu, returning")
 		return
-	var path = U.to_scene_path(path_or_scene)
+	var path := U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if pause_menu and is_instance_valid(pause_menu):
 			if pause_menu.scene_file_path == path:
@@ -239,13 +255,13 @@ func set_pause_menu(path_or_scene):
 
 ## death ###########################################
 
-var death_menu
+var death_menu: CanvasLayer
 
-func set_death_menu(path_or_scene):
+func set_death_menu(path_or_scene: Variant) -> void:
 	if path_or_scene == null:
 		Log.warn("Null passed to set_death_menu, returning")
 		return
-	var path = U.to_scene_path(path_or_scene)
+	var path := U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if death_menu and is_instance_valid(death_menu):
 			if death_menu.scene_file_path == path:
@@ -255,23 +271,23 @@ func set_death_menu(path_or_scene):
 	else:
 		Log.warn("No scene at path: ", path, ", can't set death menu.")
 
-func show_death_menu():
+func show_death_menu() -> void:
 	# Music.pause_game_song()
 	death_menu.show()
 	find_focus(death_menu)
 
-func hide_death_menu():
+func hide_death_menu() -> void:
 	death_menu.hide()
 
 ## win ###########################################
 
-var win_menu
+var win_menu: CanvasLayer
 
-func set_win_menu(path_or_scene):
+func set_win_menu(path_or_scene: Variant) -> void:
 	if path_or_scene == null:
 		Log.warn("Null passed to set_win_menu, returning")
 		return
-	var path = U.to_scene_path(path_or_scene)
+	var path := U.to_scene_path(path_or_scene)
 	if ResourceLoader.exists(path):
 		if win_menu and is_instance_valid(win_menu):
 			if win_menu.scene_file_path == path:
@@ -281,10 +297,10 @@ func set_win_menu(path_or_scene):
 	else:
 		Log.warn("No scene at path: ", path, ", can't set win menu.")
 
-func show_win_menu():
+func show_win_menu() -> void:
 	# Music.pause_game_song()
 	win_menu.show()
 	find_focus(win_menu)
 
-func hide_win_menu():
+func hide_win_menu() -> void:
 	win_menu.hide()
