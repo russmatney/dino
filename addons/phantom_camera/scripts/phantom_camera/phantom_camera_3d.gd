@@ -5,7 +5,7 @@ extends Node3D
 
 ## Controls a scene's [Camera3D] and applies logic to it.
 ##
-## The scene's [param Camera3D] will follow the position of the
+## The scene's [Camera3D] will follow the position of the
 ## [param PhantomCamera3D] with the highest priority.
 ## Each instance can have different positional and rotational logic applied
 ## to them.
@@ -16,7 +16,6 @@ const _constants = preload("res://addons/phantom_camera/scripts/phantom_camera/p
 
 #endregion
 
-
 #region Signals
 
 ## Emitted when the [param PhantomCamera3D] becomes active.
@@ -25,13 +24,17 @@ signal became_active
 ## Emitted when the [param PhantomCamera3D] becomes inactive.
 signal became_inactive
 
+## Emitted when the follow_mode changes.
+## Note: This is for internal use only
+signal follow_mode_changed
+
 ## Emitted when [member follow_target] changes.
 signal follow_target_changed
 
 ## Emitted when [member look_at_target] changes.
 signal look_at_target_changed
 
-## Emitted when dead zones changes. [br]
+## Emitted when dead zones changes.[br]
 ## [b]Note:[/b] Only applicable in [param Framed] [member FollowMode].
 signal dead_zone_changed
 
@@ -55,8 +58,13 @@ signal tween_interrupted(pcam_3d: PhantomCamera3D)
 ## [param PhantomCamera3D].
 signal tween_completed
 
-## Emitted when Noise should be applied to the Camera3D.
+## Emitted when Noise should be applied to the [param Camera3D].
 signal noise_emitted(noise_output: Transform3D)
+
+signal physics_target_changed
+
+signal camera_3d_resource_property_changed(property: StringName, value: Variant)
+signal camera_3d_resource_changed
 
 #endregion
 
@@ -98,6 +106,17 @@ enum InactiveUpdateMode {
 #	EXPONENTIALLY,
 }
 
+enum FollowLockAxis {
+	NONE	= 0,
+	X 		= 1,
+	Y 		= 2,
+	Z 		= 3,
+	XY		= 4,
+	XZ		= 5,
+	YZ		= 6,
+	XYZ		= 7,
+}
+
 #endregion
 
 
@@ -110,16 +129,17 @@ enum InactiveUpdateMode {
 ## disabled when running a build export of the game.
 @export var priority_override: bool = false:
 	set(value):
-		if Engine.is_editor_hint() and _has_valid_pcam_owner():
-			if value == true:
-				priority_override = value
-				get_pcam_host_owner().pcam_priority_override(self)
+		priority_override = value
+		if Engine.is_editor_hint():
+			if value:
+				if not Engine.has_singleton(_constants.PCAM_MANAGER_NODE_NAME): return
+				Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME).pcam_priority_override.emit(self, priority_override)
 			else:
-				priority_override = value
-				get_pcam_host_owner().pcam_priority_updated(self)
-				get_pcam_host_owner().pcam_priority_override_disabled()
+				if not Engine.has_singleton(_constants.PCAM_MANAGER_NODE_NAME): return
+				Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME).pcam_priority_override.emit(self, priority_override)
 	get:
 		return priority_override
+
 
 ## It defines which [param PhantomCamera3D] a scene's [param Camera3D] should
 ## be corresponding with and be attached to. This is decided by the
@@ -135,6 +155,7 @@ enum InactiveUpdateMode {
 	set = set_priority,
 	get = get_priority
 
+
 ## Determines the positional logic for a given [param PhantomCamera3D].
 ## The different modes have different functionalities and purposes, so
 ## choosing the correct one depends on what each [param PhantomCamera3D]
@@ -145,6 +166,8 @@ enum InactiveUpdateMode {
 
 		if follow_mode == FollowMode.NONE:
 			_should_follow = false
+			top_level = false
+			_is_parents_physics()
 			notify_property_list_changed()
 			return
 
@@ -165,7 +188,19 @@ enum InactiveUpdateMode {
 			if  dead_zone_changed.is_connected(_on_dead_zone_changed):
 				dead_zone_changed.disconnect(_on_dead_zone_changed)
 
+		if follow_mode == FollowMode.THIRD_PERSON:
+			top_level = false
+			_is_third_person_follow = true
+		else:
+			top_level = true
+			_is_third_person_follow = false
+
+		follow_mode_changed.emit()
 		notify_property_list_changed()
+
+		## NOTE - Warning that Look At + Follow Mode hasn't been fully tested together yet
+		if look_at_mode != LookAtMode.NONE:
+			print_rich("[color=#EAA15E]Warning: Using both Look At and Follow Mode on the same PCam3D has not been fully tested yet, proceed with caution![/color]")
 	get:
 		return follow_mode
 
@@ -189,6 +224,7 @@ enum InactiveUpdateMode {
 	set = set_follow_path,
 	get = get_follow_path
 
+
 ## Determines the rotational logic for a given [param PhantomCamera3D].
 ## The different modes has different functionalities and purposes,
 ## so choosing the correct mode depends on what each
@@ -208,6 +244,10 @@ enum InactiveUpdateMode {
 		else: # If Look At Group
 			_look_at_targets_size_check()
 		notify_property_list_changed()
+
+		## NOTE - Warning that Look At + Follow Mode hasn't been fully tested together yet
+		if follow_mode != FollowMode.NONE:
+			print_rich("[color=#EAA15E]Warning: Using both Look At and Follow Mode on the same PCam3D has not been fully tested yet, proceed with caution![/color]")
 	get:
 		return look_at_mode
 
@@ -223,6 +263,7 @@ enum InactiveUpdateMode {
 @export var look_at_targets: Array[Node3D] = []:
 	set = set_look_at_targets,
 	get = get_look_at_targets
+
 
 ## Defines how [param ]PhantomCamera3Ds] transition between one another.
 ## Changing the tween values for a given [param PhantomCamera3D]
@@ -245,6 +286,7 @@ enum InactiveUpdateMode {
 	set = set_tween_on_load,
 	get = get_tween_on_load
 
+
 ## Determines how often an inactive [param PhantomCamera3D] should update
 ## its positional and rotational values. This is meant to reduce the amount
 ## of calculations inactive [param PhantomCamera3Ds] are doing when idling
@@ -254,21 +296,30 @@ enum InactiveUpdateMode {
 	get = get_inactive_update_mode
 
 
+## Determines which layers this [param PhantomCamera3D] should be able to communicate with [PhantomCameraHost] nodes.[br]
+## A corresponding layer needs to be set on the [PhantomCameraHost] node.
+@export_flags_3d_render var host_layers: int = 1:
+	set = set_host_layers,
+	get = get_host_layers
+
+
 ## A resource type that allows for overriding the [param Camera3D] node's
 ## properties.
-@export var camera_3d_resource: Camera3DResource: # = Camera3DResource.new():
+@export var camera_3d_resource: Camera3DResource = null:
 	set = set_camera_3d_resource,
 	get = get_camera_3d_resource
 
-## Overrides the [member Camera3D.environment] resource property.
-@export var environment: Environment = null:
-	set = set_environment,
-	get = get_environment
 
 ## Overrides the [member Camera3D.attribuets] resource property.
 @export var attributes: CameraAttributes = null:
 	set = set_attributes,
 	get = get_attributes
+
+
+## Overrides the [member Camera3D.environment] resource property.
+@export var environment: Environment = null:
+	set = set_environment,
+	get = get_environment
 
 
 @export_group("Follow Parameters")
@@ -292,6 +343,16 @@ enum InactiveUpdateMode {
 	set = set_follow_damping_value,
 	get = get_follow_damping_value
 
+
+## Prevents the [param PhantomCamera2D] from moving in a designated axis.
+## This can be enabled or disabled at runtime or from the editor directly.
+@export var follow_axis_lock: FollowLockAxis = FollowLockAxis.NONE:
+	set = set_follow_axis_lock,
+	get = get_follow_axis_lock
+var _follow_axis_is_locked: bool = false
+var _follow_axis_lock_value: Vector3 = Vector3.ZERO
+
+
 ## Sets a distance offset from the centre of the target's position.
 ## The distance is applied to the [param PhantomCamera3D]'s local z axis.
 @export var follow_distance: float = 1:
@@ -314,6 +375,8 @@ enum InactiveUpdateMode {
 ## Note: This distance will only ever be reached when all the targets are in
 ## the exact same [param Vector3] coordinate, which will very unlikely
 ## happen, so adjust the value here accordingly.
+## [br][br]
+## If only one follow target is assigned to [member follow_targets], this value will be used as the `follow_distance`.
 @export var auto_follow_distance_min: float = 1:
 	set = set_auto_follow_distance_min,
 	get = get_auto_follow_distance_min
@@ -334,6 +397,7 @@ enum InactiveUpdateMode {
 @export var auto_follow_distance_divisor: float = 10:
 	set = set_auto_follow_distance_divisor,
 	get = get_auto_follow_distance_divisor
+
 
 @export_subgroup("Dead Zones")
 ## Defines the horizontal dead zone area. While the target is within it, the
@@ -366,7 +430,6 @@ enum InactiveUpdateMode {
 
 ## Defines the position of the [member follow_target] within the viewport.[br]
 ## This is only used for when [member follow_mode] is set to [param Framed].
-
 @export_subgroup("Spring Arm")
 
 ## Defines the [member SpringArm3D.spring_length].
@@ -388,6 +451,7 @@ enum InactiveUpdateMode {
 @export var margin: float = 0.01:
 	set = set_margin,
 	get = get_margin
+
 
 @export_group("Look At Parameters")
 ## Offsets the target's [param Vector3] position that the
@@ -411,10 +475,25 @@ enum InactiveUpdateMode {
 	set = set_look_at_damping_value,
 	get = get_look_at_damping_value
 
+@export_subgroup("Up Direction")
+
+## Defines the upward direction of the [param PhantomCamera3D] when [member look_at_mode] is set. [br]
+## This value will be overriden if [member up_target] is defined.
+@export var up: Vector3 = Vector3.UP:
+	set = set_up,
+	get = get_up
+
+## Applies and continuously updates the [param up] direction of the [param PhantomCamera3D] based on this target when [member look_at_mode] is set.[br]
+## Setting a value here will override the [member up] value.
+@export var up_target: Node3D = null:
+	set = set_up_target,
+	get = get_up_target
+
+
 @export_group("Noise")
 ## Applies a noise, or shake, to a [Camera3D].[br]
 ## Once set, the noise will run continuously after the tween to the [PhantomCamera3D] instance is complete.
-@export var noise: PhantomCameraNoise3D:
+@export var noise: PhantomCameraNoise3D = null:
 	set = set_noise,
 	get = get_noise
 
@@ -430,7 +509,7 @@ enum InactiveUpdateMode {
 
 ## Enable a corresponding layer for a [member PhantomCameraNoiseEmitter3D.noise_emitter_layer]
 ## to make this [PhantomCamera3D] be affect by it.
-@export_flags_3d_render var noise_emitter_layer: int:
+@export_flags_3d_render var noise_emitter_layer: int = 0:
 	set = set_noise_emitter_layer,
 	get = get_noise_emitter_layer
 
@@ -441,6 +520,7 @@ enum InactiveUpdateMode {
 var _is_active: bool = false
 
 var _is_third_person_follow: bool = false
+var _camera_target: Node3D = self # Calculates the position of the camera in the editor, uses instantiated SpringArm3D node when running the scene
 
 var _should_follow: bool = false
 var _follow_target_physics_based: bool = false
@@ -448,7 +528,7 @@ var _physics_interpolation_enabled: bool = false ## TOOD - Should be enbled once
 
 var _has_multiple_follow_targets: bool = false
 var _follow_targets_single_target_index: int = 0
-var _follow_targets: Array[Node3D]
+var _follow_targets: Array[Node3D] = []
 
 var _should_look_at: bool = false
 var _look_at_target_physics_based: bool = false
@@ -456,33 +536,36 @@ var _look_at_target_physics_based: bool = false
 var _has_multiple_look_at_targets: bool = false
 var _look_at_targets_single_target_index: int = 0
 
+var _current_rotation: Vector3 = Vector3.ZERO
+
+var _up: Vector3 = Vector3.UP
+var _has_up_target: bool = false
+
+var _follow_target_position: Vector3 = Vector3.ZERO
+var _look_at_target_position: Vector3 = Vector3.ZERO
+
+var _transform_output: Transform3D = Transform3D()
+var _transform_noise: Transform3D = Transform3D()
+
 var _tween_skip: bool = false
 
 var _follow_velocity_ref: Vector3 = Vector3.ZERO # Stores and applies the velocity of the movement
 
 var _follow_framed_initial_set: bool = false
-var _follow_framed_offset: Vector3
+var _follow_framed_offset: Vector3 = Vector3.ZERO
 
-var _follow_spring_arm: SpringArm3D
-
-var _current_rotation: Vector3
+var _follow_spring_arm: SpringArm3D = null
+var _has_follow_spring_arm: bool = false
 
 var _has_noise_resource: bool = false
 
-var _transform_output: Transform3D
-var _transform_noise: Transform3D
 
 # NOTE - Temp solution until Godot has better plugin autoload recognition out-of-the-box.
-var _phantom_camera_manager: Node
+var _phantom_camera_manager: Node = null
 
 #endregion
 
-#region Public Variables
-
-## The [PhantomCameraHost] that owns this [param PhantomCamera2D].
-var pcam_host_owner: PhantomCameraHost = null:
-	set = set_pcam_host_owner,
-	get = get_pcam_host_owner
+#region Public Variable
 
 var tween_duration: float:
 	set = set_tween_duration,
@@ -494,6 +577,9 @@ var tween_ease: PhantomCameraTween.EaseType:
 	set = set_tween_ease,
 	get = get_tween_ease
 
+var keep_aspect: int:
+	set = set_keep_aspect,
+	get = get_keep_aspect
 var cull_mask: int:
 	set = set_cull_mask,
 	get = get_cull_mask
@@ -527,7 +613,7 @@ var viewport_position: Vector2
 #endregion
 
 
-#region Property Validator
+#region Private Functions
 
 func _validate_property(property: Dictionary) -> void:
 	################
@@ -549,7 +635,8 @@ func _validate_property(property: Dictionary) -> void:
 		match property.name:
 			"follow_offset", \
 			"follow_damping", \
-			"follow_damping_value":
+			"follow_damping_value", \
+			"follow_axis_lock":
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	if property.name == "follow_offset":
@@ -617,7 +704,9 @@ func _validate_property(property: Dictionary) -> void:
 			"look_at_target", \
 			"look_at_offset" , \
 			"look_at_damping", \
-			"look_at_damping_value":
+			"look_at_damping_value", \
+			"up", \
+			"up_target":
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 	elif look_at_mode == LookAtMode.GROUP:
 		match property.name:
@@ -637,26 +726,32 @@ func _validate_property(property: Dictionary) -> void:
 	not look_at_damping:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
-	notify_property_list_changed()
+	if property.name == "up" and _has_up_target:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 
-#endregion
-
-#region Private Functions
 
 func _enter_tree() -> void:
-	_phantom_camera_manager = get_tree().root.get_node(_constants.PCAM_MANAGER_NODE_NAME)
+	_phantom_camera_manager = Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME)
+	_tween_skip = !tween_on_load
 
 	_phantom_camera_manager.pcam_added(self)
 
-	if not _phantom_camera_manager.get_phantom_camera_hosts().is_empty():
-		set_pcam_host_owner(_phantom_camera_manager.get_phantom_camera_hosts()[0])
+	priority_override = false
 
 	if not visibility_changed.is_connected(_check_visibility):
 		visibility_changed.connect(_check_visibility)
 
 	_should_follow_checker()
+	_should_look_at_checker()
+
 	if follow_mode == FollowMode.GROUP:
 		_follow_targets_size_check()
+	elif follow_mode == FollowMode.NONE:
+		_is_parents_physics()
+
+	if look_at_mode == LookAtMode.GROUP:
+		_look_at_targets_size_check()
+
 	#if not get_parent() is SpringArm3D:
 		#if look_at_target:
 			#_look_at_target_node = look_at_target
@@ -670,38 +765,50 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	_phantom_camera_manager.pcam_removed(self)
-
-	if _has_valid_pcam_owner():
-		get_pcam_host_owner().pcam_removed_from_scene(self)
-
 	if not follow_mode == FollowMode.GROUP:
 		follow_targets = []
+
+	if not is_instance_valid(_phantom_camera_manager): return
+	_phantom_camera_manager.pcam_removed(self)
 
 
 func _ready():
 	match follow_mode:
 		FollowMode.THIRD_PERSON:
 			_is_third_person_follow = true
+			if _should_follow: _transform_output.origin = _get_target_position_offset_distance()
 			if not Engine.is_editor_hint():
 				if not is_instance_valid(_follow_spring_arm):
 					_follow_spring_arm = SpringArm3D.new()
 					_follow_spring_arm.top_level = true
 					_follow_spring_arm.rotation = global_rotation
-					_follow_spring_arm.position = _get_target_position_offset() if is_instance_valid(follow_target) else global_position
 					_follow_spring_arm.spring_length = spring_length
 					_follow_spring_arm.collision_mask = collision_mask
 					_follow_spring_arm.shape = shape
 					_follow_spring_arm.margin = margin
-					_follow_spring_arm.add_excluded_object(follow_target)
+					if _should_follow: _follow_spring_arm.add_excluded_object(follow_target)
 					get_parent().add_child.call_deferred(_follow_spring_arm)
 					reparent.call_deferred(_follow_spring_arm)
+
+					# Waits for the SpringArm3D to be ready and then apply rotation
+					# Resolves an issue most prominent in Godot 4.4
+					await _follow_spring_arm.ready
+					_camera_target = _follow_spring_arm
+					_follow_spring_arm.global_position = _get_target_position_offset() if is_instance_valid(follow_target) else global_position
+					_follow_spring_arm.global_rotation = global_rotation
+					_has_follow_spring_arm = true
 		FollowMode.FRAMED:
 			if not Engine.is_editor_hint():
-				_follow_framed_offset = global_position - _get_target_position_offset()
+				if is_instance_valid(follow_target):
+					_follow_framed_offset = global_position - _get_target_position_offset()
 				_current_rotation = global_rotation
 		FollowMode.GROUP:
 			_follow_targets_size_check()
+		_:
+			if is_instance_valid(follow_target):
+				_transform_output.origin = _get_target_position_offset()
+			else:
+				_transform_output.origin = global_transform.origin
 
 	if not Engine.is_editor_hint():
 		_preview_noise = true
@@ -743,18 +850,45 @@ func process_logic(delta: float) -> void:
 	else:
 		_transform_output.basis = global_basis
 
+	if _follow_axis_is_locked:
+		match follow_axis_lock:
+			FollowLockAxis.X:
+				_transform_output.origin.x = _follow_axis_lock_value.x
+			FollowLockAxis.Y:
+				_transform_output.origin.y = _follow_axis_lock_value.y
+			FollowLockAxis.Z:
+				_transform_output.origin.z = _follow_axis_lock_value.z
+			FollowLockAxis.XY:
+				_transform_output.origin.x = _follow_axis_lock_value.x
+				_transform_output.origin.y = _follow_axis_lock_value.y
+			FollowLockAxis.XZ:
+				_transform_output.origin.x = _follow_axis_lock_value.x
+				_transform_output.origin.z = _follow_axis_lock_value.z
+			FollowLockAxis.YZ:
+				_transform_output.origin.y = _follow_axis_lock_value.y
+				_transform_output.origin.z = _follow_axis_lock_value.z
+			FollowLockAxis.XYZ:
+				_transform_output.origin.x = _follow_axis_lock_value.x
+				_transform_output.origin.y = _follow_axis_lock_value.y
+				_transform_output.origin.z = _follow_axis_lock_value.z
+
 
 func _follow(delta: float) -> void:
-	var follow_position: Vector3
+	_set_follow_position()
+	_interpolate_position(delta)
 
-	var follow_target_node: Node3D = self # TODO - Think this can be removed
+func _look_at(delta: float) -> void:
+	_set_look_at_position()
+	_interpolate_rotation(delta)
 
+
+func _set_follow_position() -> void:
 	match follow_mode:
 		FollowMode.GLUED:
-			follow_position = follow_target.global_position
+			_follow_target_position = follow_target.global_position
 
 		FollowMode.SIMPLE:
-			follow_position = _get_target_position_offset()
+			_follow_target_position = _get_target_position_offset()
 
 		FollowMode.GROUP:
 			if _has_multiple_follow_targets:
@@ -768,78 +902,76 @@ func _follow(delta: float) -> void:
 				else:
 					distance = follow_distance
 
-				follow_position = \
+				_follow_target_position = \
 					bounds.get_center() + \
 					follow_offset + \
-					get_transform().basis.z * \
+					global_transform.basis.z * \
 					Vector3(distance, distance, distance)
 			else:
-				follow_position = \
+				_follow_target_position = \
 					follow_targets[_follow_targets_single_target_index].global_position + \
 					follow_offset + \
-					get_transform().basis.z * \
-					Vector3(follow_distance, follow_distance, follow_distance)
+					global_transform.basis.z * \
+					Vector3(auto_follow_distance_min, auto_follow_distance_min, auto_follow_distance_min)
 
 		FollowMode.PATH:
 			var path_position: Vector3 = follow_path.global_position
-			follow_position = \
+			_follow_target_position = \
 				follow_path.curve.get_closest_point(
 					follow_target.global_position - path_position
 				) + path_position
 
 		FollowMode.FRAMED:
 			if not Engine.is_editor_hint():
-				if not _is_active || get_pcam_host_owner().get_trigger_pcam_tween():
-					follow_position = _get_position_offset_distance()
-					_interpolate_position(follow_position, delta)
-					return
-
-				viewport_position = get_viewport().get_camera_3d().unproject_position(_get_target_position_offset())
-				var visible_rect_size: Vector2 = get_viewport().get_viewport().size
-				viewport_position = viewport_position / visible_rect_size
-				_current_rotation = global_rotation
-
-				if _current_rotation != global_rotation:
-					follow_position = _get_position_offset_distance()
-
-				if _get_framed_side_offset() != Vector2.ZERO:
-					var target_position: Vector3 = _get_target_position_offset() + _follow_framed_offset
-					var glo_pos: Vector3
-
-					if dead_zone_width == 0 || dead_zone_height == 0:
-						if dead_zone_width == 0 && dead_zone_height != 0:
-							glo_pos = _get_position_offset_distance()
-							glo_pos.z = target_position.z
-							follow_position = glo_pos
-						elif dead_zone_width != 0 && dead_zone_height == 0:
-							glo_pos = _get_position_offset_distance()
-							glo_pos.x = target_position.x
-							follow_position = glo_pos
-						else:
-							follow_position = _get_position_offset_distance()
-					else:
-						if _current_rotation != global_rotation:
-							var opposite: float = sin(-global_rotation.x) * follow_distance + _get_target_position_offset().y
-							glo_pos.y = _get_target_position_offset().y + opposite
-							glo_pos.z = sqrt(pow(follow_distance, 2) - pow(opposite, 2)) + _get_target_position_offset().z
-							glo_pos.x = global_position.x
-
-							follow_position = glo_pos
-							_current_rotation = global_rotation
-						else:
-							dead_zone_reached.emit()
-							follow_position = target_position
+				if not _is_active:
+					_follow_target_position = _get_target_position_offset_distance()
 				else:
-					_follow_framed_offset = global_position - _get_target_position_offset()
+					viewport_position = get_viewport().get_camera_3d().unproject_position(_get_target_position_offset())
+					var visible_rect_size: Vector2 = get_viewport().get_visible_rect().size
+					viewport_position = viewport_position / visible_rect_size
 					_current_rotation = global_rotation
-					return
+
+					if _current_rotation != global_rotation:
+						_follow_target_position = _get_target_position_offset_distance()
+
+					if _get_framed_side_offset() != Vector2.ZERO:
+						var target_position: Vector3 = _get_target_position_offset() + _follow_framed_offset
+						var glo_pos: Vector3
+
+						if dead_zone_width == 0 || dead_zone_height == 0:
+							if dead_zone_width == 0 && dead_zone_height != 0:
+								glo_pos = _get_target_position_offset_distance()
+								glo_pos.z = target_position.z
+								_follow_target_position = glo_pos
+							elif dead_zone_width != 0 && dead_zone_height == 0:
+								glo_pos = _get_target_position_offset_distance()
+								glo_pos.x = target_position.x
+								_follow_target_position = glo_pos
+							else:
+								_follow_target_position = _get_target_position_offset_distance()
+						else:
+							if _current_rotation != global_rotation:
+								var opposite: float = sin(-global_rotation.x) * follow_distance + _get_target_position_offset().y
+								glo_pos.y = _get_target_position_offset().y + opposite
+								glo_pos.z = sqrt(pow(follow_distance, 2) - pow(opposite, 2)) + _get_target_position_offset().z
+								glo_pos.x = global_position.x
+
+								_follow_target_position = glo_pos
+								_current_rotation = global_rotation
+							else:
+								dead_zone_reached.emit()
+								_follow_target_position = target_position
+					else:
+						_follow_framed_offset = global_position - _get_target_position_offset()
+						_current_rotation = global_rotation
+						return
 			else:
-				follow_position = _get_position_offset_distance()
+				_follow_target_position = _get_target_position_offset_distance()
 				var unprojected_position: Vector2 = _get_raw_unprojected_position()
 				var viewport_width: float = get_viewport().size.x
 				var viewport_height: float = get_viewport().size.y
 				var camera_aspect: Camera3D.KeepAspect = get_viewport().get_camera_3d().keep_aspect
-				var visible_rect_size: Vector2 = get_viewport().get_viewport().size
+				var visible_rect_size: Vector2 = get_viewport().get_visible_rect().size
 
 				unprojected_position = unprojected_position - visible_rect_size / 2
 				if camera_aspect == Camera3D.KeepAspect.KEEP_HEIGHT:
@@ -857,59 +989,51 @@ func _follow(delta: float) -> void:
 
 		FollowMode.THIRD_PERSON:
 			if not Engine.is_editor_hint():
-				if is_instance_valid(follow_target) and is_instance_valid(_follow_spring_arm):
-					follow_position = _get_target_position_offset()
-					follow_target_node = _follow_spring_arm
+				if not _has_follow_spring_arm: return
+				_follow_target_position = _get_target_position_offset()
 			else:
-				follow_position = _get_position_offset_distance()
+				_follow_target_position = _get_target_position_offset_distance()
+#				_follow_target_position = _get_target_position_offset_distance_direction()
 
-	_interpolate_position(follow_position, delta, follow_target_node)
 
-
-func _look_at(delta: float) -> void:
+func _set_look_at_position() -> void:
 	match look_at_mode:
 		LookAtMode.MIMIC:
-			global_rotation = look_at_target.global_rotation
+			_look_at_target_position = global_position - look_at_target.global_basis.z
 
 		LookAtMode.SIMPLE:
-			_interpolate_rotation(
-				look_at_target.global_position,
-				delta
-			)
+			_look_at_target_position =look_at_target.global_position
 
 		LookAtMode.GROUP:
 			if not _has_multiple_look_at_targets:
-				_interpolate_rotation(
-					look_at_targets[_look_at_targets_single_target_index].global_position,
-					delta
-				)
+				_look_at_target_position =look_at_targets[_look_at_targets_single_target_index].global_position
 			else:
 				var bounds: AABB = AABB(look_at_targets[0].global_position, Vector3.ZERO)
 				for node in look_at_targets:
 					bounds = bounds.expand(node.global_position)
-				_interpolate_rotation(
-					bounds.get_center(),
-					delta
-				)
+				_look_at_target_position =bounds.get_center()
 
 
 func _get_target_position_offset() -> Vector3:
 	return follow_target.global_position + follow_offset
 
 
-func _get_position_offset_distance() -> Vector3:
+func _get_target_position_offset_distance() -> Vector3:
 	return _get_target_position_offset() + \
 	transform.basis.z * Vector3(follow_distance, follow_distance, follow_distance)
+
+#func _get_target_position_offset_distance_direction() -> Vector3:
+#	return (_get_target_position_offset() + \
+#	follow_target.global_basis.z * Vector3(follow_distance, follow_distance, follow_distance)) * Quaternion.from_euler(rotational_offset)
 
 
 func _set_follow_velocity(index: int, value: float) -> void:
 	_follow_velocity_ref[index] = value
 
-
-func _interpolate_position(target_position: Vector3, delta: float, camera_target: Node3D = self) -> void:
-	if follow_damping:
+func _interpolate_position(delta: float) -> void:
+	if follow_damping and not Engine.is_editor_hint():
 		if not _is_third_person_follow:
-			global_position = target_position
+			global_position = _follow_target_position
 			for i in 3:
 				_transform_output.origin[i] = _smooth_damp(
 					global_position[i],
@@ -922,27 +1046,49 @@ func _interpolate_position(target_position: Vector3, delta: float, camera_target
 				)
 		else:
 			for i in 3:
-				if _is_third_person_follow:
-					camera_target.global_position[i] = _smooth_damp(
-						target_position[i],
-						camera_target.global_position[i],
-						i,
-						_follow_velocity_ref[i],
-						_set_follow_velocity,
-						follow_damping_value[i],
-						delta
-					)
-					_transform_output.origin = global_position
-					_transform_output.basis = global_basis
+				_camera_target.global_position[i] = _smooth_damp(
+					_follow_target_position[i],
+					_camera_target.global_position[i],
+					i,
+					_follow_velocity_ref[i],
+					_set_follow_velocity,
+					follow_damping_value[i],
+					delta
+				)
+			_transform_output.origin = global_position
+			_transform_output.basis = global_basis
 	else:
-		camera_target.global_position = target_position
+		_camera_target.global_position = _follow_target_position
 		_transform_output.origin = global_position
 
 
-func _interpolate_rotation(target_trans: Vector3, delta: float) -> void:
-	var direction: Vector3 = (target_trans - global_position + look_at_offset).normalized()
-	var target_basis: Basis = Basis().looking_at(direction)
-	var target_quat: Quaternion = target_basis.get_rotation_quaternion().normalized()
+
+func _look_at_target_quat(target_position: Vector3, up_direction: Vector3 = Vector3.UP) -> Quaternion:
+	var direction: Vector3 = -(target_position - global_position + look_at_offset).normalized()
+
+	var basis_z: Vector3 = direction.normalized()
+	var basis_x: Vector3 = up_direction.cross(basis_z)
+	var basis_y: Vector3 = basis_z.cross(basis_x.normalized())
+
+	var target_basis: Basis = Basis(basis_x, basis_y, basis_z)
+
+	if target_basis.determinant() == 0:
+		if target_basis.z == Vector3.UP:
+			global_rotation_degrees.x = -90
+		else:
+			global_rotation_degrees.x = 90
+
+		_transform_output.basis = global_basis
+		return quaternion
+
+	return target_basis.get_rotation_quaternion().normalized()
+
+func _interpolate_rotation(delta: float) -> void:
+	if _has_up_target:
+		_up = up_target.get_global_transform().basis.y
+
+	var target_quat: Quaternion = _look_at_target_quat(_look_at_target_position, _up)
+
 	if look_at_damping:
 		var current_quat: Quaternion = quaternion.normalized()
 		var damping_time: float = max(0.0001, look_at_damping_value)
@@ -1004,7 +1150,7 @@ func _get_raw_unprojected_position() -> Vector2:
 
 
 func _on_dead_zone_changed() -> void:
-	global_position = _get_position_offset_distance()
+	global_position = _get_target_position_offset_distance()
 
 
 func _get_framed_side_offset() -> Vector2:
@@ -1028,6 +1174,7 @@ func _get_framed_side_offset() -> Vector2:
 
 	return frame_out_bounds
 
+
 func _set_layer(current_layers: int, layer_number: int, value: bool) -> int:
 	var mask: int = current_layers
 
@@ -1042,15 +1189,9 @@ func _set_layer(current_layers: int, layer_number: int, value: bool) -> int:
 
 	return mask
 
-func _has_valid_pcam_owner() -> bool:
-	if not is_instance_valid(get_pcam_host_owner()): return false
-	if not is_instance_valid(get_pcam_host_owner().camera_3d): return false
-	return true
-
 
 func _check_visibility() -> void:
-	if not is_instance_valid(pcam_host_owner): return
-	pcam_host_owner.refresh_pcam_list_priorty()
+	_phantom_camera_manager.pcam_visibility_changed.emit(self)
 
 
 func _follow_target_tree_exiting(target: Node) -> void:
@@ -1104,6 +1245,21 @@ func _look_at_target_tree_exiting(target: Node) -> void:
 	if look_at_targets.has(target):
 		erase_look_at_targets(target)
 
+func _up_target_tree_exiting() -> void:
+	up_target = null
+
+
+func _should_look_at_checker() -> void:
+	if look_at_mode == LookAtMode.NONE:
+		_should_look_at = false
+		return
+
+	if not look_at_mode == LookAtMode.GROUP:
+		if is_instance_valid(look_at_target):
+			_should_look_at = true
+		else:
+			_should_look_at = false
+
 
 func _look_at_targets_size_check() -> void:
 	var targets_size: int = 0
@@ -1136,22 +1292,42 @@ func _noise_emitted(emitter_noise_output: Transform3D, emitter_layer: int) -> vo
 
 func _check_physics_body(target: Node3D) -> void:
 	if target is PhysicsBody3D:
+		var show_jitter_tips := ProjectSettings.get_setting("phantom_camera/tips/show_jitter_tips")
+		var physics_interpolation_enabled := ProjectSettings.get_setting("physics/common/physics_interpolation")
+
 		## NOTE - Feature Toggle
-		#if Engine.get_version_info().major == 4 and \
-		#Engine.get_version_info().minor < XX:
-		if ProjectSettings.get_setting("phantom_camera/tips/show_jitter_tips"):
-			print_rich("Following or Looking at a [b]PhysicsBody3D[/b] node will likely result in jitter - on lower physics ticks in particular.")
-			print_rich("Will have proper support once 3D Physics Interpolation becomes part of the core Godot engine.")
-			print_rich("Until then, try following the guide on the [url=https://phantom-camera.dev/support/faq#i-m-seeing-jitter-what-can-i-do]documentation site[/url] for better results.")
+		if Engine.get_version_info().major == 4 and \
+		Engine.get_version_info().minor < 4:
+			if show_jitter_tips == null: # Default value is null when referencing custom Project Setting
+				print_rich("Following or Looking at a [b]PhysicsBody3D[/b] node will likely result in jitter - on lower physics ticks in particular.")
+				print_rich("If possible, will recommend upgrading to Godot 4.4, as it has built-in support for 3D Physics Interpolation, which will mitigate this issue.")
+				print_rich("Until then, try following the guide on the [url=https://phantom-camera.dev/support/faq#i-m-seeing-jitter-what-can-i-do]documentation site[/url] for better results.")
+				print_rich("This tip can be disabled from within [code]Project Settings / Phantom Camera / Tips / Show Jitter Tips[/code]")
+			return
+		## NOTE - Only supported in Godot 4.4 or above
+		elif not physics_interpolation_enabled and show_jitter_tips == null: # Default value is null when referencing custom Project Setting
+			printerr("Physics Interpolation is disabled in the Project Settings, recommend enabling it to smooth out physics-based camera movement")
 			print_rich("This tip can be disabled from within [code]Project Settings / Phantom Camera / Tips / Show Jitter Tips[/code]")
-		return
-## TODO - Enable once Godot supports 3D Physics Interpolation
-#elif not ProjectSettings.get_setting("physics/common/physics_interpolation"):
-#printerr("Physics Interpolation is disabled in the Project Settings, recommend enabling it to smooth out physics-based camera movement")
-#_follow_target_physics_based = true
+		_follow_target_physics_based = true
+	else:
+		_is_parents_physics(target)
+	physics_target_changed.emit()
+
+
+func _is_parents_physics(target: Node = self) -> void:
+	var current_node: Node = target
+	while current_node:
+		current_node = current_node.get_parent()
+		if not current_node is PhysicsBody3D: continue
+		_follow_target_physics_based = true
+
+
+func _camera_resource_changed() -> void:
+	camera_3d_resource_changed.emit()
 
 #endregion
 
+#region Public Functions
 
 # TBD
 #func get_unprojected_position() -> Vector2:
@@ -1191,6 +1367,31 @@ func get_noise_transform() -> Transform3D:
 func emit_noise(value: Transform3D) -> void:
 	noise_emitted.emit(value)
 
+
+## Teleports the [param PhantomCamera3D] and [Camera3D] to their designated position,
+## bypassing the damping process.
+func teleport_position() -> void:
+	_follow_velocity_ref = Vector3.ZERO
+	_set_follow_position()
+	_transform_output.origin = _follow_target_position
+	_phantom_camera_manager.pcam_teleport.emit(self)
+
+
+# TODO: Enum link does link to anywhere is being tracked in: https://github.com/godotengine/godot/issues/106828
+## Returns [code]true[/code] if this [param PhantomCamera3D]'s [member follow_mode] is not set to [constant FollowMode.NONE]
+## and has a valid [member follow_target].
+func is_following() -> bool:
+	return _should_follow
+
+# TODO: Enum link does link to anywhere is being tracked in: https://github.com/godotengine/godot/issues/106828
+## Returns [code]true[/code] if this [param PhantomCamera3D]'s [member look_at_mode] is not set to [constant LookAtMode.NONE]
+## and has a valid [member look_at_target].
+func is_looking() -> bool:
+	return _should_look_at
+
+#endregion
+
+
 #region Setter & Getter Functions
 
 ## Assigns the value of the [param has_tweened] property.[br]
@@ -1206,36 +1407,11 @@ func get_tween_skip() -> bool:
 	return _tween_skip
 
 
-## Assigns the [param PhantomCamera3D] to a new [PhantomCameraHost].[br]
-## [b][color=yellow]Important:[/color][/b] This is currently restricted to
-## plugin internals. Proper support will be added in issue #26.
-func set_pcam_host_owner(value: PhantomCameraHost) -> void:
-	pcam_host_owner = value
-	if is_instance_valid(pcam_host_owner):
-		pcam_host_owner.pcam_added_to_scene(self)
-
-	#if value.size() == 1:
-#	else:
-#		for camera_host in camera_host_group:
-#			print("Multiple PhantomCameraBases in scene")
-#			print(pcam_host_group)
-#			print(pcam.get_tree().get_nodes_in_group(PhantomCameraGroupNames.PHANTOM_CAMERA_HOST_GROUP_NAME))
-#			multiple_pcam_host_group.append(camera_host)
-#			return null
-## Sets a PCamHost to
-#func assign_pcam_host(value: PhantomCameraHost) -> void:
-	#pcam_host_owner = value
-## Gets the current [PhantomCameraHost] this [param PhantomCamera3D] is
-## assigned to.
-func get_pcam_host_owner() -> PhantomCameraHost:
-	return pcam_host_owner
-
-
 ## Assigns new [member priority] value.
 func set_priority(value: int) -> void:
 	priority = abs(value) # TODO - Make any minus values be 0
-	if _has_valid_pcam_owner():
-		get_pcam_host_owner().pcam_priority_updated(self)
+	if not Engine.has_singleton(_constants.PCAM_MANAGER_NODE_NAME): return
+	Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME).pcam_priority_changed.emit(self)
 ## Gets current [param Priority] value.
 func get_priority() -> int:
 	return priority
@@ -1280,6 +1456,8 @@ func get_tween_ease() -> int:
 func set_is_active(node: Node, value: bool) -> void:
 	if node is PhantomCameraHost:
 		_is_active = value
+		if value:
+			_should_follow_checker()
 	else:
 		printerr("PCams can only be set from the PhantomCameraHost")
 ## Gets current active state of the [param PhantomCamera3D].
@@ -1295,6 +1473,21 @@ func set_tween_on_load(value: bool) -> void:
 ## Gets the current [member tween_on_load] value.
 func get_tween_on_load() -> bool:
 	return tween_on_load
+
+
+## Sets the [member host_layers] value.
+func set_host_layers(value: int) -> void:
+	host_layers = value
+	if is_instance_valid(_phantom_camera_manager):
+		_phantom_camera_manager.pcam_host_layer_changed.emit(self)
+
+## Enables or disables a given layer of [member host_layers].
+func set_host_layers_value(layer: int, value: bool) -> void:
+	host_layers = _set_layer(host_layers, layer, value)
+
+## Gets the current [member host_layers].
+func get_host_layers() -> int:
+	return host_layers
 
 
 ## Gets the current follow mode as an enum int based on [member FollowMode] enum.[br]
@@ -1319,6 +1512,8 @@ func set_follow_target(value: Node3D) -> void:
 		else:
 			_should_follow = true
 		_check_physics_body(value)
+		if follow_mode == FollowMode.THIRD_PERSON and is_instance_valid(_follow_spring_arm):
+			_follow_spring_arm.add_excluded_object(follow_target)
 		if not follow_target.tree_exiting.is_connected(_follow_target_tree_exiting):
 			follow_target.tree_exiting.connect(_follow_target_tree_exiting.bind(follow_target))
 	else:
@@ -1394,7 +1589,31 @@ func get_follow_targets() -> Array[Node3D]:
 
 ## Assigns a new [param Vector3] for the [param follow_offset] property.
 func set_follow_offset(value: Vector3) -> void:
+	var temp_offset: Vector3 = follow_offset
 	follow_offset = value
+
+	if follow_axis_lock != FollowLockAxis.NONE:
+		temp_offset = temp_offset - value
+		match value:
+			FollowLockAxis.X:
+				_follow_axis_lock_value.x = _transform_output.origin.x + temp_offset.x
+			FollowLockAxis.Y:
+				_follow_axis_lock_value.y = _transform_output.origin.y + temp_offset.y
+			FollowLockAxis.Z:
+				_follow_axis_lock_value.z = _transform_output.origin.z + temp_offset.z
+			FollowLockAxis.XY:
+				_follow_axis_lock_value.x = _transform_output.origin.x + temp_offset.x
+				_follow_axis_lock_value.y = _transform_output.origin.y + temp_offset.y
+			FollowLockAxis.XZ:
+				_follow_axis_lock_value.x = _transform_output.origin.x + temp_offset.x
+				_follow_axis_lock_value.z = _transform_output.origin.z + temp_offset.z
+			FollowLockAxis.YZ:
+				_follow_axis_lock_value.y = _transform_output.origin.y + temp_offset.y
+				_follow_axis_lock_value.z = _transform_output.origin.z + temp_offset.z
+			FollowLockAxis.XYZ:
+				_follow_axis_lock_value.x = _transform_output.origin.x + temp_offset.x
+				_follow_axis_lock_value.y = _transform_output.origin.y + temp_offset.y
+				_follow_axis_lock_value.z = _transform_output.origin.z + temp_offset.z
 
 ## Gets the current [param Vector3] for the [param follow_offset] property.
 func get_follow_offset() -> Vector3:
@@ -1472,41 +1691,59 @@ func get_auto_follow_distance_divisor() -> float:
 ## Assigns new rotation (in radians) value to [SpringArm3D] for
 ## [param ThirdPerson] [enum FollowMode].
 func set_third_person_rotation(value: Vector3) -> void:
+	if not _is_third_person_follow:
+		printerr("Follow Mode is not set to Third Person")
+		return
 	_follow_spring_arm.rotation = value
 
 ## Gets the rotation value (in radians) from the [SpringArm3D] for
 ## [param ThirdPerson] [enum FollowMode].
 func get_third_person_rotation() -> Vector3:
+	if not _is_third_person_follow:
+		printerr("Follow Mode is not set to Third Person")
+		return Vector3.ZERO
 	return _follow_spring_arm.rotation
 
 
 ## Assigns new rotation (in degrees) value to [SpringArm3D] for
 ## [param ThirdPerson] [enum FollowMode].
 func set_third_person_rotation_degrees(value: Vector3) -> void:
+	if not _is_third_person_follow:
+		printerr("Follow Mode is not set to Third Person")
+		return
 	_follow_spring_arm.rotation_degrees = value
 
 ## Gets the rotation value (in degrees) from the [SpringArm3D] for
 ## [param ThirdPerson] [enum FollowMode].
 func get_third_person_rotation_degrees() -> Vector3:
+	if not _is_third_person_follow:
+		printerr("Follow Mode is not set to Third Person")
+		return Vector3.ZERO
 	return _follow_spring_arm.rotation_degrees
 
 
 ## Assigns new [Quaternion] value to [SpringArm3D] for [param ThirdPerson]
 ## [enum FollowMode].
 func set_third_person_quaternion(value: Quaternion) -> void:
+	if not _is_third_person_follow:
+		printerr("Follow Mode is not set to Third Person")
+		return
 	_follow_spring_arm.quaternion = value
 
 ## Gets the [Quaternion] value of the [SpringArm3D] for [param ThirdPerson]
 ## [enum Follow mode].
 func get_third_person_quaternion() -> Quaternion:
+	if not _is_third_person_follow:
+		printerr("Follow Mode is not set to Third Person")
+		return Quaternion.IDENTITY
 	return _follow_spring_arm.quaternion
 
 
 ## Assigns a new ThirdPerson [member SpringArm3D.length] value.
 func set_spring_length(value: float) -> void:
 	follow_distance = value
-	if is_instance_valid(_follow_spring_arm):
-		_follow_spring_arm.spring_length = value
+	if not is_instance_valid(_follow_spring_arm): return
+	_follow_spring_arm.spring_length = value
 
 ## Gets the [member SpringArm3D.length]
 ## from a [param ThirdPerson] [enum follow_mode] instance.
@@ -1518,15 +1755,15 @@ func get_spring_length() -> float:
 ## is set to [param ThirdPerson].
 func set_collision_mask(value: int) -> void:
 	collision_mask = value
-	if is_instance_valid(_follow_spring_arm):
-		_follow_spring_arm.collision_mask = collision_mask
+	if not is_instance_valid(_follow_spring_arm): return
+	_follow_spring_arm.collision_mask = collision_mask
 
 ## Enables or disables a specific [member collision_mask] layer for the
 ## [SpringArm3D] when [enum FollowMode] is set to [param ThirdPerson].
 func set_collision_mask_value(value: int, enabled: bool) -> void:
 	collision_mask = _set_layer(collision_mask, value, enabled)
-	if is_instance_valid(_follow_spring_arm):
-		_follow_spring_arm.collision_mask = collision_mask
+	if not is_instance_valid(_follow_spring_arm): return
+	_follow_spring_arm.collision_mask = collision_mask
 
 ## Gets [member collision_mask] from the [SpringArm3D] when [enum FollowMode]
 ## is set to [param ThirdPerson].
@@ -1538,8 +1775,8 @@ func get_collision_mask() -> int:
 ## is set to [param ThirdPerson].
 func set_shape(value: Shape3D) -> void:
 	shape = value
-	if is_instance_valid(_follow_spring_arm):
-		_follow_spring_arm.shape = shape
+	if not is_instance_valid(_follow_spring_arm): return
+	_follow_spring_arm.shape = shape
 
 ## Gets [param ThirdPerson] [member SpringArm3D.shape] value.
 func get_shape() -> Shape3D:
@@ -1550,8 +1787,8 @@ func get_shape() -> Shape3D:
 ## is set to [param ThirdPerson].
 func set_margin(value: float) -> void:
 	margin = value
-	if is_instance_valid(_follow_spring_arm):
-		_follow_spring_arm.margin = margin
+	if not is_instance_valid(_follow_spring_arm): return
+	_follow_spring_arm.margin = margin
 
 ## Gets the [SpringArm3D.margin] when [enum FollowMode] is set to
 ## [param ThirdPerson].
@@ -1571,14 +1808,17 @@ func set_look_at_target(value: Node3D) -> void:
 	if look_at_mode == LookAtMode.NONE: return
 	if look_at_target == value: return
 	look_at_target = value
-	if is_instance_valid(look_at_target):
-		_should_look_at = true
-		_check_physics_body(value)
-		if not look_at_target.tree_exiting.is_connected(_look_at_target_tree_exiting):
-			look_at_target.tree_exiting.connect(_look_at_target_tree_exiting.bind(look_at_target))
-	else:
-		if not look_at_mode == LookAtMode.GROUP:
+	if not look_at_mode == LookAtMode.GROUP:
+		if is_instance_valid(look_at_target):
+			_should_look_at = true
+			_check_physics_body(value)
+			if not look_at_target.tree_exiting.is_connected(_look_at_target_tree_exiting):
+				look_at_target.tree_exiting.connect(_look_at_target_tree_exiting.bind(look_at_target))
+		else:
 			_should_look_at = false
+	elif look_at_targets.size() == 0:
+		_should_look_at = false
+
 	look_at_target_changed.emit()
 	notify_property_list_changed()
 
@@ -1619,6 +1859,7 @@ func append_look_at_targets_array(value: Array[Node3D]) -> void:
 		else:
 			printerr(val, " is already part of Look At Group")
 
+## Removes [Node3D] from [member look_at_targets] array.
 func erase_look_at_targets(value: Node3D) -> void:
 	if look_at_targets.has(value):
 		look_at_targets.erase(value)
@@ -1665,8 +1906,77 @@ func set_look_at_damping_value(value: float) -> void:
 func get_look_at_damping_value() -> float:
 	return look_at_damping_value
 
+## Assigns the Follow Axis.
+func set_follow_axis_lock(value: FollowLockAxis) -> void:
+	follow_axis_lock = value
 
-## Sets a [PhantomCameraNoise3D] resource
+	# Wait for the node to be ready before setting lock
+	if not is_node_ready(): await ready
+
+	# Prevent axis lock from working in the editor
+	if value != FollowLockAxis.NONE and not Engine.is_editor_hint():
+		_follow_axis_is_locked = true
+		match value:
+			FollowLockAxis.X:
+				_follow_axis_lock_value.x = _transform_output.origin.x
+			FollowLockAxis.Y:
+				_follow_axis_lock_value.y = _transform_output.origin.y
+			FollowLockAxis.Z:
+				_follow_axis_lock_value.z = _transform_output.origin.z
+			FollowLockAxis.XY:
+				_follow_axis_lock_value.x = _transform_output.origin.x
+				_follow_axis_lock_value.y = _transform_output.origin.y
+			FollowLockAxis.XZ:
+				_follow_axis_lock_value.x = _transform_output.origin.x
+				_follow_axis_lock_value.z = _transform_output.origin.z
+			FollowLockAxis.YZ:
+				_follow_axis_lock_value.y = _transform_output.origin.y
+				_follow_axis_lock_value.z = _transform_output.origin.z
+			FollowLockAxis.XYZ:
+				_follow_axis_lock_value.x = _transform_output.origin.x
+				_follow_axis_lock_value.y = _transform_output.origin.y
+				_follow_axis_lock_value.z = _transform_output.origin.z
+	else:
+		_follow_axis_is_locked = false
+
+## Gets the current [member follow_axis_lock] property. Value is based on [enum FollowLockAxis] enum.
+func get_follow_axis_lock() -> FollowLockAxis:
+	return follow_axis_lock
+
+
+## Sets the [member up] value.
+func set_up(value: Vector3) -> void:
+	if value == Vector3.ZERO:
+		value = Vector3.UP
+		push_warning("Up value cannot be (0, 0, 0), resetting to (0, 1, 0).")
+
+	up = value
+	if not _has_up_target:
+		_up = value
+
+## Gets the [member up] value.
+func get_up() -> Vector3:
+	return up
+
+
+## Sets the [member up_target].
+func set_up_target(value: Node3D) -> void:
+	up_target = value
+	if is_instance_valid(value):
+		_has_up_target = true
+		if not value.tree_exiting.is_connected(_up_target_tree_exiting):
+			value.tree_exiting.connect(_up_target_tree_exiting)
+	else:
+		_has_up_target = false
+		_up = up
+	notify_property_list_changed()
+
+## Gets the [member up_target].
+func get_up_target() -> Node3D:
+	return up_target
+
+
+## Sets a [PhantomCameraNoise3D] resource.
 func set_noise(value: PhantomCameraNoise3D) -> void:
 	noise = value
 	if value != null:
@@ -1679,16 +1989,19 @@ func set_noise(value: PhantomCameraNoise3D) -> void:
 func get_noise() -> PhantomCameraNoise3D:
 	return noise
 
+func has_noise_resource() -> bool:
+	return _has_noise_resource
+
 
 ## Sets the [member noise_emitter_layer] value.
 func set_noise_emitter_layer(value: int) -> void:
 	noise_emitter_layer = value
 
-## Enables or disables a given layer of the [member noise_emitter_layer] value.
+## Enables or disables a given layer of [member noise_emitter_layer].
 func set_noise_emitter_layer_value(value: int, enabled: bool) -> void:
 	noise_emitter_layer = _set_layer(noise_emitter_layer, value, enabled)
 
-## Returns the [member noise_emitter_layer]
+## Returns the [member noise_emitter_layer].
 func get_noise_emitter_layer() -> int:
 	return noise_emitter_layer
 
@@ -1705,35 +2018,59 @@ func get_inactive_update_mode() -> int:
 ## Assigns a [Camera3DResource].
 func set_camera_3d_resource(value: Camera3DResource) -> void:
 	camera_3d_resource = value
+	camera_3d_resource_changed.emit()
+	if value:
+		if not camera_3d_resource.changed.is_connected(_camera_resource_changed):
+			camera_3d_resource.changed.connect(_camera_resource_changed)
 
-## Gets the [Camera3DResource]
+## Gets the [Camera3DResource].
 func get_camera_3d_resource() -> Camera3DResource:
 	return camera_3d_resource
+
+
+func set_keep_aspect(value: int) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a keep_aspect value. No Camera3DResource assigned to ", name)
+		return
+	keep_aspect = value
+	camera_3d_resource_property_changed.emit("keep_aspect", value)
+
+func get_keep_aspect() -> Variant:
+	if not camera_3d_resource: return null
+	return camera_3d_resource.keep_aspect
 
 
 ## Assigns a new [member Camera3D.cull_mask] value.[br]
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_cull_mask(value: int) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a cull_mask value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.cull_mask = value
-	if _is_active: get_pcam_host_owner().camera_3d.cull_mask = value
+	camera_3d_resource_property_changed.emit("cull_mask", value)
 
 ## Enables or disables a specific [member Camera3D.cull_mask] layer.[br]
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_cull_mask_value(layer_number: int, value: bool) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a cull_mask value. No Camera3DResource assigned to ", name)
+		return
 	var mask: int = _set_layer(get_cull_mask(), layer_number, value)
 	camera_3d_resource.cull_mask = mask
-	if _is_active: get_pcam_host_owner().camera_3d.cull_mask = mask
+	camera_3d_resource_property_changed.emit("cull_mask", mask)
 
 ## Gets the [member Camera3D.cull_mask] value assigned to the [Camera3DResource].
-func get_cull_mask() -> int:
+func get_cull_mask() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.cull_mask
 
 
 ## Assigns a new [Environment] resource to the [Camera3DResource].
-func set_environment(value: Environment):
+func set_environment(value: Environment) -> void:
 	environment = value
+	camera_3d_resource_property_changed.emit("environment", value)
 
 ## Gets the [Camera3D.environment] value assigned to the [Camera3DResource].
 func get_environment() -> Environment:
@@ -1741,8 +2078,9 @@ func get_environment() -> Environment:
 
 
 ## Assigns a new [CameraAttributes] resource to the [Camera3DResource].
-func set_attributes(value: CameraAttributes):
+func set_attributes(value: CameraAttributes) -> void:
 	attributes = value
+	camera_3d_resource_property_changed.emit("attributes", value)
 
 ## Gets the [Camera3D.attributes] value assigned to the [Camera3DResource].
 func get_attributes() -> CameraAttributes:
@@ -1753,11 +2091,15 @@ func get_attributes() -> CameraAttributes:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_h_offset(value: float) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a h_offset value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.h_offset = value
-	if _is_active: get_pcam_host_owner().camera_3d.h_offset = value
+	camera_3d_resource_property_changed.emit("h_offset", value)
 
 ## Gets the [member Camera3D.h_offset] value assigned to the [param Camera3DResource].
-func get_h_offset() -> float:
+func get_h_offset() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.h_offset
 
 
@@ -1765,11 +2107,15 @@ func get_h_offset() -> float:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_v_offset(value: float) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a v_offset value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.v_offset = value
-	if _is_active: get_pcam_host_owner().camera_3d.v_offset = value
+	camera_3d_resource_property_changed.emit("v_offset", value)
 
 ## Gets the [member Camera3D.v_offset] value assigned to the [param Camera3DResource].
-func get_v_offset() -> float:
+func get_v_offset() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.v_offset
 
 
@@ -1777,11 +2123,15 @@ func get_v_offset() -> float:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_projection(value: int) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a projection value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.projection = value
-	if _is_active: get_pcam_host_owner().camera_3d.projection = value
+	camera_3d_resource_property_changed.emit("projection", value)
 
 ## Gets the [member Camera3D.projection] value assigned to the [param Camera3DResource].
-func get_projection() -> int:
+func get_projection() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.projection
 
 
@@ -1789,11 +2139,15 @@ func get_projection() -> int:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_fov(value: float) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a fov value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.fov = value
-	if _is_active: get_pcam_host_owner().camera_3d.fov = value
+	camera_3d_resource_property_changed.emit("fov", value)
 
 ## Gets the [member Camera3D.fov] value assigned to the [param Camera3DResource].
-func get_fov() -> float:
+func get_fov() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.fov
 
 
@@ -1801,11 +2155,15 @@ func get_fov() -> float:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_size(value: float) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a size value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.size = value
-	if _is_active: get_pcam_host_owner().camera_3d.size = value
+	camera_3d_resource_property_changed.emit("size", value)
 
 ## Gets the [member Camera3D.size] value assigned to the [param Camera3DResource].
-func get_size() -> float:
+func get_size() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.size
 
 
@@ -1813,11 +2171,15 @@ func get_size() -> float:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_frustum_offset(value: Vector2) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a frustum_offset value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.frustum_offset = value
-	if _is_active: get_pcam_host_owner().camera_3d.frustum_offset = value
+	camera_3d_resource_property_changed.emit("frustum_offset", value)
 
 ## Gets the [member Camera3D.frustum_offset] value assigned to the [param Camera3DResource].
-func get_frustum_offset() -> Vector2:
+func get_frustum_offset() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.frustum_offset
 
 
@@ -1825,11 +2187,15 @@ func get_frustum_offset() -> Vector2:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_near(value: float) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a near value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.near = value
-	if _is_active: get_pcam_host_owner().camera_3d.near = value
+	camera_3d_resource_property_changed.emit("near", value)
 
 ## Gets the [member Camera3D.near] value assigned to the [param Camera3DResource].
-func get_near() -> float:
+func get_near() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.near
 
 
@@ -1837,19 +2203,17 @@ func get_near() -> float:
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
 ## this [param PhantomCamera3D].
 func set_far(value: float) -> void:
+	if not camera_3d_resource:
+		printerr("Can't assign a far value. No Camera3DResource assigned to ", name)
+		return
 	camera_3d_resource.far = value
-	if _is_active: get_pcam_host_owner().camera_3d.far = value
+	camera_3d_resource_property_changed.emit("far", value)
 
 ## Gets the [member Camera3D.far] value assigned to the [param Camera3DResource].
-func get_far() -> float:
+func get_far() -> Variant:
+	if not camera_3d_resource: return null
 	return camera_3d_resource.far
 
-
-func set_follow_target_physics_based(value: bool, caller: Node) -> void:
-	if is_instance_of(caller, PhantomCameraHost):
-		_follow_target_physics_based = value
-	else:
-		printerr("set_follow_target_physics_based is for internal use only.")
 
 func get_follow_target_physics_based() -> bool:
 	return _follow_target_physics_based

@@ -38,13 +38,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _player_pcam.get_follow_mode() == _player_pcam.FollowMode.THIRD_PERSON:
 		var active_pcam: PhantomCamera3D
 
-		if is_instance_valid(_aim_pcam):
-			_set_pcam_rotation(_player_pcam, event)
-			_set_pcam_rotation(_aim_pcam, event)
-			if _player_pcam.get_priority() > _aim_pcam.get_priority():
-				_toggle_aim_pcam(event)
-			else:
-				_toggle_aim_pcam(event)
+		_set_pcam_rotation(_player_pcam, event)
+		_set_pcam_rotation(_aim_pcam, event)
+		if _player_pcam.get_priority() > _aim_pcam.get_priority():
+			_toggle_aim_pcam(event)
+		else:
+			_toggle_aim_pcam(event)
 
 		if event is InputEventKey and event.pressed:
 			if event.keycode == KEY_SPACE:
