@@ -1,7 +1,7 @@
 @tool
 ## Resource that defines the cell appearance.
 ##
-## MapTheme is assigned in MetSys Settings and defines the cell appearance when using [method MetroidvaniaSystem.draw_cell]. It has a few subtypes: shape can be either square or rectangular and borders can be either shared or not. Some properties are only available for certain theme subtypes. Check the Map Theme section in README for some more detailed information.
+## MapTheme is assigned in MetSys Settings and defines the cell appearance when using [MapView]. It has a few subtypes: shape can be either square or rectangular and borders can be either shared or not. Some properties are only available for certain theme subtypes. Check the Map Theme section in README for some more detailed information.
 extends Resource
 class_name MapTheme
 
@@ -112,22 +112,23 @@ enum SeparatorMode {
 var rectangle: bool
 
 func _validate_property(property: Dictionary) -> void:
+	var pname: String = property["name"]
 	if rectangle:
-		if property.name in SQUARE_BORDERS:
-			property.usage = 0
+		if pname in SQUARE_BORDERS:
+			property["usage"] = 0
 			return
 	else:
-		if property.name in RECTANGLE_BORDERS:
-			property.usage = 0
+		if pname in RECTANGLE_BORDERS:
+			property["usage"] = 0
 			return
 	
 	if use_shared_borders:
-		if property.name in DEFAULT_CORNERS:
-			property.usage = 0
+		if pname in DEFAULT_CORNERS:
+			property["usage"] = 0
 			return
 	else:
-		if property.name in SHARED_CORNERS:
-			property.usage = 0
+		if pname in SHARED_CORNERS:
+			property["usage"] = 0
 			return
 
 func is_unicorner() -> bool:
@@ -136,13 +137,19 @@ func is_unicorner() -> bool:
 	else:
 		return inner_corner == outer_corner
 
+func is_nocorner():
+	if use_shared_borders:
+		return l_corner == null and is_unicorner()
+	else:
+		return inner_corner == null and outer_corner == null
+
 func check_for_changes(prev_state: Array) -> Array[String]:
 	var new_state: Array
 	var changed: Array[String]
 	
 	var properties := get_property_list()
 	for property in properties:
-		new_state.append(get(property.name))
+		new_state.append(get(property["name"]))
 		if changed:
 			continue
 		
@@ -151,7 +158,7 @@ func check_for_changes(prev_state: Array) -> Array[String]:
 			continue
 		
 		if new_state[idx] != prev_state[idx]:
-			changed.append(property.name)
+			changed.append(property["name"])
 	
 	if not changed.is_empty() or prev_state.size() != new_state.size():
 		prev_state.assign(new_state)

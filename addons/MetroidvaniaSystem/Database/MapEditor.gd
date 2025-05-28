@@ -1,13 +1,15 @@
 @tool
 extends "res://addons/MetroidvaniaSystem/Scripts/EditorMapView.gd"
 
-@onready var ghost_map: Control = %GhostMap
 @onready var grid: Control = %Grid
+var viewer_layers: Dictionary
 
 @export var mode_group: ButtonGroup
 
 var mode: int
 var preview_layer := -1
+
+var preview_layers: Dictionary[int, MapView]
 
 var undo_redo: UndoRedo
 var saved_version := 1
@@ -22,11 +24,17 @@ func _ready() -> void:
 	plugin.saved.connect(mark_saved)
 	await super()
 	
+	viewer_layers = %"Map Viewer".layers
+	
 	mode_group.pressed.connect(mode_pressed)
 	get_current_sub_editor()._editor_enter()
 	MetSys.settings.theme_changed.connect(grid.queue_redraw)
 	map_overlay.mouse_entered.connect(map_overlay.grab_focus)
 	map_overlay.set_drag_forwarding(Callable(), _on_overlay_can_drop_data, _on_overlay_drop_data)
+
+func refresh():
+	preview_layers.clear()
+	super()
 
 func mode_pressed(button: BaseButton):
 	get_current_sub_editor()._editor_exit()
@@ -36,12 +44,36 @@ func mode_pressed(button: BaseButton):
 	map_overlay.queue_redraw()
 
 func on_layer_changed(l: int):
+	if preview_layer > -1 and current_layer == preview_layer:
+		preview_layer_changed(preview_layer)
+	
 	super(l)
-	ghost_map.queue_redraw()
+	
+	if preview_layer > -1 and current_layer != preview_layer:
+		preview_layer_changed(preview_layer)
+	
+	map_overlay.queue_redraw()
 
 func preview_layer_changed(value: float) -> void:
+	if preview_layer > -1:
+		var prev_preview_layer: MapView = preview_layers.get(preview_layer)
+		if prev_preview_layer:
+			prev_preview_layer.visible = false
+	
 	preview_layer = value
-	ghost_map.queue_redraw()
+	if preview_layer == -1 or preview_layer == current_layer:
+		return
+	
+	var new_preview_layer: MapView = preview_layers.get(preview_layer)
+	if not new_preview_layer:
+		var map_extents := MetSys.settings.map_extents
+		new_preview_layer = MetSys.make_map_view(map, Vector2i(-map_extents, -map_extents), Vector2i(map_extents * 2, map_extents * 2), preview_layer)
+		new_preview_layer.skip_empty = true
+		RenderingServer.canvas_item_set_modulate(new_preview_layer._canvas_item, Color(1, 1, 1, 0.5))
+		new_preview_layer.queue_updates = true
+		preview_layers[preview_layer] = new_preview_layer
+	
+	new_preview_layer.visible = true
 
 func get_current_sub_editor() -> Control:
 	return mode_group.get_buttons()[mode]
@@ -63,14 +95,10 @@ func _on_overlay_input(event: InputEvent) -> void:
 					print("MetSys undo")
 				accept_event()
 
-func _on_drag():
-	ghost_map.queue_redraw()
-
 func _on_overlay_draw() -> void:
 	if not plugin:
 		return
 	
-	super()
 	map_overlay.draw_set_transform(Vector2(map_offset) * MetSys.CELL_SIZE)
 	
 	var sub := get_current_sub_editor()
@@ -80,33 +108,20 @@ func _on_overlay_draw() -> void:
 	if sub.top_draw.is_valid():
 		sub.top_draw.call(map_overlay)
 
-func _on_ghost_map_draw() -> void:
-	if not plugin:
-		return
-	
-	if preview_layer == -1 or preview_layer == current_layer:
-		return
-	
-	for x in range(-100, 100):
-		for y in range(-100, 100):
-			MetSys.draw_cell(ghost_map, Vector2i(x, y) + map_offset, Vector3i(x, y, preview_layer), true, false)
-
 func _on_grid_draw() -> void:
 	if not plugin:
 		return
 	
-	var empty_texture: Texture2D = MetSys.settings.theme.empty_space_texture
+	if MetSys.settings.theme.empty_space_texture:
+		return
+	
 	for x in ceili(grid.size.x / MetSys.CELL_SIZE.x):
 		for y in ceili(grid.size.y / MetSys.CELL_SIZE.y):
-			if empty_texture:
-				grid.draw_texture(empty_texture, Vector2(x, y) * MetSys.CELL_SIZE)
-			else:
-				grid.draw_rect(Rect2(Vector2(x, y) * MetSys.CELL_SIZE, MetSys.CELL_SIZE), Color(Color.WHITE, 0.1), false)
+			grid.draw_rect(Rect2(Vector2(x, y) * MetSys.CELL_SIZE, MetSys.CELL_SIZE), Color(Color.WHITE, 0.1), false)
 
 func on_zoom_changed(new_zoom: float):
 	super(new_zoom)
 	var new_zoom_vector := Vector2.ONE * new_zoom
-	ghost_map.scale = new_zoom_vector
 	grid.scale = new_zoom_vector
 
 func update_name():
@@ -121,6 +136,24 @@ func is_unsaved() -> bool:
 func mark_saved():
 	saved_version = undo_redo.get_version()
 	update_name()
+
+func update_cell(coords: Vector3i):
+	current_map_view.update_cell(coords)
+	var other: MapView = preview_layers.get(current_layer)
+	if other:
+		other.update_cell(coords)
+	other = viewer_layers.get(current_layer)
+	if other:
+		other.update_cell(coords)
+
+func update_rect(rect: Rect2i):
+	current_map_view.update_rect(rect)
+	var other: MapView = preview_layers.get(current_layer)
+	if other:
+		other.update_rect(rect)
+	other = viewer_layers.get(current_layer)
+	if other:
+		other.update_rect(rect)
 
 func _on_overlay_can_drop_data(at_pos: Vector2, data) -> bool:
 	return get_current_sub_editor().can_drop_data(at_pos, data)

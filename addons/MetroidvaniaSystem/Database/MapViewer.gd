@@ -1,11 +1,24 @@
 @tool
 extends "res://addons/MetroidvaniaSystem/Scripts/EditorMapView.gd"
 
+class FoundElement:
+	var element: String
+	var icon: Texture2D
+	var map: String
+	var coords := Vector3i.MAX
+	var position := Vector2.INF
+	
+	func make_result() -> FoundElement:
+		var dup := FoundElement.new()
+		dup.element = element
+		dup.icon = icon
+		return dup
+
 enum {MODE_LAYOUT = 1, MODE_ROOM_SYMBOL, MODE_ROOM_COLOR, MODE_ROOM_GROUP, MODE_BORDER_TYPE, MODE_BORDER_COLOR, MODE_MAP}
 
 @export var mode_group: ButtonGroup
 
-var theme_cache: Dictionary
+var theme_cache: Dictionary[StringName, Variant]
 
 var room_under_cursor: MetroidvaniaSystem.MapData.CellData
 var current_hovered_item: Control
@@ -27,6 +40,14 @@ func _notification(what: int) -> void:
 		theme_cache.cursor_color = get_theme_color(&"cursor_color", &"MetSys")
 		theme_cache.room_not_assigned = get_theme_color(&"room_not_assigned", &"MetSys")
 		theme_cache.room_assigned = get_theme_color(&"room_assigned", &"MetSys")
+
+func on_layer_changed(l: int):
+	super(l)
+	map_overlay.queue_redraw()
+
+func setup_new_layer(layer: MapView):
+	layer._force_mapped = %MappedCheckbox.button_pressed
+	layer._update_all_with_mapped.call_deferred()
 
 func _on_item_hover(item: Control):
 	item.mouse_exited.connect(_on_item_unhover.bind(item))
@@ -59,13 +80,16 @@ func _on_overlay_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and room_under_cursor and not room_under_cursor.assigned_scene.is_empty():
-				EditorInterface.open_scene_from_path(MetSys.settings.map_root_folder.path_join(MetSys.map_data.get_uid_room(room_under_cursor.assigned_scene)))
+				var scene := room_under_cursor.assigned_scene
+				if not scene.begins_with("uid://") and not scene.begins_with("res://"):
+					scene = MetSys.settings.map_root_folder.path_join(scene)
+				
+				EditorInterface.open_scene_from_path(scene)
 
 func _on_overlay_draw() -> void:
 	if not plugin:
 		return
 	
-	super()
 	var mouse := get_cursor_pos()
 	
 	if cursor_inside:
@@ -74,16 +98,16 @@ func _on_overlay_draw() -> void:
 	if get_tree().edited_scene_root and get_tree().edited_scene_root.scene_file_path.begins_with(MetSys.settings.map_root_folder):
 		var current_scene := get_tree().edited_scene_root.scene_file_path
 		
-		for coords in MetSys.map_data.get_cells_assigned_to_path(current_scene):
+		for coords in MetSys.map_data.get_cells_assigned_to(current_scene):
 			if coords.z != current_layer:
 				break
 			
 			map_overlay.draw_rect(Rect2(Vector2(coords.x + map_offset.x, coords.y + map_offset.y) * MetSys.CELL_SIZE, MetSys.CELL_SIZE), theme_cache.current_scene_room)
 	
 	if current_hovered_item:
-		var data: Dictionary = current_hovered_item.get_meta(&"data")
-		if "coords" in data:
-			var coords: Vector3i = data.coords
+		var data: FoundElement = current_hovered_item.get_meta(&"data")
+		if data.coords != Vector3i.MAX:
+			var coords := data.coords
 			map_overlay.draw_rect(Rect2(Vector2(coords.x + map_offset.x, coords.y + map_offset.y) * MetSys.CELL_SIZE, MetSys.CELL_SIZE), theme_cache.marked_collectible_room if coords.z == current_layer else theme_cache.foreign_marked_collectible_room)
 		else:
 			for coords in MetSys.map_data.get_cells_assigned_to(data.map):
@@ -97,6 +121,6 @@ func _on_overlay_draw() -> void:
 		extra_draw.call(map_overlay)
 
 func toggle_mapped(toggled_on: bool) -> void:
-	for map_view: MetroidvaniaSystem.MapView in layers.values():
+	for map_view: MapView in layers.values():
 		map_view._force_mapped = toggled_on
 		map_view._update_all_with_mapped()

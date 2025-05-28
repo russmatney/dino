@@ -11,20 +11,15 @@ const MetSysSettings = preload("res://addons/MetroidvaniaSystem/Scripts/Settings
 const MetSysSaveData = preload("res://addons/MetroidvaniaSystem/Scripts/SaveData.gd")
 const MapData = preload("res://addons/MetroidvaniaSystem/Scripts/MapData.gd")
 const CellView = preload("res://addons/MetroidvaniaSystem/Scripts/CellView.gd")
-const MapView = preload("res://addons/MetroidvaniaSystem/Scripts/MapView.gd")
 const MapBuilder = preload("res://addons/MetroidvaniaSystem/Scripts/MapBuilder.gd")
 const RoomInstance = preload("res://addons/MetroidvaniaSystem/Scripts/RoomInstance.gd")
 const CustomElementManager = preload("res://addons/MetroidvaniaSystem/Scripts/CustomElementManager.gd")
-
-const RoomDrawer = preload("res://addons/MetroidvaniaSystem/Scripts/Legacy/RoomDrawer.gd")
 
 enum { R, ## Right border.
 		D, ## Bottom border.
 		L, ## Left border.
 		U, ## Top border.
 	}
-
-var plugin
 
 var settings: MetSysSettings
 ## The size of a map cell. Automatically set to the size of [member MapTheme.center_texture]. Read only.
@@ -46,8 +41,6 @@ var current_layer: int:
 		current_layer = layer
 		cell_changed.emit(Vector3i(last_player_position.x, last_player_position.y, current_layer))
 
-var _meta_list: Array[StringName]
-
 ## Emitted when the player crosses a cell boundary and visits another cell as a result of [method set_player_position]. The new cell coordinates are provided as an argument.
 signal cell_changed(new_cell: Vector3i)
 ## Emitted when the player enters a new room, i.e. using [method set_player_position] results in a cell that has a different assigned scene. The new scene is provided as an argument, you can use it to easily make room transitions.
@@ -63,17 +56,10 @@ func _enter_tree() -> void:
 	
 	if ProjectSettings.has_setting("addons/metroidvania_system/settings_file"):
 		settings_path = ProjectSettings.get_setting("addons/metroidvania_system/settings_file")
-	elif ProjectSettings.has_setting("metroidvania_system/settings_file"):
-		# Compatibility. Will be removed.
-		var legacy_settings_path: String = ProjectSettings.get_setting("metroidvania_system/settings_file")
-		if legacy_settings_path != settings_path:
-			push_warning("Detected MetSys settings path under \"metroidvania_system/settings_file\" project setting. Migrating it to the new setting: \"addons/metroidvania_system/settings_file\".")
-		
-		settings_path = legacy_settings_path
-		ProjectSettings.set_setting("addons/metroidvania_system/settings_file", settings_path)
 	else:
 		ProjectSettings.set_setting("addons/metroidvania_system/settings_file", settings_path)
 	
+	ProjectSettings.set_initial_value("addons/metroidvania_system/settings_file", "res://MetSysSettings.tres")
 	ProjectSettings.add_property_info({"name": "addons/metroidvania_system/settings_file", "type": TYPE_STRING, "hint": PROPERTY_HINT_FILE, "hint_string": "*.tres"})
 	
 	if ResourceLoader.exists(settings_path):
@@ -88,6 +74,12 @@ func _enter_tree() -> void:
 	
 	map_data = MapData.new()
 	map_data.load_data()
+	
+	if Engine.is_editor_hint():
+		return
+	
+	if settings.cache_group_reverse_lookup:
+		map_data.cache_groups()
 
 func _update_theme():
 	CELL_SIZE = settings.theme.center_texture.get_size()
@@ -116,6 +108,35 @@ func get_layer_by_name(layer: String) -> int:
 		push_error("Layer \"%s\" does not exist." % layer)
 	return index
 
+## Returns name of a layer at the given index. Returns empty [String] if the layer with the given index is unnamed.
+func get_layer_name(idx: int) -> String:
+	if idx < 0:
+		push_error("Layer index can't be negative.")
+		return ""
+	
+	if idx >= map_data.layer_names.size():
+		return ""
+	
+	return map_data.layer_names[idx]
+
+## Returns index of a cell group with the given name. Returns [code]-1[/code] and error if group name does not exist.
+func get_group_by_name(group: String) -> int:
+	var index := map_data.group_names.find(group)
+	if index == -1:
+		push_error("Group \"%s\" does not exist." % group)
+	return index
+
+## Returns name of a cell group at the given index. Returns empty [String] if the group with the given index is unnamed.
+func get_group_name(idx: int) -> String:
+	if idx < 0:
+		push_error("Group index can't be negative.")
+		return ""
+	
+	if idx >= map_data.group_names.size():
+		return ""
+	
+	return map_data.group_names[idx]
+
 ## Returns a [Dictionary] containing the MetSys' runtime data, like discovered cells or stored objects. You need to serialize it yourself, e.g. using [method FileAccess.store_var].
 func get_save_data() -> Dictionary:
 	return save_data.get_data()
@@ -132,13 +153,10 @@ func visit_cell(coords: Vector3i):
 	var previous_map := map_data.get_assigned_scene_at(Vector3i(last_player_position.x, last_player_position.y, current_layer))
 	var new_map := map_data.get_assigned_scene_at(coords)
 	if not new_map.is_empty() and not previous_map.is_empty() and new_map != previous_map:
-		room_changed.emit(map_data.get_uid_room(new_map))
+		room_changed.emit(new_map)
 
 ## Returns [code]true[/code] if the call was discovered, either mapped (if [param include_mapped] is [code]true[/code]) or explored.
 func is_cell_discovered(coords: Vector3i, include_mapped := true) -> bool:
-	if RoomDrawer.force_mapped:
-		return include_mapped
-	
 	if not save_data:
 		return true
 	
@@ -242,6 +260,10 @@ func store_object(object: Object, map_marker := DEFAULT_SYMBOL):
 	if map_marker > -1:
 		save_data.add_custom_marker(get_object_coords(object), map_marker)
 
+## Returns [code]true[/code] if the given [param id] was stored with [method store_object]. Useful if you want to display status of collected items.
+func is_object_id_stored(id: String) -> bool:
+	return id in save_data.stored_objects
+
 ## Returns the game-unique ID of an object. It's used to identify instances of objects in the game's world. It can be used manually when storable objects are insufficient for whatever reason.
 ## [br][br]The ID is first determined from [code]object_id[/code] metadata (see [method Object.set_meta]), then using [code]_get_object_id()[/code] method and finally using a heuristic based on the current scene and node's path in scene. If the [param object] is not a [Node] and no custom ID is provided, this method returns empty string.
 func get_object_id(object: Object) -> String:
@@ -283,6 +305,18 @@ func get_object_coords(object: Object) -> Vector3i:
 		return coords
 	return Vector3i.MAX
 
+## Returns all cell groups assigned at the given coordinates. Make sure to enable [code]cache_group_reverse_lookup[/code] in MetSys settings if you want to call this method, otherwise it's very costly to use.
+func get_cell_groups(coords: Vector3i) -> PackedInt32Array:
+	if not map_data.group_cache.is_empty():
+		return map_data.group_cache.get(coords, PackedInt32Array())
+	
+	var groups: PackedInt32Array
+	for group in map_data.cell_groups:
+		if coords in map_data.cell_groups[group]:
+			groups.append(group)
+	
+	return groups
+
 ## Translates map coordinates to 2D pixel coordinates. Can be used for custom drawing on the map.
 ## [br][br][param relative] allows to specify precise position inside the cell, with [code](0.5, 0.5)[/code] being the cell's center. [param base_offset] is an additional offset in pixels.
 func get_cell_position(coords: Vector2i, relative := Vector2(0.5, 0.5), base_offset := Vector2()) -> Vector2:
@@ -313,7 +347,7 @@ func get_cell_override_from_group(group_id: int, auto_create := true) -> MapData
 ## Removes an override created with [method get_cell_override], reverting the cell to its original appearance, and emits [signal map_updated] signal. Does nothing if the override didn't exist.
 ## [br][br][b]Note:[/b] If the override was created with MapBuilder, use the [code]destroy()[/code] method instead.
 func remove_cell_override(coords: Vector3i):
-	var cell = map_data.get_cell_at(coords)
+	var cell := map_data.get_cell_at(coords)
 	assert(cell, "Can't remove override of non-existent cell")
 	if save_data.remove_cell_override(cell):
 		map_updated.emit()
@@ -323,42 +357,13 @@ func remove_cell_override(coords: Vector3i):
 func get_map_builder() -> MapBuilder:
 	return MapBuilder.new()
 
-## TODO doc
-func make_cell_view(parent_item: CanvasItem, coords: Vector3i, offset: Vector2) -> CellView:
-	var cv := CellView.new(parent_item.get_canvas_item())
-	cv._coords = coords
-	cv.offset = offset
-	cv.update()
-	return cv
-
+## Creates a [MapView] object that displays the specified area of the map. It's a low-level system to use if you find Minimap.tscn insufficient.
 func make_map_view(parent_item: CanvasItem, begin: Vector2i, size: Vector2i, layer: int) -> MapView:
 	var mv := MapView.new(parent_item.get_canvas_item())
 	mv.begin = begin
 	mv.size = size
 	mv.layer = layer
 	return mv
-
-## Draws a single map cell. [param canvas_item] is the [CanvasItem] responsible for drawing, [param offset] is the drawing offset in map coordinates. [param coords] is the coordinate of the map cell that's going to be drawn (does not need to exist). If [param skip_empty] is [code]false[/code], [member MapTheme.empty_space_texture] will be drawn in place of empty cells, if available. If [param use_save_data] is [code]true[/code], the discovered rooms data will be used for drawing the map.
-## [br][br]Example of drawing a 3x3 minimap where center is at [code]current_cell[/code]:
-## [codeblock]
-## for x in range(-1, 2):
-##     for y in range(-1, 2):
-##         MetSys.draw_cell(self, Vector2i(x + 1, y + 1), Vector3i(current_cell.x + x, current_cell.y + y, MetSys.current_layer))
-## [/codeblock]
-## [b]Note:[/b] Drawing a cell is an expensive operation, so avoid performing it too often. You can use the [signal map_updated] signal to only redraw when necessary.
-func draw_cell(canvas_item: CanvasItem, offset: Vector2, coords: Vector3i, skip_empty := false, use_save_data := true):
-	RoomDrawer.draw(canvas_item, offset, coords, skip_empty, map_data, save_data if use_save_data else null)
-
-## Performs a second drawing pass after all cells were drawn, for drawing the shared borders. Only required if [member MapTheme.use_shared_borders] is enabled.
-func draw_shared_borders():
-	RoomDrawer.draw_shared_borders()
-
-## Performs another drawing pass after all cells were draw, for drawing the custom elements. Only required if [code]custom_element_script[/code] is assigned in MetSyS Settings.
-## [br][br][param canvas_item] is the [CanvasItem] responsible for drawing. [param rect] is the portion of the world map that's going to be drawn. All elements whose rects intersect with this rectangle will be drawn. [param drawing_offset] is an offset in pixels, in case your map has a margin etc. You can draw elements from another layer or leave default [param layer] to use the current one.
-func draw_custom_elements(canvas_item: CanvasItem, rect: Rect2i, drawing_offset := Vector2(), layer := current_layer):
-	if not settings.custom_elements or map_data.custom_elements.is_empty():
-		return
-	RoomDrawer.draw_custom_elements(canvas_item, map_data.custom_elements, drawing_offset, rect, layer)
 
 ## Creates an instance of [member MapTheme.player_location_scene] and adds it as a child of the specified [param canvas_item]. The location scene will be moved to the player's location, respecting [member MapTheme.show_exact_player_location]. [param offset] is the offset in pixels for drawing the location. Use it if your map doesn't use [code](0, 0)[/code] as origin point.
 ## [br][br][b]Note:[/b] The scene automatically disables processing if it's not visible, so you don't need to worry about having animations and such. They will not run in the background.
@@ -384,26 +389,20 @@ func get_current_room_instance() -> RoomInstance:
 		return current_room
 	return null
 
-## Returns the name of the current room, or empty string if there is no active RoomInstance. Use together with [method get_full_room_path] to get the full path.
+## Returns the unique ID of the current room, or empty string if there is no active RoomInstance. In most cases this is scene's UID.
+func get_current_room_id() -> String:
+	if current_room:
+		return current_room.room_id
+	else:
+		return ""
+
+## Like [method get_current_room_id], but returns scene name. Use together with [method get_full_room_path] to get the full path.
 func get_current_room_name() -> String:
 	if current_room:
-		return current_room.room_name
+		return map_data.get_room_friendly_name(current_room.room_id)
 	else:
 		return ""
 
 ## Returns the full path to the provided [param room_name] scene. This method assumes that the scene is inside the base map folder.
 func get_full_room_path(room_name: String) -> String:
 	return settings.map_root_folder.path_join(room_name)
-
-func _add_meta(meta: StringName, value: Variant):
-	set_meta(meta, value)
-	
-	if _meta_list.is_empty():
-		_cleanup_meta.call_deferred()
-	
-	_meta_list.append(meta)
-
-func _cleanup_meta():
-	for meta in _meta_list:
-		remove_meta(meta)
-	_meta_list.clear()

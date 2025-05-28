@@ -18,7 +18,7 @@ extends Resource
 		else:
 			map_root_folder = mrf + "/"
 
-## Size of the map drawn in the editor. Cells beyond this value on any side will not be drawn. Adjust this to your needs, but keep in mind that big values will cause editor slowdowns.
+## Size of the map drawn in the editor, in both directions. Cells beyond this value on any side will not be drawn. Adjust this to your needs, but keep in mind that big values will cause editor slowdowns.
 @export_range(50, 1000) var map_extents: int = 100
 
 ## Scene template file used when creating new scenes from editor's Assign Scene mode. If empty, a default scene with RoomInstance will be created.
@@ -29,6 +29,9 @@ extends Resource
 
 ## If [code]true[/code], when the player visits a new room, all its cells will be discovered at once.
 @export var discover_whole_rooms := false
+
+## If [code]true[/code], MetSys will cache a reverse map of cell groups, which allows for fast checking of assigned groups for a cell. This can take a while to initialize and takes memory, especially with bigger maps. You can disable it if you don't plan to use [method MetroidvaniaSystem.get_cell_groups].
+@export var cache_group_reverse_lookup := true
 
 ## The script that determines the custom elements available in the Custom Elements map editor mode. It should inherit [code]CustomElementManager.gd[/code], refer to that class' documentation on how to use it.
 @export var custom_element_script: Script:
@@ -44,14 +47,22 @@ extends Resource
 		
 		custom_elements_changed.emit()
 
-@export var collectible_list: Array[Dictionary]
-@export var assign_uid_to_rooms: bool
+@export_storage var _collectible_list: Array[Dictionary]
+@export_storage var _assign_uid_to_rooms: bool = true
 
 var custom_elements: MetroidvaniaSystem.CustomElementManager
 
 signal theme_changed
 signal custom_elements_changed
 
-func _validate_property(property: Dictionary) -> void:
-	if property.name == "collectible_list" or property.name == "assign_uid_to_rooms":
-		property.usage &= ~PROPERTY_USAGE_EDITOR
+# Compatibility
+
+func _set(property: StringName, value: Variant) -> bool:
+	if property == &"collectible_list":
+		_collectible_list = value
+		return true
+	elif property == &"assign_uid_to_rooms":
+		_assign_uid_to_rooms = value
+		return true
+	
+	return false

@@ -4,10 +4,13 @@
 @tool
 extends Control
 
-## If [code]true[/code], [member center] and [member layer] will be automatically updated when [signal MetroidvaniaSystem.cell_changed] is received.
-@export var track_position := true
+## If [code]true[/code], [member center] and [member layer] will be automatically updated when [signal MetroidvaniaSystem.cell_changed] is received. Enabling this property will make some other properties ineffective.
+@export var track_position := true:
+	set(tp):
+		track_position = tp
+		notify_property_list_changed()
 
-## If [code]true[/code], the minimap scrolls with pixel precision, instead of changing when cell changes. Only effective when the current theme uses [member MapTheme.show_exact_player_location] enabled.
+## If [code]true[/code], the minimap scrolls with pixel precision, instead of changing when cell changes. Only effective when the current theme uses [member MapTheme.show_exact_player_location] enabled. [member track_position] must be enabled.
 @export var smooth_scroll := false:
 	set(ss):
 		smooth_scroll = ss
@@ -19,52 +22,124 @@ extends Control
 ## Size of the minimap in cells. Avoid even numbers if you want to display the player position in the middle.
 @export var area: Vector2i = Vector2i(3, 3):
 	set(value):
+		if value == area:
+			return
+		
 		area = value
+		if _map_view:
+			_update_center()
+		
 		update_configuration_warnings()
 		update_minimum_size()
 
 ## Center coordinates shown on the minimap. Corresponds to the position on the world map.
 @export var center: Vector2i:
 	set(value):
-		center = value
-		if drawer:
-			drawer.queue_redraw()
+		if value == center:
+			return
+		
+		_center.x = value.x
+		_center.y = value.y
+		_update_center()
+	get:
+		return Vector2i(_center.x, _center.y)
 
 ## Layer displayed by the minimap.
 @export var layer: int:
 	set(value):
-		layer = value
-		if drawer:
-			drawer.queue_redraw()
+		if value == _center.z:
+			return
+		
+		_center.z = value
+		if _map_view:
+			_map_view.move(Vector2i(), value)
+	get:
+		return _center.z
 
-@onready var drawer: Node2D = $Drawer
+@onready var _drawer: Node2D = $Drawer
 
-var player_location: Node2D
+var _map_view: MapView
+var _player_location: Node2D
+var _center: Vector3i
+var _center_offset: Vector3i
+var _update_all_queued: bool
 
 func _ready() -> void:
+	if not Engine.is_editor_hint() and smooth_scroll and not MetSys.settings.theme.show_exact_player_location:
+		push_warning("Minimap has smooth_scroll enabled, but the theme does not show exact position. Disabling.")
+		smooth_scroll = false
+	
+	var actual_size := area
+	if smooth_scroll:
+		actual_size += Vector2i(2, 2)
+	
+	_center_offset.x = -actual_size.x / 2
+	_center_offset.y = -actual_size.y / 2
+	_map_view = MetSys.make_map_view(_drawer, center + Vector2i(_center_offset.x, _center_offset.y), actual_size, layer)
+	
 	if Engine.is_editor_hint():
 		set_physics_process(false)
 		MetSys.settings.theme_changed.connect(update_configuration_warnings)
 		return
 	
-	MetSys.map_updated.connect(drawer.queue_redraw)
+	MetSys.map_updated.connect(_queue_update_all)
 	if track_position:
 		MetSys.cell_changed.connect(_on_cell_changed)
+		set_physics_process(smooth_scroll)
 	
 	if display_player_location:
-		player_location = MetSys.add_player_location(drawer)
-	
-	set_physics_process(smooth_scroll and MetSys.settings.theme.show_exact_player_location)
+		_player_location = MetSys.add_player_location(_drawer)
 
 func _physics_process(delta: float) -> void:
-	update_drawer_position()
+	_update_drawer_position()
 
 func _on_cell_changed(new_cell: Vector3i):
-	center = Vector2i(new_cell.x, new_cell.y)
-	layer = new_cell.z
+	_map_view.move_to(new_cell + _center_offset)
+	_center = new_cell
+	_update_drawer_position()
+
+func _update_drawer_position():
+	if smooth_scroll:
+		var new_position := -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
+		if new_position != _drawer.position:
+			if smooth_scroll:
+				_drawer.position = new_position - MetSys.CELL_SIZE
+			else:
+				_drawer.position = new_position
 	
-	if is_physics_processing():
-		update_drawer_position()
+	if _player_location:
+		if layer == MetSys.current_layer:
+			_player_location.show()
+			_player_location.offset = -Vector2(center) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * Vector2(area / 2)
+			if smooth_scroll:
+				_player_location.offset += MetSys.CELL_SIZE
+		else:
+			_player_location.hide()
+
+func _update_center():
+	var actual_size := area
+	if smooth_scroll:
+		actual_size += Vector2i(2, 2)
+	
+	_center_offset.x = -actual_size.x / 2
+	_center_offset.y = -actual_size.y / 2
+	_map_view.size = actual_size
+	_map_view._begin = center - actual_size / 2
+	_map_view.recreate_cache()
+
+func _queue_update_all():
+	if _update_all_queued:
+		return
+	_update_all_queued = true
+	
+	var update_all := func():
+		_map_view.update_all()
+		_update_all_queued = false
+	
+	update_all.call_deferred()
+
+func _get_minimum_size() -> Vector2:
+	return Vector2(area) * MetSys.CELL_SIZE
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var ret: PackedStringArray
@@ -76,34 +151,11 @@ func _get_configuration_warnings() -> PackedStringArray:
 	
 	return ret
 
-func _get_minimum_size() -> Vector2:
-	return Vector2(area) * MetSys.CELL_SIZE
-
-func update_drawer_position():
-	var new_position = -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
-	if new_position != drawer.position:
-		drawer.position = new_position
-
-func _draw_map() -> void:
-	var draw_center := center
-	var draw_area := area
-	var draw_offset: Vector2
-	
-	if is_physics_processing():
-		draw_area += Vector2i(2, 2)
-		draw_offset = -Vector2i.ONE
-	
-	var offset := -draw_area / 2
-	if player_location:
-		player_location.visible = layer == MetSys.current_layer
-		if player_location.visible:
-			player_location.offset = (-Vector2(draw_center + offset) + draw_offset) * MetSys.CELL_SIZE
-	
-	for y in draw_area.y:
-		for x in draw_area.x:
-			MetSys.draw_cell(drawer, Vector2(x, y) + draw_offset, Vector3i(draw_center.x + offset.x + x, draw_center.y + offset.y + y, layer))
-	
-	if MetSys.settings.theme.use_shared_borders:
-		MetSys.draw_shared_borders()
-	
-	MetSys.draw_custom_elements(drawer, Rect2i(draw_center + offset, draw_area), draw_offset, layer)
+func _validate_property(property: Dictionary) -> void:
+	var pname: String = property["name"]
+	if track_position:
+		if pname == "center" or pname == "layer":
+			property.usage |= PROPERTY_USAGE_READ_ONLY
+	else:
+		if pname == "smooth_scroll":
+			property.usage |= PROPERTY_USAGE_READ_ONLY
