@@ -56,25 +56,13 @@ type = 16
 
 [sub_resource type="Resource" id="Resource_yuw5o"]
 script = ExtResource("5_hcrmw")
-genre = 0
-entities = Array[ExtResource("4_up2ik")]([])
-enemies = Array[ExtResource("3_pe08t")]([])
-enemy_waves = 0
 room_shapes = Array[ExtResource("5_0i88o")]([SubResource("Resource_xut72"), SubResource("Resource_ty3bt"), SubResource("Resource_rhwdr"), SubResource("Resource_p8igi"), SubResource("Resource_mh1eu")])
 room_effects = Array[ExtResource("4_8ixd6")]([SubResource("Resource_bne7i")])
-tiles = Array[ExtResource("9_1y4aj")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
 skip_borders = Array[Vector2i]([Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(-1, -1), Vector2i(1, -1)])
 drops = Array[ExtResource("2_0q0of")]([SubResource("Resource_x03cn")])
-bg_color = Color(0, 0, 0, 1)
-dupe_room_count = 0
-skip_merge = false
-grids_path = ""
 
 [resource]
 script = ExtResource("6_ows82")
 name = "Classic Mode!"
 input = SubResource("Resource_yuw5o")
-rooms = Array[ExtResource("5_hcrmw")]([])
 sub_map_defs = Array[ExtResource("6_ows82")]([ExtResource("7_peqd3"), ExtResource("8_bfifi"), ExtResource("9_n6026"), ExtResource("10_ti3eu"), ExtResource("11_kyoic"), ExtResource("12_2ill8"), ExtResource("13_5rw6w"), ExtResource("14_30lpe")])

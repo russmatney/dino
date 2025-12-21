@@ -92,21 +92,13 @@ _id = "183"
 
 [sub_resource type="Resource" id="Resource_ca6cn"]
 script = ExtResource("4_2votg")
-genre = 0
 entities = Array[ExtResource("2_r3h32")]([SubResource("Resource_n686k"), SubResource("Resource_3xn8u")])
 enemies = Array[ExtResource("1_m2e53")]([SubResource("Resource_dstqj"), SubResource("Resource_v00y0")])
-enemy_waves = 0
 room_shapes = Array[ExtResource("3_7e1dv")]([SubResource("Resource_dg3ao"), SubResource("Resource_15qex"), SubResource("Resource_56iaw"), SubResource("Resource_q42si"), SubResource("Resource_qmg0i"), SubResource("Resource_gnyay"), SubResource("Resource_sfka4"), SubResource("Resource_pni75"), SubResource("Resource_8lemx"), SubResource("Resource_gaysq"), SubResource("Resource_ef4wu")])
 room_effects = Array[ExtResource("4_5ks2g")]([SubResource("Resource_kqwal")])
 tiles = Array[ExtResource("5_g4qoi")]([SubResource("Resource_gkukq")])
 door_mode = 4
 neighbor_direction = Vector2i(0, -1)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("1_6rt6c")]([])
-bg_color = Color(0, 0, 0, 1)
-dupe_room_count = 0
-skip_merge = false
-grids_path = ""
 
 [sub_resource type="Resource" id="Resource_e3xlk"]
 script = ExtResource("2_r3h32")
@@ -118,57 +110,17 @@ _id = "158"
 
 [sub_resource type="Resource" id="Resource_sgckp"]
 script = ExtResource("4_2votg")
-genre = 0
 entities = Array[ExtResource("2_r3h32")]([SubResource("Resource_e3xlk"), SubResource("Resource_k6476")])
-enemies = Array[ExtResource("1_m2e53")]([])
-enemy_waves = 0
-room_shapes = Array[ExtResource("3_7e1dv")]([])
-room_effects = Array[ExtResource("4_5ks2g")]([])
-tiles = Array[ExtResource("5_g4qoi")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("1_6rt6c")]([])
-bg_color = Color(0, 0, 0, 1)
-dupe_room_count = 0
 skip_merge = true
-grids_path = ""
 
 [sub_resource type="Resource" id="Resource_sokyy"]
 script = ExtResource("4_2votg")
-genre = 0
-entities = Array[ExtResource("2_r3h32")]([])
-enemies = Array[ExtResource("1_m2e53")]([])
-enemy_waves = 0
-room_shapes = Array[ExtResource("3_7e1dv")]([])
-room_effects = Array[ExtResource("4_5ks2g")]([])
-tiles = Array[ExtResource("5_g4qoi")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("1_6rt6c")]([])
-bg_color = Color(0, 0, 0, 1)
 dupe_room_count = 9
-skip_merge = false
-grids_path = ""
 
 [sub_resource type="Resource" id="Resource_dcopn"]
 script = ExtResource("4_2votg")
-genre = 0
 entities = Array[ExtResource("2_r3h32")]([SubResource("Resource_e3xlk")])
-enemies = Array[ExtResource("1_m2e53")]([])
-enemy_waves = 0
-room_shapes = Array[ExtResource("3_7e1dv")]([])
-room_effects = Array[ExtResource("4_5ks2g")]([])
-tiles = Array[ExtResource("5_g4qoi")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("1_6rt6c")]([])
-bg_color = Color(0, 0, 0, 1)
-dupe_room_count = 0
 skip_merge = true
-grids_path = ""
 
 [resource]
 resource_name = "Tower Map Def"
@@ -176,4 +128,3 @@ script = ExtResource("6_vfcw0")
 name = "Climb the Tower!"
 input = SubResource("Resource_ca6cn")
 rooms = Array[ExtResource("4_2votg")]([SubResource("Resource_sgckp"), SubResource("Resource_sokyy"), SubResource("Resource_dcopn")])
-sub_map_defs = Array[ExtResource("6_vfcw0")]([])

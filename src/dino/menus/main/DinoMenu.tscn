@@ -188,12 +188,12 @@ size_flags_horizontal = 3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="PanelContainer"]
 amount = 200
-process_material = SubResource("ParticleProcessMaterial_6k285")
 visibility_rect = Rect2(0, 0, 1920, 1080)
+process_material = SubResource("ParticleProcessMaterial_6k285")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../PanelContainer/HBoxContainer/VBoxContainer/CenterContainer/TextureRect")
 libraries = {
-"": SubResource("AnimationLibrary_cbedv")
+&"": SubResource("AnimationLibrary_cbedv")
 }
 autoplay = "fade_in"

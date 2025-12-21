@@ -11,26 +11,9 @@
 
 [sub_resource type="Resource" id="Resource_db7dj"]
 script = ExtResource("6_tn7ca")
-genre = 0
-entities = Array[ExtResource("3_wjn4n")]([])
-enemies = Array[ExtResource("2_loq26")]([])
-enemy_waves = 0
-room_shapes = Array[ExtResource("5_fvs0p")]([])
-room_effects = Array[ExtResource("4_yuh8t")]([])
-tiles = Array[ExtResource("7_sef7p")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("1_q7kgc")]([])
-bg_color = Color(0, 0, 0, 1)
-dupe_room_count = 0
-skip_merge = false
-grids_path = ""
 
 [resource]
 resource_name = "The Mountain Map Def"
 script = ExtResource("1_qdvp2")
 name = "Welcome to The Mountain"
 input = SubResource("Resource_db7dj")
-rooms = Array[ExtResource("6_tn7ca")]([])
-sub_map_defs = Array[ExtResource("1_qdvp2")]([])

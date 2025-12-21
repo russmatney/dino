@@ -29,26 +29,12 @@ type = 9
 
 [sub_resource type="Resource" id="Resource_k377a"]
 script = ExtResource("2_3x6dm")
-genre = 0
-entities = Array[ExtResource("3_x3j2n")]([])
 enemies = Array[ExtResource("1_bo8r7")]([SubResource("Resource_v8pov"), SubResource("Resource_kmsyt")])
-enemy_waves = 0
 room_shapes = Array[ExtResource("2_vw0lw")]([SubResource("Resource_7wbhh"), SubResource("Resource_5lgxw")])
-room_effects = Array[ExtResource("4_r287o")]([])
-tiles = Array[ExtResource("7_kufjc")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
-drops = Array[ExtResource("1_fsub8")]([])
-bg_color = Color(0, 0, 0, 1)
-dupe_room_count = 0
 skip_merge = true
-grids_path = ""
 
 [resource]
 resource_name = "Boss Battle"
 script = ExtResource("3_wn6lk")
 name = "Boss Battle!"
 input = SubResource("Resource_k377a")
-rooms = Array[ExtResource("2_3x6dm")]([])
-sub_map_defs = Array[ExtResource("3_wn6lk")]([])

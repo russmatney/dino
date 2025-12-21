@@ -39,26 +39,15 @@ type = 10
 
 [sub_resource type="Resource" id="Resource_gkjen"]
 script = ExtResource("5_cv7fm")
-genre = 0
 entities = Array[ExtResource("4_wpq4m")]([SubResource("Resource_6bvdb"), SubResource("Resource_5s072"), SubResource("Resource_5s072")])
 enemies = Array[ExtResource("3_c4s3a")]([SubResource("Resource_5l33f")])
-enemy_waves = 0
 room_shapes = Array[ExtResource("5_h7twa")]([SubResource("Resource_210cc"), SubResource("Resource_lcy1d")])
-room_effects = Array[ExtResource("5_wol82")]([])
-tiles = Array[ExtResource("8_4mtqd")]([])
-door_mode = 0
-neighbor_direction = Vector2i(0, 0)
-skip_borders = Array[Vector2i]([])
 drops = Array[ExtResource("2_bjcdh")]([SubResource("Resource_6imcj")])
 bg_color = Color(0.774941, 0.436213, 0.239675, 1)
-dupe_room_count = 0
 skip_merge = true
-grids_path = ""
 
 [resource]
 resource_name = "FEED THE VOID"
 script = ExtResource("6_cnrlv")
 name = "FEEEED the VOID"
 input = SubResource("Resource_gkjen")
-rooms = Array[ExtResource("5_cv7fm")]([])
-sub_map_defs = Array[ExtResource("6_cnrlv")]([])
