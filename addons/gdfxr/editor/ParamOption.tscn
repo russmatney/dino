@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8wt6fq8w6mxc"]
 
-[ext_resource type="Script" uid="uid://b03yjbwwmnel0" path="res://addons/gdfxr/editor/ParamOption.gd" id="1"]
-[ext_resource type="Script" uid="uid://b0aex355igu0y" path="res://addons/gdfxr/editor/EditorIconButton.gd" id="2"]
+[ext_resource type="Script" path="res://addons/gdfxr/editor/ParamOption.gd" id="1"]
+[ext_resource type="Script" path="res://addons/gdfxr/editor/EditorIconButton.gd" id="2"]
 
 [node name="WaveformOption" type="HBoxContainer"]
 offset_right = 253.0
