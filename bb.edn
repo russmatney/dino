@@ -19,7 +19,7 @@
                  ;; {:extra-env {"GODOT_BIN" godot-bin}}
                  (str "./addons/gdUnit4/runtest.sh -c -a " arg)))
 
-  watch tasks/watch
+  ;; watch tasks/watch
 
   changelog (let [tag-overwrite (some-> *command-line-args* first)]
               (changelog/rewrite-changelog {:latest-tag-label tag-overwrite})
