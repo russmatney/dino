@@ -101,6 +101,15 @@ msgstr ""
 msgid "generate_line_ids"
 msgstr ""
 
+msgid "use_uuid_only_for_ids"
+msgstr ""
+
+msgid "set_id_prefix_length"
+msgstr ""
+
+msgid "id_prefix_length"
+msgstr ""
+
 msgid "save_to_csv"
 msgstr ""
 
@@ -114,6 +123,9 @@ msgid "confirm_close.save"
 msgstr ""
 
 msgid "confirm_close.discard"
+msgstr ""
+
+msgid "confirm_n_unsaved_files"
 msgstr ""
 
 msgid "buffer.save"
@@ -138,6 +150,9 @@ msgid "buffer.show_in_filesystem"
 msgstr ""
 
 msgid "n_of_n"
+msgstr ""
+
+msgid "search.find_in_dialogue"
 msgstr ""
 
 msgid "search.find"
@@ -318,6 +333,9 @@ msgid "errors.unexpected_syntax_on_nested_dialogue_line"
 msgstr ""
 
 msgid "errors.err_nested_dialogue_invalid_jump"
+msgstr ""
+
+msgid "errors.missing_resource_for_autostart"
 msgstr ""
 
 msgid "errors.unknown"

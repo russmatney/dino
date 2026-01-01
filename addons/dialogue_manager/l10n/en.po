@@ -37,7 +37,7 @@ msgid "all"
 msgstr "All"
 
 msgid "find_in_files"
-msgstr "Find in files..."
+msgstr "Find in Dialogue..."
 
 msgid "test_dialogue"
 msgstr "Test dialogue from start of file"
@@ -108,6 +108,15 @@ msgstr "End dialogue"
 msgid "generate_line_ids"
 msgstr "Generate line IDs"
 
+msgid "use_uuid_only_for_ids"
+msgstr "Use UUID only for IDs"
+
+msgid "set_id_prefix_length"
+msgstr "Set ID prefix length"
+
+msgid "id_prefix_length"
+msgstr "ID prefix length:"
+
 msgid "save_characters_to_csv"
 msgstr "Save character names to CSV..."
 
@@ -125,6 +134,9 @@ msgstr "Save changes"
 
 msgid "confirm_close.discard"
 msgstr "Discard"
+
+msgid "confirm_n_unsaved_files"
+msgstr "You have {count} unsaved dialogue files."
 
 msgid "buffer.save"
 msgstr "Save"
@@ -149,6 +161,9 @@ msgstr "Show in FileSystem"
 
 msgid "n_of_n"
 msgstr "{index} of {total}"
+
+msgid "search.find_in_dialogue"
+msgstr "Find in Dialogue"
 
 msgid "search.find"
 msgstr "Find:"
@@ -329,6 +344,9 @@ msgstr "Nested dialogue lines may only contain dialogue."
 
 msgid "errors.err_nested_dialogue_invalid_jump"
 msgstr "Only the last line of nested dialogue is allowed to include a jump."
+
+msgid "errors.missing_resource_for_autostart"
+msgstr "You need to specify a dialogue resource when using auto-start."
 
 msgid "errors.unknown"
 msgstr "Unknown syntax."
