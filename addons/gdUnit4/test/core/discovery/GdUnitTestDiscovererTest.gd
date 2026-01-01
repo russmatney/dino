@@ -64,6 +64,7 @@ func test_discover_tests() -> void:
 			tuple("test_parameterized_dynamic", "test_parameterized_dynamic:0 (<null>)"),
 			tuple("test_parameterized_dynamic", "test_parameterized_dynamic:1 (%s)" % Vector2.ONE),
 			tuple("test_parameterized_dynamic", "test_parameterized_dynamic:2 (%s)" % Vector2i.ONE),
+			tuple("test_日本語", "test_日本語"),
 		])
 
 
@@ -78,3 +79,75 @@ func test_discover_tests_on_GdUnitTestSuite() -> void:
 
 	# we expect no test covered from the base implementaion of GdUnitTestSuite
 	assert_array(discovered_tests).is_empty()
+
+
+func test_discover_tests_inherited() -> void:
+	var script: GDScript = load("res://addons/gdUnit4/test/core/resources/scan_testsuite_inheritance/by_class_name/ExtendsExtendedTest.gd")
+
+	var discovered_tests := []
+	GdUnitTestDiscoverer.discover_tests(script,\
+		func discover(test_case: GdUnitTestCase) -> void:
+			discovered_tests.append(test_case)
+	)
+
+	assert_array(discovered_tests)\
+		.extractv(extr("test_name"), extr("display_name"), extr("fully_qualified_name"))\
+		.contains_exactly([
+			tuple("test_foo3", "test_foo3", "addons.gdUnit4.test.core.resources.scan_testsuite_inheritance.by_class_name.ExtendsExtendedTest.test_foo3"),
+			tuple("test_foo2", "test_foo2", "addons.gdUnit4.test.core.resources.scan_testsuite_inheritance.by_class_name.ExtendsExtendedTest.test_foo2"),
+			tuple("test_foo1", "test_foo1", "addons.gdUnit4.test.core.resources.scan_testsuite_inheritance.by_class_name.ExtendsExtendedTest.test_foo1")
+		])
+
+
+#if GDUNIT4NET_API_V5
+func test_discover_csharp_tests(_do_skip := !GdUnit4CSharpApiLoader.is_api_loaded()) -> void:
+	var script :Script = load("res://addons/gdUnit4/test/core/discovery/resources/DiscoverExampleTestSuite.cs")
+	var discovered_tests := []
+	GdUnitTestDiscoverer.discover_tests(script,\
+		func discover(test_case: GdUnitTestCase) -> void:
+			discovered_tests.append(test_case)
+	)
+	assert_array(discovered_tests)\
+		.extractv(extr("test_name"), extr("display_name"), extr("fully_qualified_name"))\
+		.contains_exactly([
+			tuple("TestCase1", "TestCase1", "gdUnit4.addons.gdUnit4.test.core.discovery.resources.DiscoverExampleTestSuite.TestCase1"),
+			tuple("TestCase2", "TestCase2", "gdUnit4.addons.gdUnit4.test.core.discovery.resources.DiscoverExampleTestSuite.TestCase2")
+		])
+#endif
+
+
+func test_scan_test_directories() -> void:
+	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "test", [])).contains_exactly([
+		"res://addons/gdUnit4/test"
+	])
+	# for root folders
+	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "", [])).contains_exactly([
+		"res://addons", "res://assets"
+	])
+	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "/", [])).contains_exactly([
+		"res://addons", "res://assets"
+	])
+	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "res://", [])).contains_exactly([
+		"res://addons", "res://assets"
+	])
+	# a test folder not exists
+	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "notest", [])).is_empty()
+	# for excluded folder (contain .gdignore file)
+	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "excluded", [])).is_empty()
+
+
+func test_scan_all_test_directories() -> void:
+	# Test when test_root_folder is empty
+	assert_array(GdUnitTestDiscoverer.scan_all_test_directories("")).contains_exactly(["res://"])
+
+	# Test when test_root_folder is "/"
+	assert_array(GdUnitTestDiscoverer.scan_all_test_directories("/")).contains_exactly(["res://"])
+
+	# Test when test_root_folder is "res://"
+	assert_array(GdUnitTestDiscoverer.scan_all_test_directories("res://")).contains_exactly(["res://"])
+
+	# Test when test_root_folder is set to a specific folder
+	assert_array(GdUnitTestDiscoverer.scan_all_test_directories("test")).contains_exactly(["res://addons/gdUnit4/test"])
+
+	# Test when test_root_folder is set to something which doesn't exist
+	assert_array(GdUnitTestDiscoverer.scan_all_test_directories("notest")).is_empty()
