@@ -167,6 +167,8 @@ enum FollowLockAxis {
 		if follow_mode == FollowMode.NONE:
 			_should_follow = false
 			top_level = false
+			_draw_follow_gizmo_line = false
+			_check_draw_gizmo()
 			_is_parents_physics()
 			notify_property_list_changed()
 			return
@@ -175,10 +177,20 @@ enum FollowLockAxis {
 			FollowMode.PATH:
 				if is_instance_valid(follow_path):
 					_should_follow_checker()
+				else:
+					_should_follow = false
 			FollowMode.GROUP:
 				_follow_targets_size_check()
 			_:
 				_should_follow_checker()
+
+		## Disables Follow Gizmo Line for Follow Glued
+		if follow_mode == FollowMode.GLUED:
+			_draw_follow_gizmo_line = false
+			_check_draw_gizmo()
+		else:
+			if draw_follow_line: _draw_follow_gizmo_line = true
+			_check_draw_gizmo()
 
 		if follow_mode == FollowMode.FRAMED:
 			if _follow_framed_initial_set and follow_target:
@@ -235,14 +247,24 @@ enum FollowLockAxis {
 
 		if look_at_mode == LookAtMode.NONE:
 			_should_look_at = false
+			_draw_look_at_gizmo_line = false
+			_check_draw_gizmo()
 			notify_property_list_changed()
 			return
+
+		if look_at_mode == LookAtMode.MIMIC:
+			_draw_look_at_gizmo_line = false
+			_check_draw_gizmo()
+		else:
+			if draw_look_at_line: _draw_look_at_gizmo_line = true
+			_check_draw_gizmo()
 
 		if not look_at_mode == LookAtMode.GROUP:
 			if look_at_target is Node3D:
 				_should_look_at = true
 		else: # If Look At Group
 			_look_at_targets_size_check()
+
 		notify_property_list_changed()
 
 		## NOTE - Warning that Look At + Follow Mode hasn't been fully tested together yet
@@ -322,6 +344,12 @@ enum FollowLockAxis {
 	get = get_environment
 
 
+## Overrides the [member Camera3D.compositor] resource property.
+@export var compositor: Compositor = null:
+	set = set_compositor,
+	get = get_compositor
+
+
 @export_group("Follow Parameters")
 ## Offsets the [member follow_target] position.
 @export var follow_offset: Vector3 = Vector3.ZERO:
@@ -339,7 +367,8 @@ enum FollowLockAxis {
 ## The damping amount can be specified in the individual axis.[br][br]
 ## [b]Lower value[/b] = faster / sharper camera movement.[br]
 ## [b]Higher value[/b] = slower / heavier camera movement.
-@export var follow_damping_value: Vector3 = Vector3(0.1, 0.1, 0.1):
+@export_custom(PROPERTY_HINT_LINK, "")
+var follow_damping_value: Vector3 = Vector3(0.1, 0.1, 0.1):
 	set = set_follow_damping_value,
 	get = get_follow_damping_value
 
@@ -432,6 +461,18 @@ var _follow_axis_lock_value: Vector3 = Vector3.ZERO
 ## This is only used for when [member follow_mode] is set to [param Framed].
 @export_subgroup("Spring Arm")
 
+## Applies a rotational offset to the Third Person [member follow_mode] in the [code]X[/code] axis.
+@export_range(-360, 360, 0.1,"or_greater", "or_less", "radians_as_degrees")
+var vertical_rotation_offset: float = 0:
+	set = set_vertical_rotation_offset,
+	get = get_vertical_rotation_offset
+
+## Applies a rotational offset to the Third Person [member follow_mode] in the [code]Y[/code] axis.
+@export_range(-360, 360, 0.1, "or_greater", "or_less", "radians_as_degrees")
+var horizontal_rotation_offset: float = 0:
+	set = set_horizontal_rotation_offset,
+	get = get_horizontal_rotation_offset
+
 ## Defines the [member SpringArm3D.spring_length].
 @export var spring_length: float = 1:
 	set = set_spring_length,
@@ -451,7 +492,6 @@ var _follow_axis_lock_value: Vector3 = Vector3.ZERO
 @export var margin: float = 0.01:
 	set = set_margin,
 	get = get_margin
-
 
 @export_group("Look At Parameters")
 ## Offsets the target's [param Vector3] position that the
@@ -476,7 +516,6 @@ var _follow_axis_lock_value: Vector3 = Vector3.ZERO
 	get = get_look_at_damping_value
 
 @export_subgroup("Up Direction")
-
 ## Defines the upward direction of the [param PhantomCamera3D] when [member look_at_mode] is set. [br]
 ## This value will be overriden if [member up_target] is defined.
 @export var up: Vector3 = Vector3.UP:
@@ -513,6 +552,67 @@ var _follow_axis_lock_value: Vector3 = Vector3.ZERO
 	set = set_noise_emitter_layer,
 	get = get_noise_emitter_layer
 
+
+@export_group("Editor")
+@export_subgroup("Align with View")
+## Adds an editor button that positions and rotates the [param PhantomCamera3D] to match the 3D viewport's transform.[br][br]
+## This editor button is not visible if the [param PhantomCamera3D] is following [i]or[/i] looking at a target.[br][br]
+## [b]Note[/b]: This is only functional in the editor.
+@export_tool_button("Align Transform with View", "CenterView")
+var align_transform_with_view: Callable = func():
+	var undo_redo: EditorUndoRedoManager = EditorInterface.get_editor_undo_redo()
+	var property: StringName = &"global_transform"
+	undo_redo.create_action("Aligned " + name + "'s transform with view")
+	undo_redo.add_do_property(self, property, EditorInterface.get_editor_viewport_3d(viewport_index).get_camera_3d().global_transform)
+	undo_redo.add_undo_property(self, property, global_transform)
+	undo_redo.commit_action()
+
+## Adds an editor button that positions the [param PhantomCamera3D] to match the 3D viewport's position.[br][br]
+## This editor button is not visible if the [param PhantomCamera3D] is following a target.[br][br]
+## [b]Note[/b]: This is only functional in the editor.
+@export_tool_button("Align Position with View", "ToolMove")
+var align_position_with_view: Callable = func():
+	var undo_redo: EditorUndoRedoManager = EditorInterface.get_editor_undo_redo()
+	var property: StringName = &"global_position"
+	undo_redo.create_action("Aligned " + name + "'s position with view")
+	undo_redo.add_do_property(self, property, EditorInterface.get_editor_viewport_3d(viewport_index).get_camera_3d().global_position)
+	undo_redo.add_undo_property(self, property, global_position)
+	undo_redo.commit_action()
+
+## Adds an editor button that rotates the [param PhantomCamera3D] to match the 3D viewport's rotation.[br][br]
+## This editor button is not visible if the [param PhantomCamera3D] is looking at a target.[br][br]
+## [b]Note[/b]: This is only functional in the editor.
+@export_tool_button("Align Rotation with View", "ToolRotate")
+var align_rotation_with_view: Callable = func():
+	var undo_redo: EditorUndoRedoManager = EditorInterface.get_editor_undo_redo()
+	var property: StringName = &"global_rotation"
+	undo_redo.create_action("Aligned " + name + "'s rotation with view")
+	undo_redo.add_do_property(self, property, EditorInterface.get_editor_viewport_3d(viewport_index).get_camera_3d().global_rotation)
+	undo_redo.add_undo_property(self, property, global_rotation)
+	undo_redo.commit_action()
+
+## Change which viewport the alignment buttons should be based on.[br]
+## [b]Note:[/b] If you are only using 1 viewport, keep the default value to 0.
+@export_range(0, 3) var viewport_index: int = 0:
+	set(value):
+		viewport_index = value
+	get:
+		return viewport_index
+
+
+@export_subgroup("Gizmo Line")
+## Draws a line between the [param PhantomCamera3D] and its follow target position.[br]
+## This is only drawn when a valid [member follow_target] or [member follow_targets] is set.
+@export var draw_follow_line: bool = false:
+	set = set_draw_follow_line,
+	get = get_draw_follow_line
+
+## Draws a line between the [param PhantomCamera3D] and its look at target position.[br]
+## This is only drawn when a valid [member follow_target] or [member look_at_targets] is set.
+@export var draw_look_at_line: bool = false:
+	set = set_draw_look_at_line,
+	get = get_draw_look_at_line
+
 #endregion
 
 #region Private Variables
@@ -541,8 +641,8 @@ var _current_rotation: Vector3 = Vector3.ZERO
 var _up: Vector3 = Vector3.UP
 var _has_up_target: bool = false
 
-var _follow_target_position: Vector3 = Vector3.ZERO
-var _look_at_target_position: Vector3 = Vector3.ZERO
+var _follow_target_output_position: Vector3  = Vector3.ZERO
+var _look_at_target_output_position: Vector3 = Vector3.ZERO
 
 var _transform_output: Transform3D = Transform3D()
 var _transform_noise: Transform3D = Transform3D()
@@ -559,6 +659,10 @@ var _has_follow_spring_arm: bool = false
 
 var _has_noise_resource: bool = false
 
+var _draw_gizmo: bool                = false
+var _draw_follow_gizmo_line: bool    = false
+var _follow_target_position: Vector3 = Vector3.ZERO
+var _draw_look_at_gizmo_line: bool   = false
 
 # NOTE - Temp solution until Godot has better plugin autoload recognition out-of-the-box.
 var _phantom_camera_manager: Node = null
@@ -619,11 +723,6 @@ func _validate_property(property: Dictionary) -> void:
 	################
 	## Follow Target
 	################
-	if property.name == "follow_target":
-		if follow_mode == FollowMode.NONE or \
-		follow_mode == FollowMode.GROUP:
-			property.usage = PROPERTY_USAGE_NO_EDITOR
-
 	if property.name == "follow_path" and \
 	follow_mode != FollowMode.PATH:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
@@ -633,23 +732,25 @@ func _validate_property(property: Dictionary) -> void:
 	####################
 	if follow_mode == FollowMode.NONE:
 		match property.name:
+			"follow_target", \
 			"follow_offset", \
 			"follow_damping", \
 			"follow_damping_value", \
-			"follow_axis_lock":
+			"follow_axis_lock", \
+			"draw_follow_line":
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+
+	if follow_mode == FollowMode.GROUP:
+		match property.name:
+			"follow_target":
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	if property.name == "follow_offset":
-		if follow_mode == FollowMode.PATH or \
-		follow_mode == FollowMode.GLUED:
+		if follow_mode == FollowMode.GLUED:
 			property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	if property.name == "follow_damping_value" and not follow_damping:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
-
-	if property.name == "follow_offset":
-		if follow_mode == FollowMode.PATH:
-			property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	if property.name == "follow_distance":
 		if not follow_mode == FollowMode.FRAMED:
@@ -690,6 +791,8 @@ func _validate_property(property: Dictionary) -> void:
 	######################
 	if not follow_mode == FollowMode.THIRD_PERSON:
 		match property.name:
+			"vertical_rotation_offset", \
+			"horizontal_rotation_offset", \
 			"spring_length", \
 			"collision_mask", \
 			"shape", \
@@ -699,19 +802,27 @@ func _validate_property(property: Dictionary) -> void:
 	##########
 	## Look At
 	##########
-	if look_at_mode == LookAtMode.NONE:
-		match property.name:
-			"look_at_target", \
-			"look_at_offset" , \
-			"look_at_damping", \
-			"look_at_damping_value", \
-			"up", \
-			"up_target":
-				property.usage = PROPERTY_USAGE_NO_EDITOR
-	elif look_at_mode == LookAtMode.GROUP:
-		match property.name:
-			"look_at_target":
-				property.usage = PROPERTY_USAGE_NO_EDITOR
+	match look_at_mode:
+		LookAtMode.NONE:
+			match property.name:
+				"look_at_target", \
+				"look_at_offset" , \
+				"look_at_damping", \
+				"look_at_damping_value", \
+				"up", \
+				"up_target", \
+				"draw_look_at_line":
+					property.usage = PROPERTY_USAGE_NO_EDITOR
+		LookAtMode.MIMIC:
+			match property.name:
+				"draw_look_at_line":
+					property.usage = PROPERTY_USAGE_NO_EDITOR
+		LookAtMode.GROUP:
+			match property.name:
+				"look_at_target", \
+				"draw_look_at_line":
+					property.usage = PROPERTY_USAGE_NO_EDITOR
+
 
 	if property.name == "look_at_target":
 		if look_at_mode == LookAtMode.NONE or \
@@ -729,6 +840,27 @@ func _validate_property(property: Dictionary) -> void:
 	if property.name == "up" and _has_up_target:
 		property.usage = PROPERTY_USAGE_NO_EDITOR
 
+	##########################
+	## Align With Viewport
+	##########################
+	if property.name == 'align_transform_with_view' and \
+	(_should_look_at == true or _should_follow == true):
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+
+	if property.name == 'align_position_with_view' and \
+	(
+		_should_follow == true or \
+		_should_follow == true and follow_mode == FollowMode.THIRD_PERSON
+	):
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+
+	if property.name == 'align_rotation_with_view' and \
+	(
+		_should_look_at == true or \
+		_should_follow == true and follow_mode == FollowMode.THIRD_PERSON
+	):
+		property.usage = PROPERTY_USAGE_NO_EDITOR
+
 
 func _enter_tree() -> void:
 	_phantom_camera_manager = Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME)
@@ -741,14 +873,21 @@ func _enter_tree() -> void:
 	if not visibility_changed.is_connected(_check_visibility):
 		visibility_changed.connect(_check_visibility)
 
-	_should_follow_checker()
+	match follow_mode:
+		FollowMode.NONE:
+			_is_parents_physics()
+		FollowMode.PATH:
+			if is_instance_valid(follow_path):
+				_should_follow_checker()
+			else:
+				_should_follow = false
+		FollowMode.GROUP:
+			_follow_targets_size_check()
+			_should_follow_checker()
+		_:
+			_should_follow_checker()
+
 	_should_look_at_checker()
-
-	if follow_mode == FollowMode.GROUP:
-		_follow_targets_size_check()
-	elif follow_mode == FollowMode.NONE:
-		_is_parents_physics()
-
 	if look_at_mode == LookAtMode.GROUP:
 		_look_at_targets_size_check()
 
@@ -781,34 +920,27 @@ func _ready():
 				if not is_instance_valid(_follow_spring_arm):
 					_follow_spring_arm = SpringArm3D.new()
 					_follow_spring_arm.top_level = true
-					_follow_spring_arm.rotation = global_rotation
 					_follow_spring_arm.spring_length = spring_length
 					_follow_spring_arm.collision_mask = collision_mask
 					_follow_spring_arm.shape = shape
 					_follow_spring_arm.margin = margin
+					# Stores the rotation value as the rotation gets skewed after
+					# the SpringArm3D is instantiated for some reason...
+					var initial_rotation: Vector3 = global_rotation
 					if _should_follow: _follow_spring_arm.add_excluded_object(follow_target)
 					get_parent().add_child.call_deferred(_follow_spring_arm)
-					reparent.call_deferred(_follow_spring_arm)
 
 					# Waits for the SpringArm3D to be ready and then apply rotation
 					# Resolves an issue most prominent in Godot 4.4
 					await _follow_spring_arm.ready
+					reparent.call_deferred(_follow_spring_arm)
 					_camera_target = _follow_spring_arm
 					_follow_spring_arm.global_position = _get_target_position_offset() if is_instance_valid(follow_target) else global_position
-					_follow_spring_arm.global_rotation = global_rotation
+					_follow_spring_arm.global_rotation = initial_rotation
 					_has_follow_spring_arm = true
-		FollowMode.FRAMED:
-			if not Engine.is_editor_hint():
-				if is_instance_valid(follow_target):
-					_follow_framed_offset = global_position - _get_target_position_offset()
-				_current_rotation = global_rotation
-		FollowMode.GROUP:
-			_follow_targets_size_check()
+					top_level = false
 		_:
-			if is_instance_valid(follow_target):
-				_transform_output.origin = _get_target_position_offset()
-			else:
-				_transform_output.origin = global_transform.origin
+			_transform_output.origin = global_position
 
 	if not Engine.is_editor_hint():
 		_preview_noise = true
@@ -821,6 +953,9 @@ func _ready():
 
 
 func _process(delta: float) -> void:
+	if Engine.is_editor_hint() and _draw_gizmo:
+		update_gizmos()
+
 	if _follow_target_physics_based or _is_active: return
 	process_logic(delta)
 
@@ -843,11 +978,11 @@ func process_logic(delta: float) -> void:
 	if _should_follow:
 		_follow(delta)
 	else:
-		_transform_output.origin = global_transform.origin
+		_transform_output.origin = global_position
 
 	if _should_look_at:
 		_look_at(delta)
-	else:
+	elif not _is_third_person_follow:
 		_transform_output.basis = global_basis
 
 	if _follow_axis_is_locked:
@@ -885,10 +1020,11 @@ func _look_at(delta: float) -> void:
 func _set_follow_position() -> void:
 	match follow_mode:
 		FollowMode.GLUED:
-			_follow_target_position = follow_target.global_position
+			_follow_target_output_position = follow_target.global_position
 
 		FollowMode.SIMPLE:
-			_follow_target_position = _get_target_position_offset()
+			_follow_target_output_position = _get_target_position_offset()
+			_set_follow_gizmo_line_position(follow_target.global_position)
 
 		FollowMode.GROUP:
 			if _has_multiple_follow_targets:
@@ -902,29 +1038,32 @@ func _set_follow_position() -> void:
 				else:
 					distance = follow_distance
 
-				_follow_target_position = \
+				_follow_target_output_position = \
 					bounds.get_center() + \
 					follow_offset + \
-					global_transform.basis.z * \
-					Vector3(distance, distance, distance)
+					global_basis.z * \
+					distance
+
+				_set_follow_gizmo_line_position(bounds.get_center())
 			else:
-				_follow_target_position = \
+				_follow_target_output_position = \
 					follow_targets[_follow_targets_single_target_index].global_position + \
 					follow_offset + \
-					global_transform.basis.z * \
-					Vector3(auto_follow_distance_min, auto_follow_distance_min, auto_follow_distance_min)
+					global_basis.z * \
+					auto_follow_distance_min
 
 		FollowMode.PATH:
 			var path_position: Vector3 = follow_path.global_position
-			_follow_target_position = \
+			_follow_target_output_position = \
 				follow_path.curve.get_closest_point(
-					follow_target.global_position - path_position
+					_get_target_position_offset() - path_position
 				) + path_position
+			_set_follow_gizmo_line_position(_get_target_position_offset())
 
 		FollowMode.FRAMED:
 			if not Engine.is_editor_hint():
 				if not _is_active:
-					_follow_target_position = _get_target_position_offset_distance()
+					_follow_target_output_position = _get_target_position_offset_distance()
 				else:
 					viewport_position = get_viewport().get_camera_3d().unproject_position(_get_target_position_offset())
 					var visible_rect_size: Vector2 = get_viewport().get_visible_rect().size
@@ -932,9 +1071,10 @@ func _set_follow_position() -> void:
 					_current_rotation = global_rotation
 
 					if _current_rotation != global_rotation:
-						_follow_target_position = _get_target_position_offset_distance()
+						_follow_target_output_position = _get_target_position_offset_distance()
 
 					if _get_framed_side_offset() != Vector2.ZERO:
+						var framed_offset: Vector2 = _get_framed_side_offset()
 						var target_position: Vector3 = _get_target_position_offset() + _follow_framed_offset
 						var glo_pos: Vector3
 
@@ -942,13 +1082,13 @@ func _set_follow_position() -> void:
 							if dead_zone_width == 0 && dead_zone_height != 0:
 								glo_pos = _get_target_position_offset_distance()
 								glo_pos.z = target_position.z
-								_follow_target_position = glo_pos
+								_follow_target_output_position = glo_pos
 							elif dead_zone_width != 0 && dead_zone_height == 0:
 								glo_pos = _get_target_position_offset_distance()
 								glo_pos.x = target_position.x
-								_follow_target_position = glo_pos
+								_follow_target_output_position = glo_pos
 							else:
-								_follow_target_position = _get_target_position_offset_distance()
+								_follow_target_output_position = _get_target_position_offset_distance()
 						else:
 							if _current_rotation != global_rotation:
 								var opposite: float = sin(-global_rotation.x) * follow_distance + _get_target_position_offset().y
@@ -956,25 +1096,43 @@ func _set_follow_position() -> void:
 								glo_pos.z = sqrt(pow(follow_distance, 2) - pow(opposite, 2)) + _get_target_position_offset().z
 								glo_pos.x = global_position.x
 
-								_follow_target_position = glo_pos
+								_follow_target_output_position = glo_pos
 								_current_rotation = global_rotation
 							else:
 								dead_zone_reached.emit()
-								_follow_target_position = target_position
+
+								# FIX: Only move camera in the axis where dead zone is breached
+								var current_global_position: Vector3 = global_position
+								var current_offset: Vector3 = global_position - _get_target_position_offset()
+
+								# Update stored offset for non-breached axes
+								if framed_offset.x == 0:
+										_follow_framed_offset.x = current_offset.x
+								if framed_offset.y == 0:
+										_follow_framed_offset.z = current_offset.z
+
+								# Lock camera position on non-breached axes
+								if framed_offset.x == 0:
+										target_position.x = current_global_position.x
+								if framed_offset.y == 0:
+										target_position.z = current_global_position.z
+
+								_follow_target_output_position = target_position
 					else:
 						_follow_framed_offset = global_position - _get_target_position_offset()
+						_follow_target_position = global_position
 						_current_rotation = global_rotation
 						return
 			else:
-				_follow_target_position = _get_target_position_offset_distance()
+				_follow_target_output_position = _get_target_position_offset_distance()
 				var unprojected_position: Vector2 = _get_raw_unprojected_position()
 				var viewport_width: float = get_viewport().size.x
 				var viewport_height: float = get_viewport().size.y
-				var camera_aspect: Camera3D.KeepAspect = get_viewport().get_camera_3d().keep_aspect
+				var camera_aspect: int = get_viewport().get_camera_3d().keep_aspect
 				var visible_rect_size: Vector2 = get_viewport().get_visible_rect().size
 
 				unprojected_position = unprojected_position - visible_rect_size / 2
-				if camera_aspect == Camera3D.KeepAspect.KEEP_HEIGHT:
+				if camera_aspect == Camera3D.KEEP_HEIGHT:
 					# Landscape View
 					var aspect_ratio_scale: float = viewport_width / viewport_height
 					unprojected_position.x = (unprojected_position.x / aspect_ratio_scale + 1) / 2
@@ -986,33 +1144,36 @@ func _set_follow_position() -> void:
 					unprojected_position.y = (unprojected_position.y / aspect_ratio_scale + 1) / 2
 
 				viewport_position = unprojected_position
+				_set_follow_gizmo_line_position(follow_target.global_position)
 
 		FollowMode.THIRD_PERSON:
 			if not Engine.is_editor_hint():
 				if not _has_follow_spring_arm: return
-				_follow_target_position = _get_target_position_offset()
+				_follow_target_output_position = _get_target_position_offset()
 			else:
-				_follow_target_position = _get_target_position_offset_distance()
+				_follow_target_output_position = _get_target_position_offset_distance_direction()
 #				_follow_target_position = _get_target_position_offset_distance_direction()
+				_set_follow_gizmo_line_position(follow_target.global_position)
 
 
 func _set_look_at_position() -> void:
 	match look_at_mode:
 		LookAtMode.MIMIC:
-			_look_at_target_position = global_position - look_at_target.global_basis.z
+			_look_at_target_output_position = global_position - look_at_target.global_basis.z
 
 		LookAtMode.SIMPLE:
-			_look_at_target_position =look_at_target.global_position
+			_look_at_target_output_position = look_at_target.global_position
 
 		LookAtMode.GROUP:
 			if not _has_multiple_look_at_targets:
-				_look_at_target_position =look_at_targets[_look_at_targets_single_target_index].global_position
+				_look_at_target_output_position = look_at_targets[_look_at_targets_single_target_index].global_position
 			else:
 				var bounds: AABB = AABB(look_at_targets[0].global_position, Vector3.ZERO)
 				for node in look_at_targets:
 					bounds = bounds.expand(node.global_position)
-				_look_at_target_position =bounds.get_center()
+				_look_at_target_output_position = bounds.get_center()
 
+	_look_at_target_output_position += look_at_offset
 
 func _get_target_position_offset() -> Vector3:
 	return follow_target.global_position + follow_offset
@@ -1020,11 +1181,15 @@ func _get_target_position_offset() -> Vector3:
 
 func _get_target_position_offset_distance() -> Vector3:
 	return _get_target_position_offset() + \
-	transform.basis.z * Vector3(follow_distance, follow_distance, follow_distance)
+	transform.basis.z * follow_distance
 
-#func _get_target_position_offset_distance_direction() -> Vector3:
-#	return (_get_target_position_offset() + \
-#	follow_target.global_basis.z * Vector3(follow_distance, follow_distance, follow_distance)) * Quaternion.from_euler(rotational_offset)
+# Used in the editor for setting initial Third Person position and angle
+func _get_target_position_offset_distance_direction() -> Vector3:
+	return _get_target_position_offset() + \
+	follow_target.global_basis.z * \
+	follow_distance * \
+	Quaternion(follow_target.global_basis.x, vertical_rotation_offset) * \
+	Quaternion(follow_target.global_basis.y, horizontal_rotation_offset)
 
 
 func _set_follow_velocity(index: int, value: float) -> void:
@@ -1033,7 +1198,7 @@ func _set_follow_velocity(index: int, value: float) -> void:
 func _interpolate_position(delta: float) -> void:
 	if follow_damping and not Engine.is_editor_hint():
 		if not _is_third_person_follow:
-			global_position = _follow_target_position
+			global_position = _follow_target_output_position
 			for i in 3:
 				_transform_output.origin[i] = _smooth_damp(
 					global_position[i],
@@ -1047,7 +1212,7 @@ func _interpolate_position(delta: float) -> void:
 		else:
 			for i in 3:
 				_camera_target.global_position[i] = _smooth_damp(
-					_follow_target_position[i],
+					_follow_target_output_position[i],
 					_camera_target.global_position[i],
 					i,
 					_follow_velocity_ref[i],
@@ -1056,15 +1221,19 @@ func _interpolate_position(delta: float) -> void:
 					delta
 				)
 			_transform_output.origin = global_position
-			_transform_output.basis = global_basis
 	else:
-		_camera_target.global_position = _follow_target_position
+		_camera_target.global_position = _follow_target_output_position
 		_transform_output.origin = global_position
 
+	if _is_third_person_follow:
+		var target_quat: Quaternion = _look_at_target_quat(_get_target_position_offset(), follow_target.global_basis.y)
+		var target_basis: Basis = Basis(target_quat)
+		_transform_output.basis = target_basis
+		global_basis = target_basis
 
 
 func _look_at_target_quat(target_position: Vector3, up_direction: Vector3 = Vector3.UP) -> Quaternion:
-	var direction: Vector3 = -(target_position - global_position + look_at_offset).normalized()
+	var direction: Vector3 = -(target_position - global_position).normalized()
 
 	var basis_z: Vector3 = direction.normalized()
 	var basis_x: Vector3 = up_direction.cross(basis_z)
@@ -1085,9 +1254,9 @@ func _look_at_target_quat(target_position: Vector3, up_direction: Vector3 = Vect
 
 func _interpolate_rotation(delta: float) -> void:
 	if _has_up_target:
-		_up = up_target.get_global_transform().basis.y
+		_up = up_target.global_basis.y
 
-	var target_quat: Quaternion = _look_at_target_quat(_look_at_target_position, _up)
+	var target_quat: Quaternion = _look_at_target_quat(_look_at_target_output_position, _up)
 
 	if look_at_damping:
 		var current_quat: Quaternion = quaternion.normalized()
@@ -1106,9 +1275,7 @@ func _interpolate_rotation(delta: float) -> void:
 		var sin_theta: float = sin(theta)
 		var sin_theta_total: float = sin(acos(dot))
 
-		# Stop interpolating once sin_theta_total reaches a very low value or 0
-		if sin_theta_total < 0.00001:
-			return
+		if is_zero_approx(sin_theta_total): return
 
 		var ratio_a: float = cos(theta) - dot * sin_theta / sin_theta_total
 		var ratio_b: float = sin_theta / sin_theta_total
@@ -1219,7 +1386,7 @@ func _follow_targets_size_check() -> void:
 	_follow_targets = []
 	for i in follow_targets.size():
 		if follow_targets[i] == null: continue
-		if follow_targets[i].is_inside_tree():
+		if is_instance_valid(follow_targets[i]):
 			_follow_targets.append(follow_targets[i])
 			targets_size += 1
 			_follow_targets_single_target_index = i
@@ -1325,6 +1492,18 @@ func _is_parents_physics(target: Node = self) -> void:
 func _camera_resource_changed() -> void:
 	camera_3d_resource_changed.emit()
 
+
+func _set_follow_gizmo_line_position(target_position: Vector3) -> void:
+	if Engine.is_editor_hint():
+		_follow_target_position = target_position
+
+func _check_draw_gizmo() -> void:
+	if _draw_follow_gizmo_line or _draw_look_at_gizmo_line:
+		_draw_gizmo = true
+	else:
+		_draw_gizmo = false
+		update_gizmos()
+
 #endregion
 
 #region Public Functions
@@ -1373,7 +1552,7 @@ func emit_noise(value: Transform3D) -> void:
 func teleport_position() -> void:
 	_follow_velocity_ref = Vector3.ZERO
 	_set_follow_position()
-	_transform_output.origin = _follow_target_position
+	_transform_output.origin = _follow_target_output_position
 	_phantom_camera_manager.pcam_teleport.emit(self)
 
 
@@ -1388,6 +1567,16 @@ func is_following() -> bool:
 ## and has a valid [member look_at_target].
 func is_looking() -> bool:
 	return _should_look_at
+
+
+## Returns the world space coodinate of where the target the camera is following.
+## In most cases, this is the
+func get_follow_target_position() -> Vector3:
+	return _follow_target_position
+
+## Returns the world space coordinate of where the camera is looking at.
+func get_look_at_target_position() -> Vector3:
+	return _look_at_target_output_position
 
 #endregion
 
@@ -1409,7 +1598,8 @@ func get_tween_skip() -> bool:
 
 ## Assigns new [member priority] value.
 func set_priority(value: int) -> void:
-	priority = abs(value) # TODO - Make any minus values be 0
+	priority = maxi(0, value)
+	if not is_node_ready(): return
 	if not Engine.has_singleton(_constants.PCAM_MANAGER_NODE_NAME): return
 	Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME).pcam_priority_changed.emit(self)
 ## Gets current [param Priority] value.
@@ -1456,8 +1646,6 @@ func get_tween_ease() -> int:
 func set_is_active(node: Node, value: bool) -> void:
 	if node is PhantomCameraHost:
 		_is_active = value
-		if value:
-			_should_follow_checker()
 	else:
 		printerr("PCams can only be set from the PhantomCameraHost")
 ## Gets current active state of the [param PhantomCamera3D].
@@ -1520,6 +1708,7 @@ func set_follow_target(value: Node3D) -> void:
 		if not follow_mode == FollowMode.GROUP:
 			_should_follow = false
 	follow_target_changed.emit()
+	update_gizmos()
 	notify_property_list_changed()
 ## Removes the current [Node3D] [member follow_target].
 func erase_follow_target() -> void:
@@ -1739,6 +1928,23 @@ func get_third_person_quaternion() -> Quaternion:
 	return _follow_spring_arm.quaternion
 
 
+## Assigns a new [member set_vertical_rotation_offset] value.
+func set_vertical_rotation_offset(value: float) -> void:
+	vertical_rotation_offset = value
+
+## Gets the [member vertical_rotation] value.
+func get_vertical_rotation_offset() -> float:
+	return vertical_rotation_offset
+
+
+func set_horizontal_rotation_offset(value: float) -> void:
+	horizontal_rotation_offset = value
+
+## Gets the [member horizontal_rotation] value.
+func get_horizontal_rotation_offset() -> float:
+	return horizontal_rotation_offset
+
+
 ## Assigns a new ThirdPerson [member SpringArm3D.length] value.
 func set_spring_length(value: float) -> void:
 	follow_distance = value
@@ -1794,6 +2000,24 @@ func set_margin(value: float) -> void:
 ## [param ThirdPerson].
 func get_margin() -> float:
 	return margin
+
+
+func set_draw_follow_line(value: bool) -> void:
+	draw_follow_line = value
+	_draw_follow_gizmo_line = value
+	_check_draw_gizmo()
+
+func get_draw_follow_line() -> bool:
+	return draw_follow_line
+
+
+func set_draw_look_at_line(value: bool) -> void:
+	draw_look_at_line = value
+	_draw_look_at_gizmo_line = value
+	_check_draw_gizmo()
+
+func get_draw_look_at_line() -> bool:
+	return draw_look_at_line
 
 
 ## Gets the current [member look_at_mode]. Value is based on [enum LookAtMode]
@@ -2086,6 +2310,15 @@ func set_attributes(value: CameraAttributes) -> void:
 func get_attributes() -> CameraAttributes:
 	return attributes
 
+## Assigns a new [Compositor] resource to the [Camera3DResource].
+func set_compositor(value: Compositor) -> void:
+	compositor = value
+	camera_3d_resource_property_changed.emit("compositor", value)
+
+## Gets the [Camera3D.compositor] value assigned to the [Camera3DResource].
+func get_compositor() -> Compositor:
+	return compositor
+
 
 ## Assigns a new [member Camera3D.h_offset] value.[br]
 ## [b]Note:[/b] This will override and make the [param Camera3DResource] unique to
@@ -2217,6 +2450,15 @@ func get_far() -> Variant:
 
 func get_follow_target_physics_based() -> bool:
 	return _follow_target_physics_based
+
+
+## Used internally in phantom_camera_3d_gizmo.gd to check if the Follow line should be shown.
+func draw_follow_gizmo_line() -> bool:
+	return _draw_follow_gizmo_line
+
+## Used internally in phantom_camera_3d_gizmo.gd to check if the Look At line should be shown.
+func draw_look_at_gizmo_line() -> bool:
+	return _draw_look_at_gizmo_line
 
 
 func get_class() -> String:
