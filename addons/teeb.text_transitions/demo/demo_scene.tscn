@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://fvuert4j801a"]
 
 [ext_resource type="PackedScene" uid="uid://b4u15tgrq5xnn" path="res://addons/teeb.text_transitions/demo/RichTextLabel.tscn" id="1"]
-[ext_resource type="Script" uid="uid://xheq2orh7nwl" path="res://addons/teeb.text_transitions/Debugger.gd" id="2"]
+[ext_resource type="Script" path="res://addons/teeb.text_transitions/Debugger.gd" id="2"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_transitions/resources/Prickle.tres" id="3"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_transitions/resources/Redacted.tres" id="4"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_transitions/resources/WFC.tres" id="5"]
