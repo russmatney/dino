@@ -9,7 +9,7 @@ func _plugging():
 	plug("timothyqiu/gdfxr")
 	plug("viniciusgerevini/godot-aseprite-wizard", {include=["addons/AsepriteWizard"]})
 	plug("russmatney/bones", {include=["addons/bones"]})
-	plug("russmatney/log.gd", {include=["addons/log"]})
+	plug("russmatney/log.gd", {include=["addons/log"], branch="pretty-loggers"})
 	plug("KoBeWi/Metroidvania-System", {
 		include=["addons/MetroidvaniaSystem"],
 		exclude=["Extensions"],
