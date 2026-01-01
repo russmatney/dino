@@ -14,12 +14,17 @@ func export_file(file_name: String, output_folder: String, options: Dictionary) 
 	var only_visible_layers = options.get('only_visible_layers', false)
 	var output_name = file_name if options.get('output_filename') == "" else options.get('output_filename', file_name)
 	var first_frame_only = options.get("first_frame_only", false)
+	var scale = options.get('scale', '1')
 	var basename = _get_file_basename(output_name)
 	var output_dir = ProjectSettings.globalize_path(output_folder)
 	var data_file = "%s/%s.json" % [output_dir, basename]
 	var sprite_sheet = "%s/%s.png" % [output_dir, basename]
 	var output = []
 	var arguments = _export_command_common_arguments(file_name, data_file, sprite_sheet)
+
+	if scale != "1":
+		arguments.push_back("--scale")
+		arguments.push_back(scale)
 
 	if not only_visible_layers:
 		arguments.push_front("--all-layers")
@@ -67,13 +72,19 @@ func export_layers(file_name: String, output_folder: String, options: Dictionary
 func export_file_with_layers(file_name: String, layer_names: Array, output_folder: String, options: Dictionary) -> Dictionary:
 	var output_prefix = options.get('output_filename', "").strip_edges()
 	var output_dir = output_folder.replace("res://", "./").strip_edges()
-	var base_output_path = "%s/%s%s" % [output_dir, output_prefix, layer_names[0] if layer_names.size() == 1 else ""]
+	var flat_file_name = layer_names[0].replace("/", "_")
+	var base_output_path = "%s/%s%s" % [output_dir, output_prefix, flat_file_name if layer_names.size() == 1 else ""]
 	var data_file = "%s.json" % base_output_path
 	var sprite_sheet = "%s.png" % base_output_path
 	var trim_cels = options.get("trim_cels", false)
 	var first_frame_only = options.get("first_frame_only", false)
+	var scale = options.get('scale', '1')
 	var output = []
 	var arguments = _export_command_common_arguments(file_name, data_file, sprite_sheet)
+
+	if scale != "1":
+		arguments.push_back("--scale")
+		arguments.push_back(scale)
 
 	for layer_name in layer_names:
 		arguments.push_front(layer_name)
@@ -147,13 +158,13 @@ func _get_exception_layers(file_name: String, exception_pattern: String) -> Arra
 	return exception_layers
 
 
-func list_valid_layers(file_path: String, exception_pattern: String = "", show_only_visible: bool = false, should_merge_duplicates: bool = false) -> Array:
+func list_valid_layers(file_path: String, exception_pattern: String = "", show_only_visible: bool = false, should_merge_duplicates: bool = false, skip_group_layers: bool = false) -> Array:
 	var layers = []
 
 	if should_merge_duplicates:
 		layers = list_layers_without_duplicates(file_path, show_only_visible)
 	else:
-		layers = list_layers(file_path, show_only_visible)
+		layers = list_layers(file_path, show_only_visible, skip_group_layers)
 
 	var exception_regex = _compile_regex(exception_pattern)
 
@@ -166,9 +177,9 @@ func list_valid_layers(file_path: String, exception_pattern: String = "", show_o
 	return output
 
 
-func list_layers(file_path: String, only_visible = false) -> Array:
+func list_layers(file_path: String, only_visible = false, skip_group_layers: bool = false) -> Array:
 	var output = []
-	var arguments = ["-b", "--list-layers", file_path]
+	var arguments = ["-b", "--list-layer-hierarchy", file_path]
 
 	if not only_visible:
 		arguments.push_front("--all-layers")
@@ -183,11 +194,28 @@ func list_layers(file_path: String, only_visible = false) -> Array:
 	if output.is_empty():
 		return output
 
-	var raw = output[0].split('\n')
-	var sanitized = []
-	for s in raw:
-		sanitized.append(s.strip_edges())
-	return sanitized
+	var lines: PackedStringArray = output[0].strip_edges().split('\n')
+	var paths = []
+	var stack = []
+	
+	for line in lines:
+		var indent_level = 0
+		while line.begins_with('  '):
+			indent_level += 1
+			line = line.substr(2)
+		
+		stack = stack.slice(0, indent_level)
+		
+		if line.ends_with('/'):
+			var dir_name = line.rstrip('/').strip_edges()
+			stack.append(dir_name)
+			if not skip_group_layers:
+				paths.append("/".join(stack))
+		else:
+			var file_name = line.strip_edges()
+			var full_path = '/'.join(stack + [file_name])
+			paths.append(full_path)
+	return paths
 
 
 func list_layers_without_duplicates(file_path: String, only_visible = false) -> Array:
@@ -268,7 +296,7 @@ func _export_command_common_arguments(source_name: String, data_path: String, sp
 		"json-array",
 		"--sheet",
 		spritesheet_path,
-		source_name
+		source_name,
 	]
 
 
@@ -277,7 +305,7 @@ func _execute(arguments, output):
 
 
 func _aseprite_command() -> String:
-	return _config.is_command_or_control_pressed()
+	return _config.get_command()
 
 
 func _get_file_basename(file_path: String) -> String:

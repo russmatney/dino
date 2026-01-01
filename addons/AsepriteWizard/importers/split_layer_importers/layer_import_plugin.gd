@@ -59,14 +59,15 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	var source_path = source_file.get_base_dir()
 
 	var absolute_source_file = ProjectSettings.globalize_path(data.import_options.source)
-	
+
 	var export_options = {
 		"sheet_type": data.import_options.sheet_type,
 		"frame_padding": data.import_options.frame_padding,
 		"sheet_columns": data.import_options.sheet_columns,
 		"should_round_fps": data.import_options.should_round_fps,
+		"scale": data.import_options.get("scale"),
 	}
-	
+
 	var source_files = _aseprite.export_file_with_layers(
 		absolute_source_file,
 		[data.layer],
@@ -94,6 +95,8 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	var resource_path = "%s.res" % save_path
 	var exit_code = ResourceSaver.save(resource.resource, resource_path)
 	resource.resource.take_over_path(resource_path)
+	ResourceLoader.load(resource_path, "", ResourceLoader.CACHE_MODE_REPLACE_DEEP)
+
 
 	for extra_file in resource.extra_gen_files:
 		gen_files.push_back(extra_file)

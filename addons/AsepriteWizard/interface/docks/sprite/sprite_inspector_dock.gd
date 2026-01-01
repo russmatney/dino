@@ -17,16 +17,22 @@ var static_texture_creator: StaticTextureCreator
 var _import_mode = -1
 var _animation_player_path: String
 
-@onready var _import_mode_options_field := $dock_fields/VBoxContainer/modes/options as OptionButton
-@onready var _animation_player_field := $dock_fields/VBoxContainer/animation_player/options as OptionButton
-@onready var _animation_player_container := $dock_fields/VBoxContainer/animation_player as HBoxContainer
+@onready var _import_mode_options_field: OptionButton = $dock_fields/VBoxContainer/modes/options
+@onready var _animation_player_field: OptionButton = $dock_fields/VBoxContainer/animation_player/options
+@onready var _animation_player_container: HBoxContainer = $dock_fields/VBoxContainer/animation_player
 
 # animation
-@onready var _animation_section := $dock_fields/VBoxContainer/extra/sections/animation as VBoxContainer
-@onready var _animation_section_header := $dock_fields/VBoxContainer/extra/sections/animation/section_header as Button
-@onready var _animation_section_container := $dock_fields/VBoxContainer/extra/sections/animation/section_content as MarginContainer
-@onready var _cleanup_hide_unused_nodes :=  $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/auto_visible_track/CheckBox as CheckBox
-@onready var _keep_length :=  $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/keep_length/CheckBox as CheckBox
+@onready var _animation_section: VBoxContainer = $dock_fields/VBoxContainer/extra/sections/animation
+@onready var _animation_section_header: Button = $dock_fields/VBoxContainer/extra/sections/animation/section_header
+@onready var _animation_section_container: MarginContainer = $dock_fields/VBoxContainer/extra/sections/animation/section_content
+@onready var _cleanup_hide_unused_nodes: CheckBox =  $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/auto_visible_track/CheckBox
+@onready var _keep_length: CheckBox =  $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/keep_length/CheckBox
+@onready var _convert_to_fps: CheckBox = $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/snap_to_fps/convert_to_fps/CheckBox
+
+@onready var _convert_section: MarginContainer = $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/snap_to_fps/convert_ratio_container
+@onready var _convert_ms_field: SpinBox = $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/snap_to_fps/convert_ratio_container/convert_ratio/ms/SpinBox
+@onready var _convert_fps_field: SpinBox = $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/snap_to_fps/convert_ratio_container/convert_ratio/fps/fraction/SpinBox
+@onready var _converted_fps_label: Label = $dock_fields/VBoxContainer/extra/sections/animation/section_content/content/snap_to_fps/convert_ratio_container/convert_ratio/fps/ms
 
 const INTERFACE_SECTION_KEY_ANIMATION = "animation_section"
 
@@ -53,6 +59,9 @@ func _load_config(cfg):
 
 	_cleanup_hide_unused_nodes.button_pressed = cfg.get("set_vis_track", config.is_set_visible_track_automatically_enabled())
 	_keep_length.button_pressed = cfg.get("keep_anim_length", false)
+	_convert_to_fps.button_pressed = cfg.get("convert_to_fps", false)
+	_convert_ms_field.value = cfg.get("convert_ms_field", 16)
+	_convert_fps_field.value = cfg.get("convert_fps_field", 60)
 	_set_import_mode(int(cfg.get("i_mode", 0)))
 
 
@@ -172,6 +181,9 @@ func _import_for_animation_player():
 		"cleanup_hide_unused_nodes": _cleanup_hide_unused_nodes.button_pressed,
 		"slice": _slice,
 		"should_create_portable_texture": _embed_field.button_pressed,
+		"convert_to_fps": _convert_to_fps.button_pressed,
+		"convert_ms_field": _convert_ms_field.value,
+		"convert_fps_field": _convert_fps_field.value
 	}
 
 	animation_creator.create_animations(target_node, root.get_node(_animation_player_path), aseprite_output.content, anim_options)
@@ -216,6 +228,9 @@ func _get_current_field_values() -> Dictionary:
 		"i_mode": _import_mode,
 		"player": _animation_player_path,
 		"keep_anim_length": _keep_length.button_pressed,
+		"convert_to_fps": _convert_to_fps.button_pressed,
+		"convert_ms_field": _convert_ms_field.value,
+		"convert_fps_field": _convert_fps_field.value
 	}
 
 	if _cleanup_hide_unused_nodes.button_pressed != config.is_set_visible_track_automatically_enabled():
@@ -260,3 +275,13 @@ func _show_specific_fields():
 	_import_mode_options_field.get_parent().show()
 	_animation_player_container.show()
 	_animation_section.show()
+
+
+func _on_dock_fields_field_changed():
+	super._on_dock_fields_field_changed()
+	if _convert_to_fps.button_pressed:
+		_convert_section.visible = true
+		var godot_ms := 1000 / _convert_fps_field.value
+		_converted_fps_label.text = "(%.3f ms)" % godot_ms
+	else:
+		_convert_section.visible = false
