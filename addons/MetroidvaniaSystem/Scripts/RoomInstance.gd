@@ -37,7 +37,7 @@ func _enter_tree() -> void:
 	
 	if Engine.is_editor_hint():
 		MetSys.room_assign_updated.connect(_update_assigned_scene)
-		var theme: Theme = load("res://addons/MetroidvaniaSystem/Database/DatabaseTheme.tres")
+		var theme: Theme = load("uid://dfyoc5jqnnpf5")
 		GRID_COLOR = theme.get_color(&"scene_cell_border", &"MetSys")
 		GRID_PASSAGE_COLOR = theme.get_color(&"scene_room_exit", &"MetSys")
 	
@@ -58,7 +58,7 @@ func _update_assigned_scene():
 	if cells.is_empty():
 		return
 	
-	room_id = MetSys.map_data.get_room_id(owner_node.scene_file_path)
+	room_id = MetSys.map_data.get_room_from_scene_path(owner_node.scene_file_path)
 	
 	layer = cells[0].z
 	for p in cells:
@@ -98,10 +98,10 @@ func _update_neighbor_previews():
 					next_min_cell.x = mini(next_min_cell.x, p.x)
 					next_min_cell.y = mini(next_min_cell.y, p.y)
 				
-				var preview: Control = load("res://addons/MetroidvaniaSystem/Nodes/RoomPreview.tscn").instantiate()
+				var preview: Control = load("uid://bx8a6r0ee0l1b").instantiate()
 				preview.position = Vector2i(next_coords.x, next_coords.y) - min_cell
 				preview.position *= MetSys.settings.in_game_cell_size
-				preview.tooltip_text = MetSys.map_data.get_room_friendly_name(scene)
+				preview.scene = scene
 				preview.offset = Vector2(next_coords.x, next_coords.y) - Vector2(min_cell)
 				preview.offset -= Vector2(next_coords.x, next_coords.y) - Vector2(next_min_cell)
 				add_child(preview)
@@ -118,8 +118,9 @@ func _update_neighbor_previews():
 func adjust_camera_limits(camera: Camera2D):
 	camera.limit_left = 0
 	camera.limit_top = 0
-	camera.limit_right = get_size().x
-	camera.limit_bottom = get_size().y
+	var size := get_size()
+	camera.limit_right = size.x
+	camera.limit_bottom = size.y
 
 ## Returns the full size of this room, based on the cells and [code]in_game_cell_size[/code] defined in MetSys Settings.
 func get_size() -> Vector2:

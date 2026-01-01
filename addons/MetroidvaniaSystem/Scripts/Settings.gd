@@ -10,13 +10,12 @@ extends Resource
 		theme = t
 		theme_changed.emit()
 
-## The root directory where room scenes are located. All scenes used for MetSys editor should be within this folder or its subfolders. The name should end with [code]/[/code].
-@export_dir var map_root_folder: String = "res://":
-	set(mrf):
-		if mrf.ends_with("/"):
-			map_root_folder = mrf
-		else:
-			map_root_folder = mrf + "/"
+@export_custom(PROPERTY_HINT_SAVE_FILE, "") var map_data_file: String = "res://MapData.txt":
+	set(mdf):
+		if map_data_file == mdf:
+			return
+		map_data_file = mdf
+		map_data_file_changed.emit()
 
 ## Size of the map drawn in the editor, in both directions. Cells beyond this value on any side will not be drawn. Adjust this to your needs, but keep in mind that big values will cause editor slowdowns.
 @export_range(50, 1000) var map_extents: int = 100
@@ -47,13 +46,21 @@ extends Resource
 		
 		custom_elements_changed.emit()
 
+@export_storage var _last_scene_folder: String
 @export_storage var _collectible_list: Array[Dictionary]
-@export_storage var _assign_uid_to_rooms: bool = true
 
 var custom_elements: MetroidvaniaSystem.CustomElementManager
+var _legacy_map_root: String
 
 signal theme_changed
+signal map_data_file_changed
 signal custom_elements_changed
+
+func get_scene_folder() -> String:
+	if _last_scene_folder.is_empty():
+		return MetSys.settings.map_data_file.get_base_dir()
+	else:
+		return MetSys.settings._last_scene_folder
 
 # Compatibility
 
@@ -61,8 +68,10 @@ func _set(property: StringName, value: Variant) -> bool:
 	if property == &"collectible_list":
 		_collectible_list = value
 		return true
-	elif property == &"assign_uid_to_rooms":
-		_assign_uid_to_rooms = value
+	elif property == &"map_root_folder":
+		var folder := value as String
+		_legacy_map_root = folder
+		map_data_file = folder.path_join("MapData.txt")
 		return true
 	
 	return false

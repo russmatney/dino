@@ -10,7 +10,10 @@ var main: Control
 var theme_scanner: Timer
 var prev_theme_state: Array
 var translation_list: Array[Translation]
+var is_unsaved: bool
+var cumulative_change: Array[StringName]
 
+signal presaved
 signal saved
 
 func _has_main_screen() -> bool:
@@ -67,8 +70,9 @@ func _enter_tree() -> void:
 			DirAccess.remove_absolute("user://MetSysFail")
 			EditorInterface.set_plugin_enabled(EXTENSION_PATH, true)
 	
-	main = load("res://addons/MetroidvaniaSystem/Database/Main.tscn").instantiate()
-	main.plugin = self
+	get_singleton().editor_plugin = self
+	
+	main = load("uid://crxgu2q73va5y").instantiate()
 	EditorInterface.get_editor_main_screen().add_child(main)
 	main.hide()
 	
@@ -81,8 +85,8 @@ func _enter_tree() -> void:
 	add_tool_submenu_item("MetSys", metsys_tools)
 	metsys_tools.index_pressed.connect(on_tool_option)
 	
-	EditorInterface.get_command_palette().add_command("Print Object ID", "met_sys/print_object_id", on_tool_option.bind(0))
-	EditorInterface.get_command_palette().add_command("Copy Object ID to Clipboard", "met_sys/copy_object_id_to_clipboard", on_tool_option.bind(1))
+	EditorInterface.get_command_palette().add_command("Print Object ID", "met_sys/print_object_id", on_tool_option.bind(TOOL_PRINT_ID))
+	EditorInterface.get_command_palette().add_command("Copy Object ID to Clipboard", "met_sys/copy_object_id_to_clipboard", on_tool_option.bind(TOOL_COPY_ID))
 	
 	get_singleton().settings.theme_changed.connect(func(): prev_theme_state.clear())
 
@@ -108,6 +112,11 @@ func _save_external_data() -> void:
 	if not is_inside_tree():
 		return
 	
+	presaved.emit()
+	
+	if not is_unsaved:
+		return
+	
 	get_singleton().map_data.save_data()
 	saved.emit()
 
@@ -116,6 +125,17 @@ func _get_unsaved_status(for_scene: String) -> String:
 		return tr("MetSys map has been modified.\nDo you want to save?")
 	return ""
 
+func _get_window_layout(configuration: ConfigFile) -> void:
+	configuration.set_value("MetSys", "editor_offset", main.editor.map_offset)
+	configuration.set_value("MetSys", "viewer_offset", main.viewer.map_offset)
+
+func _set_window_layout(configuration: ConfigFile) -> void:
+	if configuration.has_section("MetSys"):
+		main.editor.map_offset = configuration.get_value("MetSys", "editor_offset")
+		main.editor.update_map_position()
+		main.viewer.map_offset = configuration.get_value("MetSys", "viewer_offset")
+		main.viewer.update_map_position()
+
 func get_singleton():# -> MetroidvaniaSystem:
 	return get_tree().root.get_node_or_null(^"MetSys")
 
@@ -123,33 +143,39 @@ func check_theme():
 	var theme: MapTheme = get_singleton().settings.theme
 	var changed := theme.check_for_changes(prev_theme_state)
 	if not changed.is_empty():
-		get_singleton().theme_modified.emit(changed)
+		for change in changed:
+			if not change in cumulative_change:
+				cumulative_change.append(change)
+	elif not cumulative_change.is_empty():
+		get_singleton().theme_modified.emit(cumulative_change)
+		cumulative_change.clear()
 
 func on_tool_option(idx: int):
 	match idx:
 		TOOL_PRINT_ID, TOOL_COPY_ID:
 			var currrent_scene := EditorInterface.get_edited_scene_root()
 			if not currrent_scene:
-				push_error(tr("No scene open to check Node."))
+				EditorInterface.get_editor_toaster().push_toast(tr("No scene open to check Node."), EditorToaster.SEVERITY_ERROR)
 				return
 			
 			var selection := EditorInterface.get_selection().get_selected_nodes()
 			if selection.size() != 1:
-				push_error(tr("You need to select a single Node."))
+				EditorInterface.get_editor_toaster().push_toast(tr("You need to select a single Node."), EditorToaster.SEVERITY_ERROR)
 				return
 			
 			var id: String = get_singleton().get_object_id(selection[0])
 			if id.is_empty():
-				push_warning(tr("Could not determine ID."))
+				EditorInterface.get_editor_toaster().push_toast(tr("Could not determine ID."), EditorToaster.SEVERITY_WARNING)
 			else:
 				if idx == TOOL_PRINT_ID:
 					print(tr("ID of the selected Node is \"%s\".") % id)
 				else:
-					print(tr("ID \"%s\" copied to clipboard.") % id)
 					DisplayServer.clipboard_set(id)
+					EditorInterface.get_editor_toaster().push_toast(tr("ID \"%s\" copied to clipboard.") % id)
 
 func POT_hack():
 	tr("Error!")
 	tr("MetSys restart failed, the singleton still can't be loaded. Make sure the \"MetroidvaniaSystem.gd\" script has no errors.\n\nCommon cause of errors are:\n- Using Godot version older than 4.4.\n- Name conflicts with one of the classes.\n\nThe plugin will be now disabled. Fix the errors and try again.")
 	tr("Runs get_object_id() for the selected Node and prints the result.")
 	tr("Runs get_object_id() for the selected Node and copies the result to clipboard.")
+	tr("Scene File") # POT generator bug.
