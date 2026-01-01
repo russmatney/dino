@@ -56,7 +56,7 @@ func setup_sound_map(sound_map: Dictionary) -> Dictionary:
 		if not sound_map[k] is Array:
 			sound_map[k] = [sound_map[k]]
 		for s: Variant in sound_map[k]:
-			var sound := s
+			var sound: Variant = s
 			var opts := {}
 			if typeof(s) == TYPE_ARRAY:
 				sound = s[0]

@@ -62,6 +62,9 @@ static func is_accept(event: InputEvent) -> bool:
 static func is_jump(event: InputEvent) -> bool:
 	return is_event(event, "jump")
 
+static func is_jump_released(event: InputEvent) -> bool:
+	return is_released(event, "jump")
+
 static func is_dash(event: InputEvent) -> bool:
 	return is_event(event, "dash")
 

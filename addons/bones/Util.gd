@@ -286,7 +286,7 @@ static func call_in(node: Node, callable: Callable, s: float) -> void:
 		return
 	await node.get_tree().create_timer(s).timeout
 	var obj: Object = callable.get_object()
-	if obj and is_instance_valid(obj) and not callable.is_null():
+	if node and node != null and obj and is_instance_valid(obj) and not callable.is_null():
 		callable.call()
 
 ############################################################
@@ -398,6 +398,9 @@ static func flat_map(arr: Array, to_xs: Callable) -> Array:
 static func reverse(arr: Array) -> Array:
 	arr.reverse()
 	return arr
+
+static func remove_nulls(arr: Array) -> Array:
+	return arr.filter(func(x: Variant) -> bool: return x != null)
 
 ############################################################
 # Facing

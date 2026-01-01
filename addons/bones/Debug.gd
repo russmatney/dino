@@ -48,7 +48,7 @@ func _notification(what: int) -> void:
 
 signal debug_notification(notif: Dictionary)
 
-func notif(text: Variant, opts: Variant = {}) -> void:
+func notif(text: Variant, opts := {}) -> void:
 	if text is Dictionary:
 		var t_dict: Dictionary = text
 		opts.merge(t_dict)

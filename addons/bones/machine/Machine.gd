@@ -69,6 +69,7 @@ func start(opts := {}) -> void:
 			state = child
 
 		var anim: AnimatedSprite2D
+		# TODO isn't there a better way? gotta just avoid dictionaries, i guess
 		@warning_ignore("unsafe_property_access")
 		if actor.get("anim") and actor.anim != null:
 			@warning_ignore("unsafe_property_access")
