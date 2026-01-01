@@ -219,8 +219,12 @@ enum S {
 		preload("res://assets/sounds/laser4.sfxr"),
 		preload("res://assets/sounds/laser5.sfxr"),
 	],
-	S.maximize: [preload("res://assets/sounds/maximize_006.ogg")],
-	S.minimize: [preload("res://assets/sounds/minimize_006.ogg")],
+	S.maximize: [
+		preload("res://assets/sounds/maximize_006.ogg")
+		],
+	S.minimize: [
+		preload("res://assets/sounds/minimize_006.ogg")
+		],
 	S.nodamageclang:
 	[
 			preload("res://assets/sounds/nodamageclang.sfxr"),
@@ -272,7 +276,9 @@ enum S {
 			preload("res://assets/sounds/showjumbotron2.sfxr"),
 			preload("res://assets/sounds/showjumbotron3.sfxr"),
 		],
-	S.slime: [preload("res://assets/sounds/slime_001.ogg")],
+	S.slime: [
+		preload("res://assets/sounds/slime_001.ogg")
+		],
 	S.soldierdead:
 	[
 			preload("res://assets/sounds/soldierdead1.sfxr"),
