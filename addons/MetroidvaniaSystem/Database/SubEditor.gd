@@ -210,9 +210,9 @@ func undo_handle_element_remove(coords: Vector3i, element: MetroidvaniaSystem.Ma
 func undo_handle_scene_add(room: Array[Vector3i], old_scene: String, undo_only := false):
 	if not undo_active:
 		undo_begin()
-	
-	var new_scene := MetSys.map_data.get_cell_at(room[0]).assigned_scene
-	
+
+	var new_scene: Variant = MetSys.map_data.get_cell_at(room[0]).assigned_scene
+
 	if not undo_only:
 		editor.undo_redo.add_do_method(switch_scene.bind(room, new_scene, old_scene))
 	editor.undo_redo.add_undo_method(switch_scene.bind(room, old_scene, new_scene))

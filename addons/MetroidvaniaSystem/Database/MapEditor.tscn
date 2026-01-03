@@ -557,7 +557,7 @@ func _editor_input(event: InputEvent):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				if not highlighted_room.is_empty():
-					var settings_root_folder := MetSys.settings.map_root_folder
+					var settings_root_folder : Variant = MetSys.settings.map_root_folder
 					if file_dialog.root_subfolder != settings_root_folder:
 						if settings_root_folder.ends_with(\"//\"):
 							file_dialog.root_subfolder = MetSys.settings.map_root_folder
