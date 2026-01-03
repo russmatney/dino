@@ -6,11 +6,6 @@
 [resource]
 script = ExtResource("1_06u7y")
 theme = ExtResource("2_sdssx")
-map_root_folder = "res://src/dino/vania/maps/"
-map_extents = 100
+map_data_file = "res://src/dino/vania/maps/MapData.txt"
 scene_template = "res://src/dino/vania/maps/VaniaRoom.tscn"
 in_game_cell_size = Vector2(240, 135)
-discover_whole_rooms = false
-cache_group_reverse_lookup = true
-_collectible_list = Array[Dictionary]([])
-_assign_uid_to_rooms = false

@@ -10,7 +10,7 @@ config_version=5
 
 [addons]
 
-metroidvania_system/settings_file="res://src/dino/vania/VaniaMetSysSettings.tres"
+metroidvania_system/settings_file="uid://bvvxp4phcd6la"
 
 [application]
 
