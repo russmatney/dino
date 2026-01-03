@@ -69,5 +69,5 @@
 
   gd-plug
   (tasks/shell-and-log
-    (str "godot --no-window -s plug.gd " (string/join " " *command-line-args*)))
+    (str "godot --headless -s plug.gd " (string/join " " *command-line-args*)))
   }}
