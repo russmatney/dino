@@ -89,8 +89,9 @@ func initialize_runner(new_runner: CustomRunner):
 	context.runner = runner
 
 func update_settings():
-	if ProjectSettings.check_changed_settings_in_group(CONFIG_SETTING):
-		load_runner()
+	pass
+	# if ProjectSettings.check_changed_settings_in_group(CONFIG_SETTING):
+	# 	load_runner()
 
 func _exit_tree() -> void:
 	remove_context_menu_plugin(context)
