@@ -38,6 +38,7 @@ var neighbor_dirs = [
 	]
 
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
+	Log.info("Adding rooms:", len(room_defs))
 	var builder = MetSys.get_map_builder()
 
 	place_rooms(room_defs)
@@ -269,8 +270,11 @@ func get_possible_start_coords(existing_map_cells, def):
 	var local_cells_dict = {}
 	for cell in def.local_cells:
 		local_cells_dict[cell] = true
-	var map_rect = Reptile.get_recti(existing_map_cells.keys())
-	var possible_rect = map_rect
+	var possible_rect
+	if existing_map_cells.keys().is_empty():
+		possible_rect = Rect2i()
+	else:
+		possible_rect = Reptile.get_recti(existing_map_cells.keys())
 	possible_rect.position -= def_rect.position + def_rect.size
 	possible_rect.size += def_rect.size + Vector2i.ONE
 
