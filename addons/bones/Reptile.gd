@@ -62,6 +62,12 @@ static func normalized_val(stats: Dictionary, val: float) -> float:
 
 ## tilemap/cell helpers #####################################################################
 
+static func get_layers(tilemap: TileMap) -> Array:
+	var layers := []
+	for i in range(tilemap.get_layers_count()):
+		layers.append({i=i, name=tilemap.get_layer_name(i)})
+	return layers
+
 static func valid_neighbors(tilemap: TileMap, cell: Vector2i, layer: int = 0) -> Array:
 	var nbr_coords := tilemap.get_surrounding_cells(cell)
 	return nbr_coords.filter(func(coord: Vector2i) -> bool:
@@ -305,7 +311,8 @@ static func get_recti(coords: Array) -> Rect2i:
 			var miny: int = U.min_of(coords, func(coord: Vector3i) -> int: return coord.y, 0)
 			var maxy: int = U.max_of(coords, func(coord: Vector3i) -> int: return coord.y, 0) + 1
 			return Rect2i(Vector2i(minx, miny), Vector2i(maxx, maxy))
-	Log.warn("no coords passed to get_recti")
+		Log.warn("unknown coord type passed to get_recti", coords[0])
+	Log.warn("no coords passed to get_recti", coords)
 	return Rect2i()
 
 ### Tilesets

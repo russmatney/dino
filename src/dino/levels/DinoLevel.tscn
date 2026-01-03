@@ -1,39 +1,43 @@
-[gd_scene load_steps=15 format=3 uid="uid://7rx6q0i5fbdo"]
+[gd_scene load_steps=17 format=4 uid="uid://7rx6q0i5fbdo"]
 
 [ext_resource type="Script" uid="uid://oub4s5olcpr2" path="res://src/dino/levels/DinoLevel.gd" id="1_thmin"]
-[ext_resource type="Script" uid="uid://bcyhkmf18i670" path="res://src/dino/levels/tower/TowerLevelGen.gd" id="3_up4cq"]
+[ext_resource type="Script" uid="uid://dumvtkc2fuao6" path="res://src/dino/levels/woods/LeafRunnerGen.gd" id="2_nslwf"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="4_um1rd"]
 [ext_resource type="Script" uid="uid://d1cr1m0ksnsba" path="res://src/core/quest/QuestManager.gd" id="5_kkaoh"]
-[ext_resource type="PackedScene" uid="uid://c4inidtgbuwlg" path="res://src/dino/entities/targets/Target.tscn" id="6_x0vmf"]
+[ext_resource type="Script" uid="uid://1qopvk18ap1m" path="res://src/dino/entities/PlayerSpawnPoint.gd" id="6_qxl6l"]
+[ext_resource type="PackedScene" uid="uid://dhma0vanfafyo" path="res://src/dino/pickups/leaves/Leaf.tscn" id="7_vnarb"]
+[ext_resource type="Script" uid="uid://cf01kx814af42" path="res://src/dino/pickups/leaves/LeafEntity.gd" id="8_b6erp"]
 [ext_resource type="Script" uid="uid://c0ylk60xkbmom" path="res://src/core/brick/BrickRoom.gd" id="9_mbvbi"]
-[ext_resource type="PackedScene" uid="uid://b462pe2po5a1c" path="res://src/dino/enemies/robots/Robot.tscn" id="10_tiykt"]
+[ext_resource type="PackedScene" uid="uid://bjuwy3qtchj80" path="res://src/tilemaps/grass/GrassTiles16.tscn" id="9_we6w5"]
+[ext_resource type="TileSet" uid="uid://cvc56aldv1hyq" path="res://src/tilemaps/grass/GrassyTiles16.tres" id="10_kwqhm"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_3kpot"]
-[ext_resource type="PackedScene" uid="uid://cf2h0k17vuvga" path="res://src/tilemaps/metal/MetalTiles8.tscn" id="12_r53ry"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ippqw"]
-size = Vector2(368, 112)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jb63o"]
+size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vc61"]
-size = Vector2(432, 208)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujnba"]
+size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftm7g"]
-size = Vector2(432, 208)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8fgf"]
+size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vooe"]
-size = Vector2(368, 160)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dqk8"]
+size = Vector2(160, 144)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0517"]
-size = Vector2(224, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ljw"]
+size = Vector2(256, 144)
 
 [node name="DinoLevel" type="Node2D"]
 script = ExtResource("1_thmin")
 
 [node name="LevelGen" type="Node2D" parent="." groups=["brick_generators"]]
-script = ExtResource("3_up4cq")
+script = ExtResource("2_nslwf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+process_priority = 300
+process_physics_priority = 300
 script = ExtResource("4_um1rd")
 
 [node name="QuestManager" type="Node" parent="."]
@@ -41,32 +45,59 @@ script = ExtResource("5_kkaoh")
 
 [node name="Entities" type="Node2D" parent="."]
 
-[node name="Target" parent="Entities" instance=ExtResource("6_x0vmf")]
-position = Vector2(32, 32)
+[node name="PlayerSpawnPoint" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("12_3kpot")]
+position = Vector2(32, 64)
+script = ExtResource("6_qxl6l")
+dev_only = false
 
-[node name="@Area2D@43614" parent="Entities" instance=ExtResource("6_x0vmf")]
-position = Vector2(208, 32)
+[node name="Leaf" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(96, 80)
+script = ExtResource("8_b6erp")
 
-[node name="@Area2D@43615" parent="Entities" instance=ExtResource("6_x0vmf")]
-position = Vector2(48, 64)
+[node name="@Marker2D@25121" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("12_3kpot")]
+position = Vector2(160, 176)
+script = ExtResource("6_qxl6l")
+dev_only = false
 
-[node name="PlayerSpawnPoint" parent="Entities" instance=ExtResource("12_3kpot")]
-position = Vector2(112, 64)
+[node name="@Node2D@25122" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(224, 192)
+script = ExtResource("8_b6erp")
 
-[node name="@Area2D@43616" parent="Entities" instance=ExtResource("6_x0vmf")]
-position = Vector2(272, 80)
+[node name="@Marker2D@25125" type="Marker2D" parent="Entities" groups=["player_spawn_points"] instance=ExtResource("12_3kpot")]
+position = Vector2(288, 288)
+script = ExtResource("6_qxl6l")
+dev_only = false
 
-[node name="EnemyRobot" parent="Entities" instance=ExtResource("10_tiykt")]
-position = Vector2(304, -144)
+[node name="@Node2D@25126" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(352, 304)
+script = ExtResource("8_b6erp")
 
-[node name="@CharacterBody2D@43617" parent="Entities" instance=ExtResource("10_tiykt")]
-position = Vector2(304, -80)
+[node name="@Node2D@25129" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(480, 240)
+script = ExtResource("8_b6erp")
+
+[node name="@Node2D@25132" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(768, 240)
+script = ExtResource("8_b6erp")
+
+[node name="@Node2D@25116" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(592, 256)
+script = ExtResource("8_b6erp")
+
+[node name="@Node2D@25117" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(640, 256)
+script = ExtResource("8_b6erp")
+
+[node name="@Node2D@25118" type="Node2D" parent="Entities" groups=["leaves"] instance=ExtResource("7_vnarb")]
+position = Vector2(704, 272)
+script = ExtResource("8_b6erp")
 
 [node name="Tilemaps" type="Node2D" parent="."]
 
-[node name="MetalTiles8" parent="Tilemaps" instance=ExtResource("12_r53ry")]
-scale = Vector2(2, 2)
-layer_0/tile_data = PackedInt32Array(-2490345, 65537, 2, -2490344, 131073, 2, -2490343, 131073, 2, -2490342, 131073, 2, -2490341, 131073, 2, -2490340, 131073, 2, -2490339, 131073, 2, -2490338, 131073, 2, -2490337, 131073, 2, -2490336, 131073, 2, -2490335, 131073, 2, -2490334, 131073, 2, -2490333, 131073, 2, -2490332, 196609, 2, -2424809, 65537, 4, -2424808, 131073, 4, -2424807, 131073, 4, -2424806, 131073, 4, -2424805, 131073, 4, -2424804, 131073, 4, -2424803, 131073, 4, -2424802, 131073, 4, -2424801, 131073, 4, -2424800, 131073, 4, -2424799, 131073, 4, -2424798, 458753, 3, -2424797, 131073, 3, -2424796, 196609, 3, -2359262, 65537, 3, -2359261, 131073, 3, -2359260, 196609, 3, -2293726, 65537, 3, -2293725, 131073, 3, -2293724, 196609, 3, -2228190, 65537, 3, -2228189, 131073, 3, -2228188, 196609, 3, -2162654, 65537, 3, -2162653, 131073, 3, -2162652, 196609, 3, -2097129, 131073, 2, -2097128, 131073, 2, -2097127, 131073, 2, -2097126, 131073, 2, -2097125, 131073, 2, -2097124, 131073, 2, -2097123, 131073, 2, -2097122, 131073, 2, -2097121, 131073, 2, -2097120, 131073, 2, -2097119, 131073, 2, -2097118, 458753, 4, -2097117, 131073, 3, -2097116, 196609, 3, -2031593, 131073, 4, -2031592, 131073, 4, -2031591, 131073, 4, -2031590, 131073, 4, -2031589, 131073, 4, -2031588, 131073, 4, -2031587, 131073, 4, -2031586, 131073, 4, -2031585, 131073, 4, -2031584, 131073, 4, -2031583, 131073, 4, -2031582, 131073, 4, -2031581, 131073, 4, -2031580, 196609, 4, -2359296, 327681, 2, -2359295, 131073, 5, -2359294, 131073, 5, -2359293, 131073, 5, -2359292, 131073, 5, -2359291, 131073, 5, -2359290, 131073, 5, -2359289, 131073, 5, -2359288, 131073, 5, -2359287, 131073, 5, -2359286, 131073, 5, -2359285, 131073, 5, -2359284, 131073, 5, -2359283, 131073, 5, -2359282, 131073, 5, -2359281, 131073, 5, -2359280, 131073, 5, -2359279, 131073, 5, -2359278, 131073, 5, -2359277, 131073, 5, -2359276, 131073, 5, -2359275, 131073, 5, -2359274, 196609, 5, -2293760, 262145, 3, -2228224, 262145, 3, -2162688, 262145, 3, -2097152, 262145, 3, -2097136, 65537, 2, -2097135, 131073, 2, -2097134, 131073, 2, -2097133, 131073, 2, -2097132, 131073, 2, -2097131, 131073, 2, -2097130, 131073, 2, -2031616, 262145, 3, -2031603, 65537, 5, -2031602, 131073, 5, -2031601, 131073, 5, -2031600, 65537, 4, -2031599, 131073, 4, -2031598, 131073, 4, -2031597, 131073, 4, -2031596, 131073, 4, -2031595, 131073, 4, -2031594, 589825, 3, -1966080, 262145, 3, -1966058, 262145, 3, -1900544, 327681, 4, -1900543, 131073, 2, -1900542, 131073, 2, -1900541, 131073, 2, -1900540, 131073, 2, -1900539, 131073, 2, -1900538, 196609, 2, -1900522, 262145, 3, -1835008, 65537, 3, -1835007, 131073, 3, -1835006, 131073, 3, -1835005, 131073, 3, -1835004, 131073, 3, -1835003, 131073, 3, -1835002, 393217, 4, -1835001, 196609, 2, -1834986, 262145, 3, -1769472, 327681, 3, -1769471, 131073, 4, -1769470, 131073, 4, -1769469, 131073, 4, -1769468, 131073, 4, -1769467, 131073, 4, -1769466, 131073, 4, -1769465, 393217, 5, -1769464, 131073, 5, -1769463, 196609, 5, -1769450, 262145, 3, -1638402, 65537, 2, -1638401, 131073, 2, -1703936, 524289, 4, -1703914, 327681, 4, -1703913, 131073, 2, -1703912, 196609, 2, -1572866, 65537, 3, -1572865, 131073, 3, -1638400, 393217, 6, -1638399, 131073, 5, -1638398, 131073, 5, -1638397, 131073, 5, -1638396, 196609, 5, -1638378, 65537, 3, -1638377, 131073, 3, -1638376, 196609, 3, -1507330, 65537, 3, -1507329, 131073, 3, -1572864, 196609, 3, -1572842, 65537, 3, -1572841, 131073, 3, -1572840, 196609, 3, -1441794, 65537, 3, -1441793, 131073, 3, -1507328, 196609, 3, -1507306, 65537, 3, -1507305, 131073, 3, -1507304, 196609, 3, -1376258, 65537, 3, -1376257, 131073, 3, -1441792, 196609, 3, -1441781, 65537, 5, -1441780, 131073, 5, -1441779, 131073, 5, -1441778, 131073, 5, -1441777, 131073, 5, -1441776, 196609, 5, -1441770, 65537, 3, -1441769, 131073, 3, -1441768, 196609, 3, -1310722, 65537, 3, -1310721, 131073, 3, -1376256, 196609, 3, -1376234, 65537, 3, -1376233, 131073, 3, -1376232, 196609, 3, -1245186, 65537, 3, -1245185, 131073, 3, -1310720, 196609, 3, -1310698, 65537, 3, -1310697, 131073, 3, -1310696, 196609, 3, -1179650, 65537, 3, -1179649, 131073, 3, -1245184, 196609, 3, -1245162, 65537, 3, -1245161, 131073, 3, -1245160, 196609, 3, -1114114, 65537, 3, -1114113, 131073, 3, -1179648, 196609, 3, -1179626, 65537, 3, -1179625, 131073, 3, -1179624, 196609, 3, -1048578, 65537, 3, -1048577, 131073, 3, -1114112, 196609, 3, -1114108, 65537, 5, -1114107, 131073, 5, -1114106, 131073, 5, -1114105, 131073, 5, -1114104, 131073, 5, -1114103, 196609, 5, -1114090, 65537, 3, -1114089, 131073, 3, -1114088, 196609, 3, -983042, 65537, 3, -983041, 131073, 3, -1048576, 196609, 3, -1048554, 65537, 3, -1048553, 131073, 3, -1048552, 196609, 3, -917506, 65537, 3, -917505, 131073, 3, -983040, 196609, 3, -983024, 65537, 5, -983023, 131073, 5, -983022, 131073, 5, -983021, 131073, 5, -983020, 131073, 5, -983019, 131073, 5, -983018, 458753, 6, -983017, 131073, 3, -983016, 196609, 3, -851970, 65537, 3, -851969, 131073, 3, -917504, 196609, 3, -917482, 65537, 3, -917481, 131073, 3, -917480, 196609, 3, -786434, 65537, 3, -786433, 131073, 3, -851968, 196609, 3, -851946, 65537, 3, -851945, 131073, 3, -851944, 196609, 3, -720898, 65537, 3, -720897, 131073, 3, -786432, 196609, 3, -786410, 65537, 3, -786409, 131073, 3, -786408, 196609, 3, -655362, 65537, 3, -655361, 131073, 3, -720896, 196609, 3, -720881, 65537, 5, -720880, 131073, 5, -720879, 196609, 5, -720874, 65537, 3, -720873, 131073, 3, -720872, 196609, 3, -589826, 65537, 3, -589825, 131073, 3, -655360, 196609, 3, -655338, 65537, 3, -655337, 131073, 3, -655336, 196609, 3, -524290, 65537, 3, -524289, 131073, 3, -589824, 196609, 3, -589802, 65537, 3, -589801, 131073, 3, -589800, 196609, 3, -458754, 65537, 3, -458753, 131073, 3, -524288, 196609, 3, -524282, 65537, 5, -524281, 131073, 5, -524280, 196609, 5, -524266, 65537, 3, -524265, 131073, 3, -524264, 196609, 3, -393218, 65537, 3, -393217, 131073, 3, -458752, 196609, 3, -458737, 65537, 5, -458736, 131073, 5, -458735, 131073, 5, -458734, 131073, 5, -458733, 131073, 5, -458732, 131073, 5, -458731, 131073, 5, -458730, 458753, 6, -458729, 131073, 3, -458728, 196609, 3, -327682, 65537, 3, -327681, 131073, 3, -393216, 196609, 3, -393194, 65537, 3, -393193, 131073, 3, -393192, 196609, 3, -262146, 65537, 3, -262145, 131073, 3, -327680, 196609, 3, -327658, 65537, 3, -327657, 131073, 3, -327656, 196609, 3, -196610, 65537, 3, -196609, 131073, 3, -262144, 196609, 3, -262122, 65537, 3, -262121, 131073, 3, -262120, 196609, 3, -131074, 65537, 3, -131073, 131073, 3, -196608, 393217, 6, -196607, 131073, 5, -196606, 131073, 5, -196605, 196609, 5, -196596, 65537, 5, -196595, 131073, 5, -196594, 131073, 5, -196593, 131073, 5, -196592, 131073, 5, -196591, 131073, 5, -196590, 131073, 5, -196589, 131073, 5, -196588, 131073, 5, -196587, 131073, 5, -196586, 458753, 6, -196585, 131073, 3, -196584, 196609, 3, -65538, 65537, 3, -65537, 131073, 3, -131072, 196609, 3, -131050, 65537, 3, -131049, 131073, 3, -131048, 196609, 3, -2, 65537, 4, -1, 131073, 4, -65536, 524289, 3, -65514, 327681, 3, -65513, 131073, 4, -65512, 196609, 4, 0, 262145, 3, 22, 262145, 3, 65536, 262145, 3, 65558, 262145, 3, 131072, 262145, 3, 131094, 262145, 3, 196608, 327681, 4, 196609, 131073, 2, 196610, 196609, 2, 196620, 65537, 5, 196621, 131073, 5, 196622, 196609, 5, 196630, 262145, 3, 262144, 65537, 3, 262145, 131073, 3, 262146, 196609, 3, 262162, 65537, 2, 262163, 131073, 2, 262164, 131073, 2, 262165, 131073, 2, 262166, 524289, 4, 327680, 65537, 3, 327681, 131073, 3, 327682, 196609, 3, 327685, 65537, 2, 327686, 131073, 2, 327687, 131073, 2, 327688, 196609, 2, 327698, 65537, 3, 327699, 131073, 3, 327700, 131073, 3, 327701, 131073, 3, 327702, 196609, 3, 393216, 65537, 4, 393217, 131073, 4, 393218, 393217, 5, 393219, 131073, 5, 393220, 131073, 5, 393221, 65537, 4, 393222, 131073, 4, 393223, 131073, 4, 393224, 393217, 5, 393225, 131073, 5, 393226, 131073, 5, 393227, 131073, 5, 393228, 131073, 5, 393229, 131073, 5, 393230, 131073, 5, 393231, 131073, 5, 393232, 131073, 5, 393233, 131073, 5, 393234, 65537, 4, 393235, 131073, 4, 393236, 131073, 4, 393237, 131073, 4, 393238, 196609, 4)
+[node name="GrassTiles16" type="TileMapLayer" parent="Tilemaps" instance=ExtResource("9_we6w5")]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAiABUAAAAJAAQAAAAjABUAAAAJAAQAAAAkABUAAAAJAAQAAAAlABUAAAAJAAQAAAAmABUAAAACAAQAAAAnABUAAAACAAQAAAAoABUAAAAJAAQAAAApABUAAAAJAAQAAAAqABUAAAACAAQAAAArABUAAAAJAAQAAAAsABUAAAAJAAQAAAAtABUAAAACAAQAAAAuABUAAAACAAQAAAAvABUAAAAJAAQAAAAwABUAAAAJAAQAAAAxABUAAAADAAQAAAAaABEAAAABAAQAAAAbABEAAAACAAQAAAAcABEAAAAJAAQAAAAdABEAAAACAAQAAAAeABEAAAACAAQAAAAfABEAAAADAAQAAAAYABUAAAACAAQAAAAZABUAAAAJAAQAAAAaABUAAAAJAAQAAAAbABUAAAACAAQAAAAcABUAAAACAAQAAAAdABUAAAACAAQAAAAeABUAAAACAAQAAAAfABUAAAACAAQAAAAgABUAAAAJAAQAAAAhABUAAAAJAAQAAAAQAA4AAAAIAAEAAAAQAA8AAAAEAAIAAAAQABAAAAAEAAMAAAAQABEAAAAEAAMAAAAQABIAAAAEAAMAAAAQABMAAAAEAAIAAAAQABQAAAAEAAMAAAAQABUAAAAFAAQAAAARABUAAAAJAAQAAAASABUAAAACAAQAAAATABUAAAAJAAQAAAAUABUAAAAJAAQAAAAVABUAAAAJAAQAAAAWABUAAAAJAAQAAAAXABUAAAACAAQAAAAIAAcAAAAIAAEAAAAIAAgAAAAEAAIAAAAIAAkAAAAEAAMAAAAIAAoAAAAEAAMAAAAIAAsAAAAEAAMAAAAIAAwAAAAEAAIAAAAIAA0AAAAEAAIAAAAIAA4AAAAFAAQAAAAJAA4AAAACAAQAAAAKAA4AAAAJAAQAAAALAA4AAAACAAQAAAAMAA4AAAAJAAQAAAANAA4AAAAJAAQAAAAOAA4AAAACAAQAAAAPAA4AAAACAAQAAAAAAAAAAAAEAAEAAAAAAAEAAAAEAAMAAAAAAAIAAAAEAAIAAAAAAAMAAAAEAAMAAAAAAAQAAAAEAAIAAAAAAAUAAAAEAAIAAAAAAAYAAAAEAAIAAAAAAAcAAAAFAAQAAAABAAcAAAACAAQAAAACAAcAAAAJAAQAAAADAAcAAAACAAQAAAAEAAcAAAACAAQAAAAFAAcAAAAJAAQAAAAGAAcAAAAJAAQAAAAHAAcAAAACAAQAAAA=")
+tile_set = ExtResource("10_kwqhm")
 
 [node name="Rooms" type="Node2D" parent="."]
 
@@ -75,9 +106,9 @@ script = ExtResource("9_mbvbi")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_0"]
 visible = false
-offset_right = 368.0
-offset_bottom = 112.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.8039216, 0.52156866, 0.24705882, 1)
 
 [node name="RoomBox" type="Area2D" parent="Rooms/Room_0" groups=["roombox"]]
 visible = false
@@ -85,18 +116,18 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_0/RoomBox"]
-position = Vector2(184, 56)
-shape = SubResource("RectangleShape2D_ippqw")
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_jb63o")
 
 [node name="Room_1" type="Node2D" parent="Rooms"]
-position = Vector2(-32, -208)
+position = Vector2(128, 112)
 script = ExtResource("9_mbvbi")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_1"]
 visible = false
-offset_right = 432.0
-offset_bottom = 208.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.8039216, 0.52156866, 0.24705882, 1)
 
 [node name="RoomBox" type="Area2D" parent="Rooms/Room_1" groups=["roombox"]]
 visible = false
@@ -104,18 +135,18 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_1/RoomBox"]
-position = Vector2(216, 104)
-shape = SubResource("RectangleShape2D_0vc61")
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_ujnba")
 
 [node name="Room_2" type="Node2D" parent="Rooms"]
-position = Vector2(-32, -416)
+position = Vector2(256, 224)
 script = ExtResource("9_mbvbi")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_2"]
 visible = false
-offset_right = 432.0
-offset_bottom = 208.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(0.8039216, 0.52156866, 0.24705882, 1)
 
 [node name="RoomBox" type="Area2D" parent="Rooms/Room_2" groups=["roombox"]]
 visible = false
@@ -123,18 +154,18 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_2/RoomBox"]
-position = Vector2(216, 104)
-shape = SubResource("RectangleShape2D_ftm7g")
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_e8fgf")
 
 [node name="Room_3" type="Node2D" parent="Rooms"]
-position = Vector2(0, -576)
+position = Vector2(384, 208)
 script = ExtResource("9_mbvbi")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_3"]
 visible = false
-offset_right = 368.0
-offset_bottom = 160.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
+offset_right = 160.0
+offset_bottom = 144.0
+color = Color(0.8039216, 0.52156866, 0.24705882, 1)
 
 [node name="RoomBox" type="Area2D" parent="Rooms/Room_3" groups=["roombox"]]
 visible = false
@@ -142,18 +173,18 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_3/RoomBox"]
-position = Vector2(184, 80)
-shape = SubResource("RectangleShape2D_3vooe")
+position = Vector2(80, 72)
+shape = SubResource("RectangleShape2D_4dqk8")
 
 [node name="Room_4" type="Node2D" parent="Rooms"]
-position = Vector2(368, -608)
+position = Vector2(544, 208)
 script = ExtResource("9_mbvbi")
 
 [node name="ColorRect" type="ColorRect" parent="Rooms/Room_4"]
 visible = false
-offset_right = 224.0
-offset_bottom = 128.0
-color = Color(0.803922, 0.521569, 0.247059, 1)
+offset_right = 256.0
+offset_bottom = 144.0
+color = Color(0.8039216, 0.52156866, 0.24705882, 1)
 
 [node name="RoomBox" type="Area2D" parent="Rooms/Room_4" groups=["roombox"]]
 visible = false
@@ -161,5 +192,5 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rooms/Room_4/RoomBox"]
-position = Vector2(112, 64)
-shape = SubResource("RectangleShape2D_w0517")
+position = Vector2(128, 72)
+shape = SubResource("RectangleShape2D_s7ljw")

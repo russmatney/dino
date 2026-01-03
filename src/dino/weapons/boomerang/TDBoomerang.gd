@@ -1,3 +1,4 @@
+@tool
 extends TDWeapon
 
 var aim_vector

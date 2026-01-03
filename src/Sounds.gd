@@ -1,3 +1,4 @@
+@tool
 extends DJSoundMap
 
 enum S {

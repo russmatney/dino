@@ -1,3 +1,4 @@
+@tool
 extends BEUBody
 
 @onready var palettes = [null,

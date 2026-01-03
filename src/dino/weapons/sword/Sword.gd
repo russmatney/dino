@@ -1,3 +1,4 @@
+@tool
 extends SSWeapon
 
 func aim(aim_vector: Vector2):

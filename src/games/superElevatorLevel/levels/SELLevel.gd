@@ -1,3 +1,4 @@
+@tool
 extends DinoLevel
 class_name SELLevel
 
