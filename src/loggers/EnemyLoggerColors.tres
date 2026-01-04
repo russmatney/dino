@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LogColorTheme" load_steps=2 format=3 uid="uid://dfvwpsgmkvtuq"]
+
+[ext_resource type="Script" uid="uid://br8socgd1vvih" path="res://addons/log/log_color_theme.gd" id="1_plexr"]
+
+[resource]
+script = ExtResource("1_plexr")
+bg_colors = Array[Color]([Color(0.397594, 0, 0, 1), Color(0.21095628, 3.1435397e-07, 1.2032688e-08, 1)])
+metadata/_custom_type_script = "uid://br8socgd1vvih"

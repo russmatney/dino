@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PrettyLogger" load_steps=3 format=3 uid="uid://bdw6q8nns4lce"]
+
+[ext_resource type="Resource" uid="uid://btquu08337ts3" path="res://src/loggers/PlayerLoggerColors.tres" id="1_ejh00"]
+[ext_resource type="Script" uid="uid://b2gj75y2i3u01" path="res://addons/log/PrettyLogger.gd" id="1_qumv8"]
+
+[resource]
+script = ExtResource("1_qumv8")
+logger_name = "PlayerLogger"
+log_level = 0
+color_theme_resource = ExtResource("1_ejh00")
+dictionary_skip_keys = PackedStringArray("layer_0/tile_data")
+metadata/_custom_type_script = "uid://b2gj75y2i3u01"

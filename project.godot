@@ -76,7 +76,8 @@ folder_colors={
 "res://src/dino/pickups/": "pink",
 "res://src/dino/players/": "pink",
 "res://src/dino/weapons/": "pink",
-"res://src/games/": "green"
+"res://src/games/": "green",
+"res://src/loggers/": "gray"
 }
 
 [gdunit4]

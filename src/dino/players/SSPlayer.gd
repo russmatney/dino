@@ -11,6 +11,9 @@ func _get_configuration_warnings():
 			"idle", "run", "jump", "air", "fall",
 			"knocked_back", "dying", "dead",]}})
 
+static func logger() -> PrettyLogger:
+	return LoggerFactory.load_logger("res://src/loggers/PlayerLogger.tres")
+
 ## data ##########################################################
 
 enum Powerup { Read, Sword, Flashlight, DoubleJump, Climb, Gun, Jetpack, Ascend, Descend,
@@ -216,7 +219,7 @@ func _ready():
 
 	state_label.set_visible(false)
 
-	Log.pr("player ready!!!", self)
+	logger().pr("player ready!!!", self)
 
 ## input ###########################################################
 
@@ -226,7 +229,7 @@ func _unhandled_input(event):
 	# prevent input
 	if block_controls or is_dead or machine.ignore_input():
 		if not logged_blocking_controls:
-			Log.info("blocking ss player control")
+			logger().info("blocking ss player control")
 			logged_blocking_controls = true
 
 		# fire 'release' actions when controls are blocked
@@ -265,7 +268,7 @@ func _unhandled_input(event):
 		if did_exec:
 			action_detector.current_action()
 		else:
-			Log.pr("no action done, dwim/toggle/cycle something?")
+			logger().pr("no action done, dwim/toggle/cycle something?")
 			self.scale = Vector2.ONE * U.rand_of([0.25, 0.5, 1, 1.5])
 
 	# action cycling
@@ -625,12 +628,12 @@ func collect(opts={}):
 	var data = opts.get("data")
 
 	if not data:
-		Log.warn("No data on collected pickup, returning", opts)
+		logger().warn("No data on collected pickup, returning", opts)
 		return
 
 	match data.type:
 		DropData.T.RANDOM:
-			Log.warn("Unhandled random pickup", opts)
+			logger().warn("Unhandled random pickup", opts)
 		DropData.T.ORB:
 			add_orb(data)
 			Dino.notif({
@@ -667,11 +670,11 @@ func collect(opts={}):
 			add_leaf()
 			return
 		DropData.T.POWERUP:
-			Log.info("Selecting new weapon", opts)
+			logger().info("Selecting new weapon", opts)
 			var missing_weapons = DinoWeaponsData.sidescroller_weapon_entities()\
 				.filter(func(ent): return not has_weapon_id(ent.get_entity_id()))
 			if missing_weapons.is_empty():
-				Log.warn("Already have all weapons, extra powerup?")
+				logger().warn("Already have all weapons, extra powerup?")
 			else:
 				quick_select_menu.show_menu({
 					label="Select a new weapon",
@@ -684,7 +687,7 @@ func collect(opts={}):
 				icon=powerup_icon,
 				})
 		_:
-			Log.warn("no match on pickup data.type", data)
+			logger().warn("no match on pickup data.type", data)
 
 ## counts
 
@@ -788,13 +791,13 @@ func add_jetpack():
 
 func add_ascend():
 	if not warp_cast:
-		Log.warn("refusing to add ascend powerup")
+		logger().warn("refusing to add ascend powerup")
 		return
 	has_ascend = true
 
 func add_descend():
 	if not warp_cast:
-		Log.warn("refusing to add descend powerup")
+		logger().warn("refusing to add descend powerup")
 		return
 	has_descend = true
 

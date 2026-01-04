@@ -4,6 +4,9 @@ class_name PlayerSet
 
 # enum State { TEMPLATE, SPAWNING, ALIVE, DEAD }
 
+static func logger() -> PrettyLogger:
+	return LoggerFactory.load_logger("res://src/loggers/PlayerLogger.tres")
+
 ## PData #################################################
 
 # PData bundles the player entity and current node, if there is one,
@@ -36,7 +39,7 @@ class PData:
 			genre = opts.genre
 		input_opts = opts
 		if entity == null:
-			Log.err("PData created without player entity info", opts)
+			PlayerSet.logger().err("PData created without player entity info", opts)
 
 ## vars #################################################
 
@@ -50,7 +53,7 @@ func create_new(opts):
 	var pdata = PData.new(opts)
 	# TODO ensure vs always append? should be unique? could be instances, not ents coming in
 	stack.push_front(pdata)
-	Log.info("created new player!", pdata.entity.get_display_name())
+	logger().info("created new player!", pdata.entity.get_display_name())
 
 # reset data. supports starting a new game mode
 func reset_player_data():
@@ -69,14 +72,14 @@ func _remove_player_node(p: PData, _opts={}):
 func spawn_new(opts={}):
 	var p = active_player()
 	if not p:
-		Log.err("No active player, cannot spawn", stack)
+		logger().err("No active player, cannot spawn", stack)
 		return
 	var genre = opts.get("genre")
 	if genre == null:
 		genre = p.genre
 
 	if genre == null:
-		Log.warn("genre not passed, defaulting", opts)
+		logger().warn("genre not passed, defaulting", opts)
 		genre = DinoData.Genre.SideScroller
 
 	p.node = p.entity.get_player_scene(genre).instantiate()
@@ -102,23 +105,23 @@ func spawn_new(opts={}):
 	var level_node = opts.get("level_node")
 	var deferred = opts.get("deferred", true)
 	if level_node:
-		Log.info("adding player to level node", p.entity.get_display_name(), level_node, sp)
+		logger().info("adding player to level node", p.entity.get_display_name(), level_node, sp)
 		if deferred:
 			level_node.add_child.call_deferred(p.node)
 		else:
 			level_node.add_child(p.node)
 	elif spawn_point:
-		Log.info("adding player at spawn_point", spawn_point)
+		logger().info("adding player at spawn_point", spawn_point)
 		if deferred:
 			U.add_child_to_level(spawn_point, p.node)
 		else:
 			U.add_child_to_level(spawn_point, p.node, false)
 	else:
 		if deferred:
-			Log.warn("No spawn_point found, adding player to current_scene (deferred)")
+			logger().warn("No spawn_point found, adding player to current_scene (deferred)")
 			Navi.get_tree().current_scene.add_child.call_deferred(p.node)
 		else:
-			Log.warn("No spawn_point found, adding player to current_scene")
+			logger().warn("No spawn_point found, adding player to current_scene")
 			Navi.get_tree().current_scene.add_child(p.node)
 
 ## respawn #################################################
@@ -126,11 +129,11 @@ func spawn_new(opts={}):
 func current_player_genre():
 	var p = active_player()
 	if not p or not p.node:
-		Log.warn("No current player, couldn't pull genre")
+		logger().warn("No current player, couldn't pull genre")
 		return DinoData.Genre.SideScroller
 
 	if not is_instance_valid(p.node):
-		Log.warn("Invalid player, couldn't pull genre", p)
+		logger().warn("Invalid player, couldn't pull genre", p)
 		return DinoData.Genre.SideScroller
 
 	return p.entity.get_genre_for_scene(p.node.scene_file_path)
@@ -174,7 +177,7 @@ func get_spawn_point_and_coords(opts):
 		if spawn_point:
 			spawn_coords = spawn_point.global_position
 		else:
-			Log.warn("spawning player, no spawn point found", opts)
+			logger().warn("spawning player, no spawn point found", opts)
 
 	return [spawn_point, spawn_coords]
 

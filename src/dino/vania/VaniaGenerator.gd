@@ -2,6 +2,9 @@
 extends RefCounted
 class_name VaniaGenerator
 
+static func logger() -> PrettyLogger:
+	return LoggerFactory.load_logger("res://src/loggers/VaniaLogger.tres")
+
 const FALLBACK_GEN_MAP_DIR = "user://vania_maps"
 var gen_map_dir
 static var global_room_num = 0
@@ -38,7 +41,7 @@ var neighbor_dirs = [
 	]
 
 func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
-	Log.info("Adding rooms:", len(room_defs))
+	logger().info("Adding rooms:", len(room_defs))
 	var builder = MetSys.get_map_builder()
 
 	place_rooms(room_defs)
@@ -47,7 +50,7 @@ func add_rooms(room_defs: Array[VaniaRoomDef]) -> Array[VaniaRoomDef]:
 
 	for room_def in room_defs:
 		if room_def.map_cells.is_empty():
-			Log.warn("Cannot create room without map_cells", room_def)
+			logger().warn("Cannot create room without map_cells", room_def)
 			continue
 
 		if not room_def.room_path:
@@ -190,17 +193,17 @@ func get_neighbor_defs(room_def: VaniaRoomDef):
 	# TODO ugh, get rid of this neighbor_data / rebuild_doors dep
 	var nbr = neighbor_data.get(room_def.room_path)
 	if nbr == null:
-		Log.warn("Could not find neighbor for room_def", room_def.room_path.get_file())
+		logger().warn("Could not find neighbor for room_def", room_def.room_path.get_file())
 		return []
 	var paths = nbr.map(func(data): return data.room_path)
 	var defs = []
 	for path in paths:
 		var rds = all_room_defs.filter(func(rd): return rd.room_path == path)
 		if rds.is_empty():
-			Log.warn("Could not find room_def for neighbor_path:", path.get_file())
+			logger().warn("Could not find room_def for neighbor_path:", path.get_file())
 			continue
 		if len(rds) > 1:
-			Log.warn("Found multiple room_defs for neighbor_path! eeeek!", path.get_file())
+			logger().warn("Found multiple room_defs for neighbor_path! eeeek!", path.get_file())
 			continue
 		defs.append(rds[0])
 	return defs
@@ -218,7 +221,7 @@ func set_room_scene_path(room_def):
 
 func build_and_prep_scene(room_def, _opts={}):
 	Debug.notif({msg="[GENNING... [color=crimson]%s[/color]]" % room_def.room_path.get_file(), rich=true})
-	Log.info("generating and packing room", room_def.room_path.get_file())
+	logger().info("generating and packing room", room_def.room_path.get_file())
 	# Prepare the actual scene (maybe deferred if threading)
 	var room: Node2D = load(room_def.base_scene_path).instantiate()
 	# unique name for unique hotel entries?
@@ -231,7 +234,7 @@ func build_and_prep_scene(room_def, _opts={}):
 	ps.pack(room)
 	var error = ResourceSaver.save(ps, room_def.room_path)
 	if error != Error.OK:
-		Log.error("Error saving room scene! Error code:", error)
+		logger().error("Error saving room scene! Error code:", error)
 	Debug.notif({msg="[GENNED! [color=purple]%s[/color]]!" % room_def.room_path.get_file(), rich=true})
 	Dino.notif({type="side", text="Generated [color=purple]%s[/color]" % room_def.room_path.get_file()})
 
@@ -244,7 +247,7 @@ func place_rooms(defs: Array[VaniaRoomDef]):
 
 	for def in defs:
 		if def.local_cells.is_empty():
-			Log.warn("Cannot place room without local_cells!!", def)
+			logger().warn("Cannot place room without local_cells!!", def)
 			continue
 
 		attach_room(existing_map_cells, def)
@@ -254,7 +257,7 @@ func attach_room(existing_map_cells, def):
 	var possible_start_coords = get_possible_start_coords(existing_map_cells, def)
 
 	if possible_start_coords.is_empty():
-		Log.warn("Could not find a possible start coord for room def", def)
+		logger().warn("Could not find a possible start coord for room def", def)
 		return
 
 	var start_coord = possible_start_coords.pick_random()
@@ -292,7 +295,7 @@ func get_possible_start_coords(existing_map_cells, def):
 				found = true
 				possible.append(start_coord)
 		if found == false:
-			Log.warn("no start pos found for next room and door_mode, expanding search")
+			logger().warn("no start pos found for next room and door_mode, expanding search")
 			rel_neighbor_coords = relative_neighbor_coords()
 
 			for start_coord in Reptile.cells_in_rect(possible_rect):
