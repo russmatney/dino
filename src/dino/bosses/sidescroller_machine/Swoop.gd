@@ -37,7 +37,7 @@ func enter(_ctx={}):
 			]
 
 	var positions = warp_spots
-	positions = positions.filter(func(ws): return not U.are_nodes_close(ws, actor))
+	positions = positions.filter(func(ws): return not U.are_points_close(ws.global_position, actor.global_position))
 	if len(positions) < 2:
 		positions = warp_spots
 
