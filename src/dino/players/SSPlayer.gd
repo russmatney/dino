@@ -145,9 +145,14 @@ func _enter_tree():
 func ensure_pcam():
 	pcam = get_node_or_null("PlayerCamera")
 	if pcam == null or not is_instance_valid(pcam):
+		logger().info("no pcam found, creating one")
 		pcam = player_camera_scene.instantiate()
 		add_child(pcam)
 		pcam.set_owner(self)
+		pcam.set_follow_target(self)
+	else:
+		logger().info("found pcam.", pcam)
+		pcam.set_follow_target(self)
 
 func _ready():
 	Hotel.register(self)

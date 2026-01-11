@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1_8pa3l")
-bg_colors = Array[Color]([Color(0.00077644526, 0, 0.5563279, 1), Color(0.08242976, 0.15479735, 0.49331695, 1), Color(0.07222044, 0.16880444, 0.6712903, 1)])
 metadata/_custom_type_script = "uid://br8socgd1vvih"

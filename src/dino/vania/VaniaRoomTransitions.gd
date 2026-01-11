@@ -28,10 +28,10 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 	var prev_room_def = game.get_room_def(MetSys.get_current_room_name())
 
 	if new_room_def == null:
-		Log.warn("No new room def in room transition, aborting", target_room)
+		Log.warn("No new room def in room transition, aborting. target_room:", target_room)
 		return
 	if prev_room_def == null:
-		Log.warn("No prev room def in room transition, aborting", MetSys.get_current_room_name())
+		Log.warn("No prev room def in room transition, aborting. MetSys current room:", MetSys.get_current_room_name())
 		return
 
 	var prev_room_instance = MetSys.get_current_room_instance()

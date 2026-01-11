@@ -596,10 +596,12 @@ func erase_vania_room(room):
 
 ## room_defs #######################################################
 
-func get_room_def(path):
-	for rd in room_defs:
-		if path == rd.room_path:
+func get_room_def(path: String) -> VaniaRoomDef:
+	for rd: VaniaRoomDef in room_defs:
+		if path == rd.room_path or (rd and path == rd.room_path.get_file()):
 			return rd
+	Log.warn("no room def found for path:", path, room_defs.map(func(rd): return rd.room_path))
+	return null
 
 func current_room_def():
 	var path = MetSys.get_current_room_name()

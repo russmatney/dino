@@ -312,6 +312,7 @@ updater/show_new_release_info_on_editor_launch_in_output=false
 
 [physics]
 
+common/physics_interpolation=true
 common/enable_pause_aware_picking=true
 
 [rendering]
