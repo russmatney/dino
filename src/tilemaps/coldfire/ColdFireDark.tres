@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bat0oor02xfha"]
+[gd_resource type="TileSet" format=3 uid="uid://bat0oor02xfha"]
 
 [ext_resource type="Texture2D" uid="uid://b61wws46p8qqo" path="res://src/tilemaps/coldfire/64x64coldfire_sheet.png" id="1_5cweg"]
 

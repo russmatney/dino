@@ -1,9 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://b73k32om0cbr3"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://b73k32om0cbr3"]
 
 [ext_resource type="Texture2D" uid="uid://0sbm1c6kmk2w" path="res://src/tilemaps/coldfire/32x40autumnglow_tiles_sheet.png" id="1_ucp5r"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sb4ra"]
-load_path = "res://.godot/imported/64x64snake_tiles_sheet.png-d83f0f01fa1ec1fddb7697b41fd6a037.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ryuii"]
 atlas = SubResource("CompressedTexture2D_sb4ra")

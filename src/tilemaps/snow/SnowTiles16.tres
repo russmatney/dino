@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://4dyw7g538e23"]
+[gd_resource type="TileSet" format=3 uid="uid://4dyw7g538e23"]
 
 [ext_resource type="Texture2D" uid="uid://8c6hqljrpgg" path="res://src/tilemaps/snow/snow_tiles-16_sheet.png" id="1_fhlh7"]
 

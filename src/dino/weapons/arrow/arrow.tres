@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://y6eqsli8lr2t"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://y6eqsli8lr2t"]
 
 [ext_resource type="Texture2D" uid="uid://b6fxibqhnx8qh" path="res://src/dino/weapons/arrow/arrow_sheet.png" id="1_kqnna"]
 [ext_resource type="Texture2D" uid="uid://bn3cn7jnlbqvf" path="res://src/dino/weapons/bullet/pop_sheet.png" id="2_vrcae"]

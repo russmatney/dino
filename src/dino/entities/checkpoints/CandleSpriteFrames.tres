@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://63sc3onlnswo"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://63sc3onlnswo"]
 
 [ext_resource type="Texture2D" uid="uid://dnp56m8kln68v" path="res://src/dino/entities/checkpoints/candle_sheet.png" id="1_e7fx5"]
 

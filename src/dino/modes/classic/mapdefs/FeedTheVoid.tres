@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=17 format=3 uid="uid://b2xht8rpxnoyr"]
+[gd_resource type="Resource" script_class="MapDef" format=3 uid="uid://b2xht8rpxnoyr"]
 
 [ext_resource type="PackedScene" uid="uid://d1vdnd50c6c05" path="res://src/dino/pickups/orb/GreenBlobAnim.tscn" id="1_ejkkc"]
 [ext_resource type="Script" uid="uid://b7pv3c2a3ryd0" path="res://src/dino/pickups/DropData.gd" id="2_bjcdh"]

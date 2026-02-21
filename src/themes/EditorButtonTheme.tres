@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=4 uid="uid://bvd007nsath2b"]
+[gd_resource type="Theme" format=4 uid="uid://bvd007nsath2b"]
 
 [sub_resource type="Image" id="Image_l6fca"]
 data = {
@@ -42,6 +42,15 @@ font_name = "at01"
 style_name = "Medium"
 font_weight = 500
 msdf_pixel_range = 8
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
 cache/0/16/0/ascent = 11.0
 cache/0/16/0/descent = 2.0
 cache/0/16/0/underline_position = 2.39062

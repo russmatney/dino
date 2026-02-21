@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://ri3hfhsgowmo"]
+[gd_resource type="TileSet" format=3 uid="uid://ri3hfhsgowmo"]
 
 [ext_resource type="Texture2D" uid="uid://bj4j5o583vie8" path="res://src/tilemaps/grass/grassy-cave-tiles-8_sheet.png" id="1_eg731"]
 [ext_resource type="Texture2D" uid="uid://m7pqd7ox1a3b" path="res://src/tilemaps/spaceship/spaceship-tiles-8_sheet.png" id="2_6nh5s"]

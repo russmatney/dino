@@ -64,6 +64,8 @@ script = ExtResource("5_3unf7")
 shape = SubResource("RectangleShape2D_pc7iw")
 
 [node name="ActionHint" parent="." instance=ExtResource("6_f0aop")]
-action_name = ""
 
 [node name="PlayerCamera" parent="." instance=ExtResource("8_3w1a4")]
+zoom = Vector2(3, 3)
+tween_on_load = true
+follow_damping = true

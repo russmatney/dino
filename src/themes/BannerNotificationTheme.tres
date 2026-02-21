@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=4 uid="uid://bg3jgqdp2kpu1"]
+[gd_resource type="Theme" format=4 uid="uid://bg3jgqdp2kpu1"]
 
 [sub_resource type="Image" id="Image_x8lkg"]
 data = {
@@ -50,6 +50,15 @@ data = PackedByteArray("AAEAAAAKAIAAAwAgT1MvMl4pq3QAAAEoAAAAYGNtYXBN9U+7AAAEHAAA
 font_name = "Arcade_Cabinet"
 style_name = "Regular"
 msdf_pixel_range = 8
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
 cache/0/16/0/ascent = 20.0
 cache/0/16/0/descent = 8.0
 cache/0/16/0/underline_position = -1.20312

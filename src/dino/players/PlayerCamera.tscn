@@ -12,24 +12,17 @@ ease = 1
 
 [sub_resource type="Resource" id="Resource_bnrqh"]
 script = ExtResource("3_wu2yh")
-amplitude = 10.0
-frequency = 0.5
 randomize_noise_seed = 1
-noise_seed = 0
-positional_noise = true
-rotational_noise = false
-positional_multiplier_x = 1.0
-positional_multiplier_y = 1.0
-rotational_multiplier = 1.0
 
 [node name="PlayerCamera" type="Node2D"]
+top_level = true
 script = ExtResource("1_n32v8")
 priority = 1
 follow_mode = 1
-zoom = Vector2(8, 8)
+zoom = Vector2(2, 2)
 snap_to_pixel = true
 tween_resource = SubResource("Resource_fhpg4")
-follow_damping = true
+tween_on_load = false
 dead_zone_width = 0.311
 dead_zone_height = 0.474
 noise = SubResource("Resource_bnrqh")

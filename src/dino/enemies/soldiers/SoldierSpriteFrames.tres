@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=35 format=3 uid="uid://tehrf3qb1t4c"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://tehrf3qb1t4c"]
 
 [ext_resource type="Texture2D" uid="uid://yo4eqy35y1uc" path="res://src/dino/enemies/soldiers/soldierorange_sheet.png" id="1_gihev"]
 

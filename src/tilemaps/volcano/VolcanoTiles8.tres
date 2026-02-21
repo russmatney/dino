@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=34 format=3 uid="uid://bwwxt4q7tnsix"]
+[gd_resource type="TileSet" format=3 uid="uid://bwwxt4q7tnsix"]
 
 [ext_resource type="Texture2D" uid="uid://c404wal1v2ro" path="res://src/tilemaps/metal/metal-tiles-8_sheet.png" id="1_2jbqc"]
 [ext_resource type="Texture2D" uid="uid://d1eb27nsm5o11" path="res://src/tilemaps/volcano/volcano-tiles-8_sheet.png" id="1_uad1d"]

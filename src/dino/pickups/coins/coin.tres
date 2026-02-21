@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://c1f3hoppwx7cw"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://c1f3hoppwx7cw"]
 
 [ext_resource type="Texture2D" uid="uid://bhkcms8a3wapl" path="res://src/dino/pickups/coins/coin_sheet.png" id="1_cl7ue"]
 

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=24 format=3 uid="uid://4ee51xr80oda"]
+[gd_resource type="Resource" script_class="MapDef" format=3 uid="uid://4ee51xr80oda"]
 
 [ext_resource type="Script" uid="uid://b7pv3c2a3ryd0" path="res://src/dino/pickups/DropData.gd" id="1_6r5rh"]
 [ext_resource type="Script" uid="uid://cquwjbsn86j01" path="res://src/dino/entities/DinoEntity.gd" id="1_xqsd8"]

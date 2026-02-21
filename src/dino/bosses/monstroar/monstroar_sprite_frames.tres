@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=37 format=3 uid="uid://cvrl5hva6wlar"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://cvrl5hva6wlar"]
 
 [ext_resource type="Texture2D" uid="uid://dqa0cghbdjoxj" path="res://src/dino/bosses/monstroar/monstroar_sheet.png" id="1_oqnmq"]
 

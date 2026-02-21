@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dn26xh12hupr1"]
+[gd_resource type="TileSet" format=3 uid="uid://dn26xh12hupr1"]
 
 [ext_resource type="Texture2D" uid="uid://b0qblnip8w0c6" path="res://src/tilemaps/wooden/wooden-boxes-tiles-8_sheet.png" id="1_fo8sh"]
 

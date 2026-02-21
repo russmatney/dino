@@ -83,4 +83,6 @@ func _on_room_changed(target_room: String, ignore_same_room=true):
 			setup=func(p): p.position = og_p_position - offset
 			})
 	else:
+		Log.pr("adjusting player position", offset)
 		og_player.position -= offset
+		# og_player.pcam.teleport_position()

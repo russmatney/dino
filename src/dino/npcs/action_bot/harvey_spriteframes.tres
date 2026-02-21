@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://c3bahe6lnnse8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://c3bahe6lnnse8"]
 
 [ext_resource type="Texture2D" uid="uid://bg2euexdogdt5" path="res://src/dino/npcs/action_bot/redhat_sheet.png" id="1_uxhds"]
 

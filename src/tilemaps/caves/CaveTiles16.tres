@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://b0rg8dver31j6"]
+[gd_resource type="TileSet" format=3 uid="uid://b0rg8dver31j6"]
 
 [ext_resource type="Texture2D" uid="uid://ciy5438ao6h67" path="res://src/tilemaps/caves/cave_tiles-16_sheet.png" id="1_2js48"]
 

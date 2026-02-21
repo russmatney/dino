@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://jsan51qxpc3w"]
+[gd_scene format=4 uid="uid://jsan51qxpc3w"]
 
 [ext_resource type="Script" uid="uid://b4hk85eeggffa" path="res://src/dino/vania/VaniaGame.gd" id="1_rrc8s"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_ae8tp"]
@@ -9,8 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://db11pg0l5l562" path="res://assets/kenney-input-prompts/Keyboard & Mouse/Default/keyboard_x.png" id="10_8vghj"]
 [ext_resource type="Shader" uid="uid://u0vw1l8e4t2t" path="res://src/shaders/SimpleBlurScreen.gdshader" id="11_1hsjh"]
 [ext_resource type="PackedScene" uid="uid://bjbx05x3en3pk" path="res://src/effects/ScreenBlur.tscn" id="11_jq6qc"]
-[ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="11_n8r60"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="12_d1x2y"]
 [ext_resource type="RichTextEffect" path="res://addons/teeb.text_effects/resources/Jump.tres" id="12_lin80"]
 [ext_resource type="PackedScene" uid="uid://bs0c5xn0vglfn" path="res://src/dino/entities/PlayerSpawnPoint.tscn" id="12_qb2xg"]
 [ext_resource type="PackedScene" uid="uid://buluwrwsan2bp" path="res://src/components/mapdef_preview/MapDefIconGrid.tscn" id="13_73vrb"]
@@ -22,59 +20,48 @@
 [ext_resource type="PackedScene" uid="uid://c25comrsm8rkt" path="res://src/dino/entities/lights/HangingLight.tscn" id="17_jvpqf"]
 [ext_resource type="PackedScene" uid="uid://bvjtmnprpxqem" path="res://src/dino/entities/checkpoints/SnowCheckpoint.tscn" id="20_6xuw3"]
 
-[sub_resource type="Resource" id="Resource_fx1bk"]
-script = ExtResource("12_d1x2y")
-duration = 1.0
-transition = 0
-ease = 2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7p884"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5msm"]
 resource_local_to_scene = true
 shader = ExtResource("11_1hsjh")
 shader_parameter/lod = 2.6
 shader_parameter/grayscale = 0.0
 
-[node name="VaniaGame" type="Node2D" groups=["vania_game"]]
+[node name="VaniaGame" type="Node2D" unique_id=658770445 groups=["vania_game"]]
 script = ExtResource("1_rrc8s")
 map_def = ExtResource("2_i2h0n")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=252118897]
 ignore_rotation = false
-editor_draw_limits = true
 
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+[node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=1775783384]
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("2_ae8tp")
 
-[node name="DinoHUD" parent="." instance=ExtResource("5_r75pq")]
+[node name="DinoHUD" parent="." unique_id=716411900 instance=ExtResource("5_r75pq")]
 unique_name_in_owner = true
 
-[node name="QuestManager" type="Node" parent="."]
+[node name="QuestManager" type="Node" parent="." unique_id=854871794]
 unique_name_in_owner = true
 script = ExtResource("15_g6u8y")
 manual_mode = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=342993758]
 
-[node name="Minimap" parent="CanvasLayer" instance=ExtResource("6_jluxu")]
+[node name="Minimap" parent="CanvasLayer" unique_id=1442445668 instance=ExtResource("6_jluxu")]
 offset_top = 174.0
 offset_right = 240.0
 offset_bottom = 334.0
 display_player_location = true
 area = Vector2i(5, 5)
 
-[node name="PhantomCamera2D" type="Node2D" parent="."]
-script = ExtResource("11_n8r60")
-tween_resource = SubResource("Resource_fx1bk")
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=920041137]
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="ScreenBlur" parent="CanvasLayer2" instance=ExtResource("11_jq6qc")]
+[node name="ScreenBlur" parent="CanvasLayer2" unique_id=88053433 instance=ExtResource("11_jq6qc")]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_7p884")
+material = SubResource("ShaderMaterial_t5msm")
 
-[node name="ReadyToPlay" type="Control" parent="CanvasLayer2"]
+[node name="ReadyToPlay" type="Control" parent="CanvasLayer2" unique_id=304298679]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -83,7 +70,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/ReadyToPlay"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/ReadyToPlay" unique_id=1160734811]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,11 +79,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelNoBackground"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer" unique_id=1172140110]
 layout_mode = 2
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer" unique_id=1933671916]
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
 theme_type_variation = &"RichHeaderLabel"
@@ -106,27 +93,27 @@ text = "[center]Level Gen Complete![/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer" unique_id=1069601583]
 custom_minimum_size = Vector2(2.08165e-12, 80)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer" unique_id=1879448216]
 layout_mode = 2
 alignment = 1
 
-[node name="ReadyMapDefIcons" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_73vrb")]
+[node name="ReadyMapDefIcons" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=294123308 instance=ExtResource("13_73vrb")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer" unique_id=1076252964]
 custom_minimum_size = Vector2(2.08165e-12, 80)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer" unique_id=1402721145]
 layout_mode = 2
 alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer" unique_id=190110437]
 clip_contents = false
 custom_minimum_size = Vector2(180, 2.08165e-12)
 layout_mode = 2
@@ -137,14 +124,14 @@ text = "[center]Press[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="StartGameAction" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_g3klb")]
+[node name="StartGameAction" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1926463497 instance=ExtResource("8_g3klb")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("10_8vghj")
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/ReadyToPlay/PanelContainer/VBoxContainer/HBoxContainer" unique_id=649844155]
 custom_minimum_size = Vector2(240, 2.08165e-12)
 layout_mode = 2
 theme_type_variation = &"RichHeaderLabel"
@@ -153,7 +140,7 @@ text = "[center]to start![/center]"
 fit_content = true
 scroll_active = false
 
-[node name="LevelStart" type="Control" parent="CanvasLayer2"]
+[node name="LevelStart" type="Control" parent="CanvasLayer2" unique_id=255331012]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -162,7 +149,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/LevelStart"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/LevelStart" unique_id=915808572]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,11 +158,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelNoBackground"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/LevelStart/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/LevelStart/PanelContainer" unique_id=2057880938]
 layout_mode = 2
 alignment = 1
 
-[node name="LevelStartHeader" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="LevelStartHeader" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=138961191]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
@@ -186,23 +173,23 @@ text = "[center]Enemy Robot 1:1[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=171186950]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=1543991809]
 layout_mode = 2
 alignment = 1
 
-[node name="LevelStartMapDefIcons" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_73vrb")]
+[node name="LevelStartMapDefIcons" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1296683409 instance=ExtResource("13_73vrb")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=962696202]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 
-[node name="LevelStartSubhead" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="LevelStartSubhead" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=822447377]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
@@ -213,11 +200,11 @@ text = "[center]Watch out for those arrows![/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=48256941]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 
-[node name="LevelStartCountdown" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer"]
+[node name="LevelStartCountdown" type="RichTextLabel" parent="CanvasLayer2/LevelStart/PanelContainer/VBoxContainer" unique_id=99458389]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
@@ -229,7 +216,7 @@ fit_content = true
 scroll_active = false
 custom_effects = [ExtResource("12_lin80")]
 
-[node name="LevelComplete" type="Control" parent="CanvasLayer2"]
+[node name="LevelComplete" type="Control" parent="CanvasLayer2" unique_id=483808378]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -238,7 +225,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/LevelComplete"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/LevelComplete" unique_id=1534523275]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -247,11 +234,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"PanelNoBackground"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer" unique_id=1654079943]
 layout_mode = 2
 alignment = 1
 
-[node name="LevelCompleteHeader" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="LevelCompleteHeader" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=1764071188]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
@@ -262,23 +249,23 @@ text = "[center]Enemy Robot 1:1[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=381559600]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=537881593]
 layout_mode = 2
 alignment = 1
 
-[node name="LevelCompleteMapDefIcons" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("13_73vrb")]
+[node name="LevelCompleteMapDefIcons" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=170281767 instance=ExtResource("13_73vrb")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=1816117480]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 
-[node name="LevelCompleteSubhead" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="LevelCompleteSubhead" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=590935266]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 2.08165e-12)
 layout_mode = 2
@@ -289,16 +276,16 @@ text = "[center]Watch out for those arrows![/center]"
 fit_content = true
 scroll_active = false
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=506747782]
 custom_minimum_size = Vector2(2.08165e-12, 40)
 layout_mode = 2
 
-[node name="LevelCompleteAction" type="HBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer"]
+[node name="LevelCompleteAction" type="HBoxContainer" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer" unique_id=1427339196]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction" unique_id=47046143]
 clip_contents = false
 custom_minimum_size = Vector2(180, 2.08165e-12)
 layout_mode = 2
@@ -309,14 +296,14 @@ text = "[center]Press[/center]"
 fit_content = true
 scroll_active = false
 
-[node name="LevelCompleteActionIcon" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction" instance=ExtResource("8_g3klb")]
+[node name="LevelCompleteActionIcon" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction" unique_id=657194420 instance=ExtResource("8_g3klb")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("10_8vghj")
 
-[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction"]
+[node name="RichTextLabel3" type="RichTextLabel" parent="CanvasLayer2/LevelComplete/PanelContainer/VBoxContainer/LevelCompleteAction" unique_id=1277312752]
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
 theme_type_variation = &"RichHeaderLabel"
@@ -325,41 +312,41 @@ text = "[center]to continue![/center]"
 fit_content = true
 scroll_active = false
 
-[node name="LoadingPlayground" type="Node2D" parent="."]
+[node name="LoadingPlayground" type="Node2D" parent="." unique_id=984338249]
 unique_name_in_owner = true
 
-[node name="ColorRect" type="ColorRect" parent="LoadingPlayground"]
+[node name="ColorRect" type="ColorRect" parent="LoadingPlayground" unique_id=260758286]
 offset_left = -200.0
 offset_top = -168.0
 offset_right = 985.0
 offset_bottom = 534.0
 color = Color(1.44392e-07, 0.250856, 0.251362, 1)
 
-[node name="TileMap" type="TileMapLayer" parent="LoadingPlayground"]
+[node name="TileMap" type="TileMapLayer" parent="LoadingPlayground" unique_id=990425868]
 use_parent_material = true
 tile_map_data = PackedByteArray("AAAZAAwAAAACAAkAAAAZAAsAAAACAA0AAAAZAAMAAAACAAkAAAAZAAIAAAACAAIAAAAZAAEAAAACAAIAAAAZAAAAAAACAAgAAAAZAP//AAACAAgAAAAZAP7/AAAGAA8AAAAZAP3/AAADAA0AAAAYAAwAAAACAA8AAAAYAAsAAAACAAcAAAAYAAMAAAACAAMAAAAYAAIAAAACAAgAAAAYAAEAAAACAAIAAAAYAAAAAAACAA4AAAAYAP//AAACAA4AAAAYAP7/AAACAA4AAAAYAP3/AAACAAcAAAAXAAwAAAAHAAoAAAAXAAsAAAABAAcAAAAXAAMAAAACAAkAAAAXAAIAAAACAA4AAAAXAAEAAAACAAIAAAAXAAAAAAACAAIAAAAXAP//AAACAAgAAAAXAP7/AAACAA4AAAAXAP3/AAACAAEAAAAWAAMAAAABAAMAAAAWAAIAAAABAAIAAAAWAAEAAAABAAgAAAAWAAAAAAABAA4AAAAWAP//AAAHAAgAAAAWAP7/AAACAAIAAAAWAP3/AAACAAEAAAAVAP//AAACAAkAAAAVAP7/AAACAA4AAAAVAP3/AAACAAcAAAAUAP//AAACAAMAAAAUAP7/AAACAAIAAAAUAP3/AAACAAcAAAATAP//AAACAAMAAAATAP7/AAACAAIAAAATAP3/AAACAAEAAAASAP//AAACAAkAAAASAP7/AAACAAIAAAASAP3/AAACAA0AAAARAP//AAACAAMAAAARAP7/AAACAA4AAAARAP3/AAACAA0AAAAQAP//AAACAAMAAAAQAP7/AAACAAIAAAAQAP3/AAACAAEAAAAPAP//AAACAAMAAAAPAP7/AAACAAgAAAAPAP3/AAACAA0AAAAOAP//AAACAAkAAAAOAP7/AAACAAgAAAAOAP3/AAACAAEAAAANAP//AAACAA8AAAANAP7/AAACAAgAAAANAP3/AAACAA0AAAAMAP//AAACAA8AAAAMAP7/AAACAA4AAAAMAP3/AAACAA0AAAALAAwAAAADAA8AAAALAAsAAAADAAgAAAALAAoAAAADAAEAAAALAP//AAACAA8AAAALAP7/AAACAAgAAAALAP3/AAACAA0AAAAKAAwAAAACAAMAAAAKAAsAAAACAA4AAAAKAAoAAAACAA0AAAAKAP//AAACAAkAAAAKAP7/AAACAA4AAAAKAP3/AAACAAcAAAAJAAwAAAACAA8AAAAJAAsAAAACAAIAAAAJAAoAAAACAAcAAAAJAP//AAACAAkAAAAJAP7/AAACAA4AAAAJAP3/AAACAAEAAAAIAAwAAAACAA8AAAAIAAsAAAACAAgAAAAIAAoAAAACAA0AAAAIAP//AAACAAMAAAAIAP7/AAACAA4AAAAIAP3/AAACAAcAAAAHAAwAAAACAA8AAAAHAAsAAAACAAIAAAAHAAoAAAACAAEAAAAHAP//AAACAAMAAAAHAP7/AAACAAgAAAAHAP3/AAACAA0AAAAGAAwAAAACAAMAAAAGAAsAAAACAAIAAAAGAAoAAAACAA0AAAAGAP//AAACAAkAAAAGAP7/AAACAA4AAAAGAP3/AAACAAcAAAAFAAwAAAACAA8AAAAFAAsAAAACAAgAAAAFAAoAAAACAA0AAAAFAP//AAACAAkAAAAFAP7/AAACAAgAAAAFAP3/AAACAAEAAAAEAAwAAAABAAkAAAAEAAsAAAABAA4AAAAEAAoAAAABAA0AAAAEAP//AAACAAMAAAAEAP7/AAACAAgAAAAEAP3/AAACAAcAAAADAP//AAACAA8AAAADAP7/AAACAA4AAAADAP3/AAACAA0AAAACAP//AAACAAMAAAACAP7/AAACAAgAAAACAP3/AAACAAEAAAABAP//AAACAAkAAAABAP7/AAACAA4AAAABAP3/AAACAAEAAAAAAP//AAACAAkAAAAAAP7/AAACAA4AAAAAAP3/AAACAA0AAAD//wwAAAADAAMAAAD//wsAAAADAAIAAAD//woAAAADAAcAAAD/////AAACAA8AAAD///7/AAACAA4AAAD///3/AAACAAEAAAD+/wwAAAACAAMAAAD+/wsAAAACAAgAAAD+/woAAAAGAAkAAAD+/wkAAAADAAIAAAD+/wgAAAADAAIAAAD+/wcAAAADAA4AAAD+/wYAAAADAAgAAAD+/wUAAAADAAgAAAD+/wQAAAADAA4AAAD+/wMAAAADAAIAAAD+/wIAAAADAA4AAAD+/wEAAAADAAIAAAD+/wAAAAADAA4AAAD+////AAAGAA4AAAD+//7/AAACAAIAAAD+//3/AAACAA0AAAD9/wwAAAAGAAgAAAD9/wsAAAACAAIAAAD9/woAAAACAAgAAAD9/wkAAAACAA4AAAD9/wgAAAACAAgAAAD9/wcAAAACAAIAAAD9/wYAAAACAAIAAAD9/wUAAAACAAIAAAD9/wQAAAACAAgAAAD9/wMAAAACAA4AAAD9/wIAAAACAAIAAAD9/wEAAAACAAIAAAD9/wAAAAACAAgAAAD9////AAACAAgAAAD9//7/AAACAA4AAAD9//3/AAACAA0AAAD8/wwAAAACAA4AAAD8/wsAAAACAAIAAAD8/woAAAACAAIAAAD8/wkAAAACAAIAAAD8/wgAAAACAAgAAAD8/wcAAAACAAgAAAD8/wYAAAACAA4AAAD8/wUAAAACAAIAAAD8/wQAAAACAAIAAAD8/wMAAAACAA4AAAD8/wIAAAACAAgAAAD8/wEAAAACAA4AAAD8/wAAAAACAA4AAAD8////AAACAAgAAAD8//7/AAACAAgAAAD8//3/AAACAAEAAAD7/wwAAAABAAgAAAD7/wsAAAABAAgAAAD7/woAAAABAAgAAAD7/wkAAAABAAgAAAD7/wgAAAABAA4AAAD7/wcAAAABAAIAAAD7/wYAAAABAAgAAAD7/wUAAAABAAIAAAD7/wQAAAABAAgAAAD7/wMAAAABAAIAAAD7/wIAAAABAAgAAAD7/wEAAAABAAgAAAD7/wAAAAABAAIAAAD7////AAABAAIAAAD7//7/AAABAAIAAAD7//3/AAABAAcAAAAhABYAAAADAAMAAAAhABUAAAADAAIAAAAhABQAAAAGAAgAAAAhABMAAAACAAgAAAAhABIAAAACAAcAAAAgABYAAAACAAMAAAAgABUAAAACAA4AAAAgABQAAAACAAIAAAAgABMAAAACAAIAAAAgABIAAAACAAcAAAAfABYAAAACAAMAAAAfABUAAAACAA4AAAAfABQAAAACAA4AAAAfABMAAAACAAIAAAAfABIAAAACAAcAAAAeABYAAAACAA8AAAAeABUAAAACAAgAAAAeABQAAAACAAIAAAAeABMAAAACAAIAAAAeABIAAAACAAcAAAAdABYAAAACAA8AAAAdABUAAAACAA4AAAAdABQAAAACAA4AAAAdABMAAAACAAIAAAAdABIAAAACAAcAAAAcABYAAAACAA8AAAAcABUAAAACAAIAAAAcABQAAAACAAIAAAAcABMAAAACAAgAAAAcABIAAAACAAcAAAAbABYAAAACAAMAAAAbABUAAAACAAgAAAAbABQAAAACAAgAAAAbABMAAAACAAgAAAAbABIAAAACAA0AAAAaABYAAAACAAkAAAAaABUAAAACAA4AAAAaABQAAAACAA4AAAAaABMAAAACAAIAAAAaABIAAAACAA0AAAAZABYAAAACAAMAAAAZABUAAAACAA4AAAAZABQAAAACAA4AAAAZABMAAAACAA4AAAAZABIAAAACAAcAAAAYABYAAAACAA8AAAAYABUAAAACAA4AAAAYABQAAAAHAAkAAAAYABMAAAABAAgAAAAYABIAAAABAA0AAAAXABYAAAACAAMAAAAXABUAAAACAAIAAAAXABQAAAACAAcAAAAWABYAAAACAAkAAAAWABUAAAACAAgAAAAWABQAAAACAAEAAAAVABYAAAACAAMAAAAVABUAAAACAAIAAAAVABQAAAACAA0AAAAUABYAAAACAA8AAAAUABUAAAACAAIAAAAUABQAAAACAAcAAAATABYAAAACAAkAAAATABUAAAACAAgAAAATABQAAAACAA0AAAASABYAAAACAAMAAAASABUAAAACAAgAAAASABQAAAACAAcAAAARABYAAAACAAkAAAARABUAAAACAA4AAAARABQAAAACAAEAAAAQABYAAAACAAkAAAAQABUAAAACAA4AAAAQABQAAAACAA0AAAAPABYAAAACAAMAAAAPABUAAAACAA4AAAAPABQAAAACAAEAAAAOABYAAAACAAMAAAAOABUAAAACAAgAAAAOABQAAAACAAcAAAANABYAAAACAAMAAAANABUAAAACAAIAAAANABQAAAACAAEAAAAMABYAAAACAAkAAAAMABUAAAACAA4AAAAMABQAAAACAAcAAAALABYAAAACAA8AAAALABUAAAACAAgAAAALABQAAAACAAcAAAAKABYAAAACAAMAAAAKABUAAAACAAgAAAAKABQAAAACAAEAAAAJABYAAAACAA8AAAAJABUAAAACAA4AAAAJABQAAAACAAEAAAAIABYAAAACAA8AAAAIABUAAAACAAgAAAAIABQAAAACAAEAAAAHABYAAAACAA8AAAAHABUAAAACAA4AAAAHABQAAAACAAEAAAAGABYAAAACAAkAAAAGABUAAAACAAgAAAAGABQAAAACAAcAAAAFABYAAAACAAkAAAAFABUAAAACAAIAAAAFABQAAAACAAcAAAAEABYAAAACAAkAAAAEABUAAAACAA4AAAAEABQAAAACAAEAAAADABYAAAACAAkAAAADABUAAAACAAgAAAADABQAAAACAA0AAAACABYAAAACAAMAAAACABUAAAACAAgAAAACABQAAAACAA0AAAABABYAAAACAAMAAAABABUAAAACAAIAAAABABQAAAACAA0AAAAAABYAAAACAAMAAAAAABUAAAACAA4AAAAAABQAAAACAAcAAAD//xYAAAACAA8AAAD//xUAAAACAAIAAAD//xQAAAACAAcAAAD+/xYAAAACAA8AAAD+/xUAAAACAAIAAAD+/xQAAAACAA0AAAD9/xYAAAACAAMAAAD9/xUAAAACAAIAAAD9/xQAAAAGAA8AAAD9/xMAAAADAA4AAAD9/xIAAAADAAIAAAD9/xEAAAADAAIAAAD9/xAAAAADAAgAAAD9/w8AAAADAAgAAAD9/w4AAAADAA4AAAD9/w0AAAADAAgAAAD8/xYAAAACAAkAAAD8/xUAAAACAAgAAAD8/xQAAAACAAgAAAD8/xMAAAACAAgAAAD8/xIAAAACAA4AAAD8/xEAAAACAA4AAAD8/xAAAAACAA4AAAD8/w8AAAACAAgAAAD8/w4AAAACAAIAAAD8/w0AAAACAAIAAAD7/xYAAAABAA8AAAD7/xUAAAABAAIAAAD7/xQAAAABAAgAAAD7/xMAAAABAAIAAAD7/xIAAAABAA4AAAD7/xEAAAABAAIAAAD7/xAAAAABAAgAAAD7/w8AAAABAAIAAAD7/w4AAAABAAgAAAD7/w0AAAABAA4AAAAxABQAAAADAA8AAAAxABMAAAADAA4AAAAxABIAAAADAA4AAAAxABEAAAADAA4AAAAxABAAAAADAAgAAAAxAA8AAAADAAIAAAAxAA4AAAADAAgAAAAxAA0AAAADAA4AAAAxAAwAAAADAA4AAAAxAAsAAAADAAgAAAAxAAoAAAADAAgAAAAxAAkAAAADAAIAAAAxAAgAAAADAA4AAAAxAAcAAAADAA4AAAAxAAYAAAADAA4AAAAxAAUAAAADAAgAAAAxAAQAAAADAA4AAAAxAAMAAAADAAgAAAAxAAIAAAADAA4AAAAxAAEAAAADAAgAAAAxAAAAAAADAAgAAAAxAP//AAADAAIAAAAxAP7/AAADAAEAAAAwABQAAAACAAkAAAAwABMAAAACAA4AAAAwABIAAAACAA4AAAAwABEAAAACAA4AAAAwABAAAAACAAgAAAAwAA8AAAACAAIAAAAwAA4AAAACAA4AAAAwAA0AAAACAA4AAAAwAAwAAAACAA4AAAAwAAsAAAACAA4AAAAwAAoAAAACAAIAAAAwAAkAAAACAAgAAAAwAAgAAAACAAIAAAAwAAcAAAACAA4AAAAwAAYAAAACAA4AAAAwAAUAAAACAAgAAAAwAAQAAAACAAgAAAAwAAMAAAACAAIAAAAwAAIAAAACAAgAAAAwAAEAAAACAAIAAAAwAAAAAAACAAgAAAAwAP//AAACAAgAAAAwAP7/AAACAAEAAAAvABQAAAACAAMAAAAvABMAAAACAAIAAAAvABIAAAACAAIAAAAvABEAAAACAA4AAAAvABAAAAACAAgAAAAvAA8AAAACAAgAAAAvAA4AAAACAA4AAAAvAA0AAAACAA4AAAAvAAwAAAACAAIAAAAvAAsAAAACAAIAAAAvAAoAAAACAAIAAAAvAAkAAAACAA4AAAAvAAgAAAACAAgAAAAvAAcAAAACAA4AAAAvAAYAAAACAAIAAAAvAAUAAAACAAgAAAAvAAQAAAACAAgAAAAvAAMAAAACAA4AAAAvAAIAAAACAAIAAAAvAAEAAAACAA4AAAAvAAAAAAACAAIAAAAvAP//AAACAAIAAAAvAP7/AAACAAcAAAAuABQAAAACAAkAAAAuABMAAAACAAIAAAAuABIAAAACAAgAAAAuABEAAAACAA4AAAAuABAAAAACAAIAAAAuAA8AAAACAAIAAAAuAA4AAAACAA4AAAAuAA0AAAACAA4AAAAuAAwAAAACAAIAAAAuAAsAAAACAAgAAAAuAAoAAAACAA4AAAAuAAkAAAACAAIAAAAuAAgAAAACAA4AAAAuAAcAAAACAA4AAAAuAAYAAAACAAgAAAAuAAUAAAACAA4AAAAuAAQAAAACAA4AAAAuAAMAAAACAAIAAAAuAAIAAAACAAgAAAAuAAEAAAACAA4AAAAuAAAAAAACAA4AAAAuAP//AAACAA4AAAAuAP7/AAACAAcAAAAtABQAAAACAAkAAAAtABMAAAACAAIAAAAtABIAAAACAAIAAAAtABEAAAACAAgAAAAtABAAAAACAAgAAAAtAA8AAAACAA4AAAAtAA4AAAACAA4AAAAtAA0AAAACAAIAAAAtAAwAAAACAAIAAAAtAAsAAAACAAgAAAAtAAoAAAACAAgAAAAtAAkAAAACAAgAAAAtAAgAAAACAAgAAAAtAAcAAAACAA4AAAAtAAYAAAACAAIAAAAtAAUAAAACAA4AAAAtAAQAAAACAAIAAAAtAAMAAAACAAgAAAAtAAIAAAACAAIAAAAtAAEAAAACAAIAAAAtAAAAAAACAAgAAAAtAP//AAACAAgAAAAtAP7/AAACAAEAAAAsABQAAAACAA8AAAAsABMAAAACAAIAAAAsABIAAAACAA4AAAAsABEAAAACAAIAAAAsABAAAAACAAgAAAAsAA8AAAACAAgAAAAsAA4AAAACAAIAAAAsAA0AAAACAAgAAAAsAAwAAAACAAIAAAAsAAsAAAACAAgAAAAsAAoAAAACAAIAAAAsAAkAAAACAA4AAAAsAAgAAAACAAgAAAAsAAcAAAACAAIAAAAsAAYAAAACAA4AAAAsAAUAAAACAAIAAAAsAAQAAAACAAgAAAAsAAMAAAACAA4AAAAsAAIAAAACAA4AAAAsAAEAAAACAAIAAAAsAAAAAAACAAgAAAAsAP//AAACAA4AAAAsAP7/AAACAAEAAAArABQAAAACAA8AAAArABMAAAACAAgAAAArABIAAAACAAgAAAArABEAAAACAAIAAAArABAAAAACAAgAAAArAA8AAAACAAIAAAArAA4AAAACAAgAAAArAA0AAAACAAIAAAArAAwAAAACAAgAAAArAAsAAAACAA4AAAArAAoAAAACAAIAAAArAAkAAAAHAAMAAAArAAgAAAABAA4AAAArAAcAAAABAAgAAAArAAYAAAABAA4AAAArAAUAAAABAA4AAAArAAQAAAABAAgAAAArAAMAAAABAAIAAAArAAIAAAAHAAgAAAArAAEAAAACAAIAAAArAAAAAAACAAgAAAArAP//AAACAA4AAAArAP7/AAACAA0AAAAqABQAAAACAA8AAAAqABMAAAACAAgAAAAqABIAAAACAAIAAAAqABEAAAACAA4AAAAqABAAAAACAAIAAAAqAA8AAAACAAgAAAAqAA4AAAACAA4AAAAqAA0AAAACAA4AAAAqAAwAAAACAA4AAAAqAAsAAAACAA4AAAAqAAoAAAACAA4AAAAqAAkAAAACAA0AAAAqAAIAAAACAA8AAAAqAAEAAAACAAgAAAAqAAAAAAACAA4AAAAqAP//AAACAAgAAAAqAP7/AAACAAcAAAApABQAAAACAAMAAAApABMAAAACAAgAAAApABIAAAACAA4AAAApABEAAAACAAgAAAApABAAAAACAA4AAAApAA8AAAACAAIAAAApAA4AAAAHAA8AAAApAA0AAAABAA4AAAApAAwAAAABAA4AAAApAAsAAAABAAgAAAApAAoAAAABAAgAAAApAAkAAAABAAcAAAApAAIAAAACAA8AAAApAAEAAAACAAgAAAApAAAAAAACAAIAAAApAP//AAACAAgAAAApAP7/AAACAAEAAAAoABQAAAACAAkAAAAoABMAAAACAAgAAAAoABIAAAACAAIAAAAoABEAAAACAAIAAAAoABAAAAACAAgAAAAoAA8AAAACAA4AAAAoAA4AAAACAAcAAAAoAAIAAAACAAMAAAAoAAEAAAACAAgAAAAoAAAAAAACAA4AAAAoAP//AAACAAgAAAAoAP7/AAACAAcAAAAnABQAAAACAAMAAAAnABMAAAACAAIAAAAnABIAAAACAAgAAAAnABEAAAACAA4AAAAnABAAAAACAAIAAAAnAA8AAAACAA4AAAAnAA4AAAACAAEAAAAnAAIAAAACAA8AAAAnAAEAAAACAAgAAAAnAAAAAAACAAgAAAAnAP//AAACAAIAAAAnAP7/AAACAA0AAAAmABQAAAACAAkAAAAmABMAAAACAAIAAAAmABIAAAACAAIAAAAmABEAAAACAA4AAAAmABAAAAACAAIAAAAmAA8AAAACAAIAAAAmAA4AAAACAAEAAAAmAAIAAAACAA8AAAAmAAEAAAACAA4AAAAmAAAAAAACAA4AAAAmAP//AAACAA4AAAAmAP7/AAACAA0AAAAlABQAAAACAA8AAAAlABMAAAACAAgAAAAlABIAAAACAAIAAAAlABEAAAACAAgAAAAlABAAAAACAAgAAAAlAA8AAAACAA4AAAAlAA4AAAACAAEAAAAlAAIAAAACAA8AAAAlAAEAAAACAAIAAAAlAAAAAAACAAgAAAAlAP//AAACAAIAAAAlAP7/AAACAA0AAAAkABQAAAACAAMAAAAkABMAAAACAAgAAAAkABIAAAACAAIAAAAkABEAAAACAA4AAAAkABAAAAACAA4AAAAkAA8AAAACAAIAAAAkAA4AAAACAAcAAAAkAAIAAAACAAMAAAAkAAEAAAACAAIAAAAkAAAAAAACAA4AAAAkAP//AAACAAIAAAAkAP7/AAACAAcAAAAjABQAAAACAA8AAAAjABMAAAACAAgAAAAjABIAAAACAAgAAAAjABEAAAACAAgAAAAjABAAAAACAA4AAAAjAA8AAAACAA4AAAAjAA4AAAACAA0AAAAjAAIAAAACAAMAAAAjAAEAAAACAA4AAAAjAAAAAAACAAIAAAAjAP//AAACAAgAAAAjAP7/AAACAAEAAAAiABQAAAACAAMAAAAiABMAAAACAA4AAAAiABIAAAAHAAMAAAAiABEAAAABAAIAAAAiABAAAAABAAgAAAAiAA8AAAABAA4AAAAiAA4AAAABAA0AAAAiAAIAAAACAA8AAAAiAAEAAAACAA4AAAAiAAAAAAACAAIAAAAiAP//AAACAAIAAAAiAP7/AAACAAEAAAAhAAIAAAACAAkAAAAhAAEAAAACAAIAAAAhAAAAAAACAAgAAAAhAP//AAACAAgAAAAhAP7/AAACAA0AAAAgAAIAAAACAAMAAAAgAAEAAAACAA4AAAAgAAAAAAACAA4AAAAgAP//AAACAAIAAAAgAP7/AAACAAEAAAAfAAIAAAACAA8AAAAfAAEAAAACAAgAAAAfAAAAAAACAAgAAAAfAP//AAACAAIAAAAfAP7/AAACAAcAAAAeAAIAAAACAAkAAAAeAAEAAAACAAgAAAAeAAAAAAACAA4AAAAeAP//AAACAAgAAAAeAP7/AAACAA0AAAAdAAMAAAADAA8AAAAdAAIAAAAGAAIAAAAdAAEAAAACAAgAAAAdAAAAAAACAA4AAAAdAP//AAACAA4AAAAdAP7/AAACAAEAAAAcAAMAAAACAAMAAAAcAAIAAAACAAgAAAAcAAEAAAACAA4AAAAcAAAAAAACAA4AAAAcAP//AAACAA4AAAAcAP7/AAACAAEAAAAbAAMAAAACAAkAAAAbAAIAAAACAA4AAAAbAAEAAAACAAIAAAAbAAAAAAACAA4AAAAbAP//AAACAAIAAAAbAP7/AAACAAcAAAAaAAwAAAADAA8AAAAaAAsAAAADAAcAAAAaAAMAAAACAAMAAAAaAAIAAAACAAgAAAAaAAEAAAACAA4AAAAaAAAAAAACAA4AAAAaAP//AAACAAgAAAAaAP7/AAACAAcAAAAWAAwAAAACAAoAAAAVAAwAAAACABAAAAAUAAwAAAACAAoAAAATAAwAAAACAAoAAAASAA0AAAADAA8AAAASAAwAAAAGAAcAAAARAA0AAAABAA8AAAARAAwAAAABAA0AAAA=")
 tile_set = ExtResource("13_k6w4a")
 
-[node name="PlayerSpawnPoint" parent="LoadingPlayground" instance=ExtResource("12_qb2xg")]
+[node name="PlayerSpawnPoint" parent="LoadingPlayground" unique_id=464124612 instance=ExtResource("12_qb2xg")]
 position = Vector2(406, 119)
 
-[node name="EnemyRobot" parent="LoadingPlayground" instance=ExtResource("15_7bsuh")]
+[node name="EnemyRobot" parent="LoadingPlayground" unique_id=1927809439 instance=ExtResource("15_7bsuh")]
 position = Vector2(345, 252)
 
-[node name="CanvasModulate" type="CanvasModulate" parent="LoadingPlayground"]
+[node name="CanvasModulate" type="CanvasModulate" parent="LoadingPlayground" unique_id=1138796260]
 color = Color(0.356064, 0.356064, 0.356064, 1)
 
-[node name="Bush1" parent="LoadingPlayground" instance=ExtResource("15_1p30g")]
+[node name="Bush1" parent="LoadingPlayground" unique_id=1685618880 instance=ExtResource("15_1p30g")]
 position = Vector2(87, 161)
 
-[node name="Bush2" parent="LoadingPlayground" instance=ExtResource("16_igr1p")]
+[node name="Bush2" parent="LoadingPlayground" unique_id=1509759893 instance=ExtResource("16_igr1p")]
 position = Vector2(155, 158)
 
-[node name="HangingLight" parent="LoadingPlayground" instance=ExtResource("17_jvpqf")]
+[node name="HangingLight" parent="LoadingPlayground" unique_id=1183951668 instance=ExtResource("17_jvpqf")]
 position = Vector2(234, -6)
 
-[node name="HangingLight2" parent="LoadingPlayground" instance=ExtResource("17_jvpqf")]
+[node name="HangingLight2" parent="LoadingPlayground" unique_id=920621092 instance=ExtResource("17_jvpqf")]
 position = Vector2(522, 42)
 
-[node name="SnowCheckpoint" parent="LoadingPlayground" instance=ExtResource("20_6xuw3")]
+[node name="SnowCheckpoint" parent="LoadingPlayground" unique_id=903330526 instance=ExtResource("20_6xuw3")]
 position = Vector2(616, 224)

@@ -12,12 +12,16 @@ config_version=5
 
 metroidvania_system/settings_file="uid://bvvxp4phcd6la"
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Dino"
 run/main_scene="res://src/dino/menus/main/DinoMenu.tscn"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.6")
 boot_splash/bg_color=Color(0.819608, 0.509804, 0.576471, 1)
 boot_splash/image="res://assets/gameicons/dino_splash_sheet.png"
 config/icon="res://src/core/assets/icons/dino_sheet.png"
@@ -25,12 +29,12 @@ boot_splash/minimum_display_time=300
 
 [autoload]
 
-Pandora="*res://addons/pandora/api.gd"
-InputHelper="*res://addons/input_helper/input_helper.gd"
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
-Debug="*res://addons/bones/Debug.gd"
-Navi="*res://addons/bones/navi/Navi.gd"
-DJ="*res://addons/bones/DJ.gd"
+Pandora="*uid://bqv713p4thrli"
+InputHelper="*uid://cholww48njaeh"
+SoundManager="*uid://47qcf5cx2ti2"
+Debug="*uid://bwnujo6sesi4c"
+Navi="*uid://ukapf6uc7tnb"
+DJ="*uid://cgrh8hohdn51v"
 Hotel="*res://src/core/hotel/Hotel.gd"
 Metro="*res://src/core/metro/Metro.gd"
 Records="*res://src/dino/Records.gd"
@@ -38,8 +42,8 @@ Dino="*res://src/dino/Dino.gd"
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 Music="*res://src/Music.gd"
 Sounds="*res://src/Sounds.gd"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-Juice="*res://addons/bones/Juice.gd"
+PhantomCameraManager="*uid://duq6jhf6unyis"
+Juice="*uid://djen3rfnhq875"
 
 [display]
 

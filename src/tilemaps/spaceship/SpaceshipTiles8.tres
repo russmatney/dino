@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://daa3dtllkaqv3"]
+[gd_resource type="TileSet" format=3 uid="uid://daa3dtllkaqv3"]
 
 [ext_resource type="Texture2D" uid="uid://m7pqd7ox1a3b" path="res://src/tilemaps/spaceship/spaceship-tiles-8_sheet.png" id="1_wuc57"]
 

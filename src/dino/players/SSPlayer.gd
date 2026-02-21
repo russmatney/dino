@@ -149,9 +149,10 @@ func ensure_pcam():
 		pcam = player_camera_scene.instantiate()
 		add_child(pcam)
 		pcam.set_owner(self)
-		pcam.set_follow_target(self)
 	else:
 		logger().info("found pcam.", pcam)
+
+	if pcam.get_follow_target() != self:
 		pcam.set_follow_target(self)
 
 func _ready():

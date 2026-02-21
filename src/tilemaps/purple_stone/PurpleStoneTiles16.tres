@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://uuhwfbymqdt8"]
+[gd_resource type="TileSet" format=3 uid="uid://uuhwfbymqdt8"]
 
 [ext_resource type="Texture2D" uid="uid://rk61rhjkabem" path="res://src/tilemaps/purple_stone/stone_tiles_sheet.png" id="1_oci0t"]
 

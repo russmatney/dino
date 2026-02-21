@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://blvew4kmdi1j"]
+[gd_resource type="TileSet" format=3 uid="uid://blvew4kmdi1j"]
 
 [ext_resource type="Texture2D" uid="uid://j8c5vxs4qh8s" path="res://src/tilemaps/boat/pirate_ship_auto_tiles_sheet.png" id="1_c8kpa"]
 

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=45 format=3 uid="uid://dgkfewk2df8x7"]
+[gd_resource type="TileSet" format=3 uid="uid://dgkfewk2df8x7"]
 
 [ext_resource type="Texture2D" uid="uid://c404wal1v2ro" path="res://src/tilemaps/metal/metal-tiles-8_sheet.png" id="1_lwesb"]
 
