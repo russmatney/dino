@@ -126,14 +126,16 @@ func _get_unsaved_status(for_scene: String) -> String:
 	return ""
 
 func _get_window_layout(configuration: ConfigFile) -> void:
-	configuration.set_value("MetSys", "editor_offset", main.editor.map_offset)
-	configuration.set_value("MetSys", "viewer_offset", main.viewer.map_offset)
+	if main.editor:
+		configuration.set_value("MetSys", "editor_offset", main.editor.map_offset)
+	if main.viewer:
+		configuration.set_value("MetSys", "viewer_offset", main.viewer.map_offset)
 
 func _set_window_layout(configuration: ConfigFile) -> void:
 	if configuration.has_section("MetSys"):
-		main.editor.map_offset = configuration.get_value("MetSys", "editor_offset")
+		main.editor.map_offset = configuration.get_value("MetSys", "editor_offset", Vector2.ZERO)
 		main.editor.update_map_position()
-		main.viewer.map_offset = configuration.get_value("MetSys", "viewer_offset")
+		main.viewer.map_offset = configuration.get_value("MetSys", "viewer_offset", Vector2.ZERO)
 		main.viewer.update_map_position()
 
 func get_singleton():# -> MetroidvaniaSystem:

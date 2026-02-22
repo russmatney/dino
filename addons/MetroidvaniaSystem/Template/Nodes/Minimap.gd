@@ -21,11 +21,11 @@ extends Control
 	set(value):
 		if value == area:
 			return
-		
+
 		area = value
 		if _map_view:
 			_update_center()
-		
+
 		update_configuration_warnings()
 		update_minimum_size()
 
@@ -34,7 +34,7 @@ extends Control
 	set(value):
 		if value == center:
 			return
-		
+
 		_center.x = value.x
 		_center.y = value.y
 		_update_center()
@@ -46,7 +46,7 @@ extends Control
 	set(value):
 		if value == _center.z:
 			return
-		
+
 		_center.z = value
 		if _map_view:
 			_map_view.move(Vector2i(), value)
@@ -65,20 +65,20 @@ func _ready() -> void:
 	var actual_size := area
 	if smooth_scroll:
 		actual_size += Vector2i(2, 2)
-	
+
 	_center_offset.x = -actual_size.x / 2
 	_center_offset.y = -actual_size.y / 2
 	_map_view = MetSys.make_map_view(_drawer, center + Vector2i(_center_offset.x, _center_offset.y), actual_size, layer)
-	
+
 	if Engine.is_editor_hint():
 		set_physics_process(false)
 		return
-	
+
 	MetSys.map_updated.connect(_queue_update_all)
 	if track_position:
 		MetSys.cell_changed.connect(_on_cell_changed)
 		set_physics_process(smooth_scroll)
-	
+
 	if display_player_location:
 		_player_location = MetSys.add_player_location(_drawer)
 
@@ -92,13 +92,13 @@ func _on_cell_changed(new_cell: Vector3i):
 
 func _update_drawer_position():
 	if smooth_scroll:
-		var new_position := -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
+		var new_position: Vector2 = -(MetSys.exact_player_position / MetSys.settings.in_game_cell_size).posmod(1) * MetSys.CELL_SIZE + MetSys.CELL_SIZE * 0.5
 		if new_position != _drawer.position:
 			if smooth_scroll:
 				_drawer.position = new_position - MetSys.CELL_SIZE
 			else:
 				_drawer.position = new_position
-	
+
 	if _player_location:
 		if layer == MetSys.current_layer:
 			_player_location.show()
@@ -112,7 +112,7 @@ func _update_center():
 	var actual_size := area
 	if smooth_scroll:
 		actual_size += Vector2i(2, 2)
-	
+
 	_center_offset.x = -actual_size.x / 2
 	_center_offset.y = -actual_size.y / 2
 	_map_view.size = actual_size
@@ -123,11 +123,11 @@ func _queue_update_all():
 	if _update_all_queued:
 		return
 	_update_all_queued = true
-	
+
 	var update_all := func():
 		_map_view.update_all()
 		_update_all_queued = false
-	
+
 	update_all.call_deferred()
 
 func _get_minimum_size() -> Vector2:
@@ -137,7 +137,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var ret: PackedStringArray
 	if area.x % 2 == 0 or area.y % 2 == 0:
 		ret.append("Using even area dimensions is not recommended.")
-	
+
 	return ret
 
 func _validate_property(property: Dictionary) -> void:
