@@ -1,5 +1,5 @@
 @tool
-extends EditorPlugin
+extends "ExtendedEditorPlugin.gd"
 
 var context: EditorContextMenuPlugin
 
@@ -7,33 +7,22 @@ const PLAY_SHORTCUT = "custom_runner/play"
 const REPLAY_SHORTCUT = "custom_runner/replay_last"
 const CONFIG_SETTING = "addons/custom_runner/config_script"
 const DEFAULT_CONFIG = "uid://cotrfsbbe2ngp"
+const RAY_DISTANCE_SETTING = "addons/custom_runner/ray_distance"
 
 var runner: CustomRunner
 var data: Dictionary
 var prev_game_scene: String
 
+func _init() -> void:
+	add_plugin_translations_from_directory("res://addons/CustomRunner/Translations")
+
 func _enter_tree():
-	
 	context = ContextMenuPlugin.new()
+	context.plugin = self
 	add_context_menu_plugin(EditorContextMenuPlugin.CONTEXT_SLOT_2D_EDITOR, context)
 	
-	var make_shortcut := func(name: String, key: int) -> Shortcut:
-		var event := InputEventKey.new()
-		event.keycode = key
-		
-		var shortcut := Shortcut.new()
-		shortcut.resource_name = name
-		shortcut.events.append(event)
-		return shortcut
-	
-	var settings := EditorInterface.get_editor_settings()
-	if not settings.has_shortcut(PLAY_SHORTCUT):
-		settings.add_shortcut(PLAY_SHORTCUT, make_shortcut.call("Play Custom Scene", KEY_F7))
-	if not settings.has_shortcut(REPLAY_SHORTCUT):
-		settings.add_shortcut(REPLAY_SHORTCUT, make_shortcut.call("Replay Custom Scene", KEY_MASK_SHIFT | KEY_F7))
-	
-	if not ProjectSettings.has_setting(CONFIG_SETTING):
-		ProjectSettings.set_setting(CONFIG_SETTING, DEFAULT_CONFIG)
+	register_editor_shortcut("custom_runner/play", tr_extract.tr("Play Custom Scene"), KEY_F7)
+	register_editor_shortcut("custom_runner/replay_last", tr_extract.tr("Replay Custom Scene"), KEY_MASK_SHIFT | KEY_F7)
 	
 	var extensions: PackedStringArray
 	for ext in ResourceLoader.get_recognized_extensions_for_type("Script"):
@@ -41,15 +30,9 @@ func _enter_tree():
 			continue
 		extensions.append("*.%s;Script File" % ext)
 	
-	ProjectSettings.set_initial_value(CONFIG_SETTING, DEFAULT_CONFIG)
-	ProjectSettings.add_property_info({
-		"name": CONFIG_SETTING,
-		"type": TYPE_STRING,
-		"hint": PROPERTY_HINT_FILE_PATH,
-		"hint_string": ",".join(extensions),
-	})
-	
-	ProjectSettings.settings_changed.connect(update_settings)
+	define_project_setting(CONFIG_SETTING, DEFAULT_CONFIG, PROPERTY_HINT_FILE_PATH, ",".join(extensions))
+	define_project_setting(RAY_DISTANCE_SETTING, 100.0, PROPERTY_HINT_RANGE, "1.0,500.0,1.0")
+	track_project_setting(CONFIG_SETTING)
 	
 	load_runner()
 
@@ -86,12 +69,9 @@ func initialize_default_runner():
 func initialize_runner(new_runner: CustomRunner):
 	runner = new_runner
 	runner._add_variable.connect(func(variable: String, value: Variant): data[variable] = value)
-	context.runner = runner
 
-func update_settings():
-	pass
-	# if ProjectSettings.check_changed_settings_in_group(CONFIG_SETTING):
-	# 	load_runner()
+func _on_setting_changed(setting: String):
+	load_runner()
 
 func _exit_tree() -> void:
 	remove_context_menu_plugin(context)
@@ -105,6 +85,8 @@ func _shortcut_input(event: InputEvent) -> void:
 		return
 	
 	if EditorInterface.get_editor_settings().is_shortcut(PLAY_SHORTCUT, k):
+		update_click_position()
+		update_camera_and_mouse_3d_transform()
 		play_scene(false)
 		get_viewport().set_input_as_handled()
 	elif EditorInterface.get_editor_settings().is_shortcut(REPLAY_SHORTCUT, k):
@@ -114,12 +96,12 @@ func _shortcut_input(event: InputEvent) -> void:
 func play_scene(keep_data: bool) -> void:
 	if keep_data:
 		if data.is_empty() or prev_game_scene.is_empty():
-			EditorInterface.get_editor_toaster().push_toast("CustomRunner: Can't do Quick Run before running mormally at least once.", EditorToaster.SEVERITY_WARNING)
+			EditorInterface.get_editor_toaster().push_toast(tr("CustomRunner: Can't replay scene before running it normally at least once."), EditorToaster.SEVERITY_WARNING)
 			return
 	else:
 		var root: Node = EditorInterface.get_edited_scene_root()
 		if not runner._can_play_scene(root):
-			EditorInterface.get_editor_toaster().push_toast("CustomRunner: Invalid scene to play.")
+			EditorInterface.get_editor_toaster().push_toast(tr("CustomRunner: Invalid scene to play."))
 			return
 		
 		data.clear()
@@ -136,11 +118,68 @@ func play_scene(keep_data: bool) -> void:
 	EditorInterface.play_custom_scene(prev_game_scene)
 	OS.set_environment("__custom_runner_data__", "")
 
+func update_click_position() -> void:
+	if EditorInterface.get_edited_scene_root() is CanvasItem:
+		runner._click_position = EditorInterface.get_edited_scene_root().get_global_mouse_position()
+	else:
+		runner._click_position = Vector2.INF
+
+func update_camera_and_mouse_3d_transform() -> void:
+	var ray_distance = ProjectSettings.get_setting(RAY_DISTANCE_SETTING)
+	var viewport := EditorInterface.get_editor_viewport_3d()
+	var camera := viewport.get_camera_3d()
+
+	if not is_instance_valid(camera):
+		runner._camera_transform_3d = Transform3D.IDENTITY
+		runner._mouse_position_3d = Vector3.ZERO
+		return
+
+	var xform := camera.get_camera_transform()
+	var mouse_position := EditorInterface.get_editor_viewport_3d().get_mouse_position();
+
+	var ray_parameters := PhysicsRayQueryParameters3D.new();
+	ray_parameters.collide_with_areas = true
+	ray_parameters.collide_with_bodies = true
+	ray_parameters.from = camera.project_position(mouse_position, 0.0)
+	ray_parameters.to = camera.project_position(mouse_position, ray_distance)
+
+	var ray_result := viewport \
+		.find_world_3d() \
+		.direct_space_state \
+		.intersect_ray(ray_parameters)
+
+	runner._camera_transform_3d = xform
+	runner._mouse_position_3d = Vector3.ZERO if ray_result.is_empty() else ray_result["position"]
+
 class ContextMenuPlugin extends EditorContextMenuPlugin:
-	var runner: CustomRunner
+	var plugin: EditorPlugin
 	
 	func _popup_menu(paths: PackedStringArray) -> void:
-		add_context_menu_item("Play Here", play, EditorInterface.get_editor_theme().get_icon(&"Play", &"EditorIcons"))
+		if plugin.runner._can_play_scene(EditorInterface.get_edited_scene_root()):
+			add_context_menu_item(plugin.tr_extract.tr("Play Here"), play, EditorInterface.get_editor_theme().get_icon(&"Play", &"EditorIcons"))
+	
+	func get_position_from_popup() -> Vector2:
+		var editor: Node = Engine.get_main_loop().root
+		editor = editor.find_child("*CanvasItemEditor*", true, false)
+		if not editor:
+			return Vector2.INF
+		
+		var popup := editor.find_child("*SnapDialog*", false, false)
+		if not popup:
+			return Vector2.INF
+		popup = popup.get_parent().get_child(popup.get_index(true) + 2, true)
+		if not popup:
+			return Vector2.INF
+		
+		var pos: Vector2 = Vector2(popup.position) - editor.get_screen_position() - Vector2(0, 36)
+		pos = EditorInterface.get_edited_scene_root().get_viewport().global_canvas_transform.affine_inverse() * pos
+		return pos
 	
 	func play(whatevers):
-		runner.play_scene(false)
+		var popup_pos := get_position_from_popup()
+		if popup_pos.is_finite():
+			plugin.runner._click_position = popup_pos
+		else:
+			plugin.update_click_position()
+		
+		plugin.play_scene(false)
