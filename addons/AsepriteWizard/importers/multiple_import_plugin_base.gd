@@ -2,9 +2,11 @@
 extends EditorImportPlugin
 
 const result_codes = preload("../config/result_codes.gd")
+const logger = preload("../config/logger.gd")
 
 var config = preload("../config/config.gd").new()
 var _aseprite = preload("../aseprite/aseprite.gd").new()
+var _bakery = preload("./helpers/bakery.gd").new()
 
 var file_system_helper
 
@@ -42,6 +44,14 @@ func _get_option_visibility(path, option, options):
 
 func _import(source_file, save_path, options, platform_variants, gen_files):
 	var old_data = _load_old_data(source_file)
+
+	if not _aseprite.test_command():
+		if config.should_generate_bake_files() && _bakery.has_bake_file(source_file):
+			logger.warn("Aseprite command failed. Falling back to baked file. No changes will be made to children resources", source_file)
+			return _bakery.load_bake_file(source_file, "%s.%s" % [save_path, _get_save_extension()])
+		else:
+			return ERR_UNCONFIGURED
+
 	var exception_pattern = options.get('layer/exclude_layers_pattern', "")
 	var should_include_only_visibles = options.get('layer/only_visible_layers', false)
 	var should_merge_duplicates = options.get('layer/merge_duplicate_layers', false)
@@ -80,9 +90,11 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		var flat_layer_name = (layer as String).replace("/", "_")
 		var layer_save_path = "%s_%s.%s" % [base_name, flat_layer_name, _layer_extension()]
 		var file = FileAccess.open(layer_save_path, FileAccess.WRITE)
+		var source_hash = FileAccess.get_md5(absolute_source_file)
 		file.store_string(JSON.stringify({
 			"layer": layer,
 			"import_options": import_options,
+			"source_hash": source_hash
 		}))
 		data_to_save.layers[layer] = layer_save_path
 
@@ -90,6 +102,11 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 	packed.pack(data_to_save)
 
 	var exit_code = ResourceSaver.save(packed, "%s.%s" % [save_path, _get_save_extension()])
+
+	if config.should_generate_bake_files():
+		var bake_code = _bakery.save_bake_file(source_file, packed)
+		if bake_code != OK:
+			logger.error('Bake file creation failed (%s) ' % bake_code, source_file)
 
 	_cleanup_old_layers(old_data, layers)
 

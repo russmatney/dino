@@ -27,6 +27,11 @@ func _get_import_options(_path, _i):
 
 
 func _import(source_file, save_path, options, platform_variants, gen_files):
+	var bake_result = _handle_bake_fallback(source_file, save_path)
+
+	if bake_result != CONTINUE_STATUS_CODE:
+		return bake_result
+
 	var file = FileAccess.open(source_file, FileAccess.READ)
 	var i_data = JSON.parse_string(file.get_as_text())
 
@@ -38,17 +43,23 @@ func _import(source_file, save_path, options, platform_variants, gen_files):
 		"output_filename": '',
 		"output_folder": source_path,
 		"first_frame_only": i_data.import_options.get("first_frame_only", false),
+		"frame_padding": i_data.import_options.get("frame_padding", 0),
 		"trim_cels": i_data.import_options.get("trim_cels", false),
 		"scale": i_data.import_options.get("scale"),
 	}
 
+	if not aseprite_opts.first_frame_only:
+		aseprite_opts['sheet_type'] = i_data.import_options.get("sheet_type")
+		aseprite_opts['sheet_columns'] = i_data.import_options.get("sheet_columns")
+
+
 	var result = _generate_texture(absolute_source_file, aseprite_opts)
 
 	if not result.is_ok:
-		printerr("ERROR - Could not import aseprite file: %s" % result_codes.get_error_message(result.code))
+		logger.error("Could not import aseprite file: %s" % result_codes.get_error_message(result.code), source_file)
 		return FAILED
 
 	var sprite_sheet = result.content.sprite_sheet
 	var data = result.content.data
 
-	return _save_resource(sprite_sheet, save_path, result.content.data_file, data.meta.size)
+	return _save_resource(source_file, sprite_sheet, save_path, result.content.data_file, data.meta.size)

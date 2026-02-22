@@ -1,6 +1,7 @@
 @tool
 extends RefCounted
 
+const logger = preload("../config/logger.gd")
 var _config = preload("../config/config.gd").new()
 
 #
@@ -33,6 +34,9 @@ func export_file(file_name: String, output_folder: String, options: Dictionary) 
 		arguments.push_front("'[0, 0]'")
 		arguments.push_front("--frame-range")
 
+	if options.get('split_layers', false):
+		arguments.push_front("--split-layers")
+
 	_add_sheet_type_arguments(arguments, options)
 
 	_add_ignore_layer_arguments(file_name, arguments, exception_pattern)
@@ -42,8 +46,7 @@ func export_file(file_name: String, output_folder: String, options: Dictionary) 
 
 	var exit_code = _execute(arguments, output)
 	if exit_code != 0:
-		printerr('aseprite: failed to export spritesheet')
-		printerr(output)
+		logger.error('Failed to export spritesheet: %s' % output, file_name)
 		return {}
 
 	return {
@@ -97,6 +100,9 @@ func export_file_with_layers(file_name: String, layer_names: Array, output_folde
 		arguments.push_front("'[0, 0]'")
 		arguments.push_front("--frame-range")
 
+	if options.get('split_layers', false):
+		arguments.push_front("--split-layers")
+
 	_add_sheet_type_arguments(arguments, options)
 
 	var local_sprite_sheet_path = ProjectSettings.localize_path(sprite_sheet)
@@ -104,8 +110,7 @@ func export_file_with_layers(file_name: String, layer_names: Array, output_folde
 
 	var exit_code = _execute(arguments, output)
 	if exit_code != 0:
-		print('aseprite: failed to export layer spritesheet')
-		print(output)
+		logger.error('Failed to export layer spritesheet: %s' % output, file_name)
 		return {}
 
 	return {
@@ -187,8 +192,7 @@ func list_layers(file_path: String, only_visible = false, skip_group_layers: boo
 	var exit_code = _execute(arguments, output)
 
 	if exit_code != 0:
-		printerr('aseprite: failed listing layers')
-		printerr(output)
+		logger.error('Failed listing layers: %s' % output, file_path)
 		return []
 
 	if output.is_empty():
@@ -240,8 +244,7 @@ func list_layers_without_duplicates(file_path: String, only_visible = false) -> 
 	var exit_code = _execute(arguments, output)
 
 	if exit_code != 0:
-		printerr('aseprite: failed listing layers')
-		printerr(output)
+		logger.error('Failed listing layers: %s' % output, file_path)
 		return []
 
 	var file = FileAccess.open(data_path, FileAccess.READ)
@@ -271,8 +274,7 @@ func list_slices(file_name: String) -> Array:
 	var exit_code = _execute(arguments, output)
 
 	if exit_code != 0:
-		printerr('aseprite: failed listing slices')
-		printerr(output)
+		logger.error('Failed listing slices: %s' % output, file_name)
 		return []
 
 	if output.is_empty():
@@ -320,10 +322,10 @@ func _compile_regex(pattern):
 	if rgx.compile(pattern) == OK:
 		return rgx
 
-	printerr('exception regex error')
+	logger.error('Exception regex error')
 
 
-func test_command():
+func test_command() -> bool:
 	var exit_code = OS.execute(_aseprite_command(), ['--version'], [], true)
 	return exit_code == 0
 
@@ -384,8 +386,7 @@ func export_tileset_texture(file_name: String, output_folder: String, options: D
 
 	var exit_code = _execute(arguments, output)
 	if exit_code != 0:
-		printerr('aseprite: failed to export spritesheet')
-		printerr(output)
+		logger.error('Failed to export spritesheet: %s' % output, file_name)
 		return {}
 
 	return {
