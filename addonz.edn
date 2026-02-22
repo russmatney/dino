@@ -1,0 +1,28 @@
+{:addons
+ [{:repo "MikeSchulze/gdUnit4", :exclude ["addons/gdUnit4/test"]}
+  {:repo "bitbrain/pandora", :include ["addons/pandora"]}
+  {:repo "nathanhoad/godot_input_helper",
+   :include ["addons/input_helper"]}
+  {:repo "nathanhoad/godot_sound_manager",
+   :include ["addons/sound_manager"]}
+  {:repo "nathanhoad/godot_dialogue_manager",
+   :include ["addons/dialogue_manager"]}
+  {:repo "timothyqiu/gdfxr"}
+  {:repo "viniciusgerevini/godot-aseprite-wizard",
+   :include ["addons/AsepriteWizard"]}
+  {:repo "russmatney/bones", :include ["addons/bones"]}
+  {:repo "russmatney/log.gd",
+   :include ["addons/log"],
+   :branch "pretty-loggers"}
+  {:repo "KoBeWi/Metroidvania-System",
+   :include ["addons/MetroidvaniaSystem"],
+   :exclude ["Extensions"]}
+  {:repo "KoBeWi/Godot-Custom-Runner",
+   :include ["addons/CustomRunner"],
+   :exclude ["ExampleProject"]}
+  {:repo "ramokz/phantom-camera", :include ["addons/phantom_camera"]}
+  {:repo "SimonGigant/godot-text_effects_4.0"}],
+ :config
+ {:cache-dir "~/.config/gg/.cache/addonz",
+  :addons-dir "addons",
+  :index-file "~/.config/gg/.cache/addonz/index.edn"}}
