@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 
 #nullable enable
 
@@ -8,7 +8,8 @@ public enum InterpolationMode
 {
     Auto,
     Idle,
-    Physics
+    Physics,
+    Manual,
 }
 
 public static class PhantomCameraHostExtensions
@@ -43,13 +44,6 @@ public class PhantomCameraHost()
 
     private readonly Callable _callablePCamBecameActive;
     private readonly Callable _callablePCamBecameInactive;
-    
-    // For when Godot becomes the minimum version
-    // public InterpolationMode InterpolationMode
-    // {
-    //      get => (InterpolationMode)(int)Node.Call(MethodName.GetInterpolationMode);
-    //      set => Node.Call(MethodName.SetInterpolationMode, (int)value);
-    // }
 
     public int HostLayers
     {
@@ -71,10 +65,12 @@ public class PhantomCameraHost()
 
     public bool TriggerPhantomCameraTween => (bool)Node.Call(MethodName.GetTriggerPhantomCameraTween);
 
+    public void Process() => Node.Call(MethodName.Process);
+
     public PhantomCamera? GetActivePhantomCamera()
     {
         var result = Node.Call(MethodName.GetActivePhantomCamera);
-        
+
         if (result.Obj is Node2D node2D)
         {
             return new PhantomCamera2D(node2D);
@@ -103,6 +99,8 @@ public class PhantomCameraHost()
         public static readonly StringName SetInterpolationMode = new("set_interpolation_mode");
 
         public static readonly StringName SetHostLayersValue = new("set_host_layers_value");
+
+        public static readonly StringName Process = new("process");
     }
 
     public static class SignalName

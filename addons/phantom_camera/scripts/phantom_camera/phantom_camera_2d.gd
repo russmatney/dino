@@ -67,12 +67,12 @@ signal physics_target_changed
 ## The different modes have different functionalities and purposes, so choosing
 ## the correct one depends on what each [param PhantomCamera2D] is meant to do.
 enum FollowMode {
-	NONE 			= 0, ## Default - No follow logic is applied.
-	GLUED 			= 1, ## Sticks to its target.
-	SIMPLE 			= 2, ## Follows its target with an optional offset.
-	GROUP 			= 3, ## Follows multiple targets with option to dynamically reframe itself.
-	PATH 			= 4, ## Follows a target while being positionally confined to a [Path2D] node.
-	FRAMED 			= 5, ## Applies a dead zone on the frame and only follows its target when it tries to leave it.
+	NONE    = 0, ## Default - No follow logic is applied.
+	GLUED   = 1, ## Sticks to its target.
+	SIMPLE  = 2, ## Follows its target with an optional offset.
+	GROUP   = 3, ## Follows multiple targets with option to dynamically reframe itself.
+	PATH    = 4, ## Follows a target while being positionally confined to a [Path2D] node.
+	FRAMED  = 5, ## Applies a dead zone on the frame and only follows its target when it tries to leave it.
 }
 
 ## Determines how often an inactive [param PhantomCamera2D] should update
@@ -87,9 +87,15 @@ enum InactiveUpdateMode {
 
 enum FollowLockAxis {
 	NONE    = 0,
-	X 		= 1,
-	Y 		= 2,
-	XY		= 3,
+	X       = 1,
+	Y       = 2,
+	XY      = 3,
+}
+
+enum FollowTargetPhysicsClass {
+	CHARACTERBODY   = 0,
+	RIGIDBODY       = 1,
+	OTHER           = 2,
 }
 
 #endregion
@@ -136,6 +142,7 @@ enum FollowLockAxis {
 @export var follow_mode: FollowMode = FollowMode.NONE:
 	set(value):
 		follow_mode = value
+		follow_mode_changed.emit()
 
 		if follow_mode == FollowMode.NONE:
 			_should_follow = false
@@ -145,13 +152,13 @@ enum FollowLockAxis {
 			return
 
 		match follow_mode:
+			FollowMode.GROUP:
+				_follow_targets_size_check()
 			FollowMode.PATH:
 				if is_instance_valid(follow_path):
 					_should_follow_checker()
 				else:
 					_should_follow = false
-			FollowMode.GROUP:
-				_follow_targets_size_check()
 			_:
 				_should_follow_checker()
 
@@ -164,7 +171,8 @@ enum FollowLockAxis {
 				dead_zone_changed.disconnect(_on_dead_zone_changed)
 
 		top_level = true
-		follow_mode_changed.emit()
+		_reset_lookahead()
+
 		notify_property_list_changed()
 	get:
 		return follow_mode
@@ -295,7 +303,7 @@ var _follow_axis_lock_value: Vector2 = Vector2.ZERO
 var _should_rotate_with_target: bool = false
 
 ## Offsets the rotation when [member rotate_with_target] is enabled.
-@export_range(-360, 360, 0.001, "radians_as_degrees") var rotation_offset: float = 0:
+@export_range(-360.0, 360.0, 0.001, "radians_as_degrees") var rotation_offset: float = 0.0:
 	set = set_rotation_offset,
 	get = get_rotation_offset
 
@@ -305,9 +313,53 @@ var _should_rotate_with_target: bool = false
 	get = get_rotation_damping
 
 ## Defines the damping amount for the [member rotate_with_target].
-@export_range(0, 1) var rotation_damping_value: float = 0.1:
+@export_range(0.0, 1.0) var rotation_damping_value: float = 0.1:
 	set = set_rotation_damping_value,
 	get = get_rotation_damping_value
+
+## Enables velocity-based lookahead. As the [param follow target] moves the camera will move further ahead
+## based on its velocity. The faster the [param follow target] moves, the further ahead the camera will move.
+@export var lookahead: bool = false:
+	set = set_lookahead,
+	get = get_lookahead
+
+@export_subgroup("Lookahead")
+## The amount of [param seconds] to look ahead of the [param follow target]'s position per axis based on
+## the [param follow target]'s velocity.[br]
+## Each axis has its own prediction time in [param seconds].[br][br]
+## A value of [param 0] can be set either to disable lookahead for the corresponding axis.
+@export_custom(PROPERTY_HINT_LINK, "suffix:s") var lookahead_time: Vector2 = Vector2(0.5, 0.5):
+	set = set_lookahead_time,
+	get = get_lookahead_time
+
+## Determines the damping speed of how fast the camera should reach the [member lookahead_time]
+## target once the [param follow target] has a positional velocity.[br]
+## [b]Lower value[/b] = faster.[br]
+## [b]Higher value[/b] = slower.
+@export_range(0.0, 1.0, 0.001, "or_greater") var lookahead_acceleration: float = 0.2:
+	set = set_lookahead_acceleration,
+	get = get_lookahead_acceleration
+
+## Determines the damping speed of how fast the camera should decelerate back to the
+## [param follow target]'s position once it has no positional velocity.[br]
+## [b]Lower value[/b] = faster.[br]
+## [b]Higher value[/b] = slower.
+@export_range(0.0, 1.0, 0.001, "or_greater") var lookahead_deceleration: float = 0.2:
+	set = set_lookahead_deceleration,
+	get = get_lookahead_deceleration
+
+## Enables a maximum velocity limit in [param pixels per second] for the [member follow_lookahead] effect.[br]
+## If [code]true[/code], the [param follow target's] velocity will be clamped to the [member follow_lookahead_max_value] before calculating lookahead.[br]
+## In other words, no matter how fast the target's actual velocity is, the lookahead will only follow up to the speed defined here.
+@export var lookahead_max: bool = false:
+	set = set_lookahead_max,
+	get = get_lookahead_max
+
+## The maximum [member lookahead] velocity in [param pixels per second].
+## The [param follow target]'s velocity will be clamped within these bounds on each axis before applying lookahead time.
+@export_custom(PROPERTY_HINT_LINK, "suffix:px/s") var lookahead_max_value: Vector2 = Vector2(200.0, 200.0):
+	set = set_lookahead_max_value,
+	get = get_lookahead_max_value
 
 
 @export_subgroup("Follow Group")
@@ -325,14 +377,14 @@ var _should_rotate_with_target: bool = false
 ## Sets the param minimum zoom amount, in other words how far away the
 ## [param Camera2D] can be from scene.[br][br]
 ## This only works when [member auto_zoom] is enabled.
-@export var auto_zoom_min: float = 1:
+@export var auto_zoom_min: float = 1.0:
 	set = set_auto_zoom_min,
 	get = get_auto_zoom_min
 
 ## Sets the maximum zoom amount, in other words how close the [param Camera2D]
 ## can move towards the scene.[br][br]
 ## This only works when [member auto_zoom] is enabled.
-@export var auto_zoom_max: float = 5:
+@export var auto_zoom_max: float = 5.0:
 	set = set_auto_zoom_max,
 	get = get_auto_zoom_max
 
@@ -352,7 +404,7 @@ var _should_rotate_with_target: bool = false
 ## If the targeted node leaves the horizontal bounds, the
 ## [param PhantomCamera2D] will follow the target horizontally to keep
 ## it within bounds.
-@export_range(0, 1) var dead_zone_width: float = 0:
+@export_range(0.0, 1.0) var dead_zone_width: float = 0.0:
 	set(value):
 		dead_zone_width = value
 		dead_zone_changed.emit()
@@ -364,7 +416,7 @@ var _should_rotate_with_target: bool = false
 ## If the targeted node leaves the vertical bounds, the
 ## [param PhantomCamera2D] will follow the target horizontally to keep
 ## it within bounds.
-@export_range(0, 1) var dead_zone_height: float = 0:
+@export_range(0.0, 1.0) var dead_zone_height: float = 0.0:
 	set(value):
 		dead_zone_height = value
 		dead_zone_changed.emit()
@@ -378,7 +430,6 @@ var _should_rotate_with_target: bool = false
 
 
 @export_group("Limit")
-
 ## Shows the [param Camera2D]'s built-in limit border.[br]
 ## The [param PhantomCamera2D] and [param Camera2D] can move around anywhere within it.
 @export var draw_limits: bool = false:
@@ -428,7 +479,7 @@ var _should_rotate_with_target: bool = false
 ## Applies an offset to the [TileMapLayer] Limit or [Shape2D] Limit.
 ## The values goes from [param Left], [param Top], [param Right]
 ## and [param Bottom].
-@export var limit_margin: Vector4i = Vector4.ZERO:
+@export var limit_margin: Vector4i = Vector4i.ZERO:
 	set = set_limit_margin,
 	get = get_limit_margin
 #@export var limit_smoothed: bool = false: # TODO - Needs proper support
@@ -463,24 +514,37 @@ var _should_rotate_with_target: bool = false
 var _is_active: bool = false
 
 var _should_follow: bool = false
-var _follow_framed_offset: Vector2 = Vector2.ZERO
 var _follow_target_physics_based: bool = false
 var _physics_interpolation_enabled: bool = false # NOTE - Enable for Godot 4.3 and when PhysicsInterpolationMode bug is resolved
+
+var _follow_target_physics_class: FollowTargetPhysicsClass = FollowTargetPhysicsClass.OTHER
+var _character_body_2d: CharacterBody2D = null
+var _rigid_body_2d: RigidBody2D = null
 
 var _has_multiple_follow_targets: bool = false
 var _follow_targets_single_target_index: int = 0
 var _follow_targets: Array[Node2D] = []
 
 var _follow_velocity_ref: Vector2 = Vector2.ZERO # Stores and applies the velocity of the follow movement
-var _rotation_velocity_ref: float = 0 # Stores and applies the velocity of the rotation movement
+var _rotation_velocity_ref: float = 0.0 # Stores and applies the velocity of the rotation movement
 
 var _has_follow_path: bool = false
+
+var _has_lookahead_acceleration: bool = true
+var _has_lookahead_deceleration: bool = true
 
 var _tween_skip: bool = false
 
 ## Defines the position of the [member follow_target] within the viewport.[br]
 ## This is only used for when [member follow_mode] is set to [param Framed].
 var _follow_framed_initial_set: bool = false
+
+var _lookahead_offset: Vector2 = Vector2.ZERO
+var _lookahead_offset_velocity_ref: Vector2 = Vector2.ZERO
+
+var _lookahead_sample_pos_prev: Vector2 = Vector2.ZERO
+var _lookahead_has_prev_sample: bool = false
+
 
 static var _draw_limits: bool = false
 
@@ -545,7 +609,8 @@ func _validate_property(property: Dictionary) -> void:
 			"follow_damping", \
 			"follow_damping_value", \
 			"follow_axis_lock", \
-			"rotate_with_target":
+			"rotate_with_target", \
+			"lookahead":
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	if property.name == "follow_offset":
@@ -581,6 +646,22 @@ func _validate_property(property: Dictionary) -> void:
 			"show_viewfinder_in_play":
 				property.usage = PROPERTY_USAGE_NO_EDITOR
 
+
+	###############
+	## Look Ahead
+	###############
+	# Look-ahead only available for single-target follow modes
+	if not lookahead:
+		match property.name:
+			"lookahead_time", \
+			"lookahead_max", \
+			"lookahead_max_value", \
+			"lookahead_acceleration", \
+			"lookahead_deceleration":
+				property.usage = PROPERTY_USAGE_NO_EDITOR
+
+	if property.name == "lookahead_max_value" and not lookahead_max:
+		property.usage = PROPERTY_USAGE_NO_EDITOR
 
 	#####################
 	## Rotate With Target
@@ -716,17 +797,21 @@ func _limit_checker() -> void:
 
 
 func _follow(delta: float) -> void:
-	_set_follow_position()
+	_set_follow_position(delta)
 	_interpolate_position(_follow_target_position, delta)
 
 
-func _set_follow_position() -> void:
+func _set_follow_position(delta: float) -> void:
 	match follow_mode:
 		FollowMode.GLUED:
 			_follow_target_position = follow_target.global_position
+			if lookahead and not Engine.is_editor_hint():
+				_follow_target_position = _apply_lookahead(_follow_target_position, delta)
 
 		FollowMode.SIMPLE:
 			_follow_target_position = _get_target_position_offset()
+			if lookahead and not Engine.is_editor_hint():
+				_follow_target_position = _apply_lookahead(_follow_target_position, delta)
 
 		FollowMode.GROUP:
 			if _has_multiple_follow_targets:
@@ -745,69 +830,177 @@ func _set_follow_position() -> void:
 						zoom = clamp(_phantom_camera_manager.screen_size.x / rect.size.x, auto_zoom_min, auto_zoom_max) * Vector2.ONE
 					else:
 						zoom = clamp(_phantom_camera_manager.screen_size.y / rect.size.y, auto_zoom_min, auto_zoom_max) * Vector2.ONE
-				_follow_target_position = rect.get_center() + follow_offset
+
+				var target_position: Vector2 = rect.get_center() + follow_offset
+				if lookahead and not Engine.is_editor_hint():
+					target_position = _apply_lookahead(target_position, delta)
+
+				_follow_target_position = target_position
 			else:
 				_follow_target_position = follow_targets[_follow_targets_single_target_index].global_position + follow_offset
 
 		FollowMode.PATH:
 			var path_position: Vector2 = follow_path.global_position
+			var follow_postion: Vector2 = _get_target_position_offset()
+
+			if lookahead and not Engine.is_editor_hint():
+				follow_postion = _apply_lookahead(follow_postion, delta)
 
 			_follow_target_position = \
 			follow_path.curve.get_closest_point(
-				_get_target_position_offset() - path_position
+				follow_postion - path_position
 			) + path_position
 
 		FollowMode.FRAMED:
-			if not Engine.is_editor_hint():
-				if not _is_active:
-					_follow_target_position = _get_target_position_offset()
-				else:
-					viewport_position = (get_follow_target().get_global_transform_with_canvas().get_origin() + follow_offset) / get_viewport_rect().size
-					var framed_side_offset: Vector2 = _get_framed_side_offset()
-
-					if framed_side_offset != Vector2.ZERO:
-						var glo_pos: Vector2
-						var target_position: Vector2 = _get_target_position_offset() + _follow_framed_offset
-
-						if dead_zone_width == 0 || dead_zone_height == 0:
-							if dead_zone_width == 0 && dead_zone_height != 0:
-								_follow_target_position = _get_target_position_offset()
-							elif dead_zone_width != 0 && dead_zone_height == 0:
-								glo_pos = _get_target_position_offset()
-								glo_pos.x += target_position.x - global_position.x
-								_follow_target_position = glo_pos
-							else:
-								_follow_target_position = _get_target_position_offset()
-
-						# If a horizontal dead zone is reached
-						if framed_side_offset.x != 0 and framed_side_offset.y == 0:
-							_follow_target_position.y = _transform_output.origin.y
-							_follow_target_position.x = target_position.x
-							_follow_framed_offset.y = global_position.y - _get_target_position_offset().y
-							dead_zone_reached.emit(Vector2(framed_side_offset.x, 0))
-							# If a vertical dead zone is reached
-						elif framed_side_offset.x == 0 and framed_side_offset.y != 0:
-							_follow_target_position.x = _transform_output.origin.x
-							_follow_target_position.y = target_position.y
-							_follow_framed_offset.x = global_position.x - _get_target_position_offset().x
-							dead_zone_reached.emit(Vector2(0, framed_side_offset.y))
-						# If a deadzone corner is reached
-						else:
-							_follow_target_position = target_position
-							dead_zone_reached.emit(Vector2(framed_side_offset.x, framed_side_offset.y))
-					else:
-						_follow_framed_offset = _transform_output.origin - _get_target_position_offset()
-						_follow_target_position = global_position
-						return
-			else:
+			if Engine.is_editor_hint() or not _is_active:
 				_follow_target_position = _get_target_position_offset()
+			else:
+				var target_position: Vector2 = _get_target_position_offset()
+				var viewport_rect: Vector2 = get_viewport_rect().size
+				if lookahead and not Engine.is_editor_hint():
+					target_position = _apply_lookahead(target_position, delta)
 
+				var viewport_dead_zone: Vector4 = Vector4(
+					viewport_rect.x / 2 / zoom.x * dead_zone_width,     # Left ## TODO - Replace with specific left dead zone value
+					viewport_rect.y / 2 / zoom.y * dead_zone_height,    # Top ## TODO - Replace with specific top dead zone value
+					viewport_rect.x / 2 / zoom.x * dead_zone_width,     # Right ## TODO - Replace with specific right dead zone value
+					viewport_rect.y / 2 / zoom.y * dead_zone_height,    # Bottom  ## TODO - Replace with specific bottom dead zone value
+				)
+
+				var viewport_target_offset: Vector2 = Vector2.ZERO
+				var dead_zone_side_reached: Vector2i = Vector2i.ZERO
+
+				var left_dead_zone: float = global_position.x - viewport_dead_zone.x
+				var right_dead_zone: float = global_position.x + viewport_dead_zone.z
+				## Left Dead Zone
+				if left_dead_zone > target_position.x:
+					viewport_target_offset.x = left_dead_zone - target_position.x
+					_follow_target_position.x -= viewport_target_offset.x
+					dead_zone_side_reached.x = 1
+				## Right Dead Zone
+				elif right_dead_zone < target_position.x:
+					viewport_target_offset.x = right_dead_zone - target_position.x
+					_follow_target_position.x -= viewport_target_offset.x
+					dead_zone_side_reached.x = -1
+
+				var top_dead_zone: float = global_position.y - viewport_dead_zone.y
+				var bottom_dead_zone: float = global_position.y + viewport_dead_zone.w
+				## Top Dead Zone
+				if top_dead_zone > target_position.y:
+					viewport_target_offset.y = top_dead_zone - target_position.y
+					_follow_target_position.y -= viewport_target_offset.y
+					dead_zone_side_reached.y = 1
+				## Bottom Dead Zone
+				elif bottom_dead_zone < target_position.y:
+					viewport_target_offset.y = bottom_dead_zone - target_position.y
+					_follow_target_position.y -= viewport_target_offset.y
+					dead_zone_side_reached.y = -1
+
+				if dead_zone_side_reached != Vector2i.ZERO:
+					dead_zone_reached.emit(dead_zone_side_reached)
+
+				if show_viewfinder_in_play:
+					var target_screen_position: Vector2 = Transform2D(get_viewport().canvas_transform * Transform2D(0, target_position + viewport_target_offset)).origin
+					viewport_position = target_screen_position / viewport_rect
+		_: pass
 
 func _set_follow_velocity(index: int, value: float):
 	_follow_velocity_ref[index] = value
 
 func _set_rotation_velocity(index: int, value: float):
 	_rotation_velocity_ref = value
+
+
+func _reset_lookahead() -> void:
+	_lookahead_offset = Vector2.ZERO
+	_lookahead_offset_velocity_ref = Vector2.ZERO
+	_lookahead_has_prev_sample = false
+
+
+func _set_lookahead_velocity(index: int, value: float) -> void:
+	_lookahead_offset_velocity_ref[index] = value
+
+
+func _get_follow_target_velocity(target_position: Vector2, delta: float) -> Vector2:
+	match _follow_target_physics_class:
+		FollowTargetPhysicsClass.CHARACTERBODY:
+			return _character_body_2d.velocity
+		FollowTargetPhysicsClass.RIGIDBODY:
+			return _rigid_body_2d.linear_velocity
+		FollowTargetPhysicsClass.OTHER:
+			if follow_mode != FollowMode.GROUP:
+				if follow_target.has_method(&"get_velocity"):
+					var v = follow_target.call(&"get_velocity")
+					if v is Vector2:
+						return v
+
+				var prop_v = follow_target.get(&"velocity")
+				if prop_v is Vector2:
+					return prop_v
+
+	if not _lookahead_has_prev_sample:
+		_lookahead_has_prev_sample = true
+		_lookahead_sample_pos_prev = target_position
+		return Vector2.ZERO
+
+	var current_position: Vector2
+	if follow_mode == FollowMode.GROUP:
+		if _has_multiple_follow_targets:
+			current_position = target_position
+		else:
+			current_position = follow_targets[_follow_targets_single_target_index].global_position + follow_offset
+	else:
+		current_position = _get_target_position_offset()
+
+	if not _lookahead_has_prev_sample:
+		_lookahead_has_prev_sample = true
+		_lookahead_sample_pos_prev = current_position
+		return Vector2.ZERO
+
+	var velocity: Vector2 = (current_position - _lookahead_sample_pos_prev) / maxf(delta, 0.0001)
+	_lookahead_sample_pos_prev = current_position
+
+	return velocity
+
+
+func _apply_lookahead(target_position: Vector2, delta: float) -> Vector2:
+	var velocity: Vector2 = _get_follow_target_velocity(target_position, delta)
+
+	if lookahead_max:
+		velocity = Vector2(
+			clampf(velocity.x, -lookahead_max_value.x, lookahead_max_value.x),
+			clampf(velocity.y, -lookahead_max_value.y, lookahead_max_value.y),
+		)
+
+	var desired: Vector2 = velocity * lookahead_time
+	for i in 2:
+		# Determine if moving toward desired (accelerating) or away from it (decelerating)
+		var is_accelerating: bool = signf(desired[i] - _lookahead_offset[i]) == signf(desired[i])
+		var smooth_time: float
+		var lookahead_is_smooth: bool
+
+		if is_accelerating:
+			lookahead_is_smooth = _has_lookahead_acceleration
+			smooth_time = lookahead_acceleration
+		else:
+			lookahead_is_smooth = _has_lookahead_deceleration
+			smooth_time = lookahead_deceleration
+
+		if lookahead_is_smooth:
+			_lookahead_offset[i] = _smooth_damp(
+				desired[i],
+				_lookahead_offset[i],
+				i,
+				_lookahead_offset_velocity_ref[i],
+				_set_lookahead_velocity,
+				smooth_time,
+				delta
+			)
+		else:
+			_lookahead_offset[i] = desired[i]
+
+	return target_position + _lookahead_offset
+
 
 func _interpolate_position(target_position: Vector2, delta: float) -> void:
 	var output_rotation: float = global_transform.get_rotation()
@@ -825,50 +1018,51 @@ func _interpolate_position(target_position: Vector2, delta: float) -> void:
 		else:
 			output_rotation = follow_target.get_rotation() + rotation_offset
 
+	## Applies the raw target position to the PCam2D
+	global_position = target_position
+
+	## Applies Damping to the Transform2D output
+	if not Engine.is_editor_hint():
+		if follow_damping:
+			for i in 2:
+				target_position[i] = _smooth_damp(
+					global_position[i],
+					_transform_output.origin[i],
+					i,
+					_follow_velocity_ref[i],
+					_set_follow_velocity,
+					follow_damping_value[i],
+					delta
+				)
+
 	if _limit_inactive_pcam and not _tween_skip:
 		target_position = _set_limit_clamp_position(target_position)
 
-	global_position = target_position
-
-	if follow_damping and not Engine.is_editor_hint():
-		var output_position: Vector2
-		for i in 2:
-			output_position[i] = _smooth_damp(
-				global_position[i],
-				_transform_output.origin[i],
-				i,
-				_follow_velocity_ref[i],
-				_set_follow_velocity,
-				follow_damping_value[i],
-				delta
-			)
-		_transform_output = Transform2D(output_rotation, output_position)
-	else:
-		_transform_output = Transform2D(output_rotation, target_position)
+	_transform_output = Transform2D(output_rotation, target_position)
 
 
 func _smooth_damp(target_axis: float, self_axis: float, index: int, current_velocity: float, set_velocity: Callable, damping_time: float, delta: float) -> float:
-		damping_time = maxf(0.0001, damping_time)
-		var omega: float = 2 / damping_time
-		var x: float = omega * delta
-		var exponential: float = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x)
-		var diff: float = self_axis - target_axis
-		var _target_axis: float = target_axis
+	damping_time = maxf(0.0001, damping_time)
+	var omega: float = 2 / damping_time
+	var x: float = omega * delta
+	var exponential: float = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x)
+	var diff: float = self_axis - target_axis
+	var _target_axis: float = target_axis
 
-		var max_change: float = INF * damping_time
-		diff = clampf(diff, -max_change, max_change)
-		target_axis = self_axis - diff
+	var max_change: float = INF * damping_time
+	diff = clampf(diff, -max_change, max_change)
+	target_axis = self_axis - diff
 
-		var temp: float = (current_velocity + omega * diff) * delta
-		set_velocity.call(index, (current_velocity - omega * temp) * exponential)
-		var output: float = target_axis + (diff + temp) * exponential
+	var temp: float = (current_velocity + omega * diff) * delta
+	set_velocity.call(index, (current_velocity - omega * temp) * exponential)
+	var output: float = target_axis + (diff + temp) * exponential
 
-		## To prevent overshooting
-		if (_target_axis - self_axis > 0.0) == (output > _target_axis):
-			output = _target_axis
-			set_velocity.call(index, (output - _target_axis) / delta)
+	## To prevent overshooting
+	if (_target_axis - self_axis > 0.0) == (output > _target_axis):
+		output = _target_axis
+		set_velocity.call(index, (output - _target_axis) / delta)
 
-		return output
+	return output
 
 
 func _set_limit_clamp_position(value: Vector2) -> Vector2:
@@ -901,28 +1095,6 @@ func _get_target_position_offset() -> Vector2:
 
 func _on_dead_zone_changed() -> void:
 	global_position = _get_target_position_offset()
-
-
-func _get_framed_side_offset() -> Vector2:
-	var frame_out_bounds: Vector2
-
-	if viewport_position.x < 0.5 - dead_zone_width / 2:
-		# Is outside left edge
-		frame_out_bounds.x = -1
-
-	if viewport_position.y < 0.5 - dead_zone_height / 2:
-		# Is outside top edge
-		frame_out_bounds.y = 1
-
-	if viewport_position.x > 0.5 + dead_zone_width / 2:
-		# Is outside right edge
-		frame_out_bounds.x = 1
-
-	if viewport_position.y > 0.5001 + dead_zone_height / 2: # 0.501 to resolve an issue where the bottom vertical Dead Zone never becoming 0 when the Dead Zone Vertical parameter is set to 0
-		# Is outside bottom edge
-		frame_out_bounds.y = -1
-
-	return frame_out_bounds
 
 
 func _draw_camera_2d_limit() -> void:
@@ -1007,7 +1179,20 @@ func _set_layer(current_layers: int, layer_number: int, value: bool) -> int:
 
 
 func _check_physics_body(target: Node2D) -> void:
+	# Reset cached physics references
+	_character_body_2d = null
+	_rigid_body_2d = null
+	_follow_target_physics_class = FollowTargetPhysicsClass.OTHER
+
 	if target is PhysicsBody2D:
+		# Cache the type and reference for performance
+		if target is CharacterBody2D:
+			_character_body_2d = target as CharacterBody2D
+			_follow_target_physics_class = FollowTargetPhysicsClass.CHARACTERBODY
+		elif target is RigidBody2D:
+			_rigid_body_2d = target as RigidBody2D
+			_follow_target_physics_class = FollowTargetPhysicsClass.RIGIDBODY
+
 		var show_jitter_tips := ProjectSettings.get_setting("phantom_camera/tips/show_jitter_tips")
 		var physics_interpolation_enabled := ProjectSettings.get_setting("physics/common/physics_interpolation")
 
@@ -1152,7 +1337,8 @@ func emit_noise(value: Transform2D) -> void:
 ## bypassing the damping process.
 func teleport_position() -> void:
 	_follow_velocity_ref = Vector2.ZERO
-	_set_follow_position()
+	_reset_lookahead()
+	_set_follow_position(0.0)
 	_transform_output.origin = _follow_target_position
 	_phantom_camera_manager.pcam_teleport.emit(self)
 
@@ -1209,7 +1395,10 @@ func set_tween_duration(value: float) -> void:
 ## [member tween_resource].[br]
 ## The duration value is in seconds.
 func get_tween_duration() -> float:
-	return tween_resource.duration
+	if tween_resource:
+		return tween_resource.duration
+	else:
+		return 0.0 # Makes tween instant
 
 
 ## Assigns a new [param Tween Transition] value inside the
@@ -1220,7 +1409,10 @@ func set_tween_transition(value: int) -> void:
 ## Gets the current [param Tween Transition] value  inside the
 ## [member tween_resource].
 func get_tween_transition() -> int:
-	return tween_resource.transition
+	if tween_resource:
+		return tween_resource.transition
+	else:
+		return 0 # Equals TransitionType.LINEAR
 
 
 ## Assigns a new [param Tween Ease] value inside the [member tween_resource].
@@ -1229,7 +1421,10 @@ func set_tween_ease(value: int) -> void:
 
 ## Gets the current [param Tween Ease] value inside the [member tween_resource].
 func get_tween_ease() -> int:
-	return tween_resource.ease
+	if tween_resource:
+		return tween_resource.ease
+	else:
+		return 2 # Equals EaseType.EASE_IN_OUT
 
 
 ## Sets the [param PhantomCamera2D] active state.[br]
@@ -1298,6 +1493,7 @@ func set_follow_target(value: Node2D) -> void:
 			follow_target.tree_exiting.connect(_follow_target_tree_exiting.bind(follow_target))
 	else:
 		_should_follow = false
+	_reset_lookahead()
 	follow_target_changed.emit()
 	notify_property_list_changed()
 
@@ -1307,6 +1503,9 @@ func erase_follow_target() -> void:
 	_should_follow = false
 	follow_target = null
 	_follow_target_physics_based = false
+	_character_body_2d = null
+	_rigid_body_2d = null
+	_follow_target_physics_class = FollowTargetPhysicsClass.OTHER
 	follow_target_changed.emit()
 
 ## Gets the current [member follow_target].
@@ -1337,6 +1536,7 @@ func set_follow_targets(value: Array[Node2D]) -> void:
 	if follow_targets == value: return
 	follow_targets = value
 	_follow_targets_size_check()
+	_reset_lookahead()
 
 ## Appends a single [Node2D] to [member follow_targets].
 func append_follow_targets(value: Node2D) -> void:
@@ -1405,10 +1605,10 @@ func get_follow_damping() -> bool:
 
 ## Assigns new Damping value.
 func set_follow_damping_value(value: Vector2) -> void:
-	## TODO - Should be using @export_range once minimum version support is Godot 4.3
-	if value.x < 0: value.x = 0
-	elif value.y < 0: value.y = 0
-	follow_damping_value = value
+	follow_damping_value = Vector2(
+		maxf(0.0, value.x),
+		maxf(0.0, value.y),
+	)
 
 ## Gets the current Follow Damping value.
 func get_follow_damping_value() -> Vector2:
@@ -1525,23 +1725,82 @@ func get_auto_zoom_margin() -> Vector4:
 	return auto_zoom_margin
 
 
+func set_lookahead(value: bool) -> void:
+	lookahead = value
+	_reset_lookahead()
+	notify_property_list_changed()
+
+func get_lookahead() -> bool:
+	return lookahead
+
+
+func set_lookahead_time(value: Vector2) -> void:
+	lookahead_time = Vector2(
+		maxf(0.0, value.x),
+		maxf(0.0, value.y)
+	)
+
+func get_lookahead_time() -> Vector2:
+	return lookahead_time
+
+
+func set_lookahead_max(value: bool) -> void:
+	lookahead_max = value
+	notify_property_list_changed()
+
+func get_lookahead_max() -> bool:
+	return lookahead_max
+
+
+func set_lookahead_max_value(value: Vector2) -> void:
+	lookahead_max_value = Vector2(
+		maxf(0.0, value.x),
+		maxf(0.0, value.y)
+	)
+
+func get_lookahead_max_value() -> Vector2:
+	return lookahead_max_value
+
+
+func set_lookahead_acceleration(value: float) ->  void:
+	lookahead_acceleration = maxf(0.0, value)
+	if is_zero_approx(lookahead_acceleration):
+		_has_lookahead_acceleration = false
+	else:
+		_has_lookahead_acceleration = true
+
+func get_lookahead_acceleration() -> float:
+	return lookahead_acceleration
+
+
+func set_lookahead_deceleration(value: float) ->  void:
+	lookahead_deceleration = maxf(0.0, value)
+	if is_zero_approx(lookahead_deceleration):
+		_has_lookahead_deceleration = false
+	else:
+		_has_lookahead_deceleration = true
+
+func get_lookahead_deceleration() -> float:
+	return lookahead_deceleration
+
+
 ## Sets a limit side based on the side parameter.[br]
 ## It's recommended to pass the [enum Side] enum as the sid parameter.
 func set_limit(side: int, value: int) -> void:
 	match side:
-		SIDE_LEFT: 		limit_left = value
-		SIDE_TOP: 		limit_top = value
-		SIDE_RIGHT: 	limit_right = value
-		SIDE_BOTTOM: 	limit_bottom = value
-		_:				printerr("Not a valid Side.")
+		SIDE_LEFT:      limit_left = value
+		SIDE_TOP:       limit_top = value
+		SIDE_RIGHT:     limit_right = value
+		SIDE_BOTTOM:    limit_bottom = value
+		_: printerr("Not a valid Side.")
 
 ## Gets the limit side
 func get_limit(value: int) -> int:
 	match value:
-		SIDE_LEFT: 		return limit_left
-		SIDE_TOP: 		return limit_top
-		SIDE_RIGHT: 	return limit_right
-		SIDE_BOTTOM: 	return limit_bottom
+		SIDE_LEFT:      return limit_left
+		SIDE_TOP:       return limit_top
+		SIDE_RIGHT:     return limit_right
+		SIDE_BOTTOM:    return limit_bottom
 		_:
 						printerr("Not a valid Side.")
 						return -1
@@ -1593,7 +1852,7 @@ func get_limit_bottom() -> int:
 
 func _limit_target_exist_error() -> void:
 	if not limit_target.is_empty():
-		printerr("Unable to set Limit Side due to Limit Target ", _limit_node.name,  " being assigned")
+		printerr("Unable to set Limit Side due to Limit Target ", _limit_node.name, " being assigned")
 
 
 # Sets a [memeber limit_target] node.
@@ -1622,14 +1881,14 @@ func set_limit_target(value: NodePath) -> void:
 			if col_shape.shape == null:
 				printerr("No Shape2D in: ", col_shape.name)
 				reset_limit()
-				limit_target = ""
+				limit_target = NodePath("")
 				return
 		else:
 			printerr("Limit Target is not a TileMapLayer or CollisionShape2D node")
 			return
 	elif value == NodePath(""):
 		reset_limit()
-		limit_target = ""
+		limit_target = NodePath("")
 	else:
 		printerr("Limit Target cannot be found")
 		return
@@ -1669,7 +1928,7 @@ func set_noise(value: PhantomCameraNoise2D) -> void:
 	noise = value
 	if value != null:
 		_has_noise_resource = true
-		noise.set_trauma(1)
+		noise.set_trauma(1.0)
 	else:
 		_has_noise_resource = false
 		_transform_noise = Transform2D()
