@@ -5,11 +5,14 @@ class_name DialogueManagerExampleBalloon extends CanvasLayer
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
 
-## Start from a given title when using balloon as a [Node] in a scene.
-@export var start_from_title: String = ""
+## Start from a given label when using balloon as a [Node] in a scene.
+@export var start_from_label: String = ""
 
 ## If running as a [Node] in a scene then auto start the dialogue.
 @export var auto_start: bool = false
+
+## If all other input is blocked as long as dialogue is shown.
+@export var will_block_other_input: bool = true
 
 ## The action to use for advancing the dialogue
 @export var next_action: StringName = &"ui_accept"
@@ -85,14 +88,15 @@ func _ready() -> void:
 		start()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
 
 
 func _unhandled_input(_event: InputEvent) -> void:
 	# Only the balloon is allowed to handle input while it's showing
-	get_viewport().set_input_as_handled()
+	if will_block_other_input:
+		get_viewport().set_input_as_handled()
 
 
 func _notification(what: int) -> void:
@@ -106,14 +110,14 @@ func _notification(what: int) -> void:
 
 
 ## Start some dialogue
-func start(with_dialogue_resource: DialogueResource = null, title: String = "", extra_game_states: Array = []) -> void:
+func start(with_dialogue_resource: DialogueResource = null, label: String = "", extra_game_states: Array = []) -> void:
 	temporary_game_states = [self] + extra_game_states
 	is_waiting_for_input = false
 	if is_instance_valid(with_dialogue_resource):
 		dialogue_resource = with_dialogue_resource
-	if not title.is_empty():
-		start_from_title = title
-	dialogue_line = await dialogue_resource.get_next_dialogue_line(start_from_title, temporary_game_states)
+	if not label.is_empty():
+		start_from_label = label
+	dialogue_line = await dialogue_resource.get_next_dialogue_line(start_from_label, temporary_game_states)
 	show()
 
 

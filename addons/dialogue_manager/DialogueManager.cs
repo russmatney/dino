@@ -28,18 +28,20 @@ namespace DialogueManagerRuntime
     public partial class DialogueManager : RefCounted
     {
         public delegate void DialogueStartedEventHandler(Resource dialogueResource);
-        public delegate void PassedTitleEventHandler(string title);
+        public delegate void PassedLabelEventHandler(string label);
         public delegate void GotDialogueEventHandler(DialogueLine dialogueLine);
         public delegate void MutatedEventHandler(Dictionary mutation);
         public delegate void DialogueEndedEventHandler(Resource dialogueResource);
 
         public static DialogueStartedEventHandler? DialogueStarted;
-        public static PassedTitleEventHandler? PassedTitle;
+        public static PassedLabelEventHandler? PassedLabel;
         public static GotDialogueEventHandler? GotDialogue;
         public static MutatedEventHandler? Mutated;
         public static DialogueEndedEventHandler? DialogueEnded;
 
         [Signal] public delegate void ResolvedEventHandler(Variant value);
+
+        private static Random random = new Random();
 
         private static GodotObject? instance;
         public static GodotObject Instance
@@ -49,7 +51,11 @@ namespace DialogueManagerRuntime
                 if (instance == null)
                 {
                     instance = Engine.GetSingleton("DialogueManager");
-                    Prepare(instance);
+                    instance.Connect("dialogue_started", Callable.From((Resource dialogueResource) => DialogueStarted?.Invoke(dialogueResource)));
+                    instance.Connect("passed_label", Callable.From((string label) => PassedLabel?.Invoke(label)));
+                    instance.Connect("got_dialogue", Callable.From((RefCounted line) => GotDialogue?.Invoke(new DialogueLine(line))));
+                    instance.Connect("mutated", Callable.From((Dictionary mutation) => Mutated?.Invoke(mutation)));
+                    instance.Connect("dialogue_ended", Callable.From((Resource dialogueResource) => DialogueEnded?.Invoke(dialogueResource)));
                 }
                 return instance;
             }
@@ -89,41 +95,6 @@ namespace DialogueManagerRuntime
             set => Instance.Set("get_current_scene", Callable.From(value));
         }
 
-
-        public static void Prepare(GodotObject instance)
-        {
-            instance.Connect("bridge_dialogue_started", Callable.From((Resource dialogueResource) => DialogueStarted?.Invoke(dialogueResource)));
-            instance.Connect("passed_title", Callable.From((string title) => PassedTitle?.Invoke(title)));
-            instance.Connect("got_dialogue", Callable.From((RefCounted line) => GotDialogue?.Invoke(new DialogueLine(line))));
-            instance.Connect("mutated", Callable.From((Dictionary mutation) => Mutated?.Invoke(mutation)));
-            instance.Connect("dialogue_ended", Callable.From((Resource dialogueResource) => DialogueEnded?.Invoke(dialogueResource)));
-        }
-
-
-        public static async Task<GodotObject> GetSingleton()
-        {
-            if (instance != null) return instance;
-
-            var tree = Engine.GetMainLoop();
-            int x = 0;
-
-            // Try and find the singleton for a few seconds
-            while (!Engine.HasSingleton("DialogueManager") && x < 300)
-            {
-                await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
-                x++;
-            }
-
-            // If it times out something is wrong
-            if (x >= 300)
-            {
-                throw new Exception("The DialogueManager singleton is missing.");
-            }
-
-            instance = Engine.GetSingleton("DialogueManager");
-            return instance;
-        }
-
         public static Resource CreateResourceFromText(string text)
         {
             return (Resource)Instance.Call("create_resource_from_text", text);
@@ -131,26 +102,30 @@ namespace DialogueManagerRuntime
 
         public static async Task<DialogueLine?> GetNextDialogueLine(Resource dialogueResource, string key = "", Array<Variant>? extraGameStates = null, MutationBehaviour mutation_behaviour = MutationBehaviour.Wait)
         {
-            var instance = (Node)Instance.Call("_bridge_get_new_instance");
-            instance.Call("_bridge_get_next_dialogue_line", dialogueResource, key, extraGameStates ?? new Array<Variant>(), (int)mutation_behaviour);
-            var result = await instance.ToSignal(instance, "bridge_get_next_dialogue_line_completed");
-            instance.QueueFree();
-
-            if ((RefCounted)result[0] == null) return null;
-
-            return new DialogueLine((RefCounted)result[0]);
+            int id = random.Next();
+            Instance.Call("_bridge_get_next_dialogue_line", id, dialogueResource, key, extraGameStates ?? new Array<Variant>(), (int)mutation_behaviour);
+            while (true)
+            {
+                var result = await Instance.ToSignal(Instance, "bridge_get_next_dialogue_line_completed");
+                if ((int)result[0] == id)
+                {
+                    return ((RefCounted)result[1] == null) ? null : new DialogueLine((RefCounted)result[1]);
+                }
+            }
         }
 
         public static async Task<DialogueLine?> GetLine(Resource dialogueResource, string key = "", Array<Variant>? extraGameStates = null)
         {
-            var instance = (Node)Instance.Call("_bridge_get_new_instance");
-            instance.Call("_bridge_get_line", dialogueResource, key, extraGameStates ?? new Array<Variant>());
-            var result = await instance.ToSignal(instance, "bridge_get_line_completed");
-            instance.QueueFree();
-
-            if ((RefCounted)result[0] == null) return null;
-
-            return new DialogueLine((RefCounted)result[0]);
+            int id = random.Next();
+            Instance.Call("_bridge_get_line", id, dialogueResource, key, extraGameStates ?? new Array<Variant>());
+            while (true)
+            {
+                var result = await Instance.ToSignal(Instance, "bridge_get_line_completed");
+                if ((int)result[0] == id)
+                {
+                    return ((RefCounted)result[0] == null) ? null : new DialogueLine((RefCounted)result[0]);
+                }
+            }
         }
 
 
@@ -196,61 +171,188 @@ namespace DialogueManagerRuntime
 
         public static async void Mutate(Dictionary mutation, Array<Variant>? extraGameStates = null, bool isInlineMutation = false)
         {
-            Instance.Call("_bridge_mutate", mutation, extraGameStates ?? new Array<Variant>(), isInlineMutation);
-            await Instance.ToSignal(Instance, "bridge_mutated");
+            int id = random.Next();
+            Instance.Call("_bridge_mutate", id, mutation, extraGameStates ?? new Array<Variant>(), isInlineMutation);
+            while (true)
+            {
+                var result = await Instance.ToSignal(Instance, "bridge_mutated");
+                if ((int)result[0] == id)
+                {
+                    return;
+                }
+            }
         }
 
 
-        public static Array<Dictionary> GetMembersForAutoload(Script script)
+        public static Array<Dictionary> GetMembersForScript(Script script)
+        {
+            string typeName = script.ResourcePath.GetFile().GetBaseName();
+            var matchingType = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == typeName);
+            if (matchingType == null) return new Array<Dictionary>();
+            return GetMembersForType(matchingType);
+        }
+
+
+        public static Array<Dictionary> GetMembersForPropertyChain(Script script, Array<string> chain)
+        {
+            string typeName = script.ResourcePath.GetFile().GetBaseName();
+            var currentType = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == typeName);
+            if (currentType == null) return new Array<Dictionary>();
+
+            foreach (var segment in chain)
+            {
+                currentType = ResolvePropertyType(currentType, segment);
+                if (currentType == null) return new Array<Dictionary>();
+            }
+
+            return GetMembersForType(currentType);
+        }
+
+
+        public static Dictionary GetMethodInfoForPropertyChain(Script script, Array<string> chain, string methodName)
+        {
+            string typeName = script.ResourcePath.GetFile().GetBaseName();
+            var currentType = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == typeName);
+
+            if (currentType == null) return new Dictionary();
+
+            foreach (var segment in chain)
+            {
+                currentType = ResolvePropertyType(currentType, segment);
+                if (currentType == null) return new Dictionary();
+            }
+
+            var methodInfo = currentType
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                .FirstOrDefault(m => m.Name == methodName && !m.IsSpecialName);
+            if (methodInfo == null) return new Dictionary();
+
+            return BuildMethodDictionary(methodInfo);
+        }
+
+
+        private static Array<Dictionary> GetMembersForType(Type type)
         {
             Array<Dictionary> members = new Array<Dictionary>();
 
-            string typeName = script.ResourcePath.GetFile().GetBaseName();
-            var matchingTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Name == typeName);
-            foreach (var matchingType in matchingTypes)
+            if (type.IsEnum)
             {
-                var memberInfos = matchingType.GetMembers(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
-                foreach (var memberInfo in memberInfos)
+                foreach (var name in type.GetEnumNames())
                 {
-                    string type;
-                    switch (memberInfo.MemberType)
-                    {
-                        case MemberTypes.Field:
-                            FieldInfo fieldInfo = memberInfo as FieldInfo;
-
-                            if (fieldInfo.FieldType.ToString().Contains("EventHandler"))
-                            {
-                                type = "signal";
-                            }
-                            else if (fieldInfo.IsLiteral)
-                            {
-                                type = "constant";
-                            }
-                            else
-                            {
-                                type = "property";
-                            }
-                            break;
-                        case MemberTypes.Method:
-                            type = "method";
-                            break;
-
-                        case MemberTypes.NestedType:
-                            type = "constant";
-                            break;
-
-                        default:
-                            continue;
-                    }
-
                     members.Add(new Dictionary() {
-                        { "name", memberInfo.Name },
-                        { "type", type }
+                        { "name", name },
+                        { "type", "enum" }
                     });
+                }
+                return members;
+            }
+
+            var memberInfos = type.GetMembers(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            foreach (var memberInfo in memberInfos)
+            {
+                switch (memberInfo.MemberType)
+                {
+                    case MemberTypes.Field:
+                        FieldInfo fieldInfo = (FieldInfo)memberInfo;
+                        string fieldType;
+                        if (fieldInfo.FieldType.ToString().Contains("EventHandler"))
+                        {
+                            fieldType = "signal";
+                        }
+                        else if (fieldInfo.IsLiteral)
+                        {
+                            fieldType = "constant";
+                        }
+                        else
+                        {
+                            fieldType = "property";
+                        }
+                        members.Add(new Dictionary() {
+                            { "name", memberInfo.Name },
+                            { "type", fieldType },
+                            { "class_name", GetFriendlyTypeName(fieldInfo.FieldType) }
+                        });
+                        break;
+
+                    case MemberTypes.Property:
+                        PropertyInfo propInfo = (PropertyInfo)memberInfo;
+                        members.Add(new Dictionary() {
+                            { "name", memberInfo.Name },
+                            { "type", "property" },
+                            { "class_name", GetFriendlyTypeName(propInfo.PropertyType) }
+                        });
+                        break;
+
+                    case MemberTypes.Method:
+                        MethodInfo methodInfo = (MethodInfo)memberInfo;
+                        if (methodInfo.IsSpecialName) continue;
+                        members.Add(BuildMethodDictionary(methodInfo));
+                        break;
+
+                    case MemberTypes.NestedType:
+                        members.Add(new Dictionary() {
+                            { "name", memberInfo.Name },
+                            { "type", "constant" }
+                        });
+                        break;
+
+                    default:
+                        continue;
                 }
             }
 
             return members;
+        }
+
+
+        private static Dictionary BuildMethodDictionary(MethodInfo methodInfo)
+        {
+            var args = new Array<Dictionary>();
+            foreach (var param in methodInfo.GetParameters())
+            {
+                args.Add(new Dictionary() {
+                    { "name", param.Name },
+                    { "type", (int)Variant.Type.Nil },
+                    { "class_name", GetFriendlyTypeName(param.ParameterType) }
+                });
+            }
+            return new Dictionary() {
+                { "name", methodInfo.Name },
+                { "type", "method" },
+                { "args", args }
+            };
+        }
+
+
+        private static Type? ResolvePropertyType(Type type, string memberName)
+        {
+            var field = type.GetField(memberName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            if (field != null) return field.FieldType;
+
+            var prop = type.GetProperty(memberName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
+            if (prop != null) return prop.PropertyType;
+
+            var nested = type.GetNestedType(memberName, BindingFlags.Public);
+            if (nested != null) return nested;
+
+            return null;
+        }
+
+
+        private static string GetFriendlyTypeName(Type type)
+        {
+            if (type == typeof(int)) return "int";
+            if (type == typeof(long)) return "long";
+            if (type == typeof(float)) return "float";
+            if (type == typeof(double)) return "double";
+            if (type == typeof(bool)) return "bool";
+            if (type == typeof(string)) return "string";
+            if (type == typeof(void)) return "void";
+            if (type == typeof(byte)) return "byte";
+            if (type == typeof(short)) return "short";
+            if (type == typeof(char)) return "char";
+            if (type == typeof(decimal)) return "decimal";
+            return type.Name;
         }
 
 
@@ -318,7 +420,7 @@ namespace DialogueManagerRuntime
 
         Variant ConvertValueToVariant(object value)
         {
-            if (value == null) return false;
+            if (value == null) return default;
 
             Type rawType = value.GetType();
             if (rawType.IsEnum)
@@ -330,11 +432,20 @@ namespace DialogueManagerRuntime
             return value switch
             {
                 Variant v => v,
+                bool v => Variant.From(v),
+                byte v => Variant.From((long)v),
+                sbyte v => Variant.From((long)v),
+                short v => Variant.From((long)v),
+                ushort v => Variant.From((long)v),
                 int v => Variant.From((long)v),
+                uint v => Variant.From((long)v),
+                long v => Variant.From(v),
+                ulong v => Variant.From((long)v),
                 float v => Variant.From((double)v),
-                System.String v => Variant.From((string)v),
+                double v => Variant.From(v),
+                string v => Variant.From(v),
                 GodotObject godotObj => Variant.From(godotObj),
-                _ => Variant.From(value)
+                _ => default
             };
         }
 
@@ -354,19 +465,23 @@ namespace DialogueManagerRuntime
         }
 
 
-        public async void ResolveThingMethod(GodotObject thing, string method, Array<Variant> args)
+        public async void ResolveThingMethod(float id, GodotObject thing, string method, Array<Variant> args)
         {
             MethodInfo? info = null;
             var methodInfos = thing.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly);
             foreach (var methodInfo in methodInfos)
             {
-                if (methodInfo.Name == method && args.Count >= methodInfo.GetParameters().Where(p => !p.HasDefaultValue).Count())
+                if (methodInfo.Name == method && args.Count >= methodInfo.GetParameters().Count(p => !p.HasDefaultValue))
                 {
                     info = methodInfo;
                 }
             }
 
-            if (info == null) return;
+            if (info == null)
+            {
+                EmitSignal(SignalName.Resolved, id);
+                return;
+            }
 
 #nullable disable
             // Convert the method args to something reflection can handle
@@ -404,17 +519,17 @@ namespace DialogueManagerRuntime
                 await taskResult;
                 try
                 {
-                    Variant value = (Variant)taskResult.GetType().GetProperty("Result").GetValue(taskResult);
-                    EmitSignal(SignalName.Resolved, value);
+                    object value = taskResult.GetType().GetProperty("Result").GetValue(taskResult);
+                    EmitSignal(SignalName.Resolved, id, ConvertValueToVariant(value));
                 }
                 catch (Exception)
                 {
-                    EmitSignal(SignalName.Resolved);
+                    EmitSignal(SignalName.Resolved, id);
                 }
             }
             else
             {
-                EmitSignal(SignalName.Resolved, ConvertValueToVariant(result));
+                EmitSignal(SignalName.Resolved, id, ConvertValueToVariant(result));
             }
         }
 #nullable enable
